@@ -1,0 +1,11 @@
+{
+  "packageName": "HoneybeeDotNet",
+  "projectName": "HoneybeeDotNet",
+  "packageUrl": "https://github.com/ladybug-tools/honeybee-schema-dotnet",
+  "packageVersion":"1.0.0",
+  "targetFramework":"v4.5",
+  "sourceFolder":"src",
+  "optionalAssemblyInfo":"false"
+
+
+}

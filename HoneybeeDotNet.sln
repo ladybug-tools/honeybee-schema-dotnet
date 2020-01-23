@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoneybeeDotNet", "src\HoneybeeDotNet\HoneybeeDotNet.csproj", "{6C53010A-120F-423E-8F3A-5DA271FA7A60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoneybeeDotNet.Test", "src\HoneybeeDotNet.Test\HoneybeeDotNet.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C53010A-120F-423E-8F3A-5DA271FA7A60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C53010A-120F-423E-8F3A-5DA271FA7A60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C53010A-120F-423E-8F3A-5DA271FA7A60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C53010A-120F-423E-8F3A-5DA271FA7A60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7572982D-4AD8-4AE0-B13C-9895916E2616}
+	EndGlobalSection
+EndGlobal
