@@ -45,7 +45,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="displayName">Display name of the object with no restrictions..</param>
         /// <param name="type">type (default to &quot;Door&quot;).</param>
         /// <param name="isGlass">Boolean to note whether this object is a glass door as opposed to an opaque door. (default to false).</param>
-        public Door(string name, Face3D geometry, AnyOfOutdoorsSurface boundaryCondition, DoorPropertiesAbridged properties, string displayName = default(string), string type = "Door", bool isGlass = false)
+        public Door(string name, Face3D geometry, AnyOf<Outdoors,Surface> boundaryCondition, DoorPropertiesAbridged properties, string displayName = default(string), string type = "Door", bool isGlass = false)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -126,7 +126,7 @@ namespace HoneybeeDotNet.Model
         /// Gets or Sets BoundaryCondition
         /// </summary>
         [DataMember(Name="boundary_condition", EmitDefaultValue=false)]
-        public AnyOfOutdoorsSurface BoundaryCondition { get; set; }
+        public AnyOf<Outdoors,Surface> BoundaryCondition { get; set; }
 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).

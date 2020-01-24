@@ -47,7 +47,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="isOperable">Boolean to note whether the Aperture can be opened for ventilation. (default to false).</param>
         /// <param name="indoorShades">Shades assigned to the interior side of this object (eg. window sill, light shelf)..</param>
         /// <param name="outdoorShades">Shades assigned to the exterior side of this object (eg. mullions, louvers)..</param>
-        public Aperture(string name, Face3D geometry, AnyOfOutdoorsSurface boundaryCondition, AperturePropertiesAbridged properties, string displayName = default(string), string type = "Aperture", bool isOperable = false, List<Shade> indoorShades = default(List<Shade>), List<Shade> outdoorShades = default(List<Shade>))
+        public Aperture(string name, Face3D geometry, AnyOf<Outdoors,Surface> boundaryCondition, AperturePropertiesAbridged properties, string displayName = default(string), string type = "Aperture", bool isOperable = false, List<Shade> indoorShades = default(List<Shade>), List<Shade> outdoorShades = default(List<Shade>))
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -130,7 +130,7 @@ namespace HoneybeeDotNet.Model
         /// Gets or Sets BoundaryCondition
         /// </summary>
         [DataMember(Name="boundary_condition", EmitDefaultValue=false)]
-        public AnyOfOutdoorsSurface BoundaryCondition { get; set; }
+        public AnyOf<Outdoors,Surface> BoundaryCondition { get; set; }
 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).

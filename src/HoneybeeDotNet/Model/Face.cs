@@ -86,7 +86,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="doors">Doors assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid..</param>
         /// <param name="indoorShades">Shades assigned to the interior side of this object..</param>
         /// <param name="outdoorShades">Shades assigned to the exterior side of this object (eg. balcony, overhang)..</param>
-        public Face(string name, Face3D geometry, FaceTypeEnum faceType, AnyOfGroundOutdoorsAdiabaticSurface boundaryCondition, FacePropertiesAbridged properties, string displayName = default(string), string type = "Face", List<Aperture> apertures = default(List<Aperture>), List<Door> doors = default(List<Door>), List<Shade> indoorShades = default(List<Shade>), List<Shade> outdoorShades = default(List<Shade>))
+        public Face(string name, Face3D geometry, FaceTypeEnum faceType, AnyOf<Ground,Outdoors,Adiabatic,Surface> boundaryCondition, FacePropertiesAbridged properties, string displayName = default(string), string type = "Face", List<Aperture> apertures = default(List<Aperture>), List<Door> doors = default(List<Door>), List<Shade> indoorShades = default(List<Shade>), List<Shade> outdoorShades = default(List<Shade>))
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -173,7 +173,7 @@ namespace HoneybeeDotNet.Model
         /// Gets or Sets BoundaryCondition
         /// </summary>
         [DataMember(Name="boundary_condition", EmitDefaultValue=false)]
-        public AnyOfGroundOutdoorsAdiabaticSurface BoundaryCondition { get; set; }
+        public AnyOf<Ground,Outdoors,Adiabatic,Surface> BoundaryCondition { get; set; }
 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).

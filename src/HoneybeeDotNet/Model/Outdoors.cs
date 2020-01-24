@@ -37,7 +37,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="sunExposure">A boolean noting whether the boundary is exposed to sun. (default to true).</param>
         /// <param name="windExposure">A boolean noting whether the boundary is exposed to wind. (default to true).</param>
         /// <param name="viewFactor">A number for the view factor to the ground. This can also be the word \&quot;autocalculate\&quot; to have the view factor automatically calculated..</param>
-        public Outdoors(string type = "Outdoors", bool sunExposure = true, bool windExposure = true, AnyOfstringnumber viewFactor = default(AnyOfstringnumber))
+        public Outdoors(string type = "Outdoors", bool sunExposure = true, bool windExposure = true, AnyOf<string,decimal> viewFactor = default(AnyOf<string,decimal>))
         {
             // use default value if no "type" provided
             if (type == null)
@@ -94,7 +94,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A number for the view factor to the ground. This can also be the word \&quot;autocalculate\&quot; to have the view factor automatically calculated.</value>
         [DataMember(Name="view_factor", EmitDefaultValue=false)]
-        public AnyOfstringnumber ViewFactor { get; set; }
+        public AnyOf<string,decimal> ViewFactor { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

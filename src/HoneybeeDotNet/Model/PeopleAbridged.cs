@@ -45,7 +45,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="type">type (default to &quot;PeopleAbridged&quot;).</param>
         /// <param name="radiantFraction">The radiant fraction of sensible heat released by people. The defaultvalue is 0.30. (default to 0.3M).</param>
         /// <param name="latentFraction">Number for the latent fraction of heat gain due to people or simply the word \&quot;autocalculate\&quot;..</param>
-        public PeopleAbridged(string name, decimal peoplePerArea, string occupancySchedule, string activitySchedule, string type = "PeopleAbridged", decimal radiantFraction = 0.3M, AnyOfnumberstring latentFraction = default(AnyOfnumberstring))
+        public PeopleAbridged(string name, decimal peoplePerArea, string occupancySchedule, string activitySchedule, string type = "PeopleAbridged", decimal radiantFraction = 0.3M, AnyOf<decimal,string> latentFraction = default(AnyOf<decimal,string>))
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -154,7 +154,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Number for the latent fraction of heat gain due to people or simply the word \&quot;autocalculate\&quot;.</value>
         [DataMember(Name="latent_fraction", EmitDefaultValue=false)]
-        public AnyOfnumberstring LatentFraction { get; set; }
+        public AnyOf<decimal,string> LatentFraction { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

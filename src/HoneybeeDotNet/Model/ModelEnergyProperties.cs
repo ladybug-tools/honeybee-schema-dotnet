@@ -93,7 +93,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="programTypes">List of all ProgramTypes in the Model..</param>
         /// <param name="schedules">A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades..</param>
         /// <param name="scheduleTypeLimits">A list of all unique ScheduleTypeLimits in the model. This all ScheduleTypeLimits needed to make the Model schedules..</param>
-        public ModelEnergyProperties(List<AnyOfOpaqueConstructionAbridgedWindowConstructionAbridgedShadeConstruction> constructions, List<AnyOfEnergyMaterialEnergyMaterialNoMassEnergyWindowMaterialGasEnergyWindowMaterialGasCustomEnergyWindowMaterialGasMixtureEnergyWindowMaterialSimpleGlazSysEnergyWindowMaterialBlindEnergyWindowMaterialGlazingEnergyWindowMaterialShade> materials, string type = "ModelEnergyProperties", TerrainTypeEnum? terrainType = TerrainTypeEnum.City, string globalConstructionSet = default(string), List<ConstructionSetAbridged> constructionSets = default(List<ConstructionSetAbridged>), List<IdealAirSystemAbridged> hvacs = default(List<IdealAirSystemAbridged>), List<ProgramTypeAbridged> programTypes = default(List<ProgramTypeAbridged>), List<AnyOfScheduleRulesetAbridgedScheduleFixedIntervalAbridged> schedules = default(List<AnyOfScheduleRulesetAbridgedScheduleFixedIntervalAbridged>), List<ScheduleTypeLimit> scheduleTypeLimits = default(List<ScheduleTypeLimit>))
+        public ModelEnergyProperties(List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,ShadeConstruction>> constructions, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing,EnergyWindowMaterialShade>> materials, string type = "ModelEnergyProperties", TerrainTypeEnum? terrainType = TerrainTypeEnum.City, string globalConstructionSet = default(string), List<ConstructionSetAbridged> constructionSets = default(List<ConstructionSetAbridged>), List<IdealAirSystemAbridged> hvacs = default(List<IdealAirSystemAbridged>), List<ProgramTypeAbridged> programTypes = default(List<ProgramTypeAbridged>), List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged>> schedules = default(List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged>>), List<ScheduleTypeLimit> scheduleTypeLimits = default(List<ScheduleTypeLimit>))
         {
             // to ensure "constructions" is required (not null)
             if (constructions == null)
@@ -146,14 +146,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A list of all unique constructions in the model. This includes constructions across all Faces, Apertures, Doors, Shades, Room ConstructionSets, and the global_construction_set.</value>
         [DataMember(Name="constructions", EmitDefaultValue=false)]
-        public List<AnyOfOpaqueConstructionAbridgedWindowConstructionAbridgedShadeConstruction> Constructions { get; set; }
+        public List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,ShadeConstruction>> Constructions { get; set; }
 
         /// <summary>
         /// A list of all unique materials in the model. This includes materials needed to make the Model constructions.
         /// </summary>
         /// <value>A list of all unique materials in the model. This includes materials needed to make the Model constructions.</value>
         [DataMember(Name="materials", EmitDefaultValue=false)]
-        public List<AnyOfEnergyMaterialEnergyMaterialNoMassEnergyWindowMaterialGasEnergyWindowMaterialGasCustomEnergyWindowMaterialGasMixtureEnergyWindowMaterialSimpleGlazSysEnergyWindowMaterialBlindEnergyWindowMaterialGlazingEnergyWindowMaterialShade> Materials { get; set; }
+        public List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing,EnergyWindowMaterialShade>> Materials { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
@@ -195,7 +195,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades.</value>
         [DataMember(Name="schedules", EmitDefaultValue=false)]
-        public List<AnyOfScheduleRulesetAbridgedScheduleFixedIntervalAbridged> Schedules { get; set; }
+        public List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged>> Schedules { get; set; }
 
         /// <summary>
         /// A list of all unique ScheduleTypeLimits in the model. This all ScheduleTypeLimits needed to make the Model schedules.

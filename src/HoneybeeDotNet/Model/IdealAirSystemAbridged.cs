@@ -83,7 +83,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="coolingLimit">A number for the maximum cooling capacity in Watts. This can also be the text \&quot;autosize\&quot; to indicate that the capacity should be determined during the sizing calculation. This can also be the text \&quot;NoLimit\&quot; to indicate no upper limit to the cooling capacity. Note that setting this to None will trigger the default (\&quot;autosize\&quot;)..</param>
         /// <param name="heatingAvailability">An optional name of a schedule to set the availability of heating over the course of the simulation..</param>
         /// <param name="coolingAvailability">An optional name of a schedule to set the availability of cooling over the course of the simulation..</param>
-        public IdealAirSystemAbridged(string name, string type = "IdealAirSystemAbridged", EconomizerTypeEnum? economizerType = EconomizerTypeEnum.DifferentialDryBulb, bool demandControlVentilation = false, decimal sensibleHeatRecovery = 0M, decimal latentHeatRecovery = 0M, decimal heatingAirTemperature = 50M, decimal coolingAirTemperature = 13M, AnyOfnumberstring heatingLimit = default(AnyOfnumberstring), AnyOfnumberstring coolingLimit = default(AnyOfnumberstring), string heatingAvailability = default(string), string coolingAvailability = default(string))
+        public IdealAirSystemAbridged(string name, string type = "IdealAirSystemAbridged", EconomizerTypeEnum? economizerType = EconomizerTypeEnum.DifferentialDryBulb, bool demandControlVentilation = false, decimal sensibleHeatRecovery = 0M, decimal latentHeatRecovery = 0M, decimal heatingAirTemperature = 50M, decimal coolingAirTemperature = 13M, AnyOf<decimal,string> heatingLimit = default(AnyOf<decimal,string>), AnyOf<decimal,string> coolingLimit = default(AnyOf<decimal,string>), string heatingAvailability = default(string), string coolingAvailability = default(string))
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -218,14 +218,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A number for the maximum heating capacity in Watts. This can also be the text \&quot;autosize\&quot; to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be the text \&quot;NoLimit\&quot; to indicate no upper limit to the heating capacity. Note that setting this to None will trigger the default (\&quot;autosize\&quot;).</value>
         [DataMember(Name="heating_limit", EmitDefaultValue=false)]
-        public AnyOfnumberstring HeatingLimit { get; set; }
+        public AnyOf<decimal,string> HeatingLimit { get; set; }
 
         /// <summary>
         /// A number for the maximum cooling capacity in Watts. This can also be the text \&quot;autosize\&quot; to indicate that the capacity should be determined during the sizing calculation. This can also be the text \&quot;NoLimit\&quot; to indicate no upper limit to the cooling capacity. Note that setting this to None will trigger the default (\&quot;autosize\&quot;).
         /// </summary>
         /// <value>A number for the maximum cooling capacity in Watts. This can also be the text \&quot;autosize\&quot; to indicate that the capacity should be determined during the sizing calculation. This can also be the text \&quot;NoLimit\&quot; to indicate no upper limit to the cooling capacity. Note that setting this to None will trigger the default (\&quot;autosize\&quot;).</value>
         [DataMember(Name="cooling_limit", EmitDefaultValue=false)]
-        public AnyOfnumberstring CoolingLimit { get; set; }
+        public AnyOf<decimal,string> CoolingLimit { get; set; }
 
         /// <summary>
         /// An optional name of a schedule to set the availability of heating over the course of the simulation.

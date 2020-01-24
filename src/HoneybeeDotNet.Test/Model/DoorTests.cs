@@ -15,7 +15,7 @@ using System;
 using System.Linq;
 using System.IO;
 using System.Collections.Generic;
-using HoneybeeDotNet.Api;
+
 using HoneybeeDotNet.Model;
 using HoneybeeDotNet.Client;
 using System.Reflection;
@@ -32,8 +32,7 @@ namespace HoneybeeDotNet.Test
     /// </remarks>
     public class DoorTests
     {
-        // TODO uncomment below to declare an instance variable for Door
-        //private Door instance;
+        private Door instance;
 
         /// <summary>
         /// Setup before each test
@@ -42,7 +41,20 @@ namespace HoneybeeDotNet.Test
         public void Init()
         {
             // TODO uncomment below to create an instance of Door
-            //instance = new Door();
+            var face = new Face3D(
+                new List<List<decimal>>()
+                {
+                    new List<decimal>(){0,0,0 },
+                    new List<decimal>(){0.5M,0.5M,0.5M },
+                    new List<decimal>(){1,0,0 }
+                });
+            instance = new Door(
+                "mainEntrance", 
+                face, 
+                new AnyOf<Outdoors,Surface>(new Outdoors()), 
+                new DoorPropertiesAbridged()
+                );
+
         }
 
         /// <summary>
@@ -103,7 +115,7 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void BoundaryConditionTest()
         {
-            // TODO unit test for the property 'BoundaryCondition'
+            Assert.IsInstanceOf(typeof(Outdoors), this.instance.BoundaryCondition.Obj);
         }
         /// <summary>
         /// Test the property 'IsGlass'
