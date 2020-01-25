@@ -110,6 +110,8 @@
     <Compile Include="Model\VentilationAbridged.cs" />
     <Compile Include="Model\WallSetAbridged.cs" />
     <Compile Include="Model\WindowConstructionAbridged.cs" />
+    <Compile Include="Partial\Door.cs" />
+    <Compile Include="Partial\Outdoors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
