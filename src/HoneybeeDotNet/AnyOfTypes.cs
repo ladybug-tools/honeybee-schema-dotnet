@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace HoneybeeDotNet.Model
@@ -14,7 +16,7 @@ namespace HoneybeeDotNet.Model
     {
         [IgnoreDataMember]
         public Object Obj { get; set; }
-        internal virtual List<Type> AllValidTypes => new List<Type>() {typeof(object)};
+        internal virtual List<Type> AllValidTypes => new List<Type>() { typeof(object) };
 
         public AnyOf(object obj)
         {
@@ -36,34 +38,66 @@ namespace HoneybeeDotNet.Model
 
         }
 
+        public override string ToString()
+        {
+            return this.Obj.ToString();
+        }
+
+        public virtual string ToJson()
+        {
+            return this.ToString();
+        }
+
+        public static implicit operator AnyOf(int d) => new AnyOf(d);
+        public static implicit operator AnyOf(string d) => new AnyOf(d);
+        public static implicit operator AnyOf(double d) => new AnyOf(d);
+        public static implicit operator AnyOf(decimal d) => new AnyOf(d);
+
+        public static implicit operator string(AnyOf b) => b.ToString();
+
+        //[JsonContainer]
+        //public object data()
+        //{
+
+        //}
+
         [JsonExtensionData]
-        public IDictionary<string, object> ExtraData { get; set; }
+        public Dictionary<string, object> ExtraData { get; set; }
 
         [OnSerializing]
         internal void OnSerializingMethod(StreamingContext context)
         {
+            if (this.Obj is string)
+            {
+                //ExtraData.Add("", this.Obj);
+                return;
+            }
+
             ExtraData = new Dictionary<string, object>();
             var fields = this.Obj.GetType().GetProperties();
             foreach (var item in fields)
             {
-                var name_schema = (item.GetCustomAttributes(typeof(DataMemberAttribute), true)[0] as DataMemberAttribute).Name;
-                ExtraData.Add(name_schema, item.GetValue(this.Obj));
+                var attrisToSerialize = item.GetCustomAttributes(typeof(DataMemberAttribute), true);
+                if (attrisToSerialize.Any())
+                {
+                    var name_schema = (attrisToSerialize.First() as DataMemberAttribute).Name;
+                    ExtraData.Add(name_schema, item.GetValue(this.Obj)?.ToString());
+                }
             }
 
-
+            //TODO: I think this will be need when parsing the json.
+            //[OnDeserialized]
+            //private void OnDeserialized(StreamingContext context)
+            //{
+            //    foreach (var kvp in ExtraData)
+            //    {
+            //        if (!kvp.Key.StartsWith("x-"))
+            //        {
+            //            this[kvp.Key] = kvp.Value.ToObject<OpenApiPathItem>();
+            //        }
+            //    }
+            //}
         }
-        //TODO: I think this will be need when parsing the json.
-        //[OnDeserialized]
-        //private void OnDeserialized(StreamingContext context)
-        //{
-        //    foreach (var kvp in ExtraData)
-        //    {
-        //        if (!kvp.Key.StartsWith("x-"))
-        //        {
-        //            this[kvp.Key] = kvp.Value.ToObject<OpenApiPathItem>();
-        //        }
-        //    }
-        //}
     }
     public class AnyOf<T> : AnyOf
     {
@@ -73,7 +107,9 @@ namespace HoneybeeDotNet.Model
         {
         }
 
+        public static implicit operator string(AnyOf<T> b) => b.ToString();
     }
+
 
     public class AnyOf<T, K>: AnyOf
     {
@@ -82,6 +118,11 @@ namespace HoneybeeDotNet.Model
         public AnyOf(object obj):base(obj)
         {
         }
+
+        public static implicit operator string(AnyOf<T, K> b) => b.ToString();
+
+        public static implicit operator AnyOf<T, K>(T b) => new AnyOf<T, K>(b);
+        public static implicit operator AnyOf<T, K>(K b) => new AnyOf<T, K>(b);
 
     }
 

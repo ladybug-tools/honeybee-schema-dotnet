@@ -21,6 +21,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = HoneybeeDotNet.Client.OpenAPIDateConverter;
+using System.ComponentModel;
 
 namespace HoneybeeDotNet.Model
 {
@@ -94,6 +95,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A number for the view factor to the ground. This can also be the word \&quot;autocalculate\&quot; to have the view factor automatically calculated.</value>
         [DataMember(Name="view_factor", EmitDefaultValue=false)]
+        [DefaultValueAttribute("autocalculate")]
         public AnyOf<string,decimal> ViewFactor { get; set; }
 
         /// <summary>
