@@ -50,10 +50,7 @@ namespace HoneybeeDotNet.Test
                 });
             instance = new Door(
                 "mainEntrance",
-                face,
-                new Outdoors(), 
-                new DoorPropertiesAbridged()
-                );
+                face);
 
         }
 
@@ -115,15 +112,9 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void BoundaryConditionTest()
         {
-            var bcObj = this.instance.BoundaryCondition.Obj as Outdoors;
+            var bcObj = this.instance.BoundaryCondition.Obj;
             Assert.IsInstanceOf(typeof(Outdoors), bcObj);
 
-            //var viewF = bcObj.ViewFactor.ToString();
-
-            var js = this.instance.ToJson();
-            Assert.AreEqual("autocalculate", "autocalculate");
-
-            
         }
         /// <summary>
         /// Test the property 'IsGlass'

@@ -32,8 +32,7 @@ namespace HoneybeeDotNet.Test
     /// </remarks>
     public class OutdoorsTests
     {
-        // TODO uncomment below to declare an instance variable for Outdoors
-        //private Outdoors instance;
+        private Outdoors instance;
 
         /// <summary>
         /// Setup before each test
@@ -41,8 +40,7 @@ namespace HoneybeeDotNet.Test
         [SetUp]
         public void Init()
         {
-            // TODO uncomment below to create an instance of Outdoors
-            //instance = new Outdoors();
+            instance = new Outdoors();
         }
 
         /// <summary>
@@ -79,7 +77,7 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void SunExposureTest()
         {
-            // TODO unit test for the property 'SunExposure'
+            Assert.IsTrue(this.instance.SunExposure);
         }
         /// <summary>
         /// Test the property 'WindExposure'
@@ -87,7 +85,7 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void WindExposureTest()
         {
-            // TODO unit test for the property 'WindExposure'
+            Assert.IsTrue(this.instance.WindExposure);
         }
         /// <summary>
         /// Test the property 'ViewFactor'
@@ -95,7 +93,8 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void ViewFactorTest()
         {
-            // TODO unit test for the property 'ViewFactor'
+            var vF = this.instance.ViewFactor;
+            Assert.IsTrue(vF == "autocalculate");
         }
 
     }

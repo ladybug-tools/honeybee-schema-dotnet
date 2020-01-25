@@ -53,7 +53,7 @@ namespace HoneybeeDotNet.Model
         public static implicit operator AnyOf(double d) => new AnyOf(d);
         public static implicit operator AnyOf(decimal d) => new AnyOf(d);
 
-        public static implicit operator string(AnyOf b) => b.ToString();
+        public static implicit operator string(AnyOf b) => b;
 
         //[JsonContainer]
         //public object data()
@@ -120,6 +120,9 @@ namespace HoneybeeDotNet.Model
         }
 
         public static implicit operator string(AnyOf<T, K> b) => b.ToString();
+        //public static implicit operator T(AnyOf<T, K> b) => (T)b.Obj;
+        //public static implicit operator K(AnyOf<T, K> b) => (K)b.Obj;
+
 
         public static implicit operator AnyOf<T, K>(T b) => new AnyOf<T, K>(b);
         public static implicit operator AnyOf<T, K>(K b) => new AnyOf<T, K>(b);
