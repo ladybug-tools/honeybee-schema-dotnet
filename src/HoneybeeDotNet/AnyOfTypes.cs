@@ -107,7 +107,7 @@ namespace HoneybeeDotNet.Model
         {
         }
 
-        public static implicit operator string(AnyOf<T> b) => b.ToString();
+        public static implicit operator string(AnyOf<T> b) => b;
     }
 
 
