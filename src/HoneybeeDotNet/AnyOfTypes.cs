@@ -137,6 +137,11 @@ namespace HoneybeeDotNet.Model
         {
         }
 
+        public static implicit operator string(AnyOf<T, K, Q> b) => b.ToString();
+        public static implicit operator AnyOf<T, K, Q>(T b) => new AnyOf<T, K, Q>(b);
+        public static implicit operator AnyOf<T, K, Q>(K b) => new AnyOf<T, K, Q>(b);
+        public static implicit operator AnyOf<T, K, Q>(Q b) => new AnyOf<T, K, Q>(b);
+
     }
     public class AnyOf<T, K, Q, W> : AnyOf
     {
@@ -146,6 +151,11 @@ namespace HoneybeeDotNet.Model
         {
         }
 
+        public static implicit operator string(AnyOf<T, K, Q, W> b) => b.ToString();
+        public static implicit operator AnyOf<T, K, Q, W>(T b) => new AnyOf<T, K, Q, W>(b);
+        public static implicit operator AnyOf<T, K, Q, W>(K b) => new AnyOf<T, K, Q, W>(b);
+        public static implicit operator AnyOf<T, K, Q, W>(Q b) => new AnyOf<T, K, Q, W>(b);
+        public static implicit operator AnyOf<T, K, Q, W>(W b) => new AnyOf<T, K, Q, W>(b);
     }
 
     public class AnyOf<T, K, Q, W, E> : AnyOf
@@ -156,6 +166,13 @@ namespace HoneybeeDotNet.Model
         {
         }
 
+        public static implicit operator string(AnyOf<T, K, Q, W, E> b) => b.ToString();
+        public static implicit operator AnyOf<T, K, Q, W, E>(T b) => new AnyOf<T, K, Q, W, E>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E>(K b) => new AnyOf<T, K, Q, W, E>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E>(Q b) => new AnyOf<T, K, Q, W, E>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E>(W b) => new AnyOf<T, K, Q, W, E>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E>(E b) => new AnyOf<T, K, Q, W, E>(b);
+
     }
 
     public class AnyOf<T, K, Q, W, E, R> : AnyOf
@@ -165,7 +182,13 @@ namespace HoneybeeDotNet.Model
         public AnyOf(object obj) : base(obj)
         {
         }
-
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R> b) => b.ToString();
+        public static implicit operator AnyOf<T, K, Q, W, E, R>(T b) => new AnyOf<T, K, Q, W, E, R>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R>(K b) => new AnyOf<T, K, Q, W, E, R>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R>(Q b) => new AnyOf<T, K, Q, W, E, R>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R>(W b) => new AnyOf<T, K, Q, W, E, R>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R>(E b) => new AnyOf<T, K, Q, W, E, R>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R>(R b) => new AnyOf<T, K, Q, W, E, R>(b);
     }
 
     public class AnyOf<T, K, Q, W, E, R, Y> : AnyOf
@@ -177,7 +200,14 @@ namespace HoneybeeDotNet.Model
         public AnyOf(object obj) : base(obj)
         {
         }
-
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y> b) => b.ToString();
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y>(T b) => new AnyOf<T, K, Q, W, E, R, Y>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y>(K b) => new AnyOf<T, K, Q, W, E, R, Y>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y>(Q b) => new AnyOf<T, K, Q, W, E, R, Y>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y>(W b) => new AnyOf<T, K, Q, W, E, R, Y>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y>(E b) => new AnyOf<T, K, Q, W, E, R, Y>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y>(R b) => new AnyOf<T, K, Q, W, E, R, Y>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y>(Y b) => new AnyOf<T, K, Q, W, E, R, Y>(b);
     }
 
     public class AnyOf<T, K, Q, W, E, R, Y, U> : AnyOf
@@ -190,6 +220,16 @@ namespace HoneybeeDotNet.Model
         {
         }
 
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U> b) => b.ToString();
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U>(W b) => new AnyOf<T, K, Q, W, E, R, Y, U>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U>(E b) => new AnyOf<T, K, Q, W, E, R, Y, U>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U>(R b) => new AnyOf<T, K, Q, W, E, R, Y, U>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U>(Y b) => new AnyOf<T, K, Q, W, E, R, Y, U>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U>(U b) => new AnyOf<T, K, Q, W, E, R, Y, U>(b);
+
     }
 
     public class AnyOf<T, K, Q, W, E, R, Y, U, I> : AnyOf
@@ -201,6 +241,16 @@ namespace HoneybeeDotNet.Model
         public AnyOf(object obj) : base(obj)
         {
         }
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I> b) => b.ToString();
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I>(W b) => new AnyOf<T, K, Q, W, E, R, Y, U, I>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I>(E b) => new AnyOf<T, K, Q, W, E, R, Y, U, I>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I>(R b) => new AnyOf<T, K, Q, W, E, R, Y, U, I>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I>(Y b) => new AnyOf<T, K, Q, W, E, R, Y, U, I>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I>(U b) => new AnyOf<T, K, Q, W, E, R, Y, U, I>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I>(I b) => new AnyOf<T, K, Q, W, E, R, Y, U, I>(b);
 
     }
 
@@ -214,6 +264,17 @@ namespace HoneybeeDotNet.Model
         public AnyOf(object obj) : base(obj)
         {
         }
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O> b) => b.ToString();
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O>(W b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O>(E b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O>(R b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O>(Y b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O>(U b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O>(I b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O>(O b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O>(b);
 
     }
 
@@ -227,6 +288,18 @@ namespace HoneybeeDotNet.Model
         {
         }
 
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P> b) => b.ToString();
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(W b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(E b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(R b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(Y b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(U b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(I b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(O b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(P b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(b);
     }
 
     public class AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A> : AnyOf
@@ -238,6 +311,18 @@ namespace HoneybeeDotNet.Model
         public AnyOf(object obj) : base(obj)
         {
         }
-
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A> b) => b.ToString();
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(W b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(E b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(R b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(Y b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(U b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(I b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(O b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(P b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(A b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
     }
 }
