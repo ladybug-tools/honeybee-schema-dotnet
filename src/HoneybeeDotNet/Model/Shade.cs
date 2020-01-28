@@ -43,7 +43,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="properties">Extension properties for particular simulation engines (Radiance, EnergyPlus). (required).</param>
         /// <param name="displayName">Display name of the object with no restrictions..</param>
         /// <param name="type">type (default to &quot;Shade&quot;).</param>
-        public Shade(string name, Face3D geometry, ShadePropertiesAbridged properties, string displayName = default(string), string type = "Shade")
+        public Shade(string name, Face3D geometry, ShadePropertiesAbridged properties, string displayName = default, string type = "Shade")
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -149,8 +149,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>Shade object</returns>
+        public static Shade FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<Shade>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

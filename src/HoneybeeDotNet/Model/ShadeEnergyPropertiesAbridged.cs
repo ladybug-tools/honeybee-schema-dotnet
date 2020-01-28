@@ -36,7 +36,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="type">type (default to &quot;ShadeEnergyPropertiesAbridged&quot;).</param>
         /// <param name="construction">Name of a ShadeConstruction to set the reflectance and specularity of the Shade. If None, the construction is set by theparent Room construction_set, the Model global_construction_set or (in the case fo an orphaned shade) the EnergyPlus default of 0.2 diffuse reflectance..</param>
         /// <param name="transmittanceSchedule">Name of a schedule to set the transmittance of the shade, which can vary throughout the simulation. If None, the shade will be completely opauqe..</param>
-        public ShadeEnergyPropertiesAbridged(string type = "ShadeEnergyPropertiesAbridged", string construction = default(string), string transmittanceSchedule = default(string))
+        public ShadeEnergyPropertiesAbridged(string type = "ShadeEnergyPropertiesAbridged", string construction = default, string transmittanceSchedule = default)
         {
             // use default value if no "type" provided
             if (type == null)
@@ -95,8 +95,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>ShadeEnergyPropertiesAbridged object</returns>
+        public static ShadeEnergyPropertiesAbridged FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<ShadeEnergyPropertiesAbridged>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

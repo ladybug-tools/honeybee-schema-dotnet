@@ -166,7 +166,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="upperLimit">Upper limit for the schedule type is entered..</param>
         /// <param name="numericType">numericType (default to NumericTypeEnum.Continuous).</param>
         /// <param name="unitType">unitType (default to UnitTypeEnum.Dimensionless).</param>
-        public ScheduleTypeLimit(string name, string type = "ScheduleTypeLimit", decimal lowerLimit = default(decimal), decimal upperLimit = default(decimal), NumericTypeEnum? numericType = NumericTypeEnum.Continuous, UnitTypeEnum? unitType = UnitTypeEnum.Dimensionless)
+        public ScheduleTypeLimit(string name, string type = "ScheduleTypeLimit", decimal lowerLimit = default, decimal upperLimit = default, NumericTypeEnum? numericType = NumericTypeEnum.Continuous, UnitTypeEnum? unitType = UnitTypeEnum.Dimensionless)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -266,8 +266,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>ScheduleTypeLimit object</returns>
+        public static ScheduleTypeLimit FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<ScheduleTypeLimit>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

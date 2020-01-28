@@ -12,7 +12,7 @@ Contact: info@ladybug.tools
     
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{16F5EA1B-995C-4549-BE67-B9BBB10A246B}</ProjectGuid>
+    <ProjectGuid>{B250F6D2-8739-42F8-BAC8-F753886F1F4A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HoneybeeDotNet</RootNamespace>

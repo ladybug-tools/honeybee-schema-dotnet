@@ -45,7 +45,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="airChangesPerHour">Intensity of ventilation in air changes per hour (ACH) for the entire Room. (default to 0M).</param>
         /// <param name="flowPerZone">Intensity of ventilation in m3/s for the entire Room. (default to 0M).</param>
         /// <param name="schedule">Name of the schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile..</param>
-        public VentilationAbridged(string name, string type = "VentilationAbridged", decimal flowPerPerson = 0M, decimal flowPerArea = 0M, decimal airChangesPerHour = 0M, decimal flowPerZone = 0M, string schedule = default(string))
+        public VentilationAbridged(string name, string type = "VentilationAbridged", decimal flowPerPerson = 0M, decimal flowPerArea = 0M, decimal airChangesPerHour = 0M, decimal flowPerZone = 0M, string schedule = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -185,8 +185,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>VentilationAbridged object</returns>
+        public static VentilationAbridged FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<VentilationAbridged>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

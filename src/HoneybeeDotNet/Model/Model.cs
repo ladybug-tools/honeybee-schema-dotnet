@@ -48,7 +48,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="orphanedApertures">A list of Apertures in the model that lack a parent Face. Note that orphaned Apertures are not acceptable for Models that are to be exported for energy simulation..</param>
         /// <param name="orphanedDoors">A list of Doors in the model that lack a parent Face. Note that orphaned Doors are not acceptable for Models that are to be exported for energy simulation..</param>
         /// <param name="northAngle">The clockwise north direction in degrees. (default to 0M).</param>
-        public Model(string name, ModelProperties properties, string displayName = default(string), string type = "Model", List<Room> rooms = default(List<Room>), List<Face> orphanedFaces = default(List<Face>), List<Shade> orphanedShades = default(List<Shade>), List<Aperture> orphanedApertures = default(List<Aperture>), List<Door> orphanedDoors = default(List<Door>), decimal northAngle = 0M)
+        public Model(string name, ModelProperties properties, string displayName = default, string type = "Model", List<Room> rooms = default, List<Face> orphanedFaces = default, List<Shade> orphanedShades = default, List<Aperture> orphanedApertures = default, List<Door> orphanedDoors = default, decimal northAngle = 0M)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -203,8 +203,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>Model object</returns>
+        public static Model FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<Model>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

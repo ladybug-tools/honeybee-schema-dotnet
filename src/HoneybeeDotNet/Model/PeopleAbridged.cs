@@ -45,7 +45,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="type">type (default to &quot;PeopleAbridged&quot;).</param>
         /// <param name="radiantFraction">The radiant fraction of sensible heat released by people. The defaultvalue is 0.30. (default to 0.3M).</param>
         /// <param name="latentFraction">Number for the latent fraction of heat gain due to people or simply the word \&quot;autocalculate\&quot;..</param>
-        public PeopleAbridged(string name, decimal peoplePerArea, string occupancySchedule, string activitySchedule, string type = "PeopleAbridged", decimal radiantFraction = 0.3M, AnyOf<decimal,string> latentFraction = default(AnyOf<decimal,string>))
+        public PeopleAbridged(string name, decimal peoplePerArea, string occupancySchedule, string activitySchedule, string type = "PeopleAbridged", decimal radiantFraction = 0.3M, AnyOf<decimal,string> latentFraction = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -188,8 +188,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>PeopleAbridged object</returns>
+        public static PeopleAbridged FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<PeopleAbridged>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

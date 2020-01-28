@@ -47,7 +47,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="isGlass">Boolean to note whether this object is a glass door as opposed to an opaque door. (default to false).</param>
         /// <param name="indoorShades">Shades assigned to the interior side of this object..</param>
         /// <param name="outdoorShades">Shades assigned to the exterior side of this object (eg. entryway awning)..</param>
-        public Door(string name, Face3D geometry, AnyOf<Outdoors,Surface> boundaryCondition, DoorPropertiesAbridged properties, string displayName = default(string), string type = "Door", bool isGlass = false, List<Shade> indoorShades = default(List<Shade>), List<Shade> outdoorShades = default(List<Shade>))
+        public Door(string name, Face3D geometry, AnyOf<Outdoors,Surface> boundaryCondition, DoorPropertiesAbridged properties, string displayName = default, string type = "Door", bool isGlass = false, List<Shade> indoorShades = default, List<Shade> outdoorShades = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -209,8 +209,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>Door object</returns>
+        public static Door FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<Door>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

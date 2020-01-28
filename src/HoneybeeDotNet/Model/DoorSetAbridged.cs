@@ -39,7 +39,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="overheadConstruction">Name for an OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face..</param>
         /// <param name="exteriorGlassConstruction">Name for an WindowConstruction for all glass doors with an Outdoors boundary condition..</param>
         /// <param name="interiorGlassConstruction">Name for an WindowConstruction for all glass doors with a Surface boundary condition..</param>
-        public DoorSetAbridged(string type = "DoorSetAbridged", string interiorConstruction = default(string), string exteriorConstruction = default(string), string overheadConstruction = default(string), string exteriorGlassConstruction = default(string), string interiorGlassConstruction = default(string))
+        public DoorSetAbridged(string type = "DoorSetAbridged", string interiorConstruction = default, string exteriorConstruction = default, string overheadConstruction = default, string exteriorGlassConstruction = default, string interiorGlassConstruction = default)
         {
             // use default value if no "type" provided
             if (type == null)
@@ -128,8 +128,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>DoorSetAbridged object</returns>
+        public static DoorSetAbridged FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<DoorSetAbridged>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

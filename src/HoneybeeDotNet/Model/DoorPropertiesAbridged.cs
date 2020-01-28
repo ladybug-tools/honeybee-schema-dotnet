@@ -35,7 +35,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <param name="type">type (default to &quot;DoorPropertiesAbridged&quot;).</param>
         /// <param name="energy">energy.</param>
-        public DoorPropertiesAbridged(string type = "DoorPropertiesAbridged", DoorEnergyPropertiesAbridged energy = default(DoorEnergyPropertiesAbridged))
+        public DoorPropertiesAbridged(string type = "DoorPropertiesAbridged", DoorEnergyPropertiesAbridged energy = default)
         {
             // use default value if no "type" provided
             if (type == null)
@@ -83,8 +83,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>DoorPropertiesAbridged object</returns>
+        public static DoorPropertiesAbridged FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<DoorPropertiesAbridged>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

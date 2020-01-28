@@ -45,7 +45,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="latentFraction">Number for the amount of latent heat given off by electricequipment. Default value is 0..</param>
         /// <param name="lostFraction">Number for the amount of “lost” heat being given off by equipment. The default value is 0. (default to 0M).</param>
         /// <param name="type">type (default to &quot;GasEquipmentAbridged&quot;).</param>
-        public GasEquipmentAbridged(string name, decimal wattsPerArea, string schedule, decimal radiantFraction = 0M, AnyOf<decimal,string> latentFraction = default(AnyOf<decimal,string>), decimal lostFraction = 0M, string type = "GasEquipmentAbridged")
+        public GasEquipmentAbridged(string name, decimal wattsPerArea, string schedule, decimal radiantFraction = 0M, AnyOf<decimal,string> latentFraction = default, decimal lostFraction = 0M, string type = "GasEquipmentAbridged")
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -187,8 +187,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>GasEquipmentAbridged object</returns>
+        public static GasEquipmentAbridged FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<GasEquipmentAbridged>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

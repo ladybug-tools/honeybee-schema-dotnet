@@ -48,9 +48,10 @@ namespace HoneybeeDotNet.Test
                     new List<decimal>(){0.5M,0.5M,0.5M },
                     new List<decimal>(){1,0,0 }
                 });
-            instance = new Door(
+            instance = new Door( 
                 "mainEntrance",
-                face);
+                face
+                );
 
         }
 
@@ -112,8 +113,9 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void BoundaryConditionTest()
         {
-            var bcObj = this.instance.BoundaryCondition.Obj;
-            Assert.IsInstanceOf(typeof(Outdoors), bcObj);
+            this.instance.BoundaryCondition = new Outdoors(sunExposure: false, viewFactor: 0.5M);
+            var bcObj = this.instance.BoundaryCondition.Obj as Outdoors;
+            Assert.IsTrue(bcObj.SunExposure == false);
 
         }
         /// <summary>
@@ -133,6 +135,35 @@ namespace HoneybeeDotNet.Test
             // TODO unit test for the property 'Properties'
         }
 
+        /// <summary>
+        /// Test the ToJson with a default instance
+        /// </summary>
+        [Test]
+        public void ToJsonTest()
+        {
+            var j = this.instance.ToJson();
+
+            var obj = Door.FromJson(j);
+
+            var bc = obj.BoundaryCondition.Obj as Outdoors;
+            Assert.IsTrue(bc.ViewFactor == "autocalculate");
+        }
+
+        /// <summary>
+        /// Test the ToJson with a default instance
+        /// </summary>
+        [Test]
+        public void ToJsonViewTypeTest()
+        {
+            this.instance.BoundaryCondition = new Outdoors(sunExposure: false, viewFactor: 0.5M);
+            var j = this.instance.ToJson();
+
+            var obj = Door.FromJson(j);
+
+            var bc = obj.BoundaryCondition.Obj as Outdoors;
+            Assert.IsTrue((decimal)bc.ViewFactor.Obj == 0.5M);
+
+        }
     }
 
 }

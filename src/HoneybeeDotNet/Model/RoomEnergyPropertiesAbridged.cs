@@ -44,7 +44,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="infiltration">Infiltration object to to describe the outdoor air leakage..</param>
         /// <param name="ventilation">Ventilation object for the minimum outdoor air requirement..</param>
         /// <param name="setpoint">Setpoint object for the temperature setpoints of the Room..</param>
-        public RoomEnergyPropertiesAbridged(string type = "RoomEnergyPropertiesAbridged", string constructionSet = default(string), string programType = default(string), string hvac = default(string), PeopleAbridged people = default(PeopleAbridged), LightingAbridged lighting = default(LightingAbridged), ElectricEquipmentAbridged electricEquipment = default(ElectricEquipmentAbridged), GasEquipmentAbridged gasEquipment = default(GasEquipmentAbridged), InfiltrationAbridged infiltration = default(InfiltrationAbridged), VentilationAbridged ventilation = default(VentilationAbridged), SetpointAbridged setpoint = default(SetpointAbridged))
+        public RoomEnergyPropertiesAbridged(string type = "RoomEnergyPropertiesAbridged", string constructionSet = default, string programType = default, string hvac = default, PeopleAbridged people = default, LightingAbridged lighting = default, ElectricEquipmentAbridged electricEquipment = default, GasEquipmentAbridged gasEquipment = default, InfiltrationAbridged infiltration = default, VentilationAbridged ventilation = default, SetpointAbridged setpoint = default)
         {
             // use default value if no "type" provided
             if (type == null)
@@ -183,8 +183,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>RoomEnergyPropertiesAbridged object</returns>
+        public static RoomEnergyPropertiesAbridged FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<RoomEnergyPropertiesAbridged>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

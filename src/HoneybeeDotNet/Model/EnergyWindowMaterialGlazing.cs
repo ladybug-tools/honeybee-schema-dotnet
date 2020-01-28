@@ -53,7 +53,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="conductivity">Thermal conductivity of the glass in W/(m-K). Default value is 0.9, which is  typical for clear glass without a low-e coating. (default to 0.9M).</param>
         /// <param name="dirtCorrection">Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean. (default to 1M).</param>
         /// <param name="solarDiffusing">Takes values True and False. If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component. (default to false).</param>
-        public EnergyWindowMaterialGlazing(string name, string type = "EnergyWindowMaterialGlazing", decimal thickness = 0.003M, decimal solarTransmittance = 0.85M, decimal solarReflectance = 0.075M, decimal solarReflectanceBack = default(decimal), decimal visibleTransmittance = 0.9M, decimal visibleReflectance = 0.075M, decimal visibleReflectanceBack = default(decimal), decimal infraredTransmittance = 0M, decimal emissivity = 0.84M, decimal emissivityBack = 0.84M, decimal conductivity = 0.9M, decimal dirtCorrection = 1M, bool solarDiffusing = false)
+        public EnergyWindowMaterialGlazing(string name, string type = "EnergyWindowMaterialGlazing", decimal thickness = 0.003M, decimal solarTransmittance = 0.85M, decimal solarReflectance = 0.075M, decimal solarReflectanceBack = default, decimal visibleTransmittance = 0.9M, decimal visibleReflectance = 0.075M, decimal visibleReflectanceBack = default, decimal infraredTransmittance = 0M, decimal emissivity = 0.84M, decimal emissivityBack = 0.84M, decimal conductivity = 0.9M, decimal dirtCorrection = 1M, bool solarDiffusing = false)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -329,8 +329,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>EnergyWindowMaterialGlazing object</returns>
+        public static EnergyWindowMaterialGlazing FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<EnergyWindowMaterialGlazing>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

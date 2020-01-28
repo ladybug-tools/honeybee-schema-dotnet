@@ -42,7 +42,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="type">type (default to &quot;Face3D&quot;).</param>
         /// <param name="holes">Optional list of lists with one list for each hole in the face.Each hole should be a list of at least 3 points and each point a list of 3 (x, y, z) values. If None, it will be assumed that there are no holes in the face..</param>
         /// <param name="plane">Optional Plane indicating the plane in which the face exists.If None, the plane will usually be derived from the boundary points..</param>
-        public Face3D(List<List<decimal>> boundary, string type = "Face3D", List<List<List<decimal>>> holes = default(List<List<List<decimal>>>), Plane plane = default(Plane))
+        public Face3D(List<List<decimal>> boundary, string type = "Face3D", List<List<List<decimal>>> holes = default, Plane plane = default)
         {
             // to ensure "boundary" is required (not null)
             if (boundary == null)
@@ -120,8 +120,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>Face3D object</returns>
+        public static Face3D FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<Face3D>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

@@ -46,7 +46,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="apertureSet">A ApertureSet object for this ConstructionSet..</param>
         /// <param name="doorSet">A DoorSet object for this ConstructionSet..</param>
         /// <param name="shadeConstruction">A ShadeConstruction to set the reflectance properties of all outdoor shades to which this ConstructionSet is assigned..</param>
-        public ConstructionSetAbridged(string name, string type = "ConstructionSetAbridged", WallSetAbridged wallSet = default(WallSetAbridged), FloorSetAbridged floorSet = default(FloorSetAbridged), RoofCeilingSetAbridged roofCeilingSet = default(RoofCeilingSetAbridged), ApertureSetAbridged apertureSet = default(ApertureSetAbridged), DoorSetAbridged doorSet = default(DoorSetAbridged), string shadeConstruction = default(string))
+        public ConstructionSetAbridged(string name, string type = "ConstructionSetAbridged", WallSetAbridged wallSet = default, FloorSetAbridged floorSet = default, RoofCeilingSetAbridged roofCeilingSet = default, ApertureSetAbridged apertureSet = default, DoorSetAbridged doorSet = default, string shadeConstruction = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -164,8 +164,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>ConstructionSetAbridged object</returns>
+        public static ConstructionSetAbridged FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<ConstructionSetAbridged>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

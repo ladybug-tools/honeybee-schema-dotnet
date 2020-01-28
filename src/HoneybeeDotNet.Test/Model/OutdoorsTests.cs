@@ -99,15 +99,33 @@ namespace HoneybeeDotNet.Test
         }
 
         /// <summary>
-        /// Test the property 'ViewFactor'
+        /// Test the ToJson with a ViewFactor number
+        /// </summary>
+        [Test]
+        public void ToJsonViewFactorTest()
+        {
+            this.instance.ViewFactor = 0.5M;
+            var j = this.instance.ToJson();
+
+            var obj = Outdoors.FromJson(j);
+            Assert.IsFalse(obj.SunExposure);
+
+            var vF = obj.ViewFactor;
+            Assert.IsTrue((decimal)vF.Obj == 0.5M);
+        }
+
+        /// <summary>
+        /// Test the ToJson with a default instance
         /// </summary>
         [Test]
         public void ToJsonTest()
         {
             var j = this.instance.ToJson();
 
-            var obj = JsonConvert.DeserializeObject<Outdoors>(j);
-            Assert.IsFalse(obj.SunExposure);
+            var obj = Outdoors.FromJson(j);
+
+            var vF = obj.ViewFactor;
+            Assert.IsTrue(vF == "autocalculate");
         }
 
     }

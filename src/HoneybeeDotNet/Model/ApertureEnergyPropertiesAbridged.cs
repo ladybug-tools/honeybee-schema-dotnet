@@ -35,7 +35,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <param name="type">type (default to &quot;ApertureEnergyPropertiesAbridged&quot;).</param>
         /// <param name="construction">Name of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set..</param>
-        public ApertureEnergyPropertiesAbridged(string type = "ApertureEnergyPropertiesAbridged", string construction = default(string))
+        public ApertureEnergyPropertiesAbridged(string type = "ApertureEnergyPropertiesAbridged", string construction = default)
         {
             // use default value if no "type" provided
             if (type == null)
@@ -84,8 +84,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>ApertureEnergyPropertiesAbridged object</returns>
+        public static ApertureEnergyPropertiesAbridged FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<ApertureEnergyPropertiesAbridged>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

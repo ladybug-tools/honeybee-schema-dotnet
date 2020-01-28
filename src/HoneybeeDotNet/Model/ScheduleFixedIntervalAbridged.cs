@@ -46,7 +46,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="startDate">A list of two integers for [month, day], representing the start date when the schedule values begin to take effect.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case)..</param>
         /// <param name="placeholderValue"> A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period. (default to 0M).</param>
         /// <param name="interpolate">Boolean to note whether values in between intervals should be linearly interpolated or whether successive values should take effect immediately upon the beginning time corrsponding to them. (default to false).</param>
-        public ScheduleFixedIntervalAbridged(string name, List<decimal> values, string type = "ScheduleFixedIntervalAbridged", string scheduleTypeLimit = default(string), int timestep = 1, List<int> startDate = default(List<int>), decimal placeholderValue = 0M, bool interpolate = false)
+        public ScheduleFixedIntervalAbridged(string name, List<decimal> values, string type = "ScheduleFixedIntervalAbridged", string scheduleTypeLimit = default, int timestep = 1, List<int> startDate = default, decimal placeholderValue = 0M, bool interpolate = false)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -197,8 +197,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>ScheduleFixedIntervalAbridged object</returns>
+        public static ScheduleFixedIntervalAbridged FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<ScheduleFixedIntervalAbridged>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

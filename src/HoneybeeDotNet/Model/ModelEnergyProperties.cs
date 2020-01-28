@@ -93,7 +93,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="programTypes">List of all ProgramTypes in the Model..</param>
         /// <param name="schedules">A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades..</param>
         /// <param name="scheduleTypeLimits">A list of all unique ScheduleTypeLimits in the model. This all ScheduleTypeLimits needed to make the Model schedules..</param>
-        public ModelEnergyProperties(List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,ShadeConstruction>> constructions, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing,EnergyWindowMaterialShade>> materials, string type = "ModelEnergyProperties", TerrainTypeEnum? terrainType = TerrainTypeEnum.City, string globalConstructionSet = default(string), List<ConstructionSetAbridged> constructionSets = default(List<ConstructionSetAbridged>), List<IdealAirSystemAbridged> hvacs = default(List<IdealAirSystemAbridged>), List<ProgramTypeAbridged> programTypes = default(List<ProgramTypeAbridged>), List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged>> schedules = default(List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged>>), List<ScheduleTypeLimit> scheduleTypeLimits = default(List<ScheduleTypeLimit>))
+        public ModelEnergyProperties(List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,ShadeConstruction>> constructions, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing,EnergyWindowMaterialShade>> materials, string type = "ModelEnergyProperties", TerrainTypeEnum? terrainType = TerrainTypeEnum.City, string globalConstructionSet = default, List<ConstructionSetAbridged> constructionSets = default, List<IdealAirSystemAbridged> hvacs = default, List<ProgramTypeAbridged> programTypes = default, List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged>> schedules = default, List<ScheduleTypeLimit> scheduleTypeLimits = default)
         {
             // to ensure "constructions" is required (not null)
             if (constructions == null)
@@ -241,8 +241,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>ModelEnergyProperties object</returns>
+        public static ModelEnergyProperties FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<ModelEnergyProperties>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

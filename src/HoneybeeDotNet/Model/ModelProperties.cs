@@ -35,7 +35,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <param name="type">type (default to &quot;ModelProperties&quot;).</param>
         /// <param name="energy">energy.</param>
-        public ModelProperties(string type = "ModelProperties", ModelEnergyProperties energy = default(ModelEnergyProperties))
+        public ModelProperties(string type = "ModelProperties", ModelEnergyProperties energy = default)
         {
             // use default value if no "type" provided
             if (type == null)
@@ -83,8 +83,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>ModelProperties object</returns>
+        public static ModelProperties FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<ModelProperties>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

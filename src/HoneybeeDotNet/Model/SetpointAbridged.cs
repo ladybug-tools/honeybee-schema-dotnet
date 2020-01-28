@@ -44,7 +44,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="type">type (default to &quot;SetpointAbridged&quot;).</param>
         /// <param name="humidificationSchedule">Name of the schedule for the humidification setpoint. The values in this schedule should be in [%]..</param>
         /// <param name="dehumidificationSchedule">Name of the schedule for the dehumidification setpoint. The values in this schedule should be in [%]..</param>
-        public SetpointAbridged(string name, string coolingSchedule, string heatingSchedule, string type = "SetpointAbridged", string humidificationSchedule = default(string), string dehumidificationSchedule = default(string))
+        public SetpointAbridged(string name, string coolingSchedule, string heatingSchedule, string type = "SetpointAbridged", string humidificationSchedule = default, string dehumidificationSchedule = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -160,8 +160,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>SetpointAbridged object</returns>
+        public static SetpointAbridged FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<SetpointAbridged>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal
