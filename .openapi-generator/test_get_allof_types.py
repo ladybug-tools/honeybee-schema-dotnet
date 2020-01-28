@@ -6,7 +6,7 @@ import urllib.request, json
 def test_get_allof_types(schema_obj_name, keys_anyof):
     #load schema json, and get all union types
     unitItem = []
-    source_json_url = "https://ladybug-tools-in2.github.io/honeybee-schema/model.json"
+    source_json_url = "https://www.ladybug.tools/honeybee-schema/model.json"
     json_url = urllib.request.urlopen(source_json_url)
     data = json.loads(json_url.read())
     for sn, sp in data['components']['schemas'].items():
