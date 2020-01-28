@@ -77,4 +77,4 @@ def check_anyof_types(source_json_url):
   
 
 # print(unitItem)
-# check_anyof_types("https://ladybug-tools-in2.github.io/honeybee-schema/model.json")
+# check_anyof_types("https://www.ladybug.tools/honeybee-schema/model.json")
