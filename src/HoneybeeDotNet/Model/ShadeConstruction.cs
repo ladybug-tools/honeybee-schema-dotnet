@@ -98,12 +98,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -111,6 +113,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value> A number for the solar reflectance of the construction.</value>
         [DataMember(Name="solar_reflectance", EmitDefaultValue=false)]
+        [JsonProperty("solar_reflectance")]
         public decimal SolarReflectance { get; set; }
 
         /// <summary>
@@ -118,6 +121,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value> A number for the visible reflectance of the construction.</value>
         [DataMember(Name="visible_reflectance", EmitDefaultValue=false)]
+        [JsonProperty("visible_reflectance")]
         public decimal VisibleReflectance { get; set; }
 
         /// <summary>
@@ -125,6 +129,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Boolean to note whether the reflection off the shade is diffuse (False) or specular (True). Set to True if the construction is representing a glass facade or a mirror material.</value>
         [DataMember(Name="is_specular", EmitDefaultValue=false)]
+        [JsonProperty("is_specular")]
         public bool IsSpecular { get; set; }
 
         /// <summary>

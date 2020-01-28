@@ -182,12 +182,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -195,6 +197,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The surface-to-surface of the glass in meters. Default value is 0.003.</value>
         [DataMember(Name="thickness", EmitDefaultValue=false)]
+        [JsonProperty("thickness")]
         public decimal Thickness { get; set; }
 
         /// <summary>
@@ -202,6 +205,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Transmittance of solar radiation through the glass at normal incidence. Default value is 0.85 for clear glass.</value>
         [DataMember(Name="solar_transmittance", EmitDefaultValue=false)]
+        [JsonProperty("solar_transmittance")]
         public decimal SolarTransmittance { get; set; }
 
         /// <summary>
@@ -209,6 +213,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default value is 0.075 for clear glass.</value>
         [DataMember(Name="solar_reflectance", EmitDefaultValue=false)]
+        [JsonProperty("solar_reflectance")]
         public decimal SolarReflectance { get; set; }
 
         /// <summary>
@@ -216,6 +221,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum.</value>
         [DataMember(Name="solar_reflectance_back", EmitDefaultValue=false)]
+        [JsonProperty("solar_reflectance_back")]
         public decimal SolarReflectanceBack { get; set; }
 
         /// <summary>
@@ -223,6 +229,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Transmittance of visible light through the glass at normal incidence. Default value is 0.9 for clear glass.</value>
         [DataMember(Name="visible_transmittance", EmitDefaultValue=false)]
+        [JsonProperty("visible_transmittance")]
         public decimal VisibleTransmittance { get; set; }
 
         /// <summary>
@@ -230,6 +237,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Reflectance of visible light off of the front side of the glass at normal incidence. Default value is 0.075 for clear glass.</value>
         [DataMember(Name="visible_reflectance", EmitDefaultValue=false)]
+        [JsonProperty("visible_reflectance")]
         public decimal VisibleReflectance { get; set; }
 
         /// <summary>
@@ -237,6 +245,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye.</value>
         [DataMember(Name="visible_reflectance_back", EmitDefaultValue=false)]
+        [JsonProperty("visible_reflectance_back")]
         public decimal VisibleReflectanceBack { get; set; }
 
         /// <summary>
@@ -244,6 +253,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Long-wave transmittance at normal incidence.</value>
         [DataMember(Name="infrared_transmittance", EmitDefaultValue=false)]
+        [JsonProperty("infrared_transmittance")]
         public decimal InfraredTransmittance { get; set; }
 
         /// <summary>
@@ -251,6 +261,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.</value>
         [DataMember(Name="emissivity", EmitDefaultValue=false)]
+        [JsonProperty("emissivity")]
         public decimal Emissivity { get; set; }
 
         /// <summary>
@@ -258,6 +269,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.</value>
         [DataMember(Name="emissivity_back", EmitDefaultValue=false)]
+        [JsonProperty("emissivity_back")]
         public decimal EmissivityBack { get; set; }
 
         /// <summary>
@@ -265,6 +277,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Thermal conductivity of the glass in W/(m-K). Default value is 0.9, which is  typical for clear glass without a low-e coating.</value>
         [DataMember(Name="conductivity", EmitDefaultValue=false)]
+        [JsonProperty("conductivity")]
         public decimal Conductivity { get; set; }
 
         /// <summary>
@@ -272,6 +285,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean.</value>
         [DataMember(Name="dirt_correction", EmitDefaultValue=false)]
+        [JsonProperty("dirt_correction")]
         public decimal DirtCorrection { get; set; }
 
         /// <summary>
@@ -279,6 +293,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Takes values True and False. If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.</value>
         [DataMember(Name="solar_diffusing", EmitDefaultValue=false)]
+        [JsonProperty("solar_diffusing")]
         public bool SolarDiffusing { get; set; }
 
         /// <summary>

@@ -359,12 +359,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
 
@@ -373,6 +375,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The width of slat measured from edge to edge in meters.</value>
         [DataMember(Name="slat_width", EmitDefaultValue=false)]
+        [JsonProperty("slat_width")]
         public decimal SlatWidth { get; set; }
 
         /// <summary>
@@ -380,6 +383,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The distance between the front of a slat and the back of the adjacent slat in meters.</value>
         [DataMember(Name="slat_separation", EmitDefaultValue=false)]
+        [JsonProperty("slat_separation")]
         public decimal SlatSeparation { get; set; }
 
         /// <summary>
@@ -387,6 +391,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The distance between the faces of a slat in meters. The default value is 0.001.</value>
         [DataMember(Name="slat_thickness", EmitDefaultValue=false)]
+        [JsonProperty("slat_thickness")]
         public decimal SlatThickness { get; set; }
 
         /// <summary>
@@ -394,6 +399,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The angle (degrees) between the glazing outward normal and the slat outward normal where the outward normal points away from the front face of the slat (degrees). The default value is 45.</value>
         [DataMember(Name="slat_angle", EmitDefaultValue=false)]
+        [JsonProperty("slat_angle")]
         public decimal SlatAngle { get; set; }
 
         /// <summary>
@@ -401,6 +407,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The thermal conductivity of the slat in W/(m-K). Default value is 221.</value>
         [DataMember(Name="slat_conductivity", EmitDefaultValue=false)]
+        [JsonProperty("slat_conductivity")]
         public decimal SlatConductivity { get; set; }
 
         /// <summary>
@@ -408,6 +415,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The beam solar transmittance of the slat, assumed to be independent of angle of incidence on the slat. Any transmitted beam radiation is assumed to be 100% diffuse (i.e., slats are translucent). The default value is 0.</value>
         [DataMember(Name="beam_solar_transmittance", EmitDefaultValue=false)]
+        [JsonProperty("beam_solar_transmittance")]
         public decimal BeamSolarTransmittance { get; set; }
 
         /// <summary>
@@ -415,6 +423,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.</value>
         [DataMember(Name="beam_solar_reflectance", EmitDefaultValue=false)]
+        [JsonProperty("beam_solar_reflectance")]
         public decimal BeamSolarReflectance { get; set; }
 
         /// <summary>
@@ -422,6 +431,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.</value>
         [DataMember(Name="beam_solar_reflectance_back", EmitDefaultValue=false)]
+        [JsonProperty("beam_solar_reflectance_back")]
         public decimal BeamSolarReflectanceBack { get; set; }
 
         /// <summary>
@@ -429,6 +439,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The slat transmittance for hemisperically diffuse solar radiation. Default value is 0.</value>
         [DataMember(Name="diffuse_solar_transmittance", EmitDefaultValue=false)]
+        [JsonProperty("diffuse_solar_transmittance")]
         public decimal DiffuseSolarTransmittance { get; set; }
 
         /// <summary>
@@ -436,6 +447,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The front-side slat reflectance for hemispherically diffuse solar radiation. Default value is 0.5.</value>
         [DataMember(Name="diffuse_solar_reflectance", EmitDefaultValue=false)]
+        [JsonProperty("diffuse_solar_reflectance")]
         public decimal DiffuseSolarReflectance { get; set; }
 
         /// <summary>
@@ -443,6 +455,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The back-side slat reflectance for hemispherically diffuse solar radiation. Default value is 0.5.</value>
         [DataMember(Name="diffuse_solar_reflectance_back", EmitDefaultValue=false)]
+        [JsonProperty("diffuse_solar_reflectance_back")]
         public decimal DiffuseSolarReflectanceBack { get; set; }
 
         /// <summary>
@@ -450,6 +463,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.</value>
         [DataMember(Name="beam_visible_transmittance", EmitDefaultValue=false)]
+        [JsonProperty("beam_visible_transmittance")]
         public decimal BeamVisibleTransmittance { get; set; }
 
         /// <summary>
@@ -457,6 +471,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The beam visible reflectance on the front side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.</value>
         [DataMember(Name="beam_visible_reflectance", EmitDefaultValue=false)]
+        [JsonProperty("beam_visible_reflectance")]
         public decimal BeamVisibleReflectance { get; set; }
 
         /// <summary>
@@ -464,6 +479,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The beam visible reflectance on the back side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.</value>
         [DataMember(Name="beam_visible_reflectance_back", EmitDefaultValue=false)]
+        [JsonProperty("beam_visible_reflectance_back")]
         public decimal BeamVisibleReflectanceBack { get; set; }
 
         /// <summary>
@@ -471,6 +487,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The slat transmittance for hemispherically diffuse visible radiation. This value should equal “Slat Beam Visible Transmittance.”</value>
         [DataMember(Name="diffuse_visible_transmittance", EmitDefaultValue=false)]
+        [JsonProperty("diffuse_visible_transmittance")]
         public decimal DiffuseVisibleTransmittance { get; set; }
 
         /// <summary>
@@ -478,6 +495,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The front-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Front Side Slat Beam Visible Reflectance.” Default value is 0.5.</value>
         [DataMember(Name="diffuse_visible_reflectance", EmitDefaultValue=false)]
+        [JsonProperty("diffuse_visible_reflectance")]
         public decimal DiffuseVisibleReflectance { get; set; }
 
         /// <summary>
@@ -485,6 +503,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The back-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Back Side Slat Beam Visible Reflectance. Default value is 0.5.”</value>
         [DataMember(Name="diffuse_visible_reflectance_back", EmitDefaultValue=false)]
+        [JsonProperty("diffuse_visible_reflectance_back")]
         public decimal DiffuseVisibleReflectanceBack { get; set; }
 
         /// <summary>
@@ -492,6 +511,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The slat infrared hemispherical transmittance. It is zero for solid metallic, wooden or glass slats, but may be non-zero in some cases such as for thin plastic slats. The default value is 0.</value>
         [DataMember(Name="infrared_transmittance", EmitDefaultValue=false)]
+        [JsonProperty("infrared_transmittance")]
         public decimal InfraredTransmittance { get; set; }
 
         /// <summary>
@@ -499,6 +519,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Front side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9.</value>
         [DataMember(Name="emissivity", EmitDefaultValue=false)]
+        [JsonProperty("emissivity")]
         public decimal Emissivity { get; set; }
 
         /// <summary>
@@ -506,6 +527,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Back side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9.</value>
         [DataMember(Name="emissivity_back", EmitDefaultValue=false)]
+        [JsonProperty("emissivity_back")]
         public decimal EmissivityBack { get; set; }
 
         /// <summary>
@@ -513,6 +535,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The distance from the mid-plane of the blind to the adjacent glass in meters. The default value is 0.05.</value>
         [DataMember(Name="distance_to_glass", EmitDefaultValue=false)]
+        [JsonProperty("distance_to_glass")]
         public decimal DistanceToGlass { get; set; }
 
         /// <summary>
@@ -520,6 +543,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. The default value is 0.5</value>
         [DataMember(Name="top_opening_multiplier", EmitDefaultValue=false)]
+        [JsonProperty("top_opening_multiplier")]
         public decimal TopOpeningMultiplier { get; set; }
 
         /// <summary>
@@ -527,6 +551,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. The default value is 0.</value>
         [DataMember(Name="bottom_opening_multiplier", EmitDefaultValue=false)]
+        [JsonProperty("bottom_opening_multiplier")]
         public decimal BottomOpeningMultiplier { get; set; }
 
         /// <summary>
@@ -534,6 +559,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. The default value is 0.5.</value>
         [DataMember(Name="left_opening_multiplier", EmitDefaultValue=false)]
+        [JsonProperty("left_opening_multiplier")]
         public decimal LeftOpeningMultiplier { get; set; }
 
         /// <summary>
@@ -541,6 +567,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. The default value is 0.5.</value>
         [DataMember(Name="right_opening_multiplier", EmitDefaultValue=false)]
+        [JsonProperty("right_opening_multiplier")]
         public decimal RightOpeningMultiplier { get; set; }
 
         /// <summary>

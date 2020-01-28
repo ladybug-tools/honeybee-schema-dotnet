@@ -94,6 +94,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -101,6 +102,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the schedule for the cooling setpoint. The values in this schedule should be temperature in [C].</value>
         [DataMember(Name="cooling_schedule", EmitDefaultValue=false)]
+        [JsonProperty("cooling_schedule")]
         public string CoolingSchedule { get; set; }
 
         /// <summary>
@@ -108,12 +110,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the schedule for the heating setpoint. The values in this schedule should be temperature in [C].</value>
         [DataMember(Name="heating_schedule", EmitDefaultValue=false)]
+        [JsonProperty("heating_schedule")]
         public string HeatingSchedule { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -121,6 +125,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the schedule for the humidification setpoint. The values in this schedule should be in [%].</value>
         [DataMember(Name="humidification_schedule", EmitDefaultValue=false)]
+        [JsonProperty("humidification_schedule")]
         public string HumidificationSchedule { get; set; }
 
         /// <summary>
@@ -128,6 +133,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the schedule for the dehumidification setpoint. The values in this schedule should be in [%].</value>
         [DataMember(Name="dehumidification_schedule", EmitDefaultValue=false)]
+        [JsonProperty("dehumidification_schedule")]
         public string DehumidificationSchedule { get; set; }
 
         /// <summary>

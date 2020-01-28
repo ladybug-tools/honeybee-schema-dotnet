@@ -41,6 +41,7 @@ namespace HoneybeeDotNet.Test
         public void Init()
         {
             instance = new Outdoors();
+            instance.SunExposure = false;
         }
 
         /// <summary>
@@ -77,7 +78,7 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void SunExposureTest()
         {
-            Assert.IsTrue(this.instance.SunExposure);
+            Assert.IsFalse(this.instance.SunExposure);
         }
         /// <summary>
         /// Test the property 'WindExposure'
@@ -95,6 +96,18 @@ namespace HoneybeeDotNet.Test
         {
             var vF = this.instance.ViewFactor;
             Assert.IsTrue(vF == "autocalculate");
+        }
+
+        /// <summary>
+        /// Test the property 'ViewFactor'
+        /// </summary>
+        [Test]
+        public void ToJsonTest()
+        {
+            var j = this.instance.ToJson();
+
+            var obj = JsonConvert.DeserializeObject<Outdoors>(j);
+            Assert.IsFalse(obj.SunExposure);
         }
 
     }

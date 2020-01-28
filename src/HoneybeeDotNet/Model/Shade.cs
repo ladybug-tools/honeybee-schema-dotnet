@@ -92,6 +92,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object used in all simulation engines. Must not contain spaces and use only letters, digits and underscores/dashes. It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -99,6 +100,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Planar Face3D for the geometry.</value>
         [DataMember(Name="geometry", EmitDefaultValue=false)]
+        [JsonProperty("geometry")]
         public Face3D Geometry { get; set; }
 
         /// <summary>
@@ -106,6 +108,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
         [DataMember(Name="properties", EmitDefaultValue=false)]
+        [JsonProperty("properties")]
         public ShadePropertiesAbridged Properties { get; set; }
 
         /// <summary>
@@ -113,12 +116,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Display name of the object with no restrictions.</value>
         [DataMember(Name="display_name", EmitDefaultValue=false)]
+        [JsonProperty("display_name")]
         public string DisplayName { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>

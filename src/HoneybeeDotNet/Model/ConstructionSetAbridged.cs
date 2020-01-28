@@ -80,12 +80,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -93,6 +95,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A WallSet object for this ConstructionSet.</value>
         [DataMember(Name="wall_set", EmitDefaultValue=false)]
+        [JsonProperty("wall_set")]
         public WallSetAbridged WallSet { get; set; }
 
         /// <summary>
@@ -100,6 +103,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A FloorSet object for this ConstructionSet.</value>
         [DataMember(Name="floor_set", EmitDefaultValue=false)]
+        [JsonProperty("floor_set")]
         public FloorSetAbridged FloorSet { get; set; }
 
         /// <summary>
@@ -107,6 +111,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A RoofCeilingSet object for this ConstructionSet.</value>
         [DataMember(Name="roof_ceiling_set", EmitDefaultValue=false)]
+        [JsonProperty("roof_ceiling_set")]
         public RoofCeilingSetAbridged RoofCeilingSet { get; set; }
 
         /// <summary>
@@ -114,6 +119,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A ApertureSet object for this ConstructionSet.</value>
         [DataMember(Name="aperture_set", EmitDefaultValue=false)]
+        [JsonProperty("aperture_set")]
         public ApertureSetAbridged ApertureSet { get; set; }
 
         /// <summary>
@@ -121,6 +127,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A DoorSet object for this ConstructionSet.</value>
         [DataMember(Name="door_set", EmitDefaultValue=false)]
+        [JsonProperty("door_set")]
         public DoorSetAbridged DoorSet { get; set; }
 
         /// <summary>
@@ -128,6 +135,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A ShadeConstruction to set the reflectance properties of all outdoor shades to which this ConstructionSet is assigned.</value>
         [DataMember(Name="shade_construction", EmitDefaultValue=false)]
+        [JsonProperty("shade_construction")]
         public string ShadeConstruction { get; set; }
 
         /// <summary>

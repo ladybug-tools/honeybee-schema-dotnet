@@ -81,6 +81,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Plane normal as 3 (x, y, z) values.</value>
         [DataMember(Name="n", EmitDefaultValue=false)]
+        [JsonProperty("n")]
         public List<decimal> N { get; set; }
 
         /// <summary>
@@ -88,12 +89,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Plane origin as 3 (x, y, z) values</value>
         [DataMember(Name="o", EmitDefaultValue=false)]
+        [JsonProperty("o")]
         public List<decimal> O { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -101,6 +104,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated.</value>
         [DataMember(Name="x", EmitDefaultValue=false)]
+        [JsonProperty("x")]
         public List<decimal> X { get; set; }
 
         /// <summary>

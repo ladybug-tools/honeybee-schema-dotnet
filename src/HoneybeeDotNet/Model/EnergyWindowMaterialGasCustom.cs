@@ -193,6 +193,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -200,6 +201,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The A coefficient for gas conductivity in W/(m-K).</value>
         [DataMember(Name="conductivity_coeff_a", EmitDefaultValue=false)]
+        [JsonProperty("conductivity_coeff_a")]
         public decimal ConductivityCoeffA { get; set; }
 
         /// <summary>
@@ -207,6 +209,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The A coefficient for gas viscosity in kg/(m-s).</value>
         [DataMember(Name="viscosity_coeff_a", EmitDefaultValue=false)]
+        [JsonProperty("viscosity_coeff_a")]
         public decimal ViscosityCoeffA { get; set; }
 
         /// <summary>
@@ -214,6 +217,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The A coefficient for gas specific heat in J/(kg-K).</value>
         [DataMember(Name="specific_heat_coeff_a", EmitDefaultValue=false)]
+        [JsonProperty("specific_heat_coeff_a")]
         public decimal SpecificHeatCoeffA { get; set; }
 
         /// <summary>
@@ -221,6 +225,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The specific heat ratio for gas.</value>
         [DataMember(Name="specific_heat_ratio", EmitDefaultValue=false)]
+        [JsonProperty("specific_heat_ratio")]
         public decimal SpecificHeatRatio { get; set; }
 
         /// <summary>
@@ -228,12 +233,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The molecular weight for gas in g/mol.</value>
         [DataMember(Name="molecular_weight", EmitDefaultValue=false)]
+        [JsonProperty("molecular_weight")]
         public decimal MolecularWeight { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -241,6 +248,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Thickness of the gas layer in meters. Default value is 0.0125.</value>
         [DataMember(Name="thickness", EmitDefaultValue=false)]
+        [JsonProperty("thickness")]
         public decimal Thickness { get; set; }
 
         /// <summary>
@@ -248,6 +256,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The B coefficient for gas conductivity in W/(m-K2).</value>
         [DataMember(Name="conductivity_coeff_b", EmitDefaultValue=false)]
+        [JsonProperty("conductivity_coeff_b")]
         public decimal ConductivityCoeffB { get; set; }
 
         /// <summary>
@@ -255,6 +264,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The C coefficient for gas conductivity in W/(m-K3).</value>
         [DataMember(Name="conductivity_coeff_c", EmitDefaultValue=false)]
+        [JsonProperty("conductivity_coeff_c")]
         public decimal ConductivityCoeffC { get; set; }
 
         /// <summary>
@@ -262,6 +272,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The B coefficient for gas viscosity in kg/(m-s-K).</value>
         [DataMember(Name="viscosity_coeff_b", EmitDefaultValue=false)]
+        [JsonProperty("viscosity_coeff_b")]
         public decimal ViscosityCoeffB { get; set; }
 
         /// <summary>
@@ -269,6 +280,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The C coefficient for gas viscosity in kg/(m-s-K2).</value>
         [DataMember(Name="viscosity_coeff_c", EmitDefaultValue=false)]
+        [JsonProperty("viscosity_coeff_c")]
         public decimal ViscosityCoeffC { get; set; }
 
         /// <summary>
@@ -276,6 +288,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The B coefficient for gas specific heat in J/(kg-K2).</value>
         [DataMember(Name="specific_heat_coeff_b", EmitDefaultValue=false)]
+        [JsonProperty("specific_heat_coeff_b")]
         public decimal SpecificHeatCoeffB { get; set; }
 
         /// <summary>
@@ -283,6 +296,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The C coefficient for gas specific heat in J/(kg-K3).</value>
         [DataMember(Name="specific_heat_coeff_c", EmitDefaultValue=false)]
+        [JsonProperty("specific_heat_coeff_c")]
         public decimal SpecificHeatCoeffC { get; set; }
 
         /// <summary>

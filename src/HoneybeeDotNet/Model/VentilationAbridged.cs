@@ -110,12 +110,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -123,6 +125,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room.</value>
         [DataMember(Name="flow_per_person", EmitDefaultValue=false)]
+        [JsonProperty("flow_per_person")]
         public decimal FlowPerPerson { get; set; }
 
         /// <summary>
@@ -130,6 +133,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Intensity of ventilation in [m3/s per m2 of floor area].</value>
         [DataMember(Name="flow_per_area", EmitDefaultValue=false)]
+        [JsonProperty("flow_per_area")]
         public decimal FlowPerArea { get; set; }
 
         /// <summary>
@@ -137,6 +141,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Intensity of ventilation in air changes per hour (ACH) for the entire Room.</value>
         [DataMember(Name="air_changes_per_hour", EmitDefaultValue=false)]
+        [JsonProperty("air_changes_per_hour")]
         public decimal AirChangesPerHour { get; set; }
 
         /// <summary>
@@ -144,6 +149,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Intensity of ventilation in m3/s for the entire Room.</value>
         [DataMember(Name="flow_per_zone", EmitDefaultValue=false)]
+        [JsonProperty("flow_per_zone")]
         public decimal FlowPerZone { get; set; }
 
         /// <summary>
@@ -151,6 +157,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.</value>
         [DataMember(Name="schedule", EmitDefaultValue=false)]
+        [JsonProperty("schedule")]
         public string Schedule { get; set; }
 
         /// <summary>

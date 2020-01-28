@@ -120,6 +120,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -127,6 +128,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Number for the infiltration per exterior surface area in m3/s-m2.</value>
         [DataMember(Name="flow_per_exterior_area", EmitDefaultValue=false)]
+        [JsonProperty("flow_per_exterior_area")]
         public decimal FlowPerExteriorArea { get; set; }
 
         /// <summary>
@@ -134,30 +136,35 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.</value>
         [DataMember(Name="schedule", EmitDefaultValue=false)]
+        [JsonProperty("schedule")]
         public string Schedule { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
         /// Gets or Sets ConstantCoefficient
         /// </summary>
         [DataMember(Name="constant_coefficient", EmitDefaultValue=false)]
+        [JsonProperty("constant_coefficient")]
         public decimal ConstantCoefficient { get; set; }
 
         /// <summary>
         /// Gets or Sets TemperatureCoefficient
         /// </summary>
         [DataMember(Name="temperature_coefficient", EmitDefaultValue=false)]
+        [JsonProperty("temperature_coefficient")]
         public decimal TemperatureCoefficient { get; set; }
 
         /// <summary>
         /// Gets or Sets VelocityCoefficient
         /// </summary>
         [DataMember(Name="velocity_coefficient", EmitDefaultValue=false)]
+        [JsonProperty("velocity_coefficient")]
         public decimal VelocityCoefficient { get; set; }
 
         /// <summary>

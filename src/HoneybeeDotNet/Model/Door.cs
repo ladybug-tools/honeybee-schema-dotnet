@@ -45,7 +45,9 @@ namespace HoneybeeDotNet.Model
         /// <param name="displayName">Display name of the object with no restrictions..</param>
         /// <param name="type">type (default to &quot;Door&quot;).</param>
         /// <param name="isGlass">Boolean to note whether this object is a glass door as opposed to an opaque door. (default to false).</param>
-        public Door(string name, Face3D geometry, AnyOf<Outdoors,Surface> boundaryCondition, DoorPropertiesAbridged properties, string displayName = default(string), string type = "Door", bool isGlass = false)
+        /// <param name="indoorShades">Shades assigned to the interior side of this object..</param>
+        /// <param name="outdoorShades">Shades assigned to the exterior side of this object (eg. entryway awning)..</param>
+        public Door(string name, Face3D geometry, AnyOf<Outdoors,Surface> boundaryCondition, DoorPropertiesAbridged properties, string displayName = default(string), string type = "Door", bool isGlass = false, List<Shade> indoorShades = default(List<Shade>), List<Shade> outdoorShades = default(List<Shade>))
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -106,6 +108,8 @@ namespace HoneybeeDotNet.Model
             {
                 this.IsGlass = isGlass;
             }
+            this.IndoorShades = indoorShades;
+            this.OutdoorShades = outdoorShades;
         }
         
         /// <summary>
@@ -113,6 +117,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object used in all simulation engines. Must not contain spaces and use only letters, digits and underscores/dashes. It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -120,12 +125,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Planar Face3D for the geometry.</value>
         [DataMember(Name="geometry", EmitDefaultValue=false)]
+        [JsonProperty("geometry")]
         public Face3D Geometry { get; set; }
 
         /// <summary>
         /// Gets or Sets BoundaryCondition
         /// </summary>
         [DataMember(Name="boundary_condition", EmitDefaultValue=false)]
+        [JsonProperty("boundary_condition")]
         public AnyOf<Outdoors,Surface> BoundaryCondition { get; set; }
 
         /// <summary>
@@ -133,6 +140,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
         [DataMember(Name="properties", EmitDefaultValue=false)]
+        [JsonProperty("properties")]
         public DoorPropertiesAbridged Properties { get; set; }
 
         /// <summary>
@@ -140,12 +148,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Display name of the object with no restrictions.</value>
         [DataMember(Name="display_name", EmitDefaultValue=false)]
+        [JsonProperty("display_name")]
         public string DisplayName { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -153,7 +163,24 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Boolean to note whether this object is a glass door as opposed to an opaque door.</value>
         [DataMember(Name="is_glass", EmitDefaultValue=false)]
+        [JsonProperty("is_glass")]
         public bool IsGlass { get; set; }
+
+        /// <summary>
+        /// Shades assigned to the interior side of this object.
+        /// </summary>
+        /// <value>Shades assigned to the interior side of this object.</value>
+        [DataMember(Name="indoor_shades", EmitDefaultValue=false)]
+        [JsonProperty("indoor_shades")]
+        public List<Shade> IndoorShades { get; set; }
+
+        /// <summary>
+        /// Shades assigned to the exterior side of this object (eg. entryway awning).
+        /// </summary>
+        /// <value>Shades assigned to the exterior side of this object (eg. entryway awning).</value>
+        [DataMember(Name="outdoor_shades", EmitDefaultValue=false)]
+        [JsonProperty("outdoor_shades")]
+        public List<Shade> OutdoorShades { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -170,6 +197,8 @@ namespace HoneybeeDotNet.Model
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  IsGlass: ").Append(IsGlass).Append("\n");
+            sb.Append("  IndoorShades: ").Append(IndoorShades).Append("\n");
+            sb.Append("  OutdoorShades: ").Append(OutdoorShades).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -238,6 +267,18 @@ namespace HoneybeeDotNet.Model
                     this.IsGlass == input.IsGlass ||
                     (this.IsGlass != null &&
                     this.IsGlass.Equals(input.IsGlass))
+                ) && 
+                (
+                    this.IndoorShades == input.IndoorShades ||
+                    this.IndoorShades != null &&
+                    input.IndoorShades != null &&
+                    this.IndoorShades.SequenceEqual(input.IndoorShades)
+                ) && 
+                (
+                    this.OutdoorShades == input.OutdoorShades ||
+                    this.OutdoorShades != null &&
+                    input.OutdoorShades != null &&
+                    this.OutdoorShades.SequenceEqual(input.OutdoorShades)
                 );
         }
 
@@ -264,6 +305,10 @@ namespace HoneybeeDotNet.Model
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.IsGlass != null)
                     hashCode = hashCode * 59 + this.IsGlass.GetHashCode();
+                if (this.IndoorShades != null)
+                    hashCode = hashCode * 59 + this.IndoorShades.GetHashCode();
+                if (this.OutdoorShades != null)
+                    hashCode = hashCode * 59 + this.OutdoorShades.GetHashCode();
                 return hashCode;
             }
         }

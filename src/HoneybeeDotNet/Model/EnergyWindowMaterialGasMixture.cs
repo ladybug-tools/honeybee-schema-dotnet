@@ -139,6 +139,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
 
@@ -147,12 +148,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1.</value>
         [DataMember(Name="gas_fractions", EmitDefaultValue=false)]
+        [JsonProperty("gas_fractions")]
         public List<decimal> GasFractions { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -160,6 +163,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The thickness of the gas mixture layer in meters.</value>
         [DataMember(Name="thickness", EmitDefaultValue=false)]
+        [JsonProperty("thickness")]
         public decimal Thickness { get; set; }
 
         /// <summary>

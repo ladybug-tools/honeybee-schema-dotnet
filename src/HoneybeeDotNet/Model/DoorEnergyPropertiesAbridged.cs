@@ -53,6 +53,7 @@ namespace HoneybeeDotNet.Model
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -60,6 +61,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of an OpaqueConstruction or WindowConstruction for the door. Note that the host door must have the is_glass property set to True to assign a WindowConstruction. If None, the construction is set by theparent Room construction_set or the Model global_construction_set.</value>
         [DataMember(Name="construction", EmitDefaultValue=false)]
+        [JsonProperty("construction")]
         public string Construction { get; set; }
 
         /// <summary>

@@ -125,12 +125,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -138,6 +140,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Thickness of the gas layer in meters. Default value is 0.0125.</value>
         [DataMember(Name="thickness", EmitDefaultValue=false)]
+        [JsonProperty("thickness")]
         public decimal Thickness { get; set; }
 
 

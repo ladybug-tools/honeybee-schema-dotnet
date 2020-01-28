@@ -100,6 +100,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -107,6 +108,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Used to describe the value for window system U-Factor, or overall heat transfer coefficient in W/(m2-K).</value>
         [DataMember(Name="u_factor", EmitDefaultValue=false)]
+        [JsonProperty("u_factor")]
         public decimal UFactor { get; set; }
 
         /// <summary>
@@ -114,12 +116,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Unitless  quantity describing Solar Heat Gain Coefficient for normal incidence and vertical orientation.</value>
         [DataMember(Name="shgc", EmitDefaultValue=false)]
+        [JsonProperty("shgc")]
         public decimal Shgc { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -127,6 +131,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The fraction of visible light falling on the window that makes it through the glass at normal incidence.</value>
         [DataMember(Name="vt", EmitDefaultValue=false)]
+        [JsonProperty("vt")]
         public decimal Vt { get; set; }
 
         /// <summary>

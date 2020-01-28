@@ -152,12 +152,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A ScheduleDay object associated with this rule.</value>
         [DataMember(Name="schedule_day", EmitDefaultValue=false)]
+        [JsonProperty("schedule_day")]
         public string ScheduleDay { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -165,6 +167,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Sundays.</value>
         [DataMember(Name="apply_sunday", EmitDefaultValue=false)]
+        [JsonProperty("apply_sunday")]
         public bool ApplySunday { get; set; }
 
         /// <summary>
@@ -172,6 +175,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Mondays.</value>
         [DataMember(Name="apply_monday", EmitDefaultValue=false)]
+        [JsonProperty("apply_monday")]
         public bool ApplyMonday { get; set; }
 
         /// <summary>
@@ -179,6 +183,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Tuesdays.</value>
         [DataMember(Name="apply_tuesday", EmitDefaultValue=false)]
+        [JsonProperty("apply_tuesday")]
         public bool ApplyTuesday { get; set; }
 
         /// <summary>
@@ -186,6 +191,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Wednesdays.</value>
         [DataMember(Name="apply_wednesday", EmitDefaultValue=false)]
+        [JsonProperty("apply_wednesday")]
         public bool ApplyWednesday { get; set; }
 
         /// <summary>
@@ -193,6 +199,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Thursdays.</value>
         [DataMember(Name="apply_thursday", EmitDefaultValue=false)]
+        [JsonProperty("apply_thursday")]
         public bool ApplyThursday { get; set; }
 
         /// <summary>
@@ -200,6 +207,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Fridays.</value>
         [DataMember(Name="apply_friday", EmitDefaultValue=false)]
+        [JsonProperty("apply_friday")]
         public bool ApplyFriday { get; set; }
 
         /// <summary>
@@ -207,6 +215,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Saturdays.</value>
         [DataMember(Name="apply_saturday", EmitDefaultValue=false)]
+        [JsonProperty("apply_saturday")]
         public bool ApplySaturday { get; set; }
 
         /// <summary>
@@ -214,6 +223,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Holidays.</value>
         [DataMember(Name="apply_holiday", EmitDefaultValue=false)]
+        [JsonProperty("apply_holiday")]
         public bool ApplyHoliday { get; set; }
 
         /// <summary>
@@ -221,6 +231,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the start date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</value>
         [DataMember(Name="start_date", EmitDefaultValue=false)]
+        [JsonProperty("start_date")]
         public List<int> StartDate { get; set; }
 
         /// <summary>
@@ -228,6 +239,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the end date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</value>
         [DataMember(Name="end_date", EmitDefaultValue=false)]
+        [JsonProperty("end_date")]
         public List<int> EndDate { get; set; }
 
         /// <summary>

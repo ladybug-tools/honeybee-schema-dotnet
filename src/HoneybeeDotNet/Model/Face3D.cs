@@ -72,12 +72,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A list of points representing the outer boundary vertices of the face. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.</value>
         [DataMember(Name="boundary", EmitDefaultValue=false)]
+        [JsonProperty("boundary")]
         public List<List<decimal>> Boundary { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -85,6 +87,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Optional list of lists with one list for each hole in the face.Each hole should be a list of at least 3 points and each point a list of 3 (x, y, z) values. If None, it will be assumed that there are no holes in the face.</value>
         [DataMember(Name="holes", EmitDefaultValue=false)]
+        [JsonProperty("holes")]
         public List<List<List<decimal>>> Holes { get; set; }
 
         /// <summary>
@@ -92,6 +95,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Optional Plane indicating the plane in which the face exists.If None, the plane will usually be derived from the boundary points.</value>
         [DataMember(Name="plane", EmitDefaultValue=false)]
+        [JsonProperty("plane")]
         public Plane Plane { get; set; }
 
         /// <summary>

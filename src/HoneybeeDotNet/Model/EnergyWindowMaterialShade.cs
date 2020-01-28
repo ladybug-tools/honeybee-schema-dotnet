@@ -208,12 +208,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -221,6 +223,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default value is 0.4.</value>
         [DataMember(Name="solar_transmittance", EmitDefaultValue=false)]
+        [JsonProperty("solar_transmittance")]
         public decimal SolarTransmittance { get; set; }
 
         /// <summary>
@@ -228,6 +231,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The reflectance averaged over the solar spectrum. It us assumed same on both sides of shade and independent of incidence angle. Default value is 0.5</value>
         [DataMember(Name="solar_reflectance", EmitDefaultValue=false)]
+        [JsonProperty("solar_reflectance")]
         public decimal SolarReflectance { get; set; }
 
         /// <summary>
@@ -235,6 +239,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4.</value>
         [DataMember(Name="visible_transmittance", EmitDefaultValue=false)]
+        [JsonProperty("visible_transmittance")]
         public decimal VisibleTransmittance { get; set; }
 
         /// <summary>
@@ -242,6 +247,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4</value>
         [DataMember(Name="visible_reflectance", EmitDefaultValue=false)]
+        [JsonProperty("visible_reflectance")]
         public decimal VisibleReflectance { get; set; }
 
         /// <summary>
@@ -249,6 +255,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The effective long-wave infrared hemispherical emissivity. It is assumed same on both sides of shade. Default value is 0.9.</value>
         [DataMember(Name="emissivity", EmitDefaultValue=false)]
+        [JsonProperty("emissivity")]
         public decimal Emissivity { get; set; }
 
         /// <summary>
@@ -256,6 +263,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The effective long-wave transmittance. It is assumed independent of incidence angle. Default value is 0.</value>
         [DataMember(Name="infrared_transmittance", EmitDefaultValue=false)]
+        [JsonProperty("infrared_transmittance")]
         public decimal InfraredTransmittance { get; set; }
 
         /// <summary>
@@ -263,6 +271,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The thickness of the shade material in meters. Default value is 0.005.</value>
         [DataMember(Name="thickness", EmitDefaultValue=false)]
+        [JsonProperty("thickness")]
         public decimal Thickness { get; set; }
 
         /// <summary>
@@ -270,6 +279,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The conductivity of the shade material in W/(m-K). Default value is 0.1.</value>
         [DataMember(Name="conductivity", EmitDefaultValue=false)]
+        [JsonProperty("conductivity")]
         public decimal Conductivity { get; set; }
 
         /// <summary>
@@ -277,6 +287,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The distance from shade to adjacent glass in meters. Default value is 0.05</value>
         [DataMember(Name="distance_to_glass", EmitDefaultValue=false)]
+        [JsonProperty("distance_to_glass")]
         public decimal DistanceToGlass { get; set; }
 
         /// <summary>
@@ -284,6 +295,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. Default value is 0.5.</value>
         [DataMember(Name="top_opening_multiplier", EmitDefaultValue=false)]
+        [JsonProperty("top_opening_multiplier")]
         public decimal TopOpeningMultiplier { get; set; }
 
         /// <summary>
@@ -291,6 +303,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. Default value is 0.5.</value>
         [DataMember(Name="bottom_opening_multiplier", EmitDefaultValue=false)]
+        [JsonProperty("bottom_opening_multiplier")]
         public decimal BottomOpeningMultiplier { get; set; }
 
         /// <summary>
@@ -298,6 +311,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. Default value is 0.5.</value>
         [DataMember(Name="left_opening_multiplier", EmitDefaultValue=false)]
+        [JsonProperty("left_opening_multiplier")]
         public decimal LeftOpeningMultiplier { get; set; }
 
         /// <summary>
@@ -305,6 +319,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. Default value is 0.5.</value>
         [DataMember(Name="right_opening_multiplier", EmitDefaultValue=false)]
+        [JsonProperty("right_opening_multiplier")]
         public decimal RightOpeningMultiplier { get; set; }
 
         /// <summary>
@@ -312,6 +327,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The fraction of the shade surface that is open to air flow. If air cannot pass through the shade material, airflow_permeability &#x3D; 0. Default value is 0.</value>
         [DataMember(Name="airflow_permeability", EmitDefaultValue=false)]
+        [JsonProperty("airflow_permeability")]
         public decimal AirflowPermeability { get; set; }
 
         /// <summary>
