@@ -113,6 +113,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -120,6 +121,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>People per floor area expressed as [people/m2]</value>
         [DataMember(Name="people_per_area", EmitDefaultValue=false)]
+        [JsonProperty("people_per_area")]
         public decimal PeoplePerArea { get; set; }
 
         /// <summary>
@@ -127,6 +129,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile.</value>
         [DataMember(Name="occupancy_schedule", EmitDefaultValue=false)]
+        [JsonProperty("occupancy_schedule")]
         public string OccupancySchedule { get; set; }
 
         /// <summary>
@@ -134,12 +137,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of a schedule for the activity of the occupants over the course of the year. The type of this schedule should be Power and the values of the schedule equal to the number of Watts given off by an individual person in the room.</value>
         [DataMember(Name="activity_schedule", EmitDefaultValue=false)]
+        [JsonProperty("activity_schedule")]
         public string ActivitySchedule { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -147,6 +152,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The radiant fraction of sensible heat released by people. The defaultvalue is 0.30.</value>
         [DataMember(Name="radiant_fraction", EmitDefaultValue=false)]
+        [JsonProperty("radiant_fraction")]
         public decimal RadiantFraction { get; set; }
 
         /// <summary>
@@ -154,6 +160,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Number for the latent fraction of heat gain due to people or simply the word \&quot;autocalculate\&quot;.</value>
         [DataMember(Name="latent_fraction", EmitDefaultValue=false)]
+        [JsonProperty("latent_fraction")]
         public AnyOf<decimal,string> LatentFraction { get; set; }
 
         /// <summary>

@@ -21,7 +21,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 using OpenAPIDateConverter = HoneybeeDotNet.Client.OpenAPIDateConverter;
-using System.ComponentModel;
 
 namespace HoneybeeDotNet.Model
 {
@@ -74,6 +73,7 @@ namespace HoneybeeDotNet.Model
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -81,6 +81,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A boolean noting whether the boundary is exposed to sun.</value>
         [DataMember(Name="sun_exposure", EmitDefaultValue=false)]
+        [JsonProperty("sun_exposure")]
         public bool SunExposure { get; set; }
 
         /// <summary>
@@ -88,6 +89,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A boolean noting whether the boundary is exposed to wind.</value>
         [DataMember(Name="wind_exposure", EmitDefaultValue=false)]
+        [JsonProperty("wind_exposure")]
         public bool WindExposure { get; set; }
 
         /// <summary>
@@ -95,7 +97,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A number for the view factor to the ground. This can also be the word \&quot;autocalculate\&quot; to have the view factor automatically calculated.</value>
         [DataMember(Name="view_factor", EmitDefaultValue=false)]
-        [DefaultValueAttribute("autocalculate")]
+        [JsonProperty("view_factor")]
         public AnyOf<string,decimal> ViewFactor { get; set; }
 
         /// <summary>

@@ -112,6 +112,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -119,6 +120,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Equipment level per floor area as [W/m2].</value>
         [DataMember(Name="watts_per_area", EmitDefaultValue=false)]
+        [JsonProperty("watts_per_area")]
         public decimal WattsPerArea { get; set; }
 
         /// <summary>
@@ -126,6 +128,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.</value>
         [DataMember(Name="schedule", EmitDefaultValue=false)]
+        [JsonProperty("schedule")]
         public string Schedule { get; set; }
 
         /// <summary>
@@ -133,6 +136,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Number for the amount of long-wave radiation heat given off by electric equipment. Default value is 0.</value>
         [DataMember(Name="radiant_fraction", EmitDefaultValue=false)]
+        [JsonProperty("radiant_fraction")]
         public decimal RadiantFraction { get; set; }
 
         /// <summary>
@@ -140,6 +144,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Number for the amount of latent heat given off by electricequipment. Default value is 0.</value>
         [DataMember(Name="latent_fraction", EmitDefaultValue=false)]
+        [JsonProperty("latent_fraction")]
         public AnyOf<decimal,string> LatentFraction { get; set; }
 
         /// <summary>
@@ -147,12 +152,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Number for the amount of “lost” heat being given off by equipment. The default value is 0.</value>
         [DataMember(Name="lost_fraction", EmitDefaultValue=false)]
+        [JsonProperty("lost_fraction")]
         public decimal LostFraction { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>

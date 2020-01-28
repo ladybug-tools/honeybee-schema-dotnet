@@ -159,6 +159,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object used in all simulation engines. Must not contain spaces and use only letters, digits and underscores/dashes. It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -166,6 +167,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Planar Face3D for the geometry.</value>
         [DataMember(Name="geometry", EmitDefaultValue=false)]
+        [JsonProperty("geometry")]
         public Face3D Geometry { get; set; }
 
 
@@ -173,6 +175,7 @@ namespace HoneybeeDotNet.Model
         /// Gets or Sets BoundaryCondition
         /// </summary>
         [DataMember(Name="boundary_condition", EmitDefaultValue=false)]
+        [JsonProperty("boundary_condition")]
         public AnyOf<Ground,Outdoors,Adiabatic,Surface> BoundaryCondition { get; set; }
 
         /// <summary>
@@ -180,6 +183,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
         [DataMember(Name="properties", EmitDefaultValue=false)]
+        [JsonProperty("properties")]
         public FacePropertiesAbridged Properties { get; set; }
 
         /// <summary>
@@ -187,12 +191,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Display name of the object with no restrictions.</value>
         [DataMember(Name="display_name", EmitDefaultValue=false)]
+        [JsonProperty("display_name")]
         public string DisplayName { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -200,6 +206,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Apertures assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid.</value>
         [DataMember(Name="apertures", EmitDefaultValue=false)]
+        [JsonProperty("apertures")]
         public List<Aperture> Apertures { get; set; }
 
         /// <summary>
@@ -207,6 +214,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Doors assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid.</value>
         [DataMember(Name="doors", EmitDefaultValue=false)]
+        [JsonProperty("doors")]
         public List<Door> Doors { get; set; }
 
         /// <summary>
@@ -214,6 +222,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Shades assigned to the interior side of this object.</value>
         [DataMember(Name="indoor_shades", EmitDefaultValue=false)]
+        [JsonProperty("indoor_shades")]
         public List<Shade> IndoorShades { get; set; }
 
         /// <summary>
@@ -221,6 +230,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Shades assigned to the exterior side of this object (eg. balcony, overhang).</value>
         [DataMember(Name="outdoor_shades", EmitDefaultValue=false)]
+        [JsonProperty("outdoor_shades")]
         public List<Shade> OutdoorShades { get; set; }
 
         /// <summary>

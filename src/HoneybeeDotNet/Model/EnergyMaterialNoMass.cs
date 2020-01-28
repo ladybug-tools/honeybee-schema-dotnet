@@ -168,6 +168,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -175,12 +176,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The thermal resistance (R-value) of the material layer [m2-K/W].</value>
         [DataMember(Name="r_value", EmitDefaultValue=false)]
+        [JsonProperty("r_value")]
         public decimal RValue { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
 
@@ -189,6 +192,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9.</value>
         [DataMember(Name="thermal_absorptance", EmitDefaultValue=false)]
+        [JsonProperty("thermal_absorptance")]
         public decimal ThermalAbsorptance { get; set; }
 
         /// <summary>
@@ -196,6 +200,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Fraction of incident solar radiation absorbed by the material. Default value is 0.7.</value>
         [DataMember(Name="solar_absorptance", EmitDefaultValue=false)]
+        [JsonProperty("solar_absorptance")]
         public decimal SolarAbsorptance { get; set; }
 
         /// <summary>
@@ -203,6 +208,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7.</value>
         [DataMember(Name="visible_absorptance", EmitDefaultValue=false)]
+        [JsonProperty("visible_absorptance")]
         public decimal VisibleAbsorptance { get; set; }
 
         /// <summary>

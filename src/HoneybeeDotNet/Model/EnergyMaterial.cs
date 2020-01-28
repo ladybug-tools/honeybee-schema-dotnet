@@ -201,6 +201,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -208,6 +209,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Thickness of the material layer in meters.</value>
         [DataMember(Name="thickness", EmitDefaultValue=false)]
+        [JsonProperty("thickness")]
         public decimal Thickness { get; set; }
 
         /// <summary>
@@ -215,6 +217,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Thermal conductivity of the material layer in W/(m-K).</value>
         [DataMember(Name="conductivity", EmitDefaultValue=false)]
+        [JsonProperty("conductivity")]
         public decimal Conductivity { get; set; }
 
         /// <summary>
@@ -222,6 +225,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Density of the material layer in kg/m3.</value>
         [DataMember(Name="density", EmitDefaultValue=false)]
+        [JsonProperty("density")]
         public decimal Density { get; set; }
 
         /// <summary>
@@ -229,12 +233,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Specific heat of the material layer in J/(kg-K).</value>
         [DataMember(Name="specific_heat", EmitDefaultValue=false)]
+        [JsonProperty("specific_heat")]
         public decimal SpecificHeat { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
 
@@ -243,6 +249,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9.</value>
         [DataMember(Name="thermal_absorptance", EmitDefaultValue=false)]
+        [JsonProperty("thermal_absorptance")]
         public decimal ThermalAbsorptance { get; set; }
 
         /// <summary>
@@ -250,6 +257,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Fraction of incident solar radiation absorbed by the material. Default value is 0.7.</value>
         [DataMember(Name="solar_absorptance", EmitDefaultValue=false)]
+        [JsonProperty("solar_absorptance")]
         public decimal SolarAbsorptance { get; set; }
 
         /// <summary>
@@ -257,6 +265,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7.</value>
         [DataMember(Name="visible_absorptance", EmitDefaultValue=false)]
+        [JsonProperty("visible_absorptance")]
         public decimal VisibleAbsorptance { get; set; }
 
         /// <summary>

@@ -117,6 +117,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object used in all simulation engines. Must not contain spaces and use only letters, digits and underscores/dashes. It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -124,12 +125,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Planar Face3D for the geometry.</value>
         [DataMember(Name="geometry", EmitDefaultValue=false)]
+        [JsonProperty("geometry")]
         public Face3D Geometry { get; set; }
 
         /// <summary>
         /// Gets or Sets BoundaryCondition
         /// </summary>
         [DataMember(Name="boundary_condition", EmitDefaultValue=false)]
+        [JsonProperty("boundary_condition")]
         public AnyOf<Outdoors,Surface> BoundaryCondition { get; set; }
 
         /// <summary>
@@ -137,6 +140,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
         [DataMember(Name="properties", EmitDefaultValue=false)]
+        [JsonProperty("properties")]
         public AperturePropertiesAbridged Properties { get; set; }
 
         /// <summary>
@@ -144,12 +148,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Display name of the object with no restrictions.</value>
         [DataMember(Name="display_name", EmitDefaultValue=false)]
+        [JsonProperty("display_name")]
         public string DisplayName { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -157,6 +163,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Boolean to note whether the Aperture can be opened for ventilation.</value>
         [DataMember(Name="is_operable", EmitDefaultValue=false)]
+        [JsonProperty("is_operable")]
         public bool IsOperable { get; set; }
 
         /// <summary>
@@ -164,6 +171,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Shades assigned to the interior side of this object (eg. window sill, light shelf).</value>
         [DataMember(Name="indoor_shades", EmitDefaultValue=false)]
+        [JsonProperty("indoor_shades")]
         public List<Shade> IndoorShades { get; set; }
 
         /// <summary>
@@ -171,6 +179,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Shades assigned to the exterior side of this object (eg. mullions, louvers).</value>
         [DataMember(Name="outdoor_shades", EmitDefaultValue=false)]
+        [JsonProperty("outdoor_shades")]
         public List<Shade> OutdoorShades { get; set; }
 
         /// <summary>

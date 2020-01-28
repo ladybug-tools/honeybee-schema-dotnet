@@ -79,6 +79,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -86,12 +87,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>List of strings for material names. The order of the materials is from exterior to interior.</value>
         [DataMember(Name="layers", EmitDefaultValue=false)]
+        [JsonProperty("layers")]
         public List<string> Layers { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>

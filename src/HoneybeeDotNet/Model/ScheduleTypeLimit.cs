@@ -214,12 +214,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -227,6 +229,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Lower limit for the schedule type is entered.</value>
         [DataMember(Name="lower_limit", EmitDefaultValue=false)]
+        [JsonProperty("lower_limit")]
         public decimal LowerLimit { get; set; }
 
         /// <summary>
@@ -234,6 +237,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Upper limit for the schedule type is entered.</value>
         [DataMember(Name="upper_limit", EmitDefaultValue=false)]
+        [JsonProperty("upper_limit")]
         public decimal UpperLimit { get; set; }
 
 

@@ -113,6 +113,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -120,12 +121,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A list of timeseries values occuring at each timestep over the course of the simulation.</value>
         [DataMember(Name="values", EmitDefaultValue=false)]
+        [JsonProperty("values")]
         public List<decimal> Values { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -133,6 +136,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of a ScheduleTypeLimit that will be used to validate schedule values against upper/lower limits and assign units to the schedule values. If None, no validation will occur.</value>
         [DataMember(Name="schedule_type_limit", EmitDefaultValue=false)]
+        [JsonProperty("schedule_type_limit")]
         public string ScheduleTypeLimit { get; set; }
 
         /// <summary>
@@ -140,6 +144,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>An integer for the number of steps per hour that the input values correspond to.  For example, if each value represents 30 minutes, the timestep is 2. For 15 minutes, it is 4.</value>
         [DataMember(Name="timestep", EmitDefaultValue=false)]
+        [JsonProperty("timestep")]
         public int Timestep { get; set; }
 
         /// <summary>
@@ -147,6 +152,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the start date when the schedule values begin to take effect.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</value>
         [DataMember(Name="start_date", EmitDefaultValue=false)]
+        [JsonProperty("start_date")]
         public List<int> StartDate { get; set; }
 
         /// <summary>
@@ -154,6 +160,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value> A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period.</value>
         [DataMember(Name="placeholder_value", EmitDefaultValue=false)]
+        [JsonProperty("placeholder_value")]
         public decimal PlaceholderValue { get; set; }
 
         /// <summary>
@@ -161,6 +168,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Boolean to note whether values in between intervals should be linearly interpolated or whether successive values should take effect immediately upon the beginning time corrsponding to them.</value>
         [DataMember(Name="interpolate", EmitDefaultValue=false)]
+        [JsonProperty("interpolate")]
         public bool Interpolate { get; set; }
 
         /// <summary>

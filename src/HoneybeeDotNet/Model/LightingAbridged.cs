@@ -120,6 +120,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -127,6 +128,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Lighting per floor area as [W/m2].</value>
         [DataMember(Name="watts_per_area", EmitDefaultValue=false)]
+        [JsonProperty("watts_per_area")]
         public decimal WattsPerArea { get; set; }
 
         /// <summary>
@@ -134,12 +136,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile.</value>
         [DataMember(Name="schedule", EmitDefaultValue=false)]
+        [JsonProperty("schedule")]
         public string Schedule { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -147,6 +151,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. The default value is &#x60;0.25&#x60;.</value>
         [DataMember(Name="visible_fraction", EmitDefaultValue=false)]
+        [JsonProperty("visible_fraction")]
         public decimal VisibleFraction { get; set; }
 
         /// <summary>
@@ -154,6 +159,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The fraction of heat from lights that is long-wave radiation. Default value is &#x60;0.32&#x60;.</value>
         [DataMember(Name="radiant_fraction", EmitDefaultValue=false)]
+        [JsonProperty("radiant_fraction")]
         public decimal RadiantFraction { get; set; }
 
         /// <summary>
@@ -161,6 +167,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The fraction of the heat from lights that goes into the zone return air. Default value is &#x60;0&#x60;.</value>
         [DataMember(Name="return_air_fraction", EmitDefaultValue=false)]
+        [JsonProperty("return_air_fraction")]
         public decimal ReturnAirFraction { get; set; }
 
         /// <summary>

@@ -101,6 +101,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object used in all simulation engines. Must not contain spaces and use only letters, digits and underscores/dashes. It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -108,6 +109,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
         [DataMember(Name="properties", EmitDefaultValue=false)]
+        [JsonProperty("properties")]
         public ModelProperties Properties { get; set; }
 
         /// <summary>
@@ -115,12 +117,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Display name of the object with no restrictions.</value>
         [DataMember(Name="display_name", EmitDefaultValue=false)]
+        [JsonProperty("display_name")]
         public string DisplayName { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -128,6 +132,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A list of Rooms in the model.</value>
         [DataMember(Name="rooms", EmitDefaultValue=false)]
+        [JsonProperty("rooms")]
         public List<Room> Rooms { get; set; }
 
         /// <summary>
@@ -135,6 +140,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A list of Faces in the model that lack a parent Room. Note that orphaned Faces are not acceptable for Models that are to be exported for energy simulation.</value>
         [DataMember(Name="orphaned_faces", EmitDefaultValue=false)]
+        [JsonProperty("orphaned_faces")]
         public List<Face> OrphanedFaces { get; set; }
 
         /// <summary>
@@ -142,6 +148,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A list of Shades in the model that lack a parent.</value>
         [DataMember(Name="orphaned_shades", EmitDefaultValue=false)]
+        [JsonProperty("orphaned_shades")]
         public List<Shade> OrphanedShades { get; set; }
 
         /// <summary>
@@ -149,6 +156,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A list of Apertures in the model that lack a parent Face. Note that orphaned Apertures are not acceptable for Models that are to be exported for energy simulation.</value>
         [DataMember(Name="orphaned_apertures", EmitDefaultValue=false)]
+        [JsonProperty("orphaned_apertures")]
         public List<Aperture> OrphanedApertures { get; set; }
 
         /// <summary>
@@ -156,6 +164,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>A list of Doors in the model that lack a parent Face. Note that orphaned Doors are not acceptable for Models that are to be exported for energy simulation.</value>
         [DataMember(Name="orphaned_doors", EmitDefaultValue=false)]
+        [JsonProperty("orphaned_doors")]
         public List<Door> OrphanedDoors { get; set; }
 
         /// <summary>
@@ -163,6 +172,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>The clockwise north direction in degrees.</value>
         [DataMember(Name="north_angle", EmitDefaultValue=false)]
+        [JsonProperty("north_angle")]
         public decimal NorthAngle { get; set; }
 
         /// <summary>

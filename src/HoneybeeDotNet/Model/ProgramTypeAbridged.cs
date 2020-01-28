@@ -82,12 +82,14 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters.</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -95,6 +97,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>People to describe the occupancy of the program. If None, no occupancy will be assumed for the program.</value>
         [DataMember(Name="people", EmitDefaultValue=false)]
+        [JsonProperty("people")]
         public PeopleAbridged People { get; set; }
 
         /// <summary>
@@ -102,6 +105,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program.</value>
         [DataMember(Name="lighting", EmitDefaultValue=false)]
+        [JsonProperty("lighting")]
         public LightingAbridged Lighting { get; set; }
 
         /// <summary>
@@ -109,6 +113,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed.</value>
         [DataMember(Name="electrical_equipment", EmitDefaultValue=false)]
+        [JsonProperty("electrical_equipment")]
         public ElectricEquipmentAbridged ElectricalEquipment { get; set; }
 
         /// <summary>
@@ -116,6 +121,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed.</value>
         [DataMember(Name="gas_equipment", EmitDefaultValue=false)]
+        [JsonProperty("gas_equipment")]
         public GasEquipmentAbridged GasEquipment { get; set; }
 
         /// <summary>
@@ -123,6 +129,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program.</value>
         [DataMember(Name="infiltration", EmitDefaultValue=false)]
+        [JsonProperty("infiltration")]
         public InfiltrationAbridged Infiltration { get; set; }
 
         /// <summary>
@@ -130,6 +137,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed.</value>
         [DataMember(Name="ventilation", EmitDefaultValue=false)]
+        [JsonProperty("ventilation")]
         public VentilationAbridged Ventilation { get; set; }
 
         /// <summary>
@@ -137,6 +145,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.</value>
         [DataMember(Name="setpoint", EmitDefaultValue=false)]
+        [JsonProperty("setpoint")]
         public SetpointAbridged Setpoint { get; set; }
 
         /// <summary>

@@ -53,6 +53,7 @@ namespace HoneybeeDotNet.Model
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -60,6 +61,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.</value>
         [DataMember(Name="construction", EmitDefaultValue=false)]
+        [JsonProperty("construction")]
         public string Construction { get; set; }
 
         /// <summary>

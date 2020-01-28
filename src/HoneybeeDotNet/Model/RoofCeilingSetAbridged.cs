@@ -57,6 +57,7 @@ namespace HoneybeeDotNet.Model
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -64,6 +65,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name for an OpaqueConstruction for ceilings with a Surface or Adiabatic boundary condition.</value>
         [DataMember(Name="interior_construction", EmitDefaultValue=false)]
+        [JsonProperty("interior_construction")]
         public string InteriorConstruction { get; set; }
 
         /// <summary>
@@ -71,6 +73,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name for an OpaqueConstruction for roofs with an Outdoors boundary condition.</value>
         [DataMember(Name="exterior_construction", EmitDefaultValue=false)]
+        [JsonProperty("exterior_construction")]
         public string ExteriorConstruction { get; set; }
 
         /// <summary>
@@ -78,6 +81,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name for an OpaqueConstruction for roofs with a Ground boundary condition.</value>
         [DataMember(Name="ground_construction", EmitDefaultValue=false)]
+        [JsonProperty("ground_construction")]
         public string GroundConstruction { get; set; }
 
         /// <summary>

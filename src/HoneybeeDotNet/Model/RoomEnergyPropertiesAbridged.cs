@@ -71,6 +71,7 @@ namespace HoneybeeDotNet.Model
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -78,6 +79,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of a ConstructionSet to specify all default constructions for the Faces, Apertures, and Doors of the Room. If None, the Room will use the Model global_construction_set.</value>
         [DataMember(Name="construction_set", EmitDefaultValue=false)]
+        [JsonProperty("construction_set")]
         public string ConstructionSet { get; set; }
 
         /// <summary>
@@ -85,6 +87,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Name of a ProgramType to specify all default schedules and loads for the Room. If None, the Room will have no loads or setpoints.</value>
         [DataMember(Name="program_type", EmitDefaultValue=false)]
+        [JsonProperty("program_type")]
         public string ProgramType { get; set; }
 
         /// <summary>
@@ -92,6 +95,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>An optional name of a HVAC system (such as an IdealAirSystem) that specifies how the Room is conditioned. If None, it will be assumed that the Room is not conditioned.</value>
         [DataMember(Name="hvac", EmitDefaultValue=false)]
+        [JsonProperty("hvac")]
         public string Hvac { get; set; }
 
         /// <summary>
@@ -99,6 +103,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>People object to describe the occupancy of the Room.</value>
         [DataMember(Name="people", EmitDefaultValue=false)]
+        [JsonProperty("people")]
         public PeopleAbridged People { get; set; }
 
         /// <summary>
@@ -106,6 +111,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Lighting object to describe the lighting usage of the Room.</value>
         [DataMember(Name="lighting", EmitDefaultValue=false)]
+        [JsonProperty("lighting")]
         public LightingAbridged Lighting { get; set; }
 
         /// <summary>
@@ -113,6 +119,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>ElectricEquipment object to describe the electric equipment usage.</value>
         [DataMember(Name="electric_equipment", EmitDefaultValue=false)]
+        [JsonProperty("electric_equipment")]
         public ElectricEquipmentAbridged ElectricEquipment { get; set; }
 
         /// <summary>
@@ -120,6 +127,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>GasEquipment object to describe the gas equipment usage.</value>
         [DataMember(Name="gas_equipment", EmitDefaultValue=false)]
+        [JsonProperty("gas_equipment")]
         public GasEquipmentAbridged GasEquipment { get; set; }
 
         /// <summary>
@@ -127,6 +135,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Infiltration object to to describe the outdoor air leakage.</value>
         [DataMember(Name="infiltration", EmitDefaultValue=false)]
+        [JsonProperty("infiltration")]
         public InfiltrationAbridged Infiltration { get; set; }
 
         /// <summary>
@@ -134,6 +143,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Ventilation object for the minimum outdoor air requirement.</value>
         [DataMember(Name="ventilation", EmitDefaultValue=false)]
+        [JsonProperty("ventilation")]
         public VentilationAbridged Ventilation { get; set; }
 
         /// <summary>
@@ -141,6 +151,7 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <value>Setpoint object for the temperature setpoints of the Room.</value>
         [DataMember(Name="setpoint", EmitDefaultValue=false)]
+        [JsonProperty("setpoint")]
         public SetpointAbridged Setpoint { get; set; }
 
         /// <summary>
