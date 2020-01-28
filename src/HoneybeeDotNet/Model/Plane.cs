@@ -42,7 +42,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="o">Plane origin as 3 (x, y, z) values (required).</param>
         /// <param name="type">type (default to &quot;Plane&quot;).</param>
         /// <param name="x">Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated..</param>
-        public Plane(List<decimal> n, List<decimal> o, string type = "Plane", List<decimal> x = default(List<decimal>))
+        public Plane(List<decimal> n, List<decimal> o, string type = "Plane", List<decimal> x = default)
         {
             // to ensure "n" is required (not null)
             if (n == null)
@@ -129,8 +129,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>Plane object</returns>
+        public static Plane FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<Plane>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

@@ -86,7 +86,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="doors">Doors assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid..</param>
         /// <param name="indoorShades">Shades assigned to the interior side of this object..</param>
         /// <param name="outdoorShades">Shades assigned to the exterior side of this object (eg. balcony, overhang)..</param>
-        public Face(string name, Face3D geometry, FaceTypeEnum faceType, AnyOf<Ground,Outdoors,Adiabatic,Surface> boundaryCondition, FacePropertiesAbridged properties, string displayName = default(string), string type = "Face", List<Aperture> apertures = default(List<Aperture>), List<Door> doors = default(List<Door>), List<Shade> indoorShades = default(List<Shade>), List<Shade> outdoorShades = default(List<Shade>))
+        public Face(string name, Face3D geometry, FaceTypeEnum faceType, AnyOf<Ground,Outdoors,Adiabatic,Surface> boundaryCondition, FacePropertiesAbridged properties, string displayName = default, string type = "Face", List<Aperture> apertures = default, List<Door> doors = default, List<Shade> indoorShades = default, List<Shade> outdoorShades = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -262,8 +262,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>Face object</returns>
+        public static Face FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<Face>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

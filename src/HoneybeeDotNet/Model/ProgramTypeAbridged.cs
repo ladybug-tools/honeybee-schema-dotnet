@@ -47,7 +47,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="infiltration">Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program..</param>
         /// <param name="ventilation">Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed..</param>
         /// <param name="setpoint">Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned..</param>
-        public ProgramTypeAbridged(string name, string type = "ProgramTypeAbridged", PeopleAbridged people = default(PeopleAbridged), LightingAbridged lighting = default(LightingAbridged), ElectricEquipmentAbridged electricalEquipment = default(ElectricEquipmentAbridged), GasEquipmentAbridged gasEquipment = default(GasEquipmentAbridged), InfiltrationAbridged infiltration = default(InfiltrationAbridged), VentilationAbridged ventilation = default(VentilationAbridged), SetpointAbridged setpoint = default(SetpointAbridged))
+        public ProgramTypeAbridged(string name, string type = "ProgramTypeAbridged", PeopleAbridged people = default, LightingAbridged lighting = default, ElectricEquipmentAbridged electricalEquipment = default, GasEquipmentAbridged gasEquipment = default, InfiltrationAbridged infiltration = default, VentilationAbridged ventilation = default, SetpointAbridged setpoint = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -175,8 +175,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>ProgramTypeAbridged object</returns>
+        public static ProgramTypeAbridged FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<ProgramTypeAbridged>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

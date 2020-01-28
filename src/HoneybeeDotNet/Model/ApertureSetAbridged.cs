@@ -38,7 +38,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="windowConstruction">Name for a WindowConstruction for all apertures with a Surface boundary condition..</param>
         /// <param name="skylightConstruction">Name for a WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face..</param>
         /// <param name="operableConstruction">Name for a WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property...</param>
-        public ApertureSetAbridged(string type = "ApertureSetAbridged", string interiorConstruction = default(string), string windowConstruction = default(string), string skylightConstruction = default(string), string operableConstruction = default(string))
+        public ApertureSetAbridged(string type = "ApertureSetAbridged", string interiorConstruction = default, string windowConstruction = default, string skylightConstruction = default, string operableConstruction = default)
         {
             // use default value if no "type" provided
             if (type == null)
@@ -117,8 +117,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>ApertureSetAbridged object</returns>
+        public static ApertureSetAbridged FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<ApertureSetAbridged>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

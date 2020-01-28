@@ -50,7 +50,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="applyHoliday">Boolean noting whether to apply schedule_day on Holidays. (default to false).</param>
         /// <param name="startDate">A list of two integers for [month, day], representing the start date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case)..</param>
         /// <param name="endDate">A list of two integers for [month, day], representing the end date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case)..</param>
-        public ScheduleRuleAbridged(string scheduleDay, string type = "ScheduleRuleAbridged", bool applySunday = false, bool applyMonday = false, bool applyTuesday = false, bool applyWednesday = false, bool applyThursday = false, bool applyFriday = false, bool applySaturday = false, bool applyHoliday = false, List<int> startDate = default(List<int>), List<int> endDate = default(List<int>))
+        public ScheduleRuleAbridged(string scheduleDay, string type = "ScheduleRuleAbridged", bool applySunday = false, bool applyMonday = false, bool applyTuesday = false, bool applyWednesday = false, bool applyThursday = false, bool applyFriday = false, bool applySaturday = false, bool applyHoliday = false, List<int> startDate = default, List<int> endDate = default)
         {
             // to ensure "scheduleDay" is required (not null)
             if (scheduleDay == null)
@@ -272,8 +272,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>ScheduleRuleAbridged object</returns>
+        public static ScheduleRuleAbridged FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<ScheduleRuleAbridged>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

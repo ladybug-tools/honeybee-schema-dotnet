@@ -37,7 +37,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="interiorConstruction">Name for an OpaqueConstruction for walls with a Surface or Adiabatic boundary condition..</param>
         /// <param name="exteriorConstruction">Name for an OpaqueConstruction for walls with an Outdoors boundary condition..</param>
         /// <param name="groundConstruction">Name for an OpaqueConstruction for walls with a Ground boundary condition..</param>
-        public WallSetAbridged(string type = "WallSetAbridged", string interiorConstruction = default(string), string exteriorConstruction = default(string), string groundConstruction = default(string))
+        public WallSetAbridged(string type = "WallSetAbridged", string interiorConstruction = default, string exteriorConstruction = default, string groundConstruction = default)
         {
             // use default value if no "type" provided
             if (type == null)
@@ -106,8 +106,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>WallSetAbridged object</returns>
+        public static WallSetAbridged FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<WallSetAbridged>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

@@ -83,7 +83,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="coolingLimit">A number for the maximum cooling capacity in Watts. This can also be the text \&quot;autosize\&quot; to indicate that the capacity should be determined during the sizing calculation. This can also be the text \&quot;NoLimit\&quot; to indicate no upper limit to the cooling capacity. Note that setting this to None will trigger the default (\&quot;autosize\&quot;)..</param>
         /// <param name="heatingAvailability">An optional name of a schedule to set the availability of heating over the course of the simulation..</param>
         /// <param name="coolingAvailability">An optional name of a schedule to set the availability of cooling over the course of the simulation..</param>
-        public IdealAirSystemAbridged(string name, string type = "IdealAirSystemAbridged", EconomizerTypeEnum? economizerType = EconomizerTypeEnum.DifferentialDryBulb, bool demandControlVentilation = false, decimal sensibleHeatRecovery = 0M, decimal latentHeatRecovery = 0M, decimal heatingAirTemperature = 50M, decimal coolingAirTemperature = 13M, AnyOf<decimal,string> heatingLimit = default(AnyOf<decimal,string>), AnyOf<decimal,string> coolingLimit = default(AnyOf<decimal,string>), string heatingAvailability = default(string), string coolingAvailability = default(string))
+        public IdealAirSystemAbridged(string name, string type = "IdealAirSystemAbridged", EconomizerTypeEnum? economizerType = EconomizerTypeEnum.DifferentialDryBulb, bool demandControlVentilation = false, decimal sensibleHeatRecovery = 0M, decimal latentHeatRecovery = 0M, decimal heatingAirTemperature = 50M, decimal coolingAirTemperature = 13M, AnyOf<decimal,string> heatingLimit = default, AnyOf<decimal,string> coolingLimit = default, string heatingAvailability = default, string coolingAvailability = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -282,8 +282,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>IdealAirSystemAbridged object</returns>
+        public static IdealAirSystemAbridged FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<IdealAirSystemAbridged>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

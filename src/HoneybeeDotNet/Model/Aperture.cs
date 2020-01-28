@@ -47,7 +47,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="isOperable">Boolean to note whether the Aperture can be opened for ventilation. (default to false).</param>
         /// <param name="indoorShades">Shades assigned to the interior side of this object (eg. window sill, light shelf)..</param>
         /// <param name="outdoorShades">Shades assigned to the exterior side of this object (eg. mullions, louvers)..</param>
-        public Aperture(string name, Face3D geometry, AnyOf<Outdoors,Surface> boundaryCondition, AperturePropertiesAbridged properties, string displayName = default(string), string type = "Aperture", bool isOperable = false, List<Shade> indoorShades = default(List<Shade>), List<Shade> outdoorShades = default(List<Shade>))
+        public Aperture(string name, Face3D geometry, AnyOf<Outdoors,Surface> boundaryCondition, AperturePropertiesAbridged properties, string displayName = default, string type = "Aperture", bool isOperable = false, List<Shade> indoorShades = default, List<Shade> outdoorShades = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -209,8 +209,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>Aperture object</returns>
+        public static Aperture FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<Aperture>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

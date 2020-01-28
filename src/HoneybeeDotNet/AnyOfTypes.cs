@@ -6,21 +6,114 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Serialization;
+using Newtonsoft.Json.Serialization;
 
 namespace HoneybeeDotNet.Model
 {
+    public class AnyOfJsonConverter : JsonConverter<AnyOf>
+    {
+        private readonly Type _types;
+
+        public AnyOfJsonConverter()
+        {
+            _types = typeof(AnyOf);
+        }
+
+        public override AnyOf ReadJson(JsonReader reader, Type objectType, AnyOf existingValue, bool hasExistingValue, JsonSerializer serializer)
+        {
+            var objType = objectType;
+            var validTypes = objType.GenericTypeArguments;
+            var data = CheckType(reader.Value);
+
+            if (reader.Value == null)
+            {
+                var jObject = JObject.Load(reader);
+
+                if (jObject["type"] != null)
+                {
+                    var typeName = jObject["type"].Value<string>();
+                    var type = validTypes.FirstOrDefault(_ => _.Name == typeName);
+                    if (type != null)
+                    {
+                        //var values = jObject.Children();
+                        //var value = values.Last().ToObject(typeof(decimal));
+
+                        //var root = DeserializeTypeX(jObject, serializer);
+
+                        data = jObject.ToObject(type, serializer);
+                    }
+                    else
+                    {
+                        throw new ArgumentException($"{typeName} is not a valid type for {reader.Path}, this might because of mismatch version of honeybee schema!");
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException($"Unable to load {reader.Path}");
+                }
+            }
+           
+
+            var inputType = data.GetType();
+           
+            if (validTypes.ToList().Contains(inputType))
+            {
+                var obj = Activator.CreateInstance(objectType, new object[] {data});
+                return obj as AnyOf;
+            }
+            else
+            {
+                throw new ArgumentException($"{data} is {inputType} type, which doesn't match any of [{string.Join(", ", validTypes.ToString())}]");
+            }
 
 
-    [JsonObject(MemberSerialization.OptIn)]
+            object CheckType(object value)
+            {
+                switch (value)
+                {
+                    // in Honeybee Schema, all double is converted to decimal
+                    case double db:
+                        return new Decimal(db);
+                    default:
+                        return value;
+                }
+            }
+            
+            
+        }
+
+        public override void WriteJson(JsonWriter writer,  AnyOf value, JsonSerializer serializer)
+        {
+            JToken t = JToken.FromObject(value.Obj, serializer);
+            t.WriteTo(writer);
+        }
+
+      
+    }
+
+
     public class AnyOf
     {
-        [IgnoreDataMember]
+       
         public Object Obj { get; set; }
         internal virtual List<Type> AllValidTypes => new List<Type>() { typeof(object) };
 
         public AnyOf(object obj)
         {
             this.CheckType(obj);
+        }
+        public AnyOf(object obj, Type type)
+        {
+            var objType = obj.GetType();
+            var isValidType = objType == type;
+            if (!isValidType)
+            {
+                throw new ArgumentException("Not acceptable type!");
+            }
+            else
+            {
+                this.Obj = objType;
+            }
         }
 
         internal void CheckType(object Object)
@@ -48,56 +141,19 @@ namespace HoneybeeDotNet.Model
             return this.ToString();
         }
 
+        public static implicit operator string(AnyOf b) => b;
+
         public static implicit operator AnyOf(int d) => new AnyOf(d);
         public static implicit operator AnyOf(string d) => new AnyOf(d);
         public static implicit operator AnyOf(double d) => new AnyOf(d);
         public static implicit operator AnyOf(decimal d) => new AnyOf(d);
 
-        public static implicit operator string(AnyOf b) => b;
 
-        //[JsonContainer]
-        //public object data()
+        //public override bool Equals(object obj)
         //{
-
+        //    return obj == this.Obj;
         //}
 
-        [JsonExtensionData]
-        public Dictionary<string, object> ExtraData { get; set; }
-
-        [OnSerializing]
-        internal void OnSerializingMethod(StreamingContext context)
-        {
-            if (this.Obj is string)
-            {
-                //ExtraData.Add("", this.Obj);
-                return;
-            }
-
-            ExtraData = new Dictionary<string, object>();
-            var fields = this.Obj.GetType().GetProperties();
-            foreach (var item in fields)
-            {
-                var attrisToSerialize = item.GetCustomAttributes(typeof(DataMemberAttribute), true);
-                if (attrisToSerialize.Any())
-                {
-                    var name_schema = (attrisToSerialize.First() as DataMemberAttribute).Name;
-                    ExtraData.Add(name_schema, item.GetValue(this.Obj)?.ToString());
-                }
-            }
-
-            //TODO: I think this will be need when parsing the json.
-            //[OnDeserialized]
-            //private void OnDeserialized(StreamingContext context)
-            //{
-            //    foreach (var kvp in ExtraData)
-            //    {
-            //        if (!kvp.Key.StartsWith("x-"))
-            //        {
-            //            this[kvp.Key] = kvp.Value.ToObject<OpenApiPathItem>();
-            //        }
-            //    }
-            //}
-        }
     }
     public class AnyOf<T> : AnyOf
     {
@@ -108,6 +164,10 @@ namespace HoneybeeDotNet.Model
         }
 
         public static implicit operator string(AnyOf<T> b) => b;
+        public static implicit operator AnyOf<T>(decimal b) => b;
+        public static implicit operator AnyOf<T>(double b) => new AnyOf<T>((decimal)b);
+        public static implicit operator AnyOf<T>(int b) => b;
+
     }
 
 

@@ -37,7 +37,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="sunExposure">A boolean noting whether the boundary is exposed to sun. (default to true).</param>
         /// <param name="windExposure">A boolean noting whether the boundary is exposed to wind. (default to true).</param>
         /// <param name="viewFactor">A number for the view factor to the ground. This can also be the word \&quot;autocalculate\&quot; to have the view factor automatically calculated..</param>
-        public Outdoors(string type = "Outdoors", bool sunExposure = true, bool windExposure = true, AnyOf<string,decimal> viewFactor = default(AnyOf<string,decimal>))
+        public Outdoors(string type = "Outdoors", bool sunExposure = true, bool windExposure = true, AnyOf<string,decimal> viewFactor = default)
         {
             // use default value if no "type" provided
             if (type == null)
@@ -122,8 +122,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>Outdoors object</returns>
+        public static Outdoors FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<Outdoors>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal

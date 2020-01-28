@@ -46,7 +46,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="indoorShades">Shades assigned to the interior side of this object (eg. partitions, tables)..</param>
         /// <param name="outdoorShades">Shades assigned to the exterior side of this object (eg. trees, landscaping)..</param>
         /// <param name="multiplier">An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is mutliplied by the multiplier. (default to 1).</param>
-        public Room(string name, List<Face> faces, RoomPropertiesAbridged properties, string displayName = default(string), string type = "Room", List<Shade> indoorShades = default(List<Shade>), List<Shade> outdoorShades = default(List<Shade>), int multiplier = 1)
+        public Room(string name, List<Face> faces, RoomPropertiesAbridged properties, string displayName = default, string type = "Room", List<Shade> indoorShades = default, List<Shade> outdoorShades = default, int multiplier = 1)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -190,8 +190,18 @@ namespace HoneybeeDotNet.Model
         /// <returns>JSON string presentation of the object</returns>
         public virtual string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
+
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>Room object</returns>
+        public static Room FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<Room>(json, new AnyOfJsonConverter());
+        }
+
 
         /// <summary>
         /// Returns true if objects are equal
