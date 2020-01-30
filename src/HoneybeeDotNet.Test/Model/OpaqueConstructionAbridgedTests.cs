@@ -32,17 +32,27 @@ namespace HoneybeeDotNet.Test
     /// </remarks>
     public class OpaqueConstructionAbridgedTests
     {
-        // TODO uncomment below to declare an instance variable for OpaqueConstructionAbridged
-        //private OpaqueConstructionAbridged instance;
-
+        private OpaqueConstructionAbridged instance;
+        private OpaqueConstructionAbridged instanceFromJson;
         /// <summary>
         /// Setup before each test
         /// </summary>
         [SetUp]
         public void Init()
         {
-            // TODO uncomment below to create an instance of OpaqueConstructionAbridged
-            //instance = new OpaqueConstructionAbridged();
+            instance = new OpaqueConstructionAbridged(
+                "Exterior Wall ASHRAE 2009",
+                new List<string>() 
+                {
+                    "1 in Gypsum",
+                    "8in Concrete HW",
+                    "Wall Insulation",
+                    "1.5 in Gypsum"
+                }
+                );
+
+            var json = this.instance.ToJson();
+            instanceFromJson = OpaqueConstructionAbridged.FromJson(json);
         }
 
         /// <summary>
@@ -60,8 +70,7 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void OpaqueConstructionAbridgedInstanceTest()
         {
-            // TODO uncomment below to test "IsInstanceOf" OpaqueConstructionAbridged
-            //Assert.IsInstanceOf(typeof(OpaqueConstructionAbridged), instance);
+            Assert.IsInstanceOf(typeof(OpaqueConstructionAbridged), instance);
         }
 
 
@@ -71,7 +80,9 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void NameTest()
         {
-            // TODO unit test for the property 'Name'
+            Assert.AreEqual(this.instance.Name, "Exterior Wall ASHRAE 2009");
+            Assert.AreEqual(instanceFromJson.Name, this.instance.Name);
+
         }
         /// <summary>
         /// Test the property 'Type'
@@ -87,7 +98,11 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void LayersTest()
         {
-            // TODO unit test for the property 'Layers'
+            Assert.AreEqual(this.instance.Layers.Count, 4);
+            Assert.AreEqual(this.instance.Layers[1], "8in Concrete HW");
+
+            Assert.AreEqual(instanceFromJson.Layers.Count, this.instance.Layers.Count);
+            Assert.AreEqual(instanceFromJson.Layers[2], this.instance.Layers[2]);
         }
 
     }

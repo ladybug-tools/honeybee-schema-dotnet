@@ -16,10 +16,11 @@ using System.Linq;
 using System.IO;
 using System.Collections.Generic;
 
-using HoneybeeDotNet.Model;
+using HB = HoneybeeDotNet.Model;
 using HoneybeeDotNet.Client;
 using System.Reflection;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace HoneybeeDotNet.Test
 {
@@ -33,7 +34,7 @@ namespace HoneybeeDotNet.Test
     public class ModelTests
     {
         // TODO uncomment below to declare an instance variable for Model
-        //private Model instance;
+        private Model.Model instance;
 
         /// <summary>
         /// Setup before each test
@@ -41,8 +42,12 @@ namespace HoneybeeDotNet.Test
         [SetUp]
         public void Init()
         {
-            // TODO uncomment below to create an instance of Model
-            //instance = new Model();
+            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/honeybee_schema/samples/model_complete_single_zone_office.json";
+            using (WebClient wc = new WebClient())
+            {
+                var json = wc.DownloadString(url);
+                this.instance = HB.Model.FromJson(json);
+            }
         }
 
         /// <summary>
@@ -61,7 +66,7 @@ namespace HoneybeeDotNet.Test
         public void ModelInstanceTest()
         {
             // TODO uncomment below to test "IsInstanceOf" Model
-            //Assert.IsInstanceOf(typeof(Model), instance);
+            Assert.IsInstanceOf(typeof(HB.Model), instance);
         }
 
 
@@ -71,7 +76,7 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void NameTest()
         {
-            // TODO unit test for the property 'Name'
+            Assert.AreEqual(this.instance.Name, "TinyHouse");
         }
         /// <summary>
         /// Test the property 'DisplayName'
@@ -79,7 +84,7 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void DisplayNameTest()
         {
-            // TODO unit test for the property 'DisplayName'
+            Assert.AreEqual(this.instance.DisplayName, "Tiny House");
         }
         /// <summary>
         /// Test the property 'Type'
@@ -95,7 +100,7 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void RoomsTest()
         {
-            // TODO unit test for the property 'Rooms'
+            Assert.AreEqual(this.instance.Rooms.Count, 1);
         }
         /// <summary>
         /// Test the property 'OrphanedFaces'
@@ -103,7 +108,8 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void OrphanedFacesTest()
         {
-            // TODO unit test for the property 'OrphanedFaces'
+            Assert.AreEqual(this.instance.OrphanedShades.Count, 1);
+            Assert.AreEqual(this.instance.OrphanedShades[0].Name, "TreeCanopy");
         }
         /// <summary>
         /// Test the property 'OrphanedShades'
@@ -135,7 +141,7 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void NorthAngleTest()
         {
-            // TODO unit test for the property 'NorthAngle'
+            Assert.AreEqual(this.instance.NorthAngle, 15);
         }
         /// <summary>
         /// Test the property 'Properties'
@@ -143,7 +149,18 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void PropertiesTest()
         {
-            // TODO unit test for the property 'Properties'
+            var prop = this.instance.Properties.Energy.ProgramTypes.First();
+            Assert.AreEqual(prop.Name, "Generic Office Program");
+            Assert.AreEqual(prop.Lighting.WattsPerArea, 10.55);
+            Assert.AreEqual(prop.ElectricEquipment.LatentFraction, 0);
+            Assert.AreEqual(prop.People.LatentFraction.Obj, "autocalculate");
+            Assert.AreEqual(prop.Infiltration.FlowPerExteriorArea, 0.0002266);
+            Assert.AreEqual(prop.Setpoint.HeatingSchedule, "Generic Office Heating");
+
+
+            var hvac = this.instance.Properties.Energy.Hvacs.First();
+            Assert.AreEqual(hvac.HeatingAirTemperature, 50);
+            Assert.AreEqual(hvac.HeatingLimit.Obj, "autosize");
         }
 
     }

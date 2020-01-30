@@ -70,7 +70,7 @@ namespace HoneybeeDotNet.Model
             }
             this.People = people;
             this.Lighting = lighting;
-            this.ElectricalEquipment = electricalEquipment;
+            this.ElectricEquipment = electricalEquipment;
             this.GasEquipment = gasEquipment;
             this.Infiltration = infiltration;
             this.Ventilation = ventilation;
@@ -112,9 +112,9 @@ namespace HoneybeeDotNet.Model
         /// ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed.
         /// </summary>
         /// <value>ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed.</value>
-        [DataMember(Name="electrical_equipment", EmitDefaultValue=false)]
-        [JsonProperty("electrical_equipment")]
-        public ElectricEquipmentAbridged ElectricalEquipment { get; set; }
+        [DataMember(Name="electric_equipment", EmitDefaultValue=false)]
+        [JsonProperty("electric_equipment")]
+        public ElectricEquipmentAbridged ElectricEquipment { get; set; }
 
         /// <summary>
         /// GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed.
@@ -160,7 +160,7 @@ namespace HoneybeeDotNet.Model
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  People: ").Append(People).Append("\n");
             sb.Append("  Lighting: ").Append(Lighting).Append("\n");
-            sb.Append("  ElectricalEquipment: ").Append(ElectricalEquipment).Append("\n");
+            sb.Append("  ElectricalEquipment: ").Append(ElectricEquipment).Append("\n");
             sb.Append("  GasEquipment: ").Append(GasEquipment).Append("\n");
             sb.Append("  Infiltration: ").Append(Infiltration).Append("\n");
             sb.Append("  Ventilation: ").Append(Ventilation).Append("\n");
@@ -230,9 +230,9 @@ namespace HoneybeeDotNet.Model
                     this.Lighting.Equals(input.Lighting))
                 ) && 
                 (
-                    this.ElectricalEquipment == input.ElectricalEquipment ||
-                    (this.ElectricalEquipment != null &&
-                    this.ElectricalEquipment.Equals(input.ElectricalEquipment))
+                    this.ElectricEquipment == input.ElectricEquipment ||
+                    (this.ElectricEquipment != null &&
+                    this.ElectricEquipment.Equals(input.ElectricEquipment))
                 ) && 
                 (
                     this.GasEquipment == input.GasEquipment ||
@@ -273,8 +273,8 @@ namespace HoneybeeDotNet.Model
                     hashCode = hashCode * 59 + this.People.GetHashCode();
                 if (this.Lighting != null)
                     hashCode = hashCode * 59 + this.Lighting.GetHashCode();
-                if (this.ElectricalEquipment != null)
-                    hashCode = hashCode * 59 + this.ElectricalEquipment.GetHashCode();
+                if (this.ElectricEquipment != null)
+                    hashCode = hashCode * 59 + this.ElectricEquipment.GetHashCode();
                 if (this.GasEquipment != null)
                     hashCode = hashCode * 59 + this.GasEquipment.GetHashCode();
                 if (this.Infiltration != null)

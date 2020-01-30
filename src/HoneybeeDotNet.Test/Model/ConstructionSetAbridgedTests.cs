@@ -11,15 +11,7 @@
 
 using NUnit.Framework;
 
-using System;
-using System.Linq;
-using System.IO;
-using System.Collections.Generic;
-
 using HoneybeeDotNet.Model;
-using HoneybeeDotNet.Client;
-using System.Reflection;
-using Newtonsoft.Json;
 
 namespace HoneybeeDotNet.Test
 {
@@ -33,16 +25,38 @@ namespace HoneybeeDotNet.Test
     public class ConstructionSetAbridgedTests
     {
         // TODO uncomment below to declare an instance variable for ConstructionSetAbridged
-        //private ConstructionSetAbridged instance;
-
+        private ConstructionSetAbridged instance;
+        private ConstructionSetAbridged instanceFromJson;
         /// <summary>
         /// Setup before each test
         /// </summary>
         [SetUp]
         public void Init()
         {
-            // TODO uncomment below to create an instance of ConstructionSetAbridged
-            //instance = new ConstructionSetAbridged();
+            instance = new ConstructionSetAbridged("NewConstructionSet");
+            var json = 
+ @"{
+    ""type"": ""ConstructionSetAbridged"",
+    ""name"": ""Construction Set"",
+    ""wall_set"": {
+                ""type"": ""WallSetAbridged"",
+        ""exterior_construction"": ""Exterior Wall ASHRAE 2009""
+    },
+    ""floor_set"": {
+                ""type"": ""FloorSetAbridged"",
+        ""interior_construction"": ""Internal Floor""
+    },
+    ""roof_ceiling_set"": {
+                ""type"": ""RoofCeilingSetAbridged"",
+        ""exterior_construction"": ""Exterior Roof ASHRAE 2009""
+    },
+    ""aperture_set"": {
+                ""type"": ""ApertureSetAbridged"",
+        ""fixed_window_construction"": ""Exterior Window""
+    }
+}";
+
+            instanceFromJson = ConstructionSetAbridged.FromJson(json);
         }
 
         /// <summary>
@@ -61,7 +75,7 @@ namespace HoneybeeDotNet.Test
         public void ConstructionSetAbridgedInstanceTest()
         {
             // TODO uncomment below to test "IsInstanceOf" ConstructionSetAbridged
-            //Assert.IsInstanceOf(typeof(ConstructionSetAbridged), instance);
+            Assert.IsInstanceOf(typeof(ConstructionSetAbridged), instanceFromJson);
         }
 
 
@@ -71,7 +85,8 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void NameTest()
         {
-            // TODO unit test for the property 'Name'
+            Assert.AreEqual(this.instance.Name, "NewConstructionSet");
+            Assert.AreEqual(instanceFromJson.Name, "Construction Set");
         }
         /// <summary>
         /// Test the property 'Type'
@@ -87,7 +102,8 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void WallSetTest()
         {
-            // TODO unit test for the property 'WallSet'
+            Assert.AreEqual(this.instance.WallSet, null);
+            Assert.AreEqual(instanceFromJson.WallSet.ExteriorConstruction, "Exterior Wall ASHRAE 2009");
         }
         /// <summary>
         /// Test the property 'FloorSet'
@@ -95,7 +111,9 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void FloorSetTest()
         {
-            // TODO unit test for the property 'FloorSet'
+            Assert.AreEqual(this.instance.FloorSet, null);
+            Assert.AreEqual(instanceFromJson.FloorSet.InteriorConstruction, "Internal Floor");
+            Assert.AreEqual(instanceFromJson.FloorSet.ExteriorConstruction, null);
         }
         /// <summary>
         /// Test the property 'RoofCeilingSet'
@@ -103,7 +121,8 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void RoofCeilingSetTest()
         {
-            // TODO unit test for the property 'RoofCeilingSet'
+            Assert.AreEqual(this.instance.RoofCeilingSet, null);
+            Assert.AreEqual(instanceFromJson.RoofCeilingSet.ExteriorConstruction, "Exterior Roof ASHRAE 2009");
         }
         /// <summary>
         /// Test the property 'ApertureSet'
@@ -127,7 +146,8 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void ShadeConstructionTest()
         {
-            // TODO unit test for the property 'ShadeConstruction'
+            Assert.AreEqual(this.instance.ShadeConstruction, null);
+            Assert.AreEqual(instanceFromJson.ShadeConstruction, null);
         }
 
     }

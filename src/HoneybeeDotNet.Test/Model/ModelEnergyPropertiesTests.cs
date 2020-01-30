@@ -32,8 +32,7 @@ namespace HoneybeeDotNet.Test
     /// </remarks>
     public class ModelEnergyPropertiesTests
     {
-        // TODO uncomment below to declare an instance variable for ModelEnergyProperties
-        //private ModelEnergyProperties instance;
+        private ModelEnergyProperties instance;
 
         /// <summary>
         /// Setup before each test
@@ -41,8 +40,7 @@ namespace HoneybeeDotNet.Test
         [SetUp]
         public void Init()
         {
-            // TODO uncomment below to create an instance of ModelEnergyProperties
-            //instance = new ModelEnergyProperties();
+            //instance = new ModelEnergyProperties(;
         }
 
         /// <summary>

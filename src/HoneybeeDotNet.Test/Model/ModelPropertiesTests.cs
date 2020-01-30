@@ -33,7 +33,7 @@ namespace HoneybeeDotNet.Test
     public class ModelPropertiesTests
     {
         // TODO uncomment below to declare an instance variable for ModelProperties
-        //private ModelProperties instance;
+        private ModelProperties instance;
 
         /// <summary>
         /// Setup before each test
@@ -42,7 +42,7 @@ namespace HoneybeeDotNet.Test
         public void Init()
         {
             // TODO uncomment below to create an instance of ModelProperties
-            //instance = new ModelProperties();
+            instance = new ModelProperties();
         }
 
         /// <summary>

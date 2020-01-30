@@ -20,6 +20,7 @@ using HoneybeeDotNet.Model;
 using HoneybeeDotNet.Client;
 using System.Reflection;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace HoneybeeDotNet.Test
 {
@@ -33,7 +34,7 @@ namespace HoneybeeDotNet.Test
     public class ScheduleTypeLimitTests
     {
         // TODO uncomment below to declare an instance variable for ScheduleTypeLimit
-        //private ScheduleTypeLimit instance;
+        private ScheduleTypeLimit instance;
 
         /// <summary>
         /// Setup before each test
@@ -41,8 +42,12 @@ namespace HoneybeeDotNet.Test
         [SetUp]
         public void Init()
         {
-            // TODO uncomment below to create an instance of ScheduleTypeLimit
-            //instance = new ScheduleTypeLimit();
+            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/honeybee_schema/samples/scheduletypelimit_temperature.json";
+            using (WebClient wc = new WebClient())
+            {
+                var json = wc.DownloadString(url);
+                this.instance = ScheduleTypeLimit.FromJson(json);
+            }
         }
 
         /// <summary>
@@ -61,7 +66,7 @@ namespace HoneybeeDotNet.Test
         public void ScheduleTypeLimitInstanceTest()
         {
             // TODO uncomment below to test "IsInstanceOf" ScheduleTypeLimit
-            //Assert.IsInstanceOf(typeof(ScheduleTypeLimit), instance);
+            Assert.IsInstanceOf(typeof(ScheduleTypeLimit), instance);
         }
 
 
@@ -71,7 +76,7 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void NameTest()
         {
-            // TODO unit test for the property 'Name'
+            Assert.AreEqual(this.instance.Name, "Temperature");
         }
         /// <summary>
         /// Test the property 'Type'
@@ -87,7 +92,7 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void LowerLimitTest()
         {
-            // TODO unit test for the property 'LowerLimit'
+            Assert.AreEqual(this.instance.LowerLimit, -273.15);
         }
         /// <summary>
         /// Test the property 'UpperLimit'
@@ -95,7 +100,7 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void UpperLimitTest()
         {
-            // TODO unit test for the property 'UpperLimit'
+            Assert.AreEqual(this.instance.UpperLimit, null);
         }
         /// <summary>
         /// Test the property 'NumericType'

@@ -166,7 +166,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="upperLimit">Upper limit for the schedule type is entered..</param>
         /// <param name="numericType">numericType (default to NumericTypeEnum.Continuous).</param>
         /// <param name="unitType">unitType (default to UnitTypeEnum.Dimensionless).</param>
-        public ScheduleTypeLimit(string name, string type = "ScheduleTypeLimit", double lowerLimit = default, double upperLimit = default, NumericTypeEnum? numericType = NumericTypeEnum.Continuous, UnitTypeEnum? unitType = UnitTypeEnum.Dimensionless)
+        public ScheduleTypeLimit(string name, string type = "ScheduleTypeLimit", double lowerLimit = default, double? upperLimit = default, NumericTypeEnum? numericType = NumericTypeEnum.Continuous, UnitTypeEnum? unitType = UnitTypeEnum.Dimensionless)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -238,7 +238,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Upper limit for the schedule type is entered.</value>
         [DataMember(Name="upper_limit", EmitDefaultValue=false)]
         [JsonProperty("upper_limit")]
-        public double UpperLimit { get; set; }
+        public double? UpperLimit { get; set; }
 
 
 
