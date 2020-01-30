@@ -19,7 +19,8 @@ namespace HoneybeeDotNet.Model
         {
             var objType = objectType;
             var validTypes = objType.GenericTypeArguments;
-            var data = CheckType(reader.Value);
+
+            var data = reader.Value;
 
             if (reader.Value == null)
             {
@@ -31,11 +32,6 @@ namespace HoneybeeDotNet.Model
                     var type = validTypes.FirstOrDefault(_ => _.Name == typeName);
                     if (type != null)
                     {
-                        //var values = jObject.Children();
-                        //var value = values.Last().ToObject(typeof(decimal));
-
-                        //var root = DeserializeTypeX(jObject, serializer);
-
                         data = jObject.ToObject(type, serializer);
                     }
                     else
@@ -62,20 +58,6 @@ namespace HoneybeeDotNet.Model
                 throw new ArgumentException($"{data} is {inputType} type, which doesn't match any of [{string.Join(", ", validTypes.ToString())}]");
             }
 
-
-            object CheckType(object value)
-            {
-                switch (value)
-                {
-                    // in Honeybee Schema, all double is converted to decimal
-                    case double db:
-                        return new Decimal(db);
-                    default:
-                        return value;
-                }
-            }
-            
-            
         }
 
         public override void WriteJson(JsonWriter writer,  AnyOf value, JsonSerializer serializer)

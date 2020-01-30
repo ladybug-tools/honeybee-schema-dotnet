@@ -104,14 +104,14 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void ToJsonViewFactorTest()
         {
-            this.instance.ViewFactor = 0.5M;
+            this.instance.ViewFactor = 0.5;
             var j = this.instance.ToJson();
 
             var obj = Outdoors.FromJson(j);
             Assert.IsFalse(obj.SunExposure);
 
             var vF = obj.ViewFactor;
-            Assert.IsTrue((decimal)vF.Obj == 0.5M);
+            Assert.IsTrue((double)vF.Obj == 0.5);
         }
 
         /// <summary>

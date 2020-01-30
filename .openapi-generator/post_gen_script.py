@@ -28,21 +28,23 @@ def get_allof_types(obj, allofList):
         for item in vv:
             get_allof_types(item,allofList)
 
+def replace_decimal(read_data):
+  data = read_data
+  replace_source = ['decimal', '1M', '2M', '3M', '4M', '5M', '6M', '7M', '8M', '9M', '0M']
+  replace_new =    ['double', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+  for s, n in zip(replace_source, replace_new):
+    data = data.replace(s, n)
+  print("\n---Replacing %s to %s" % ('decimal','double'))
+  return data
 
-
-def replace_anyof_type(file_path, anyof_types):
-  f = open(file_path, "rt", encoding='utf-8')
-  data = f.read()
-
+def replace_anyof_type(read_data, anyof_types):
+  data = read_data
   for items in anyof_types:
     replace_source ="AnyOf%s" % ("".join(items))
-    replace_new = "AnyOf<%s>" % (",".join(items).replace('number','decimal'))
+    replace_new = "AnyOf<%s>" % (",".join(items).replace('number','double'))
     data = data.replace(replace_source, replace_new)
-  f.close()
-
-  f = open(file_path, "wt", encoding='utf-8')
-  f.write(data)
-  f.close()
+    print("\n---Replacing %s to %s" % (replace_source,replace_new))
+  return data
 
 def check_csfiles(source_folder, anyof_types):
   #go through all files and replce AnyOf types
@@ -52,7 +54,20 @@ def check_csfiles(source_folder, anyof_types):
   for f in class_files:
     cs_file = os.path.join(source_folder,f)
     print("\n-Checking %s\n" % cs_file)
-    replace_anyof_type(cs_file, anyof_types)
+
+    #read data
+    f = open(cs_file, "rt", encoding='utf-8')
+    data = f.read()
+    #take care of anyof type
+    data = replace_anyof_type(data, anyof_types)
+    #replace decimal/number to double
+    data = replace_decimal(data)
+    f.close()
+
+    #save data
+    f = open(cs_file, "wt", encoding='utf-8')
+    f.write(data)
+    f.close()
 
 
 def get_allof_types_from_json(source_json_url):

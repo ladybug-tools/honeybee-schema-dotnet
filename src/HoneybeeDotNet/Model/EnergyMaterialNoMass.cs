@@ -91,10 +91,10 @@ namespace HoneybeeDotNet.Model
         /// <param name="rValue">The thermal resistance (R-value) of the material layer [m2-K/W]. (required).</param>
         /// <param name="type">type (default to &quot;EnergyMaterialNoMass&quot;).</param>
         /// <param name="roughness">roughness (default to RoughnessEnum.MediumRough).</param>
-        /// <param name="thermalAbsorptance">Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9. (default to 0.9M).</param>
-        /// <param name="solarAbsorptance">Fraction of incident solar radiation absorbed by the material. Default value is 0.7. (default to 0.7M).</param>
-        /// <param name="visibleAbsorptance">Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7. (default to 0.7M).</param>
-        public EnergyMaterialNoMass(string name, decimal rValue, string type = "EnergyMaterialNoMass", RoughnessEnum? roughness = RoughnessEnum.MediumRough, decimal thermalAbsorptance = 0.9M, decimal solarAbsorptance = 0.7M, decimal visibleAbsorptance = 0.7M)
+        /// <param name="thermalAbsorptance">Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9. (default to 0.9).</param>
+        /// <param name="solarAbsorptance">Fraction of incident solar radiation absorbed by the material. Default value is 0.7. (default to 0.7).</param>
+        /// <param name="visibleAbsorptance">Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7. (default to 0.7).</param>
+        public EnergyMaterialNoMass(string name, double rValue, string type = "EnergyMaterialNoMass", RoughnessEnum? roughness = RoughnessEnum.MediumRough, double thermalAbsorptance = 0.9, double solarAbsorptance = 0.7, double visibleAbsorptance = 0.7)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -137,7 +137,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "thermalAbsorptance" provided
             if (thermalAbsorptance == null)
             {
-                this.ThermalAbsorptance = 0.9M;
+                this.ThermalAbsorptance = 0.9;
             }
             else
             {
@@ -146,7 +146,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "solarAbsorptance" provided
             if (solarAbsorptance == null)
             {
-                this.SolarAbsorptance = 0.7M;
+                this.SolarAbsorptance = 0.7;
             }
             else
             {
@@ -155,7 +155,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "visibleAbsorptance" provided
             if (visibleAbsorptance == null)
             {
-                this.VisibleAbsorptance = 0.7M;
+                this.VisibleAbsorptance = 0.7;
             }
             else
             {
@@ -177,7 +177,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The thermal resistance (R-value) of the material layer [m2-K/W].</value>
         [DataMember(Name="r_value", EmitDefaultValue=false)]
         [JsonProperty("r_value")]
-        public decimal RValue { get; set; }
+        public double RValue { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
@@ -193,7 +193,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9.</value>
         [DataMember(Name="thermal_absorptance", EmitDefaultValue=false)]
         [JsonProperty("thermal_absorptance")]
-        public decimal ThermalAbsorptance { get; set; }
+        public double ThermalAbsorptance { get; set; }
 
         /// <summary>
         /// Fraction of incident solar radiation absorbed by the material. Default value is 0.7.
@@ -201,7 +201,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Fraction of incident solar radiation absorbed by the material. Default value is 0.7.</value>
         [DataMember(Name="solar_absorptance", EmitDefaultValue=false)]
         [JsonProperty("solar_absorptance")]
-        public decimal SolarAbsorptance { get; set; }
+        public double SolarAbsorptance { get; set; }
 
         /// <summary>
         /// Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7.
@@ -209,7 +209,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7.</value>
         [DataMember(Name="visible_absorptance", EmitDefaultValue=false)]
         [JsonProperty("visible_absorptance")]
-        public decimal VisibleAbsorptance { get; set; }
+        public double VisibleAbsorptance { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -353,8 +353,8 @@ namespace HoneybeeDotNet.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Name, length must be greater than 1.", new [] { "Name" });
             }
 
-            // RValue (decimal) minimum
-            if(this.RValue < (decimal)0.001)
+            // RValue (double) minimum
+            if(this.RValue < (double)0.001)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RValue, must be a value greater than or equal to 0.001.", new [] { "RValue" });
             }
@@ -366,32 +366,32 @@ namespace HoneybeeDotNet.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
-            // ThermalAbsorptance (decimal) maximum
-            if(this.ThermalAbsorptance > (decimal)0.99999)
+            // ThermalAbsorptance (double) maximum
+            if(this.ThermalAbsorptance > (double)0.99999)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ThermalAbsorptance, must be a value less than or equal to 0.99999.", new [] { "ThermalAbsorptance" });
             }
 
-            // SolarAbsorptance (decimal) maximum
-            if(this.SolarAbsorptance > (decimal)1)
+            // SolarAbsorptance (double) maximum
+            if(this.SolarAbsorptance > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SolarAbsorptance, must be a value less than or equal to 1.", new [] { "SolarAbsorptance" });
             }
 
-            // SolarAbsorptance (decimal) minimum
-            if(this.SolarAbsorptance < (decimal)0)
+            // SolarAbsorptance (double) minimum
+            if(this.SolarAbsorptance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SolarAbsorptance, must be a value greater than or equal to 0.", new [] { "SolarAbsorptance" });
             }
 
-            // VisibleAbsorptance (decimal) maximum
-            if(this.VisibleAbsorptance > (decimal)1)
+            // VisibleAbsorptance (double) maximum
+            if(this.VisibleAbsorptance > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VisibleAbsorptance, must be a value less than or equal to 1.", new [] { "VisibleAbsorptance" });
             }
 
-            // VisibleAbsorptance (decimal) minimum
-            if(this.VisibleAbsorptance < (decimal)0)
+            // VisibleAbsorptance (double) minimum
+            if(this.VisibleAbsorptance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VisibleAbsorptance, must be a value greater than or equal to 0.", new [] { "VisibleAbsorptance" });
             }

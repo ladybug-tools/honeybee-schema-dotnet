@@ -42,8 +42,8 @@ namespace HoneybeeDotNet.Model
         /// <param name="uFactor">Used to describe the value for window system U-Factor, or overall heat transfer coefficient in W/(m2-K). (required).</param>
         /// <param name="shgc">Unitless  quantity describing Solar Heat Gain Coefficient for normal incidence and vertical orientation. (required).</param>
         /// <param name="type">type (default to &quot;EnergyWindowMaterialSimpleGlazSys&quot;).</param>
-        /// <param name="vt">The fraction of visible light falling on the window that makes it through the glass at normal incidence. (default to 0.54M).</param>
-        public EnergyWindowMaterialSimpleGlazSys(string name, decimal uFactor, decimal shgc, string type = "EnergyWindowMaterialSimpleGlazSys", decimal vt = 0.54M)
+        /// <param name="vt">The fraction of visible light falling on the window that makes it through the glass at normal incidence. (default to 0.54).</param>
+        public EnergyWindowMaterialSimpleGlazSys(string name, double uFactor, double shgc, string type = "EnergyWindowMaterialSimpleGlazSys", double vt = 0.54)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -87,7 +87,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "vt" provided
             if (vt == null)
             {
-                this.Vt = 0.54M;
+                this.Vt = 0.54;
             }
             else
             {
@@ -109,7 +109,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Used to describe the value for window system U-Factor, or overall heat transfer coefficient in W/(m2-K).</value>
         [DataMember(Name="u_factor", EmitDefaultValue=false)]
         [JsonProperty("u_factor")]
-        public decimal UFactor { get; set; }
+        public double UFactor { get; set; }
 
         /// <summary>
         /// Unitless  quantity describing Solar Heat Gain Coefficient for normal incidence and vertical orientation.
@@ -117,7 +117,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Unitless  quantity describing Solar Heat Gain Coefficient for normal incidence and vertical orientation.</value>
         [DataMember(Name="shgc", EmitDefaultValue=false)]
         [JsonProperty("shgc")]
-        public decimal Shgc { get; set; }
+        public double Shgc { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
@@ -132,7 +132,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The fraction of visible light falling on the window that makes it through the glass at normal incidence.</value>
         [DataMember(Name="vt", EmitDefaultValue=false)]
         [JsonProperty("vt")]
-        public decimal Vt { get; set; }
+        public double Vt { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -260,8 +260,8 @@ namespace HoneybeeDotNet.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Name, length must be greater than 1.", new [] { "Name" });
             }
 
-            // UFactor (decimal) maximum
-            if(this.UFactor > (decimal)5.8)
+            // UFactor (double) maximum
+            if(this.UFactor > (double)5.8)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for UFactor, must be a value less than or equal to 5.8.", new [] { "UFactor" });
             }

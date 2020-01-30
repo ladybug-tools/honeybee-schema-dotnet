@@ -45,14 +45,14 @@ namespace HoneybeeDotNet.Model
         /// <param name="specificHeatRatio">The specific heat ratio for gas. (required).</param>
         /// <param name="molecularWeight">The molecular weight for gas in g/mol. (required).</param>
         /// <param name="type">type (default to &quot;EnergyWindowMaterialGasCustom&quot;).</param>
-        /// <param name="thickness">Thickness of the gas layer in meters. Default value is 0.0125. (default to 0.0125M).</param>
-        /// <param name="conductivityCoeffB">The B coefficient for gas conductivity in W/(m-K2). (default to 0M).</param>
-        /// <param name="conductivityCoeffC">The C coefficient for gas conductivity in W/(m-K3). (default to 0M).</param>
-        /// <param name="viscosityCoeffB">The B coefficient for gas viscosity in kg/(m-s-K). (default to 0M).</param>
-        /// <param name="viscosityCoeffC">The C coefficient for gas viscosity in kg/(m-s-K2). (default to 0M).</param>
-        /// <param name="specificHeatCoeffB">The B coefficient for gas specific heat in J/(kg-K2). (default to 0M).</param>
-        /// <param name="specificHeatCoeffC">The C coefficient for gas specific heat in J/(kg-K3). (default to 0M).</param>
-        public EnergyWindowMaterialGasCustom(string name, decimal conductivityCoeffA, decimal viscosityCoeffA, decimal specificHeatCoeffA, decimal specificHeatRatio, decimal molecularWeight, string type = "EnergyWindowMaterialGasCustom", decimal thickness = 0.0125M, decimal conductivityCoeffB = 0M, decimal conductivityCoeffC = 0M, decimal viscosityCoeffB = 0M, decimal viscosityCoeffC = 0M, decimal specificHeatCoeffB = 0M, decimal specificHeatCoeffC = 0M)
+        /// <param name="thickness">Thickness of the gas layer in meters. Default value is 0.0125. (default to 0.0125).</param>
+        /// <param name="conductivityCoeffB">The B coefficient for gas conductivity in W/(m-K2). (default to 0).</param>
+        /// <param name="conductivityCoeffC">The C coefficient for gas conductivity in W/(m-K3). (default to 0).</param>
+        /// <param name="viscosityCoeffB">The B coefficient for gas viscosity in kg/(m-s-K). (default to 0).</param>
+        /// <param name="viscosityCoeffC">The C coefficient for gas viscosity in kg/(m-s-K2). (default to 0).</param>
+        /// <param name="specificHeatCoeffB">The B coefficient for gas specific heat in J/(kg-K2). (default to 0).</param>
+        /// <param name="specificHeatCoeffC">The C coefficient for gas specific heat in J/(kg-K3). (default to 0).</param>
+        public EnergyWindowMaterialGasCustom(string name, double conductivityCoeffA, double viscosityCoeffA, double specificHeatCoeffA, double specificHeatRatio, double molecularWeight, string type = "EnergyWindowMaterialGasCustom", double thickness = 0.0125, double conductivityCoeffB = 0, double conductivityCoeffC = 0, double viscosityCoeffB = 0, double viscosityCoeffC = 0, double specificHeatCoeffB = 0, double specificHeatCoeffC = 0)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -126,7 +126,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "thickness" provided
             if (thickness == null)
             {
-                this.Thickness = 0.0125M;
+                this.Thickness = 0.0125;
             }
             else
             {
@@ -135,7 +135,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "conductivityCoeffB" provided
             if (conductivityCoeffB == null)
             {
-                this.ConductivityCoeffB = 0M;
+                this.ConductivityCoeffB = 0;
             }
             else
             {
@@ -144,7 +144,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "conductivityCoeffC" provided
             if (conductivityCoeffC == null)
             {
-                this.ConductivityCoeffC = 0M;
+                this.ConductivityCoeffC = 0;
             }
             else
             {
@@ -153,7 +153,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "viscosityCoeffB" provided
             if (viscosityCoeffB == null)
             {
-                this.ViscosityCoeffB = 0M;
+                this.ViscosityCoeffB = 0;
             }
             else
             {
@@ -162,7 +162,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "viscosityCoeffC" provided
             if (viscosityCoeffC == null)
             {
-                this.ViscosityCoeffC = 0M;
+                this.ViscosityCoeffC = 0;
             }
             else
             {
@@ -171,7 +171,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "specificHeatCoeffB" provided
             if (specificHeatCoeffB == null)
             {
-                this.SpecificHeatCoeffB = 0M;
+                this.SpecificHeatCoeffB = 0;
             }
             else
             {
@@ -180,7 +180,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "specificHeatCoeffC" provided
             if (specificHeatCoeffC == null)
             {
-                this.SpecificHeatCoeffC = 0M;
+                this.SpecificHeatCoeffC = 0;
             }
             else
             {
@@ -202,7 +202,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The A coefficient for gas conductivity in W/(m-K).</value>
         [DataMember(Name="conductivity_coeff_a", EmitDefaultValue=false)]
         [JsonProperty("conductivity_coeff_a")]
-        public decimal ConductivityCoeffA { get; set; }
+        public double ConductivityCoeffA { get; set; }
 
         /// <summary>
         /// The A coefficient for gas viscosity in kg/(m-s).
@@ -210,7 +210,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The A coefficient for gas viscosity in kg/(m-s).</value>
         [DataMember(Name="viscosity_coeff_a", EmitDefaultValue=false)]
         [JsonProperty("viscosity_coeff_a")]
-        public decimal ViscosityCoeffA { get; set; }
+        public double ViscosityCoeffA { get; set; }
 
         /// <summary>
         /// The A coefficient for gas specific heat in J/(kg-K).
@@ -218,7 +218,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The A coefficient for gas specific heat in J/(kg-K).</value>
         [DataMember(Name="specific_heat_coeff_a", EmitDefaultValue=false)]
         [JsonProperty("specific_heat_coeff_a")]
-        public decimal SpecificHeatCoeffA { get; set; }
+        public double SpecificHeatCoeffA { get; set; }
 
         /// <summary>
         /// The specific heat ratio for gas.
@@ -226,7 +226,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The specific heat ratio for gas.</value>
         [DataMember(Name="specific_heat_ratio", EmitDefaultValue=false)]
         [JsonProperty("specific_heat_ratio")]
-        public decimal SpecificHeatRatio { get; set; }
+        public double SpecificHeatRatio { get; set; }
 
         /// <summary>
         /// The molecular weight for gas in g/mol.
@@ -234,7 +234,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The molecular weight for gas in g/mol.</value>
         [DataMember(Name="molecular_weight", EmitDefaultValue=false)]
         [JsonProperty("molecular_weight")]
-        public decimal MolecularWeight { get; set; }
+        public double MolecularWeight { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
@@ -249,7 +249,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Thickness of the gas layer in meters. Default value is 0.0125.</value>
         [DataMember(Name="thickness", EmitDefaultValue=false)]
         [JsonProperty("thickness")]
-        public decimal Thickness { get; set; }
+        public double Thickness { get; set; }
 
         /// <summary>
         /// The B coefficient for gas conductivity in W/(m-K2).
@@ -257,7 +257,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The B coefficient for gas conductivity in W/(m-K2).</value>
         [DataMember(Name="conductivity_coeff_b", EmitDefaultValue=false)]
         [JsonProperty("conductivity_coeff_b")]
-        public decimal ConductivityCoeffB { get; set; }
+        public double ConductivityCoeffB { get; set; }
 
         /// <summary>
         /// The C coefficient for gas conductivity in W/(m-K3).
@@ -265,7 +265,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The C coefficient for gas conductivity in W/(m-K3).</value>
         [DataMember(Name="conductivity_coeff_c", EmitDefaultValue=false)]
         [JsonProperty("conductivity_coeff_c")]
-        public decimal ConductivityCoeffC { get; set; }
+        public double ConductivityCoeffC { get; set; }
 
         /// <summary>
         /// The B coefficient for gas viscosity in kg/(m-s-K).
@@ -273,7 +273,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The B coefficient for gas viscosity in kg/(m-s-K).</value>
         [DataMember(Name="viscosity_coeff_b", EmitDefaultValue=false)]
         [JsonProperty("viscosity_coeff_b")]
-        public decimal ViscosityCoeffB { get; set; }
+        public double ViscosityCoeffB { get; set; }
 
         /// <summary>
         /// The C coefficient for gas viscosity in kg/(m-s-K2).
@@ -281,7 +281,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The C coefficient for gas viscosity in kg/(m-s-K2).</value>
         [DataMember(Name="viscosity_coeff_c", EmitDefaultValue=false)]
         [JsonProperty("viscosity_coeff_c")]
-        public decimal ViscosityCoeffC { get; set; }
+        public double ViscosityCoeffC { get; set; }
 
         /// <summary>
         /// The B coefficient for gas specific heat in J/(kg-K2).
@@ -289,7 +289,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The B coefficient for gas specific heat in J/(kg-K2).</value>
         [DataMember(Name="specific_heat_coeff_b", EmitDefaultValue=false)]
         [JsonProperty("specific_heat_coeff_b")]
-        public decimal SpecificHeatCoeffB { get; set; }
+        public double SpecificHeatCoeffB { get; set; }
 
         /// <summary>
         /// The C coefficient for gas specific heat in J/(kg-K3).
@@ -297,7 +297,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The C coefficient for gas specific heat in J/(kg-K3).</value>
         [DataMember(Name="specific_heat_coeff_c", EmitDefaultValue=false)]
         [JsonProperty("specific_heat_coeff_c")]
-        public decimal SpecificHeatCoeffC { get; set; }
+        public double SpecificHeatCoeffC { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -497,14 +497,14 @@ namespace HoneybeeDotNet.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Name, length must be greater than 1.", new [] { "Name" });
             }
 
-            // MolecularWeight (decimal) maximum
-            if(this.MolecularWeight > (decimal)200)
+            // MolecularWeight (double) maximum
+            if(this.MolecularWeight > (double)200)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for MolecularWeight, must be a value less than or equal to 200.", new [] { "MolecularWeight" });
             }
 
-            // MolecularWeight (decimal) minimum
-            if(this.MolecularWeight < (decimal)20)
+            // MolecularWeight (double) minimum
+            if(this.MolecularWeight < (double)20)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for MolecularWeight, must be a value greater than or equal to 20.", new [] { "MolecularWeight" });
             }

@@ -43,9 +43,9 @@ namespace HoneybeeDotNet.Model
         /// <param name="occupancySchedule">Name of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile. (required).</param>
         /// <param name="activitySchedule">Name of a schedule for the activity of the occupants over the course of the year. The type of this schedule should be Power and the values of the schedule equal to the number of Watts given off by an individual person in the room. (required).</param>
         /// <param name="type">type (default to &quot;PeopleAbridged&quot;).</param>
-        /// <param name="radiantFraction">The radiant fraction of sensible heat released by people. The defaultvalue is 0.30. (default to 0.3M).</param>
+        /// <param name="radiantFraction">The radiant fraction of sensible heat released by people. The defaultvalue is 0.30. (default to 0.3).</param>
         /// <param name="latentFraction">Number for the latent fraction of heat gain due to people or simply the word \&quot;autocalculate\&quot;..</param>
-        public PeopleAbridged(string name, decimal peoplePerArea, string occupancySchedule, string activitySchedule, string type = "PeopleAbridged", decimal radiantFraction = 0.3M, AnyOf<decimal,string> latentFraction = default)
+        public PeopleAbridged(string name, double peoplePerArea, string occupancySchedule, string activitySchedule, string type = "PeopleAbridged", double radiantFraction = 0.3, AnyOf<double,string> latentFraction = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -99,7 +99,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "radiantFraction" provided
             if (radiantFraction == null)
             {
-                this.RadiantFraction = 0.3M;
+                this.RadiantFraction = 0.3;
             }
             else
             {
@@ -122,7 +122,7 @@ namespace HoneybeeDotNet.Model
         /// <value>People per floor area expressed as [people/m2]</value>
         [DataMember(Name="people_per_area", EmitDefaultValue=false)]
         [JsonProperty("people_per_area")]
-        public decimal PeoplePerArea { get; set; }
+        public double PeoplePerArea { get; set; }
 
         /// <summary>
         /// Name of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile.
@@ -153,7 +153,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The radiant fraction of sensible heat released by people. The defaultvalue is 0.30.</value>
         [DataMember(Name="radiant_fraction", EmitDefaultValue=false)]
         [JsonProperty("radiant_fraction")]
-        public decimal RadiantFraction { get; set; }
+        public double RadiantFraction { get; set; }
 
         /// <summary>
         /// Number for the latent fraction of heat gain due to people or simply the word \&quot;autocalculate\&quot;.
@@ -161,7 +161,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Number for the latent fraction of heat gain due to people or simply the word \&quot;autocalculate\&quot;.</value>
         [DataMember(Name="latent_fraction", EmitDefaultValue=false)]
         [JsonProperty("latent_fraction")]
-        public AnyOf<decimal,string> LatentFraction { get; set; }
+        public AnyOf<double,string> LatentFraction { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -305,8 +305,8 @@ namespace HoneybeeDotNet.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Name, length must be greater than 1.", new [] { "Name" });
             }
 
-            // PeoplePerArea (decimal) minimum
-            if(this.PeoplePerArea < (decimal)0)
+            // PeoplePerArea (double) minimum
+            if(this.PeoplePerArea < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PeoplePerArea, must be a value greater than or equal to 0.", new [] { "PeoplePerArea" });
             }
@@ -342,14 +342,14 @@ namespace HoneybeeDotNet.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
-            // RadiantFraction (decimal) maximum
-            if(this.RadiantFraction > (decimal)1)
+            // RadiantFraction (double) maximum
+            if(this.RadiantFraction > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RadiantFraction, must be a value less than or equal to 1.", new [] { "RadiantFraction" });
             }
 
-            // RadiantFraction (decimal) minimum
-            if(this.RadiantFraction < (decimal)0)
+            // RadiantFraction (double) minimum
+            if(this.RadiantFraction < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RadiantFraction, must be a value greater than or equal to 0.", new [] { "RadiantFraction" });
             }

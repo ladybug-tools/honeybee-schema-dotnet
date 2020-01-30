@@ -42,10 +42,10 @@ namespace HoneybeeDotNet.Model
         /// <param name="flowPerExteriorArea">Number for the infiltration per exterior surface area in m3/s-m2. (required).</param>
         /// <param name="schedule">Name of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile. (required).</param>
         /// <param name="type">type (default to &quot;InfiltrationAbridged&quot;).</param>
-        /// <param name="constantCoefficient">constantCoefficient (default to 1M).</param>
-        /// <param name="temperatureCoefficient">temperatureCoefficient (default to 0M).</param>
-        /// <param name="velocityCoefficient">velocityCoefficient (default to 0M).</param>
-        public InfiltrationAbridged(string name, decimal flowPerExteriorArea, string schedule, string type = "InfiltrationAbridged", decimal constantCoefficient = 1M, decimal temperatureCoefficient = 0M, decimal velocityCoefficient = 0M)
+        /// <param name="constantCoefficient">constantCoefficient (default to 1).</param>
+        /// <param name="temperatureCoefficient">temperatureCoefficient (default to 0).</param>
+        /// <param name="velocityCoefficient">velocityCoefficient (default to 0).</param>
+        public InfiltrationAbridged(string name, double flowPerExteriorArea, string schedule, string type = "InfiltrationAbridged", double constantCoefficient = 1, double temperatureCoefficient = 0, double velocityCoefficient = 0)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -89,7 +89,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "constantCoefficient" provided
             if (constantCoefficient == null)
             {
-                this.ConstantCoefficient = 1M;
+                this.ConstantCoefficient = 1;
             }
             else
             {
@@ -98,7 +98,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "temperatureCoefficient" provided
             if (temperatureCoefficient == null)
             {
-                this.TemperatureCoefficient = 0M;
+                this.TemperatureCoefficient = 0;
             }
             else
             {
@@ -107,7 +107,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "velocityCoefficient" provided
             if (velocityCoefficient == null)
             {
-                this.VelocityCoefficient = 0M;
+                this.VelocityCoefficient = 0;
             }
             else
             {
@@ -129,7 +129,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Number for the infiltration per exterior surface area in m3/s-m2.</value>
         [DataMember(Name="flow_per_exterior_area", EmitDefaultValue=false)]
         [JsonProperty("flow_per_exterior_area")]
-        public decimal FlowPerExteriorArea { get; set; }
+        public double FlowPerExteriorArea { get; set; }
 
         /// <summary>
         /// Name of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.
@@ -151,21 +151,21 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         [DataMember(Name="constant_coefficient", EmitDefaultValue=false)]
         [JsonProperty("constant_coefficient")]
-        public decimal ConstantCoefficient { get; set; }
+        public double ConstantCoefficient { get; set; }
 
         /// <summary>
         /// Gets or Sets TemperatureCoefficient
         /// </summary>
         [DataMember(Name="temperature_coefficient", EmitDefaultValue=false)]
         [JsonProperty("temperature_coefficient")]
-        public decimal TemperatureCoefficient { get; set; }
+        public double TemperatureCoefficient { get; set; }
 
         /// <summary>
         /// Gets or Sets VelocityCoefficient
         /// </summary>
         [DataMember(Name="velocity_coefficient", EmitDefaultValue=false)]
         [JsonProperty("velocity_coefficient")]
-        public decimal VelocityCoefficient { get; set; }
+        public double VelocityCoefficient { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -309,8 +309,8 @@ namespace HoneybeeDotNet.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Name, length must be greater than 1.", new [] { "Name" });
             }
 
-            // FlowPerExteriorArea (decimal) minimum
-            if(this.FlowPerExteriorArea < (decimal)0)
+            // FlowPerExteriorArea (double) minimum
+            if(this.FlowPerExteriorArea < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for FlowPerExteriorArea, must be a value greater than or equal to 0.", new [] { "FlowPerExteriorArea" });
             }
@@ -334,20 +334,20 @@ namespace HoneybeeDotNet.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
-            // ConstantCoefficient (decimal) minimum
-            if(this.ConstantCoefficient < (decimal)0)
+            // ConstantCoefficient (double) minimum
+            if(this.ConstantCoefficient < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ConstantCoefficient, must be a value greater than or equal to 0.", new [] { "ConstantCoefficient" });
             }
 
-            // TemperatureCoefficient (decimal) minimum
-            if(this.TemperatureCoefficient < (decimal)0)
+            // TemperatureCoefficient (double) minimum
+            if(this.TemperatureCoefficient < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TemperatureCoefficient, must be a value greater than or equal to 0.", new [] { "TemperatureCoefficient" });
             }
 
-            // VelocityCoefficient (decimal) minimum
-            if(this.VelocityCoefficient < (decimal)0)
+            // VelocityCoefficient (double) minimum
+            if(this.VelocityCoefficient < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VelocityCoefficient, must be a value greater than or equal to 0.", new [] { "VelocityCoefficient" });
             }

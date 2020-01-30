@@ -59,16 +59,10 @@ namespace HoneybeeDotNet.Model
 
         public static implicit operator string(AnyOf b) => b;
 
-        public static implicit operator AnyOf(int d) => new AnyOf(d);
-        public static implicit operator AnyOf(string d) => new AnyOf(d);
-        public static implicit operator AnyOf(double d) => new AnyOf(d);
-        public static implicit operator AnyOf(decimal d) => new AnyOf(d);
+        public static implicit operator AnyOf(int d) => new AnyOf(d, typeof(int));
+        public static implicit operator AnyOf(string d) => new AnyOf(d, typeof(string));
+        public static implicit operator AnyOf(double d) => new AnyOf(d, typeof(double));
 
-
-        //public override bool Equals(object obj)
-        //{
-        //    return obj == this.Obj;
-        //}
 
     }
     public class AnyOf<T> : AnyOf
@@ -80,9 +74,6 @@ namespace HoneybeeDotNet.Model
         }
 
         public static implicit operator string(AnyOf<T> b) => b;
-        public static implicit operator AnyOf<T>(decimal b) => b;
-        public static implicit operator AnyOf<T>(double b) => new AnyOf<T>((decimal)b);
-        public static implicit operator AnyOf<T>(int b) => b;
 
     }
 
@@ -96,9 +87,6 @@ namespace HoneybeeDotNet.Model
         }
 
         public static implicit operator string(AnyOf<T, K> b) => b.ToString();
-        //public static implicit operator T(AnyOf<T, K> b) => (T)b.Obj;
-        //public static implicit operator K(AnyOf<T, K> b) => (K)b.Obj;
-
 
         public static implicit operator AnyOf<T, K>(T b) => new AnyOf<T, K>(b);
         public static implicit operator AnyOf<T, K>(K b) => new AnyOf<T, K>(b);

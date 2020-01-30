@@ -81,7 +81,7 @@ Contact: info@ladybug.tools
   <Import Project="$(MsBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
       <ProjectReference Include="..\HoneybeeDotNet\HoneybeeDotNet.csproj">
-          <Project>{B250F6D2-8739-42F8-BAC8-F753886F1F4A}</Project>
+          <Project>{2D9490D8-0848-4451-B3A9-9465C55F806F}</Project>
           <Name>HoneybeeDotNet</Name>
       </ProjectReference>
   </ItemGroup>
