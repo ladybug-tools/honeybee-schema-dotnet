@@ -20,6 +20,7 @@ using HoneybeeDotNet.Model;
 using HoneybeeDotNet.Client;
 using System.Reflection;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace HoneybeeDotNet.Test
 {
@@ -33,16 +34,20 @@ namespace HoneybeeDotNet.Test
     public class ElectricEquipmentAbridgedTests
     {
         // TODO uncomment below to declare an instance variable for ElectricEquipmentAbridged
-        //private ElectricEquipmentAbridged instance;
-
+        private ElectricEquipmentAbridged instance;
+        private string json = @"{
+    ""type"": ""ElectricalEquipmentAbridged"",
+    ""name"": ""Electrical Equipment Definition"",
+    ""watts_per_area"": 12.5,
+    ""schedule"": ""Schedule-Equipment""
+}";
         /// <summary>
         /// Setup before each test
         /// </summary>
         [SetUp]
         public void Init()
         {
-            // TODO uncomment below to create an instance of ElectricEquipmentAbridged
-            //instance = new ElectricEquipmentAbridged();
+            this.instance = ElectricEquipmentAbridged.FromJson(json);
         }
 
         /// <summary>
@@ -61,7 +66,7 @@ namespace HoneybeeDotNet.Test
         public void ElectricEquipmentAbridgedInstanceTest()
         {
             // TODO uncomment below to test "IsInstanceOf" ElectricEquipmentAbridged
-            //Assert.IsInstanceOf(typeof(ElectricEquipmentAbridged), instance);
+            Assert.IsInstanceOf(typeof(ElectricEquipmentAbridged), instance);
         }
 
 
@@ -79,7 +84,7 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void WattsPerAreaTest()
         {
-            // TODO unit test for the property 'WattsPerArea'
+            Assert.AreEqual(this.instance.WattsPerArea, 12.5);
         }
         /// <summary>
         /// Test the property 'Schedule'
@@ -87,7 +92,7 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void ScheduleTest()
         {
-            // TODO unit test for the property 'Schedule'
+            Assert.AreEqual(this.instance.Schedule, "Schedule-Equipment");
         }
         /// <summary>
         /// Test the property 'RadiantFraction'
@@ -95,7 +100,7 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void RadiantFractionTest()
         {
-            // TODO unit test for the property 'RadiantFraction'
+            Assert.AreEqual(this.instance.RadiantFraction, 0);
         }
         /// <summary>
         /// Test the property 'LatentFraction'
@@ -103,7 +108,7 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void LatentFractionTest()
         {
-            // TODO unit test for the property 'LatentFraction'
+            Assert.AreEqual(this.instance.LatentFraction, 0);
         }
         /// <summary>
         /// Test the property 'LostFraction'
@@ -112,6 +117,7 @@ namespace HoneybeeDotNet.Test
         public void LostFractionTest()
         {
             // TODO unit test for the property 'LostFraction'
+            Assert.AreEqual(this.instance.LostFraction, 0);
         }
         /// <summary>
         /// Test the property 'Type'
@@ -121,6 +127,7 @@ namespace HoneybeeDotNet.Test
         {
             // TODO unit test for the property 'Type'
         }
+
 
     }
 

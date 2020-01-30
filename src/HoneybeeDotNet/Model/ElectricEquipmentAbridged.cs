@@ -45,7 +45,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="latentFraction">Number for the amount of latent heat given off by electricequipment. Default value is 0..</param>
         /// <param name="lostFraction">Number for the amount of “lost” heat being given off by equipment. The default value is 0. (default to 0).</param>
         /// <param name="type">type (default to &quot;ElectricEquipmentAbridged&quot;).</param>
-        public ElectricEquipmentAbridged(string name, double wattsPerArea, string schedule, double radiantFraction = 0, AnyOf<double,string> latentFraction = default, double lostFraction = 0, string type = "ElectricEquipmentAbridged")
+        public ElectricEquipmentAbridged(string name, double wattsPerArea, string schedule, double radiantFraction = 0, double latentFraction = 0, double lostFraction = 0, string type = "ElectricEquipmentAbridged")
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -145,7 +145,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Number for the amount of latent heat given off by electricequipment. Default value is 0.</value>
         [DataMember(Name="latent_fraction", EmitDefaultValue=false)]
         [JsonProperty("latent_fraction")]
-        public AnyOf<double,string> LatentFraction { get; set; }
+        public double LatentFraction { get; set; }
 
         /// <summary>
         /// Number for the amount of “lost” heat being given off by equipment. The default value is 0.
