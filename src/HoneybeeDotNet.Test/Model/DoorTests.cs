@@ -42,11 +42,11 @@ namespace HoneybeeDotNet.Test
         {
             // TODO uncomment below to create an instance of Door
             var face = new Face3D(
-                new List<List<decimal>>()
+                new List<List<double>>()
                 {
-                    new List<decimal>(){0,0,0 },
-                    new List<decimal>(){0.5M,0.5M,0.5M },
-                    new List<decimal>(){1,0,0 }
+                    new List<double>(){0,0,0 },
+                    new List<double>(){0.5,0.5,0.5 },
+                    new List<double>(){1,0,0 }
                 });
             instance = new Door( 
                 "mainEntrance",
@@ -113,7 +113,7 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void BoundaryConditionTest()
         {
-            this.instance.BoundaryCondition = new Outdoors(sunExposure: false, viewFactor: 0.5M);
+            this.instance.BoundaryCondition = new Outdoors(sunExposure: false, viewFactor: 0.5);
             var bcObj = this.instance.BoundaryCondition.Obj as Outdoors;
             Assert.IsTrue(bcObj.SunExposure == false);
 
@@ -155,13 +155,13 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void ToJsonViewTypeTest()
         {
-            this.instance.BoundaryCondition = new Outdoors(sunExposure: false, viewFactor: 0.5M);
+            this.instance.BoundaryCondition = new Outdoors(sunExposure: false, viewFactor: 0.5);
             var j = this.instance.ToJson();
 
             var obj = Door.FromJson(j);
 
             var bc = obj.BoundaryCondition.Obj as Outdoors;
-            Assert.IsTrue((decimal)bc.ViewFactor.Obj == 0.5M);
+            Assert.IsTrue((double)bc.ViewFactor.Obj == 0.5);
 
         }
     }

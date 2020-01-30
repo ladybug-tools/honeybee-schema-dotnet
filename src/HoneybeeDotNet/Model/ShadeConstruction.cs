@@ -40,10 +40,10 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <param name="name">Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters. (required).</param>
         /// <param name="type">type (default to &quot;ShadeConstruction&quot;).</param>
-        /// <param name="solarReflectance"> A number for the solar reflectance of the construction. (default to 0.2M).</param>
-        /// <param name="visibleReflectance"> A number for the visible reflectance of the construction. (default to 0.2M).</param>
+        /// <param name="solarReflectance"> A number for the solar reflectance of the construction. (default to 0.2).</param>
+        /// <param name="visibleReflectance"> A number for the visible reflectance of the construction. (default to 0.2).</param>
         /// <param name="isSpecular">Boolean to note whether the reflection off the shade is diffuse (False) or specular (True). Set to True if the construction is representing a glass facade or a mirror material. (default to false).</param>
-        public ShadeConstruction(string name, string type = "ShadeConstruction", decimal solarReflectance = 0.2M, decimal visibleReflectance = 0.2M, bool isSpecular = false)
+        public ShadeConstruction(string name, string type = "ShadeConstruction", double solarReflectance = 0.2, double visibleReflectance = 0.2, bool isSpecular = false)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -67,7 +67,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "solarReflectance" provided
             if (solarReflectance == null)
             {
-                this.SolarReflectance = 0.2M;
+                this.SolarReflectance = 0.2;
             }
             else
             {
@@ -76,7 +76,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "visibleReflectance" provided
             if (visibleReflectance == null)
             {
-                this.VisibleReflectance = 0.2M;
+                this.VisibleReflectance = 0.2;
             }
             else
             {
@@ -114,7 +114,7 @@ namespace HoneybeeDotNet.Model
         /// <value> A number for the solar reflectance of the construction.</value>
         [DataMember(Name="solar_reflectance", EmitDefaultValue=false)]
         [JsonProperty("solar_reflectance")]
-        public decimal SolarReflectance { get; set; }
+        public double SolarReflectance { get; set; }
 
         /// <summary>
         ///  A number for the visible reflectance of the construction.
@@ -122,7 +122,7 @@ namespace HoneybeeDotNet.Model
         /// <value> A number for the visible reflectance of the construction.</value>
         [DataMember(Name="visible_reflectance", EmitDefaultValue=false)]
         [JsonProperty("visible_reflectance")]
-        public decimal VisibleReflectance { get; set; }
+        public double VisibleReflectance { get; set; }
 
         /// <summary>
         /// Boolean to note whether the reflection off the shade is diffuse (False) or specular (True). Set to True if the construction is representing a glass facade or a mirror material.
@@ -265,26 +265,26 @@ namespace HoneybeeDotNet.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
-            // SolarReflectance (decimal) maximum
-            if(this.SolarReflectance > (decimal)1)
+            // SolarReflectance (double) maximum
+            if(this.SolarReflectance > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SolarReflectance, must be a value less than or equal to 1.", new [] { "SolarReflectance" });
             }
 
-            // SolarReflectance (decimal) minimum
-            if(this.SolarReflectance < (decimal)0)
+            // SolarReflectance (double) minimum
+            if(this.SolarReflectance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SolarReflectance, must be a value greater than or equal to 0.", new [] { "SolarReflectance" });
             }
 
-            // VisibleReflectance (decimal) maximum
-            if(this.VisibleReflectance > (decimal)1)
+            // VisibleReflectance (double) maximum
+            if(this.VisibleReflectance > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VisibleReflectance, must be a value less than or equal to 1.", new [] { "VisibleReflectance" });
             }
 
-            // VisibleReflectance (decimal) minimum
-            if(this.VisibleReflectance < (decimal)0)
+            // VisibleReflectance (double) minimum
+            if(this.VisibleReflectance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VisibleReflectance, must be a value greater than or equal to 0.", new [] { "VisibleReflectance" });
             }

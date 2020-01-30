@@ -75,15 +75,15 @@ namespace HoneybeeDotNet.Model
         /// <param name="type">type (default to &quot;IdealAirSystemAbridged&quot;).</param>
         /// <param name="economizerType">Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone. (default to EconomizerTypeEnum.DifferentialDryBulb).</param>
         /// <param name="demandControlVentilation">Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the zone. (default to false).</param>
-        /// <param name="sensibleHeatRecovery">A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. (default to 0M).</param>
-        /// <param name="latentHeatRecovery">A number between 0 and 1 for the effectiveness of latent heat recovery within the system. (default to 0M).</param>
-        /// <param name="heatingAirTemperature">A number for the maximum heating supply air temperature [C]. (default to 50M).</param>
-        /// <param name="coolingAirTemperature">A number for the minimum cooling supply air temperature [C]. (default to 13M).</param>
+        /// <param name="sensibleHeatRecovery">A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. (default to 0).</param>
+        /// <param name="latentHeatRecovery">A number between 0 and 1 for the effectiveness of latent heat recovery within the system. (default to 0).</param>
+        /// <param name="heatingAirTemperature">A number for the maximum heating supply air temperature [C]. (default to 50).</param>
+        /// <param name="coolingAirTemperature">A number for the minimum cooling supply air temperature [C]. (default to 13).</param>
         /// <param name="heatingLimit">A number for the maximum heating capacity in Watts. This can also be the text \&quot;autosize\&quot; to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be the text \&quot;NoLimit\&quot; to indicate no upper limit to the heating capacity. Note that setting this to None will trigger the default (\&quot;autosize\&quot;)..</param>
         /// <param name="coolingLimit">A number for the maximum cooling capacity in Watts. This can also be the text \&quot;autosize\&quot; to indicate that the capacity should be determined during the sizing calculation. This can also be the text \&quot;NoLimit\&quot; to indicate no upper limit to the cooling capacity. Note that setting this to None will trigger the default (\&quot;autosize\&quot;)..</param>
         /// <param name="heatingAvailability">An optional name of a schedule to set the availability of heating over the course of the simulation..</param>
         /// <param name="coolingAvailability">An optional name of a schedule to set the availability of cooling over the course of the simulation..</param>
-        public IdealAirSystemAbridged(string name, string type = "IdealAirSystemAbridged", EconomizerTypeEnum? economizerType = EconomizerTypeEnum.DifferentialDryBulb, bool demandControlVentilation = false, decimal sensibleHeatRecovery = 0M, decimal latentHeatRecovery = 0M, decimal heatingAirTemperature = 50M, decimal coolingAirTemperature = 13M, AnyOf<decimal,string> heatingLimit = default, AnyOf<decimal,string> coolingLimit = default, string heatingAvailability = default, string coolingAvailability = default)
+        public IdealAirSystemAbridged(string name, string type = "IdealAirSystemAbridged", EconomizerTypeEnum? economizerType = EconomizerTypeEnum.DifferentialDryBulb, bool demandControlVentilation = false, double sensibleHeatRecovery = 0, double latentHeatRecovery = 0, double heatingAirTemperature = 50, double coolingAirTemperature = 13, AnyOf<double,string> heatingLimit = default, AnyOf<double,string> coolingLimit = default, string heatingAvailability = default, string coolingAvailability = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -125,7 +125,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "sensibleHeatRecovery" provided
             if (sensibleHeatRecovery == null)
             {
-                this.SensibleHeatRecovery = 0M;
+                this.SensibleHeatRecovery = 0;
             }
             else
             {
@@ -134,7 +134,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "latentHeatRecovery" provided
             if (latentHeatRecovery == null)
             {
-                this.LatentHeatRecovery = 0M;
+                this.LatentHeatRecovery = 0;
             }
             else
             {
@@ -143,7 +143,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "heatingAirTemperature" provided
             if (heatingAirTemperature == null)
             {
-                this.HeatingAirTemperature = 50M;
+                this.HeatingAirTemperature = 50;
             }
             else
             {
@@ -152,7 +152,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "coolingAirTemperature" provided
             if (coolingAirTemperature == null)
             {
-                this.CoolingAirTemperature = 13M;
+                this.CoolingAirTemperature = 13;
             }
             else
             {
@@ -194,7 +194,7 @@ namespace HoneybeeDotNet.Model
         /// <value>A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.</value>
         [DataMember(Name="sensible_heat_recovery", EmitDefaultValue=false)]
         [JsonProperty("sensible_heat_recovery")]
-        public decimal SensibleHeatRecovery { get; set; }
+        public double SensibleHeatRecovery { get; set; }
 
         /// <summary>
         /// A number between 0 and 1 for the effectiveness of latent heat recovery within the system.
@@ -202,7 +202,7 @@ namespace HoneybeeDotNet.Model
         /// <value>A number between 0 and 1 for the effectiveness of latent heat recovery within the system.</value>
         [DataMember(Name="latent_heat_recovery", EmitDefaultValue=false)]
         [JsonProperty("latent_heat_recovery")]
-        public decimal LatentHeatRecovery { get; set; }
+        public double LatentHeatRecovery { get; set; }
 
         /// <summary>
         /// A number for the maximum heating supply air temperature [C].
@@ -210,7 +210,7 @@ namespace HoneybeeDotNet.Model
         /// <value>A number for the maximum heating supply air temperature [C].</value>
         [DataMember(Name="heating_air_temperature", EmitDefaultValue=false)]
         [JsonProperty("heating_air_temperature")]
-        public decimal HeatingAirTemperature { get; set; }
+        public double HeatingAirTemperature { get; set; }
 
         /// <summary>
         /// A number for the minimum cooling supply air temperature [C].
@@ -218,7 +218,7 @@ namespace HoneybeeDotNet.Model
         /// <value>A number for the minimum cooling supply air temperature [C].</value>
         [DataMember(Name="cooling_air_temperature", EmitDefaultValue=false)]
         [JsonProperty("cooling_air_temperature")]
-        public decimal CoolingAirTemperature { get; set; }
+        public double CoolingAirTemperature { get; set; }
 
         /// <summary>
         /// A number for the maximum heating capacity in Watts. This can also be the text \&quot;autosize\&quot; to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be the text \&quot;NoLimit\&quot; to indicate no upper limit to the heating capacity. Note that setting this to None will trigger the default (\&quot;autosize\&quot;).
@@ -226,7 +226,7 @@ namespace HoneybeeDotNet.Model
         /// <value>A number for the maximum heating capacity in Watts. This can also be the text \&quot;autosize\&quot; to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be the text \&quot;NoLimit\&quot; to indicate no upper limit to the heating capacity. Note that setting this to None will trigger the default (\&quot;autosize\&quot;).</value>
         [DataMember(Name="heating_limit", EmitDefaultValue=false)]
         [JsonProperty("heating_limit")]
-        public AnyOf<decimal,string> HeatingLimit { get; set; }
+        public AnyOf<double,string> HeatingLimit { get; set; }
 
         /// <summary>
         /// A number for the maximum cooling capacity in Watts. This can also be the text \&quot;autosize\&quot; to indicate that the capacity should be determined during the sizing calculation. This can also be the text \&quot;NoLimit\&quot; to indicate no upper limit to the cooling capacity. Note that setting this to None will trigger the default (\&quot;autosize\&quot;).
@@ -234,7 +234,7 @@ namespace HoneybeeDotNet.Model
         /// <value>A number for the maximum cooling capacity in Watts. This can also be the text \&quot;autosize\&quot; to indicate that the capacity should be determined during the sizing calculation. This can also be the text \&quot;NoLimit\&quot; to indicate no upper limit to the cooling capacity. Note that setting this to None will trigger the default (\&quot;autosize\&quot;).</value>
         [DataMember(Name="cooling_limit", EmitDefaultValue=false)]
         [JsonProperty("cooling_limit")]
-        public AnyOf<decimal,string> CoolingLimit { get; set; }
+        public AnyOf<double,string> CoolingLimit { get; set; }
 
         /// <summary>
         /// An optional name of a schedule to set the availability of heating over the course of the simulation.
@@ -441,26 +441,26 @@ namespace HoneybeeDotNet.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
-            // SensibleHeatRecovery (decimal) maximum
-            if(this.SensibleHeatRecovery > (decimal)1)
+            // SensibleHeatRecovery (double) maximum
+            if(this.SensibleHeatRecovery > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SensibleHeatRecovery, must be a value less than or equal to 1.", new [] { "SensibleHeatRecovery" });
             }
 
-            // SensibleHeatRecovery (decimal) minimum
-            if(this.SensibleHeatRecovery < (decimal)0)
+            // SensibleHeatRecovery (double) minimum
+            if(this.SensibleHeatRecovery < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SensibleHeatRecovery, must be a value greater than or equal to 0.", new [] { "SensibleHeatRecovery" });
             }
 
-            // LatentHeatRecovery (decimal) maximum
-            if(this.LatentHeatRecovery > (decimal)1)
+            // LatentHeatRecovery (double) maximum
+            if(this.LatentHeatRecovery > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LatentHeatRecovery, must be a value less than or equal to 1.", new [] { "LatentHeatRecovery" });
             }
 
-            // LatentHeatRecovery (decimal) minimum
-            if(this.LatentHeatRecovery < (decimal)0)
+            // LatentHeatRecovery (double) minimum
+            if(this.LatentHeatRecovery < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LatentHeatRecovery, must be a value greater than or equal to 0.", new [] { "LatentHeatRecovery" });
             }

@@ -42,10 +42,10 @@ namespace HoneybeeDotNet.Model
         /// <param name="wattsPerArea">Lighting per floor area as [W/m2]. (required).</param>
         /// <param name="schedule">Name of the schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile. (required).</param>
         /// <param name="type">type (default to &quot;LightingAbridged&quot;).</param>
-        /// <param name="visibleFraction">The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. The default value is &#x60;0.25&#x60;. (default to 0.25M).</param>
-        /// <param name="radiantFraction">The fraction of heat from lights that is long-wave radiation. Default value is &#x60;0.32&#x60;. (default to 0.32M).</param>
-        /// <param name="returnAirFraction">The fraction of the heat from lights that goes into the zone return air. Default value is &#x60;0&#x60;. (default to 0.0M).</param>
-        public LightingAbridged(string name, decimal wattsPerArea, string schedule, string type = "LightingAbridged", decimal visibleFraction = 0.25M, decimal radiantFraction = 0.32M, decimal returnAirFraction = 0.0M)
+        /// <param name="visibleFraction">The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. The default value is &#x60;0.25&#x60;. (default to 0.25).</param>
+        /// <param name="radiantFraction">The fraction of heat from lights that is long-wave radiation. Default value is &#x60;0.32&#x60;. (default to 0.32).</param>
+        /// <param name="returnAirFraction">The fraction of the heat from lights that goes into the zone return air. Default value is &#x60;0&#x60;. (default to 0.0).</param>
+        public LightingAbridged(string name, double wattsPerArea, string schedule, string type = "LightingAbridged", double visibleFraction = 0.25, double radiantFraction = 0.32, double returnAirFraction = 0.0)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -89,7 +89,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "visibleFraction" provided
             if (visibleFraction == null)
             {
-                this.VisibleFraction = 0.25M;
+                this.VisibleFraction = 0.25;
             }
             else
             {
@@ -98,7 +98,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "radiantFraction" provided
             if (radiantFraction == null)
             {
-                this.RadiantFraction = 0.32M;
+                this.RadiantFraction = 0.32;
             }
             else
             {
@@ -107,7 +107,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "returnAirFraction" provided
             if (returnAirFraction == null)
             {
-                this.ReturnAirFraction = 0.0M;
+                this.ReturnAirFraction = 0.0;
             }
             else
             {
@@ -129,7 +129,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Lighting per floor area as [W/m2].</value>
         [DataMember(Name="watts_per_area", EmitDefaultValue=false)]
         [JsonProperty("watts_per_area")]
-        public decimal WattsPerArea { get; set; }
+        public double WattsPerArea { get; set; }
 
         /// <summary>
         /// Name of the schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile.
@@ -152,7 +152,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. The default value is &#x60;0.25&#x60;.</value>
         [DataMember(Name="visible_fraction", EmitDefaultValue=false)]
         [JsonProperty("visible_fraction")]
-        public decimal VisibleFraction { get; set; }
+        public double VisibleFraction { get; set; }
 
         /// <summary>
         /// The fraction of heat from lights that is long-wave radiation. Default value is &#x60;0.32&#x60;.
@@ -160,7 +160,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The fraction of heat from lights that is long-wave radiation. Default value is &#x60;0.32&#x60;.</value>
         [DataMember(Name="radiant_fraction", EmitDefaultValue=false)]
         [JsonProperty("radiant_fraction")]
-        public decimal RadiantFraction { get; set; }
+        public double RadiantFraction { get; set; }
 
         /// <summary>
         /// The fraction of the heat from lights that goes into the zone return air. Default value is &#x60;0&#x60;.
@@ -168,7 +168,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The fraction of the heat from lights that goes into the zone return air. Default value is &#x60;0&#x60;.</value>
         [DataMember(Name="return_air_fraction", EmitDefaultValue=false)]
         [JsonProperty("return_air_fraction")]
-        public decimal ReturnAirFraction { get; set; }
+        public double ReturnAirFraction { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -312,8 +312,8 @@ namespace HoneybeeDotNet.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Name, length must be greater than 1.", new [] { "Name" });
             }
 
-            // WattsPerArea (decimal) minimum
-            if(this.WattsPerArea < (decimal)0)
+            // WattsPerArea (double) minimum
+            if(this.WattsPerArea < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for WattsPerArea, must be a value greater than or equal to 0.", new [] { "WattsPerArea" });
             }
@@ -337,38 +337,38 @@ namespace HoneybeeDotNet.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
-            // VisibleFraction (decimal) maximum
-            if(this.VisibleFraction > (decimal)1)
+            // VisibleFraction (double) maximum
+            if(this.VisibleFraction > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VisibleFraction, must be a value less than or equal to 1.", new [] { "VisibleFraction" });
             }
 
-            // VisibleFraction (decimal) minimum
-            if(this.VisibleFraction < (decimal)0)
+            // VisibleFraction (double) minimum
+            if(this.VisibleFraction < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VisibleFraction, must be a value greater than or equal to 0.", new [] { "VisibleFraction" });
             }
 
-            // RadiantFraction (decimal) maximum
-            if(this.RadiantFraction > (decimal)1)
+            // RadiantFraction (double) maximum
+            if(this.RadiantFraction > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RadiantFraction, must be a value less than or equal to 1.", new [] { "RadiantFraction" });
             }
 
-            // RadiantFraction (decimal) minimum
-            if(this.RadiantFraction < (decimal)0)
+            // RadiantFraction (double) minimum
+            if(this.RadiantFraction < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RadiantFraction, must be a value greater than or equal to 0.", new [] { "RadiantFraction" });
             }
 
-            // ReturnAirFraction (decimal) maximum
-            if(this.ReturnAirFraction > (decimal)1)
+            // ReturnAirFraction (double) maximum
+            if(this.ReturnAirFraction > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ReturnAirFraction, must be a value less than or equal to 1.", new [] { "ReturnAirFraction" });
             }
 
-            // ReturnAirFraction (decimal) minimum
-            if(this.ReturnAirFraction < (decimal)0)
+            // ReturnAirFraction (double) minimum
+            if(this.ReturnAirFraction < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ReturnAirFraction, must be a value greater than or equal to 0.", new [] { "ReturnAirFraction" });
             }

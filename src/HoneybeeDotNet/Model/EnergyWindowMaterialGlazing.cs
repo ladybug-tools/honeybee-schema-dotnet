@@ -40,20 +40,20 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <param name="name">Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters. (required).</param>
         /// <param name="type">type (default to &quot;EnergyWindowMaterialGlazing&quot;).</param>
-        /// <param name="thickness">The surface-to-surface of the glass in meters. Default value is 0.003. (default to 0.003M).</param>
-        /// <param name="solarTransmittance">Transmittance of solar radiation through the glass at normal incidence. Default value is 0.85 for clear glass. (default to 0.85M).</param>
-        /// <param name="solarReflectance">Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default value is 0.075 for clear glass. (default to 0.075M).</param>
+        /// <param name="thickness">The surface-to-surface of the glass in meters. Default value is 0.003. (default to 0.003).</param>
+        /// <param name="solarTransmittance">Transmittance of solar radiation through the glass at normal incidence. Default value is 0.85 for clear glass. (default to 0.85).</param>
+        /// <param name="solarReflectance">Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default value is 0.075 for clear glass. (default to 0.075).</param>
         /// <param name="solarReflectanceBack">Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum..</param>
-        /// <param name="visibleTransmittance">Transmittance of visible light through the glass at normal incidence. Default value is 0.9 for clear glass. (default to 0.9M).</param>
-        /// <param name="visibleReflectance">Reflectance of visible light off of the front side of the glass at normal incidence. Default value is 0.075 for clear glass. (default to 0.075M).</param>
+        /// <param name="visibleTransmittance">Transmittance of visible light through the glass at normal incidence. Default value is 0.9 for clear glass. (default to 0.9).</param>
+        /// <param name="visibleReflectance">Reflectance of visible light off of the front side of the glass at normal incidence. Default value is 0.075 for clear glass. (default to 0.075).</param>
         /// <param name="visibleReflectanceBack">Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye..</param>
-        /// <param name="infraredTransmittance">Long-wave transmittance at normal incidence. (default to 0M).</param>
-        /// <param name="emissivity">Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating. (default to 0.84M).</param>
-        /// <param name="emissivityBack">Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating. (default to 0.84M).</param>
-        /// <param name="conductivity">Thermal conductivity of the glass in W/(m-K). Default value is 0.9, which is  typical for clear glass without a low-e coating. (default to 0.9M).</param>
-        /// <param name="dirtCorrection">Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean. (default to 1M).</param>
+        /// <param name="infraredTransmittance">Long-wave transmittance at normal incidence. (default to 0).</param>
+        /// <param name="emissivity">Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating. (default to 0.84).</param>
+        /// <param name="emissivityBack">Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating. (default to 0.84).</param>
+        /// <param name="conductivity">Thermal conductivity of the glass in W/(m-K). Default value is 0.9, which is  typical for clear glass without a low-e coating. (default to 0.9).</param>
+        /// <param name="dirtCorrection">Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean. (default to 1).</param>
         /// <param name="solarDiffusing">Takes values True and False. If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component. (default to false).</param>
-        public EnergyWindowMaterialGlazing(string name, string type = "EnergyWindowMaterialGlazing", decimal thickness = 0.003M, decimal solarTransmittance = 0.85M, decimal solarReflectance = 0.075M, decimal solarReflectanceBack = default, decimal visibleTransmittance = 0.9M, decimal visibleReflectance = 0.075M, decimal visibleReflectanceBack = default, decimal infraredTransmittance = 0M, decimal emissivity = 0.84M, decimal emissivityBack = 0.84M, decimal conductivity = 0.9M, decimal dirtCorrection = 1M, bool solarDiffusing = false)
+        public EnergyWindowMaterialGlazing(string name, string type = "EnergyWindowMaterialGlazing", double thickness = 0.003, double solarTransmittance = 0.85, double solarReflectance = 0.075, double solarReflectanceBack = default, double visibleTransmittance = 0.9, double visibleReflectance = 0.075, double visibleReflectanceBack = default, double infraredTransmittance = 0, double emissivity = 0.84, double emissivityBack = 0.84, double conductivity = 0.9, double dirtCorrection = 1, bool solarDiffusing = false)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -77,7 +77,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "thickness" provided
             if (thickness == null)
             {
-                this.Thickness = 0.003M;
+                this.Thickness = 0.003;
             }
             else
             {
@@ -86,7 +86,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "solarTransmittance" provided
             if (solarTransmittance == null)
             {
-                this.SolarTransmittance = 0.85M;
+                this.SolarTransmittance = 0.85;
             }
             else
             {
@@ -95,7 +95,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "solarReflectance" provided
             if (solarReflectance == null)
             {
-                this.SolarReflectance = 0.075M;
+                this.SolarReflectance = 0.075;
             }
             else
             {
@@ -105,7 +105,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "visibleTransmittance" provided
             if (visibleTransmittance == null)
             {
-                this.VisibleTransmittance = 0.9M;
+                this.VisibleTransmittance = 0.9;
             }
             else
             {
@@ -114,7 +114,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "visibleReflectance" provided
             if (visibleReflectance == null)
             {
-                this.VisibleReflectance = 0.075M;
+                this.VisibleReflectance = 0.075;
             }
             else
             {
@@ -124,7 +124,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "infraredTransmittance" provided
             if (infraredTransmittance == null)
             {
-                this.InfraredTransmittance = 0M;
+                this.InfraredTransmittance = 0;
             }
             else
             {
@@ -133,7 +133,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "emissivity" provided
             if (emissivity == null)
             {
-                this.Emissivity = 0.84M;
+                this.Emissivity = 0.84;
             }
             else
             {
@@ -142,7 +142,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "emissivityBack" provided
             if (emissivityBack == null)
             {
-                this.EmissivityBack = 0.84M;
+                this.EmissivityBack = 0.84;
             }
             else
             {
@@ -151,7 +151,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "conductivity" provided
             if (conductivity == null)
             {
-                this.Conductivity = 0.9M;
+                this.Conductivity = 0.9;
             }
             else
             {
@@ -160,7 +160,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "dirtCorrection" provided
             if (dirtCorrection == null)
             {
-                this.DirtCorrection = 1M;
+                this.DirtCorrection = 1;
             }
             else
             {
@@ -198,7 +198,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The surface-to-surface of the glass in meters. Default value is 0.003.</value>
         [DataMember(Name="thickness", EmitDefaultValue=false)]
         [JsonProperty("thickness")]
-        public decimal Thickness { get; set; }
+        public double Thickness { get; set; }
 
         /// <summary>
         /// Transmittance of solar radiation through the glass at normal incidence. Default value is 0.85 for clear glass.
@@ -206,7 +206,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Transmittance of solar radiation through the glass at normal incidence. Default value is 0.85 for clear glass.</value>
         [DataMember(Name="solar_transmittance", EmitDefaultValue=false)]
         [JsonProperty("solar_transmittance")]
-        public decimal SolarTransmittance { get; set; }
+        public double SolarTransmittance { get; set; }
 
         /// <summary>
         /// Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default value is 0.075 for clear glass.
@@ -214,7 +214,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default value is 0.075 for clear glass.</value>
         [DataMember(Name="solar_reflectance", EmitDefaultValue=false)]
         [JsonProperty("solar_reflectance")]
-        public decimal SolarReflectance { get; set; }
+        public double SolarReflectance { get; set; }
 
         /// <summary>
         /// Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum.
@@ -222,7 +222,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum.</value>
         [DataMember(Name="solar_reflectance_back", EmitDefaultValue=false)]
         [JsonProperty("solar_reflectance_back")]
-        public decimal SolarReflectanceBack { get; set; }
+        public double SolarReflectanceBack { get; set; }
 
         /// <summary>
         /// Transmittance of visible light through the glass at normal incidence. Default value is 0.9 for clear glass.
@@ -230,7 +230,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Transmittance of visible light through the glass at normal incidence. Default value is 0.9 for clear glass.</value>
         [DataMember(Name="visible_transmittance", EmitDefaultValue=false)]
         [JsonProperty("visible_transmittance")]
-        public decimal VisibleTransmittance { get; set; }
+        public double VisibleTransmittance { get; set; }
 
         /// <summary>
         /// Reflectance of visible light off of the front side of the glass at normal incidence. Default value is 0.075 for clear glass.
@@ -238,7 +238,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Reflectance of visible light off of the front side of the glass at normal incidence. Default value is 0.075 for clear glass.</value>
         [DataMember(Name="visible_reflectance", EmitDefaultValue=false)]
         [JsonProperty("visible_reflectance")]
-        public decimal VisibleReflectance { get; set; }
+        public double VisibleReflectance { get; set; }
 
         /// <summary>
         /// Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye.
@@ -246,7 +246,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye.</value>
         [DataMember(Name="visible_reflectance_back", EmitDefaultValue=false)]
         [JsonProperty("visible_reflectance_back")]
-        public decimal VisibleReflectanceBack { get; set; }
+        public double VisibleReflectanceBack { get; set; }
 
         /// <summary>
         /// Long-wave transmittance at normal incidence.
@@ -254,7 +254,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Long-wave transmittance at normal incidence.</value>
         [DataMember(Name="infrared_transmittance", EmitDefaultValue=false)]
         [JsonProperty("infrared_transmittance")]
-        public decimal InfraredTransmittance { get; set; }
+        public double InfraredTransmittance { get; set; }
 
         /// <summary>
         /// Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.
@@ -262,7 +262,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.</value>
         [DataMember(Name="emissivity", EmitDefaultValue=false)]
         [JsonProperty("emissivity")]
-        public decimal Emissivity { get; set; }
+        public double Emissivity { get; set; }
 
         /// <summary>
         /// Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.
@@ -270,7 +270,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.</value>
         [DataMember(Name="emissivity_back", EmitDefaultValue=false)]
         [JsonProperty("emissivity_back")]
-        public decimal EmissivityBack { get; set; }
+        public double EmissivityBack { get; set; }
 
         /// <summary>
         /// Thermal conductivity of the glass in W/(m-K). Default value is 0.9, which is  typical for clear glass without a low-e coating.
@@ -278,7 +278,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Thermal conductivity of the glass in W/(m-K). Default value is 0.9, which is  typical for clear glass without a low-e coating.</value>
         [DataMember(Name="conductivity", EmitDefaultValue=false)]
         [JsonProperty("conductivity")]
-        public decimal Conductivity { get; set; }
+        public double Conductivity { get; set; }
 
         /// <summary>
         /// Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean.
@@ -286,7 +286,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean.</value>
         [DataMember(Name="dirt_correction", EmitDefaultValue=false)]
         [JsonProperty("dirt_correction")]
-        public decimal DirtCorrection { get; set; }
+        public double DirtCorrection { get; set; }
 
         /// <summary>
         /// Takes values True and False. If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.
@@ -509,98 +509,98 @@ namespace HoneybeeDotNet.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
-            // SolarTransmittance (decimal) maximum
-            if(this.SolarTransmittance > (decimal)1)
+            // SolarTransmittance (double) maximum
+            if(this.SolarTransmittance > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SolarTransmittance, must be a value less than or equal to 1.", new [] { "SolarTransmittance" });
             }
 
-            // SolarTransmittance (decimal) minimum
-            if(this.SolarTransmittance < (decimal)0)
+            // SolarTransmittance (double) minimum
+            if(this.SolarTransmittance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SolarTransmittance, must be a value greater than or equal to 0.", new [] { "SolarTransmittance" });
             }
 
-            // SolarReflectance (decimal) maximum
-            if(this.SolarReflectance > (decimal)1)
+            // SolarReflectance (double) maximum
+            if(this.SolarReflectance > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SolarReflectance, must be a value less than or equal to 1.", new [] { "SolarReflectance" });
             }
 
-            // SolarReflectance (decimal) minimum
-            if(this.SolarReflectance < (decimal)0)
+            // SolarReflectance (double) minimum
+            if(this.SolarReflectance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SolarReflectance, must be a value greater than or equal to 0.", new [] { "SolarReflectance" });
             }
 
-            // VisibleTransmittance (decimal) maximum
-            if(this.VisibleTransmittance > (decimal)1)
+            // VisibleTransmittance (double) maximum
+            if(this.VisibleTransmittance > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VisibleTransmittance, must be a value less than or equal to 1.", new [] { "VisibleTransmittance" });
             }
 
-            // VisibleTransmittance (decimal) minimum
-            if(this.VisibleTransmittance < (decimal)0)
+            // VisibleTransmittance (double) minimum
+            if(this.VisibleTransmittance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VisibleTransmittance, must be a value greater than or equal to 0.", new [] { "VisibleTransmittance" });
             }
 
-            // VisibleReflectance (decimal) maximum
-            if(this.VisibleReflectance > (decimal)1)
+            // VisibleReflectance (double) maximum
+            if(this.VisibleReflectance > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VisibleReflectance, must be a value less than or equal to 1.", new [] { "VisibleReflectance" });
             }
 
-            // VisibleReflectance (decimal) minimum
-            if(this.VisibleReflectance < (decimal)0)
+            // VisibleReflectance (double) minimum
+            if(this.VisibleReflectance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VisibleReflectance, must be a value greater than or equal to 0.", new [] { "VisibleReflectance" });
             }
 
-            // VisibleReflectanceBack (decimal) maximum
-            if(this.VisibleReflectanceBack > (decimal)1)
+            // VisibleReflectanceBack (double) maximum
+            if(this.VisibleReflectanceBack > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VisibleReflectanceBack, must be a value less than or equal to 1.", new [] { "VisibleReflectanceBack" });
             }
 
-            // VisibleReflectanceBack (decimal) minimum
-            if(this.VisibleReflectanceBack < (decimal)0)
+            // VisibleReflectanceBack (double) minimum
+            if(this.VisibleReflectanceBack < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VisibleReflectanceBack, must be a value greater than or equal to 0.", new [] { "VisibleReflectanceBack" });
             }
 
-            // InfraredTransmittance (decimal) maximum
-            if(this.InfraredTransmittance > (decimal)1)
+            // InfraredTransmittance (double) maximum
+            if(this.InfraredTransmittance > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InfraredTransmittance, must be a value less than or equal to 1.", new [] { "InfraredTransmittance" });
             }
 
-            // InfraredTransmittance (decimal) minimum
-            if(this.InfraredTransmittance < (decimal)0)
+            // InfraredTransmittance (double) minimum
+            if(this.InfraredTransmittance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InfraredTransmittance, must be a value greater than or equal to 0.", new [] { "InfraredTransmittance" });
             }
 
-            // Emissivity (decimal) maximum
-            if(this.Emissivity > (decimal)1)
+            // Emissivity (double) maximum
+            if(this.Emissivity > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Emissivity, must be a value less than or equal to 1.", new [] { "Emissivity" });
             }
 
-            // Emissivity (decimal) minimum
-            if(this.Emissivity < (decimal)0)
+            // Emissivity (double) minimum
+            if(this.Emissivity < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Emissivity, must be a value greater than or equal to 0.", new [] { "Emissivity" });
             }
 
-            // EmissivityBack (decimal) maximum
-            if(this.EmissivityBack > (decimal)1)
+            // EmissivityBack (double) maximum
+            if(this.EmissivityBack > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for EmissivityBack, must be a value less than or equal to 1.", new [] { "EmissivityBack" });
             }
 
-            // EmissivityBack (decimal) minimum
-            if(this.EmissivityBack < (decimal)0)
+            // EmissivityBack (double) minimum
+            if(this.EmissivityBack < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for EmissivityBack, must be a value greater than or equal to 0.", new [] { "EmissivityBack" });
             }

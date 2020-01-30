@@ -47,8 +47,8 @@ namespace HoneybeeDotNet.Model
         /// <param name="orphanedShades">A list of Shades in the model that lack a parent..</param>
         /// <param name="orphanedApertures">A list of Apertures in the model that lack a parent Face. Note that orphaned Apertures are not acceptable for Models that are to be exported for energy simulation..</param>
         /// <param name="orphanedDoors">A list of Doors in the model that lack a parent Face. Note that orphaned Doors are not acceptable for Models that are to be exported for energy simulation..</param>
-        /// <param name="northAngle">The clockwise north direction in degrees. (default to 0M).</param>
-        public Model(string name, ModelProperties properties, string displayName = default, string type = "Model", List<Room> rooms = default, List<Face> orphanedFaces = default, List<Shade> orphanedShades = default, List<Aperture> orphanedApertures = default, List<Door> orphanedDoors = default, decimal northAngle = 0M)
+        /// <param name="northAngle">The clockwise north direction in degrees. (default to 0).</param>
+        public Model(string name, ModelProperties properties, string displayName = default, string type = "Model", List<Room> rooms = default, List<Face> orphanedFaces = default, List<Shade> orphanedShades = default, List<Aperture> orphanedApertures = default, List<Door> orphanedDoors = default, double northAngle = 0)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -88,7 +88,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "northAngle" provided
             if (northAngle == null)
             {
-                this.NorthAngle = 0M;
+                this.NorthAngle = 0;
             }
             else
             {
@@ -173,7 +173,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The clockwise north direction in degrees.</value>
         [DataMember(Name="north_angle", EmitDefaultValue=false)]
         [JsonProperty("north_angle")]
-        public decimal NorthAngle { get; set; }
+        public double NorthAngle { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -360,8 +360,8 @@ namespace HoneybeeDotNet.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
-            // NorthAngle (decimal) minimum
-            if(this.NorthAngle < (decimal)0)
+            // NorthAngle (double) minimum
+            if(this.NorthAngle < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for NorthAngle, must be a value greater than or equal to 0.", new [] { "NorthAngle" });
             }

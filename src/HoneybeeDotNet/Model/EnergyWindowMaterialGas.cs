@@ -77,9 +77,9 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <param name="name">Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters. (required).</param>
         /// <param name="type">type (default to &quot;EnergyWindowMaterialGas&quot;).</param>
-        /// <param name="thickness">Thickness of the gas layer in meters. Default value is 0.0125. (default to 0.0125M).</param>
+        /// <param name="thickness">Thickness of the gas layer in meters. Default value is 0.0125. (default to 0.0125).</param>
         /// <param name="gasType">gasType (default to GasTypeEnum.Air).</param>
-        public EnergyWindowMaterialGas(string name, string type = "EnergyWindowMaterialGas", decimal thickness = 0.0125M, GasTypeEnum? gasType = GasTypeEnum.Air)
+        public EnergyWindowMaterialGas(string name, string type = "EnergyWindowMaterialGas", double thickness = 0.0125, GasTypeEnum? gasType = GasTypeEnum.Air)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -103,7 +103,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "thickness" provided
             if (thickness == null)
             {
-                this.Thickness = 0.0125M;
+                this.Thickness = 0.0125;
             }
             else
             {
@@ -141,7 +141,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Thickness of the gas layer in meters. Default value is 0.0125.</value>
         [DataMember(Name="thickness", EmitDefaultValue=false)]
         [JsonProperty("thickness")]
-        public decimal Thickness { get; set; }
+        public double Thickness { get; set; }
 
 
         /// <summary>

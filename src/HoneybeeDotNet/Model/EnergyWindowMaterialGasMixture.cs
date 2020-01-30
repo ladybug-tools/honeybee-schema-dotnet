@@ -81,8 +81,8 @@ namespace HoneybeeDotNet.Model
         /// <param name="gasTypes">List of gases in the gas mixture. (required).</param>
         /// <param name="gasFractions">A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1. (required).</param>
         /// <param name="type">type (default to &quot;EnergyWindowMaterialGasMixture&quot;).</param>
-        /// <param name="thickness">The thickness of the gas mixture layer in meters. (default to 0.0125M).</param>
-        public EnergyWindowMaterialGasMixture(string name, List<GasTypesEnum> gasTypes, List<decimal> gasFractions, string type = "EnergyWindowMaterialGasMixture", decimal thickness = 0.0125M)
+        /// <param name="thickness">The thickness of the gas mixture layer in meters. (default to 0.0125).</param>
+        public EnergyWindowMaterialGasMixture(string name, List<GasTypesEnum> gasTypes, List<double> gasFractions, string type = "EnergyWindowMaterialGasMixture", double thickness = 0.0125)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -126,7 +126,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "thickness" provided
             if (thickness == null)
             {
-                this.Thickness = 0.0125M;
+                this.Thickness = 0.0125;
             }
             else
             {
@@ -149,7 +149,7 @@ namespace HoneybeeDotNet.Model
         /// <value>A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1.</value>
         [DataMember(Name="gas_fractions", EmitDefaultValue=false)]
         [JsonProperty("gas_fractions")]
-        public List<decimal> GasFractions { get; set; }
+        public List<double> GasFractions { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
@@ -164,7 +164,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The thickness of the gas mixture layer in meters.</value>
         [DataMember(Name="thickness", EmitDefaultValue=false)]
         [JsonProperty("thickness")]
-        public decimal Thickness { get; set; }
+        public double Thickness { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -72,32 +72,32 @@ namespace HoneybeeDotNet.Model
         /// <param name="name">Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters. (required).</param>
         /// <param name="type">type (default to &quot;EnergyWindowMaterialBlind&quot;).</param>
         /// <param name="slatOrientation">slatOrientation (default to SlatOrientationEnum.Horizontal).</param>
-        /// <param name="slatWidth">The width of slat measured from edge to edge in meters. (default to 0.025M).</param>
-        /// <param name="slatSeparation">The distance between the front of a slat and the back of the adjacent slat in meters. (default to 0.01875M).</param>
-        /// <param name="slatThickness">The distance between the faces of a slat in meters. The default value is 0.001. (default to 0.001M).</param>
-        /// <param name="slatAngle">The angle (degrees) between the glazing outward normal and the slat outward normal where the outward normal points away from the front face of the slat (degrees). The default value is 45. (default to 45M).</param>
-        /// <param name="slatConductivity">The thermal conductivity of the slat in W/(m-K). Default value is 221. (default to 221M).</param>
-        /// <param name="beamSolarTransmittance">The beam solar transmittance of the slat, assumed to be independent of angle of incidence on the slat. Any transmitted beam radiation is assumed to be 100% diffuse (i.e., slats are translucent). The default value is 0. (default to 0M).</param>
-        /// <param name="beamSolarReflectance">The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5. (default to 0.5M).</param>
-        /// <param name="beamSolarReflectanceBack">The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5. (default to 0.5M).</param>
-        /// <param name="diffuseSolarTransmittance">The slat transmittance for hemisperically diffuse solar radiation. Default value is 0. (default to 0M).</param>
-        /// <param name="diffuseSolarReflectance">The front-side slat reflectance for hemispherically diffuse solar radiation. Default value is 0.5. (default to 0.5M).</param>
-        /// <param name="diffuseSolarReflectanceBack">The back-side slat reflectance for hemispherically diffuse solar radiation. Default value is 0.5. (default to 0.5M).</param>
-        /// <param name="beamVisibleTransmittance">The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default value is 0. (default to 0M).</param>
-        /// <param name="beamVisibleReflectance">The beam visible reflectance on the front side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5. (default to 0.5M).</param>
-        /// <param name="beamVisibleReflectanceBack">The beam visible reflectance on the back side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5. (default to 0.5M).</param>
-        /// <param name="diffuseVisibleTransmittance">The slat transmittance for hemispherically diffuse visible radiation. This value should equal “Slat Beam Visible Transmittance.” (default to 0M).</param>
-        /// <param name="diffuseVisibleReflectance">The front-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Front Side Slat Beam Visible Reflectance.” Default value is 0.5. (default to 0.5M).</param>
-        /// <param name="diffuseVisibleReflectanceBack">The back-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Back Side Slat Beam Visible Reflectance. Default value is 0.5.” (default to 0.5M).</param>
-        /// <param name="infraredTransmittance">The slat infrared hemispherical transmittance. It is zero for solid metallic, wooden or glass slats, but may be non-zero in some cases such as for thin plastic slats. The default value is 0. (default to 0M).</param>
-        /// <param name="emissivity">Front side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9. (default to 0.9M).</param>
-        /// <param name="emissivityBack">Back side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9. (default to 0.9M).</param>
-        /// <param name="distanceToGlass">The distance from the mid-plane of the blind to the adjacent glass in meters. The default value is 0.05. (default to 0.05M).</param>
-        /// <param name="topOpeningMultiplier">The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. The default value is 0.5 (default to 0.5M).</param>
-        /// <param name="bottomOpeningMultiplier">The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. The default value is 0. (default to 0.5M).</param>
-        /// <param name="leftOpeningMultiplier">The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. The default value is 0.5. (default to 0.5M).</param>
-        /// <param name="rightOpeningMultiplier">The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. The default value is 0.5. (default to 0.5M).</param>
-        public EnergyWindowMaterialBlind(string name, string type = "EnergyWindowMaterialBlind", SlatOrientationEnum? slatOrientation = SlatOrientationEnum.Horizontal, decimal slatWidth = 0.025M, decimal slatSeparation = 0.01875M, decimal slatThickness = 0.001M, decimal slatAngle = 45M, decimal slatConductivity = 221M, decimal beamSolarTransmittance = 0M, decimal beamSolarReflectance = 0.5M, decimal beamSolarReflectanceBack = 0.5M, decimal diffuseSolarTransmittance = 0M, decimal diffuseSolarReflectance = 0.5M, decimal diffuseSolarReflectanceBack = 0.5M, decimal beamVisibleTransmittance = 0M, decimal beamVisibleReflectance = 0.5M, decimal beamVisibleReflectanceBack = 0.5M, decimal diffuseVisibleTransmittance = 0M, decimal diffuseVisibleReflectance = 0.5M, decimal diffuseVisibleReflectanceBack = 0.5M, decimal infraredTransmittance = 0M, decimal emissivity = 0.9M, decimal emissivityBack = 0.9M, decimal distanceToGlass = 0.05M, decimal topOpeningMultiplier = 0.5M, decimal bottomOpeningMultiplier = 0.5M, decimal leftOpeningMultiplier = 0.5M, decimal rightOpeningMultiplier = 0.5M)
+        /// <param name="slatWidth">The width of slat measured from edge to edge in meters. (default to 0.025).</param>
+        /// <param name="slatSeparation">The distance between the front of a slat and the back of the adjacent slat in meters. (default to 0.01875).</param>
+        /// <param name="slatThickness">The distance between the faces of a slat in meters. The default value is 0.001. (default to 0.001).</param>
+        /// <param name="slatAngle">The angle (degrees) between the glazing outward normal and the slat outward normal where the outward normal points away from the front face of the slat (degrees). The default value is 45. (default to 45).</param>
+        /// <param name="slatConductivity">The thermal conductivity of the slat in W/(m-K). Default value is 221. (default to 221).</param>
+        /// <param name="beamSolarTransmittance">The beam solar transmittance of the slat, assumed to be independent of angle of incidence on the slat. Any transmitted beam radiation is assumed to be 100% diffuse (i.e., slats are translucent). The default value is 0. (default to 0).</param>
+        /// <param name="beamSolarReflectance">The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5. (default to 0.5).</param>
+        /// <param name="beamSolarReflectanceBack">The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5. (default to 0.5).</param>
+        /// <param name="diffuseSolarTransmittance">The slat transmittance for hemisperically diffuse solar radiation. Default value is 0. (default to 0).</param>
+        /// <param name="diffuseSolarReflectance">The front-side slat reflectance for hemispherically diffuse solar radiation. Default value is 0.5. (default to 0.5).</param>
+        /// <param name="diffuseSolarReflectanceBack">The back-side slat reflectance for hemispherically diffuse solar radiation. Default value is 0.5. (default to 0.5).</param>
+        /// <param name="beamVisibleTransmittance">The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default value is 0. (default to 0).</param>
+        /// <param name="beamVisibleReflectance">The beam visible reflectance on the front side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5. (default to 0.5).</param>
+        /// <param name="beamVisibleReflectanceBack">The beam visible reflectance on the back side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5. (default to 0.5).</param>
+        /// <param name="diffuseVisibleTransmittance">The slat transmittance for hemispherically diffuse visible radiation. This value should equal “Slat Beam Visible Transmittance.” (default to 0).</param>
+        /// <param name="diffuseVisibleReflectance">The front-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Front Side Slat Beam Visible Reflectance.” Default value is 0.5. (default to 0.5).</param>
+        /// <param name="diffuseVisibleReflectanceBack">The back-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Back Side Slat Beam Visible Reflectance. Default value is 0.5.” (default to 0.5).</param>
+        /// <param name="infraredTransmittance">The slat infrared hemispherical transmittance. It is zero for solid metallic, wooden or glass slats, but may be non-zero in some cases such as for thin plastic slats. The default value is 0. (default to 0).</param>
+        /// <param name="emissivity">Front side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9. (default to 0.9).</param>
+        /// <param name="emissivityBack">Back side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9. (default to 0.9).</param>
+        /// <param name="distanceToGlass">The distance from the mid-plane of the blind to the adjacent glass in meters. The default value is 0.05. (default to 0.05).</param>
+        /// <param name="topOpeningMultiplier">The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. The default value is 0.5 (default to 0.5).</param>
+        /// <param name="bottomOpeningMultiplier">The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. The default value is 0. (default to 0.5).</param>
+        /// <param name="leftOpeningMultiplier">The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. The default value is 0.5. (default to 0.5).</param>
+        /// <param name="rightOpeningMultiplier">The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. The default value is 0.5. (default to 0.5).</param>
+        public EnergyWindowMaterialBlind(string name, string type = "EnergyWindowMaterialBlind", SlatOrientationEnum? slatOrientation = SlatOrientationEnum.Horizontal, double slatWidth = 0.025, double slatSeparation = 0.01875, double slatThickness = 0.001, double slatAngle = 45, double slatConductivity = 221, double beamSolarTransmittance = 0, double beamSolarReflectance = 0.5, double beamSolarReflectanceBack = 0.5, double diffuseSolarTransmittance = 0, double diffuseSolarReflectance = 0.5, double diffuseSolarReflectanceBack = 0.5, double beamVisibleTransmittance = 0, double beamVisibleReflectance = 0.5, double beamVisibleReflectanceBack = 0.5, double diffuseVisibleTransmittance = 0, double diffuseVisibleReflectance = 0.5, double diffuseVisibleReflectanceBack = 0.5, double infraredTransmittance = 0, double emissivity = 0.9, double emissivityBack = 0.9, double distanceToGlass = 0.05, double topOpeningMultiplier = 0.5, double bottomOpeningMultiplier = 0.5, double leftOpeningMultiplier = 0.5, double rightOpeningMultiplier = 0.5)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -130,7 +130,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "slatWidth" provided
             if (slatWidth == null)
             {
-                this.SlatWidth = 0.025M;
+                this.SlatWidth = 0.025;
             }
             else
             {
@@ -139,7 +139,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "slatSeparation" provided
             if (slatSeparation == null)
             {
-                this.SlatSeparation = 0.01875M;
+                this.SlatSeparation = 0.01875;
             }
             else
             {
@@ -148,7 +148,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "slatThickness" provided
             if (slatThickness == null)
             {
-                this.SlatThickness = 0.001M;
+                this.SlatThickness = 0.001;
             }
             else
             {
@@ -157,7 +157,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "slatAngle" provided
             if (slatAngle == null)
             {
-                this.SlatAngle = 45M;
+                this.SlatAngle = 45;
             }
             else
             {
@@ -166,7 +166,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "slatConductivity" provided
             if (slatConductivity == null)
             {
-                this.SlatConductivity = 221M;
+                this.SlatConductivity = 221;
             }
             else
             {
@@ -175,7 +175,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "beamSolarTransmittance" provided
             if (beamSolarTransmittance == null)
             {
-                this.BeamSolarTransmittance = 0M;
+                this.BeamSolarTransmittance = 0;
             }
             else
             {
@@ -184,7 +184,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "beamSolarReflectance" provided
             if (beamSolarReflectance == null)
             {
-                this.BeamSolarReflectance = 0.5M;
+                this.BeamSolarReflectance = 0.5;
             }
             else
             {
@@ -193,7 +193,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "beamSolarReflectanceBack" provided
             if (beamSolarReflectanceBack == null)
             {
-                this.BeamSolarReflectanceBack = 0.5M;
+                this.BeamSolarReflectanceBack = 0.5;
             }
             else
             {
@@ -202,7 +202,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "diffuseSolarTransmittance" provided
             if (diffuseSolarTransmittance == null)
             {
-                this.DiffuseSolarTransmittance = 0M;
+                this.DiffuseSolarTransmittance = 0;
             }
             else
             {
@@ -211,7 +211,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "diffuseSolarReflectance" provided
             if (diffuseSolarReflectance == null)
             {
-                this.DiffuseSolarReflectance = 0.5M;
+                this.DiffuseSolarReflectance = 0.5;
             }
             else
             {
@@ -220,7 +220,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "diffuseSolarReflectanceBack" provided
             if (diffuseSolarReflectanceBack == null)
             {
-                this.DiffuseSolarReflectanceBack = 0.5M;
+                this.DiffuseSolarReflectanceBack = 0.5;
             }
             else
             {
@@ -229,7 +229,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "beamVisibleTransmittance" provided
             if (beamVisibleTransmittance == null)
             {
-                this.BeamVisibleTransmittance = 0M;
+                this.BeamVisibleTransmittance = 0;
             }
             else
             {
@@ -238,7 +238,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "beamVisibleReflectance" provided
             if (beamVisibleReflectance == null)
             {
-                this.BeamVisibleReflectance = 0.5M;
+                this.BeamVisibleReflectance = 0.5;
             }
             else
             {
@@ -247,7 +247,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "beamVisibleReflectanceBack" provided
             if (beamVisibleReflectanceBack == null)
             {
-                this.BeamVisibleReflectanceBack = 0.5M;
+                this.BeamVisibleReflectanceBack = 0.5;
             }
             else
             {
@@ -256,7 +256,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "diffuseVisibleTransmittance" provided
             if (diffuseVisibleTransmittance == null)
             {
-                this.DiffuseVisibleTransmittance = 0M;
+                this.DiffuseVisibleTransmittance = 0;
             }
             else
             {
@@ -265,7 +265,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "diffuseVisibleReflectance" provided
             if (diffuseVisibleReflectance == null)
             {
-                this.DiffuseVisibleReflectance = 0.5M;
+                this.DiffuseVisibleReflectance = 0.5;
             }
             else
             {
@@ -274,7 +274,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "diffuseVisibleReflectanceBack" provided
             if (diffuseVisibleReflectanceBack == null)
             {
-                this.DiffuseVisibleReflectanceBack = 0.5M;
+                this.DiffuseVisibleReflectanceBack = 0.5;
             }
             else
             {
@@ -283,7 +283,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "infraredTransmittance" provided
             if (infraredTransmittance == null)
             {
-                this.InfraredTransmittance = 0M;
+                this.InfraredTransmittance = 0;
             }
             else
             {
@@ -292,7 +292,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "emissivity" provided
             if (emissivity == null)
             {
-                this.Emissivity = 0.9M;
+                this.Emissivity = 0.9;
             }
             else
             {
@@ -301,7 +301,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "emissivityBack" provided
             if (emissivityBack == null)
             {
-                this.EmissivityBack = 0.9M;
+                this.EmissivityBack = 0.9;
             }
             else
             {
@@ -310,7 +310,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "distanceToGlass" provided
             if (distanceToGlass == null)
             {
-                this.DistanceToGlass = 0.05M;
+                this.DistanceToGlass = 0.05;
             }
             else
             {
@@ -319,7 +319,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "topOpeningMultiplier" provided
             if (topOpeningMultiplier == null)
             {
-                this.TopOpeningMultiplier = 0.5M;
+                this.TopOpeningMultiplier = 0.5;
             }
             else
             {
@@ -328,7 +328,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "bottomOpeningMultiplier" provided
             if (bottomOpeningMultiplier == null)
             {
-                this.BottomOpeningMultiplier = 0.5M;
+                this.BottomOpeningMultiplier = 0.5;
             }
             else
             {
@@ -337,7 +337,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "leftOpeningMultiplier" provided
             if (leftOpeningMultiplier == null)
             {
-                this.LeftOpeningMultiplier = 0.5M;
+                this.LeftOpeningMultiplier = 0.5;
             }
             else
             {
@@ -346,7 +346,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "rightOpeningMultiplier" provided
             if (rightOpeningMultiplier == null)
             {
-                this.RightOpeningMultiplier = 0.5M;
+                this.RightOpeningMultiplier = 0.5;
             }
             else
             {
@@ -376,7 +376,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The width of slat measured from edge to edge in meters.</value>
         [DataMember(Name="slat_width", EmitDefaultValue=false)]
         [JsonProperty("slat_width")]
-        public decimal SlatWidth { get; set; }
+        public double SlatWidth { get; set; }
 
         /// <summary>
         /// The distance between the front of a slat and the back of the adjacent slat in meters.
@@ -384,7 +384,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The distance between the front of a slat and the back of the adjacent slat in meters.</value>
         [DataMember(Name="slat_separation", EmitDefaultValue=false)]
         [JsonProperty("slat_separation")]
-        public decimal SlatSeparation { get; set; }
+        public double SlatSeparation { get; set; }
 
         /// <summary>
         /// The distance between the faces of a slat in meters. The default value is 0.001.
@@ -392,7 +392,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The distance between the faces of a slat in meters. The default value is 0.001.</value>
         [DataMember(Name="slat_thickness", EmitDefaultValue=false)]
         [JsonProperty("slat_thickness")]
-        public decimal SlatThickness { get; set; }
+        public double SlatThickness { get; set; }
 
         /// <summary>
         /// The angle (degrees) between the glazing outward normal and the slat outward normal where the outward normal points away from the front face of the slat (degrees). The default value is 45.
@@ -400,7 +400,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The angle (degrees) between the glazing outward normal and the slat outward normal where the outward normal points away from the front face of the slat (degrees). The default value is 45.</value>
         [DataMember(Name="slat_angle", EmitDefaultValue=false)]
         [JsonProperty("slat_angle")]
-        public decimal SlatAngle { get; set; }
+        public double SlatAngle { get; set; }
 
         /// <summary>
         /// The thermal conductivity of the slat in W/(m-K). Default value is 221.
@@ -408,7 +408,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The thermal conductivity of the slat in W/(m-K). Default value is 221.</value>
         [DataMember(Name="slat_conductivity", EmitDefaultValue=false)]
         [JsonProperty("slat_conductivity")]
-        public decimal SlatConductivity { get; set; }
+        public double SlatConductivity { get; set; }
 
         /// <summary>
         /// The beam solar transmittance of the slat, assumed to be independent of angle of incidence on the slat. Any transmitted beam radiation is assumed to be 100% diffuse (i.e., slats are translucent). The default value is 0.
@@ -416,7 +416,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The beam solar transmittance of the slat, assumed to be independent of angle of incidence on the slat. Any transmitted beam radiation is assumed to be 100% diffuse (i.e., slats are translucent). The default value is 0.</value>
         [DataMember(Name="beam_solar_transmittance", EmitDefaultValue=false)]
         [JsonProperty("beam_solar_transmittance")]
-        public decimal BeamSolarTransmittance { get; set; }
+        public double BeamSolarTransmittance { get; set; }
 
         /// <summary>
         /// The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.
@@ -424,7 +424,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.</value>
         [DataMember(Name="beam_solar_reflectance", EmitDefaultValue=false)]
         [JsonProperty("beam_solar_reflectance")]
-        public decimal BeamSolarReflectance { get; set; }
+        public double BeamSolarReflectance { get; set; }
 
         /// <summary>
         /// The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.
@@ -432,7 +432,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.</value>
         [DataMember(Name="beam_solar_reflectance_back", EmitDefaultValue=false)]
         [JsonProperty("beam_solar_reflectance_back")]
-        public decimal BeamSolarReflectanceBack { get; set; }
+        public double BeamSolarReflectanceBack { get; set; }
 
         /// <summary>
         /// The slat transmittance for hemisperically diffuse solar radiation. Default value is 0.
@@ -440,7 +440,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The slat transmittance for hemisperically diffuse solar radiation. Default value is 0.</value>
         [DataMember(Name="diffuse_solar_transmittance", EmitDefaultValue=false)]
         [JsonProperty("diffuse_solar_transmittance")]
-        public decimal DiffuseSolarTransmittance { get; set; }
+        public double DiffuseSolarTransmittance { get; set; }
 
         /// <summary>
         /// The front-side slat reflectance for hemispherically diffuse solar radiation. Default value is 0.5.
@@ -448,7 +448,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The front-side slat reflectance for hemispherically diffuse solar radiation. Default value is 0.5.</value>
         [DataMember(Name="diffuse_solar_reflectance", EmitDefaultValue=false)]
         [JsonProperty("diffuse_solar_reflectance")]
-        public decimal DiffuseSolarReflectance { get; set; }
+        public double DiffuseSolarReflectance { get; set; }
 
         /// <summary>
         /// The back-side slat reflectance for hemispherically diffuse solar radiation. Default value is 0.5.
@@ -456,7 +456,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The back-side slat reflectance for hemispherically diffuse solar radiation. Default value is 0.5.</value>
         [DataMember(Name="diffuse_solar_reflectance_back", EmitDefaultValue=false)]
         [JsonProperty("diffuse_solar_reflectance_back")]
-        public decimal DiffuseSolarReflectanceBack { get; set; }
+        public double DiffuseSolarReflectanceBack { get; set; }
 
         /// <summary>
         /// The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.
@@ -464,7 +464,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.</value>
         [DataMember(Name="beam_visible_transmittance", EmitDefaultValue=false)]
         [JsonProperty("beam_visible_transmittance")]
-        public decimal BeamVisibleTransmittance { get; set; }
+        public double BeamVisibleTransmittance { get; set; }
 
         /// <summary>
         /// The beam visible reflectance on the front side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.
@@ -472,7 +472,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The beam visible reflectance on the front side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.</value>
         [DataMember(Name="beam_visible_reflectance", EmitDefaultValue=false)]
         [JsonProperty("beam_visible_reflectance")]
-        public decimal BeamVisibleReflectance { get; set; }
+        public double BeamVisibleReflectance { get; set; }
 
         /// <summary>
         /// The beam visible reflectance on the back side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.
@@ -480,7 +480,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The beam visible reflectance on the back side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.</value>
         [DataMember(Name="beam_visible_reflectance_back", EmitDefaultValue=false)]
         [JsonProperty("beam_visible_reflectance_back")]
-        public decimal BeamVisibleReflectanceBack { get; set; }
+        public double BeamVisibleReflectanceBack { get; set; }
 
         /// <summary>
         /// The slat transmittance for hemispherically diffuse visible radiation. This value should equal “Slat Beam Visible Transmittance.”
@@ -488,7 +488,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The slat transmittance for hemispherically diffuse visible radiation. This value should equal “Slat Beam Visible Transmittance.”</value>
         [DataMember(Name="diffuse_visible_transmittance", EmitDefaultValue=false)]
         [JsonProperty("diffuse_visible_transmittance")]
-        public decimal DiffuseVisibleTransmittance { get; set; }
+        public double DiffuseVisibleTransmittance { get; set; }
 
         /// <summary>
         /// The front-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Front Side Slat Beam Visible Reflectance.” Default value is 0.5.
@@ -496,7 +496,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The front-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Front Side Slat Beam Visible Reflectance.” Default value is 0.5.</value>
         [DataMember(Name="diffuse_visible_reflectance", EmitDefaultValue=false)]
         [JsonProperty("diffuse_visible_reflectance")]
-        public decimal DiffuseVisibleReflectance { get; set; }
+        public double DiffuseVisibleReflectance { get; set; }
 
         /// <summary>
         /// The back-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Back Side Slat Beam Visible Reflectance. Default value is 0.5.”
@@ -504,7 +504,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The back-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Back Side Slat Beam Visible Reflectance. Default value is 0.5.”</value>
         [DataMember(Name="diffuse_visible_reflectance_back", EmitDefaultValue=false)]
         [JsonProperty("diffuse_visible_reflectance_back")]
-        public decimal DiffuseVisibleReflectanceBack { get; set; }
+        public double DiffuseVisibleReflectanceBack { get; set; }
 
         /// <summary>
         /// The slat infrared hemispherical transmittance. It is zero for solid metallic, wooden or glass slats, but may be non-zero in some cases such as for thin plastic slats. The default value is 0.
@@ -512,7 +512,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The slat infrared hemispherical transmittance. It is zero for solid metallic, wooden or glass slats, but may be non-zero in some cases such as for thin plastic slats. The default value is 0.</value>
         [DataMember(Name="infrared_transmittance", EmitDefaultValue=false)]
         [JsonProperty("infrared_transmittance")]
-        public decimal InfraredTransmittance { get; set; }
+        public double InfraredTransmittance { get; set; }
 
         /// <summary>
         /// Front side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9.
@@ -520,7 +520,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Front side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9.</value>
         [DataMember(Name="emissivity", EmitDefaultValue=false)]
         [JsonProperty("emissivity")]
-        public decimal Emissivity { get; set; }
+        public double Emissivity { get; set; }
 
         /// <summary>
         /// Back side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9.
@@ -528,7 +528,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Back side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9.</value>
         [DataMember(Name="emissivity_back", EmitDefaultValue=false)]
         [JsonProperty("emissivity_back")]
-        public decimal EmissivityBack { get; set; }
+        public double EmissivityBack { get; set; }
 
         /// <summary>
         /// The distance from the mid-plane of the blind to the adjacent glass in meters. The default value is 0.05.
@@ -536,7 +536,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The distance from the mid-plane of the blind to the adjacent glass in meters. The default value is 0.05.</value>
         [DataMember(Name="distance_to_glass", EmitDefaultValue=false)]
         [JsonProperty("distance_to_glass")]
-        public decimal DistanceToGlass { get; set; }
+        public double DistanceToGlass { get; set; }
 
         /// <summary>
         /// The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. The default value is 0.5
@@ -544,7 +544,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. The default value is 0.5</value>
         [DataMember(Name="top_opening_multiplier", EmitDefaultValue=false)]
         [JsonProperty("top_opening_multiplier")]
-        public decimal TopOpeningMultiplier { get; set; }
+        public double TopOpeningMultiplier { get; set; }
 
         /// <summary>
         /// The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. The default value is 0.
@@ -552,7 +552,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. The default value is 0.</value>
         [DataMember(Name="bottom_opening_multiplier", EmitDefaultValue=false)]
         [JsonProperty("bottom_opening_multiplier")]
-        public decimal BottomOpeningMultiplier { get; set; }
+        public double BottomOpeningMultiplier { get; set; }
 
         /// <summary>
         /// The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. The default value is 0.5.
@@ -560,7 +560,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. The default value is 0.5.</value>
         [DataMember(Name="left_opening_multiplier", EmitDefaultValue=false)]
         [JsonProperty("left_opening_multiplier")]
-        public decimal LeftOpeningMultiplier { get; set; }
+        public double LeftOpeningMultiplier { get; set; }
 
         /// <summary>
         /// The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. The default value is 0.5.
@@ -568,7 +568,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. The default value is 0.5.</value>
         [DataMember(Name="right_opening_multiplier", EmitDefaultValue=false)]
         [JsonProperty("right_opening_multiplier")]
-        public decimal RightOpeningMultiplier { get; set; }
+        public double RightOpeningMultiplier { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -887,182 +887,182 @@ namespace HoneybeeDotNet.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
-            // SlatWidth (decimal) maximum
-            if(this.SlatWidth > (decimal)1)
+            // SlatWidth (double) maximum
+            if(this.SlatWidth > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SlatWidth, must be a value less than or equal to 1.", new [] { "SlatWidth" });
             }
 
-            // SlatSeparation (decimal) maximum
-            if(this.SlatSeparation > (decimal)1)
+            // SlatSeparation (double) maximum
+            if(this.SlatSeparation > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SlatSeparation, must be a value less than or equal to 1.", new [] { "SlatSeparation" });
             }
 
-            // SlatThickness (decimal) maximum
-            if(this.SlatThickness > (decimal)0.1)
+            // SlatThickness (double) maximum
+            if(this.SlatThickness > (double)0.1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SlatThickness, must be a value less than or equal to 0.1.", new [] { "SlatThickness" });
             }
 
-            // SlatAngle (decimal) maximum
-            if(this.SlatAngle > (decimal)180)
+            // SlatAngle (double) maximum
+            if(this.SlatAngle > (double)180)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SlatAngle, must be a value less than or equal to 180.", new [] { "SlatAngle" });
             }
 
-            // SlatAngle (decimal) minimum
-            if(this.SlatAngle < (decimal)0)
+            // SlatAngle (double) minimum
+            if(this.SlatAngle < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SlatAngle, must be a value greater than or equal to 0.", new [] { "SlatAngle" });
             }
 
-            // BeamSolarTransmittance (decimal) minimum
-            if(this.BeamSolarTransmittance < (decimal)0)
+            // BeamSolarTransmittance (double) minimum
+            if(this.BeamSolarTransmittance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for BeamSolarTransmittance, must be a value greater than or equal to 0.", new [] { "BeamSolarTransmittance" });
             }
 
-            // BeamSolarReflectance (decimal) minimum
-            if(this.BeamSolarReflectance < (decimal)0)
+            // BeamSolarReflectance (double) minimum
+            if(this.BeamSolarReflectance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for BeamSolarReflectance, must be a value greater than or equal to 0.", new [] { "BeamSolarReflectance" });
             }
 
-            // BeamSolarReflectanceBack (decimal) minimum
-            if(this.BeamSolarReflectanceBack < (decimal)0)
+            // BeamSolarReflectanceBack (double) minimum
+            if(this.BeamSolarReflectanceBack < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for BeamSolarReflectanceBack, must be a value greater than or equal to 0.", new [] { "BeamSolarReflectanceBack" });
             }
 
-            // DiffuseSolarTransmittance (decimal) minimum
-            if(this.DiffuseSolarTransmittance < (decimal)0)
+            // DiffuseSolarTransmittance (double) minimum
+            if(this.DiffuseSolarTransmittance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DiffuseSolarTransmittance, must be a value greater than or equal to 0.", new [] { "DiffuseSolarTransmittance" });
             }
 
-            // DiffuseSolarReflectance (decimal) minimum
-            if(this.DiffuseSolarReflectance < (decimal)0)
+            // DiffuseSolarReflectance (double) minimum
+            if(this.DiffuseSolarReflectance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DiffuseSolarReflectance, must be a value greater than or equal to 0.", new [] { "DiffuseSolarReflectance" });
             }
 
-            // DiffuseSolarReflectanceBack (decimal) minimum
-            if(this.DiffuseSolarReflectanceBack < (decimal)0)
+            // DiffuseSolarReflectanceBack (double) minimum
+            if(this.DiffuseSolarReflectanceBack < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DiffuseSolarReflectanceBack, must be a value greater than or equal to 0.", new [] { "DiffuseSolarReflectanceBack" });
             }
 
-            // BeamVisibleTransmittance (decimal) minimum
-            if(this.BeamVisibleTransmittance < (decimal)0)
+            // BeamVisibleTransmittance (double) minimum
+            if(this.BeamVisibleTransmittance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for BeamVisibleTransmittance, must be a value greater than or equal to 0.", new [] { "BeamVisibleTransmittance" });
             }
 
-            // BeamVisibleReflectance (decimal) minimum
-            if(this.BeamVisibleReflectance < (decimal)0)
+            // BeamVisibleReflectance (double) minimum
+            if(this.BeamVisibleReflectance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for BeamVisibleReflectance, must be a value greater than or equal to 0.", new [] { "BeamVisibleReflectance" });
             }
 
-            // BeamVisibleReflectanceBack (decimal) minimum
-            if(this.BeamVisibleReflectanceBack < (decimal)0)
+            // BeamVisibleReflectanceBack (double) minimum
+            if(this.BeamVisibleReflectanceBack < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for BeamVisibleReflectanceBack, must be a value greater than or equal to 0.", new [] { "BeamVisibleReflectanceBack" });
             }
 
-            // DiffuseVisibleTransmittance (decimal) minimum
-            if(this.DiffuseVisibleTransmittance < (decimal)0)
+            // DiffuseVisibleTransmittance (double) minimum
+            if(this.DiffuseVisibleTransmittance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DiffuseVisibleTransmittance, must be a value greater than or equal to 0.", new [] { "DiffuseVisibleTransmittance" });
             }
 
-            // DiffuseVisibleReflectance (decimal) minimum
-            if(this.DiffuseVisibleReflectance < (decimal)0)
+            // DiffuseVisibleReflectance (double) minimum
+            if(this.DiffuseVisibleReflectance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DiffuseVisibleReflectance, must be a value greater than or equal to 0.", new [] { "DiffuseVisibleReflectance" });
             }
 
-            // DiffuseVisibleReflectanceBack (decimal) minimum
-            if(this.DiffuseVisibleReflectanceBack < (decimal)0)
+            // DiffuseVisibleReflectanceBack (double) minimum
+            if(this.DiffuseVisibleReflectanceBack < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DiffuseVisibleReflectanceBack, must be a value greater than or equal to 0.", new [] { "DiffuseVisibleReflectanceBack" });
             }
 
-            // InfraredTransmittance (decimal) minimum
-            if(this.InfraredTransmittance < (decimal)0)
+            // InfraredTransmittance (double) minimum
+            if(this.InfraredTransmittance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InfraredTransmittance, must be a value greater than or equal to 0.", new [] { "InfraredTransmittance" });
             }
 
-            // Emissivity (decimal) minimum
-            if(this.Emissivity < (decimal)0)
+            // Emissivity (double) minimum
+            if(this.Emissivity < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Emissivity, must be a value greater than or equal to 0.", new [] { "Emissivity" });
             }
 
-            // EmissivityBack (decimal) minimum
-            if(this.EmissivityBack < (decimal)0)
+            // EmissivityBack (double) minimum
+            if(this.EmissivityBack < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for EmissivityBack, must be a value greater than or equal to 0.", new [] { "EmissivityBack" });
             }
 
-            // DistanceToGlass (decimal) maximum
-            if(this.DistanceToGlass > (decimal)1)
+            // DistanceToGlass (double) maximum
+            if(this.DistanceToGlass > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DistanceToGlass, must be a value less than or equal to 1.", new [] { "DistanceToGlass" });
             }
 
-            // DistanceToGlass (decimal) minimum
-            if(this.DistanceToGlass < (decimal)0.01)
+            // DistanceToGlass (double) minimum
+            if(this.DistanceToGlass < (double)0.01)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DistanceToGlass, must be a value greater than or equal to 0.01.", new [] { "DistanceToGlass" });
             }
 
-            // TopOpeningMultiplier (decimal) maximum
-            if(this.TopOpeningMultiplier > (decimal)1)
+            // TopOpeningMultiplier (double) maximum
+            if(this.TopOpeningMultiplier > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TopOpeningMultiplier, must be a value less than or equal to 1.", new [] { "TopOpeningMultiplier" });
             }
 
-            // TopOpeningMultiplier (decimal) minimum
-            if(this.TopOpeningMultiplier < (decimal)0)
+            // TopOpeningMultiplier (double) minimum
+            if(this.TopOpeningMultiplier < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TopOpeningMultiplier, must be a value greater than or equal to 0.", new [] { "TopOpeningMultiplier" });
             }
 
-            // BottomOpeningMultiplier (decimal) maximum
-            if(this.BottomOpeningMultiplier > (decimal)1)
+            // BottomOpeningMultiplier (double) maximum
+            if(this.BottomOpeningMultiplier > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for BottomOpeningMultiplier, must be a value less than or equal to 1.", new [] { "BottomOpeningMultiplier" });
             }
 
-            // BottomOpeningMultiplier (decimal) minimum
-            if(this.BottomOpeningMultiplier < (decimal)0)
+            // BottomOpeningMultiplier (double) minimum
+            if(this.BottomOpeningMultiplier < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for BottomOpeningMultiplier, must be a value greater than or equal to 0.", new [] { "BottomOpeningMultiplier" });
             }
 
-            // LeftOpeningMultiplier (decimal) maximum
-            if(this.LeftOpeningMultiplier > (decimal)1)
+            // LeftOpeningMultiplier (double) maximum
+            if(this.LeftOpeningMultiplier > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LeftOpeningMultiplier, must be a value less than or equal to 1.", new [] { "LeftOpeningMultiplier" });
             }
 
-            // LeftOpeningMultiplier (decimal) minimum
-            if(this.LeftOpeningMultiplier < (decimal)0)
+            // LeftOpeningMultiplier (double) minimum
+            if(this.LeftOpeningMultiplier < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LeftOpeningMultiplier, must be a value greater than or equal to 0.", new [] { "LeftOpeningMultiplier" });
             }
 
-            // RightOpeningMultiplier (decimal) maximum
-            if(this.RightOpeningMultiplier > (decimal)1)
+            // RightOpeningMultiplier (double) maximum
+            if(this.RightOpeningMultiplier > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RightOpeningMultiplier, must be a value less than or equal to 1.", new [] { "RightOpeningMultiplier" });
             }
 
-            // RightOpeningMultiplier (decimal) minimum
-            if(this.RightOpeningMultiplier < (decimal)0)
+            // RightOpeningMultiplier (double) minimum
+            if(this.RightOpeningMultiplier < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RightOpeningMultiplier, must be a value greater than or equal to 0.", new [] { "RightOpeningMultiplier" });
             }

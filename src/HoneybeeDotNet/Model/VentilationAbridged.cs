@@ -40,12 +40,12 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <param name="name">Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters. (required).</param>
         /// <param name="type">type (default to &quot;VentilationAbridged&quot;).</param>
-        /// <param name="flowPerPerson">Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room. (default to 0M).</param>
-        /// <param name="flowPerArea">Intensity of ventilation in [m3/s per m2 of floor area]. (default to 0M).</param>
-        /// <param name="airChangesPerHour">Intensity of ventilation in air changes per hour (ACH) for the entire Room. (default to 0M).</param>
-        /// <param name="flowPerZone">Intensity of ventilation in m3/s for the entire Room. (default to 0M).</param>
+        /// <param name="flowPerPerson">Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room. (default to 0).</param>
+        /// <param name="flowPerArea">Intensity of ventilation in [m3/s per m2 of floor area]. (default to 0).</param>
+        /// <param name="airChangesPerHour">Intensity of ventilation in air changes per hour (ACH) for the entire Room. (default to 0).</param>
+        /// <param name="flowPerZone">Intensity of ventilation in m3/s for the entire Room. (default to 0).</param>
         /// <param name="schedule">Name of the schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile..</param>
-        public VentilationAbridged(string name, string type = "VentilationAbridged", decimal flowPerPerson = 0M, decimal flowPerArea = 0M, decimal airChangesPerHour = 0M, decimal flowPerZone = 0M, string schedule = default)
+        public VentilationAbridged(string name, string type = "VentilationAbridged", double flowPerPerson = 0, double flowPerArea = 0, double airChangesPerHour = 0, double flowPerZone = 0, string schedule = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -69,7 +69,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "flowPerPerson" provided
             if (flowPerPerson == null)
             {
-                this.FlowPerPerson = 0M;
+                this.FlowPerPerson = 0;
             }
             else
             {
@@ -78,7 +78,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "flowPerArea" provided
             if (flowPerArea == null)
             {
-                this.FlowPerArea = 0M;
+                this.FlowPerArea = 0;
             }
             else
             {
@@ -87,7 +87,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "airChangesPerHour" provided
             if (airChangesPerHour == null)
             {
-                this.AirChangesPerHour = 0M;
+                this.AirChangesPerHour = 0;
             }
             else
             {
@@ -96,7 +96,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "flowPerZone" provided
             if (flowPerZone == null)
             {
-                this.FlowPerZone = 0M;
+                this.FlowPerZone = 0;
             }
             else
             {
@@ -126,7 +126,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room.</value>
         [DataMember(Name="flow_per_person", EmitDefaultValue=false)]
         [JsonProperty("flow_per_person")]
-        public decimal FlowPerPerson { get; set; }
+        public double FlowPerPerson { get; set; }
 
         /// <summary>
         /// Intensity of ventilation in [m3/s per m2 of floor area].
@@ -134,7 +134,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Intensity of ventilation in [m3/s per m2 of floor area].</value>
         [DataMember(Name="flow_per_area", EmitDefaultValue=false)]
         [JsonProperty("flow_per_area")]
-        public decimal FlowPerArea { get; set; }
+        public double FlowPerArea { get; set; }
 
         /// <summary>
         /// Intensity of ventilation in air changes per hour (ACH) for the entire Room.
@@ -142,7 +142,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Intensity of ventilation in air changes per hour (ACH) for the entire Room.</value>
         [DataMember(Name="air_changes_per_hour", EmitDefaultValue=false)]
         [JsonProperty("air_changes_per_hour")]
-        public decimal AirChangesPerHour { get; set; }
+        public double AirChangesPerHour { get; set; }
 
         /// <summary>
         /// Intensity of ventilation in m3/s for the entire Room.
@@ -150,7 +150,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Intensity of ventilation in m3/s for the entire Room.</value>
         [DataMember(Name="flow_per_zone", EmitDefaultValue=false)]
         [JsonProperty("flow_per_zone")]
-        public decimal FlowPerZone { get; set; }
+        public double FlowPerZone { get; set; }
 
         /// <summary>
         /// Name of the schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.
@@ -309,26 +309,26 @@ namespace HoneybeeDotNet.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
-            // FlowPerPerson (decimal) minimum
-            if(this.FlowPerPerson < (decimal)0)
+            // FlowPerPerson (double) minimum
+            if(this.FlowPerPerson < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for FlowPerPerson, must be a value greater than or equal to 0.", new [] { "FlowPerPerson" });
             }
 
-            // FlowPerArea (decimal) minimum
-            if(this.FlowPerArea < (decimal)0)
+            // FlowPerArea (double) minimum
+            if(this.FlowPerArea < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for FlowPerArea, must be a value greater than or equal to 0.", new [] { "FlowPerArea" });
             }
 
-            // AirChangesPerHour (decimal) minimum
-            if(this.AirChangesPerHour < (decimal)0)
+            // AirChangesPerHour (double) minimum
+            if(this.AirChangesPerHour < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for AirChangesPerHour, must be a value greater than or equal to 0.", new [] { "AirChangesPerHour" });
             }
 
-            // FlowPerZone (decimal) minimum
-            if(this.FlowPerZone < (decimal)0)
+            // FlowPerZone (double) minimum
+            if(this.FlowPerZone < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for FlowPerZone, must be a value greater than or equal to 0.", new [] { "FlowPerZone" });
             }

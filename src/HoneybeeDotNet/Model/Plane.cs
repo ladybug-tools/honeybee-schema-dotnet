@@ -42,7 +42,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="o">Plane origin as 3 (x, y, z) values (required).</param>
         /// <param name="type">type (default to &quot;Plane&quot;).</param>
         /// <param name="x">Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated..</param>
-        public Plane(List<decimal> n, List<decimal> o, string type = "Plane", List<decimal> x = default)
+        public Plane(List<double> n, List<double> o, string type = "Plane", List<double> x = default)
         {
             // to ensure "n" is required (not null)
             if (n == null)
@@ -82,7 +82,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Plane normal as 3 (x, y, z) values.</value>
         [DataMember(Name="n", EmitDefaultValue=false)]
         [JsonProperty("n")]
-        public List<decimal> N { get; set; }
+        public List<double> N { get; set; }
 
         /// <summary>
         /// Plane origin as 3 (x, y, z) values
@@ -90,7 +90,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Plane origin as 3 (x, y, z) values</value>
         [DataMember(Name="o", EmitDefaultValue=false)]
         [JsonProperty("o")]
-        public List<decimal> O { get; set; }
+        public List<double> O { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
@@ -105,7 +105,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated.</value>
         [DataMember(Name="x", EmitDefaultValue=false)]
         [JsonProperty("x")]
-        public List<decimal> X { get; set; }
+        public List<double> X { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

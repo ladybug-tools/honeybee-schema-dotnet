@@ -40,21 +40,21 @@ namespace HoneybeeDotNet.Model
         /// </summary>
         /// <param name="name">Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters. (required).</param>
         /// <param name="type">type (default to &quot;EnergyWindowMaterialShade&quot;).</param>
-        /// <param name="solarTransmittance">The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default value is 0.4. (default to 0.4M).</param>
-        /// <param name="solarReflectance">The reflectance averaged over the solar spectrum. It us assumed same on both sides of shade and independent of incidence angle. Default value is 0.5 (default to 0.5M).</param>
-        /// <param name="visibleTransmittance">The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4. (default to 0.4M).</param>
-        /// <param name="visibleReflectance">The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4 (default to 0.4M).</param>
-        /// <param name="emissivity">The effective long-wave infrared hemispherical emissivity. It is assumed same on both sides of shade. Default value is 0.9. (default to 0.9M).</param>
-        /// <param name="infraredTransmittance">The effective long-wave transmittance. It is assumed independent of incidence angle. Default value is 0. (default to 0M).</param>
-        /// <param name="thickness">The thickness of the shade material in meters. Default value is 0.005. (default to 0.005M).</param>
-        /// <param name="conductivity">The conductivity of the shade material in W/(m-K). Default value is 0.1. (default to 0.1M).</param>
-        /// <param name="distanceToGlass">The distance from shade to adjacent glass in meters. Default value is 0.05 (default to 0.05M).</param>
-        /// <param name="topOpeningMultiplier">The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. Default value is 0.5. (default to 0.5M).</param>
-        /// <param name="bottomOpeningMultiplier">The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. Default value is 0.5. (default to 0.5M).</param>
-        /// <param name="leftOpeningMultiplier">The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. Default value is 0.5. (default to 0.5M).</param>
-        /// <param name="rightOpeningMultiplier">The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. Default value is 0.5. (default to 0.5M).</param>
-        /// <param name="airflowPermeability">The fraction of the shade surface that is open to air flow. If air cannot pass through the shade material, airflow_permeability &#x3D; 0. Default value is 0. (default to 0M).</param>
-        public EnergyWindowMaterialShade(string name, string type = "EnergyWindowMaterialShade", decimal solarTransmittance = 0.4M, decimal solarReflectance = 0.5M, decimal visibleTransmittance = 0.4M, decimal visibleReflectance = 0.4M, decimal emissivity = 0.9M, decimal infraredTransmittance = 0M, decimal thickness = 0.005M, decimal conductivity = 0.1M, decimal distanceToGlass = 0.05M, decimal topOpeningMultiplier = 0.5M, decimal bottomOpeningMultiplier = 0.5M, decimal leftOpeningMultiplier = 0.5M, decimal rightOpeningMultiplier = 0.5M, decimal airflowPermeability = 0M)
+        /// <param name="solarTransmittance">The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default value is 0.4. (default to 0.4).</param>
+        /// <param name="solarReflectance">The reflectance averaged over the solar spectrum. It us assumed same on both sides of shade and independent of incidence angle. Default value is 0.5 (default to 0.5).</param>
+        /// <param name="visibleTransmittance">The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4. (default to 0.4).</param>
+        /// <param name="visibleReflectance">The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4 (default to 0.4).</param>
+        /// <param name="emissivity">The effective long-wave infrared hemispherical emissivity. It is assumed same on both sides of shade. Default value is 0.9. (default to 0.9).</param>
+        /// <param name="infraredTransmittance">The effective long-wave transmittance. It is assumed independent of incidence angle. Default value is 0. (default to 0).</param>
+        /// <param name="thickness">The thickness of the shade material in meters. Default value is 0.005. (default to 0.005).</param>
+        /// <param name="conductivity">The conductivity of the shade material in W/(m-K). Default value is 0.1. (default to 0.1).</param>
+        /// <param name="distanceToGlass">The distance from shade to adjacent glass in meters. Default value is 0.05 (default to 0.05).</param>
+        /// <param name="topOpeningMultiplier">The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. Default value is 0.5. (default to 0.5).</param>
+        /// <param name="bottomOpeningMultiplier">The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. Default value is 0.5. (default to 0.5).</param>
+        /// <param name="leftOpeningMultiplier">The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. Default value is 0.5. (default to 0.5).</param>
+        /// <param name="rightOpeningMultiplier">The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. Default value is 0.5. (default to 0.5).</param>
+        /// <param name="airflowPermeability">The fraction of the shade surface that is open to air flow. If air cannot pass through the shade material, airflow_permeability &#x3D; 0. Default value is 0. (default to 0).</param>
+        public EnergyWindowMaterialShade(string name, string type = "EnergyWindowMaterialShade", double solarTransmittance = 0.4, double solarReflectance = 0.5, double visibleTransmittance = 0.4, double visibleReflectance = 0.4, double emissivity = 0.9, double infraredTransmittance = 0, double thickness = 0.005, double conductivity = 0.1, double distanceToGlass = 0.05, double topOpeningMultiplier = 0.5, double bottomOpeningMultiplier = 0.5, double leftOpeningMultiplier = 0.5, double rightOpeningMultiplier = 0.5, double airflowPermeability = 0)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -78,7 +78,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "solarTransmittance" provided
             if (solarTransmittance == null)
             {
-                this.SolarTransmittance = 0.4M;
+                this.SolarTransmittance = 0.4;
             }
             else
             {
@@ -87,7 +87,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "solarReflectance" provided
             if (solarReflectance == null)
             {
-                this.SolarReflectance = 0.5M;
+                this.SolarReflectance = 0.5;
             }
             else
             {
@@ -96,7 +96,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "visibleTransmittance" provided
             if (visibleTransmittance == null)
             {
-                this.VisibleTransmittance = 0.4M;
+                this.VisibleTransmittance = 0.4;
             }
             else
             {
@@ -105,7 +105,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "visibleReflectance" provided
             if (visibleReflectance == null)
             {
-                this.VisibleReflectance = 0.4M;
+                this.VisibleReflectance = 0.4;
             }
             else
             {
@@ -114,7 +114,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "emissivity" provided
             if (emissivity == null)
             {
-                this.Emissivity = 0.9M;
+                this.Emissivity = 0.9;
             }
             else
             {
@@ -123,7 +123,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "infraredTransmittance" provided
             if (infraredTransmittance == null)
             {
-                this.InfraredTransmittance = 0M;
+                this.InfraredTransmittance = 0;
             }
             else
             {
@@ -132,7 +132,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "thickness" provided
             if (thickness == null)
             {
-                this.Thickness = 0.005M;
+                this.Thickness = 0.005;
             }
             else
             {
@@ -141,7 +141,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "conductivity" provided
             if (conductivity == null)
             {
-                this.Conductivity = 0.1M;
+                this.Conductivity = 0.1;
             }
             else
             {
@@ -150,7 +150,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "distanceToGlass" provided
             if (distanceToGlass == null)
             {
-                this.DistanceToGlass = 0.05M;
+                this.DistanceToGlass = 0.05;
             }
             else
             {
@@ -159,7 +159,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "topOpeningMultiplier" provided
             if (topOpeningMultiplier == null)
             {
-                this.TopOpeningMultiplier = 0.5M;
+                this.TopOpeningMultiplier = 0.5;
             }
             else
             {
@@ -168,7 +168,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "bottomOpeningMultiplier" provided
             if (bottomOpeningMultiplier == null)
             {
-                this.BottomOpeningMultiplier = 0.5M;
+                this.BottomOpeningMultiplier = 0.5;
             }
             else
             {
@@ -177,7 +177,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "leftOpeningMultiplier" provided
             if (leftOpeningMultiplier == null)
             {
-                this.LeftOpeningMultiplier = 0.5M;
+                this.LeftOpeningMultiplier = 0.5;
             }
             else
             {
@@ -186,7 +186,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "rightOpeningMultiplier" provided
             if (rightOpeningMultiplier == null)
             {
-                this.RightOpeningMultiplier = 0.5M;
+                this.RightOpeningMultiplier = 0.5;
             }
             else
             {
@@ -195,7 +195,7 @@ namespace HoneybeeDotNet.Model
             // use default value if no "airflowPermeability" provided
             if (airflowPermeability == null)
             {
-                this.AirflowPermeability = 0M;
+                this.AirflowPermeability = 0;
             }
             else
             {
@@ -224,7 +224,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default value is 0.4.</value>
         [DataMember(Name="solar_transmittance", EmitDefaultValue=false)]
         [JsonProperty("solar_transmittance")]
-        public decimal SolarTransmittance { get; set; }
+        public double SolarTransmittance { get; set; }
 
         /// <summary>
         /// The reflectance averaged over the solar spectrum. It us assumed same on both sides of shade and independent of incidence angle. Default value is 0.5
@@ -232,7 +232,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The reflectance averaged over the solar spectrum. It us assumed same on both sides of shade and independent of incidence angle. Default value is 0.5</value>
         [DataMember(Name="solar_reflectance", EmitDefaultValue=false)]
         [JsonProperty("solar_reflectance")]
-        public decimal SolarReflectance { get; set; }
+        public double SolarReflectance { get; set; }
 
         /// <summary>
         /// The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4.
@@ -240,7 +240,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4.</value>
         [DataMember(Name="visible_transmittance", EmitDefaultValue=false)]
         [JsonProperty("visible_transmittance")]
-        public decimal VisibleTransmittance { get; set; }
+        public double VisibleTransmittance { get; set; }
 
         /// <summary>
         /// The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4
@@ -248,7 +248,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4</value>
         [DataMember(Name="visible_reflectance", EmitDefaultValue=false)]
         [JsonProperty("visible_reflectance")]
-        public decimal VisibleReflectance { get; set; }
+        public double VisibleReflectance { get; set; }
 
         /// <summary>
         /// The effective long-wave infrared hemispherical emissivity. It is assumed same on both sides of shade. Default value is 0.9.
@@ -256,7 +256,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The effective long-wave infrared hemispherical emissivity. It is assumed same on both sides of shade. Default value is 0.9.</value>
         [DataMember(Name="emissivity", EmitDefaultValue=false)]
         [JsonProperty("emissivity")]
-        public decimal Emissivity { get; set; }
+        public double Emissivity { get; set; }
 
         /// <summary>
         /// The effective long-wave transmittance. It is assumed independent of incidence angle. Default value is 0.
@@ -264,7 +264,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The effective long-wave transmittance. It is assumed independent of incidence angle. Default value is 0.</value>
         [DataMember(Name="infrared_transmittance", EmitDefaultValue=false)]
         [JsonProperty("infrared_transmittance")]
-        public decimal InfraredTransmittance { get; set; }
+        public double InfraredTransmittance { get; set; }
 
         /// <summary>
         /// The thickness of the shade material in meters. Default value is 0.005.
@@ -272,7 +272,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The thickness of the shade material in meters. Default value is 0.005.</value>
         [DataMember(Name="thickness", EmitDefaultValue=false)]
         [JsonProperty("thickness")]
-        public decimal Thickness { get; set; }
+        public double Thickness { get; set; }
 
         /// <summary>
         /// The conductivity of the shade material in W/(m-K). Default value is 0.1.
@@ -280,7 +280,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The conductivity of the shade material in W/(m-K). Default value is 0.1.</value>
         [DataMember(Name="conductivity", EmitDefaultValue=false)]
         [JsonProperty("conductivity")]
-        public decimal Conductivity { get; set; }
+        public double Conductivity { get; set; }
 
         /// <summary>
         /// The distance from shade to adjacent glass in meters. Default value is 0.05
@@ -288,7 +288,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The distance from shade to adjacent glass in meters. Default value is 0.05</value>
         [DataMember(Name="distance_to_glass", EmitDefaultValue=false)]
         [JsonProperty("distance_to_glass")]
-        public decimal DistanceToGlass { get; set; }
+        public double DistanceToGlass { get; set; }
 
         /// <summary>
         /// The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. Default value is 0.5.
@@ -296,7 +296,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. Default value is 0.5.</value>
         [DataMember(Name="top_opening_multiplier", EmitDefaultValue=false)]
         [JsonProperty("top_opening_multiplier")]
-        public decimal TopOpeningMultiplier { get; set; }
+        public double TopOpeningMultiplier { get; set; }
 
         /// <summary>
         /// The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. Default value is 0.5.
@@ -304,7 +304,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. Default value is 0.5.</value>
         [DataMember(Name="bottom_opening_multiplier", EmitDefaultValue=false)]
         [JsonProperty("bottom_opening_multiplier")]
-        public decimal BottomOpeningMultiplier { get; set; }
+        public double BottomOpeningMultiplier { get; set; }
 
         /// <summary>
         /// The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. Default value is 0.5.
@@ -312,7 +312,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. Default value is 0.5.</value>
         [DataMember(Name="left_opening_multiplier", EmitDefaultValue=false)]
         [JsonProperty("left_opening_multiplier")]
-        public decimal LeftOpeningMultiplier { get; set; }
+        public double LeftOpeningMultiplier { get; set; }
 
         /// <summary>
         /// The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. Default value is 0.5.
@@ -320,7 +320,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. Default value is 0.5.</value>
         [DataMember(Name="right_opening_multiplier", EmitDefaultValue=false)]
         [JsonProperty("right_opening_multiplier")]
-        public decimal RightOpeningMultiplier { get; set; }
+        public double RightOpeningMultiplier { get; set; }
 
         /// <summary>
         /// The fraction of the shade surface that is open to air flow. If air cannot pass through the shade material, airflow_permeability &#x3D; 0. Default value is 0.
@@ -328,7 +328,7 @@ namespace HoneybeeDotNet.Model
         /// <value>The fraction of the shade surface that is open to air flow. If air cannot pass through the shade material, airflow_permeability &#x3D; 0. Default value is 0.</value>
         [DataMember(Name="airflow_permeability", EmitDefaultValue=false)]
         [JsonProperty("airflow_permeability")]
-        public decimal AirflowPermeability { get; set; }
+        public double AirflowPermeability { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -551,104 +551,104 @@ namespace HoneybeeDotNet.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
-            // SolarTransmittance (decimal) minimum
-            if(this.SolarTransmittance < (decimal)0)
+            // SolarTransmittance (double) minimum
+            if(this.SolarTransmittance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SolarTransmittance, must be a value greater than or equal to 0.", new [] { "SolarTransmittance" });
             }
 
-            // SolarReflectance (decimal) minimum
-            if(this.SolarReflectance < (decimal)0)
+            // SolarReflectance (double) minimum
+            if(this.SolarReflectance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SolarReflectance, must be a value greater than or equal to 0.", new [] { "SolarReflectance" });
             }
 
-            // VisibleTransmittance (decimal) minimum
-            if(this.VisibleTransmittance < (decimal)0)
+            // VisibleTransmittance (double) minimum
+            if(this.VisibleTransmittance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VisibleTransmittance, must be a value greater than or equal to 0.", new [] { "VisibleTransmittance" });
             }
 
-            // VisibleReflectance (decimal) minimum
-            if(this.VisibleReflectance < (decimal)0)
+            // VisibleReflectance (double) minimum
+            if(this.VisibleReflectance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VisibleReflectance, must be a value greater than or equal to 0.", new [] { "VisibleReflectance" });
             }
 
-            // InfraredTransmittance (decimal) minimum
-            if(this.InfraredTransmittance < (decimal)0)
+            // InfraredTransmittance (double) minimum
+            if(this.InfraredTransmittance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InfraredTransmittance, must be a value greater than or equal to 0.", new [] { "InfraredTransmittance" });
             }
 
-            // DistanceToGlass (decimal) maximum
-            if(this.DistanceToGlass > (decimal)1)
+            // DistanceToGlass (double) maximum
+            if(this.DistanceToGlass > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DistanceToGlass, must be a value less than or equal to 1.", new [] { "DistanceToGlass" });
             }
 
-            // DistanceToGlass (decimal) minimum
-            if(this.DistanceToGlass < (decimal)0.001)
+            // DistanceToGlass (double) minimum
+            if(this.DistanceToGlass < (double)0.001)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DistanceToGlass, must be a value greater than or equal to 0.001.", new [] { "DistanceToGlass" });
             }
 
-            // TopOpeningMultiplier (decimal) maximum
-            if(this.TopOpeningMultiplier > (decimal)1)
+            // TopOpeningMultiplier (double) maximum
+            if(this.TopOpeningMultiplier > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TopOpeningMultiplier, must be a value less than or equal to 1.", new [] { "TopOpeningMultiplier" });
             }
 
-            // TopOpeningMultiplier (decimal) minimum
-            if(this.TopOpeningMultiplier < (decimal)0)
+            // TopOpeningMultiplier (double) minimum
+            if(this.TopOpeningMultiplier < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TopOpeningMultiplier, must be a value greater than or equal to 0.", new [] { "TopOpeningMultiplier" });
             }
 
-            // BottomOpeningMultiplier (decimal) maximum
-            if(this.BottomOpeningMultiplier > (decimal)1)
+            // BottomOpeningMultiplier (double) maximum
+            if(this.BottomOpeningMultiplier > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for BottomOpeningMultiplier, must be a value less than or equal to 1.", new [] { "BottomOpeningMultiplier" });
             }
 
-            // BottomOpeningMultiplier (decimal) minimum
-            if(this.BottomOpeningMultiplier < (decimal)0)
+            // BottomOpeningMultiplier (double) minimum
+            if(this.BottomOpeningMultiplier < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for BottomOpeningMultiplier, must be a value greater than or equal to 0.", new [] { "BottomOpeningMultiplier" });
             }
 
-            // LeftOpeningMultiplier (decimal) maximum
-            if(this.LeftOpeningMultiplier > (decimal)1)
+            // LeftOpeningMultiplier (double) maximum
+            if(this.LeftOpeningMultiplier > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LeftOpeningMultiplier, must be a value less than or equal to 1.", new [] { "LeftOpeningMultiplier" });
             }
 
-            // LeftOpeningMultiplier (decimal) minimum
-            if(this.LeftOpeningMultiplier < (decimal)0)
+            // LeftOpeningMultiplier (double) minimum
+            if(this.LeftOpeningMultiplier < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LeftOpeningMultiplier, must be a value greater than or equal to 0.", new [] { "LeftOpeningMultiplier" });
             }
 
-            // RightOpeningMultiplier (decimal) maximum
-            if(this.RightOpeningMultiplier > (decimal)1)
+            // RightOpeningMultiplier (double) maximum
+            if(this.RightOpeningMultiplier > (double)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RightOpeningMultiplier, must be a value less than or equal to 1.", new [] { "RightOpeningMultiplier" });
             }
 
-            // RightOpeningMultiplier (decimal) minimum
-            if(this.RightOpeningMultiplier < (decimal)0)
+            // RightOpeningMultiplier (double) minimum
+            if(this.RightOpeningMultiplier < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RightOpeningMultiplier, must be a value greater than or equal to 0.", new [] { "RightOpeningMultiplier" });
             }
 
-            // AirflowPermeability (decimal) maximum
-            if(this.AirflowPermeability > (decimal)0.8)
+            // AirflowPermeability (double) maximum
+            if(this.AirflowPermeability > (double)0.8)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for AirflowPermeability, must be a value less than or equal to 0.8.", new [] { "AirflowPermeability" });
             }
 
-            // AirflowPermeability (decimal) minimum
-            if(this.AirflowPermeability < (decimal)0)
+            // AirflowPermeability (double) minimum
+            if(this.AirflowPermeability < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for AirflowPermeability, must be a value greater than or equal to 0.", new [] { "AirflowPermeability" });
             }
