@@ -40,10 +40,11 @@ def replace_decimal(read_data):
 def replace_anyof_type(read_data, anyof_types):
   data = read_data
   for items in anyof_types:
-    replace_source ="AnyOf%s" % ("".join(items))
-    replace_new = "AnyOf<%s>" % (",".join(items).replace('number','double'))
-    data = data.replace(replace_source, replace_new)
-    print("\n---Replacing %s to %s" % (replace_source,replace_new))
+    if len(items)>0:
+      replace_source ="AnyOf%s" % ("".join(items))
+      replace_new = "AnyOf<%s>" % (",".join(items).replace('number','double'))
+      data = data.replace(replace_source, replace_new)
+      print("\n---Replacing %s to %s" % (replace_source,replace_new))
   return data
 
 def check_csfiles(source_folder, anyof_types):
@@ -89,7 +90,5 @@ def check_anyof_types(source_json_url):
   check_csfiles(source_folder, all_types)
 
 
-  
-
-# print(unitItem)
-# check_anyof_types("https://www.ladybug.tools/honeybee-schema/model.json")
+check_anyof_types("https://www.ladybug.tools/honeybee-schema/model.json")
+check_anyof_types("https://www.ladybug.tools/honeybee-schema/simulation-parameter.json")

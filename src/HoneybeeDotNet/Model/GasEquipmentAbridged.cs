@@ -42,10 +42,10 @@ namespace HoneybeeDotNet.Model
         /// <param name="wattsPerArea">Equipment level per floor area as [W/m2]. (required).</param>
         /// <param name="schedule">Name of the schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile. (required).</param>
         /// <param name="radiantFraction">Number for the amount of long-wave radiation heat given off by electric equipment. Default value is 0. (default to 0).</param>
-        /// <param name="latentFraction">Number for the amount of latent heat given off by electricequipment. Default value is 0..</param>
+        /// <param name="latentFraction">Number for the amount of latent heat given off by electricequipment. Default value is 0. (default to 0).</param>
         /// <param name="lostFraction">Number for the amount of “lost” heat being given off by equipment. The default value is 0. (default to 0).</param>
         /// <param name="type">type (default to &quot;GasEquipmentAbridged&quot;).</param>
-        public GasEquipmentAbridged(string name, double wattsPerArea, string schedule, double radiantFraction = 0, AnyOf<double,string> latentFraction = default, double lostFraction = 0, string type = "GasEquipmentAbridged")
+        public GasEquipmentAbridged(string name, double wattsPerArea, string schedule, double radiantFraction = 0, double latentFraction = 0, double lostFraction = 0, string type = "GasEquipmentAbridged")
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -86,7 +86,15 @@ namespace HoneybeeDotNet.Model
             {
                 this.RadiantFraction = radiantFraction;
             }
-            this.LatentFraction = latentFraction;
+            // use default value if no "latentFraction" provided
+            if (latentFraction == null)
+            {
+                this.LatentFraction = 0;
+            }
+            else
+            {
+                this.LatentFraction = latentFraction;
+            }
             // use default value if no "lostFraction" provided
             if (lostFraction == null)
             {
@@ -145,7 +153,7 @@ namespace HoneybeeDotNet.Model
         /// <value>Number for the amount of latent heat given off by electricequipment. Default value is 0.</value>
         [DataMember(Name="latent_fraction", EmitDefaultValue=false)]
         [JsonProperty("latent_fraction")]
-        public AnyOf<double,string> LatentFraction { get; set; }
+        public double LatentFraction { get; set; }
 
         /// <summary>
         /// Number for the amount of “lost” heat being given off by equipment. The default value is 0.
@@ -332,6 +340,18 @@ namespace HoneybeeDotNet.Model
             if(this.RadiantFraction < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RadiantFraction, must be a value greater than or equal to 0.", new [] { "RadiantFraction" });
+            }
+
+            // LatentFraction (double) maximum
+            if(this.LatentFraction > (double)1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LatentFraction, must be a value less than or equal to 1.", new [] { "LatentFraction" });
+            }
+
+            // LatentFraction (double) minimum
+            if(this.LatentFraction < (double)0)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LatentFraction, must be a value greater than or equal to 0.", new [] { "LatentFraction" });
             }
 
             // LostFraction (double) maximum

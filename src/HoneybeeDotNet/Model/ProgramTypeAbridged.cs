@@ -42,12 +42,12 @@ namespace HoneybeeDotNet.Model
         /// <param name="type">type (default to &quot;ProgramTypeAbridged&quot;).</param>
         /// <param name="people">People to describe the occupancy of the program. If None, no occupancy will be assumed for the program..</param>
         /// <param name="lighting">Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program..</param>
-        /// <param name="electricalEquipment">ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed..</param>
+        /// <param name="electricEquipment">ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed..</param>
         /// <param name="gasEquipment">GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed..</param>
         /// <param name="infiltration">Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program..</param>
         /// <param name="ventilation">Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed..</param>
         /// <param name="setpoint">Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned..</param>
-        public ProgramTypeAbridged(string name, string type = "ProgramTypeAbridged", PeopleAbridged people = default, LightingAbridged lighting = default, ElectricEquipmentAbridged electricalEquipment = default, GasEquipmentAbridged gasEquipment = default, InfiltrationAbridged infiltration = default, VentilationAbridged ventilation = default, SetpointAbridged setpoint = default)
+        public ProgramTypeAbridged(string name, string type = "ProgramTypeAbridged", PeopleAbridged people = default, LightingAbridged lighting = default, ElectricEquipmentAbridged electricEquipment = default, GasEquipmentAbridged gasEquipment = default, InfiltrationAbridged infiltration = default, VentilationAbridged ventilation = default, SetpointAbridged setpoint = default)
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -70,7 +70,7 @@ namespace HoneybeeDotNet.Model
             }
             this.People = people;
             this.Lighting = lighting;
-            this.ElectricEquipment = electricalEquipment;
+            this.ElectricEquipment = electricEquipment;
             this.GasEquipment = gasEquipment;
             this.Infiltration = infiltration;
             this.Ventilation = ventilation;
@@ -160,7 +160,7 @@ namespace HoneybeeDotNet.Model
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  People: ").Append(People).Append("\n");
             sb.Append("  Lighting: ").Append(Lighting).Append("\n");
-            sb.Append("  ElectricalEquipment: ").Append(ElectricEquipment).Append("\n");
+            sb.Append("  ElectricEquipment: ").Append(ElectricEquipment).Append("\n");
             sb.Append("  GasEquipment: ").Append(GasEquipment).Append("\n");
             sb.Append("  Infiltration: ").Append(Infiltration).Append("\n");
             sb.Append("  Ventilation: ").Append(Ventilation).Append("\n");
