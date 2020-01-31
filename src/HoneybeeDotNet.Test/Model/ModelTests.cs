@@ -153,14 +153,14 @@ namespace HoneybeeDotNet.Test
             Assert.AreEqual(prop.Name, "Generic Office Program");
             Assert.AreEqual(prop.Lighting.WattsPerArea, 10.55);
             Assert.AreEqual(prop.ElectricEquipment.LatentFraction, 0);
-            Assert.AreEqual(prop.People.LatentFraction.Obj, "autocalculate");
+            Assert.AreEqual(prop.People.LatentFraction, "autocalculate");
             Assert.AreEqual(prop.Infiltration.FlowPerExteriorArea, 0.0002266);
             Assert.AreEqual(prop.Setpoint.HeatingSchedule, "Generic Office Heating");
 
 
             var hvac = this.instance.Properties.Energy.Hvacs.First();
             Assert.AreEqual(hvac.HeatingAirTemperature, 50);
-            Assert.AreEqual(hvac.HeatingLimit.Obj, "autosize");
+            Assert.AreEqual(hvac.HeatingLimit, "autosize");
         }
 
     }

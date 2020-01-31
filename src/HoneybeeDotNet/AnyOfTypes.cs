@@ -57,6 +57,15 @@ namespace HoneybeeDotNet.Model
             return this.ToString();
         }
 
+        public override bool Equals(object obj)
+        {
+            return this.Obj.Equals(obj);
+        }
+        public override int GetHashCode()
+        {
+            return this.Obj.GetHashCode();
+        }
+        
         public static implicit operator string(AnyOf b) => b;
 
         public static implicit operator AnyOf(int d) => new AnyOf(d, typeof(int));

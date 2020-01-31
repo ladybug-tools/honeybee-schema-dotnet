@@ -97,7 +97,7 @@ namespace HoneybeeDotNet.Test
         public void PeopleTest()
         {
             Assert.AreEqual(this.instance.People.PeoplePerArea, 0.0565);
-            Assert.AreEqual(this.instance.People.LatentFraction.Obj, "autocalculate");
+            Assert.AreEqual(this.instance.People.LatentFraction, "autocalculate");
         }
         /// <summary>
         /// Test the property 'Lighting'
