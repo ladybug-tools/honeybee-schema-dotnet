@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
 Honeybee Model Schema
 
@@ -9,7 +9,6 @@ Contact: info@ladybug.tools
 -->
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2D9490D8-0848-4451-B3A9-9465C55F806F}</ProjectGuid>
@@ -62,19 +61,87 @@ Contact: info@ladybug.tools
       <HintPath Condition="Exists('..\..\vendor')">..\..\vendor\JsonSubTypes.1.5.2\lib\net45\JsonSubTypes.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp">
-        <HintPath Condition="Exists('$(SolutionDir)\packages')">$(SolutionDir)\packages\RestSharp.105.1.0\lib\net45\RestSharp.dll</HintPath>
-        <HintPath Condition="Exists('..\packages')">..\packages\RestSharp.105.1.0\lib\net45\RestSharp.dll</HintPath>
-        <HintPath Condition="Exists('..\..\packages')">..\..\packages\RestSharp.105.1.0\lib\net45\RestSharp.dll</HintPath>
+      <HintPath Condition="Exists('$(SolutionDir)\packages')">$(SolutionDir)\packages\RestSharp.105.1.0\lib\net45\RestSharp.dll</HintPath>
+      <HintPath Condition="Exists('..\packages')">..\packages\RestSharp.105.1.0\lib\net45\RestSharp.dll</HintPath>
+      <HintPath Condition="Exists('..\..\packages')">..\..\packages\RestSharp.105.1.0\lib\net45\RestSharp.dll</HintPath>
       <HintPath Condition="Exists('..\..\vendor')">..\..\vendor\RestSharp.105.1.0\lib\net45\RestSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="**\*.cs"
-             Exclude="obj\**" />
+    <Compile Include="AnyOfJsonConverter.cs" />
+    <Compile Include="AnyOfTypes.cs" />
+    <Compile Include="Client\ApiClient.cs" />
+    <Compile Include="Client\ApiException.cs" />
+    <Compile Include="Client\ApiResponse.cs" />
+    <Compile Include="Client\Configuration.cs" />
+    <Compile Include="Client\ExceptionFactory.cs" />
+    <Compile Include="Client\GlobalConfiguration.cs" />
+    <Compile Include="Client\IApiAccessor.cs" />
+    <Compile Include="Client\IReadableConfiguration.cs" />
+    <Compile Include="Client\OpenAPIDateConverter.cs" />
+    <Compile Include="Model\Adiabatic.cs" />
+    <Compile Include="Model\Aperture.cs" />
+    <Compile Include="Model\ApertureEnergyPropertiesAbridged.cs" />
+    <Compile Include="Model\AperturePropertiesAbridged.cs" />
+    <Compile Include="Model\ApertureSetAbridged.cs" />
+    <Compile Include="Model\ConstructionSetAbridged.cs" />
+    <Compile Include="Model\Door.cs" />
+    <Compile Include="Model\DoorEnergyPropertiesAbridged.cs" />
+    <Compile Include="Model\DoorPropertiesAbridged.cs" />
+    <Compile Include="Model\DoorSetAbridged.cs" />
+    <Compile Include="Model\ElectricEquipmentAbridged.cs" />
+    <Compile Include="Model\EnergyMaterial.cs" />
+    <Compile Include="Model\EnergyMaterialNoMass.cs" />
+    <Compile Include="Model\EnergyWindowMaterialBlind.cs" />
+    <Compile Include="Model\EnergyWindowMaterialGas.cs" />
+    <Compile Include="Model\EnergyWindowMaterialGasCustom.cs" />
+    <Compile Include="Model\EnergyWindowMaterialGasMixture.cs" />
+    <Compile Include="Model\EnergyWindowMaterialGlazing.cs" />
+    <Compile Include="Model\EnergyWindowMaterialShade.cs" />
+    <Compile Include="Model\EnergyWindowMaterialSimpleGlazSys.cs" />
+    <Compile Include="Model\Face.cs" />
+    <Compile Include="Model\Face3D.cs" />
+    <Compile Include="Model\FaceEnergyPropertiesAbridged.cs" />
+    <Compile Include="Model\FacePropertiesAbridged.cs" />
+    <Compile Include="Model\FloorSetAbridged.cs" />
+    <Compile Include="Model\GasEquipmentAbridged.cs" />
+    <Compile Include="Model\Ground.cs" />
+    <Compile Include="Model\IdealAirSystemAbridged.cs" />
+    <Compile Include="Model\InfiltrationAbridged.cs" />
+    <Compile Include="Model\LightingAbridged.cs" />
+    <Compile Include="Model\Model.cs" />
+    <Compile Include="Model\ModelEnergyProperties.cs" />
+    <Compile Include="Model\ModelProperties.cs" />
+    <Compile Include="Model\OpaqueConstructionAbridged.cs" />
+    <Compile Include="Model\Outdoors.cs" />
+    <Compile Include="Model\PeopleAbridged.cs" />
+    <Compile Include="Model\Plane.cs" />
+    <Compile Include="Model\ProgramTypeAbridged.cs" />
+    <Compile Include="Model\RoofCeilingSetAbridged.cs" />
+    <Compile Include="Model\Room.cs" />
+    <Compile Include="Model\RoomEnergyPropertiesAbridged.cs" />
+    <Compile Include="Model\RoomPropertiesAbridged.cs" />
+    <Compile Include="Model\ScheduleDay.cs" />
+    <Compile Include="Model\ScheduleFixedIntervalAbridged.cs" />
+    <Compile Include="Model\ScheduleRuleAbridged.cs" />
+    <Compile Include="Model\ScheduleRulesetAbridged.cs" />
+    <Compile Include="Model\ScheduleTypeLimit.cs" />
+    <Compile Include="Model\SetpointAbridged.cs" />
+    <Compile Include="Model\Shade.cs" />
+    <Compile Include="Model\ShadeConstruction.cs" />
+    <Compile Include="Model\ShadeEnergyPropertiesAbridged.cs" />
+    <Compile Include="Model\ShadePropertiesAbridged.cs" />
+    <Compile Include="Model\Surface.cs" />
+    <Compile Include="Model\VentilationAbridged.cs" />
+    <Compile Include="Model\WallSetAbridged.cs" />
+    <Compile Include="Model\WindowConstructionAbridged.cs" />
+    <Compile Include="Partial\Door.cs" />
+    <Compile Include="Partial\ModelEnergyProperties.cs" />
+    <Compile Include="Partial\Outdoors.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-      <None Include="packages.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MsBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
-

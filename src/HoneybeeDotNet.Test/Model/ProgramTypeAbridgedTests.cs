@@ -42,16 +42,16 @@ namespace HoneybeeDotNet.Test
         [SetUp]
         public void Init()
         {
-            //var url = @"https://raw.githubusercontent.com/MingboPeng/honeybee-schema/master/honeybee_schema/samples/program_type.json";
-            //using (WebClient wc = new WebClient())
-            //{
-            //    var json = wc.DownloadString(url);
-            //    this.instance = ProgramTypeAbridged.FromJson(json);
-            //}
+            var url = @"https://raw.githubusercontent.com/MingboPeng/honeybee-schema/master/honeybee_schema/samples/program_type.json";
+            using (WebClient wc = new WebClient())
+            {
+                var json = wc.DownloadString(url);
+                this.instance = ProgramTypeAbridged.FromJson(json);
+            }
 
-            var file = @"D:\Dev\honeybee-schema\honeybee_schema\samples\program_type.json";
-            string json = File.ReadAllText(file);
-            this.instance = ProgramTypeAbridged.FromJson(json);
+            //var file = @"D:\Dev\honeybee-schema\honeybee_schema\samples\program_type.json";
+            //string json = File.ReadAllText(file);
+            //this.instance = ProgramTypeAbridged.FromJson(json);
         }
 
         /// <summary>
