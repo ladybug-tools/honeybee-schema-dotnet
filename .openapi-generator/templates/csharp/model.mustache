@@ -30,7 +30,7 @@ using System.ComponentModel.DataAnnotations;
 
 {{#models}}
 {{#model}}
-namespace {{packageName}}.{{modelPackage}}
+namespace {{packageName}}
 {
 {{#isEnum}}{{>modelEnum}}{{/isEnum}}{{^isEnum}}{{>modelGeneric}}{{/isEnum}}
 {{/model}}

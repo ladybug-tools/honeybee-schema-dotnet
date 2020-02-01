@@ -16,8 +16,7 @@ using System.Linq;
 using System.IO;
 using System.Collections.Generic;
 
-using HoneybeeDotNet.Model;
-using HoneybeeDotNet.Client;
+using HoneybeeDotNet;
 using System.Reflection;
 using Newtonsoft.Json;
 

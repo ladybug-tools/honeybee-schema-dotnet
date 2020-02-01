@@ -20,9 +20,9 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
-using OpenAPIDateConverter = HoneybeeDotNet.Client.OpenAPIDateConverter;
 
-namespace HoneybeeDotNet.Model
+
+namespace HoneybeeDotNet
 {
     /// <summary>
     /// Window blind properties.  Window blind properties consist of flat, equally-spaced slats.

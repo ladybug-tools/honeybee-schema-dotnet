@@ -20,9 +20,9 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
-using OpenAPIDateConverter = HoneybeeDotNet.Client.OpenAPIDateConverter;
 
-namespace HoneybeeDotNet.Model
+
+namespace HoneybeeDotNet
 {
     /// <summary>
     /// Lists the outputs to report from the simulation and their format.

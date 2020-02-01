@@ -20,9 +20,9 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
-using OpenAPIDateConverter = HoneybeeDotNet.Client.OpenAPIDateConverter;
 
-namespace HoneybeeDotNet.Model
+
+namespace HoneybeeDotNet
 {
     /// <summary>
     /// An object representing design day conditions.
@@ -124,7 +124,7 @@ namespace HoneybeeDotNet.Model
         /// <param name="windCondition">A WindCondition describing wind conditions on the design day. (required).</param>
         /// <param name="skyCondition">A SkyCondition (either ASHRAEClearSky or ASHRAETau) describing solar irradiance conditions on the design day. (required).</param>
         /// <param name="type">type (default to &quot;DesignDay&quot;).</param>
-        public DesignDay(string name, DayTypeEnum dayType, DryBulbCondition dryBulbCondition, HumidityCondition humidityCondition, WindCondition windCondition, AnyOfobjectobject skyCondition, string type = "DesignDay")
+        public DesignDay(string name, DayTypeEnum dayType, DryBulbCondition dryBulbCondition, HumidityCondition humidityCondition, WindCondition windCondition, AnyOf<ASHRAEClearSky, ASHRAETau> skyCondition, string type = "DesignDay")
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -236,7 +236,7 @@ namespace HoneybeeDotNet.Model
         /// <value>A SkyCondition (either ASHRAEClearSky or ASHRAETau) describing solar irradiance conditions on the design day.</value>
         [DataMember(Name="sky_condition", EmitDefaultValue=false)]
         [JsonProperty("sky_condition")]
-        public AnyOfobjectobject SkyCondition { get; set; }
+        public AnyOf<ASHRAEClearSky, ASHRAETau> SkyCondition { get; set; }
 
         /// <summary>
         /// Gets or Sets Type

@@ -16,8 +16,7 @@ using System.Linq;
 using System.IO;
 using System.Collections.Generic;
 
-using HB = HoneybeeDotNet.Model;
-using HoneybeeDotNet.Client;
+using HB = HoneybeeDotNet;
 using System.Reflection;
 using Newtonsoft.Json;
 using System.Net;
@@ -34,7 +33,7 @@ namespace HoneybeeDotNet.Test
     public class ModelTests
     {
         // TODO uncomment below to declare an instance variable for Model
-        private Model.Model instance;
+        private Model instance;
 
         /// <summary>
         /// Setup before each test

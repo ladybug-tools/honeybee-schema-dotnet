@@ -72,62 +72,15 @@ Contact: info@ladybug.tools
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\AdiabaticTests.cs" />
-    <Compile Include="Model\ApertureEnergyPropertiesAbridgedTests.cs" />
-    <Compile Include="Model\AperturePropertiesAbridgedTests.cs" />
-    <Compile Include="Model\ApertureSetAbridgedTests.cs" />
-    <Compile Include="Model\ApertureTests.cs" />
     <Compile Include="Model\ConstructionSetAbridgedTests.cs" />
-    <Compile Include="Model\DoorEnergyPropertiesAbridgedTests.cs" />
-    <Compile Include="Model\DoorPropertiesAbridgedTests.cs" />
-    <Compile Include="Model\DoorSetAbridgedTests.cs" />
     <Compile Include="Model\DoorTests.cs" />
     <Compile Include="Model\ElectricEquipmentAbridgedTests.cs" />
-    <Compile Include="Model\EnergyMaterialNoMassTests.cs" />
-    <Compile Include="Model\EnergyMaterialTests.cs" />
-    <Compile Include="Model\EnergyWindowMaterialBlindTests.cs" />
-    <Compile Include="Model\EnergyWindowMaterialGasCustomTests.cs" />
-    <Compile Include="Model\EnergyWindowMaterialGasMixtureTests.cs" />
-    <Compile Include="Model\EnergyWindowMaterialGasTests.cs" />
-    <Compile Include="Model\EnergyWindowMaterialGlazingTests.cs" />
-    <Compile Include="Model\EnergyWindowMaterialShadeTests.cs" />
-    <Compile Include="Model\EnergyWindowMaterialSimpleGlazSysTests.cs" />
-    <Compile Include="Model\Face3DTests.cs" />
-    <Compile Include="Model\FaceEnergyPropertiesAbridgedTests.cs" />
-    <Compile Include="Model\FacePropertiesAbridgedTests.cs" />
-    <Compile Include="Model\FaceTests.cs" />
-    <Compile Include="Model\FloorSetAbridgedTests.cs" />
-    <Compile Include="Model\GasEquipmentAbridgedTests.cs" />
-    <Compile Include="Model\GroundTests.cs" />
-    <Compile Include="Model\IdealAirSystemAbridgedTests.cs" />
-    <Compile Include="Model\InfiltrationAbridgedTests.cs" />
-    <Compile Include="Model\LightingAbridgedTests.cs" />
     <Compile Include="Model\ModelEnergyPropertiesTests.cs" />
-    <Compile Include="Model\ModelPropertiesTests.cs" />
     <Compile Include="Model\ModelTests.cs" />
     <Compile Include="Model\OpaqueConstructionAbridgedTests.cs" />
     <Compile Include="Model\OutdoorsTests.cs" />
-    <Compile Include="Model\PeopleAbridgedTests.cs" />
-    <Compile Include="Model\PlaneTests.cs" />
     <Compile Include="Model\ProgramTypeAbridgedTests.cs" />
-    <Compile Include="Model\RoofCeilingSetAbridgedTests.cs" />
-    <Compile Include="Model\RoomEnergyPropertiesAbridgedTests.cs" />
-    <Compile Include="Model\RoomPropertiesAbridgedTests.cs" />
-    <Compile Include="Model\RoomTests.cs" />
-    <Compile Include="Model\ScheduleDayTests.cs" />
-    <Compile Include="Model\ScheduleFixedIntervalAbridgedTests.cs" />
-    <Compile Include="Model\ScheduleRuleAbridgedTests.cs" />
-    <Compile Include="Model\ScheduleRulesetAbridgedTests.cs" />
     <Compile Include="Model\ScheduleTypeLimitTests.cs" />
-    <Compile Include="Model\SetpointAbridgedTests.cs" />
-    <Compile Include="Model\ShadeConstructionTests.cs" />
-    <Compile Include="Model\ShadeEnergyPropertiesAbridgedTests.cs" />
-    <Compile Include="Model\ShadePropertiesAbridgedTests.cs" />
-    <Compile Include="Model\ShadeTests.cs" />
-    <Compile Include="Model\SurfaceTests.cs" />
-    <Compile Include="Model\VentilationAbridgedTests.cs" />
-    <Compile Include="Model\WallSetAbridgedTests.cs" />
-    <Compile Include="Model\WindowConstructionAbridgedTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

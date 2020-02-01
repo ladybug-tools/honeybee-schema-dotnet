@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
 
-namespace HoneybeeDotNet.Model
+namespace HoneybeeDotNet
 {
     public class AnyOfJsonConverter : JsonConverter<AnyOf>
     {
