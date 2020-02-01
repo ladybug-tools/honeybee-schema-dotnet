@@ -20,9 +20,9 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
-using OpenAPIDateConverter = HoneybeeDotNet.Client.OpenAPIDateConverter;
 
-namespace HoneybeeDotNet.Model
+
+namespace HoneybeeDotNet
 {
     /// <summary>
     /// Create a mixture of two to four different gases to fill the panes of multiple pane windows.

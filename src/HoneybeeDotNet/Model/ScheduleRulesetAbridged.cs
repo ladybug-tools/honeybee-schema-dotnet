@@ -20,9 +20,9 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
-using OpenAPIDateConverter = HoneybeeDotNet.Client.OpenAPIDateConverter;
 
-namespace HoneybeeDotNet.Model
+
+namespace HoneybeeDotNet
 {
     /// <summary>
     /// Used to define a schedule for a default day, further described by ScheduleRule.

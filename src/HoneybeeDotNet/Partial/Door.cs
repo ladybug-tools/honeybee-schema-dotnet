@@ -1,4 +1,4 @@
-﻿namespace HoneybeeDotNet.Model
+﻿namespace HoneybeeDotNet
 {
     public partial class Door
     {
@@ -7,7 +7,7 @@
         /// </summary>
         /// <param name="name"></param>
         /// <param name="geometry"></param>
-        public Door(string name, Face3D geometry) :this(name, geometry, new Outdoors(),new DoorPropertiesAbridged())
+        public Door(string name, Face3D geometry) :this(name, geometry, new Outdoors(), new DoorPropertiesAbridged())
         {
 
         }

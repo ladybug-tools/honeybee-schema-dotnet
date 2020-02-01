@@ -67,8 +67,6 @@ Then, publish to a [local feed](https://docs.microsoft.com/en-us/nuget/hosting-p
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using HoneybeeDotNet.Api;
-using HoneybeeDotNet.Client;
 using HoneybeeDotNet.Model;
 
 namespace Example

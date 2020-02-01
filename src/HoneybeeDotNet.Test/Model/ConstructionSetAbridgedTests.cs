@@ -11,7 +11,7 @@
 
 using NUnit.Framework;
 
-using HoneybeeDotNet.Model;
+using HoneybeeDotNet;
 
 namespace HoneybeeDotNet.Test
 {

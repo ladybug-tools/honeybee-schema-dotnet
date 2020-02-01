@@ -1,4 +1,4 @@
-﻿namespace HoneybeeDotNet.Model
+﻿namespace HoneybeeDotNet
 {
     public partial class Outdoors
     {
