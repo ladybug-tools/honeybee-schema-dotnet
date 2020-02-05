@@ -41,16 +41,13 @@ namespace HoneybeeDotNet.Test
         [SetUp]
         public void Init()
         {
-            var url = @"https://raw.githubusercontent.com/MingboPeng/honeybee-schema/master/honeybee_schema/samples/program_type.json";
+            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/program_type_office.json";
             using (WebClient wc = new WebClient())
             {
                 var json = wc.DownloadString(url);
                 this.instance = ProgramTypeAbridged.FromJson(json);
             }
 
-            //var file = @"D:\Dev\honeybee-schema\honeybee_schema\samples\program_type.json";
-            //string json = File.ReadAllText(file);
-            //this.instance = ProgramTypeAbridged.FromJson(json);
         }
 
         /// <summary>
@@ -96,7 +93,7 @@ namespace HoneybeeDotNet.Test
         public void PeopleTest()
         {
             Assert.AreEqual(this.instance.People.PeoplePerArea, 0.0565);
-            Assert.AreEqual(this.instance.People.LatentFraction, "autocalculate");
+            Assert.AreEqual(this.instance.People.LatentFraction, new Autocalculate());
         }
         /// <summary>
         /// Test the property 'Lighting'

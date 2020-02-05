@@ -59,6 +59,8 @@ Contact: info@ladybug.tools
     <Compile Include="Model\ApertureSetAbridged.cs" />
     <Compile Include="Model\ASHRAEClearSky.cs" />
     <Compile Include="Model\ASHRAETau.cs" />
+    <Compile Include="Model\Autocalculate.cs" />
+    <Compile Include="Model\Autosize.cs" />
     <Compile Include="Model\ConstructionSetAbridged.cs" />
     <Compile Include="Model\DaylightSavingTime.cs" />
     <Compile Include="Model\DesignDay.cs" />
@@ -91,6 +93,7 @@ Contact: info@ladybug.tools
     <Compile Include="Model\Model.cs" />
     <Compile Include="Model\ModelEnergyProperties.cs" />
     <Compile Include="Model\ModelProperties.cs" />
+    <Compile Include="Model\NoLimit.cs" />
     <Compile Include="Model\OpaqueConstructionAbridged.cs" />
     <Compile Include="Model\Outdoors.cs" />
     <Compile Include="Model\PeopleAbridged.cs" />

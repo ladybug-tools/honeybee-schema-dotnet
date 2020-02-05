@@ -93,8 +93,8 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void ViewFactorTest()
         {
-            var vF = this.instance.ViewFactor;
-            Assert.IsTrue(vF == "autocalculate");
+            var vF = this.instance.ViewFactor.Obj;
+            Assert.IsTrue(vF is Autocalculate);
         }
 
         /// <summary>
@@ -123,8 +123,8 @@ namespace HoneybeeDotNet.Test
 
             var obj = Outdoors.FromJson(j);
 
-            var vF = obj.ViewFactor;
-            Assert.IsTrue(vF == "autocalculate");
+            var vF = obj.ViewFactor.Obj;
+            Assert.IsTrue(vF is Autocalculate);
         }
 
     }

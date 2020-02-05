@@ -145,7 +145,7 @@ namespace HoneybeeDotNet.Test
             var obj = Door.FromJson(j);
 
             var bc = obj.BoundaryCondition.Obj as Outdoors;
-            Assert.IsTrue(bc.ViewFactor == "autocalculate");
+            Assert.IsTrue(bc.ViewFactor.Obj is Autocalculate);
         }
 
         /// <summary>
