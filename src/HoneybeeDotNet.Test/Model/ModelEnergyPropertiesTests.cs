@@ -120,8 +120,8 @@ namespace HoneybeeDotNet.Test
             var obj = this.instance.Constructions.First();
             var o = obj.Obj as OpaqueConstructionAbridged;
 
-            Assert.AreEqual(o.Name, "Generic Exterior Door");
-            Assert.AreEqual(o.Layers.Count, 3);
+            Assert.AreEqual(o.Name, "Generic Underground Wall");
+            Assert.AreEqual(o.Layers.Count, 4);
         }
         /// <summary>
         /// Test the property 'Materials'
@@ -131,10 +131,10 @@ namespace HoneybeeDotNet.Test
         {
             // TODO unit test for the property 'Materials'
             var obj = this.instance.Materials.First();
-            var o = obj.Obj as EnergyMaterial;
+            var o = obj.Obj as EnergyWindowMaterialGlazing;
 
-            Assert.AreEqual(o.Name, "Generic 25mm Wood");
-            Assert.AreEqual(o.SpecificHeat, 1630.0);
+            Assert.AreEqual(o.Name, "Generic Low-e Glass");
+            Assert.AreEqual(o.Thickness, 0.006);
         }
         /// <summary>
         /// Test the property 'Hvacs'
@@ -146,8 +146,8 @@ namespace HoneybeeDotNet.Test
             var obj = this.instance.Hvacs.First();
             var o = obj;
 
-            Assert.AreEqual(o.Name, "TinyHouseZone_IdealAir");
-            Assert.AreEqual(o.HeatingLimit, "autosize");
+            Assert.AreEqual(o.Name, "ClosedOffice_IdealAir");
+            Assert.AreEqual(o.HeatingLimit, new Autosize());
         }
         /// <summary>
         /// Test the property 'ProgramTypes'
@@ -160,7 +160,7 @@ namespace HoneybeeDotNet.Test
             var o = obj;
 
             Assert.AreEqual(o.Name, "Generic Office Program");
-            Assert.AreEqual(o.People.LatentFraction, "autocalculate");
+            Assert.AreEqual(o.People.LatentFraction, new Autocalculate());
         }
         /// <summary>
         /// Test the property 'Schedules'
@@ -172,8 +172,8 @@ namespace HoneybeeDotNet.Test
             var obj = this.instance.Schedules.First();
             var o = obj.Obj as ScheduleRulesetAbridged;
 
-            Assert.AreEqual(o.Name, "Generic Office Occupancy");
-            Assert.AreEqual(o.DaySchedules.First().Name, "OfficeMedium BLDG_OCC_SCH_Default");
+            Assert.AreEqual(o.Name, "Generic Office Cooling");
+            Assert.AreEqual(o.DaySchedules.First().Name, "OfficeMedium CLGSETP_SCH_YES_OPTIMUM_Default");
         }
         /// <summary>
         /// Test the property 'ScheduleTypeLimits'
@@ -184,7 +184,7 @@ namespace HoneybeeDotNet.Test
             // TODO unit test for the property 'ScheduleTypeLimits'
             var obj = this.instance.ScheduleTypeLimits.First();
             Assert.AreEqual(obj.Name, "Activity Level");
-            Assert.AreEqual(obj.UpperLimit, null);
+            Assert.AreEqual(obj.UpperLimit, new NoLimit());
         }
 
     }

@@ -41,7 +41,7 @@ namespace HoneybeeDotNet.Test
         [SetUp]
         public void Init()
         {
-            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/honeybee_schema/samples/model_complete_single_zone_office.json";
+            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/model_complete_single_zone_office.json";
             using (WebClient wc = new WebClient())
             {
                 var json = wc.DownloadString(url);
@@ -152,14 +152,14 @@ namespace HoneybeeDotNet.Test
             Assert.AreEqual(prop.Name, "Generic Office Program");
             Assert.AreEqual(prop.Lighting.WattsPerArea, 10.55);
             Assert.AreEqual(prop.ElectricEquipment.LatentFraction, 0);
-            Assert.AreEqual(prop.People.LatentFraction, "autocalculate");
+            Assert.AreEqual(prop.People.LatentFraction, new Autocalculate());
             Assert.AreEqual(prop.Infiltration.FlowPerExteriorArea, 0.0002266);
             Assert.AreEqual(prop.Setpoint.HeatingSchedule, "Generic Office Heating");
 
 
             var hvac = this.instance.Properties.Energy.Hvacs.First();
             Assert.AreEqual(hvac.HeatingAirTemperature, 50);
-            Assert.AreEqual(hvac.HeatingLimit, "autosize");
+            Assert.AreEqual(hvac.HeatingLimit, new Autosize());
         }
 
     }

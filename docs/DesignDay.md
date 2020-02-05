@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **DryBulbCondition** | [**DryBulbCondition**](DryBulbCondition.md) | A DryBulbCondition describing temperature conditions on the design day. | 
 **HumidityCondition** | [**HumidityCondition**](HumidityCondition.md) | A HumidityCondition describing humidity and precipitation conditions on the design day. | 
 **WindCondition** | [**WindCondition**](WindCondition.md) | A WindCondition describing wind conditions on the design day. | 
-**SkyCondition** | [**AnyOfobjectobject**](AnyOfobjectobject.md) | A SkyCondition (either ASHRAEClearSky or ASHRAETau) describing solar irradiance conditions on the design day. | 
+**SkyCondition** | [**AnyOfASHRAEClearSkyASHRAETau**](AnyOfASHRAEClearSkyASHRAETau.md) |  | 
 **Type** | **string** |  | [optional] [default to "DesignDay"]
 
 [[Back to Model list]](../README.md#documentation-for-models)

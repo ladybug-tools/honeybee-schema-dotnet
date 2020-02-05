@@ -41,7 +41,7 @@ namespace HoneybeeDotNet.Test
         [SetUp]
         public void Init()
         {
-            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/honeybee_schema/samples/scheduletypelimit_temperature.json";
+            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/scheduletypelimit_temperature.json";
             using (WebClient wc = new WebClient())
             {
                 var json = wc.DownloadString(url);
@@ -99,7 +99,7 @@ namespace HoneybeeDotNet.Test
         [Test]
         public void UpperLimitTest()
         {
-            Assert.AreEqual(this.instance.UpperLimit, null);
+            Assert.AreEqual(this.instance.UpperLimit, new NoLimit());
         }
         /// <summary>
         /// Test the property 'NumericType'

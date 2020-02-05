@@ -11,7 +11,7 @@ namespace HoneybeeDotNet
 			{
 				if (_default == null)
 				{
-					var url = @"https://raw.githubusercontent.com/MingboPeng/honeybee-schema/master/honeybee_schema/samples/model_energy_properties_default.json";
+					var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/model_energy_properties_office.json";
 					using (System.Net.WebClient wc = new System.Net.WebClient())
 					{
 						var json = wc.DownloadString(url);
