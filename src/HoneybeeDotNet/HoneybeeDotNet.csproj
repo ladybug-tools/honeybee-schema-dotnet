@@ -1,12 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-Honeybee Model Schema
-
-This is the documentation for Honeybee model schema.
-
-The version of the OpenAPI document: 1.3.0
-Contact: info@ladybug.tools
--->
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -37,6 +29,9 @@ Contact: info@ladybug.tools
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\HoneybeeDotNet.xml</DocumentationFile>
+  </PropertyGroup>
+    <PropertyGroup>
+    <NoWarn>CS0472,CS1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
