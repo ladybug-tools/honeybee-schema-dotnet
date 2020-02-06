@@ -3,7 +3,7 @@
     <metadata>
         <!-- The identifier that must be unique within the hosting gallery -->
         <id>$id$</id>
-        <title>OpenAPI Library</title>
+        <title>$title$</title>
 
         <!-- The package version number that is used when resolving dependencies -->
         <version>$version$</version>
@@ -16,19 +16,23 @@
         <owners>$author$</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <developmentDependency>false</developmentDependency>
+        <license type="expression">MIT</license>
 
         <!-- The description can be used in package manager UI. Note that the
              nuget.org gallery uses information you add in the portal. -->
-        <description>A library generated from a OpenAPI doc</description>
-        <licenseUrl>https://github.com/ladybug-tools-in2/honeybee-schema/blob/master/LICENSE</licenseUrl>
+        <description>$description$</description>
+        <projectUrl>https://github.com/ladybug-tools/honeybee-schema-dotnet</projectUrl>
+        <copyright>Copyright 2020</copyright>
 
         <!-- Dependencies are automatically installed when the package is installed -->
+
         <dependencies>
 
-            <dependency id="NewtonSoft.Json" version="12.0.1" />
-            <dependency id="JsonSubTypes" version="1.5.2" />
-            <dependency id="RestSharp" version="105.1.0" />
-
+            <group targetFramework=".NETFramework4.5">
+                <dependency id="NewtonSoft.Json" version="12.0.1" />
+                <dependency id="JsonSubTypes" version="1.5.2" />
+                <dependency id="RestSharp" version="105.1.0" />
+            </group>
         </dependencies>
     </metadata>
     <files>
