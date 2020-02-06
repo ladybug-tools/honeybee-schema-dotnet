@@ -7,3 +7,4 @@ mono:
 solution: HoneybeeDotNet.sln
 script:
   - /bin/sh ./mono_nunit_test.sh
+  - /bin/sh ./deploy.sh

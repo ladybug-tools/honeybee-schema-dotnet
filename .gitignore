@@ -7,7 +7,7 @@
 *.user
 *.sln.docstates
 ./nuget
-
+nuget.exe
 # Build results
 
 [Dd]ebug/
