@@ -29,5 +29,3 @@ jobs:
         on:
           branch: master
           condition: '"x${NUGET_API_KEY}" != "x" && "x$NUGET_SOURCE" != "x"
-
-          export GITHUB_TOKEN=975370b8cafd30df10eb68010043dcc0bbbd9494
