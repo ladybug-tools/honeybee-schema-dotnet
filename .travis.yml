@@ -1,3 +1,4 @@
+
 stages:
   - version
   - test_Publish
@@ -20,9 +21,6 @@ jobs:
         - rm -f src/HoneybeeDotNet.Test/bin/Debug/HoneybeeDotNet.Test.dll
         - mono ./packages/NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe src/HoneybeeDotNet.Test/bin/Release/HoneybeeDotNet.Test.dll
         - cd src/HoneybeeDotNet/
-        - nuget pack src/HoneybeeDotNet/HoneybeeDotNet.csproj -Build -Version 2.1.0
+        - nuget pack src/HoneybeeDotNet/HoneybeeDotNet.csproj -Build -Version 1.14.1
         - sleep 5
         - nuget push *.nupkg -ApiKey $ApiKey -Source $NUGET_SOURCE
-
-
-
