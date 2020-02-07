@@ -31,7 +31,7 @@
     <DocumentationFile>bin\Release\HoneybeeDotNet.xml</DocumentationFile>
   </PropertyGroup>
     <PropertyGroup>
-    <NoWarn>CS0472,CS1591,NU5128</NoWarn>
+    <NoWarn>CS0472,CS1591</NoWarn>
       
   </PropertyGroup>
   <ItemGroup>
