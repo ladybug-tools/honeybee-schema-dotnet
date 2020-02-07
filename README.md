@@ -43,6 +43,7 @@ Then include the DLL (under the `bin` folder) in the C# project, and use the nam
 
 ```csharp
 using HoneybeeDotNet.Model;
+
 ```
 
 
