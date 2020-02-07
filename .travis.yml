@@ -1,19 +1,23 @@
+language: csharp
+solution: HoneybeeDotNet.sln
+mono: latest
 
-stages:
-  - test_Publish
-jobs:
-  include:
-    - stage: test_Publish
-      sudo: required
-      language: csharp
-      solution: HoneybeeDotNet.sln
-      mono: latest
-      install:
-        - nuget restore HoneybeeDotNet.sln
-        - nuget install NUnit.ConsoleRunner -Version 3.10.0 -OutputDirectory packages
-        - msbuild /p:Configuration=Release HoneybeeDotNet.sln
-      script:
-        - rm -f src/HoneybeeDotNet.Test/bin/Debug/HoneybeeDotNet.Test.dll
-        - mono ./packages/NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe src/HoneybeeDotNet.Test/bin/Release/HoneybeeDotNet.Test.dll
-        - nuget pack src/HoneybeeDotNet/HoneybeeDotNet.csproj -Build
-        - nuget push *.nupkg -ApiKey $NUGET_API_KEY -Source $NUGET_SOURCE
+install:
+  - nuget restore HoneybeeDotNet.sln
+  - nuget install NUnit.ConsoleRunner -Version 3.10.0 -OutputDirectory packages
+  - msbuild /p:Configuration=Release HoneybeeDotNet.sln
+  - export BUILD_VERSION=$(monodis --assembly src/HoneybeeDotNet/bin/Release/HoneybeeDotNet.dll | grep -Po '([0-9]{1,}\.)+[0-9]{1,}')
+
+script:
+  - rm -f src/HoneybeeDotNet.Test/bin/Debug/HoneybeeDotNet.Test.dll
+  - mono ./packages/NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe src/HoneybeeDotNet.Test/bin/Release/HoneybeeDotNet.Test.dll
+  
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script:
+    - nuget pack src/HoneybeeDotNet/HoneybeeDotNet.csproj -Properties Configuration=Release -Version $BUILD_VERSION
+    - nuget push *.nupkg -ApiKey $NUGET_API_KEY -Source nuget.org
+  on:
+    branch: master
