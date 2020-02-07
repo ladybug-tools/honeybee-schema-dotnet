@@ -17,7 +17,6 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
-    - nuget pack src/HoneybeeDotNet/HoneybeeDotNet.csproj -Properties Configuration=Release -Version $BUILD_VERSION
-    - nuget push *.nupkg -ApiKey $NUGET_API_KEY -Source nuget.org
+    - /bin/sh ./deploy.sh
   on:
     branch: master
