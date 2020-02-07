@@ -16,11 +16,18 @@ jobs:
       install:
         - nuget restore HoneybeeDotNet.sln
         - nuget install NUnit.ConsoleRunner -Version 3.10.0 -OutputDirectory packages
-        - xbuild /p:Configuration=Release HoneybeeDotNet.sln
+        - msbuild /p:Configuration=Release HoneybeeDotNet.sln
       script:
         - rm -f src/HoneybeeDotNet.Test/bin/Debug/HoneybeeDotNet.Test.dll
         - mono ./packages/NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe src/HoneybeeDotNet.Test/bin/Release/HoneybeeDotNet.Test.dll
-        - cd src/HoneybeeDotNet/
-        - nuget pack src/HoneybeeDotNet/HoneybeeDotNet.csproj -Build -Version 1.14.1
-        - sleep 5
-        - nuget push *.nupkg -ApiKey $ApiKey -Source $NUGET_SOURCE
+      deploy:
+        skip_cleanup: true
+        provider: script
+        script: 
+          - nuget pack src/HoneybeeDotNet/HoneybeeDotNet.csproj -Build -Version 1.14.1
+          - nuget push *.nupkg -ApiKey $NUGET_API_KEY -Source $NUGET_SOURCE
+        on:
+          branch: master
+          condition: '"x${NUGET_API_KEY}" != "x" && "x$NUGET_SOURCE" != "x"
+
+          export GITHUB_TOKEN=975370b8cafd30df10eb68010043dcc0bbbd9494
