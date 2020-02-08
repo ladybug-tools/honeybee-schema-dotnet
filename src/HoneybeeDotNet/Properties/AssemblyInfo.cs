@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("HoneybeeNotNet")]
-[assembly: AssemblyDescription("This is the DotNet version of Honeybee Schema")]
+[assembly: AssemblyDescription("This is the .Net version of Honeybee Schema")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ladybug Tools")]
 [assembly: AssemblyProduct("HoneybeeNotNet")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCopyright("Copyright © 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
