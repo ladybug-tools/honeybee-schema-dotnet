@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.Face3D
+# HoneybeeSchema.Model.Face3D
 
 ## Properties
 

@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.WallSetAbridged
+# HoneybeeSchema.Model.WallSetAbridged
 
 ## Properties
 

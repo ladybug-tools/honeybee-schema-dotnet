@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.OpaqueConstructionAbridged
+# HoneybeeSchema.Model.OpaqueConstructionAbridged
 
 ## Properties
 

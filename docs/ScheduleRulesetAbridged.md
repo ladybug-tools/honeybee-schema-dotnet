@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.ScheduleRulesetAbridged
+# HoneybeeSchema.Model.ScheduleRulesetAbridged
 
 ## Properties
 

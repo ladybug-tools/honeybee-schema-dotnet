@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.ProgramTypeAbridged
+# HoneybeeSchema.Model.ProgramTypeAbridged
 
 ## Properties
 

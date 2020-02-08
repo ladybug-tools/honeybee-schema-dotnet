@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.ShadeEnergyPropertiesAbridged
+# HoneybeeSchema.Model.ShadeEnergyPropertiesAbridged
 
 ## Properties
 

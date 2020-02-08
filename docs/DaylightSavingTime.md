@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.DaylightSavingTime
+# HoneybeeSchema.Model.DaylightSavingTime
 
 ## Properties
 

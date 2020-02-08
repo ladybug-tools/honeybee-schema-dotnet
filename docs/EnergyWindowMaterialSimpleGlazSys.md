@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.EnergyWindowMaterialSimpleGlazSys
+# HoneybeeSchema.Model.EnergyWindowMaterialSimpleGlazSys
 
 ## Properties
 

@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.Model
+# HoneybeeSchema.Model.Model
 
 ## Properties
 

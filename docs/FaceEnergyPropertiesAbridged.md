@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.FaceEnergyPropertiesAbridged
+# HoneybeeSchema.Model.FaceEnergyPropertiesAbridged
 
 ## Properties
 

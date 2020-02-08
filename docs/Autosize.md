@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.Autosize
+# HoneybeeSchema.Model.Autosize
 
 ## Properties
 

@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.Aperture
+# HoneybeeSchema.Model.Aperture
 
 ## Properties
 

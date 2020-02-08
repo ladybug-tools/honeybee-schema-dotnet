@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.EnergyWindowMaterialShade
+# HoneybeeSchema.Model.EnergyWindowMaterialShade
 
 ## Properties
 

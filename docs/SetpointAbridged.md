@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.SetpointAbridged
+# HoneybeeSchema.Model.SetpointAbridged
 
 ## Properties
 

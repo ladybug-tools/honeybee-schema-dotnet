@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.LightingAbridged
+# HoneybeeSchema.Model.LightingAbridged
 
 ## Properties
 

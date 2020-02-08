@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.ModelEnergyProperties
+# HoneybeeSchema.Model.ModelEnergyProperties
 
 ## Properties
 

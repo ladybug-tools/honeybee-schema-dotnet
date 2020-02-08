@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.ASHRAETau
+# HoneybeeSchema.Model.ASHRAETau
 
 ## Properties
 

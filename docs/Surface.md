@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.Surface
+# HoneybeeSchema.Model.Surface
 
 ## Properties
 

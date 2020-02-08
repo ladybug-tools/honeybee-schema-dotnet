@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.EnergyWindowMaterialBlind
+# HoneybeeSchema.Model.EnergyWindowMaterialBlind
 
 ## Properties
 

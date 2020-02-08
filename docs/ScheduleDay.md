@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.ScheduleDay
+# HoneybeeSchema.Model.ScheduleDay
 
 ## Properties
 

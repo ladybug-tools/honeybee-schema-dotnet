@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.Outdoors
+# HoneybeeSchema.Model.Outdoors
 
 ## Properties
 

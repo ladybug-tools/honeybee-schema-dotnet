@@ -86,7 +86,7 @@ def check_anyof_types(source_json_url):
   all_types = get_allof_types_from_json(source_json_url)
 
   root = os.path.dirname(os.path.dirname(__file__))
-  source_folder = os.path.join(root, 'src', 'HoneybeeDotNet', 'Model')
+  source_folder = os.path.join(root, 'src', 'HoneybeeSchema', 'Model')
   check_csfiles(source_folder, all_types)
 
 

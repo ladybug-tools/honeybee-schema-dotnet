@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.Ground
+# HoneybeeSchema.Model.Ground
 
 ## Properties
 
