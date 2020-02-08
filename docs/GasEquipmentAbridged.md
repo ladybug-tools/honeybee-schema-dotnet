@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.GasEquipmentAbridged
+# HoneybeeSchema.Model.GasEquipmentAbridged
 
 ## Properties
 

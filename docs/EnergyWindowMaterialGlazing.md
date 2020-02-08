@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.EnergyWindowMaterialGlazing
+# HoneybeeSchema.Model.EnergyWindowMaterialGlazing
 
 ## Properties
 

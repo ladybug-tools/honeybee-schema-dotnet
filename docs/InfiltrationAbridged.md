@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.InfiltrationAbridged
+# HoneybeeSchema.Model.InfiltrationAbridged
 
 ## Properties
 

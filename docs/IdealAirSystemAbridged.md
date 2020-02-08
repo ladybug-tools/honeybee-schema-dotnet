@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.IdealAirSystemAbridged
+# HoneybeeSchema.Model.IdealAirSystemAbridged
 
 ## Properties
 

@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.HumidityCondition
+# HoneybeeSchema.Model.HumidityCondition
 
 ## Properties
 

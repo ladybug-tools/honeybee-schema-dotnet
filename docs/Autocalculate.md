@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.Autocalculate
+# HoneybeeSchema.Model.Autocalculate
 
 ## Properties
 

@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.DoorPropertiesAbridged
+# HoneybeeSchema.Model.DoorPropertiesAbridged
 
 ## Properties
 

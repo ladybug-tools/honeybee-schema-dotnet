@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.DryBulbCondition
+# HoneybeeSchema.Model.DryBulbCondition
 
 ## Properties
 

@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.PeopleAbridged
+# HoneybeeSchema.Model.PeopleAbridged
 
 ## Properties
 

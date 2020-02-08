@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.EnergyMaterialNoMass
+# HoneybeeSchema.Model.EnergyMaterialNoMass
 
 ## Properties
 

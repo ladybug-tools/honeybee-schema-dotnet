@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.ScheduleTypeLimit
+# HoneybeeSchema.Model.ScheduleTypeLimit
 
 ## Properties
 

@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.SizingParameter
+# HoneybeeSchema.Model.SizingParameter
 
 ## Properties
 

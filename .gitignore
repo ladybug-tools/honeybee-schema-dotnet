@@ -189,4 +189,4 @@ $RECYCLE.BIN/
 
 .openapi-generator/__pycache__/
 
-src/HoneybeeDotNet/Client/
+src/HoneybeeSchema/Client/

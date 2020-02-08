@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.SimulationOutput
+# HoneybeeSchema.Model.SimulationOutput
 
 ## Properties
 

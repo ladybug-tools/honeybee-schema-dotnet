@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.Adiabatic
+# HoneybeeSchema.Model.Adiabatic
 
 ## Properties
 

@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.ASHRAEClearSky
+# HoneybeeSchema.Model.ASHRAEClearSky
 
 ## Properties
 

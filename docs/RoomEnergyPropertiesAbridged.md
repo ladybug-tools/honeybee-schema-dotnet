@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.RoomEnergyPropertiesAbridged
+# HoneybeeSchema.Model.RoomEnergyPropertiesAbridged
 
 ## Properties
 

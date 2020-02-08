@@ -6,17 +6,17 @@
 wget -nc https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 mozroots --import --sync
 
-echo "[INFO] remove bin/Debug/HoneybeeDotNet.Test.dll"
-rm src/HoneybeeDotNet.Test/bin/Debug/HoneybeeDotNet.Test.dll 2> /dev/null
+echo "[INFO] remove bin/Debug/HoneybeeSchema.Test.dll"
+rm src/HoneybeeSchema.Test/bin/Debug/HoneybeeSchema.Test.dll 2> /dev/null
 
 echo "[INFO] install NUnit runners via NuGet"
 wget -nc https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 mozroots --import --sync
-mono nuget.exe install src/HoneybeeDotNet.Test/packages.config -o packages
+mono nuget.exe install src/HoneybeeSchema.Test/packages.config -o packages
 
 echo "[INFO] Install NUnit Console 3.x runners via NuGet"
 mono nuget.exe install NUnit.ConsoleRunner -Version 3.10.0 -OutputDirectory packages
 
 echo "[INFO] Build the solution and run the unit test"
-xbuild HoneybeeDotNet.sln && \
-    mono ./packages/NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe src/HoneybeeDotNet.Test/bin/Debug/HoneybeeDotNet.Test.dll
+xbuild HoneybeeSchema.sln && \
+    mono ./packages/NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe src/HoneybeeSchema.Test/bin/Debug/HoneybeeSchema.Test.dll

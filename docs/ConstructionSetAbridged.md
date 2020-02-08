@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.ConstructionSetAbridged
+# HoneybeeSchema.Model.ConstructionSetAbridged
 
 ## Properties
 

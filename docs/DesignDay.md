@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.DesignDay
+# HoneybeeSchema.Model.DesignDay
 
 ## Properties
 

@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.RoofCeilingSetAbridged
+# HoneybeeSchema.Model.RoofCeilingSetAbridged
 
 ## Properties
 

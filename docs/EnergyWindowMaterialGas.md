@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.EnergyWindowMaterialGas
+# HoneybeeSchema.Model.EnergyWindowMaterialGas
 
 ## Properties
 

@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.NoLimit
+# HoneybeeSchema.Model.NoLimit
 
 ## Properties
 

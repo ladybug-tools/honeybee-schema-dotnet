@@ -40,7 +40,7 @@ if ! type nuget &>/dev/null; then
 fi
 
 mozroots --import --sync
-${nuget_cmd} install src/HoneybeeDotNet/packages.config -o packages;
+${nuget_cmd} install src/HoneybeeSchema/packages.config -o packages;
 
 echo "[INFO] Copy DLLs to the 'bin' folder"
 mkdir -p bin;
@@ -48,15 +48,15 @@ cp packages/Newtonsoft.Json.12.0.1/lib/net45/Newtonsoft.Json.dll bin/Newtonsoft.
 cp packages/RestSharp.105.1.0/lib/net45/RestSharp.dll bin/RestSharp.dll;
 cp packages/JsonSubTypes.1.5.2/lib/net45/JsonSubTypes.dll bin/JsonSubTypes.dll
 
-echo "[INFO] Run 'mcs' to build bin/HoneybeeDotNet.dll"
+echo "[INFO] Run 'mcs' to build bin/HoneybeeSchema.dll"
 mcs -langversion:${langversion} -sdk:${sdk} -r:bin/Newtonsoft.Json.dll,bin/JsonSubTypes.dll,\
 bin/RestSharp.dll,\
 System.ComponentModel.DataAnnotations.dll,\
 System.Runtime.Serialization.dll \
 -target:library \
--out:bin/HoneybeeDotNet.dll \
--recurse:'src/HoneybeeDotNet/*.cs' \
--doc:bin/HoneybeeDotNet.xml \
+-out:bin/HoneybeeSchema.dll \
+-recurse:'src/HoneybeeSchema/*.cs' \
+-doc:bin/HoneybeeSchema.xml \
 -platform:anycpu
 
 if [ $? -ne 0 ]
@@ -64,5 +64,5 @@ then
   echo "[ERROR] Compilation failed with exit code $?"
   exit 1
 else
-  echo "[INFO] bin/HoneybeeDotNet.dll was created successfully"
+  echo "[INFO] bin/HoneybeeSchema.dll was created successfully"
 fi

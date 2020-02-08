@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.ScheduleFixedIntervalAbridged
+# HoneybeeSchema.Model.ScheduleFixedIntervalAbridged
 
 ## Properties
 

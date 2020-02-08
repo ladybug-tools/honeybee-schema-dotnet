@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.WindCondition
+# HoneybeeSchema.Model.WindCondition
 
 ## Properties
 

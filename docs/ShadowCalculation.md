@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.ShadowCalculation
+# HoneybeeSchema.Model.ShadowCalculation
 
 ## Properties
 

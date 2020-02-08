@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.Plane
+# HoneybeeSchema.Model.Plane
 
 ## Properties
 

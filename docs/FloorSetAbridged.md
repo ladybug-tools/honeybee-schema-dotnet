@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.FloorSetAbridged
+# HoneybeeSchema.Model.FloorSetAbridged
 
 ## Properties
 

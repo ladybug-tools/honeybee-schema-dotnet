@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.WindowConstructionAbridged
+# HoneybeeSchema.Model.WindowConstructionAbridged
 
 ## Properties
 

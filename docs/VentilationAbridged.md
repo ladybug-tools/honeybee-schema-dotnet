@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.VentilationAbridged
+# HoneybeeSchema.Model.VentilationAbridged
 
 ## Properties
 

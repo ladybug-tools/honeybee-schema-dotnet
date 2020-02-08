@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.ElectricEquipmentAbridged
+# HoneybeeSchema.Model.ElectricEquipmentAbridged
 
 ## Properties
 

@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.RunPeriod
+# HoneybeeSchema.Model.RunPeriod
 
 ## Properties
 

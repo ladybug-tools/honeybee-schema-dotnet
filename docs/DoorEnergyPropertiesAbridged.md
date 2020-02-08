@@ -1,5 +1,5 @@
 
-# HoneybeeDotNet.Model.DoorEnergyPropertiesAbridged
+# HoneybeeSchema.Model.DoorEnergyPropertiesAbridged
 
 ## Properties
 

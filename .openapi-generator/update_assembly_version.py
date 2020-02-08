@@ -7,7 +7,7 @@ with open(config_file, "r") as jsonFile:
 
 schema_version = config_data["packageVersion"]
 
-assembly_file = os.path.join(os.getcwd(),'src', 'HoneybeeDotNet', 'Properties','AssemblyInfo.cs')
+assembly_file = os.path.join(os.getcwd(),'src', 'HoneybeeSchema', 'Properties','AssemblyInfo.cs')
 
 with open(assembly_file, "r") as csFile:
     s = csFile.read()
