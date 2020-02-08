@@ -9,22 +9,20 @@
         <version>$version$</version>
 
         <!-- Authors contain text that appears directly on the gallery -->
-        <authors>MingboPeng</authors>
+        <authors>Mingbo Peng</authors>
 
         <!-- Owners are typically nuget.org identities that allow gallery
              users to earily find other packages by the same owners.  -->
-        <owners>$author$</owners>
+        <owners>LadybugTools</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <developmentDependency>false</developmentDependency>
         <license type="expression">MIT</license>
 
         <!-- The description can be used in package manager UI. Note that the
              nuget.org gallery uses information you add in the portal. -->
-        <description>This is the DotNet version of Honeybee Schema</description>
+        <description>This is the .Net version of Honeybee Schema</description>
         <projectUrl>https://github.com/ladybug-tools/honeybee-schema-dotnet</projectUrl>
-        <copyright>Copyright 2020</copyright>
-
-        <!-- Dependencies are automatically installed when the package is installed -->
+        <copyright>Copyright © 2020 Ladybug Tools LLC</copyright>
         <dependencies>
             <group targetFramework=".NETFramework4.5">
                 <dependency id="NewtonSoft.Json" version="12.0.1" />
@@ -34,9 +32,6 @@
         </dependencies>
     </metadata>
     <files>
-
-        <!-- A readme.txt will be displayed when the package is installed -->
         <file src="..\..\README.md" target="" />
-
     </files>
 </package>
