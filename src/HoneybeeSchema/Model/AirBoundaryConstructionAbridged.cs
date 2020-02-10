@@ -25,73 +25,62 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Describe an entire glazing system rather than individual layers.  Used when only very limited information is available on the glazing layers or when specific performance levels are being targeted.
+    /// Construction for Shade objects.
     /// </summary>
     [DataContract]
-    public partial class EnergyWindowMaterialSimpleGlazSys :  IEquatable<EnergyWindowMaterialSimpleGlazSys>, IValidatableObject
+    public partial class AirBoundaryConstructionAbridged :  IEquatable<AirBoundaryConstructionAbridged>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="EnergyWindowMaterialSimpleGlazSys" /> class.
+        /// Initializes a new instance of the <see cref="AirBoundaryConstructionAbridged" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected EnergyWindowMaterialSimpleGlazSys() { }
+        protected AirBoundaryConstructionAbridged() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="EnergyWindowMaterialSimpleGlazSys" /> class.
+        /// Initializes a new instance of the <see cref="AirBoundaryConstructionAbridged" /> class.
         /// </summary>
         /// <param name="name">Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters. (required).</param>
-        /// <param name="uFactor">Used to describe the value for window system U-Factor, or overall heat transfer coefficient in W/(m2-K). (required).</param>
-        /// <param name="shgc">Unitless  quantity describing Solar Heat Gain Coefficient for normal incidence and vertical orientation. (required).</param>
-        /// <param name="type">type (default to &quot;EnergyWindowMaterialSimpleGlazSys&quot;).</param>
-        /// <param name="vt">The fraction of visible light falling on the window that makes it through the glass at normal incidence. (default to 0.54).</param>
-        public EnergyWindowMaterialSimpleGlazSys(string name, double uFactor, double shgc, string type = "EnergyWindowMaterialSimpleGlazSys", double vt = 0.54)
+        /// <param name="airMixingSchedule">Name of A fractional schedule for the air mixing schedule across the construction. (required).</param>
+        /// <param name="type">type (default to &quot;AirBoundaryConstructionAbridged&quot;).</param>
+        /// <param name="airMixingPerArea">A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system. (default to 0.1).</param>
+        public AirBoundaryConstructionAbridged(string name, string airMixingSchedule, string type = "AirBoundaryConstructionAbridged", double airMixingPerArea = 0.1)
         {
             // to ensure "name" is required (not null)
             if (name == null)
             {
-                throw new InvalidDataException("name is a required property for EnergyWindowMaterialSimpleGlazSys and cannot be null");
+                throw new InvalidDataException("name is a required property for AirBoundaryConstructionAbridged and cannot be null");
             }
             else
             {
                 this.Name = name;
             }
             
-            // to ensure "uFactor" is required (not null)
-            if (uFactor == null)
+            // to ensure "airMixingSchedule" is required (not null)
+            if (airMixingSchedule == null)
             {
-                throw new InvalidDataException("uFactor is a required property for EnergyWindowMaterialSimpleGlazSys and cannot be null");
+                throw new InvalidDataException("airMixingSchedule is a required property for AirBoundaryConstructionAbridged and cannot be null");
             }
             else
             {
-                this.UFactor = uFactor;
-            }
-            
-            // to ensure "shgc" is required (not null)
-            if (shgc == null)
-            {
-                throw new InvalidDataException("shgc is a required property for EnergyWindowMaterialSimpleGlazSys and cannot be null");
-            }
-            else
-            {
-                this.Shgc = shgc;
+                this.AirMixingSchedule = airMixingSchedule;
             }
             
             // use default value if no "type" provided
             if (type == null)
             {
-                this.Type = "EnergyWindowMaterialSimpleGlazSys";
+                this.Type = "AirBoundaryConstructionAbridged";
             }
             else
             {
                 this.Type = type;
             }
-            // use default value if no "vt" provided
-            if (vt == null)
+            // use default value if no "airMixingPerArea" provided
+            if (airMixingPerArea == null)
             {
-                this.Vt = 0.54;
+                this.AirMixingPerArea = 0.1;
             }
             else
             {
-                this.Vt = vt;
+                this.AirMixingPerArea = airMixingPerArea;
             }
         }
         
@@ -104,20 +93,12 @@ namespace HoneybeeSchema
         public string Name { get; set; }
 
         /// <summary>
-        /// Used to describe the value for window system U-Factor, or overall heat transfer coefficient in W/(m2-K).
+        /// Name of A fractional schedule for the air mixing schedule across the construction.
         /// </summary>
-        /// <value>Used to describe the value for window system U-Factor, or overall heat transfer coefficient in W/(m2-K).</value>
-        [DataMember(Name="u_factor", EmitDefaultValue=false)]
-        [JsonProperty("u_factor")]
-        public double UFactor { get; set; }
-
-        /// <summary>
-        /// Unitless  quantity describing Solar Heat Gain Coefficient for normal incidence and vertical orientation.
-        /// </summary>
-        /// <value>Unitless  quantity describing Solar Heat Gain Coefficient for normal incidence and vertical orientation.</value>
-        [DataMember(Name="shgc", EmitDefaultValue=false)]
-        [JsonProperty("shgc")]
-        public double Shgc { get; set; }
+        /// <value>Name of A fractional schedule for the air mixing schedule across the construction.</value>
+        [DataMember(Name="air_mixing_schedule", EmitDefaultValue=false)]
+        [JsonProperty("air_mixing_schedule")]
+        public string AirMixingSchedule { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
@@ -127,12 +108,12 @@ namespace HoneybeeSchema
         public string Type { get; set; }
 
         /// <summary>
-        /// The fraction of visible light falling on the window that makes it through the glass at normal incidence.
+        /// A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system.
         /// </summary>
-        /// <value>The fraction of visible light falling on the window that makes it through the glass at normal incidence.</value>
-        [DataMember(Name="vt", EmitDefaultValue=false)]
-        [JsonProperty("vt")]
-        public double Vt { get; set; }
+        /// <value>A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system.</value>
+        [DataMember(Name="air_mixing_per_area", EmitDefaultValue=false)]
+        [JsonProperty("air_mixing_per_area")]
+        public double AirMixingPerArea { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -141,12 +122,11 @@ namespace HoneybeeSchema
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class EnergyWindowMaterialSimpleGlazSys {\n");
+            sb.Append("class AirBoundaryConstructionAbridged {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  UFactor: ").Append(UFactor).Append("\n");
-            sb.Append("  Shgc: ").Append(Shgc).Append("\n");
+            sb.Append("  AirMixingSchedule: ").Append(AirMixingSchedule).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Vt: ").Append(Vt).Append("\n");
+            sb.Append("  AirMixingPerArea: ").Append(AirMixingPerArea).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -163,10 +143,10 @@ namespace HoneybeeSchema
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>EnergyWindowMaterialSimpleGlazSys object</returns>
-        public static EnergyWindowMaterialSimpleGlazSys FromJson(string json)
+        /// <returns>AirBoundaryConstructionAbridged object</returns>
+        public static AirBoundaryConstructionAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<EnergyWindowMaterialSimpleGlazSys>(json, new AnyOfJsonConverter());
+            return JsonConvert.DeserializeObject<AirBoundaryConstructionAbridged>(json, new AnyOfJsonConverter());
         }
 
 
@@ -177,15 +157,15 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as EnergyWindowMaterialSimpleGlazSys);
+            return this.Equals(input as AirBoundaryConstructionAbridged);
         }
 
         /// <summary>
-        /// Returns true if EnergyWindowMaterialSimpleGlazSys instances are equal
+        /// Returns true if AirBoundaryConstructionAbridged instances are equal
         /// </summary>
-        /// <param name="input">Instance of EnergyWindowMaterialSimpleGlazSys to be compared</param>
+        /// <param name="input">Instance of AirBoundaryConstructionAbridged to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(EnergyWindowMaterialSimpleGlazSys input)
+        public bool Equals(AirBoundaryConstructionAbridged input)
         {
             if (input == null)
                 return false;
@@ -197,14 +177,9 @@ namespace HoneybeeSchema
                     this.Name.Equals(input.Name))
                 ) && 
                 (
-                    this.UFactor == input.UFactor ||
-                    (this.UFactor != null &&
-                    this.UFactor.Equals(input.UFactor))
-                ) && 
-                (
-                    this.Shgc == input.Shgc ||
-                    (this.Shgc != null &&
-                    this.Shgc.Equals(input.Shgc))
+                    this.AirMixingSchedule == input.AirMixingSchedule ||
+                    (this.AirMixingSchedule != null &&
+                    this.AirMixingSchedule.Equals(input.AirMixingSchedule))
                 ) && 
                 (
                     this.Type == input.Type ||
@@ -212,9 +187,9 @@ namespace HoneybeeSchema
                     this.Type.Equals(input.Type))
                 ) && 
                 (
-                    this.Vt == input.Vt ||
-                    (this.Vt != null &&
-                    this.Vt.Equals(input.Vt))
+                    this.AirMixingPerArea == input.AirMixingPerArea ||
+                    (this.AirMixingPerArea != null &&
+                    this.AirMixingPerArea.Equals(input.AirMixingPerArea))
                 );
         }
 
@@ -229,14 +204,12 @@ namespace HoneybeeSchema
                 int hashCode = 41;
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.UFactor != null)
-                    hashCode = hashCode * 59 + this.UFactor.GetHashCode();
-                if (this.Shgc != null)
-                    hashCode = hashCode * 59 + this.Shgc.GetHashCode();
+                if (this.AirMixingSchedule != null)
+                    hashCode = hashCode * 59 + this.AirMixingSchedule.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Vt != null)
-                    hashCode = hashCode * 59 + this.Vt.GetHashCode();
+                if (this.AirMixingPerArea != null)
+                    hashCode = hashCode * 59 + this.AirMixingPerArea.GetHashCode();
                 return hashCode;
             }
         }
@@ -260,17 +233,29 @@ namespace HoneybeeSchema
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Name, length must be greater than 1.", new [] { "Name" });
             }
 
-            // UFactor (double) maximum
-            if(this.UFactor > (double)5.8)
+            // AirMixingSchedule (string) maxLength
+            if(this.AirMixingSchedule != null && this.AirMixingSchedule.Length > 100)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for UFactor, must be a value less than or equal to 5.8.", new [] { "UFactor" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for AirMixingSchedule, length must be less than 100.", new [] { "AirMixingSchedule" });
+            }
+
+            // AirMixingSchedule (string) minLength
+            if(this.AirMixingSchedule != null && this.AirMixingSchedule.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for AirMixingSchedule, length must be greater than 1.", new [] { "AirMixingSchedule" });
             }
 
             // Type (string) pattern
-            Regex regexType = new Regex(@"^EnergyWindowMaterialSimpleGlazSys$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^AirBoundaryConstructionAbridged$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
+            }
+
+            // AirMixingPerArea (double) minimum
+            if(this.AirMixingPerArea < (double)0)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for AirMixingPerArea, must be a value greater than or equal to 0.", new [] { "AirMixingPerArea" });
             }
 
             yield break;
