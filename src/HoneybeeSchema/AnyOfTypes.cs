@@ -65,12 +65,25 @@ namespace HoneybeeSchema
         {
             return this.Obj.GetHashCode();
         }
-        
+
+        public static bool operator == (AnyOf obj, object anotherObj) 
+        {
+            return obj.Obj.Equals(anotherObj);
+        }
+
+        public static bool operator != (AnyOf obj, object anotherObj)
+        {
+            return !obj.Obj.Equals(anotherObj);
+        }
+
+
         public static implicit operator string(AnyOf b) => b;
 
         public static implicit operator AnyOf(int d) => new AnyOf(d, typeof(int));
         public static implicit operator AnyOf(string d) => new AnyOf(d, typeof(string));
         public static implicit operator AnyOf(double d) => new AnyOf(d, typeof(double));
+
+
 
 
     }

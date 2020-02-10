@@ -54,6 +54,7 @@
     <Compile Include="AnyOfJsonConverter.cs" />
     <Compile Include="AnyOfTypes.cs" />
     <Compile Include="Model\Adiabatic.cs" />
+    <Compile Include="Model\AirBoundaryConstructionAbridged.cs" />
     <Compile Include="Model\Aperture.cs" />
     <Compile Include="Model\ApertureEnergyPropertiesAbridged.cs" />
     <Compile Include="Model\AperturePropertiesAbridged.cs" />

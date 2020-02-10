@@ -41,7 +41,7 @@ namespace HoneybeeSchema.Test
         [SetUp]
         public void Init()
         {
-            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/scheduletypelimit_temperature.json";
+            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/schedule/scheduletypelimit_temperature.json";
             using (WebClient wc = new WebClient())
             {
                 var json = wc.DownloadString(url);

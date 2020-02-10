@@ -41,7 +41,7 @@ namespace HoneybeeSchema.Test
         [SetUp]
         public void Init()
         {
-            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/model_complete_single_zone_office.json";
+            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/model/model_complete_single_zone_office.json";
             using (WebClient wc = new WebClient())
             {
                 var json = wc.DownloadString(url);
