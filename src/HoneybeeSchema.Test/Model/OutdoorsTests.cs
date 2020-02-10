@@ -93,8 +93,8 @@ namespace HoneybeeSchema.Test
         [Test]
         public void ViewFactorTest()
         {
-            var vF = this.instance.ViewFactor.Obj;
-            Assert.IsTrue(vF is Autocalculate);
+            var vF = this.instance.ViewFactor;
+            Assert.IsTrue(vF == new Autocalculate());
         }
 
         /// <summary>
@@ -110,7 +110,8 @@ namespace HoneybeeSchema.Test
             Assert.IsFalse(obj.SunExposure);
 
             var vF = obj.ViewFactor;
-            Assert.IsTrue((double)vF.Obj == 0.5);
+            var isTrue = vF == 0.5;
+            Assert.IsTrue(isTrue);
         }
 
         /// <summary>

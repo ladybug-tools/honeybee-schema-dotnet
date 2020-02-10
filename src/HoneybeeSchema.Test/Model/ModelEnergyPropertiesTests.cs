@@ -117,10 +117,9 @@ namespace HoneybeeSchema.Test
         public void ConstructionsTest()
         {
             // TODO unit test for the property 'Constructions'
-            var obj = this.instance.Constructions.First();
+            var obj = this.instance.Constructions.Where(_=>(_.Obj as OpaqueConstructionAbridged).Name == "Generic Underground Wall").First();
             var o = obj.Obj as OpaqueConstructionAbridged;
 
-            Assert.AreEqual(o.Name, "Generic Underground Wall");
             Assert.AreEqual(o.Layers.Count, 4);
         }
         /// <summary>
@@ -130,10 +129,9 @@ namespace HoneybeeSchema.Test
         public void MaterialsTest()
         {
             // TODO unit test for the property 'Materials'
-            var obj = this.instance.Materials.First();
+            var obj = this.instance.Materials.Where(_ => (_.Obj as EnergyWindowMaterialGlazing)?.Name == "Generic Low-e Glass").First();
             var o = obj.Obj as EnergyWindowMaterialGlazing;
 
-            Assert.AreEqual(o.Name, "Generic Low-e Glass");
             Assert.AreEqual(o.Thickness, 0.006);
         }
         /// <summary>
@@ -169,10 +167,9 @@ namespace HoneybeeSchema.Test
         public void SchedulesTest()
         {
             // TODO unit test for the property 'Schedules'
-            var obj = this.instance.Schedules.First();
+            var obj = this.instance.Schedules.Where(_ => (_.Obj as ScheduleRulesetAbridged).Name == "Generic Office Cooling").First();
             var o = obj.Obj as ScheduleRulesetAbridged;
 
-            Assert.AreEqual(o.Name, "Generic Office Cooling");
             Assert.AreEqual(o.DaySchedules.First().Name, "OfficeMedium CLGSETP_SCH_YES_OPTIMUM_Default");
         }
         /// <summary>
