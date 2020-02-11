@@ -12,7 +12,8 @@ Name | Type | Description | Notes
 **RoofCeilingSet** | [**RoofCeilingSetAbridged**](RoofCeilingSetAbridged.md) | A RoofCeilingSet object for this ConstructionSet. | [optional] 
 **ApertureSet** | [**ApertureSetAbridged**](ApertureSetAbridged.md) | A ApertureSet object for this ConstructionSet. | [optional] 
 **DoorSet** | [**DoorSetAbridged**](DoorSetAbridged.md) | A DoorSet object for this ConstructionSet. | [optional] 
-**ShadeConstruction** | **string** | A ShadeConstruction to set the reflectance properties of all outdoor shades to which this ConstructionSet is assigned. | [optional] 
+**ShadeConstruction** | **string** | The name of a ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned. | [optional] 
+**AirBoundaryConstruction** | **string** | The name of an AirBoundaryConstruction to set the properties of Faces with an AirBoundary type. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)

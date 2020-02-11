@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **CoolingSchedule** | **string** | Name of the schedule for the cooling setpoint. The values in this schedule should be temperature in [C]. | 
 **HeatingSchedule** | **string** | Name of the schedule for the heating setpoint. The values in this schedule should be temperature in [C]. | 
 **Type** | **string** |  | [optional] [default to "SetpointAbridged"]
-**HumidificationSchedule** | **string** | Name of the schedule for the humidification setpoint. The values in this schedule should be in [%]. | [optional] 
-**DehumidificationSchedule** | **string** | Name of the schedule for the dehumidification setpoint. The values in this schedule should be in [%]. | [optional] 
+**HumidifyingSchedule** | **string** | Name of the schedule for the humidification setpoint. The values in this schedule should be in [%]. | [optional] 
+**DehumidifyingSchedule** | **string** | Name of the schedule for the dehumidification setpoint. The values in this schedule should be in [%]. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
