@@ -1,6 +1,7 @@
 
 import os
 import urllib.request, json
+import shutil
 
 
 def get_allof_types(obj, allofList):
@@ -89,6 +90,12 @@ def check_anyof_types(source_json_url):
   source_folder = os.path.join(root, 'src', 'HoneybeeSchema', 'Model')
   check_csfiles(source_folder, all_types)
 
+def cleanup():
+  root = os.path.dirname(os.path.dirname(__file__))
+  target_folder = os.path.join(root, 'src', 'HoneybeeSchema', 'Client')
+  shutil.rmtree(target_folder)
 
+
+cleanup()
 check_anyof_types("https://www.ladybug.tools/honeybee-schema/model.json")
 check_anyof_types("https://www.ladybug.tools/honeybee-schema/simulation-parameter.json")
