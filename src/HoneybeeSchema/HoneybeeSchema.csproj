@@ -34,6 +34,9 @@
     <NoWarn>CS0472,CS1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,93 +46,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath Condition="Exists('$(SolutionDir)\packages')">$(SolutionDir)\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <HintPath Condition="Exists('..\packages')">..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <HintPath Condition="Exists('..\..\packages')">..\..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <HintPath Condition="Exists('..\..\vendor')">..\..\vendor\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnyOfJsonConverter.cs" />
-    <Compile Include="AnyOfTypes.cs" />
-    <Compile Include="Model\Adiabatic.cs" />
-    <Compile Include="Model\AirBoundaryConstructionAbridged.cs" />
-    <Compile Include="Model\Aperture.cs" />
-    <Compile Include="Model\ApertureEnergyPropertiesAbridged.cs" />
-    <Compile Include="Model\AperturePropertiesAbridged.cs" />
-    <Compile Include="Model\ApertureSetAbridged.cs" />
-    <Compile Include="Model\ASHRAEClearSky.cs" />
-    <Compile Include="Model\ASHRAETau.cs" />
-    <Compile Include="Model\Autocalculate.cs" />
-    <Compile Include="Model\Autosize.cs" />
-    <Compile Include="Model\ConstructionSetAbridged.cs" />
-    <Compile Include="Model\DaylightSavingTime.cs" />
-    <Compile Include="Model\DesignDay.cs" />
-    <Compile Include="Model\Door.cs" />
-    <Compile Include="Model\DoorEnergyPropertiesAbridged.cs" />
-    <Compile Include="Model\DoorPropertiesAbridged.cs" />
-    <Compile Include="Model\DoorSetAbridged.cs" />
-    <Compile Include="Model\DryBulbCondition.cs" />
-    <Compile Include="Model\ElectricEquipmentAbridged.cs" />
-    <Compile Include="Model\EnergyMaterial.cs" />
-    <Compile Include="Model\EnergyMaterialNoMass.cs" />
-    <Compile Include="Model\EnergyWindowMaterialBlind.cs" />
-    <Compile Include="Model\EnergyWindowMaterialGas.cs" />
-    <Compile Include="Model\EnergyWindowMaterialGasCustom.cs" />
-    <Compile Include="Model\EnergyWindowMaterialGasMixture.cs" />
-    <Compile Include="Model\EnergyWindowMaterialGlazing.cs" />
-    <Compile Include="Model\EnergyWindowMaterialShade.cs" />
-    <Compile Include="Model\EnergyWindowMaterialSimpleGlazSys.cs" />
-    <Compile Include="Model\Face.cs" />
-    <Compile Include="Model\Face3D.cs" />
-    <Compile Include="Model\FaceEnergyPropertiesAbridged.cs" />
-    <Compile Include="Model\FacePropertiesAbridged.cs" />
-    <Compile Include="Model\FloorSetAbridged.cs" />
-    <Compile Include="Model\GasEquipmentAbridged.cs" />
-    <Compile Include="Model\Ground.cs" />
-    <Compile Include="Model\HumidityCondition.cs" />
-    <Compile Include="Model\IdealAirSystemAbridged.cs" />
-    <Compile Include="Model\InfiltrationAbridged.cs" />
-    <Compile Include="Model\LightingAbridged.cs" />
-    <Compile Include="Model\Model.cs" />
-    <Compile Include="Model\ModelEnergyProperties.cs" />
-    <Compile Include="Model\ModelProperties.cs" />
-    <Compile Include="Model\NoLimit.cs" />
-    <Compile Include="Model\OpaqueConstructionAbridged.cs" />
-    <Compile Include="Model\Outdoors.cs" />
-    <Compile Include="Model\PeopleAbridged.cs" />
-    <Compile Include="Model\Plane.cs" />
-    <Compile Include="Model\ProgramTypeAbridged.cs" />
-    <Compile Include="Model\RoofCeilingSetAbridged.cs" />
-    <Compile Include="Model\Room.cs" />
-    <Compile Include="Model\RoomEnergyPropertiesAbridged.cs" />
-    <Compile Include="Model\RoomPropertiesAbridged.cs" />
-    <Compile Include="Model\RunPeriod.cs" />
-    <Compile Include="Model\ScheduleDay.cs" />
-    <Compile Include="Model\ScheduleFixedIntervalAbridged.cs" />
-    <Compile Include="Model\ScheduleRuleAbridged.cs" />
-    <Compile Include="Model\ScheduleRulesetAbridged.cs" />
-    <Compile Include="Model\ScheduleTypeLimit.cs" />
-    <Compile Include="Model\SetpointAbridged.cs" />
-    <Compile Include="Model\Shade.cs" />
-    <Compile Include="Model\ShadeConstruction.cs" />
-    <Compile Include="Model\ShadeEnergyPropertiesAbridged.cs" />
-    <Compile Include="Model\ShadePropertiesAbridged.cs" />
-    <Compile Include="Model\ShadowCalculation.cs" />
-    <Compile Include="Model\SimulationControl.cs" />
-    <Compile Include="Model\SimulationOutput.cs" />
-    <Compile Include="Model\SimulationParameter.cs" />
-    <Compile Include="Model\SizingParameter.cs" />
-    <Compile Include="Model\Surface.cs" />
-    <Compile Include="Model\VentilationAbridged.cs" />
-    <Compile Include="Model\WallSetAbridged.cs" />
-    <Compile Include="Model\WindCondition.cs" />
-    <Compile Include="Model\WindowConstructionAbridged.cs" />
-    <Compile Include="Partial\Door.cs" />
-    <Compile Include="Partial\ModelEnergyProperties.cs" />
-    <Compile Include="Partial\Outdoors.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="**\*.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
