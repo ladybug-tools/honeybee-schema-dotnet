@@ -16,6 +16,7 @@ with open(abridged_file, "wt", encoding='utf-8') as abridgeFile:
     for f in class_files:
         type_name = f
         data.append('public partial class %s: INamed {}\n' % f.replace('.cs',''))
+    data.append('public partial class ConstructionSetAbridged: INamed{}\n')
     data.append('}')
     abridgeFile.writelines(data)
     abridgeFile.close()

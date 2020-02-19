@@ -14,4 +14,5 @@ public partial class ScheduleRulesetAbridged: INamed {}
 public partial class SetpointAbridged: INamed {}
 public partial class VentilationAbridged: INamed {}
 public partial class WindowConstructionAbridged: INamed {}
+public partial class ConstructionSetAbridged: INamed{}
 }
