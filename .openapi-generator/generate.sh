@@ -3,4 +3,4 @@ npx openapi-generator generate -i "https://www.ladybug.tools/honeybee-schema/sim
 npx openapi-generator generate -i "https://www.ladybug.tools/honeybee-schema/model.json"  -t ".openapi-generator/templates/csharp" -g csharp -o . --skip-validate-spec -c .openapi-generator/config.json --type-mappings decimal=double
 python .openapi-generator/post_gen_script.py
 python .openapi-generator/update_assembly_version.py
-python .openapi-generator/update_iNamed_type.py
+python .openapi-generator/update_type_with_interface.py
