@@ -37,7 +37,7 @@ Run the following command to generate the DLL
 Then include the DLL (under the `bin` folder) in the C# project, and use the namespaces:
 
 ```csharp
-using HoneybeeSchema.Model;
+using HoneybeeSchema;
 
 ```
 
@@ -60,7 +60,7 @@ Then, publish to a [local feed](https://docs.microsoft.com/en-us/nuget/hosting-p
 ```csharp
 using System.Collections.Generic;
 using System.Diagnostics;
-using HoneybeeSchema.Model;
+using HoneybeeSchema;
 
 namespace Example
 {
