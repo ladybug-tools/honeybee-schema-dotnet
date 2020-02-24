@@ -117,7 +117,7 @@ namespace HoneybeeSchema.Test
         public void ConstructionsTest()
         {
             // TODO unit test for the property 'Constructions'
-            var obj = this.instance.Constructions.Where(_=>(_.Obj as OpaqueConstructionAbridged).Name == "Generic Underground Wall").First();
+            var obj = this.instance.Constructions.Where(_=>(_.Obj as OpaqueConstructionAbridged)?.Name == "Generic Underground Wall").First();
             var o = obj.Obj as OpaqueConstructionAbridged;
 
             Assert.AreEqual(o.Layers.Count, 4);
@@ -179,7 +179,7 @@ namespace HoneybeeSchema.Test
         public void ScheduleTypeLimitsTest()
         {
             // TODO unit test for the property 'ScheduleTypeLimits'
-            var obj = this.instance.ScheduleTypeLimits.First();
+            var obj = this.instance.ScheduleTypeLimits.First(_=>_.UnitType == ScheduleTypeLimit.UnitTypeEnum.ActivityLevel);
             Assert.AreEqual(obj.Name, "Activity Level");
             Assert.AreEqual(obj.UpperLimit, new NoLimit());
         }
