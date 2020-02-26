@@ -1,11 +1,10 @@
 import os
 import urllib.request, json
 
-source_json_url = "https://www.ladybug.tools/honeybee-schema/model.json"
+version = os.getenv('VERSION')
 
-json_url = urllib.request.urlopen(source_json_url)
-data = json.loads(json_url.read())
-version = data['info']['version']
+version = version.replace('v', '')
+
 print(version)
 
 config_file = os.path.join(os.getcwd(),'.openapi-generator','config.json')

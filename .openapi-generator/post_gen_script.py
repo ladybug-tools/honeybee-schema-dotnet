@@ -95,7 +95,8 @@ def cleanup():
   target_folder = os.path.join(root, 'src', 'HoneybeeSchema', 'Client')
   shutil.rmtree(target_folder)
 
+version = os.getenv("VERSION")
 
 cleanup()
-check_anyof_types("https://www.ladybug.tools/honeybee-schema/model.json")
-check_anyof_types("https://www.ladybug.tools/honeybee-schema/simulation-parameter.json")
+check_anyof_types(f"https://github.com/ladybug-tools/honeybee-schema/releases/download/{version}/model.json")
+check_anyof_types(f"https://github.com/ladybug-tools/honeybee-schema/releases/download/{version}/simulation-parameter.json")
