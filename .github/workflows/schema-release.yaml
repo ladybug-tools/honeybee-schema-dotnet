@@ -20,6 +20,10 @@ jobs:
       with:
         node-version: '12.x'
 
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+
     - name: "Run Update Script"
       env:
         VERSION: ${{ github.event.client_payload.version }}
