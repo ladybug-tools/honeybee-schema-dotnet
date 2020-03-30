@@ -64,7 +64,6 @@ Contact: info@ladybug.tools
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\ConstructionSetAbridgedTests.cs" />
-    <Compile Include="EnergyLibraryTests.cs" />
     <Compile Include="Model\DoorTests.cs" />
     <Compile Include="Model\ElectricEquipmentAbridgedTests.cs" />
     <Compile Include="Model\ModelEnergyPropertiesTests.cs" />
