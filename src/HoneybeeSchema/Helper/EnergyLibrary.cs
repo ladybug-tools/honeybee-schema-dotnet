@@ -35,8 +35,11 @@ namespace HoneybeeSchema.Helper
         }
 
         public static string ResourcesStandardsFolder { get; } = Path.Combine(LadybugToolsRootFolder, "resources", "standards");
+        /// <summary>
+        /// This returns ladybug_tools/resources/standards/default folder.
+        /// </summary>
         public static string DefaultStandardsFolder { get; } = Path.Combine(ResourcesStandardsFolder, "default");
-        private static string[] _LoadLibraries = new string[10]
+        private static string[] _LoadLibraries = new string[11]
         {
             Path.Combine(DefaultStandardsFolder,"defaultPeopleLoads.json"),
             Path.Combine(DefaultStandardsFolder,"defaultLightingLoads.json"),
@@ -48,7 +51,9 @@ namespace HoneybeeSchema.Helper
 
             Path.Combine(DefaultStandardsFolder,"constructionsets.json"),
             Path.Combine(DefaultStandardsFolder,"programTypes.json"),
-            Path.Combine(DefaultStandardsFolder,"hvacs.json")
+            Path.Combine(DefaultStandardsFolder,"hvacs.json"),
+
+            Path.Combine(DefaultStandardsFolder,"defaultModelEnergyProperty.json")
         };
 
 
@@ -102,7 +107,10 @@ namespace HoneybeeSchema.Helper
         public static IEnumerable<HB.IEnergyMaterial> StandardsOpaqueMaterials =>
             _standardsOpaqueMaterials = _standardsOpaqueMaterials ?? LoadOpqueMaterials(Path.Combine(ConstructionsFolder, "opaque_material.json"));
 
-
+        //Default Model Energy Property
+        private static HB.ModelEnergyProperties _defaultModelEnergyProperty;
+        public static HB.ModelEnergyProperties ModelEnergyProperties =>
+            _defaultModelEnergyProperty = _defaultModelEnergyProperty ??  HB.ModelEnergyProperties.FromJson(_LoadLibraries[10]);
 
         //ProgramTypes
         private static IEnumerable<HB.ProgramTypeAbridged> _defaultProgramTypes;
