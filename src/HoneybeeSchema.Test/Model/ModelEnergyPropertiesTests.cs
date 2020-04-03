@@ -39,19 +39,28 @@ namespace HoneybeeSchema.Test
         [SetUp]
         public void Init()
         {
-            if (ModelEnergyProperties.Default != null)
+            try
             {
                 instance = ModelEnergyProperties.Default;
             }
-            else
+            catch (ArgumentException e)
             {
-                var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/model/model_energy_properties_office.json";
-                using (System.Net.WebClient wc = new System.Net.WebClient())
+                if (e.Message.Contains("Invalid file:"))
                 {
-                    var json = wc.DownloadString(url);
-                    instance = ModelEnergyProperties.FromJson(json);
+                    var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/model/model_energy_properties_office.json";
+                    using (System.Net.WebClient wc = new System.Net.WebClient())
+                    {
+                        var json = wc.DownloadString(url);
+                        instance = ModelEnergyProperties.FromJson(json);
+                    }
                 }
+                else
+                {
+                    throw e;
+                }
+                
             }
+            
            
            
         }
