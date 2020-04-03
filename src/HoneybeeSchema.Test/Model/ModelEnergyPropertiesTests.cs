@@ -45,7 +45,7 @@ namespace HoneybeeSchema.Test
             }
             catch (ArgumentException e)
             {
-                if (e.Message.Contains("Invalid file:"))
+                if (e.Message.Contains("Invalid file:") || e.Message.Contains("Ladybug Tools is not installed"))
                 {
                     var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/model/model_energy_properties_office.json";
                     using (System.Net.WebClient wc = new System.Net.WebClient())
