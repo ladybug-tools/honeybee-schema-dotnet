@@ -110,7 +110,7 @@ namespace HoneybeeSchema.Helper
         //Default Model Energy Property
         private static HB.ModelEnergyProperties _defaultModelEnergyProperty;
         public static HB.ModelEnergyProperties ModelEnergyProperties =>
-            _defaultModelEnergyProperty = _defaultModelEnergyProperty ??  HB.ModelEnergyProperties.FromJson(_LoadLibraries[10]);
+            _defaultModelEnergyProperty = _defaultModelEnergyProperty ??  LoadHoneybeeObject(_LoadLibraries[10], HB.ModelEnergyProperties.FromJson);
 
         //ProgramTypes
         private static IEnumerable<HB.ProgramTypeAbridged> _defaultProgramTypes;
@@ -194,6 +194,22 @@ namespace HoneybeeSchema.Helper
                 var libItems = jObjs.Values();
 
                 var hbObjs = libItems.Select(_ => func(_.ToString()));
+                return hbObjs;
+            }
+
+        }
+
+        public static T LoadHoneybeeObject<T>(string jsonFile, Func<string, T> func)
+        {
+
+            if (!File.Exists(jsonFile))
+                throw new ArgumentException($"Invalid file: {jsonFile}");
+
+            using (var file = File.OpenText(jsonFile))
+            using (var reader = new JsonTextReader(file))
+            {
+                var jObjs = JToken.ReadFrom(reader);
+                T hbObjs = func(jObjs.ToString());
                 return hbObjs;
             }
 
