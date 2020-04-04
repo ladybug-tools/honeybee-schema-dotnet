@@ -28,7 +28,7 @@ jobs:
         run: |
           msbuild /p:Configuration=Release HoneybeeSchema.sln
           echo "getting HoneybeeSchema.dll version"
-          echo ::set-outputs name=BUILD_VERSION::$((Get-Item src/HoneybeeSchema/bin/Debug/HoneybeeSchema.dll).VersionInfo.ProductVersion)
+          powershell echo ::set-outputs name=BUILD_VERSION::$((Get-Item src/HoneybeeSchema/bin/Debug/HoneybeeSchema.dll).VersionInfo.ProductVersion)
      
       - name: try get version
         env:
