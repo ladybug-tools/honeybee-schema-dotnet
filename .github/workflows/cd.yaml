@@ -9,6 +9,13 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - name: Set the value
+        id: step_one
+        run: echo "::set-output name=FOO::$(powershell $PSVersionTable.PSVersion.Build)"
+
+      - name: Use it
+        run: echo ${{ steps.step_one.outputs.FOO }}
+
       - name: "Checkout Master Branch"
         uses: actions/checkout@v2
 
@@ -24,6 +31,7 @@ jobs:
           nuget install NUnit.ConsoleRunner -Version 3.10.0 -OutputDirectory packages
 
       - name: MSBuild
+        id: msbuild
         run: |
           msbuild /p:Configuration=Release HoneybeeSchema.sln
 
@@ -34,5 +42,7 @@ jobs:
       - name: Deploy
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+          BUILD_VERSION: ${{ steps.msbuild.outputs.BUILD_VERSION }}
         run: |
           python deploy.py
+
