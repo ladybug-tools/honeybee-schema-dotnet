@@ -9,6 +9,13 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - name: Set the value
+        id: step_one
+        run: echo "::set-output name=FOO::BAR"
+        
+      - name: Use it
+        run: echo ${{ steps.step_one.outputs.FOO }}
+
       - name: "Checkout Master Branch"
         uses: actions/checkout@v2
         
@@ -28,7 +35,7 @@ jobs:
         run: |
           msbuild /p:Configuration=Release HoneybeeSchema.sln
           echo "getting HoneybeeSchema.dll version"
-          echo ::set-output name=BUILD_VERSION::$(powershell (Get-Item src/HoneybeeSchema/bin/Debug/HoneybeeSchema.dll).VersionInfo.ProductVersion)
+          powershell echo ::set-output name=BUILD_VERSION::$((Get-Item src/HoneybeeSchema/bin/Debug/HoneybeeSchema.dll).VersionInfo.ProductVersion)
      
       - name: try get version
         env:
