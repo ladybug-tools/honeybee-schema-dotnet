@@ -28,9 +28,16 @@ jobs:
         run: |
           msbuild /p:Configuration=Release HoneybeeSchema.sln
           echo "getting HoneybeeSchema.dll version"
-          powershell (Get-Item src/HoneybeeSchema/bin/Release/HoneybeeSchema.dll).VersionInfo.ProductVersion
-          echo ::set-output name=BUILD_VERSION::$(powershell (Get-Item src/HoneybeeSchema/bin/Release/HoneybeeSchema.dll).VersionInfo.ProductVersion)
-          
+          echo ::set-outputs name=BUILD_VERSION::$((Get-Item src/HoneybeeSchema/bin/Debug/HoneybeeSchema.dll).VersionInfo.ProductVersion)
+     
+      - name: try get version
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+          BUILD_VERSION: ${{ steps.msbuild.outputs.BUILD_VERSION }}
+        run: |
+          echo ${env:BUILD_VERSION}
+          nuget pack src/HoneybeeSchema/HoneybeeSchema.csproj -Properties Configuration=Release -Version ${env:BUILD_VERSION} -Verbosity detailed
+      
       - name: Run Unit Tests
         run: |
           ./packages/NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe src/HoneybeeSchema.Test/bin/Release/HoneybeeSchema.Test.dll
@@ -40,5 +47,5 @@ jobs:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
           BUILD_VERSION: ${{ steps.msbuild.outputs.BUILD_VERSION }}
         run: |
-          nuget pack src/HoneybeeSchema/HoneybeeSchema.csproj -Properties Configuration=Release -Version $BUILD_VERSION -Verbosity detailed
-          nuget push HoneybeeSchema.$BUILD_VERSION.nupkg -ApiKey $NUGET_API_KEY -Source https://api.nuget.org/v3/index.json
+          nuget pack src/HoneybeeSchema/HoneybeeSchema.csproj -Properties Configuration=Release -Version ${env:BUILD_VERSION} -Verbosity detailed
+          nuget push HoneybeeSchema.${env:BUILD_VERSION}.nupkg -ApiKey ${env:NUGET_API_KEY} -Source https://api.nuget.org/v3/index.json
