@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Set the value
         id: step_one
-        run: echo "::set-output name=FOO::BAR"
+        run: echo "::set-output name=FOO::$(powershell $PSVersionTable.PSVersion.Build)"
 
       - name: Use it
         run: echo ${{ steps.step_one.outputs.FOO }}
@@ -35,7 +35,7 @@ jobs:
         run: |
           msbuild /p:Configuration=Release HoneybeeSchema.sln
           echo "getting HoneybeeSchema.dll version"
-          echo "::set-output name=BUILD_VERSION::$((Get-Item src/HoneybeeSchema/bin/Debug/HoneybeeSchema.dll).VersionInfo.ProductVersion)"
+          echo "::set-output name=BUILD_VERSION::$(powershell (Get-Item src/HoneybeeSchema/bin/Release/HoneybeeSchema.dll).VersionInfo.ProductVersion)"
           echo "::set-output name=FOO::BAR"
      
       - name: try get version
