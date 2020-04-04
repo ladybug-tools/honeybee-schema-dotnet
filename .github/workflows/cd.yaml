@@ -12,7 +12,7 @@ jobs:
       - name: Set the value
         id: step_one
         run: echo "::set-output name=FOO::BAR"
-        
+
       - name: Use it
         run: echo ${{ steps.step_one.outputs.FOO }}
 
@@ -35,14 +35,12 @@ jobs:
         run: |
           msbuild /p:Configuration=Release HoneybeeSchema.sln
           echo "getting HoneybeeSchema.dll version"
-          powershell echo ::set-output name=BUILD_VERSION::$((Get-Item src/HoneybeeSchema/bin/Debug/HoneybeeSchema.dll).VersionInfo.ProductVersion)
+          echo "::set-output name=BUILD_VERSION::$((Get-Item src/HoneybeeSchema/bin/Debug/HoneybeeSchema.dll).VersionInfo.ProductVersion)"
+          echo "::set-output name=FOO::BAR"
      
       - name: try get version
-        env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-          BUILD_VERSION: ${{ steps.msbuild.outputs.BUILD_VERSION }}
         run: |
-          echo ${BUILD_VERSION}
+          echo ${{ steps.msbuild.outputs.FOO }}
           echo ${{ steps.msbuild.outputs.BUILD_VERSION }}
           nuget pack src/HoneybeeSchema/HoneybeeSchema.csproj -Properties Configuration=Release -Version ${{ steps.msbuild.outputs.BUILD_VERSION }} -Verbosity detailed
           nuget pack src/HoneybeeSchema/HoneybeeSchema.csproj -Properties Configuration=Release -Version $BUILD_VERSION -Verbosity detailed
