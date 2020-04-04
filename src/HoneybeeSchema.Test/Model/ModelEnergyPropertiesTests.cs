@@ -43,9 +43,9 @@ namespace HoneybeeSchema.Test
             {
                 instance = ModelEnergyProperties.Default;
             }
-            catch (ArgumentException e)
+            catch (Exception e)
             {
-                if (e.Message.Contains("Invalid file:"))
+                if (e.Message.Contains("Invalid file:") || e.InnerException.Message.Contains("Ladybug Tools is not installed"))
                 {
                     var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/model/model_energy_properties_office.json";
                     using (System.Net.WebClient wc = new System.Net.WebClient())

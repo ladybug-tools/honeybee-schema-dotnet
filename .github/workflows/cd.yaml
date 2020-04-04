@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: "Checkout Master Branch"
         uses: actions/checkout@v2
-        
+
       - name: Setup MSbuild
         uses: microsoft/setup-msbuild@v1.0.0
         
@@ -26,15 +26,13 @@ jobs:
       - name: MSBuild
         run: |
           msbuild /p:Configuration=Release HoneybeeSchema.sln
-          
+
       - name: Run Unit Tests
         run: |
-          rm -f src/HoneybeeSchema.Test/bin/Debug/HoneybeeSchema.Test.dll
           ./packages/NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe src/HoneybeeSchema.Test/bin/Release/HoneybeeSchema.Test.dll
 
       - name: Deploy
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
-          bash export BUILD_VERSION=$(monodis --assembly src/HoneybeeSchema/bin/Release/HoneybeeSchema.dll | grep -Po '([0-9]{1,}\.)+[0-9]{1,}')
-          bash ./deploy.sh
+          python deploy.py
