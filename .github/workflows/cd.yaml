@@ -24,8 +24,10 @@ jobs:
           nuget install NUnit.ConsoleRunner -Version 3.10.0 -OutputDirectory packages
 
       - name: MSBuild
+        id: msbuild
         run: |
           msbuild /p:Configuration=Release HoneybeeSchema.sln
+          echo ::set-output name=BUILD_VERSION::$(monodis --assembly src/HoneybeeSchema/bin/Release/HoneybeeSchema.dll | grep -Po '([0-9]{1,}\.)+[0-9]{1,}')
           
       - name: Run Unit Tests
         run: |
@@ -34,7 +36,7 @@ jobs:
       - name: Deploy
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-          BUILD_VERSION: $(monodis --assembly src/HoneybeeSchema/bin/Release/HoneybeeSchema.dll | grep -Po '([0-9]{1,}\.)+[0-9]{1,}')
+          BUILD_VERSION: ${{ steps.msbuild.outputs.BUILD_VERSION }}
         run: |
           nuget pack src/HoneybeeSchema/HoneybeeSchema.csproj -Properties Configuration=Release -Version $BUILD_VERSION -Verbosity detailed
           nuget push HoneybeeSchema.$BUILD_VERSION.nupkg -ApiKey $NUGET_API_KEY -Source https://api.nuget.org/v3/index.json
