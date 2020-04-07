@@ -1,4 +1,4 @@
-import os
+import os, sys
 import urllib.request, json
 import shutil
 
@@ -96,11 +96,11 @@ def check_anyof_types(source_json_url):
 def cleanup():
     root = os.path.dirname(os.path.dirname(__file__))
     target_folder = os.path.join(root, 'src', 'HoneybeeSchema', 'Client')
-    shutil.rmtree(target_folder)
+    if os.path.exists(target_folder):
+        shutil.rmtree(target_folder)
 
 
-version = os.getenv("VERSION")
-
+json_url = sys.argv[1:][0]
 cleanup()
-check_anyof_types(f"https://github.com/ladybug-tools/honeybee-schema/releases/download/{version}/model.json")
-check_anyof_types(f"https://github.com/ladybug-tools/honeybee-schema/releases/download/{version}/simulation-parameter.json")
+print(f"post processing with {json_url}")
+check_anyof_types(json_url)
