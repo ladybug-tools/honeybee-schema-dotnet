@@ -1,7 +1,7 @@
-import os
+import os, sys
 import urllib.request, json
 
-version = os.getenv('VERSION')
+version = sys.argv[1:][0]
 
 version = version.replace('v', '')
 
