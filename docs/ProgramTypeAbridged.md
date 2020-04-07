@@ -5,7 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters. | 
+**Identifier** | **string** | Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). | 
+**DisplayName** | **string** | Display name of the object with no character restrictions. | [optional] 
 **Type** | **string** |  | [optional] [default to "ProgramTypeAbridged"]
 **People** | [**PeopleAbridged**](PeopleAbridged.md) | People to describe the occupancy of the program. If None, no occupancy will be assumed for the program. | [optional] 
 **Lighting** | [**LightingAbridged**](LightingAbridged.md) | Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program. | [optional] 

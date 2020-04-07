@@ -5,12 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | Name of the object used in all simulation engines. Must not contain spaces and use only letters, digits and underscores/dashes. It cannot be longer than 100 characters. | 
+**Identifier** | **string** | Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters. | 
 **Geometry** | [**Face3D**](Face3D.md) | Planar Face3D for the geometry. | 
 **FaceType** | **string** |  | 
 **BoundaryCondition** | [**AnyOfGroundOutdoorsAdiabaticSurface**](AnyOfGroundOutdoorsAdiabaticSurface.md) |  | 
 **Properties** | [**FacePropertiesAbridged**](FacePropertiesAbridged.md) | Extension properties for particular simulation engines (Radiance, EnergyPlus). | 
-**DisplayName** | **string** | Display name of the object with no restrictions. | [optional] 
+**DisplayName** | **string** | Display name of the object with no character restrictions. | [optional] 
+**UserData** | [**Object**](.md) | Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list). | [optional] 
 **Type** | **string** |  | [optional] [default to "Face"]
 **Apertures** | [**List&lt;Aperture&gt;**](Aperture.md) | Apertures assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid. | [optional] 
 **Doors** | [**List&lt;Door&gt;**](Door.md) | Doors assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid. | [optional] 

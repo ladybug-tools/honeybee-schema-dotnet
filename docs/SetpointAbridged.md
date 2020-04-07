@@ -5,12 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | Name of the object. Must use only ASCII characters and exclude (, ; ! \\n \\t). It cannot be longer than 100 characters. | 
-**CoolingSchedule** | **string** | Name of the schedule for the cooling setpoint. The values in this schedule should be temperature in [C]. | 
-**HeatingSchedule** | **string** | Name of the schedule for the heating setpoint. The values in this schedule should be temperature in [C]. | 
+**Identifier** | **string** | Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). | 
+**CoolingSchedule** | **string** | Identifier of the schedule for the cooling setpoint. The values in this schedule should be temperature in [C]. | 
+**HeatingSchedule** | **string** | Identifier of the schedule for the heating setpoint. The values in this schedule should be temperature in [C]. | 
+**DisplayName** | **string** | Display name of the object with no character restrictions. | [optional] 
 **Type** | **string** |  | [optional] [default to "SetpointAbridged"]
-**HumidifyingSchedule** | **string** | Name of the schedule for the humidification setpoint. The values in this schedule should be in [%]. | [optional] 
-**DehumidifyingSchedule** | **string** | Name of the schedule for the dehumidification setpoint. The values in this schedule should be in [%]. | [optional] 
+**HumidifyingSchedule** | **string** | Identifier of the schedule for the humidification setpoint. The values in this schedule should be in [%]. | [optional] 
+**DehumidifyingSchedule** | **string** | Identifier of the schedule for the dehumidification setpoint. The values in this schedule should be in [%]. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
