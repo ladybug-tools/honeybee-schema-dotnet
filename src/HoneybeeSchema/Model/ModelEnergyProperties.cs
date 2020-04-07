@@ -93,7 +93,7 @@ namespace HoneybeeSchema
         /// <param name="programTypes">List of all unique ProgramTypes in the Model..</param>
         /// <param name="schedules">A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades..</param>
         /// <param name="scheduleTypeLimits">A list of all unique ScheduleTypeLimits in the model. This all ScheduleTypeLimits needed to make the Model schedules..</param>
-        public ModelEnergyProperties(List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,ShadeConstruction,AirBoundaryConstructionAbridged>OpaqueConstructionWindowConstructionAirBoundaryConstruction> constructions, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGas,EnergyWindowMaterialGasMixture,EnergyWindowMaterialGasCustom,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing,EnergyWindowMaterialShade,EnergyWindowMaterialSimpleGlazSys>> materials, string type = "ModelEnergyProperties", TerrainTypeEnum? terrainType = TerrainTypeEnum.City, string globalConstructionSet = default, List<AnyOf<ConstructionSetAbridged,ConstructionSet>> constructionSets = default, List<IdealAirSystemAbridged> hvacs = default, List<AnyOf<ProgramTypeAbridged,ProgramType>> programTypes = default, List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged,ScheduleRuleset,ScheduleFixedInterval>> schedules = default, List<ScheduleTypeLimit> scheduleTypeLimits = default)
+        public ModelEnergyProperties(List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,ShadeConstruction,AirBoundaryConstructionAbridged,OpaqueConstruction,WindowConstruction,AirBoundaryConstruction>> constructions, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGas,EnergyWindowMaterialGasMixture,EnergyWindowMaterialGasCustom,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing,EnergyWindowMaterialShade,EnergyWindowMaterialSimpleGlazSys>> materials, string type = "ModelEnergyProperties", TerrainTypeEnum? terrainType = TerrainTypeEnum.City, string globalConstructionSet = default, List<AnyOf<ConstructionSetAbridged,ConstructionSet>> constructionSets = default, List<IdealAirSystemAbridged> hvacs = default, List<AnyOf<ProgramTypeAbridged,ProgramType>> programTypes = default, List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged,ScheduleRuleset,ScheduleFixedInterval>> schedules = default, List<ScheduleTypeLimit> scheduleTypeLimits = default)
         {
             // to ensure "constructions" is required (not null)
             if (constructions == null)
@@ -147,7 +147,7 @@ namespace HoneybeeSchema
         /// <value>A list of all unique constructions in the model. This includes constructions across all Faces, Apertures, Doors, Shades, Room ConstructionSets, and the global_construction_set.</value>
         [DataMember(Name="constructions", EmitDefaultValue=false)]
         [JsonProperty("constructions")]
-        public List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,ShadeConstruction,AirBoundaryConstructionAbridged>OpaqueConstructionWindowConstructionAirBoundaryConstruction> Constructions { get; set; }
+        public List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,ShadeConstruction,AirBoundaryConstructionAbridged,OpaqueConstruction,WindowConstruction,AirBoundaryConstruction>> Constructions { get; set; }
 
         /// <summary>
         /// A list of all unique materials in the model. This includes materials needed to make the Model constructions.
