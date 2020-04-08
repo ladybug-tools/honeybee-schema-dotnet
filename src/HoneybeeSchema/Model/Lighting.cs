@@ -46,7 +46,7 @@ namespace HoneybeeSchema
         /// <param name="visibleFraction">The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. The default value is &#x60;0.25&#x60;. (default to 0.25).</param>
         /// <param name="radiantFraction">The fraction of heat from lights that is long-wave radiation. Default value is &#x60;0.32&#x60;. (default to 0.32).</param>
         /// <param name="returnAirFraction">The fraction of the heat from lights that goes into the zone return air. Default value is &#x60;0&#x60;. (default to 0.0).</param>
-        public Lighting(string identifier, double wattsPerArea, AnyOfobjectobject schedule, string displayName = default, string type = "Lighting", double visibleFraction = 0.25, double radiantFraction = 0.32, double returnAirFraction = 0.0)
+        public Lighting(string identifier, double wattsPerArea, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule, string displayName = default, string type = "Lighting", double visibleFraction = 0.25, double radiantFraction = 0.32, double returnAirFraction = 0.0)
         {
             // to ensure "identifier" is required (not null)
             if (identifier == null)
@@ -139,7 +139,7 @@ namespace HoneybeeSchema
         /// <value>The schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile.</value>
         [DataMember(Name="schedule", EmitDefaultValue=false)]
         [JsonProperty("schedule")]
-        public AnyOfobjectobject Schedule { get; set; }
+        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; }
 
         /// <summary>
         /// Display name of the object with no character restrictions.

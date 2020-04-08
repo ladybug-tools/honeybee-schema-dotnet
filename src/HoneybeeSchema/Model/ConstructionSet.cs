@@ -39,8 +39,6 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="ConstructionSet" /> class.
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="materials">List of materials. The order of the materials is from outside to inside. (required).</param>
-        /// <param name="constructions">List of abridged Construction objects. (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="type">type (default to &quot;ConstructionSet&quot;).</param>
         /// <param name="wallSet">A WallSet object for this ConstructionSet..</param>
@@ -48,9 +46,9 @@ namespace HoneybeeSchema
         /// <param name="roofCeilingSet">A RoofCeilingSet object for this ConstructionSet..</param>
         /// <param name="apertureSet">A ApertureSet object for this ConstructionSet..</param>
         /// <param name="doorSet">A DoorSet object for this ConstructionSet..</param>
-        /// <param name="shadeConstruction">The identifier of a ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned..</param>
-        /// <param name="airBoundaryConstruction">The identifier of an AirBoundaryConstruction to set the properties of Faces with an AirBoundary type..</param>
-        public ConstructionSet(string identifier, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGas,EnergyWindowMaterialGasMixture,EnergyWindowMaterialGasCustom,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing,EnergyWindowMaterialShade,EnergyWindowMaterialSimpleGlazSys>> materials, List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,ShadeConstruction,AirBoundaryConstructionAbridged>> constructions, string displayName = default, string type = "ConstructionSet", WallSetAbridged wallSet = default, FloorSetAbridged floorSet = default, RoofCeilingSetAbridged roofCeilingSet = default, ApertureSetAbridged apertureSet = default, DoorSetAbridged doorSet = default, string shadeConstruction = default, string airBoundaryConstruction = default)
+        /// <param name="shadeConstruction">A ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned..</param>
+        /// <param name="airBoundaryConstruction">An AirBoundaryConstruction to set the properties of Faces with an AirBoundary type..</param>
+        public ConstructionSet(string identifier, string displayName = default, string type = "ConstructionSet", WallSet wallSet = default, FloorSet floorSet = default, RoofCeilingSet roofCeilingSet = default, ApertureSet apertureSet = default, DoorSet doorSet = default, ShadeConstruction shadeConstruction = default, AirBoundaryConstruction airBoundaryConstruction = default)
         {
             // to ensure "identifier" is required (not null)
             if (identifier == null)
@@ -60,26 +58,6 @@ namespace HoneybeeSchema
             else
             {
                 this.Identifier = identifier;
-            }
-            
-            // to ensure "materials" is required (not null)
-            if (materials == null)
-            {
-                throw new InvalidDataException("materials is a required property for ConstructionSet and cannot be null");
-            }
-            else
-            {
-                this.Materials = materials;
-            }
-            
-            // to ensure "constructions" is required (not null)
-            if (constructions == null)
-            {
-                throw new InvalidDataException("constructions is a required property for ConstructionSet and cannot be null");
-            }
-            else
-            {
-                this.Constructions = constructions;
             }
             
             this.DisplayName = displayName;
@@ -110,22 +88,6 @@ namespace HoneybeeSchema
         public string Identifier { get; set; }
 
         /// <summary>
-        /// List of materials. The order of the materials is from outside to inside.
-        /// </summary>
-        /// <value>List of materials. The order of the materials is from outside to inside.</value>
-        [DataMember(Name="materials", EmitDefaultValue=false)]
-        [JsonProperty("materials")]
-        public List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGas,EnergyWindowMaterialGasMixture,EnergyWindowMaterialGasCustom,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing,EnergyWindowMaterialShade,EnergyWindowMaterialSimpleGlazSys>> Materials { get; set; }
-
-        /// <summary>
-        /// List of abridged Construction objects.
-        /// </summary>
-        /// <value>List of abridged Construction objects.</value>
-        [DataMember(Name="constructions", EmitDefaultValue=false)]
-        [JsonProperty("constructions")]
-        public List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,ShadeConstruction,AirBoundaryConstructionAbridged>> Constructions { get; set; }
-
-        /// <summary>
         /// Display name of the object with no character restrictions.
         /// </summary>
         /// <value>Display name of the object with no character restrictions.</value>
@@ -146,7 +108,7 @@ namespace HoneybeeSchema
         /// <value>A WallSet object for this ConstructionSet.</value>
         [DataMember(Name="wall_set", EmitDefaultValue=false)]
         [JsonProperty("wall_set")]
-        public WallSetAbridged WallSet { get; set; }
+        public WallSet WallSet { get; set; }
 
         /// <summary>
         /// A FloorSet object for this ConstructionSet.
@@ -154,7 +116,7 @@ namespace HoneybeeSchema
         /// <value>A FloorSet object for this ConstructionSet.</value>
         [DataMember(Name="floor_set", EmitDefaultValue=false)]
         [JsonProperty("floor_set")]
-        public FloorSetAbridged FloorSet { get; set; }
+        public FloorSet FloorSet { get; set; }
 
         /// <summary>
         /// A RoofCeilingSet object for this ConstructionSet.
@@ -162,7 +124,7 @@ namespace HoneybeeSchema
         /// <value>A RoofCeilingSet object for this ConstructionSet.</value>
         [DataMember(Name="roof_ceiling_set", EmitDefaultValue=false)]
         [JsonProperty("roof_ceiling_set")]
-        public RoofCeilingSetAbridged RoofCeilingSet { get; set; }
+        public RoofCeilingSet RoofCeilingSet { get; set; }
 
         /// <summary>
         /// A ApertureSet object for this ConstructionSet.
@@ -170,7 +132,7 @@ namespace HoneybeeSchema
         /// <value>A ApertureSet object for this ConstructionSet.</value>
         [DataMember(Name="aperture_set", EmitDefaultValue=false)]
         [JsonProperty("aperture_set")]
-        public ApertureSetAbridged ApertureSet { get; set; }
+        public ApertureSet ApertureSet { get; set; }
 
         /// <summary>
         /// A DoorSet object for this ConstructionSet.
@@ -178,23 +140,23 @@ namespace HoneybeeSchema
         /// <value>A DoorSet object for this ConstructionSet.</value>
         [DataMember(Name="door_set", EmitDefaultValue=false)]
         [JsonProperty("door_set")]
-        public DoorSetAbridged DoorSet { get; set; }
+        public DoorSet DoorSet { get; set; }
 
         /// <summary>
-        /// The identifier of a ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned.
+        /// A ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned.
         /// </summary>
-        /// <value>The identifier of a ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned.</value>
+        /// <value>A ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned.</value>
         [DataMember(Name="shade_construction", EmitDefaultValue=false)]
         [JsonProperty("shade_construction")]
-        public string ShadeConstruction { get; set; }
+        public ShadeConstruction ShadeConstruction { get; set; }
 
         /// <summary>
-        /// The identifier of an AirBoundaryConstruction to set the properties of Faces with an AirBoundary type.
+        /// An AirBoundaryConstruction to set the properties of Faces with an AirBoundary type.
         /// </summary>
-        /// <value>The identifier of an AirBoundaryConstruction to set the properties of Faces with an AirBoundary type.</value>
+        /// <value>An AirBoundaryConstruction to set the properties of Faces with an AirBoundary type.</value>
         [DataMember(Name="air_boundary_construction", EmitDefaultValue=false)]
         [JsonProperty("air_boundary_construction")]
-        public string AirBoundaryConstruction { get; set; }
+        public AirBoundaryConstruction AirBoundaryConstruction { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -205,8 +167,6 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("class ConstructionSet {\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  Materials: ").Append(Materials).Append("\n");
-            sb.Append("  Constructions: ").Append(Constructions).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  WallSet: ").Append(WallSet).Append("\n");
@@ -266,18 +226,6 @@ namespace HoneybeeSchema
                     this.Identifier.Equals(input.Identifier))
                 ) && 
                 (
-                    this.Materials == input.Materials ||
-                    this.Materials != null &&
-                    input.Materials != null &&
-                    this.Materials.SequenceEqual(input.Materials)
-                ) && 
-                (
-                    this.Constructions == input.Constructions ||
-                    this.Constructions != null &&
-                    input.Constructions != null &&
-                    this.Constructions.SequenceEqual(input.Constructions)
-                ) && 
-                (
                     this.DisplayName == input.DisplayName ||
                     (this.DisplayName != null &&
                     this.DisplayName.Equals(input.DisplayName))
@@ -335,10 +283,6 @@ namespace HoneybeeSchema
                 int hashCode = 41;
                 if (this.Identifier != null)
                     hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.Materials != null)
-                    hashCode = hashCode * 59 + this.Materials.GetHashCode();
-                if (this.Constructions != null)
-                    hashCode = hashCode * 59 + this.Constructions.GetHashCode();
                 if (this.DisplayName != null)
                     hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.Type != null)
@@ -385,30 +329,6 @@ namespace HoneybeeSchema
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
-            }
-
-            // ShadeConstruction (string) maxLength
-            if(this.ShadeConstruction != null && this.ShadeConstruction.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ShadeConstruction, length must be less than 100.", new [] { "ShadeConstruction" });
-            }
-
-            // ShadeConstruction (string) minLength
-            if(this.ShadeConstruction != null && this.ShadeConstruction.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ShadeConstruction, length must be greater than 1.", new [] { "ShadeConstruction" });
-            }
-
-            // AirBoundaryConstruction (string) maxLength
-            if(this.AirBoundaryConstruction != null && this.AirBoundaryConstruction.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for AirBoundaryConstruction, length must be less than 100.", new [] { "AirBoundaryConstruction" });
-            }
-
-            // AirBoundaryConstruction (string) minLength
-            if(this.AirBoundaryConstruction != null && this.AirBoundaryConstruction.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for AirBoundaryConstruction, length must be greater than 1.", new [] { "AirBoundaryConstruction" });
             }
 
             yield break;

@@ -46,7 +46,7 @@ namespace HoneybeeSchema
         /// <param name="airChangesPerHour">Intensity of ventilation in air changes per hour (ACH) for the entire Room. (default to 0).</param>
         /// <param name="flowPerZone">Intensity of ventilation in m3/s for the entire Room. (default to 0).</param>
         /// <param name="schedule">Schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile..</param>
-        public Ventilation(string identifier, string displayName = default, string type = "Ventilation", double flowPerPerson = 0, double flowPerArea = 0, double airChangesPerHour = 0, double flowPerZone = 0, string schedule = default)
+        public Ventilation(string identifier, string displayName = default, string type = "Ventilation", double flowPerPerson = 0, double flowPerArea = 0, double airChangesPerHour = 0, double flowPerZone = 0, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule = default)
         {
             // to ensure "identifier" is required (not null)
             if (identifier == null)
@@ -168,7 +168,7 @@ namespace HoneybeeSchema
         /// <value>Schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.</value>
         [DataMember(Name="schedule", EmitDefaultValue=false)]
         [JsonProperty("schedule")]
-        public string Schedule { get; set; }
+        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -349,18 +349,6 @@ namespace HoneybeeSchema
             if(this.FlowPerZone < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for FlowPerZone, must be a value greater than or equal to 0.", new [] { "FlowPerZone" });
-            }
-
-            // Schedule (string) maxLength
-            if(this.Schedule != null && this.Schedule.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Schedule, length must be less than 100.", new [] { "Schedule" });
-            }
-
-            // Schedule (string) minLength
-            if(this.Schedule != null && this.Schedule.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Schedule, length must be greater than 1.", new [] { "Schedule" });
             }
 
             yield break;

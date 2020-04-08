@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Identifier** | **string** | Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). | 
-**AirMixingSchedule** | [**AnyOfobjectobject**](AnyOfobjectobject.md) | A fractional schedule as a ScheduleRuleset or ScheduleFixedInterval for the air mixing schedule across the construction. | 
+**AirMixingSchedule** | [**AnyOfScheduleRulesetScheduleFixedInterval**](AnyOfScheduleRulesetScheduleFixedInterval.md) | A fractional schedule as a ScheduleRuleset or ScheduleFixedInterval for the air mixing schedule across the construction. | 
 **DisplayName** | **string** | Display name of the object with no character restrictions. | [optional] 
 **Type** | **string** |  | [optional] [default to "AirBoundaryConstruction"]
 **AirMixingPerArea** | **double** | A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system. | [optional] [default to 0.1M]

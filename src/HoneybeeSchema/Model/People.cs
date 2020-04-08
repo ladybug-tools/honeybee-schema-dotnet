@@ -46,7 +46,7 @@ namespace HoneybeeSchema
         /// <param name="type">type (default to &quot;People&quot;).</param>
         /// <param name="radiantFraction">The radiant fraction of sensible heat released by people. The defaultvalue is 0.30. (default to 0.3).</param>
         /// <param name="latentFraction">Number for the latent fraction of heat gain due to people or an Autocalculate object..</param>
-        public People(string identifier, double peoplePerArea, AnyOfobjectobject occupancySchedule, AnyOfobjectobject activitySchedule, string displayName = default, string type = "People", double radiantFraction = 0.3, AnyOf<Autocalculate,double> latentFraction = default)
+        public People(string identifier, double peoplePerArea, AnyOf<ScheduleRuleset,ScheduleFixedInterval> occupancySchedule, AnyOf<ScheduleRuleset,ScheduleFixedInterval> activitySchedule, string displayName = default, string type = "People", double radiantFraction = 0.3, AnyOf<Autocalculate,double> latentFraction = default)
         {
             // to ensure "identifier" is required (not null)
             if (identifier == null)
@@ -132,7 +132,7 @@ namespace HoneybeeSchema
         /// <value>A schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile.</value>
         [DataMember(Name="occupancy_schedule", EmitDefaultValue=false)]
         [JsonProperty("occupancy_schedule")]
-        public AnyOfobjectobject OccupancySchedule { get; set; }
+        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> OccupancySchedule { get; set; }
 
         /// <summary>
         /// A schedule for the activity of the occupants over the course of the year. The type of this schedule should be Power and the values of the schedule equal to the number of Watts given off by an individual person in the room.
@@ -140,7 +140,7 @@ namespace HoneybeeSchema
         /// <value>A schedule for the activity of the occupants over the course of the year. The type of this schedule should be Power and the values of the schedule equal to the number of Watts given off by an individual person in the room.</value>
         [DataMember(Name="activity_schedule", EmitDefaultValue=false)]
         [JsonProperty("activity_schedule")]
-        public AnyOfobjectobject ActivitySchedule { get; set; }
+        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> ActivitySchedule { get; set; }
 
         /// <summary>
         /// Display name of the object with no character restrictions.
