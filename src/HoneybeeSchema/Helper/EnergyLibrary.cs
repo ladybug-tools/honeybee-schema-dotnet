@@ -424,55 +424,55 @@ namespace HoneybeeSchema.Helper
 
         }
 
-        public static HB.OpaqueConstructionAbridged GetOpaqueConstructionByName(string name)
+        public static HB.OpaqueConstructionAbridged GetOpaqueConstructionByIdentifier(string identifier)
         {
             var lib = EnergyLibrary.StandardsOpaqueConstructions;
-            var obj = lib.FirstOrDefault(_ => _.Name == name);
+            var obj = lib.FirstOrDefault(_ => _.Identifier == identifier);
             if (obj == null)
-                throw new ArgumentNullException($"Failed to find the opaque construction {name}");
+                throw new ArgumentNullException($"Failed to find the opaque construction {identifier}");
             return obj;
         }
-        public static HB.WindowConstructionAbridged GetWindowConstructionByName(string name)
+        public static HB.WindowConstructionAbridged GetWindowConstructionByIdentifier(string identifier)
         {
             var lib = EnergyLibrary.StandardsWindowConstructions;
-            var obj = lib.FirstOrDefault(_ => _.Name == name);
+            var obj = lib.FirstOrDefault(_ => _.Identifier == identifier);
             if (obj == null)
-                throw new ArgumentNullException($"Failed to find the window construction {name}");
+                throw new ArgumentNullException($"Failed to find the window construction {identifier}");
             return obj;
         }
-        public static HB.ShadeConstruction GetShadeConstructionByName(string name)
+        public static HB.ShadeConstruction GetShadeConstructionByIdentifier(string identifier)
         {
-            throw new ArgumentNullException($"Failed to find the shade constructions {name}");
+            throw new ArgumentNullException($"Failed to find the shade constructions {identifier}");
             //var lib = EnergyLibrary.;
             //var obj = lib.FirstOrDefault(_ => _.Name == name);
             //if (obj == null)
             //    throw new ArgumentNullException($"Failed to find the window construction {name}");
             //return obj;
         }
-        public static HB.IEnergyMaterial GetOpaqueMaterialByName(string name)
+        public static HB.IEnergyMaterial GetOpaqueMaterialByIdentifier(string identifier)
         {
             var lib = EnergyLibrary.StandardsOpaqueMaterials;
-            var obj = lib.FirstOrDefault(_ => _.Name == name);
+            var obj = lib.FirstOrDefault(_ => _.Identifier == identifier);
             if (obj == null)
-                throw new ArgumentNullException($"Failed to find the opaque material {name}");
+                throw new ArgumentNullException($"Failed to find the opaque material {identifier}");
             return obj;
         }
-        public static HB.IEnergyWindowMaterial GetWindowMaterialByName(string name)
+        public static HB.IEnergyWindowMaterial GetWindowMaterialByIdentifier(string identifier)
         {
             var lib = EnergyLibrary.StandardsWindowMaterials;
-            var obj = lib.FirstOrDefault(_ => _.Name == name);
+            var obj = lib.FirstOrDefault(_ => _.Identifier == identifier);
             if (obj == null)
-                throw new ArgumentNullException($"Failed to find the opaque material {name}");
+                throw new ArgumentNullException($"Failed to find the opaque material {identifier}");
             return obj;
         }
 
         public static List<HB.IEnergyMaterial> GetConstructionMaterials(HB.OpaqueConstructionAbridged construction)
         {
-            return construction.Layers.Select(_ => GetOpaqueMaterialByName(_)).ToList();
+            return construction.Layers.Select(_ => GetOpaqueMaterialByIdentifier(_)).ToList();
         }
         public static List<HB.IEnergyWindowMaterial> GetConstructionMaterials(HB.WindowConstructionAbridged construction)
         {
-            return construction.Layers.Select(_ => GetWindowMaterialByName(_)).ToList();
+            return construction.Layers.Select(_ => GetWindowMaterialByIdentifier(_)).ToList();
         }
 
         
