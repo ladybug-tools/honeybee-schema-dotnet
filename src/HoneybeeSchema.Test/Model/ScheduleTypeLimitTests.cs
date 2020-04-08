@@ -75,7 +75,7 @@ namespace HoneybeeSchema.Test
         [Test]
         public void NameTest()
         {
-            Assert.AreEqual(this.instance.Name, "Temperature");
+            Assert.AreEqual(this.instance.Identifier, "Temperature");
         }
         /// <summary>
         /// Test the property 'Type'

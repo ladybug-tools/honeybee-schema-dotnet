@@ -75,7 +75,7 @@ namespace HoneybeeSchema.Test
         [Test]
         public void NameTest()
         {
-            Assert.AreEqual(this.instance.Name, "TinyHouse");
+            Assert.AreEqual(this.instance.Identifier, "Tiny_House");
         }
         /// <summary>
         /// Test the property 'DisplayName'
@@ -83,7 +83,7 @@ namespace HoneybeeSchema.Test
         [Test]
         public void DisplayNameTest()
         {
-            Assert.AreEqual(this.instance.DisplayName, "Tiny House");
+            Assert.AreEqual(this.instance.DisplayName, "Tiny_House");
         }
         /// <summary>
         /// Test the property 'Type'
@@ -108,7 +108,7 @@ namespace HoneybeeSchema.Test
         public void OrphanedFacesTest()
         {
             Assert.AreEqual(this.instance.OrphanedShades.Count, 1);
-            Assert.AreEqual(this.instance.OrphanedShades[0].Name, "TreeCanopy");
+            Assert.AreEqual(this.instance.OrphanedShades[0].Identifier, "Tree_Canopy");
         }
         /// <summary>
         /// Test the property 'OrphanedShades'
@@ -148,8 +148,9 @@ namespace HoneybeeSchema.Test
         [Test]
         public void PropertiesTest()
         {
-            var prop = this.instance.Properties.Energy.ProgramTypes.First();
-            Assert.AreEqual(prop.Name, "Generic Office Program");
+            var obj = this.instance.Properties.Energy.ProgramTypes.First();
+            var prop = obj.Obj as ProgramTypeAbridged; 
+            Assert.AreEqual(prop.Identifier, "Generic Office Program");
             Assert.AreEqual(prop.Lighting.WattsPerArea, 10.55);
             Assert.AreEqual(prop.ElectricEquipment.LatentFraction, 0);
             Assert.AreEqual(prop.People.LatentFraction, new Autocalculate());

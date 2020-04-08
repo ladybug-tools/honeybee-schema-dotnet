@@ -34,29 +34,12 @@ namespace HoneybeeSchema.Test
         public void Init()
         {
             instance = new ConstructionSetAbridged("NewConstructionSet");
-            var json = 
- @"{
-    ""type"": ""ConstructionSetAbridged"",
-    ""name"": ""Construction Set"",
-    ""wall_set"": {
-                ""type"": ""WallSetAbridged"",
-        ""exterior_construction"": ""Exterior Wall ASHRAE 2009""
-    },
-    ""floor_set"": {
-                ""type"": ""FloorSetAbridged"",
-        ""interior_construction"": ""Internal Floor""
-    },
-    ""roof_ceiling_set"": {
-                ""type"": ""RoofCeilingSetAbridged"",
-        ""exterior_construction"": ""Exterior Roof ASHRAE 2009""
-    },
-    ""aperture_set"": {
-                ""type"": ""ApertureSetAbridged"",
-        ""fixed_window_construction"": ""Exterior Window""
-    }
-}";
-
-            instanceFromJson = ConstructionSetAbridged.FromJson(json);
+            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/construction_set/constructionset_abridged_complete.json";
+            using (var wc = new System.Net.WebClient())
+            {
+                var json = wc.DownloadString(url);
+                this.instanceFromJson = ConstructionSetAbridged.FromJson(json);
+            }
         }
 
         /// <summary>
@@ -80,13 +63,13 @@ namespace HoneybeeSchema.Test
 
 
         /// <summary>
-        /// Test the property 'Name'
+        /// Test the property 'Identifier'
         /// </summary>
         [Test]
-        public void NameTest()
+        public void IdentifierTest()
         {
-            Assert.AreEqual(this.instance.Name, "NewConstructionSet");
-            Assert.AreEqual(instanceFromJson.Name, "Construction Set");
+            Assert.AreEqual(this.instance.Identifier, "NewConstructionSet");
+            Assert.AreEqual(instanceFromJson.Identifier, "Default Generic Construction Set");
         }
         /// <summary>
         /// Test the property 'Type'
@@ -103,7 +86,7 @@ namespace HoneybeeSchema.Test
         public void WallSetTest()
         {
             Assert.AreEqual(this.instance.WallSet, null);
-            Assert.AreEqual(instanceFromJson.WallSet.ExteriorConstruction, "Exterior Wall ASHRAE 2009");
+            Assert.AreEqual(instanceFromJson.WallSet.ExteriorConstruction, "Generic Exterior Wall");
         }
         /// <summary>
         /// Test the property 'FloorSet'
@@ -112,8 +95,8 @@ namespace HoneybeeSchema.Test
         public void FloorSetTest()
         {
             Assert.AreEqual(this.instance.FloorSet, null);
-            Assert.AreEqual(instanceFromJson.FloorSet.InteriorConstruction, "Internal Floor");
-            Assert.AreEqual(instanceFromJson.FloorSet.ExteriorConstruction, null);
+            Assert.AreEqual(instanceFromJson.FloorSet.InteriorConstruction, "Generic Interior Floor");
+            Assert.AreEqual(instanceFromJson.FloorSet.ExteriorConstruction, "Generic Exposed Floor");
         }
         /// <summary>
         /// Test the property 'RoofCeilingSet'
@@ -122,7 +105,7 @@ namespace HoneybeeSchema.Test
         public void RoofCeilingSetTest()
         {
             Assert.AreEqual(this.instance.RoofCeilingSet, null);
-            Assert.AreEqual(instanceFromJson.RoofCeilingSet.ExteriorConstruction, "Exterior Roof ASHRAE 2009");
+            Assert.AreEqual(instanceFromJson.RoofCeilingSet.ExteriorConstruction, "Generic Roof");
         }
         /// <summary>
         /// Test the property 'ApertureSet'
@@ -130,7 +113,8 @@ namespace HoneybeeSchema.Test
         [Test]
         public void ApertureSetTest()
         {
-            // TODO unit test for the property 'ApertureSet'
+            Assert.AreEqual(this.instance.ApertureSet, null);
+            Assert.AreEqual(instanceFromJson.ApertureSet.WindowConstruction, "Generic Double Pane");
         }
         /// <summary>
         /// Test the property 'DoorSet'
@@ -138,7 +122,8 @@ namespace HoneybeeSchema.Test
         [Test]
         public void DoorSetTest()
         {
-            // TODO unit test for the property 'DoorSet'
+            Assert.AreEqual(this.instance.DoorSet, null);
+            Assert.AreEqual(instanceFromJson.DoorSet.ExteriorConstruction, "Generic Exterior Door");
         }
         /// <summary>
         /// Test the property 'ShadeConstruction'
@@ -147,7 +132,7 @@ namespace HoneybeeSchema.Test
         public void ShadeConstructionTest()
         {
             Assert.AreEqual(this.instance.ShadeConstruction, null);
-            Assert.AreEqual(instanceFromJson.ShadeConstruction, null);
+            Assert.AreEqual(instanceFromJson.ShadeConstruction, "Generic Shade");
         }
 
     }

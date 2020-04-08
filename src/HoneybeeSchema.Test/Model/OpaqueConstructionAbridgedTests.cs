@@ -79,8 +79,8 @@ namespace HoneybeeSchema.Test
         [Test]
         public void NameTest()
         {
-            Assert.AreEqual(this.instance.Name, "Exterior Wall ASHRAE 2009");
-            Assert.AreEqual(instanceFromJson.Name, this.instance.Name);
+            Assert.AreEqual(this.instance.Identifier, "Exterior Wall ASHRAE 2009");
+            Assert.AreEqual(instanceFromJson.Identifier, this.instance.Identifier);
 
         }
         /// <summary>
