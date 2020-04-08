@@ -1,5 +1,7 @@
-import os, sys
-import urllib.request, json
+import os
+import sys
+import urllib.request
+import json
 import shutil
 
 
@@ -34,7 +36,7 @@ def replace_decimal(read_data):
     replace_new = ['double', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
     for s, n in zip(replace_source, replace_new):
         data = data.replace(s, n)
-    print("\n---Replacing %s to %s" % ('decimal', 'double'))
+    print("|---Replacing %s to %s" % ('decimal', 'double'))
     return data
 
 
@@ -44,8 +46,11 @@ def replace_anyof_type(read_data, anyof_types):
         if len(items) > 0:
             replace_source = "AnyOf%s" % ("".join(items))
             replace_new = "AnyOf<%s>" % (",".join(items).replace('number', 'double'))
-            data = data.replace(replace_source, replace_new)
-            print("\n---Replacing %s to %s" % (replace_source, replace_new))
+            head, _sep, tail = data.rpartition(replace_source)
+            first_behind = tail[0:1]
+            if first_behind == ' ' or first_behind == '>':
+                data = head + replace_new + tail
+                print("|---Replacing %s to %s" % (replace_source, replace_new))
     return data
 
 
@@ -56,8 +61,7 @@ def check_csfiles(source_folder, anyof_types):
 
     for f in class_files:
         cs_file = os.path.join(source_folder, f)
-        print("\n-Checking %s\n" % cs_file)
-
+        print("\n-Checking %s" % cs_file)
         # read data
         f = open(cs_file, "rt", encoding='utf-8')
         data = f.read()
