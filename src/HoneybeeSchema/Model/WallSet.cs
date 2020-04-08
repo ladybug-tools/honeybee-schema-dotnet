@@ -28,16 +28,16 @@ namespace HoneybeeSchema
     /// A set of constructions for wall assemblies.
     /// </summary>
     [DataContract]
-    public partial class WallSetAbridged :  IEquatable<WallSetAbridged>, IValidatableObject
+    public partial class WallSet :  IEquatable<WallSet>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WallSetAbridged" /> class.
+        /// Initializes a new instance of the <see cref="WallSet" /> class.
         /// </summary>
-        /// <param name="interiorConstruction">Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition..</param>
-        /// <param name="exteriorConstruction">Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition..</param>
-        /// <param name="groundConstruction">Identifier for an OpaqueConstruction for faces with a Ground boundary condition..</param>
-        /// <param name="type">type (default to &quot;WallSetAbridged&quot;).</param>
-        public WallSetAbridged(string interiorConstruction = default, string exteriorConstruction = default, string groundConstruction = default, string type = "WallSetAbridged")
+        /// <param name="interiorConstruction">An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition..</param>
+        /// <param name="exteriorConstruction">An OpaqueConstruction for walls with an Outdoors boundary condition..</param>
+        /// <param name="groundConstruction">An OpaqueConstruction for walls with a Ground boundary condition..</param>
+        /// <param name="type">type (default to &quot;WallSet&quot;).</param>
+        public WallSet(OpaqueConstruction interiorConstruction = default, OpaqueConstruction exteriorConstruction = default, OpaqueConstruction groundConstruction = default, string type = "WallSet")
         {
             this.InteriorConstruction = interiorConstruction;
             this.ExteriorConstruction = exteriorConstruction;
@@ -45,7 +45,7 @@ namespace HoneybeeSchema
             // use default value if no "type" provided
             if (type == null)
             {
-                this.Type = "WallSetAbridged";
+                this.Type = "WallSet";
             }
             else
             {
@@ -54,28 +54,28 @@ namespace HoneybeeSchema
         }
         
         /// <summary>
-        /// Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition.
+        /// An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition.
         /// </summary>
-        /// <value>Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition.</value>
+        /// <value>An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition.</value>
         [DataMember(Name="interior_construction", EmitDefaultValue=false)]
         [JsonProperty("interior_construction")]
-        public string InteriorConstruction { get; set; }
+        public OpaqueConstruction InteriorConstruction { get; set; }
 
         /// <summary>
-        /// Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition.
+        /// An OpaqueConstruction for walls with an Outdoors boundary condition.
         /// </summary>
-        /// <value>Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition.</value>
+        /// <value>An OpaqueConstruction for walls with an Outdoors boundary condition.</value>
         [DataMember(Name="exterior_construction", EmitDefaultValue=false)]
         [JsonProperty("exterior_construction")]
-        public string ExteriorConstruction { get; set; }
+        public OpaqueConstruction ExteriorConstruction { get; set; }
 
         /// <summary>
-        /// Identifier for an OpaqueConstruction for faces with a Ground boundary condition.
+        /// An OpaqueConstruction for walls with a Ground boundary condition.
         /// </summary>
-        /// <value>Identifier for an OpaqueConstruction for faces with a Ground boundary condition.</value>
+        /// <value>An OpaqueConstruction for walls with a Ground boundary condition.</value>
         [DataMember(Name="ground_construction", EmitDefaultValue=false)]
         [JsonProperty("ground_construction")]
-        public string GroundConstruction { get; set; }
+        public OpaqueConstruction GroundConstruction { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
@@ -91,7 +91,7 @@ namespace HoneybeeSchema
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class WallSetAbridged {\n");
+            sb.Append("class WallSet {\n");
             sb.Append("  InteriorConstruction: ").Append(InteriorConstruction).Append("\n");
             sb.Append("  ExteriorConstruction: ").Append(ExteriorConstruction).Append("\n");
             sb.Append("  GroundConstruction: ").Append(GroundConstruction).Append("\n");
@@ -112,10 +112,10 @@ namespace HoneybeeSchema
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>WallSetAbridged object</returns>
-        public static WallSetAbridged FromJson(string json)
+        /// <returns>WallSet object</returns>
+        public static WallSet FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<WallSetAbridged>(json, new AnyOfJsonConverter());
+            return JsonConvert.DeserializeObject<WallSet>(json, new AnyOfJsonConverter());
         }
 
 
@@ -126,15 +126,15 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as WallSetAbridged);
+            return this.Equals(input as WallSet);
         }
 
         /// <summary>
-        /// Returns true if WallSetAbridged instances are equal
+        /// Returns true if WallSet instances are equal
         /// </summary>
-        /// <param name="input">Instance of WallSetAbridged to be compared</param>
+        /// <param name="input">Instance of WallSet to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(WallSetAbridged input)
+        public bool Equals(WallSet input)
         {
             if (input == null)
                 return false;
@@ -190,44 +190,8 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // InteriorConstruction (string) maxLength
-            if(this.InteriorConstruction != null && this.InteriorConstruction.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InteriorConstruction, length must be less than 100.", new [] { "InteriorConstruction" });
-            }
-
-            // InteriorConstruction (string) minLength
-            if(this.InteriorConstruction != null && this.InteriorConstruction.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InteriorConstruction, length must be greater than 1.", new [] { "InteriorConstruction" });
-            }
-
-            // ExteriorConstruction (string) maxLength
-            if(this.ExteriorConstruction != null && this.ExteriorConstruction.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ExteriorConstruction, length must be less than 100.", new [] { "ExteriorConstruction" });
-            }
-
-            // ExteriorConstruction (string) minLength
-            if(this.ExteriorConstruction != null && this.ExteriorConstruction.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ExteriorConstruction, length must be greater than 1.", new [] { "ExteriorConstruction" });
-            }
-
-            // GroundConstruction (string) maxLength
-            if(this.GroundConstruction != null && this.GroundConstruction.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for GroundConstruction, length must be less than 100.", new [] { "GroundConstruction" });
-            }
-
-            // GroundConstruction (string) minLength
-            if(this.GroundConstruction != null && this.GroundConstruction.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for GroundConstruction, length must be greater than 1.", new [] { "GroundConstruction" });
-            }
-
             // Type (string) pattern
-            Regex regexType = new Regex(@"^WallSetAbridged$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^WallSet$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

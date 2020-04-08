@@ -46,7 +46,7 @@ namespace HoneybeeSchema
         /// <param name="constantCoefficient">constantCoefficient (default to 1).</param>
         /// <param name="temperatureCoefficient">temperatureCoefficient (default to 0).</param>
         /// <param name="velocityCoefficient">velocityCoefficient (default to 0).</param>
-        public Infiltration(string identifier, double flowPerExteriorArea, string schedule, string displayName = default, string type = "Infiltration", double constantCoefficient = 1, double temperatureCoefficient = 0, double velocityCoefficient = 0)
+        public Infiltration(string identifier, double flowPerExteriorArea, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule, string displayName = default, string type = "Infiltration", double constantCoefficient = 1, double temperatureCoefficient = 0, double velocityCoefficient = 0)
         {
             // to ensure "identifier" is required (not null)
             if (identifier == null)
@@ -139,7 +139,7 @@ namespace HoneybeeSchema
         /// <value>The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.</value>
         [DataMember(Name="schedule", EmitDefaultValue=false)]
         [JsonProperty("schedule")]
-        public string Schedule { get; set; }
+        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; }
 
         /// <summary>
         /// Display name of the object with no character restrictions.

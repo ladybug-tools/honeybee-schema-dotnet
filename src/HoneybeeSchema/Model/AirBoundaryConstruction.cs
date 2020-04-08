@@ -43,7 +43,7 @@ namespace HoneybeeSchema
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="type">type (default to &quot;AirBoundaryConstruction&quot;).</param>
         /// <param name="airMixingPerArea">A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system. (default to 0.1).</param>
-        public AirBoundaryConstruction(string identifier, AnyOfobjectobject airMixingSchedule, string displayName = default, string type = "AirBoundaryConstruction", double airMixingPerArea = 0.1)
+        public AirBoundaryConstruction(string identifier, AnyOf<ScheduleRuleset,ScheduleFixedInterval> airMixingSchedule, string displayName = default, string type = "AirBoundaryConstruction", double airMixingPerArea = 0.1)
         {
             // to ensure "identifier" is required (not null)
             if (identifier == null)
@@ -100,7 +100,7 @@ namespace HoneybeeSchema
         /// <value>A fractional schedule as a ScheduleRuleset or ScheduleFixedInterval for the air mixing schedule across the construction.</value>
         [DataMember(Name="air_mixing_schedule", EmitDefaultValue=false)]
         [JsonProperty("air_mixing_schedule")]
-        public AnyOfobjectobject AirMixingSchedule { get; set; }
+        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> AirMixingSchedule { get; set; }
 
         /// <summary>
         /// Display name of the object with no character restrictions.

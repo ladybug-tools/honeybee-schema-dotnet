@@ -46,7 +46,7 @@ namespace HoneybeeSchema
         /// <param name="latentFraction">Number for the amount of latent heat given off by electricequipment. Default value is 0. (default to 0).</param>
         /// <param name="lostFraction">Number for the amount of “lost” heat being given off by equipment. The default value is 0. (default to 0).</param>
         /// <param name="type">type (default to &quot;ElectricEquipment&quot;).</param>
-        public ElectricEquipment(string identifier, double wattsPerArea, AnyOfobjectobject schedule, string displayName = default, double radiantFraction = 0, double latentFraction = 0, double lostFraction = 0, string type = "ElectricEquipment")
+        public ElectricEquipment(string identifier, double wattsPerArea, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule, string displayName = default, double radiantFraction = 0, double latentFraction = 0, double lostFraction = 0, string type = "ElectricEquipment")
         {
             // to ensure "identifier" is required (not null)
             if (identifier == null)
@@ -139,7 +139,7 @@ namespace HoneybeeSchema
         /// <value>The schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.</value>
         [DataMember(Name="schedule", EmitDefaultValue=false)]
         [JsonProperty("schedule")]
-        public AnyOfobjectobject Schedule { get; set; }
+        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; }
 
         /// <summary>
         /// Display name of the object with no character restrictions.

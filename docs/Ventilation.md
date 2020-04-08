@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **FlowPerArea** | **double** | Intensity of ventilation in [m3/s per m2 of floor area]. | [optional] [default to 0M]
 **AirChangesPerHour** | **double** | Intensity of ventilation in air changes per hour (ACH) for the entire Room. | [optional] [default to 0M]
 **FlowPerZone** | **double** | Intensity of ventilation in m3/s for the entire Room. | [optional] [default to 0M]
-**Schedule** | **string** | Schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile. | [optional] 
+**Schedule** | [**AnyOfScheduleRulesetScheduleFixedInterval**](AnyOfScheduleRulesetScheduleFixedInterval.md) | Schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)

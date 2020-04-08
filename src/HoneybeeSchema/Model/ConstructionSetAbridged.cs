@@ -41,11 +41,11 @@ namespace HoneybeeSchema
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="type">type (default to &quot;ConstructionSetAbridged&quot;).</param>
-        /// <param name="wallSet">A WallSet object for this ConstructionSet..</param>
-        /// <param name="floorSet">A FloorSet object for this ConstructionSet..</param>
-        /// <param name="roofCeilingSet">A RoofCeilingSet object for this ConstructionSet..</param>
-        /// <param name="apertureSet">A ApertureSet object for this ConstructionSet..</param>
-        /// <param name="doorSet">A DoorSet object for this ConstructionSet..</param>
+        /// <param name="wallSet">A WallSetAbridged object for this ConstructionSet..</param>
+        /// <param name="floorSet">A FloorSetAbridged object for this ConstructionSet..</param>
+        /// <param name="roofCeilingSet">A RoofCeilingSetAbridged object for this ConstructionSet..</param>
+        /// <param name="apertureSet">A ApertureSetAbridged object for this ConstructionSet..</param>
+        /// <param name="doorSet">A DoorSetAbridged object for this ConstructionSet..</param>
         /// <param name="shadeConstruction">The identifier of a ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned..</param>
         /// <param name="airBoundaryConstruction">The identifier of an AirBoundaryConstruction to set the properties of Faces with an AirBoundary type..</param>
         public ConstructionSetAbridged(string identifier, string displayName = default, string type = "ConstructionSetAbridged", WallSetAbridged wallSet = default, FloorSetAbridged floorSet = default, RoofCeilingSetAbridged roofCeilingSet = default, ApertureSetAbridged apertureSet = default, DoorSetAbridged doorSet = default, string shadeConstruction = default, string airBoundaryConstruction = default)
@@ -103,41 +103,41 @@ namespace HoneybeeSchema
         public string Type { get; set; }
 
         /// <summary>
-        /// A WallSet object for this ConstructionSet.
+        /// A WallSetAbridged object for this ConstructionSet.
         /// </summary>
-        /// <value>A WallSet object for this ConstructionSet.</value>
+        /// <value>A WallSetAbridged object for this ConstructionSet.</value>
         [DataMember(Name="wall_set", EmitDefaultValue=false)]
         [JsonProperty("wall_set")]
         public WallSetAbridged WallSet { get; set; }
 
         /// <summary>
-        /// A FloorSet object for this ConstructionSet.
+        /// A FloorSetAbridged object for this ConstructionSet.
         /// </summary>
-        /// <value>A FloorSet object for this ConstructionSet.</value>
+        /// <value>A FloorSetAbridged object for this ConstructionSet.</value>
         [DataMember(Name="floor_set", EmitDefaultValue=false)]
         [JsonProperty("floor_set")]
         public FloorSetAbridged FloorSet { get; set; }
 
         /// <summary>
-        /// A RoofCeilingSet object for this ConstructionSet.
+        /// A RoofCeilingSetAbridged object for this ConstructionSet.
         /// </summary>
-        /// <value>A RoofCeilingSet object for this ConstructionSet.</value>
+        /// <value>A RoofCeilingSetAbridged object for this ConstructionSet.</value>
         [DataMember(Name="roof_ceiling_set", EmitDefaultValue=false)]
         [JsonProperty("roof_ceiling_set")]
         public RoofCeilingSetAbridged RoofCeilingSet { get; set; }
 
         /// <summary>
-        /// A ApertureSet object for this ConstructionSet.
+        /// A ApertureSetAbridged object for this ConstructionSet.
         /// </summary>
-        /// <value>A ApertureSet object for this ConstructionSet.</value>
+        /// <value>A ApertureSetAbridged object for this ConstructionSet.</value>
         [DataMember(Name="aperture_set", EmitDefaultValue=false)]
         [JsonProperty("aperture_set")]
         public ApertureSetAbridged ApertureSet { get; set; }
 
         /// <summary>
-        /// A DoorSet object for this ConstructionSet.
+        /// A DoorSetAbridged object for this ConstructionSet.
         /// </summary>
-        /// <value>A DoorSet object for this ConstructionSet.</value>
+        /// <value>A DoorSetAbridged object for this ConstructionSet.</value>
         [DataMember(Name="door_set", EmitDefaultValue=false)]
         [JsonProperty("door_set")]
         public DoorSetAbridged DoorSet { get; set; }

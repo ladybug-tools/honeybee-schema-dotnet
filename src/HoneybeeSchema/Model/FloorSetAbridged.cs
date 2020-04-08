@@ -33,12 +33,15 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="FloorSetAbridged" /> class.
         /// </summary>
+        /// <param name="interiorConstruction">Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition..</param>
+        /// <param name="exteriorConstruction">Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition..</param>
+        /// <param name="groundConstruction">Identifier for an OpaqueConstruction for faces with a Ground boundary condition..</param>
         /// <param name="type">type (default to &quot;FloorSetAbridged&quot;).</param>
-        /// <param name="interiorConstruction">Identifier for an OpaqueConstruction for floors with a Surface or Adiabatic boundary condition..</param>
-        /// <param name="exteriorConstruction">Identifier for an OpaqueConstruction for floors with an Outdoors boundary condition..</param>
-        /// <param name="groundConstruction">Identifier for an OpaqueConstruction for floors with a Ground boundary condition..</param>
-        public FloorSetAbridged(string type = "FloorSetAbridged", string interiorConstruction = default, string exteriorConstruction = default, string groundConstruction = default)
+        public FloorSetAbridged(string interiorConstruction = default, string exteriorConstruction = default, string groundConstruction = default, string type = "FloorSetAbridged")
         {
+            this.InteriorConstruction = interiorConstruction;
+            this.ExteriorConstruction = exteriorConstruction;
+            this.GroundConstruction = groundConstruction;
             // use default value if no "type" provided
             if (type == null)
             {
@@ -48,41 +51,38 @@ namespace HoneybeeSchema
             {
                 this.Type = type;
             }
-            this.InteriorConstruction = interiorConstruction;
-            this.ExteriorConstruction = exteriorConstruction;
-            this.GroundConstruction = groundConstruction;
         }
         
+        /// <summary>
+        /// Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition.
+        /// </summary>
+        /// <value>Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition.</value>
+        [DataMember(Name="interior_construction", EmitDefaultValue=false)]
+        [JsonProperty("interior_construction")]
+        public string InteriorConstruction { get; set; }
+
+        /// <summary>
+        /// Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition.
+        /// </summary>
+        /// <value>Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition.</value>
+        [DataMember(Name="exterior_construction", EmitDefaultValue=false)]
+        [JsonProperty("exterior_construction")]
+        public string ExteriorConstruction { get; set; }
+
+        /// <summary>
+        /// Identifier for an OpaqueConstruction for faces with a Ground boundary condition.
+        /// </summary>
+        /// <value>Identifier for an OpaqueConstruction for faces with a Ground boundary condition.</value>
+        [DataMember(Name="ground_construction", EmitDefaultValue=false)]
+        [JsonProperty("ground_construction")]
+        public string GroundConstruction { get; set; }
+
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
         public string Type { get; set; }
-
-        /// <summary>
-        /// Identifier for an OpaqueConstruction for floors with a Surface or Adiabatic boundary condition.
-        /// </summary>
-        /// <value>Identifier for an OpaqueConstruction for floors with a Surface or Adiabatic boundary condition.</value>
-        [DataMember(Name="interior_construction", EmitDefaultValue=false)]
-        [JsonProperty("interior_construction")]
-        public string InteriorConstruction { get; set; }
-
-        /// <summary>
-        /// Identifier for an OpaqueConstruction for floors with an Outdoors boundary condition.
-        /// </summary>
-        /// <value>Identifier for an OpaqueConstruction for floors with an Outdoors boundary condition.</value>
-        [DataMember(Name="exterior_construction", EmitDefaultValue=false)]
-        [JsonProperty("exterior_construction")]
-        public string ExteriorConstruction { get; set; }
-
-        /// <summary>
-        /// Identifier for an OpaqueConstruction for floors with a Ground boundary condition.
-        /// </summary>
-        /// <value>Identifier for an OpaqueConstruction for floors with a Ground boundary condition.</value>
-        [DataMember(Name="ground_construction", EmitDefaultValue=false)]
-        [JsonProperty("ground_construction")]
-        public string GroundConstruction { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -92,10 +92,10 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class FloorSetAbridged {\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  InteriorConstruction: ").Append(InteriorConstruction).Append("\n");
             sb.Append("  ExteriorConstruction: ").Append(ExteriorConstruction).Append("\n");
             sb.Append("  GroundConstruction: ").Append(GroundConstruction).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -141,11 +141,6 @@ namespace HoneybeeSchema
 
             return 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
-                (
                     this.InteriorConstruction == input.InteriorConstruction ||
                     (this.InteriorConstruction != null &&
                     this.InteriorConstruction.Equals(input.InteriorConstruction))
@@ -159,6 +154,11 @@ namespace HoneybeeSchema
                     this.GroundConstruction == input.GroundConstruction ||
                     (this.GroundConstruction != null &&
                     this.GroundConstruction.Equals(input.GroundConstruction))
+                ) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -171,14 +171,14 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.InteriorConstruction != null)
                     hashCode = hashCode * 59 + this.InteriorConstruction.GetHashCode();
                 if (this.ExteriorConstruction != null)
                     hashCode = hashCode * 59 + this.ExteriorConstruction.GetHashCode();
                 if (this.GroundConstruction != null)
                     hashCode = hashCode * 59 + this.GroundConstruction.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -190,13 +190,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Type (string) pattern
-            Regex regexType = new Regex(@"^FloorSetAbridged$", RegexOptions.CultureInvariant);
-            if (false == regexType.Match(this.Type).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
-            }
-
             // InteriorConstruction (string) maxLength
             if(this.InteriorConstruction != null && this.InteriorConstruction.Length > 100)
             {
@@ -231,6 +224,13 @@ namespace HoneybeeSchema
             if(this.GroundConstruction != null && this.GroundConstruction.Length < 1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for GroundConstruction, length must be greater than 1.", new [] { "GroundConstruction" });
+            }
+
+            // Type (string) pattern
+            Regex regexType = new Regex(@"^FloorSetAbridged$", RegexOptions.CultureInvariant);
+            if (false == regexType.Match(this.Type).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
             yield break;

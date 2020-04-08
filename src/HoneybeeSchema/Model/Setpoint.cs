@@ -45,7 +45,7 @@ namespace HoneybeeSchema
         /// <param name="type">type (default to &quot;Setpoint&quot;).</param>
         /// <param name="humidifyingSchedule">Schedule for the humidification setpoint. The values in this schedule should be in [%]..</param>
         /// <param name="dehumidifyingSchedule">Schedule for the dehumidification setpoint. The values in this schedule should be in [%]..</param>
-        public Setpoint(string identifier, AnyOfobjectobject coolingSchedule, AnyOfobjectobject heatingSchedule, string displayName = default, string type = "Setpoint", AnyOfobjectobject humidifyingSchedule = default, AnyOfobjectobject dehumidifyingSchedule = default)
+        public Setpoint(string identifier, AnyOf<ScheduleRuleset,ScheduleFixedInterval> coolingSchedule, AnyOf<ScheduleRuleset,ScheduleFixedInterval> heatingSchedule, string displayName = default, string type = "Setpoint", AnyOf<ScheduleRuleset,ScheduleFixedInterval> humidifyingSchedule = default, AnyOf<ScheduleRuleset,ScheduleFixedInterval> dehumidifyingSchedule = default)
         {
             // to ensure "identifier" is required (not null)
             if (identifier == null)
@@ -105,7 +105,7 @@ namespace HoneybeeSchema
         /// <value>Schedule for the cooling setpoint. The values in this schedule should be temperature in [C].</value>
         [DataMember(Name="cooling_schedule", EmitDefaultValue=false)]
         [JsonProperty("cooling_schedule")]
-        public AnyOfobjectobject CoolingSchedule { get; set; }
+        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> CoolingSchedule { get; set; }
 
         /// <summary>
         /// Schedule for the heating setpoint. The values in this schedule should be temperature in [C].
@@ -113,7 +113,7 @@ namespace HoneybeeSchema
         /// <value>Schedule for the heating setpoint. The values in this schedule should be temperature in [C].</value>
         [DataMember(Name="heating_schedule", EmitDefaultValue=false)]
         [JsonProperty("heating_schedule")]
-        public AnyOfobjectobject HeatingSchedule { get; set; }
+        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> HeatingSchedule { get; set; }
 
         /// <summary>
         /// Display name of the object with no character restrictions.
@@ -136,7 +136,7 @@ namespace HoneybeeSchema
         /// <value>Schedule for the humidification setpoint. The values in this schedule should be in [%].</value>
         [DataMember(Name="humidifying_schedule", EmitDefaultValue=false)]
         [JsonProperty("humidifying_schedule")]
-        public AnyOfobjectobject HumidifyingSchedule { get; set; }
+        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> HumidifyingSchedule { get; set; }
 
         /// <summary>
         /// Schedule for the dehumidification setpoint. The values in this schedule should be in [%].
@@ -144,7 +144,7 @@ namespace HoneybeeSchema
         /// <value>Schedule for the dehumidification setpoint. The values in this schedule should be in [%].</value>
         [DataMember(Name="dehumidifying_schedule", EmitDefaultValue=false)]
         [JsonProperty("dehumidifying_schedule")]
-        public AnyOfobjectobject DehumidifyingSchedule { get; set; }
+        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> DehumidifyingSchedule { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
