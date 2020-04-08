@@ -39,30 +39,14 @@ namespace HoneybeeSchema.Test
         [SetUp]
         public void Init()
         {
-            try
+            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/model/model_energy_properties_office.json";
+            using (System.Net.WebClient wc = new System.Net.WebClient())
             {
-                instance = ModelEnergyProperties.Default;
+                var json = wc.DownloadString(url);
+                instance = ModelEnergyProperties.FromJson(json);
             }
-            catch (Exception e)
-            {
-                if (e.Message.Contains("Invalid file:") || e.InnerException.Message.Contains("Ladybug Tools is not installed"))
-                {
-                    var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/model/model_energy_properties_office.json";
-                    using (System.Net.WebClient wc = new System.Net.WebClient())
-                    {
-                        var json = wc.DownloadString(url);
-                        instance = ModelEnergyProperties.FromJson(json);
-                    }
-                }
-                else
-                {
-                    throw e;
-                }
-                
-            }
-            
-           
-           
+
+
         }
 
         /// <summary>
@@ -123,9 +107,9 @@ namespace HoneybeeSchema.Test
         {
             // TODO unit test for the property 'ConstructionSets'
             var obj = this.instance.ConstructionSets.First();
-            var o = obj;
+            var o = obj.Obj as ConstructionSetAbridged;
 
-            Assert.AreEqual(o.Name, "Default Generic Construction Set");
+            Assert.AreEqual(o.Identifier, "Default Generic Construction Set");
             Assert.AreEqual(o.WallSet.ExteriorConstruction, "Generic Exterior Wall");
             Assert.AreEqual(o.FloorSet.ExteriorConstruction, "Generic Exposed Floor");
             Assert.AreEqual(o.RoofCeilingSet.ExteriorConstruction, "Generic Roof");
@@ -140,7 +124,7 @@ namespace HoneybeeSchema.Test
         public void ConstructionsTest()
         {
             // TODO unit test for the property 'Constructions'
-            var obj = this.instance.Constructions.Where(_=>(_.Obj as OpaqueConstructionAbridged)?.Name == "Generic Underground Wall").First();
+            var obj = this.instance.Constructions.Where(_=>(_.Obj as OpaqueConstructionAbridged)?.Identifier == "Generic Underground Wall").First();
             var o = obj.Obj as OpaqueConstructionAbridged;
 
             Assert.AreEqual(o.Layers.Count, 4);
@@ -152,7 +136,7 @@ namespace HoneybeeSchema.Test
         public void MaterialsTest()
         {
             // TODO unit test for the property 'Materials'
-            var obj = this.instance.Materials.Where(_ => (_.Obj as EnergyWindowMaterialGlazing)?.Name == "Generic Low-e Glass").First();
+            var obj = this.instance.Materials.Where(_ => (_.Obj as EnergyWindowMaterialGlazing)?.Identifier == "Generic Low-e Glass").First();
             var o = obj.Obj as EnergyWindowMaterialGlazing;
 
             Assert.AreEqual(o.Thickness, 0.006);
@@ -167,7 +151,7 @@ namespace HoneybeeSchema.Test
             var obj = this.instance.Hvacs.First();
             var o = obj;
 
-            Assert.AreEqual(o.Name, "ClosedOffice_IdealAir");
+            Assert.AreEqual(o.Identifier, "Closed_Office_IdealAir");
             Assert.AreEqual(o.HeatingLimit, new Autosize());
         }
         /// <summary>
@@ -178,9 +162,9 @@ namespace HoneybeeSchema.Test
         {
             // TODO unit test for the property 'ProgramTypes'
             var obj = this.instance.ProgramTypes.First();
-            var o = obj;
+            var o = obj.Obj as ProgramTypeAbridged;
 
-            Assert.AreEqual(o.Name, "Generic Office Program");
+            Assert.AreEqual(o.Identifier, "Generic Office Program");
             Assert.AreEqual(o.People.LatentFraction, new Autocalculate());
         }
         /// <summary>
@@ -190,10 +174,10 @@ namespace HoneybeeSchema.Test
         public void SchedulesTest()
         {
             // TODO unit test for the property 'Schedules'
-            var obj = this.instance.Schedules.Where(_ => (_.Obj as ScheduleRulesetAbridged).Name == "Generic Office Cooling").First();
+            var obj = this.instance.Schedules.Where(_ => (_.Obj as ScheduleRulesetAbridged).Identifier == "Generic Office Cooling").First();
             var o = obj.Obj as ScheduleRulesetAbridged;
 
-            Assert.AreEqual(o.DaySchedules.First().Name, "OfficeMedium CLGSETP_SCH_YES_OPTIMUM_Default");
+            Assert.AreEqual(o.DaySchedules.First().Identifier, "OfficeMedium CLGSETP_SCH_YES_OPTIMUM_Default");
         }
         /// <summary>
         /// Test the property 'ScheduleTypeLimits'
@@ -203,7 +187,7 @@ namespace HoneybeeSchema.Test
         {
             // TODO unit test for the property 'ScheduleTypeLimits'
             var obj = this.instance.ScheduleTypeLimits.First(_=>_.UnitType == ScheduleTypeLimit.UnitTypeEnum.ActivityLevel);
-            Assert.AreEqual(obj.Name, "Activity Level");
+            Assert.AreEqual(obj.Identifier, "Activity Level");
             Assert.AreEqual(obj.UpperLimit, new NoLimit());
         }
 
