@@ -1,4 +1,4 @@
-[![Build Status](https://api.travis-ci.org/ladybug-tools/honeybee-schema-dotnet.svg?branch=master)](https://travis-ci.org/ladybug-tools/honeybee-schema-dotnet)
+[![Build](https://github.com/ladybug-tools/honeybee-schema-dotnet/workflows/CD/badge.svg)](https://github.com/ladybug-tools/honeybee-schema-dotnet/actions) [![NuGet Version and Downloads count](https://buildstats.info/nuget/HoneybeeSchema?dWidth=50)](https://www.nuget.org/packages/HoneybeeSchema)
 # HoneybeeSchema - the C# library for the Honeybee Model Schema
 
 This is the documentation for Honeybee model schema.
