@@ -3,6 +3,7 @@ import sys
 import urllib.request
 import json
 import shutil
+import re
 
 
 def get_allof_types(obj, allofList):
@@ -46,10 +47,9 @@ def replace_anyof_type(read_data, anyof_types):
         if len(items) > 0:
             replace_source = "AnyOf%s" % ("".join(items))
             replace_new = "AnyOf<%s>" % (",".join(items).replace('number', 'double'))
-            head, _sep, tail = data.rpartition(replace_source)
-            first_behind = tail[0:1]
-            if first_behind == ' ' or first_behind == '>':
-                data = head + replace_new + tail
+            rex = "(%s)(?=[ >])" % replace_source # find replace_source only with " "(space) or ">" follows
+            if re.findall(rex, data) != []:
+                data = re.sub(rex, replace_new, data)
                 print("|---Replacing %s to %s" % (replace_source, replace_new))
     return data
 
