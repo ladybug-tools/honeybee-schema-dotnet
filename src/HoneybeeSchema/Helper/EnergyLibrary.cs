@@ -60,7 +60,7 @@ namespace HoneybeeSchema.Helper
         //public static string StandardsFolder { get; } = Path.Combine(ResourcesStandardsFolder, "honeybee_standards", "data");
 
         //honeybee_energy_standards
-        public static string EnergyStandardsFolder { get; } = Path.Combine(ResourcesStandardsFolder, "honeybee_energy_standards", "data");
+        public static string EnergyStandardsFolder { get; } = Path.Combine(ResourcesStandardsFolder, "honeybee_energy_standards");
         public static string BuildingVintagesFolder { get; } = Path.Combine(EnergyStandardsFolder, "programtypes_registry");
         public static string BuildingProgramTypesFolder { get; } = Path.Combine(EnergyStandardsFolder, "programtypes");
         public static string ConstructionsFolder { get; } = Path.Combine(EnergyStandardsFolder, "constructions");
@@ -385,7 +385,7 @@ namespace HoneybeeSchema.Helper
             }
         }
 
-        public static string GetLadybugToolsInstallationPath()
+        private static string GetLadybugToolsInstallationPath()
         {
             var scr = $"/C REG QUERY HKEY_CURRENT_USER\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\UNINSTALL /s /v InstallLocation | findstr \"ladybug_tools\"";
     
