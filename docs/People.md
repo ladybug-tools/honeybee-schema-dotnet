@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **DisplayName** | **string** | Display name of the object with no character restrictions. | [optional] 
 **Type** | **string** |  | [optional] [default to "People"]
 **RadiantFraction** | **double** | The radiant fraction of sensible heat released by people. The defaultvalue is 0.30. | [optional] [default to 0.3M]
-**LatentFraction** | [**AnyOfobjectnumber**](AnyOfobjectnumber.md) | Number for the latent fraction of heat gain due to people or an Autocalculate object. | [optional] 
+**LatentFraction** | [**AnyOfAutocalculatenumber**](AnyOfAutocalculatenumber.md) | Number for the latent fraction of heat gain due to people or an Autocalculate object. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
