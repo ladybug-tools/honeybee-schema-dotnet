@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | [optional] [default to "SimulationControl"]
+**Type** | **string** |  | [optional] [readonly] [default to "SimulationControl"]
 **DoZoneSizing** | **bool** | Boolean for whether the zone sizing calculation should be run. | [optional] [default to true]
 **DoSystemSizing** | **bool** | Boolean for whether the system sizing calculation should be run. | [optional] [default to true]
 **DoPlantSizing** | **bool** | Boolean for whether the plant sizing calculation should be run. | [optional] [default to true]

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | [optional] [default to "SimulationParameter"]
+**Type** | **string** |  | [optional] [readonly] [default to "SimulationParameter"]
 **Output** | [**SimulationOutput**](SimulationOutput.md) | A SimulationOutput that lists the desired outputs from the simulation and the format in which to report them. | [optional] 
 **RunPeriod** | [**RunPeriod**](RunPeriod.md) | A RunPeriod to describe the time period over which to run the simulation. | [optional] 
 **Timestep** | **int** | An integer for the number of timesteps per hour at which the energy calculation will be run. | [optional] [default to 6]

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | [optional] [default to "SimulationOutput"]
+**Type** | **string** |  | [optional] [readonly] [default to "SimulationOutput"]
 **ReportingFrequency** | **string** |  | [optional] [default to ReportingFrequencyEnum.Hourly]
 **IncludeSqlite** | **bool** | Boolean to note whether a SQLite report should be requested from the simulation. | [optional] [default to true]
 **IncludeHtml** | **bool** | Boolean to note whether an HTML report should be requested from the simulation. | [optional] [default to false]

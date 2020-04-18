@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | [optional] [default to "RoomPropertiesAbridged"]
+**Type** | **string** |  | [optional] [readonly] [default to "RoomPropertiesAbridged"]
 **Energy** | [**RoomEnergyPropertiesAbridged**](RoomEnergyPropertiesAbridged.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | [optional] [default to "DaylightSavingTime"]
+**Type** | **string** |  | [optional] [readonly] [default to "DaylightSavingTime"]
 **StartDate** | **List&lt;int&gt;** | A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017). | [optional] 
 **EndDate** | **List&lt;int&gt;** | A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017). | [optional] 
 

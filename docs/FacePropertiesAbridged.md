@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | [optional] [default to "FacePropertiesAbridged"]
+**Type** | **string** |  | [optional] [readonly] [default to "FacePropertiesAbridged"]
 **Energy** | [**FaceEnergyPropertiesAbridged**](FaceEnergyPropertiesAbridged.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)

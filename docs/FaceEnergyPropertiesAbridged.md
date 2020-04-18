@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | [optional] [default to "FaceEnergyPropertiesAbridged"]
+**Type** | **string** |  | [optional] [readonly] [default to "FaceEnergyPropertiesAbridged"]
 **Construction** | **string** | Identifier of an OpaqueConstruction for the Face. If None, the construction is set by the parent Room construction_set or the Model global_construction_set. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)

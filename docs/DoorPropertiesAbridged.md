@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | [optional] [default to "DoorPropertiesAbridged"]
+**Type** | **string** |  | [optional] [readonly] [default to "DoorPropertiesAbridged"]
 **Energy** | [**DoorEnergyPropertiesAbridged**](DoorEnergyPropertiesAbridged.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)

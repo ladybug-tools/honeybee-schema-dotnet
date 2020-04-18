@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | [optional] [default to "DoorConstructionSetAbridged"]
+**Type** | **string** |  | [optional] [readonly] [default to "DoorConstructionSetAbridged"]
 **InteriorConstruction** | **string** | Identifier for an OpaqueConstruction for all opaque doors with a Surface boundary condition. | [optional] 
 **ExteriorConstruction** | **string** | Identifier for an OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face. | [optional] 
 **OverheadConstruction** | **string** | Identifier for an OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face. | [optional] 

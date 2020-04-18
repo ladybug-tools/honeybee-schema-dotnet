@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | [optional] [default to "AperturePropertiesAbridged"]
+**Type** | **string** |  | [optional] [readonly] [default to "AperturePropertiesAbridged"]
 **Energy** | [**ApertureEnergyPropertiesAbridged**](ApertureEnergyPropertiesAbridged.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)

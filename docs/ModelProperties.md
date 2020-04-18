@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | [optional] [default to "ModelProperties"]
+**Type** | **string** |  | [optional] [readonly] [default to "ModelProperties"]
 **Energy** | [**ModelEnergyProperties**](ModelEnergyProperties.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)

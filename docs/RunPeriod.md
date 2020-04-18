@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | [optional] [default to "RunPeriod"]
+**Type** | **string** |  | [optional] [readonly] [default to "RunPeriod"]
 **StartDate** | **List&lt;int&gt;** | A list of two integers for [month, day], representing the date for the start of the run period. Must be before the end date. | [optional] 
 **EndDate** | **List&lt;int&gt;** | A list of two integers for [month, day], representing the date for the end of the run period. Must be after the start date. | [optional] 
 **StartDayOfWeek** | **string** | Text for the day of the week on which the simulation starts. | [optional] [default to StartDayOfWeekEnum.Sunday]
