@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Identifier** | **string** | Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). | 
 **DisplayName** | **string** | Display name of the object with no character restrictions. | [optional] 
-**Type** | **string** |  | [optional] [default to "ConstructionSet"]
+**Type** | **string** |  | [optional] [readonly] [default to "ConstructionSet"]
 **WallSet** | [**WallConstructionSet**](WallConstructionSet.md) | A WallConstructionSet object for this ConstructionSet. | [optional] 
 **FloorSet** | [**FloorConstructionSet**](FloorConstructionSet.md) | A FloorConstructionSet object for this ConstructionSet. | [optional] 
 **RoofCeilingSet** | [**RoofCeilingConstructionSet**](RoofCeilingConstructionSet.md) | A RoofCeilingConstructionSet object for this ConstructionSet. | [optional] 

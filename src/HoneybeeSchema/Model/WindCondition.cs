@@ -30,6 +30,7 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class WindCondition :  IEquatable<WindCondition>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="WindCondition" /> class.
         /// </summary>
@@ -40,7 +41,11 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="windSpeed">Wind speed on the design day [m/s]. (required).</param>
         /// <param name="windDirection">Wind direction on the design day [degrees]. (default to 0D).</param>
-        public WindCondition(double windSpeed, double windDirection = 0D)
+        public WindCondition
+        (
+            double windSpeed, // Required parameters
+            double windDirection = 0D// Optional parameters
+        )// BaseClass
         {
             // to ensure "windSpeed" is required (not null)
             if (windSpeed == null)
@@ -76,7 +81,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "WindCondition"; 
 
         /// <summary>
         /// Wind direction on the design day [degrees].

@@ -30,6 +30,7 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class SimulationParameter :  IEquatable<SimulationParameter>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SimulationParameter" /> class.
         /// </summary>
@@ -39,7 +40,11 @@ namespace HoneybeeSchema
         /// <param name="simulationControl">A SimulationControl object that describes which types of calculations to run..</param>
         /// <param name="shadowCalculation">A ShadowCalculation object describing settings for the EnergyPlus Shadow Calculation..</param>
         /// <param name="sizingParameter">A SizingParameter object with criteria for sizing the heating and cooling system..</param>
-        public SimulationParameter(SimulationOutput output = default, RunPeriod runPeriod = default, int timestep = 6, SimulationControl simulationControl = default, ShadowCalculation shadowCalculation = default, SizingParameter sizingParameter = default)
+        public SimulationParameter
+        (
+            // Required parameters
+            SimulationOutput output= default, RunPeriod runPeriod= default, int timestep = 6, SimulationControl simulationControl= default, ShadowCalculation shadowCalculation= default, SizingParameter sizingParameter= default// Optional parameters
+        )// BaseClass
         {
             this.Output = output;
             this.RunPeriod = runPeriod;
@@ -62,7 +67,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "SimulationParameter"; 
 
         /// <summary>
         /// A SimulationOutput that lists the desired outputs from the simulation and the format in which to report them.

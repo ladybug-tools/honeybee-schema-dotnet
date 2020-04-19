@@ -30,6 +30,7 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class Face3D :  IEquatable<Face3D>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Face3D" /> class.
         /// </summary>
@@ -41,7 +42,11 @@ namespace HoneybeeSchema
         /// <param name="boundary">A list of points representing the outer boundary vertices of the face. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values. (required).</param>
         /// <param name="holes">Optional list of lists with one list for each hole in the face.Each hole should be a list of at least 3 points and each point a list of 3 (x, y, z) values. If None, it will be assumed that there are no holes in the face..</param>
         /// <param name="plane">Optional Plane indicating the plane in which the face exists.If None, the plane will usually be derived from the boundary points..</param>
-        public Face3D(List<List<double>> boundary, List<List<List<double>>> holes = default, Plane plane = default)
+        public Face3D
+        (
+            List<List<double>> boundary, // Required parameters
+            List<List<List<double>>> holes= default, Plane plane= default// Optional parameters
+        )// BaseClass
         {
             // to ensure "boundary" is required (not null)
             if (boundary == null)
@@ -70,7 +75,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "Face3D"; 
 
         /// <summary>
         /// Optional list of lists with one list for each hole in the face.Each hole should be a list of at least 3 points and each point a list of 3 (x, y, z) values. If None, it will be assumed that there are no holes in the face.

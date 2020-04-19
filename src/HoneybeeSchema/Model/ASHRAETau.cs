@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Used to specify sky conditions on a design day.
     /// </summary>
     [DataContract]
-    public partial class ASHRAETau :  IEquatable<ASHRAETau>, IValidatableObject
+    public partial class ASHRAETau : SkyCondition,  IEquatable<ASHRAETau>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ASHRAETau" /> class.
         /// </summary>
@@ -38,61 +39,20 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ASHRAETau" /> class.
         /// </summary>
+        /// <param name="tauB">Value for the beam optical depth. Typically found in .stat files..</param>
+        /// <param name="tauD">Value for the diffuse optical depth. Typically found in .stat files..</param>
         /// <param name="date">A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case). (required).</param>
-        /// <param name="tauB">Value for the beam optical depth. Typically found in .stat files. (required).</param>
-        /// <param name="tauD">Value for the diffuse optical depth. Typically found in .stat files. (required).</param>
         /// <param name="daylightSavings">Boolean to indicate whether daylight savings time is active on the design day. (default to false).</param>
-        public ASHRAETau(List<int> date, double tauB, double tauD, bool daylightSavings = false)
+        public ASHRAETau
+        (
+            List<int> date, // Required parameters
+            double tauB= default, double tauD= default, bool daylightSavings = false// Optional parameters
+        ) : base(date: date, daylightSavings: daylightSavings )// BaseClass
         {
-            // to ensure "date" is required (not null)
-            if (date == null)
-            {
-                throw new InvalidDataException("date is a required property for ASHRAETau and cannot be null");
-            }
-            else
-            {
-                this.Date = date;
-            }
-            
-            // to ensure "tauB" is required (not null)
-            if (tauB == null)
-            {
-                throw new InvalidDataException("tauB is a required property for ASHRAETau and cannot be null");
-            }
-            else
-            {
-                this.TauB = tauB;
-            }
-            
-            // to ensure "tauD" is required (not null)
-            if (tauD == null)
-            {
-                throw new InvalidDataException("tauD is a required property for ASHRAETau and cannot be null");
-            }
-            else
-            {
-                this.TauD = tauD;
-            }
-            
-            // use default value if no "daylightSavings" provided
-            if (daylightSavings == null)
-            {
-                this.DaylightSavings = false;
-            }
-            else
-            {
-                this.DaylightSavings = daylightSavings;
-            }
+            this.TauB = tauB;
+            this.TauD = tauD;
         }
         
-        /// <summary>
-        /// A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).
-        /// </summary>
-        /// <value>A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</value>
-        [DataMember(Name="date", EmitDefaultValue=false)]
-        [JsonProperty("date")]
-        public List<int> Date { get; set; }
-
         /// <summary>
         /// Value for the beam optical depth. Typically found in .stat files.
         /// </summary>
@@ -110,19 +70,11 @@ namespace HoneybeeSchema
         public double TauD { get; set; }
 
         /// <summary>
-        /// Boolean to indicate whether daylight savings time is active on the design day.
-        /// </summary>
-        /// <value>Boolean to indicate whether daylight savings time is active on the design day.</value>
-        [DataMember(Name="daylight_savings", EmitDefaultValue=false)]
-        [JsonProperty("daylight_savings")]
-        public bool DaylightSavings { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "ASHRAETau"; 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -132,10 +84,9 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class ASHRAETau {\n");
-            sb.Append("  Date: ").Append(Date).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  TauB: ").Append(TauB).Append("\n");
             sb.Append("  TauD: ").Append(TauD).Append("\n");
-            sb.Append("  DaylightSavings: ").Append(DaylightSavings).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -145,7 +96,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -180,28 +131,17 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Date == input.Date ||
-                    this.Date != null &&
-                    input.Date != null &&
-                    this.Date.SequenceEqual(input.Date)
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.TauB == input.TauB ||
                     (this.TauB != null &&
                     this.TauB.Equals(input.TauB))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.TauD == input.TauD ||
                     (this.TauD != null &&
                     this.TauD.Equals(input.TauD))
-                ) && 
-                (
-                    this.DaylightSavings == input.DaylightSavings ||
-                    (this.DaylightSavings != null &&
-                    this.DaylightSavings.Equals(input.DaylightSavings))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
@@ -217,15 +157,11 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Date != null)
-                    hashCode = hashCode * 59 + this.Date.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.TauB != null)
                     hashCode = hashCode * 59 + this.TauB.GetHashCode();
                 if (this.TauD != null)
                     hashCode = hashCode * 59 + this.TauD.GetHashCode();
-                if (this.DaylightSavings != null)
-                    hashCode = hashCode * 59 + this.DaylightSavings.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
@@ -239,6 +175,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // TauB (double) maximum
             if(this.TauB > (double)1.2)
             {

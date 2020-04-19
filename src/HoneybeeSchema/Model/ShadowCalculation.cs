@@ -30,6 +30,7 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class ShadowCalculation :  IEquatable<ShadowCalculation>, IValidatableObject
     {
+
         /// <summary>
         /// Defines SolarDistribution
         /// </summary>
@@ -105,7 +106,11 @@ namespace HoneybeeSchema
         /// <param name="calculationFrequency">Integer for the number of days in each period for which a unique shadow calculation will be performed. This field is only used if the AverageOverDaysInFrequency calculation_method is used. (default to 30).</param>
         /// <param name="calculationMethod">calculationMethod (default to CalculationMethodEnum.AverageOverDaysInFrequency).</param>
         /// <param name="maximumFigures">Number of allowable figures in shadow overlap calculations. (default to 15000).</param>
-        public ShadowCalculation(SolarDistributionEnum? solarDistribution = SolarDistributionEnum.FullInteriorAndExteriorWithReflections, int calculationFrequency = 30, CalculationMethodEnum? calculationMethod = CalculationMethodEnum.AverageOverDaysInFrequency, int maximumFigures = 15000)
+        public ShadowCalculation
+        (
+            // Required parameters
+            SolarDistributionEnum? solarDistribution = SolarDistributionEnum.FullInteriorAndExteriorWithReflections, int calculationFrequency = 30, CalculationMethodEnum? calculationMethod = CalculationMethodEnum.AverageOverDaysInFrequency, int maximumFigures = 15000// Optional parameters
+        )// BaseClass
         {
             // use default value if no "solarDistribution" provided
             if (solarDistribution == null)
@@ -150,7 +155,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "ShadowCalculation"; 
 
 
         /// <summary>

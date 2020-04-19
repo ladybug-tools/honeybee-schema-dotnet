@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [DataContract]
-    public partial class PeopleAbridged :  IEquatable<PeopleAbridged>, IValidatableObject
+    public partial class PeopleAbridged : IDdEnergyBaseModel,  IEquatable<PeopleAbridged>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PeopleAbridged" /> class.
         /// </summary>
@@ -38,56 +39,22 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="PeopleAbridged" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="peoplePerArea">People per floor area expressed as [people/m2] (required).</param>
-        /// <param name="occupancySchedule">Identifier of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile. (required).</param>
-        /// <param name="activitySchedule">Identifier of a schedule for the activity of the occupants over the course of the year. The type of this schedule should be Power and the values of the schedule equal to the number of Watts given off by an individual person in the room. (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="peoplePerArea">People per floor area expressed as [people/m2].</param>
+        /// <param name="occupancySchedule">Identifier of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile..</param>
+        /// <param name="activitySchedule">Identifier of a schedule for the activity of the occupants over the course of the year. The type of this schedule should be Power and the values of the schedule equal to the number of Watts given off by an individual person in the room..</param>
         /// <param name="radiantFraction">The radiant fraction of sensible heat released by people. The defaultvalue is 0.30. (default to 0.3D).</param>
         /// <param name="latentFraction">Number for the latent fraction of heat gain due to people or an Autocalculate object..</param>
-        public PeopleAbridged(string identifier, double peoplePerArea, string occupancySchedule, string activitySchedule, string displayName = default, double radiantFraction = 0.3D, AnyOf<Autocalculate,double> latentFraction = default)
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        public PeopleAbridged
+        (
+            string identifier, // Required parameters
+            double peoplePerArea= default, string occupancySchedule= default, string activitySchedule= default, double radiantFraction = 0.3D, AnyOf<Autocalculate,double> latentFraction= default, string displayName= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for PeopleAbridged and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
-            // to ensure "peoplePerArea" is required (not null)
-            if (peoplePerArea == null)
-            {
-                throw new InvalidDataException("peoplePerArea is a required property for PeopleAbridged and cannot be null");
-            }
-            else
-            {
-                this.PeoplePerArea = peoplePerArea;
-            }
-            
-            // to ensure "occupancySchedule" is required (not null)
-            if (occupancySchedule == null)
-            {
-                throw new InvalidDataException("occupancySchedule is a required property for PeopleAbridged and cannot be null");
-            }
-            else
-            {
-                this.OccupancySchedule = occupancySchedule;
-            }
-            
-            // to ensure "activitySchedule" is required (not null)
-            if (activitySchedule == null)
-            {
-                throw new InvalidDataException("activitySchedule is a required property for PeopleAbridged and cannot be null");
-            }
-            else
-            {
-                this.ActivitySchedule = activitySchedule;
-            }
-            
-            this.DisplayName = displayName;
+            this.PeoplePerArea = peoplePerArea;
+            this.OccupancySchedule = occupancySchedule;
+            this.ActivitySchedule = activitySchedule;
             // use default value if no "radiantFraction" provided
             if (radiantFraction == null)
             {
@@ -100,14 +67,6 @@ namespace HoneybeeSchema
             this.LatentFraction = latentFraction;
         }
         
-        /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
-        public string Identifier { get; set; }
-
         /// <summary>
         /// People per floor area expressed as [people/m2]
         /// </summary>
@@ -133,19 +92,11 @@ namespace HoneybeeSchema
         public string ActivitySchedule { get; set; }
 
         /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "PeopleAbridged"; 
 
         /// <summary>
         /// The radiant fraction of sensible heat released by people. The defaultvalue is 0.30.
@@ -171,11 +122,10 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class PeopleAbridged {\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  PeoplePerArea: ").Append(PeoplePerArea).Append("\n");
             sb.Append("  OccupancySchedule: ").Append(OccupancySchedule).Append("\n");
             sb.Append("  ActivitySchedule: ").Append(ActivitySchedule).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  RadiantFraction: ").Append(RadiantFraction).Append("\n");
             sb.Append("  LatentFraction: ").Append(LatentFraction).Append("\n");
@@ -187,7 +137,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -222,42 +172,32 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.PeoplePerArea == input.PeoplePerArea ||
                     (this.PeoplePerArea != null &&
                     this.PeoplePerArea.Equals(input.PeoplePerArea))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.OccupancySchedule == input.OccupancySchedule ||
                     (this.OccupancySchedule != null &&
                     this.OccupancySchedule.Equals(input.OccupancySchedule))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ActivitySchedule == input.ActivitySchedule ||
                     (this.ActivitySchedule != null &&
                     this.ActivitySchedule.Equals(input.ActivitySchedule))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.RadiantFraction == input.RadiantFraction ||
                     (this.RadiantFraction != null &&
                     this.RadiantFraction.Equals(input.RadiantFraction))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.LatentFraction == input.LatentFraction ||
                     (this.LatentFraction != null &&
@@ -273,17 +213,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.PeoplePerArea != null)
                     hashCode = hashCode * 59 + this.PeoplePerArea.GetHashCode();
                 if (this.OccupancySchedule != null)
                     hashCode = hashCode * 59 + this.OccupancySchedule.GetHashCode();
                 if (this.ActivitySchedule != null)
                     hashCode = hashCode * 59 + this.ActivitySchedule.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.RadiantFraction != null)
@@ -301,18 +237,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // PeoplePerArea (double) minimum
             if(this.PeoplePerArea < (double)0)
             {

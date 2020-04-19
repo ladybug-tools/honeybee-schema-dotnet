@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Used to describe the daily schedule for a single simulation day.
     /// </summary>
     [DataContract]
-    public partial class ScheduleDay :  IEquatable<ScheduleDay>, IValidatableObject
+    public partial class ScheduleDay : IDdEnergyBaseModel,  IEquatable<ScheduleDay>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleDay" /> class.
         /// </summary>
@@ -38,34 +39,18 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleDay" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="values">A list of floats or integers for the values of the schedule. The length of this list must match the length of the times list. (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="values">A list of floats or integers for the values of the schedule. The length of this list must match the length of the times list..</param>
         /// <param name="times">A list of lists with each sub-list possesing 2 values for [hour, minute]. The length of the master list must match the length of the values list. Each time in the master list represents the time of day that the corresponding value begins to take effect. For example [(0,0), (9,0), (17,0)] in combination with the values [0, 1, 0] denotes a schedule value of 0 from 0:00 to 9:00, a value of 1 from 9:00 to 17:00 and 0 from 17:00 to the end of the day. Note that this representation of times as the \&quot;time of beginning\&quot; is a different convention than EnergyPlus, which uses \&quot;time until\&quot;..</param>
         /// <param name="interpolate">Boolean to note whether values in between times should be linearly interpolated or whether successive values should take effect immediately upon the beginning time corrsponding to them. (default to false).</param>
-        public ScheduleDay(string identifier, List<double> values, string displayName = default, List<List<int>> times = default, bool interpolate = false)
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        public ScheduleDay
+        (
+            string identifier, // Required parameters
+            List<double> values= default, List<List<int>> times= default, bool interpolate = false, string displayName= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for ScheduleDay and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
-            // to ensure "values" is required (not null)
-            if (values == null)
-            {
-                throw new InvalidDataException("values is a required property for ScheduleDay and cannot be null");
-            }
-            else
-            {
-                this.Values = values;
-            }
-            
-            this.DisplayName = displayName;
+            this.Values = values;
             this.Times = times;
             // use default value if no "interpolate" provided
             if (interpolate == null)
@@ -79,14 +64,6 @@ namespace HoneybeeSchema
         }
         
         /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
-        public string Identifier { get; set; }
-
-        /// <summary>
         /// A list of floats or integers for the values of the schedule. The length of this list must match the length of the times list.
         /// </summary>
         /// <value>A list of floats or integers for the values of the schedule. The length of this list must match the length of the times list.</value>
@@ -95,19 +72,11 @@ namespace HoneybeeSchema
         public List<double> Values { get; set; }
 
         /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "ScheduleDay"; 
 
         /// <summary>
         /// A list of lists with each sub-list possesing 2 values for [hour, minute]. The length of the master list must match the length of the values list. Each time in the master list represents the time of day that the corresponding value begins to take effect. For example [(0,0), (9,0), (17,0)] in combination with the values [0, 1, 0] denotes a schedule value of 0 from 0:00 to 9:00, a value of 1 from 9:00 to 17:00 and 0 from 17:00 to the end of the day. Note that this representation of times as the \&quot;time of beginning\&quot; is a different convention than EnergyPlus, which uses \&quot;time until\&quot;.
@@ -133,9 +102,8 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class ScheduleDay {\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Values: ").Append(Values).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Times: ").Append(Times).Append("\n");
             sb.Append("  Interpolate: ").Append(Interpolate).Append("\n");
@@ -147,7 +115,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -182,34 +150,24 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Values == input.Values ||
                     this.Values != null &&
                     input.Values != null &&
                     this.Values.SequenceEqual(input.Values)
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Times == input.Times ||
                     this.Times != null &&
                     input.Times != null &&
                     this.Times.SequenceEqual(input.Times)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Interpolate == input.Interpolate ||
                     (this.Interpolate != null &&
@@ -225,13 +183,9 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Values != null)
                     hashCode = hashCode * 59 + this.Values.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Times != null)
@@ -249,18 +203,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // Type (string) pattern
             Regex regexType = new Regex(@"^ScheduleDay$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)

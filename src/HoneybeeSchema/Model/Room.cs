@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [DataContract]
-    public partial class Room :  IEquatable<Room>, IValidatableObject
+    public partial class Room : IDdBaseModel,  IEquatable<Room>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Room" /> class.
         /// </summary>
@@ -38,48 +39,22 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Room" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters. (required).</param>
-        /// <param name="faces">Faces that together form the closed volume of a room. (required).</param>
-        /// <param name="properties">Extension properties for particular simulation engines (Radiance, EnergyPlus). (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
+        /// <param name="faces">Faces that together form the closed volume of a room..</param>
+        /// <param name="properties">Extension properties for particular simulation engines (Radiance, EnergyPlus)..</param>
         /// <param name="indoorShades">Shades assigned to the interior side of this object (eg. partitions, tables)..</param>
         /// <param name="outdoorShades">Shades assigned to the exterior side of this object (eg. trees, landscaping)..</param>
         /// <param name="multiplier">An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is mutliplied by the multiplier. (default to 1).</param>
-        public Room(string identifier, List<Face> faces, RoomPropertiesAbridged properties, string displayName = default, Object userData = default, List<Shade> indoorShades = default, List<Shade> outdoorShades = default, int multiplier = 1)
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters. (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
+        public Room
+        (
+            string identifier, // Required parameters
+            List<Face> faces= default, RoomPropertiesAbridged properties= default, List<Shade> indoorShades= default, List<Shade> outdoorShades= default, int multiplier = 1, string displayName= default, Object userData= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for Room and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
-            // to ensure "faces" is required (not null)
-            if (faces == null)
-            {
-                throw new InvalidDataException("faces is a required property for Room and cannot be null");
-            }
-            else
-            {
-                this.Faces = faces;
-            }
-            
-            // to ensure "properties" is required (not null)
-            if (properties == null)
-            {
-                throw new InvalidDataException("properties is a required property for Room and cannot be null");
-            }
-            else
-            {
-                this.Properties = properties;
-            }
-            
-            this.DisplayName = displayName;
-            this.UserData = userData;
+            this.Faces = faces;
+            this.Properties = properties;
             this.IndoorShades = indoorShades;
             this.OutdoorShades = outdoorShades;
             // use default value if no "multiplier" provided
@@ -93,14 +68,6 @@ namespace HoneybeeSchema
             }
         }
         
-        /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters.
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters.</value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
-        public string Identifier { get; set; }
-
         /// <summary>
         /// Faces that together form the closed volume of a room.
         /// </summary>
@@ -118,27 +85,11 @@ namespace HoneybeeSchema
         public RoomPropertiesAbridged Properties { get; set; }
 
         /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
-        public string DisplayName { get; set; }
-
-        /// <summary>
-        /// Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).
-        /// </summary>
-        /// <value>Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</value>
-        [DataMember(Name="user_data", EmitDefaultValue=false)]
-        [JsonProperty("user_data")]
-        public Object UserData { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "Room"; 
 
         /// <summary>
         /// Shades assigned to the interior side of this object (eg. partitions, tables).
@@ -172,11 +123,9 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class Room {\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Faces: ").Append(Faces).Append("\n");
             sb.Append("  Properties: ").Append(Properties).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  IndoorShades: ").Append(IndoorShades).Append("\n");
             sb.Append("  OutdoorShades: ").Append(OutdoorShades).Append("\n");
@@ -189,7 +138,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -224,50 +173,35 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Faces == input.Faces ||
                     this.Faces != null &&
                     input.Faces != null &&
                     this.Faces.SequenceEqual(input.Faces)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Properties == input.Properties ||
                     (this.Properties != null &&
                     this.Properties.Equals(input.Properties))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
-                (
-                    this.UserData == input.UserData ||
-                    (this.UserData != null &&
-                    this.UserData.Equals(input.UserData))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.IndoorShades == input.IndoorShades ||
                     this.IndoorShades != null &&
                     input.IndoorShades != null &&
                     this.IndoorShades.SequenceEqual(input.IndoorShades)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.OutdoorShades == input.OutdoorShades ||
                     this.OutdoorShades != null &&
                     input.OutdoorShades != null &&
                     this.OutdoorShades.SequenceEqual(input.OutdoorShades)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Multiplier == input.Multiplier ||
                     (this.Multiplier != null &&
@@ -283,17 +217,11 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Faces != null)
                     hashCode = hashCode * 59 + this.Faces.GetHashCode();
                 if (this.Properties != null)
                     hashCode = hashCode * 59 + this.Properties.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
-                if (this.UserData != null)
-                    hashCode = hashCode * 59 + this.UserData.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.IndoorShades != null)
@@ -313,25 +241,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) pattern
-            Regex regexIdentifier = new Regex(@"[A-Za-z0-9_-]", RegexOptions.CultureInvariant);
-            if (false == regexIdentifier.Match(this.Identifier).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, must match a pattern of " + regexIdentifier, new [] { "Identifier" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // Type (string) pattern
             Regex regexType = new Regex(@"^Room$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)

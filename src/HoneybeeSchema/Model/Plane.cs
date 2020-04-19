@@ -30,6 +30,7 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class Plane :  IEquatable<Plane>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Plane" /> class.
         /// </summary>
@@ -41,7 +42,11 @@ namespace HoneybeeSchema
         /// <param name="n">Plane normal as 3 (x, y, z) values. (required).</param>
         /// <param name="o">Plane origin as 3 (x, y, z) values (required).</param>
         /// <param name="x">Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated..</param>
-        public Plane(List<double> n, List<double> o, List<double> x = default)
+        public Plane
+        (
+            List<double> n, List<double> o, // Required parameters
+            List<double> x= default// Optional parameters
+        )// BaseClass
         {
             // to ensure "n" is required (not null)
             if (n == null)
@@ -87,7 +92,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "Plane"; 
 
         /// <summary>
         /// Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated.

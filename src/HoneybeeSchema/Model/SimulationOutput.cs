@@ -30,6 +30,7 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class SimulationOutput :  IEquatable<SimulationOutput>, IValidatableObject
     {
+
         /// <summary>
         /// Defines ReportingFrequency
         /// </summary>
@@ -81,7 +82,11 @@ namespace HoneybeeSchema
         /// <param name="includeHtml">Boolean to note whether an HTML report should be requested from the simulation. (default to false).</param>
         /// <param name="outputs">A list of EnergyPlus output names as strings, which are requested from the simulation..</param>
         /// <param name="summaryReports">A list of EnergyPlus summary report names as strings..</param>
-        public SimulationOutput(ReportingFrequencyEnum? reportingFrequency = ReportingFrequencyEnum.Hourly, bool includeSqlite = true, bool includeHtml = false, List<string> outputs = default, List<string> summaryReports = default)
+        public SimulationOutput
+        (
+            // Required parameters
+            ReportingFrequencyEnum? reportingFrequency = ReportingFrequencyEnum.Hourly, bool includeSqlite = true, bool includeHtml = false, List<string> outputs= default, List<string> summaryReports= default// Optional parameters
+        )// BaseClass
         {
             // use default value if no "reportingFrequency" provided
             if (reportingFrequency == null)
@@ -119,7 +124,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "SimulationOutput"; 
 
 
         /// <summary>

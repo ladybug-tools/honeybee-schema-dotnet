@@ -30,13 +30,18 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class SizingParameter :  IEquatable<SizingParameter>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SizingParameter" /> class.
         /// </summary>
         /// <param name="designDays">A list of DesignDays that represent the criteria for which the HVAC systems will be sized..</param>
         /// <param name="heatingFactor">A number that will be multiplied by the peak heating load for each zone in order to size the heating system. (default to 1.25D).</param>
         /// <param name="coolingFactor">A number that will be multiplied by the peak cooling load for each zone in order to size the heating system. (default to 1.15D).</param>
-        public SizingParameter(List<DesignDay> designDays = default, double heatingFactor = 1.25D, double coolingFactor = 1.15D)
+        public SizingParameter
+        (
+            // Required parameters
+            List<DesignDay> designDays= default, double heatingFactor = 1.25D, double coolingFactor = 1.15D// Optional parameters
+        )// BaseClass
         {
             this.DesignDays = designDays;
             // use default value if no "heatingFactor" provided
@@ -64,7 +69,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "SizingParameter"; 
 
         /// <summary>
         /// A list of DesignDays that represent the criteria for which the HVAC systems will be sized.

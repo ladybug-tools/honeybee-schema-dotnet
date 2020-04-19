@@ -30,11 +30,16 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class Ground :  IEquatable<Ground>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Ground" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        public Ground()
+        public Ground
+        (
+            // Required parameters
+            // Optional parameters
+        )// BaseClass
         {
         }
         
@@ -43,7 +48,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "Ground"; 
 
         /// <summary>
         /// Returns the string presentation of the object

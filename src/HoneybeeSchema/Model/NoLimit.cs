@@ -30,11 +30,16 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class NoLimit :  IEquatable<NoLimit>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="NoLimit" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        public NoLimit()
+        public NoLimit
+        (
+            // Required parameters
+            // Optional parameters
+        )// BaseClass
         {
         }
         
@@ -43,7 +48,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "NoLimit"; 
 
         /// <summary>
         /// Returns the string presentation of the object

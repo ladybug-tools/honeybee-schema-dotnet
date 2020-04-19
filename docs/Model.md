@@ -6,12 +6,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Identifier** | **string** | Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters. | 
-**Properties** | [**ModelProperties**](ModelProperties.md) | Extension properties for particular simulation engines (Radiance, EnergyPlus). | 
 **DisplayName** | **string** | Display name of the object with no character restrictions. | [optional] 
 **UserData** | [**Object**](.md) | Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list). | [optional] 
-**Type** | **string** |  | [optional] [readonly] [default to "Model"]
-**Rooms** | [**List&lt;Room&gt;**](Room.md) | A list of Rooms in the model. | [optional] 
-**OrphanedFaces** | [**List&lt;Face&gt;**](Face.md) | A list of Faces in the model that lack a parent Room. Note that orphaned Faces are not acceptable for Models that are to be exported for energy simulation. | [optional] 
+**Properties** | [**ModelProperties**](ModelProperties.md) | Extension properties for particular simulation engines (Radiance, EnergyPlus). | [optional] 
 **OrphanedShades** | [**List&lt;Shade&gt;**](Shade.md) | A list of Shades in the model that lack a parent. | [optional] 
 **OrphanedApertures** | [**List&lt;Aperture&gt;**](Aperture.md) | A list of Apertures in the model that lack a parent Face. Note that orphaned Apertures are not acceptable for Models that are to be exported for energy simulation. | [optional] 
 **OrphanedDoors** | [**List&lt;Door&gt;**](Door.md) | A list of Doors in the model that lack a parent Face. Note that orphaned Doors are not acceptable for Models that are to be exported for energy simulation. | [optional] 

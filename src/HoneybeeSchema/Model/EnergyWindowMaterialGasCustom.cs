@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Create single layer of custom gas.
     /// </summary>
     [DataContract]
-    public partial class EnergyWindowMaterialGasCustom :  IEquatable<EnergyWindowMaterialGasCustom>, IValidatableObject
+    public partial class EnergyWindowMaterialGasCustom : IDdEnergyBaseModel,  IEquatable<EnergyWindowMaterialGasCustom>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialGasCustom" /> class.
         /// </summary>
@@ -38,13 +39,11 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialGasCustom" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="conductivityCoeffA">The A coefficient for gas conductivity in W/(m-K). (required).</param>
-        /// <param name="viscosityCoeffA">The A coefficient for gas viscosity in kg/(m-s). (required).</param>
-        /// <param name="specificHeatCoeffA">The A coefficient for gas specific heat in J/(kg-K). (required).</param>
-        /// <param name="specificHeatRatio">The specific heat ratio for gas. (required).</param>
-        /// <param name="molecularWeight">The molecular weight for gas in g/mol. (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="conductivityCoeffA">The A coefficient for gas conductivity in W/(m-K)..</param>
+        /// <param name="viscosityCoeffA">The A coefficient for gas viscosity in kg/(m-s)..</param>
+        /// <param name="specificHeatCoeffA">The A coefficient for gas specific heat in J/(kg-K)..</param>
+        /// <param name="specificHeatRatio">The specific heat ratio for gas..</param>
+        /// <param name="molecularWeight">The molecular weight for gas in g/mol..</param>
         /// <param name="thickness">Thickness of the gas layer in meters. Default value is 0.0125. (default to 0.0125D).</param>
         /// <param name="conductivityCoeffB">The B coefficient for gas conductivity in W/(m-K2). (default to 0D).</param>
         /// <param name="conductivityCoeffC">The C coefficient for gas conductivity in W/(m-K3). (default to 0D).</param>
@@ -52,69 +51,19 @@ namespace HoneybeeSchema
         /// <param name="viscosityCoeffC">The C coefficient for gas viscosity in kg/(m-s-K2). (default to 0D).</param>
         /// <param name="specificHeatCoeffB">The B coefficient for gas specific heat in J/(kg-K2). (default to 0D).</param>
         /// <param name="specificHeatCoeffC">The C coefficient for gas specific heat in J/(kg-K3). (default to 0D).</param>
-        public EnergyWindowMaterialGasCustom(string identifier, double conductivityCoeffA, double viscosityCoeffA, double specificHeatCoeffA, double specificHeatRatio, double molecularWeight, string displayName = default, double thickness = 0.0125D, double conductivityCoeffB = 0D, double conductivityCoeffC = 0D, double viscosityCoeffB = 0D, double viscosityCoeffC = 0D, double specificHeatCoeffB = 0D, double specificHeatCoeffC = 0D)
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        public EnergyWindowMaterialGasCustom
+        (
+            string identifier, // Required parameters
+            double conductivityCoeffA= default, double viscosityCoeffA= default, double specificHeatCoeffA= default, double specificHeatRatio= default, double molecularWeight= default, double thickness = 0.0125D, double conductivityCoeffB = 0D, double conductivityCoeffC = 0D, double viscosityCoeffB = 0D, double viscosityCoeffC = 0D, double specificHeatCoeffB = 0D, double specificHeatCoeffC = 0D, string displayName= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for EnergyWindowMaterialGasCustom and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
-            // to ensure "conductivityCoeffA" is required (not null)
-            if (conductivityCoeffA == null)
-            {
-                throw new InvalidDataException("conductivityCoeffA is a required property for EnergyWindowMaterialGasCustom and cannot be null");
-            }
-            else
-            {
-                this.ConductivityCoeffA = conductivityCoeffA;
-            }
-            
-            // to ensure "viscosityCoeffA" is required (not null)
-            if (viscosityCoeffA == null)
-            {
-                throw new InvalidDataException("viscosityCoeffA is a required property for EnergyWindowMaterialGasCustom and cannot be null");
-            }
-            else
-            {
-                this.ViscosityCoeffA = viscosityCoeffA;
-            }
-            
-            // to ensure "specificHeatCoeffA" is required (not null)
-            if (specificHeatCoeffA == null)
-            {
-                throw new InvalidDataException("specificHeatCoeffA is a required property for EnergyWindowMaterialGasCustom and cannot be null");
-            }
-            else
-            {
-                this.SpecificHeatCoeffA = specificHeatCoeffA;
-            }
-            
-            // to ensure "specificHeatRatio" is required (not null)
-            if (specificHeatRatio == null)
-            {
-                throw new InvalidDataException("specificHeatRatio is a required property for EnergyWindowMaterialGasCustom and cannot be null");
-            }
-            else
-            {
-                this.SpecificHeatRatio = specificHeatRatio;
-            }
-            
-            // to ensure "molecularWeight" is required (not null)
-            if (molecularWeight == null)
-            {
-                throw new InvalidDataException("molecularWeight is a required property for EnergyWindowMaterialGasCustom and cannot be null");
-            }
-            else
-            {
-                this.MolecularWeight = molecularWeight;
-            }
-            
-            this.DisplayName = displayName;
+            this.ConductivityCoeffA = conductivityCoeffA;
+            this.ViscosityCoeffA = viscosityCoeffA;
+            this.SpecificHeatCoeffA = specificHeatCoeffA;
+            this.SpecificHeatRatio = specificHeatRatio;
+            this.MolecularWeight = molecularWeight;
             // use default value if no "thickness" provided
             if (thickness == null)
             {
@@ -181,14 +130,6 @@ namespace HoneybeeSchema
         }
         
         /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
-        public string Identifier { get; set; }
-
-        /// <summary>
         /// The A coefficient for gas conductivity in W/(m-K).
         /// </summary>
         /// <value>The A coefficient for gas conductivity in W/(m-K).</value>
@@ -229,19 +170,11 @@ namespace HoneybeeSchema
         public double MolecularWeight { get; set; }
 
         /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "EnergyWindowMaterialGasCustom"; 
 
         /// <summary>
         /// Thickness of the gas layer in meters. Default value is 0.0125.
@@ -307,13 +240,12 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class EnergyWindowMaterialGasCustom {\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  ConductivityCoeffA: ").Append(ConductivityCoeffA).Append("\n");
             sb.Append("  ViscosityCoeffA: ").Append(ViscosityCoeffA).Append("\n");
             sb.Append("  SpecificHeatCoeffA: ").Append(SpecificHeatCoeffA).Append("\n");
             sb.Append("  SpecificHeatRatio: ").Append(SpecificHeatRatio).Append("\n");
             sb.Append("  MolecularWeight: ").Append(MolecularWeight).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Thickness: ").Append(Thickness).Append("\n");
             sb.Append("  ConductivityCoeffB: ").Append(ConductivityCoeffB).Append("\n");
@@ -330,7 +262,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -365,77 +297,67 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.ConductivityCoeffA == input.ConductivityCoeffA ||
                     (this.ConductivityCoeffA != null &&
                     this.ConductivityCoeffA.Equals(input.ConductivityCoeffA))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ViscosityCoeffA == input.ViscosityCoeffA ||
                     (this.ViscosityCoeffA != null &&
                     this.ViscosityCoeffA.Equals(input.ViscosityCoeffA))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SpecificHeatCoeffA == input.SpecificHeatCoeffA ||
                     (this.SpecificHeatCoeffA != null &&
                     this.SpecificHeatCoeffA.Equals(input.SpecificHeatCoeffA))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SpecificHeatRatio == input.SpecificHeatRatio ||
                     (this.SpecificHeatRatio != null &&
                     this.SpecificHeatRatio.Equals(input.SpecificHeatRatio))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.MolecularWeight == input.MolecularWeight ||
                     (this.MolecularWeight != null &&
                     this.MolecularWeight.Equals(input.MolecularWeight))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Thickness == input.Thickness ||
                     (this.Thickness != null &&
                     this.Thickness.Equals(input.Thickness))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ConductivityCoeffB == input.ConductivityCoeffB ||
                     (this.ConductivityCoeffB != null &&
                     this.ConductivityCoeffB.Equals(input.ConductivityCoeffB))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ConductivityCoeffC == input.ConductivityCoeffC ||
                     (this.ConductivityCoeffC != null &&
                     this.ConductivityCoeffC.Equals(input.ConductivityCoeffC))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ViscosityCoeffB == input.ViscosityCoeffB ||
                     (this.ViscosityCoeffB != null &&
                     this.ViscosityCoeffB.Equals(input.ViscosityCoeffB))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ViscosityCoeffC == input.ViscosityCoeffC ||
                     (this.ViscosityCoeffC != null &&
                     this.ViscosityCoeffC.Equals(input.ViscosityCoeffC))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SpecificHeatCoeffB == input.SpecificHeatCoeffB ||
                     (this.SpecificHeatCoeffB != null &&
                     this.SpecificHeatCoeffB.Equals(input.SpecificHeatCoeffB))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SpecificHeatCoeffC == input.SpecificHeatCoeffC ||
                     (this.SpecificHeatCoeffC != null &&
@@ -451,9 +373,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.ConductivityCoeffA != null)
                     hashCode = hashCode * 59 + this.ConductivityCoeffA.GetHashCode();
                 if (this.ViscosityCoeffA != null)
@@ -464,8 +384,6 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.SpecificHeatRatio.GetHashCode();
                 if (this.MolecularWeight != null)
                     hashCode = hashCode * 59 + this.MolecularWeight.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Thickness != null)
@@ -493,18 +411,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // MolecularWeight (double) maximum
             if(this.MolecularWeight > (double)200)
             {

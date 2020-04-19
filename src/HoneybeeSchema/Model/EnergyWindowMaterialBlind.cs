@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Window blind material consisting of flat, equally-spaced slats.
     /// </summary>
     [DataContract]
-    public partial class EnergyWindowMaterialBlind :  IEquatable<EnergyWindowMaterialBlind>, IValidatableObject
+    public partial class EnergyWindowMaterialBlind : IDdEnergyBaseModel,  IEquatable<EnergyWindowMaterialBlind>, IValidatableObject
     {
+
         /// <summary>
         /// Defines SlatOrientation
         /// </summary>
@@ -63,8 +64,6 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialBlind" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="slatOrientation">slatOrientation (default to SlatOrientationEnum.Horizontal).</param>
         /// <param name="slatWidth">The width of slat measured from edge to edge in meters. (default to 0.025D).</param>
         /// <param name="slatSeparation">The distance between the front of a slat and the back of the adjacent slat in meters. (default to 0.01875D).</param>
@@ -91,19 +90,14 @@ namespace HoneybeeSchema
         /// <param name="bottomOpeningMultiplier">The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. The default value is 0. (default to 0.5D).</param>
         /// <param name="leftOpeningMultiplier">The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. The default value is 0.5. (default to 0.5D).</param>
         /// <param name="rightOpeningMultiplier">The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. The default value is 0.5. (default to 0.5D).</param>
-        public EnergyWindowMaterialBlind(string identifier, string displayName = default, SlatOrientationEnum? slatOrientation = SlatOrientationEnum.Horizontal, double slatWidth = 0.025D, double slatSeparation = 0.01875D, double slatThickness = 0.001D, double slatAngle = 45D, double slatConductivity = 221D, double beamSolarTransmittance = 0D, double beamSolarReflectance = 0.5D, double beamSolarReflectanceBack = 0.5D, double diffuseSolarTransmittance = 0D, double diffuseSolarReflectance = 0.5D, double diffuseSolarReflectanceBack = 0.5D, double beamVisibleTransmittance = 0D, double beamVisibleReflectance = 0.5D, double beamVisibleReflectanceBack = 0.5D, double diffuseVisibleTransmittance = 0D, double diffuseVisibleReflectance = 0.5D, double diffuseVisibleReflectanceBack = 0.5D, double infraredTransmittance = 0D, double emissivity = 0.9D, double emissivityBack = 0.9D, double distanceToGlass = 0.05D, double topOpeningMultiplier = 0.5D, double bottomOpeningMultiplier = 0.5D, double leftOpeningMultiplier = 0.5D, double rightOpeningMultiplier = 0.5D)
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        public EnergyWindowMaterialBlind
+        (
+            string identifier, // Required parameters
+            SlatOrientationEnum? slatOrientation = SlatOrientationEnum.Horizontal, double slatWidth = 0.025D, double slatSeparation = 0.01875D, double slatThickness = 0.001D, double slatAngle = 45D, double slatConductivity = 221D, double beamSolarTransmittance = 0D, double beamSolarReflectance = 0.5D, double beamSolarReflectanceBack = 0.5D, double diffuseSolarTransmittance = 0D, double diffuseSolarReflectance = 0.5D, double diffuseSolarReflectanceBack = 0.5D, double beamVisibleTransmittance = 0D, double beamVisibleReflectance = 0.5D, double beamVisibleReflectanceBack = 0.5D, double diffuseVisibleTransmittance = 0D, double diffuseVisibleReflectance = 0.5D, double diffuseVisibleReflectanceBack = 0.5D, double infraredTransmittance = 0D, double emissivity = 0.9D, double emissivityBack = 0.9D, double distanceToGlass = 0.05D, double topOpeningMultiplier = 0.5D, double bottomOpeningMultiplier = 0.5D, double leftOpeningMultiplier = 0.5D, double rightOpeningMultiplier = 0.5D, string displayName= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for EnergyWindowMaterialBlind and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
-            this.DisplayName = displayName;
             // use default value if no "slatOrientation" provided
             if (slatOrientation == null)
             {
@@ -341,27 +335,11 @@ namespace HoneybeeSchema
         }
         
         /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
-        public string Identifier { get; set; }
-
-        /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "EnergyWindowMaterialBlind"; 
 
 
         /// <summary>
@@ -572,8 +550,7 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class EnergyWindowMaterialBlind {\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  SlatOrientation: ").Append(SlatOrientation).Append("\n");
             sb.Append("  SlatWidth: ").Append(SlatWidth).Append("\n");
@@ -609,7 +586,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -644,147 +621,137 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SlatOrientation == input.SlatOrientation ||
                     (this.SlatOrientation != null &&
                     this.SlatOrientation.Equals(input.SlatOrientation))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SlatWidth == input.SlatWidth ||
                     (this.SlatWidth != null &&
                     this.SlatWidth.Equals(input.SlatWidth))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SlatSeparation == input.SlatSeparation ||
                     (this.SlatSeparation != null &&
                     this.SlatSeparation.Equals(input.SlatSeparation))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SlatThickness == input.SlatThickness ||
                     (this.SlatThickness != null &&
                     this.SlatThickness.Equals(input.SlatThickness))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SlatAngle == input.SlatAngle ||
                     (this.SlatAngle != null &&
                     this.SlatAngle.Equals(input.SlatAngle))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SlatConductivity == input.SlatConductivity ||
                     (this.SlatConductivity != null &&
                     this.SlatConductivity.Equals(input.SlatConductivity))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.BeamSolarTransmittance == input.BeamSolarTransmittance ||
                     (this.BeamSolarTransmittance != null &&
                     this.BeamSolarTransmittance.Equals(input.BeamSolarTransmittance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.BeamSolarReflectance == input.BeamSolarReflectance ||
                     (this.BeamSolarReflectance != null &&
                     this.BeamSolarReflectance.Equals(input.BeamSolarReflectance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.BeamSolarReflectanceBack == input.BeamSolarReflectanceBack ||
                     (this.BeamSolarReflectanceBack != null &&
                     this.BeamSolarReflectanceBack.Equals(input.BeamSolarReflectanceBack))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DiffuseSolarTransmittance == input.DiffuseSolarTransmittance ||
                     (this.DiffuseSolarTransmittance != null &&
                     this.DiffuseSolarTransmittance.Equals(input.DiffuseSolarTransmittance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DiffuseSolarReflectance == input.DiffuseSolarReflectance ||
                     (this.DiffuseSolarReflectance != null &&
                     this.DiffuseSolarReflectance.Equals(input.DiffuseSolarReflectance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DiffuseSolarReflectanceBack == input.DiffuseSolarReflectanceBack ||
                     (this.DiffuseSolarReflectanceBack != null &&
                     this.DiffuseSolarReflectanceBack.Equals(input.DiffuseSolarReflectanceBack))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.BeamVisibleTransmittance == input.BeamVisibleTransmittance ||
                     (this.BeamVisibleTransmittance != null &&
                     this.BeamVisibleTransmittance.Equals(input.BeamVisibleTransmittance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.BeamVisibleReflectance == input.BeamVisibleReflectance ||
                     (this.BeamVisibleReflectance != null &&
                     this.BeamVisibleReflectance.Equals(input.BeamVisibleReflectance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.BeamVisibleReflectanceBack == input.BeamVisibleReflectanceBack ||
                     (this.BeamVisibleReflectanceBack != null &&
                     this.BeamVisibleReflectanceBack.Equals(input.BeamVisibleReflectanceBack))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DiffuseVisibleTransmittance == input.DiffuseVisibleTransmittance ||
                     (this.DiffuseVisibleTransmittance != null &&
                     this.DiffuseVisibleTransmittance.Equals(input.DiffuseVisibleTransmittance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DiffuseVisibleReflectance == input.DiffuseVisibleReflectance ||
                     (this.DiffuseVisibleReflectance != null &&
                     this.DiffuseVisibleReflectance.Equals(input.DiffuseVisibleReflectance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DiffuseVisibleReflectanceBack == input.DiffuseVisibleReflectanceBack ||
                     (this.DiffuseVisibleReflectanceBack != null &&
                     this.DiffuseVisibleReflectanceBack.Equals(input.DiffuseVisibleReflectanceBack))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.InfraredTransmittance == input.InfraredTransmittance ||
                     (this.InfraredTransmittance != null &&
                     this.InfraredTransmittance.Equals(input.InfraredTransmittance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Emissivity == input.Emissivity ||
                     (this.Emissivity != null &&
                     this.Emissivity.Equals(input.Emissivity))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.EmissivityBack == input.EmissivityBack ||
                     (this.EmissivityBack != null &&
                     this.EmissivityBack.Equals(input.EmissivityBack))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DistanceToGlass == input.DistanceToGlass ||
                     (this.DistanceToGlass != null &&
                     this.DistanceToGlass.Equals(input.DistanceToGlass))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.TopOpeningMultiplier == input.TopOpeningMultiplier ||
                     (this.TopOpeningMultiplier != null &&
                     this.TopOpeningMultiplier.Equals(input.TopOpeningMultiplier))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.BottomOpeningMultiplier == input.BottomOpeningMultiplier ||
                     (this.BottomOpeningMultiplier != null &&
                     this.BottomOpeningMultiplier.Equals(input.BottomOpeningMultiplier))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.LeftOpeningMultiplier == input.LeftOpeningMultiplier ||
                     (this.LeftOpeningMultiplier != null &&
                     this.LeftOpeningMultiplier.Equals(input.LeftOpeningMultiplier))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.RightOpeningMultiplier == input.RightOpeningMultiplier ||
                     (this.RightOpeningMultiplier != null &&
@@ -800,11 +767,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.SlatOrientation != null)
@@ -870,18 +833,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // Type (string) pattern
             Regex regexType = new Regex(@"^EnergyWindowMaterialBlind$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)

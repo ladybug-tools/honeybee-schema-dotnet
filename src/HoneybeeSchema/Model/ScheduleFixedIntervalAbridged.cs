@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Used to specify a start date and a list of values for a period of analysis.
     /// </summary>
     [DataContract]
-    public partial class ScheduleFixedIntervalAbridged :  IEquatable<ScheduleFixedIntervalAbridged>, IValidatableObject
+    public partial class ScheduleFixedIntervalAbridged : IDdEnergyBaseModel,  IEquatable<ScheduleFixedIntervalAbridged>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleFixedIntervalAbridged" /> class.
         /// </summary>
@@ -38,37 +39,21 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleFixedIntervalAbridged" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="values">A list of timeseries values occuring at each timestep over the course of the simulation. (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="values">A list of timeseries values occuring at each timestep over the course of the simulation..</param>
         /// <param name="scheduleTypeLimit">Identifier of a ScheduleTypeLimit that will be used to validate schedule values against upper/lower limits and assign units to the schedule values. If None, no validation will occur..</param>
         /// <param name="timestep">An integer for the number of steps per hour that the input values correspond to.  For example, if each value represents 30 minutes, the timestep is 2. For 15 minutes, it is 4. (default to 1).</param>
         /// <param name="startDate">A list of two integers for [month, day], representing the start date when the schedule values begin to take effect.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case)..</param>
         /// <param name="placeholderValue"> A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period. (default to 0D).</param>
         /// <param name="interpolate">Boolean to note whether values in between intervals should be linearly interpolated or whether successive values should take effect immediately upon the beginning time corrsponding to them. (default to false).</param>
-        public ScheduleFixedIntervalAbridged(string identifier, List<double> values, string displayName = default, string scheduleTypeLimit = default, int timestep = 1, List<int> startDate = default, double placeholderValue = 0D, bool interpolate = false)
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        public ScheduleFixedIntervalAbridged
+        (
+            string identifier, // Required parameters
+            List<double> values= default, string scheduleTypeLimit= default, int timestep = 1, List<int> startDate= default, double placeholderValue = 0D, bool interpolate = false, string displayName= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for ScheduleFixedIntervalAbridged and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
-            // to ensure "values" is required (not null)
-            if (values == null)
-            {
-                throw new InvalidDataException("values is a required property for ScheduleFixedIntervalAbridged and cannot be null");
-            }
-            else
-            {
-                this.Values = values;
-            }
-            
-            this.DisplayName = displayName;
+            this.Values = values;
             this.ScheduleTypeLimit = scheduleTypeLimit;
             // use default value if no "timestep" provided
             if (timestep == null)
@@ -101,14 +86,6 @@ namespace HoneybeeSchema
         }
         
         /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
-        public string Identifier { get; set; }
-
-        /// <summary>
         /// A list of timeseries values occuring at each timestep over the course of the simulation.
         /// </summary>
         /// <value>A list of timeseries values occuring at each timestep over the course of the simulation.</value>
@@ -117,19 +94,11 @@ namespace HoneybeeSchema
         public List<double> Values { get; set; }
 
         /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "ScheduleFixedIntervalAbridged"; 
 
         /// <summary>
         /// Identifier of a ScheduleTypeLimit that will be used to validate schedule values against upper/lower limits and assign units to the schedule values. If None, no validation will occur.
@@ -179,9 +148,8 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class ScheduleFixedIntervalAbridged {\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Values: ").Append(Values).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  ScheduleTypeLimit: ").Append(ScheduleTypeLimit).Append("\n");
             sb.Append("  Timestep: ").Append(Timestep).Append("\n");
@@ -196,7 +164,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -231,49 +199,39 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Values == input.Values ||
                     this.Values != null &&
                     input.Values != null &&
                     this.Values.SequenceEqual(input.Values)
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ScheduleTypeLimit == input.ScheduleTypeLimit ||
                     (this.ScheduleTypeLimit != null &&
                     this.ScheduleTypeLimit.Equals(input.ScheduleTypeLimit))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Timestep == input.Timestep ||
                     (this.Timestep != null &&
                     this.Timestep.Equals(input.Timestep))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.StartDate == input.StartDate ||
                     this.StartDate != null &&
                     input.StartDate != null &&
                     this.StartDate.SequenceEqual(input.StartDate)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.PlaceholderValue == input.PlaceholderValue ||
                     (this.PlaceholderValue != null &&
                     this.PlaceholderValue.Equals(input.PlaceholderValue))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Interpolate == input.Interpolate ||
                     (this.Interpolate != null &&
@@ -289,13 +247,9 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Values != null)
                     hashCode = hashCode * 59 + this.Values.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.ScheduleTypeLimit != null)
@@ -319,18 +273,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // Type (string) pattern
             Regex regexType = new Regex(@"^ScheduleFixedIntervalAbridged$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)

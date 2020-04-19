@@ -30,6 +30,7 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class DryBulbCondition :  IEquatable<DryBulbCondition>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DryBulbCondition" /> class.
         /// </summary>
@@ -40,7 +41,11 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="dryBulbMax">The maximum dry bulb temperature on the design day [C]. (required).</param>
         /// <param name="dryBulbRange">The difference between min and max temperatures on thedesign day [C]. (required).</param>
-        public DryBulbCondition(double dryBulbMax, double dryBulbRange)
+        public DryBulbCondition
+        (
+            double dryBulbMax, double dryBulbRange // Required parameters
+            // Optional parameters
+        )// BaseClass
         {
             // to ensure "dryBulbMax" is required (not null)
             if (dryBulbMax == null)
@@ -85,7 +90,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "DryBulbCondition"; 
 
         /// <summary>
         /// Returns the string presentation of the object

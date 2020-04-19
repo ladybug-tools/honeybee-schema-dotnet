@@ -30,11 +30,16 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class ApertureEnergyPropertiesAbridged :  IEquatable<ApertureEnergyPropertiesAbridged>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ApertureEnergyPropertiesAbridged" /> class.
         /// </summary>
         /// <param name="construction">Identifier of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set..</param>
-        public ApertureEnergyPropertiesAbridged(string construction = default)
+        public ApertureEnergyPropertiesAbridged
+        (
+            // Required parameters
+            string construction= default// Optional parameters
+        )// BaseClass
         {
             this.Construction = construction;
         }
@@ -44,7 +49,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "ApertureEnergyPropertiesAbridged"; 
 
         /// <summary>
         /// Identifier of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.

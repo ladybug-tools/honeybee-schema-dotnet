@@ -22,7 +22,8 @@ namespace HoneybeeSchema
 
             var data = reader.Value;
 
-            if (reader.Value == null)
+            // try to load value
+            if (data == null)
             {
                 var jObject = JObject.Load(reader);
 

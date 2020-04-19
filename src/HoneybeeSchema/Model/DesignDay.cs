@@ -30,6 +30,7 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class DesignDay :  IEquatable<DesignDay>, IValidatableObject
     {
+
         /// <summary>
         /// Defines DayType
         /// </summary>
@@ -123,7 +124,11 @@ namespace HoneybeeSchema
         /// <param name="humidityCondition">A HumidityCondition describing humidity and precipitation conditions on the design day. (required).</param>
         /// <param name="windCondition">A WindCondition describing wind conditions on the design day. (required).</param>
         /// <param name="skyCondition">skyCondition (required).</param>
-        public DesignDay(string name, DayTypeEnum dayType, DryBulbCondition dryBulbCondition, HumidityCondition humidityCondition, WindCondition windCondition, AnyOf<ASHRAEClearSky,ASHRAETau> skyCondition)
+        public DesignDay
+        (
+            string name, DayTypeEnum dayType, DryBulbCondition dryBulbCondition, HumidityCondition humidityCondition, WindCondition windCondition, AnyOf<ASHRAEClearSky,ASHRAETau> skyCondition // Required parameters
+            // Optional parameters
+        )// BaseClass
         {
             // to ensure "name" is required (not null)
             if (name == null)
@@ -232,7 +237,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "DesignDay"; 
 
         /// <summary>
         /// Returns the string presentation of the object

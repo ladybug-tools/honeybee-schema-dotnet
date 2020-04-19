@@ -30,11 +30,16 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class AperturePropertiesAbridged :  IEquatable<AperturePropertiesAbridged>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AperturePropertiesAbridged" /> class.
         /// </summary>
         /// <param name="energy">energy.</param>
-        public AperturePropertiesAbridged(ApertureEnergyPropertiesAbridged energy = default)
+        public AperturePropertiesAbridged
+        (
+            // Required parameters
+            ApertureEnergyPropertiesAbridged energy= default// Optional parameters
+        )// BaseClass
         {
             this.Energy = energy;
         }
@@ -44,7 +49,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "AperturePropertiesAbridged"; 
 
         /// <summary>
         /// Gets or Sets Energy

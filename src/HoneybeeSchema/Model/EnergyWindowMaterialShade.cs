@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// This object specifies the properties of window shade materials.
     /// </summary>
     [DataContract]
-    public partial class EnergyWindowMaterialShade :  IEquatable<EnergyWindowMaterialShade>, IValidatableObject
+    public partial class EnergyWindowMaterialShade : IDdEnergyBaseModel,  IEquatable<EnergyWindowMaterialShade>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialShade" /> class.
         /// </summary>
@@ -38,8 +39,6 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialShade" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="solarTransmittance">The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default value is 0.4. (default to 0.4D).</param>
         /// <param name="solarReflectance">The reflectance averaged over the solar spectrum. It us assumed same on both sides of shade and independent of incidence angle. Default value is 0.5 (default to 0.5D).</param>
         /// <param name="visibleTransmittance">The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4. (default to 0.4D).</param>
@@ -54,19 +53,14 @@ namespace HoneybeeSchema
         /// <param name="leftOpeningMultiplier">The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. Default value is 0.5. (default to 0.5D).</param>
         /// <param name="rightOpeningMultiplier">The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. Default value is 0.5. (default to 0.5D).</param>
         /// <param name="airflowPermeability">The fraction of the shade surface that is open to air flow. If air cannot pass through the shade material, airflow_permeability &#x3D; 0. Default value is 0. (default to 0D).</param>
-        public EnergyWindowMaterialShade(string identifier, string displayName = default, double solarTransmittance = 0.4D, double solarReflectance = 0.5D, double visibleTransmittance = 0.4D, double visibleReflectance = 0.4D, double emissivity = 0.9D, double infraredTransmittance = 0D, double thickness = 0.005D, double conductivity = 0.1D, double distanceToGlass = 0.05D, double topOpeningMultiplier = 0.5D, double bottomOpeningMultiplier = 0.5D, double leftOpeningMultiplier = 0.5D, double rightOpeningMultiplier = 0.5D, double airflowPermeability = 0D)
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        public EnergyWindowMaterialShade
+        (
+            string identifier, // Required parameters
+            double solarTransmittance = 0.4D, double solarReflectance = 0.5D, double visibleTransmittance = 0.4D, double visibleReflectance = 0.4D, double emissivity = 0.9D, double infraredTransmittance = 0D, double thickness = 0.005D, double conductivity = 0.1D, double distanceToGlass = 0.05D, double topOpeningMultiplier = 0.5D, double bottomOpeningMultiplier = 0.5D, double leftOpeningMultiplier = 0.5D, double rightOpeningMultiplier = 0.5D, double airflowPermeability = 0D, string displayName= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for EnergyWindowMaterialShade and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
-            this.DisplayName = displayName;
             // use default value if no "solarTransmittance" provided
             if (solarTransmittance == null)
             {
@@ -196,27 +190,11 @@ namespace HoneybeeSchema
         }
         
         /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
-        public string Identifier { get; set; }
-
-        /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "EnergyWindowMaterialShade"; 
 
         /// <summary>
         /// The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default value is 0.4.
@@ -338,8 +316,7 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class EnergyWindowMaterialShade {\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  SolarTransmittance: ").Append(SolarTransmittance).Append("\n");
             sb.Append("  SolarReflectance: ").Append(SolarReflectance).Append("\n");
@@ -363,7 +340,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -398,87 +375,77 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SolarTransmittance == input.SolarTransmittance ||
                     (this.SolarTransmittance != null &&
                     this.SolarTransmittance.Equals(input.SolarTransmittance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SolarReflectance == input.SolarReflectance ||
                     (this.SolarReflectance != null &&
                     this.SolarReflectance.Equals(input.SolarReflectance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.VisibleTransmittance == input.VisibleTransmittance ||
                     (this.VisibleTransmittance != null &&
                     this.VisibleTransmittance.Equals(input.VisibleTransmittance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.VisibleReflectance == input.VisibleReflectance ||
                     (this.VisibleReflectance != null &&
                     this.VisibleReflectance.Equals(input.VisibleReflectance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Emissivity == input.Emissivity ||
                     (this.Emissivity != null &&
                     this.Emissivity.Equals(input.Emissivity))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.InfraredTransmittance == input.InfraredTransmittance ||
                     (this.InfraredTransmittance != null &&
                     this.InfraredTransmittance.Equals(input.InfraredTransmittance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Thickness == input.Thickness ||
                     (this.Thickness != null &&
                     this.Thickness.Equals(input.Thickness))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Conductivity == input.Conductivity ||
                     (this.Conductivity != null &&
                     this.Conductivity.Equals(input.Conductivity))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DistanceToGlass == input.DistanceToGlass ||
                     (this.DistanceToGlass != null &&
                     this.DistanceToGlass.Equals(input.DistanceToGlass))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.TopOpeningMultiplier == input.TopOpeningMultiplier ||
                     (this.TopOpeningMultiplier != null &&
                     this.TopOpeningMultiplier.Equals(input.TopOpeningMultiplier))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.BottomOpeningMultiplier == input.BottomOpeningMultiplier ||
                     (this.BottomOpeningMultiplier != null &&
                     this.BottomOpeningMultiplier.Equals(input.BottomOpeningMultiplier))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.LeftOpeningMultiplier == input.LeftOpeningMultiplier ||
                     (this.LeftOpeningMultiplier != null &&
                     this.LeftOpeningMultiplier.Equals(input.LeftOpeningMultiplier))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.RightOpeningMultiplier == input.RightOpeningMultiplier ||
                     (this.RightOpeningMultiplier != null &&
                     this.RightOpeningMultiplier.Equals(input.RightOpeningMultiplier))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.AirflowPermeability == input.AirflowPermeability ||
                     (this.AirflowPermeability != null &&
@@ -494,11 +461,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.SolarTransmittance != null)
@@ -540,18 +503,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // Type (string) pattern
             Regex regexType = new Regex(@"^EnergyWindowMaterialShade$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)

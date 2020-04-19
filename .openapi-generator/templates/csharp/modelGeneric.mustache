@@ -11,6 +11,7 @@
     {{/generatePropertyChanged}}
     {{>visibility}} partial class {{classname}} : {{#parent}}{{{parent}}}, {{/parent}} IEquatable<{{classname}}>{{^netStandard}}{{#validatable}}, IValidatableObject{{/validatable}}{{/netStandard}}
     {
+
         {{#vars}}
         {{#items.isEnum}}
         {{#items}}
@@ -52,10 +53,23 @@
         /// <param name="{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}">{{#description}}{{description}}{{/description}}{{^description}}{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{/description}}{{#required}} (required){{/required}}{{#defaultValue}} (default to {{defaultValue}}){{/defaultValue}}.</param>
         {{/isReadOnly}}
         {{/vars}}
+        {{#parent}}
+        {{#parentModel}}
+        {{#allVars}}
+        {{^isReadOnly}}
+        /// <param name="{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}">{{#description}}{{description}}{{/description}}{{^description}}{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{/description}}{{#required}} (required){{/required}}{{#defaultValue}} (default to {{defaultValue}}){{/defaultValue}}.</param>
+        {{/isReadOnly}}
+        {{/allVars}}
+        {{/parentModel}}
+        {{/parent}}
     {{#hasOnlyReadOnly}}
         [JsonConstructorAttribute]
     {{/hasOnlyReadOnly}}
-        public {{classname}}({{#readWriteVars}}{{{datatypeWithEnum}}}{{#isEnum}}{{^isContainer}}{{^required}}?{{/required}}{{/isContainer}}{{/isEnum}} {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#defaultValue}} = {{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}{{^required}} = default{{/required}}{{/defaultValue}}{{^-last}}, {{/-last}}{{/readWriteVars}}){{#parent}} : base({{#parentVars}}{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#hasMore}}, {{/hasMore}}{{/parentVars}}){{/parent}}
+        public {{classname}}
+        (
+            {{#readWriteVars}}{{#required}}{{{datatypeWithEnum}}} {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#hasMore}}, {{/hasMore}}{{/required}}{{/readWriteVars}}{{#hasRequired}}{{#hasOptional}}, {{/hasOptional}}{{/hasRequired}}// Required parameters
+            {{#readWriteVars}}{{^required}}{{{datatypeWithEnum}}}{{#isEnum}}{{^isContainer}}?{{/isContainer}}{{/isEnum}} {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#defaultValue}} = {{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}= default{{/defaultValue}}{{#hasMore}}, {{/hasMore}}{{/required}}{{/readWriteVars}}// Optional parameters
+        ){{#parent}} : base({{#parentModel}}{{#allVars}}{{^isReadOnly}}{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}: {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#hasMore}}, {{/hasMore}}{{/isReadOnly}}{{/allVars}}{{/parentModel}}){{/parent}}// BaseClass
         {
             {{#vars}}
             {{^isInherited}}
@@ -111,7 +125,7 @@ this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}};
         [DataMember(Name="{{baseName}}", EmitDefaultValue={{#vendorExtensions.x-emit-default-value}}true{{/vendorExtensions.x-emit-default-value}}{{^vendorExtensions.x-emit-default-value}}{{#isNullable}}true{{/isNullable}}{{^isNullable}}false{{/isNullable}}{{/vendorExtensions.x-emit-default-value}})]{{#isDate}}
         [JsonConverter(typeof(OpenAPIDateConverter))]{{/isDate}}
         [JsonProperty("{{baseName}}")]
-        public {{{dataType}}} {{name}} { get; {{#isReadOnly}}private {{/isReadOnly}}set; }
+        public {{{dataType}}} {{name}} { get; {{#isReadOnly}}private {{/isReadOnly}}set; }{{#isReadOnly}} = {{{defaultValue}}}; {{/isReadOnly}}
         {{/isEnum}}
         {{/isInherited}}
 

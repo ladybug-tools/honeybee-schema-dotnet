@@ -30,6 +30,7 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class RoomEnergyPropertiesAbridged :  IEquatable<RoomEnergyPropertiesAbridged>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RoomEnergyPropertiesAbridged" /> class.
         /// </summary>
@@ -43,7 +44,11 @@ namespace HoneybeeSchema
         /// <param name="infiltration">Infiltration object to to describe the outdoor air leakage..</param>
         /// <param name="ventilation">Ventilation object for the minimum outdoor air requirement..</param>
         /// <param name="setpoint">Setpoint object for the temperature setpoints of the Room..</param>
-        public RoomEnergyPropertiesAbridged(string constructionSet = default, string programType = default, string hvac = default, PeopleAbridged people = default, LightingAbridged lighting = default, ElectricEquipmentAbridged electricEquipment = default, GasEquipmentAbridged gasEquipment = default, InfiltrationAbridged infiltration = default, VentilationAbridged ventilation = default, SetpointAbridged setpoint = default)
+        public RoomEnergyPropertiesAbridged
+        (
+            // Required parameters
+            string constructionSet= default, string programType= default, string hvac= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default// Optional parameters
+        )// BaseClass
         {
             this.ConstructionSet = constructionSet;
             this.ProgramType = programType;
@@ -62,7 +67,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "RoomEnergyPropertiesAbridged"; 
 
         /// <summary>
         /// Identifier of a ConstructionSet to specify all default constructions for the Faces, Apertures, and Doors of the Room. If None, the Room will use the Model global_construction_set.

@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Describe a single glass pane corresponding to a layer in a window construction.
     /// </summary>
     [DataContract]
-    public partial class EnergyWindowMaterialGlazing :  IEquatable<EnergyWindowMaterialGlazing>, IValidatableObject
+    public partial class EnergyWindowMaterialGlazing : IDdEnergyBaseModel,  IEquatable<EnergyWindowMaterialGlazing>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialGlazing" /> class.
         /// </summary>
@@ -38,8 +39,6 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialGlazing" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="thickness">The surface-to-surface of the glass in meters. Default value is 0.003. (default to 0.003D).</param>
         /// <param name="solarTransmittance">Transmittance of solar radiation through the glass at normal incidence. Default value is 0.85 for clear glass. (default to 0.85D).</param>
         /// <param name="solarReflectance">Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default value is 0.075 for clear glass. (default to 0.075D).</param>
@@ -53,19 +52,14 @@ namespace HoneybeeSchema
         /// <param name="conductivity">Thermal conductivity of the glass in W/(m-K). Default value is 0.9, which is  typical for clear glass without a low-e coating. (default to 0.9D).</param>
         /// <param name="dirtCorrection">Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean. (default to 1D).</param>
         /// <param name="solarDiffusing">Takes values True and False. If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component. (default to false).</param>
-        public EnergyWindowMaterialGlazing(string identifier, string displayName = default, double thickness = 0.003D, double solarTransmittance = 0.85D, double solarReflectance = 0.075D, double solarReflectanceBack = default, double visibleTransmittance = 0.9D, double visibleReflectance = 0.075D, double visibleReflectanceBack = default, double infraredTransmittance = 0D, double emissivity = 0.84D, double emissivityBack = 0.84D, double conductivity = 0.9D, double dirtCorrection = 1D, bool solarDiffusing = false)
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        public EnergyWindowMaterialGlazing
+        (
+            string identifier, // Required parameters
+            double thickness = 0.003D, double solarTransmittance = 0.85D, double solarReflectance = 0.075D, double solarReflectanceBack= default, double visibleTransmittance = 0.9D, double visibleReflectance = 0.075D, double visibleReflectanceBack= default, double infraredTransmittance = 0D, double emissivity = 0.84D, double emissivityBack = 0.84D, double conductivity = 0.9D, double dirtCorrection = 1D, bool solarDiffusing = false, string displayName= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for EnergyWindowMaterialGlazing and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
-            this.DisplayName = displayName;
             // use default value if no "thickness" provided
             if (thickness == null)
             {
@@ -170,27 +164,11 @@ namespace HoneybeeSchema
         }
         
         /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
-        public string Identifier { get; set; }
-
-        /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "EnergyWindowMaterialGlazing"; 
 
         /// <summary>
         /// The surface-to-surface of the glass in meters. Default value is 0.003.
@@ -304,8 +282,7 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class EnergyWindowMaterialGlazing {\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Thickness: ").Append(Thickness).Append("\n");
             sb.Append("  SolarTransmittance: ").Append(SolarTransmittance).Append("\n");
@@ -328,7 +305,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -363,82 +340,72 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Thickness == input.Thickness ||
                     (this.Thickness != null &&
                     this.Thickness.Equals(input.Thickness))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SolarTransmittance == input.SolarTransmittance ||
                     (this.SolarTransmittance != null &&
                     this.SolarTransmittance.Equals(input.SolarTransmittance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SolarReflectance == input.SolarReflectance ||
                     (this.SolarReflectance != null &&
                     this.SolarReflectance.Equals(input.SolarReflectance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SolarReflectanceBack == input.SolarReflectanceBack ||
                     (this.SolarReflectanceBack != null &&
                     this.SolarReflectanceBack.Equals(input.SolarReflectanceBack))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.VisibleTransmittance == input.VisibleTransmittance ||
                     (this.VisibleTransmittance != null &&
                     this.VisibleTransmittance.Equals(input.VisibleTransmittance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.VisibleReflectance == input.VisibleReflectance ||
                     (this.VisibleReflectance != null &&
                     this.VisibleReflectance.Equals(input.VisibleReflectance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.VisibleReflectanceBack == input.VisibleReflectanceBack ||
                     (this.VisibleReflectanceBack != null &&
                     this.VisibleReflectanceBack.Equals(input.VisibleReflectanceBack))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.InfraredTransmittance == input.InfraredTransmittance ||
                     (this.InfraredTransmittance != null &&
                     this.InfraredTransmittance.Equals(input.InfraredTransmittance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Emissivity == input.Emissivity ||
                     (this.Emissivity != null &&
                     this.Emissivity.Equals(input.Emissivity))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.EmissivityBack == input.EmissivityBack ||
                     (this.EmissivityBack != null &&
                     this.EmissivityBack.Equals(input.EmissivityBack))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Conductivity == input.Conductivity ||
                     (this.Conductivity != null &&
                     this.Conductivity.Equals(input.Conductivity))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DirtCorrection == input.DirtCorrection ||
                     (this.DirtCorrection != null &&
                     this.DirtCorrection.Equals(input.DirtCorrection))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SolarDiffusing == input.SolarDiffusing ||
                     (this.SolarDiffusing != null &&
@@ -454,11 +421,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Thickness != null)
@@ -498,18 +461,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // Type (string) pattern
             Regex regexType = new Regex(@"^EnergyWindowMaterialGlazing$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)

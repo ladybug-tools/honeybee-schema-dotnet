@@ -30,6 +30,7 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class HumidityCondition :  IEquatable<HumidityCondition>, IValidatableObject
     {
+
         /// <summary>
         /// Defines HumidityType
         /// </summary>
@@ -80,7 +81,11 @@ namespace HoneybeeSchema
         /// <param name="barometricPressure">Barometric air pressure on the design day [Pa]. (default to 101325D).</param>
         /// <param name="rain">Boolean to indicate rain on the design day. (default to false).</param>
         /// <param name="snowOnGround">Boolean to indicate snow on the ground during the design day. (default to false).</param>
-        public HumidityCondition(HumidityTypeEnum humidityType, double humidityValue, double barometricPressure = 101325D, bool rain = false, bool snowOnGround = false)
+        public HumidityCondition
+        (
+            HumidityTypeEnum humidityType, double humidityValue, // Required parameters
+            double barometricPressure = 101325D, bool rain = false, bool snowOnGround = false// Optional parameters
+        )// BaseClass
         {
             // to ensure "humidityType" is required (not null)
             if (humidityType == null)
@@ -145,7 +150,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "HumidityCondition"; 
 
         /// <summary>
         /// Barometric air pressure on the design day [Pa].

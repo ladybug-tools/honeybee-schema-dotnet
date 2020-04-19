@@ -30,6 +30,7 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class SimulationControl :  IEquatable<SimulationControl>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SimulationControl" /> class.
         /// </summary>
@@ -38,7 +39,11 @@ namespace HoneybeeSchema
         /// <param name="doPlantSizing">Boolean for whether the plant sizing calculation should be run. (default to true).</param>
         /// <param name="runForRunPeriods">Boolean for whether the simulation should be run for the sizing periods. (default to true).</param>
         /// <param name="runForSizingPeriods">Boolean for whether the simulation should be run for the run periods. (default to false).</param>
-        public SimulationControl(bool doZoneSizing = true, bool doSystemSizing = true, bool doPlantSizing = true, bool runForRunPeriods = true, bool runForSizingPeriods = false)
+        public SimulationControl
+        (
+            // Required parameters
+            bool doZoneSizing = true, bool doSystemSizing = true, bool doPlantSizing = true, bool runForRunPeriods = true, bool runForSizingPeriods = false// Optional parameters
+        )// BaseClass
         {
             // use default value if no "doZoneSizing" provided
             if (doZoneSizing == null)
@@ -92,7 +97,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "SimulationControl"; 
 
         /// <summary>
         /// Boolean for whether the zone sizing calculation should be run.

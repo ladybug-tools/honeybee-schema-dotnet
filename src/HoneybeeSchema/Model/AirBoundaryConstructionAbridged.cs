@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Construction for Air Boundary objects.
     /// </summary>
     [DataContract]
-    public partial class AirBoundaryConstructionAbridged :  IEquatable<AirBoundaryConstructionAbridged>, IValidatableObject
+    public partial class AirBoundaryConstructionAbridged : IDdEnergyBaseModel,  IEquatable<AirBoundaryConstructionAbridged>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AirBoundaryConstructionAbridged" /> class.
         /// </summary>
@@ -38,33 +39,17 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="AirBoundaryConstructionAbridged" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="airMixingSchedule">Identifier of a fractional schedule for the air mixing schedule across the construction. (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="airMixingSchedule">Identifier of a fractional schedule for the air mixing schedule across the construction..</param>
         /// <param name="airMixingPerArea">A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system. (default to 0.1D).</param>
-        public AirBoundaryConstructionAbridged(string identifier, string airMixingSchedule, string displayName = default, double airMixingPerArea = 0.1D)
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        public AirBoundaryConstructionAbridged
+        (
+            string identifier, // Required parameters
+            string airMixingSchedule= default, double airMixingPerArea = 0.1D, string displayName= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for AirBoundaryConstructionAbridged and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
-            // to ensure "airMixingSchedule" is required (not null)
-            if (airMixingSchedule == null)
-            {
-                throw new InvalidDataException("airMixingSchedule is a required property for AirBoundaryConstructionAbridged and cannot be null");
-            }
-            else
-            {
-                this.AirMixingSchedule = airMixingSchedule;
-            }
-            
-            this.DisplayName = displayName;
+            this.AirMixingSchedule = airMixingSchedule;
             // use default value if no "airMixingPerArea" provided
             if (airMixingPerArea == null)
             {
@@ -77,14 +62,6 @@ namespace HoneybeeSchema
         }
         
         /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
-        public string Identifier { get; set; }
-
-        /// <summary>
         /// Identifier of a fractional schedule for the air mixing schedule across the construction.
         /// </summary>
         /// <value>Identifier of a fractional schedule for the air mixing schedule across the construction.</value>
@@ -93,19 +70,11 @@ namespace HoneybeeSchema
         public string AirMixingSchedule { get; set; }
 
         /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "AirBoundaryConstructionAbridged"; 
 
         /// <summary>
         /// A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system.
@@ -123,9 +92,8 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class AirBoundaryConstructionAbridged {\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  AirMixingSchedule: ").Append(AirMixingSchedule).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  AirMixingPerArea: ").Append(AirMixingPerArea).Append("\n");
             sb.Append("}\n");
@@ -136,7 +104,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -171,27 +139,17 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.AirMixingSchedule == input.AirMixingSchedule ||
                     (this.AirMixingSchedule != null &&
                     this.AirMixingSchedule.Equals(input.AirMixingSchedule))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.AirMixingPerArea == input.AirMixingPerArea ||
                     (this.AirMixingPerArea != null &&
@@ -207,13 +165,9 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.AirMixingSchedule != null)
                     hashCode = hashCode * 59 + this.AirMixingSchedule.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.AirMixingPerArea != null)
@@ -229,18 +183,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // AirMixingSchedule (string) maxLength
             if(this.AirMixingSchedule != null && this.AirMixingSchedule.Length > 100)
             {
