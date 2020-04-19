@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using HoneybeeSchema.Energy;
 
 namespace HoneybeeSchema
 {
     public partial class Model
     {
-        public void AddEnergyMaterial(List<IEnergyMaterial> materials)
+        public void AddEnergyMaterial(List<IMaterial> materials)
         {
             foreach (var material in materials)
             {
@@ -30,7 +31,7 @@ namespace HoneybeeSchema
             }
         }
 
-        public void AddEnergyWindowMaterial( List<IEnergyWindowMaterial> materials)
+        public void AddEnergyWindowMaterial( List<IMaterial> materials)
         {
             foreach (var material in materials)
             {
