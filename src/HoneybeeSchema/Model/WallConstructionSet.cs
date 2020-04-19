@@ -47,6 +47,7 @@ namespace HoneybeeSchema
             this.ExteriorConstruction = exteriorConstruction;
             this.GroundConstruction = groundConstruction;
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "WallConstructionSet";
         }
         
@@ -78,13 +79,24 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "WallConstructionSet";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class WallConstructionSet {\n");
+            sb.Append("WallConstructionSet:\n");
             sb.Append("  InteriorConstruction: ").Append(InteriorConstruction).Append("\n");
             sb.Append("  ExteriorConstruction: ").Append(ExteriorConstruction).Append("\n");
             sb.Append("  GroundConstruction: ").Append(GroundConstruction).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -105,7 +117,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<WallConstructionSet>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

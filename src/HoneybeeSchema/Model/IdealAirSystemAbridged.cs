@@ -149,6 +149,7 @@ namespace HoneybeeSchema
             this.HeatingAvailability = heatingAvailability;
             this.CoolingAvailability = coolingAvailability;
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "IdealAirSystemAbridged";
         }
         
@@ -222,9 +223,23 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "IdealAirSystemAbridged";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class IdealAirSystemAbridged {\n");
+            sb.Append("IdealAirSystemAbridged:\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  EconomizerType: ").Append(EconomizerType).Append("\n");
             sb.Append("  DemandControlledVentilation: ").Append(DemandControlledVentilation).Append("\n");
@@ -236,7 +251,6 @@ namespace HoneybeeSchema
             sb.Append("  CoolingLimit: ").Append(CoolingLimit).Append("\n");
             sb.Append("  HeatingAvailability: ").Append(HeatingAvailability).Append("\n");
             sb.Append("  CoolingAvailability: ").Append(CoolingAvailability).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -257,7 +271,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<IdealAirSystemAbridged>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

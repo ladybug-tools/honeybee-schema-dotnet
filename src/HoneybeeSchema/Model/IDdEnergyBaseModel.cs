@@ -59,6 +59,7 @@ namespace HoneybeeSchema
             
             this.DisplayName = displayName;
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "IDdEnergyBaseModel";
         }
         
@@ -83,12 +84,23 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "IDdEnergyBaseModel";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class IDdEnergyBaseModel {\n");
+            sb.Append("IDdEnergyBaseModel:\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -109,7 +121,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<IDdEnergyBaseModel>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

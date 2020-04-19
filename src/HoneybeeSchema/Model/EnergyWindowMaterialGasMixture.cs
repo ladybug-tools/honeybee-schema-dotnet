@@ -101,6 +101,7 @@ namespace HoneybeeSchema
                 this.Thickness = thickness;
             }
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "EnergyWindowMaterialGasMixture";
         }
         
@@ -125,14 +126,27 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "EnergyWindowMaterialGasMixture";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class EnergyWindowMaterialGasMixture {\n");
+            sb.Append("EnergyWindowMaterialGasMixture:\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  GasTypes: ").Append(GasTypes).Append("\n");
-            sb.Append("  GasFractions: ").Append(GasFractions).Append("\n");
+            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Thickness: ").Append(Thickness).Append("\n");
-            sb.Append("}\n");
+            sb.Append("  GasTypes: ").Append(GasTypes).Append("\n");
+            sb.Append("  GasFractions: ").Append(GasFractions).Append("\n");
             return sb.ToString();
         }
   
@@ -153,7 +167,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<EnergyWindowMaterialGasMixture>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

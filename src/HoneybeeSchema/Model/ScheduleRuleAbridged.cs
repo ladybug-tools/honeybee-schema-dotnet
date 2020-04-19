@@ -121,6 +121,7 @@ namespace HoneybeeSchema
             this.StartDate = startDate;
             this.EndDate = endDate;
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "ScheduleRuleAbridged";
         }
         
@@ -201,11 +202,23 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "ScheduleRuleAbridged";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class ScheduleRuleAbridged {\n");
+            sb.Append("ScheduleRuleAbridged:\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  ScheduleDay: ").Append(ScheduleDay).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  ScheduleDay: ").Append(ScheduleDay).Append("\n");
             sb.Append("  ApplySunday: ").Append(ApplySunday).Append("\n");
             sb.Append("  ApplyMonday: ").Append(ApplyMonday).Append("\n");
             sb.Append("  ApplyTuesday: ").Append(ApplyTuesday).Append("\n");
@@ -215,7 +228,6 @@ namespace HoneybeeSchema
             sb.Append("  ApplySaturday: ").Append(ApplySaturday).Append("\n");
             sb.Append("  StartDate: ").Append(StartDate).Append("\n");
             sb.Append("  EndDate: ").Append(EndDate).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -236,7 +248,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<ScheduleRuleAbridged>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

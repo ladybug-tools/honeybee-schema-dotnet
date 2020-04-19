@@ -62,6 +62,7 @@ namespace HoneybeeSchema
             this.ShadeConstruction = shadeConstruction;
             this.AirBoundaryConstruction = airBoundaryConstruction;
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "ConstructionSetAbridged";
         }
         
@@ -121,9 +122,23 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "ConstructionSetAbridged";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class ConstructionSetAbridged {\n");
+            sb.Append("ConstructionSetAbridged:\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  WallSet: ").Append(WallSet).Append("\n");
             sb.Append("  FloorSet: ").Append(FloorSet).Append("\n");
@@ -132,7 +147,6 @@ namespace HoneybeeSchema
             sb.Append("  DoorSet: ").Append(DoorSet).Append("\n");
             sb.Append("  ShadeConstruction: ").Append(ShadeConstruction).Append("\n");
             sb.Append("  AirBoundaryConstruction: ").Append(AirBoundaryConstruction).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -153,7 +167,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<ConstructionSetAbridged>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

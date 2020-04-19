@@ -146,6 +146,7 @@ namespace HoneybeeSchema
                 this.AngleTolerance = angleTolerance;
             }
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "Model";
         }
         
@@ -219,10 +220,24 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "Model";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class Model {\n");
+            sb.Append("Model:\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  Properties: ").Append(Properties).Append("\n");
+            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(UserData).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Rooms: ").Append(Rooms).Append("\n");
             sb.Append("  OrphanedFaces: ").Append(OrphanedFaces).Append("\n");
@@ -233,7 +248,7 @@ namespace HoneybeeSchema
             sb.Append("  Units: ").Append(Units).Append("\n");
             sb.Append("  Tolerance: ").Append(Tolerance).Append("\n");
             sb.Append("  AngleTolerance: ").Append(AngleTolerance).Append("\n");
-            sb.Append("}\n");
+            sb.Append("  Properties: ").Append(Properties).Append("\n");
             return sb.ToString();
         }
   
@@ -254,7 +269,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<Model>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

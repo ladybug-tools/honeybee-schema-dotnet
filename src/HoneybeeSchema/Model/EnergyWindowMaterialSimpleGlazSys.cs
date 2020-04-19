@@ -62,6 +62,7 @@ namespace HoneybeeSchema
                 this.Vt = vt;
             }
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "EnergyWindowMaterialSimpleGlazSys";
         }
         
@@ -93,14 +94,27 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "EnergyWindowMaterialSimpleGlazSys";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class EnergyWindowMaterialSimpleGlazSys {\n");
+            sb.Append("EnergyWindowMaterialSimpleGlazSys:\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  UFactor: ").Append(UFactor).Append("\n");
             sb.Append("  Shgc: ").Append(Shgc).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Vt: ").Append(Vt).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -121,7 +135,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<EnergyWindowMaterialSimpleGlazSys>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

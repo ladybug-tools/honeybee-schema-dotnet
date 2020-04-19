@@ -84,6 +84,7 @@ namespace HoneybeeSchema
                 this.Interpolate = interpolate;
             }
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "ScheduleFixedInterval";
         }
         
@@ -136,17 +137,30 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "ScheduleFixedInterval";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class ScheduleFixedInterval {\n");
+            sb.Append("ScheduleFixedInterval:\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  Values: ").Append(Values).Append("\n");
+            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  Values: ").Append(Values).Append("\n");
             sb.Append("  ScheduleTypeLimit: ").Append(ScheduleTypeLimit).Append("\n");
             sb.Append("  Timestep: ").Append(Timestep).Append("\n");
             sb.Append("  StartDate: ").Append(StartDate).Append("\n");
             sb.Append("  PlaceholderValue: ").Append(PlaceholderValue).Append("\n");
             sb.Append("  Interpolate: ").Append(Interpolate).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -167,7 +181,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<ScheduleFixedInterval>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

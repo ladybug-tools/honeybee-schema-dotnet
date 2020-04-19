@@ -188,6 +188,7 @@ namespace HoneybeeSchema
                 this.AirflowPermeability = airflowPermeability;
             }
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "EnergyWindowMaterialShade";
         }
         
@@ -296,9 +297,23 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "EnergyWindowMaterialShade";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class EnergyWindowMaterialShade {\n");
+            sb.Append("EnergyWindowMaterialShade:\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  SolarTransmittance: ").Append(SolarTransmittance).Append("\n");
             sb.Append("  SolarReflectance: ").Append(SolarReflectance).Append("\n");
@@ -314,7 +329,6 @@ namespace HoneybeeSchema
             sb.Append("  LeftOpeningMultiplier: ").Append(LeftOpeningMultiplier).Append("\n");
             sb.Append("  RightOpeningMultiplier: ").Append(RightOpeningMultiplier).Append("\n");
             sb.Append("  AirflowPermeability: ").Append(AirflowPermeability).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -335,7 +349,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<EnergyWindowMaterialShade>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

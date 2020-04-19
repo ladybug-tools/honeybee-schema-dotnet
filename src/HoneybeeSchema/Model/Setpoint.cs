@@ -56,6 +56,7 @@ namespace HoneybeeSchema
             this.HumidifyingSchedule = humidifyingSchedule;
             this.DehumidifyingSchedule = dehumidifyingSchedule;
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "Setpoint";
         }
         
@@ -94,15 +95,28 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "Setpoint";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class Setpoint {\n");
+            sb.Append("Setpoint:\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  CoolingSchedule: ").Append(CoolingSchedule).Append("\n");
             sb.Append("  HeatingSchedule: ").Append(HeatingSchedule).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  HumidifyingSchedule: ").Append(HumidifyingSchedule).Append("\n");
             sb.Append("  DehumidifyingSchedule: ").Append(DehumidifyingSchedule).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -123,7 +137,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<Setpoint>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal
