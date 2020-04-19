@@ -9,6 +9,9 @@ Name | Type | Description | Notes
 **DisplayName** | **string** | Display name of the object with no character restrictions. | [optional] 
 **FlowPerExteriorArea** | **double** | Number for the infiltration per exterior surface area in m3/s-m2. | [optional] 
 **Schedule** | **string** | Identifier of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile. | [optional] 
+**Type** | **string** |  | [optional] [readonly] [default to "InfiltrationAbridged"]
+**ConstantCoefficient** | **double** |  | [optional] [default to 1D]
+**TemperatureCoefficient** | **double** |  | [optional] [default to 0D]
 **VelocityCoefficient** | **double** |  | [optional] [default to 0D]
 
 [[Back to Model list]](../README.md#documentation-for-models)

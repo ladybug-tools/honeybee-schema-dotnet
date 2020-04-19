@@ -16,5 +16,10 @@ Name | Type | Description | Notes
 **CoolingAirTemperature** | **double** | A number for the minimum cooling supply air temperature [C]. | [optional] [default to 13D]
 **HeatingLimit** | [**AnyOfNoLimitAutosizedouble**](AnyOfNoLimitAutosizedouble.md) | A number for the maximum heating capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit boject to indicate no upper limit to the heating capacity. | [optional] 
 **CoolingLimit** | [**AnyOfNoLimitAutosizedouble**](AnyOfNoLimitAutosizedouble.md) | A number for the maximum cooling capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit boject to indicate no upper limit to the cooling capacity. | [optional] 
+**HeatingAvailability** | **string** | An optional identifier of a schedule to set the availability of heating over the course of the simulation. | [optional] 
+**CoolingAvailability** | **string** | An optional identifier of a schedule to set the availability of cooling over the course of the simulation. | [optional] 
+
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to README]](../README.md)
 
