@@ -66,6 +66,7 @@ namespace HoneybeeSchema
             }
             this.LatentFraction = latentFraction;
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "People";
         }
         
@@ -111,16 +112,29 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "People";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class People {\n");
+            sb.Append("People:\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  PeoplePerArea: ").Append(PeoplePerArea).Append("\n");
             sb.Append("  OccupancySchedule: ").Append(OccupancySchedule).Append("\n");
             sb.Append("  ActivitySchedule: ").Append(ActivitySchedule).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  RadiantFraction: ").Append(RadiantFraction).Append("\n");
             sb.Append("  LatentFraction: ").Append(LatentFraction).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -141,7 +155,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<People>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

@@ -70,6 +70,7 @@ namespace HoneybeeSchema
             
             this.X = x;
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "Plane";
         }
         
@@ -101,13 +102,24 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "Plane";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class Plane {\n");
+            sb.Append("Plane:\n");
             sb.Append("  N: ").Append(N).Append("\n");
             sb.Append("  O: ").Append(O).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  X: ").Append(X).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -128,7 +140,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<Plane>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

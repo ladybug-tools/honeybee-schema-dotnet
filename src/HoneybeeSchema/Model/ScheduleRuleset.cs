@@ -62,6 +62,7 @@ namespace HoneybeeSchema
             this.WinterDesigndaySchedule = winterDesigndaySchedule;
             this.ScheduleTypeLimit = scheduleTypeLimit;
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "ScheduleRuleset";
         }
         
@@ -121,18 +122,31 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "ScheduleRuleset";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class ScheduleRuleset {\n");
+            sb.Append("ScheduleRuleset:\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  DaySchedules: ").Append(DaySchedules).Append("\n");
             sb.Append("  DefaultDaySchedule: ").Append(DefaultDaySchedule).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  ScheduleRules: ").Append(ScheduleRules).Append("\n");
             sb.Append("  HolidaySchedule: ").Append(HolidaySchedule).Append("\n");
             sb.Append("  SummerDesigndaySchedule: ").Append(SummerDesigndaySchedule).Append("\n");
             sb.Append("  WinterDesigndaySchedule: ").Append(WinterDesigndaySchedule).Append("\n");
             sb.Append("  ScheduleTypeLimit: ").Append(ScheduleTypeLimit).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -153,7 +167,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<ScheduleRuleset>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

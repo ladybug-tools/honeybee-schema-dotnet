@@ -43,6 +43,7 @@ namespace HoneybeeSchema
         {
             this.Energy = energy;
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "ShadePropertiesAbridged";
         }
         
@@ -59,11 +60,22 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "ShadePropertiesAbridged";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class ShadePropertiesAbridged {\n");
+            sb.Append("ShadePropertiesAbridged:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Energy: ").Append(Energy).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -84,7 +96,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<ShadePropertiesAbridged>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

@@ -61,6 +61,7 @@ namespace HoneybeeSchema
             this.Ventilation = ventilation;
             this.Setpoint = setpoint;
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "RoomEnergyPropertiesAbridged";
         }
         
@@ -141,8 +142,20 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "RoomEnergyPropertiesAbridged";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class RoomEnergyPropertiesAbridged {\n");
+            sb.Append("RoomEnergyPropertiesAbridged:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  ConstructionSet: ").Append(ConstructionSet).Append("\n");
             sb.Append("  ProgramType: ").Append(ProgramType).Append("\n");
@@ -154,7 +167,6 @@ namespace HoneybeeSchema
             sb.Append("  Infiltration: ").Append(Infiltration).Append("\n");
             sb.Append("  Ventilation: ").Append(Ventilation).Append("\n");
             sb.Append("  Setpoint: ").Append(Setpoint).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -175,7 +187,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<RoomEnergyPropertiesAbridged>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

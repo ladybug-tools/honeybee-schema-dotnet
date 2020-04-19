@@ -102,6 +102,7 @@ namespace HoneybeeSchema
             this.IndoorShades = indoorShades;
             this.OutdoorShades = outdoorShades;
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "Face";
         }
         
@@ -160,19 +161,33 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "Face";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class Face {\n");
+            sb.Append("Face:\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(UserData).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Geometry: ").Append(Geometry).Append("\n");
             sb.Append("  FaceType: ").Append(FaceType).Append("\n");
             sb.Append("  BoundaryCondition: ").Append(BoundaryCondition).Append("\n");
-            sb.Append("  Properties: ").Append(Properties).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Apertures: ").Append(Apertures).Append("\n");
             sb.Append("  Doors: ").Append(Doors).Append("\n");
             sb.Append("  IndoorShades: ").Append(IndoorShades).Append("\n");
             sb.Append("  OutdoorShades: ").Append(OutdoorShades).Append("\n");
-            sb.Append("}\n");
+            sb.Append("  Properties: ").Append(Properties).Append("\n");
             return sb.ToString();
         }
   
@@ -193,7 +208,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<Face>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

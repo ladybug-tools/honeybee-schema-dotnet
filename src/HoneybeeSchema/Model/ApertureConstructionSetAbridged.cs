@@ -49,6 +49,7 @@ namespace HoneybeeSchema
             this.SkylightConstruction = skylightConstruction;
             this.OperableConstruction = operableConstruction;
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "ApertureConstructionSetAbridged";
         }
         
@@ -87,14 +88,25 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "ApertureConstructionSetAbridged";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class ApertureConstructionSetAbridged {\n");
+            sb.Append("ApertureConstructionSetAbridged:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  InteriorConstruction: ").Append(InteriorConstruction).Append("\n");
             sb.Append("  WindowConstruction: ").Append(WindowConstruction).Append("\n");
             sb.Append("  SkylightConstruction: ").Append(SkylightConstruction).Append("\n");
             sb.Append("  OperableConstruction: ").Append(OperableConstruction).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -115,7 +127,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<ApertureConstructionSetAbridged>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

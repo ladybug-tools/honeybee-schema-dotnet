@@ -51,6 +51,7 @@ namespace HoneybeeSchema
             this.ExteriorGlassConstruction = exteriorGlassConstruction;
             this.InteriorGlassConstruction = interiorGlassConstruction;
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "DoorConstructionSet";
         }
         
@@ -96,15 +97,26 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "DoorConstructionSet";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class DoorConstructionSet {\n");
+            sb.Append("DoorConstructionSet:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  InteriorConstruction: ").Append(InteriorConstruction).Append("\n");
             sb.Append("  ExteriorConstruction: ").Append(ExteriorConstruction).Append("\n");
             sb.Append("  OverheadConstruction: ").Append(OverheadConstruction).Append("\n");
             sb.Append("  ExteriorGlassConstruction: ").Append(ExteriorGlassConstruction).Append("\n");
             sb.Append("  InteriorGlassConstruction: ").Append(InteriorGlassConstruction).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -125,7 +137,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<DoorConstructionSet>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

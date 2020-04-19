@@ -112,6 +112,7 @@ namespace HoneybeeSchema
             this.Schedules = schedules;
             this.ScheduleTypeLimits = scheduleTypeLimits;
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "ModelEnergyProperties";
         }
         
@@ -178,8 +179,20 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "ModelEnergyProperties";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class ModelEnergyProperties {\n");
+            sb.Append("ModelEnergyProperties:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  TerrainType: ").Append(TerrainType).Append("\n");
             sb.Append("  GlobalConstructionSet: ").Append(GlobalConstructionSet).Append("\n");
@@ -190,7 +203,6 @@ namespace HoneybeeSchema
             sb.Append("  ProgramTypes: ").Append(ProgramTypes).Append("\n");
             sb.Append("  Schedules: ").Append(Schedules).Append("\n");
             sb.Append("  ScheduleTypeLimits: ").Append(ScheduleTypeLimits).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -211,7 +223,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<ModelEnergyProperties>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

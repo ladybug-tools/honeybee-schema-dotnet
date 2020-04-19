@@ -61,6 +61,7 @@ namespace HoneybeeSchema
             this.Holes = holes;
             this.Plane = plane;
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "Face3D";
         }
         
@@ -92,13 +93,24 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "Face3D";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class Face3D {\n");
+            sb.Append("Face3D:\n");
             sb.Append("  Boundary: ").Append(Boundary).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Holes: ").Append(Holes).Append("\n");
             sb.Append("  Plane: ").Append(Plane).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -119,7 +131,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<Face3D>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

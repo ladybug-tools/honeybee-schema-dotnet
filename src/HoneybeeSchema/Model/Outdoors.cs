@@ -63,6 +63,7 @@ namespace HoneybeeSchema
             }
             this.ViewFactor = viewFactor;
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "Outdoors";
         }
         
@@ -94,13 +95,24 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "Outdoors";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class Outdoors {\n");
+            sb.Append("Outdoors:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  SunExposure: ").Append(SunExposure).Append("\n");
             sb.Append("  WindExposure: ").Append(WindExposure).Append("\n");
             sb.Append("  ViewFactor: ").Append(ViewFactor).Append("\n");
-            sb.Append("}\n");
             return sb.ToString();
         }
   
@@ -121,7 +133,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<Outdoors>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal

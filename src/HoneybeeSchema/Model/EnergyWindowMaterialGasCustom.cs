@@ -128,6 +128,7 @@ namespace HoneybeeSchema
                 this.SpecificHeatCoeffC = specificHeatCoeffC;
             }
 
+            // Set non-required readonly properties with defaultValue
             this.Type = "EnergyWindowMaterialGasCustom";
         }
         
@@ -222,23 +223,36 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            return "EnergyWindowMaterialGasCustom";
+        }
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public string ToString(bool detailed)
+        {
+            if (detailed)
+                return this.ToString();
+            
             var sb = new StringBuilder();
-            sb.Append("class EnergyWindowMaterialGasCustom {\n");
+            sb.Append("EnergyWindowMaterialGasCustom:\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  ConductivityCoeffA: ").Append(ConductivityCoeffA).Append("\n");
-            sb.Append("  ViscosityCoeffA: ").Append(ViscosityCoeffA).Append("\n");
-            sb.Append("  SpecificHeatCoeffA: ").Append(SpecificHeatCoeffA).Append("\n");
-            sb.Append("  SpecificHeatRatio: ").Append(SpecificHeatRatio).Append("\n");
-            sb.Append("  MolecularWeight: ").Append(MolecularWeight).Append("\n");
+            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Thickness: ").Append(Thickness).Append("\n");
+            sb.Append("  ConductivityCoeffA: ").Append(ConductivityCoeffA).Append("\n");
             sb.Append("  ConductivityCoeffB: ").Append(ConductivityCoeffB).Append("\n");
             sb.Append("  ConductivityCoeffC: ").Append(ConductivityCoeffC).Append("\n");
+            sb.Append("  ViscosityCoeffA: ").Append(ViscosityCoeffA).Append("\n");
             sb.Append("  ViscosityCoeffB: ").Append(ViscosityCoeffB).Append("\n");
             sb.Append("  ViscosityCoeffC: ").Append(ViscosityCoeffC).Append("\n");
+            sb.Append("  SpecificHeatCoeffA: ").Append(SpecificHeatCoeffA).Append("\n");
             sb.Append("  SpecificHeatCoeffB: ").Append(SpecificHeatCoeffB).Append("\n");
             sb.Append("  SpecificHeatCoeffC: ").Append(SpecificHeatCoeffC).Append("\n");
-            sb.Append("}\n");
+            sb.Append("  SpecificHeatRatio: ").Append(SpecificHeatRatio).Append("\n");
+            sb.Append("  MolecularWeight: ").Append(MolecularWeight).Append("\n");
             return sb.ToString();
         }
   
@@ -259,7 +273,7 @@ namespace HoneybeeSchema
         {
             return JsonConvert.DeserializeObject<EnergyWindowMaterialGasCustom>(json, new AnyOfJsonConverter());
         }
-
+     
 
         /// <summary>
         /// Returns true if objects are equal
