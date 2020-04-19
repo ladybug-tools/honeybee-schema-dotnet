@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [DataContract]
-    public partial class Model : IDdBaseModel,  IEquatable<Model>, IValidatableObject
+    public partial class Model : IDdBaseModel, IEquatable<Model>, IValidatableObject
     {
 
         /// <summary>
@@ -145,6 +145,8 @@ namespace HoneybeeSchema
             {
                 this.AngleTolerance = angleTolerance;
             }
+
+            this.Type = "Model";
         }
         
         /// <summary>
@@ -154,14 +156,6 @@ namespace HoneybeeSchema
         [DataMember(Name="properties", EmitDefaultValue=false)]
         [JsonProperty("properties")]
         public ModelProperties Properties { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "Model"; 
-
         /// <summary>
         /// A list of Rooms in the model.
         /// </summary>
@@ -169,7 +163,6 @@ namespace HoneybeeSchema
         [DataMember(Name="rooms", EmitDefaultValue=false)]
         [JsonProperty("rooms")]
         public List<Room> Rooms { get; set; }
-
         /// <summary>
         /// A list of Faces in the model that lack a parent Room. Note that orphaned Faces are not acceptable for Models that are to be exported for energy simulation.
         /// </summary>
@@ -177,7 +170,6 @@ namespace HoneybeeSchema
         [DataMember(Name="orphaned_faces", EmitDefaultValue=false)]
         [JsonProperty("orphaned_faces")]
         public List<Face> OrphanedFaces { get; set; }
-
         /// <summary>
         /// A list of Shades in the model that lack a parent.
         /// </summary>
@@ -185,7 +177,6 @@ namespace HoneybeeSchema
         [DataMember(Name="orphaned_shades", EmitDefaultValue=false)]
         [JsonProperty("orphaned_shades")]
         public List<Shade> OrphanedShades { get; set; }
-
         /// <summary>
         /// A list of Apertures in the model that lack a parent Face. Note that orphaned Apertures are not acceptable for Models that are to be exported for energy simulation.
         /// </summary>
@@ -193,7 +184,6 @@ namespace HoneybeeSchema
         [DataMember(Name="orphaned_apertures", EmitDefaultValue=false)]
         [JsonProperty("orphaned_apertures")]
         public List<Aperture> OrphanedApertures { get; set; }
-
         /// <summary>
         /// A list of Doors in the model that lack a parent Face. Note that orphaned Doors are not acceptable for Models that are to be exported for energy simulation.
         /// </summary>
@@ -201,7 +191,6 @@ namespace HoneybeeSchema
         [DataMember(Name="orphaned_doors", EmitDefaultValue=false)]
         [JsonProperty("orphaned_doors")]
         public List<Door> OrphanedDoors { get; set; }
-
         /// <summary>
         /// The clockwise north direction in degrees.
         /// </summary>
@@ -209,8 +198,6 @@ namespace HoneybeeSchema
         [DataMember(Name="north_angle", EmitDefaultValue=false)]
         [JsonProperty("north_angle")]
         public double NorthAngle { get; set; }
-
-
         /// <summary>
         /// The maximum difference between x, y, and z values at which vertices are considered equivalent. This value should be in the Model units and it is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in no attempt to evaluate whether Room volumes are closed or check face direction. So it is recommended that this always be a positive number when such checks have not been performed on a Model. Typical tolerances for builing geometry range from 0.1 to 0.0001 depending on the units of the geometry.
         /// </summary>
@@ -218,7 +205,6 @@ namespace HoneybeeSchema
         [DataMember(Name="tolerance", EmitDefaultValue=false)]
         [JsonProperty("tolerance")]
         public double Tolerance { get; set; }
-
         /// <summary>
         /// The max angle difference in degrees that vertices are allowed to differ from one another in order to consider them colinear. This value is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in no attempt to evaluate whether the Room volumes is closed or check face direction. So it is recommended that this always be a positive number when such checks have not been performed on a given Model. Typical tolerances for builing geometry are often around 1 degree.
         /// </summary>
@@ -226,7 +212,7 @@ namespace HoneybeeSchema
         [DataMember(Name="angle_tolerance", EmitDefaultValue=false)]
         [JsonProperty("angle_tolerance")]
         public double AngleTolerance { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

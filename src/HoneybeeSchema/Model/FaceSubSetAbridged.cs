@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// A set of constructions for wall, floor, or roof assemblies.
     /// </summary>
     [DataContract]
-    public partial class FaceSubSetAbridged :  IEquatable<FaceSubSetAbridged>, IValidatableObject
+    public partial class FaceSubSetAbridged : HoneybeeObject, IEquatable<FaceSubSetAbridged>, IValidatableObject
     {
 
         /// <summary>
@@ -46,6 +46,8 @@ namespace HoneybeeSchema
             this.InteriorConstruction = interiorConstruction;
             this.ExteriorConstruction = exteriorConstruction;
             this.GroundConstruction = groundConstruction;
+
+            this.Type = "_FaceSubSetAbridged";
         }
         
         /// <summary>
@@ -55,7 +57,6 @@ namespace HoneybeeSchema
         [DataMember(Name="interior_construction", EmitDefaultValue=false)]
         [JsonProperty("interior_construction")]
         public string InteriorConstruction { get; set; }
-
         /// <summary>
         /// Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition.
         /// </summary>
@@ -63,7 +64,6 @@ namespace HoneybeeSchema
         [DataMember(Name="exterior_construction", EmitDefaultValue=false)]
         [JsonProperty("exterior_construction")]
         public string ExteriorConstruction { get; set; }
-
         /// <summary>
         /// Identifier for an OpaqueConstruction for faces with a Ground boundary condition.
         /// </summary>
@@ -71,14 +71,7 @@ namespace HoneybeeSchema
         [DataMember(Name="ground_construction", EmitDefaultValue=false)]
         [JsonProperty("ground_construction")]
         public string GroundConstruction { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "_FaceSubSetAbridged"; 
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

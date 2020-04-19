@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Specifies the data types and limits for values contained in schedules.
     /// </summary>
     [DataContract]
-    public partial class ScheduleTypeLimit : IDdEnergyBaseModel,  IEquatable<ScheduleTypeLimit>, IValidatableObject
+    public partial class ScheduleTypeLimit : IDdEnergyBaseModel, IEquatable<ScheduleTypeLimit>, IValidatableObject
     {
 
         /// <summary>
@@ -193,15 +193,10 @@ namespace HoneybeeSchema
             {
                 this.UnitType = unitType;
             }
+
+            this.Type = "ScheduleTypeLimit";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "ScheduleTypeLimit"; 
-
         /// <summary>
         /// Lower limit for the schedule type or NoLimit.
         /// </summary>
@@ -209,7 +204,6 @@ namespace HoneybeeSchema
         [DataMember(Name="lower_limit", EmitDefaultValue=false)]
         [JsonProperty("lower_limit")]
         public AnyOf<NoLimit,double> LowerLimit { get; set; }
-
         /// <summary>
         /// Upper limit for the schedule type or NoLimit.
         /// </summary>
@@ -217,9 +211,7 @@ namespace HoneybeeSchema
         [DataMember(Name="upper_limit", EmitDefaultValue=false)]
         [JsonProperty("upper_limit")]
         public AnyOf<NoLimit,double> UpperLimit { get; set; }
-
-
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

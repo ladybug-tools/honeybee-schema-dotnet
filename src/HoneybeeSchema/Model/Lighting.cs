@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [DataContract]
-    public partial class Lighting : IDdEnergyBaseModel,  IEquatable<Lighting>, IValidatableObject
+    public partial class Lighting : IDdEnergyBaseModel, IEquatable<Lighting>, IValidatableObject
     {
 
         /// <summary>
@@ -81,6 +81,8 @@ namespace HoneybeeSchema
             {
                 this.ReturnAirFraction = returnAirFraction;
             }
+
+            this.Type = "Lighting";
         }
         
         /// <summary>
@@ -90,7 +92,6 @@ namespace HoneybeeSchema
         [DataMember(Name="watts_per_area", EmitDefaultValue=false)]
         [JsonProperty("watts_per_area")]
         public double WattsPerArea { get; set; }
-
         /// <summary>
         /// The schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile.
         /// </summary>
@@ -98,14 +99,6 @@ namespace HoneybeeSchema
         [DataMember(Name="schedule", EmitDefaultValue=false)]
         [JsonProperty("schedule")]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "Lighting"; 
-
         /// <summary>
         /// The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. The default value is &#x60;0.25&#x60;.
         /// </summary>
@@ -113,7 +106,6 @@ namespace HoneybeeSchema
         [DataMember(Name="visible_fraction", EmitDefaultValue=false)]
         [JsonProperty("visible_fraction")]
         public double VisibleFraction { get; set; }
-
         /// <summary>
         /// The fraction of heat from lights that is long-wave radiation. Default value is &#x60;0.32&#x60;.
         /// </summary>
@@ -121,7 +113,6 @@ namespace HoneybeeSchema
         [DataMember(Name="radiant_fraction", EmitDefaultValue=false)]
         [JsonProperty("radiant_fraction")]
         public double RadiantFraction { get; set; }
-
         /// <summary>
         /// The fraction of the heat from lights that goes into the zone return air. Default value is &#x60;0&#x60;.
         /// </summary>
@@ -129,7 +120,7 @@ namespace HoneybeeSchema
         [DataMember(Name="return_air_fraction", EmitDefaultValue=false)]
         [JsonProperty("return_air_fraction")]
         public double ReturnAirFraction { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

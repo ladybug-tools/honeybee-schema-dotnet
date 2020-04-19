@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Used to define a schedule for a default day, further described by ScheduleRule.
     /// </summary>
     [DataContract]
-    public partial class ScheduleRuleset : IDdEnergyBaseModel,  IEquatable<ScheduleRuleset>, IValidatableObject
+    public partial class ScheduleRuleset : IDdEnergyBaseModel, IEquatable<ScheduleRuleset>, IValidatableObject
     {
 
         /// <summary>
@@ -61,6 +61,8 @@ namespace HoneybeeSchema
             this.SummerDesigndaySchedule = summerDesigndaySchedule;
             this.WinterDesigndaySchedule = winterDesigndaySchedule;
             this.ScheduleTypeLimit = scheduleTypeLimit;
+
+            this.Type = "ScheduleRuleset";
         }
         
         /// <summary>
@@ -70,7 +72,6 @@ namespace HoneybeeSchema
         [DataMember(Name="day_schedules", EmitDefaultValue=false)]
         [JsonProperty("day_schedules")]
         public List<ScheduleDay> DaySchedules { get; set; }
-
         /// <summary>
         /// An identifier for the ScheduleDay that will be used for all days when no ScheduleRule is applied. This ScheduleDay must be in the day_schedules.
         /// </summary>
@@ -78,14 +79,6 @@ namespace HoneybeeSchema
         [DataMember(Name="default_day_schedule", EmitDefaultValue=false)]
         [JsonProperty("default_day_schedule")]
         public string DefaultDaySchedule { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "ScheduleRuleset"; 
-
         /// <summary>
         /// A list of ScheduleRuleAbridged that note exceptions to the default_day_schedule. These rules should be ordered from highest to lowest priority.
         /// </summary>
@@ -93,7 +86,6 @@ namespace HoneybeeSchema
         [DataMember(Name="schedule_rules", EmitDefaultValue=false)]
         [JsonProperty("schedule_rules")]
         public List<ScheduleRuleAbridged> ScheduleRules { get; set; }
-
         /// <summary>
         /// An identifier for the ScheduleDay that will be used for holidays. This ScheduleDay must be in the day_schedules.
         /// </summary>
@@ -101,7 +93,6 @@ namespace HoneybeeSchema
         [DataMember(Name="holiday_schedule", EmitDefaultValue=false)]
         [JsonProperty("holiday_schedule")]
         public string HolidaySchedule { get; set; }
-
         /// <summary>
         /// An identifier for the ScheduleDay that will be used for the summer design day. This ScheduleDay must be in the day_schedules.
         /// </summary>
@@ -109,7 +100,6 @@ namespace HoneybeeSchema
         [DataMember(Name="summer_designday_schedule", EmitDefaultValue=false)]
         [JsonProperty("summer_designday_schedule")]
         public string SummerDesigndaySchedule { get; set; }
-
         /// <summary>
         /// An identifier for the ScheduleDay that will be used for the winter design day. This ScheduleDay must be in the day_schedules.
         /// </summary>
@@ -117,7 +107,6 @@ namespace HoneybeeSchema
         [DataMember(Name="winter_designday_schedule", EmitDefaultValue=false)]
         [JsonProperty("winter_designday_schedule")]
         public string WinterDesigndaySchedule { get; set; }
-
         /// <summary>
         /// ScheduleTypeLimit object that will be used to validate schedule values against upper/lower limits and assign units to the schedule values. If None, no validation will occur.
         /// </summary>
@@ -125,7 +114,7 @@ namespace HoneybeeSchema
         [DataMember(Name="schedule_type_limit", EmitDefaultValue=false)]
         [JsonProperty("schedule_type_limit")]
         public ScheduleTypeLimit ScheduleTypeLimit { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

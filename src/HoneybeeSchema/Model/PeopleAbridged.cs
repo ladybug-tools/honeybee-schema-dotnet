@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [DataContract]
-    public partial class PeopleAbridged : IDdEnergyBaseModel,  IEquatable<PeopleAbridged>, IValidatableObject
+    public partial class PeopleAbridged : IDdEnergyBaseModel, IEquatable<PeopleAbridged>, IValidatableObject
     {
 
         /// <summary>
@@ -65,6 +65,8 @@ namespace HoneybeeSchema
                 this.RadiantFraction = radiantFraction;
             }
             this.LatentFraction = latentFraction;
+
+            this.Type = "PeopleAbridged";
         }
         
         /// <summary>
@@ -74,7 +76,6 @@ namespace HoneybeeSchema
         [DataMember(Name="people_per_area", EmitDefaultValue=false)]
         [JsonProperty("people_per_area")]
         public double PeoplePerArea { get; set; }
-
         /// <summary>
         /// Identifier of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile.
         /// </summary>
@@ -82,7 +83,6 @@ namespace HoneybeeSchema
         [DataMember(Name="occupancy_schedule", EmitDefaultValue=false)]
         [JsonProperty("occupancy_schedule")]
         public string OccupancySchedule { get; set; }
-
         /// <summary>
         /// Identifier of a schedule for the activity of the occupants over the course of the year. The type of this schedule should be Power and the values of the schedule equal to the number of Watts given off by an individual person in the room.
         /// </summary>
@@ -90,14 +90,6 @@ namespace HoneybeeSchema
         [DataMember(Name="activity_schedule", EmitDefaultValue=false)]
         [JsonProperty("activity_schedule")]
         public string ActivitySchedule { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "PeopleAbridged"; 
-
         /// <summary>
         /// The radiant fraction of sensible heat released by people. The defaultvalue is 0.30.
         /// </summary>
@@ -105,7 +97,6 @@ namespace HoneybeeSchema
         [DataMember(Name="radiant_fraction", EmitDefaultValue=false)]
         [JsonProperty("radiant_fraction")]
         public double RadiantFraction { get; set; }
-
         /// <summary>
         /// Number for the latent fraction of heat gain due to people or an Autocalculate object.
         /// </summary>
@@ -113,7 +104,7 @@ namespace HoneybeeSchema
         [DataMember(Name="latent_fraction", EmitDefaultValue=false)]
         [JsonProperty("latent_fraction")]
         public AnyOf<Autocalculate,double> LatentFraction { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

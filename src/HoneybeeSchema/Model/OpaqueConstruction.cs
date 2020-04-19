@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Construction for opaque objects (Face, Shade, Door).
     /// </summary>
     [DataContract]
-    public partial class OpaqueConstruction : OpaqueConstructionAbridged,  IEquatable<OpaqueConstruction>, IValidatableObject
+    public partial class OpaqueConstruction : OpaqueConstructionAbridged, IEquatable<OpaqueConstruction>, IValidatableObject
     {
 
         /// <summary>
@@ -50,6 +50,8 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName, layers: layers)// BaseClass
         {
             this.Materials = materials;
+
+            this.Type = "OpaqueConstruction";
         }
         
         /// <summary>
@@ -59,14 +61,7 @@ namespace HoneybeeSchema
         [DataMember(Name="materials", EmitDefaultValue=false)]
         [JsonProperty("materials")]
         public List<AnyOf<EnergyMaterial,EnergyMaterialNoMass>> Materials { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "OpaqueConstruction"; 
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

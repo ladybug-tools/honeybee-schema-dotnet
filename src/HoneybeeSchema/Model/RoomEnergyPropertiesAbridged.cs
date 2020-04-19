@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
     [DataContract]
-    public partial class RoomEnergyPropertiesAbridged :  IEquatable<RoomEnergyPropertiesAbridged>, IValidatableObject
+    public partial class RoomEnergyPropertiesAbridged : HoneybeeObject, IEquatable<RoomEnergyPropertiesAbridged>, IValidatableObject
     {
 
         /// <summary>
@@ -60,15 +60,10 @@ namespace HoneybeeSchema
             this.Infiltration = infiltration;
             this.Ventilation = ventilation;
             this.Setpoint = setpoint;
+
+            this.Type = "RoomEnergyPropertiesAbridged";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "RoomEnergyPropertiesAbridged"; 
-
         /// <summary>
         /// Identifier of a ConstructionSet to specify all default constructions for the Faces, Apertures, and Doors of the Room. If None, the Room will use the Model global_construction_set.
         /// </summary>
@@ -76,7 +71,6 @@ namespace HoneybeeSchema
         [DataMember(Name="construction_set", EmitDefaultValue=false)]
         [JsonProperty("construction_set")]
         public string ConstructionSet { get; set; }
-
         /// <summary>
         /// Identifier of a ProgramType to specify all default schedules and loads for the Room. If None, the Room will have no loads or setpoints.
         /// </summary>
@@ -84,7 +78,6 @@ namespace HoneybeeSchema
         [DataMember(Name="program_type", EmitDefaultValue=false)]
         [JsonProperty("program_type")]
         public string ProgramType { get; set; }
-
         /// <summary>
         /// An optional identifier of a HVAC system (such as an IdealAirSystem) that specifies how the Room is conditioned. If None, it will be assumed that the Room is not conditioned.
         /// </summary>
@@ -92,7 +85,6 @@ namespace HoneybeeSchema
         [DataMember(Name="hvac", EmitDefaultValue=false)]
         [JsonProperty("hvac")]
         public string Hvac { get; set; }
-
         /// <summary>
         /// People object to describe the occupancy of the Room.
         /// </summary>
@@ -100,7 +92,6 @@ namespace HoneybeeSchema
         [DataMember(Name="people", EmitDefaultValue=false)]
         [JsonProperty("people")]
         public PeopleAbridged People { get; set; }
-
         /// <summary>
         /// Lighting object to describe the lighting usage of the Room.
         /// </summary>
@@ -108,7 +99,6 @@ namespace HoneybeeSchema
         [DataMember(Name="lighting", EmitDefaultValue=false)]
         [JsonProperty("lighting")]
         public LightingAbridged Lighting { get; set; }
-
         /// <summary>
         /// ElectricEquipment object to describe the electric equipment usage.
         /// </summary>
@@ -116,7 +106,6 @@ namespace HoneybeeSchema
         [DataMember(Name="electric_equipment", EmitDefaultValue=false)]
         [JsonProperty("electric_equipment")]
         public ElectricEquipmentAbridged ElectricEquipment { get; set; }
-
         /// <summary>
         /// GasEquipment object to describe the gas equipment usage.
         /// </summary>
@@ -124,7 +113,6 @@ namespace HoneybeeSchema
         [DataMember(Name="gas_equipment", EmitDefaultValue=false)]
         [JsonProperty("gas_equipment")]
         public GasEquipmentAbridged GasEquipment { get; set; }
-
         /// <summary>
         /// Infiltration object to to describe the outdoor air leakage.
         /// </summary>
@@ -132,7 +120,6 @@ namespace HoneybeeSchema
         [DataMember(Name="infiltration", EmitDefaultValue=false)]
         [JsonProperty("infiltration")]
         public InfiltrationAbridged Infiltration { get; set; }
-
         /// <summary>
         /// Ventilation object for the minimum outdoor air requirement.
         /// </summary>
@@ -140,7 +127,6 @@ namespace HoneybeeSchema
         [DataMember(Name="ventilation", EmitDefaultValue=false)]
         [JsonProperty("ventilation")]
         public VentilationAbridged Ventilation { get; set; }
-
         /// <summary>
         /// Setpoint object for the temperature setpoints of the Room.
         /// </summary>
@@ -148,7 +134,7 @@ namespace HoneybeeSchema
         [DataMember(Name="setpoint", EmitDefaultValue=false)]
         [JsonProperty("setpoint")]
         public SetpointAbridged Setpoint { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

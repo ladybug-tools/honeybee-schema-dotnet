@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// ShadePropertiesAbridged
     /// </summary>
     [DataContract]
-    public partial class ShadePropertiesAbridged :  IEquatable<ShadePropertiesAbridged>, IValidatableObject
+    public partial class ShadePropertiesAbridged : HoneybeeObject, IEquatable<ShadePropertiesAbridged>, IValidatableObject
     {
 
         /// <summary>
@@ -42,22 +42,17 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             this.Energy = energy;
+
+            this.Type = "ShadePropertiesAbridged";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "ShadePropertiesAbridged"; 
-
         /// <summary>
         /// Gets or Sets Energy
         /// </summary>
         [DataMember(Name="energy", EmitDefaultValue=false)]
         [JsonProperty("energy")]
         public ShadeEnergyPropertiesAbridged Energy { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

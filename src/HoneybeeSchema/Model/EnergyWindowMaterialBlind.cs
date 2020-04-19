@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Window blind material consisting of flat, equally-spaced slats.
     /// </summary>
     [DataContract]
-    public partial class EnergyWindowMaterialBlind : IDdEnergyBaseModel,  IEquatable<EnergyWindowMaterialBlind>, IValidatableObject
+    public partial class EnergyWindowMaterialBlind : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialBlind>, IValidatableObject
     {
 
         /// <summary>
@@ -332,16 +332,10 @@ namespace HoneybeeSchema
             {
                 this.RightOpeningMultiplier = rightOpeningMultiplier;
             }
+
+            this.Type = "EnergyWindowMaterialBlind";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "EnergyWindowMaterialBlind"; 
-
-
         /// <summary>
         /// The width of slat measured from edge to edge in meters.
         /// </summary>
@@ -349,7 +343,6 @@ namespace HoneybeeSchema
         [DataMember(Name="slat_width", EmitDefaultValue=false)]
         [JsonProperty("slat_width")]
         public double SlatWidth { get; set; }
-
         /// <summary>
         /// The distance between the front of a slat and the back of the adjacent slat in meters.
         /// </summary>
@@ -357,7 +350,6 @@ namespace HoneybeeSchema
         [DataMember(Name="slat_separation", EmitDefaultValue=false)]
         [JsonProperty("slat_separation")]
         public double SlatSeparation { get; set; }
-
         /// <summary>
         /// The distance between the faces of a slat in meters. The default value is 0.001.
         /// </summary>
@@ -365,7 +357,6 @@ namespace HoneybeeSchema
         [DataMember(Name="slat_thickness", EmitDefaultValue=false)]
         [JsonProperty("slat_thickness")]
         public double SlatThickness { get; set; }
-
         /// <summary>
         /// The angle (degrees) between the glazing outward normal and the slat outward normal where the outward normal points away from the front face of the slat (degrees). The default value is 45.
         /// </summary>
@@ -373,7 +364,6 @@ namespace HoneybeeSchema
         [DataMember(Name="slat_angle", EmitDefaultValue=false)]
         [JsonProperty("slat_angle")]
         public double SlatAngle { get; set; }
-
         /// <summary>
         /// The thermal conductivity of the slat in W/(m-K). Default value is 221.
         /// </summary>
@@ -381,7 +371,6 @@ namespace HoneybeeSchema
         [DataMember(Name="slat_conductivity", EmitDefaultValue=false)]
         [JsonProperty("slat_conductivity")]
         public double SlatConductivity { get; set; }
-
         /// <summary>
         /// The beam solar transmittance of the slat, assumed to be independent of angle of incidence on the slat. Any transmitted beam radiation is assumed to be 100% diffuse (i.e., slats are translucent). The default value is 0.
         /// </summary>
@@ -389,7 +378,6 @@ namespace HoneybeeSchema
         [DataMember(Name="beam_solar_transmittance", EmitDefaultValue=false)]
         [JsonProperty("beam_solar_transmittance")]
         public double BeamSolarTransmittance { get; set; }
-
         /// <summary>
         /// The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.
         /// </summary>
@@ -397,7 +385,6 @@ namespace HoneybeeSchema
         [DataMember(Name="beam_solar_reflectance", EmitDefaultValue=false)]
         [JsonProperty("beam_solar_reflectance")]
         public double BeamSolarReflectance { get; set; }
-
         /// <summary>
         /// The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.
         /// </summary>
@@ -405,7 +392,6 @@ namespace HoneybeeSchema
         [DataMember(Name="beam_solar_reflectance_back", EmitDefaultValue=false)]
         [JsonProperty("beam_solar_reflectance_back")]
         public double BeamSolarReflectanceBack { get; set; }
-
         /// <summary>
         /// The slat transmittance for hemisperically diffuse solar radiation. Default value is 0.
         /// </summary>
@@ -413,7 +399,6 @@ namespace HoneybeeSchema
         [DataMember(Name="diffuse_solar_transmittance", EmitDefaultValue=false)]
         [JsonProperty("diffuse_solar_transmittance")]
         public double DiffuseSolarTransmittance { get; set; }
-
         /// <summary>
         /// The front-side slat reflectance for hemispherically diffuse solar radiation. Default value is 0.5.
         /// </summary>
@@ -421,7 +406,6 @@ namespace HoneybeeSchema
         [DataMember(Name="diffuse_solar_reflectance", EmitDefaultValue=false)]
         [JsonProperty("diffuse_solar_reflectance")]
         public double DiffuseSolarReflectance { get; set; }
-
         /// <summary>
         /// The back-side slat reflectance for hemispherically diffuse solar radiation. Default value is 0.5.
         /// </summary>
@@ -429,7 +413,6 @@ namespace HoneybeeSchema
         [DataMember(Name="diffuse_solar_reflectance_back", EmitDefaultValue=false)]
         [JsonProperty("diffuse_solar_reflectance_back")]
         public double DiffuseSolarReflectanceBack { get; set; }
-
         /// <summary>
         /// The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.
         /// </summary>
@@ -437,7 +420,6 @@ namespace HoneybeeSchema
         [DataMember(Name="beam_visible_transmittance", EmitDefaultValue=false)]
         [JsonProperty("beam_visible_transmittance")]
         public double BeamVisibleTransmittance { get; set; }
-
         /// <summary>
         /// The beam visible reflectance on the front side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.
         /// </summary>
@@ -445,7 +427,6 @@ namespace HoneybeeSchema
         [DataMember(Name="beam_visible_reflectance", EmitDefaultValue=false)]
         [JsonProperty("beam_visible_reflectance")]
         public double BeamVisibleReflectance { get; set; }
-
         /// <summary>
         /// The beam visible reflectance on the back side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.
         /// </summary>
@@ -453,7 +434,6 @@ namespace HoneybeeSchema
         [DataMember(Name="beam_visible_reflectance_back", EmitDefaultValue=false)]
         [JsonProperty("beam_visible_reflectance_back")]
         public double BeamVisibleReflectanceBack { get; set; }
-
         /// <summary>
         /// The slat transmittance for hemispherically diffuse visible radiation. This value should equal “Slat Beam Visible Transmittance.”
         /// </summary>
@@ -461,7 +441,6 @@ namespace HoneybeeSchema
         [DataMember(Name="diffuse_visible_transmittance", EmitDefaultValue=false)]
         [JsonProperty("diffuse_visible_transmittance")]
         public double DiffuseVisibleTransmittance { get; set; }
-
         /// <summary>
         /// The front-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Front Side Slat Beam Visible Reflectance.” Default value is 0.5.
         /// </summary>
@@ -469,7 +448,6 @@ namespace HoneybeeSchema
         [DataMember(Name="diffuse_visible_reflectance", EmitDefaultValue=false)]
         [JsonProperty("diffuse_visible_reflectance")]
         public double DiffuseVisibleReflectance { get; set; }
-
         /// <summary>
         /// The back-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Back Side Slat Beam Visible Reflectance. Default value is 0.5.”
         /// </summary>
@@ -477,7 +455,6 @@ namespace HoneybeeSchema
         [DataMember(Name="diffuse_visible_reflectance_back", EmitDefaultValue=false)]
         [JsonProperty("diffuse_visible_reflectance_back")]
         public double DiffuseVisibleReflectanceBack { get; set; }
-
         /// <summary>
         /// The slat infrared hemispherical transmittance. It is zero for solid metallic, wooden or glass slats, but may be non-zero in some cases such as for thin plastic slats. The default value is 0.
         /// </summary>
@@ -485,7 +462,6 @@ namespace HoneybeeSchema
         [DataMember(Name="infrared_transmittance", EmitDefaultValue=false)]
         [JsonProperty("infrared_transmittance")]
         public double InfraredTransmittance { get; set; }
-
         /// <summary>
         /// Front side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9.
         /// </summary>
@@ -493,7 +469,6 @@ namespace HoneybeeSchema
         [DataMember(Name="emissivity", EmitDefaultValue=false)]
         [JsonProperty("emissivity")]
         public double Emissivity { get; set; }
-
         /// <summary>
         /// Back side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9.
         /// </summary>
@@ -501,7 +476,6 @@ namespace HoneybeeSchema
         [DataMember(Name="emissivity_back", EmitDefaultValue=false)]
         [JsonProperty("emissivity_back")]
         public double EmissivityBack { get; set; }
-
         /// <summary>
         /// The distance from the mid-plane of the blind to the adjacent glass in meters. The default value is 0.05.
         /// </summary>
@@ -509,7 +483,6 @@ namespace HoneybeeSchema
         [DataMember(Name="distance_to_glass", EmitDefaultValue=false)]
         [JsonProperty("distance_to_glass")]
         public double DistanceToGlass { get; set; }
-
         /// <summary>
         /// The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. The default value is 0.5
         /// </summary>
@@ -517,7 +490,6 @@ namespace HoneybeeSchema
         [DataMember(Name="top_opening_multiplier", EmitDefaultValue=false)]
         [JsonProperty("top_opening_multiplier")]
         public double TopOpeningMultiplier { get; set; }
-
         /// <summary>
         /// The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. The default value is 0.
         /// </summary>
@@ -525,7 +497,6 @@ namespace HoneybeeSchema
         [DataMember(Name="bottom_opening_multiplier", EmitDefaultValue=false)]
         [JsonProperty("bottom_opening_multiplier")]
         public double BottomOpeningMultiplier { get; set; }
-
         /// <summary>
         /// The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. The default value is 0.5.
         /// </summary>
@@ -533,7 +504,6 @@ namespace HoneybeeSchema
         [DataMember(Name="left_opening_multiplier", EmitDefaultValue=false)]
         [JsonProperty("left_opening_multiplier")]
         public double LeftOpeningMultiplier { get; set; }
-
         /// <summary>
         /// The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. The default value is 0.5.
         /// </summary>
@@ -541,7 +511,7 @@ namespace HoneybeeSchema
         [DataMember(Name="right_opening_multiplier", EmitDefaultValue=false)]
         [JsonProperty("right_opening_multiplier")]
         public double RightOpeningMultiplier { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

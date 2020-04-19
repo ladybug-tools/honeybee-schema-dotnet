@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Construction for Shade objects.
     /// </summary>
     [DataContract]
-    public partial class ShadeConstruction : IDdEnergyBaseModel,  IEquatable<ShadeConstruction>, IValidatableObject
+    public partial class ShadeConstruction : IDdEnergyBaseModel, IEquatable<ShadeConstruction>, IValidatableObject
     {
 
         /// <summary>
@@ -77,15 +77,10 @@ namespace HoneybeeSchema
             {
                 this.IsSpecular = isSpecular;
             }
+
+            this.Type = "ShadeConstruction";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "ShadeConstruction"; 
-
         /// <summary>
         ///  A number for the solar reflectance of the construction.
         /// </summary>
@@ -93,7 +88,6 @@ namespace HoneybeeSchema
         [DataMember(Name="solar_reflectance", EmitDefaultValue=false)]
         [JsonProperty("solar_reflectance")]
         public double SolarReflectance { get; set; }
-
         /// <summary>
         ///  A number for the visible reflectance of the construction.
         /// </summary>
@@ -101,7 +95,6 @@ namespace HoneybeeSchema
         [DataMember(Name="visible_reflectance", EmitDefaultValue=false)]
         [JsonProperty("visible_reflectance")]
         public double VisibleReflectance { get; set; }
-
         /// <summary>
         /// Boolean to note whether the reflection off the shade is diffuse (False) or specular (True). Set to True if the construction is representing a glass facade or a mirror material.
         /// </summary>
@@ -109,7 +102,7 @@ namespace HoneybeeSchema
         [DataMember(Name="is_specular", EmitDefaultValue=false)]
         [JsonProperty("is_specular")]
         public bool IsSpecular { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

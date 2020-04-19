@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [DataContract]
-    public partial class Room : IDdBaseModel,  IEquatable<Room>, IValidatableObject
+    public partial class Room : IDdBaseModel, IEquatable<Room>, IValidatableObject
     {
 
         /// <summary>
@@ -66,6 +66,8 @@ namespace HoneybeeSchema
             {
                 this.Multiplier = multiplier;
             }
+
+            this.Type = "Room";
         }
         
         /// <summary>
@@ -75,7 +77,6 @@ namespace HoneybeeSchema
         [DataMember(Name="faces", EmitDefaultValue=false)]
         [JsonProperty("faces")]
         public List<Face> Faces { get; set; }
-
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
@@ -83,14 +84,6 @@ namespace HoneybeeSchema
         [DataMember(Name="properties", EmitDefaultValue=false)]
         [JsonProperty("properties")]
         public RoomPropertiesAbridged Properties { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "Room"; 
-
         /// <summary>
         /// Shades assigned to the interior side of this object (eg. partitions, tables).
         /// </summary>
@@ -98,7 +91,6 @@ namespace HoneybeeSchema
         [DataMember(Name="indoor_shades", EmitDefaultValue=false)]
         [JsonProperty("indoor_shades")]
         public List<Shade> IndoorShades { get; set; }
-
         /// <summary>
         /// Shades assigned to the exterior side of this object (eg. trees, landscaping).
         /// </summary>
@@ -106,7 +98,6 @@ namespace HoneybeeSchema
         [DataMember(Name="outdoor_shades", EmitDefaultValue=false)]
         [JsonProperty("outdoor_shades")]
         public List<Shade> OutdoorShades { get; set; }
-
         /// <summary>
         /// An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is mutliplied by the multiplier.
         /// </summary>
@@ -114,7 +105,7 @@ namespace HoneybeeSchema
         [DataMember(Name="multiplier", EmitDefaultValue=false)]
         [JsonProperty("multiplier")]
         public int Multiplier { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

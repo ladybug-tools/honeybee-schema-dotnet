@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
     [DataContract]
-    public partial class FaceEnergyPropertiesAbridged :  IEquatable<FaceEnergyPropertiesAbridged>, IValidatableObject
+    public partial class FaceEnergyPropertiesAbridged : HoneybeeObject, IEquatable<FaceEnergyPropertiesAbridged>, IValidatableObject
     {
 
         /// <summary>
@@ -42,15 +42,10 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             this.Construction = construction;
+
+            this.Type = "FaceEnergyPropertiesAbridged";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "FaceEnergyPropertiesAbridged"; 
-
         /// <summary>
         /// Identifier of an OpaqueConstruction for the Face. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.
         /// </summary>
@@ -58,7 +53,7 @@ namespace HoneybeeSchema
         [DataMember(Name="construction", EmitDefaultValue=false)]
         [JsonProperty("construction")]
         public string Construction { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

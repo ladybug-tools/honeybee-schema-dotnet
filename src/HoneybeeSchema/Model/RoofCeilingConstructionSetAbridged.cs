@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// A set of constructions for roof and ceiling assemblies.
     /// </summary>
     [DataContract]
-    public partial class RoofCeilingConstructionSetAbridged : FaceSubSetAbridged,  IEquatable<RoofCeilingConstructionSetAbridged>, IValidatableObject
+    public partial class RoofCeilingConstructionSetAbridged : FaceSubSetAbridged, IEquatable<RoofCeilingConstructionSetAbridged>, IValidatableObject
     {
 
         /// <summary>
@@ -43,15 +43,11 @@ namespace HoneybeeSchema
             string interiorConstruction= default, string exteriorConstruction= default, string groundConstruction= default// Optional parameters
         ) : base(interiorConstruction: interiorConstruction, exteriorConstruction: exteriorConstruction, groundConstruction: groundConstruction )// BaseClass
         {
+
+            this.Type = "RoofCeilingConstructionSetAbridged";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "RoofCeilingConstructionSetAbridged"; 
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

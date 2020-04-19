@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
     [DataContract]
-    public partial class ModelEnergyProperties :  IEquatable<ModelEnergyProperties>, IValidatableObject
+    public partial class ModelEnergyProperties : HoneybeeObject, IEquatable<ModelEnergyProperties>, IValidatableObject
     {
 
         /// <summary>
@@ -111,16 +111,10 @@ namespace HoneybeeSchema
             this.ProgramTypes = programTypes;
             this.Schedules = schedules;
             this.ScheduleTypeLimits = scheduleTypeLimits;
+
+            this.Type = "ModelEnergyProperties";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "ModelEnergyProperties"; 
-
-
         /// <summary>
         /// Identifier for the ConstructionSet to be used for all objects lacking their own construction or a parent Room construction_set. This ConstructionSet must appear under the Model construction_sets.
         /// </summary>
@@ -128,7 +122,6 @@ namespace HoneybeeSchema
         [DataMember(Name="global_construction_set", EmitDefaultValue=false)]
         [JsonProperty("global_construction_set")]
         public string GlobalConstructionSet { get; set; }
-
         /// <summary>
         /// List of all unique ConstructionSets in the Model.
         /// </summary>
@@ -136,7 +129,6 @@ namespace HoneybeeSchema
         [DataMember(Name="construction_sets", EmitDefaultValue=false)]
         [JsonProperty("construction_sets")]
         public List<AnyOf<ConstructionSetAbridged,ConstructionSet>> ConstructionSets { get; set; }
-
         /// <summary>
         /// A list of all unique constructions in the model. This includes constructions across all Faces, Apertures, Doors, Shades, Room ConstructionSets, and the global_construction_set.
         /// </summary>
@@ -144,7 +136,6 @@ namespace HoneybeeSchema
         [DataMember(Name="constructions", EmitDefaultValue=false)]
         [JsonProperty("constructions")]
         public List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,ShadeConstruction,AirBoundaryConstructionAbridged,OpaqueConstruction,WindowConstruction,AirBoundaryConstruction>> Constructions { get; set; }
-
         /// <summary>
         /// A list of all unique materials in the model. This includes materials needed to make the Model constructions.
         /// </summary>
@@ -152,7 +143,6 @@ namespace HoneybeeSchema
         [DataMember(Name="materials", EmitDefaultValue=false)]
         [JsonProperty("materials")]
         public List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing,EnergyWindowMaterialShade>> Materials { get; set; }
-
         /// <summary>
         /// List of all unique HVAC systems in the Model.
         /// </summary>
@@ -160,7 +150,6 @@ namespace HoneybeeSchema
         [DataMember(Name="hvacs", EmitDefaultValue=false)]
         [JsonProperty("hvacs")]
         public List<IdealAirSystemAbridged> Hvacs { get; set; }
-
         /// <summary>
         /// List of all unique ProgramTypes in the Model.
         /// </summary>
@@ -168,7 +157,6 @@ namespace HoneybeeSchema
         [DataMember(Name="program_types", EmitDefaultValue=false)]
         [JsonProperty("program_types")]
         public List<AnyOf<ProgramTypeAbridged,ProgramType>> ProgramTypes { get; set; }
-
         /// <summary>
         /// A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades.
         /// </summary>
@@ -176,7 +164,6 @@ namespace HoneybeeSchema
         [DataMember(Name="schedules", EmitDefaultValue=false)]
         [JsonProperty("schedules")]
         public List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged,ScheduleRuleset,ScheduleFixedInterval>> Schedules { get; set; }
-
         /// <summary>
         /// A list of all unique ScheduleTypeLimits in the model. This all ScheduleTypeLimits needed to make the Model schedules.
         /// </summary>
@@ -184,7 +171,7 @@ namespace HoneybeeSchema
         [DataMember(Name="schedule_type_limits", EmitDefaultValue=false)]
         [JsonProperty("schedule_type_limits")]
         public List<ScheduleTypeLimit> ScheduleTypeLimits { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

@@ -9,7 +9,7 @@
     {{#generatePropertyChanged}}
     [ImplementPropertyChanged]
     {{/generatePropertyChanged}}
-    {{>visibility}} partial class {{classname}} : {{#parent}}{{{parent}}}, {{/parent}} IEquatable<{{classname}}>{{^netStandard}}{{#validatable}}, IValidatableObject{{/validatable}}{{/netStandard}}
+    {{>visibility}} partial class {{classname}} : {{#parent}}{{{parent}}}, {{/parent}}{{^parent}}HoneybeeObject, {{/parent}}IEquatable<{{classname}}>{{^netStandard}}{{#validatable}}, IValidatableObject{{/validatable}}{{/netStandard}}
     {
 
         {{#vars}}
@@ -113,11 +113,27 @@ this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}};
             {{/isReadOnly}}
             {{/isInherited}}
             {{/vars}}
+
+            // Set non-required readonly properties with defaultValue
+            {{#vars}}
+            {{^isInherited}}
+            {{^isEnum}}
+            {{^required}}
+            {{#isReadOnly}}
+            {{#defaultValue}}
+            this.{{name}} = {{{defaultValue}}};
+            {{/defaultValue}}
+            {{/isReadOnly}}
+            {{/required}}
+            {{/isEnum}}
+            {{/isInherited}}
+            {{/vars}}
         }
         
         {{#vars}}
         {{^isInherited}}
         {{^isEnum}}
+        {{^isReadOnly}}
         /// <summary>
         /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{description}}{{/description}}
         /// </summary>{{#description}}
@@ -125,11 +141,12 @@ this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}};
         [DataMember(Name="{{baseName}}", EmitDefaultValue={{#vendorExtensions.x-emit-default-value}}true{{/vendorExtensions.x-emit-default-value}}{{^vendorExtensions.x-emit-default-value}}{{#isNullable}}true{{/isNullable}}{{^isNullable}}false{{/isNullable}}{{/vendorExtensions.x-emit-default-value}})]{{#isDate}}
         [JsonConverter(typeof(OpenAPIDateConverter))]{{/isDate}}
         [JsonProperty("{{baseName}}")]
-        public {{{dataType}}} {{name}} { get; {{#isReadOnly}}private {{/isReadOnly}}set; }{{#isReadOnly}} = {{{defaultValue}}}; {{/isReadOnly}}
+        public {{{dataType}}} {{name}} { get; set; }
+        {{/isReadOnly}}
         {{/isEnum}}
         {{/isInherited}}
-
         {{/vars}}
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

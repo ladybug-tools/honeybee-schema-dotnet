@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [DataContract]
-    public partial class ProgramType : IDdEnergyBaseModel,  IEquatable<ProgramType>, IValidatableObject
+    public partial class ProgramType : IDdEnergyBaseModel, IEquatable<ProgramType>, IValidatableObject
     {
 
         /// <summary>
@@ -61,15 +61,10 @@ namespace HoneybeeSchema
             this.Infiltration = infiltration;
             this.Ventilation = ventilation;
             this.Setpoint = setpoint;
+
+            this.Type = "ProgramType";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "ProgramType"; 
-
         /// <summary>
         /// People to describe the occupancy of the program. If None, no occupancy will be assumed for the program.
         /// </summary>
@@ -77,7 +72,6 @@ namespace HoneybeeSchema
         [DataMember(Name="people", EmitDefaultValue=false)]
         [JsonProperty("people")]
         public People People { get; set; }
-
         /// <summary>
         /// Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program.
         /// </summary>
@@ -85,7 +79,6 @@ namespace HoneybeeSchema
         [DataMember(Name="lighting", EmitDefaultValue=false)]
         [JsonProperty("lighting")]
         public Lighting Lighting { get; set; }
-
         /// <summary>
         /// ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed.
         /// </summary>
@@ -93,7 +86,6 @@ namespace HoneybeeSchema
         [DataMember(Name="electric_equipment", EmitDefaultValue=false)]
         [JsonProperty("electric_equipment")]
         public ElectricEquipment ElectricEquipment { get; set; }
-
         /// <summary>
         /// GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed.
         /// </summary>
@@ -101,7 +93,6 @@ namespace HoneybeeSchema
         [DataMember(Name="gas_equipment", EmitDefaultValue=false)]
         [JsonProperty("gas_equipment")]
         public GasEquipment GasEquipment { get; set; }
-
         /// <summary>
         /// Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program.
         /// </summary>
@@ -109,7 +100,6 @@ namespace HoneybeeSchema
         [DataMember(Name="infiltration", EmitDefaultValue=false)]
         [JsonProperty("infiltration")]
         public Infiltration Infiltration { get; set; }
-
         /// <summary>
         /// Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed.
         /// </summary>
@@ -117,7 +107,6 @@ namespace HoneybeeSchema
         [DataMember(Name="ventilation", EmitDefaultValue=false)]
         [JsonProperty("ventilation")]
         public Ventilation Ventilation { get; set; }
-
         /// <summary>
         /// Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.
         /// </summary>
@@ -125,7 +114,7 @@ namespace HoneybeeSchema
         [DataMember(Name="setpoint", EmitDefaultValue=false)]
         [JsonProperty("setpoint")]
         public Setpoint Setpoint { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Construction for window objects (Aperture, Door).
     /// </summary>
     [DataContract]
-    public partial class WindowConstructionAbridged : IDdEnergyBaseModel,  IEquatable<WindowConstructionAbridged>, IValidatableObject
+    public partial class WindowConstructionAbridged : IDdEnergyBaseModel, IEquatable<WindowConstructionAbridged>, IValidatableObject
     {
 
         /// <summary>
@@ -49,6 +49,8 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             this.Layers = layers;
+
+            this.Type = "WindowConstructionAbridged";
         }
         
         /// <summary>
@@ -58,14 +60,7 @@ namespace HoneybeeSchema
         [DataMember(Name="layers", EmitDefaultValue=false)]
         [JsonProperty("layers")]
         public List<string> Layers { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "WindowConstructionAbridged"; 
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

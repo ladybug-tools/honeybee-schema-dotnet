@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// AperturePropertiesAbridged
     /// </summary>
     [DataContract]
-    public partial class AperturePropertiesAbridged :  IEquatable<AperturePropertiesAbridged>, IValidatableObject
+    public partial class AperturePropertiesAbridged : HoneybeeObject, IEquatable<AperturePropertiesAbridged>, IValidatableObject
     {
 
         /// <summary>
@@ -42,22 +42,17 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             this.Energy = energy;
+
+            this.Type = "AperturePropertiesAbridged";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "AperturePropertiesAbridged"; 
-
         /// <summary>
         /// Gets or Sets Energy
         /// </summary>
         [DataMember(Name="energy", EmitDefaultValue=false)]
         [JsonProperty("energy")]
         public ApertureEnergyPropertiesAbridged Energy { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

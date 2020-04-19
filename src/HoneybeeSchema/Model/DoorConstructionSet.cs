@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// A set of constructions for door assemblies.
     /// </summary>
     [DataContract]
-    public partial class DoorConstructionSet :  IEquatable<DoorConstructionSet>, IValidatableObject
+    public partial class DoorConstructionSet : HoneybeeObject, IEquatable<DoorConstructionSet>, IValidatableObject
     {
 
         /// <summary>
@@ -50,15 +50,10 @@ namespace HoneybeeSchema
             this.OverheadConstruction = overheadConstruction;
             this.ExteriorGlassConstruction = exteriorGlassConstruction;
             this.InteriorGlassConstruction = interiorGlassConstruction;
+
+            this.Type = "DoorConstructionSet";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "DoorConstructionSet"; 
-
         /// <summary>
         /// An OpaqueConstruction for all opaque doors with a Surface boundary condition.
         /// </summary>
@@ -66,7 +61,6 @@ namespace HoneybeeSchema
         [DataMember(Name="interior_construction", EmitDefaultValue=false)]
         [JsonProperty("interior_construction")]
         public OpaqueConstruction InteriorConstruction { get; set; }
-
         /// <summary>
         /// An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face.
         /// </summary>
@@ -74,7 +68,6 @@ namespace HoneybeeSchema
         [DataMember(Name="exterior_construction", EmitDefaultValue=false)]
         [JsonProperty("exterior_construction")]
         public OpaqueConstruction ExteriorConstruction { get; set; }
-
         /// <summary>
         /// An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face.
         /// </summary>
@@ -82,7 +75,6 @@ namespace HoneybeeSchema
         [DataMember(Name="overhead_construction", EmitDefaultValue=false)]
         [JsonProperty("overhead_construction")]
         public OpaqueConstruction OverheadConstruction { get; set; }
-
         /// <summary>
         /// A WindowConstruction for all glass doors with an Outdoors boundary condition.
         /// </summary>
@@ -90,7 +82,6 @@ namespace HoneybeeSchema
         [DataMember(Name="exterior_glass_construction", EmitDefaultValue=false)]
         [JsonProperty("exterior_glass_construction")]
         public WindowConstruction ExteriorGlassConstruction { get; set; }
-
         /// <summary>
         /// A WindowConstruction for all glass doors with a Surface boundary condition.
         /// </summary>
@@ -98,7 +89,7 @@ namespace HoneybeeSchema
         [DataMember(Name="interior_glass_construction", EmitDefaultValue=false)]
         [JsonProperty("interior_glass_construction")]
         public WindowConstruction InteriorGlassConstruction { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

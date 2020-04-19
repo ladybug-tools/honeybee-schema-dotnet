@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [DataContract]
-    public partial class Shade : IDdBaseModel,  IEquatable<Shade>, IValidatableObject
+    public partial class Shade : IDdBaseModel, IEquatable<Shade>, IValidatableObject
     {
 
         /// <summary>
@@ -52,6 +52,8 @@ namespace HoneybeeSchema
         {
             this.Geometry = geometry;
             this.Properties = properties;
+
+            this.Type = "Shade";
         }
         
         /// <summary>
@@ -61,7 +63,6 @@ namespace HoneybeeSchema
         [DataMember(Name="geometry", EmitDefaultValue=false)]
         [JsonProperty("geometry")]
         public Face3D Geometry { get; set; }
-
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
@@ -69,14 +70,7 @@ namespace HoneybeeSchema
         [DataMember(Name="properties", EmitDefaultValue=false)]
         [JsonProperty("properties")]
         public ShadePropertiesAbridged Properties { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "Shade"; 
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

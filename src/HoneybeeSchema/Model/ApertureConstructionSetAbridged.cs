@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// A set of constructions for aperture assemblies.
     /// </summary>
     [DataContract]
-    public partial class ApertureConstructionSetAbridged :  IEquatable<ApertureConstructionSetAbridged>, IValidatableObject
+    public partial class ApertureConstructionSetAbridged : HoneybeeObject, IEquatable<ApertureConstructionSetAbridged>, IValidatableObject
     {
 
         /// <summary>
@@ -48,15 +48,10 @@ namespace HoneybeeSchema
             this.WindowConstruction = windowConstruction;
             this.SkylightConstruction = skylightConstruction;
             this.OperableConstruction = operableConstruction;
+
+            this.Type = "ApertureConstructionSetAbridged";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "ApertureConstructionSetAbridged"; 
-
         /// <summary>
         /// Identifier for a WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.
         /// </summary>
@@ -64,7 +59,6 @@ namespace HoneybeeSchema
         [DataMember(Name="interior_construction", EmitDefaultValue=false)]
         [JsonProperty("interior_construction")]
         public string InteriorConstruction { get; set; }
-
         /// <summary>
         /// Identifier for a WindowConstruction for all apertures with a Surface boundary condition.
         /// </summary>
@@ -72,7 +66,6 @@ namespace HoneybeeSchema
         [DataMember(Name="window_construction", EmitDefaultValue=false)]
         [JsonProperty("window_construction")]
         public string WindowConstruction { get; set; }
-
         /// <summary>
         /// Identifier for a WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.
         /// </summary>
@@ -80,7 +73,6 @@ namespace HoneybeeSchema
         [DataMember(Name="skylight_construction", EmitDefaultValue=false)]
         [JsonProperty("skylight_construction")]
         public string SkylightConstruction { get; set; }
-
         /// <summary>
         /// Identifier for a WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property..
         /// </summary>
@@ -88,7 +80,7 @@ namespace HoneybeeSchema
         [DataMember(Name="operable_construction", EmitDefaultValue=false)]
         [JsonProperty("operable_construction")]
         public string OperableConstruction { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

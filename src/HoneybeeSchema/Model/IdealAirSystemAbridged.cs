@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Provides a model for an ideal HVAC system.
     /// </summary>
     [DataContract]
-    public partial class IdealAirSystemAbridged : IDdEnergyBaseModel,  IEquatable<IdealAirSystemAbridged>, IValidatableObject
+    public partial class IdealAirSystemAbridged : IDdEnergyBaseModel, IEquatable<IdealAirSystemAbridged>, IValidatableObject
     {
 
         /// <summary>
@@ -148,16 +148,10 @@ namespace HoneybeeSchema
             this.CoolingLimit = coolingLimit;
             this.HeatingAvailability = heatingAvailability;
             this.CoolingAvailability = coolingAvailability;
+
+            this.Type = "IdealAirSystemAbridged";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "IdealAirSystemAbridged"; 
-
-
         /// <summary>
         /// Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the zone.
         /// </summary>
@@ -165,7 +159,6 @@ namespace HoneybeeSchema
         [DataMember(Name="demand_controlled_ventilation", EmitDefaultValue=false)]
         [JsonProperty("demand_controlled_ventilation")]
         public bool DemandControlledVentilation { get; set; }
-
         /// <summary>
         /// A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.
         /// </summary>
@@ -173,7 +166,6 @@ namespace HoneybeeSchema
         [DataMember(Name="sensible_heat_recovery", EmitDefaultValue=false)]
         [JsonProperty("sensible_heat_recovery")]
         public double SensibleHeatRecovery { get; set; }
-
         /// <summary>
         /// A number between 0 and 1 for the effectiveness of latent heat recovery within the system.
         /// </summary>
@@ -181,7 +173,6 @@ namespace HoneybeeSchema
         [DataMember(Name="latent_heat_recovery", EmitDefaultValue=false)]
         [JsonProperty("latent_heat_recovery")]
         public double LatentHeatRecovery { get; set; }
-
         /// <summary>
         /// A number for the maximum heating supply air temperature [C].
         /// </summary>
@@ -189,7 +180,6 @@ namespace HoneybeeSchema
         [DataMember(Name="heating_air_temperature", EmitDefaultValue=false)]
         [JsonProperty("heating_air_temperature")]
         public double HeatingAirTemperature { get; set; }
-
         /// <summary>
         /// A number for the minimum cooling supply air temperature [C].
         /// </summary>
@@ -197,7 +187,6 @@ namespace HoneybeeSchema
         [DataMember(Name="cooling_air_temperature", EmitDefaultValue=false)]
         [JsonProperty("cooling_air_temperature")]
         public double CoolingAirTemperature { get; set; }
-
         /// <summary>
         /// A number for the maximum heating capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit boject to indicate no upper limit to the heating capacity.
         /// </summary>
@@ -205,7 +194,6 @@ namespace HoneybeeSchema
         [DataMember(Name="heating_limit", EmitDefaultValue=false)]
         [JsonProperty("heating_limit")]
         public AnyOf<NoLimit,Autosize,double> HeatingLimit { get; set; }
-
         /// <summary>
         /// A number for the maximum cooling capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit boject to indicate no upper limit to the cooling capacity.
         /// </summary>
@@ -213,7 +201,6 @@ namespace HoneybeeSchema
         [DataMember(Name="cooling_limit", EmitDefaultValue=false)]
         [JsonProperty("cooling_limit")]
         public AnyOf<NoLimit,Autosize,double> CoolingLimit { get; set; }
-
         /// <summary>
         /// An optional identifier of a schedule to set the availability of heating over the course of the simulation.
         /// </summary>
@@ -221,7 +208,6 @@ namespace HoneybeeSchema
         [DataMember(Name="heating_availability", EmitDefaultValue=false)]
         [JsonProperty("heating_availability")]
         public string HeatingAvailability { get; set; }
-
         /// <summary>
         /// An optional identifier of a schedule to set the availability of cooling over the course of the simulation.
         /// </summary>
@@ -229,7 +215,7 @@ namespace HoneybeeSchema
         [DataMember(Name="cooling_availability", EmitDefaultValue=false)]
         [JsonProperty("cooling_availability")]
         public string CoolingAvailability { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// ModelProperties
     /// </summary>
     [DataContract]
-    public partial class ModelProperties :  IEquatable<ModelProperties>, IValidatableObject
+    public partial class ModelProperties : HoneybeeObject, IEquatable<ModelProperties>, IValidatableObject
     {
 
         /// <summary>
@@ -42,22 +42,17 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             this.Energy = energy;
+
+            this.Type = "ModelProperties";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "ModelProperties"; 
-
         /// <summary>
         /// Gets or Sets Energy
         /// </summary>
         [DataMember(Name="energy", EmitDefaultValue=false)]
         [JsonProperty("energy")]
         public ModelEnergyProperties Energy { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

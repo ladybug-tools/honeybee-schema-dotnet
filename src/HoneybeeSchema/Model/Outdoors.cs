@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
     [DataContract]
-    public partial class Outdoors :  IEquatable<Outdoors>, IValidatableObject
+    public partial class Outdoors : HoneybeeObject, IEquatable<Outdoors>, IValidatableObject
     {
 
         /// <summary>
@@ -62,15 +62,10 @@ namespace HoneybeeSchema
                 this.WindExposure = windExposure;
             }
             this.ViewFactor = viewFactor;
+
+            this.Type = "Outdoors";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "Outdoors"; 
-
         /// <summary>
         /// A boolean noting whether the boundary is exposed to sun.
         /// </summary>
@@ -78,7 +73,6 @@ namespace HoneybeeSchema
         [DataMember(Name="sun_exposure", EmitDefaultValue=false)]
         [JsonProperty("sun_exposure")]
         public bool SunExposure { get; set; }
-
         /// <summary>
         /// A boolean noting whether the boundary is exposed to wind.
         /// </summary>
@@ -86,7 +80,6 @@ namespace HoneybeeSchema
         [DataMember(Name="wind_exposure", EmitDefaultValue=false)]
         [JsonProperty("wind_exposure")]
         public bool WindExposure { get; set; }
-
         /// <summary>
         /// A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated.
         /// </summary>
@@ -94,7 +87,7 @@ namespace HoneybeeSchema
         [DataMember(Name="view_factor", EmitDefaultValue=false)]
         [JsonProperty("view_factor")]
         public AnyOf<Autocalculate,double> ViewFactor { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

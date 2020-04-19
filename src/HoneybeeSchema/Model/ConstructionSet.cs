@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// A set of constructions for different surface types and boundary conditions.
     /// </summary>
     [DataContract]
-    public partial class ConstructionSet : IDdEnergyBaseModel,  IEquatable<ConstructionSet>, IValidatableObject
+    public partial class ConstructionSet : IDdEnergyBaseModel, IEquatable<ConstructionSet>, IValidatableObject
     {
 
         /// <summary>
@@ -61,15 +61,10 @@ namespace HoneybeeSchema
             this.DoorSet = doorSet;
             this.ShadeConstruction = shadeConstruction;
             this.AirBoundaryConstruction = airBoundaryConstruction;
+
+            this.Type = "ConstructionSet";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "ConstructionSet"; 
-
         /// <summary>
         /// A WallConstructionSet object for this ConstructionSet.
         /// </summary>
@@ -77,7 +72,6 @@ namespace HoneybeeSchema
         [DataMember(Name="wall_set", EmitDefaultValue=false)]
         [JsonProperty("wall_set")]
         public WallConstructionSet WallSet { get; set; }
-
         /// <summary>
         /// A FloorConstructionSet object for this ConstructionSet.
         /// </summary>
@@ -85,7 +79,6 @@ namespace HoneybeeSchema
         [DataMember(Name="floor_set", EmitDefaultValue=false)]
         [JsonProperty("floor_set")]
         public FloorConstructionSet FloorSet { get; set; }
-
         /// <summary>
         /// A RoofCeilingConstructionSet object for this ConstructionSet.
         /// </summary>
@@ -93,7 +86,6 @@ namespace HoneybeeSchema
         [DataMember(Name="roof_ceiling_set", EmitDefaultValue=false)]
         [JsonProperty("roof_ceiling_set")]
         public RoofCeilingConstructionSet RoofCeilingSet { get; set; }
-
         /// <summary>
         /// A ApertureConstructionSet object for this ConstructionSet.
         /// </summary>
@@ -101,7 +93,6 @@ namespace HoneybeeSchema
         [DataMember(Name="aperture_set", EmitDefaultValue=false)]
         [JsonProperty("aperture_set")]
         public ApertureConstructionSet ApertureSet { get; set; }
-
         /// <summary>
         /// A DoorConstructionSet object for this ConstructionSet.
         /// </summary>
@@ -109,7 +100,6 @@ namespace HoneybeeSchema
         [DataMember(Name="door_set", EmitDefaultValue=false)]
         [JsonProperty("door_set")]
         public DoorConstructionSet DoorSet { get; set; }
-
         /// <summary>
         /// A ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned.
         /// </summary>
@@ -117,7 +107,6 @@ namespace HoneybeeSchema
         [DataMember(Name="shade_construction", EmitDefaultValue=false)]
         [JsonProperty("shade_construction")]
         public ShadeConstruction ShadeConstruction { get; set; }
-
         /// <summary>
         /// An AirBoundaryConstruction to set the properties of Faces with an AirBoundary type.
         /// </summary>
@@ -125,7 +114,7 @@ namespace HoneybeeSchema
         [DataMember(Name="air_boundary_construction", EmitDefaultValue=false)]
         [JsonProperty("air_boundary_construction")]
         public AirBoundaryConstruction AirBoundaryConstruction { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

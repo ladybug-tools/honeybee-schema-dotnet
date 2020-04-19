@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Describe a single glass pane corresponding to a layer in a window construction.
     /// </summary>
     [DataContract]
-    public partial class EnergyWindowMaterialGlazing : IDdEnergyBaseModel,  IEquatable<EnergyWindowMaterialGlazing>, IValidatableObject
+    public partial class EnergyWindowMaterialGlazing : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialGlazing>, IValidatableObject
     {
 
         /// <summary>
@@ -161,15 +161,10 @@ namespace HoneybeeSchema
             {
                 this.SolarDiffusing = solarDiffusing;
             }
+
+            this.Type = "EnergyWindowMaterialGlazing";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "EnergyWindowMaterialGlazing"; 
-
         /// <summary>
         /// The surface-to-surface of the glass in meters. Default value is 0.003.
         /// </summary>
@@ -177,7 +172,6 @@ namespace HoneybeeSchema
         [DataMember(Name="thickness", EmitDefaultValue=false)]
         [JsonProperty("thickness")]
         public double Thickness { get; set; }
-
         /// <summary>
         /// Transmittance of solar radiation through the glass at normal incidence. Default value is 0.85 for clear glass.
         /// </summary>
@@ -185,7 +179,6 @@ namespace HoneybeeSchema
         [DataMember(Name="solar_transmittance", EmitDefaultValue=false)]
         [JsonProperty("solar_transmittance")]
         public double SolarTransmittance { get; set; }
-
         /// <summary>
         /// Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default value is 0.075 for clear glass.
         /// </summary>
@@ -193,7 +186,6 @@ namespace HoneybeeSchema
         [DataMember(Name="solar_reflectance", EmitDefaultValue=false)]
         [JsonProperty("solar_reflectance")]
         public double SolarReflectance { get; set; }
-
         /// <summary>
         /// Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum.
         /// </summary>
@@ -201,7 +193,6 @@ namespace HoneybeeSchema
         [DataMember(Name="solar_reflectance_back", EmitDefaultValue=false)]
         [JsonProperty("solar_reflectance_back")]
         public double SolarReflectanceBack { get; set; }
-
         /// <summary>
         /// Transmittance of visible light through the glass at normal incidence. Default value is 0.9 for clear glass.
         /// </summary>
@@ -209,7 +200,6 @@ namespace HoneybeeSchema
         [DataMember(Name="visible_transmittance", EmitDefaultValue=false)]
         [JsonProperty("visible_transmittance")]
         public double VisibleTransmittance { get; set; }
-
         /// <summary>
         /// Reflectance of visible light off of the front side of the glass at normal incidence. Default value is 0.075 for clear glass.
         /// </summary>
@@ -217,7 +207,6 @@ namespace HoneybeeSchema
         [DataMember(Name="visible_reflectance", EmitDefaultValue=false)]
         [JsonProperty("visible_reflectance")]
         public double VisibleReflectance { get; set; }
-
         /// <summary>
         /// Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye.
         /// </summary>
@@ -225,7 +214,6 @@ namespace HoneybeeSchema
         [DataMember(Name="visible_reflectance_back", EmitDefaultValue=false)]
         [JsonProperty("visible_reflectance_back")]
         public double VisibleReflectanceBack { get; set; }
-
         /// <summary>
         /// Long-wave transmittance at normal incidence.
         /// </summary>
@@ -233,7 +221,6 @@ namespace HoneybeeSchema
         [DataMember(Name="infrared_transmittance", EmitDefaultValue=false)]
         [JsonProperty("infrared_transmittance")]
         public double InfraredTransmittance { get; set; }
-
         /// <summary>
         /// Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.
         /// </summary>
@@ -241,7 +228,6 @@ namespace HoneybeeSchema
         [DataMember(Name="emissivity", EmitDefaultValue=false)]
         [JsonProperty("emissivity")]
         public double Emissivity { get; set; }
-
         /// <summary>
         /// Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.
         /// </summary>
@@ -249,7 +235,6 @@ namespace HoneybeeSchema
         [DataMember(Name="emissivity_back", EmitDefaultValue=false)]
         [JsonProperty("emissivity_back")]
         public double EmissivityBack { get; set; }
-
         /// <summary>
         /// Thermal conductivity of the glass in W/(m-K). Default value is 0.9, which is  typical for clear glass without a low-e coating.
         /// </summary>
@@ -257,7 +242,6 @@ namespace HoneybeeSchema
         [DataMember(Name="conductivity", EmitDefaultValue=false)]
         [JsonProperty("conductivity")]
         public double Conductivity { get; set; }
-
         /// <summary>
         /// Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean.
         /// </summary>
@@ -265,7 +249,6 @@ namespace HoneybeeSchema
         [DataMember(Name="dirt_correction", EmitDefaultValue=false)]
         [JsonProperty("dirt_correction")]
         public double DirtCorrection { get; set; }
-
         /// <summary>
         /// Takes values True and False. If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.
         /// </summary>
@@ -273,7 +256,7 @@ namespace HoneybeeSchema
         [DataMember(Name="solar_diffusing", EmitDefaultValue=false)]
         [JsonProperty("solar_diffusing")]
         public bool SolarDiffusing { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

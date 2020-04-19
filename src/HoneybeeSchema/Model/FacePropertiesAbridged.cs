@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// FacePropertiesAbridged
     /// </summary>
     [DataContract]
-    public partial class FacePropertiesAbridged :  IEquatable<FacePropertiesAbridged>, IValidatableObject
+    public partial class FacePropertiesAbridged : HoneybeeObject, IEquatable<FacePropertiesAbridged>, IValidatableObject
     {
 
         /// <summary>
@@ -42,22 +42,17 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             this.Energy = energy;
+
+            this.Type = "FacePropertiesAbridged";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "FacePropertiesAbridged"; 
-
         /// <summary>
         /// Gets or Sets Energy
         /// </summary>
         [DataMember(Name="energy", EmitDefaultValue=false)]
         [JsonProperty("energy")]
         public FaceEnergyPropertiesAbridged Energy { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

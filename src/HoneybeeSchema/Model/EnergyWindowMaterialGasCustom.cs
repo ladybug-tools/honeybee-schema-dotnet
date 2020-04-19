@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Create single layer of custom gas.
     /// </summary>
     [DataContract]
-    public partial class EnergyWindowMaterialGasCustom : IDdEnergyBaseModel,  IEquatable<EnergyWindowMaterialGasCustom>, IValidatableObject
+    public partial class EnergyWindowMaterialGasCustom : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialGasCustom>, IValidatableObject
     {
 
         /// <summary>
@@ -127,6 +127,8 @@ namespace HoneybeeSchema
             {
                 this.SpecificHeatCoeffC = specificHeatCoeffC;
             }
+
+            this.Type = "EnergyWindowMaterialGasCustom";
         }
         
         /// <summary>
@@ -136,7 +138,6 @@ namespace HoneybeeSchema
         [DataMember(Name="conductivity_coeff_a", EmitDefaultValue=false)]
         [JsonProperty("conductivity_coeff_a")]
         public double ConductivityCoeffA { get; set; }
-
         /// <summary>
         /// The A coefficient for gas viscosity in kg/(m-s).
         /// </summary>
@@ -144,7 +145,6 @@ namespace HoneybeeSchema
         [DataMember(Name="viscosity_coeff_a", EmitDefaultValue=false)]
         [JsonProperty("viscosity_coeff_a")]
         public double ViscosityCoeffA { get; set; }
-
         /// <summary>
         /// The A coefficient for gas specific heat in J/(kg-K).
         /// </summary>
@@ -152,7 +152,6 @@ namespace HoneybeeSchema
         [DataMember(Name="specific_heat_coeff_a", EmitDefaultValue=false)]
         [JsonProperty("specific_heat_coeff_a")]
         public double SpecificHeatCoeffA { get; set; }
-
         /// <summary>
         /// The specific heat ratio for gas.
         /// </summary>
@@ -160,7 +159,6 @@ namespace HoneybeeSchema
         [DataMember(Name="specific_heat_ratio", EmitDefaultValue=false)]
         [JsonProperty("specific_heat_ratio")]
         public double SpecificHeatRatio { get; set; }
-
         /// <summary>
         /// The molecular weight for gas in g/mol.
         /// </summary>
@@ -168,14 +166,6 @@ namespace HoneybeeSchema
         [DataMember(Name="molecular_weight", EmitDefaultValue=false)]
         [JsonProperty("molecular_weight")]
         public double MolecularWeight { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "EnergyWindowMaterialGasCustom"; 
-
         /// <summary>
         /// Thickness of the gas layer in meters. Default value is 0.0125.
         /// </summary>
@@ -183,7 +173,6 @@ namespace HoneybeeSchema
         [DataMember(Name="thickness", EmitDefaultValue=false)]
         [JsonProperty("thickness")]
         public double Thickness { get; set; }
-
         /// <summary>
         /// The B coefficient for gas conductivity in W/(m-K2).
         /// </summary>
@@ -191,7 +180,6 @@ namespace HoneybeeSchema
         [DataMember(Name="conductivity_coeff_b", EmitDefaultValue=false)]
         [JsonProperty("conductivity_coeff_b")]
         public double ConductivityCoeffB { get; set; }
-
         /// <summary>
         /// The C coefficient for gas conductivity in W/(m-K3).
         /// </summary>
@@ -199,7 +187,6 @@ namespace HoneybeeSchema
         [DataMember(Name="conductivity_coeff_c", EmitDefaultValue=false)]
         [JsonProperty("conductivity_coeff_c")]
         public double ConductivityCoeffC { get; set; }
-
         /// <summary>
         /// The B coefficient for gas viscosity in kg/(m-s-K).
         /// </summary>
@@ -207,7 +194,6 @@ namespace HoneybeeSchema
         [DataMember(Name="viscosity_coeff_b", EmitDefaultValue=false)]
         [JsonProperty("viscosity_coeff_b")]
         public double ViscosityCoeffB { get; set; }
-
         /// <summary>
         /// The C coefficient for gas viscosity in kg/(m-s-K2).
         /// </summary>
@@ -215,7 +201,6 @@ namespace HoneybeeSchema
         [DataMember(Name="viscosity_coeff_c", EmitDefaultValue=false)]
         [JsonProperty("viscosity_coeff_c")]
         public double ViscosityCoeffC { get; set; }
-
         /// <summary>
         /// The B coefficient for gas specific heat in J/(kg-K2).
         /// </summary>
@@ -223,7 +208,6 @@ namespace HoneybeeSchema
         [DataMember(Name="specific_heat_coeff_b", EmitDefaultValue=false)]
         [JsonProperty("specific_heat_coeff_b")]
         public double SpecificHeatCoeffB { get; set; }
-
         /// <summary>
         /// The C coefficient for gas specific heat in J/(kg-K3).
         /// </summary>
@@ -231,7 +215,7 @@ namespace HoneybeeSchema
         [DataMember(Name="specific_heat_coeff_c", EmitDefaultValue=false)]
         [JsonProperty("specific_heat_coeff_c")]
         public double SpecificHeatCoeffC { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

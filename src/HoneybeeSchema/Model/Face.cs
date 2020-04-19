@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [DataContract]
-    public partial class Face : IDdBaseModel,  IEquatable<Face>, IValidatableObject
+    public partial class Face : IDdBaseModel, IEquatable<Face>, IValidatableObject
     {
 
         /// <summary>
@@ -101,6 +101,8 @@ namespace HoneybeeSchema
             this.Doors = doors;
             this.IndoorShades = indoorShades;
             this.OutdoorShades = outdoorShades;
+
+            this.Type = "Face";
         }
         
         /// <summary>
@@ -110,15 +112,12 @@ namespace HoneybeeSchema
         [DataMember(Name="geometry", EmitDefaultValue=false)]
         [JsonProperty("geometry")]
         public Face3D Geometry { get; set; }
-
-
         /// <summary>
         /// Gets or Sets BoundaryCondition
         /// </summary>
         [DataMember(Name="boundary_condition", EmitDefaultValue=false)]
         [JsonProperty("boundary_condition")]
         public AnyOf<Ground,Outdoors,Adiabatic,Surface> BoundaryCondition { get; set; }
-
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
@@ -126,14 +125,6 @@ namespace HoneybeeSchema
         [DataMember(Name="properties", EmitDefaultValue=false)]
         [JsonProperty("properties")]
         public FacePropertiesAbridged Properties { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "Face"; 
-
         /// <summary>
         /// Apertures assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid.
         /// </summary>
@@ -141,7 +132,6 @@ namespace HoneybeeSchema
         [DataMember(Name="apertures", EmitDefaultValue=false)]
         [JsonProperty("apertures")]
         public List<Aperture> Apertures { get; set; }
-
         /// <summary>
         /// Doors assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid.
         /// </summary>
@@ -149,7 +139,6 @@ namespace HoneybeeSchema
         [DataMember(Name="doors", EmitDefaultValue=false)]
         [JsonProperty("doors")]
         public List<Door> Doors { get; set; }
-
         /// <summary>
         /// Shades assigned to the interior side of this object.
         /// </summary>
@@ -157,7 +146,6 @@ namespace HoneybeeSchema
         [DataMember(Name="indoor_shades", EmitDefaultValue=false)]
         [JsonProperty("indoor_shades")]
         public List<Shade> IndoorShades { get; set; }
-
         /// <summary>
         /// Shades assigned to the exterior side of this object (eg. balcony, overhang).
         /// </summary>
@@ -165,7 +153,7 @@ namespace HoneybeeSchema
         [DataMember(Name="outdoor_shades", EmitDefaultValue=false)]
         [JsonProperty("outdoor_shades")]
         public List<Shade> OutdoorShades { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
