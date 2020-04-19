@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using HB = HoneybeeSchema;
+using HBEng = HoneybeeSchema.Energy;
 
 namespace HoneybeeSchema.Helper
 {
@@ -98,13 +99,13 @@ namespace HoneybeeSchema.Helper
 
 
         //Window Materials load from honeybee\honeybee_energy_standards\data\constructions\window_material.json
-        private static IEnumerable<HB.IEnergyWindowMaterial> _standardsWindowMaterials;
-        public static IEnumerable<HB.IEnergyWindowMaterial> StandardsWindowMaterials =>
+        private static IEnumerable<HBEng.IMaterial> _standardsWindowMaterials;
+        public static IEnumerable<HBEng.IMaterial> StandardsWindowMaterials =>
             _standardsWindowMaterials = _standardsWindowMaterials ?? LoadWindowMaterials(Path.Combine(ConstructionsFolder, "window_material.json"));
 
         //                 load from honeybee\honeybee_energy_standards\data\constructions\opaque_material.json
-        private static IEnumerable<HB.IEnergyMaterial> _standardsOpaqueMaterials;
-        public static IEnumerable<HB.IEnergyMaterial> StandardsOpaqueMaterials =>
+        private static IEnumerable<HBEng.IMaterial> _standardsOpaqueMaterials;
+        public static IEnumerable<HBEng.IMaterial> StandardsOpaqueMaterials =>
             _standardsOpaqueMaterials = _standardsOpaqueMaterials ?? LoadOpqueMaterials(Path.Combine(ConstructionsFolder, "opaque_material.json"));
 
         //Default Model Energy Property
@@ -301,13 +302,13 @@ namespace HoneybeeSchema.Helper
 
         }
 
-        public static List<HB.IEnergyWindowMaterial> LoadWindowMaterials(string windowMaterialJsonFile)
+        public static List<HBEng.IMaterial> LoadWindowMaterials(string windowMaterialJsonFile)
         {
             var jsonFile = windowMaterialJsonFile;
             if (!File.Exists(jsonFile))
                 throw new ArgumentException($"Invalid file: {jsonFile}");
 
-            var materials = new List<HB.IEnergyWindowMaterial>();
+            var materials = new List<HBEng.IMaterial>();
 
 
             using (var file = File.OpenText(jsonFile))
@@ -351,13 +352,13 @@ namespace HoneybeeSchema.Helper
             }
         }
 
-        public static List<HB.IEnergyMaterial> LoadOpqueMaterials(string opaqueMaterialJsonFile)
+        public static List<HBEng.IMaterial> LoadOpqueMaterials(string opaqueMaterialJsonFile)
         {
             var jsonFile = opaqueMaterialJsonFile;
             if (!File.Exists(jsonFile))
                 throw new ArgumentException($"Invalid file: {jsonFile}");
 
-            var materials = new List<HB.IEnergyMaterial>();
+            var materials = new List<HBEng.IMaterial>();
 
             using (var file = File.OpenText(jsonFile))
             using (var reader = new JsonTextReader(file))
@@ -449,7 +450,7 @@ namespace HoneybeeSchema.Helper
             //    throw new ArgumentNullException($"Failed to find the window construction {name}");
             //return obj;
         }
-        public static HB.IEnergyMaterial GetOpaqueMaterialByIdentifier(string identifier)
+        public static HBEng.IMaterial GetOpaqueMaterialByIdentifier(string identifier)
         {
             var lib = EnergyLibrary.StandardsOpaqueMaterials;
             var obj = lib.FirstOrDefault(_ => _.Identifier == identifier);
@@ -457,7 +458,7 @@ namespace HoneybeeSchema.Helper
                 throw new ArgumentNullException($"Failed to find the opaque material {identifier}");
             return obj;
         }
-        public static HB.IEnergyWindowMaterial GetWindowMaterialByIdentifier(string identifier)
+        public static HBEng.IMaterial GetWindowMaterialByIdentifier(string identifier)
         {
             var lib = EnergyLibrary.StandardsWindowMaterials;
             var obj = lib.FirstOrDefault(_ => _.Identifier == identifier);
@@ -466,11 +467,11 @@ namespace HoneybeeSchema.Helper
             return obj;
         }
 
-        public static List<HB.IEnergyMaterial> GetConstructionMaterials(HB.OpaqueConstructionAbridged construction)
+        public static List<HBEng.IMaterial> GetConstructionMaterials(HB.OpaqueConstructionAbridged construction)
         {
             return construction.Layers.Select(_ => GetOpaqueMaterialByIdentifier(_)).ToList();
         }
-        public static List<HB.IEnergyWindowMaterial> GetConstructionMaterials(HB.WindowConstructionAbridged construction)
+        public static List<HBEng.IMaterial> GetConstructionMaterials(HB.WindowConstructionAbridged construction)
         {
             return construction.Layers.Select(_ => GetWindowMaterialByIdentifier(_)).ToList();
         }
