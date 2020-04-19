@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Used to specify sky conditions on a design day.
     /// </summary>
     [DataContract]
-    public partial class ASHRAEClearSky :  IEquatable<ASHRAEClearSky>, IValidatableObject
+    public partial class ASHRAEClearSky : SkyCondition,  IEquatable<ASHRAEClearSky>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ASHRAEClearSky" /> class.
         /// </summary>
@@ -38,50 +39,18 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ASHRAEClearSky" /> class.
         /// </summary>
+        /// <param name="clearness">Value between 0 and 1.2 that will get multiplied by the irradinace to correct for factors like elevation above sea level..</param>
         /// <param name="date">A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case). (required).</param>
-        /// <param name="clearness">Value between 0 and 1.2 that will get multiplied by the irradinace to correct for factors like elevation above sea level. (required).</param>
         /// <param name="daylightSavings">Boolean to indicate whether daylight savings time is active on the design day. (default to false).</param>
-        public ASHRAEClearSky(List<int> date, double clearness, bool daylightSavings = false)
+        public ASHRAEClearSky
+        (
+            List<int> date, // Required parameters
+            double clearness= default, bool daylightSavings = false// Optional parameters
+        ) : base(date: date, daylightSavings: daylightSavings )// BaseClass
         {
-            // to ensure "date" is required (not null)
-            if (date == null)
-            {
-                throw new InvalidDataException("date is a required property for ASHRAEClearSky and cannot be null");
-            }
-            else
-            {
-                this.Date = date;
-            }
-            
-            // to ensure "clearness" is required (not null)
-            if (clearness == null)
-            {
-                throw new InvalidDataException("clearness is a required property for ASHRAEClearSky and cannot be null");
-            }
-            else
-            {
-                this.Clearness = clearness;
-            }
-            
-            // use default value if no "daylightSavings" provided
-            if (daylightSavings == null)
-            {
-                this.DaylightSavings = false;
-            }
-            else
-            {
-                this.DaylightSavings = daylightSavings;
-            }
+            this.Clearness = clearness;
         }
         
-        /// <summary>
-        /// A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).
-        /// </summary>
-        /// <value>A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</value>
-        [DataMember(Name="date", EmitDefaultValue=false)]
-        [JsonProperty("date")]
-        public List<int> Date { get; set; }
-
         /// <summary>
         /// Value between 0 and 1.2 that will get multiplied by the irradinace to correct for factors like elevation above sea level.
         /// </summary>
@@ -91,19 +60,11 @@ namespace HoneybeeSchema
         public double Clearness { get; set; }
 
         /// <summary>
-        /// Boolean to indicate whether daylight savings time is active on the design day.
-        /// </summary>
-        /// <value>Boolean to indicate whether daylight savings time is active on the design day.</value>
-        [DataMember(Name="daylight_savings", EmitDefaultValue=false)]
-        [JsonProperty("daylight_savings")]
-        public bool DaylightSavings { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "ASHRAEClearSky"; 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -113,9 +74,8 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class ASHRAEClearSky {\n");
-            sb.Append("  Date: ").Append(Date).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Clearness: ").Append(Clearness).Append("\n");
-            sb.Append("  DaylightSavings: ").Append(DaylightSavings).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -125,7 +85,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -160,23 +120,12 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Date == input.Date ||
-                    this.Date != null &&
-                    input.Date != null &&
-                    this.Date.SequenceEqual(input.Date)
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Clearness == input.Clearness ||
                     (this.Clearness != null &&
                     this.Clearness.Equals(input.Clearness))
-                ) && 
-                (
-                    this.DaylightSavings == input.DaylightSavings ||
-                    (this.DaylightSavings != null &&
-                    this.DaylightSavings.Equals(input.DaylightSavings))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
@@ -192,13 +141,9 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Date != null)
-                    hashCode = hashCode * 59 + this.Date.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Clearness != null)
                     hashCode = hashCode * 59 + this.Clearness.GetHashCode();
-                if (this.DaylightSavings != null)
-                    hashCode = hashCode * 59 + this.DaylightSavings.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
@@ -212,6 +157,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // Clearness (double) maximum
             if(this.Clearness > (double)1.2)
             {

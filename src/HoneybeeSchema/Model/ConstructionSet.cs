@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// A set of constructions for different surface types and boundary conditions.
     /// </summary>
     [DataContract]
-    public partial class ConstructionSet :  IEquatable<ConstructionSet>, IValidatableObject
+    public partial class ConstructionSet : IDdEnergyBaseModel,  IEquatable<ConstructionSet>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructionSet" /> class.
         /// </summary>
@@ -38,9 +39,6 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructionSet" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
-        /// <param name="type">type (default to &quot;ConstructionSet&quot;).</param>
         /// <param name="wallSet">A WallConstructionSet object for this ConstructionSet..</param>
         /// <param name="floorSet">A FloorConstructionSet object for this ConstructionSet..</param>
         /// <param name="roofCeilingSet">A RoofCeilingConstructionSet object for this ConstructionSet..</param>
@@ -48,28 +46,14 @@ namespace HoneybeeSchema
         /// <param name="doorSet">A DoorConstructionSet object for this ConstructionSet..</param>
         /// <param name="shadeConstruction">A ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned..</param>
         /// <param name="airBoundaryConstruction">An AirBoundaryConstruction to set the properties of Faces with an AirBoundary type..</param>
-        public ConstructionSet(string identifier, string displayName = default, string type = "ConstructionSet", WallConstructionSet wallSet = default, FloorConstructionSet floorSet = default, RoofCeilingConstructionSet roofCeilingSet = default, ApertureConstructionSet apertureSet = default, DoorConstructionSet doorSet = default, ShadeConstruction shadeConstruction = default, AirBoundaryConstruction airBoundaryConstruction = default)
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        public ConstructionSet
+        (
+            string identifier, // Required parameters
+            WallConstructionSet wallSet= default, FloorConstructionSet floorSet= default, RoofCeilingConstructionSet roofCeilingSet= default, ApertureConstructionSet apertureSet= default, DoorConstructionSet doorSet= default, ShadeConstruction shadeConstruction= default, AirBoundaryConstruction airBoundaryConstruction= default, string displayName= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for ConstructionSet and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
-            this.DisplayName = displayName;
-            // use default value if no "type" provided
-            if (type == null)
-            {
-                this.Type = "ConstructionSet";
-            }
-            else
-            {
-                this.Type = type;
-            }
             this.WallSet = wallSet;
             this.FloorSet = floorSet;
             this.RoofCeilingSet = roofCeilingSet;
@@ -80,27 +64,11 @@ namespace HoneybeeSchema
         }
         
         /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
-        public string Identifier { get; set; }
-
-        /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public string Type { get; private set; } = "ConstructionSet"; 
 
         /// <summary>
         /// A WallConstructionSet object for this ConstructionSet.
@@ -166,8 +134,7 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class ConstructionSet {\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  WallSet: ").Append(WallSet).Append("\n");
             sb.Append("  FloorSet: ").Append(FloorSet).Append("\n");
@@ -184,7 +151,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -219,52 +186,42 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.WallSet == input.WallSet ||
                     (this.WallSet != null &&
                     this.WallSet.Equals(input.WallSet))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.FloorSet == input.FloorSet ||
                     (this.FloorSet != null &&
                     this.FloorSet.Equals(input.FloorSet))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.RoofCeilingSet == input.RoofCeilingSet ||
                     (this.RoofCeilingSet != null &&
                     this.RoofCeilingSet.Equals(input.RoofCeilingSet))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ApertureSet == input.ApertureSet ||
                     (this.ApertureSet != null &&
                     this.ApertureSet.Equals(input.ApertureSet))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DoorSet == input.DoorSet ||
                     (this.DoorSet != null &&
                     this.DoorSet.Equals(input.DoorSet))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ShadeConstruction == input.ShadeConstruction ||
                     (this.ShadeConstruction != null &&
                     this.ShadeConstruction.Equals(input.ShadeConstruction))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.AirBoundaryConstruction == input.AirBoundaryConstruction ||
                     (this.AirBoundaryConstruction != null &&
@@ -280,11 +237,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.WallSet != null)
@@ -312,18 +265,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // Type (string) pattern
             Regex regexType = new Regex(@"^ConstructionSet$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)

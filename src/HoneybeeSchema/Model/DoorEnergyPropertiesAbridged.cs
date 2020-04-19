@@ -30,11 +30,16 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class DoorEnergyPropertiesAbridged :  IEquatable<DoorEnergyPropertiesAbridged>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DoorEnergyPropertiesAbridged" /> class.
         /// </summary>
         /// <param name="construction">Identifier of an OpaqueConstruction or WindowConstruction for the door. Note that the host door must have the is_glass property set to True to assign a WindowConstruction. If None, the construction is set by the parent Room construction_set or the Model global_construction_set..</param>
-        public DoorEnergyPropertiesAbridged(string construction = default)
+        public DoorEnergyPropertiesAbridged
+        (
+            // Required parameters
+            string construction= default// Optional parameters
+        )// BaseClass
         {
             this.Construction = construction;
         }
@@ -44,7 +49,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "DoorEnergyPropertiesAbridged"; 
 
         /// <summary>
         /// Identifier of an OpaqueConstruction or WindowConstruction for the door. Note that the host door must have the is_glass property set to True to assign a WindowConstruction. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.

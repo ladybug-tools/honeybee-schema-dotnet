@@ -30,6 +30,7 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class ModelEnergyProperties :  IEquatable<ModelEnergyProperties>, IValidatableObject
     {
+
         /// <summary>
         /// Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms.
         /// </summary>
@@ -87,7 +88,11 @@ namespace HoneybeeSchema
         /// <param name="programTypes">List of all unique ProgramTypes in the Model..</param>
         /// <param name="schedules">A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades..</param>
         /// <param name="scheduleTypeLimits">A list of all unique ScheduleTypeLimits in the model. This all ScheduleTypeLimits needed to make the Model schedules..</param>
-        public ModelEnergyProperties(TerrainTypeEnum? terrainType = TerrainTypeEnum.City, string globalConstructionSet = default, List<ConstructionSetAbridged> constructionSets = default, List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,ShadeConstruction,AirBoundaryConstructionAbridged>> constructions = default, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing,EnergyWindowMaterialShade>> materials = default, List<IdealAirSystemAbridged> hvacs = default, List<ProgramTypeAbridged> programTypes = default, List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged>> schedules = default, List<ScheduleTypeLimit> scheduleTypeLimits = default)
+        public ModelEnergyProperties
+        (
+            // Required parameters
+            TerrainTypeEnum? terrainType = TerrainTypeEnum.City, string globalConstructionSet= default, List<AnyOf<ConstructionSetAbridged,ConstructionSet>> constructionSets= default, List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,ShadeConstruction,AirBoundaryConstructionAbridged,OpaqueConstruction,WindowConstruction,AirBoundaryConstruction>> constructions= default, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing,EnergyWindowMaterialShade>> materials= default, List<IdealAirSystemAbridged> hvacs= default, List<AnyOf<ProgramTypeAbridged,ProgramType>> programTypes= default, List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged,ScheduleRuleset,ScheduleFixedInterval>> schedules= default, List<ScheduleTypeLimit> scheduleTypeLimits= default// Optional parameters
+        )// BaseClass
         {
             // use default value if no "terrainType" provided
             if (terrainType == null)
@@ -113,7 +118,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "ModelEnergyProperties"; 
 
 
         /// <summary>

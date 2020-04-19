@@ -30,27 +30,22 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class WallConstructionSet :  IEquatable<WallConstructionSet>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="WallConstructionSet" /> class.
         /// </summary>
         /// <param name="interiorConstruction">An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition..</param>
         /// <param name="exteriorConstruction">An OpaqueConstruction for walls with an Outdoors boundary condition..</param>
         /// <param name="groundConstruction">An OpaqueConstruction for walls with a Ground boundary condition..</param>
-        /// <param name="type">type (default to &quot;WallConstructionSet&quot;).</param>
-        public WallConstructionSet(OpaqueConstruction interiorConstruction = default, OpaqueConstruction exteriorConstruction = default, OpaqueConstruction groundConstruction = default, string type = "WallConstructionSet")
+        public WallConstructionSet
+        (
+            // Required parameters
+            OpaqueConstruction interiorConstruction= default, OpaqueConstruction exteriorConstruction= default, OpaqueConstruction groundConstruction= default// Optional parameters
+        )// BaseClass
         {
             this.InteriorConstruction = interiorConstruction;
             this.ExteriorConstruction = exteriorConstruction;
             this.GroundConstruction = groundConstruction;
-            // use default value if no "type" provided
-            if (type == null)
-            {
-                this.Type = "WallConstructionSet";
-            }
-            else
-            {
-                this.Type = type;
-            }
         }
         
         /// <summary>
@@ -82,7 +77,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public string Type { get; private set; } = "WallConstructionSet"; 
 
         /// <summary>
         /// Returns the string presentation of the object

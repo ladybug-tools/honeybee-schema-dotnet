@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Used to define a schedule for a default day, further described by ScheduleRule.
     /// </summary>
     [DataContract]
-    public partial class ScheduleRulesetAbridged :  IEquatable<ScheduleRulesetAbridged>, IValidatableObject
+    public partial class ScheduleRulesetAbridged : IDdEnergyBaseModel,  IEquatable<ScheduleRulesetAbridged>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleRulesetAbridged" /> class.
         /// </summary>
@@ -38,48 +39,23 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleRulesetAbridged" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="daySchedules">A list of ScheduleDays that are referenced in the other keys of this ScheduleRulesetAbridged. (required).</param>
-        /// <param name="defaultDaySchedule">An identifier for the ScheduleDay that will be used for all days when no ScheduleRule is applied. This ScheduleDay must be in the day_schedules. (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="daySchedules">A list of ScheduleDays that are referenced in the other keys of this ScheduleRulesetAbridged..</param>
+        /// <param name="defaultDaySchedule">An identifier for the ScheduleDay that will be used for all days when no ScheduleRule is applied. This ScheduleDay must be in the day_schedules..</param>
         /// <param name="scheduleRules">A list of ScheduleRuleAbridged that note exceptions to the default_day_schedule. These rules should be ordered from highest to lowest priority..</param>
         /// <param name="holidaySchedule">An identifier for the ScheduleDay that will be used for holidays. This ScheduleDay must be in the day_schedules..</param>
         /// <param name="summerDesigndaySchedule">An identifier for the ScheduleDay that will be used for the summer design day. This ScheduleDay must be in the day_schedules..</param>
         /// <param name="winterDesigndaySchedule">An identifier for the ScheduleDay that will be used for the winter design day. This ScheduleDay must be in the day_schedules..</param>
         /// <param name="scheduleTypeLimit">Identifier of a ScheduleTypeLimit that will be used to validate schedule values against upper/lower limits and assign units to the schedule values. If None, no validation will occur..</param>
-        public ScheduleRulesetAbridged(string identifier, List<ScheduleDay> daySchedules, string defaultDaySchedule, string displayName = default, List<ScheduleRuleAbridged> scheduleRules = default, string holidaySchedule = default, string summerDesigndaySchedule = default, string winterDesigndaySchedule = default, string scheduleTypeLimit = default)
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        public ScheduleRulesetAbridged
+        (
+            string identifier, // Required parameters
+            List<ScheduleDay> daySchedules= default, string defaultDaySchedule= default, List<ScheduleRuleAbridged> scheduleRules= default, string holidaySchedule= default, string summerDesigndaySchedule= default, string winterDesigndaySchedule= default, string scheduleTypeLimit= default, string displayName= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for ScheduleRulesetAbridged and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
-            // to ensure "daySchedules" is required (not null)
-            if (daySchedules == null)
-            {
-                throw new InvalidDataException("daySchedules is a required property for ScheduleRulesetAbridged and cannot be null");
-            }
-            else
-            {
-                this.DaySchedules = daySchedules;
-            }
-            
-            // to ensure "defaultDaySchedule" is required (not null)
-            if (defaultDaySchedule == null)
-            {
-                throw new InvalidDataException("defaultDaySchedule is a required property for ScheduleRulesetAbridged and cannot be null");
-            }
-            else
-            {
-                this.DefaultDaySchedule = defaultDaySchedule;
-            }
-            
-            this.DisplayName = displayName;
+            this.DaySchedules = daySchedules;
+            this.DefaultDaySchedule = defaultDaySchedule;
             this.ScheduleRules = scheduleRules;
             this.HolidaySchedule = holidaySchedule;
             this.SummerDesigndaySchedule = summerDesigndaySchedule;
@@ -87,14 +63,6 @@ namespace HoneybeeSchema
             this.ScheduleTypeLimit = scheduleTypeLimit;
         }
         
-        /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
-        public string Identifier { get; set; }
-
         /// <summary>
         /// A list of ScheduleDays that are referenced in the other keys of this ScheduleRulesetAbridged.
         /// </summary>
@@ -112,19 +80,11 @@ namespace HoneybeeSchema
         public string DefaultDaySchedule { get; set; }
 
         /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "ScheduleRulesetAbridged"; 
 
         /// <summary>
         /// A list of ScheduleRuleAbridged that note exceptions to the default_day_schedule. These rules should be ordered from highest to lowest priority.
@@ -174,10 +134,9 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class ScheduleRulesetAbridged {\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  DaySchedules: ").Append(DaySchedules).Append("\n");
             sb.Append("  DefaultDaySchedule: ").Append(DefaultDaySchedule).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  ScheduleRules: ").Append(ScheduleRules).Append("\n");
             sb.Append("  HolidaySchedule: ").Append(HolidaySchedule).Append("\n");
@@ -192,7 +151,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -227,54 +186,44 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.DaySchedules == input.DaySchedules ||
                     this.DaySchedules != null &&
                     input.DaySchedules != null &&
                     this.DaySchedules.SequenceEqual(input.DaySchedules)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DefaultDaySchedule == input.DefaultDaySchedule ||
                     (this.DefaultDaySchedule != null &&
                     this.DefaultDaySchedule.Equals(input.DefaultDaySchedule))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ScheduleRules == input.ScheduleRules ||
                     this.ScheduleRules != null &&
                     input.ScheduleRules != null &&
                     this.ScheduleRules.SequenceEqual(input.ScheduleRules)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.HolidaySchedule == input.HolidaySchedule ||
                     (this.HolidaySchedule != null &&
                     this.HolidaySchedule.Equals(input.HolidaySchedule))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SummerDesigndaySchedule == input.SummerDesigndaySchedule ||
                     (this.SummerDesigndaySchedule != null &&
                     this.SummerDesigndaySchedule.Equals(input.SummerDesigndaySchedule))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.WinterDesigndaySchedule == input.WinterDesigndaySchedule ||
                     (this.WinterDesigndaySchedule != null &&
                     this.WinterDesigndaySchedule.Equals(input.WinterDesigndaySchedule))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ScheduleTypeLimit == input.ScheduleTypeLimit ||
                     (this.ScheduleTypeLimit != null &&
@@ -290,15 +239,11 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.DaySchedules != null)
                     hashCode = hashCode * 59 + this.DaySchedules.GetHashCode();
                 if (this.DefaultDaySchedule != null)
                     hashCode = hashCode * 59 + this.DefaultDaySchedule.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.ScheduleRules != null)
@@ -322,18 +267,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // DefaultDaySchedule (string) maxLength
             if(this.DefaultDaySchedule != null && this.DefaultDaySchedule.Length > 100)
             {

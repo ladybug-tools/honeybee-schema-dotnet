@@ -30,11 +30,16 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class FaceEnergyPropertiesAbridged :  IEquatable<FaceEnergyPropertiesAbridged>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FaceEnergyPropertiesAbridged" /> class.
         /// </summary>
         /// <param name="construction">Identifier of an OpaqueConstruction for the Face. If None, the construction is set by the parent Room construction_set or the Model global_construction_set..</param>
-        public FaceEnergyPropertiesAbridged(string construction = default)
+        public FaceEnergyPropertiesAbridged
+        (
+            // Required parameters
+            string construction= default// Optional parameters
+        )// BaseClass
         {
             this.Construction = construction;
         }
@@ -44,7 +49,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "FaceEnergyPropertiesAbridged"; 
 
         /// <summary>
         /// Identifier of an OpaqueConstruction for the Face. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.

@@ -30,26 +30,21 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class DoorConstructionSet :  IEquatable<DoorConstructionSet>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DoorConstructionSet" /> class.
         /// </summary>
-        /// <param name="type">type (default to &quot;DoorConstructionSet&quot;).</param>
         /// <param name="interiorConstruction">An OpaqueConstruction for all opaque doors with a Surface boundary condition..</param>
         /// <param name="exteriorConstruction">An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face..</param>
         /// <param name="overheadConstruction">An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face..</param>
         /// <param name="exteriorGlassConstruction">A WindowConstruction for all glass doors with an Outdoors boundary condition..</param>
         /// <param name="interiorGlassConstruction">A WindowConstruction for all glass doors with a Surface boundary condition..</param>
-        public DoorConstructionSet(string type = "DoorConstructionSet", OpaqueConstruction interiorConstruction = default, OpaqueConstruction exteriorConstruction = default, OpaqueConstruction overheadConstruction = default, WindowConstruction exteriorGlassConstruction = default, WindowConstruction interiorGlassConstruction = default)
+        public DoorConstructionSet
+        (
+            // Required parameters
+            OpaqueConstruction interiorConstruction= default, OpaqueConstruction exteriorConstruction= default, OpaqueConstruction overheadConstruction= default, WindowConstruction exteriorGlassConstruction= default, WindowConstruction interiorGlassConstruction= default// Optional parameters
+        )// BaseClass
         {
-            // use default value if no "type" provided
-            if (type == null)
-            {
-                this.Type = "DoorConstructionSet";
-            }
-            else
-            {
-                this.Type = type;
-            }
             this.InteriorConstruction = interiorConstruction;
             this.ExteriorConstruction = exteriorConstruction;
             this.OverheadConstruction = overheadConstruction;
@@ -62,7 +57,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public string Type { get; private set; } = "DoorConstructionSet"; 
 
         /// <summary>
         /// An OpaqueConstruction for all opaque doors with a Surface boundary condition.

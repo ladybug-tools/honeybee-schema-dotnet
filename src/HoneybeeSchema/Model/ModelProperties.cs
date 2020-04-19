@@ -30,11 +30,16 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class ModelProperties :  IEquatable<ModelProperties>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelProperties" /> class.
         /// </summary>
         /// <param name="energy">energy.</param>
-        public ModelProperties(ModelEnergyProperties energy = default)
+        public ModelProperties
+        (
+            // Required parameters
+            ModelEnergyProperties energy= default// Optional parameters
+        )// BaseClass
         {
             this.Energy = energy;
         }
@@ -44,7 +49,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "ModelProperties"; 
 
         /// <summary>
         /// Gets or Sets Energy

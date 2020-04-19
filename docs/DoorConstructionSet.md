@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | [optional] [default to "DoorConstructionSet"]
+**Type** | **string** |  | [optional] [readonly] [default to "DoorConstructionSet"]
 **InteriorConstruction** | [**OpaqueConstruction**](OpaqueConstruction.md) | An OpaqueConstruction for all opaque doors with a Surface boundary condition. | [optional] 
 **ExteriorConstruction** | [**OpaqueConstruction**](OpaqueConstruction.md) | An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face. | [optional] 
 **OverheadConstruction** | [**OpaqueConstruction**](OpaqueConstruction.md) | An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face. | [optional] 

@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Provides a model for an ideal HVAC system.
     /// </summary>
     [DataContract]
-    public partial class IdealAirSystemAbridged :  IEquatable<IdealAirSystemAbridged>, IValidatableObject
+    public partial class IdealAirSystemAbridged : IDdEnergyBaseModel,  IEquatable<IdealAirSystemAbridged>, IValidatableObject
     {
+
         /// <summary>
         /// Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone.
         /// </summary>
@@ -71,8 +72,6 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="IdealAirSystemAbridged" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="economizerType">Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone. (default to EconomizerTypeEnum.DifferentialDryBulb).</param>
         /// <param name="demandControlledVentilation">Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the zone. (default to false).</param>
         /// <param name="sensibleHeatRecovery">A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. (default to 0D).</param>
@@ -83,19 +82,14 @@ namespace HoneybeeSchema
         /// <param name="coolingLimit">A number for the maximum cooling capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit boject to indicate no upper limit to the cooling capacity..</param>
         /// <param name="heatingAvailability">An optional identifier of a schedule to set the availability of heating over the course of the simulation..</param>
         /// <param name="coolingAvailability">An optional identifier of a schedule to set the availability of cooling over the course of the simulation..</param>
-        public IdealAirSystemAbridged(string identifier, string displayName = default, EconomizerTypeEnum? economizerType = EconomizerTypeEnum.DifferentialDryBulb, bool demandControlledVentilation = false, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, double heatingAirTemperature = 50D, double coolingAirTemperature = 13D, AnyOf<NoLimit,Autosize,double> heatingLimit = default, AnyOf<NoLimit,Autosize,double> coolingLimit = default, string heatingAvailability = default, string coolingAvailability = default)
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        public IdealAirSystemAbridged
+        (
+            string identifier, // Required parameters
+            EconomizerTypeEnum? economizerType = EconomizerTypeEnum.DifferentialDryBulb, bool demandControlledVentilation = false, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, double heatingAirTemperature = 50D, double coolingAirTemperature = 13D, AnyOf<NoLimit,Autosize,double> heatingLimit= default, AnyOf<NoLimit,Autosize,double> coolingLimit= default, string heatingAvailability= default, string coolingAvailability= default, string displayName= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for IdealAirSystemAbridged and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
-            this.DisplayName = displayName;
             // use default value if no "economizerType" provided
             if (economizerType == null)
             {
@@ -157,27 +151,11 @@ namespace HoneybeeSchema
         }
         
         /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
-        public string Identifier { get; set; }
-
-        /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "IdealAirSystemAbridged"; 
 
 
         /// <summary>
@@ -260,8 +238,7 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class IdealAirSystemAbridged {\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  EconomizerType: ").Append(EconomizerType).Append("\n");
             sb.Append("  DemandControlledVentilation: ").Append(DemandControlledVentilation).Append("\n");
@@ -281,7 +258,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -316,67 +293,57 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.EconomizerType == input.EconomizerType ||
                     (this.EconomizerType != null &&
                     this.EconomizerType.Equals(input.EconomizerType))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DemandControlledVentilation == input.DemandControlledVentilation ||
                     (this.DemandControlledVentilation != null &&
                     this.DemandControlledVentilation.Equals(input.DemandControlledVentilation))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SensibleHeatRecovery == input.SensibleHeatRecovery ||
                     (this.SensibleHeatRecovery != null &&
                     this.SensibleHeatRecovery.Equals(input.SensibleHeatRecovery))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.LatentHeatRecovery == input.LatentHeatRecovery ||
                     (this.LatentHeatRecovery != null &&
                     this.LatentHeatRecovery.Equals(input.LatentHeatRecovery))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.HeatingAirTemperature == input.HeatingAirTemperature ||
                     (this.HeatingAirTemperature != null &&
                     this.HeatingAirTemperature.Equals(input.HeatingAirTemperature))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.CoolingAirTemperature == input.CoolingAirTemperature ||
                     (this.CoolingAirTemperature != null &&
                     this.CoolingAirTemperature.Equals(input.CoolingAirTemperature))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.HeatingLimit == input.HeatingLimit ||
                     (this.HeatingLimit != null &&
                     this.HeatingLimit.Equals(input.HeatingLimit))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.CoolingLimit == input.CoolingLimit ||
                     (this.CoolingLimit != null &&
                     this.CoolingLimit.Equals(input.CoolingLimit))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.HeatingAvailability == input.HeatingAvailability ||
                     (this.HeatingAvailability != null &&
                     this.HeatingAvailability.Equals(input.HeatingAvailability))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.CoolingAvailability == input.CoolingAvailability ||
                     (this.CoolingAvailability != null &&
@@ -392,11 +359,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.EconomizerType != null)
@@ -430,18 +393,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // Type (string) pattern
             Regex regexType = new Regex(@"^IdealAirSystemAbridged$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)

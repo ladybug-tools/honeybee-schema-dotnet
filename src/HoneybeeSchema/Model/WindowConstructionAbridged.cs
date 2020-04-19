@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Construction for window objects (Aperture, Door).
     /// </summary>
     [DataContract]
-    public partial class WindowConstructionAbridged :  IEquatable<WindowConstructionAbridged>, IValidatableObject
+    public partial class WindowConstructionAbridged : IDdEnergyBaseModel,  IEquatable<WindowConstructionAbridged>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowConstructionAbridged" /> class.
         /// </summary>
@@ -38,42 +39,18 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowConstructionAbridged" /> class.
         /// </summary>
+        /// <param name="layers">List of strings for material identifiers. The order of the materials is from exterior to interior..</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="layers">List of strings for material identifiers. The order of the materials is from exterior to interior. (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
-        public WindowConstructionAbridged(string identifier, List<string> layers, string displayName = default)
+        public WindowConstructionAbridged
+        (
+            string identifier, // Required parameters
+            List<string> layers= default, string displayName= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for WindowConstructionAbridged and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
-            // to ensure "layers" is required (not null)
-            if (layers == null)
-            {
-                throw new InvalidDataException("layers is a required property for WindowConstructionAbridged and cannot be null");
-            }
-            else
-            {
-                this.Layers = layers;
-            }
-            
-            this.DisplayName = displayName;
+            this.Layers = layers;
         }
         
-        /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
-        public string Identifier { get; set; }
-
         /// <summary>
         /// List of strings for material identifiers. The order of the materials is from exterior to interior.
         /// </summary>
@@ -83,19 +60,11 @@ namespace HoneybeeSchema
         public List<string> Layers { get; set; }
 
         /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "WindowConstructionAbridged"; 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -105,9 +74,8 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class WindowConstructionAbridged {\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Layers: ").Append(Layers).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -117,7 +85,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -152,23 +120,13 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Layers == input.Layers ||
                     this.Layers != null &&
                     input.Layers != null &&
                     this.Layers.SequenceEqual(input.Layers)
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
@@ -184,13 +142,9 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Layers != null)
                     hashCode = hashCode * 59 + this.Layers.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
@@ -204,18 +158,17 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
+            return this.BaseValidate(validationContext);
+        }
 
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-
+        /// <summary>
+        /// To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
+        {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // Type (string) pattern
             Regex regexType = new Regex(@"^WindowConstructionAbridged$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)

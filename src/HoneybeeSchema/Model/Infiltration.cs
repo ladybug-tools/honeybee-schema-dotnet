@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [DataContract]
-    public partial class Infiltration :  IEquatable<Infiltration>, IValidatableObject
+    public partial class Infiltration : IDdEnergyBaseModel,  IEquatable<Infiltration>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Infiltration" /> class.
         /// </summary>
@@ -38,60 +39,25 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Infiltration" /> class.
         /// </summary>
+        /// <param name="flowPerExteriorArea">Number for the infiltration per exterior surface area in m3/s-m2..</param>
+        /// <param name="schedule">The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile..</param>
+        /// <param name="constantCoefficient">constantCoefficient (default to 1D).</param>
+        /// <param name="temperatureCoefficient">temperatureCoefficient (default to 0D).</param>
+        /// <param name="velocityCoefficient">velocityCoefficient (default to 0D).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="flowPerExteriorArea">Number for the infiltration per exterior surface area in m3/s-m2. (required).</param>
-        /// <param name="schedule">The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile. (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
-        /// <param name="type">type (default to &quot;Infiltration&quot;).</param>
-        /// <param name="constantCoefficient">constantCoefficient (default to 1).</param>
-        /// <param name="temperatureCoefficient">temperatureCoefficient (default to 0).</param>
-        /// <param name="velocityCoefficient">velocityCoefficient (default to 0).</param>
-        public Infiltration(string identifier, double flowPerExteriorArea, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule, string displayName = default, string type = "Infiltration", double constantCoefficient = 1, double temperatureCoefficient = 0, double velocityCoefficient = 0)
+        public Infiltration
+        (
+            string identifier, // Required parameters
+            double flowPerExteriorArea= default, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule= default, double constantCoefficient = 1D, double temperatureCoefficient = 0D, double velocityCoefficient = 0D, string displayName= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for Infiltration and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
-            // to ensure "flowPerExteriorArea" is required (not null)
-            if (flowPerExteriorArea == null)
-            {
-                throw new InvalidDataException("flowPerExteriorArea is a required property for Infiltration and cannot be null");
-            }
-            else
-            {
-                this.FlowPerExteriorArea = flowPerExteriorArea;
-            }
-            
-            // to ensure "schedule" is required (not null)
-            if (schedule == null)
-            {
-                throw new InvalidDataException("schedule is a required property for Infiltration and cannot be null");
-            }
-            else
-            {
-                this.Schedule = schedule;
-            }
-            
-            this.DisplayName = displayName;
-            // use default value if no "type" provided
-            if (type == null)
-            {
-                this.Type = "Infiltration";
-            }
-            else
-            {
-                this.Type = type;
-            }
+            this.FlowPerExteriorArea = flowPerExteriorArea;
+            this.Schedule = schedule;
             // use default value if no "constantCoefficient" provided
             if (constantCoefficient == null)
             {
-                this.ConstantCoefficient = 1;
+                this.ConstantCoefficient = 1D;
             }
             else
             {
@@ -100,7 +66,7 @@ namespace HoneybeeSchema
             // use default value if no "temperatureCoefficient" provided
             if (temperatureCoefficient == null)
             {
-                this.TemperatureCoefficient = 0;
+                this.TemperatureCoefficient = 0D;
             }
             else
             {
@@ -109,7 +75,7 @@ namespace HoneybeeSchema
             // use default value if no "velocityCoefficient" provided
             if (velocityCoefficient == null)
             {
-                this.VelocityCoefficient = 0;
+                this.VelocityCoefficient = 0D;
             }
             else
             {
@@ -117,14 +83,6 @@ namespace HoneybeeSchema
             }
         }
         
-        /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
-        public string Identifier { get; set; }
-
         /// <summary>
         /// Number for the infiltration per exterior surface area in m3/s-m2.
         /// </summary>
@@ -142,19 +100,11 @@ namespace HoneybeeSchema
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; }
 
         /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public string Type { get; private set; } = "Infiltration"; 
 
         /// <summary>
         /// Gets or Sets ConstantCoefficient
@@ -185,10 +135,9 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class Infiltration {\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  FlowPerExteriorArea: ").Append(FlowPerExteriorArea).Append("\n");
             sb.Append("  Schedule: ").Append(Schedule).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  ConstantCoefficient: ").Append(ConstantCoefficient).Append("\n");
             sb.Append("  TemperatureCoefficient: ").Append(TemperatureCoefficient).Append("\n");
@@ -201,7 +150,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -236,42 +185,32 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.FlowPerExteriorArea == input.FlowPerExteriorArea ||
                     (this.FlowPerExteriorArea != null &&
                     this.FlowPerExteriorArea.Equals(input.FlowPerExteriorArea))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Schedule == input.Schedule ||
                     (this.Schedule != null &&
                     this.Schedule.Equals(input.Schedule))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ConstantCoefficient == input.ConstantCoefficient ||
                     (this.ConstantCoefficient != null &&
                     this.ConstantCoefficient.Equals(input.ConstantCoefficient))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.TemperatureCoefficient == input.TemperatureCoefficient ||
                     (this.TemperatureCoefficient != null &&
                     this.TemperatureCoefficient.Equals(input.TemperatureCoefficient))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.VelocityCoefficient == input.VelocityCoefficient ||
                     (this.VelocityCoefficient != null &&
@@ -287,15 +226,11 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.FlowPerExteriorArea != null)
                     hashCode = hashCode * 59 + this.FlowPerExteriorArea.GetHashCode();
                 if (this.Schedule != null)
                     hashCode = hashCode * 59 + this.Schedule.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.ConstantCoefficient != null)
@@ -315,18 +250,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // FlowPerExteriorArea (double) minimum
             if(this.FlowPerExteriorArea < (double)0)
             {

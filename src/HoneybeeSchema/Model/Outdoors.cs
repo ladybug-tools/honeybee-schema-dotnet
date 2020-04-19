@@ -30,13 +30,18 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class Outdoors :  IEquatable<Outdoors>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Outdoors" /> class.
         /// </summary>
         /// <param name="sunExposure">A boolean noting whether the boundary is exposed to sun. (default to true).</param>
         /// <param name="windExposure">A boolean noting whether the boundary is exposed to wind. (default to true).</param>
         /// <param name="viewFactor">A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated..</param>
-        public Outdoors(bool sunExposure = true, bool windExposure = true, AnyOf<Autocalculate,double> viewFactor = default)
+        public Outdoors
+        (
+            // Required parameters
+            bool sunExposure = true, bool windExposure = true, AnyOf<Autocalculate,double> viewFactor= default// Optional parameters
+        )// BaseClass
         {
             // use default value if no "sunExposure" provided
             if (sunExposure == null)
@@ -64,7 +69,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "Outdoors"; 
 
         /// <summary>
         /// A boolean noting whether the boundary is exposed to sun.

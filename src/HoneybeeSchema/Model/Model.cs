@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [DataContract]
-    public partial class Model :  IEquatable<Model>, IValidatableObject
+    public partial class Model : IDdBaseModel,  IEquatable<Model>, IValidatableObject
     {
+
         /// <summary>
         /// Text indicating the units in which the model geometry exists. This is used to scale the geometry to the correct units for simulation engines like EnergyPlus, which requires all geometry be in meters.
         /// </summary>
@@ -83,10 +84,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Model" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters. (required).</param>
-        /// <param name="properties">Extension properties for particular simulation engines (Radiance, EnergyPlus). (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
+        /// <param name="properties">Extension properties for particular simulation engines (Radiance, EnergyPlus)..</param>
         /// <param name="rooms">A list of Rooms in the model..</param>
         /// <param name="orphanedFaces">A list of Faces in the model that lack a parent Room. Note that orphaned Faces are not acceptable for Models that are to be exported for energy simulation..</param>
         /// <param name="orphanedShades">A list of Shades in the model that lack a parent..</param>
@@ -96,30 +94,16 @@ namespace HoneybeeSchema
         /// <param name="units">Text indicating the units in which the model geometry exists. This is used to scale the geometry to the correct units for simulation engines like EnergyPlus, which requires all geometry be in meters. (default to UnitsEnum.Meters).</param>
         /// <param name="tolerance">The maximum difference between x, y, and z values at which vertices are considered equivalent. This value should be in the Model units and it is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in no attempt to evaluate whether Room volumes are closed or check face direction. So it is recommended that this always be a positive number when such checks have not been performed on a Model. Typical tolerances for builing geometry range from 0.1 to 0.0001 depending on the units of the geometry. (default to 0D).</param>
         /// <param name="angleTolerance">The max angle difference in degrees that vertices are allowed to differ from one another in order to consider them colinear. This value is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in no attempt to evaluate whether the Room volumes is closed or check face direction. So it is recommended that this always be a positive number when such checks have not been performed on a given Model. Typical tolerances for builing geometry are often around 1 degree. (default to 0D).</param>
-        public Model(string identifier, ModelProperties properties, string displayName = default, Object userData = default, List<Room> rooms = default, List<Face> orphanedFaces = default, List<Shade> orphanedShades = default, List<Aperture> orphanedApertures = default, List<Door> orphanedDoors = default, double northAngle = 0D, UnitsEnum? units = UnitsEnum.Meters, double tolerance = 0D, double angleTolerance = 0D)
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters. (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
+        public Model
+        (
+            string identifier, // Required parameters
+            ModelProperties properties= default, List<Room> rooms= default, List<Face> orphanedFaces= default, List<Shade> orphanedShades= default, List<Aperture> orphanedApertures= default, List<Door> orphanedDoors= default, double northAngle = 0D, UnitsEnum? units = UnitsEnum.Meters, double tolerance = 0D, double angleTolerance = 0D, string displayName= default, Object userData= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for Model and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
-            // to ensure "properties" is required (not null)
-            if (properties == null)
-            {
-                throw new InvalidDataException("properties is a required property for Model and cannot be null");
-            }
-            else
-            {
-                this.Properties = properties;
-            }
-            
-            this.DisplayName = displayName;
-            this.UserData = userData;
+            this.Properties = properties;
             this.Rooms = rooms;
             this.OrphanedFaces = orphanedFaces;
             this.OrphanedShades = orphanedShades;
@@ -164,14 +148,6 @@ namespace HoneybeeSchema
         }
         
         /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters.
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters.</value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
-        public string Identifier { get; set; }
-
-        /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
@@ -180,27 +156,11 @@ namespace HoneybeeSchema
         public ModelProperties Properties { get; set; }
 
         /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
-        public string DisplayName { get; set; }
-
-        /// <summary>
-        /// Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).
-        /// </summary>
-        /// <value>Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</value>
-        [DataMember(Name="user_data", EmitDefaultValue=false)]
-        [JsonProperty("user_data")]
-        public Object UserData { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "Model"; 
 
         /// <summary>
         /// A list of Rooms in the model.
@@ -275,10 +235,8 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class Model {\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Properties: ").Append(Properties).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Rooms: ").Append(Rooms).Append("\n");
             sb.Append("  OrphanedFaces: ").Append(OrphanedFaces).Append("\n");
@@ -297,7 +255,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -332,77 +290,62 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Properties == input.Properties ||
                     (this.Properties != null &&
                     this.Properties.Equals(input.Properties))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
-                (
-                    this.UserData == input.UserData ||
-                    (this.UserData != null &&
-                    this.UserData.Equals(input.UserData))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Rooms == input.Rooms ||
                     this.Rooms != null &&
                     input.Rooms != null &&
                     this.Rooms.SequenceEqual(input.Rooms)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.OrphanedFaces == input.OrphanedFaces ||
                     this.OrphanedFaces != null &&
                     input.OrphanedFaces != null &&
                     this.OrphanedFaces.SequenceEqual(input.OrphanedFaces)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.OrphanedShades == input.OrphanedShades ||
                     this.OrphanedShades != null &&
                     input.OrphanedShades != null &&
                     this.OrphanedShades.SequenceEqual(input.OrphanedShades)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.OrphanedApertures == input.OrphanedApertures ||
                     this.OrphanedApertures != null &&
                     input.OrphanedApertures != null &&
                     this.OrphanedApertures.SequenceEqual(input.OrphanedApertures)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.OrphanedDoors == input.OrphanedDoors ||
                     this.OrphanedDoors != null &&
                     input.OrphanedDoors != null &&
                     this.OrphanedDoors.SequenceEqual(input.OrphanedDoors)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.NorthAngle == input.NorthAngle ||
                     (this.NorthAngle != null &&
                     this.NorthAngle.Equals(input.NorthAngle))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Units == input.Units ||
                     (this.Units != null &&
                     this.Units.Equals(input.Units))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Tolerance == input.Tolerance ||
                     (this.Tolerance != null &&
                     this.Tolerance.Equals(input.Tolerance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.AngleTolerance == input.AngleTolerance ||
                     (this.AngleTolerance != null &&
@@ -418,15 +361,9 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Properties != null)
                     hashCode = hashCode * 59 + this.Properties.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
-                if (this.UserData != null)
-                    hashCode = hashCode * 59 + this.UserData.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Rooms != null)
@@ -458,25 +395,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) pattern
-            Regex regexIdentifier = new Regex(@"[A-Za-z0-9_-]", RegexOptions.CultureInvariant);
-            if (false == regexIdentifier.Match(this.Identifier).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, must match a pattern of " + regexIdentifier, new [] { "Identifier" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // Type (string) pattern
             Regex regexType = new Regex(@"^Model$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)

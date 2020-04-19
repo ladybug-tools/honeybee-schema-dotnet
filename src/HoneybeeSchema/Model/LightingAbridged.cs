@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [DataContract]
-    public partial class LightingAbridged :  IEquatable<LightingAbridged>, IValidatableObject
+    public partial class LightingAbridged : IDdEnergyBaseModel,  IEquatable<LightingAbridged>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LightingAbridged" /> class.
         /// </summary>
@@ -38,46 +39,21 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="LightingAbridged" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="wattsPerArea">Lighting per floor area as [W/m2]. (required).</param>
-        /// <param name="schedule">Identifier of the schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile. (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="wattsPerArea">Lighting per floor area as [W/m2]..</param>
+        /// <param name="schedule">Identifier of the schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile..</param>
         /// <param name="visibleFraction">The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. The default value is &#x60;0.25&#x60;. (default to 0.25D).</param>
         /// <param name="radiantFraction">The fraction of heat from lights that is long-wave radiation. Default value is &#x60;0.32&#x60;. (default to 0.32D).</param>
         /// <param name="returnAirFraction">The fraction of the heat from lights that goes into the zone return air. Default value is &#x60;0&#x60;. (default to 0.0D).</param>
-        public LightingAbridged(string identifier, double wattsPerArea, string schedule, string displayName = default, double visibleFraction = 0.25D, double radiantFraction = 0.32D, double returnAirFraction = 0.0D)
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        public LightingAbridged
+        (
+            string identifier, // Required parameters
+            double wattsPerArea= default, string schedule= default, double visibleFraction = 0.25D, double radiantFraction = 0.32D, double returnAirFraction = 0.0D, string displayName= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for LightingAbridged and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
-            // to ensure "wattsPerArea" is required (not null)
-            if (wattsPerArea == null)
-            {
-                throw new InvalidDataException("wattsPerArea is a required property for LightingAbridged and cannot be null");
-            }
-            else
-            {
-                this.WattsPerArea = wattsPerArea;
-            }
-            
-            // to ensure "schedule" is required (not null)
-            if (schedule == null)
-            {
-                throw new InvalidDataException("schedule is a required property for LightingAbridged and cannot be null");
-            }
-            else
-            {
-                this.Schedule = schedule;
-            }
-            
-            this.DisplayName = displayName;
+            this.WattsPerArea = wattsPerArea;
+            this.Schedule = schedule;
             // use default value if no "visibleFraction" provided
             if (visibleFraction == null)
             {
@@ -108,14 +84,6 @@ namespace HoneybeeSchema
         }
         
         /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
-        public string Identifier { get; set; }
-
-        /// <summary>
         /// Lighting per floor area as [W/m2].
         /// </summary>
         /// <value>Lighting per floor area as [W/m2].</value>
@@ -132,19 +100,11 @@ namespace HoneybeeSchema
         public string Schedule { get; set; }
 
         /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "LightingAbridged"; 
 
         /// <summary>
         /// The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. The default value is &#x60;0.25&#x60;.
@@ -178,10 +138,9 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class LightingAbridged {\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  WattsPerArea: ").Append(WattsPerArea).Append("\n");
             sb.Append("  Schedule: ").Append(Schedule).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  VisibleFraction: ").Append(VisibleFraction).Append("\n");
             sb.Append("  RadiantFraction: ").Append(RadiantFraction).Append("\n");
@@ -194,7 +153,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -229,42 +188,32 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.WattsPerArea == input.WattsPerArea ||
                     (this.WattsPerArea != null &&
                     this.WattsPerArea.Equals(input.WattsPerArea))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Schedule == input.Schedule ||
                     (this.Schedule != null &&
                     this.Schedule.Equals(input.Schedule))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.VisibleFraction == input.VisibleFraction ||
                     (this.VisibleFraction != null &&
                     this.VisibleFraction.Equals(input.VisibleFraction))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.RadiantFraction == input.RadiantFraction ||
                     (this.RadiantFraction != null &&
                     this.RadiantFraction.Equals(input.RadiantFraction))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ReturnAirFraction == input.ReturnAirFraction ||
                     (this.ReturnAirFraction != null &&
@@ -280,15 +229,11 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.WattsPerArea != null)
                     hashCode = hashCode * 59 + this.WattsPerArea.GetHashCode();
                 if (this.Schedule != null)
                     hashCode = hashCode * 59 + this.Schedule.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.VisibleFraction != null)
@@ -308,18 +253,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // WattsPerArea (double) minimum
             if(this.WattsPerArea < (double)0)
             {

@@ -70,7 +70,7 @@ namespace HoneybeeSchema.Test
         public void DoorInstanceTest()
         {
             // TODO uncomment below to test "IsInstanceOf" Door
-            //Assert.IsInstanceOf(typeof(Door), instance);
+            Assert.IsInstanceOf(typeof(Door), instance);
         }
 
 
@@ -81,6 +81,7 @@ namespace HoneybeeSchema.Test
         public void NameTest()
         {
             // TODO unit test for the property 'Name'
+            Assert.IsTrue(this.instance.Identifier == "mainEntrance");
         }
         /// <summary>
         /// Test the property 'DisplayName'

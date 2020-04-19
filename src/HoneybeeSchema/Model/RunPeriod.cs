@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Used to describe the time period over which to run the simulation.
     /// </summary>
     [DataContract]
-    public partial class RunPeriod :  IEquatable<RunPeriod>, IValidatableObject
+    public partial class RunPeriod : DatedBaseModel,  IEquatable<RunPeriod>, IValidatableObject
     {
+
         /// <summary>
         /// Text for the day of the week on which the simulation starts.
         /// </summary>
@@ -96,7 +97,11 @@ namespace HoneybeeSchema
         /// <param name="holidays">A list of lists where each sub-list consists of two integers for [month, day], representing a date which is a holiday within the simulation. If None, no holidays are applied..</param>
         /// <param name="daylightSavingTime">A DaylightSavingTime to dictate the start and end dates of daylight saving time. If None, no daylight saving time is applied to the simulation..</param>
         /// <param name="leapYear">Boolean noting whether the simulation will be run for a leap year. (default to false).</param>
-        public RunPeriod(List<int> startDate = default, List<int> endDate = default, StartDayOfWeekEnum? startDayOfWeek = StartDayOfWeekEnum.Sunday, List<List<int>> holidays = default, DaylightSavingTime daylightSavingTime = default, bool leapYear = false)
+        public RunPeriod
+        (
+            // Required parameters
+            List<int> startDate= default, List<int> endDate= default, StartDayOfWeekEnum? startDayOfWeek = StartDayOfWeekEnum.Sunday, List<List<int>> holidays= default, DaylightSavingTime daylightSavingTime= default, bool leapYear = false// Optional parameters
+        ) : base()// BaseClass
         {
             this.StartDate = startDate;
             this.EndDate = endDate;
@@ -127,7 +132,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "RunPeriod"; 
 
         /// <summary>
         /// A list of two integers for [month, day], representing the date for the start of the run period. Must be before the end date.
@@ -178,6 +183,7 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class RunPeriod {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  StartDate: ").Append(StartDate).Append("\n");
             sb.Append("  EndDate: ").Append(EndDate).Append("\n");
@@ -193,7 +199,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -228,40 +234,40 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.StartDate == input.StartDate ||
                     this.StartDate != null &&
                     input.StartDate != null &&
                     this.StartDate.SequenceEqual(input.StartDate)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.EndDate == input.EndDate ||
                     this.EndDate != null &&
                     input.EndDate != null &&
                     this.EndDate.SequenceEqual(input.EndDate)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.StartDayOfWeek == input.StartDayOfWeek ||
                     (this.StartDayOfWeek != null &&
                     this.StartDayOfWeek.Equals(input.StartDayOfWeek))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Holidays == input.Holidays ||
                     this.Holidays != null &&
                     input.Holidays != null &&
                     this.Holidays.SequenceEqual(input.Holidays)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DaylightSavingTime == input.DaylightSavingTime ||
                     (this.DaylightSavingTime != null &&
                     this.DaylightSavingTime.Equals(input.DaylightSavingTime))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.LeapYear == input.LeapYear ||
                     (this.LeapYear != null &&
@@ -277,7 +283,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.StartDate != null)
@@ -303,6 +309,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // Type (string) pattern
             Regex regexType = new Regex(@"^RunPeriod$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)

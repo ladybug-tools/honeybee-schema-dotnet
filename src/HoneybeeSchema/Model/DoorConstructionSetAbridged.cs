@@ -30,6 +30,7 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class DoorConstructionSetAbridged :  IEquatable<DoorConstructionSetAbridged>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DoorConstructionSetAbridged" /> class.
         /// </summary>
@@ -38,7 +39,11 @@ namespace HoneybeeSchema
         /// <param name="overheadConstruction">Identifier for an OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face..</param>
         /// <param name="exteriorGlassConstruction">Identifier for a WindowConstruction for all glass doors with an Outdoors boundary condition..</param>
         /// <param name="interiorGlassConstruction">Identifier for a WindowConstruction for all glass doors with a Surface boundary condition..</param>
-        public DoorConstructionSetAbridged(string interiorConstruction = default, string exteriorConstruction = default, string overheadConstruction = default, string exteriorGlassConstruction = default, string interiorGlassConstruction = default)
+        public DoorConstructionSetAbridged
+        (
+            // Required parameters
+            string interiorConstruction= default, string exteriorConstruction= default, string overheadConstruction= default, string exteriorGlassConstruction= default, string interiorGlassConstruction= default// Optional parameters
+        )// BaseClass
         {
             this.InteriorConstruction = interiorConstruction;
             this.ExteriorConstruction = exteriorConstruction;
@@ -52,7 +57,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "DoorConstructionSetAbridged"; 
 
         /// <summary>
         /// Identifier for an OpaqueConstruction for all opaque doors with a Surface boundary condition.

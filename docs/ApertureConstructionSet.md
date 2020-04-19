@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | [optional] [default to "ApertureConstructionSet"]
+**Type** | **string** |  | [optional] [readonly] [default to "ApertureConstructionSet"]
 **InteriorConstruction** | [**WindowConstruction**](WindowConstruction.md) | A WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face. | [optional] 
 **WindowConstruction** | [**WindowConstruction**](WindowConstruction.md) | A WindowConstruction for all apertures with a Surface boundary condition. | [optional] 
 **SkylightConstruction** | [**WindowConstruction**](WindowConstruction.md) | A WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face. | [optional] 

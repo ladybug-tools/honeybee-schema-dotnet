@@ -30,11 +30,16 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class Autosize :  IEquatable<Autosize>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Autosize" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        public Autosize()
+        public Autosize
+        (
+            // Required parameters
+            // Optional parameters
+        )// BaseClass
         {
         }
         
@@ -43,7 +48,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "Autosize"; 
 
         /// <summary>
         /// Returns the string presentation of the object

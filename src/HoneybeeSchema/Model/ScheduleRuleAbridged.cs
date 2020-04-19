@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Schedule rule including a ScheduleDay and when it should be applied..
     /// </summary>
     [DataContract]
-    public partial class ScheduleRuleAbridged :  IEquatable<ScheduleRuleAbridged>, IValidatableObject
+    public partial class ScheduleRuleAbridged : DatedBaseModel,  IEquatable<ScheduleRuleAbridged>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleRuleAbridged" /> class.
         /// </summary>
@@ -38,7 +39,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleRuleAbridged" /> class.
         /// </summary>
-        /// <param name="scheduleDay">The identifier of a ScheduleDay object associated with this rule. (required).</param>
+        /// <param name="scheduleDay">The identifier of a ScheduleDay object associated with this rule..</param>
         /// <param name="applySunday">Boolean noting whether to apply schedule_day on Sundays. (default to false).</param>
         /// <param name="applyMonday">Boolean noting whether to apply schedule_day on Mondays. (default to false).</param>
         /// <param name="applyTuesday">Boolean noting whether to apply schedule_day on Tuesdays. (default to false).</param>
@@ -48,18 +49,12 @@ namespace HoneybeeSchema
         /// <param name="applySaturday">Boolean noting whether to apply schedule_day on Saturdays. (default to false).</param>
         /// <param name="startDate">A list of two integers for [month, day], representing the start date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case)..</param>
         /// <param name="endDate">A list of two integers for [month, day], representing the end date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case)..</param>
-        public ScheduleRuleAbridged(string scheduleDay, bool applySunday = false, bool applyMonday = false, bool applyTuesday = false, bool applyWednesday = false, bool applyThursday = false, bool applyFriday = false, bool applySaturday = false, List<int> startDate = default, List<int> endDate = default)
+        public ScheduleRuleAbridged
+        ( // Required parameters
+            string scheduleDay= default, bool applySunday = false, bool applyMonday = false, bool applyTuesday = false, bool applyWednesday = false, bool applyThursday = false, bool applyFriday = false, bool applySaturday = false, List<int> startDate= default, List<int> endDate= default// Optional parameters
+        ) : base()// BaseClass
         {
-            // to ensure "scheduleDay" is required (not null)
-            if (scheduleDay == null)
-            {
-                throw new InvalidDataException("scheduleDay is a required property for ScheduleRuleAbridged and cannot be null");
-            }
-            else
-            {
-                this.ScheduleDay = scheduleDay;
-            }
-            
+            this.ScheduleDay = scheduleDay;
             // use default value if no "applySunday" provided
             if (applySunday == null)
             {
@@ -140,7 +135,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "ScheduleRuleAbridged"; 
 
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Sundays.
@@ -222,6 +217,7 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class ScheduleRuleAbridged {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  ScheduleDay: ").Append(ScheduleDay).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  ApplySunday: ").Append(ApplySunday).Append("\n");
@@ -241,7 +237,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -276,58 +272,58 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
+            return base.Equals(input) && 
                 (
                     this.ScheduleDay == input.ScheduleDay ||
                     (this.ScheduleDay != null &&
                     this.ScheduleDay.Equals(input.ScheduleDay))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ApplySunday == input.ApplySunday ||
                     (this.ApplySunday != null &&
                     this.ApplySunday.Equals(input.ApplySunday))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ApplyMonday == input.ApplyMonday ||
                     (this.ApplyMonday != null &&
                     this.ApplyMonday.Equals(input.ApplyMonday))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ApplyTuesday == input.ApplyTuesday ||
                     (this.ApplyTuesday != null &&
                     this.ApplyTuesday.Equals(input.ApplyTuesday))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ApplyWednesday == input.ApplyWednesday ||
                     (this.ApplyWednesday != null &&
                     this.ApplyWednesday.Equals(input.ApplyWednesday))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ApplyThursday == input.ApplyThursday ||
                     (this.ApplyThursday != null &&
                     this.ApplyThursday.Equals(input.ApplyThursday))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ApplyFriday == input.ApplyFriday ||
                     (this.ApplyFriday != null &&
                     this.ApplyFriday.Equals(input.ApplyFriday))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ApplySaturday == input.ApplySaturday ||
                     (this.ApplySaturday != null &&
                     this.ApplySaturday.Equals(input.ApplySaturday))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.StartDate == input.StartDate ||
                     this.StartDate != null &&
                     input.StartDate != null &&
                     this.StartDate.SequenceEqual(input.StartDate)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.EndDate == input.EndDate ||
                     this.EndDate != null &&
@@ -344,7 +340,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.ScheduleDay != null)
                     hashCode = hashCode * 59 + this.ScheduleDay.GetHashCode();
                 if (this.Type != null)
@@ -378,6 +374,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // ScheduleDay (string) maxLength
             if(this.ScheduleDay != null && this.ScheduleDay.Length > 100)
             {

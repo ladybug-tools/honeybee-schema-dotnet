@@ -30,25 +30,20 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class ApertureConstructionSet :  IEquatable<ApertureConstructionSet>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ApertureConstructionSet" /> class.
         /// </summary>
-        /// <param name="type">type (default to &quot;ApertureConstructionSet&quot;).</param>
         /// <param name="interiorConstruction">A WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face..</param>
         /// <param name="windowConstruction">A WindowConstruction for all apertures with a Surface boundary condition..</param>
         /// <param name="skylightConstruction">A WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face..</param>
         /// <param name="operableConstruction">A WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property...</param>
-        public ApertureConstructionSet(string type = "ApertureConstructionSet", WindowConstruction interiorConstruction = default, WindowConstruction windowConstruction = default, WindowConstruction skylightConstruction = default, WindowConstruction operableConstruction = default)
+        public ApertureConstructionSet
+        (
+            // Required parameters
+            WindowConstruction interiorConstruction= default, WindowConstruction windowConstruction= default, WindowConstruction skylightConstruction= default, WindowConstruction operableConstruction= default// Optional parameters
+        )// BaseClass
         {
-            // use default value if no "type" provided
-            if (type == null)
-            {
-                this.Type = "ApertureConstructionSet";
-            }
-            else
-            {
-                this.Type = type;
-            }
             this.InteriorConstruction = interiorConstruction;
             this.WindowConstruction = windowConstruction;
             this.SkylightConstruction = skylightConstruction;
@@ -60,7 +55,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public string Type { get; private set; } = "ApertureConstructionSet"; 
 
         /// <summary>
         /// A WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.

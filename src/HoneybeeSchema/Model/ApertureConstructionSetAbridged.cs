@@ -30,6 +30,7 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class ApertureConstructionSetAbridged :  IEquatable<ApertureConstructionSetAbridged>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ApertureConstructionSetAbridged" /> class.
         /// </summary>
@@ -37,7 +38,11 @@ namespace HoneybeeSchema
         /// <param name="windowConstruction">Identifier for a WindowConstruction for all apertures with a Surface boundary condition..</param>
         /// <param name="skylightConstruction">Identifier for a WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face..</param>
         /// <param name="operableConstruction">Identifier for a WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property...</param>
-        public ApertureConstructionSetAbridged(string interiorConstruction = default, string windowConstruction = default, string skylightConstruction = default, string operableConstruction = default)
+        public ApertureConstructionSetAbridged
+        (
+            // Required parameters
+            string interiorConstruction= default, string windowConstruction= default, string skylightConstruction= default, string operableConstruction= default// Optional parameters
+        )// BaseClass
         {
             this.InteriorConstruction = interiorConstruction;
             this.WindowConstruction = windowConstruction;
@@ -50,7 +55,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "ApertureConstructionSetAbridged"; 
 
         /// <summary>
         /// Identifier for a WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.

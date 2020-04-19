@@ -30,27 +30,22 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class FloorConstructionSet :  IEquatable<FloorConstructionSet>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FloorConstructionSet" /> class.
         /// </summary>
         /// <param name="interiorConstruction">An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition..</param>
         /// <param name="exteriorConstruction">An OpaqueConstruction for walls with an Outdoors boundary condition..</param>
         /// <param name="groundConstruction">An OpaqueConstruction for walls with a Ground boundary condition..</param>
-        /// <param name="type">type (default to &quot;FloorConstructionSet&quot;).</param>
-        public FloorConstructionSet(OpaqueConstruction interiorConstruction = default, OpaqueConstruction exteriorConstruction = default, OpaqueConstruction groundConstruction = default, string type = "FloorConstructionSet")
+        public FloorConstructionSet
+        (
+            // Required parameters
+            OpaqueConstruction interiorConstruction= default, OpaqueConstruction exteriorConstruction= default, OpaqueConstruction groundConstruction= default// Optional parameters
+        )// BaseClass
         {
             this.InteriorConstruction = interiorConstruction;
             this.ExteriorConstruction = exteriorConstruction;
             this.GroundConstruction = groundConstruction;
-            // use default value if no "type" provided
-            if (type == null)
-            {
-                this.Type = "FloorConstructionSet";
-            }
-            else
-            {
-                this.Type = type;
-            }
         }
         
         /// <summary>
@@ -82,7 +77,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public string Type { get; private set; } = "FloorConstructionSet"; 
 
         /// <summary>
         /// Returns the string presentation of the object

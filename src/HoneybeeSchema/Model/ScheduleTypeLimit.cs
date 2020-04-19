@@ -28,8 +28,9 @@ namespace HoneybeeSchema
     /// Specifies the data types and limits for values contained in schedules.
     /// </summary>
     [DataContract]
-    public partial class ScheduleTypeLimit :  IEquatable<ScheduleTypeLimit>, IValidatableObject
+    public partial class ScheduleTypeLimit : IDdEnergyBaseModel,  IEquatable<ScheduleTypeLimit>, IValidatableObject
     {
+
         /// <summary>
         /// Defines NumericType
         /// </summary>
@@ -160,25 +161,18 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleTypeLimit" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="lowerLimit">Lower limit for the schedule type or NoLimit..</param>
         /// <param name="upperLimit">Upper limit for the schedule type or NoLimit..</param>
         /// <param name="numericType">numericType (default to NumericTypeEnum.Continuous).</param>
         /// <param name="unitType">unitType (default to UnitTypeEnum.Dimensionless).</param>
-        public ScheduleTypeLimit(string identifier, string displayName = default, AnyOf<NoLimit,double> lowerLimit = default, AnyOf<NoLimit,double> upperLimit = default, NumericTypeEnum? numericType = NumericTypeEnum.Continuous, UnitTypeEnum? unitType = UnitTypeEnum.Dimensionless)
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        public ScheduleTypeLimit
+        (
+            string identifier, // Required parameters
+            AnyOf<NoLimit,double> lowerLimit= default, AnyOf<NoLimit,double> upperLimit= default, NumericTypeEnum? numericType = NumericTypeEnum.Continuous, UnitTypeEnum? unitType = UnitTypeEnum.Dimensionless, string displayName= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for ScheduleTypeLimit and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
-            this.DisplayName = displayName;
             this.LowerLimit = lowerLimit;
             this.UpperLimit = upperLimit;
             // use default value if no "numericType" provided
@@ -202,27 +196,11 @@ namespace HoneybeeSchema
         }
         
         /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
-        public string Identifier { get; set; }
-
-        /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "ScheduleTypeLimit"; 
 
         /// <summary>
         /// Lower limit for the schedule type or NoLimit.
@@ -250,8 +228,7 @@ namespace HoneybeeSchema
         {
             var sb = new StringBuilder();
             sb.Append("class ScheduleTypeLimit {\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  LowerLimit: ").Append(LowerLimit).Append("\n");
             sb.Append("  UpperLimit: ").Append(UpperLimit).Append("\n");
@@ -265,7 +242,7 @@ namespace HoneybeeSchema
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public override string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, new AnyOfJsonConverter());
         }
@@ -300,37 +277,27 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
 
-            return 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.LowerLimit == input.LowerLimit ||
                     (this.LowerLimit != null &&
                     this.LowerLimit.Equals(input.LowerLimit))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.UpperLimit == input.UpperLimit ||
                     (this.UpperLimit != null &&
                     this.UpperLimit.Equals(input.UpperLimit))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.NumericType == input.NumericType ||
                     (this.NumericType != null &&
                     this.NumericType.Equals(input.NumericType))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.UnitType == input.UnitType ||
                     (this.UnitType != null &&
@@ -346,11 +313,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.LowerLimit != null)
@@ -372,18 +335,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // Type (string) pattern
             Regex regexType = new Regex(@"^ScheduleTypeLimit$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)

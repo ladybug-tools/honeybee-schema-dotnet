@@ -1,3 +1,5 @@
+
+
 /* 
  * Honeybee Model Schema
  *
@@ -30,11 +32,16 @@ namespace HoneybeeSchema
     [DataContract]
     public partial class Adiabatic :  IEquatable<Adiabatic>, IValidatableObject
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Adiabatic" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        public Adiabatic()
+        public Adiabatic
+        (
+            // Required parameters
+            // Optional parameters
+        )// BaseClass
         {
         }
         
@@ -43,7 +50,7 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; private set; } = "Adiabatic"; 
 
         /// <summary>
         /// Returns the string presentation of the object
