@@ -12,6 +12,9 @@ Name | Type | Description | Notes
 **FaceType** | **string** |  | [optional] 
 **BoundaryCondition** | [**AnyOfGroundOutdoorsAdiabaticSurface**](AnyOfGroundOutdoorsAdiabaticSurface.md) |  | [optional] 
 **Properties** | [**FacePropertiesAbridged**](FacePropertiesAbridged.md) | Extension properties for particular simulation engines (Radiance, EnergyPlus). | [optional] 
+**Type** | **string** |  | [optional] [readonly] [default to "Face"]
+**Apertures** | [**List&lt;Aperture&gt;**](Aperture.md) | Apertures assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid. | [optional] 
+**Doors** | [**List&lt;Door&gt;**](Door.md) | Doors assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid. | [optional] 
 **IndoorShades** | [**List&lt;Shade&gt;**](Shade.md) | Shades assigned to the interior side of this object. | [optional] 
 **OutdoorShades** | [**List&lt;Shade&gt;**](Shade.md) | Shades assigned to the exterior side of this object (eg. balcony, overhang). | [optional] 
 
