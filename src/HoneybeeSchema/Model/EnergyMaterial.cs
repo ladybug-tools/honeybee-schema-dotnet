@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Opaque material representing a layer within an opaque construction.
     /// </summary>
     [DataContract]
-    public partial class EnergyMaterial : IDdEnergyBaseModel,  IEquatable<EnergyMaterial>, IValidatableObject
+    public partial class EnergyMaterial : IDdEnergyBaseModel, IEquatable<EnergyMaterial>, IValidatableObject
     {
 
         /// <summary>
@@ -144,6 +144,8 @@ namespace HoneybeeSchema
             {
                 this.VisibleAbsorptance = visibleAbsorptance;
             }
+
+            this.Type = "EnergyMaterial";
         }
         
         /// <summary>
@@ -153,7 +155,6 @@ namespace HoneybeeSchema
         [DataMember(Name="thickness", EmitDefaultValue=false)]
         [JsonProperty("thickness")]
         public double Thickness { get; set; }
-
         /// <summary>
         /// Thermal conductivity of the material layer in W/(m-K).
         /// </summary>
@@ -161,7 +162,6 @@ namespace HoneybeeSchema
         [DataMember(Name="conductivity", EmitDefaultValue=false)]
         [JsonProperty("conductivity")]
         public double Conductivity { get; set; }
-
         /// <summary>
         /// Density of the material layer in kg/m3.
         /// </summary>
@@ -169,7 +169,6 @@ namespace HoneybeeSchema
         [DataMember(Name="density", EmitDefaultValue=false)]
         [JsonProperty("density")]
         public double Density { get; set; }
-
         /// <summary>
         /// Specific heat of the material layer in J/(kg-K).
         /// </summary>
@@ -177,15 +176,6 @@ namespace HoneybeeSchema
         [DataMember(Name="specific_heat", EmitDefaultValue=false)]
         [JsonProperty("specific_heat")]
         public double SpecificHeat { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "EnergyMaterial"; 
-
-
         /// <summary>
         /// Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9.
         /// </summary>
@@ -193,7 +183,6 @@ namespace HoneybeeSchema
         [DataMember(Name="thermal_absorptance", EmitDefaultValue=false)]
         [JsonProperty("thermal_absorptance")]
         public double ThermalAbsorptance { get; set; }
-
         /// <summary>
         /// Fraction of incident solar radiation absorbed by the material. Default value is 0.7.
         /// </summary>
@@ -201,7 +190,6 @@ namespace HoneybeeSchema
         [DataMember(Name="solar_absorptance", EmitDefaultValue=false)]
         [JsonProperty("solar_absorptance")]
         public double SolarAbsorptance { get; set; }
-
         /// <summary>
         /// Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7.
         /// </summary>
@@ -209,7 +197,7 @@ namespace HoneybeeSchema
         [DataMember(Name="visible_absorptance", EmitDefaultValue=false)]
         [JsonProperty("visible_absorptance")]
         public double VisibleAbsorptance { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

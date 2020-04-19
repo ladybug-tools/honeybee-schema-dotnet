@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [DataContract]
-    public partial class IDdBaseModel :  IEquatable<IDdBaseModel>, IValidatableObject
+    public partial class IDdBaseModel : HoneybeeObject, IEquatable<IDdBaseModel>, IValidatableObject
     {
 
         /// <summary>
@@ -60,6 +60,8 @@ namespace HoneybeeSchema
             
             this.DisplayName = displayName;
             this.UserData = userData;
+
+            this.Type = "IDdBaseModel";
         }
         
         /// <summary>
@@ -69,7 +71,6 @@ namespace HoneybeeSchema
         [DataMember(Name="identifier", EmitDefaultValue=false)]
         [JsonProperty("identifier")]
         public string Identifier { get; set; }
-
         /// <summary>
         /// Display name of the object with no character restrictions.
         /// </summary>
@@ -77,7 +78,6 @@ namespace HoneybeeSchema
         [DataMember(Name="display_name", EmitDefaultValue=false)]
         [JsonProperty("display_name")]
         public string DisplayName { get; set; }
-
         /// <summary>
         /// Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).
         /// </summary>
@@ -85,14 +85,7 @@ namespace HoneybeeSchema
         [DataMember(Name="user_data", EmitDefaultValue=false)]
         [JsonProperty("user_data")]
         public Object UserData { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "IDdBaseModel"; 
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// A set of constructions for wall assemblies.
     /// </summary>
     [DataContract]
-    public partial class WallConstructionSetAbridged : FaceSubSetAbridged,  IEquatable<WallConstructionSetAbridged>, IValidatableObject
+    public partial class WallConstructionSetAbridged : FaceSubSetAbridged, IEquatable<WallConstructionSetAbridged>, IValidatableObject
     {
 
         /// <summary>
@@ -43,15 +43,11 @@ namespace HoneybeeSchema
             string interiorConstruction= default, string exteriorConstruction= default, string groundConstruction= default// Optional parameters
         ) : base(interiorConstruction: interiorConstruction, exteriorConstruction: exteriorConstruction, groundConstruction: groundConstruction )// BaseClass
         {
+
+            this.Type = "WallConstructionSetAbridged";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "WallConstructionSetAbridged"; 
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

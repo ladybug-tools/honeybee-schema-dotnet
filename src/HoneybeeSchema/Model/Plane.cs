@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
     [DataContract]
-    public partial class Plane :  IEquatable<Plane>, IValidatableObject
+    public partial class Plane : HoneybeeObject, IEquatable<Plane>, IValidatableObject
     {
 
         /// <summary>
@@ -69,6 +69,8 @@ namespace HoneybeeSchema
             }
             
             this.X = x;
+
+            this.Type = "Plane";
         }
         
         /// <summary>
@@ -78,7 +80,6 @@ namespace HoneybeeSchema
         [DataMember(Name="n", EmitDefaultValue=false)]
         [JsonProperty("n")]
         public List<double> N { get; set; }
-
         /// <summary>
         /// Plane origin as 3 (x, y, z) values
         /// </summary>
@@ -86,14 +87,6 @@ namespace HoneybeeSchema
         [DataMember(Name="o", EmitDefaultValue=false)]
         [JsonProperty("o")]
         public List<double> O { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "Plane"; 
-
         /// <summary>
         /// Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated.
         /// </summary>
@@ -101,7 +94,7 @@ namespace HoneybeeSchema
         [DataMember(Name="x", EmitDefaultValue=false)]
         [JsonProperty("x")]
         public List<double> X { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

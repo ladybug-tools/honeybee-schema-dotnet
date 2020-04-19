@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
     [DataContract]
-    public partial class Surface :  IEquatable<Surface>, IValidatableObject
+    public partial class Surface : HoneybeeObject, IEquatable<Surface>, IValidatableObject
     {
 
         /// <summary>
@@ -56,6 +56,8 @@ namespace HoneybeeSchema
                 this.BoundaryConditionObjects = boundaryConditionObjects;
             }
             
+
+            this.Type = "Surface";
         }
         
         /// <summary>
@@ -65,14 +67,7 @@ namespace HoneybeeSchema
         [DataMember(Name="boundary_condition_objects", EmitDefaultValue=false)]
         [JsonProperty("boundary_condition_objects")]
         public List<string> BoundaryConditionObjects { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "Surface"; 
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

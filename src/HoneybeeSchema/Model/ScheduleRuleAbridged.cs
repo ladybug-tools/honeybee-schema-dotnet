@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Schedule rule including a ScheduleDay and when it should be applied..
     /// </summary>
     [DataContract]
-    public partial class ScheduleRuleAbridged : DatedBaseModel,  IEquatable<ScheduleRuleAbridged>, IValidatableObject
+    public partial class ScheduleRuleAbridged : DatedBaseModel, IEquatable<ScheduleRuleAbridged>, IValidatableObject
     {
 
         /// <summary>
@@ -120,6 +120,8 @@ namespace HoneybeeSchema
             }
             this.StartDate = startDate;
             this.EndDate = endDate;
+
+            this.Type = "ScheduleRuleAbridged";
         }
         
         /// <summary>
@@ -129,14 +131,6 @@ namespace HoneybeeSchema
         [DataMember(Name="schedule_day", EmitDefaultValue=false)]
         [JsonProperty("schedule_day")]
         public string ScheduleDay { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "ScheduleRuleAbridged"; 
-
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Sundays.
         /// </summary>
@@ -144,7 +138,6 @@ namespace HoneybeeSchema
         [DataMember(Name="apply_sunday", EmitDefaultValue=false)]
         [JsonProperty("apply_sunday")]
         public bool ApplySunday { get; set; }
-
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Mondays.
         /// </summary>
@@ -152,7 +145,6 @@ namespace HoneybeeSchema
         [DataMember(Name="apply_monday", EmitDefaultValue=false)]
         [JsonProperty("apply_monday")]
         public bool ApplyMonday { get; set; }
-
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Tuesdays.
         /// </summary>
@@ -160,7 +152,6 @@ namespace HoneybeeSchema
         [DataMember(Name="apply_tuesday", EmitDefaultValue=false)]
         [JsonProperty("apply_tuesday")]
         public bool ApplyTuesday { get; set; }
-
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Wednesdays.
         /// </summary>
@@ -168,7 +159,6 @@ namespace HoneybeeSchema
         [DataMember(Name="apply_wednesday", EmitDefaultValue=false)]
         [JsonProperty("apply_wednesday")]
         public bool ApplyWednesday { get; set; }
-
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Thursdays.
         /// </summary>
@@ -176,7 +166,6 @@ namespace HoneybeeSchema
         [DataMember(Name="apply_thursday", EmitDefaultValue=false)]
         [JsonProperty("apply_thursday")]
         public bool ApplyThursday { get; set; }
-
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Fridays.
         /// </summary>
@@ -184,7 +173,6 @@ namespace HoneybeeSchema
         [DataMember(Name="apply_friday", EmitDefaultValue=false)]
         [JsonProperty("apply_friday")]
         public bool ApplyFriday { get; set; }
-
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Saturdays.
         /// </summary>
@@ -192,7 +180,6 @@ namespace HoneybeeSchema
         [DataMember(Name="apply_saturday", EmitDefaultValue=false)]
         [JsonProperty("apply_saturday")]
         public bool ApplySaturday { get; set; }
-
         /// <summary>
         /// A list of two integers for [month, day], representing the start date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).
         /// </summary>
@@ -200,7 +187,6 @@ namespace HoneybeeSchema
         [DataMember(Name="start_date", EmitDefaultValue=false)]
         [JsonProperty("start_date")]
         public List<int> StartDate { get; set; }
-
         /// <summary>
         /// A list of two integers for [month, day], representing the end date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).
         /// </summary>
@@ -208,7 +194,7 @@ namespace HoneybeeSchema
         [DataMember(Name="end_date", EmitDefaultValue=false)]
         [JsonProperty("end_date")]
         public List<int> EndDate { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

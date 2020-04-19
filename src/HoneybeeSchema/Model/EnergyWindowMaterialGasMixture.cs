@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Create a mixture of two to four different gases to fill the panes of multiple pane windows.
     /// </summary>
     [DataContract]
-    public partial class EnergyWindowMaterialGasMixture : IDdEnergyBaseModel,  IEquatable<EnergyWindowMaterialGasMixture>, IValidatableObject
+    public partial class EnergyWindowMaterialGasMixture : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialGasMixture>, IValidatableObject
     {
 
         /// <summary>
@@ -100,9 +100,10 @@ namespace HoneybeeSchema
             {
                 this.Thickness = thickness;
             }
+
+            this.Type = "EnergyWindowMaterialGasMixture";
         }
         
-
         /// <summary>
         /// A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1.
         /// </summary>
@@ -110,14 +111,6 @@ namespace HoneybeeSchema
         [DataMember(Name="gas_fractions", EmitDefaultValue=false)]
         [JsonProperty("gas_fractions")]
         public List<double> GasFractions { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "EnergyWindowMaterialGasMixture"; 
-
         /// <summary>
         /// The thickness of the gas mixture layer in meters.
         /// </summary>
@@ -125,7 +118,7 @@ namespace HoneybeeSchema
         [DataMember(Name="thickness", EmitDefaultValue=false)]
         [JsonProperty("thickness")]
         public double Thickness { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

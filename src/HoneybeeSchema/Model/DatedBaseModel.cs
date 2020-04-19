@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects needing to check for a valid Date.
     /// </summary>
     [DataContract]
-    public partial class DatedBaseModel :  IEquatable<DatedBaseModel>, IValidatableObject
+    public partial class DatedBaseModel : HoneybeeObject, IEquatable<DatedBaseModel>, IValidatableObject
     {
 
         /// <summary>
@@ -41,15 +41,11 @@ namespace HoneybeeSchema
             // Optional parameters
         )// BaseClass
         {
+
+            this.Type = "DatedBaseModel";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "DatedBaseModel"; 
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Construction for Air Boundary objects.
     /// </summary>
     [DataContract]
-    public partial class AirBoundaryConstructionAbridged : IDdEnergyBaseModel,  IEquatable<AirBoundaryConstructionAbridged>, IValidatableObject
+    public partial class AirBoundaryConstructionAbridged : IDdEnergyBaseModel, IEquatable<AirBoundaryConstructionAbridged>, IValidatableObject
     {
 
         /// <summary>
@@ -59,6 +59,8 @@ namespace HoneybeeSchema
             {
                 this.AirMixingPerArea = airMixingPerArea;
             }
+
+            this.Type = "AirBoundaryConstructionAbridged";
         }
         
         /// <summary>
@@ -68,14 +70,6 @@ namespace HoneybeeSchema
         [DataMember(Name="air_mixing_schedule", EmitDefaultValue=false)]
         [JsonProperty("air_mixing_schedule")]
         public string AirMixingSchedule { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "AirBoundaryConstructionAbridged"; 
-
         /// <summary>
         /// A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system.
         /// </summary>
@@ -83,7 +77,7 @@ namespace HoneybeeSchema
         [DataMember(Name="air_mixing_per_area", EmitDefaultValue=false)]
         [JsonProperty("air_mixing_per_area")]
         public double AirMixingPerArea { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

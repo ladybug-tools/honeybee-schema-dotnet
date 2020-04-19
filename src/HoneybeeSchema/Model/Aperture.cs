@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [DataContract]
-    public partial class Aperture : IDdBaseModel,  IEquatable<Aperture>, IValidatableObject
+    public partial class Aperture : IDdBaseModel, IEquatable<Aperture>, IValidatableObject
     {
 
         /// <summary>
@@ -68,6 +68,8 @@ namespace HoneybeeSchema
             }
             this.IndoorShades = indoorShades;
             this.OutdoorShades = outdoorShades;
+
+            this.Type = "Aperture";
         }
         
         /// <summary>
@@ -77,14 +79,12 @@ namespace HoneybeeSchema
         [DataMember(Name="geometry", EmitDefaultValue=false)]
         [JsonProperty("geometry")]
         public Face3D Geometry { get; set; }
-
         /// <summary>
         /// Gets or Sets BoundaryCondition
         /// </summary>
         [DataMember(Name="boundary_condition", EmitDefaultValue=false)]
         [JsonProperty("boundary_condition")]
         public AnyOf<Outdoors,Surface> BoundaryCondition { get; set; }
-
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
@@ -92,14 +92,6 @@ namespace HoneybeeSchema
         [DataMember(Name="properties", EmitDefaultValue=false)]
         [JsonProperty("properties")]
         public AperturePropertiesAbridged Properties { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "Aperture"; 
-
         /// <summary>
         /// Boolean to note whether the Aperture can be opened for ventilation.
         /// </summary>
@@ -107,7 +99,6 @@ namespace HoneybeeSchema
         [DataMember(Name="is_operable", EmitDefaultValue=false)]
         [JsonProperty("is_operable")]
         public bool IsOperable { get; set; }
-
         /// <summary>
         /// Shades assigned to the interior side of this object (eg. window sill, light shelf).
         /// </summary>
@@ -115,7 +106,6 @@ namespace HoneybeeSchema
         [DataMember(Name="indoor_shades", EmitDefaultValue=false)]
         [JsonProperty("indoor_shades")]
         public List<Shade> IndoorShades { get; set; }
-
         /// <summary>
         /// Shades assigned to the exterior side of this object (eg. mullions, louvers).
         /// </summary>
@@ -123,7 +113,7 @@ namespace HoneybeeSchema
         [DataMember(Name="outdoor_shades", EmitDefaultValue=false)]
         [JsonProperty("outdoor_shades")]
         public List<Shade> OutdoorShades { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

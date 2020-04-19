@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [DataContract]
-    public partial class Ventilation : IDdEnergyBaseModel,  IEquatable<Ventilation>, IValidatableObject
+    public partial class Ventilation : IDdEnergyBaseModel, IEquatable<Ventilation>, IValidatableObject
     {
 
         /// <summary>
@@ -89,15 +89,10 @@ namespace HoneybeeSchema
                 this.FlowPerZone = flowPerZone;
             }
             this.Schedule = schedule;
+
+            this.Type = "Ventilation";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "Ventilation"; 
-
         /// <summary>
         /// Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room.
         /// </summary>
@@ -105,7 +100,6 @@ namespace HoneybeeSchema
         [DataMember(Name="flow_per_person", EmitDefaultValue=false)]
         [JsonProperty("flow_per_person")]
         public double FlowPerPerson { get; set; }
-
         /// <summary>
         /// Intensity of ventilation in [m3/s per m2 of floor area].
         /// </summary>
@@ -113,7 +107,6 @@ namespace HoneybeeSchema
         [DataMember(Name="flow_per_area", EmitDefaultValue=false)]
         [JsonProperty("flow_per_area")]
         public double FlowPerArea { get; set; }
-
         /// <summary>
         /// Intensity of ventilation in air changes per hour (ACH) for the entire Room.
         /// </summary>
@@ -121,7 +114,6 @@ namespace HoneybeeSchema
         [DataMember(Name="air_changes_per_hour", EmitDefaultValue=false)]
         [JsonProperty("air_changes_per_hour")]
         public double AirChangesPerHour { get; set; }
-
         /// <summary>
         /// Intensity of ventilation in m3/s for the entire Room.
         /// </summary>
@@ -129,7 +121,6 @@ namespace HoneybeeSchema
         [DataMember(Name="flow_per_zone", EmitDefaultValue=false)]
         [JsonProperty("flow_per_zone")]
         public double FlowPerZone { get; set; }
-
         /// <summary>
         /// Schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.
         /// </summary>
@@ -137,7 +128,7 @@ namespace HoneybeeSchema
         [DataMember(Name="schedule", EmitDefaultValue=false)]
         [JsonProperty("schedule")]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [DataContract]
-    public partial class ElectricEquipmentAbridged : EquipmentBase,  IEquatable<ElectricEquipmentAbridged>, IValidatableObject
+    public partial class ElectricEquipmentAbridged : EquipmentBase, IEquatable<ElectricEquipmentAbridged>, IValidatableObject
     {
 
         /// <summary>
@@ -52,15 +52,11 @@ namespace HoneybeeSchema
             string displayName= default, double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, wattsPerArea: wattsPerArea, schedule: schedule, radiantFraction: radiantFraction, latentFraction: latentFraction, lostFraction: lostFraction)// BaseClass
         {
+
+            this.Type = "ElectricEquipmentAbridged";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "ElectricEquipmentAbridged"; 
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

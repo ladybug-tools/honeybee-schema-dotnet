@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// No mass opaque material representing a layer within an opaque construction.  Used when only the thermal resistance (R value) of the material is known.
     /// </summary>
     [DataContract]
-    public partial class EnergyMaterialNoMass : IDdEnergyBaseModel,  IEquatable<EnergyMaterialNoMass>, IValidatableObject
+    public partial class EnergyMaterialNoMass : IDdEnergyBaseModel, IEquatable<EnergyMaterialNoMass>, IValidatableObject
     {
 
         /// <summary>
@@ -138,6 +138,8 @@ namespace HoneybeeSchema
             {
                 this.VisibleAbsorptance = visibleAbsorptance;
             }
+
+            this.Type = "EnergyMaterialNoMass";
         }
         
         /// <summary>
@@ -147,15 +149,6 @@ namespace HoneybeeSchema
         [DataMember(Name="r_value", EmitDefaultValue=false)]
         [JsonProperty("r_value")]
         public double RValue { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "EnergyMaterialNoMass"; 
-
-
         /// <summary>
         /// Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9.
         /// </summary>
@@ -163,7 +156,6 @@ namespace HoneybeeSchema
         [DataMember(Name="thermal_absorptance", EmitDefaultValue=false)]
         [JsonProperty("thermal_absorptance")]
         public double ThermalAbsorptance { get; set; }
-
         /// <summary>
         /// Fraction of incident solar radiation absorbed by the material. Default value is 0.7.
         /// </summary>
@@ -171,7 +163,6 @@ namespace HoneybeeSchema
         [DataMember(Name="solar_absorptance", EmitDefaultValue=false)]
         [JsonProperty("solar_absorptance")]
         public double SolarAbsorptance { get; set; }
-
         /// <summary>
         /// Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7.
         /// </summary>
@@ -179,7 +170,7 @@ namespace HoneybeeSchema
         [DataMember(Name="visible_absorptance", EmitDefaultValue=false)]
         [JsonProperty("visible_absorptance")]
         public double VisibleAbsorptance { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

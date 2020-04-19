@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// A single planar face in 3D space.
     /// </summary>
     [DataContract]
-    public partial class Face3D :  IEquatable<Face3D>, IValidatableObject
+    public partial class Face3D : HoneybeeObject, IEquatable<Face3D>, IValidatableObject
     {
 
         /// <summary>
@@ -60,6 +60,8 @@ namespace HoneybeeSchema
             
             this.Holes = holes;
             this.Plane = plane;
+
+            this.Type = "Face3D";
         }
         
         /// <summary>
@@ -69,14 +71,6 @@ namespace HoneybeeSchema
         [DataMember(Name="boundary", EmitDefaultValue=false)]
         [JsonProperty("boundary")]
         public List<List<double>> Boundary { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "Face3D"; 
-
         /// <summary>
         /// Optional list of lists with one list for each hole in the face.Each hole should be a list of at least 3 points and each point a list of 3 (x, y, z) values. If None, it will be assumed that there are no holes in the face.
         /// </summary>
@@ -84,7 +78,6 @@ namespace HoneybeeSchema
         [DataMember(Name="holes", EmitDefaultValue=false)]
         [JsonProperty("holes")]
         public List<List<List<double>>> Holes { get; set; }
-
         /// <summary>
         /// Optional Plane indicating the plane in which the face exists.If None, the plane will usually be derived from the boundary points.
         /// </summary>
@@ -92,7 +85,7 @@ namespace HoneybeeSchema
         [DataMember(Name="plane", EmitDefaultValue=false)]
         [JsonProperty("plane")]
         public Plane Plane { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

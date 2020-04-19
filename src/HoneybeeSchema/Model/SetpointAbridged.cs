@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Used to specify information about the setpoint schedule.
     /// </summary>
     [DataContract]
-    public partial class SetpointAbridged : IDdEnergyBaseModel,  IEquatable<SetpointAbridged>, IValidatableObject
+    public partial class SetpointAbridged : IDdEnergyBaseModel, IEquatable<SetpointAbridged>, IValidatableObject
     {
 
         /// <summary>
@@ -55,6 +55,8 @@ namespace HoneybeeSchema
             this.HeatingSchedule = heatingSchedule;
             this.HumidifyingSchedule = humidifyingSchedule;
             this.DehumidifyingSchedule = dehumidifyingSchedule;
+
+            this.Type = "SetpointAbridged";
         }
         
         /// <summary>
@@ -64,7 +66,6 @@ namespace HoneybeeSchema
         [DataMember(Name="cooling_schedule", EmitDefaultValue=false)]
         [JsonProperty("cooling_schedule")]
         public string CoolingSchedule { get; set; }
-
         /// <summary>
         /// Identifier of the schedule for the heating setpoint. The values in this schedule should be temperature in [C].
         /// </summary>
@@ -72,14 +73,6 @@ namespace HoneybeeSchema
         [DataMember(Name="heating_schedule", EmitDefaultValue=false)]
         [JsonProperty("heating_schedule")]
         public string HeatingSchedule { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "SetpointAbridged"; 
-
         /// <summary>
         /// Identifier of the schedule for the humidification setpoint. The values in this schedule should be in [%].
         /// </summary>
@@ -87,7 +80,6 @@ namespace HoneybeeSchema
         [DataMember(Name="humidifying_schedule", EmitDefaultValue=false)]
         [JsonProperty("humidifying_schedule")]
         public string HumidifyingSchedule { get; set; }
-
         /// <summary>
         /// Identifier of the schedule for the dehumidification setpoint. The values in this schedule should be in [%].
         /// </summary>
@@ -95,7 +87,7 @@ namespace HoneybeeSchema
         [DataMember(Name="dehumidifying_schedule", EmitDefaultValue=false)]
         [JsonProperty("dehumidifying_schedule")]
         public string DehumidifyingSchedule { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

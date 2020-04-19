@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [DataContract]
-    public partial class Door : IDdBaseModel,  IEquatable<Door>, IValidatableObject
+    public partial class Door : IDdBaseModel, IEquatable<Door>, IValidatableObject
     {
 
         /// <summary>
@@ -68,6 +68,8 @@ namespace HoneybeeSchema
             }
             this.IndoorShades = indoorShades;
             this.OutdoorShades = outdoorShades;
+
+            this.Type = "Door";
         }
         
         /// <summary>
@@ -77,14 +79,12 @@ namespace HoneybeeSchema
         [DataMember(Name="geometry", EmitDefaultValue=false)]
         [JsonProperty("geometry")]
         public Face3D Geometry { get; set; }
-
         /// <summary>
         /// Gets or Sets BoundaryCondition
         /// </summary>
         [DataMember(Name="boundary_condition", EmitDefaultValue=false)]
         [JsonProperty("boundary_condition")]
         public AnyOf<Outdoors,Surface> BoundaryCondition { get; set; }
-
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
@@ -92,14 +92,6 @@ namespace HoneybeeSchema
         [DataMember(Name="properties", EmitDefaultValue=false)]
         [JsonProperty("properties")]
         public DoorPropertiesAbridged Properties { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "Door"; 
-
         /// <summary>
         /// Boolean to note whether this object is a glass door as opposed to an opaque door.
         /// </summary>
@@ -107,7 +99,6 @@ namespace HoneybeeSchema
         [DataMember(Name="is_glass", EmitDefaultValue=false)]
         [JsonProperty("is_glass")]
         public bool IsGlass { get; set; }
-
         /// <summary>
         /// Shades assigned to the interior side of this object.
         /// </summary>
@@ -115,7 +106,6 @@ namespace HoneybeeSchema
         [DataMember(Name="indoor_shades", EmitDefaultValue=false)]
         [JsonProperty("indoor_shades")]
         public List<Shade> IndoorShades { get; set; }
-
         /// <summary>
         /// Shades assigned to the exterior side of this object (eg. entryway awning).
         /// </summary>
@@ -123,7 +113,7 @@ namespace HoneybeeSchema
         [DataMember(Name="outdoor_shades", EmitDefaultValue=false)]
         [JsonProperty("outdoor_shades")]
         public List<Shade> OutdoorShades { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [DataContract]
-    public partial class IDdEnergyBaseModel :  IEquatable<IDdEnergyBaseModel>, IValidatableObject
+    public partial class IDdEnergyBaseModel : HoneybeeObject, IEquatable<IDdEnergyBaseModel>, IValidatableObject
     {
 
         /// <summary>
@@ -58,6 +58,8 @@ namespace HoneybeeSchema
             }
             
             this.DisplayName = displayName;
+
+            this.Type = "IDdEnergyBaseModel";
         }
         
         /// <summary>
@@ -67,7 +69,6 @@ namespace HoneybeeSchema
         [DataMember(Name="identifier", EmitDefaultValue=false)]
         [JsonProperty("identifier")]
         public string Identifier { get; set; }
-
         /// <summary>
         /// Display name of the object with no character restrictions.
         /// </summary>
@@ -75,14 +76,7 @@ namespace HoneybeeSchema
         [DataMember(Name="display_name", EmitDefaultValue=false)]
         [JsonProperty("display_name")]
         public string DisplayName { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "IDdEnergyBaseModel"; 
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
     [DataContract]
-    public partial class Autocalculate :  IEquatable<Autocalculate>, IValidatableObject
+    public partial class Autocalculate : HoneybeeObject, IEquatable<Autocalculate>, IValidatableObject
     {
 
         /// <summary>
@@ -41,15 +41,11 @@ namespace HoneybeeSchema
             // Optional parameters
         )// BaseClass
         {
+
+            this.Type = "Autocalculate";
         }
         
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "Autocalculate"; 
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

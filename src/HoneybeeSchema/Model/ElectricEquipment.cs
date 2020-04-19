@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [DataContract]
-    public partial class ElectricEquipment : IDdEnergyBaseModel,  IEquatable<ElectricEquipment>, IValidatableObject
+    public partial class ElectricEquipment : IDdEnergyBaseModel, IEquatable<ElectricEquipment>, IValidatableObject
     {
 
         /// <summary>
@@ -81,6 +81,8 @@ namespace HoneybeeSchema
             {
                 this.LostFraction = lostFraction;
             }
+
+            this.Type = "ElectricEquipment";
         }
         
         /// <summary>
@@ -90,7 +92,6 @@ namespace HoneybeeSchema
         [DataMember(Name="watts_per_area", EmitDefaultValue=false)]
         [JsonProperty("watts_per_area")]
         public double WattsPerArea { get; set; }
-
         /// <summary>
         /// The schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.
         /// </summary>
@@ -98,7 +99,6 @@ namespace HoneybeeSchema
         [DataMember(Name="schedule", EmitDefaultValue=false)]
         [JsonProperty("schedule")]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; }
-
         /// <summary>
         /// Number for the amount of long-wave radiation heat given off by electric equipment. Default value is 0.
         /// </summary>
@@ -106,7 +106,6 @@ namespace HoneybeeSchema
         [DataMember(Name="radiant_fraction", EmitDefaultValue=false)]
         [JsonProperty("radiant_fraction")]
         public double RadiantFraction { get; set; }
-
         /// <summary>
         /// Number for the amount of latent heat given off by electricequipment. Default value is 0.
         /// </summary>
@@ -114,7 +113,6 @@ namespace HoneybeeSchema
         [DataMember(Name="latent_fraction", EmitDefaultValue=false)]
         [JsonProperty("latent_fraction")]
         public double LatentFraction { get; set; }
-
         /// <summary>
         /// Number for the amount of “lost” heat being given off by equipment. The default value is 0.
         /// </summary>
@@ -122,14 +120,7 @@ namespace HoneybeeSchema
         [DataMember(Name="lost_fraction", EmitDefaultValue=false)]
         [JsonProperty("lost_fraction")]
         public double LostFraction { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "ElectricEquipment"; 
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

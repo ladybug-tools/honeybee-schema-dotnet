@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Describe an entire glazing system rather than individual layers.  Used when only very limited information is available on the glazing layers or when specific performance levels are being targeted.
     /// </summary>
     [DataContract]
-    public partial class EnergyWindowMaterialSimpleGlazSys : IDdEnergyBaseModel,  IEquatable<EnergyWindowMaterialSimpleGlazSys>, IValidatableObject
+    public partial class EnergyWindowMaterialSimpleGlazSys : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialSimpleGlazSys>, IValidatableObject
     {
 
         /// <summary>
@@ -61,6 +61,8 @@ namespace HoneybeeSchema
             {
                 this.Vt = vt;
             }
+
+            this.Type = "EnergyWindowMaterialSimpleGlazSys";
         }
         
         /// <summary>
@@ -70,7 +72,6 @@ namespace HoneybeeSchema
         [DataMember(Name="u_factor", EmitDefaultValue=false)]
         [JsonProperty("u_factor")]
         public double UFactor { get; set; }
-
         /// <summary>
         /// Unitless  quantity describing Solar Heat Gain Coefficient for normal incidence and vertical orientation.
         /// </summary>
@@ -78,14 +79,6 @@ namespace HoneybeeSchema
         [DataMember(Name="shgc", EmitDefaultValue=false)]
         [JsonProperty("shgc")]
         public double Shgc { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "EnergyWindowMaterialSimpleGlazSys"; 
-
         /// <summary>
         /// The fraction of visible light falling on the window that makes it through the glass at normal incidence.
         /// </summary>
@@ -93,7 +86,7 @@ namespace HoneybeeSchema
         [DataMember(Name="vt", EmitDefaultValue=false)]
         [JsonProperty("vt")]
         public double Vt { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

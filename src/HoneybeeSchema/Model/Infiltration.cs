@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [DataContract]
-    public partial class Infiltration : IDdEnergyBaseModel,  IEquatable<Infiltration>, IValidatableObject
+    public partial class Infiltration : IDdEnergyBaseModel, IEquatable<Infiltration>, IValidatableObject
     {
 
         /// <summary>
@@ -81,6 +81,8 @@ namespace HoneybeeSchema
             {
                 this.VelocityCoefficient = velocityCoefficient;
             }
+
+            this.Type = "Infiltration";
         }
         
         /// <summary>
@@ -90,7 +92,6 @@ namespace HoneybeeSchema
         [DataMember(Name="flow_per_exterior_area", EmitDefaultValue=false)]
         [JsonProperty("flow_per_exterior_area")]
         public double FlowPerExteriorArea { get; set; }
-
         /// <summary>
         /// The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.
         /// </summary>
@@ -98,35 +99,25 @@ namespace HoneybeeSchema
         [DataMember(Name="schedule", EmitDefaultValue=false)]
         [JsonProperty("schedule")]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        [JsonProperty("type")]
-        public string Type { get; private set; } = "Infiltration"; 
-
         /// <summary>
         /// Gets or Sets ConstantCoefficient
         /// </summary>
         [DataMember(Name="constant_coefficient", EmitDefaultValue=false)]
         [JsonProperty("constant_coefficient")]
         public double ConstantCoefficient { get; set; }
-
         /// <summary>
         /// Gets or Sets TemperatureCoefficient
         /// </summary>
         [DataMember(Name="temperature_coefficient", EmitDefaultValue=false)]
         [JsonProperty("temperature_coefficient")]
         public double TemperatureCoefficient { get; set; }
-
         /// <summary>
         /// Gets or Sets VelocityCoefficient
         /// </summary>
         [DataMember(Name="velocity_coefficient", EmitDefaultValue=false)]
         [JsonProperty("velocity_coefficient")]
         public double VelocityCoefficient { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
