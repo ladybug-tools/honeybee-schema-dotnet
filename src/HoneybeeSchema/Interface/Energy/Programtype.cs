@@ -9,5 +9,4 @@ namespace HoneybeeSchema.Energy
 namespace HoneybeeSchema
 {
 	public partial class ProgramTypeAbridged: HoneybeeSchema.Energy.IProgramtype {}
-	public partial class ProgramType: HoneybeeSchema.Energy.IProgramtype {}
 }
