@@ -132,14 +132,14 @@ def check_anyof_types(source_json_url):
     check_csfiles(source_folder, all_types)
 
 
-def cleanup():
+def cleanup(projectName):
     root = os.path.dirname(os.path.dirname(__file__))
     # remove Client folder
-    target_folder = os.path.join(root, 'src', 'HoneybeeSchema', 'Client')
+    target_folder = os.path.join(root, 'src', projectName, 'Client')
     if os.path.exists(target_folder):
         shutil.rmtree(target_folder)
     # remove all *AllOf.cs files
-    target_folder = os.path.join(root, 'src', 'HoneybeeSchema', 'Model')
+    target_folder = os.path.join(root, 'src', projectName, 'Model')
     class_files = [x for x in os.listdir(target_folder) if x.endswith("AllOf.cs")]
     for f in class_files:
         cs_file = os.path.join(target_folder, f)
@@ -151,6 +151,13 @@ def cleanup():
     for f in class_files:
         cs_file = os.path.join(docs_folder, f)
         os.remove(cs_file)
+    # remove all *AllOfTests.cs files
+    target_folder = os.path.join(root, 'src', f'{projectName}.Test', 'Model')
+    print(f"Checking {target_folder}")
+    class_files = [x for x in os.listdir(target_folder) if x.endswith("AllOfTests.cs")]
+    for f in class_files:
+        cs_file = os.path.join(target_folder, f)
+        os.remove(cs_file)
 
 
 args = sys.argv[1:]
@@ -160,7 +167,7 @@ else:
     json_file = args[0]
 
 time.sleep(3)
-cleanup()
+cleanup('HoneybeeSchema')
 print(f"post processing with {json_file}")
 check_anyof_types(json_file)
 
