@@ -144,6 +144,13 @@ def cleanup():
     for f in class_files:
         cs_file = os.path.join(target_folder, f)
         os.remove(cs_file)
+    # remove all *AllOf.md files
+    docs_folder = os.path.join(root, 'docs')
+    print(f"Checking {docs_folder}")
+    class_files = [x for x in os.listdir(docs_folder) if x.endswith("AllOf.md")]
+    for f in class_files:
+        cs_file = os.path.join(docs_folder, f)
+        os.remove(cs_file)
 
 
 args = sys.argv[1:]
