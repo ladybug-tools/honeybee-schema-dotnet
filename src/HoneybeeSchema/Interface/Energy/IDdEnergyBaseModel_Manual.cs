@@ -1,10 +1,10 @@
 
 namespace HoneybeeSchema.Energy
 {
-    public partial interface IIDdEnergyBaseModel
+    public partial interface IIDdEnergyBaseModel: IIDdBase
     {
-        string Identifier { get; set;}
-        string DisplayName { get; set; }
+        // string Identifier { get; set;}
+        // string DisplayName { get; set; }
     } 
 
     public partial interface ILoad: IIDdEnergyBaseModel{}

@@ -264,6 +264,9 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            if (this is IIDdBase iDd)
+                return $"EnergyWindowMaterialGlazing {iDd.Identifier}";
+       
             return "EnergyWindowMaterialGlazing";
         }
 

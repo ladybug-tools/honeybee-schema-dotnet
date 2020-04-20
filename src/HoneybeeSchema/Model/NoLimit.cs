@@ -53,6 +53,9 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            if (this is IIDdBase iDd)
+                return $"NoLimit {iDd.Identifier}";
+       
             return "NoLimit";
         }
 
