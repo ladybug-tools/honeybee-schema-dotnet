@@ -39,8 +39,7 @@ def create_interfaces(dir, interfaces):
     
     for interface in interfaces:
         space_name = interface
-        child_classes = interfaces[space_name]
- 
+        child_classes = sorted(interfaces[space_name]) 
         create_interface(dir, space_name, child_classes)
 
 
@@ -67,7 +66,7 @@ def create_interface(dir, space_name, child_classes):
     
     # creating the interface cs file
     interface_file = os.path.join(sub_dir, f'{interface_name}.cs')
-    print(f'Creating {interface_file}')
+    print(f'\nCreating interface {interface_name}: {interface_file}')
     with open(interface_file, "wt", encoding='utf-8') as interfaceFile:
         data = []
         
@@ -81,6 +80,7 @@ def create_interface(dir, space_name, child_classes):
         data.append(f'namespace {layers[0]}\n')
         data.append('{\n')
         for f in child_classes:
+            print(f'\t -Adding {f}')
             data.append('\tpublic partial class %s: %s.I%s {}\n' % (f, space_full_name, interface_name))
         data.append('}\n')
         interfaceFile.writelines(data)
