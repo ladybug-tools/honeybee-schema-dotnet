@@ -8,8 +8,8 @@ namespace HoneybeeSchema.Energy
 //Classes implemented this interface:
 namespace HoneybeeSchema
 {
-	public partial class OpaqueConstructionAbridged: HoneybeeSchema.Energy.IConstruction {}
-	public partial class ShadeConstruction: HoneybeeSchema.Energy.IConstruction {}
-	public partial class AirBoundaryConstructionAbridged: HoneybeeSchema.Energy.IConstruction {}
 	public partial class WindowConstructionAbridged: HoneybeeSchema.Energy.IConstruction {}
+	public partial class ShadeConstruction: HoneybeeSchema.Energy.IConstruction {}
+	public partial class OpaqueConstructionAbridged: HoneybeeSchema.Energy.IConstruction {}
+	public partial class AirBoundaryConstructionAbridged: HoneybeeSchema.Energy.IConstruction {}
 }

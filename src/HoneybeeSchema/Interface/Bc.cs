@@ -9,7 +9,7 @@ namespace HoneybeeSchema
 namespace HoneybeeSchema
 {
 	public partial class Surface: HoneybeeSchema.IBc {}
-	public partial class Outdoors: HoneybeeSchema.IBc {}
 	public partial class Adiabatic: HoneybeeSchema.IBc {}
 	public partial class Ground: HoneybeeSchema.IBc {}
+	public partial class Outdoors: HoneybeeSchema.IBc {}
 }
