@@ -8,7 +8,7 @@ namespace HoneybeeSchema
 //Classes implemented this interface:
 namespace HoneybeeSchema
 {
+	public partial class Autocalculate: HoneybeeSchema.IAltnumber {}
 	public partial class Autosize: HoneybeeSchema.IAltnumber {}
 	public partial class NoLimit: HoneybeeSchema.IAltnumber {}
-	public partial class Autocalculate: HoneybeeSchema.IAltnumber {}
 }
