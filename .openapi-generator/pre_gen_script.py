@@ -8,10 +8,10 @@ args = sys.argv[1:]
 version = ""
 
 if args == []:
-    source_json_url = "https://www.ladybug.tools/honeybee-schema/model.json"
+    source_json_url = "https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/gh-pages/model.json"
     json_url = urllib.request.urlopen(source_json_url)
     data = json.loads(json_url.read())
-    version = data['info']['version'][0]
+    version = data['info']['version']
 else:
     version = args[0]
 

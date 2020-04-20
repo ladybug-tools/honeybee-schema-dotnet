@@ -12,4 +12,5 @@ npx openapi-generator generate -i "https://github.com/ladybug-tools/honeybee-sch
 python .openapi-generator/post_gen_script.py "https://github.com/ladybug-tools/honeybee-schema/releases/download/$VERSION/simulation-parameter_inheritance.json"
 python .openapi-generator/post_gen_script.py "https://github.com/ladybug-tools/honeybee-schema/releases/download/$VERSION/model_inheritance.json"
 python .openapi-generator/update_assembly_version.py
+python .openapi-generator/create_interface.py "https://github.com/ladybug-tools/honeybee-schema/releases/download/$VERSION/simulation-parameter_mapper.json"
 python .openapi-generator/create_interface.py "https://github.com/ladybug-tools/honeybee-schema/releases/download/$VERSION/model_mapper.json"
