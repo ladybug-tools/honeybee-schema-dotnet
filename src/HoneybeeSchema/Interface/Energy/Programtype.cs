@@ -8,5 +8,6 @@ namespace HoneybeeSchema.Energy
 //Classes implemented this interface:
 namespace HoneybeeSchema
 {
+	public partial class ProgramType: HoneybeeSchema.Energy.IProgramtype {}
 	public partial class ProgramTypeAbridged: HoneybeeSchema.Energy.IProgramtype {}
 }
