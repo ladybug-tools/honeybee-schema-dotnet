@@ -128,6 +128,9 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            if (this is IIDdBase iDd)
+                return $"LightingAbridged {iDd.Identifier}";
+       
             return "LightingAbridged";
         }
 

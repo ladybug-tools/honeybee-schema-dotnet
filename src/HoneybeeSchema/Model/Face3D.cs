@@ -93,6 +93,9 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
+            if (this is IIDdBase iDd)
+                return $"Face3D {iDd.Identifier}";
+       
             return "Face3D";
         }
 

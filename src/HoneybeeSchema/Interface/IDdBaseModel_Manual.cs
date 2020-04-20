@@ -1,10 +1,10 @@
 
-namespace HoneybeeSchema.Energy
+namespace HoneybeeSchema
 {
-    public partial interface IIDdBaseModel
+    public partial interface IIDdBaseModel: IIDdBase
     {
-        string Identifier { get; set;}
-        string DisplayName { get; set; }
+        // string Identifier { get; set;}
+        // string DisplayName { get; set; }
         object UserData { get; set; }
     } 
 
@@ -13,5 +13,5 @@ namespace HoneybeeSchema.Energy
 
 namespace HoneybeeSchema
 {
-    public partial class IDdBaseModel: Energy.IIDdBaseModel{}
+    // public partial class IDdBaseModel: IIDdBaseModel{}
 }
