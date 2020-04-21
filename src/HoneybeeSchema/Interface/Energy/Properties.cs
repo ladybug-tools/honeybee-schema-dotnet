@@ -12,7 +12,6 @@ namespace HoneybeeSchema
 	public partial class DoorEnergyPropertiesAbridged: HoneybeeSchema.Energy.IProperties {}
 	public partial class FaceEnergyPropertiesAbridged: HoneybeeSchema.Energy.IProperties {}
 	public partial class ModelEnergyProperties: HoneybeeSchema.Energy.IProperties {}
-	public partial class ShadeEnergyPropertiesAbridged: HoneybeeSchema.Energy.IProperties {}
 	public partial class RoomEnergyPropertiesAbridged: HoneybeeSchema.Energy.IProperties {}
 	public partial class ShadeEnergyPropertiesAbridged: HoneybeeSchema.Energy.IProperties {}
 }

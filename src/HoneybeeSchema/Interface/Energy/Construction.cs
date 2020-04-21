@@ -15,6 +15,4 @@ namespace HoneybeeSchema
 	public partial class ShadeConstruction: HoneybeeSchema.Energy.IConstruction {}
 	public partial class WindowConstruction: HoneybeeSchema.Energy.IConstruction {}
 	public partial class WindowConstructionAbridged: HoneybeeSchema.Energy.IConstruction {}
-	public partial class OpaqueConstruction: HoneybeeSchema.Energy.IConstruction {}
-	public partial class WindowConstruction: HoneybeeSchema.Energy.IConstruction {}
 }
