@@ -33,17 +33,21 @@ def get_allof_types(obj, allofList):
 
 def fix_constructor(read_data):
     regexs = [
-        r"(,\s*,)(?=\s*\/\/ Required parameters\n\s+\b)",
+        r"(?<=(\w|\d)),\s*,\s*(?=\w)",
+        r"(?<=\()\s*(,)(?=\s\w*.*, \/\/ Required parameters)",
+        r"(?<=\w)(,\s){2,}(?=\s*\/\/ Required parameters\s*\n\s*\w)",
         r"(,)(?=\s*\/\/ Optional parameters)",
-        r"(,)(?=\s*\/\/ Required parameters\n\s+\/\/ Optional parameters)",
+        r"(,\s)+(?=\s*\/\/ Required parameters\n\s+\/\/ Optional parameters)",
         r"(,)(?=\s*\)\/\/ BaseClass)",
         r"(?<=\()(\s*,)(?=\s*\/\/ Required parameters)"
     ]
 
     replace_new = [
-        ",",
+        ", ",
+        "",   # remove "," at begining
+        ", ",  # remove one comma of in two or more commas before "//Required parameters"
         " ",
-        "",
+        "",   # remove commas before "//Required parameters" when there is no optional perameters
         "",
         ""
     ]
