@@ -425,6 +425,36 @@ namespace HoneybeeSchema.Helper
 
         }
 
+        public static HB.Energy.IBuildingConstructionset GetConstructionSetByIdentifier(string identifier)
+        {
+            // TODO: change it to all construction set collection bucket
+            var lib = EnergyLibrary.DefaultConstructionSets;
+            var obj = lib.FirstOrDefault(_ => _.Identifier == identifier);
+            if (obj == null)
+                throw new ArgumentNullException($"Failed to find the construction set {identifier}");
+            return obj;
+        }
+
+        public static HB.Energy.IProgramtype GetProgramTypeByIdentifier(string identifier)
+        {
+            // TODO: change it to all program type collection bucket
+            var lib = EnergyLibrary.DefaultProgramTypes;
+            var obj = lib.FirstOrDefault(_ => _.Identifier == identifier);
+            if (obj == null)
+                throw new ArgumentNullException($"Failed to find the program type {identifier}");
+            return obj;
+        }
+
+        public static HB.Energy.IHvac GetHVACByIdentifier(string identifier)
+        {
+            // TODO: change it to all hvacs collection bucket
+            var lib = EnergyLibrary.DefaultHVACs;
+            var obj = lib.FirstOrDefault(_ => _.Identifier == identifier);
+            if (obj == null)
+                throw new ArgumentNullException($"Failed to find the program type {identifier}");
+            return obj;
+        }
+
         public static HB.OpaqueConstructionAbridged GetOpaqueConstructionByIdentifier(string identifier)
         {
             var lib = EnergyLibrary.StandardsOpaqueConstructions;
