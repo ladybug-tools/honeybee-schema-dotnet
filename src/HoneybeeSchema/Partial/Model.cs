@@ -7,6 +7,75 @@ namespace HoneybeeSchema
 {
     public partial class Model
     {
+        public void AddConstructionSets(List<IBuildingConstructionset> constructionsets)
+        {
+            foreach (var item in constructionsets)
+            {
+                var exist = this.Properties.Energy.ConstructionSets.Any(_ => _ == item);
+                if (exist)
+                    return;
+
+                switch (item)
+                {
+                    case ConstructionSetAbridged em:
+                        this.Properties.Energy.ConstructionSets.Add(em);
+                        break;
+                    case ConstructionSet em:
+                        this.Properties.Energy.ConstructionSets.Add(em);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            
+        }
+
+        public void AddProgramTypes(List<IProgramtype> programtypes)
+        {
+            foreach (var item in programtypes)
+            {
+                var exist = this.Properties.Energy.ProgramTypes.Any(_ => _ == item);
+                if (exist)
+                    return;
+
+                switch (item)
+                {
+                    case ProgramType em:
+                        this.Properties.Energy.ProgramTypes.Add(em);
+                        break;
+                    case ProgramTypeAbridged em:
+                        this.Properties.Energy.ProgramTypes.Add(em);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            
+        }
+
+        public void AddHVACs(List<IHvac> havcs)
+        {
+            foreach (var item in havcs)
+            {
+                var exist = this.Properties.Energy.Hvacs.Any(_ => _ == item);
+                if (exist)
+                    return;
+
+                switch (item)
+                {
+                    case IdealAirSystemAbridged em:
+                        this.Properties.Energy.Hvacs.Add(em);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            
+        }
+
         public void AddEnergyMaterial(List<IMaterial> materials)
         {
             foreach (var material in materials)
