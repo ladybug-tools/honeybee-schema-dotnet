@@ -1,0 +1,17 @@
+{
+  "SimulationOutput": "honeybee_schema.energy.simulation",
+  "SizingParameter": "honeybee_schema.energy.simulation",
+  "HumidityCondition": "honeybee_schema.energy.designday",
+  "ASHRAEClearSky": "honeybee_schema.energy.designday",
+  "RunPeriod": "honeybee_schema.energy.simulation",
+  "WindCondition": "honeybee_schema.energy.designday",
+  "SimulationParameter": "honeybee_schema.energy.simulation",
+  "ASHRAETau": "honeybee_schema.energy.designday",
+  "SimulationControl": "honeybee_schema.energy.simulation",
+  "ShadowCalculation": "honeybee_schema.energy.simulation",
+  "DaylightSavingTime": "honeybee_schema.energy.simulation",
+  "DesignDay": "honeybee_schema.energy.designday",
+  "DryBulbCondition": "honeybee_schema.energy.designday",
+  "_SkyCondition": "honeybee_schema.energy.designday",
+  "DatedBaseModel": "honeybee_schema.energy._base"
+}
