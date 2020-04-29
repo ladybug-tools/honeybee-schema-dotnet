@@ -1,6 +1,6 @@
 namespace HoneybeeSchema.Energy
 {
-	public partial interface IBuildingConstructionset: IIDdBase, IConstructionset {}
+	public partial interface IBuildingConstructionset: IConstructionset {}
 }
 
 //Classes implemented this interface:
