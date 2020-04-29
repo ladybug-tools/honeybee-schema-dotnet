@@ -11,7 +11,7 @@ namespace HoneybeeSchema
         {
             foreach (var item in constructionsets)
             {
-                var exist = this.Properties.Energy.ConstructionSets.Any(_ => _ == item);
+                var exist = this.Properties.Energy.ConstructionSets.Any(_ => (_.Obj as IIDdBase).Identifier == item.Identifier);
                 if (exist)
                     return;
 
@@ -35,7 +35,7 @@ namespace HoneybeeSchema
         {
             foreach (var item in programtypes)
             {
-                var exist = this.Properties.Energy.ProgramTypes.Any(_ => _ == item);
+                var exist = this.Properties.Energy.ProgramTypes.Any(_ => (_.Obj as IIDdBase).Identifier == item.Identifier);
                 if (exist)
                     return;
 
@@ -59,7 +59,7 @@ namespace HoneybeeSchema
         {
             foreach (var item in havcs)
             {
-                var exist = this.Properties.Energy.Hvacs.Any(_ => _ == item);
+                var exist = this.Properties.Energy.Hvacs.Any(_ => _.Identifier == item.Identifier);
                 if (exist)
                     return;
 
@@ -76,15 +76,16 @@ namespace HoneybeeSchema
             
         }
 
-        public void AddEnergyMaterial(List<IMaterial> materials)
+
+        public void AddMaterials( List<IMaterial> materials)
         {
-            foreach (var material in materials)
+            foreach (var item in materials)
             {
-                var exist = this.Properties.Energy.Materials.Any(_ => _ == material);
+                var exist = this.Properties.Energy.Materials.Any(_ => (_.Obj as IIDdBase).Identifier == item.Identifier);
                 if (exist)
                     continue;
 
-                switch (material)
+                switch (item)
                 {
                     case EnergyMaterial em:
                         this.Properties.Energy.Materials.Add(em);
@@ -92,25 +93,6 @@ namespace HoneybeeSchema
                     case EnergyMaterialNoMass em:
                         this.Properties.Energy.Materials.Add(em);
                         break;
-
-                    default:
-                        break;
-                }
-
-            }
-        }
-
-        public void AddEnergyWindowMaterial( List<IMaterial> materials)
-        {
-            foreach (var material in materials)
-            {
-                var exist = this.Properties.Energy.Materials.Any(_ => _ == material);
-                if (exist)
-                    continue;
-
-                switch (material)
-                {
-
                     case EnergyWindowMaterialBlind em:
                         this.Properties.Energy.Materials.Add(em);
                         break;
@@ -139,55 +121,46 @@ namespace HoneybeeSchema
             }
         }
 
-        public void AddConstructions( List<OpaqueConstructionAbridged> constructions)
+        public void AddConstructions(List<IConstruction> constructions)
         {
             foreach (var item in constructions)
             {
-                var exist = this.Properties.Energy.Constructions.Any(_ => _ == item);
+                var exist = this.Properties.Energy.Constructions.Any(_ => (_.Obj as IIDdBase).Identifier == item.Identifier);
                 if (exist)
                     continue;
 
-                this.Properties.Energy.Constructions.Add(item);
+                switch (item)
+                {
+                    case OpaqueConstruction em:
+                        this.Properties.Energy.Constructions.Add(em);
+                        break;
+                    case OpaqueConstructionAbridged em:
+                        this.Properties.Energy.Constructions.Add(em);
+                        break;
+                    case WindowConstruction em:
+                        this.Properties.Energy.Constructions.Add(em);
+                        break;
+                    case WindowConstructionAbridged em:
+                        this.Properties.Energy.Constructions.Add(em);
+                        break;
+                    case ShadeConstruction em:
+                        this.Properties.Energy.Constructions.Add(em);
+                        break;
+                    case AirBoundaryConstruction em:
+                        this.Properties.Energy.Constructions.Add(em);
+                        break;
+                    case AirBoundaryConstructionAbridged em:
+                        this.Properties.Energy.Constructions.Add(em);
+                        break;
+                
+                    default:
+                        break;
+                }
+                
 
             }
         }
-        public void AddConstructions( List<WindowConstructionAbridged> constructions)
-        {
-            foreach (var item in constructions)
-            {
-                var exist = this.Properties.Energy.Constructions.Any(_ => _ == item);
-                if (exist)
-                    continue;
 
-                this.Properties.Energy.Constructions.Add(item);
-
-            }
-        }
-
-        public void AddConstructions( List<ShadeConstruction> constructions)
-        {
-            foreach (var item in constructions)
-            {
-                var exist = this.Properties.Energy.Constructions.Any(_ => _ == item);
-                if (exist)
-                    continue;
-
-                this.Properties.Energy.Constructions.Add(item);
-
-            }
-        }
-        public void AddConstructions( List<AirBoundaryConstructionAbridged> constructions)
-        {
-            foreach (var item in constructions)
-            {
-                var exist = this.Properties.Energy.Constructions.Any(_ => _ == item);
-                if (exist)
-                    continue;
-
-                this.Properties.Energy.Constructions.Add(item);
-
-            }
-        }
 
     }
 }
