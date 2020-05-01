@@ -66,6 +66,11 @@ namespace HoneybeeSchema
             return this.Obj.GetHashCode();
         }
 
+        public new Type GetType()
+        {
+            return this.Obj.GetType();
+        }
+
         public static bool operator == (AnyOf obj, object anotherObj) 
         {
             return obj.Obj.Equals(anotherObj);
@@ -75,6 +80,7 @@ namespace HoneybeeSchema
         {
             return !obj.Obj.Equals(anotherObj);
         }
+
 
 
         public static implicit operator string(AnyOf b) => b;
