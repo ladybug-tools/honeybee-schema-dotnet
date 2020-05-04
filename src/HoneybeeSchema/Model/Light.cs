@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         public Light
         (
             string identifier, // Required parameters
-            AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror>> dependencies= default, double rEmittance = 0.0D, double gEmittance = 0.0D, double bEmittance = 0.0D, string displayName= default// Optional parameters
+            string displayName= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror>> dependencies= default, double rEmittance = 0.0D, double gEmittance = 0.0D, double bEmittance = 0.0D  // Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             this.Modifier = modifier;

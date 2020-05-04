@@ -100,7 +100,7 @@ namespace HoneybeeSchema
         public Model
         (
             string identifier, ModelProperties properties, // Required parameters
-            List<Room> rooms= default, List<Face> orphanedFaces= default, List<Shade> orphanedShades= default, List<Aperture> orphanedApertures= default, List<Door> orphanedDoors= default, double northAngle = 0D, UnitsEnum? units = UnitsEnum.Meters, double tolerance = 0D, double angleTolerance = 0D, string displayName= default, Object userData= default// Optional parameters
+            string displayName= default, Object userData= default, List<Room> rooms= default, List<Face> orphanedFaces= default, List<Shade> orphanedShades= default, List<Aperture> orphanedApertures= default, List<Door> orphanedDoors= default, double northAngle = 0D, UnitsEnum? units = UnitsEnum.Meters, double tolerance = 0D, double angleTolerance = 0D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "properties" is required (not null)

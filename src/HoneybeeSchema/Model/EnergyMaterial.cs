@@ -101,7 +101,7 @@ namespace HoneybeeSchema
         public EnergyMaterial
         (
             string identifier, double thickness, double conductivity, double density, double specificHeat, // Required parameters
-            RoughnessEnum? roughness = RoughnessEnum.MediumRough, double thermalAbsorptance = 0.9D, double solarAbsorptance = 0.7D, double visibleAbsorptance = 0.7D, string displayName= default// Optional parameters
+            string displayName= default, RoughnessEnum? roughness = RoughnessEnum.MediumRough, double thermalAbsorptance = 0.9D, double solarAbsorptance = 0.7D, double visibleAbsorptance = 0.7D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "thickness" is required (not null)

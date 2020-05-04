@@ -90,7 +90,7 @@ namespace HoneybeeSchema
         public Face
         (
             string identifier, Face3D geometry, FaceTypeEnum faceType, AnyOf<Ground,Outdoors,Adiabatic,Surface> boundaryCondition, FacePropertiesAbridged properties, // Required parameters
-            List<Aperture> apertures= default, List<Door> doors= default, List<Shade> indoorShades= default, List<Shade> outdoorShades= default, string displayName= default, Object userData= default// Optional parameters
+            string displayName= default, Object userData= default, List<Aperture> apertures= default, List<Door> doors= default, List<Shade> indoorShades= default, List<Shade> outdoorShades= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "geometry" is required (not null)

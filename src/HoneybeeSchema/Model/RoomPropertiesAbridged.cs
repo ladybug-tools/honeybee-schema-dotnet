@@ -37,7 +37,8 @@ namespace HoneybeeSchema
         /// <param name="energy">energy.</param>
         /// <param name="radiance">radiance.</param>
         public RoomPropertiesAbridged
-        ( // Required parameters
+        (
+             // Required parameters
             RoomEnergyPropertiesAbridged energy= default, RoomRadiancePropertiesAbridged radiance= default// Optional parameters
         )// BaseClass
         {

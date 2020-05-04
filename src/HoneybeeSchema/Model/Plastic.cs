@@ -51,7 +51,7 @@ namespace HoneybeeSchema
         public Plastic
         (
             string identifier, // Required parameters
-            AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror>> dependencies= default, double rReflectance = 0.0D, double gReflectance = 0.0D, double bReflectance = 0.0D, double specularity = 0D, double roughness = 0D, string displayName= default// Optional parameters
+            string displayName= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror>> dependencies= default, double rReflectance = 0.0D, double gReflectance = 0.0D, double bReflectance = 0.0D, double specularity = 0D, double roughness = 0D  // Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             this.Modifier = modifier;

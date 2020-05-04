@@ -51,7 +51,7 @@ namespace HoneybeeSchema
         public ConstructionSet
         (
             string identifier, // Required parameters
-            WallConstructionSet wallSet= default, FloorConstructionSet floorSet= default, RoofCeilingConstructionSet roofCeilingSet= default, ApertureConstructionSet apertureSet= default, DoorConstructionSet doorSet= default, ShadeConstruction shadeConstruction= default, AirBoundaryConstruction airBoundaryConstruction= default, string displayName= default// Optional parameters
+            string displayName= default, WallConstructionSet wallSet= default, FloorConstructionSet floorSet= default, RoofCeilingConstructionSet roofCeilingSet= default, ApertureConstructionSet apertureSet= default, DoorConstructionSet doorSet= default, ShadeConstruction shadeConstruction= default, AirBoundaryConstruction airBoundaryConstruction= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             this.WallSet = wallSet;

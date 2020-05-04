@@ -48,7 +48,7 @@ namespace HoneybeeSchema
         public SetpointAbridged
         (
             string identifier, string coolingSchedule, string heatingSchedule, // Required parameters
-            string humidifyingSchedule= default, string dehumidifyingSchedule= default, string displayName= default// Optional parameters
+            string displayName= default, string humidifyingSchedule= default, string dehumidifyingSchedule= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "coolingSchedule" is required (not null)

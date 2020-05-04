@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         public GasEquipmentAbridged
         (
             string identifier, double wattsPerArea, string schedule, // Required parameters
-            string displayName= default, double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D// Optional parameters
+            string displayName= default, double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D  // Optional parameters
         ) : base(identifier: identifier, displayName: displayName, wattsPerArea: wattsPerArea, schedule: schedule, radiantFraction: radiantFraction, latentFraction: latentFraction, lostFraction: lostFraction)// BaseClass
         {
 

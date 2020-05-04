@@ -38,8 +38,9 @@ namespace HoneybeeSchema
         /// <param name="exteriorConstruction">Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition..</param>
         /// <param name="groundConstruction">Identifier for an OpaqueConstruction for faces with a Ground boundary condition..</param>
         public FaceSubSetAbridged
-        ( // Required parameters
-            string interiorConstruction= default, string exteriorConstruction= default, string groundConstruction= default// Optional parameters
+        (
+             // Required parameters
+            string interiorConstruction= default, string exteriorConstruction= default, string groundConstruction= default  // Optional parameters
         )// BaseClass
         {
             this.InteriorConstruction = interiorConstruction;

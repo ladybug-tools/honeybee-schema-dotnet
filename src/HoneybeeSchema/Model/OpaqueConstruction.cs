@@ -46,7 +46,7 @@ namespace HoneybeeSchema
         public OpaqueConstruction
         (
             string identifier, List<string> layers, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass>> materials, // Required parameters
-            string displayName= default  // Optional parameters
+            string displayName= default    // Optional parameters
         ) : base(identifier: identifier, displayName: displayName, layers: layers)// BaseClass
         {
             // to ensure "materials" is required (not null)

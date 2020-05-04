@@ -48,7 +48,7 @@ namespace HoneybeeSchema
         public Setpoint
         (
             string identifier, AnyOf<ScheduleRuleset,ScheduleFixedInterval> coolingSchedule, AnyOf<ScheduleRuleset,ScheduleFixedInterval> heatingSchedule, // Required parameters
-            AnyOf<ScheduleRuleset,ScheduleFixedInterval> humidifyingSchedule= default, AnyOf<ScheduleRuleset,ScheduleFixedInterval> dehumidifyingSchedule= default, string displayName= default// Optional parameters
+            string displayName= default, AnyOf<ScheduleRuleset,ScheduleFixedInterval> humidifyingSchedule= default, AnyOf<ScheduleRuleset,ScheduleFixedInterval> dehumidifyingSchedule= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "coolingSchedule" is required (not null)

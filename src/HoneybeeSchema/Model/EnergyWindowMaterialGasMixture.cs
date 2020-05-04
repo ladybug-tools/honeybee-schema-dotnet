@@ -86,7 +86,7 @@ namespace HoneybeeSchema
         public EnergyWindowMaterialGasMixture
         (
             string identifier, List<GasTypesEnum> gasTypes, List<double> gasFractions, // Required parameters
-            double thickness = 0.0125D, string displayName= default// Optional parameters
+            string displayName= default, double thickness = 0.0125D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "gasTypes" is required (not null)

@@ -51,7 +51,7 @@ namespace HoneybeeSchema
         public ProgramType
         (
             string identifier, // Required parameters
-            People people= default, Lighting lighting= default, ElectricEquipment electricEquipment= default, GasEquipment gasEquipment= default, Infiltration infiltration= default, Ventilation ventilation= default, Setpoint setpoint= default, string displayName= default// Optional parameters
+            string displayName= default, People people= default, Lighting lighting= default, ElectricEquipment electricEquipment= default, GasEquipment gasEquipment= default, Infiltration infiltration= default, Ventilation ventilation= default, Setpoint setpoint= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             this.People = people;

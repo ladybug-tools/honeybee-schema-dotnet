@@ -46,7 +46,7 @@ namespace HoneybeeSchema
         public WindowConstruction
         (
             string identifier, List<string> layers, List<AnyOf<EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing,EnergyWindowMaterialShade>> materials, // Required parameters
-            string displayName= default  // Optional parameters
+            string displayName= default    // Optional parameters
         ) : base(identifier: identifier, displayName: displayName, layers: layers)// BaseClass
         {
             // to ensure "materials" is required (not null)

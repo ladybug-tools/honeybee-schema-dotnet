@@ -45,7 +45,8 @@ namespace HoneybeeSchema
         /// <param name="ventilation">Ventilation object for the minimum outdoor air requirement..</param>
         /// <param name="setpoint">Setpoint object for the temperature setpoints of the Room..</param>
         public RoomEnergyPropertiesAbridged
-        ( // Required parameters
+        (
+             // Required parameters
             string constructionSet= default, string programType= default, string hvac= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default// Optional parameters
         )// BaseClass
         {

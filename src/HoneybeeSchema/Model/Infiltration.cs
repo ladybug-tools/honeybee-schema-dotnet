@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         public Infiltration
         (
             string identifier, double flowPerExteriorArea, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule, // Required parameters
-            double constantCoefficient = 1D, double temperatureCoefficient = 0D, double velocityCoefficient = 0D, string displayName= default// Optional parameters
+            string displayName= default, double constantCoefficient = 1D, double temperatureCoefficient = 0D, double velocityCoefficient = 0D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "flowPerExteriorArea" is required (not null)

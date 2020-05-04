@@ -38,7 +38,7 @@ namespace HoneybeeSchema
         public Ground
         (
             // Required parameters
-            // Optional parameters
+              // Optional parameters
         )// BaseClass
         {
 

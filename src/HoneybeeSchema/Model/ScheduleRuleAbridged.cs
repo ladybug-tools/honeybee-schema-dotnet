@@ -50,7 +50,8 @@ namespace HoneybeeSchema
         /// <param name="startDate">A list of two integers for [month, day], representing the start date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case)..</param>
         /// <param name="endDate">A list of two integers for [month, day], representing the end date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case)..</param>
         public ScheduleRuleAbridged
-        ( string scheduleDay, // Required parameters
+        (
+             string scheduleDay, // Required parameters
             bool applySunday = false, bool applyMonday = false, bool applyTuesday = false, bool applyWednesday = false, bool applyThursday = false, bool applyFriday = false, bool applySaturday = false, List<int> startDate= default, List<int> endDate= default// Optional parameters
         ) : base()// BaseClass
         {

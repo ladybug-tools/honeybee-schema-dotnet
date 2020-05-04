@@ -51,7 +51,7 @@ namespace HoneybeeSchema
         public Aperture
         (
             string identifier, Face3D geometry, AnyOf<Outdoors,Surface> boundaryCondition, AperturePropertiesAbridged properties, // Required parameters
-            bool isOperable = false, List<Shade> indoorShades= default, List<Shade> outdoorShades= default, string displayName= default, Object userData= default// Optional parameters
+            string displayName= default, Object userData= default, bool isOperable = false, List<Shade> indoorShades= default, List<Shade> outdoorShades= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "geometry" is required (not null)

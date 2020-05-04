@@ -46,7 +46,7 @@ namespace HoneybeeSchema
         public AirBoundaryConstructionAbridged
         (
             string identifier, string airMixingSchedule, // Required parameters
-            double airMixingPerArea = 0.1D, string displayName= default// Optional parameters
+            string displayName= default, double airMixingPerArea = 0.1D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "airMixingSchedule" is required (not null)

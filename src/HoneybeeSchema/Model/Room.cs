@@ -50,7 +50,7 @@ namespace HoneybeeSchema
         public Room
         (
             string identifier, List<Face> faces, RoomPropertiesAbridged properties, // Required parameters
-            List<Shade> indoorShades= default, List<Shade> outdoorShades= default, int multiplier = 1, string displayName= default, Object userData= default// Optional parameters
+            string displayName= default, Object userData= default, List<Shade> indoorShades= default, List<Shade> outdoorShades= default, int multiplier = 1// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "faces" is required (not null)

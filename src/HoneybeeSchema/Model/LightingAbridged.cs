@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         public LightingAbridged
         (
             string identifier, double wattsPerArea, string schedule, // Required parameters
-            double visibleFraction = 0.25D, double radiantFraction = 0.32D, double returnAirFraction = 0.0D, string displayName= default// Optional parameters
+            string displayName= default, double visibleFraction = 0.25D, double radiantFraction = 0.32D, double returnAirFraction = 0.0D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "wattsPerArea" is required (not null)

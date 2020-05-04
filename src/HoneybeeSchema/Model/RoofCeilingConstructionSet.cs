@@ -38,8 +38,9 @@ namespace HoneybeeSchema
         /// <param name="exteriorConstruction">An OpaqueConstruction for walls with an Outdoors boundary condition..</param>
         /// <param name="groundConstruction">An OpaqueConstruction for walls with a Ground boundary condition..</param>
         public RoofCeilingConstructionSet
-        ( // Required parameters
-            OpaqueConstruction interiorConstruction= default, OpaqueConstruction exteriorConstruction= default, OpaqueConstruction groundConstruction= default// Optional parameters
+        (
+             // Required parameters
+            OpaqueConstruction interiorConstruction= default, OpaqueConstruction exteriorConstruction= default, OpaqueConstruction groundConstruction= default  // Optional parameters
         )// BaseClass
         {
             this.InteriorConstruction = interiorConstruction;

@@ -50,7 +50,7 @@ namespace HoneybeeSchema
         public Glass
         (
             string identifier, // Required parameters
-            AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror>> dependencies= default, double rTransmissivity = 0.0D, double gTransmissivity = 0.0D, double bTransmissivity = 0.0D, double refractionIndex = 1.52D, string displayName= default// Optional parameters
+            string displayName= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror>> dependencies= default, double rTransmissivity = 0.0D, double gTransmissivity = 0.0D, double bTransmissivity = 0.0D, double refractionIndex = 1.52D  // Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             this.Modifier = modifier;

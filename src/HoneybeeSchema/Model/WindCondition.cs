@@ -42,7 +42,8 @@ namespace HoneybeeSchema
         /// <param name="windSpeed">Wind speed on the design day [m/s]. (required).</param>
         /// <param name="windDirection">Wind direction on the design day [degrees]. (default to 0D).</param>
         public WindCondition
-        ( double windSpeed, // Required parameters
+        (
+             double windSpeed, // Required parameters
             double windDirection = 0D// Optional parameters
         )// BaseClass
         {

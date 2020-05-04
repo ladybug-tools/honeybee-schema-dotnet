@@ -39,7 +39,8 @@ namespace HoneybeeSchema
         /// <param name="skylightModifier">A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face..</param>
         /// <param name="operableModifier">A modifier object for apertures with an Outdoors boundary condition and a True is_operable property..</param>
         public ApertureModifierSet
-        ( // Required parameters
+        (
+             // Required parameters
             AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> windowModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> interiorModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> skylightModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> operableModifier= default// Optional parameters
         )// BaseClass
         {

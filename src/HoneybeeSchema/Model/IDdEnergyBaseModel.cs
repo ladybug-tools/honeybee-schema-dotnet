@@ -42,8 +42,9 @@ namespace HoneybeeSchema
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public IDdEnergyBaseModel
-        ( string identifier, // Required parameters
-            string displayName= default// Optional parameters
+        (
+             string identifier, // Required parameters
+            string displayName= default  // Optional parameters
         )// BaseClass
         {
             // to ensure "identifier" is required (not null)

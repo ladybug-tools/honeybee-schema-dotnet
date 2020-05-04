@@ -50,7 +50,7 @@ namespace HoneybeeSchema
         public Mirror
         (
             string identifier, // Required parameters
-            AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror>> dependencies= default, double rReflectance = 1D, double gReflectance = 1D, double bReflectance = 1D, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> alternateMaterial= default, string displayName= default// Optional parameters
+            string displayName= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror>> dependencies= default, double rReflectance = 1D, double gReflectance = 1D, double bReflectance = 1D, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> alternateMaterial= default  // Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             this.Modifier = modifier;
