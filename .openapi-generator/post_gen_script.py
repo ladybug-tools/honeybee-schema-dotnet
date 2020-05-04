@@ -37,7 +37,7 @@ def fix_constructor(read_data):
         r"(?<=\(\n\s{12})\s*(,)(?=\s\w*.*, \/\/ Required parameters)", # remove "," at begining of required
         r"(?<=\/\/ Required parameters\n\s{12})(,\s){1,}(?=\s*\w)",      # remove "," at begining of optional
         r"(?<=\w)(,\s){2,}(?=\s*\/\/ Required parameters\s*\n\s*(\w|,))",
-        r"(,)(?=\s*\/\/ Optional parameters)",
+        r"(,\s)+(?=\s*\/\/ Optional parameters)",
         r"(,\s)+(?=\s*\/\/ Required parameters\n\s+\/\/ Optional parameters)",
         r"(,)(?=\s*\)\/\/ BaseClass)",
         r"(?<=\(\n\s{12})\s*(,)(?=\s*\/\/ Required parameters)"  # remove "," before "//Required parameters" when there is no required
