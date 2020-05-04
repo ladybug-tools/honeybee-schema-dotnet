@@ -50,7 +50,7 @@ namespace HoneybeeSchema
         public ScheduleFixedInterval
         (
             string identifier, List<double> values, // Required parameters
-            ScheduleTypeLimit scheduleTypeLimit= default, int timestep = 1, List<int> startDate= default, double placeholderValue = 0D, bool interpolate = false, string displayName= default// Optional parameters
+            string displayName= default, ScheduleTypeLimit scheduleTypeLimit= default, int timestep = 1, List<int> startDate= default, double placeholderValue = 0D, bool interpolate = false// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "values" is required (not null)

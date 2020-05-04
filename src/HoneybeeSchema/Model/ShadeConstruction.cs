@@ -47,7 +47,7 @@ namespace HoneybeeSchema
         public ShadeConstruction
         (
             string identifier, // Required parameters
-            double solarReflectance = 0.2D, double visibleReflectance = 0.2D, bool isSpecular = false, string displayName= default// Optional parameters
+            string displayName= default, double solarReflectance = 0.2D, double visibleReflectance = 0.2D, bool isSpecular = false// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // use default value if no "solarReflectance" provided

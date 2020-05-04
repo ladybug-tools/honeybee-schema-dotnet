@@ -45,7 +45,7 @@ namespace HoneybeeSchema
         public ASHRAEClearSky
         (
             List<int> date, double clearness, // Required parameters
-            bool daylightSavings = false// Optional parameters
+            bool daylightSavings = false    // Optional parameters
         ) : base(date: date, daylightSavings: daylightSavings )// BaseClass
         {
             // to ensure "clearness" is required (not null)

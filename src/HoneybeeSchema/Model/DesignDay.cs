@@ -125,8 +125,9 @@ namespace HoneybeeSchema
         /// <param name="windCondition">A WindCondition describing wind conditions on the design day. (required).</param>
         /// <param name="skyCondition">skyCondition (required).</param>
         public DesignDay
-        ( string name, DayTypeEnum dayType, DryBulbCondition dryBulbCondition, HumidityCondition humidityCondition, WindCondition windCondition, AnyOf<ASHRAEClearSky,ASHRAETau> skyCondition// Required parameters
-            // Optional parameters
+        (
+             string name, DayTypeEnum dayType, DryBulbCondition dryBulbCondition, HumidityCondition humidityCondition, WindCondition windCondition, AnyOf<ASHRAEClearSky,ASHRAETau> skyCondition// Required parameters
+              // Optional parameters
         )// BaseClass
         {
             // to ensure "name" is required (not null)

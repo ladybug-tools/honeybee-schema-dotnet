@@ -83,7 +83,8 @@ namespace HoneybeeSchema
         /// <param name="outputs">A list of EnergyPlus output names as strings, which are requested from the simulation..</param>
         /// <param name="summaryReports">A list of EnergyPlus summary report names as strings..</param>
         public SimulationOutput
-        ( // Required parameters
+        (
+             // Required parameters
             ReportingFrequencyEnum? reportingFrequency = ReportingFrequencyEnum.Hourly, bool includeSqlite = true, bool includeHtml = false, List<string> outputs= default, List<string> summaryReports= default// Optional parameters
         )// BaseClass
         {

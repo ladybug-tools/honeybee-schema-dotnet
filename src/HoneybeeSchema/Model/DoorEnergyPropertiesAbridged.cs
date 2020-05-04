@@ -36,7 +36,8 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="construction">Identifier of an OpaqueConstruction or WindowConstruction for the door. Note that the host door must have the is_glass property set to True to assign a WindowConstruction. If None, the construction is set by the parent Room construction_set or the Model global_construction_set..</param>
         public DoorEnergyPropertiesAbridged
-        ( // Required parameters
+        (
+             // Required parameters
             string construction= default// Optional parameters
         )// BaseClass
         {

@@ -170,7 +170,7 @@ namespace HoneybeeSchema
         public ScheduleTypeLimit
         (
             string identifier, // Required parameters
-            AnyOf<NoLimit,double> lowerLimit= default, AnyOf<NoLimit,double> upperLimit= default, NumericTypeEnum? numericType = NumericTypeEnum.Continuous, UnitTypeEnum? unitType = UnitTypeEnum.Dimensionless, string displayName= default// Optional parameters
+            string displayName= default, AnyOf<NoLimit,double> lowerLimit= default, AnyOf<NoLimit,double> upperLimit= default, NumericTypeEnum? numericType = NumericTypeEnum.Continuous, UnitTypeEnum? unitType = UnitTypeEnum.Dimensionless// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             this.LowerLimit = lowerLimit;

@@ -43,7 +43,8 @@ namespace HoneybeeSchema
         /// <param name="o">Plane origin as 3 (x, y, z) values (required).</param>
         /// <param name="x">Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated..</param>
         public Plane
-        ( List<double> n, List<double> o, // Required parameters
+        (
+             List<double> n, List<double> o, // Required parameters
             List<double> x= default// Optional parameters
         )// BaseClass
         {

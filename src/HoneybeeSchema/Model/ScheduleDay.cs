@@ -47,7 +47,7 @@ namespace HoneybeeSchema
         public ScheduleDay
         (
             string identifier, List<double> values, // Required parameters
-            List<List<int>> times= default, bool interpolate = false, string displayName= default// Optional parameters
+            string displayName= default, List<List<int>> times= default, bool interpolate = false// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "values" is required (not null)

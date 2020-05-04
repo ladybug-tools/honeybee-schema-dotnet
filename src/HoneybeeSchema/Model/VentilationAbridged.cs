@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         public VentilationAbridged
         (
             string identifier, // Required parameters
-            double flowPerPerson = 0D, double flowPerArea = 0D, double airChangesPerHour = 0D, double flowPerZone = 0D, string schedule= default, string displayName= default// Optional parameters
+            string displayName= default, double flowPerPerson = 0D, double flowPerArea = 0D, double airChangesPerHour = 0D, double flowPerZone = 0D, string schedule= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // use default value if no "flowPerPerson" provided

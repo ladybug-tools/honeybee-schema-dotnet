@@ -58,7 +58,7 @@ namespace HoneybeeSchema
         public EnergyWindowMaterialShade
         (
             string identifier, // Required parameters
-            double solarTransmittance = 0.4D, double solarReflectance = 0.5D, double visibleTransmittance = 0.4D, double visibleReflectance = 0.4D, double emissivity = 0.9D, double infraredTransmittance = 0D, double thickness = 0.005D, double conductivity = 0.1D, double distanceToGlass = 0.05D, double topOpeningMultiplier = 0.5D, double bottomOpeningMultiplier = 0.5D, double leftOpeningMultiplier = 0.5D, double rightOpeningMultiplier = 0.5D, double airflowPermeability = 0D, string displayName= default// Optional parameters
+            string displayName= default, double solarTransmittance = 0.4D, double solarReflectance = 0.5D, double visibleTransmittance = 0.4D, double visibleReflectance = 0.4D, double emissivity = 0.9D, double infraredTransmittance = 0D, double thickness = 0.005D, double conductivity = 0.1D, double distanceToGlass = 0.05D, double topOpeningMultiplier = 0.5D, double bottomOpeningMultiplier = 0.5D, double leftOpeningMultiplier = 0.5D, double rightOpeningMultiplier = 0.5D, double airflowPermeability = 0D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // use default value if no "solarTransmittance" provided

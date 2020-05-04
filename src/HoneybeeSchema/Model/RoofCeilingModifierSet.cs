@@ -37,8 +37,9 @@ namespace HoneybeeSchema
         /// <param name="exteriorModifier">A radiance modifier object for faces with an Outdoors boundary condition..</param>
         /// <param name="interiorModifier">A radiance modifier object for faces with a boundary condition other than Outdoors..</param>
         public RoofCeilingModifierSet
-        ( // Required parameters
-            AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> exteriorModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> interiorModifier= default// Optional parameters
+        (
+             // Required parameters
+            AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> exteriorModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> interiorModifier= default  // Optional parameters
         )// BaseClass
         {
             this.ExteriorModifier = exteriorModifier;

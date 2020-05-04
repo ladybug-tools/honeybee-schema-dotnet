@@ -38,7 +38,7 @@ namespace HoneybeeSchema
         public DatedBaseModel
         (
             // Required parameters
-            // Optional parameters
+              // Optional parameters
         )// BaseClass
         {
 

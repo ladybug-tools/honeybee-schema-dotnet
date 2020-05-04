@@ -38,7 +38,8 @@ namespace HoneybeeSchema
         /// <param name="modifierSets">A list of all unique Room-Assigned ModifierSets in the Model (default: [])..</param>
         /// <param name="globalModifierSet">Identifier of a ModifierSet or ModifierSetAbridged object to be used as as a default object for all unassigned objects in the Model (default: None)..</param>
         public ModelRadianceProperties
-        ( // Required parameters
+        (
+             // Required parameters
             List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror>> modifiers= default, List<AnyOf<ModifierSet,ModifierSetAbridged>> modifierSets= default, string globalModifierSet= default// Optional parameters
         )// BaseClass
         {

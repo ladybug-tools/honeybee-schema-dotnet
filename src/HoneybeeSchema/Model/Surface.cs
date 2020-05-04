@@ -41,8 +41,9 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="boundaryConditionObjects">A list of up to 3 object identifiers that are adjacent to this one. The first object is always the one that is immediately adjacet and is of the same object type (Face, Aperture, Door). When this boundary condition is applied to a Face, the second object in the tuple will be the parent Room of the adjacent object. When the boundary condition is applied to a sub-face (Door or Aperture), the second object will be the parent Face of the adjacent sub-face and the third object will be the parent Room of the adjacent sub-face. (required).</param>
         public Surface
-        ( List<string> boundaryConditionObjects// Required parameters
-            // Optional parameters
+        (
+             List<string> boundaryConditionObjects// Required parameters
+              // Optional parameters
         )// BaseClass
         {
             // to ensure "boundaryConditionObjects" is required (not null)

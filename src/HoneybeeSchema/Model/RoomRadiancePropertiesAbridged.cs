@@ -36,7 +36,8 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="modifierSet">An identifier for a unique Room-Assigned ModifierSet (default: None)..</param>
         public RoomRadiancePropertiesAbridged
-        ( // Required parameters
+        (
+             // Required parameters
             string modifierSet= default// Optional parameters
         )// BaseClass
         {

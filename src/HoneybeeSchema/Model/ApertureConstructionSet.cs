@@ -39,7 +39,8 @@ namespace HoneybeeSchema
         /// <param name="skylightConstruction">A WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face..</param>
         /// <param name="operableConstruction">A WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property...</param>
         public ApertureConstructionSet
-        ( // Required parameters
+        (
+             // Required parameters
             WindowConstruction interiorConstruction= default, WindowConstruction windowConstruction= default, WindowConstruction skylightConstruction= default, WindowConstruction operableConstruction= default// Optional parameters
         )// BaseClass
         {

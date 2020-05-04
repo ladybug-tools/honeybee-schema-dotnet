@@ -41,7 +41,8 @@ namespace HoneybeeSchema
         /// <param name="shadowCalculation">A ShadowCalculation object describing settings for the EnergyPlus Shadow Calculation..</param>
         /// <param name="sizingParameter">A SizingParameter object with criteria for sizing the heating and cooling system..</param>
         public SimulationParameter
-        ( // Required parameters
+        (
+             // Required parameters
             SimulationOutput output= default, RunPeriod runPeriod= default, int timestep = 6, SimulationControl simulationControl= default, ShadowCalculation shadowCalculation= default, SizingParameter sizingParameter= default// Optional parameters
         )// BaseClass
         {

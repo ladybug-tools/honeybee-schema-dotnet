@@ -107,7 +107,8 @@ namespace HoneybeeSchema
         /// <param name="calculationMethod">calculationMethod (default to CalculationMethodEnum.AverageOverDaysInFrequency).</param>
         /// <param name="maximumFigures">Number of allowable figures in shadow overlap calculations. (default to 15000).</param>
         public ShadowCalculation
-        ( // Required parameters
+        (
+             // Required parameters
             SolarDistributionEnum? solarDistribution = SolarDistributionEnum.FullInteriorAndExteriorWithReflections, int calculationFrequency = 30, CalculationMethodEnum? calculationMethod = CalculationMethodEnum.AverageOverDaysInFrequency, int maximumFigures = 15000// Optional parameters
         )// BaseClass
         {

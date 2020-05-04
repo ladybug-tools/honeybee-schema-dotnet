@@ -82,7 +82,8 @@ namespace HoneybeeSchema
         /// <param name="rain">Boolean to indicate rain on the design day. (default to false).</param>
         /// <param name="snowOnGround">Boolean to indicate snow on the ground during the design day. (default to false).</param>
         public HumidityCondition
-        ( HumidityTypeEnum humidityType, double humidityValue, // Required parameters
+        (
+             HumidityTypeEnum humidityType, double humidityValue, // Required parameters
             double barometricPressure = 101325D, bool rain = false, bool snowOnGround = false// Optional parameters
         )// BaseClass
         {

@@ -38,7 +38,8 @@ namespace HoneybeeSchema
         /// <param name="windExposure">A boolean noting whether the boundary is exposed to wind. (default to true).</param>
         /// <param name="viewFactor">A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated..</param>
         public Outdoors
-        ( // Required parameters
+        (
+             // Required parameters
             bool sunExposure = true, bool windExposure = true, AnyOf<Autocalculate,double> viewFactor= default// Optional parameters
         )// BaseClass
         {

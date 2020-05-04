@@ -36,7 +36,8 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="construction">Identifier of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set..</param>
         public ApertureEnergyPropertiesAbridged
-        ( // Required parameters
+        (
+             // Required parameters
             string construction= default// Optional parameters
         )// BaseClass
         {

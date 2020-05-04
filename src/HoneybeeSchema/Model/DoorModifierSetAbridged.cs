@@ -40,8 +40,9 @@ namespace HoneybeeSchema
         /// <param name="exteriorModifier">Identifier for a radiance modifier object for faces with an  Outdoors boundary condition..</param>
         /// <param name="interiorModifier">Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors..</param>
         public DoorModifierSetAbridged
-        ( // Required parameters
-            string interiorGlassModifier= default, string exteriorGlassModifier= default, string overheadModifier= default, string exteriorModifier= default, string interiorModifier= default// Optional parameters
+        (
+             // Required parameters
+            string exteriorModifier= default, string interiorModifier= default, string interiorGlassModifier= default, string exteriorGlassModifier= default, string overheadModifier= default// Optional parameters
         ) : base(exteriorModifier: exteriorModifier, interiorModifier: interiorModifier )// BaseClass
         {
             this.InteriorGlassModifier = interiorGlassModifier;

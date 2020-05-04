@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         public People
         (
             string identifier, double peoplePerArea, AnyOf<ScheduleRuleset,ScheduleFixedInterval> occupancySchedule, AnyOf<ScheduleRuleset,ScheduleFixedInterval> activitySchedule, // Required parameters
-            double radiantFraction = 0.3D, AnyOf<Autocalculate,double> latentFraction= default, string displayName= default// Optional parameters
+            string displayName= default, double radiantFraction = 0.3D, AnyOf<Autocalculate,double> latentFraction= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "peoplePerArea" is required (not null)

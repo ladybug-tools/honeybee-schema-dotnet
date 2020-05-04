@@ -43,8 +43,9 @@ namespace HoneybeeSchema
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public IDdBaseModel
-        ( string identifier, // Required parameters
-            string displayName= default, Object userData= default// Optional parameters
+        (
+             string identifier, // Required parameters
+            string displayName= default, Object userData= default  // Optional parameters
         )// BaseClass
         {
             // to ensure "identifier" is required (not null)

@@ -57,7 +57,7 @@ namespace HoneybeeSchema
         public EnergyWindowMaterialGlazing
         (
             string identifier, // Required parameters
-            double thickness = 0.003D, double solarTransmittance = 0.85D, double solarReflectance = 0.075D, double solarReflectanceBack= default, double visibleTransmittance = 0.9D, double visibleReflectance = 0.075D, double visibleReflectanceBack= default, double infraredTransmittance = 0D, double emissivity = 0.84D, double emissivityBack = 0.84D, double conductivity = 0.9D, double dirtCorrection = 1D, bool solarDiffusing = false, string displayName= default// Optional parameters
+            string displayName= default, double thickness = 0.003D, double solarTransmittance = 0.85D, double solarReflectance = 0.075D, double solarReflectanceBack= default, double visibleTransmittance = 0.9D, double visibleReflectance = 0.075D, double visibleReflectanceBack= default, double infraredTransmittance = 0D, double emissivity = 0.84D, double emissivityBack = 0.84D, double conductivity = 0.9D, double dirtCorrection = 1D, bool solarDiffusing = false// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // use default value if no "thickness" provided

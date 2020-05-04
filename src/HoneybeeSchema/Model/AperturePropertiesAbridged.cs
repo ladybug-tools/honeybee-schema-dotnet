@@ -37,7 +37,8 @@ namespace HoneybeeSchema
         /// <param name="energy">energy.</param>
         /// <param name="radiance">radiance.</param>
         public AperturePropertiesAbridged
-        ( // Required parameters
+        (
+             // Required parameters
             ApertureEnergyPropertiesAbridged energy= default, ApertureRadiancePropertiesAbridged radiance= default// Optional parameters
         )// BaseClass
         {

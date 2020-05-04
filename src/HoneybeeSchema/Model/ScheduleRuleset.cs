@@ -51,7 +51,7 @@ namespace HoneybeeSchema
         public ScheduleRuleset
         (
             string identifier, List<ScheduleDay> daySchedules, string defaultDaySchedule, // Required parameters
-            List<ScheduleRuleAbridged> scheduleRules= default, string holidaySchedule= default, string summerDesigndaySchedule= default, string winterDesigndaySchedule= default, ScheduleTypeLimit scheduleTypeLimit= default, string displayName= default// Optional parameters
+            string displayName= default, List<ScheduleRuleAbridged> scheduleRules= default, string holidaySchedule= default, string summerDesigndaySchedule= default, string winterDesigndaySchedule= default, ScheduleTypeLimit scheduleTypeLimit= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "daySchedules" is required (not null)

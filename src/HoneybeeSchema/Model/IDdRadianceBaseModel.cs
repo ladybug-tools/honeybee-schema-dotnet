@@ -42,8 +42,9 @@ namespace HoneybeeSchema
         /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public IDdRadianceBaseModel
-        ( string identifier, // Required parameters
-            string displayName= default// Optional parameters
+        (
+             string identifier, // Required parameters
+            string displayName= default  // Optional parameters
         )// BaseClass
         {
             // to ensure "identifier" is required (not null)

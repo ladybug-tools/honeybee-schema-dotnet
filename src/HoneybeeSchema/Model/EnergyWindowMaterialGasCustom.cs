@@ -56,7 +56,7 @@ namespace HoneybeeSchema
         public EnergyWindowMaterialGasCustom
         (
             string identifier, double conductivityCoeffA, double viscosityCoeffA, double specificHeatCoeffA, double specificHeatRatio, double molecularWeight, // Required parameters
-            double thickness = 0.0125D, double conductivityCoeffB = 0D, double conductivityCoeffC = 0D, double viscosityCoeffB = 0D, double viscosityCoeffC = 0D, double specificHeatCoeffB = 0D, double specificHeatCoeffC = 0D, string displayName= default// Optional parameters
+            string displayName= default, double thickness = 0.0125D, double conductivityCoeffB = 0D, double conductivityCoeffC = 0D, double viscosityCoeffB = 0D, double viscosityCoeffC = 0D, double specificHeatCoeffB = 0D, double specificHeatCoeffC = 0D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "conductivityCoeffA" is required (not null)

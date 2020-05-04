@@ -83,7 +83,7 @@ namespace HoneybeeSchema
         public EnergyWindowMaterialGas
         (
             string identifier, // Required parameters
-            double thickness = 0.0125D, GasTypeEnum? gasType = GasTypeEnum.Air, string displayName= default// Optional parameters
+            string displayName= default, double thickness = 0.0125D, GasTypeEnum? gasType = GasTypeEnum.Air// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // use default value if no "thickness" provided

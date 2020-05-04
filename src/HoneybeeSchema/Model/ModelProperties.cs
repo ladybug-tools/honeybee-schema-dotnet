@@ -37,7 +37,8 @@ namespace HoneybeeSchema
         /// <param name="energy">energy.</param>
         /// <param name="radiance">radiance.</param>
         public ModelProperties
-        ( // Required parameters
+        (
+             // Required parameters
             ModelEnergyProperties energy= default, ModelRadianceProperties radiance= default// Optional parameters
         )// BaseClass
         {

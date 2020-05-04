@@ -47,7 +47,7 @@ namespace HoneybeeSchema
         public EnergyWindowMaterialSimpleGlazSys
         (
             string identifier, double uFactor, double shgc, // Required parameters
-            double vt = 0.54D, string displayName= default// Optional parameters
+            string displayName= default, double vt = 0.54D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "uFactor" is required (not null)

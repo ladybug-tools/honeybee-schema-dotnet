@@ -46,7 +46,7 @@ namespace HoneybeeSchema
         public ASHRAETau
         (
             List<int> date, double tauB, double tauD, // Required parameters
-            bool daylightSavings = false// Optional parameters
+            bool daylightSavings = false    // Optional parameters
         ) : base(date: date, daylightSavings: daylightSavings )// BaseClass
         {
             // to ensure "tauB" is required (not null)

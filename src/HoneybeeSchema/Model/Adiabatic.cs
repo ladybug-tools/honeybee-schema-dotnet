@@ -38,7 +38,7 @@ namespace HoneybeeSchema
         public Adiabatic
         (
             // Required parameters
-            // Optional parameters
+              // Optional parameters
         )// BaseClass
         {
 

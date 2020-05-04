@@ -40,7 +40,8 @@ namespace HoneybeeSchema
         /// <param name="exteriorGlassConstruction">A WindowConstruction for all glass doors with an Outdoors boundary condition..</param>
         /// <param name="interiorGlassConstruction">A WindowConstruction for all glass doors with a Surface boundary condition..</param>
         public DoorConstructionSet
-        ( // Required parameters
+        (
+             // Required parameters
             OpaqueConstruction interiorConstruction= default, OpaqueConstruction exteriorConstruction= default, OpaqueConstruction overheadConstruction= default, WindowConstruction exteriorGlassConstruction= default, WindowConstruction interiorGlassConstruction= default// Optional parameters
         )// BaseClass
         {

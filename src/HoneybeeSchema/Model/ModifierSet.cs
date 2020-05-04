@@ -51,7 +51,7 @@ namespace HoneybeeSchema
         public ModifierSet
         (
             string identifier, // Required parameters
-            WallModifierSet wallSet= default, FloorModifierSet floorSet= default, RoofCeilingModifierSet roofCeilingSet= default, ApertureModifierSet apertureSet= default, DoorModifierSet doorSet= default, ShadeModifierSet shadeSet= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> airBoundaryModifier= default, string displayName= default// Optional parameters
+            string displayName= default, WallModifierSet wallSet= default, FloorModifierSet floorSet= default, RoofCeilingModifierSet roofCeilingSet= default, ApertureModifierSet apertureSet= default, DoorModifierSet doorSet= default, ShadeModifierSet shadeSet= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Void,Mirror> airBoundaryModifier= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             this.WallSet = wallSet;

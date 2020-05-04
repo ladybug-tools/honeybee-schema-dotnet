@@ -87,7 +87,7 @@ namespace HoneybeeSchema
         public IdealAirSystemAbridged
         (
             string identifier, // Required parameters
-            EconomizerTypeEnum? economizerType = EconomizerTypeEnum.DifferentialDryBulb, bool demandControlledVentilation = false, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, double heatingAirTemperature = 50D, double coolingAirTemperature = 13D, AnyOf<NoLimit,Autosize,double> heatingLimit= default, AnyOf<NoLimit,Autosize,double> coolingLimit= default, string heatingAvailability= default, string coolingAvailability= default, string displayName= default// Optional parameters
+            string displayName= default, EconomizerTypeEnum? economizerType = EconomizerTypeEnum.DifferentialDryBulb, bool demandControlledVentilation = false, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, double heatingAirTemperature = 50D, double coolingAirTemperature = 13D, AnyOf<NoLimit,Autosize,double> heatingLimit= default, AnyOf<NoLimit,Autosize,double> coolingLimit= default, string heatingAvailability= default, string coolingAvailability= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // use default value if no "economizerType" provided

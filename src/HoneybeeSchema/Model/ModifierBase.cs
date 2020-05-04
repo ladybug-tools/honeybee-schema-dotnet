@@ -44,7 +44,7 @@ namespace HoneybeeSchema
         public ModifierBase
         (
             string identifier, // Required parameters
-            string displayName= default// Optional parameters
+            string displayName= default    // Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
 
