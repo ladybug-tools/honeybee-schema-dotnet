@@ -19,6 +19,8 @@ using HoneybeeSchema;
 
 using System.Reflection;
 using Newtonsoft.Json;
+using HB = HoneybeeSchema;
+using System.Net;
 
 namespace HoneybeeSchema.Test
 {
@@ -32,7 +34,7 @@ namespace HoneybeeSchema.Test
     public class GlassTests
     {
         // TODO uncomment below to declare an instance variable for Glass
-        //private Glass instance;
+        private Glass instance;
 
         /// <summary>
         /// Setup before each test
@@ -40,8 +42,21 @@ namespace HoneybeeSchema.Test
         [SetUp]
         public void Init()
         {
-            // TODO uncomment below to create an instance of Glass
-            //instance = new Glass();
+            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/modifier/modifier_glass_generic_exterior_window.json";
+            using (WebClient wc = new WebClient())
+            {
+                var json = wc.DownloadString(url);
+                this.instance = HB.Glass.FromJson(json);
+            }
+            //var dir = Path.GetDirectoryName(this.GetType().Assembly.Location);
+            //Directory.SetCurrentDirectory(dir);
+            //var file = @"..\..\..\..\samples\modifier\glass.json";
+            //using (StreamReader sr = File.OpenText(file))
+            //{
+            //    string s = sr.ReadToEnd();
+            //    this.instance = HB.Glass.FromJson(s);
+            //}
+
         }
 
         /// <summary>
@@ -60,7 +75,7 @@ namespace HoneybeeSchema.Test
         public void GlassInstanceTest()
         {
             // TODO uncomment below to test "IsInstanceOf" Glass
-            //Assert.IsInstanceOf(typeof(Glass), instance);
+            Assert.IsInstanceOf(typeof(Glass), instance);
         }
 
 

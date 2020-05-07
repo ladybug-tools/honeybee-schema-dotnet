@@ -63,24 +63,26 @@ Contact: info@ladybug.tools
     <Compile Include="Model\ConstructionSetAbridgedTests.cs" />
     <Compile Include="Model\DoorTests.cs" />
     <Compile Include="Model\ElectricEquipmentAbridgedTests.cs" />
+    <Compile Include="Model\GlassTests.cs" />
     <Compile Include="Model\ModelEnergyPropertiesTests.cs" />
     <Compile Include="Model\ModelTests.cs" />
     <Compile Include="Model\OpaqueConstructionAbridgedTests.cs" />
     <Compile Include="Model\OutdoorsTests.cs" />
     <Compile Include="Model\ProgramTypeAbridgedTests.cs" />
     <Compile Include="Model\ScheduleTypeLimitTests.cs" />
+    <Compile Include="Model\VoidTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <Import Project="$(MsBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\HoneybeeSchema\HoneybeeSchema.csproj">
-      <Project>{2D9490D8-0848-4451-B3A9-9465C55F806F}</Project>
+      <Project>{2d9490d8-0848-4451-b3a9-9465c55f806f}</Project>
       <Name>HoneybeeSchema</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="$(MsBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
