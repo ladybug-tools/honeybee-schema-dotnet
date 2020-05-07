@@ -19,6 +19,7 @@ using HoneybeeSchema;
 
 using System.Reflection;
 using Newtonsoft.Json;
+using HB = HoneybeeSchema;
 
 namespace HoneybeeSchema.Test
 {
@@ -32,7 +33,7 @@ namespace HoneybeeSchema.Test
     public class VoidTests
     {
         // TODO uncomment below to declare an instance variable for Void
-        //private Void instance;
+        private Void instance;
 
         /// <summary>
         /// Setup before each test
@@ -40,8 +41,14 @@ namespace HoneybeeSchema.Test
         [SetUp]
         public void Init()
         {
-            // TODO uncomment below to create an instance of Void
-            //instance = new Void();
+            var dir = Path.GetDirectoryName(this.GetType().Assembly.Location);
+            Directory.SetCurrentDirectory(dir);
+            var file = @"..\..\..\..\samples\modifier\void.json";
+            using (StreamReader sr = File.OpenText(file))
+            {
+                string s = sr.ReadToEnd();
+                this.instance = HB.Void.FromJson(s);
+            }
         }
 
         /// <summary>
@@ -60,7 +67,7 @@ namespace HoneybeeSchema.Test
         public void VoidInstanceTest()
         {
             // TODO uncomment below to test "IsInstanceOf" Void
-            //Assert.IsInstanceOf(typeof(Void), instance);
+            Assert.IsInstanceOf(typeof(Void), instance);
         }
 
 
