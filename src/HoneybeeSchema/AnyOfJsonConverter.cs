@@ -1,5 +1,4 @@
-﻿
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
@@ -30,7 +29,7 @@ namespace HoneybeeSchema
                 if (jObject["type"] != null)
                 {
                     var typeName = jObject["type"].Value<string>();
-                    var type = validTypes.FirstOrDefault(_ => _.Name == typeName);
+                    var type = validTypes.FirstOrDefault(_ => _.Name.Equals(typeName, StringComparison.CurrentCultureIgnoreCase));
                     if (type != null)
                     {
                         data = jObject.ToObject(type, serializer);
