@@ -31,7 +31,7 @@
     <DocumentationFile>bin\Release\HoneybeeSchema.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <NoWarn>CS0472,CS1591</NoWarn>
+    <NoWarn>CS0472,CS1591,CS0108</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
