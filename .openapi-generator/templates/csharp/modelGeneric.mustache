@@ -141,7 +141,7 @@ this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}};
         [DataMember(Name="{{baseName}}", EmitDefaultValue={{#vendorExtensions.x-emit-default-value}}true{{/vendorExtensions.x-emit-default-value}}{{^vendorExtensions.x-emit-default-value}}{{#isNullable}}true{{/isNullable}}{{^isNullable}}false{{/isNullable}}{{/vendorExtensions.x-emit-default-value}})]{{#isDate}}
         [JsonConverter(typeof(OpenAPIDateConverter))]{{/isDate}}
         [JsonProperty("{{baseName}}")]
-        public {{{dataType}}} {{name}} { get; set; }
+        public {{{dataType}}} {{name}} { get; set; } {{#defaultValue}} = {{{defaultValue}}};{{/defaultValue}}
         {{/isReadOnly}}
         {{/isEnum}}
         {{/isInherited}}
