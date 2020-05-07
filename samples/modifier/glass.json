@@ -1,0 +1,12 @@
+{
+    "modifier": {
+        "type": "void"
+    },
+    "type": "glass",
+    "identifier": "generic_interior_window_vis_0.88",
+    "r_transmissivity": 0.9584154328610596,
+    "g_transmissivity": 0.9584154328610596,
+    "b_transmissivity": 0.9584154328610596,
+    "refraction_index": null,
+    "dependencies": []
+}
