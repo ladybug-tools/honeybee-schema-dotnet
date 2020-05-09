@@ -56,6 +56,8 @@ namespace HoneybeeSchema
 
         public override bool Equals(object obj)
         {
+            if (this == null)
+                return obj == null ? true : false;
             return this.Obj.Equals(obj);
         }
         public override int GetHashCode()
@@ -70,12 +72,15 @@ namespace HoneybeeSchema
 
         public static bool operator == (AnyOf obj, object anotherObj) 
         {
+            if (obj == null)
+                return anotherObj == null ? true : false;
+
             return obj.Obj.Equals(anotherObj);
         }
 
         public static bool operator != (AnyOf obj, object anotherObj)
         {
-            return !obj.Obj.Equals(anotherObj);
+            return !(obj == anotherObj);
         }
 
 
