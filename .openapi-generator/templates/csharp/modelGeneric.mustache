@@ -163,7 +163,7 @@ this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}};
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
-        public string ToString(bool detailed)
+        public override string ToString(bool detailed)
         {
             if (detailed)
                 return this.ToString();

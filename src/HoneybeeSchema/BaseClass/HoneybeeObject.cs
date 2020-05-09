@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace HoneybeeSchema
 {
-    public abstract class HoneybeeObject
+    public abstract class HoneybeeObject: IToStringDetailed
     {
         /// <summary>
         /// This is the base class for all honeybee schema objects.
@@ -18,6 +18,8 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
         [JsonProperty("type")]
-        public string Type { get; protected internal set; } = "InvalidSchemaObject"; 
+        public string Type { get; protected internal set; } = "InvalidSchemaObject";
+
+        public abstract string ToString(bool detailed);
     }
 }
