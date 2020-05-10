@@ -135,14 +135,6 @@ namespace HoneybeeSchema.Test
             // TODO unit test for the property 'OrphanedDoors'
         }
         /// <summary>
-        /// Test the property 'NorthAngle'
-        /// </summary>
-        [Test]
-        public void NorthAngleTest()
-        {
-            Assert.AreEqual(this.instance.NorthAngle, 15);
-        }
-        /// <summary>
         /// Test the property 'Properties'
         /// </summary>
         [Test]
