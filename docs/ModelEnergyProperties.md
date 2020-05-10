@@ -6,7 +6,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** |  | [optional] [readonly] [default to "ModelEnergyProperties"]
-**TerrainType** | **string** | Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms. | [optional] [default to TerrainTypeEnum.City]
 **GlobalConstructionSet** | **string** | Identifier for the ConstructionSet to be used for all objects lacking their own construction or a parent Room construction_set. This ConstructionSet must appear under the Model construction_sets. | [optional] 
 **ConstructionSets** | [**List&lt;AnyOfConstructionSetAbridgedConstructionSet&gt;**](AnyOfConstructionSetAbridgedConstructionSet.md) | List of all unique ConstructionSets in the Model. | [optional] 
 **Constructions** | [**List&lt;AnyOfOpaqueConstructionAbridgedWindowConstructionAbridgedShadeConstructionAirBoundaryConstructionAbridgedOpaqueConstructionWindowConstructionAirBoundaryConstruction&gt;**](AnyOfOpaqueConstructionAbridgedWindowConstructionAbridgedShadeConstructionAirBoundaryConstructionAbridgedOpaqueConstructionWindowConstructionAirBoundaryConstruction.md) | A list of all unique constructions in the model. This includes constructions across all Faces, Apertures, Doors, Shades, Room ConstructionSets, and the global_construction_set. | [optional] 
