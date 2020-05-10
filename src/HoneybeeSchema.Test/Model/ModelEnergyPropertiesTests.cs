@@ -78,16 +78,6 @@ namespace HoneybeeSchema.Test
             // TODO unit test for the property 'Type'
         }
         /// <summary>
-        /// Test the property 'TerrainType'
-        /// </summary>
-        [Test]
-        public void TerrainTypeTest()
-        {
-            // TODO unit test for the property 'TerrainType'
-            var obj = this.instance.TerrainType;
-            Assert.AreEqual(obj, ModelEnergyProperties.TerrainTypeEnum.City);
-        }
-        /// <summary>
         /// Test the property 'GlobalConstructionSet'
         /// </summary>
         [Test]
