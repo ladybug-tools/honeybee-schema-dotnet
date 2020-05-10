@@ -165,14 +165,11 @@ this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}};
         /// <returns>String presentation of the object</returns>
         public override string ToString(bool detailed)
         {
-            if (detailed)
+            if (!detailed)
                 return this.ToString();
             
             var sb = new StringBuilder();
             sb.Append("{{classname}}:\n");
-            {{#parent}}
-            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            {{/parent}}
             {{#allVars}}
             sb.Append("  {{name}}: ").Append({{name}}).Append("\n");
             {{/allVars}}
