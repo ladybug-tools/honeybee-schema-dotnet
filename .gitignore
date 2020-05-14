@@ -8,6 +8,7 @@
 *.sln.docstates
 ./nuget
 nuget.exe
+*.jar
 # Build results
 
 [Dd]ebug/

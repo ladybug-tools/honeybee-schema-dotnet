@@ -176,7 +176,7 @@ namespace HoneybeeSchema.Test
         public void ScheduleTypeLimitsTest()
         {
             // TODO unit test for the property 'ScheduleTypeLimits'
-            var obj = this.instance.ScheduleTypeLimits.First(_=>_.UnitType == ScheduleTypeLimit.UnitTypeEnum.ActivityLevel);
+            var obj = this.instance.ScheduleTypeLimits.First(_=>_.UnitType == ScheduleUnitType.ActivityLevel);
             Assert.AreEqual(obj.Identifier, "Activity Level");
             Assert.AreEqual(obj.UpperLimit, new NoLimit());
         }

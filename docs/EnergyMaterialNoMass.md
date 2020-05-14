@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **DisplayName** | **string** | Display name of the object with no character restrictions. | [optional] 
 **RValue** | **double** | The thermal resistance (R-value) of the material layer [m2-K/W]. | 
 **Type** | **string** |  | [optional] [readonly] [default to "EnergyMaterialNoMass"]
-**Roughness** | **string** |  | [optional] [default to RoughnessEnum.MediumRough]
+**Roughness** | **Roughness** |  | [optional] [default to "MediumRough"]
 **ThermalAbsorptance** | **double** | Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9. | [optional] [default to 0.9D]
 **SolarAbsorptance** | **double** | Fraction of incident solar radiation absorbed by the material. Default value is 0.7. | [optional] [default to 0.7D]
 **VisibleAbsorptance** | **double** | Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7. | [optional] [default to 0.7D]

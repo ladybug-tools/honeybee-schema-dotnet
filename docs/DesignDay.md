@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). | 
-**DayType** | **string** |  | 
+**DayType** | **DesignDayTypes** |  | 
 **DryBulbCondition** | [**DryBulbCondition**](DryBulbCondition.md) | A DryBulbCondition describing temperature conditions on the design day. | 
 **HumidityCondition** | [**HumidityCondition**](HumidityCondition.md) | A HumidityCondition describing humidity and precipitation conditions on the design day. | 
 **WindCondition** | [**WindCondition**](WindCondition.md) | A WindCondition describing wind conditions on the design day. | 

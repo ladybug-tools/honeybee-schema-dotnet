@@ -12,6 +12,7 @@ namespace HoneybeeSchema
 	public partial class Glass: HoneybeeSchema.Radiance.IModifier {}
 	public partial class Glow: HoneybeeSchema.Radiance.IModifier {}
 	public partial class Light: HoneybeeSchema.Radiance.IModifier {}
+	public partial class Metal: HoneybeeSchema.Radiance.IModifier {}
 	public partial class Mirror: HoneybeeSchema.Radiance.IModifier {}
 	public partial class ModifierBase: HoneybeeSchema.Radiance.IModifier {}
 	public partial class Plastic: HoneybeeSchema.Radiance.IModifier {}

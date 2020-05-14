@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BsdfData** | **System.IO.Stream** | BSDF xml file data as bytes. | 
-**Modifier** | [**AnyOfPlasticGlassBSDFGlowLightTransVoidMirror**](AnyOfPlasticGlassBSDFGlowLightTransVoidMirror.md) | Material modifier (default: Void). | [optional] 
-**Dependencies** | [**List&lt;AnyOfPlasticGlassBSDFGlowLightTransVoidMirror&gt;**](AnyOfPlasticGlassBSDFGlowLightTransVoidMirror.md) | List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: []). | [optional] 
+**BsdfData** | **string** | A string with the contents of the BSDF XML file. | 
+**Modifier** | [**AnyOfPlasticGlassBSDFGlowLightTransMetalVoidMirror**](AnyOfPlasticGlassBSDFGlowLightTransMetalVoidMirror.md) | Material modifier (default: Void). | [optional] 
+**Dependencies** | [**List&lt;AnyOfPlasticGlassBSDFGlowLightTransMetalVoidMirror&gt;**](AnyOfPlasticGlassBSDFGlowLightTransMetalVoidMirror.md) | List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None). | [optional] 
 **UpOrientation** | **List&lt;double&gt;** | Vector as sequence that sets the hemisphere that the BSDF material faces. (default: (0.01, 0.01, 1.00). | [optional] 
 **Thickness** | **double** | Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative)(default: 0). | [optional] [default to 0D]
 **FunctionFile** | **string** | Optional input for function file (default: \&quot;.\&quot;). | [optional] [default to "."]

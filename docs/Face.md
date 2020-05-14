@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **DisplayName** | **string** | Display name of the object with no character restrictions. | [optional] 
 **UserData** | [**Object**](.md) | Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list). | [optional] 
 **Geometry** | [**Face3D**](Face3D.md) | Planar Face3D for the geometry. | 
-**FaceType** | **string** |  | 
+**FaceType** | **FaceType** |  | 
 **BoundaryCondition** | [**AnyOfGroundOutdoorsAdiabaticSurface**](AnyOfGroundOutdoorsAdiabaticSurface.md) |  | 
 **Properties** | [**FacePropertiesAbridged**](FacePropertiesAbridged.md) | Extension properties for particular simulation engines (Radiance, EnergyPlus). | 
 **Type** | **string** |  | [optional] [readonly] [default to "Face"]

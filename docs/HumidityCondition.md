@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HumidityType** | **string** |  | 
+**HumidityType** | **HumidityTypes** |  | 
 **HumidityValue** | **double** | The value correcponding to the humidity_type. | 
 **Type** | **string** |  | [optional] [readonly] [default to "HumidityCondition"]
 **BarometricPressure** | **double** | Barometric air pressure on the design day [Pa]. | [optional] [default to 101325D]
