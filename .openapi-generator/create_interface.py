@@ -3,12 +3,14 @@ import sys
 import json
 import urllib.request
 
+lib_Name = 'HoneybeeSchema'
+
 root = os.path.dirname(os.path.dirname(__file__))
-source_folder = os.path.join(root, 'src', 'HoneybeeSchema', 'Model')
+source_folder = os.path.join(root, 'src', lib_Name, 'Model')
 
 
 def gen_interfaces(source_json):
-    interface_dir = os.path.join(root, 'src', 'HoneybeeSchema', 'Interface')
+    interface_dir = os.path.join(root, 'src', lib_Name, 'Interface')
 
     if source_json.startswith('https:'):
         json_url = urllib.request.urlopen(source_json)
@@ -18,8 +20,10 @@ def gen_interfaces(source_json):
             data = json.load(jsonFile)
     
     interfaces = {}
-    for key in data.keys():
-        name_space = data[key].title().replace('_', '', 1)
+    classItems = data['classes']
+
+    for key in classItems.keys():
+        name_space = classItems[key].title().replace('_', '', 1)
 
         if name_space.endswith('_Base'):
             name_space = name_space.replace('_Base', key)
@@ -45,7 +49,7 @@ def create_interfaces(dir, interfaces):
 
 def create_interface(dir, space_name, child_classes):
 
-    if space_name == "HoneybeeSchema.Model":
+    if space_name == f"{lib_Name}.Model":
         return
 
     layers = space_name.split('.')
