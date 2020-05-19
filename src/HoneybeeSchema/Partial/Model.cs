@@ -25,7 +25,7 @@ namespace HoneybeeSchema
                         break;
 
                     default:
-                        break;
+                        throw new ArgumentException($"{item.GetType()} is not added to model");
                 }
             }
             
@@ -49,7 +49,7 @@ namespace HoneybeeSchema
                         break;
 
                     default:
-                        break;
+                        throw new ArgumentException($"{item.GetType()} is not added to model");
                 }
             }
             
@@ -70,7 +70,7 @@ namespace HoneybeeSchema
                         break;
 
                     default:
-                        break;
+                        throw new ArgumentException($"{item.GetType()} is not added to model");
                 }
             }
             
@@ -115,7 +115,7 @@ namespace HoneybeeSchema
                         this.Properties.Energy.Materials.Add(em);
                         break;
                     default:
-                        break;
+                        throw new ArgumentException($"{item.GetType()} is not added to model");
                 }
 
             }
@@ -154,12 +154,65 @@ namespace HoneybeeSchema
                         break;
                 
                     default:
-                        break;
+                        throw new ArgumentException($"{item.GetType()} is not added to model");
+                      
                 }
                 
 
             }
         }
+
+        public void AddSchedules(List<IDdEnergyBaseModel> schedules)
+        {
+            foreach (var item in schedules)
+            {
+                var exist = this.Properties.Energy.Schedules.Any(_ => (_.Obj as IIDdBase).Identifier == item.Identifier);
+                if (exist)
+                    continue;
+                switch (item)
+                {
+                    case ScheduleRulesetAbridged em:
+                        this.Properties.Energy.Schedules.Add(em);
+                        break;
+                    case ScheduleFixedIntervalAbridged em:
+                        this.Properties.Energy.Schedules.Add(em);
+                        break;
+                    case ScheduleRuleset em:
+                        this.Properties.Energy.Schedules.Add(em);
+                        break;
+                    case ScheduleFixedInterval em:
+                        this.Properties.Energy.Schedules.Add(em);
+                        break;
+               
+                    default:
+                        throw new ArgumentException($"{item.GetType()} is not added to model");
+
+                }
+            }
+          
+        }
+
+        public void AddScheduleTypeLimits(List<ScheduleTypeLimit> scheduleTypeLimits)
+        {
+            foreach (var item in scheduleTypeLimits)
+            {
+                var exist = this.Properties.Energy.ScheduleTypeLimits.Any(_ => _.Identifier == item.Identifier);
+                if (exist)
+                    continue;
+                switch (item)
+                {
+                    case ScheduleTypeLimit em:
+                        this.Properties.Energy.ScheduleTypeLimits.Add(em);
+                        break;
+                 
+                    default:
+                        throw new ArgumentException($"{item.GetType()} is not added to model");
+
+                }
+            }
+        }
+
+
 
 
     }
