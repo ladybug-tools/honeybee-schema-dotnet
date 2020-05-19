@@ -146,6 +146,7 @@ def check_csfiles(source_folder, anyof_types, enum_types):
         if class_name in enums_tobe_removed:
             print(f"Removing {class_name}")
             os.remove(cs_file)
+            continue
         
         print("\n-Checking %s" % cs_file)
         # read data
