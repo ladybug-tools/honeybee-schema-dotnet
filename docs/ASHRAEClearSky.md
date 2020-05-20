@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Clearness** | **double** | Value between 0 and 1.2 that will get multiplied by the irradinace to correct for factors like elevation above sea level. | 
+**Clearness** | **double** | Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level. | 
 **Type** | **string** |  | [optional] [readonly] [default to "ASHRAEClearSky"]
 
 [[Back to Model list]](../README.md#documentation-for-models)
