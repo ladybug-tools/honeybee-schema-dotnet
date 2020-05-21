@@ -110,7 +110,7 @@ namespace HoneybeeSchema.Helper
 
         //Default Model Energy Property
         private static HB.ModelEnergyProperties _defaultModelEnergyProperty;
-        public static HB.ModelEnergyProperties ModelEnergyProperties =>
+        public static HB.ModelEnergyProperties DefaultModelEnergyProperties =>
             _defaultModelEnergyProperty = _defaultModelEnergyProperty ??  LoadHoneybeeObject(_LoadLibraries[10], HB.ModelEnergyProperties.FromJson);
 
         //ProgramTypes
