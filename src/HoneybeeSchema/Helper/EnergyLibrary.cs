@@ -506,7 +506,28 @@ namespace HoneybeeSchema.Helper
             return construction.Layers.Select(_ => GetWindowMaterialByIdentifier(_)).ToList();
         }
 
-        
+        private static HB.ModelEnergyProperties _inModelEnergyProperties;
+        /// <summary>
+        /// This is a temporary placeholder for keeping in model resource objects.
+        /// </summary>
+        public static HB.ModelEnergyProperties InModelEnergyProperties { 
+            get 
+            {
+                if (_inModelEnergyProperties == null)
+                {
+                    _inModelEnergyProperties = ModelEnergyProperties.Default;
+                }
+                return _inModelEnergyProperties;
+            }
+            set
+            {
+                _inModelEnergyProperties = value;
+            }
+        }
+
+      
+
+
     }
 
 }
