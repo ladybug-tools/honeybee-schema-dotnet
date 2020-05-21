@@ -158,7 +158,10 @@ namespace HoneybeeSchema
         /// <returns>ProgramTypeAbridged object</returns>
         public static ProgramTypeAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<ProgramTypeAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<ProgramTypeAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

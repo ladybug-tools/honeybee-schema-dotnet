@@ -184,7 +184,10 @@ namespace HoneybeeSchema
         /// <returns>Door object</returns>
         public static Door FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Door>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Door>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

@@ -306,7 +306,10 @@ namespace HoneybeeSchema
         /// <returns>EnergyWindowMaterialGlazing object</returns>
         public static EnergyWindowMaterialGlazing FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<EnergyWindowMaterialGlazing>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<EnergyWindowMaterialGlazing>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

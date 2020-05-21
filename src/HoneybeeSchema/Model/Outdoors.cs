@@ -125,7 +125,10 @@ namespace HoneybeeSchema
         /// <returns>Outdoors object</returns>
         public static Outdoors FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Outdoors>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Outdoors>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

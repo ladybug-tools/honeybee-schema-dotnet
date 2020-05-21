@@ -126,7 +126,10 @@ namespace HoneybeeSchema
         /// <returns>ASHRAETau object</returns>
         public static ASHRAETau FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<ASHRAETau>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<ASHRAETau>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

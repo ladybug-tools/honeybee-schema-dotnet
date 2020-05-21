@@ -99,7 +99,10 @@ namespace HoneybeeSchema
         /// <returns>FloorModifierSet object</returns>
         public static FloorModifierSet FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<FloorModifierSet>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<FloorModifierSet>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

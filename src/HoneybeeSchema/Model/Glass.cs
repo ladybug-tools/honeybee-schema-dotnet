@@ -180,7 +180,10 @@ namespace HoneybeeSchema
         /// <returns>Glass object</returns>
         public static Glass FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Glass>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Glass>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

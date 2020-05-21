@@ -99,7 +99,10 @@ namespace HoneybeeSchema
         /// <returns>ShadeModifierSet object</returns>
         public static ShadeModifierSet FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<ShadeModifierSet>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<ShadeModifierSet>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

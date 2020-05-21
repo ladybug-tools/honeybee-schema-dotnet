@@ -180,7 +180,10 @@ namespace HoneybeeSchema
         /// <returns>GasEquipment object</returns>
         public static GasEquipment FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<GasEquipment>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<GasEquipment>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

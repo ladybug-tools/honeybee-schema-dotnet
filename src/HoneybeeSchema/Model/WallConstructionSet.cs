@@ -109,7 +109,10 @@ namespace HoneybeeSchema
         /// <returns>WallConstructionSet object</returns>
         public static WallConstructionSet FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<WallConstructionSet>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<WallConstructionSet>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

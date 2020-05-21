@@ -180,7 +180,10 @@ namespace HoneybeeSchema
         /// <returns>Glow object</returns>
         public static Glow FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Glow>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Glow>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

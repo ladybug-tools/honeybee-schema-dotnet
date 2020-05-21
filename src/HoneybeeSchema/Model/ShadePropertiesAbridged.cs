@@ -97,7 +97,10 @@ namespace HoneybeeSchema
         /// <returns>ShadePropertiesAbridged object</returns>
         public static ShadePropertiesAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<ShadePropertiesAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<ShadePropertiesAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

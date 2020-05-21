@@ -129,7 +129,10 @@ namespace HoneybeeSchema
         /// <returns>DoorModifierSet object</returns>
         public static DoorModifierSet FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<DoorModifierSet>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<DoorModifierSet>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

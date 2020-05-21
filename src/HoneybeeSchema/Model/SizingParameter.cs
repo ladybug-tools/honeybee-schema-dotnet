@@ -125,7 +125,10 @@ namespace HoneybeeSchema
         /// <returns>SizingParameter object</returns>
         public static SizingParameter FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<SizingParameter>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<SizingParameter>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

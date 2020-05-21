@@ -203,7 +203,10 @@ namespace HoneybeeSchema
         /// <returns>Face object</returns>
         public static Face FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Face>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Face>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

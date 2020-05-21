@@ -109,7 +109,10 @@ namespace HoneybeeSchema
         /// <returns>RoofCeilingConstructionSet object</returns>
         public static RoofCeilingConstructionSet FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<RoofCeilingConstructionSet>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<RoofCeilingConstructionSet>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

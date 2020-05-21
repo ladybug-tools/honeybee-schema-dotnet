@@ -166,7 +166,10 @@ namespace HoneybeeSchema
         /// <returns>Room object</returns>
         public static Room FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Room>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Room>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

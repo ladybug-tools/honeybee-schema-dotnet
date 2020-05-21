@@ -103,7 +103,10 @@ namespace HoneybeeSchema
         /// <returns>Surface object</returns>
         public static Surface FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Surface>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Surface>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

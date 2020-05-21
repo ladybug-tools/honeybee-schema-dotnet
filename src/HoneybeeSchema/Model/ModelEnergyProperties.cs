@@ -159,7 +159,10 @@ namespace HoneybeeSchema
         /// <returns>ModelEnergyProperties object</returns>
         public static ModelEnergyProperties FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<ModelEnergyProperties>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<ModelEnergyProperties>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

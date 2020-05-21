@@ -213,7 +213,10 @@ namespace HoneybeeSchema
         /// <returns>BSDF object</returns>
         public static BSDF FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<BSDF>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<BSDF>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

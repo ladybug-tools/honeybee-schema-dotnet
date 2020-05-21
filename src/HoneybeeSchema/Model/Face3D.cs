@@ -123,7 +123,10 @@ namespace HoneybeeSchema
         /// <returns>Face3D object</returns>
         public static Face3D FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Face3D>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Face3D>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

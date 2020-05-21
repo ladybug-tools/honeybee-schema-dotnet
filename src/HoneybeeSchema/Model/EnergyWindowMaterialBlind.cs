@@ -554,7 +554,10 @@ namespace HoneybeeSchema
         /// <returns>EnergyWindowMaterialBlind object</returns>
         public static EnergyWindowMaterialBlind FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<EnergyWindowMaterialBlind>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<EnergyWindowMaterialBlind>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

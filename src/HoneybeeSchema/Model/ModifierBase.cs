@@ -88,7 +88,10 @@ namespace HoneybeeSchema
         /// <returns>ModifierBase object</returns>
         public static ModifierBase FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<ModifierBase>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<ModifierBase>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

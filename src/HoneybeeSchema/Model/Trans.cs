@@ -234,7 +234,10 @@ namespace HoneybeeSchema
         /// <returns>Trans object</returns>
         public static Trans FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Trans>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Trans>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

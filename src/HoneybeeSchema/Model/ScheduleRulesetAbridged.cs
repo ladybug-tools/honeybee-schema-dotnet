@@ -176,7 +176,10 @@ namespace HoneybeeSchema
         /// <returns>ScheduleRulesetAbridged object</returns>
         public static ScheduleRulesetAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<ScheduleRulesetAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<ScheduleRulesetAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

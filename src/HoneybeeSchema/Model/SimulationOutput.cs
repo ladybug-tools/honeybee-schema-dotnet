@@ -151,7 +151,10 @@ namespace HoneybeeSchema
         /// <returns>SimulationOutput object</returns>
         public static SimulationOutput FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<SimulationOutput>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<SimulationOutput>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

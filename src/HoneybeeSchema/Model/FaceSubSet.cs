@@ -109,7 +109,10 @@ namespace HoneybeeSchema
         /// <returns>FaceSubSet object</returns>
         public static FaceSubSet FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<FaceSubSet>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<FaceSubSet>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

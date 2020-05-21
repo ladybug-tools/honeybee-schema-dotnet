@@ -174,7 +174,10 @@ namespace HoneybeeSchema
         /// <returns>HumidityCondition object</returns>
         public static HumidityCondition FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<HumidityCondition>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<HumidityCondition>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

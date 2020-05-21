@@ -85,7 +85,10 @@ namespace HoneybeeSchema
         /// <returns>RoofCeilingConstructionSetAbridged object</returns>
         public static RoofCeilingConstructionSetAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<RoofCeilingConstructionSetAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<RoofCeilingConstructionSetAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

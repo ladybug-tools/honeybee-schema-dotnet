@@ -212,7 +212,10 @@ namespace HoneybeeSchema
         /// <returns>Model object</returns>
         public static Model FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Model>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Model>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

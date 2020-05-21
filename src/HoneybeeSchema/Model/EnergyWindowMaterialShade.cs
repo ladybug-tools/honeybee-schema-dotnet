@@ -340,7 +340,10 @@ namespace HoneybeeSchema
         /// <returns>EnergyWindowMaterialShade object</returns>
         public static EnergyWindowMaterialShade FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<EnergyWindowMaterialShade>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<EnergyWindowMaterialShade>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

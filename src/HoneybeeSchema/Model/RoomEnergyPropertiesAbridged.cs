@@ -179,7 +179,10 @@ namespace HoneybeeSchema
         /// <returns>RoomEnergyPropertiesAbridged object</returns>
         public static RoomEnergyPropertiesAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<RoomEnergyPropertiesAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<RoomEnergyPropertiesAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

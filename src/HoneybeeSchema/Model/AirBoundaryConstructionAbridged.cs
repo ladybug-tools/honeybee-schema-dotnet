@@ -125,7 +125,10 @@ namespace HoneybeeSchema
         /// <returns>AirBoundaryConstructionAbridged object</returns>
         public static AirBoundaryConstructionAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<AirBoundaryConstructionAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<AirBoundaryConstructionAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

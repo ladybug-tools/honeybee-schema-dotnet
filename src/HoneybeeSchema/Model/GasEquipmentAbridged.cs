@@ -98,7 +98,10 @@ namespace HoneybeeSchema
         /// <returns>GasEquipmentAbridged object</returns>
         public static GasEquipmentAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<GasEquipmentAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<GasEquipmentAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

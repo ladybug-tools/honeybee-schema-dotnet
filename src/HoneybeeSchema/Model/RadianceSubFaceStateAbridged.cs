@@ -105,7 +105,10 @@ namespace HoneybeeSchema
         /// <returns>RadianceSubFaceStateAbridged object</returns>
         public static RadianceSubFaceStateAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<RadianceSubFaceStateAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<RadianceSubFaceStateAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

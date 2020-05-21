@@ -109,7 +109,10 @@ namespace HoneybeeSchema
         /// <returns>RadianceShadeStateAbridged object</returns>
         public static RadianceShadeStateAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<RadianceShadeStateAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<RadianceShadeStateAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>
