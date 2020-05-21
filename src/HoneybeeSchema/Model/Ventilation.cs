@@ -170,7 +170,10 @@ namespace HoneybeeSchema
         /// <returns>Ventilation object</returns>
         public static Ventilation FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Ventilation>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Ventilation>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

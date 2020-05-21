@@ -80,7 +80,10 @@ namespace HoneybeeSchema
         /// <returns>Ground object</returns>
         public static Ground FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Ground>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Ground>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

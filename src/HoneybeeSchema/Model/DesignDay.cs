@@ -195,7 +195,10 @@ namespace HoneybeeSchema
         /// <returns>DesignDay object</returns>
         public static DesignDay FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<DesignDay>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<DesignDay>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

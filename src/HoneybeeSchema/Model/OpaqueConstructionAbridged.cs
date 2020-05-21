@@ -107,7 +107,10 @@ namespace HoneybeeSchema
         /// <returns>OpaqueConstructionAbridged object</returns>
         public static OpaqueConstructionAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<OpaqueConstructionAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<OpaqueConstructionAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

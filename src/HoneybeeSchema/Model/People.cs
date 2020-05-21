@@ -173,7 +173,10 @@ namespace HoneybeeSchema
         /// <returns>People object</returns>
         public static People FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<People>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<People>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

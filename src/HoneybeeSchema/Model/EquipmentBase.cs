@@ -180,7 +180,10 @@ namespace HoneybeeSchema
         /// <returns>EquipmentBase object</returns>
         public static EquipmentBase FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<EquipmentBase>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<EquipmentBase>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

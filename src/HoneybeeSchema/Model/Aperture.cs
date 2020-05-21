@@ -184,7 +184,10 @@ namespace HoneybeeSchema
         /// <returns>Aperture object</returns>
         public static Aperture FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Aperture>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Aperture>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

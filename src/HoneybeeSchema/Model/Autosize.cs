@@ -80,7 +80,10 @@ namespace HoneybeeSchema
         /// <returns>Autosize object</returns>
         public static Autosize FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Autosize>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Autosize>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

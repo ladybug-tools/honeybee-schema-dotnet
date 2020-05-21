@@ -121,7 +121,10 @@ namespace HoneybeeSchema
         /// <returns>WindCondition object</returns>
         public static WindCondition FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<WindCondition>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<WindCondition>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

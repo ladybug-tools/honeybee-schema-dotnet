@@ -99,7 +99,10 @@ namespace HoneybeeSchema
         /// <returns>DaylightSavingTime object</returns>
         public static DaylightSavingTime FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<DaylightSavingTime>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<DaylightSavingTime>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

@@ -109,7 +109,10 @@ namespace HoneybeeSchema
         /// <returns>WindowConstruction object</returns>
         public static WindowConstruction FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<WindowConstruction>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<WindowConstruction>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

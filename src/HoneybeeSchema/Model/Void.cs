@@ -80,7 +80,10 @@ namespace HoneybeeSchema
         /// <returns>Void object</returns>
         public static Void FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Void>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Void>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

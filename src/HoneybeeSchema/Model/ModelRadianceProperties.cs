@@ -109,7 +109,10 @@ namespace HoneybeeSchema
         /// <returns>ModelRadianceProperties object</returns>
         public static ModelRadianceProperties FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<ModelRadianceProperties>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<ModelRadianceProperties>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

@@ -158,7 +158,10 @@ namespace HoneybeeSchema
         /// <returns>ProgramType object</returns>
         public static ProgramType FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<ProgramType>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<ProgramType>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

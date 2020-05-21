@@ -109,7 +109,10 @@ namespace HoneybeeSchema
         /// <returns>FloorConstructionSet object</returns>
         public static FloorConstructionSet FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<FloorConstructionSet>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<FloorConstructionSet>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

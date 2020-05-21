@@ -97,7 +97,10 @@ namespace HoneybeeSchema
         /// <returns>RoomPropertiesAbridged object</returns>
         public static RoomPropertiesAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<RoomPropertiesAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<RoomPropertiesAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

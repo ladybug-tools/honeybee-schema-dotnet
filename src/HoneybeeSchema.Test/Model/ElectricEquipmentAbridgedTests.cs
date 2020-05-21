@@ -35,7 +35,7 @@ namespace HoneybeeSchema.Test
         // TODO uncomment below to declare an instance variable for ElectricEquipmentAbridged
         private ElectricEquipmentAbridged instance;
         private string json = @"{
-    ""type"": ""ElectricalEquipmentAbridged"",
+    ""type"": ""ElectricEquipmentAbridged"",
     ""name"": ""Electrical Equipment Definition"",
     ""watts_per_area"": 12.5,
     ""schedule"": ""Schedule-Equipment""

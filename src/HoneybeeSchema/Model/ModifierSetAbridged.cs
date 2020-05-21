@@ -158,7 +158,10 @@ namespace HoneybeeSchema
         /// <returns>ModifierSetAbridged object</returns>
         public static ModifierSetAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<ModifierSetAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<ModifierSetAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

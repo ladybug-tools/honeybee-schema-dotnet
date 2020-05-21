@@ -103,7 +103,10 @@ namespace HoneybeeSchema
         /// <returns>ApertureRadiancePropertiesAbridged object</returns>
         public static ApertureRadiancePropertiesAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<ApertureRadiancePropertiesAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<ApertureRadiancePropertiesAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

@@ -177,7 +177,10 @@ namespace HoneybeeSchema
         /// <returns>Infiltration object</returns>
         public static Infiltration FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Infiltration>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Infiltration>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

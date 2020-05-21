@@ -172,7 +172,10 @@ namespace HoneybeeSchema
         /// <returns>Mirror object</returns>
         public static Mirror FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Mirror>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Mirror>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

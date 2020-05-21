@@ -129,7 +129,10 @@ namespace HoneybeeSchema
         /// <returns>DoorConstructionSet object</returns>
         public static DoorConstructionSet FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<DoorConstructionSet>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<DoorConstructionSet>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

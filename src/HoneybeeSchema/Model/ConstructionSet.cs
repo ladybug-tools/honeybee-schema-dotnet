@@ -158,7 +158,10 @@ namespace HoneybeeSchema
         /// <returns>ConstructionSet object</returns>
         public static ConstructionSet FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<ConstructionSet>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<ConstructionSet>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

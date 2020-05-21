@@ -170,7 +170,10 @@ namespace HoneybeeSchema
         /// <returns>VentilationAbridged object</returns>
         public static VentilationAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<VentilationAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<VentilationAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

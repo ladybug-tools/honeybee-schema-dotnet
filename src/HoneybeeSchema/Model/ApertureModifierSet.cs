@@ -119,7 +119,10 @@ namespace HoneybeeSchema
         /// <returns>ApertureModifierSet object</returns>
         public static ApertureModifierSet FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<ApertureModifierSet>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<ApertureModifierSet>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

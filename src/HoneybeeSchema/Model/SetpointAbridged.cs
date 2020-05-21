@@ -146,7 +146,10 @@ namespace HoneybeeSchema
         /// <returns>SetpointAbridged object</returns>
         public static SetpointAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<SetpointAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<SetpointAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

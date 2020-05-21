@@ -99,7 +99,10 @@ namespace HoneybeeSchema
         /// <returns>RoofCeilingModifierSet object</returns>
         public static RoofCeilingModifierSet FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<RoofCeilingModifierSet>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<RoofCeilingModifierSet>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

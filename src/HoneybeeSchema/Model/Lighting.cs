@@ -180,7 +180,10 @@ namespace HoneybeeSchema
         /// <returns>Lighting object</returns>
         public static Lighting FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Lighting>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Lighting>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

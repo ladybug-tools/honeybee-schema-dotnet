@@ -103,7 +103,10 @@ namespace HoneybeeSchema
         /// <returns>DoorRadiancePropertiesAbridged object</returns>
         public static DoorRadiancePropertiesAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<DoorRadiancePropertiesAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<DoorRadiancePropertiesAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

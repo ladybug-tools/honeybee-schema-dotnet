@@ -146,7 +146,10 @@ namespace HoneybeeSchema
         /// <returns>Setpoint object</returns>
         public static Setpoint FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<Setpoint>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<Setpoint>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

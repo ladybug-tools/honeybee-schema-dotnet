@@ -181,7 +181,10 @@ namespace HoneybeeSchema
         /// <returns>ScheduleFixedIntervalAbridged object</returns>
         public static ScheduleFixedIntervalAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<ScheduleFixedIntervalAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<ScheduleFixedIntervalAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

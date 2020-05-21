@@ -182,7 +182,10 @@ namespace HoneybeeSchema
         /// <returns>SimulationParameter object</returns>
         public static SimulationParameter FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<SimulationParameter>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<SimulationParameter>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

@@ -113,7 +113,10 @@ namespace HoneybeeSchema
         /// <returns>IDdEnergyBaseModel object</returns>
         public static IDdEnergyBaseModel FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<IDdEnergyBaseModel>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<IDdEnergyBaseModel>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

@@ -11,7 +11,7 @@ namespace HoneybeeSchema
 			{
 				if (_default == null)
 				{
-					_default = Helper.EnergyLibrary.ModelEnergyProperties;
+					_default = Helper.EnergyLibrary.DefaultModelEnergyProperties;
 				}
 
 				return _default; 

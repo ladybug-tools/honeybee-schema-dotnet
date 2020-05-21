@@ -122,7 +122,10 @@ namespace HoneybeeSchema
         /// <returns>DryBulbCondition object</returns>
         public static DryBulbCondition FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<DryBulbCondition>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<DryBulbCondition>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

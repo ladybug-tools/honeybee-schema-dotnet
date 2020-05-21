@@ -142,7 +142,10 @@ namespace HoneybeeSchema
         /// <returns>ShadeConstruction object</returns>
         public static ShadeConstruction FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<ShadeConstruction>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<ShadeConstruction>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

@@ -83,7 +83,10 @@ namespace HoneybeeSchema
         /// <returns>FloorModifierSetAbridged object</returns>
         public static FloorModifierSetAbridged FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<FloorModifierSetAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<FloorModifierSetAbridged>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>

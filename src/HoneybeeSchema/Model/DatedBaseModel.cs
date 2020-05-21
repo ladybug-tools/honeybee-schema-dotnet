@@ -80,7 +80,10 @@ namespace HoneybeeSchema
         /// <returns>DatedBaseModel object</returns>
         public static DatedBaseModel FromJson(string json)
         {
-            return JsonConvert.DeserializeObject<DatedBaseModel>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<DatedBaseModel>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
         }
 
         /// <summary>
