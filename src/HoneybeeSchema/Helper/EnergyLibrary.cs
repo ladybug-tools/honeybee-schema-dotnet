@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using HoneybeeSchema.Energy;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace HoneybeeSchema.Helper
         /// <summary>
         /// This will return the top main folder path of where ladybug_tools is.
         /// </summary>
-        public static string LadybugToolsRootFolder 
+        public static string LadybugToolsRootFolder
         {
             get
             {
@@ -75,6 +76,56 @@ namespace HoneybeeSchema.Helper
         private static IEnumerable<string> _buildingVintages;
         public static IEnumerable<string> BuildingVintages => _buildingVintages = _buildingVintages ?? GetBuildingVintages();
 
+        // ladybug_tools\resources\standards\honeybee_energy_standards\programtypes\2013_data.json
+        private static IEnumerable<string> _buildingTypeJsonFilePaths;
+        public static IEnumerable<string> BuildingTypeJsonFilePaths => _buildingTypeJsonFilePaths = _buildingTypeJsonFilePaths ?? GetBuildingTypeJsonFilePaths();
+
+
+        // "2013::MediumOffice::OpenOffice"
+        public static (ProgramTypeAbridged programType, IEnumerable<ScheduleRulesetAbridged> schedules) GetStandardProgramTypeByIdentifier(string standardProgramType)
+        {
+            var year = standardProgramType.Split(':').First();
+            if (string.IsNullOrEmpty(year))
+                throw new ArgumentException($"Invalid {standardProgramType}");
+
+
+            var jsonFile = BuildingTypeJsonFilePaths.First(_ => _.Contains(year));
+            if (!File.Exists(jsonFile))
+                throw new ArgumentException($"Following file does not exist: \n{year}");
+
+            using (var file = File.OpenText(jsonFile))
+            using (var reader = new JsonTextReader(file))
+            {
+                var jObjs = JObject.Load(reader);
+                var buildingTypes = jObjs.Children<JProperty>();
+                var found = jObjs.TryGetValue(standardProgramType, out JToken pType);
+
+                if (!found)
+                    throw new ArgumentException($"Cannot find {standardProgramType}");
+                //var program = buildingTypes.First(_ => _.Name == "2007::MediumOffice::OpenOffice");
+
+                var programType = ProgramTypeAbridged.FromJson(pType.ToString());
+                var scheduleNames = new List<string>()
+                {
+                    programType.People?.ActivitySchedule,
+                    programType.People?.OccupancySchedule,
+                    programType.Lighting?.Schedule,
+                    programType.ElectricEquipment?.Schedule,
+                    programType.GasEquipment?.Schedule,
+                    programType.Ventilation?.Schedule,
+                    programType.Infiltration?.Schedule,
+                    programType.Setpoint?.CoolingSchedule,
+                    programType.Setpoint?.HeatingSchedule,
+                    programType.Setpoint?.DehumidifyingSchedule,
+                    programType.Setpoint?.HumidifyingSchedule
+                };
+                scheduleNames.RemoveAll(string.IsNullOrWhiteSpace);
+
+                var sches = scheduleNames.Select(_ => StandardsSchedules[_]).ToList();
+
+                return (programType, sches);
+            }
+        }
 
         //ConstructionSets
         private static IEnumerable<HB.ConstructionSetAbridged> _defaultConstructionSets;
@@ -111,7 +162,7 @@ namespace HoneybeeSchema.Helper
         //Default Model Energy Property
         private static HB.ModelEnergyProperties _defaultModelEnergyProperty;
         public static HB.ModelEnergyProperties DefaultModelEnergyProperties =>
-            _defaultModelEnergyProperty = _defaultModelEnergyProperty ??  LoadHoneybeeObject(_LoadLibraries[10], HB.ModelEnergyProperties.FromJson);
+            _defaultModelEnergyProperty = _defaultModelEnergyProperty ?? LoadHoneybeeObject(_LoadLibraries[10], HB.ModelEnergyProperties.FromJson);
 
         //ProgramTypes
         private static IEnumerable<HB.ProgramTypeAbridged> _defaultProgramTypes;
@@ -124,9 +175,19 @@ namespace HoneybeeSchema.Helper
 
 
         //Schedules
-        private static IEnumerable<HB.ScheduleRulesetAbridged> _standardsSchedules;
-        public static IEnumerable<HB.ScheduleRulesetAbridged> StandardsSchedules =>
-            _standardsSchedules = _standardsSchedules ?? LoadLibraryParallel(Path.Combine(ScheduleFolder, "schedule.json"), HB.ScheduleRulesetAbridged.FromJson);
+        private static Dictionary<string, HB.ScheduleRulesetAbridged> _standardsSchedules;
+        public static Dictionary<string, HB.ScheduleRulesetAbridged> StandardsSchedules 
+        {
+            get 
+            {
+                if (_standardsSchedules == null)
+                {
+                    var sches = LoadLibraryParallel(Path.Combine(ScheduleFolder, "schedule.json"), HB.ScheduleRulesetAbridged.FromJson);
+                    _standardsSchedules = sches.ToDictionary(_ => _.Identifier, _ => _);
+                }
+                return _standardsSchedules;
+            }
+        }
 
         //HVACs
         private static IEnumerable<HB.IdealAirSystemAbridged> _defaultHVACs;
@@ -235,6 +296,7 @@ namespace HoneybeeSchema.Helper
         }
 
         public static IEnumerable<string> GetBuildingVintages() => Directory.GetFiles(BuildingVintagesFolder, "*.json");
+        public static IEnumerable<string> GetBuildingTypeJsonFilePaths() => Directory.GetFiles(BuildingProgramTypesFolder, "*.json");
 
 
         public static Dictionary<string, IEnumerable<string>> LoadBuildingVintage(string buildingVintageFile)
