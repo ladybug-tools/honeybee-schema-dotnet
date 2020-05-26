@@ -73,13 +73,16 @@ namespace HoneybeeSchema.Helper
 
 
         //BuildingVintages 2004, 2007, 2010, 2013, etc..
-        private static IEnumerable<string> _buildingVintages;
-        public static IEnumerable<string> BuildingVintages => _buildingVintages = _buildingVintages ?? GetBuildingVintages();
+        private static readonly IEnumerable<string> _buildingVintages = Directory.GetFiles(BuildingVintagesFolder, "*.json");
+        public static IEnumerable<string> BuildingVintages => _buildingVintages;
 
         // ladybug_tools\resources\standards\honeybee_energy_standards\programtypes\2013_data.json
-        private static IEnumerable<string> _buildingTypeJsonFilePaths;
-        public static IEnumerable<string> BuildingTypeJsonFilePaths => _buildingTypeJsonFilePaths = _buildingTypeJsonFilePaths ?? GetBuildingTypeJsonFilePaths();
+        private static readonly IEnumerable<string> _buildingTypeJsonFilePaths = Directory.GetFiles(BuildingProgramTypesFolder, "*.json");
+        public static IEnumerable<string> BuildingTypeJsonFilePaths => _buildingTypeJsonFilePaths;
 
+        // ladybug_tools\resources\standards\honeybee_energy_standards\\constructionsets\2013_data.json
+        private static readonly IEnumerable<string> _constructionsetJsonFilePaths = Directory.GetFiles(ConstructionSetFolder, "*.json");
+        public static IEnumerable<string> ConstructionsetJsonFilePaths => _constructionsetJsonFilePaths;
 
         // "2013::MediumOffice::OpenOffice"
         public static (ProgramTypeAbridged programType, IEnumerable<ScheduleRulesetAbridged> schedules) GetStandardProgramTypeByIdentifier(string standardProgramType)
@@ -89,42 +92,102 @@ namespace HoneybeeSchema.Helper
                 throw new ArgumentException($"Invalid {standardProgramType}");
 
 
-            var jsonFile = BuildingTypeJsonFilePaths.First(_ => _.Contains(year));
-            if (!File.Exists(jsonFile))
-                throw new ArgumentException($"Following file does not exist: \n{year}");
+            var found = StandardsProgramTypes.TryGetValue(standardProgramType, out ProgramTypeAbridged programType);
+            if (!found)
+                throw new ArgumentException($"Cannot find {standardProgramType}");
 
-            using (var file = File.OpenText(jsonFile))
-            using (var reader = new JsonTextReader(file))
+            var scheduleNames = new List<string>()
             {
-                var jObjs = JObject.Load(reader);
-                var buildingTypes = jObjs.Children<JProperty>();
-                var found = jObjs.TryGetValue(standardProgramType, out JToken pType);
+                programType.People?.ActivitySchedule,
+                programType.People?.OccupancySchedule,
+                programType.Lighting?.Schedule,
+                programType.ElectricEquipment?.Schedule,
+                programType.GasEquipment?.Schedule,
+                programType.Ventilation?.Schedule,
+                programType.Infiltration?.Schedule,
+                programType.Setpoint?.CoolingSchedule,
+                programType.Setpoint?.HeatingSchedule,
+                programType.Setpoint?.DehumidifyingSchedule,
+                programType.Setpoint?.HumidifyingSchedule
+            };
+            scheduleNames.RemoveAll(string.IsNullOrWhiteSpace);
 
-                if (!found)
-                    throw new ArgumentException($"Cannot find {standardProgramType}");
-                //var program = buildingTypes.First(_ => _.Name == "2007::MediumOffice::OpenOffice");
+            var sches = scheduleNames.Select(_ => StandardsSchedules[_]).ToList();
+            return (programType, sches);
 
-                var programType = ProgramTypeAbridged.FromJson(pType.ToString());
-                var scheduleNames = new List<string>()
+        }
+
+        // "2004::ClimateZone1::SteelFramed"
+        public static (ConstructionSetAbridged constructionSet, IEnumerable<IConstruction> constructions, IEnumerable<IMaterial> materials) GetStandardConstructionSetByIdentifier(string standardConstructionSet)
+        {
+            var year = standardConstructionSet.Split(':').First();
+            if (string.IsNullOrEmpty(year))
+                throw new ArgumentException($"Invalid {standardConstructionSet}");
+
+            var found = StandardsConstructionSets.TryGetValue(standardConstructionSet, out ConstructionSetAbridged cSet);
+            if (!found)
+                throw new ArgumentException($"Cannot find {standardConstructionSet}");
+
+            // get constructions
+            var opaqueNames = new List<string>()
                 {
-                    programType.People?.ActivitySchedule,
-                    programType.People?.OccupancySchedule,
-                    programType.Lighting?.Schedule,
-                    programType.ElectricEquipment?.Schedule,
-                    programType.GasEquipment?.Schedule,
-                    programType.Ventilation?.Schedule,
-                    programType.Infiltration?.Schedule,
-                    programType.Setpoint?.CoolingSchedule,
-                    programType.Setpoint?.HeatingSchedule,
-                    programType.Setpoint?.DehumidifyingSchedule,
-                    programType.Setpoint?.HumidifyingSchedule
+                    cSet.WallSet?.ExteriorConstruction,
+                    cSet.WallSet?.GroundConstruction,
+                    cSet.WallSet?.InteriorConstruction,
+
+                    cSet.FloorSet?.ExteriorConstruction,
+                    cSet.FloorSet?.GroundConstruction,
+                    cSet.FloorSet?.InteriorConstruction,
+
+                    cSet.RoofCeilingSet?.ExteriorConstruction,
+                    cSet.RoofCeilingSet?.GroundConstruction,
+                    cSet.RoofCeilingSet?.InteriorConstruction,
+
+                    cSet.DoorSet?.ExteriorConstruction,
+                    cSet.DoorSet?.InteriorConstruction,
+                    cSet.DoorSet?.OverheadConstruction,
                 };
-                scheduleNames.RemoveAll(string.IsNullOrWhiteSpace);
+            opaqueNames.RemoveAll(string.IsNullOrWhiteSpace);
 
-                var sches = scheduleNames.Select(_ => StandardsSchedules[_]).ToList();
+            var windowNames = new List<string>()
+                {
+                    cSet.ApertureSet?.OperableConstruction,
+                    cSet.ApertureSet?.WindowConstruction,
+                    cSet.ApertureSet?.SkylightConstruction,
+                    cSet.ApertureSet?.InteriorConstruction,
 
-                return (programType, sches);
-            }
+                    cSet.DoorSet?.ExteriorGlassConstruction,
+                    cSet.DoorSet?.InteriorGlassConstruction,
+                };
+            windowNames.RemoveAll(string.IsNullOrWhiteSpace);
+
+            var shadeNames = new List<string>()
+                {
+                    cSet.ShadeConstruction
+                };
+            shadeNames.RemoveAll(string.IsNullOrWhiteSpace);
+
+            var airBoundaryNames = new List<string>()
+                {
+                    cSet.AirBoundaryConstruction
+                };
+            airBoundaryNames.RemoveAll(string.IsNullOrWhiteSpace);
+
+            var opaqueConstructions = opaqueNames.Select(_ => StandardsOpaqueConstructions[_]);
+            var windConstructions = windowNames.Select(_ => StandardsWindowConstructions[_]);
+            //TODO: Shade, AirBoundary
+
+           
+            // get materials
+            var opaMaterials = opaqueConstructions.SelectMany(_ => _.Layers).Select(_ => StandardsOpaqueMaterials[_]);
+            var winMaterials = windConstructions.SelectMany(_ => _.Layers).Select(_ => StandardsWindowMaterials[_]);
+
+
+            var constrs = opaqueConstructions.OfType<IConstruction>().Concat(windConstructions);
+            var mats = opaMaterials.Concat(winMaterials);
+
+            return (cSet, constrs, mats);
+
         }
 
         //ConstructionSets
@@ -132,45 +195,128 @@ namespace HoneybeeSchema.Helper
         public static IEnumerable<HB.ConstructionSetAbridged> DefaultConstructionSets =>
             _defaultConstructionSets = _defaultConstructionSets ?? LoadLibrary(_LoadLibraries[7], HB.ConstructionSetAbridged.FromJson);
 
-        private static Dictionary<string, IEnumerable<HB.ConstructionSetAbridged>> _standardsConstructionSets = new Dictionary<string, IEnumerable<HB.ConstructionSetAbridged>>();
-        public static Dictionary<string, IEnumerable<HB.ConstructionSetAbridged>> StandardsConstructionSets => throw new ArgumentException("Use GetorLoadStandardsConstructionSets(jsonFile)");
 
+        // "2004::ClimateZone1::SteelFramed"
+        private static Dictionary<string, HB.ConstructionSetAbridged> _standardsConstructionSets;
+        public static Dictionary<string, HB.ConstructionSetAbridged> StandardsConstructionSets {
+            get
+            {
+                if (_standardsConstructionSets == null)
+                {
+                    //Load from Json 
+                    var dic = new Dictionary<string, HB.ConstructionSetAbridged>();
+                    foreach (var jsonFile in ConstructionsetJsonFilePaths)
+                    {
+                        var constructionSets = LoadLibrary(jsonFile, HB.ConstructionSetAbridged.FromJson);
+                        dic = dic.Concat(constructionSets.ToDictionary(_ => _.Identifier, _ => _)).ToDictionary(_ => _.Key, _ => _.Value);
+                    }
+                    _standardsConstructionSets = dic;
+                }
+                return _standardsConstructionSets;
+            }
+        } 
 
 
         //Constructions  load from honeybee\honeybee_energy_standards\data\constructions\window_construction.json
-        private static IEnumerable<HB.WindowConstructionAbridged> _standardsWindowConstructions;
-        public static IEnumerable<HB.WindowConstructionAbridged> StandardsWindowConstructions =>
-            _standardsWindowConstructions = _standardsWindowConstructions ?? LoadLibrary(Path.Combine(ConstructionsFolder, "window_construction.json"), HB.WindowConstructionAbridged.FromJson);
+        private static Dictionary<string, HB.WindowConstructionAbridged> _standardsWindowConstructions;
+        public static Dictionary<string, HB.WindowConstructionAbridged> StandardsWindowConstructions
+        {
+            get 
+            {
+                if (_standardsWindowConstructions == null)
+                {
+                    var contrs = LoadLibrary(Path.Combine(ConstructionsFolder, "window_construction.json"), HB.WindowConstructionAbridged.FromJson);
+                    _standardsWindowConstructions = contrs.ToDictionary(_ => _.Identifier, _ => _);
+                }
+                return _standardsWindowConstructions;
+            }
+        }
+    
 
-        //                  load from honeybee\honeybee_energy_standards\data\constructions\opaque_construction.json
-        private static IEnumerable<HB.OpaqueConstructionAbridged> _standardsOpaqueConstructions;
-        public static IEnumerable<HB.OpaqueConstructionAbridged> StandardsOpaqueConstructions =>
-            _standardsOpaqueConstructions = _standardsOpaqueConstructions ?? LoadLibrary(Path.Combine(ConstructionsFolder, "opaque_construction.json"), HB.OpaqueConstructionAbridged.FromJson);
+
+        //load from honeybee\honeybee_energy_standards\data\constructions\opaque_construction.json
+        private static Dictionary<string, HB.OpaqueConstructionAbridged> _standardsOpaqueConstructions;
+        public static Dictionary<string, HB.OpaqueConstructionAbridged> StandardsOpaqueConstructions
+        {
+            get {
+
+                if (_standardsOpaqueConstructions == null)
+                {
+                    var opaques =  LoadLibrary(Path.Combine(ConstructionsFolder, "opaque_construction.json"), HB.OpaqueConstructionAbridged.FromJson);
+                    _standardsOpaqueConstructions = opaques.ToDictionary(_ => _.Identifier, _ => _);
+                }
+                return _standardsOpaqueConstructions;
+            }
+        }
 
 
-
-        //Window Materials load from honeybee\honeybee_energy_standards\data\constructions\window_material.json
-        private static IEnumerable<HBEng.IMaterial> _standardsWindowMaterials;
-        public static IEnumerable<HBEng.IMaterial> StandardsWindowMaterials =>
-            _standardsWindowMaterials = _standardsWindowMaterials ?? LoadWindowMaterials(Path.Combine(ConstructionsFolder, "window_material.json"));
-
-        //                 load from honeybee\honeybee_energy_standards\data\constructions\opaque_material.json
-        private static IEnumerable<HBEng.IMaterial> _standardsOpaqueMaterials;
-        public static IEnumerable<HBEng.IMaterial> StandardsOpaqueMaterials =>
-            _standardsOpaqueMaterials = _standardsOpaqueMaterials ?? LoadOpqueMaterials(Path.Combine(ConstructionsFolder, "opaque_material.json"));
-
-        //Default Model Energy Property
-        private static HB.ModelEnergyProperties _defaultModelEnergyProperty;
-        public static HB.ModelEnergyProperties DefaultModelEnergyProperties =>
-            _defaultModelEnergyProperty = _defaultModelEnergyProperty ?? LoadHoneybeeObject(_LoadLibraries[10], HB.ModelEnergyProperties.FromJson);
 
         //ProgramTypes
         private static IEnumerable<HB.ProgramTypeAbridged> _defaultProgramTypes;
         public static IEnumerable<HB.ProgramTypeAbridged> DefaultProgramTypes =>
             _defaultProgramTypes = _defaultProgramTypes ?? LoadLibrary(_LoadLibraries[8], HB.ProgramTypeAbridged.FromJson);
 
-        private static Dictionary<string, IEnumerable<HB.ProgramTypeAbridged>> _standardsProgramTypesByVintage = new Dictionary<string, IEnumerable<HB.ProgramTypeAbridged>>();
-        public static Dictionary<string, IEnumerable<HB.ProgramTypeAbridged>> StandardsProgramTypesByVintage => throw new ArgumentException("Use GetOrLoadProgramTypesFromJson(jsonFile)");
+
+        // "2013::MediumOffice::OpenOffice"
+        private static Dictionary<string, HB.ProgramTypeAbridged> _standardsProgramTypes;
+        public static Dictionary<string, HB.ProgramTypeAbridged> StandardsProgramTypes
+        {
+            get
+            {
+                if (_standardsProgramTypes == null)
+                {
+                    //Load from Json 
+                    var dic = new Dictionary<string, HB.ProgramTypeAbridged>();
+                    foreach (var jsonFile in BuildingTypeJsonFilePaths)
+                    {
+                        var programTypes = LoadLibrary(jsonFile, HB.ProgramTypeAbridged.FromJson);
+                        dic = dic.Concat(programTypes.ToDictionary(_ => _.Identifier, _ => _)).ToDictionary(_=>_.Key, _=>_.Value);
+                    }
+                    _standardsProgramTypes = dic;
+                }
+                return _standardsProgramTypes;
+            }
+        }
+
+
+        //Window Materials 
+        //                  load from honeybee\honeybee_energy_standards\data\constructions\window_material.json
+        private static Dictionary<string, HBEng.IMaterial> _standardsWindowMaterials;
+        public static Dictionary<string, HBEng.IMaterial> StandardsWindowMaterials {
+
+            get 
+            {
+                if (_standardsWindowMaterials == null)
+                {
+                    var wins = LoadWindowMaterials(Path.Combine(ConstructionsFolder, "window_material.json"));
+                    _standardsWindowMaterials = wins.ToDictionary(_ => _.Identifier, _ => _);
+                }
+                return _standardsWindowMaterials;
+            }
+        }
+            
+        //                 load from honeybee\honeybee_energy_standards\data\constructions\opaque_material.json
+        private static Dictionary<string, HBEng.IMaterial> _standardsOpaqueMaterials;
+        public static Dictionary<string, HBEng.IMaterial> StandardsOpaqueMaterials
+        {
+            get
+            {
+                if (_standardsOpaqueMaterials == null)
+                {
+                    var opaMaterils = LoadOpqueMaterials(Path.Combine(ConstructionsFolder, "opaque_material.json"));
+                    _standardsOpaqueMaterials = opaMaterils.ToDictionary(_ => _.Identifier, _ => _);
+                }
+                return _standardsOpaqueMaterials;
+
+            }
+        }
+            
+
+        //Default Model Energy Property
+        private static HB.ModelEnergyProperties _defaultModelEnergyProperty;
+        public static HB.ModelEnergyProperties DefaultModelEnergyProperties =>
+            _defaultModelEnergyProperty = _defaultModelEnergyProperty ?? LoadHoneybeeObject(_LoadLibraries[10], HB.ModelEnergyProperties.FromJson);
+
 
 
 
@@ -295,9 +441,6 @@ namespace HoneybeeSchema.Helper
 
         }
 
-        public static IEnumerable<string> GetBuildingVintages() => Directory.GetFiles(BuildingVintagesFolder, "*.json");
-        public static IEnumerable<string> GetBuildingTypeJsonFilePaths() => Directory.GetFiles(BuildingProgramTypesFolder, "*.json");
-
 
         public static Dictionary<string, IEnumerable<string>> LoadBuildingVintage(string buildingVintageFile)
         {
@@ -328,41 +471,6 @@ namespace HoneybeeSchema.Helper
 
         }
 
-
-        public static IEnumerable<HB.ConstructionSetAbridged> GetOrLoadStandardsConstructionSets(string jsonFile)
-        {
-            var jsonFilePath = jsonFile;
-
-            var fileName = Path.GetFileName(jsonFilePath);
-            IEnumerable<HB.ConstructionSetAbridged> constructionSets;
-
-            //Check if this is loaded previously
-            var loadedBefore = _standardsConstructionSets.TryGetValue(fileName, out constructionSets);
-            if (loadedBefore)
-                return constructionSets;
-
-            //Load from Json 
-            constructionSets = LoadLibrary(jsonFilePath, HB.ConstructionSetAbridged.FromJson);
-            return constructionSets;
-
-        }
-        public static IEnumerable<HB.ProgramTypeAbridged> GetOrLoadProgramTypesFromJson(string jsonFile)
-        {
-            var jsonFilePath = jsonFile;
-
-            var fileName = Path.GetFileName(jsonFilePath);
-            IEnumerable<HB.ProgramTypeAbridged> programTypes;
-
-            //Check if this is loaded previously
-            var loadedBefore = _standardsProgramTypesByVintage.TryGetValue(fileName, out programTypes);
-            if (loadedBefore)
-                return programTypes;
-
-            //Load from Json 
-            programTypes = LoadLibrary(jsonFilePath, HB.ProgramTypeAbridged.FromJson);
-            return programTypes;
-
-        }
 
         public static List<HBEng.IMaterial> LoadWindowMaterials(string windowMaterialJsonFile)
         {
@@ -519,19 +627,17 @@ namespace HoneybeeSchema.Helper
 
         public static HB.OpaqueConstructionAbridged GetOpaqueConstructionByIdentifier(string identifier)
         {
-            var lib = EnergyLibrary.StandardsOpaqueConstructions;
-            var obj = lib.FirstOrDefault(_ => _.Identifier == identifier);
-            if (obj == null)
+            var found = EnergyLibrary.StandardsOpaqueConstructions.TryGetValue(identifier, out OpaqueConstructionAbridged opaque);
+            if (!found)
                 throw new ArgumentNullException($"Failed to find the opaque construction {identifier}");
-            return obj;
+            return opaque;
         }
         public static HB.WindowConstructionAbridged GetWindowConstructionByIdentifier(string identifier)
         {
-            var lib = EnergyLibrary.StandardsWindowConstructions;
-            var obj = lib.FirstOrDefault(_ => _.Identifier == identifier);
-            if (obj == null)
+            var found = EnergyLibrary.StandardsWindowConstructions.TryGetValue(identifier, out WindowConstructionAbridged win);
+            if (!found)
                 throw new ArgumentNullException($"Failed to find the window construction {identifier}");
-            return obj;
+            return win;
         }
         public static HB.ShadeConstruction GetShadeConstructionByIdentifier(string identifier)
         {
@@ -544,19 +650,17 @@ namespace HoneybeeSchema.Helper
         }
         public static HBEng.IMaterial GetOpaqueMaterialByIdentifier(string identifier)
         {
-            var lib = EnergyLibrary.StandardsOpaqueMaterials;
-            var obj = lib.FirstOrDefault(_ => _.Identifier == identifier);
-            if (obj == null)
+            var found = EnergyLibrary.StandardsOpaqueMaterials.TryGetValue(identifier, out IMaterial material);
+            if (!found)
                 throw new ArgumentNullException($"Failed to find the opaque material {identifier}");
-            return obj;
+            return material;
         }
         public static HBEng.IMaterial GetWindowMaterialByIdentifier(string identifier)
         {
-            var lib = EnergyLibrary.StandardsWindowMaterials;
-            var obj = lib.FirstOrDefault(_ => _.Identifier == identifier);
-            if (obj == null)
+            var found = EnergyLibrary.StandardsWindowMaterials.TryGetValue(identifier, out IMaterial material);
+            if (!found)
                 throw new ArgumentNullException($"Failed to find the opaque material {identifier}");
-            return obj;
+            return material;
         }
 
         public static List<HBEng.IMaterial> GetConstructionMaterials(HB.OpaqueConstructionAbridged construction)
