@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **ApertureSet** | [**ApertureModifierSet**](ApertureModifierSet.md) | An optional ApertureModifierSet object for this ModifierSet. (default: None). | [optional] 
 **DoorSet** | [**DoorModifierSet**](DoorModifierSet.md) | An optional DoorModifierSet object for this ModifierSet. (default: None). | [optional] 
 **ShadeSet** | [**ShadeModifierSet**](ShadeModifierSet.md) | An optional ShadeModifierSet object for this ModifierSet. (default: None). | [optional] 
-**AirBoundaryModifier** | [**AnyOfPlasticGlassBSDFGlowLightTransMetalVoidMirror**](AnyOfPlasticGlassBSDFGlowLightTransMetalVoidMirror.md) | An optional Modifier to be used for all Faces with an AirBoundary face type. If None, it will be the honyebee generic air wall modifier. | [optional] 
+**AirBoundaryModifier** | [**AnyOfPlasticGlassBSDFGlowLightTransMetalVoidMirror**](AnyOfPlasticGlassBSDFGlowLightTransMetalVoidMirror.md) | An optional Modifier to be used for all Faces with an AirBoundary face type. If None, it will be the honeybee generic air wall modifier. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
