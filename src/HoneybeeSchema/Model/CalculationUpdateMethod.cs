@@ -1,7 +1,7 @@
 /* 
- * Honeybee Model Schema
+ * Honeybee Energy Simulation Parameter Schema
  *
- * This is the documentation for Honeybee model schema.
+ * This is the documentation for Honeybee energy simulation parameter schema.
  *
  * The version of the OpenAPI document: 1.33.0
  * Contact: info@ladybug.tools
@@ -25,36 +25,25 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Defines GasType
+    /// Text describing how often the solar and shading calculations are updated with respect to the flow of time in the simulation.
     /// </summary>
+    /// <value>Text describing how often the solar and shading calculations are updated with respect to the flow of time in the simulation.</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
-    public enum GasType
+    public enum CalculationUpdateMethod
     {
         /// <summary>
-        /// Enum Air for value: Air
+        /// Enum Periodic for value: Periodic
         /// </summary>
-        [EnumMember(Value = "Air")]
-        Air = 1,
+        [EnumMember(Value = "Periodic")]
+        Periodic = 1,
 
         /// <summary>
-        /// Enum Argon for value: Argon
+        /// Enum Timestep for value: Timestep
         /// </summary>
-        [EnumMember(Value = "Argon")]
-        Argon = 2,
-
-        /// <summary>
-        /// Enum Krypton for value: Krypton
-        /// </summary>
-        [EnumMember(Value = "Krypton")]
-        Krypton = 3,
-
-        /// <summary>
-        /// Enum Xenon for value: Xenon
-        /// </summary>
-        [EnumMember(Value = "Xenon")]
-        Xenon = 4
+        [EnumMember(Value = "Timestep")]
+        Timestep = 2
 
     }
 
