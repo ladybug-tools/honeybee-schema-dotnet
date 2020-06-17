@@ -46,6 +46,16 @@ namespace HoneybeeSchema.Test
                 instance = ModelEnergyProperties.FromJson(json);
             }
 
+            if (System.Environment.OSVersion.Platform == PlatformID.Unix)
+            {
+                //var homeDir = Environment.GetEnvironmentVariable("HOME");
+                ////var dirs = Directory.GetDirectories("$HOME");
+                //var json = Path.Combine(homeDir, "ladybug_tools", "resources/standards/default/defaultModelEnergyProperty.json");
+                //var isfile = File.Exists(json);
+
+                instance = Helper.EnergyLibrary.DefaultModelEnergyProperties;
+            }
+                
 
         }
 

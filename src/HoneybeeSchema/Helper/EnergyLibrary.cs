@@ -558,6 +558,18 @@ namespace HoneybeeSchema.Helper
 
         private static string GetLadybugToolsInstallationPath()
         {
+            // Mac
+            if (System.Environment.OSVersion.Platform == PlatformID.Unix)
+            {
+                var homeDir = Environment.GetEnvironmentVariable("HOME");
+                var dir = Path.Combine(homeDir, "ladybug_tools");
+
+                if( Directory.Exists(dir)) return dir;
+                throw new ArgumentException($"Ladybug Tools is not installed in this Mac's {homeDir}!");
+
+            }
+
+            // windows
             var scr = $"/C REG QUERY HKEY_CURRENT_USER\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\UNINSTALL /s /v InstallLocation | findstr \"ladybug_tools\"";
     
             var startInfo = new System.Diagnostics.ProcessStartInfo();
