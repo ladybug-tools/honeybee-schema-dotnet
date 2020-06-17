@@ -11,7 +11,7 @@
 .travis.yml
 src/*.csproj
 src/*.nuspec
-packages.config
+src/*/packages.config
 # You can match any string of characters against a directory, file or extension with a single asterisk (*):
 #foo/*/qux
 # The above matches foo/bar/qux and foo/baz/qux, but not foo/bar/baz/qux
