@@ -62,7 +62,7 @@ namespace HoneybeeSchema
         public WindowConstructionShadeAbridged
         (
             string identifier, WindowConstructionAbridged windowConstruction, string shadeMaterial, // Required parameters
-            string displayName= default, ShadeLocation? shadeLocation = HoneybeeSchema.ShadeLocation.Interior, ControlType? controlType = HoneybeeSchema.ControlType.AlwaysOn, double setpoint= default, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule= default// Optional parameters
+            string displayName= default, ShadeLocation? shadeLocation = HoneybeeSchema.ShadeLocation.Interior, ControlType? controlType = HoneybeeSchema.ControlType.AlwaysOn, double setpoint= default, string schedule= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "windowConstruction" is required (not null)
@@ -137,7 +137,7 @@ namespace HoneybeeSchema
         /// <value>An optional schedule identifier to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction.</value>
         [DataMember(Name="schedule", EmitDefaultValue=false)]
         [JsonProperty("schedule")]
-        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; } 
+        public string Schedule { get; set; } 
         
         /// <summary>
         /// Returns the string presentation of the object
