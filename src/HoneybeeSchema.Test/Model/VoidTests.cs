@@ -41,9 +41,12 @@ namespace HoneybeeSchema.Test
         [SetUp]
         public void Init()
         {
+            
             var dir = Path.GetDirectoryName(this.GetType().Assembly.Location);
             Directory.SetCurrentDirectory(dir);
             var file = @"..\..\..\..\samples\modifier\void.json";
+            if (System.Environment.OSVersion.Platform == PlatformID.Unix)
+                file = @"../../../../samples/modifier/void.json";
             using (StreamReader sr = File.OpenText(file))
             {
                 string s = sr.ReadToEnd();
