@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **ShadeLocation** | **ShadeLocation** | Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the \&quot;Between\&quot; option. Also note that, for a WindowConstruction with more than one gas gap, the \&quot;Between\&quot; option defalts to using the inner gap as this is the only option that EnergyPlus supports. | [optional] [default to "Interior"]
 **ControlType** | **ControlType** | Text to indicate how the shading device is controlled, which determines when the shading is “on” or “off.” | [optional] [default to "AlwaysOn"]
 **Setpoint** | **double** | A number that corresponds to the specified control_type. This can be a value in (W/m2), (C) or (W) depending upon the control type.Note that this value cannot be None for any control type except \&quot;AlwaysOn.\&quot; | [optional] 
-**Schedule** | [**AnyOfScheduleRulesetScheduleFixedInterval**](AnyOfScheduleRulesetScheduleFixedInterval.md) | An optional schedule identifier to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction. | [optional] 
+**Schedule** | **string** | An optional schedule identifier to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
