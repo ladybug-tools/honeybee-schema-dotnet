@@ -67,6 +67,7 @@ Contact: info@ladybug.tools
     <Compile Include="Model\ScheduleTypeLimitTests.cs" />
     <Compile Include="Model\VoidTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Model\EnergyLibraryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
