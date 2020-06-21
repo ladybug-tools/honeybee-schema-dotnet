@@ -561,49 +561,76 @@ namespace HoneybeeSchema.Helper
             // Mac
             if (System.Environment.OSVersion.Platform == PlatformID.Unix)
             {
-                var homeDir = Environment.GetEnvironmentVariable("HOME");
-                var dir = Path.Combine(homeDir, "ladybug_tools");
+                // this only looking for Rhino 6 for now
+                var args = $"defaults read com.mcneel.rhinoceros User.PlugInRegistry.6.8b32d89c-3455-4c21-8fd7-7364c32a6feb.PlugIn.FileName";
 
-                if( Directory.Exists(dir)) return dir;
-                throw new ArgumentException($"Ladybug Tools is not installed in this Mac's {homeDir}!");
+                var startInfo = new System.Diagnostics.ProcessStartInfo();
+                startInfo.CreateNoWindow = false;
+                startInfo.UseShellExecute = false;
+                startInfo.FileName = "/bin/bash";
+                startInfo.Arguments = $"-c \"{args}\"";
+                startInfo.RedirectStandardOutput = true;
 
-            }
-
-            // windows
-            var scr = $"/C REG QUERY HKEY_CURRENT_USER\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\UNINSTALL /s /v InstallLocation | findstr \"ladybug_tools\"";
-    
-            var startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.CreateNoWindow = false;
-            startInfo.UseShellExecute = false;
-            startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = scr;
-            startInfo.RedirectStandardOutput = true;
-
-            using (var exeProcess = new System.Diagnostics.Process())
-            {
-                exeProcess.StartInfo = startInfo;
-                exeProcess.Start();
-                exeProcess.WaitForExit();
-                string outputs = exeProcess.StandardOutput.ReadToEnd().Trim();
-                if (string.IsNullOrEmpty(outputs))
+                using (var exeProcess = new System.Diagnostics.Process())
                 {
-                    startInfo.Arguments = $"/C REG QUERY HKLM\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\UNINSTALL /s /v InstallLocation | findstr \"ladybug_tools\"";
                     exeProcess.StartInfo = startInfo;
                     exeProcess.Start();
                     exeProcess.WaitForExit();
-                    outputs = exeProcess.StandardOutput.ReadToEnd().Trim();
+                    string outputs = exeProcess.StandardOutput.ReadToEnd().Trim();
+
+                    if (string.IsNullOrEmpty(outputs))
+                        throw new ArgumentException("Ladybug Tools is not installed on this machine!");
+
+                    // "/Users/mingbo/ladybug_tools2/rhino/HoneybeeRhino.PlugIn.Mac.rhp"
+                    outputs = outputs.Split(new[]{ "rhino"}, StringSplitOptions.RemoveEmptyEntries).First();
+          
+                    if (!Directory.Exists(outputs))
+                        throw new ArgumentException("Ladybug Tools is not installed on this machine!");
+
+                    return outputs;
                 }
 
-                if (string.IsNullOrEmpty(outputs))
-                    throw new ArgumentException("Ladybug Tools is not installed on this machine!");
-
-                outputs = outputs.Split(' ').Last();
-
-                if (!Directory.Exists(outputs))
-                    throw new ArgumentException("Ladybug Tools is not installed on this machine!");
-
-                return outputs;
             }
+            else
+            {
+                // windows
+                var scr = $"/C REG QUERY HKEY_CURRENT_USER\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\UNINSTALL /s /v InstallLocation | findstr \"ladybug_tools\"";
+
+                var startInfo = new System.Diagnostics.ProcessStartInfo();
+                startInfo.CreateNoWindow = false;
+                startInfo.UseShellExecute = false;
+                startInfo.FileName = "cmd.exe";
+                startInfo.Arguments = scr;
+                startInfo.RedirectStandardOutput = true;
+
+                using (var exeProcess = new System.Diagnostics.Process())
+                {
+                    exeProcess.StartInfo = startInfo;
+                    exeProcess.Start();
+                    exeProcess.WaitForExit();
+                    string outputs = exeProcess.StandardOutput.ReadToEnd().Trim();
+                    if (string.IsNullOrEmpty(outputs))
+                    {
+                        startInfo.Arguments = $"/C REG QUERY HKLM\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\UNINSTALL /s /v InstallLocation | findstr \"ladybug_tools\"";
+                        exeProcess.StartInfo = startInfo;
+                        exeProcess.Start();
+                        exeProcess.WaitForExit();
+                        outputs = exeProcess.StandardOutput.ReadToEnd().Trim();
+                    }
+
+                    if (string.IsNullOrEmpty(outputs))
+                        throw new ArgumentException("Ladybug Tools is not installed on this machine!");
+
+                    outputs = outputs.Split(' ').Last();
+
+                    if (!Directory.Exists(outputs))
+                        throw new ArgumentException("Ladybug Tools is not installed on this machine!");
+
+                    return outputs;
+                }
+            }
+
+            
 
         }
 
