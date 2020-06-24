@@ -40,16 +40,10 @@ namespace HoneybeeSchema.Helper
         /// <summary>
         /// This returns ladybug_tools/resources/standards/default folder.
         /// </summary>
-        public static string DefaultStandardsFolder { get; } = Path.Combine(ResourcesStandardsFolder, "default");
-        private static string[] _LoadLibraries = new string[11]
+        public static string DefaultStandardsFolder { get; } = Path.Combine(ResourcesStandardsFolder, "honeybee_standards");
+        private static List<string> _LoadLibraries = new List<string>()
         {
-            Path.Combine(DefaultStandardsFolder,"defaultPeopleLoads.json"),
-            Path.Combine(DefaultStandardsFolder,"defaultLightingLoads.json"),
-            Path.Combine(DefaultStandardsFolder,"defaultElectricEquipmentLoads.json"),
-            Path.Combine(DefaultStandardsFolder,"defaultGasEquipmentLoads.json"),
-            Path.Combine(DefaultStandardsFolder,"defaultInfiltrationLoads.json"),
-            Path.Combine(DefaultStandardsFolder,"defaultVentilationLoads.json"),
-            Path.Combine(DefaultStandardsFolder,"defaultSetpoints.json"),
+            Path.Combine(DefaultStandardsFolder, "programtypes" ,"default.json"),
 
             Path.Combine(DefaultStandardsFolder,"constructionsets.json"),
             Path.Combine(DefaultStandardsFolder,"programTypes.json"),
@@ -177,7 +171,7 @@ namespace HoneybeeSchema.Helper
             var windConstructions = windowNames.Select(_ => StandardsWindowConstructions[_]);
             //TODO: Shade, AirBoundary
 
-           
+
             // get materials
             var opaMaterials = opaqueConstructions.SelectMany(_ => _.Layers).Select(_ => StandardsOpaqueMaterials[_]);
             var winMaterials = windConstructions.SelectMany(_ => _.Layers).Select(_ => StandardsWindowMaterials[_]);
@@ -192,8 +186,15 @@ namespace HoneybeeSchema.Helper
 
         //ConstructionSets
         private static IEnumerable<HB.ConstructionSetAbridged> _defaultConstructionSets;
-        public static IEnumerable<HB.ConstructionSetAbridged> DefaultConstructionSets =>
-            _defaultConstructionSets = _defaultConstructionSets ?? LoadLibrary(_LoadLibraries[7], HB.ConstructionSetAbridged.FromJson);
+        public static IEnumerable<HB.ConstructionSetAbridged> DefaultConstructionSets
+        {
+            get
+            {
+                _defaultConstructionSets = _defaultConstructionSets ?? LoadLibrary(_LoadLibraries[7], HB.ConstructionSetAbridged.FromJson);
+                return _defaultConstructionSets;
+            }
+           
+        }
 
 
         // "2004::ClimateZone1::SteelFramed"
@@ -253,8 +254,16 @@ namespace HoneybeeSchema.Helper
 
         //ProgramTypes
         private static IEnumerable<HB.ProgramTypeAbridged> _defaultProgramTypes;
-        public static IEnumerable<HB.ProgramTypeAbridged> DefaultProgramTypes =>
-            _defaultProgramTypes = _defaultProgramTypes ?? LoadLibrary(_LoadLibraries[8], HB.ProgramTypeAbridged.FromJson);
+        public static IEnumerable<HB.ProgramTypeAbridged> DefaultProgramTypes
+        {
+            get
+            {
+                _defaultProgramTypes = _defaultProgramTypes ?? LoadLibrary(_LoadLibraries[0], HB.ProgramTypeAbridged.FromJson);
+                return _defaultProgramTypes;
+            }
+        }
+       
+            
 
 
         // "2013::MediumOffice::OpenOffice"
@@ -342,38 +351,149 @@ namespace HoneybeeSchema.Helper
 
         //People load
         private static IEnumerable<HB.PeopleAbridged> _defaultPeopleLoads;
-        public static IEnumerable<HB.PeopleAbridged> DefaultPeopleLoads =>
-            _defaultPeopleLoads = _defaultPeopleLoads ?? LoadLibrary(_LoadLibraries[0], HB.PeopleAbridged.FromJson);
+        public static IEnumerable<HB.PeopleAbridged> DefaultPeopleLoads
+        {
+            get
+            {
+                if (_defaultPeopleLoads == null)
+                {
+                    var peopleList = DefaultProgramTypes.Select(_ => _?.People).ToList();
+                    foreach (var item in peopleList)
+                    {
+                        item.DisplayName = $"{item.Identifier} ({Math.Round(item.PeoplePerArea * 100, 1)} ppl/100m2)";
+                    }
+                    //peopleList.Add(
+                    //    new PeopleAbridged(
+                    //        Guid.NewGuid().ToString(),
+                    //        0.5381957525591208,
+                    //        "Generic Office Occupancy",
+                    //        "Generic Office Activity",
+                    //        "Office Comference People (53.8 ppl/100m2)"
+                    //        )
+                    //    );
+                    _defaultPeopleLoads = peopleList;
+                }
+                return _defaultPeopleLoads;
+            }
+        }
+            
 
         //Lighting load
         private static IEnumerable<HB.LightingAbridged> _defaultLightingLoads;
-        public static IEnumerable<HB.LightingAbridged> DefaultLightingLoads =>
-            _defaultLightingLoads = _defaultLightingLoads ?? LoadLibrary(_LoadLibraries[1], HB.LightingAbridged.FromJson);
+        public static IEnumerable<HB.LightingAbridged> DefaultLightingLoads
+        {
+            get
+            {
+                if (_defaultLightingLoads == null)
+                {
+                    var items = DefaultProgramTypes.Select(_ => _?.Lighting).ToList();
+                    foreach (var item in items)
+                    {
+                        item.DisplayName = $"{item.Identifier} ({item.WattsPerArea} W/m2)";
+                    }
+                    _defaultLightingLoads = items;
+                }
+                return _defaultLightingLoads;
+            }
+        }
 
         //ElecEqp load
         private static IEnumerable<HB.ElectricEquipmentAbridged> _defaultElectricEquipmentLoads;
-        public static IEnumerable<HB.ElectricEquipmentAbridged> DefaultElectricEquipmentLoads =>
-            _defaultElectricEquipmentLoads = _defaultElectricEquipmentLoads ?? LoadLibrary(_LoadLibraries[2], HB.ElectricEquipmentAbridged.FromJson);
+        public static IEnumerable<HB.ElectricEquipmentAbridged> DefaultElectricEquipmentLoads
+        {
+            get
+            {
+                if (_defaultElectricEquipmentLoads == null)
+                {
+                    var items = DefaultProgramTypes.Select(_ => _?.ElectricEquipment).ToList();
+                    foreach (var item in items)
+                    {
+                        item.DisplayName = $"{item.Identifier} ({item.WattsPerArea} W/m2)";
+                    }
+                    _defaultElectricEquipmentLoads = items;
+                }
+                return _defaultElectricEquipmentLoads;
+            }
+        }
 
         //GasEqp load
         private static IEnumerable<HB.GasEquipmentAbridged> _defaultGasEquipmentLoads;
-        public static IEnumerable<HB.GasEquipmentAbridged> GasEquipmentLoads =>
-            _defaultGasEquipmentLoads = _defaultGasEquipmentLoads ?? LoadLibrary(_LoadLibraries[3], HB.GasEquipmentAbridged.FromJson);
+        public static IEnumerable<HB.GasEquipmentAbridged> GasEquipmentLoads
+        {
+            get
+            {
+                if (_defaultGasEquipmentLoads == null)
+                {
+                    var items = DefaultProgramTypes.Select(_ => _?.GasEquipment).ToList();
+                    foreach (var item in items)
+                    {
+                        item.DisplayName = $"{item.Identifier} ({item.WattsPerArea} W/m2)";
+                    }
+                    _defaultGasEquipmentLoads = items;
+                }
+                return _defaultGasEquipmentLoads;
+            }
+        }
 
         //GasEqp load
         private static IEnumerable<HB.InfiltrationAbridged> _defaultInfiltrationLoads;
-        public static IEnumerable<HB.InfiltrationAbridged> DefaultInfiltrationLoads =>
-            _defaultInfiltrationLoads = _defaultInfiltrationLoads ?? LoadLibrary(_LoadLibraries[4], HB.InfiltrationAbridged.FromJson);
+        public static IEnumerable<HB.InfiltrationAbridged> DefaultInfiltrationLoads
+        {
+            get
+            {
+                if (_defaultInfiltrationLoads == null)
+                {
+                    var items = new List<InfiltrationAbridged>()
+                    {
+                        new InfiltrationAbridged("Passive house", 0.000071, "Generic Office Infiltration"),
+                        new InfiltrationAbridged("Tight building", 0.0001, "Generic Office Infiltration"),
+                        new InfiltrationAbridged("ASHRAE 2013", 0.000285, "Generic Office Infiltration"),
+                        new InfiltrationAbridged("Generic Office", 0.0002266, "Generic Office Infiltration"),
+                        new InfiltrationAbridged("Average building", 0.0003, "Generic Office Infiltration"),
+                        new InfiltrationAbridged("Leaky building", 0.0006, "Generic Office Infiltration")
+
+                    };
+
+                    foreach (var item in items)
+                    {
+                        item.DisplayName = $"{item.Identifier} ({item.FlowPerExteriorArea} m3/s per m2 facade @4Pa)";
+                    }
+                    _defaultInfiltrationLoads = items;
+                }
+                return _defaultInfiltrationLoads;
+            }
+        }
 
         //Ventilation load
         private static IEnumerable<HB.VentilationAbridged> _defaultVentilationLoads;
-        public static IEnumerable<HB.VentilationAbridged> DefaultVentilationLoads =>
-            _defaultVentilationLoads = _defaultVentilationLoads ?? LoadLibrary(_LoadLibraries[5], HB.VentilationAbridged.FromJson);
+        public static IEnumerable<HB.VentilationAbridged> DefaultVentilationLoads
+        {
+            get
+            {
+                if (_defaultVentilationLoads == null)
+                {
+                    var items = DefaultProgramTypes.Select(_ => _.Ventilation).ToList();
+                    foreach (var item in items)
+                    {
+                        item.DisplayName = $"{item.Identifier} ({item.FlowPerArea} m3/s per m2 floor)";
+                    }
+                    _defaultVentilationLoads = items;
+                }
+                return _defaultVentilationLoads;
+            }
+        }
 
         //Setpoints
         private static IEnumerable<HB.SetpointAbridged> _defaultSetpoints;
-        public static IEnumerable<HB.SetpointAbridged> DefaultSetpoints =>
-            _defaultSetpoints = _defaultSetpoints ?? LoadLibrary(_LoadLibraries[6], HB.SetpointAbridged.FromJson);
+        public static IEnumerable<HB.SetpointAbridged> DefaultSetpoints
+        {
+            get
+            {
+                _defaultSetpoints = _defaultSetpoints ?? DefaultProgramTypes.Select(_ => _.Setpoint);
+                return _defaultSetpoints;
+            }
+        }
+        
 
         public static string DownLoadLibrary(string standardsUrl, string saveAsfileName)
         {
