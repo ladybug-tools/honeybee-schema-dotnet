@@ -41,19 +41,17 @@ namespace HoneybeeSchema.Helper
         /// This returns ladybug_tools/resources/standards/default folder.
         /// </summary>
         public static string DefaultStandardsFolder { get; } = Path.Combine(ResourcesStandardsFolder, "honeybee_standards");
-        private static List<string> _LoadLibraries = new List<string>()
+        private static List<string> _DefaultLibJsons = new List<string>()
         {
-            Path.Combine(DefaultStandardsFolder, "programtypes" ,"default.json"),
-
-            Path.Combine(DefaultStandardsFolder,"constructionsets.json"),
-            Path.Combine(DefaultStandardsFolder,"programTypes.json"),
-            Path.Combine(DefaultStandardsFolder,"hvacs.json"),
-
-            Path.Combine(DefaultStandardsFolder,"defaultModelEnergyProperty.json")
+            Path.Combine(DefaultStandardsFolder,"defaultModelEnergyProperty.json"),
+            Path.Combine(DefaultStandardsFolder,"defaultModelRadianceProperty.json")
         };
 
 
         //public static string StandardsFolder { get; } = Path.Combine(ResourcesStandardsFolder, "honeybee_standards", "data");
+
+
+        #region Honeybee OpenStudio Standards
 
         //honeybee_energy_standards
         public static string EnergyStandardsFolder { get; } = Path.Combine(ResourcesStandardsFolder, "honeybee_energy_standards");
@@ -64,15 +62,15 @@ namespace HoneybeeSchema.Helper
         public static string ScheduleFolder { get; } = Path.Combine(EnergyStandardsFolder, "schedules");
 
 
-
-
         //BuildingVintages 2004, 2007, 2010, 2013, etc..
         private static readonly IEnumerable<string> _buildingVintages = Directory.GetFiles(BuildingVintagesFolder, "*.json");
         public static IEnumerable<string> BuildingVintages => _buildingVintages;
 
+
         // ladybug_tools\resources\standards\honeybee_energy_standards\programtypes\2013_data.json
         private static readonly IEnumerable<string> _buildingTypeJsonFilePaths = Directory.GetFiles(BuildingProgramTypesFolder, "*.json");
         public static IEnumerable<string> BuildingTypeJsonFilePaths => _buildingTypeJsonFilePaths;
+
 
         // ladybug_tools\resources\standards\honeybee_energy_standards\\constructionsets\2013_data.json
         private static readonly IEnumerable<string> _constructionsetJsonFilePaths = Directory.GetFiles(ConstructionSetFolder, "*.json");
@@ -184,22 +182,10 @@ namespace HoneybeeSchema.Helper
 
         }
 
-        //ConstructionSets
-        private static IEnumerable<HB.ConstructionSetAbridged> _defaultConstructionSets;
-        public static IEnumerable<HB.ConstructionSetAbridged> DefaultConstructionSets
-        {
-            get
-            {
-                _defaultConstructionSets = _defaultConstructionSets ?? LoadLibrary(_LoadLibraries[7], HB.ConstructionSetAbridged.FromJson);
-                return _defaultConstructionSets;
-            }
-           
-        }
-
-
         // "2004::ClimateZone1::SteelFramed"
         private static Dictionary<string, HB.ConstructionSetAbridged> _standardsConstructionSets;
-        public static Dictionary<string, HB.ConstructionSetAbridged> StandardsConstructionSets {
+        public static Dictionary<string, HB.ConstructionSetAbridged> StandardsConstructionSets
+        {
             get
             {
                 if (_standardsConstructionSets == null)
@@ -215,14 +201,13 @@ namespace HoneybeeSchema.Helper
                 }
                 return _standardsConstructionSets;
             }
-        } 
-
+        }
 
         //Constructions  load from honeybee\honeybee_energy_standards\data\constructions\window_construction.json
         private static Dictionary<string, HB.WindowConstructionAbridged> _standardsWindowConstructions;
         public static Dictionary<string, HB.WindowConstructionAbridged> StandardsWindowConstructions
         {
-            get 
+            get
             {
                 if (_standardsWindowConstructions == null)
                 {
@@ -232,38 +217,23 @@ namespace HoneybeeSchema.Helper
                 return _standardsWindowConstructions;
             }
         }
-    
 
 
         //load from honeybee\honeybee_energy_standards\data\constructions\opaque_construction.json
         private static Dictionary<string, HB.OpaqueConstructionAbridged> _standardsOpaqueConstructions;
         public static Dictionary<string, HB.OpaqueConstructionAbridged> StandardsOpaqueConstructions
         {
-            get {
+            get
+            {
 
                 if (_standardsOpaqueConstructions == null)
                 {
-                    var opaques =  LoadLibrary(Path.Combine(ConstructionsFolder, "opaque_construction.json"), HB.OpaqueConstructionAbridged.FromJson);
+                    var opaques = LoadLibrary(Path.Combine(ConstructionsFolder, "opaque_construction.json"), HB.OpaqueConstructionAbridged.FromJson);
                     _standardsOpaqueConstructions = opaques.ToDictionary(_ => _.Identifier, _ => _);
                 }
                 return _standardsOpaqueConstructions;
             }
         }
-
-
-
-        //ProgramTypes
-        private static IEnumerable<HB.ProgramTypeAbridged> _defaultProgramTypes;
-        public static IEnumerable<HB.ProgramTypeAbridged> DefaultProgramTypes
-        {
-            get
-            {
-                _defaultProgramTypes = _defaultProgramTypes ?? LoadLibrary(_LoadLibraries[0], HB.ProgramTypeAbridged.FromJson);
-                return _defaultProgramTypes;
-            }
-        }
-       
-            
 
 
         // "2013::MediumOffice::OpenOffice"
@@ -279,7 +249,7 @@ namespace HoneybeeSchema.Helper
                     foreach (var jsonFile in BuildingTypeJsonFilePaths)
                     {
                         var programTypes = LoadLibrary(jsonFile, HB.ProgramTypeAbridged.FromJson);
-                        dic = dic.Concat(programTypes.ToDictionary(_ => _.Identifier, _ => _)).ToDictionary(_=>_.Key, _=>_.Value);
+                        dic = dic.Concat(programTypes.ToDictionary(_ => _.Identifier, _ => _)).ToDictionary(_ => _.Key, _ => _.Value);
                     }
                     _standardsProgramTypes = dic;
                 }
@@ -291,9 +261,10 @@ namespace HoneybeeSchema.Helper
         //Window Materials 
         //                  load from honeybee\honeybee_energy_standards\data\constructions\window_material.json
         private static Dictionary<string, HBEng.IMaterial> _standardsWindowMaterials;
-        public static Dictionary<string, HBEng.IMaterial> StandardsWindowMaterials {
+        public static Dictionary<string, HBEng.IMaterial> StandardsWindowMaterials
+        {
 
-            get 
+            get
             {
                 if (_standardsWindowMaterials == null)
                 {
@@ -303,7 +274,10 @@ namespace HoneybeeSchema.Helper
                 return _standardsWindowMaterials;
             }
         }
-            
+
+
+
+
         //                 load from honeybee\honeybee_energy_standards\data\constructions\opaque_material.json
         private static Dictionary<string, HBEng.IMaterial> _standardsOpaqueMaterials;
         public static Dictionary<string, HBEng.IMaterial> StandardsOpaqueMaterials
@@ -319,21 +293,13 @@ namespace HoneybeeSchema.Helper
 
             }
         }
-            
-
-        //Default Model Energy Property
-        private static HB.ModelEnergyProperties _defaultModelEnergyProperty;
-        public static HB.ModelEnergyProperties DefaultModelEnergyProperties =>
-            _defaultModelEnergyProperty = _defaultModelEnergyProperty ?? LoadHoneybeeObject(_LoadLibraries[10], HB.ModelEnergyProperties.FromJson);
-
-
 
 
         //Schedules
         private static Dictionary<string, HB.ScheduleRulesetAbridged> _standardsSchedules;
-        public static Dictionary<string, HB.ScheduleRulesetAbridged> StandardsSchedules 
+        public static Dictionary<string, HB.ScheduleRulesetAbridged> StandardsSchedules
         {
-            get 
+            get
             {
                 if (_standardsSchedules == null)
                 {
@@ -344,10 +310,138 @@ namespace HoneybeeSchema.Helper
             }
         }
 
+        // end of Honeybee OpenStudio Standards
+        #endregion
+
+
+
+        #region Honeybee Default Standards
+
+        //Default Model Energy Property
+        private static HB.ModelEnergyProperties _defaultModelEnergyProperty;
+        public static HB.ModelEnergyProperties DefaultModelEnergyProperties
+        {
+            get
+            {
+                if (_defaultModelEnergyProperty == null)
+                {
+                    // Load from local ladybug_tools folder
+                    if (File.Exists(_DefaultLibJsons[0]))
+                    {
+                        _defaultModelEnergyProperty = LoadHoneybeeObject(_DefaultLibJsons[0], HB.ModelEnergyProperties.FromJson);
+                    }
+                    else
+                    {
+                        // Download from URL
+                        var file = Path.Combine(Path.GetTempPath(), "DefaultModelEnergyProperties.json");
+                        if (!File.Exists(_DefaultLibJsons[0]))
+                        {
+                            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/model/model_energy_properties_office.json";
+                            DownLoadLibrary(url, file);
+                        }
+                        _defaultModelEnergyProperty = LoadHoneybeeObject(file, HB.ModelEnergyProperties.FromJson);
+
+                    }
+                    
+                }
+
+                return _defaultModelEnergyProperty;
+            }
+        }
+        
+
+        //ConstructionSets
+        private static IEnumerable<HB.ConstructionSetAbridged> _defaultConstructionSets;
+        public static IEnumerable<HB.ConstructionSetAbridged> DefaultConstructionSets
+        {
+            get
+            {
+                _defaultConstructionSets = _defaultConstructionSets ?? DefaultModelEnergyProperties.ConstructionSets.OfType<HB.ConstructionSetAbridged>();
+                return _defaultConstructionSets;
+            }
+
+        }
+
+        //DefaultMaterials
+        private static IEnumerable<HB.Energy.IMaterial> _defaultMaterials;
+        /// <summary>
+        /// All default materials including opaque and window materials.
+        /// </summary>
+        public static IEnumerable<HB.Energy.IMaterial> DefaultMaterials
+        {
+            get
+            {
+                _defaultMaterials = _defaultMaterials ?? DefaultModelEnergyProperties.Materials.OfType<HB.Energy.IMaterial>();
+                return _defaultMaterials;
+            }
+        }
+
+        //DefaultOpaqueMaterials
+        private static IEnumerable<HB.Energy.IMaterial> _defaultOpaqueMaterials;
+        public static IEnumerable<HB.Energy.IMaterial> DefaultOpaqueMaterials
+        {
+            get
+            {
+                _defaultOpaqueMaterials = 
+                    _defaultOpaqueMaterials ?? 
+                    DefaultModelEnergyProperties.Materials.Where(_ => _ is HB.EnergyMaterial || _ is HB.EnergyMaterialNoMass)
+                    .OfType<HB.Energy.IMaterial>(); 
+
+                return _defaultOpaqueMaterials;
+            }
+        }
+
+        //DefaultMaterials
+        private static IEnumerable<HB.Energy.IMaterial> _defaultWindowMaterials;
+        public static IEnumerable<HB.Energy.IMaterial> DefaultWindowMaterials
+        {
+            get
+            {
+                _defaultWindowMaterials =
+                    _defaultWindowMaterials ??
+                    DefaultModelEnergyProperties.Materials.Where(_ => _.GetType().Name.StartsWith("EnergyWindowMaterial"))
+                    .OfType<HB.Energy.IMaterial>();
+
+                return _defaultWindowMaterials;
+            }
+        }
+
+        //DefaultConstructions
+        private static IEnumerable<HB.Energy.IConstruction> _defaultConstructions;
+        public static IEnumerable<HB.Energy.IConstruction> DefaultConstructions
+        {
+            get
+            {
+                _defaultConstructions = _defaultConstructions ?? DefaultModelEnergyProperties.Constructions.OfType<HB.Energy.IConstruction>();
+                return _defaultConstructions;
+            }
+        }
+
+        //ProgramTypes
+        private static IEnumerable<HB.ProgramTypeAbridged> _defaultProgramTypes;
+        public static IEnumerable<HB.ProgramTypeAbridged> DefaultProgramTypes
+        {
+            get
+            {
+                _defaultProgramTypes = _defaultProgramTypes ?? DefaultModelEnergyProperties.ProgramTypes.OfType<HB.ProgramTypeAbridged>();
+                return _defaultProgramTypes;
+            }
+        }
+
+
+
         //HVACs
         private static IEnumerable<HB.IdealAirSystemAbridged> _defaultHVACs;
-        public static IEnumerable<HB.IdealAirSystemAbridged> DefaultHVACs =>
-            _defaultHVACs = _defaultHVACs ?? LoadLibrary(_LoadLibraries[9], HB.IdealAirSystemAbridged.FromJson);
+        public static IEnumerable<HB.IdealAirSystemAbridged> DefaultHVACs 
+        {
+            get
+            {
+                _defaultHVACs = _defaultHVACs ?? DefaultModelEnergyProperties.Hvacs;
+                return _defaultHVACs;
+            }
+        
+        }
+            
 
         //People load
         private static IEnumerable<HB.PeopleAbridged> _defaultPeopleLoads;
@@ -357,7 +451,7 @@ namespace HoneybeeSchema.Helper
             {
                 if (_defaultPeopleLoads == null)
                 {
-                    var peopleList = DefaultProgramTypes.Select(_ => _?.People).ToList();
+                    var peopleList = DefaultProgramTypes.Select(_ => _?.People).Where(_ => _ != null).ToList();
                     foreach (var item in peopleList)
                     {
                         item.DisplayName = $"{item.Identifier} ({Math.Round(item.PeoplePerArea * 100, 1)} ppl/100m2)";
@@ -376,7 +470,7 @@ namespace HoneybeeSchema.Helper
                 return _defaultPeopleLoads;
             }
         }
-            
+
 
         //Lighting load
         private static IEnumerable<HB.LightingAbridged> _defaultLightingLoads;
@@ -386,7 +480,7 @@ namespace HoneybeeSchema.Helper
             {
                 if (_defaultLightingLoads == null)
                 {
-                    var items = DefaultProgramTypes.Select(_ => _?.Lighting).ToList();
+                    var items = DefaultProgramTypes.Select(_ => _?.Lighting).Where(_ => _ != null).ToList();
                     foreach (var item in items)
                     {
                         item.DisplayName = $"{item.Identifier} ({item.WattsPerArea} W/m2)";
@@ -405,7 +499,7 @@ namespace HoneybeeSchema.Helper
             {
                 if (_defaultElectricEquipmentLoads == null)
                 {
-                    var items = DefaultProgramTypes.Select(_ => _?.ElectricEquipment).ToList();
+                    var items = DefaultProgramTypes.Select(_ => _?.ElectricEquipment).Where(_ => _ != null).ToList();
                     foreach (var item in items)
                     {
                         item.DisplayName = $"{item.Identifier} ({item.WattsPerArea} W/m2)";
@@ -424,7 +518,7 @@ namespace HoneybeeSchema.Helper
             {
                 if (_defaultGasEquipmentLoads == null)
                 {
-                    var items = DefaultProgramTypes.Select(_ => _?.GasEquipment).ToList();
+                    var items = DefaultProgramTypes.Select(_ => _?.GasEquipment).Where(_ => _ != null).ToList();
                     foreach (var item in items)
                     {
                         item.DisplayName = $"{item.Identifier} ({item.WattsPerArea} W/m2)";
@@ -472,7 +566,7 @@ namespace HoneybeeSchema.Helper
             {
                 if (_defaultVentilationLoads == null)
                 {
-                    var items = DefaultProgramTypes.Select(_ => _.Ventilation).ToList();
+                    var items = DefaultProgramTypes.Select(_ => _.Ventilation).Where(_ => _ != null).ToList();
                     foreach (var item in items)
                     {
                         item.DisplayName = $"{item.Identifier} ({item.FlowPerArea} m3/s per m2 floor)";
@@ -489,12 +583,40 @@ namespace HoneybeeSchema.Helper
         {
             get
             {
-                _defaultSetpoints = _defaultSetpoints ?? DefaultProgramTypes.Select(_ => _.Setpoint);
+                _defaultSetpoints = _defaultSetpoints ?? DefaultProgramTypes.Select(_ => _.Setpoint).Where(_ => _ != null);
                 return _defaultSetpoints;
             }
         }
-        
 
+        //DefaultScheduleTypeLimit
+        private static IEnumerable<HB.ScheduleTypeLimit> _defaultScheduleTypeLimit;
+        public static IEnumerable<HB.ScheduleTypeLimit> DefaultScheduleTypeLimit
+        {
+            get
+            {
+                _defaultScheduleTypeLimit = _defaultScheduleTypeLimit ?? DefaultModelEnergyProperties.ScheduleTypeLimits;
+                return _defaultScheduleTypeLimit;
+            }
+        }
+
+
+        //DefaultScheduleRuleset
+        private static IEnumerable<HB.ScheduleRulesetAbridged> _defaultScheduleRuleset;
+        public static IEnumerable<HB.ScheduleRulesetAbridged> DefaultScheduleRuleset
+        {
+            get
+            {
+                _defaultScheduleRuleset = _defaultScheduleRuleset ?? DefaultModelEnergyProperties.Schedules.OfType<HB.ScheduleRulesetAbridged>();
+                return _defaultScheduleRuleset;
+            }
+        }
+
+
+        #endregion
+
+
+
+        #region Utilities
         public static string DownLoadLibrary(string standardsUrl, string saveAsfileName)
         {
             var url = standardsUrl;
@@ -702,8 +824,8 @@ namespace HoneybeeSchema.Helper
                         throw new ArgumentException("Ladybug Tools is not installed on this machine!");
 
                     // "/Users/mingbo/ladybug_tools2/rhino/HoneybeeRhino.PlugIn.Mac.rhp"
-                    outputs = outputs.Split(new[]{ "rhino"}, StringSplitOptions.RemoveEmptyEntries).First();
-          
+                    outputs = outputs.Split(new[] { "rhino" }, StringSplitOptions.RemoveEmptyEntries).First();
+
                     if (!Directory.Exists(outputs))
                         throw new ArgumentException("Ladybug Tools is not installed on this machine!");
 
@@ -738,19 +860,26 @@ namespace HoneybeeSchema.Helper
                         outputs = exeProcess.StandardOutput.ReadToEnd().Trim();
                     }
 
-                    if (string.IsNullOrEmpty(outputs))
-                        throw new ArgumentException("Ladybug Tools is not installed on this machine!");
 
-                    outputs = outputs.Split(' ').Last();
+                    if (string.IsNullOrEmpty(outputs))
+                    {
+                        var userDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                        outputs = Path.Combine(userDir, "ladybug_tools");
+                    }
+                    else
+                    {
+                        outputs = outputs.Split(' ').Last();
+                    }
+
 
                     if (!Directory.Exists(outputs))
-                        throw new ArgumentException("Ladybug Tools is not installed on this machine!");
+                        throw new ArgumentException($"Ladybug Tools is not installed on this machine! ({outputs})");
 
                     return outputs;
                 }
             }
 
-            
+
 
         }
 
@@ -835,8 +964,9 @@ namespace HoneybeeSchema.Helper
         /// <summary>
         /// This is a temporary placeholder for keeping in model resource objects.
         /// </summary>
-        public static HB.ModelEnergyProperties InModelEnergyProperties { 
-            get 
+        public static HB.ModelEnergyProperties InModelEnergyProperties
+        {
+            get
             {
                 if (_inModelEnergyProperties == null)
                 {
@@ -849,8 +979,7 @@ namespace HoneybeeSchema.Helper
                 _inModelEnergyProperties = value;
             }
         }
-
-      
+        #endregion
 
 
     }
