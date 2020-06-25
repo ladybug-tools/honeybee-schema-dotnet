@@ -81,7 +81,7 @@ namespace HoneybeeSchema.Test
         public void DefaultHVACsTest()
         {
             var obj = Helper.EnergyLibrary.DefaultHVACs.First();
-            Assert.IsTrue(obj.Identifier == "ClosedOffice_IdealAir");
+            Assert.IsTrue(obj.Identifier == "Closed_Office_IdealAir");
         }
 
 
