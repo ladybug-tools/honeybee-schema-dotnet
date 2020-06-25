@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HoneybeeSchema
 {
@@ -318,5 +319,33 @@ namespace HoneybeeSchema
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(O b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(P b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(A b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
+    }
+
+    //public class AnyOfList<T> : Collection<T> where T : AnyOf
+    //{
+       
+    //    public IEnumerable<T1> OfType<T1>()
+    //    {
+    //        return this.Select(_ => _.Obj).OfType<T1>();
+    //    }
+
+    //}
+
+    public static class AnyOfListEntensiton
+    {
+        public static IEnumerable<T> Select<T>(this IEnumerable<T> Source, Func<object, T> predicate) where T : AnyOf
+        {
+            return Source.Select(_ => predicate(_.Obj));
+        }
+
+        public static IEnumerable<T1> OfType<T1>(this IEnumerable<AnyOf> Source)
+        {
+            return Source.Select(_ => _.Obj).OfType<T1>(); 
+        }
+
+        public static IEnumerable<T> Where<T>(this IEnumerable<T> Source, Func<object, bool> predicate) where T: AnyOf
+        {
+            return Source.Where(_ => predicate(_.Obj));
+        }
     }
 }
