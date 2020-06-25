@@ -865,6 +865,7 @@ namespace HoneybeeSchema.Helper
                     {
                         var userDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
                         outputs = Path.Combine(userDir, "ladybug_tools");
+                        Directory.CreateDirectory(outputs);
                     }
                     else
                     {
