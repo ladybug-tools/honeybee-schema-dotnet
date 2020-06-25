@@ -63,18 +63,39 @@ namespace HoneybeeSchema.Helper
 
 
         //BuildingVintages 2004, 2007, 2010, 2013, etc..
-        private static readonly IEnumerable<string> _buildingVintages = Directory.GetFiles(BuildingVintagesFolder, "*.json");
-        public static IEnumerable<string> BuildingVintages => _buildingVintages;
+        private static IEnumerable<string> _buildingVintages;
+        public static IEnumerable<string> BuildingVintages 
+        {
+            get
+            {
+                _buildingVintages = _buildingVintages ?? Directory.GetFiles(BuildingVintagesFolder, "*.json");
+                return _buildingVintages;
+            }
+        }
 
 
         // ladybug_tools\resources\standards\honeybee_energy_standards\programtypes\2013_data.json
-        private static readonly IEnumerable<string> _buildingTypeJsonFilePaths = Directory.GetFiles(BuildingProgramTypesFolder, "*.json");
-        public static IEnumerable<string> BuildingTypeJsonFilePaths => _buildingTypeJsonFilePaths;
+        private static IEnumerable<string> _buildingTypeJsonFilePaths;
+        public static IEnumerable<string> BuildingTypeJsonFilePaths 
+        {
+            get
+            {
+                _buildingTypeJsonFilePaths = _buildingTypeJsonFilePaths ?? Directory.GetFiles(BuildingProgramTypesFolder, "*.json");
+                return _buildingTypeJsonFilePaths;
+            }
+        }
 
 
         // ladybug_tools\resources\standards\honeybee_energy_standards\\constructionsets\2013_data.json
-        private static readonly IEnumerable<string> _constructionsetJsonFilePaths = Directory.GetFiles(ConstructionSetFolder, "*.json");
-        public static IEnumerable<string> ConstructionsetJsonFilePaths => _constructionsetJsonFilePaths;
+        private static IEnumerable<string> _constructionsetJsonFilePaths;
+        public static IEnumerable<string> ConstructionsetJsonFilePaths
+        {
+            get
+            {
+                _constructionsetJsonFilePaths = _constructionsetJsonFilePaths ?? Directory.GetFiles(ConstructionSetFolder, "*.json");
+                return _constructionsetJsonFilePaths;
+            }
+        }
 
         // "2013::MediumOffice::OpenOffice"
         public static (ProgramTypeAbridged programType, IEnumerable<ScheduleRulesetAbridged> schedules) GetStandardProgramTypeByIdentifier(string standardProgramType)
