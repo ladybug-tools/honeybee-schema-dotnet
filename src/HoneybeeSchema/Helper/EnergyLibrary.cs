@@ -43,8 +43,8 @@ namespace HoneybeeSchema.Helper
         public static string DefaultStandardsFolder { get; } = Path.Combine(ResourcesStandardsFolder, "honeybee_standards");
         private static List<string> _DefaultLibJsons = new List<string>()
         {
-            Path.Combine(DefaultStandardsFolder,"defaultModelEnergyProperty.json"),
-            Path.Combine(DefaultStandardsFolder,"defaultModelRadianceProperty.json")
+            Path.Combine(DefaultStandardsFolder,"energy_default.json"),
+            Path.Combine(DefaultStandardsFolder,"radiance_default.json")
         };
 
 
@@ -354,7 +354,7 @@ namespace HoneybeeSchema.Helper
                     else
                     {
                         // Download from URL
-                        var file = Path.Combine(Path.GetTempPath(), "DefaultModelEnergyProperties.json");
+                        var file = Path.Combine(Path.GetTempPath(), "energy_default.json");
                         if (!File.Exists(_DefaultLibJsons[0]))
                         {
                             var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/model/model_energy_properties_office.json";
@@ -457,7 +457,9 @@ namespace HoneybeeSchema.Helper
         {
             get
             {
-                _defaultHVACs = _defaultHVACs ?? DefaultModelEnergyProperties.Hvacs;
+                _defaultHVACs = _defaultHVACs ?? 
+                    DefaultModelEnergyProperties.Hvacs ?? 
+                    new List<IdealAirSystemAbridged>() { new IdealAirSystemAbridged(Guid.NewGuid().ToString(), "Ideal Air System") };
                 return _defaultHVACs;
             }
         

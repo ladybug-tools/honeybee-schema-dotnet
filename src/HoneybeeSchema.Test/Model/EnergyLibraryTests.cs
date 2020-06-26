@@ -31,10 +31,10 @@ namespace HoneybeeSchema.Test
         {
             var modelEnergyProperties = Helper.EnergyLibrary.DefaultModelEnergyProperties;
             var objs = Helper.EnergyLibrary.DefaultScheduleTypeLimit;
-            Assert.IsTrue(objs.Any());
+            Assert.IsTrue(objs.Count() == 9);
 
             var sches = Helper.EnergyLibrary.DefaultScheduleRuleset;
-            Assert.IsTrue(sches.Any());
+            Assert.IsTrue(sches.Count() == 8);
         }
 
         [Test]
@@ -60,7 +60,7 @@ namespace HoneybeeSchema.Test
         public void MaterialsTest()
         {
             var mats = Helper.EnergyLibrary.DefaultMaterials;
-            Assert.IsTrue(mats.Count() == 15);
+            Assert.IsTrue(mats.Count() == 16);
 
             var opk = Helper.EnergyLibrary.DefaultOpaqueMaterials;
             Assert.IsTrue(opk.Count() == 12);
@@ -81,15 +81,15 @@ namespace HoneybeeSchema.Test
         public void DefaultHVACsTest()
         {
             var obj = Helper.EnergyLibrary.DefaultHVACs.First();
-            Assert.IsTrue(obj.Identifier == "Closed_Office_IdealAir");
+            Assert.IsTrue(obj.DisplayName == "Ideal Air System");
         }
 
 
         [Test]
         public void LoadsTest()
         {
-            var pTypes = Helper.EnergyLibrary.DefaultProgramTypes;
-            Assert.IsTrue(pTypes.First().Identifier == "Generic Office Program");
+            var pType = Helper.EnergyLibrary.DefaultProgramTypes.FirstOrDefault(_=>_.Identifier == "Generic Office Program");
+            Assert.IsTrue(pType != null);
 
             var ppl = Helper.EnergyLibrary.DefaultPeopleLoads;
             Assert.IsTrue(ppl.First().PeoplePerArea == 0.0565);
