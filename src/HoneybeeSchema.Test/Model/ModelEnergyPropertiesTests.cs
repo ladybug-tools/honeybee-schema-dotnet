@@ -87,18 +87,7 @@ namespace HoneybeeSchema.Test
         {
             // TODO unit test for the property 'Type'
         }
-        /// <summary>
-        /// Test the property 'GlobalConstructionSet'
-        /// </summary>
-        [Test]
-        public void GlobalConstructionSetTest()
-        {
-            // TODO unit test for the property 'GlobalConstructionSet'
-            var obj = this.instance.GlobalConstructionSet;
-            var o = obj;
-
-            Assert.AreEqual(o, "Default Generic Construction Set");
-        }
+      
         /// <summary>
         /// Test the property 'ConstructionSets'
         /// </summary>
