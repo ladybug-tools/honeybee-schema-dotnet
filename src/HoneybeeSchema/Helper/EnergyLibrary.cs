@@ -357,7 +357,7 @@ namespace HoneybeeSchema.Helper
                         var file = Path.Combine(Path.GetTempPath(), "energy_default.json");
                         if (!File.Exists(_DefaultLibJsons[0]))
                         {
-                            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/model/model_energy_properties_office.json";
+                            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-standards/master/honeybee_standards/energy_default.json";
                             DownLoadLibrary(url, file);
                         }
                         _defaultModelEnergyProperty = LoadHoneybeeObject(file, HB.ModelEnergyProperties.FromJson);

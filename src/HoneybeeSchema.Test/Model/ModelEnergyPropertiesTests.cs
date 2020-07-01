@@ -39,23 +39,15 @@ namespace HoneybeeSchema.Test
         [SetUp]
         public void Init()
         {
-            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/model/model_energy_properties_office.json";
-            using (System.Net.WebClient wc = new System.Net.WebClient())
-            {
-                var json = wc.DownloadString(url);
-                instance = ModelEnergyProperties.FromJson(json);
-            }
+            instance = Helper.EnergyLibrary.DefaultModelEnergyProperties;
 
-            if (System.Environment.OSVersion.Platform == PlatformID.Unix)
-            {
-                //var homeDir = Environment.GetEnvironmentVariable("HOME");
-                ////var dirs = Directory.GetDirectories("$HOME");
-                //var json = Path.Combine(homeDir, "ladybug_tools", "resources/standards/default/defaultModelEnergyProperty.json");
-                //var isfile = File.Exists(json);
+            //var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-standards/master/honeybee_standards/energy_default.json";
+            //using (System.Net.WebClient wc = new System.Net.WebClient())
+            //{
+            //    var json = wc.DownloadString(url);
+            //    instance = ModelEnergyProperties.FromJson(json);
+            //}
 
-                instance = Helper.EnergyLibrary.DefaultModelEnergyProperties;
-            }
-                
 
         }
 
@@ -130,19 +122,7 @@ namespace HoneybeeSchema.Test
 
             Assert.AreEqual(o.Thickness, 0.006);
         }
-        /// <summary>
-        /// Test the property 'Hvacs'
-        /// </summary>
-        [Test]
-        public void HvacsTest()
-        {
-            // TODO unit test for the property 'Hvacs'
-            var obj = this.instance.Hvacs.First();
-            var o = obj;
-
-            Assert.AreEqual(o.Identifier, "Closed_Office_IdealAir");
-            Assert.AreEqual(o.HeatingLimit, new Autosize());
-        }
+       
         /// <summary>
         /// Test the property 'ProgramTypes'
         /// </summary>
@@ -150,11 +130,10 @@ namespace HoneybeeSchema.Test
         public void ProgramTypesTest()
         {
             // TODO unit test for the property 'ProgramTypes'
-            var obj = this.instance.ProgramTypes.First();
-            var o = obj.Obj as ProgramTypeAbridged;
-
-            Assert.AreEqual(o.Identifier, "Generic Office Program");
-            Assert.AreEqual(o.People.LatentFraction, new Autocalculate());
+            var obj = this.instance.ProgramTypes.OfType<ProgramTypeAbridged>().First(_=>_.Identifier == "Generic Office Program");
+          
+            Assert.AreEqual(obj.ElectricEquipment.WattsPerArea, 10.33);
+            Assert.AreEqual(obj.People.LatentFraction, new Autocalculate());
         }
         /// <summary>
         /// Test the property 'Schedules'
