@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Density** | **double** | Density of the material layer in kg/m3. | 
 **SpecificHeat** | **double** | Specific heat of the material layer in J/(kg-K). | 
 **Type** | **string** |  | [optional] [readonly] [default to "EnergyMaterial"]
-**Roughness** | **Roughness** |  | [optional] [default to "MediumRough"]
+**Roughness** | **Roughness** |  | [optional] 
 **ThermalAbsorptance** | **double** | Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9. | [optional] [default to 0.9D]
 **SolarAbsorptance** | **double** | Fraction of incident solar radiation absorbed by the material. Default value is 0.7. | [optional] [default to 0.7D]
 **VisibleAbsorptance** | **double** | Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7. | [optional] [default to 0.7D]

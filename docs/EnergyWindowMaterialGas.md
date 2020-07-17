@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **DisplayName** | **string** | Display name of the object with no character restrictions. | [optional] 
 **Type** | **string** |  | [optional] [readonly] [default to "EnergyWindowMaterialGas"]
 **Thickness** | **double** | Thickness of the gas layer in meters. Default value is 0.0125. | [optional] [default to 0.0125D]
-**GasType** | **GasType** |  | [optional] [default to "Air"]
+**GasType** | **GasType** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
