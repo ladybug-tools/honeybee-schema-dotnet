@@ -2,9 +2,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoneybeeSchema", "src\HoneybeeSchema\HoneybeeSchema.csproj", "{2D9490D8-0848-4451-B3A9-9465C55F806F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoneybeeSchema", "src\HoneybeeSchema\HoneybeeSchema.csproj", "{7C1337B8-495C-4C13-A1AD-2DACB7107076}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoneybeeSchema.Test", "src\HoneybeeSchema.Test\HoneybeeSchema.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoneybeeSchema.Test", "src\HoneybeeSchema.Test\HoneybeeSchema.Test.csproj", "{B5EEF666-4FB9-4A84-9B65-17C551ED9A7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,14 +12,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2D9490D8-0848-4451-B3A9-9465C55F806F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2D9490D8-0848-4451-B3A9-9465C55F806F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2D9490D8-0848-4451-B3A9-9465C55F806F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2D9490D8-0848-4451-B3A9-9465C55F806F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C1337B8-495C-4C13-A1AD-2DACB7107076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C1337B8-495C-4C13-A1AD-2DACB7107076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C1337B8-495C-4C13-A1AD-2DACB7107076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C1337B8-495C-4C13-A1AD-2DACB7107076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5EEF666-4FB9-4A84-9B65-17C551ED9A7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5EEF666-4FB9-4A84-9B65-17C551ED9A7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5EEF666-4FB9-4A84-9B65-17C551ED9A7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5EEF666-4FB9-4A84-9B65-17C551ED9A7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
