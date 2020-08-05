@@ -12,27 +12,24 @@ jobs:
       - name: "Checkout Master Branch"
         uses: actions/checkout@v2
 
-      - name: Setup MSbuild
-        uses: microsoft/setup-msbuild@v1.0.0
-        
-      - name: Setup Nuget.exe
-        uses: nuget/setup-nuget@v1
-        
-      - name: Nuget Restore
+      - name: Update Assembly Version
         run: |
-          nuget restore HoneybeeSchema.sln
-          nuget install NUnit.ConsoleRunner -Version 3.10.0 -OutputDirectory packages
-
-      - name: MSBuild
+          python .openapi-generator/update_assembly_version.py
+          
+      - name: Build
         run: |
-          msbuild /p:Configuration=Release HoneybeeSchema.sln
+          dotnet restore
+          dotnet build --configuration Release /nowarn:CS0472,CS0108
 
       - name: Run Unit Tests
+        working-directory: src/HoneybeeSchema.Test
         run: |
-          ./packages/NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe src/HoneybeeSchema.Test/bin/Release/HoneybeeSchema.Test.dll
-
+          dotnet test --configuration Release
+          
       - name: Deploy
-        env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        working-directory: src/HoneybeeSchema
         run: |
-          python deploy.py
+          dotnet pack --configuration Release
+          dotnet nuget push bin\Release\HoneybeeSchema.*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
+
+
