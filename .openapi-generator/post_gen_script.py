@@ -184,6 +184,9 @@ def get_allof_types_from_json(source_json_url):
             for obj in all_objs:
                 if 'properties' in obj:
                     props = obj['properties']
+        else:
+            # skip enum type
+            continue
         get_allof_types(props, unitItem)
     return unitItem
 
