@@ -36,12 +36,12 @@ namespace HoneybeeSchema.Helper
             }
         }
 
-        public static string ResourcesStandardsFolder { get; } = Path.Combine(LadybugToolsRootFolder, "resources", "standards");
+        public static string ResourcesStandardsFolder => Path.Combine(LadybugToolsRootFolder, "resources", "standards");
         /// <summary>
         /// This returns ladybug_tools/resources/standards/default folder.
         /// </summary>
-        public static string DefaultStandardsFolder { get; } = Path.Combine(ResourcesStandardsFolder, "honeybee_standards");
-        private static List<string> _DefaultLibJsons = new List<string>()
+        public static string DefaultStandardsFolder => Path.Combine(ResourcesStandardsFolder, "honeybee_standards");
+        private static List<string> _DefaultLibJsons => new List<string>()
         {
             Path.Combine(DefaultStandardsFolder,"energy_default.json"),
             Path.Combine(DefaultStandardsFolder,"radiance_default.json")
@@ -54,12 +54,12 @@ namespace HoneybeeSchema.Helper
         #region Honeybee OpenStudio Standards
 
         //honeybee_energy_standards
-        public static string EnergyStandardsFolder { get; } = Path.Combine(ResourcesStandardsFolder, "honeybee_energy_standards");
-        public static string BuildingVintagesFolder { get; } = Path.Combine(EnergyStandardsFolder, "programtypes_registry");
-        public static string BuildingProgramTypesFolder { get; } = Path.Combine(EnergyStandardsFolder, "programtypes");
-        public static string ConstructionsFolder { get; } = Path.Combine(EnergyStandardsFolder, "constructions");
-        public static string ConstructionSetFolder { get; } = Path.Combine(EnergyStandardsFolder, "constructionsets");
-        public static string ScheduleFolder { get; } = Path.Combine(EnergyStandardsFolder, "schedules");
+        public static string EnergyStandardsFolder => Path.Combine(ResourcesStandardsFolder, "honeybee_energy_standards");
+        public static string BuildingVintagesFolder => Path.Combine(EnergyStandardsFolder, "programtypes_registry");
+        public static string BuildingProgramTypesFolder => Path.Combine(EnergyStandardsFolder, "programtypes");
+        public static string ConstructionsFolder => Path.Combine(EnergyStandardsFolder, "constructions");
+        public static string ConstructionSetFolder => Path.Combine(EnergyStandardsFolder, "constructionsets");
+        public static string ScheduleFolder => Path.Combine(EnergyStandardsFolder, "schedules");
 
 
         //BuildingVintages 2004, 2007, 2010, 2013, etc..
@@ -355,11 +355,8 @@ namespace HoneybeeSchema.Helper
                     {
                         // Download from URL
                         var file = Path.Combine(Path.GetTempPath(), "energy_default.json");
-                        if (!File.Exists(_DefaultLibJsons[0]))
-                        {
-                            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-standards/master/honeybee_standards/energy_default.json";
-                            DownLoadLibrary(url, file);
-                        }
+                        var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-standards/master/honeybee_standards/energy_default.json";
+                        DownLoadLibrary(url, file);
                         _defaultModelEnergyProperty = LoadHoneybeeObject(file, HB.ModelEnergyProperties.FromJson);
 
                     }
@@ -859,6 +856,7 @@ namespace HoneybeeSchema.Helper
             else
             {
                 // windows
+                var foundPath = string.Empty;
                 var scr = $"/C REG QUERY HKEY_CURRENT_USER\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\UNINSTALL /s /v InstallLocation | findstr \"ladybug_tools\"";
 
                 var startInfo = new System.Diagnostics.ProcessStartInfo();
@@ -874,6 +872,8 @@ namespace HoneybeeSchema.Helper
                     exeProcess.Start();
                     exeProcess.WaitForExit();
                     string outputs = exeProcess.StandardOutput.ReadToEnd().Trim();
+
+                    exeProcess.Close();
                     if (string.IsNullOrEmpty(outputs))
                     {
                         startInfo.Arguments = $"/C REG QUERY HKLM\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\UNINSTALL /s /v InstallLocation | findstr \"ladybug_tools\"";
@@ -882,25 +882,27 @@ namespace HoneybeeSchema.Helper
                         exeProcess.WaitForExit();
                         outputs = exeProcess.StandardOutput.ReadToEnd().Trim();
                     }
-
-
-                    if (string.IsNullOrEmpty(outputs))
-                    {
-                        var userDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-                        outputs = Path.Combine(userDir, "ladybug_tools");
-                        Directory.CreateDirectory(outputs);
-                    }
-                    else
-                    {
-                        outputs = outputs.Split(' ').Last();
-                    }
-
-
-                    if (!Directory.Exists(outputs))
-                        throw new ArgumentException($"Ladybug Tools is not installed on this machine! ({outputs})");
-
-                    return outputs;
+                    foundPath = outputs;
                 }
+
+                
+                if (string.IsNullOrEmpty(foundPath))
+                {
+                    // create a new ladybug_tools folder under user dir
+                    var userDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                    foundPath = Path.Combine(userDir, "ladybug_tools");
+                    Directory.CreateDirectory(foundPath);
+                }
+                else
+                {
+                    // get from installer's registry
+                    foundPath = foundPath.Split(' ').Last();
+                }
+
+                if (!Directory.Exists(foundPath))
+                    throw new ArgumentException($"Ladybug Tools is not installed on this machine! ({foundPath})");
+
+                return foundPath;
             }
 
 
