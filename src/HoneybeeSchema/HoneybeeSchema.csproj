@@ -3,14 +3,14 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>0.0.0.1</Version>
+    <Version>1.36.0.0</Version>
     <Authors>Ladybug Tools</Authors>
     <Description>This is the .Net version of Honeybee Schema</Description>
     <Copyright>Copyright © 2020 Ladybug Tools LLC</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/pollination/csharp-sdk</PackageProjectUrl>
-    <AssemblyVersion>0.0.0.1</AssemblyVersion>
-    <FileVersion>0.0.0.1</FileVersion>
+    <AssemblyVersion>1.36.0.0</AssemblyVersion>
+    <FileVersion>1.36.0.0</FileVersion>
     <RepositoryUrl>https://github.com/pollination/csharp-sdk</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
