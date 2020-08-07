@@ -86,6 +86,7 @@ namespace HoneybeeSchema
         }
         public static void AddHVAC(this ModelEnergyProperties modelEnergyCollection, IHvac havc)
         {
+            modelEnergyCollection.Hvacs = modelEnergyCollection.Hvacs?? new List<AnyOf<IdealAirSystemAbridged, VAV, PVAV, PSZ, PTAC, ForcedAirFurnace, FCUwithDOAS, WSHPwithDOAS, VRFwithDOAS, FCU, WSHP, VRF, Baseboard, EvaporativeCooler, Residential, WindowAC, GasUnitHeater>>();
             var exist = modelEnergyCollection.Hvacs.OfType<IHvac>().Any(_ => _.Identifier == havc.Identifier);
             if (exist)
                 return;
