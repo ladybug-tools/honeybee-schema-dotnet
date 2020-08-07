@@ -362,7 +362,10 @@ namespace HoneybeeSchema.Helper
                     }
 
                     // add default HVACs to loaded energy_default
-                    _defaultModelEnergyProperty.Hvacs = DefaultHVACs.ToList();
+                    if (_defaultModelEnergyProperty.Hvacs == null)
+                    {
+                        _defaultModelEnergyProperty.AddHVACs(DefaultHVACs.ToList());
+                    }
                     
                 }
 
@@ -452,14 +455,17 @@ namespace HoneybeeSchema.Helper
 
 
         //HVACs
-        private static IEnumerable<HB.IdealAirSystemAbridged> _defaultHVACs;
-        public static IEnumerable<HB.IdealAirSystemAbridged> DefaultHVACs 
+        private static IEnumerable<HB.Energy.IHvac> _defaultHVACs;
+        public static IEnumerable<HB.Energy.IHvac> DefaultHVACs 
         {
             get
             {
-                _defaultHVACs = _defaultHVACs ?? 
-                    DefaultModelEnergyProperties.Hvacs ?? 
-                    new List<IdealAirSystemAbridged>() { new IdealAirSystemAbridged(Guid.NewGuid().ToString(), "Ideal Air System") };
+                
+                _defaultHVACs = _defaultHVACs?? DefaultModelEnergyProperties.Hvacs?.OfType<HB.Energy.IHvac>();
+                if (_defaultHVACs == null)
+                {
+                    _defaultHVACs = new List<IHvac>() { new IdealAirSystemAbridged(Guid.NewGuid().ToString(), "Ideal Air System") };
+                }
                 return _defaultHVACs;
             }
         
