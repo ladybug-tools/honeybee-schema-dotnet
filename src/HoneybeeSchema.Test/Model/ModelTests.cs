@@ -150,7 +150,7 @@ namespace HoneybeeSchema.Test
             Assert.AreEqual(prop.Setpoint.HeatingSchedule, "Generic Office Heating");
 
 
-            var hvac = this.instance.Properties.Energy.Hvacs.First();
+            var hvac = this.instance.Properties.Energy.Hvacs.First().Obj as IdealAirSystemAbridged;
             Assert.AreEqual(hvac.HeatingAirTemperature, 50);
             Assert.AreEqual(hvac.HeatingLimit, new Autosize());
         }
