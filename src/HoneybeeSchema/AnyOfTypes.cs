@@ -321,9 +321,223 @@ namespace HoneybeeSchema
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(A b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
     }
 
+    public class AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B> : AnyOf
+    {
+        internal override List<Type> AllValidTypes => new List<Type>() {
+            typeof(T), typeof(K), typeof(Q), typeof(W), typeof(E), typeof(R), typeof(Y), typeof(U), typeof(I), typeof(O), typeof(P), typeof(A), typeof(B)
+        };
+
+        public AnyOf(object obj) : base(obj){}
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B> b) => b.ToString();
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(W b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(E b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(R b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(Y b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(U b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(I b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(O b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(P b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(A b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(B b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(b);
+    }
+
+    public class AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C> : AnyOf
+    {
+        internal override List<Type> AllValidTypes => new List<Type>() {
+            typeof(T), typeof(K), typeof(Q), typeof(W), typeof(E), typeof(R), typeof(Y), typeof(U), typeof(I), typeof(O), typeof(P), typeof(A), typeof(B), typeof(C)
+        };
+
+        public AnyOf(object obj) : base(obj) { }
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C> b) => b.ToString();
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(W b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(E b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(R b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(Y b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(U b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(I b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(O b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(P b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(A b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(B b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(C b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(b);
+    }
+
+    public class AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D> : AnyOf
+    {
+        internal override List<Type> AllValidTypes => new List<Type>() {
+            typeof(T), typeof(K), typeof(Q), typeof(W), typeof(E), typeof(R), typeof(Y), typeof(U), typeof(I), typeof(O), typeof(P), typeof(A), typeof(B), typeof(C), typeof(D)
+        };
+
+        public AnyOf(object obj) : base(obj) { }
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D> b) => b.ToString();
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(W b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(E b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(R b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(Y b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(U b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(I b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(O b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(P b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(A b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(B b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(C b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(D b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(b);
+    }
+
+    public class AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F> : AnyOf
+    {
+        internal override List<Type> AllValidTypes => new List<Type>() {
+            typeof(T), typeof(K), typeof(Q), typeof(W), typeof(E), typeof(R), typeof(Y), typeof(U), typeof(I), typeof(O), typeof(P), typeof(A), typeof(B), typeof(C), typeof(D), typeof(F)
+        };
+
+        public AnyOf(object obj) : base(obj) { }
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F> b) => b.ToString();
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(W b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(E b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(R b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(Y b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(U b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(I b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(O b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(P b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(A b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(B b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(C b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(D b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(F b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
+    }
+
+    public class AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G> : AnyOf
+    {
+        internal override List<Type> AllValidTypes => new List<Type>() {
+            typeof(T), typeof(K), typeof(Q), typeof(W), typeof(E), typeof(R), typeof(Y), typeof(U), typeof(I), typeof(O), 
+            typeof(P), typeof(A), typeof(B), typeof(C), typeof(D), typeof(F), typeof(G)
+        };
+
+        public AnyOf(object obj) : base(obj) { }
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G> b) => b.ToString();
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(W b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(E b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(R b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(Y b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(U b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(I b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(O b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(P b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(A b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(B b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(C b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(D b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(F b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(G b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
+    }
+
+    public class AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H> : AnyOf
+    {
+        internal override List<Type> AllValidTypes => new List<Type>() {
+            typeof(T), typeof(K), typeof(Q), typeof(W), typeof(E), typeof(R), typeof(Y), typeof(U), typeof(I), typeof(O),
+            typeof(P), typeof(A), typeof(B), typeof(C), typeof(D), typeof(F), typeof(G), typeof(H)
+        };
+
+        public AnyOf(object obj) : base(obj) { }
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H> b) => b.ToString();
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(W b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(E b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(R b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(Y b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(U b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(I b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(O b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(P b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(A b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(B b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(C b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(D b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(F b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(G b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(H b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
+    }
+
+    public class AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J> : AnyOf
+    {
+        internal override List<Type> AllValidTypes => new List<Type>() {
+            typeof(T), typeof(K), typeof(Q), typeof(W), typeof(E), typeof(R), typeof(Y), typeof(U), typeof(I), typeof(O),
+            typeof(P), typeof(A), typeof(B), typeof(C), typeof(D), typeof(F), typeof(G), typeof(H), typeof(J)
+        };
+
+        public AnyOf(object obj) : base(obj) { }
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J> b) => b.ToString();
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(W b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(E b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(R b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(Y b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(U b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(I b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(O b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(P b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(A b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(B b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(C b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(D b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(F b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(G b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(H b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(J b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
+    }
+    public class AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M> : AnyOf
+    {
+        internal override List<Type> AllValidTypes => new List<Type>() {
+            typeof(T), typeof(K), typeof(Q), typeof(W), typeof(E), typeof(R), typeof(Y), typeof(U), typeof(I), typeof(O),
+            typeof(P), typeof(A), typeof(B), typeof(C), typeof(D), typeof(F), typeof(G), typeof(H), typeof(J), typeof(M)
+        };
+
+        public AnyOf(object obj) : base(obj) { }
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M> b) => b.ToString();
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(W b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(E b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(R b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(Y b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(U b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(I b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(O b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(P b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(A b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(B b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(C b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(D b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(F b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(G b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(H b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(J b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+        public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(M b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
+    }
     //public class AnyOfList<T> : Collection<T> where T : AnyOf
     //{
-       
+
     //    public IEnumerable<T1> OfType<T1>()
     //    {
     //        return this.Select(_ => _.Obj).OfType<T1>();

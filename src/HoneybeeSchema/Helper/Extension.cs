@@ -29,7 +29,7 @@ namespace HoneybeeSchema
 
         public static void AddConstructionSet(this ModelEnergyProperties modelEnergyCollection, IBuildingConstructionset constructionset)
         {
-            var exist = modelEnergyCollection.ConstructionSets.Any(_ => (_.Obj as IIDdBase).Identifier == constructionset.Identifier);
+            var exist = modelEnergyCollection.ConstructionSets.OfType<IIDdBase>().Any(_ => _.Identifier == constructionset.Identifier);
             if (exist)
                 return;
 
@@ -57,7 +57,7 @@ namespace HoneybeeSchema
         }
         public static void AddProgramType(this ModelEnergyProperties modelEnergyCollection, IProgramtype programtype)
         {
-            var exist = modelEnergyCollection.ProgramTypes.Any(_ => (_.Obj as IIDdBase).Identifier == programtype.Identifier);
+            var exist = modelEnergyCollection.ProgramTypes.OfType<IIDdBase>().Any(_ => _.Identifier == programtype.Identifier);
             if (exist)
                 return;
 
@@ -86,7 +86,7 @@ namespace HoneybeeSchema
         }
         public static void AddHVAC(this ModelEnergyProperties modelEnergyCollection, IHvac havc)
         {
-            var exist = modelEnergyCollection.Hvacs.Any(_ => _.Identifier == havc.Identifier);
+            var exist = modelEnergyCollection.Hvacs.OfType<IHvac>().Any(_ => _.Identifier == havc.Identifier);
             if (exist)
                 return;
 
@@ -95,7 +95,54 @@ namespace HoneybeeSchema
                 case IdealAirSystemAbridged em:
                     modelEnergyCollection.Hvacs.Add(em);
                     break;
-
+                case ForcedAirFurnace em:
+                    modelEnergyCollection.Hvacs.Add(em);
+                    break;
+                case PSZ em:
+                    modelEnergyCollection.Hvacs.Add(em);
+                    break;
+                case PTAC em:
+                    modelEnergyCollection.Hvacs.Add(em);
+                    break;
+                case PVAV em:
+                    modelEnergyCollection.Hvacs.Add(em);
+                    break;
+                case VAV em:
+                    modelEnergyCollection.Hvacs.Add(em);
+                    break;
+                case FCUwithDOAS em:
+                    modelEnergyCollection.Hvacs.Add(em);
+                    break;
+                case VRFwithDOAS em:
+                    modelEnergyCollection.Hvacs.Add(em);
+                    break;
+                case WSHPwithDOAS em:
+                    modelEnergyCollection.Hvacs.Add(em);
+                    break;
+                case Baseboard em:
+                    modelEnergyCollection.Hvacs.Add(em);
+                    break;
+                case EvaporativeCooler em:
+                    modelEnergyCollection.Hvacs.Add(em);
+                    break;
+                case FCU em:
+                    modelEnergyCollection.Hvacs.Add(em);
+                    break;
+                case GasUnitHeater em:
+                    modelEnergyCollection.Hvacs.Add(em);
+                    break;
+                case Residential em:
+                    modelEnergyCollection.Hvacs.Add(em);
+                    break;
+                case VRF em:
+                    modelEnergyCollection.Hvacs.Add(em);
+                    break;
+                case WSHP em:
+                    modelEnergyCollection.Hvacs.Add(em);
+                    break;
+                case WindowAC em:
+                    modelEnergyCollection.Hvacs.Add(em);
+                    break;
                 default:
                     throw new ArgumentException($"{havc.GetType()} is not added to model");
             }
@@ -111,7 +158,7 @@ namespace HoneybeeSchema
 
         public static void AddMaterial(this ModelEnergyProperties modelEnergyCollection, IMaterial material)
         {
-            var exist = modelEnergyCollection.Materials.Any(_ => (_.Obj as IIDdBase).Identifier == material.Identifier);
+            var exist = modelEnergyCollection.Materials.OfType<IMaterial>().Any(_ => _.Identifier == material.Identifier);
             if (exist)
                 return;
 
@@ -158,7 +205,7 @@ namespace HoneybeeSchema
 
         public static void AddConstruction(this ModelEnergyProperties modelEnergyCollection, IConstruction construction)
         {
-            var exist = modelEnergyCollection.Constructions.Any(_ => (_.Obj as IIDdBase).Identifier == construction.Identifier);
+            var exist = modelEnergyCollection.Constructions.OfType<IConstruction>().Any(_ => _.Identifier == construction.Identifier);
             if (exist)
                 return;
 
@@ -201,7 +248,7 @@ namespace HoneybeeSchema
 
         public static void AddSchedule(this ModelEnergyProperties modelEnergyCollection, IDdEnergyBaseModel schedule)
         {
-            var exist = modelEnergyCollection.Schedules.Any(_ => (_.Obj as IIDdBase).Identifier == schedule.Identifier);
+            var exist = modelEnergyCollection.Schedules.OfType<IIDdBase>().Any(_ => _.Identifier == schedule.Identifier);
             if (exist)
                 return;
 
@@ -233,7 +280,6 @@ namespace HoneybeeSchema
                 modelEnergyCollection.AddSchedule(item);
             }
         }
-
 
         public static void AddScheduleTypeLimit(this ModelEnergyProperties modelEnergyCollection,  ScheduleTypeLimit scheduleTypeLimit)
         {
