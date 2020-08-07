@@ -159,6 +159,14 @@ namespace HoneybeeSchema.Test
             Assert.AreEqual(obj.UpperLimit, new NoLimit());
         }
 
+        /// <summary>
+        /// Test the property 'ScheduleTypeLimits'
+        /// </summary>
+        [Test]
+        public void HvacsTest()
+        {
+            Assert.IsTrue(this.instance.Hvacs.Any());
+        }
     }
 
 }

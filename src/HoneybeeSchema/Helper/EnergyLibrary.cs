@@ -360,6 +360,9 @@ namespace HoneybeeSchema.Helper
                         _defaultModelEnergyProperty = LoadHoneybeeObject(file, HB.ModelEnergyProperties.FromJson);
 
                     }
+
+                    // add default HVACs to loaded energy_default
+                    _defaultModelEnergyProperty.Hvacs = DefaultHVACs.ToList();
                     
                 }
 
