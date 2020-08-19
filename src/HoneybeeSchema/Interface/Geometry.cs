@@ -8,6 +8,8 @@ namespace HoneybeeSchema
 //Classes implemented this interface:
 namespace HoneybeeSchema
 {
+	public partial class Color: HoneybeeSchema.IGeometry {}
 	public partial class Face3D: HoneybeeSchema.IGeometry {}
+	public partial class Mesh3D: HoneybeeSchema.IGeometry {}
 	public partial class Plane: HoneybeeSchema.IGeometry {}
 }
