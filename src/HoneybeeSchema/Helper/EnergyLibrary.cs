@@ -372,7 +372,34 @@ namespace HoneybeeSchema.Helper
                 return _defaultModelEnergyProperty;
             }
         }
-        
+        //Default Model Radiance Property
+        private static HB.ModelRadianceProperties _defaultModelRadianceProperty;
+        public static HB.ModelRadianceProperties DefaultModelRadianceProperties
+        {
+            get
+            {
+                if (_defaultModelRadianceProperty == null)
+                {
+                    // Load from local ladybug_tools folder
+                    if (File.Exists(_DefaultLibJsons[0]))
+                    {
+                        _defaultModelRadianceProperty = LoadHoneybeeObject(_DefaultLibJsons[1], HB.ModelRadianceProperties.FromJson);
+                    }
+                    else
+                    {
+                        // Download from URL
+                        var file = Path.Combine(Path.GetTempPath(), "radiance_default.json");
+                        var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-standards/master/honeybee_standards/radiance_default.json";
+                        DownLoadLibrary(url, file);
+                        _defaultModelRadianceProperty = LoadHoneybeeObject(file, HB.ModelRadianceProperties.FromJson);
+
+                    }
+
+                }
+
+                return _defaultModelRadianceProperty;
+            }
+        }
 
         //ConstructionSets
         private static IEnumerable<HB.ConstructionSetAbridged> _defaultConstructionSets;
@@ -1003,10 +1030,7 @@ namespace HoneybeeSchema.Helper
         {
             get
             {
-                if (_inModelEnergyProperties == null)
-                {
-                    _inModelEnergyProperties = ModelEnergyProperties.Default;
-                }
+                _inModelEnergyProperties = _inModelEnergyProperties ?? ModelEnergyProperties.Default;
                 return _inModelEnergyProperties;
             }
             set
@@ -1014,6 +1038,24 @@ namespace HoneybeeSchema.Helper
                 _inModelEnergyProperties = value;
             }
         }
+
+        private static HB.ModelRadianceProperties _inModelRadianceProperties;
+        /// <summary>
+        /// This is a temporary placeholder for keeping in model resource objects.
+        /// </summary>
+        public static HB.ModelRadianceProperties InModelRadianceProperties
+        {
+            get
+            {
+                _inModelRadianceProperties = _inModelRadianceProperties ?? ModelRadianceProperties.Default;
+                return _inModelRadianceProperties;
+            }
+            set
+            {
+                _inModelRadianceProperties = value;
+            }
+        }
+
         #endregion
 
 
