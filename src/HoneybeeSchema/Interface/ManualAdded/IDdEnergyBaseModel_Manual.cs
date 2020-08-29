@@ -17,8 +17,3 @@ namespace HoneybeeSchema.Energy
 }
 
 
-namespace HoneybeeSchema
-{
-    public partial class IDdEnergyBaseModel: Energy.IIDdEnergyBaseModel{}
-    
-}
