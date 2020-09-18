@@ -43,7 +43,7 @@ namespace HoneybeeSchema
                     break;
 
                 default:
-                    throw new ArgumentException($"{constructionset.GetType()} is not added to model");
+                    throw new ArgumentException($"{constructionset.GetType()}({constructionset.Identifier}) is not added to model");
             }
 
         }
@@ -71,7 +71,7 @@ namespace HoneybeeSchema
                     break;
 
                 default:
-                    throw new ArgumentException($"{programtype.GetType()} is not added to model");
+                    throw new ArgumentException($"{programtype.GetType()}({programtype.Identifier}) is not added to model");
             }
 
         }
@@ -145,7 +145,7 @@ namespace HoneybeeSchema
                     modelEnergyCollection.Hvacs.Add(em);
                     break;
                 default:
-                    throw new ArgumentException($"{havc.GetType()} is not added to model");
+                    throw new ArgumentException($"{havc.GetType()}({havc.Identifier}) is not added to model");
             }
         }
         public static void AddHVACs(this ModelEnergyProperties modelEnergyCollection, List<IHvac> havcs)
@@ -193,7 +193,7 @@ namespace HoneybeeSchema
                     modelEnergyCollection.Materials.Add(em);
                     break;
                 default:
-                    throw new ArgumentException($"{material.GetType()} is not added to model");
+                    throw new ArgumentException($"{material.GetType()}({material.Identifier}) is not added to model");
             }
         }
         public static void AddMaterials(this ModelEnergyProperties modelEnergyCollection, List<IMaterial> materials)
@@ -235,7 +235,7 @@ namespace HoneybeeSchema
                     break;
 
                 default:
-                    throw new ArgumentException($"{construction.GetType()} is not added to model");
+                    throw new ArgumentException($"{construction.GetType()}({construction.Identifier}) is not added to model");
 
             }
         }
@@ -269,7 +269,7 @@ namespace HoneybeeSchema
                     break;
 
                 default:
-                    throw new ArgumentException($"{schedule.GetType()} is not added to model");
+                    throw new ArgumentException($"{schedule.GetType()}({schedule.Identifier}) is not added to model");
 
             }
         }
@@ -294,7 +294,7 @@ namespace HoneybeeSchema
                     break;
 
                 default:
-                    throw new ArgumentException($"{scheduleTypeLimit.GetType()} is not added to model");
+                    throw new ArgumentException($"{scheduleTypeLimit.GetType()}({scheduleTypeLimit.Identifier}) is not added to model");
 
             }
         }
@@ -302,7 +302,7 @@ namespace HoneybeeSchema
         {
             foreach (var item in scheduleTypeLimits)
             {
-                modelEnergyCollection.AddSchedule(item);
+                modelEnergyCollection.AddScheduleTypeLimit(item);
             }
         }
 
