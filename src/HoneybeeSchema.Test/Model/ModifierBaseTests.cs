@@ -32,7 +32,7 @@ namespace HoneybeeSchema.Test
     public class ModifierBaseTests
     {
         // TODO uncomment below to declare an instance variable for ModifierBase
-        //private ModifierBase instance;
+        private ModifierBase instance;
 
         /// <summary>
         /// Setup before each test
@@ -41,7 +41,7 @@ namespace HoneybeeSchema.Test
         public void Init()
         {
             // TODO uncomment below to create an instance of ModifierBase
-            //instance = new ModifierBase();
+            instance = new Plastic("newID");
         }
 
         /// <summary>
@@ -70,9 +70,27 @@ namespace HoneybeeSchema.Test
         [Test]
         public void TypeTest()
         {
-            // TODO unit test for the property 'Type'
+            Assert.AreEqual(this.instance.Type, typeof(Plastic).Name);
         }
 
+        [Test]
+        public void DuplicateModifierBaseTest()
+        {
+            var dup = this.instance.DuplicateModifierBase();
+            Assert.IsTrue(dup is Plastic);
+        }
+        [Test]
+        public void DuplicateTest()
+        {
+            var dup = this.instance.Duplicate();
+            Assert.IsTrue(dup is Plastic);
+        }
+        [Test]
+        public void DuplicateIDdRadianceBaseModelTest()
+        {
+            var dup = this.instance.DuplicateIDdRadianceBaseModel();
+            Assert.IsTrue(dup is Plastic);
+        }
     }
 
 }
