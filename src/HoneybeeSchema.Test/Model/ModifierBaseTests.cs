@@ -70,7 +70,7 @@ namespace HoneybeeSchema.Test
         [Test]
         public void TypeTest()
         {
-            Assert.AreEqual(this.instance.Type, typeof(Plastic).Name);
+            Assert.AreEqual(this.instance.Type, typeof(Plastic).Name.ToLower());
         }
 
         [Test]
