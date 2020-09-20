@@ -273,7 +273,6 @@ namespace HoneybeeSchema
 
             }
         }
-
         public static void AddSchedules(this ModelEnergyProperties modelEnergyCollection, List<IDdEnergyBaseModel> schedules)
         {
             foreach (var item in schedules)
@@ -306,6 +305,76 @@ namespace HoneybeeSchema
             }
         }
 
+
+        public static void AddModifier(this ModelRadianceProperties modelRadianceCollection, ModifierBase modifier)
+        {
+            var exist = modelRadianceCollection.Modifiers.OfType<ModifierBase>().Any(_ => _.Identifier == modifier.Identifier);
+            if (exist)
+                return;
+            switch (modifier)
+            {
+                case Plastic obj:
+                    modelRadianceCollection.Modifiers.Add(obj);
+                    break;
+                case Glass obj:
+                    modelRadianceCollection.Modifiers.Add(obj);
+                    break;
+                case Trans obj:
+                    modelRadianceCollection.Modifiers.Add(obj);
+                    break;
+                case Metal obj:
+                    modelRadianceCollection.Modifiers.Add(obj);
+                    break;
+                case Mirror obj:
+                    modelRadianceCollection.Modifiers.Add(obj);
+                    break;
+                case Glow obj:
+                    modelRadianceCollection.Modifiers.Add(obj);
+                    break;
+                case Light obj:
+                    modelRadianceCollection.Modifiers.Add(obj);
+                    break;
+                case BSDF obj:
+                    modelRadianceCollection.Modifiers.Add(obj);
+                    break;
+                default:
+                    throw new ArgumentException($"{modifier.GetType()}({modifier.Identifier}) is not added to model");
+            }
+
+        }
+        public static void AddModifiers(this ModelRadianceProperties modelRadianceCollection, List<ModifierBase> modifiers)
+        {
+            foreach (var item in modifiers)
+            {
+                modelRadianceCollection.AddModifier(item);
+            }
+        }
+
+        public static void AddModifierSet(this ModelRadianceProperties modelRadianceCollection, IDdRadianceBaseModel modifierSet)
+        {
+            var exist = modelRadianceCollection.ModifierSets.OfType<IDdRadianceBaseModel>().Any(_ => _.Identifier == modifierSet.Identifier);
+            if (exist)
+                return;
+            switch (modifierSet)
+            {
+                case ModifierSet em:
+                    modelRadianceCollection.ModifierSets.Add(em);
+                    break;
+                case ModifierSetAbridged em:
+                    modelRadianceCollection.ModifierSets.Add(em);
+                    break;
+                default:
+                    throw new ArgumentException($"{modifierSet.GetType()}({modifierSet.Identifier}) is not added to model");
+
+            }
+        }
+        public static void AddModifierSets(this ModelRadianceProperties modelRadianceCollection, List<IDdRadianceBaseModel> modifierSets)
+        {
+            foreach (var item in modifierSets)
+            {
+                modelRadianceCollection.AddModifierSet(item);
+            }
+        }
     }
 
 }
