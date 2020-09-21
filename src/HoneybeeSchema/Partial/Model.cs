@@ -41,6 +41,14 @@ namespace HoneybeeSchema
             this.Properties.Energy.AddScheduleTypeLimits(scheduleTypeLimits);
         }
 
+        public void AddModifiers(List<ModifierBase> modifiers)
+        {
+            this.Properties.Radiance.AddModifiers(modifiers);
+        }
 
+        public void AddModifierSets(List<IDdRadianceBaseModel> modifierSets)
+        {
+            this.Properties.Radiance.AddModifierSets(modifierSets);
+        }
     }
 }
