@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Geometry** | [**Face3D**](Face3D.md) | Planar Face3D for the geometry. | 
 **Properties** | [**ShadePropertiesAbridged**](ShadePropertiesAbridged.md) | Extension properties for particular simulation engines (Radiance, EnergyPlus). | 
 **Type** | **string** |  | [optional] [readonly] [default to "Shade"]
+**IsDetached** | **bool** | Boolean to note whether this shade is detached from any of the other geometry in the model. Cases where this should be True include shade representing surrounding buildings or context. Note that this should always be False for shades assigned to parent objects. | [optional] [default to false]
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
