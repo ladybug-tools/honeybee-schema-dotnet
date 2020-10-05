@@ -29,6 +29,8 @@ namespace HoneybeeSchema
 
         public static void AddConstructionSet(this ModelEnergyProperties modelEnergyCollection, IBuildingConstructionset constructionset)
         {
+            modelEnergyCollection.ConstructionSets = modelEnergyCollection.ConstructionSets ?? new List<AnyOf<ConstructionSetAbridged, ConstructionSet>>();
+             
             var exist = modelEnergyCollection.ConstructionSets.OfType<IIDdBase>().Any(_ => _.Identifier == constructionset.Identifier);
             if (exist)
                 return;
@@ -49,6 +51,7 @@ namespace HoneybeeSchema
         }
         public static void AddConstructionSets(this ModelEnergyProperties modelEnergyCollection, List<IBuildingConstructionset> constructionsets)
         {
+            if (constructionsets == null) return;
             foreach (var item in constructionsets)
             {
                 modelEnergyCollection.AddConstructionSet(item);
@@ -57,6 +60,8 @@ namespace HoneybeeSchema
         }
         public static void AddProgramType(this ModelEnergyProperties modelEnergyCollection, IProgramtype programtype)
         {
+            modelEnergyCollection.ProgramTypes = modelEnergyCollection.ProgramTypes ?? new List<AnyOf<ProgramTypeAbridged, ProgramType>>();
+
             var exist = modelEnergyCollection.ProgramTypes.OfType<IIDdBase>().Any(_ => _.Identifier == programtype.Identifier);
             if (exist)
                 return;
@@ -78,6 +83,7 @@ namespace HoneybeeSchema
 
         public static void AddProgramTypes(this ModelEnergyProperties modelEnergyCollection, List<IProgramtype> programtypes)
         {
+            if (programtypes == null) return;
             foreach (var item in programtypes)
             {
                 modelEnergyCollection.AddProgramType(item);
@@ -150,6 +156,7 @@ namespace HoneybeeSchema
         }
         public static void AddHVACs(this ModelEnergyProperties modelEnergyCollection, List<IHvac> havcs)
         {
+            if (havcs == null) return;
             foreach (var item in havcs)
             {
                 modelEnergyCollection.AddHVAC(item);
@@ -159,6 +166,7 @@ namespace HoneybeeSchema
 
         public static void AddMaterial(this ModelEnergyProperties modelEnergyCollection, IMaterial material)
         {
+            modelEnergyCollection.Materials = modelEnergyCollection.Materials ?? new List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, EnergyWindowMaterialGasMixture, EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade>>();
             var exist = modelEnergyCollection.Materials.OfType<IMaterial>().Any(_ => _.Identifier == material.Identifier);
             if (exist)
                 return;
@@ -198,6 +206,7 @@ namespace HoneybeeSchema
         }
         public static void AddMaterials(this ModelEnergyProperties modelEnergyCollection, List<IMaterial> materials)
         {
+            if (materials == null) return;
             foreach (var item in materials)
             {
                 modelEnergyCollection.AddMaterial(item);
@@ -206,6 +215,7 @@ namespace HoneybeeSchema
 
         public static void AddConstruction(this ModelEnergyProperties modelEnergyCollection, IConstruction construction)
         {
+            modelEnergyCollection.Constructions = modelEnergyCollection.Constructions ?? new List<AnyOf<OpaqueConstructionAbridged, WindowConstructionAbridged, WindowConstructionShadeAbridged, AirBoundaryConstructionAbridged, OpaqueConstruction, WindowConstruction, WindowConstructionShade, AirBoundaryConstruction, ShadeConstruction>>();
             var exist = modelEnergyCollection.Constructions.OfType<IConstruction>().Any(_ => _.Identifier == construction.Identifier);
             if (exist)
                 return;
@@ -241,6 +251,7 @@ namespace HoneybeeSchema
         }
         public static void AddConstructions(this ModelEnergyProperties modelEnergyCollection, List<IConstruction> constructions)
         {
+            if (constructions == null) return;
             foreach (var item in constructions)
             {
                 modelEnergyCollection.AddConstruction(item);
@@ -249,6 +260,7 @@ namespace HoneybeeSchema
 
         public static void AddSchedule(this ModelEnergyProperties modelEnergyCollection, IDdEnergyBaseModel schedule)
         {
+            modelEnergyCollection.Schedules = modelEnergyCollection.Schedules ?? new List<AnyOf<ScheduleRulesetAbridged, ScheduleFixedIntervalAbridged, ScheduleRuleset, ScheduleFixedInterval>>();
             var exist = modelEnergyCollection.Schedules.OfType<IIDdBase>().Any(_ => _.Identifier == schedule.Identifier);
             if (exist)
                 return;
@@ -275,6 +287,7 @@ namespace HoneybeeSchema
         }
         public static void AddSchedules(this ModelEnergyProperties modelEnergyCollection, List<IDdEnergyBaseModel> schedules)
         {
+            if (schedules == null) return;
             foreach (var item in schedules)
             {
                 modelEnergyCollection.AddSchedule(item);
@@ -283,6 +296,7 @@ namespace HoneybeeSchema
 
         public static void AddScheduleTypeLimit(this ModelEnergyProperties modelEnergyCollection,  ScheduleTypeLimit scheduleTypeLimit)
         {
+            modelEnergyCollection.ScheduleTypeLimits = modelEnergyCollection.ScheduleTypeLimits ?? new List<ScheduleTypeLimit>();
             var exist = modelEnergyCollection.ScheduleTypeLimits.Any(_ => _.Identifier == scheduleTypeLimit.Identifier);
             if (exist)
                 return;
@@ -299,6 +313,7 @@ namespace HoneybeeSchema
         }
         public static void AddScheduleTypeLimits(this ModelEnergyProperties modelEnergyCollection, List<ScheduleTypeLimit> scheduleTypeLimits)
         {
+            if (scheduleTypeLimits == null) return;
             foreach (var item in scheduleTypeLimits)
             {
                 modelEnergyCollection.AddScheduleTypeLimit(item);
@@ -308,6 +323,7 @@ namespace HoneybeeSchema
 
         public static void AddModifier(this ModelRadianceProperties modelRadianceCollection, ModifierBase modifier)
         {
+            modelRadianceCollection.Modifiers = modelRadianceCollection.Modifiers ?? new List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>>();
             var exist = modelRadianceCollection.Modifiers.OfType<ModifierBase>().Any(_ => _.Identifier == modifier.Identifier);
             if (exist)
                 return;
@@ -344,6 +360,7 @@ namespace HoneybeeSchema
         }
         public static void AddModifiers(this ModelRadianceProperties modelRadianceCollection, List<ModifierBase> modifiers)
         {
+            if (modifiers == null) return;
             foreach (var item in modifiers)
             {
                 modelRadianceCollection.AddModifier(item);
@@ -352,6 +369,7 @@ namespace HoneybeeSchema
 
         public static void AddModifierSet(this ModelRadianceProperties modelRadianceCollection, IDdRadianceBaseModel modifierSet)
         {
+            modelRadianceCollection.ModifierSets = modelRadianceCollection.ModifierSets ?? new List<AnyOf<ModifierSet, ModifierSetAbridged>>();
             var exist = modelRadianceCollection.ModifierSets.OfType<IDdRadianceBaseModel>().Any(_ => _.Identifier == modifierSet.Identifier);
             if (exist)
                 return;
@@ -370,6 +388,7 @@ namespace HoneybeeSchema
         }
         public static void AddModifierSets(this ModelRadianceProperties modelRadianceCollection, List<IDdRadianceBaseModel> modifierSets)
         {
+            if (modifierSets == null) return;
             foreach (var item in modifierSets)
             {
                 modelRadianceCollection.AddModifierSet(item);
