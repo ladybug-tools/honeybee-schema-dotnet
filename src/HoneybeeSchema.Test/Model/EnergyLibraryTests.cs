@@ -12,7 +12,7 @@ namespace HoneybeeSchema.Test
         [Test]
         public void InModelEnergyPropertiesTest()
         {
-            var modelEnergyProperties = Helper.EnergyLibrary.InModelEnergyProperties;
+            var modelEnergyProperties = ModelEnergyProperties.Default;
             var opqs = modelEnergyProperties.Constructions.OfType<OpaqueConstructionAbridged>();
             Assert.IsTrue(opqs.Any());
         }
