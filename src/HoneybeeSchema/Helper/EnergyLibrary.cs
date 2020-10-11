@@ -1022,39 +1022,39 @@ namespace HoneybeeSchema.Helper
             return construction.Layers.Select(_ => GetWindowMaterialByIdentifier(_)).ToList();
         }
 
-        private static HB.ModelEnergyProperties _inModelEnergyProperties;
-        /// <summary>
-        /// This is a temporary placeholder for keeping in model resource objects.
-        /// </summary>
-        public static HB.ModelEnergyProperties InModelEnergyProperties
-        {
-            get
-            {
-                _inModelEnergyProperties = _inModelEnergyProperties ?? ModelEnergyProperties.Default;
-                return _inModelEnergyProperties;
-            }
-            set
-            {
-                _inModelEnergyProperties = value;
-            }
-        }
+        //private static HB.ModelEnergyProperties _inModelEnergyProperties;
+        ///// <summary>
+        ///// This is a temporary placeholder for keeping in model resource objects.
+        ///// </summary>
+        //public static HB.ModelEnergyProperties InModelEnergyProperties
+        //{
+        //    get
+        //    {
+        //        _inModelEnergyProperties = _inModelEnergyProperties ?? ModelEnergyProperties.Default.DuplicateModelEnergyProperties();
+        //        return _inModelEnergyProperties;
+        //    }
+        //    set
+        //    {
+        //        _inModelEnergyProperties = value;
+        //    }
+        //}
 
-        private static HB.ModelRadianceProperties _inModelRadianceProperties;
-        /// <summary>
-        /// This is a temporary placeholder for keeping in model resource objects.
-        /// </summary>
-        public static HB.ModelRadianceProperties InModelRadianceProperties
-        {
-            get
-            {
-                _inModelRadianceProperties = _inModelRadianceProperties ?? ModelRadianceProperties.Default;
-                return _inModelRadianceProperties;
-            }
-            set
-            {
-                _inModelRadianceProperties = value;
-            }
-        }
+        //private static HB.ModelRadianceProperties _inModelRadianceProperties;
+        ///// <summary>
+        ///// This is a temporary placeholder for keeping in model resource objects.
+        ///// </summary>
+        //public static HB.ModelRadianceProperties InModelRadianceProperties
+        //{
+        //    get
+        //    {
+        //        _inModelRadianceProperties = _inModelRadianceProperties ?? ModelRadianceProperties.Default.DuplicateModelRadianceProperties();
+        //        return _inModelRadianceProperties;
+        //    }
+        //    set
+        //    {
+        //        _inModelRadianceProperties = value;
+        //    }
+        //}
 
         #endregion
 
