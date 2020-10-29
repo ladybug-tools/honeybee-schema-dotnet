@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import shutil
 
 
 args = sys.argv[1:]
@@ -26,3 +27,13 @@ config_data["packageVersion"] = version
 with open(config_file, "w") as jsonFile:
     json.dump(config_data, jsonFile, indent=4)
 
+
+def cleanup(projectName):
+    root = os.path.dirname(os.path.dirname(__file__))
+    # remove Model folder
+    target_folder = os.path.join(root, 'src', projectName, 'Model')
+    if os.path.exists(target_folder):
+        shutil.rmtree(target_folder)
+
+
+cleanup("HoneybeeSchema")
