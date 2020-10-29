@@ -2,7 +2,7 @@ import os
 import urllib.request
 import json
 import shutil
-
+import sys
 
 def download(url, dir):
     json_url = urllib.request.urlopen(url)
@@ -22,8 +22,15 @@ if os.path.exists(saving_dir):
     shutil.rmtree(saving_dir)
 os.mkdir(saving_dir)
 
+base_url = "https://www.ladybug.tools/honeybee-schema"
+
+args = sys.argv[1:]
+if args != []:
+    base_url = args[0] 
+
+
 # downlaod model
-json_file = "https://www.ladybug.tools/honeybee-schema/model_inheritance.json"
+json_file = f"{base_url}/model_inheritance.json"
 download(json_file, saving_dir)
 
 # download model mapper
@@ -31,7 +38,7 @@ mapper_json = json_file.replace("inheritance.json", "mapper.json")
 download(mapper_json, saving_dir)
 
 # downlaod simulation-parameter
-json_file = "https://www.ladybug.tools/honeybee-schema/simulation-parameter_inheritance.json"
+json_file = f"{base_url}/simulation-parameter_inheritance.json"
 download(json_file, saving_dir)
 
 # download simulation-parameter mapper
