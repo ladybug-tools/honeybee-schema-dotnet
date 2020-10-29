@@ -19,7 +19,7 @@ jobs:
       - name: Build
         run: |
           dotnet restore
-          dotnet build --configuration Release /nowarn:CS0472,CS0108
+          dotnet build --configuration Release 
 
       - name: Run Unit Tests
         working-directory: src/HoneybeeSchema.Test

@@ -34,7 +34,7 @@ jobs:
 
     - name: "Install OpenAPI-generator"
       run: |
-        npm install @openapitools/openapi-generator-cli@cli-4.3.0 -g
+        npm install @openapitools/openapi-generator-cli@cli-4.3.0
       
     - name: "Run Update Script"
       env:
