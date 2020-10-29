@@ -1,7 +1,6 @@
 import os
 import sys
 import json
-import urllib.request
 
 lib_Name = 'HoneybeeSchema'
 
@@ -12,13 +11,9 @@ source_folder = os.path.join(root, 'src', lib_Name, 'Model')
 def gen_interfaces(source_json):
     interface_dir = os.path.join(root, 'src', lib_Name, 'Interface')
 
-    if source_json.startswith('https:'):
-        json_url = urllib.request.urlopen(source_json)
-        data = json.loads(json_url.read())
-    else:
-        with open(source_json, "rb") as jsonFile:
-            data = json.load(jsonFile)
-    
+    with open(source_json, "rb") as jsonFile:
+        data = json.load(jsonFile)
+
     interfaces = {}
     classItems = data['classes']
 

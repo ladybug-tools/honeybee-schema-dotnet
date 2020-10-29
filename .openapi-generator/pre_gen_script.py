@@ -1,19 +1,16 @@
 import os
 import sys
-import urllib.request
 import json
 
 
 args = sys.argv[1:]
 version = ""
 
-if args == []:
-    source_json_url = "https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/gh-pages/model.json"
-    json_url = urllib.request.urlopen(source_json_url)
-    data = json.loads(json_url.read())
+model_json = args[0]
+with open(model_json, "r") as jsonFile:
+    data = json.load(jsonFile)
     version = data['info']['version']
-else:
-    version = args[0]
+
 
 print(version)
 version = version.replace('v', '')
@@ -28,5 +25,4 @@ config_data["packageVersion"] = version
 
 with open(config_file, "w") as jsonFile:
     json.dump(config_data, jsonFile, indent=4)
-
 

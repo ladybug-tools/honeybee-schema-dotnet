@@ -3,7 +3,7 @@
 #   npm install @openapitools/openapi-generator-cli@cli-4.3.0
 
 python .openapi-generator/downloadHoneybeeSchema.py
-python .openapi-generator/pre_gen_script.py
+python .openapi-generator/pre_gen_script.py ".openapi-docs/model_inheritance.json"
 
 npx openapi-generator generate -i ".openapi-docs/simulation-parameter_inheritance.json"  -t ".openapi-generator/templates/csharp" -g csharp -o . --skip-validate-spec -c .openapi-generator/config.json  
 npx openapi-generator generate -i ".openapi-docs/model_inheritance.json"  -t ".openapi-generator/templates/csharp" -g csharp -o . --skip-validate-spec -c .openapi-generator/config.json 

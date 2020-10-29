@@ -1,6 +1,5 @@
 import os
 import sys
-import urllib.request
 import json
 import shutil
 import re
@@ -64,46 +63,16 @@ def fix_constructor(read_data):
 
 
 def get_enums(mapperJson):
-    if mapperJson.startswith('https:'):
-        json_url = urllib.request.urlopen(mapperJson)
-        data = json.loads(json_url.read())
-    else:
-        with open(mapperJson, "rb") as jsonFile:
-            data = json.load(jsonFile)
-    enumItems = data['enums']
-    full_enum_names = []
-    for key in enumItems.keys():
-        name_space = enumItems[key].title().replace('_', '', 1).split('.')[0]
-        full_enum_name = f"{name_space}.{key}" #HoneybeeSchema.Roughness
-        full_enum_names.append(full_enum_name)
+    with open(mapperJson, "rb") as jsonFile:
+        data = json.load(jsonFile)
+        enumItems = data['enums']
+        full_enum_names = []
+        for key in enumItems.keys():
+            name_space = enumItems[key].title().replace('_', '', 1).split('.')[0]
+            full_enum_name = f"{name_space}.{key}" #HoneybeeSchema.Roughness
+            full_enum_names.append(full_enum_name)
 
     return full_enum_names
-
-
-def fix_enums(read_data, enumTypes):
-    
-    regexs = [
-        r"\"{3}Enum"
-    ]
-
-    for eType in enumTypes:
-        name = eType.split('.')[-1]
-        regexs.append(f"{name}Enum\"\"\"")
-
-
-    replace_new = [
-        "",  # remove """Enum
-    ]
-
-    for eType in enumTypes:
-        replace_new.append(f"{eType}.")
-
-    data = read_data
-    for i, rex in enumerate(regexs):
-        replace = replace_new[i]
-        if re.findall(rex, data) != []:
-            data = re.sub(rex, replace, data)
-    return data
 
 
 def replace_decimal(read_data):
@@ -129,25 +98,17 @@ def replace_anyof_type(read_data, anyof_types):
     return data
 
 
-def check_csfiles(source_folder, anyof_types, enum_types):
+def check_csfiles(source_folder, anyof_types):
     # go through all files and replce AnyOf types
 
     class_files = [x for x in os.listdir(source_folder) if x.endswith(".cs")]
-    enums_tobe_removed =[]
-    for eType in enum_types:
-        if not eType.startswith(name_space):
-            enums_tobe_removed.append(eType.split('.')[-1])
+
 
     for f in class_files:
         cs_file = os.path.join(source_folder, f)
         # remove enum file
         class_name = f"{f.split('/')[-1].replace('.cs','')}"
 
-        if class_name in enums_tobe_removed:
-            print(f"Removing {class_name}")
-            os.remove(cs_file)
-            continue
-        
         print("\n-Checking %s" % cs_file)
         # read data
         f = open(cs_file, "rt", encoding='utf-8')
@@ -157,7 +118,6 @@ def check_csfiles(source_folder, anyof_types, enum_types):
         # replace decimal/number to double
         # data = replace_decimal(data)
         data = fix_constructor(data)
-        data = fix_enums(data, enum_types)
         f.close()
 
         # save data
@@ -170,12 +130,9 @@ def get_allof_types_from_json(source_json_url):
     # load schema json, and get all union types
     unitItem = []
 
-    if source_json_url.startswith('https:'):
-        json_url = urllib.request.urlopen(source_json_url)
-        data = json.loads(json_url.read())
-    else:
-        with open(source_json_url, "rb") as jsonFile:
-            data = json.load(jsonFile)
+    with open(source_json_url, "rb") as jsonFile:
+        data = json.load(jsonFile)
+
     for sn, sp in data['components']['schemas'].items():
         if 'properties' in sp:
             props = sp['properties']
@@ -193,12 +150,10 @@ def get_allof_types_from_json(source_json_url):
 
 def check_types(source_json_url, mapper_json):
     all_types = get_allof_types_from_json(source_json_url)
-    # fix enum parameters with default value
-    enumTypes = get_enums(mapper_json)
 
     root = os.path.dirname(os.path.dirname(__file__))
     source_folder = os.path.join(root, 'src', name_space, 'Model')
-    check_csfiles(source_folder, all_types, enumTypes)
+    check_csfiles(source_folder, all_types)
 
 
 def cleanup(projectName):
