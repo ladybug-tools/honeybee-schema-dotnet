@@ -54,32 +54,11 @@ namespace HoneybeeSchema
             this.Modifier = modifier;
             this.Dependencies = dependencies;
             // use default value if no "rEmittance" provided
-            if (rEmittance == null)
-            {
-                this.REmittance = 0.0D;
-            }
-            else
-            {
-                this.REmittance = rEmittance;
-            }
+            this.REmittance = rEmittance ?? 0.0D;
             // use default value if no "gEmittance" provided
-            if (gEmittance == null)
-            {
-                this.GEmittance = 0.0D;
-            }
-            else
-            {
-                this.GEmittance = gEmittance;
-            }
+            this.GEmittance = gEmittance ?? 0.0D;
             // use default value if no "bEmittance" provided
-            if (bEmittance == null)
-            {
-                this.BEmittance = 0.0D;
-            }
-            else
-            {
-                this.BEmittance = bEmittance;
-            }
+            this.BEmittance = bEmittance ?? 0.0D;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "light";
@@ -90,35 +69,30 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Material modifier (default: Void).</value>
         [DataMember(Name="modifier", EmitDefaultValue=false)]
-        [JsonProperty("modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> Modifier { get; set; } 
         /// <summary>
         /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).
         /// </summary>
         /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).</value>
         [DataMember(Name="dependencies", EmitDefaultValue=false)]
-        [JsonProperty("dependencies")]
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Dependencies { get; set; } 
         /// <summary>
         /// A value between 0 and 1 for the red channel of the modifier (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the red channel of the modifier (default: 0).</value>
         [DataMember(Name="r_emittance", EmitDefaultValue=false)]
-        [JsonProperty("r_emittance")]
         public double REmittance { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the green channel of the modifier (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the green channel of the modifier (default: 0).</value>
         [DataMember(Name="g_emittance", EmitDefaultValue=false)]
-        [JsonProperty("g_emittance")]
         public double GEmittance { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the blue channel of the modifier (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the blue channel of the modifier (default: 0).</value>
         [DataMember(Name="b_emittance", EmitDefaultValue=false)]
-        [JsonProperty("b_emittance")]
         public double BEmittance { get; set; }  = 0.0D;
         
         /// <summary>

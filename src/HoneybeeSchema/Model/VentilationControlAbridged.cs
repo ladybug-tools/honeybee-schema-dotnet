@@ -46,50 +46,15 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             // use default value if no "minIndoorTemperature" provided
-            if (minIndoorTemperature == null)
-            {
-                this.MinIndoorTemperature = -100D;
-            }
-            else
-            {
-                this.MinIndoorTemperature = minIndoorTemperature;
-            }
+            this.MinIndoorTemperature = minIndoorTemperature ?? -100D;
             // use default value if no "maxIndoorTemperature" provided
-            if (maxIndoorTemperature == null)
-            {
-                this.MaxIndoorTemperature = 100D;
-            }
-            else
-            {
-                this.MaxIndoorTemperature = maxIndoorTemperature;
-            }
+            this.MaxIndoorTemperature = maxIndoorTemperature ?? 100D;
             // use default value if no "minOutdoorTemperature" provided
-            if (minOutdoorTemperature == null)
-            {
-                this.MinOutdoorTemperature = -100D;
-            }
-            else
-            {
-                this.MinOutdoorTemperature = minOutdoorTemperature;
-            }
+            this.MinOutdoorTemperature = minOutdoorTemperature ?? -100D;
             // use default value if no "maxOutdoorTemperature" provided
-            if (maxOutdoorTemperature == null)
-            {
-                this.MaxOutdoorTemperature = 100D;
-            }
-            else
-            {
-                this.MaxOutdoorTemperature = maxOutdoorTemperature;
-            }
+            this.MaxOutdoorTemperature = maxOutdoorTemperature ?? 100D;
             // use default value if no "deltaTemperature" provided
-            if (deltaTemperature == null)
-            {
-                this.DeltaTemperature = -100D;
-            }
-            else
-            {
-                this.DeltaTemperature = deltaTemperature;
-            }
+            this.DeltaTemperature = deltaTemperature ?? -100D;
             this.Schedule = schedule;
 
             // Set non-required readonly properties with defaultValue
@@ -101,42 +66,36 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A number for the minimum indoor temperature at which to ventilate in Celsius. Typically, this variable is used to initiate ventilation.</value>
         [DataMember(Name="min_indoor_temperature", EmitDefaultValue=false)]
-        [JsonProperty("min_indoor_temperature")]
         public double MinIndoorTemperature { get; set; }  = -100D;
         /// <summary>
         /// A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a maximum temperature at which point ventilation is stopped and a cooling system is turned on.
         /// </summary>
         /// <value>A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a maximum temperature at which point ventilation is stopped and a cooling system is turned on.</value>
         [DataMember(Name="max_indoor_temperature", EmitDefaultValue=false)]
-        [JsonProperty("max_indoor_temperature")]
         public double MaxIndoorTemperature { get; set; }  = 100D;
         /// <summary>
         /// A number for the minimum outdoor temperature at which to ventilate in Celsius. This can be used to ensure ventilative cooling does not happen during the winter even if the Room is above the min_indoor_temperature.
         /// </summary>
         /// <value>A number for the minimum outdoor temperature at which to ventilate in Celsius. This can be used to ensure ventilative cooling does not happen during the winter even if the Room is above the min_indoor_temperature.</value>
         [DataMember(Name="min_outdoor_temperature", EmitDefaultValue=false)]
-        [JsonProperty("min_outdoor_temperature")]
         public double MinOutdoorTemperature { get; set; }  = -100D;
         /// <summary>
         /// A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a limit for when it is considered too hot outside for ventilative cooling.
         /// </summary>
         /// <value>A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a limit for when it is considered too hot outside for ventilative cooling.</value>
         [DataMember(Name="max_outdoor_temperature", EmitDefaultValue=false)]
-        [JsonProperty("max_outdoor_temperature")]
         public double MaxOutdoorTemperature { get; set; }  = 100D;
         /// <summary>
         /// A number for the temperature differential in Celsius between indoor and outdoor below which ventilation is shut off.  This should usually be a positive number so that ventilation only occurs when the outdoors is cooler than the indoors. Negative numbers indicate how much hotter the outdoors can be than the indoors before ventilation is stopped.
         /// </summary>
         /// <value>A number for the temperature differential in Celsius between indoor and outdoor below which ventilation is shut off.  This should usually be a positive number so that ventilation only occurs when the outdoors is cooler than the indoors. Negative numbers indicate how much hotter the outdoors can be than the indoors before ventilation is stopped.</value>
         [DataMember(Name="delta_temperature", EmitDefaultValue=false)]
-        [JsonProperty("delta_temperature")]
         public double DeltaTemperature { get; set; }  = -100D;
         /// <summary>
         /// Identifier of the schedule for the ventilation over the course of the year. Note that this is applied on top of any setpoints. The type of this schedule should be On/Off and values should be either 0 (no possibility of ventilation) or 1 (ventilation possible).
         /// </summary>
         /// <value>Identifier of the schedule for the ventilation over the course of the year. Note that this is applied on top of any setpoints. The type of this schedule should be On/Off and values should be either 0 (no possibility of ventilation) or 1 (ventilation possible).</value>
         [DataMember(Name="schedule", EmitDefaultValue=false)]
-        [JsonProperty("schedule")]
         public string Schedule { get; set; } 
         
         /// <summary>

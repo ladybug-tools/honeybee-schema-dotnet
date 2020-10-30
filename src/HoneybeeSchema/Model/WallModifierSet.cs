@@ -53,14 +53,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A radiance modifier object for faces with an Outdoors boundary condition.</value>
         [DataMember(Name="exterior_modifier", EmitDefaultValue=false)]
-        [JsonProperty("exterior_modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> ExteriorModifier { get; set; } 
         /// <summary>
         /// A radiance modifier object for faces with a boundary condition other than Outdoors.
         /// </summary>
         /// <value>A radiance modifier object for faces with a boundary condition other than Outdoors.</value>
         [DataMember(Name="interior_modifier", EmitDefaultValue=false)]
-        [JsonProperty("interior_modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> InteriorModifier { get; set; } 
         
         /// <summary>

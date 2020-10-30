@@ -48,25 +48,9 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             // to ensure "vertices" is required (not null)
-            if (vertices == null)
-            {
-                throw new InvalidDataException("vertices is a required property for Mesh3D and cannot be null");
-            }
-            else
-            {
-                this.Vertices = vertices;
-            }
-            
+            this.Vertices = vertices ?? throw new ArgumentNullException("vertices is a required property for Mesh3D and cannot be null");
             // to ensure "faces" is required (not null)
-            if (faces == null)
-            {
-                throw new InvalidDataException("faces is a required property for Mesh3D and cannot be null");
-            }
-            else
-            {
-                this.Faces = faces;
-            }
-            
+            this.Faces = faces ?? throw new ArgumentNullException("faces is a required property for Mesh3D and cannot be null");
             this.Colors = colors;
 
             // Set non-required readonly properties with defaultValue
@@ -78,21 +62,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A list of points representing the vertices of the mesh. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.</value>
         [DataMember(Name="vertices", EmitDefaultValue=false)]
-        [JsonProperty("vertices")]
         public List<List<double>> Vertices { get; set; } 
         /// <summary>
         /// A list of lists with each sub-list having either 3 or 4 integers. These integers correspond to indices within the list of vertices.
         /// </summary>
         /// <value>A list of lists with each sub-list having either 3 or 4 integers. These integers correspond to indices within the list of vertices.</value>
         [DataMember(Name="faces", EmitDefaultValue=false)]
-        [JsonProperty("faces")]
         public List<List<int>> Faces { get; set; } 
         /// <summary>
         /// An optional list of colors that correspond to either the faces of the mesh or the vertices of the mesh.
         /// </summary>
         /// <value>An optional list of colors that correspond to either the faces of the mesh or the vertices of the mesh.</value>
         [DataMember(Name="colors", EmitDefaultValue=false)]
-        [JsonProperty("colors")]
         public List<Color> Colors { get; set; } 
         
         /// <summary>

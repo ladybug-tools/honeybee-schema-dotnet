@@ -51,15 +51,7 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName, roomIdentifier: roomIdentifier, lightPath: lightPath)// BaseClass
         {
             // to ensure "sensors" is required (not null)
-            if (sensors == null)
-            {
-                throw new InvalidDataException("sensors is a required property for SensorGrid and cannot be null");
-            }
-            else
-            {
-                this.Sensors = sensors;
-            }
-            
+            this.Sensors = sensors ?? throw new ArgumentNullException("sensors is a required property for SensorGrid and cannot be null");
             this.Mesh = mesh;
 
             // Set non-required readonly properties with defaultValue
@@ -71,14 +63,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A list of sensors that belong to the grid.</value>
         [DataMember(Name="sensors", EmitDefaultValue=false)]
-        [JsonProperty("sensors")]
         public List<Sensor> Sensors { get; set; } 
         /// <summary>
         /// An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D.
         /// </summary>
         /// <value>An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D.</value>
         [DataMember(Name="mesh", EmitDefaultValue=false)]
-        [JsonProperty("mesh")]
         public Mesh3D Mesh { get; set; } 
         
         /// <summary>

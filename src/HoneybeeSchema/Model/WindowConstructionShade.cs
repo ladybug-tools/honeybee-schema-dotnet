@@ -35,13 +35,13 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the \&quot;Between\&quot; option. Also note that, for a WindowConstruction with more than one gas gap, the \&quot;Between\&quot; option defalts to using the inner gap as this is the only option that EnergyPlus supports.</value>
         [DataMember(Name="shade_location", EmitDefaultValue=false)]
-        public ShadeLocation? ShadeLocation { get; set; }   
+        public ShadeLocation ShadeLocation { get; set; }   
         /// <summary>
         /// Text to indicate how the shading device is controlled, which determines when the shading is “on” or “off.”
         /// </summary>
         /// <value>Text to indicate how the shading device is controlled, which determines when the shading is “on” or “off.”</value>
         [DataMember(Name="control_type", EmitDefaultValue=false)]
-        public ControlType? ControlType { get; set; }   
+        public ControlType ControlType { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowConstructionShade" /> class.
         /// </summary>
@@ -65,25 +65,9 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "windowConstruction" is required (not null)
-            if (windowConstruction == null)
-            {
-                throw new InvalidDataException("windowConstruction is a required property for WindowConstructionShade and cannot be null");
-            }
-            else
-            {
-                this.WindowConstruction = windowConstruction;
-            }
-            
+            this.WindowConstruction = windowConstruction ?? throw new ArgumentNullException("windowConstruction is a required property for WindowConstructionShade and cannot be null");
             // to ensure "shadeMaterial" is required (not null)
-            if (shadeMaterial == null)
-            {
-                throw new InvalidDataException("shadeMaterial is a required property for WindowConstructionShade and cannot be null");
-            }
-            else
-            {
-                this.ShadeMaterial = shadeMaterial;
-            }
-            
+            this.ShadeMaterial = shadeMaterial ?? throw new ArgumentNullException("shadeMaterial is a required property for WindowConstructionShade and cannot be null");
             this.ShadeLocation = shadeLocation;
             this.ControlType = controlType;
             this.Setpoint = setpoint;
@@ -98,28 +82,24 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A WindowConstruction object that serves as the \&quot;switched off\&quot; version of the construction (aka. the \&quot;bare construction\&quot;). The shade_material and shade_location will be used to modify this starting construction.</value>
         [DataMember(Name="window_construction", EmitDefaultValue=false)]
-        [JsonProperty("window_construction")]
         public WindowConstruction WindowConstruction { get; set; } 
         /// <summary>
         /// Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly.
         /// </summary>
         /// <value>Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly.</value>
         [DataMember(Name="shade_material", EmitDefaultValue=false)]
-        [JsonProperty("shade_material")]
         public AnyOf<EnergyWindowMaterialShade,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing> ShadeMaterial { get; set; } 
         /// <summary>
         /// A number that corresponds to the specified control_type. This can be a value in (W/m2), (C) or (W) depending upon the control type.Note that this value cannot be None for any control type except \&quot;AlwaysOn.\&quot;
         /// </summary>
         /// <value>A number that corresponds to the specified control_type. This can be a value in (W/m2), (C) or (W) depending upon the control type.Note that this value cannot be None for any control type except \&quot;AlwaysOn.\&quot;</value>
         [DataMember(Name="setpoint", EmitDefaultValue=false)]
-        [JsonProperty("setpoint")]
         public double Setpoint { get; set; } 
         /// <summary>
         /// An optional ScheduleRuleset or ScheduleFixedInterval to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction.
         /// </summary>
         /// <value>An optional ScheduleRuleset or ScheduleFixedInterval to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction.</value>
         [DataMember(Name="schedule", EmitDefaultValue=false)]
-        [JsonProperty("schedule")]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; } 
         
         /// <summary>

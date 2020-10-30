@@ -48,15 +48,7 @@ namespace HoneybeeSchema
         ) : base(date: date, daylightSavings: daylightSavings )// BaseClass
         {
             // to ensure "clearness" is required (not null)
-            if (clearness == null)
-            {
-                throw new InvalidDataException("clearness is a required property for ASHRAEClearSky and cannot be null");
-            }
-            else
-            {
-                this.Clearness = clearness;
-            }
-            
+            this.Clearness = clearness ?? throw new ArgumentNullException("clearness is a required property for ASHRAEClearSky and cannot be null");
 
             // Set non-required readonly properties with defaultValue
             this.Type = "ASHRAEClearSky";
@@ -67,7 +59,6 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.</value>
         [DataMember(Name="clearness", EmitDefaultValue=false)]
-        [JsonProperty("clearness")]
         public double Clearness { get; set; } 
         
         /// <summary>

@@ -34,19 +34,19 @@ namespace HoneybeeSchema
         /// Gets or Sets SolarDistribution
         /// </summary>
         [DataMember(Name="solar_distribution", EmitDefaultValue=false)]
-        public SolarDistribution? SolarDistribution { get; set; }   
+        public SolarDistribution SolarDistribution { get; set; }   
         /// <summary>
         /// Text noting whether CPU-based polygon clipping method orGPU-based pixel counting method should be used. For low numbers of shadingsurfaces (less than ~200), PolygonClipping requires less runtime thanPixelCounting. However, PixelCounting runtime scales significantlybetter at higher numbers of shading surfaces. PixelCounting also hasno limitations related to zone concavity when used with any“FullInterior” solar distribution options.
         /// </summary>
         /// <value>Text noting whether CPU-based polygon clipping method orGPU-based pixel counting method should be used. For low numbers of shadingsurfaces (less than ~200), PolygonClipping requires less runtime thanPixelCounting. However, PixelCounting runtime scales significantlybetter at higher numbers of shading surfaces. PixelCounting also hasno limitations related to zone concavity when used with any“FullInterior” solar distribution options.</value>
         [DataMember(Name="calculation_method", EmitDefaultValue=false)]
-        public CalculationMethod? CalculationMethod { get; set; }   
+        public CalculationMethod CalculationMethod { get; set; }   
         /// <summary>
         /// Text describing how often the solar and shading calculations are updated with respect to the flow of time in the simulation.
         /// </summary>
         /// <value>Text describing how often the solar and shading calculations are updated with respect to the flow of time in the simulation.</value>
         [DataMember(Name="calculation_update_method", EmitDefaultValue=false)]
-        public CalculationUpdateMethod? CalculationUpdateMethod { get; set; }   
+        public CalculationUpdateMethod CalculationUpdateMethod { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="ShadowCalculation" /> class.
         /// </summary>
@@ -65,23 +65,9 @@ namespace HoneybeeSchema
             this.CalculationMethod = calculationMethod;
             this.CalculationUpdateMethod = calculationUpdateMethod;
             // use default value if no "calculationFrequency" provided
-            if (calculationFrequency == null)
-            {
-                this.CalculationFrequency = 30;
-            }
-            else
-            {
-                this.CalculationFrequency = calculationFrequency;
-            }
+            this.CalculationFrequency = calculationFrequency ?? 30;
             // use default value if no "maximumFigures" provided
-            if (maximumFigures == null)
-            {
-                this.MaximumFigures = 15000;
-            }
-            else
-            {
-                this.MaximumFigures = maximumFigures;
-            }
+            this.MaximumFigures = maximumFigures ?? 15000;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "ShadowCalculation";
@@ -92,14 +78,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Integer for the number of days in each period for which a unique shadow calculation will be performed. This field is only used if the Periodic calculation_method is used.</value>
         [DataMember(Name="calculation_frequency", EmitDefaultValue=false)]
-        [JsonProperty("calculation_frequency")]
         public int CalculationFrequency { get; set; }  = 30;
         /// <summary>
         /// Number of allowable figures in shadow overlap calculations.
         /// </summary>
         /// <value>Number of allowable figures in shadow overlap calculations.</value>
         [DataMember(Name="maximum_figures", EmitDefaultValue=false)]
-        [JsonProperty("maximum_figures")]
         public int MaximumFigures { get; set; }  = 15000;
         
         /// <summary>

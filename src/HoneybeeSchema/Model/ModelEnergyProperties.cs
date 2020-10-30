@@ -65,56 +65,48 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>List of all unique ConstructionSets in the Model.</value>
         [DataMember(Name="construction_sets", EmitDefaultValue=false)]
-        [JsonProperty("construction_sets")]
         public List<AnyOf<ConstructionSetAbridged,ConstructionSet>> ConstructionSets { get; set; } 
         /// <summary>
         /// A list of all unique constructions in the model. This includes constructions across all Faces, Apertures, Doors, Shades, Room ConstructionSets, and the global_construction_set.
         /// </summary>
         /// <value>A list of all unique constructions in the model. This includes constructions across all Faces, Apertures, Doors, Shades, Room ConstructionSets, and the global_construction_set.</value>
         [DataMember(Name="constructions", EmitDefaultValue=false)]
-        [JsonProperty("constructions")]
         public List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,WindowConstructionShadeAbridged,AirBoundaryConstructionAbridged,OpaqueConstruction,WindowConstruction,WindowConstructionShade,AirBoundaryConstruction,ShadeConstruction>> Constructions { get; set; } 
         /// <summary>
         /// A list of all unique materials in the model. This includes materials needed to make the Model constructions.
         /// </summary>
         /// <value>A list of all unique materials in the model. This includes materials needed to make the Model constructions.</value>
         [DataMember(Name="materials", EmitDefaultValue=false)]
-        [JsonProperty("materials")]
         public List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing,EnergyWindowMaterialShade>> Materials { get; set; } 
         /// <summary>
         /// List of all unique HVAC systems in the Model.
         /// </summary>
         /// <value>List of all unique HVAC systems in the Model.</value>
         [DataMember(Name="hvacs", EmitDefaultValue=false)]
-        [JsonProperty("hvacs")]
         public List<AnyOf<IdealAirSystemAbridged,VAV,PVAV,PSZ,PTAC,ForcedAirFurnace,FCUwithDOAS,WSHPwithDOAS,VRFwithDOAS,FCU,WSHP,VRF,Baseboard,EvaporativeCooler,Residential,WindowAC,GasUnitHeater>> Hvacs { get; set; } 
         /// <summary>
         /// List of all unique ProgramTypes in the Model.
         /// </summary>
         /// <value>List of all unique ProgramTypes in the Model.</value>
         [DataMember(Name="program_types", EmitDefaultValue=false)]
-        [JsonProperty("program_types")]
         public List<AnyOf<ProgramTypeAbridged,ProgramType>> ProgramTypes { get; set; } 
         /// <summary>
         /// A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades.
         /// </summary>
         /// <value>A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades.</value>
         [DataMember(Name="schedules", EmitDefaultValue=false)]
-        [JsonProperty("schedules")]
         public List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged,ScheduleRuleset,ScheduleFixedInterval>> Schedules { get; set; } 
         /// <summary>
         /// A list of all unique ScheduleTypeLimits in the model. This all ScheduleTypeLimits needed to make the Model schedules.
         /// </summary>
         /// <value>A list of all unique ScheduleTypeLimits in the model. This all ScheduleTypeLimits needed to make the Model schedules.</value>
         [DataMember(Name="schedule_type_limits", EmitDefaultValue=false)]
-        [JsonProperty("schedule_type_limits")]
         public List<ScheduleTypeLimit> ScheduleTypeLimits { get; set; } 
         /// <summary>
         /// An optional parameter to define the global parameters for a ventilation cooling.
         /// </summary>
         /// <value>An optional parameter to define the global parameters for a ventilation cooling.</value>
         [DataMember(Name="ventilation_simulation_control", EmitDefaultValue=false)]
-        [JsonProperty("ventilation_simulation_control")]
         public VentilationSimulationControl VentilationSimulationControl { get; set; } 
         
         /// <summary>

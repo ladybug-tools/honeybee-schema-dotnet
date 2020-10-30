@@ -56,14 +56,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A Face3D for the view matrix geometry (default: None).</value>
         [DataMember(Name="vmtx_geometry", EmitDefaultValue=false)]
-        [JsonProperty("vmtx_geometry")]
         public Face3D VmtxGeometry { get; set; } 
         /// <summary>
         /// A Face3D for the daylight matrix geometry (default: None).
         /// </summary>
         /// <value>A Face3D for the daylight matrix geometry (default: None).</value>
         [DataMember(Name="dmtx_geometry", EmitDefaultValue=false)]
-        [JsonProperty("dmtx_geometry")]
         public Face3D DmtxGeometry { get; set; } 
         
         /// <summary>

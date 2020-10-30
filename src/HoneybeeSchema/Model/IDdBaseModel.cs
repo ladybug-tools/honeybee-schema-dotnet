@@ -48,15 +48,7 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for IDdBaseModel and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
+            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for IDdBaseModel and cannot be null");
             this.DisplayName = displayName;
             this.UserData = userData;
 
@@ -69,21 +61,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters.</value>
         [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
         public string Identifier { get; set; } 
         /// <summary>
         /// Display name of the object with no character restrictions.
         /// </summary>
         /// <value>Display name of the object with no character restrictions.</value>
         [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
         public string DisplayName { get; set; } 
         /// <summary>
         /// Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).
         /// </summary>
         /// <value>Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</value>
         [DataMember(Name="user_data", EmitDefaultValue=false)]
-        [JsonProperty("user_data")]
         public Object UserData { get; set; } 
         
         /// <summary>

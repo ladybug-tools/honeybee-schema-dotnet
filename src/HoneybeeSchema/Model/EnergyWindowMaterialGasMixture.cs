@@ -50,34 +50,11 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "gasTypes" is required (not null)
-            if (gasTypes == null)
-            {
-                throw new InvalidDataException("gasTypes is a required property for EnergyWindowMaterialGasMixture and cannot be null");
-            }
-            else
-            {
-                this.GasTypes = gasTypes;
-            }
-            
+            this.GasTypes = gasTypes ?? throw new ArgumentNullException("gasTypes is a required property for EnergyWindowMaterialGasMixture and cannot be null");
             // to ensure "gasFractions" is required (not null)
-            if (gasFractions == null)
-            {
-                throw new InvalidDataException("gasFractions is a required property for EnergyWindowMaterialGasMixture and cannot be null");
-            }
-            else
-            {
-                this.GasFractions = gasFractions;
-            }
-            
+            this.GasFractions = gasFractions ?? throw new ArgumentNullException("gasFractions is a required property for EnergyWindowMaterialGasMixture and cannot be null");
             // use default value if no "thickness" provided
-            if (thickness == null)
-            {
-                this.Thickness = 0.0125D;
-            }
-            else
-            {
-                this.Thickness = thickness;
-            }
+            this.Thickness = thickness ?? 0.0125D;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "EnergyWindowMaterialGasMixture";
@@ -88,21 +65,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>List of gases in the gas mixture.</value>
         [DataMember(Name="gas_types", EmitDefaultValue=false)]
-        [JsonProperty("gas_types")]
         public List<GasType> GasTypes { get; set; } 
         /// <summary>
         /// A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1.
         /// </summary>
         /// <value>A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1.</value>
         [DataMember(Name="gas_fractions", EmitDefaultValue=false)]
-        [JsonProperty("gas_fractions")]
         public List<double> GasFractions { get; set; } 
         /// <summary>
         /// The thickness of the gas mixture layer in meters.
         /// </summary>
         /// <value>The thickness of the gas mixture layer in meters.</value>
         [DataMember(Name="thickness", EmitDefaultValue=false)]
-        [JsonProperty("thickness")]
         public double Thickness { get; set; }  = 0.0125D;
         
         /// <summary>

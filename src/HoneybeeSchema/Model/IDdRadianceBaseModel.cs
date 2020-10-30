@@ -47,15 +47,7 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             // to ensure "identifier" is required (not null)
-            if (identifier == null)
-            {
-                throw new InvalidDataException("identifier is a required property for IDdRadianceBaseModel and cannot be null");
-            }
-            else
-            {
-                this.Identifier = identifier;
-            }
-            
+            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for IDdRadianceBaseModel and cannot be null");
             this.DisplayName = displayName;
 
             // Set non-required readonly properties with defaultValue
@@ -67,14 +59,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.</value>
         [DataMember(Name="identifier", EmitDefaultValue=false)]
-        [JsonProperty("identifier")]
         public string Identifier { get; set; } 
         /// <summary>
         /// Display name of the object with no character restrictions.
         /// </summary>
         /// <value>Display name of the object with no character restrictions.</value>
         [DataMember(Name="display_name", EmitDefaultValue=false)]
-        [JsonProperty("display_name")]
         public string DisplayName { get; set; } 
         
         /// <summary>

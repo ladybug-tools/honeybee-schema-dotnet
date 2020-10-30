@@ -35,13 +35,13 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text indicating type of ventilation control. Choices are: SingleZone, MultiZoneWithDistribution, MultiZoneWithoutDistribution. The MultiZone options will model air flow with the AirflowNetwork model, which is generally more accurate then the SingleZone option, but will take considerably longer to simulate, and requires defining more ventilation parameters to explicitly account for weather and building-induced pressure differences, and the leakage geometry corresponding to specific windows, doors, and surface cracks.</value>
         [DataMember(Name="vent_control_type", EmitDefaultValue=false)]
-        public VentilationControlType? VentControlType { get; set; }   
+        public VentilationControlType VentControlType { get; set; }   
         /// <summary>
         /// Text indicating relationship between building footprint and height used to calculate the wind pressure coefficients for exterior surfaces.Choices are: LowRise and HighRise. LowRise corresponds to rectangular building whose height is less then three times the width and length of the footprint. HighRise corresponds to a rectangular building whose height is more than three times the width and length of the footprint. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.
         /// </summary>
         /// <value>Text indicating relationship between building footprint and height used to calculate the wind pressure coefficients for exterior surfaces.Choices are: LowRise and HighRise. LowRise corresponds to rectangular building whose height is less then three times the width and length of the footprint. HighRise corresponds to a rectangular building whose height is more than three times the width and length of the footprint. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.</value>
         [DataMember(Name="building_type", EmitDefaultValue=false)]
-        public BuildingType? BuildingType { get; set; }   
+        public BuildingType BuildingType { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="VentilationSimulationControl" /> class.
         /// </summary>
@@ -60,51 +60,16 @@ namespace HoneybeeSchema
         {
             this.VentControlType = ventControlType;
             // use default value if no "referenceTemperature" provided
-            if (referenceTemperature == null)
-            {
-                this.ReferenceTemperature = 20D;
-            }
-            else
-            {
-                this.ReferenceTemperature = referenceTemperature;
-            }
+            this.ReferenceTemperature = referenceTemperature ?? 20D;
             // use default value if no "referencePressure" provided
-            if (referencePressure == null)
-            {
-                this.ReferencePressure = 101325D;
-            }
-            else
-            {
-                this.ReferencePressure = referencePressure;
-            }
+            this.ReferencePressure = referencePressure ?? 101325D;
             // use default value if no "referenceHumidityRatio" provided
-            if (referenceHumidityRatio == null)
-            {
-                this.ReferenceHumidityRatio = 0D;
-            }
-            else
-            {
-                this.ReferenceHumidityRatio = referenceHumidityRatio;
-            }
+            this.ReferenceHumidityRatio = referenceHumidityRatio ?? 0D;
             this.BuildingType = buildingType;
             // use default value if no "longAxisAngle" provided
-            if (longAxisAngle == null)
-            {
-                this.LongAxisAngle = 0D;
-            }
-            else
-            {
-                this.LongAxisAngle = longAxisAngle;
-            }
+            this.LongAxisAngle = longAxisAngle ?? 0D;
             // use default value if no "aspectRatio" provided
-            if (aspectRatio == null)
-            {
-                this.AspectRatio = 1D;
-            }
-            else
-            {
-                this.AspectRatio = aspectRatio;
-            }
+            this.AspectRatio = aspectRatio ?? 1D;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "VentilationSimulationControl";
@@ -115,35 +80,30 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Reference temperature measurement in Celsius under which the surface crack data were obtained.</value>
         [DataMember(Name="reference_temperature", EmitDefaultValue=false)]
-        [JsonProperty("reference_temperature")]
         public double ReferenceTemperature { get; set; }  = 20D;
         /// <summary>
         /// Reference barometric pressure measurement in Pascals under which the surface crack data were obtained.
         /// </summary>
         /// <value>Reference barometric pressure measurement in Pascals under which the surface crack data were obtained.</value>
         [DataMember(Name="reference_pressure", EmitDefaultValue=false)]
-        [JsonProperty("reference_pressure")]
         public double ReferencePressure { get; set; }  = 101325D;
         /// <summary>
         /// Reference humidity ratio measurement in kgWater/kgDryAir under which the surface crack data were obtained.
         /// </summary>
         /// <value>Reference humidity ratio measurement in kgWater/kgDryAir under which the surface crack data were obtained.</value>
         [DataMember(Name="reference_humidity_ratio", EmitDefaultValue=false)]
-        [JsonProperty("reference_humidity_ratio")]
         public double ReferenceHumidityRatio { get; set; }  = 0D;
         /// <summary>
         /// The clockwise rotation in degrees from true North of the long axis of the building. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.
         /// </summary>
         /// <value>The clockwise rotation in degrees from true North of the long axis of the building. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.</value>
         [DataMember(Name="long_axis_angle", EmitDefaultValue=false)]
-        [JsonProperty("long_axis_angle")]
         public double LongAxisAngle { get; set; }  = 0D;
         /// <summary>
         /// Aspect ratio of a rectangular footprint, defined as the ratio of length of the short axis divided by the length of the long axis. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.
         /// </summary>
         /// <value>Aspect ratio of a rectangular footprint, defined as the ratio of length of the short axis divided by the length of the long axis. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.</value>
         [DataMember(Name="aspect_ratio", EmitDefaultValue=false)]
-        [JsonProperty("aspect_ratio")]
         public double AspectRatio { get; set; }  = 1D;
         
         /// <summary>

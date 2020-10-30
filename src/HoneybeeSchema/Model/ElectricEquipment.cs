@@ -52,52 +52,15 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "wattsPerArea" is required (not null)
-            if (wattsPerArea == null)
-            {
-                throw new InvalidDataException("wattsPerArea is a required property for ElectricEquipment and cannot be null");
-            }
-            else
-            {
-                this.WattsPerArea = wattsPerArea;
-            }
-            
+            this.WattsPerArea = wattsPerArea ?? throw new ArgumentNullException("wattsPerArea is a required property for ElectricEquipment and cannot be null");
             // to ensure "schedule" is required (not null)
-            if (schedule == null)
-            {
-                throw new InvalidDataException("schedule is a required property for ElectricEquipment and cannot be null");
-            }
-            else
-            {
-                this.Schedule = schedule;
-            }
-            
+            this.Schedule = schedule ?? throw new ArgumentNullException("schedule is a required property for ElectricEquipment and cannot be null");
             // use default value if no "radiantFraction" provided
-            if (radiantFraction == null)
-            {
-                this.RadiantFraction = 0D;
-            }
-            else
-            {
-                this.RadiantFraction = radiantFraction;
-            }
+            this.RadiantFraction = radiantFraction ?? 0D;
             // use default value if no "latentFraction" provided
-            if (latentFraction == null)
-            {
-                this.LatentFraction = 0D;
-            }
-            else
-            {
-                this.LatentFraction = latentFraction;
-            }
+            this.LatentFraction = latentFraction ?? 0D;
             // use default value if no "lostFraction" provided
-            if (lostFraction == null)
-            {
-                this.LostFraction = 0D;
-            }
-            else
-            {
-                this.LostFraction = lostFraction;
-            }
+            this.LostFraction = lostFraction ?? 0D;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "ElectricEquipment";
@@ -108,35 +71,30 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Equipment level per floor area as [W/m2].</value>
         [DataMember(Name="watts_per_area", EmitDefaultValue=false)]
-        [JsonProperty("watts_per_area")]
         public double WattsPerArea { get; set; } 
         /// <summary>
         /// The schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.
         /// </summary>
         /// <value>The schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.</value>
         [DataMember(Name="schedule", EmitDefaultValue=false)]
-        [JsonProperty("schedule")]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; } 
         /// <summary>
         /// Number for the amount of long-wave radiation heat given off by electric equipment. Default value is 0.
         /// </summary>
         /// <value>Number for the amount of long-wave radiation heat given off by electric equipment. Default value is 0.</value>
         [DataMember(Name="radiant_fraction", EmitDefaultValue=false)]
-        [JsonProperty("radiant_fraction")]
         public double RadiantFraction { get; set; }  = 0D;
         /// <summary>
         /// Number for the amount of latent heat given off by electricequipment. Default value is 0.
         /// </summary>
         /// <value>Number for the amount of latent heat given off by electricequipment. Default value is 0.</value>
         [DataMember(Name="latent_fraction", EmitDefaultValue=false)]
-        [JsonProperty("latent_fraction")]
         public double LatentFraction { get; set; }  = 0D;
         /// <summary>
         /// Number for the amount of “lost” heat being given off by equipment. The default value is 0.
         /// </summary>
         /// <value>Number for the amount of “lost” heat being given off by equipment. The default value is 0.</value>
         [DataMember(Name="lost_fraction", EmitDefaultValue=false)]
-        [JsonProperty("lost_fraction")]
         public double LostFraction { get; set; }  = 0D;
         
         /// <summary>

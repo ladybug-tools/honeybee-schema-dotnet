@@ -61,131 +61,33 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // use default value if no "solarTransmittance" provided
-            if (solarTransmittance == null)
-            {
-                this.SolarTransmittance = 0.4D;
-            }
-            else
-            {
-                this.SolarTransmittance = solarTransmittance;
-            }
+            this.SolarTransmittance = solarTransmittance ?? 0.4D;
             // use default value if no "solarReflectance" provided
-            if (solarReflectance == null)
-            {
-                this.SolarReflectance = 0.5D;
-            }
-            else
-            {
-                this.SolarReflectance = solarReflectance;
-            }
+            this.SolarReflectance = solarReflectance ?? 0.5D;
             // use default value if no "visibleTransmittance" provided
-            if (visibleTransmittance == null)
-            {
-                this.VisibleTransmittance = 0.4D;
-            }
-            else
-            {
-                this.VisibleTransmittance = visibleTransmittance;
-            }
+            this.VisibleTransmittance = visibleTransmittance ?? 0.4D;
             // use default value if no "visibleReflectance" provided
-            if (visibleReflectance == null)
-            {
-                this.VisibleReflectance = 0.4D;
-            }
-            else
-            {
-                this.VisibleReflectance = visibleReflectance;
-            }
+            this.VisibleReflectance = visibleReflectance ?? 0.4D;
             // use default value if no "emissivity" provided
-            if (emissivity == null)
-            {
-                this.Emissivity = 0.9D;
-            }
-            else
-            {
-                this.Emissivity = emissivity;
-            }
+            this.Emissivity = emissivity ?? 0.9D;
             // use default value if no "infraredTransmittance" provided
-            if (infraredTransmittance == null)
-            {
-                this.InfraredTransmittance = 0D;
-            }
-            else
-            {
-                this.InfraredTransmittance = infraredTransmittance;
-            }
+            this.InfraredTransmittance = infraredTransmittance ?? 0D;
             // use default value if no "thickness" provided
-            if (thickness == null)
-            {
-                this.Thickness = 0.005D;
-            }
-            else
-            {
-                this.Thickness = thickness;
-            }
+            this.Thickness = thickness ?? 0.005D;
             // use default value if no "conductivity" provided
-            if (conductivity == null)
-            {
-                this.Conductivity = 0.1D;
-            }
-            else
-            {
-                this.Conductivity = conductivity;
-            }
+            this.Conductivity = conductivity ?? 0.1D;
             // use default value if no "distanceToGlass" provided
-            if (distanceToGlass == null)
-            {
-                this.DistanceToGlass = 0.05D;
-            }
-            else
-            {
-                this.DistanceToGlass = distanceToGlass;
-            }
+            this.DistanceToGlass = distanceToGlass ?? 0.05D;
             // use default value if no "topOpeningMultiplier" provided
-            if (topOpeningMultiplier == null)
-            {
-                this.TopOpeningMultiplier = 0.5D;
-            }
-            else
-            {
-                this.TopOpeningMultiplier = topOpeningMultiplier;
-            }
+            this.TopOpeningMultiplier = topOpeningMultiplier ?? 0.5D;
             // use default value if no "bottomOpeningMultiplier" provided
-            if (bottomOpeningMultiplier == null)
-            {
-                this.BottomOpeningMultiplier = 0.5D;
-            }
-            else
-            {
-                this.BottomOpeningMultiplier = bottomOpeningMultiplier;
-            }
+            this.BottomOpeningMultiplier = bottomOpeningMultiplier ?? 0.5D;
             // use default value if no "leftOpeningMultiplier" provided
-            if (leftOpeningMultiplier == null)
-            {
-                this.LeftOpeningMultiplier = 0.5D;
-            }
-            else
-            {
-                this.LeftOpeningMultiplier = leftOpeningMultiplier;
-            }
+            this.LeftOpeningMultiplier = leftOpeningMultiplier ?? 0.5D;
             // use default value if no "rightOpeningMultiplier" provided
-            if (rightOpeningMultiplier == null)
-            {
-                this.RightOpeningMultiplier = 0.5D;
-            }
-            else
-            {
-                this.RightOpeningMultiplier = rightOpeningMultiplier;
-            }
+            this.RightOpeningMultiplier = rightOpeningMultiplier ?? 0.5D;
             // use default value if no "airflowPermeability" provided
-            if (airflowPermeability == null)
-            {
-                this.AirflowPermeability = 0D;
-            }
-            else
-            {
-                this.AirflowPermeability = airflowPermeability;
-            }
+            this.AirflowPermeability = airflowPermeability ?? 0D;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "EnergyWindowMaterialShade";
@@ -196,98 +98,84 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default value is 0.4.</value>
         [DataMember(Name="solar_transmittance", EmitDefaultValue=false)]
-        [JsonProperty("solar_transmittance")]
         public double SolarTransmittance { get; set; }  = 0.4D;
         /// <summary>
         /// The reflectance averaged over the solar spectrum. It us assumed same on both sides of shade and independent of incidence angle. Default value is 0.5
         /// </summary>
         /// <value>The reflectance averaged over the solar spectrum. It us assumed same on both sides of shade and independent of incidence angle. Default value is 0.5</value>
         [DataMember(Name="solar_reflectance", EmitDefaultValue=false)]
-        [JsonProperty("solar_reflectance")]
         public double SolarReflectance { get; set; }  = 0.5D;
         /// <summary>
         /// The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4.
         /// </summary>
         /// <value>The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4.</value>
         [DataMember(Name="visible_transmittance", EmitDefaultValue=false)]
-        [JsonProperty("visible_transmittance")]
         public double VisibleTransmittance { get; set; }  = 0.4D;
         /// <summary>
         /// The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4
         /// </summary>
         /// <value>The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4</value>
         [DataMember(Name="visible_reflectance", EmitDefaultValue=false)]
-        [JsonProperty("visible_reflectance")]
         public double VisibleReflectance { get; set; }  = 0.4D;
         /// <summary>
         /// The effective long-wave infrared hemispherical emissivity. It is assumed same on both sides of shade. Default value is 0.9.
         /// </summary>
         /// <value>The effective long-wave infrared hemispherical emissivity. It is assumed same on both sides of shade. Default value is 0.9.</value>
         [DataMember(Name="emissivity", EmitDefaultValue=false)]
-        [JsonProperty("emissivity")]
         public double Emissivity { get; set; }  = 0.9D;
         /// <summary>
         /// The effective long-wave transmittance. It is assumed independent of incidence angle. Default value is 0.
         /// </summary>
         /// <value>The effective long-wave transmittance. It is assumed independent of incidence angle. Default value is 0.</value>
         [DataMember(Name="infrared_transmittance", EmitDefaultValue=false)]
-        [JsonProperty("infrared_transmittance")]
         public double InfraredTransmittance { get; set; }  = 0D;
         /// <summary>
         /// The thickness of the shade material in meters. Default value is 0.005.
         /// </summary>
         /// <value>The thickness of the shade material in meters. Default value is 0.005.</value>
         [DataMember(Name="thickness", EmitDefaultValue=false)]
-        [JsonProperty("thickness")]
         public double Thickness { get; set; }  = 0.005D;
         /// <summary>
         /// The conductivity of the shade material in W/(m-K). Default value is 0.1.
         /// </summary>
         /// <value>The conductivity of the shade material in W/(m-K). Default value is 0.1.</value>
         [DataMember(Name="conductivity", EmitDefaultValue=false)]
-        [JsonProperty("conductivity")]
         public double Conductivity { get; set; }  = 0.1D;
         /// <summary>
         /// The distance from shade to adjacent glass in meters. Default value is 0.05
         /// </summary>
         /// <value>The distance from shade to adjacent glass in meters. Default value is 0.05</value>
         [DataMember(Name="distance_to_glass", EmitDefaultValue=false)]
-        [JsonProperty("distance_to_glass")]
         public double DistanceToGlass { get; set; }  = 0.05D;
         /// <summary>
         /// The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. Default value is 0.5.
         /// </summary>
         /// <value>The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. Default value is 0.5.</value>
         [DataMember(Name="top_opening_multiplier", EmitDefaultValue=false)]
-        [JsonProperty("top_opening_multiplier")]
         public double TopOpeningMultiplier { get; set; }  = 0.5D;
         /// <summary>
         /// The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. Default value is 0.5.
         /// </summary>
         /// <value>The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. Default value is 0.5.</value>
         [DataMember(Name="bottom_opening_multiplier", EmitDefaultValue=false)]
-        [JsonProperty("bottom_opening_multiplier")]
         public double BottomOpeningMultiplier { get; set; }  = 0.5D;
         /// <summary>
         /// The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. Default value is 0.5.
         /// </summary>
         /// <value>The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. Default value is 0.5.</value>
         [DataMember(Name="left_opening_multiplier", EmitDefaultValue=false)]
-        [JsonProperty("left_opening_multiplier")]
         public double LeftOpeningMultiplier { get; set; }  = 0.5D;
         /// <summary>
         /// The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. Default value is 0.5.
         /// </summary>
         /// <value>The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. Default value is 0.5.</value>
         [DataMember(Name="right_opening_multiplier", EmitDefaultValue=false)]
-        [JsonProperty("right_opening_multiplier")]
         public double RightOpeningMultiplier { get; set; }  = 0.5D;
         /// <summary>
         /// The fraction of the shade surface that is open to air flow. If air cannot pass through the shade material, airflow_permeability &#x3D; 0. Default value is 0.
         /// </summary>
         /// <value>The fraction of the shade surface that is open to air flow. If air cannot pass through the shade material, airflow_permeability &#x3D; 0. Default value is 0.</value>
         [DataMember(Name="airflow_permeability", EmitDefaultValue=false)]
-        [JsonProperty("airflow_permeability")]
         public double AirflowPermeability { get; set; }  = 0D;
         
         /// <summary>

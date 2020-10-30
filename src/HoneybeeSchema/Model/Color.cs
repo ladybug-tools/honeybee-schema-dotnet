@@ -48,35 +48,11 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             // to ensure "r" is required (not null)
-            if (r == null)
-            {
-                throw new InvalidDataException("r is a required property for Color and cannot be null");
-            }
-            else
-            {
-                this.R = r;
-            }
-            
+            this.R = r ?? throw new ArgumentNullException("r is a required property for Color and cannot be null");
             // to ensure "g" is required (not null)
-            if (g == null)
-            {
-                throw new InvalidDataException("g is a required property for Color and cannot be null");
-            }
-            else
-            {
-                this.G = g;
-            }
-            
+            this.G = g ?? throw new ArgumentNullException("g is a required property for Color and cannot be null");
             // to ensure "b" is required (not null)
-            if (b == null)
-            {
-                throw new InvalidDataException("b is a required property for Color and cannot be null");
-            }
-            else
-            {
-                this.B = b;
-            }
-            
+            this.B = b ?? throw new ArgumentNullException("b is a required property for Color and cannot be null");
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Color";
@@ -87,21 +63,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Integer for red value.</value>
         [DataMember(Name="r", EmitDefaultValue=false)]
-        [JsonProperty("r")]
         public int R { get; set; } 
         /// <summary>
         /// Integer for green value.
         /// </summary>
         /// <value>Integer for green value.</value>
         [DataMember(Name="g", EmitDefaultValue=false)]
-        [JsonProperty("g")]
         public int G { get; set; } 
         /// <summary>
         /// Integer for blue value.
         /// </summary>
         /// <value>Integer for blue value.</value>
         [DataMember(Name="b", EmitDefaultValue=false)]
-        [JsonProperty("b")]
         public int B { get; set; } 
         
         /// <summary>

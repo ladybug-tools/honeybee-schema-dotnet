@@ -55,21 +55,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A Radiance Modifier identifier (default: None).</value>
         [DataMember(Name="modifier", EmitDefaultValue=false)]
-        [JsonProperty("modifier")]
         public string Modifier { get; set; } 
         /// <summary>
         /// A Radiance Modifier identifier (default: None).
         /// </summary>
         /// <value>A Radiance Modifier identifier (default: None).</value>
         [DataMember(Name="modifier_direct", EmitDefaultValue=false)]
-        [JsonProperty("modifier_direct")]
         public string ModifierDirect { get; set; } 
         /// <summary>
         /// A list of StateGeometryAbridged objects (default: None).
         /// </summary>
         /// <value>A list of StateGeometryAbridged objects (default: None).</value>
         [DataMember(Name="shades", EmitDefaultValue=false)]
-        [JsonProperty("shades")]
         public List<StateGeometryAbridged> Shades { get; set; } 
         
         /// <summary>

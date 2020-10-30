@@ -54,36 +54,13 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "faces" is required (not null)
-            if (faces == null)
-            {
-                throw new InvalidDataException("faces is a required property for Room and cannot be null");
-            }
-            else
-            {
-                this.Faces = faces;
-            }
-            
+            this.Faces = faces ?? throw new ArgumentNullException("faces is a required property for Room and cannot be null");
             // to ensure "properties" is required (not null)
-            if (properties == null)
-            {
-                throw new InvalidDataException("properties is a required property for Room and cannot be null");
-            }
-            else
-            {
-                this.Properties = properties;
-            }
-            
+            this.Properties = properties ?? throw new ArgumentNullException("properties is a required property for Room and cannot be null");
             this.IndoorShades = indoorShades;
             this.OutdoorShades = outdoorShades;
             // use default value if no "multiplier" provided
-            if (multiplier == null)
-            {
-                this.Multiplier = 1;
-            }
-            else
-            {
-                this.Multiplier = multiplier;
-            }
+            this.Multiplier = multiplier ?? 1;
             this.Story = story;
 
             // Set non-required readonly properties with defaultValue
@@ -95,42 +72,36 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Faces that together form the closed volume of a room.</value>
         [DataMember(Name="faces", EmitDefaultValue=false)]
-        [JsonProperty("faces")]
         public List<Face> Faces { get; set; } 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
         [DataMember(Name="properties", EmitDefaultValue=false)]
-        [JsonProperty("properties")]
         public RoomPropertiesAbridged Properties { get; set; } 
         /// <summary>
         /// Shades assigned to the interior side of this object (eg. partitions, tables).
         /// </summary>
         /// <value>Shades assigned to the interior side of this object (eg. partitions, tables).</value>
         [DataMember(Name="indoor_shades", EmitDefaultValue=false)]
-        [JsonProperty("indoor_shades")]
         public List<Shade> IndoorShades { get; set; } 
         /// <summary>
         /// Shades assigned to the exterior side of this object (eg. trees, landscaping).
         /// </summary>
         /// <value>Shades assigned to the exterior side of this object (eg. trees, landscaping).</value>
         [DataMember(Name="outdoor_shades", EmitDefaultValue=false)]
-        [JsonProperty("outdoor_shades")]
         public List<Shade> OutdoorShades { get; set; } 
         /// <summary>
         /// An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is mutliplied by the multiplier.
         /// </summary>
         /// <value>An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is mutliplied by the multiplier.</value>
         [DataMember(Name="multiplier", EmitDefaultValue=false)]
-        [JsonProperty("multiplier")]
         public int Multiplier { get; set; }  = 1;
         /// <summary>
         /// Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model.
         /// </summary>
         /// <value>Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model.</value>
         [DataMember(Name="story", EmitDefaultValue=false)]
-        [JsonProperty("story")]
         public string Story { get; set; } 
         
         /// <summary>

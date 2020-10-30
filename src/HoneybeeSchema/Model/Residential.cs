@@ -35,13 +35,13 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards</value>
         [DataMember(Name="vintage", EmitDefaultValue=false)]
-        public Vintages? Vintage { get; set; }   
+        public Vintages Vintage { get; set; }   
         /// <summary>
         /// Text for the specific type of system equipment from the ResidentialEquipmentType enumeration.
         /// </summary>
         /// <value>Text for the specific type of system equipment from the ResidentialEquipmentType enumeration.</value>
         [DataMember(Name="equipment_type", EmitDefaultValue=false)]
-        public ResidentialEquipmentType? EquipmentType { get; set; }   
+        public ResidentialEquipmentType EquipmentType { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="Residential" /> class.
         /// </summary>

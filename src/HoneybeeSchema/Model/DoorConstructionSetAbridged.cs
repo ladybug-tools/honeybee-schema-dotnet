@@ -59,35 +59,30 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Identifier for an OpaqueConstruction for all opaque doors with a Surface boundary condition.</value>
         [DataMember(Name="interior_construction", EmitDefaultValue=false)]
-        [JsonProperty("interior_construction")]
         public string InteriorConstruction { get; set; } 
         /// <summary>
         /// Identifier for an OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face.
         /// </summary>
         /// <value>Identifier for an OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face.</value>
         [DataMember(Name="exterior_construction", EmitDefaultValue=false)]
-        [JsonProperty("exterior_construction")]
         public string ExteriorConstruction { get; set; } 
         /// <summary>
         /// Identifier for an OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face.
         /// </summary>
         /// <value>Identifier for an OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face.</value>
         [DataMember(Name="overhead_construction", EmitDefaultValue=false)]
-        [JsonProperty("overhead_construction")]
         public string OverheadConstruction { get; set; } 
         /// <summary>
         /// Identifier for a WindowConstruction for all glass doors with an Outdoors boundary condition.
         /// </summary>
         /// <value>Identifier for a WindowConstruction for all glass doors with an Outdoors boundary condition.</value>
         [DataMember(Name="exterior_glass_construction", EmitDefaultValue=false)]
-        [JsonProperty("exterior_glass_construction")]
         public string ExteriorGlassConstruction { get; set; } 
         /// <summary>
         /// Identifier for a WindowConstruction for all glass doors with a Surface boundary condition.
         /// </summary>
         /// <value>Identifier for a WindowConstruction for all glass doors with a Surface boundary condition.</value>
         [DataMember(Name="interior_glass_construction", EmitDefaultValue=false)]
-        [JsonProperty("interior_glass_construction")]
         public string InteriorGlassConstruction { get; set; } 
         
         /// <summary>

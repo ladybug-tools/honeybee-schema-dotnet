@@ -35,7 +35,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms.</value>
         [DataMember(Name="terrain_type", EmitDefaultValue=false)]
-        public TerrianTypes? TerrainType { get; set; }   
+        public TerrianTypes TerrainType { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="SimulationParameter" /> class.
         /// </summary>
@@ -56,26 +56,12 @@ namespace HoneybeeSchema
             this.Output = output;
             this.RunPeriod = runPeriod;
             // use default value if no "timestep" provided
-            if (timestep == null)
-            {
-                this.Timestep = 6;
-            }
-            else
-            {
-                this.Timestep = timestep;
-            }
+            this.Timestep = timestep ?? 6;
             this.SimulationControl = simulationControl;
             this.ShadowCalculation = shadowCalculation;
             this.SizingParameter = sizingParameter;
             // use default value if no "northAngle" provided
-            if (northAngle == null)
-            {
-                this.NorthAngle = 0D;
-            }
-            else
-            {
-                this.NorthAngle = northAngle;
-            }
+            this.NorthAngle = northAngle ?? 0D;
             this.TerrainType = terrainType;
 
             // Set non-required readonly properties with defaultValue
@@ -87,49 +73,42 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A SimulationOutput that lists the desired outputs from the simulation and the format in which to report them.</value>
         [DataMember(Name="output", EmitDefaultValue=false)]
-        [JsonProperty("output")]
         public SimulationOutput Output { get; set; } 
         /// <summary>
         /// A RunPeriod to describe the time period over which to run the simulation.
         /// </summary>
         /// <value>A RunPeriod to describe the time period over which to run the simulation.</value>
         [DataMember(Name="run_period", EmitDefaultValue=false)]
-        [JsonProperty("run_period")]
         public RunPeriod RunPeriod { get; set; } 
         /// <summary>
         /// An integer for the number of timesteps per hour at which the energy calculation will be run.
         /// </summary>
         /// <value>An integer for the number of timesteps per hour at which the energy calculation will be run.</value>
         [DataMember(Name="timestep", EmitDefaultValue=false)]
-        [JsonProperty("timestep")]
         public int Timestep { get; set; }  = 6;
         /// <summary>
         /// A SimulationControl object that describes which types of calculations to run.
         /// </summary>
         /// <value>A SimulationControl object that describes which types of calculations to run.</value>
         [DataMember(Name="simulation_control", EmitDefaultValue=false)]
-        [JsonProperty("simulation_control")]
         public SimulationControl SimulationControl { get; set; } 
         /// <summary>
         /// A ShadowCalculation object describing settings for the EnergyPlus Shadow Calculation.
         /// </summary>
         /// <value>A ShadowCalculation object describing settings for the EnergyPlus Shadow Calculation.</value>
         [DataMember(Name="shadow_calculation", EmitDefaultValue=false)]
-        [JsonProperty("shadow_calculation")]
         public ShadowCalculation ShadowCalculation { get; set; } 
         /// <summary>
         /// A SizingParameter object with criteria for sizing the heating and cooling system.
         /// </summary>
         /// <value>A SizingParameter object with criteria for sizing the heating and cooling system.</value>
         [DataMember(Name="sizing_parameter", EmitDefaultValue=false)]
-        [JsonProperty("sizing_parameter")]
         public SizingParameter SizingParameter { get; set; } 
         /// <summary>
         /// A number between -360 and 360 for the north direction in degrees.This is the counterclockwise difference between the North and the positive Y-axis. 90 is West and 270 is East. Note that this is different than the convention used in EnergyPlus, which uses clockwise difference instead of counterclockwise difference.
         /// </summary>
         /// <value>A number between -360 and 360 for the north direction in degrees.This is the counterclockwise difference between the North and the positive Y-axis. 90 is West and 270 is East. Note that this is different than the convention used in EnergyPlus, which uses clockwise difference instead of counterclockwise difference.</value>
         [DataMember(Name="north_angle", EmitDefaultValue=false)]
-        [JsonProperty("north_angle")]
         public double NorthAngle { get; set; }  = 0D;
         
         /// <summary>

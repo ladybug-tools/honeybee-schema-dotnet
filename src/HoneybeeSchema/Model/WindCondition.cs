@@ -47,24 +47,9 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             // to ensure "windSpeed" is required (not null)
-            if (windSpeed == null)
-            {
-                throw new InvalidDataException("windSpeed is a required property for WindCondition and cannot be null");
-            }
-            else
-            {
-                this.WindSpeed = windSpeed;
-            }
-            
+            this.WindSpeed = windSpeed ?? throw new ArgumentNullException("windSpeed is a required property for WindCondition and cannot be null");
             // use default value if no "windDirection" provided
-            if (windDirection == null)
-            {
-                this.WindDirection = 0D;
-            }
-            else
-            {
-                this.WindDirection = windDirection;
-            }
+            this.WindDirection = windDirection ?? 0D;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "WindCondition";
@@ -75,14 +60,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Wind speed on the design day [m/s].</value>
         [DataMember(Name="wind_speed", EmitDefaultValue=false)]
-        [JsonProperty("wind_speed")]
         public double WindSpeed { get; set; } 
         /// <summary>
         /// Wind direction on the design day [degrees].
         /// </summary>
         /// <value>Wind direction on the design day [degrees].</value>
         [DataMember(Name="wind_direction", EmitDefaultValue=false)]
-        [JsonProperty("wind_direction")]
         public double WindDirection { get; set; }  = 0D;
         
         /// <summary>

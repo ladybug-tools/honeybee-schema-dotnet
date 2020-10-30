@@ -51,25 +51,9 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "coolingSchedule" is required (not null)
-            if (coolingSchedule == null)
-            {
-                throw new InvalidDataException("coolingSchedule is a required property for SetpointAbridged and cannot be null");
-            }
-            else
-            {
-                this.CoolingSchedule = coolingSchedule;
-            }
-            
+            this.CoolingSchedule = coolingSchedule ?? throw new ArgumentNullException("coolingSchedule is a required property for SetpointAbridged and cannot be null");
             // to ensure "heatingSchedule" is required (not null)
-            if (heatingSchedule == null)
-            {
-                throw new InvalidDataException("heatingSchedule is a required property for SetpointAbridged and cannot be null");
-            }
-            else
-            {
-                this.HeatingSchedule = heatingSchedule;
-            }
-            
+            this.HeatingSchedule = heatingSchedule ?? throw new ArgumentNullException("heatingSchedule is a required property for SetpointAbridged and cannot be null");
             this.HumidifyingSchedule = humidifyingSchedule;
             this.DehumidifyingSchedule = dehumidifyingSchedule;
 
@@ -82,28 +66,24 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Identifier of the schedule for the cooling setpoint. The values in this schedule should be temperature in [C].</value>
         [DataMember(Name="cooling_schedule", EmitDefaultValue=false)]
-        [JsonProperty("cooling_schedule")]
         public string CoolingSchedule { get; set; } 
         /// <summary>
         /// Identifier of the schedule for the heating setpoint. The values in this schedule should be temperature in [C].
         /// </summary>
         /// <value>Identifier of the schedule for the heating setpoint. The values in this schedule should be temperature in [C].</value>
         [DataMember(Name="heating_schedule", EmitDefaultValue=false)]
-        [JsonProperty("heating_schedule")]
         public string HeatingSchedule { get; set; } 
         /// <summary>
         /// Identifier of the schedule for the humidification setpoint. The values in this schedule should be in [%].
         /// </summary>
         /// <value>Identifier of the schedule for the humidification setpoint. The values in this schedule should be in [%].</value>
         [DataMember(Name="humidifying_schedule", EmitDefaultValue=false)]
-        [JsonProperty("humidifying_schedule")]
         public string HumidifyingSchedule { get; set; } 
         /// <summary>
         /// Identifier of the schedule for the dehumidification setpoint. The values in this schedule should be in [%].
         /// </summary>
         /// <value>Identifier of the schedule for the dehumidification setpoint. The values in this schedule should be in [%].</value>
         [DataMember(Name="dehumidifying_schedule", EmitDefaultValue=false)]
-        [JsonProperty("dehumidifying_schedule")]
         public string DehumidifyingSchedule { get; set; } 
         
         /// <summary>

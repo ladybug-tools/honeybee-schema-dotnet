@@ -50,25 +50,10 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "values" is required (not null)
-            if (values == null)
-            {
-                throw new InvalidDataException("values is a required property for ScheduleDay and cannot be null");
-            }
-            else
-            {
-                this.Values = values;
-            }
-            
+            this.Values = values ?? throw new ArgumentNullException("values is a required property for ScheduleDay and cannot be null");
             this.Times = times;
             // use default value if no "interpolate" provided
-            if (interpolate == null)
-            {
-                this.Interpolate = false;
-            }
-            else
-            {
-                this.Interpolate = interpolate;
-            }
+            this.Interpolate = interpolate ?? false;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "ScheduleDay";
@@ -79,21 +64,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A list of floats or integers for the values of the schedule. The length of this list must match the length of the times list.</value>
         [DataMember(Name="values", EmitDefaultValue=false)]
-        [JsonProperty("values")]
         public List<double> Values { get; set; } 
         /// <summary>
         /// A list of lists with each sub-list possesing 2 values for [hour, minute]. The length of the master list must match the length of the values list. Each time in the master list represents the time of day that the corresponding value begins to take effect. For example [(0,0), (9,0), (17,0)] in combination with the values [0, 1, 0] denotes a schedule value of 0 from 0:00 to 9:00, a value of 1 from 9:00 to 17:00 and 0 from 17:00 to the end of the day. Note that this representation of times as the \&quot;time of beginning\&quot; is a different convention than EnergyPlus, which uses \&quot;time until\&quot;.
         /// </summary>
         /// <value>A list of lists with each sub-list possesing 2 values for [hour, minute]. The length of the master list must match the length of the values list. Each time in the master list represents the time of day that the corresponding value begins to take effect. For example [(0,0), (9,0), (17,0)] in combination with the values [0, 1, 0] denotes a schedule value of 0 from 0:00 to 9:00, a value of 1 from 9:00 to 17:00 and 0 from 17:00 to the end of the day. Note that this representation of times as the \&quot;time of beginning\&quot; is a different convention than EnergyPlus, which uses \&quot;time until\&quot;.</value>
         [DataMember(Name="times", EmitDefaultValue=false)]
-        [JsonProperty("times")]
         public List<List<int>> Times { get; set; } 
         /// <summary>
         /// Boolean to note whether values in between times should be linearly interpolated or whether successive values should take effect immediately upon the beginning time corresponding to them.
         /// </summary>
         /// <value>Boolean to note whether values in between times should be linearly interpolated or whether successive values should take effect immediately upon the beginning time corresponding to them.</value>
         [DataMember(Name="interpolate", EmitDefaultValue=false)]
-        [JsonProperty("interpolate")]
         public bool Interpolate { get; set; }  = false;
         
         /// <summary>

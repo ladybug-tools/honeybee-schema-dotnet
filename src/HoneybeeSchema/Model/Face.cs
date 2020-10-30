@@ -61,45 +61,13 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "geometry" is required (not null)
-            if (geometry == null)
-            {
-                throw new InvalidDataException("geometry is a required property for Face and cannot be null");
-            }
-            else
-            {
-                this.Geometry = geometry;
-            }
-            
+            this.Geometry = geometry ?? throw new ArgumentNullException("geometry is a required property for Face and cannot be null");
             // to ensure "faceType" is required (not null)
-            if (faceType == null)
-            {
-                throw new InvalidDataException("faceType is a required property for Face and cannot be null");
-            }
-            else
-            {
-                this.FaceType = faceType;
-            }
-            
+            this.FaceType = faceType ?? throw new ArgumentNullException("faceType is a required property for Face and cannot be null");
             // to ensure "boundaryCondition" is required (not null)
-            if (boundaryCondition == null)
-            {
-                throw new InvalidDataException("boundaryCondition is a required property for Face and cannot be null");
-            }
-            else
-            {
-                this.BoundaryCondition = boundaryCondition;
-            }
-            
+            this.BoundaryCondition = boundaryCondition ?? throw new ArgumentNullException("boundaryCondition is a required property for Face and cannot be null");
             // to ensure "properties" is required (not null)
-            if (properties == null)
-            {
-                throw new InvalidDataException("properties is a required property for Face and cannot be null");
-            }
-            else
-            {
-                this.Properties = properties;
-            }
-            
+            this.Properties = properties ?? throw new ArgumentNullException("properties is a required property for Face and cannot be null");
             this.Apertures = apertures;
             this.Doors = doors;
             this.IndoorShades = indoorShades;
@@ -114,48 +82,41 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Planar Face3D for the geometry.</value>
         [DataMember(Name="geometry", EmitDefaultValue=false)]
-        [JsonProperty("geometry")]
         public Face3D Geometry { get; set; } 
         /// <summary>
         /// Gets or Sets BoundaryCondition
         /// </summary>
         [DataMember(Name="boundary_condition", EmitDefaultValue=false)]
-        [JsonProperty("boundary_condition")]
         public AnyOf<Ground,Outdoors,Adiabatic,Surface> BoundaryCondition { get; set; } 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
         [DataMember(Name="properties", EmitDefaultValue=false)]
-        [JsonProperty("properties")]
         public FacePropertiesAbridged Properties { get; set; } 
         /// <summary>
         /// Apertures assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid.
         /// </summary>
         /// <value>Apertures assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid.</value>
         [DataMember(Name="apertures", EmitDefaultValue=false)]
-        [JsonProperty("apertures")]
         public List<Aperture> Apertures { get; set; } 
         /// <summary>
         /// Doors assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid.
         /// </summary>
         /// <value>Doors assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid.</value>
         [DataMember(Name="doors", EmitDefaultValue=false)]
-        [JsonProperty("doors")]
         public List<Door> Doors { get; set; } 
         /// <summary>
         /// Shades assigned to the interior side of this object.
         /// </summary>
         /// <value>Shades assigned to the interior side of this object.</value>
         [DataMember(Name="indoor_shades", EmitDefaultValue=false)]
-        [JsonProperty("indoor_shades")]
         public List<Shade> IndoorShades { get; set; } 
         /// <summary>
         /// Shades assigned to the exterior side of this object (eg. balcony, overhang).
         /// </summary>
         /// <value>Shades assigned to the exterior side of this object (eg. balcony, overhang).</value>
         [DataMember(Name="outdoor_shades", EmitDefaultValue=false)]
-        [JsonProperty("outdoor_shades")]
         public List<Shade> OutdoorShades { get; set; } 
         
         /// <summary>

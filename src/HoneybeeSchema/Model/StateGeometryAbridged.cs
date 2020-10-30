@@ -50,15 +50,7 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "geometry" is required (not null)
-            if (geometry == null)
-            {
-                throw new InvalidDataException("geometry is a required property for StateGeometryAbridged and cannot be null");
-            }
-            else
-            {
-                this.Geometry = geometry;
-            }
-            
+            this.Geometry = geometry ?? throw new ArgumentNullException("geometry is a required property for StateGeometryAbridged and cannot be null");
             this.Modifier = modifier;
             this.ModifierDirect = modifierDirect;
 
@@ -71,21 +63,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A ladybug_geometry Face3D.</value>
         [DataMember(Name="geometry", EmitDefaultValue=false)]
-        [JsonProperty("geometry")]
         public Face3D Geometry { get; set; } 
         /// <summary>
         /// A string for a Honeybee Radiance Modifier identifier (default: None).
         /// </summary>
         /// <value>A string for a Honeybee Radiance Modifier identifier (default: None).</value>
         [DataMember(Name="modifier", EmitDefaultValue=false)]
-        [JsonProperty("modifier")]
         public string Modifier { get; set; } 
         /// <summary>
         /// A string for Honeybee Radiance Modifier identifiers to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).
         /// </summary>
         /// <value>A string for Honeybee Radiance Modifier identifiers to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).</value>
         [DataMember(Name="modifier_direct", EmitDefaultValue=false)]
-        [JsonProperty("modifier_direct")]
         public string ModifierDirect { get; set; } 
         
         /// <summary>

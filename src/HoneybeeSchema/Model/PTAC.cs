@@ -35,19 +35,19 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards</value>
         [DataMember(Name="vintage", EmitDefaultValue=false)]
-        public Vintages? Vintage { get; set; }   
+        public Vintages Vintage { get; set; }   
         /// <summary>
         /// Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration). If Inferred, the economizer will be set to whatever is recommended for the given vintage.
         /// </summary>
         /// <value>Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration). If Inferred, the economizer will be set to whatever is recommended for the given vintage.</value>
         [DataMember(Name="economizer_type", EmitDefaultValue=false)]
-        public AllAirEconomizerType? EconomizerType { get; set; }   
+        public AllAirEconomizerType EconomizerType { get; set; }   
         /// <summary>
         /// Text for the specific type of system equipment from the PTACEquipmentType enumeration.
         /// </summary>
         /// <value>Text for the specific type of system equipment from the PTACEquipmentType enumeration.</value>
         [DataMember(Name="equipment_type", EmitDefaultValue=false)]
-        public PTACEquipmentType? EquipmentType { get; set; }   
+        public PTACEquipmentType EquipmentType { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="PTAC" /> class.
         /// </summary>
@@ -84,14 +84,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. If None or Autosize, it will be whatever is recommended for the given vintage.</value>
         [DataMember(Name="sensible_heat_recovery", EmitDefaultValue=false)]
-        [JsonProperty("sensible_heat_recovery")]
         public AnyOf<Autosize,double> SensibleHeatRecovery { get; set; } 
         /// <summary>
         /// A number between 0 and 1 for the effectiveness of latent heat recovery within the system. If None or Autosize, it will be whatever is recommended for the given vintage.
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of latent heat recovery within the system. If None or Autosize, it will be whatever is recommended for the given vintage.</value>
         [DataMember(Name="latent_heat_recovery", EmitDefaultValue=false)]
-        [JsonProperty("latent_heat_recovery")]
         public AnyOf<Autosize,double> LatentHeatRecovery { get; set; } 
         
         /// <summary>

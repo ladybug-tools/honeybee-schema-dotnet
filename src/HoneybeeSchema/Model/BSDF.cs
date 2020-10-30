@@ -57,36 +57,14 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "bsdfData" is required (not null)
-            if (bsdfData == null)
-            {
-                throw new InvalidDataException("bsdfData is a required property for BSDF and cannot be null");
-            }
-            else
-            {
-                this.BsdfData = bsdfData;
-            }
-            
+            this.BsdfData = bsdfData ?? throw new ArgumentNullException("bsdfData is a required property for BSDF and cannot be null");
             this.Modifier = modifier;
             this.Dependencies = dependencies;
             this.UpOrientation = upOrientation;
             // use default value if no "thickness" provided
-            if (thickness == null)
-            {
-                this.Thickness = 0D;
-            }
-            else
-            {
-                this.Thickness = thickness;
-            }
+            this.Thickness = thickness ?? 0D;
             // use default value if no "functionFile" provided
-            if (functionFile == null)
-            {
-                this.FunctionFile = ".";
-            }
-            else
-            {
-                this.FunctionFile = functionFile;
-            }
+            this.FunctionFile = functionFile ?? ".";
             this.Transform = transform;
             this.FrontDiffuseReflectance = frontDiffuseReflectance;
             this.BackDiffuseReflectance = backDiffuseReflectance;
@@ -101,70 +79,60 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A string with the contents of the BSDF XML file.</value>
         [DataMember(Name="bsdf_data", EmitDefaultValue=false)]
-        [JsonProperty("bsdf_data")]
         public string BsdfData { get; set; } 
         /// <summary>
         /// Material modifier (default: Void).
         /// </summary>
         /// <value>Material modifier (default: Void).</value>
         [DataMember(Name="modifier", EmitDefaultValue=false)]
-        [JsonProperty("modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> Modifier { get; set; } 
         /// <summary>
         /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).
         /// </summary>
         /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).</value>
         [DataMember(Name="dependencies", EmitDefaultValue=false)]
-        [JsonProperty("dependencies")]
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Dependencies { get; set; } 
         /// <summary>
         /// Vector as sequence that sets the hemisphere that the BSDF material faces. (default: (0.01, 0.01, 1.00).
         /// </summary>
         /// <value>Vector as sequence that sets the hemisphere that the BSDF material faces. (default: (0.01, 0.01, 1.00).</value>
         [DataMember(Name="up_orientation", EmitDefaultValue=false)]
-        [JsonProperty("up_orientation")]
         public List<double> UpOrientation { get; set; } 
         /// <summary>
         /// Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative)(default: 0).
         /// </summary>
         /// <value>Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative)(default: 0).</value>
         [DataMember(Name="thickness", EmitDefaultValue=false)]
-        [JsonProperty("thickness")]
         public double Thickness { get; set; }  = 0D;
         /// <summary>
         /// Optional input for function file (default: \&quot;.\&quot;).
         /// </summary>
         /// <value>Optional input for function file (default: \&quot;.\&quot;).</value>
         [DataMember(Name="function_file", EmitDefaultValue=false)]
-        [JsonProperty("function_file")]
         public string FunctionFile { get; set; }  = ".";
         /// <summary>
         /// Optional transform input to scale the thickness and reorient the up vector (default: None).
         /// </summary>
         /// <value>Optional transform input to scale the thickness and reorient the up vector (default: None).</value>
         [DataMember(Name="transform", EmitDefaultValue=false)]
-        [JsonProperty("transform")]
         public string Transform { get; set; } 
         /// <summary>
         /// Optional additional front diffuse reflectance as sequence of numbers (default: None).
         /// </summary>
         /// <value>Optional additional front diffuse reflectance as sequence of numbers (default: None).</value>
         [DataMember(Name="front_diffuse_reflectance", EmitDefaultValue=false)]
-        [JsonProperty("front_diffuse_reflectance")]
         public List<double> FrontDiffuseReflectance { get; set; } 
         /// <summary>
         /// Optional additional back diffuse reflectance as sequence of numbers (default: None).
         /// </summary>
         /// <value>Optional additional back diffuse reflectance as sequence of numbers (default: None).</value>
         [DataMember(Name="back_diffuse_reflectance", EmitDefaultValue=false)]
-        [JsonProperty("back_diffuse_reflectance")]
         public List<double> BackDiffuseReflectance { get; set; } 
         /// <summary>
         /// Optional additional diffuse transmittance as sequence of numbers (default: None).
         /// </summary>
         /// <value>Optional additional diffuse transmittance as sequence of numbers (default: None).</value>
         [DataMember(Name="diffuse_transmittance", EmitDefaultValue=false)]
-        [JsonProperty("diffuse_transmittance")]
         public List<double> DiffuseTransmittance { get; set; } 
         
         /// <summary>

@@ -55,52 +55,15 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             // to ensure "humidityType" is required (not null)
-            if (humidityType == null)
-            {
-                throw new InvalidDataException("humidityType is a required property for HumidityCondition and cannot be null");
-            }
-            else
-            {
-                this.HumidityType = humidityType;
-            }
-            
+            this.HumidityType = humidityType ?? throw new ArgumentNullException("humidityType is a required property for HumidityCondition and cannot be null");
             // to ensure "humidityValue" is required (not null)
-            if (humidityValue == null)
-            {
-                throw new InvalidDataException("humidityValue is a required property for HumidityCondition and cannot be null");
-            }
-            else
-            {
-                this.HumidityValue = humidityValue;
-            }
-            
+            this.HumidityValue = humidityValue ?? throw new ArgumentNullException("humidityValue is a required property for HumidityCondition and cannot be null");
             // use default value if no "barometricPressure" provided
-            if (barometricPressure == null)
-            {
-                this.BarometricPressure = 101325D;
-            }
-            else
-            {
-                this.BarometricPressure = barometricPressure;
-            }
+            this.BarometricPressure = barometricPressure ?? 101325D;
             // use default value if no "rain" provided
-            if (rain == null)
-            {
-                this.Rain = false;
-            }
-            else
-            {
-                this.Rain = rain;
-            }
+            this.Rain = rain ?? false;
             // use default value if no "snowOnGround" provided
-            if (snowOnGround == null)
-            {
-                this.SnowOnGround = false;
-            }
-            else
-            {
-                this.SnowOnGround = snowOnGround;
-            }
+            this.SnowOnGround = snowOnGround ?? false;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "HumidityCondition";
@@ -111,28 +74,24 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>The value correcponding to the humidity_type.</value>
         [DataMember(Name="humidity_value", EmitDefaultValue=false)]
-        [JsonProperty("humidity_value")]
         public double HumidityValue { get; set; } 
         /// <summary>
         /// Barometric air pressure on the design day [Pa].
         /// </summary>
         /// <value>Barometric air pressure on the design day [Pa].</value>
         [DataMember(Name="barometric_pressure", EmitDefaultValue=false)]
-        [JsonProperty("barometric_pressure")]
         public double BarometricPressure { get; set; }  = 101325D;
         /// <summary>
         /// Boolean to indicate rain on the design day.
         /// </summary>
         /// <value>Boolean to indicate rain on the design day.</value>
         [DataMember(Name="rain", EmitDefaultValue=false)]
-        [JsonProperty("rain")]
         public bool Rain { get; set; }  = false;
         /// <summary>
         /// Boolean to indicate snow on the ground during the design day.
         /// </summary>
         /// <value>Boolean to indicate snow on the ground during the design day.</value>
         [DataMember(Name="snow_on_ground", EmitDefaultValue=false)]
-        [JsonProperty("snow_on_ground")]
         public bool SnowOnGround { get; set; }  = false;
         
         /// <summary>

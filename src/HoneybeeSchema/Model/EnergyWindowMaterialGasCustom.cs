@@ -59,118 +59,29 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "conductivityCoeffA" is required (not null)
-            if (conductivityCoeffA == null)
-            {
-                throw new InvalidDataException("conductivityCoeffA is a required property for EnergyWindowMaterialGasCustom and cannot be null");
-            }
-            else
-            {
-                this.ConductivityCoeffA = conductivityCoeffA;
-            }
-            
+            this.ConductivityCoeffA = conductivityCoeffA ?? throw new ArgumentNullException("conductivityCoeffA is a required property for EnergyWindowMaterialGasCustom and cannot be null");
             // to ensure "viscosityCoeffA" is required (not null)
-            if (viscosityCoeffA == null)
-            {
-                throw new InvalidDataException("viscosityCoeffA is a required property for EnergyWindowMaterialGasCustom and cannot be null");
-            }
-            else
-            {
-                this.ViscosityCoeffA = viscosityCoeffA;
-            }
-            
+            this.ViscosityCoeffA = viscosityCoeffA ?? throw new ArgumentNullException("viscosityCoeffA is a required property for EnergyWindowMaterialGasCustom and cannot be null");
             // to ensure "specificHeatCoeffA" is required (not null)
-            if (specificHeatCoeffA == null)
-            {
-                throw new InvalidDataException("specificHeatCoeffA is a required property for EnergyWindowMaterialGasCustom and cannot be null");
-            }
-            else
-            {
-                this.SpecificHeatCoeffA = specificHeatCoeffA;
-            }
-            
+            this.SpecificHeatCoeffA = specificHeatCoeffA ?? throw new ArgumentNullException("specificHeatCoeffA is a required property for EnergyWindowMaterialGasCustom and cannot be null");
             // to ensure "specificHeatRatio" is required (not null)
-            if (specificHeatRatio == null)
-            {
-                throw new InvalidDataException("specificHeatRatio is a required property for EnergyWindowMaterialGasCustom and cannot be null");
-            }
-            else
-            {
-                this.SpecificHeatRatio = specificHeatRatio;
-            }
-            
+            this.SpecificHeatRatio = specificHeatRatio ?? throw new ArgumentNullException("specificHeatRatio is a required property for EnergyWindowMaterialGasCustom and cannot be null");
             // to ensure "molecularWeight" is required (not null)
-            if (molecularWeight == null)
-            {
-                throw new InvalidDataException("molecularWeight is a required property for EnergyWindowMaterialGasCustom and cannot be null");
-            }
-            else
-            {
-                this.MolecularWeight = molecularWeight;
-            }
-            
+            this.MolecularWeight = molecularWeight ?? throw new ArgumentNullException("molecularWeight is a required property for EnergyWindowMaterialGasCustom and cannot be null");
             // use default value if no "thickness" provided
-            if (thickness == null)
-            {
-                this.Thickness = 0.0125D;
-            }
-            else
-            {
-                this.Thickness = thickness;
-            }
+            this.Thickness = thickness ?? 0.0125D;
             // use default value if no "conductivityCoeffB" provided
-            if (conductivityCoeffB == null)
-            {
-                this.ConductivityCoeffB = 0D;
-            }
-            else
-            {
-                this.ConductivityCoeffB = conductivityCoeffB;
-            }
+            this.ConductivityCoeffB = conductivityCoeffB ?? 0D;
             // use default value if no "conductivityCoeffC" provided
-            if (conductivityCoeffC == null)
-            {
-                this.ConductivityCoeffC = 0D;
-            }
-            else
-            {
-                this.ConductivityCoeffC = conductivityCoeffC;
-            }
+            this.ConductivityCoeffC = conductivityCoeffC ?? 0D;
             // use default value if no "viscosityCoeffB" provided
-            if (viscosityCoeffB == null)
-            {
-                this.ViscosityCoeffB = 0D;
-            }
-            else
-            {
-                this.ViscosityCoeffB = viscosityCoeffB;
-            }
+            this.ViscosityCoeffB = viscosityCoeffB ?? 0D;
             // use default value if no "viscosityCoeffC" provided
-            if (viscosityCoeffC == null)
-            {
-                this.ViscosityCoeffC = 0D;
-            }
-            else
-            {
-                this.ViscosityCoeffC = viscosityCoeffC;
-            }
+            this.ViscosityCoeffC = viscosityCoeffC ?? 0D;
             // use default value if no "specificHeatCoeffB" provided
-            if (specificHeatCoeffB == null)
-            {
-                this.SpecificHeatCoeffB = 0D;
-            }
-            else
-            {
-                this.SpecificHeatCoeffB = specificHeatCoeffB;
-            }
+            this.SpecificHeatCoeffB = specificHeatCoeffB ?? 0D;
             // use default value if no "specificHeatCoeffC" provided
-            if (specificHeatCoeffC == null)
-            {
-                this.SpecificHeatCoeffC = 0D;
-            }
-            else
-            {
-                this.SpecificHeatCoeffC = specificHeatCoeffC;
-            }
+            this.SpecificHeatCoeffC = specificHeatCoeffC ?? 0D;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "EnergyWindowMaterialGasCustom";
@@ -181,84 +92,72 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>The A coefficient for gas conductivity in W/(m-K).</value>
         [DataMember(Name="conductivity_coeff_a", EmitDefaultValue=false)]
-        [JsonProperty("conductivity_coeff_a")]
         public double ConductivityCoeffA { get; set; } 
         /// <summary>
         /// The A coefficient for gas viscosity in kg/(m-s).
         /// </summary>
         /// <value>The A coefficient for gas viscosity in kg/(m-s).</value>
         [DataMember(Name="viscosity_coeff_a", EmitDefaultValue=false)]
-        [JsonProperty("viscosity_coeff_a")]
         public double ViscosityCoeffA { get; set; } 
         /// <summary>
         /// The A coefficient for gas specific heat in J/(kg-K).
         /// </summary>
         /// <value>The A coefficient for gas specific heat in J/(kg-K).</value>
         [DataMember(Name="specific_heat_coeff_a", EmitDefaultValue=false)]
-        [JsonProperty("specific_heat_coeff_a")]
         public double SpecificHeatCoeffA { get; set; } 
         /// <summary>
         /// The specific heat ratio for gas.
         /// </summary>
         /// <value>The specific heat ratio for gas.</value>
         [DataMember(Name="specific_heat_ratio", EmitDefaultValue=false)]
-        [JsonProperty("specific_heat_ratio")]
         public double SpecificHeatRatio { get; set; } 
         /// <summary>
         /// The molecular weight for gas in g/mol.
         /// </summary>
         /// <value>The molecular weight for gas in g/mol.</value>
         [DataMember(Name="molecular_weight", EmitDefaultValue=false)]
-        [JsonProperty("molecular_weight")]
         public double MolecularWeight { get; set; } 
         /// <summary>
         /// Thickness of the gas layer in meters. Default value is 0.0125.
         /// </summary>
         /// <value>Thickness of the gas layer in meters. Default value is 0.0125.</value>
         [DataMember(Name="thickness", EmitDefaultValue=false)]
-        [JsonProperty("thickness")]
         public double Thickness { get; set; }  = 0.0125D;
         /// <summary>
         /// The B coefficient for gas conductivity in W/(m-K2).
         /// </summary>
         /// <value>The B coefficient for gas conductivity in W/(m-K2).</value>
         [DataMember(Name="conductivity_coeff_b", EmitDefaultValue=false)]
-        [JsonProperty("conductivity_coeff_b")]
         public double ConductivityCoeffB { get; set; }  = 0D;
         /// <summary>
         /// The C coefficient for gas conductivity in W/(m-K3).
         /// </summary>
         /// <value>The C coefficient for gas conductivity in W/(m-K3).</value>
         [DataMember(Name="conductivity_coeff_c", EmitDefaultValue=false)]
-        [JsonProperty("conductivity_coeff_c")]
         public double ConductivityCoeffC { get; set; }  = 0D;
         /// <summary>
         /// The B coefficient for gas viscosity in kg/(m-s-K).
         /// </summary>
         /// <value>The B coefficient for gas viscosity in kg/(m-s-K).</value>
         [DataMember(Name="viscosity_coeff_b", EmitDefaultValue=false)]
-        [JsonProperty("viscosity_coeff_b")]
         public double ViscosityCoeffB { get; set; }  = 0D;
         /// <summary>
         /// The C coefficient for gas viscosity in kg/(m-s-K2).
         /// </summary>
         /// <value>The C coefficient for gas viscosity in kg/(m-s-K2).</value>
         [DataMember(Name="viscosity_coeff_c", EmitDefaultValue=false)]
-        [JsonProperty("viscosity_coeff_c")]
         public double ViscosityCoeffC { get; set; }  = 0D;
         /// <summary>
         /// The B coefficient for gas specific heat in J/(kg-K2).
         /// </summary>
         /// <value>The B coefficient for gas specific heat in J/(kg-K2).</value>
         [DataMember(Name="specific_heat_coeff_b", EmitDefaultValue=false)]
-        [JsonProperty("specific_heat_coeff_b")]
         public double SpecificHeatCoeffB { get; set; }  = 0D;
         /// <summary>
         /// The C coefficient for gas specific heat in J/(kg-K3).
         /// </summary>
         /// <value>The C coefficient for gas specific heat in J/(kg-K3).</value>
         [DataMember(Name="specific_heat_coeff_c", EmitDefaultValue=false)]
-        [JsonProperty("specific_heat_coeff_c")]
         public double SpecificHeatCoeffC { get; set; }  = 0D;
         
         /// <summary>

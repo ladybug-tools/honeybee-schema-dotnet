@@ -45,50 +45,15 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             // use default value if no "doZoneSizing" provided
-            if (doZoneSizing == null)
-            {
-                this.DoZoneSizing = true;
-            }
-            else
-            {
-                this.DoZoneSizing = doZoneSizing;
-            }
+            this.DoZoneSizing = doZoneSizing ?? true;
             // use default value if no "doSystemSizing" provided
-            if (doSystemSizing == null)
-            {
-                this.DoSystemSizing = true;
-            }
-            else
-            {
-                this.DoSystemSizing = doSystemSizing;
-            }
+            this.DoSystemSizing = doSystemSizing ?? true;
             // use default value if no "doPlantSizing" provided
-            if (doPlantSizing == null)
-            {
-                this.DoPlantSizing = true;
-            }
-            else
-            {
-                this.DoPlantSizing = doPlantSizing;
-            }
+            this.DoPlantSizing = doPlantSizing ?? true;
             // use default value if no "runForRunPeriods" provided
-            if (runForRunPeriods == null)
-            {
-                this.RunForRunPeriods = true;
-            }
-            else
-            {
-                this.RunForRunPeriods = runForRunPeriods;
-            }
+            this.RunForRunPeriods = runForRunPeriods ?? true;
             // use default value if no "runForSizingPeriods" provided
-            if (runForSizingPeriods == null)
-            {
-                this.RunForSizingPeriods = false;
-            }
-            else
-            {
-                this.RunForSizingPeriods = runForSizingPeriods;
-            }
+            this.RunForSizingPeriods = runForSizingPeriods ?? false;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "SimulationControl";
@@ -99,35 +64,30 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Boolean for whether the zone sizing calculation should be run.</value>
         [DataMember(Name="do_zone_sizing", EmitDefaultValue=false)]
-        [JsonProperty("do_zone_sizing")]
         public bool DoZoneSizing { get; set; }  = true;
         /// <summary>
         /// Boolean for whether the system sizing calculation should be run.
         /// </summary>
         /// <value>Boolean for whether the system sizing calculation should be run.</value>
         [DataMember(Name="do_system_sizing", EmitDefaultValue=false)]
-        [JsonProperty("do_system_sizing")]
         public bool DoSystemSizing { get; set; }  = true;
         /// <summary>
         /// Boolean for whether the plant sizing calculation should be run.
         /// </summary>
         /// <value>Boolean for whether the plant sizing calculation should be run.</value>
         [DataMember(Name="do_plant_sizing", EmitDefaultValue=false)]
-        [JsonProperty("do_plant_sizing")]
         public bool DoPlantSizing { get; set; }  = true;
         /// <summary>
         /// Boolean for whether the simulation should be run for the sizing periods.
         /// </summary>
         /// <value>Boolean for whether the simulation should be run for the sizing periods.</value>
         [DataMember(Name="run_for_run_periods", EmitDefaultValue=false)]
-        [JsonProperty("run_for_run_periods")]
         public bool RunForRunPeriods { get; set; }  = true;
         /// <summary>
         /// Boolean for whether the simulation should be run for the run periods.
         /// </summary>
         /// <value>Boolean for whether the simulation should be run for the run periods.</value>
         [DataMember(Name="run_for_sizing_periods", EmitDefaultValue=false)]
-        [JsonProperty("run_for_sizing_periods")]
         public bool RunForSizingPeriods { get; set; }  = false;
         
         /// <summary>

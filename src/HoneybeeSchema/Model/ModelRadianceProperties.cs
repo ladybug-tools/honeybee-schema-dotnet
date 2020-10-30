@@ -57,28 +57,24 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set.</value>
         [DataMember(Name="modifiers", EmitDefaultValue=false)]
-        [JsonProperty("modifiers")]
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Modifiers { get; set; } 
         /// <summary>
         /// A list of all unique Room-Assigned ModifierSets in the Model.
         /// </summary>
         /// <value>A list of all unique Room-Assigned ModifierSets in the Model.</value>
         [DataMember(Name="modifier_sets", EmitDefaultValue=false)]
-        [JsonProperty("modifier_sets")]
         public List<AnyOf<ModifierSet,ModifierSetAbridged>> ModifierSets { get; set; } 
         /// <summary>
         /// An array of SensorGrids that are associated with the model.
         /// </summary>
         /// <value>An array of SensorGrids that are associated with the model.</value>
         [DataMember(Name="sensor_grids", EmitDefaultValue=false)]
-        [JsonProperty("sensor_grids")]
         public List<SensorGrid> SensorGrids { get; set; } 
         /// <summary>
         /// An array of Views that are associated with the model.
         /// </summary>
         /// <value>An array of Views that are associated with the model.</value>
         [DataMember(Name="views", EmitDefaultValue=false)]
-        [JsonProperty("views")]
         public List<View> Views { get; set; } 
         
         /// <summary>

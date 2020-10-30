@@ -47,24 +47,9 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             // to ensure "flowCoefficient" is required (not null)
-            if (flowCoefficient == null)
-            {
-                throw new InvalidDataException("flowCoefficient is a required property for AFNCrack and cannot be null");
-            }
-            else
-            {
-                this.FlowCoefficient = flowCoefficient;
-            }
-            
+            this.FlowCoefficient = flowCoefficient ?? throw new ArgumentNullException("flowCoefficient is a required property for AFNCrack and cannot be null");
             // use default value if no "flowExponent" provided
-            if (flowExponent == null)
-            {
-                this.FlowExponent = 0.65D;
-            }
-            else
-            {
-                this.FlowExponent = flowExponent;
-            }
+            this.FlowExponent = flowExponent ?? 0.65D;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "AFNCrack";
@@ -75,14 +60,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A number in kg/s-m at 1 Pa per meter of crack length at the conditions defined in the ReferenceCrack condition; required to run an AirflowNetwork simulation. The DesignBuilder Cracks template defines the flow coefficient for a tight, low-leakage wall to be 0.00001 and 0.001 for external and internal constructions, respectively. Flow coefficients for a very poor, high-leakage wall are defined to be 0.0004 and 0.019 for external and internal constructions, respectively.</value>
         [DataMember(Name="flow_coefficient", EmitDefaultValue=false)]
-        [JsonProperty("flow_coefficient")]
         public double FlowCoefficient { get; set; } 
         /// <summary>
         /// An optional dimensionless number between 0.5 and 1 used to calculate the crack mass flow rate; required to run an AirflowNetwork simulation. This value represents the leak geometry impact on airflow, with 0.5 generally corresponding to turbulent orifice flow and 1 generally corresponding to laminar flow. The default of 0.65 is representative of many cases of wall and window leakage, used when the exponent cannot be measured.
         /// </summary>
         /// <value>An optional dimensionless number between 0.5 and 1 used to calculate the crack mass flow rate; required to run an AirflowNetwork simulation. This value represents the leak geometry impact on airflow, with 0.5 generally corresponding to turbulent orifice flow and 1 generally corresponding to laminar flow. The default of 0.65 is representative of many cases of wall and window leakage, used when the exponent cannot be measured.</value>
         [DataMember(Name="flow_exponent", EmitDefaultValue=false)]
-        [JsonProperty("flow_exponent")]
         public double FlowExponent { get; set; }  = 0.65D;
         
         /// <summary>

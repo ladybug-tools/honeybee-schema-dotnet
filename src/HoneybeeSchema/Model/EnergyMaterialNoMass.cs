@@ -34,7 +34,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Roughness
         /// </summary>
         [DataMember(Name="roughness", EmitDefaultValue=false)]
-        public Roughness? Roughness { get; set; }   
+        public Roughness Roughness { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyMaterialNoMass" /> class.
         /// </summary>
@@ -57,43 +57,14 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "rValue" is required (not null)
-            if (rValue == null)
-            {
-                throw new InvalidDataException("rValue is a required property for EnergyMaterialNoMass and cannot be null");
-            }
-            else
-            {
-                this.RValue = rValue;
-            }
-            
+            this.RValue = rValue ?? throw new ArgumentNullException("rValue is a required property for EnergyMaterialNoMass and cannot be null");
             this.Roughness = roughness;
             // use default value if no "thermalAbsorptance" provided
-            if (thermalAbsorptance == null)
-            {
-                this.ThermalAbsorptance = 0.9D;
-            }
-            else
-            {
-                this.ThermalAbsorptance = thermalAbsorptance;
-            }
+            this.ThermalAbsorptance = thermalAbsorptance ?? 0.9D;
             // use default value if no "solarAbsorptance" provided
-            if (solarAbsorptance == null)
-            {
-                this.SolarAbsorptance = 0.7D;
-            }
-            else
-            {
-                this.SolarAbsorptance = solarAbsorptance;
-            }
+            this.SolarAbsorptance = solarAbsorptance ?? 0.7D;
             // use default value if no "visibleAbsorptance" provided
-            if (visibleAbsorptance == null)
-            {
-                this.VisibleAbsorptance = 0.7D;
-            }
-            else
-            {
-                this.VisibleAbsorptance = visibleAbsorptance;
-            }
+            this.VisibleAbsorptance = visibleAbsorptance ?? 0.7D;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "EnergyMaterialNoMass";
@@ -104,28 +75,24 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>The thermal resistance (R-value) of the material layer [m2-K/W].</value>
         [DataMember(Name="r_value", EmitDefaultValue=false)]
-        [JsonProperty("r_value")]
         public double RValue { get; set; } 
         /// <summary>
         /// Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9.
         /// </summary>
         /// <value>Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9.</value>
         [DataMember(Name="thermal_absorptance", EmitDefaultValue=false)]
-        [JsonProperty("thermal_absorptance")]
         public double ThermalAbsorptance { get; set; }  = 0.9D;
         /// <summary>
         /// Fraction of incident solar radiation absorbed by the material. Default value is 0.7.
         /// </summary>
         /// <value>Fraction of incident solar radiation absorbed by the material. Default value is 0.7.</value>
         [DataMember(Name="solar_absorptance", EmitDefaultValue=false)]
-        [JsonProperty("solar_absorptance")]
         public double SolarAbsorptance { get; set; }  = 0.7D;
         /// <summary>
         /// Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7.
         /// </summary>
         /// <value>Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7.</value>
         [DataMember(Name="visible_absorptance", EmitDefaultValue=false)]
-        [JsonProperty("visible_absorptance")]
         public double VisibleAbsorptance { get; set; }  = 0.7D;
         
         /// <summary>

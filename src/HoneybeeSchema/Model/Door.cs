@@ -54,44 +54,13 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "geometry" is required (not null)
-            if (geometry == null)
-            {
-                throw new InvalidDataException("geometry is a required property for Door and cannot be null");
-            }
-            else
-            {
-                this.Geometry = geometry;
-            }
-            
+            this.Geometry = geometry ?? throw new ArgumentNullException("geometry is a required property for Door and cannot be null");
             // to ensure "boundaryCondition" is required (not null)
-            if (boundaryCondition == null)
-            {
-                throw new InvalidDataException("boundaryCondition is a required property for Door and cannot be null");
-            }
-            else
-            {
-                this.BoundaryCondition = boundaryCondition;
-            }
-            
+            this.BoundaryCondition = boundaryCondition ?? throw new ArgumentNullException("boundaryCondition is a required property for Door and cannot be null");
             // to ensure "properties" is required (not null)
-            if (properties == null)
-            {
-                throw new InvalidDataException("properties is a required property for Door and cannot be null");
-            }
-            else
-            {
-                this.Properties = properties;
-            }
-            
+            this.Properties = properties ?? throw new ArgumentNullException("properties is a required property for Door and cannot be null");
             // use default value if no "isGlass" provided
-            if (isGlass == null)
-            {
-                this.IsGlass = false;
-            }
-            else
-            {
-                this.IsGlass = isGlass;
-            }
+            this.IsGlass = isGlass ?? false;
             this.IndoorShades = indoorShades;
             this.OutdoorShades = outdoorShades;
 
@@ -104,41 +73,35 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Planar Face3D for the geometry.</value>
         [DataMember(Name="geometry", EmitDefaultValue=false)]
-        [JsonProperty("geometry")]
         public Face3D Geometry { get; set; } 
         /// <summary>
         /// Gets or Sets BoundaryCondition
         /// </summary>
         [DataMember(Name="boundary_condition", EmitDefaultValue=false)]
-        [JsonProperty("boundary_condition")]
         public AnyOf<Outdoors,Surface> BoundaryCondition { get; set; } 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
         [DataMember(Name="properties", EmitDefaultValue=false)]
-        [JsonProperty("properties")]
         public DoorPropertiesAbridged Properties { get; set; } 
         /// <summary>
         /// Boolean to note whether this object is a glass door as opposed to an opaque door.
         /// </summary>
         /// <value>Boolean to note whether this object is a glass door as opposed to an opaque door.</value>
         [DataMember(Name="is_glass", EmitDefaultValue=false)]
-        [JsonProperty("is_glass")]
         public bool IsGlass { get; set; }  = false;
         /// <summary>
         /// Shades assigned to the interior side of this object.
         /// </summary>
         /// <value>Shades assigned to the interior side of this object.</value>
         [DataMember(Name="indoor_shades", EmitDefaultValue=false)]
-        [JsonProperty("indoor_shades")]
         public List<Shade> IndoorShades { get; set; } 
         /// <summary>
         /// Shades assigned to the exterior side of this object (eg. entryway awning).
         /// </summary>
         /// <value>Shades assigned to the exterior side of this object (eg. entryway awning).</value>
         [DataMember(Name="outdoor_shades", EmitDefaultValue=false)]
-        [JsonProperty("outdoor_shades")]
         public List<Shade> OutdoorShades { get; set; } 
         
         /// <summary>

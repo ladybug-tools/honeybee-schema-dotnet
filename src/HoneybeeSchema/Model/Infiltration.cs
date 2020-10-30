@@ -52,52 +52,15 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "flowPerExteriorArea" is required (not null)
-            if (flowPerExteriorArea == null)
-            {
-                throw new InvalidDataException("flowPerExteriorArea is a required property for Infiltration and cannot be null");
-            }
-            else
-            {
-                this.FlowPerExteriorArea = flowPerExteriorArea;
-            }
-            
+            this.FlowPerExteriorArea = flowPerExteriorArea ?? throw new ArgumentNullException("flowPerExteriorArea is a required property for Infiltration and cannot be null");
             // to ensure "schedule" is required (not null)
-            if (schedule == null)
-            {
-                throw new InvalidDataException("schedule is a required property for Infiltration and cannot be null");
-            }
-            else
-            {
-                this.Schedule = schedule;
-            }
-            
+            this.Schedule = schedule ?? throw new ArgumentNullException("schedule is a required property for Infiltration and cannot be null");
             // use default value if no "constantCoefficient" provided
-            if (constantCoefficient == null)
-            {
-                this.ConstantCoefficient = 1D;
-            }
-            else
-            {
-                this.ConstantCoefficient = constantCoefficient;
-            }
+            this.ConstantCoefficient = constantCoefficient ?? 1D;
             // use default value if no "temperatureCoefficient" provided
-            if (temperatureCoefficient == null)
-            {
-                this.TemperatureCoefficient = 0D;
-            }
-            else
-            {
-                this.TemperatureCoefficient = temperatureCoefficient;
-            }
+            this.TemperatureCoefficient = temperatureCoefficient ?? 0D;
             // use default value if no "velocityCoefficient" provided
-            if (velocityCoefficient == null)
-            {
-                this.VelocityCoefficient = 0D;
-            }
-            else
-            {
-                this.VelocityCoefficient = velocityCoefficient;
-            }
+            this.VelocityCoefficient = velocityCoefficient ?? 0D;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Infiltration";
@@ -108,32 +71,27 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Number for the infiltration per exterior surface area in m3/s-m2.</value>
         [DataMember(Name="flow_per_exterior_area", EmitDefaultValue=false)]
-        [JsonProperty("flow_per_exterior_area")]
         public double FlowPerExteriorArea { get; set; } 
         /// <summary>
         /// The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.
         /// </summary>
         /// <value>The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.</value>
         [DataMember(Name="schedule", EmitDefaultValue=false)]
-        [JsonProperty("schedule")]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; } 
         /// <summary>
         /// Gets or Sets ConstantCoefficient
         /// </summary>
         [DataMember(Name="constant_coefficient", EmitDefaultValue=false)]
-        [JsonProperty("constant_coefficient")]
         public double ConstantCoefficient { get; set; }  = 1D;
         /// <summary>
         /// Gets or Sets TemperatureCoefficient
         /// </summary>
         [DataMember(Name="temperature_coefficient", EmitDefaultValue=false)]
-        [JsonProperty("temperature_coefficient")]
         public double TemperatureCoefficient { get; set; }  = 0D;
         /// <summary>
         /// Gets or Sets VelocityCoefficient
         /// </summary>
         [DataMember(Name="velocity_coefficient", EmitDefaultValue=false)]
-        [JsonProperty("velocity_coefficient")]
         public double VelocityCoefficient { get; set; }  = 0D;
         
         /// <summary>

@@ -43,23 +43,9 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             // use default value if no "sunExposure" provided
-            if (sunExposure == null)
-            {
-                this.SunExposure = true;
-            }
-            else
-            {
-                this.SunExposure = sunExposure;
-            }
+            this.SunExposure = sunExposure ?? true;
             // use default value if no "windExposure" provided
-            if (windExposure == null)
-            {
-                this.WindExposure = true;
-            }
-            else
-            {
-                this.WindExposure = windExposure;
-            }
+            this.WindExposure = windExposure ?? true;
             this.ViewFactor = viewFactor;
 
             // Set non-required readonly properties with defaultValue
@@ -71,21 +57,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A boolean noting whether the boundary is exposed to sun.</value>
         [DataMember(Name="sun_exposure", EmitDefaultValue=false)]
-        [JsonProperty("sun_exposure")]
         public bool SunExposure { get; set; }  = true;
         /// <summary>
         /// A boolean noting whether the boundary is exposed to wind.
         /// </summary>
         /// <value>A boolean noting whether the boundary is exposed to wind.</value>
         [DataMember(Name="wind_exposure", EmitDefaultValue=false)]
-        [JsonProperty("wind_exposure")]
         public bool WindExposure { get; set; }  = true;
         /// <summary>
         /// A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated.
         /// </summary>
         /// <value>A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated.</value>
         [DataMember(Name="view_factor", EmitDefaultValue=false)]
-        [JsonProperty("view_factor")]
         public AnyOf<Autocalculate,double> ViewFactor { get; set; } 
         
         /// <summary>

@@ -34,7 +34,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Roughness
         /// </summary>
         [DataMember(Name="roughness", EmitDefaultValue=false)]
-        public Roughness? Roughness { get; set; }   
+        public Roughness Roughness { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyMaterial" /> class.
         /// </summary>
@@ -60,73 +60,20 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "thickness" is required (not null)
-            if (thickness == null)
-            {
-                throw new InvalidDataException("thickness is a required property for EnergyMaterial and cannot be null");
-            }
-            else
-            {
-                this.Thickness = thickness;
-            }
-            
+            this.Thickness = thickness ?? throw new ArgumentNullException("thickness is a required property for EnergyMaterial and cannot be null");
             // to ensure "conductivity" is required (not null)
-            if (conductivity == null)
-            {
-                throw new InvalidDataException("conductivity is a required property for EnergyMaterial and cannot be null");
-            }
-            else
-            {
-                this.Conductivity = conductivity;
-            }
-            
+            this.Conductivity = conductivity ?? throw new ArgumentNullException("conductivity is a required property for EnergyMaterial and cannot be null");
             // to ensure "density" is required (not null)
-            if (density == null)
-            {
-                throw new InvalidDataException("density is a required property for EnergyMaterial and cannot be null");
-            }
-            else
-            {
-                this.Density = density;
-            }
-            
+            this.Density = density ?? throw new ArgumentNullException("density is a required property for EnergyMaterial and cannot be null");
             // to ensure "specificHeat" is required (not null)
-            if (specificHeat == null)
-            {
-                throw new InvalidDataException("specificHeat is a required property for EnergyMaterial and cannot be null");
-            }
-            else
-            {
-                this.SpecificHeat = specificHeat;
-            }
-            
+            this.SpecificHeat = specificHeat ?? throw new ArgumentNullException("specificHeat is a required property for EnergyMaterial and cannot be null");
             this.Roughness = roughness;
             // use default value if no "thermalAbsorptance" provided
-            if (thermalAbsorptance == null)
-            {
-                this.ThermalAbsorptance = 0.9D;
-            }
-            else
-            {
-                this.ThermalAbsorptance = thermalAbsorptance;
-            }
+            this.ThermalAbsorptance = thermalAbsorptance ?? 0.9D;
             // use default value if no "solarAbsorptance" provided
-            if (solarAbsorptance == null)
-            {
-                this.SolarAbsorptance = 0.7D;
-            }
-            else
-            {
-                this.SolarAbsorptance = solarAbsorptance;
-            }
+            this.SolarAbsorptance = solarAbsorptance ?? 0.7D;
             // use default value if no "visibleAbsorptance" provided
-            if (visibleAbsorptance == null)
-            {
-                this.VisibleAbsorptance = 0.7D;
-            }
-            else
-            {
-                this.VisibleAbsorptance = visibleAbsorptance;
-            }
+            this.VisibleAbsorptance = visibleAbsorptance ?? 0.7D;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "EnergyMaterial";
@@ -137,49 +84,42 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Thickness of the material layer in meters.</value>
         [DataMember(Name="thickness", EmitDefaultValue=false)]
-        [JsonProperty("thickness")]
         public double Thickness { get; set; } 
         /// <summary>
         /// Thermal conductivity of the material layer in W/(m-K).
         /// </summary>
         /// <value>Thermal conductivity of the material layer in W/(m-K).</value>
         [DataMember(Name="conductivity", EmitDefaultValue=false)]
-        [JsonProperty("conductivity")]
         public double Conductivity { get; set; } 
         /// <summary>
         /// Density of the material layer in kg/m3.
         /// </summary>
         /// <value>Density of the material layer in kg/m3.</value>
         [DataMember(Name="density", EmitDefaultValue=false)]
-        [JsonProperty("density")]
         public double Density { get; set; } 
         /// <summary>
         /// Specific heat of the material layer in J/(kg-K).
         /// </summary>
         /// <value>Specific heat of the material layer in J/(kg-K).</value>
         [DataMember(Name="specific_heat", EmitDefaultValue=false)]
-        [JsonProperty("specific_heat")]
         public double SpecificHeat { get; set; } 
         /// <summary>
         /// Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9.
         /// </summary>
         /// <value>Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9.</value>
         [DataMember(Name="thermal_absorptance", EmitDefaultValue=false)]
-        [JsonProperty("thermal_absorptance")]
         public double ThermalAbsorptance { get; set; }  = 0.9D;
         /// <summary>
         /// Fraction of incident solar radiation absorbed by the material. Default value is 0.7.
         /// </summary>
         /// <value>Fraction of incident solar radiation absorbed by the material. Default value is 0.7.</value>
         [DataMember(Name="solar_absorptance", EmitDefaultValue=false)]
-        [JsonProperty("solar_absorptance")]
         public double SolarAbsorptance { get; set; }  = 0.7D;
         /// <summary>
         /// Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7.
         /// </summary>
         /// <value>Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7.</value>
         [DataMember(Name="visible_absorptance", EmitDefaultValue=false)]
-        [JsonProperty("visible_absorptance")]
         public double VisibleAbsorptance { get; set; }  = 0.7D;
         
         /// <summary>

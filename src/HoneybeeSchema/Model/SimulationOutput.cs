@@ -34,7 +34,7 @@ namespace HoneybeeSchema
         /// Gets or Sets ReportingFrequency
         /// </summary>
         [DataMember(Name="reporting_frequency", EmitDefaultValue=false)]
-        public ReportingFrequency? ReportingFrequency { get; set; }   
+        public ReportingFrequency ReportingFrequency { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="SimulationOutput" /> class.
         /// </summary>
@@ -51,23 +51,9 @@ namespace HoneybeeSchema
         {
             this.ReportingFrequency = reportingFrequency;
             // use default value if no "includeSqlite" provided
-            if (includeSqlite == null)
-            {
-                this.IncludeSqlite = true;
-            }
-            else
-            {
-                this.IncludeSqlite = includeSqlite;
-            }
+            this.IncludeSqlite = includeSqlite ?? true;
             // use default value if no "includeHtml" provided
-            if (includeHtml == null)
-            {
-                this.IncludeHtml = true;
-            }
-            else
-            {
-                this.IncludeHtml = includeHtml;
-            }
+            this.IncludeHtml = includeHtml ?? true;
             this.Outputs = outputs;
             this.SummaryReports = summaryReports;
 
@@ -80,28 +66,24 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Boolean to note whether a SQLite report should be requested from the simulation.</value>
         [DataMember(Name="include_sqlite", EmitDefaultValue=false)]
-        [JsonProperty("include_sqlite")]
         public bool IncludeSqlite { get; set; }  = true;
         /// <summary>
         /// Boolean to note whether an HTML report should be requested from the simulation.
         /// </summary>
         /// <value>Boolean to note whether an HTML report should be requested from the simulation.</value>
         [DataMember(Name="include_html", EmitDefaultValue=false)]
-        [JsonProperty("include_html")]
         public bool IncludeHtml { get; set; }  = true;
         /// <summary>
         /// A list of EnergyPlus output names as strings, which are requested from the simulation.
         /// </summary>
         /// <value>A list of EnergyPlus output names as strings, which are requested from the simulation.</value>
         [DataMember(Name="outputs", EmitDefaultValue=false)]
-        [JsonProperty("outputs")]
         public List<string> Outputs { get; set; } 
         /// <summary>
         /// A list of EnergyPlus summary report names as strings.
         /// </summary>
         /// <value>A list of EnergyPlus summary report names as strings.</value>
         [DataMember(Name="summary_reports", EmitDefaultValue=false)]
-        [JsonProperty("summary_reports")]
         public List<string> SummaryReports { get; set; } 
         
         /// <summary>

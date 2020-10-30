@@ -53,61 +53,17 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "wattsPerArea" is required (not null)
-            if (wattsPerArea == null)
-            {
-                throw new InvalidDataException("wattsPerArea is a required property for Lighting and cannot be null");
-            }
-            else
-            {
-                this.WattsPerArea = wattsPerArea;
-            }
-            
+            this.WattsPerArea = wattsPerArea ?? throw new ArgumentNullException("wattsPerArea is a required property for Lighting and cannot be null");
             // to ensure "schedule" is required (not null)
-            if (schedule == null)
-            {
-                throw new InvalidDataException("schedule is a required property for Lighting and cannot be null");
-            }
-            else
-            {
-                this.Schedule = schedule;
-            }
-            
+            this.Schedule = schedule ?? throw new ArgumentNullException("schedule is a required property for Lighting and cannot be null");
             // use default value if no "visibleFraction" provided
-            if (visibleFraction == null)
-            {
-                this.VisibleFraction = 0.25D;
-            }
-            else
-            {
-                this.VisibleFraction = visibleFraction;
-            }
+            this.VisibleFraction = visibleFraction ?? 0.25D;
             // use default value if no "radiantFraction" provided
-            if (radiantFraction == null)
-            {
-                this.RadiantFraction = 0.32D;
-            }
-            else
-            {
-                this.RadiantFraction = radiantFraction;
-            }
+            this.RadiantFraction = radiantFraction ?? 0.32D;
             // use default value if no "returnAirFraction" provided
-            if (returnAirFraction == null)
-            {
-                this.ReturnAirFraction = 0.0D;
-            }
-            else
-            {
-                this.ReturnAirFraction = returnAirFraction;
-            }
+            this.ReturnAirFraction = returnAirFraction ?? 0.0D;
             // use default value if no "baselineWattsPerArea" provided
-            if (baselineWattsPerArea == null)
-            {
-                this.BaselineWattsPerArea = 11.84029D;
-            }
-            else
-            {
-                this.BaselineWattsPerArea = baselineWattsPerArea;
-            }
+            this.BaselineWattsPerArea = baselineWattsPerArea ?? 11.84029D;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Lighting";
@@ -118,42 +74,36 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Lighting per floor area as [W/m2].</value>
         [DataMember(Name="watts_per_area", EmitDefaultValue=false)]
-        [JsonProperty("watts_per_area")]
         public double WattsPerArea { get; set; } 
         /// <summary>
         /// The schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile.
         /// </summary>
         /// <value>The schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile.</value>
         [DataMember(Name="schedule", EmitDefaultValue=false)]
-        [JsonProperty("schedule")]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; } 
         /// <summary>
         /// The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. The default value is &#x60;0.25&#x60;.
         /// </summary>
         /// <value>The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. The default value is &#x60;0.25&#x60;.</value>
         [DataMember(Name="visible_fraction", EmitDefaultValue=false)]
-        [JsonProperty("visible_fraction")]
         public double VisibleFraction { get; set; }  = 0.25D;
         /// <summary>
         /// The fraction of heat from lights that is long-wave radiation. Default value is &#x60;0.32&#x60;.
         /// </summary>
         /// <value>The fraction of heat from lights that is long-wave radiation. Default value is &#x60;0.32&#x60;.</value>
         [DataMember(Name="radiant_fraction", EmitDefaultValue=false)]
-        [JsonProperty("radiant_fraction")]
         public double RadiantFraction { get; set; }  = 0.32D;
         /// <summary>
         /// The fraction of the heat from lights that goes into the zone return air. Default value is &#x60;0&#x60;.
         /// </summary>
         /// <value>The fraction of the heat from lights that goes into the zone return air. Default value is &#x60;0&#x60;.</value>
         [DataMember(Name="return_air_fraction", EmitDefaultValue=false)]
-        [JsonProperty("return_air_fraction")]
         public double ReturnAirFraction { get; set; }  = 0.0D;
         /// <summary>
         /// The baseline lighting power density in [W/m2] of floor area. This baseline is useful to track how much better the installed lights are in comparison to a standard like ASHRAE 90.1. If set to None, it will default to 11.84029 W/m2, which is that ASHRAE 90.1-2004 baseline for an office.
         /// </summary>
         /// <value>The baseline lighting power density in [W/m2] of floor area. This baseline is useful to track how much better the installed lights are in comparison to a standard like ASHRAE 90.1. If set to None, it will default to 11.84029 W/m2, which is that ASHRAE 90.1-2004 baseline for an office.</value>
         [DataMember(Name="baseline_watts_per_area", EmitDefaultValue=false)]
-        [JsonProperty("baseline_watts_per_area")]
         public double BaselineWattsPerArea { get; set; }  = 11.84029D;
         
         /// <summary>

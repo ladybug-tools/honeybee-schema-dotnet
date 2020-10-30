@@ -52,44 +52,13 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "peoplePerArea" is required (not null)
-            if (peoplePerArea == null)
-            {
-                throw new InvalidDataException("peoplePerArea is a required property for People and cannot be null");
-            }
-            else
-            {
-                this.PeoplePerArea = peoplePerArea;
-            }
-            
+            this.PeoplePerArea = peoplePerArea ?? throw new ArgumentNullException("peoplePerArea is a required property for People and cannot be null");
             // to ensure "occupancySchedule" is required (not null)
-            if (occupancySchedule == null)
-            {
-                throw new InvalidDataException("occupancySchedule is a required property for People and cannot be null");
-            }
-            else
-            {
-                this.OccupancySchedule = occupancySchedule;
-            }
-            
+            this.OccupancySchedule = occupancySchedule ?? throw new ArgumentNullException("occupancySchedule is a required property for People and cannot be null");
             // to ensure "activitySchedule" is required (not null)
-            if (activitySchedule == null)
-            {
-                throw new InvalidDataException("activitySchedule is a required property for People and cannot be null");
-            }
-            else
-            {
-                this.ActivitySchedule = activitySchedule;
-            }
-            
+            this.ActivitySchedule = activitySchedule ?? throw new ArgumentNullException("activitySchedule is a required property for People and cannot be null");
             // use default value if no "radiantFraction" provided
-            if (radiantFraction == null)
-            {
-                this.RadiantFraction = 0.3D;
-            }
-            else
-            {
-                this.RadiantFraction = radiantFraction;
-            }
+            this.RadiantFraction = radiantFraction ?? 0.3D;
             this.LatentFraction = latentFraction;
 
             // Set non-required readonly properties with defaultValue
@@ -101,35 +70,30 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>People per floor area expressed as [people/m2]</value>
         [DataMember(Name="people_per_area", EmitDefaultValue=false)]
-        [JsonProperty("people_per_area")]
         public double PeoplePerArea { get; set; } 
         /// <summary>
         /// A schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile.
         /// </summary>
         /// <value>A schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile.</value>
         [DataMember(Name="occupancy_schedule", EmitDefaultValue=false)]
-        [JsonProperty("occupancy_schedule")]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> OccupancySchedule { get; set; } 
         /// <summary>
         /// A schedule for the activity of the occupants over the course of the year. The type of this schedule should be Power and the values of the schedule equal to the number of Watts given off by an individual person in the room.
         /// </summary>
         /// <value>A schedule for the activity of the occupants over the course of the year. The type of this schedule should be Power and the values of the schedule equal to the number of Watts given off by an individual person in the room.</value>
         [DataMember(Name="activity_schedule", EmitDefaultValue=false)]
-        [JsonProperty("activity_schedule")]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> ActivitySchedule { get; set; } 
         /// <summary>
         /// The radiant fraction of sensible heat released by people. The defaultvalue is 0.30.
         /// </summary>
         /// <value>The radiant fraction of sensible heat released by people. The defaultvalue is 0.30.</value>
         [DataMember(Name="radiant_fraction", EmitDefaultValue=false)]
-        [JsonProperty("radiant_fraction")]
         public double RadiantFraction { get; set; }  = 0.3D;
         /// <summary>
         /// Number for the latent fraction of heat gain due to people or an Autocalculate object.
         /// </summary>
         /// <value>Number for the latent fraction of heat gain due to people or an Autocalculate object.</value>
         [DataMember(Name="latent_fraction", EmitDefaultValue=false)]
-        [JsonProperty("latent_fraction")]
         public AnyOf<Autocalculate,double> LatentFraction { get; set; } 
         
         /// <summary>

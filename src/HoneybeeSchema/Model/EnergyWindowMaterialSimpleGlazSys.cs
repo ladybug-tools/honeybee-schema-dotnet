@@ -50,34 +50,11 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "uFactor" is required (not null)
-            if (uFactor == null)
-            {
-                throw new InvalidDataException("uFactor is a required property for EnergyWindowMaterialSimpleGlazSys and cannot be null");
-            }
-            else
-            {
-                this.UFactor = uFactor;
-            }
-            
+            this.UFactor = uFactor ?? throw new ArgumentNullException("uFactor is a required property for EnergyWindowMaterialSimpleGlazSys and cannot be null");
             // to ensure "shgc" is required (not null)
-            if (shgc == null)
-            {
-                throw new InvalidDataException("shgc is a required property for EnergyWindowMaterialSimpleGlazSys and cannot be null");
-            }
-            else
-            {
-                this.Shgc = shgc;
-            }
-            
+            this.Shgc = shgc ?? throw new ArgumentNullException("shgc is a required property for EnergyWindowMaterialSimpleGlazSys and cannot be null");
             // use default value if no "vt" provided
-            if (vt == null)
-            {
-                this.Vt = 0.54D;
-            }
-            else
-            {
-                this.Vt = vt;
-            }
+            this.Vt = vt ?? 0.54D;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "EnergyWindowMaterialSimpleGlazSys";
@@ -88,21 +65,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Used to describe the value for window system U-Factor, or overall heat transfer coefficient in W/(m2-K).</value>
         [DataMember(Name="u_factor", EmitDefaultValue=false)]
-        [JsonProperty("u_factor")]
         public double UFactor { get; set; } 
         /// <summary>
         /// Unitless  quantity describing Solar Heat Gain Coefficient for normal incidence and vertical orientation.
         /// </summary>
         /// <value>Unitless  quantity describing Solar Heat Gain Coefficient for normal incidence and vertical orientation.</value>
         [DataMember(Name="shgc", EmitDefaultValue=false)]
-        [JsonProperty("shgc")]
         public double Shgc { get; set; } 
         /// <summary>
         /// The fraction of visible light falling on the window that makes it through the glass at normal incidence.
         /// </summary>
         /// <value>The fraction of visible light falling on the window that makes it through the glass at normal incidence.</value>
         [DataMember(Name="vt", EmitDefaultValue=false)]
-        [JsonProperty("vt")]
         public double Vt { get; set; }  = 0.54D;
         
         /// <summary>

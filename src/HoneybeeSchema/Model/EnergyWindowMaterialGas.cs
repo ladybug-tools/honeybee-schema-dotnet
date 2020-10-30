@@ -34,7 +34,7 @@ namespace HoneybeeSchema
         /// Gets or Sets GasType
         /// </summary>
         [DataMember(Name="gas_type", EmitDefaultValue=false)]
-        public GasType? GasType { get; set; }   
+        public GasType GasType { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialGas" /> class.
         /// </summary>
@@ -54,14 +54,7 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // use default value if no "thickness" provided
-            if (thickness == null)
-            {
-                this.Thickness = 0.0125D;
-            }
-            else
-            {
-                this.Thickness = thickness;
-            }
+            this.Thickness = thickness ?? 0.0125D;
             this.GasType = gasType;
 
             // Set non-required readonly properties with defaultValue
@@ -73,7 +66,6 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Thickness of the gas layer in meters. Default value is 0.0125.</value>
         [DataMember(Name="thickness", EmitDefaultValue=false)]
-        [JsonProperty("thickness")]
         public double Thickness { get; set; }  = 0.0125D;
         
         /// <summary>

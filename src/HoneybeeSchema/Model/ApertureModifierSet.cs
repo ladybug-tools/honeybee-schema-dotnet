@@ -57,28 +57,24 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and Wall parent Face.</value>
         [DataMember(Name="window_modifier", EmitDefaultValue=false)]
-        [JsonProperty("window_modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> WindowModifier { get; set; } 
         /// <summary>
         /// A modifier object for apertures with a Surface boundary condition.
         /// </summary>
         /// <value>A modifier object for apertures with a Surface boundary condition.</value>
         [DataMember(Name="interior_modifier", EmitDefaultValue=false)]
-        [JsonProperty("interior_modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> InteriorModifier { get; set; } 
         /// <summary>
         /// A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.
         /// </summary>
         /// <value>A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.</value>
         [DataMember(Name="skylight_modifier", EmitDefaultValue=false)]
-        [JsonProperty("skylight_modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> SkylightModifier { get; set; } 
         /// <summary>
         /// A modifier object for apertures with an Outdoors boundary condition and a True is_operable property.
         /// </summary>
         /// <value>A modifier object for apertures with an Outdoors boundary condition and a True is_operable property.</value>
         [DataMember(Name="operable_modifier", EmitDefaultValue=false)]
-        [JsonProperty("operable_modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> OperableModifier { get; set; } 
         
         /// <summary>

@@ -59,35 +59,30 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A radiance modifier object for faces with an Outdoors boundary condition.</value>
         [DataMember(Name="exterior_modifier", EmitDefaultValue=false)]
-        [JsonProperty("exterior_modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> ExteriorModifier { get; set; } 
         /// <summary>
         /// A radiance modifier object for faces with a boundary condition other than Outdoors.
         /// </summary>
         /// <value>A radiance modifier object for faces with a boundary condition other than Outdoors.</value>
         [DataMember(Name="interior_modifier", EmitDefaultValue=false)]
-        [JsonProperty("interior_modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> InteriorModifier { get; set; } 
         /// <summary>
         /// A modifier object for glass with a Surface boundary condition.
         /// </summary>
         /// <value>A modifier object for glass with a Surface boundary condition.</value>
         [DataMember(Name="interior_glass_modifier", EmitDefaultValue=false)]
-        [JsonProperty("interior_glass_modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> InteriorGlassModifier { get; set; } 
         /// <summary>
         /// A modifier object for glass with an Outdoors boundary condition.
         /// </summary>
         /// <value>A modifier object for glass with an Outdoors boundary condition.</value>
         [DataMember(Name="exterior_glass_modifier", EmitDefaultValue=false)]
-        [JsonProperty("exterior_glass_modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> ExteriorGlassModifier { get; set; } 
         /// <summary>
         /// A window modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face.
         /// </summary>
         /// <value>A window modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face.</value>
         [DataMember(Name="overhead_modifier", EmitDefaultValue=false)]
-        [JsonProperty("overhead_modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> OverheadModifier { get; set; } 
         
         /// <summary>

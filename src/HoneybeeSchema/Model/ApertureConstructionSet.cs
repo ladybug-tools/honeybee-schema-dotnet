@@ -57,28 +57,24 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.</value>
         [DataMember(Name="interior_construction", EmitDefaultValue=false)]
-        [JsonProperty("interior_construction")]
         public WindowConstruction InteriorConstruction { get; set; } 
         /// <summary>
         /// A WindowConstruction for all apertures with a Surface boundary condition.
         /// </summary>
         /// <value>A WindowConstruction for all apertures with a Surface boundary condition.</value>
         [DataMember(Name="window_construction", EmitDefaultValue=false)]
-        [JsonProperty("window_construction")]
         public WindowConstruction WindowConstruction { get; set; } 
         /// <summary>
         /// A WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.
         /// </summary>
         /// <value>A WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.</value>
         [DataMember(Name="skylight_construction", EmitDefaultValue=false)]
-        [JsonProperty("skylight_construction")]
         public WindowConstruction SkylightConstruction { get; set; } 
         /// <summary>
         /// A WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property.
         /// </summary>
         /// <value>A WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property.</value>
         [DataMember(Name="operable_construction", EmitDefaultValue=false)]
-        [JsonProperty("operable_construction")]
         public WindowConstruction OperableConstruction { get; set; } 
         
         /// <summary>

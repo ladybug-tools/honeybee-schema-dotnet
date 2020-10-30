@@ -57,21 +57,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Identifier of modifier object for glass with a Surface boundary condition.</value>
         [DataMember(Name="interior_glass_modifier", EmitDefaultValue=false)]
-        [JsonProperty("interior_glass_modifier")]
         public string InteriorGlassModifier { get; set; } 
         /// <summary>
         /// Identifier of modifier object for glass with an Outdoors boundary condition.
         /// </summary>
         /// <value>Identifier of modifier object for glass with an Outdoors boundary condition.</value>
         [DataMember(Name="exterior_glass_modifier", EmitDefaultValue=false)]
-        [JsonProperty("exterior_glass_modifier")]
         public string ExteriorGlassModifier { get; set; } 
         /// <summary>
         /// Identifier of a modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face.
         /// </summary>
         /// <value>Identifier of a modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face.</value>
         [DataMember(Name="overhead_modifier", EmitDefaultValue=false)]
-        [JsonProperty("overhead_modifier")]
         public string OverheadModifier { get; set; } 
         
         /// <summary>

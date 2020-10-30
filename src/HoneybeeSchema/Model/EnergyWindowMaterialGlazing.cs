@@ -60,106 +60,29 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // use default value if no "thickness" provided
-            if (thickness == null)
-            {
-                this.Thickness = 0.003D;
-            }
-            else
-            {
-                this.Thickness = thickness;
-            }
+            this.Thickness = thickness ?? 0.003D;
             // use default value if no "solarTransmittance" provided
-            if (solarTransmittance == null)
-            {
-                this.SolarTransmittance = 0.85D;
-            }
-            else
-            {
-                this.SolarTransmittance = solarTransmittance;
-            }
+            this.SolarTransmittance = solarTransmittance ?? 0.85D;
             // use default value if no "solarReflectance" provided
-            if (solarReflectance == null)
-            {
-                this.SolarReflectance = 0.075D;
-            }
-            else
-            {
-                this.SolarReflectance = solarReflectance;
-            }
+            this.SolarReflectance = solarReflectance ?? 0.075D;
             this.SolarReflectanceBack = solarReflectanceBack;
             // use default value if no "visibleTransmittance" provided
-            if (visibleTransmittance == null)
-            {
-                this.VisibleTransmittance = 0.9D;
-            }
-            else
-            {
-                this.VisibleTransmittance = visibleTransmittance;
-            }
+            this.VisibleTransmittance = visibleTransmittance ?? 0.9D;
             // use default value if no "visibleReflectance" provided
-            if (visibleReflectance == null)
-            {
-                this.VisibleReflectance = 0.075D;
-            }
-            else
-            {
-                this.VisibleReflectance = visibleReflectance;
-            }
+            this.VisibleReflectance = visibleReflectance ?? 0.075D;
             this.VisibleReflectanceBack = visibleReflectanceBack;
             // use default value if no "infraredTransmittance" provided
-            if (infraredTransmittance == null)
-            {
-                this.InfraredTransmittance = 0D;
-            }
-            else
-            {
-                this.InfraredTransmittance = infraredTransmittance;
-            }
+            this.InfraredTransmittance = infraredTransmittance ?? 0D;
             // use default value if no "emissivity" provided
-            if (emissivity == null)
-            {
-                this.Emissivity = 0.84D;
-            }
-            else
-            {
-                this.Emissivity = emissivity;
-            }
+            this.Emissivity = emissivity ?? 0.84D;
             // use default value if no "emissivityBack" provided
-            if (emissivityBack == null)
-            {
-                this.EmissivityBack = 0.84D;
-            }
-            else
-            {
-                this.EmissivityBack = emissivityBack;
-            }
+            this.EmissivityBack = emissivityBack ?? 0.84D;
             // use default value if no "conductivity" provided
-            if (conductivity == null)
-            {
-                this.Conductivity = 0.9D;
-            }
-            else
-            {
-                this.Conductivity = conductivity;
-            }
+            this.Conductivity = conductivity ?? 0.9D;
             // use default value if no "dirtCorrection" provided
-            if (dirtCorrection == null)
-            {
-                this.DirtCorrection = 1D;
-            }
-            else
-            {
-                this.DirtCorrection = dirtCorrection;
-            }
+            this.DirtCorrection = dirtCorrection ?? 1D;
             // use default value if no "solarDiffusing" provided
-            if (solarDiffusing == null)
-            {
-                this.SolarDiffusing = false;
-            }
-            else
-            {
-                this.SolarDiffusing = solarDiffusing;
-            }
+            this.SolarDiffusing = solarDiffusing ?? false;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "EnergyWindowMaterialGlazing";
@@ -170,91 +93,78 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>The surface-to-surface of the glass in meters. Default value is 0.003.</value>
         [DataMember(Name="thickness", EmitDefaultValue=false)]
-        [JsonProperty("thickness")]
         public double Thickness { get; set; }  = 0.003D;
         /// <summary>
         /// Transmittance of solar radiation through the glass at normal incidence. Default value is 0.85 for clear glass.
         /// </summary>
         /// <value>Transmittance of solar radiation through the glass at normal incidence. Default value is 0.85 for clear glass.</value>
         [DataMember(Name="solar_transmittance", EmitDefaultValue=false)]
-        [JsonProperty("solar_transmittance")]
         public double SolarTransmittance { get; set; }  = 0.85D;
         /// <summary>
         /// Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default value is 0.075 for clear glass.
         /// </summary>
         /// <value>Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default value is 0.075 for clear glass.</value>
         [DataMember(Name="solar_reflectance", EmitDefaultValue=false)]
-        [JsonProperty("solar_reflectance")]
         public double SolarReflectance { get; set; }  = 0.075D;
         /// <summary>
         /// Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum.
         /// </summary>
         /// <value>Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum.</value>
         [DataMember(Name="solar_reflectance_back", EmitDefaultValue=false)]
-        [JsonProperty("solar_reflectance_back")]
         public double SolarReflectanceBack { get; set; } 
         /// <summary>
         /// Transmittance of visible light through the glass at normal incidence. Default value is 0.9 for clear glass.
         /// </summary>
         /// <value>Transmittance of visible light through the glass at normal incidence. Default value is 0.9 for clear glass.</value>
         [DataMember(Name="visible_transmittance", EmitDefaultValue=false)]
-        [JsonProperty("visible_transmittance")]
         public double VisibleTransmittance { get; set; }  = 0.9D;
         /// <summary>
         /// Reflectance of visible light off of the front side of the glass at normal incidence. Default value is 0.075 for clear glass.
         /// </summary>
         /// <value>Reflectance of visible light off of the front side of the glass at normal incidence. Default value is 0.075 for clear glass.</value>
         [DataMember(Name="visible_reflectance", EmitDefaultValue=false)]
-        [JsonProperty("visible_reflectance")]
         public double VisibleReflectance { get; set; }  = 0.075D;
         /// <summary>
         /// Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye.
         /// </summary>
         /// <value>Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye.</value>
         [DataMember(Name="visible_reflectance_back", EmitDefaultValue=false)]
-        [JsonProperty("visible_reflectance_back")]
         public double VisibleReflectanceBack { get; set; } 
         /// <summary>
         /// Long-wave transmittance at normal incidence.
         /// </summary>
         /// <value>Long-wave transmittance at normal incidence.</value>
         [DataMember(Name="infrared_transmittance", EmitDefaultValue=false)]
-        [JsonProperty("infrared_transmittance")]
         public double InfraredTransmittance { get; set; }  = 0D;
         /// <summary>
         /// Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.
         /// </summary>
         /// <value>Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.</value>
         [DataMember(Name="emissivity", EmitDefaultValue=false)]
-        [JsonProperty("emissivity")]
         public double Emissivity { get; set; }  = 0.84D;
         /// <summary>
         /// Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.
         /// </summary>
         /// <value>Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.</value>
         [DataMember(Name="emissivity_back", EmitDefaultValue=false)]
-        [JsonProperty("emissivity_back")]
         public double EmissivityBack { get; set; }  = 0.84D;
         /// <summary>
         /// Thermal conductivity of the glass in W/(m-K). Default value is 0.9, which is  typical for clear glass without a low-e coating.
         /// </summary>
         /// <value>Thermal conductivity of the glass in W/(m-K). Default value is 0.9, which is  typical for clear glass without a low-e coating.</value>
         [DataMember(Name="conductivity", EmitDefaultValue=false)]
-        [JsonProperty("conductivity")]
         public double Conductivity { get; set; }  = 0.9D;
         /// <summary>
         /// Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean.
         /// </summary>
         /// <value>Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean.</value>
         [DataMember(Name="dirt_correction", EmitDefaultValue=false)]
-        [JsonProperty("dirt_correction")]
         public double DirtCorrection { get; set; }  = 1D;
         /// <summary>
         /// Takes values True and False. If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.
         /// </summary>
         /// <value>Takes values True and False. If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.</value>
         [DataMember(Name="solar_diffusing", EmitDefaultValue=false)]
-        [JsonProperty("solar_diffusing")]
         public bool SolarDiffusing { get; set; }  = false;
         
         /// <summary>

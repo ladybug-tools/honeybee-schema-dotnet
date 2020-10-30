@@ -58,68 +58,19 @@ namespace HoneybeeSchema
             this.Modifier = modifier;
             this.Dependencies = dependencies;
             // use default value if no "rReflectance" provided
-            if (rReflectance == null)
-            {
-                this.RReflectance = 0.0D;
-            }
-            else
-            {
-                this.RReflectance = rReflectance;
-            }
+            this.RReflectance = rReflectance ?? 0.0D;
             // use default value if no "gReflectance" provided
-            if (gReflectance == null)
-            {
-                this.GReflectance = 0.0D;
-            }
-            else
-            {
-                this.GReflectance = gReflectance;
-            }
+            this.GReflectance = gReflectance ?? 0.0D;
             // use default value if no "bReflectance" provided
-            if (bReflectance == null)
-            {
-                this.BReflectance = 0.0D;
-            }
-            else
-            {
-                this.BReflectance = bReflectance;
-            }
+            this.BReflectance = bReflectance ?? 0.0D;
             // use default value if no "specularity" provided
-            if (specularity == null)
-            {
-                this.Specularity = 0D;
-            }
-            else
-            {
-                this.Specularity = specularity;
-            }
+            this.Specularity = specularity ?? 0D;
             // use default value if no "roughness" provided
-            if (roughness == null)
-            {
-                this.Roughness = 0D;
-            }
-            else
-            {
-                this.Roughness = roughness;
-            }
+            this.Roughness = roughness ?? 0D;
             // use default value if no "transmittedDiff" provided
-            if (transmittedDiff == null)
-            {
-                this.TransmittedDiff = 0D;
-            }
-            else
-            {
-                this.TransmittedDiff = transmittedDiff;
-            }
+            this.TransmittedDiff = transmittedDiff ?? 0D;
             // use default value if no "transmittedSpec" provided
-            if (transmittedSpec == null)
-            {
-                this.TransmittedSpec = 0D;
-            }
-            else
-            {
-                this.TransmittedSpec = transmittedSpec;
-            }
+            this.TransmittedSpec = transmittedSpec ?? 0D;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "trans";
@@ -130,63 +81,54 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Material modifier (default: Void).</value>
         [DataMember(Name="modifier", EmitDefaultValue=false)]
-        [JsonProperty("modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> Modifier { get; set; } 
         /// <summary>
         /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).
         /// </summary>
         /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).</value>
         [DataMember(Name="dependencies", EmitDefaultValue=false)]
-        [JsonProperty("dependencies")]
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Dependencies { get; set; } 
         /// <summary>
         /// A value between 0 and 1 for the red channel reflectance (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the red channel reflectance (default: 0).</value>
         [DataMember(Name="r_reflectance", EmitDefaultValue=false)]
-        [JsonProperty("r_reflectance")]
         public double RReflectance { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the green channel reflectance (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the green channel reflectance (default: 0).</value>
         [DataMember(Name="g_reflectance", EmitDefaultValue=false)]
-        [JsonProperty("g_reflectance")]
         public double GReflectance { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the blue channel reflectance (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the blue channel reflectance (default: 0).</value>
         [DataMember(Name="b_reflectance", EmitDefaultValue=false)]
-        [JsonProperty("b_reflectance")]
         public double BReflectance { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials. (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials. (default: 0).</value>
         [DataMember(Name="specularity", EmitDefaultValue=false)]
-        [JsonProperty("specularity")]
         public double Specularity { get; set; }  = 0D;
         /// <summary>
         /// A value between 0 and 1 for the roughness, specified as the rms slope of surface facets. Roughness greater than 0.2 are not realistic (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the roughness, specified as the rms slope of surface facets. Roughness greater than 0.2 are not realistic (default: 0).</value>
         [DataMember(Name="roughness", EmitDefaultValue=false)]
-        [JsonProperty("roughness")]
         public double Roughness { get; set; }  = 0D;
         /// <summary>
         /// The fraction of transmitted light that is transmitted diffusely in a scattering fashion (default: 0).
         /// </summary>
         /// <value>The fraction of transmitted light that is transmitted diffusely in a scattering fashion (default: 0).</value>
         [DataMember(Name="transmitted_diff", EmitDefaultValue=false)]
-        [JsonProperty("transmitted_diff")]
         public double TransmittedDiff { get; set; }  = 0D;
         /// <summary>
         /// The fraction of transmitted light that is not diffusely scattered (default: 0).
         /// </summary>
         /// <value>The fraction of transmitted light that is not diffusely scattered (default: 0).</value>
         [DataMember(Name="transmitted_spec", EmitDefaultValue=false)]
-        [JsonProperty("transmitted_spec")]
         public double TransmittedSpec { get; set; }  = 0D;
         
         /// <summary>

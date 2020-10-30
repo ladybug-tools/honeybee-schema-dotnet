@@ -57,28 +57,24 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Identifier for a WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.</value>
         [DataMember(Name="interior_construction", EmitDefaultValue=false)]
-        [JsonProperty("interior_construction")]
         public string InteriorConstruction { get; set; } 
         /// <summary>
         /// Identifier for a WindowConstruction for all apertures with a Surface boundary condition.
         /// </summary>
         /// <value>Identifier for a WindowConstruction for all apertures with a Surface boundary condition.</value>
         [DataMember(Name="window_construction", EmitDefaultValue=false)]
-        [JsonProperty("window_construction")]
         public string WindowConstruction { get; set; } 
         /// <summary>
         /// Identifier for a WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.
         /// </summary>
         /// <value>Identifier for a WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.</value>
         [DataMember(Name="skylight_construction", EmitDefaultValue=false)]
-        [JsonProperty("skylight_construction")]
         public string SkylightConstruction { get; set; } 
         /// <summary>
         /// Identifier for a WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property.
         /// </summary>
         /// <value>Identifier for a WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property.</value>
         [DataMember(Name="operable_construction", EmitDefaultValue=false)]
-        [JsonProperty("operable_construction")]
         public string OperableConstruction { get; set; } 
         
         /// <summary>

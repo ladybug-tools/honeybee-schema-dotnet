@@ -34,12 +34,12 @@ namespace HoneybeeSchema
         /// Gets or Sets NumericType
         /// </summary>
         [DataMember(Name="numeric_type", EmitDefaultValue=false)]
-        public ScheduleNumericType? NumericType { get; set; }   
+        public ScheduleNumericType NumericType { get; set; }   
         /// <summary>
         /// Gets or Sets UnitType
         /// </summary>
         [DataMember(Name="unit_type", EmitDefaultValue=false)]
-        public ScheduleUnitType? UnitType { get; set; }   
+        public ScheduleUnitType UnitType { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleTypeLimit" /> class.
         /// </summary>
@@ -74,14 +74,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Lower limit for the schedule type or NoLimit.</value>
         [DataMember(Name="lower_limit", EmitDefaultValue=false)]
-        [JsonProperty("lower_limit")]
         public AnyOf<NoLimit,double> LowerLimit { get; set; } 
         /// <summary>
         /// Upper limit for the schedule type or NoLimit.
         /// </summary>
         /// <value>Upper limit for the schedule type or NoLimit.</value>
         [DataMember(Name="upper_limit", EmitDefaultValue=false)]
-        [JsonProperty("upper_limit")]
         public AnyOf<NoLimit,double> UpperLimit { get; set; } 
         
         /// <summary>

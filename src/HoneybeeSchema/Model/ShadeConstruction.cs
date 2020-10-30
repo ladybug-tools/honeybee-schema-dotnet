@@ -50,32 +50,11 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // use default value if no "solarReflectance" provided
-            if (solarReflectance == null)
-            {
-                this.SolarReflectance = 0.2D;
-            }
-            else
-            {
-                this.SolarReflectance = solarReflectance;
-            }
+            this.SolarReflectance = solarReflectance ?? 0.2D;
             // use default value if no "visibleReflectance" provided
-            if (visibleReflectance == null)
-            {
-                this.VisibleReflectance = 0.2D;
-            }
-            else
-            {
-                this.VisibleReflectance = visibleReflectance;
-            }
+            this.VisibleReflectance = visibleReflectance ?? 0.2D;
             // use default value if no "isSpecular" provided
-            if (isSpecular == null)
-            {
-                this.IsSpecular = false;
-            }
-            else
-            {
-                this.IsSpecular = isSpecular;
-            }
+            this.IsSpecular = isSpecular ?? false;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "ShadeConstruction";
@@ -86,21 +65,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A number for the solar reflectance of the construction.</value>
         [DataMember(Name="solar_reflectance", EmitDefaultValue=false)]
-        [JsonProperty("solar_reflectance")]
         public double SolarReflectance { get; set; }  = 0.2D;
         /// <summary>
         /// A number for the visible reflectance of the construction.
         /// </summary>
         /// <value>A number for the visible reflectance of the construction.</value>
         [DataMember(Name="visible_reflectance", EmitDefaultValue=false)]
-        [JsonProperty("visible_reflectance")]
         public double VisibleReflectance { get; set; }  = 0.2D;
         /// <summary>
         /// Boolean to note whether the reflection off the shade is diffuse (False) or specular (True). Set to True if the construction is representing a glass facade or a mirror material.
         /// </summary>
         /// <value>Boolean to note whether the reflection off the shade is diffuse (False) or specular (True). Set to True if the construction is representing a glass facade or a mirror material.</value>
         [DataMember(Name="is_specular", EmitDefaultValue=false)]
-        [JsonProperty("is_specular")]
         public bool IsSpecular { get; set; }  = false;
         
         /// <summary>

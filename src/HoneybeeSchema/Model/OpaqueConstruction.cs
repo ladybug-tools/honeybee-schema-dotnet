@@ -49,15 +49,7 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName, layers: layers)// BaseClass
         {
             // to ensure "materials" is required (not null)
-            if (materials == null)
-            {
-                throw new InvalidDataException("materials is a required property for OpaqueConstruction and cannot be null");
-            }
-            else
-            {
-                this.Materials = materials;
-            }
-            
+            this.Materials = materials ?? throw new ArgumentNullException("materials is a required property for OpaqueConstruction and cannot be null");
 
             // Set non-required readonly properties with defaultValue
             this.Type = "OpaqueConstruction";
@@ -68,7 +60,6 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>List of opaque materials. The order of the materials is from outside to inside.</value>
         [DataMember(Name="materials", EmitDefaultValue=false)]
-        [JsonProperty("materials")]
         public List<AnyOf<EnergyMaterial,EnergyMaterialNoMass>> Materials { get; set; } 
         
         /// <summary>

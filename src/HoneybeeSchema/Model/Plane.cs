@@ -48,25 +48,9 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             // to ensure "n" is required (not null)
-            if (n == null)
-            {
-                throw new InvalidDataException("n is a required property for Plane and cannot be null");
-            }
-            else
-            {
-                this.N = n;
-            }
-            
+            this.N = n ?? throw new ArgumentNullException("n is a required property for Plane and cannot be null");
             // to ensure "o" is required (not null)
-            if (o == null)
-            {
-                throw new InvalidDataException("o is a required property for Plane and cannot be null");
-            }
-            else
-            {
-                this.O = o;
-            }
-            
+            this.O = o ?? throw new ArgumentNullException("o is a required property for Plane and cannot be null");
             this.X = x;
 
             // Set non-required readonly properties with defaultValue
@@ -78,21 +62,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Plane normal as 3 (x, y, z) values.</value>
         [DataMember(Name="n", EmitDefaultValue=false)]
-        [JsonProperty("n")]
         public List<double> N { get; set; } 
         /// <summary>
         /// Plane origin as 3 (x, y, z) values
         /// </summary>
         /// <value>Plane origin as 3 (x, y, z) values</value>
         [DataMember(Name="o", EmitDefaultValue=false)]
-        [JsonProperty("o")]
         public List<double> O { get; set; } 
         /// <summary>
         /// Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated.
         /// </summary>
         /// <value>Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated.</value>
         [DataMember(Name="x", EmitDefaultValue=false)]
-        [JsonProperty("x")]
         public List<double> X { get; set; } 
         
         /// <summary>

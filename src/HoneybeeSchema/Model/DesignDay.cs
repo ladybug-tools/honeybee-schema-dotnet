@@ -56,65 +56,17 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             // to ensure "name" is required (not null)
-            if (name == null)
-            {
-                throw new InvalidDataException("name is a required property for DesignDay and cannot be null");
-            }
-            else
-            {
-                this.Name = name;
-            }
-            
+            this.Name = name ?? throw new ArgumentNullException("name is a required property for DesignDay and cannot be null");
             // to ensure "dayType" is required (not null)
-            if (dayType == null)
-            {
-                throw new InvalidDataException("dayType is a required property for DesignDay and cannot be null");
-            }
-            else
-            {
-                this.DayType = dayType;
-            }
-            
+            this.DayType = dayType ?? throw new ArgumentNullException("dayType is a required property for DesignDay and cannot be null");
             // to ensure "dryBulbCondition" is required (not null)
-            if (dryBulbCondition == null)
-            {
-                throw new InvalidDataException("dryBulbCondition is a required property for DesignDay and cannot be null");
-            }
-            else
-            {
-                this.DryBulbCondition = dryBulbCondition;
-            }
-            
+            this.DryBulbCondition = dryBulbCondition ?? throw new ArgumentNullException("dryBulbCondition is a required property for DesignDay and cannot be null");
             // to ensure "humidityCondition" is required (not null)
-            if (humidityCondition == null)
-            {
-                throw new InvalidDataException("humidityCondition is a required property for DesignDay and cannot be null");
-            }
-            else
-            {
-                this.HumidityCondition = humidityCondition;
-            }
-            
+            this.HumidityCondition = humidityCondition ?? throw new ArgumentNullException("humidityCondition is a required property for DesignDay and cannot be null");
             // to ensure "windCondition" is required (not null)
-            if (windCondition == null)
-            {
-                throw new InvalidDataException("windCondition is a required property for DesignDay and cannot be null");
-            }
-            else
-            {
-                this.WindCondition = windCondition;
-            }
-            
+            this.WindCondition = windCondition ?? throw new ArgumentNullException("windCondition is a required property for DesignDay and cannot be null");
             // to ensure "skyCondition" is required (not null)
-            if (skyCondition == null)
-            {
-                throw new InvalidDataException("skyCondition is a required property for DesignDay and cannot be null");
-            }
-            else
-            {
-                this.SkyCondition = skyCondition;
-            }
-            
+            this.SkyCondition = skyCondition ?? throw new ArgumentNullException("skyCondition is a required property for DesignDay and cannot be null");
 
             // Set non-required readonly properties with defaultValue
             this.Type = "DesignDay";
@@ -125,34 +77,29 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
         [DataMember(Name="name", EmitDefaultValue=false)]
-        [JsonProperty("name")]
         public string Name { get; set; } 
         /// <summary>
         /// A DryBulbCondition describing temperature conditions on the design day.
         /// </summary>
         /// <value>A DryBulbCondition describing temperature conditions on the design day.</value>
         [DataMember(Name="dry_bulb_condition", EmitDefaultValue=false)]
-        [JsonProperty("dry_bulb_condition")]
         public DryBulbCondition DryBulbCondition { get; set; } 
         /// <summary>
         /// A HumidityCondition describing humidity and precipitation conditions on the design day.
         /// </summary>
         /// <value>A HumidityCondition describing humidity and precipitation conditions on the design day.</value>
         [DataMember(Name="humidity_condition", EmitDefaultValue=false)]
-        [JsonProperty("humidity_condition")]
         public HumidityCondition HumidityCondition { get; set; } 
         /// <summary>
         /// A WindCondition describing wind conditions on the design day.
         /// </summary>
         /// <value>A WindCondition describing wind conditions on the design day.</value>
         [DataMember(Name="wind_condition", EmitDefaultValue=false)]
-        [JsonProperty("wind_condition")]
         public WindCondition WindCondition { get; set; } 
         /// <summary>
         /// Gets or Sets SkyCondition
         /// </summary>
         [DataMember(Name="sky_condition", EmitDefaultValue=false)]
-        [JsonProperty("sky_condition")]
         public AnyOf<ASHRAEClearSky,ASHRAETau> SkyCondition { get; set; } 
         
         /// <summary>

@@ -34,7 +34,7 @@ namespace HoneybeeSchema
         /// Gets or Sets ViewType
         /// </summary>
         [DataMember(Name="view_type", EmitDefaultValue=false)]
-        public ViewType? ViewType { get; set; }   
+        public ViewType ViewType { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="View" /> class.
         /// </summary>
@@ -64,54 +64,16 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName, roomIdentifier: roomIdentifier, lightPath: lightPath)// BaseClass
         {
             // to ensure "position" is required (not null)
-            if (position == null)
-            {
-                throw new InvalidDataException("position is a required property for View and cannot be null");
-            }
-            else
-            {
-                this.Position = position;
-            }
-            
+            this.Position = position ?? throw new ArgumentNullException("position is a required property for View and cannot be null");
             // to ensure "direction" is required (not null)
-            if (direction == null)
-            {
-                throw new InvalidDataException("direction is a required property for View and cannot be null");
-            }
-            else
-            {
-                this.Direction = direction;
-            }
-            
+            this.Direction = direction ?? throw new ArgumentNullException("direction is a required property for View and cannot be null");
             // to ensure "upVector" is required (not null)
-            if (upVector == null)
-            {
-                throw new InvalidDataException("upVector is a required property for View and cannot be null");
-            }
-            else
-            {
-                this.UpVector = upVector;
-            }
-            
+            this.UpVector = upVector ?? throw new ArgumentNullException("upVector is a required property for View and cannot be null");
             this.ViewType = viewType;
             // use default value if no "hSize" provided
-            if (hSize == null)
-            {
-                this.HSize = 60D;
-            }
-            else
-            {
-                this.HSize = hSize;
-            }
+            this.HSize = hSize ?? 60D;
             // use default value if no "vSize" provided
-            if (vSize == null)
-            {
-                this.VSize = 60D;
-            }
-            else
-            {
-                this.VSize = vSize;
-            }
+            this.VSize = vSize ?? 60D;
             this.Shift = shift;
             this.Lift = lift;
             this.ForeClip = foreClip;
@@ -126,63 +88,54 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>The view position (-vp) as an array of (x, y, z) values.This is the focal point of a perspective view or the center of a parallel projection.</value>
         [DataMember(Name="position", EmitDefaultValue=false)]
-        [JsonProperty("position")]
         public List<double> Position { get; set; } 
         /// <summary>
         /// The view direction (-vd) as an array of (x, y, z) values.The length of this vector indicates the focal distance as needed by the pixel depth of field (-pd) in rpict.
         /// </summary>
         /// <value>The view direction (-vd) as an array of (x, y, z) values.The length of this vector indicates the focal distance as needed by the pixel depth of field (-pd) in rpict.</value>
         [DataMember(Name="direction", EmitDefaultValue=false)]
-        [JsonProperty("direction")]
         public List<double> Direction { get; set; } 
         /// <summary>
         /// The view up (-vu) vector as an array of (x, y, z) values.
         /// </summary>
         /// <value>The view up (-vu) vector as an array of (x, y, z) values.</value>
         [DataMember(Name="up_vector", EmitDefaultValue=false)]
-        [JsonProperty("up_vector")]
         public List<double> UpVector { get; set; } 
         /// <summary>
         /// A number for the horizontal field of view in degrees (for all perspective projections including fisheye). For a parallel projection, this is the view width in world coordinates.
         /// </summary>
         /// <value>A number for the horizontal field of view in degrees (for all perspective projections including fisheye). For a parallel projection, this is the view width in world coordinates.</value>
         [DataMember(Name="h_size", EmitDefaultValue=false)]
-        [JsonProperty("h_size")]
         public double HSize { get; set; }  = 60D;
         /// <summary>
         /// A number for the vertical field of view in degrees (for all perspective projections including fisheye). For a parallel projection, this is the view width in world coordinates.
         /// </summary>
         /// <value>A number for the vertical field of view in degrees (for all perspective projections including fisheye). For a parallel projection, this is the view width in world coordinates.</value>
         [DataMember(Name="v_size", EmitDefaultValue=false)]
-        [JsonProperty("v_size")]
         public double VSize { get; set; }  = 60D;
         /// <summary>
         /// The view shift (-vs). This is the amount the actual image will be shifted to the right of the specified view. This option is useful for generating skewed perspectives or rendering an image a piece at a time. A value of 1 means that the rendered image starts just to the right of the normal view. A value of -1 would be to the left. Larger or fractional values are permitted as well.
         /// </summary>
         /// <value>The view shift (-vs). This is the amount the actual image will be shifted to the right of the specified view. This option is useful for generating skewed perspectives or rendering an image a piece at a time. A value of 1 means that the rendered image starts just to the right of the normal view. A value of -1 would be to the left. Larger or fractional values are permitted as well.</value>
         [DataMember(Name="shift", EmitDefaultValue=false)]
-        [JsonProperty("shift")]
         public double Shift { get; set; } 
         /// <summary>
         /// The view lift (-vl). This is the amount the actual image will be lifted up from the specified view. This option is useful for generating skewed perspectives or rendering an image a piece at a time. A value of 1 means that the rendered image starts just to the right of the normal view. A value of -1 would be to the left. Larger or fractional values are permitted as well.
         /// </summary>
         /// <value>The view lift (-vl). This is the amount the actual image will be lifted up from the specified view. This option is useful for generating skewed perspectives or rendering an image a piece at a time. A value of 1 means that the rendered image starts just to the right of the normal view. A value of -1 would be to the left. Larger or fractional values are permitted as well.</value>
         [DataMember(Name="lift", EmitDefaultValue=false)]
-        [JsonProperty("lift")]
         public double Lift { get; set; } 
         /// <summary>
         /// View fore clip (-vo) at a distance from the view point.The plane will be perpendicular to the view direction for perspective and parallel view types. For fisheye view types, the clipping plane is actually a clipping sphere, centered on the view point with fore_clip radius. Objects in front of this imaginary surface will not be visible.
         /// </summary>
         /// <value>View fore clip (-vo) at a distance from the view point.The plane will be perpendicular to the view direction for perspective and parallel view types. For fisheye view types, the clipping plane is actually a clipping sphere, centered on the view point with fore_clip radius. Objects in front of this imaginary surface will not be visible.</value>
         [DataMember(Name="fore_clip", EmitDefaultValue=false)]
-        [JsonProperty("fore_clip")]
         public double ForeClip { get; set; } 
         /// <summary>
         /// View aft clip (-va) at a distance from the view point.Like the view fore plane, it will be perpendicular to the view direction for perspective and parallel view types. For fisheye view types, the clipping plane is actually a clipping sphere, centered on the view point with radius val.
         /// </summary>
         /// <value>View aft clip (-va) at a distance from the view point.Like the view fore plane, it will be perpendicular to the view direction for perspective and parallel view types. For fisheye view types, the clipping plane is actually a clipping sphere, centered on the view point with radius val.</value>
         [DataMember(Name="aft_clip", EmitDefaultValue=false)]
-        [JsonProperty("aft_clip")]
         public double AftClip { get; set; } 
         
         /// <summary>

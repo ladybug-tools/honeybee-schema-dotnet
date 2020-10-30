@@ -52,41 +52,13 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // use default value if no "flowPerPerson" provided
-            if (flowPerPerson == null)
-            {
-                this.FlowPerPerson = 0D;
-            }
-            else
-            {
-                this.FlowPerPerson = flowPerPerson;
-            }
+            this.FlowPerPerson = flowPerPerson ?? 0D;
             // use default value if no "flowPerArea" provided
-            if (flowPerArea == null)
-            {
-                this.FlowPerArea = 0D;
-            }
-            else
-            {
-                this.FlowPerArea = flowPerArea;
-            }
+            this.FlowPerArea = flowPerArea ?? 0D;
             // use default value if no "airChangesPerHour" provided
-            if (airChangesPerHour == null)
-            {
-                this.AirChangesPerHour = 0D;
-            }
-            else
-            {
-                this.AirChangesPerHour = airChangesPerHour;
-            }
+            this.AirChangesPerHour = airChangesPerHour ?? 0D;
             // use default value if no "flowPerZone" provided
-            if (flowPerZone == null)
-            {
-                this.FlowPerZone = 0D;
-            }
-            else
-            {
-                this.FlowPerZone = flowPerZone;
-            }
+            this.FlowPerZone = flowPerZone ?? 0D;
             this.Schedule = schedule;
 
             // Set non-required readonly properties with defaultValue
@@ -98,35 +70,30 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room.</value>
         [DataMember(Name="flow_per_person", EmitDefaultValue=false)]
-        [JsonProperty("flow_per_person")]
         public double FlowPerPerson { get; set; }  = 0D;
         /// <summary>
         /// Intensity of ventilation in [m3/s per m2 of floor area].
         /// </summary>
         /// <value>Intensity of ventilation in [m3/s per m2 of floor area].</value>
         [DataMember(Name="flow_per_area", EmitDefaultValue=false)]
-        [JsonProperty("flow_per_area")]
         public double FlowPerArea { get; set; }  = 0D;
         /// <summary>
         /// Intensity of ventilation in air changes per hour (ACH) for the entire Room.
         /// </summary>
         /// <value>Intensity of ventilation in air changes per hour (ACH) for the entire Room.</value>
         [DataMember(Name="air_changes_per_hour", EmitDefaultValue=false)]
-        [JsonProperty("air_changes_per_hour")]
         public double AirChangesPerHour { get; set; }  = 0D;
         /// <summary>
         /// Intensity of ventilation in m3/s for the entire Room.
         /// </summary>
         /// <value>Intensity of ventilation in m3/s for the entire Room.</value>
         [DataMember(Name="flow_per_zone", EmitDefaultValue=false)]
-        [JsonProperty("flow_per_zone")]
         public double FlowPerZone { get; set; }  = 0D;
         /// <summary>
         /// Identifier of the schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.
         /// </summary>
         /// <value>Identifier of the schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.</value>
         [DataMember(Name="schedule", EmitDefaultValue=false)]
-        [JsonProperty("schedule")]
         public string Schedule { get; set; } 
         
         /// <summary>

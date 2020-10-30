@@ -47,25 +47,9 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             // to ensure "dryBulbMax" is required (not null)
-            if (dryBulbMax == null)
-            {
-                throw new InvalidDataException("dryBulbMax is a required property for DryBulbCondition and cannot be null");
-            }
-            else
-            {
-                this.DryBulbMax = dryBulbMax;
-            }
-            
+            this.DryBulbMax = dryBulbMax ?? throw new ArgumentNullException("dryBulbMax is a required property for DryBulbCondition and cannot be null");
             // to ensure "dryBulbRange" is required (not null)
-            if (dryBulbRange == null)
-            {
-                throw new InvalidDataException("dryBulbRange is a required property for DryBulbCondition and cannot be null");
-            }
-            else
-            {
-                this.DryBulbRange = dryBulbRange;
-            }
-            
+            this.DryBulbRange = dryBulbRange ?? throw new ArgumentNullException("dryBulbRange is a required property for DryBulbCondition and cannot be null");
 
             // Set non-required readonly properties with defaultValue
             this.Type = "DryBulbCondition";
@@ -76,14 +60,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>The maximum dry bulb temperature on the design day [C].</value>
         [DataMember(Name="dry_bulb_max", EmitDefaultValue=false)]
-        [JsonProperty("dry_bulb_max")]
         public double DryBulbMax { get; set; } 
         /// <summary>
         /// The difference between min and max temperatures on the design day [C].
         /// </summary>
         /// <value>The difference between min and max temperatures on the design day [C].</value>
         [DataMember(Name="dry_bulb_range", EmitDefaultValue=false)]
-        [JsonProperty("dry_bulb_range")]
         public double DryBulbRange { get; set; } 
         
         /// <summary>

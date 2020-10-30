@@ -49,24 +49,9 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "airMixingSchedule" is required (not null)
-            if (airMixingSchedule == null)
-            {
-                throw new InvalidDataException("airMixingSchedule is a required property for AirBoundaryConstructionAbridged and cannot be null");
-            }
-            else
-            {
-                this.AirMixingSchedule = airMixingSchedule;
-            }
-            
+            this.AirMixingSchedule = airMixingSchedule ?? throw new ArgumentNullException("airMixingSchedule is a required property for AirBoundaryConstructionAbridged and cannot be null");
             // use default value if no "airMixingPerArea" provided
-            if (airMixingPerArea == null)
-            {
-                this.AirMixingPerArea = 0.1D;
-            }
-            else
-            {
-                this.AirMixingPerArea = airMixingPerArea;
-            }
+            this.AirMixingPerArea = airMixingPerArea ?? 0.1D;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "AirBoundaryConstructionAbridged";
@@ -77,14 +62,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Identifier of a fractional schedule for the air mixing schedule across the construction.</value>
         [DataMember(Name="air_mixing_schedule", EmitDefaultValue=false)]
-        [JsonProperty("air_mixing_schedule")]
         public string AirMixingSchedule { get; set; } 
         /// <summary>
         /// A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system.
         /// </summary>
         /// <value>A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system.</value>
         [DataMember(Name="air_mixing_per_area", EmitDefaultValue=false)]
-        [JsonProperty("air_mixing_per_area")]
         public double AirMixingPerArea { get; set; }  = 0.1D;
         
         /// <summary>

@@ -53,44 +53,15 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "values" is required (not null)
-            if (values == null)
-            {
-                throw new InvalidDataException("values is a required property for ScheduleFixedIntervalAbridged and cannot be null");
-            }
-            else
-            {
-                this.Values = values;
-            }
-            
+            this.Values = values ?? throw new ArgumentNullException("values is a required property for ScheduleFixedIntervalAbridged and cannot be null");
             this.ScheduleTypeLimit = scheduleTypeLimit;
             // use default value if no "timestep" provided
-            if (timestep == null)
-            {
-                this.Timestep = 1;
-            }
-            else
-            {
-                this.Timestep = timestep;
-            }
+            this.Timestep = timestep ?? 1;
             this.StartDate = startDate;
             // use default value if no "placeholderValue" provided
-            if (placeholderValue == null)
-            {
-                this.PlaceholderValue = 0D;
-            }
-            else
-            {
-                this.PlaceholderValue = placeholderValue;
-            }
+            this.PlaceholderValue = placeholderValue ?? 0D;
             // use default value if no "interpolate" provided
-            if (interpolate == null)
-            {
-                this.Interpolate = false;
-            }
-            else
-            {
-                this.Interpolate = interpolate;
-            }
+            this.Interpolate = interpolate ?? false;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "ScheduleFixedIntervalAbridged";
@@ -101,42 +72,36 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A list of timeseries values occuring at each timestep over the course of the simulation.</value>
         [DataMember(Name="values", EmitDefaultValue=false)]
-        [JsonProperty("values")]
         public List<double> Values { get; set; } 
         /// <summary>
         /// Identifier of a ScheduleTypeLimit that will be used to validate schedule values against upper/lower limits and assign units to the schedule values. If None, no validation will occur.
         /// </summary>
         /// <value>Identifier of a ScheduleTypeLimit that will be used to validate schedule values against upper/lower limits and assign units to the schedule values. If None, no validation will occur.</value>
         [DataMember(Name="schedule_type_limit", EmitDefaultValue=false)]
-        [JsonProperty("schedule_type_limit")]
         public string ScheduleTypeLimit { get; set; } 
         /// <summary>
         /// An integer for the number of steps per hour that the input values correspond to.  For example, if each value represents 30 minutes, the timestep is 2. For 15 minutes, it is 4.
         /// </summary>
         /// <value>An integer for the number of steps per hour that the input values correspond to.  For example, if each value represents 30 minutes, the timestep is 2. For 15 minutes, it is 4.</value>
         [DataMember(Name="timestep", EmitDefaultValue=false)]
-        [JsonProperty("timestep")]
         public int Timestep { get; set; }  = 1;
         /// <summary>
         /// A list of two integers for [month, day], representing the start date when the schedule values begin to take effect.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the start date when the schedule values begin to take effect.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</value>
         [DataMember(Name="start_date", EmitDefaultValue=false)]
-        [JsonProperty("start_date")]
         public List<int> StartDate { get; set; } 
         /// <summary>
         ///  A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period.
         /// </summary>
         /// <value> A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period.</value>
         [DataMember(Name="placeholder_value", EmitDefaultValue=false)]
-        [JsonProperty("placeholder_value")]
         public double PlaceholderValue { get; set; }  = 0D;
         /// <summary>
         /// Boolean to note whether values in between intervals should be linearly interpolated or whether successive values should take effect immediately upon the beginning time corresponding to them.
         /// </summary>
         /// <value>Boolean to note whether values in between intervals should be linearly interpolated or whether successive values should take effect immediately upon the beginning time corresponding to them.</value>
         [DataMember(Name="interpolate", EmitDefaultValue=false)]
-        [JsonProperty("interpolate")]
         public bool Interpolate { get; set; }  = false;
         
         /// <summary>

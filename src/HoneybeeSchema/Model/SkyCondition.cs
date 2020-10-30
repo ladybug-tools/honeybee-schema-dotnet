@@ -47,24 +47,9 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             // to ensure "date" is required (not null)
-            if (date == null)
-            {
-                throw new InvalidDataException("date is a required property for SkyCondition and cannot be null");
-            }
-            else
-            {
-                this.Date = date;
-            }
-            
+            this.Date = date ?? throw new ArgumentNullException("date is a required property for SkyCondition and cannot be null");
             // use default value if no "daylightSavings" provided
-            if (daylightSavings == null)
-            {
-                this.DaylightSavings = false;
-            }
-            else
-            {
-                this.DaylightSavings = daylightSavings;
-            }
+            this.DaylightSavings = daylightSavings ?? false;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "_SkyCondition";
@@ -75,14 +60,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</value>
         [DataMember(Name="date", EmitDefaultValue=false)]
-        [JsonProperty("date")]
         public List<int> Date { get; set; } 
         /// <summary>
         /// Boolean to indicate whether daylight savings time is active on the design day.
         /// </summary>
         /// <value>Boolean to indicate whether daylight savings time is active on the design day.</value>
         [DataMember(Name="daylight_savings", EmitDefaultValue=false)]
-        [JsonProperty("daylight_savings")]
         public bool DaylightSavings { get; set; }  = false;
         
         /// <summary>

@@ -49,25 +49,9 @@ namespace HoneybeeSchema
         ) : base(date: date, daylightSavings: daylightSavings )// BaseClass
         {
             // to ensure "tauB" is required (not null)
-            if (tauB == null)
-            {
-                throw new InvalidDataException("tauB is a required property for ASHRAETau and cannot be null");
-            }
-            else
-            {
-                this.TauB = tauB;
-            }
-            
+            this.TauB = tauB ?? throw new ArgumentNullException("tauB is a required property for ASHRAETau and cannot be null");
             // to ensure "tauD" is required (not null)
-            if (tauD == null)
-            {
-                throw new InvalidDataException("tauD is a required property for ASHRAETau and cannot be null");
-            }
-            else
-            {
-                this.TauD = tauD;
-            }
-            
+            this.TauD = tauD ?? throw new ArgumentNullException("tauD is a required property for ASHRAETau and cannot be null");
 
             // Set non-required readonly properties with defaultValue
             this.Type = "ASHRAETau";
@@ -78,14 +62,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Value for the beam optical depth. Typically found in .stat files.</value>
         [DataMember(Name="tau_b", EmitDefaultValue=false)]
-        [JsonProperty("tau_b")]
         public double TauB { get; set; } 
         /// <summary>
         /// Value for the diffuse optical depth. Typically found in .stat files.
         /// </summary>
         /// <value>Value for the diffuse optical depth. Typically found in .stat files.</value>
         [DataMember(Name="tau_d", EmitDefaultValue=false)]
-        [JsonProperty("tau_d")]
         public double TauD { get; set; } 
         
         /// <summary>

@@ -55,78 +55,21 @@ namespace HoneybeeSchema
         ) : base()// BaseClass
         {
             // to ensure "scheduleDay" is required (not null)
-            if (scheduleDay == null)
-            {
-                throw new InvalidDataException("scheduleDay is a required property for ScheduleRuleAbridged and cannot be null");
-            }
-            else
-            {
-                this.ScheduleDay = scheduleDay;
-            }
-            
+            this.ScheduleDay = scheduleDay ?? throw new ArgumentNullException("scheduleDay is a required property for ScheduleRuleAbridged and cannot be null");
             // use default value if no "applySunday" provided
-            if (applySunday == null)
-            {
-                this.ApplySunday = false;
-            }
-            else
-            {
-                this.ApplySunday = applySunday;
-            }
+            this.ApplySunday = applySunday ?? false;
             // use default value if no "applyMonday" provided
-            if (applyMonday == null)
-            {
-                this.ApplyMonday = false;
-            }
-            else
-            {
-                this.ApplyMonday = applyMonday;
-            }
+            this.ApplyMonday = applyMonday ?? false;
             // use default value if no "applyTuesday" provided
-            if (applyTuesday == null)
-            {
-                this.ApplyTuesday = false;
-            }
-            else
-            {
-                this.ApplyTuesday = applyTuesday;
-            }
+            this.ApplyTuesday = applyTuesday ?? false;
             // use default value if no "applyWednesday" provided
-            if (applyWednesday == null)
-            {
-                this.ApplyWednesday = false;
-            }
-            else
-            {
-                this.ApplyWednesday = applyWednesday;
-            }
+            this.ApplyWednesday = applyWednesday ?? false;
             // use default value if no "applyThursday" provided
-            if (applyThursday == null)
-            {
-                this.ApplyThursday = false;
-            }
-            else
-            {
-                this.ApplyThursday = applyThursday;
-            }
+            this.ApplyThursday = applyThursday ?? false;
             // use default value if no "applyFriday" provided
-            if (applyFriday == null)
-            {
-                this.ApplyFriday = false;
-            }
-            else
-            {
-                this.ApplyFriday = applyFriday;
-            }
+            this.ApplyFriday = applyFriday ?? false;
             // use default value if no "applySaturday" provided
-            if (applySaturday == null)
-            {
-                this.ApplySaturday = false;
-            }
-            else
-            {
-                this.ApplySaturday = applySaturday;
-            }
+            this.ApplySaturday = applySaturday ?? false;
             this.StartDate = startDate;
             this.EndDate = endDate;
 
@@ -139,70 +82,60 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>The identifier of a ScheduleDay object associated with this rule.</value>
         [DataMember(Name="schedule_day", EmitDefaultValue=false)]
-        [JsonProperty("schedule_day")]
         public string ScheduleDay { get; set; } 
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Sundays.
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Sundays.</value>
         [DataMember(Name="apply_sunday", EmitDefaultValue=false)]
-        [JsonProperty("apply_sunday")]
         public bool ApplySunday { get; set; }  = false;
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Mondays.
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Mondays.</value>
         [DataMember(Name="apply_monday", EmitDefaultValue=false)]
-        [JsonProperty("apply_monday")]
         public bool ApplyMonday { get; set; }  = false;
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Tuesdays.
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Tuesdays.</value>
         [DataMember(Name="apply_tuesday", EmitDefaultValue=false)]
-        [JsonProperty("apply_tuesday")]
         public bool ApplyTuesday { get; set; }  = false;
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Wednesdays.
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Wednesdays.</value>
         [DataMember(Name="apply_wednesday", EmitDefaultValue=false)]
-        [JsonProperty("apply_wednesday")]
         public bool ApplyWednesday { get; set; }  = false;
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Thursdays.
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Thursdays.</value>
         [DataMember(Name="apply_thursday", EmitDefaultValue=false)]
-        [JsonProperty("apply_thursday")]
         public bool ApplyThursday { get; set; }  = false;
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Fridays.
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Fridays.</value>
         [DataMember(Name="apply_friday", EmitDefaultValue=false)]
-        [JsonProperty("apply_friday")]
         public bool ApplyFriday { get; set; }  = false;
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Saturdays.
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Saturdays.</value>
         [DataMember(Name="apply_saturday", EmitDefaultValue=false)]
-        [JsonProperty("apply_saturday")]
         public bool ApplySaturday { get; set; }  = false;
         /// <summary>
         /// A list of two integers for [month, day], representing the start date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the start date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</value>
         [DataMember(Name="start_date", EmitDefaultValue=false)]
-        [JsonProperty("start_date")]
         public List<int> StartDate { get; set; } 
         /// <summary>
         /// A list of two integers for [month, day], representing the end date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the end date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</value>
         [DataMember(Name="end_date", EmitDefaultValue=false)]
-        [JsonProperty("end_date")]
         public List<int> EndDate { get; set; } 
         
         /// <summary>

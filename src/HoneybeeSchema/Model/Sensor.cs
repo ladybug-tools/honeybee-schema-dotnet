@@ -47,25 +47,9 @@ namespace HoneybeeSchema
         )// BaseClass
         {
             // to ensure "pos" is required (not null)
-            if (pos == null)
-            {
-                throw new InvalidDataException("pos is a required property for Sensor and cannot be null");
-            }
-            else
-            {
-                this.Pos = pos;
-            }
-            
+            this.Pos = pos ?? throw new ArgumentNullException("pos is a required property for Sensor and cannot be null");
             // to ensure "dir" is required (not null)
-            if (dir == null)
-            {
-                throw new InvalidDataException("dir is a required property for Sensor and cannot be null");
-            }
-            else
-            {
-                this.Dir = dir;
-            }
-            
+            this.Dir = dir ?? throw new ArgumentNullException("dir is a required property for Sensor and cannot be null");
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Sensor";
@@ -76,14 +60,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Position of sensor in space as an array of (x, y, z) values.</value>
         [DataMember(Name="pos", EmitDefaultValue=false)]
-        [JsonProperty("pos")]
         public List<double> Pos { get; set; } 
         /// <summary>
         /// Direction of sensor as an array of (x, y, z) values.
         /// </summary>
         /// <value>Direction of sensor as an array of (x, y, z) values.</value>
         [DataMember(Name="dir", EmitDefaultValue=false)]
-        [JsonProperty("dir")]
         public List<double> Dir { get; set; } 
         
         /// <summary>

@@ -55,14 +55,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>An optional string to note the dynamic group &#39;             &#39;to which the Aperture is a part of. Apertures sharing the same &#39;             &#39;dynamic_group_identifier will have their states change in unison. &#39;             &#39;If None, the Aperture is assumed to be static. (default: None).</value>
         [DataMember(Name="dynamic_group_identifier", EmitDefaultValue=false)]
-        [JsonProperty("dynamic_group_identifier")]
         public string DynamicGroupIdentifier { get; set; } 
         /// <summary>
         /// An optional list of abridged states (default: None).
         /// </summary>
         /// <value>An optional list of abridged states (default: None).</value>
         [DataMember(Name="states", EmitDefaultValue=false)]
-        [JsonProperty("states")]
         public List<RadianceSubFaceStateAbridged> States { get; set; } 
         
         /// <summary>

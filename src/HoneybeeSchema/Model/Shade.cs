@@ -51,34 +51,11 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "geometry" is required (not null)
-            if (geometry == null)
-            {
-                throw new InvalidDataException("geometry is a required property for Shade and cannot be null");
-            }
-            else
-            {
-                this.Geometry = geometry;
-            }
-            
+            this.Geometry = geometry ?? throw new ArgumentNullException("geometry is a required property for Shade and cannot be null");
             // to ensure "properties" is required (not null)
-            if (properties == null)
-            {
-                throw new InvalidDataException("properties is a required property for Shade and cannot be null");
-            }
-            else
-            {
-                this.Properties = properties;
-            }
-            
+            this.Properties = properties ?? throw new ArgumentNullException("properties is a required property for Shade and cannot be null");
             // use default value if no "isDetached" provided
-            if (isDetached == null)
-            {
-                this.IsDetached = false;
-            }
-            else
-            {
-                this.IsDetached = isDetached;
-            }
+            this.IsDetached = isDetached ?? false;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Shade";
@@ -89,21 +66,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Planar Face3D for the geometry.</value>
         [DataMember(Name="geometry", EmitDefaultValue=false)]
-        [JsonProperty("geometry")]
         public Face3D Geometry { get; set; } 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
         [DataMember(Name="properties", EmitDefaultValue=false)]
-        [JsonProperty("properties")]
         public ShadePropertiesAbridged Properties { get; set; } 
         /// <summary>
         /// Boolean to note whether this shade is detached from any of the other geometry in the model. Cases where this should be True include shade representing surrounding buildings or context. Note that this should always be False for shades assigned to parent objects.
         /// </summary>
         /// <value>Boolean to note whether this shade is detached from any of the other geometry in the model. Cases where this should be True include shade representing surrounding buildings or context. Note that this should always be False for shades assigned to parent objects.</value>
         [DataMember(Name="is_detached", EmitDefaultValue=false)]
-        [JsonProperty("is_detached")]
         public bool IsDetached { get; set; }  = false;
         
         /// <summary>

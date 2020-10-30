@@ -55,32 +55,11 @@ namespace HoneybeeSchema
             this.Modifier = modifier;
             this.Dependencies = dependencies;
             // use default value if no "rReflectance" provided
-            if (rReflectance == null)
-            {
-                this.RReflectance = 1D;
-            }
-            else
-            {
-                this.RReflectance = rReflectance;
-            }
+            this.RReflectance = rReflectance ?? 1D;
             // use default value if no "gReflectance" provided
-            if (gReflectance == null)
-            {
-                this.GReflectance = 1D;
-            }
-            else
-            {
-                this.GReflectance = gReflectance;
-            }
+            this.GReflectance = gReflectance ?? 1D;
             // use default value if no "bReflectance" provided
-            if (bReflectance == null)
-            {
-                this.BReflectance = 1D;
-            }
-            else
-            {
-                this.BReflectance = bReflectance;
-            }
+            this.BReflectance = bReflectance ?? 1D;
             this.AlternateMaterial = alternateMaterial;
 
             // Set non-required readonly properties with defaultValue
@@ -92,42 +71,36 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Material modifier (default: Void).</value>
         [DataMember(Name="modifier", EmitDefaultValue=false)]
-        [JsonProperty("modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> Modifier { get; set; } 
         /// <summary>
         /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).
         /// </summary>
         /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).</value>
         [DataMember(Name="dependencies", EmitDefaultValue=false)]
-        [JsonProperty("dependencies")]
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Dependencies { get; set; } 
         /// <summary>
         /// A value between 0 and 1 for the red channel reflectance (default: 1).
         /// </summary>
         /// <value>A value between 0 and 1 for the red channel reflectance (default: 1).</value>
         [DataMember(Name="r_reflectance", EmitDefaultValue=false)]
-        [JsonProperty("r_reflectance")]
         public double RReflectance { get; set; }  = 1D;
         /// <summary>
         /// A value between 0 and 1 for the green channel reflectance (default: 1).
         /// </summary>
         /// <value>A value between 0 and 1 for the green channel reflectance (default: 1).</value>
         [DataMember(Name="g_reflectance", EmitDefaultValue=false)]
-        [JsonProperty("g_reflectance")]
         public double GReflectance { get; set; }  = 1D;
         /// <summary>
         /// A value between 0 and 1 for the blue channel reflectance (default: 1).
         /// </summary>
         /// <value>A value between 0 and 1 for the blue channel reflectance (default: 1).</value>
         [DataMember(Name="b_reflectance", EmitDefaultValue=false)]
-        [JsonProperty("b_reflectance")]
         public double BReflectance { get; set; }  = 1D;
         /// <summary>
         /// An optional material that may be used like the illum type to specify a different material to be used for shading non-source rays. If None, this will keep the alternat_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance (default: None).
         /// </summary>
         /// <value>An optional material that may be used like the illum type to specify a different material to be used for shading non-source rays. If None, this will keep the alternat_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance (default: None).</value>
         [DataMember(Name="alternate_material", EmitDefaultValue=false)]
-        [JsonProperty("alternate_material")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> AlternateMaterial { get; set; } 
         
         /// <summary>

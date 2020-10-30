@@ -52,13 +52,11 @@ namespace HoneybeeSchema
         /// Gets or Sets Energy
         /// </summary>
         [DataMember(Name="energy", EmitDefaultValue=false)]
-        [JsonProperty("energy")]
         public DoorEnergyPropertiesAbridged Energy { get; set; } 
         /// <summary>
         /// Gets or Sets Radiance
         /// </summary>
         [DataMember(Name="radiance", EmitDefaultValue=false)]
-        [JsonProperty("radiance")]
         public DoorRadiancePropertiesAbridged Radiance { get; set; } 
         
         /// <summary>

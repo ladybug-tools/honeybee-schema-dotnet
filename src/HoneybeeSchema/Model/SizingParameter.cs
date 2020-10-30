@@ -44,23 +44,9 @@ namespace HoneybeeSchema
         {
             this.DesignDays = designDays;
             // use default value if no "heatingFactor" provided
-            if (heatingFactor == null)
-            {
-                this.HeatingFactor = 1.25D;
-            }
-            else
-            {
-                this.HeatingFactor = heatingFactor;
-            }
+            this.HeatingFactor = heatingFactor ?? 1.25D;
             // use default value if no "coolingFactor" provided
-            if (coolingFactor == null)
-            {
-                this.CoolingFactor = 1.15D;
-            }
-            else
-            {
-                this.CoolingFactor = coolingFactor;
-            }
+            this.CoolingFactor = coolingFactor ?? 1.15D;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "SizingParameter";
@@ -71,21 +57,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A list of DesignDays that represent the criteria for which the HVAC systems will be sized.</value>
         [DataMember(Name="design_days", EmitDefaultValue=false)]
-        [JsonProperty("design_days")]
         public List<DesignDay> DesignDays { get; set; } 
         /// <summary>
         /// A number that will be multiplied by the peak heating load for each zone in order to size the heating system.
         /// </summary>
         /// <value>A number that will be multiplied by the peak heating load for each zone in order to size the heating system.</value>
         [DataMember(Name="heating_factor", EmitDefaultValue=false)]
-        [JsonProperty("heating_factor")]
         public double HeatingFactor { get; set; }  = 1.25D;
         /// <summary>
         /// A number that will be multiplied by the peak cooling load for each zone in order to size the heating system.
         /// </summary>
         /// <value>A number that will be multiplied by the peak cooling load for each zone in order to size the heating system.</value>
         [DataMember(Name="cooling_factor", EmitDefaultValue=false)]
-        [JsonProperty("cooling_factor")]
         public double CoolingFactor { get; set; }  = 1.15D;
         
         /// <summary>
