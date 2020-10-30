@@ -33,7 +33,7 @@
         /// <value>{{description}}</value>
         {{/description}}
         [DataMember(Name="{{baseName}}", EmitDefaultValue={{#vendorExtensions.x-emit-default-value}}true{{/vendorExtensions.x-emit-default-value}}{{^vendorExtensions.x-emit-default-value}}{{#isNullable}}true{{/isNullable}}{{^isNullable}}false{{/isNullable}}{{/vendorExtensions.x-emit-default-value}})]
-        public {{#complexType}}{{{complexType}}}{{/complexType}}{{^complexType}}{{{datatypeWithEnum}}}{{/complexType}}{{^isContainer}}{{^required}}?{{/required}}{{/isContainer}} {{name}} { get; set; }  {{#defaultValue}} = {{#isEnum}}{{{datatypeWithEnum}}}Enum""{{{defaultValue}}}""Enum{{/isEnum}}{{^isEnum}}{{{defaultValue}}}{{/isEnum}};{{/defaultValue}} 
+        public {{#complexType}}{{{complexType}}}{{/complexType}}{{^complexType}}{{{datatypeWithEnum}}}{{/complexType}}{{^isContainer}}{{^required}}{{^isEnum}}?{{/isEnum}}{{/required}}{{/isContainer}} {{name}} { get; set; }  {{#defaultValue}} = {{#isEnum}}{{{datatypeWithEnum}}}Enum""{{{defaultValue}}}""Enum{{/isEnum}}{{^isEnum}}{{{defaultValue}}}{{/isEnum}};{{/defaultValue}} 
         {{/isEnum}}
         {{/vars}}
     {{#hasRequired}}
@@ -75,20 +75,14 @@
             {{^isInherited}}
             {{^isReadOnly}}
             {{#required}}
+            {{^vendorExtensions.x-csharp-value-type}}
             // to ensure "{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}" is required (not null)
-            if ({{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}} == null)
-            {
-                throw new InvalidDataException("{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}} is a required property for {{classname}} and cannot be null");
-            }
-            else
-            {
+            this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}} ?? throw new ArgumentNullException("{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}} is a required property for {{classname}} and cannot be null");
+            {{/vendorExtensions.x-csharp-value-type}}
+            {{#vendorExtensions.x-csharp-value-type}}
                 this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}};
-            }
-            
+            {{/vendorExtensions.x-csharp-value-type}}
             {{/required}}
-            {{#isNullable}}
-            this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}};
-            {{/isNullable}}
             {{/isReadOnly}}
             {{/isInherited}}
             {{/vars}}
@@ -96,18 +90,17 @@
             {{^isInherited}}
             {{^isReadOnly}}
             {{^required}}
-            {{#defaultValue}}// use default value if no "{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}" provided
-            if ({{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}} == null)
-            {
-                this.{{name}} = {{#isEnum}}{{{datatypeWithEnum}}}Enum""{{{defaultValue}}}""Enum{{/isEnum}}{{^isEnum}}{{{defaultValue}}}{{/isEnum}};
-            }
-            else
-            {
+            {{#defaultValue}}
+            {{^vendorExtensions.x-csharp-value-type}}
+            // use default value if no "{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}" provided
+            this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}} ?? {{{defaultValue}}};
+            {{/vendorExtensions.x-csharp-value-type}}
+            {{#vendorExtensions.x-csharp-value-type}}
                 this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}};
-            }
+            {{/vendorExtensions.x-csharp-value-type}}
             {{/defaultValue}}
             {{^defaultValue}}
-this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}};
+            this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}};
             {{/defaultValue}}
             {{/required}}
             {{/isReadOnly}}
@@ -140,7 +133,6 @@ this.{{name}} = {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}};
         /// <value>{{description}}</value>{{/description}}
         [DataMember(Name="{{baseName}}", EmitDefaultValue={{#vendorExtensions.x-emit-default-value}}true{{/vendorExtensions.x-emit-default-value}}{{^vendorExtensions.x-emit-default-value}}{{#isNullable}}true{{/isNullable}}{{^isNullable}}false{{/isNullable}}{{/vendorExtensions.x-emit-default-value}})]{{#isDate}}
         [JsonConverter(typeof(OpenAPIDateConverter))]{{/isDate}}
-        [JsonProperty("{{baseName}}")]
         public {{{dataType}}} {{name}} { get; set; } {{#defaultValue}} = {{{defaultValue}}};{{/defaultValue}}
         {{/isReadOnly}}
         {{/isEnum}}
