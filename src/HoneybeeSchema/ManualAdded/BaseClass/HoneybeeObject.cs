@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Runtime.Serialization;
 
 namespace HoneybeeSchema
 {
@@ -12,10 +11,10 @@ namespace HoneybeeSchema
         {
         }
 
-        
+
         public abstract string ToString(bool detailed);
 
-        public abstract HoneybeeObject Duplicate();
+        public abstract OpenAPIGenBaseModel Duplicate();
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented, JsonSetting.AnyOfConvertSetting);

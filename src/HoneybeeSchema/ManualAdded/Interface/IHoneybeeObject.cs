@@ -5,7 +5,7 @@ namespace HoneybeeSchema
     {
         string ToString(bool detailed);
         string ToJson();
-        HoneybeeObject Duplicate();
+        OpenAPIGenBaseModel Duplicate();
     } 
 
     
