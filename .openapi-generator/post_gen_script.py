@@ -5,7 +5,15 @@ import shutil
 import re
 import time
 
-name_space = "HoneybeeSchema"
+
+def get_package_name():
+    config_file = os.path.join(os.getcwd(), 'openapi-config.json')
+    with open(config_file, "r") as jsonFile:
+        config_data = json.load(jsonFile)
+
+    package_name = config_data["packageName"]
+    return package_name
+
 
 def get_allof_types(obj, allofList):
 
@@ -186,27 +194,17 @@ def cleanup(projectName):
 
 args = sys.argv[1:]
 if args == []:
-    json_file = os.path.join(os.getcwd(), 'model.json')
+    raise ValueError("Missing a json path. eg: python3 post_gen_script.py \".openapi-docs/model_inheritance.json\"")
+    # json_file = os.path.join(os.getcwd(), '.openapi-docs', 'model.json')
 else:
     json_file = args[0]
 
+name_space = get_package_name()
 mapper_json = json_file.replace("inheritance.json", "mapper.json")
 
-time.sleep(3)
+time.sleep(1)
+# clean up first
 cleanup(name_space)
 print(f"post processing {json_file} with {mapper_json}")
 
 check_types(json_file, mapper_json)
-
-
-# regex = r"(,\s*,)(?=\s*\/\/ Required parameters\n\s+\b)"
-# replace_new = ""
-
-# test_str = ("ndition, AperturePropertiesAbridged properties, string identifier, , // Required parameters\n"
-# "            bool isO")
-
-# test_str1 = re.sub(regex, replace_new, test_str)
-# print(test_str1)
-
-# test_str2 =fix_constructor(test_str)
-# print(test_str2)

@@ -4,6 +4,7 @@ import json
 import shutil
 import sys
 
+
 def download(url, dir):
     json_url = urllib.request.urlopen(url)
     data = json.loads(json_url.read())
@@ -16,17 +17,19 @@ def download(url, dir):
         json.dump(data, j, indent=4)
 
 
+args = sys.argv[1:]
+if args == []:
+    raise ValueError("Missing base url argument. eg: python downloadSchema.sh \"https://www.ladybug.tools/honeybee-schema\"")
+
+# base_url = "https://www.ladybug.tools/honeybee-schema"
+base_url = args[0]
+
+
 saving_dir = os.path.join(os.getcwd(), '.openapi-docs')
 # clean up the folder
 if os.path.exists(saving_dir):
     shutil.rmtree(saving_dir)
 os.mkdir(saving_dir)
-
-base_url = "https://www.ladybug.tools/honeybee-schema"
-
-args = sys.argv[1:]
-if args != []:
-    base_url = args[0] 
 
 
 # downlaod model

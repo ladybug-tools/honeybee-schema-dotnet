@@ -3,16 +3,18 @@ import os
 import json
 import urllib.request
 
-package_name = 'HoneybeeSchema'
+
 
 # Check the version from config
-config_file = os.path.join(os.getcwd(), '.openapi-generator', 'config.json')
+config_file = os.path.join(os.getcwd(), 'openapi-config.json')
 with open(config_file, "r") as jsonFile:
     config_data = json.load(jsonFile)
 
 schema_version = config_data["packageVersion"]
 print(f'Schema_version: {schema_version}')
 new_version = f'{schema_version}.0'
+
+package_name = config_data["packageName"]
 
 # Check the version from nuget
 api = f'https://api.nuget.org/v3-flatcontainer/{package_name}/index.json'
