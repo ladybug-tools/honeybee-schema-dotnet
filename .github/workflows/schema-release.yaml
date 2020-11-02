@@ -40,7 +40,8 @@ jobs:
       env:
         VERSION: ${{ github.event.client_payload.version }}
       run: |
-        bash .openapi-generator/generate.sh $VERSION
+        bash .openapi-generator/download.sh $VERSION
+        bash .openapi-generator/generate.sh
 
     - name: "Set Commit Message"
       id: vars
