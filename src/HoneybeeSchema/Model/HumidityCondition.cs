@@ -138,9 +138,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>HumidityCondition object</returns>
-        public HumidityCondition DuplicateHumidityCondition()
+        public virtual HumidityCondition DuplicateHumidityCondition()
         {
-            return FromJson(this.ToJson()) as HumidityCondition;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -149,7 +149,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateHumidityCondition();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateHumidityCondition();
         }
      
         /// <summary>

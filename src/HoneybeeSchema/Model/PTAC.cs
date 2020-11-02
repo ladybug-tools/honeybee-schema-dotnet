@@ -143,9 +143,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>PTAC object</returns>
-        public PTAC DuplicatePTAC()
+        public virtual PTAC DuplicatePTAC()
         {
-            return FromJson(this.ToJson()) as PTAC;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -154,7 +154,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicatePTAC();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicatePTAC();
         }
      
         /// <summary>

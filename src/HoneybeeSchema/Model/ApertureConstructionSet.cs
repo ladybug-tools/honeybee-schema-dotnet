@@ -125,9 +125,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>ApertureConstructionSet object</returns>
-        public ApertureConstructionSet DuplicateApertureConstructionSet()
+        public virtual ApertureConstructionSet DuplicateApertureConstructionSet()
         {
-            return FromJson(this.ToJson()) as ApertureConstructionSet;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -136,7 +136,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateApertureConstructionSet();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateApertureConstructionSet();
         }
      
         /// <summary>

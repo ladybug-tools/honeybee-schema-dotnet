@@ -105,9 +105,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>RoomPropertiesAbridged object</returns>
-        public RoomPropertiesAbridged DuplicateRoomPropertiesAbridged()
+        public virtual RoomPropertiesAbridged DuplicateRoomPropertiesAbridged()
         {
-            return FromJson(this.ToJson()) as RoomPropertiesAbridged;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -116,7 +116,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateRoomPropertiesAbridged();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateRoomPropertiesAbridged();
         }
      
         /// <summary>

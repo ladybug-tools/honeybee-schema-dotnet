@@ -112,9 +112,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>AFNCrack object</returns>
-        public AFNCrack DuplicateAFNCrack()
+        public virtual AFNCrack DuplicateAFNCrack()
         {
-            return FromJson(this.ToJson()) as AFNCrack;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -123,7 +123,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateAFNCrack();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateAFNCrack();
         }
      
         /// <summary>

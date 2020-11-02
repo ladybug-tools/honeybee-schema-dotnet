@@ -173,9 +173,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>Face object</returns>
-        public Face DuplicateFace()
+        public virtual Face DuplicateFace()
         {
-            return FromJson(this.ToJson()) as Face;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -184,7 +184,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateFace();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdBaseModel DuplicateIDdBaseModel()
+        {
+            return DuplicateFace();
         }
      
         /// <summary>

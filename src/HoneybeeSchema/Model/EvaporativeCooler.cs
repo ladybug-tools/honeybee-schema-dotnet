@@ -116,9 +116,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>EvaporativeCooler object</returns>
-        public EvaporativeCooler DuplicateEvaporativeCooler()
+        public virtual EvaporativeCooler DuplicateEvaporativeCooler()
         {
-            return FromJson(this.ToJson()) as EvaporativeCooler;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -127,7 +127,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateEvaporativeCooler();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateEvaporativeCooler();
         }
      
         /// <summary>

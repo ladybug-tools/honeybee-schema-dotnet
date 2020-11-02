@@ -107,9 +107,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>ApertureEnergyPropertiesAbridged object</returns>
-        public ApertureEnergyPropertiesAbridged DuplicateApertureEnergyPropertiesAbridged()
+        public virtual ApertureEnergyPropertiesAbridged DuplicateApertureEnergyPropertiesAbridged()
         {
-            return FromJson(this.ToJson()) as ApertureEnergyPropertiesAbridged;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -118,7 +118,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateApertureEnergyPropertiesAbridged();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateApertureEnergyPropertiesAbridged();
         }
      
         /// <summary>

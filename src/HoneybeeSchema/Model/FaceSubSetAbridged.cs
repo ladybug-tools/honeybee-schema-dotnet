@@ -119,9 +119,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>FaceSubSetAbridged object</returns>
-        public FaceSubSetAbridged DuplicateFaceSubSetAbridged()
+        public virtual FaceSubSetAbridged DuplicateFaceSubSetAbridged()
         {
-            return FromJson(this.ToJson()) as FaceSubSetAbridged;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -130,7 +130,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateFaceSubSetAbridged();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateFaceSubSetAbridged();
         }
      
         /// <summary>

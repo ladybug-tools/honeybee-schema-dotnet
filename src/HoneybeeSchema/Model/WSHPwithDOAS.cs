@@ -134,9 +134,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>WSHPwithDOAS object</returns>
-        public WSHPwithDOAS DuplicateWSHPwithDOAS()
+        public virtual WSHPwithDOAS DuplicateWSHPwithDOAS()
         {
-            return FromJson(this.ToJson()) as WSHPwithDOAS;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -145,7 +145,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateWSHPwithDOAS();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateWSHPwithDOAS();
         }
      
         /// <summary>

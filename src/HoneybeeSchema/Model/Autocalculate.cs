@@ -90,9 +90,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>Autocalculate object</returns>
-        public Autocalculate DuplicateAutocalculate()
+        public virtual Autocalculate DuplicateAutocalculate()
         {
-            return FromJson(this.ToJson()) as Autocalculate;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -101,7 +101,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateAutocalculate();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateAutocalculate();
         }
      
         /// <summary>

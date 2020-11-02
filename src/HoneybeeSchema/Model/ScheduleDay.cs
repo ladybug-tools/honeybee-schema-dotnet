@@ -126,9 +126,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>ScheduleDay object</returns>
-        public ScheduleDay DuplicateScheduleDay()
+        public virtual ScheduleDay DuplicateScheduleDay()
         {
-            return FromJson(this.ToJson()) as ScheduleDay;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -137,7 +137,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateScheduleDay();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateScheduleDay();
         }
      
         /// <summary>

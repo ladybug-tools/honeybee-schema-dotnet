@@ -152,9 +152,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>VentilationSimulationControl object</returns>
-        public VentilationSimulationControl DuplicateVentilationSimulationControl()
+        public virtual VentilationSimulationControl DuplicateVentilationSimulationControl()
         {
-            return FromJson(this.ToJson()) as VentilationSimulationControl;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -163,7 +163,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateVentilationSimulationControl();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateVentilationSimulationControl();
         }
      
         /// <summary>

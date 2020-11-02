@@ -141,9 +141,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>Infiltration object</returns>
-        public Infiltration DuplicateInfiltration()
+        public virtual Infiltration DuplicateInfiltration()
         {
-            return FromJson(this.ToJson()) as Infiltration;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -152,7 +152,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateInfiltration();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateInfiltration();
         }
      
         /// <summary>

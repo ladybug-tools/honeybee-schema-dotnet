@@ -156,9 +156,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>Room object</returns>
-        public Room DuplicateRoom()
+        public virtual Room DuplicateRoom()
         {
-            return FromJson(this.ToJson()) as Room;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -167,7 +167,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateRoom();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdBaseModel DuplicateIDdBaseModel()
+        {
+            return DuplicateRoom();
         }
      
         /// <summary>

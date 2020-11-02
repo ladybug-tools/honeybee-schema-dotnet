@@ -107,9 +107,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>TemplateSystem object</returns>
-        public TemplateSystem DuplicateTemplateSystem()
+        public virtual TemplateSystem DuplicateTemplateSystem()
         {
-            return FromJson(this.ToJson()) as TemplateSystem;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -118,7 +118,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateTemplateSystem();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateTemplateSystem();
         }
      
         /// <summary>

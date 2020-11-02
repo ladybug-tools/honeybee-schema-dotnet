@@ -173,9 +173,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>IDdEnergyBaseModel object</returns>
-        public IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        public virtual IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
         {
-            return FromJson(this.ToJson()) as IDdEnergyBaseModel;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -184,7 +184,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateIDdEnergyBaseModel();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateIDdEnergyBaseModel();
         }
      
         /// <summary>

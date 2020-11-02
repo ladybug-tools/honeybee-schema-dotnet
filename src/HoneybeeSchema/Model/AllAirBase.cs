@@ -134,9 +134,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>AllAirBase object</returns>
-        public AllAirBase DuplicateAllAirBase()
+        public virtual AllAirBase DuplicateAllAirBase()
         {
-            return FromJson(this.ToJson()) as AllAirBase;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -145,7 +145,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateAllAirBase();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateAllAirBase();
         }
      
         /// <summary>

@@ -331,9 +331,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>EnergyWindowMaterialBlind object</returns>
-        public EnergyWindowMaterialBlind DuplicateEnergyWindowMaterialBlind()
+        public virtual EnergyWindowMaterialBlind DuplicateEnergyWindowMaterialBlind()
         {
-            return FromJson(this.ToJson()) as EnergyWindowMaterialBlind;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -342,7 +342,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateEnergyWindowMaterialBlind();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateEnergyWindowMaterialBlind();
         }
      
         /// <summary>

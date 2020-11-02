@@ -107,9 +107,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>DaylightSavingTime object</returns>
-        public DaylightSavingTime DuplicateDaylightSavingTime()
+        public virtual DaylightSavingTime DuplicateDaylightSavingTime()
         {
-            return FromJson(this.ToJson()) as DaylightSavingTime;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -118,7 +118,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateDaylightSavingTime();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override DatedBaseModel DuplicateDatedBaseModel()
+        {
+            return DuplicateDaylightSavingTime();
         }
      
         /// <summary>

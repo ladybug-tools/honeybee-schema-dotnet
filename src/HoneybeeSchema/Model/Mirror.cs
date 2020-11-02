@@ -152,9 +152,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>Mirror object</returns>
-        public Mirror DuplicateMirror()
+        public virtual Mirror DuplicateMirror()
         {
-            return FromJson(this.ToJson()) as Mirror;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -163,7 +163,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateMirror();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override ModifierBase DuplicateModifierBase()
+        {
+            return DuplicateMirror();
         }
      
         /// <summary>

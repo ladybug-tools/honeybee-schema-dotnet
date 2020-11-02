@@ -136,9 +136,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>SetpointAbridged object</returns>
-        public SetpointAbridged DuplicateSetpointAbridged()
+        public virtual SetpointAbridged DuplicateSetpointAbridged()
         {
-            return FromJson(this.ToJson()) as SetpointAbridged;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -147,7 +147,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateSetpointAbridged();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateSetpointAbridged();
         }
      
         /// <summary>

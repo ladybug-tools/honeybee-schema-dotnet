@@ -134,9 +134,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>FCUwithDOAS object</returns>
-        public FCUwithDOAS DuplicateFCUwithDOAS()
+        public virtual FCUwithDOAS DuplicateFCUwithDOAS()
         {
-            return FromJson(this.ToJson()) as FCUwithDOAS;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -145,7 +145,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateFCUwithDOAS();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateFCUwithDOAS();
         }
      
         /// <summary>

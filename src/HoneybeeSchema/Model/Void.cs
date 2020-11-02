@@ -90,9 +90,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>Void object</returns>
-        public Void DuplicateVoid()
+        public virtual Void DuplicateVoid()
         {
-            return FromJson(this.ToJson()) as Void;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -101,7 +101,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateVoid();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateVoid();
         }
      
         /// <summary>

@@ -126,9 +126,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>StateGeometryAbridged object</returns>
-        public StateGeometryAbridged DuplicateStateGeometryAbridged()
+        public virtual StateGeometryAbridged DuplicateStateGeometryAbridged()
         {
-            return FromJson(this.ToJson()) as StateGeometryAbridged;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -137,7 +137,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateStateGeometryAbridged();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdRadianceBaseModel DuplicateIDdRadianceBaseModel()
+        {
+            return DuplicateStateGeometryAbridged();
         }
      
         /// <summary>

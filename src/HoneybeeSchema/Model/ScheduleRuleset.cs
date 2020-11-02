@@ -163,9 +163,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>ScheduleRuleset object</returns>
-        public ScheduleRuleset DuplicateScheduleRuleset()
+        public virtual ScheduleRuleset DuplicateScheduleRuleset()
         {
-            return FromJson(this.ToJson()) as ScheduleRuleset;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -174,7 +174,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateScheduleRuleset();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateScheduleRuleset();
         }
      
         /// <summary>

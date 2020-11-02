@@ -143,9 +143,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>RunPeriod object</returns>
-        public RunPeriod DuplicateRunPeriod()
+        public virtual RunPeriod DuplicateRunPeriod()
         {
-            return FromJson(this.ToJson()) as RunPeriod;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -154,7 +154,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateRunPeriod();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override DatedBaseModel DuplicateDatedBaseModel()
+        {
+            return DuplicateRunPeriod();
         }
      
         /// <summary>

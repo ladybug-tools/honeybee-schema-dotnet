@@ -90,9 +90,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>NoLimit object</returns>
-        public NoLimit DuplicateNoLimit()
+        public virtual NoLimit DuplicateNoLimit()
         {
-            return FromJson(this.ToJson()) as NoLimit;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -101,7 +101,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateNoLimit();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateNoLimit();
         }
      
         /// <summary>

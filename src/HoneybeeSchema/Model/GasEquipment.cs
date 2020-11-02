@@ -144,9 +144,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>GasEquipment object</returns>
-        public GasEquipment DuplicateGasEquipment()
+        public virtual GasEquipment DuplicateGasEquipment()
         {
-            return FromJson(this.ToJson()) as GasEquipment;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -155,7 +155,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateGasEquipment();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateGasEquipment();
         }
      
         /// <summary>

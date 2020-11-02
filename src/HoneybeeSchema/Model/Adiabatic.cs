@@ -90,9 +90,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>Adiabatic object</returns>
-        public Adiabatic DuplicateAdiabatic()
+        public virtual Adiabatic DuplicateAdiabatic()
         {
-            return FromJson(this.ToJson()) as Adiabatic;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -101,7 +101,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateAdiabatic();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateAdiabatic();
         }
      
         /// <summary>

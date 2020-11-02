@@ -90,9 +90,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>Ground object</returns>
-        public Ground DuplicateGround()
+        public virtual Ground DuplicateGround()
         {
-            return FromJson(this.ToJson()) as Ground;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -101,7 +101,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateGround();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateGround();
         }
      
         /// <summary>

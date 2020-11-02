@@ -145,9 +145,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>OpenAPIGenBaseModel object</returns>
-        public OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        public virtual OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
         {
-            return FromJson(this.ToJson()) as OpenAPIGenBaseModel;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -156,8 +156,9 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateOpenAPIGenBaseModel();
         }
+
      
         /// <summary>
         /// Returns true if objects are equal

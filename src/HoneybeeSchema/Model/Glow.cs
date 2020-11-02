@@ -152,9 +152,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>Glow object</returns>
-        public Glow DuplicateGlow()
+        public virtual Glow DuplicateGlow()
         {
-            return FromJson(this.ToJson()) as Glow;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -163,7 +163,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateGlow();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override ModifierBase DuplicateModifierBase()
+        {
+            return DuplicateGlow();
         }
      
         /// <summary>

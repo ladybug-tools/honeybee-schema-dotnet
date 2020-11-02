@@ -185,9 +185,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>ScheduleRuleAbridged object</returns>
-        public ScheduleRuleAbridged DuplicateScheduleRuleAbridged()
+        public virtual ScheduleRuleAbridged DuplicateScheduleRuleAbridged()
         {
-            return FromJson(this.ToJson()) as ScheduleRuleAbridged;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -196,7 +196,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateScheduleRuleAbridged();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override DatedBaseModel DuplicateDatedBaseModel()
+        {
+            return DuplicateScheduleRuleAbridged();
         }
      
         /// <summary>

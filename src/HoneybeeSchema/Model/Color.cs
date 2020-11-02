@@ -121,9 +121,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>Color object</returns>
-        public Color DuplicateColor()
+        public virtual Color DuplicateColor()
         {
-            return FromJson(this.ToJson()) as Color;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -132,7 +132,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateColor();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateColor();
         }
      
         /// <summary>

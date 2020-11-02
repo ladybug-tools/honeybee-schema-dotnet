@@ -134,9 +134,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>VRFwithDOAS object</returns>
-        public VRFwithDOAS DuplicateVRFwithDOAS()
+        public virtual VRFwithDOAS DuplicateVRFwithDOAS()
         {
-            return FromJson(this.ToJson()) as VRFwithDOAS;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -145,7 +145,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateVRFwithDOAS();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateVRFwithDOAS();
         }
      
         /// <summary>

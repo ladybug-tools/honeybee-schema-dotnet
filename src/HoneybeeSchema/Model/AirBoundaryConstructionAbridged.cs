@@ -117,9 +117,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>AirBoundaryConstructionAbridged object</returns>
-        public AirBoundaryConstructionAbridged DuplicateAirBoundaryConstructionAbridged()
+        public virtual AirBoundaryConstructionAbridged DuplicateAirBoundaryConstructionAbridged()
         {
-            return FromJson(this.ToJson()) as AirBoundaryConstructionAbridged;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -128,7 +128,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateAirBoundaryConstructionAbridged();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateAirBoundaryConstructionAbridged();
         }
      
         /// <summary>

@@ -125,9 +125,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>EnergyWindowMaterialSimpleGlazSys object</returns>
-        public EnergyWindowMaterialSimpleGlazSys DuplicateEnergyWindowMaterialSimpleGlazSys()
+        public virtual EnergyWindowMaterialSimpleGlazSys DuplicateEnergyWindowMaterialSimpleGlazSys()
         {
-            return FromJson(this.ToJson()) as EnergyWindowMaterialSimpleGlazSys;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -136,7 +136,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateEnergyWindowMaterialSimpleGlazSys();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateEnergyWindowMaterialSimpleGlazSys();
         }
      
         /// <summary>

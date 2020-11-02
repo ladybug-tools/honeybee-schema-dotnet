@@ -161,9 +161,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>ModelEnergyProperties object</returns>
-        public ModelEnergyProperties DuplicateModelEnergyProperties()
+        public virtual ModelEnergyProperties DuplicateModelEnergyProperties()
         {
-            return FromJson(this.ToJson()) as ModelEnergyProperties;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -172,7 +172,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateModelEnergyProperties();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateModelEnergyProperties();
         }
      
         /// <summary>

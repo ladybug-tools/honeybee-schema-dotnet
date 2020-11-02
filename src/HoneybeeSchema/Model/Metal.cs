@@ -161,9 +161,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>Metal object</returns>
-        public Metal DuplicateMetal()
+        public virtual Metal DuplicateMetal()
         {
-            return FromJson(this.ToJson()) as Metal;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -172,7 +172,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateMetal();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override ModifierBase DuplicateModifierBase()
+        {
+            return DuplicateMetal();
         }
      
         /// <summary>

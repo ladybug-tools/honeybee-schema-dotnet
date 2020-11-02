@@ -104,9 +104,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>Surface object</returns>
-        public Surface DuplicateSurface()
+        public virtual Surface DuplicateSurface()
         {
-            return FromJson(this.ToJson()) as Surface;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -115,7 +115,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateSurface();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateSurface();
         }
      
         /// <summary>

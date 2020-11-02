@@ -108,9 +108,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>GasEquipmentAbridged object</returns>
-        public GasEquipmentAbridged DuplicateGasEquipmentAbridged()
+        public virtual GasEquipmentAbridged DuplicateGasEquipmentAbridged()
         {
-            return FromJson(this.ToJson()) as GasEquipmentAbridged;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -119,7 +119,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateGasEquipmentAbridged();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override EquipmentBase DuplicateEquipmentBase()
+        {
+            return DuplicateGasEquipmentAbridged();
         }
      
         /// <summary>

@@ -194,9 +194,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>View object</returns>
-        public View DuplicateView()
+        public virtual View DuplicateView()
         {
-            return FromJson(this.ToJson()) as View;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -205,7 +205,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateView();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override RadianceAsset DuplicateRadianceAsset()
+        {
+            return DuplicateView();
         }
      
         /// <summary>

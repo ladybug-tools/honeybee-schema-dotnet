@@ -109,9 +109,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>WindowConstructionAbridged object</returns>
-        public WindowConstructionAbridged DuplicateWindowConstructionAbridged()
+        public virtual WindowConstructionAbridged DuplicateWindowConstructionAbridged()
         {
-            return FromJson(this.ToJson()) as WindowConstructionAbridged;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -120,7 +120,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateWindowConstructionAbridged();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateWindowConstructionAbridged();
         }
      
         /// <summary>

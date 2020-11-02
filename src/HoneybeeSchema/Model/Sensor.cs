@@ -114,9 +114,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>Sensor object</returns>
-        public Sensor DuplicateSensor()
+        public virtual Sensor DuplicateSensor()
         {
-            return FromJson(this.ToJson()) as Sensor;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -125,7 +125,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateSensor();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateSensor();
         }
      
         /// <summary>

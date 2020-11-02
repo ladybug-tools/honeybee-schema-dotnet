@@ -179,9 +179,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>Trans object</returns>
-        public Trans DuplicateTrans()
+        public virtual Trans DuplicateTrans()
         {
-            return FromJson(this.ToJson()) as Trans;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -190,7 +190,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateTrans();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override ModifierBase DuplicateModifierBase()
+        {
+            return DuplicateTrans();
         }
      
         /// <summary>

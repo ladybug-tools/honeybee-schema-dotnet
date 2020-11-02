@@ -153,9 +153,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>ScheduleFixedIntervalAbridged object</returns>
-        public ScheduleFixedIntervalAbridged DuplicateScheduleFixedIntervalAbridged()
+        public virtual ScheduleFixedIntervalAbridged DuplicateScheduleFixedIntervalAbridged()
         {
-            return FromJson(this.ToJson()) as ScheduleFixedIntervalAbridged;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -164,7 +164,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateScheduleFixedIntervalAbridged();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateScheduleFixedIntervalAbridged();
         }
      
         /// <summary>

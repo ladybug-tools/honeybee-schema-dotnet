@@ -112,9 +112,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>WindCondition object</returns>
-        public WindCondition DuplicateWindCondition()
+        public virtual WindCondition DuplicateWindCondition()
         {
-            return FromJson(this.ToJson()) as WindCondition;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -123,7 +123,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateWindCondition();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateWindCondition();
         }
      
         /// <summary>

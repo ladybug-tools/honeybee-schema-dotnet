@@ -133,9 +133,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>ShadowCalculation object</returns>
-        public ShadowCalculation DuplicateShadowCalculation()
+        public virtual ShadowCalculation DuplicateShadowCalculation()
         {
-            return FromJson(this.ToJson()) as ShadowCalculation;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -144,7 +144,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateShadowCalculation();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateShadowCalculation();
         }
      
         /// <summary>

@@ -117,9 +117,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>RadianceShadeStateAbridged object</returns>
-        public RadianceShadeStateAbridged DuplicateRadianceShadeStateAbridged()
+        public virtual RadianceShadeStateAbridged DuplicateRadianceShadeStateAbridged()
         {
-            return FromJson(this.ToJson()) as RadianceShadeStateAbridged;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -128,7 +128,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateRadianceShadeStateAbridged();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateRadianceShadeStateAbridged();
         }
      
         /// <summary>

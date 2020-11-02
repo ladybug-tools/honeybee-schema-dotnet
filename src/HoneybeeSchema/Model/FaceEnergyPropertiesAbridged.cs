@@ -107,9 +107,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>FaceEnergyPropertiesAbridged object</returns>
-        public FaceEnergyPropertiesAbridged DuplicateFaceEnergyPropertiesAbridged()
+        public virtual FaceEnergyPropertiesAbridged DuplicateFaceEnergyPropertiesAbridged()
         {
-            return FromJson(this.ToJson()) as FaceEnergyPropertiesAbridged;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -118,7 +118,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateFaceEnergyPropertiesAbridged();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateFaceEnergyPropertiesAbridged();
         }
      
         /// <summary>

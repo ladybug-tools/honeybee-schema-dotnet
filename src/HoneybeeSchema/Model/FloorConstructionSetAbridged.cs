@@ -95,9 +95,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>FloorConstructionSetAbridged object</returns>
-        public FloorConstructionSetAbridged DuplicateFloorConstructionSetAbridged()
+        public virtual FloorConstructionSetAbridged DuplicateFloorConstructionSetAbridged()
         {
-            return FromJson(this.ToJson()) as FloorConstructionSetAbridged;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -106,7 +106,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateFloorConstructionSetAbridged();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override FaceSubSetAbridged DuplicateFaceSubSetAbridged()
+        {
+            return DuplicateFloorConstructionSetAbridged();
         }
      
         /// <summary>

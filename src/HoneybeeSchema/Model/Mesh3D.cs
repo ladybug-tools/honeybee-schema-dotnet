@@ -123,9 +123,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>Mesh3D object</returns>
-        public Mesh3D DuplicateMesh3D()
+        public virtual Mesh3D DuplicateMesh3D()
         {
-            return FromJson(this.ToJson()) as Mesh3D;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -134,7 +134,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateMesh3D();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateMesh3D();
         }
      
         /// <summary>

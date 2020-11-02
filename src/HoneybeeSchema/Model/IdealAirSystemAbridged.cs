@@ -188,9 +188,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>IdealAirSystemAbridged object</returns>
-        public IdealAirSystemAbridged DuplicateIdealAirSystemAbridged()
+        public virtual IdealAirSystemAbridged DuplicateIdealAirSystemAbridged()
         {
-            return FromJson(this.ToJson()) as IdealAirSystemAbridged;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -199,7 +199,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateIdealAirSystemAbridged();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateIdealAirSystemAbridged();
         }
      
         /// <summary>

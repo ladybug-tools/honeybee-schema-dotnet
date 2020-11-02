@@ -55,7 +55,7 @@ namespace HoneybeeSchema
         /// A boolean noting whether the boundary is exposed to sun.
         /// </summary>
         /// <value>A boolean noting whether the boundary is exposed to sun.</value>
-        [DataMember(Name="sun_exposure")]
+        [DataMember(Name="sun_exposure", EmitDefaultValue=false)]
         public bool SunExposure { get; set; }  = true;
         /// <summary>
         /// A boolean noting whether the boundary is exposed to wind.
@@ -116,9 +116,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>Outdoors object</returns>
-        public Outdoors DuplicateOutdoors()
+        public virtual Outdoors DuplicateOutdoors()
         {
-            return FromJson(this.ToJson()) as Outdoors;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -127,7 +127,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateOutdoors();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateOutdoors();
         }
      
         /// <summary>

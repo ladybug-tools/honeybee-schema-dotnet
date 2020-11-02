@@ -110,9 +110,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>OpaqueConstruction object</returns>
-        public OpaqueConstruction DuplicateOpaqueConstruction()
+        public virtual OpaqueConstruction DuplicateOpaqueConstruction()
         {
-            return FromJson(this.ToJson()) as OpaqueConstruction;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -121,7 +121,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateOpaqueConstruction();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpaqueConstructionAbridged DuplicateOpaqueConstructionAbridged()
+        {
+            return DuplicateOpaqueConstruction();
         }
      
         /// <summary>

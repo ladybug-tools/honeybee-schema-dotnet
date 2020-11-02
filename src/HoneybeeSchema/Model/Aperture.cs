@@ -156,9 +156,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>Aperture object</returns>
-        public Aperture DuplicateAperture()
+        public virtual Aperture DuplicateAperture()
         {
-            return FromJson(this.ToJson()) as Aperture;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -167,7 +167,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateAperture();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdBaseModel DuplicateIDdBaseModel()
+        {
+            return DuplicateAperture();
         }
      
         /// <summary>

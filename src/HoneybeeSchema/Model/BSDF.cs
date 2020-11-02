@@ -190,9 +190,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>BSDF object</returns>
-        public BSDF DuplicateBSDF()
+        public virtual BSDF DuplicateBSDF()
         {
-            return FromJson(this.ToJson()) as BSDF;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -201,7 +201,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateBSDF();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override ModifierBase DuplicateModifierBase()
+        {
+            return DuplicateBSDF();
         }
      
         /// <summary>

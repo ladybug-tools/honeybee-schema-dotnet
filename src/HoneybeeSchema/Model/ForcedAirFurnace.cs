@@ -143,9 +143,9 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>ForcedAirFurnace object</returns>
-        public ForcedAirFurnace DuplicateForcedAirFurnace()
+        public virtual ForcedAirFurnace DuplicateForcedAirFurnace()
         {
-            return FromJson(this.ToJson()) as ForcedAirFurnace;
+            return FromJson(this.ToJson());
         }
 
         /// <summary>
@@ -154,7 +154,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return FromJson(this.ToJson());
+            return DuplicateForcedAirFurnace();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateForcedAirFurnace();
         }
      
         /// <summary>
