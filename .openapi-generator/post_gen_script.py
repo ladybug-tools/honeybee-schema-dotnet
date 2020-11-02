@@ -166,6 +166,10 @@ def check_types(source_json_url, mapper_json):
 
 def cleanup(projectName):
     root = os.path.dirname(os.path.dirname(__file__))
+    # remove unused test folder
+    target_folder = os.path.join(root, 'src', f'{projectName}.Test')
+    if os.path.exists(target_folder):
+        shutil.rmtree(target_folder)
     # remove Client folder
     target_folder = os.path.join(root, 'src', projectName, 'Client')
     if os.path.exists(target_folder):
@@ -183,13 +187,7 @@ def cleanup(projectName):
     for f in class_files:
         cs_file = os.path.join(docs_folder, f)
         os.remove(cs_file)
-    # remove all *AllOfTests.cs files
-    target_folder = os.path.join(root, 'src', f'{projectName}.Test', 'Model')
-    print(f"Checking {target_folder}")
-    class_files = [x for x in os.listdir(target_folder) if x.endswith("AllOfTests.cs")]
-    for f in class_files:
-        cs_file = os.path.join(target_folder, f)
-        os.remove(cs_file)
+ 
 
 
 args = sys.argv[1:]
