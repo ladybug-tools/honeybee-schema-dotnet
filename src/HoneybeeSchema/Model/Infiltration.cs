@@ -58,8 +58,11 @@ namespace HoneybeeSchema
             this.ConstantCoefficient = constantCoefficient;
             this.TemperatureCoefficient = temperatureCoefficient;
             this.VelocityCoefficient = velocityCoefficient;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Infiltration";
         }
-        
+
         /// <summary>
         /// Number for the infiltration per exterior surface area in m3/s-m2.
         /// </summary>
@@ -72,11 +75,6 @@ namespace HoneybeeSchema
         /// <value>The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.</value>
         [DataMember(Name="schedule", EmitDefaultValue=true)]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "Infiltration";
         /// <summary>
         /// Gets or Sets ConstantCoefficient
         /// </summary>

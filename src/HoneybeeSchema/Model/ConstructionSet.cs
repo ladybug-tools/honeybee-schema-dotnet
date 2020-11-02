@@ -61,13 +61,11 @@ namespace HoneybeeSchema
             this.DoorSet = doorSet;
             this.ShadeConstruction = shadeConstruction;
             this.AirBoundaryConstruction = airBoundaryConstruction;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ConstructionSet";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "ConstructionSet";
+
         /// <summary>
         /// A WallConstructionSet object for this ConstructionSet.
         /// </summary>

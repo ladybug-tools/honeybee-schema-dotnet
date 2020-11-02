@@ -48,13 +48,11 @@ namespace HoneybeeSchema
             this.WindowConstruction = windowConstruction;
             this.SkylightConstruction = skylightConstruction;
             this.OperableConstruction = operableConstruction;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ApertureConstructionSetAbridged";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "ApertureConstructionSetAbridged";
+
         /// <summary>
         /// Identifier for a WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.
         /// </summary>

@@ -55,13 +55,11 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             this.Vintage = vintage;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "_TemplateSystem";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "_TemplateSystem";
+
 
         /// <summary>
         /// Returns the string presentation of the object

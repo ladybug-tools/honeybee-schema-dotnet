@@ -56,13 +56,11 @@ namespace HoneybeeSchema
             this.Schedules = schedules;
             this.ScheduleTypeLimits = scheduleTypeLimits;
             this.VentilationSimulationControl = ventilationSimulationControl;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ModelEnergyProperties";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "ModelEnergyProperties";
+
         /// <summary>
         /// List of all unique ConstructionSets in the Model.
         /// </summary>

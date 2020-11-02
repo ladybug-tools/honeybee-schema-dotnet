@@ -60,19 +60,17 @@ namespace HoneybeeSchema
             this.StartDate = startDate;
             this.PlaceholderValue = placeholderValue;
             this.Interpolate = interpolate;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ScheduleFixedInterval";
         }
-        
+
         /// <summary>
         /// A list of timeseries values occuring at each timestep over the course of the simulation.
         /// </summary>
         /// <value>A list of timeseries values occuring at each timestep over the course of the simulation.</value>
         [DataMember(Name="values", EmitDefaultValue=true)]
         public List<double> Values { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "ScheduleFixedInterval";
         /// <summary>
         /// ScheduleTypeLimit object that will be used to validate schedule values against upper/lower limits and assign units to the schedule values. If None, no validation will occur.
         /// </summary>

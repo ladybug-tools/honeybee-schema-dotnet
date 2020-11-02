@@ -48,13 +48,11 @@ namespace HoneybeeSchema
             this.ModifierSets = modifierSets;
             this.SensorGrids = sensorGrids;
             this.Views = views;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ModelRadianceProperties";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "ModelRadianceProperties";
+
         /// <summary>
         /// A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set.
         /// </summary>

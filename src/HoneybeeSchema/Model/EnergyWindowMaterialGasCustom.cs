@@ -71,8 +71,11 @@ namespace HoneybeeSchema
             this.ViscosityCoeffC = viscosityCoeffC;
             this.SpecificHeatCoeffB = specificHeatCoeffB;
             this.SpecificHeatCoeffC = specificHeatCoeffC;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "EnergyWindowMaterialGasCustom";
         }
-        
+
         /// <summary>
         /// The A coefficient for gas conductivity in W/(m-K).
         /// </summary>
@@ -103,11 +106,6 @@ namespace HoneybeeSchema
         /// <value>The molecular weight for gas in g/mol.</value>
         [DataMember(Name="molecular_weight", EmitDefaultValue=true)]
         public double MolecularWeight { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "EnergyWindowMaterialGasCustom";
         /// <summary>
         /// Thickness of the gas layer in meters. Default value is 0.0125.
         /// </summary>

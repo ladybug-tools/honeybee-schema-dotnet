@@ -54,13 +54,11 @@ namespace HoneybeeSchema
             this.FlowCoefficientClosed = flowCoefficientClosed;
             this.FlowExponentClosed = flowExponentClosed;
             this.TwoWayThreshold = twoWayThreshold;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "VentilationOpening";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "VentilationOpening";
+
         /// <summary>
         /// A number for the fraction of the window area that is operable.
         /// </summary>

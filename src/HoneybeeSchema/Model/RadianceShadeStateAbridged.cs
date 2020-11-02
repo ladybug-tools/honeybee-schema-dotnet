@@ -30,7 +30,6 @@ namespace HoneybeeSchema
     [DataContract(Name = "RadianceShadeStateAbridged")]
     [JsonConverter(typeof(JsonSubtypes), "Type")]
     [JsonSubtypes.KnownSubType(typeof(RadianceSubFaceStateAbridged), "RadianceSubFaceStateAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(RadianceSubFaceStateAbridged), "RadianceSubFaceStateAbridged")]
     public partial class RadianceShadeStateAbridged : OpenAPIGenBaseModel, IEquatable<RadianceShadeStateAbridged>, IValidatableObject
     {
         /// <summary>
@@ -48,13 +47,11 @@ namespace HoneybeeSchema
             this.Modifier = modifier;
             this.ModifierDirect = modifierDirect;
             this.Shades = shades;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "RadianceShadeStateAbridged";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "RadianceShadeStateAbridged";
+
         /// <summary>
         /// A Radiance Modifier identifier (default: None).
         /// </summary>

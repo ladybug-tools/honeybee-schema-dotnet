@@ -67,8 +67,11 @@ namespace HoneybeeSchema
             this.WindCondition = windCondition ?? throw new ArgumentNullException("windCondition is a required property for DesignDay and cannot be null");
             // to ensure "skyCondition" is required (not null)
             this.SkyCondition = skyCondition ?? throw new ArgumentNullException("skyCondition is a required property for DesignDay and cannot be null");
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "DesignDay";
         }
-        
+
         /// <summary>
         /// Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
         /// </summary>
@@ -98,11 +101,6 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name="sky_condition", EmitDefaultValue=true)]
         public AnyOf<ASHRAEClearSky,ASHRAETau> SkyCondition { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "DesignDay";
 
         /// <summary>
         /// Returns the string presentation of the object

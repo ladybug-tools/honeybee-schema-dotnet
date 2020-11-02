@@ -52,19 +52,17 @@ namespace HoneybeeSchema
             // to ensure "airMixingSchedule" is required (not null)
             this.AirMixingSchedule = airMixingSchedule ?? throw new ArgumentNullException("airMixingSchedule is a required property for AirBoundaryConstructionAbridged and cannot be null");
             this.AirMixingPerArea = airMixingPerArea;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "AirBoundaryConstructionAbridged";
         }
-        
+
         /// <summary>
         /// Identifier of a fractional schedule for the air mixing schedule across the construction.
         /// </summary>
         /// <value>Identifier of a fractional schedule for the air mixing schedule across the construction.</value>
         [DataMember(Name="air_mixing_schedule", EmitDefaultValue=true)]
         public string AirMixingSchedule { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "AirBoundaryConstructionAbridged";
         /// <summary>
         /// A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system.
         /// </summary>

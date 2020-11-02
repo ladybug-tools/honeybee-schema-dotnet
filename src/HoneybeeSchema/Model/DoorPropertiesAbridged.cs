@@ -44,13 +44,11 @@ namespace HoneybeeSchema
         {
             this.Energy = energy;
             this.Radiance = radiance;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "DoorPropertiesAbridged";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "DoorPropertiesAbridged";
+
         /// <summary>
         /// Gets or Sets Energy
         /// </summary>

@@ -46,13 +46,11 @@ namespace HoneybeeSchema
         {
             this.DynamicGroupIdentifier = dynamicGroupIdentifier;
             this.States = states;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ApertureRadiancePropertiesAbridged";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "ApertureRadiancePropertiesAbridged";
+
         /// <summary>
         /// An optional string to note the dynamic group &#39;             &#39;to which the Aperture is a part of. Apertures sharing the same &#39;             &#39;dynamic_group_identifier will have their states change in unison. &#39;             &#39;If None, the Aperture is assumed to be static. (default: None).
         /// </summary>

@@ -76,19 +76,17 @@ namespace HoneybeeSchema
             this.Units = units;
             this.Tolerance = tolerance;
             this.AngleTolerance = angleTolerance;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Model";
         }
-        
+
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
         [DataMember(Name="properties", EmitDefaultValue=true)]
         public ModelProperties Properties { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "Model";
         /// <summary>
         /// Text string for the current version of the schema.
         /// </summary>

@@ -37,14 +37,6 @@ namespace HoneybeeSchema
     [JsonSubtypes.KnownSubType(typeof(Glass), "Glass")]
     [JsonSubtypes.KnownSubType(typeof(Plastic), "Plastic")]
     [JsonSubtypes.KnownSubType(typeof(Glow), "Glow")]
-    [JsonSubtypes.KnownSubType(typeof(Mirror), "Mirror")]
-    [JsonSubtypes.KnownSubType(typeof(Metal), "Metal")]
-    [JsonSubtypes.KnownSubType(typeof(Trans), "Trans")]
-    [JsonSubtypes.KnownSubType(typeof(Light), "Light")]
-    [JsonSubtypes.KnownSubType(typeof(Glow), "Glow")]
-    [JsonSubtypes.KnownSubType(typeof(BSDF), "BSDF")]
-    [JsonSubtypes.KnownSubType(typeof(Glass), "Glass")]
-    [JsonSubtypes.KnownSubType(typeof(Plastic), "Plastic")]
     public partial class ModifierBase : IDdRadianceBaseModel, IEquatable<ModifierBase>, IValidatableObject
     {
         /// <summary>
@@ -63,13 +55,11 @@ namespace HoneybeeSchema
             string displayName= default // Optional parameters
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ModifierBase";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "ModifierBase";
+
 
         /// <summary>
         /// Returns the string presentation of the object

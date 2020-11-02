@@ -63,8 +63,11 @@ namespace HoneybeeSchema
             this.SummerDesigndaySchedule = summerDesigndaySchedule;
             this.WinterDesigndaySchedule = winterDesigndaySchedule;
             this.ScheduleTypeLimit = scheduleTypeLimit;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ScheduleRulesetAbridged";
         }
-        
+
         /// <summary>
         /// A list of ScheduleDays that are referenced in the other keys of this ScheduleRulesetAbridged.
         /// </summary>
@@ -77,11 +80,6 @@ namespace HoneybeeSchema
         /// <value>An identifier for the ScheduleDay that will be used for all days when no ScheduleRule is applied. This ScheduleDay must be in the day_schedules.</value>
         [DataMember(Name="default_day_schedule", EmitDefaultValue=true)]
         public string DefaultDaySchedule { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "ScheduleRulesetAbridged";
         /// <summary>
         /// A list of ScheduleRuleAbridged that note exceptions to the default_day_schedule. These rules should be ordered from highest to lowest priority.
         /// </summary>

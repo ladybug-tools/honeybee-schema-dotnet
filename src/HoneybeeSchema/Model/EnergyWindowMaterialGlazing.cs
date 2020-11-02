@@ -73,13 +73,11 @@ namespace HoneybeeSchema
             this.Conductivity = conductivity;
             this.DirtCorrection = dirtCorrection;
             this.SolarDiffusing = solarDiffusing;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "EnergyWindowMaterialGlazing";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "EnergyWindowMaterialGlazing";
+
         /// <summary>
         /// The surface-to-surface of the glass in meters. Default value is 0.003.
         /// </summary>

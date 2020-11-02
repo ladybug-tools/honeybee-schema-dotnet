@@ -53,8 +53,11 @@ namespace HoneybeeSchema
             this.UFactor = uFactor;
             this.Shgc = shgc;
             this.Vt = vt;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "EnergyWindowMaterialSimpleGlazSys";
         }
-        
+
         /// <summary>
         /// Used to describe the value for window system U-Factor, or overall heat transfer coefficient in W/(m2-K).
         /// </summary>
@@ -67,11 +70,6 @@ namespace HoneybeeSchema
         /// <value>Unitless  quantity describing Solar Heat Gain Coefficient for normal incidence and vertical orientation.</value>
         [DataMember(Name="shgc", EmitDefaultValue=true)]
         public double Shgc { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "EnergyWindowMaterialSimpleGlazSys";
         /// <summary>
         /// The fraction of visible light falling on the window that makes it through the glass at normal incidence.
         /// </summary>

@@ -56,8 +56,11 @@ namespace HoneybeeSchema
             // to ensure "properties" is required (not null)
             this.Properties = properties ?? throw new ArgumentNullException("properties is a required property for Shade and cannot be null");
             this.IsDetached = isDetached;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Shade";
         }
-        
+
         /// <summary>
         /// Planar Face3D for the geometry.
         /// </summary>
@@ -70,11 +73,6 @@ namespace HoneybeeSchema
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
         [DataMember(Name="properties", EmitDefaultValue=true)]
         public ShadePropertiesAbridged Properties { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "Shade";
         /// <summary>
         /// Boolean to note whether this shade is detached from any of the other geometry in the model. Cases where this should be True include shade representing surrounding buildings or context. Note that this should always be False for shades assigned to parent objects.
         /// </summary>

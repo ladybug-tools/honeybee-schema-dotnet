@@ -59,8 +59,11 @@ namespace HoneybeeSchema
             this.GTransmissivity = gTransmissivity;
             this.BTransmissivity = bTransmissivity;
             this.RefractionIndex = refractionIndex;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "glass";
         }
-        
+
         /// <summary>
         /// Material modifier (default: Void).
         /// </summary>
@@ -97,11 +100,6 @@ namespace HoneybeeSchema
         /// <value>A value between 0 and 1 for the index of refraction (default: 1.52).</value>
         [DataMember(Name="refraction_index", EmitDefaultValue=false)]
         public double RefractionIndex { get; set; }  = 1.52D;
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "glass";
 
         /// <summary>
         /// Returns the string presentation of the object

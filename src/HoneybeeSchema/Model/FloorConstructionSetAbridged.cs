@@ -43,13 +43,11 @@ namespace HoneybeeSchema
             string interiorConstruction= default, string exteriorConstruction= default, string groundConstruction= default // Optional parameters
         ) : base(interiorConstruction: interiorConstruction, exteriorConstruction: exteriorConstruction, groundConstruction: groundConstruction)// BaseClass
         {
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "FloorConstructionSetAbridged";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "FloorConstructionSetAbridged";
+
 
         /// <summary>
         /// Returns the string presentation of the object

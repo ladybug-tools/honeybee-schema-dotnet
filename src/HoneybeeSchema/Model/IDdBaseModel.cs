@@ -35,12 +35,6 @@ namespace HoneybeeSchema
     [JsonSubtypes.KnownSubType(typeof(Room), "Room")]
     [JsonSubtypes.KnownSubType(typeof(Model), "Model")]
     [JsonSubtypes.KnownSubType(typeof(Door), "Door")]
-    [JsonSubtypes.KnownSubType(typeof(Shade), "Shade")]
-    [JsonSubtypes.KnownSubType(typeof(Aperture), "Aperture")]
-    [JsonSubtypes.KnownSubType(typeof(Door), "Door")]
-    [JsonSubtypes.KnownSubType(typeof(Face), "Face")]
-    [JsonSubtypes.KnownSubType(typeof(Room), "Room")]
-    [JsonSubtypes.KnownSubType(typeof(Model), "Model")]
     public partial class IDdBaseModel : OpenAPIGenBaseModel, IEquatable<IDdBaseModel>, IValidatableObject
     {
         /// <summary>
@@ -64,8 +58,11 @@ namespace HoneybeeSchema
             this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for IDdBaseModel and cannot be null");
             this.DisplayName = displayName;
             this.UserData = userData;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "IDdBaseModel";
         }
-        
+
         /// <summary>
         /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters.
         /// </summary>
@@ -84,11 +81,6 @@ namespace HoneybeeSchema
         /// <value>Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</value>
         [DataMember(Name="user_data", EmitDefaultValue=false)]
         public Object UserData { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "IDdBaseModel";
 
         /// <summary>
         /// Returns the string presentation of the object

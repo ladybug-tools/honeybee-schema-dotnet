@@ -46,13 +46,11 @@ namespace HoneybeeSchema
             this.DesignDays = designDays;
             this.HeatingFactor = heatingFactor;
             this.CoolingFactor = coolingFactor;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "SizingParameter";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "SizingParameter";
+
         /// <summary>
         /// A list of DesignDays that represent the criteria for which the HVAC systems will be sized.
         /// </summary>

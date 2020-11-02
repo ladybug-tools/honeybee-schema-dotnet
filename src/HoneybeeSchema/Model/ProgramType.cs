@@ -61,13 +61,11 @@ namespace HoneybeeSchema
             this.Infiltration = infiltration;
             this.Ventilation = ventilation;
             this.Setpoint = setpoint;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ProgramType";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "ProgramType";
+
         /// <summary>
         /// People to describe the occupancy of the program. If None, no occupancy will be assumed for the program.
         /// </summary>

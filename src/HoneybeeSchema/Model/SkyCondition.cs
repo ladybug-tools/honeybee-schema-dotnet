@@ -31,8 +31,6 @@ namespace HoneybeeSchema
     [JsonConverter(typeof(JsonSubtypes), "Type")]
     [JsonSubtypes.KnownSubType(typeof(ASHRAEClearSky), "ASHRAEClearSky")]
     [JsonSubtypes.KnownSubType(typeof(ASHRAETau), "ASHRAETau")]
-    [JsonSubtypes.KnownSubType(typeof(ASHRAEClearSky), "ASHRAEClearSky")]
-    [JsonSubtypes.KnownSubType(typeof(ASHRAETau), "ASHRAETau")]
     public partial class SkyCondition : OpenAPIGenBaseModel, IEquatable<SkyCondition>, IValidatableObject
     {
         /// <summary>
@@ -54,8 +52,11 @@ namespace HoneybeeSchema
             // to ensure "date" is required (not null)
             this.Date = date ?? throw new ArgumentNullException("date is a required property for SkyCondition and cannot be null");
             this.DaylightSavings = daylightSavings;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "_SkyCondition";
         }
-        
+
         /// <summary>
         /// A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).
         /// </summary>
@@ -68,11 +69,6 @@ namespace HoneybeeSchema
         /// <value>Boolean to indicate whether daylight savings time is active on the design day.</value>
         [DataMember(Name="daylight_savings", EmitDefaultValue=false)]
         public bool DaylightSavings { get; set; }  = false;
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "_SkyCondition";
 
         /// <summary>
         /// Returns the string presentation of the object

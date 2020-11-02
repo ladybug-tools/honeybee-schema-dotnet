@@ -54,19 +54,17 @@ namespace HoneybeeSchema
             this.Geometry = geometry ?? throw new ArgumentNullException("geometry is a required property for StateGeometryAbridged and cannot be null");
             this.Modifier = modifier;
             this.ModifierDirect = modifierDirect;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "StateGeometryAbridged";
         }
-        
+
         /// <summary>
         /// A ladybug_geometry Face3D.
         /// </summary>
         /// <value>A ladybug_geometry Face3D.</value>
         [DataMember(Name="geometry", EmitDefaultValue=true)]
         public Face3D Geometry { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "StateGeometryAbridged";
         /// <summary>
         /// A string for a Honeybee Radiance Modifier identifier (default: None).
         /// </summary>

@@ -50,13 +50,11 @@ namespace HoneybeeSchema
             this.DoPlantSizing = doPlantSizing;
             this.RunForRunPeriods = runForRunPeriods;
             this.RunForSizingPeriods = runForSizingPeriods;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "SimulationControl";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "SimulationControl";
+
         /// <summary>
         /// Boolean for whether the zone sizing calculation should be run.
         /// </summary>

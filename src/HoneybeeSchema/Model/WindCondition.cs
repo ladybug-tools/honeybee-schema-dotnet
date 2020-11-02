@@ -49,19 +49,17 @@ namespace HoneybeeSchema
         {
             this.WindSpeed = windSpeed;
             this.WindDirection = windDirection;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "WindCondition";
         }
-        
+
         /// <summary>
         /// Wind speed on the design day [m/s].
         /// </summary>
         /// <value>Wind speed on the design day [m/s].</value>
         [DataMember(Name="wind_speed", EmitDefaultValue=true)]
         public double WindSpeed { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "WindCondition";
         /// <summary>
         /// Wind direction on the design day [degrees].
         /// </summary>

@@ -51,8 +51,11 @@ namespace HoneybeeSchema
         {
             this.TauB = tauB;
             this.TauD = tauD;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ASHRAETau";
         }
-        
+
         /// <summary>
         /// Value for the beam optical depth. Typically found in .stat files.
         /// </summary>
@@ -65,11 +68,6 @@ namespace HoneybeeSchema
         /// <value>Value for the diffuse optical depth. Typically found in .stat files.</value>
         [DataMember(Name="tau_d", EmitDefaultValue=true)]
         public double TauD { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "ASHRAETau";
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -56,13 +56,11 @@ namespace HoneybeeSchema
         {
             this.Thickness = thickness;
             this.GasType = gasType;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "EnergyWindowMaterialGas";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "EnergyWindowMaterialGas";
+
         /// <summary>
         /// Thickness of the gas layer in meters. Default value is 0.0125.
         /// </summary>

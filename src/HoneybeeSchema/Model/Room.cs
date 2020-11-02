@@ -62,8 +62,11 @@ namespace HoneybeeSchema
             this.OutdoorShades = outdoorShades;
             this.Multiplier = multiplier;
             this.Story = story;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Room";
         }
-        
+
         /// <summary>
         /// Faces that together form the closed volume of a room.
         /// </summary>
@@ -76,11 +79,6 @@ namespace HoneybeeSchema
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
         [DataMember(Name="properties", EmitDefaultValue=true)]
         public RoomPropertiesAbridged Properties { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "Room";
         /// <summary>
         /// Shades assigned to the interior side of this object (eg. partitions, tables).
         /// </summary>

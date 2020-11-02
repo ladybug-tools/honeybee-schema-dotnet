@@ -51,8 +51,11 @@ namespace HoneybeeSchema
             this.R = r;
             this.G = g;
             this.B = b;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Color";
         }
-        
+
         /// <summary>
         /// Integer for red value.
         /// </summary>
@@ -71,11 +74,6 @@ namespace HoneybeeSchema
         /// <value>Integer for blue value.</value>
         [DataMember(Name="b", EmitDefaultValue=true)]
         public int B { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "Color";
 
         /// <summary>
         /// Returns the string presentation of the object

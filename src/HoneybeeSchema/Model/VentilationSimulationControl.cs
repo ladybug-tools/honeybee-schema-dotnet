@@ -66,13 +66,11 @@ namespace HoneybeeSchema
             this.BuildingType = buildingType;
             this.LongAxisAngle = longAxisAngle;
             this.AspectRatio = aspectRatio;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "VentilationSimulationControl";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "VentilationSimulationControl";
+
         /// <summary>
         /// Reference temperature measurement in Celsius under which the surface crack data were obtained.
         /// </summary>

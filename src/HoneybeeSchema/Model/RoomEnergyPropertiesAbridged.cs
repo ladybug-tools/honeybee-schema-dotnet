@@ -62,13 +62,11 @@ namespace HoneybeeSchema
             this.Ventilation = ventilation;
             this.Setpoint = setpoint;
             this.WindowVentControl = windowVentControl;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "RoomEnergyPropertiesAbridged";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "RoomEnergyPropertiesAbridged";
+
         /// <summary>
         /// Identifier of a ConstructionSet to specify all default constructions for the Faces, Apertures, and Doors of the Room. If None, the Room will use the Model global_construction_set.
         /// </summary>

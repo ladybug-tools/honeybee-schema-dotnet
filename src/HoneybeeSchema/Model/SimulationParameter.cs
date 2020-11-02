@@ -62,13 +62,11 @@ namespace HoneybeeSchema
             this.SizingParameter = sizingParameter;
             this.NorthAngle = northAngle;
             this.TerrainType = terrainType;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "SimulationParameter";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "SimulationParameter";
+
         /// <summary>
         /// A SimulationOutput that lists the desired outputs from the simulation and the format in which to report them.
         /// </summary>

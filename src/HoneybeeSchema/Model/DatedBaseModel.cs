@@ -30,7 +30,6 @@ namespace HoneybeeSchema
     [DataContract(Name = "DatedBaseModel")]
     [JsonConverter(typeof(JsonSubtypes), "Type")]
     [JsonSubtypes.KnownSubType(typeof(ScheduleRuleAbridged), "ScheduleRuleAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(ScheduleRuleAbridged), "ScheduleRuleAbridged")]
     public partial class DatedBaseModel : OpenAPIGenBaseModel, IEquatable<DatedBaseModel>, IValidatableObject
     {
         /// <summary>
@@ -43,13 +42,11 @@ namespace HoneybeeSchema
              // Optional parameters
         ) : base()// BaseClass
         {
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "DatedBaseModel";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "DatedBaseModel";
+
 
         /// <summary>
         /// Returns the string presentation of the object

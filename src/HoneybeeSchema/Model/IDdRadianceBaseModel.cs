@@ -34,21 +34,6 @@ namespace HoneybeeSchema
     [JsonSubtypes.KnownSubType(typeof(ModifierBase), "ModifierBase")]
     [JsonSubtypes.KnownSubType(typeof(StateGeometryAbridged), "StateGeometryAbridged")]
     [JsonSubtypes.KnownSubType(typeof(RadianceAsset), "_RadianceAsset")]
-    [JsonSubtypes.KnownSubType(typeof(StateGeometryAbridged), "StateGeometryAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(ModifierSet), "ModifierSet")]
-    [JsonSubtypes.KnownSubType(typeof(ModifierSetAbridged), "ModifierSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(ModifierBase), "ModifierBase")]
-    [JsonSubtypes.KnownSubType(typeof(RadianceAsset), "_RadianceAsset")]
-    [JsonSubtypes.KnownSubType(typeof(Mirror), "Mirror")]
-    [JsonSubtypes.KnownSubType(typeof(Metal), "Metal")]
-    [JsonSubtypes.KnownSubType(typeof(Trans), "Trans")]
-    [JsonSubtypes.KnownSubType(typeof(Light), "Light")]
-    [JsonSubtypes.KnownSubType(typeof(Glow), "Glow")]
-    [JsonSubtypes.KnownSubType(typeof(BSDF), "BSDF")]
-    [JsonSubtypes.KnownSubType(typeof(Glass), "Glass")]
-    [JsonSubtypes.KnownSubType(typeof(Plastic), "Plastic")]
-    [JsonSubtypes.KnownSubType(typeof(SensorGrid), "SensorGrid")]
-    [JsonSubtypes.KnownSubType(typeof(View), "View")]
     public partial class IDdRadianceBaseModel : OpenAPIGenBaseModel, IEquatable<IDdRadianceBaseModel>, IValidatableObject
     {
         /// <summary>
@@ -70,8 +55,11 @@ namespace HoneybeeSchema
             // to ensure "identifier" is required (not null)
             this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for IDdRadianceBaseModel and cannot be null");
             this.DisplayName = displayName;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "IDdRadianceBaseModel";
         }
-        
+
         /// <summary>
         /// Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.
         /// </summary>
@@ -84,11 +72,6 @@ namespace HoneybeeSchema
         /// <value>Display name of the object with no character restrictions.</value>
         [DataMember(Name="display_name", EmitDefaultValue=false)]
         public string DisplayName { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "IDdRadianceBaseModel";
 
         /// <summary>
         /// Returns the string presentation of the object

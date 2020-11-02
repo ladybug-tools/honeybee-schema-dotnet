@@ -61,13 +61,11 @@ namespace HoneybeeSchema
             this.DoorSet = doorSet;
             this.ShadeSet = shadeSet;
             this.AirBoundaryModifier = airBoundaryModifier;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ModifierSet";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "ModifierSet";
+
         /// <summary>
         /// An optional WallModifierSet object for this ModifierSet. (default: None).
         /// </summary>

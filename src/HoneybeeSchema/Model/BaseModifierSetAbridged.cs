@@ -34,11 +34,6 @@ namespace HoneybeeSchema
     [JsonSubtypes.KnownSubType(typeof(FloorModifierSetAbridged), "FloorModifierSetAbridged")]
     [JsonSubtypes.KnownSubType(typeof(DoorModifierSetAbridged), "DoorModifierSetAbridged")]
     [JsonSubtypes.KnownSubType(typeof(ShadeModifierSetAbridged), "ShadeModifierSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(WallModifierSetAbridged), "WallModifierSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(FloorModifierSetAbridged), "FloorModifierSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(RoofCeilingModifierSetAbridged), "RoofCeilingModifierSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(DoorModifierSetAbridged), "DoorModifierSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(ShadeModifierSetAbridged), "ShadeModifierSetAbridged")]
     public partial class BaseModifierSetAbridged : OpenAPIGenBaseModel, IEquatable<BaseModifierSetAbridged>, IValidatableObject
     {
         /// <summary>
@@ -54,8 +49,11 @@ namespace HoneybeeSchema
         {
             this.ExteriorModifier = exteriorModifier;
             this.InteriorModifier = interiorModifier;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "BaseModifierSetAbridged";
         }
-        
+
         /// <summary>
         /// Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.
         /// </summary>
@@ -68,11 +66,6 @@ namespace HoneybeeSchema
         /// <value>Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors.</value>
         [DataMember(Name="interior_modifier", EmitDefaultValue=false)]
         public string InteriorModifier { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "BaseModifierSetAbridged";
 
         /// <summary>
         /// Returns the string presentation of the object

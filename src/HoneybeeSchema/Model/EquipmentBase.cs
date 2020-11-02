@@ -31,8 +31,6 @@ namespace HoneybeeSchema
     [JsonConverter(typeof(JsonSubtypes), "Type")]
     [JsonSubtypes.KnownSubType(typeof(GasEquipmentAbridged), "GasEquipmentAbridged")]
     [JsonSubtypes.KnownSubType(typeof(ElectricEquipmentAbridged), "ElectricEquipmentAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(ElectricEquipmentAbridged), "ElectricEquipmentAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(GasEquipmentAbridged), "GasEquipmentAbridged")]
     public partial class EquipmentBase : IDdEnergyBaseModel, IEquatable<EquipmentBase>, IValidatableObject
     {
         /// <summary>
@@ -62,8 +60,11 @@ namespace HoneybeeSchema
             this.RadiantFraction = radiantFraction;
             this.LatentFraction = latentFraction;
             this.LostFraction = lostFraction;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "_EquipmentBase";
         }
-        
+
         /// <summary>
         /// Equipment level per floor area as [W/m2].
         /// </summary>
@@ -94,11 +95,6 @@ namespace HoneybeeSchema
         /// <value>Number for the amount of “lost” heat being given off by equipment. The default value is 0.</value>
         [DataMember(Name="lost_fraction", EmitDefaultValue=false)]
         public double LostFraction { get; set; }  = 0D;
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "_EquipmentBase";
 
         /// <summary>
         /// Returns the string presentation of the object

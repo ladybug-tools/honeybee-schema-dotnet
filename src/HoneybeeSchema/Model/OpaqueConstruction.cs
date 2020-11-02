@@ -51,19 +51,17 @@ namespace HoneybeeSchema
         {
             // to ensure "materials" is required (not null)
             this.Materials = materials ?? throw new ArgumentNullException("materials is a required property for OpaqueConstruction and cannot be null");
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "OpaqueConstruction";
         }
-        
+
         /// <summary>
         /// List of opaque materials. The order of the materials is from outside to inside.
         /// </summary>
         /// <value>List of opaque materials. The order of the materials is from outside to inside.</value>
         [DataMember(Name="materials", EmitDefaultValue=true)]
         public List<AnyOf<EnergyMaterial,EnergyMaterialNoMass>> Materials { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "OpaqueConstruction";
 
         /// <summary>
         /// Returns the string presentation of the object

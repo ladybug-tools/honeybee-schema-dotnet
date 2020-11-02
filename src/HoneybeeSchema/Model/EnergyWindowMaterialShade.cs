@@ -75,13 +75,11 @@ namespace HoneybeeSchema
             this.LeftOpeningMultiplier = leftOpeningMultiplier;
             this.RightOpeningMultiplier = rightOpeningMultiplier;
             this.AirflowPermeability = airflowPermeability;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "EnergyWindowMaterialShade";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "EnergyWindowMaterialShade";
+
         /// <summary>
         /// The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default value is 0.4.
         /// </summary>

@@ -57,8 +57,11 @@ namespace HoneybeeSchema
             this.REmittance = rEmittance;
             this.GEmittance = gEmittance;
             this.BEmittance = bEmittance;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "light";
         }
-        
+
         /// <summary>
         /// Material modifier (default: Void).
         /// </summary>
@@ -89,11 +92,6 @@ namespace HoneybeeSchema
         /// <value>A value between 0 and 1 for the blue channel of the modifier (default: 0).</value>
         [DataMember(Name="b_emittance", EmitDefaultValue=false)]
         public double BEmittance { get; set; }  = 0.0D;
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "light";
 
         /// <summary>
         /// Returns the string presentation of the object

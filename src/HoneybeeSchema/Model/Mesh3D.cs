@@ -53,8 +53,11 @@ namespace HoneybeeSchema
             // to ensure "faces" is required (not null)
             this.Faces = faces ?? throw new ArgumentNullException("faces is a required property for Mesh3D and cannot be null");
             this.Colors = colors;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Mesh3D";
         }
-        
+
         /// <summary>
         /// A list of points representing the vertices of the mesh. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.
         /// </summary>
@@ -67,11 +70,6 @@ namespace HoneybeeSchema
         /// <value>A list of lists with each sub-list having either 3 or 4 integers. These integers correspond to indices within the list of vertices.</value>
         [DataMember(Name="faces", EmitDefaultValue=true)]
         public List<List<int>> Faces { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "Mesh3D";
         /// <summary>
         /// An optional list of colors that correspond to either the faces of the mesh or the vertices of the mesh.
         /// </summary>

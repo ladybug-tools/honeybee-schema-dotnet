@@ -42,13 +42,11 @@ namespace HoneybeeSchema
             string modifier= default, string modifierBlk= default // Optional parameters
         ) : base(modifier: modifier, modifierBlk: modifierBlk)// BaseClass
         {
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "FaceRadiancePropertiesAbridged";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "FaceRadiancePropertiesAbridged";
+
 
         /// <summary>
         /// Returns the string presentation of the object

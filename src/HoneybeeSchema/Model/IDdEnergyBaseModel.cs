@@ -89,70 +89,6 @@ namespace HoneybeeSchema
     [JsonSubtypes.KnownSubType(typeof(Lighting), "Lighting")]
     [JsonSubtypes.KnownSubType(typeof(ScheduleTypeLimit), "ScheduleTypeLimit")]
     [JsonSubtypes.KnownSubType(typeof(EnergyWindowMaterialSimpleGlazSys), "EnergyWindowMaterialSimpleGlazSys")]
-    [JsonSubtypes.KnownSubType(typeof(PeopleAbridged), "PeopleAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(LightingAbridged), "LightingAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(InfiltrationAbridged), "InfiltrationAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(VentilationAbridged), "VentilationAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(SetpointAbridged), "SetpointAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(ScheduleDay), "ScheduleDay")]
-    [JsonSubtypes.KnownSubType(typeof(ScheduleTypeLimit), "ScheduleTypeLimit")]
-    [JsonSubtypes.KnownSubType(typeof(ScheduleRuleset), "ScheduleRuleset")]
-    [JsonSubtypes.KnownSubType(typeof(ScheduleFixedInterval), "ScheduleFixedInterval")]
-    [JsonSubtypes.KnownSubType(typeof(GasEquipment), "GasEquipment")]
-    [JsonSubtypes.KnownSubType(typeof(ScheduleRulesetAbridged), "ScheduleRulesetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(EnergyWindowMaterialSimpleGlazSys), "EnergyWindowMaterialSimpleGlazSys")]
-    [JsonSubtypes.KnownSubType(typeof(PTAC), "PTAC")]
-    [JsonSubtypes.KnownSubType(typeof(FCUwithDOAS), "FCUwithDOAS")]
-    [JsonSubtypes.KnownSubType(typeof(VRFwithDOAS), "VRFwithDOAS")]
-    [JsonSubtypes.KnownSubType(typeof(ConstructionSetAbridged), "ConstructionSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(EnergyMaterial), "EnergyMaterial")]
-    [JsonSubtypes.KnownSubType(typeof(EnergyMaterialNoMass), "EnergyMaterialNoMass")]
-    [JsonSubtypes.KnownSubType(typeof(EnergyWindowMaterialGlazing), "EnergyWindowMaterialGlazing")]
-    [JsonSubtypes.KnownSubType(typeof(EnergyWindowMaterialGas), "EnergyWindowMaterialGas")]
-    [JsonSubtypes.KnownSubType(typeof(EnergyWindowMaterialGasCustom), "EnergyWindowMaterialGasCustom")]
-    [JsonSubtypes.KnownSubType(typeof(EnergyWindowMaterialGasMixture), "EnergyWindowMaterialGasMixture")]
-    [JsonSubtypes.KnownSubType(typeof(ShadeConstruction), "ShadeConstruction")]
-    [JsonSubtypes.KnownSubType(typeof(AirBoundaryConstruction), "AirBoundaryConstruction")]
-    [JsonSubtypes.KnownSubType(typeof(ConstructionSet), "ConstructionSet")]
-    [JsonSubtypes.KnownSubType(typeof(OpaqueConstructionAbridged), "OpaqueConstructionAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(WindowConstructionAbridged), "WindowConstructionAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(WindowConstructionShadeAbridged), "WindowConstructionShadeAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(AirBoundaryConstructionAbridged), "AirBoundaryConstructionAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(EnergyWindowMaterialShade), "EnergyWindowMaterialShade")]
-    [JsonSubtypes.KnownSubType(typeof(EnergyWindowMaterialBlind), "EnergyWindowMaterialBlind")]
-    [JsonSubtypes.KnownSubType(typeof(WindowConstructionShade), "WindowConstructionShade")]
-    [JsonSubtypes.KnownSubType(typeof(IdealAirSystemAbridged), "IdealAirSystemAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(VAV), "VAV")]
-    [JsonSubtypes.KnownSubType(typeof(PVAV), "PVAV")]
-    [JsonSubtypes.KnownSubType(typeof(PSZ), "PSZ")]
-    [JsonSubtypes.KnownSubType(typeof(ForcedAirFurnace), "ForcedAirFurnace")]
-    [JsonSubtypes.KnownSubType(typeof(WSHPwithDOAS), "WSHPwithDOAS")]
-    [JsonSubtypes.KnownSubType(typeof(FCU), "FCU")]
-    [JsonSubtypes.KnownSubType(typeof(WSHP), "WSHP")]
-    [JsonSubtypes.KnownSubType(typeof(VRF), "VRF")]
-    [JsonSubtypes.KnownSubType(typeof(Baseboard), "Baseboard")]
-    [JsonSubtypes.KnownSubType(typeof(EvaporativeCooler), "EvaporativeCooler")]
-    [JsonSubtypes.KnownSubType(typeof(Residential), "Residential")]
-    [JsonSubtypes.KnownSubType(typeof(WindowAC), "WindowAC")]
-    [JsonSubtypes.KnownSubType(typeof(GasUnitHeater), "GasUnitHeater")]
-    [JsonSubtypes.KnownSubType(typeof(ProgramTypeAbridged), "ProgramTypeAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(People), "People")]
-    [JsonSubtypes.KnownSubType(typeof(Lighting), "Lighting")]
-    [JsonSubtypes.KnownSubType(typeof(ElectricEquipment), "ElectricEquipment")]
-    [JsonSubtypes.KnownSubType(typeof(Infiltration), "Infiltration")]
-    [JsonSubtypes.KnownSubType(typeof(Ventilation), "Ventilation")]
-    [JsonSubtypes.KnownSubType(typeof(Setpoint), "Setpoint")]
-    [JsonSubtypes.KnownSubType(typeof(ProgramType), "ProgramType")]
-    [JsonSubtypes.KnownSubType(typeof(ScheduleFixedIntervalAbridged), "ScheduleFixedIntervalAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(EquipmentBase), "_EquipmentBase")]
-    [JsonSubtypes.KnownSubType(typeof(AllAirBase), "_AllAirBase")]
-    [JsonSubtypes.KnownSubType(typeof(TemplateSystem), "_TemplateSystem")]
-    [JsonSubtypes.KnownSubType(typeof(DOASBase), "_DOASBase")]
-    [JsonSubtypes.KnownSubType(typeof(HeatCoolBase), "_HeatCoolBase")]
-    [JsonSubtypes.KnownSubType(typeof(OpaqueConstruction), "OpaqueConstruction")]
-    [JsonSubtypes.KnownSubType(typeof(WindowConstruction), "WindowConstruction")]
-    [JsonSubtypes.KnownSubType(typeof(ElectricEquipmentAbridged), "ElectricEquipmentAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(GasEquipmentAbridged), "GasEquipmentAbridged")]
     public partial class IDdEnergyBaseModel : OpenAPIGenBaseModel, IEquatable<IDdEnergyBaseModel>, IValidatableObject
     {
         /// <summary>
@@ -174,8 +110,11 @@ namespace HoneybeeSchema
             // to ensure "identifier" is required (not null)
             this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for IDdEnergyBaseModel and cannot be null");
             this.DisplayName = displayName;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "IDdEnergyBaseModel";
         }
-        
+
         /// <summary>
         /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
         /// </summary>
@@ -188,11 +127,6 @@ namespace HoneybeeSchema
         /// <value>Display name of the object with no character restrictions.</value>
         [DataMember(Name="display_name", EmitDefaultValue=false)]
         public string DisplayName { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "IDdEnergyBaseModel";
 
         /// <summary>
         /// Returns the string presentation of the object

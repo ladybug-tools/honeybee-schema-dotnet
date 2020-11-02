@@ -58,13 +58,11 @@ namespace HoneybeeSchema
             this.Holidays = holidays;
             this.DaylightSavingTime = daylightSavingTime;
             this.LeapYear = leapYear;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "RunPeriod";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "RunPeriod";
+
         /// <summary>
         /// A list of two integers for [month, day], representing the date for the start of the run period. Must be before the end date.
         /// </summary>

@@ -49,8 +49,11 @@ namespace HoneybeeSchema
         {
             this.DryBulbMax = dryBulbMax;
             this.DryBulbRange = dryBulbRange;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "DryBulbCondition";
         }
-        
+
         /// <summary>
         /// The maximum dry bulb temperature on the design day [C].
         /// </summary>
@@ -63,11 +66,6 @@ namespace HoneybeeSchema
         /// <value>The difference between min and max temperatures on the design day [C].</value>
         [DataMember(Name="dry_bulb_range", EmitDefaultValue=true)]
         public double DryBulbRange { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "DryBulbCondition";
 
         /// <summary>
         /// Returns the string presentation of the object

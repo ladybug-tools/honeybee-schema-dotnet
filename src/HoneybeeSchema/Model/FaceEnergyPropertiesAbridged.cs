@@ -44,13 +44,11 @@ namespace HoneybeeSchema
         {
             this.Construction = construction;
             this.VentCrack = ventCrack;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "FaceEnergyPropertiesAbridged";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "FaceEnergyPropertiesAbridged";
+
         /// <summary>
         /// Identifier of an OpaqueConstruction for the Face. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.
         /// </summary>

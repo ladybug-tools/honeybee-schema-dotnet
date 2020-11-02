@@ -44,13 +44,11 @@ namespace HoneybeeSchema
         {
             this.Construction = construction;
             this.VentOpening = ventOpening;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ApertureEnergyPropertiesAbridged";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "ApertureEnergyPropertiesAbridged";
+
         /// <summary>
         /// Identifier of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.
         /// </summary>

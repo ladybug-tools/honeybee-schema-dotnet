@@ -60,8 +60,11 @@ namespace HoneybeeSchema
             this.RadiantFraction = radiantFraction;
             this.ReturnAirFraction = returnAirFraction;
             this.BaselineWattsPerArea = baselineWattsPerArea;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "LightingAbridged";
         }
-        
+
         /// <summary>
         /// Lighting per floor area as [W/m2].
         /// </summary>
@@ -74,11 +77,6 @@ namespace HoneybeeSchema
         /// <value>Identifier of the schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile.</value>
         [DataMember(Name="schedule", EmitDefaultValue=true)]
         public string Schedule { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "LightingAbridged";
         /// <summary>
         /// The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. The default value is &#x60;0.25&#x60;.
         /// </summary>

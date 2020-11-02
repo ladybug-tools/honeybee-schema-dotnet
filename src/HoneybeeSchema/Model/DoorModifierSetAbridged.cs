@@ -48,13 +48,11 @@ namespace HoneybeeSchema
             this.InteriorGlassModifier = interiorGlassModifier;
             this.ExteriorGlassModifier = exteriorGlassModifier;
             this.OverheadModifier = overheadModifier;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "DoorModifierSetAbridged";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "DoorModifierSetAbridged";
+
         /// <summary>
         /// Identifier of modifier object for glass with a Surface boundary condition.
         /// </summary>

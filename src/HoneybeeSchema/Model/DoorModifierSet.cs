@@ -50,8 +50,11 @@ namespace HoneybeeSchema
             this.InteriorGlassModifier = interiorGlassModifier;
             this.ExteriorGlassModifier = exteriorGlassModifier;
             this.OverheadModifier = overheadModifier;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "DoorModifierSet";
         }
-        
+
         /// <summary>
         /// A radiance modifier object for faces with an Outdoors boundary condition.
         /// </summary>
@@ -82,11 +85,6 @@ namespace HoneybeeSchema
         /// <value>A window modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face.</value>
         [DataMember(Name="overhead_modifier", EmitDefaultValue=false)]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> OverheadModifier { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "DoorModifierSet";
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -67,13 +67,11 @@ namespace HoneybeeSchema
             this.CalculationUpdateMethod = calculationUpdateMethod;
             this.CalculationFrequency = calculationFrequency;
             this.MaximumFigures = maximumFigures;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ShadowCalculation";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "ShadowCalculation";
+
         /// <summary>
         /// Integer for the number of days in each period for which a unique shadow calculation will be performed. This field is only used if the Periodic calculation_method is used.
         /// </summary>

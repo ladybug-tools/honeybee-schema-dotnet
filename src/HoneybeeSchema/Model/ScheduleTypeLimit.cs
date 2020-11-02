@@ -65,13 +65,11 @@ namespace HoneybeeSchema
             this.UpperLimit = upperLimit;
             this.NumericType = numericType;
             this.UnitType = unitType;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ScheduleTypeLimit";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "ScheduleTypeLimit";
+
         /// <summary>
         /// Lower limit for the schedule type or NoLimit.
         /// </summary>

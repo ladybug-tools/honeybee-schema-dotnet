@@ -33,10 +33,6 @@ namespace HoneybeeSchema
     [JsonSubtypes.KnownSubType(typeof(ApertureRadiancePropertiesAbridged), "ApertureRadiancePropertiesAbridged")]
     [JsonSubtypes.KnownSubType(typeof(DoorRadiancePropertiesAbridged), "DoorRadiancePropertiesAbridged")]
     [JsonSubtypes.KnownSubType(typeof(ShadeRadiancePropertiesAbridged), "ShadeRadiancePropertiesAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(ApertureRadiancePropertiesAbridged), "ApertureRadiancePropertiesAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(DoorRadiancePropertiesAbridged), "DoorRadiancePropertiesAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(ShadeRadiancePropertiesAbridged), "ShadeRadiancePropertiesAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(FaceRadiancePropertiesAbridged), "FaceRadiancePropertiesAbridged")]
     public partial class PropertiesBaseAbridged : OpenAPIGenBaseModel, IEquatable<PropertiesBaseAbridged>, IValidatableObject
     {
         /// <summary>
@@ -52,8 +48,11 @@ namespace HoneybeeSchema
         {
             this.Modifier = modifier;
             this.ModifierBlk = modifierBlk;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "_PropertiesBaseAbridged";
         }
-        
+
         /// <summary>
         /// A string for a Honeybee Radiance Modifier (default: None).
         /// </summary>
@@ -66,11 +65,6 @@ namespace HoneybeeSchema
         /// <value>A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).</value>
         [DataMember(Name="modifier_blk", EmitDefaultValue=false)]
         public string ModifierBlk { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "_PropertiesBaseAbridged";
 
         /// <summary>
         /// Returns the string presentation of the object

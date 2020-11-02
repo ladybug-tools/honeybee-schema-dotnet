@@ -104,13 +104,11 @@ namespace HoneybeeSchema
             this.BottomOpeningMultiplier = bottomOpeningMultiplier;
             this.LeftOpeningMultiplier = leftOpeningMultiplier;
             this.RightOpeningMultiplier = rightOpeningMultiplier;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "EnergyWindowMaterialBlind";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "EnergyWindowMaterialBlind";
+
         /// <summary>
         /// The width of slat measured from edge to edge in meters.
         /// </summary>

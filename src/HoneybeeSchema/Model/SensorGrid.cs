@@ -54,19 +54,17 @@ namespace HoneybeeSchema
             // to ensure "sensors" is required (not null)
             this.Sensors = sensors ?? throw new ArgumentNullException("sensors is a required property for SensorGrid and cannot be null");
             this.Mesh = mesh;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "SensorGrid";
         }
-        
+
         /// <summary>
         /// A list of sensors that belong to the grid.
         /// </summary>
         /// <value>A list of sensors that belong to the grid.</value>
         [DataMember(Name="sensors", EmitDefaultValue=true)]
         public List<Sensor> Sensors { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "SensorGrid";
         /// <summary>
         /// An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D.
         /// </summary>

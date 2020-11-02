@@ -68,8 +68,11 @@ namespace HoneybeeSchema
             this.ThermalAbsorptance = thermalAbsorptance;
             this.SolarAbsorptance = solarAbsorptance;
             this.VisibleAbsorptance = visibleAbsorptance;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "EnergyMaterial";
         }
-        
+
         /// <summary>
         /// Thickness of the material layer in meters.
         /// </summary>
@@ -94,11 +97,6 @@ namespace HoneybeeSchema
         /// <value>Specific heat of the material layer in J/(kg-K).</value>
         [DataMember(Name="specific_heat", EmitDefaultValue=true)]
         public double SpecificHeat { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "EnergyMaterial";
         /// <summary>
         /// Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9.
         /// </summary>

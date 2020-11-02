@@ -69,8 +69,11 @@ namespace HoneybeeSchema
             this.FrontDiffuseReflectance = frontDiffuseReflectance;
             this.BackDiffuseReflectance = backDiffuseReflectance;
             this.DiffuseTransmittance = diffuseTransmittance;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "BSDF";
         }
-        
+
         /// <summary>
         /// A string with the contents of the BSDF XML file.
         /// </summary>
@@ -131,11 +134,6 @@ namespace HoneybeeSchema
         /// <value>Optional additional diffuse transmittance as sequence of numbers (default: None).</value>
         [DataMember(Name="diffuse_transmittance", EmitDefaultValue=false)]
         public List<double> DiffuseTransmittance { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "BSDF";
 
         /// <summary>
         /// Returns the string presentation of the object

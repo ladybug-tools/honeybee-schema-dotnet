@@ -60,19 +60,17 @@ namespace HoneybeeSchema
             this.BarometricPressure = barometricPressure;
             this.Rain = rain;
             this.SnowOnGround = snowOnGround;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "HumidityCondition";
         }
-        
+
         /// <summary>
         /// The value correcponding to the humidity_type.
         /// </summary>
         /// <value>The value correcponding to the humidity_type.</value>
         [DataMember(Name="humidity_value", EmitDefaultValue=true)]
         public double HumidityValue { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "HumidityCondition";
         /// <summary>
         /// Barometric air pressure on the design day [Pa].
         /// </summary>

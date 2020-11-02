@@ -62,19 +62,17 @@ namespace HoneybeeSchema
             this.ThermalAbsorptance = thermalAbsorptance;
             this.SolarAbsorptance = solarAbsorptance;
             this.VisibleAbsorptance = visibleAbsorptance;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "EnergyMaterialNoMass";
         }
-        
+
         /// <summary>
         /// The thermal resistance (R-value) of the material layer [m2-K/W].
         /// </summary>
         /// <value>The thermal resistance (R-value) of the material layer [m2-K/W].</value>
         [DataMember(Name="r_value", EmitDefaultValue=true)]
         public double RValue { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "EnergyMaterialNoMass";
         /// <summary>
         /// Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9.
         /// </summary>

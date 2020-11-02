@@ -57,8 +57,11 @@ namespace HoneybeeSchema
             this.HeatingSchedule = heatingSchedule ?? throw new ArgumentNullException("heatingSchedule is a required property for Setpoint and cannot be null");
             this.HumidifyingSchedule = humidifyingSchedule;
             this.DehumidifyingSchedule = dehumidifyingSchedule;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Setpoint";
         }
-        
+
         /// <summary>
         /// Schedule for the cooling setpoint. The values in this schedule should be temperature in [C].
         /// </summary>
@@ -71,11 +74,6 @@ namespace HoneybeeSchema
         /// <value>Schedule for the heating setpoint. The values in this schedule should be temperature in [C].</value>
         [DataMember(Name="heating_schedule", EmitDefaultValue=true)]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> HeatingSchedule { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "Setpoint";
         /// <summary>
         /// Schedule for the humidification setpoint. The values in this schedule should be in [%].
         /// </summary>

@@ -65,8 +65,11 @@ namespace HoneybeeSchema
             this.Roughness = roughness;
             this.TransmittedDiff = transmittedDiff;
             this.TransmittedSpec = transmittedSpec;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "trans";
         }
-        
+
         /// <summary>
         /// Material modifier (default: Void).
         /// </summary>
@@ -121,11 +124,6 @@ namespace HoneybeeSchema
         /// <value>The fraction of transmitted light that is not diffusely scattered (default: 0).</value>
         [DataMember(Name="transmitted_spec", EmitDefaultValue=false)]
         public double TransmittedSpec { get; set; }  = 0D;
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "trans";
 
         /// <summary>
         /// Returns the string presentation of the object

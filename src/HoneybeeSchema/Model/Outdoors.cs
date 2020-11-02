@@ -46,18 +46,16 @@ namespace HoneybeeSchema
             this.SunExposure = sunExposure;
             this.WindExposure = windExposure;
             this.ViewFactor = viewFactor;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Outdoors";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "Outdoors";
+
         /// <summary>
         /// A boolean noting whether the boundary is exposed to sun.
         /// </summary>
         /// <value>A boolean noting whether the boundary is exposed to sun.</value>
-        [DataMember(Name="sun_exposure", EmitDefaultValue=false)]
+        [DataMember(Name="sun_exposure")]
         public bool SunExposure { get; set; }  = true;
         /// <summary>
         /// A boolean noting whether the boundary is exposed to wind.

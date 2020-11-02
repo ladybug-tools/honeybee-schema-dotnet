@@ -49,19 +49,17 @@ namespace HoneybeeSchema
         ) : base(date: date, daylightSavings: daylightSavings)// BaseClass
         {
             this.Clearness = clearness;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ASHRAEClearSky";
         }
-        
+
         /// <summary>
         /// Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.
         /// </summary>
         /// <value>Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.</value>
         [DataMember(Name="clearness", EmitDefaultValue=true)]
         public double Clearness { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "ASHRAEClearSky";
 
         /// <summary>
         /// Returns the string presentation of the object

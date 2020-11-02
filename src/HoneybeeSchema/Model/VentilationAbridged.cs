@@ -57,13 +57,11 @@ namespace HoneybeeSchema
             this.AirChangesPerHour = airChangesPerHour;
             this.FlowPerZone = flowPerZone;
             this.Schedule = schedule;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "VentilationAbridged";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "VentilationAbridged";
+
         /// <summary>
         /// Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room.
         /// </summary>

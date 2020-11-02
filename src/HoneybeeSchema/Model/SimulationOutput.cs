@@ -55,13 +55,11 @@ namespace HoneybeeSchema
             this.IncludeHtml = includeHtml;
             this.Outputs = outputs;
             this.SummaryReports = summaryReports;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "SimulationOutput";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "SimulationOutput";
+
         /// <summary>
         /// Boolean to note whether a SQLite report should be requested from the simulation.
         /// </summary>

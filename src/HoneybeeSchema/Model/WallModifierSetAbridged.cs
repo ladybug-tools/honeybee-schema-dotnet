@@ -42,13 +42,11 @@ namespace HoneybeeSchema
             string exteriorModifier= default, string interiorModifier= default // Optional parameters
         ) : base(exteriorModifier: exteriorModifier, interiorModifier: interiorModifier)// BaseClass
         {
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "WallModifierSetAbridged";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "WallModifierSetAbridged";
+
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -77,8 +77,11 @@ namespace HoneybeeSchema
             this.Lift = lift;
             this.ForeClip = foreClip;
             this.AftClip = aftClip;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "View";
         }
-        
+
         /// <summary>
         /// The view position (-vp) as an array of (x, y, z) values.This is the focal point of a perspective view or the center of a parallel projection.
         /// </summary>
@@ -97,11 +100,6 @@ namespace HoneybeeSchema
         /// <value>The view up (-vu) vector as an array of (x, y, z) values.</value>
         [DataMember(Name="up_vector", EmitDefaultValue=true)]
         public List<double> UpVector { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "View";
         /// <summary>
         /// A number for the horizontal field of view in degrees (for all perspective projections including fisheye). For a parallel projection, this is the view width in world coordinates.
         /// </summary>

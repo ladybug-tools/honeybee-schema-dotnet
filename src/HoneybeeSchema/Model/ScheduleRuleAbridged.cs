@@ -66,19 +66,17 @@ namespace HoneybeeSchema
             this.ApplySaturday = applySaturday;
             this.StartDate = startDate;
             this.EndDate = endDate;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ScheduleRuleAbridged";
         }
-        
+
         /// <summary>
         /// The identifier of a ScheduleDay object associated with this rule.
         /// </summary>
         /// <value>The identifier of a ScheduleDay object associated with this rule.</value>
         [DataMember(Name="schedule_day", EmitDefaultValue=true)]
         public string ScheduleDay { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "ScheduleRuleAbridged";
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Sundays.
         /// </summary>

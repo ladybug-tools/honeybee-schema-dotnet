@@ -50,13 +50,11 @@ namespace HoneybeeSchema
             this.OverheadConstruction = overheadConstruction;
             this.ExteriorGlassConstruction = exteriorGlassConstruction;
             this.InteriorGlassConstruction = interiorGlassConstruction;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "DoorConstructionSet";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "DoorConstructionSet";
+
         /// <summary>
         /// An OpaqueConstruction for all opaque doors with a Surface boundary condition.
         /// </summary>

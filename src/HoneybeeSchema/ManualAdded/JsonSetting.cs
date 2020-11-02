@@ -17,8 +17,8 @@ namespace HoneybeeSchema
 					_setting = new JsonSerializerSettings
 					{
 						NullValueHandling = NullValueHandling.Ignore,
-						//DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
-						Converters = new List<JsonConverter>() { new AnyOfJsonConverter() }
+                        //DefaultValueHandling = DefaultValueHandling.,
+                        Converters = new List<JsonConverter>() { new AnyOfJsonConverter() }
 					};
 				}
 				return _setting; 

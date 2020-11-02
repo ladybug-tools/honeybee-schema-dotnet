@@ -53,8 +53,11 @@ namespace HoneybeeSchema
             // to ensure "o" is required (not null)
             this.O = o ?? throw new ArgumentNullException("o is a required property for Plane and cannot be null");
             this.X = x;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Plane";
         }
-        
+
         /// <summary>
         /// Plane normal as 3 (x, y, z) values.
         /// </summary>
@@ -67,11 +70,6 @@ namespace HoneybeeSchema
         /// <value>Plane origin as 3 (x, y, z) values</value>
         [DataMember(Name="o", EmitDefaultValue=true)]
         public List<double> O { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "Plane";
         /// <summary>
         /// Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated.
         /// </summary>

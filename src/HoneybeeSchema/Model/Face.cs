@@ -72,8 +72,11 @@ namespace HoneybeeSchema
             this.Doors = doors;
             this.IndoorShades = indoorShades;
             this.OutdoorShades = outdoorShades;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Face";
         }
-        
+
         /// <summary>
         /// Planar Face3D for the geometry.
         /// </summary>
@@ -91,11 +94,6 @@ namespace HoneybeeSchema
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
         [DataMember(Name="properties", EmitDefaultValue=true)]
         public FacePropertiesAbridged Properties { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "Face";
         /// <summary>
         /// Apertures assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid.
         /// </summary>

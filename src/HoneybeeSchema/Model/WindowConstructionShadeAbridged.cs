@@ -73,8 +73,11 @@ namespace HoneybeeSchema
             this.ControlType = controlType;
             this.Setpoint = setpoint;
             this.Schedule = schedule;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "WindowConstructionShadeAbridged";
         }
-        
+
         /// <summary>
         /// A WindowConstructionAbridged object that serves as the \&quot;switched off\&quot; version of the construction (aka. the \&quot;bare construction\&quot;). The shade_material and shade_location will be used to modify this starting construction.
         /// </summary>
@@ -87,11 +90,6 @@ namespace HoneybeeSchema
         /// <value>Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly.</value>
         [DataMember(Name="shade_material", EmitDefaultValue=true)]
         public string ShadeMaterial { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "WindowConstructionShadeAbridged";
         /// <summary>
         /// A number that corresponds to the specified control_type. This can be a value in (W/m2), (C) or (W) depending upon the control type.Note that this value cannot be None for any control type except \&quot;AlwaysOn.\&quot;
         /// </summary>

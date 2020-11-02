@@ -59,8 +59,11 @@ namespace HoneybeeSchema
             this.GReflectance = gReflectance;
             this.BReflectance = bReflectance;
             this.AlternateMaterial = alternateMaterial;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "mirror";
         }
-        
+
         /// <summary>
         /// Material modifier (default: Void).
         /// </summary>
@@ -97,11 +100,6 @@ namespace HoneybeeSchema
         /// <value>An optional material that may be used like the illum type to specify a different material to be used for shading non-source rays. If None, this will keep the alternat_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance (default: None).</value>
         [DataMember(Name="alternate_material", EmitDefaultValue=false)]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> AlternateMaterial { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "mirror";
 
         /// <summary>
         /// Returns the string presentation of the object

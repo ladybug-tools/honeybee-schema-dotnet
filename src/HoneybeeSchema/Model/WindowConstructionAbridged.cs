@@ -30,7 +30,6 @@ namespace HoneybeeSchema
     [DataContract(Name = "WindowConstructionAbridged")]
     [JsonConverter(typeof(JsonSubtypes), "Type")]
     [JsonSubtypes.KnownSubType(typeof(WindowConstruction), "WindowConstruction")]
-    [JsonSubtypes.KnownSubType(typeof(WindowConstruction), "WindowConstruction")]
     public partial class WindowConstructionAbridged : IDdEnergyBaseModel, IEquatable<WindowConstructionAbridged>, IValidatableObject
     {
         /// <summary>
@@ -52,19 +51,17 @@ namespace HoneybeeSchema
         {
             // to ensure "layers" is required (not null)
             this.Layers = layers ?? throw new ArgumentNullException("layers is a required property for WindowConstructionAbridged and cannot be null");
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "WindowConstructionAbridged";
         }
-        
+
         /// <summary>
         /// List of strings for glazing or gas material identifiers. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.
         /// </summary>
         /// <value>List of strings for glazing or gas material identifiers. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.</value>
         [DataMember(Name="layers", EmitDefaultValue=true)]
         public List<string> Layers { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "WindowConstructionAbridged";
 
         /// <summary>
         /// Returns the string presentation of the object

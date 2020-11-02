@@ -52,13 +52,11 @@ namespace HoneybeeSchema
             this.MaxOutdoorTemperature = maxOutdoorTemperature;
             this.DeltaTemperature = deltaTemperature;
             this.Schedule = schedule;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "VentilationControlAbridged";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "VentilationControlAbridged";
+
         /// <summary>
         /// A number for the minimum indoor temperature at which to ventilate in Celsius. Typically, this variable is used to initiate ventilation.
         /// </summary>

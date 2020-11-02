@@ -47,8 +47,11 @@ namespace HoneybeeSchema
         {
             this.VmtxGeometry = vmtxGeometry;
             this.DmtxGeometry = dmtxGeometry;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "RadianceSubFaceStateAbridged";
         }
-        
+
         /// <summary>
         /// A Face3D for the view matrix geometry (default: None).
         /// </summary>
@@ -61,11 +64,6 @@ namespace HoneybeeSchema
         /// <value>A Face3D for the daylight matrix geometry (default: None).</value>
         [DataMember(Name="dmtx_geometry", EmitDefaultValue=false)]
         public Face3D DmtxGeometry { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "RadianceSubFaceStateAbridged";
 
         /// <summary>
         /// Returns the string presentation of the object

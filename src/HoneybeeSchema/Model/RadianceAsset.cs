@@ -31,8 +31,6 @@ namespace HoneybeeSchema
     [JsonConverter(typeof(JsonSubtypes), "Type")]
     [JsonSubtypes.KnownSubType(typeof(SensorGrid), "SensorGrid")]
     [JsonSubtypes.KnownSubType(typeof(View), "View")]
-    [JsonSubtypes.KnownSubType(typeof(SensorGrid), "SensorGrid")]
-    [JsonSubtypes.KnownSubType(typeof(View), "View")]
     public partial class RadianceAsset : IDdRadianceBaseModel, IEquatable<RadianceAsset>, IValidatableObject
     {
         /// <summary>
@@ -55,8 +53,11 @@ namespace HoneybeeSchema
         {
             this.RoomIdentifier = roomIdentifier;
             this.LightPath = lightPath;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "_RadianceAsset";
         }
-        
+
         /// <summary>
         /// Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model.
         /// </summary>
@@ -69,11 +70,6 @@ namespace HoneybeeSchema
         /// <value>Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [[\&quot;SouthWindow1\&quot;], [\&quot;static_apertures\&quot;, \&quot;NorthWindow2\&quot;]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation.</value>
         [DataMember(Name="light_path", EmitDefaultValue=false)]
         public List<List<string>> LightPath { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "_RadianceAsset";
 
         /// <summary>
         /// Returns the string presentation of the object

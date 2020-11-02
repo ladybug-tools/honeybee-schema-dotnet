@@ -52,19 +52,17 @@ namespace HoneybeeSchema
             this.Boundary = boundary ?? throw new ArgumentNullException("boundary is a required property for Face3D and cannot be null");
             this.Holes = holes;
             this.Plane = plane;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Face3D";
         }
-        
+
         /// <summary>
         /// A list of points representing the outer boundary vertices of the face. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.
         /// </summary>
         /// <value>A list of points representing the outer boundary vertices of the face. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.</value>
         [DataMember(Name="boundary", EmitDefaultValue=true)]
         public List<List<double>> Boundary { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "Face3D";
         /// <summary>
         /// Optional list of lists with one list for each hole in the face.Each hole should be a list of at least 3 points and each point a list of 3 (x, y, z) values. If None, it will be assumed that there are no holes in the face.
         /// </summary>

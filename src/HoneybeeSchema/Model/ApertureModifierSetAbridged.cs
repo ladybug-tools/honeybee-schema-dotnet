@@ -48,13 +48,11 @@ namespace HoneybeeSchema
             this.InteriorModifier = interiorModifier;
             this.SkylightModifier = skylightModifier;
             this.OperableModifier = operableModifier;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ApertureModifierSetAbridged";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "ApertureModifierSetAbridged";
+
         /// <summary>
         /// Identifier of modifier object for apertures with an Outdoors boundary condition, False is_operable property, and Wall parent Face.
         /// </summary>

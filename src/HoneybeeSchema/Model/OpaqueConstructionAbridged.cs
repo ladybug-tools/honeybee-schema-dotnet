@@ -30,7 +30,6 @@ namespace HoneybeeSchema
     [DataContract(Name = "OpaqueConstructionAbridged")]
     [JsonConverter(typeof(JsonSubtypes), "Type")]
     [JsonSubtypes.KnownSubType(typeof(OpaqueConstruction), "OpaqueConstruction")]
-    [JsonSubtypes.KnownSubType(typeof(OpaqueConstruction), "OpaqueConstruction")]
     public partial class OpaqueConstructionAbridged : IDdEnergyBaseModel, IEquatable<OpaqueConstructionAbridged>, IValidatableObject
     {
         /// <summary>
@@ -52,19 +51,17 @@ namespace HoneybeeSchema
         {
             // to ensure "layers" is required (not null)
             this.Layers = layers ?? throw new ArgumentNullException("layers is a required property for OpaqueConstructionAbridged and cannot be null");
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "OpaqueConstructionAbridged";
         }
-        
+
         /// <summary>
         /// List of strings for opaque material identifiers. The order of the materials is from exterior to interior.
         /// </summary>
         /// <value>List of strings for opaque material identifiers. The order of the materials is from exterior to interior.</value>
         [DataMember(Name="layers", EmitDefaultValue=true)]
         public List<string> Layers { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "OpaqueConstructionAbridged";
 
         /// <summary>
         /// Returns the string presentation of the object

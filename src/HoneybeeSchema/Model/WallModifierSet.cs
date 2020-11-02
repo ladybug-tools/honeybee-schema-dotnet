@@ -44,8 +44,11 @@ namespace HoneybeeSchema
         {
             this.ExteriorModifier = exteriorModifier;
             this.InteriorModifier = interiorModifier;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "WallModifierSet";
         }
-        
+
         /// <summary>
         /// A radiance modifier object for faces with an Outdoors boundary condition.
         /// </summary>
@@ -58,11 +61,6 @@ namespace HoneybeeSchema
         /// <value>A radiance modifier object for faces with a boundary condition other than Outdoors.</value>
         [DataMember(Name="interior_modifier", EmitDefaultValue=false)]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> InteriorModifier { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "WallModifierSet";
 
         /// <summary>
         /// Returns the string presentation of the object

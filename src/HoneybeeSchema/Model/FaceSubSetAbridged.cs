@@ -32,9 +32,6 @@ namespace HoneybeeSchema
     [JsonSubtypes.KnownSubType(typeof(WallConstructionSetAbridged), "WallConstructionSetAbridged")]
     [JsonSubtypes.KnownSubType(typeof(FloorConstructionSetAbridged), "FloorConstructionSetAbridged")]
     [JsonSubtypes.KnownSubType(typeof(RoofCeilingConstructionSetAbridged), "RoofCeilingConstructionSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(WallConstructionSetAbridged), "WallConstructionSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(FloorConstructionSetAbridged), "FloorConstructionSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(RoofCeilingConstructionSetAbridged), "RoofCeilingConstructionSetAbridged")]
     public partial class FaceSubSetAbridged : OpenAPIGenBaseModel, IEquatable<FaceSubSetAbridged>, IValidatableObject
     {
         /// <summary>
@@ -52,8 +49,11 @@ namespace HoneybeeSchema
             this.InteriorConstruction = interiorConstruction;
             this.ExteriorConstruction = exteriorConstruction;
             this.GroundConstruction = groundConstruction;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "_FaceSubSetAbridged";
         }
-        
+
         /// <summary>
         /// Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition.
         /// </summary>
@@ -72,11 +72,6 @@ namespace HoneybeeSchema
         /// <value>Identifier for an OpaqueConstruction for faces with a Ground boundary condition.</value>
         [DataMember(Name="ground_construction", EmitDefaultValue=false)]
         public string GroundConstruction { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "_FaceSubSetAbridged";
 
         /// <summary>
         /// Returns the string presentation of the object

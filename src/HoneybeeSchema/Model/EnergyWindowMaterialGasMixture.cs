@@ -55,8 +55,11 @@ namespace HoneybeeSchema
             // to ensure "gasFractions" is required (not null)
             this.GasFractions = gasFractions ?? throw new ArgumentNullException("gasFractions is a required property for EnergyWindowMaterialGasMixture and cannot be null");
             this.Thickness = thickness;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "EnergyWindowMaterialGasMixture";
         }
-        
+
         /// <summary>
         /// List of gases in the gas mixture.
         /// </summary>
@@ -69,11 +72,6 @@ namespace HoneybeeSchema
         /// <value>A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1.</value>
         [DataMember(Name="gas_fractions", EmitDefaultValue=true)]
         public List<double> GasFractions { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "EnergyWindowMaterialGasMixture";
         /// <summary>
         /// The thickness of the gas mixture layer in meters.
         /// </summary>

@@ -42,13 +42,11 @@ namespace HoneybeeSchema
         ) : base()// BaseClass
         {
             this.ModifierSet = modifierSet;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "RoomRadiancePropertiesAbridged";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "RoomRadiancePropertiesAbridged";
+
         /// <summary>
         /// An identifier for a unique Room-Assigned ModifierSet (default: None).
         /// </summary>

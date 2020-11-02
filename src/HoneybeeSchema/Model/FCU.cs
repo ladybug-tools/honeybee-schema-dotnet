@@ -63,13 +63,11 @@ namespace HoneybeeSchema
         {
             this.Vintage = vintage;
             this.EquipmentType = equipmentType;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "FCU";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "FCU";
+
 
         /// <summary>
         /// Returns the string presentation of the object

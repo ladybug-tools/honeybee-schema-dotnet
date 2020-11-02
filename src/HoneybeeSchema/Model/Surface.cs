@@ -48,19 +48,17 @@ namespace HoneybeeSchema
         {
             // to ensure "boundaryConditionObjects" is required (not null)
             this.BoundaryConditionObjects = boundaryConditionObjects ?? throw new ArgumentNullException("boundaryConditionObjects is a required property for Surface and cannot be null");
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Surface";
         }
-        
+
         /// <summary>
         /// A list of up to 3 object identifiers that are adjacent to this one. The first object is always the one that is immediately adjacent and is of the same object type (Face, Aperture, Door). When this boundary condition is applied to a Face, the second object in the tuple will be the parent Room of the adjacent object. When the boundary condition is applied to a sub-face (Door or Aperture), the second object will be the parent Face of the adjacent sub-face and the third object will be the parent Room of the adjacent sub-face.
         /// </summary>
         /// <value>A list of up to 3 object identifiers that are adjacent to this one. The first object is always the one that is immediately adjacent and is of the same object type (Face, Aperture, Door). When this boundary condition is applied to a Face, the second object in the tuple will be the parent Room of the adjacent object. When the boundary condition is applied to a sub-face (Door or Aperture), the second object will be the parent Face of the adjacent sub-face and the third object will be the parent Room of the adjacent sub-face.</value>
         [DataMember(Name="boundary_condition_objects", EmitDefaultValue=true)]
         public List<string> BoundaryConditionObjects { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "Surface";
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -59,8 +59,11 @@ namespace HoneybeeSchema
             this.GEmittance = gEmittance;
             this.BEmittance = bEmittance;
             this.MaxRadius = maxRadius;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "glow";
         }
-        
+
         /// <summary>
         /// Material modifier (default: Void).
         /// </summary>
@@ -97,11 +100,6 @@ namespace HoneybeeSchema
         /// <value>Maximum radius for shadow testing (default: 0). Surfaces with zero will never be tested for zero, although it may participate in interreflection calculation. Negative values will never contribute to scene illumination.</value>
         [DataMember(Name="max_radius", EmitDefaultValue=false)]
         public double MaxRadius { get; set; }  = 0D;
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "glow";
 
         /// <summary>
         /// Returns the string presentation of the object

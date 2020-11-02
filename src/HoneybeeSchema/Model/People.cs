@@ -59,8 +59,11 @@ namespace HoneybeeSchema
             this.ActivitySchedule = activitySchedule ?? throw new ArgumentNullException("activitySchedule is a required property for People and cannot be null");
             this.RadiantFraction = radiantFraction;
             this.LatentFraction = latentFraction;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "People";
         }
-        
+
         /// <summary>
         /// People per floor area expressed as [people/m2]
         /// </summary>
@@ -79,11 +82,6 @@ namespace HoneybeeSchema
         /// <value>A schedule for the activity of the occupants over the course of the year. The type of this schedule should be Power and the values of the schedule equal to the number of Watts given off by an individual person in the room.</value>
         [DataMember(Name="activity_schedule", EmitDefaultValue=true)]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> ActivitySchedule { get; set; } 
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "People";
         /// <summary>
         /// The radiant fraction of sensible heat released by people. The defaultvalue is 0.30.
         /// </summary>

@@ -61,8 +61,11 @@ namespace HoneybeeSchema
             this.BReflectance = bReflectance;
             this.Specularity = specularity;
             this.Roughness = roughness;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "plastic";
         }
-        
+
         /// <summary>
         /// Material modifier (default: Void).
         /// </summary>
@@ -105,11 +108,6 @@ namespace HoneybeeSchema
         /// <value>A value between 0 and 1 for the roughness, specified as the rms slope of surface facets. Roughness greater than 0.2 are not realistic (default: 0).</value>
         [DataMember(Name="roughness", EmitDefaultValue=false)]
         public double Roughness { get; set; }  = 0D;
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "plastic";
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -44,13 +44,11 @@ namespace HoneybeeSchema
         {
             this.StartDate = startDate;
             this.EndDate = endDate;
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "DaylightSavingTime";
         }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }  = "DaylightSavingTime";
+
         /// <summary>
         /// A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).
         /// </summary>
