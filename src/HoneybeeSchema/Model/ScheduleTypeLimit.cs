@@ -45,7 +45,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="ScheduleTypeLimit" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ScheduleTypeLimit() { }
+        protected ScheduleTypeLimit() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ScheduleTypeLimit";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleTypeLimit" /> class.
         /// </summary>
@@ -91,9 +96,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"ScheduleTypeLimit {iDd.Identifier}";
-       
             return "ScheduleTypeLimit";
         }
 

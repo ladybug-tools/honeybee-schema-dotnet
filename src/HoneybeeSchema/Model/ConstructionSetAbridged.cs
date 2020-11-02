@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="ConstructionSetAbridged" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ConstructionSetAbridged() { }
+        protected ConstructionSetAbridged() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ConstructionSetAbridged";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructionSetAbridged" /> class.
         /// </summary>
@@ -122,9 +127,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"ConstructionSetAbridged {iDd.Identifier}";
-       
             return "ConstructionSetAbridged";
         }
 

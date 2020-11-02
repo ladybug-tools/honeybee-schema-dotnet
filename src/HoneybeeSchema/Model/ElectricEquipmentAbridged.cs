@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="ElectricEquipmentAbridged" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ElectricEquipmentAbridged() { }
+        protected ElectricEquipmentAbridged() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ElectricEquipmentAbridged";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ElectricEquipmentAbridged" /> class.
         /// </summary>
@@ -64,9 +69,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"ElectricEquipmentAbridged {iDd.Identifier}";
-       
             return "ElectricEquipmentAbridged";
         }
 

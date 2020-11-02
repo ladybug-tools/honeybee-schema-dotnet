@@ -47,7 +47,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="WSHPwithDOAS" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected WSHPwithDOAS() { }
+        protected WSHPwithDOAS() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "WSHPwithDOAS";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="WSHPwithDOAS" /> class.
         /// </summary>
@@ -93,9 +98,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"WSHPwithDOAS {iDd.Identifier}";
-       
             return "WSHPwithDOAS";
         }
 

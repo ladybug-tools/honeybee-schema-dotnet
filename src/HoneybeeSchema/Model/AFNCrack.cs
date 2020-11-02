@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="AFNCrack" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected AFNCrack() { }
+        protected AFNCrack() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "AFNCrack";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="AFNCrack" /> class.
         /// </summary>
@@ -75,9 +80,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"AFNCrack {iDd.Identifier}";
-       
             return "AFNCrack";
         }
 

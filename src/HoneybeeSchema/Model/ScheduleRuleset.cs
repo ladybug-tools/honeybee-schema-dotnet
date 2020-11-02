@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="ScheduleRuleset" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ScheduleRuleset() { }
+        protected ScheduleRuleset() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ScheduleRuleset";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleRuleset" /> class.
         /// </summary>
@@ -124,9 +129,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"ScheduleRuleset {iDd.Identifier}";
-       
             return "ScheduleRuleset";
         }
 

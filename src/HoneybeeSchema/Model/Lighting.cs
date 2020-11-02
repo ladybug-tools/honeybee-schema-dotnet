@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="Lighting" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Lighting() { }
+        protected Lighting() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Lighting";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="Lighting" /> class.
         /// </summary>
@@ -114,9 +119,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"Lighting {iDd.Identifier}";
-       
             return "Lighting";
         }
 

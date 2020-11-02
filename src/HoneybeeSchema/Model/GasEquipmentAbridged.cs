@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="GasEquipmentAbridged" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected GasEquipmentAbridged() { }
+        protected GasEquipmentAbridged() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "GasEquipmentAbridged";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="GasEquipmentAbridged" /> class.
         /// </summary>
@@ -64,9 +69,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"GasEquipmentAbridged {iDd.Identifier}";
-       
             return "GasEquipmentAbridged";
         }
 

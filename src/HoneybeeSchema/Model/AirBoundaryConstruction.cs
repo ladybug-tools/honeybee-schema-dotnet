@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="AirBoundaryConstruction" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected AirBoundaryConstruction() { }
+        protected AirBoundaryConstruction() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "AirBoundaryConstruction";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="AirBoundaryConstruction" /> class.
         /// </summary>
@@ -78,9 +83,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"AirBoundaryConstruction {iDd.Identifier}";
-       
             return "AirBoundaryConstruction";
         }
 

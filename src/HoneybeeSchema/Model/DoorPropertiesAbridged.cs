@@ -68,9 +68,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"DoorPropertiesAbridged {iDd.Identifier}";
-       
             return "DoorPropertiesAbridged";
         }
 

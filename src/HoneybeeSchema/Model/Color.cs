@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="Color" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Color() { }
+        protected Color() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Color";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="Color" /> class.
         /// </summary>
@@ -84,9 +89,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"Color {iDd.Identifier}";
-       
             return "Color";
         }
 

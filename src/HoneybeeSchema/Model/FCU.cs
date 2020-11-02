@@ -47,7 +47,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="FCU" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected FCU() { }
+        protected FCU() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "FCU";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="FCU" /> class.
         /// </summary>
@@ -75,9 +80,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"FCU {iDd.Identifier}";
-       
             return "FCU";
         }
 

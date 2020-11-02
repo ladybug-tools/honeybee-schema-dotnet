@@ -47,7 +47,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="Baseboard" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Baseboard() { }
+        protected Baseboard() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Baseboard";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="Baseboard" /> class.
         /// </summary>
@@ -75,9 +80,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"Baseboard {iDd.Identifier}";
-       
             return "Baseboard";
         }
 

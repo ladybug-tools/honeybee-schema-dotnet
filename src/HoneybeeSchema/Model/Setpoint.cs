@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="Setpoint" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Setpoint() { }
+        protected Setpoint() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Setpoint";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="Setpoint" /> class.
         /// </summary>
@@ -97,9 +102,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"Setpoint {iDd.Identifier}";
-       
             return "Setpoint";
         }
 

@@ -40,7 +40,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="HumidityCondition" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected HumidityCondition() { }
+        protected HumidityCondition() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "HumidityCondition";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="HumidityCondition" /> class.
         /// </summary>
@@ -100,9 +105,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"HumidityCondition {iDd.Identifier}";
-       
             return "HumidityCondition";
         }
 

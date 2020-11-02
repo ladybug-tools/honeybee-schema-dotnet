@@ -47,7 +47,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="EvaporativeCooler" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected EvaporativeCooler() { }
+        protected EvaporativeCooler() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "EvaporativeCooler";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="EvaporativeCooler" /> class.
         /// </summary>
@@ -75,9 +80,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"EvaporativeCooler {iDd.Identifier}";
-       
             return "EvaporativeCooler";
         }
 

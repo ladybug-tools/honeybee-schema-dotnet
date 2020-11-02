@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="ScheduleFixedInterval" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ScheduleFixedInterval() { }
+        protected ScheduleFixedInterval() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ScheduleFixedInterval";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleFixedInterval" /> class.
         /// </summary>
@@ -114,9 +119,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"ScheduleFixedInterval {iDd.Identifier}";
-       
             return "ScheduleFixedInterval";
         }
 

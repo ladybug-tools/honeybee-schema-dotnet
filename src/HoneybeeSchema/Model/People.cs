@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="People" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected People() { }
+        protected People() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "People";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="People" /> class.
         /// </summary>
@@ -106,9 +111,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"People {iDd.Identifier}";
-       
             return "People";
         }
 

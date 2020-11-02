@@ -53,7 +53,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="ForcedAirFurnace" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ForcedAirFurnace() { }
+        protected ForcedAirFurnace() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ForcedAirFurnace";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ForcedAirFurnace" /> class.
         /// </summary>
@@ -101,9 +106,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"ForcedAirFurnace {iDd.Identifier}";
-       
             return "ForcedAirFurnace";
         }
 

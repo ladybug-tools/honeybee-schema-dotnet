@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="SensorGrid" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected SensorGrid() { }
+        protected SensorGrid() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "SensorGrid";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="SensorGrid" /> class.
         /// </summary>
@@ -80,9 +85,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"SensorGrid {iDd.Identifier}";
-       
             return "SensorGrid";
         }
 

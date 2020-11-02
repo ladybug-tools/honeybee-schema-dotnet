@@ -47,7 +47,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="WSHP" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected WSHP() { }
+        protected WSHP() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "WSHP";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="WSHP" /> class.
         /// </summary>
@@ -75,9 +80,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"WSHP {iDd.Identifier}";
-       
             return "WSHP";
         }
 

@@ -40,7 +40,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialBlind" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected EnergyWindowMaterialBlind() { }
+        protected EnergyWindowMaterialBlind() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "EnergyWindowMaterialBlind";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialBlind" /> class.
         /// </summary>
@@ -291,9 +296,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"EnergyWindowMaterialBlind {iDd.Identifier}";
-       
             return "EnergyWindowMaterialBlind";
         }
 

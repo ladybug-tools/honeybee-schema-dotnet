@@ -113,9 +113,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"VentilationSimulationControl {iDd.Identifier}";
-       
             return "VentilationSimulationControl";
         }
 

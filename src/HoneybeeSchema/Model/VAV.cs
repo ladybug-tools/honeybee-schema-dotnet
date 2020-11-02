@@ -53,7 +53,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="VAV" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected VAV() { }
+        protected VAV() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "VAV";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="VAV" /> class.
         /// </summary>
@@ -101,9 +106,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"VAV {iDd.Identifier}";
-       
             return "VAV";
         }
 

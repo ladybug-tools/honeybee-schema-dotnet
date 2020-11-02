@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="Mesh3D" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Mesh3D() { }
+        protected Mesh3D() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Mesh3D";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="Mesh3D" /> class.
         /// </summary>
@@ -86,9 +91,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"Mesh3D {iDd.Identifier}";
-       
             return "Mesh3D";
         }
 

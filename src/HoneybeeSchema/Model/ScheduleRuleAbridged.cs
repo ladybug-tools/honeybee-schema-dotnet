@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="ScheduleRuleAbridged" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ScheduleRuleAbridged() { }
+        protected ScheduleRuleAbridged() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ScheduleRuleAbridged";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleRuleAbridged" /> class.
         /// </summary>
@@ -148,9 +153,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"ScheduleRuleAbridged {iDd.Identifier}";
-       
             return "ScheduleRuleAbridged";
         }
 

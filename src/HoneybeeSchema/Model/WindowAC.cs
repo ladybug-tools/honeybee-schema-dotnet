@@ -47,7 +47,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="WindowAC" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected WindowAC() { }
+        protected WindowAC() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "WindowAC";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowAC" /> class.
         /// </summary>
@@ -75,9 +80,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"WindowAC {iDd.Identifier}";
-       
             return "WindowAC";
         }
 

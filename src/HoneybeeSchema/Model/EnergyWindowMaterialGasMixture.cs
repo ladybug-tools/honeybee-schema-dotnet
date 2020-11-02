@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialGasMixture" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected EnergyWindowMaterialGasMixture() { }
+        protected EnergyWindowMaterialGasMixture() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "EnergyWindowMaterialGasMixture";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialGasMixture" /> class.
         /// </summary>
@@ -88,9 +93,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"EnergyWindowMaterialGasMixture {iDd.Identifier}";
-       
             return "EnergyWindowMaterialGasMixture";
         }
 

@@ -41,7 +41,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="IDdBaseModel" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected IDdBaseModel() { }
+        protected IDdBaseModel() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "IDdBaseModel";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="IDdBaseModel" /> class.
         /// </summary>
@@ -91,9 +96,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"IDdBaseModel {iDd.Identifier}";
-       
             return "IDdBaseModel";
         }
 

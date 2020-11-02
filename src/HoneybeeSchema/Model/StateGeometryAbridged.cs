@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="StateGeometryAbridged" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected StateGeometryAbridged() { }
+        protected StateGeometryAbridged() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "StateGeometryAbridged";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="StateGeometryAbridged" /> class.
         /// </summary>
@@ -87,9 +92,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"StateGeometryAbridged {iDd.Identifier}";
-       
             return "StateGeometryAbridged";
         }
 

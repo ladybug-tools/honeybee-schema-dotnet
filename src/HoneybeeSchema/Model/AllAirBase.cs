@@ -47,7 +47,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="AllAirBase" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected AllAirBase() { }
+        protected AllAirBase() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "_AllAirBase";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="AllAirBase" /> class.
         /// </summary>
@@ -93,9 +98,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"AllAirBase {iDd.Identifier}";
-       
             return "AllAirBase";
         }
 

@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="VentilationAbridged" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected VentilationAbridged() { }
+        protected VentilationAbridged() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "VentilationAbridged";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="VentilationAbridged" /> class.
         /// </summary>
@@ -104,9 +109,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"VentilationAbridged {iDd.Identifier}";
-       
             return "VentilationAbridged";
         }
 

@@ -36,7 +36,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="WindowConstructionAbridged" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected WindowConstructionAbridged() { }
+        protected WindowConstructionAbridged() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "WindowConstructionAbridged";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowConstructionAbridged" /> class.
         /// </summary>
@@ -70,9 +75,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"WindowConstructionAbridged {iDd.Identifier}";
-       
             return "WindowConstructionAbridged";
         }
 

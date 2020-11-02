@@ -40,7 +40,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="EnergyMaterialNoMass" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected EnergyMaterialNoMass() { }
+        protected EnergyMaterialNoMass() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "EnergyMaterialNoMass";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyMaterialNoMass" /> class.
         /// </summary>
@@ -102,9 +107,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"EnergyMaterialNoMass {iDd.Identifier}";
-       
             return "EnergyMaterialNoMass";
         }
 

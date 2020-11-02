@@ -36,7 +36,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="OpaqueConstructionAbridged" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected OpaqueConstructionAbridged() { }
+        protected OpaqueConstructionAbridged() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "OpaqueConstructionAbridged";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="OpaqueConstructionAbridged" /> class.
         /// </summary>
@@ -70,9 +75,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"OpaqueConstructionAbridged {iDd.Identifier}";
-       
             return "OpaqueConstructionAbridged";
         }
 

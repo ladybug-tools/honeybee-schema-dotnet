@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="Metal" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Metal() { }
+        protected Metal() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "metal";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="Metal" /> class.
         /// </summary>
@@ -122,9 +127,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"Metal {iDd.Identifier}";
-       
             return "Metal";
         }
 

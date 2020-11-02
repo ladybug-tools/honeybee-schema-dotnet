@@ -47,7 +47,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="FCUwithDOAS" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected FCUwithDOAS() { }
+        protected FCUwithDOAS() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "FCUwithDOAS";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="FCUwithDOAS" /> class.
         /// </summary>
@@ -93,9 +98,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"FCUwithDOAS {iDd.Identifier}";
-       
             return "FCUwithDOAS";
         }
 

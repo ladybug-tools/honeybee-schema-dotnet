@@ -40,7 +40,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="DesignDay" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected DesignDay() { }
+        protected DesignDay() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "DesignDay";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="DesignDay" /> class.
         /// </summary>
@@ -113,9 +118,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"DesignDay {iDd.Identifier}";
-       
             return "DesignDay";
         }
 

@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="ModifierSet" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ModifierSet() { }
+        protected ModifierSet() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ModifierSet";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ModifierSet" /> class.
         /// </summary>
@@ -122,9 +127,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"ModifierSet {iDd.Identifier}";
-       
             return "ModifierSet";
         }
 

@@ -37,7 +37,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="SkyCondition" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected SkyCondition() { }
+        protected SkyCondition() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "_SkyCondition";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="SkyCondition" /> class.
         /// </summary>
@@ -78,9 +83,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"SkyCondition {iDd.Identifier}";
-       
             return "SkyCondition";
         }
 

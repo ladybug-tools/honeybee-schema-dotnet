@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="Plastic" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Plastic() { }
+        protected Plastic() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "plastic";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="Plastic" /> class.
         /// </summary>
@@ -122,9 +127,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"Plastic {iDd.Identifier}";
-       
             return "Plastic";
         }
 

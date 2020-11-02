@@ -53,7 +53,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="PTAC" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected PTAC() { }
+        protected PTAC() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "PTAC";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="PTAC" /> class.
         /// </summary>
@@ -101,9 +106,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"PTAC {iDd.Identifier}";
-       
             return "PTAC";
         }
 

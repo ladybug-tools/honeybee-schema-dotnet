@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="Mirror" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Mirror() { }
+        protected Mirror() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "mirror";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="Mirror" /> class.
         /// </summary>
@@ -113,9 +118,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"Mirror {iDd.Identifier}";
-       
             return "Mirror";
         }
 

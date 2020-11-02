@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="SetpointAbridged" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected SetpointAbridged() { }
+        protected SetpointAbridged() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "SetpointAbridged";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="SetpointAbridged" /> class.
         /// </summary>
@@ -97,9 +102,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"SetpointAbridged {iDd.Identifier}";
-       
             return "SetpointAbridged";
         }
 

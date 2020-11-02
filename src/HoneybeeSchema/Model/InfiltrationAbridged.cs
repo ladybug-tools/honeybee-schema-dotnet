@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="InfiltrationAbridged" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected InfiltrationAbridged() { }
+        protected InfiltrationAbridged() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "InfiltrationAbridged";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="InfiltrationAbridged" /> class.
         /// </summary>
@@ -102,9 +107,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"InfiltrationAbridged {iDd.Identifier}";
-       
             return "InfiltrationAbridged";
         }
 

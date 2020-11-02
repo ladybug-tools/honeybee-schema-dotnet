@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="Face3D" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Face3D() { }
+        protected Face3D() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Face3D";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="Face3D" /> class.
         /// </summary>
@@ -85,9 +90,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"Face3D {iDd.Identifier}";
-       
             return "Face3D";
         }
 

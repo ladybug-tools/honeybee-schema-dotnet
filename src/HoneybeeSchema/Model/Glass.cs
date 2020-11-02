@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="Glass" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Glass() { }
+        protected Glass() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "glass";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="Glass" /> class.
         /// </summary>
@@ -113,9 +118,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"Glass {iDd.Identifier}";
-       
             return "Glass";
         }
 

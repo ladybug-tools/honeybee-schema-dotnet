@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="BSDF" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected BSDF() { }
+        protected BSDF() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "BSDF";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="BSDF" /> class.
         /// </summary>
@@ -151,9 +156,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"BSDF {iDd.Identifier}";
-       
             return "BSDF";
         }
 

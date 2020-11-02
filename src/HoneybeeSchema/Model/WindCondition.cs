@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="WindCondition" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected WindCondition() { }
+        protected WindCondition() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "WindCondition";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="WindCondition" /> class.
         /// </summary>
@@ -75,9 +80,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"WindCondition {iDd.Identifier}";
-       
             return "WindCondition";
         }
 

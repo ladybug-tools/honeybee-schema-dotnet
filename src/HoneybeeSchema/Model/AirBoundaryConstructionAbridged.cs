@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="AirBoundaryConstructionAbridged" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected AirBoundaryConstructionAbridged() { }
+        protected AirBoundaryConstructionAbridged() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "AirBoundaryConstructionAbridged";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="AirBoundaryConstructionAbridged" /> class.
         /// </summary>
@@ -78,9 +83,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"AirBoundaryConstructionAbridged {iDd.Identifier}";
-       
             return "AirBoundaryConstructionAbridged";
         }
 

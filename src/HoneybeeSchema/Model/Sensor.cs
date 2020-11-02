@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="Sensor" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Sensor() { }
+        protected Sensor() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "Sensor";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="Sensor" /> class.
         /// </summary>
@@ -77,9 +82,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"Sensor {iDd.Identifier}";
-       
             return "Sensor";
         }
 

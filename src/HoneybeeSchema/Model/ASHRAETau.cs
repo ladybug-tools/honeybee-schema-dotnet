@@ -35,7 +35,12 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="ASHRAETau" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ASHRAETau() { }
+        protected ASHRAETau() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ASHRAETau";
+        }
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="ASHRAETau" /> class.
         /// </summary>
@@ -77,9 +82,6 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"ASHRAETau {iDd.Identifier}";
-       
             return "ASHRAETau";
         }
 
