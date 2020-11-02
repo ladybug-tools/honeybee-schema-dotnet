@@ -64,25 +64,29 @@ namespace HoneybeeSchema
         /// Boolean to note whether a SQLite report should be requested from the simulation.
         /// </summary>
         /// <value>Boolean to note whether a SQLite report should be requested from the simulation.</value>
-        [DataMember(Name="include_sqlite", EmitDefaultValue=false)]
+        [DataMember(Name = "include_sqlite", EmitDefaultValue = true)]
+        
         public bool IncludeSqlite { get; set; }  = true;
         /// <summary>
         /// Boolean to note whether an HTML report should be requested from the simulation.
         /// </summary>
         /// <value>Boolean to note whether an HTML report should be requested from the simulation.</value>
-        [DataMember(Name="include_html", EmitDefaultValue=false)]
+        [DataMember(Name = "include_html", EmitDefaultValue = true)]
+        
         public bool IncludeHtml { get; set; }  = true;
         /// <summary>
         /// A list of EnergyPlus output names as strings, which are requested from the simulation.
         /// </summary>
         /// <value>A list of EnergyPlus output names as strings, which are requested from the simulation.</value>
-        [DataMember(Name="outputs", EmitDefaultValue=false)]
+        [DataMember(Name = "outputs", EmitDefaultValue = false)]
+        
         public List<string> Outputs { get; set; } 
         /// <summary>
         /// A list of EnergyPlus summary report names as strings.
         /// </summary>
         /// <value>A list of EnergyPlus summary report names as strings.</value>
-        [DataMember(Name="summary_reports", EmitDefaultValue=false)]
+        [DataMember(Name = "summary_reports", EmitDefaultValue = false)]
+        
         public List<string> SummaryReports { get; set; } 
 
         /// <summary>

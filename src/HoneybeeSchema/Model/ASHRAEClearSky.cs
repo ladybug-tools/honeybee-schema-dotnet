@@ -58,7 +58,8 @@ namespace HoneybeeSchema
         /// Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.
         /// </summary>
         /// <value>Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.</value>
-        [DataMember(Name="clearness", EmitDefaultValue=true)]
+        [DataMember(Name = "clearness", IsRequired = true, EmitDefaultValue = false)]
+        
         public double Clearness { get; set; } 
 
         /// <summary>

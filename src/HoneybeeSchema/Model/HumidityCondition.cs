@@ -69,25 +69,29 @@ namespace HoneybeeSchema
         /// The value correcponding to the humidity_type.
         /// </summary>
         /// <value>The value correcponding to the humidity_type.</value>
-        [DataMember(Name="humidity_value", EmitDefaultValue=true)]
+        [DataMember(Name = "humidity_value", IsRequired = true, EmitDefaultValue = false)]
+        
         public double HumidityValue { get; set; } 
         /// <summary>
         /// Barometric air pressure on the design day [Pa].
         /// </summary>
         /// <value>Barometric air pressure on the design day [Pa].</value>
-        [DataMember(Name="barometric_pressure", EmitDefaultValue=false)]
+        [DataMember(Name = "barometric_pressure", EmitDefaultValue = true)]
+        
         public double BarometricPressure { get; set; }  = 101325D;
         /// <summary>
         /// Boolean to indicate rain on the design day.
         /// </summary>
         /// <value>Boolean to indicate rain on the design day.</value>
-        [DataMember(Name="rain", EmitDefaultValue=false)]
+        [DataMember(Name = "rain", EmitDefaultValue = true)]
+        
         public bool Rain { get; set; }  = false;
         /// <summary>
         /// Boolean to indicate snow on the ground during the design day.
         /// </summary>
         /// <value>Boolean to indicate snow on the ground during the design day.</value>
-        [DataMember(Name="snow_on_ground", EmitDefaultValue=false)]
+        [DataMember(Name = "snow_on_ground", EmitDefaultValue = true)]
+        
         public bool SnowOnGround { get; set; }  = false;
 
         /// <summary>

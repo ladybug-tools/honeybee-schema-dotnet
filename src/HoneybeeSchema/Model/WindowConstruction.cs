@@ -60,7 +60,8 @@ namespace HoneybeeSchema
         /// List of glazing and gas materials. The order of the materials is from outside to inside. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.
         /// </summary>
         /// <value>List of glazing and gas materials. The order of the materials is from outside to inside. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.</value>
-        [DataMember(Name="materials", EmitDefaultValue=true)]
+        [DataMember(Name = "materials", IsRequired = true, EmitDefaultValue = false)]
+        
         public List<AnyOf<EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialGlazing,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture>> Materials { get; set; } 
 
         /// <summary>

@@ -76,30 +76,35 @@ namespace HoneybeeSchema
         /// Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
         /// </summary>
         /// <value>Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name="name", EmitDefaultValue=true)]
+        [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
+        
         public string Name { get; set; } 
         /// <summary>
         /// A DryBulbCondition describing temperature conditions on the design day.
         /// </summary>
         /// <value>A DryBulbCondition describing temperature conditions on the design day.</value>
-        [DataMember(Name="dry_bulb_condition", EmitDefaultValue=true)]
+        [DataMember(Name = "dry_bulb_condition", IsRequired = true, EmitDefaultValue = false)]
+        
         public DryBulbCondition DryBulbCondition { get; set; } 
         /// <summary>
         /// A HumidityCondition describing humidity and precipitation conditions on the design day.
         /// </summary>
         /// <value>A HumidityCondition describing humidity and precipitation conditions on the design day.</value>
-        [DataMember(Name="humidity_condition", EmitDefaultValue=true)]
+        [DataMember(Name = "humidity_condition", IsRequired = true, EmitDefaultValue = false)]
+        
         public HumidityCondition HumidityCondition { get; set; } 
         /// <summary>
         /// A WindCondition describing wind conditions on the design day.
         /// </summary>
         /// <value>A WindCondition describing wind conditions on the design day.</value>
-        [DataMember(Name="wind_condition", EmitDefaultValue=true)]
+        [DataMember(Name = "wind_condition", IsRequired = true, EmitDefaultValue = false)]
+        
         public WindCondition WindCondition { get; set; } 
         /// <summary>
         /// Gets or Sets SkyCondition
         /// </summary>
-        [DataMember(Name="sky_condition", EmitDefaultValue=true)]
+        [DataMember(Name = "sky_condition", IsRequired = true, EmitDefaultValue = false)]
+        
         public AnyOf<ASHRAEClearSky,ASHRAETau> SkyCondition { get; set; } 
 
         /// <summary>

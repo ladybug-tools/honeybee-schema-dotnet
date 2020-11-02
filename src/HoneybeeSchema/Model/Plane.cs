@@ -62,19 +62,22 @@ namespace HoneybeeSchema
         /// Plane normal as 3 (x, y, z) values.
         /// </summary>
         /// <value>Plane normal as 3 (x, y, z) values.</value>
-        [DataMember(Name="n", EmitDefaultValue=true)]
+        [DataMember(Name = "n", IsRequired = true, EmitDefaultValue = false)]
+        
         public List<double> N { get; set; } 
         /// <summary>
         /// Plane origin as 3 (x, y, z) values
         /// </summary>
         /// <value>Plane origin as 3 (x, y, z) values</value>
-        [DataMember(Name="o", EmitDefaultValue=true)]
+        [DataMember(Name = "o", IsRequired = true, EmitDefaultValue = false)]
+        
         public List<double> O { get; set; } 
         /// <summary>
         /// Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated.
         /// </summary>
         /// <value>Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated.</value>
-        [DataMember(Name="x", EmitDefaultValue=false)]
+        [DataMember(Name = "x", EmitDefaultValue = false)]
+        
         public List<double> X { get; set; } 
 
         /// <summary>

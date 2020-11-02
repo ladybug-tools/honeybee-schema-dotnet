@@ -55,19 +55,22 @@ namespace HoneybeeSchema
         /// A boolean noting whether the boundary is exposed to sun.
         /// </summary>
         /// <value>A boolean noting whether the boundary is exposed to sun.</value>
-        [DataMember(Name="sun_exposure", EmitDefaultValue=false)]
+        [DataMember(Name = "sun_exposure", EmitDefaultValue = true)]
+        
         public bool SunExposure { get; set; }  = true;
         /// <summary>
         /// A boolean noting whether the boundary is exposed to wind.
         /// </summary>
         /// <value>A boolean noting whether the boundary is exposed to wind.</value>
-        [DataMember(Name="wind_exposure", EmitDefaultValue=false)]
+        [DataMember(Name = "wind_exposure", EmitDefaultValue = true)]
+        
         public bool WindExposure { get; set; }  = true;
         /// <summary>
         /// A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated.
         /// </summary>
         /// <value>A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated.</value>
-        [DataMember(Name="view_factor", EmitDefaultValue=false)]
+        [DataMember(Name = "view_factor", EmitDefaultValue = false)]
+        
         public AnyOf<Autocalculate,double> ViewFactor { get; set; } 
 
         /// <summary>

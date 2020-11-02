@@ -52,12 +52,14 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Energy
         /// </summary>
-        [DataMember(Name="energy", EmitDefaultValue=false)]
+        [DataMember(Name = "energy", EmitDefaultValue = false)]
+        
         public FaceEnergyPropertiesAbridged Energy { get; set; } 
         /// <summary>
         /// Gets or Sets Radiance
         /// </summary>
-        [DataMember(Name="radiance", EmitDefaultValue=false)]
+        [DataMember(Name = "radiance", EmitDefaultValue = false)]
+        
         public FaceRadiancePropertiesAbridged Radiance { get; set; } 
 
         /// <summary>

@@ -61,13 +61,15 @@ namespace HoneybeeSchema
         /// A fractional schedule as a ScheduleRuleset or ScheduleFixedInterval for the air mixing schedule across the construction.
         /// </summary>
         /// <value>A fractional schedule as a ScheduleRuleset or ScheduleFixedInterval for the air mixing schedule across the construction.</value>
-        [DataMember(Name="air_mixing_schedule", EmitDefaultValue=true)]
+        [DataMember(Name = "air_mixing_schedule", IsRequired = true, EmitDefaultValue = false)]
+        
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> AirMixingSchedule { get; set; } 
         /// <summary>
         /// A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system.
         /// </summary>
         /// <value>A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system.</value>
-        [DataMember(Name="air_mixing_per_area", EmitDefaultValue=false)]
+        [DataMember(Name = "air_mixing_per_area", EmitDefaultValue = true)]
+        
         public double AirMixingPerArea { get; set; }  = 0.1D;
 
         /// <summary>

@@ -69,31 +69,36 @@ namespace HoneybeeSchema
         /// Equipment level per floor area as [W/m2].
         /// </summary>
         /// <value>Equipment level per floor area as [W/m2].</value>
-        [DataMember(Name="watts_per_area", EmitDefaultValue=true)]
+        [DataMember(Name = "watts_per_area", IsRequired = true, EmitDefaultValue = false)]
+        
         public double WattsPerArea { get; set; } 
         /// <summary>
         /// Identifier of the schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.
         /// </summary>
         /// <value>Identifier of the schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.</value>
-        [DataMember(Name="schedule", EmitDefaultValue=true)]
+        [DataMember(Name = "schedule", IsRequired = true, EmitDefaultValue = false)]
+        
         public string Schedule { get; set; } 
         /// <summary>
         /// Number for the amount of long-wave radiation heat given off by electric equipment. Default value is 0.
         /// </summary>
         /// <value>Number for the amount of long-wave radiation heat given off by electric equipment. Default value is 0.</value>
-        [DataMember(Name="radiant_fraction", EmitDefaultValue=false)]
+        [DataMember(Name = "radiant_fraction", EmitDefaultValue = true)]
+        
         public double RadiantFraction { get; set; }  = 0D;
         /// <summary>
         /// Number for the amount of latent heat given off by electricequipment. Default value is 0.
         /// </summary>
         /// <value>Number for the amount of latent heat given off by electricequipment. Default value is 0.</value>
-        [DataMember(Name="latent_fraction", EmitDefaultValue=false)]
+        [DataMember(Name = "latent_fraction", EmitDefaultValue = true)]
+        
         public double LatentFraction { get; set; }  = 0D;
         /// <summary>
         /// Number for the amount of “lost” heat being given off by equipment. The default value is 0.
         /// </summary>
         /// <value>Number for the amount of “lost” heat being given off by equipment. The default value is 0.</value>
-        [DataMember(Name="lost_fraction", EmitDefaultValue=false)]
+        [DataMember(Name = "lost_fraction", EmitDefaultValue = true)]
+        
         public double LostFraction { get; set; }  = 0D;
 
         /// <summary>

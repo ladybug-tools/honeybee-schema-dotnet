@@ -71,37 +71,43 @@ namespace HoneybeeSchema
         /// Faces that together form the closed volume of a room.
         /// </summary>
         /// <value>Faces that together form the closed volume of a room.</value>
-        [DataMember(Name="faces", EmitDefaultValue=true)]
+        [DataMember(Name = "faces", IsRequired = true, EmitDefaultValue = false)]
+        
         public List<Face> Faces { get; set; } 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
-        [DataMember(Name="properties", EmitDefaultValue=true)]
+        [DataMember(Name = "properties", IsRequired = true, EmitDefaultValue = false)]
+        
         public RoomPropertiesAbridged Properties { get; set; } 
         /// <summary>
         /// Shades assigned to the interior side of this object (eg. partitions, tables).
         /// </summary>
         /// <value>Shades assigned to the interior side of this object (eg. partitions, tables).</value>
-        [DataMember(Name="indoor_shades", EmitDefaultValue=false)]
+        [DataMember(Name = "indoor_shades", EmitDefaultValue = false)]
+        
         public List<Shade> IndoorShades { get; set; } 
         /// <summary>
         /// Shades assigned to the exterior side of this object (eg. trees, landscaping).
         /// </summary>
         /// <value>Shades assigned to the exterior side of this object (eg. trees, landscaping).</value>
-        [DataMember(Name="outdoor_shades", EmitDefaultValue=false)]
+        [DataMember(Name = "outdoor_shades", EmitDefaultValue = false)]
+        
         public List<Shade> OutdoorShades { get; set; } 
         /// <summary>
         /// An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is mutliplied by the multiplier.
         /// </summary>
         /// <value>An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is mutliplied by the multiplier.</value>
-        [DataMember(Name="multiplier", EmitDefaultValue=false)]
+        [DataMember(Name = "multiplier", EmitDefaultValue = true)]
+        
         public int Multiplier { get; set; }  = 1;
         /// <summary>
         /// Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model.
         /// </summary>
         /// <value>Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model.</value>
-        [DataMember(Name="story", EmitDefaultValue=false)]
+        [DataMember(Name = "story", EmitDefaultValue = false)]
+        
         public string Story { get; set; } 
 
         /// <summary>

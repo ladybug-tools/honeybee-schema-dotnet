@@ -71,25 +71,29 @@ namespace HoneybeeSchema
         /// The thermal resistance (R-value) of the material layer [m2-K/W].
         /// </summary>
         /// <value>The thermal resistance (R-value) of the material layer [m2-K/W].</value>
-        [DataMember(Name="r_value", EmitDefaultValue=true)]
+        [DataMember(Name = "r_value", IsRequired = true, EmitDefaultValue = false)]
+        
         public double RValue { get; set; } 
         /// <summary>
         /// Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9.
         /// </summary>
         /// <value>Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9.</value>
-        [DataMember(Name="thermal_absorptance", EmitDefaultValue=false)]
+        [DataMember(Name = "thermal_absorptance", EmitDefaultValue = true)]
+        
         public double ThermalAbsorptance { get; set; }  = 0.9D;
         /// <summary>
         /// Fraction of incident solar radiation absorbed by the material. Default value is 0.7.
         /// </summary>
         /// <value>Fraction of incident solar radiation absorbed by the material. Default value is 0.7.</value>
-        [DataMember(Name="solar_absorptance", EmitDefaultValue=false)]
+        [DataMember(Name = "solar_absorptance", EmitDefaultValue = true)]
+        
         public double SolarAbsorptance { get; set; }  = 0.7D;
         /// <summary>
         /// Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7.
         /// </summary>
         /// <value>Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7.</value>
-        [DataMember(Name="visible_absorptance", EmitDefaultValue=false)]
+        [DataMember(Name = "visible_absorptance", EmitDefaultValue = true)]
+        
         public double VisibleAbsorptance { get; set; }  = 0.7D;
 
         /// <summary>

@@ -59,31 +59,36 @@ namespace HoneybeeSchema
         /// Boolean for whether the zone sizing calculation should be run.
         /// </summary>
         /// <value>Boolean for whether the zone sizing calculation should be run.</value>
-        [DataMember(Name="do_zone_sizing", EmitDefaultValue=false)]
+        [DataMember(Name = "do_zone_sizing", EmitDefaultValue = true)]
+        
         public bool DoZoneSizing { get; set; }  = true;
         /// <summary>
         /// Boolean for whether the system sizing calculation should be run.
         /// </summary>
         /// <value>Boolean for whether the system sizing calculation should be run.</value>
-        [DataMember(Name="do_system_sizing", EmitDefaultValue=false)]
+        [DataMember(Name = "do_system_sizing", EmitDefaultValue = true)]
+        
         public bool DoSystemSizing { get; set; }  = true;
         /// <summary>
         /// Boolean for whether the plant sizing calculation should be run.
         /// </summary>
         /// <value>Boolean for whether the plant sizing calculation should be run.</value>
-        [DataMember(Name="do_plant_sizing", EmitDefaultValue=false)]
+        [DataMember(Name = "do_plant_sizing", EmitDefaultValue = true)]
+        
         public bool DoPlantSizing { get; set; }  = true;
         /// <summary>
         /// Boolean for whether the simulation should be run for the sizing periods.
         /// </summary>
         /// <value>Boolean for whether the simulation should be run for the sizing periods.</value>
-        [DataMember(Name="run_for_run_periods", EmitDefaultValue=false)]
+        [DataMember(Name = "run_for_run_periods", EmitDefaultValue = true)]
+        
         public bool RunForRunPeriods { get; set; }  = true;
         /// <summary>
         /// Boolean for whether the simulation should be run for the run periods.
         /// </summary>
         /// <value>Boolean for whether the simulation should be run for the run periods.</value>
-        [DataMember(Name="run_for_sizing_periods", EmitDefaultValue=false)]
+        [DataMember(Name = "run_for_sizing_periods", EmitDefaultValue = true)]
+        
         public bool RunForSizingPeriods { get; set; }  = false;
 
         /// <summary>

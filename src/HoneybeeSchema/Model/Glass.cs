@@ -68,37 +68,43 @@ namespace HoneybeeSchema
         /// Material modifier (default: Void).
         /// </summary>
         /// <value>Material modifier (default: Void).</value>
-        [DataMember(Name="modifier", EmitDefaultValue=false)]
+        [DataMember(Name = "modifier", EmitDefaultValue = false)]
+        
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> Modifier { get; set; } 
         /// <summary>
         /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).
         /// </summary>
         /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).</value>
-        [DataMember(Name="dependencies", EmitDefaultValue=false)]
+        [DataMember(Name = "dependencies", EmitDefaultValue = false)]
+        
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Dependencies { get; set; } 
         /// <summary>
         /// A value between 0 and 1 for the red channel transmissivity (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the red channel transmissivity (default: 0).</value>
-        [DataMember(Name="r_transmissivity", EmitDefaultValue=false)]
+        [DataMember(Name = "r_transmissivity", EmitDefaultValue = true)]
+        
         public double RTransmissivity { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the green channel transmissivity (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the green channel transmissivity (default: 0).</value>
-        [DataMember(Name="g_transmissivity", EmitDefaultValue=false)]
+        [DataMember(Name = "g_transmissivity", EmitDefaultValue = true)]
+        
         public double GTransmissivity { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the blue channel transmissivity (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the blue channel transmissivity (default: 0).</value>
-        [DataMember(Name="b_transmissivity", EmitDefaultValue=false)]
+        [DataMember(Name = "b_transmissivity", EmitDefaultValue = true)]
+        
         public double BTransmissivity { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the index of refraction (default: 1.52).
         /// </summary>
         /// <value>A value between 0 and 1 for the index of refraction (default: 1.52).</value>
-        [DataMember(Name="refraction_index", EmitDefaultValue=false)]
+        [DataMember(Name = "refraction_index", EmitDefaultValue = true)]
+        
         public double RefractionIndex { get; set; }  = 1.52D;
 
         /// <summary>

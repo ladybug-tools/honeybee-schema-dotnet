@@ -60,7 +60,8 @@ namespace HoneybeeSchema
         /// List of strings for opaque material identifiers. The order of the materials is from exterior to interior.
         /// </summary>
         /// <value>List of strings for opaque material identifiers. The order of the materials is from exterior to interior.</value>
-        [DataMember(Name="layers", EmitDefaultValue=true)]
+        [DataMember(Name = "layers", IsRequired = true, EmitDefaultValue = false)]
+        
         public List<string> Layers { get; set; } 
 
         /// <summary>

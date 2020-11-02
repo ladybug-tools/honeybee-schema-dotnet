@@ -70,43 +70,50 @@ namespace HoneybeeSchema
         /// An optional WallModifierSet object for this ModifierSet. (default: None).
         /// </summary>
         /// <value>An optional WallModifierSet object for this ModifierSet. (default: None).</value>
-        [DataMember(Name="wall_set", EmitDefaultValue=false)]
+        [DataMember(Name = "wall_set", EmitDefaultValue = false)]
+        
         public WallModifierSet WallSet { get; set; } 
         /// <summary>
         /// An optional FloorModifierSet object for this ModifierSet. (default: None).
         /// </summary>
         /// <value>An optional FloorModifierSet object for this ModifierSet. (default: None).</value>
-        [DataMember(Name="floor_set", EmitDefaultValue=false)]
+        [DataMember(Name = "floor_set", EmitDefaultValue = false)]
+        
         public FloorModifierSet FloorSet { get; set; } 
         /// <summary>
         /// An optional RoofCeilingModifierSet object for this ModifierSet. (default: None).
         /// </summary>
         /// <value>An optional RoofCeilingModifierSet object for this ModifierSet. (default: None).</value>
-        [DataMember(Name="roof_ceiling_set", EmitDefaultValue=false)]
+        [DataMember(Name = "roof_ceiling_set", EmitDefaultValue = false)]
+        
         public RoofCeilingModifierSet RoofCeilingSet { get; set; } 
         /// <summary>
         /// An optional ApertureModifierSet object for this ModifierSet. (default: None).
         /// </summary>
         /// <value>An optional ApertureModifierSet object for this ModifierSet. (default: None).</value>
-        [DataMember(Name="aperture_set", EmitDefaultValue=false)]
+        [DataMember(Name = "aperture_set", EmitDefaultValue = false)]
+        
         public ApertureModifierSet ApertureSet { get; set; } 
         /// <summary>
         /// An optional DoorModifierSet object for this ModifierSet. (default: None).
         /// </summary>
         /// <value>An optional DoorModifierSet object for this ModifierSet. (default: None).</value>
-        [DataMember(Name="door_set", EmitDefaultValue=false)]
+        [DataMember(Name = "door_set", EmitDefaultValue = false)]
+        
         public DoorModifierSet DoorSet { get; set; } 
         /// <summary>
         /// An optional ShadeModifierSet object for this ModifierSet. (default: None).
         /// </summary>
         /// <value>An optional ShadeModifierSet object for this ModifierSet. (default: None).</value>
-        [DataMember(Name="shade_set", EmitDefaultValue=false)]
+        [DataMember(Name = "shade_set", EmitDefaultValue = false)]
+        
         public ShadeModifierSet ShadeSet { get; set; } 
         /// <summary>
         /// An optional Modifier to be used for all Faces with an AirBoundary face type. If None, it will be the honeybee generic air wall modifier.
         /// </summary>
         /// <value>An optional Modifier to be used for all Faces with an AirBoundary face type. If None, it will be the honeybee generic air wall modifier.</value>
-        [DataMember(Name="air_boundary_modifier", EmitDefaultValue=false)]
+        [DataMember(Name = "air_boundary_modifier", EmitDefaultValue = false)]
+        
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> AirBoundaryModifier { get; set; } 
 
         /// <summary>

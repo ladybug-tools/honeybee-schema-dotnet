@@ -60,7 +60,8 @@ namespace HoneybeeSchema
         /// List of strings for glazing or gas material identifiers. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.
         /// </summary>
         /// <value>List of strings for glazing or gas material identifiers. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.</value>
-        [DataMember(Name="layers", EmitDefaultValue=true)]
+        [DataMember(Name = "layers", IsRequired = true, EmitDefaultValue = false)]
+        
         public List<string> Layers { get; set; } 
 
         /// <summary>

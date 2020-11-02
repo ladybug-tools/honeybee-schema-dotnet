@@ -57,7 +57,8 @@ namespace HoneybeeSchema
         /// A list of up to 3 object identifiers that are adjacent to this one. The first object is always the one that is immediately adjacent and is of the same object type (Face, Aperture, Door). When this boundary condition is applied to a Face, the second object in the tuple will be the parent Room of the adjacent object. When the boundary condition is applied to a sub-face (Door or Aperture), the second object will be the parent Face of the adjacent sub-face and the third object will be the parent Room of the adjacent sub-face.
         /// </summary>
         /// <value>A list of up to 3 object identifiers that are adjacent to this one. The first object is always the one that is immediately adjacent and is of the same object type (Face, Aperture, Door). When this boundary condition is applied to a Face, the second object in the tuple will be the parent Room of the adjacent object. When the boundary condition is applied to a sub-face (Door or Aperture), the second object will be the parent Face of the adjacent sub-face and the third object will be the parent Room of the adjacent sub-face.</value>
-        [DataMember(Name="boundary_condition_objects", EmitDefaultValue=true)]
+        [DataMember(Name = "boundary_condition_objects", IsRequired = true, EmitDefaultValue = false)]
+        
         public List<string> BoundaryConditionObjects { get; set; } 
 
         /// <summary>

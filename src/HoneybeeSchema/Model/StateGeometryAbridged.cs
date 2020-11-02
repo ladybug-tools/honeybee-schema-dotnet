@@ -63,19 +63,22 @@ namespace HoneybeeSchema
         /// A ladybug_geometry Face3D.
         /// </summary>
         /// <value>A ladybug_geometry Face3D.</value>
-        [DataMember(Name="geometry", EmitDefaultValue=true)]
+        [DataMember(Name = "geometry", IsRequired = true, EmitDefaultValue = false)]
+        
         public Face3D Geometry { get; set; } 
         /// <summary>
         /// A string for a Honeybee Radiance Modifier identifier (default: None).
         /// </summary>
         /// <value>A string for a Honeybee Radiance Modifier identifier (default: None).</value>
-        [DataMember(Name="modifier", EmitDefaultValue=false)]
+        [DataMember(Name = "modifier", EmitDefaultValue = false)]
+        
         public string Modifier { get; set; } 
         /// <summary>
         /// A string for Honeybee Radiance Modifier identifiers to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).
         /// </summary>
         /// <value>A string for Honeybee Radiance Modifier identifiers to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).</value>
-        [DataMember(Name="modifier_direct", EmitDefaultValue=false)]
+        [DataMember(Name = "modifier_direct", EmitDefaultValue = false)]
+        
         public string ModifierDirect { get; set; } 
 
         /// <summary>

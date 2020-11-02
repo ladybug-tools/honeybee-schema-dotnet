@@ -60,13 +60,15 @@ namespace HoneybeeSchema
         /// Value for the beam optical depth. Typically found in .stat files.
         /// </summary>
         /// <value>Value for the beam optical depth. Typically found in .stat files.</value>
-        [DataMember(Name="tau_b", EmitDefaultValue=true)]
+        [DataMember(Name = "tau_b", IsRequired = true, EmitDefaultValue = false)]
+        
         public double TauB { get; set; } 
         /// <summary>
         /// Value for the diffuse optical depth. Typically found in .stat files.
         /// </summary>
         /// <value>Value for the diffuse optical depth. Typically found in .stat files.</value>
-        [DataMember(Name="tau_d", EmitDefaultValue=true)]
+        [DataMember(Name = "tau_d", IsRequired = true, EmitDefaultValue = false)]
+        
         public double TauD { get; set; } 
 
         /// <summary>

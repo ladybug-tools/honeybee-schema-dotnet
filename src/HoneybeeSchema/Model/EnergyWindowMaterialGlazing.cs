@@ -82,79 +82,92 @@ namespace HoneybeeSchema
         /// The surface-to-surface of the glass in meters. Default value is 0.003.
         /// </summary>
         /// <value>The surface-to-surface of the glass in meters. Default value is 0.003.</value>
-        [DataMember(Name="thickness", EmitDefaultValue=false)]
+        [DataMember(Name = "thickness", EmitDefaultValue = true)]
+        
         public double Thickness { get; set; }  = 0.003D;
         /// <summary>
         /// Transmittance of solar radiation through the glass at normal incidence. Default value is 0.85 for clear glass.
         /// </summary>
         /// <value>Transmittance of solar radiation through the glass at normal incidence. Default value is 0.85 for clear glass.</value>
-        [DataMember(Name="solar_transmittance", EmitDefaultValue=false)]
+        [DataMember(Name = "solar_transmittance", EmitDefaultValue = true)]
+        
         public double SolarTransmittance { get; set; }  = 0.85D;
         /// <summary>
         /// Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default value is 0.075 for clear glass.
         /// </summary>
         /// <value>Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default value is 0.075 for clear glass.</value>
-        [DataMember(Name="solar_reflectance", EmitDefaultValue=false)]
+        [DataMember(Name = "solar_reflectance", EmitDefaultValue = true)]
+        
         public double SolarReflectance { get; set; }  = 0.075D;
         /// <summary>
         /// Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum.
         /// </summary>
         /// <value>Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum.</value>
-        [DataMember(Name="solar_reflectance_back", EmitDefaultValue=false)]
+        [DataMember(Name = "solar_reflectance_back", EmitDefaultValue = false)]
+        
         public double SolarReflectanceBack { get; set; } 
         /// <summary>
         /// Transmittance of visible light through the glass at normal incidence. Default value is 0.9 for clear glass.
         /// </summary>
         /// <value>Transmittance of visible light through the glass at normal incidence. Default value is 0.9 for clear glass.</value>
-        [DataMember(Name="visible_transmittance", EmitDefaultValue=false)]
+        [DataMember(Name = "visible_transmittance", EmitDefaultValue = true)]
+        
         public double VisibleTransmittance { get; set; }  = 0.9D;
         /// <summary>
         /// Reflectance of visible light off of the front side of the glass at normal incidence. Default value is 0.075 for clear glass.
         /// </summary>
         /// <value>Reflectance of visible light off of the front side of the glass at normal incidence. Default value is 0.075 for clear glass.</value>
-        [DataMember(Name="visible_reflectance", EmitDefaultValue=false)]
+        [DataMember(Name = "visible_reflectance", EmitDefaultValue = true)]
+        
         public double VisibleReflectance { get; set; }  = 0.075D;
         /// <summary>
         /// Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye.
         /// </summary>
         /// <value>Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye.</value>
-        [DataMember(Name="visible_reflectance_back", EmitDefaultValue=false)]
+        [DataMember(Name = "visible_reflectance_back", EmitDefaultValue = false)]
+        
         public double VisibleReflectanceBack { get; set; } 
         /// <summary>
         /// Long-wave transmittance at normal incidence.
         /// </summary>
         /// <value>Long-wave transmittance at normal incidence.</value>
-        [DataMember(Name="infrared_transmittance", EmitDefaultValue=false)]
+        [DataMember(Name = "infrared_transmittance", EmitDefaultValue = true)]
+        
         public double InfraredTransmittance { get; set; }  = 0D;
         /// <summary>
         /// Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.
         /// </summary>
         /// <value>Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.</value>
-        [DataMember(Name="emissivity", EmitDefaultValue=false)]
+        [DataMember(Name = "emissivity", EmitDefaultValue = true)]
+        
         public double Emissivity { get; set; }  = 0.84D;
         /// <summary>
         /// Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.
         /// </summary>
         /// <value>Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.</value>
-        [DataMember(Name="emissivity_back", EmitDefaultValue=false)]
+        [DataMember(Name = "emissivity_back", EmitDefaultValue = true)]
+        
         public double EmissivityBack { get; set; }  = 0.84D;
         /// <summary>
         /// Thermal conductivity of the glass in W/(m-K). Default value is 0.9, which is  typical for clear glass without a low-e coating.
         /// </summary>
         /// <value>Thermal conductivity of the glass in W/(m-K). Default value is 0.9, which is  typical for clear glass without a low-e coating.</value>
-        [DataMember(Name="conductivity", EmitDefaultValue=false)]
+        [DataMember(Name = "conductivity", EmitDefaultValue = true)]
+        
         public double Conductivity { get; set; }  = 0.9D;
         /// <summary>
         /// Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean.
         /// </summary>
         /// <value>Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean.</value>
-        [DataMember(Name="dirt_correction", EmitDefaultValue=false)]
+        [DataMember(Name = "dirt_correction", EmitDefaultValue = true)]
+        
         public double DirtCorrection { get; set; }  = 1D;
         /// <summary>
         /// Takes values True and False. If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.
         /// </summary>
         /// <value>Takes values True and False. If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.</value>
-        [DataMember(Name="solar_diffusing", EmitDefaultValue=false)]
+        [DataMember(Name = "solar_diffusing", EmitDefaultValue = true)]
+        
         public bool SolarDiffusing { get; set; }  = false;
 
         /// <summary>

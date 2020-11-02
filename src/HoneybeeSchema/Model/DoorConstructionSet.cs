@@ -59,31 +59,36 @@ namespace HoneybeeSchema
         /// An OpaqueConstruction for all opaque doors with a Surface boundary condition.
         /// </summary>
         /// <value>An OpaqueConstruction for all opaque doors with a Surface boundary condition.</value>
-        [DataMember(Name="interior_construction", EmitDefaultValue=false)]
+        [DataMember(Name = "interior_construction", EmitDefaultValue = false)]
+        
         public OpaqueConstruction InteriorConstruction { get; set; } 
         /// <summary>
         /// An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face.
         /// </summary>
         /// <value>An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face.</value>
-        [DataMember(Name="exterior_construction", EmitDefaultValue=false)]
+        [DataMember(Name = "exterior_construction", EmitDefaultValue = false)]
+        
         public OpaqueConstruction ExteriorConstruction { get; set; } 
         /// <summary>
         /// An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face.
         /// </summary>
         /// <value>An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face.</value>
-        [DataMember(Name="overhead_construction", EmitDefaultValue=false)]
+        [DataMember(Name = "overhead_construction", EmitDefaultValue = false)]
+        
         public OpaqueConstruction OverheadConstruction { get; set; } 
         /// <summary>
         /// A WindowConstruction for all glass doors with an Outdoors boundary condition.
         /// </summary>
         /// <value>A WindowConstruction for all glass doors with an Outdoors boundary condition.</value>
-        [DataMember(Name="exterior_glass_construction", EmitDefaultValue=false)]
+        [DataMember(Name = "exterior_glass_construction", EmitDefaultValue = false)]
+        
         public WindowConstruction ExteriorGlassConstruction { get; set; } 
         /// <summary>
         /// A WindowConstruction for all glass doors with a Surface boundary condition.
         /// </summary>
         /// <value>A WindowConstruction for all glass doors with a Surface boundary condition.</value>
-        [DataMember(Name="interior_glass_construction", EmitDefaultValue=false)]
+        [DataMember(Name = "interior_glass_construction", EmitDefaultValue = false)]
+        
         public WindowConstruction InteriorGlassConstruction { get; set; } 
 
         /// <summary>

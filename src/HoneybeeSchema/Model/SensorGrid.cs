@@ -63,13 +63,15 @@ namespace HoneybeeSchema
         /// A list of sensors that belong to the grid.
         /// </summary>
         /// <value>A list of sensors that belong to the grid.</value>
-        [DataMember(Name="sensors", EmitDefaultValue=true)]
+        [DataMember(Name = "sensors", IsRequired = true, EmitDefaultValue = false)]
+        
         public List<Sensor> Sensors { get; set; } 
         /// <summary>
         /// An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D.
         /// </summary>
         /// <value>An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D.</value>
-        [DataMember(Name="mesh", EmitDefaultValue=false)]
+        [DataMember(Name = "mesh", EmitDefaultValue = false)]
+        
         public Mesh3D Mesh { get; set; } 
 
         /// <summary>

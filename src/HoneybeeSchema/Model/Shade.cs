@@ -65,19 +65,22 @@ namespace HoneybeeSchema
         /// Planar Face3D for the geometry.
         /// </summary>
         /// <value>Planar Face3D for the geometry.</value>
-        [DataMember(Name="geometry", EmitDefaultValue=true)]
+        [DataMember(Name = "geometry", IsRequired = true, EmitDefaultValue = false)]
+        
         public Face3D Geometry { get; set; } 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
-        [DataMember(Name="properties", EmitDefaultValue=true)]
+        [DataMember(Name = "properties", IsRequired = true, EmitDefaultValue = false)]
+        
         public ShadePropertiesAbridged Properties { get; set; } 
         /// <summary>
         /// Boolean to note whether this shade is detached from any of the other geometry in the model. Cases where this should be True include shade representing surrounding buildings or context. Note that this should always be False for shades assigned to parent objects.
         /// </summary>
         /// <value>Boolean to note whether this shade is detached from any of the other geometry in the model. Cases where this should be True include shade representing surrounding buildings or context. Note that this should always be False for shades assigned to parent objects.</value>
-        [DataMember(Name="is_detached", EmitDefaultValue=false)]
+        [DataMember(Name = "is_detached", EmitDefaultValue = true)]
+        
         public bool IsDetached { get; set; }  = false;
 
         /// <summary>

@@ -67,19 +67,22 @@ namespace HoneybeeSchema
         /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters.
         /// </summary>
         /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters.</value>
-        [DataMember(Name="identifier", EmitDefaultValue=true)]
+        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
+        
         public string Identifier { get; set; } 
         /// <summary>
         /// Display name of the object with no character restrictions.
         /// </summary>
         /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name="display_name", EmitDefaultValue=false)]
+        [DataMember(Name = "display_name", EmitDefaultValue = false)]
+        
         public string DisplayName { get; set; } 
         /// <summary>
         /// Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).
         /// </summary>
         /// <value>Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</value>
-        [DataMember(Name="user_data", EmitDefaultValue=false)]
+        [DataMember(Name = "user_data", EmitDefaultValue = false)]
+        
         public Object UserData { get; set; } 
 
         /// <summary>

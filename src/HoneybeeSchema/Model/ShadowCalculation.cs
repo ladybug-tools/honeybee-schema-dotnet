@@ -76,13 +76,15 @@ namespace HoneybeeSchema
         /// Integer for the number of days in each period for which a unique shadow calculation will be performed. This field is only used if the Periodic calculation_method is used.
         /// </summary>
         /// <value>Integer for the number of days in each period for which a unique shadow calculation will be performed. This field is only used if the Periodic calculation_method is used.</value>
-        [DataMember(Name="calculation_frequency", EmitDefaultValue=false)]
+        [DataMember(Name = "calculation_frequency", EmitDefaultValue = true)]
+        
         public int CalculationFrequency { get; set; }  = 30;
         /// <summary>
         /// Number of allowable figures in shadow overlap calculations.
         /// </summary>
         /// <value>Number of allowable figures in shadow overlap calculations.</value>
-        [DataMember(Name="maximum_figures", EmitDefaultValue=false)]
+        [DataMember(Name = "maximum_figures", EmitDefaultValue = true)]
+        
         public int MaximumFigures { get; set; }  = 15000;
 
         /// <summary>
