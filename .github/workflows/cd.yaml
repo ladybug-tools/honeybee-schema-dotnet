@@ -22,7 +22,7 @@ jobs:
           dotnet build --configuration Release 
 
       - name: Run Unit Tests
-        working-directory: src/HoneybeeSchema.Test
+        working-directory: src/HoneybeeSchema.Tests
         run: |
           dotnet test --configuration Release
           
