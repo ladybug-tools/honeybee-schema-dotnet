@@ -93,6 +93,16 @@ def replace_decimal(read_data):
     return data
 
 
+def replace_AnyType(read_data):
+    data = read_data
+    replace_source = ['AnyType']
+    replace_new = ['object']
+    for s, n in zip(replace_source, replace_new):
+        data = data.replace(s, n)
+    print("|---Replacing %s to %s" % ('AnyType', 'object'))
+    return data
+    
+
 def replace_anyof_type(read_data, anyof_types):
     data = read_data
     for items in anyof_types:
@@ -123,6 +133,7 @@ def check_csfiles(source_folder, anyof_types):
         data = f.read()
         # take care of anyof type
         data = replace_anyof_type(data, anyof_types)
+        data = replace_AnyType(data)
         # replace decimal/number to double
         # data = replace_decimal(data)
         data = fix_constructor(data)
