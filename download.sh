@@ -8,4 +8,4 @@ else
 fi
 
 echo "Base URL: $URL"
-python3 src/downloadSchema.py "$URL"
+python3 downloadSchema.py "$URL"

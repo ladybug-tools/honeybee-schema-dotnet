@@ -47,3 +47,11 @@ download(json_file, saving_dir)
 # download simulation-parameter mapper
 mapper_json = json_file.replace("inheritance.json", "mapper.json")
 download(mapper_json, saving_dir)
+
+# downlaod radiance-asset
+json_file = f"{base_url}/radiance-asset_inheritance.json"
+download(json_file, saving_dir)
+
+# download radiance-asset mapper
+mapper_json = json_file.replace("inheritance.json", "mapper.json")
+download(mapper_json, saving_dir)
