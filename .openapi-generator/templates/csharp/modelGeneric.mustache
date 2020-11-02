@@ -40,15 +40,27 @@
         /// Initializes a new instance of the <see cref="{{classname}}" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        {{^isAdditionalPropertiesTrue}}
-        protected {{classname}}() { }
-        {{/isAdditionalPropertiesTrue}}
-        {{#isAdditionalPropertiesTrue}}
-        protected {{classname}}()
-        {
+        protected {{classname}}() 
+        { 
+            {{#isAdditionalPropertiesTrue}}
             this.AdditionalProperties = new Dictionary<string, object>();
+            {{/isAdditionalPropertiesTrue}}
+            // Set non-required readonly properties with defaultValue
+            {{#vars}}
+            {{^isInherited}}
+            {{^isEnum}}
+            {{^required}}
+            {{#isReadOnly}}
+            {{#defaultValue}}
+            this.{{name}} = {{{defaultValue}}};
+            {{/defaultValue}}
+            {{/isReadOnly}}
+            {{/required}}
+            {{/isEnum}}
+            {{/isInherited}}
+            {{/vars}}
         }
-        {{/isAdditionalPropertiesTrue}}
+        
     {{/hasOnlyReadOnly}}
     {{/hasRequired}}
         /// <summary>
@@ -151,9 +163,6 @@
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            if (this is IIDdBase iDd)
-                return $"{{classname}} {iDd.Identifier}";
-       
             return "{{classname}}";
         }
 

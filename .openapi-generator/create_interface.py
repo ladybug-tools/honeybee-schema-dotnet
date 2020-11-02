@@ -56,6 +56,7 @@ def create_interface(dir, space_name, child_classes):
         return
 
     layers = space_name.split('.')
+    layers[0] = lib_Name
     sub_folders = layers[1:-1]
     sub_dir = os.path.join(dir, *sub_folders)
 
