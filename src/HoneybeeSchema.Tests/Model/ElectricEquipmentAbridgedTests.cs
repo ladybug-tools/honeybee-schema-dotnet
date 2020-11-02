@@ -35,18 +35,27 @@ namespace HoneybeeSchema.Test
         // TODO uncomment below to declare an instance variable for ElectricEquipmentAbridged
         private ElectricEquipmentAbridged instance;
         private string json = @"{
-    ""type"": ""ElectricEquipmentAbridged"",
-    ""name"": ""Electrical Equipment Definition"",
-    ""watts_per_area"": 12.5,
-    ""schedule"": ""Schedule-Equipment""
+  ""watts_per_area"": 12.5,
+  ""schedule"": ""Schedule-Equipment"",
+  ""identifier"": ""newID"",
+  ""display_name"": ""Electrical Equipment Definition"",
+  ""type"": ""ElectricEquipmentAbridged""
 }";
-        /// <summary>
-        /// Setup before each test
-        /// </summary>
-        [SetUp]
+
+
+        
+    /// <summary>
+    /// Setup before each test
+    /// </summary>
+    [SetUp]
         public void Init()
         {
             this.instance = ElectricEquipmentAbridged.FromJson(json);
+            //this.instance = new ElectricEquipmentAbridged("newID", 12.5, "Schedule-Equipment");
+            //this.instance.DisplayName = "Electrical Equipment Definition";
+            
+
+
         }
 
         /// <summary>
@@ -64,7 +73,6 @@ namespace HoneybeeSchema.Test
         [Test]
         public void ElectricEquipmentAbridgedInstanceTest()
         {
-            // TODO uncomment below to test "IsInstanceOf" ElectricEquipmentAbridged
             Assert.IsInstanceOf(typeof(ElectricEquipmentAbridged), instance);
         }
 
@@ -122,9 +130,10 @@ namespace HoneybeeSchema.Test
         /// Test the property 'Type'
         /// </summary>
         [Test]
-        public void TypeTest()
+        public void DuplicateTest()
         {
-            // TODO unit test for the property 'Type'
+            var newJson = this.instance.ToJson();
+            Assert.IsTrue(this.instance.Duplicate().Equals(this.instance));
         }
 
 
