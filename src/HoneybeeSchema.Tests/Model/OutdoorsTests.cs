@@ -78,6 +78,7 @@ namespace HoneybeeSchema.Test
         public void SunExposureTest()
         {
             Assert.IsFalse(this.instance.SunExposure);
+            Assert.IsTrue(this.instance.DuplicateOutdoors().SunExposure == false);
         }
         /// <summary>
         /// Test the property 'WindExposure'
@@ -86,6 +87,8 @@ namespace HoneybeeSchema.Test
         public void WindExposureTest()
         {
             Assert.IsTrue(this.instance.WindExposure);
+            this.instance.WindExposure = false;
+            Assert.IsTrue(this.instance.DuplicateOutdoors().WindExposure == false);
         }
         /// <summary>
         /// Test the property 'ViewFactor'
