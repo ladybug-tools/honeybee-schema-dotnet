@@ -45,13 +45,13 @@ namespace HoneybeeSchema
         { 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
+            this.Version = "1.39.2";
         }
         
         /// <summary>
         /// Initializes a new instance of the <see cref="Model" /> class.
         /// </summary>
         /// <param name="properties">Extension properties for particular simulation engines (Radiance, EnergyPlus). (required).</param>
-        /// <param name="version">Text string for the current version of the schema. (default to &quot;0.0.0&quot;).</param>
         /// <param name="rooms">A list of Rooms in the model..</param>
         /// <param name="orphanedFaces">A list of Faces in the model that lack a parent Room. Note that orphaned Faces are not acceptable for Models that are to be exported for energy simulation..</param>
         /// <param name="orphanedShades">A list of Shades in the model that lack a parent..</param>
@@ -66,13 +66,11 @@ namespace HoneybeeSchema
         public Model
         (
             string identifier, ModelProperties properties, // Required parameters
-            string displayName= default, Object userData= default, string version = "0.0.0", List<Room> rooms= default, List<Face> orphanedFaces= default, List<Shade> orphanedShades= default, List<Aperture> orphanedApertures= default, List<Door> orphanedDoors= default, Units units= default, double tolerance = 0.01D, double angleTolerance = 1.0D// Optional parameters
+            string displayName= default, Object userData= default, List<Room> rooms= default, List<Face> orphanedFaces= default, List<Shade> orphanedShades= default, List<Aperture> orphanedApertures= default, List<Door> orphanedDoors= default, Units units= default, double tolerance = 0.01D, double angleTolerance = 1.0D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             // to ensure "properties" is required (not null)
             this.Properties = properties ?? throw new ArgumentNullException("properties is a required property for Model and cannot be null");
-            // use default value if no "version" provided
-            this.Version = version ?? "0.0.0";
             this.Rooms = rooms;
             this.OrphanedFaces = orphanedFaces;
             this.OrphanedShades = orphanedShades;
@@ -84,6 +82,7 @@ namespace HoneybeeSchema
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
+            this.Version = "1.39.2";
         }
 
         /// <summary>
@@ -93,13 +92,6 @@ namespace HoneybeeSchema
         [DataMember(Name = "properties", IsRequired = true, EmitDefaultValue = false)]
         
         public ModelProperties Properties { get; set; } 
-        /// <summary>
-        /// Text string for the current version of the schema.
-        /// </summary>
-        /// <value>Text string for the current version of the schema.</value>
-        [DataMember(Name = "version", EmitDefaultValue = true)]
-        
-        public string Version { get; set; }  = "0.0.0";
         /// <summary>
         /// A list of Rooms in the model.
         /// </summary>
@@ -363,7 +355,7 @@ namespace HoneybeeSchema
 
             
             // Version (string) pattern
-            Regex regexVersion = new Regex(@"([0-9]+)\\.([0-9]+)\\.([0-9]+)", RegexOptions.CultureInvariant);
+            Regex regexVersion = new Regex(@"^1.39.2$", RegexOptions.CultureInvariant);
             if (false == regexVersion.Match(this.Version).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Version, must match a pattern of " + regexVersion, new [] { "Version" });
