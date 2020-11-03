@@ -83,6 +83,101 @@ def get_enums(mapperJson):
     return full_enum_names
 
 
+def get_enum_parameters(modelJson, mapperJson):
+    enums = [x.split('.')[-1] for x in get_enums(mapperJson)] 
+
+    with open(modelJson, "rb") as jsonFile:
+        data = json.load(jsonFile)
+
+    classes_with_enum_props = []
+    for sn, sp in data['components']['schemas'].items():
+        props = []
+        if 'properties' in sp:
+            props = sp['properties']
+        elif 'allOf' in sp:
+            all_objs = sp['allOf']
+            for obj in all_objs:
+                if 'properties' in obj:
+                    props = obj['properties']
+
+        class_with_enum_props = {}
+        if props == []:
+            continue
+
+        # find enum typo parameters with default
+        for prop in props:
+            prop_item = props[prop]
+            prop_keys = prop_item.keys()
+            if 'allOf' in prop_keys and 'default' in prop_keys:
+                # this is a ref enum type with default
+                enum_default = prop_item['default']
+                enum_type = prop_item['allOf'][0]['$ref'].split('/')[-1]
+
+                # check if it is in mapper enums
+                if enum_type not in enums:
+                    continue
+                if sn not in class_with_enum_props:
+                    class_with_enum_props[sn] = []
+                class_with_enum_props[sn].append(f'{enum_type}:{enum_default}')
+                # print(f'{sn} {enum_type}: {enum_default}')
+        
+        if class_with_enum_props != {}:
+            classes_with_enum_props.append(class_with_enum_props)
+            # print(class_with_enum_props)
+
+    return classes_with_enum_props
+
+
+def fix_enums_with_defaults(classesData, source_folder):
+    # open cs files to fix enum type with default value
+
+    for c in classesData:
+        class_name = [*c.keys()][0]
+        class_file = f'{class_name}.cs'
+        class_file_fullpath = os.path.join(source_folder, class_file)
+
+        f = open(class_file_fullpath, "rt", encoding='utf-8')
+        data = f.read()
+        f.close()
+
+        print(f"Fixing enum defaults in {class_file}")
+
+        enums = c[class_name]
+        for enum in enums:
+            enum_data = enum.split(':')
+            enum_type = enum_data[0]
+            enum_default_value = enum_data[1]
+
+            # replace enum type parameter in constructor
+            rex = f"(?<={enum_type})(\s*\w*=\s*)(default)"
+            replace = f"{enum_type}.{enum_default_value}"
+            found = re.findall(rex, data)
+            if found != []:
+                rex_hint = [*found[0]][0]
+                rex_hint = f"{enum_type}{rex_hint}"
+                #SolarDistribution solarDistribution=
+                rex = f"(?<={rex_hint})default"
+                data = re.sub(rex, replace, data)
+                print(f"  -{enum_type}: {enum_default_value} in constructor")
+            
+            # replace enum type properties
+            # public SolarDistribution SolarDistribution { get; set; }
+            rex = f"public {enum_type}[a-zA-Z\s]+\W*get\W*set;\W*\n"
+            replace = f" = {enum_type}.{enum_default_value};\n"
+            found = re.findall(rex, data)
+            if found != []:
+                rex_hint = str(found[0]).strip()
+                rex_hint = f"{rex_hint}{replace}"
+                data = re.sub(rex, rex_hint, data)
+                print(f"  -{enum_type}: {enum_default_value} in parameter")
+                # print(rex_hint)
+
+        # save data
+        f = open(class_file_fullpath, "wt", encoding='utf-8')
+        f.write(data)
+        f.close()
+
+
 def replace_decimal(read_data):
     data = read_data
     replace_source = ['decimal', '1M', '2M', '3M', '4M', '5M', '6M', '7M', '8M', '9M', '0M']
@@ -153,6 +248,7 @@ def get_allof_types_from_json(source_json_url):
         data = json.load(jsonFile)
 
     for sn, sp in data['components']['schemas'].items():
+        props = []
         if 'properties' in sp:
             props = sp['properties']
         elif 'allOf' in sp:
@@ -162,6 +258,8 @@ def get_allof_types_from_json(source_json_url):
                     props = obj['properties']
         else:
             # skip enum type
+            continue
+        if props == []:
             continue
         get_allof_types(props, unitItem)
     return unitItem
@@ -217,3 +315,6 @@ cleanup(name_space)
 print(f"post processing {json_file} with {mapper_json}")
 
 check_types(json_file, mapper_json)
+# fix enums
+classes_enum_data = get_enum_parameters(json_file, mapper_json)
+fix_enums_with_defaults(classes_enum_data, f'./src/{name_space}/Model')
