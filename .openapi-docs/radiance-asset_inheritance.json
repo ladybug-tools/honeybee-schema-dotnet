@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Documentation for Honeybee radiance-asset schema",
-        "version": "1.39.4",
+        "version": "1.39.5",
         "title": "Honeybee Radiance Asset Schema",
         "contact": {
             "name": "Ladybug Tools",
