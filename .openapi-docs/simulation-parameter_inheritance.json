@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Documentation for Honeybee simulation-parameter schema",
-        "version": "1.39.6",
+        "version": "1.39.7",
         "title": "Honeybee Simulation Parameter Schema",
         "contact": {
             "name": "Ladybug Tools",
@@ -179,7 +179,7 @@
     "paths": {},
     "components": {
         "schemas": {
-            "SimulationControl": {
+            "WindCondition": {
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
@@ -187,49 +187,39 @@
                     {
                         "type": "object",
                         "properties": {
+                            "wind_speed": {
+                                "title": "Wind Speed",
+                                "description": "Wind speed on the design day [m/s].",
+                                "minimum": 0,
+                                "maximum": 40,
+                                "type": "number",
+                                "format": "double"
+                            },
                             "type": {
                                 "title": "Type",
-                                "default": "SimulationControl",
-                                "pattern": "^SimulationControl$",
+                                "default": "WindCondition",
+                                "pattern": "^WindCondition$",
                                 "type": "string",
                                 "readOnly": true
                             },
-                            "do_zone_sizing": {
-                                "title": "Do Zone Sizing",
-                                "description": "Boolean for whether the zone sizing calculation should be run.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "do_system_sizing": {
-                                "title": "Do System Sizing",
-                                "description": "Boolean for whether the system sizing calculation should be run.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "do_plant_sizing": {
-                                "title": "Do Plant Sizing",
-                                "description": "Boolean for whether the plant sizing calculation should be run.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "run_for_run_periods": {
-                                "title": "Run For Run Periods",
-                                "description": "Boolean for whether the simulation should be run for the sizing periods.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "run_for_sizing_periods": {
-                                "title": "Run For Sizing Periods",
-                                "description": "Boolean for whether the simulation should be run for the run periods.",
-                                "default": false,
-                                "type": "boolean"
+                            "wind_direction": {
+                                "title": "Wind Direction",
+                                "description": "Wind direction on the design day [degrees].",
+                                "default": 0,
+                                "minimum": 0,
+                                "maximum": 360,
+                                "type": "number",
+                                "format": "double"
                             }
                         },
+                        "required": [
+                            "wind_speed"
+                        ],
                         "additionalProperties": false
                     }
                 ],
-                "title": "SimulationControl",
-                "description": "Used to specify which types of calculations to run.",
+                "title": "WindCondition",
+                "description": "Used to specify wind conditions on a design day.",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -362,51 +352,6 @@
                 ],
                 "title": "HumidityCondition",
                 "description": "Used to specify humidity conditions on a design day.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "WindCondition": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "wind_speed": {
-                                "title": "Wind Speed",
-                                "description": "Wind speed on the design day [m/s].",
-                                "minimum": 0,
-                                "maximum": 40,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "WindCondition",
-                                "pattern": "^WindCondition$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "wind_direction": {
-                                "title": "Wind Direction",
-                                "description": "Wind direction on the design day [degrees].",
-                                "default": 0,
-                                "minimum": 0,
-                                "maximum": 360,
-                                "type": "number",
-                                "format": "double"
-                            }
-                        },
-                        "required": [
-                            "wind_speed"
-                        ],
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "WindCondition",
-                "description": "Used to specify wind conditions on a design day.",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -719,6 +664,61 @@
                     "propertyName": "type"
                 }
             },
+            "DaylightSavingTime": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/DatedBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "title": "Type",
+                                "default": "DaylightSavingTime",
+                                "pattern": "^DaylightSavingTime$",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "start_date": {
+                                "title": "Start Date",
+                                "description": "A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).",
+                                "default": [
+                                    3,
+                                    12
+                                ],
+                                "minItems": 2,
+                                "maxItems": 3,
+                                "type": "array",
+                                "items": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "end_date": {
+                                "title": "End Date",
+                                "description": "A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).",
+                                "default": [
+                                    11,
+                                    5
+                                ],
+                                "minItems": 2,
+                                "maxItems": 3,
+                                "type": "array",
+                                "items": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "DaylightSavingTime",
+                "description": "Used to describe the daylight savings time for the simulation.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
             "ReportingFrequency": {
                 "title": "ReportingFrequency",
                 "description": "An enumeration.",
@@ -805,61 +805,6 @@
                     "Saturday"
                 ],
                 "type": "string"
-            },
-            "DaylightSavingTime": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/DatedBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "title": "Type",
-                                "default": "DaylightSavingTime",
-                                "pattern": "^DaylightSavingTime$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "start_date": {
-                                "title": "Start Date",
-                                "description": "A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).",
-                                "default": [
-                                    3,
-                                    12
-                                ],
-                                "minItems": 2,
-                                "maxItems": 3,
-                                "type": "array",
-                                "items": {
-                                    "type": "integer",
-                                    "format": "int32"
-                                }
-                            },
-                            "end_date": {
-                                "title": "End Date",
-                                "description": "A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).",
-                                "default": [
-                                    11,
-                                    5
-                                ],
-                                "minItems": 2,
-                                "maxItems": 3,
-                                "type": "array",
-                                "items": {
-                                    "type": "integer",
-                                    "format": "int32"
-                                }
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "DaylightSavingTime",
-                "description": "Used to describe the daylight savings time for the simulation.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
             },
             "RunPeriod": {
                 "allOf": [
@@ -950,6 +895,61 @@
                 ],
                 "title": "RunPeriod",
                 "description": "Used to describe the time period over which to run the simulation.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "SimulationControl": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "title": "Type",
+                                "default": "SimulationControl",
+                                "pattern": "^SimulationControl$",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "do_zone_sizing": {
+                                "title": "Do Zone Sizing",
+                                "description": "Boolean for whether the zone sizing calculation should be run.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "do_system_sizing": {
+                                "title": "Do System Sizing",
+                                "description": "Boolean for whether the system sizing calculation should be run.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "do_plant_sizing": {
+                                "title": "Do Plant Sizing",
+                                "description": "Boolean for whether the plant sizing calculation should be run.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "run_for_run_periods": {
+                                "title": "Run For Run Periods",
+                                "description": "Boolean for whether the simulation should be run for the sizing periods.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "run_for_sizing_periods": {
+                                "title": "Run For Sizing Periods",
+                                "description": "Boolean for whether the simulation should be run for the run periods.",
+                                "default": false,
+                                "type": "boolean"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "SimulationControl",
+                "description": "Used to specify which types of calculations to run.",
                 "discriminator": {
                     "propertyName": "type"
                 }

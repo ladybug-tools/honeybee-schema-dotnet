@@ -389,6 +389,8 @@ src/HoneybeeSchema.Test/Model/ConstructionSetTests.cs
 src/HoneybeeSchema.Test/Model/ControlTypeTests.cs
 src/HoneybeeSchema.Test/Model/DOASBaseAllOfTests.cs
 src/HoneybeeSchema.Test/Model/DOASBaseTests.cs
+src/HoneybeeSchema.Test/Model/DatedBaseModelAllOfTests.cs
+src/HoneybeeSchema.Test/Model/DatedBaseModelTests.cs
 src/HoneybeeSchema.Test/Model/DoorAllOfTests.cs
 src/HoneybeeSchema.Test/Model/DoorConstructionSetAbridgedAllOfTests.cs
 src/HoneybeeSchema.Test/Model/DoorConstructionSetAbridgedTests.cs
@@ -525,6 +527,7 @@ src/HoneybeeSchema.Test/Model/OpaqueConstructionAbridgedAllOfTests.cs
 src/HoneybeeSchema.Test/Model/OpaqueConstructionAbridgedTests.cs
 src/HoneybeeSchema.Test/Model/OpaqueConstructionAllOfTests.cs
 src/HoneybeeSchema.Test/Model/OpaqueConstructionTests.cs
+src/HoneybeeSchema.Test/Model/OpenAPIGenBaseModelTests.cs
 src/HoneybeeSchema.Test/Model/OutdoorsAllOfTests.cs
 src/HoneybeeSchema.Test/Model/OutdoorsTests.cs
 src/HoneybeeSchema.Test/Model/PSZAllOfTests.cs
