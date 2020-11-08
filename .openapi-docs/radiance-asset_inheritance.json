@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Documentation for Honeybee radiance-asset schema",
-        "version": "1.39.7",
+        "version": "1.39.8",
         "title": "Honeybee Radiance Asset Schema",
         "contact": {
             "name": "Ladybug Tools",
@@ -831,58 +831,6 @@
                     "propertyName": "type"
                 }
             },
-            "_GlowHemisphere": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "r_emittance": {
-                                "title": "R Emittance",
-                                "description": "A value between 0 and 1 for the red channel emittance.",
-                                "default": 1.0,
-                                "minimum": 0,
-                                "maximum": 1,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "g_emittance": {
-                                "title": "G Emittance",
-                                "description": "A value between 0 and 1 for the green channel emittance.",
-                                "default": 1.0,
-                                "minimum": 0,
-                                "maximum": 1,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "b_emittance": {
-                                "title": "B Emittance",
-                                "description": "A value between 0 and 1 for the blue channel of the emittance.",
-                                "default": 1.0,
-                                "minimum": 0,
-                                "maximum": 1,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "_GlowHemisphere",
-                                "type": "string",
-                                "pattern": "^_GlowHemisphere$",
-                                "readOnly": true
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "_GlowHemisphere",
-                "description": "Hidden base class for Ground and SkyHemisphere.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
             "_SkyWithSun": {
                 "allOf": [
                     {
@@ -963,6 +911,58 @@
                 ],
                 "title": "_SkyWithSun",
                 "description": "Hidden base class for all altitude/azimuth sky domes.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "_GlowHemisphere": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "r_emittance": {
+                                "title": "R Emittance",
+                                "description": "A value between 0 and 1 for the red channel emittance.",
+                                "default": 1.0,
+                                "minimum": 0,
+                                "maximum": 1,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "g_emittance": {
+                                "title": "G Emittance",
+                                "description": "A value between 0 and 1 for the green channel emittance.",
+                                "default": 1.0,
+                                "minimum": 0,
+                                "maximum": 1,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "b_emittance": {
+                                "title": "B Emittance",
+                                "description": "A value between 0 and 1 for the blue channel of the emittance.",
+                                "default": 1.0,
+                                "minimum": 0,
+                                "maximum": 1,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "_GlowHemisphere",
+                                "type": "string",
+                                "pattern": "^_GlowHemisphere$",
+                                "readOnly": true
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "_GlowHemisphere",
+                "description": "Hidden base class for Ground and SkyHemisphere.",
                 "discriminator": {
                     "propertyName": "type"
                 }

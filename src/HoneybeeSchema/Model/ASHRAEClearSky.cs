@@ -25,29 +25,47 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Base class for all objects needing to check for a valid Date.
+    /// Used to specify sky conditions on a design day.
     /// </summary>
-    [DataContract(Name = "DatedBaseModel")]
+    [DataContract(Name = "ASHRAEClearSky")]
     [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(RunPeriod), "RunPeriod")]
-    [JsonSubtypes.KnownSubType(typeof(DaylightSavingTime), "DaylightSavingTime")]
-    public partial class DatedBaseModel : OpenAPIGenBaseModel, IEquatable<DatedBaseModel>, IValidatableObject
+    public partial class ASHRAEClearSky : SkyCondition, IEquatable<ASHRAEClearSky>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DatedBaseModel" /> class.
+        /// Initializes a new instance of the <see cref="ASHRAEClearSky" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        public DatedBaseModel
+        protected ASHRAEClearSky() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "ASHRAEClearSky";
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ASHRAEClearSky" /> class.
+        /// </summary>
+        /// <param name="clearness">Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level. (required).</param>
+        /// <param name="date">A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case). (required).</param>
+        /// <param name="daylightSavings">Boolean to indicate whether daylight savings time is active on the design day. (default to false).</param>
+        public ASHRAEClearSky
         (
-            // Required parameters
-             // Optional parameters
-        ) : base()// BaseClass
+            List<int> date, double clearness, // Required parameters
+            bool daylightSavings = false // Optional parameters
+        ) : base(date: date, daylightSavings: daylightSavings)// BaseClass
         {
+            this.Clearness = clearness;
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "DatedBaseModel";
+            this.Type = "ASHRAEClearSky";
         }
 
+        /// <summary>
+        /// Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.
+        /// </summary>
+        /// <value>Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.</value>
+        [DataMember(Name = "clearness", IsRequired = true, EmitDefaultValue = false)]
+        
+        public double Clearness { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -55,7 +73,7 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            return "DatedBaseModel";
+            return "ASHRAEClearSky";
         }
 
         /// <summary>
@@ -68,18 +86,21 @@ namespace HoneybeeSchema
                 return this.ToString();
             
             var sb = new StringBuilder();
-            sb.Append("DatedBaseModel:\n");
+            sb.Append("ASHRAEClearSky:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  Date: ").Append(Date).Append("\n");
+            sb.Append("  DaylightSavings: ").Append(DaylightSavings).Append("\n");
+            sb.Append("  Clearness: ").Append(Clearness).Append("\n");
             return sb.ToString();
         }
   
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>DatedBaseModel object</returns>
-        public static DatedBaseModel FromJson(string json)
+        /// <returns>ASHRAEClearSky object</returns>
+        public static ASHRAEClearSky FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<DatedBaseModel>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<ASHRAEClearSky>(json, JsonSetting.AnyOfConvertSetting);
             if (obj == null)
                 return null;
             return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
@@ -88,8 +109,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>DatedBaseModel object</returns>
-        public virtual DatedBaseModel DuplicateDatedBaseModel()
+        /// <returns>ASHRAEClearSky object</returns>
+        public virtual ASHRAEClearSky DuplicateASHRAEClearSky()
         {
             return FromJson(this.ToJson());
         }
@@ -100,16 +121,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return DuplicateDatedBaseModel();
+            return DuplicateASHRAEClearSky();
         }
 
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        public override SkyCondition DuplicateSkyCondition()
         {
-            return DuplicateDatedBaseModel();
+            return DuplicateASHRAEClearSky();
         }
      
         /// <summary>
@@ -119,19 +140,24 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DatedBaseModel);
+            return this.Equals(input as ASHRAEClearSky);
         }
 
         /// <summary>
-        /// Returns true if DatedBaseModel instances are equal
+        /// Returns true if ASHRAEClearSky instances are equal
         /// </summary>
-        /// <param name="input">Instance of DatedBaseModel to be compared</param>
+        /// <param name="input">Instance of ASHRAEClearSky to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DatedBaseModel input)
+        public bool Equals(ASHRAEClearSky input)
         {
             if (input == null)
                 return false;
             return base.Equals(input) && 
+                (
+                    this.Clearness == input.Clearness ||
+                    (this.Clearness != null &&
+                    this.Clearness.Equals(input.Clearness))
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
@@ -148,6 +174,8 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                if (this.Clearness != null)
+                    hashCode = hashCode * 59 + this.Clearness.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
@@ -161,21 +189,25 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            return this.BaseValidate(validationContext);
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
-        {
             foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
+            // Clearness (double) maximum
+            if(this.Clearness > (double)1.2)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Clearness, must be a value less than or equal to 1.2.", new [] { "Clearness" });
+            }
+
+            // Clearness (double) minimum
+            if(this.Clearness < (double)0)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Clearness, must be a value greater than or equal to 0.", new [] { "Clearness" });
+            }
+
+
+            
             // Type (string) pattern
-            Regex regexType = new Regex(@"^DatedBaseModel$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^ASHRAEClearSky$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

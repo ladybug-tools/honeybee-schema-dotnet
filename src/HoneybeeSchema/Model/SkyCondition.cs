@@ -25,29 +25,57 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Base class for all objects needing to check for a valid Date.
+    /// Used to specify sky conditions on a design day.
     /// </summary>
-    [DataContract(Name = "DatedBaseModel")]
+    [DataContract(Name = "_SkyCondition")]
     [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(RunPeriod), "RunPeriod")]
-    [JsonSubtypes.KnownSubType(typeof(DaylightSavingTime), "DaylightSavingTime")]
-    public partial class DatedBaseModel : OpenAPIGenBaseModel, IEquatable<DatedBaseModel>, IValidatableObject
+    [JsonSubtypes.KnownSubType(typeof(ASHRAEClearSky), "ASHRAEClearSky")]
+    [JsonSubtypes.KnownSubType(typeof(ASHRAETau), "ASHRAETau")]
+    public partial class SkyCondition : OpenAPIGenBaseModel, IEquatable<SkyCondition>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DatedBaseModel" /> class.
+        /// Initializes a new instance of the <see cref="SkyCondition" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        public DatedBaseModel
+        protected SkyCondition() 
+        { 
+            // Set non-required readonly properties with defaultValue
+            this.Type = "_SkyCondition";
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SkyCondition" /> class.
+        /// </summary>
+        /// <param name="date">A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case). (required).</param>
+        /// <param name="daylightSavings">Boolean to indicate whether daylight savings time is active on the design day. (default to false).</param>
+        public SkyCondition
         (
-            // Required parameters
-             // Optional parameters
+             List<int> date, // Required parameters
+            bool daylightSavings = false // Optional parameters
         ) : base()// BaseClass
         {
+            // to ensure "date" is required (not null)
+            this.Date = date ?? throw new ArgumentNullException("date is a required property for SkyCondition and cannot be null");
+            this.DaylightSavings = daylightSavings;
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "DatedBaseModel";
+            this.Type = "_SkyCondition";
         }
 
+        /// <summary>
+        /// A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).
+        /// </summary>
+        /// <value>A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</value>
+        [DataMember(Name = "date", IsRequired = true, EmitDefaultValue = false)]
+        
+        public List<int> Date { get; set; } 
+        /// <summary>
+        /// Boolean to indicate whether daylight savings time is active on the design day.
+        /// </summary>
+        /// <value>Boolean to indicate whether daylight savings time is active on the design day.</value>
+        [DataMember(Name = "daylight_savings", EmitDefaultValue = true)]
+        
+        public bool DaylightSavings { get; set; }  = false;
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -55,7 +83,7 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            return "DatedBaseModel";
+            return "SkyCondition";
         }
 
         /// <summary>
@@ -68,18 +96,20 @@ namespace HoneybeeSchema
                 return this.ToString();
             
             var sb = new StringBuilder();
-            sb.Append("DatedBaseModel:\n");
+            sb.Append("SkyCondition:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  Date: ").Append(Date).Append("\n");
+            sb.Append("  DaylightSavings: ").Append(DaylightSavings).Append("\n");
             return sb.ToString();
         }
   
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>DatedBaseModel object</returns>
-        public static DatedBaseModel FromJson(string json)
+        /// <returns>SkyCondition object</returns>
+        public static SkyCondition FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<DatedBaseModel>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<SkyCondition>(json, JsonSetting.AnyOfConvertSetting);
             if (obj == null)
                 return null;
             return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
@@ -88,8 +118,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>DatedBaseModel object</returns>
-        public virtual DatedBaseModel DuplicateDatedBaseModel()
+        /// <returns>SkyCondition object</returns>
+        public virtual SkyCondition DuplicateSkyCondition()
         {
             return FromJson(this.ToJson());
         }
@@ -100,7 +130,7 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return DuplicateDatedBaseModel();
+            return DuplicateSkyCondition();
         }
 
         /// <summary>
@@ -109,7 +139,7 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
         {
-            return DuplicateDatedBaseModel();
+            return DuplicateSkyCondition();
         }
      
         /// <summary>
@@ -119,19 +149,30 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DatedBaseModel);
+            return this.Equals(input as SkyCondition);
         }
 
         /// <summary>
-        /// Returns true if DatedBaseModel instances are equal
+        /// Returns true if SkyCondition instances are equal
         /// </summary>
-        /// <param name="input">Instance of DatedBaseModel to be compared</param>
+        /// <param name="input">Instance of SkyCondition to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DatedBaseModel input)
+        public bool Equals(SkyCondition input)
         {
             if (input == null)
                 return false;
             return base.Equals(input) && 
+                (
+                    this.Date == input.Date ||
+                    this.Date != null &&
+                    input.Date != null &&
+                    this.Date.SequenceEqual(input.Date)
+                ) && base.Equals(input) && 
+                (
+                    this.DaylightSavings == input.DaylightSavings ||
+                    (this.DaylightSavings != null &&
+                    this.DaylightSavings.Equals(input.DaylightSavings))
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
@@ -148,6 +189,10 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                if (this.Date != null)
+                    hashCode = hashCode * 59 + this.Date.GetHashCode();
+                if (this.DaylightSavings != null)
+                    hashCode = hashCode * 59 + this.DaylightSavings.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
@@ -175,7 +220,7 @@ namespace HoneybeeSchema
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^DatedBaseModel$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^_SkyCondition$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

@@ -25,29 +25,44 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Base class for all objects needing to check for a valid Date.
+    /// Used to describe the daylight savings time for the simulation.
     /// </summary>
-    [DataContract(Name = "DatedBaseModel")]
+    [DataContract(Name = "DaylightSavingTime")]
     [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(RunPeriod), "RunPeriod")]
-    [JsonSubtypes.KnownSubType(typeof(DaylightSavingTime), "DaylightSavingTime")]
-    public partial class DatedBaseModel : OpenAPIGenBaseModel, IEquatable<DatedBaseModel>, IValidatableObject
+    public partial class DaylightSavingTime : DatedBaseModel, IEquatable<DaylightSavingTime>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DatedBaseModel" /> class.
+        /// Initializes a new instance of the <see cref="DaylightSavingTime" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
-        public DatedBaseModel
+        /// <param name="startDate">A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017)..</param>
+        /// <param name="endDate">A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017)..</param>
+        public DaylightSavingTime
         (
-            // Required parameters
-             // Optional parameters
+             // Required parameters
+            List<int> startDate= default, List<int> endDate= default// Optional parameters
         ) : base()// BaseClass
         {
+            this.StartDate = startDate;
+            this.EndDate = endDate;
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "DatedBaseModel";
+            this.Type = "DaylightSavingTime";
         }
 
+        /// <summary>
+        /// A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).
+        /// </summary>
+        /// <value>A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).</value>
+        [DataMember(Name = "start_date", EmitDefaultValue = false)]
+        
+        public List<int> StartDate { get; set; } 
+        /// <summary>
+        /// A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).
+        /// </summary>
+        /// <value>A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).</value>
+        [DataMember(Name = "end_date", EmitDefaultValue = false)]
+        
+        public List<int> EndDate { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -55,7 +70,7 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            return "DatedBaseModel";
+            return "DaylightSavingTime";
         }
 
         /// <summary>
@@ -68,18 +83,20 @@ namespace HoneybeeSchema
                 return this.ToString();
             
             var sb = new StringBuilder();
-            sb.Append("DatedBaseModel:\n");
+            sb.Append("DaylightSavingTime:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  StartDate: ").Append(StartDate).Append("\n");
+            sb.Append("  EndDate: ").Append(EndDate).Append("\n");
             return sb.ToString();
         }
   
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>DatedBaseModel object</returns>
-        public static DatedBaseModel FromJson(string json)
+        /// <returns>DaylightSavingTime object</returns>
+        public static DaylightSavingTime FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<DatedBaseModel>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<DaylightSavingTime>(json, JsonSetting.AnyOfConvertSetting);
             if (obj == null)
                 return null;
             return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
@@ -88,8 +105,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>DatedBaseModel object</returns>
-        public virtual DatedBaseModel DuplicateDatedBaseModel()
+        /// <returns>DaylightSavingTime object</returns>
+        public virtual DaylightSavingTime DuplicateDaylightSavingTime()
         {
             return FromJson(this.ToJson());
         }
@@ -100,16 +117,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return DuplicateDatedBaseModel();
+            return DuplicateDaylightSavingTime();
         }
 
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        public override DatedBaseModel DuplicateDatedBaseModel()
         {
-            return DuplicateDatedBaseModel();
+            return DuplicateDaylightSavingTime();
         }
      
         /// <summary>
@@ -119,15 +136,15 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as DatedBaseModel);
+            return this.Equals(input as DaylightSavingTime);
         }
 
         /// <summary>
-        /// Returns true if DatedBaseModel instances are equal
+        /// Returns true if DaylightSavingTime instances are equal
         /// </summary>
-        /// <param name="input">Instance of DatedBaseModel to be compared</param>
+        /// <param name="input">Instance of DaylightSavingTime to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DatedBaseModel input)
+        public bool Equals(DaylightSavingTime input)
         {
             if (input == null)
                 return false;
@@ -136,6 +153,18 @@ namespace HoneybeeSchema
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
+                    this.StartDate == input.StartDate ||
+                    this.StartDate != null &&
+                    input.StartDate != null &&
+                    this.StartDate.SequenceEqual(input.StartDate)
+                ) && base.Equals(input) && 
+                (
+                    this.EndDate == input.EndDate ||
+                    this.EndDate != null &&
+                    input.EndDate != null &&
+                    this.EndDate.SequenceEqual(input.EndDate)
                 );
         }
 
@@ -150,6 +179,10 @@ namespace HoneybeeSchema
                 int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.StartDate != null)
+                    hashCode = hashCode * 59 + this.StartDate.GetHashCode();
+                if (this.EndDate != null)
+                    hashCode = hashCode * 59 + this.EndDate.GetHashCode();
                 return hashCode;
             }
         }
@@ -161,21 +194,11 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            return this.BaseValidate(validationContext);
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
-        {
             foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^DatedBaseModel$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^DaylightSavingTime$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
