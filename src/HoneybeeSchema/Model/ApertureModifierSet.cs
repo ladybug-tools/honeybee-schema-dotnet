@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Set containing radiance modifiers needed for a model&#39;s Apertures.
     /// </summary>
     [DataContract(Name = "ApertureModifierSet")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class ApertureModifierSet : OpenAPIGenBaseModel, IEquatable<ApertureModifierSet>, IValidatableObject
     {
         /// <summary>

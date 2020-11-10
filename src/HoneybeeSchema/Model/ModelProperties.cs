@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// ModelProperties
     /// </summary>
     [DataContract(Name = "ModelProperties")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class ModelProperties : OpenAPIGenBaseModel, IEquatable<ModelProperties>, IValidatableObject
     {
         /// <summary>

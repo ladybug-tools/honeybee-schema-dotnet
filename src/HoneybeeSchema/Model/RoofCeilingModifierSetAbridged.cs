@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Abridged set containing radiance modifiers needed for a model&#39;s Roofs.
     /// </summary>
     [DataContract(Name = "RoofCeilingModifierSetAbridged")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class RoofCeilingModifierSetAbridged : BaseModifierSetAbridged, IEquatable<RoofCeilingModifierSetAbridged>, IValidatableObject
     {
         /// <summary>

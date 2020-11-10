@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,12 +27,6 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a valid Radiance identifier.
     /// </summary>
     [DataContract(Name = "IDdRadianceBaseModel")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(ModifierSetAbridged), "ModifierSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(ModifierSet), "ModifierSet")]
-    [JsonSubtypes.KnownSubType(typeof(ModifierBase), "ModifierBase")]
-    [JsonSubtypes.KnownSubType(typeof(StateGeometryAbridged), "StateGeometryAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(RadianceAsset), "_RadianceAsset")]
     public partial class IDdRadianceBaseModel : OpenAPIGenBaseModel, IEquatable<IDdRadianceBaseModel>, IValidatableObject
     {
         /// <summary>

@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Packaged Variable Air Volume (PVAV) HVAC system.
     /// </summary>
     [DataContract(Name = "PVAV")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class PVAV : IDdEnergyBaseModel, IEquatable<PVAV>, IValidatableObject
     {
         /// <summary>

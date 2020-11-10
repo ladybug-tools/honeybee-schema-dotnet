@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,13 +27,6 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [DataContract(Name = "IDdBaseModel")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(Aperture), "Aperture")]
-    [JsonSubtypes.KnownSubType(typeof(Face), "Face")]
-    [JsonSubtypes.KnownSubType(typeof(Shade), "Shade")]
-    [JsonSubtypes.KnownSubType(typeof(Room), "Room")]
-    [JsonSubtypes.KnownSubType(typeof(Model), "Model")]
-    [JsonSubtypes.KnownSubType(typeof(Door), "Door")]
     public partial class IDdBaseModel : OpenAPIGenBaseModel, IEquatable<IDdBaseModel>, IValidatableObject
     {
         /// <summary>

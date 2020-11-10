@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Construction for Air Boundary objects.
     /// </summary>
     [DataContract(Name = "AirBoundaryConstructionAbridged")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class AirBoundaryConstructionAbridged : IDdEnergyBaseModel, IEquatable<AirBoundaryConstructionAbridged>, IValidatableObject
     {
         /// <summary>

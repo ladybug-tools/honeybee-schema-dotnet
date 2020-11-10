@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Provides a model for an ideal HVAC system.
     /// </summary>
     [DataContract(Name = "IdealAirSystemAbridged")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class IdealAirSystemAbridged : IDdEnergyBaseModel, IEquatable<IdealAirSystemAbridged>, IValidatableObject
     {
         /// <summary>

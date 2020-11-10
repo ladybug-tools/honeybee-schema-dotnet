@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Construction for window objects with an included shade layer.
     /// </summary>
     [DataContract(Name = "WindowConstructionShadeAbridged")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class WindowConstructionShadeAbridged : IDdEnergyBaseModel, IEquatable<WindowConstructionShadeAbridged>, IValidatableObject
     {
         /// <summary>

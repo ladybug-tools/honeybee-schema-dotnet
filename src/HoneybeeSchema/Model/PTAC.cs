@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Packaged Terminal Air Conditioning (PTAC) or Heat Pump (PTHP) HVAC system.
     /// </summary>
     [DataContract(Name = "PTAC")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class PTAC : IDdEnergyBaseModel, IEquatable<PTAC>, IValidatableObject
     {
         /// <summary>

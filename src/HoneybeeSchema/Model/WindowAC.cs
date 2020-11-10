@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Window Air Conditioning cooling system (with optional heating).
     /// </summary>
     [DataContract(Name = "WindowAC")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class WindowAC : IDdEnergyBaseModel, IEquatable<WindowAC>, IValidatableObject
     {
         /// <summary>

@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// This object specifies the properties of window shade materials.
     /// </summary>
     [DataContract(Name = "EnergyWindowMaterialShade")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class EnergyWindowMaterialShade : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialShade>, IValidatableObject
     {
         /// <summary>

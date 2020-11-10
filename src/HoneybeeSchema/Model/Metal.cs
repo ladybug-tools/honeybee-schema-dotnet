@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Radiance metal material.
     /// </summary>
     [DataContract(Name = "Metal")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class Metal : ModifierBase, IEquatable<Metal>, IValidatableObject
     {
         /// <summary>

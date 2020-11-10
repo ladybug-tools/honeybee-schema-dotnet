@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,8 +27,6 @@ namespace HoneybeeSchema
     /// RadianceShadeStateAbridged represents a single state for a dynamic Shade.
     /// </summary>
     [DataContract(Name = "RadianceShadeStateAbridged")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(RadianceSubFaceStateAbridged), "RadianceSubFaceStateAbridged")]
     public partial class RadianceShadeStateAbridged : OpenAPIGenBaseModel, IEquatable<RadianceShadeStateAbridged>, IValidatableObject
     {
         /// <summary>

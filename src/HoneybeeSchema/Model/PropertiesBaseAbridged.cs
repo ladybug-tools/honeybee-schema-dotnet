@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,11 +27,6 @@ namespace HoneybeeSchema
     /// Base class of Abridged Radiance Properties.
     /// </summary>
     [DataContract(Name = "_PropertiesBaseAbridged")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(FaceRadiancePropertiesAbridged), "FaceRadiancePropertiesAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(ApertureRadiancePropertiesAbridged), "ApertureRadiancePropertiesAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(DoorRadiancePropertiesAbridged), "DoorRadiancePropertiesAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(ShadeRadiancePropertiesAbridged), "ShadeRadiancePropertiesAbridged")]
     public partial class PropertiesBaseAbridged : OpenAPIGenBaseModel, IEquatable<PropertiesBaseAbridged>, IValidatableObject
     {
         /// <summary>

@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,9 +27,6 @@ namespace HoneybeeSchema
     /// Hidden base class for all Radiance Assets.
     /// </summary>
     [DataContract(Name = "_RadianceAsset")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(SensorGrid), "SensorGrid")]
-    [JsonSubtypes.KnownSubType(typeof(View), "View")]
     public partial class RadianceAsset : IDdRadianceBaseModel, IEquatable<RadianceAsset>, IValidatableObject
     {
         /// <summary>

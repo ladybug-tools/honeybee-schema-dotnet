@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Used to describe settings for EnergyPlus shadow calculation.
     /// </summary>
     [DataContract(Name = "ShadowCalculation")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class ShadowCalculation : OpenAPIGenBaseModel, IEquatable<ShadowCalculation>, IValidatableObject
     {
         /// <summary>

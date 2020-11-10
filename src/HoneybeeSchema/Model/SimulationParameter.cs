@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// The complete set of EnergyPlus Simulation Settings.
     /// </summary>
     [DataContract(Name = "SimulationParameter")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class SimulationParameter : OpenAPIGenBaseModel, IEquatable<SimulationParameter>, IValidatableObject
     {
         /// <summary>

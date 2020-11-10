@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door.     
     /// </summary>
     [DataContract(Name = "RadianceSubFaceStateAbridged")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class RadianceSubFaceStateAbridged : RadianceShadeStateAbridged, IEquatable<RadianceSubFaceStateAbridged>, IValidatableObject
     {
         /// <summary>

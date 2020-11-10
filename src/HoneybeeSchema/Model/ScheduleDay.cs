@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Used to describe the daily schedule for a single simulation day.
     /// </summary>
     [DataContract(Name = "ScheduleDay")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class ScheduleDay : IDdEnergyBaseModel, IEquatable<ScheduleDay>, IValidatableObject
     {
         /// <summary>

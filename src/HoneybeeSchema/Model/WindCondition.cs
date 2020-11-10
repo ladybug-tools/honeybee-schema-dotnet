@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Used to specify wind conditions on a design day.
     /// </summary>
     [DataContract(Name = "WindCondition")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class WindCondition : OpenAPIGenBaseModel, IEquatable<WindCondition>, IValidatableObject
     {
         /// <summary>

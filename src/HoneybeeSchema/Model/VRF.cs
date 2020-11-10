@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Variable Refrigerant Flow (VRF) heating/cooling system (with no ventilation).
     /// </summary>
     [DataContract(Name = "VRF")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class VRF : IDdEnergyBaseModel, IEquatable<VRF>, IValidatableObject
     {
         /// <summary>

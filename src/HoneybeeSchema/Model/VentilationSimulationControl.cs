@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// The global parameters used in the ventilation simulation.
     /// </summary>
     [DataContract(Name = "VentilationSimulationControl")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class VentilationSimulationControl : OpenAPIGenBaseModel, IEquatable<VentilationSimulationControl>, IValidatableObject
     {
         /// <summary>

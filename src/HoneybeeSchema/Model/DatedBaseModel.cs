@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,8 +27,6 @@ namespace HoneybeeSchema
     /// Base class for all objects needing to check for a valid Date.
     /// </summary>
     [DataContract(Name = "DatedBaseModel")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(ScheduleRuleAbridged), "ScheduleRuleAbridged")]
     public partial class DatedBaseModel : OpenAPIGenBaseModel, IEquatable<DatedBaseModel>, IValidatableObject
     {
         /// <summary>

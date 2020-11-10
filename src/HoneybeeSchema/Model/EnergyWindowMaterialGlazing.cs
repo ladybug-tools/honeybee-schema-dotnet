@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Describe a single glass pane corresponding to a layer in a window construction.
     /// </summary>
     [DataContract(Name = "EnergyWindowMaterialGlazing")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class EnergyWindowMaterialGlazing : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialGlazing>, IValidatableObject
     {
         /// <summary>

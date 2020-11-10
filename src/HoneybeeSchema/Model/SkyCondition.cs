@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,9 +27,6 @@ namespace HoneybeeSchema
     /// Used to specify sky conditions on a design day.
     /// </summary>
     [DataContract(Name = "_SkyCondition")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(ASHRAEClearSky), "ASHRAEClearSky")]
-    [JsonSubtypes.KnownSubType(typeof(ASHRAETau), "ASHRAETau")]
     public partial class SkyCondition : OpenAPIGenBaseModel, IEquatable<SkyCondition>, IValidatableObject
     {
         /// <summary>

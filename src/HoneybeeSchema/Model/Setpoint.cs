@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Used to specify information about the setpoint schedule.
     /// </summary>
     [DataContract(Name = "Setpoint")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class Setpoint : IDdEnergyBaseModel, IEquatable<Setpoint>, IValidatableObject
     {
         /// <summary>

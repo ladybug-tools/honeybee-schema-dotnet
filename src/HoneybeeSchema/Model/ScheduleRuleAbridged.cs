@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Schedule rule including a ScheduleDay and when it should be applied..
     /// </summary>
     [DataContract(Name = "ScheduleRuleAbridged")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class ScheduleRuleAbridged : DatedBaseModel, IEquatable<ScheduleRuleAbridged>, IValidatableObject
     {
         /// <summary>

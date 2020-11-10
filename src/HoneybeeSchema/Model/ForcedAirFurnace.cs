@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Forced Air Furnace HVAC system. Intended for spaces only requiring heating.
     /// </summary>
     [DataContract(Name = "ForcedAirFurnace")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class ForcedAirFurnace : IDdEnergyBaseModel, IEquatable<ForcedAirFurnace>, IValidatableObject
     {
         /// <summary>

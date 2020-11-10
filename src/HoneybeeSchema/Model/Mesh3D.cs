@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// A mesh in 3D space.
     /// </summary>
     [DataContract(Name = "Mesh3D")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class Mesh3D : OpenAPIGenBaseModel, IEquatable<Mesh3D>, IValidatableObject
     {
         /// <summary>

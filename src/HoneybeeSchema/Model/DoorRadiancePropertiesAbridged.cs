@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Radiance Properties for Honeybee Door Abridged.
     /// </summary>
     [DataContract(Name = "DoorRadiancePropertiesAbridged")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class DoorRadiancePropertiesAbridged : PropertiesBaseAbridged, IEquatable<DoorRadiancePropertiesAbridged>, IValidatableObject
     {
         /// <summary>

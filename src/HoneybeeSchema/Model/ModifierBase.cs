@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,15 +27,6 @@ namespace HoneybeeSchema
     /// Base class for Radiance Modifiers
     /// </summary>
     [DataContract(Name = "ModifierBase")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(Trans), "Trans")]
-    [JsonSubtypes.KnownSubType(typeof(Metal), "Metal")]
-    [JsonSubtypes.KnownSubType(typeof(BSDF), "BSDF")]
-    [JsonSubtypes.KnownSubType(typeof(Light), "Light")]
-    [JsonSubtypes.KnownSubType(typeof(Mirror), "Mirror")]
-    [JsonSubtypes.KnownSubType(typeof(Glass), "Glass")]
-    [JsonSubtypes.KnownSubType(typeof(Plastic), "Plastic")]
-    [JsonSubtypes.KnownSubType(typeof(Glow), "Glow")]
     public partial class ModifierBase : IDdRadianceBaseModel, IEquatable<ModifierBase>, IValidatableObject
     {
         /// <summary>

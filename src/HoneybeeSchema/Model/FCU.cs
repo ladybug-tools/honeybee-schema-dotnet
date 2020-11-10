@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Fan Coil Unit (FCU) heating/cooling system (with no ventilation).
     /// </summary>
     [DataContract(Name = "FCU")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class FCU : IDdEnergyBaseModel, IEquatable<FCU>, IValidatableObject
     {
         /// <summary>

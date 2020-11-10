@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,12 +27,6 @@ namespace HoneybeeSchema
     /// Base class for the abridged modifier sets assigned to Faces.
     /// </summary>
     [DataContract(Name = "BaseModifierSetAbridged")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(RoofCeilingModifierSetAbridged), "RoofCeilingModifierSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(WallModifierSetAbridged), "WallModifierSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(FloorModifierSetAbridged), "FloorModifierSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(DoorModifierSetAbridged), "DoorModifierSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(ShadeModifierSetAbridged), "ShadeModifierSetAbridged")]
     public partial class BaseModifierSetAbridged : OpenAPIGenBaseModel, IEquatable<BaseModifierSetAbridged>, IValidatableObject
     {
         /// <summary>

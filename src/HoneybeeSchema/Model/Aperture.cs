@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [DataContract(Name = "Aperture")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class Aperture : IDdBaseModel, IEquatable<Aperture>, IValidatableObject
     {
         /// <summary>

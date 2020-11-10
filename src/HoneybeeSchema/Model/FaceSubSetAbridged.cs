@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,10 +27,6 @@ namespace HoneybeeSchema
     /// A set of constructions for wall, floor, or roof assemblies.
     /// </summary>
     [DataContract(Name = "_FaceSubSetAbridged")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(WallConstructionSetAbridged), "WallConstructionSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(FloorConstructionSetAbridged), "FloorConstructionSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(RoofCeilingConstructionSetAbridged), "RoofCeilingConstructionSetAbridged")]
     public partial class FaceSubSetAbridged : OpenAPIGenBaseModel, IEquatable<FaceSubSetAbridged>, IValidatableObject
     {
         /// <summary>

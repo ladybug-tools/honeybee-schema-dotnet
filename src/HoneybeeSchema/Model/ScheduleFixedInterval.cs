@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Used to specify a start date and a list of values for a period of analysis.
     /// </summary>
     [DataContract(Name = "ScheduleFixedInterval")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class ScheduleFixedInterval : IDdEnergyBaseModel, IEquatable<ScheduleFixedInterval>, IValidatableObject
     {
         /// <summary>

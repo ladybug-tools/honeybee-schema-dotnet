@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Radiance BSDF (Bidirectional Scattering Distribution Function) material.
     /// </summary>
     [DataContract(Name = "BSDF")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class BSDF : ModifierBase, IEquatable<BSDF>, IValidatableObject
     {
         /// <summary>

@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Window blind material consisting of flat, equally-spaced slats.
     /// </summary>
     [DataContract(Name = "EnergyWindowMaterialBlind")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class EnergyWindowMaterialBlind : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialBlind>, IValidatableObject
     {
         /// <summary>

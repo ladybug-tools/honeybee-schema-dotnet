@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [DataContract(Name = "Model")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class Model : IDdBaseModel, IEquatable<Model>, IValidatableObject
     {
         /// <summary>
@@ -37,9 +35,6 @@ namespace HoneybeeSchema
         /// <value>Text indicating the units in which the model geometry exists. This is used to scale the geometry to the correct units for simulation engines like EnergyPlus, which requires all geometry be in meters.</value>
         [DataMember(Name="units", EmitDefaultValue=false)]
         public Units Units { get; set; } = Units.Meters;
-
-        [DataMember(Name="version", EmitDefaultValue=false)]
-        public string Version { get; set; }= "1.39.8";
         /// <summary>
         /// Initializes a new instance of the <see cref="Model" /> class.
         /// </summary>
@@ -48,13 +43,13 @@ namespace HoneybeeSchema
         { 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.39.8";
         }
         
         /// <summary>
         /// Initializes a new instance of the <see cref="Model" /> class.
         /// </summary>
         /// <param name="properties">Extension properties for particular simulation engines (Radiance, EnergyPlus). (required).</param>
+        /// <param name="version">Text string for the current version of the schema. (default to &quot;1.39.8&quot;).</param>
         /// <param name="rooms">A list of Rooms in the model..</param>
         /// <param name="orphanedFaces">A list of Faces in the model that lack a parent Room. Note that orphaned Faces are not acceptable for Models that are to be exported for energy simulation..</param>
         /// <param name="orphanedShades">A list of Shades in the model that lack a parent..</param>
@@ -69,11 +64,13 @@ namespace HoneybeeSchema
         public Model
         (
             string identifier, ModelProperties properties, // Required parameters
-            string displayName= default, Object userData= default, List<Room> rooms= default, List<Face> orphanedFaces= default, List<Shade> orphanedShades= default, List<Aperture> orphanedApertures= default, List<Door> orphanedDoors= default, Units units= Units.Meters, double tolerance = 0.01D, double angleTolerance = 1.0D// Optional parameters
+            string displayName= default, Object userData= default, string version = "1.39.8", List<Room> rooms= default, List<Face> orphanedFaces= default, List<Shade> orphanedShades= default, List<Aperture> orphanedApertures= default, List<Door> orphanedDoors= default, Units units= Units.Meters, double tolerance = 0.01D, double angleTolerance = 1.0D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             // to ensure "properties" is required (not null)
             this.Properties = properties ?? throw new ArgumentNullException("properties is a required property for Model and cannot be null");
+            // use default value if no "version" provided
+            this.Version = version ?? "1.39.8";
             this.Rooms = rooms;
             this.OrphanedFaces = orphanedFaces;
             this.OrphanedShades = orphanedShades;
@@ -85,7 +82,6 @@ namespace HoneybeeSchema
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.39.8";
         }
 
         /// <summary>
@@ -95,6 +91,13 @@ namespace HoneybeeSchema
         [DataMember(Name = "properties", IsRequired = true, EmitDefaultValue = false)]
         
         public ModelProperties Properties { get; set; } 
+        /// <summary>
+        /// Text string for the current version of the schema.
+        /// </summary>
+        /// <value>Text string for the current version of the schema.</value>
+        [DataMember(Name = "version", EmitDefaultValue = true)]
+        
+        public string Version { get; set; }  = "1.39.8";
         /// <summary>
         /// A list of Rooms in the model.
         /// </summary>

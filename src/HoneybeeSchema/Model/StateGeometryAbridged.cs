@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// A single planar geometry that can be assigned to Radiance states.
     /// </summary>
     [DataContract(Name = "StateGeometryAbridged")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class StateGeometryAbridged : IDdRadianceBaseModel, IEquatable<StateGeometryAbridged>, IValidatableObject
     {
         /// <summary>

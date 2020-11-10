@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Opaque material representing a layer within an opaque construction.
     /// </summary>
     [DataContract(Name = "EnergyMaterial")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class EnergyMaterial : IDdEnergyBaseModel, IEquatable<EnergyMaterial>, IValidatableObject
     {
         /// <summary>

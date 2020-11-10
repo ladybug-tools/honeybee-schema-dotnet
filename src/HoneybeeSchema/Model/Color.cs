@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// A mesh in 3D space.
     /// </summary>
     [DataContract(Name = "Color")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class Color : OpenAPIGenBaseModel, IEquatable<Color>, IValidatableObject
     {
         /// <summary>

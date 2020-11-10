@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// A set of constructions for aperture assemblies.
     /// </summary>
     [DataContract(Name = "ApertureConstructionSetAbridged")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class ApertureConstructionSetAbridged : OpenAPIGenBaseModel, IEquatable<ApertureConstructionSetAbridged>, IValidatableObject
     {
         /// <summary>

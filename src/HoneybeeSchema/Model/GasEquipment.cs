@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [DataContract(Name = "GasEquipment")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class GasEquipment : IDdEnergyBaseModel, IEquatable<GasEquipment>, IValidatableObject
     {
         /// <summary>

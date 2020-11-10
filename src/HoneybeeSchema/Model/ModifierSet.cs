@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Set containing all radiance modifiers needed to create a radiance model.
     /// </summary>
     [DataContract(Name = "ModifierSet")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class ModifierSet : IDdRadianceBaseModel, IEquatable<ModifierSet>, IValidatableObject
     {
         /// <summary>

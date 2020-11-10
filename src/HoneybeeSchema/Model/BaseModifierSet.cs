@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Base class for the modifier sets assigned to Faces.
     /// </summary>
     [DataContract(Name = "BaseModifierSet")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class BaseModifierSet : OpenAPIGenBaseModel, IEquatable<BaseModifierSet>, IValidatableObject
     {
         /// <summary>

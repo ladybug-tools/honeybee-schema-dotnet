@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,62 +27,6 @@ namespace HoneybeeSchema
     /// OpenAPIGenBaseModel
     /// </summary>
     [DataContract(Name = "_OpenAPIGenBaseModel")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
-    [JsonSubtypes.KnownSubType(typeof(Ground), "Ground")]
-    [JsonSubtypes.KnownSubType(typeof(Mesh3D), "Mesh3D")]
-    [JsonSubtypes.KnownSubType(typeof(Autocalculate), "Autocalculate")]
-    [JsonSubtypes.KnownSubType(typeof(BaseModifierSetAbridged), "BaseModifierSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(RoomPropertiesAbridged), "RoomPropertiesAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(ShadeEnergyPropertiesAbridged), "ShadeEnergyPropertiesAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(Surface), "Surface")]
-    [JsonSubtypes.KnownSubType(typeof(RadianceShadeStateAbridged), "RadianceShadeStateAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(AFNCrack), "AFNCrack")]
-    [JsonSubtypes.KnownSubType(typeof(FloorConstructionSet), "FloorConstructionSet")]
-    [JsonSubtypes.KnownSubType(typeof(RoomRadiancePropertiesAbridged), "RoomRadiancePropertiesAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(ApertureEnergyPropertiesAbridged), "ApertureEnergyPropertiesAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(FaceSubSetAbridged), "_FaceSubSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(FloorModifierSet), "FloorModifierSet")]
-    [JsonSubtypes.KnownSubType(typeof(VentilationOpening), "VentilationOpening")]
-    [JsonSubtypes.KnownSubType(typeof(ApertureModifierSet), "ApertureModifierSet")]
-    [JsonSubtypes.KnownSubType(typeof(Plane), "Plane")]
-    [JsonSubtypes.KnownSubType(typeof(Color), "Color")]
-    [JsonSubtypes.KnownSubType(typeof(BaseModifierSet), "BaseModifierSet")]
-    [JsonSubtypes.KnownSubType(typeof(DoorEnergyPropertiesAbridged), "DoorEnergyPropertiesAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(Sensor), "Sensor")]
-    [JsonSubtypes.KnownSubType(typeof(VentilationSimulationControl), "VentilationSimulationControl")]
-    [JsonSubtypes.KnownSubType(typeof(DoorConstructionSetAbridged), "DoorConstructionSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(Adiabatic), "Adiabatic")]
-    [JsonSubtypes.KnownSubType(typeof(DatedBaseModel), "DatedBaseModel")]
-    [JsonSubtypes.KnownSubType(typeof(WallConstructionSet), "WallConstructionSet")]
-    [JsonSubtypes.KnownSubType(typeof(ApertureConstructionSetAbridged), "ApertureConstructionSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(ApertureModifierSetAbridged), "ApertureModifierSetAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(RoofCeilingConstructionSet), "RoofCeilingConstructionSet")]
-    [JsonSubtypes.KnownSubType(typeof(DoorPropertiesAbridged), "DoorPropertiesAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(ShadePropertiesAbridged), "ShadePropertiesAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(Outdoors), "Outdoors")]
-    [JsonSubtypes.KnownSubType(typeof(FaceEnergyPropertiesAbridged), "FaceEnergyPropertiesAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(FacePropertiesAbridged), "FacePropertiesAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(Face3D), "Face3D")]
-    [JsonSubtypes.KnownSubType(typeof(IDdBaseModel), "IDdBaseModel")]
-    [JsonSubtypes.KnownSubType(typeof(AperturePropertiesAbridged), "AperturePropertiesAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(DoorConstructionSet), "DoorConstructionSet")]
-    [JsonSubtypes.KnownSubType(typeof(IDdRadianceBaseModel), "IDdRadianceBaseModel")]
-    [JsonSubtypes.KnownSubType(typeof(ModelEnergyProperties), "ModelEnergyProperties")]
-    [JsonSubtypes.KnownSubType(typeof(ModelProperties), "ModelProperties")]
-    [JsonSubtypes.KnownSubType(typeof(Void), "Void")]
-    [JsonSubtypes.KnownSubType(typeof(DoorModifierSet), "DoorModifierSet")]
-    [JsonSubtypes.KnownSubType(typeof(IDdEnergyBaseModel), "IDdEnergyBaseModel")]
-    [JsonSubtypes.KnownSubType(typeof(ShadeModifierSet), "ShadeModifierSet")]
-    [JsonSubtypes.KnownSubType(typeof(NoLimit), "NoLimit")]
-    [JsonSubtypes.KnownSubType(typeof(ApertureConstructionSet), "ApertureConstructionSet")]
-    [JsonSubtypes.KnownSubType(typeof(RoofCeilingModifierSet), "RoofCeilingModifierSet")]
-    [JsonSubtypes.KnownSubType(typeof(PropertiesBaseAbridged), "_PropertiesBaseAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(RoomEnergyPropertiesAbridged), "RoomEnergyPropertiesAbridged")]
-    [JsonSubtypes.KnownSubType(typeof(ModelRadianceProperties), "ModelRadianceProperties")]
-    [JsonSubtypes.KnownSubType(typeof(FaceSubSet), "_FaceSubSet")]
-    [JsonSubtypes.KnownSubType(typeof(Autosize), "Autosize")]
-    [JsonSubtypes.KnownSubType(typeof(WallModifierSet), "WallModifierSet")]
-    [JsonSubtypes.KnownSubType(typeof(VentilationControlAbridged), "VentilationControlAbridged")]
     public partial class OpenAPIGenBaseModel : IEquatable<OpenAPIGenBaseModel>, IValidatableObject
     {
         /// <summary>

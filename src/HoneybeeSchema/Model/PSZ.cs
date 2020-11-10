@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Packaged Single-Zone (PSZ) HVAC system.
     /// </summary>
     [DataContract(Name = "PSZ")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class PSZ : IDdEnergyBaseModel, IEquatable<PSZ>, IValidatableObject
     {
         /// <summary>

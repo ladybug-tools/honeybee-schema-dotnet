@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using JsonSubTypes;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -28,7 +27,6 @@ namespace HoneybeeSchema
     /// Used to describe the daylight savings time for the simulation.
     /// </summary>
     [DataContract(Name = "DaylightSavingTime")]
-    [JsonConverter(typeof(JsonSubtypes), "Type")]
     public partial class DaylightSavingTime : DatedBaseModel, IEquatable<DaylightSavingTime>, IValidatableObject
     {
         /// <summary>
