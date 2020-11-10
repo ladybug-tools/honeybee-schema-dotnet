@@ -155,6 +155,14 @@ namespace HoneybeeSchema.Test
             Assert.AreEqual(hvac.HeatingLimit, new Autosize());
         }
 
+        [Test]
+        public void VersionTest()
+        {
+            var version = this.instance.Version;
+            var versions = version.Split(".").Select(_ => int.Parse(_));
+            Assert.IsTrue(versions.Count() == 3);
+        }
+
     }
 
 }
