@@ -66,35 +66,30 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the date for the start of the run period. Must be before the end date.</value>
         [DataMember(Name = "start_date", EmitDefaultValue = false)]
-        
         public List<int> StartDate { get; set; } 
         /// <summary>
         /// A list of two integers for [month, day], representing the date for the end of the run period. Must be after the start date.
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the date for the end of the run period. Must be after the start date.</value>
         [DataMember(Name = "end_date", EmitDefaultValue = false)]
-        
         public List<int> EndDate { get; set; } 
         /// <summary>
         /// A list of lists where each sub-list consists of two integers for [month, day], representing a date which is a holiday within the simulation. If None, no holidays are applied.
         /// </summary>
         /// <value>A list of lists where each sub-list consists of two integers for [month, day], representing a date which is a holiday within the simulation. If None, no holidays are applied.</value>
         [DataMember(Name = "holidays", EmitDefaultValue = false)]
-        
         public List<List<int>> Holidays { get; set; } 
         /// <summary>
         /// A DaylightSavingTime to dictate the start and end dates of daylight saving time. If None, no daylight saving time is applied to the simulation.
         /// </summary>
         /// <value>A DaylightSavingTime to dictate the start and end dates of daylight saving time. If None, no daylight saving time is applied to the simulation.</value>
         [DataMember(Name = "daylight_saving_time", EmitDefaultValue = false)]
-        
         public DaylightSavingTime DaylightSavingTime { get; set; } 
         /// <summary>
         /// Boolean noting whether the simulation will be run for a leap year.
         /// </summary>
         /// <value>Boolean noting whether the simulation will be run for a leap year.</value>
         [DataMember(Name = "leap_year", EmitDefaultValue = true)]
-        
         public bool LeapYear { get; set; }  = false;
 
         /// <summary>

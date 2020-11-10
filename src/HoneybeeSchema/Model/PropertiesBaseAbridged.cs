@@ -52,14 +52,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A string for a Honeybee Radiance Modifier (default: None).</value>
         [DataMember(Name = "modifier", EmitDefaultValue = false)]
-        
         public string Modifier { get; set; } 
         /// <summary>
         /// A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).
         /// </summary>
         /// <value>A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).</value>
         [DataMember(Name = "modifier_blk", EmitDefaultValue = false)]
-        
         public string ModifierBlk { get; set; } 
 
         /// <summary>

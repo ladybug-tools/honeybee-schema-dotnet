@@ -52,14 +52,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.</value>
         [DataMember(Name = "exterior_modifier", EmitDefaultValue = false)]
-        
         public string ExteriorModifier { get; set; } 
         /// <summary>
         /// Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors.
         /// </summary>
         /// <value>Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors.</value>
         [DataMember(Name = "interior_modifier", EmitDefaultValue = false)]
-        
         public string InteriorModifier { get; set; } 
 
         /// <summary>

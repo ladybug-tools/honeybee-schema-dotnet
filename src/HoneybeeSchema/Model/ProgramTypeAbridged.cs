@@ -74,49 +74,42 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>People to describe the occupancy of the program. If None, no occupancy will be assumed for the program.</value>
         [DataMember(Name = "people", EmitDefaultValue = false)]
-        
         public PeopleAbridged People { get; set; } 
         /// <summary>
         /// Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program.
         /// </summary>
         /// <value>Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program.</value>
         [DataMember(Name = "lighting", EmitDefaultValue = false)]
-        
         public LightingAbridged Lighting { get; set; } 
         /// <summary>
         /// ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed.
         /// </summary>
         /// <value>ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed.</value>
         [DataMember(Name = "electric_equipment", EmitDefaultValue = false)]
-        
         public ElectricEquipmentAbridged ElectricEquipment { get; set; } 
         /// <summary>
         /// GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed.
         /// </summary>
         /// <value>GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed.</value>
         [DataMember(Name = "gas_equipment", EmitDefaultValue = false)]
-        
         public GasEquipmentAbridged GasEquipment { get; set; } 
         /// <summary>
         /// Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program.
         /// </summary>
         /// <value>Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program.</value>
         [DataMember(Name = "infiltration", EmitDefaultValue = false)]
-        
         public InfiltrationAbridged Infiltration { get; set; } 
         /// <summary>
         /// Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed.
         /// </summary>
         /// <value>Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed.</value>
         [DataMember(Name = "ventilation", EmitDefaultValue = false)]
-        
         public VentilationAbridged Ventilation { get; set; } 
         /// <summary>
         /// Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.
         /// </summary>
         /// <value>Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.</value>
         [DataMember(Name = "setpoint", EmitDefaultValue = false)]
-        
         public SetpointAbridged Setpoint { get; set; } 
 
         /// <summary>

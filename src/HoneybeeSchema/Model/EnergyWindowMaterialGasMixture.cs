@@ -68,21 +68,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>List of gases in the gas mixture.</value>
         [DataMember(Name = "gas_types", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<GasType> GasTypes { get; set; } 
         /// <summary>
         /// A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1.
         /// </summary>
         /// <value>A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1.</value>
         [DataMember(Name = "gas_fractions", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<double> GasFractions { get; set; } 
         /// <summary>
         /// The thickness of the gas mixture layer in meters.
         /// </summary>
         /// <value>The thickness of the gas mixture layer in meters.</value>
         [DataMember(Name = "thickness", EmitDefaultValue = true)]
-        
         public double Thickness { get; set; }  = 0.0125D;
 
         /// <summary>

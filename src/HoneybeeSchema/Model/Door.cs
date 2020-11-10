@@ -76,41 +76,35 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Planar Face3D for the geometry.</value>
         [DataMember(Name = "geometry", IsRequired = true, EmitDefaultValue = false)]
-        
         public Face3D Geometry { get; set; } 
         /// <summary>
         /// Gets or Sets BoundaryCondition
         /// </summary>
         [DataMember(Name = "boundary_condition", IsRequired = true, EmitDefaultValue = false)]
-        
         public AnyOf<Outdoors,Surface> BoundaryCondition { get; set; } 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
         [DataMember(Name = "properties", IsRequired = true, EmitDefaultValue = false)]
-        
         public DoorPropertiesAbridged Properties { get; set; } 
         /// <summary>
         /// Boolean to note whether this object is a glass door as opposed to an opaque door.
         /// </summary>
         /// <value>Boolean to note whether this object is a glass door as opposed to an opaque door.</value>
         [DataMember(Name = "is_glass", EmitDefaultValue = true)]
-        
         public bool IsGlass { get; set; }  = false;
         /// <summary>
         /// Shades assigned to the interior side of this object.
         /// </summary>
         /// <value>Shades assigned to the interior side of this object.</value>
         [DataMember(Name = "indoor_shades", EmitDefaultValue = false)]
-        
         public List<Shade> IndoorShades { get; set; } 
         /// <summary>
         /// Shades assigned to the exterior side of this object (eg. entryway awning).
         /// </summary>
         /// <value>Shades assigned to the exterior side of this object (eg. entryway awning).</value>
         [DataMember(Name = "outdoor_shades", EmitDefaultValue = false)]
-        
         public List<Shade> OutdoorShades { get; set; } 
 
         /// <summary>

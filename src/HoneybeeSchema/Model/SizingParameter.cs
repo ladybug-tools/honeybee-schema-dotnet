@@ -54,21 +54,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A list of DesignDays that represent the criteria for which the HVAC systems will be sized.</value>
         [DataMember(Name = "design_days", EmitDefaultValue = false)]
-        
         public List<DesignDay> DesignDays { get; set; } 
         /// <summary>
         /// A number that will be multiplied by the peak heating load for each zone in order to size the heating system.
         /// </summary>
         /// <value>A number that will be multiplied by the peak heating load for each zone in order to size the heating system.</value>
         [DataMember(Name = "heating_factor", EmitDefaultValue = true)]
-        
         public double HeatingFactor { get; set; }  = 1.25D;
         /// <summary>
         /// A number that will be multiplied by the peak cooling load for each zone in order to size the heating system.
         /// </summary>
         /// <value>A number that will be multiplied by the peak cooling load for each zone in order to size the heating system.</value>
         [DataMember(Name = "cooling_factor", EmitDefaultValue = true)]
-        
         public double CoolingFactor { get; set; }  = 1.15D;
 
         /// <summary>

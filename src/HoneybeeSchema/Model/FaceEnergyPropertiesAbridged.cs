@@ -52,14 +52,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Identifier of an OpaqueConstruction for the Face. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.</value>
         [DataMember(Name = "construction", EmitDefaultValue = false)]
-        
         public string Construction { get; set; } 
         /// <summary>
         /// An optional AFNCrack to specify airflow through a surface crack used by the AirflowNetwork.
         /// </summary>
         /// <value>An optional AFNCrack to specify airflow through a surface crack used by the AirflowNetwork.</value>
         [DataMember(Name = "vent_crack", EmitDefaultValue = false)]
-        
         public AFNCrack VentCrack { get; set; } 
 
         /// <summary>

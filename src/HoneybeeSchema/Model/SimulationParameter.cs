@@ -70,49 +70,42 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A SimulationOutput that lists the desired outputs from the simulation and the format in which to report them.</value>
         [DataMember(Name = "output", EmitDefaultValue = false)]
-        
         public SimulationOutput Output { get; set; } 
         /// <summary>
         /// A RunPeriod to describe the time period over which to run the simulation.
         /// </summary>
         /// <value>A RunPeriod to describe the time period over which to run the simulation.</value>
         [DataMember(Name = "run_period", EmitDefaultValue = false)]
-        
         public RunPeriod RunPeriod { get; set; } 
         /// <summary>
         /// An integer for the number of timesteps per hour at which the energy calculation will be run.
         /// </summary>
         /// <value>An integer for the number of timesteps per hour at which the energy calculation will be run.</value>
         [DataMember(Name = "timestep", EmitDefaultValue = true)]
-        
         public int Timestep { get; set; }  = 6;
         /// <summary>
         /// A SimulationControl object that describes which types of calculations to run.
         /// </summary>
         /// <value>A SimulationControl object that describes which types of calculations to run.</value>
         [DataMember(Name = "simulation_control", EmitDefaultValue = false)]
-        
         public SimulationControl SimulationControl { get; set; } 
         /// <summary>
         /// A ShadowCalculation object describing settings for the EnergyPlus Shadow Calculation.
         /// </summary>
         /// <value>A ShadowCalculation object describing settings for the EnergyPlus Shadow Calculation.</value>
         [DataMember(Name = "shadow_calculation", EmitDefaultValue = false)]
-        
         public ShadowCalculation ShadowCalculation { get; set; } 
         /// <summary>
         /// A SizingParameter object with criteria for sizing the heating and cooling system.
         /// </summary>
         /// <value>A SizingParameter object with criteria for sizing the heating and cooling system.</value>
         [DataMember(Name = "sizing_parameter", EmitDefaultValue = false)]
-        
         public SizingParameter SizingParameter { get; set; } 
         /// <summary>
         /// A number between -360 and 360 for the north direction in degrees.This is the counterclockwise difference between the North and the positive Y-axis. 90 is West and 270 is East. Note that this is different than the convention used in EnergyPlus, which uses clockwise difference instead of counterclockwise difference.
         /// </summary>
         /// <value>A number between -360 and 360 for the north direction in degrees.This is the counterclockwise difference between the North and the positive Y-axis. 90 is West and 270 is East. Note that this is different than the convention used in EnergyPlus, which uses clockwise difference instead of counterclockwise difference.</value>
         [DataMember(Name = "north_angle", EmitDefaultValue = true)]
-        
         public double NorthAngle { get; set; }  = 0D;
 
         /// <summary>

@@ -64,14 +64,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Position of sensor in space as an array of (x, y, z) values.</value>
         [DataMember(Name = "pos", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<double> Pos { get; set; } 
         /// <summary>
         /// Direction of sensor as an array of (x, y, z) values.
         /// </summary>
         /// <value>Direction of sensor as an array of (x, y, z) values.</value>
         [DataMember(Name = "dir", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<double> Dir { get; set; } 
 
         /// <summary>

@@ -64,7 +64,6 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>List of opaque materials. The order of the materials is from outside to inside.</value>
         [DataMember(Name = "materials", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<AnyOf<EnergyMaterial,EnergyMaterialNoMass>> Materials { get; set; } 
 
         /// <summary>

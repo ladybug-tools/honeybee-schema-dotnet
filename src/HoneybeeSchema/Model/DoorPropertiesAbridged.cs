@@ -51,13 +51,11 @@ namespace HoneybeeSchema
         /// Gets or Sets Energy
         /// </summary>
         [DataMember(Name = "energy", EmitDefaultValue = false)]
-        
         public DoorEnergyPropertiesAbridged Energy { get; set; } 
         /// <summary>
         /// Gets or Sets Radiance
         /// </summary>
         [DataMember(Name = "radiance", EmitDefaultValue = false)]
-        
         public DoorRadiancePropertiesAbridged Radiance { get; set; } 
 
         /// <summary>

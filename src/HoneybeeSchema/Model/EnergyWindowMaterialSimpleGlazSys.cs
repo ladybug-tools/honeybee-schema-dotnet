@@ -66,21 +66,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Used to describe the value for window system U-Factor, or overall heat transfer coefficient in W/(m2-K).</value>
         [DataMember(Name = "u_factor", IsRequired = true, EmitDefaultValue = false)]
-        
         public double UFactor { get; set; } 
         /// <summary>
         /// Unitless  quantity describing Solar Heat Gain Coefficient for normal incidence and vertical orientation.
         /// </summary>
         /// <value>Unitless  quantity describing Solar Heat Gain Coefficient for normal incidence and vertical orientation.</value>
         [DataMember(Name = "shgc", IsRequired = true, EmitDefaultValue = false)]
-        
         public double Shgc { get; set; } 
         /// <summary>
         /// The fraction of visible light falling on the window that makes it through the glass at normal incidence.
         /// </summary>
         /// <value>The fraction of visible light falling on the window that makes it through the glass at normal incidence.</value>
         [DataMember(Name = "vt", EmitDefaultValue = true)]
-        
         public double Vt { get; set; }  = 0.54D;
 
         /// <summary>

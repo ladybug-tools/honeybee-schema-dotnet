@@ -72,42 +72,36 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Material modifier (default: Void).</value>
         [DataMember(Name = "modifier", EmitDefaultValue = false)]
-        
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> Modifier { get; set; } 
         /// <summary>
         /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).
         /// </summary>
         /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).</value>
         [DataMember(Name = "dependencies", EmitDefaultValue = false)]
-        
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Dependencies { get; set; } 
         /// <summary>
         /// A value between 0 and 1 for the red channel of the modifier (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the red channel of the modifier (default: 0).</value>
         [DataMember(Name = "r_emittance", EmitDefaultValue = true)]
-        
         public double REmittance { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the green channel of the modifier (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the green channel of the modifier (default: 0).</value>
         [DataMember(Name = "g_emittance", EmitDefaultValue = true)]
-        
         public double GEmittance { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the blue channel of the modifier (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the blue channel of the modifier (default: 0).</value>
         [DataMember(Name = "b_emittance", EmitDefaultValue = true)]
-        
         public double BEmittance { get; set; }  = 0.0D;
         /// <summary>
         /// Maximum radius for shadow testing (default: 0). Surfaces with zero will never be tested for zero, although it may participate in interreflection calculation. Negative values will never contribute to scene illumination.
         /// </summary>
         /// <value>Maximum radius for shadow testing (default: 0). Surfaces with zero will never be tested for zero, although it may participate in interreflection calculation. Negative values will never contribute to scene illumination.</value>
         [DataMember(Name = "max_radius", EmitDefaultValue = true)]
-        
         public double MaxRadius { get; set; }  = 0D;
 
         /// <summary>

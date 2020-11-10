@@ -62,14 +62,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>The maximum dry bulb temperature on the design day [C].</value>
         [DataMember(Name = "dry_bulb_max", IsRequired = true, EmitDefaultValue = false)]
-        
         public double DryBulbMax { get; set; } 
         /// <summary>
         /// The difference between min and max temperatures on the design day [C].
         /// </summary>
         /// <value>The difference between min and max temperatures on the design day [C].</value>
         [DataMember(Name = "dry_bulb_range", IsRequired = true, EmitDefaultValue = false)]
-        
         public double DryBulbRange { get; set; } 
 
         /// <summary>

@@ -69,7 +69,6 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Thickness of the gas layer in meters. Default value is 0.0125.</value>
         [DataMember(Name = "thickness", EmitDefaultValue = true)]
-        
         public double Thickness { get; set; }  = 0.0125D;
 
         /// <summary>

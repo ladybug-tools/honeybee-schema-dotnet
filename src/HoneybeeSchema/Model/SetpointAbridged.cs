@@ -70,28 +70,24 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Identifier of the schedule for the cooling setpoint. The values in this schedule should be temperature in [C].</value>
         [DataMember(Name = "cooling_schedule", IsRequired = true, EmitDefaultValue = false)]
-        
         public string CoolingSchedule { get; set; } 
         /// <summary>
         /// Identifier of the schedule for the heating setpoint. The values in this schedule should be temperature in [C].
         /// </summary>
         /// <value>Identifier of the schedule for the heating setpoint. The values in this schedule should be temperature in [C].</value>
         [DataMember(Name = "heating_schedule", IsRequired = true, EmitDefaultValue = false)]
-        
         public string HeatingSchedule { get; set; } 
         /// <summary>
         /// Identifier of the schedule for the humidification setpoint. The values in this schedule should be in [%].
         /// </summary>
         /// <value>Identifier of the schedule for the humidification setpoint. The values in this schedule should be in [%].</value>
         [DataMember(Name = "humidifying_schedule", EmitDefaultValue = false)]
-        
         public string HumidifyingSchedule { get; set; } 
         /// <summary>
         /// Identifier of the schedule for the dehumidification setpoint. The values in this schedule should be in [%].
         /// </summary>
         /// <value>Identifier of the schedule for the dehumidification setpoint. The values in this schedule should be in [%].</value>
         [DataMember(Name = "dehumidifying_schedule", EmitDefaultValue = false)]
-        
         public string DehumidifyingSchedule { get; set; } 
 
         /// <summary>

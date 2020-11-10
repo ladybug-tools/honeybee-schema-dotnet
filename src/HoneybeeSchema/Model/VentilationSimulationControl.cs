@@ -74,35 +74,30 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Reference temperature measurement in Celsius under which the surface crack data were obtained.</value>
         [DataMember(Name = "reference_temperature", EmitDefaultValue = true)]
-        
         public double ReferenceTemperature { get; set; }  = 20D;
         /// <summary>
         /// Reference barometric pressure measurement in Pascals under which the surface crack data were obtained.
         /// </summary>
         /// <value>Reference barometric pressure measurement in Pascals under which the surface crack data were obtained.</value>
         [DataMember(Name = "reference_pressure", EmitDefaultValue = true)]
-        
         public double ReferencePressure { get; set; }  = 101325D;
         /// <summary>
         /// Reference humidity ratio measurement in kgWater/kgDryAir under which the surface crack data were obtained.
         /// </summary>
         /// <value>Reference humidity ratio measurement in kgWater/kgDryAir under which the surface crack data were obtained.</value>
         [DataMember(Name = "reference_humidity_ratio", EmitDefaultValue = true)]
-        
         public double ReferenceHumidityRatio { get; set; }  = 0D;
         /// <summary>
         /// The clockwise rotation in degrees from true North of the long axis of the building. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.
         /// </summary>
         /// <value>The clockwise rotation in degrees from true North of the long axis of the building. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.</value>
         [DataMember(Name = "long_axis_angle", EmitDefaultValue = true)]
-        
         public double LongAxisAngle { get; set; }  = 0D;
         /// <summary>
         /// Aspect ratio of a rectangular footprint, defined as the ratio of length of the short axis divided by the length of the long axis. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.
         /// </summary>
         /// <value>Aspect ratio of a rectangular footprint, defined as the ratio of length of the short axis divided by the length of the long axis. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.</value>
         [DataMember(Name = "aspect_ratio", EmitDefaultValue = true)]
-        
         public double AspectRatio { get; set; }  = 1D;
 
         /// <summary>

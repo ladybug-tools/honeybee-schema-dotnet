@@ -52,14 +52,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Identifier of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.</value>
         [DataMember(Name = "construction", EmitDefaultValue = false)]
-        
         public string Construction { get; set; } 
         /// <summary>
         /// An optional VentilationOpening to specify the operable portion of the Aperture.
         /// </summary>
         /// <value>An optional VentilationOpening to specify the operable portion of the Aperture.</value>
         [DataMember(Name = "vent_opening", EmitDefaultValue = false)]
-        
         public VentilationOpening VentOpening { get; set; } 
 
         /// <summary>

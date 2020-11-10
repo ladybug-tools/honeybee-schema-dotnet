@@ -70,35 +70,30 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room.</value>
         [DataMember(Name = "flow_per_person", EmitDefaultValue = true)]
-        
         public double FlowPerPerson { get; set; }  = 0D;
         /// <summary>
         /// Intensity of ventilation in [m3/s per m2 of floor area].
         /// </summary>
         /// <value>Intensity of ventilation in [m3/s per m2 of floor area].</value>
         [DataMember(Name = "flow_per_area", EmitDefaultValue = true)]
-        
         public double FlowPerArea { get; set; }  = 0D;
         /// <summary>
         /// Intensity of ventilation in air changes per hour (ACH) for the entire Room.
         /// </summary>
         /// <value>Intensity of ventilation in air changes per hour (ACH) for the entire Room.</value>
         [DataMember(Name = "air_changes_per_hour", EmitDefaultValue = true)]
-        
         public double AirChangesPerHour { get; set; }  = 0D;
         /// <summary>
         /// Intensity of ventilation in m3/s for the entire Room.
         /// </summary>
         /// <value>Intensity of ventilation in m3/s for the entire Room.</value>
         [DataMember(Name = "flow_per_zone", EmitDefaultValue = true)]
-        
         public double FlowPerZone { get; set; }  = 0D;
         /// <summary>
         /// Identifier of the schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.
         /// </summary>
         /// <value>Identifier of the schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.</value>
         [DataMember(Name = "schedule", EmitDefaultValue = false)]
-        
         public string Schedule { get; set; } 
 
         /// <summary>

@@ -54,21 +54,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition.</value>
         [DataMember(Name = "interior_construction", EmitDefaultValue = false)]
-        
         public OpaqueConstruction InteriorConstruction { get; set; } 
         /// <summary>
         /// An OpaqueConstruction for walls with an Outdoors boundary condition.
         /// </summary>
         /// <value>An OpaqueConstruction for walls with an Outdoors boundary condition.</value>
         [DataMember(Name = "exterior_construction", EmitDefaultValue = false)]
-        
         public OpaqueConstruction ExteriorConstruction { get; set; } 
         /// <summary>
         /// An OpaqueConstruction for walls with a Ground boundary condition.
         /// </summary>
         /// <value>An OpaqueConstruction for walls with a Ground boundary condition.</value>
         [DataMember(Name = "ground_construction", EmitDefaultValue = false)]
-        
         public OpaqueConstruction GroundConstruction { get; set; } 
 
         /// <summary>

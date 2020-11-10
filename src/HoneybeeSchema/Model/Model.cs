@@ -43,13 +43,13 @@ namespace HoneybeeSchema
         { 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
+            this.Version = "1.39.8";
         }
         
         /// <summary>
         /// Initializes a new instance of the <see cref="Model" /> class.
         /// </summary>
         /// <param name="properties">Extension properties for particular simulation engines (Radiance, EnergyPlus). (required).</param>
-        /// <param name="version">Text string for the current version of the schema. (default to &quot;1.39.8&quot;).</param>
         /// <param name="rooms">A list of Rooms in the model..</param>
         /// <param name="orphanedFaces">A list of Faces in the model that lack a parent Room. Note that orphaned Faces are not acceptable for Models that are to be exported for energy simulation..</param>
         /// <param name="orphanedShades">A list of Shades in the model that lack a parent..</param>
@@ -64,13 +64,11 @@ namespace HoneybeeSchema
         public Model
         (
             string identifier, ModelProperties properties, // Required parameters
-            string displayName= default, Object userData= default, string version = "1.39.8", List<Room> rooms= default, List<Face> orphanedFaces= default, List<Shade> orphanedShades= default, List<Aperture> orphanedApertures= default, List<Door> orphanedDoors= default, Units units= Units.Meters, double tolerance = 0.01D, double angleTolerance = 1.0D// Optional parameters
+            string displayName= default, Object userData= default, List<Room> rooms= default, List<Face> orphanedFaces= default, List<Shade> orphanedShades= default, List<Aperture> orphanedApertures= default, List<Door> orphanedDoors= default, Units units= Units.Meters, double tolerance = 0.01D, double angleTolerance = 1.0D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             // to ensure "properties" is required (not null)
             this.Properties = properties ?? throw new ArgumentNullException("properties is a required property for Model and cannot be null");
-            // use default value if no "version" provided
-            this.Version = version ?? "1.39.8";
             this.Rooms = rooms;
             this.OrphanedFaces = orphanedFaces;
             this.OrphanedShades = orphanedShades;
@@ -82,6 +80,7 @@ namespace HoneybeeSchema
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
+            this.Version = "1.39.8";
         }
 
         /// <summary>
@@ -89,63 +88,48 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
         [DataMember(Name = "properties", IsRequired = true, EmitDefaultValue = false)]
-        
         public ModelProperties Properties { get; set; } 
-        /// <summary>
-        /// Text string for the current version of the schema.
-        /// </summary>
-        /// <value>Text string for the current version of the schema.</value>
-        [DataMember(Name = "version", EmitDefaultValue = true)]
-        
-        public string Version { get; set; }  = "1.39.8";
         /// <summary>
         /// A list of Rooms in the model.
         /// </summary>
         /// <value>A list of Rooms in the model.</value>
         [DataMember(Name = "rooms", EmitDefaultValue = false)]
-        
         public List<Room> Rooms { get; set; } 
         /// <summary>
         /// A list of Faces in the model that lack a parent Room. Note that orphaned Faces are not acceptable for Models that are to be exported for energy simulation.
         /// </summary>
         /// <value>A list of Faces in the model that lack a parent Room. Note that orphaned Faces are not acceptable for Models that are to be exported for energy simulation.</value>
         [DataMember(Name = "orphaned_faces", EmitDefaultValue = false)]
-        
         public List<Face> OrphanedFaces { get; set; } 
         /// <summary>
         /// A list of Shades in the model that lack a parent.
         /// </summary>
         /// <value>A list of Shades in the model that lack a parent.</value>
         [DataMember(Name = "orphaned_shades", EmitDefaultValue = false)]
-        
         public List<Shade> OrphanedShades { get; set; } 
         /// <summary>
         /// A list of Apertures in the model that lack a parent Face. Note that orphaned Apertures are not acceptable for Models that are to be exported for energy simulation.
         /// </summary>
         /// <value>A list of Apertures in the model that lack a parent Face. Note that orphaned Apertures are not acceptable for Models that are to be exported for energy simulation.</value>
         [DataMember(Name = "orphaned_apertures", EmitDefaultValue = false)]
-        
         public List<Aperture> OrphanedApertures { get; set; } 
         /// <summary>
         /// A list of Doors in the model that lack a parent Face. Note that orphaned Doors are not acceptable for Models that are to be exported for energy simulation.
         /// </summary>
         /// <value>A list of Doors in the model that lack a parent Face. Note that orphaned Doors are not acceptable for Models that are to be exported for energy simulation.</value>
         [DataMember(Name = "orphaned_doors", EmitDefaultValue = false)]
-        
         public List<Door> OrphanedDoors { get; set; } 
         /// <summary>
         /// The maximum difference between x, y, and z values at which vertices are considered equivalent. This value should be in the Model units and it is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a Model. The default of 0.01 is suitable for models in meters.
         /// </summary>
         /// <value>The maximum difference between x, y, and z values at which vertices are considered equivalent. This value should be in the Model units and it is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a Model. The default of 0.01 is suitable for models in meters.</value>
         [DataMember(Name = "tolerance", EmitDefaultValue = true)]
-        
         public double Tolerance { get; set; }  = 0.01D;
         /// <summary>
         /// The max angle difference in degrees that vertices are allowed to differ from one another in order to consider them colinear. This value is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a given Model.
         /// </summary>
         /// <value>The max angle difference in degrees that vertices are allowed to differ from one another in order to consider them colinear. This value is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a given Model.</value>
         [DataMember(Name = "angle_tolerance", EmitDefaultValue = true)]
-        
         public double AngleTolerance { get; set; }  = 1.0D;
 
         /// <summary>

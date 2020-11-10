@@ -74,49 +74,42 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A WallConstructionSetAbridged object for this ConstructionSet.</value>
         [DataMember(Name = "wall_set", EmitDefaultValue = false)]
-        
         public WallConstructionSetAbridged WallSet { get; set; } 
         /// <summary>
         /// A FloorConstructionSetAbridged object for this ConstructionSet.
         /// </summary>
         /// <value>A FloorConstructionSetAbridged object for this ConstructionSet.</value>
         [DataMember(Name = "floor_set", EmitDefaultValue = false)]
-        
         public FloorConstructionSetAbridged FloorSet { get; set; } 
         /// <summary>
         /// A RoofCeilingConstructionSetAbridged object for this ConstructionSet.
         /// </summary>
         /// <value>A RoofCeilingConstructionSetAbridged object for this ConstructionSet.</value>
         [DataMember(Name = "roof_ceiling_set", EmitDefaultValue = false)]
-        
         public RoofCeilingConstructionSetAbridged RoofCeilingSet { get; set; } 
         /// <summary>
         /// A ApertureConstructionSetAbridged object for this ConstructionSet.
         /// </summary>
         /// <value>A ApertureConstructionSetAbridged object for this ConstructionSet.</value>
         [DataMember(Name = "aperture_set", EmitDefaultValue = false)]
-        
         public ApertureConstructionSetAbridged ApertureSet { get; set; } 
         /// <summary>
         /// A DoorConstructionSetAbridged object for this ConstructionSet.
         /// </summary>
         /// <value>A DoorConstructionSetAbridged object for this ConstructionSet.</value>
         [DataMember(Name = "door_set", EmitDefaultValue = false)]
-        
         public DoorConstructionSetAbridged DoorSet { get; set; } 
         /// <summary>
         /// The identifier of a ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned.
         /// </summary>
         /// <value>The identifier of a ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned.</value>
         [DataMember(Name = "shade_construction", EmitDefaultValue = false)]
-        
         public string ShadeConstruction { get; set; } 
         /// <summary>
         /// The identifier of an AirBoundaryConstruction to set the properties of Faces with an AirBoundary type.
         /// </summary>
         /// <value>The identifier of an AirBoundaryConstruction to set the properties of Faces with an AirBoundary type.</value>
         [DataMember(Name = "air_boundary_construction", EmitDefaultValue = false)]
-        
         public string AirBoundaryConstruction { get; set; } 
 
         /// <summary>

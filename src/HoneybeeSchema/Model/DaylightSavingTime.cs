@@ -52,14 +52,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).</value>
         [DataMember(Name = "start_date", EmitDefaultValue = false)]
-        
         public List<int> StartDate { get; set; } 
         /// <summary>
         /// A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).</value>
         [DataMember(Name = "end_date", EmitDefaultValue = false)]
-        
         public List<int> EndDate { get; set; } 
 
         /// <summary>

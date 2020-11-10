@@ -78,14 +78,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Lower limit for the schedule type or NoLimit.</value>
         [DataMember(Name = "lower_limit", EmitDefaultValue = false)]
-        
         public AnyOf<NoLimit,double> LowerLimit { get; set; } 
         /// <summary>
         /// Upper limit for the schedule type or NoLimit.
         /// </summary>
         /// <value>Upper limit for the schedule type or NoLimit.</value>
         [DataMember(Name = "upper_limit", EmitDefaultValue = false)]
-        
         public AnyOf<NoLimit,double> UpperLimit { get; set; } 
 
         /// <summary>

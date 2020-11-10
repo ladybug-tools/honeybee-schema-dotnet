@@ -63,14 +63,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</value>
         [DataMember(Name = "date", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<int> Date { get; set; } 
         /// <summary>
         /// Boolean to indicate whether daylight savings time is active on the design day.
         /// </summary>
         /// <value>Boolean to indicate whether daylight savings time is active on the design day.</value>
         [DataMember(Name = "daylight_savings", EmitDefaultValue = true)]
-        
         public bool DaylightSavings { get; set; }  = false;
 
         /// <summary>

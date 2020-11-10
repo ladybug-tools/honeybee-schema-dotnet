@@ -90,63 +90,54 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>The view position (-vp) as an array of (x, y, z) values.This is the focal point of a perspective view or the center of a parallel projection.</value>
         [DataMember(Name = "position", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<double> Position { get; set; } 
         /// <summary>
         /// The view direction (-vd) as an array of (x, y, z) values.The length of this vector indicates the focal distance as needed by the pixel depth of field (-pd) in rpict.
         /// </summary>
         /// <value>The view direction (-vd) as an array of (x, y, z) values.The length of this vector indicates the focal distance as needed by the pixel depth of field (-pd) in rpict.</value>
         [DataMember(Name = "direction", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<double> Direction { get; set; } 
         /// <summary>
         /// The view up (-vu) vector as an array of (x, y, z) values.
         /// </summary>
         /// <value>The view up (-vu) vector as an array of (x, y, z) values.</value>
         [DataMember(Name = "up_vector", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<double> UpVector { get; set; } 
         /// <summary>
         /// A number for the horizontal field of view in degrees (for all perspective projections including fisheye). For a parallel projection, this is the view width in world coordinates.
         /// </summary>
         /// <value>A number for the horizontal field of view in degrees (for all perspective projections including fisheye). For a parallel projection, this is the view width in world coordinates.</value>
         [DataMember(Name = "h_size", EmitDefaultValue = true)]
-        
         public double HSize { get; set; }  = 60D;
         /// <summary>
         /// A number for the vertical field of view in degrees (for all perspective projections including fisheye). For a parallel projection, this is the view width in world coordinates.
         /// </summary>
         /// <value>A number for the vertical field of view in degrees (for all perspective projections including fisheye). For a parallel projection, this is the view width in world coordinates.</value>
         [DataMember(Name = "v_size", EmitDefaultValue = true)]
-        
         public double VSize { get; set; }  = 60D;
         /// <summary>
         /// The view shift (-vs). This is the amount the actual image will be shifted to the right of the specified view. This option is useful for generating skewed perspectives or rendering an image a piece at a time. A value of 1 means that the rendered image starts just to the right of the normal view. A value of -1 would be to the left. Larger or fractional values are permitted as well.
         /// </summary>
         /// <value>The view shift (-vs). This is the amount the actual image will be shifted to the right of the specified view. This option is useful for generating skewed perspectives or rendering an image a piece at a time. A value of 1 means that the rendered image starts just to the right of the normal view. A value of -1 would be to the left. Larger or fractional values are permitted as well.</value>
         [DataMember(Name = "shift", EmitDefaultValue = false)]
-        
         public double Shift { get; set; } 
         /// <summary>
         /// The view lift (-vl). This is the amount the actual image will be lifted up from the specified view. This option is useful for generating skewed perspectives or rendering an image a piece at a time. A value of 1 means that the rendered image starts just to the right of the normal view. A value of -1 would be to the left. Larger or fractional values are permitted as well.
         /// </summary>
         /// <value>The view lift (-vl). This is the amount the actual image will be lifted up from the specified view. This option is useful for generating skewed perspectives or rendering an image a piece at a time. A value of 1 means that the rendered image starts just to the right of the normal view. A value of -1 would be to the left. Larger or fractional values are permitted as well.</value>
         [DataMember(Name = "lift", EmitDefaultValue = false)]
-        
         public double Lift { get; set; } 
         /// <summary>
         /// View fore clip (-vo) at a distance from the view point.The plane will be perpendicular to the view direction for perspective and parallel view types. For fisheye view types, the clipping plane is actually a clipping sphere, centered on the view point with fore_clip radius. Objects in front of this imaginary surface will not be visible.
         /// </summary>
         /// <value>View fore clip (-vo) at a distance from the view point.The plane will be perpendicular to the view direction for perspective and parallel view types. For fisheye view types, the clipping plane is actually a clipping sphere, centered on the view point with fore_clip radius. Objects in front of this imaginary surface will not be visible.</value>
         [DataMember(Name = "fore_clip", EmitDefaultValue = false)]
-        
         public double ForeClip { get; set; } 
         /// <summary>
         /// View aft clip (-va) at a distance from the view point.Like the view fore plane, it will be perpendicular to the view direction for perspective and parallel view types. For fisheye view types, the clipping plane is actually a clipping sphere, centered on the view point with radius val.
         /// </summary>
         /// <value>View aft clip (-va) at a distance from the view point.Like the view fore plane, it will be perpendicular to the view direction for perspective and parallel view types. For fisheye view types, the clipping plane is actually a clipping sphere, centered on the view point with radius val.</value>
         [DataMember(Name = "aft_clip", EmitDefaultValue = false)]
-        
         public double AftClip { get; set; } 
 
         /// <summary>

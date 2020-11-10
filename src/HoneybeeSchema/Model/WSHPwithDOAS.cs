@@ -80,14 +80,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. If None or Autosize, it will be whatever is recommended for the given vintage.</value>
         [DataMember(Name = "sensible_heat_recovery", EmitDefaultValue = false)]
-        
         public AnyOf<Autosize,double> SensibleHeatRecovery { get; set; } 
         /// <summary>
         /// A number between 0 and 1 for the effectiveness of latent heat recovery within the system. If None or Autosize, it will be whatever is recommended for the given vintage.
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of latent heat recovery within the system. If None or Autosize, it will be whatever is recommended for the given vintage.</value>
         [DataMember(Name = "latent_heat_recovery", EmitDefaultValue = false)]
-        
         public AnyOf<Autosize,double> LatentHeatRecovery { get; set; } 
 
         /// <summary>

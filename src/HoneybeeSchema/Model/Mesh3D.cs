@@ -66,21 +66,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A list of points representing the vertices of the mesh. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.</value>
         [DataMember(Name = "vertices", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<List<double>> Vertices { get; set; } 
         /// <summary>
         /// A list of lists with each sub-list having either 3 or 4 integers. These integers correspond to indices within the list of vertices.
         /// </summary>
         /// <value>A list of lists with each sub-list having either 3 or 4 integers. These integers correspond to indices within the list of vertices.</value>
         [DataMember(Name = "faces", IsRequired = true, EmitDefaultValue = false)]
-        
         public List<List<int>> Faces { get; set; } 
         /// <summary>
         /// An optional list of colors that correspond to either the faces of the mesh or the vertices of the mesh.
         /// </summary>
         /// <value>An optional list of colors that correspond to either the faces of the mesh or the vertices of the mesh.</value>
         [DataMember(Name = "colors", EmitDefaultValue = false)]
-        
         public List<Color> Colors { get; set; } 
 
         /// <summary>

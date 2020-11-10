@@ -50,7 +50,6 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>An identifier for a unique Room-Assigned ModifierSet (default: None).</value>
         [DataMember(Name = "modifier_set", EmitDefaultValue = false)]
-        
         public string ModifierSet { get; set; } 
 
         /// <summary>

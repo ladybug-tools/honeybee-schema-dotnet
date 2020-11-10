@@ -62,14 +62,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Wind speed on the design day [m/s].</value>
         [DataMember(Name = "wind_speed", IsRequired = true, EmitDefaultValue = false)]
-        
         public double WindSpeed { get; set; } 
         /// <summary>
         /// Wind direction on the design day [degrees].
         /// </summary>
         /// <value>Wind direction on the design day [degrees].</value>
         [DataMember(Name = "wind_direction", EmitDefaultValue = true)]
-        
         public double WindDirection { get; set; }  = 0D;
 
         /// <summary>

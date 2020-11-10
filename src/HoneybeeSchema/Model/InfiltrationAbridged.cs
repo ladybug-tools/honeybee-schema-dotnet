@@ -71,32 +71,27 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Number for the infiltration per exterior surface area in m3/s-m2.</value>
         [DataMember(Name = "flow_per_exterior_area", IsRequired = true, EmitDefaultValue = false)]
-        
         public double FlowPerExteriorArea { get; set; } 
         /// <summary>
         /// Identifier of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.
         /// </summary>
         /// <value>Identifier of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.</value>
         [DataMember(Name = "schedule", IsRequired = true, EmitDefaultValue = false)]
-        
         public string Schedule { get; set; } 
         /// <summary>
         /// Gets or Sets ConstantCoefficient
         /// </summary>
         [DataMember(Name = "constant_coefficient", EmitDefaultValue = true)]
-        
         public double ConstantCoefficient { get; set; }  = 1D;
         /// <summary>
         /// Gets or Sets TemperatureCoefficient
         /// </summary>
         [DataMember(Name = "temperature_coefficient", EmitDefaultValue = true)]
-        
         public double TemperatureCoefficient { get; set; }  = 0D;
         /// <summary>
         /// Gets or Sets VelocityCoefficient
         /// </summary>
         [DataMember(Name = "velocity_coefficient", EmitDefaultValue = true)]
-        
         public double VelocityCoefficient { get; set; }  = 0D;
 
         /// <summary>

@@ -64,21 +64,18 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Integer for red value.</value>
         [DataMember(Name = "r", IsRequired = true, EmitDefaultValue = false)]
-        
         public int R { get; set; } 
         /// <summary>
         /// Integer for green value.
         /// </summary>
         /// <value>Integer for green value.</value>
         [DataMember(Name = "g", IsRequired = true, EmitDefaultValue = false)]
-        
         public int G { get; set; } 
         /// <summary>
         /// Integer for blue value.
         /// </summary>
         /// <value>Integer for blue value.</value>
         [DataMember(Name = "b", IsRequired = true, EmitDefaultValue = false)]
-        
         public int B { get; set; } 
 
         /// <summary>
