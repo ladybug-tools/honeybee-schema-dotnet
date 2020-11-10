@@ -36,13 +36,13 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards</value>
         [DataMember(Name="vintage", EmitDefaultValue=false)]
-        public Vintages Vintage { get; set; }   
+        public Vintages Vintage { get; set; } = Vintages._9012013;
         /// <summary>
         /// Text for the specific type of system equipment from the VRFwithDOASEquipmentType enumeration.
         /// </summary>
         /// <value>Text for the specific type of system equipment from the VRFwithDOASEquipmentType enumeration.</value>
         [DataMember(Name="equipment_type", EmitDefaultValue=false)]
-        public VRFwithDOASEquipmentType EquipmentType { get; set; }   
+        public VRFwithDOASEquipmentType EquipmentType { get; set; } = VRFwithDOASEquipmentType.DOASwithVRF;
         /// <summary>
         /// Initializes a new instance of the <see cref="VRFwithDOAS" /> class.
         /// </summary>
@@ -65,7 +65,7 @@ namespace HoneybeeSchema
         public VRFwithDOAS
         (
             string identifier, // Required parameters
-            string displayName= default, Vintages vintage= default, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, VRFwithDOASEquipmentType equipmentType= default// Optional parameters
+            string displayName= default, Vintages vintage= Vintages._9012013, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, VRFwithDOASEquipmentType equipmentType= VRFwithDOASEquipmentType.DOASwithVRF// Optional parameters
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             this.Vintage = vintage;

@@ -35,7 +35,7 @@ namespace HoneybeeSchema
         /// Gets or Sets ReportingFrequency
         /// </summary>
         [DataMember(Name="reporting_frequency", EmitDefaultValue=false)]
-        public ReportingFrequency ReportingFrequency { get; set; }   
+        public ReportingFrequency ReportingFrequency { get; set; } = ReportingFrequency.Hourly;
         /// <summary>
         /// Initializes a new instance of the <see cref="SimulationOutput" /> class.
         /// </summary>
@@ -47,7 +47,7 @@ namespace HoneybeeSchema
         public SimulationOutput
         (
              // Required parameters
-            ReportingFrequency reportingFrequency= default, bool includeSqlite = true, bool includeHtml = true, List<string> outputs= default, List<string> summaryReports= default// Optional parameters
+            ReportingFrequency reportingFrequency= ReportingFrequency.Hourly, bool includeSqlite = true, bool includeHtml = true, List<string> outputs= default, List<string> summaryReports= default// Optional parameters
         ) : base()// BaseClass
         {
             this.ReportingFrequency = reportingFrequency;

@@ -36,7 +36,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text for the day of the week on which the simulation starts.</value>
         [DataMember(Name="start_day_of_week", EmitDefaultValue=false)]
-        public DaysOfWeek StartDayOfWeek { get; set; }   
+        public DaysOfWeek StartDayOfWeek { get; set; } = DaysOfWeek.Sunday;
         /// <summary>
         /// Initializes a new instance of the <see cref="RunPeriod" /> class.
         /// </summary>
@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         public RunPeriod
         (
              // Required parameters
-            List<int> startDate= default, List<int> endDate= default, DaysOfWeek startDayOfWeek= default, List<List<int>> holidays= default, DaylightSavingTime daylightSavingTime= default, bool leapYear = false// Optional parameters
+            List<int> startDate= default, List<int> endDate= default, DaysOfWeek startDayOfWeek= DaysOfWeek.Sunday, List<List<int>> holidays= default, DaylightSavingTime daylightSavingTime= default, bool leapYear = false// Optional parameters
         ) : base()// BaseClass
         {
             this.StartDate = startDate;

@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Documentation for Honeybee simulation-parameter schema",
-        "version": "1.39.4",
+        "version": "1.39.8",
         "title": "Honeybee Simulation Parameter Schema",
         "contact": {
             "name": "Ladybug Tools",
@@ -179,7 +179,19 @@
     "paths": {},
     "components": {
         "schemas": {
-            "SimulationControl": {
+            "ReportingFrequency": {
+                "title": "ReportingFrequency",
+                "description": "An enumeration.",
+                "enum": [
+                    "Timestep",
+                    "Hourly",
+                    "Daily",
+                    "Monthly",
+                    "Annual"
+                ],
+                "type": "string"
+            },
+            "SimulationOutput": {
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
@@ -189,47 +201,53 @@
                         "properties": {
                             "type": {
                                 "title": "Type",
-                                "default": "SimulationControl",
-                                "pattern": "^SimulationControl$",
+                                "default": "SimulationOutput",
+                                "pattern": "^SimulationOutput$",
                                 "type": "string",
                                 "readOnly": true
                             },
-                            "do_zone_sizing": {
-                                "title": "Do Zone Sizing",
-                                "description": "Boolean for whether the zone sizing calculation should be run.",
+                            "reporting_frequency": {
+                                "default": "Hourly",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/ReportingFrequency"
+                                    }
+                                ]
+                            },
+                            "include_sqlite": {
+                                "title": "Include Sqlite",
+                                "description": "Boolean to note whether a SQLite report should be requested from the simulation.",
                                 "default": true,
                                 "type": "boolean"
                             },
-                            "do_system_sizing": {
-                                "title": "Do System Sizing",
-                                "description": "Boolean for whether the system sizing calculation should be run.",
+                            "include_html": {
+                                "title": "Include Html",
+                                "description": "Boolean to note whether an HTML report should be requested from the simulation.",
                                 "default": true,
                                 "type": "boolean"
                             },
-                            "do_plant_sizing": {
-                                "title": "Do Plant Sizing",
-                                "description": "Boolean for whether the plant sizing calculation should be run.",
-                                "default": true,
-                                "type": "boolean"
+                            "outputs": {
+                                "title": "Outputs",
+                                "description": "A list of EnergyPlus output names as strings, which are requested from the simulation.",
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
                             },
-                            "run_for_run_periods": {
-                                "title": "Run For Run Periods",
-                                "description": "Boolean for whether the simulation should be run for the sizing periods.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "run_for_sizing_periods": {
-                                "title": "Run For Sizing Periods",
-                                "description": "Boolean for whether the simulation should be run for the run periods.",
-                                "default": false,
-                                "type": "boolean"
+                            "summary_reports": {
+                                "title": "Summary Reports",
+                                "description": "A list of EnergyPlus summary report names as strings.",
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
                             }
                         },
                         "additionalProperties": false
                     }
                 ],
-                "title": "SimulationControl",
-                "description": "Used to specify which types of calculations to run.",
+                "title": "SimulationOutput",
+                "description": "Lists the outputs to report from the simulation and their format.",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -275,68 +293,6 @@
                 ],
                 "title": "WindCondition",
                 "description": "Used to specify wind conditions on a design day.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "DesignDayTypes": {
-                "title": "DesignDayTypes",
-                "description": "An enumeration.",
-                "enum": [
-                    "SummerDesignDay",
-                    "WinterDesignDay",
-                    "Sunday",
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Holiday",
-                    "CustomDay1",
-                    "CustomDay2"
-                ],
-                "type": "string"
-            },
-            "DryBulbCondition": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "dry_bulb_max": {
-                                "title": "Dry Bulb Max",
-                                "description": "The maximum dry bulb temperature on the design day [C].",
-                                "minimum": -90,
-                                "maximum": 70,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "dry_bulb_range": {
-                                "title": "Dry Bulb Range",
-                                "description": "The difference between min and max temperatures on the design day [C].",
-                                "minimum": 0,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "DryBulbCondition",
-                                "pattern": "^DryBulbCondition$",
-                                "type": "string",
-                                "readOnly": true
-                            }
-                        },
-                        "required": [
-                            "dry_bulb_max",
-                            "dry_bulb_range"
-                        ],
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "DryBulbCondition",
-                "description": "Used to specify dry bulb conditions on a design day.",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -411,38 +367,99 @@
                     "propertyName": "type"
                 }
             },
-            "ASHRAEClearSky": {
+            "SolarDistribution": {
+                "title": "SolarDistribution",
+                "description": "An enumeration.",
+                "enum": [
+                    "MinimalShadowing",
+                    "FullExterior",
+                    "FullInteriorAndExterior",
+                    "FullExteriorWithReflections",
+                    "FullInteriorAndExteriorWithReflections"
+                ],
+                "type": "string"
+            },
+            "CalculationMethod": {
+                "title": "CalculationMethod",
+                "description": "An enumeration.",
+                "enum": [
+                    "PolygonClipping",
+                    "PixelCounting"
+                ],
+                "type": "string"
+            },
+            "CalculationUpdateMethod": {
+                "title": "CalculationUpdateMethod",
+                "description": "An enumeration.",
+                "enum": [
+                    "Periodic",
+                    "Timestep"
+                ],
+                "type": "string"
+            },
+            "ShadowCalculation": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/_SkyCondition"
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "clearness"
-                        ],
                         "properties": {
-                            "clearness": {
-                                "title": "Clearness",
-                                "description": "Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.",
-                                "minimum": 0,
-                                "maximum": 1.2,
-                                "type": "number",
-                                "format": "double"
-                            },
                             "type": {
                                 "title": "Type",
-                                "default": "ASHRAEClearSky",
-                                "pattern": "^ASHRAEClearSky$",
+                                "default": "ShadowCalculation",
+                                "pattern": "^ShadowCalculation$",
                                 "type": "string",
                                 "readOnly": true
+                            },
+                            "solar_distribution": {
+                                "default": "FullExteriorWithReflections",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/SolarDistribution"
+                                    }
+                                ]
+                            },
+                            "calculation_method": {
+                                "description": "Text noting whether CPU-based polygon clipping method orGPU-based pixel counting method should be used. For low numbers of shadingsurfaces (less than ~200), PolygonClipping requires less runtime thanPixelCounting. However, PixelCounting runtime scales significantlybetter at higher numbers of shading surfaces. PixelCounting also hasno limitations related to zone concavity when used with any\u201cFullInterior\u201d solar distribution options.",
+                                "default": "PolygonClipping",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/CalculationMethod"
+                                    }
+                                ]
+                            },
+                            "calculation_update_method": {
+                                "description": "Text describing how often the solar and shading calculations are updated with respect to the flow of time in the simulation.",
+                                "default": "Periodic",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/CalculationUpdateMethod"
+                                    }
+                                ]
+                            },
+                            "calculation_frequency": {
+                                "title": "Calculation Frequency",
+                                "description": "Integer for the number of days in each period for which a unique shadow calculation will be performed. This field is only used if the Periodic calculation_method is used.",
+                                "default": 30,
+                                "minimum": 1,
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "maximum_figures": {
+                                "title": "Maximum Figures",
+                                "description": "Number of allowable figures in shadow overlap calculations.",
+                                "default": 15000,
+                                "minimum": 200,
+                                "type": "integer",
+                                "format": "int32"
                             }
                         },
                         "additionalProperties": false
                     }
                 ],
-                "title": "ASHRAEClearSky",
-                "description": "Used to specify sky conditions on a design day.",
+                "title": "ShadowCalculation",
+                "description": "Used to describe settings for EnergyPlus shadow calculation.",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -487,6 +504,104 @@
                     }
                 ],
                 "title": "ASHRAETau",
+                "description": "Used to specify sky conditions on a design day.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "DesignDayTypes": {
+                "title": "DesignDayTypes",
+                "description": "An enumeration.",
+                "enum": [
+                    "SummerDesignDay",
+                    "WinterDesignDay",
+                    "Sunday",
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Holiday",
+                    "CustomDay1",
+                    "CustomDay2"
+                ],
+                "type": "string"
+            },
+            "DryBulbCondition": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "dry_bulb_max": {
+                                "title": "Dry Bulb Max",
+                                "description": "The maximum dry bulb temperature on the design day [C].",
+                                "minimum": -90,
+                                "maximum": 70,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "dry_bulb_range": {
+                                "title": "Dry Bulb Range",
+                                "description": "The difference between min and max temperatures on the design day [C].",
+                                "minimum": 0,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "DryBulbCondition",
+                                "pattern": "^DryBulbCondition$",
+                                "type": "string",
+                                "readOnly": true
+                            }
+                        },
+                        "required": [
+                            "dry_bulb_max",
+                            "dry_bulb_range"
+                        ],
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "DryBulbCondition",
+                "description": "Used to specify dry bulb conditions on a design day.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "ASHRAEClearSky": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_SkyCondition"
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "clearness"
+                        ],
+                        "properties": {
+                            "clearness": {
+                                "title": "Clearness",
+                                "description": "Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.",
+                                "minimum": 0,
+                                "maximum": 1.2,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "ASHRAEClearSky",
+                                "pattern": "^ASHRAEClearSky$",
+                                "type": "string",
+                                "readOnly": true
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "ASHRAEClearSky",
                 "description": "Used to specify sky conditions on a design day.",
                 "discriminator": {
                     "propertyName": "type"
@@ -622,190 +737,6 @@
                     "propertyName": "type"
                 }
             },
-            "ReportingFrequency": {
-                "title": "ReportingFrequency",
-                "description": "An enumeration.",
-                "enum": [
-                    "Timestep",
-                    "Hourly",
-                    "Daily",
-                    "Monthly",
-                    "Annual"
-                ],
-                "type": "string"
-            },
-            "SimulationOutput": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "title": "Type",
-                                "default": "SimulationOutput",
-                                "pattern": "^SimulationOutput$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "reporting_frequency": {
-                                "default": "Hourly",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/ReportingFrequency"
-                                    }
-                                ]
-                            },
-                            "include_sqlite": {
-                                "title": "Include Sqlite",
-                                "description": "Boolean to note whether a SQLite report should be requested from the simulation.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "include_html": {
-                                "title": "Include Html",
-                                "description": "Boolean to note whether an HTML report should be requested from the simulation.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "outputs": {
-                                "title": "Outputs",
-                                "description": "A list of EnergyPlus output names as strings, which are requested from the simulation.",
-                                "type": "array",
-                                "items": {
-                                    "type": "string"
-                                }
-                            },
-                            "summary_reports": {
-                                "title": "Summary Reports",
-                                "description": "A list of EnergyPlus summary report names as strings.",
-                                "type": "array",
-                                "items": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "SimulationOutput",
-                "description": "Lists the outputs to report from the simulation and their format.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "SolarDistribution": {
-                "title": "SolarDistribution",
-                "description": "An enumeration.",
-                "enum": [
-                    "MinimalShadowing",
-                    "FullExterior",
-                    "FullInteriorAndExterior",
-                    "FullExteriorWithReflections",
-                    "FullInteriorAndExteriorWithReflections"
-                ],
-                "type": "string"
-            },
-            "CalculationMethod": {
-                "title": "CalculationMethod",
-                "description": "An enumeration.",
-                "enum": [
-                    "PolygonClipping",
-                    "PixelCounting"
-                ],
-                "type": "string"
-            },
-            "CalculationUpdateMethod": {
-                "title": "CalculationUpdateMethod",
-                "description": "An enumeration.",
-                "enum": [
-                    "Periodic",
-                    "Timestep"
-                ],
-                "type": "string"
-            },
-            "ShadowCalculation": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "title": "Type",
-                                "default": "ShadowCalculation",
-                                "pattern": "^ShadowCalculation$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "solar_distribution": {
-                                "default": "FullExteriorWithReflections",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/SolarDistribution"
-                                    }
-                                ]
-                            },
-                            "calculation_method": {
-                                "description": "Text noting whether CPU-based polygon clipping method orGPU-based pixel counting method should be used. For low numbers of shadingsurfaces (less than ~200), PolygonClipping requires less runtime thanPixelCounting. However, PixelCounting runtime scales significantlybetter at higher numbers of shading surfaces. PixelCounting also hasno limitations related to zone concavity when used with any\u201cFullInterior\u201d solar distribution options.",
-                                "default": "PolygonClipping",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/CalculationMethod"
-                                    }
-                                ]
-                            },
-                            "calculation_update_method": {
-                                "description": "Text describing how often the solar and shading calculations are updated with respect to the flow of time in the simulation.",
-                                "default": "Periodic",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/CalculationUpdateMethod"
-                                    }
-                                ]
-                            },
-                            "calculation_frequency": {
-                                "title": "Calculation Frequency",
-                                "description": "Integer for the number of days in each period for which a unique shadow calculation will be performed. This field is only used if the Periodic calculation_method is used.",
-                                "default": 30,
-                                "minimum": 1,
-                                "type": "integer",
-                                "format": "int32"
-                            },
-                            "maximum_figures": {
-                                "title": "Maximum Figures",
-                                "description": "Number of allowable figures in shadow overlap calculations.",
-                                "default": 15000,
-                                "minimum": 200,
-                                "type": "integer",
-                                "format": "int32"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "ShadowCalculation",
-                "description": "Used to describe settings for EnergyPlus shadow calculation.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "DaysOfWeek": {
-                "title": "DaysOfWeek",
-                "description": "An enumeration.",
-                "enum": [
-                    "Sunday",
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday"
-                ],
-                "type": "string"
-            },
             "DaylightSavingTime": {
                 "allOf": [
                     {
@@ -860,6 +791,20 @@
                 "discriminator": {
                     "propertyName": "type"
                 }
+            },
+            "DaysOfWeek": {
+                "title": "DaysOfWeek",
+                "description": "An enumeration.",
+                "enum": [
+                    "Sunday",
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday"
+                ],
+                "type": "string"
             },
             "RunPeriod": {
                 "allOf": [
@@ -950,6 +895,61 @@
                 ],
                 "title": "RunPeriod",
                 "description": "Used to describe the time period over which to run the simulation.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "SimulationControl": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "title": "Type",
+                                "default": "SimulationControl",
+                                "pattern": "^SimulationControl$",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "do_zone_sizing": {
+                                "title": "Do Zone Sizing",
+                                "description": "Boolean for whether the zone sizing calculation should be run.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "do_system_sizing": {
+                                "title": "Do System Sizing",
+                                "description": "Boolean for whether the system sizing calculation should be run.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "do_plant_sizing": {
+                                "title": "Do Plant Sizing",
+                                "description": "Boolean for whether the plant sizing calculation should be run.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "run_for_run_periods": {
+                                "title": "Run For Run Periods",
+                                "description": "Boolean for whether the simulation should be run for the sizing periods.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "run_for_sizing_periods": {
+                                "title": "Run For Sizing Periods",
+                                "description": "Boolean for whether the simulation should be run for the run periods.",
+                                "default": false,
+                                "type": "boolean"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "SimulationControl",
+                "description": "Used to specify which types of calculations to run.",
                 "discriminator": {
                     "propertyName": "type"
                 }

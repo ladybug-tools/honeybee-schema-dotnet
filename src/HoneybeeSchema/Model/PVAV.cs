@@ -36,19 +36,19 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards</value>
         [DataMember(Name="vintage", EmitDefaultValue=false)]
-        public Vintages Vintage { get; set; }   
+        public Vintages Vintage { get; set; } = Vintages._9012013;
         /// <summary>
         /// Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration). If Inferred, the economizer will be set to whatever is recommended for the given vintage.
         /// </summary>
         /// <value>Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration). If Inferred, the economizer will be set to whatever is recommended for the given vintage.</value>
         [DataMember(Name="economizer_type", EmitDefaultValue=false)]
-        public AllAirEconomizerType EconomizerType { get; set; }   
+        public AllAirEconomizerType EconomizerType { get; set; } = AllAirEconomizerType.Inferred;
         /// <summary>
         /// Text for the specific type of system equipment from the VAVEquipmentType enumeration.
         /// </summary>
         /// <value>Text for the specific type of system equipment from the VAVEquipmentType enumeration.</value>
         [DataMember(Name="equipment_type", EmitDefaultValue=false)]
-        public PVAVEquipmentType EquipmentType { get; set; }   
+        public PVAVEquipmentType EquipmentType { get; set; } = PVAVEquipmentType.Gasboilerreheat;
         /// <summary>
         /// Initializes a new instance of the <see cref="PVAV" /> class.
         /// </summary>
@@ -72,7 +72,7 @@ namespace HoneybeeSchema
         public PVAV
         (
             string identifier, // Required parameters
-            string displayName= default, Vintages vintage= default, AllAirEconomizerType economizerType= default, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, PVAVEquipmentType equipmentType= default// Optional parameters
+            string displayName= default, Vintages vintage= Vintages._9012013, AllAirEconomizerType economizerType= AllAirEconomizerType.Inferred, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, PVAVEquipmentType equipmentType= PVAVEquipmentType.Gasboilerreheat// Optional parameters
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             this.Vintage = vintage;

@@ -35,12 +35,12 @@ namespace HoneybeeSchema
         /// Gets or Sets NumericType
         /// </summary>
         [DataMember(Name="numeric_type", EmitDefaultValue=false)]
-        public ScheduleNumericType NumericType { get; set; }   
+        public ScheduleNumericType NumericType { get; set; } = ScheduleNumericType.Continuous;
         /// <summary>
         /// Gets or Sets UnitType
         /// </summary>
         [DataMember(Name="unit_type", EmitDefaultValue=false)]
-        public ScheduleUnitType UnitType { get; set; }   
+        public ScheduleUnitType UnitType { get; set; } = ScheduleUnitType.Dimensionless;
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleTypeLimit" /> class.
         /// </summary>
@@ -63,7 +63,7 @@ namespace HoneybeeSchema
         public ScheduleTypeLimit
         (
             string identifier, // Required parameters
-            string displayName= default, AnyOf<NoLimit,double> lowerLimit= default, AnyOf<NoLimit,double> upperLimit= default, ScheduleNumericType numericType= default, ScheduleUnitType unitType= default// Optional parameters
+            string displayName= default, AnyOf<NoLimit,double> lowerLimit= default, AnyOf<NoLimit,double> upperLimit= default, ScheduleNumericType numericType= ScheduleNumericType.Continuous, ScheduleUnitType unitType= ScheduleUnitType.Dimensionless// Optional parameters
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             this.LowerLimit = lowerLimit;

@@ -36,13 +36,13 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the \&quot;Between\&quot; option. Also note that, for a WindowConstruction with more than one gas gap, the \&quot;Between\&quot; option defalts to using the inner gap as this is the only option that EnergyPlus supports.</value>
         [DataMember(Name="shade_location", EmitDefaultValue=false)]
-        public ShadeLocation ShadeLocation { get; set; }   
+        public ShadeLocation ShadeLocation { get; set; } = ShadeLocation.Interior;
         /// <summary>
         /// Text to indicate how the shading device is controlled, which determines when the shading is “on” or “off.”
         /// </summary>
         /// <value>Text to indicate how the shading device is controlled, which determines when the shading is “on” or “off.”</value>
         [DataMember(Name="control_type", EmitDefaultValue=false)]
-        public ControlType ControlType { get; set; }   
+        public ControlType ControlType { get; set; } = ControlType.AlwaysOn;
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowConstructionShadeAbridged" /> class.
         /// </summary>
@@ -67,7 +67,7 @@ namespace HoneybeeSchema
         public WindowConstructionShadeAbridged
         (
             string identifier, WindowConstructionAbridged windowConstruction, string shadeMaterial, // Required parameters
-            string displayName= default, ShadeLocation shadeLocation= default, ControlType controlType= default, double setpoint= default, string schedule= default// Optional parameters
+            string displayName= default, ShadeLocation shadeLocation= ShadeLocation.Interior, ControlType controlType= ControlType.AlwaysOn, double setpoint= default, string schedule= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             // to ensure "windowConstruction" is required (not null)

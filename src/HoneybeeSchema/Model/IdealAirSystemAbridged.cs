@@ -36,7 +36,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone.</value>
         [DataMember(Name="economizer_type", EmitDefaultValue=false)]
-        public EconomizerType EconomizerType { get; set; }   
+        public EconomizerType EconomizerType { get; set; } = EconomizerType.DifferentialDryBulb;
         /// <summary>
         /// Initializes a new instance of the <see cref="IdealAirSystemAbridged" /> class.
         /// </summary>
@@ -65,7 +65,7 @@ namespace HoneybeeSchema
         public IdealAirSystemAbridged
         (
             string identifier, // Required parameters
-            string displayName= default, EconomizerType economizerType= default, bool demandControlledVentilation = false, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, double heatingAirTemperature = 50D, double coolingAirTemperature = 13D, AnyOf<Autosize,NoLimit,double> heatingLimit= default, AnyOf<Autosize,NoLimit,double> coolingLimit= default, string heatingAvailability= default, string coolingAvailability= default// Optional parameters
+            string displayName= default, EconomizerType economizerType= EconomizerType.DifferentialDryBulb, bool demandControlledVentilation = false, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, double heatingAirTemperature = 50D, double coolingAirTemperature = 13D, AnyOf<Autosize,NoLimit,double> heatingLimit= default, AnyOf<Autosize,NoLimit,double> coolingLimit= default, string heatingAvailability= default, string coolingAvailability= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             this.EconomizerType = economizerType;

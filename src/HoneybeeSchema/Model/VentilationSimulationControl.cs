@@ -36,13 +36,13 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text indicating type of ventilation control. Choices are: SingleZone, MultiZoneWithDistribution, MultiZoneWithoutDistribution. The MultiZone options will model air flow with the AirflowNetwork model, which is generally more accurate then the SingleZone option, but will take considerably longer to simulate, and requires defining more ventilation parameters to explicitly account for weather and building-induced pressure differences, and the leakage geometry corresponding to specific windows, doors, and surface cracks.</value>
         [DataMember(Name="vent_control_type", EmitDefaultValue=false)]
-        public VentilationControlType VentControlType { get; set; }   
+        public VentilationControlType VentControlType { get; set; } = VentilationControlType.SingleZone;
         /// <summary>
         /// Text indicating relationship between building footprint and height used to calculate the wind pressure coefficients for exterior surfaces.Choices are: LowRise and HighRise. LowRise corresponds to rectangular building whose height is less then three times the width and length of the footprint. HighRise corresponds to a rectangular building whose height is more than three times the width and length of the footprint. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.
         /// </summary>
         /// <value>Text indicating relationship between building footprint and height used to calculate the wind pressure coefficients for exterior surfaces.Choices are: LowRise and HighRise. LowRise corresponds to rectangular building whose height is less then three times the width and length of the footprint. HighRise corresponds to a rectangular building whose height is more than three times the width and length of the footprint. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.</value>
         [DataMember(Name="building_type", EmitDefaultValue=false)]
-        public BuildingType BuildingType { get; set; }   
+        public BuildingType BuildingType { get; set; } = BuildingType.LowRise;
         /// <summary>
         /// Initializes a new instance of the <see cref="VentilationSimulationControl" /> class.
         /// </summary>
@@ -56,7 +56,7 @@ namespace HoneybeeSchema
         public VentilationSimulationControl
         (
              // Required parameters
-            VentilationControlType ventControlType= default, double referenceTemperature = 20D, double referencePressure = 101325D, double referenceHumidityRatio = 0D, BuildingType buildingType= default, double longAxisAngle = 0D, double aspectRatio = 1D// Optional parameters
+            VentilationControlType ventControlType= VentilationControlType.SingleZone, double referenceTemperature = 20D, double referencePressure = 101325D, double referenceHumidityRatio = 0D, BuildingType buildingType= BuildingType.LowRise, double longAxisAngle = 0D, double aspectRatio = 1D// Optional parameters
         ) : base()// BaseClass
         {
             this.VentControlType = ventControlType;

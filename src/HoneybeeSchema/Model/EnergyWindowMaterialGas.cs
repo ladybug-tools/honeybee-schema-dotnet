@@ -35,7 +35,7 @@ namespace HoneybeeSchema
         /// Gets or Sets GasType
         /// </summary>
         [DataMember(Name="gas_type", EmitDefaultValue=false)]
-        public GasType GasType { get; set; }   
+        public GasType GasType { get; set; } = GasType.Air;
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialGas" /> class.
         /// </summary>
@@ -56,7 +56,7 @@ namespace HoneybeeSchema
         public EnergyWindowMaterialGas
         (
             string identifier, // Required parameters
-            string displayName= default, double thickness = 0.0125D, GasType gasType= default// Optional parameters
+            string displayName= default, double thickness = 0.0125D, GasType gasType= GasType.Air// Optional parameters
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             this.Thickness = thickness;

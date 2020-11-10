@@ -36,7 +36,10 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text indicating the units in which the model geometry exists. This is used to scale the geometry to the correct units for simulation engines like EnergyPlus, which requires all geometry be in meters.</value>
         [DataMember(Name="units", EmitDefaultValue=false)]
-        public Units Units { get; set; }   
+        public Units Units { get; set; } = Units.Meters;
+
+        [DataMember(Name="version", EmitDefaultValue=false)]
+        public string Version { get; set; }= "1.39.8";
         /// <summary>
         /// Initializes a new instance of the <see cref="Model" /> class.
         /// </summary>
@@ -45,7 +48,7 @@ namespace HoneybeeSchema
         { 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.39.2";
+            this.Version = "1.39.8";
         }
         
         /// <summary>
@@ -66,7 +69,7 @@ namespace HoneybeeSchema
         public Model
         (
             string identifier, ModelProperties properties, // Required parameters
-            string displayName= default, Object userData= default, List<Room> rooms= default, List<Face> orphanedFaces= default, List<Shade> orphanedShades= default, List<Aperture> orphanedApertures= default, List<Door> orphanedDoors= default, Units units= default, double tolerance = 0.01D, double angleTolerance = 1.0D// Optional parameters
+            string displayName= default, Object userData= default, List<Room> rooms= default, List<Face> orphanedFaces= default, List<Shade> orphanedShades= default, List<Aperture> orphanedApertures= default, List<Door> orphanedDoors= default, Units units= Units.Meters, double tolerance = 0.01D, double angleTolerance = 1.0D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             // to ensure "properties" is required (not null)
@@ -82,7 +85,7 @@ namespace HoneybeeSchema
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.39.2";
+            this.Version = "1.39.8";
         }
 
         /// <summary>
@@ -355,7 +358,7 @@ namespace HoneybeeSchema
 
             
             // Version (string) pattern
-            Regex regexVersion = new Regex(@"^1.39.2$", RegexOptions.CultureInvariant);
+            Regex regexVersion = new Regex(@"([0-9]+)\\.([0-9]+)\\.([0-9]+)", RegexOptions.CultureInvariant);
             if (false == regexVersion.Match(this.Version).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Version, must match a pattern of " + regexVersion, new [] { "Version" });

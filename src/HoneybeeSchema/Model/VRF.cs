@@ -36,13 +36,13 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards</value>
         [DataMember(Name="vintage", EmitDefaultValue=false)]
-        public Vintages Vintage { get; set; }   
+        public Vintages Vintage { get; set; } = Vintages._9012013;
         /// <summary>
         /// Text for the specific type of system equipment from the VRFEquipmentType enumeration.
         /// </summary>
         /// <value>Text for the specific type of system equipment from the VRFEquipmentType enumeration.</value>
         [DataMember(Name="equipment_type", EmitDefaultValue=false)]
-        public VRFEquipmentType EquipmentType { get; set; }   
+        public VRFEquipmentType EquipmentType { get; set; } = VRFEquipmentType.VRF;
         /// <summary>
         /// Initializes a new instance of the <see cref="VRF" /> class.
         /// </summary>
@@ -63,7 +63,7 @@ namespace HoneybeeSchema
         public VRF
         (
             string identifier, // Required parameters
-            string displayName= default, Vintages vintage= default, VRFEquipmentType equipmentType= default// Optional parameters
+            string displayName= default, Vintages vintage= Vintages._9012013, VRFEquipmentType equipmentType= VRFEquipmentType.VRF// Optional parameters
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             this.Vintage = vintage;

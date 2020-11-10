@@ -35,7 +35,7 @@ namespace HoneybeeSchema
         /// Gets or Sets SlatOrientation
         /// </summary>
         [DataMember(Name="slat_orientation", EmitDefaultValue=false)]
-        public SlatOrientation SlatOrientation { get; set; }   
+        public SlatOrientation SlatOrientation { get; set; } = SlatOrientation.Horizontal;
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialBlind" /> class.
         /// </summary>
@@ -80,7 +80,7 @@ namespace HoneybeeSchema
         public EnergyWindowMaterialBlind
         (
             string identifier, // Required parameters
-            string displayName= default, SlatOrientation slatOrientation= default, double slatWidth = 0.025D, double slatSeparation = 0.01875D, double slatThickness = 0.001D, double slatAngle = 45D, double slatConductivity = 221D, double beamSolarTransmittance = 0D, double beamSolarReflectance = 0.5D, double beamSolarReflectanceBack = 0.5D, double diffuseSolarTransmittance = 0D, double diffuseSolarReflectance = 0.5D, double diffuseSolarReflectanceBack = 0.5D, double beamVisibleTransmittance = 0D, double beamVisibleReflectance = 0.5D, double beamVisibleReflectanceBack = 0.5D, double diffuseVisibleTransmittance = 0D, double diffuseVisibleReflectance = 0.5D, double diffuseVisibleReflectanceBack = 0.5D, double infraredTransmittance = 0D, double emissivity = 0.9D, double emissivityBack = 0.9D, double distanceToGlass = 0.05D, double topOpeningMultiplier = 0.5D, double bottomOpeningMultiplier = 0.5D, double leftOpeningMultiplier = 0.5D, double rightOpeningMultiplier = 0.5D// Optional parameters
+            string displayName= default, SlatOrientation slatOrientation= SlatOrientation.Horizontal, double slatWidth = 0.025D, double slatSeparation = 0.01875D, double slatThickness = 0.001D, double slatAngle = 45D, double slatConductivity = 221D, double beamSolarTransmittance = 0D, double beamSolarReflectance = 0.5D, double beamSolarReflectanceBack = 0.5D, double diffuseSolarTransmittance = 0D, double diffuseSolarReflectance = 0.5D, double diffuseSolarReflectanceBack = 0.5D, double beamVisibleTransmittance = 0D, double beamVisibleReflectance = 0.5D, double beamVisibleReflectanceBack = 0.5D, double diffuseVisibleTransmittance = 0D, double diffuseVisibleReflectance = 0.5D, double diffuseVisibleReflectanceBack = 0.5D, double infraredTransmittance = 0D, double emissivity = 0.9D, double emissivityBack = 0.9D, double distanceToGlass = 0.05D, double topOpeningMultiplier = 0.5D, double bottomOpeningMultiplier = 0.5D, double leftOpeningMultiplier = 0.5D, double rightOpeningMultiplier = 0.5D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             this.SlatOrientation = slatOrientation;

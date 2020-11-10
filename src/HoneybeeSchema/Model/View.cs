@@ -35,7 +35,7 @@ namespace HoneybeeSchema
         /// Gets or Sets ViewType
         /// </summary>
         [DataMember(Name="view_type", EmitDefaultValue=false)]
-        public ViewType ViewType { get; set; }   
+        public ViewType ViewType { get; set; } = ViewType.V;
         /// <summary>
         /// Initializes a new instance of the <see cref="View" /> class.
         /// </summary>
@@ -66,7 +66,7 @@ namespace HoneybeeSchema
         public View
         (
             string identifier, List<double> position, List<double> direction, List<double> upVector, // Required parameters
-            string displayName= default, string roomIdentifier= default, List<List<string>> lightPath= default, ViewType viewType= default, double hSize = 60D, double vSize = 60D, double shift= default, double lift= default, double foreClip= default, double aftClip= default// Optional parameters
+            string displayName= default, string roomIdentifier= default, List<List<string>> lightPath= default, ViewType viewType= ViewType.V, double hSize = 60D, double vSize = 60D, double shift= default, double lift= default, double foreClip= default, double aftClip= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, roomIdentifier: roomIdentifier, lightPath: lightPath)// BaseClass
         {
             // to ensure "position" is required (not null)

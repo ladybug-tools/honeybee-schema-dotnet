@@ -35,7 +35,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Roughness
         /// </summary>
         [DataMember(Name="roughness", EmitDefaultValue=false)]
-        public Roughness Roughness { get; set; }   
+        public Roughness Roughness { get; set; } = Roughness.MediumRough;
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyMaterialNoMass" /> class.
         /// </summary>
@@ -59,7 +59,7 @@ namespace HoneybeeSchema
         public EnergyMaterialNoMass
         (
             string identifier, double rValue, // Required parameters
-            string displayName= default, Roughness roughness= default, double thermalAbsorptance = 0.9D, double solarAbsorptance = 0.7D, double visibleAbsorptance = 0.7D// Optional parameters
+            string displayName= default, Roughness roughness= Roughness.MediumRough, double thermalAbsorptance = 0.9D, double solarAbsorptance = 0.7D, double visibleAbsorptance = 0.7D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             this.RValue = rValue;
