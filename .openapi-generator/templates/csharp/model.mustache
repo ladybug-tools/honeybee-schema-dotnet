@@ -14,9 +14,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 {{#models}}
 {{#model}}
-{{#discriminator}}
-using JsonSubTypes;
-{{/discriminator}}
 {{/model}}
 {{/models}}
 {{^netStandard}}
