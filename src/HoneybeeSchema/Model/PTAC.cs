@@ -34,7 +34,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards</value>
         [DataMember(Name="vintage", EmitDefaultValue=false)]
-        public Vintages Vintage { get; set; } = Vintages._9012013;
+        public Vintages Vintage { get; set; } = Vintages.90.1-2013;
         /// <summary>
         /// Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration). If Inferred, the economizer will be set to whatever is recommended for the given vintage.
         /// </summary>
@@ -46,7 +46,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text for the specific type of system equipment from the PTACEquipmentType enumeration.</value>
         [DataMember(Name="equipment_type", EmitDefaultValue=false)]
-        public PTACEquipmentType EquipmentType { get; set; } = PTACEquipmentType.PTACwithbaseboardelectric;
+        public PTACEquipmentType EquipmentType { get; set; } = PTACEquipmentType.PTAC with baseboard electric;
         /// <summary>
         /// Initializes a new instance of the <see cref="PTAC" /> class.
         /// </summary>
@@ -70,7 +70,7 @@ namespace HoneybeeSchema
         public PTAC
         (
             string identifier, // Required parameters
-            string displayName= default, Vintages vintage= Vintages._9012013, AllAirEconomizerType economizerType= AllAirEconomizerType.Inferred, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, PTACEquipmentType equipmentType= PTACEquipmentType.PTACwithbaseboardelectric// Optional parameters
+            string displayName= default, Vintages vintage= Vintages.90.1-2013, AllAirEconomizerType economizerType= AllAirEconomizerType.Inferred, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, PTACEquipmentType equipmentType= PTACEquipmentType.PTAC with baseboard electric// Optional parameters
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             this.Vintage = vintage;

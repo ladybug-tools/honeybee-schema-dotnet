@@ -34,13 +34,13 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards</value>
         [DataMember(Name="vintage", EmitDefaultValue=false)]
-        public Vintages Vintage { get; set; } = Vintages._9012013;
+        public Vintages Vintage { get; set; } = Vintages.90.1-2013;
         /// <summary>
         /// Text for the specific type of system equipment from the WSHPwithDOASEquipmentType enumeration.
         /// </summary>
         /// <value>Text for the specific type of system equipment from the WSHPwithDOASEquipmentType enumeration.</value>
         [DataMember(Name="equipment_type", EmitDefaultValue=false)]
-        public WSHPwithDOASEquipmentType EquipmentType { get; set; } = WSHPwithDOASEquipmentType.Fluidcoolerwithboiler;
+        public WSHPwithDOASEquipmentType EquipmentType { get; set; } = WSHPwithDOASEquipmentType.DOAS with water source heat pumps fluid cooler with boiler;
         /// <summary>
         /// Initializes a new instance of the <see cref="WSHPwithDOAS" /> class.
         /// </summary>
@@ -63,7 +63,7 @@ namespace HoneybeeSchema
         public WSHPwithDOAS
         (
             string identifier, // Required parameters
-            string displayName= default, Vintages vintage= Vintages._9012013, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, WSHPwithDOASEquipmentType equipmentType= WSHPwithDOASEquipmentType.Fluidcoolerwithboiler// Optional parameters
+            string displayName= default, Vintages vintage= Vintages.90.1-2013, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, WSHPwithDOASEquipmentType equipmentType= WSHPwithDOASEquipmentType.DOAS with water source heat pumps fluid cooler with boiler// Optional parameters
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             this.Vintage = vintage;

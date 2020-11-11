@@ -12,11 +12,7 @@
         "Wea": "honeybee_schema.radiance.wea",
         "_GlowHemisphere": "honeybee_schema.radiance.lightsource",
         "_PointInTime": "honeybee_schema.radiance.lightsource",
-        "_SkyWithSun": "honeybee_schema.radiance.lightsource",
-        "honeybee_schema__radiance__lightsource__Ground": "honeybee_schema.radiance.lightsource",
-        "honeybee_schema__radiance__lightsource__SkyHemisphere": "honeybee_schema.radiance.lightsource",
-        "honeybee_schema__radiance__wea__Location": "honeybee_schema.radiance.wea",
-        "honeybee_schema__radiance__wea__Wea": "honeybee_schema.radiance.wea"
+        "_SkyWithSun": "honeybee_schema.radiance.lightsource"
     },
     "enums": {}
 }

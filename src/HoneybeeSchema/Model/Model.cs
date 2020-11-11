@@ -43,7 +43,7 @@ namespace HoneybeeSchema
         { 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.39.8";
+            this.Version = "1.39.9";
         }
         
         /// <summary>
@@ -80,7 +80,7 @@ namespace HoneybeeSchema
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.39.8";
+            this.Version = "1.39.9";
         }
 
         /// <summary>

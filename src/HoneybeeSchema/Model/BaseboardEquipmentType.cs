@@ -36,25 +36,25 @@ namespace HoneybeeSchema
         /// Enum Electric for value: Baseboard electric
         /// </summary>
         [EnumMember(Value = "Baseboard electric")]
-        Electric = 1,
+        Baseboard electric = 1,
 
         /// <summary>
         /// Enum Gasboiler for value: Baseboard gas boiler
         /// </summary>
         [EnumMember(Value = "Baseboard gas boiler")]
-        Gasboiler = 2,
+        Baseboard gas boiler = 2,
 
         /// <summary>
         /// Enum Centralairsourceheatpump for value: Baseboard central air source heat pump
         /// </summary>
         [EnumMember(Value = "Baseboard central air source heat pump")]
-        Centralairsourceheatpump = 3,
+        Baseboard central air source heat pump = 3,
 
         /// <summary>
         /// Enum Districthotwater for value: Baseboard district hot water
         /// </summary>
         [EnumMember(Value = "Baseboard district hot water")]
-        Districthotwater = 4
+        Baseboard district hot water = 4
 
     }
 

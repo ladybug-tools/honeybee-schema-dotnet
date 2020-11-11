@@ -36,7 +36,7 @@ namespace HoneybeeSchema
         /// Enum DOASwithVRF for value: DOAS with VRF
         /// </summary>
         [EnumMember(Value = "DOAS with VRF")]
-        DOASwithVRF = 1
+        DOAS with VRF = 1
 
     }
 

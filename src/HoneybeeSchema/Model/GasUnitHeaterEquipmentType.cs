@@ -36,7 +36,7 @@ namespace HoneybeeSchema
         /// Enum Gasunitheaters for value: Gas unit heaters
         /// </summary>
         [EnumMember(Value = "Gas unit heaters")]
-        Gasunitheaters = 1
+        Gas unit heaters = 1
 
     }
 

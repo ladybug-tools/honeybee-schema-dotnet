@@ -36,25 +36,25 @@ namespace HoneybeeSchema
         /// Enum Fluidcoolerwithboiler for value: DOAS with water source heat pumps fluid cooler with boiler
         /// </summary>
         [EnumMember(Value = "DOAS with water source heat pumps fluid cooler with boiler")]
-        Fluidcoolerwithboiler = 1,
+        DOAS with water source heat pumps fluid cooler with boiler = 1,
 
         /// <summary>
         /// Enum Coolingtowerwithboiler for value: DOAS with water source heat pumps cooling tower with boiler
         /// </summary>
         [EnumMember(Value = "DOAS with water source heat pumps cooling tower with boiler")]
-        Coolingtowerwithboiler = 2,
+        DOAS with water source heat pumps cooling tower with boiler = 2,
 
         /// <summary>
         /// Enum Withgroundsourceheatpump for value: DOAS with water source heat pumps with ground source heat pump
         /// </summary>
         [EnumMember(Value = "DOAS with water source heat pumps with ground source heat pump")]
-        Withgroundsourceheatpump = 3,
+        DOAS with water source heat pumps with ground source heat pump = 3,
 
         /// <summary>
         /// Enum Districtchilledwaterwithdistricthotwater for value: DOAS with water source heat pumps district chilled water with district hot water
         /// </summary>
         [EnumMember(Value = "DOAS with water source heat pumps district chilled water with district hot water")]
-        Districtchilledwaterwithdistricthotwater = 4
+        DOAS with water source heat pumps district chilled water with district hot water = 4
 
     }
 
