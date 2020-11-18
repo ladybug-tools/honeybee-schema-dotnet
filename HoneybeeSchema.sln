@@ -6,6 +6,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HoneybeeSchema", "src\Honey
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HoneybeeSchema.Tests", "src\HoneybeeSchema.Tests\HoneybeeSchema.Tests.csproj", "{2CBDE6F4-6A8B-4813-BF26-879F5072EDC0}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HoneybeeSchema.Handlers", "src\HoneybeeSchemaHandler\HoneybeeSchema.Handlers.csproj", "{78B6FF28-290B-4ACF-A7FD-478B9C622A51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{2CBDE6F4-6A8B-4813-BF26-879F5072EDC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CBDE6F4-6A8B-4813-BF26-879F5072EDC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CBDE6F4-6A8B-4813-BF26-879F5072EDC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78B6FF28-290B-4ACF-A7FD-478B9C622A51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78B6FF28-290B-4ACF-A7FD-478B9C622A51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78B6FF28-290B-4ACF-A7FD-478B9C622A51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78B6FF28-290B-4ACF-A7FD-478B9C622A51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
