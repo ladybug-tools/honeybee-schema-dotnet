@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Documentation for Honeybee model schema",
-        "version": "1.39.9",
+        "version": "1.39.10",
         "title": "Honeybee Model Schema",
         "contact": {
             "name": "Ladybug Tools",
@@ -11234,7 +11234,7 @@
                             "version": {
                                 "title": "Version",
                                 "description": "Text string for the current version of the schema.",
-                                "default": "1.39.9",
+                                "default": "1.39.10",
                                 "pattern": "([0-9]+)\\.([0-9]+)\\.([0-9]+)",
                                 "type": "string",
                                 "readOnly": true
