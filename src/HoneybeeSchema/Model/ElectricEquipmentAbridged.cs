@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [DataContract(Name = "ElectricEquipmentAbridged")]
-    public partial class ElectricEquipmentAbridged : EquipmentBase, IEquatable<ElectricEquipmentAbridged>, IValidatableObject
+    public partial class ElectricEquipmentAbridged : IEquatable<ElectricEquipmentAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ElectricEquipmentAbridged" /> class.
@@ -51,15 +51,66 @@ namespace HoneybeeSchema
         /// <param name="lostFraction">Number for the amount of “lost” heat being given off by equipment. The default value is 0. (default to 0D).</param>
         public ElectricEquipmentAbridged
         (
-            string identifier, double wattsPerArea, string schedule, // Required parameters
-            string displayName= default, double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D // Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, wattsPerArea: wattsPerArea, schedule: schedule, radiantFraction: radiantFraction, latentFraction: latentFraction, lostFraction: lostFraction)// BaseClass
+             string identifier, double wattsPerArea, string schedule, // Required parameters
+            string displayName= default, double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D// Optional parameters
+        )// BaseClass
         {
+            // to ensure "identifier" is required (not null)
+            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for ElectricEquipmentAbridged and cannot be null");
+            this.WattsPerArea = wattsPerArea;
+            // to ensure "schedule" is required (not null)
+            this.Schedule = schedule ?? throw new ArgumentNullException("schedule is a required property for ElectricEquipmentAbridged and cannot be null");
+            this.DisplayName = displayName;
+            this.RadiantFraction = radiantFraction;
+            this.LatentFraction = latentFraction;
+            this.LostFraction = lostFraction;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "ElectricEquipmentAbridged";
         }
 
+        /// <summary>
+        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
+        /// </summary>
+        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
+        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
+        public string Identifier { get; set; } 
+        /// <summary>
+        /// Display name of the object with no character restrictions.
+        /// </summary>
+        /// <value>Display name of the object with no character restrictions.</value>
+        [DataMember(Name = "display_name", EmitDefaultValue = false)]
+        public string DisplayName { get; set; } 
+        /// <summary>
+        /// Equipment level per floor area as [W/m2].
+        /// </summary>
+        /// <value>Equipment level per floor area as [W/m2].</value>
+        [DataMember(Name = "watts_per_area", IsRequired = true, EmitDefaultValue = false)]
+        public double WattsPerArea { get; set; } 
+        /// <summary>
+        /// Identifier of the schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.
+        /// </summary>
+        /// <value>Identifier of the schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.</value>
+        [DataMember(Name = "schedule", IsRequired = true, EmitDefaultValue = false)]
+        public string Schedule { get; set; } 
+        /// <summary>
+        /// Number for the amount of long-wave radiation heat given off by electric equipment. Default value is 0.
+        /// </summary>
+        /// <value>Number for the amount of long-wave radiation heat given off by electric equipment. Default value is 0.</value>
+        [DataMember(Name = "radiant_fraction", EmitDefaultValue = true)]
+        public double RadiantFraction { get; set; }  = 0D;
+        /// <summary>
+        /// Number for the amount of latent heat given off by electricequipment. Default value is 0.
+        /// </summary>
+        /// <value>Number for the amount of latent heat given off by electricequipment. Default value is 0.</value>
+        [DataMember(Name = "latent_fraction", EmitDefaultValue = true)]
+        public double LatentFraction { get; set; }  = 0D;
+        /// <summary>
+        /// Number for the amount of “lost” heat being given off by equipment. The default value is 0.
+        /// </summary>
+        /// <value>Number for the amount of “lost” heat being given off by equipment. The default value is 0.</value>
+        [DataMember(Name = "lost_fraction", EmitDefaultValue = true)]
+        public double LostFraction { get; set; }  = 0D;
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -122,14 +173,6 @@ namespace HoneybeeSchema
             return DuplicateElectricEquipmentAbridged();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override EquipmentBase DuplicateEquipmentBase()
-        {
-            return DuplicateElectricEquipmentAbridged();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -150,11 +193,46 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
+                ) && 
+                (
+                    this.Identifier == input.Identifier ||
+                    (this.Identifier != null &&
+                    this.Identifier.Equals(input.Identifier))
+                ) && 
+                (
+                    this.DisplayName == input.DisplayName ||
+                    (this.DisplayName != null &&
+                    this.DisplayName.Equals(input.DisplayName))
+                ) && 
+                (
+                    this.WattsPerArea == input.WattsPerArea ||
+                    (this.WattsPerArea != null &&
+                    this.WattsPerArea.Equals(input.WattsPerArea))
+                ) && 
+                (
+                    this.Schedule == input.Schedule ||
+                    (this.Schedule != null &&
+                    this.Schedule.Equals(input.Schedule))
+                ) && 
+                (
+                    this.RadiantFraction == input.RadiantFraction ||
+                    (this.RadiantFraction != null &&
+                    this.RadiantFraction.Equals(input.RadiantFraction))
+                ) && 
+                (
+                    this.LatentFraction == input.LatentFraction ||
+                    (this.LatentFraction != null &&
+                    this.LatentFraction.Equals(input.LatentFraction))
+                ) && 
+                (
+                    this.LostFraction == input.LostFraction ||
+                    (this.LostFraction != null &&
+                    this.LostFraction.Equals(input.LostFraction))
                 );
         }
 
@@ -166,9 +244,23 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Identifier != null)
+                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                if (this.DisplayName != null)
+                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
+                if (this.WattsPerArea != null)
+                    hashCode = hashCode * 59 + this.WattsPerArea.GetHashCode();
+                if (this.Schedule != null)
+                    hashCode = hashCode * 59 + this.Schedule.GetHashCode();
+                if (this.RadiantFraction != null)
+                    hashCode = hashCode * 59 + this.RadiantFraction.GetHashCode();
+                if (this.LatentFraction != null)
+                    hashCode = hashCode * 59 + this.LatentFraction.GetHashCode();
+                if (this.LostFraction != null)
+                    hashCode = hashCode * 59 + this.LostFraction.GetHashCode();
                 return hashCode;
             }
         }
@@ -180,7 +272,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern
@@ -188,6 +279,80 @@ namespace HoneybeeSchema
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
+            }
+
+            // Identifier (string) maxLength
+            if(this.Identifier != null && this.Identifier.Length > 100)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
+            }
+
+            // Identifier (string) minLength
+            if(this.Identifier != null && this.Identifier.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
+            }
+            
+
+            
+            // WattsPerArea (double) minimum
+            if(this.WattsPerArea < (double)0)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for WattsPerArea, must be a value greater than or equal to 0.", new [] { "WattsPerArea" });
+            }
+
+            // Schedule (string) maxLength
+            if(this.Schedule != null && this.Schedule.Length > 100)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Schedule, length must be less than 100.", new [] { "Schedule" });
+            }
+
+            // Schedule (string) minLength
+            if(this.Schedule != null && this.Schedule.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Schedule, length must be greater than 1.", new [] { "Schedule" });
+            }
+            
+
+            
+            // RadiantFraction (double) maximum
+            if(this.RadiantFraction > (double)1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RadiantFraction, must be a value less than or equal to 1.", new [] { "RadiantFraction" });
+            }
+
+            // RadiantFraction (double) minimum
+            if(this.RadiantFraction < (double)0)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RadiantFraction, must be a value greater than or equal to 0.", new [] { "RadiantFraction" });
+            }
+
+
+            
+            // LatentFraction (double) maximum
+            if(this.LatentFraction > (double)1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LatentFraction, must be a value less than or equal to 1.", new [] { "LatentFraction" });
+            }
+
+            // LatentFraction (double) minimum
+            if(this.LatentFraction < (double)0)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LatentFraction, must be a value greater than or equal to 0.", new [] { "LatentFraction" });
+            }
+
+
+            
+            // LostFraction (double) maximum
+            if(this.LostFraction > (double)1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LostFraction, must be a value less than or equal to 1.", new [] { "LostFraction" });
+            }
+
+            // LostFraction (double) minimum
+            if(this.LostFraction < (double)0)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LostFraction, must be a value greater than or equal to 0.", new [] { "LostFraction" });
             }
 
             yield break;

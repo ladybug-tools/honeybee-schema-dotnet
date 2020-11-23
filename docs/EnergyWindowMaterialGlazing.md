@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Type** | **string** |  | [optional] [readonly] [default to "EnergyWindowMaterialGlazing"]
 **Identifier** | **string** | Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). | 
 **DisplayName** | **string** | Display name of the object with no character restrictions. | [optional] 
-**Type** | **string** |  | [optional] [readonly] [default to "EnergyWindowMaterialGlazing"]
 **Thickness** | **double** | The surface-to-surface of the glass in meters. Default value is 0.003. | [optional] [default to 0.003D]
 **SolarTransmittance** | **double** | Transmittance of solar radiation through the glass at normal incidence. Default value is 0.85 for clear glass. | [optional] [default to 0.85D]
 **SolarReflectance** | **double** | Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default value is 0.075 for clear glass. | [optional] [default to 0.075D]

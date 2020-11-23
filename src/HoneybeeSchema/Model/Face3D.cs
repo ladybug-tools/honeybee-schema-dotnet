@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// A single planar face in 3D space.
     /// </summary>
     [DataContract(Name = "Face3D")]
-    public partial class Face3D : OpenAPIGenBaseModel, IEquatable<Face3D>, IValidatableObject
+    public partial class Face3D : IEquatable<Face3D>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Face3D" /> class.
@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         (
              List<List<double>> boundary, // Required parameters
             List<List<List<double>>> holes= default, Plane plane= default// Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             // to ensure "boundary" is required (not null)
             this.Boundary = boundary ?? throw new ArgumentNullException("boundary is a required property for Face3D and cannot be null");
@@ -136,14 +136,6 @@ namespace HoneybeeSchema
             return DuplicateFace3D();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateFace3D();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -164,24 +156,24 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && 
                 (
                     this.Boundary == input.Boundary ||
                     this.Boundary != null &&
                     input.Boundary != null &&
                     this.Boundary.SequenceEqual(input.Boundary)
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Holes == input.Holes ||
                     this.Holes != null &&
                     input.Holes != null &&
                     this.Holes.SequenceEqual(input.Holes)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Plane == input.Plane ||
                     (this.Plane != null &&
@@ -197,11 +189,11 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                if (this.Boundary != null)
-                    hashCode = hashCode * 59 + this.Boundary.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Boundary != null)
+                    hashCode = hashCode * 59 + this.Boundary.GetHashCode();
                 if (this.Holes != null)
                     hashCode = hashCode * 59 + this.Holes.GetHashCode();
                 if (this.Plane != null)
@@ -217,7 +209,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

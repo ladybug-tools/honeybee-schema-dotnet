@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// AperturePropertiesAbridged
     /// </summary>
     [DataContract(Name = "AperturePropertiesAbridged")]
-    public partial class AperturePropertiesAbridged : OpenAPIGenBaseModel, IEquatable<AperturePropertiesAbridged>, IValidatableObject
+    public partial class AperturePropertiesAbridged : IEquatable<AperturePropertiesAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AperturePropertiesAbridged" /> class.
@@ -38,7 +38,7 @@ namespace HoneybeeSchema
         (
              // Required parameters
             ApertureEnergyPropertiesAbridged energy= default, ApertureRadiancePropertiesAbridged radiance= default// Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             this.Energy = energy;
             this.Radiance = radiance;
@@ -114,14 +114,6 @@ namespace HoneybeeSchema
             return DuplicateAperturePropertiesAbridged();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateAperturePropertiesAbridged();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -142,17 +134,17 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Energy == input.Energy ||
                     (this.Energy != null &&
                     this.Energy.Equals(input.Energy))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Radiance == input.Radiance ||
                     (this.Radiance != null &&
@@ -168,7 +160,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Energy != null)
@@ -186,7 +178,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

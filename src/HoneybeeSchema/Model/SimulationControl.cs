@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Used to specify which types of calculations to run.
     /// </summary>
     [DataContract(Name = "SimulationControl")]
-    public partial class SimulationControl : OpenAPIGenBaseModel, IEquatable<SimulationControl>, IValidatableObject
+    public partial class SimulationControl : IEquatable<SimulationControl>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SimulationControl" /> class.
@@ -41,7 +41,7 @@ namespace HoneybeeSchema
         (
              // Required parameters
             bool doZoneSizing = true, bool doSystemSizing = true, bool doPlantSizing = true, bool runForRunPeriods = true, bool runForSizingPeriods = false// Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             this.DoZoneSizing = doZoneSizing;
             this.DoSystemSizing = doSystemSizing;
@@ -143,14 +143,6 @@ namespace HoneybeeSchema
             return DuplicateSimulationControl();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateSimulationControl();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -171,32 +163,32 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.DoZoneSizing == input.DoZoneSizing ||
                     (this.DoZoneSizing != null &&
                     this.DoZoneSizing.Equals(input.DoZoneSizing))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.DoSystemSizing == input.DoSystemSizing ||
                     (this.DoSystemSizing != null &&
                     this.DoSystemSizing.Equals(input.DoSystemSizing))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.DoPlantSizing == input.DoPlantSizing ||
                     (this.DoPlantSizing != null &&
                     this.DoPlantSizing.Equals(input.DoPlantSizing))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.RunForRunPeriods == input.RunForRunPeriods ||
                     (this.RunForRunPeriods != null &&
                     this.RunForRunPeriods.Equals(input.RunForRunPeriods))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.RunForSizingPeriods == input.RunForSizingPeriods ||
                     (this.RunForSizingPeriods != null &&
@@ -212,7 +204,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.DoZoneSizing != null)
@@ -236,7 +228,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// A mesh in 3D space.
     /// </summary>
     [DataContract(Name = "Mesh3D")]
-    public partial class Mesh3D : OpenAPIGenBaseModel, IEquatable<Mesh3D>, IValidatableObject
+    public partial class Mesh3D : IEquatable<Mesh3D>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Mesh3D" /> class.
@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         (
              List<List<double>> vertices, List<List<int>> faces, // Required parameters
             List<Color> colors= default// Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             // to ensure "vertices" is required (not null)
             this.Vertices = vertices ?? throw new ArgumentNullException("vertices is a required property for Mesh3D and cannot be null");
@@ -137,14 +137,6 @@ namespace HoneybeeSchema
             return DuplicateMesh3D();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateMesh3D();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -165,24 +157,24 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && 
                 (
                     this.Vertices == input.Vertices ||
                     this.Vertices != null &&
                     input.Vertices != null &&
                     this.Vertices.SequenceEqual(input.Vertices)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Faces == input.Faces ||
                     this.Faces != null &&
                     input.Faces != null &&
                     this.Faces.SequenceEqual(input.Faces)
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Colors == input.Colors ||
                     this.Colors != null &&
@@ -199,13 +191,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Vertices != null)
                     hashCode = hashCode * 59 + this.Vertices.GetHashCode();
                 if (this.Faces != null)
                     hashCode = hashCode * 59 + this.Faces.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Colors != null)
                     hashCode = hashCode * 59 + this.Colors.GetHashCode();
                 return hashCode;
@@ -219,7 +211,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

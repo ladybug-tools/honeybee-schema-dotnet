@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
     [DataContract(Name = "RoomEnergyPropertiesAbridged")]
-    public partial class RoomEnergyPropertiesAbridged : OpenAPIGenBaseModel, IEquatable<RoomEnergyPropertiesAbridged>, IValidatableObject
+    public partial class RoomEnergyPropertiesAbridged : IEquatable<RoomEnergyPropertiesAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RoomEnergyPropertiesAbridged" /> class.
@@ -47,7 +47,7 @@ namespace HoneybeeSchema
         (
              // Required parameters
             string constructionSet= default, string programType= default, string hvac= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default, VentilationControlAbridged windowVentControl= default// Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             this.ConstructionSet = constructionSet;
             this.ProgramType = programType;
@@ -197,14 +197,6 @@ namespace HoneybeeSchema
             return DuplicateRoomEnergyPropertiesAbridged();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateRoomEnergyPropertiesAbridged();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -225,62 +217,62 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ConstructionSet == input.ConstructionSet ||
                     (this.ConstructionSet != null &&
                     this.ConstructionSet.Equals(input.ConstructionSet))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ProgramType == input.ProgramType ||
                     (this.ProgramType != null &&
                     this.ProgramType.Equals(input.ProgramType))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Hvac == input.Hvac ||
                     (this.Hvac != null &&
                     this.Hvac.Equals(input.Hvac))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.People == input.People ||
                     (this.People != null &&
                     this.People.Equals(input.People))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Lighting == input.Lighting ||
                     (this.Lighting != null &&
                     this.Lighting.Equals(input.Lighting))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ElectricEquipment == input.ElectricEquipment ||
                     (this.ElectricEquipment != null &&
                     this.ElectricEquipment.Equals(input.ElectricEquipment))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.GasEquipment == input.GasEquipment ||
                     (this.GasEquipment != null &&
                     this.GasEquipment.Equals(input.GasEquipment))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Infiltration == input.Infiltration ||
                     (this.Infiltration != null &&
                     this.Infiltration.Equals(input.Infiltration))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Ventilation == input.Ventilation ||
                     (this.Ventilation != null &&
                     this.Ventilation.Equals(input.Ventilation))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Setpoint == input.Setpoint ||
                     (this.Setpoint != null &&
                     this.Setpoint.Equals(input.Setpoint))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.WindowVentControl == input.WindowVentControl ||
                     (this.WindowVentControl != null &&
@@ -296,7 +288,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.ConstructionSet != null)
@@ -332,7 +324,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

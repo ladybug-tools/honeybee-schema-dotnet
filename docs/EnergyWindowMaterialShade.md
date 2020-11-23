@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Type** | **string** |  | [optional] [readonly] [default to "EnergyWindowMaterialShade"]
 **Identifier** | **string** | Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). | 
 **DisplayName** | **string** | Display name of the object with no character restrictions. | [optional] 
-**Type** | **string** |  | [optional] [readonly] [default to "EnergyWindowMaterialShade"]
 **SolarTransmittance** | **double** | The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default value is 0.4. | [optional] [default to 0.4D]
 **SolarReflectance** | **double** | The reflectance averaged over the solar spectrum. It us assumed same on both sides of shade and independent of incidence angle. Default value is 0.5 | [optional] [default to 0.5D]
 **VisibleTransmittance** | **double** | The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4. | [optional] [default to 0.4D]

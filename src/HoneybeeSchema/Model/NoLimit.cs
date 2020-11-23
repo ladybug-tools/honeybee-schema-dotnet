@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
     [DataContract(Name = "NoLimit")]
-    public partial class NoLimit : OpenAPIGenBaseModel, IEquatable<NoLimit>, IValidatableObject
+    public partial class NoLimit : IEquatable<NoLimit>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="NoLimit" /> class.
@@ -37,7 +37,7 @@ namespace HoneybeeSchema
         (
             // Required parameters
              // Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
 
             // Set non-required readonly properties with defaultValue
@@ -99,14 +99,6 @@ namespace HoneybeeSchema
             return DuplicateNoLimit();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateNoLimit();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -127,7 +119,7 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
@@ -143,7 +135,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
@@ -157,7 +149,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

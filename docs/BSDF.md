@@ -5,6 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Type** | **string** |  | [optional] [readonly] [default to "BSDF"]
+**Identifier** | **string** | Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. | 
+**DisplayName** | **string** | Display name of the object with no character restrictions. | [optional] 
 **BsdfData** | **string** | A string with the contents of the BSDF XML file. | 
 **Modifier** | [**AnyOfPlasticGlassBSDFGlowLightTransMetalVoidMirror**](AnyOfPlasticGlassBSDFGlowLightTransMetalVoidMirror.md) | Material modifier (default: Void). | [optional] 
 **Dependencies** | [**List&lt;AnyOfPlasticGlassBSDFGlowLightTransMetalVoidMirror&gt;**](AnyOfPlasticGlassBSDFGlowLightTransMetalVoidMirror.md) | List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None). | [optional] 
@@ -15,7 +18,6 @@ Name | Type | Description | Notes
 **FrontDiffuseReflectance** | **List&lt;double&gt;** | Optional additional front diffuse reflectance as sequence of numbers (default: None). | [optional] 
 **BackDiffuseReflectance** | **List&lt;double&gt;** | Optional additional back diffuse reflectance as sequence of numbers (default: None). | [optional] 
 **DiffuseTransmittance** | **List&lt;double&gt;** | Optional additional diffuse transmittance as sequence of numbers (default: None). | [optional] 
-**Type** | **string** |  | [optional] [readonly] [default to "BSDF"]
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)

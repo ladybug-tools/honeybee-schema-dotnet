@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**WindSpeed** | **double** | Wind speed on the design day [m/s]. | 
 **Type** | **string** |  | [optional] [readonly] [default to "WindCondition"]
+**WindSpeed** | **double** | Wind speed on the design day [m/s]. | 
 **WindDirection** | **double** | Wind direction on the design day [degrees]. | [optional] [default to 0D]
 
 [[Back to Model list]](../README.md#documentation-for-models)

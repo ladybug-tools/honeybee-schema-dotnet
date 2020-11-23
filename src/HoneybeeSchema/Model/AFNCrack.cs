@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Properties for airflow through a crack.
     /// </summary>
     [DataContract(Name = "AFNCrack")]
-    public partial class AFNCrack : OpenAPIGenBaseModel, IEquatable<AFNCrack>, IValidatableObject
+    public partial class AFNCrack : IEquatable<AFNCrack>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AFNCrack" /> class.
@@ -48,7 +48,7 @@ namespace HoneybeeSchema
         (
              double flowCoefficient, // Required parameters
             double flowExponent = 0.65D// Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             this.FlowCoefficient = flowCoefficient;
             this.FlowExponent = flowExponent;
@@ -126,14 +126,6 @@ namespace HoneybeeSchema
             return DuplicateAFNCrack();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateAFNCrack();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -154,17 +146,17 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
-                (
-                    this.FlowCoefficient == input.FlowCoefficient ||
-                    (this.FlowCoefficient != null &&
-                    this.FlowCoefficient.Equals(input.FlowCoefficient))
-                ) && base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
+                (
+                    this.FlowCoefficient == input.FlowCoefficient ||
+                    (this.FlowCoefficient != null &&
+                    this.FlowCoefficient.Equals(input.FlowCoefficient))
+                ) && 
                 (
                     this.FlowExponent == input.FlowExponent ||
                     (this.FlowExponent != null &&
@@ -180,11 +172,11 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                if (this.FlowCoefficient != null)
-                    hashCode = hashCode * 59 + this.FlowCoefficient.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.FlowCoefficient != null)
+                    hashCode = hashCode * 59 + this.FlowCoefficient.GetHashCode();
                 if (this.FlowExponent != null)
                     hashCode = hashCode * 59 + this.FlowExponent.GetHashCode();
                 return hashCode;
@@ -198,7 +190,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

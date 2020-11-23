@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Radiance Properties for Honeybee Model.
     /// </summary>
     [DataContract(Name = "ModelRadianceProperties")]
-    public partial class ModelRadianceProperties : OpenAPIGenBaseModel, IEquatable<ModelRadianceProperties>, IValidatableObject
+    public partial class ModelRadianceProperties : IEquatable<ModelRadianceProperties>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelRadianceProperties" /> class.
@@ -40,7 +40,7 @@ namespace HoneybeeSchema
         (
              // Required parameters
             List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> modifiers= default, List<AnyOf<ModifierSet,ModifierSetAbridged>> modifierSets= default, List<SensorGrid> sensorGrids= default, List<View> views= default// Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             this.Modifiers = modifiers;
             this.ModifierSets = modifierSets;
@@ -134,14 +134,6 @@ namespace HoneybeeSchema
             return DuplicateModelRadianceProperties();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateModelRadianceProperties();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -162,30 +154,30 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Modifiers == input.Modifiers ||
                     this.Modifiers != null &&
                     input.Modifiers != null &&
                     this.Modifiers.SequenceEqual(input.Modifiers)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ModifierSets == input.ModifierSets ||
                     this.ModifierSets != null &&
                     input.ModifierSets != null &&
                     this.ModifierSets.SequenceEqual(input.ModifierSets)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.SensorGrids == input.SensorGrids ||
                     this.SensorGrids != null &&
                     input.SensorGrids != null &&
                     this.SensorGrids.SequenceEqual(input.SensorGrids)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Views == input.Views ||
                     this.Views != null &&
@@ -202,7 +194,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Modifiers != null)
@@ -224,7 +216,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

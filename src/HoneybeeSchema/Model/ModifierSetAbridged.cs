@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Abridged set containing all modifiers needed to create a radiance model.
     /// </summary>
     [DataContract(Name = "ModifierSetAbridged")]
-    public partial class ModifierSetAbridged : IDdRadianceBaseModel, IEquatable<ModifierSetAbridged>, IValidatableObject
+    public partial class ModifierSetAbridged : IEquatable<ModifierSetAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModifierSetAbridged" /> class.
@@ -42,6 +42,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ModifierSetAbridged" /> class.
         /// </summary>
+        /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="wallSet">Optional WallModifierSet object for this ModifierSet (default: None)..</param>
         /// <param name="floorSet">Optional FloorModifierSet object for this ModifierSet (default: None)..</param>
         /// <param name="roofCeilingSet">Optional RoofCeilingModifierSet object for this ModifierSet (default: None)..</param>
@@ -49,14 +51,15 @@ namespace HoneybeeSchema
         /// <param name="doorSet">Optional DoorModifierSet object for this ModifierSet (default: None)..</param>
         /// <param name="shadeSet">Optional ShadeModifierSet object for this ModifierSet (default: None)..</param>
         /// <param name="airBoundaryModifier">Optional Modifier to be used for all Faces with an AirBoundary face type. If None, it will be the honeybee generic air wall modifier..</param>
-        /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public ModifierSetAbridged
         (
-            string identifier, // Required parameters
+             string identifier, // Required parameters
             string displayName= default, WallModifierSetAbridged wallSet= default, FloorModifierSetAbridged floorSet= default, RoofCeilingModifierSetAbridged roofCeilingSet= default, ApertureModifierSetAbridged apertureSet= default, DoorModifierSetAbridged doorSet= default, ShadeModifierSetAbridged shadeSet= default, string airBoundaryModifier= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+        )// BaseClass
         {
+            // to ensure "identifier" is required (not null)
+            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for ModifierSetAbridged and cannot be null");
+            this.DisplayName = displayName;
             this.WallSet = wallSet;
             this.FloorSet = floorSet;
             this.RoofCeilingSet = roofCeilingSet;
@@ -69,6 +72,18 @@ namespace HoneybeeSchema
             this.Type = "ModifierSetAbridged";
         }
 
+        /// <summary>
+        /// Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.
+        /// </summary>
+        /// <value>Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.</value>
+        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
+        public string Identifier { get; set; } 
+        /// <summary>
+        /// Display name of the object with no character restrictions.
+        /// </summary>
+        /// <value>Display name of the object with no character restrictions.</value>
+        [DataMember(Name = "display_name", EmitDefaultValue = false)]
+        public string DisplayName { get; set; } 
         /// <summary>
         /// Optional WallModifierSet object for this ModifierSet (default: None).
         /// </summary>
@@ -175,14 +190,6 @@ namespace HoneybeeSchema
             return DuplicateModifierSetAbridged();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override IDdRadianceBaseModel DuplicateIDdRadianceBaseModel()
-        {
-            return DuplicateModifierSetAbridged();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -203,42 +210,52 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
+                (
+                    this.Identifier == input.Identifier ||
+                    (this.Identifier != null &&
+                    this.Identifier.Equals(input.Identifier))
+                ) && 
+                (
+                    this.DisplayName == input.DisplayName ||
+                    (this.DisplayName != null &&
+                    this.DisplayName.Equals(input.DisplayName))
+                ) && 
                 (
                     this.WallSet == input.WallSet ||
                     (this.WallSet != null &&
                     this.WallSet.Equals(input.WallSet))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.FloorSet == input.FloorSet ||
                     (this.FloorSet != null &&
                     this.FloorSet.Equals(input.FloorSet))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.RoofCeilingSet == input.RoofCeilingSet ||
                     (this.RoofCeilingSet != null &&
                     this.RoofCeilingSet.Equals(input.RoofCeilingSet))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ApertureSet == input.ApertureSet ||
                     (this.ApertureSet != null &&
                     this.ApertureSet.Equals(input.ApertureSet))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.DoorSet == input.DoorSet ||
                     (this.DoorSet != null &&
                     this.DoorSet.Equals(input.DoorSet))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ShadeSet == input.ShadeSet ||
                     (this.ShadeSet != null &&
                     this.ShadeSet.Equals(input.ShadeSet))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.AirBoundaryModifier == input.AirBoundaryModifier ||
                     (this.AirBoundaryModifier != null &&
@@ -254,9 +271,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Identifier != null)
+                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                if (this.DisplayName != null)
+                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.WallSet != null)
                     hashCode = hashCode * 59 + this.WallSet.GetHashCode();
                 if (this.FloorSet != null)
@@ -282,7 +303,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

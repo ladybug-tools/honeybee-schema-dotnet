@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// A single planar geometry that can be assigned to Radiance states.
     /// </summary>
     [DataContract(Name = "StateGeometryAbridged")]
-    public partial class StateGeometryAbridged : IDdRadianceBaseModel, IEquatable<StateGeometryAbridged>, IValidatableObject
+    public partial class StateGeometryAbridged : IEquatable<StateGeometryAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="StateGeometryAbridged" /> class.
@@ -42,19 +42,22 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="StateGeometryAbridged" /> class.
         /// </summary>
+        /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="geometry">A ladybug_geometry Face3D. (required).</param>
         /// <param name="modifier">A string for a Honeybee Radiance Modifier identifier (default: None)..</param>
         /// <param name="modifierDirect">A string for Honeybee Radiance Modifier identifiers to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None)..</param>
-        /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public StateGeometryAbridged
         (
-            string identifier, Face3D geometry, // Required parameters
+             string identifier, Face3D geometry, // Required parameters
             string displayName= default, string modifier= default, string modifierDirect= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+        )// BaseClass
         {
+            // to ensure "identifier" is required (not null)
+            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for StateGeometryAbridged and cannot be null");
             // to ensure "geometry" is required (not null)
             this.Geometry = geometry ?? throw new ArgumentNullException("geometry is a required property for StateGeometryAbridged and cannot be null");
+            this.DisplayName = displayName;
             this.Modifier = modifier;
             this.ModifierDirect = modifierDirect;
 
@@ -62,6 +65,18 @@ namespace HoneybeeSchema
             this.Type = "StateGeometryAbridged";
         }
 
+        /// <summary>
+        /// Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.
+        /// </summary>
+        /// <value>Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.</value>
+        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
+        public string Identifier { get; set; } 
+        /// <summary>
+        /// Display name of the object with no character restrictions.
+        /// </summary>
+        /// <value>Display name of the object with no character restrictions.</value>
+        [DataMember(Name = "display_name", EmitDefaultValue = false)]
+        public string DisplayName { get; set; } 
         /// <summary>
         /// A ladybug_geometry Face3D.
         /// </summary>
@@ -140,14 +155,6 @@ namespace HoneybeeSchema
             return DuplicateStateGeometryAbridged();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override IDdRadianceBaseModel DuplicateIDdRadianceBaseModel()
-        {
-            return DuplicateStateGeometryAbridged();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -168,22 +175,32 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
-                (
-                    this.Geometry == input.Geometry ||
-                    (this.Geometry != null &&
-                    this.Geometry.Equals(input.Geometry))
-                ) && base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
+                (
+                    this.Identifier == input.Identifier ||
+                    (this.Identifier != null &&
+                    this.Identifier.Equals(input.Identifier))
+                ) && 
+                (
+                    this.DisplayName == input.DisplayName ||
+                    (this.DisplayName != null &&
+                    this.DisplayName.Equals(input.DisplayName))
+                ) && 
+                (
+                    this.Geometry == input.Geometry ||
+                    (this.Geometry != null &&
+                    this.Geometry.Equals(input.Geometry))
+                ) && 
                 (
                     this.Modifier == input.Modifier ||
                     (this.Modifier != null &&
                     this.Modifier.Equals(input.Modifier))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ModifierDirect == input.ModifierDirect ||
                     (this.ModifierDirect != null &&
@@ -199,11 +216,15 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                if (this.Geometry != null)
-                    hashCode = hashCode * 59 + this.Geometry.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Identifier != null)
+                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                if (this.DisplayName != null)
+                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
+                if (this.Geometry != null)
+                    hashCode = hashCode * 59 + this.Geometry.GetHashCode();
                 if (this.Modifier != null)
                     hashCode = hashCode * 59 + this.Modifier.GetHashCode();
                 if (this.ModifierDirect != null)
@@ -219,7 +240,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

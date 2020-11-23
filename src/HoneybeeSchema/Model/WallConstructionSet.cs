@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// A set of constructions for wall assemblies.
     /// </summary>
     [DataContract(Name = "WallConstructionSet")]
-    public partial class WallConstructionSet : OpenAPIGenBaseModel, IEquatable<WallConstructionSet>, IValidatableObject
+    public partial class WallConstructionSet : IEquatable<WallConstructionSet>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="WallConstructionSet" /> class.
@@ -38,8 +38,8 @@ namespace HoneybeeSchema
         public WallConstructionSet
         (
              // Required parameters
-            OpaqueConstruction interiorConstruction= default, OpaqueConstruction exteriorConstruction= default, OpaqueConstruction groundConstruction= default // Optional parameters
-        ) : base()// BaseClass
+            OpaqueConstruction interiorConstruction= default, OpaqueConstruction exteriorConstruction= default, OpaqueConstruction groundConstruction= default// Optional parameters
+        )// BaseClass
         {
             this.InteriorConstruction = interiorConstruction;
             this.ExteriorConstruction = exteriorConstruction;
@@ -125,14 +125,6 @@ namespace HoneybeeSchema
             return DuplicateWallConstructionSet();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateWallConstructionSet();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -153,26 +145,26 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
-                (
-                    this.InteriorConstruction == input.InteriorConstruction ||
-                    (this.InteriorConstruction != null &&
-                    this.InteriorConstruction.Equals(input.InteriorConstruction))
-                ) && base.Equals(input) && 
-                (
-                    this.ExteriorConstruction == input.ExteriorConstruction ||
-                    (this.ExteriorConstruction != null &&
-                    this.ExteriorConstruction.Equals(input.ExteriorConstruction))
-                ) && base.Equals(input) && 
-                (
-                    this.GroundConstruction == input.GroundConstruction ||
-                    (this.GroundConstruction != null &&
-                    this.GroundConstruction.Equals(input.GroundConstruction))
-                ) && base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
+                ) && 
+                (
+                    this.InteriorConstruction == input.InteriorConstruction ||
+                    (this.InteriorConstruction != null &&
+                    this.InteriorConstruction.Equals(input.InteriorConstruction))
+                ) && 
+                (
+                    this.ExteriorConstruction == input.ExteriorConstruction ||
+                    (this.ExteriorConstruction != null &&
+                    this.ExteriorConstruction.Equals(input.ExteriorConstruction))
+                ) && 
+                (
+                    this.GroundConstruction == input.GroundConstruction ||
+                    (this.GroundConstruction != null &&
+                    this.GroundConstruction.Equals(input.GroundConstruction))
                 );
         }
 
@@ -184,15 +176,15 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.InteriorConstruction != null)
                     hashCode = hashCode * 59 + this.InteriorConstruction.GetHashCode();
                 if (this.ExteriorConstruction != null)
                     hashCode = hashCode * 59 + this.ExteriorConstruction.GetHashCode();
                 if (this.GroundConstruction != null)
                     hashCode = hashCode * 59 + this.GroundConstruction.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -204,7 +196,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

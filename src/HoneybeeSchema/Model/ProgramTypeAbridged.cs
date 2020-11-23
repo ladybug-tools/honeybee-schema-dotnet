@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [DataContract(Name = "ProgramTypeAbridged")]
-    public partial class ProgramTypeAbridged : IDdEnergyBaseModel, IEquatable<ProgramTypeAbridged>, IValidatableObject
+    public partial class ProgramTypeAbridged : IEquatable<ProgramTypeAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ProgramTypeAbridged" /> class.
@@ -42,6 +42,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ProgramTypeAbridged" /> class.
         /// </summary>
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="people">People to describe the occupancy of the program. If None, no occupancy will be assumed for the program..</param>
         /// <param name="lighting">Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program..</param>
         /// <param name="electricEquipment">ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed..</param>
@@ -49,14 +51,15 @@ namespace HoneybeeSchema
         /// <param name="infiltration">Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program..</param>
         /// <param name="ventilation">Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed..</param>
         /// <param name="setpoint">Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned..</param>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public ProgramTypeAbridged
         (
-            string identifier, // Required parameters
+             string identifier, // Required parameters
             string displayName= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+        )// BaseClass
         {
+            // to ensure "identifier" is required (not null)
+            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for ProgramTypeAbridged and cannot be null");
+            this.DisplayName = displayName;
             this.People = people;
             this.Lighting = lighting;
             this.ElectricEquipment = electricEquipment;
@@ -69,6 +72,18 @@ namespace HoneybeeSchema
             this.Type = "ProgramTypeAbridged";
         }
 
+        /// <summary>
+        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
+        /// </summary>
+        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
+        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
+        public string Identifier { get; set; } 
+        /// <summary>
+        /// Display name of the object with no character restrictions.
+        /// </summary>
+        /// <value>Display name of the object with no character restrictions.</value>
+        [DataMember(Name = "display_name", EmitDefaultValue = false)]
+        public string DisplayName { get; set; } 
         /// <summary>
         /// People to describe the occupancy of the program. If None, no occupancy will be assumed for the program.
         /// </summary>
@@ -175,14 +190,6 @@ namespace HoneybeeSchema
             return DuplicateProgramTypeAbridged();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
-        {
-            return DuplicateProgramTypeAbridged();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -203,42 +210,52 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
+                (
+                    this.Identifier == input.Identifier ||
+                    (this.Identifier != null &&
+                    this.Identifier.Equals(input.Identifier))
+                ) && 
+                (
+                    this.DisplayName == input.DisplayName ||
+                    (this.DisplayName != null &&
+                    this.DisplayName.Equals(input.DisplayName))
+                ) && 
                 (
                     this.People == input.People ||
                     (this.People != null &&
                     this.People.Equals(input.People))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Lighting == input.Lighting ||
                     (this.Lighting != null &&
                     this.Lighting.Equals(input.Lighting))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ElectricEquipment == input.ElectricEquipment ||
                     (this.ElectricEquipment != null &&
                     this.ElectricEquipment.Equals(input.ElectricEquipment))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.GasEquipment == input.GasEquipment ||
                     (this.GasEquipment != null &&
                     this.GasEquipment.Equals(input.GasEquipment))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Infiltration == input.Infiltration ||
                     (this.Infiltration != null &&
                     this.Infiltration.Equals(input.Infiltration))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Ventilation == input.Ventilation ||
                     (this.Ventilation != null &&
                     this.Ventilation.Equals(input.Ventilation))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Setpoint == input.Setpoint ||
                     (this.Setpoint != null &&
@@ -254,9 +271,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Identifier != null)
+                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                if (this.DisplayName != null)
+                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.People != null)
                     hashCode = hashCode * 59 + this.People.GetHashCode();
                 if (this.Lighting != null)
@@ -282,7 +303,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern
@@ -292,6 +312,18 @@ namespace HoneybeeSchema
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
+            // Identifier (string) maxLength
+            if(this.Identifier != null && this.Identifier.Length > 100)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
+            }
+
+            // Identifier (string) minLength
+            if(this.Identifier != null && this.Identifier.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
+            }
+            
             yield break;
         }
     }

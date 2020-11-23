@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Abridged set containing radiance modifiers needed for a model&#39;s Apertures.
     /// </summary>
     [DataContract(Name = "ApertureModifierSetAbridged")]
-    public partial class ApertureModifierSetAbridged : OpenAPIGenBaseModel, IEquatable<ApertureModifierSetAbridged>, IValidatableObject
+    public partial class ApertureModifierSetAbridged : IEquatable<ApertureModifierSetAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ApertureModifierSetAbridged" /> class.
@@ -40,7 +40,7 @@ namespace HoneybeeSchema
         (
              // Required parameters
             string windowModifier= default, string interiorModifier= default, string skylightModifier= default, string operableModifier= default// Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             this.WindowModifier = windowModifier;
             this.InteriorModifier = interiorModifier;
@@ -134,14 +134,6 @@ namespace HoneybeeSchema
             return DuplicateApertureModifierSetAbridged();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateApertureModifierSetAbridged();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -162,27 +154,27 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.WindowModifier == input.WindowModifier ||
                     (this.WindowModifier != null &&
                     this.WindowModifier.Equals(input.WindowModifier))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.InteriorModifier == input.InteriorModifier ||
                     (this.InteriorModifier != null &&
                     this.InteriorModifier.Equals(input.InteriorModifier))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.SkylightModifier == input.SkylightModifier ||
                     (this.SkylightModifier != null &&
                     this.SkylightModifier.Equals(input.SkylightModifier))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.OperableModifier == input.OperableModifier ||
                     (this.OperableModifier != null &&
@@ -198,7 +190,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.WindowModifier != null)
@@ -220,7 +212,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

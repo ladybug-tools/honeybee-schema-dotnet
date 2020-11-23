@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Used to describe settings for EnergyPlus shadow calculation.
     /// </summary>
     [DataContract(Name = "ShadowCalculation")]
-    public partial class ShadowCalculation : OpenAPIGenBaseModel, IEquatable<ShadowCalculation>, IValidatableObject
+    public partial class ShadowCalculation : IEquatable<ShadowCalculation>, IValidatableObject
     {
         /// <summary>
         /// Gets or Sets SolarDistribution
@@ -58,7 +58,7 @@ namespace HoneybeeSchema
         (
              // Required parameters
             SolarDistribution solarDistribution= SolarDistribution.FullExteriorWithReflections, CalculationMethod calculationMethod= CalculationMethod.PolygonClipping, CalculationUpdateMethod calculationUpdateMethod= CalculationUpdateMethod.Periodic, int calculationFrequency = 30, int maximumFigures = 15000// Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             this.SolarDistribution = solarDistribution;
             this.CalculationMethod = calculationMethod;
@@ -142,14 +142,6 @@ namespace HoneybeeSchema
             return DuplicateShadowCalculation();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateShadowCalculation();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -170,32 +162,32 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.SolarDistribution == input.SolarDistribution ||
                     (this.SolarDistribution != null &&
                     this.SolarDistribution.Equals(input.SolarDistribution))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.CalculationMethod == input.CalculationMethod ||
                     (this.CalculationMethod != null &&
                     this.CalculationMethod.Equals(input.CalculationMethod))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.CalculationUpdateMethod == input.CalculationUpdateMethod ||
                     (this.CalculationUpdateMethod != null &&
                     this.CalculationUpdateMethod.Equals(input.CalculationUpdateMethod))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.CalculationFrequency == input.CalculationFrequency ||
                     (this.CalculationFrequency != null &&
                     this.CalculationFrequency.Equals(input.CalculationFrequency))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.MaximumFigures == input.MaximumFigures ||
                     (this.MaximumFigures != null &&
@@ -211,7 +203,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.SolarDistribution != null)
@@ -235,7 +227,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Used to specify sky conditions on a design day.
     /// </summary>
     [DataContract(Name = "_SkyCondition")]
-    public partial class SkyCondition : OpenAPIGenBaseModel, IEquatable<SkyCondition>, IValidatableObject
+    public partial class SkyCondition : IEquatable<SkyCondition>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SkyCondition" /> class.
@@ -47,8 +47,8 @@ namespace HoneybeeSchema
         public SkyCondition
         (
              List<int> date, // Required parameters
-            bool daylightSavings = false // Optional parameters
-        ) : base()// BaseClass
+            bool daylightSavings = false// Optional parameters
+        )// BaseClass
         {
             // to ensure "date" is required (not null)
             this.Date = date ?? throw new ArgumentNullException("date is a required property for SkyCondition and cannot be null");
@@ -127,14 +127,6 @@ namespace HoneybeeSchema
             return DuplicateSkyCondition();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateSkyCondition();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -155,22 +147,22 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && 
                 (
                     this.Date == input.Date ||
                     this.Date != null &&
                     input.Date != null &&
                     this.Date.SequenceEqual(input.Date)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.DaylightSavings == input.DaylightSavings ||
                     (this.DaylightSavings != null &&
                     this.DaylightSavings.Equals(input.DaylightSavings))
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -182,13 +174,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Date != null)
                     hashCode = hashCode * 59 + this.Date.GetHashCode();
                 if (this.DaylightSavings != null)
                     hashCode = hashCode * 59 + this.DaylightSavings.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -200,17 +192,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            return this.BaseValidate(validationContext);
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
-        {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

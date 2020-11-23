@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
     [DataContract(Name = "Outdoors")]
-    public partial class Outdoors : OpenAPIGenBaseModel, IEquatable<Outdoors>, IValidatableObject
+    public partial class Outdoors : IEquatable<Outdoors>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Outdoors" /> class.
@@ -39,7 +39,7 @@ namespace HoneybeeSchema
         (
              // Required parameters
             bool sunExposure = true, bool windExposure = true, AnyOf<Autocalculate,double> viewFactor= default// Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             this.SunExposure = sunExposure;
             this.WindExposure = windExposure;
@@ -125,14 +125,6 @@ namespace HoneybeeSchema
             return DuplicateOutdoors();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateOutdoors();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -153,22 +145,22 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.SunExposure == input.SunExposure ||
                     (this.SunExposure != null &&
                     this.SunExposure.Equals(input.SunExposure))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.WindExposure == input.WindExposure ||
                     (this.WindExposure != null &&
                     this.WindExposure.Equals(input.WindExposure))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ViewFactor == input.ViewFactor ||
                     (this.ViewFactor != null &&
@@ -184,7 +176,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.SunExposure != null)
@@ -204,7 +196,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// A set of constructions for door assemblies.
     /// </summary>
     [DataContract(Name = "DoorConstructionSet")]
-    public partial class DoorConstructionSet : OpenAPIGenBaseModel, IEquatable<DoorConstructionSet>, IValidatableObject
+    public partial class DoorConstructionSet : IEquatable<DoorConstructionSet>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DoorConstructionSet" /> class.
@@ -41,7 +41,7 @@ namespace HoneybeeSchema
         (
              // Required parameters
             OpaqueConstruction interiorConstruction= default, OpaqueConstruction exteriorConstruction= default, OpaqueConstruction overheadConstruction= default, WindowConstruction exteriorGlassConstruction= default, WindowConstruction interiorGlassConstruction= default// Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             this.InteriorConstruction = interiorConstruction;
             this.ExteriorConstruction = exteriorConstruction;
@@ -143,14 +143,6 @@ namespace HoneybeeSchema
             return DuplicateDoorConstructionSet();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateDoorConstructionSet();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -171,32 +163,32 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.InteriorConstruction == input.InteriorConstruction ||
                     (this.InteriorConstruction != null &&
                     this.InteriorConstruction.Equals(input.InteriorConstruction))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ExteriorConstruction == input.ExteriorConstruction ||
                     (this.ExteriorConstruction != null &&
                     this.ExteriorConstruction.Equals(input.ExteriorConstruction))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.OverheadConstruction == input.OverheadConstruction ||
                     (this.OverheadConstruction != null &&
                     this.OverheadConstruction.Equals(input.OverheadConstruction))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ExteriorGlassConstruction == input.ExteriorGlassConstruction ||
                     (this.ExteriorGlassConstruction != null &&
                     this.ExteriorGlassConstruction.Equals(input.ExteriorGlassConstruction))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.InteriorGlassConstruction == input.InteriorGlassConstruction ||
                     (this.InteriorGlassConstruction != null &&
@@ -212,7 +204,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.InteriorConstruction != null)
@@ -236,7 +228,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

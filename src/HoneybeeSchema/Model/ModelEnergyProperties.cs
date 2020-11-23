@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
     [DataContract(Name = "ModelEnergyProperties")]
-    public partial class ModelEnergyProperties : OpenAPIGenBaseModel, IEquatable<ModelEnergyProperties>, IValidatableObject
+    public partial class ModelEnergyProperties : IEquatable<ModelEnergyProperties>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelEnergyProperties" /> class.
@@ -44,7 +44,7 @@ namespace HoneybeeSchema
         (
              // Required parameters
             List<AnyOf<ConstructionSetAbridged,ConstructionSet>> constructionSets= default, List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,WindowConstructionShadeAbridged,AirBoundaryConstructionAbridged,OpaqueConstruction,WindowConstruction,WindowConstructionShade,AirBoundaryConstruction,ShadeConstruction>> constructions= default, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing,EnergyWindowMaterialShade>> materials= default, List<AnyOf<IdealAirSystemAbridged,VAV,PVAV,PSZ,PTAC,ForcedAirFurnace,FCUwithDOAS,WSHPwithDOAS,VRFwithDOAS,FCU,WSHP,VRF,Baseboard,EvaporativeCooler,Residential,WindowAC,GasUnitHeater>> hvacs= default, List<AnyOf<ProgramTypeAbridged,ProgramType>> programTypes= default, List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged,ScheduleRuleset,ScheduleFixedInterval>> schedules= default, List<ScheduleTypeLimit> scheduleTypeLimits= default, VentilationSimulationControl ventilationSimulationControl= default// Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             this.ConstructionSets = constructionSets;
             this.Constructions = constructions;
@@ -170,14 +170,6 @@ namespace HoneybeeSchema
             return DuplicateModelEnergyProperties();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateModelEnergyProperties();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -198,54 +190,54 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ConstructionSets == input.ConstructionSets ||
                     this.ConstructionSets != null &&
                     input.ConstructionSets != null &&
                     this.ConstructionSets.SequenceEqual(input.ConstructionSets)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Constructions == input.Constructions ||
                     this.Constructions != null &&
                     input.Constructions != null &&
                     this.Constructions.SequenceEqual(input.Constructions)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Materials == input.Materials ||
                     this.Materials != null &&
                     input.Materials != null &&
                     this.Materials.SequenceEqual(input.Materials)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Hvacs == input.Hvacs ||
                     this.Hvacs != null &&
                     input.Hvacs != null &&
                     this.Hvacs.SequenceEqual(input.Hvacs)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ProgramTypes == input.ProgramTypes ||
                     this.ProgramTypes != null &&
                     input.ProgramTypes != null &&
                     this.ProgramTypes.SequenceEqual(input.ProgramTypes)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Schedules == input.Schedules ||
                     this.Schedules != null &&
                     input.Schedules != null &&
                     this.Schedules.SequenceEqual(input.Schedules)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ScheduleTypeLimits == input.ScheduleTypeLimits ||
                     this.ScheduleTypeLimits != null &&
                     input.ScheduleTypeLimits != null &&
                     this.ScheduleTypeLimits.SequenceEqual(input.ScheduleTypeLimits)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.VentilationSimulationControl == input.VentilationSimulationControl ||
                     (this.VentilationSimulationControl != null &&
@@ -261,7 +253,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.ConstructionSets != null)
@@ -291,7 +283,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

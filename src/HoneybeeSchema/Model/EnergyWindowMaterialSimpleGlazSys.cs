@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Describe an entire glazing system rather than individual layers.  Used when only very limited information is available on the glazing layers or when specific performance levels are being targeted.
     /// </summary>
     [DataContract(Name = "EnergyWindowMaterialSimpleGlazSys")]
-    public partial class EnergyWindowMaterialSimpleGlazSys : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialSimpleGlazSys>, IValidatableObject
+    public partial class EnergyWindowMaterialSimpleGlazSys : IEquatable<EnergyWindowMaterialSimpleGlazSys>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialSimpleGlazSys" /> class.
@@ -42,25 +42,40 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialSimpleGlazSys" /> class.
         /// </summary>
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="uFactor">Used to describe the value for window system U-Factor, or overall heat transfer coefficient in W/(m2-K). (required).</param>
         /// <param name="shgc">Unitless  quantity describing Solar Heat Gain Coefficient for normal incidence and vertical orientation. (required).</param>
         /// <param name="vt">The fraction of visible light falling on the window that makes it through the glass at normal incidence. (default to 0.54D).</param>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public EnergyWindowMaterialSimpleGlazSys
         (
-            string identifier, double uFactor, double shgc, // Required parameters
+             string identifier, double uFactor, double shgc, // Required parameters
             string displayName= default, double vt = 0.54D// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+        )// BaseClass
         {
+            // to ensure "identifier" is required (not null)
+            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for EnergyWindowMaterialSimpleGlazSys and cannot be null");
             this.UFactor = uFactor;
             this.Shgc = shgc;
+            this.DisplayName = displayName;
             this.Vt = vt;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "EnergyWindowMaterialSimpleGlazSys";
         }
 
+        /// <summary>
+        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
+        /// </summary>
+        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
+        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
+        public string Identifier { get; set; } 
+        /// <summary>
+        /// Display name of the object with no character restrictions.
+        /// </summary>
+        /// <value>Display name of the object with no character restrictions.</value>
+        [DataMember(Name = "display_name", EmitDefaultValue = false)]
+        public string DisplayName { get; set; } 
         /// <summary>
         /// Used to describe the value for window system U-Factor, or overall heat transfer coefficient in W/(m2-K).
         /// </summary>
@@ -139,14 +154,6 @@ namespace HoneybeeSchema
             return DuplicateEnergyWindowMaterialSimpleGlazSys();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
-        {
-            return DuplicateEnergyWindowMaterialSimpleGlazSys();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -167,22 +174,32 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
-                (
-                    this.UFactor == input.UFactor ||
-                    (this.UFactor != null &&
-                    this.UFactor.Equals(input.UFactor))
-                ) && base.Equals(input) && 
-                (
-                    this.Shgc == input.Shgc ||
-                    (this.Shgc != null &&
-                    this.Shgc.Equals(input.Shgc))
-                ) && base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
+                (
+                    this.Identifier == input.Identifier ||
+                    (this.Identifier != null &&
+                    this.Identifier.Equals(input.Identifier))
+                ) && 
+                (
+                    this.DisplayName == input.DisplayName ||
+                    (this.DisplayName != null &&
+                    this.DisplayName.Equals(input.DisplayName))
+                ) && 
+                (
+                    this.UFactor == input.UFactor ||
+                    (this.UFactor != null &&
+                    this.UFactor.Equals(input.UFactor))
+                ) && 
+                (
+                    this.Shgc == input.Shgc ||
+                    (this.Shgc != null &&
+                    this.Shgc.Equals(input.Shgc))
+                ) && 
                 (
                     this.Vt == input.Vt ||
                     (this.Vt != null &&
@@ -198,13 +215,17 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Identifier != null)
+                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                if (this.DisplayName != null)
+                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.UFactor != null)
                     hashCode = hashCode * 59 + this.UFactor.GetHashCode();
                 if (this.Shgc != null)
                     hashCode = hashCode * 59 + this.Shgc.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Vt != null)
                     hashCode = hashCode * 59 + this.Vt.GetHashCode();
                 return hashCode;
@@ -218,15 +239,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
-
-            
-            // UFactor (double) maximum
-            if(this.UFactor > (double)5.8)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for UFactor, must be a value less than or equal to 5.8.", new [] { "UFactor" });
-            }
-
 
             
             // Type (string) pattern
@@ -234,6 +246,26 @@ namespace HoneybeeSchema
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
+            }
+
+            // Identifier (string) maxLength
+            if(this.Identifier != null && this.Identifier.Length > 100)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
+            }
+
+            // Identifier (string) minLength
+            if(this.Identifier != null && this.Identifier.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
+            }
+            
+
+            
+            // UFactor (double) maximum
+            if(this.UFactor > (double)5.8)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for UFactor, must be a value less than or equal to 5.8.", new [] { "UFactor" });
             }
 
             yield break;

@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Lists the outputs to report from the simulation and their format.
     /// </summary>
     [DataContract(Name = "SimulationOutput")]
-    public partial class SimulationOutput : OpenAPIGenBaseModel, IEquatable<SimulationOutput>, IValidatableObject
+    public partial class SimulationOutput : IEquatable<SimulationOutput>, IValidatableObject
     {
         /// <summary>
         /// Gets or Sets ReportingFrequency
@@ -46,7 +46,7 @@ namespace HoneybeeSchema
         (
              // Required parameters
             ReportingFrequency reportingFrequency= ReportingFrequency.Hourly, bool includeSqlite = true, bool includeHtml = true, List<string> outputs= default, List<string> summaryReports= default// Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             this.ReportingFrequency = reportingFrequency;
             this.IncludeSqlite = includeSqlite;
@@ -142,14 +142,6 @@ namespace HoneybeeSchema
             return DuplicateSimulationOutput();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateSimulationOutput();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -170,33 +162,33 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ReportingFrequency == input.ReportingFrequency ||
                     (this.ReportingFrequency != null &&
                     this.ReportingFrequency.Equals(input.ReportingFrequency))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.IncludeSqlite == input.IncludeSqlite ||
                     (this.IncludeSqlite != null &&
                     this.IncludeSqlite.Equals(input.IncludeSqlite))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.IncludeHtml == input.IncludeHtml ||
                     (this.IncludeHtml != null &&
                     this.IncludeHtml.Equals(input.IncludeHtml))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Outputs == input.Outputs ||
                     this.Outputs != null &&
                     input.Outputs != null &&
                     this.Outputs.SequenceEqual(input.Outputs)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.SummaryReports == input.SummaryReports ||
                     this.SummaryReports != null &&
@@ -213,7 +205,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.ReportingFrequency != null)
@@ -237,7 +229,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

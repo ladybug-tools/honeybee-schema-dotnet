@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [DataContract(Name = "_EquipmentBase")]
-    public partial class EquipmentBase : IDdEnergyBaseModel, IEquatable<EquipmentBase>, IValidatableObject
+    public partial class EquipmentBase : IEquatable<EquipmentBase>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EquipmentBase" /> class.
@@ -42,22 +42,25 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="EquipmentBase" /> class.
         /// </summary>
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="wattsPerArea">Equipment level per floor area as [W/m2]. (required).</param>
         /// <param name="schedule">Identifier of the schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile. (required).</param>
         /// <param name="radiantFraction">Number for the amount of long-wave radiation heat given off by electric equipment. Default value is 0. (default to 0D).</param>
         /// <param name="latentFraction">Number for the amount of latent heat given off by electricequipment. Default value is 0. (default to 0D).</param>
         /// <param name="lostFraction">Number for the amount of “lost” heat being given off by equipment. The default value is 0. (default to 0D).</param>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public EquipmentBase
         (
-            string identifier, double wattsPerArea, string schedule, // Required parameters
-            string displayName= default, double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D // Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+             string identifier, double wattsPerArea, string schedule, // Required parameters
+            string displayName= default, double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D// Optional parameters
+        )// BaseClass
         {
+            // to ensure "identifier" is required (not null)
+            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for EquipmentBase and cannot be null");
             this.WattsPerArea = wattsPerArea;
             // to ensure "schedule" is required (not null)
             this.Schedule = schedule ?? throw new ArgumentNullException("schedule is a required property for EquipmentBase and cannot be null");
+            this.DisplayName = displayName;
             this.RadiantFraction = radiantFraction;
             this.LatentFraction = latentFraction;
             this.LostFraction = lostFraction;
@@ -66,6 +69,18 @@ namespace HoneybeeSchema
             this.Type = "_EquipmentBase";
         }
 
+        /// <summary>
+        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
+        /// </summary>
+        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
+        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
+        public string Identifier { get; set; } 
+        /// <summary>
+        /// Display name of the object with no character restrictions.
+        /// </summary>
+        /// <value>Display name of the object with no character restrictions.</value>
+        [DataMember(Name = "display_name", EmitDefaultValue = false)]
+        public string DisplayName { get; set; } 
         /// <summary>
         /// Equipment level per floor area as [W/m2].
         /// </summary>
@@ -158,14 +173,6 @@ namespace HoneybeeSchema
             return DuplicateEquipmentBase();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
-        {
-            return DuplicateEquipmentBase();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -186,36 +193,46 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
-                (
-                    this.WattsPerArea == input.WattsPerArea ||
-                    (this.WattsPerArea != null &&
-                    this.WattsPerArea.Equals(input.WattsPerArea))
-                ) && base.Equals(input) && 
-                (
-                    this.Schedule == input.Schedule ||
-                    (this.Schedule != null &&
-                    this.Schedule.Equals(input.Schedule))
-                ) && base.Equals(input) && 
-                (
-                    this.RadiantFraction == input.RadiantFraction ||
-                    (this.RadiantFraction != null &&
-                    this.RadiantFraction.Equals(input.RadiantFraction))
-                ) && base.Equals(input) && 
-                (
-                    this.LatentFraction == input.LatentFraction ||
-                    (this.LatentFraction != null &&
-                    this.LatentFraction.Equals(input.LatentFraction))
-                ) && base.Equals(input) && 
-                (
-                    this.LostFraction == input.LostFraction ||
-                    (this.LostFraction != null &&
-                    this.LostFraction.Equals(input.LostFraction))
-                ) && base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
+                ) && 
+                (
+                    this.Identifier == input.Identifier ||
+                    (this.Identifier != null &&
+                    this.Identifier.Equals(input.Identifier))
+                ) && 
+                (
+                    this.DisplayName == input.DisplayName ||
+                    (this.DisplayName != null &&
+                    this.DisplayName.Equals(input.DisplayName))
+                ) && 
+                (
+                    this.WattsPerArea == input.WattsPerArea ||
+                    (this.WattsPerArea != null &&
+                    this.WattsPerArea.Equals(input.WattsPerArea))
+                ) && 
+                (
+                    this.Schedule == input.Schedule ||
+                    (this.Schedule != null &&
+                    this.Schedule.Equals(input.Schedule))
+                ) && 
+                (
+                    this.RadiantFraction == input.RadiantFraction ||
+                    (this.RadiantFraction != null &&
+                    this.RadiantFraction.Equals(input.RadiantFraction))
+                ) && 
+                (
+                    this.LatentFraction == input.LatentFraction ||
+                    (this.LatentFraction != null &&
+                    this.LatentFraction.Equals(input.LatentFraction))
+                ) && 
+                (
+                    this.LostFraction == input.LostFraction ||
+                    (this.LostFraction != null &&
+                    this.LostFraction.Equals(input.LostFraction))
                 );
         }
 
@@ -227,7 +244,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Identifier != null)
+                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                if (this.DisplayName != null)
+                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.WattsPerArea != null)
                     hashCode = hashCode * 59 + this.WattsPerArea.GetHashCode();
                 if (this.Schedule != null)
@@ -238,8 +261,6 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.LatentFraction.GetHashCode();
                 if (this.LostFraction != null)
                     hashCode = hashCode * 59 + this.LostFraction.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -251,17 +272,27 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            return this.BaseValidate(validationContext);
-        }
 
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
-        {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
+            
+            // Type (string) pattern
+            Regex regexType = new Regex(@"^_EquipmentBase$", RegexOptions.CultureInvariant);
+            if (false == regexType.Match(this.Type).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
+            }
+
+            // Identifier (string) maxLength
+            if(this.Identifier != null && this.Identifier.Length > 100)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
+            }
+
+            // Identifier (string) minLength
+            if(this.Identifier != null && this.Identifier.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
+            }
+            
 
             
             // WattsPerArea (double) minimum
@@ -322,15 +353,6 @@ namespace HoneybeeSchema
             if(this.LostFraction < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LostFraction, must be a value greater than or equal to 0.", new [] { "LostFraction" });
-            }
-
-
-            
-            // Type (string) pattern
-            Regex regexType = new Regex(@"^_EquipmentBase$", RegexOptions.CultureInvariant);
-            if (false == regexType.Match(this.Type).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
             yield break;

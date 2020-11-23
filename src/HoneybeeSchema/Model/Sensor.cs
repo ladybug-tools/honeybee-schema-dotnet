@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// A single Radiance of sensors.
     /// </summary>
     [DataContract(Name = "Sensor")]
-    public partial class Sensor : OpenAPIGenBaseModel, IEquatable<Sensor>, IValidatableObject
+    public partial class Sensor : IEquatable<Sensor>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Sensor" /> class.
@@ -48,7 +48,7 @@ namespace HoneybeeSchema
         (
              List<double> pos, List<double> dir// Required parameters
              // Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             // to ensure "pos" is required (not null)
             this.Pos = pos ?? throw new ArgumentNullException("pos is a required property for Sensor and cannot be null");
@@ -128,14 +128,6 @@ namespace HoneybeeSchema
             return DuplicateSensor();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateSensor();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -156,23 +148,23 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && 
                 (
                     this.Pos == input.Pos ||
                     this.Pos != null &&
                     input.Pos != null &&
                     this.Pos.SequenceEqual(input.Pos)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Dir == input.Dir ||
                     this.Dir != null &&
                     input.Dir != null &&
                     this.Dir.SequenceEqual(input.Dir)
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -184,13 +176,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Pos != null)
                     hashCode = hashCode * 59 + this.Pos.GetHashCode();
                 if (this.Dir != null)
                     hashCode = hashCode * 59 + this.Dir.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -202,7 +194,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

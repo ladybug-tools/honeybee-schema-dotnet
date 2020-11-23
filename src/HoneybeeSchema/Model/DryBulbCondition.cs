@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Used to specify dry bulb conditions on a design day.
     /// </summary>
     [DataContract(Name = "DryBulbCondition")]
-    public partial class DryBulbCondition : OpenAPIGenBaseModel, IEquatable<DryBulbCondition>, IValidatableObject
+    public partial class DryBulbCondition : IEquatable<DryBulbCondition>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DryBulbCondition" /> class.
@@ -48,7 +48,7 @@ namespace HoneybeeSchema
         (
              double dryBulbMax, double dryBulbRange// Required parameters
              // Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             this.DryBulbMax = dryBulbMax;
             this.DryBulbRange = dryBulbRange;
@@ -126,14 +126,6 @@ namespace HoneybeeSchema
             return DuplicateDryBulbCondition();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateDryBulbCondition();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -154,21 +146,21 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
-                (
-                    this.DryBulbMax == input.DryBulbMax ||
-                    (this.DryBulbMax != null &&
-                    this.DryBulbMax.Equals(input.DryBulbMax))
-                ) && base.Equals(input) && 
-                (
-                    this.DryBulbRange == input.DryBulbRange ||
-                    (this.DryBulbRange != null &&
-                    this.DryBulbRange.Equals(input.DryBulbRange))
-                ) && base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
+                ) && 
+                (
+                    this.DryBulbMax == input.DryBulbMax ||
+                    (this.DryBulbMax != null &&
+                    this.DryBulbMax.Equals(input.DryBulbMax))
+                ) && 
+                (
+                    this.DryBulbRange == input.DryBulbRange ||
+                    (this.DryBulbRange != null &&
+                    this.DryBulbRange.Equals(input.DryBulbRange))
                 );
         }
 
@@ -180,13 +172,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.DryBulbMax != null)
                     hashCode = hashCode * 59 + this.DryBulbMax.GetHashCode();
                 if (this.DryBulbRange != null)
                     hashCode = hashCode * 59 + this.DryBulbRange.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -198,7 +190,15 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
+
+            
+            // Type (string) pattern
+            Regex regexType = new Regex(@"^DryBulbCondition$", RegexOptions.CultureInvariant);
+            if (false == regexType.Match(this.Type).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
+            }
+
 
             
             // DryBulbMax (double) maximum
@@ -219,15 +219,6 @@ namespace HoneybeeSchema
             if(this.DryBulbRange < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DryBulbRange, must be a value greater than or equal to 0.", new [] { "DryBulbRange" });
-            }
-
-
-            
-            // Type (string) pattern
-            Regex regexType = new Regex(@"^DryBulbCondition$", RegexOptions.CultureInvariant);
-            if (false == regexType.Match(this.Type).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
             yield break;

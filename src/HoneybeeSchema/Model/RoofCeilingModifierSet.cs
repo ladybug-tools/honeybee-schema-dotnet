@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Set containing radiance modifiers needed for a model&#39;s roofs.
     /// </summary>
     [DataContract(Name = "RoofCeilingModifierSet")]
-    public partial class RoofCeilingModifierSet : OpenAPIGenBaseModel, IEquatable<RoofCeilingModifierSet>, IValidatableObject
+    public partial class RoofCeilingModifierSet : IEquatable<RoofCeilingModifierSet>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RoofCeilingModifierSet" /> class.
@@ -37,8 +37,8 @@ namespace HoneybeeSchema
         public RoofCeilingModifierSet
         (
              // Required parameters
-            AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> exteriorModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> interiorModifier= default // Optional parameters
-        ) : base()// BaseClass
+            AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> exteriorModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> interiorModifier= default// Optional parameters
+        )// BaseClass
         {
             this.ExteriorModifier = exteriorModifier;
             this.InteriorModifier = interiorModifier;
@@ -116,14 +116,6 @@ namespace HoneybeeSchema
             return DuplicateRoofCeilingModifierSet();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateRoofCeilingModifierSet();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -144,21 +136,21 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
-                (
-                    this.ExteriorModifier == input.ExteriorModifier ||
-                    (this.ExteriorModifier != null &&
-                    this.ExteriorModifier.Equals(input.ExteriorModifier))
-                ) && base.Equals(input) && 
-                (
-                    this.InteriorModifier == input.InteriorModifier ||
-                    (this.InteriorModifier != null &&
-                    this.InteriorModifier.Equals(input.InteriorModifier))
-                ) && base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
+                ) && 
+                (
+                    this.ExteriorModifier == input.ExteriorModifier ||
+                    (this.ExteriorModifier != null &&
+                    this.ExteriorModifier.Equals(input.ExteriorModifier))
+                ) && 
+                (
+                    this.InteriorModifier == input.InteriorModifier ||
+                    (this.InteriorModifier != null &&
+                    this.InteriorModifier.Equals(input.InteriorModifier))
                 );
         }
 
@@ -170,13 +162,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.ExteriorModifier != null)
                     hashCode = hashCode * 59 + this.ExteriorModifier.GetHashCode();
                 if (this.InteriorModifier != null)
                     hashCode = hashCode * 59 + this.InteriorModifier.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -188,7 +180,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

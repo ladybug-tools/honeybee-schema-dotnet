@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Type** | **string** |  | [optional] [readonly] [default to "EnergyWindowMaterialBlind"]
 **Identifier** | **string** | Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). | 
 **DisplayName** | **string** | Display name of the object with no character restrictions. | [optional] 
-**Type** | **string** |  | [optional] [readonly] [default to "EnergyWindowMaterialBlind"]
 **SlatOrientation** | **SlatOrientation** |  | [optional] 
 **SlatWidth** | **double** | The width of slat measured from edge to edge in meters. | [optional] [default to 0.025D]
 **SlatSeparation** | **double** | The distance between the front of a slat and the back of the adjacent slat in meters. | [optional] [default to 0.01875D]

@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Used to describe the time period over which to run the simulation.
     /// </summary>
     [DataContract(Name = "RunPeriod")]
-    public partial class RunPeriod : DatedBaseModel, IEquatable<RunPeriod>, IValidatableObject
+    public partial class RunPeriod : IEquatable<RunPeriod>, IValidatableObject
     {
         /// <summary>
         /// Text for the day of the week on which the simulation starts.
@@ -48,7 +48,7 @@ namespace HoneybeeSchema
         (
              // Required parameters
             List<int> startDate= default, List<int> endDate= default, DaysOfWeek startDayOfWeek= DaysOfWeek.Sunday, List<List<int>> holidays= default, DaylightSavingTime daylightSavingTime= default, bool leapYear = false// Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             this.StartDate = startDate;
             this.EndDate = endDate;
@@ -152,14 +152,6 @@ namespace HoneybeeSchema
             return DuplicateRunPeriod();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override DatedBaseModel DuplicateDatedBaseModel()
-        {
-            return DuplicateRunPeriod();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -180,40 +172,40 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.StartDate == input.StartDate ||
                     this.StartDate != null &&
                     input.StartDate != null &&
                     this.StartDate.SequenceEqual(input.StartDate)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.EndDate == input.EndDate ||
                     this.EndDate != null &&
                     input.EndDate != null &&
                     this.EndDate.SequenceEqual(input.EndDate)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.StartDayOfWeek == input.StartDayOfWeek ||
                     (this.StartDayOfWeek != null &&
                     this.StartDayOfWeek.Equals(input.StartDayOfWeek))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Holidays == input.Holidays ||
                     this.Holidays != null &&
                     input.Holidays != null &&
                     this.Holidays.SequenceEqual(input.Holidays)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.DaylightSavingTime == input.DaylightSavingTime ||
                     (this.DaylightSavingTime != null &&
                     this.DaylightSavingTime.Equals(input.DaylightSavingTime))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.LeapYear == input.LeapYear ||
                     (this.LeapYear != null &&
@@ -229,7 +221,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.StartDate != null)
@@ -255,7 +247,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

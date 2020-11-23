@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Radiance BSDF (Bidirectional Scattering Distribution Function) material.
     /// </summary>
     [DataContract(Name = "BSDF")]
-    public partial class BSDF : ModifierBase, IEquatable<BSDF>, IValidatableObject
+    public partial class BSDF : IEquatable<BSDF>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BSDF" /> class.
@@ -42,6 +42,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="BSDF" /> class.
         /// </summary>
+        /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="bsdfData">A string with the contents of the BSDF XML file. (required).</param>
         /// <param name="modifier">Material modifier (default: Void)..</param>
         /// <param name="dependencies">List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None)..</param>
@@ -52,16 +54,17 @@ namespace HoneybeeSchema
         /// <param name="frontDiffuseReflectance">Optional additional front diffuse reflectance as sequence of numbers (default: None)..</param>
         /// <param name="backDiffuseReflectance">Optional additional back diffuse reflectance as sequence of numbers (default: None)..</param>
         /// <param name="diffuseTransmittance">Optional additional diffuse transmittance as sequence of numbers (default: None)..</param>
-        /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public BSDF
         (
-            string identifier, string bsdfData, // Required parameters
-            string displayName= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> dependencies= default, List<double> upOrientation= default, double thickness = 0D, string functionFile = ".", string transform= default, List<double> frontDiffuseReflectance= default, List<double> backDiffuseReflectance= default, List<double> diffuseTransmittance= default // Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+             string identifier, string bsdfData, // Required parameters
+            string displayName= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> dependencies= default, List<double> upOrientation= default, double thickness = 0D, string functionFile = ".", string transform= default, List<double> frontDiffuseReflectance= default, List<double> backDiffuseReflectance= default, List<double> diffuseTransmittance= default// Optional parameters
+        )// BaseClass
         {
+            // to ensure "identifier" is required (not null)
+            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for BSDF and cannot be null");
             // to ensure "bsdfData" is required (not null)
             this.BsdfData = bsdfData ?? throw new ArgumentNullException("bsdfData is a required property for BSDF and cannot be null");
+            this.DisplayName = displayName;
             this.Modifier = modifier;
             this.Dependencies = dependencies;
             this.UpOrientation = upOrientation;
@@ -77,6 +80,18 @@ namespace HoneybeeSchema
             this.Type = "BSDF";
         }
 
+        /// <summary>
+        /// Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.
+        /// </summary>
+        /// <value>Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.</value>
+        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
+        public string Identifier { get; set; } 
+        /// <summary>
+        /// Display name of the object with no character restrictions.
+        /// </summary>
+        /// <value>Display name of the object with no character restrictions.</value>
+        [DataMember(Name = "display_name", EmitDefaultValue = false)]
+        public string DisplayName { get; set; } 
         /// <summary>
         /// A string with the contents of the BSDF XML file.
         /// </summary>
@@ -204,14 +219,6 @@ namespace HoneybeeSchema
             return DuplicateBSDF();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override ModifierBase DuplicateModifierBase()
-        {
-            return DuplicateBSDF();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -232,66 +239,76 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && 
+                (
+                    this.Identifier == input.Identifier ||
+                    (this.Identifier != null &&
+                    this.Identifier.Equals(input.Identifier))
+                ) && 
+                (
+                    this.DisplayName == input.DisplayName ||
+                    (this.DisplayName != null &&
+                    this.DisplayName.Equals(input.DisplayName))
+                ) && 
                 (
                     this.BsdfData == input.BsdfData ||
                     (this.BsdfData != null &&
                     this.BsdfData.Equals(input.BsdfData))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Modifier == input.Modifier ||
                     (this.Modifier != null &&
                     this.Modifier.Equals(input.Modifier))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Dependencies == input.Dependencies ||
                     this.Dependencies != null &&
                     input.Dependencies != null &&
                     this.Dependencies.SequenceEqual(input.Dependencies)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.UpOrientation == input.UpOrientation ||
                     this.UpOrientation != null &&
                     input.UpOrientation != null &&
                     this.UpOrientation.SequenceEqual(input.UpOrientation)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Thickness == input.Thickness ||
                     (this.Thickness != null &&
                     this.Thickness.Equals(input.Thickness))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.FunctionFile == input.FunctionFile ||
                     (this.FunctionFile != null &&
                     this.FunctionFile.Equals(input.FunctionFile))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Transform == input.Transform ||
                     (this.Transform != null &&
                     this.Transform.Equals(input.Transform))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.FrontDiffuseReflectance == input.FrontDiffuseReflectance ||
                     this.FrontDiffuseReflectance != null &&
                     input.FrontDiffuseReflectance != null &&
                     this.FrontDiffuseReflectance.SequenceEqual(input.FrontDiffuseReflectance)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.BackDiffuseReflectance == input.BackDiffuseReflectance ||
                     this.BackDiffuseReflectance != null &&
                     input.BackDiffuseReflectance != null &&
                     this.BackDiffuseReflectance.SequenceEqual(input.BackDiffuseReflectance)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.DiffuseTransmittance == input.DiffuseTransmittance ||
                     this.DiffuseTransmittance != null &&
                     input.DiffuseTransmittance != null &&
                     this.DiffuseTransmittance.SequenceEqual(input.DiffuseTransmittance)
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -303,7 +320,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Identifier != null)
+                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                if (this.DisplayName != null)
+                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.BsdfData != null)
                     hashCode = hashCode * 59 + this.BsdfData.GetHashCode();
                 if (this.Modifier != null)
@@ -324,8 +347,6 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.BackDiffuseReflectance.GetHashCode();
                 if (this.DiffuseTransmittance != null)
                     hashCode = hashCode * 59 + this.DiffuseTransmittance.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -337,7 +358,15 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
+
+            
+            // Type (string) pattern
+            Regex regexType = new Regex(@"^BSDF$", RegexOptions.CultureInvariant);
+            if (false == regexType.Match(this.Type).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
+            }
+
             // FunctionFile (string) maxLength
             if(this.FunctionFile != null && this.FunctionFile.Length > 100)
             {
@@ -362,15 +391,6 @@ namespace HoneybeeSchema
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Transform, length must be greater than 1.", new [] { "Transform" });
             }
             
-
-            
-            // Type (string) pattern
-            Regex regexType = new Regex(@"^BSDF$", RegexOptions.CultureInvariant);
-            if (false == regexType.Match(this.Type).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
-            }
-
             yield break;
         }
     }

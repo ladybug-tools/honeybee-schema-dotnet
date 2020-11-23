@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// A set of constructions for aperture assemblies.
     /// </summary>
     [DataContract(Name = "ApertureConstructionSetAbridged")]
-    public partial class ApertureConstructionSetAbridged : OpenAPIGenBaseModel, IEquatable<ApertureConstructionSetAbridged>, IValidatableObject
+    public partial class ApertureConstructionSetAbridged : IEquatable<ApertureConstructionSetAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ApertureConstructionSetAbridged" /> class.
@@ -40,7 +40,7 @@ namespace HoneybeeSchema
         (
              // Required parameters
             string interiorConstruction= default, string windowConstruction= default, string skylightConstruction= default, string operableConstruction= default// Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             this.InteriorConstruction = interiorConstruction;
             this.WindowConstruction = windowConstruction;
@@ -134,14 +134,6 @@ namespace HoneybeeSchema
             return DuplicateApertureConstructionSetAbridged();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateApertureConstructionSetAbridged();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -162,27 +154,27 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.InteriorConstruction == input.InteriorConstruction ||
                     (this.InteriorConstruction != null &&
                     this.InteriorConstruction.Equals(input.InteriorConstruction))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.WindowConstruction == input.WindowConstruction ||
                     (this.WindowConstruction != null &&
                     this.WindowConstruction.Equals(input.WindowConstruction))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.SkylightConstruction == input.SkylightConstruction ||
                     (this.SkylightConstruction != null &&
                     this.SkylightConstruction.Equals(input.SkylightConstruction))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.OperableConstruction == input.OperableConstruction ||
                     (this.OperableConstruction != null &&
@@ -198,7 +190,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.InteriorConstruction != null)
@@ -220,7 +212,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

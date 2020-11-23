@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// A mesh in 3D space.
     /// </summary>
     [DataContract(Name = "Color")]
-    public partial class Color : OpenAPIGenBaseModel, IEquatable<Color>, IValidatableObject
+    public partial class Color : IEquatable<Color>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Color" /> class.
@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         (
              int r, int g, int b// Required parameters
              // Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             this.R = r;
             this.G = g;
@@ -135,14 +135,6 @@ namespace HoneybeeSchema
             return DuplicateColor();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateColor();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -163,26 +155,26 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
-                (
-                    this.R == input.R ||
-                    (this.R != null &&
-                    this.R.Equals(input.R))
-                ) && base.Equals(input) && 
-                (
-                    this.G == input.G ||
-                    (this.G != null &&
-                    this.G.Equals(input.G))
-                ) && base.Equals(input) && 
-                (
-                    this.B == input.B ||
-                    (this.B != null &&
-                    this.B.Equals(input.B))
-                ) && base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
+                ) && 
+                (
+                    this.R == input.R ||
+                    (this.R != null &&
+                    this.R.Equals(input.R))
+                ) && 
+                (
+                    this.G == input.G ||
+                    (this.G != null &&
+                    this.G.Equals(input.G))
+                ) && 
+                (
+                    this.B == input.B ||
+                    (this.B != null &&
+                    this.B.Equals(input.B))
                 );
         }
 
@@ -194,15 +186,15 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.R != null)
                     hashCode = hashCode * 59 + this.R.GetHashCode();
                 if (this.G != null)
                     hashCode = hashCode * 59 + this.G.GetHashCode();
                 if (this.B != null)
                     hashCode = hashCode * 59 + this.B.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -214,7 +206,15 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
+
+            
+            // Type (string) pattern
+            Regex regexType = new Regex(@"^Color$", RegexOptions.CultureInvariant);
+            if (false == regexType.Match(this.Type).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
+            }
+
 
             
             // R (int) maximum
@@ -255,15 +255,6 @@ namespace HoneybeeSchema
             if(this.B < (int)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for B, must be a value greater than or equal to 0.", new [] { "B" });
-            }
-
-
-            
-            // Type (string) pattern
-            Regex regexType = new Regex(@"^Color$", RegexOptions.CultureInvariant);
-            if (false == regexType.Match(this.Type).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
             yield break;

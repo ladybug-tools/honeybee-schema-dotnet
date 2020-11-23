@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Construction for window objects (Aperture, Door).
     /// </summary>
     [DataContract(Name = "WindowConstruction")]
-    public partial class WindowConstruction : WindowConstructionAbridged, IEquatable<WindowConstruction>, IValidatableObject
+    public partial class WindowConstruction : IEquatable<WindowConstruction>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowConstruction" /> class.
@@ -42,23 +42,46 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowConstruction" /> class.
         /// </summary>
-        /// <param name="materials">List of glazing and gas materials. The order of the materials is from outside to inside. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer. (required).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="layers">List of strings for glazing or gas material identifiers. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer. (required).</param>
+        /// <param name="materials">List of glazing and gas materials. The order of the materials is from outside to inside. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer. (required).</param>
         public WindowConstruction
         (
-            string identifier, List<string> layers, List<AnyOf<EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialGlazing,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture>> materials, // Required parameters
+             string identifier, List<string> layers, List<AnyOf<EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialGlazing,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture>> materials, // Required parameters
             string displayName= default // Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, layers: layers)// BaseClass
+        )// BaseClass
         {
+            // to ensure "identifier" is required (not null)
+            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for WindowConstruction and cannot be null");
+            // to ensure "layers" is required (not null)
+            this.Layers = layers ?? throw new ArgumentNullException("layers is a required property for WindowConstruction and cannot be null");
             // to ensure "materials" is required (not null)
             this.Materials = materials ?? throw new ArgumentNullException("materials is a required property for WindowConstruction and cannot be null");
+            this.DisplayName = displayName;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "WindowConstruction";
         }
 
+        /// <summary>
+        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
+        /// </summary>
+        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
+        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
+        public string Identifier { get; set; } 
+        /// <summary>
+        /// Display name of the object with no character restrictions.
+        /// </summary>
+        /// <value>Display name of the object with no character restrictions.</value>
+        [DataMember(Name = "display_name", EmitDefaultValue = false)]
+        public string DisplayName { get; set; } 
+        /// <summary>
+        /// List of strings for glazing or gas material identifiers. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.
+        /// </summary>
+        /// <value>List of strings for glazing or gas material identifiers. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.</value>
+        [DataMember(Name = "layers", IsRequired = true, EmitDefaultValue = false)]
+        public List<string> Layers { get; set; } 
         /// <summary>
         /// List of glazing and gas materials. The order of the materials is from outside to inside. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.
         /// </summary>
@@ -124,14 +147,6 @@ namespace HoneybeeSchema
             return DuplicateWindowConstruction();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override WindowConstructionAbridged DuplicateWindowConstructionAbridged()
-        {
-            return DuplicateWindowConstruction();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -152,17 +167,33 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && 
+                (
+                    this.Identifier == input.Identifier ||
+                    (this.Identifier != null &&
+                    this.Identifier.Equals(input.Identifier))
+                ) && 
+                (
+                    this.DisplayName == input.DisplayName ||
+                    (this.DisplayName != null &&
+                    this.DisplayName.Equals(input.DisplayName))
+                ) && 
+                (
+                    this.Layers == input.Layers ||
+                    this.Layers != null &&
+                    input.Layers != null &&
+                    this.Layers.SequenceEqual(input.Layers)
+                ) && 
                 (
                     this.Materials == input.Materials ||
                     this.Materials != null &&
                     input.Materials != null &&
                     this.Materials.SequenceEqual(input.Materials)
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -174,11 +205,17 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
-                if (this.Materials != null)
-                    hashCode = hashCode * 59 + this.Materials.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Identifier != null)
+                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                if (this.DisplayName != null)
+                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
+                if (this.Layers != null)
+                    hashCode = hashCode * 59 + this.Layers.GetHashCode();
+                if (this.Materials != null)
+                    hashCode = hashCode * 59 + this.Materials.GetHashCode();
                 return hashCode;
             }
         }
@@ -190,7 +227,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern
@@ -200,6 +236,18 @@ namespace HoneybeeSchema
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
+            // Identifier (string) maxLength
+            if(this.Identifier != null && this.Identifier.Length > 100)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
+            }
+
+            // Identifier (string) minLength
+            if(this.Identifier != null && this.Identifier.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
+            }
+            
             yield break;
         }
     }

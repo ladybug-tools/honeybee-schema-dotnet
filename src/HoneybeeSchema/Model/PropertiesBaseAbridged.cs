@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Base class of Abridged Radiance Properties.
     /// </summary>
     [DataContract(Name = "_PropertiesBaseAbridged")]
-    public partial class PropertiesBaseAbridged : OpenAPIGenBaseModel, IEquatable<PropertiesBaseAbridged>, IValidatableObject
+    public partial class PropertiesBaseAbridged : IEquatable<PropertiesBaseAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertiesBaseAbridged" /> class.
@@ -37,8 +37,8 @@ namespace HoneybeeSchema
         public PropertiesBaseAbridged
         (
              // Required parameters
-            string modifier= default, string modifierBlk= default // Optional parameters
-        ) : base()// BaseClass
+            string modifier= default, string modifierBlk= default// Optional parameters
+        )// BaseClass
         {
             this.Modifier = modifier;
             this.ModifierBlk = modifierBlk;
@@ -116,14 +116,6 @@ namespace HoneybeeSchema
             return DuplicatePropertiesBaseAbridged();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicatePropertiesBaseAbridged();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -144,21 +136,21 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
-                (
-                    this.Modifier == input.Modifier ||
-                    (this.Modifier != null &&
-                    this.Modifier.Equals(input.Modifier))
-                ) && base.Equals(input) && 
-                (
-                    this.ModifierBlk == input.ModifierBlk ||
-                    (this.ModifierBlk != null &&
-                    this.ModifierBlk.Equals(input.ModifierBlk))
-                ) && base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
+                ) && 
+                (
+                    this.Modifier == input.Modifier ||
+                    (this.Modifier != null &&
+                    this.Modifier.Equals(input.Modifier))
+                ) && 
+                (
+                    this.ModifierBlk == input.ModifierBlk ||
+                    (this.ModifierBlk != null &&
+                    this.ModifierBlk.Equals(input.ModifierBlk))
                 );
         }
 
@@ -170,13 +162,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Modifier != null)
                     hashCode = hashCode * 59 + this.Modifier.GetHashCode();
                 if (this.ModifierBlk != null)
                     hashCode = hashCode * 59 + this.ModifierBlk.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -188,17 +180,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            return this.BaseValidate(validationContext);
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
-        {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

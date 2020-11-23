@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Provides a model for an ideal HVAC system.
     /// </summary>
     [DataContract(Name = "IdealAirSystemAbridged")]
-    public partial class IdealAirSystemAbridged : IDdEnergyBaseModel, IEquatable<IdealAirSystemAbridged>, IValidatableObject
+    public partial class IdealAirSystemAbridged : IEquatable<IdealAirSystemAbridged>, IValidatableObject
     {
         /// <summary>
         /// Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone.
@@ -48,6 +48,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="IdealAirSystemAbridged" /> class.
         /// </summary>
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="economizerType">Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone..</param>
         /// <param name="demandControlledVentilation">Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the zone. (default to false).</param>
         /// <param name="sensibleHeatRecovery">A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. (default to 0D).</param>
@@ -58,14 +60,15 @@ namespace HoneybeeSchema
         /// <param name="coolingLimit">A number for the maximum cooling capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the cooling capacity..</param>
         /// <param name="heatingAvailability">An optional identifier of a schedule to set the availability of heating over the course of the simulation..</param>
         /// <param name="coolingAvailability">An optional identifier of a schedule to set the availability of cooling over the course of the simulation..</param>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public IdealAirSystemAbridged
         (
-            string identifier, // Required parameters
+             string identifier, // Required parameters
             string displayName= default, EconomizerType economizerType= EconomizerType.DifferentialDryBulb, bool demandControlledVentilation = false, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, double heatingAirTemperature = 50D, double coolingAirTemperature = 13D, AnyOf<Autosize,NoLimit,double> heatingLimit= default, AnyOf<Autosize,NoLimit,double> coolingLimit= default, string heatingAvailability= default, string coolingAvailability= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+        )// BaseClass
         {
+            // to ensure "identifier" is required (not null)
+            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for IdealAirSystemAbridged and cannot be null");
+            this.DisplayName = displayName;
             this.EconomizerType = economizerType;
             this.DemandControlledVentilation = demandControlledVentilation;
             this.SensibleHeatRecovery = sensibleHeatRecovery;
@@ -81,6 +84,18 @@ namespace HoneybeeSchema
             this.Type = "IdealAirSystemAbridged";
         }
 
+        /// <summary>
+        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
+        /// </summary>
+        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
+        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
+        public string Identifier { get; set; } 
+        /// <summary>
+        /// Display name of the object with no character restrictions.
+        /// </summary>
+        /// <value>Display name of the object with no character restrictions.</value>
+        [DataMember(Name = "display_name", EmitDefaultValue = false)]
+        public string DisplayName { get; set; } 
         /// <summary>
         /// Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the zone.
         /// </summary>
@@ -202,14 +217,6 @@ namespace HoneybeeSchema
             return DuplicateIdealAirSystemAbridged();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
-        {
-            return DuplicateIdealAirSystemAbridged();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -230,57 +237,67 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
+                (
+                    this.Identifier == input.Identifier ||
+                    (this.Identifier != null &&
+                    this.Identifier.Equals(input.Identifier))
+                ) && 
+                (
+                    this.DisplayName == input.DisplayName ||
+                    (this.DisplayName != null &&
+                    this.DisplayName.Equals(input.DisplayName))
+                ) && 
                 (
                     this.EconomizerType == input.EconomizerType ||
                     (this.EconomizerType != null &&
                     this.EconomizerType.Equals(input.EconomizerType))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.DemandControlledVentilation == input.DemandControlledVentilation ||
                     (this.DemandControlledVentilation != null &&
                     this.DemandControlledVentilation.Equals(input.DemandControlledVentilation))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.SensibleHeatRecovery == input.SensibleHeatRecovery ||
                     (this.SensibleHeatRecovery != null &&
                     this.SensibleHeatRecovery.Equals(input.SensibleHeatRecovery))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.LatentHeatRecovery == input.LatentHeatRecovery ||
                     (this.LatentHeatRecovery != null &&
                     this.LatentHeatRecovery.Equals(input.LatentHeatRecovery))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.HeatingAirTemperature == input.HeatingAirTemperature ||
                     (this.HeatingAirTemperature != null &&
                     this.HeatingAirTemperature.Equals(input.HeatingAirTemperature))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.CoolingAirTemperature == input.CoolingAirTemperature ||
                     (this.CoolingAirTemperature != null &&
                     this.CoolingAirTemperature.Equals(input.CoolingAirTemperature))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.HeatingLimit == input.HeatingLimit ||
                     (this.HeatingLimit != null &&
                     this.HeatingLimit.Equals(input.HeatingLimit))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.CoolingLimit == input.CoolingLimit ||
                     (this.CoolingLimit != null &&
                     this.CoolingLimit.Equals(input.CoolingLimit))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.HeatingAvailability == input.HeatingAvailability ||
                     (this.HeatingAvailability != null &&
                     this.HeatingAvailability.Equals(input.HeatingAvailability))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.CoolingAvailability == input.CoolingAvailability ||
                     (this.CoolingAvailability != null &&
@@ -296,9 +313,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Identifier != null)
+                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                if (this.DisplayName != null)
+                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.EconomizerType != null)
                     hashCode = hashCode * 59 + this.EconomizerType.GetHashCode();
                 if (this.DemandControlledVentilation != null)
@@ -330,7 +351,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern
@@ -340,6 +360,18 @@ namespace HoneybeeSchema
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
+            // Identifier (string) maxLength
+            if(this.Identifier != null && this.Identifier.Length > 100)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
+            }
+
+            // Identifier (string) minLength
+            if(this.Identifier != null && this.Identifier.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
+            }
+            
 
             
             // SensibleHeatRecovery (double) maximum

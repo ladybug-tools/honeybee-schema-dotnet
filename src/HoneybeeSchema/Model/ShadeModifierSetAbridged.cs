@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Abridged set containing radiance modifiers needed for a model&#39;s Shade.
     /// </summary>
     [DataContract(Name = "ShadeModifierSetAbridged")]
-    public partial class ShadeModifierSetAbridged : BaseModifierSetAbridged, IEquatable<ShadeModifierSetAbridged>, IValidatableObject
+    public partial class ShadeModifierSetAbridged : IEquatable<ShadeModifierSetAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ShadeModifierSetAbridged" /> class.
@@ -37,14 +37,28 @@ namespace HoneybeeSchema
         public ShadeModifierSetAbridged
         (
              // Required parameters
-            string exteriorModifier= default, string interiorModifier= default // Optional parameters
-        ) : base(exteriorModifier: exteriorModifier, interiorModifier: interiorModifier)// BaseClass
+            string exteriorModifier= default, string interiorModifier= default// Optional parameters
+        )// BaseClass
         {
+            this.ExteriorModifier = exteriorModifier;
+            this.InteriorModifier = interiorModifier;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "ShadeModifierSetAbridged";
         }
 
+        /// <summary>
+        /// Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.
+        /// </summary>
+        /// <value>Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.</value>
+        [DataMember(Name = "exterior_modifier", EmitDefaultValue = false)]
+        public string ExteriorModifier { get; set; } 
+        /// <summary>
+        /// Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors.
+        /// </summary>
+        /// <value>Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors.</value>
+        [DataMember(Name = "interior_modifier", EmitDefaultValue = false)]
+        public string InteriorModifier { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -102,14 +116,6 @@ namespace HoneybeeSchema
             return DuplicateShadeModifierSetAbridged();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override BaseModifierSetAbridged DuplicateBaseModifierSetAbridged()
-        {
-            return DuplicateShadeModifierSetAbridged();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -130,11 +136,21 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
+                ) && 
+                (
+                    this.ExteriorModifier == input.ExteriorModifier ||
+                    (this.ExteriorModifier != null &&
+                    this.ExteriorModifier.Equals(input.ExteriorModifier))
+                ) && 
+                (
+                    this.InteriorModifier == input.InteriorModifier ||
+                    (this.InteriorModifier != null &&
+                    this.InteriorModifier.Equals(input.InteriorModifier))
                 );
         }
 
@@ -146,9 +162,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.ExteriorModifier != null)
+                    hashCode = hashCode * 59 + this.ExteriorModifier.GetHashCode();
+                if (this.InteriorModifier != null)
+                    hashCode = hashCode * 59 + this.InteriorModifier.GetHashCode();
                 return hashCode;
             }
         }
@@ -160,7 +180,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

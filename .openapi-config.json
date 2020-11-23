@@ -2,7 +2,7 @@
     "packageName": "HoneybeeSchema",
     "projectName": "HoneybeeSchema",
     "packageUrl": "https://github.com/ladybug-tools/honeybee-schema-dotnet",
-    "packageVersion": "1.39.10",
+    "packageVersion": "1.39.11",
     "targetFramework": "v4.5",
     "sourceFolder": "src",
     "optionalAssemblyInfo": false,

@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
     [DataContract(Name = "Plane")]
-    public partial class Plane : OpenAPIGenBaseModel, IEquatable<Plane>, IValidatableObject
+    public partial class Plane : IEquatable<Plane>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Plane" /> class.
@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         (
              List<double> n, List<double> o, // Required parameters
             List<double> x= default// Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             // to ensure "n" is required (not null)
             this.N = n ?? throw new ArgumentNullException("n is a required property for Plane and cannot be null");
@@ -137,14 +137,6 @@ namespace HoneybeeSchema
             return DuplicatePlane();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicatePlane();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -165,24 +157,24 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && 
                 (
                     this.N == input.N ||
                     this.N != null &&
                     input.N != null &&
                     this.N.SequenceEqual(input.N)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.O == input.O ||
                     this.O != null &&
                     input.O != null &&
                     this.O.SequenceEqual(input.O)
-                ) && base.Equals(input) && 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.X == input.X ||
                     this.X != null &&
@@ -199,13 +191,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.N != null)
                     hashCode = hashCode * 59 + this.N.GetHashCode();
                 if (this.O != null)
                     hashCode = hashCode * 59 + this.O.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.X != null)
                     hashCode = hashCode * 59 + this.X.GetHashCode();
                 return hashCode;
@@ -219,7 +211,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Used to specify humidity conditions on a design day.
     /// </summary>
     [DataContract(Name = "HumidityCondition")]
-    public partial class HumidityCondition : OpenAPIGenBaseModel, IEquatable<HumidityCondition>, IValidatableObject
+    public partial class HumidityCondition : IEquatable<HumidityCondition>, IValidatableObject
     {
         /// <summary>
         /// Gets or Sets HumidityType
@@ -56,7 +56,7 @@ namespace HoneybeeSchema
         (
              HumidityTypes humidityType, double humidityValue, // Required parameters
             double barometricPressure = 101325D, bool rain = false, bool snowOnGround = false// Optional parameters
-        ) : base()// BaseClass
+        )// BaseClass
         {
             this.HumidityType = humidityType;
             this.HumidityValue = humidityValue;
@@ -152,14 +152,6 @@ namespace HoneybeeSchema
             return DuplicateHumidityCondition();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
-        {
-            return DuplicateHumidityCondition();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -180,32 +172,32 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
-                (
-                    this.HumidityType == input.HumidityType ||
-                    (this.HumidityType != null &&
-                    this.HumidityType.Equals(input.HumidityType))
-                ) && base.Equals(input) && 
-                (
-                    this.HumidityValue == input.HumidityValue ||
-                    (this.HumidityValue != null &&
-                    this.HumidityValue.Equals(input.HumidityValue))
-                ) && base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
+                (
+                    this.HumidityType == input.HumidityType ||
+                    (this.HumidityType != null &&
+                    this.HumidityType.Equals(input.HumidityType))
+                ) && 
+                (
+                    this.HumidityValue == input.HumidityValue ||
+                    (this.HumidityValue != null &&
+                    this.HumidityValue.Equals(input.HumidityValue))
+                ) && 
                 (
                     this.BarometricPressure == input.BarometricPressure ||
                     (this.BarometricPressure != null &&
                     this.BarometricPressure.Equals(input.BarometricPressure))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Rain == input.Rain ||
                     (this.Rain != null &&
                     this.Rain.Equals(input.Rain))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.SnowOnGround == input.SnowOnGround ||
                     (this.SnowOnGround != null &&
@@ -221,13 +213,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.HumidityType != null)
                     hashCode = hashCode * 59 + this.HumidityType.GetHashCode();
                 if (this.HumidityValue != null)
                     hashCode = hashCode * 59 + this.HumidityValue.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.BarometricPressure != null)
                     hashCode = hashCode * 59 + this.BarometricPressure.GetHashCode();
                 if (this.Rain != null)
@@ -245,7 +237,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

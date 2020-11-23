@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Radiance Properties for Honeybee Face Abridged.
     /// </summary>
     [DataContract(Name = "FaceRadiancePropertiesAbridged")]
-    public partial class FaceRadiancePropertiesAbridged : PropertiesBaseAbridged, IEquatable<FaceRadiancePropertiesAbridged>, IValidatableObject
+    public partial class FaceRadiancePropertiesAbridged : IEquatable<FaceRadiancePropertiesAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FaceRadiancePropertiesAbridged" /> class.
@@ -37,14 +37,28 @@ namespace HoneybeeSchema
         public FaceRadiancePropertiesAbridged
         (
              // Required parameters
-            string modifier= default, string modifierBlk= default // Optional parameters
-        ) : base(modifier: modifier, modifierBlk: modifierBlk)// BaseClass
+            string modifier= default, string modifierBlk= default// Optional parameters
+        )// BaseClass
         {
+            this.Modifier = modifier;
+            this.ModifierBlk = modifierBlk;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "FaceRadiancePropertiesAbridged";
         }
 
+        /// <summary>
+        /// A string for a Honeybee Radiance Modifier (default: None).
+        /// </summary>
+        /// <value>A string for a Honeybee Radiance Modifier (default: None).</value>
+        [DataMember(Name = "modifier", EmitDefaultValue = false)]
+        public string Modifier { get; set; } 
+        /// <summary>
+        /// A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).
+        /// </summary>
+        /// <value>A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).</value>
+        [DataMember(Name = "modifier_blk", EmitDefaultValue = false)]
+        public string ModifierBlk { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -102,14 +116,6 @@ namespace HoneybeeSchema
             return DuplicateFaceRadiancePropertiesAbridged();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override PropertiesBaseAbridged DuplicatePropertiesBaseAbridged()
-        {
-            return DuplicateFaceRadiancePropertiesAbridged();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -130,11 +136,21 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
+                ) && 
+                (
+                    this.Modifier == input.Modifier ||
+                    (this.Modifier != null &&
+                    this.Modifier.Equals(input.Modifier))
+                ) && 
+                (
+                    this.ModifierBlk == input.ModifierBlk ||
+                    (this.ModifierBlk != null &&
+                    this.ModifierBlk.Equals(input.ModifierBlk))
                 );
         }
 
@@ -146,9 +162,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Modifier != null)
+                    hashCode = hashCode * 59 + this.Modifier.GetHashCode();
+                if (this.ModifierBlk != null)
+                    hashCode = hashCode * 59 + this.ModifierBlk.GetHashCode();
                 return hashCode;
             }
         }
@@ -160,7 +180,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

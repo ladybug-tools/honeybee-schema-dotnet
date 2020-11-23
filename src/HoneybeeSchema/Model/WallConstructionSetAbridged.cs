@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// A set of constructions for wall assemblies.
     /// </summary>
     [DataContract(Name = "WallConstructionSetAbridged")]
-    public partial class WallConstructionSetAbridged : FaceSubSetAbridged, IEquatable<WallConstructionSetAbridged>, IValidatableObject
+    public partial class WallConstructionSetAbridged : IEquatable<WallConstructionSetAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="WallConstructionSetAbridged" /> class.
@@ -38,14 +38,35 @@ namespace HoneybeeSchema
         public WallConstructionSetAbridged
         (
              // Required parameters
-            string interiorConstruction= default, string exteriorConstruction= default, string groundConstruction= default // Optional parameters
-        ) : base(interiorConstruction: interiorConstruction, exteriorConstruction: exteriorConstruction, groundConstruction: groundConstruction)// BaseClass
+            string interiorConstruction= default, string exteriorConstruction= default, string groundConstruction= default// Optional parameters
+        )// BaseClass
         {
+            this.InteriorConstruction = interiorConstruction;
+            this.ExteriorConstruction = exteriorConstruction;
+            this.GroundConstruction = groundConstruction;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "WallConstructionSetAbridged";
         }
 
+        /// <summary>
+        /// Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition.
+        /// </summary>
+        /// <value>Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition.</value>
+        [DataMember(Name = "interior_construction", EmitDefaultValue = false)]
+        public string InteriorConstruction { get; set; } 
+        /// <summary>
+        /// Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition.
+        /// </summary>
+        /// <value>Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition.</value>
+        [DataMember(Name = "exterior_construction", EmitDefaultValue = false)]
+        public string ExteriorConstruction { get; set; } 
+        /// <summary>
+        /// Identifier for an OpaqueConstruction for faces with a Ground boundary condition.
+        /// </summary>
+        /// <value>Identifier for an OpaqueConstruction for faces with a Ground boundary condition.</value>
+        [DataMember(Name = "ground_construction", EmitDefaultValue = false)]
+        public string GroundConstruction { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -104,14 +125,6 @@ namespace HoneybeeSchema
             return DuplicateWallConstructionSetAbridged();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override FaceSubSetAbridged DuplicateFaceSubSetAbridged()
-        {
-            return DuplicateWallConstructionSetAbridged();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -132,11 +145,26 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
+                ) && 
+                (
+                    this.InteriorConstruction == input.InteriorConstruction ||
+                    (this.InteriorConstruction != null &&
+                    this.InteriorConstruction.Equals(input.InteriorConstruction))
+                ) && 
+                (
+                    this.ExteriorConstruction == input.ExteriorConstruction ||
+                    (this.ExteriorConstruction != null &&
+                    this.ExteriorConstruction.Equals(input.ExteriorConstruction))
+                ) && 
+                (
+                    this.GroundConstruction == input.GroundConstruction ||
+                    (this.GroundConstruction != null &&
+                    this.GroundConstruction.Equals(input.GroundConstruction))
                 );
         }
 
@@ -148,9 +176,15 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.InteriorConstruction != null)
+                    hashCode = hashCode * 59 + this.InteriorConstruction.GetHashCode();
+                if (this.ExteriorConstruction != null)
+                    hashCode = hashCode * 59 + this.ExteriorConstruction.GetHashCode();
+                if (this.GroundConstruction != null)
+                    hashCode = hashCode * 59 + this.GroundConstruction.GetHashCode();
                 return hashCode;
             }
         }
@@ -162,7 +196,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern
@@ -172,6 +205,42 @@ namespace HoneybeeSchema
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
+            // InteriorConstruction (string) maxLength
+            if(this.InteriorConstruction != null && this.InteriorConstruction.Length > 100)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InteriorConstruction, length must be less than 100.", new [] { "InteriorConstruction" });
+            }
+
+            // InteriorConstruction (string) minLength
+            if(this.InteriorConstruction != null && this.InteriorConstruction.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InteriorConstruction, length must be greater than 1.", new [] { "InteriorConstruction" });
+            }
+            
+            // ExteriorConstruction (string) maxLength
+            if(this.ExteriorConstruction != null && this.ExteriorConstruction.Length > 100)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ExteriorConstruction, length must be less than 100.", new [] { "ExteriorConstruction" });
+            }
+
+            // ExteriorConstruction (string) minLength
+            if(this.ExteriorConstruction != null && this.ExteriorConstruction.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ExteriorConstruction, length must be greater than 1.", new [] { "ExteriorConstruction" });
+            }
+            
+            // GroundConstruction (string) maxLength
+            if(this.GroundConstruction != null && this.GroundConstruction.Length > 100)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for GroundConstruction, length must be less than 100.", new [] { "GroundConstruction" });
+            }
+
+            // GroundConstruction (string) minLength
+            if(this.GroundConstruction != null && this.GroundConstruction.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for GroundConstruction, length must be greater than 1.", new [] { "GroundConstruction" });
+            }
+            
             yield break;
         }
     }

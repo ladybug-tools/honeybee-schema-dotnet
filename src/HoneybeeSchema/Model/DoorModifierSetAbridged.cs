@@ -27,22 +27,24 @@ namespace HoneybeeSchema
     /// Abridged set containing radiance modifiers needed for a model&#39;s Doors.
     /// </summary>
     [DataContract(Name = "DoorModifierSetAbridged")]
-    public partial class DoorModifierSetAbridged : BaseModifierSetAbridged, IEquatable<DoorModifierSetAbridged>, IValidatableObject
+    public partial class DoorModifierSetAbridged : IEquatable<DoorModifierSetAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DoorModifierSetAbridged" /> class.
         /// </summary>
+        /// <param name="exteriorModifier">Identifier for a radiance modifier object for faces with an  Outdoors boundary condition..</param>
+        /// <param name="interiorModifier">Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors..</param>
         /// <param name="interiorGlassModifier">Identifier of modifier object for glass with a Surface boundary condition..</param>
         /// <param name="exteriorGlassModifier">Identifier of modifier object for glass with an Outdoors boundary condition..</param>
         /// <param name="overheadModifier">Identifier of a modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face..</param>
-        /// <param name="exteriorModifier">Identifier for a radiance modifier object for faces with an  Outdoors boundary condition..</param>
-        /// <param name="interiorModifier">Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors..</param>
         public DoorModifierSetAbridged
         (
              // Required parameters
             string exteriorModifier= default, string interiorModifier= default, string interiorGlassModifier= default, string exteriorGlassModifier= default, string overheadModifier= default// Optional parameters
-        ) : base(exteriorModifier: exteriorModifier, interiorModifier: interiorModifier)// BaseClass
+        )// BaseClass
         {
+            this.ExteriorModifier = exteriorModifier;
+            this.InteriorModifier = interiorModifier;
             this.InteriorGlassModifier = interiorGlassModifier;
             this.ExteriorGlassModifier = exteriorGlassModifier;
             this.OverheadModifier = overheadModifier;
@@ -51,6 +53,18 @@ namespace HoneybeeSchema
             this.Type = "DoorModifierSetAbridged";
         }
 
+        /// <summary>
+        /// Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.
+        /// </summary>
+        /// <value>Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.</value>
+        [DataMember(Name = "exterior_modifier", EmitDefaultValue = false)]
+        public string ExteriorModifier { get; set; } 
+        /// <summary>
+        /// Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors.
+        /// </summary>
+        /// <value>Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors.</value>
+        [DataMember(Name = "interior_modifier", EmitDefaultValue = false)]
+        public string InteriorModifier { get; set; } 
         /// <summary>
         /// Identifier of modifier object for glass with a Surface boundary condition.
         /// </summary>
@@ -129,14 +143,6 @@ namespace HoneybeeSchema
             return DuplicateDoorModifierSetAbridged();
         }
 
-        /// <summary>
-        /// Creates a new instance with the same properties.
-        /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override BaseModifierSetAbridged DuplicateBaseModifierSetAbridged()
-        {
-            return DuplicateDoorModifierSetAbridged();
-        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -157,22 +163,32 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
+                ) && 
+                (
+                    this.ExteriorModifier == input.ExteriorModifier ||
+                    (this.ExteriorModifier != null &&
+                    this.ExteriorModifier.Equals(input.ExteriorModifier))
+                ) && 
+                (
+                    this.InteriorModifier == input.InteriorModifier ||
+                    (this.InteriorModifier != null &&
+                    this.InteriorModifier.Equals(input.InteriorModifier))
+                ) && 
                 (
                     this.InteriorGlassModifier == input.InteriorGlassModifier ||
                     (this.InteriorGlassModifier != null &&
                     this.InteriorGlassModifier.Equals(input.InteriorGlassModifier))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ExteriorGlassModifier == input.ExteriorGlassModifier ||
                     (this.ExteriorGlassModifier != null &&
                     this.ExteriorGlassModifier.Equals(input.ExteriorGlassModifier))
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.OverheadModifier == input.OverheadModifier ||
                     (this.OverheadModifier != null &&
@@ -188,9 +204,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = 41;
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.ExteriorModifier != null)
+                    hashCode = hashCode * 59 + this.ExteriorModifier.GetHashCode();
+                if (this.InteriorModifier != null)
+                    hashCode = hashCode * 59 + this.InteriorModifier.GetHashCode();
                 if (this.InteriorGlassModifier != null)
                     hashCode = hashCode * 59 + this.InteriorGlassModifier.GetHashCode();
                 if (this.ExteriorGlassModifier != null)
@@ -208,7 +228,6 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern
