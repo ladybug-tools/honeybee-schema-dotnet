@@ -12,9 +12,17 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static string HBModelToJSON(Model model)
+        public static string HBModelToJSON(object param)
         {
-            if (model == null) throw new ArgumentNullException("Input model: null is not valid");
+            if (param == null) throw new ArgumentNullException("Input model: null is not valid");
+
+            if (param is string s)
+                return s;
+
+            var model = param as Model;
+            if (model == null) throw new ArgumentNullException("Input is not a Honeybee Model");
+
+
             var temp = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + ".hbjson");
             using (var outputFile = new StreamWriter(temp))
             {
