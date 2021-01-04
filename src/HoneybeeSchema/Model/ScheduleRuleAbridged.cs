@@ -54,9 +54,9 @@ namespace HoneybeeSchema
         /// <param name="endDate">A list of two integers for [month, day], representing the end date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case)..</param>
         public ScheduleRuleAbridged
         (
-             string scheduleDay, // Required parameters
-            bool applySunday = false, bool applyMonday = false, bool applyTuesday = false, bool applyWednesday = false, bool applyThursday = false, bool applyFriday = false, bool applySaturday = false, List<int> startDate= default, List<int> endDate= default// Optional parameters
-        )// BaseClass
+           string scheduleDay, // Required parameters
+           bool applySunday = false, bool applyMonday = false, bool applyTuesday = false, bool applyWednesday = false, bool applyThursday = false, bool applyFriday = false, bool applySaturday = false, List<int> startDate= default, List<int> endDate= default// Optional parameters
+        ) : base()// BaseClass
         {
             // to ensure "scheduleDay" is required (not null)
             this.ScheduleDay = scheduleDay ?? throw new ArgumentNullException("scheduleDay is a required property for ScheduleRuleAbridged and cannot be null");
@@ -73,6 +73,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "ScheduleRuleAbridged";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "ScheduleRuleAbridged";
 
         /// <summary>
         /// The identifier of a ScheduleDay object associated with this rule.
@@ -207,6 +214,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as ScheduleRuleAbridged);
         }
 

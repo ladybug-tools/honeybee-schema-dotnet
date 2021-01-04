@@ -38,9 +38,9 @@ namespace HoneybeeSchema
         /// <param name="operableModifier">A modifier object for apertures with an Outdoors boundary condition and a True is_operable property..</param>
         public ApertureModifierSet
         (
-             // Required parameters
-            AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> windowModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> interiorModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> skylightModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> operableModifier= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> windowModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> interiorModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> skylightModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> operableModifier= default// Optional parameters
+        ) : base()// BaseClass
         {
             this.WindowModifier = windowModifier;
             this.InteriorModifier = interiorModifier;
@@ -50,6 +50,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "ApertureModifierSet";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "ApertureModifierSet";
 
         /// <summary>
         /// A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and Wall parent Face.
@@ -142,6 +149,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as ApertureModifierSet);
         }
 

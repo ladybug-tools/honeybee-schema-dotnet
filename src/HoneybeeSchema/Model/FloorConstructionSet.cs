@@ -37,9 +37,9 @@ namespace HoneybeeSchema
         /// <param name="groundConstruction">An OpaqueConstruction for walls with a Ground boundary condition..</param>
         public FloorConstructionSet
         (
-             // Required parameters
-            OpaqueConstruction interiorConstruction= default, OpaqueConstruction exteriorConstruction= default, OpaqueConstruction groundConstruction= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           OpaqueConstruction interiorConstruction= default, OpaqueConstruction exteriorConstruction= default, OpaqueConstruction groundConstruction= default // Optional parameters
+        ) : base()// BaseClass
         {
             this.InteriorConstruction = interiorConstruction;
             this.ExteriorConstruction = exteriorConstruction;
@@ -48,6 +48,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "FloorConstructionSet";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "FloorConstructionSet";
 
         /// <summary>
         /// An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition.
@@ -133,6 +140,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as FloorConstructionSet);
         }
 

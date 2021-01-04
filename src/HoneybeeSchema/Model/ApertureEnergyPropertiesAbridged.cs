@@ -36,9 +36,9 @@ namespace HoneybeeSchema
         /// <param name="ventOpening">An optional VentilationOpening to specify the operable portion of the Aperture..</param>
         public ApertureEnergyPropertiesAbridged
         (
-             // Required parameters
-            string construction= default, VentilationOpening ventOpening= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           string construction= default, VentilationOpening ventOpening= default// Optional parameters
+        ) : base()// BaseClass
         {
             this.Construction = construction;
             this.VentOpening = ventOpening;
@@ -46,6 +46,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "ApertureEnergyPropertiesAbridged";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "ApertureEnergyPropertiesAbridged";
 
         /// <summary>
         /// Identifier of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.
@@ -124,6 +131,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as ApertureEnergyPropertiesAbridged);
         }
 

@@ -39,15 +39,16 @@ namespace HoneybeeSchema
         /// <param name="lighting">Lighting object to describe the lighting usage of the Room..</param>
         /// <param name="electricEquipment">ElectricEquipment object to describe the electric equipment usage..</param>
         /// <param name="gasEquipment">GasEquipment object to describe the gas equipment usage..</param>
+        /// <param name="serviceHotWater">ServiceHotWater object to describe the hot water usage..</param>
         /// <param name="infiltration">Infiltration object to to describe the outdoor air leakage..</param>
         /// <param name="ventilation">Ventilation object for the minimum outdoor air requirement..</param>
         /// <param name="setpoint">Setpoint object for the temperature setpoints of the Room..</param>
         /// <param name="windowVentControl">An optional VentilationControl object to dictate the opening of windows. If None, the windows will never open..</param>
         public RoomEnergyPropertiesAbridged
         (
-             // Required parameters
-            string constructionSet= default, string programType= default, string hvac= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default, VentilationControlAbridged windowVentControl= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           string constructionSet= default, string programType= default, string hvac= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, ServiceHotWaterAbridged serviceHotWater= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default, VentilationControlAbridged windowVentControl= default// Optional parameters
+        ) : base()// BaseClass
         {
             this.ConstructionSet = constructionSet;
             this.ProgramType = programType;
@@ -56,6 +57,7 @@ namespace HoneybeeSchema
             this.Lighting = lighting;
             this.ElectricEquipment = electricEquipment;
             this.GasEquipment = gasEquipment;
+            this.ServiceHotWater = serviceHotWater;
             this.Infiltration = infiltration;
             this.Ventilation = ventilation;
             this.Setpoint = setpoint;
@@ -64,6 +66,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "RoomEnergyPropertiesAbridged";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "RoomEnergyPropertiesAbridged";
 
         /// <summary>
         /// Identifier of a ConstructionSet to specify all default constructions for the Faces, Apertures, and Doors of the Room. If None, the Room will use the Model global_construction_set.
@@ -107,6 +116,12 @@ namespace HoneybeeSchema
         /// <value>GasEquipment object to describe the gas equipment usage.</value>
         [DataMember(Name = "gas_equipment", EmitDefaultValue = false)]
         public GasEquipmentAbridged GasEquipment { get; set; } 
+        /// <summary>
+        /// ServiceHotWater object to describe the hot water usage.
+        /// </summary>
+        /// <value>ServiceHotWater object to describe the hot water usage.</value>
+        [DataMember(Name = "service_hot_water", EmitDefaultValue = false)]
+        public ServiceHotWaterAbridged ServiceHotWater { get; set; } 
         /// <summary>
         /// Infiltration object to to describe the outdoor air leakage.
         /// </summary>
@@ -160,6 +175,7 @@ namespace HoneybeeSchema
             sb.Append("  Lighting: ").Append(Lighting).Append("\n");
             sb.Append("  ElectricEquipment: ").Append(ElectricEquipment).Append("\n");
             sb.Append("  GasEquipment: ").Append(GasEquipment).Append("\n");
+            sb.Append("  ServiceHotWater: ").Append(ServiceHotWater).Append("\n");
             sb.Append("  Infiltration: ").Append(Infiltration).Append("\n");
             sb.Append("  Ventilation: ").Append(Ventilation).Append("\n");
             sb.Append("  Setpoint: ").Append(Setpoint).Append("\n");
@@ -205,6 +221,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as RoomEnergyPropertiesAbridged);
         }
 
@@ -259,6 +276,11 @@ namespace HoneybeeSchema
                     this.GasEquipment.Equals(input.GasEquipment))
                 ) && 
                 (
+                    this.ServiceHotWater == input.ServiceHotWater ||
+                    (this.ServiceHotWater != null &&
+                    this.ServiceHotWater.Equals(input.ServiceHotWater))
+                ) && base.Equals(input) && 
+                (
                     this.Infiltration == input.Infiltration ||
                     (this.Infiltration != null &&
                     this.Infiltration.Equals(input.Infiltration))
@@ -305,6 +327,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.ElectricEquipment.GetHashCode();
                 if (this.GasEquipment != null)
                     hashCode = hashCode * 59 + this.GasEquipment.GetHashCode();
+                if (this.ServiceHotWater != null)
+                    hashCode = hashCode * 59 + this.ServiceHotWater.GetHashCode();
                 if (this.Infiltration != null)
                     hashCode = hashCode * 59 + this.Infiltration.GetHashCode();
                 if (this.Ventilation != null)

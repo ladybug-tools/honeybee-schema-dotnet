@@ -46,9 +46,9 @@ namespace HoneybeeSchema
         /// <param name="dir">Direction of sensor as an array of (x, y, z) values. (required).</param>
         public Sensor
         (
-             List<double> pos, List<double> dir// Required parameters
-             // Optional parameters
-        )// BaseClass
+           List<double> pos, List<double> dir// Required parameters
+           // Optional parameters
+        ) : base()// BaseClass
         {
             // to ensure "pos" is required (not null)
             this.Pos = pos ?? throw new ArgumentNullException("pos is a required property for Sensor and cannot be null");
@@ -58,6 +58,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "Sensor";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "Sensor";
 
         /// <summary>
         /// Position of sensor in space as an array of (x, y, z) values.
@@ -136,6 +143,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as Sensor);
         }
 

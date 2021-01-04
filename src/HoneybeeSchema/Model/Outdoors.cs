@@ -37,9 +37,9 @@ namespace HoneybeeSchema
         /// <param name="viewFactor">A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated..</param>
         public Outdoors
         (
-             // Required parameters
-            bool sunExposure = true, bool windExposure = true, AnyOf<Autocalculate,double> viewFactor= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           bool sunExposure = true, bool windExposure = true, AnyOf<Autocalculate,double> viewFactor= default// Optional parameters
+        ) : base()// BaseClass
         {
             this.SunExposure = sunExposure;
             this.WindExposure = windExposure;
@@ -48,6 +48,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "Outdoors";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "Outdoors";
 
         /// <summary>
         /// A boolean noting whether the boundary is exposed to sun.
@@ -133,6 +140,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as Outdoors);
         }
 

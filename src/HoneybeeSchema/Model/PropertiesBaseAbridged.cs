@@ -36,9 +36,9 @@ namespace HoneybeeSchema
         /// <param name="modifierBlk">A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None)..</param>
         public PropertiesBaseAbridged
         (
-             // Required parameters
-            string modifier= default, string modifierBlk= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           string modifier= default, string modifierBlk= default // Optional parameters
+        ) : base()// BaseClass
         {
             this.Modifier = modifier;
             this.ModifierBlk = modifierBlk;
@@ -46,6 +46,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "_PropertiesBaseAbridged";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "_PropertiesBaseAbridged";
 
         /// <summary>
         /// A string for a Honeybee Radiance Modifier (default: None).
@@ -124,6 +131,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as PropertiesBaseAbridged);
         }
 

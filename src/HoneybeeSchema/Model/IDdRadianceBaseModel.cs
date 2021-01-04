@@ -46,9 +46,9 @@ namespace HoneybeeSchema
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public IDdRadianceBaseModel
         (
-             string identifier, // Required parameters
-            string displayName= default// Optional parameters
-        )// BaseClass
+           string identifier, // Required parameters
+           string displayName= default // Optional parameters
+        ) : base()// BaseClass
         {
             // to ensure "identifier" is required (not null)
             this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for IDdRadianceBaseModel and cannot be null");
@@ -57,6 +57,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "IDdRadianceBaseModel";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "IDdRadianceBaseModel";
 
         /// <summary>
         /// Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.
@@ -135,6 +142,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as IDdRadianceBaseModel);
         }
 

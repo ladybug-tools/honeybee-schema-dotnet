@@ -47,9 +47,9 @@ namespace HoneybeeSchema
         /// <param name="plane">Optional Plane indicating the plane in which the face exists.If None, the plane will usually be derived from the boundary points..</param>
         public Face3D
         (
-             List<List<double>> boundary, // Required parameters
-            List<List<List<double>>> holes= default, Plane plane= default// Optional parameters
-        )// BaseClass
+           List<List<double>> boundary, // Required parameters
+           List<List<List<double>>> holes= default, Plane plane= default// Optional parameters
+        ) : base()// BaseClass
         {
             // to ensure "boundary" is required (not null)
             this.Boundary = boundary ?? throw new ArgumentNullException("boundary is a required property for Face3D and cannot be null");
@@ -59,6 +59,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "Face3D";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "Face3D";
 
         /// <summary>
         /// A list of points representing the outer boundary vertices of the face. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.
@@ -144,6 +151,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as Face3D);
         }
 

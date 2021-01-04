@@ -36,9 +36,9 @@ namespace HoneybeeSchema
         /// <param name="interiorModifier">A radiance modifier object for faces with a boundary condition other than Outdoors..</param>
         public ShadeModifierSet
         (
-             // Required parameters
-            AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> exteriorModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> interiorModifier= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> exteriorModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> interiorModifier= default // Optional parameters
+        ) : base()// BaseClass
         {
             this.ExteriorModifier = exteriorModifier;
             this.InteriorModifier = interiorModifier;
@@ -46,6 +46,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "ShadeModifierSet";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "ShadeModifierSet";
 
         /// <summary>
         /// A radiance modifier object for faces with an Outdoors boundary condition.
@@ -124,6 +131,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as ShadeModifierSet);
         }
 

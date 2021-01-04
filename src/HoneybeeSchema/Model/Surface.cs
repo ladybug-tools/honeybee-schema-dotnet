@@ -45,9 +45,9 @@ namespace HoneybeeSchema
         /// <param name="boundaryConditionObjects">A list of up to 3 object identifiers that are adjacent to this one. The first object is always the one that is immediately adjacent and is of the same object type (Face, Aperture, Door). When this boundary condition is applied to a Face, the second object in the tuple will be the parent Room of the adjacent object. When the boundary condition is applied to a sub-face (Door or Aperture), the second object will be the parent Face of the adjacent sub-face and the third object will be the parent Room of the adjacent sub-face. (required).</param>
         public Surface
         (
-             List<string> boundaryConditionObjects// Required parameters
-             // Optional parameters
-        )// BaseClass
+           List<string> boundaryConditionObjects// Required parameters
+           // Optional parameters
+        ) : base()// BaseClass
         {
             // to ensure "boundaryConditionObjects" is required (not null)
             this.BoundaryConditionObjects = boundaryConditionObjects ?? throw new ArgumentNullException("boundaryConditionObjects is a required property for Surface and cannot be null");
@@ -55,6 +55,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "Surface";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "Surface";
 
         /// <summary>
         /// A list of up to 3 object identifiers that are adjacent to this one. The first object is always the one that is immediately adjacent and is of the same object type (Face, Aperture, Door). When this boundary condition is applied to a Face, the second object in the tuple will be the parent Room of the adjacent object. When the boundary condition is applied to a sub-face (Door or Aperture), the second object will be the parent Face of the adjacent sub-face and the third object will be the parent Room of the adjacent sub-face.
@@ -126,6 +133,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as Surface);
         }
 

@@ -37,9 +37,9 @@ namespace HoneybeeSchema
         /// <param name="coolingFactor">A number that will be multiplied by the peak cooling load for each zone in order to size the heating system. (default to 1.15D).</param>
         public SizingParameter
         (
-             // Required parameters
-            List<DesignDay> designDays= default, double heatingFactor = 1.25D, double coolingFactor = 1.15D// Optional parameters
-        )// BaseClass
+           // Required parameters
+           List<DesignDay> designDays= default, double heatingFactor = 1.25D, double coolingFactor = 1.15D// Optional parameters
+        ) : base()// BaseClass
         {
             this.DesignDays = designDays;
             this.HeatingFactor = heatingFactor;
@@ -48,6 +48,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "SizingParameter";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "SizingParameter";
 
         /// <summary>
         /// A list of DesignDays that represent the criteria for which the HVAC systems will be sized.
@@ -133,6 +140,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as SizingParameter);
         }
 

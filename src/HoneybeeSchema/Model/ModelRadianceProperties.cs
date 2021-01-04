@@ -38,9 +38,9 @@ namespace HoneybeeSchema
         /// <param name="views">An array of Views that are associated with the model..</param>
         public ModelRadianceProperties
         (
-             // Required parameters
-            List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> modifiers= default, List<AnyOf<ModifierSet,ModifierSetAbridged>> modifierSets= default, List<SensorGrid> sensorGrids= default, List<View> views= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> modifiers= default, List<AnyOf<ModifierSet,ModifierSetAbridged>> modifierSets= default, List<SensorGrid> sensorGrids= default, List<View> views= default// Optional parameters
+        ) : base()// BaseClass
         {
             this.Modifiers = modifiers;
             this.ModifierSets = modifierSets;
@@ -50,6 +50,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "ModelRadianceProperties";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "ModelRadianceProperties";
 
         /// <summary>
         /// A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set.
@@ -142,6 +149,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as ModelRadianceProperties);
         }
 

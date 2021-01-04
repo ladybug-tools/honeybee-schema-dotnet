@@ -37,9 +37,9 @@ namespace HoneybeeSchema
         /// <param name="groundConstruction">Identifier for an OpaqueConstruction for faces with a Ground boundary condition..</param>
         public FloorConstructionSetAbridged
         (
-             // Required parameters
-            string interiorConstruction= default, string exteriorConstruction= default, string groundConstruction= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+            string interiorConstruction= default, string exteriorConstruction= default, string groundConstruction= default // Optional parameters
+        ) : base(interiorConstruction: interiorConstruction, exteriorConstruction: exteriorConstruction, groundConstruction: groundConstruction)// BaseClass
         {
             this.InteriorConstruction = interiorConstruction;
             this.ExteriorConstruction = exteriorConstruction;
@@ -49,24 +49,13 @@ namespace HoneybeeSchema
             this.Type = "FloorConstructionSetAbridged";
         }
 
+        //============================================== is ReadOnly 
         /// <summary>
-        /// Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition.
+        /// Gets or Sets Type
         /// </summary>
-        /// <value>Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition.</value>
-        [DataMember(Name = "interior_construction", EmitDefaultValue = false)]
-        public string InteriorConstruction { get; set; } 
-        /// <summary>
-        /// Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition.
-        /// </summary>
-        /// <value>Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition.</value>
-        [DataMember(Name = "exterior_construction", EmitDefaultValue = false)]
-        public string ExteriorConstruction { get; set; } 
-        /// <summary>
-        /// Identifier for an OpaqueConstruction for faces with a Ground boundary condition.
-        /// </summary>
-        /// <value>Identifier for an OpaqueConstruction for faces with a Ground boundary condition.</value>
-        [DataMember(Name = "ground_construction", EmitDefaultValue = false)]
-        public string GroundConstruction { get; set; } 
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "FloorConstructionSetAbridged";
+
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -133,6 +122,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as FloorConstructionSetAbridged);
         }
 

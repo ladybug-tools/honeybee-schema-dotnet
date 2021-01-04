@@ -39,9 +39,9 @@ namespace HoneybeeSchema
         /// <param name="interiorGlassConstruction">Identifier for a WindowConstruction for all glass doors with a Surface boundary condition..</param>
         public DoorConstructionSetAbridged
         (
-             // Required parameters
-            string interiorConstruction= default, string exteriorConstruction= default, string overheadConstruction= default, string exteriorGlassConstruction= default, string interiorGlassConstruction= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           string interiorConstruction= default, string exteriorConstruction= default, string overheadConstruction= default, string exteriorGlassConstruction= default, string interiorGlassConstruction= default// Optional parameters
+        ) : base()// BaseClass
         {
             this.InteriorConstruction = interiorConstruction;
             this.ExteriorConstruction = exteriorConstruction;
@@ -52,6 +52,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "DoorConstructionSetAbridged";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "DoorConstructionSetAbridged";
 
         /// <summary>
         /// Identifier for an OpaqueConstruction for all opaque doors with a Surface boundary condition.
@@ -151,6 +158,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as DoorConstructionSetAbridged);
         }
 

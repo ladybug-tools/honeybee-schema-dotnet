@@ -35,14 +35,21 @@ namespace HoneybeeSchema
         [JsonConstructorAttribute]
         public DatedBaseModel
         (
-            // Required parameters
-             // Optional parameters
-        )// BaseClass
+           // Required parameters
+           // Optional parameters
+        ) : base()// BaseClass
         {
 
             // Set non-required readonly properties with defaultValue
             this.Type = "DatedBaseModel";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "DatedBaseModel";
 
 
         /// <summary>
@@ -107,6 +114,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as DatedBaseModel);
         }
 

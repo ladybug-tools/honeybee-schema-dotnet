@@ -55,9 +55,9 @@ namespace HoneybeeSchema
         /// <param name="skyCondition">skyCondition (required).</param>
         public DesignDay
         (
-             string name, DesignDayTypes dayType, DryBulbCondition dryBulbCondition, HumidityCondition humidityCondition, WindCondition windCondition, AnyOf<ASHRAEClearSky,ASHRAETau> skyCondition// Required parameters
-             // Optional parameters
-        )// BaseClass
+           string name, DesignDayTypes dayType, DryBulbCondition dryBulbCondition, HumidityCondition humidityCondition, WindCondition windCondition, AnyOf<ASHRAEClearSky,ASHRAETau> skyCondition// Required parameters
+           // Optional parameters
+        ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)
             this.Name = name ?? throw new ArgumentNullException("name is a required property for DesignDay and cannot be null");
@@ -74,6 +74,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "DesignDay";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "DesignDay";
 
         /// <summary>
         /// Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
@@ -173,6 +180,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as DesignDay);
         }
 

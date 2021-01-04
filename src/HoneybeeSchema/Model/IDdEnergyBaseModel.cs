@@ -46,9 +46,9 @@ namespace HoneybeeSchema
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public IDdEnergyBaseModel
         (
-             string identifier, // Required parameters
-            string displayName= default// Optional parameters
-        )// BaseClass
+           string identifier, // Required parameters
+           string displayName= default // Optional parameters
+        ) : base()// BaseClass
         {
             // to ensure "identifier" is required (not null)
             this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for IDdEnergyBaseModel and cannot be null");
@@ -57,6 +57,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "IDdEnergyBaseModel";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "IDdEnergyBaseModel";
 
         /// <summary>
         /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
@@ -135,6 +142,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as IDdEnergyBaseModel);
         }
 

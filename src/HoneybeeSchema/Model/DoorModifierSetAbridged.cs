@@ -39,7 +39,7 @@ namespace HoneybeeSchema
         /// <param name="overheadModifier">Identifier of a modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face..</param>
         public DoorModifierSetAbridged
         (
-             // Required parameters
+           // Required parameters
             string exteriorModifier= default, string interiorModifier= default, string interiorGlassModifier= default, string exteriorGlassModifier= default, string overheadModifier= default// Optional parameters
         )// BaseClass
         {
@@ -52,6 +52,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "DoorModifierSetAbridged";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "DoorModifierSetAbridged";
 
         /// <summary>
         /// Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.
@@ -151,6 +158,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as DoorModifierSetAbridged);
         }
 

@@ -35,15 +35,22 @@ namespace HoneybeeSchema
         /// <param name="modifierSet">An identifier for a unique Room-Assigned ModifierSet (default: None)..</param>
         public RoomRadiancePropertiesAbridged
         (
-             // Required parameters
-            string modifierSet= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           string modifierSet= default// Optional parameters
+        ) : base()// BaseClass
         {
             this.ModifierSet = modifierSet;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "RoomRadiancePropertiesAbridged";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "RoomRadiancePropertiesAbridged";
 
         /// <summary>
         /// An identifier for a unique Room-Assigned ModifierSet (default: None).
@@ -115,6 +122,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as RoomRadiancePropertiesAbridged);
         }
 

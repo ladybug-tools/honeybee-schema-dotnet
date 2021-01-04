@@ -40,9 +40,9 @@ namespace HoneybeeSchema
         /// <param name="schedule">Identifier of the schedule for the ventilation over the course of the year. Note that this is applied on top of any setpoints. The type of this schedule should be On/Off and values should be either 0 (no possibility of ventilation) or 1 (ventilation possible)..</param>
         public VentilationControlAbridged
         (
-             // Required parameters
-            double minIndoorTemperature = -100D, double maxIndoorTemperature = 100D, double minOutdoorTemperature = -100D, double maxOutdoorTemperature = 100D, double deltaTemperature = -100D, string schedule= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           double minIndoorTemperature = -100D, double maxIndoorTemperature = 100D, double minOutdoorTemperature = -100D, double maxOutdoorTemperature = 100D, double deltaTemperature = -100D, string schedule= default// Optional parameters
+        ) : base()// BaseClass
         {
             this.MinIndoorTemperature = minIndoorTemperature;
             this.MaxIndoorTemperature = maxIndoorTemperature;
@@ -54,6 +54,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "VentilationControlAbridged";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "VentilationControlAbridged";
 
         /// <summary>
         /// A number for the minimum indoor temperature at which to ventilate in Celsius. Typically, this variable is used to initiate ventilation.
@@ -160,6 +167,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as VentilationControlAbridged);
         }
 

@@ -43,7 +43,7 @@ namespace HoneybeeSchema
         { 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.39.12";
+            this.Version = "1.40.0";
         }
         
         /// <summary>
@@ -84,8 +84,22 @@ namespace HoneybeeSchema
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.39.12";
+            this.Version = "1.40.0";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "Model";
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Text string for the current version of the schema.
+        /// </summary>
+        /// <value>Text string for the current version of the schema.</value>
+        [DataMember(Name = "version", EmitDefaultValue = true)]
+        public string Version { get; protected internal set; }  = "1.40.0";
 
         /// <summary>
         /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters.
@@ -229,6 +243,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as Model);
         }
 

@@ -47,9 +47,9 @@ namespace HoneybeeSchema
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public IDdBaseModel
         (
-             string identifier, // Required parameters
-            string displayName= default, Object userData= default// Optional parameters
-        )// BaseClass
+           string identifier, // Required parameters
+           string displayName= default, Object userData= default // Optional parameters
+        ) : base()// BaseClass
         {
             // to ensure "identifier" is required (not null)
             this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for IDdBaseModel and cannot be null");
@@ -59,6 +59,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "IDdBaseModel";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "IDdBaseModel";
 
         /// <summary>
         /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters.
@@ -144,6 +151,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as IDdBaseModel);
         }
 

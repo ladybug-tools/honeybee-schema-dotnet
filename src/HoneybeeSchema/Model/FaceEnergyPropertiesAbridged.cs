@@ -36,9 +36,9 @@ namespace HoneybeeSchema
         /// <param name="ventCrack">An optional AFNCrack to specify airflow through a surface crack used by the AirflowNetwork..</param>
         public FaceEnergyPropertiesAbridged
         (
-             // Required parameters
-            string construction= default, AFNCrack ventCrack= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           string construction= default, AFNCrack ventCrack= default// Optional parameters
+        ) : base()// BaseClass
         {
             this.Construction = construction;
             this.VentCrack = ventCrack;
@@ -46,6 +46,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "FaceEnergyPropertiesAbridged";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "FaceEnergyPropertiesAbridged";
 
         /// <summary>
         /// Identifier of an OpaqueConstruction for the Face. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.
@@ -124,6 +131,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as FaceEnergyPropertiesAbridged);
         }
 

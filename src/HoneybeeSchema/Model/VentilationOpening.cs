@@ -41,9 +41,9 @@ namespace HoneybeeSchema
         /// <param name="twoWayThreshold">A number in kg/m3 indicating the minimum density difference above which two-way flow may occur due to stack effect, required to run an AirflowNetwork simulation. This value is required because the air density difference between two zones (which drives two-way air flow) will tend towards division by zero errors as the air density difference approaches zero. The default of 0.0001 is a typical default value used for AirflowNetwork openings. (default to 0.00010D).</param>
         public VentilationOpening
         (
-             // Required parameters
-            double fractionAreaOperable = 0.5D, double fractionHeightOperable = 1.0D, double dischargeCoefficient = 0.45D, bool windCrossVent = false, double flowCoefficientClosed= default, double flowExponentClosed = 0.65D, double twoWayThreshold = 0.00010D// Optional parameters
-        )// BaseClass
+           // Required parameters
+           double fractionAreaOperable = 0.5D, double fractionHeightOperable = 1.0D, double dischargeCoefficient = 0.45D, bool windCrossVent = false, double flowCoefficientClosed= default, double flowExponentClosed = 0.65D, double twoWayThreshold = 0.00010D// Optional parameters
+        ) : base()// BaseClass
         {
             this.FractionAreaOperable = fractionAreaOperable;
             this.FractionHeightOperable = fractionHeightOperable;
@@ -56,6 +56,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "VentilationOpening";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "VentilationOpening";
 
         /// <summary>
         /// A number for the fraction of the window area that is operable.
@@ -169,6 +176,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as VentilationOpening);
         }
 

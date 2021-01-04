@@ -36,9 +36,9 @@ namespace HoneybeeSchema
         /// <param name="endDate">A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017)..</param>
         public DaylightSavingTime
         (
-             // Required parameters
-            List<int> startDate= default, List<int> endDate= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           List<int> startDate= default, List<int> endDate= default// Optional parameters
+        ) : base()// BaseClass
         {
             this.StartDate = startDate;
             this.EndDate = endDate;
@@ -46,6 +46,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "DaylightSavingTime";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "DaylightSavingTime";
 
         /// <summary>
         /// A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).
@@ -124,6 +131,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as DaylightSavingTime);
         }
 
