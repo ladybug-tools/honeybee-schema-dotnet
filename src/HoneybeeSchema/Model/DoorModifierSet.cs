@@ -39,9 +39,9 @@ namespace HoneybeeSchema
         /// <param name="overheadModifier">A window modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face..</param>
         public DoorModifierSet
         (
-             // Required parameters
-            AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> exteriorModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> interiorModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> interiorGlassModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> exteriorGlassModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> overheadModifier= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> exteriorModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> interiorModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> interiorGlassModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> exteriorGlassModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> overheadModifier= default // Optional parameters
+        ) : base()// BaseClass
         {
             this.ExteriorModifier = exteriorModifier;
             this.InteriorModifier = interiorModifier;
@@ -52,6 +52,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "DoorModifierSet";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "DoorModifierSet";
 
         /// <summary>
         /// A radiance modifier object for faces with an Outdoors boundary condition.
@@ -151,6 +158,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as DoorModifierSet);
         }
 

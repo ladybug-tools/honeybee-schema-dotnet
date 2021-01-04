@@ -42,9 +42,9 @@ namespace HoneybeeSchema
         /// <param name="ventilationSimulationControl">An optional parameter to define the global parameters for a ventilation cooling..</param>
         public ModelEnergyProperties
         (
-             // Required parameters
-            List<AnyOf<ConstructionSetAbridged,ConstructionSet>> constructionSets= default, List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,WindowConstructionShadeAbridged,AirBoundaryConstructionAbridged,OpaqueConstruction,WindowConstruction,WindowConstructionShade,AirBoundaryConstruction,ShadeConstruction>> constructions= default, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing,EnergyWindowMaterialShade>> materials= default, List<AnyOf<IdealAirSystemAbridged,VAV,PVAV,PSZ,PTAC,ForcedAirFurnace,FCUwithDOAS,WSHPwithDOAS,VRFwithDOAS,FCU,WSHP,VRF,Baseboard,EvaporativeCooler,Residential,WindowAC,GasUnitHeater>> hvacs= default, List<AnyOf<ProgramTypeAbridged,ProgramType>> programTypes= default, List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged,ScheduleRuleset,ScheduleFixedInterval>> schedules= default, List<ScheduleTypeLimit> scheduleTypeLimits= default, VentilationSimulationControl ventilationSimulationControl= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           List<AnyOf<ConstructionSetAbridged,ConstructionSet>> constructionSets= default, List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,WindowConstructionShadeAbridged,AirBoundaryConstructionAbridged,OpaqueConstruction,WindowConstruction,WindowConstructionShade,AirBoundaryConstruction,ShadeConstruction>> constructions= default, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing,EnergyWindowMaterialShade>> materials= default, List<AnyOf<IdealAirSystemAbridged,VAV,PVAV,PSZ,PTAC,ForcedAirFurnace,FCUwithDOAS,WSHPwithDOAS,VRFwithDOAS,FCU,WSHP,VRF,Baseboard,EvaporativeCooler,Residential,WindowAC,GasUnitHeater>> hvacs= default, List<AnyOf<ProgramTypeAbridged,ProgramType>> programTypes= default, List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged,ScheduleRuleset,ScheduleFixedInterval>> schedules= default, List<ScheduleTypeLimit> scheduleTypeLimits= default, VentilationSimulationControl ventilationSimulationControl= default// Optional parameters
+        ) : base()// BaseClass
         {
             this.ConstructionSets = constructionSets;
             this.Constructions = constructions;
@@ -58,6 +58,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "ModelEnergyProperties";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "ModelEnergyProperties";
 
         /// <summary>
         /// List of all unique ConstructionSets in the Model.
@@ -178,6 +185,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as ModelEnergyProperties);
         }
 

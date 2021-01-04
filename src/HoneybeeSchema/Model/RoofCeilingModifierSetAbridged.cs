@@ -36,9 +36,9 @@ namespace HoneybeeSchema
         /// <param name="interiorModifier">Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors..</param>
         public RoofCeilingModifierSetAbridged
         (
-             // Required parameters
-            string exteriorModifier= default, string interiorModifier= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+            string exteriorModifier= default, string interiorModifier= default // Optional parameters
+        ) : base(exteriorModifier: exteriorModifier, interiorModifier: interiorModifier)// BaseClass
         {
             this.ExteriorModifier = exteriorModifier;
             this.InteriorModifier = interiorModifier;
@@ -47,18 +47,13 @@ namespace HoneybeeSchema
             this.Type = "RoofCeilingModifierSetAbridged";
         }
 
+        //============================================== is ReadOnly 
         /// <summary>
-        /// Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.
+        /// Gets or Sets Type
         /// </summary>
-        /// <value>Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.</value>
-        [DataMember(Name = "exterior_modifier", EmitDefaultValue = false)]
-        public string ExteriorModifier { get; set; } 
-        /// <summary>
-        /// Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors.
-        /// </summary>
-        /// <value>Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors.</value>
-        [DataMember(Name = "interior_modifier", EmitDefaultValue = false)]
-        public string InteriorModifier { get; set; } 
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "RoofCeilingModifierSetAbridged";
+
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -124,6 +119,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as RoofCeilingModifierSetAbridged);
         }
 

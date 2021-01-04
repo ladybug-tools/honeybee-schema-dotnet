@@ -39,9 +39,9 @@ namespace HoneybeeSchema
         /// <param name="dmtxGeometry">A Face3D for the daylight matrix geometry (default: None)..</param>
         public RadianceSubFaceStateAbridged
         (
-             // Required parameters
-            string modifier= default, string modifierDirect= default, List<StateGeometryAbridged> shades= default, Face3D vmtxGeometry= default, Face3D dmtxGeometry= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+            string modifier= default, string modifierDirect= default, List<StateGeometryAbridged> shades= default, Face3D vmtxGeometry= default, Face3D dmtxGeometry= default // Optional parameters
+        ) : base(modifier: modifier, modifierDirect: modifierDirect, shades: shades)// BaseClass
         {
             this.Modifier = modifier;
             this.ModifierDirect = modifierDirect;
@@ -52,6 +52,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "RadianceSubFaceStateAbridged";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "RadianceSubFaceStateAbridged";
 
         /// <summary>
         /// A Radiance Modifier identifier (default: None).
@@ -151,6 +158,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as RadianceSubFaceStateAbridged);
         }
 

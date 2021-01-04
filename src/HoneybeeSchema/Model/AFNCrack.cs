@@ -46,9 +46,9 @@ namespace HoneybeeSchema
         /// <param name="flowExponent">An optional dimensionless number between 0.5 and 1 used to calculate the crack mass flow rate; required to run an AirflowNetwork simulation. This value represents the leak geometry impact on airflow, with 0.5 generally corresponding to turbulent orifice flow and 1 generally corresponding to laminar flow. The default of 0.65 is representative of many cases of wall and window leakage, used when the exponent cannot be measured. (default to 0.65D).</param>
         public AFNCrack
         (
-             double flowCoefficient, // Required parameters
-            double flowExponent = 0.65D// Optional parameters
-        )// BaseClass
+           double flowCoefficient, // Required parameters
+           double flowExponent = 0.65D// Optional parameters
+        ) : base()// BaseClass
         {
             this.FlowCoefficient = flowCoefficient;
             this.FlowExponent = flowExponent;
@@ -56,6 +56,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "AFNCrack";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "AFNCrack";
 
         /// <summary>
         /// A number in kg/s-m at 1 Pa per meter of crack length at the conditions defined in the ReferenceCrack condition; required to run an AirflowNetwork simulation. The DesignBuilder Cracks template defines the flow coefficient for a tight, low-leakage wall to be 0.00001 and 0.001 for external and internal constructions, respectively. Flow coefficients for a very poor, high-leakage wall are defined to be 0.0004 and 0.019 for external and internal constructions, respectively.
@@ -134,6 +141,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as AFNCrack);
         }
 

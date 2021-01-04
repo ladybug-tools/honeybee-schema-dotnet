@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Lighting** | [**LightingAbridged**](LightingAbridged.md) | Lighting object to describe the lighting usage of the Room. | [optional] 
 **ElectricEquipment** | [**ElectricEquipmentAbridged**](ElectricEquipmentAbridged.md) | ElectricEquipment object to describe the electric equipment usage. | [optional] 
 **GasEquipment** | [**GasEquipmentAbridged**](GasEquipmentAbridged.md) | GasEquipment object to describe the gas equipment usage. | [optional] 
+**ServiceHotWater** | [**ServiceHotWaterAbridged**](ServiceHotWaterAbridged.md) | ServiceHotWater object to describe the hot water usage. | [optional] 
 **Infiltration** | [**InfiltrationAbridged**](InfiltrationAbridged.md) | Infiltration object to to describe the outdoor air leakage. | [optional] 
 **Ventilation** | [**VentilationAbridged**](VentilationAbridged.md) | Ventilation object for the minimum outdoor air requirement. | [optional] 
 **Setpoint** | [**SetpointAbridged**](SetpointAbridged.md) | Setpoint object for the temperature setpoints of the Room. | [optional] 

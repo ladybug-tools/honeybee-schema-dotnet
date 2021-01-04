@@ -38,7 +38,7 @@ namespace HoneybeeSchema
         /// <param name="states">An optional list of abridged states (default: None)..</param>
         public ShadeRadiancePropertiesAbridged
         (
-             // Required parameters
+           // Required parameters
             string modifier= default, string modifierBlk= default, string dynamicGroupIdentifier= default, List<RadianceShadeStateAbridged> states= default// Optional parameters
         )// BaseClass
         {
@@ -50,6 +50,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "ShadeRadiancePropertiesAbridged";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "ShadeRadiancePropertiesAbridged";
 
         /// <summary>
         /// A string for a Honeybee Radiance Modifier (default: None).
@@ -142,6 +149,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as ShadeRadiancePropertiesAbridged);
         }
 

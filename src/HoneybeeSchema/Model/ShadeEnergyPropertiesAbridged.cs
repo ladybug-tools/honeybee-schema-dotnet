@@ -36,9 +36,9 @@ namespace HoneybeeSchema
         /// <param name="transmittanceSchedule">Identifier of a schedule to set the transmittance of the shade, which can vary throughout the simulation. If None, the shade will be completely opaque..</param>
         public ShadeEnergyPropertiesAbridged
         (
-             // Required parameters
-            string construction= default, string transmittanceSchedule= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           string construction= default, string transmittanceSchedule= default// Optional parameters
+        ) : base()// BaseClass
         {
             this.Construction = construction;
             this.TransmittanceSchedule = transmittanceSchedule;
@@ -46,6 +46,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "ShadeEnergyPropertiesAbridged";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "ShadeEnergyPropertiesAbridged";
 
         /// <summary>
         /// Identifier of a ShadeConstruction to set the reflectance and specularity of the Shade. If None, the construction is set by theparent Room construction_set, the Model global_construction_set or (in the case fo an orphaned shade) the EnergyPlus default of 0.2 diffuse reflectance.
@@ -124,6 +131,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as ShadeEnergyPropertiesAbridged);
         }
 

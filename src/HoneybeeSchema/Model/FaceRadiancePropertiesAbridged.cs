@@ -36,9 +36,9 @@ namespace HoneybeeSchema
         /// <param name="modifierBlk">A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None)..</param>
         public FaceRadiancePropertiesAbridged
         (
-             // Required parameters
-            string modifier= default, string modifierBlk= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+            string modifier= default, string modifierBlk= default // Optional parameters
+        ) : base(modifier: modifier, modifierBlk: modifierBlk)// BaseClass
         {
             this.Modifier = modifier;
             this.ModifierBlk = modifierBlk;
@@ -47,18 +47,13 @@ namespace HoneybeeSchema
             this.Type = "FaceRadiancePropertiesAbridged";
         }
 
+        //============================================== is ReadOnly 
         /// <summary>
-        /// A string for a Honeybee Radiance Modifier (default: None).
+        /// Gets or Sets Type
         /// </summary>
-        /// <value>A string for a Honeybee Radiance Modifier (default: None).</value>
-        [DataMember(Name = "modifier", EmitDefaultValue = false)]
-        public string Modifier { get; set; } 
-        /// <summary>
-        /// A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).
-        /// </summary>
-        /// <value>A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).</value>
-        [DataMember(Name = "modifier_blk", EmitDefaultValue = false)]
-        public string ModifierBlk { get; set; } 
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "FaceRadiancePropertiesAbridged";
+
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -124,6 +119,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as FaceRadiancePropertiesAbridged);
         }
 

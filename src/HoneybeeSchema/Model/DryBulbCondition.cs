@@ -46,9 +46,9 @@ namespace HoneybeeSchema
         /// <param name="dryBulbRange">The difference between min and max temperatures on the design day [C]. (required).</param>
         public DryBulbCondition
         (
-             double dryBulbMax, double dryBulbRange// Required parameters
-             // Optional parameters
-        )// BaseClass
+           double dryBulbMax, double dryBulbRange// Required parameters
+           // Optional parameters
+        ) : base()// BaseClass
         {
             this.DryBulbMax = dryBulbMax;
             this.DryBulbRange = dryBulbRange;
@@ -56,6 +56,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "DryBulbCondition";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "DryBulbCondition";
 
         /// <summary>
         /// The maximum dry bulb temperature on the design day [C].
@@ -134,6 +141,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as DryBulbCondition);
         }
 

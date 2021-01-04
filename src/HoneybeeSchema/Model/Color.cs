@@ -47,9 +47,9 @@ namespace HoneybeeSchema
         /// <param name="b">Integer for blue value. (required).</param>
         public Color
         (
-             int r, int g, int b// Required parameters
-             // Optional parameters
-        )// BaseClass
+           int r, int g, int b// Required parameters
+           // Optional parameters
+        ) : base()// BaseClass
         {
             this.R = r;
             this.G = g;
@@ -58,6 +58,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "Color";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "Color";
 
         /// <summary>
         /// Integer for red value.
@@ -143,6 +150,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as Color);
         }
 

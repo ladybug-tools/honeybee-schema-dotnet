@@ -44,9 +44,9 @@ namespace HoneybeeSchema
         /// <param name="summaryReports">A list of EnergyPlus summary report names as strings..</param>
         public SimulationOutput
         (
-             // Required parameters
-            ReportingFrequency reportingFrequency= ReportingFrequency.Hourly, bool includeSqlite = true, bool includeHtml = true, List<string> outputs= default, List<string> summaryReports= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           ReportingFrequency reportingFrequency= ReportingFrequency.Hourly, bool includeSqlite = true, bool includeHtml = true, List<string> outputs= default, List<string> summaryReports= default// Optional parameters
+        ) : base()// BaseClass
         {
             this.ReportingFrequency = reportingFrequency;
             this.IncludeSqlite = includeSqlite;
@@ -57,6 +57,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "SimulationOutput";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "SimulationOutput";
 
         /// <summary>
         /// Boolean to note whether a SQLite report should be requested from the simulation.
@@ -150,6 +157,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as SimulationOutput);
         }
 

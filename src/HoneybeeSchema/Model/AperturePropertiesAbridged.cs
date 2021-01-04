@@ -36,9 +36,9 @@ namespace HoneybeeSchema
         /// <param name="radiance">radiance.</param>
         public AperturePropertiesAbridged
         (
-             // Required parameters
-            ApertureEnergyPropertiesAbridged energy= default, ApertureRadiancePropertiesAbridged radiance= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           ApertureEnergyPropertiesAbridged energy= default, ApertureRadiancePropertiesAbridged radiance= default// Optional parameters
+        ) : base()// BaseClass
         {
             this.Energy = energy;
             this.Radiance = radiance;
@@ -46,6 +46,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "AperturePropertiesAbridged";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "AperturePropertiesAbridged";
 
         /// <summary>
         /// Gets or Sets Energy
@@ -122,6 +129,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as AperturePropertiesAbridged);
         }
 

@@ -48,9 +48,9 @@ namespace HoneybeeSchema
         /// <param name="terrainType">Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms..</param>
         public SimulationParameter
         (
-             // Required parameters
-            SimulationOutput output= default, RunPeriod runPeriod= default, int timestep = 6, SimulationControl simulationControl= default, ShadowCalculation shadowCalculation= default, SizingParameter sizingParameter= default, double northAngle = 0D, TerrianTypes terrainType= TerrianTypes.City// Optional parameters
-        )// BaseClass
+           // Required parameters
+           SimulationOutput output= default, RunPeriod runPeriod= default, int timestep = 6, SimulationControl simulationControl= default, ShadowCalculation shadowCalculation= default, SizingParameter sizingParameter= default, double northAngle = 0D, TerrianTypes terrainType= TerrianTypes.City// Optional parameters
+        ) : base()// BaseClass
         {
             this.Output = output;
             this.RunPeriod = runPeriod;
@@ -64,6 +64,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "SimulationParameter";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "SimulationParameter";
 
         /// <summary>
         /// A SimulationOutput that lists the desired outputs from the simulation and the format in which to report them.
@@ -178,6 +185,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as SimulationParameter);
         }
 

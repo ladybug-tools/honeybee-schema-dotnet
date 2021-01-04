@@ -47,9 +47,9 @@ namespace HoneybeeSchema
         /// <param name="x">Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated..</param>
         public Plane
         (
-             List<double> n, List<double> o, // Required parameters
-            List<double> x= default// Optional parameters
-        )// BaseClass
+           List<double> n, List<double> o, // Required parameters
+           List<double> x= default// Optional parameters
+        ) : base()// BaseClass
         {
             // to ensure "n" is required (not null)
             this.N = n ?? throw new ArgumentNullException("n is a required property for Plane and cannot be null");
@@ -60,6 +60,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "Plane";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "Plane";
 
         /// <summary>
         /// Plane normal as 3 (x, y, z) values.
@@ -145,6 +152,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as Plane);
         }
 

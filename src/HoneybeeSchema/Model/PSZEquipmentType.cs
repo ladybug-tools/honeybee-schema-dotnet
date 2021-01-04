@@ -102,55 +102,55 @@ namespace HoneybeeSchema
         /// Enum ACdistrictchilledwaterwithbaseboardgasboiler for value: PSZ-AC district chilled water with baseboard gas boiler
         /// </summary>
         [EnumMember(Value = "PSZ-AC district chilled water with baseboard gas boiler")]
-        PSZ-AC district chilled water with baseboard gas boiler = 12,
+        ACdistrictchilledwaterwithbaseboardgasboiler = 12,
 
         /// <summary>
         /// Enum ACdistrictchilledwaterwithgasunitheaters for value: PSZ-AC district chilled water with gas unit heaters
         /// </summary>
         [EnumMember(Value = "PSZ-AC district chilled water with gas unit heaters")]
-        PSZ-AC district chilled water with gas unit heaters = 13,
+        ACdistrictchilledwaterwithgasunitheaters = 13,
 
         /// <summary>
         /// Enum ACdistrictchilledwaterwithelectriccoil for value: PSZ-AC district chilled water with electric coil
         /// </summary>
         [EnumMember(Value = "PSZ-AC district chilled water with electric coil")]
-        PSZ-AC district chilled water with electric coil = 14,
+        ACdistrictchilledwaterwithelectriccoil = 14,
 
         /// <summary>
         /// Enum ACdistrictchilledwaterwithgascoil for value: PSZ-AC district chilled water with gas coil
         /// </summary>
         [EnumMember(Value = "PSZ-AC district chilled water with gas coil")]
-        PSZ-AC district chilled water with gas coil = 15,
+        ACdistrictchilledwaterwithgascoil = 15,
 
         /// <summary>
         /// Enum ACdistrictchilledwaterwithgasboiler for value: PSZ-AC district chilled water with gas boiler
         /// </summary>
         [EnumMember(Value = "PSZ-AC district chilled water with gas boiler")]
-        PSZ-AC district chilled water with gas boiler = 16,
+        ACdistrictchilledwaterwithgasboiler = 16,
 
         /// <summary>
         /// Enum ACdistrictchilledwaterwithcentralairsourceheatpump for value: PSZ-AC district chilled water with central air source heat pump
         /// </summary>
         [EnumMember(Value = "PSZ-AC district chilled water with central air source heat pump")]
-        PSZ-AC district chilled water with central air source heat pump = 17,
+        ACdistrictchilledwaterwithcentralairsourceheatpump = 17,
 
         /// <summary>
         /// Enum ACdistrictchilledwaterwithdistricthotwater for value: PSZ-AC district chilled water with district hot water
         /// </summary>
         [EnumMember(Value = "PSZ-AC district chilled water with district hot water")]
-        PSZ-AC district chilled water with district hot water = 18,
+        ACdistrictchilledwaterwithdistricthotwater = 18,
 
         /// <summary>
         /// Enum ACdistrictchilledwaterwithnoheat for value: PSZ-AC district chilled water with no heat
         /// </summary>
         [EnumMember(Value = "PSZ-AC district chilled water with no heat")]
-        PSZ-AC district chilled water with no heat = 19,
+        ACdistrictchilledwaterwithnoheat = 19,
 
         /// <summary>
         /// Enum HP for value: PSZ-HP
         /// </summary>
         [EnumMember(Value = "PSZ-HP")]
-        PSZ-HP = 20
+        HP = 20
 
     }
 

@@ -47,9 +47,9 @@ namespace HoneybeeSchema
         /// <param name="colors">An optional list of colors that correspond to either the faces of the mesh or the vertices of the mesh..</param>
         public Mesh3D
         (
-             List<List<double>> vertices, List<List<int>> faces, // Required parameters
-            List<Color> colors= default// Optional parameters
-        )// BaseClass
+           List<List<double>> vertices, List<List<int>> faces, // Required parameters
+           List<Color> colors= default// Optional parameters
+        ) : base()// BaseClass
         {
             // to ensure "vertices" is required (not null)
             this.Vertices = vertices ?? throw new ArgumentNullException("vertices is a required property for Mesh3D and cannot be null");
@@ -60,6 +60,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "Mesh3D";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "Mesh3D";
 
         /// <summary>
         /// A list of points representing the vertices of the mesh. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.
@@ -145,6 +152,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as Mesh3D);
         }
 

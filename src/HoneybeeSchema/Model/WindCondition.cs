@@ -46,9 +46,9 @@ namespace HoneybeeSchema
         /// <param name="windDirection">Wind direction on the design day [degrees]. (default to 0D).</param>
         public WindCondition
         (
-             double windSpeed, // Required parameters
-            double windDirection = 0D// Optional parameters
-        )// BaseClass
+           double windSpeed, // Required parameters
+           double windDirection = 0D// Optional parameters
+        ) : base()// BaseClass
         {
             this.WindSpeed = windSpeed;
             this.WindDirection = windDirection;
@@ -56,6 +56,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "WindCondition";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "WindCondition";
 
         /// <summary>
         /// Wind speed on the design day [m/s].
@@ -134,6 +141,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as WindCondition);
         }
 

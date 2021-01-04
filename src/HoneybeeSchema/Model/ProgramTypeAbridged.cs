@@ -48,14 +48,15 @@ namespace HoneybeeSchema
         /// <param name="lighting">Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program..</param>
         /// <param name="electricEquipment">ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed..</param>
         /// <param name="gasEquipment">GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed..</param>
+        /// <param name="serviceHotWater">ServiceHotWater object to describe the usage of hot water within the program. If None, no hot water will be assumed..</param>
         /// <param name="infiltration">Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program..</param>
         /// <param name="ventilation">Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed..</param>
         /// <param name="setpoint">Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned..</param>
         public ProgramTypeAbridged
         (
-             string identifier, // Required parameters
-            string displayName= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default// Optional parameters
-        )// BaseClass
+            string identifier, // Required parameters
+            string displayName= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, ServiceHotWaterAbridged serviceHotWater= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             // to ensure "identifier" is required (not null)
             this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for ProgramTypeAbridged and cannot be null");
@@ -64,6 +65,7 @@ namespace HoneybeeSchema
             this.Lighting = lighting;
             this.ElectricEquipment = electricEquipment;
             this.GasEquipment = gasEquipment;
+            this.ServiceHotWater = serviceHotWater;
             this.Infiltration = infiltration;
             this.Ventilation = ventilation;
             this.Setpoint = setpoint;
@@ -71,6 +73,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "ProgramTypeAbridged";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "ProgramTypeAbridged";
 
         /// <summary>
         /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
@@ -108,6 +117,12 @@ namespace HoneybeeSchema
         /// <value>GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed.</value>
         [DataMember(Name = "gas_equipment", EmitDefaultValue = false)]
         public GasEquipmentAbridged GasEquipment { get; set; } 
+        /// <summary>
+        /// ServiceHotWater object to describe the usage of hot water within the program. If None, no hot water will be assumed.
+        /// </summary>
+        /// <value>ServiceHotWater object to describe the usage of hot water within the program. If None, no hot water will be assumed.</value>
+        [DataMember(Name = "service_hot_water", EmitDefaultValue = false)]
+        public ServiceHotWaterAbridged ServiceHotWater { get; set; } 
         /// <summary>
         /// Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program.
         /// </summary>
@@ -154,6 +169,7 @@ namespace HoneybeeSchema
             sb.Append("  Lighting: ").Append(Lighting).Append("\n");
             sb.Append("  ElectricEquipment: ").Append(ElectricEquipment).Append("\n");
             sb.Append("  GasEquipment: ").Append(GasEquipment).Append("\n");
+            sb.Append("  ServiceHotWater: ").Append(ServiceHotWater).Append("\n");
             sb.Append("  Infiltration: ").Append(Infiltration).Append("\n");
             sb.Append("  Ventilation: ").Append(Ventilation).Append("\n");
             sb.Append("  Setpoint: ").Append(Setpoint).Append("\n");
@@ -198,6 +214,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as ProgramTypeAbridged);
         }
 
@@ -247,6 +264,11 @@ namespace HoneybeeSchema
                     this.GasEquipment.Equals(input.GasEquipment))
                 ) && 
                 (
+                    this.ServiceHotWater == input.ServiceHotWater ||
+                    (this.ServiceHotWater != null &&
+                    this.ServiceHotWater.Equals(input.ServiceHotWater))
+                ) && base.Equals(input) && 
+                (
                     this.Infiltration == input.Infiltration ||
                     (this.Infiltration != null &&
                     this.Infiltration.Equals(input.Infiltration))
@@ -286,6 +308,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.ElectricEquipment.GetHashCode();
                 if (this.GasEquipment != null)
                     hashCode = hashCode * 59 + this.GasEquipment.GetHashCode();
+                if (this.ServiceHotWater != null)
+                    hashCode = hashCode * 59 + this.ServiceHotWater.GetHashCode();
                 if (this.Infiltration != null)
                     hashCode = hashCode * 59 + this.Infiltration.GetHashCode();
                 if (this.Ventilation != null)

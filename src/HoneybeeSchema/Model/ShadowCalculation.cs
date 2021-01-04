@@ -56,9 +56,9 @@ namespace HoneybeeSchema
         /// <param name="maximumFigures">Number of allowable figures in shadow overlap calculations. (default to 15000).</param>
         public ShadowCalculation
         (
-             // Required parameters
-            SolarDistribution solarDistribution= SolarDistribution.FullExteriorWithReflections, CalculationMethod calculationMethod= CalculationMethod.PolygonClipping, CalculationUpdateMethod calculationUpdateMethod= CalculationUpdateMethod.Periodic, int calculationFrequency = 30, int maximumFigures = 15000// Optional parameters
-        )// BaseClass
+           // Required parameters
+           SolarDistribution solarDistribution= SolarDistribution.FullExteriorWithReflections, CalculationMethod calculationMethod= CalculationMethod.PolygonClipping, CalculationUpdateMethod calculationUpdateMethod= CalculationUpdateMethod.Periodic, int calculationFrequency = 30, int maximumFigures = 15000// Optional parameters
+        ) : base()// BaseClass
         {
             this.SolarDistribution = solarDistribution;
             this.CalculationMethod = calculationMethod;
@@ -69,6 +69,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "ShadowCalculation";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "ShadowCalculation";
 
         /// <summary>
         /// Integer for the number of days in each period for which a unique shadow calculation will be performed. This field is only used if the Periodic calculation_method is used.
@@ -150,6 +157,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as ShadowCalculation);
         }
 

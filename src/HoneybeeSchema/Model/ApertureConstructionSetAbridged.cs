@@ -38,9 +38,9 @@ namespace HoneybeeSchema
         /// <param name="operableConstruction">Identifier for a WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property..</param>
         public ApertureConstructionSetAbridged
         (
-             // Required parameters
-            string interiorConstruction= default, string windowConstruction= default, string skylightConstruction= default, string operableConstruction= default// Optional parameters
-        )// BaseClass
+           // Required parameters
+           string interiorConstruction= default, string windowConstruction= default, string skylightConstruction= default, string operableConstruction= default// Optional parameters
+        ) : base()// BaseClass
         {
             this.InteriorConstruction = interiorConstruction;
             this.WindowConstruction = windowConstruction;
@@ -50,6 +50,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "ApertureConstructionSetAbridged";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "ApertureConstructionSetAbridged";
 
         /// <summary>
         /// Identifier for a WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.
@@ -142,6 +149,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as ApertureConstructionSetAbridged);
         }
 

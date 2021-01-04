@@ -54,9 +54,9 @@ namespace HoneybeeSchema
         /// <param name="snowOnGround">Boolean to indicate snow on the ground during the design day. (default to false).</param>
         public HumidityCondition
         (
-             HumidityTypes humidityType, double humidityValue, // Required parameters
-            double barometricPressure = 101325D, bool rain = false, bool snowOnGround = false// Optional parameters
-        )// BaseClass
+           HumidityTypes humidityType, double humidityValue, // Required parameters
+           double barometricPressure = 101325D, bool rain = false, bool snowOnGround = false// Optional parameters
+        ) : base()// BaseClass
         {
             this.HumidityType = humidityType;
             this.HumidityValue = humidityValue;
@@ -67,6 +67,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "HumidityCondition";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "HumidityCondition";
 
         /// <summary>
         /// The value correcponding to the humidity_type.
@@ -160,6 +167,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as HumidityCondition);
         }
 

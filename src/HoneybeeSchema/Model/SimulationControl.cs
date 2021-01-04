@@ -39,9 +39,9 @@ namespace HoneybeeSchema
         /// <param name="runForSizingPeriods">Boolean for whether the simulation should be run for the run periods. (default to false).</param>
         public SimulationControl
         (
-             // Required parameters
-            bool doZoneSizing = true, bool doSystemSizing = true, bool doPlantSizing = true, bool runForRunPeriods = true, bool runForSizingPeriods = false// Optional parameters
-        )// BaseClass
+           // Required parameters
+           bool doZoneSizing = true, bool doSystemSizing = true, bool doPlantSizing = true, bool runForRunPeriods = true, bool runForSizingPeriods = false// Optional parameters
+        ) : base()// BaseClass
         {
             this.DoZoneSizing = doZoneSizing;
             this.DoSystemSizing = doSystemSizing;
@@ -52,6 +52,13 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "SimulationControl";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "SimulationControl";
 
         /// <summary>
         /// Boolean for whether the zone sizing calculation should be run.
@@ -151,6 +158,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as SimulationControl);
         }
 

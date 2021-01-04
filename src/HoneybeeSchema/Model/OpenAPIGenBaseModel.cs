@@ -35,14 +35,22 @@ namespace HoneybeeSchema
         [JsonConstructorAttribute]
         public OpenAPIGenBaseModel
         (
-            // Required parameters
-             // Optional parameters
+           // Required parameters
+           // Optional parameters
         )// BaseClass
         {
 
             // Set non-required readonly properties with defaultValue
             this.Type = "InvalidType";
         }
+
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// A base class to use when there is no baseclass available to fall on.
+        /// </summary>
+        /// <value>A base class to use when there is no baseclass available to fall on.</value>
+        [DataMember(Name = "type", EmitDefaultValue = true)]
+        public override string Type { get; protected internal set; }  = "InvalidType";
 
 
         /// <summary>
@@ -107,6 +115,7 @@ namespace HoneybeeSchema
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as OpenAPIGenBaseModel);
         }
 
