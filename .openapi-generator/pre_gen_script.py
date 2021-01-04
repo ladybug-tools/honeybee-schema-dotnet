@@ -35,6 +35,14 @@ def cleanup(projectName):
     target_folder = os.path.join(root, 'docs')
     if os.path.exists(target_folder):
         shutil.rmtree(target_folder)
+    # remove Model Api
+    target_folder = os.path.join(root, 'src', projectName, 'Api')
+    if os.path.exists(target_folder):
+        shutil.rmtree(target_folder)
+    # remove Model Client
+    target_folder = os.path.join(root, 'src', projectName, 'Client')
+    if os.path.exists(target_folder):
+        shutil.rmtree(target_folder)
     # remove Model folder
     target_folder = os.path.join(root, 'src', projectName, 'Model')
     if os.path.exists(target_folder):

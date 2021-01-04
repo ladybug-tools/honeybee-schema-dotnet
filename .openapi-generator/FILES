@@ -259,6 +259,10 @@ docs/Sensor.md
 docs/SensorAllOf.md
 docs/SensorGrid.md
 docs/SensorGridAllOf.md
+docs/ServiceHotWater.md
+docs/ServiceHotWaterAbridged.md
+docs/ServiceHotWaterAbridgedAllOf.md
+docs/ServiceHotWaterAllOf.md
 docs/Setpoint.md
 docs/SetpointAbridged.md
 docs/SetpointAbridgedAllOf.md
@@ -596,6 +600,10 @@ src/HoneybeeSchema.Test/Model/SensorAllOfTests.cs
 src/HoneybeeSchema.Test/Model/SensorGridAllOfTests.cs
 src/HoneybeeSchema.Test/Model/SensorGridTests.cs
 src/HoneybeeSchema.Test/Model/SensorTests.cs
+src/HoneybeeSchema.Test/Model/ServiceHotWaterAbridgedAllOfTests.cs
+src/HoneybeeSchema.Test/Model/ServiceHotWaterAbridgedTests.cs
+src/HoneybeeSchema.Test/Model/ServiceHotWaterAllOfTests.cs
+src/HoneybeeSchema.Test/Model/ServiceHotWaterTests.cs
 src/HoneybeeSchema.Test/Model/SetpointAbridgedAllOfTests.cs
 src/HoneybeeSchema.Test/Model/SetpointAbridgedTests.cs
 src/HoneybeeSchema.Test/Model/SetpointAllOfTests.cs
@@ -945,6 +953,10 @@ src/HoneybeeSchema/Model/Sensor.cs
 src/HoneybeeSchema/Model/SensorAllOf.cs
 src/HoneybeeSchema/Model/SensorGrid.cs
 src/HoneybeeSchema/Model/SensorGridAllOf.cs
+src/HoneybeeSchema/Model/ServiceHotWater.cs
+src/HoneybeeSchema/Model/ServiceHotWaterAbridged.cs
+src/HoneybeeSchema/Model/ServiceHotWaterAbridgedAllOf.cs
+src/HoneybeeSchema/Model/ServiceHotWaterAllOf.cs
 src/HoneybeeSchema/Model/Setpoint.cs
 src/HoneybeeSchema/Model/SetpointAbridged.cs
 src/HoneybeeSchema/Model/SetpointAbridgedAllOf.cs
