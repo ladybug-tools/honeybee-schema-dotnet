@@ -130,6 +130,23 @@
         {{#vars}}
         {{^isInherited}}
         {{^isEnum}}
+        {{#isReadOnly}}
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{description}}{{/description}}
+        /// </summary>{{#description}}
+        /// <value>{{description}}</value>{{/description}}
+        [DataMember(Name = "{{baseName}}"{{#required}}, IsRequired = true{{/required}}, EmitDefaultValue = {{#vendorExtensions.x-emit-default-value}}true{{/vendorExtensions.x-emit-default-value}}{{^vendorExtensions.x-emit-default-value}}{{#isNullable}}true{{/isNullable}}{{^isNullable}}{{#defaultValue}}true{{/defaultValue}}{{^defaultValue}}false{{/defaultValue}}{{/isNullable}}{{/vendorExtensions.x-emit-default-value}})]{{#isDate}}
+        [JsonConverter(typeof(OpenAPIDateConverter))]{{/isDate}}
+        public {{{dataType}}} {{name}} { get; protected internal set; } {{#defaultValue}} = {{{defaultValue}}};{{/defaultValue}}
+        {{/isReadOnly}}
+        {{/isEnum}}
+        {{/isInherited}}
+        {{/vars}}
+
+        {{#vars}}
+        {{^isInherited}}
+        {{^isEnum}}
         {{^isReadOnly}}
         /// <summary>
         /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{description}}{{/description}}
@@ -225,6 +242,7 @@
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as {{classname}});
         }
 
