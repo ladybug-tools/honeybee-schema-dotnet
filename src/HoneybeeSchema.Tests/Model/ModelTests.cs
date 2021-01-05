@@ -163,6 +163,17 @@ namespace HoneybeeSchema.Test
             Assert.IsTrue(versions.Count() == 3);
         }
 
+        [Test]
+        public void RoomWithoutFaceTest()
+        {
+            var room = new Room("", new List<Face>(), new RoomPropertiesAbridged());
+            var json = room.ToJson();
+
+            var dup = Room.FromJson(json);
+            var isSame = room.Equals(dup);
+            Assert.IsTrue(isSame);
+        }
+
     }
 
 }
