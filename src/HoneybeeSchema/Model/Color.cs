@@ -64,7 +64,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "Color";
+        public override string Type { get; protected set; }  = "Color";
 
         /// <summary>
         /// Integer for red value.

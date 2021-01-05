@@ -70,7 +70,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "light";
+        public override string Type { get; protected set; }  = "light";
 
         /// <summary>
         /// Material modifier (default: Void).

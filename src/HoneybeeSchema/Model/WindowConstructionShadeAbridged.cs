@@ -86,7 +86,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "WindowConstructionShadeAbridged";
+        public override string Type { get; protected set; }  = "WindowConstructionShadeAbridged";
 
         /// <summary>
         /// A WindowConstructionAbridged object that serves as the \&quot;switched off\&quot; version of the construction (aka. the \&quot;bare construction\&quot;). The shade_material and shade_location will be used to modify this starting construction.

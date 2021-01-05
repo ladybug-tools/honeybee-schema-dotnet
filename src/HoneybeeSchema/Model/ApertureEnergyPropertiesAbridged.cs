@@ -52,7 +52,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "ApertureEnergyPropertiesAbridged";
+        public override string Type { get; protected set; }  = "ApertureEnergyPropertiesAbridged";
 
         /// <summary>
         /// Identifier of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.

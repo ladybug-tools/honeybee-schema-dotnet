@@ -62,7 +62,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "ASHRAEClearSky";
+        public override string Type { get; protected set; }  = "ASHRAEClearSky";
 
         /// <summary>
         /// Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.

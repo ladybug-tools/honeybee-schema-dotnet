@@ -65,7 +65,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "AirBoundaryConstructionAbridged";
+        public override string Type { get; protected set; }  = "AirBoundaryConstructionAbridged";
 
         /// <summary>
         /// Identifier of a fractional schedule for the air mixing schedule across the construction.

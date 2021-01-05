@@ -11,7 +11,7 @@ namespace HoneybeeSchema
         /// The default value is set to "InvalidSchemaObject", which should be overridden in subclass' constructor.
         /// </summary>
         [DataMember(Name = "type", EmitDefaultValue = false)]
-        public virtual string Type { get; protected internal set; } = "InvalidSchemaObject";
+        public virtual string Type { get; protected set; } = "InvalidSchemaObject";
 
         /// <summary>
         /// This is the base class for all honeybee schema objects.

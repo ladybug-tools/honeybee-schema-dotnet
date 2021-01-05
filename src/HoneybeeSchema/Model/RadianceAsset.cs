@@ -64,7 +64,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "_RadianceAsset";
+        public override string Type { get; protected set; }  = "_RadianceAsset";
 
         /// <summary>
         /// Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model.

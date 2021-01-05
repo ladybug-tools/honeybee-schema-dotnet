@@ -54,7 +54,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "ShadeRadiancePropertiesAbridged";
+        public override string Type { get; protected set; }  = "ShadeRadiancePropertiesAbridged";
 
         /// <summary>
         /// An optional string to note the dynamic group &#39;             &#39;to which the Shade is a part of. Shades sharing the same &#39;             &#39;dynamic_group_identifier will have their states change in unison. &#39;             &#39;If None, the Shade is assumed to be static. (default: None).

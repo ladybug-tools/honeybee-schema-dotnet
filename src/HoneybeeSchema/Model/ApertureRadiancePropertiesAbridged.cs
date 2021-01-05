@@ -54,7 +54,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "ApertureRadiancePropertiesAbridged";
+        public override string Type { get; protected set; }  = "ApertureRadiancePropertiesAbridged";
 
         /// <summary>
         /// An optional string to note the dynamic group &#39;             &#39;to which the Aperture is a part of. Apertures sharing the same &#39;             &#39;dynamic_group_identifier will have their states change in unison. &#39;             &#39;If None, the Aperture is assumed to be static. (default: None).

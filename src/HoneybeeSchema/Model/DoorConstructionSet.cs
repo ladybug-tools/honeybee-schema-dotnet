@@ -58,7 +58,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "DoorConstructionSet";
+        public override string Type { get; protected set; }  = "DoorConstructionSet";
 
         /// <summary>
         /// An OpaqueConstruction for all opaque doors with a Surface boundary condition.

@@ -54,7 +54,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "RoofCeilingConstructionSet";
+        public override string Type { get; protected set; }  = "RoofCeilingConstructionSet";
 
         /// <summary>
         /// An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition.

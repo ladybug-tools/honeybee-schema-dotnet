@@ -64,7 +64,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "OpaqueConstruction";
+        public override string Type { get; protected set; }  = "OpaqueConstruction";
 
         /// <summary>
         /// List of opaque materials. The order of the materials is from outside to inside.

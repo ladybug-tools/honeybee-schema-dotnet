@@ -71,7 +71,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "ServiceHotWaterAbridged";
+        public override string Type { get; protected set; }  = "ServiceHotWaterAbridged";
 
         /// <summary>
         /// Number for the total volume flow rate of water per unit area of floor [L/h-m2].

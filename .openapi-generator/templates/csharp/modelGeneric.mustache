@@ -138,7 +138,7 @@
         /// <value>{{description}}</value>{{/description}}
         [DataMember(Name = "{{baseName}}"{{#required}}, IsRequired = true{{/required}})]{{#isDate}}
         [JsonConverter(typeof(OpenAPIDateConverter))]{{/isDate}}
-        public {{{dataType}}} {{name}} { get; protected internal set; } {{#defaultValue}} = {{{defaultValue}}};{{/defaultValue}}
+        public {{{dataType}}} {{name}} { get; protected set; } {{#defaultValue}} = {{{defaultValue}}};{{/defaultValue}}
         {{/isReadOnly}}
         {{/isEnum}}
         {{/isInherited}}

@@ -66,7 +66,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "EnergyWindowMaterialSimpleGlazSys";
+        public override string Type { get; protected set; }  = "EnergyWindowMaterialSimpleGlazSys";
 
         /// <summary>
         /// Used to describe the value for window system U-Factor, or overall heat transfer coefficient in W/(m2-K).

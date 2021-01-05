@@ -66,7 +66,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "Mesh3D";
+        public override string Type { get; protected set; }  = "Mesh3D";
 
         /// <summary>
         /// A list of points representing the vertices of the mesh. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.

@@ -72,7 +72,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "RoomEnergyPropertiesAbridged";
+        public override string Type { get; protected set; }  = "RoomEnergyPropertiesAbridged";
 
         /// <summary>
         /// Identifier of a ConstructionSet to specify all default constructions for the Faces, Apertures, and Doors of the Room. If None, the Room will use the Model global_construction_set.

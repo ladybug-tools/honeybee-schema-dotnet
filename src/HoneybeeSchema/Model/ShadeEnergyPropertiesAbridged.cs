@@ -52,7 +52,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "ShadeEnergyPropertiesAbridged";
+        public override string Type { get; protected set; }  = "ShadeEnergyPropertiesAbridged";
 
         /// <summary>
         /// Identifier of a ShadeConstruction to set the reflectance and specularity of the Shade. If None, the construction is set by theparent Room construction_set, the Model global_construction_set or (in the case fo an orphaned shade) the EnergyPlus default of 0.2 diffuse reflectance.

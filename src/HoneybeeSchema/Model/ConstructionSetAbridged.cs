@@ -74,7 +74,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "ConstructionSetAbridged";
+        public override string Type { get; protected set; }  = "ConstructionSetAbridged";
 
         /// <summary>
         /// A WallConstructionSetAbridged object for this ConstructionSet.

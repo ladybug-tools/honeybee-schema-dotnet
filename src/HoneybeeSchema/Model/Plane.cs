@@ -66,7 +66,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "Plane";
+        public override string Type { get; protected set; }  = "Plane";
 
         /// <summary>
         /// Plane normal as 3 (x, y, z) values.

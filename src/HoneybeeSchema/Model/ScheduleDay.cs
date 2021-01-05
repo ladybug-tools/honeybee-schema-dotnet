@@ -67,7 +67,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "ScheduleDay";
+        public override string Type { get; protected set; }  = "ScheduleDay";
 
         /// <summary>
         /// A list of floats or integers for the values of the schedule. The length of this list must match the length of the times list.

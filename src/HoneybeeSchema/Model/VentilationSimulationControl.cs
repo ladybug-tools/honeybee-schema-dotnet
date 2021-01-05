@@ -74,7 +74,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "VentilationSimulationControl";
+        public override string Type { get; protected set; }  = "VentilationSimulationControl";
 
         /// <summary>
         /// Reference temperature measurement in Celsius under which the surface crack data were obtained.

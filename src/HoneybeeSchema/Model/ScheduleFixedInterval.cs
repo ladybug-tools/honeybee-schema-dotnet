@@ -73,7 +73,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "ScheduleFixedInterval";
+        public override string Type { get; protected set; }  = "ScheduleFixedInterval";
 
         /// <summary>
         /// A list of timeseries values occuring at each timestep over the course of the simulation.

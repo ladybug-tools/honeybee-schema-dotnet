@@ -56,7 +56,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "ModelRadianceProperties";
+        public override string Type { get; protected set; }  = "ModelRadianceProperties";
 
         /// <summary>
         /// A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set.
