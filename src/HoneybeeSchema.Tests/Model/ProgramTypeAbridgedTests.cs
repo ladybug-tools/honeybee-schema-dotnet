@@ -147,6 +147,14 @@ namespace HoneybeeSchema.Test
             Assert.AreEqual(this.instance.Setpoint.HeatingSchedule, "Generic Office Heating");
         }
 
+        [Test]
+        public void DuplicateTest()
+        {
+            var dup = this.instance.DuplicateProgramTypeAbridged();
+
+            Assert.IsTrue(this.instance.Equals(dup));
+        }
+
     }
 
 }
