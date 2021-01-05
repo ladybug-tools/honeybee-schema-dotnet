@@ -137,8 +137,6 @@ def fix_enums_with_defaults(classesData, source_folder):
         class_name = [*c.keys()][0]
         class_file = f'{class_name}.cs'
         class_file_fullpath = os.path.join(source_folder, class_file)
-        if not os.path.exists(class_file_fullpath):
-            continue
 
         f = open(class_file_fullpath, "rt", encoding='utf-8')
         data = f.read()
