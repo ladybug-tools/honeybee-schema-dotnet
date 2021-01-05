@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// A set of constructions for roof and ceiling assemblies.
     /// </summary>
     [DataContract(Name = "RoofCeilingConstructionSet")]
-    public partial class RoofCeilingConstructionSet : IEquatable<RoofCeilingConstructionSet>, IValidatableObject
+    public partial class RoofCeilingConstructionSet : OpenAPIGenBaseModel, IEquatable<RoofCeilingConstructionSet>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RoofCeilingConstructionSet" /> class.
@@ -132,6 +132,14 @@ namespace HoneybeeSchema
             return DuplicateRoofCeilingConstructionSet();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateRoofCeilingConstructionSet();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -153,26 +161,26 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.InteriorConstruction == input.InteriorConstruction ||
                     (this.InteriorConstruction != null &&
                     this.InteriorConstruction.Equals(input.InteriorConstruction))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ExteriorConstruction == input.ExteriorConstruction ||
                     (this.ExteriorConstruction != null &&
                     this.ExteriorConstruction.Equals(input.ExteriorConstruction))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.GroundConstruction == input.GroundConstruction ||
                     (this.GroundConstruction != null &&
                     this.GroundConstruction.Equals(input.GroundConstruction))
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -184,15 +192,15 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.InteriorConstruction != null)
                     hashCode = hashCode * 59 + this.InteriorConstruction.GetHashCode();
                 if (this.ExteriorConstruction != null)
                     hashCode = hashCode * 59 + this.ExteriorConstruction.GetHashCode();
                 if (this.GroundConstruction != null)
                     hashCode = hashCode * 59 + this.GroundConstruction.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -204,6 +212,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

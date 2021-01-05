@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [DataContract(Name = "GasEquipmentAbridged")]
-    public partial class GasEquipmentAbridged : IEquatable<GasEquipmentAbridged>, IValidatableObject
+    public partial class GasEquipmentAbridged : EquipmentBase, IEquatable<GasEquipmentAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GasEquipmentAbridged" /> class.
@@ -51,19 +51,10 @@ namespace HoneybeeSchema
         /// <param name="lostFraction">Number for the amount of “lost” heat being given off by equipment. The default value is 0. (default to 0D).</param>
         public GasEquipmentAbridged
         (
-             string identifier, double wattsPerArea, string schedule, // Required parameters
-            string displayName= default, double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D// Optional parameters
-        )// BaseClass
+            string identifier, double wattsPerArea, string schedule, // Required parameters
+            string displayName= default, double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D // Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, wattsPerArea: wattsPerArea, schedule: schedule, radiantFraction: radiantFraction, latentFraction: latentFraction, lostFraction: lostFraction)// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for GasEquipmentAbridged and cannot be null");
-            this.WattsPerArea = wattsPerArea;
-            // to ensure "schedule" is required (not null)
-            this.Schedule = schedule ?? throw new ArgumentNullException("schedule is a required property for GasEquipmentAbridged and cannot be null");
-            this.DisplayName = displayName;
-            this.RadiantFraction = radiantFraction;
-            this.LatentFraction = latentFraction;
-            this.LostFraction = lostFraction;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "GasEquipmentAbridged";
@@ -138,6 +129,14 @@ namespace HoneybeeSchema
             return DuplicateGasEquipmentAbridged();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override EquipmentBase DuplicateEquipmentBase()
+        {
+            return DuplicateGasEquipmentAbridged();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -159,46 +158,11 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
-                (
-                    this.WattsPerArea == input.WattsPerArea ||
-                    (this.WattsPerArea != null &&
-                    this.WattsPerArea.Equals(input.WattsPerArea))
-                ) && 
-                (
-                    this.Schedule == input.Schedule ||
-                    (this.Schedule != null &&
-                    this.Schedule.Equals(input.Schedule))
-                ) && 
-                (
-                    this.RadiantFraction == input.RadiantFraction ||
-                    (this.RadiantFraction != null &&
-                    this.RadiantFraction.Equals(input.RadiantFraction))
-                ) && 
-                (
-                    this.LatentFraction == input.LatentFraction ||
-                    (this.LatentFraction != null &&
-                    this.LatentFraction.Equals(input.LatentFraction))
-                ) && 
-                (
-                    this.LostFraction == input.LostFraction ||
-                    (this.LostFraction != null &&
-                    this.LostFraction.Equals(input.LostFraction))
                 );
         }
 
@@ -210,23 +174,9 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
-                if (this.WattsPerArea != null)
-                    hashCode = hashCode * 59 + this.WattsPerArea.GetHashCode();
-                if (this.Schedule != null)
-                    hashCode = hashCode * 59 + this.Schedule.GetHashCode();
-                if (this.RadiantFraction != null)
-                    hashCode = hashCode * 59 + this.RadiantFraction.GetHashCode();
-                if (this.LatentFraction != null)
-                    hashCode = hashCode * 59 + this.LatentFraction.GetHashCode();
-                if (this.LostFraction != null)
-                    hashCode = hashCode * 59 + this.LostFraction.GetHashCode();
                 return hashCode;
             }
         }
@@ -238,6 +188,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern
@@ -245,80 +196,6 @@ namespace HoneybeeSchema
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
-            }
-
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-            
-
-            
-            // WattsPerArea (double) minimum
-            if(this.WattsPerArea < (double)0)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for WattsPerArea, must be a value greater than or equal to 0.", new [] { "WattsPerArea" });
-            }
-
-            // Schedule (string) maxLength
-            if(this.Schedule != null && this.Schedule.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Schedule, length must be less than 100.", new [] { "Schedule" });
-            }
-
-            // Schedule (string) minLength
-            if(this.Schedule != null && this.Schedule.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Schedule, length must be greater than 1.", new [] { "Schedule" });
-            }
-            
-
-            
-            // RadiantFraction (double) maximum
-            if(this.RadiantFraction > (double)1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RadiantFraction, must be a value less than or equal to 1.", new [] { "RadiantFraction" });
-            }
-
-            // RadiantFraction (double) minimum
-            if(this.RadiantFraction < (double)0)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RadiantFraction, must be a value greater than or equal to 0.", new [] { "RadiantFraction" });
-            }
-
-
-            
-            // LatentFraction (double) maximum
-            if(this.LatentFraction > (double)1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LatentFraction, must be a value less than or equal to 1.", new [] { "LatentFraction" });
-            }
-
-            // LatentFraction (double) minimum
-            if(this.LatentFraction < (double)0)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LatentFraction, must be a value greater than or equal to 0.", new [] { "LatentFraction" });
-            }
-
-
-            
-            // LostFraction (double) maximum
-            if(this.LostFraction > (double)1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LostFraction, must be a value less than or equal to 1.", new [] { "LostFraction" });
-            }
-
-            // LostFraction (double) minimum
-            if(this.LostFraction < (double)0)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LostFraction, must be a value greater than or equal to 0.", new [] { "LostFraction" });
             }
 
             yield break;

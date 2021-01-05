@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Abridged set containing radiance modifiers needed for a model&#39;s Roofs.
     /// </summary>
     [DataContract(Name = "RoofCeilingModifierSetAbridged")]
-    public partial class RoofCeilingModifierSetAbridged : IEquatable<RoofCeilingModifierSetAbridged>, IValidatableObject
+    public partial class RoofCeilingModifierSetAbridged : BaseModifierSetAbridged, IEquatable<RoofCeilingModifierSetAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RoofCeilingModifierSetAbridged" /> class.
@@ -40,8 +40,6 @@ namespace HoneybeeSchema
             string exteriorModifier= default, string interiorModifier= default // Optional parameters
         ) : base(exteriorModifier: exteriorModifier, interiorModifier: interiorModifier)// BaseClass
         {
-            this.ExteriorModifier = exteriorModifier;
-            this.InteriorModifier = interiorModifier;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "RoofCeilingModifierSetAbridged";
@@ -111,6 +109,14 @@ namespace HoneybeeSchema
             return DuplicateRoofCeilingModifierSetAbridged();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override BaseModifierSetAbridged DuplicateBaseModifierSetAbridged()
+        {
+            return DuplicateRoofCeilingModifierSetAbridged();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -132,21 +138,11 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.ExteriorModifier == input.ExteriorModifier ||
-                    (this.ExteriorModifier != null &&
-                    this.ExteriorModifier.Equals(input.ExteriorModifier))
-                ) && 
-                (
-                    this.InteriorModifier == input.InteriorModifier ||
-                    (this.InteriorModifier != null &&
-                    this.InteriorModifier.Equals(input.InteriorModifier))
                 );
         }
 
@@ -158,13 +154,9 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.ExteriorModifier != null)
-                    hashCode = hashCode * 59 + this.ExteriorModifier.GetHashCode();
-                if (this.InteriorModifier != null)
-                    hashCode = hashCode * 59 + this.InteriorModifier.GetHashCode();
                 return hashCode;
             }
         }
@@ -176,6 +168,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

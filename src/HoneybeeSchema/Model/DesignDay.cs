@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// An object representing design day conditions.
     /// </summary>
     [DataContract(Name = "DesignDay")]
-    public partial class DesignDay : IEquatable<DesignDay>, IValidatableObject
+    public partial class DesignDay : OpenAPIGenBaseModel, IEquatable<DesignDay>, IValidatableObject
     {
         /// <summary>
         /// Gets or Sets DayType
@@ -172,6 +172,14 @@ namespace HoneybeeSchema
             return DuplicateDesignDay();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateDesignDay();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -193,41 +201,41 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Name == input.Name ||
                     (this.Name != null &&
                     this.Name.Equals(input.Name))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DayType == input.DayType ||
                     (this.DayType != null &&
                     this.DayType.Equals(input.DayType))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DryBulbCondition == input.DryBulbCondition ||
                     (this.DryBulbCondition != null &&
                     this.DryBulbCondition.Equals(input.DryBulbCondition))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.HumidityCondition == input.HumidityCondition ||
                     (this.HumidityCondition != null &&
                     this.HumidityCondition.Equals(input.HumidityCondition))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.WindCondition == input.WindCondition ||
                     (this.WindCondition != null &&
                     this.WindCondition.Equals(input.WindCondition))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SkyCondition == input.SkyCondition ||
                     (this.SkyCondition != null &&
                     this.SkyCondition.Equals(input.SkyCondition))
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -239,9 +247,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.DayType != null)
@@ -254,6 +260,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.WindCondition.GetHashCode();
                 if (this.SkyCondition != null)
                     hashCode = hashCode * 59 + this.SkyCondition.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -265,15 +273,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-
-            
-            // Type (string) pattern
-            Regex regexType = new Regex(@"^DesignDay$", RegexOptions.CultureInvariant);
-            if (false == regexType.Match(this.Type).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // Name (string) maxLength
             if(this.Name != null && this.Name.Length > 100)
             {
@@ -286,6 +286,15 @@ namespace HoneybeeSchema
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Name, length must be greater than 1.", new [] { "Name" });
             }
             
+
+            
+            // Type (string) pattern
+            Regex regexType = new Regex(@"^DesignDay$", RegexOptions.CultureInvariant);
+            if (false == regexType.Match(this.Type).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
+            }
+
             yield break;
         }
     }

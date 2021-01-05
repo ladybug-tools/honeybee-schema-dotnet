@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Create single layer of gas in a window construction.  Can be combined with EnergyWindowMaterialGlazing to make multi-pane windows.
     /// </summary>
     [DataContract(Name = "EnergyWindowMaterialGas")]
-    public partial class EnergyWindowMaterialGas : IEquatable<EnergyWindowMaterialGas>, IValidatableObject
+    public partial class EnergyWindowMaterialGas : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialGas>, IValidatableObject
     {
         /// <summary>
         /// Gets or Sets GasType
@@ -47,19 +47,16 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialGas" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="thickness">Thickness of the gas layer in meters. Default value is 0.0125. (default to 0.0125D).</param>
         /// <param name="gasType">gasType.</param>
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public EnergyWindowMaterialGas
         (
-             string identifier, // Required parameters
+            string identifier, // Required parameters
             string displayName= default, double thickness = 0.0125D, GasType gasType= GasType.Air// Optional parameters
-        )// BaseClass
+        ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for EnergyWindowMaterialGas and cannot be null");
-            this.DisplayName = displayName;
             this.Thickness = thickness;
             this.GasType = gasType;
 
@@ -74,18 +71,6 @@ namespace HoneybeeSchema
         [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "EnergyWindowMaterialGas";
 
-        /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
-        public string Identifier { get; set; } 
-        /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name = "display_name", EmitDefaultValue = false)]
-        public string DisplayName { get; set; } 
         /// <summary>
         /// Thickness of the gas layer in meters. Default value is 0.0125.
         /// </summary>
@@ -151,6 +136,14 @@ namespace HoneybeeSchema
             return DuplicateEnergyWindowMaterialGas();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateEnergyWindowMaterialGas();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -172,27 +165,17 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Thickness == input.Thickness ||
                     (this.Thickness != null &&
                     this.Thickness.Equals(input.Thickness))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.GasType == input.GasType ||
                     (this.GasType != null &&
@@ -208,13 +191,9 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.Thickness != null)
                     hashCode = hashCode * 59 + this.Thickness.GetHashCode();
                 if (this.GasType != null)
@@ -230,6 +209,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern
@@ -239,18 +219,6 @@ namespace HoneybeeSchema
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-            
             yield break;
         }
     }

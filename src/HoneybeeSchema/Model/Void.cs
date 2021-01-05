@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Void modifier
     /// </summary>
     [DataContract(Name = "Void")]
-    public partial class Void : IEquatable<Void>, IValidatableObject
+    public partial class Void : OpenAPIGenBaseModel, IEquatable<Void>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Void" /> class.
@@ -106,6 +106,14 @@ namespace HoneybeeSchema
             return DuplicateVoid();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateVoid();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -127,7 +135,7 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
@@ -143,7 +151,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
@@ -157,6 +165,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

@@ -27,14 +27,14 @@ namespace HoneybeeSchema
     /// The complete set of EnergyPlus Simulation Settings.
     /// </summary>
     [DataContract(Name = "SimulationParameter")]
-    public partial class SimulationParameter : IEquatable<SimulationParameter>, IValidatableObject
+    public partial class SimulationParameter : OpenAPIGenBaseModel, IEquatable<SimulationParameter>, IValidatableObject
     {
         /// <summary>
         /// Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms.
         /// </summary>
         /// <value>Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms.</value>
         [DataMember(Name="terrain_type")]
-        public TerrianTypes TerrainType { get; set; }   
+        public TerrianTypes TerrainType { get; set; } = TerrianTypes.City;
         /// <summary>
         /// Initializes a new instance of the <see cref="SimulationParameter" /> class.
         /// </summary>
@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         public SimulationParameter
         (
            // Required parameters
-           SimulationOutput output= default, RunPeriod runPeriod= default, int timestep = 6, SimulationControl simulationControl= default, ShadowCalculation shadowCalculation= default, SizingParameter sizingParameter= default, double northAngle = 0D, TerrianTypes terrainType= default// Optional parameters
+           SimulationOutput output= default, RunPeriod runPeriod= default, int timestep = 6, SimulationControl simulationControl= default, ShadowCalculation shadowCalculation= default, SizingParameter sizingParameter= default, double northAngle = 0D, TerrianTypes terrainType= TerrianTypes.City// Optional parameters
         ) : base()// BaseClass
         {
             this.Output = output;
@@ -177,6 +177,14 @@ namespace HoneybeeSchema
             return DuplicateSimulationParameter();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateSimulationParameter();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -198,47 +206,47 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Output == input.Output ||
                     (this.Output != null &&
                     this.Output.Equals(input.Output))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.RunPeriod == input.RunPeriod ||
                     (this.RunPeriod != null &&
                     this.RunPeriod.Equals(input.RunPeriod))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Timestep == input.Timestep ||
                     (this.Timestep != null &&
                     this.Timestep.Equals(input.Timestep))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SimulationControl == input.SimulationControl ||
                     (this.SimulationControl != null &&
                     this.SimulationControl.Equals(input.SimulationControl))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ShadowCalculation == input.ShadowCalculation ||
                     (this.ShadowCalculation != null &&
                     this.ShadowCalculation.Equals(input.ShadowCalculation))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SizingParameter == input.SizingParameter ||
                     (this.SizingParameter != null &&
                     this.SizingParameter.Equals(input.SizingParameter))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.NorthAngle == input.NorthAngle ||
                     (this.NorthAngle != null &&
                     this.NorthAngle.Equals(input.NorthAngle))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.TerrainType == input.TerrainType ||
                     (this.TerrainType != null &&
@@ -254,7 +262,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Output != null)
@@ -284,6 +292,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

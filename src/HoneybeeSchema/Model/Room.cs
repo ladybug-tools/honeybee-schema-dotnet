@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [DataContract(Name = "Room")]
-    public partial class Room : IEquatable<Room>, IValidatableObject
+    public partial class Room : IDdBaseModel, IEquatable<Room>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Room" /> class.
@@ -42,29 +42,25 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Room" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters. (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         /// <param name="faces">Faces that together form the closed volume of a room. (required).</param>
         /// <param name="properties">Extension properties for particular simulation engines (Radiance, EnergyPlus). (required).</param>
         /// <param name="indoorShades">Shades assigned to the interior side of this object (eg. partitions, tables)..</param>
         /// <param name="outdoorShades">Shades assigned to the exterior side of this object (eg. trees, landscaping)..</param>
         /// <param name="multiplier">An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is mutliplied by the multiplier. (default to 1).</param>
         /// <param name="story">Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model..</param>
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters. (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public Room
         (
-             string identifier, List<Face> faces, RoomPropertiesAbridged properties, // Required parameters
+            string identifier, List<Face> faces, RoomPropertiesAbridged properties, // Required parameters
             string displayName= default, Object userData= default, List<Shade> indoorShades= default, List<Shade> outdoorShades= default, int multiplier = 1, string story= default// Optional parameters
-        )// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for Room and cannot be null");
             // to ensure "faces" is required (not null)
             this.Faces = faces ?? throw new ArgumentNullException("faces is a required property for Room and cannot be null");
             // to ensure "properties" is required (not null)
             this.Properties = properties ?? throw new ArgumentNullException("properties is a required property for Room and cannot be null");
-            this.DisplayName = displayName;
-            this.UserData = userData;
             this.IndoorShades = indoorShades;
             this.OutdoorShades = outdoorShades;
             this.Multiplier = multiplier;
@@ -81,24 +77,6 @@ namespace HoneybeeSchema
         [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "Room";
 
-        /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters.
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters.</value>
-        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
-        public string Identifier { get; set; } 
-        /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name = "display_name", EmitDefaultValue = false)]
-        public string DisplayName { get; set; } 
-        /// <summary>
-        /// Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).
-        /// </summary>
-        /// <value>Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</value>
-        [DataMember(Name = "user_data", EmitDefaultValue = false)]
-        public Object UserData { get; set; } 
         /// <summary>
         /// Faces that together form the closed volume of a room.
         /// </summary>
@@ -199,6 +177,14 @@ namespace HoneybeeSchema
             return DuplicateRoom();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdBaseModel DuplicateIDdBaseModel()
+        {
+            return DuplicateRoom();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -220,55 +206,40 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
-                (
-                    this.UserData == input.UserData ||
-                    (this.UserData != null &&
-                    this.UserData.Equals(input.UserData))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Faces == input.Faces ||
                     this.Faces != null &&
                     input.Faces != null &&
                     this.Faces.SequenceEqual(input.Faces)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Properties == input.Properties ||
                     (this.Properties != null &&
                     this.Properties.Equals(input.Properties))
-                ) && 
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
                 (
                     this.IndoorShades == input.IndoorShades ||
                     this.IndoorShades != null &&
                     input.IndoorShades != null &&
                     this.IndoorShades.SequenceEqual(input.IndoorShades)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.OutdoorShades == input.OutdoorShades ||
                     this.OutdoorShades != null &&
                     input.OutdoorShades != null &&
                     this.OutdoorShades.SequenceEqual(input.OutdoorShades)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Multiplier == input.Multiplier ||
                     (this.Multiplier != null &&
                     this.Multiplier.Equals(input.Multiplier))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Story == input.Story ||
                     (this.Story != null &&
@@ -284,19 +255,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
-                if (this.UserData != null)
-                    hashCode = hashCode * 59 + this.UserData.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Faces != null)
                     hashCode = hashCode * 59 + this.Faces.GetHashCode();
                 if (this.Properties != null)
                     hashCode = hashCode * 59 + this.Properties.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.IndoorShades != null)
                     hashCode = hashCode * 59 + this.IndoorShades.GetHashCode();
                 if (this.OutdoorShades != null)
@@ -316,6 +281,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern
@@ -323,25 +289,6 @@ namespace HoneybeeSchema
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
-            }
-
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-            
-            // Identifier (string) pattern
-            Regex regexIdentifier = new Regex(@"[A-Za-z0-9_-]", RegexOptions.CultureInvariant);
-            if (false == regexIdentifier.Match(this.Identifier).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, must match a pattern of " + regexIdentifier, new [] { "Identifier" });
             }
 
 

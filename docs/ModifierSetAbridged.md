@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | [optional] [readonly] [default to "ModifierSetAbridged"]
 **Identifier** | **string** | Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. | 
 **DisplayName** | **string** | Display name of the object with no character restrictions. | [optional] 
+**Type** | **string** |  | [optional] [readonly] [default to "ModifierSetAbridged"]
 **WallSet** | [**WallModifierSetAbridged**](WallModifierSetAbridged.md) | Optional WallModifierSet object for this ModifierSet (default: None). | [optional] 
 **FloorSet** | [**FloorModifierSetAbridged**](FloorModifierSetAbridged.md) | Optional FloorModifierSet object for this ModifierSet (default: None). | [optional] 
 **RoofCeilingSet** | [**RoofCeilingModifierSetAbridged**](RoofCeilingModifierSetAbridged.md) | Optional RoofCeilingModifierSet object for this ModifierSet (default: None). | [optional] 

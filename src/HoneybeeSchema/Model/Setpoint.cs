@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Used to specify information about the setpoint schedule.
     /// </summary>
     [DataContract(Name = "Setpoint")]
-    public partial class Setpoint : IEquatable<Setpoint>, IValidatableObject
+    public partial class Setpoint : IDdEnergyBaseModel, IEquatable<Setpoint>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Setpoint" /> class.
@@ -42,25 +42,22 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Setpoint" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="coolingSchedule">Schedule for the cooling setpoint. The values in this schedule should be temperature in [C]. (required).</param>
         /// <param name="heatingSchedule">Schedule for the heating setpoint. The values in this schedule should be temperature in [C]. (required).</param>
         /// <param name="humidifyingSchedule">Schedule for the humidification setpoint. The values in this schedule should be in [%]..</param>
         /// <param name="dehumidifyingSchedule">Schedule for the dehumidification setpoint. The values in this schedule should be in [%]..</param>
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public Setpoint
         (
-             string identifier, AnyOf<ScheduleRuleset,ScheduleFixedInterval> coolingSchedule, AnyOf<ScheduleRuleset,ScheduleFixedInterval> heatingSchedule, // Required parameters
+            string identifier, AnyOf<ScheduleRuleset,ScheduleFixedInterval> coolingSchedule, AnyOf<ScheduleRuleset,ScheduleFixedInterval> heatingSchedule, // Required parameters
             string displayName= default, AnyOf<ScheduleRuleset,ScheduleFixedInterval> humidifyingSchedule= default, AnyOf<ScheduleRuleset,ScheduleFixedInterval> dehumidifyingSchedule= default// Optional parameters
-        )// BaseClass
+        ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for Setpoint and cannot be null");
             // to ensure "coolingSchedule" is required (not null)
             this.CoolingSchedule = coolingSchedule ?? throw new ArgumentNullException("coolingSchedule is a required property for Setpoint and cannot be null");
             // to ensure "heatingSchedule" is required (not null)
             this.HeatingSchedule = heatingSchedule ?? throw new ArgumentNullException("heatingSchedule is a required property for Setpoint and cannot be null");
-            this.DisplayName = displayName;
             this.HumidifyingSchedule = humidifyingSchedule;
             this.DehumidifyingSchedule = dehumidifyingSchedule;
 
@@ -75,18 +72,6 @@ namespace HoneybeeSchema
         [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "Setpoint";
 
-        /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
-        public string Identifier { get; set; } 
-        /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name = "display_name", EmitDefaultValue = false)]
-        public string DisplayName { get; set; } 
         /// <summary>
         /// Schedule for the cooling setpoint. The values in this schedule should be temperature in [C].
         /// </summary>
@@ -172,6 +157,14 @@ namespace HoneybeeSchema
             return DuplicateSetpoint();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateSetpoint();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -193,37 +186,27 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.CoolingSchedule == input.CoolingSchedule ||
                     (this.CoolingSchedule != null &&
                     this.CoolingSchedule.Equals(input.CoolingSchedule))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.HeatingSchedule == input.HeatingSchedule ||
                     (this.HeatingSchedule != null &&
                     this.HeatingSchedule.Equals(input.HeatingSchedule))
-                ) && 
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
                 (
                     this.HumidifyingSchedule == input.HumidifyingSchedule ||
                     (this.HumidifyingSchedule != null &&
                     this.HumidifyingSchedule.Equals(input.HumidifyingSchedule))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DehumidifyingSchedule == input.DehumidifyingSchedule ||
                     (this.DehumidifyingSchedule != null &&
@@ -239,17 +222,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.CoolingSchedule != null)
                     hashCode = hashCode * 59 + this.CoolingSchedule.GetHashCode();
                 if (this.HeatingSchedule != null)
                     hashCode = hashCode * 59 + this.HeatingSchedule.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.HumidifyingSchedule != null)
                     hashCode = hashCode * 59 + this.HumidifyingSchedule.GetHashCode();
                 if (this.DehumidifyingSchedule != null)
@@ -265,6 +244,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern
@@ -274,18 +254,6 @@ namespace HoneybeeSchema
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-            
             yield break;
         }
     }

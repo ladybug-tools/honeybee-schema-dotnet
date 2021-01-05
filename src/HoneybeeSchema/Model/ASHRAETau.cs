@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Used to specify sky conditions on a design day.
     /// </summary>
     [DataContract(Name = "ASHRAETau")]
-    public partial class ASHRAETau : IEquatable<ASHRAETau>, IValidatableObject
+    public partial class ASHRAETau : SkyCondition, IEquatable<ASHRAETau>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ASHRAETau" /> class.
@@ -42,21 +42,18 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ASHRAETau" /> class.
         /// </summary>
-        /// <param name="date">A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case). (required).</param>
-        /// <param name="daylightSavings">Boolean to indicate whether daylight savings time is active on the design day. (default to false).</param>
         /// <param name="tauB">Value for the beam optical depth. Typically found in .stat files. (required).</param>
         /// <param name="tauD">Value for the diffuse optical depth. Typically found in .stat files. (required).</param>
+        /// <param name="date">A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case). (required).</param>
+        /// <param name="daylightSavings">Boolean to indicate whether daylight savings time is active on the design day. (default to false).</param>
         public ASHRAETau
         (
-             List<int> date, double tauB, double tauD, // Required parameters
+            List<int> date, double tauB, double tauD, // Required parameters
             bool daylightSavings = false // Optional parameters
-        )// BaseClass
+        ) : base(date: date, daylightSavings: daylightSavings)// BaseClass
         {
-            // to ensure "date" is required (not null)
-            this.Date = date ?? throw new ArgumentNullException("date is a required property for ASHRAETau and cannot be null");
             this.TauB = tauB;
             this.TauD = tauD;
-            this.DaylightSavings = daylightSavings;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "ASHRAETau";
@@ -69,18 +66,6 @@ namespace HoneybeeSchema
         [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "ASHRAETau";
 
-        /// <summary>
-        /// A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).
-        /// </summary>
-        /// <value>A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</value>
-        [DataMember(Name = "date", IsRequired = true, EmitDefaultValue = false)]
-        public List<int> Date { get; set; } 
-        /// <summary>
-        /// Boolean to indicate whether daylight savings time is active on the design day.
-        /// </summary>
-        /// <value>Boolean to indicate whether daylight savings time is active on the design day.</value>
-        [DataMember(Name = "daylight_savings", EmitDefaultValue = true)]
-        public bool DaylightSavings { get; set; }  = false;
         /// <summary>
         /// Value for the beam optical depth. Typically found in .stat files.
         /// </summary>
@@ -152,6 +137,14 @@ namespace HoneybeeSchema
             return DuplicateASHRAETau();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override SkyCondition DuplicateSkyCondition()
+        {
+            return DuplicateASHRAETau();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -173,32 +166,21 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.Date == input.Date ||
-                    this.Date != null &&
-                    input.Date != null &&
-                    this.Date.SequenceEqual(input.Date)
-                ) && 
-                (
-                    this.DaylightSavings == input.DaylightSavings ||
-                    (this.DaylightSavings != null &&
-                    this.DaylightSavings.Equals(input.DaylightSavings))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.TauB == input.TauB ||
                     (this.TauB != null &&
                     this.TauB.Equals(input.TauB))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.TauD == input.TauD ||
                     (this.TauD != null &&
                     this.TauD.Equals(input.TauD))
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -210,17 +192,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Date != null)
-                    hashCode = hashCode * 59 + this.Date.GetHashCode();
-                if (this.DaylightSavings != null)
-                    hashCode = hashCode * 59 + this.DaylightSavings.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.TauB != null)
                     hashCode = hashCode * 59 + this.TauB.GetHashCode();
                 if (this.TauD != null)
                     hashCode = hashCode * 59 + this.TauD.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -232,15 +210,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-
-            
-            // Type (string) pattern
-            Regex regexType = new Regex(@"^ASHRAETau$", RegexOptions.CultureInvariant);
-            if (false == regexType.Match(this.Type).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // TauB (double) maximum
@@ -267,6 +237,15 @@ namespace HoneybeeSchema
             if(this.TauD < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TauD, must be a value greater than or equal to 0.", new [] { "TauD" });
+            }
+
+
+            
+            // Type (string) pattern
+            Regex regexType = new Regex(@"^ASHRAETau$", RegexOptions.CultureInvariant);
+            if (false == regexType.Match(this.Type).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
             yield break;

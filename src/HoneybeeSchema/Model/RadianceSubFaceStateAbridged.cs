@@ -27,25 +27,22 @@ namespace HoneybeeSchema
     /// RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door.     
     /// </summary>
     [DataContract(Name = "RadianceSubFaceStateAbridged")]
-    public partial class RadianceSubFaceStateAbridged : IEquatable<RadianceSubFaceStateAbridged>, IValidatableObject
+    public partial class RadianceSubFaceStateAbridged : RadianceShadeStateAbridged, IEquatable<RadianceSubFaceStateAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RadianceSubFaceStateAbridged" /> class.
         /// </summary>
+        /// <param name="vmtxGeometry">A Face3D for the view matrix geometry (default: None)..</param>
+        /// <param name="dmtxGeometry">A Face3D for the daylight matrix geometry (default: None)..</param>
         /// <param name="modifier">A Radiance Modifier identifier (default: None)..</param>
         /// <param name="modifierDirect">A Radiance Modifier identifier (default: None)..</param>
         /// <param name="shades">A list of StateGeometryAbridged objects (default: None)..</param>
-        /// <param name="vmtxGeometry">A Face3D for the view matrix geometry (default: None)..</param>
-        /// <param name="dmtxGeometry">A Face3D for the daylight matrix geometry (default: None)..</param>
         public RadianceSubFaceStateAbridged
         (
            // Required parameters
             string modifier= default, string modifierDirect= default, List<StateGeometryAbridged> shades= default, Face3D vmtxGeometry= default, Face3D dmtxGeometry= default // Optional parameters
         ) : base(modifier: modifier, modifierDirect: modifierDirect, shades: shades)// BaseClass
         {
-            this.Modifier = modifier;
-            this.ModifierDirect = modifierDirect;
-            this.Shades = shades;
             this.VmtxGeometry = vmtxGeometry;
             this.DmtxGeometry = dmtxGeometry;
 
@@ -60,24 +57,6 @@ namespace HoneybeeSchema
         [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "RadianceSubFaceStateAbridged";
 
-        /// <summary>
-        /// A Radiance Modifier identifier (default: None).
-        /// </summary>
-        /// <value>A Radiance Modifier identifier (default: None).</value>
-        [DataMember(Name = "modifier", EmitDefaultValue = false)]
-        public string Modifier { get; set; } 
-        /// <summary>
-        /// A Radiance Modifier identifier (default: None).
-        /// </summary>
-        /// <value>A Radiance Modifier identifier (default: None).</value>
-        [DataMember(Name = "modifier_direct", EmitDefaultValue = false)]
-        public string ModifierDirect { get; set; } 
-        /// <summary>
-        /// A list of StateGeometryAbridged objects (default: None).
-        /// </summary>
-        /// <value>A list of StateGeometryAbridged objects (default: None).</value>
-        [DataMember(Name = "shades", EmitDefaultValue = false)]
-        public List<StateGeometryAbridged> Shades { get; set; } 
         /// <summary>
         /// A Face3D for the view matrix geometry (default: None).
         /// </summary>
@@ -150,6 +129,14 @@ namespace HoneybeeSchema
             return DuplicateRadianceSubFaceStateAbridged();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override RadianceShadeStateAbridged DuplicateRadianceShadeStateAbridged()
+        {
+            return DuplicateRadianceSubFaceStateAbridged();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -171,37 +158,21 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.Modifier == input.Modifier ||
-                    (this.Modifier != null &&
-                    this.Modifier.Equals(input.Modifier))
-                ) && 
-                (
-                    this.ModifierDirect == input.ModifierDirect ||
-                    (this.ModifierDirect != null &&
-                    this.ModifierDirect.Equals(input.ModifierDirect))
-                ) && 
-                (
-                    this.Shades == input.Shades ||
-                    this.Shades != null &&
-                    input.Shades != null &&
-                    this.Shades.SequenceEqual(input.Shades)
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.VmtxGeometry == input.VmtxGeometry ||
                     (this.VmtxGeometry != null &&
                     this.VmtxGeometry.Equals(input.VmtxGeometry))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DmtxGeometry == input.DmtxGeometry ||
                     (this.DmtxGeometry != null &&
                     this.DmtxGeometry.Equals(input.DmtxGeometry))
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -213,19 +184,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Modifier != null)
-                    hashCode = hashCode * 59 + this.Modifier.GetHashCode();
-                if (this.ModifierDirect != null)
-                    hashCode = hashCode * 59 + this.ModifierDirect.GetHashCode();
-                if (this.Shades != null)
-                    hashCode = hashCode * 59 + this.Shades.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.VmtxGeometry != null)
                     hashCode = hashCode * 59 + this.VmtxGeometry.GetHashCode();
                 if (this.DmtxGeometry != null)
                     hashCode = hashCode * 59 + this.DmtxGeometry.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -237,6 +202,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

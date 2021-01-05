@@ -36,43 +36,43 @@ namespace HoneybeeSchema
         /// Enum Baseboardelectric for value: Direct evap coolers with baseboard electric
         /// </summary>
         [EnumMember(Value = "Direct evap coolers with baseboard electric")]
-        Direct evap coolers with baseboard electric = 1,
+        Baseboardelectric = 1,
 
         /// <summary>
         /// Enum Baseboardgasboiler for value: Direct evap coolers with baseboard gas boiler
         /// </summary>
         [EnumMember(Value = "Direct evap coolers with baseboard gas boiler")]
-        Direct evap coolers with baseboard gas boiler = 2,
+        Baseboardgasboiler = 2,
 
         /// <summary>
         /// Enum Baseboardcentralairsourceheatpump for value: Direct evap coolers with baseboard central air source heat pump
         /// </summary>
         [EnumMember(Value = "Direct evap coolers with baseboard central air source heat pump")]
-        Direct evap coolers with baseboard central air source heat pump = 3,
+        Baseboardcentralairsourceheatpump = 3,
 
         /// <summary>
         /// Enum Baseboarddistricthotwater for value: Direct evap coolers with baseboard district hot water
         /// </summary>
         [EnumMember(Value = "Direct evap coolers with baseboard district hot water")]
-        Direct evap coolers with baseboard district hot water = 4,
+        Baseboarddistricthotwater = 4,
 
         /// <summary>
         /// Enum Forcedairfurnace for value: Direct evap coolers with forced air furnace
         /// </summary>
         [EnumMember(Value = "Direct evap coolers with forced air furnace")]
-        Direct evap coolers with forced air furnace = 5,
+        Forcedairfurnace = 5,
 
         /// <summary>
         /// Enum Gasunitheaters for value: Direct evap coolers with gas unit heaters
         /// </summary>
         [EnumMember(Value = "Direct evap coolers with gas unit heaters")]
-        Direct evap coolers with gas unit heaters = 6,
+        Gasunitheaters = 6,
 
         /// <summary>
         /// Enum Noheat for value: Direct evap coolers with no heat
         /// </summary>
         [EnumMember(Value = "Direct evap coolers with no heat")]
-        Direct evap coolers with no heat = 7
+        Noheat = 7
 
     }
 

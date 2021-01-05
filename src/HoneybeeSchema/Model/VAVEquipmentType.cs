@@ -36,91 +36,91 @@ namespace HoneybeeSchema
         /// Enum Chillerwithgasboilerreheat for value: VAV chiller with gas boiler reheat
         /// </summary>
         [EnumMember(Value = "VAV chiller with gas boiler reheat")]
-        VAV chiller with gas boiler reheat = 1,
+        Chillerwithgasboilerreheat = 1,
 
         /// <summary>
         /// Enum Chillerwithcentralairsourceheatpumpreheat for value: VAV chiller with central air source heat pump reheat
         /// </summary>
         [EnumMember(Value = "VAV chiller with central air source heat pump reheat")]
-        VAV chiller with central air source heat pump reheat = 2,
+        Chillerwithcentralairsourceheatpumpreheat = 2,
 
         /// <summary>
         /// Enum Chillerwithdistricthotwaterreheat for value: VAV chiller with district hot water reheat
         /// </summary>
         [EnumMember(Value = "VAV chiller with district hot water reheat")]
-        VAV chiller with district hot water reheat = 3,
+        Chillerwithdistricthotwaterreheat = 3,
 
         /// <summary>
         /// Enum ChillerwithPFPboxes for value: VAV chiller with PFP boxes
         /// </summary>
         [EnumMember(Value = "VAV chiller with PFP boxes")]
-        VAV chiller with PFP boxes = 4,
+        ChillerwithPFPboxes = 4,
 
         /// <summary>
         /// Enum Chillerwithgascoilreheat for value: VAV chiller with gas coil reheat
         /// </summary>
         [EnumMember(Value = "VAV chiller with gas coil reheat")]
-        VAV chiller with gas coil reheat = 5,
+        Chillerwithgascoilreheat = 5,
 
         /// <summary>
         /// Enum AirCooledchillerwithgasboilerreheat for value: VAV air-cooled chiller with gas boiler reheat
         /// </summary>
         [EnumMember(Value = "VAV air-cooled chiller with gas boiler reheat")]
-        VAV air-cooled chiller with gas boiler reheat = 6,
+        AirCooledchillerwithgasboilerreheat = 6,
 
         /// <summary>
         /// Enum AirCooledchillerwithcentralairsourceheatpumpreheat for value: VAV air-cooled chiller with central air source heat pump reheat
         /// </summary>
         [EnumMember(Value = "VAV air-cooled chiller with central air source heat pump reheat")]
-        VAV air-cooled chiller with central air source heat pump reheat = 7,
+        AirCooledchillerwithcentralairsourceheatpumpreheat = 7,
 
         /// <summary>
         /// Enum AirCooledchillerwithdistricthotwaterreheat for value: VAV air-cooled chiller with district hot water reheat
         /// </summary>
         [EnumMember(Value = "VAV air-cooled chiller with district hot water reheat")]
-        VAV air-cooled chiller with district hot water reheat = 8,
+        AirCooledchillerwithdistricthotwaterreheat = 8,
 
         /// <summary>
         /// Enum AirCooledchillerwithPFPboxes for value: VAV air-cooled chiller with PFP boxes
         /// </summary>
         [EnumMember(Value = "VAV air-cooled chiller with PFP boxes")]
-        VAV air-cooled chiller with PFP boxes = 9,
+        AirCooledchillerwithPFPboxes = 9,
 
         /// <summary>
         /// Enum AirCooledchillerwithgascoilreheat for value: VAV air-cooled chiller with gas coil reheat
         /// </summary>
         [EnumMember(Value = "VAV air-cooled chiller with gas coil reheat")]
-        VAV air-cooled chiller with gas coil reheat = 10,
+        AirCooledchillerwithgascoilreheat = 10,
 
         /// <summary>
         /// Enum Districtchilledwaterwithgasboilerreheat for value: VAV district chilled water with gas boiler reheat
         /// </summary>
         [EnumMember(Value = "VAV district chilled water with gas boiler reheat")]
-        VAV district chilled water with gas boiler reheat = 11,
+        Districtchilledwaterwithgasboilerreheat = 11,
 
         /// <summary>
         /// Enum Districtchilledwaterwithcentralairsourceheatpumpreheat for value: VAV district chilled water with central air source heat pump reheat
         /// </summary>
         [EnumMember(Value = "VAV district chilled water with central air source heat pump reheat")]
-        VAV district chilled water with central air source heat pump reheat = 12,
+        Districtchilledwaterwithcentralairsourceheatpumpreheat = 12,
 
         /// <summary>
         /// Enum Districtchilledwaterwithdistricthotwaterreheat for value: VAV district chilled water with district hot water reheat
         /// </summary>
         [EnumMember(Value = "VAV district chilled water with district hot water reheat")]
-        VAV district chilled water with district hot water reheat = 13,
+        Districtchilledwaterwithdistricthotwaterreheat = 13,
 
         /// <summary>
         /// Enum DistrictchilledwaterwithPFPboxes for value: VAV district chilled water with PFP boxes
         /// </summary>
         [EnumMember(Value = "VAV district chilled water with PFP boxes")]
-        VAV district chilled water with PFP boxes = 14,
+        DistrictchilledwaterwithPFPboxes = 14,
 
         /// <summary>
         /// Enum Districtchilledwaterwithgascoilreheat for value: VAV district chilled water with gas coil reheat
         /// </summary>
         [EnumMember(Value = "VAV district chilled water with gas coil reheat")]
-        VAV district chilled water with gas coil reheat = 15
+        Districtchilledwaterwithgascoilreheat = 15
 
     }
 

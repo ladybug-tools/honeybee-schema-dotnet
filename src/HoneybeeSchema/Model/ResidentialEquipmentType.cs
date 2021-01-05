@@ -36,55 +36,55 @@ namespace HoneybeeSchema
         /// Enum ACwithbaseboardelectric for value: Residential AC with baseboard electric
         /// </summary>
         [EnumMember(Value = "Residential AC with baseboard electric")]
-        Residential AC with baseboard electric = 1,
+        ACwithbaseboardelectric = 1,
 
         /// <summary>
         /// Enum ACwithbaseboardgasboiler for value: Residential AC with baseboard gas boiler
         /// </summary>
         [EnumMember(Value = "Residential AC with baseboard gas boiler")]
-        Residential AC with baseboard gas boiler = 2,
+        ACwithbaseboardgasboiler = 2,
 
         /// <summary>
         /// Enum ACwithbaseboardcentralairsourceheatpump for value: Residential AC with baseboard central air source heat pump
         /// </summary>
         [EnumMember(Value = "Residential AC with baseboard central air source heat pump")]
-        Residential AC with baseboard central air source heat pump = 3,
+        ACwithbaseboardcentralairsourceheatpump = 3,
 
         /// <summary>
         /// Enum ACwithbaseboarddistricthotwater for value: Residential AC with baseboard district hot water
         /// </summary>
         [EnumMember(Value = "Residential AC with baseboard district hot water")]
-        Residential AC with baseboard district hot water = 4,
+        ACwithbaseboarddistricthotwater = 4,
 
         /// <summary>
         /// Enum ACwithresidentialforcedairfurnace for value: Residential AC with residential forced air furnace
         /// </summary>
         [EnumMember(Value = "Residential AC with residential forced air furnace")]
-        Residential AC with residential forced air furnace = 5,
+        ACwithresidentialforcedairfurnace = 5,
 
         /// <summary>
         /// Enum ACwithnoheat for value: Residential AC with no heat
         /// </summary>
         [EnumMember(Value = "Residential AC with no heat")]
-        Residential AC with no heat = 6,
+        ACwithnoheat = 6,
 
         /// <summary>
         /// Enum Heatpump for value: Residential heat pump
         /// </summary>
         [EnumMember(Value = "Residential heat pump")]
-        Residential heat pump = 7,
+        Heatpump = 7,
 
         /// <summary>
         /// Enum Heatpumpwithnocooling for value: Residential heat pump with no cooling
         /// </summary>
         [EnumMember(Value = "Residential heat pump with no cooling")]
-        Residential heat pump with no cooling = 8,
+        Heatpumpwithnocooling = 8,
 
         /// <summary>
         /// Enum Forcedairfurnace for value: Residential forced air furnace
         /// </summary>
         [EnumMember(Value = "Residential forced air furnace")]
-        Residential forced air furnace = 9
+        Forcedairfurnace = 9
 
     }
 

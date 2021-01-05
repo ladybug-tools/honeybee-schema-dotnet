@@ -36,7 +36,7 @@ namespace HoneybeeSchema
         /// Enum Forcedairfurnace for value: Forced air furnace
         /// </summary>
         [EnumMember(Value = "Forced air furnace")]
-        Forced air furnace = 1
+        Forcedairfurnace = 1
 
     }
 

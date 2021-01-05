@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
     [DataContract(Name = "VentilationOpening")]
-    public partial class VentilationOpening : IEquatable<VentilationOpening>, IValidatableObject
+    public partial class VentilationOpening : OpenAPIGenBaseModel, IEquatable<VentilationOpening>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="VentilationOpening" /> class.
@@ -168,6 +168,14 @@ namespace HoneybeeSchema
             return DuplicateVentilationOpening();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateVentilationOpening();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -189,42 +197,42 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.FractionAreaOperable == input.FractionAreaOperable ||
                     (this.FractionAreaOperable != null &&
                     this.FractionAreaOperable.Equals(input.FractionAreaOperable))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.FractionHeightOperable == input.FractionHeightOperable ||
                     (this.FractionHeightOperable != null &&
                     this.FractionHeightOperable.Equals(input.FractionHeightOperable))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DischargeCoefficient == input.DischargeCoefficient ||
                     (this.DischargeCoefficient != null &&
                     this.DischargeCoefficient.Equals(input.DischargeCoefficient))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.WindCrossVent == input.WindCrossVent ||
                     (this.WindCrossVent != null &&
                     this.WindCrossVent.Equals(input.WindCrossVent))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.FlowCoefficientClosed == input.FlowCoefficientClosed ||
                     (this.FlowCoefficientClosed != null &&
                     this.FlowCoefficientClosed.Equals(input.FlowCoefficientClosed))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.FlowExponentClosed == input.FlowExponentClosed ||
                     (this.FlowExponentClosed != null &&
                     this.FlowExponentClosed.Equals(input.FlowExponentClosed))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.TwoWayThreshold == input.TwoWayThreshold ||
                     (this.TwoWayThreshold != null &&
@@ -240,7 +248,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.FractionAreaOperable != null)
@@ -268,6 +276,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

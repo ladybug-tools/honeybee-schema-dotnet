@@ -27,25 +27,25 @@ namespace HoneybeeSchema
     /// Used to describe settings for EnergyPlus shadow calculation.
     /// </summary>
     [DataContract(Name = "ShadowCalculation")]
-    public partial class ShadowCalculation : IEquatable<ShadowCalculation>, IValidatableObject
+    public partial class ShadowCalculation : OpenAPIGenBaseModel, IEquatable<ShadowCalculation>, IValidatableObject
     {
         /// <summary>
         /// Gets or Sets SolarDistribution
         /// </summary>
         [DataMember(Name="solar_distribution")]
-        public SolarDistribution SolarDistribution { get; set; }   
+        public SolarDistribution SolarDistribution { get; set; } = SolarDistribution.FullExteriorWithReflections;
         /// <summary>
         /// Text noting whether CPU-based polygon clipping method orGPU-based pixel counting method should be used. For low numbers of shadingsurfaces (less than ~200), PolygonClipping requires less runtime thanPixelCounting. However, PixelCounting runtime scales significantlybetter at higher numbers of shading surfaces. PixelCounting also hasno limitations related to zone concavity when used with any“FullInterior” solar distribution options.
         /// </summary>
         /// <value>Text noting whether CPU-based polygon clipping method orGPU-based pixel counting method should be used. For low numbers of shadingsurfaces (less than ~200), PolygonClipping requires less runtime thanPixelCounting. However, PixelCounting runtime scales significantlybetter at higher numbers of shading surfaces. PixelCounting also hasno limitations related to zone concavity when used with any“FullInterior” solar distribution options.</value>
         [DataMember(Name="calculation_method")]
-        public CalculationMethod CalculationMethod { get; set; }   
+        public CalculationMethod CalculationMethod { get; set; } = CalculationMethod.PolygonClipping;
         /// <summary>
         /// Text describing how often the solar and shading calculations are updated with respect to the flow of time in the simulation.
         /// </summary>
         /// <value>Text describing how often the solar and shading calculations are updated with respect to the flow of time in the simulation.</value>
         [DataMember(Name="calculation_update_method")]
-        public CalculationUpdateMethod CalculationUpdateMethod { get; set; }   
+        public CalculationUpdateMethod CalculationUpdateMethod { get; set; } = CalculationUpdateMethod.Periodic;
         /// <summary>
         /// Initializes a new instance of the <see cref="ShadowCalculation" /> class.
         /// </summary>
@@ -57,7 +57,7 @@ namespace HoneybeeSchema
         public ShadowCalculation
         (
            // Required parameters
-           SolarDistribution solarDistribution= default, CalculationMethod calculationMethod= default, CalculationUpdateMethod calculationUpdateMethod= default, int calculationFrequency = 30, int maximumFigures = 15000// Optional parameters
+           SolarDistribution solarDistribution= SolarDistribution.FullExteriorWithReflections, CalculationMethod calculationMethod= CalculationMethod.PolygonClipping, CalculationUpdateMethod calculationUpdateMethod= CalculationUpdateMethod.Periodic, int calculationFrequency = 30, int maximumFigures = 15000// Optional parameters
         ) : base()// BaseClass
         {
             this.SolarDistribution = solarDistribution;
@@ -149,6 +149,14 @@ namespace HoneybeeSchema
             return DuplicateShadowCalculation();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateShadowCalculation();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -170,32 +178,32 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SolarDistribution == input.SolarDistribution ||
                     (this.SolarDistribution != null &&
                     this.SolarDistribution.Equals(input.SolarDistribution))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.CalculationMethod == input.CalculationMethod ||
                     (this.CalculationMethod != null &&
                     this.CalculationMethod.Equals(input.CalculationMethod))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.CalculationUpdateMethod == input.CalculationUpdateMethod ||
                     (this.CalculationUpdateMethod != null &&
                     this.CalculationUpdateMethod.Equals(input.CalculationUpdateMethod))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.CalculationFrequency == input.CalculationFrequency ||
                     (this.CalculationFrequency != null &&
                     this.CalculationFrequency.Equals(input.CalculationFrequency))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.MaximumFigures == input.MaximumFigures ||
                     (this.MaximumFigures != null &&
@@ -211,7 +219,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.SolarDistribution != null)
@@ -235,6 +243,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

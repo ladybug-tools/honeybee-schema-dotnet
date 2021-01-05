@@ -36,61 +36,61 @@ namespace HoneybeeSchema
         /// Enum PTACwithbaseboardelectric for value: PTAC with baseboard electric
         /// </summary>
         [EnumMember(Value = "PTAC with baseboard electric")]
-        PTAC with baseboard electric = 1,
+        PTACwithbaseboardelectric = 1,
 
         /// <summary>
         /// Enum PTACwithbaseboardgasboiler for value: PTAC with baseboard gas boiler
         /// </summary>
         [EnumMember(Value = "PTAC with baseboard gas boiler")]
-        PTAC with baseboard gas boiler = 2,
+        PTACwithbaseboardgasboiler = 2,
 
         /// <summary>
         /// Enum PTACwithbaseboarddistricthotwater for value: PTAC with baseboard district hot water
         /// </summary>
         [EnumMember(Value = "PTAC with baseboard district hot water")]
-        PTAC with baseboard district hot water = 3,
+        PTACwithbaseboarddistricthotwater = 3,
 
         /// <summary>
         /// Enum PTACwithgasunitheaters for value: PTAC with gas unit heaters
         /// </summary>
         [EnumMember(Value = "PTAC with gas unit heaters")]
-        PTAC with gas unit heaters = 4,
+        PTACwithgasunitheaters = 4,
 
         /// <summary>
         /// Enum PTACwithelectriccoil for value: PTAC with electric coil
         /// </summary>
         [EnumMember(Value = "PTAC with electric coil")]
-        PTAC with electric coil = 5,
+        PTACwithelectriccoil = 5,
 
         /// <summary>
         /// Enum PTACwithgascoil for value: PTAC with gas coil
         /// </summary>
         [EnumMember(Value = "PTAC with gas coil")]
-        PTAC with gas coil = 6,
+        PTACwithgascoil = 6,
 
         /// <summary>
         /// Enum PTACwithgasboiler for value: PTAC with gas boiler
         /// </summary>
         [EnumMember(Value = "PTAC with gas boiler")]
-        PTAC with gas boiler = 7,
+        PTACwithgasboiler = 7,
 
         /// <summary>
         /// Enum PTACwithcentralairsourceheatpump for value: PTAC with central air source heat pump
         /// </summary>
         [EnumMember(Value = "PTAC with central air source heat pump")]
-        PTAC with central air source heat pump = 8,
+        PTACwithcentralairsourceheatpump = 8,
 
         /// <summary>
         /// Enum PTACwithdistricthotwater for value: PTAC with district hot water
         /// </summary>
         [EnumMember(Value = "PTAC with district hot water")]
-        PTAC with district hot water = 9,
+        PTACwithdistricthotwater = 9,
 
         /// <summary>
         /// Enum PTACwithnoheat for value: PTAC with no heat
         /// </summary>
         [EnumMember(Value = "PTAC with no heat")]
-        PTAC with no heat = 10,
+        PTACwithnoheat = 10,
 
         /// <summary>
         /// Enum PTHP for value: PTHP

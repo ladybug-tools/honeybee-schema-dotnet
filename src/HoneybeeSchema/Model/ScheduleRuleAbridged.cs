@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Schedule rule including a ScheduleDay and when it should be applied..
     /// </summary>
     [DataContract(Name = "ScheduleRuleAbridged")]
-    public partial class ScheduleRuleAbridged : IEquatable<ScheduleRuleAbridged>, IValidatableObject
+    public partial class ScheduleRuleAbridged : DatedBaseModel, IEquatable<ScheduleRuleAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleRuleAbridged" /> class.
@@ -206,6 +206,14 @@ namespace HoneybeeSchema
             return DuplicateScheduleRuleAbridged();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override DatedBaseModel DuplicateDatedBaseModel()
+        {
+            return DuplicateScheduleRuleAbridged();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -227,58 +235,58 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.ScheduleDay == input.ScheduleDay ||
                     (this.ScheduleDay != null &&
                     this.ScheduleDay.Equals(input.ScheduleDay))
-                ) && 
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
                 (
                     this.ApplySunday == input.ApplySunday ||
                     (this.ApplySunday != null &&
                     this.ApplySunday.Equals(input.ApplySunday))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ApplyMonday == input.ApplyMonday ||
                     (this.ApplyMonday != null &&
                     this.ApplyMonday.Equals(input.ApplyMonday))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ApplyTuesday == input.ApplyTuesday ||
                     (this.ApplyTuesday != null &&
                     this.ApplyTuesday.Equals(input.ApplyTuesday))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ApplyWednesday == input.ApplyWednesday ||
                     (this.ApplyWednesday != null &&
                     this.ApplyWednesday.Equals(input.ApplyWednesday))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ApplyThursday == input.ApplyThursday ||
                     (this.ApplyThursday != null &&
                     this.ApplyThursday.Equals(input.ApplyThursday))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ApplyFriday == input.ApplyFriday ||
                     (this.ApplyFriday != null &&
                     this.ApplyFriday.Equals(input.ApplyFriday))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ApplySaturday == input.ApplySaturday ||
                     (this.ApplySaturday != null &&
                     this.ApplySaturday.Equals(input.ApplySaturday))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.StartDate == input.StartDate ||
                     this.StartDate != null &&
                     input.StartDate != null &&
                     this.StartDate.SequenceEqual(input.StartDate)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.EndDate == input.EndDate ||
                     this.EndDate != null &&
@@ -295,11 +303,11 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.ScheduleDay != null)
                     hashCode = hashCode * 59 + this.ScheduleDay.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.ApplySunday != null)
                     hashCode = hashCode * 59 + this.ApplySunday.GetHashCode();
                 if (this.ApplyMonday != null)
@@ -329,15 +337,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-
-            
-            // Type (string) pattern
-            Regex regexType = new Regex(@"^ScheduleRuleAbridged$", RegexOptions.CultureInvariant);
-            if (false == regexType.Match(this.Type).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // ScheduleDay (string) maxLength
             if(this.ScheduleDay != null && this.ScheduleDay.Length > 100)
             {
@@ -350,6 +350,15 @@ namespace HoneybeeSchema
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ScheduleDay, length must be greater than 1.", new [] { "ScheduleDay" });
             }
             
+
+            
+            // Type (string) pattern
+            Regex regexType = new Regex(@"^ScheduleRuleAbridged$", RegexOptions.CultureInvariant);
+            if (false == regexType.Match(this.Type).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
+            }
+
             yield break;
         }
     }

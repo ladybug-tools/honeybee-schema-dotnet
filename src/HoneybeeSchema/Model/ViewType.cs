@@ -36,37 +36,37 @@ namespace HoneybeeSchema
         /// Enum V for value: v
         /// </summary>
         [EnumMember(Value = "v")]
-        v = 1,
+        V = 1,
 
         /// <summary>
         /// Enum H for value: h
         /// </summary>
         [EnumMember(Value = "h")]
-        h = 2,
+        H = 2,
 
         /// <summary>
         /// Enum L for value: l
         /// </summary>
         [EnumMember(Value = "l")]
-        l = 3,
+        L = 3,
 
         /// <summary>
         /// Enum C for value: c
         /// </summary>
         [EnumMember(Value = "c")]
-        c = 4,
+        C = 4,
 
         /// <summary>
         /// Enum A for value: a
         /// </summary>
         [EnumMember(Value = "a")]
-        a = 5,
+        A = 5,
 
         /// <summary>
         /// Enum S for value: s
         /// </summary>
         [EnumMember(Value = "s")]
-        s = 6
+        S = 6
 
     }
 

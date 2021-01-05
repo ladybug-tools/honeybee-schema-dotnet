@@ -36,43 +36,43 @@ namespace HoneybeeSchema
         /// Enum Baseboardelectric for value: Window AC with baseboard electric
         /// </summary>
         [EnumMember(Value = "Window AC with baseboard electric")]
-        Window AC with baseboard electric = 1,
+        Baseboardelectric = 1,
 
         /// <summary>
         /// Enum Baseboardgasboiler for value: Window AC with baseboard gas boiler
         /// </summary>
         [EnumMember(Value = "Window AC with baseboard gas boiler")]
-        Window AC with baseboard gas boiler = 2,
+        Baseboardgasboiler = 2,
 
         /// <summary>
         /// Enum Baseboardcentralairsourceheatpump for value: Window AC with baseboard central air source heat pump
         /// </summary>
         [EnumMember(Value = "Window AC with baseboard central air source heat pump")]
-        Window AC with baseboard central air source heat pump = 3,
+        Baseboardcentralairsourceheatpump = 3,
 
         /// <summary>
         /// Enum Baseboarddistricthotwater for value: Window AC with baseboard district hot water
         /// </summary>
         [EnumMember(Value = "Window AC with baseboard district hot water")]
-        Window AC with baseboard district hot water = 4,
+        Baseboarddistricthotwater = 4,
 
         /// <summary>
         /// Enum Forcedairfurnace for value: Window AC with forced air furnace
         /// </summary>
         [EnumMember(Value = "Window AC with forced air furnace")]
-        Window AC with forced air furnace = 5,
+        Forcedairfurnace = 5,
 
         /// <summary>
         /// Enum Unitheaters for value: Window AC with unit heaters
         /// </summary>
         [EnumMember(Value = "Window AC with unit heaters")]
-        Window AC with unit heaters = 6,
+        Unitheaters = 6,
 
         /// <summary>
         /// Enum Noheat for value: Window AC with no heat
         /// </summary>
         [EnumMember(Value = "Window AC with no heat")]
-        Window AC with no heat = 7
+        Noheat = 7
 
     }
 

@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Radiance glass material.
     /// </summary>
     [DataContract(Name = "Glass")]
-    public partial class Glass : IEquatable<Glass>, IValidatableObject
+    public partial class Glass : ModifierBase, IEquatable<Glass>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Glass" /> class.
@@ -42,23 +42,20 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Glass" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="modifier">Material modifier (default: Void)..</param>
         /// <param name="dependencies">List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None)..</param>
         /// <param name="rTransmissivity">A value between 0 and 1 for the red channel transmissivity (default: 0). (default to 0.0D).</param>
         /// <param name="gTransmissivity">A value between 0 and 1 for the green channel transmissivity (default: 0). (default to 0.0D).</param>
         /// <param name="bTransmissivity">A value between 0 and 1 for the blue channel transmissivity (default: 0). (default to 0.0D).</param>
         /// <param name="refractionIndex">A value between 0 and 1 for the index of refraction (default: 1.52). (default to 1.52D).</param>
+        /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public Glass
         (
-             string identifier, // Required parameters
-            string displayName= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> dependencies= default, double rTransmissivity = 0.0D, double gTransmissivity = 0.0D, double bTransmissivity = 0.0D, double refractionIndex = 1.52D// Optional parameters
-        )// BaseClass
+            string identifier, // Required parameters
+            string displayName= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> dependencies= default, double rTransmissivity = 0.0D, double gTransmissivity = 0.0D, double bTransmissivity = 0.0D, double refractionIndex = 1.52D // Optional parameters
+        ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for Glass and cannot be null");
-            this.DisplayName = displayName;
             this.Modifier = modifier;
             this.Dependencies = dependencies;
             this.RTransmissivity = rTransmissivity;
@@ -77,18 +74,6 @@ namespace HoneybeeSchema
         [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "glass";
 
-        /// <summary>
-        /// Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.
-        /// </summary>
-        /// <value>Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.</value>
-        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
-        public string Identifier { get; set; } 
-        /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name = "display_name", EmitDefaultValue = false)]
-        public string DisplayName { get; set; } 
         /// <summary>
         /// Material modifier (default: Void).
         /// </summary>
@@ -188,6 +173,14 @@ namespace HoneybeeSchema
             return DuplicateGlass();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override ModifierBase DuplicateModifierBase()
+        {
+            return DuplicateGlass();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -209,52 +202,42 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Modifier == input.Modifier ||
                     (this.Modifier != null &&
                     this.Modifier.Equals(input.Modifier))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Dependencies == input.Dependencies ||
                     this.Dependencies != null &&
                     input.Dependencies != null &&
                     this.Dependencies.SequenceEqual(input.Dependencies)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.RTransmissivity == input.RTransmissivity ||
                     (this.RTransmissivity != null &&
                     this.RTransmissivity.Equals(input.RTransmissivity))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.GTransmissivity == input.GTransmissivity ||
                     (this.GTransmissivity != null &&
                     this.GTransmissivity.Equals(input.GTransmissivity))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.BTransmissivity == input.BTransmissivity ||
                     (this.BTransmissivity != null &&
                     this.BTransmissivity.Equals(input.BTransmissivity))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.RefractionIndex == input.RefractionIndex ||
                     (this.RefractionIndex != null &&
                     this.RefractionIndex.Equals(input.RefractionIndex))
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -266,13 +249,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Modifier != null)
                     hashCode = hashCode * 59 + this.Modifier.GetHashCode();
                 if (this.Dependencies != null)
@@ -285,6 +262,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.BTransmissivity.GetHashCode();
                 if (this.RefractionIndex != null)
                     hashCode = hashCode * 59 + this.RefractionIndex.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -296,15 +275,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-
-            
-            // Type (string) pattern
-            Regex regexType = new Regex(@"^glass$", RegexOptions.CultureInvariant);
-            if (false == regexType.Match(this.Type).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // RTransmissivity (double) maximum
@@ -353,6 +324,15 @@ namespace HoneybeeSchema
             if(this.RefractionIndex < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RefractionIndex, must be a value greater than or equal to 0.", new [] { "RefractionIndex" });
+            }
+
+
+            
+            // Type (string) pattern
+            Regex regexType = new Regex(@"^glass$", RegexOptions.CultureInvariant);
+            if (false == regexType.Match(this.Type).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
             yield break;

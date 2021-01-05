@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Hidden base class for all Radiance Assets.
     /// </summary>
     [DataContract(Name = "_RadianceAsset")]
-    public partial class RadianceAsset : IEquatable<RadianceAsset>, IValidatableObject
+    public partial class RadianceAsset : IDdRadianceBaseModel, IEquatable<RadianceAsset>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RadianceAsset" /> class.
@@ -42,19 +42,16 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="RadianceAsset" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="roomIdentifier">Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model..</param>
         /// <param name="lightPath">Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [[\&quot;SouthWindow1\&quot;], [\&quot;static_apertures\&quot;, \&quot;NorthWindow2\&quot;]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation..</param>
+        /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public RadianceAsset
         (
-             string identifier, // Required parameters
-            string displayName= default, string roomIdentifier= default, List<List<string>> lightPath= default// Optional parameters
-        )// BaseClass
+            string identifier, // Required parameters
+            string displayName= default, string roomIdentifier= default, List<List<string>> lightPath= default // Optional parameters
+        ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for RadianceAsset and cannot be null");
-            this.DisplayName = displayName;
             this.RoomIdentifier = roomIdentifier;
             this.LightPath = lightPath;
 
@@ -69,18 +66,6 @@ namespace HoneybeeSchema
         [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "_RadianceAsset";
 
-        /// <summary>
-        /// Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.
-        /// </summary>
-        /// <value>Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.</value>
-        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
-        public string Identifier { get; set; } 
-        /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name = "display_name", EmitDefaultValue = false)]
-        public string DisplayName { get; set; } 
         /// <summary>
         /// Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model.
         /// </summary>
@@ -152,6 +137,14 @@ namespace HoneybeeSchema
             return DuplicateRadianceAsset();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdRadianceBaseModel DuplicateIDdRadianceBaseModel()
+        {
+            return DuplicateRadianceAsset();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -173,32 +166,22 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.RoomIdentifier == input.RoomIdentifier ||
                     (this.RoomIdentifier != null &&
                     this.RoomIdentifier.Equals(input.RoomIdentifier))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.LightPath == input.LightPath ||
                     this.LightPath != null &&
                     input.LightPath != null &&
                     this.LightPath.SequenceEqual(input.LightPath)
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -210,17 +193,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.RoomIdentifier != null)
                     hashCode = hashCode * 59 + this.RoomIdentifier.GetHashCode();
                 if (this.LightPath != null)
                     hashCode = hashCode * 59 + this.LightPath.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -232,15 +211,17 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            return this.BaseValidate(validationContext);
+        }
 
-            
-            // Type (string) pattern
-            Regex regexType = new Regex(@"^_RadianceAsset$", RegexOptions.CultureInvariant);
-            if (false == regexType.Match(this.Type).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
-            }
-
+        /// <summary>
+        /// To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
+        {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
             // RoomIdentifier (string) maxLength
             if(this.RoomIdentifier != null && this.RoomIdentifier.Length > 100)
             {
@@ -258,6 +239,15 @@ namespace HoneybeeSchema
             if (false == regexRoomIdentifier.Match(this.RoomIdentifier).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RoomIdentifier, must match a pattern of " + regexRoomIdentifier, new [] { "RoomIdentifier" });
+            }
+
+
+            
+            // Type (string) pattern
+            Regex regexType = new Regex(@"^_RadianceAsset$", RegexOptions.CultureInvariant);
+            if (false == regexType.Match(this.Type).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
             yield break;

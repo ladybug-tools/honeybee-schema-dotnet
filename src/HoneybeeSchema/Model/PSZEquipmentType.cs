@@ -36,67 +36,67 @@ namespace HoneybeeSchema
         /// Enum ACwithbaseboardelectric for value: PSZ-AC with baseboard electric
         /// </summary>
         [EnumMember(Value = "PSZ-AC with baseboard electric")]
-        PSZ-AC with baseboard electric = 1,
+        ACwithbaseboardelectric = 1,
 
         /// <summary>
         /// Enum ACwithbaseboardgasboiler for value: PSZ-AC with baseboard gas boiler
         /// </summary>
         [EnumMember(Value = "PSZ-AC with baseboard gas boiler")]
-        PSZ-AC with baseboard gas boiler = 2,
+        ACwithbaseboardgasboiler = 2,
 
         /// <summary>
         /// Enum ACwithbaseboarddistricthotwater for value: PSZ-AC with baseboard district hot water
         /// </summary>
         [EnumMember(Value = "PSZ-AC with baseboard district hot water")]
-        PSZ-AC with baseboard district hot water = 3,
+        ACwithbaseboarddistricthotwater = 3,
 
         /// <summary>
         /// Enum ACwithgasunitheaters for value: PSZ-AC with gas unit heaters
         /// </summary>
         [EnumMember(Value = "PSZ-AC with gas unit heaters")]
-        PSZ-AC with gas unit heaters = 4,
+        ACwithgasunitheaters = 4,
 
         /// <summary>
         /// Enum ACwithelectriccoil for value: PSZ-AC with electric coil
         /// </summary>
         [EnumMember(Value = "PSZ-AC with electric coil")]
-        PSZ-AC with electric coil = 5,
+        ACwithelectriccoil = 5,
 
         /// <summary>
         /// Enum ACwithgascoil for value: PSZ-AC with gas coil
         /// </summary>
         [EnumMember(Value = "PSZ-AC with gas coil")]
-        PSZ-AC with gas coil = 6,
+        ACwithgascoil = 6,
 
         /// <summary>
         /// Enum ACwithgasboiler for value: PSZ-AC with gas boiler
         /// </summary>
         [EnumMember(Value = "PSZ-AC with gas boiler")]
-        PSZ-AC with gas boiler = 7,
+        ACwithgasboiler = 7,
 
         /// <summary>
         /// Enum ACwithcentralairsourceheatpump for value: PSZ-AC with central air source heat pump
         /// </summary>
         [EnumMember(Value = "PSZ-AC with central air source heat pump")]
-        PSZ-AC with central air source heat pump = 8,
+        ACwithcentralairsourceheatpump = 8,
 
         /// <summary>
         /// Enum ACwithdistricthotwater for value: PSZ-AC with district hot water
         /// </summary>
         [EnumMember(Value = "PSZ-AC with district hot water")]
-        PSZ-AC with district hot water = 9,
+        ACwithdistricthotwater = 9,
 
         /// <summary>
         /// Enum ACwithnoheat for value: PSZ-AC with no heat
         /// </summary>
         [EnumMember(Value = "PSZ-AC with no heat")]
-        PSZ-AC with no heat = 10,
+        ACwithnoheat = 10,
 
         /// <summary>
         /// Enum ACdistrictchilledwaterwithbaseboardelectric for value: PSZ-AC district chilled water with baseboard electric
         /// </summary>
         [EnumMember(Value = "PSZ-AC district chilled water with baseboard electric")]
-        PSZ-AC district chilled water with baseboard electric = 11,
+        ACdistrictchilledwaterwithbaseboardelectric = 11,
 
         /// <summary>
         /// Enum ACdistrictchilledwaterwithbaseboardgasboiler for value: PSZ-AC district chilled water with baseboard gas boiler

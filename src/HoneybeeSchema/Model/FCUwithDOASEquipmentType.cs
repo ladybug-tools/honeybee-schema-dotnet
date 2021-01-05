@@ -36,109 +36,109 @@ namespace HoneybeeSchema
         /// Enum Chillerwithboiler for value: DOAS with fan coil chiller with boiler
         /// </summary>
         [EnumMember(Value = "DOAS with fan coil chiller with boiler")]
-        DOAS with fan coil chiller with boiler = 1,
+        Chillerwithboiler = 1,
 
         /// <summary>
         /// Enum Chillerwithcentralairsourceheatpump for value: DOAS with fan coil chiller with central air source heat pump
         /// </summary>
         [EnumMember(Value = "DOAS with fan coil chiller with central air source heat pump")]
-        DOAS with fan coil chiller with central air source heat pump = 2,
+        Chillerwithcentralairsourceheatpump = 2,
 
         /// <summary>
         /// Enum Chillerwithdistricthotwater for value: DOAS with fan coil chiller with district hot water
         /// </summary>
         [EnumMember(Value = "DOAS with fan coil chiller with district hot water")]
-        DOAS with fan coil chiller with district hot water = 3,
+        Chillerwithdistricthotwater = 3,
 
         /// <summary>
         /// Enum Chillerwithbaseboardelectric for value: DOAS with fan coil chiller with baseboard electric
         /// </summary>
         [EnumMember(Value = "DOAS with fan coil chiller with baseboard electric")]
-        DOAS with fan coil chiller with baseboard electric = 4,
+        Chillerwithbaseboardelectric = 4,
 
         /// <summary>
         /// Enum Chillerwithgasunitheaters for value: DOAS with fan coil chiller with gas unit heaters
         /// </summary>
         [EnumMember(Value = "DOAS with fan coil chiller with gas unit heaters")]
-        DOAS with fan coil chiller with gas unit heaters = 5,
+        Chillerwithgasunitheaters = 5,
 
         /// <summary>
         /// Enum Chillerwithnoheat for value: DOAS with fan coil chiller with no heat
         /// </summary>
         [EnumMember(Value = "DOAS with fan coil chiller with no heat")]
-        DOAS with fan coil chiller with no heat = 6,
+        Chillerwithnoheat = 6,
 
         /// <summary>
         /// Enum AirCooledchillerwithboiler for value: DOAS with fan coil air-cooled chiller with boiler
         /// </summary>
         [EnumMember(Value = "DOAS with fan coil air-cooled chiller with boiler")]
-        DOAS with fan coil air-cooled chiller with boiler = 7,
+        AirCooledchillerwithboiler = 7,
 
         /// <summary>
         /// Enum AirCooledchillerwithcentralairsourceheatpump for value: DOAS with fan coil air-cooled chiller with central air source heat pump
         /// </summary>
         [EnumMember(Value = "DOAS with fan coil air-cooled chiller with central air source heat pump")]
-        DOAS with fan coil air-cooled chiller with central air source heat pump = 8,
+        AirCooledchillerwithcentralairsourceheatpump = 8,
 
         /// <summary>
         /// Enum AirCooledchillerwithdistricthotwater for value: DOAS with fan coil air-cooled chiller with district hot water
         /// </summary>
         [EnumMember(Value = "DOAS with fan coil air-cooled chiller with district hot water")]
-        DOAS with fan coil air-cooled chiller with district hot water = 9,
+        AirCooledchillerwithdistricthotwater = 9,
 
         /// <summary>
         /// Enum AirCooledchillerwithbaseboardelectric for value: DOAS with fan coil air-cooled chiller with baseboard electric
         /// </summary>
         [EnumMember(Value = "DOAS with fan coil air-cooled chiller with baseboard electric")]
-        DOAS with fan coil air-cooled chiller with baseboard electric = 10,
+        AirCooledchillerwithbaseboardelectric = 10,
 
         /// <summary>
         /// Enum AirCooledchillerwithgasunitheaters for value: DOAS with fan coil air-cooled chiller with gas unit heaters
         /// </summary>
         [EnumMember(Value = "DOAS with fan coil air-cooled chiller with gas unit heaters")]
-        DOAS with fan coil air-cooled chiller with gas unit heaters = 11,
+        AirCooledchillerwithgasunitheaters = 11,
 
         /// <summary>
         /// Enum AirCooledchillerwithnoheat for value: DOAS with fan coil air-cooled chiller with no heat
         /// </summary>
         [EnumMember(Value = "DOAS with fan coil air-cooled chiller with no heat")]
-        DOAS with fan coil air-cooled chiller with no heat = 12,
+        AirCooledchillerwithnoheat = 12,
 
         /// <summary>
         /// Enum Districtchilledwaterwithboiler for value: DOAS with fan coil district chilled water with boiler
         /// </summary>
         [EnumMember(Value = "DOAS with fan coil district chilled water with boiler")]
-        DOAS with fan coil district chilled water with boiler = 13,
+        Districtchilledwaterwithboiler = 13,
 
         /// <summary>
         /// Enum Districtchilledwaterwithcentralairsourceheatpump for value: DOAS with fan coil district chilled water with central air source heat pump
         /// </summary>
         [EnumMember(Value = "DOAS with fan coil district chilled water with central air source heat pump")]
-        DOAS with fan coil district chilled water with central air source heat pump = 14,
+        Districtchilledwaterwithcentralairsourceheatpump = 14,
 
         /// <summary>
         /// Enum Districtchilledwaterwithdistricthotwater for value: DOAS with fan coil district chilled water with district hot water
         /// </summary>
         [EnumMember(Value = "DOAS with fan coil district chilled water with district hot water")]
-        DOAS with fan coil district chilled water with district hot water = 15,
+        Districtchilledwaterwithdistricthotwater = 15,
 
         /// <summary>
         /// Enum Districtchilledwaterwithbaseboardelectric for value: DOAS with fan coil district chilled water with baseboard electric
         /// </summary>
         [EnumMember(Value = "DOAS with fan coil district chilled water with baseboard electric")]
-        DOAS with fan coil district chilled water with baseboard electric = 16,
+        Districtchilledwaterwithbaseboardelectric = 16,
 
         /// <summary>
         /// Enum Districtchilledwaterwithgasunitheaters for value: DOAS with fan coil district chilled water with gas unit heaters
         /// </summary>
         [EnumMember(Value = "DOAS with fan coil district chilled water with gas unit heaters")]
-        DOAS with fan coil district chilled water with gas unit heaters = 17,
+        Districtchilledwaterwithgasunitheaters = 17,
 
         /// <summary>
         /// Enum Districtchilledwaterwithnoheat for value: DOAS with fan coil district chilled water with no heat
         /// </summary>
         [EnumMember(Value = "DOAS with fan coil district chilled water with no heat")]
-        DOAS with fan coil district chilled water with no heat = 18
+        Districtchilledwaterwithnoheat = 18
 
     }
 

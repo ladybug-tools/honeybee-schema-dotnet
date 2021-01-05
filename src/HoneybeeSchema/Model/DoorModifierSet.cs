@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Set containing radiance modifiers needed for a model&#39;s Doors.
     /// </summary>
     [DataContract(Name = "DoorModifierSet")]
-    public partial class DoorModifierSet : IEquatable<DoorModifierSet>, IValidatableObject
+    public partial class DoorModifierSet : OpenAPIGenBaseModel, IEquatable<DoorModifierSet>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DoorModifierSet" /> class.
@@ -150,6 +150,14 @@ namespace HoneybeeSchema
             return DuplicateDoorModifierSet();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateDoorModifierSet();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -171,36 +179,36 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.ExteriorModifier == input.ExteriorModifier ||
                     (this.ExteriorModifier != null &&
                     this.ExteriorModifier.Equals(input.ExteriorModifier))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.InteriorModifier == input.InteriorModifier ||
                     (this.InteriorModifier != null &&
                     this.InteriorModifier.Equals(input.InteriorModifier))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.InteriorGlassModifier == input.InteriorGlassModifier ||
                     (this.InteriorGlassModifier != null &&
                     this.InteriorGlassModifier.Equals(input.InteriorGlassModifier))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ExteriorGlassModifier == input.ExteriorGlassModifier ||
                     (this.ExteriorGlassModifier != null &&
                     this.ExteriorGlassModifier.Equals(input.ExteriorGlassModifier))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.OverheadModifier == input.OverheadModifier ||
                     (this.OverheadModifier != null &&
                     this.OverheadModifier.Equals(input.OverheadModifier))
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -212,9 +220,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.ExteriorModifier != null)
                     hashCode = hashCode * 59 + this.ExteriorModifier.GetHashCode();
                 if (this.InteriorModifier != null)
@@ -225,6 +231,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.ExteriorGlassModifier.GetHashCode();
                 if (this.OverheadModifier != null)
                     hashCode = hashCode * 59 + this.OverheadModifier.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -236,6 +244,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern
