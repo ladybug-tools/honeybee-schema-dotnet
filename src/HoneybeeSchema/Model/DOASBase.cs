@@ -33,7 +33,7 @@ namespace HoneybeeSchema
         /// Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards
         /// </summary>
         /// <value>Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards</value>
-        [DataMember(Name="vintage", EmitDefaultValue=false)]
+        [DataMember(Name="vintage")]
         public Vintages Vintage { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="DOASBase" /> class.
@@ -74,7 +74,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "_DOASBase";
 
         /// <summary>
@@ -93,13 +93,13 @@ namespace HoneybeeSchema
         /// A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. If None or Autosize, it will be whatever is recommended for the given vintage.
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. If None or Autosize, it will be whatever is recommended for the given vintage.</value>
-        [DataMember(Name = "sensible_heat_recovery", EmitDefaultValue = false)]
+        [DataMember(Name = "sensible_heat_recovery")]
         public AnyOf<Autosize,double> SensibleHeatRecovery { get; set; } 
         /// <summary>
         /// A number between 0 and 1 for the effectiveness of latent heat recovery within the system. If None or Autosize, it will be whatever is recommended for the given vintage.
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of latent heat recovery within the system. If None or Autosize, it will be whatever is recommended for the given vintage.</value>
-        [DataMember(Name = "latent_heat_recovery", EmitDefaultValue = false)]
+        [DataMember(Name = "latent_heat_recovery")]
         public AnyOf<Autosize,double> LatentHeatRecovery { get; set; } 
 
         /// <summary>

@@ -68,7 +68,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "OpaqueConstruction";
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace HoneybeeSchema
         /// List of opaque materials. The order of the materials is from outside to inside.
         /// </summary>
         /// <value>List of opaque materials. The order of the materials is from outside to inside.</value>
-        [DataMember(Name = "materials", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "materials", IsRequired = true)]
         public List<AnyOf<EnergyMaterial,EnergyMaterialNoMass>> Materials { get; set; } 
 
         /// <summary>

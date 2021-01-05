@@ -51,18 +51,18 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "AperturePropertiesAbridged";
 
         /// <summary>
         /// Gets or Sets Energy
         /// </summary>
-        [DataMember(Name = "energy", EmitDefaultValue = false)]
+        [DataMember(Name = "energy")]
         public ApertureEnergyPropertiesAbridged Energy { get; set; } 
         /// <summary>
         /// Gets or Sets Radiance
         /// </summary>
-        [DataMember(Name = "radiance", EmitDefaultValue = false)]
+        [DataMember(Name = "radiance")]
         public ApertureRadiancePropertiesAbridged Radiance { get; set; } 
 
         /// <summary>

@@ -65,26 +65,26 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "Plane";
 
         /// <summary>
         /// Plane normal as 3 (x, y, z) values.
         /// </summary>
         /// <value>Plane normal as 3 (x, y, z) values.</value>
-        [DataMember(Name = "n", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "n", IsRequired = true)]
         public List<double> N { get; set; } 
         /// <summary>
         /// Plane origin as 3 (x, y, z) values
         /// </summary>
         /// <value>Plane origin as 3 (x, y, z) values</value>
-        [DataMember(Name = "o", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "o", IsRequired = true)]
         public List<double> O { get; set; } 
         /// <summary>
         /// Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated.
         /// </summary>
         /// <value>Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated.</value>
-        [DataMember(Name = "x", EmitDefaultValue = false)]
+        [DataMember(Name = "x")]
         public List<double> X { get; set; } 
 
         /// <summary>

@@ -53,26 +53,26 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "Outdoors";
 
         /// <summary>
         /// A boolean noting whether the boundary is exposed to sun.
         /// </summary>
         /// <value>A boolean noting whether the boundary is exposed to sun.</value>
-        [DataMember(Name = "sun_exposure", EmitDefaultValue = true)]
+        [DataMember(Name = "sun_exposure")]
         public bool SunExposure { get; set; }  = true;
         /// <summary>
         /// A boolean noting whether the boundary is exposed to wind.
         /// </summary>
         /// <value>A boolean noting whether the boundary is exposed to wind.</value>
-        [DataMember(Name = "wind_exposure", EmitDefaultValue = true)]
+        [DataMember(Name = "wind_exposure")]
         public bool WindExposure { get; set; }  = true;
         /// <summary>
         /// A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated.
         /// </summary>
         /// <value>A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated.</value>
-        [DataMember(Name = "view_factor", EmitDefaultValue = false)]
+        [DataMember(Name = "view_factor")]
         public AnyOf<Autocalculate,double> ViewFactor { get; set; } 
 
         /// <summary>

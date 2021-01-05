@@ -74,7 +74,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "People";
 
         /// <summary>
@@ -93,31 +93,31 @@ namespace HoneybeeSchema
         /// People per floor area expressed as [people/m2]
         /// </summary>
         /// <value>People per floor area expressed as [people/m2]</value>
-        [DataMember(Name = "people_per_area", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "people_per_area", IsRequired = true)]
         public double PeoplePerArea { get; set; } 
         /// <summary>
         /// A schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile.
         /// </summary>
         /// <value>A schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile.</value>
-        [DataMember(Name = "occupancy_schedule", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "occupancy_schedule", IsRequired = true)]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> OccupancySchedule { get; set; } 
         /// <summary>
         /// A schedule for the activity of the occupants over the course of the year. The type of this schedule should be Power and the values of the schedule equal to the number of Watts given off by an individual person in the room.
         /// </summary>
         /// <value>A schedule for the activity of the occupants over the course of the year. The type of this schedule should be Power and the values of the schedule equal to the number of Watts given off by an individual person in the room.</value>
-        [DataMember(Name = "activity_schedule", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "activity_schedule", IsRequired = true)]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> ActivitySchedule { get; set; } 
         /// <summary>
         /// The radiant fraction of sensible heat released by people. The defaultvalue is 0.30.
         /// </summary>
         /// <value>The radiant fraction of sensible heat released by people. The defaultvalue is 0.30.</value>
-        [DataMember(Name = "radiant_fraction", EmitDefaultValue = true)]
+        [DataMember(Name = "radiant_fraction")]
         public double RadiantFraction { get; set; }  = 0.3D;
         /// <summary>
         /// Number for the latent fraction of heat gain due to people or an Autocalculate object.
         /// </summary>
         /// <value>Number for the latent fraction of heat gain due to people or an Autocalculate object.</value>
-        [DataMember(Name = "latent_fraction", EmitDefaultValue = false)]
+        [DataMember(Name = "latent_fraction")]
         public AnyOf<Autocalculate,double> LatentFraction { get; set; } 
 
         /// <summary>

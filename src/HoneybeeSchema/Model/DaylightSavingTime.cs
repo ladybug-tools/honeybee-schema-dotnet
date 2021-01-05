@@ -51,20 +51,20 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "DaylightSavingTime";
 
         /// <summary>
         /// A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).</value>
-        [DataMember(Name = "start_date", EmitDefaultValue = false)]
+        [DataMember(Name = "start_date")]
         public List<int> StartDate { get; set; } 
         /// <summary>
         /// A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).</value>
-        [DataMember(Name = "end_date", EmitDefaultValue = false)]
+        [DataMember(Name = "end_date")]
         public List<int> EndDate { get; set; } 
 
         /// <summary>

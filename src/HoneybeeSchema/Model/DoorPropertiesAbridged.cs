@@ -51,18 +51,18 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "DoorPropertiesAbridged";
 
         /// <summary>
         /// Gets or Sets Energy
         /// </summary>
-        [DataMember(Name = "energy", EmitDefaultValue = false)]
+        [DataMember(Name = "energy")]
         public DoorEnergyPropertiesAbridged Energy { get; set; } 
         /// <summary>
         /// Gets or Sets Radiance
         /// </summary>
-        [DataMember(Name = "radiance", EmitDefaultValue = false)]
+        [DataMember(Name = "radiance")]
         public DoorRadiancePropertiesAbridged Radiance { get; set; } 
 
         /// <summary>

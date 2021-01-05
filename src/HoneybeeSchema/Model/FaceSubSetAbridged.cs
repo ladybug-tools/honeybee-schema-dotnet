@@ -53,26 +53,26 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "_FaceSubSetAbridged";
 
         /// <summary>
         /// Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition.
         /// </summary>
         /// <value>Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition.</value>
-        [DataMember(Name = "interior_construction", EmitDefaultValue = false)]
+        [DataMember(Name = "interior_construction")]
         public string InteriorConstruction { get; set; } 
         /// <summary>
         /// Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition.
         /// </summary>
         /// <value>Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition.</value>
-        [DataMember(Name = "exterior_construction", EmitDefaultValue = false)]
+        [DataMember(Name = "exterior_construction")]
         public string ExteriorConstruction { get; set; } 
         /// <summary>
         /// Identifier for an OpaqueConstruction for faces with a Ground boundary condition.
         /// </summary>
         /// <value>Identifier for an OpaqueConstruction for faces with a Ground boundary condition.</value>
-        [DataMember(Name = "ground_construction", EmitDefaultValue = false)]
+        [DataMember(Name = "ground_construction")]
         public string GroundConstruction { get; set; } 
 
         /// <summary>

@@ -62,20 +62,20 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "_SkyCondition";
 
         /// <summary>
         /// A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</value>
-        [DataMember(Name = "date", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "date", IsRequired = true)]
         public List<int> Date { get; set; } 
         /// <summary>
         /// Boolean to indicate whether daylight savings time is active on the design day.
         /// </summary>
         /// <value>Boolean to indicate whether daylight savings time is active on the design day.</value>
-        [DataMember(Name = "daylight_savings", EmitDefaultValue = true)]
+        [DataMember(Name = "daylight_savings")]
         public bool DaylightSavings { get; set; }  = false;
 
         /// <summary>

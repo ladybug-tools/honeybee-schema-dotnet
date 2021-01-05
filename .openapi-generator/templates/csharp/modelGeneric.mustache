@@ -24,7 +24,7 @@
         {{#description}}
         /// <value>{{description}}</value>
         {{/description}}
-        [DataMember(Name="{{baseName}}", EmitDefaultValue={{#vendorExtensions.x-emit-default-value}}true{{/vendorExtensions.x-emit-default-value}}{{^vendorExtensions.x-emit-default-value}}{{#isNullable}}true{{/isNullable}}{{^isNullable}}false{{/isNullable}}{{/vendorExtensions.x-emit-default-value}})]
+        [DataMember(Name="{{baseName}}")]
         public {{#complexType}}{{{complexType}}}{{/complexType}}{{^complexType}}{{{datatypeWithEnum}}}{{/complexType}}{{^isContainer}}{{^required}}{{^isEnum}}?{{/isEnum}}{{/required}}{{/isContainer}} {{name}} { get; set; }  {{#defaultValue}} = {{#isEnum}}{{{datatypeWithEnum}}}Enum""{{{defaultValue}}}""Enum{{/isEnum}}{{^isEnum}}{{{defaultValue}}}{{/isEnum}};{{/defaultValue}} 
         {{/isEnum}}
         {{/vars}}
@@ -136,7 +136,7 @@
         /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{description}}{{/description}}
         /// </summary>{{#description}}
         /// <value>{{description}}</value>{{/description}}
-        [DataMember(Name = "{{baseName}}"{{#required}}, IsRequired = true{{/required}}, EmitDefaultValue = {{#vendorExtensions.x-emit-default-value}}true{{/vendorExtensions.x-emit-default-value}}{{^vendorExtensions.x-emit-default-value}}{{#isNullable}}true{{/isNullable}}{{^isNullable}}{{#defaultValue}}true{{/defaultValue}}{{^defaultValue}}false{{/defaultValue}}{{/isNullable}}{{/vendorExtensions.x-emit-default-value}})]{{#isDate}}
+        [DataMember(Name = "{{baseName}}"{{#required}}, IsRequired = true{{/required}})]{{#isDate}}
         [JsonConverter(typeof(OpenAPIDateConverter))]{{/isDate}}
         public {{{dataType}}} {{name}} { get; protected internal set; } {{#defaultValue}} = {{{defaultValue}}};{{/defaultValue}}
         {{/isReadOnly}}
@@ -152,7 +152,7 @@
         /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{description}}{{/description}}
         /// </summary>{{#description}}
         /// <value>{{description}}</value>{{/description}}
-        [DataMember(Name = "{{baseName}}"{{#required}}, IsRequired = true{{/required}}, EmitDefaultValue = {{#vendorExtensions.x-emit-default-value}}true{{/vendorExtensions.x-emit-default-value}}{{^vendorExtensions.x-emit-default-value}}{{#isNullable}}true{{/isNullable}}{{^isNullable}}{{#defaultValue}}true{{/defaultValue}}{{^defaultValue}}false{{/defaultValue}}{{/isNullable}}{{/vendorExtensions.x-emit-default-value}})]{{#isDate}}
+        [DataMember(Name = "{{baseName}}"{{#required}}, IsRequired = true{{/required}})]{{#isDate}}
         [JsonConverter(typeof(OpenAPIDateConverter))]{{/isDate}}
         public {{{dataType}}} {{name}} { get; set; } {{#defaultValue}} = {{{defaultValue}}};{{/defaultValue}}
         {{/isReadOnly}}

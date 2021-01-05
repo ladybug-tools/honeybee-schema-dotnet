@@ -69,7 +69,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "StateGeometryAbridged";
 
         /// <summary>
@@ -88,19 +88,19 @@ namespace HoneybeeSchema
         /// A ladybug_geometry Face3D.
         /// </summary>
         /// <value>A ladybug_geometry Face3D.</value>
-        [DataMember(Name = "geometry", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "geometry", IsRequired = true)]
         public Face3D Geometry { get; set; } 
         /// <summary>
         /// A string for a Honeybee Radiance Modifier identifier (default: None).
         /// </summary>
         /// <value>A string for a Honeybee Radiance Modifier identifier (default: None).</value>
-        [DataMember(Name = "modifier", EmitDefaultValue = false)]
+        [DataMember(Name = "modifier")]
         public string Modifier { get; set; } 
         /// <summary>
         /// A string for Honeybee Radiance Modifier identifiers to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).
         /// </summary>
         /// <value>A string for Honeybee Radiance Modifier identifiers to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).</value>
-        [DataMember(Name = "modifier_direct", EmitDefaultValue = false)]
+        [DataMember(Name = "modifier_direct")]
         public string ModifierDirect { get; set; } 
 
         /// <summary>

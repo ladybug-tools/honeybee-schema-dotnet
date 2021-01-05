@@ -70,38 +70,38 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "ServiceHotWater";
 
         /// <summary>
         /// Number for the total volume flow rate of water per unit area of floor [L/h-m2].
         /// </summary>
         /// <value>Number for the total volume flow rate of water per unit area of floor [L/h-m2].</value>
-        [DataMember(Name = "flow_per_area", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "flow_per_area", IsRequired = true)]
         public double FlowPerArea { get; set; } 
         /// <summary>
         /// The schedule for the use of hot water over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile.
         /// </summary>
         /// <value>The schedule for the use of hot water over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile.</value>
-        [DataMember(Name = "schedule", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "schedule", IsRequired = true)]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; } 
         /// <summary>
         /// Number for the target temperature of water out of the tap (C). This the temperature after hot water has been mixed with cold water from the water mains. The default is 60C, which essentially assumes that the flow_per_area on this object is only for water straight out of the water heater.
         /// </summary>
         /// <value>Number for the target temperature of water out of the tap (C). This the temperature after hot water has been mixed with cold water from the water mains. The default is 60C, which essentially assumes that the flow_per_area on this object is only for water straight out of the water heater.</value>
-        [DataMember(Name = "target_temperature", EmitDefaultValue = true)]
+        [DataMember(Name = "target_temperature")]
         public double TargetTemperature { get; set; }  = 60D;
         /// <summary>
         /// A number between 0 and 1 for the fraction of the total hot water load given off as sensible heat in the zone.
         /// </summary>
         /// <value>A number between 0 and 1 for the fraction of the total hot water load given off as sensible heat in the zone.</value>
-        [DataMember(Name = "sensible_fraction", EmitDefaultValue = true)]
+        [DataMember(Name = "sensible_fraction")]
         public double SensibleFraction { get; set; }  = 0.2D;
         /// <summary>
         /// A number between 0 and 1 for the fraction of the total hot water load that is latent.
         /// </summary>
         /// <value>A number between 0 and 1 for the fraction of the total hot water load that is latent.</value>
-        [DataMember(Name = "latent_fraction", EmitDefaultValue = true)]
+        [DataMember(Name = "latent_fraction")]
         public double LatentFraction { get; set; }  = 0.05D;
 
         /// <summary>

@@ -32,7 +32,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets DayType
         /// </summary>
-        [DataMember(Name="day_type", EmitDefaultValue=false)]
+        [DataMember(Name="day_type")]
         public DesignDayTypes DayType { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="DesignDay" /> class.
@@ -79,37 +79,37 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "DesignDay";
 
         /// <summary>
         /// Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
         /// </summary>
         /// <value>Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "name", IsRequired = true)]
         public string Name { get; set; } 
         /// <summary>
         /// A DryBulbCondition describing temperature conditions on the design day.
         /// </summary>
         /// <value>A DryBulbCondition describing temperature conditions on the design day.</value>
-        [DataMember(Name = "dry_bulb_condition", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "dry_bulb_condition", IsRequired = true)]
         public DryBulbCondition DryBulbCondition { get; set; } 
         /// <summary>
         /// A HumidityCondition describing humidity and precipitation conditions on the design day.
         /// </summary>
         /// <value>A HumidityCondition describing humidity and precipitation conditions on the design day.</value>
-        [DataMember(Name = "humidity_condition", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "humidity_condition", IsRequired = true)]
         public HumidityCondition HumidityCondition { get; set; } 
         /// <summary>
         /// A WindCondition describing wind conditions on the design day.
         /// </summary>
         /// <value>A WindCondition describing wind conditions on the design day.</value>
-        [DataMember(Name = "wind_condition", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "wind_condition", IsRequired = true)]
         public WindCondition WindCondition { get; set; } 
         /// <summary>
         /// Gets or Sets SkyCondition
         /// </summary>
-        [DataMember(Name = "sky_condition", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "sky_condition", IsRequired = true)]
         public AnyOf<ASHRAEClearSky,ASHRAETau> SkyCondition { get; set; } 
 
         /// <summary>

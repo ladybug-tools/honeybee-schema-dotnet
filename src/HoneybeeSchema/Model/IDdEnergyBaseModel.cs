@@ -62,20 +62,20 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "IDdEnergyBaseModel";
 
         /// <summary>
         /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
         /// </summary>
         /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "identifier", IsRequired = true)]
         public string Identifier { get; set; } 
         /// <summary>
         /// Display name of the object with no character restrictions.
         /// </summary>
         /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name = "display_name", EmitDefaultValue = false)]
+        [DataMember(Name = "display_name")]
         public string DisplayName { get; set; } 
 
         /// <summary>

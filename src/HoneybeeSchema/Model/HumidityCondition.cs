@@ -32,7 +32,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets HumidityType
         /// </summary>
-        [DataMember(Name="humidity_type", EmitDefaultValue=false)]
+        [DataMember(Name="humidity_type")]
         public HumidityTypes HumidityType { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="HumidityCondition" /> class.
@@ -72,32 +72,32 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "HumidityCondition";
 
         /// <summary>
         /// The value correcponding to the humidity_type.
         /// </summary>
         /// <value>The value correcponding to the humidity_type.</value>
-        [DataMember(Name = "humidity_value", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "humidity_value", IsRequired = true)]
         public double HumidityValue { get; set; } 
         /// <summary>
         /// Barometric air pressure on the design day [Pa].
         /// </summary>
         /// <value>Barometric air pressure on the design day [Pa].</value>
-        [DataMember(Name = "barometric_pressure", EmitDefaultValue = true)]
+        [DataMember(Name = "barometric_pressure")]
         public double BarometricPressure { get; set; }  = 101325D;
         /// <summary>
         /// Boolean to indicate rain on the design day.
         /// </summary>
         /// <value>Boolean to indicate rain on the design day.</value>
-        [DataMember(Name = "rain", EmitDefaultValue = true)]
+        [DataMember(Name = "rain")]
         public bool Rain { get; set; }  = false;
         /// <summary>
         /// Boolean to indicate snow on the ground during the design day.
         /// </summary>
         /// <value>Boolean to indicate snow on the ground during the design day.</value>
-        [DataMember(Name = "snow_on_ground", EmitDefaultValue = true)]
+        [DataMember(Name = "snow_on_ground")]
         public bool SnowOnGround { get; set; }  = false;
 
         /// <summary>

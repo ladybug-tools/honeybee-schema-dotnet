@@ -33,7 +33,7 @@ namespace HoneybeeSchema
         /// Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards
         /// </summary>
         /// <value>Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards</value>
-        [DataMember(Name="vintage", EmitDefaultValue=false)]
+        [DataMember(Name="vintage")]
         public Vintages Vintage { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="HeatCoolBase" /> class.
@@ -70,7 +70,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "_HeatCoolBase";
 
 

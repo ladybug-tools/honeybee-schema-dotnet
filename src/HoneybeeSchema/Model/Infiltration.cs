@@ -73,7 +73,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "Infiltration";
 
         /// <summary>
@@ -92,28 +92,28 @@ namespace HoneybeeSchema
         /// Number for the infiltration per exterior surface area in m3/s-m2.
         /// </summary>
         /// <value>Number for the infiltration per exterior surface area in m3/s-m2.</value>
-        [DataMember(Name = "flow_per_exterior_area", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "flow_per_exterior_area", IsRequired = true)]
         public double FlowPerExteriorArea { get; set; } 
         /// <summary>
         /// The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.
         /// </summary>
         /// <value>The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.</value>
-        [DataMember(Name = "schedule", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "schedule", IsRequired = true)]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; } 
         /// <summary>
         /// Gets or Sets ConstantCoefficient
         /// </summary>
-        [DataMember(Name = "constant_coefficient", EmitDefaultValue = true)]
+        [DataMember(Name = "constant_coefficient")]
         public double ConstantCoefficient { get; set; }  = 1D;
         /// <summary>
         /// Gets or Sets TemperatureCoefficient
         /// </summary>
-        [DataMember(Name = "temperature_coefficient", EmitDefaultValue = true)]
+        [DataMember(Name = "temperature_coefficient")]
         public double TemperatureCoefficient { get; set; }  = 0D;
         /// <summary>
         /// Gets or Sets VelocityCoefficient
         /// </summary>
-        [DataMember(Name = "velocity_coefficient", EmitDefaultValue = true)]
+        [DataMember(Name = "velocity_coefficient")]
         public double VelocityCoefficient { get; set; }  = 0D;
 
         /// <summary>

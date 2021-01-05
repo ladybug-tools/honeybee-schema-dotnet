@@ -51,20 +51,20 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "FaceEnergyPropertiesAbridged";
 
         /// <summary>
         /// Identifier of an OpaqueConstruction for the Face. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.
         /// </summary>
         /// <value>Identifier of an OpaqueConstruction for the Face. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.</value>
-        [DataMember(Name = "construction", EmitDefaultValue = false)]
+        [DataMember(Name = "construction")]
         public string Construction { get; set; } 
         /// <summary>
         /// An optional AFNCrack to specify airflow through a surface crack used by the AirflowNetwork.
         /// </summary>
         /// <value>An optional AFNCrack to specify airflow through a surface crack used by the AirflowNetwork.</value>
-        [DataMember(Name = "vent_crack", EmitDefaultValue = false)]
+        [DataMember(Name = "vent_crack")]
         public AFNCrack VentCrack { get; set; } 
 
         /// <summary>

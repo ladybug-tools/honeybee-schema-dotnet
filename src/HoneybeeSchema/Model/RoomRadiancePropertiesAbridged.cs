@@ -49,14 +49,14 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "RoomRadiancePropertiesAbridged";
 
         /// <summary>
         /// An identifier for a unique Room-Assigned ModifierSet (default: None).
         /// </summary>
         /// <value>An identifier for a unique Room-Assigned ModifierSet (default: None).</value>
-        [DataMember(Name = "modifier_set", EmitDefaultValue = false)]
+        [DataMember(Name = "modifier_set")]
         public string ModifierSet { get; set; } 
 
         /// <summary>

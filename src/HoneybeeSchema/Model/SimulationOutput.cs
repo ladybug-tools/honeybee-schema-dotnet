@@ -32,8 +32,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets ReportingFrequency
         /// </summary>
-        [DataMember(Name="reporting_frequency", EmitDefaultValue=false)]
-        public ReportingFrequency ReportingFrequency { get; set; } = ReportingFrequency.Hourly;
+        [DataMember(Name="reporting_frequency")]
+        public ReportingFrequency ReportingFrequency { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="SimulationOutput" /> class.
         /// </summary>
@@ -45,7 +45,7 @@ namespace HoneybeeSchema
         public SimulationOutput
         (
            // Required parameters
-           ReportingFrequency reportingFrequency= ReportingFrequency.Hourly, bool includeSqlite = true, bool includeHtml = true, List<string> outputs= default, List<string> summaryReports= default// Optional parameters
+           ReportingFrequency reportingFrequency= default, bool includeSqlite = true, bool includeHtml = true, List<string> outputs= default, List<string> summaryReports= default// Optional parameters
         ) : base()// BaseClass
         {
             this.ReportingFrequency = reportingFrequency;
@@ -62,32 +62,32 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "SimulationOutput";
 
         /// <summary>
         /// Boolean to note whether a SQLite report should be requested from the simulation.
         /// </summary>
         /// <value>Boolean to note whether a SQLite report should be requested from the simulation.</value>
-        [DataMember(Name = "include_sqlite", EmitDefaultValue = true)]
+        [DataMember(Name = "include_sqlite")]
         public bool IncludeSqlite { get; set; }  = true;
         /// <summary>
         /// Boolean to note whether an HTML report should be requested from the simulation.
         /// </summary>
         /// <value>Boolean to note whether an HTML report should be requested from the simulation.</value>
-        [DataMember(Name = "include_html", EmitDefaultValue = true)]
+        [DataMember(Name = "include_html")]
         public bool IncludeHtml { get; set; }  = true;
         /// <summary>
         /// A list of EnergyPlus output names as strings, which are requested from the simulation.
         /// </summary>
         /// <value>A list of EnergyPlus output names as strings, which are requested from the simulation.</value>
-        [DataMember(Name = "outputs", EmitDefaultValue = false)]
+        [DataMember(Name = "outputs")]
         public List<string> Outputs { get; set; } 
         /// <summary>
         /// A list of EnergyPlus summary report names as strings.
         /// </summary>
         /// <value>A list of EnergyPlus summary report names as strings.</value>
-        [DataMember(Name = "summary_reports", EmitDefaultValue = false)]
+        [DataMember(Name = "summary_reports")]
         public List<string> SummaryReports { get; set; } 
 
         /// <summary>

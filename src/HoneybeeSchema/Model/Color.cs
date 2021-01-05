@@ -63,26 +63,26 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "Color";
 
         /// <summary>
         /// Integer for red value.
         /// </summary>
         /// <value>Integer for red value.</value>
-        [DataMember(Name = "r", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "r", IsRequired = true)]
         public int R { get; set; } 
         /// <summary>
         /// Integer for green value.
         /// </summary>
         /// <value>Integer for green value.</value>
-        [DataMember(Name = "g", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "g", IsRequired = true)]
         public int G { get; set; } 
         /// <summary>
         /// Integer for blue value.
         /// </summary>
         /// <value>Integer for blue value.</value>
-        [DataMember(Name = "b", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "b", IsRequired = true)]
         public int B { get; set; } 
 
         /// <summary>

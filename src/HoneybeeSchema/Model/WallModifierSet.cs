@@ -51,20 +51,20 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "WallModifierSet";
 
         /// <summary>
         /// A radiance modifier object for faces with an Outdoors boundary condition.
         /// </summary>
         /// <value>A radiance modifier object for faces with an Outdoors boundary condition.</value>
-        [DataMember(Name = "exterior_modifier", EmitDefaultValue = false)]
+        [DataMember(Name = "exterior_modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> ExteriorModifier { get; set; } 
         /// <summary>
         /// A radiance modifier object for faces with a boundary condition other than Outdoors.
         /// </summary>
         /// <value>A radiance modifier object for faces with a boundary condition other than Outdoors.</value>
-        [DataMember(Name = "interior_modifier", EmitDefaultValue = false)]
+        [DataMember(Name = "interior_modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> InteriorModifier { get; set; } 
 
         /// <summary>

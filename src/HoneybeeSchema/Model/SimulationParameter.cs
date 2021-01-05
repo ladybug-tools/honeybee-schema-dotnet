@@ -33,8 +33,8 @@ namespace HoneybeeSchema
         /// Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms.
         /// </summary>
         /// <value>Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms.</value>
-        [DataMember(Name="terrain_type", EmitDefaultValue=false)]
-        public TerrianTypes TerrainType { get; set; } = TerrianTypes.City;
+        [DataMember(Name="terrain_type")]
+        public TerrianTypes TerrainType { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="SimulationParameter" /> class.
         /// </summary>
@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         public SimulationParameter
         (
            // Required parameters
-           SimulationOutput output= default, RunPeriod runPeriod= default, int timestep = 6, SimulationControl simulationControl= default, ShadowCalculation shadowCalculation= default, SizingParameter sizingParameter= default, double northAngle = 0D, TerrianTypes terrainType= TerrianTypes.City// Optional parameters
+           SimulationOutput output= default, RunPeriod runPeriod= default, int timestep = 6, SimulationControl simulationControl= default, ShadowCalculation shadowCalculation= default, SizingParameter sizingParameter= default, double northAngle = 0D, TerrianTypes terrainType= default// Optional parameters
         ) : base()// BaseClass
         {
             this.Output = output;
@@ -69,50 +69,50 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "SimulationParameter";
 
         /// <summary>
         /// A SimulationOutput that lists the desired outputs from the simulation and the format in which to report them.
         /// </summary>
         /// <value>A SimulationOutput that lists the desired outputs from the simulation and the format in which to report them.</value>
-        [DataMember(Name = "output", EmitDefaultValue = false)]
+        [DataMember(Name = "output")]
         public SimulationOutput Output { get; set; } 
         /// <summary>
         /// A RunPeriod to describe the time period over which to run the simulation.
         /// </summary>
         /// <value>A RunPeriod to describe the time period over which to run the simulation.</value>
-        [DataMember(Name = "run_period", EmitDefaultValue = false)]
+        [DataMember(Name = "run_period")]
         public RunPeriod RunPeriod { get; set; } 
         /// <summary>
         /// An integer for the number of timesteps per hour at which the energy calculation will be run.
         /// </summary>
         /// <value>An integer for the number of timesteps per hour at which the energy calculation will be run.</value>
-        [DataMember(Name = "timestep", EmitDefaultValue = true)]
+        [DataMember(Name = "timestep")]
         public int Timestep { get; set; }  = 6;
         /// <summary>
         /// A SimulationControl object that describes which types of calculations to run.
         /// </summary>
         /// <value>A SimulationControl object that describes which types of calculations to run.</value>
-        [DataMember(Name = "simulation_control", EmitDefaultValue = false)]
+        [DataMember(Name = "simulation_control")]
         public SimulationControl SimulationControl { get; set; } 
         /// <summary>
         /// A ShadowCalculation object describing settings for the EnergyPlus Shadow Calculation.
         /// </summary>
         /// <value>A ShadowCalculation object describing settings for the EnergyPlus Shadow Calculation.</value>
-        [DataMember(Name = "shadow_calculation", EmitDefaultValue = false)]
+        [DataMember(Name = "shadow_calculation")]
         public ShadowCalculation ShadowCalculation { get; set; } 
         /// <summary>
         /// A SizingParameter object with criteria for sizing the heating and cooling system.
         /// </summary>
         /// <value>A SizingParameter object with criteria for sizing the heating and cooling system.</value>
-        [DataMember(Name = "sizing_parameter", EmitDefaultValue = false)]
+        [DataMember(Name = "sizing_parameter")]
         public SizingParameter SizingParameter { get; set; } 
         /// <summary>
         /// A number between -360 and 360 for the north direction in degrees.This is the counterclockwise difference between the North and the positive Y-axis. 90 is West and 270 is East. Note that this is different than the convention used in EnergyPlus, which uses clockwise difference instead of counterclockwise difference.
         /// </summary>
         /// <value>A number between -360 and 360 for the north direction in degrees.This is the counterclockwise difference between the North and the positive Y-axis. 90 is West and 270 is East. Note that this is different than the convention used in EnergyPlus, which uses clockwise difference instead of counterclockwise difference.</value>
-        [DataMember(Name = "north_angle", EmitDefaultValue = true)]
+        [DataMember(Name = "north_angle")]
         public double NorthAngle { get; set; }  = 0D;
 
         /// <summary>

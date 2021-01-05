@@ -55,32 +55,32 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "ApertureModifierSetAbridged";
 
         /// <summary>
         /// Identifier of modifier object for apertures with an Outdoors boundary condition, False is_operable property, and Wall parent Face.
         /// </summary>
         /// <value>Identifier of modifier object for apertures with an Outdoors boundary condition, False is_operable property, and Wall parent Face.</value>
-        [DataMember(Name = "window_modifier", EmitDefaultValue = false)]
+        [DataMember(Name = "window_modifier")]
         public string WindowModifier { get; set; } 
         /// <summary>
         /// Identifier of modifier object for apertures with a Surface boundary condition.
         /// </summary>
         /// <value>Identifier of modifier object for apertures with a Surface boundary condition.</value>
-        [DataMember(Name = "interior_modifier", EmitDefaultValue = false)]
+        [DataMember(Name = "interior_modifier")]
         public string InteriorModifier { get; set; } 
         /// <summary>
         /// Identifier of modifier object for apertures with an Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.
         /// </summary>
         /// <value>Identifier of modifier object for apertures with an Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.</value>
-        [DataMember(Name = "skylight_modifier", EmitDefaultValue = false)]
+        [DataMember(Name = "skylight_modifier")]
         public string SkylightModifier { get; set; } 
         /// <summary>
         /// Identifier of modifier object for apertures with an Outdoors boundary condition and a True is_operable property.
         /// </summary>
         /// <value>Identifier of modifier object for apertures with an Outdoors boundary condition and a True is_operable property.</value>
-        [DataMember(Name = "operable_modifier", EmitDefaultValue = false)]
+        [DataMember(Name = "operable_modifier")]
         public string OperableModifier { get; set; } 
 
         /// <summary>

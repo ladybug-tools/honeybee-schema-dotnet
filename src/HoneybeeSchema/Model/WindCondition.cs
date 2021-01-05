@@ -61,20 +61,20 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "WindCondition";
 
         /// <summary>
         /// Wind speed on the design day [m/s].
         /// </summary>
         /// <value>Wind speed on the design day [m/s].</value>
-        [DataMember(Name = "wind_speed", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "wind_speed", IsRequired = true)]
         public double WindSpeed { get; set; } 
         /// <summary>
         /// Wind direction on the design day [degrees].
         /// </summary>
         /// <value>Wind direction on the design day [degrees].</value>
-        [DataMember(Name = "wind_direction", EmitDefaultValue = true)]
+        [DataMember(Name = "wind_direction")]
         public double WindDirection { get; set; }  = 0D;
 
         /// <summary>

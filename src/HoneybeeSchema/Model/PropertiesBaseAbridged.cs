@@ -51,20 +51,20 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "_PropertiesBaseAbridged";
 
         /// <summary>
         /// A string for a Honeybee Radiance Modifier (default: None).
         /// </summary>
         /// <value>A string for a Honeybee Radiance Modifier (default: None).</value>
-        [DataMember(Name = "modifier", EmitDefaultValue = false)]
+        [DataMember(Name = "modifier")]
         public string Modifier { get; set; } 
         /// <summary>
         /// A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).
         /// </summary>
         /// <value>A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).</value>
-        [DataMember(Name = "modifier_blk", EmitDefaultValue = false)]
+        [DataMember(Name = "modifier_blk")]
         public string ModifierBlk { get; set; } 
 
         /// <summary>

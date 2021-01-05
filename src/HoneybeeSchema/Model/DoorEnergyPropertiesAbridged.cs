@@ -51,20 +51,20 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "DoorEnergyPropertiesAbridged";
 
         /// <summary>
         /// Identifier of an OpaqueConstruction or WindowConstruction for the door. Note that the host door must have the is_glass property set to True to assign a WindowConstruction. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.
         /// </summary>
         /// <value>Identifier of an OpaqueConstruction or WindowConstruction for the door. Note that the host door must have the is_glass property set to True to assign a WindowConstruction. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.</value>
-        [DataMember(Name = "construction", EmitDefaultValue = false)]
+        [DataMember(Name = "construction")]
         public string Construction { get; set; } 
         /// <summary>
         /// An optional VentilationOpening to specify the operable portion of the Door.
         /// </summary>
         /// <value>An optional VentilationOpening to specify the operable portion of the Door.</value>
-        [DataMember(Name = "vent_opening", EmitDefaultValue = false)]
+        [DataMember(Name = "vent_opening")]
         public VentilationOpening VentOpening { get; set; } 
 
         /// <summary>

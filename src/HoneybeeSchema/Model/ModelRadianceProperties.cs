@@ -55,32 +55,32 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "ModelRadianceProperties";
 
         /// <summary>
         /// A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set.
         /// </summary>
         /// <value>A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set.</value>
-        [DataMember(Name = "modifiers", EmitDefaultValue = false)]
+        [DataMember(Name = "modifiers")]
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Modifiers { get; set; } 
         /// <summary>
         /// A list of all unique Room-Assigned ModifierSets in the Model.
         /// </summary>
         /// <value>A list of all unique Room-Assigned ModifierSets in the Model.</value>
-        [DataMember(Name = "modifier_sets", EmitDefaultValue = false)]
+        [DataMember(Name = "modifier_sets")]
         public List<AnyOf<ModifierSet,ModifierSetAbridged>> ModifierSets { get; set; } 
         /// <summary>
         /// An array of SensorGrids that are associated with the model.
         /// </summary>
         /// <value>An array of SensorGrids that are associated with the model.</value>
-        [DataMember(Name = "sensor_grids", EmitDefaultValue = false)]
+        [DataMember(Name = "sensor_grids")]
         public List<SensorGrid> SensorGrids { get; set; } 
         /// <summary>
         /// An array of Views that are associated with the model.
         /// </summary>
         /// <value>An array of Views that are associated with the model.</value>
-        [DataMember(Name = "views", EmitDefaultValue = false)]
+        [DataMember(Name = "views")]
         public List<View> Views { get; set; } 
 
         /// <summary>

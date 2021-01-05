@@ -32,12 +32,12 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets NumericType
         /// </summary>
-        [DataMember(Name="numeric_type", EmitDefaultValue=false)]
+        [DataMember(Name="numeric_type")]
         public ScheduleNumericType NumericType { get; set; } = ScheduleNumericType.Continuous;
         /// <summary>
         /// Gets or Sets UnitType
         /// </summary>
-        [DataMember(Name="unit_type", EmitDefaultValue=false)]
+        [DataMember(Name="unit_type")]
         public ScheduleUnitType UnitType { get; set; } = ScheduleUnitType.Dimensionless;
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleTypeLimit" /> class.
@@ -80,7 +80,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "ScheduleTypeLimit";
 
         /// <summary>
@@ -99,13 +99,13 @@ namespace HoneybeeSchema
         /// Lower limit for the schedule type or NoLimit.
         /// </summary>
         /// <value>Lower limit for the schedule type or NoLimit.</value>
-        [DataMember(Name = "lower_limit", EmitDefaultValue = false)]
+        [DataMember(Name = "lower_limit")]
         public AnyOf<NoLimit,double> LowerLimit { get; set; } 
         /// <summary>
         /// Upper limit for the schedule type or NoLimit.
         /// </summary>
         /// <value>Upper limit for the schedule type or NoLimit.</value>
-        [DataMember(Name = "upper_limit", EmitDefaultValue = false)]
+        [DataMember(Name = "upper_limit")]
         public AnyOf<NoLimit,double> UpperLimit { get; set; } 
 
         /// <summary>

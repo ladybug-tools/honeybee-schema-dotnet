@@ -65,26 +65,26 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "Mesh3D";
 
         /// <summary>
         /// A list of points representing the vertices of the mesh. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.
         /// </summary>
         /// <value>A list of points representing the vertices of the mesh. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.</value>
-        [DataMember(Name = "vertices", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "vertices", IsRequired = true)]
         public List<List<double>> Vertices { get; set; } 
         /// <summary>
         /// A list of lists with each sub-list having either 3 or 4 integers. These integers correspond to indices within the list of vertices.
         /// </summary>
         /// <value>A list of lists with each sub-list having either 3 or 4 integers. These integers correspond to indices within the list of vertices.</value>
-        [DataMember(Name = "faces", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "faces", IsRequired = true)]
         public List<List<int>> Faces { get; set; } 
         /// <summary>
         /// An optional list of colors that correspond to either the faces of the mesh or the vertices of the mesh.
         /// </summary>
         /// <value>An optional list of colors that correspond to either the faces of the mesh or the vertices of the mesh.</value>
-        [DataMember(Name = "colors", EmitDefaultValue = false)]
+        [DataMember(Name = "colors")]
         public List<Color> Colors { get; set; } 
 
         /// <summary>
