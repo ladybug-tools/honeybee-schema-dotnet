@@ -115,6 +115,17 @@ namespace HoneybeeSchema.Test
 
         }
 
+        [Test]
+        public void ElectricEquipmentWithDefaultTest()
+        {
+            // use 0 for watts per area as same as double type's default value
+            var elecEqp = new ElectricEquipmentAbridged("", 0, "");
+            var dup = elecEqp.DuplicateElectricEquipmentAbridged();
+            Assert.IsTrue(elecEqp.Equals(dup));
+
+
+        }
+
     }
 
 }
