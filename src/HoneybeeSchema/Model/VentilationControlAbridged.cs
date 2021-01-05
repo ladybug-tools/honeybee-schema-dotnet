@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
     [DataContract(Name = "VentilationControlAbridged")]
-    public partial class VentilationControlAbridged : IEquatable<VentilationControlAbridged>, IValidatableObject
+    public partial class VentilationControlAbridged : OpenAPIGenBaseModel, IEquatable<VentilationControlAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="VentilationControlAbridged" /> class.
@@ -159,6 +159,14 @@ namespace HoneybeeSchema
             return DuplicateVentilationControlAbridged();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateVentilationControlAbridged();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -180,37 +188,37 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.MinIndoorTemperature == input.MinIndoorTemperature ||
                     (this.MinIndoorTemperature != null &&
                     this.MinIndoorTemperature.Equals(input.MinIndoorTemperature))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.MaxIndoorTemperature == input.MaxIndoorTemperature ||
                     (this.MaxIndoorTemperature != null &&
                     this.MaxIndoorTemperature.Equals(input.MaxIndoorTemperature))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.MinOutdoorTemperature == input.MinOutdoorTemperature ||
                     (this.MinOutdoorTemperature != null &&
                     this.MinOutdoorTemperature.Equals(input.MinOutdoorTemperature))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.MaxOutdoorTemperature == input.MaxOutdoorTemperature ||
                     (this.MaxOutdoorTemperature != null &&
                     this.MaxOutdoorTemperature.Equals(input.MaxOutdoorTemperature))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DeltaTemperature == input.DeltaTemperature ||
                     (this.DeltaTemperature != null &&
                     this.DeltaTemperature.Equals(input.DeltaTemperature))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Schedule == input.Schedule ||
                     (this.Schedule != null &&
@@ -226,7 +234,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.MinIndoorTemperature != null)
@@ -252,6 +260,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

@@ -27,14 +27,14 @@ namespace HoneybeeSchema
     /// Used to describe the time period over which to run the simulation.
     /// </summary>
     [DataContract(Name = "RunPeriod")]
-    public partial class RunPeriod : IEquatable<RunPeriod>, IValidatableObject
+    public partial class RunPeriod : DatedBaseModel, IEquatable<RunPeriod>, IValidatableObject
     {
         /// <summary>
         /// Text for the day of the week on which the simulation starts.
         /// </summary>
         /// <value>Text for the day of the week on which the simulation starts.</value>
         [DataMember(Name="start_day_of_week")]
-        public DaysOfWeek StartDayOfWeek { get; set; }   
+        public DaysOfWeek StartDayOfWeek { get; set; } = DaysOfWeek.Sunday;
         /// <summary>
         /// Initializes a new instance of the <see cref="RunPeriod" /> class.
         /// </summary>
@@ -47,7 +47,7 @@ namespace HoneybeeSchema
         public RunPeriod
         (
            // Required parameters
-           List<int> startDate= default, List<int> endDate= default, DaysOfWeek startDayOfWeek= default, List<List<int>> holidays= default, DaylightSavingTime daylightSavingTime= default, bool leapYear = false// Optional parameters
+           List<int> startDate= default, List<int> endDate= default, DaysOfWeek startDayOfWeek= DaysOfWeek.Sunday, List<List<int>> holidays= default, DaylightSavingTime daylightSavingTime= default, bool leapYear = false// Optional parameters
         ) : base()// BaseClass
         {
             this.StartDate = startDate;
@@ -159,6 +159,14 @@ namespace HoneybeeSchema
             return DuplicateRunPeriod();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override DatedBaseModel DuplicateDatedBaseModel()
+        {
+            return DuplicateRunPeriod();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -180,40 +188,40 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.StartDate == input.StartDate ||
                     this.StartDate != null &&
                     input.StartDate != null &&
                     this.StartDate.SequenceEqual(input.StartDate)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.EndDate == input.EndDate ||
                     this.EndDate != null &&
                     input.EndDate != null &&
                     this.EndDate.SequenceEqual(input.EndDate)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.StartDayOfWeek == input.StartDayOfWeek ||
                     (this.StartDayOfWeek != null &&
                     this.StartDayOfWeek.Equals(input.StartDayOfWeek))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Holidays == input.Holidays ||
                     this.Holidays != null &&
                     input.Holidays != null &&
                     this.Holidays.SequenceEqual(input.Holidays)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DaylightSavingTime == input.DaylightSavingTime ||
                     (this.DaylightSavingTime != null &&
                     this.DaylightSavingTime.Equals(input.DaylightSavingTime))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.LeapYear == input.LeapYear ||
                     (this.LeapYear != null &&
@@ -229,7 +237,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.StartDate != null)
@@ -255,6 +263,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

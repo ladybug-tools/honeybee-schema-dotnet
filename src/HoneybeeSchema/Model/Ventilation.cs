@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [DataContract(Name = "Ventilation")]
-    public partial class Ventilation : IEquatable<Ventilation>, IValidatableObject
+    public partial class Ventilation : IDdEnergyBaseModel, IEquatable<Ventilation>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Ventilation" /> class.
@@ -42,22 +42,19 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Ventilation" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="flowPerPerson">Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room. (default to 0D).</param>
         /// <param name="flowPerArea">Intensity of ventilation in [m3/s per m2 of floor area]. (default to 0D).</param>
         /// <param name="airChangesPerHour">Intensity of ventilation in air changes per hour (ACH) for the entire Room. (default to 0D).</param>
         /// <param name="flowPerZone">Intensity of ventilation in m3/s for the entire Room. (default to 0D).</param>
         /// <param name="schedule">Schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile..</param>
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public Ventilation
         (
-             string identifier, // Required parameters
+            string identifier, // Required parameters
             string displayName= default, double flowPerPerson = 0D, double flowPerArea = 0D, double airChangesPerHour = 0D, double flowPerZone = 0D, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule= default// Optional parameters
-        )// BaseClass
+        ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for Ventilation and cannot be null");
-            this.DisplayName = displayName;
             this.FlowPerPerson = flowPerPerson;
             this.FlowPerArea = flowPerArea;
             this.AirChangesPerHour = airChangesPerHour;
@@ -75,18 +72,6 @@ namespace HoneybeeSchema
         [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "Ventilation";
 
-        /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
-        public string Identifier { get; set; } 
-        /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name = "display_name", EmitDefaultValue = false)]
-        public string DisplayName { get; set; } 
         /// <summary>
         /// Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room.
         /// </summary>
@@ -179,6 +164,14 @@ namespace HoneybeeSchema
             return DuplicateVentilation();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateVentilation();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -200,42 +193,32 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.FlowPerPerson == input.FlowPerPerson ||
                     (this.FlowPerPerson != null &&
                     this.FlowPerPerson.Equals(input.FlowPerPerson))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.FlowPerArea == input.FlowPerArea ||
                     (this.FlowPerArea != null &&
                     this.FlowPerArea.Equals(input.FlowPerArea))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.AirChangesPerHour == input.AirChangesPerHour ||
                     (this.AirChangesPerHour != null &&
                     this.AirChangesPerHour.Equals(input.AirChangesPerHour))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.FlowPerZone == input.FlowPerZone ||
                     (this.FlowPerZone != null &&
                     this.FlowPerZone.Equals(input.FlowPerZone))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Schedule == input.Schedule ||
                     (this.Schedule != null &&
@@ -251,13 +234,9 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.FlowPerPerson != null)
                     hashCode = hashCode * 59 + this.FlowPerPerson.GetHashCode();
                 if (this.FlowPerArea != null)
@@ -279,6 +258,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern
@@ -288,18 +268,6 @@ namespace HoneybeeSchema
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-            
 
             
             // FlowPerPerson (double) minimum

@@ -36,31 +36,31 @@ namespace HoneybeeSchema
         /// Enum Gasboilerreheat for value: PVAV with gas boiler reheat
         /// </summary>
         [EnumMember(Value = "PVAV with gas boiler reheat")]
-        PVAV with gas boiler reheat = 1,
+        Gasboilerreheat = 1,
 
         /// <summary>
         /// Enum Centralairsourceheatpumpreheat for value: PVAV with central air source heat pump reheat
         /// </summary>
         [EnumMember(Value = "PVAV with central air source heat pump reheat")]
-        PVAV with central air source heat pump reheat = 2,
+        Centralairsourceheatpumpreheat = 2,
 
         /// <summary>
         /// Enum Districthotwaterreheat for value: PVAV with district hot water reheat
         /// </summary>
         [EnumMember(Value = "PVAV with district hot water reheat")]
-        PVAV with district hot water reheat = 3,
+        Districthotwaterreheat = 3,
 
         /// <summary>
         /// Enum PFPboxes for value: PVAV with PFP boxes
         /// </summary>
         [EnumMember(Value = "PVAV with PFP boxes")]
-        PVAV with PFP boxes = 4,
+        PFPboxes = 4,
 
         /// <summary>
         /// Enum Gasheatwithelectricreheat for value: PVAV with gas heat with electric reheat
         /// </summary>
         [EnumMember(Value = "PVAV with gas heat with electric reheat")]
-        PVAV with gas heat with electric reheat = 5
+        Gasheatwithelectricreheat = 5
 
     }
 

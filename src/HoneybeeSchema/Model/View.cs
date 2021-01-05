@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// A single Radiance of sensors.
     /// </summary>
     [DataContract(Name = "View")]
-    public partial class View : IEquatable<View>, IValidatableObject
+    public partial class View : RadianceAsset, IEquatable<View>, IValidatableObject
     {
         /// <summary>
         /// Gets or Sets ViewType
@@ -47,10 +47,6 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="View" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
-        /// <param name="roomIdentifier">Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model..</param>
-        /// <param name="lightPath">Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [[\&quot;SouthWindow1\&quot;], [\&quot;static_apertures\&quot;, \&quot;NorthWindow2\&quot;]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation..</param>
         /// <param name="position">The view position (-vp) as an array of (x, y, z) values.This is the focal point of a perspective view or the center of a parallel projection. (required).</param>
         /// <param name="direction">The view direction (-vd) as an array of (x, y, z) values.The length of this vector indicates the focal distance as needed by the pixel depth of field (-pd) in rpict. (required).</param>
         /// <param name="upVector">The view up (-vu) vector as an array of (x, y, z) values. (required).</param>
@@ -61,23 +57,22 @@ namespace HoneybeeSchema
         /// <param name="lift">The view lift (-vl). This is the amount the actual image will be lifted up from the specified view. This option is useful for generating skewed perspectives or rendering an image a piece at a time. A value of 1 means that the rendered image starts just to the right of the normal view. A value of -1 would be to the left. Larger or fractional values are permitted as well..</param>
         /// <param name="foreClip">View fore clip (-vo) at a distance from the view point.The plane will be perpendicular to the view direction for perspective and parallel view types. For fisheye view types, the clipping plane is actually a clipping sphere, centered on the view point with fore_clip radius. Objects in front of this imaginary surface will not be visible..</param>
         /// <param name="aftClip">View aft clip (-va) at a distance from the view point.Like the view fore plane, it will be perpendicular to the view direction for perspective and parallel view types. For fisheye view types, the clipping plane is actually a clipping sphere, centered on the view point with radius val..</param>
+        /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="roomIdentifier">Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model..</param>
+        /// <param name="lightPath">Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [[\&quot;SouthWindow1\&quot;], [\&quot;static_apertures\&quot;, \&quot;NorthWindow2\&quot;]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation..</param>
         public View
         (
-             string identifier, List<double> position, List<double> direction, List<double> upVector, // Required parameters
-            string displayName= default, string roomIdentifier= default, List<List<string>> lightPath= default, ViewType viewType= ViewType.v, double hSize = 60D, double vSize = 60D, double shift= default, double lift= default, double foreClip= default, double aftClip= default// Optional parameters
-        )// BaseClass
+            string identifier, List<double> position, List<double> direction, List<double> upVector, // Required parameters
+            string displayName= default, string roomIdentifier= default, List<List<string>> lightPath= default, ViewType viewType= ViewType.V, double hSize = 60D, double vSize = 60D, double shift= default, double lift= default, double foreClip= default, double aftClip= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, roomIdentifier: roomIdentifier, lightPath: lightPath)// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for View and cannot be null");
             // to ensure "position" is required (not null)
             this.Position = position ?? throw new ArgumentNullException("position is a required property for View and cannot be null");
             // to ensure "direction" is required (not null)
             this.Direction = direction ?? throw new ArgumentNullException("direction is a required property for View and cannot be null");
             // to ensure "upVector" is required (not null)
             this.UpVector = upVector ?? throw new ArgumentNullException("upVector is a required property for View and cannot be null");
-            this.DisplayName = displayName;
-            this.RoomIdentifier = roomIdentifier;
-            this.LightPath = lightPath;
             this.ViewType = viewType;
             this.HSize = hSize;
             this.VSize = vSize;
@@ -97,30 +92,6 @@ namespace HoneybeeSchema
         [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "View";
 
-        /// <summary>
-        /// Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.
-        /// </summary>
-        /// <value>Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.</value>
-        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
-        public string Identifier { get; set; } 
-        /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name = "display_name", EmitDefaultValue = false)]
-        public string DisplayName { get; set; } 
-        /// <summary>
-        /// Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model.
-        /// </summary>
-        /// <value>Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model.</value>
-        [DataMember(Name = "room_identifier", EmitDefaultValue = false)]
-        public string RoomIdentifier { get; set; } 
-        /// <summary>
-        /// Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [[\&quot;SouthWindow1\&quot;], [\&quot;static_apertures\&quot;, \&quot;NorthWindow2\&quot;]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation.
-        /// </summary>
-        /// <value>Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [[\&quot;SouthWindow1\&quot;], [\&quot;static_apertures\&quot;, \&quot;NorthWindow2\&quot;]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation.</value>
-        [DataMember(Name = "light_path", EmitDefaultValue = false)]
-        public List<List<string>> LightPath { get; set; } 
         /// <summary>
         /// The view position (-vp) as an array of (x, y, z) values.This is the focal point of a perspective view or the center of a parallel projection.
         /// </summary>
@@ -244,6 +215,14 @@ namespace HoneybeeSchema
             return DuplicateView();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override RadianceAsset DuplicateRadianceAsset()
+        {
+            return DuplicateView();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -265,81 +244,60 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
-                (
-                    this.RoomIdentifier == input.RoomIdentifier ||
-                    (this.RoomIdentifier != null &&
-                    this.RoomIdentifier.Equals(input.RoomIdentifier))
-                ) && 
-                (
-                    this.LightPath == input.LightPath ||
-                    this.LightPath != null &&
-                    input.LightPath != null &&
-                    this.LightPath.SequenceEqual(input.LightPath)
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Position == input.Position ||
                     this.Position != null &&
                     input.Position != null &&
                     this.Position.SequenceEqual(input.Position)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Direction == input.Direction ||
                     this.Direction != null &&
                     input.Direction != null &&
                     this.Direction.SequenceEqual(input.Direction)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.UpVector == input.UpVector ||
                     this.UpVector != null &&
                     input.UpVector != null &&
                     this.UpVector.SequenceEqual(input.UpVector)
-                ) && 
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
                 (
                     this.ViewType == input.ViewType ||
                     (this.ViewType != null &&
                     this.ViewType.Equals(input.ViewType))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.HSize == input.HSize ||
                     (this.HSize != null &&
                     this.HSize.Equals(input.HSize))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.VSize == input.VSize ||
                     (this.VSize != null &&
                     this.VSize.Equals(input.VSize))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Shift == input.Shift ||
                     (this.Shift != null &&
                     this.Shift.Equals(input.Shift))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Lift == input.Lift ||
                     (this.Lift != null &&
                     this.Lift.Equals(input.Lift))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ForeClip == input.ForeClip ||
                     (this.ForeClip != null &&
                     this.ForeClip.Equals(input.ForeClip))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.AftClip == input.AftClip ||
                     (this.AftClip != null &&
@@ -355,23 +313,15 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
-                if (this.RoomIdentifier != null)
-                    hashCode = hashCode * 59 + this.RoomIdentifier.GetHashCode();
-                if (this.LightPath != null)
-                    hashCode = hashCode * 59 + this.LightPath.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Position != null)
                     hashCode = hashCode * 59 + this.Position.GetHashCode();
                 if (this.Direction != null)
                     hashCode = hashCode * 59 + this.Direction.GetHashCode();
                 if (this.UpVector != null)
                     hashCode = hashCode * 59 + this.UpVector.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.ViewType != null)
                     hashCode = hashCode * 59 + this.ViewType.GetHashCode();
                 if (this.HSize != null)
@@ -397,6 +347,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern
@@ -404,25 +355,6 @@ namespace HoneybeeSchema
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
-            }
-
-            // RoomIdentifier (string) maxLength
-            if(this.RoomIdentifier != null && this.RoomIdentifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RoomIdentifier, length must be less than 100.", new [] { "RoomIdentifier" });
-            }
-
-            // RoomIdentifier (string) minLength
-            if(this.RoomIdentifier != null && this.RoomIdentifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RoomIdentifier, length must be greater than 1.", new [] { "RoomIdentifier" });
-            }
-            
-            // RoomIdentifier (string) pattern
-            Regex regexRoomIdentifier = new Regex(@"[A-Za-z0-9_-]", RegexOptions.CultureInvariant);
-            if (false == regexRoomIdentifier.Match(this.RoomIdentifier).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RoomIdentifier, must match a pattern of " + regexRoomIdentifier, new [] { "RoomIdentifier" });
             }
 
             yield break;

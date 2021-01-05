@@ -27,23 +27,21 @@ namespace HoneybeeSchema
     /// Radiance Properties for Honeybee Door Abridged.
     /// </summary>
     [DataContract(Name = "DoorRadiancePropertiesAbridged")]
-    public partial class DoorRadiancePropertiesAbridged : IEquatable<DoorRadiancePropertiesAbridged>, IValidatableObject
+    public partial class DoorRadiancePropertiesAbridged : PropertiesBaseAbridged, IEquatable<DoorRadiancePropertiesAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DoorRadiancePropertiesAbridged" /> class.
         /// </summary>
-        /// <param name="modifier">A string for a Honeybee Radiance Modifier (default: None)..</param>
-        /// <param name="modifierBlk">A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None)..</param>
         /// <param name="dynamicGroupIdentifier">An optional string to note the dynamic group &#39;             &#39;to which the Door is a part of. Doors sharing the same &#39;             &#39;dynamic_group_identifier will have their states change in unison. &#39;             &#39;If None, the Door is assumed to be static. (default: None)..</param>
         /// <param name="states">An optional list of abridged states (default: None)..</param>
+        /// <param name="modifier">A string for a Honeybee Radiance Modifier (default: None)..</param>
+        /// <param name="modifierBlk">A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None)..</param>
         public DoorRadiancePropertiesAbridged
         (
            // Required parameters
             string modifier= default, string modifierBlk= default, string dynamicGroupIdentifier= default, List<RadianceSubFaceStateAbridged> states= default// Optional parameters
-        )// BaseClass
+        ) : base(modifier: modifier, modifierBlk: modifierBlk)// BaseClass
         {
-            this.Modifier = modifier;
-            this.ModifierBlk = modifierBlk;
             this.DynamicGroupIdentifier = dynamicGroupIdentifier;
             this.States = states;
 
@@ -58,18 +56,6 @@ namespace HoneybeeSchema
         [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "DoorRadiancePropertiesAbridged";
 
-        /// <summary>
-        /// A string for a Honeybee Radiance Modifier (default: None).
-        /// </summary>
-        /// <value>A string for a Honeybee Radiance Modifier (default: None).</value>
-        [DataMember(Name = "modifier", EmitDefaultValue = false)]
-        public string Modifier { get; set; } 
-        /// <summary>
-        /// A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).
-        /// </summary>
-        /// <value>A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).</value>
-        [DataMember(Name = "modifier_blk", EmitDefaultValue = false)]
-        public string ModifierBlk { get; set; } 
         /// <summary>
         /// An optional string to note the dynamic group &#39;             &#39;to which the Door is a part of. Doors sharing the same &#39;             &#39;dynamic_group_identifier will have their states change in unison. &#39;             &#39;If None, the Door is assumed to be static. (default: None).
         /// </summary>
@@ -141,6 +127,14 @@ namespace HoneybeeSchema
             return DuplicateDoorRadiancePropertiesAbridged();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override PropertiesBaseAbridged DuplicatePropertiesBaseAbridged()
+        {
+            return DuplicateDoorRadiancePropertiesAbridged();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -162,27 +156,17 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.Modifier == input.Modifier ||
-                    (this.Modifier != null &&
-                    this.Modifier.Equals(input.Modifier))
-                ) && 
-                (
-                    this.ModifierBlk == input.ModifierBlk ||
-                    (this.ModifierBlk != null &&
-                    this.ModifierBlk.Equals(input.ModifierBlk))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DynamicGroupIdentifier == input.DynamicGroupIdentifier ||
                     (this.DynamicGroupIdentifier != null &&
                     this.DynamicGroupIdentifier.Equals(input.DynamicGroupIdentifier))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.States == input.States ||
                     this.States != null &&
@@ -199,13 +183,9 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Modifier != null)
-                    hashCode = hashCode * 59 + this.Modifier.GetHashCode();
-                if (this.ModifierBlk != null)
-                    hashCode = hashCode * 59 + this.ModifierBlk.GetHashCode();
                 if (this.DynamicGroupIdentifier != null)
                     hashCode = hashCode * 59 + this.DynamicGroupIdentifier.GetHashCode();
                 if (this.States != null)
@@ -221,6 +201,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
     [DataContract(Name = "DoorEnergyPropertiesAbridged")]
-    public partial class DoorEnergyPropertiesAbridged : IEquatable<DoorEnergyPropertiesAbridged>, IValidatableObject
+    public partial class DoorEnergyPropertiesAbridged : OpenAPIGenBaseModel, IEquatable<DoorEnergyPropertiesAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DoorEnergyPropertiesAbridged" /> class.
@@ -123,6 +123,14 @@ namespace HoneybeeSchema
             return DuplicateDoorEnergyPropertiesAbridged();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateDoorEnergyPropertiesAbridged();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -144,17 +152,17 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Construction == input.Construction ||
                     (this.Construction != null &&
                     this.Construction.Equals(input.Construction))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.VentOpening == input.VentOpening ||
                     (this.VentOpening != null &&
@@ -170,7 +178,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Construction != null)
@@ -188,6 +196,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

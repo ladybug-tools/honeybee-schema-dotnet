@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Abridged Radiance Properties for Honeybee Room.
     /// </summary>
     [DataContract(Name = "RoomRadiancePropertiesAbridged")]
-    public partial class RoomRadiancePropertiesAbridged : IEquatable<RoomRadiancePropertiesAbridged>, IValidatableObject
+    public partial class RoomRadiancePropertiesAbridged : OpenAPIGenBaseModel, IEquatable<RoomRadiancePropertiesAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RoomRadiancePropertiesAbridged" /> class.
@@ -114,6 +114,14 @@ namespace HoneybeeSchema
             return DuplicateRoomRadiancePropertiesAbridged();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateRoomRadiancePropertiesAbridged();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -135,12 +143,12 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ModifierSet == input.ModifierSet ||
                     (this.ModifierSet != null &&
@@ -156,7 +164,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.ModifierSet != null)
@@ -172,6 +180,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

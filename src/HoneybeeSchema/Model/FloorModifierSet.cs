@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Set containing radiance modifiers needed for a model&#39;s Floors.
     /// </summary>
     [DataContract(Name = "FloorModifierSet")]
-    public partial class FloorModifierSet : IEquatable<FloorModifierSet>, IValidatableObject
+    public partial class FloorModifierSet : OpenAPIGenBaseModel, IEquatable<FloorModifierSet>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FloorModifierSet" /> class.
@@ -123,6 +123,14 @@ namespace HoneybeeSchema
             return DuplicateFloorModifierSet();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateFloorModifierSet();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -144,21 +152,21 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.ExteriorModifier == input.ExteriorModifier ||
                     (this.ExteriorModifier != null &&
                     this.ExteriorModifier.Equals(input.ExteriorModifier))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.InteriorModifier == input.InteriorModifier ||
                     (this.InteriorModifier != null &&
                     this.InteriorModifier.Equals(input.InteriorModifier))
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -170,13 +178,13 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.ExteriorModifier != null)
                     hashCode = hashCode * 59 + this.ExteriorModifier.GetHashCode();
                 if (this.InteriorModifier != null)
                     hashCode = hashCode * 59 + this.InteriorModifier.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -188,6 +196,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

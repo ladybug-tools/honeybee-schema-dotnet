@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Used to specify heating and cooling sizing criteria and safety factors.
     /// </summary>
     [DataContract(Name = "SizingParameter")]
-    public partial class SizingParameter : IEquatable<SizingParameter>, IValidatableObject
+    public partial class SizingParameter : OpenAPIGenBaseModel, IEquatable<SizingParameter>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SizingParameter" /> class.
@@ -132,6 +132,14 @@ namespace HoneybeeSchema
             return DuplicateSizingParameter();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateSizingParameter();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -153,23 +161,23 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.DesignDays == input.DesignDays ||
                     this.DesignDays != null &&
                     input.DesignDays != null &&
                     this.DesignDays.SequenceEqual(input.DesignDays)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.HeatingFactor == input.HeatingFactor ||
                     (this.HeatingFactor != null &&
                     this.HeatingFactor.Equals(input.HeatingFactor))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.CoolingFactor == input.CoolingFactor ||
                     (this.CoolingFactor != null &&
@@ -185,7 +193,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.DesignDays != null)
@@ -205,6 +213,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

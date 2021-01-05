@@ -36,37 +36,37 @@ namespace HoneybeeSchema
         /// Enum _9012013 for value: 90.1-2013
         /// </summary>
         [EnumMember(Value = "90.1-2013")]
-        90.1-2013 = 1,
+        _9012013 = 1,
 
         /// <summary>
         /// Enum _9012010 for value: 90.1-2010
         /// </summary>
         [EnumMember(Value = "90.1-2010")]
-        90.1-2010 = 2,
+        _9012010 = 2,
 
         /// <summary>
         /// Enum _9012007 for value: 90.1-2007
         /// </summary>
         [EnumMember(Value = "90.1-2007")]
-        90.1-2007 = 3,
+        _9012007 = 3,
 
         /// <summary>
         /// Enum _9012004 for value: 90.1-2004
         /// </summary>
         [EnumMember(Value = "90.1-2004")]
-        90.1-2004 = 4,
+        _9012004 = 4,
 
         /// <summary>
         /// Enum DOERef19802004 for value: DOE Ref 1980-2004
         /// </summary>
         [EnumMember(Value = "DOE Ref 1980-2004")]
-        DOE Ref 1980-2004 = 5,
+        DOERef19802004 = 5,
 
         /// <summary>
         /// Enum DOERefPre1980 for value: DOE Ref Pre-1980
         /// </summary>
         [EnumMember(Value = "DOE Ref Pre-1980")]
-        DOE Ref Pre-1980 = 6
+        DOERefPre1980 = 6
 
     }
 

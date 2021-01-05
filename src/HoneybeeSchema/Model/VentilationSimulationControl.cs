@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// The global parameters used in the ventilation simulation.
     /// </summary>
     [DataContract(Name = "VentilationSimulationControl")]
-    public partial class VentilationSimulationControl : IEquatable<VentilationSimulationControl>, IValidatableObject
+    public partial class VentilationSimulationControl : OpenAPIGenBaseModel, IEquatable<VentilationSimulationControl>, IValidatableObject
     {
         /// <summary>
         /// Text indicating type of ventilation control. Choices are: SingleZone, MultiZoneWithDistribution, MultiZoneWithoutDistribution. The MultiZone options will model air flow with the AirflowNetwork model, which is generally more accurate then the SingleZone option, but will take considerably longer to simulate, and requires defining more ventilation parameters to explicitly account for weather and building-induced pressure differences, and the leakage geometry corresponding to specific windows, doors, and surface cracks.
@@ -168,6 +168,14 @@ namespace HoneybeeSchema
             return DuplicateVentilationSimulationControl();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateVentilationSimulationControl();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -189,42 +197,42 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.VentControlType == input.VentControlType ||
                     (this.VentControlType != null &&
                     this.VentControlType.Equals(input.VentControlType))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ReferenceTemperature == input.ReferenceTemperature ||
                     (this.ReferenceTemperature != null &&
                     this.ReferenceTemperature.Equals(input.ReferenceTemperature))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ReferencePressure == input.ReferencePressure ||
                     (this.ReferencePressure != null &&
                     this.ReferencePressure.Equals(input.ReferencePressure))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ReferenceHumidityRatio == input.ReferenceHumidityRatio ||
                     (this.ReferenceHumidityRatio != null &&
                     this.ReferenceHumidityRatio.Equals(input.ReferenceHumidityRatio))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.BuildingType == input.BuildingType ||
                     (this.BuildingType != null &&
                     this.BuildingType.Equals(input.BuildingType))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.LongAxisAngle == input.LongAxisAngle ||
                     (this.LongAxisAngle != null &&
                     this.LongAxisAngle.Equals(input.LongAxisAngle))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.AspectRatio == input.AspectRatio ||
                     (this.AspectRatio != null &&
@@ -240,7 +248,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.VentControlType != null)
@@ -268,6 +276,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

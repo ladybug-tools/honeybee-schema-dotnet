@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Base class for Radiance Modifiers
     /// </summary>
     [DataContract(Name = "ModifierBase")]
-    public partial class ModifierBase : IEquatable<ModifierBase>, IValidatableObject
+    public partial class ModifierBase : IDdRadianceBaseModel, IEquatable<ModifierBase>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModifierBase" /> class.
@@ -46,13 +46,10 @@ namespace HoneybeeSchema
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public ModifierBase
         (
-             string identifier, // Required parameters
-            string displayName= default// Optional parameters
-        )// BaseClass
+            string identifier, // Required parameters
+            string displayName= default // Optional parameters
+        ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for ModifierBase and cannot be null");
-            this.DisplayName = displayName;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "ModifierBase";
@@ -122,6 +119,14 @@ namespace HoneybeeSchema
             return DuplicateModifierBase();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdRadianceBaseModel DuplicateIDdRadianceBaseModel()
+        {
+            return DuplicateModifierBase();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -143,21 +148,11 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
                 );
         }
 
@@ -169,13 +164,9 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 return hashCode;
             }
         }
@@ -187,6 +178,17 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            return this.BaseValidate(validationContext);
+        }
+
+        /// <summary>
+        /// To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
+        {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

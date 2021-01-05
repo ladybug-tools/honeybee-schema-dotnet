@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Used to specify wind conditions on a design day.
     /// </summary>
     [DataContract(Name = "WindCondition")]
-    public partial class WindCondition : IEquatable<WindCondition>, IValidatableObject
+    public partial class WindCondition : OpenAPIGenBaseModel, IEquatable<WindCondition>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="WindCondition" /> class.
@@ -133,6 +133,14 @@ namespace HoneybeeSchema
             return DuplicateWindCondition();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateWindCondition();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -154,17 +162,17 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.WindSpeed == input.WindSpeed ||
                     (this.WindSpeed != null &&
                     this.WindSpeed.Equals(input.WindSpeed))
-                ) && 
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
                 (
                     this.WindDirection == input.WindDirection ||
                     (this.WindDirection != null &&
@@ -180,11 +188,11 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.WindSpeed != null)
                     hashCode = hashCode * 59 + this.WindSpeed.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.WindDirection != null)
                     hashCode = hashCode * 59 + this.WindDirection.GetHashCode();
                 return hashCode;
@@ -198,15 +206,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-
-            
-            // Type (string) pattern
-            Regex regexType = new Regex(@"^WindCondition$", RegexOptions.CultureInvariant);
-            if (false == regexType.Match(this.Type).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // WindSpeed (double) maximum
@@ -219,6 +219,15 @@ namespace HoneybeeSchema
             if(this.WindSpeed < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for WindSpeed, must be a value greater than or equal to 0.", new [] { "WindSpeed" });
+            }
+
+
+            
+            // Type (string) pattern
+            Regex regexType = new Regex(@"^WindCondition$", RegexOptions.CultureInvariant);
+            if (false == regexType.Match(this.Type).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
 

@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// RadianceShadeStateAbridged represents a single state for a dynamic Shade.
     /// </summary>
     [DataContract(Name = "RadianceShadeStateAbridged")]
-    public partial class RadianceShadeStateAbridged : IEquatable<RadianceShadeStateAbridged>, IValidatableObject
+    public partial class RadianceShadeStateAbridged : OpenAPIGenBaseModel, IEquatable<RadianceShadeStateAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RadianceShadeStateAbridged" /> class.
@@ -132,6 +132,14 @@ namespace HoneybeeSchema
             return DuplicateRadianceShadeStateAbridged();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateRadianceShadeStateAbridged();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -153,22 +161,22 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Modifier == input.Modifier ||
                     (this.Modifier != null &&
                     this.Modifier.Equals(input.Modifier))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ModifierDirect == input.ModifierDirect ||
                     (this.ModifierDirect != null &&
                     this.ModifierDirect.Equals(input.ModifierDirect))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Shades == input.Shades ||
                     this.Shades != null &&
@@ -185,7 +193,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Modifier != null)
@@ -205,6 +213,17 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            return this.BaseValidate(validationContext);
+        }
+
+        /// <summary>
+        /// To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
+        {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

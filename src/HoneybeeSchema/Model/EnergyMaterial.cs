@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Opaque material representing a layer within an opaque construction.
     /// </summary>
     [DataContract(Name = "EnergyMaterial")]
-    public partial class EnergyMaterial : IEquatable<EnergyMaterial>, IValidatableObject
+    public partial class EnergyMaterial : IDdEnergyBaseModel, IEquatable<EnergyMaterial>, IValidatableObject
     {
         /// <summary>
         /// Gets or Sets Roughness
@@ -47,8 +47,6 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyMaterial" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="thickness">Thickness of the material layer in meters. (required).</param>
         /// <param name="conductivity">Thermal conductivity of the material layer in W/(m-K). (required).</param>
         /// <param name="density">Density of the material layer in kg/m3. (required).</param>
@@ -57,19 +55,18 @@ namespace HoneybeeSchema
         /// <param name="thermalAbsorptance">Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9. (default to 0.9D).</param>
         /// <param name="solarAbsorptance">Fraction of incident solar radiation absorbed by the material. Default value is 0.7. (default to 0.7D).</param>
         /// <param name="visibleAbsorptance">Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7. (default to 0.7D).</param>
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public EnergyMaterial
         (
-             string identifier, double thickness, double conductivity, double density, double specificHeat, // Required parameters
+            string identifier, double thickness, double conductivity, double density, double specificHeat, // Required parameters
             string displayName= default, Roughness roughness= Roughness.MediumRough, double thermalAbsorptance = 0.9D, double solarAbsorptance = 0.7D, double visibleAbsorptance = 0.7D// Optional parameters
-        )// BaseClass
+        ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for EnergyMaterial and cannot be null");
             this.Thickness = thickness;
             this.Conductivity = conductivity;
             this.Density = density;
             this.SpecificHeat = specificHeat;
-            this.DisplayName = displayName;
             this.Roughness = roughness;
             this.ThermalAbsorptance = thermalAbsorptance;
             this.SolarAbsorptance = solarAbsorptance;
@@ -86,18 +83,6 @@ namespace HoneybeeSchema
         [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "EnergyMaterial";
 
-        /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
-        /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
-        public string Identifier { get; set; } 
-        /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name = "display_name", EmitDefaultValue = false)]
-        public string DisplayName { get; set; } 
         /// <summary>
         /// Thickness of the material layer in meters.
         /// </summary>
@@ -205,6 +190,14 @@ namespace HoneybeeSchema
             return DuplicateEnergyMaterial();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        {
+            return DuplicateEnergyMaterial();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -226,57 +219,47 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Thickness == input.Thickness ||
                     (this.Thickness != null &&
                     this.Thickness.Equals(input.Thickness))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Conductivity == input.Conductivity ||
                     (this.Conductivity != null &&
                     this.Conductivity.Equals(input.Conductivity))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Density == input.Density ||
                     (this.Density != null &&
                     this.Density.Equals(input.Density))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SpecificHeat == input.SpecificHeat ||
                     (this.SpecificHeat != null &&
                     this.SpecificHeat.Equals(input.SpecificHeat))
-                ) && 
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
                 (
                     this.Roughness == input.Roughness ||
                     (this.Roughness != null &&
                     this.Roughness.Equals(input.Roughness))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ThermalAbsorptance == input.ThermalAbsorptance ||
                     (this.ThermalAbsorptance != null &&
                     this.ThermalAbsorptance.Equals(input.ThermalAbsorptance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.SolarAbsorptance == input.SolarAbsorptance ||
                     (this.SolarAbsorptance != null &&
                     this.SolarAbsorptance.Equals(input.SolarAbsorptance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.VisibleAbsorptance == input.VisibleAbsorptance ||
                     (this.VisibleAbsorptance != null &&
@@ -292,13 +275,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Thickness != null)
                     hashCode = hashCode * 59 + this.Thickness.GetHashCode();
                 if (this.Conductivity != null)
@@ -307,6 +284,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.Density.GetHashCode();
                 if (this.SpecificHeat != null)
                     hashCode = hashCode * 59 + this.SpecificHeat.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Roughness != null)
                     hashCode = hashCode * 59 + this.Roughness.GetHashCode();
                 if (this.ThermalAbsorptance != null)
@@ -326,27 +305,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-
-            
-            // Type (string) pattern
-            Regex regexType = new Regex(@"^EnergyMaterial$", RegexOptions.CultureInvariant);
-            if (false == regexType.Match(this.Type).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
-            }
-
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-            
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Thickness (double) maximum
@@ -361,6 +320,15 @@ namespace HoneybeeSchema
             if(this.SpecificHeat < (double)100)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SpecificHeat, must be a value greater than or equal to 100.", new [] { "SpecificHeat" });
+            }
+
+
+            
+            // Type (string) pattern
+            Regex regexType = new Regex(@"^EnergyMaterial$", RegexOptions.CultureInvariant);
+            if (false == regexType.Match(this.Type).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
 

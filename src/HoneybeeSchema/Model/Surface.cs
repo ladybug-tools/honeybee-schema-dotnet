@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
     [DataContract(Name = "Surface")]
-    public partial class Surface : IEquatable<Surface>, IValidatableObject
+    public partial class Surface : OpenAPIGenBaseModel, IEquatable<Surface>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Surface" /> class.
@@ -125,6 +125,14 @@ namespace HoneybeeSchema
             return DuplicateSurface();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return DuplicateSurface();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -146,17 +154,17 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.BoundaryConditionObjects == input.BoundaryConditionObjects ||
                     this.BoundaryConditionObjects != null &&
                     input.BoundaryConditionObjects != null &&
                     this.BoundaryConditionObjects.SequenceEqual(input.BoundaryConditionObjects)
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -168,11 +176,11 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.BoundaryConditionObjects != null)
                     hashCode = hashCode * 59 + this.BoundaryConditionObjects.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -184,6 +192,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern

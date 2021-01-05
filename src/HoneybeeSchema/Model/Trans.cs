@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Radiance Translucent material.
     /// </summary>
     [DataContract(Name = "Trans")]
-    public partial class Trans : IEquatable<Trans>, IValidatableObject
+    public partial class Trans : ModifierBase, IEquatable<Trans>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Trans" /> class.
@@ -42,8 +42,6 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Trans" /> class.
         /// </summary>
-        /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="modifier">Material modifier (default: Void)..</param>
         /// <param name="dependencies">List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None)..</param>
         /// <param name="rReflectance">A value between 0 and 1 for the red channel reflectance (default: 0). (default to 0.0D).</param>
@@ -53,15 +51,14 @@ namespace HoneybeeSchema
         /// <param name="roughness">A value between 0 and 1 for the roughness, specified as the rms slope of surface facets. Roughness greater than 0.2 are not realistic (default: 0). (default to 0D).</param>
         /// <param name="transmittedDiff">The fraction of transmitted light that is transmitted diffusely in a scattering fashion (default: 0). (default to 0D).</param>
         /// <param name="transmittedSpec">The fraction of transmitted light that is not diffusely scattered (default: 0). (default to 0D).</param>
+        /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public Trans
         (
-             string identifier, // Required parameters
-            string displayName= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> dependencies= default, double rReflectance = 0.0D, double gReflectance = 0.0D, double bReflectance = 0.0D, double specularity = 0D, double roughness = 0D, double transmittedDiff = 0D, double transmittedSpec = 0D// Optional parameters
-        )// BaseClass
+            string identifier, // Required parameters
+            string displayName= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> dependencies= default, double rReflectance = 0.0D, double gReflectance = 0.0D, double bReflectance = 0.0D, double specularity = 0D, double roughness = 0D, double transmittedDiff = 0D, double transmittedSpec = 0D // Optional parameters
+        ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for Trans and cannot be null");
-            this.DisplayName = displayName;
             this.Modifier = modifier;
             this.Dependencies = dependencies;
             this.RReflectance = rReflectance;
@@ -83,18 +80,6 @@ namespace HoneybeeSchema
         [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "trans";
 
-        /// <summary>
-        /// Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.
-        /// </summary>
-        /// <value>Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.</value>
-        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
-        public string Identifier { get; set; } 
-        /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name = "display_name", EmitDefaultValue = false)]
-        public string DisplayName { get; set; } 
         /// <summary>
         /// Material modifier (default: Void).
         /// </summary>
@@ -215,6 +200,14 @@ namespace HoneybeeSchema
             return DuplicateTrans();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override ModifierBase DuplicateModifierBase()
+        {
+            return DuplicateTrans();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -236,67 +229,57 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
-                ) && 
+            return base.Equals(input) && 
                 (
                     this.Modifier == input.Modifier ||
                     (this.Modifier != null &&
                     this.Modifier.Equals(input.Modifier))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Dependencies == input.Dependencies ||
                     this.Dependencies != null &&
                     input.Dependencies != null &&
                     this.Dependencies.SequenceEqual(input.Dependencies)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.RReflectance == input.RReflectance ||
                     (this.RReflectance != null &&
                     this.RReflectance.Equals(input.RReflectance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.GReflectance == input.GReflectance ||
                     (this.GReflectance != null &&
                     this.GReflectance.Equals(input.GReflectance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.BReflectance == input.BReflectance ||
                     (this.BReflectance != null &&
                     this.BReflectance.Equals(input.BReflectance))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Specularity == input.Specularity ||
                     (this.Specularity != null &&
                     this.Specularity.Equals(input.Specularity))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Roughness == input.Roughness ||
                     (this.Roughness != null &&
                     this.Roughness.Equals(input.Roughness))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.TransmittedDiff == input.TransmittedDiff ||
                     (this.TransmittedDiff != null &&
                     this.TransmittedDiff.Equals(input.TransmittedDiff))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.TransmittedSpec == input.TransmittedSpec ||
                     (this.TransmittedSpec != null &&
                     this.TransmittedSpec.Equals(input.TransmittedSpec))
+                ) && base.Equals(input) && 
+                (
+                    this.Type == input.Type ||
+                    (this.Type != null &&
+                    this.Type.Equals(input.Type))
                 );
         }
 
@@ -308,13 +291,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
+                int hashCode = base.GetHashCode();
                 if (this.Modifier != null)
                     hashCode = hashCode * 59 + this.Modifier.GetHashCode();
                 if (this.Dependencies != null)
@@ -333,6 +310,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.TransmittedDiff.GetHashCode();
                 if (this.TransmittedSpec != null)
                     hashCode = hashCode * 59 + this.TransmittedSpec.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -344,15 +323,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-
-            
-            // Type (string) pattern
-            Regex regexType = new Regex(@"^trans$", RegexOptions.CultureInvariant);
-            if (false == regexType.Match(this.Type).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
-            }
-
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // RReflectance (double) maximum
@@ -449,6 +420,15 @@ namespace HoneybeeSchema
             if(this.TransmittedSpec < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TransmittedSpec, must be a value greater than or equal to 0.", new [] { "TransmittedSpec" });
+            }
+
+
+            
+            // Type (string) pattern
+            Regex regexType = new Regex(@"^trans$", RegexOptions.CultureInvariant);
+            if (false == regexType.Match(this.Type).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
             yield break;

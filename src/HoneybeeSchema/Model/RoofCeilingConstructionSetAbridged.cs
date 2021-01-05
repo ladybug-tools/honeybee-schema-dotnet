@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// A set of constructions for roof and ceiling assemblies.
     /// </summary>
     [DataContract(Name = "RoofCeilingConstructionSetAbridged")]
-    public partial class RoofCeilingConstructionSetAbridged : IEquatable<RoofCeilingConstructionSetAbridged>, IValidatableObject
+    public partial class RoofCeilingConstructionSetAbridged : FaceSubSetAbridged, IEquatable<RoofCeilingConstructionSetAbridged>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RoofCeilingConstructionSetAbridged" /> class.
@@ -41,9 +41,6 @@ namespace HoneybeeSchema
             string interiorConstruction= default, string exteriorConstruction= default, string groundConstruction= default // Optional parameters
         ) : base(interiorConstruction: interiorConstruction, exteriorConstruction: exteriorConstruction, groundConstruction: groundConstruction)// BaseClass
         {
-            this.InteriorConstruction = interiorConstruction;
-            this.ExteriorConstruction = exteriorConstruction;
-            this.GroundConstruction = groundConstruction;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "RoofCeilingConstructionSetAbridged";
@@ -114,6 +111,14 @@ namespace HoneybeeSchema
             return DuplicateRoofCeilingConstructionSetAbridged();
         }
 
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override FaceSubSetAbridged DuplicateFaceSubSetAbridged()
+        {
+            return DuplicateRoofCeilingConstructionSetAbridged();
+        }
      
         /// <summary>
         /// Returns true if objects are equal
@@ -135,26 +140,11 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
+            return base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && 
-                (
-                    this.InteriorConstruction == input.InteriorConstruction ||
-                    (this.InteriorConstruction != null &&
-                    this.InteriorConstruction.Equals(input.InteriorConstruction))
-                ) && 
-                (
-                    this.ExteriorConstruction == input.ExteriorConstruction ||
-                    (this.ExteriorConstruction != null &&
-                    this.ExteriorConstruction.Equals(input.ExteriorConstruction))
-                ) && 
-                (
-                    this.GroundConstruction == input.GroundConstruction ||
-                    (this.GroundConstruction != null &&
-                    this.GroundConstruction.Equals(input.GroundConstruction))
                 );
         }
 
@@ -166,15 +156,9 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.InteriorConstruction != null)
-                    hashCode = hashCode * 59 + this.InteriorConstruction.GetHashCode();
-                if (this.ExteriorConstruction != null)
-                    hashCode = hashCode * 59 + this.ExteriorConstruction.GetHashCode();
-                if (this.GroundConstruction != null)
-                    hashCode = hashCode * 59 + this.GroundConstruction.GetHashCode();
                 return hashCode;
             }
         }
@@ -186,6 +170,7 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
             
             // Type (string) pattern
@@ -195,42 +180,6 @@ namespace HoneybeeSchema
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
-            // InteriorConstruction (string) maxLength
-            if(this.InteriorConstruction != null && this.InteriorConstruction.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InteriorConstruction, length must be less than 100.", new [] { "InteriorConstruction" });
-            }
-
-            // InteriorConstruction (string) minLength
-            if(this.InteriorConstruction != null && this.InteriorConstruction.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for InteriorConstruction, length must be greater than 1.", new [] { "InteriorConstruction" });
-            }
-            
-            // ExteriorConstruction (string) maxLength
-            if(this.ExteriorConstruction != null && this.ExteriorConstruction.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ExteriorConstruction, length must be less than 100.", new [] { "ExteriorConstruction" });
-            }
-
-            // ExteriorConstruction (string) minLength
-            if(this.ExteriorConstruction != null && this.ExteriorConstruction.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ExteriorConstruction, length must be greater than 1.", new [] { "ExteriorConstruction" });
-            }
-            
-            // GroundConstruction (string) maxLength
-            if(this.GroundConstruction != null && this.GroundConstruction.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for GroundConstruction, length must be less than 100.", new [] { "GroundConstruction" });
-            }
-
-            // GroundConstruction (string) minLength
-            if(this.GroundConstruction != null && this.GroundConstruction.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for GroundConstruction, length must be greater than 1.", new [] { "GroundConstruction" });
-            }
-            
             yield break;
         }
     }
