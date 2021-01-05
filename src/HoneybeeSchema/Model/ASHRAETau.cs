@@ -66,7 +66,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "ASHRAETau";
 
         /// <summary>
@@ -85,13 +85,13 @@ namespace HoneybeeSchema
         /// Value for the beam optical depth. Typically found in .stat files.
         /// </summary>
         /// <value>Value for the beam optical depth. Typically found in .stat files.</value>
-        [DataMember(Name = "tau_b", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "tau_b", IsRequired = true)]
         public double TauB { get; set; } 
         /// <summary>
         /// Value for the diffuse optical depth. Typically found in .stat files.
         /// </summary>
         /// <value>Value for the diffuse optical depth. Typically found in .stat files.</value>
-        [DataMember(Name = "tau_d", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "tau_d", IsRequired = true)]
         public double TauD { get; set; } 
 
         /// <summary>

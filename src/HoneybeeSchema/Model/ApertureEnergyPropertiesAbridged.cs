@@ -51,20 +51,20 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "ApertureEnergyPropertiesAbridged";
 
         /// <summary>
         /// Identifier of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.
         /// </summary>
         /// <value>Identifier of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.</value>
-        [DataMember(Name = "construction", EmitDefaultValue = false)]
+        [DataMember(Name = "construction")]
         public string Construction { get; set; } 
         /// <summary>
         /// An optional VentilationOpening to specify the operable portion of the Aperture.
         /// </summary>
         /// <value>An optional VentilationOpening to specify the operable portion of the Aperture.</value>
-        [DataMember(Name = "vent_opening", EmitDefaultValue = false)]
+        [DataMember(Name = "vent_opening")]
         public VentilationOpening VentOpening { get; set; } 
 
         /// <summary>

@@ -71,7 +71,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "SensorGrid";
 
         /// <summary>
@@ -102,13 +102,13 @@ namespace HoneybeeSchema
         /// A list of sensors that belong to the grid.
         /// </summary>
         /// <value>A list of sensors that belong to the grid.</value>
-        [DataMember(Name = "sensors", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "sensors", IsRequired = true)]
         public List<Sensor> Sensors { get; set; } 
         /// <summary>
         /// An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D.
         /// </summary>
         /// <value>An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D.</value>
-        [DataMember(Name = "mesh", EmitDefaultValue = false)]
+        [DataMember(Name = "mesh")]
         public Mesh3D Mesh { get; set; } 
 
         /// <summary>

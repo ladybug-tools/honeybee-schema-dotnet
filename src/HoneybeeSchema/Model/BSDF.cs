@@ -84,7 +84,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "BSDF";
 
         /// <summary>
@@ -103,61 +103,61 @@ namespace HoneybeeSchema
         /// A string with the contents of the BSDF XML file.
         /// </summary>
         /// <value>A string with the contents of the BSDF XML file.</value>
-        [DataMember(Name = "bsdf_data", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "bsdf_data", IsRequired = true)]
         public string BsdfData { get; set; } 
         /// <summary>
         /// Material modifier (default: Void).
         /// </summary>
         /// <value>Material modifier (default: Void).</value>
-        [DataMember(Name = "modifier", EmitDefaultValue = false)]
+        [DataMember(Name = "modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> Modifier { get; set; } 
         /// <summary>
         /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).
         /// </summary>
         /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).</value>
-        [DataMember(Name = "dependencies", EmitDefaultValue = false)]
+        [DataMember(Name = "dependencies")]
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Dependencies { get; set; } 
         /// <summary>
         /// Vector as sequence that sets the hemisphere that the BSDF material faces. (default: (0.01, 0.01, 1.00).
         /// </summary>
         /// <value>Vector as sequence that sets the hemisphere that the BSDF material faces. (default: (0.01, 0.01, 1.00).</value>
-        [DataMember(Name = "up_orientation", EmitDefaultValue = false)]
+        [DataMember(Name = "up_orientation")]
         public List<double> UpOrientation { get; set; } 
         /// <summary>
         /// Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative)(default: 0).
         /// </summary>
         /// <value>Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative)(default: 0).</value>
-        [DataMember(Name = "thickness", EmitDefaultValue = true)]
+        [DataMember(Name = "thickness")]
         public double Thickness { get; set; }  = 0D;
         /// <summary>
         /// Optional input for function file (default: \&quot;.\&quot;).
         /// </summary>
         /// <value>Optional input for function file (default: \&quot;.\&quot;).</value>
-        [DataMember(Name = "function_file", EmitDefaultValue = true)]
+        [DataMember(Name = "function_file")]
         public string FunctionFile { get; set; }  = ".";
         /// <summary>
         /// Optional transform input to scale the thickness and reorient the up vector (default: None).
         /// </summary>
         /// <value>Optional transform input to scale the thickness and reorient the up vector (default: None).</value>
-        [DataMember(Name = "transform", EmitDefaultValue = false)]
+        [DataMember(Name = "transform")]
         public string Transform { get; set; } 
         /// <summary>
         /// Optional additional front diffuse reflectance as sequence of numbers (default: None).
         /// </summary>
         /// <value>Optional additional front diffuse reflectance as sequence of numbers (default: None).</value>
-        [DataMember(Name = "front_diffuse_reflectance", EmitDefaultValue = false)]
+        [DataMember(Name = "front_diffuse_reflectance")]
         public List<double> FrontDiffuseReflectance { get; set; } 
         /// <summary>
         /// Optional additional back diffuse reflectance as sequence of numbers (default: None).
         /// </summary>
         /// <value>Optional additional back diffuse reflectance as sequence of numbers (default: None).</value>
-        [DataMember(Name = "back_diffuse_reflectance", EmitDefaultValue = false)]
+        [DataMember(Name = "back_diffuse_reflectance")]
         public List<double> BackDiffuseReflectance { get; set; } 
         /// <summary>
         /// Optional additional diffuse transmittance as sequence of numbers (default: None).
         /// </summary>
         /// <value>Optional additional diffuse transmittance as sequence of numbers (default: None).</value>
-        [DataMember(Name = "diffuse_transmittance", EmitDefaultValue = false)]
+        [DataMember(Name = "diffuse_transmittance")]
         public List<double> DiffuseTransmittance { get; set; } 
 
         /// <summary>

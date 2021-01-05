@@ -62,20 +62,20 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "IDdRadianceBaseModel";
 
         /// <summary>
         /// Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.
         /// </summary>
         /// <value>Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.</value>
-        [DataMember(Name = "identifier", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "identifier", IsRequired = true)]
         public string Identifier { get; set; } 
         /// <summary>
         /// Display name of the object with no character restrictions.
         /// </summary>
         /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name = "display_name", EmitDefaultValue = false)]
+        [DataMember(Name = "display_name")]
         public string DisplayName { get; set; } 
 
         /// <summary>

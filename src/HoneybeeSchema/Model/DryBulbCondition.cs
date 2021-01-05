@@ -61,20 +61,20 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "DryBulbCondition";
 
         /// <summary>
         /// The maximum dry bulb temperature on the design day [C].
         /// </summary>
         /// <value>The maximum dry bulb temperature on the design day [C].</value>
-        [DataMember(Name = "dry_bulb_max", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "dry_bulb_max", IsRequired = true)]
         public double DryBulbMax { get; set; } 
         /// <summary>
         /// The difference between min and max temperatures on the design day [C].
         /// </summary>
         /// <value>The difference between min and max temperatures on the design day [C].</value>
-        [DataMember(Name = "dry_bulb_range", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "dry_bulb_range", IsRequired = true)]
         public double DryBulbRange { get; set; } 
 
         /// <summary>

@@ -64,7 +64,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "ASHRAEClearSky";
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace HoneybeeSchema
         /// Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.
         /// </summary>
         /// <value>Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.</value>
-        [DataMember(Name = "clearness", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "clearness", IsRequired = true)]
         public double Clearness { get; set; } 
 
         /// <summary>

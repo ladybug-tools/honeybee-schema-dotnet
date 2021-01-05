@@ -32,7 +32,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets GasType
         /// </summary>
-        [DataMember(Name="gas_type", EmitDefaultValue=false)]
+        [DataMember(Name="gas_type")]
         public GasType GasType { get; set; } = GasType.Air;
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialGas" /> class.
@@ -71,7 +71,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "EnergyWindowMaterialGas";
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace HoneybeeSchema
         /// Thickness of the gas layer in meters. Default value is 0.0125.
         /// </summary>
         /// <value>Thickness of the gas layer in meters. Default value is 0.0125.</value>
-        [DataMember(Name = "thickness", EmitDefaultValue = true)]
+        [DataMember(Name = "thickness")]
         public double Thickness { get; set; }  = 0.0125D;
 
         /// <summary>

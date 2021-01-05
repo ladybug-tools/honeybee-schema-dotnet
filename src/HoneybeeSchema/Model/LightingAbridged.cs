@@ -75,7 +75,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "LightingAbridged";
 
         /// <summary>
@@ -94,37 +94,37 @@ namespace HoneybeeSchema
         /// Lighting per floor area as [W/m2].
         /// </summary>
         /// <value>Lighting per floor area as [W/m2].</value>
-        [DataMember(Name = "watts_per_area", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "watts_per_area", IsRequired = true)]
         public double WattsPerArea { get; set; } 
         /// <summary>
         /// Identifier of the schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile.
         /// </summary>
         /// <value>Identifier of the schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile.</value>
-        [DataMember(Name = "schedule", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "schedule", IsRequired = true)]
         public string Schedule { get; set; } 
         /// <summary>
         /// The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. The default value is &#x60;0.25&#x60;.
         /// </summary>
         /// <value>The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. The default value is &#x60;0.25&#x60;.</value>
-        [DataMember(Name = "visible_fraction", EmitDefaultValue = true)]
+        [DataMember(Name = "visible_fraction")]
         public double VisibleFraction { get; set; }  = 0.25D;
         /// <summary>
         /// The fraction of heat from lights that is long-wave radiation. Default value is &#x60;0.32&#x60;.
         /// </summary>
         /// <value>The fraction of heat from lights that is long-wave radiation. Default value is &#x60;0.32&#x60;.</value>
-        [DataMember(Name = "radiant_fraction", EmitDefaultValue = true)]
+        [DataMember(Name = "radiant_fraction")]
         public double RadiantFraction { get; set; }  = 0.32D;
         /// <summary>
         /// The fraction of the heat from lights that goes into the zone return air. Default value is &#x60;0&#x60;.
         /// </summary>
         /// <value>The fraction of the heat from lights that goes into the zone return air. Default value is &#x60;0&#x60;.</value>
-        [DataMember(Name = "return_air_fraction", EmitDefaultValue = true)]
+        [DataMember(Name = "return_air_fraction")]
         public double ReturnAirFraction { get; set; }  = 0.0D;
         /// <summary>
         /// The baseline lighting power density in [W/m2] of floor area. This baseline is useful to track how much better the installed lights are in comparison to a standard like ASHRAE 90.1. If set to None, it will default to 11.84029 W/m2, which is that ASHRAE 90.1-2004 baseline for an office.
         /// </summary>
         /// <value>The baseline lighting power density in [W/m2] of floor area. This baseline is useful to track how much better the installed lights are in comparison to a standard like ASHRAE 90.1. If set to None, it will default to 11.84029 W/m2, which is that ASHRAE 90.1-2004 baseline for an office.</value>
-        [DataMember(Name = "baseline_watts_per_area", EmitDefaultValue = true)]
+        [DataMember(Name = "baseline_watts_per_area")]
         public double BaselineWattsPerArea { get; set; }  = 11.84029D;
 
         /// <summary>

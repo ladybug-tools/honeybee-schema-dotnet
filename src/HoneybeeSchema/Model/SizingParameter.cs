@@ -53,26 +53,26 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "SizingParameter";
 
         /// <summary>
         /// A list of DesignDays that represent the criteria for which the HVAC systems will be sized.
         /// </summary>
         /// <value>A list of DesignDays that represent the criteria for which the HVAC systems will be sized.</value>
-        [DataMember(Name = "design_days", EmitDefaultValue = false)]
+        [DataMember(Name = "design_days")]
         public List<DesignDay> DesignDays { get; set; } 
         /// <summary>
         /// A number that will be multiplied by the peak heating load for each zone in order to size the heating system.
         /// </summary>
         /// <value>A number that will be multiplied by the peak heating load for each zone in order to size the heating system.</value>
-        [DataMember(Name = "heating_factor", EmitDefaultValue = true)]
+        [DataMember(Name = "heating_factor")]
         public double HeatingFactor { get; set; }  = 1.25D;
         /// <summary>
         /// A number that will be multiplied by the peak cooling load for each zone in order to size the heating system.
         /// </summary>
         /// <value>A number that will be multiplied by the peak cooling load for each zone in order to size the heating system.</value>
-        [DataMember(Name = "cooling_factor", EmitDefaultValue = true)]
+        [DataMember(Name = "cooling_factor")]
         public double CoolingFactor { get; set; }  = 1.15D;
 
         /// <summary>

@@ -64,26 +64,26 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "Face3D";
 
         /// <summary>
         /// A list of points representing the outer boundary vertices of the face. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.
         /// </summary>
         /// <value>A list of points representing the outer boundary vertices of the face. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.</value>
-        [DataMember(Name = "boundary", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "boundary", IsRequired = true)]
         public List<List<double>> Boundary { get; set; } 
         /// <summary>
         /// Optional list of lists with one list for each hole in the face.Each hole should be a list of at least 3 points and each point a list of 3 (x, y, z) values. If None, it will be assumed that there are no holes in the face.
         /// </summary>
         /// <value>Optional list of lists with one list for each hole in the face.Each hole should be a list of at least 3 points and each point a list of 3 (x, y, z) values. If None, it will be assumed that there are no holes in the face.</value>
-        [DataMember(Name = "holes", EmitDefaultValue = false)]
+        [DataMember(Name = "holes")]
         public List<List<List<double>>> Holes { get; set; } 
         /// <summary>
         /// Optional Plane indicating the plane in which the face exists.If None, the plane will usually be derived from the boundary points.
         /// </summary>
         /// <value>Optional Plane indicating the plane in which the face exists.If None, the plane will usually be derived from the boundary points.</value>
-        [DataMember(Name = "plane", EmitDefaultValue = false)]
+        [DataMember(Name = "plane")]
         public Plane Plane { get; set; } 
 
         /// <summary>

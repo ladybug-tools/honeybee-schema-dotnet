@@ -66,7 +66,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "_RadianceAsset";
 
         /// <summary>
@@ -85,13 +85,13 @@ namespace HoneybeeSchema
         /// Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model.
         /// </summary>
         /// <value>Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model.</value>
-        [DataMember(Name = "room_identifier", EmitDefaultValue = false)]
+        [DataMember(Name = "room_identifier")]
         public string RoomIdentifier { get; set; } 
         /// <summary>
         /// Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [[\&quot;SouthWindow1\&quot;], [\&quot;static_apertures\&quot;, \&quot;NorthWindow2\&quot;]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation.
         /// </summary>
         /// <value>Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [[\&quot;SouthWindow1\&quot;], [\&quot;static_apertures\&quot;, \&quot;NorthWindow2\&quot;]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation.</value>
-        [DataMember(Name = "light_path", EmitDefaultValue = false)]
+        [DataMember(Name = "light_path")]
         public List<List<string>> LightPath { get; set; } 
 
         /// <summary>

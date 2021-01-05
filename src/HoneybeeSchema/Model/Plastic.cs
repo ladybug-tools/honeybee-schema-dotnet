@@ -76,7 +76,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "plastic";
 
         /// <summary>
@@ -95,43 +95,43 @@ namespace HoneybeeSchema
         /// Material modifier (default: Void).
         /// </summary>
         /// <value>Material modifier (default: Void).</value>
-        [DataMember(Name = "modifier", EmitDefaultValue = false)]
+        [DataMember(Name = "modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> Modifier { get; set; } 
         /// <summary>
         /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).
         /// </summary>
         /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).</value>
-        [DataMember(Name = "dependencies", EmitDefaultValue = false)]
+        [DataMember(Name = "dependencies")]
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Dependencies { get; set; } 
         /// <summary>
         /// A value between 0 and 1 for the red channel reflectance (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the red channel reflectance (default: 0).</value>
-        [DataMember(Name = "r_reflectance", EmitDefaultValue = true)]
+        [DataMember(Name = "r_reflectance")]
         public double RReflectance { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the green channel reflectance (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the green channel reflectance (default: 0).</value>
-        [DataMember(Name = "g_reflectance", EmitDefaultValue = true)]
+        [DataMember(Name = "g_reflectance")]
         public double GReflectance { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the blue channel reflectance (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the blue channel reflectance (default: 0).</value>
-        [DataMember(Name = "b_reflectance", EmitDefaultValue = true)]
+        [DataMember(Name = "b_reflectance")]
         public double BReflectance { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials. (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials. (default: 0).</value>
-        [DataMember(Name = "specularity", EmitDefaultValue = true)]
+        [DataMember(Name = "specularity")]
         public double Specularity { get; set; }  = 0D;
         /// <summary>
         /// A value between 0 and 1 for the roughness, specified as the rms slope of surface facets. Roughness greater than 0.2 are not realistic (default: 0).
         /// </summary>
         /// <value>A value between 0 and 1 for the roughness, specified as the rms slope of surface facets. Roughness greater than 0.2 are not realistic (default: 0).</value>
-        [DataMember(Name = "roughness", EmitDefaultValue = true)]
+        [DataMember(Name = "roughness")]
         public double Roughness { get; set; }  = 0D;
 
         /// <summary>

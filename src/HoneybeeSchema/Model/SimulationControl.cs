@@ -57,38 +57,38 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "SimulationControl";
 
         /// <summary>
         /// Boolean for whether the zone sizing calculation should be run.
         /// </summary>
         /// <value>Boolean for whether the zone sizing calculation should be run.</value>
-        [DataMember(Name = "do_zone_sizing", EmitDefaultValue = true)]
+        [DataMember(Name = "do_zone_sizing")]
         public bool DoZoneSizing { get; set; }  = true;
         /// <summary>
         /// Boolean for whether the system sizing calculation should be run.
         /// </summary>
         /// <value>Boolean for whether the system sizing calculation should be run.</value>
-        [DataMember(Name = "do_system_sizing", EmitDefaultValue = true)]
+        [DataMember(Name = "do_system_sizing")]
         public bool DoSystemSizing { get; set; }  = true;
         /// <summary>
         /// Boolean for whether the plant sizing calculation should be run.
         /// </summary>
         /// <value>Boolean for whether the plant sizing calculation should be run.</value>
-        [DataMember(Name = "do_plant_sizing", EmitDefaultValue = true)]
+        [DataMember(Name = "do_plant_sizing")]
         public bool DoPlantSizing { get; set; }  = true;
         /// <summary>
         /// Boolean for whether the simulation should be run for the sizing periods.
         /// </summary>
         /// <value>Boolean for whether the simulation should be run for the sizing periods.</value>
-        [DataMember(Name = "run_for_run_periods", EmitDefaultValue = true)]
+        [DataMember(Name = "run_for_run_periods")]
         public bool RunForRunPeriods { get; set; }  = true;
         /// <summary>
         /// Boolean for whether the simulation should be run for the run periods.
         /// </summary>
         /// <value>Boolean for whether the simulation should be run for the run periods.</value>
-        [DataMember(Name = "run_for_sizing_periods", EmitDefaultValue = true)]
+        [DataMember(Name = "run_for_sizing_periods")]
         public bool RunForSizingPeriods { get; set; }  = false;
 
         /// <summary>

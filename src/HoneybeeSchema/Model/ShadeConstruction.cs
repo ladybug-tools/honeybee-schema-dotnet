@@ -68,7 +68,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "ShadeConstruction";
 
         /// <summary>
@@ -87,19 +87,19 @@ namespace HoneybeeSchema
         /// A number for the solar reflectance of the construction.
         /// </summary>
         /// <value>A number for the solar reflectance of the construction.</value>
-        [DataMember(Name = "solar_reflectance", EmitDefaultValue = true)]
+        [DataMember(Name = "solar_reflectance")]
         public double SolarReflectance { get; set; }  = 0.2D;
         /// <summary>
         /// A number for the visible reflectance of the construction.
         /// </summary>
         /// <value>A number for the visible reflectance of the construction.</value>
-        [DataMember(Name = "visible_reflectance", EmitDefaultValue = true)]
+        [DataMember(Name = "visible_reflectance")]
         public double VisibleReflectance { get; set; }  = 0.2D;
         /// <summary>
         /// Boolean to note whether the reflection off the shade is diffuse (False) or specular (True). Set to True if the construction is representing a glass facade or a mirror material.
         /// </summary>
         /// <value>Boolean to note whether the reflection off the shade is diffuse (False) or specular (True). Set to True if the construction is representing a glass facade or a mirror material.</value>
-        [DataMember(Name = "is_specular", EmitDefaultValue = true)]
+        [DataMember(Name = "is_specular")]
         public bool IsSpecular { get; set; }  = false;
 
         /// <summary>

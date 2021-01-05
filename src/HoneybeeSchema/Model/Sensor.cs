@@ -63,20 +63,20 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "Sensor";
 
         /// <summary>
         /// Position of sensor in space as an array of (x, y, z) values.
         /// </summary>
         /// <value>Position of sensor in space as an array of (x, y, z) values.</value>
-        [DataMember(Name = "pos", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "pos", IsRequired = true)]
         public List<double> Pos { get; set; } 
         /// <summary>
         /// Direction of sensor as an array of (x, y, z) values.
         /// </summary>
         /// <value>Direction of sensor as an array of (x, y, z) values.</value>
-        [DataMember(Name = "dir", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "dir", IsRequired = true)]
         public List<double> Dir { get; set; } 
 
         /// <summary>

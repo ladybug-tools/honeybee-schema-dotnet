@@ -78,7 +78,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "ProgramType";
 
         /// <summary>
@@ -97,49 +97,49 @@ namespace HoneybeeSchema
         /// People to describe the occupancy of the program. If None, no occupancy will be assumed for the program.
         /// </summary>
         /// <value>People to describe the occupancy of the program. If None, no occupancy will be assumed for the program.</value>
-        [DataMember(Name = "people", EmitDefaultValue = false)]
+        [DataMember(Name = "people")]
         public People People { get; set; } 
         /// <summary>
         /// Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program.
         /// </summary>
         /// <value>Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program.</value>
-        [DataMember(Name = "lighting", EmitDefaultValue = false)]
+        [DataMember(Name = "lighting")]
         public Lighting Lighting { get; set; } 
         /// <summary>
         /// ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed.
         /// </summary>
         /// <value>ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed.</value>
-        [DataMember(Name = "electric_equipment", EmitDefaultValue = false)]
+        [DataMember(Name = "electric_equipment")]
         public ElectricEquipment ElectricEquipment { get; set; } 
         /// <summary>
         /// GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed.
         /// </summary>
         /// <value>GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed.</value>
-        [DataMember(Name = "gas_equipment", EmitDefaultValue = false)]
+        [DataMember(Name = "gas_equipment")]
         public GasEquipment GasEquipment { get; set; } 
         /// <summary>
         /// ServiceHotWater object to describe the usage of hot water within the program. If None, no hot water will be assumed.
         /// </summary>
         /// <value>ServiceHotWater object to describe the usage of hot water within the program. If None, no hot water will be assumed.</value>
-        [DataMember(Name = "service_hot_water", EmitDefaultValue = false)]
+        [DataMember(Name = "service_hot_water")]
         public ServiceHotWater ServiceHotWater { get; set; } 
         /// <summary>
         /// Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program.
         /// </summary>
         /// <value>Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program.</value>
-        [DataMember(Name = "infiltration", EmitDefaultValue = false)]
+        [DataMember(Name = "infiltration")]
         public Infiltration Infiltration { get; set; } 
         /// <summary>
         /// Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed.
         /// </summary>
         /// <value>Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed.</value>
-        [DataMember(Name = "ventilation", EmitDefaultValue = false)]
+        [DataMember(Name = "ventilation")]
         public Ventilation Ventilation { get; set; } 
         /// <summary>
         /// Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.
         /// </summary>
         /// <value>Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.</value>
-        [DataMember(Name = "setpoint", EmitDefaultValue = false)]
+        [DataMember(Name = "setpoint")]
         public Setpoint Setpoint { get; set; } 
 
         /// <summary>

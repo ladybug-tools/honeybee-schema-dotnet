@@ -72,7 +72,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "SetpointAbridged";
 
         /// <summary>
@@ -91,25 +91,25 @@ namespace HoneybeeSchema
         /// Identifier of the schedule for the cooling setpoint. The values in this schedule should be temperature in [C].
         /// </summary>
         /// <value>Identifier of the schedule for the cooling setpoint. The values in this schedule should be temperature in [C].</value>
-        [DataMember(Name = "cooling_schedule", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "cooling_schedule", IsRequired = true)]
         public string CoolingSchedule { get; set; } 
         /// <summary>
         /// Identifier of the schedule for the heating setpoint. The values in this schedule should be temperature in [C].
         /// </summary>
         /// <value>Identifier of the schedule for the heating setpoint. The values in this schedule should be temperature in [C].</value>
-        [DataMember(Name = "heating_schedule", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "heating_schedule", IsRequired = true)]
         public string HeatingSchedule { get; set; } 
         /// <summary>
         /// Identifier of the schedule for the humidification setpoint. The values in this schedule should be in [%].
         /// </summary>
         /// <value>Identifier of the schedule for the humidification setpoint. The values in this schedule should be in [%].</value>
-        [DataMember(Name = "humidifying_schedule", EmitDefaultValue = false)]
+        [DataMember(Name = "humidifying_schedule")]
         public string HumidifyingSchedule { get; set; } 
         /// <summary>
         /// Identifier of the schedule for the dehumidification setpoint. The values in this schedule should be in [%].
         /// </summary>
         /// <value>Identifier of the schedule for the dehumidification setpoint. The values in this schedule should be in [%].</value>
-        [DataMember(Name = "dehumidifying_schedule", EmitDefaultValue = false)]
+        [DataMember(Name = "dehumidifying_schedule")]
         public string DehumidifyingSchedule { get; set; } 
 
         /// <summary>

@@ -53,26 +53,26 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "RadianceShadeStateAbridged";
 
         /// <summary>
         /// A Radiance Modifier identifier (default: None).
         /// </summary>
         /// <value>A Radiance Modifier identifier (default: None).</value>
-        [DataMember(Name = "modifier", EmitDefaultValue = false)]
+        [DataMember(Name = "modifier")]
         public string Modifier { get; set; } 
         /// <summary>
         /// A Radiance Modifier identifier (default: None).
         /// </summary>
         /// <value>A Radiance Modifier identifier (default: None).</value>
-        [DataMember(Name = "modifier_direct", EmitDefaultValue = false)]
+        [DataMember(Name = "modifier_direct")]
         public string ModifierDirect { get; set; } 
         /// <summary>
         /// A list of StateGeometryAbridged objects (default: None).
         /// </summary>
         /// <value>A list of StateGeometryAbridged objects (default: None).</value>
-        [DataMember(Name = "shades", EmitDefaultValue = false)]
+        [DataMember(Name = "shades")]
         public List<StateGeometryAbridged> Shades { get; set; } 
 
         /// <summary>

@@ -32,7 +32,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Roughness
         /// </summary>
-        [DataMember(Name="roughness", EmitDefaultValue=false)]
+        [DataMember(Name="roughness")]
         public Roughness Roughness { get; set; } = Roughness.MediumRough;
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyMaterial" /> class.
@@ -83,7 +83,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "EnergyMaterial";
 
         /// <summary>
@@ -102,43 +102,43 @@ namespace HoneybeeSchema
         /// Thickness of the material layer in meters.
         /// </summary>
         /// <value>Thickness of the material layer in meters.</value>
-        [DataMember(Name = "thickness", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "thickness", IsRequired = true)]
         public double Thickness { get; set; } 
         /// <summary>
         /// Thermal conductivity of the material layer in W/(m-K).
         /// </summary>
         /// <value>Thermal conductivity of the material layer in W/(m-K).</value>
-        [DataMember(Name = "conductivity", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "conductivity", IsRequired = true)]
         public double Conductivity { get; set; } 
         /// <summary>
         /// Density of the material layer in kg/m3.
         /// </summary>
         /// <value>Density of the material layer in kg/m3.</value>
-        [DataMember(Name = "density", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "density", IsRequired = true)]
         public double Density { get; set; } 
         /// <summary>
         /// Specific heat of the material layer in J/(kg-K).
         /// </summary>
         /// <value>Specific heat of the material layer in J/(kg-K).</value>
-        [DataMember(Name = "specific_heat", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "specific_heat", IsRequired = true)]
         public double SpecificHeat { get; set; } 
         /// <summary>
         /// Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9.
         /// </summary>
         /// <value>Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9.</value>
-        [DataMember(Name = "thermal_absorptance", EmitDefaultValue = true)]
+        [DataMember(Name = "thermal_absorptance")]
         public double ThermalAbsorptance { get; set; }  = 0.9D;
         /// <summary>
         /// Fraction of incident solar radiation absorbed by the material. Default value is 0.7.
         /// </summary>
         /// <value>Fraction of incident solar radiation absorbed by the material. Default value is 0.7.</value>
-        [DataMember(Name = "solar_absorptance", EmitDefaultValue = true)]
+        [DataMember(Name = "solar_absorptance")]
         public double SolarAbsorptance { get; set; }  = 0.7D;
         /// <summary>
         /// Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7.
         /// </summary>
         /// <value>Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7.</value>
-        [DataMember(Name = "visible_absorptance", EmitDefaultValue = true)]
+        [DataMember(Name = "visible_absorptance")]
         public double VisibleAbsorptance { get; set; }  = 0.7D;
 
         /// <summary>

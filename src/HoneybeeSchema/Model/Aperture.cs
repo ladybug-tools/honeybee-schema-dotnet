@@ -79,7 +79,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "Aperture";
 
         /// <summary>
@@ -104,36 +104,36 @@ namespace HoneybeeSchema
         /// Planar Face3D for the geometry.
         /// </summary>
         /// <value>Planar Face3D for the geometry.</value>
-        [DataMember(Name = "geometry", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "geometry", IsRequired = true)]
         public Face3D Geometry { get; set; } 
         /// <summary>
         /// Gets or Sets BoundaryCondition
         /// </summary>
-        [DataMember(Name = "boundary_condition", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "boundary_condition", IsRequired = true)]
         public AnyOf<Outdoors,Surface> BoundaryCondition { get; set; } 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
-        [DataMember(Name = "properties", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "properties", IsRequired = true)]
         public AperturePropertiesAbridged Properties { get; set; } 
         /// <summary>
         /// Boolean to note whether the Aperture can be opened for ventilation.
         /// </summary>
         /// <value>Boolean to note whether the Aperture can be opened for ventilation.</value>
-        [DataMember(Name = "is_operable", EmitDefaultValue = true)]
+        [DataMember(Name = "is_operable")]
         public bool IsOperable { get; set; }  = false;
         /// <summary>
         /// Shades assigned to the interior side of this object (eg. window sill, light shelf).
         /// </summary>
         /// <value>Shades assigned to the interior side of this object (eg. window sill, light shelf).</value>
-        [DataMember(Name = "indoor_shades", EmitDefaultValue = false)]
+        [DataMember(Name = "indoor_shades")]
         public List<Shade> IndoorShades { get; set; } 
         /// <summary>
         /// Shades assigned to the exterior side of this object (eg. mullions, louvers).
         /// </summary>
         /// <value>Shades assigned to the exterior side of this object (eg. mullions, louvers).</value>
-        [DataMember(Name = "outdoor_shades", EmitDefaultValue = false)]
+        [DataMember(Name = "outdoor_shades")]
         public List<Shade> OutdoorShades { get; set; } 
 
         /// <summary>

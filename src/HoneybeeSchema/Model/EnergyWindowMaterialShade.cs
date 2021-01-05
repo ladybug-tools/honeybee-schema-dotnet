@@ -90,7 +90,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "EnergyWindowMaterialShade";
 
         /// <summary>
@@ -109,85 +109,85 @@ namespace HoneybeeSchema
         /// The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default value is 0.4.
         /// </summary>
         /// <value>The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default value is 0.4.</value>
-        [DataMember(Name = "solar_transmittance", EmitDefaultValue = true)]
+        [DataMember(Name = "solar_transmittance")]
         public double SolarTransmittance { get; set; }  = 0.4D;
         /// <summary>
         /// The reflectance averaged over the solar spectrum. It us assumed same on both sides of shade and independent of incidence angle. Default value is 0.5
         /// </summary>
         /// <value>The reflectance averaged over the solar spectrum. It us assumed same on both sides of shade and independent of incidence angle. Default value is 0.5</value>
-        [DataMember(Name = "solar_reflectance", EmitDefaultValue = true)]
+        [DataMember(Name = "solar_reflectance")]
         public double SolarReflectance { get; set; }  = 0.5D;
         /// <summary>
         /// The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4.
         /// </summary>
         /// <value>The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4.</value>
-        [DataMember(Name = "visible_transmittance", EmitDefaultValue = true)]
+        [DataMember(Name = "visible_transmittance")]
         public double VisibleTransmittance { get; set; }  = 0.4D;
         /// <summary>
         /// The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4
         /// </summary>
         /// <value>The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default value is 0.4</value>
-        [DataMember(Name = "visible_reflectance", EmitDefaultValue = true)]
+        [DataMember(Name = "visible_reflectance")]
         public double VisibleReflectance { get; set; }  = 0.4D;
         /// <summary>
         /// The effective long-wave infrared hemispherical emissivity. It is assumed same on both sides of shade. Default value is 0.9.
         /// </summary>
         /// <value>The effective long-wave infrared hemispherical emissivity. It is assumed same on both sides of shade. Default value is 0.9.</value>
-        [DataMember(Name = "emissivity", EmitDefaultValue = true)]
+        [DataMember(Name = "emissivity")]
         public double Emissivity { get; set; }  = 0.9D;
         /// <summary>
         /// The effective long-wave transmittance. It is assumed independent of incidence angle. Default value is 0.
         /// </summary>
         /// <value>The effective long-wave transmittance. It is assumed independent of incidence angle. Default value is 0.</value>
-        [DataMember(Name = "infrared_transmittance", EmitDefaultValue = true)]
+        [DataMember(Name = "infrared_transmittance")]
         public double InfraredTransmittance { get; set; }  = 0D;
         /// <summary>
         /// The thickness of the shade material in meters. Default value is 0.005.
         /// </summary>
         /// <value>The thickness of the shade material in meters. Default value is 0.005.</value>
-        [DataMember(Name = "thickness", EmitDefaultValue = true)]
+        [DataMember(Name = "thickness")]
         public double Thickness { get; set; }  = 0.005D;
         /// <summary>
         /// The conductivity of the shade material in W/(m-K). Default value is 0.1.
         /// </summary>
         /// <value>The conductivity of the shade material in W/(m-K). Default value is 0.1.</value>
-        [DataMember(Name = "conductivity", EmitDefaultValue = true)]
+        [DataMember(Name = "conductivity")]
         public double Conductivity { get; set; }  = 0.1D;
         /// <summary>
         /// The distance from shade to adjacent glass in meters. Default value is 0.05
         /// </summary>
         /// <value>The distance from shade to adjacent glass in meters. Default value is 0.05</value>
-        [DataMember(Name = "distance_to_glass", EmitDefaultValue = true)]
+        [DataMember(Name = "distance_to_glass")]
         public double DistanceToGlass { get; set; }  = 0.05D;
         /// <summary>
         /// The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. Default value is 0.5.
         /// </summary>
         /// <value>The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. Default value is 0.5.</value>
-        [DataMember(Name = "top_opening_multiplier", EmitDefaultValue = true)]
+        [DataMember(Name = "top_opening_multiplier")]
         public double TopOpeningMultiplier { get; set; }  = 0.5D;
         /// <summary>
         /// The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. Default value is 0.5.
         /// </summary>
         /// <value>The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. Default value is 0.5.</value>
-        [DataMember(Name = "bottom_opening_multiplier", EmitDefaultValue = true)]
+        [DataMember(Name = "bottom_opening_multiplier")]
         public double BottomOpeningMultiplier { get; set; }  = 0.5D;
         /// <summary>
         /// The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. Default value is 0.5.
         /// </summary>
         /// <value>The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. Default value is 0.5.</value>
-        [DataMember(Name = "left_opening_multiplier", EmitDefaultValue = true)]
+        [DataMember(Name = "left_opening_multiplier")]
         public double LeftOpeningMultiplier { get; set; }  = 0.5D;
         /// <summary>
         /// The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. Default value is 0.5.
         /// </summary>
         /// <value>The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. Default value is 0.5.</value>
-        [DataMember(Name = "right_opening_multiplier", EmitDefaultValue = true)]
+        [DataMember(Name = "right_opening_multiplier")]
         public double RightOpeningMultiplier { get; set; }  = 0.5D;
         /// <summary>
         /// The fraction of the shade surface that is open to air flow. If air cannot pass through the shade material, airflow_permeability &#x3D; 0. Default value is 0.
         /// </summary>
         /// <value>The fraction of the shade surface that is open to air flow. If air cannot pass through the shade material, airflow_permeability &#x3D; 0. Default value is 0.</value>
-        [DataMember(Name = "airflow_permeability", EmitDefaultValue = true)]
+        [DataMember(Name = "airflow_permeability")]
         public double AirflowPermeability { get; set; }  = 0D;
 
         /// <summary>

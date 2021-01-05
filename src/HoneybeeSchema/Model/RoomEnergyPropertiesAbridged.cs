@@ -71,80 +71,80 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "RoomEnergyPropertiesAbridged";
 
         /// <summary>
         /// Identifier of a ConstructionSet to specify all default constructions for the Faces, Apertures, and Doors of the Room. If None, the Room will use the Model global_construction_set.
         /// </summary>
         /// <value>Identifier of a ConstructionSet to specify all default constructions for the Faces, Apertures, and Doors of the Room. If None, the Room will use the Model global_construction_set.</value>
-        [DataMember(Name = "construction_set", EmitDefaultValue = false)]
+        [DataMember(Name = "construction_set")]
         public string ConstructionSet { get; set; } 
         /// <summary>
         /// Identifier of a ProgramType to specify all default schedules and loads for the Room. If None, the Room will have no loads or setpoints.
         /// </summary>
         /// <value>Identifier of a ProgramType to specify all default schedules and loads for the Room. If None, the Room will have no loads or setpoints.</value>
-        [DataMember(Name = "program_type", EmitDefaultValue = false)]
+        [DataMember(Name = "program_type")]
         public string ProgramType { get; set; } 
         /// <summary>
         /// An optional identifier of a HVAC system (such as an IdealAirSystem) that specifies how the Room is conditioned. If None, it will be assumed that the Room is not conditioned.
         /// </summary>
         /// <value>An optional identifier of a HVAC system (such as an IdealAirSystem) that specifies how the Room is conditioned. If None, it will be assumed that the Room is not conditioned.</value>
-        [DataMember(Name = "hvac", EmitDefaultValue = false)]
+        [DataMember(Name = "hvac")]
         public string Hvac { get; set; } 
         /// <summary>
         /// People object to describe the occupancy of the Room.
         /// </summary>
         /// <value>People object to describe the occupancy of the Room.</value>
-        [DataMember(Name = "people", EmitDefaultValue = false)]
+        [DataMember(Name = "people")]
         public PeopleAbridged People { get; set; } 
         /// <summary>
         /// Lighting object to describe the lighting usage of the Room.
         /// </summary>
         /// <value>Lighting object to describe the lighting usage of the Room.</value>
-        [DataMember(Name = "lighting", EmitDefaultValue = false)]
+        [DataMember(Name = "lighting")]
         public LightingAbridged Lighting { get; set; } 
         /// <summary>
         /// ElectricEquipment object to describe the electric equipment usage.
         /// </summary>
         /// <value>ElectricEquipment object to describe the electric equipment usage.</value>
-        [DataMember(Name = "electric_equipment", EmitDefaultValue = false)]
+        [DataMember(Name = "electric_equipment")]
         public ElectricEquipmentAbridged ElectricEquipment { get; set; } 
         /// <summary>
         /// GasEquipment object to describe the gas equipment usage.
         /// </summary>
         /// <value>GasEquipment object to describe the gas equipment usage.</value>
-        [DataMember(Name = "gas_equipment", EmitDefaultValue = false)]
+        [DataMember(Name = "gas_equipment")]
         public GasEquipmentAbridged GasEquipment { get; set; } 
         /// <summary>
         /// ServiceHotWater object to describe the hot water usage.
         /// </summary>
         /// <value>ServiceHotWater object to describe the hot water usage.</value>
-        [DataMember(Name = "service_hot_water", EmitDefaultValue = false)]
+        [DataMember(Name = "service_hot_water")]
         public ServiceHotWaterAbridged ServiceHotWater { get; set; } 
         /// <summary>
         /// Infiltration object to to describe the outdoor air leakage.
         /// </summary>
         /// <value>Infiltration object to to describe the outdoor air leakage.</value>
-        [DataMember(Name = "infiltration", EmitDefaultValue = false)]
+        [DataMember(Name = "infiltration")]
         public InfiltrationAbridged Infiltration { get; set; } 
         /// <summary>
         /// Ventilation object for the minimum outdoor air requirement.
         /// </summary>
         /// <value>Ventilation object for the minimum outdoor air requirement.</value>
-        [DataMember(Name = "ventilation", EmitDefaultValue = false)]
+        [DataMember(Name = "ventilation")]
         public VentilationAbridged Ventilation { get; set; } 
         /// <summary>
         /// Setpoint object for the temperature setpoints of the Room.
         /// </summary>
         /// <value>Setpoint object for the temperature setpoints of the Room.</value>
-        [DataMember(Name = "setpoint", EmitDefaultValue = false)]
+        [DataMember(Name = "setpoint")]
         public SetpointAbridged Setpoint { get; set; } 
         /// <summary>
         /// An optional VentilationControl object to dictate the opening of windows. If None, the windows will never open.
         /// </summary>
         /// <value>An optional VentilationControl object to dictate the opening of windows. If None, the windows will never open.</value>
-        [DataMember(Name = "window_vent_control", EmitDefaultValue = false)]
+        [DataMember(Name = "window_vent_control")]
         public VentilationControlAbridged WindowVentControl { get; set; } 
 
         /// <summary>

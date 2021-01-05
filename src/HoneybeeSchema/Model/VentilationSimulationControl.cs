@@ -33,13 +33,13 @@ namespace HoneybeeSchema
         /// Text indicating type of ventilation control. Choices are: SingleZone, MultiZoneWithDistribution, MultiZoneWithoutDistribution. The MultiZone options will model air flow with the AirflowNetwork model, which is generally more accurate then the SingleZone option, but will take considerably longer to simulate, and requires defining more ventilation parameters to explicitly account for weather and building-induced pressure differences, and the leakage geometry corresponding to specific windows, doors, and surface cracks.
         /// </summary>
         /// <value>Text indicating type of ventilation control. Choices are: SingleZone, MultiZoneWithDistribution, MultiZoneWithoutDistribution. The MultiZone options will model air flow with the AirflowNetwork model, which is generally more accurate then the SingleZone option, but will take considerably longer to simulate, and requires defining more ventilation parameters to explicitly account for weather and building-induced pressure differences, and the leakage geometry corresponding to specific windows, doors, and surface cracks.</value>
-        [DataMember(Name="vent_control_type", EmitDefaultValue=false)]
+        [DataMember(Name="vent_control_type")]
         public VentilationControlType VentControlType { get; set; } = VentilationControlType.SingleZone;
         /// <summary>
         /// Text indicating relationship between building footprint and height used to calculate the wind pressure coefficients for exterior surfaces.Choices are: LowRise and HighRise. LowRise corresponds to rectangular building whose height is less then three times the width and length of the footprint. HighRise corresponds to a rectangular building whose height is more than three times the width and length of the footprint. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.
         /// </summary>
         /// <value>Text indicating relationship between building footprint and height used to calculate the wind pressure coefficients for exterior surfaces.Choices are: LowRise and HighRise. LowRise corresponds to rectangular building whose height is less then three times the width and length of the footprint. HighRise corresponds to a rectangular building whose height is more than three times the width and length of the footprint. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.</value>
-        [DataMember(Name="building_type", EmitDefaultValue=false)]
+        [DataMember(Name="building_type")]
         public BuildingType BuildingType { get; set; } = BuildingType.LowRise;
         /// <summary>
         /// Initializes a new instance of the <see cref="VentilationSimulationControl" /> class.
@@ -73,38 +73,38 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "VentilationSimulationControl";
 
         /// <summary>
         /// Reference temperature measurement in Celsius under which the surface crack data were obtained.
         /// </summary>
         /// <value>Reference temperature measurement in Celsius under which the surface crack data were obtained.</value>
-        [DataMember(Name = "reference_temperature", EmitDefaultValue = true)]
+        [DataMember(Name = "reference_temperature")]
         public double ReferenceTemperature { get; set; }  = 20D;
         /// <summary>
         /// Reference barometric pressure measurement in Pascals under which the surface crack data were obtained.
         /// </summary>
         /// <value>Reference barometric pressure measurement in Pascals under which the surface crack data were obtained.</value>
-        [DataMember(Name = "reference_pressure", EmitDefaultValue = true)]
+        [DataMember(Name = "reference_pressure")]
         public double ReferencePressure { get; set; }  = 101325D;
         /// <summary>
         /// Reference humidity ratio measurement in kgWater/kgDryAir under which the surface crack data were obtained.
         /// </summary>
         /// <value>Reference humidity ratio measurement in kgWater/kgDryAir under which the surface crack data were obtained.</value>
-        [DataMember(Name = "reference_humidity_ratio", EmitDefaultValue = true)]
+        [DataMember(Name = "reference_humidity_ratio")]
         public double ReferenceHumidityRatio { get; set; }  = 0D;
         /// <summary>
         /// The clockwise rotation in degrees from true North of the long axis of the building. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.
         /// </summary>
         /// <value>The clockwise rotation in degrees from true North of the long axis of the building. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.</value>
-        [DataMember(Name = "long_axis_angle", EmitDefaultValue = true)]
+        [DataMember(Name = "long_axis_angle")]
         public double LongAxisAngle { get; set; }  = 0D;
         /// <summary>
         /// Aspect ratio of a rectangular footprint, defined as the ratio of length of the short axis divided by the length of the long axis. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.
         /// </summary>
         /// <value>Aspect ratio of a rectangular footprint, defined as the ratio of length of the short axis divided by the length of the long axis. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.</value>
-        [DataMember(Name = "aspect_ratio", EmitDefaultValue = true)]
+        [DataMember(Name = "aspect_ratio")]
         public double AspectRatio { get; set; }  = 1D;
 
         /// <summary>

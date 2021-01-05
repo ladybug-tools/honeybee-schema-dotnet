@@ -33,13 +33,13 @@ namespace HoneybeeSchema
         /// Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the \&quot;Between\&quot; option. Also note that, for a WindowConstruction with more than one gas gap, the \&quot;Between\&quot; option defalts to using the inner gap as this is the only option that EnergyPlus supports.
         /// </summary>
         /// <value>Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the \&quot;Between\&quot; option. Also note that, for a WindowConstruction with more than one gas gap, the \&quot;Between\&quot; option defalts to using the inner gap as this is the only option that EnergyPlus supports.</value>
-        [DataMember(Name="shade_location", EmitDefaultValue=false)]
+        [DataMember(Name="shade_location")]
         public ShadeLocation ShadeLocation { get; set; } = ShadeLocation.Interior;
         /// <summary>
         /// Text to indicate how the shading device is controlled, which determines when the shading is “on” or “off.”
         /// </summary>
         /// <value>Text to indicate how the shading device is controlled, which determines when the shading is “on” or “off.”</value>
-        [DataMember(Name="control_type", EmitDefaultValue=false)]
+        [DataMember(Name="control_type")]
         public ControlType ControlType { get; set; } = ControlType.AlwaysOn;
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowConstructionShade" /> class.
@@ -88,7 +88,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
+        [DataMember(Name = "type")]
         public override string Type { get; protected internal set; }  = "WindowConstructionShade";
 
         /// <summary>
@@ -107,25 +107,25 @@ namespace HoneybeeSchema
         /// A WindowConstruction object that serves as the \&quot;switched off\&quot; version of the construction (aka. the \&quot;bare construction\&quot;). The shade_material and shade_location will be used to modify this starting construction.
         /// </summary>
         /// <value>A WindowConstruction object that serves as the \&quot;switched off\&quot; version of the construction (aka. the \&quot;bare construction\&quot;). The shade_material and shade_location will be used to modify this starting construction.</value>
-        [DataMember(Name = "window_construction", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "window_construction", IsRequired = true)]
         public WindowConstruction WindowConstruction { get; set; } 
         /// <summary>
         /// Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly.
         /// </summary>
         /// <value>Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly.</value>
-        [DataMember(Name = "shade_material", IsRequired = true, EmitDefaultValue = false)]
+        [DataMember(Name = "shade_material", IsRequired = true)]
         public AnyOf<EnergyWindowMaterialShade,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing> ShadeMaterial { get; set; } 
         /// <summary>
         /// A number that corresponds to the specified control_type. This can be a value in (W/m2), (C) or (W) depending upon the control type.Note that this value cannot be None for any control type except \&quot;AlwaysOn.\&quot;
         /// </summary>
         /// <value>A number that corresponds to the specified control_type. This can be a value in (W/m2), (C) or (W) depending upon the control type.Note that this value cannot be None for any control type except \&quot;AlwaysOn.\&quot;</value>
-        [DataMember(Name = "setpoint", EmitDefaultValue = false)]
+        [DataMember(Name = "setpoint")]
         public double Setpoint { get; set; } 
         /// <summary>
         /// An optional ScheduleRuleset or ScheduleFixedInterval to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction.
         /// </summary>
         /// <value>An optional ScheduleRuleset or ScheduleFixedInterval to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction.</value>
-        [DataMember(Name = "schedule", EmitDefaultValue = false)]
+        [DataMember(Name = "schedule")]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; } 
 
         /// <summary>
