@@ -70,7 +70,7 @@ namespace HoneybeeSchema
         public PSZ
         (
              string identifier, // Required parameters
-            string displayName= default, Vintages vintage= Vintages.90.1-2013, AllAirEconomizerType economizerType= AllAirEconomizerType.Inferred, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, PSZEquipmentType equipmentType= PSZEquipmentType.PSZ-AC with baseboard electric// Optional parameters
+            string displayName= default, Vintages vintage= Vintages._9012013, AllAirEconomizerType economizerType= AllAirEconomizerType.Inferred, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, PSZEquipmentType equipmentType= PSZEquipmentType.ACwithbaseboardelectric// Optional parameters
         )// BaseClass
         {
             // to ensure "identifier" is required (not null)

@@ -63,7 +63,7 @@ namespace HoneybeeSchema
         public VRFwithDOAS
         (
              string identifier, // Required parameters
-            string displayName= default, Vintages vintage= Vintages.90.1-2013, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, VRFwithDOASEquipmentType equipmentType= VRFwithDOASEquipmentType.DOAS with VRF// Optional parameters
+            string displayName= default, Vintages vintage= Vintages._9012013, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, VRFwithDOASEquipmentType equipmentType= VRFwithDOASEquipmentType.DOASwithVRF// Optional parameters
         )// BaseClass
         {
             // to ensure "identifier" is required (not null)

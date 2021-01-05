@@ -63,7 +63,7 @@ namespace HoneybeeSchema
         public FCUwithDOAS
         (
              string identifier, // Required parameters
-            string displayName= default, Vintages vintage= Vintages.90.1-2013, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, FCUwithDOASEquipmentType equipmentType= FCUwithDOASEquipmentType.DOAS with fan coil chiller with boiler// Optional parameters
+            string displayName= default, Vintages vintage= Vintages._9012013, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, FCUwithDOASEquipmentType equipmentType= FCUwithDOASEquipmentType.Chillerwithboiler// Optional parameters
         )// BaseClass
         {
             // to ensure "identifier" is required (not null)
