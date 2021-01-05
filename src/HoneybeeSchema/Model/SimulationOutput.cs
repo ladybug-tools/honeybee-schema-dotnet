@@ -63,7 +63,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "SimulationOutput";
+        public override string Type { get; protected set; }  = "SimulationOutput";
 
         /// <summary>
         /// Boolean to note whether a SQLite report should be requested from the simulation.

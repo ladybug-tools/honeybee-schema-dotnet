@@ -60,7 +60,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "VentilationControlAbridged";
+        public override string Type { get; protected set; }  = "VentilationControlAbridged";
 
         /// <summary>
         /// A number for the minimum indoor temperature at which to ventilate in Celsius. Typically, this variable is used to initiate ventilation.

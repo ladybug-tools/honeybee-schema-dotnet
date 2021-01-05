@@ -52,7 +52,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "DaylightSavingTime";
+        public override string Type { get; protected set; }  = "DaylightSavingTime";
 
         /// <summary>
         /// A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).

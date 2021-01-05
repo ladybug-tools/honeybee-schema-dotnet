@@ -90,7 +90,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "View";
+        public override string Type { get; protected set; }  = "View";
 
         /// <summary>
         /// The view position (-vp) as an array of (x, y, z) values.This is the focal point of a perspective view or the center of a parallel projection.

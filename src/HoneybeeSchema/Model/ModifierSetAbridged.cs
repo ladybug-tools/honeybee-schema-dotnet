@@ -74,7 +74,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "ModifierSetAbridged";
+        public override string Type { get; protected set; }  = "ModifierSetAbridged";
 
         /// <summary>
         /// Optional WallModifierSet object for this ModifierSet (default: None).

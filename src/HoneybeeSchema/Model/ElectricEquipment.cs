@@ -71,7 +71,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "ElectricEquipment";
+        public override string Type { get; protected set; }  = "ElectricEquipment";
 
         /// <summary>
         /// Equipment level per floor area as [W/m2].

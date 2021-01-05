@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "void";
+        public override string Type { get; protected set; }  = "void";
 
 
         /// <summary>

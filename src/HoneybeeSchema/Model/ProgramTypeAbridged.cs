@@ -76,7 +76,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "ProgramTypeAbridged";
+        public override string Type { get; protected set; }  = "ProgramTypeAbridged";
 
         /// <summary>
         /// People to describe the occupancy of the program. If None, no occupancy will be assumed for the program.

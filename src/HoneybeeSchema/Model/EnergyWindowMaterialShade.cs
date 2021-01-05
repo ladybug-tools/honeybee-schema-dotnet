@@ -88,7 +88,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "EnergyWindowMaterialShade";
+        public override string Type { get; protected set; }  = "EnergyWindowMaterialShade";
 
         /// <summary>
         /// The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default value is 0.4.

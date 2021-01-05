@@ -51,7 +51,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "RoofCeilingConstructionSetAbridged";
+        public override string Type { get; protected set; }  = "RoofCeilingConstructionSetAbridged";
 
 
         /// <summary>

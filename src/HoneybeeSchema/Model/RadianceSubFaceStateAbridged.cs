@@ -55,7 +55,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "RadianceSubFaceStateAbridged";
+        public override string Type { get; protected set; }  = "RadianceSubFaceStateAbridged";
 
         /// <summary>
         /// A Face3D for the view matrix geometry (default: None).

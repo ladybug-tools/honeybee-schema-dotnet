@@ -137,7 +137,8 @@ def fix_enums_with_defaults(classesData, source_folder):
         class_name = [*c.keys()][0]
         class_file = f'{class_name}.cs'
         class_file_fullpath = os.path.join(source_folder, class_file)
-
+        if not os.path.exists(class_file_fullpath):
+            continue
         f = open(class_file_fullpath, "rt", encoding='utf-8')
         data = f.read()
         f.close()
@@ -202,8 +203,8 @@ def replace_AnyType(read_data):
 
 def add_override_to_type_property(read_data):
     data = read_data
-    replace_source = "public string Type { get; protected internal set; }"
-    replace_new = "public override string Type { get; protected internal set; }"
+    replace_source = "public string Type { get; protected set; }"
+    replace_new = "public override string Type { get; protected set; }"
     rex = replace_source
     if re.findall(rex, data) != []:
         data = re.sub(rex, replace_new, data)

@@ -52,7 +52,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "ShadePropertiesAbridged";
+        public override string Type { get; protected set; }  = "ShadePropertiesAbridged";
 
         /// <summary>
         /// Gets or Sets Energy

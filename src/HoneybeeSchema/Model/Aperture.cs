@@ -76,7 +76,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "Aperture";
+        public override string Type { get; protected set; }  = "Aperture";
 
         /// <summary>
         /// Planar Face3D for the geometry.

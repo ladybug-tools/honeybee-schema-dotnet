@@ -66,7 +66,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "RunPeriod";
+        public override string Type { get; protected set; }  = "RunPeriod";
 
         /// <summary>
         /// A list of two integers for [month, day], representing the date for the start of the run period. Must be before the end date.

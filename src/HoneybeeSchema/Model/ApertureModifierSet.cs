@@ -56,7 +56,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "ApertureModifierSet";
+        public override string Type { get; protected set; }  = "ApertureModifierSet";
 
         /// <summary>
         /// A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and Wall parent Face.

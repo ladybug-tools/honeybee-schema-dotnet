@@ -62,7 +62,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "DryBulbCondition";
+        public override string Type { get; protected set; }  = "DryBulbCondition";
 
         /// <summary>
         /// The maximum dry bulb temperature on the design day [C].

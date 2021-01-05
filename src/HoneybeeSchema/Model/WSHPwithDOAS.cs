@@ -80,7 +80,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "WSHPwithDOAS";
+        public override string Type { get; protected set; }  = "WSHPwithDOAS";
 
         /// <summary>
         /// A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. If None or Autosize, it will be whatever is recommended for the given vintage.

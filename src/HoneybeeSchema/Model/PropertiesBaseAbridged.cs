@@ -52,7 +52,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "_PropertiesBaseAbridged";
+        public override string Type { get; protected set; }  = "_PropertiesBaseAbridged";
 
         /// <summary>
         /// A string for a Honeybee Radiance Modifier (default: None).

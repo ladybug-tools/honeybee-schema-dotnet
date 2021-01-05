@@ -50,7 +50,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "RoomRadiancePropertiesAbridged";
+        public override string Type { get; protected set; }  = "RoomRadiancePropertiesAbridged";
 
         /// <summary>
         /// An identifier for a unique Room-Assigned ModifierSet (default: None).

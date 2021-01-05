@@ -70,7 +70,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "SimulationParameter";
+        public override string Type { get; protected set; }  = "SimulationParameter";
 
         /// <summary>
         /// A SimulationOutput that lists the desired outputs from the simulation and the format in which to report them.

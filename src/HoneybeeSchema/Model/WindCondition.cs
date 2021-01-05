@@ -62,7 +62,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "WindCondition";
+        public override string Type { get; protected set; }  = "WindCondition";
 
         /// <summary>
         /// Wind speed on the design day [m/s].

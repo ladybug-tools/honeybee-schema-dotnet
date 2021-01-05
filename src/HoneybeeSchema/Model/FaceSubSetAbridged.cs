@@ -54,7 +54,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "_FaceSubSetAbridged";
+        public override string Type { get; protected set; }  = "_FaceSubSetAbridged";
 
         /// <summary>
         /// Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition.

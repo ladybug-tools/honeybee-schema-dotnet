@@ -88,14 +88,14 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "Model";
+        public override string Type { get; protected set; }  = "Model";
         //============================================== is ReadOnly 
         /// <summary>
         /// Text string for the current version of the schema.
         /// </summary>
         /// <value>Text string for the current version of the schema.</value>
         [DataMember(Name = "version")]
-        public string Version { get; protected internal set; }  = "1.40.0";
+        public string Version { get; protected set; }  = "1.40.0";
 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).

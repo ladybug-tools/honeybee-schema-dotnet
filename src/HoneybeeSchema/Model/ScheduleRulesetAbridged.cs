@@ -76,7 +76,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected internal set; }  = "ScheduleRulesetAbridged";
+        public override string Type { get; protected set; }  = "ScheduleRulesetAbridged";
 
         /// <summary>
         /// A list of ScheduleDays that are referenced in the other keys of this ScheduleRulesetAbridged.
