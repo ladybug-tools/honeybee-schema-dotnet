@@ -70,7 +70,7 @@ namespace HoneybeeSchema
         public PVAV
         (
              string identifier, // Required parameters
-            string displayName= default, Vintages vintage= Vintages.90.1-2013, AllAirEconomizerType economizerType= AllAirEconomizerType.Inferred, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, PVAVEquipmentType equipmentType= PVAVEquipmentType.PVAV with gas boiler reheat// Optional parameters
+            string displayName= default, Vintages vintage= Vintages._9012013, AllAirEconomizerType economizerType= AllAirEconomizerType.Inferred, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, PVAVEquipmentType equipmentType= PVAVEquipmentType.Gasboilerreheat// Optional parameters
         )// BaseClass
         {
             // to ensure "identifier" is required (not null)

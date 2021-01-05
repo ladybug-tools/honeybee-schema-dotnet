@@ -63,7 +63,7 @@ namespace HoneybeeSchema
         public WSHPwithDOAS
         (
              string identifier, // Required parameters
-            string displayName= default, Vintages vintage= Vintages.90.1-2013, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, WSHPwithDOASEquipmentType equipmentType= WSHPwithDOASEquipmentType.DOAS with water source heat pumps fluid cooler with boiler// Optional parameters
+            string displayName= default, Vintages vintage= Vintages._9012013, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, WSHPwithDOASEquipmentType equipmentType= WSHPwithDOASEquipmentType.Fluidcoolerwithboiler// Optional parameters
         )// BaseClass
         {
             // to ensure "identifier" is required (not null)
