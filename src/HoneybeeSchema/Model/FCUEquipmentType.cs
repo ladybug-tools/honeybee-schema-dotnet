@@ -33,112 +33,112 @@ namespace HoneybeeSchema
     public enum FCUEquipmentType
     {
         /// <summary>
-        /// Enum Chillerwithboiler for value: Fan coil chiller with boiler
+        /// Enum ChillerBoiler for value: FCU_Chiller_Boiler
         /// </summary>
-        [EnumMember(Value = "Fan coil chiller with boiler")]
-        Chillerwithboiler = 1,
+        [EnumMember(Value = "FCU_Chiller_Boiler")]
+        FCU_Chiller_Boiler = 1,
 
         /// <summary>
-        /// Enum Chillerwithcentralairsourceheatpump for value: Fan coil chiller with central air source heat pump
+        /// Enum ChillerASHP for value: FCU_Chiller_ASHP
         /// </summary>
-        [EnumMember(Value = "Fan coil chiller with central air source heat pump")]
-        Chillerwithcentralairsourceheatpump = 2,
+        [EnumMember(Value = "FCU_Chiller_ASHP")]
+        FCU_Chiller_ASHP = 2,
 
         /// <summary>
-        /// Enum Chillerwithdistricthotwater for value: Fan coil chiller with district hot water
+        /// Enum ChillerDHW for value: FCU_Chiller_DHW
         /// </summary>
-        [EnumMember(Value = "Fan coil chiller with district hot water")]
-        Chillerwithdistricthotwater = 3,
+        [EnumMember(Value = "FCU_Chiller_DHW")]
+        FCU_Chiller_DHW = 3,
 
         /// <summary>
-        /// Enum Chillerwithbaseboardelectric for value: Fan coil chiller with baseboard electric
+        /// Enum ChillerElectricBaseboard for value: FCU_Chiller_ElectricBaseboard
         /// </summary>
-        [EnumMember(Value = "Fan coil chiller with baseboard electric")]
-        Chillerwithbaseboardelectric = 4,
+        [EnumMember(Value = "FCU_Chiller_ElectricBaseboard")]
+        FCU_Chiller_ElectricBaseboard = 4,
 
         /// <summary>
-        /// Enum Chillerwithgasunitheaters for value: Fan coil chiller with gas unit heaters
+        /// Enum ChillerGasHeaters for value: FCU_Chiller_GasHeaters
         /// </summary>
-        [EnumMember(Value = "Fan coil chiller with gas unit heaters")]
-        Chillerwithgasunitheaters = 5,
+        [EnumMember(Value = "FCU_Chiller_GasHeaters")]
+        FCU_Chiller_GasHeaters = 5,
 
         /// <summary>
-        /// Enum Chillerwithnoheat for value: Fan coil chiller with no heat
+        /// Enum Chiller for value: FCU_Chiller
         /// </summary>
-        [EnumMember(Value = "Fan coil chiller with no heat")]
-        Chillerwithnoheat = 6,
+        [EnumMember(Value = "FCU_Chiller")]
+        FCU_Chiller = 6,
 
         /// <summary>
-        /// Enum AirCooledchillerwithboiler for value: Fan coil air-cooled chiller with boiler
+        /// Enum ACChillerBoiler for value: FCU_ACChiller_Boiler
         /// </summary>
-        [EnumMember(Value = "Fan coil air-cooled chiller with boiler")]
-        AirCooledchillerwithboiler = 7,
+        [EnumMember(Value = "FCU_ACChiller_Boiler")]
+        FCU_ACChiller_Boiler = 7,
 
         /// <summary>
-        /// Enum AirCooledchillerwithcentralairsourceheatpump for value: Fan coil air-cooled chiller with central air source heat pump
+        /// Enum ACChillerASHP for value: FCU_ACChiller_ASHP
         /// </summary>
-        [EnumMember(Value = "Fan coil air-cooled chiller with central air source heat pump")]
-        AirCooledchillerwithcentralairsourceheatpump = 8,
+        [EnumMember(Value = "FCU_ACChiller_ASHP")]
+        FCU_ACChiller_ASHP = 8,
 
         /// <summary>
-        /// Enum AirCooledchillerwithdistricthotwater for value: Fan coil air-cooled chiller with district hot water
+        /// Enum ACChillerDHW for value: FCU_ACChiller_DHW
         /// </summary>
-        [EnumMember(Value = "Fan coil air-cooled chiller with district hot water")]
-        AirCooledchillerwithdistricthotwater = 9,
+        [EnumMember(Value = "FCU_ACChiller_DHW")]
+        FCU_ACChiller_DHW = 9,
 
         /// <summary>
-        /// Enum AirCooledchillerwithbaseboardelectric for value: Fan coil air-cooled chiller with baseboard electric
+        /// Enum ACChillerElectricBaseboard for value: FCU_ACChiller_ElectricBaseboard
         /// </summary>
-        [EnumMember(Value = "Fan coil air-cooled chiller with baseboard electric")]
-        AirCooledchillerwithbaseboardelectric = 10,
+        [EnumMember(Value = "FCU_ACChiller_ElectricBaseboard")]
+        FCU_ACChiller_ElectricBaseboard = 10,
 
         /// <summary>
-        /// Enum AirCooledchillerwithgasunitheaters for value: Fan coil air-cooled chiller with gas unit heaters
+        /// Enum ACChillerGasHeaters for value: FCU_ACChiller_GasHeaters
         /// </summary>
-        [EnumMember(Value = "Fan coil air-cooled chiller with gas unit heaters")]
-        AirCooledchillerwithgasunitheaters = 11,
+        [EnumMember(Value = "FCU_ACChiller_GasHeaters")]
+        FCU_ACChiller_GasHeaters = 11,
 
         /// <summary>
-        /// Enum AirCooledchillerwithnoheat for value: Fan coil air-cooled chiller with no heat
+        /// Enum ACChiller for value: FCU_ACChiller
         /// </summary>
-        [EnumMember(Value = "Fan coil air-cooled chiller with no heat")]
-        AirCooledchillerwithnoheat = 12,
+        [EnumMember(Value = "FCU_ACChiller")]
+        FCU_ACChiller = 12,
 
         /// <summary>
-        /// Enum Districtchilledwaterwithboiler for value: Fan coil district chilled water with boiler
+        /// Enum DCWBoiler for value: FCU_DCW_Boiler
         /// </summary>
-        [EnumMember(Value = "Fan coil district chilled water with boiler")]
-        Districtchilledwaterwithboiler = 13,
+        [EnumMember(Value = "FCU_DCW_Boiler")]
+        FCU_DCW_Boiler = 13,
 
         /// <summary>
-        /// Enum Districtchilledwaterwithcentralairsourceheatpump for value: Fan coil district chilled water with central air source heat pump
+        /// Enum DCWASHP for value: FCU_DCW_ASHP
         /// </summary>
-        [EnumMember(Value = "Fan coil district chilled water with central air source heat pump")]
-        Districtchilledwaterwithcentralairsourceheatpump = 14,
+        [EnumMember(Value = "FCU_DCW_ASHP")]
+        FCU_DCW_ASHP = 14,
 
         /// <summary>
-        /// Enum Districtchilledwaterwithdistricthotwater for value: Fan coil district chilled water with district hot water
+        /// Enum DCWDHW for value: FCU_DCW_DHW
         /// </summary>
-        [EnumMember(Value = "Fan coil district chilled water with district hot water")]
-        Districtchilledwaterwithdistricthotwater = 15,
+        [EnumMember(Value = "FCU_DCW_DHW")]
+        FCU_DCW_DHW = 15,
 
         /// <summary>
-        /// Enum Districtchilledwaterwithbaseboardelectric for value: Fan coil district chilled water with baseboard electric
+        /// Enum DCWElectricBaseboard for value: FCU_DCW_ElectricBaseboard
         /// </summary>
-        [EnumMember(Value = "Fan coil district chilled water with baseboard electric")]
-        Districtchilledwaterwithbaseboardelectric = 16,
+        [EnumMember(Value = "FCU_DCW_ElectricBaseboard")]
+        FCU_DCW_ElectricBaseboard = 16,
 
         /// <summary>
-        /// Enum Districtchilledwaterwithgasunitheaters for value: Fan coil district chilled water with gas unit heaters
+        /// Enum DCWGasHeaters for value: FCU_DCW_GasHeaters
         /// </summary>
-        [EnumMember(Value = "Fan coil district chilled water with gas unit heaters")]
-        Districtchilledwaterwithgasunitheaters = 17,
+        [EnumMember(Value = "FCU_DCW_GasHeaters")]
+        FCU_DCW_GasHeaters = 17,
 
         /// <summary>
-        /// Enum Districtchilledwaterwithnoheat for value: Fan coil district chilled water with no heat
+        /// Enum DCW for value: FCU_DCW
         /// </summary>
-        [EnumMember(Value = "Fan coil district chilled water with no heat")]
-        Districtchilledwaterwithnoheat = 18
+        [EnumMember(Value = "FCU_DCW")]
+        FCU_DCW = 18
 
     }
 

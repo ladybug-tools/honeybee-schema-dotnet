@@ -33,10 +33,10 @@ namespace HoneybeeSchema
     public enum FurnaceEquipmentType
     {
         /// <summary>
-        /// Enum Forcedairfurnace for value: Forced air furnace
+        /// Enum Furnace for value: Furnace
         /// </summary>
-        [EnumMember(Value = "Forced air furnace")]
-        Forcedairfurnace = 1
+        [EnumMember(Value = "Furnace")]
+        Furnace = 1
 
     }
 

@@ -33,58 +33,58 @@ namespace HoneybeeSchema
     public enum ResidentialEquipmentType
     {
         /// <summary>
-        /// Enum ACwithbaseboardelectric for value: Residential AC with baseboard electric
+        /// Enum ResidentialACElectricBaseboard for value: ResidentialAC_ElectricBaseboard
         /// </summary>
-        [EnumMember(Value = "Residential AC with baseboard electric")]
-        ACwithbaseboardelectric = 1,
+        [EnumMember(Value = "ResidentialAC_ElectricBaseboard")]
+        ResidentialAC_ElectricBaseboard = 1,
 
         /// <summary>
-        /// Enum ACwithbaseboardgasboiler for value: Residential AC with baseboard gas boiler
+        /// Enum ResidentialACBoilerBaseboard for value: ResidentialAC_BoilerBaseboard
         /// </summary>
-        [EnumMember(Value = "Residential AC with baseboard gas boiler")]
-        ACwithbaseboardgasboiler = 2,
+        [EnumMember(Value = "ResidentialAC_BoilerBaseboard")]
+        ResidentialAC_BoilerBaseboard = 2,
 
         /// <summary>
-        /// Enum ACwithbaseboardcentralairsourceheatpump for value: Residential AC with baseboard central air source heat pump
+        /// Enum ResidentialACASHPBaseboard for value: ResidentialAC_ASHPBaseboard
         /// </summary>
-        [EnumMember(Value = "Residential AC with baseboard central air source heat pump")]
-        ACwithbaseboardcentralairsourceheatpump = 3,
+        [EnumMember(Value = "ResidentialAC_ASHPBaseboard")]
+        ResidentialAC_ASHPBaseboard = 3,
 
         /// <summary>
-        /// Enum ACwithbaseboarddistricthotwater for value: Residential AC with baseboard district hot water
+        /// Enum ResidentialACDHWBaseboard for value: ResidentialAC_DHWBaseboard
         /// </summary>
-        [EnumMember(Value = "Residential AC with baseboard district hot water")]
-        ACwithbaseboarddistricthotwater = 4,
+        [EnumMember(Value = "ResidentialAC_DHWBaseboard")]
+        ResidentialAC_DHWBaseboard = 4,
 
         /// <summary>
-        /// Enum ACwithresidentialforcedairfurnace for value: Residential AC with residential forced air furnace
+        /// Enum ResidentialACResidentialFurnace for value: ResidentialAC_ResidentialFurnace
         /// </summary>
-        [EnumMember(Value = "Residential AC with residential forced air furnace")]
-        ACwithresidentialforcedairfurnace = 5,
+        [EnumMember(Value = "ResidentialAC_ResidentialFurnace")]
+        ResidentialAC_ResidentialFurnace = 5,
 
         /// <summary>
-        /// Enum ACwithnoheat for value: Residential AC with no heat
+        /// Enum ResidentialAC for value: ResidentialAC
         /// </summary>
-        [EnumMember(Value = "Residential AC with no heat")]
-        ACwithnoheat = 6,
+        [EnumMember(Value = "ResidentialAC")]
+        ResidentialAC = 6,
 
         /// <summary>
-        /// Enum Heatpump for value: Residential heat pump
+        /// Enum ResidentialHP for value: ResidentialHP
         /// </summary>
-        [EnumMember(Value = "Residential heat pump")]
-        Heatpump = 7,
+        [EnumMember(Value = "ResidentialHP")]
+        ResidentialHP = 7,
 
         /// <summary>
-        /// Enum Heatpumpwithnocooling for value: Residential heat pump with no cooling
+        /// Enum ResidentialHPNoCool for value: ResidentialHPNoCool
         /// </summary>
-        [EnumMember(Value = "Residential heat pump with no cooling")]
-        Heatpumpwithnocooling = 8,
+        [EnumMember(Value = "ResidentialHPNoCool")]
+        ResidentialHPNoCool = 8,
 
         /// <summary>
-        /// Enum Forcedairfurnace for value: Residential forced air furnace
+        /// Enum ResidentialFurnace for value: ResidentialFurnace
         /// </summary>
-        [EnumMember(Value = "Residential forced air furnace")]
-        Forcedairfurnace = 9
+        [EnumMember(Value = "ResidentialFurnace")]
+        ResidentialFurnace = 9
 
     }
 

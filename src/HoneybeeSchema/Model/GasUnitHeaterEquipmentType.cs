@@ -33,10 +33,10 @@ namespace HoneybeeSchema
     public enum GasUnitHeaterEquipmentType
     {
         /// <summary>
-        /// Enum Gasunitheaters for value: Gas unit heaters
+        /// Enum GasHeaters for value: GasHeaters
         /// </summary>
-        [EnumMember(Value = "Gas unit heaters")]
-        Gasunitheaters = 1
+        [EnumMember(Value = "GasHeaters")]
+        GasHeaters = 1
 
     }
 

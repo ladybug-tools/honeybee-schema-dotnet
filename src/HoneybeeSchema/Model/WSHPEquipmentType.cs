@@ -33,28 +33,28 @@ namespace HoneybeeSchema
     public enum WSHPEquipmentType
     {
         /// <summary>
-        /// Enum Fluidcoolerwithboiler for value: Water source heat pumps fluid cooler with boiler
+        /// Enum FluidCoolerBoiler for value: WSHP_FluidCooler_Boiler
         /// </summary>
-        [EnumMember(Value = "Water source heat pumps fluid cooler with boiler")]
-        Fluidcoolerwithboiler = 1,
+        [EnumMember(Value = "WSHP_FluidCooler_Boiler")]
+        WSHP_FluidCooler_Boiler = 1,
 
         /// <summary>
-        /// Enum Coolingtowerwithboiler for value: Water source heat pumps cooling tower with boiler
+        /// Enum CoolingTowerBoiler for value: WSHP_CoolingTower_Boiler
         /// </summary>
-        [EnumMember(Value = "Water source heat pumps cooling tower with boiler")]
-        Coolingtowerwithboiler = 2,
+        [EnumMember(Value = "WSHP_CoolingTower_Boiler")]
+        WSHP_CoolingTower_Boiler = 2,
 
         /// <summary>
-        /// Enum Withgroundsourceheatpump for value: Water source heat pumps with ground source heat pump
+        /// Enum GSHP for value: WSHP_GSHP
         /// </summary>
-        [EnumMember(Value = "Water source heat pumps with ground source heat pump")]
-        Withgroundsourceheatpump = 3,
+        [EnumMember(Value = "WSHP_GSHP")]
+        WSHP_GSHP = 3,
 
         /// <summary>
-        /// Enum Districtchilledwaterwithdistricthotwater for value: Water source heat pumps district chilled water with district hot water
+        /// Enum DCWDHW for value: WSHP_DCW_DHW
         /// </summary>
-        [EnumMember(Value = "Water source heat pumps district chilled water with district hot water")]
-        Districtchilledwaterwithdistricthotwater = 4
+        [EnumMember(Value = "WSHP_DCW_DHW")]
+        WSHP_DCW_DHW = 4
 
     }
 

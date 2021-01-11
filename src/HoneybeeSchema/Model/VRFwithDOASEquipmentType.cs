@@ -33,10 +33,10 @@ namespace HoneybeeSchema
     public enum VRFwithDOASEquipmentType
     {
         /// <summary>
-        /// Enum DOASwithVRF for value: DOAS with VRF
+        /// Enum DOASVRF for value: DOAS_VRF
         /// </summary>
-        [EnumMember(Value = "DOAS with VRF")]
-        DOASwithVRF = 1
+        [EnumMember(Value = "DOAS_VRF")]
+        DOAS_VRF = 1
 
     }
 
