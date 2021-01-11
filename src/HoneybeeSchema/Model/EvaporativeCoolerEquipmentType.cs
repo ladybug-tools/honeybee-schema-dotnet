@@ -33,46 +33,46 @@ namespace HoneybeeSchema
     public enum EvaporativeCoolerEquipmentType
     {
         /// <summary>
-        /// Enum Baseboardelectric for value: Direct evap coolers with baseboard electric
+        /// Enum EvapCoolersElectricBaseboard for value: EvapCoolers_ElectricBaseboard
         /// </summary>
-        [EnumMember(Value = "Direct evap coolers with baseboard electric")]
-        Baseboardelectric = 1,
+        [EnumMember(Value = "EvapCoolers_ElectricBaseboard")]
+        EvapCoolers_ElectricBaseboard = 1,
 
         /// <summary>
-        /// Enum Baseboardgasboiler for value: Direct evap coolers with baseboard gas boiler
+        /// Enum EvapCoolersBoilerBaseboard for value: EvapCoolers_BoilerBaseboard
         /// </summary>
-        [EnumMember(Value = "Direct evap coolers with baseboard gas boiler")]
-        Baseboardgasboiler = 2,
+        [EnumMember(Value = "EvapCoolers_BoilerBaseboard")]
+        EvapCoolers_BoilerBaseboard = 2,
 
         /// <summary>
-        /// Enum Baseboardcentralairsourceheatpump for value: Direct evap coolers with baseboard central air source heat pump
+        /// Enum EvapCoolersASHPBaseboard for value: EvapCoolers_ASHPBaseboard
         /// </summary>
-        [EnumMember(Value = "Direct evap coolers with baseboard central air source heat pump")]
-        Baseboardcentralairsourceheatpump = 3,
+        [EnumMember(Value = "EvapCoolers_ASHPBaseboard")]
+        EvapCoolers_ASHPBaseboard = 3,
 
         /// <summary>
-        /// Enum Baseboarddistricthotwater for value: Direct evap coolers with baseboard district hot water
+        /// Enum EvapCoolersDHWBaseboard for value: EvapCoolers_DHWBaseboard
         /// </summary>
-        [EnumMember(Value = "Direct evap coolers with baseboard district hot water")]
-        Baseboarddistricthotwater = 4,
+        [EnumMember(Value = "EvapCoolers_DHWBaseboard")]
+        EvapCoolers_DHWBaseboard = 4,
 
         /// <summary>
-        /// Enum Forcedairfurnace for value: Direct evap coolers with forced air furnace
+        /// Enum EvapCoolersFurnace for value: EvapCoolers_Furnace
         /// </summary>
-        [EnumMember(Value = "Direct evap coolers with forced air furnace")]
-        Forcedairfurnace = 5,
+        [EnumMember(Value = "EvapCoolers_Furnace")]
+        EvapCoolers_Furnace = 5,
 
         /// <summary>
-        /// Enum Gasunitheaters for value: Direct evap coolers with gas unit heaters
+        /// Enum EvapCoolersUnitHeaters for value: EvapCoolers_UnitHeaters
         /// </summary>
-        [EnumMember(Value = "Direct evap coolers with gas unit heaters")]
-        Gasunitheaters = 6,
+        [EnumMember(Value = "EvapCoolers_UnitHeaters")]
+        EvapCoolers_UnitHeaters = 6,
 
         /// <summary>
-        /// Enum Noheat for value: Direct evap coolers with no heat
+        /// Enum EvapCoolers for value: EvapCoolers
         /// </summary>
-        [EnumMember(Value = "Direct evap coolers with no heat")]
-        Noheat = 7
+        [EnumMember(Value = "EvapCoolers")]
+        EvapCoolers = 7
 
     }
 

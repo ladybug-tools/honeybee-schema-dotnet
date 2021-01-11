@@ -33,34 +33,34 @@ namespace HoneybeeSchema
     public enum PVAVEquipmentType
     {
         /// <summary>
-        /// Enum Gasboilerreheat for value: PVAV with gas boiler reheat
+        /// Enum Boiler for value: PVAV_Boiler
         /// </summary>
-        [EnumMember(Value = "PVAV with gas boiler reheat")]
-        Gasboilerreheat = 1,
+        [EnumMember(Value = "PVAV_Boiler")]
+        PVAV_Boiler = 1,
 
         /// <summary>
-        /// Enum Centralairsourceheatpumpreheat for value: PVAV with central air source heat pump reheat
+        /// Enum ASHP for value: PVAV_ASHP
         /// </summary>
-        [EnumMember(Value = "PVAV with central air source heat pump reheat")]
-        Centralairsourceheatpumpreheat = 2,
+        [EnumMember(Value = "PVAV_ASHP")]
+        PVAV_ASHP = 2,
 
         /// <summary>
-        /// Enum Districthotwaterreheat for value: PVAV with district hot water reheat
+        /// Enum DHW for value: PVAV_DHW
         /// </summary>
-        [EnumMember(Value = "PVAV with district hot water reheat")]
-        Districthotwaterreheat = 3,
+        [EnumMember(Value = "PVAV_DHW")]
+        PVAV_DHW = 3,
 
         /// <summary>
-        /// Enum PFPboxes for value: PVAV with PFP boxes
+        /// Enum PFP for value: PVAV_PFP
         /// </summary>
-        [EnumMember(Value = "PVAV with PFP boxes")]
-        PFPboxes = 4,
+        [EnumMember(Value = "PVAV_PFP")]
+        PVAV_PFP = 4,
 
         /// <summary>
-        /// Enum Gasheatwithelectricreheat for value: PVAV with gas heat with electric reheat
+        /// Enum BoilerElectricReheat for value: PVAV_BoilerElectricReheat
         /// </summary>
-        [EnumMember(Value = "PVAV with gas heat with electric reheat")]
-        Gasheatwithelectricreheat = 5
+        [EnumMember(Value = "PVAV_BoilerElectricReheat")]
+        PVAV_BoilerElectricReheat = 5
 
     }
 

@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Documentation for Honeybee simulation-parameter schema",
-    "version": "1.40.0",
+    "version": "1.40.2",
     "title": "Honeybee Simulation Parameter Schema",
     "contact": {
       "name": "Ladybug Tools",
@@ -179,6 +179,150 @@
   "paths": {},
   "components": {
     "schemas": {
+      "DaylightSavingTime": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DatedBaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "title": "Type",
+                "default": "DaylightSavingTime",
+                "pattern": "^DaylightSavingTime$",
+                "type": "string",
+                "readOnly": true
+              },
+              "start_date": {
+                "title": "Start Date",
+                "description": "A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).",
+                "default": [
+                  3,
+                  12
+                ],
+                "minItems": 2,
+                "maxItems": 3,
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "end_date": {
+                "title": "End Date",
+                "description": "A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).",
+                "default": [
+                  11,
+                  5
+                ],
+                "minItems": 2,
+                "maxItems": 3,
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        ],
+        "title": "DaylightSavingTime",
+        "description": "Used to describe the daylight savings time for the simulation.",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "WindCondition": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "wind_speed": {
+                "title": "Wind Speed",
+                "description": "Wind speed on the design day [m/s].",
+                "minimum": 0,
+                "maximum": 40,
+                "type": "number",
+                "format": "double"
+              },
+              "type": {
+                "title": "Type",
+                "default": "WindCondition",
+                "pattern": "^WindCondition$",
+                "type": "string",
+                "readOnly": true
+              },
+              "wind_direction": {
+                "title": "Wind Direction",
+                "description": "Wind direction on the design day [degrees].",
+                "default": 0,
+                "minimum": 0,
+                "maximum": 360,
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "required": [
+              "wind_speed"
+            ],
+            "additionalProperties": false
+          }
+        ],
+        "title": "WindCondition",
+        "description": "Used to specify wind conditions on a design day.",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "DryBulbCondition": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "dry_bulb_max": {
+                "title": "Dry Bulb Max",
+                "description": "The maximum dry bulb temperature on the design day [C].",
+                "minimum": -90,
+                "maximum": 70,
+                "type": "number",
+                "format": "double"
+              },
+              "dry_bulb_range": {
+                "title": "Dry Bulb Range",
+                "description": "The difference between min and max temperatures on the design day [C].",
+                "minimum": 0,
+                "type": "number",
+                "format": "double"
+              },
+              "type": {
+                "title": "Type",
+                "default": "DryBulbCondition",
+                "pattern": "^DryBulbCondition$",
+                "type": "string",
+                "readOnly": true
+              }
+            },
+            "required": [
+              "dry_bulb_max",
+              "dry_bulb_range"
+            ],
+            "additionalProperties": false
+          }
+        ],
+        "title": "DryBulbCondition",
+        "description": "Used to specify dry bulb conditions on a design day.",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
       "SimulationControl": {
         "allOf": [
           {
@@ -230,345 +374,6 @@
         ],
         "title": "SimulationControl",
         "description": "Used to specify which types of calculations to run.",
-        "discriminator": {
-          "propertyName": "type"
-        }
-      },
-      "ASHRAEClearSky": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/_SkyCondition"
-          },
-          {
-            "type": "object",
-            "required": [
-              "clearness"
-            ],
-            "properties": {
-              "clearness": {
-                "title": "Clearness",
-                "description": "Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.",
-                "minimum": 0,
-                "maximum": 1.2,
-                "type": "number",
-                "format": "double"
-              },
-              "type": {
-                "title": "Type",
-                "default": "ASHRAEClearSky",
-                "pattern": "^ASHRAEClearSky$",
-                "type": "string",
-                "readOnly": true
-              }
-            },
-            "additionalProperties": false
-          }
-        ],
-        "title": "ASHRAEClearSky",
-        "description": "Used to specify sky conditions on a design day.",
-        "discriminator": {
-          "propertyName": "type"
-        }
-      },
-      "DesignDayTypes": {
-        "title": "DesignDayTypes",
-        "description": "An enumeration.",
-        "enum": [
-          "SummerDesignDay",
-          "WinterDesignDay",
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Holiday",
-          "CustomDay1",
-          "CustomDay2"
-        ],
-        "type": "string"
-      },
-      "DryBulbCondition": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "dry_bulb_max": {
-                "title": "Dry Bulb Max",
-                "description": "The maximum dry bulb temperature on the design day [C].",
-                "minimum": -90,
-                "maximum": 70,
-                "type": "number",
-                "format": "double"
-              },
-              "dry_bulb_range": {
-                "title": "Dry Bulb Range",
-                "description": "The difference between min and max temperatures on the design day [C].",
-                "minimum": 0,
-                "type": "number",
-                "format": "double"
-              },
-              "type": {
-                "title": "Type",
-                "default": "DryBulbCondition",
-                "pattern": "^DryBulbCondition$",
-                "type": "string",
-                "readOnly": true
-              }
-            },
-            "required": [
-              "dry_bulb_max",
-              "dry_bulb_range"
-            ],
-            "additionalProperties": false
-          }
-        ],
-        "title": "DryBulbCondition",
-        "description": "Used to specify dry bulb conditions on a design day.",
-        "discriminator": {
-          "propertyName": "type"
-        }
-      },
-      "HumidityTypes": {
-        "title": "HumidityTypes",
-        "description": "An enumeration.",
-        "enum": [
-          "Wetbulb",
-          "Dewpoint",
-          "HumidityRatio",
-          "Enthalpy"
-        ],
-        "type": "string"
-      },
-      "HumidityCondition": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "humidity_type": {
-                "$ref": "#/components/schemas/HumidityTypes"
-              },
-              "humidity_value": {
-                "title": "Humidity Value",
-                "description": "The value correcponding to the humidity_type.",
-                "type": "number",
-                "format": "double"
-              },
-              "type": {
-                "title": "Type",
-                "default": "HumidityCondition",
-                "pattern": "^HumidityCondition$",
-                "type": "string",
-                "readOnly": true
-              },
-              "barometric_pressure": {
-                "title": "Barometric Pressure",
-                "description": "Barometric air pressure on the design day [Pa].",
-                "default": 101325,
-                "minimum": 31000,
-                "maximum": 120000,
-                "type": "number",
-                "format": "double"
-              },
-              "rain": {
-                "title": "Rain",
-                "description": "Boolean to indicate rain on the design day.",
-                "default": false,
-                "type": "boolean"
-              },
-              "snow_on_ground": {
-                "title": "Snow On Ground",
-                "description": "Boolean to indicate snow on the ground during the design day.",
-                "default": false,
-                "type": "boolean"
-              }
-            },
-            "required": [
-              "humidity_type",
-              "humidity_value"
-            ],
-            "additionalProperties": false
-          }
-        ],
-        "title": "HumidityCondition",
-        "description": "Used to specify humidity conditions on a design day.",
-        "discriminator": {
-          "propertyName": "type"
-        }
-      },
-      "WindCondition": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "wind_speed": {
-                "title": "Wind Speed",
-                "description": "Wind speed on the design day [m/s].",
-                "minimum": 0,
-                "maximum": 40,
-                "type": "number",
-                "format": "double"
-              },
-              "type": {
-                "title": "Type",
-                "default": "WindCondition",
-                "pattern": "^WindCondition$",
-                "type": "string",
-                "readOnly": true
-              },
-              "wind_direction": {
-                "title": "Wind Direction",
-                "description": "Wind direction on the design day [degrees].",
-                "default": 0,
-                "minimum": 0,
-                "maximum": 360,
-                "type": "number",
-                "format": "double"
-              }
-            },
-            "required": [
-              "wind_speed"
-            ],
-            "additionalProperties": false
-          }
-        ],
-        "title": "WindCondition",
-        "description": "Used to specify wind conditions on a design day.",
-        "discriminator": {
-          "propertyName": "type"
-        }
-      },
-      "ASHRAETau": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/_SkyCondition"
-          },
-          {
-            "type": "object",
-            "required": [
-              "tau_b",
-              "tau_d"
-            ],
-            "properties": {
-              "tau_b": {
-                "title": "Tau B",
-                "description": "Value for the beam optical depth. Typically found in .stat files.",
-                "minimum": 0,
-                "maximum": 1.2,
-                "type": "number",
-                "format": "double"
-              },
-              "tau_d": {
-                "title": "Tau D",
-                "description": "Value for the diffuse optical depth. Typically found in .stat files.",
-                "minimum": 0,
-                "maximum": 3,
-                "type": "number",
-                "format": "double"
-              },
-              "type": {
-                "title": "Type",
-                "default": "ASHRAETau",
-                "pattern": "^ASHRAETau$",
-                "type": "string",
-                "readOnly": true
-              }
-            },
-            "additionalProperties": false
-          }
-        ],
-        "title": "ASHRAETau",
-        "description": "Used to specify sky conditions on a design day.",
-        "discriminator": {
-          "propertyName": "type"
-        }
-      },
-      "DesignDay": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "name": {
-                "title": "Name",
-                "description": "Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).",
-                "maxLength": 100,
-                "minLength": 1,
-                "type": "string"
-              },
-              "day_type": {
-                "$ref": "#/components/schemas/DesignDayTypes"
-              },
-              "dry_bulb_condition": {
-                "title": "Dry Bulb Condition",
-                "description": "A DryBulbCondition describing temperature conditions on the design day.",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DryBulbCondition"
-                  }
-                ]
-              },
-              "humidity_condition": {
-                "title": "Humidity Condition",
-                "description": "A HumidityCondition describing humidity and precipitation conditions on the design day.",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/HumidityCondition"
-                  }
-                ]
-              },
-              "wind_condition": {
-                "title": "Wind Condition",
-                "description": "A WindCondition describing wind conditions on the design day.",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/WindCondition"
-                  }
-                ]
-              },
-              "sky_condition": {
-                "title": "Sky Condition",
-                "anyOf": [
-                  {
-                    "$ref": "#/components/schemas/ASHRAEClearSky"
-                  },
-                  {
-                    "$ref": "#/components/schemas/ASHRAETau"
-                  }
-                ]
-              },
-              "type": {
-                "title": "Type",
-                "default": "DesignDay",
-                "pattern": "^DesignDay$",
-                "type": "string",
-                "readOnly": true
-              }
-            },
-            "required": [
-              "name",
-              "day_type",
-              "dry_bulb_condition",
-              "humidity_condition",
-              "wind_condition",
-              "sky_condition"
-            ],
-            "additionalProperties": false
-          }
-        ],
-        "title": "DesignDay",
-        "description": "An object representing design day conditions.",
         "discriminator": {
           "propertyName": "type"
         }
@@ -659,61 +464,6 @@
           "Saturday"
         ],
         "type": "string"
-      },
-      "DaylightSavingTime": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DatedBaseModel"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "type": {
-                "title": "Type",
-                "default": "DaylightSavingTime",
-                "pattern": "^DaylightSavingTime$",
-                "type": "string",
-                "readOnly": true
-              },
-              "start_date": {
-                "title": "Start Date",
-                "description": "A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).",
-                "default": [
-                  3,
-                  12
-                ],
-                "minItems": 2,
-                "maxItems": 3,
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "end_date": {
-                "title": "End Date",
-                "description": "A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).",
-                "default": [
-                  11,
-                  5
-                ],
-                "minItems": 2,
-                "maxItems": 3,
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
-            "additionalProperties": false
-          }
-        ],
-        "title": "DaylightSavingTime",
-        "description": "Used to describe the daylight savings time for the simulation.",
-        "discriminator": {
-          "propertyName": "type"
-        }
       },
       "RunPeriod": {
         "allOf": [
@@ -905,6 +655,256 @@
           "propertyName": "type"
         }
       },
+      "DesignDayTypes": {
+        "title": "DesignDayTypes",
+        "description": "An enumeration.",
+        "enum": [
+          "SummerDesignDay",
+          "WinterDesignDay",
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Holiday",
+          "CustomDay1",
+          "CustomDay2"
+        ],
+        "type": "string"
+      },
+      "HumidityTypes": {
+        "title": "HumidityTypes",
+        "description": "An enumeration.",
+        "enum": [
+          "Wetbulb",
+          "Dewpoint",
+          "HumidityRatio",
+          "Enthalpy"
+        ],
+        "type": "string"
+      },
+      "HumidityCondition": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "humidity_type": {
+                "$ref": "#/components/schemas/HumidityTypes"
+              },
+              "humidity_value": {
+                "title": "Humidity Value",
+                "description": "The value correcponding to the humidity_type.",
+                "type": "number",
+                "format": "double"
+              },
+              "type": {
+                "title": "Type",
+                "default": "HumidityCondition",
+                "pattern": "^HumidityCondition$",
+                "type": "string",
+                "readOnly": true
+              },
+              "barometric_pressure": {
+                "title": "Barometric Pressure",
+                "description": "Barometric air pressure on the design day [Pa].",
+                "default": 101325,
+                "minimum": 31000,
+                "maximum": 120000,
+                "type": "number",
+                "format": "double"
+              },
+              "rain": {
+                "title": "Rain",
+                "description": "Boolean to indicate rain on the design day.",
+                "default": false,
+                "type": "boolean"
+              },
+              "snow_on_ground": {
+                "title": "Snow On Ground",
+                "description": "Boolean to indicate snow on the ground during the design day.",
+                "default": false,
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "humidity_type",
+              "humidity_value"
+            ],
+            "additionalProperties": false
+          }
+        ],
+        "title": "HumidityCondition",
+        "description": "Used to specify humidity conditions on a design day.",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "ASHRAEClearSky": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/_SkyCondition"
+          },
+          {
+            "type": "object",
+            "required": [
+              "clearness"
+            ],
+            "properties": {
+              "clearness": {
+                "title": "Clearness",
+                "description": "Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.",
+                "minimum": 0,
+                "maximum": 1.2,
+                "type": "number",
+                "format": "double"
+              },
+              "type": {
+                "title": "Type",
+                "default": "ASHRAEClearSky",
+                "pattern": "^ASHRAEClearSky$",
+                "type": "string",
+                "readOnly": true
+              }
+            },
+            "additionalProperties": false
+          }
+        ],
+        "title": "ASHRAEClearSky",
+        "description": "Used to specify sky conditions on a design day.",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "ASHRAETau": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/_SkyCondition"
+          },
+          {
+            "type": "object",
+            "required": [
+              "tau_b",
+              "tau_d"
+            ],
+            "properties": {
+              "tau_b": {
+                "title": "Tau B",
+                "description": "Value for the beam optical depth. Typically found in .stat files.",
+                "minimum": 0,
+                "maximum": 1.2,
+                "type": "number",
+                "format": "double"
+              },
+              "tau_d": {
+                "title": "Tau D",
+                "description": "Value for the diffuse optical depth. Typically found in .stat files.",
+                "minimum": 0,
+                "maximum": 3,
+                "type": "number",
+                "format": "double"
+              },
+              "type": {
+                "title": "Type",
+                "default": "ASHRAETau",
+                "pattern": "^ASHRAETau$",
+                "type": "string",
+                "readOnly": true
+              }
+            },
+            "additionalProperties": false
+          }
+        ],
+        "title": "ASHRAETau",
+        "description": "Used to specify sky conditions on a design day.",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "DesignDay": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "title": "Name",
+                "description": "Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).",
+                "maxLength": 100,
+                "minLength": 1,
+                "type": "string"
+              },
+              "day_type": {
+                "$ref": "#/components/schemas/DesignDayTypes"
+              },
+              "dry_bulb_condition": {
+                "title": "Dry Bulb Condition",
+                "description": "A DryBulbCondition describing temperature conditions on the design day.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/DryBulbCondition"
+                  }
+                ]
+              },
+              "humidity_condition": {
+                "title": "Humidity Condition",
+                "description": "A HumidityCondition describing humidity and precipitation conditions on the design day.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/HumidityCondition"
+                  }
+                ]
+              },
+              "wind_condition": {
+                "title": "Wind Condition",
+                "description": "A WindCondition describing wind conditions on the design day.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/WindCondition"
+                  }
+                ]
+              },
+              "sky_condition": {
+                "title": "Sky Condition",
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ASHRAEClearSky"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ASHRAETau"
+                  }
+                ]
+              },
+              "type": {
+                "title": "Type",
+                "default": "DesignDay",
+                "pattern": "^DesignDay$",
+                "type": "string",
+                "readOnly": true
+              }
+            },
+            "required": [
+              "name",
+              "day_type",
+              "dry_bulb_condition",
+              "humidity_condition",
+              "wind_condition",
+              "sky_condition"
+            ],
+            "additionalProperties": false
+          }
+        ],
+        "title": "DesignDay",
+        "description": "An object representing design day conditions.",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
       "SizingParameter": {
         "allOf": [
           {
@@ -1063,6 +1063,31 @@
           "propertyName": "type"
         }
       },
+      "DatedBaseModel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "title": "Type",
+                "default": "DatedBaseModel",
+                "type": "string",
+                "pattern": "^DatedBaseModel$",
+                "readOnly": true
+              }
+            },
+            "additionalProperties": false
+          }
+        ],
+        "title": "DatedBaseModel",
+        "description": "Base class for all objects needing to check for a valid Date.",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
       "_SkyCondition": {
         "allOf": [
           {
@@ -1104,31 +1129,6 @@
         ],
         "title": "_SkyCondition",
         "description": "Used to specify sky conditions on a design day.",
-        "discriminator": {
-          "propertyName": "type"
-        }
-      },
-      "DatedBaseModel": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "type": {
-                "title": "Type",
-                "default": "DatedBaseModel",
-                "type": "string",
-                "pattern": "^DatedBaseModel$",
-                "readOnly": true
-              }
-            },
-            "additionalProperties": false
-          }
-        ],
-        "title": "DatedBaseModel",
-        "description": "Base class for all objects needing to check for a valid Date.",
         "discriminator": {
           "propertyName": "type"
         }

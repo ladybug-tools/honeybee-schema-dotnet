@@ -33,28 +33,28 @@ namespace HoneybeeSchema
     public enum WSHPwithDOASEquipmentType
     {
         /// <summary>
-        /// Enum Fluidcoolerwithboiler for value: DOAS with water source heat pumps fluid cooler with boiler
+        /// Enum FluidCoolerBoiler for value: DOAS_WSHP_FluidCooler_Boiler
         /// </summary>
-        [EnumMember(Value = "DOAS with water source heat pumps fluid cooler with boiler")]
-        Fluidcoolerwithboiler = 1,
+        [EnumMember(Value = "DOAS_WSHP_FluidCooler_Boiler")]
+        DOAS_WSHP_FluidCooler_Boiler = 1,
 
         /// <summary>
-        /// Enum Coolingtowerwithboiler for value: DOAS with water source heat pumps cooling tower with boiler
+        /// Enum CoolingTowerBoiler for value: DOAS_WSHP_CoolingTower_Boiler
         /// </summary>
-        [EnumMember(Value = "DOAS with water source heat pumps cooling tower with boiler")]
-        Coolingtowerwithboiler = 2,
+        [EnumMember(Value = "DOAS_WSHP_CoolingTower_Boiler")]
+        DOAS_WSHP_CoolingTower_Boiler = 2,
 
         /// <summary>
-        /// Enum Withgroundsourceheatpump for value: DOAS with water source heat pumps with ground source heat pump
+        /// Enum GSHP for value: DOAS_WSHP_GSHP
         /// </summary>
-        [EnumMember(Value = "DOAS with water source heat pumps with ground source heat pump")]
-        Withgroundsourceheatpump = 3,
+        [EnumMember(Value = "DOAS_WSHP_GSHP")]
+        DOAS_WSHP_GSHP = 3,
 
         /// <summary>
-        /// Enum Districtchilledwaterwithdistricthotwater for value: DOAS with water source heat pumps district chilled water with district hot water
+        /// Enum DCWDHW for value: DOAS_WSHP_DCW_DHW
         /// </summary>
-        [EnumMember(Value = "DOAS with water source heat pumps district chilled water with district hot water")]
-        Districtchilledwaterwithdistricthotwater = 4
+        [EnumMember(Value = "DOAS_WSHP_DCW_DHW")]
+        DOAS_WSHP_DCW_DHW = 4
 
     }
 

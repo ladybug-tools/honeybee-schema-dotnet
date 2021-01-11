@@ -34,13 +34,13 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards</value>
         [DataMember(Name="vintage")]
-        public Vintages Vintage { get; set; } = Vintages._9012013;
+        public Vintages Vintage { get; set; } = Vintages.ASHRAE_2013;
         /// <summary>
         /// Text for the specific type of system equipment from the BaseboardEquipmentType enumeration.
         /// </summary>
         /// <value>Text for the specific type of system equipment from the BaseboardEquipmentType enumeration.</value>
         [DataMember(Name="equipment_type")]
-        public BaseboardEquipmentType EquipmentType { get; set; } = BaseboardEquipmentType.Electric;
+        public BaseboardEquipmentType EquipmentType { get; set; } = BaseboardEquipmentType.ElectricBaseboard;
         /// <summary>
         /// Initializes a new instance of the <see cref="Baseboard" /> class.
         /// </summary>
@@ -61,7 +61,7 @@ namespace HoneybeeSchema
         public Baseboard
         (
             string identifier, // Required parameters
-            string displayName= default, Vintages vintage= Vintages._9012013, BaseboardEquipmentType equipmentType= BaseboardEquipmentType.Electric// Optional parameters
+            string displayName= default, Vintages vintage= Vintages.ASHRAE_2013, BaseboardEquipmentType equipmentType= BaseboardEquipmentType.ElectricBaseboard// Optional parameters
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             this.Vintage = vintage;

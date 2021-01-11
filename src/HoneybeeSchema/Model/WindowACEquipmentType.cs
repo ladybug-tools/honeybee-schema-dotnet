@@ -33,46 +33,46 @@ namespace HoneybeeSchema
     public enum WindowACEquipmentType
     {
         /// <summary>
-        /// Enum Baseboardelectric for value: Window AC with baseboard electric
+        /// Enum WindowACElectricBaseboard for value: WindowAC_ElectricBaseboard
         /// </summary>
-        [EnumMember(Value = "Window AC with baseboard electric")]
-        Baseboardelectric = 1,
+        [EnumMember(Value = "WindowAC_ElectricBaseboard")]
+        WindowAC_ElectricBaseboard = 1,
 
         /// <summary>
-        /// Enum Baseboardgasboiler for value: Window AC with baseboard gas boiler
+        /// Enum WindowACBoilerBaseboard for value: WindowAC_BoilerBaseboard
         /// </summary>
-        [EnumMember(Value = "Window AC with baseboard gas boiler")]
-        Baseboardgasboiler = 2,
+        [EnumMember(Value = "WindowAC_BoilerBaseboard")]
+        WindowAC_BoilerBaseboard = 2,
 
         /// <summary>
-        /// Enum Baseboardcentralairsourceheatpump for value: Window AC with baseboard central air source heat pump
+        /// Enum WindowACASHPBaseboard for value: WindowAC_ASHPBaseboard
         /// </summary>
-        [EnumMember(Value = "Window AC with baseboard central air source heat pump")]
-        Baseboardcentralairsourceheatpump = 3,
+        [EnumMember(Value = "WindowAC_ASHPBaseboard")]
+        WindowAC_ASHPBaseboard = 3,
 
         /// <summary>
-        /// Enum Baseboarddistricthotwater for value: Window AC with baseboard district hot water
+        /// Enum WindowACDHWBaseboard for value: WindowAC_DHWBaseboard
         /// </summary>
-        [EnumMember(Value = "Window AC with baseboard district hot water")]
-        Baseboarddistricthotwater = 4,
+        [EnumMember(Value = "WindowAC_DHWBaseboard")]
+        WindowAC_DHWBaseboard = 4,
 
         /// <summary>
-        /// Enum Forcedairfurnace for value: Window AC with forced air furnace
+        /// Enum WindowACFurnace for value: WindowAC_Furnace
         /// </summary>
-        [EnumMember(Value = "Window AC with forced air furnace")]
-        Forcedairfurnace = 5,
+        [EnumMember(Value = "WindowAC_Furnace")]
+        WindowAC_Furnace = 5,
 
         /// <summary>
-        /// Enum Unitheaters for value: Window AC with unit heaters
+        /// Enum WindowACGasHeaters for value: WindowAC_GasHeaters
         /// </summary>
-        [EnumMember(Value = "Window AC with unit heaters")]
-        Unitheaters = 6,
+        [EnumMember(Value = "WindowAC_GasHeaters")]
+        WindowAC_GasHeaters = 6,
 
         /// <summary>
-        /// Enum Noheat for value: Window AC with no heat
+        /// Enum WindowAC for value: WindowAC
         /// </summary>
-        [EnumMember(Value = "Window AC with no heat")]
-        Noheat = 7
+        [EnumMember(Value = "WindowAC")]
+        WindowAC = 7
 
     }
 

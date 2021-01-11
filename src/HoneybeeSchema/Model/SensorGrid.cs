@@ -44,6 +44,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="sensors">A list of sensors that belong to the grid. (required).</param>
         /// <param name="mesh">An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D..</param>
+        /// <param name="baseGeometry">An optional array of Face3D used to represent the grid. There are no restrictions on how this property relates to the sensors and it is provided only to assist with the display of the grid when the number of sensors or the mesh is too large to be practically visualized..</param>
         /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="roomIdentifier">Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model..</param>
@@ -51,12 +52,13 @@ namespace HoneybeeSchema
         public SensorGrid
         (
             string identifier, List<Sensor> sensors, // Required parameters
-            string displayName= default, string roomIdentifier= default, List<List<string>> lightPath= default, Mesh3D mesh= default// Optional parameters
+            string displayName= default, string roomIdentifier= default, List<List<string>> lightPath= default, Mesh3D mesh= default, List<Face3D> baseGeometry= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, roomIdentifier: roomIdentifier, lightPath: lightPath)// BaseClass
         {
             // to ensure "sensors" is required (not null)
             this.Sensors = sensors ?? throw new ArgumentNullException("sensors is a required property for SensorGrid and cannot be null");
             this.Mesh = mesh;
+            this.BaseGeometry = baseGeometry;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "SensorGrid";
@@ -81,6 +83,12 @@ namespace HoneybeeSchema
         /// <value>An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D.</value>
         [DataMember(Name = "mesh")]
         public Mesh3D Mesh { get; set; } 
+        /// <summary>
+        /// An optional array of Face3D used to represent the grid. There are no restrictions on how this property relates to the sensors and it is provided only to assist with the display of the grid when the number of sensors or the mesh is too large to be practically visualized.
+        /// </summary>
+        /// <value>An optional array of Face3D used to represent the grid. There are no restrictions on how this property relates to the sensors and it is provided only to assist with the display of the grid when the number of sensors or the mesh is too large to be practically visualized.</value>
+        [DataMember(Name = "base_geometry")]
+        public List<Face3D> BaseGeometry { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -109,6 +117,7 @@ namespace HoneybeeSchema
             sb.Append("  LightPath: ").Append(LightPath).Append("\n");
             sb.Append("  Sensors: ").Append(Sensors).Append("\n");
             sb.Append("  Mesh: ").Append(Mesh).Append("\n");
+            sb.Append("  BaseGeometry: ").Append(BaseGeometry).Append("\n");
             return sb.ToString();
         }
   
@@ -187,6 +196,12 @@ namespace HoneybeeSchema
                     this.Mesh == input.Mesh ||
                     (this.Mesh != null &&
                     this.Mesh.Equals(input.Mesh))
+                ) && base.Equals(input) && 
+                (
+                    this.BaseGeometry == input.BaseGeometry ||
+                    this.BaseGeometry != null &&
+                    input.BaseGeometry != null &&
+                    this.BaseGeometry.SequenceEqual(input.BaseGeometry)
                 );
         }
 
@@ -205,6 +220,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Mesh != null)
                     hashCode = hashCode * 59 + this.Mesh.GetHashCode();
+                if (this.BaseGeometry != null)
+                    hashCode = hashCode * 59 + this.BaseGeometry.GetHashCode();
                 return hashCode;
             }
         }
