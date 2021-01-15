@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>1.40.2.0</Version>
+    <Version>1.40.2.1</Version>
     <Authors>Ladybug Tools</Authors>
     <Description>This is the .Net version of Honeybee Schema</Description>
     <Copyright>Copyright © 2020 Ladybug Tools LLC</Copyright>
@@ -13,6 +13,8 @@
     <FileVersion>1.40.2.0</FileVersion>
     <RepositoryUrl>https://github.com/ladybug-tools/honeybee-schema-dotnet</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>HoneybeeSchema.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

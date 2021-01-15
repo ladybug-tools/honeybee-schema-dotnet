@@ -15,10 +15,18 @@ jobs:
       - name: Update Assembly Version
         run: |
           python .openapi-generator/update_assembly_version.py
-          
+      
+      - name: Create key pair for signing the assembly
+        working-directory: src/HoneybeeSchema
+        run: |
+          "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\sn.exe" -k HoneybeeSchema.snk
+          ls
+        shell: cmd
+
       - name: Build
         run: |
           dotnet restore
+          
           dotnet build --configuration Release 
 
       - name: Run Unit Tests
