@@ -17,11 +17,9 @@ jobs:
           python .openapi-generator/update_assembly_version.py
       
       - run: |
-          tree "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin"
-
-      - run: |
           "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\sn.exe" -k HoneybeeSchema.snk
           ls
+        shell: cmd
 
       - name: Build
         run: |
