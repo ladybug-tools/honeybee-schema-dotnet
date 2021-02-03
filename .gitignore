@@ -31,6 +31,7 @@ node_modules/
 !**/packages/build/
 # Uncomment if necessary however generally it will be regenerated when needed
 #!**/packages/repositories.config
+!dll/*.nupkg
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
