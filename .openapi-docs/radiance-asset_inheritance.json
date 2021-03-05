@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Documentation for Honeybee radiance-asset schema",
-        "version": "1.42.0",
+        "version": "1.42.2",
         "title": "Honeybee Radiance Asset Schema",
         "contact": {
             "name": "Ladybug Tools",
@@ -119,6 +119,156 @@
     "paths": {},
     "components": {
         "schemas": {
+            "Ground": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_GlowHemisphere"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "title": "Type",
+                                "default": "Ground",
+                                "pattern": "^Ground$",
+                                "type": "string",
+                                "readOnly": true
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "Ground",
+                "description": "Ground component of the sky sphere.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "SkyHemisphere": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_GlowHemisphere"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "title": "Type",
+                                "default": "SkyHemisphere",
+                                "pattern": "^SkyHemisphere$",
+                                "type": "string",
+                                "readOnly": true
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "SkyHemisphere",
+                "description": "SkyHemisphere component of the sky sphere.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "ClimateBased": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "altitude",
+                            "azimuth",
+                            "direct_normal_irradiance",
+                            "diffuse_horizontal_irradiance"
+                        ],
+                        "properties": {
+                            "altitude": {
+                                "title": "Altitude",
+                                "description": "The solar altitude measured in degrees above the horizon.Negative values indicate cases where the sun is below the horizon (eg. twilight conditions).",
+                                "minimum": -90,
+                                "maximum": 90,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "azimuth": {
+                                "title": "Azimuth",
+                                "description": "The solar altitude measured in degrees above the horizon.The azimuth is measured in degrees east of North. East is 90, South is 180 and West is 270. Note that this input is different from Radiance convention. In Radiance the azimuth degrees are measured in west of South.",
+                                "minimum": 0,
+                                "maximum": 360,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "direct_normal_irradiance": {
+                                "title": "Direct Normal Irradiance",
+                                "description": "Direct normal irradiance (W/m2).",
+                                "minimum": 0,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "diffuse_horizontal_irradiance": {
+                                "title": "Diffuse Horizontal Irradiance",
+                                "description": "Diffuse horizontal irradiance (W/m2).",
+                                "minimum": 0,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "ground_hemisphere": {
+                                "title": "Ground Hemisphere",
+                                "description": "Optional ground glow source.",
+                                "default": {
+                                    "r_emittance": 1.0,
+                                    "g_emittance": 1.0,
+                                    "b_emittance": 1.0,
+                                    "type": "Ground"
+                                },
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/Ground"
+                                    }
+                                ]
+                            },
+                            "sky_hemisphere": {
+                                "title": "Sky Hemisphere",
+                                "description": "Optional sky hemisphere glow source.",
+                                "default": {
+                                    "r_emittance": 1.0,
+                                    "g_emittance": 1.0,
+                                    "b_emittance": 1.0,
+                                    "type": "SkyHemisphere"
+                                },
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/SkyHemisphere"
+                                    }
+                                ]
+                            },
+                            "ground_reflectance": {
+                                "title": "Ground Reflectance",
+                                "description": "A value between 0 and 1 for the ground reflectance.",
+                                "default": 0.2,
+                                "minimum": 0,
+                                "maximum": 1,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "ClimateBased",
+                                "pattern": "^ClimateBased$",
+                                "type": "string",
+                                "readOnly": true
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "ClimateBased",
+                "description": "Point-in-time Climate-based sky.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
             "Location": {
                 "allOf": [
                     {
@@ -297,6 +447,52 @@
                     "propertyName": "type"
                 }
             },
+            "SunMatrix": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "wea": {
+                                "title": "Wea",
+                                "description": "A Ladybug wea schema.",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/Wea"
+                                    }
+                                ]
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "SunMatrix",
+                                "pattern": "^SunMatrix$",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "north": {
+                                "title": "North",
+                                "description": "A number between -360 and 360 for the counterclockwise difference between the North and the positive Y-axis in degrees. 90 is West and 270 is East.",
+                                "default": 0,
+                                "minimum": -360,
+                                "maximum": 360,
+                                "type": "number",
+                                "format": "double"
+                            }
+                        },
+                        "required": [
+                            "wea"
+                        ],
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "SunMatrix",
+                "description": "Annual Climate-based Sun matrix.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
             "SkyMatrix": {
                 "allOf": [
                     {
@@ -351,18 +547,65 @@
                     "propertyName": "type"
                 }
             },
-            "Ground": {
+            "CertainIrradiance": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/_GlowHemisphere"
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
                     },
                     {
                         "type": "object",
                         "properties": {
+                            "ground_hemisphere": {
+                                "title": "Ground Hemisphere",
+                                "description": "Optional ground glow source.",
+                                "default": {
+                                    "r_emittance": 1.0,
+                                    "g_emittance": 1.0,
+                                    "b_emittance": 1.0,
+                                    "type": "Ground"
+                                },
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/Ground"
+                                    }
+                                ]
+                            },
+                            "sky_hemisphere": {
+                                "title": "Sky Hemisphere",
+                                "description": "Optional sky hemisphere glow source.",
+                                "default": {
+                                    "r_emittance": 1.0,
+                                    "g_emittance": 1.0,
+                                    "b_emittance": 1.0,
+                                    "type": "SkyHemisphere"
+                                },
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/SkyHemisphere"
+                                    }
+                                ]
+                            },
+                            "ground_reflectance": {
+                                "title": "Ground Reflectance",
+                                "description": "A value between 0 and 1 for the ground reflectance.",
+                                "default": 0.2,
+                                "minimum": 0,
+                                "maximum": 1,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "irradiance": {
+                                "title": "Irradiance",
+                                "description": "A value for the horizontal diffuse irradiance value in W/m2.",
+                                "default": 558.659,
+                                "minimum": 0,
+                                "type": "number",
+                                "format": "double"
+                            },
                             "type": {
                                 "title": "Type",
-                                "default": "Ground",
-                                "pattern": "^Ground$",
+                                "default": "CertainIrradiance",
+                                "pattern": "^CertainIrradiance$",
                                 "type": "string",
                                 "readOnly": true
                             }
@@ -370,33 +613,8 @@
                         "additionalProperties": false
                     }
                 ],
-                "title": "Ground",
-                "description": "Ground component of the sky sphere.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "SkyHemisphere": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_GlowHemisphere"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "title": "Type",
-                                "default": "SkyHemisphere",
-                                "pattern": "^SkyHemisphere$",
-                                "type": "string",
-                                "readOnly": true
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "SkyHemisphere",
-                "description": "SkyHemisphere component of the sky sphere.",
+                "title": "CertainIrradiance",
+                "description": "Sky with evenly distributed light at a certain irradiance value.",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -494,7 +712,7 @@
                     "propertyName": "type"
                 }
             },
-            "CertainIrradiance": {
+            "_GlowHemisphere": {
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
@@ -502,148 +720,28 @@
                     {
                         "type": "object",
                         "properties": {
-                            "ground_hemisphere": {
-                                "title": "Ground Hemisphere",
-                                "description": "Optional ground glow source.",
-                                "default": {
-                                    "r_emittance": 1.0,
-                                    "g_emittance": 1.0,
-                                    "b_emittance": 1.0,
-                                    "type": "Ground"
-                                },
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/Ground"
-                                    }
-                                ]
-                            },
-                            "sky_hemisphere": {
-                                "title": "Sky Hemisphere",
-                                "description": "Optional sky hemisphere glow source.",
-                                "default": {
-                                    "r_emittance": 1.0,
-                                    "g_emittance": 1.0,
-                                    "b_emittance": 1.0,
-                                    "type": "SkyHemisphere"
-                                },
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/SkyHemisphere"
-                                    }
-                                ]
-                            },
-                            "ground_reflectance": {
-                                "title": "Ground Reflectance",
-                                "description": "A value between 0 and 1 for the ground reflectance.",
-                                "default": 0.2,
+                            "r_emittance": {
+                                "title": "R Emittance",
+                                "description": "A value between 0 and 1 for the red channel emittance.",
+                                "default": 1.0,
                                 "minimum": 0,
                                 "maximum": 1,
                                 "type": "number",
                                 "format": "double"
                             },
-                            "irradiance": {
-                                "title": "Irradiance",
-                                "description": "A value for the horizontal diffuse irradiance value in W/m2.",
-                                "default": 558.659,
+                            "g_emittance": {
+                                "title": "G Emittance",
+                                "description": "A value between 0 and 1 for the green channel emittance.",
+                                "default": 1.0,
                                 "minimum": 0,
+                                "maximum": 1,
                                 "type": "number",
                                 "format": "double"
                             },
-                            "type": {
-                                "title": "Type",
-                                "default": "CertainIrradiance",
-                                "pattern": "^CertainIrradiance$",
-                                "type": "string",
-                                "readOnly": true
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "CertainIrradiance",
-                "description": "Sky with evenly distributed light at a certain irradiance value.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "ClimateBased": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "required": [
-                            "altitude",
-                            "azimuth",
-                            "direct_normal_irradiance",
-                            "diffuse_horizontal_irradiance"
-                        ],
-                        "properties": {
-                            "altitude": {
-                                "title": "Altitude",
-                                "description": "The solar altitude measured in degrees above the horizon.Negative values indicate cases where the sun is below the horizon (eg. twilight conditions).",
-                                "minimum": -90,
-                                "maximum": 90,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "azimuth": {
-                                "title": "Azimuth",
-                                "description": "The solar altitude measured in degrees above the horizon.The azimuth is measured in degrees east of North. East is 90, South is 180 and West is 270. Note that this input is different from Radiance convention. In Radiance the azimuth degrees are measured in west of South.",
-                                "minimum": 0,
-                                "maximum": 360,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "direct_normal_irradiance": {
-                                "title": "Direct Normal Irradiance",
-                                "description": "Direct normal irradiance (W/m2).",
-                                "minimum": 0,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "diffuse_horizontal_irradiance": {
-                                "title": "Diffuse Horizontal Irradiance",
-                                "description": "Diffuse horizontal irradiance (W/m2).",
-                                "minimum": 0,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "ground_hemisphere": {
-                                "title": "Ground Hemisphere",
-                                "description": "Optional ground glow source.",
-                                "default": {
-                                    "r_emittance": 1.0,
-                                    "g_emittance": 1.0,
-                                    "b_emittance": 1.0,
-                                    "type": "Ground"
-                                },
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/Ground"
-                                    }
-                                ]
-                            },
-                            "sky_hemisphere": {
-                                "title": "Sky Hemisphere",
-                                "description": "Optional sky hemisphere glow source.",
-                                "default": {
-                                    "r_emittance": 1.0,
-                                    "g_emittance": 1.0,
-                                    "b_emittance": 1.0,
-                                    "type": "SkyHemisphere"
-                                },
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/SkyHemisphere"
-                                    }
-                                ]
-                            },
-                            "ground_reflectance": {
-                                "title": "Ground Reflectance",
-                                "description": "A value between 0 and 1 for the ground reflectance.",
-                                "default": 0.2,
+                            "b_emittance": {
+                                "title": "B Emittance",
+                                "description": "A value between 0 and 1 for the blue channel of the emittance.",
+                                "default": 1.0,
                                 "minimum": 0,
                                 "maximum": 1,
                                 "type": "number",
@@ -651,63 +749,17 @@
                             },
                             "type": {
                                 "title": "Type",
-                                "default": "ClimateBased",
-                                "pattern": "^ClimateBased$",
+                                "default": "_GlowHemisphere",
                                 "type": "string",
+                                "pattern": "^_GlowHemisphere$",
                                 "readOnly": true
                             }
                         },
                         "additionalProperties": false
                     }
                 ],
-                "title": "ClimateBased",
-                "description": "Point-in-time Climate-based sky.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "SunMatrix": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "wea": {
-                                "title": "Wea",
-                                "description": "A Ladybug wea schema.",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/Wea"
-                                    }
-                                ]
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "SunMatrix",
-                                "pattern": "^SunMatrix$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "north": {
-                                "title": "North",
-                                "description": "A number between -360 and 360 for the counterclockwise difference between the North and the positive Y-axis in degrees. 90 is West and 270 is East.",
-                                "default": 0,
-                                "minimum": -360,
-                                "maximum": 360,
-                                "type": "number",
-                                "format": "double"
-                            }
-                        },
-                        "required": [
-                            "wea"
-                        ],
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "SunMatrix",
-                "description": "Annual Climate-based Sun matrix.",
+                "title": "_GlowHemisphere",
+                "description": "Hidden base class for Ground and SkyHemisphere.",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -911,58 +963,6 @@
                 ],
                 "title": "SkyDome",
                 "description": "Base class for all sky domes.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "_GlowHemisphere": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "r_emittance": {
-                                "title": "R Emittance",
-                                "description": "A value between 0 and 1 for the red channel emittance.",
-                                "default": 1.0,
-                                "minimum": 0,
-                                "maximum": 1,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "g_emittance": {
-                                "title": "G Emittance",
-                                "description": "A value between 0 and 1 for the green channel emittance.",
-                                "default": 1.0,
-                                "minimum": 0,
-                                "maximum": 1,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "b_emittance": {
-                                "title": "B Emittance",
-                                "description": "A value between 0 and 1 for the blue channel of the emittance.",
-                                "default": 1.0,
-                                "minimum": 0,
-                                "maximum": 1,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "_GlowHemisphere",
-                                "type": "string",
-                                "pattern": "^_GlowHemisphere$",
-                                "readOnly": true
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "_GlowHemisphere",
-                "description": "Hidden base class for Ground and SkyHemisphere.",
                 "discriminator": {
                     "propertyName": "type"
                 }
