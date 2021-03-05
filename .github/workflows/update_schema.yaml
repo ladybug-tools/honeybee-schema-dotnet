@@ -15,15 +15,6 @@ jobs:
         ref: refs/heads/master
         token: ${{ secrets.GH_TOKEN }}
 
-    - name: Set up npm
-      uses: actions/setup-node@v1
-      with:
-        node-version: '12.x'
-
-    - name: Set up Python
-      uses: actions/setup-python@v1
-      with:
-        python-version: '3.x'
 
     - name: Set up Java
       uses: actions/setup-java@v1
@@ -40,24 +31,17 @@ jobs:
       env:
         VERSION: ${{ github.event.client_payload.version }}
       run: |
-        bash download.sh $VERSION
-        bash generate.sh
-
-    - name: "Set Commit Message"
-      id: vars
-      env:
-        VERSION: ${{ github.event.client_payload.version }}
-      run: |
-        echo ::set-output name=commit_message::"Update Schema to $VERSION"
-
+        python3 .openapi-generator/download_schema.py $VERSION
+        python3 .openapi-generator/generate.py $VERSION
 
     - name: "Commit and Push Changes"
       id: push
       env:
+        VERSION: ${{ github.event.client_payload.version }}
         COMMIT_MESSAGE: ${{ steps.vars.outputs.commit_message }}
       run: |
         git config --global user.name 'ladybugbot'
         git config --global user.email 'ladybugbot@users.noreply.github.com'
         git add .
-        git commit -m "$COMMIT_MESSAGE"
+        git commit -m "feat(schema): Update Schema to $VERSION"
         git push
