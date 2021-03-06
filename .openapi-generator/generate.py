@@ -50,3 +50,8 @@ time.sleep(1)
 subprocess.call(f"python3 {generator_folder}/create_interface.py {json2}", shell=True)
 time.sleep(1)
 subprocess.call(f"python3 {generator_folder}/create_interface.py {json1}", shell=True)
+
+
+# test to build the project
+time.sleep(1)
+subprocess.call("dotnet build -c Release /nowarn:CS0472,CS0108,CS0114", shell=True)
