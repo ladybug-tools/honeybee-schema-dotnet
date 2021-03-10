@@ -19,9 +19,13 @@ namespace HoneybeeSchema
             var objType = objectType;
             var validTypes = objType.GenericTypeArguments;
 
+            // null value assigned to AnyOf type, ignore 
+            if (reader.TokenType == JsonToken.Null)
+                return null;
+
             var data = reader.Value;
 
-            // try to load value
+            // try to load AnyOf value
             if (data == null)
             {
                 var jObject = JObject.Load(reader);
