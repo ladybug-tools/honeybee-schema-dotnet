@@ -25,9 +25,10 @@ namespace HoneybeeSchema
         public abstract string ToString(bool detailed);
 
         public abstract OpenAPIGenBaseModel Duplicate();
-        public string ToJson()
+        public string ToJson(bool indented = false)
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented, JsonSetting.AnyOfConvertSetting);
+            var format = indented ? Formatting.Indented : Formatting.None;
+            return JsonConvert.SerializeObject(this, format, JsonSetting.AnyOfConvertSetting);
         }
     }
 }
