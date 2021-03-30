@@ -43,11 +43,12 @@ namespace HoneybeeSchema
         /// <param name="infiltration">Infiltration object to to describe the outdoor air leakage..</param>
         /// <param name="ventilation">Ventilation object for the minimum outdoor air requirement..</param>
         /// <param name="setpoint">Setpoint object for the temperature setpoints of the Room..</param>
+        /// <param name="daylightingControl">An optional DaylightingControl object to dictate the dimming of lights. If None, the lighting will respond only to the schedule and not the daylight conditions within the room..</param>
         /// <param name="windowVentControl">An optional VentilationControl object to dictate the opening of windows. If None, the windows will never open..</param>
         public RoomEnergyPropertiesAbridged
         (
            // Required parameters
-           string constructionSet= default, string programType= default, string hvac= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, ServiceHotWaterAbridged serviceHotWater= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default, VentilationControlAbridged windowVentControl= default// Optional parameters
+           string constructionSet= default, string programType= default, string hvac= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, ServiceHotWaterAbridged serviceHotWater= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default, DaylightingControl daylightingControl= default, VentilationControlAbridged windowVentControl= default// Optional parameters
         ) : base()// BaseClass
         {
             this.ConstructionSet = constructionSet;
@@ -61,6 +62,7 @@ namespace HoneybeeSchema
             this.Infiltration = infiltration;
             this.Ventilation = ventilation;
             this.Setpoint = setpoint;
+            this.DaylightingControl = daylightingControl;
             this.WindowVentControl = windowVentControl;
 
             // Set non-required readonly properties with defaultValue
@@ -141,6 +143,12 @@ namespace HoneybeeSchema
         [DataMember(Name = "setpoint")]
         public SetpointAbridged Setpoint { get; set; } 
         /// <summary>
+        /// An optional DaylightingControl object to dictate the dimming of lights. If None, the lighting will respond only to the schedule and not the daylight conditions within the room.
+        /// </summary>
+        /// <value>An optional DaylightingControl object to dictate the dimming of lights. If None, the lighting will respond only to the schedule and not the daylight conditions within the room.</value>
+        [DataMember(Name = "daylighting_control")]
+        public DaylightingControl DaylightingControl { get; set; } 
+        /// <summary>
         /// An optional VentilationControl object to dictate the opening of windows. If None, the windows will never open.
         /// </summary>
         /// <value>An optional VentilationControl object to dictate the opening of windows. If None, the windows will never open.</value>
@@ -179,6 +187,7 @@ namespace HoneybeeSchema
             sb.Append("  Infiltration: ").Append(Infiltration).Append("\n");
             sb.Append("  Ventilation: ").Append(Ventilation).Append("\n");
             sb.Append("  Setpoint: ").Append(Setpoint).Append("\n");
+            sb.Append("  DaylightingControl: ").Append(DaylightingControl).Append("\n");
             sb.Append("  WindowVentControl: ").Append(WindowVentControl).Append("\n");
             return sb.ToString();
         }
@@ -304,6 +313,11 @@ namespace HoneybeeSchema
                     this.Setpoint.Equals(input.Setpoint))
                 ) && base.Equals(input) && 
                 (
+                    this.DaylightingControl == input.DaylightingControl ||
+                    (this.DaylightingControl != null &&
+                    this.DaylightingControl.Equals(input.DaylightingControl))
+                ) && base.Equals(input) && 
+                (
                     this.WindowVentControl == input.WindowVentControl ||
                     (this.WindowVentControl != null &&
                     this.WindowVentControl.Equals(input.WindowVentControl))
@@ -343,6 +357,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.Ventilation.GetHashCode();
                 if (this.Setpoint != null)
                     hashCode = hashCode * 59 + this.Setpoint.GetHashCode();
+                if (this.DaylightingControl != null)
+                    hashCode = hashCode * 59 + this.DaylightingControl.GetHashCode();
                 if (this.WindowVentControl != null)
                     hashCode = hashCode * 59 + this.WindowVentControl.GetHashCode();
                 return hashCode;

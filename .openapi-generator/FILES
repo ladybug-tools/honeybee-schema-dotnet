@@ -51,6 +51,8 @@ docs/DOASBase.md
 docs/DOASBaseAllOf.md
 docs/DatedBaseModel.md
 docs/DatedBaseModelAllOf.md
+docs/DaylightingControl.md
+docs/DaylightingControlAllOf.md
 docs/Door.md
 docs/DoorAllOf.md
 docs/DoorConstructionSet.md
@@ -393,6 +395,8 @@ src/HoneybeeSchema.Test/Model/ConstructionSetTests.cs
 src/HoneybeeSchema.Test/Model/ControlTypeTests.cs
 src/HoneybeeSchema.Test/Model/DOASBaseAllOfTests.cs
 src/HoneybeeSchema.Test/Model/DOASBaseTests.cs
+src/HoneybeeSchema.Test/Model/DaylightingControlAllOfTests.cs
+src/HoneybeeSchema.Test/Model/DaylightingControlTests.cs
 src/HoneybeeSchema.Test/Model/DoorAllOfTests.cs
 src/HoneybeeSchema.Test/Model/DoorConstructionSetAbridgedAllOfTests.cs
 src/HoneybeeSchema.Test/Model/DoorConstructionSetAbridgedTests.cs
@@ -745,6 +749,8 @@ src/HoneybeeSchema/Model/DOASBase.cs
 src/HoneybeeSchema/Model/DOASBaseAllOf.cs
 src/HoneybeeSchema/Model/DatedBaseModel.cs
 src/HoneybeeSchema/Model/DatedBaseModelAllOf.cs
+src/HoneybeeSchema/Model/DaylightingControl.cs
+src/HoneybeeSchema/Model/DaylightingControlAllOf.cs
 src/HoneybeeSchema/Model/Door.cs
 src/HoneybeeSchema/Model/DoorAllOf.cs
 src/HoneybeeSchema/Model/DoorConstructionSet.cs

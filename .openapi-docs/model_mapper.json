@@ -22,6 +22,7 @@
         "ConstructionSet": "honeybee_schema.energy.constructionset",
         "ConstructionSetAbridged": "honeybee_schema.energy.constructionset",
         "DatedBaseModel": "honeybee_schema.energy._base",
+        "DaylightingControl": "honeybee_schema.energy.load",
         "Door": "honeybee_schema.model",
         "DoorConstructionSet": "honeybee_schema.energy.constructionset",
         "DoorConstructionSetAbridged": "honeybee_schema.energy.constructionset",
