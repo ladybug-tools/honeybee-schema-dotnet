@@ -44,9 +44,9 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="wattsPerArea">Lighting per floor area as [W/m2]. (required).</param>
         /// <param name="schedule">Identifier of the schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile. (required).</param>
-        /// <param name="visibleFraction">The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. The default value is &#x60;0.25&#x60;. (default to 0.25D).</param>
-        /// <param name="radiantFraction">The fraction of heat from lights that is long-wave radiation. Default value is &#x60;0.32&#x60;. (default to 0.32D).</param>
-        /// <param name="returnAirFraction">The fraction of the heat from lights that goes into the zone return air. Default value is &#x60;0&#x60;. (default to 0.0D).</param>
+        /// <param name="visibleFraction">The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. (Default: 0.25). (default to 0.25D).</param>
+        /// <param name="radiantFraction">The fraction of heat from lights that is long-wave radiation. (Default: 0.32). (default to 0.32D).</param>
+        /// <param name="returnAirFraction">The fraction of the heat from lights that goes into the zone return air. (Default: 0). (default to 0.0D).</param>
         /// <param name="baselineWattsPerArea">The baseline lighting power density in [W/m2] of floor area. This baseline is useful to track how much better the installed lights are in comparison to a standard like ASHRAE 90.1. If set to None, it will default to 11.84029 W/m2, which is that ASHRAE 90.1-2004 baseline for an office. (default to 11.84029D).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
@@ -88,21 +88,21 @@ namespace HoneybeeSchema
         [DataMember(Name = "schedule", IsRequired = true)]
         public string Schedule { get; set; } 
         /// <summary>
-        /// The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. The default value is &#x60;0.25&#x60;.
+        /// The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. (Default: 0.25).
         /// </summary>
-        /// <value>The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. The default value is &#x60;0.25&#x60;.</value>
+        /// <value>The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. (Default: 0.25).</value>
         [DataMember(Name = "visible_fraction")]
         public double VisibleFraction { get; set; }  = 0.25D;
         /// <summary>
-        /// The fraction of heat from lights that is long-wave radiation. Default value is &#x60;0.32&#x60;.
+        /// The fraction of heat from lights that is long-wave radiation. (Default: 0.32).
         /// </summary>
-        /// <value>The fraction of heat from lights that is long-wave radiation. Default value is &#x60;0.32&#x60;.</value>
+        /// <value>The fraction of heat from lights that is long-wave radiation. (Default: 0.32).</value>
         [DataMember(Name = "radiant_fraction")]
         public double RadiantFraction { get; set; }  = 0.32D;
         /// <summary>
-        /// The fraction of the heat from lights that goes into the zone return air. Default value is &#x60;0&#x60;.
+        /// The fraction of the heat from lights that goes into the zone return air. (Default: 0).
         /// </summary>
-        /// <value>The fraction of the heat from lights that goes into the zone return air. Default value is &#x60;0&#x60;.</value>
+        /// <value>The fraction of the heat from lights that goes into the zone return air. (Default: 0).</value>
         [DataMember(Name = "return_air_fraction")]
         public double ReturnAirFraction { get; set; }  = 0.0D;
         /// <summary>

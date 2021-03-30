@@ -45,7 +45,7 @@ namespace HoneybeeSchema
         /// <param name="peoplePerArea">People per floor area expressed as [people/m2] (required).</param>
         /// <param name="occupancySchedule">A schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile. (required).</param>
         /// <param name="activitySchedule">A schedule for the activity of the occupants over the course of the year. The type of this schedule should be Power and the values of the schedule equal to the number of Watts given off by an individual person in the room. (required).</param>
-        /// <param name="radiantFraction">The radiant fraction of sensible heat released by people. The defaultvalue is 0.30. (default to 0.3D).</param>
+        /// <param name="radiantFraction">The radiant fraction of sensible heat released by people. (Default: 0.3). (default to 0.3D).</param>
         /// <param name="latentFraction">Number for the latent fraction of heat gain due to people or an Autocalculate object..</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
@@ -93,9 +93,9 @@ namespace HoneybeeSchema
         [DataMember(Name = "activity_schedule", IsRequired = true)]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> ActivitySchedule { get; set; } 
         /// <summary>
-        /// The radiant fraction of sensible heat released by people. The defaultvalue is 0.30.
+        /// The radiant fraction of sensible heat released by people. (Default: 0.3).
         /// </summary>
-        /// <value>The radiant fraction of sensible heat released by people. The defaultvalue is 0.30.</value>
+        /// <value>The radiant fraction of sensible heat released by people. (Default: 0.3).</value>
         [DataMember(Name = "radiant_fraction")]
         public double RadiantFraction { get; set; }  = 0.3D;
         /// <summary>

@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **Infiltration** | [**InfiltrationAbridged**](InfiltrationAbridged.md) | Infiltration object to to describe the outdoor air leakage. | [optional] 
 **Ventilation** | [**VentilationAbridged**](VentilationAbridged.md) | Ventilation object for the minimum outdoor air requirement. | [optional] 
 **Setpoint** | [**SetpointAbridged**](SetpointAbridged.md) | Setpoint object for the temperature setpoints of the Room. | [optional] 
+**DaylightingControl** | [**DaylightingControl**](DaylightingControl.md) | An optional DaylightingControl object to dictate the dimming of lights. If None, the lighting will respond only to the schedule and not the daylight conditions within the room. | [optional] 
 **WindowVentControl** | [**VentilationControlAbridged**](VentilationControlAbridged.md) | An optional VentilationControl object to dictate the opening of windows. If None, the windows will never open. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)
