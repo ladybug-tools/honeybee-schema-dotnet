@@ -1,12 +1,13 @@
-name: CI
+name: Update_Schema
 
-on: repository_dispatch
+on: 
+  pull_request:
 
 jobs:
   updateImage:
+    if: contains(github.event.pull_request.title, 'honeybee_schema_release') && contains(github.event.pusher.name, 'dependabot')
     name: "Check Event"
     runs-on: ubuntu-latest
-    if: github.event.action == 'honeybee_schema_release'
 
     steps:
     - name: "Checkout Master Branch"
@@ -23,16 +24,23 @@ jobs:
         java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
         architecture: x64 # (x64 or x86) - defaults to x64
 
+
     - name: "Install OpenAPI-generator"
       run: |
-        npm install @openapitools/openapi-generator-cli@cli-4.3.0
+        npm install @openapitools/openapi-generator-cli
       
+
     - name: "Run Update Script"
-      env:
-        VERSION: ${{ github.event.client_payload.version }}
       run: |
-        python3 .openapi-generator/download_schema.py $VERSION
-        python3 .openapi-generator/generate.py $VERSION
+        python3 .openapi-generator/download_schema.py
+        python3 .openapi-generator/generate.py
+
+
+    - name: Run Unit Tests
+      working-directory: src/HoneybeeSchema.Tests
+      run: |
+        dotnet test --configuration Release
+
 
     - name: "Commit and Push Changes"
       id: push
