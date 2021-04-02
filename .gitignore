@@ -196,3 +196,4 @@ $RECYCLE.BIN/
 .openapi-generator/__pycache__/
 
 src/HoneybeeSchema/Client/
+src/HoneybeeSchema/Properties/PublishProfiles/FolderProfile.pubxml
