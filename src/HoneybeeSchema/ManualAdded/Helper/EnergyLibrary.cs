@@ -893,8 +893,8 @@ namespace HoneybeeSchema.Helper
             {
                 // windows
                 var foundPath = string.Empty;
-                var scr = $"/C REG QUERY HKEY_CURRENT_USER\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\UNINSTALL /s /v InstallLocation | findstr \"ladybug_tools\"";
-
+                var scr = @"/C REG QUERY HKEY_CURRENT_USER\SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL /s /v InstallLocation" + " | findstr \"ladybug_tools\"";
+                //Registry.LocalMachine
                 var startInfo = new System.Diagnostics.ProcessStartInfo();
                 startInfo.CreateNoWindow = false;
                 startInfo.UseShellExecute = false;
@@ -912,7 +912,7 @@ namespace HoneybeeSchema.Helper
                     exeProcess.Close();
                     if (string.IsNullOrEmpty(outputs))
                     {
-                        startInfo.Arguments = $"/C REG QUERY HKLM\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\UNINSTALL /s /v InstallLocation | findstr \"ladybug_tools\"";
+                        startInfo.Arguments = @"/C REG QUERY HKLM\SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL /s /v InstallLocation" + " | findstr \"ladybug_tools\"";
                         exeProcess.StartInfo = startInfo;
                         exeProcess.Start();
                         exeProcess.WaitForExit();
@@ -926,13 +926,20 @@ namespace HoneybeeSchema.Helper
                 {
                     // create a new ladybug_tools folder under user dir
                     var userDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-                    foundPath = Path.Combine(userDir, "ladybug_tools");
-                    Directory.CreateDirectory(foundPath);
+                    foundPath = Directory.GetDirectories(userDir, "*ladybug_tools*", SearchOption.TopDirectoryOnly).FirstOrDefault();
+                    if (!Directory.Exists(foundPath))
+                    {
+                        foundPath = Path.Combine(userDir, "ladybug_tools");
+                        Directory.CreateDirectory(foundPath);
+                    }
+
                 }
                 else
                 {
                     // get from installer's registry
-                    foundPath = foundPath.Split(' ').Last();
+                    // InstallLocation    REG_SZ    C:\Users\mingo\ladybug_tools test
+                    foundPath = foundPath.Split(new[] { "REG_SZ" }, StringSplitOptions.RemoveEmptyEntries).Last().Trim();
+
                 }
 
                 if (!Directory.Exists(foundPath))
