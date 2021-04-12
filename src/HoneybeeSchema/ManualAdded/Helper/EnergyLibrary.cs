@@ -479,7 +479,24 @@ namespace HoneybeeSchema.Helper
             }
         }
 
-
+        //Service hot water
+        private static IEnumerable<HB.ServiceHotWaterAbridged> _serviceHotWaterLoads;
+        public static IEnumerable<HB.ServiceHotWaterAbridged> DefaultServiceHotWaterLoads
+        {
+            get
+            { 
+                if (_serviceHotWaterLoads == null)
+                {
+                    var items = DefaultProgramTypes.Select(_ => _?.ServiceHotWater).Where(_ => _ != null).ToList();
+                    foreach (var item in items)
+                    {
+                        item.DisplayName = $"{item.Identifier} ({item.FlowPerArea} L/h-m2)";
+                    }
+                    _serviceHotWaterLoads = items;
+                }
+                return _serviceHotWaterLoads;
+            }
+        }
 
         //HVACs
         private static IEnumerable<HB.Energy.IHvac> _defaultHVACs;
