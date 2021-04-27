@@ -121,7 +121,8 @@ namespace HoneybeeSchema.Helper
                 programType.Setpoint?.CoolingSchedule,
                 programType.Setpoint?.HeatingSchedule,
                 programType.Setpoint?.DehumidifyingSchedule,
-                programType.Setpoint?.HumidifyingSchedule
+                programType.Setpoint?.HumidifyingSchedule,
+                programType.ServiceHotWater?.Schedule
             };
             scheduleNames.RemoveAll(string.IsNullOrWhiteSpace);
 
