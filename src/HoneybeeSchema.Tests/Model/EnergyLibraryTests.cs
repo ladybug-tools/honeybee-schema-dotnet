@@ -116,6 +116,19 @@ namespace HoneybeeSchema.Test
         }
 
         [Test]
+        public void LoadSHWscheduleTest()
+        {
+            ProgramTypeAbridged program;
+            Helper.EnergyLibrary.StandardsProgramTypes.TryGetValue("2013::HighriseApartment::Apartment", out program);
+
+            ScheduleRulesetAbridged schedule;
+            Helper.EnergyLibrary.StandardsSchedules.TryGetValue(program.ServiceHotWater.Schedule, out schedule);
+
+            var swhLoad = program.ServiceHotWater.Schedule;
+            Assert.IsTrue(swhLoad == schedule.Identifier);
+        }
+
+        [Test]
         public void ElectricEquipmentWithDefaultTest()
         {
             // use 0 for watts per area as same as double type's default value
