@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Construction for window objects (Aperture, Door).
     /// </summary>
     [DataContract(Name = "WindowConstruction")]
-    public partial class WindowConstruction : WindowConstructionAbridged, IEquatable<WindowConstruction>, IValidatableObject
+    public partial class WindowConstruction : IDdEnergyBaseModel, IEquatable<WindowConstruction>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowConstruction" /> class.
@@ -42,15 +42,14 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowConstruction" /> class.
         /// </summary>
-        /// <param name="materials">List of glazing and gas material definitions that are referenced in the layers. Note that the order of materials does not matter and there is no need to specify duplicated materials in this list. (required).</param>
+        /// <param name="materials">List of glazing and gas material definitions. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer. (required).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
-        /// <param name="layers">List of strings for glazing or gas material identifiers. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer. (required).</param>
         public WindowConstruction
         (
-            string identifier, List<string> layers, List<AnyOf<EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialGlazing,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture>> materials, // Required parameters
+            string identifier, List<AnyOf<EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialGlazing,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture>> materials, // Required parameters
             string displayName= default // Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, layers: layers)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             // to ensure "materials" is required (not null)
             this.Materials = materials ?? throw new ArgumentNullException("materials is a required property for WindowConstruction and cannot be null");
@@ -67,9 +66,9 @@ namespace HoneybeeSchema
         public override string Type { get; protected set; }  = "WindowConstruction";
 
         /// <summary>
-        /// List of glazing and gas material definitions that are referenced in the layers. Note that the order of materials does not matter and there is no need to specify duplicated materials in this list.
+        /// List of glazing and gas material definitions. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.
         /// </summary>
-        /// <value>List of glazing and gas material definitions that are referenced in the layers. Note that the order of materials does not matter and there is no need to specify duplicated materials in this list.</value>
+        /// <value>List of glazing and gas material definitions. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.</value>
         [DataMember(Name = "materials", IsRequired = true)]
         public List<AnyOf<EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialGlazing,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture>> Materials { get; set; } 
 
@@ -96,7 +95,6 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  Layers: ").Append(Layers).Append("\n");
             sb.Append("  Materials: ").Append(Materials).Append("\n");
             return sb.ToString();
         }
@@ -135,7 +133,7 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>OpenAPIGenBaseModel</returns>
-        public override WindowConstructionAbridged DuplicateWindowConstructionAbridged()
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
         {
             return DuplicateWindowConstruction();
         }

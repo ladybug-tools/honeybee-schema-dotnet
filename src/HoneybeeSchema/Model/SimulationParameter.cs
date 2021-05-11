@@ -34,7 +34,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms.</value>
         [DataMember(Name="terrain_type")]
-        public TerrianTypes TerrainType { get; set; } = TerrianTypes.City;
+        public TerrianTypes TerrainType { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="SimulationParameter" /> class.
         /// </summary>
@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         public SimulationParameter
         (
            // Required parameters
-           SimulationOutput output= default, RunPeriod runPeriod= default, int timestep = 6, SimulationControl simulationControl= default, ShadowCalculation shadowCalculation= default, SizingParameter sizingParameter= default, double northAngle = 0D, TerrianTypes terrainType= TerrianTypes.City// Optional parameters
+           SimulationOutput output= default, RunPeriod runPeriod= default, int timestep = 6, SimulationControl simulationControl= default, ShadowCalculation shadowCalculation= default, SizingParameter sizingParameter= default, double northAngle = 0D, TerrianTypes terrainType= default// Optional parameters
         ) : base()// BaseClass
         {
             this.Output = output;

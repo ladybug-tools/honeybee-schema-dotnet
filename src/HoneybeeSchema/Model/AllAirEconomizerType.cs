@@ -33,28 +33,46 @@ namespace HoneybeeSchema
     public enum AllAirEconomizerType
     {
         /// <summary>
-        /// Enum Inferred for value: Inferred
-        /// </summary>
-        [EnumMember(Value = "Inferred")]
-        Inferred = 1,
-
-        /// <summary>
         /// Enum NoEconomizer for value: NoEconomizer
         /// </summary>
         [EnumMember(Value = "NoEconomizer")]
-        NoEconomizer = 2,
+        NoEconomizer = 1,
 
         /// <summary>
         /// Enum DifferentialDryBulb for value: DifferentialDryBulb
         /// </summary>
         [EnumMember(Value = "DifferentialDryBulb")]
-        DifferentialDryBulb = 3,
+        DifferentialDryBulb = 2,
 
         /// <summary>
         /// Enum DifferentialEnthalpy for value: DifferentialEnthalpy
         /// </summary>
         [EnumMember(Value = "DifferentialEnthalpy")]
-        DifferentialEnthalpy = 4
+        DifferentialEnthalpy = 3,
+
+        /// <summary>
+        /// Enum DifferentialDryBulbAndEnthalpy for value: DifferentialDryBulbAndEnthalpy
+        /// </summary>
+        [EnumMember(Value = "DifferentialDryBulbAndEnthalpy")]
+        DifferentialDryBulbAndEnthalpy = 4,
+
+        /// <summary>
+        /// Enum FixedDryBulb for value: FixedDryBulb
+        /// </summary>
+        [EnumMember(Value = "FixedDryBulb")]
+        FixedDryBulb = 5,
+
+        /// <summary>
+        /// Enum FixedEnthalpy for value: FixedEnthalpy
+        /// </summary>
+        [EnumMember(Value = "FixedEnthalpy")]
+        FixedEnthalpy = 6,
+
+        /// <summary>
+        /// Enum ElectronicEnthalpy for value: ElectronicEnthalpy
+        /// </summary>
+        [EnumMember(Value = "ElectronicEnthalpy")]
+        ElectronicEnthalpy = 7
 
     }
 

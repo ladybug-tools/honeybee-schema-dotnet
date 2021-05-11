@@ -92,7 +92,7 @@ namespace HoneybeeSchema
         }
         public static void AddHVAC(this ModelEnergyProperties modelEnergyCollection, IHvac havc)
         {
-            modelEnergyCollection.Hvacs = modelEnergyCollection.Hvacs?? new List<AnyOf<IdealAirSystemAbridged, VAV, PVAV, PSZ, PTAC, ForcedAirFurnace, FCUwithDOAS, WSHPwithDOAS, VRFwithDOAS, FCU, WSHP, VRF, Baseboard, EvaporativeCooler, Residential, WindowAC, GasUnitHeater>>();
+            modelEnergyCollection.Hvacs = modelEnergyCollection.Hvacs ?? new List<AnyOf<IdealAirSystemAbridged, VAV, PVAV, PSZ, PTAC, ForcedAirFurnace, FCUwithDOASAbridged, WSHPwithDOASAbridged, VRFwithDOASAbridged, FCU, WSHP, VRF, Baseboard, EvaporativeCooler, Residential, WindowAC, GasUnitHeater>>();
             var exist = modelEnergyCollection.Hvacs.OfType<IHvac>().Any(_ => _.Identifier == havc.Identifier);
             if (exist)
                 return;
@@ -117,13 +117,13 @@ namespace HoneybeeSchema
                 case VAV em:
                     modelEnergyCollection.Hvacs.Add(em);
                     break;
-                case FCUwithDOAS em:
+                case FCUwithDOASAbridged em:
                     modelEnergyCollection.Hvacs.Add(em);
                     break;
-                case VRFwithDOAS em:
+                case VRFwithDOASAbridged em:
                     modelEnergyCollection.Hvacs.Add(em);
                     break;
-                case WSHPwithDOAS em:
+                case WSHPwithDOASAbridged em:
                     modelEnergyCollection.Hvacs.Add(em);
                     break;
                 case Baseboard em:

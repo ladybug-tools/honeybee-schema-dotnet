@@ -192,8 +192,8 @@ namespace HoneybeeSchema.Helper
 
 
             // get materials
-            var opaMaterials = opaqueConstructions.SelectMany(_ => _.Layers).Select(_ => StandardsOpaqueMaterials[_]);
-            var winMaterials = windConstructions.SelectMany(_ => _.Layers).Select(_ => StandardsWindowMaterials[_]);
+            var opaMaterials = opaqueConstructions.SelectMany(_ => _.Materials).Select(_ => StandardsOpaqueMaterials[_]);
+            var winMaterials = windConstructions.SelectMany(_ => _.Materials).Select(_ => StandardsWindowMaterials[_]);
 
 
             var constrs = opaqueConstructions.OfType<IConstruction>().Concat(windConstructions);
@@ -1039,11 +1039,11 @@ namespace HoneybeeSchema.Helper
 
         public static List<HBEng.IMaterial> GetConstructionMaterials(HB.OpaqueConstructionAbridged construction)
         {
-            return construction.Layers.Select(_ => GetOpaqueMaterialByIdentifier(_)).ToList();
+            return construction.Materials.Select(_ => GetOpaqueMaterialByIdentifier(_)).ToList();
         }
         public static List<HBEng.IMaterial> GetConstructionMaterials(HB.WindowConstructionAbridged construction)
         {
-            return construction.Layers.Select(_ => GetWindowMaterialByIdentifier(_)).ToList();
+            return construction.Materials.Select(_ => GetWindowMaterialByIdentifier(_)).ToList();
         }
 
         //private static HB.ModelEnergyProperties _inModelEnergyProperties;

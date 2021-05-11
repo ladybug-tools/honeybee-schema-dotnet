@@ -42,17 +42,17 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="OpaqueConstructionAbridged" /> class.
         /// </summary>
-        /// <param name="layers">List of strings for opaque material identifiers. The order of the materials is from exterior to interior. (required).</param>
+        /// <param name="materials">List of strings for opaque material identifiers. The order of the materials is from exterior to interior. (required).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public OpaqueConstructionAbridged
         (
-            string identifier, List<string> layers, // Required parameters
+            string identifier, List<string> materials, // Required parameters
             string displayName= default // Optional parameters
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
-            // to ensure "layers" is required (not null)
-            this.Layers = layers ?? throw new ArgumentNullException("layers is a required property for OpaqueConstructionAbridged and cannot be null");
+            // to ensure "materials" is required (not null)
+            this.Materials = materials ?? throw new ArgumentNullException("materials is a required property for OpaqueConstructionAbridged and cannot be null");
 
             // Set non-required readonly properties with defaultValue
             this.Type = "OpaqueConstructionAbridged";
@@ -69,8 +69,8 @@ namespace HoneybeeSchema
         /// List of strings for opaque material identifiers. The order of the materials is from exterior to interior.
         /// </summary>
         /// <value>List of strings for opaque material identifiers. The order of the materials is from exterior to interior.</value>
-        [DataMember(Name = "layers", IsRequired = true)]
-        public List<string> Layers { get; set; } 
+        [DataMember(Name = "materials", IsRequired = true)]
+        public List<string> Materials { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -95,7 +95,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  Layers: ").Append(Layers).Append("\n");
+            sb.Append("  Materials: ").Append(Materials).Append("\n");
             return sb.ToString();
         }
   
@@ -160,10 +160,10 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Layers == input.Layers ||
-                    this.Layers != null &&
-                    input.Layers != null &&
-                    this.Layers.SequenceEqual(input.Layers)
+                    this.Materials == input.Materials ||
+                    this.Materials != null &&
+                    input.Materials != null &&
+                    this.Materials.SequenceEqual(input.Materials)
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
@@ -181,8 +181,8 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Layers != null)
-                    hashCode = hashCode * 59 + this.Layers.GetHashCode();
+                if (this.Materials != null)
+                    hashCode = hashCode * 59 + this.Materials.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
@@ -195,16 +195,6 @@ namespace HoneybeeSchema
         /// <param name="validationContext">Validation context</param>
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            return this.BaseValidate(validationContext);
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
         {
             foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
