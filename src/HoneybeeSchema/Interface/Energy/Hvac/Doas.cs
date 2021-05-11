@@ -8,7 +8,7 @@ namespace HoneybeeSchema.Energy.Hvac
 //Classes implemented this interface:
 namespace HoneybeeSchema
 {
-	public partial class FCUwithDOAS: HoneybeeSchema.Energy.Hvac.IDoas {}
-	public partial class VRFwithDOAS: HoneybeeSchema.Energy.Hvac.IDoas {}
-	public partial class WSHPwithDOAS: HoneybeeSchema.Energy.Hvac.IDoas {}
+	public partial class FCUwithDOASAbridged: HoneybeeSchema.Energy.Hvac.IDoas {}
+	public partial class VRFwithDOASAbridged: HoneybeeSchema.Energy.Hvac.IDoas {}
+	public partial class WSHPwithDOASAbridged: HoneybeeSchema.Energy.Hvac.IDoas {}
 }

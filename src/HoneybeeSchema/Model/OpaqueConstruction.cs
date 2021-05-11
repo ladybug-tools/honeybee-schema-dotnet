@@ -27,7 +27,7 @@ namespace HoneybeeSchema
     /// Construction for opaque objects (Face, Shade, Door).
     /// </summary>
     [DataContract(Name = "OpaqueConstruction")]
-    public partial class OpaqueConstruction : OpaqueConstructionAbridged, IEquatable<OpaqueConstruction>, IValidatableObject
+    public partial class OpaqueConstruction : IDdEnergyBaseModel, IEquatable<OpaqueConstruction>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="OpaqueConstruction" /> class.
@@ -42,15 +42,14 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="OpaqueConstruction" /> class.
         /// </summary>
-        /// <param name="materials">List of opaque material definitions that are referenced in the layers. Note that the order of materials does not matter and there is no need to specify duplicated materials in this list. (required).</param>
+        /// <param name="materials">List of opaque material definitions. The order of the materials is from exterior to interior. (required).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
-        /// <param name="layers">List of strings for opaque material identifiers. The order of the materials is from exterior to interior. (required).</param>
         public OpaqueConstruction
         (
-            string identifier, List<string> layers, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass>> materials, // Required parameters
+            string identifier, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass>> materials, // Required parameters
             string displayName= default // Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, layers: layers)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             // to ensure "materials" is required (not null)
             this.Materials = materials ?? throw new ArgumentNullException("materials is a required property for OpaqueConstruction and cannot be null");
@@ -67,9 +66,9 @@ namespace HoneybeeSchema
         public override string Type { get; protected set; }  = "OpaqueConstruction";
 
         /// <summary>
-        /// List of opaque material definitions that are referenced in the layers. Note that the order of materials does not matter and there is no need to specify duplicated materials in this list.
+        /// List of opaque material definitions. The order of the materials is from exterior to interior.
         /// </summary>
-        /// <value>List of opaque material definitions that are referenced in the layers. Note that the order of materials does not matter and there is no need to specify duplicated materials in this list.</value>
+        /// <value>List of opaque material definitions. The order of the materials is from exterior to interior.</value>
         [DataMember(Name = "materials", IsRequired = true)]
         public List<AnyOf<EnergyMaterial,EnergyMaterialNoMass>> Materials { get; set; } 
 
@@ -96,7 +95,6 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  Layers: ").Append(Layers).Append("\n");
             sb.Append("  Materials: ").Append(Materials).Append("\n");
             return sb.ToString();
         }
@@ -135,7 +133,7 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpaqueConstructionAbridged DuplicateOpaqueConstructionAbridged()
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
         {
             return DuplicateOpaqueConstruction();
         }

@@ -36,12 +36,6 @@ namespace HoneybeeSchema
         [DataMember(Name="vintage")]
         public Vintages Vintage { get; set; } = Vintages.ASHRAE_2013;
         /// <summary>
-        /// Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration). If Inferred, the economizer will be set to whatever is recommended for the given vintage.
-        /// </summary>
-        /// <value>Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration). If Inferred, the economizer will be set to whatever is recommended for the given vintage.</value>
-        [DataMember(Name="economizer_type")]
-        public AllAirEconomizerType EconomizerType { get; set; } = AllAirEconomizerType.Inferred;
-        /// <summary>
         /// Text for the specific type of system equipment from the PTACEquipmentType enumeration.
         /// </summary>
         /// <value>Text for the specific type of system equipment from the PTACEquipmentType enumeration.</value>
@@ -61,22 +55,16 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="PTAC" /> class.
         /// </summary>
         /// <param name="vintage">Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards.</param>
-        /// <param name="economizerType">Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration). If Inferred, the economizer will be set to whatever is recommended for the given vintage..</param>
-        /// <param name="sensibleHeatRecovery">A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. If None or Autosize, it will be whatever is recommended for the given vintage..</param>
-        /// <param name="latentHeatRecovery">A number between 0 and 1 for the effectiveness of latent heat recovery within the system. If None or Autosize, it will be whatever is recommended for the given vintage..</param>
         /// <param name="equipmentType">Text for the specific type of system equipment from the PTACEquipmentType enumeration..</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public PTAC
         (
             string identifier, // Required parameters
-            string displayName= default, Vintages vintage= Vintages.ASHRAE_2013, AllAirEconomizerType economizerType= AllAirEconomizerType.Inferred, AnyOf<Autosize,double> sensibleHeatRecovery= default, AnyOf<Autosize,double> latentHeatRecovery= default, PTACEquipmentType equipmentType= PTACEquipmentType.PTAC_ElectricBaseboard// Optional parameters
+            string displayName= default, Vintages vintage= Vintages.ASHRAE_2013, PTACEquipmentType equipmentType= PTACEquipmentType.PTAC_ElectricBaseboard// Optional parameters
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             this.Vintage = vintage;
-            this.EconomizerType = economizerType;
-            this.SensibleHeatRecovery = sensibleHeatRecovery;
-            this.LatentHeatRecovery = latentHeatRecovery;
             this.EquipmentType = equipmentType;
 
             // Set non-required readonly properties with defaultValue
@@ -90,18 +78,6 @@ namespace HoneybeeSchema
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "PTAC";
 
-        /// <summary>
-        /// A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. If None or Autosize, it will be whatever is recommended for the given vintage.
-        /// </summary>
-        /// <value>A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. If None or Autosize, it will be whatever is recommended for the given vintage.</value>
-        [DataMember(Name = "sensible_heat_recovery")]
-        public AnyOf<Autosize,double> SensibleHeatRecovery { get; set; } 
-        /// <summary>
-        /// A number between 0 and 1 for the effectiveness of latent heat recovery within the system. If None or Autosize, it will be whatever is recommended for the given vintage.
-        /// </summary>
-        /// <value>A number between 0 and 1 for the effectiveness of latent heat recovery within the system. If None or Autosize, it will be whatever is recommended for the given vintage.</value>
-        [DataMember(Name = "latent_heat_recovery")]
-        public AnyOf<Autosize,double> LatentHeatRecovery { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -127,9 +103,6 @@ namespace HoneybeeSchema
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Vintage: ").Append(Vintage).Append("\n");
-            sb.Append("  EconomizerType: ").Append(EconomizerType).Append("\n");
-            sb.Append("  SensibleHeatRecovery: ").Append(SensibleHeatRecovery).Append("\n");
-            sb.Append("  LatentHeatRecovery: ").Append(LatentHeatRecovery).Append("\n");
             sb.Append("  EquipmentType: ").Append(EquipmentType).Append("\n");
             return sb.ToString();
         }
@@ -200,21 +173,6 @@ namespace HoneybeeSchema
                     this.Vintage.Equals(input.Vintage))
                 ) && base.Equals(input) && 
                 (
-                    this.EconomizerType == input.EconomizerType ||
-                    (this.EconomizerType != null &&
-                    this.EconomizerType.Equals(input.EconomizerType))
-                ) && base.Equals(input) && 
-                (
-                    this.SensibleHeatRecovery == input.SensibleHeatRecovery ||
-                    (this.SensibleHeatRecovery != null &&
-                    this.SensibleHeatRecovery.Equals(input.SensibleHeatRecovery))
-                ) && base.Equals(input) && 
-                (
-                    this.LatentHeatRecovery == input.LatentHeatRecovery ||
-                    (this.LatentHeatRecovery != null &&
-                    this.LatentHeatRecovery.Equals(input.LatentHeatRecovery))
-                ) && base.Equals(input) && 
-                (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
@@ -237,12 +195,6 @@ namespace HoneybeeSchema
                 int hashCode = base.GetHashCode();
                 if (this.Vintage != null)
                     hashCode = hashCode * 59 + this.Vintage.GetHashCode();
-                if (this.EconomizerType != null)
-                    hashCode = hashCode * 59 + this.EconomizerType.GetHashCode();
-                if (this.SensibleHeatRecovery != null)
-                    hashCode = hashCode * 59 + this.SensibleHeatRecovery.GetHashCode();
-                if (this.LatentHeatRecovery != null)
-                    hashCode = hashCode * 59 + this.LatentHeatRecovery.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.EquipmentType != null)

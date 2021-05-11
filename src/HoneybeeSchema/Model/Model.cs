@@ -43,7 +43,7 @@ namespace HoneybeeSchema
         { 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.43.0";
+            this.Version = "1.43.3";
         }
         
         /// <summary>
@@ -80,7 +80,7 @@ namespace HoneybeeSchema
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.43.0";
+            this.Version = "1.43.3";
         }
 
         //============================================== is ReadOnly 
@@ -95,7 +95,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text string for the current version of the schema.</value>
         [DataMember(Name = "version")]
-        public string Version { get; protected set; }  = "1.43.0";
+        public string Version { get; protected set; }  = "1.43.3";
 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
