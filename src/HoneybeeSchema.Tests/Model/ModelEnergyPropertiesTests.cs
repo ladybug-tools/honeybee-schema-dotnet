@@ -108,7 +108,7 @@ namespace HoneybeeSchema.Test
             var obj = this.instance.Constructions.Where(_=>(_.Obj as OpaqueConstructionAbridged)?.Identifier == "Generic Underground Wall").First();
             var o = obj.Obj as OpaqueConstructionAbridged;
 
-            Assert.AreEqual(o.Layers.Count, 4);
+            Assert.AreEqual(o.Materials.Count, 4);
         }
         /// <summary>
         /// Test the property 'Materials'
