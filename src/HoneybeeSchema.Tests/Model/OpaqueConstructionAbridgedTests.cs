@@ -97,11 +97,11 @@ namespace HoneybeeSchema.Test
         [Test]
         public void LayersTest()
         {
-            Assert.AreEqual(this.instance.Layers.Count, 4);
-            Assert.AreEqual(this.instance.Layers[1], "8in Concrete HW");
+            Assert.AreEqual(this.instance.Materials.Count, 4);
+            Assert.AreEqual(this.instance.Materials[1], "8in Concrete HW");
 
-            Assert.AreEqual(instanceFromJson.Layers.Count, this.instance.Layers.Count);
-            Assert.AreEqual(instanceFromJson.Layers[2], this.instance.Layers[2]);
+            Assert.AreEqual(instanceFromJson.Materials.Count, this.instance.Materials.Count);
+            Assert.AreEqual(instanceFromJson.Materials[2], this.instance.Materials[2]);
         }
 
     }
