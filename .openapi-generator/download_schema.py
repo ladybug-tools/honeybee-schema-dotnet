@@ -37,16 +37,13 @@ os.mkdir(saving_dir)
 json_file1 = f"{base_url}/model_inheritance.json"
 # simulation-parameter
 json_file2 = f"{base_url}/simulation-parameter_inheritance.json"
-# radiance-asset
-json_file3 = f"{base_url}/radiance-asset_inheritance.json"
+
 
 files = [
     json_file1,
     json_file1.replace("inheritance.json", "mapper.json"),
     json_file2,
-    json_file2.replace("inheritance.json", "mapper.json"),
-    json_file3,
-    json_file3.replace("inheritance.json", "mapper.json"),
+    json_file2.replace("inheritance.json", "mapper.json")
 ]
 
 for f in files:
