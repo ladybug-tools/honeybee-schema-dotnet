@@ -41,7 +41,7 @@ namespace HoneybeeSchema
         {
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "void";
+            this.Type = "Void";
         }
 
         //============================================== is ReadOnly 
@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected set; }  = "void";
+        public override string Type { get; protected set; }  = "Void";
 
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace HoneybeeSchema
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^void$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^Void$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

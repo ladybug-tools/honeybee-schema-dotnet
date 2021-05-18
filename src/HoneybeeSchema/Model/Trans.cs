@@ -36,21 +36,21 @@ namespace HoneybeeSchema
         protected Trans() 
         { 
             // Set non-required readonly properties with defaultValue
-            this.Type = "trans";
+            this.Type = "Trans";
         }
         
         /// <summary>
         /// Initializes a new instance of the <see cref="Trans" /> class.
         /// </summary>
-        /// <param name="modifier">Material modifier (default: Void)..</param>
-        /// <param name="dependencies">List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None)..</param>
-        /// <param name="rReflectance">A value between 0 and 1 for the red channel reflectance (default: 0). (default to 0.0D).</param>
-        /// <param name="gReflectance">A value between 0 and 1 for the green channel reflectance (default: 0). (default to 0.0D).</param>
-        /// <param name="bReflectance">A value between 0 and 1 for the blue channel reflectance (default: 0). (default to 0.0D).</param>
-        /// <param name="specularity">A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials. (default: 0). (default to 0D).</param>
-        /// <param name="roughness">A value between 0 and 1 for the roughness, specified as the rms slope of surface facets. Roughness greater than 0.2 are not realistic (default: 0). (default to 0D).</param>
-        /// <param name="transmittedDiff">The fraction of transmitted light that is transmitted diffusely in a scattering fashion (default: 0). (default to 0D).</param>
-        /// <param name="transmittedSpec">The fraction of transmitted light that is not diffusely scattered (default: 0). (default to 0D).</param>
+        /// <param name="modifier">Material modifier..</param>
+        /// <param name="dependencies">List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers..</param>
+        /// <param name="rReflectance">A value between 0 and 1 for the red channel reflectance. (default to 0.0D).</param>
+        /// <param name="gReflectance">A value between 0 and 1 for the green channel reflectance. (default to 0.0D).</param>
+        /// <param name="bReflectance">A value between 0 and 1 for the blue channel reflectance. (default to 0.0D).</param>
+        /// <param name="specularity">A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials. (default to 0D).</param>
+        /// <param name="roughness">A value between 0 and 1 for the roughness, specified as the RMS slope of surface facets. Roughness greater than 0.2 are not realistic. (default to 0D).</param>
+        /// <param name="transmittedDiff">The fraction of transmitted light that is transmitted diffusely in a scattering fashion. (default to 0D).</param>
+        /// <param name="transmittedSpec">The fraction of transmitted light that is not diffusely scattered. (default to 0D).</param>
         /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public Trans
@@ -70,7 +70,7 @@ namespace HoneybeeSchema
             this.TransmittedSpec = transmittedSpec;
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "trans";
+            this.Type = "Trans";
         }
 
         //============================================== is ReadOnly 
@@ -78,60 +78,60 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected set; }  = "trans";
+        public override string Type { get; protected set; }  = "Trans";
 
         /// <summary>
-        /// Material modifier (default: Void).
+        /// Material modifier.
         /// </summary>
-        /// <value>Material modifier (default: Void).</value>
+        /// <value>Material modifier.</value>
         [DataMember(Name = "modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> Modifier { get; set; } 
         /// <summary>
-        /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).
+        /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.
         /// </summary>
-        /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).</value>
+        /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.</value>
         [DataMember(Name = "dependencies")]
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Dependencies { get; set; } 
         /// <summary>
-        /// A value between 0 and 1 for the red channel reflectance (default: 0).
+        /// A value between 0 and 1 for the red channel reflectance.
         /// </summary>
-        /// <value>A value between 0 and 1 for the red channel reflectance (default: 0).</value>
+        /// <value>A value between 0 and 1 for the red channel reflectance.</value>
         [DataMember(Name = "r_reflectance")]
         public double RReflectance { get; set; }  = 0.0D;
         /// <summary>
-        /// A value between 0 and 1 for the green channel reflectance (default: 0).
+        /// A value between 0 and 1 for the green channel reflectance.
         /// </summary>
-        /// <value>A value between 0 and 1 for the green channel reflectance (default: 0).</value>
+        /// <value>A value between 0 and 1 for the green channel reflectance.</value>
         [DataMember(Name = "g_reflectance")]
         public double GReflectance { get; set; }  = 0.0D;
         /// <summary>
-        /// A value between 0 and 1 for the blue channel reflectance (default: 0).
+        /// A value between 0 and 1 for the blue channel reflectance.
         /// </summary>
-        /// <value>A value between 0 and 1 for the blue channel reflectance (default: 0).</value>
+        /// <value>A value between 0 and 1 for the blue channel reflectance.</value>
         [DataMember(Name = "b_reflectance")]
         public double BReflectance { get; set; }  = 0.0D;
         /// <summary>
-        /// A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials. (default: 0).
+        /// A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials.
         /// </summary>
-        /// <value>A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials. (default: 0).</value>
+        /// <value>A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials.</value>
         [DataMember(Name = "specularity")]
         public double Specularity { get; set; }  = 0D;
         /// <summary>
-        /// A value between 0 and 1 for the roughness, specified as the rms slope of surface facets. Roughness greater than 0.2 are not realistic (default: 0).
+        /// A value between 0 and 1 for the roughness, specified as the RMS slope of surface facets. Roughness greater than 0.2 are not realistic.
         /// </summary>
-        /// <value>A value between 0 and 1 for the roughness, specified as the rms slope of surface facets. Roughness greater than 0.2 are not realistic (default: 0).</value>
+        /// <value>A value between 0 and 1 for the roughness, specified as the RMS slope of surface facets. Roughness greater than 0.2 are not realistic.</value>
         [DataMember(Name = "roughness")]
         public double Roughness { get; set; }  = 0D;
         /// <summary>
-        /// The fraction of transmitted light that is transmitted diffusely in a scattering fashion (default: 0).
+        /// The fraction of transmitted light that is transmitted diffusely in a scattering fashion.
         /// </summary>
-        /// <value>The fraction of transmitted light that is transmitted diffusely in a scattering fashion (default: 0).</value>
+        /// <value>The fraction of transmitted light that is transmitted diffusely in a scattering fashion.</value>
         [DataMember(Name = "transmitted_diff")]
         public double TransmittedDiff { get; set; }  = 0D;
         /// <summary>
-        /// The fraction of transmitted light that is not diffusely scattered (default: 0).
+        /// The fraction of transmitted light that is not diffusely scattered.
         /// </summary>
-        /// <value>The fraction of transmitted light that is not diffusely scattered (default: 0).</value>
+        /// <value>The fraction of transmitted light that is not diffusely scattered.</value>
         [DataMember(Name = "transmitted_spec")]
         public double TransmittedSpec { get; set; }  = 0D;
 
@@ -425,7 +425,7 @@ namespace HoneybeeSchema
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^trans$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^Trans$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

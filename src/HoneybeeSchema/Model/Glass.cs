@@ -36,18 +36,18 @@ namespace HoneybeeSchema
         protected Glass() 
         { 
             // Set non-required readonly properties with defaultValue
-            this.Type = "glass";
+            this.Type = "Glass";
         }
         
         /// <summary>
         /// Initializes a new instance of the <see cref="Glass" /> class.
         /// </summary>
-        /// <param name="modifier">Material modifier (default: Void)..</param>
-        /// <param name="dependencies">List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None)..</param>
-        /// <param name="rTransmissivity">A value between 0 and 1 for the red channel transmissivity (default: 0). (default to 0.0D).</param>
-        /// <param name="gTransmissivity">A value between 0 and 1 for the green channel transmissivity (default: 0). (default to 0.0D).</param>
-        /// <param name="bTransmissivity">A value between 0 and 1 for the blue channel transmissivity (default: 0). (default to 0.0D).</param>
-        /// <param name="refractionIndex">A value between 0 and 1 for the index of refraction (default: 1.52). (default to 1.52D).</param>
+        /// <param name="modifier">Material modifier..</param>
+        /// <param name="dependencies">List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers..</param>
+        /// <param name="rTransmissivity">A value between 0 and 1 for the red channel transmissivity. (default to 0.0D).</param>
+        /// <param name="gTransmissivity">A value between 0 and 1 for the green channel transmissivity. (default to 0.0D).</param>
+        /// <param name="bTransmissivity">A value between 0 and 1 for the blue channel transmissivity. (default to 0.0D).</param>
+        /// <param name="refractionIndex">A value between 0 and 1 for the index of refraction. (default to 1.52D).</param>
         /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public Glass
@@ -64,7 +64,7 @@ namespace HoneybeeSchema
             this.RefractionIndex = refractionIndex;
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "glass";
+            this.Type = "Glass";
         }
 
         //============================================== is ReadOnly 
@@ -72,42 +72,42 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected set; }  = "glass";
+        public override string Type { get; protected set; }  = "Glass";
 
         /// <summary>
-        /// Material modifier (default: Void).
+        /// Material modifier.
         /// </summary>
-        /// <value>Material modifier (default: Void).</value>
+        /// <value>Material modifier.</value>
         [DataMember(Name = "modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> Modifier { get; set; } 
         /// <summary>
-        /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).
+        /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.
         /// </summary>
-        /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).</value>
+        /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.</value>
         [DataMember(Name = "dependencies")]
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Dependencies { get; set; } 
         /// <summary>
-        /// A value between 0 and 1 for the red channel transmissivity (default: 0).
+        /// A value between 0 and 1 for the red channel transmissivity.
         /// </summary>
-        /// <value>A value between 0 and 1 for the red channel transmissivity (default: 0).</value>
+        /// <value>A value between 0 and 1 for the red channel transmissivity.</value>
         [DataMember(Name = "r_transmissivity")]
         public double RTransmissivity { get; set; }  = 0.0D;
         /// <summary>
-        /// A value between 0 and 1 for the green channel transmissivity (default: 0).
+        /// A value between 0 and 1 for the green channel transmissivity.
         /// </summary>
-        /// <value>A value between 0 and 1 for the green channel transmissivity (default: 0).</value>
+        /// <value>A value between 0 and 1 for the green channel transmissivity.</value>
         [DataMember(Name = "g_transmissivity")]
         public double GTransmissivity { get; set; }  = 0.0D;
         /// <summary>
-        /// A value between 0 and 1 for the blue channel transmissivity (default: 0).
+        /// A value between 0 and 1 for the blue channel transmissivity.
         /// </summary>
-        /// <value>A value between 0 and 1 for the blue channel transmissivity (default: 0).</value>
+        /// <value>A value between 0 and 1 for the blue channel transmissivity.</value>
         [DataMember(Name = "b_transmissivity")]
         public double BTransmissivity { get; set; }  = 0.0D;
         /// <summary>
-        /// A value between 0 and 1 for the index of refraction (default: 1.52).
+        /// A value between 0 and 1 for the index of refraction.
         /// </summary>
-        /// <value>A value between 0 and 1 for the index of refraction (default: 1.52).</value>
+        /// <value>A value between 0 and 1 for the index of refraction.</value>
         [DataMember(Name = "refraction_index")]
         public double RefractionIndex { get; set; }  = 1.52D;
 
@@ -329,7 +329,7 @@ namespace HoneybeeSchema
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^glass$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^Glass$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
