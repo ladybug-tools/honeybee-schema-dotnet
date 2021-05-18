@@ -36,17 +36,17 @@ namespace HoneybeeSchema
         protected Light() 
         { 
             // Set non-required readonly properties with defaultValue
-            this.Type = "light";
+            this.Type = "Light";
         }
         
         /// <summary>
         /// Initializes a new instance of the <see cref="Light" /> class.
         /// </summary>
-        /// <param name="modifier">Material modifier (default: Void)..</param>
-        /// <param name="dependencies">List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None)..</param>
-        /// <param name="rEmittance">A value between 0 and 1 for the red channel of the modifier (default: 0). (default to 0.0D).</param>
-        /// <param name="gEmittance">A value between 0 and 1 for the green channel of the modifier (default: 0). (default to 0.0D).</param>
-        /// <param name="bEmittance">A value between 0 and 1 for the blue channel of the modifier (default: 0). (default to 0.0D).</param>
+        /// <param name="modifier">Material modifier..</param>
+        /// <param name="dependencies">List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers..</param>
+        /// <param name="rEmittance">A value between 0 and 1 for the red channel of the modifier. (default to 0.0D).</param>
+        /// <param name="gEmittance">A value between 0 and 1 for the green channel of the modifier. (default to 0.0D).</param>
+        /// <param name="bEmittance">A value between 0 and 1 for the blue channel of the modifier. (default to 0.0D).</param>
         /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public Light
@@ -62,7 +62,7 @@ namespace HoneybeeSchema
             this.BEmittance = bEmittance;
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "light";
+            this.Type = "Light";
         }
 
         //============================================== is ReadOnly 
@@ -70,36 +70,36 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected set; }  = "light";
+        public override string Type { get; protected set; }  = "Light";
 
         /// <summary>
-        /// Material modifier (default: Void).
+        /// Material modifier.
         /// </summary>
-        /// <value>Material modifier (default: Void).</value>
+        /// <value>Material modifier.</value>
         [DataMember(Name = "modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> Modifier { get; set; } 
         /// <summary>
-        /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).
+        /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.
         /// </summary>
-        /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).</value>
+        /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.</value>
         [DataMember(Name = "dependencies")]
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Dependencies { get; set; } 
         /// <summary>
-        /// A value between 0 and 1 for the red channel of the modifier (default: 0).
+        /// A value between 0 and 1 for the red channel of the modifier.
         /// </summary>
-        /// <value>A value between 0 and 1 for the red channel of the modifier (default: 0).</value>
+        /// <value>A value between 0 and 1 for the red channel of the modifier.</value>
         [DataMember(Name = "r_emittance")]
         public double REmittance { get; set; }  = 0.0D;
         /// <summary>
-        /// A value between 0 and 1 for the green channel of the modifier (default: 0).
+        /// A value between 0 and 1 for the green channel of the modifier.
         /// </summary>
-        /// <value>A value between 0 and 1 for the green channel of the modifier (default: 0).</value>
+        /// <value>A value between 0 and 1 for the green channel of the modifier.</value>
         [DataMember(Name = "g_emittance")]
         public double GEmittance { get; set; }  = 0.0D;
         /// <summary>
-        /// A value between 0 and 1 for the blue channel of the modifier (default: 0).
+        /// A value between 0 and 1 for the blue channel of the modifier.
         /// </summary>
-        /// <value>A value between 0 and 1 for the blue channel of the modifier (default: 0).</value>
+        /// <value>A value between 0 and 1 for the blue channel of the modifier.</value>
         [DataMember(Name = "b_emittance")]
         public double BEmittance { get; set; }  = 0.0D;
 
@@ -305,7 +305,7 @@ namespace HoneybeeSchema
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^light$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^Light$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

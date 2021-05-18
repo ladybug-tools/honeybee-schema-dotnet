@@ -43,15 +43,15 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="BSDF" /> class.
         /// </summary>
         /// <param name="bsdfData">A string with the contents of the BSDF XML file. (required).</param>
-        /// <param name="modifier">Material modifier (default: Void)..</param>
-        /// <param name="dependencies">List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None)..</param>
-        /// <param name="upOrientation">Vector as sequence that sets the hemisphere that the BSDF material faces. (default: (0.01, 0.01, 1.00)..</param>
-        /// <param name="thickness">Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative)(default: 0). (default to 0D).</param>
-        /// <param name="functionFile">Optional input for function file (default: \&quot;.\&quot;). (default to &quot;.&quot;).</param>
-        /// <param name="transform">Optional transform input to scale the thickness and reorient the up vector (default: None)..</param>
-        /// <param name="frontDiffuseReflectance">Optional additional front diffuse reflectance as sequence of numbers (default: None)..</param>
-        /// <param name="backDiffuseReflectance">Optional additional back diffuse reflectance as sequence of numbers (default: None)..</param>
-        /// <param name="diffuseTransmittance">Optional additional diffuse transmittance as sequence of numbers (default: None)..</param>
+        /// <param name="modifier">Material modifier..</param>
+        /// <param name="dependencies">List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers..</param>
+        /// <param name="upOrientation">Vector as sequence that sets the hemisphere that the BSDF material faces..</param>
+        /// <param name="thickness">Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative). (default to 0D).</param>
+        /// <param name="functionFile">Optional input for function file. Using \&quot;.\&quot; will ensure that BSDF data is written to the root of wherever a given study is run. (default to &quot;.&quot;).</param>
+        /// <param name="transform">Optional transform input to scale the thickness and reorient the up vector..</param>
+        /// <param name="frontDiffuseReflectance">Optional additional front diffuse reflectance as sequence of three RGB numbers..</param>
+        /// <param name="backDiffuseReflectance">Optional additional back diffuse reflectance as sequence of three RGB numbers..</param>
+        /// <param name="diffuseTransmittance">Optional additional diffuse transmittance as sequence of three RGB numbers..</param>
         /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public BSDF
@@ -91,57 +91,57 @@ namespace HoneybeeSchema
         [DataMember(Name = "bsdf_data", IsRequired = true)]
         public string BsdfData { get; set; } 
         /// <summary>
-        /// Material modifier (default: Void).
+        /// Material modifier.
         /// </summary>
-        /// <value>Material modifier (default: Void).</value>
+        /// <value>Material modifier.</value>
         [DataMember(Name = "modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> Modifier { get; set; } 
         /// <summary>
-        /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).
+        /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.
         /// </summary>
-        /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers (default: None).</value>
+        /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.</value>
         [DataMember(Name = "dependencies")]
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Dependencies { get; set; } 
         /// <summary>
-        /// Vector as sequence that sets the hemisphere that the BSDF material faces. (default: (0.01, 0.01, 1.00).
+        /// Vector as sequence that sets the hemisphere that the BSDF material faces.
         /// </summary>
-        /// <value>Vector as sequence that sets the hemisphere that the BSDF material faces. (default: (0.01, 0.01, 1.00).</value>
+        /// <value>Vector as sequence that sets the hemisphere that the BSDF material faces.</value>
         [DataMember(Name = "up_orientation")]
         public List<double> UpOrientation { get; set; } 
         /// <summary>
-        /// Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative)(default: 0).
+        /// Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative).
         /// </summary>
-        /// <value>Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative)(default: 0).</value>
+        /// <value>Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative).</value>
         [DataMember(Name = "thickness")]
         public double Thickness { get; set; }  = 0D;
         /// <summary>
-        /// Optional input for function file (default: \&quot;.\&quot;).
+        /// Optional input for function file. Using \&quot;.\&quot; will ensure that BSDF data is written to the root of wherever a given study is run.
         /// </summary>
-        /// <value>Optional input for function file (default: \&quot;.\&quot;).</value>
+        /// <value>Optional input for function file. Using \&quot;.\&quot; will ensure that BSDF data is written to the root of wherever a given study is run.</value>
         [DataMember(Name = "function_file")]
         public string FunctionFile { get; set; }  = ".";
         /// <summary>
-        /// Optional transform input to scale the thickness and reorient the up vector (default: None).
+        /// Optional transform input to scale the thickness and reorient the up vector.
         /// </summary>
-        /// <value>Optional transform input to scale the thickness and reorient the up vector (default: None).</value>
+        /// <value>Optional transform input to scale the thickness and reorient the up vector.</value>
         [DataMember(Name = "transform")]
         public string Transform { get; set; } 
         /// <summary>
-        /// Optional additional front diffuse reflectance as sequence of numbers (default: None).
+        /// Optional additional front diffuse reflectance as sequence of three RGB numbers.
         /// </summary>
-        /// <value>Optional additional front diffuse reflectance as sequence of numbers (default: None).</value>
+        /// <value>Optional additional front diffuse reflectance as sequence of three RGB numbers.</value>
         [DataMember(Name = "front_diffuse_reflectance")]
         public List<double> FrontDiffuseReflectance { get; set; } 
         /// <summary>
-        /// Optional additional back diffuse reflectance as sequence of numbers (default: None).
+        /// Optional additional back diffuse reflectance as sequence of three RGB numbers.
         /// </summary>
-        /// <value>Optional additional back diffuse reflectance as sequence of numbers (default: None).</value>
+        /// <value>Optional additional back diffuse reflectance as sequence of three RGB numbers.</value>
         [DataMember(Name = "back_diffuse_reflectance")]
         public List<double> BackDiffuseReflectance { get; set; } 
         /// <summary>
-        /// Optional additional diffuse transmittance as sequence of numbers (default: None).
+        /// Optional additional diffuse transmittance as sequence of three RGB numbers.
         /// </summary>
-        /// <value>Optional additional diffuse transmittance as sequence of numbers (default: None).</value>
+        /// <value>Optional additional diffuse transmittance as sequence of three RGB numbers.</value>
         [DataMember(Name = "diffuse_transmittance")]
         public List<double> DiffuseTransmittance { get; set; } 
 
