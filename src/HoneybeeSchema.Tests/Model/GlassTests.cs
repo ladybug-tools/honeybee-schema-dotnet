@@ -133,10 +133,10 @@ namespace HoneybeeSchema.Test
         [Test]
         public void TypeTest()
         {
-            Assert.IsTrue(this.instance.Type == "glass");
+            Assert.IsTrue(this.instance.Type == "Glass");
 
             var basetype = this.instance as ModifierBase;
-            Assert.IsTrue(basetype.DuplicateModifierBase().Type == "glass");
+            Assert.IsTrue(basetype.DuplicateModifierBase().Type == "Glass");
         }
 
     }
