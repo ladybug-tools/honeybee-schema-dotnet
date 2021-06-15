@@ -48,8 +48,9 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "_FaceSubSetAbridged";
 
-            // check if object is valid
-            this.IsValid(throwException: true);
+            // check if object is valid, only check for inherited class
+            if (this.GetType() == typeof(FaceSubSetAbridged))
+                this.IsValid(throwException: true);
         }
 
         //============================================== is ReadOnly 

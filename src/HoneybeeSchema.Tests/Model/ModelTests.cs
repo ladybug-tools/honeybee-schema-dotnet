@@ -166,7 +166,7 @@ namespace HoneybeeSchema.Test
         [Test]
         public void RoomWithoutFaceTest()
         {
-            var room = new Room("", new List<Face>(), new RoomPropertiesAbridged());
+            var room = new Room("A_mewRoom", new List<Face>(), new RoomPropertiesAbridged());
             var json = room.ToJson();
 
             var dup = Room.FromJson(json);

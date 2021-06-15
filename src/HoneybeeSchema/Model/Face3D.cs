@@ -59,8 +59,9 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "Face3D";
 
-            // check if object is valid
-            this.IsValid(throwException: true);
+            // check if object is valid, only check for inherited class
+            if (this.GetType() == typeof(Face3D))
+                this.IsValid(throwException: true);
         }
 
         //============================================== is ReadOnly 

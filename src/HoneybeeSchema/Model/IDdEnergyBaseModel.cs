@@ -57,8 +57,9 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "IDdEnergyBaseModel";
 
-            // check if object is valid
-            this.IsValid(throwException: true);
+            // check if object is valid, only check for inherited class
+            if (this.GetType() == typeof(IDdEnergyBaseModel))
+                this.IsValid(throwException: true);
         }
 
         //============================================== is ReadOnly 
@@ -234,7 +235,7 @@ namespace HoneybeeSchema
             }
             
             // Identifier (string) pattern
-            Regex regexIdentifier = new Regex(@"^[^,;!\\n\\t]+$", RegexOptions.CultureInvariant);
+            Regex regexIdentifier = new Regex(@"^[^,;!\n\t]+$", RegexOptions.CultureInvariant);
             if (false == regexIdentifier.Match(this.Identifier).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, must match a pattern of " + regexIdentifier, new [] { "Identifier" });
