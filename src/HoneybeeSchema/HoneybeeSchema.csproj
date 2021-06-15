@@ -3,14 +3,14 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>1.43.5.0</Version>
+    <Version>1.43.8.0</Version>
     <Authors>Ladybug Tools</Authors>
     <Description>This is the .Net version of Honeybee Schema</Description>
     <Copyright>Copyright © 2020 Ladybug Tools LLC</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://www.ladybug.tools/honeybee-schema</PackageProjectUrl>
-    <AssemblyVersion>1.43.5.0</AssemblyVersion>
-    <FileVersion>1.43.5.0</FileVersion>
+    <AssemblyVersion>1.43.8.0</AssemblyVersion>
+    <FileVersion>1.43.8.0</FileVersion>
     <RepositoryUrl>https://github.com/ladybug-tools/honeybee-schema-dotnet</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <SignAssembly>true</SignAssembly>

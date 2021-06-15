@@ -45,10 +45,11 @@ namespace HoneybeeSchema
         /// <param name="setpoint">Setpoint object for the temperature setpoints of the Room..</param>
         /// <param name="daylightingControl">An optional DaylightingControl object to dictate the dimming of lights. If None, the lighting will respond only to the schedule and not the daylight conditions within the room..</param>
         /// <param name="windowVentControl">An optional VentilationControl object to dictate the opening of windows. If None, the windows will never open..</param>
+        /// <param name="internalMasses">An optional list of of InternalMass objects for thermal mass exposed to Room air. Note that internal masses assigned this way cannot \&quot;see\&quot; solar radiation that may potentially hit them and, as such, caution should be taken when using this component with internal mass objects that are not always in shade. Masses are factored into the the thermal calculations of the Room by undergoing heat transfer with the indoor air..</param>
         public RoomEnergyPropertiesAbridged
         (
            // Required parameters
-           string constructionSet= default, string programType= default, string hvac= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, ServiceHotWaterAbridged serviceHotWater= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default, DaylightingControl daylightingControl= default, VentilationControlAbridged windowVentControl= default// Optional parameters
+           string constructionSet= default, string programType= default, string hvac= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, ServiceHotWaterAbridged serviceHotWater= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default, DaylightingControl daylightingControl= default, VentilationControlAbridged windowVentControl= default, List<InternalMassAbridged> internalMasses= default// Optional parameters
         ) : base()// BaseClass
         {
             this.ConstructionSet = constructionSet;
@@ -64,6 +65,7 @@ namespace HoneybeeSchema
             this.Setpoint = setpoint;
             this.DaylightingControl = daylightingControl;
             this.WindowVentControl = windowVentControl;
+            this.InternalMasses = internalMasses;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "RoomEnergyPropertiesAbridged";
@@ -154,6 +156,12 @@ namespace HoneybeeSchema
         /// <value>An optional VentilationControl object to dictate the opening of windows. If None, the windows will never open.</value>
         [DataMember(Name = "window_vent_control")]
         public VentilationControlAbridged WindowVentControl { get; set; } 
+        /// <summary>
+        /// An optional list of of InternalMass objects for thermal mass exposed to Room air. Note that internal masses assigned this way cannot \&quot;see\&quot; solar radiation that may potentially hit them and, as such, caution should be taken when using this component with internal mass objects that are not always in shade. Masses are factored into the the thermal calculations of the Room by undergoing heat transfer with the indoor air.
+        /// </summary>
+        /// <value>An optional list of of InternalMass objects for thermal mass exposed to Room air. Note that internal masses assigned this way cannot \&quot;see\&quot; solar radiation that may potentially hit them and, as such, caution should be taken when using this component with internal mass objects that are not always in shade. Masses are factored into the the thermal calculations of the Room by undergoing heat transfer with the indoor air.</value>
+        [DataMember(Name = "internal_masses")]
+        public List<InternalMassAbridged> InternalMasses { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -189,6 +197,7 @@ namespace HoneybeeSchema
             sb.Append("  Setpoint: ").Append(Setpoint).Append("\n");
             sb.Append("  DaylightingControl: ").Append(DaylightingControl).Append("\n");
             sb.Append("  WindowVentControl: ").Append(WindowVentControl).Append("\n");
+            sb.Append("  InternalMasses: ").Append(InternalMasses).Append("\n");
             return sb.ToString();
         }
   
@@ -321,6 +330,12 @@ namespace HoneybeeSchema
                     this.WindowVentControl == input.WindowVentControl ||
                     (this.WindowVentControl != null &&
                     this.WindowVentControl.Equals(input.WindowVentControl))
+                ) && base.Equals(input) && 
+                (
+                    this.InternalMasses == input.InternalMasses ||
+                    this.InternalMasses != null &&
+                    input.InternalMasses != null &&
+                    this.InternalMasses.SequenceEqual(input.InternalMasses)
                 );
         }
 
@@ -361,6 +376,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.DaylightingControl.GetHashCode();
                 if (this.WindowVentControl != null)
                     hashCode = hashCode * 59 + this.WindowVentControl.GetHashCode();
+                if (this.InternalMasses != null)
+                    hashCode = hashCode * 59 + this.InternalMasses.GetHashCode();
                 return hashCode;
             }
         }

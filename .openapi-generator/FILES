@@ -157,6 +157,8 @@ docs/Infiltration.md
 docs/InfiltrationAbridged.md
 docs/InfiltrationAbridgedAllOf.md
 docs/InfiltrationAllOf.md
+docs/InternalMassAbridged.md
+docs/InternalMassAbridgedAllOf.md
 docs/Light.md
 docs/LightAllOf.md
 docs/Lighting.md
@@ -501,6 +503,8 @@ src/HoneybeeSchema.Test/Model/InfiltrationAbridgedAllOfTests.cs
 src/HoneybeeSchema.Test/Model/InfiltrationAbridgedTests.cs
 src/HoneybeeSchema.Test/Model/InfiltrationAllOfTests.cs
 src/HoneybeeSchema.Test/Model/InfiltrationTests.cs
+src/HoneybeeSchema.Test/Model/InternalMassAbridgedAllOfTests.cs
+src/HoneybeeSchema.Test/Model/InternalMassAbridgedTests.cs
 src/HoneybeeSchema.Test/Model/LightAllOfTests.cs
 src/HoneybeeSchema.Test/Model/LightTests.cs
 src/HoneybeeSchema.Test/Model/LightingAbridgedAllOfTests.cs
@@ -855,6 +859,8 @@ src/HoneybeeSchema/Model/Infiltration.cs
 src/HoneybeeSchema/Model/InfiltrationAbridged.cs
 src/HoneybeeSchema/Model/InfiltrationAbridgedAllOf.cs
 src/HoneybeeSchema/Model/InfiltrationAllOf.cs
+src/HoneybeeSchema/Model/InternalMassAbridged.cs
+src/HoneybeeSchema/Model/InternalMassAbridgedAllOf.cs
 src/HoneybeeSchema/Model/Light.cs
 src/HoneybeeSchema/Model/LightAllOf.cs
 src/HoneybeeSchema/Model/Lighting.cs
