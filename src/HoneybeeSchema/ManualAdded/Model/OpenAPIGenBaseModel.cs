@@ -1,21 +1,21 @@
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Runtime.Serialization;
 namespace HoneybeeSchema
 {
     public partial class OpenAPIGenBaseModel : HoneybeeObject
     {
         public bool IsValid(bool throwException = false)
         {
-            var isValid = !this.Validate().Any();
+            var res = this.Validate();
+            var isValid = !res.Any();
             if (isValid)
                 return true;
 
+            var resMsgs = string.Join( "; ", res.Select(_ => _.ErrorMessage));
             if (throwException)
-                throw new ArgumentException("This is an invalid object, please use Validate() to check details!");
+                throw new ArgumentException($"This is an invalid {this.Type} object! Error: {resMsgs}");
             else
                 return false;
         }
