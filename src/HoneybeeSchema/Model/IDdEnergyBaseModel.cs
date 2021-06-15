@@ -56,6 +56,9 @@ namespace HoneybeeSchema
 
             // Set non-required readonly properties with defaultValue
             this.Type = "IDdEnergyBaseModel";
+
+            // check if object is valid
+            this.IsValid(throwException: true);
         }
 
         //============================================== is ReadOnly 
@@ -113,7 +116,7 @@ namespace HoneybeeSchema
             var obj = JsonConvert.DeserializeObject<IDdEnergyBaseModel>(json, JsonSetting.AnyOfConvertSetting);
             if (obj == null)
                 return null;
-            return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() && obj.IsValid(throwException: true) ? obj : null;
         }
 
         /// <summary>
