@@ -13,12 +13,7 @@ using NUnit.Framework;
 
 using System;
 using System.Linq;
-using System.IO;
 using System.Collections.Generic;
-
-using HoneybeeSchema;
-using System.Reflection;
-using Newtonsoft.Json;
 
 namespace HoneybeeSchema.Test
 {
@@ -163,6 +158,18 @@ namespace HoneybeeSchema.Test
             var bc = obj.BoundaryCondition.Obj as Outdoors;
             Assert.IsTrue((double)bc.ViewFactor.Obj == 0.5);
 
+        }
+
+        [Test]
+        public void ValidateTest()
+        {
+       
+            var res = this.instance.Validate();
+
+            this.instance.Identifier = "ateta adfsadf%";
+            res = this.instance.Validate();
+            Assert.IsTrue(res.FirstOrDefault().MemberNames.Contains("Identifier"));
+  
         }
     }
 
