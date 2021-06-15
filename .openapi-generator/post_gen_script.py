@@ -191,6 +191,14 @@ def replace_decimal(read_data):
     return data
 
 
+def replace_regex(read_data):
+    data = read_data
+    replace_source = [r'\\n\\t', r'\\.']
+    replace_new = [r'\n\t', r'\.']
+    for s, n in zip(replace_source, replace_new):
+        data = data.replace(s, n)
+    return data
+
 def replace_AnyType(read_data):
     data = read_data
     replace_source = ['AnyType']
@@ -254,6 +262,7 @@ def check_csfiles(source_folder, anyof_types):
         data = replace_AnyType(data)
         # replace decimal/number to double
         # data = replace_decimal(data)
+        data = replace_regex(data)
         data = fix_constructor(data)
         data = add_override_to_type_property(data)
         data = change_spec_type(data)
