@@ -219,6 +219,20 @@ namespace HoneybeeSchema
         {
             foreach(var x in base.BaseValidate(validationContext)) yield return x;
 
+            // Identifier (string) minLength
+            if(this.Identifier != null && this.Identifier.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
+            }
+            
+            // Identifier (string) pattern
+            Regex regexIdentifier = new Regex(@"^[.A-Za-z0-9_-]+$", RegexOptions.CultureInvariant);
+            if (false == regexIdentifier.Match(this.Identifier).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, must match a pattern of " + regexIdentifier, new [] { "Identifier" });
+            }
+
+
             
             // Type (string) pattern
             Regex regexType = new Regex(@"^IDdRadianceBaseModel$", RegexOptions.CultureInvariant);

@@ -26,36 +26,38 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
-    [DataContract(Name = "IDdEnergyBaseModel")]
-    public partial class IDdEnergyBaseModel : OpenAPIGenBaseModel, IEquatable<IDdEnergyBaseModel>, IValidatableObject
+    [DataContract(Name = "InternalMassAbridged")]
+    public partial class InternalMassAbridged : IDdEnergyBaseModel, IEquatable<InternalMassAbridged>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="IDdEnergyBaseModel" /> class.
+        /// Initializes a new instance of the <see cref="InternalMassAbridged" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected IDdEnergyBaseModel() 
+        protected InternalMassAbridged() 
         { 
             // Set non-required readonly properties with defaultValue
-            this.Type = "IDdEnergyBaseModel";
+            this.Type = "InternalMassAbridged";
         }
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="IDdEnergyBaseModel" /> class.
+        /// Initializes a new instance of the <see cref="InternalMassAbridged" /> class.
         /// </summary>
+        /// <param name="construction">Identifier for an OpaqueConstruction that represents the material that the internal thermal mass is composed of. (required).</param>
+        /// <param name="area">A number representing the surface area of the internal mass that is exposed to the Room air. This value should always be in square meters regardless of what units system the parent model is a part of. (required).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
-        public IDdEnergyBaseModel
+        public InternalMassAbridged
         (
-           string identifier, // Required parameters
-           string displayName= default // Optional parameters
-        ) : base()// BaseClass
+            string identifier, string construction, double area, // Required parameters
+            string displayName= default // Optional parameters
+        ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for IDdEnergyBaseModel and cannot be null");
-            this.DisplayName = displayName;
+            // to ensure "construction" is required (not null)
+            this.Construction = construction ?? throw new ArgumentNullException("construction is a required property for InternalMassAbridged and cannot be null");
+            this.Area = area;
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "IDdEnergyBaseModel";
+            this.Type = "InternalMassAbridged";
         }
 
         //============================================== is ReadOnly 
@@ -63,20 +65,20 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected set; }  = "IDdEnergyBaseModel";
+        public override string Type { get; protected set; }  = "InternalMassAbridged";
 
         /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
+        /// Identifier for an OpaqueConstruction that represents the material that the internal thermal mass is composed of.
         /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name = "identifier", IsRequired = true)]
-        public string Identifier { get; set; } 
+        /// <value>Identifier for an OpaqueConstruction that represents the material that the internal thermal mass is composed of.</value>
+        [DataMember(Name = "construction", IsRequired = true)]
+        public string Construction { get; set; } 
         /// <summary>
-        /// Display name of the object with no character restrictions.
+        /// A number representing the surface area of the internal mass that is exposed to the Room air. This value should always be in square meters regardless of what units system the parent model is a part of.
         /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name = "display_name")]
-        public string DisplayName { get; set; } 
+        /// <value>A number representing the surface area of the internal mass that is exposed to the Room air. This value should always be in square meters regardless of what units system the parent model is a part of.</value>
+        [DataMember(Name = "area", IsRequired = true)]
+        public double Area { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -84,7 +86,7 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            return "IDdEnergyBaseModel";
+            return "InternalMassAbridged";
         }
 
         /// <summary>
@@ -97,20 +99,22 @@ namespace HoneybeeSchema
                 return this.ToString();
             
             var sb = new StringBuilder();
-            sb.Append("IDdEnergyBaseModel:\n");
+            sb.Append("InternalMassAbridged:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  Construction: ").Append(Construction).Append("\n");
+            sb.Append("  Area: ").Append(Area).Append("\n");
             return sb.ToString();
         }
   
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>IDdEnergyBaseModel object</returns>
-        public static IDdEnergyBaseModel FromJson(string json)
+        /// <returns>InternalMassAbridged object</returns>
+        public static InternalMassAbridged FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<IDdEnergyBaseModel>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<InternalMassAbridged>(json, JsonSetting.AnyOfConvertSetting);
             if (obj == null)
                 return null;
             return obj.Type.ToLower() == obj.GetType().Name.ToLower() ? obj : null;
@@ -119,8 +123,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>IDdEnergyBaseModel object</returns>
-        public virtual IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        /// <returns>InternalMassAbridged object</returns>
+        public virtual InternalMassAbridged DuplicateInternalMassAbridged()
         {
             return FromJson(this.ToJson());
         }
@@ -131,16 +135,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return DuplicateIDdEnergyBaseModel();
+            return DuplicateInternalMassAbridged();
         }
 
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
         {
-            return DuplicateIDdEnergyBaseModel();
+            return DuplicateInternalMassAbridged();
         }
      
         /// <summary>
@@ -151,28 +155,28 @@ namespace HoneybeeSchema
         public override bool Equals(object input)
         {
             input = input is AnyOf anyOf ? anyOf.Obj : input;
-            return this.Equals(input as IDdEnergyBaseModel);
+            return this.Equals(input as InternalMassAbridged);
         }
 
         /// <summary>
-        /// Returns true if IDdEnergyBaseModel instances are equal
+        /// Returns true if InternalMassAbridged instances are equal
         /// </summary>
-        /// <param name="input">Instance of IDdEnergyBaseModel to be compared</param>
+        /// <param name="input">Instance of InternalMassAbridged to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(IDdEnergyBaseModel input)
+        public bool Equals(InternalMassAbridged input)
         {
             if (input == null)
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
+                    this.Construction == input.Construction ||
+                    (this.Construction != null &&
+                    this.Construction.Equals(input.Construction))
                 ) && base.Equals(input) && 
                 (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
+                    this.Area == input.Area ||
+                    (this.Area != null &&
+                    this.Area.Equals(input.Area))
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
@@ -190,10 +194,10 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
+                if (this.Construction != null)
+                    hashCode = hashCode * 59 + this.Construction.GetHashCode();
+                if (this.Area != null)
+                    hashCode = hashCode * 59 + this.Area.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
@@ -207,40 +211,23 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            return this.BaseValidate(validationContext);
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
-        {
             foreach(var x in base.BaseValidate(validationContext)) yield return x;
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
+            // Construction (string) maxLength
+            if(this.Construction != null && this.Construction.Length > 100)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Construction, length must be less than 100.", new [] { "Construction" });
             }
 
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
+            // Construction (string) minLength
+            if(this.Construction != null && this.Construction.Length < 1)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Construction, length must be greater than 1.", new [] { "Construction" });
             }
             
-            // Identifier (string) pattern
-            Regex regexIdentifier = new Regex(@"^[^,;!\\n\\t]+$", RegexOptions.CultureInvariant);
-            if (false == regexIdentifier.Match(this.Identifier).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, must match a pattern of " + regexIdentifier, new [] { "Identifier" });
-            }
-
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^IDdEnergyBaseModel$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^InternalMassAbridged$", RegexOptions.CultureInvariant);
             if (false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

@@ -44,22 +44,21 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="peoplePerArea">People per floor area expressed as [people/m2] (required).</param>
         /// <param name="occupancySchedule">A schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile. (required).</param>
-        /// <param name="activitySchedule">A schedule for the activity of the occupants over the course of the year. The type of this schedule should be Power and the values of the schedule equal to the number of Watts given off by an individual person in the room. (required).</param>
+        /// <param name="activitySchedule">A schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated..</param>
         /// <param name="radiantFraction">The radiant fraction of sensible heat released by people. (Default: 0.3). (default to 0.3D).</param>
         /// <param name="latentFraction">Number for the latent fraction of heat gain due to people or an Autocalculate object..</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public People
         (
-            string identifier, double peoplePerArea, AnyOf<ScheduleRuleset,ScheduleFixedInterval> occupancySchedule, AnyOf<ScheduleRuleset,ScheduleFixedInterval> activitySchedule, // Required parameters
-            string displayName= default, double radiantFraction = 0.3D, AnyOf<Autocalculate,double> latentFraction= default// Optional parameters
+            string identifier, double peoplePerArea, AnyOf<ScheduleRuleset,ScheduleFixedInterval> occupancySchedule, // Required parameters
+            string displayName= default, AnyOf<ScheduleRuleset,ScheduleFixedInterval> activitySchedule= default, double radiantFraction = 0.3D, AnyOf<Autocalculate,double> latentFraction= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             this.PeoplePerArea = peoplePerArea;
             // to ensure "occupancySchedule" is required (not null)
             this.OccupancySchedule = occupancySchedule ?? throw new ArgumentNullException("occupancySchedule is a required property for People and cannot be null");
-            // to ensure "activitySchedule" is required (not null)
-            this.ActivitySchedule = activitySchedule ?? throw new ArgumentNullException("activitySchedule is a required property for People and cannot be null");
+            this.ActivitySchedule = activitySchedule;
             this.RadiantFraction = radiantFraction;
             this.LatentFraction = latentFraction;
 
@@ -87,10 +86,10 @@ namespace HoneybeeSchema
         [DataMember(Name = "occupancy_schedule", IsRequired = true)]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> OccupancySchedule { get; set; } 
         /// <summary>
-        /// A schedule for the activity of the occupants over the course of the year. The type of this schedule should be Power and the values of the schedule equal to the number of Watts given off by an individual person in the room.
+        /// A schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated.
         /// </summary>
-        /// <value>A schedule for the activity of the occupants over the course of the year. The type of this schedule should be Power and the values of the schedule equal to the number of Watts given off by an individual person in the room.</value>
-        [DataMember(Name = "activity_schedule", IsRequired = true)]
+        /// <value>A schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated.</value>
+        [DataMember(Name = "activity_schedule")]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> ActivitySchedule { get; set; } 
         /// <summary>
         /// The radiant fraction of sensible heat released by people. (Default: 0.3).
@@ -207,14 +206,14 @@ namespace HoneybeeSchema
                     this.OccupancySchedule.Equals(input.OccupancySchedule))
                 ) && base.Equals(input) && 
                 (
-                    this.ActivitySchedule == input.ActivitySchedule ||
-                    (this.ActivitySchedule != null &&
-                    this.ActivitySchedule.Equals(input.ActivitySchedule))
-                ) && base.Equals(input) && 
-                (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
+                ) && base.Equals(input) && 
+                (
+                    this.ActivitySchedule == input.ActivitySchedule ||
+                    (this.ActivitySchedule != null &&
+                    this.ActivitySchedule.Equals(input.ActivitySchedule))
                 ) && base.Equals(input) && 
                 (
                     this.RadiantFraction == input.RadiantFraction ||
@@ -241,10 +240,10 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.PeoplePerArea.GetHashCode();
                 if (this.OccupancySchedule != null)
                     hashCode = hashCode * 59 + this.OccupancySchedule.GetHashCode();
-                if (this.ActivitySchedule != null)
-                    hashCode = hashCode * 59 + this.ActivitySchedule.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.ActivitySchedule != null)
+                    hashCode = hashCode * 59 + this.ActivitySchedule.GetHashCode();
                 if (this.RadiantFraction != null)
                     hashCode = hashCode * 59 + this.RadiantFraction.GetHashCode();
                 if (this.LatentFraction != null)

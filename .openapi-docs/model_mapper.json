@@ -67,6 +67,7 @@
         "IdealAirSystemAbridged": "honeybee_schema.energy.hvac.idealair",
         "Infiltration": "honeybee_schema.energy.load",
         "InfiltrationAbridged": "honeybee_schema.energy.load",
+        "InternalMassAbridged": "honeybee_schema.energy.internalmass",
         "Light": "honeybee_schema.radiance.modifier",
         "Lighting": "honeybee_schema.energy.load",
         "LightingAbridged": "honeybee_schema.energy.load",
