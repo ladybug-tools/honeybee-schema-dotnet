@@ -82,8 +82,9 @@ namespace HoneybeeSchema
             this.Type = "Model";
             this.Version = "1.43.8";
 
-            // check if object is valid
-            this.IsValid(throwException: true);
+            // check if object is valid, only check for inherited class
+            if (this.GetType() == typeof(Model))
+                this.IsValid(throwException: true);
         }
 
         //============================================== is ReadOnly 
@@ -363,7 +364,7 @@ namespace HoneybeeSchema
 
             
             // Version (string) pattern
-            Regex regexVersion = new Regex(@"([0-9]+)\\.([0-9]+)\\.([0-9]+)", RegexOptions.CultureInvariant);
+            Regex regexVersion = new Regex(@"([0-9]+).([0-9]+).([0-9]+)", RegexOptions.CultureInvariant);
             if (false == regexVersion.Match(this.Version).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Version, must match a pattern of " + regexVersion, new [] { "Version" });

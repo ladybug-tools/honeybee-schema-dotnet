@@ -65,8 +65,9 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "ElectricEquipment";
 
-            // check if object is valid
-            this.IsValid(throwException: true);
+            // check if object is valid, only check for inherited class
+            if (this.GetType() == typeof(ElectricEquipment))
+                this.IsValid(throwException: true);
         }
 
         //============================================== is ReadOnly 

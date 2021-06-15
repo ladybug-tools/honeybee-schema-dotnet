@@ -126,8 +126,9 @@
             {{/isInherited}}
             {{/vars}}
 
-            // check if object is valid
-            this.IsValid(throwException: true);
+            // check if object is valid, only check for inherited class
+            if (this.GetType() == typeof({{classname}}))
+                this.IsValid(throwException: true);
         }
 
         {{#vars}}
