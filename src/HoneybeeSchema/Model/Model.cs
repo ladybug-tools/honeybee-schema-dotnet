@@ -356,7 +356,7 @@ namespace HoneybeeSchema
             
             // Type (string) pattern
             Regex regexType = new Regex(@"^Model$", RegexOptions.CultureInvariant);
-            if (false == regexType.Match(this.Type).Success)
+            if (this.Type != null && false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
@@ -364,8 +364,8 @@ namespace HoneybeeSchema
 
             
             // Version (string) pattern
-            Regex regexVersion = new Regex(@"([0-9]+).([0-9]+).([0-9]+)", RegexOptions.CultureInvariant);
-            if (false == regexVersion.Match(this.Version).Success)
+            Regex regexVersion = new Regex(@"([0-9]+)\.([0-9]+)\.([0-9]+)", RegexOptions.CultureInvariant);
+            if (this.Version != null && false == regexVersion.Match(this.Version).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Version, must match a pattern of " + regexVersion, new [] { "Version" });
             }

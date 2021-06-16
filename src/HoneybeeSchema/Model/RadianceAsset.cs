@@ -240,7 +240,7 @@ namespace HoneybeeSchema
             
             // RoomIdentifier (string) pattern
             Regex regexRoomIdentifier = new Regex(@"[A-Za-z0-9_-]", RegexOptions.CultureInvariant);
-            if (false == regexRoomIdentifier.Match(this.RoomIdentifier).Success)
+            if (this.RoomIdentifier != null && false == regexRoomIdentifier.Match(this.RoomIdentifier).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RoomIdentifier, must match a pattern of " + regexRoomIdentifier, new [] { "RoomIdentifier" });
             }
@@ -249,7 +249,7 @@ namespace HoneybeeSchema
             
             // Type (string) pattern
             Regex regexType = new Regex(@"^_RadianceAsset$", RegexOptions.CultureInvariant);
-            if (false == regexType.Match(this.Type).Success)
+            if (this.Type != null && false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }

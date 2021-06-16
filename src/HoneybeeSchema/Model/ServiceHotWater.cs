@@ -276,7 +276,7 @@ namespace HoneybeeSchema
             
             // Type (string) pattern
             Regex regexType = new Regex(@"^ServiceHotWater$", RegexOptions.CultureInvariant);
-            if (false == regexType.Match(this.Type).Success)
+            if (this.Type != null && false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
