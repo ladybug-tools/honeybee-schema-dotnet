@@ -252,7 +252,7 @@ namespace HoneybeeSchema
             
             // Identifier (string) pattern
             Regex regexIdentifier = new Regex(@"^[.A-Za-z0-9_-]+$", RegexOptions.CultureInvariant);
-            if (false == regexIdentifier.Match(this.Identifier).Success)
+            if (this.Identifier != null && false == regexIdentifier.Match(this.Identifier).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, must match a pattern of " + regexIdentifier, new [] { "Identifier" });
             }
@@ -261,7 +261,7 @@ namespace HoneybeeSchema
             
             // Type (string) pattern
             Regex regexType = new Regex(@"^IDdBaseModel$", RegexOptions.CultureInvariant);
-            if (false == regexType.Match(this.Type).Success)
+            if (this.Type != null && false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
