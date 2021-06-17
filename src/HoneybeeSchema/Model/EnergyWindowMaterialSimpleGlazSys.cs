@@ -42,8 +42,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialSimpleGlazSys" /> class.
         /// </summary>
-        /// <param name="uFactor">Used to describe the value for window system U-Factor, or overall heat transfer coefficient in W/(m2-K). (required).</param>
-        /// <param name="shgc">Unitless  quantity describing Solar Heat Gain Coefficient for normal incidence and vertical orientation. (required).</param>
+        /// <param name="uFactor">The overall heat transfer coefficient for window system in W/m2-K. Note that constructions with U-values above 5.8 cannot be assigned to skylights without EnergyPlus thorwing an error. (required).</param>
+        /// <param name="shgc">Unitless quantity for the Solar Heat Gain Coefficient (solar transmittance + conduction) at normal incidence and vertical orientation. (required).</param>
         /// <param name="vt">The fraction of visible light falling on the window that makes it through the glass at normal incidence. (default to 0.54D).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
@@ -73,15 +73,15 @@ namespace HoneybeeSchema
         public override string Type { get; protected set; }  = "EnergyWindowMaterialSimpleGlazSys";
 
         /// <summary>
-        /// Used to describe the value for window system U-Factor, or overall heat transfer coefficient in W/(m2-K).
+        /// The overall heat transfer coefficient for window system in W/m2-K. Note that constructions with U-values above 5.8 cannot be assigned to skylights without EnergyPlus thorwing an error.
         /// </summary>
-        /// <value>Used to describe the value for window system U-Factor, or overall heat transfer coefficient in W/(m2-K).</value>
+        /// <value>The overall heat transfer coefficient for window system in W/m2-K. Note that constructions with U-values above 5.8 cannot be assigned to skylights without EnergyPlus thorwing an error.</value>
         [DataMember(Name = "u_factor", IsRequired = true)]
         public double UFactor { get; set; } 
         /// <summary>
-        /// Unitless  quantity describing Solar Heat Gain Coefficient for normal incidence and vertical orientation.
+        /// Unitless quantity for the Solar Heat Gain Coefficient (solar transmittance + conduction) at normal incidence and vertical orientation.
         /// </summary>
-        /// <value>Unitless  quantity describing Solar Heat Gain Coefficient for normal incidence and vertical orientation.</value>
+        /// <value>Unitless quantity for the Solar Heat Gain Coefficient (solar transmittance + conduction) at normal incidence and vertical orientation.</value>
         [DataMember(Name = "shgc", IsRequired = true)]
         public double Shgc { get; set; } 
         /// <summary>
@@ -234,9 +234,9 @@ namespace HoneybeeSchema
 
             
             // UFactor (double) maximum
-            if(this.UFactor > (double)5.8)
+            if(this.UFactor > (double)12)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for UFactor, must be a value less than or equal to 5.8.", new [] { "UFactor" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for UFactor, must be a value less than or equal to 12.", new [] { "UFactor" });
             }
 
 

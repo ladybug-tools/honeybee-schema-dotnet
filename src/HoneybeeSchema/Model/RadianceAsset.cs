@@ -239,7 +239,7 @@ namespace HoneybeeSchema
             }
             
             // RoomIdentifier (string) pattern
-            Regex regexRoomIdentifier = new Regex(@"[A-Za-z0-9_-]", RegexOptions.CultureInvariant);
+            Regex regexRoomIdentifier = new Regex(@"[.A-Za-z0-9_-]", RegexOptions.CultureInvariant);
             if (this.RoomIdentifier != null && false == regexRoomIdentifier.Match(this.RoomIdentifier).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RoomIdentifier, must match a pattern of " + regexRoomIdentifier, new [] { "RoomIdentifier" });

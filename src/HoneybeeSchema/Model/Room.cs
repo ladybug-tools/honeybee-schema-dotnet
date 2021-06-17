@@ -316,7 +316,7 @@ namespace HoneybeeSchema
             }
             
             // Story (string) pattern
-            Regex regexStory = new Regex(@"[A-Za-z0-9_-]", RegexOptions.CultureInvariant);
+            Regex regexStory = new Regex(@"[.A-Za-z0-9_-]", RegexOptions.CultureInvariant);
             if (this.Story != null && false == regexStory.Match(this.Story).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Story, must match a pattern of " + regexStory, new [] { "Story" });

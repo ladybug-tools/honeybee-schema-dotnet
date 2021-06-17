@@ -49,9 +49,9 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="rValue">The thermal resistance (R-value) of the material layer [m2-K/W]. (required).</param>
         /// <param name="roughness">roughness.</param>
-        /// <param name="thermalAbsorptance">Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9. (default to 0.9D).</param>
-        /// <param name="solarAbsorptance">Fraction of incident solar radiation absorbed by the material. Default value is 0.7. (default to 0.7D).</param>
-        /// <param name="visibleAbsorptance">Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7. (default to 0.7D).</param>
+        /// <param name="thermalAbsorptance">Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9. (default to 0.9D).</param>
+        /// <param name="solarAbsorptance">Fraction of incident solar radiation absorbed by the material. Default: 0.7. (default to 0.7D).</param>
+        /// <param name="visibleAbsorptance">Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7. (default to 0.7D).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public EnergyMaterialNoMass
@@ -88,21 +88,21 @@ namespace HoneybeeSchema
         [DataMember(Name = "r_value", IsRequired = true)]
         public double RValue { get; set; } 
         /// <summary>
-        /// Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9.
+        /// Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9.
         /// </summary>
-        /// <value>Fraction of incident long wavelength radiation that is absorbed by the material. Default value is 0.9.</value>
+        /// <value>Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9.</value>
         [DataMember(Name = "thermal_absorptance")]
         public double ThermalAbsorptance { get; set; }  = 0.9D;
         /// <summary>
-        /// Fraction of incident solar radiation absorbed by the material. Default value is 0.7.
+        /// Fraction of incident solar radiation absorbed by the material. Default: 0.7.
         /// </summary>
-        /// <value>Fraction of incident solar radiation absorbed by the material. Default value is 0.7.</value>
+        /// <value>Fraction of incident solar radiation absorbed by the material. Default: 0.7.</value>
         [DataMember(Name = "solar_absorptance")]
         public double SolarAbsorptance { get; set; }  = 0.7D;
         /// <summary>
-        /// Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7.
+        /// Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7.
         /// </summary>
-        /// <value>Fraction of incident visible wavelength radiation absorbed by the material. Default value is 0.7.</value>
+        /// <value>Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7.</value>
         [DataMember(Name = "visible_absorptance")]
         public double VisibleAbsorptance { get; set; }  = 0.7D;
 

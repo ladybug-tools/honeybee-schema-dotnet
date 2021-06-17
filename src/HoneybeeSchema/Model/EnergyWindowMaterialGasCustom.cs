@@ -47,7 +47,7 @@ namespace HoneybeeSchema
         /// <param name="specificHeatCoeffA">The A coefficient for gas specific heat in J/(kg-K). (required).</param>
         /// <param name="specificHeatRatio">The specific heat ratio for gas. (required).</param>
         /// <param name="molecularWeight">The molecular weight for gas in g/mol. (required).</param>
-        /// <param name="thickness">Thickness of the gas layer in meters. Default value is 0.0125. (default to 0.0125D).</param>
+        /// <param name="thickness">Thickness of the gas layer in meters. Default: 0.0125. (default to 0.0125D).</param>
         /// <param name="conductivityCoeffB">The B coefficient for gas conductivity in W/(m-K2). (default to 0D).</param>
         /// <param name="conductivityCoeffC">The C coefficient for gas conductivity in W/(m-K3). (default to 0D).</param>
         /// <param name="viscosityCoeffB">The B coefficient for gas viscosity in kg/(m-s-K). (default to 0D).</param>
@@ -121,9 +121,9 @@ namespace HoneybeeSchema
         [DataMember(Name = "molecular_weight", IsRequired = true)]
         public double MolecularWeight { get; set; } 
         /// <summary>
-        /// Thickness of the gas layer in meters. Default value is 0.0125.
+        /// Thickness of the gas layer in meters. Default: 0.0125.
         /// </summary>
-        /// <value>Thickness of the gas layer in meters. Default value is 0.0125.</value>
+        /// <value>Thickness of the gas layer in meters. Default: 0.0125.</value>
         [DataMember(Name = "thickness")]
         public double Thickness { get; set; }  = 0.0125D;
         /// <summary>
