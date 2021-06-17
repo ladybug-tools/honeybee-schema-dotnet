@@ -47,7 +47,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialGas" /> class.
         /// </summary>
-        /// <param name="thickness">Thickness of the gas layer in meters. Default value is 0.0125. (default to 0.0125D).</param>
+        /// <param name="thickness">Thickness of the gas layer in meters. Default: 0.0125. (default to 0.0125D).</param>
         /// <param name="gasType">gasType.</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
@@ -76,9 +76,9 @@ namespace HoneybeeSchema
         public override string Type { get; protected set; }  = "EnergyWindowMaterialGas";
 
         /// <summary>
-        /// Thickness of the gas layer in meters. Default value is 0.0125.
+        /// Thickness of the gas layer in meters. Default: 0.0125.
         /// </summary>
-        /// <value>Thickness of the gas layer in meters. Default value is 0.0125.</value>
+        /// <value>Thickness of the gas layer in meters. Default: 0.0125.</value>
         [DataMember(Name = "thickness")]
         public double Thickness { get; set; }  = 0.0125D;
 

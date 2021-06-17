@@ -42,17 +42,17 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialGlazing" /> class.
         /// </summary>
-        /// <param name="thickness">The surface-to-surface of the glass in meters. Default value is 0.003. (default to 0.003D).</param>
-        /// <param name="solarTransmittance">Transmittance of solar radiation through the glass at normal incidence. Default value is 0.85 for clear glass. (default to 0.85D).</param>
-        /// <param name="solarReflectance">Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default value is 0.075 for clear glass. (default to 0.075D).</param>
+        /// <param name="thickness">The surface-to-surface thickness of the glass in meters. Default:  0.003. (default to 0.003D).</param>
+        /// <param name="solarTransmittance">Transmittance of solar radiation through the glass at normal incidence. Default: 0.85 for clear glass. (default to 0.85D).</param>
+        /// <param name="solarReflectance">Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default: 0.075 for clear glass. (default to 0.075D).</param>
         /// <param name="solarReflectanceBack">Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum..</param>
-        /// <param name="visibleTransmittance">Transmittance of visible light through the glass at normal incidence. Default value is 0.9 for clear glass. (default to 0.9D).</param>
-        /// <param name="visibleReflectance">Reflectance of visible light off of the front side of the glass at normal incidence. Default value is 0.075 for clear glass. (default to 0.075D).</param>
+        /// <param name="visibleTransmittance">Transmittance of visible light through the glass at normal incidence. Default: 0.9 for clear glass. (default to 0.9D).</param>
+        /// <param name="visibleReflectance">Reflectance of visible light off of the front side of the glass at normal incidence. Default: 0.075 for clear glass. (default to 0.075D).</param>
         /// <param name="visibleReflectanceBack">Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye..</param>
         /// <param name="infraredTransmittance">Long-wave transmittance at normal incidence. (default to 0D).</param>
-        /// <param name="emissivity">Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating. (default to 0.84D).</param>
-        /// <param name="emissivityBack">Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating. (default to 0.84D).</param>
-        /// <param name="conductivity">Thermal conductivity of the glass in W/(m-K). Default value is 0.9, which is  typical for clear glass without a low-e coating. (default to 0.9D).</param>
+        /// <param name="emissivity">Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating. (default to 0.84D).</param>
+        /// <param name="emissivityBack">Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating. (default to 0.84D).</param>
+        /// <param name="conductivity">Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is  typical for clear glass without a low-e coating. (default to 0.9D).</param>
         /// <param name="dirtCorrection">Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean. (default to 1D).</param>
         /// <param name="solarDiffusing">Takes values True and False. If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component. (default to false).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
@@ -60,7 +60,7 @@ namespace HoneybeeSchema
         public EnergyWindowMaterialGlazing
         (
             string identifier, // Required parameters
-            string displayName= default, double thickness = 0.003D, double solarTransmittance = 0.85D, double solarReflectance = 0.075D, double solarReflectanceBack= default, double visibleTransmittance = 0.9D, double visibleReflectance = 0.075D, double visibleReflectanceBack= default, double infraredTransmittance = 0D, double emissivity = 0.84D, double emissivityBack = 0.84D, double conductivity = 0.9D, double dirtCorrection = 1D, bool solarDiffusing = false// Optional parameters
+            string displayName= default, double thickness = 0.003D, double solarTransmittance = 0.85D, double solarReflectance = 0.075D, AnyOf<Autocalculate,double> solarReflectanceBack= default, double visibleTransmittance = 0.9D, double visibleReflectance = 0.075D, AnyOf<Autocalculate,double> visibleReflectanceBack= default, double infraredTransmittance = 0D, double emissivity = 0.84D, double emissivityBack = 0.84D, double conductivity = 0.9D, double dirtCorrection = 1D, bool solarDiffusing = false// Optional parameters
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             this.Thickness = thickness;
@@ -93,21 +93,21 @@ namespace HoneybeeSchema
         public override string Type { get; protected set; }  = "EnergyWindowMaterialGlazing";
 
         /// <summary>
-        /// The surface-to-surface of the glass in meters. Default value is 0.003.
+        /// The surface-to-surface thickness of the glass in meters. Default:  0.003.
         /// </summary>
-        /// <value>The surface-to-surface of the glass in meters. Default value is 0.003.</value>
+        /// <value>The surface-to-surface thickness of the glass in meters. Default:  0.003.</value>
         [DataMember(Name = "thickness")]
         public double Thickness { get; set; }  = 0.003D;
         /// <summary>
-        /// Transmittance of solar radiation through the glass at normal incidence. Default value is 0.85 for clear glass.
+        /// Transmittance of solar radiation through the glass at normal incidence. Default: 0.85 for clear glass.
         /// </summary>
-        /// <value>Transmittance of solar radiation through the glass at normal incidence. Default value is 0.85 for clear glass.</value>
+        /// <value>Transmittance of solar radiation through the glass at normal incidence. Default: 0.85 for clear glass.</value>
         [DataMember(Name = "solar_transmittance")]
         public double SolarTransmittance { get; set; }  = 0.85D;
         /// <summary>
-        /// Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default value is 0.075 for clear glass.
+        /// Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default: 0.075 for clear glass.
         /// </summary>
-        /// <value>Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default value is 0.075 for clear glass.</value>
+        /// <value>Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default: 0.075 for clear glass.</value>
         [DataMember(Name = "solar_reflectance")]
         public double SolarReflectance { get; set; }  = 0.075D;
         /// <summary>
@@ -115,17 +115,17 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum.</value>
         [DataMember(Name = "solar_reflectance_back")]
-        public double SolarReflectanceBack { get; set; } 
+        public AnyOf<Autocalculate,double> SolarReflectanceBack { get; set; } 
         /// <summary>
-        /// Transmittance of visible light through the glass at normal incidence. Default value is 0.9 for clear glass.
+        /// Transmittance of visible light through the glass at normal incidence. Default: 0.9 for clear glass.
         /// </summary>
-        /// <value>Transmittance of visible light through the glass at normal incidence. Default value is 0.9 for clear glass.</value>
+        /// <value>Transmittance of visible light through the glass at normal incidence. Default: 0.9 for clear glass.</value>
         [DataMember(Name = "visible_transmittance")]
         public double VisibleTransmittance { get; set; }  = 0.9D;
         /// <summary>
-        /// Reflectance of visible light off of the front side of the glass at normal incidence. Default value is 0.075 for clear glass.
+        /// Reflectance of visible light off of the front side of the glass at normal incidence. Default: 0.075 for clear glass.
         /// </summary>
-        /// <value>Reflectance of visible light off of the front side of the glass at normal incidence. Default value is 0.075 for clear glass.</value>
+        /// <value>Reflectance of visible light off of the front side of the glass at normal incidence. Default: 0.075 for clear glass.</value>
         [DataMember(Name = "visible_reflectance")]
         public double VisibleReflectance { get; set; }  = 0.075D;
         /// <summary>
@@ -133,7 +133,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye.</value>
         [DataMember(Name = "visible_reflectance_back")]
-        public double VisibleReflectanceBack { get; set; } 
+        public AnyOf<Autocalculate,double> VisibleReflectanceBack { get; set; } 
         /// <summary>
         /// Long-wave transmittance at normal incidence.
         /// </summary>
@@ -141,21 +141,21 @@ namespace HoneybeeSchema
         [DataMember(Name = "infrared_transmittance")]
         public double InfraredTransmittance { get; set; }  = 0D;
         /// <summary>
-        /// Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.
+        /// Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.
         /// </summary>
-        /// <value>Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.</value>
+        /// <value>Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.</value>
         [DataMember(Name = "emissivity")]
         public double Emissivity { get; set; }  = 0.84D;
         /// <summary>
-        /// Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.
+        /// Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.
         /// </summary>
-        /// <value>Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default value is 0.84, which is typical for clear glass without a low-e coating.</value>
+        /// <value>Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.</value>
         [DataMember(Name = "emissivity_back")]
         public double EmissivityBack { get; set; }  = 0.84D;
         /// <summary>
-        /// Thermal conductivity of the glass in W/(m-K). Default value is 0.9, which is  typical for clear glass without a low-e coating.
+        /// Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is  typical for clear glass without a low-e coating.
         /// </summary>
-        /// <value>Thermal conductivity of the glass in W/(m-K). Default value is 0.9, which is  typical for clear glass without a low-e coating.</value>
+        /// <value>Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is  typical for clear glass without a low-e coating.</value>
         [DataMember(Name = "conductivity")]
         public double Conductivity { get; set; }  = 0.9D;
         /// <summary>
@@ -454,20 +454,6 @@ namespace HoneybeeSchema
             if(this.VisibleReflectance < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VisibleReflectance, must be a value greater than or equal to 0.", new [] { "VisibleReflectance" });
-            }
-
-
-            
-            // VisibleReflectanceBack (double) maximum
-            if(this.VisibleReflectanceBack > (double)1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VisibleReflectanceBack, must be a value less than or equal to 1.", new [] { "VisibleReflectanceBack" });
-            }
-
-            // VisibleReflectanceBack (double) minimum
-            if(this.VisibleReflectanceBack < (double)0)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VisibleReflectanceBack, must be a value greater than or equal to 0.", new [] { "VisibleReflectanceBack" });
             }
 
 

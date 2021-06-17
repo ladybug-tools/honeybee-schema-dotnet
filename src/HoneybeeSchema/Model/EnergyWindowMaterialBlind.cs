@@ -52,19 +52,19 @@ namespace HoneybeeSchema
         /// <param name="slatSeparation">The distance between the front of a slat and the back of the adjacent slat in meters. (default to 0.01875D).</param>
         /// <param name="slatThickness">The distance between the faces of a slat in meters. The default value is 0.001. (default to 0.001D).</param>
         /// <param name="slatAngle">The angle (degrees) between the glazing outward normal and the slat outward normal where the outward normal points away from the front face of the slat (degrees). The default value is 45. (default to 45D).</param>
-        /// <param name="slatConductivity">The thermal conductivity of the slat in W/(m-K). Default value is 221. (default to 221D).</param>
+        /// <param name="slatConductivity">The thermal conductivity of the slat in W/(m-K). Default: 221. (default to 221D).</param>
         /// <param name="beamSolarTransmittance">The beam solar transmittance of the slat, assumed to be independent of angle of incidence on the slat. Any transmitted beam radiation is assumed to be 100% diffuse (i.e., slats are translucent). The default value is 0. (default to 0D).</param>
-        /// <param name="beamSolarReflectance">The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5. (default to 0.5D).</param>
-        /// <param name="beamSolarReflectanceBack">The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5. (default to 0.5D).</param>
-        /// <param name="diffuseSolarTransmittance">The slat transmittance for hemisperically diffuse solar radiation. Default value is 0. (default to 0D).</param>
-        /// <param name="diffuseSolarReflectance">The front-side slat reflectance for hemispherically diffuse solar radiation. Default value is 0.5. (default to 0.5D).</param>
-        /// <param name="diffuseSolarReflectanceBack">The back-side slat reflectance for hemispherically diffuse solar radiation. Default value is 0.5. (default to 0.5D).</param>
-        /// <param name="beamVisibleTransmittance">The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default value is 0. (default to 0D).</param>
-        /// <param name="beamVisibleReflectance">The beam visible reflectance on the front side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5. (default to 0.5D).</param>
-        /// <param name="beamVisibleReflectanceBack">The beam visible reflectance on the back side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5. (default to 0.5D).</param>
+        /// <param name="beamSolarReflectance">The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5. (default to 0.5D).</param>
+        /// <param name="beamSolarReflectanceBack">The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5. (default to 0.5D).</param>
+        /// <param name="diffuseSolarTransmittance">The slat transmittance for hemisperically diffuse solar radiation. Default: 0. (default to 0D).</param>
+        /// <param name="diffuseSolarReflectance">The front-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5. (default to 0.5D).</param>
+        /// <param name="diffuseSolarReflectanceBack">The back-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5. (default to 0.5D).</param>
+        /// <param name="beamVisibleTransmittance">The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default: 0. (default to 0D).</param>
+        /// <param name="beamVisibleReflectance">The beam visible reflectance on the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5. (default to 0.5D).</param>
+        /// <param name="beamVisibleReflectanceBack">The beam visible reflectance on the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5. (default to 0.5D).</param>
         /// <param name="diffuseVisibleTransmittance">The slat transmittance for hemispherically diffuse visible radiation. This value should equal “Slat Beam Visible Transmittance.” (default to 0D).</param>
-        /// <param name="diffuseVisibleReflectance">The front-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Front Side Slat Beam Visible Reflectance.” Default value is 0.5. (default to 0.5D).</param>
-        /// <param name="diffuseVisibleReflectanceBack">The back-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Back Side Slat Beam Visible Reflectance. Default value is 0.5.” (default to 0.5D).</param>
+        /// <param name="diffuseVisibleReflectance">The front-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Front Side Slat Beam Visible Reflectance.” Default: 0.5. (default to 0.5D).</param>
+        /// <param name="diffuseVisibleReflectanceBack">The back-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Back Side Slat Beam Visible Reflectance. Default: 0.5.” (default to 0.5D).</param>
         /// <param name="infraredTransmittance">The slat infrared hemispherical transmittance. It is zero for solid metallic, wooden or glass slats, but may be non-zero in some cases such as for thin plastic slats. The default value is 0. (default to 0D).</param>
         /// <param name="emissivity">Front side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9. (default to 0.9D).</param>
         /// <param name="emissivityBack">Back side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9. (default to 0.9D).</param>
@@ -148,9 +148,9 @@ namespace HoneybeeSchema
         [DataMember(Name = "slat_angle")]
         public double SlatAngle { get; set; }  = 45D;
         /// <summary>
-        /// The thermal conductivity of the slat in W/(m-K). Default value is 221.
+        /// The thermal conductivity of the slat in W/(m-K). Default: 221.
         /// </summary>
-        /// <value>The thermal conductivity of the slat in W/(m-K). Default value is 221.</value>
+        /// <value>The thermal conductivity of the slat in W/(m-K). Default: 221.</value>
         [DataMember(Name = "slat_conductivity")]
         public double SlatConductivity { get; set; }  = 221D;
         /// <summary>
@@ -160,51 +160,51 @@ namespace HoneybeeSchema
         [DataMember(Name = "beam_solar_transmittance")]
         public double BeamSolarTransmittance { get; set; }  = 0D;
         /// <summary>
-        /// The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.
+        /// The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.
         /// </summary>
-        /// <value>The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.</value>
+        /// <value>The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.</value>
         [DataMember(Name = "beam_solar_reflectance")]
         public double BeamSolarReflectance { get; set; }  = 0.5D;
         /// <summary>
-        /// The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.
+        /// The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.
         /// </summary>
-        /// <value>The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.</value>
+        /// <value>The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.</value>
         [DataMember(Name = "beam_solar_reflectance_back")]
         public double BeamSolarReflectanceBack { get; set; }  = 0.5D;
         /// <summary>
-        /// The slat transmittance for hemisperically diffuse solar radiation. Default value is 0.
+        /// The slat transmittance for hemisperically diffuse solar radiation. Default: 0.
         /// </summary>
-        /// <value>The slat transmittance for hemisperically diffuse solar radiation. Default value is 0.</value>
+        /// <value>The slat transmittance for hemisperically diffuse solar radiation. Default: 0.</value>
         [DataMember(Name = "diffuse_solar_transmittance")]
         public double DiffuseSolarTransmittance { get; set; }  = 0D;
         /// <summary>
-        /// The front-side slat reflectance for hemispherically diffuse solar radiation. Default value is 0.5.
+        /// The front-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5.
         /// </summary>
-        /// <value>The front-side slat reflectance for hemispherically diffuse solar radiation. Default value is 0.5.</value>
+        /// <value>The front-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5.</value>
         [DataMember(Name = "diffuse_solar_reflectance")]
         public double DiffuseSolarReflectance { get; set; }  = 0.5D;
         /// <summary>
-        /// The back-side slat reflectance for hemispherically diffuse solar radiation. Default value is 0.5.
+        /// The back-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5.
         /// </summary>
-        /// <value>The back-side slat reflectance for hemispherically diffuse solar radiation. Default value is 0.5.</value>
+        /// <value>The back-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5.</value>
         [DataMember(Name = "diffuse_solar_reflectance_back")]
         public double DiffuseSolarReflectanceBack { get; set; }  = 0.5D;
         /// <summary>
-        /// The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.
+        /// The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default: 0.
         /// </summary>
-        /// <value>The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.</value>
+        /// <value>The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default: 0.</value>
         [DataMember(Name = "beam_visible_transmittance")]
         public double BeamVisibleTransmittance { get; set; }  = 0D;
         /// <summary>
-        /// The beam visible reflectance on the front side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.
+        /// The beam visible reflectance on the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.
         /// </summary>
-        /// <value>The beam visible reflectance on the front side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.</value>
+        /// <value>The beam visible reflectance on the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.</value>
         [DataMember(Name = "beam_visible_reflectance")]
         public double BeamVisibleReflectance { get; set; }  = 0.5D;
         /// <summary>
-        /// The beam visible reflectance on the back side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.
+        /// The beam visible reflectance on the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.
         /// </summary>
-        /// <value>The beam visible reflectance on the back side of the slat, it is assumed to be independent of the angle of incidence. Default value is 0.5.</value>
+        /// <value>The beam visible reflectance on the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.</value>
         [DataMember(Name = "beam_visible_reflectance_back")]
         public double BeamVisibleReflectanceBack { get; set; }  = 0.5D;
         /// <summary>
@@ -214,15 +214,15 @@ namespace HoneybeeSchema
         [DataMember(Name = "diffuse_visible_transmittance")]
         public double DiffuseVisibleTransmittance { get; set; }  = 0D;
         /// <summary>
-        /// The front-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Front Side Slat Beam Visible Reflectance.” Default value is 0.5.
+        /// The front-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Front Side Slat Beam Visible Reflectance.” Default: 0.5.
         /// </summary>
-        /// <value>The front-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Front Side Slat Beam Visible Reflectance.” Default value is 0.5.</value>
+        /// <value>The front-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Front Side Slat Beam Visible Reflectance.” Default: 0.5.</value>
         [DataMember(Name = "diffuse_visible_reflectance")]
         public double DiffuseVisibleReflectance { get; set; }  = 0.5D;
         /// <summary>
-        /// The back-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Back Side Slat Beam Visible Reflectance. Default value is 0.5.”
+        /// The back-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Back Side Slat Beam Visible Reflectance. Default: 0.5.”
         /// </summary>
-        /// <value>The back-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Back Side Slat Beam Visible Reflectance. Default value is 0.5.”</value>
+        /// <value>The back-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Back Side Slat Beam Visible Reflectance. Default: 0.5.”</value>
         [DataMember(Name = "diffuse_visible_reflectance_back")]
         public double DiffuseVisibleReflectanceBack { get; set; }  = 0.5D;
         /// <summary>
