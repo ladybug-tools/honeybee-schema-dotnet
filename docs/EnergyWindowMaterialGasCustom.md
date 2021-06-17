@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **SpecificHeatRatio** | **double** | The specific heat ratio for gas. | 
 **MolecularWeight** | **double** | The molecular weight for gas in g/mol. | 
 **Type** | **string** |  | [optional] [readonly] [default to "EnergyWindowMaterialGasCustom"]
-**Thickness** | **double** | Thickness of the gas layer in meters. Default value is 0.0125. | [optional] [default to 0.0125D]
+**Thickness** | **double** | Thickness of the gas layer in meters. Default: 0.0125. | [optional] [default to 0.0125D]
 **ConductivityCoeffB** | **double** | The B coefficient for gas conductivity in W/(m-K2). | [optional] [default to 0D]
 **ConductivityCoeffC** | **double** | The C coefficient for gas conductivity in W/(m-K3). | [optional] [default to 0D]
 **ViscosityCoeffB** | **double** | The B coefficient for gas viscosity in kg/(m-s-K). | [optional] [default to 0D]

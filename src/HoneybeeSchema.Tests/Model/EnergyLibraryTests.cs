@@ -15,6 +15,9 @@ namespace HoneybeeSchema.Test
             var modelEnergyProperties = ModelEnergyProperties.Default;
             var opqs = modelEnergyProperties.Constructions.OfType<OpaqueConstructionAbridged>();
             Assert.IsTrue(opqs.Any());
+
+            var materials = modelEnergyProperties.Materials.OfType<HoneybeeSchema.Energy.IMaterial>();
+            Assert.IsTrue(materials.Any());
         }
 
         [Test]
@@ -113,6 +116,13 @@ namespace HoneybeeSchema.Test
             Assert.IsTrue(inf.Count() == 6);
 
 
+        }
+
+        [Test]
+        public void StandardsTest()
+        {
+            var materials = Helper.EnergyLibrary.StandardsWindowMaterials.Values;
+            Assert.IsTrue(materials.Any());
         }
 
         [Test]
