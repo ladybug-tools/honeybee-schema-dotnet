@@ -49,7 +49,7 @@ namespace HoneybeeSchema
             }
 
         }
-        public static void AddConstructionSets(this ModelEnergyProperties modelEnergyCollection, List<IBuildingConstructionset> constructionsets)
+        public static void AddConstructionSets(this ModelEnergyProperties modelEnergyCollection, IEnumerable<IBuildingConstructionset> constructionsets)
         {
             if (constructionsets == null) return;
             foreach (var item in constructionsets)
@@ -81,7 +81,7 @@ namespace HoneybeeSchema
 
         }
 
-        public static void AddProgramTypes(this ModelEnergyProperties modelEnergyCollection, List<IProgramtype> programtypes)
+        public static void AddProgramTypes(this ModelEnergyProperties modelEnergyCollection, IEnumerable<IProgramtype> programtypes)
         {
             if (programtypes == null) return;
             foreach (var item in programtypes)
@@ -154,7 +154,7 @@ namespace HoneybeeSchema
                     throw new ArgumentException($"{havc.GetType()}({havc.Identifier}) is not added to model");
             }
         }
-        public static void AddHVACs(this ModelEnergyProperties modelEnergyCollection, List<IHvac> havcs)
+        public static void AddHVACs(this ModelEnergyProperties modelEnergyCollection, IEnumerable<IHvac> havcs)
         {
             if (havcs == null) return;
             foreach (var item in havcs)
@@ -204,7 +204,7 @@ namespace HoneybeeSchema
                     throw new ArgumentException($"{material.GetType()}({material.Identifier}) is not added to model");
             }
         }
-        public static void AddMaterials(this ModelEnergyProperties modelEnergyCollection, List<IMaterial> materials)
+        public static void AddMaterials(this ModelEnergyProperties modelEnergyCollection, IEnumerable<IMaterial> materials)
         {
             if (materials == null) return;
             foreach (var item in materials)
@@ -249,7 +249,7 @@ namespace HoneybeeSchema
 
             }
         }
-        public static void AddConstructions(this ModelEnergyProperties modelEnergyCollection, List<IConstruction> constructions)
+        public static void AddConstructions(this ModelEnergyProperties modelEnergyCollection, IEnumerable<IConstruction> constructions)
         {
             if (constructions == null) return;
             foreach (var item in constructions)
@@ -258,7 +258,7 @@ namespace HoneybeeSchema
             }
         }
 
-        public static void AddSchedule(this ModelEnergyProperties modelEnergyCollection, IDdEnergyBaseModel schedule)
+        public static void AddSchedule(this ModelEnergyProperties modelEnergyCollection, ISchedule schedule)
         {
             modelEnergyCollection.Schedules = modelEnergyCollection.Schedules ?? new List<AnyOf<ScheduleRulesetAbridged, ScheduleFixedIntervalAbridged, ScheduleRuleset, ScheduleFixedInterval>>();
             var exist = modelEnergyCollection.Schedules.OfType<IIDdBase>().Any(_ => _.Identifier == schedule.Identifier);
@@ -285,7 +285,7 @@ namespace HoneybeeSchema
 
             }
         }
-        public static void AddSchedules(this ModelEnergyProperties modelEnergyCollection, List<IDdEnergyBaseModel> schedules)
+        public static void AddSchedules(this ModelEnergyProperties modelEnergyCollection, IEnumerable<ISchedule> schedules)
         {
             if (schedules == null) return;
             foreach (var item in schedules)
@@ -311,7 +311,7 @@ namespace HoneybeeSchema
 
             }
         }
-        public static void AddScheduleTypeLimits(this ModelEnergyProperties modelEnergyCollection, List<ScheduleTypeLimit> scheduleTypeLimits)
+        public static void AddScheduleTypeLimits(this ModelEnergyProperties modelEnergyCollection, IEnumerable<ScheduleTypeLimit> scheduleTypeLimits)
         {
             if (scheduleTypeLimits == null) return;
             foreach (var item in scheduleTypeLimits)
@@ -321,7 +321,7 @@ namespace HoneybeeSchema
         }
 
 
-        public static void AddModifier(this ModelRadianceProperties modelRadianceCollection, ModifierBase modifier)
+        public static void AddModifier(this ModelRadianceProperties modelRadianceCollection, Radiance.IModifier modifier)
         {
             modelRadianceCollection.Modifiers = modelRadianceCollection.Modifiers ?? new List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>>();
             var exist = modelRadianceCollection.Modifiers.OfType<ModifierBase>().Any(_ => _.Identifier == modifier.Identifier);
@@ -358,7 +358,7 @@ namespace HoneybeeSchema
             }
 
         }
-        public static void AddModifiers(this ModelRadianceProperties modelRadianceCollection, List<ModifierBase> modifiers)
+        public static void AddModifiers(this ModelRadianceProperties modelRadianceCollection, IEnumerable<Radiance.IModifier> modifiers)
         {
             if (modifiers == null) return;
             foreach (var item in modifiers)
@@ -367,7 +367,7 @@ namespace HoneybeeSchema
             }
         }
 
-        public static void AddModifierSet(this ModelRadianceProperties modelRadianceCollection, IDdRadianceBaseModel modifierSet)
+        public static void AddModifierSet(this ModelRadianceProperties modelRadianceCollection, Radiance.IBuildingModifierSet modifierSet)
         {
             modelRadianceCollection.ModifierSets = modelRadianceCollection.ModifierSets ?? new List<AnyOf<ModifierSet, ModifierSetAbridged>>();
             var exist = modelRadianceCollection.ModifierSets.OfType<IDdRadianceBaseModel>().Any(_ => _.Identifier == modifierSet.Identifier);
@@ -386,7 +386,7 @@ namespace HoneybeeSchema
 
             }
         }
-        public static void AddModifierSets(this ModelRadianceProperties modelRadianceCollection, List<IDdRadianceBaseModel> modifierSets)
+        public static void AddModifierSets(this ModelRadianceProperties modelRadianceCollection, IEnumerable<Radiance.IBuildingModifierSet> modifierSets)
         {
             if (modifierSets == null) return;
             foreach (var item in modifierSets)
