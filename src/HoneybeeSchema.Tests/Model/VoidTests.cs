@@ -73,6 +73,14 @@ namespace HoneybeeSchema.Test
             Assert.IsInstanceOf(typeof(Void), instance);
         }
 
+        [Test]
+        public void VoidIdentifierTest()
+        {
+            // identifier is added for just fulfilling the interface IModifier, it should not be serialized
+            var json = this.instance.ToJson();
+            Assert.True(!json.Contains("identifier"));
+            Assert.True(!json.Contains("display_name"));
+        }
 
         /// <summary>
         /// Test the property 'Type'

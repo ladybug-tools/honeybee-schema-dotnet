@@ -13,7 +13,7 @@ namespace HoneybeeSchema.Energy
     public partial interface IProgramtype : IIDdEnergyBaseModel {}
     public partial interface IHvac : IIDdEnergyBaseModel { }
     public partial interface IBuildingConstructionset : IIDdEnergyBaseModel { }
-
+    public partial interface ISchedule : IIDdEnergyBaseModel { }
 }
 
 
