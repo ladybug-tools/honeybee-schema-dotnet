@@ -7,50 +7,56 @@ namespace HoneybeeSchema
     public partial class Model
     {
         
-        public void AddConstructionSets(List<IBuildingConstructionset> constructionsets)
+        public void AddConstructionSets(IEnumerable<IBuildingConstructionset> constructionsets)
         {
             this.Properties.Energy.AddConstructionSets(constructionsets);
         }
 
-        public void AddProgramTypes(List<IProgramtype> programtypes)
+        public void AddProgramTypes(IEnumerable<IProgramtype> programtypes)
         {
             this.Properties.Energy.AddProgramTypes(programtypes);
         }
 
-        public void AddHVACs(List<IHvac> havcs)
+        public void AddHVACs(IEnumerable<IHvac> havcs)
         {
             this.Properties.Energy.AddHVACs(havcs);
         }
 
 
-        public void AddMaterials( List<IMaterial> materials)
+        public void AddMaterials(IEnumerable<IMaterial> materials)
         {
             this.Properties.Energy.AddMaterials(materials);
         }
 
-        public void AddConstructions(List<IConstruction> constructions)
+        public void AddConstructions(IEnumerable<IConstruction> constructions)
         {
             this.Properties.Energy.AddConstructions(constructions);
         }
 
-        public void AddSchedules(List<IDdEnergyBaseModel> schedules)
+        public void AddSchedules(IEnumerable<ISchedule> schedules)
         {
             this.Properties.Energy.AddSchedules(schedules);
         }
 
-        public void AddScheduleTypeLimits(List<ScheduleTypeLimit> scheduleTypeLimits)
+        public void AddScheduleTypeLimits(IEnumerable<ScheduleTypeLimit> scheduleTypeLimits)
         {
             this.Properties.Energy.AddScheduleTypeLimits(scheduleTypeLimits);
         }
 
-        public void AddModifiers(List<ModifierBase> modifiers)
+        public void AddModifiers(IEnumerable<Radiance.IModifier> modifiers)
         {
             this.Properties.Radiance.AddModifiers(modifiers);
         }
 
-        public void AddModifierSets(List<IDdRadianceBaseModel> modifierSets)
+        public void AddModifierSets(IEnumerable<Radiance.IBuildingModifierSet> modifierSets)
         {
             this.Properties.Radiance.AddModifierSets(modifierSets);
+        }
+
+        public void MergeModelProperties(Model other)
+        {
+            if (other == null) return;
+            this.Properties.MergeWith(other.Properties);
         }
     }
 }

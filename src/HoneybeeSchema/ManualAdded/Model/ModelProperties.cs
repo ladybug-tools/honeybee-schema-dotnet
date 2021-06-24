@@ -21,5 +21,11 @@ namespace HoneybeeSchema
 			}
 		}
 
+		public void MergeWith(ModelProperties other)
+        {
+			if (other == null) return;
+			this.Energy.MergeWith(other.Energy);
+			this.Radiance.MergeWith(other.Radiance);
+        }
 	}
 }
