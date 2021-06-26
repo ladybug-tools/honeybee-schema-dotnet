@@ -167,6 +167,46 @@ namespace HoneybeeSchema.Test
         {
             Assert.IsTrue(this.instance.Hvacs.Any());
         }
+
+        [Test]
+        public void GlobalConstructionSetTest()
+        {
+            var prop = new ModelEnergyProperties();
+            var global = prop.GlobalConstructionSet;
+            Assert.IsTrue(global == GlobalConstructionSet.Default);
+
+            var def = GlobalConstructionSet.Default;
+            Assert.IsTrue(def != null);
+            Assert.IsTrue(def.Materials.Any());
+            Assert.IsTrue(def.Constructions.Any());
+            Assert.IsTrue(def.WallSet?.ExteriorConstruction != null);
+            Assert.IsTrue(def.FloorSet?.ExteriorConstruction != null);
+            Assert.IsTrue(def.FloorSet?.ExteriorConstruction != null);
+            Assert.IsTrue(def.RoofCeilingSet?.ExteriorConstruction != null);
+            Assert.IsTrue(def.ApertureSet?.OperableConstruction != null);
+            Assert.IsTrue(def.DoorSet?.ExteriorConstruction != null);
+            Assert.IsTrue(def.ShadeConstruction == "Generic Shade");
+            Assert.IsTrue(def.AirBoundaryConstruction == "Generic Air Boundary");
+        }
+
+        [Test]
+        public void GlobalModifierSetTest()
+        {
+            var prop = new ModelRadianceProperties();
+            var global = prop.GlobalModifierSet;
+            Assert.IsTrue(global == GlobalModifierSet.Default);
+
+            var def = GlobalModifierSet.Default;
+            Assert.IsTrue(def != null);
+            Assert.IsTrue(def.WallSet?.ExteriorModifier != null);
+            Assert.IsTrue(def.FloorSet?.ExteriorModifier != null);
+            Assert.IsTrue(def.FloorSet?.ExteriorModifier != null);
+            Assert.IsTrue(def.RoofCeilingSet?.ExteriorModifier != null);
+            Assert.IsTrue(def.ApertureSet?.OperableModifier != null);
+            Assert.IsTrue(def.DoorSet?.ExteriorModifier != null);
+            Assert.IsTrue(def.ShadeSet?.ExteriorModifier != null);
+            Assert.IsTrue(def.AirBoundaryModifier != null);
+        }
     }
 
 }

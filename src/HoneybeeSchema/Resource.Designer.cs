@@ -61,7 +61,7 @@ namespace HoneybeeSchema {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to aaaa.
+        ///   Looks up a localized string similar to GlobalConstructionSet.
         /// </summary>
         internal static string GlobalConstructionSet {
             get {
@@ -70,7 +70,7 @@ namespace HoneybeeSchema {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to bbb.
+        ///   Looks up a localized string similar to GlobalModifierSet.
         /// </summary>
         internal static string GlobalModifierSet {
             get {
