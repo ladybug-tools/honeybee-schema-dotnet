@@ -69,6 +69,13 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ModelEnergyProperties";
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Global Energy construction set.
+        /// </summary>
+        /// <value>Global Energy construction set.</value>
+        [DataMember(Name = "global_construction_set")]
+        public GlobalConstructionSet GlobalConstructionSet { get; protected set; } 
 
         /// <summary>
         /// List of all unique ConstructionSets in the Model.
@@ -140,6 +147,7 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("ModelEnergyProperties:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  GlobalConstructionSet: ").Append(GlobalConstructionSet).Append("\n");
             sb.Append("  ConstructionSets: ").Append(ConstructionSets).Append("\n");
             sb.Append("  Constructions: ").Append(Constructions).Append("\n");
             sb.Append("  Materials: ").Append(Materials).Append("\n");
@@ -217,6 +225,11 @@ namespace HoneybeeSchema
                     this.Type.Equals(input.Type))
                 ) && base.Equals(input) && 
                 (
+                    this.GlobalConstructionSet == input.GlobalConstructionSet ||
+                    (this.GlobalConstructionSet != null &&
+                    this.GlobalConstructionSet.Equals(input.GlobalConstructionSet))
+                ) && base.Equals(input) && 
+                (
                     this.ConstructionSets == input.ConstructionSets ||
                     this.ConstructionSets != null &&
                     input.ConstructionSets != null &&
@@ -276,6 +289,8 @@ namespace HoneybeeSchema
                 int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.GlobalConstructionSet != null)
+                    hashCode = hashCode * 59 + this.GlobalConstructionSet.GetHashCode();
                 if (this.ConstructionSets != null)
                     hashCode = hashCode * 59 + this.ConstructionSets.GetHashCode();
                 if (this.Constructions != null)

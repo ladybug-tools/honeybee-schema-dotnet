@@ -61,6 +61,13 @@ namespace HoneybeeSchema
         /// </summary>
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ModelRadianceProperties";
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Global Radiance modifier set.
+        /// </summary>
+        /// <value>Global Radiance modifier set.</value>
+        [DataMember(Name = "global_modifier_set")]
+        public GlobalModifierSet GlobalModifierSet { get; protected set; } 
 
         /// <summary>
         /// A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set.
@@ -108,6 +115,7 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("ModelRadianceProperties:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  GlobalModifierSet: ").Append(GlobalModifierSet).Append("\n");
             sb.Append("  Modifiers: ").Append(Modifiers).Append("\n");
             sb.Append("  ModifierSets: ").Append(ModifierSets).Append("\n");
             sb.Append("  SensorGrids: ").Append(SensorGrids).Append("\n");
@@ -181,6 +189,11 @@ namespace HoneybeeSchema
                     this.Type.Equals(input.Type))
                 ) && base.Equals(input) && 
                 (
+                    this.GlobalModifierSet == input.GlobalModifierSet ||
+                    (this.GlobalModifierSet != null &&
+                    this.GlobalModifierSet.Equals(input.GlobalModifierSet))
+                ) && base.Equals(input) && 
+                (
                     this.Modifiers == input.Modifiers ||
                     this.Modifiers != null &&
                     input.Modifiers != null &&
@@ -217,6 +230,8 @@ namespace HoneybeeSchema
                 int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.GlobalModifierSet != null)
+                    hashCode = hashCode * 59 + this.GlobalModifierSet.GetHashCode();
                 if (this.Modifiers != null)
                     hashCode = hashCode * 59 + this.Modifiers.GetHashCode();
                 if (this.ModifierSets != null)
