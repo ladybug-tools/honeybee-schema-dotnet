@@ -59,6 +59,8 @@
         "GasEquipmentAbridged": "honeybee_schema.energy.load",
         "GasUnitHeater": "honeybee_schema.energy.hvac.heatcool",
         "Glass": "honeybee_schema.radiance.modifier",
+        "GlobalConstructionSet": "honeybee_schema.energy.global_constructionset",
+        "GlobalModifierSet": "honeybee_schema.radiance.global_modifierset",
         "Glow": "honeybee_schema.radiance.modifier",
         "Ground": "honeybee_schema.boundarycondition",
         "IDdBaseModel": "honeybee_schema._base",

@@ -139,6 +139,10 @@ docs/GasUnitHeaterAllOf.md
 docs/GasUnitHeaterEquipmentType.md
 docs/Glass.md
 docs/GlassAllOf.md
+docs/GlobalConstructionSet.md
+docs/GlobalConstructionSetAllOf.md
+docs/GlobalModifierSet.md
+docs/GlobalModifierSetAllOf.md
 docs/Glow.md
 docs/GlowAllOf.md
 docs/Ground.md
@@ -485,6 +489,10 @@ src/HoneybeeSchema.Test/Model/GasUnitHeaterEquipmentTypeTests.cs
 src/HoneybeeSchema.Test/Model/GasUnitHeaterTests.cs
 src/HoneybeeSchema.Test/Model/GlassAllOfTests.cs
 src/HoneybeeSchema.Test/Model/GlassTests.cs
+src/HoneybeeSchema.Test/Model/GlobalConstructionSetAllOfTests.cs
+src/HoneybeeSchema.Test/Model/GlobalConstructionSetTests.cs
+src/HoneybeeSchema.Test/Model/GlobalModifierSetAllOfTests.cs
+src/HoneybeeSchema.Test/Model/GlobalModifierSetTests.cs
 src/HoneybeeSchema.Test/Model/GlowAllOfTests.cs
 src/HoneybeeSchema.Test/Model/GlowTests.cs
 src/HoneybeeSchema.Test/Model/GroundAllOfTests.cs
@@ -841,6 +849,10 @@ src/HoneybeeSchema/Model/GasUnitHeaterAllOf.cs
 src/HoneybeeSchema/Model/GasUnitHeaterEquipmentType.cs
 src/HoneybeeSchema/Model/Glass.cs
 src/HoneybeeSchema/Model/GlassAllOf.cs
+src/HoneybeeSchema/Model/GlobalConstructionSet.cs
+src/HoneybeeSchema/Model/GlobalConstructionSetAllOf.cs
+src/HoneybeeSchema/Model/GlobalModifierSet.cs
+src/HoneybeeSchema/Model/GlobalModifierSetAllOf.cs
 src/HoneybeeSchema/Model/Glow.cs
 src/HoneybeeSchema/Model/GlowAllOf.cs
 src/HoneybeeSchema/Model/Ground.cs
