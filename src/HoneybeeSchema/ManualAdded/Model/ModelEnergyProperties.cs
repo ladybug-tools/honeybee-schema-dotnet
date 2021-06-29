@@ -31,12 +31,12 @@ namespace HoneybeeSchema
             this.AddScheduleTypeLimits(other.ScheduleTypeLimits);
 			this.AddProgramTypes(other.ProgramTypeList);
         }
-		public IEnumerable<Energy.IMaterial> MaterialList => this.Materials.OfType<Energy.IMaterial>();
-		public IEnumerable<Energy.IConstruction> ConstructionList => this.Constructions.OfType<Energy.IConstruction>();
-        public IEnumerable<Energy.IBuildingConstructionset> ConstructionSetList => ConstructionSets.OfType<Energy.IBuildingConstructionset>();
-        public IEnumerable<Energy.IHvac> HVACList => this.Hvacs.OfType<Energy.IHvac>();
-        public IEnumerable<Energy.ISchedule> ScheduleList => this.Schedules.OfType<Energy.ISchedule>();
-        public IEnumerable<Energy.IProgramtype> ProgramTypeList => this.ProgramTypes.OfType<Energy.IProgramtype>();
+		public IEnumerable<Energy.IMaterial> MaterialList => this.Materials?.OfType<Energy.IMaterial>();
+		public IEnumerable<Energy.IConstruction> ConstructionList => this.Constructions?.OfType<Energy.IConstruction>();
+        public IEnumerable<Energy.IBuildingConstructionset> ConstructionSetList => ConstructionSets?.OfType<Energy.IBuildingConstructionset>();
+        public IEnumerable<Energy.IHvac> HVACList => this.Hvacs?.OfType<Energy.IHvac>();
+        public IEnumerable<Energy.ISchedule> ScheduleList => this.Schedules?.OfType<Energy.ISchedule>();
+        public IEnumerable<Energy.IProgramtype> ProgramTypeList => this.ProgramTypes?.OfType<Energy.IProgramtype>();
 
 
     }
