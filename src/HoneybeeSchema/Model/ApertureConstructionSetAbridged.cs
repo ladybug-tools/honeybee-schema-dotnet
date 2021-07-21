@@ -32,8 +32,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ApertureConstructionSetAbridged" /> class.
         /// </summary>
-        /// <param name="interiorConstruction">Identifier for a WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face..</param>
-        /// <param name="windowConstruction">Identifier for a WindowConstruction for all apertures with a Surface boundary condition..</param>
+        /// <param name="interiorConstruction">Identifier for a WindowConstruction for all apertures with a Surface boundary condition..</param>
+        /// <param name="windowConstruction">Identifier for a WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face..</param>
         /// <param name="skylightConstruction">Identifier for a WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face..</param>
         /// <param name="operableConstruction">Identifier for a WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property..</param>
         public ApertureConstructionSetAbridged
@@ -63,15 +63,15 @@ namespace HoneybeeSchema
         public override string Type { get; protected set; }  = "ApertureConstructionSetAbridged";
 
         /// <summary>
-        /// Identifier for a WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.
-        /// </summary>
-        /// <value>Identifier for a WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.</value>
-        [DataMember(Name = "interior_construction")]
-        public string InteriorConstruction { get; set; } 
-        /// <summary>
         /// Identifier for a WindowConstruction for all apertures with a Surface boundary condition.
         /// </summary>
         /// <value>Identifier for a WindowConstruction for all apertures with a Surface boundary condition.</value>
+        [DataMember(Name = "interior_construction")]
+        public string InteriorConstruction { get; set; } 
+        /// <summary>
+        /// Identifier for a WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.
+        /// </summary>
+        /// <value>Identifier for a WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.</value>
         [DataMember(Name = "window_construction")]
         public string WindowConstruction { get; set; } 
         /// <summary>

@@ -33,40 +33,52 @@ namespace HoneybeeSchema
     public enum Vintages
     {
         /// <summary>
+        /// Enum ASHRAE2019 for value: ASHRAE_2019
+        /// </summary>
+        [EnumMember(Value = "ASHRAE_2019")]
+        ASHRAE_2019 = 1,
+
+        /// <summary>
+        /// Enum ASHRAE2016 for value: ASHRAE_2016
+        /// </summary>
+        [EnumMember(Value = "ASHRAE_2016")]
+        ASHRAE_2016 = 2,
+
+        /// <summary>
         /// Enum ASHRAE2013 for value: ASHRAE_2013
         /// </summary>
         [EnumMember(Value = "ASHRAE_2013")]
-        ASHRAE_2013 = 1,
+        ASHRAE_2013 = 3,
 
         /// <summary>
         /// Enum ASHRAE2010 for value: ASHRAE_2010
         /// </summary>
         [EnumMember(Value = "ASHRAE_2010")]
-        ASHRAE_2010 = 2,
+        ASHRAE_2010 = 4,
 
         /// <summary>
         /// Enum ASHRAE2007 for value: ASHRAE_2007
         /// </summary>
         [EnumMember(Value = "ASHRAE_2007")]
-        ASHRAE_2007 = 3,
+        ASHRAE_2007 = 5,
 
         /// <summary>
         /// Enum ASHRAE2004 for value: ASHRAE_2004
         /// </summary>
         [EnumMember(Value = "ASHRAE_2004")]
-        ASHRAE_2004 = 4,
+        ASHRAE_2004 = 6,
 
         /// <summary>
         /// Enum DOERef19802004 for value: DOE_Ref_1980_2004
         /// </summary>
         [EnumMember(Value = "DOE_Ref_1980_2004")]
-        DOE_Ref_1980_2004 = 5,
+        DOE_Ref_1980_2004 = 7,
 
         /// <summary>
         /// Enum DOERefPre1980 for value: DOE_Ref_Pre_1980
         /// </summary>
         [EnumMember(Value = "DOE_Ref_Pre_1980")]
-        DOE_Ref_Pre_1980 = 6
+        DOE_Ref_Pre_1980 = 8
 
     }
 
