@@ -207,6 +207,20 @@ namespace HoneybeeSchema.Test
             Assert.IsTrue(def.ShadeSet?.ExteriorModifier != null);
             Assert.IsTrue(def.AirBoundaryModifier != null);
         }
+
+        [Test]
+        public void DeserializeConstructionSetTest()
+        {
+            var engProp = ModelEnergyProperties.Default;
+            var constructionSets = engProp.ConstructionSets;
+            var count = constructionSets.Count();
+            var json = engProp.ToJson();
+
+            var dupEngProp = ModelEnergyProperties.FromJson(json);
+            var count2 = dupEngProp.ConstructionSets.Count();
+            Assert.IsTrue(count == count2);
+
+        }
     }
 
 }
