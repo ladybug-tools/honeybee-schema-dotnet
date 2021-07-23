@@ -159,32 +159,39 @@ namespace HoneybeeSchema.Test
 
             // test opaque constructions
             var opqs = Helper.EnergyLibrary.StandardsOpaqueConstructions;
-            var OpaqueTests = new Dictionary<string, double>()
+            var OpaqueTests = new Dictionary<string, (double, double)>()
             {
-                {"Typical Insulated Metal Building Roof-R19", 3.346111 },
-                {"Typical Built Up Roof", 0.087655 }, 
+                {"Typical Insulated Metal Building Roof-R19", ( 3.346111, 0.284911 )},
+                {"Typical Built Up Roof", (0.087655,  3.977601)}, 
             };
 
             foreach (var item in OpaqueTests)
             {
                 var c1 = opqs.FirstOrDefault(_ => _.Key == item.Key).Value;
                 c1.CalThermalValues(lib);
-                Assert.IsTrue(Math.Round(c1.RValue, 6) == item.Value);
+                var r = item.Value.Item1;
+                var u = item.Value.Item2;
+                Assert.IsTrue(Math.Round(c1.RValue, 6) == r);
+                Assert.IsTrue(Math.Round(c1.UFactor, 6) == u);
             }
+
 
 
             // test window constructions
             var wins = Helper.EnergyLibrary.StandardsWindowConstructions;
-            var windowTests = new Dictionary<string, double>()
+            var windowTests = new Dictionary<string, (double, double)>()
             {
-                {"U 0.25 SHGC 0.40 Dbl LoE (e2-.1) Tint 6mm/13mm Arg", 0.483239 },
-                {"U 0.98 SHGC 0.45 Sgl Ref-B-H Clr 6mm", 0.006671 },
+                {"U 0.25 SHGC 0.40 Dbl LoE (e2-.1) Tint 6mm/13mm Arg", ( 0.483239 ,1.531146)},
+                {"U 0.98 SHGC 0.45 Sgl Ref-B-H Clr 6mm", (0.006671,5.038939) },
             };
             foreach (var item in windowTests)
             {
                 var c1 = wins.FirstOrDefault(_ => _.Key == item.Key).Value;
                 c1.CalThermalValues(lib);
-                Assert.IsTrue(Math.Round(c1.RValue, 6) == item.Value);
+                var r = item.Value.Item1;
+                var u = item.Value.Item2;
+                Assert.IsTrue(Math.Round(c1.RValue, 6) == r);
+                Assert.IsTrue(Math.Round(c1.UFactor, 6) == u);
             }
 
 
