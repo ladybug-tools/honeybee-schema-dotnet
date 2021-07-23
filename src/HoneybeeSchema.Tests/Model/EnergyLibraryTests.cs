@@ -65,13 +65,13 @@ namespace HoneybeeSchema.Test
         public void MaterialsTest()
         {
             var mats = Helper.EnergyLibrary.DefaultMaterials;
-            Assert.IsTrue(mats.Count() == 16);
+            Assert.AreEqual(mats.Count(),  16);
 
             var opk = Helper.EnergyLibrary.DefaultOpaqueMaterials;
-            Assert.IsTrue(opk.Count() == 12);
+            Assert.AreEqual(opk.Count(), 12);
 
             var wins = Helper.EnergyLibrary.DefaultWindowMaterials;
-            Assert.IsTrue(wins.Count() == mats.Count() - opk.Count());
+            Assert.AreEqual(wins.Count(), mats.Count() - opk.Count());
 
         }
 
