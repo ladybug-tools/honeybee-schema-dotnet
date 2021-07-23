@@ -153,7 +153,7 @@ namespace HoneybeeSchema.Test
         [Test]
         public void ConstrucitonThermalPropertiesTest()
         {
-            var lib = ModelEnergyProperties.Default;
+            var lib = new ModelEnergyProperties();
             lib.AddMaterials(Helper.EnergyLibrary.StandardsOpaqueMaterials.Values);
             lib.AddMaterials(Helper.EnergyLibrary.StandardsWindowMaterials.Values);
 
