@@ -3,6 +3,8 @@ using NUnit.Framework;
 using System.Linq;
 using System.IO;
 using HoneybeeSchema;
+using System;
+using System.Collections.Generic;
 
 namespace HoneybeeSchema.Test
 {
@@ -146,9 +148,117 @@ namespace HoneybeeSchema.Test
             var dup = elecEqp.DuplicateElectricEquipmentAbridged();
             Assert.IsTrue(elecEqp.Equals(dup));
 
+        }
+
+        [Test]
+        public void ConstrucitonThermalPropertiesTest()
+        {
+            var lib = ModelEnergyProperties.Default;
+            lib.AddMaterials(Helper.EnergyLibrary.StandardsOpaqueMaterials.Values);
+            lib.AddMaterials(Helper.EnergyLibrary.StandardsWindowMaterials.Values);
+
+            // test opaque constructions
+            var opqs = Helper.EnergyLibrary.StandardsOpaqueConstructions;
+            var OpaqueTests = new Dictionary<string, double>()
+            {
+                {"Typical Insulated Metal Building Roof-R19", 3.346111 },
+                {"Typical Built Up Roof", 0.087655 }, 
+            };
+
+            foreach (var item in OpaqueTests)
+            {
+                var c1 = opqs.FirstOrDefault(_ => _.Key == item.Key).Value;
+                c1.CalThermalValues(lib);
+                Assert.IsTrue(Math.Round(c1.RValue, 6) == item.Value);
+            }
+
+
+            // test window constructions
+            var wins = Helper.EnergyLibrary.StandardsWindowConstructions;
+            var windowTests = new Dictionary<string, double>()
+            {
+                {"U 0.25 SHGC 0.40 Dbl LoE (e2-.1) Tint 6mm/13mm Arg", 0.483239 },
+                {"U 0.98 SHGC 0.45 Sgl Ref-B-H Clr 6mm", 0.006671 },
+            };
+            foreach (var item in windowTests)
+            {
+                var c1 = wins.FirstOrDefault(_ => _.Key == item.Key).Value;
+                c1.CalThermalValues(lib);
+                Assert.IsTrue(Math.Round(c1.RValue, 6) == item.Value);
+            }
+
 
         }
 
+        [Test]
+        public void OpaqueMaterialThermalPropertiesTest()
+        {
+          
+            var mats = Helper.EnergyLibrary.StandardsOpaqueMaterials;
+            var tests = new Dictionary<string, double>()
+            {
+                {"Solid Rock", 0.066667 }, //EnergyMaterial
+                {"1/2 in. Gypsum Board", 0.079428 }, //EnergyMaterial
+                {"8IN CONCRETE HW RefBldg", 0.1551 }, //EnergyMaterial
+                {"F16 Acoustic tile", 0.318546 }, //EnergyMaterial
+                {"Typical Insulation-R34", 5.987746 }, //EnergyMaterialNoMass
+                {"F05 Ceiling air space resistance", 0.004572 }, //EnergyMaterialNoMass
+            };
+
+            foreach (var item in tests)
+            {
+                var m1 = mats.FirstOrDefault(_ => _.Key == item.Key).Value;
+                Assert.IsTrue(Math.Round(m1.RValue, 6) == item.Value);
+            }
+
+        }
+
+        [Test]
+        public void WindowMaterialThermalPropertiesTest()
+        {
+
+            var mats = Helper.EnergyLibrary.StandardsWindowMaterials;
+            var tests = new Dictionary<string, double>()
+            {
+                {"Clear 3mm", 0.003336 }, // EnergyWindowMaterialGlazing
+                {"LoE SPEC SEL CLEAR 6MM Rev", 0.006671 }, // EnergyWindowMaterialGlazing
+                {"Fixed Window 4.09/0.39/0.25", 0.076142 }, //EnergyWindowMaterialSimpleGlazSys
+                {"U0.77_SHGC0.61_SimpleGlazing_Window_08", 0.060247 }, //EnergyWindowMaterialSimpleGlazSys
+            };
+
+            //var f = 1.0 / 23 + 1.0 / 8;
+            //var r = (1 / 4.0879) - f;
+            //Assert.IsTrue(Math.Round(f, 6) == 0.168478);
+            //Assert.IsTrue(Math.Round(r, 6) == 0.076142);
+
+            foreach (var item in tests)
+            {
+                var m1 = mats.FirstOrDefault(_ => _.Key == item.Key).Value;
+
+                Assert.IsTrue(Math.Round(m1.RValue, 6) == item.Value);
+            }
+
+
+            //Gas
+            var wg = new EnergyWindowMaterialGas("air 12.5mm");
+            Assert.IsTrue(Math.Round(wg.UValue, 6) == 5.345702);
+
+            var wga = new EnergyWindowMaterialGas("argon 12.5mm", gasType: GasType.Argon);
+            Assert.IsTrue(Math.Round(wga.UValue, 6) == 4.742058);
+
+
+            //GasMixture
+            var wgmix = new EnergyWindowMaterialGasMixture("mix", new List<GasType>() { GasType.Air, GasType.Argon }, new List<double>() { 0.5, 0.5});
+            Assert.IsTrue(Math.Round(wgmix.UValue, 6) == 5.056671);
+
+            //Gas custom
+            var wgctm = new EnergyWindowMaterialGasCustom("test", 0.005, 0.005, 0.005, 1, 20);
+            Assert.IsTrue(Math.Round(wgctm.UValue, 6) == 3.746917);
+
+            //window shade
+            var ws = new EnergyWindowMaterialShade("id", visibleReflectance: 0.5, conductivity: 0.9);
+            Assert.IsTrue(Math.Round(ws.RValue, 6) == 0.005556);
+        }
     }
 
 }
