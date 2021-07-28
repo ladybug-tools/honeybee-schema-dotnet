@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Packaged Single-Zone (PSZ) HVAC system.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "PSZ")]
     public partial class PSZ : IDdEnergyBaseModel, IEquatable<PSZ>, IValidatableObject
     {

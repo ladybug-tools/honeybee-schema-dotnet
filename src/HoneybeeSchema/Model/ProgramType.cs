@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ProgramType")]
     public partial class ProgramType : IDdEnergyBaseModel, IEquatable<ProgramType>, IValidatableObject
     {

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for Radiance Modifiers
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ModifierBase")]
     public partial class ModifierBase : IDdRadianceBaseModel, IEquatable<ModifierBase>, IValidatableObject
     {

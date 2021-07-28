@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Create single layer of gas in a window construction.  Can be combined with EnergyWindowMaterialGlazing to make multi-pane windows.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "EnergyWindowMaterialGas")]
     public partial class EnergyWindowMaterialGas : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialGas>, IValidatableObject
     {

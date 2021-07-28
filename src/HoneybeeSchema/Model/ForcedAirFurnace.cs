@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Forced Air Furnace HVAC system. Intended for spaces only requiring heating.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ForcedAirFurnace")]
     public partial class ForcedAirFurnace : IDdEnergyBaseModel, IEquatable<ForcedAirFurnace>, IValidatableObject
     {

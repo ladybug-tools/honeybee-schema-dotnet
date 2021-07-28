@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Set containing radiance modifiers needed for a model&#39;s roofs.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "RoofCeilingModifierSet")]
     public partial class RoofCeilingModifierSet : OpenAPIGenBaseModel, IEquatable<RoofCeilingModifierSet>, IValidatableObject
     {

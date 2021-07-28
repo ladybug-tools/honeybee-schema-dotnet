@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Abridged set containing radiance modifiers needed for a model&#39;s Shade.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ShadeModifierSetAbridged")]
     public partial class ShadeModifierSetAbridged : BaseModifierSetAbridged, IEquatable<ShadeModifierSetAbridged>, IValidatableObject
     {

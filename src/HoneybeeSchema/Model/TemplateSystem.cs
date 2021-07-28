@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for HVAC systems following a standards template.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "_TemplateSystem")]
     public partial class TemplateSystem : IDdEnergyBaseModel, IEquatable<TemplateSystem>, IValidatableObject
     {

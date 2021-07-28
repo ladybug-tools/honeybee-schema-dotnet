@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Hidden base class for all Radiance Assets.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "_RadianceAsset")]
     public partial class RadianceAsset : IDdRadianceBaseModel, IEquatable<RadianceAsset>, IValidatableObject
     {

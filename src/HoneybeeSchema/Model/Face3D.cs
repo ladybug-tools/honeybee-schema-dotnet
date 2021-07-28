@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A single planar face in 3D space.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "Face3D")]
     public partial class Face3D : OpenAPIGenBaseModel, IEquatable<Face3D>, IValidatableObject
     {

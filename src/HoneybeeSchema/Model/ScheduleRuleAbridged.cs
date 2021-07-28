@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Schedule rule including a ScheduleDay and when it should be applied..
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ScheduleRuleAbridged")]
     public partial class ScheduleRuleAbridged : DatedBaseModel, IEquatable<ScheduleRuleAbridged>, IValidatableObject
     {

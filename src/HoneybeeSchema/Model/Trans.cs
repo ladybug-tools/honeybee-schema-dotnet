@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance Translucent material.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "Trans")]
     public partial class Trans : ModifierBase, IEquatable<Trans>, IValidatableObject
     {

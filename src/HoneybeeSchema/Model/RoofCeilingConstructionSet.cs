@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A set of constructions for roof and ceiling assemblies.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "RoofCeilingConstructionSet")]
     public partial class RoofCeilingConstructionSet : OpenAPIGenBaseModel, IEquatable<RoofCeilingConstructionSet>, IValidatableObject
     {

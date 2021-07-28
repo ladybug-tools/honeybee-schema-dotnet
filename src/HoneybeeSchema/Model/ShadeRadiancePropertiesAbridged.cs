@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance Properties for Honeybee Shade Abridged.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ShadeRadiancePropertiesAbridged")]
     public partial class ShadeRadiancePropertiesAbridged : PropertiesBaseAbridged, IEquatable<ShadeRadiancePropertiesAbridged>, IValidatableObject
     {

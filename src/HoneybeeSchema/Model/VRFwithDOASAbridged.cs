@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Variable Refrigerant Flow (VRF) with DOAS HVAC system.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "VRFwithDOASAbridged")]
     public partial class VRFwithDOASAbridged : IDdEnergyBaseModel, IEquatable<VRFwithDOASAbridged>, IValidatableObject
     {

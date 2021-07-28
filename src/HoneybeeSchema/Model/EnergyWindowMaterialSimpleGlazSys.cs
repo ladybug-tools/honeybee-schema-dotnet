@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Describe an entire glazing system rather than individual layers.  Used when only very limited information is available on the glazing layers or when specific performance levels are being targeted.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "EnergyWindowMaterialSimpleGlazSys")]
     public partial class EnergyWindowMaterialSimpleGlazSys : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialSimpleGlazSys>, IValidatableObject
     {

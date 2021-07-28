@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A set of constructions for wall assemblies.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "WallConstructionSet")]
     public partial class WallConstructionSet : OpenAPIGenBaseModel, IEquatable<WallConstructionSet>, IValidatableObject
     {

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify dry bulb conditions on a design day.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "DryBulbCondition")]
     public partial class DryBulbCondition : OpenAPIGenBaseModel, IEquatable<DryBulbCondition>, IValidatableObject
     {

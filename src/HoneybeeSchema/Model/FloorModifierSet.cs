@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Set containing radiance modifiers needed for a model&#39;s Floors.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "FloorModifierSet")]
     public partial class FloorModifierSet : OpenAPIGenBaseModel, IEquatable<FloorModifierSet>, IValidatableObject
     {

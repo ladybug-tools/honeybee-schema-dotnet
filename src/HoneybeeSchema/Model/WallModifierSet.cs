@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Set containing radiance modifiers needed for a model&#39;s Walls.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "WallModifierSet")]
     public partial class WallModifierSet : OpenAPIGenBaseModel, IEquatable<WallModifierSet>, IValidatableObject
     {

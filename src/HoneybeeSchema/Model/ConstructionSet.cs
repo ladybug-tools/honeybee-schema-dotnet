@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A set of constructions for different surface types and boundary conditions.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ConstructionSet")]
     public partial class ConstructionSet : IDdEnergyBaseModel, IEquatable<ConstructionSet>, IValidatableObject
     {

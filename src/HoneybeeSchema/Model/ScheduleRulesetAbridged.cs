@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to define a schedule for a default day, further described by ScheduleRule.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ScheduleRulesetAbridged")]
     public partial class ScheduleRulesetAbridged : IDdEnergyBaseModel, IEquatable<ScheduleRulesetAbridged>, IValidatableObject
     {

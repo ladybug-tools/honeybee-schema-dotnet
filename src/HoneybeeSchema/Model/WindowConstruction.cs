@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Construction for window objects (Aperture, Door).
     /// </summary>
+    [Serializable]
     [DataContract(Name = "WindowConstruction")]
     public partial class WindowConstruction : IDdEnergyBaseModel, IEquatable<WindowConstruction>, IValidatableObject
     {

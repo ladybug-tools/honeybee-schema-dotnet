@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify sky conditions on a design day.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "_SkyCondition")]
     public partial class SkyCondition : OpenAPIGenBaseModel, IEquatable<SkyCondition>, IValidatableObject
     {

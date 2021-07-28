@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A set of constructions for aperture assemblies.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ApertureConstructionSet")]
     public partial class ApertureConstructionSet : OpenAPIGenBaseModel, IEquatable<ApertureConstructionSet>, IValidatableObject
     {

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to describe the time period over which to run the simulation.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "RunPeriod")]
     public partial class RunPeriod : DatedBaseModel, IEquatable<RunPeriod>, IValidatableObject
     {

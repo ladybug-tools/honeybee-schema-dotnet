@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify a start date and a list of values for a period of analysis.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ScheduleFixedIntervalAbridged")]
     public partial class ScheduleFixedIntervalAbridged : IDdEnergyBaseModel, IEquatable<ScheduleFixedIntervalAbridged>, IValidatableObject
     {

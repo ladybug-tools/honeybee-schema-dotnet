@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// FacePropertiesAbridged
     /// </summary>
+    [Serializable]
     [DataContract(Name = "FacePropertiesAbridged")]
     public partial class FacePropertiesAbridged : OpenAPIGenBaseModel, IEquatable<FacePropertiesAbridged>, IValidatableObject
     {

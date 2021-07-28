@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A set of constructions for wall, floor, or roof assemblies.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "_FaceSubSetAbridged")]
     public partial class FaceSubSetAbridged : OpenAPIGenBaseModel, IEquatable<FaceSubSetAbridged>, IValidatableObject
     {

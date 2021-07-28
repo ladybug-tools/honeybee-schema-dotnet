@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Set containing radiance modifiers needed for a model&#39;s Apertures.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ApertureModifierSet")]
     public partial class ApertureModifierSet : OpenAPIGenBaseModel, IEquatable<ApertureModifierSet>, IValidatableObject
     {

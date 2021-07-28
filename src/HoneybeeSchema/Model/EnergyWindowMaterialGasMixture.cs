@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Create a mixture of two to four different gases to fill the panes of multiple pane windows.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "EnergyWindowMaterialGasMixture")]
     public partial class EnergyWindowMaterialGasMixture : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialGasMixture>, IValidatableObject
     {

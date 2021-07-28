@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Variable Air Volume (VAV) HVAC system.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "VAV")]
     public partial class VAV : IDdEnergyBaseModel, IEquatable<VAV>, IValidatableObject
     {

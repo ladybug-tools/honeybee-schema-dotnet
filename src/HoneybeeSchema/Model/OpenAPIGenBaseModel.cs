@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// OpenAPIGenBaseModel
     /// </summary>
+    [Serializable]
     [DataContract(Name = "_OpenAPIGenBaseModel")]
     public partial class OpenAPIGenBaseModel : IEquatable<OpenAPIGenBaseModel>, IValidatableObject
     {

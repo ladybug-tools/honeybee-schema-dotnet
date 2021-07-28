@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for the modifier sets assigned to Faces.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "BaseModifierSet")]
     public partial class BaseModifierSet : OpenAPIGenBaseModel, IEquatable<BaseModifierSet>, IValidatableObject
     {

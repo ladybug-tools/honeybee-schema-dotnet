@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Set containing all radiance modifiers needed to create a radiance model.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ModifierSet")]
     public partial class ModifierSet : IDdRadianceBaseModel, IEquatable<ModifierSet>, IValidatableObject
     {

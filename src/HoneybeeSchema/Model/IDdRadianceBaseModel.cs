@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring a valid Radiance identifier.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "IDdRadianceBaseModel")]
     public partial class IDdRadianceBaseModel : OpenAPIGenBaseModel, IEquatable<IDdRadianceBaseModel>, IValidatableObject
     {

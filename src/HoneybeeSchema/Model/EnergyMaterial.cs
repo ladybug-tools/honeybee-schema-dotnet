@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Opaque material representing a layer within an opaque construction.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "EnergyMaterial")]
     public partial class EnergyMaterial : IDdEnergyBaseModel, IEquatable<EnergyMaterial>, IValidatableObject
     {

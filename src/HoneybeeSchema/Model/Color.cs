@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A mesh in 3D space.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "Color")]
     public partial class Color : OpenAPIGenBaseModel, IEquatable<Color>, IValidatableObject
     {

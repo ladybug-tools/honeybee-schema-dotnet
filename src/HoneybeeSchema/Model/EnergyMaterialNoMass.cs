@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// No mass opaque material representing a layer within an opaque construction.  Used when only the thermal resistance (R value) of the material is known.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "EnergyMaterialNoMass")]
     public partial class EnergyMaterialNoMass : IDdEnergyBaseModel, IEquatable<EnergyMaterialNoMass>, IValidatableObject
     {

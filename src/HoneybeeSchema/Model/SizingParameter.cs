@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify heating and cooling sizing criteria and safety factors.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "SizingParameter")]
     public partial class SizingParameter : OpenAPIGenBaseModel, IEquatable<SizingParameter>, IValidatableObject
     {

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Void modifier
     /// </summary>
+    [Serializable]
     [DataContract(Name = "Void")]
     public partial class Void : OpenAPIGenBaseModel, IEquatable<Void>, IValidatableObject
     {

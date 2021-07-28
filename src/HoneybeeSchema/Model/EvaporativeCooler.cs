@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Direct evaporative cooling systems (with optional heating).
     /// </summary>
+    [Serializable]
     [DataContract(Name = "EvaporativeCooler")]
     public partial class EvaporativeCooler : IDdEnergyBaseModel, IEquatable<EvaporativeCooler>, IValidatableObject
     {

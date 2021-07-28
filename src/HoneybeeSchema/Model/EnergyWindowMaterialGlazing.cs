@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Describe a single glass pane corresponding to a layer in a window construction.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "EnergyWindowMaterialGlazing")]
     public partial class EnergyWindowMaterialGlazing : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialGlazing>, IValidatableObject
     {

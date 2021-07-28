@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance Light material.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "Light")]
     public partial class Light : ModifierBase, IEquatable<Light>, IValidatableObject
     {

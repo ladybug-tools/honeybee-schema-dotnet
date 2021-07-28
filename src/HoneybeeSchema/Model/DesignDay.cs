@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// An object representing design day conditions.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "DesignDay")]
     public partial class DesignDay : OpenAPIGenBaseModel, IEquatable<DesignDay>, IValidatableObject
     {

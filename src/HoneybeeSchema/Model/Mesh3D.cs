@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A mesh in 3D space.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "Mesh3D")]
     public partial class Mesh3D : OpenAPIGenBaseModel, IEquatable<Mesh3D>, IValidatableObject
     {

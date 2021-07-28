@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Fan Coil Unit (FCU) heating/cooling system (with no ventilation).
     /// </summary>
+    [Serializable]
     [DataContract(Name = "FCU")]
     public partial class FCU : IDdEnergyBaseModel, IEquatable<FCU>, IValidatableObject
     {

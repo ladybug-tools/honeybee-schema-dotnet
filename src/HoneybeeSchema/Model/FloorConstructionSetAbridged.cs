@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A set of constructions for floor assemblies.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "FloorConstructionSetAbridged")]
     public partial class FloorConstructionSetAbridged : FaceSubSetAbridged, IEquatable<FloorConstructionSetAbridged>, IValidatableObject
     {

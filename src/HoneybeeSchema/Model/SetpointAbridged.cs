@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify information about the setpoint schedule.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "SetpointAbridged")]
     public partial class SetpointAbridged : IDdEnergyBaseModel, IEquatable<SetpointAbridged>, IValidatableObject
     {

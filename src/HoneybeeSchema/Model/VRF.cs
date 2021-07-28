@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Variable Refrigerant Flow (VRF) heating/cooling system (with no ventilation).
     /// </summary>
+    [Serializable]
     [DataContract(Name = "VRF")]
     public partial class VRF : IDdEnergyBaseModel, IEquatable<VRF>, IValidatableObject
     {

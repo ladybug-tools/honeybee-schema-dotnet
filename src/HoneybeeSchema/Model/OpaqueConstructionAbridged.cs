@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Construction for opaque objects (Face, Shade, Door).
     /// </summary>
+    [Serializable]
     [DataContract(Name = "OpaqueConstructionAbridged")]
     public partial class OpaqueConstructionAbridged : IDdEnergyBaseModel, IEquatable<OpaqueConstructionAbridged>, IValidatableObject
     {

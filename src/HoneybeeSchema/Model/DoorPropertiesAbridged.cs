@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// DoorPropertiesAbridged
     /// </summary>
+    [Serializable]
     [DataContract(Name = "DoorPropertiesAbridged")]
     public partial class DoorPropertiesAbridged : OpenAPIGenBaseModel, IEquatable<DoorPropertiesAbridged>, IValidatableObject
     {

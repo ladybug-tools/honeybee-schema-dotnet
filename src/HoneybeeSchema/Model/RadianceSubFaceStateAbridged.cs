@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door.     
     /// </summary>
+    [Serializable]
     [DataContract(Name = "RadianceSubFaceStateAbridged")]
     public partial class RadianceSubFaceStateAbridged : RadianceShadeStateAbridged, IEquatable<RadianceSubFaceStateAbridged>, IValidatableObject
     {

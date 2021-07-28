@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to describe the daily schedule for a single simulation day.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ScheduleDay")]
     public partial class ScheduleDay : IDdEnergyBaseModel, IEquatable<ScheduleDay>, IValidatableObject
     {

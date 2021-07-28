@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// RadianceShadeStateAbridged represents a single state for a dynamic Shade.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "RadianceShadeStateAbridged")]
     public partial class RadianceShadeStateAbridged : OpenAPIGenBaseModel, IEquatable<RadianceShadeStateAbridged>, IValidatableObject
     {
