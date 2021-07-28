@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A single Radiance of sensors.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "Sensor")]
     public partial class Sensor : OpenAPIGenBaseModel, IEquatable<Sensor>, IValidatableObject
     {

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "IDdBaseModel")]
     public partial class IDdBaseModel : OpenAPIGenBaseModel, IEquatable<IDdBaseModel>, IValidatableObject
     {

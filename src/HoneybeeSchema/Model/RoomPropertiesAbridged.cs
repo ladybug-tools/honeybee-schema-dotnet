@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// RoomPropertiesAbridged
     /// </summary>
+    [Serializable]
     [DataContract(Name = "RoomPropertiesAbridged")]
     public partial class RoomPropertiesAbridged : OpenAPIGenBaseModel, IEquatable<RoomPropertiesAbridged>, IValidatableObject
     {

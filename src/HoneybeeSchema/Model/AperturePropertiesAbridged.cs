@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// AperturePropertiesAbridged
     /// </summary>
+    [Serializable]
     [DataContract(Name = "AperturePropertiesAbridged")]
     public partial class AperturePropertiesAbridged : OpenAPIGenBaseModel, IEquatable<AperturePropertiesAbridged>, IValidatableObject
     {

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all heating/cooling systems without any ventilation.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "_HeatCoolBase")]
     public partial class HeatCoolBase : IDdEnergyBaseModel, IEquatable<HeatCoolBase>, IValidatableObject
     {

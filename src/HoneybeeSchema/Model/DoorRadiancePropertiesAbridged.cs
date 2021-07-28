@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance Properties for Honeybee Door Abridged.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "DoorRadiancePropertiesAbridged")]
     public partial class DoorRadiancePropertiesAbridged : PropertiesBaseAbridged, IEquatable<DoorRadiancePropertiesAbridged>, IValidatableObject
     {

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A grid of sensors.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "SensorGrid")]
     public partial class SensorGrid : RadianceAsset, IEquatable<SensorGrid>, IValidatableObject
     {

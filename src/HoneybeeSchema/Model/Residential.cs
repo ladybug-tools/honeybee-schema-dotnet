@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Residential Air Conditioning, Heat Pump or Furnace system.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "Residential")]
     public partial class Residential : IDdEnergyBaseModel, IEquatable<Residential>, IValidatableObject
     {

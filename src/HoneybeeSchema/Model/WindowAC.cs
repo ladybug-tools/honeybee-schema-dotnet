@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Window Air Conditioning cooling system (with optional heating).
     /// </summary>
+    [Serializable]
     [DataContract(Name = "WindowAC")]
     public partial class WindowAC : IDdEnergyBaseModel, IEquatable<WindowAC>, IValidatableObject
     {

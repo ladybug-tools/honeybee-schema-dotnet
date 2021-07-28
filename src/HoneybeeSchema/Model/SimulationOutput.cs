@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Lists the outputs to report from the simulation and their format.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "SimulationOutput")]
     public partial class SimulationOutput : OpenAPIGenBaseModel, IEquatable<SimulationOutput>, IValidatableObject
     {

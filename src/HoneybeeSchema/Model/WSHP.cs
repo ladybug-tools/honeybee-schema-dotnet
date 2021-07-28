@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Direct evaporative cooling systems (with optional heating).
     /// </summary>
+    [Serializable]
     [DataContract(Name = "WSHP")]
     public partial class WSHP : IDdEnergyBaseModel, IEquatable<WSHP>, IValidatableObject
     {

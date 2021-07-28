@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance Properties for Honeybee Aperture Abridged.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ApertureRadiancePropertiesAbridged")]
     public partial class ApertureRadiancePropertiesAbridged : PropertiesBaseAbridged, IEquatable<ApertureRadiancePropertiesAbridged>, IValidatableObject
     {

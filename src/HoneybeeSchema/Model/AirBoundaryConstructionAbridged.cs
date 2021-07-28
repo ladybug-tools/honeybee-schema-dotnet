@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Construction for Air Boundary objects.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "AirBoundaryConstructionAbridged")]
     public partial class AirBoundaryConstructionAbridged : IDdEnergyBaseModel, IEquatable<AirBoundaryConstructionAbridged>, IValidatableObject
     {

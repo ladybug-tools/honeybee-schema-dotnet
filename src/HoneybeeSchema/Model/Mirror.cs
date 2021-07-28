@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance mirror material.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "Mirror")]
     public partial class Mirror : ModifierBase, IEquatable<Mirror>, IValidatableObject
     {

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Packaged Terminal Air Conditioning (PTAC) or Heat Pump (PTHP) HVAC system.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "PTAC")]
     public partial class PTAC : IDdEnergyBaseModel, IEquatable<PTAC>, IValidatableObject
     {

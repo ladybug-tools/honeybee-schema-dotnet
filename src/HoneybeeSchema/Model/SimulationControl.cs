@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify which types of calculations to run.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "SimulationControl")]
     public partial class SimulationControl : OpenAPIGenBaseModel, IEquatable<SimulationControl>, IValidatableObject
     {

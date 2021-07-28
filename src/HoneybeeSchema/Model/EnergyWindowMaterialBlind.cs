@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Window blind material consisting of flat, equally-spaced slats.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "EnergyWindowMaterialBlind")]
     public partial class EnergyWindowMaterialBlind : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialBlind>, IValidatableObject
     {

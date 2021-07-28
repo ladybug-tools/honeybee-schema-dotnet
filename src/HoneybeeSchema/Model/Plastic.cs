@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance plastic material.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "Plastic")]
     public partial class Plastic : ModifierBase, IEquatable<Plastic>, IValidatableObject
     {

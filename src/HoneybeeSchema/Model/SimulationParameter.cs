@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// The complete set of EnergyPlus Simulation Settings.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "SimulationParameter")]
     public partial class SimulationParameter : OpenAPIGenBaseModel, IEquatable<SimulationParameter>, IValidatableObject
     {

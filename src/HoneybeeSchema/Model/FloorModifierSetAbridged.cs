@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Abridged set containing radiance modifiers needed for a model&#39;s Floors.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "FloorModifierSetAbridged")]
     public partial class FloorModifierSetAbridged : BaseModifierSetAbridged, IEquatable<FloorModifierSetAbridged>, IValidatableObject
     {

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all-air systems.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "_AllAirBase")]
     public partial class AllAirBase : IDdEnergyBaseModel, IEquatable<AllAirBase>, IValidatableObject
     {

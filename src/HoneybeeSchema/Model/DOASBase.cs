@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for DOAS systems.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "_DOASBase")]
     public partial class DOASBase : IDdEnergyBaseModel, IEquatable<DOASBase>, IValidatableObject
     {

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Create single layer of custom gas.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "EnergyWindowMaterialGasCustom")]
     public partial class EnergyWindowMaterialGasCustom : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialGasCustom>, IValidatableObject
     {

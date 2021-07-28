@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Provides a model for an ideal HVAC system.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "IdealAirSystemAbridged")]
     public partial class IdealAirSystemAbridged : IDdEnergyBaseModel, IEquatable<IdealAirSystemAbridged>, IValidatableObject
     {

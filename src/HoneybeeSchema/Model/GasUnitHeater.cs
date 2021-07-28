@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Gas unit heating system. Intended for spaces only requiring heating.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "GasUnitHeater")]
     public partial class GasUnitHeater : IDdEnergyBaseModel, IEquatable<GasUnitHeater>, IValidatableObject
     {

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A set of constructions for door assemblies.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "DoorConstructionSet")]
     public partial class DoorConstructionSet : OpenAPIGenBaseModel, IEquatable<DoorConstructionSet>, IValidatableObject
     {

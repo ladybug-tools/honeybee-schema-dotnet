@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Construction for window objects with an included shade layer.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "WindowConstructionShadeAbridged")]
     public partial class WindowConstructionShadeAbridged : IDdEnergyBaseModel, IEquatable<WindowConstructionShadeAbridged>, IValidatableObject
     {

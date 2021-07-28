@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects needing to check for a valid Date.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "DatedBaseModel")]
     public partial class DatedBaseModel : OpenAPIGenBaseModel, IEquatable<DatedBaseModel>, IValidatableObject
     {

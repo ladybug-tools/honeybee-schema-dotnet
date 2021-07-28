@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify wind conditions on a design day.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "WindCondition")]
     public partial class WindCondition : OpenAPIGenBaseModel, IEquatable<WindCondition>, IValidatableObject
     {

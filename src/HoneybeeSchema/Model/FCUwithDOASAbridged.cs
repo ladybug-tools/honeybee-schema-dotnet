@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Fan Coil Unit (FCU) with DOAS HVAC system.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "FCUwithDOASAbridged")]
     public partial class FCUwithDOASAbridged : IDdEnergyBaseModel, IEquatable<FCUwithDOASAbridged>, IValidatableObject
     {

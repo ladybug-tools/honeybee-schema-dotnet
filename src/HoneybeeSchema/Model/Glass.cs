@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance glass material.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "Glass")]
     public partial class Glass : ModifierBase, IEquatable<Glass>, IValidatableObject
     {

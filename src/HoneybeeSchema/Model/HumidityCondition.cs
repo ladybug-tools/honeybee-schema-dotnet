@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify humidity conditions on a design day.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "HumidityCondition")]
     public partial class HumidityCondition : OpenAPIGenBaseModel, IEquatable<HumidityCondition>, IValidatableObject
     {

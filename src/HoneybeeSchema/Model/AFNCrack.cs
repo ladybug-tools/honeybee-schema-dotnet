@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Properties for airflow through a crack.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "AFNCrack")]
     public partial class AFNCrack : OpenAPIGenBaseModel, IEquatable<AFNCrack>, IValidatableObject
     {

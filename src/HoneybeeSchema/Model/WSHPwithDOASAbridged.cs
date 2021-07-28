@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Water Source Heat Pump (WSHP) with DOAS HVAC system.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "WSHPwithDOASAbridged")]
     public partial class WSHPwithDOASAbridged : IDdEnergyBaseModel, IEquatable<WSHPwithDOASAbridged>, IValidatableObject
     {

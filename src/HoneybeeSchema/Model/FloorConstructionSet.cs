@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A set of constructions for floor assemblies.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "FloorConstructionSet")]
     public partial class FloorConstructionSet : OpenAPIGenBaseModel, IEquatable<FloorConstructionSet>, IValidatableObject
     {

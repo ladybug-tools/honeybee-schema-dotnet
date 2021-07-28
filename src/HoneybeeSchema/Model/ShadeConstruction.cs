@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Construction for Shade objects.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ShadeConstruction")]
     public partial class ShadeConstruction : IDdEnergyBaseModel, IEquatable<ShadeConstruction>, IValidatableObject
     {

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance BSDF (Bidirectional Scattering Distribution Function) material.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "BSDF")]
     public partial class BSDF : ModifierBase, IEquatable<BSDF>, IValidatableObject
     {

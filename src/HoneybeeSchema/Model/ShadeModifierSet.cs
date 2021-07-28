@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Set containing radiance modifiers needed for a model&#39;s Shade.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ShadeModifierSet")]
     public partial class ShadeModifierSet : OpenAPIGenBaseModel, IEquatable<ShadeModifierSet>, IValidatableObject
     {

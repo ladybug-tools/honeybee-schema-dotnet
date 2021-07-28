@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Specifies the data types and limits for values contained in schedules.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ScheduleTypeLimit")]
     public partial class ScheduleTypeLimit : IDdEnergyBaseModel, IEquatable<ScheduleTypeLimit>, IValidatableObject
     {

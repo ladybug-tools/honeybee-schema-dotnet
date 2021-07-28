@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// This object specifies the properties of window shade materials.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "EnergyWindowMaterialShade")]
     public partial class EnergyWindowMaterialShade : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialShade>, IValidatableObject
     {

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// The global parameters used in the ventilation simulation.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "VentilationSimulationControl")]
     public partial class VentilationSimulationControl : OpenAPIGenBaseModel, IEquatable<VentilationSimulationControl>, IValidatableObject
     {

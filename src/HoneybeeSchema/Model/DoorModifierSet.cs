@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Set containing radiance modifiers needed for a model&#39;s Doors.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "DoorModifierSet")]
     public partial class DoorModifierSet : OpenAPIGenBaseModel, IEquatable<DoorModifierSet>, IValidatableObject
     {

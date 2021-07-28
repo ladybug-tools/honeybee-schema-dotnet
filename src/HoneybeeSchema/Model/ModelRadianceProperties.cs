@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance Properties for Honeybee Model.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ModelRadianceProperties")]
     public partial class ModelRadianceProperties : OpenAPIGenBaseModel, IEquatable<ModelRadianceProperties>, IValidatableObject
     {

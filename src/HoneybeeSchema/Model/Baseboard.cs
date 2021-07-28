@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Baseboard heating system. Intended for spaces only requiring heating.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "Baseboard")]
     public partial class Baseboard : IDdEnergyBaseModel, IEquatable<Baseboard>, IValidatableObject
     {

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance metal material.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "Metal")]
     public partial class Metal : ModifierBase, IEquatable<Metal>, IValidatableObject
     {

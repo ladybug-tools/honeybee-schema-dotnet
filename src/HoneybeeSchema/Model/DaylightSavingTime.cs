@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to describe the daylight savings time for the simulation.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "DaylightSavingTime")]
     public partial class DaylightSavingTime : DatedBaseModel, IEquatable<DaylightSavingTime>, IValidatableObject
     {

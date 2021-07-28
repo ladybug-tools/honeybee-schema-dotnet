@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A single Radiance of sensors.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "View")]
     public partial class View : RadianceAsset, IEquatable<View>, IValidatableObject
     {

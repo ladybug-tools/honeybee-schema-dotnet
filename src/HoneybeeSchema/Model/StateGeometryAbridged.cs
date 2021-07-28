@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A single planar geometry that can be assigned to Radiance states.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "StateGeometryAbridged")]
     public partial class StateGeometryAbridged : IDdRadianceBaseModel, IEquatable<StateGeometryAbridged>, IValidatableObject
     {

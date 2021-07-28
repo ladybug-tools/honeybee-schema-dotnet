@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A set of constructions for wall assemblies.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "WallConstructionSetAbridged")]
     public partial class WallConstructionSetAbridged : FaceSubSetAbridged, IEquatable<WallConstructionSetAbridged>, IValidatableObject
     {

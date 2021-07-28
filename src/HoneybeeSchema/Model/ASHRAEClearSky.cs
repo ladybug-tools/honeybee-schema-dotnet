@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify sky conditions on a design day.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ASHRAEClearSky")]
     public partial class ASHRAEClearSky : SkyCondition, IEquatable<ASHRAEClearSky>, IValidatableObject
     {

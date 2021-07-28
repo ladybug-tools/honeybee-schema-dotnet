@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to describe settings for EnergyPlus shadow calculation.
     /// </summary>
+    [Serializable]
     [DataContract(Name = "ShadowCalculation")]
     public partial class ShadowCalculation : OpenAPIGenBaseModel, IEquatable<ShadowCalculation>, IValidatableObject
     {
