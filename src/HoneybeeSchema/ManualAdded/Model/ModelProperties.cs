@@ -17,7 +17,7 @@ namespace HoneybeeSchema
 						);
 				}
 
-				return _default; 
+				return _default.DuplicateModelProperties(); 
 			}
 		}
 
