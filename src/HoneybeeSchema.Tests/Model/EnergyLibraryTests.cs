@@ -215,7 +215,7 @@ namespace HoneybeeSchema.Test
             foreach (var item in tests)
             {
                 var m1 = mats.FirstOrDefault(_ => _.Key == item.Key).Value;
-                Assert.IsTrue(Math.Round(m1.RValue, 6) == item.Value);
+                Assert.AreEqual(Math.Round(m1.RValue, 6) , item.Value);
             }
 
         }
@@ -231,6 +231,7 @@ namespace HoneybeeSchema.Test
                 {"LoE SPEC SEL CLEAR 6MM Rev", 0.006671 }, // EnergyWindowMaterialGlazing
                 {"Fixed Window 4.09/0.39/0.25", 0.076142 }, //EnergyWindowMaterialSimpleGlazSys
                 {"U0.77_SHGC0.61_SimpleGlazing_Window_08", 0.060247 }, //EnergyWindowMaterialSimpleGlazSys
+                {"U 1.2 SHGC 0.45 Simple Glazing", -0.021713 }, //EnergyWindowMaterialSimpleGlazSys
             };
 
             //var f = 1.0 / 23 + 1.0 / 8;
@@ -241,30 +242,30 @@ namespace HoneybeeSchema.Test
             foreach (var item in tests)
             {
                 var m1 = mats.FirstOrDefault(_ => _.Key == item.Key).Value;
+                Assert.AreEqual(Math.Round(m1.RValue, 6), item.Value);
 
-                Assert.IsTrue(Math.Round(m1.RValue, 6) == item.Value);
             }
 
 
             //Gas
             var wg = new EnergyWindowMaterialGas("air 12.5mm");
-            Assert.IsTrue(Math.Round(wg.UValue, 6) == 5.345702);
+            Assert.AreEqual(Math.Round(wg.UValue, 6), 5.345702);
 
             var wga = new EnergyWindowMaterialGas("argon 12.5mm", gasType: GasType.Argon);
-            Assert.IsTrue(Math.Round(wga.UValue, 6) == 4.742058);
+            Assert.AreEqual(Math.Round(wga.UValue, 6), 4.742058);
 
 
             //GasMixture
             var wgmix = new EnergyWindowMaterialGasMixture("mix", new List<GasType>() { GasType.Air, GasType.Argon }, new List<double>() { 0.5, 0.5});
-            Assert.IsTrue(Math.Round(wgmix.UValue, 6) == 5.056671);
+            Assert.AreEqual(Math.Round(wgmix.UValue, 6) , 5.056671);
 
             //Gas custom
             var wgctm = new EnergyWindowMaterialGasCustom("test", 0.005, 0.005, 0.005, 1, 20);
-            Assert.IsTrue(Math.Round(wgctm.UValue, 6) == 3.746917);
+            Assert.AreEqual(Math.Round(wgctm.UValue, 6) , 3.746917);
 
             //window shade
             var ws = new EnergyWindowMaterialShade("id", visibleReflectance: 0.5, conductivity: 0.9);
-            Assert.IsTrue(Math.Round(ws.RValue, 6) == 0.005556);
+            Assert.AreEqual(Math.Round(ws.RValue, 6), 0.005556);
         }
     }
 
