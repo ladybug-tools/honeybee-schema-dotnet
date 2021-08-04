@@ -12,12 +12,8 @@ namespace HoneybeeSchema
 		{
 			get 
 			{
-				if (_default == null)
-				{
-					_default = Helper.EnergyLibrary.DefaultModelEnergyProperties;
-				}
-
-				return _default; 
+				_default = _default ?? Helper.EnergyLibrary.DefaultModelEnergyProperties;
+				return _default.DuplicateModelEnergyProperties(); 
 			}
 		}
 		public void MergeWith(ModelEnergyProperties other)

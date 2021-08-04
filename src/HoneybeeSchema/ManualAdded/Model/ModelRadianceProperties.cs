@@ -12,7 +12,7 @@ namespace HoneybeeSchema
 			get 
 			{
 				_default = _default ?? Helper.EnergyLibrary.DefaultModelRadianceProperties;
-				return _default; 
+				return _default.DuplicateModelRadianceProperties(); 
 			}
 		}
         public IEnumerable<Radiance.IModifier> ModifierList => this.Modifiers?.OfType<Radiance.IModifier>();
