@@ -29,5 +29,13 @@ namespace HoneybeeSchema
 			this.Energy.MergeWith(other.Energy);
 			this.Radiance.MergeWith(other.Radiance);
         }
+
+		public void FillNulls()
+		{
+			this.Energy = this.Energy ?? new ModelEnergyProperties();
+			this.Energy.FillNulls();
+			this.Radiance = this.Radiance ?? new ModelRadianceProperties();
+			this.Radiance.FillNulls();
+		}
 	}
 }

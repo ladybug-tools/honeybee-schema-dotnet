@@ -34,6 +34,17 @@ namespace HoneybeeSchema
         public IEnumerable<Energy.ISchedule> ScheduleList => this.Schedules?.OfType<Energy.ISchedule>();
         public IEnumerable<Energy.IProgramtype> ProgramTypeList => this.ProgramTypes?.OfType<Energy.IProgramtype>();
 
+        public void FillNulls()
+        {
 
+            this.Constructions = this.Constructions ?? new List<AnyOf<OpaqueConstructionAbridged, WindowConstructionAbridged, WindowConstructionShadeAbridged, AirBoundaryConstructionAbridged, OpaqueConstruction, WindowConstruction, WindowConstructionShade, AirBoundaryConstruction, ShadeConstruction>>();
+            this.ConstructionSets = this.ConstructionSets ?? new List<AnyOf<ConstructionSetAbridged, ConstructionSet>>();
+            this.Hvacs = this.Hvacs ?? new List<AnyOf<IdealAirSystemAbridged, VAV, PVAV, PSZ, PTAC, ForcedAirFurnace, FCUwithDOASAbridged, WSHPwithDOASAbridged, VRFwithDOASAbridged, FCU, WSHP, VRF, Baseboard, EvaporativeCooler, Residential, WindowAC, GasUnitHeater>>();
+            this.Materials = this.Materials ?? new List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, EnergyWindowMaterialGasMixture, EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing, EnergyWindowMaterialShade>>();
+            this.ProgramTypes = this.ProgramTypes ?? new List<AnyOf<ProgramTypeAbridged, ProgramType>>();
+            this.ScheduleTypeLimits = this.ScheduleTypeLimits ?? Default.ScheduleTypeLimits;
+            this.Schedules = this.Schedules ?? new List<AnyOf<ScheduleRulesetAbridged, ScheduleFixedIntervalAbridged, ScheduleRuleset, ScheduleFixedInterval>>();
+
+        }
     }
 }
