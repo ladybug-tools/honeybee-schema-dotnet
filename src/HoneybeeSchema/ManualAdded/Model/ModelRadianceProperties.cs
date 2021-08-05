@@ -24,6 +24,12 @@ namespace HoneybeeSchema
 			this.AddModifiers(other.ModifierList);
 			this.AddModifierSets(other.ModifierSetList);
 		}
-	}
+
+        public void FillNulls()
+        {
+			this.Modifiers = this.Modifiers ?? new List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>>();
+			this.ModifierSets = this.ModifierSets ?? new List<AnyOf<ModifierSet, ModifierSetAbridged>>();
+        }
+    }
 
 }
