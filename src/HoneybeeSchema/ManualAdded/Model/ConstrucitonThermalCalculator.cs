@@ -14,7 +14,7 @@ namespace HoneybeeSchema
             RValue = materials.Select(_ => _.RValue).Sum();
             RFactor = RValue + (1 / OutdoorHeatTransferCoeff) + (1 / IndoorHeatTransferCoeff);
         }
-        public static void CalWindowValues(List<Energy.IMaterial> materials, out double RValue, out double RFactor, out double solarT, out double SHGC)
+        public static void CalWindowValues(List<Energy.IMaterial> materials, out double RValue, out double RFactor, out double solarT, out double SHGC, out double vt)
         {
             //instance.MaterialList = materials;
             MaterialList = materials;
@@ -40,48 +40,15 @@ namespace HoneybeeSchema
             {
                 solarT = glz.SolarTransmittance;
                 SHGC = glz.Shgc;
+                vt = glz.Vt;
             }
             else
             {
                 //SolarT
-                var i = 0;
-                var trans = 1.0;
-                var gap_refs = new List<double>();
-                foreach (var item in mats)
-                {
-                    if (item is EnergyWindowMaterialGlazing mat)
-                    {
-                        if (i != 0)
-                        {
-                            var reff = 0.0;
-                            var prev_pane = mats[i - 2] as EnergyWindowMaterialGlazing;
-                            var solRefBack = prev_pane.SolarReflectanceBack.Obj;
-                            var prev_pane_solRefBack = solRefBack is double sfb ? sfb : 1;
-                            var ref_i = mat.SolarReflectance * prev_pane_solRefBack;
-                            for (int r = 0; r < 3; r++) //# simulate 3 bounces back and forth
-                            {
-                                reff += ref_i;
-                                ref_i = ref_i * ref_i;
-                            }
+                solarT = CalSolarTrans(mats);
 
-                            foreach (var prev_ref in gap_refs)
-                            {
-                                var b_ref_i = mat.SolarReflectance * prev_ref;
-                                for (int r = 0; r < 3; r++)  //# simulate 3 bounces back and forth
-                                {
-                                    reff += b_ref_i;
-                                    b_ref_i = b_ref_i * b_ref_i;
-                                }
-                            }
-
-                            gap_refs.Add(prev_pane_solRefBack);
-                            trans += reff * trans;  //# add the back-reflected portion
-                        }
-                        trans *= mat.SolarTransmittance;  // pass everything through the glass
-                    }
-                    i++;
-                }
-                solarT = trans;
+                //VisT
+                vt = CalVisTrans(mats);
 
                 //SHGC
                 var u_fac = 1 / RFactor;
@@ -285,6 +252,92 @@ namespace HoneybeeSchema
         }
 
         #endregion
+
+        private static double CalSolarTrans(List<Energy.IMaterial> mats)
+        {
+            var i = 0;
+            var trans = 1.0;
+            var gap_refs = new List<double>();
+            foreach (var item in mats)
+            {
+                if (item is EnergyWindowMaterialGlazing mat)
+                {
+                    if (i != 0)
+                    {
+                        var reff = 0.0;
+                        var prev_pane = mats[i - 2] as EnergyWindowMaterialGlazing;
+                        var solRefBack = prev_pane.SolarReflectanceBack.Obj;
+                        var prev_pane_solRefBack = solRefBack is double sfb ? sfb : 1;
+                        var ref_i = mat.SolarReflectance * prev_pane_solRefBack;
+                        for (int r = 0; r < 3; r++) //# simulate 3 bounces back and forth
+                        {
+                            reff += ref_i;
+                            ref_i = ref_i * ref_i;
+                        }
+
+                        foreach (var prev_ref in gap_refs)
+                        {
+                            var b_ref_i = mat.SolarReflectance * prev_ref;
+                            for (int r = 0; r < 3; r++)  //# simulate 3 bounces back and forth
+                            {
+                                reff += b_ref_i;
+                                b_ref_i = b_ref_i * b_ref_i;
+                            }
+                        }
+
+                        gap_refs.Add(prev_pane_solRefBack);
+                        trans += reff * trans;  //# add the back-reflected portion
+                    }
+                    trans *= mat.SolarTransmittance;  // pass everything through the glass
+                }
+                i++;
+            }
+
+            return trans;
+        }
+
+        private static double CalVisTrans(List<Energy.IMaterial> mats)
+        {
+            var i = 0;
+            var trans = 1.0;
+            var gap_refs = new List<double>();
+            foreach (var item in mats)
+            {
+                if (item is EnergyWindowMaterialGlazing mat)
+                {
+                    if (i != 0)
+                    {
+                        var reff = 0.0;
+                        var prev_pane = mats[i - 2] as EnergyWindowMaterialGlazing;
+                        var solRefBack = prev_pane.VisibleReflectanceBack.Obj;
+                        var prev_pane_solRefBack = solRefBack is double sfb ? sfb : 1;
+                        var ref_i = mat.VisibleReflectance * prev_pane_solRefBack;
+                        for (int r = 0; r < 3; r++) //# simulate 3 bounces back and forth
+                        {
+                            reff += ref_i;
+                            ref_i = ref_i * ref_i;
+                        }
+
+                        foreach (var prev_ref in gap_refs)
+                        {
+                            var b_ref_i = mat.VisibleReflectance * prev_ref;
+                            for (int r = 0; r < 3; r++)  //# simulate 3 bounces back and forth
+                            {
+                                reff += b_ref_i;
+                                b_ref_i = b_ref_i * b_ref_i;
+                            }
+                        }
+
+                        gap_refs.Add(prev_pane_solRefBack);
+                        trans += reff * trans;  //# add the back-reflected portion
+                    }
+                    trans *= mat.VisibleTransmittance;  // pass everything through the glass
+                }
+                i++;
+            }
+
+            return trans;
+        }
 
         private static double Secant(double a, double b, Func<double, double> fn, double epsilon)
         {
