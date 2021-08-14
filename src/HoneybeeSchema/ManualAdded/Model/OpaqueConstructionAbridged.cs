@@ -10,6 +10,8 @@ namespace HoneybeeSchema
         public double UValue { get; private set; }
         public double RFactor { get; private set; }
         public double UFactor { get; private set; }
+        public double SolarTransmittance => 0;
+        public double SHGC => 0;
 
         public bool CalThermalValues(ModelEnergyProperties libSource)
         {

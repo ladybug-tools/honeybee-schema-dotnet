@@ -6,6 +6,8 @@
         public double UValue { get; private set; }
         public double RFactor { get; private set; }
         public double UFactor { get; private set; }
+        public double SolarTransmittance => this.WindowConstruction.SolarTransmittance;
+        public double SHGC => this.WindowConstruction.SHGC;
 
         public bool CalThermalValues(ModelEnergyProperties libSource = default)
         {

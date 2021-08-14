@@ -33,6 +33,7 @@ namespace HoneybeeSchema.Energy
 	public partial interface IWindowMaterialGlazing : IMaterial
 	{
 		double Emissivity { get; }
+		//double SolarTransmittance { get; }
 	}
 	public partial interface IWindowMaterialShade : IMaterial
 	{
