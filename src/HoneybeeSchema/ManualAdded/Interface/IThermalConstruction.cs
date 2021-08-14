@@ -9,6 +9,9 @@ namespace HoneybeeSchema.Energy
 		double RFactor { get; }
 		double UFactor { get; }
 
+		double SolarTransmittance { get; }
+		double SHGC { get; }
+
 		/// <summary>
 		/// Calculate R/U values and R/U Factor, after which you can get values from properties: RValue, UValue, RFactor, UFactor.
 		/// </summary>

@@ -173,16 +173,18 @@ namespace HoneybeeSchema.Test
                 var u = item.Value.Item2;
                 Assert.IsTrue(Math.Round(c1.RValue, 6) == r);
                 Assert.IsTrue(Math.Round(c1.UFactor, 6) == u);
+                Assert.IsTrue(c1.SHGC == 0);
+                Assert.IsTrue(c1.SolarTransmittance == 0);
             }
 
 
 
             // test window constructions
             var wins = Helper.EnergyLibrary.StandardsWindowConstructions;
-            var windowTests = new Dictionary<string, (double, double)>()
+            var windowTests = new Dictionary<string, (double, double, double, double)>()
             {
-                {"U 0.25 SHGC 0.40 Dbl LoE (e2-.1) Tint 6mm/13mm Arg", ( 0.483239 ,1.531146)},
-                {"U 0.98 SHGC 0.45 Sgl Ref-B-H Clr 6mm", (0.006671,5.038939) },
+                {"U 0.25 SHGC 0.40 Dbl LoE (e2-.1) Tint 6mm/13mm Arg", ( 0.483239 ,1.531146, 0.283018, 0.365747)},
+                {"U 0.98 SHGC 0.45 Sgl Ref-B-H Clr 6mm", (0.006671,5.038939, 0.24, 0.408017) },
             };
             foreach (var item in windowTests)
             {
@@ -190,8 +192,13 @@ namespace HoneybeeSchema.Test
                 c1.CalThermalValues(lib);
                 var r = item.Value.Item1;
                 var u = item.Value.Item2;
+                var solarT = item.Value.Item3;
+                var shgc = item.Value.Item4;
+
                 Assert.IsTrue(Math.Round(c1.RValue, 6) == r);
                 Assert.IsTrue(Math.Round(c1.UFactor, 6) == u);
+                Assert.IsTrue(Math.Round(c1.SHGC, 6) == shgc);
+                Assert.IsTrue(Math.Round(c1.SolarTransmittance, 6) == solarT);
             }
 
 

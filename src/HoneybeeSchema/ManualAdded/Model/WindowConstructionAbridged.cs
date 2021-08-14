@@ -10,7 +10,8 @@ namespace HoneybeeSchema
         public double UValue { get; private set; }
         public double RFactor { get; private set; }
         public double UFactor { get; private set; }
-
+        public double SolarTransmittance { get; private set; }
+        public double SHGC { get; private set; }
         public bool CalThermalValues(ModelEnergyProperties libSource)
         {
             var mats = new List<Energy.IMaterial>();
@@ -23,13 +24,16 @@ namespace HoneybeeSchema
             }
        
             // R value,  R factor
-            ConstrucitonThermalCalculator.CalWindowValues(mats, out var rv, out var rf);
+            ConstrucitonThermalCalculator.CalWindowValues(mats, out var rv, out var rf, out var solarT, out var shgc);
             this.RValue = rv;
             this.RFactor = rf;
 
             // U value
             this.UValue = 1 / this.RValue;
             this.UFactor = 1 / this.RFactor;
+
+            this.SHGC = shgc;
+            this.SolarTransmittance = solarT;
             return true;
 
         }
