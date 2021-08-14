@@ -8,6 +8,7 @@
         public double UFactor { get; private set; }
         public double SolarTransmittance { get; private set; }
         public double SHGC { get; private set; }
+        public double VisibleTransmittance { get; private set; }
 
         public bool CalThermalValues(ModelEnergyProperties libSource = default)
         {
@@ -21,6 +22,7 @@
 
             this.SolarTransmittance = this.WindowConstruction.SolarTransmittance;
             this.SHGC = this.WindowConstruction.SHGC;
+            this.VisibleTransmittance = this.WindowConstruction.VisibleTransmittance;
             return true;
         }
     }

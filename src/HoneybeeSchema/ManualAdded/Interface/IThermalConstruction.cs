@@ -1,7 +1,7 @@
 
 namespace HoneybeeSchema.Energy
 {
-	public partial interface IThermalConstruction 
+    public partial interface IThermalConstruction 
 	{
 		double RValue { get; }
 		double UValue { get; }
@@ -24,7 +24,7 @@ namespace HoneybeeSchema.Energy
 //Classes implemented this interface:
 namespace HoneybeeSchema
 {
-	public partial class OpaqueConstruction: HoneybeeSchema.Energy.IThermalConstruction { }
+    public partial class OpaqueConstruction: HoneybeeSchema.Energy.IThermalConstruction { }
     public partial class OpaqueConstructionAbridged : HoneybeeSchema.Energy.IThermalConstruction { }
     public partial class WindowConstruction : HoneybeeSchema.Energy.IThermalConstruction { }
     public partial class WindowConstructionAbridged : HoneybeeSchema.Energy.IThermalConstruction { }
