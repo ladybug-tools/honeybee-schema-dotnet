@@ -18,7 +18,7 @@ namespace HoneybeeSchema
         {
             var term_1 = 0.0;
             var term_2 = 0.0;
-            if (uFactor > 3.5)
+            if (uFactor > 3.4)
             {
                 term_1 = shgc < 0.7206 ? 
                     (0.939998 * Math.Pow(shgc, 2)) + (0.20332 * shgc) : 
@@ -36,13 +36,13 @@ namespace HoneybeeSchema
             {
                 return term_1;
             }
-            else if (uFactor < 3.5)
+            else if (uFactor < 3.4)
             {
                 return term_2;
             }
             else
             {
-                var w = uFactor - 3.5;
+                var w = (uFactor - 3.4)/1.1;
                 return (term_1 * w) + (term_2 * (1 - w));
             }
 
