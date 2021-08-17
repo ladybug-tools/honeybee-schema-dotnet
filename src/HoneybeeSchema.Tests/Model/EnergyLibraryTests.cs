@@ -159,10 +159,10 @@ namespace HoneybeeSchema.Test
 
             // test opaque constructions
             var opqs = Helper.EnergyLibrary.StandardsOpaqueConstructions;
-            var OpaqueTests = new Dictionary<string, (double, double)>()
+            var OpaqueTests = new Dictionary<string, (double, double, double)>()
             {
-                {"Typical Insulated Metal Building Roof-R19", ( 3.346111, 0.284911 )},
-                {"Typical Built Up Roof", (0.087655,  3.977601)}, 
+                {"Typical Insulated Metal Building Roof-R19", ( 3.346111, 0.284911, 0.298854 )},
+                {"Typical Built Up Roof", (0.087655,  3.977601, 11.408410)}, 
             };
 
             foreach (var item in OpaqueTests)
@@ -171,8 +171,11 @@ namespace HoneybeeSchema.Test
                 c1.CalThermalValues(lib);
                 var r = item.Value.Item1;
                 var u = item.Value.Item2;
+                var uv = item.Value.Item3;
+
                 Assert.IsTrue(Math.Round(c1.RValue, 6) == r);
                 Assert.IsTrue(Math.Round(c1.UFactor, 6) == u);
+                Assert.IsTrue(Math.Round(c1.UValue, 6) == uv);
                 Assert.IsTrue(c1.SHGC == 0);
                 Assert.IsTrue(c1.SolarTransmittance == 0);
                 Assert.IsTrue(c1.VisibleTransmittance == 0);
