@@ -38,7 +38,7 @@ namespace HoneybeeSchema.Helper
 
         public static string ResourcesStandardsFolder => Path.Combine(LadybugToolsRootFolder, "resources", "standards");
         /// <summary>
-        /// This returns ladybug_tools/resources/standards/default folder.
+        /// This returns ladybug_tools/resources/standards/honeybee_standards.
         /// </summary>
         public static string DefaultStandardsFolder => Path.Combine(ResourcesStandardsFolder, "honeybee_standards");
         private static List<string> _DefaultLibJsons => new List<string>()
@@ -61,7 +61,7 @@ namespace HoneybeeSchema.Helper
         public static string ConstructionSetFolder => Path.Combine(EnergyStandardsFolder, "constructionsets");
         public static string ScheduleFolder => Path.Combine(EnergyStandardsFolder, "schedules");
 
-
+       
         //BuildingVintages 2004, 2007, 2010, 2013, etc..
         private static IEnumerable<string> _buildingVintages;
         public static IEnumerable<string> BuildingVintages 
@@ -335,7 +335,7 @@ namespace HoneybeeSchema.Helper
         // end of Honeybee OpenStudio Standards
         #endregion
 
-
+      
 
         #region Honeybee Default Standards
 
@@ -829,8 +829,8 @@ namespace HoneybeeSchema.Helper
                             materials.Add(HB.EnergyWindowMaterialSimpleGlazSys.FromJson(item.ToString()));
                             break;
                         default:
-                            //do nothing
-                            break;
+                            throw new ArgumentException($"{typeName} is not supported, please report this message to developers.");
+                            //break;
                     }
                 }
 
@@ -863,8 +863,8 @@ namespace HoneybeeSchema.Helper
                             materials.Add(HB.EnergyMaterialNoMass.FromJson(item.ToString()));
                             break;
                         default:
-                            //do nothing
-                            break;
+                            throw new ArgumentException($"{typeName} is not supported, please report this message to developers.");
+                            //break;
                     }
                 }
 
