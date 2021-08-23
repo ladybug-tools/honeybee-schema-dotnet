@@ -80,16 +80,27 @@ namespace HoneybeeSchema.Helper
             }
         }
 
-        //private static List<HBEng.IBuildingConstructionset> _userModifierSets;
-        //public static List<HBEng.IBuildingConstructionset> UserModifierSets
-        //{
-        //    get
-        //    {
-        //        if (_userModifierSets == null)
-        //            LoadUserLibraries();
-        //        return _userModifierSets;
-        //    }
-        //}
+        private static List<HB.Radiance.IBuildingModifierSet> _userModifierSets;
+        public static List<HB.Radiance.IBuildingModifierSet> UserModifierSets
+        {
+            get
+            {
+                if (_userModifierSets == null)
+                    LoadUserLibraries();
+                return _userModifierSets;
+            }
+        }
+
+        private static List<HB.Radiance.IModifier> _userModifiers;
+        public static List<HB.Radiance.IModifier> UserModifiers
+        {
+            get
+            {
+                if (_userModifiers == null)
+                    LoadUserLibraries();
+                return _userModifiers;
+            }
+        }
 
         public static void LoadUserLibraries()
         {
@@ -97,41 +108,65 @@ namespace HoneybeeSchema.Helper
             _userMaterials = new List<HBEng.IMaterial>();
             _userSchedules = new List<HBEng.ISchedule>();
             _userConstructionSets = new List<HBEng.IBuildingConstructionset>();
-            //_user
+            _userProgramtypes = new List<HBEng.IProgramtype>();
 
             var lib = LoadFromUserLibraryFolder();
+            if (lib.Energy != null)
+            {
+                var eng = lib.Energy;
+                _userMaterials = eng.MaterialList.ToList();
+                _userConstructions = eng.ConstructionList.ToList();
+                _userConstructionSets = eng.ConstructionSetList.ToList();
+                _userSchedules = eng.ScheduleList.ToList();
+                _userProgramtypes = eng.ProgramTypeList.ToList();
+            }
 
-            _userMaterials = lib.MaterialList.ToList();
-            _userConstructions = lib.ConstructionList.ToList();
-            _userConstructionSets = lib.ConstructionSetList.ToList();
-            _userSchedules = lib.ScheduleList.ToList();
-            _userProgramtypes = lib.ProgramTypeList.ToList();
-            //_userModifierSets = lib
+            if (lib.Radiance != null)
+            {
+                var rad = lib.Radiance;
+                _userModifiers = rad.ModifierList.ToList();
+                _userModifierSets = rad.ModifierSetList.ToList();
+            }
+
         }
 
-        public static HB.ModelEnergyProperties LoadFromUserLibraryFolder(string userLibFolder = default)
+        public static HB.ModelProperties LoadFromUserLibraryFolder(string userLibFolder = default)
         {
             var python = Path.Combine(PythonFolder, "python");
             var userPath = Directory.Exists(userLibFolder) ? $"-s \"{userLibFolder}\"" : string.Empty;
+            var prop = new ModelProperties();
+
+            // load Energy property
             var cmd = $"-m honeybee_energy lib to-model-properties {userPath}";
-            var json = string.Empty;
-            using (var p = new System.Diagnostics.Process())
+            var json = ExecuteCMD(cmd);
+            if (!string.IsNullOrEmpty(json))
+                prop.Energy = HB.ModelEnergyProperties.FromJson(json);
+
+            // load Radiance property
+            var cmd2 = $"-m honeybee_radiance lib to-model-properties {userPath}";
+            var radJson = ExecuteCMD(cmd2);
+            if (!string.IsNullOrEmpty(radJson))
+                prop.Radiance = HB.ModelRadianceProperties.FromJson(radJson);
+
+            return prop;
+
+            string ExecuteCMD(string command)
             {
-                p.StartInfo.FileName = python;
-                p.StartInfo.Arguments = cmd;
-                p.StartInfo.UseShellExecute = false;
-                p.StartInfo.RedirectStandardOutput = true;
-                p.StartInfo.CreateNoWindow = true;
-                p.Start();
+                using (var p = new System.Diagnostics.Process())
+                {
+                    p.StartInfo.FileName = python;
+                    p.StartInfo.Arguments = command;
+                    p.StartInfo.UseShellExecute = false;
+                    p.StartInfo.RedirectStandardOutput = true;
+                    p.StartInfo.CreateNoWindow = true;
+                    p.Start();
 
-                json = p.StandardOutput.ReadToEnd();
+                    var outputs = p.StandardOutput.ReadToEnd();
 
-                p.WaitForExit();
+                    p.WaitForExit();
+                    return outputs;
+                }
             }
-
-            if (string.IsNullOrEmpty(json))
-                return null;
-            return HB.ModelEnergyProperties.FromJson(json);
         }
 
 
