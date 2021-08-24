@@ -57,6 +57,16 @@ namespace HoneybeeSchema.Helper
                 return _userSchedules;
             }
         }
+        private static List<ScheduleTypeLimit> _userScheduleTypeLimits;
+        public static List<ScheduleTypeLimit> UserScheduleTypeLimits
+        {
+            get
+            {
+                if (_userScheduleTypeLimits == null)
+                    LoadUserEnergyLibraries();
+                return _userScheduleTypeLimits;
+            }
+        }
 
         private static List<HBEng.IBuildingConstructionset> _userConstructionSets;
         public static List<HBEng.IBuildingConstructionset> UserConstructionSets
@@ -109,6 +119,7 @@ namespace HoneybeeSchema.Helper
             _userSchedules = new List<HBEng.ISchedule>();
             _userConstructionSets = new List<HBEng.IBuildingConstructionset>();
             _userProgramtypes = new List<HBEng.IProgramtype>();
+            _userScheduleTypeLimits = new List<ScheduleTypeLimit>();
 
             var lib = LoadFromUserLibraryFolder(loadEnergy: true);
             if (lib.Energy != null)
@@ -119,6 +130,7 @@ namespace HoneybeeSchema.Helper
                 _userConstructionSets = eng.ConstructionSetList.ToList();
                 _userSchedules = eng.ScheduleList.ToList();
                 _userProgramtypes = eng.ProgramTypeList.ToList();
+                _userScheduleTypeLimits = eng.ScheduleTypeLimits;
             }
 
         }
@@ -166,12 +178,16 @@ namespace HoneybeeSchema.Helper
                     p.StartInfo.Arguments = command;
                     p.StartInfo.UseShellExecute = false;
                     p.StartInfo.RedirectStandardOutput = true;
+                    p.StartInfo.RedirectStandardError = true;
                     p.StartInfo.CreateNoWindow = true;
                     p.Start();
 
                     var outputs = p.StandardOutput.ReadToEnd();
+                    var errs = p.StandardError.ReadToEnd();
 
                     p.WaitForExit();
+                    if (!string.IsNullOrEmpty(errs))
+                        throw new ArgumentException($"Failed to load user library: {errs}");
                     if (outputs.StartsWith("{") && outputs.EndsWith("}"))
                         return outputs;
 
