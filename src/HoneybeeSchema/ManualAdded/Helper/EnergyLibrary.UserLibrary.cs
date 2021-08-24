@@ -109,6 +109,8 @@ namespace HoneybeeSchema.Helper
             _userSchedules = new List<HBEng.ISchedule>();
             _userConstructionSets = new List<HBEng.IBuildingConstructionset>();
             _userProgramtypes = new List<HBEng.IProgramtype>();
+            _userModifierSets = new List<Radiance.IBuildingModifierSet>();
+            _userModifiers = new List<Radiance.IModifier>();
 
             var lib = LoadFromUserLibraryFolder();
             if (lib.Energy != null)
@@ -164,6 +166,12 @@ namespace HoneybeeSchema.Helper
                     var outputs = p.StandardOutput.ReadToEnd();
 
                     p.WaitForExit();
+                    if (outputs.StartsWith("{") && outputs.EndsWith("}"))
+                        return outputs;
+
+                    var s = outputs.IndexOf('{');
+                    var e = outputs.LastIndexOf('}');
+                    outputs = outputs.Substring(s, e - s + 1);
                     return outputs;
                 }
             }
