@@ -32,7 +32,7 @@ namespace HoneybeeSchema.Helper
             get
             {
                 if (_userConstructions == null)
-                    LoadUserLibraries();
+                    LoadUserEnergyLibraries();
                 return _userConstructions;
             }
         }
@@ -43,7 +43,7 @@ namespace HoneybeeSchema.Helper
             get
             {
                 if (_userMaterials == null)
-                    LoadUserLibraries();
+                    LoadUserEnergyLibraries();
                 return _userMaterials;
             }
         }
@@ -53,7 +53,7 @@ namespace HoneybeeSchema.Helper
             get
             {
                 if (_userSchedules == null)
-                    LoadUserLibraries();
+                    LoadUserEnergyLibraries();
                 return _userSchedules;
             }
         }
@@ -64,7 +64,7 @@ namespace HoneybeeSchema.Helper
             get
             {
                 if (_userConstructionSets == null)
-                    LoadUserLibraries();
+                    LoadUserEnergyLibraries();
                 return _userConstructionSets;
             }
         }
@@ -75,7 +75,7 @@ namespace HoneybeeSchema.Helper
             get
             {
                 if (_userProgramtypes == null)
-                    LoadUserLibraries();
+                    LoadUserEnergyLibraries();
                 return _userProgramtypes;
             }
         }
@@ -86,7 +86,7 @@ namespace HoneybeeSchema.Helper
             get
             {
                 if (_userModifierSets == null)
-                    LoadUserLibraries();
+                    LoadUserRadianceLibraries();
                 return _userModifierSets;
             }
         }
@@ -97,22 +97,20 @@ namespace HoneybeeSchema.Helper
             get
             {
                 if (_userModifiers == null)
-                    LoadUserLibraries();
+                    LoadUserRadianceLibraries();
                 return _userModifiers;
             }
         }
 
-        public static void LoadUserLibraries()
+        public static void LoadUserEnergyLibraries()
         {
             _userConstructions = new List<HBEng.IConstruction>();
             _userMaterials = new List<HBEng.IMaterial>();
             _userSchedules = new List<HBEng.ISchedule>();
             _userConstructionSets = new List<HBEng.IBuildingConstructionset>();
             _userProgramtypes = new List<HBEng.IProgramtype>();
-            _userModifierSets = new List<Radiance.IBuildingModifierSet>();
-            _userModifiers = new List<Radiance.IModifier>();
 
-            var lib = LoadFromUserLibraryFolder();
+            var lib = LoadFromUserLibraryFolder(loadEnergy: true);
             if (lib.Energy != null)
             {
                 var eng = lib.Energy;
@@ -123,33 +121,41 @@ namespace HoneybeeSchema.Helper
                 _userProgramtypes = eng.ProgramTypeList.ToList();
             }
 
+        }
+
+        private static void LoadUserRadianceLibraries()
+        {
+            _userModifierSets = new List<Radiance.IBuildingModifierSet>();
+            _userModifiers = new List<Radiance.IModifier>();
+
+            var lib = LoadFromUserLibraryFolder(loadEnergy: false);
             if (lib.Radiance != null)
             {
                 var rad = lib.Radiance;
                 _userModifiers = rad.ModifierList.ToList();
                 _userModifierSets = rad.ModifierSetList.ToList();
             }
-
         }
 
-        public static HB.ModelProperties LoadFromUserLibraryFolder(string userLibFolder = default)
+        private static HB.ModelProperties LoadFromUserLibraryFolder(bool loadEnergy, string userLibFolder = default)
         {
             var python = Path.Combine(PythonFolder, "python");
             var userPath = Directory.Exists(userLibFolder) ? $"-s \"{userLibFolder}\"" : string.Empty;
             var prop = new ModelProperties();
 
-            // load Energy property
-            var cmd = $"-m honeybee_energy lib to-model-properties {userPath}";
+            var module = loadEnergy? "honeybee_energy": "honeybee_radiance";
+         
+            // load property
+            var cmd = $"-m {module} lib to-model-properties {userPath}";
             var json = ExecuteCMD(cmd);
             if (!string.IsNullOrEmpty(json))
-                prop.Energy = HB.ModelEnergyProperties.FromJson(json);
-
-            // load Radiance property
-            var cmd2 = $"-m honeybee_radiance lib to-model-properties {userPath}";
-            var radJson = ExecuteCMD(cmd2);
-            if (!string.IsNullOrEmpty(radJson))
-                prop.Radiance = HB.ModelRadianceProperties.FromJson(radJson);
-
+            {
+                if (loadEnergy)
+                    prop.Energy = HB.ModelEnergyProperties.FromJson(json);
+                else
+                    prop.Radiance = HB.ModelRadianceProperties.FromJson(json);
+            }
+               
             return prop;
 
             string ExecuteCMD(string command)
