@@ -20,6 +20,26 @@ jobs:
       run: |
         export CLEAN_VERSION=$(echo $VERSION | sed 's/v//g')
         sed -i --regexp-extended 's/(honeybee-schema==).*/honeybee-schema=='"$CLEAN_VERSION"'/' requirements.txt
+
+     - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+        java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
+        architecture: x64 # (x64 or x86) - defaults to x64
+
+
+    - name: "Install OpenAPI-generator"
+      run: |
+        npm install @openapitools/openapi-generator-cli
+      
+
+    - name: "Run Update Script"
+      run: |
+        python3 .openapi-generator/download_schema.py
+        python3 .openapi-generator/generate.py
+
+
     - name: "Commit and Push Changes"
       id: push
       env:
