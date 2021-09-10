@@ -112,6 +112,28 @@ namespace HoneybeeSchema.Helper
             }
         }
 
+        private static ModelEnergyProperties _userEnergylib;
+        public static ModelEnergyProperties UserEnergyLibrary
+        {
+            get
+            {
+                if (_userEnergylib == null)
+                    LoadUserEnergyLibraries();
+                return _userEnergylib;
+            }
+        }
+
+        private static ModelRadianceProperties _userRadiancelib;
+        public static ModelRadianceProperties UserRadianceLibrary
+        {
+            get
+            {
+                if (_userRadiancelib == null)
+                    LoadUserRadianceLibraries();
+                return _userRadiancelib;
+            }
+        }
+
         public static void LoadUserEnergyLibraries()
         {
             _userConstructions = new List<HBEng.IConstruction>();
@@ -131,6 +153,7 @@ namespace HoneybeeSchema.Helper
                 _userSchedules = eng.ScheduleList.ToList();
                 _userProgramtypes = eng.ProgramTypeList.ToList();
                 _userScheduleTypeLimits = eng.ScheduleTypeLimits;
+                _userEnergylib = eng;
             }
 
         }
@@ -146,6 +169,7 @@ namespace HoneybeeSchema.Helper
                 var rad = lib.Radiance;
                 _userModifiers = rad.ModifierList.ToList();
                 _userModifierSets = rad.ModifierSetList.ToList();
+                _userRadiancelib = rad;
             }
         }
 
