@@ -41,7 +41,7 @@ namespace HoneybeeSchema
         public DoorConstructionSet
         (
            // Required parameters
-           OpaqueConstruction interiorConstruction= default, OpaqueConstruction exteriorConstruction= default, OpaqueConstruction overheadConstruction= default, WindowConstruction exteriorGlassConstruction= default, WindowConstruction interiorGlassConstruction= default// Optional parameters
+           OpaqueConstruction interiorConstruction= default, OpaqueConstruction exteriorConstruction= default, OpaqueConstruction overheadConstruction= default, AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> exteriorGlassConstruction= default, AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> interiorGlassConstruction= default// Optional parameters
         ) : base()// BaseClass
         {
             this.InteriorConstruction = interiorConstruction;
@@ -88,13 +88,13 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A WindowConstruction for all glass doors with an Outdoors boundary condition.</value>
         [DataMember(Name = "exterior_glass_construction")]
-        public WindowConstruction ExteriorGlassConstruction { get; set; } 
+        public AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> ExteriorGlassConstruction { get; set; } 
         /// <summary>
         /// A WindowConstruction for all glass doors with a Surface boundary condition.
         /// </summary>
         /// <value>A WindowConstruction for all glass doors with a Surface boundary condition.</value>
         [DataMember(Name = "interior_glass_construction")]
-        public WindowConstruction InteriorGlassConstruction { get; set; } 
+        public AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> InteriorGlassConstruction { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -40,7 +40,7 @@ namespace HoneybeeSchema
         public ApertureConstructionSet
         (
            // Required parameters
-           WindowConstruction interiorConstruction= default, WindowConstruction windowConstruction= default, WindowConstruction skylightConstruction= default, WindowConstruction operableConstruction= default// Optional parameters
+           AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> interiorConstruction= default, AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> windowConstruction= default, AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> skylightConstruction= default, AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> operableConstruction= default// Optional parameters
         ) : base()// BaseClass
         {
             this.InteriorConstruction = interiorConstruction;
@@ -68,25 +68,25 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A WindowConstruction for all apertures with a Surface boundary condition.</value>
         [DataMember(Name = "interior_construction")]
-        public WindowConstruction InteriorConstruction { get; set; } 
+        public AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> InteriorConstruction { get; set; } 
         /// <summary>
         /// A WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.
         /// </summary>
         /// <value>A WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.</value>
         [DataMember(Name = "window_construction")]
-        public WindowConstruction WindowConstruction { get; set; } 
+        public AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> WindowConstruction { get; set; } 
         /// <summary>
         /// A WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.
         /// </summary>
         /// <value>A WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.</value>
         [DataMember(Name = "skylight_construction")]
-        public WindowConstruction SkylightConstruction { get; set; } 
+        public AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> SkylightConstruction { get; set; } 
         /// <summary>
         /// A WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property.
         /// </summary>
         /// <value>A WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property.</value>
         [DataMember(Name = "operable_construction")]
-        public WindowConstruction OperableConstruction { get; set; } 
+        public AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> OperableConstruction { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
