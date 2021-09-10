@@ -215,7 +215,7 @@ namespace HoneybeeSchema
 
         public static void AddConstruction(this ModelEnergyProperties modelEnergyCollection, IConstruction construction)
         {
-            modelEnergyCollection.Constructions = modelEnergyCollection.Constructions ?? new List<AnyOf<OpaqueConstructionAbridged, WindowConstructionAbridged, WindowConstructionShadeAbridged, AirBoundaryConstructionAbridged, OpaqueConstruction, WindowConstruction, WindowConstructionShade, AirBoundaryConstruction, ShadeConstruction>>();
+            modelEnergyCollection.Constructions = modelEnergyCollection.Constructions ?? new List<AnyOf<OpaqueConstructionAbridged, WindowConstructionAbridged, WindowConstructionShadeAbridged, AirBoundaryConstructionAbridged, OpaqueConstruction, WindowConstruction, WindowConstructionShade, WindowConstructionDynamicAbridged, WindowConstructionDynamic, AirBoundaryConstruction, ShadeConstruction>>();
             var exist = modelEnergyCollection.Constructions.OfType<IConstruction>().Any(_ => _.Identifier == construction.Identifier);
             if (exist)
                 return;
