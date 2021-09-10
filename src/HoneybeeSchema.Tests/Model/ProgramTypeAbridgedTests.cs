@@ -155,6 +155,18 @@ namespace HoneybeeSchema.Test
             Assert.IsTrue(this.instance.Equals(dup));
         }
 
+        [Test]
+        public void DisDuplicateTest()
+        {
+            var p = ModelEnergyProperties.Default.ProgramTypes.OfType<ProgramTypeAbridged>().FirstOrDefault();
+            var list = new List<ProgramTypeAbridged>() { p};
+            list.Add(p.DuplicateProgramTypeAbridged());
+            list = list.Distinct().ToList();
+
+            Assert.IsTrue(list.Count ==1);
+        }
+
+
     }
 
 }

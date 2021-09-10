@@ -347,6 +347,10 @@ docs/WindowConstruction.md
 docs/WindowConstructionAbridged.md
 docs/WindowConstructionAbridgedAllOf.md
 docs/WindowConstructionAllOf.md
+docs/WindowConstructionDynamic.md
+docs/WindowConstructionDynamicAbridged.md
+docs/WindowConstructionDynamicAbridgedAllOf.md
+docs/WindowConstructionDynamicAllOf.md
 docs/WindowConstructionShade.md
 docs/WindowConstructionShadeAbridged.md
 docs/WindowConstructionShadeAbridgedAllOf.md
@@ -695,6 +699,10 @@ src/HoneybeeSchema.Test/Model/WindowACTests.cs
 src/HoneybeeSchema.Test/Model/WindowConstructionAbridgedAllOfTests.cs
 src/HoneybeeSchema.Test/Model/WindowConstructionAbridgedTests.cs
 src/HoneybeeSchema.Test/Model/WindowConstructionAllOfTests.cs
+src/HoneybeeSchema.Test/Model/WindowConstructionDynamicAbridgedAllOfTests.cs
+src/HoneybeeSchema.Test/Model/WindowConstructionDynamicAbridgedTests.cs
+src/HoneybeeSchema.Test/Model/WindowConstructionDynamicAllOfTests.cs
+src/HoneybeeSchema.Test/Model/WindowConstructionDynamicTests.cs
 src/HoneybeeSchema.Test/Model/WindowConstructionShadeAbridgedAllOfTests.cs
 src/HoneybeeSchema.Test/Model/WindowConstructionShadeAbridgedTests.cs
 src/HoneybeeSchema.Test/Model/WindowConstructionShadeAllOfTests.cs
@@ -1057,6 +1065,10 @@ src/HoneybeeSchema/Model/WindowConstruction.cs
 src/HoneybeeSchema/Model/WindowConstructionAbridged.cs
 src/HoneybeeSchema/Model/WindowConstructionAbridgedAllOf.cs
 src/HoneybeeSchema/Model/WindowConstructionAllOf.cs
+src/HoneybeeSchema/Model/WindowConstructionDynamic.cs
+src/HoneybeeSchema/Model/WindowConstructionDynamicAbridged.cs
+src/HoneybeeSchema/Model/WindowConstructionDynamicAbridgedAllOf.cs
+src/HoneybeeSchema/Model/WindowConstructionDynamicAllOf.cs
 src/HoneybeeSchema/Model/WindowConstructionShade.cs
 src/HoneybeeSchema/Model/WindowConstructionShadeAbridged.cs
 src/HoneybeeSchema/Model/WindowConstructionShadeAbridgedAllOf.cs

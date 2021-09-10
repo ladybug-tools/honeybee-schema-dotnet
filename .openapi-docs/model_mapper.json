@@ -149,6 +149,8 @@
         "WindowAC": "honeybee_schema.energy.hvac.heatcool",
         "WindowConstruction": "honeybee_schema.energy.construction",
         "WindowConstructionAbridged": "honeybee_schema.energy.construction",
+        "WindowConstructionDynamic": "honeybee_schema.energy.construction",
+        "WindowConstructionDynamicAbridged": "honeybee_schema.energy.construction",
         "WindowConstructionShade": "honeybee_schema.energy.construction",
         "WindowConstructionShadeAbridged": "honeybee_schema.energy.construction",
         "_AllAirBase": "honeybee_schema.energy.hvac.allair",
