@@ -9,11 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.action == 'honeybee_schema_release'
     steps:
+
     - name: "Checkout Master Branch"
       uses: actions/checkout@v2
       with:
         ref: refs/heads/master
         token: ${{ secrets.DEPS_UPDATING }}
+        
     - name: "Run Update Script"
       env:
         VERSION: ${{ github.event.client_payload.version }}
@@ -21,7 +23,7 @@ jobs:
         export CLEAN_VERSION=$(echo $VERSION | sed 's/v//g')
         sed -i --regexp-extended 's/(honeybee-schema==).*/honeybee-schema=='"$CLEAN_VERSION"'/' requirements.txt
 
-     - name: Set up Java
+    - name: Set up Java
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
