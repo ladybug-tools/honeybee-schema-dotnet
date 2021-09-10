@@ -15,7 +15,18 @@ namespace HoneybeeSchema
 				return _default.DuplicateModelRadianceProperties(); 
 			}
 		}
-        public IEnumerable<Radiance.IModifier> ModifierList => this.Modifiers?.OfType<Radiance.IModifier>();
+
+		private static ModelRadianceProperties _userLib;
+
+		public static ModelRadianceProperties UserLib
+		{
+			get
+			{
+				_userLib = _userLib ?? Helper.EnergyLibrary.UserRadianceLibrary;
+				return _default.DuplicateModelRadianceProperties();
+			}
+		}
+		public IEnumerable<Radiance.IModifier> ModifierList => this.Modifiers?.OfType<Radiance.IModifier>();
         public IEnumerable<Radiance.IBuildingModifierSet> ModifierSetList => this.ModifierSets?.OfType<Radiance.IBuildingModifierSet>();
 
         public void MergeWith(ModelRadianceProperties other)

@@ -61,6 +61,26 @@ namespace HoneybeeSchema.Helper
         public static string ConstructionSetFolder => Path.Combine(EnergyStandardsFolder, "constructionsets");
         public static string ScheduleFolder => Path.Combine(EnergyStandardsFolder, "schedules");
 
+        private static ModelEnergyProperties _standardEnergyLibrary;
+        public static ModelEnergyProperties StandardEnergyLibrary
+        {
+            get
+            {
+                if (_standardEnergyLibrary == null)
+                {
+                    var eng = new ModelEnergyProperties();
+                    eng.AddMaterials(StandardsOpaqueMaterials.Values);
+                    eng.AddMaterials(StandardsWindowMaterials.Values);
+                    eng.AddConstructions(StandardsOpaqueConstructions.Values);
+                    eng.AddConstructions(StandardsWindowConstructions.Values);
+                    eng.AddConstructionSets(StandardsConstructionSets.Values);
+                    eng.AddProgramTypes(StandardsProgramTypes.Values);
+                    eng.AddSchedules(StandardsSchedules.Values);
+                    _standardEnergyLibrary = eng;
+                }
+                return _standardEnergyLibrary;
+            }
+        }
        
         //BuildingVintages 2004, 2007, 2010, 2013, etc..
         private static IEnumerable<string> _buildingVintages;

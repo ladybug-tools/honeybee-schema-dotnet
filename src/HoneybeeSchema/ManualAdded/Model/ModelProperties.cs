@@ -21,6 +21,41 @@ namespace HoneybeeSchema
 			}
 		}
 
+		private static ModelProperties _userLib;
+
+		public static ModelProperties UserLib
+		{
+			get
+			{
+				if (_userLib == null)
+				{
+					_userLib = new ModelProperties(
+						Helper.EnergyLibrary.UserEnergyLibrary,
+						Helper.EnergyLibrary.UserRadianceLibrary
+						);
+				}
+
+				return _userLib.DuplicateModelProperties();
+			}
+		}
+
+		private static ModelProperties _standardLib;
+
+		public static ModelProperties StandardLib
+		{
+			get
+			{
+				if (_standardLib == null)
+				{
+					_standardLib = new ModelProperties(
+						Helper.EnergyLibrary.StandardEnergyLibrary,
+						null
+						);
+				}
+
+				return _standardLib;
+			}
+		}
 		public void MergeWith(ModelProperties other)
         {
 			if (other == null) return;

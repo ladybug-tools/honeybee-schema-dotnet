@@ -7,7 +7,6 @@ namespace HoneybeeSchema
     partial class ModelEnergyProperties
     {
 		private static ModelEnergyProperties _default;
-
 		public static ModelEnergyProperties Default
 		{
 			get 
@@ -16,6 +15,28 @@ namespace HoneybeeSchema
 				return _default.DuplicateModelEnergyProperties(); 
 			}
 		}
+
+		private static ModelEnergyProperties _userLib;
+		public static ModelEnergyProperties UserLib
+		{
+			get
+			{
+				_userLib = _userLib ?? Helper.EnergyLibrary.UserEnergyLibrary;
+				return _userLib.DuplicateModelEnergyProperties();
+			}
+		}
+
+		private static ModelEnergyProperties _standardLib;
+
+		public static ModelEnergyProperties StandardLib
+		{
+			get
+			{
+				_standardLib = _standardLib ?? Helper.EnergyLibrary.StandardEnergyLibrary;
+				return _standardLib;
+			}
+		}
+
 		public void MergeWith(ModelEnergyProperties other)
         {
 			if (other == null) return;
