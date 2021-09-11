@@ -129,23 +129,7 @@ namespace HoneybeeSchema.Helper
             if (!found)
                 throw new ArgumentException($"Cannot find {standardProgramType}");
 
-            var scheduleNames = new List<string>()
-            {
-                programType.People?.ActivitySchedule,
-                programType.People?.OccupancySchedule,
-                programType.Lighting?.Schedule,
-                programType.ElectricEquipment?.Schedule,
-                programType.GasEquipment?.Schedule,
-                programType.Ventilation?.Schedule,
-                programType.Infiltration?.Schedule,
-                programType.Setpoint?.CoolingSchedule,
-                programType.Setpoint?.HeatingSchedule,
-                programType.Setpoint?.DehumidifyingSchedule,
-                programType.Setpoint?.HumidifyingSchedule,
-                programType.ServiceHotWater?.Schedule
-            };
-            scheduleNames.RemoveAll(string.IsNullOrWhiteSpace);
-
+            var scheduleNames = programType.GetAllSchedules();
             var sches = scheduleNames.Select(_ => StandardsSchedules[_]).ToList();
             return (programType, sches);
 
@@ -153,6 +137,15 @@ namespace HoneybeeSchema.Helper
 
         // "2004::ClimateZone1::SteelFramed"
         public static (ConstructionSetAbridged constructionSet, IEnumerable<IConstruction> constructions, IEnumerable<IMaterial> materials) GetStandardConstructionSetByIdentifier(string standardConstructionSet)
+        {
+            var resources = GetResourcesByStandardConstructionSetIdentifier(standardConstructionSet);
+            var cSet = resources.ConstructionSets.OfType<ConstructionSetAbridged>().FirstOrDefault();
+            var constructions = resources.ConstructionList;
+            var materials = resources.MaterialList;
+            return (cSet, constructions, materials);
+
+        }
+        public static ModelEnergyProperties GetResourcesByStandardConstructionSetIdentifier(string standardConstructionSet)
         {
             var year = standardConstructionSet.Split(':').First();
             if (string.IsNullOrEmpty(year))
@@ -163,64 +156,37 @@ namespace HoneybeeSchema.Helper
                 throw new ArgumentException($"Cannot find {standardConstructionSet}");
 
             // get constructions
-            var opaqueNames = new List<string>()
+            var cNames = cSet.GetAllConstructions();
+
+            var constructions = cNames.Select(_ =>
+            {
+                IConstruction con = null;
+                if (StandardsOpaqueConstructions.TryGetValue(_, out var opaque))
+                    con = opaque;
+                else if (StandardsWindowConstructions.TryGetValue(_, out var window))
+                    con = window;
+                //TODO: Shade, AirBoundary, WindowDynamic
+                return con;
+            });
+
+            var materials = constructions
+                .SelectMany(_ => _.GetAbridgedConstructionMaterials())
+                .Select(_ =>
                 {
-                    cSet.WallSet?.ExteriorConstruction,
-                    cSet.WallSet?.GroundConstruction,
-                    cSet.WallSet?.InteriorConstruction,
+                    IMaterial mat = null;
+                    if (StandardsOpaqueMaterials.TryGetValue(_, out var opaque))
+                        mat = opaque;
+                    else if (StandardsWindowMaterials.TryGetValue(_, out var window))
+                        mat = window;
+                    return mat;
+                });
 
-                    cSet.FloorSet?.ExteriorConstruction,
-                    cSet.FloorSet?.GroundConstruction,
-                    cSet.FloorSet?.InteriorConstruction,
+            var res = new ModelEnergyProperties();
+            res.AddConstructionSet(cSet);
+            res.AddConstructions(constructions);
+            res.AddMaterials(materials);
 
-                    cSet.RoofCeilingSet?.ExteriorConstruction,
-                    cSet.RoofCeilingSet?.GroundConstruction,
-                    cSet.RoofCeilingSet?.InteriorConstruction,
-
-                    cSet.DoorSet?.ExteriorConstruction,
-                    cSet.DoorSet?.InteriorConstruction,
-                    cSet.DoorSet?.OverheadConstruction,
-                };
-            opaqueNames.RemoveAll(string.IsNullOrWhiteSpace);
-
-            var windowNames = new List<string>()
-                {
-                    cSet.ApertureSet?.OperableConstruction,
-                    cSet.ApertureSet?.WindowConstruction,
-                    cSet.ApertureSet?.SkylightConstruction,
-                    cSet.ApertureSet?.InteriorConstruction,
-
-                    cSet.DoorSet?.ExteriorGlassConstruction,
-                    cSet.DoorSet?.InteriorGlassConstruction,
-                };
-            windowNames.RemoveAll(string.IsNullOrWhiteSpace);
-
-            var shadeNames = new List<string>()
-                {
-                    cSet.ShadeConstruction
-                };
-            shadeNames.RemoveAll(string.IsNullOrWhiteSpace);
-
-            var airBoundaryNames = new List<string>()
-                {
-                    cSet.AirBoundaryConstruction
-                };
-            airBoundaryNames.RemoveAll(string.IsNullOrWhiteSpace);
-
-            var opaqueConstructions = opaqueNames.Select(_ => StandardsOpaqueConstructions[_]);
-            var windConstructions = windowNames.Select(_ => StandardsWindowConstructions[_]);
-            //TODO: Shade, AirBoundary
-
-
-            // get materials
-            var opaMaterials = opaqueConstructions.SelectMany(_ => _.Materials).Select(_ => StandardsOpaqueMaterials[_]);
-            var winMaterials = windConstructions.SelectMany(_ => _.Materials).Select(_ => StandardsWindowMaterials[_]);
-
-
-            var constrs = opaqueConstructions.OfType<IConstruction>().Concat(windConstructions);
-            var mats = opaMaterials.Concat(winMaterials);
-
-            return (cSet, constrs, mats);
+            return res;
 
         }
 

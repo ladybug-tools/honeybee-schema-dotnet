@@ -394,6 +394,113 @@ namespace HoneybeeSchema
                 modelRadianceCollection.AddModifierSet(item);
             }
         }
+
+        public static List<string> GetAllConstructions(this ConstructionSetAbridged cSet)
+        {
+            // get constructions
+            var cNames = new List<string>()
+                {
+                    cSet.WallSet?.ExteriorConstruction,
+                    cSet.WallSet?.GroundConstruction,
+                    cSet.WallSet?.InteriorConstruction,
+
+                    cSet.FloorSet?.ExteriorConstruction,
+                    cSet.FloorSet?.GroundConstruction,
+                    cSet.FloorSet?.InteriorConstruction,
+
+                    cSet.RoofCeilingSet?.ExteriorConstruction,
+                    cSet.RoofCeilingSet?.GroundConstruction,
+                    cSet.RoofCeilingSet?.InteriorConstruction,
+
+                    cSet.DoorSet?.ExteriorConstruction,
+                    cSet.DoorSet?.ExteriorGlassConstruction,
+                    cSet.DoorSet?.InteriorGlassConstruction,
+                    cSet.DoorSet?.InteriorConstruction,
+                    cSet.DoorSet?.OverheadConstruction,
+
+                    cSet.ApertureSet?.OperableConstruction,
+                    cSet.ApertureSet?.WindowConstruction,
+                    cSet.ApertureSet?.SkylightConstruction,
+                    cSet.ApertureSet?.InteriorConstruction,
+
+                    cSet.ShadeConstruction,
+                    cSet.AirBoundaryConstruction,
+
+                };
+            cNames.RemoveAll(string.IsNullOrWhiteSpace);
+            return cNames;
+        }
+        public static List<string> GetAbridgedConstructionMaterials(this IConstruction construction)
+        {
+            var matNames = new List<string>();
+            var c = construction;
+            if (c is OpaqueConstructionAbridged opq)
+                matNames = opq.Materials;
+            else if (c is WindowConstructionAbridged win)
+                matNames = win.Materials;
+            else if (c is WindowConstructionDynamicAbridged windD)
+                matNames = windD.Constructions.SelectMany(_ => _.Materials).ToList();
+            else if (c is AirBoundaryConstructionAbridged air)
+            {
+            }
+            return matNames;
+        }
+        public static List<string> GetAllSchedules(this ProgramTypeAbridged programType)
+        {
+            var scheduleNames = new List<string>()
+            {
+                programType.People?.ActivitySchedule,
+                programType.People?.OccupancySchedule,
+                programType.Lighting?.Schedule,
+                programType.ElectricEquipment?.Schedule,
+                programType.GasEquipment?.Schedule,
+                programType.Ventilation?.Schedule,
+                programType.Infiltration?.Schedule,
+                programType.Setpoint?.CoolingSchedule,
+                programType.Setpoint?.HeatingSchedule,
+                programType.Setpoint?.DehumidifyingSchedule,
+                programType.Setpoint?.HumidifyingSchedule,
+                programType.ServiceHotWater?.Schedule
+            };
+            scheduleNames.RemoveAll(string.IsNullOrWhiteSpace);
+            return scheduleNames;
+        }
+
+        public static List<string> GetAllModifiers(this ModifierSetAbridged modifierSet)
+        {
+            var names = new List<string>()
+            {
+                modifierSet.AirBoundaryModifier,
+
+                modifierSet.ApertureSet?.InteriorModifier,
+                modifierSet.ApertureSet?.OperableModifier,
+                modifierSet.ApertureSet?.SkylightModifier,
+                modifierSet.ApertureSet?.WindowModifier,
+
+                modifierSet.DoorSet?.InteriorModifier,
+                modifierSet.DoorSet?.InteriorGlassModifier,
+                modifierSet.DoorSet?.OverheadModifier,
+                modifierSet.DoorSet?.ExteriorGlassModifier,
+                modifierSet.DoorSet?.ExteriorModifier,
+
+                modifierSet.FloorSet?.ExteriorModifier,
+                modifierSet.FloorSet?.InteriorModifier,
+
+                modifierSet.RoofCeilingSet?.ExteriorModifier,
+                modifierSet.RoofCeilingSet?.InteriorModifier,
+
+                modifierSet.ShadeSet?.ExteriorModifier,
+                modifierSet.ShadeSet?.InteriorModifier,
+
+                modifierSet.WallSet?.ExteriorModifier,
+                modifierSet.WallSet?.InteriorModifier,
+
+            };
+            names.RemoveAll(string.IsNullOrWhiteSpace);
+            return names;
+        }
+
+
     }
 
 }
