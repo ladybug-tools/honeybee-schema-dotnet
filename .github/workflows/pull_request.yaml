@@ -15,4 +15,55 @@ jobs:
         working-directory: src/HoneybeeSchema.Tests
         run: |
           dotnet test --configuration Release
+          name: Pull_Request_Tests
+
+on: 
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: "Checkout Master Branch"
+        uses: actions/checkout@v2
+
+      - name: Run Unit Tests
+        working-directory: src/HoneybeeSchema.Tests
+        run: |
+          dotnet test --configuration Release
+          name: Pull_Request_Tests
+
+on: 
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: "Checkout Master Branch"
+        uses: actions/checkout@v2
+
+      - name: Run Unit Tests
+        working-directory: src/HoneybeeSchema.Tests
+        run: |
+          dotnet test --configuration Release
+          name: Pull_Request_Tests
+
+on: 
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: "Checkout Master Branch"
+        uses: actions/checkout@v2
+
+      - name: Run Unit Tests
+        working-directory: src/HoneybeeSchema.Tests
+        run: |
+          dotnet test --configuration Release
           

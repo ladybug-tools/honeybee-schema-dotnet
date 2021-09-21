@@ -41,3 +41,132 @@ jobs:
           dotnet nuget push bin\Release\HoneybeeSchema.*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
 
 
+name: CD
+
+on: 
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: "Checkout Master Branch"
+        uses: actions/checkout@v2
+
+      - name: Update Assembly Version
+        run: |
+          python .openapi-generator/update_assembly_version.py
+      
+      - name: Create key pair for signing the assembly
+        working-directory: src/HoneybeeSchema
+        run: |
+          "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\sn.exe" -k HoneybeeSchema.snk
+          ls
+        shell: cmd
+
+      - name: Build
+        run: |
+          dotnet restore
+          
+          dotnet build --configuration Release 
+
+      - name: Run Unit Tests
+        working-directory: src/HoneybeeSchema.Tests
+        run: |
+          dotnet test --configuration Release
+          
+      - name: Deploy
+        working-directory: src/HoneybeeSchema
+        run: |
+          dotnet pack --configuration Release
+          dotnet nuget push bin\Release\HoneybeeSchema.*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
+
+
+name: CD
+
+on: 
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: "Checkout Master Branch"
+        uses: actions/checkout@v2
+
+      - name: Update Assembly Version
+        run: |
+          python .openapi-generator/update_assembly_version.py
+      
+      - name: Create key pair for signing the assembly
+        working-directory: src/HoneybeeSchema
+        run: |
+          "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\sn.exe" -k HoneybeeSchema.snk
+          ls
+        shell: cmd
+
+      - name: Build
+        run: |
+          dotnet restore
+          
+          dotnet build --configuration Release 
+
+      - name: Run Unit Tests
+        working-directory: src/HoneybeeSchema.Tests
+        run: |
+          dotnet test --configuration Release
+          
+      - name: Deploy
+        working-directory: src/HoneybeeSchema
+        run: |
+          dotnet pack --configuration Release
+          dotnet nuget push bin\Release\HoneybeeSchema.*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
+
+
+name: CD
+
+on: 
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: "Checkout Master Branch"
+        uses: actions/checkout@v2
+
+      - name: Update Assembly Version
+        run: |
+          python .openapi-generator/update_assembly_version.py
+      
+      - name: Create key pair for signing the assembly
+        working-directory: src/HoneybeeSchema
+        run: |
+          "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\sn.exe" -k HoneybeeSchema.snk
+          ls
+        shell: cmd
+
+      - name: Build
+        run: |
+          dotnet restore
+          
+          dotnet build --configuration Release 
+
+      - name: Run Unit Tests
+        working-directory: src/HoneybeeSchema.Tests
+        run: |
+          dotnet test --configuration Release
+          
+      - name: Deploy
+        working-directory: src/HoneybeeSchema
+        run: |
+          dotnet pack --configuration Release
+          dotnet nuget push bin\Release\HoneybeeSchema.*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
+
+
