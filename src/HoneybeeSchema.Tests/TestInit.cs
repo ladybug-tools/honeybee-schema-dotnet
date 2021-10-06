@@ -3,7 +3,6 @@ using NUnit.Framework;
 using System;
 using System.IO;
 using System.Net;
-using Newtonsoft;
 using System.IO.Compression;
 
 namespace HoneybeeSchema.Test
@@ -30,7 +29,7 @@ namespace HoneybeeSchema.Test
                 //wc.Headers.Add("Accept", "application/vnd.github.v3+json");
                 var json = wc.DownloadString(releaseJson);
 
-                var obj = Newtonsoft.Json.Linq.JObject.Parse(json);
+                var obj = LBTNewtonsoft.Newtonsoft.Json.Linq.JObject.Parse(json);
                 var zipUrl = obj["zipball_url"].ToString();
 
                 var zipfile = Path.Combine(temp, "standard.zip");

@@ -10,15 +10,10 @@
 
 
 using NUnit.Framework;
-
-using System;
 using System.Linq;
-using System.IO;
 using System.Collections.Generic;
 
 using HB = HoneybeeSchema;
-using System.Reflection;
-using Newtonsoft.Json;
 using System.Net;
 
 namespace HoneybeeSchema.Test
