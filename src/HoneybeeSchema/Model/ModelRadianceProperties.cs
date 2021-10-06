@@ -68,7 +68,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Global Radiance modifier set.</value>
         [DataMember(Name = "global_modifier_set")]
-        public GlobalModifierSet GlobalModifierSet { get; protected set; } 
+        public GlobalModifierSet GlobalModifierSet { get; protected set; } = GlobalModifierSet.Default;
 
         /// <summary>
         /// A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set.
