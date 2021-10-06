@@ -896,39 +896,16 @@ namespace HoneybeeSchema.Helper
             else
             {
                 // windows
-                var foundPath = string.Empty;
-                var scr = @"/C REG QUERY HKEY_CURRENT_USER\SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL /s /v InstallLocation" + " | findstr \"ladybug_tools\"";
-                //Registry.LocalMachine
-                var startInfo = new System.Diagnostics.ProcessStartInfo();
-                startInfo.CreateNoWindow = false;
-                startInfo.UseShellExecute = false;
-                startInfo.FileName = "cmd.exe";
-                startInfo.Arguments = scr;
-                startInfo.RedirectStandardOutput = true;
+                // check if there is a config in the folder
+                var foundPath = SettingConfig.GetSavedSettings().LBTRootFolder;
 
-                using (var exeProcess = new System.Diagnostics.Process())
-                {
-                    exeProcess.StartInfo = startInfo;
-                    exeProcess.Start();
-                    exeProcess.WaitForExit();
-                    string outputs = exeProcess.StandardOutput.ReadToEnd().Trim();
+                // find it from registry
+                if (string.IsNullOrEmpty(foundPath))
+                    foundPath = GetLBTRootFromRegistry();
 
-                    exeProcess.Close();
-                    if (string.IsNullOrEmpty(outputs))
-                    {
-                        startInfo.Arguments = @"/C REG QUERY HKLM\SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL /s /v InstallLocation" + " | findstr \"ladybug_tools\"";
-                        exeProcess.StartInfo = startInfo;
-                        exeProcess.Start();
-                        exeProcess.WaitForExit();
-                        outputs = exeProcess.StandardOutput.ReadToEnd().Trim();
-                    }
-                    foundPath = outputs;
-                }
-
-                
+                // create a new ladybug_tools folder under user dir
                 if (string.IsNullOrEmpty(foundPath))
                 {
-                    // create a new ladybug_tools folder under user dir
                     var userDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
                     foundPath = Directory.GetDirectories(userDir, "*ladybug_tools*", SearchOption.TopDirectoryOnly).FirstOrDefault();
                     if (!Directory.Exists(foundPath))
@@ -936,13 +913,6 @@ namespace HoneybeeSchema.Helper
                         foundPath = Path.Combine(userDir, "ladybug_tools");
                         Directory.CreateDirectory(foundPath);
                     }
-
-                }
-                else
-                {
-                    // get from installer's registry
-                    // InstallLocation    REG_SZ    C:\Users\mingo\ladybug_tools test
-                    foundPath = foundPath.Split(new[] { "REG_SZ" }, StringSplitOptions.RemoveEmptyEntries).Last().Trim();
 
                 }
 
@@ -956,6 +926,48 @@ namespace HoneybeeSchema.Helper
 
         }
 
+        private static string GetLBTRootFromRegistry()
+        {
+            // windows
+            var foundPath = string.Empty;
+            var scr = @"/C REG QUERY HKEY_CURRENT_USER\SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL /s /v InstallLocation" + " | findstr \"ladybug_tools\"";
+            //Registry.LocalMachine
+            var startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.CreateNoWindow = false;
+            startInfo.UseShellExecute = false;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = scr;
+            startInfo.RedirectStandardOutput = true;
+
+            using (var exeProcess = new System.Diagnostics.Process())
+            {
+                exeProcess.StartInfo = startInfo;
+                exeProcess.Start();
+                exeProcess.WaitForExit();
+                string outputs = exeProcess.StandardOutput.ReadToEnd().Trim();
+
+                exeProcess.Close();
+                if (string.IsNullOrEmpty(outputs))
+                {
+                    startInfo.Arguments = @"/C REG QUERY HKLM\SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL /s /v InstallLocation" + " | findstr \"ladybug_tools\"";
+                    exeProcess.StartInfo = startInfo;
+                    exeProcess.Start();
+                    exeProcess.WaitForExit();
+                    outputs = exeProcess.StandardOutput.ReadToEnd().Trim();
+                }
+                foundPath = outputs;
+            }
+
+
+            if (!string.IsNullOrEmpty(foundPath))
+            {
+                // get from installer's registry
+                // InstallLocation    REG_SZ    C:\Users\mingo\ladybug_tools test
+                foundPath = foundPath.Split(new[] { "REG_SZ" }, StringSplitOptions.RemoveEmptyEntries).Last().Trim();
+            }
+
+            return foundPath;
+        }
         public static HB.Energy.IBuildingConstructionset GetConstructionSetByIdentifier(string identifier)
         {
             // TODO: change it to all construction set collection bucket
@@ -1069,6 +1081,45 @@ namespace HoneybeeSchema.Helper
 
         #endregion
 
+
+        public class SettingConfig
+        {
+            public string LBTRootFolder { get; set; }
+            public static string SettingPath => Path.Combine(ApplicationRoot, "settings.txt");
+            public static string ApplicationRoot => IsMac ?
+                Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(typeof(SettingConfig).Assembly.Location))))) :
+                Path.GetDirectoryName(typeof(SettingConfig).Assembly.Location);
+            public static bool IsMac => System.Environment.OSVersion.Platform == PlatformID.Unix;
+            public SettingConfig()
+            {
+                this.LBTRootFolder = string.Empty;
+            }
+
+            public static SettingConfig GetSavedSettings()
+            {
+                SettingConfig settings = null;
+                if (File.Exists(SettingPath))
+                {
+                    var text = File.ReadAllText(SettingPath);
+                    settings = Newtonsoft.Json.JsonConvert.DeserializeObject<SettingConfig>(text);
+                }
+                else
+                {
+                    settings = new SettingConfig();
+                    //settings.LBTRootFolder = @"C:\Users\mingo\ladybug_tools_revit";
+                    settings.SaveSettings();
+                }
+
+                return settings;
+            }
+
+            public bool SaveSettings()
+            {
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject(this);
+                File.WriteAllText(SettingPath, json);
+                return File.Exists(SettingPath);
+            }
+        }
 
     }
 
