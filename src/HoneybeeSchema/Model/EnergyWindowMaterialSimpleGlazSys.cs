@@ -48,11 +48,12 @@ namespace HoneybeeSchema
         /// <param name="vt">The fraction of visible light falling on the window that makes it through the glass at normal incidence. (default to 0.54D).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public EnergyWindowMaterialSimpleGlazSys
         (
             string identifier, double uFactor, double shgc, // Required parameters
-            string displayName= default, double vt = 0.54D// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+            string displayName= default, Object userData= default, double vt = 0.54D// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             this.UFactor = uFactor;
             this.Shgc = shgc;
@@ -115,6 +116,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(UserData).Append("\n");
             sb.Append("  UFactor: ").Append(UFactor).Append("\n");
             sb.Append("  Shgc: ").Append(Shgc).Append("\n");
             sb.Append("  Vt: ").Append(Vt).Append("\n");

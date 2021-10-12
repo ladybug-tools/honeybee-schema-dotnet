@@ -63,11 +63,12 @@ namespace HoneybeeSchema
         /// <param name="schedule">An optional ScheduleRuleset or ScheduleFixedInterval to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction..</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public WindowConstructionShade
         (
             string identifier, WindowConstruction windowConstruction, AnyOf<EnergyWindowMaterialShade,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing> shadeMaterial, // Required parameters
-            string displayName= default, ShadeLocation shadeLocation= ShadeLocation.Interior, ControlType controlType= ControlType.AlwaysOn, double setpoint= default, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+            string displayName= default, Object userData= default, ShadeLocation shadeLocation= ShadeLocation.Interior, ControlType controlType= ControlType.AlwaysOn, double setpoint= default, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             // to ensure "windowConstruction" is required (not null)
             this.WindowConstruction = windowConstruction ?? throw new ArgumentNullException("windowConstruction is a required property for WindowConstructionShade and cannot be null");
@@ -141,6 +142,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(UserData).Append("\n");
             sb.Append("  WindowConstruction: ").Append(WindowConstruction).Append("\n");
             sb.Append("  ShadeMaterial: ").Append(ShadeMaterial).Append("\n");
             sb.Append("  ShadeLocation: ").Append(ShadeLocation).Append("\n");

@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Documentation for Honeybee simulation-parameter schema",
-        "version": "1.45.0",
+        "version": "1.45.1",
         "title": "Honeybee Simulation Parameter Schema",
         "contact": {
             "name": "Ladybug Tools",
@@ -179,6 +179,61 @@
     "paths": {},
     "components": {
         "schemas": {
+            "SimulationControl": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "title": "Type",
+                                "default": "SimulationControl",
+                                "pattern": "^SimulationControl$",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "do_zone_sizing": {
+                                "title": "Do Zone Sizing",
+                                "description": "Boolean for whether the zone sizing calculation should be run.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "do_system_sizing": {
+                                "title": "Do System Sizing",
+                                "description": "Boolean for whether the system sizing calculation should be run.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "do_plant_sizing": {
+                                "title": "Do Plant Sizing",
+                                "description": "Boolean for whether the plant sizing calculation should be run.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "run_for_run_periods": {
+                                "title": "Run For Run Periods",
+                                "description": "Boolean for whether the simulation should be run for the sizing periods.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "run_for_sizing_periods": {
+                                "title": "Run For Sizing Periods",
+                                "description": "Boolean for whether the simulation should be run for the run periods.",
+                                "default": false,
+                                "type": "boolean"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "SimulationControl",
+                "description": "Used to specify which types of calculations to run.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
             "DaylightSavingTime": {
                 "allOf": [
                     {
@@ -230,6 +285,79 @@
                 ],
                 "title": "DaylightSavingTime",
                 "description": "Used to describe the daylight savings time for the simulation.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "ReportingFrequency": {
+                "title": "ReportingFrequency",
+                "description": "An enumeration.",
+                "enum": [
+                    "Timestep",
+                    "Hourly",
+                    "Daily",
+                    "Monthly",
+                    "Annual"
+                ],
+                "type": "string"
+            },
+            "SimulationOutput": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "title": "Type",
+                                "default": "SimulationOutput",
+                                "pattern": "^SimulationOutput$",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "reporting_frequency": {
+                                "default": "Hourly",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/ReportingFrequency"
+                                    }
+                                ]
+                            },
+                            "include_sqlite": {
+                                "title": "Include Sqlite",
+                                "description": "Boolean to note whether a SQLite report should be requested from the simulation.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "include_html": {
+                                "title": "Include Html",
+                                "description": "Boolean to note whether an HTML report should be requested from the simulation.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "outputs": {
+                                "title": "Outputs",
+                                "description": "A list of EnergyPlus output names as strings, which are requested from the simulation.",
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "summary_reports": {
+                                "title": "Summary Reports",
+                                "description": "A list of EnergyPlus summary report names as strings.",
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "SimulationOutput",
+                "description": "Lists the outputs to report from the simulation and their format.",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -341,19 +469,37 @@
                     "propertyName": "type"
                 }
             },
-            "ReportingFrequency": {
-                "title": "ReportingFrequency",
+            "SolarDistribution": {
+                "title": "SolarDistribution",
                 "description": "An enumeration.",
                 "enum": [
-                    "Timestep",
-                    "Hourly",
-                    "Daily",
-                    "Monthly",
-                    "Annual"
+                    "MinimalShadowing",
+                    "FullExterior",
+                    "FullInteriorAndExterior",
+                    "FullExteriorWithReflections",
+                    "FullInteriorAndExteriorWithReflections"
                 ],
                 "type": "string"
             },
-            "SimulationOutput": {
+            "CalculationMethod": {
+                "title": "CalculationMethod",
+                "description": "An enumeration.",
+                "enum": [
+                    "PolygonClipping",
+                    "PixelCounting"
+                ],
+                "type": "string"
+            },
+            "CalculationUpdateMethod": {
+                "title": "CalculationUpdateMethod",
+                "description": "An enumeration.",
+                "enum": [
+                    "Periodic",
+                    "Timestep"
+                ],
+                "type": "string"
+            },
+            "ShadowCalculation": {
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
@@ -363,153 +509,59 @@
                         "properties": {
                             "type": {
                                 "title": "Type",
-                                "default": "SimulationOutput",
-                                "pattern": "^SimulationOutput$",
+                                "default": "ShadowCalculation",
+                                "pattern": "^ShadowCalculation$",
                                 "type": "string",
                                 "readOnly": true
                             },
-                            "reporting_frequency": {
-                                "default": "Hourly",
+                            "solar_distribution": {
+                                "default": "FullExteriorWithReflections",
                                 "allOf": [
                                     {
-                                        "$ref": "#/components/schemas/ReportingFrequency"
+                                        "$ref": "#/components/schemas/SolarDistribution"
                                     }
                                 ]
                             },
-                            "include_sqlite": {
-                                "title": "Include Sqlite",
-                                "description": "Boolean to note whether a SQLite report should be requested from the simulation.",
-                                "default": true,
-                                "type": "boolean"
+                            "calculation_method": {
+                                "description": "Text noting whether CPU-based polygon clipping method orGPU-based pixel counting method should be used. For low numbers of shadingsurfaces (less than ~200), PolygonClipping requires less runtime thanPixelCounting. However, PixelCounting runtime scales significantlybetter at higher numbers of shading surfaces. PixelCounting also hasno limitations related to zone concavity when used with any\u201cFullInterior\u201d solar distribution options.",
+                                "default": "PolygonClipping",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/CalculationMethod"
+                                    }
+                                ]
                             },
-                            "include_html": {
-                                "title": "Include Html",
-                                "description": "Boolean to note whether an HTML report should be requested from the simulation.",
-                                "default": true,
-                                "type": "boolean"
+                            "calculation_update_method": {
+                                "description": "Text describing how often the solar and shading calculations are updated with respect to the flow of time in the simulation.",
+                                "default": "Periodic",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/CalculationUpdateMethod"
+                                    }
+                                ]
                             },
-                            "outputs": {
-                                "title": "Outputs",
-                                "description": "A list of EnergyPlus output names as strings, which are requested from the simulation.",
-                                "type": "array",
-                                "items": {
-                                    "type": "string"
-                                }
+                            "calculation_frequency": {
+                                "title": "Calculation Frequency",
+                                "description": "Integer for the number of days in each period for which a unique shadow calculation will be performed. This field is only used if the Periodic calculation_method is used.",
+                                "default": 30,
+                                "minimum": 1,
+                                "type": "integer",
+                                "format": "int32"
                             },
-                            "summary_reports": {
-                                "title": "Summary Reports",
-                                "description": "A list of EnergyPlus summary report names as strings.",
-                                "type": "array",
-                                "items": {
-                                    "type": "string"
-                                }
+                            "maximum_figures": {
+                                "title": "Maximum Figures",
+                                "description": "Number of allowable figures in shadow overlap calculations.",
+                                "default": 15000,
+                                "minimum": 200,
+                                "type": "integer",
+                                "format": "int32"
                             }
                         },
                         "additionalProperties": false
                     }
                 ],
-                "title": "SimulationOutput",
-                "description": "Lists the outputs to report from the simulation and their format.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "WindCondition": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "wind_speed": {
-                                "title": "Wind Speed",
-                                "description": "Wind speed on the design day [m/s].",
-                                "minimum": 0,
-                                "maximum": 40,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "WindCondition",
-                                "pattern": "^WindCondition$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "wind_direction": {
-                                "title": "Wind Direction",
-                                "description": "Wind direction on the design day [degrees].",
-                                "default": 0,
-                                "minimum": 0,
-                                "maximum": 360,
-                                "type": "number",
-                                "format": "double"
-                            }
-                        },
-                        "required": [
-                            "wind_speed"
-                        ],
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "WindCondition",
-                "description": "Used to specify wind conditions on a design day.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "SimulationControl": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "title": "Type",
-                                "default": "SimulationControl",
-                                "pattern": "^SimulationControl$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "do_zone_sizing": {
-                                "title": "Do Zone Sizing",
-                                "description": "Boolean for whether the zone sizing calculation should be run.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "do_system_sizing": {
-                                "title": "Do System Sizing",
-                                "description": "Boolean for whether the system sizing calculation should be run.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "do_plant_sizing": {
-                                "title": "Do Plant Sizing",
-                                "description": "Boolean for whether the plant sizing calculation should be run.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "run_for_run_periods": {
-                                "title": "Run For Run Periods",
-                                "description": "Boolean for whether the simulation should be run for the sizing periods.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "run_for_sizing_periods": {
-                                "title": "Run For Sizing Periods",
-                                "description": "Boolean for whether the simulation should be run for the run periods.",
-                                "default": false,
-                                "type": "boolean"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "SimulationControl",
-                "description": "Used to specify which types of calculations to run.",
+                "title": "ShadowCalculation",
+                "description": "Used to describe settings for EnergyPlus shadow calculation.",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -642,6 +694,51 @@
                 ],
                 "title": "HumidityCondition",
                 "description": "Used to specify humidity conditions on a design day.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "WindCondition": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "wind_speed": {
+                                "title": "Wind Speed",
+                                "description": "Wind speed on the design day [m/s].",
+                                "minimum": 0,
+                                "maximum": 40,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "WindCondition",
+                                "pattern": "^WindCondition$",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "wind_direction": {
+                                "title": "Wind Direction",
+                                "description": "Wind direction on the design day [degrees].",
+                                "default": 0,
+                                "minimum": 0,
+                                "maximum": 360,
+                                "type": "number",
+                                "format": "double"
+                            }
+                        },
+                        "required": [
+                            "wind_speed"
+                        ],
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "WindCondition",
+                "description": "Used to specify wind conditions on a design day.",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -853,103 +950,6 @@
                 ],
                 "title": "SizingParameter",
                 "description": "Used to specify heating and cooling sizing criteria and safety factors.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "SolarDistribution": {
-                "title": "SolarDistribution",
-                "description": "An enumeration.",
-                "enum": [
-                    "MinimalShadowing",
-                    "FullExterior",
-                    "FullInteriorAndExterior",
-                    "FullExteriorWithReflections",
-                    "FullInteriorAndExteriorWithReflections"
-                ],
-                "type": "string"
-            },
-            "CalculationMethod": {
-                "title": "CalculationMethod",
-                "description": "An enumeration.",
-                "enum": [
-                    "PolygonClipping",
-                    "PixelCounting"
-                ],
-                "type": "string"
-            },
-            "CalculationUpdateMethod": {
-                "title": "CalculationUpdateMethod",
-                "description": "An enumeration.",
-                "enum": [
-                    "Periodic",
-                    "Timestep"
-                ],
-                "type": "string"
-            },
-            "ShadowCalculation": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "title": "Type",
-                                "default": "ShadowCalculation",
-                                "pattern": "^ShadowCalculation$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "solar_distribution": {
-                                "default": "FullExteriorWithReflections",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/SolarDistribution"
-                                    }
-                                ]
-                            },
-                            "calculation_method": {
-                                "description": "Text noting whether CPU-based polygon clipping method orGPU-based pixel counting method should be used. For low numbers of shadingsurfaces (less than ~200), PolygonClipping requires less runtime thanPixelCounting. However, PixelCounting runtime scales significantlybetter at higher numbers of shading surfaces. PixelCounting also hasno limitations related to zone concavity when used with any\u201cFullInterior\u201d solar distribution options.",
-                                "default": "PolygonClipping",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/CalculationMethod"
-                                    }
-                                ]
-                            },
-                            "calculation_update_method": {
-                                "description": "Text describing how often the solar and shading calculations are updated with respect to the flow of time in the simulation.",
-                                "default": "Periodic",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/CalculationUpdateMethod"
-                                    }
-                                ]
-                            },
-                            "calculation_frequency": {
-                                "title": "Calculation Frequency",
-                                "description": "Integer for the number of days in each period for which a unique shadow calculation will be performed. This field is only used if the Periodic calculation_method is used.",
-                                "default": 30,
-                                "minimum": 1,
-                                "type": "integer",
-                                "format": "int32"
-                            },
-                            "maximum_figures": {
-                                "title": "Maximum Figures",
-                                "description": "Number of allowable figures in shadow overlap calculations.",
-                                "default": 15000,
-                                "minimum": 200,
-                                "type": "integer",
-                                "format": "int32"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "ShadowCalculation",
-                "description": "Used to describe settings for EnergyPlus shadow calculation.",
                 "discriminator": {
                     "propertyName": "type"
                 }

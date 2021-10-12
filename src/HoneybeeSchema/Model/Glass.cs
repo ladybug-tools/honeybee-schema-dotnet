@@ -48,7 +48,7 @@ namespace HoneybeeSchema
         /// <param name="rTransmissivity">A value between 0 and 1 for the red channel transmissivity. (default to 0.0D).</param>
         /// <param name="gTransmissivity">A value between 0 and 1 for the green channel transmissivity. (default to 0.0D).</param>
         /// <param name="bTransmissivity">A value between 0 and 1 for the blue channel transmissivity. (default to 0.0D).</param>
-        /// <param name="refractionIndex">A value between 0 and 1 for the index of refraction. (default to 1.52D).</param>
+        /// <param name="refractionIndex">A value greater than 1 for the index of refraction. Typical values are 1.52 for float glass and 1.4 for ETFE. (default to 1.52D).</param>
         /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public Glass
@@ -110,9 +110,9 @@ namespace HoneybeeSchema
         [DataMember(Name = "b_transmissivity")]
         public double BTransmissivity { get; set; }  = 0.0D;
         /// <summary>
-        /// A value between 0 and 1 for the index of refraction.
+        /// A value greater than 1 for the index of refraction. Typical values are 1.52 for float glass and 1.4 for ETFE.
         /// </summary>
-        /// <value>A value between 0 and 1 for the index of refraction.</value>
+        /// <value>A value greater than 1 for the index of refraction. Typical values are 1.52 for float glass and 1.4 for ETFE.</value>
         [DataMember(Name = "refraction_index")]
         public double RefractionIndex { get; set; }  = 1.52D;
 
@@ -321,14 +321,6 @@ namespace HoneybeeSchema
             if(this.BTransmissivity < (double)0)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for BTransmissivity, must be a value greater than or equal to 0.", new [] { "BTransmissivity" });
-            }
-
-
-            
-            // RefractionIndex (double) minimum
-            if(this.RefractionIndex < (double)0)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RefractionIndex, must be a value greater than or equal to 0.", new [] { "RefractionIndex" });
             }
 
 

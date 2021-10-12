@@ -76,7 +76,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Global Energy construction set.</value>
         [DataMember(Name = "global_construction_set")]
-        public GlobalConstructionSet GlobalConstructionSet { get; protected set; } = GlobalConstructionSet.Default;
+        public GlobalConstructionSet GlobalConstructionSet { get; protected set; } 
 
         /// <summary>
         /// List of all unique ConstructionSets in the Model.

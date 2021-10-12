@@ -24,11 +24,11 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Base class for all objects requiring a valid EnergyPlus identifier.
+    /// Base class for all objects requiring an EnergyPlus identifier and user_data.
     /// </summary>
     [Serializable]
     [DataContract(Name = "IDdEnergyBaseModel")]
-    public partial class IDdEnergyBaseModel : OpenAPIGenBaseModel, IEquatable<IDdEnergyBaseModel>, IValidatableObject
+    public partial class IDdEnergyBaseModel : EnergyBaseModel, IEquatable<IDdEnergyBaseModel>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IDdEnergyBaseModel" /> class.
@@ -43,17 +43,16 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="IDdEnergyBaseModel" /> class.
         /// </summary>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         public IDdEnergyBaseModel
         (
-           string identifier, // Required parameters
-           string displayName= default // Optional parameters
-        ) : base()// BaseClass
+            string identifier, // Required parameters
+            string displayName= default, Object userData= default // Optional parameters
+        ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
-            // to ensure "identifier" is required (not null)
-            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for IDdEnergyBaseModel and cannot be null");
-            this.DisplayName = displayName;
+            this.UserData = userData;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "IDdEnergyBaseModel";
@@ -71,17 +70,11 @@ namespace HoneybeeSchema
         public override string Type { get; protected set; }  = "IDdEnergyBaseModel";
 
         /// <summary>
-        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
+        /// Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).
         /// </summary>
-        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
-        [DataMember(Name = "identifier", IsRequired = true)]
-        public string Identifier { get; set; } 
-        /// <summary>
-        /// Display name of the object with no character restrictions.
-        /// </summary>
-        /// <value>Display name of the object with no character restrictions.</value>
-        [DataMember(Name = "display_name")]
-        public string DisplayName { get; set; } 
+        /// <value>Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</value>
+        [DataMember(Name = "user_data")]
+        public Object UserData { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -106,6 +99,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(UserData).Append("\n");
             return sb.ToString();
         }
   
@@ -143,7 +137,7 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        public override EnergyBaseModel DuplicateEnergyBaseModel()
         {
             return DuplicateIDdEnergyBaseModel();
         }
@@ -170,14 +164,9 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Identifier == input.Identifier ||
-                    (this.Identifier != null &&
-                    this.Identifier.Equals(input.Identifier))
-                ) && base.Equals(input) && 
-                (
-                    this.DisplayName == input.DisplayName ||
-                    (this.DisplayName != null &&
-                    this.DisplayName.Equals(input.DisplayName))
+                    this.UserData == input.UserData ||
+                    (this.UserData != null &&
+                    this.UserData.Equals(input.UserData))
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
@@ -195,10 +184,8 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Identifier != null)
-                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
-                if (this.DisplayName != null)
-                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
+                if (this.UserData != null)
+                    hashCode = hashCode * 59 + this.UserData.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
@@ -223,25 +210,6 @@ namespace HoneybeeSchema
         protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
         {
             foreach(var x in base.BaseValidate(validationContext)) yield return x;
-            // Identifier (string) maxLength
-            if(this.Identifier != null && this.Identifier.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
-            }
-
-            // Identifier (string) minLength
-            if(this.Identifier != null && this.Identifier.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
-            }
-            
-            // Identifier (string) pattern
-            Regex regexIdentifier = new Regex(@"^[^,;!\n\t]+$", RegexOptions.CultureInvariant);
-            if (this.Identifier != null && false == regexIdentifier.Match(this.Identifier).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, must match a pattern of " + regexIdentifier, new [] { "Identifier" });
-            }
-
 
             
             // Type (string) pattern

@@ -59,11 +59,12 @@ namespace HoneybeeSchema
         /// <param name="airflowPermeability">The fraction of the shade surface that is open to air flow. If air cannot pass through the shade material, airflow_permeability &#x3D; 0. Default: 0. (default to 0D).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public EnergyWindowMaterialShade
         (
             string identifier, // Required parameters
-            string displayName= default, double solarTransmittance = 0.4D, double solarReflectance = 0.5D, double visibleTransmittance = 0.4D, double visibleReflectance = 0.4D, double emissivity = 0.9D, double infraredTransmittance = 0D, double thickness = 0.005D, double conductivity = 0.1D, double distanceToGlass = 0.05D, double topOpeningMultiplier = 0.5D, double bottomOpeningMultiplier = 0.5D, double leftOpeningMultiplier = 0.5D, double rightOpeningMultiplier = 0.5D, double airflowPermeability = 0D// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+            string displayName= default, Object userData= default, double solarTransmittance = 0.4D, double solarReflectance = 0.5D, double visibleTransmittance = 0.4D, double visibleReflectance = 0.4D, double emissivity = 0.9D, double infraredTransmittance = 0D, double thickness = 0.005D, double conductivity = 0.1D, double distanceToGlass = 0.05D, double topOpeningMultiplier = 0.5D, double bottomOpeningMultiplier = 0.5D, double leftOpeningMultiplier = 0.5D, double rightOpeningMultiplier = 0.5D, double airflowPermeability = 0D// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             this.SolarTransmittance = solarTransmittance;
             this.SolarReflectance = solarReflectance;
@@ -203,6 +204,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(UserData).Append("\n");
             sb.Append("  SolarTransmittance: ").Append(SolarTransmittance).Append("\n");
             sb.Append("  SolarReflectance: ").Append(SolarReflectance).Append("\n");
             sb.Append("  VisibleTransmittance: ").Append(VisibleTransmittance).Append("\n");

@@ -57,11 +57,12 @@ namespace HoneybeeSchema
         /// <param name="specificHeatCoeffC">The C coefficient for gas specific heat in J/(kg-K3). (default to 0D).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public EnergyWindowMaterialGasCustom
         (
             string identifier, double conductivityCoeffA, double viscosityCoeffA, double specificHeatCoeffA, double specificHeatRatio, double molecularWeight, // Required parameters
-            string displayName= default, double thickness = 0.0125D, double conductivityCoeffB = 0D, double conductivityCoeffC = 0D, double viscosityCoeffB = 0D, double viscosityCoeffC = 0D, double specificHeatCoeffB = 0D, double specificHeatCoeffC = 0D// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+            string displayName= default, Object userData= default, double thickness = 0.0125D, double conductivityCoeffB = 0D, double conductivityCoeffC = 0D, double viscosityCoeffB = 0D, double viscosityCoeffC = 0D, double specificHeatCoeffB = 0D, double specificHeatCoeffC = 0D// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             this.ConductivityCoeffA = conductivityCoeffA;
             this.ViscosityCoeffA = viscosityCoeffA;
@@ -187,6 +188,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(UserData).Append("\n");
             sb.Append("  ConductivityCoeffA: ").Append(ConductivityCoeffA).Append("\n");
             sb.Append("  ViscosityCoeffA: ").Append(ViscosityCoeffA).Append("\n");
             sb.Append("  SpecificHeatCoeffA: ").Append(SpecificHeatCoeffA).Append("\n");

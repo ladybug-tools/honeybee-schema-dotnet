@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Serializable]
     [DataContract(Name = "ScheduleTypeLimit")]
-    public partial class ScheduleTypeLimit : IDdEnergyBaseModel, IEquatable<ScheduleTypeLimit>, IValidatableObject
+    public partial class ScheduleTypeLimit : EnergyBaseModel, IEquatable<ScheduleTypeLimit>, IValidatableObject
     {
         /// <summary>
         /// Gets or Sets NumericType
@@ -162,7 +162,7 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>OpenAPIGenBaseModel</returns>
-        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        public override EnergyBaseModel DuplicateEnergyBaseModel()
         {
             return DuplicateScheduleTypeLimit();
         }

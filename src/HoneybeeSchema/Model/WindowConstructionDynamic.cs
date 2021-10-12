@@ -47,11 +47,12 @@ namespace HoneybeeSchema
         /// <param name="schedule">A control schedule that dictates which constructions are active at given times throughout the simulation. The values of the schedule should be intergers and range from 0 to one less then the number of constructions. Zero indicates that the first construction is active, one indicates that the second on is active, etc. The schedule type limits of this schedule should be \&quot;Control Level.\&quot; If building custom schedule type limits that describe a particular range of states, the type limits should be \&quot;Discrete\&quot; and the unit type should be \&quot;Mode,\&quot; \&quot;Control,\&quot; or some other fractional unit. (required).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public WindowConstructionDynamic
         (
             string identifier, List<WindowConstruction> constructions, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule, // Required parameters
-            string displayName= default // Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+            string displayName= default, Object userData= default // Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             // to ensure "constructions" is required (not null)
             this.Constructions = constructions ?? throw new ArgumentNullException("constructions is a required property for WindowConstructionDynamic and cannot be null");
@@ -109,6 +110,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(UserData).Append("\n");
             sb.Append("  Constructions: ").Append(Constructions).Append("\n");
             sb.Append("  Schedule: ").Append(Schedule).Append("\n");
             return sb.ToString();

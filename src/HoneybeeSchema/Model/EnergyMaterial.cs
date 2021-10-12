@@ -58,11 +58,12 @@ namespace HoneybeeSchema
         /// <param name="visibleAbsorptance">Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7. (default to 0.7D).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public EnergyMaterial
         (
             string identifier, double thickness, double conductivity, double density, double specificHeat, // Required parameters
-            string displayName= default, Roughness roughness= Roughness.MediumRough, double thermalAbsorptance = 0.9D, double solarAbsorptance = 0.7D, double visibleAbsorptance = 0.7D// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+            string displayName= default, Object userData= default, Roughness roughness= Roughness.MediumRough, double thermalAbsorptance = 0.9D, double solarAbsorptance = 0.7D, double visibleAbsorptance = 0.7D// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             this.Thickness = thickness;
             this.Conductivity = conductivity;
@@ -154,6 +155,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(UserData).Append("\n");
             sb.Append("  Thickness: ").Append(Thickness).Append("\n");
             sb.Append("  Conductivity: ").Append(Conductivity).Append("\n");
             sb.Append("  Density: ").Append(Density).Append("\n");

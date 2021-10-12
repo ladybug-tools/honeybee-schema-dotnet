@@ -51,11 +51,12 @@ namespace HoneybeeSchema
         /// <param name="interpolate">Boolean to note whether values in between intervals should be linearly interpolated or whether successive values should take effect immediately upon the beginning time corresponding to them. (default to false).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public ScheduleFixedIntervalAbridged
         (
             string identifier, List<double> values, // Required parameters
-            string displayName= default, string scheduleTypeLimit= default, int timestep = 1, List<int> startDate= default, double placeholderValue = 0D, bool interpolate = false// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+            string displayName= default, Object userData= default, string scheduleTypeLimit= default, int timestep = 1, List<int> startDate= default, double placeholderValue = 0D, bool interpolate = false// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             // to ensure "values" is required (not null)
             this.Values = values ?? throw new ArgumentNullException("values is a required property for ScheduleFixedIntervalAbridged and cannot be null");
@@ -140,6 +141,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(UserData).Append("\n");
             sb.Append("  Values: ").Append(Values).Append("\n");
             sb.Append("  ScheduleTypeLimit: ").Append(ScheduleTypeLimit).Append("\n");
             sb.Append("  Timestep: ").Append(Timestep).Append("\n");

@@ -74,6 +74,8 @@ docs/ElectricEquipment.md
 docs/ElectricEquipmentAbridged.md
 docs/ElectricEquipmentAbridgedAllOf.md
 docs/ElectricEquipmentAllOf.md
+docs/EnergyBaseModel.md
+docs/EnergyBaseModelAllOf.md
 docs/EnergyMaterial.md
 docs/EnergyMaterialAllOf.md
 docs/EnergyMaterialNoMass.md
@@ -428,6 +430,8 @@ src/HoneybeeSchema.Test/Model/ElectricEquipmentAbridgedAllOfTests.cs
 src/HoneybeeSchema.Test/Model/ElectricEquipmentAbridgedTests.cs
 src/HoneybeeSchema.Test/Model/ElectricEquipmentAllOfTests.cs
 src/HoneybeeSchema.Test/Model/ElectricEquipmentTests.cs
+src/HoneybeeSchema.Test/Model/EnergyBaseModelAllOfTests.cs
+src/HoneybeeSchema.Test/Model/EnergyBaseModelTests.cs
 src/HoneybeeSchema.Test/Model/EnergyMaterialAllOfTests.cs
 src/HoneybeeSchema.Test/Model/EnergyMaterialNoMassAllOfTests.cs
 src/HoneybeeSchema.Test/Model/EnergyMaterialNoMassTests.cs
@@ -792,6 +796,8 @@ src/HoneybeeSchema/Model/ElectricEquipment.cs
 src/HoneybeeSchema/Model/ElectricEquipmentAbridged.cs
 src/HoneybeeSchema/Model/ElectricEquipmentAbridgedAllOf.cs
 src/HoneybeeSchema/Model/ElectricEquipmentAllOf.cs
+src/HoneybeeSchema/Model/EnergyBaseModel.cs
+src/HoneybeeSchema/Model/EnergyBaseModelAllOf.cs
 src/HoneybeeSchema/Model/EnergyMaterial.cs
 src/HoneybeeSchema/Model/EnergyMaterialAllOf.cs
 src/HoneybeeSchema/Model/EnergyMaterialNoMass.cs

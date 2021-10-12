@@ -47,11 +47,12 @@ namespace HoneybeeSchema
         /// <param name="airMixingSchedule">A fractional schedule as a ScheduleRuleset or ScheduleFixedInterval for the air mixing schedule across the construction. If unspecified, an Always On schedule will be assumed..</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public AirBoundaryConstruction
         (
             string identifier, // Required parameters
-            string displayName= default, double airMixingPerArea = 0.1D, AnyOf<ScheduleRuleset,ScheduleFixedInterval> airMixingSchedule= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+            string displayName= default, Object userData= default, double airMixingPerArea = 0.1D, AnyOf<ScheduleRuleset,ScheduleFixedInterval> airMixingSchedule= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             this.AirMixingPerArea = airMixingPerArea;
             this.AirMixingSchedule = airMixingSchedule;
@@ -107,6 +108,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(UserData).Append("\n");
             sb.Append("  AirMixingPerArea: ").Append(AirMixingPerArea).Append("\n");
             sb.Append("  AirMixingSchedule: ").Append(AirMixingSchedule).Append("\n");
             return sb.ToString();

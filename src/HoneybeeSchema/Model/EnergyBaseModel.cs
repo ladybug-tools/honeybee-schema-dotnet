@@ -24,56 +24,42 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Direct evaporative cooling systems (with optional heating).
+    /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [Serializable]
-    [DataContract(Name = "EvaporativeCooler")]
-    public partial class EvaporativeCooler : IDdEnergyBaseModel, IEquatable<EvaporativeCooler>, IValidatableObject
+    [DataContract(Name = "EnergyBaseModel")]
+    public partial class EnergyBaseModel : OpenAPIGenBaseModel, IEquatable<EnergyBaseModel>, IValidatableObject
     {
         /// <summary>
-        /// Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards
-        /// </summary>
-        /// <value>Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards</value>
-        [DataMember(Name="vintage")]
-        public Vintages Vintage { get; set; } = Vintages.ASHRAE_2019;
-        /// <summary>
-        /// Text for the specific type of system equipment from the EvaporativeCoolerEquipmentType enumeration.
-        /// </summary>
-        /// <value>Text for the specific type of system equipment from the EvaporativeCoolerEquipmentType enumeration.</value>
-        [DataMember(Name="equipment_type")]
-        public EvaporativeCoolerEquipmentType EquipmentType { get; set; } = EvaporativeCoolerEquipmentType.EvapCoolers_ElectricBaseboard;
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EvaporativeCooler" /> class.
+        /// Initializes a new instance of the <see cref="EnergyBaseModel" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected EvaporativeCooler() 
+        protected EnergyBaseModel() 
         { 
             // Set non-required readonly properties with defaultValue
-            this.Type = "EvaporativeCooler";
+            this.Type = "EnergyBaseModel";
         }
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="EvaporativeCooler" /> class.
+        /// Initializes a new instance of the <see cref="EnergyBaseModel" /> class.
         /// </summary>
-        /// <param name="vintage">Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards.</param>
-        /// <param name="equipmentType">Text for the specific type of system equipment from the EvaporativeCoolerEquipmentType enumeration..</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
-        public EvaporativeCooler
+        public EnergyBaseModel
         (
-            string identifier, // Required parameters
-            string displayName= default, Object userData= default, Vintages vintage= Vintages.ASHRAE_2019, EvaporativeCoolerEquipmentType equipmentType= EvaporativeCoolerEquipmentType.EvapCoolers_ElectricBaseboard// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+           string identifier, // Required parameters
+           string displayName= default // Optional parameters
+        ) : base()// BaseClass
         {
-            this.Vintage = vintage;
-            this.EquipmentType = equipmentType;
+            // to ensure "identifier" is required (not null)
+            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for EnergyBaseModel and cannot be null");
+            this.DisplayName = displayName;
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "EvaporativeCooler";
+            this.Type = "EnergyBaseModel";
 
             // check if object is valid, only check for inherited class
-            if (this.GetType() == typeof(EvaporativeCooler))
+            if (this.GetType() == typeof(EnergyBaseModel))
                 this.IsValid(throwException: true);
         }
 
@@ -82,8 +68,20 @@ namespace HoneybeeSchema
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type")]
-        public override string Type { get; protected set; }  = "EvaporativeCooler";
+        public override string Type { get; protected set; }  = "EnergyBaseModel";
 
+        /// <summary>
+        /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
+        /// </summary>
+        /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
+        [DataMember(Name = "identifier", IsRequired = true)]
+        public string Identifier { get; set; } 
+        /// <summary>
+        /// Display name of the object with no character restrictions.
+        /// </summary>
+        /// <value>Display name of the object with no character restrictions.</value>
+        [DataMember(Name = "display_name")]
+        public string DisplayName { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -91,7 +89,7 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            return "EvaporativeCooler";
+            return "EnergyBaseModel";
         }
 
         /// <summary>
@@ -104,23 +102,20 @@ namespace HoneybeeSchema
                 return this.ToString();
             
             var sb = new StringBuilder();
-            sb.Append("EvaporativeCooler:\n");
+            sb.Append("EnergyBaseModel:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  Vintage: ").Append(Vintage).Append("\n");
-            sb.Append("  EquipmentType: ").Append(EquipmentType).Append("\n");
             return sb.ToString();
         }
   
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>EvaporativeCooler object</returns>
-        public static EvaporativeCooler FromJson(string json)
+        /// <returns>EnergyBaseModel object</returns>
+        public static EnergyBaseModel FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<EvaporativeCooler>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<EnergyBaseModel>(json, JsonSetting.AnyOfConvertSetting);
             if (obj == null)
                 return null;
             return obj.Type.ToLower() == obj.GetType().Name.ToLower() && obj.IsValid(throwException: true) ? obj : null;
@@ -129,8 +124,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>EvaporativeCooler object</returns>
-        public virtual EvaporativeCooler DuplicateEvaporativeCooler()
+        /// <returns>EnergyBaseModel object</returns>
+        public virtual EnergyBaseModel DuplicateEnergyBaseModel()
         {
             return FromJson(this.ToJson());
         }
@@ -141,16 +136,16 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return DuplicateEvaporativeCooler();
+            return DuplicateEnergyBaseModel();
         }
 
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>OpenAPIGenBaseModel</returns>
-        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
         {
-            return DuplicateEvaporativeCooler();
+            return DuplicateEnergyBaseModel();
         }
      
         /// <summary>
@@ -161,33 +156,33 @@ namespace HoneybeeSchema
         public override bool Equals(object input)
         {
             input = input is AnyOf anyOf ? anyOf.Obj : input;
-            return this.Equals(input as EvaporativeCooler);
+            return this.Equals(input as EnergyBaseModel);
         }
 
         /// <summary>
-        /// Returns true if EvaporativeCooler instances are equal
+        /// Returns true if EnergyBaseModel instances are equal
         /// </summary>
-        /// <param name="input">Instance of EvaporativeCooler to be compared</param>
+        /// <param name="input">Instance of EnergyBaseModel to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(EvaporativeCooler input)
+        public bool Equals(EnergyBaseModel input)
         {
             if (input == null)
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Vintage == input.Vintage ||
-                    (this.Vintage != null &&
-                    this.Vintage.Equals(input.Vintage))
+                    this.Identifier == input.Identifier ||
+                    (this.Identifier != null &&
+                    this.Identifier.Equals(input.Identifier))
+                ) && base.Equals(input) && 
+                (
+                    this.DisplayName == input.DisplayName ||
+                    (this.DisplayName != null &&
+                    this.DisplayName.Equals(input.DisplayName))
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     (this.Type != null &&
                     this.Type.Equals(input.Type))
-                ) && base.Equals(input) && 
-                (
-                    this.EquipmentType == input.EquipmentType ||
-                    (this.EquipmentType != null &&
-                    this.EquipmentType.Equals(input.EquipmentType))
                 );
         }
 
@@ -200,12 +195,12 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Vintage != null)
-                    hashCode = hashCode * 59 + this.Vintage.GetHashCode();
+                if (this.Identifier != null)
+                    hashCode = hashCode * 59 + this.Identifier.GetHashCode();
+                if (this.DisplayName != null)
+                    hashCode = hashCode * 59 + this.DisplayName.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.EquipmentType != null)
-                    hashCode = hashCode * 59 + this.EquipmentType.GetHashCode();
                 return hashCode;
             }
         }
@@ -217,11 +212,40 @@ namespace HoneybeeSchema
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            return this.BaseValidate(validationContext);
+        }
+
+        /// <summary>
+        /// To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
+        {
             foreach(var x in base.BaseValidate(validationContext)) yield return x;
+            // Identifier (string) maxLength
+            if(this.Identifier != null && this.Identifier.Length > 100)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be less than 100.", new [] { "Identifier" });
+            }
+
+            // Identifier (string) minLength
+            if(this.Identifier != null && this.Identifier.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, length must be greater than 1.", new [] { "Identifier" });
+            }
+            
+            // Identifier (string) pattern
+            Regex regexIdentifier = new Regex(@"^[^,;!\n\t]+$", RegexOptions.CultureInvariant);
+            if (this.Identifier != null && false == regexIdentifier.Match(this.Identifier).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Identifier, must match a pattern of " + regexIdentifier, new [] { "Identifier" });
+            }
+
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^EvaporativeCooler$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^EnergyBaseModel$", RegexOptions.CultureInvariant);
             if (this.Type != null && false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });

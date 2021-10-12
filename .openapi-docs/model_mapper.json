@@ -33,6 +33,7 @@
         "DoorRadiancePropertiesAbridged": "honeybee_schema.radiance.properties",
         "ElectricEquipment": "honeybee_schema.energy.load",
         "ElectricEquipmentAbridged": "honeybee_schema.energy.load",
+        "EnergyBaseModel": "honeybee_schema.energy._base",
         "EnergyMaterial": "honeybee_schema.energy.material",
         "EnergyMaterialNoMass": "honeybee_schema.energy.material",
         "EnergyWindowMaterialBlind": "honeybee_schema.energy.material",

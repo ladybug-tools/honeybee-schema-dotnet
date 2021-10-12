@@ -63,11 +63,12 @@ namespace HoneybeeSchema
         /// <param name="equipmentType">Text for the specific type of system equipment from the WSHPwithDOASEquipmentType enumeration..</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public WSHPwithDOASAbridged
         (
             string identifier, // Required parameters
-            string displayName= default, Vintages vintage= Vintages.ASHRAE_2019, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, bool demandControlledVentilation = false, string doasAvailabilitySchedule= default, WSHPwithDOASEquipmentType equipmentType= WSHPwithDOASEquipmentType.DOAS_WSHP_FluidCooler_Boiler// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+            string displayName= default, Object userData= default, Vintages vintage= Vintages.ASHRAE_2019, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, bool demandControlledVentilation = false, string doasAvailabilitySchedule= default, WSHPwithDOASEquipmentType equipmentType= WSHPwithDOASEquipmentType.DOAS_WSHP_FluidCooler_Boiler// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             this.Vintage = vintage;
             this.SensibleHeatRecovery = sensibleHeatRecovery;
@@ -139,6 +140,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(UserData).Append("\n");
             sb.Append("  Vintage: ").Append(Vintage).Append("\n");
             sb.Append("  SensibleHeatRecovery: ").Append(SensibleHeatRecovery).Append("\n");
             sb.Append("  LatentHeatRecovery: ").Append(LatentHeatRecovery).Append("\n");

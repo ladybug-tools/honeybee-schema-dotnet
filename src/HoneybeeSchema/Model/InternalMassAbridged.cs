@@ -24,7 +24,7 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Base class for all objects requiring a valid EnergyPlus identifier.
+    /// Base class for all objects requiring an EnergyPlus identifier and user_data.
     /// </summary>
     [Serializable]
     [DataContract(Name = "InternalMassAbridged")]
@@ -47,11 +47,12 @@ namespace HoneybeeSchema
         /// <param name="area">A number representing the surface area of the internal mass that is exposed to the Room air. This value should always be in square meters regardless of what units system the parent model is a part of. (required).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public InternalMassAbridged
         (
             string identifier, string construction, double area, // Required parameters
-            string displayName= default // Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+            string displayName= default, Object userData= default // Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             // to ensure "construction" is required (not null)
             this.Construction = construction ?? throw new ArgumentNullException("construction is a required property for InternalMassAbridged and cannot be null");
@@ -108,6 +109,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(UserData).Append("\n");
             sb.Append("  Construction: ").Append(Construction).Append("\n");
             sb.Append("  Area: ").Append(Area).Append("\n");
             return sb.ToString();

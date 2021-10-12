@@ -5,8 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Identifier** | **string** | Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). | 
-**DisplayName** | **string** | Display name of the object with no character restrictions. | [optional] 
+**UserData** | **Object** | Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list). | [optional] 
 **FlowPerArea** | **double** | Number for the total volume flow rate of water per unit area of floor [L/h-m2]. | 
 **Schedule** | **string** | Identifier of the schedule for the hot water use over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile. | 
 **Type** | **string** |  | [optional] [readonly] [default to "ServiceHotWaterAbridged"]

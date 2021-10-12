@@ -61,11 +61,12 @@ namespace HoneybeeSchema
         /// <param name="coolingAvailability">An optional identifier of a schedule to set the availability of cooling over the course of the simulation..</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public IdealAirSystemAbridged
         (
             string identifier, // Required parameters
-            string displayName= default, EconomizerType economizerType= EconomizerType.DifferentialDryBulb, bool demandControlledVentilation = false, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, double heatingAirTemperature = 50D, double coolingAirTemperature = 13D, AnyOf<Autosize,NoLimit,double> heatingLimit= default, AnyOf<Autosize,NoLimit,double> coolingLimit= default, string heatingAvailability= default, string coolingAvailability= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+            string displayName= default, Object userData= default, EconomizerType economizerType= EconomizerType.DifferentialDryBulb, bool demandControlledVentilation = false, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, double heatingAirTemperature = 50D, double coolingAirTemperature = 13D, AnyOf<Autosize,NoLimit,double> heatingLimit= default, AnyOf<Autosize,NoLimit,double> coolingLimit= default, string heatingAvailability= default, string coolingAvailability= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             this.EconomizerType = economizerType;
             this.DemandControlledVentilation = demandControlledVentilation;
@@ -171,6 +172,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(UserData).Append("\n");
             sb.Append("  EconomizerType: ").Append(EconomizerType).Append("\n");
             sb.Append("  DemandControlledVentilation: ").Append(DemandControlledVentilation).Append("\n");
             sb.Append("  SensibleHeatRecovery: ").Append(SensibleHeatRecovery).Append("\n");

@@ -24,7 +24,7 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Base class for all objects requiring a valid EnergyPlus identifier.
+    /// Base class for all objects requiring an EnergyPlus identifier and user_data.
     /// </summary>
     [Serializable]
     [DataContract(Name = "VentilationAbridged")]
@@ -50,11 +50,12 @@ namespace HoneybeeSchema
         /// <param name="schedule">Identifier of the schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile..</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public VentilationAbridged
         (
             string identifier, // Required parameters
-            string displayName= default, double flowPerPerson = 0D, double flowPerArea = 0D, double airChangesPerHour = 0D, double flowPerZone = 0D, string schedule= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+            string displayName= default, Object userData= default, double flowPerPerson = 0D, double flowPerArea = 0D, double airChangesPerHour = 0D, double flowPerZone = 0D, string schedule= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             this.FlowPerPerson = flowPerPerson;
             this.FlowPerArea = flowPerArea;
@@ -131,6 +132,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(UserData).Append("\n");
             sb.Append("  FlowPerPerson: ").Append(FlowPerPerson).Append("\n");
             sb.Append("  FlowPerArea: ").Append(FlowPerArea).Append("\n");
             sb.Append("  AirChangesPerHour: ").Append(AirChangesPerHour).Append("\n");

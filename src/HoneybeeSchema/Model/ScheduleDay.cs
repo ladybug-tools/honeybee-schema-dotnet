@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Serializable]
     [DataContract(Name = "ScheduleDay")]
-    public partial class ScheduleDay : IDdEnergyBaseModel, IEquatable<ScheduleDay>, IValidatableObject
+    public partial class ScheduleDay : EnergyBaseModel, IEquatable<ScheduleDay>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleDay" /> class.
@@ -156,7 +156,7 @@ namespace HoneybeeSchema
         /// Creates a new instance with the same properties.
         /// </summary>
         /// <returns>OpenAPIGenBaseModel</returns>
-        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        public override EnergyBaseModel DuplicateEnergyBaseModel()
         {
             return DuplicateScheduleDay();
         }

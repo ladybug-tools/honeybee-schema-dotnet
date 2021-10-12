@@ -52,11 +52,12 @@ namespace HoneybeeSchema
         /// <param name="scheduleTypeLimit">ScheduleTypeLimit object that will be used to validate schedule values against upper/lower limits and assign units to the schedule values. If None, no validation will occur..</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public ScheduleRuleset
         (
             string identifier, List<ScheduleDay> daySchedules, string defaultDaySchedule, // Required parameters
-            string displayName= default, List<ScheduleRuleAbridged> scheduleRules= default, string holidaySchedule= default, string summerDesigndaySchedule= default, string winterDesigndaySchedule= default, ScheduleTypeLimit scheduleTypeLimit= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+            string displayName= default, Object userData= default, List<ScheduleRuleAbridged> scheduleRules= default, string holidaySchedule= default, string summerDesigndaySchedule= default, string winterDesigndaySchedule= default, ScheduleTypeLimit scheduleTypeLimit= default// Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             // to ensure "daySchedules" is required (not null)
             this.DaySchedules = daySchedules ?? throw new ArgumentNullException("daySchedules is a required property for ScheduleRuleset and cannot be null");
@@ -149,6 +150,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Identifier: ").Append(Identifier).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(UserData).Append("\n");
             sb.Append("  DaySchedules: ").Append(DaySchedules).Append("\n");
             sb.Append("  DefaultDaySchedule: ").Append(DefaultDaySchedule).Append("\n");
             sb.Append("  ScheduleRules: ").Append(ScheduleRules).Append("\n");
