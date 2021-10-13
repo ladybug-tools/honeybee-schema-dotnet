@@ -215,6 +215,15 @@ namespace HoneybeeSchema.Test
             Assert.IsTrue(count == count2);
 
         }
+
+        // [Test]
+        // public void LoadModel()
+        // {
+        //     var p = @"C:\Users\mingo\Desktop\New folder\Model111.hbjson.json";
+        //     var json = System.IO.File.ReadAllText(p);
+        //     var model = Model.FromJson(json);
+        //     Assert.IsTrue(model.IsValid());
+        // }
     }
 
 }
