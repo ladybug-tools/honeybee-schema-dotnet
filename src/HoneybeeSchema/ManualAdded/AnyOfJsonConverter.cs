@@ -51,7 +51,15 @@ namespace HoneybeeSchema
            
 
             var inputType = data.GetType();
-           
+
+            //convert int to double if the number was saved as int to json string 
+            var allValidTypes = validTypes.ToList();
+            if ((inputType == typeof(int) || inputType == typeof(Int64)) && allValidTypes.Contains(typeof(double)))
+            {
+                inputType = typeof(double);
+                data = double.Parse(data.ToString());
+            }
+         
             if (validTypes.ToList().Contains(inputType))
             {
                 var obj = Activator.CreateInstance(objectType, new object[] {data});
@@ -59,7 +67,7 @@ namespace HoneybeeSchema
             }
             else
             {
-                throw new ArgumentException($"{data} is {inputType} type, which doesn't match any of [{string.Join(", ", validTypes.ToString())}]");
+                throw new ArgumentException($"{data} is {inputType} type, which doesn't match any of [{string.Join(", ", validTypes.Select(_=>_.ToString()))}]");
             }
 
         }
