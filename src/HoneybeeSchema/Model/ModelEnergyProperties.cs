@@ -37,6 +37,7 @@ namespace HoneybeeSchema
         /// <param name="constructions">A list of all unique constructions in the model. This includes constructions across all Faces, Apertures, Doors, Shades, Room ConstructionSets, and the global_construction_set..</param>
         /// <param name="materials">A list of all unique materials in the model. This includes materials needed to make the Model constructions..</param>
         /// <param name="hvacs">List of all unique HVAC systems in the Model..</param>
+        /// <param name="shws">List of all unique Service Hot Water (SHW) systems in the Model..</param>
         /// <param name="programTypes">List of all unique ProgramTypes in the Model..</param>
         /// <param name="schedules">A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades..</param>
         /// <param name="scheduleTypeLimits">A list of all unique ScheduleTypeLimits in the model. This all ScheduleTypeLimits needed to make the Model schedules..</param>
@@ -44,13 +45,14 @@ namespace HoneybeeSchema
         public ModelEnergyProperties
         (
            // Required parameters
-           List<AnyOf<ConstructionSetAbridged,ConstructionSet>> constructionSets= default, List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,WindowConstructionShadeAbridged,AirBoundaryConstructionAbridged,OpaqueConstruction,WindowConstruction,WindowConstructionShade,WindowConstructionDynamicAbridged,WindowConstructionDynamic,AirBoundaryConstruction,ShadeConstruction>> constructions= default, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing,EnergyWindowMaterialShade>> materials= default, List<AnyOf<IdealAirSystemAbridged,VAV,PVAV,PSZ,PTAC,ForcedAirFurnace,FCUwithDOASAbridged,WSHPwithDOASAbridged,VRFwithDOASAbridged,FCU,WSHP,VRF,Baseboard,EvaporativeCooler,Residential,WindowAC,GasUnitHeater>> hvacs= default, List<AnyOf<ProgramTypeAbridged,ProgramType>> programTypes= default, List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged,ScheduleRuleset,ScheduleFixedInterval>> schedules= default, List<ScheduleTypeLimit> scheduleTypeLimits= default, VentilationSimulationControl ventilationSimulationControl= default// Optional parameters
+           List<AnyOf<ConstructionSetAbridged,ConstructionSet>> constructionSets= default, List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,WindowConstructionShadeAbridged,AirBoundaryConstructionAbridged,OpaqueConstruction,WindowConstruction,WindowConstructionShade,WindowConstructionDynamicAbridged,WindowConstructionDynamic,AirBoundaryConstruction,ShadeConstruction>> constructions= default, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing,EnergyWindowMaterialShade>> materials= default, List<AnyOf<IdealAirSystemAbridged,VAV,PVAV,PSZ,PTAC,ForcedAirFurnace,FCUwithDOASAbridged,WSHPwithDOASAbridged,VRFwithDOASAbridged,FCU,WSHP,VRF,Baseboard,EvaporativeCooler,Residential,WindowAC,GasUnitHeater>> hvacs= default, List<SHWSystem> shws= default, List<AnyOf<ProgramTypeAbridged,ProgramType>> programTypes= default, List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged,ScheduleRuleset,ScheduleFixedInterval>> schedules= default, List<ScheduleTypeLimit> scheduleTypeLimits= default, VentilationSimulationControl ventilationSimulationControl= default// Optional parameters
         ) : base()// BaseClass
         {
             this.ConstructionSets = constructionSets;
             this.Constructions = constructions;
             this.Materials = materials;
             this.Hvacs = hvacs;
+            this.Shws = shws;
             this.ProgramTypes = programTypes;
             this.Schedules = schedules;
             this.ScheduleTypeLimits = scheduleTypeLimits;
@@ -103,6 +105,12 @@ namespace HoneybeeSchema
         [DataMember(Name = "hvacs")]
         public List<AnyOf<IdealAirSystemAbridged,VAV,PVAV,PSZ,PTAC,ForcedAirFurnace,FCUwithDOASAbridged,WSHPwithDOASAbridged,VRFwithDOASAbridged,FCU,WSHP,VRF,Baseboard,EvaporativeCooler,Residential,WindowAC,GasUnitHeater>> Hvacs { get; set; } 
         /// <summary>
+        /// List of all unique Service Hot Water (SHW) systems in the Model.
+        /// </summary>
+        /// <value>List of all unique Service Hot Water (SHW) systems in the Model.</value>
+        [DataMember(Name = "shws")]
+        public List<SHWSystem> Shws { get; set; } 
+        /// <summary>
         /// List of all unique ProgramTypes in the Model.
         /// </summary>
         /// <value>List of all unique ProgramTypes in the Model.</value>
@@ -153,6 +161,7 @@ namespace HoneybeeSchema
             sb.Append("  Constructions: ").Append(Constructions).Append("\n");
             sb.Append("  Materials: ").Append(Materials).Append("\n");
             sb.Append("  Hvacs: ").Append(Hvacs).Append("\n");
+            sb.Append("  Shws: ").Append(Shws).Append("\n");
             sb.Append("  ProgramTypes: ").Append(ProgramTypes).Append("\n");
             sb.Append("  Schedules: ").Append(Schedules).Append("\n");
             sb.Append("  ScheduleTypeLimits: ").Append(ScheduleTypeLimits).Append("\n");
@@ -255,6 +264,12 @@ namespace HoneybeeSchema
                     this.Hvacs.SequenceEqual(input.Hvacs)
                 ) && base.Equals(input) && 
                 (
+                    this.Shws == input.Shws ||
+                    this.Shws != null &&
+                    input.Shws != null &&
+                    this.Shws.SequenceEqual(input.Shws)
+                ) && base.Equals(input) && 
+                (
                     this.ProgramTypes == input.ProgramTypes ||
                     this.ProgramTypes != null &&
                     input.ProgramTypes != null &&
@@ -300,6 +315,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.Materials.GetHashCode();
                 if (this.Hvacs != null)
                     hashCode = hashCode * 59 + this.Hvacs.GetHashCode();
+                if (this.Shws != null)
+                    hashCode = hashCode * 59 + this.Shws.GetHashCode();
                 if (this.ProgramTypes != null)
                     hashCode = hashCode * 59 + this.ProgramTypes.GetHashCode();
                 if (this.Schedules != null)

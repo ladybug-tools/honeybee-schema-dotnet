@@ -36,6 +36,7 @@ namespace HoneybeeSchema
         /// <param name="constructionSet">Identifier of a ConstructionSet to specify all default constructions for the Faces, Apertures, and Doors of the Room. If None, the Room will use the Model global_construction_set..</param>
         /// <param name="programType">Identifier of a ProgramType to specify all default schedules and loads for the Room. If None, the Room will have no loads or setpoints..</param>
         /// <param name="hvac">An optional identifier of a HVAC system (such as an IdealAirSystem) that specifies how the Room is conditioned. If None, it will be assumed that the Room is not conditioned..</param>
+        /// <param name="shw">An optional identifier of a Service Hot Water (SHW) system that specifies how the hot water load of the Room is met. If None, the hot water load will be met with a generic system that only measures thermal loadand does not account for system efficiencies..</param>
         /// <param name="people">People object to describe the occupancy of the Room..</param>
         /// <param name="lighting">Lighting object to describe the lighting usage of the Room..</param>
         /// <param name="electricEquipment">ElectricEquipment object to describe the electric equipment usage..</param>
@@ -50,12 +51,13 @@ namespace HoneybeeSchema
         public RoomEnergyPropertiesAbridged
         (
            // Required parameters
-           string constructionSet= default, string programType= default, string hvac= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, ServiceHotWaterAbridged serviceHotWater= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default, DaylightingControl daylightingControl= default, VentilationControlAbridged windowVentControl= default, List<InternalMassAbridged> internalMasses= default// Optional parameters
+           string constructionSet= default, string programType= default, string hvac= default, string shw= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, ServiceHotWaterAbridged serviceHotWater= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default, DaylightingControl daylightingControl= default, VentilationControlAbridged windowVentControl= default, List<InternalMassAbridged> internalMasses= default// Optional parameters
         ) : base()// BaseClass
         {
             this.ConstructionSet = constructionSet;
             this.ProgramType = programType;
             this.Hvac = hvac;
+            this.Shw = shw;
             this.People = people;
             this.Lighting = lighting;
             this.ElectricEquipment = electricEquipment;
@@ -101,6 +103,12 @@ namespace HoneybeeSchema
         /// <value>An optional identifier of a HVAC system (such as an IdealAirSystem) that specifies how the Room is conditioned. If None, it will be assumed that the Room is not conditioned.</value>
         [DataMember(Name = "hvac")]
         public string Hvac { get; set; } 
+        /// <summary>
+        /// An optional identifier of a Service Hot Water (SHW) system that specifies how the hot water load of the Room is met. If None, the hot water load will be met with a generic system that only measures thermal loadand does not account for system efficiencies.
+        /// </summary>
+        /// <value>An optional identifier of a Service Hot Water (SHW) system that specifies how the hot water load of the Room is met. If None, the hot water load will be met with a generic system that only measures thermal loadand does not account for system efficiencies.</value>
+        [DataMember(Name = "shw")]
+        public string Shw { get; set; } 
         /// <summary>
         /// People object to describe the occupancy of the Room.
         /// </summary>
@@ -192,6 +200,7 @@ namespace HoneybeeSchema
             sb.Append("  ConstructionSet: ").Append(ConstructionSet).Append("\n");
             sb.Append("  ProgramType: ").Append(ProgramType).Append("\n");
             sb.Append("  Hvac: ").Append(Hvac).Append("\n");
+            sb.Append("  Shw: ").Append(Shw).Append("\n");
             sb.Append("  People: ").Append(People).Append("\n");
             sb.Append("  Lighting: ").Append(Lighting).Append("\n");
             sb.Append("  ElectricEquipment: ").Append(ElectricEquipment).Append("\n");
@@ -287,6 +296,11 @@ namespace HoneybeeSchema
                     this.Hvac.Equals(input.Hvac))
                 ) && base.Equals(input) && 
                 (
+                    this.Shw == input.Shw ||
+                    (this.Shw != null &&
+                    this.Shw.Equals(input.Shw))
+                ) && base.Equals(input) && 
+                (
                     this.People == input.People ||
                     (this.People != null &&
                     this.People.Equals(input.People))
@@ -361,6 +375,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.ProgramType.GetHashCode();
                 if (this.Hvac != null)
                     hashCode = hashCode * 59 + this.Hvac.GetHashCode();
+                if (this.Shw != null)
+                    hashCode = hashCode * 59 + this.Shw.GetHashCode();
                 if (this.People != null)
                     hashCode = hashCode * 59 + this.People.GetHashCode();
                 if (this.Lighting != null)
@@ -438,6 +454,18 @@ namespace HoneybeeSchema
             if(this.Hvac != null && this.Hvac.Length < 1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Hvac, length must be greater than 1.", new [] { "Hvac" });
+            }
+            
+            // Shw (string) maxLength
+            if(this.Shw != null && this.Shw.Length > 100)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Shw, length must be less than 100.", new [] { "Shw" });
+            }
+
+            // Shw (string) minLength
+            if(this.Shw != null && this.Shw.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Shw, length must be greater than 1.", new [] { "Shw" });
             }
             
             yield break;
