@@ -36,6 +36,9 @@ subprocess.call(f"python3 {generator_folder}/post_gen_script.py {json2}", shell=
 time.sleep(1)
 subprocess.call(f"python3 {generator_folder}/post_gen_script.py {json1}", shell=True)
 
+# update global default
+time.sleep(1)
+subprocess.call(f"python3 {generator_folder}/create_global_default.py", shell=True)
 
 # update assembly version
 time.sleep(1)
