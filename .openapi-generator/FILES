@@ -249,6 +249,9 @@ docs/RoomPropertiesAbridgedAllOf.md
 docs/RoomRadiancePropertiesAbridged.md
 docs/RoomRadiancePropertiesAbridgedAllOf.md
 docs/Roughness.md
+docs/SHWEquipmentType.md
+docs/SHWSystem.md
+docs/SHWSystemAllOf.md
 docs/ScheduleDay.md
 docs/ScheduleDayAllOf.md
 docs/ScheduleFixedInterval.md
@@ -604,6 +607,9 @@ src/HoneybeeSchema.Test/Model/RoomRadiancePropertiesAbridgedAllOfTests.cs
 src/HoneybeeSchema.Test/Model/RoomRadiancePropertiesAbridgedTests.cs
 src/HoneybeeSchema.Test/Model/RoomTests.cs
 src/HoneybeeSchema.Test/Model/RoughnessTests.cs
+src/HoneybeeSchema.Test/Model/SHWEquipmentTypeTests.cs
+src/HoneybeeSchema.Test/Model/SHWSystemAllOfTests.cs
+src/HoneybeeSchema.Test/Model/SHWSystemTests.cs
 src/HoneybeeSchema.Test/Model/ScheduleDayAllOfTests.cs
 src/HoneybeeSchema.Test/Model/ScheduleDayTests.cs
 src/HoneybeeSchema.Test/Model/ScheduleFixedIntervalAbridgedAllOfTests.cs
@@ -971,6 +977,9 @@ src/HoneybeeSchema/Model/RoomPropertiesAbridgedAllOf.cs
 src/HoneybeeSchema/Model/RoomRadiancePropertiesAbridged.cs
 src/HoneybeeSchema/Model/RoomRadiancePropertiesAbridgedAllOf.cs
 src/HoneybeeSchema/Model/Roughness.cs
+src/HoneybeeSchema/Model/SHWEquipmentType.cs
+src/HoneybeeSchema/Model/SHWSystem.cs
+src/HoneybeeSchema/Model/SHWSystemAllOf.cs
 src/HoneybeeSchema/Model/ScheduleDay.cs
 src/HoneybeeSchema/Model/ScheduleDayAllOf.cs
 src/HoneybeeSchema/Model/ScheduleFixedInterval.cs

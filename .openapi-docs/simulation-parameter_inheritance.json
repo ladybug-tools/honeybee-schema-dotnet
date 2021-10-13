@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Documentation for Honeybee simulation-parameter schema",
-        "version": "1.45.1",
+        "version": "1.46.0",
         "title": "Honeybee Simulation Parameter Schema",
         "contact": {
             "name": "Ladybug Tools",
@@ -179,7 +179,18 @@
     "paths": {},
     "components": {
         "schemas": {
-            "SimulationControl": {
+            "HumidityTypes": {
+                "title": "HumidityTypes",
+                "description": "An enumeration.",
+                "enum": [
+                    "Wetbulb",
+                    "Dewpoint",
+                    "HumidityRatio",
+                    "Enthalpy"
+                ],
+                "type": "string"
+            },
+            "HumidityCondition": {
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
@@ -187,49 +198,53 @@
                     {
                         "type": "object",
                         "properties": {
+                            "humidity_type": {
+                                "$ref": "#/components/schemas/HumidityTypes"
+                            },
+                            "humidity_value": {
+                                "title": "Humidity Value",
+                                "description": "The value correcponding to the humidity_type.",
+                                "type": "number",
+                                "format": "double"
+                            },
                             "type": {
                                 "title": "Type",
-                                "default": "SimulationControl",
-                                "pattern": "^SimulationControl$",
+                                "default": "HumidityCondition",
+                                "pattern": "^HumidityCondition$",
                                 "type": "string",
                                 "readOnly": true
                             },
-                            "do_zone_sizing": {
-                                "title": "Do Zone Sizing",
-                                "description": "Boolean for whether the zone sizing calculation should be run.",
-                                "default": true,
+                            "barometric_pressure": {
+                                "title": "Barometric Pressure",
+                                "description": "Barometric air pressure on the design day [Pa].",
+                                "default": 101325,
+                                "minimum": 31000,
+                                "maximum": 120000,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "rain": {
+                                "title": "Rain",
+                                "description": "Boolean to indicate rain on the design day.",
+                                "default": false,
                                 "type": "boolean"
                             },
-                            "do_system_sizing": {
-                                "title": "Do System Sizing",
-                                "description": "Boolean for whether the system sizing calculation should be run.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "do_plant_sizing": {
-                                "title": "Do Plant Sizing",
-                                "description": "Boolean for whether the plant sizing calculation should be run.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "run_for_run_periods": {
-                                "title": "Run For Run Periods",
-                                "description": "Boolean for whether the simulation should be run for the sizing periods.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "run_for_sizing_periods": {
-                                "title": "Run For Sizing Periods",
-                                "description": "Boolean for whether the simulation should be run for the run periods.",
+                            "snow_on_ground": {
+                                "title": "Snow On Ground",
+                                "description": "Boolean to indicate snow on the ground during the design day.",
                                 "default": false,
                                 "type": "boolean"
                             }
                         },
+                        "required": [
+                            "humidity_type",
+                            "humidity_value"
+                        ],
                         "additionalProperties": false
                     }
                 ],
-                "title": "SimulationControl",
-                "description": "Used to specify which types of calculations to run.",
+                "title": "HumidityCondition",
+                "description": "Used to specify humidity conditions on a design day.",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -285,6 +300,50 @@
                 ],
                 "title": "DaylightSavingTime",
                 "description": "Used to describe the daylight savings time for the simulation.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "DryBulbCondition": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "dry_bulb_max": {
+                                "title": "Dry Bulb Max",
+                                "description": "The maximum dry bulb temperature on the design day [C].",
+                                "minimum": -90,
+                                "maximum": 70,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "dry_bulb_range": {
+                                "title": "Dry Bulb Range",
+                                "description": "The difference between min and max temperatures on the design day [C].",
+                                "minimum": 0,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "DryBulbCondition",
+                                "pattern": "^DryBulbCondition$",
+                                "type": "string",
+                                "readOnly": true
+                            }
+                        },
+                        "required": [
+                            "dry_bulb_max",
+                            "dry_bulb_range"
+                        ],
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "DryBulbCondition",
+                "description": "Used to specify dry bulb conditions on a design day.",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -469,6 +528,61 @@
                     "propertyName": "type"
                 }
             },
+            "SimulationControl": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "title": "Type",
+                                "default": "SimulationControl",
+                                "pattern": "^SimulationControl$",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "do_zone_sizing": {
+                                "title": "Do Zone Sizing",
+                                "description": "Boolean for whether the zone sizing calculation should be run.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "do_system_sizing": {
+                                "title": "Do System Sizing",
+                                "description": "Boolean for whether the system sizing calculation should be run.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "do_plant_sizing": {
+                                "title": "Do Plant Sizing",
+                                "description": "Boolean for whether the plant sizing calculation should be run.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "run_for_run_periods": {
+                                "title": "Run For Run Periods",
+                                "description": "Boolean for whether the simulation should be run for the sizing periods.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "run_for_sizing_periods": {
+                                "title": "Run For Sizing Periods",
+                                "description": "Boolean for whether the simulation should be run for the run periods.",
+                                "default": false,
+                                "type": "boolean"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "SimulationControl",
+                "description": "Used to specify which types of calculations to run.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
             "SolarDistribution": {
                 "title": "SolarDistribution",
                 "description": "An enumeration.",
@@ -583,120 +697,6 @@
                     "CustomDay2"
                 ],
                 "type": "string"
-            },
-            "DryBulbCondition": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "dry_bulb_max": {
-                                "title": "Dry Bulb Max",
-                                "description": "The maximum dry bulb temperature on the design day [C].",
-                                "minimum": -90,
-                                "maximum": 70,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "dry_bulb_range": {
-                                "title": "Dry Bulb Range",
-                                "description": "The difference between min and max temperatures on the design day [C].",
-                                "minimum": 0,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "DryBulbCondition",
-                                "pattern": "^DryBulbCondition$",
-                                "type": "string",
-                                "readOnly": true
-                            }
-                        },
-                        "required": [
-                            "dry_bulb_max",
-                            "dry_bulb_range"
-                        ],
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "DryBulbCondition",
-                "description": "Used to specify dry bulb conditions on a design day.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "HumidityTypes": {
-                "title": "HumidityTypes",
-                "description": "An enumeration.",
-                "enum": [
-                    "Wetbulb",
-                    "Dewpoint",
-                    "HumidityRatio",
-                    "Enthalpy"
-                ],
-                "type": "string"
-            },
-            "HumidityCondition": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "humidity_type": {
-                                "$ref": "#/components/schemas/HumidityTypes"
-                            },
-                            "humidity_value": {
-                                "title": "Humidity Value",
-                                "description": "The value correcponding to the humidity_type.",
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "HumidityCondition",
-                                "pattern": "^HumidityCondition$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "barometric_pressure": {
-                                "title": "Barometric Pressure",
-                                "description": "Barometric air pressure on the design day [Pa].",
-                                "default": 101325,
-                                "minimum": 31000,
-                                "maximum": 120000,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "rain": {
-                                "title": "Rain",
-                                "description": "Boolean to indicate rain on the design day.",
-                                "default": false,
-                                "type": "boolean"
-                            },
-                            "snow_on_ground": {
-                                "title": "Snow On Ground",
-                                "description": "Boolean to indicate snow on the ground during the design day.",
-                                "default": false,
-                                "type": "boolean"
-                            }
-                        },
-                        "required": [
-                            "humidity_type",
-                            "humidity_value"
-                        ],
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "HumidityCondition",
-                "description": "Used to specify humidity conditions on a design day.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
             },
             "WindCondition": {
                 "allOf": [

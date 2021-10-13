@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ConstructionSet** | **string** | Identifier of a ConstructionSet to specify all default constructions for the Faces, Apertures, and Doors of the Room. If None, the Room will use the Model global_construction_set. | [optional] 
 **ProgramType** | **string** | Identifier of a ProgramType to specify all default schedules and loads for the Room. If None, the Room will have no loads or setpoints. | [optional] 
 **Hvac** | **string** | An optional identifier of a HVAC system (such as an IdealAirSystem) that specifies how the Room is conditioned. If None, it will be assumed that the Room is not conditioned. | [optional] 
+**Shw** | **string** | An optional identifier of a Service Hot Water (SHW) system that specifies how the hot water load of the Room is met. If None, the hot water load will be met with a generic system that only measures thermal loadand does not account for system efficiencies. | [optional] 
 **People** | [**PeopleAbridged**](PeopleAbridged.md) | People object to describe the occupancy of the Room. | [optional] 
 **Lighting** | [**LightingAbridged**](LightingAbridged.md) | Lighting object to describe the lighting usage of the Room. | [optional] 
 **ElectricEquipment** | [**ElectricEquipmentAbridged**](ElectricEquipmentAbridged.md) | ElectricEquipment object to describe the electric equipment usage. | [optional] 
