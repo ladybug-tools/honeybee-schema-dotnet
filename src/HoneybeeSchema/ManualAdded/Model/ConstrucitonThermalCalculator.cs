@@ -10,13 +10,30 @@ namespace HoneybeeSchema
 
         public static void CalOpaqueValues(List<Energy.IMaterial> materials, out double RValue, out double RFactor)
         {
+            if (materials == null || !materials.Any())
+            {
+                RValue = -999;
+                RFactor = -999;
+                return;
+            }
+
             MaterialList = materials;
             RValue = materials.Select(_ => _.RValue).Sum();
             RFactor = RValue + (1 / OutdoorHeatTransferCoeff) + (1 / IndoorHeatTransferCoeff);
         }
         public static void CalWindowValues(List<Energy.IMaterial> materials, out double RValue, out double RFactor, out double solarT, out double SHGC, out double vt)
         {
-            //instance.MaterialList = materials;
+            if (materials == null || !materials.Any())
+            {
+                RValue = -999;
+                RFactor = -999;
+                solarT = -999;
+                SHGC = -999;
+                vt = -999;
+                return;
+            }
+
+
             MaterialList = materials;
 
             var gaps = materials.OfType<Energy.IWindowMaterialGas>();
@@ -62,6 +79,7 @@ namespace HoneybeeSchema
         private static double OutsideEmissivity => GetMaterialEmissivity(MaterialList.FirstOrDefault());
         private static double GetMaterialEmissivityBack(Energy.IMaterial material)
         {
+            if (material == null) return -999;
             var insideEmissivity = 0.9;
             var insideMaterial = material;
 
@@ -83,6 +101,7 @@ namespace HoneybeeSchema
 
         private static double GetMaterialEmissivity(Energy.IMaterial material)
         {
+            if (material == null) return -999;
             var emmiss = 0.9;
             var mat = material;
             if (mat is Energy.IWindowMaterialGlazing glz)
@@ -255,6 +274,8 @@ namespace HoneybeeSchema
 
         private static double CalSolarTrans(List<Energy.IMaterial> mats)
         {
+            if (mats == null || !mats.Any()) return -999;
+
             var i = 0;
             var trans = 1.0;
             var gap_refs = new List<double>();
@@ -298,6 +319,8 @@ namespace HoneybeeSchema
 
         private static double CalVisTrans(List<Energy.IMaterial> mats)
         {
+            if (mats == null || !mats.Any()) return -999;
+
             var i = 0;
             var trans = 1.0;
             var gap_refs = new List<double>();
