@@ -279,7 +279,18 @@ namespace HoneybeeSchema.Test
             //window shade
             var ws = new EnergyWindowMaterialShade("id", visibleReflectance: 0.5, conductivity: 0.9);
             Assert.AreEqual(Math.Round(ws.RValue, 6), 0.005556);
+
         }
+
+        [Test]
+        public void InvalidConstructionThermalPropertiesTest()
+        {
+
+            var invlaid = new WindowConstructionAbridged("invalid", new List<string>());
+            var prop = ModelEnergyProperties.Default;
+            invlaid.CalThermalValues(prop);
+        }
+
     }
 
 }
