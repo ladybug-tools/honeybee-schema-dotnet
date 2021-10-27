@@ -62,7 +62,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Global Honeybee Radiance modifiers.</value>
         [DataMember(Name = "modifiers")]
-        public List<AnyOf<Plastic,Glass>> Modifiers { get; protected set; } 
+        public List<AnyOf<Plastic,Glass,Trans>> Modifiers { get; protected set; } 
         //============================================== is ReadOnly 
         /// <summary>
         /// Global Honeybee WallModifierSet.

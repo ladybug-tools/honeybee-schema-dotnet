@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | **string** |  | [optional] [readonly] [default to "GlobalModifierSet"]
-**Modifiers** | [**List&lt;AnyOfPlasticGlass&gt;**](AnyOfPlasticGlass.md) | Global Honeybee Radiance modifiers. | [optional] [readonly] 
+**Modifiers** | [**List&lt;AnyOfPlasticGlassTrans&gt;**](AnyOfPlasticGlassTrans.md) | Global Honeybee Radiance modifiers. | [optional] [readonly] 
 **WallSet** | [**WallModifierSetAbridged**](WallModifierSetAbridged.md) | Global Honeybee WallModifierSet. | [optional] [readonly] 
 **FloorSet** | [**FloorModifierSetAbridged**](FloorModifierSetAbridged.md) | Global Honeybee FloorModifierSet. | [optional] [readonly] 
 **RoofCeilingSet** | [**RoofCeilingModifierSetAbridged**](RoofCeilingModifierSetAbridged.md) | Global Honeybee RoofCeilingModifierSet. | [optional] [readonly] 
