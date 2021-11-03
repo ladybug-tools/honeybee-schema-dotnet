@@ -1,13 +1,46 @@
 
 using HoneybeeSchema.Energy;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace HoneybeeSchema
 {
-	public static class Extension 
+
+    public static class Extension 
 	{
+        public static bool AllEquals(this IList x, IList y)
+        {
+            if (x != null && y != null)
+            {
+                if (x.Count <=0 || y.Count <= 0)
+                    return x.Count == y.Count;
+
+                if (x[0] is IList listX && y[0] is IList listY)
+                {
+                    return listX.AllEquals(listY);
+                }
+                else
+                {
+                    var xo = x.Cast<object>();
+                    var yo = y.Cast<object>();
+                    return xo.SequenceEqual(yo);
+                }
+            }
+            else if (x == null)
+            {
+                return y == null || y.Count == 0;
+            }
+            else if (y == null)
+            {
+                return x == null || x.Count == 0;
+            }
+            else
+            {
+                return x == y;
+            }
+        }
 		public static Energy.ILoad Duplicate(this Energy.ILoad load)
 		{
 			return load.Duplicate() as Energy.ILoad;

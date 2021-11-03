@@ -30,5 +30,26 @@ namespace HoneybeeSchema
             var format = indented ? Formatting.Indented : Formatting.None;
             return JsonConvert.SerializeObject(this, format, JsonSetting.AnyOfConvertSetting);
         }
+
+        public static bool operator == (HoneybeeObject left, HoneybeeObject right)
+        {
+            if (left is null)
+            {
+                if (right is null)
+                {
+                    return true;
+                }
+
+                // Only the left side is null.
+                return false;
+            }
+            // Equals handles case of null on right side.
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(HoneybeeObject left, HoneybeeObject right)
+        {
+            return left != right;
+        }
     }
 }
