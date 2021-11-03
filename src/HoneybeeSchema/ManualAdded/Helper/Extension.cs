@@ -10,7 +10,7 @@ namespace HoneybeeSchema
 
     public static class Extension 
 	{
-        public static bool AllEquals(this IList x, IList y)
+        public static bool AllEquals(IList x, IList y)
         {
             if (x != null && y != null)
             {
@@ -19,7 +19,7 @@ namespace HoneybeeSchema
 
                 if (x[0] is IList listX && y[0] is IList listY)
                 {
-                    return listX.AllEquals(listY);
+                    return AllEquals(listX, listY);
                 }
                 else
                 {
