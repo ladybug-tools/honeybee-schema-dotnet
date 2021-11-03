@@ -49,7 +49,7 @@ namespace HoneybeeSchema
 
         public static bool operator !=(HoneybeeObject left, HoneybeeObject right)
         {
-            return left != right;
+            return !(left == right);
         }
     }
 }
