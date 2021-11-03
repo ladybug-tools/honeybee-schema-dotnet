@@ -256,27 +256,19 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.Apertures == input.Apertures ||
-                    this.Apertures != null &&
-                    input.Apertures != null &&
-                    this.Apertures.SequenceEqual(input.Apertures)
+                    Extension.AllEquals(this.Apertures, input.Apertures)
                 ) && base.Equals(input) && 
                 (
                     this.Doors == input.Doors ||
-                    this.Doors != null &&
-                    input.Doors != null &&
-                    this.Doors.SequenceEqual(input.Doors)
+                    Extension.AllEquals(this.Doors, input.Doors)
                 ) && base.Equals(input) && 
                 (
                     this.IndoorShades == input.IndoorShades ||
-                    this.IndoorShades != null &&
-                    input.IndoorShades != null &&
-                    this.IndoorShades.SequenceEqual(input.IndoorShades)
+                    Extension.AllEquals(this.IndoorShades, input.IndoorShades)
                 ) && base.Equals(input) && 
                 (
                     this.OutdoorShades == input.OutdoorShades ||
-                    this.OutdoorShades != null &&
-                    input.OutdoorShades != null &&
-                    this.OutdoorShades.SequenceEqual(input.OutdoorShades)
+                    Extension.AllEquals(this.OutdoorShades, input.OutdoorShades)
                 );
         }
 

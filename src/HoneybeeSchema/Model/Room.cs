@@ -214,9 +214,7 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                 (
                     this.Faces == input.Faces ||
-                    this.Faces != null &&
-                    input.Faces != null &&
-                    this.Faces.SequenceEqual(input.Faces)
+                    Extension.AllEquals(this.Faces, input.Faces)
                 ) && base.Equals(input) && 
                 (
                     this.Properties == input.Properties ||
@@ -230,15 +228,11 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.IndoorShades == input.IndoorShades ||
-                    this.IndoorShades != null &&
-                    input.IndoorShades != null &&
-                    this.IndoorShades.SequenceEqual(input.IndoorShades)
+                    Extension.AllEquals(this.IndoorShades, input.IndoorShades)
                 ) && base.Equals(input) && 
                 (
                     this.OutdoorShades == input.OutdoorShades ||
-                    this.OutdoorShades != null &&
-                    input.OutdoorShades != null &&
-                    this.OutdoorShades.SequenceEqual(input.OutdoorShades)
+                    Extension.AllEquals(this.OutdoorShades, input.OutdoorShades)
                 ) && base.Equals(input) && 
                 (
                     this.Multiplier == input.Multiplier ||

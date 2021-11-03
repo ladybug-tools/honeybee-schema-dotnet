@@ -187,15 +187,11 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                 (
                     this.GasTypes == input.GasTypes ||
-                    this.GasTypes != null &&
-                    input.GasTypes != null &&
-                    this.GasTypes.SequenceEqual(input.GasTypes)
+                    Extension.AllEquals(this.GasTypes, input.GasTypes)
                 ) && base.Equals(input) && 
                 (
                     this.GasFractions == input.GasFractions ||
-                    this.GasFractions != null &&
-                    input.GasFractions != null &&
-                    this.GasFractions.SequenceEqual(input.GasFractions)
+                    Extension.AllEquals(this.GasFractions, input.GasFractions)
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||

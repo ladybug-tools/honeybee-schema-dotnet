@@ -181,15 +181,11 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                 (
                     this.N == input.N ||
-                    this.N != null &&
-                    input.N != null &&
-                    this.N.SequenceEqual(input.N)
+                    Extension.AllEquals(this.N, input.N)
                 ) && base.Equals(input) && 
                 (
                     this.O == input.O ||
-                    this.O != null &&
-                    input.O != null &&
-                    this.O.SequenceEqual(input.O)
+                    Extension.AllEquals(this.O, input.O)
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
@@ -198,9 +194,7 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.X == input.X ||
-                    this.X != null &&
-                    input.X != null &&
-                    this.X.SequenceEqual(input.X)
+                    Extension.AllEquals(this.X, input.X)
                 );
         }
 

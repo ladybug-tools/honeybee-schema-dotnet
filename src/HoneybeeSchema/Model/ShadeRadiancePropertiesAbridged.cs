@@ -174,9 +174,7 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.States == input.States ||
-                    this.States != null &&
-                    input.States != null &&
-                    this.States.SequenceEqual(input.States)
+                    Extension.AllEquals(this.States, input.States)
                 );
         }
 

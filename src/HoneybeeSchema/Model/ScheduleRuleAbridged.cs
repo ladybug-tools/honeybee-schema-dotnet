@@ -288,15 +288,11 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.StartDate == input.StartDate ||
-                    this.StartDate != null &&
-                    input.StartDate != null &&
-                    this.StartDate.SequenceEqual(input.StartDate)
+                    Extension.AllEquals(this.StartDate, input.StartDate)
                 ) && base.Equals(input) && 
                 (
                     this.EndDate == input.EndDate ||
-                    this.EndDate != null &&
-                    input.EndDate != null &&
-                    this.EndDate.SequenceEqual(input.EndDate)
+                    Extension.AllEquals(this.EndDate, input.EndDate)
                 );
         }
 

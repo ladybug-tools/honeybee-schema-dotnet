@@ -180,9 +180,7 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                 (
                     this.Boundary == input.Boundary ||
-                    this.Boundary != null &&
-                    input.Boundary != null &&
-                    this.Boundary.SequenceEqual(input.Boundary)
+                    Extension.AllEquals(this.Boundary, input.Boundary)
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
@@ -191,9 +189,7 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.Holes == input.Holes ||
-                    this.Holes != null &&
-                    input.Holes != null &&
-                    this.Holes.SequenceEqual(input.Holes)
+                    Extension.AllEquals(this.Holes, input.Holes)
                 ) && base.Equals(input) && 
                 (
                     this.Plane == input.Plane ||

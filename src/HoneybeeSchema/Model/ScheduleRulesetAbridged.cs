@@ -223,9 +223,7 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                 (
                     this.DaySchedules == input.DaySchedules ||
-                    this.DaySchedules != null &&
-                    input.DaySchedules != null &&
-                    this.DaySchedules.SequenceEqual(input.DaySchedules)
+                    Extension.AllEquals(this.DaySchedules, input.DaySchedules)
                 ) && base.Equals(input) && 
                 (
                     this.DefaultDaySchedule == input.DefaultDaySchedule ||
@@ -239,9 +237,7 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.ScheduleRules == input.ScheduleRules ||
-                    this.ScheduleRules != null &&
-                    input.ScheduleRules != null &&
-                    this.ScheduleRules.SequenceEqual(input.ScheduleRules)
+                    Extension.AllEquals(this.ScheduleRules, input.ScheduleRules)
                 ) && base.Equals(input) && 
                 (
                     this.HolidaySchedule == input.HolidaySchedule ||

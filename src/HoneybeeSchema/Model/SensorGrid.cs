@@ -197,9 +197,7 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                 (
                     this.Sensors == input.Sensors ||
-                    this.Sensors != null &&
-                    input.Sensors != null &&
-                    this.Sensors.SequenceEqual(input.Sensors)
+                    Extension.AllEquals(this.Sensors, input.Sensors)
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
@@ -213,9 +211,7 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.BaseGeometry == input.BaseGeometry ||
-                    this.BaseGeometry != null &&
-                    input.BaseGeometry != null &&
-                    this.BaseGeometry.SequenceEqual(input.BaseGeometry)
+                    Extension.AllEquals(this.BaseGeometry, input.BaseGeometry)
                 ) && base.Equals(input) && 
                 (
                     this.GroupIdentifier == input.GroupIdentifier ||

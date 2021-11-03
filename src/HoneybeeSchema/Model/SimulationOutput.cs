@@ -206,15 +206,11 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.Outputs == input.Outputs ||
-                    this.Outputs != null &&
-                    input.Outputs != null &&
-                    this.Outputs.SequenceEqual(input.Outputs)
+                    Extension.AllEquals(this.Outputs, input.Outputs)
                 ) && base.Equals(input) && 
                 (
                     this.SummaryReports == input.SummaryReports ||
-                    this.SummaryReports != null &&
-                    input.SummaryReports != null &&
-                    this.SummaryReports.SequenceEqual(input.SummaryReports)
+                    Extension.AllEquals(this.SummaryReports, input.SummaryReports)
                 );
         }
 

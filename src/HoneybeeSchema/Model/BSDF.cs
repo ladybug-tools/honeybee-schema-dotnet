@@ -258,15 +258,11 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.Dependencies == input.Dependencies ||
-                    this.Dependencies != null &&
-                    input.Dependencies != null &&
-                    this.Dependencies.SequenceEqual(input.Dependencies)
+                    Extension.AllEquals(this.Dependencies, input.Dependencies)
                 ) && base.Equals(input) && 
                 (
                     this.UpOrientation == input.UpOrientation ||
-                    this.UpOrientation != null &&
-                    input.UpOrientation != null &&
-                    this.UpOrientation.SequenceEqual(input.UpOrientation)
+                    Extension.AllEquals(this.UpOrientation, input.UpOrientation)
                 ) && base.Equals(input) && 
                 (
                     this.Thickness == input.Thickness ||
@@ -285,21 +281,15 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.FrontDiffuseReflectance == input.FrontDiffuseReflectance ||
-                    this.FrontDiffuseReflectance != null &&
-                    input.FrontDiffuseReflectance != null &&
-                    this.FrontDiffuseReflectance.SequenceEqual(input.FrontDiffuseReflectance)
+                    Extension.AllEquals(this.FrontDiffuseReflectance, input.FrontDiffuseReflectance)
                 ) && base.Equals(input) && 
                 (
                     this.BackDiffuseReflectance == input.BackDiffuseReflectance ||
-                    this.BackDiffuseReflectance != null &&
-                    input.BackDiffuseReflectance != null &&
-                    this.BackDiffuseReflectance.SequenceEqual(input.BackDiffuseReflectance)
+                    Extension.AllEquals(this.BackDiffuseReflectance, input.BackDiffuseReflectance)
                 ) && base.Equals(input) && 
                 (
                     this.DiffuseTransmittance == input.DiffuseTransmittance ||
-                    this.DiffuseTransmittance != null &&
-                    input.DiffuseTransmittance != null &&
-                    this.DiffuseTransmittance.SequenceEqual(input.DiffuseTransmittance)
+                    Extension.AllEquals(this.DiffuseTransmittance, input.DiffuseTransmittance)
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
