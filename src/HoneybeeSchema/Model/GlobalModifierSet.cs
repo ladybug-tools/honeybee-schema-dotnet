@@ -213,9 +213,7 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.Modifiers == input.Modifiers ||
-                    this.Modifiers != null &&
-                    input.Modifiers != null &&
-                    this.Modifiers.SequenceEqual(input.Modifiers)
+                    Extension.AllEquals(this.Modifiers, input.Modifiers)
                 ) && base.Equals(input) && 
                 (
                     this.WallSet == input.WallSet ||

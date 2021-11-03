@@ -184,9 +184,7 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                 (
                     this.Values == input.Values ||
-                    this.Values != null &&
-                    input.Values != null &&
-                    this.Values.SequenceEqual(input.Values)
+                    Extension.AllEquals(this.Values, input.Values)
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
@@ -195,9 +193,7 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.Times == input.Times ||
-                    this.Times != null &&
-                    input.Times != null &&
-                    this.Times.SequenceEqual(input.Times)
+                    Extension.AllEquals(this.Times, input.Times)
                 ) && base.Equals(input) && 
                 (
                     this.Interpolate == input.Interpolate ||

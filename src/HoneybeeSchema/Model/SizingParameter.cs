@@ -174,9 +174,7 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.DesignDays == input.DesignDays ||
-                    this.DesignDays != null &&
-                    input.DesignDays != null &&
-                    this.DesignDays.SequenceEqual(input.DesignDays)
+                    Extension.AllEquals(this.DesignDays, input.DesignDays)
                 ) && base.Equals(input) && 
                 (
                     this.HeatingFactor == input.HeatingFactor ||

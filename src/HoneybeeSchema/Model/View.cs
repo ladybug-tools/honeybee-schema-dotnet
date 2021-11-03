@@ -261,21 +261,15 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                 (
                     this.Position == input.Position ||
-                    this.Position != null &&
-                    input.Position != null &&
-                    this.Position.SequenceEqual(input.Position)
+                    Extension.AllEquals(this.Position, input.Position)
                 ) && base.Equals(input) && 
                 (
                     this.Direction == input.Direction ||
-                    this.Direction != null &&
-                    input.Direction != null &&
-                    this.Direction.SequenceEqual(input.Direction)
+                    Extension.AllEquals(this.Direction, input.Direction)
                 ) && base.Equals(input) && 
                 (
                     this.UpVector == input.UpVector ||
-                    this.UpVector != null &&
-                    input.UpVector != null &&
-                    this.UpVector.SequenceEqual(input.UpVector)
+                    Extension.AllEquals(this.UpVector, input.UpVector)
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||

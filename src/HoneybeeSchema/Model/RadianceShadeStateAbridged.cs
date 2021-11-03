@@ -184,9 +184,7 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.Shades == input.Shades ||
-                    this.Shades != null &&
-                    input.Shades != null &&
-                    this.Shades.SequenceEqual(input.Shades)
+                    Extension.AllEquals(this.Shades, input.Shades)
                 );
         }
 

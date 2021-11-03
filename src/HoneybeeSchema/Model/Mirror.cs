@@ -215,9 +215,7 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.Dependencies == input.Dependencies ||
-                    this.Dependencies != null &&
-                    input.Dependencies != null &&
-                    this.Dependencies.SequenceEqual(input.Dependencies)
+                    Extension.AllEquals(this.Dependencies, input.Dependencies)
                 ) && base.Equals(input) && 
                 (
                     this.RReflectance == input.RReflectance ||

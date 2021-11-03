@@ -179,9 +179,7 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.LightPath == input.LightPath ||
-                    this.LightPath != null &&
-                    input.LightPath != null &&
-                    this.LightPath.SequenceEqual(input.LightPath)
+                    Extension.AllEquals(this.LightPath, input.LightPath)
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||

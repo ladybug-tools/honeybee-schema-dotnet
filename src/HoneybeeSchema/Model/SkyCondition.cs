@@ -171,9 +171,7 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                 (
                     this.Date == input.Date ||
-                    this.Date != null &&
-                    input.Date != null &&
-                    this.Date.SequenceEqual(input.Date)
+                    Extension.AllEquals(this.Date, input.Date)
                 ) && base.Equals(input) && 
                 (
                     this.DaylightSavings == input.DaylightSavings ||

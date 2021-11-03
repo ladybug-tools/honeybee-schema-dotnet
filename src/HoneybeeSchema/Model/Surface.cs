@@ -162,9 +162,7 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                 (
                     this.BoundaryConditionObjects == input.BoundaryConditionObjects ||
-                    this.BoundaryConditionObjects != null &&
-                    input.BoundaryConditionObjects != null &&
-                    this.BoundaryConditionObjects.SequenceEqual(input.BoundaryConditionObjects)
+                    Extension.AllEquals(this.BoundaryConditionObjects, input.BoundaryConditionObjects)
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||

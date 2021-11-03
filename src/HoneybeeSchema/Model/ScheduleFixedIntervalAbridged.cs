@@ -213,9 +213,7 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                 (
                     this.Values == input.Values ||
-                    this.Values != null &&
-                    input.Values != null &&
-                    this.Values.SequenceEqual(input.Values)
+                    Extension.AllEquals(this.Values, input.Values)
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
@@ -234,9 +232,7 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.StartDate == input.StartDate ||
-                    this.StartDate != null &&
-                    input.StartDate != null &&
-                    this.StartDate.SequenceEqual(input.StartDate)
+                    Extension.AllEquals(this.StartDate, input.StartDate)
                 ) && base.Equals(input) && 
                 (
                     this.PlaceholderValue == input.PlaceholderValue ||

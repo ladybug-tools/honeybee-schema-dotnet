@@ -181,15 +181,11 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                 (
                     this.Vertices == input.Vertices ||
-                    this.Vertices != null &&
-                    input.Vertices != null &&
-                    this.Vertices.SequenceEqual(input.Vertices)
+                    Extension.AllEquals(this.Vertices, input.Vertices)
                 ) && base.Equals(input) && 
                 (
                     this.Faces == input.Faces ||
-                    this.Faces != null &&
-                    input.Faces != null &&
-                    this.Faces.SequenceEqual(input.Faces)
+                    Extension.AllEquals(this.Faces, input.Faces)
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
@@ -198,9 +194,7 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.Colors == input.Colors ||
-                    this.Colors != null &&
-                    input.Colors != null &&
-                    this.Colors.SequenceEqual(input.Colors)
+                    Extension.AllEquals(this.Colors, input.Colors)
                 );
         }
 

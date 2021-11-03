@@ -172,15 +172,11 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                 (
                     this.Pos == input.Pos ||
-                    this.Pos != null &&
-                    input.Pos != null &&
-                    this.Pos.SequenceEqual(input.Pos)
+                    Extension.AllEquals(this.Pos, input.Pos)
                 ) && base.Equals(input) && 
                 (
                     this.Dir == input.Dir ||
-                    this.Dir != null &&
-                    input.Dir != null &&
-                    this.Dir.SequenceEqual(input.Dir)
+                    Extension.AllEquals(this.Dir, input.Dir)
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||

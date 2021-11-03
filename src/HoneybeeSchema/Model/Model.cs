@@ -265,33 +265,23 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.Rooms == input.Rooms ||
-                    this.Rooms != null &&
-                    input.Rooms != null &&
-                    this.Rooms.SequenceEqual(input.Rooms)
+                    Extension.AllEquals(this.Rooms, input.Rooms)
                 ) && base.Equals(input) && 
                 (
                     this.OrphanedFaces == input.OrphanedFaces ||
-                    this.OrphanedFaces != null &&
-                    input.OrphanedFaces != null &&
-                    this.OrphanedFaces.SequenceEqual(input.OrphanedFaces)
+                    Extension.AllEquals(this.OrphanedFaces, input.OrphanedFaces)
                 ) && base.Equals(input) && 
                 (
                     this.OrphanedShades == input.OrphanedShades ||
-                    this.OrphanedShades != null &&
-                    input.OrphanedShades != null &&
-                    this.OrphanedShades.SequenceEqual(input.OrphanedShades)
+                    Extension.AllEquals(this.OrphanedShades, input.OrphanedShades)
                 ) && base.Equals(input) && 
                 (
                     this.OrphanedApertures == input.OrphanedApertures ||
-                    this.OrphanedApertures != null &&
-                    input.OrphanedApertures != null &&
-                    this.OrphanedApertures.SequenceEqual(input.OrphanedApertures)
+                    Extension.AllEquals(this.OrphanedApertures, input.OrphanedApertures)
                 ) && base.Equals(input) && 
                 (
                     this.OrphanedDoors == input.OrphanedDoors ||
-                    this.OrphanedDoors != null &&
-                    input.OrphanedDoors != null &&
-                    this.OrphanedDoors.SequenceEqual(input.OrphanedDoors)
+                    Extension.AllEquals(this.OrphanedDoors, input.OrphanedDoors)
                 ) && base.Equals(input) && 
                 (
                     this.Units == input.Units ||

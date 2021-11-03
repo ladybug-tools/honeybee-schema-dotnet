@@ -168,9 +168,7 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                 (
                     this.Materials == input.Materials ||
-                    this.Materials != null &&
-                    input.Materials != null &&
-                    this.Materials.SequenceEqual(input.Materials)
+                    Extension.AllEquals(this.Materials, input.Materials)
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||

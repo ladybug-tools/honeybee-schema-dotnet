@@ -241,51 +241,35 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.ConstructionSets == input.ConstructionSets ||
-                    this.ConstructionSets != null &&
-                    input.ConstructionSets != null &&
-                    this.ConstructionSets.SequenceEqual(input.ConstructionSets)
+                    Extension.AllEquals(this.ConstructionSets, input.ConstructionSets)
                 ) && base.Equals(input) && 
                 (
                     this.Constructions == input.Constructions ||
-                    this.Constructions != null &&
-                    input.Constructions != null &&
-                    this.Constructions.SequenceEqual(input.Constructions)
+                    Extension.AllEquals(this.Constructions, input.Constructions)
                 ) && base.Equals(input) && 
                 (
                     this.Materials == input.Materials ||
-                    this.Materials != null &&
-                    input.Materials != null &&
-                    this.Materials.SequenceEqual(input.Materials)
+                    Extension.AllEquals(this.Materials, input.Materials)
                 ) && base.Equals(input) && 
                 (
                     this.Hvacs == input.Hvacs ||
-                    this.Hvacs != null &&
-                    input.Hvacs != null &&
-                    this.Hvacs.SequenceEqual(input.Hvacs)
+                    Extension.AllEquals(this.Hvacs, input.Hvacs)
                 ) && base.Equals(input) && 
                 (
                     this.Shws == input.Shws ||
-                    this.Shws != null &&
-                    input.Shws != null &&
-                    this.Shws.SequenceEqual(input.Shws)
+                    Extension.AllEquals(this.Shws, input.Shws)
                 ) && base.Equals(input) && 
                 (
                     this.ProgramTypes == input.ProgramTypes ||
-                    this.ProgramTypes != null &&
-                    input.ProgramTypes != null &&
-                    this.ProgramTypes.SequenceEqual(input.ProgramTypes)
+                    Extension.AllEquals(this.ProgramTypes, input.ProgramTypes)
                 ) && base.Equals(input) && 
                 (
                     this.Schedules == input.Schedules ||
-                    this.Schedules != null &&
-                    input.Schedules != null &&
-                    this.Schedules.SequenceEqual(input.Schedules)
+                    Extension.AllEquals(this.Schedules, input.Schedules)
                 ) && base.Equals(input) && 
                 (
                     this.ScheduleTypeLimits == input.ScheduleTypeLimits ||
-                    this.ScheduleTypeLimits != null &&
-                    input.ScheduleTypeLimits != null &&
-                    this.ScheduleTypeLimits.SequenceEqual(input.ScheduleTypeLimits)
+                    Extension.AllEquals(this.ScheduleTypeLimits, input.ScheduleTypeLimits)
                 ) && base.Equals(input) && 
                 (
                     this.VentilationSimulationControl == input.VentilationSimulationControl ||

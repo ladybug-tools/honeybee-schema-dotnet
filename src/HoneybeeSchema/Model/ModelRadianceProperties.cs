@@ -196,27 +196,19 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.Modifiers == input.Modifiers ||
-                    this.Modifiers != null &&
-                    input.Modifiers != null &&
-                    this.Modifiers.SequenceEqual(input.Modifiers)
+                    Extension.AllEquals(this.Modifiers, input.Modifiers)
                 ) && base.Equals(input) && 
                 (
                     this.ModifierSets == input.ModifierSets ||
-                    this.ModifierSets != null &&
-                    input.ModifierSets != null &&
-                    this.ModifierSets.SequenceEqual(input.ModifierSets)
+                    Extension.AllEquals(this.ModifierSets, input.ModifierSets)
                 ) && base.Equals(input) && 
                 (
                     this.SensorGrids == input.SensorGrids ||
-                    this.SensorGrids != null &&
-                    input.SensorGrids != null &&
-                    this.SensorGrids.SequenceEqual(input.SensorGrids)
+                    Extension.AllEquals(this.SensorGrids, input.SensorGrids)
                 ) && base.Equals(input) && 
                 (
                     this.Views == input.Views ||
-                    this.Views != null &&
-                    input.Views != null &&
-                    this.Views.SequenceEqual(input.Views)
+                    Extension.AllEquals(this.Views, input.Views)
                 );
         }
 

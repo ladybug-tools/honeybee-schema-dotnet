@@ -222,15 +222,11 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.Materials == input.Materials ||
-                    this.Materials != null &&
-                    input.Materials != null &&
-                    this.Materials.SequenceEqual(input.Materials)
+                    Extension.AllEquals(this.Materials, input.Materials)
                 ) && base.Equals(input) && 
                 (
                     this.Constructions == input.Constructions ||
-                    this.Constructions != null &&
-                    input.Constructions != null &&
-                    this.Constructions.SequenceEqual(input.Constructions)
+                    Extension.AllEquals(this.Constructions, input.Constructions)
                 ) && base.Equals(input) && 
                 (
                     this.WallSet == input.WallSet ||

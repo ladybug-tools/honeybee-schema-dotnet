@@ -352,9 +352,7 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.InternalMasses == input.InternalMasses ||
-                    this.InternalMasses != null &&
-                    input.InternalMasses != null &&
-                    this.InternalMasses.SequenceEqual(input.InternalMasses)
+                    Extension.AllEquals(this.InternalMasses, input.InternalMasses)
                 );
         }
 

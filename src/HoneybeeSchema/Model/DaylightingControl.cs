@@ -207,9 +207,7 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                 (
                     this.SensorPosition == input.SensorPosition ||
-                    this.SensorPosition != null &&
-                    input.SensorPosition != null &&
-                    this.SensorPosition.SequenceEqual(input.SensorPosition)
+                    Extension.AllEquals(this.SensorPosition, input.SensorPosition)
                 ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||

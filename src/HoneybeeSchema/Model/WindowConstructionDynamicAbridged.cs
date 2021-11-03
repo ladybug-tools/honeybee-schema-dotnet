@@ -178,9 +178,7 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                 (
                     this.Constructions == input.Constructions ||
-                    this.Constructions != null &&
-                    input.Constructions != null &&
-                    this.Constructions.SequenceEqual(input.Constructions)
+                    Extension.AllEquals(this.Constructions, input.Constructions)
                 ) && base.Equals(input) && 
                 (
                     this.Schedule == input.Schedule ||

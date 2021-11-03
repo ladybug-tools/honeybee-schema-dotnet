@@ -201,15 +201,11 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.StartDate == input.StartDate ||
-                    this.StartDate != null &&
-                    input.StartDate != null &&
-                    this.StartDate.SequenceEqual(input.StartDate)
+                    Extension.AllEquals(this.StartDate, input.StartDate)
                 ) && base.Equals(input) && 
                 (
                     this.EndDate == input.EndDate ||
-                    this.EndDate != null &&
-                    input.EndDate != null &&
-                    this.EndDate.SequenceEqual(input.EndDate)
+                    Extension.AllEquals(this.EndDate, input.EndDate)
                 ) && base.Equals(input) && 
                 (
                     this.StartDayOfWeek == input.StartDayOfWeek ||
@@ -218,9 +214,7 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     this.Holidays == input.Holidays ||
-                    this.Holidays != null &&
-                    input.Holidays != null &&
-                    this.Holidays.SequenceEqual(input.Holidays)
+                    Extension.AllEquals(this.Holidays, input.Holidays)
                 ) && base.Equals(input) && 
                 (
                     this.DaylightSavingTime == input.DaylightSavingTime ||
