@@ -268,9 +268,7 @@
                 ){{#hasMore}} && {{/hasMore}}{{/isContainer}}{{#isContainer}}
                 (
                     this.{{name}} == input.{{name}} ||
-                    this.{{name}} != null &&
-                    input.{{name}} != null &&
-                    this.{{name}}.SequenceEqual(input.{{name}})
+                    Extension.AllEquals(this.{{name}}, input.{{name}})
                 ){{#hasMore}} && {{/hasMore}}{{/isContainer}}{{/vars}}{{^vars}}{{#parent}}base.Equals(input){{/parent}}{{^parent}}false{{/parent}}{{/vars}};
         }
 
