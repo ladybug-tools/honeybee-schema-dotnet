@@ -66,6 +66,16 @@ namespace HoneybeeSchema.Test
         [Test]
         public void EqualInstanceTest()
         {
+            var p1 = new List<List<double>>() { new List<double>() { 0.11111, 0.22222, 0.333333 } };
+            var p2 = new List<List<double>>() { new List<double>() { 0.11110, 0.22222, 0.333333 } };
+            var p3 = new List<List<double>>() { new List<double>() { 0.11221, 0.22222, 0.333333 } };
+
+            var arePtsSame = Extension.AllEquals(p1, p2);
+            Assert.IsTrue(arePtsSame);
+
+            var arePtsNotSame = Extension.AllEquals(p1, p3);
+            Assert.IsFalse(arePtsNotSame);
+
             var door2 = this.instance.DuplicateDoor();
             var isSame = door2.Equals(instance);
             Assert.IsTrue(isSame);

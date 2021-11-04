@@ -17,7 +17,16 @@ namespace HoneybeeSchema
                 if (x.Count <=0 || y.Count <= 0)
                     return x.Count == y.Count;
 
-                if (x[0] is IList listX && y[0] is IList listY)
+                //Test if it is points List<List<double>> with the length of 3
+                if (x.Count == 3 && y.Count == 3 && x[0] is double && y[0] is double)
+                {
+                    var px = x.Cast<double>().ToList();
+                    var py = y.Cast<double>().ToList();
+                    var dis = CalDistanceSquare(px, py);
+                    var tol = 0.000001;
+                    return dis <= tol;
+                }
+                else if (x[0] is IList listX && y[0] is IList listY)
                 {
                     return AllEquals(listX, listY);
                 }
@@ -40,6 +49,21 @@ namespace HoneybeeSchema
             {
                 return x == y;
             }
+        }
+
+        public static double CalDistanceSquare(List<double> p1, List<double> p2)
+        {
+            var px1 = p1[0];
+            var py1 = p1[1];
+            var pz1 = p1[2];
+
+            var px2 = p2[0];
+            var py2 = p2[1];
+            var pz2 = p2[2];
+
+            var disSquare = Math.Pow(px1 - px2, 2) + Math.Pow(py1 - py2, 2) + Math.Pow(pz1 - pz2, 2);
+            return disSquare;
+
         }
 		public static Energy.ILoad Duplicate(this Energy.ILoad load)
 		{
