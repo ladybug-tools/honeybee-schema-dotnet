@@ -1,5 +1,6 @@
 
 using HoneybeeSchema.Energy;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace HoneybeeSchema
                 {
                     var px = x.Cast<double>().ToList();
                     var py = y.Cast<double>().ToList();
-                    var dis = CalDistanceSquare(px, py);
+                    var dis = CalDistanceSquare(px, py); 
                     var tol = 0.000001;
                     return dis <= tol;
                 }
@@ -51,6 +52,21 @@ namespace HoneybeeSchema
             }
         }
 
+        public static bool Equals(object x, object y)
+        {
+
+            if (x == y)
+                return true;
+
+            if (x == null)
+                return y == null;
+
+            if (x is JObject j)
+                return JToken.DeepEquals(j, y as JObject);
+            else
+                return x.Equals(y);
+
+        }
         public static double CalDistanceSquare(List<double> p1, List<double> p2)
         {
             var px1 = p1[0];
