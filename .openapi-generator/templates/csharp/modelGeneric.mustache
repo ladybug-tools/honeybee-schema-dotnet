@@ -262,9 +262,7 @@
                 return false;
             return {{#vars}}{{#parent}}base.Equals(input) && {{/parent}}{{^isContainer}}
                 (
-                    this.{{name}} == input.{{name}} ||
-                    (this.{{name}} != null &&
-                    this.{{name}}.Equals(input.{{name}}))
+                    Extension.Equals(this.{{name}}, input.{{name}})
                 ){{#hasMore}} && {{/hasMore}}{{/isContainer}}{{#isContainer}}
                 (
                     this.{{name}} == input.{{name}} ||
