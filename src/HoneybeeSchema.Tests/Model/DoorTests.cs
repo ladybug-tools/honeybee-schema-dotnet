@@ -105,7 +105,7 @@ namespace HoneybeeSchema.Test
         }
 
         // only for local tests
-        //[Test]
+        // [Test]
         public void RoomCompare()
         {
             var id = "Room_e6ac360b-aaed-4c3b-a130-36b4c2ac9d13-000d14cc";
@@ -117,6 +117,16 @@ namespace HoneybeeSchema.Test
 
             var m1 = Model.FromJson(j1);
             var m2 = Model.FromJson(j2);
+
+            var diffs = new List<Room>();
+            foreach (var item in m1.Rooms)
+            {
+                var match = m2.Rooms.FirstOrDefault(_ => _.Identifier == item.Identifier);
+                if (match != item)
+                    diffs.Add(match);
+            }
+             
+            Assert.IsTrue(diffs.Any());
 
             var r1 = m1.Rooms.FirstOrDefault(_ => _.Identifier == id);
             var r2 = m2.Rooms.FirstOrDefault(_ => _.Identifier == id);
