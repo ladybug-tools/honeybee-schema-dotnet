@@ -217,14 +217,10 @@ namespace HoneybeeSchema
                     Extension.AllEquals(this.Faces, input.Faces)
                 ) && base.Equals(input) && 
                 (
-                    this.Properties == input.Properties ||
-                    (this.Properties != null &&
-                    this.Properties.Equals(input.Properties))
+                    Extension.Equals(this.Properties, input.Properties)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
                     this.IndoorShades == input.IndoorShades ||
@@ -235,14 +231,10 @@ namespace HoneybeeSchema
                     Extension.AllEquals(this.OutdoorShades, input.OutdoorShades)
                 ) && base.Equals(input) && 
                 (
-                    this.Multiplier == input.Multiplier ||
-                    (this.Multiplier != null &&
-                    this.Multiplier.Equals(input.Multiplier))
+                    Extension.Equals(this.Multiplier, input.Multiplier)
                 ) && base.Equals(input) && 
                 (
-                    this.Story == input.Story ||
-                    (this.Story != null &&
-                    this.Story.Equals(input.Story))
+                    Extension.Equals(this.Story, input.Story)
                 );
         }
 

@@ -183,18 +183,14 @@ namespace HoneybeeSchema
                     Extension.AllEquals(this.Boundary, input.Boundary)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
                     this.Holes == input.Holes ||
                     Extension.AllEquals(this.Holes, input.Holes)
                 ) && base.Equals(input) && 
                 (
-                    this.Plane == input.Plane ||
-                    (this.Plane != null &&
-                    this.Plane.Equals(input.Plane))
+                    Extension.Equals(this.Plane, input.Plane)
                 );
         }
 

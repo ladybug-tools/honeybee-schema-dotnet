@@ -104,6 +104,35 @@ namespace HoneybeeSchema.Test
 
         }
 
+        // only for local tests
+        //[Test]
+        public void RoomCompare()
+        {
+            var id = "Room_e6ac360b-aaed-4c3b-a130-36b4c2ac9d13-000d14cc";
+            var f = @"C:\Users\mingo\Desktop\New folder\New folder\model_from_revit.hbjson";
+            var f2 = @"C:\Users\mingo\Desktop\New folder\New folder\model_updated.hbjson";
+
+            var j1 = System.IO.File.ReadAllText(f);
+            var j2 = System.IO.File.ReadAllText(f2);
+
+            var m1 = Model.FromJson(j1);
+            var m2 = Model.FromJson(j2);
+
+            var r1 = m1.Rooms.FirstOrDefault(_ => _.Identifier == id);
+            var r2 = m2.Rooms.FirstOrDefault(_ => _.Identifier == id);
+
+            
+            Assert.IsTrue(Extension.Equals(r1.UserData, r2.UserData));
+
+            Assert.IsTrue(r1.Properties.Equals(r2.Properties));
+           
+            Assert.IsTrue(Extension.AllEquals(r1.Faces, r2.Faces));
+            Assert.IsTrue(Extension.AllEquals(r1.IndoorShades, r2.IndoorShades));
+            Assert.IsTrue(Extension.AllEquals(r1.OutdoorShades, r2.OutdoorShades));
+            Assert.IsTrue(r1.Equals(r2));
+
+        }
+
         /// <summary>
         /// Test the property 'Name'
         /// </summary>

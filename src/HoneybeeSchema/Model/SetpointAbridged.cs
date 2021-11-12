@@ -195,29 +195,19 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.CoolingSchedule == input.CoolingSchedule ||
-                    (this.CoolingSchedule != null &&
-                    this.CoolingSchedule.Equals(input.CoolingSchedule))
+                    Extension.Equals(this.CoolingSchedule, input.CoolingSchedule)
                 ) && base.Equals(input) && 
                 (
-                    this.HeatingSchedule == input.HeatingSchedule ||
-                    (this.HeatingSchedule != null &&
-                    this.HeatingSchedule.Equals(input.HeatingSchedule))
+                    Extension.Equals(this.HeatingSchedule, input.HeatingSchedule)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.HumidifyingSchedule == input.HumidifyingSchedule ||
-                    (this.HumidifyingSchedule != null &&
-                    this.HumidifyingSchedule.Equals(input.HumidifyingSchedule))
+                    Extension.Equals(this.HumidifyingSchedule, input.HumidifyingSchedule)
                 ) && base.Equals(input) && 
                 (
-                    this.DehumidifyingSchedule == input.DehumidifyingSchedule ||
-                    (this.DehumidifyingSchedule != null &&
-                    this.DehumidifyingSchedule.Equals(input.DehumidifyingSchedule))
+                    Extension.Equals(this.DehumidifyingSchedule, input.DehumidifyingSchedule)
                 );
         }
 

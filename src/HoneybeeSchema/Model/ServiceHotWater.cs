@@ -203,34 +203,22 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.FlowPerArea == input.FlowPerArea ||
-                    (this.FlowPerArea != null &&
-                    this.FlowPerArea.Equals(input.FlowPerArea))
+                    Extension.Equals(this.FlowPerArea, input.FlowPerArea)
                 ) && base.Equals(input) && 
                 (
-                    this.Schedule == input.Schedule ||
-                    (this.Schedule != null &&
-                    this.Schedule.Equals(input.Schedule))
+                    Extension.Equals(this.Schedule, input.Schedule)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.TargetTemperature == input.TargetTemperature ||
-                    (this.TargetTemperature != null &&
-                    this.TargetTemperature.Equals(input.TargetTemperature))
+                    Extension.Equals(this.TargetTemperature, input.TargetTemperature)
                 ) && base.Equals(input) && 
                 (
-                    this.SensibleFraction == input.SensibleFraction ||
-                    (this.SensibleFraction != null &&
-                    this.SensibleFraction.Equals(input.SensibleFraction))
+                    Extension.Equals(this.SensibleFraction, input.SensibleFraction)
                 ) && base.Equals(input) && 
                 (
-                    this.LatentFraction == input.LatentFraction ||
-                    (this.LatentFraction != null &&
-                    this.LatentFraction.Equals(input.LatentFraction))
+                    Extension.Equals(this.LatentFraction, input.LatentFraction)
                 );
         }
 

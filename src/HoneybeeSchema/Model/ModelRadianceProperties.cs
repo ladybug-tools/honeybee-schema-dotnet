@@ -185,14 +185,10 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.GlobalModifierSet == input.GlobalModifierSet ||
-                    (this.GlobalModifierSet != null &&
-                    this.GlobalModifierSet.Equals(input.GlobalModifierSet))
+                    Extension.Equals(this.GlobalModifierSet, input.GlobalModifierSet)
                 ) && base.Equals(input) && 
                 (
                     this.Modifiers == input.Modifiers ||

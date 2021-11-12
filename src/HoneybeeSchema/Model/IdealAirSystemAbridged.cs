@@ -247,59 +247,37 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.EconomizerType == input.EconomizerType ||
-                    (this.EconomizerType != null &&
-                    this.EconomizerType.Equals(input.EconomizerType))
+                    Extension.Equals(this.EconomizerType, input.EconomizerType)
                 ) && base.Equals(input) && 
                 (
-                    this.DemandControlledVentilation == input.DemandControlledVentilation ||
-                    (this.DemandControlledVentilation != null &&
-                    this.DemandControlledVentilation.Equals(input.DemandControlledVentilation))
+                    Extension.Equals(this.DemandControlledVentilation, input.DemandControlledVentilation)
                 ) && base.Equals(input) && 
                 (
-                    this.SensibleHeatRecovery == input.SensibleHeatRecovery ||
-                    (this.SensibleHeatRecovery != null &&
-                    this.SensibleHeatRecovery.Equals(input.SensibleHeatRecovery))
+                    Extension.Equals(this.SensibleHeatRecovery, input.SensibleHeatRecovery)
                 ) && base.Equals(input) && 
                 (
-                    this.LatentHeatRecovery == input.LatentHeatRecovery ||
-                    (this.LatentHeatRecovery != null &&
-                    this.LatentHeatRecovery.Equals(input.LatentHeatRecovery))
+                    Extension.Equals(this.LatentHeatRecovery, input.LatentHeatRecovery)
                 ) && base.Equals(input) && 
                 (
-                    this.HeatingAirTemperature == input.HeatingAirTemperature ||
-                    (this.HeatingAirTemperature != null &&
-                    this.HeatingAirTemperature.Equals(input.HeatingAirTemperature))
+                    Extension.Equals(this.HeatingAirTemperature, input.HeatingAirTemperature)
                 ) && base.Equals(input) && 
                 (
-                    this.CoolingAirTemperature == input.CoolingAirTemperature ||
-                    (this.CoolingAirTemperature != null &&
-                    this.CoolingAirTemperature.Equals(input.CoolingAirTemperature))
+                    Extension.Equals(this.CoolingAirTemperature, input.CoolingAirTemperature)
                 ) && base.Equals(input) && 
                 (
-                    this.HeatingLimit == input.HeatingLimit ||
-                    (this.HeatingLimit != null &&
-                    this.HeatingLimit.Equals(input.HeatingLimit))
+                    Extension.Equals(this.HeatingLimit, input.HeatingLimit)
                 ) && base.Equals(input) && 
                 (
-                    this.CoolingLimit == input.CoolingLimit ||
-                    (this.CoolingLimit != null &&
-                    this.CoolingLimit.Equals(input.CoolingLimit))
+                    Extension.Equals(this.CoolingLimit, input.CoolingLimit)
                 ) && base.Equals(input) && 
                 (
-                    this.HeatingAvailability == input.HeatingAvailability ||
-                    (this.HeatingAvailability != null &&
-                    this.HeatingAvailability.Equals(input.HeatingAvailability))
+                    Extension.Equals(this.HeatingAvailability, input.HeatingAvailability)
                 ) && base.Equals(input) && 
                 (
-                    this.CoolingAvailability == input.CoolingAvailability ||
-                    (this.CoolingAvailability != null &&
-                    this.CoolingAvailability.Equals(input.CoolingAvailability))
+                    Extension.Equals(this.CoolingAvailability, input.CoolingAvailability)
                 );
         }
 

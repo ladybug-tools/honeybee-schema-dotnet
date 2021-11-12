@@ -204,44 +204,28 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.VentControlType == input.VentControlType ||
-                    (this.VentControlType != null &&
-                    this.VentControlType.Equals(input.VentControlType))
+                    Extension.Equals(this.VentControlType, input.VentControlType)
                 ) && base.Equals(input) && 
                 (
-                    this.ReferenceTemperature == input.ReferenceTemperature ||
-                    (this.ReferenceTemperature != null &&
-                    this.ReferenceTemperature.Equals(input.ReferenceTemperature))
+                    Extension.Equals(this.ReferenceTemperature, input.ReferenceTemperature)
                 ) && base.Equals(input) && 
                 (
-                    this.ReferencePressure == input.ReferencePressure ||
-                    (this.ReferencePressure != null &&
-                    this.ReferencePressure.Equals(input.ReferencePressure))
+                    Extension.Equals(this.ReferencePressure, input.ReferencePressure)
                 ) && base.Equals(input) && 
                 (
-                    this.ReferenceHumidityRatio == input.ReferenceHumidityRatio ||
-                    (this.ReferenceHumidityRatio != null &&
-                    this.ReferenceHumidityRatio.Equals(input.ReferenceHumidityRatio))
+                    Extension.Equals(this.ReferenceHumidityRatio, input.ReferenceHumidityRatio)
                 ) && base.Equals(input) && 
                 (
-                    this.BuildingType == input.BuildingType ||
-                    (this.BuildingType != null &&
-                    this.BuildingType.Equals(input.BuildingType))
+                    Extension.Equals(this.BuildingType, input.BuildingType)
                 ) && base.Equals(input) && 
                 (
-                    this.LongAxisAngle == input.LongAxisAngle ||
-                    (this.LongAxisAngle != null &&
-                    this.LongAxisAngle.Equals(input.LongAxisAngle))
+                    Extension.Equals(this.LongAxisAngle, input.LongAxisAngle)
                 ) && base.Equals(input) && 
                 (
-                    this.AspectRatio == input.AspectRatio ||
-                    (this.AspectRatio != null &&
-                    this.AspectRatio.Equals(input.AspectRatio))
+                    Extension.Equals(this.AspectRatio, input.AspectRatio)
                 );
         }
 

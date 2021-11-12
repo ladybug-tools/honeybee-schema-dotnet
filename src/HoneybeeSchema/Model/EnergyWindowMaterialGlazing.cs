@@ -274,74 +274,46 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.Thickness == input.Thickness ||
-                    (this.Thickness != null &&
-                    this.Thickness.Equals(input.Thickness))
+                    Extension.Equals(this.Thickness, input.Thickness)
                 ) && base.Equals(input) && 
                 (
-                    this.SolarTransmittance == input.SolarTransmittance ||
-                    (this.SolarTransmittance != null &&
-                    this.SolarTransmittance.Equals(input.SolarTransmittance))
+                    Extension.Equals(this.SolarTransmittance, input.SolarTransmittance)
                 ) && base.Equals(input) && 
                 (
-                    this.SolarReflectance == input.SolarReflectance ||
-                    (this.SolarReflectance != null &&
-                    this.SolarReflectance.Equals(input.SolarReflectance))
+                    Extension.Equals(this.SolarReflectance, input.SolarReflectance)
                 ) && base.Equals(input) && 
                 (
-                    this.SolarReflectanceBack == input.SolarReflectanceBack ||
-                    (this.SolarReflectanceBack != null &&
-                    this.SolarReflectanceBack.Equals(input.SolarReflectanceBack))
+                    Extension.Equals(this.SolarReflectanceBack, input.SolarReflectanceBack)
                 ) && base.Equals(input) && 
                 (
-                    this.VisibleTransmittance == input.VisibleTransmittance ||
-                    (this.VisibleTransmittance != null &&
-                    this.VisibleTransmittance.Equals(input.VisibleTransmittance))
+                    Extension.Equals(this.VisibleTransmittance, input.VisibleTransmittance)
                 ) && base.Equals(input) && 
                 (
-                    this.VisibleReflectance == input.VisibleReflectance ||
-                    (this.VisibleReflectance != null &&
-                    this.VisibleReflectance.Equals(input.VisibleReflectance))
+                    Extension.Equals(this.VisibleReflectance, input.VisibleReflectance)
                 ) && base.Equals(input) && 
                 (
-                    this.VisibleReflectanceBack == input.VisibleReflectanceBack ||
-                    (this.VisibleReflectanceBack != null &&
-                    this.VisibleReflectanceBack.Equals(input.VisibleReflectanceBack))
+                    Extension.Equals(this.VisibleReflectanceBack, input.VisibleReflectanceBack)
                 ) && base.Equals(input) && 
                 (
-                    this.InfraredTransmittance == input.InfraredTransmittance ||
-                    (this.InfraredTransmittance != null &&
-                    this.InfraredTransmittance.Equals(input.InfraredTransmittance))
+                    Extension.Equals(this.InfraredTransmittance, input.InfraredTransmittance)
                 ) && base.Equals(input) && 
                 (
-                    this.Emissivity == input.Emissivity ||
-                    (this.Emissivity != null &&
-                    this.Emissivity.Equals(input.Emissivity))
+                    Extension.Equals(this.Emissivity, input.Emissivity)
                 ) && base.Equals(input) && 
                 (
-                    this.EmissivityBack == input.EmissivityBack ||
-                    (this.EmissivityBack != null &&
-                    this.EmissivityBack.Equals(input.EmissivityBack))
+                    Extension.Equals(this.EmissivityBack, input.EmissivityBack)
                 ) && base.Equals(input) && 
                 (
-                    this.Conductivity == input.Conductivity ||
-                    (this.Conductivity != null &&
-                    this.Conductivity.Equals(input.Conductivity))
+                    Extension.Equals(this.Conductivity, input.Conductivity)
                 ) && base.Equals(input) && 
                 (
-                    this.DirtCorrection == input.DirtCorrection ||
-                    (this.DirtCorrection != null &&
-                    this.DirtCorrection.Equals(input.DirtCorrection))
+                    Extension.Equals(this.DirtCorrection, input.DirtCorrection)
                 ) && base.Equals(input) && 
                 (
-                    this.SolarDiffusing == input.SolarDiffusing ||
-                    (this.SolarDiffusing != null &&
-                    this.SolarDiffusing.Equals(input.SolarDiffusing))
+                    Extension.Equals(this.SolarDiffusing, input.SolarDiffusing)
                 );
         }
 

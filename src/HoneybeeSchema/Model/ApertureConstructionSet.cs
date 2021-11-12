@@ -177,29 +177,19 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.InteriorConstruction == input.InteriorConstruction ||
-                    (this.InteriorConstruction != null &&
-                    this.InteriorConstruction.Equals(input.InteriorConstruction))
+                    Extension.Equals(this.InteriorConstruction, input.InteriorConstruction)
                 ) && base.Equals(input) && 
                 (
-                    this.WindowConstruction == input.WindowConstruction ||
-                    (this.WindowConstruction != null &&
-                    this.WindowConstruction.Equals(input.WindowConstruction))
+                    Extension.Equals(this.WindowConstruction, input.WindowConstruction)
                 ) && base.Equals(input) && 
                 (
-                    this.SkylightConstruction == input.SkylightConstruction ||
-                    (this.SkylightConstruction != null &&
-                    this.SkylightConstruction.Equals(input.SkylightConstruction))
+                    Extension.Equals(this.SkylightConstruction, input.SkylightConstruction)
                 ) && base.Equals(input) && 
                 (
-                    this.OperableConstruction == input.OperableConstruction ||
-                    (this.OperableConstruction != null &&
-                    this.OperableConstruction.Equals(input.OperableConstruction))
+                    Extension.Equals(this.OperableConstruction, input.OperableConstruction)
                 );
         }
 

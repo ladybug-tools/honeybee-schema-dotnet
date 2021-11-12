@@ -169,19 +169,13 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.FlowCoefficient == input.FlowCoefficient ||
-                    (this.FlowCoefficient != null &&
-                    this.FlowCoefficient.Equals(input.FlowCoefficient))
+                    Extension.Equals(this.FlowCoefficient, input.FlowCoefficient)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.FlowExponent == input.FlowExponent ||
-                    (this.FlowExponent != null &&
-                    this.FlowExponent.Equals(input.FlowExponent))
+                    Extension.Equals(this.FlowExponent, input.FlowExponent)
                 );
         }
 

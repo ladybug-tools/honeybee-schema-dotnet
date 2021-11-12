@@ -209,38 +209,26 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Modifier == input.Modifier ||
-                    (this.Modifier != null &&
-                    this.Modifier.Equals(input.Modifier))
+                    Extension.Equals(this.Modifier, input.Modifier)
                 ) && base.Equals(input) && 
                 (
                     this.Dependencies == input.Dependencies ||
                     Extension.AllEquals(this.Dependencies, input.Dependencies)
                 ) && base.Equals(input) && 
                 (
-                    this.RReflectance == input.RReflectance ||
-                    (this.RReflectance != null &&
-                    this.RReflectance.Equals(input.RReflectance))
+                    Extension.Equals(this.RReflectance, input.RReflectance)
                 ) && base.Equals(input) && 
                 (
-                    this.GReflectance == input.GReflectance ||
-                    (this.GReflectance != null &&
-                    this.GReflectance.Equals(input.GReflectance))
+                    Extension.Equals(this.GReflectance, input.GReflectance)
                 ) && base.Equals(input) && 
                 (
-                    this.BReflectance == input.BReflectance ||
-                    (this.BReflectance != null &&
-                    this.BReflectance.Equals(input.BReflectance))
+                    Extension.Equals(this.BReflectance, input.BReflectance)
                 ) && base.Equals(input) && 
                 (
-                    this.AlternateMaterial == input.AlternateMaterial ||
-                    (this.AlternateMaterial != null &&
-                    this.AlternateMaterial.Equals(input.AlternateMaterial))
+                    Extension.Equals(this.AlternateMaterial, input.AlternateMaterial)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 );
         }
 

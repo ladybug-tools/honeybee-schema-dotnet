@@ -200,23 +200,17 @@ namespace HoneybeeSchema
                     Extension.AllEquals(this.Sensors, input.Sensors)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.Mesh == input.Mesh ||
-                    (this.Mesh != null &&
-                    this.Mesh.Equals(input.Mesh))
+                    Extension.Equals(this.Mesh, input.Mesh)
                 ) && base.Equals(input) && 
                 (
                     this.BaseGeometry == input.BaseGeometry ||
                     Extension.AllEquals(this.BaseGeometry, input.BaseGeometry)
                 ) && base.Equals(input) && 
                 (
-                    this.GroupIdentifier == input.GroupIdentifier ||
-                    (this.GroupIdentifier != null &&
-                    this.GroupIdentifier.Equals(input.GroupIdentifier))
+                    Extension.Equals(this.GroupIdentifier, input.GroupIdentifier)
                 );
         }
 

@@ -213,49 +213,31 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.Output == input.Output ||
-                    (this.Output != null &&
-                    this.Output.Equals(input.Output))
+                    Extension.Equals(this.Output, input.Output)
                 ) && base.Equals(input) && 
                 (
-                    this.RunPeriod == input.RunPeriod ||
-                    (this.RunPeriod != null &&
-                    this.RunPeriod.Equals(input.RunPeriod))
+                    Extension.Equals(this.RunPeriod, input.RunPeriod)
                 ) && base.Equals(input) && 
                 (
-                    this.Timestep == input.Timestep ||
-                    (this.Timestep != null &&
-                    this.Timestep.Equals(input.Timestep))
+                    Extension.Equals(this.Timestep, input.Timestep)
                 ) && base.Equals(input) && 
                 (
-                    this.SimulationControl == input.SimulationControl ||
-                    (this.SimulationControl != null &&
-                    this.SimulationControl.Equals(input.SimulationControl))
+                    Extension.Equals(this.SimulationControl, input.SimulationControl)
                 ) && base.Equals(input) && 
                 (
-                    this.ShadowCalculation == input.ShadowCalculation ||
-                    (this.ShadowCalculation != null &&
-                    this.ShadowCalculation.Equals(input.ShadowCalculation))
+                    Extension.Equals(this.ShadowCalculation, input.ShadowCalculation)
                 ) && base.Equals(input) && 
                 (
-                    this.SizingParameter == input.SizingParameter ||
-                    (this.SizingParameter != null &&
-                    this.SizingParameter.Equals(input.SizingParameter))
+                    Extension.Equals(this.SizingParameter, input.SizingParameter)
                 ) && base.Equals(input) && 
                 (
-                    this.NorthAngle == input.NorthAngle ||
-                    (this.NorthAngle != null &&
-                    this.NorthAngle.Equals(input.NorthAngle))
+                    Extension.Equals(this.NorthAngle, input.NorthAngle)
                 ) && base.Equals(input) && 
                 (
-                    this.TerrainType == input.TerrainType ||
-                    (this.TerrainType != null &&
-                    this.TerrainType.Equals(input.TerrainType))
+                    Extension.Equals(this.TerrainType, input.TerrainType)
                 );
         }
 

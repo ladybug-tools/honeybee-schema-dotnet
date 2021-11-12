@@ -390,139 +390,85 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.SlatOrientation == input.SlatOrientation ||
-                    (this.SlatOrientation != null &&
-                    this.SlatOrientation.Equals(input.SlatOrientation))
+                    Extension.Equals(this.SlatOrientation, input.SlatOrientation)
                 ) && base.Equals(input) && 
                 (
-                    this.SlatWidth == input.SlatWidth ||
-                    (this.SlatWidth != null &&
-                    this.SlatWidth.Equals(input.SlatWidth))
+                    Extension.Equals(this.SlatWidth, input.SlatWidth)
                 ) && base.Equals(input) && 
                 (
-                    this.SlatSeparation == input.SlatSeparation ||
-                    (this.SlatSeparation != null &&
-                    this.SlatSeparation.Equals(input.SlatSeparation))
+                    Extension.Equals(this.SlatSeparation, input.SlatSeparation)
                 ) && base.Equals(input) && 
                 (
-                    this.SlatThickness == input.SlatThickness ||
-                    (this.SlatThickness != null &&
-                    this.SlatThickness.Equals(input.SlatThickness))
+                    Extension.Equals(this.SlatThickness, input.SlatThickness)
                 ) && base.Equals(input) && 
                 (
-                    this.SlatAngle == input.SlatAngle ||
-                    (this.SlatAngle != null &&
-                    this.SlatAngle.Equals(input.SlatAngle))
+                    Extension.Equals(this.SlatAngle, input.SlatAngle)
                 ) && base.Equals(input) && 
                 (
-                    this.SlatConductivity == input.SlatConductivity ||
-                    (this.SlatConductivity != null &&
-                    this.SlatConductivity.Equals(input.SlatConductivity))
+                    Extension.Equals(this.SlatConductivity, input.SlatConductivity)
                 ) && base.Equals(input) && 
                 (
-                    this.BeamSolarTransmittance == input.BeamSolarTransmittance ||
-                    (this.BeamSolarTransmittance != null &&
-                    this.BeamSolarTransmittance.Equals(input.BeamSolarTransmittance))
+                    Extension.Equals(this.BeamSolarTransmittance, input.BeamSolarTransmittance)
                 ) && base.Equals(input) && 
                 (
-                    this.BeamSolarReflectance == input.BeamSolarReflectance ||
-                    (this.BeamSolarReflectance != null &&
-                    this.BeamSolarReflectance.Equals(input.BeamSolarReflectance))
+                    Extension.Equals(this.BeamSolarReflectance, input.BeamSolarReflectance)
                 ) && base.Equals(input) && 
                 (
-                    this.BeamSolarReflectanceBack == input.BeamSolarReflectanceBack ||
-                    (this.BeamSolarReflectanceBack != null &&
-                    this.BeamSolarReflectanceBack.Equals(input.BeamSolarReflectanceBack))
+                    Extension.Equals(this.BeamSolarReflectanceBack, input.BeamSolarReflectanceBack)
                 ) && base.Equals(input) && 
                 (
-                    this.DiffuseSolarTransmittance == input.DiffuseSolarTransmittance ||
-                    (this.DiffuseSolarTransmittance != null &&
-                    this.DiffuseSolarTransmittance.Equals(input.DiffuseSolarTransmittance))
+                    Extension.Equals(this.DiffuseSolarTransmittance, input.DiffuseSolarTransmittance)
                 ) && base.Equals(input) && 
                 (
-                    this.DiffuseSolarReflectance == input.DiffuseSolarReflectance ||
-                    (this.DiffuseSolarReflectance != null &&
-                    this.DiffuseSolarReflectance.Equals(input.DiffuseSolarReflectance))
+                    Extension.Equals(this.DiffuseSolarReflectance, input.DiffuseSolarReflectance)
                 ) && base.Equals(input) && 
                 (
-                    this.DiffuseSolarReflectanceBack == input.DiffuseSolarReflectanceBack ||
-                    (this.DiffuseSolarReflectanceBack != null &&
-                    this.DiffuseSolarReflectanceBack.Equals(input.DiffuseSolarReflectanceBack))
+                    Extension.Equals(this.DiffuseSolarReflectanceBack, input.DiffuseSolarReflectanceBack)
                 ) && base.Equals(input) && 
                 (
-                    this.BeamVisibleTransmittance == input.BeamVisibleTransmittance ||
-                    (this.BeamVisibleTransmittance != null &&
-                    this.BeamVisibleTransmittance.Equals(input.BeamVisibleTransmittance))
+                    Extension.Equals(this.BeamVisibleTransmittance, input.BeamVisibleTransmittance)
                 ) && base.Equals(input) && 
                 (
-                    this.BeamVisibleReflectance == input.BeamVisibleReflectance ||
-                    (this.BeamVisibleReflectance != null &&
-                    this.BeamVisibleReflectance.Equals(input.BeamVisibleReflectance))
+                    Extension.Equals(this.BeamVisibleReflectance, input.BeamVisibleReflectance)
                 ) && base.Equals(input) && 
                 (
-                    this.BeamVisibleReflectanceBack == input.BeamVisibleReflectanceBack ||
-                    (this.BeamVisibleReflectanceBack != null &&
-                    this.BeamVisibleReflectanceBack.Equals(input.BeamVisibleReflectanceBack))
+                    Extension.Equals(this.BeamVisibleReflectanceBack, input.BeamVisibleReflectanceBack)
                 ) && base.Equals(input) && 
                 (
-                    this.DiffuseVisibleTransmittance == input.DiffuseVisibleTransmittance ||
-                    (this.DiffuseVisibleTransmittance != null &&
-                    this.DiffuseVisibleTransmittance.Equals(input.DiffuseVisibleTransmittance))
+                    Extension.Equals(this.DiffuseVisibleTransmittance, input.DiffuseVisibleTransmittance)
                 ) && base.Equals(input) && 
                 (
-                    this.DiffuseVisibleReflectance == input.DiffuseVisibleReflectance ||
-                    (this.DiffuseVisibleReflectance != null &&
-                    this.DiffuseVisibleReflectance.Equals(input.DiffuseVisibleReflectance))
+                    Extension.Equals(this.DiffuseVisibleReflectance, input.DiffuseVisibleReflectance)
                 ) && base.Equals(input) && 
                 (
-                    this.DiffuseVisibleReflectanceBack == input.DiffuseVisibleReflectanceBack ||
-                    (this.DiffuseVisibleReflectanceBack != null &&
-                    this.DiffuseVisibleReflectanceBack.Equals(input.DiffuseVisibleReflectanceBack))
+                    Extension.Equals(this.DiffuseVisibleReflectanceBack, input.DiffuseVisibleReflectanceBack)
                 ) && base.Equals(input) && 
                 (
-                    this.InfraredTransmittance == input.InfraredTransmittance ||
-                    (this.InfraredTransmittance != null &&
-                    this.InfraredTransmittance.Equals(input.InfraredTransmittance))
+                    Extension.Equals(this.InfraredTransmittance, input.InfraredTransmittance)
                 ) && base.Equals(input) && 
                 (
-                    this.Emissivity == input.Emissivity ||
-                    (this.Emissivity != null &&
-                    this.Emissivity.Equals(input.Emissivity))
+                    Extension.Equals(this.Emissivity, input.Emissivity)
                 ) && base.Equals(input) && 
                 (
-                    this.EmissivityBack == input.EmissivityBack ||
-                    (this.EmissivityBack != null &&
-                    this.EmissivityBack.Equals(input.EmissivityBack))
+                    Extension.Equals(this.EmissivityBack, input.EmissivityBack)
                 ) && base.Equals(input) && 
                 (
-                    this.DistanceToGlass == input.DistanceToGlass ||
-                    (this.DistanceToGlass != null &&
-                    this.DistanceToGlass.Equals(input.DistanceToGlass))
+                    Extension.Equals(this.DistanceToGlass, input.DistanceToGlass)
                 ) && base.Equals(input) && 
                 (
-                    this.TopOpeningMultiplier == input.TopOpeningMultiplier ||
-                    (this.TopOpeningMultiplier != null &&
-                    this.TopOpeningMultiplier.Equals(input.TopOpeningMultiplier))
+                    Extension.Equals(this.TopOpeningMultiplier, input.TopOpeningMultiplier)
                 ) && base.Equals(input) && 
                 (
-                    this.BottomOpeningMultiplier == input.BottomOpeningMultiplier ||
-                    (this.BottomOpeningMultiplier != null &&
-                    this.BottomOpeningMultiplier.Equals(input.BottomOpeningMultiplier))
+                    Extension.Equals(this.BottomOpeningMultiplier, input.BottomOpeningMultiplier)
                 ) && base.Equals(input) && 
                 (
-                    this.LeftOpeningMultiplier == input.LeftOpeningMultiplier ||
-                    (this.LeftOpeningMultiplier != null &&
-                    this.LeftOpeningMultiplier.Equals(input.LeftOpeningMultiplier))
+                    Extension.Equals(this.LeftOpeningMultiplier, input.LeftOpeningMultiplier)
                 ) && base.Equals(input) && 
                 (
-                    this.RightOpeningMultiplier == input.RightOpeningMultiplier ||
-                    (this.RightOpeningMultiplier != null &&
-                    this.RightOpeningMultiplier.Equals(input.RightOpeningMultiplier))
+                    Extension.Equals(this.RightOpeningMultiplier, input.RightOpeningMultiplier)
                 );
         }
 

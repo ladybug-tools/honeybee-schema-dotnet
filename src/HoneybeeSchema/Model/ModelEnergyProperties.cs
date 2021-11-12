@@ -230,14 +230,10 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.GlobalConstructionSet == input.GlobalConstructionSet ||
-                    (this.GlobalConstructionSet != null &&
-                    this.GlobalConstructionSet.Equals(input.GlobalConstructionSet))
+                    Extension.Equals(this.GlobalConstructionSet, input.GlobalConstructionSet)
                 ) && base.Equals(input) && 
                 (
                     this.ConstructionSets == input.ConstructionSets ||
@@ -272,9 +268,7 @@ namespace HoneybeeSchema
                     Extension.AllEquals(this.ScheduleTypeLimits, input.ScheduleTypeLimits)
                 ) && base.Equals(input) && 
                 (
-                    this.VentilationSimulationControl == input.VentilationSimulationControl ||
-                    (this.VentilationSimulationControl != null &&
-                    this.VentilationSimulationControl.Equals(input.VentilationSimulationControl))
+                    Extension.Equals(this.VentilationSimulationControl, input.VentilationSimulationControl)
                 );
         }
 

@@ -229,49 +229,31 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.People == input.People ||
-                    (this.People != null &&
-                    this.People.Equals(input.People))
+                    Extension.Equals(this.People, input.People)
                 ) && base.Equals(input) && 
                 (
-                    this.Lighting == input.Lighting ||
-                    (this.Lighting != null &&
-                    this.Lighting.Equals(input.Lighting))
+                    Extension.Equals(this.Lighting, input.Lighting)
                 ) && base.Equals(input) && 
                 (
-                    this.ElectricEquipment == input.ElectricEquipment ||
-                    (this.ElectricEquipment != null &&
-                    this.ElectricEquipment.Equals(input.ElectricEquipment))
+                    Extension.Equals(this.ElectricEquipment, input.ElectricEquipment)
                 ) && base.Equals(input) && 
                 (
-                    this.GasEquipment == input.GasEquipment ||
-                    (this.GasEquipment != null &&
-                    this.GasEquipment.Equals(input.GasEquipment))
+                    Extension.Equals(this.GasEquipment, input.GasEquipment)
                 ) && base.Equals(input) && 
                 (
-                    this.ServiceHotWater == input.ServiceHotWater ||
-                    (this.ServiceHotWater != null &&
-                    this.ServiceHotWater.Equals(input.ServiceHotWater))
+                    Extension.Equals(this.ServiceHotWater, input.ServiceHotWater)
                 ) && base.Equals(input) && 
                 (
-                    this.Infiltration == input.Infiltration ||
-                    (this.Infiltration != null &&
-                    this.Infiltration.Equals(input.Infiltration))
+                    Extension.Equals(this.Infiltration, input.Infiltration)
                 ) && base.Equals(input) && 
                 (
-                    this.Ventilation == input.Ventilation ||
-                    (this.Ventilation != null &&
-                    this.Ventilation.Equals(input.Ventilation))
+                    Extension.Equals(this.Ventilation, input.Ventilation)
                 ) && base.Equals(input) && 
                 (
-                    this.Setpoint == input.Setpoint ||
-                    (this.Setpoint != null &&
-                    this.Setpoint.Equals(input.Setpoint))
+                    Extension.Equals(this.Setpoint, input.Setpoint)
                 );
         }
 

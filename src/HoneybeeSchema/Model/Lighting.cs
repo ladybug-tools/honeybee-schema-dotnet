@@ -212,39 +212,25 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.WattsPerArea == input.WattsPerArea ||
-                    (this.WattsPerArea != null &&
-                    this.WattsPerArea.Equals(input.WattsPerArea))
+                    Extension.Equals(this.WattsPerArea, input.WattsPerArea)
                 ) && base.Equals(input) && 
                 (
-                    this.Schedule == input.Schedule ||
-                    (this.Schedule != null &&
-                    this.Schedule.Equals(input.Schedule))
+                    Extension.Equals(this.Schedule, input.Schedule)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.VisibleFraction == input.VisibleFraction ||
-                    (this.VisibleFraction != null &&
-                    this.VisibleFraction.Equals(input.VisibleFraction))
+                    Extension.Equals(this.VisibleFraction, input.VisibleFraction)
                 ) && base.Equals(input) && 
                 (
-                    this.RadiantFraction == input.RadiantFraction ||
-                    (this.RadiantFraction != null &&
-                    this.RadiantFraction.Equals(input.RadiantFraction))
+                    Extension.Equals(this.RadiantFraction, input.RadiantFraction)
                 ) && base.Equals(input) && 
                 (
-                    this.ReturnAirFraction == input.ReturnAirFraction ||
-                    (this.ReturnAirFraction != null &&
-                    this.ReturnAirFraction.Equals(input.ReturnAirFraction))
+                    Extension.Equals(this.ReturnAirFraction, input.ReturnAirFraction)
                 ) && base.Equals(input) && 
                 (
-                    this.BaselineWattsPerArea == input.BaselineWattsPerArea ||
-                    (this.BaselineWattsPerArea != null &&
-                    this.BaselineWattsPerArea.Equals(input.BaselineWattsPerArea))
+                    Extension.Equals(this.BaselineWattsPerArea, input.BaselineWattsPerArea)
                 );
         }
 

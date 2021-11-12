@@ -174,19 +174,13 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.Thickness == input.Thickness ||
-                    (this.Thickness != null &&
-                    this.Thickness.Equals(input.Thickness))
+                    Extension.Equals(this.Thickness, input.Thickness)
                 ) && base.Equals(input) && 
                 (
-                    this.GasType == input.GasType ||
-                    (this.GasType != null &&
-                    this.GasType.Equals(input.GasType))
+                    Extension.Equals(this.GasType, input.GasType)
                 );
         }
 

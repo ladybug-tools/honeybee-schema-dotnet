@@ -203,34 +203,22 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.PeoplePerArea == input.PeoplePerArea ||
-                    (this.PeoplePerArea != null &&
-                    this.PeoplePerArea.Equals(input.PeoplePerArea))
+                    Extension.Equals(this.PeoplePerArea, input.PeoplePerArea)
                 ) && base.Equals(input) && 
                 (
-                    this.OccupancySchedule == input.OccupancySchedule ||
-                    (this.OccupancySchedule != null &&
-                    this.OccupancySchedule.Equals(input.OccupancySchedule))
+                    Extension.Equals(this.OccupancySchedule, input.OccupancySchedule)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.ActivitySchedule == input.ActivitySchedule ||
-                    (this.ActivitySchedule != null &&
-                    this.ActivitySchedule.Equals(input.ActivitySchedule))
+                    Extension.Equals(this.ActivitySchedule, input.ActivitySchedule)
                 ) && base.Equals(input) && 
                 (
-                    this.RadiantFraction == input.RadiantFraction ||
-                    (this.RadiantFraction != null &&
-                    this.RadiantFraction.Equals(input.RadiantFraction))
+                    Extension.Equals(this.RadiantFraction, input.RadiantFraction)
                 ) && base.Equals(input) && 
                 (
-                    this.LatentFraction == input.LatentFraction ||
-                    (this.LatentFraction != null &&
-                    this.LatentFraction.Equals(input.LatentFraction))
+                    Extension.Equals(this.LatentFraction, input.LatentFraction)
                 );
         }
 

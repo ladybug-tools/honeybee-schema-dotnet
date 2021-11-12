@@ -186,34 +186,22 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.DoZoneSizing == input.DoZoneSizing ||
-                    (this.DoZoneSizing != null &&
-                    this.DoZoneSizing.Equals(input.DoZoneSizing))
+                    Extension.Equals(this.DoZoneSizing, input.DoZoneSizing)
                 ) && base.Equals(input) && 
                 (
-                    this.DoSystemSizing == input.DoSystemSizing ||
-                    (this.DoSystemSizing != null &&
-                    this.DoSystemSizing.Equals(input.DoSystemSizing))
+                    Extension.Equals(this.DoSystemSizing, input.DoSystemSizing)
                 ) && base.Equals(input) && 
                 (
-                    this.DoPlantSizing == input.DoPlantSizing ||
-                    (this.DoPlantSizing != null &&
-                    this.DoPlantSizing.Equals(input.DoPlantSizing))
+                    Extension.Equals(this.DoPlantSizing, input.DoPlantSizing)
                 ) && base.Equals(input) && 
                 (
-                    this.RunForRunPeriods == input.RunForRunPeriods ||
-                    (this.RunForRunPeriods != null &&
-                    this.RunForRunPeriods.Equals(input.RunForRunPeriods))
+                    Extension.Equals(this.RunForRunPeriods, input.RunForRunPeriods)
                 ) && base.Equals(input) && 
                 (
-                    this.RunForSizingPeriods == input.RunForSizingPeriods ||
-                    (this.RunForSizingPeriods != null &&
-                    this.RunForSizingPeriods.Equals(input.RunForSizingPeriods))
+                    Extension.Equals(this.RunForSizingPeriods, input.RunForSizingPeriods)
                 );
         }
 

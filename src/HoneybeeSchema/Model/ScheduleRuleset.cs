@@ -226,38 +226,26 @@ namespace HoneybeeSchema
                     Extension.AllEquals(this.DaySchedules, input.DaySchedules)
                 ) && base.Equals(input) && 
                 (
-                    this.DefaultDaySchedule == input.DefaultDaySchedule ||
-                    (this.DefaultDaySchedule != null &&
-                    this.DefaultDaySchedule.Equals(input.DefaultDaySchedule))
+                    Extension.Equals(this.DefaultDaySchedule, input.DefaultDaySchedule)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
                     this.ScheduleRules == input.ScheduleRules ||
                     Extension.AllEquals(this.ScheduleRules, input.ScheduleRules)
                 ) && base.Equals(input) && 
                 (
-                    this.HolidaySchedule == input.HolidaySchedule ||
-                    (this.HolidaySchedule != null &&
-                    this.HolidaySchedule.Equals(input.HolidaySchedule))
+                    Extension.Equals(this.HolidaySchedule, input.HolidaySchedule)
                 ) && base.Equals(input) && 
                 (
-                    this.SummerDesigndaySchedule == input.SummerDesigndaySchedule ||
-                    (this.SummerDesigndaySchedule != null &&
-                    this.SummerDesigndaySchedule.Equals(input.SummerDesigndaySchedule))
+                    Extension.Equals(this.SummerDesigndaySchedule, input.SummerDesigndaySchedule)
                 ) && base.Equals(input) && 
                 (
-                    this.WinterDesigndaySchedule == input.WinterDesigndaySchedule ||
-                    (this.WinterDesigndaySchedule != null &&
-                    this.WinterDesigndaySchedule.Equals(input.WinterDesigndaySchedule))
+                    Extension.Equals(this.WinterDesigndaySchedule, input.WinterDesigndaySchedule)
                 ) && base.Equals(input) && 
                 (
-                    this.ScheduleTypeLimit == input.ScheduleTypeLimit ||
-                    (this.ScheduleTypeLimit != null &&
-                    this.ScheduleTypeLimit.Equals(input.ScheduleTypeLimit))
+                    Extension.Equals(this.ScheduleTypeLimit, input.ScheduleTypeLimit)
                 );
         }
 

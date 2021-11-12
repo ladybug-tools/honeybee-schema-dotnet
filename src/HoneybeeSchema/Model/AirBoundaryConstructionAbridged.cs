@@ -175,19 +175,13 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.AirMixingPerArea == input.AirMixingPerArea ||
-                    (this.AirMixingPerArea != null &&
-                    this.AirMixingPerArea.Equals(input.AirMixingPerArea))
+                    Extension.Equals(this.AirMixingPerArea, input.AirMixingPerArea)
                 ) && base.Equals(input) && 
                 (
-                    this.AirMixingSchedule == input.AirMixingSchedule ||
-                    (this.AirMixingSchedule != null &&
-                    this.AirMixingSchedule.Equals(input.AirMixingSchedule))
+                    Extension.Equals(this.AirMixingSchedule, input.AirMixingSchedule)
                 );
         }
 

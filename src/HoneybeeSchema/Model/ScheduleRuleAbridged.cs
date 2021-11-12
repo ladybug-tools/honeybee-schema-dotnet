@@ -242,49 +242,31 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.ScheduleDay == input.ScheduleDay ||
-                    (this.ScheduleDay != null &&
-                    this.ScheduleDay.Equals(input.ScheduleDay))
+                    Extension.Equals(this.ScheduleDay, input.ScheduleDay)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.ApplySunday == input.ApplySunday ||
-                    (this.ApplySunday != null &&
-                    this.ApplySunday.Equals(input.ApplySunday))
+                    Extension.Equals(this.ApplySunday, input.ApplySunday)
                 ) && base.Equals(input) && 
                 (
-                    this.ApplyMonday == input.ApplyMonday ||
-                    (this.ApplyMonday != null &&
-                    this.ApplyMonday.Equals(input.ApplyMonday))
+                    Extension.Equals(this.ApplyMonday, input.ApplyMonday)
                 ) && base.Equals(input) && 
                 (
-                    this.ApplyTuesday == input.ApplyTuesday ||
-                    (this.ApplyTuesday != null &&
-                    this.ApplyTuesday.Equals(input.ApplyTuesday))
+                    Extension.Equals(this.ApplyTuesday, input.ApplyTuesday)
                 ) && base.Equals(input) && 
                 (
-                    this.ApplyWednesday == input.ApplyWednesday ||
-                    (this.ApplyWednesday != null &&
-                    this.ApplyWednesday.Equals(input.ApplyWednesday))
+                    Extension.Equals(this.ApplyWednesday, input.ApplyWednesday)
                 ) && base.Equals(input) && 
                 (
-                    this.ApplyThursday == input.ApplyThursday ||
-                    (this.ApplyThursday != null &&
-                    this.ApplyThursday.Equals(input.ApplyThursday))
+                    Extension.Equals(this.ApplyThursday, input.ApplyThursday)
                 ) && base.Equals(input) && 
                 (
-                    this.ApplyFriday == input.ApplyFriday ||
-                    (this.ApplyFriday != null &&
-                    this.ApplyFriday.Equals(input.ApplyFriday))
+                    Extension.Equals(this.ApplyFriday, input.ApplyFriday)
                 ) && base.Equals(input) && 
                 (
-                    this.ApplySaturday == input.ApplySaturday ||
-                    (this.ApplySaturday != null &&
-                    this.ApplySaturday.Equals(input.ApplySaturday))
+                    Extension.Equals(this.ApplySaturday, input.ApplySaturday)
                 ) && base.Equals(input) && 
                 (
                     this.StartDate == input.StartDate ||

@@ -165,9 +165,7 @@ namespace HoneybeeSchema
                     Extension.AllEquals(this.BoundaryConditionObjects, input.BoundaryConditionObjects)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 );
         }
 

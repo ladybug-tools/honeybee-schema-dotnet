@@ -164,14 +164,10 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Clearness == input.Clearness ||
-                    (this.Clearness != null &&
-                    this.Clearness.Equals(input.Clearness))
+                    Extension.Equals(this.Clearness, input.Clearness)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 );
         }
 

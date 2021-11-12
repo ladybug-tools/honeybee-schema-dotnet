@@ -201,34 +201,22 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.RValue == input.RValue ||
-                    (this.RValue != null &&
-                    this.RValue.Equals(input.RValue))
+                    Extension.Equals(this.RValue, input.RValue)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.Roughness == input.Roughness ||
-                    (this.Roughness != null &&
-                    this.Roughness.Equals(input.Roughness))
+                    Extension.Equals(this.Roughness, input.Roughness)
                 ) && base.Equals(input) && 
                 (
-                    this.ThermalAbsorptance == input.ThermalAbsorptance ||
-                    (this.ThermalAbsorptance != null &&
-                    this.ThermalAbsorptance.Equals(input.ThermalAbsorptance))
+                    Extension.Equals(this.ThermalAbsorptance, input.ThermalAbsorptance)
                 ) && base.Equals(input) && 
                 (
-                    this.SolarAbsorptance == input.SolarAbsorptance ||
-                    (this.SolarAbsorptance != null &&
-                    this.SolarAbsorptance.Equals(input.SolarAbsorptance))
+                    Extension.Equals(this.SolarAbsorptance, input.SolarAbsorptance)
                 ) && base.Equals(input) && 
                 (
-                    this.VisibleAbsorptance == input.VisibleAbsorptance ||
-                    (this.VisibleAbsorptance != null &&
-                    this.VisibleAbsorptance.Equals(input.VisibleAbsorptance))
+                    Extension.Equals(this.VisibleAbsorptance, input.VisibleAbsorptance)
                 );
         }
 

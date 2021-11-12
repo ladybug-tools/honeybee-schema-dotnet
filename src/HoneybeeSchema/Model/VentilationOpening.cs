@@ -204,44 +204,28 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.FractionAreaOperable == input.FractionAreaOperable ||
-                    (this.FractionAreaOperable != null &&
-                    this.FractionAreaOperable.Equals(input.FractionAreaOperable))
+                    Extension.Equals(this.FractionAreaOperable, input.FractionAreaOperable)
                 ) && base.Equals(input) && 
                 (
-                    this.FractionHeightOperable == input.FractionHeightOperable ||
-                    (this.FractionHeightOperable != null &&
-                    this.FractionHeightOperable.Equals(input.FractionHeightOperable))
+                    Extension.Equals(this.FractionHeightOperable, input.FractionHeightOperable)
                 ) && base.Equals(input) && 
                 (
-                    this.DischargeCoefficient == input.DischargeCoefficient ||
-                    (this.DischargeCoefficient != null &&
-                    this.DischargeCoefficient.Equals(input.DischargeCoefficient))
+                    Extension.Equals(this.DischargeCoefficient, input.DischargeCoefficient)
                 ) && base.Equals(input) && 
                 (
-                    this.WindCrossVent == input.WindCrossVent ||
-                    (this.WindCrossVent != null &&
-                    this.WindCrossVent.Equals(input.WindCrossVent))
+                    Extension.Equals(this.WindCrossVent, input.WindCrossVent)
                 ) && base.Equals(input) && 
                 (
-                    this.FlowCoefficientClosed == input.FlowCoefficientClosed ||
-                    (this.FlowCoefficientClosed != null &&
-                    this.FlowCoefficientClosed.Equals(input.FlowCoefficientClosed))
+                    Extension.Equals(this.FlowCoefficientClosed, input.FlowCoefficientClosed)
                 ) && base.Equals(input) && 
                 (
-                    this.FlowExponentClosed == input.FlowExponentClosed ||
-                    (this.FlowExponentClosed != null &&
-                    this.FlowExponentClosed.Equals(input.FlowExponentClosed))
+                    Extension.Equals(this.FlowExponentClosed, input.FlowExponentClosed)
                 ) && base.Equals(input) && 
                 (
-                    this.TwoWayThreshold == input.TwoWayThreshold ||
-                    (this.TwoWayThreshold != null &&
-                    this.TwoWayThreshold.Equals(input.TwoWayThreshold))
+                    Extension.Equals(this.TwoWayThreshold, input.TwoWayThreshold)
                 );
         }
 

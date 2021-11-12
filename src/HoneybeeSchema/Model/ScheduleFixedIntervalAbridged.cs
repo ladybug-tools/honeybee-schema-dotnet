@@ -216,33 +216,23 @@ namespace HoneybeeSchema
                     Extension.AllEquals(this.Values, input.Values)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.ScheduleTypeLimit == input.ScheduleTypeLimit ||
-                    (this.ScheduleTypeLimit != null &&
-                    this.ScheduleTypeLimit.Equals(input.ScheduleTypeLimit))
+                    Extension.Equals(this.ScheduleTypeLimit, input.ScheduleTypeLimit)
                 ) && base.Equals(input) && 
                 (
-                    this.Timestep == input.Timestep ||
-                    (this.Timestep != null &&
-                    this.Timestep.Equals(input.Timestep))
+                    Extension.Equals(this.Timestep, input.Timestep)
                 ) && base.Equals(input) && 
                 (
                     this.StartDate == input.StartDate ||
                     Extension.AllEquals(this.StartDate, input.StartDate)
                 ) && base.Equals(input) && 
                 (
-                    this.PlaceholderValue == input.PlaceholderValue ||
-                    (this.PlaceholderValue != null &&
-                    this.PlaceholderValue.Equals(input.PlaceholderValue))
+                    Extension.Equals(this.PlaceholderValue, input.PlaceholderValue)
                 ) && base.Equals(input) && 
                 (
-                    this.Interpolate == input.Interpolate ||
-                    (this.Interpolate != null &&
-                    this.Interpolate.Equals(input.Interpolate))
+                    Extension.Equals(this.Interpolate, input.Interpolate)
                 );
         }
 

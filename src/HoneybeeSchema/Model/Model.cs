@@ -249,19 +249,13 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Properties == input.Properties ||
-                    (this.Properties != null &&
-                    this.Properties.Equals(input.Properties))
+                    Extension.Equals(this.Properties, input.Properties)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.Version == input.Version ||
-                    (this.Version != null &&
-                    this.Version.Equals(input.Version))
+                    Extension.Equals(this.Version, input.Version)
                 ) && base.Equals(input) && 
                 (
                     this.Rooms == input.Rooms ||
@@ -284,19 +278,13 @@ namespace HoneybeeSchema
                     Extension.AllEquals(this.OrphanedDoors, input.OrphanedDoors)
                 ) && base.Equals(input) && 
                 (
-                    this.Units == input.Units ||
-                    (this.Units != null &&
-                    this.Units.Equals(input.Units))
+                    Extension.Equals(this.Units, input.Units)
                 ) && base.Equals(input) && 
                 (
-                    this.Tolerance == input.Tolerance ||
-                    (this.Tolerance != null &&
-                    this.Tolerance.Equals(input.Tolerance))
+                    Extension.Equals(this.Tolerance, input.Tolerance)
                 ) && base.Equals(input) && 
                 (
-                    this.AngleTolerance == input.AngleTolerance ||
-                    (this.AngleTolerance != null &&
-                    this.AngleTolerance.Equals(input.AngleTolerance))
+                    Extension.Equals(this.AngleTolerance, input.AngleTolerance)
                 );
         }
 

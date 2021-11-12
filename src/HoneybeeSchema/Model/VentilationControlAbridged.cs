@@ -195,39 +195,25 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.MinIndoorTemperature == input.MinIndoorTemperature ||
-                    (this.MinIndoorTemperature != null &&
-                    this.MinIndoorTemperature.Equals(input.MinIndoorTemperature))
+                    Extension.Equals(this.MinIndoorTemperature, input.MinIndoorTemperature)
                 ) && base.Equals(input) && 
                 (
-                    this.MaxIndoorTemperature == input.MaxIndoorTemperature ||
-                    (this.MaxIndoorTemperature != null &&
-                    this.MaxIndoorTemperature.Equals(input.MaxIndoorTemperature))
+                    Extension.Equals(this.MaxIndoorTemperature, input.MaxIndoorTemperature)
                 ) && base.Equals(input) && 
                 (
-                    this.MinOutdoorTemperature == input.MinOutdoorTemperature ||
-                    (this.MinOutdoorTemperature != null &&
-                    this.MinOutdoorTemperature.Equals(input.MinOutdoorTemperature))
+                    Extension.Equals(this.MinOutdoorTemperature, input.MinOutdoorTemperature)
                 ) && base.Equals(input) && 
                 (
-                    this.MaxOutdoorTemperature == input.MaxOutdoorTemperature ||
-                    (this.MaxOutdoorTemperature != null &&
-                    this.MaxOutdoorTemperature.Equals(input.MaxOutdoorTemperature))
+                    Extension.Equals(this.MaxOutdoorTemperature, input.MaxOutdoorTemperature)
                 ) && base.Equals(input) && 
                 (
-                    this.DeltaTemperature == input.DeltaTemperature ||
-                    (this.DeltaTemperature != null &&
-                    this.DeltaTemperature.Equals(input.DeltaTemperature))
+                    Extension.Equals(this.DeltaTemperature, input.DeltaTemperature)
                 ) && base.Equals(input) && 
                 (
-                    this.Schedule == input.Schedule ||
-                    (this.Schedule != null &&
-                    this.Schedule.Equals(input.Schedule))
+                    Extension.Equals(this.Schedule, input.Schedule)
                 );
         }
 
