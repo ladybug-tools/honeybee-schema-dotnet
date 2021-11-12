@@ -184,24 +184,16 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.UFactor == input.UFactor ||
-                    (this.UFactor != null &&
-                    this.UFactor.Equals(input.UFactor))
+                    Extension.Equals(this.UFactor, input.UFactor)
                 ) && base.Equals(input) && 
                 (
-                    this.Shgc == input.Shgc ||
-                    (this.Shgc != null &&
-                    this.Shgc.Equals(input.Shgc))
+                    Extension.Equals(this.Shgc, input.Shgc)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.Vt == input.Vt ||
-                    (this.Vt != null &&
-                    this.Vt.Equals(input.Vt))
+                    Extension.Equals(this.Vt, input.Vt)
                 );
         }
 

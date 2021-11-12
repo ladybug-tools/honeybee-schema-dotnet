@@ -193,29 +193,19 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.EquipmentType == input.EquipmentType ||
-                    (this.EquipmentType != null &&
-                    this.EquipmentType.Equals(input.EquipmentType))
+                    Extension.Equals(this.EquipmentType, input.EquipmentType)
                 ) && base.Equals(input) && 
                 (
-                    this.HeaterEfficiency == input.HeaterEfficiency ||
-                    (this.HeaterEfficiency != null &&
-                    this.HeaterEfficiency.Equals(input.HeaterEfficiency))
+                    Extension.Equals(this.HeaterEfficiency, input.HeaterEfficiency)
                 ) && base.Equals(input) && 
                 (
-                    this.AmbientCondition == input.AmbientCondition ||
-                    (this.AmbientCondition != null &&
-                    this.AmbientCondition.Equals(input.AmbientCondition))
+                    Extension.Equals(this.AmbientCondition, input.AmbientCondition)
                 ) && base.Equals(input) && 
                 (
-                    this.AmbientLossCoefficient == input.AmbientLossCoefficient ||
-                    (this.AmbientLossCoefficient != null &&
-                    this.AmbientLossCoefficient.Equals(input.AmbientLossCoefficient))
+                    Extension.Equals(this.AmbientLossCoefficient, input.AmbientLossCoefficient)
                 );
         }
 

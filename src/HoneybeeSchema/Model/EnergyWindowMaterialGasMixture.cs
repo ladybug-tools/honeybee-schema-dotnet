@@ -194,14 +194,10 @@ namespace HoneybeeSchema
                     Extension.AllEquals(this.GasFractions, input.GasFractions)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.Thickness == input.Thickness ||
-                    (this.Thickness != null &&
-                    this.Thickness.Equals(input.Thickness))
+                    Extension.Equals(this.Thickness, input.Thickness)
                 );
         }
 

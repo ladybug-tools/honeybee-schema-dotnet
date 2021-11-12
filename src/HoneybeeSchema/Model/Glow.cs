@@ -209,38 +209,26 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Modifier == input.Modifier ||
-                    (this.Modifier != null &&
-                    this.Modifier.Equals(input.Modifier))
+                    Extension.Equals(this.Modifier, input.Modifier)
                 ) && base.Equals(input) && 
                 (
                     this.Dependencies == input.Dependencies ||
                     Extension.AllEquals(this.Dependencies, input.Dependencies)
                 ) && base.Equals(input) && 
                 (
-                    this.REmittance == input.REmittance ||
-                    (this.REmittance != null &&
-                    this.REmittance.Equals(input.REmittance))
+                    Extension.Equals(this.REmittance, input.REmittance)
                 ) && base.Equals(input) && 
                 (
-                    this.GEmittance == input.GEmittance ||
-                    (this.GEmittance != null &&
-                    this.GEmittance.Equals(input.GEmittance))
+                    Extension.Equals(this.GEmittance, input.GEmittance)
                 ) && base.Equals(input) && 
                 (
-                    this.BEmittance == input.BEmittance ||
-                    (this.BEmittance != null &&
-                    this.BEmittance.Equals(input.BEmittance))
+                    Extension.Equals(this.BEmittance, input.BEmittance)
                 ) && base.Equals(input) && 
                 (
-                    this.MaxRadius == input.MaxRadius ||
-                    (this.MaxRadius != null &&
-                    this.MaxRadius.Equals(input.MaxRadius))
+                    Extension.Equals(this.MaxRadius, input.MaxRadius)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 );
         }
 

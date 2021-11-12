@@ -183,24 +183,16 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Geometry == input.Geometry ||
-                    (this.Geometry != null &&
-                    this.Geometry.Equals(input.Geometry))
+                    Extension.Equals(this.Geometry, input.Geometry)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.Modifier == input.Modifier ||
-                    (this.Modifier != null &&
-                    this.Modifier.Equals(input.Modifier))
+                    Extension.Equals(this.Modifier, input.Modifier)
                 ) && base.Equals(input) && 
                 (
-                    this.ModifierDirect == input.ModifierDirect ||
-                    (this.ModifierDirect != null &&
-                    this.ModifierDirect.Equals(input.ModifierDirect))
+                    Extension.Equals(this.ModifierDirect, input.ModifierDirect)
                 );
         }
 

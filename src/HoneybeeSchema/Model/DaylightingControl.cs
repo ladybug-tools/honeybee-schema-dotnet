@@ -210,34 +210,22 @@ namespace HoneybeeSchema
                     Extension.AllEquals(this.SensorPosition, input.SensorPosition)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.IlluminanceSetpoint == input.IlluminanceSetpoint ||
-                    (this.IlluminanceSetpoint != null &&
-                    this.IlluminanceSetpoint.Equals(input.IlluminanceSetpoint))
+                    Extension.Equals(this.IlluminanceSetpoint, input.IlluminanceSetpoint)
                 ) && base.Equals(input) && 
                 (
-                    this.ControlFraction == input.ControlFraction ||
-                    (this.ControlFraction != null &&
-                    this.ControlFraction.Equals(input.ControlFraction))
+                    Extension.Equals(this.ControlFraction, input.ControlFraction)
                 ) && base.Equals(input) && 
                 (
-                    this.MinPowerInput == input.MinPowerInput ||
-                    (this.MinPowerInput != null &&
-                    this.MinPowerInput.Equals(input.MinPowerInput))
+                    Extension.Equals(this.MinPowerInput, input.MinPowerInput)
                 ) && base.Equals(input) && 
                 (
-                    this.MinLightOutput == input.MinLightOutput ||
-                    (this.MinLightOutput != null &&
-                    this.MinLightOutput.Equals(input.MinLightOutput))
+                    Extension.Equals(this.MinLightOutput, input.MinLightOutput)
                 ) && base.Equals(input) && 
                 (
-                    this.OffAtMinimum == input.OffAtMinimum ||
-                    (this.OffAtMinimum != null &&
-                    this.OffAtMinimum.Equals(input.OffAtMinimum))
+                    Extension.Equals(this.OffAtMinimum, input.OffAtMinimum)
                 );
         }
 

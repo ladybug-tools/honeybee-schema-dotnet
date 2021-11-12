@@ -207,48 +207,32 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
                     this.Modifiers == input.Modifiers ||
                     Extension.AllEquals(this.Modifiers, input.Modifiers)
                 ) && base.Equals(input) && 
                 (
-                    this.WallSet == input.WallSet ||
-                    (this.WallSet != null &&
-                    this.WallSet.Equals(input.WallSet))
+                    Extension.Equals(this.WallSet, input.WallSet)
                 ) && base.Equals(input) && 
                 (
-                    this.FloorSet == input.FloorSet ||
-                    (this.FloorSet != null &&
-                    this.FloorSet.Equals(input.FloorSet))
+                    Extension.Equals(this.FloorSet, input.FloorSet)
                 ) && base.Equals(input) && 
                 (
-                    this.RoofCeilingSet == input.RoofCeilingSet ||
-                    (this.RoofCeilingSet != null &&
-                    this.RoofCeilingSet.Equals(input.RoofCeilingSet))
+                    Extension.Equals(this.RoofCeilingSet, input.RoofCeilingSet)
                 ) && base.Equals(input) && 
                 (
-                    this.ApertureSet == input.ApertureSet ||
-                    (this.ApertureSet != null &&
-                    this.ApertureSet.Equals(input.ApertureSet))
+                    Extension.Equals(this.ApertureSet, input.ApertureSet)
                 ) && base.Equals(input) && 
                 (
-                    this.DoorSet == input.DoorSet ||
-                    (this.DoorSet != null &&
-                    this.DoorSet.Equals(input.DoorSet))
+                    Extension.Equals(this.DoorSet, input.DoorSet)
                 ) && base.Equals(input) && 
                 (
-                    this.ShadeSet == input.ShadeSet ||
-                    (this.ShadeSet != null &&
-                    this.ShadeSet.Equals(input.ShadeSet))
+                    Extension.Equals(this.ShadeSet, input.ShadeSet)
                 ) && base.Equals(input) && 
                 (
-                    this.AirBoundaryModifier == input.AirBoundaryModifier ||
-                    (this.AirBoundaryModifier != null &&
-                    this.AirBoundaryModifier.Equals(input.AirBoundaryModifier))
+                    Extension.Equals(this.AirBoundaryModifier, input.AirBoundaryModifier)
                 );
         }
 

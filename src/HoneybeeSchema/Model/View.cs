@@ -272,49 +272,31 @@ namespace HoneybeeSchema
                     Extension.AllEquals(this.UpVector, input.UpVector)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.ViewType == input.ViewType ||
-                    (this.ViewType != null &&
-                    this.ViewType.Equals(input.ViewType))
+                    Extension.Equals(this.ViewType, input.ViewType)
                 ) && base.Equals(input) && 
                 (
-                    this.HSize == input.HSize ||
-                    (this.HSize != null &&
-                    this.HSize.Equals(input.HSize))
+                    Extension.Equals(this.HSize, input.HSize)
                 ) && base.Equals(input) && 
                 (
-                    this.VSize == input.VSize ||
-                    (this.VSize != null &&
-                    this.VSize.Equals(input.VSize))
+                    Extension.Equals(this.VSize, input.VSize)
                 ) && base.Equals(input) && 
                 (
-                    this.Shift == input.Shift ||
-                    (this.Shift != null &&
-                    this.Shift.Equals(input.Shift))
+                    Extension.Equals(this.Shift, input.Shift)
                 ) && base.Equals(input) && 
                 (
-                    this.Lift == input.Lift ||
-                    (this.Lift != null &&
-                    this.Lift.Equals(input.Lift))
+                    Extension.Equals(this.Lift, input.Lift)
                 ) && base.Equals(input) && 
                 (
-                    this.ForeClip == input.ForeClip ||
-                    (this.ForeClip != null &&
-                    this.ForeClip.Equals(input.ForeClip))
+                    Extension.Equals(this.ForeClip, input.ForeClip)
                 ) && base.Equals(input) && 
                 (
-                    this.AftClip == input.AftClip ||
-                    (this.AftClip != null &&
-                    this.AftClip.Equals(input.AftClip))
+                    Extension.Equals(this.AftClip, input.AftClip)
                 ) && base.Equals(input) && 
                 (
-                    this.GroupIdentifier == input.GroupIdentifier ||
-                    (this.GroupIdentifier != null &&
-                    this.GroupIdentifier.Equals(input.GroupIdentifier))
+                    Extension.Equals(this.GroupIdentifier, input.GroupIdentifier)
                 );
         }
 

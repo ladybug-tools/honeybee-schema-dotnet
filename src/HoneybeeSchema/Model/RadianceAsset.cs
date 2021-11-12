@@ -173,18 +173,14 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.RoomIdentifier == input.RoomIdentifier ||
-                    (this.RoomIdentifier != null &&
-                    this.RoomIdentifier.Equals(input.RoomIdentifier))
+                    Extension.Equals(this.RoomIdentifier, input.RoomIdentifier)
                 ) && base.Equals(input) && 
                 (
                     this.LightPath == input.LightPath ||
                     Extension.AllEquals(this.LightPath, input.LightPath)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 );
         }
 

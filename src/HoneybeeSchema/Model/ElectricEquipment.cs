@@ -203,34 +203,22 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.WattsPerArea == input.WattsPerArea ||
-                    (this.WattsPerArea != null &&
-                    this.WattsPerArea.Equals(input.WattsPerArea))
+                    Extension.Equals(this.WattsPerArea, input.WattsPerArea)
                 ) && base.Equals(input) && 
                 (
-                    this.Schedule == input.Schedule ||
-                    (this.Schedule != null &&
-                    this.Schedule.Equals(input.Schedule))
+                    Extension.Equals(this.Schedule, input.Schedule)
                 ) && base.Equals(input) && 
                 (
-                    this.RadiantFraction == input.RadiantFraction ||
-                    (this.RadiantFraction != null &&
-                    this.RadiantFraction.Equals(input.RadiantFraction))
+                    Extension.Equals(this.RadiantFraction, input.RadiantFraction)
                 ) && base.Equals(input) && 
                 (
-                    this.LatentFraction == input.LatentFraction ||
-                    (this.LatentFraction != null &&
-                    this.LatentFraction.Equals(input.LatentFraction))
+                    Extension.Equals(this.LatentFraction, input.LatentFraction)
                 ) && base.Equals(input) && 
                 (
-                    this.LostFraction == input.LostFraction ||
-                    (this.LostFraction != null &&
-                    this.LostFraction.Equals(input.LostFraction))
+                    Extension.Equals(this.LostFraction, input.LostFraction)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 );
         }
 

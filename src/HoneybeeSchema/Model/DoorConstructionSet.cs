@@ -186,34 +186,22 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.InteriorConstruction == input.InteriorConstruction ||
-                    (this.InteriorConstruction != null &&
-                    this.InteriorConstruction.Equals(input.InteriorConstruction))
+                    Extension.Equals(this.InteriorConstruction, input.InteriorConstruction)
                 ) && base.Equals(input) && 
                 (
-                    this.ExteriorConstruction == input.ExteriorConstruction ||
-                    (this.ExteriorConstruction != null &&
-                    this.ExteriorConstruction.Equals(input.ExteriorConstruction))
+                    Extension.Equals(this.ExteriorConstruction, input.ExteriorConstruction)
                 ) && base.Equals(input) && 
                 (
-                    this.OverheadConstruction == input.OverheadConstruction ||
-                    (this.OverheadConstruction != null &&
-                    this.OverheadConstruction.Equals(input.OverheadConstruction))
+                    Extension.Equals(this.OverheadConstruction, input.OverheadConstruction)
                 ) && base.Equals(input) && 
                 (
-                    this.ExteriorGlassConstruction == input.ExteriorGlassConstruction ||
-                    (this.ExteriorGlassConstruction != null &&
-                    this.ExteriorGlassConstruction.Equals(input.ExteriorGlassConstruction))
+                    Extension.Equals(this.ExteriorGlassConstruction, input.ExteriorGlassConstruction)
                 ) && base.Equals(input) && 
                 (
-                    this.InteriorGlassConstruction == input.InteriorGlassConstruction ||
-                    (this.InteriorGlassConstruction != null &&
-                    this.InteriorGlassConstruction.Equals(input.InteriorGlassConstruction))
+                    Extension.Equals(this.InteriorGlassConstruction, input.InteriorGlassConstruction)
                 );
         }
 

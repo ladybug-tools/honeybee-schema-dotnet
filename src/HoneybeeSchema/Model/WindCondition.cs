@@ -169,19 +169,13 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.WindSpeed == input.WindSpeed ||
-                    (this.WindSpeed != null &&
-                    this.WindSpeed.Equals(input.WindSpeed))
+                    Extension.Equals(this.WindSpeed, input.WindSpeed)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.WindDirection == input.WindDirection ||
-                    (this.WindDirection != null &&
-                    this.WindDirection.Equals(input.WindDirection))
+                    Extension.Equals(this.WindDirection, input.WindDirection)
                 );
         }
 

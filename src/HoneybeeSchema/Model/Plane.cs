@@ -188,9 +188,7 @@ namespace HoneybeeSchema
                     Extension.AllEquals(this.O, input.O)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
                     this.X == input.X ||

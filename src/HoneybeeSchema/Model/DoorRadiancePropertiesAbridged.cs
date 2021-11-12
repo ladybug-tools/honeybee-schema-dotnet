@@ -163,14 +163,10 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.DynamicGroupIdentifier == input.DynamicGroupIdentifier ||
-                    (this.DynamicGroupIdentifier != null &&
-                    this.DynamicGroupIdentifier.Equals(input.DynamicGroupIdentifier))
+                    Extension.Equals(this.DynamicGroupIdentifier, input.DynamicGroupIdentifier)
                 ) && base.Equals(input) && 
                 (
                     this.States == input.States ||

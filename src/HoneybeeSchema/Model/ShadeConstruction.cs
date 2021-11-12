@@ -184,24 +184,16 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.SolarReflectance == input.SolarReflectance ||
-                    (this.SolarReflectance != null &&
-                    this.SolarReflectance.Equals(input.SolarReflectance))
+                    Extension.Equals(this.SolarReflectance, input.SolarReflectance)
                 ) && base.Equals(input) && 
                 (
-                    this.VisibleReflectance == input.VisibleReflectance ||
-                    (this.VisibleReflectance != null &&
-                    this.VisibleReflectance.Equals(input.VisibleReflectance))
+                    Extension.Equals(this.VisibleReflectance, input.VisibleReflectance)
                 ) && base.Equals(input) && 
                 (
-                    this.IsSpecular == input.IsSpecular ||
-                    (this.IsSpecular != null &&
-                    this.IsSpecular.Equals(input.IsSpecular))
+                    Extension.Equals(this.IsSpecular, input.IsSpecular)
                 );
         }
 

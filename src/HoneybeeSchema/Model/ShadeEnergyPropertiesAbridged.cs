@@ -159,19 +159,13 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.Construction == input.Construction ||
-                    (this.Construction != null &&
-                    this.Construction.Equals(input.Construction))
+                    Extension.Equals(this.Construction, input.Construction)
                 ) && base.Equals(input) && 
                 (
-                    this.TransmittanceSchedule == input.TransmittanceSchedule ||
-                    (this.TransmittanceSchedule != null &&
-                    this.TransmittanceSchedule.Equals(input.TransmittanceSchedule))
+                    Extension.Equals(this.TransmittanceSchedule, input.TransmittanceSchedule)
                 );
         }
 

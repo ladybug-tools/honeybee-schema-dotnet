@@ -174,14 +174,10 @@ namespace HoneybeeSchema
                     Extension.AllEquals(this.Date, input.Date)
                 ) && base.Equals(input) && 
                 (
-                    this.DaylightSavings == input.DaylightSavings ||
-                    (this.DaylightSavings != null &&
-                    this.DaylightSavings.Equals(input.DaylightSavings))
+                    Extension.Equals(this.DaylightSavings, input.DaylightSavings)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 );
         }
 

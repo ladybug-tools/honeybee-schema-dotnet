@@ -213,39 +213,25 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.WindowConstruction == input.WindowConstruction ||
-                    (this.WindowConstruction != null &&
-                    this.WindowConstruction.Equals(input.WindowConstruction))
+                    Extension.Equals(this.WindowConstruction, input.WindowConstruction)
                 ) && base.Equals(input) && 
                 (
-                    this.ShadeMaterial == input.ShadeMaterial ||
-                    (this.ShadeMaterial != null &&
-                    this.ShadeMaterial.Equals(input.ShadeMaterial))
+                    Extension.Equals(this.ShadeMaterial, input.ShadeMaterial)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.ShadeLocation == input.ShadeLocation ||
-                    (this.ShadeLocation != null &&
-                    this.ShadeLocation.Equals(input.ShadeLocation))
+                    Extension.Equals(this.ShadeLocation, input.ShadeLocation)
                 ) && base.Equals(input) && 
                 (
-                    this.ControlType == input.ControlType ||
-                    (this.ControlType != null &&
-                    this.ControlType.Equals(input.ControlType))
+                    Extension.Equals(this.ControlType, input.ControlType)
                 ) && base.Equals(input) && 
                 (
-                    this.Setpoint == input.Setpoint ||
-                    (this.Setpoint != null &&
-                    this.Setpoint.Equals(input.Setpoint))
+                    Extension.Equals(this.Setpoint, input.Setpoint)
                 ) && base.Equals(input) && 
                 (
-                    this.Schedule == input.Schedule ||
-                    (this.Schedule != null &&
-                    this.Schedule.Equals(input.Schedule))
+                    Extension.Equals(this.Schedule, input.Schedule)
                 );
         }
 

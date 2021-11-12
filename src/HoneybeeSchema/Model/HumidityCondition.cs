@@ -195,34 +195,22 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.HumidityType == input.HumidityType ||
-                    (this.HumidityType != null &&
-                    this.HumidityType.Equals(input.HumidityType))
+                    Extension.Equals(this.HumidityType, input.HumidityType)
                 ) && base.Equals(input) && 
                 (
-                    this.HumidityValue == input.HumidityValue ||
-                    (this.HumidityValue != null &&
-                    this.HumidityValue.Equals(input.HumidityValue))
+                    Extension.Equals(this.HumidityValue, input.HumidityValue)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.BarometricPressure == input.BarometricPressure ||
-                    (this.BarometricPressure != null &&
-                    this.BarometricPressure.Equals(input.BarometricPressure))
+                    Extension.Equals(this.BarometricPressure, input.BarometricPressure)
                 ) && base.Equals(input) && 
                 (
-                    this.Rain == input.Rain ||
-                    (this.Rain != null &&
-                    this.Rain.Equals(input.Rain))
+                    Extension.Equals(this.Rain, input.Rain)
                 ) && base.Equals(input) && 
                 (
-                    this.SnowOnGround == input.SnowOnGround ||
-                    (this.SnowOnGround != null &&
-                    this.SnowOnGround.Equals(input.SnowOnGround))
+                    Extension.Equals(this.SnowOnGround, input.SnowOnGround)
                 );
         }
 

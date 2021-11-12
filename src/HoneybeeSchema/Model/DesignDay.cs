@@ -208,39 +208,25 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    Extension.Equals(this.Name, input.Name)
                 ) && base.Equals(input) && 
                 (
-                    this.DayType == input.DayType ||
-                    (this.DayType != null &&
-                    this.DayType.Equals(input.DayType))
+                    Extension.Equals(this.DayType, input.DayType)
                 ) && base.Equals(input) && 
                 (
-                    this.DryBulbCondition == input.DryBulbCondition ||
-                    (this.DryBulbCondition != null &&
-                    this.DryBulbCondition.Equals(input.DryBulbCondition))
+                    Extension.Equals(this.DryBulbCondition, input.DryBulbCondition)
                 ) && base.Equals(input) && 
                 (
-                    this.HumidityCondition == input.HumidityCondition ||
-                    (this.HumidityCondition != null &&
-                    this.HumidityCondition.Equals(input.HumidityCondition))
+                    Extension.Equals(this.HumidityCondition, input.HumidityCondition)
                 ) && base.Equals(input) && 
                 (
-                    this.WindCondition == input.WindCondition ||
-                    (this.WindCondition != null &&
-                    this.WindCondition.Equals(input.WindCondition))
+                    Extension.Equals(this.WindCondition, input.WindCondition)
                 ) && base.Equals(input) && 
                 (
-                    this.SkyCondition == input.SkyCondition ||
-                    (this.SkyCondition != null &&
-                    this.SkyCondition.Equals(input.SkyCondition))
+                    Extension.Equals(this.SkyCondition, input.SkyCondition)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 );
         }
 

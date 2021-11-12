@@ -187,18 +187,14 @@ namespace HoneybeeSchema
                     Extension.AllEquals(this.Values, input.Values)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
                     this.Times == input.Times ||
                     Extension.AllEquals(this.Times, input.Times)
                 ) && base.Equals(input) && 
                 (
-                    this.Interpolate == input.Interpolate ||
-                    (this.Interpolate != null &&
-                    this.Interpolate.Equals(input.Interpolate))
+                    Extension.Equals(this.Interpolate, input.Interpolate)
                 );
         }
 

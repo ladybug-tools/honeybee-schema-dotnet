@@ -200,34 +200,22 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.FlowPerExteriorArea == input.FlowPerExteriorArea ||
-                    (this.FlowPerExteriorArea != null &&
-                    this.FlowPerExteriorArea.Equals(input.FlowPerExteriorArea))
+                    Extension.Equals(this.FlowPerExteriorArea, input.FlowPerExteriorArea)
                 ) && base.Equals(input) && 
                 (
-                    this.Schedule == input.Schedule ||
-                    (this.Schedule != null &&
-                    this.Schedule.Equals(input.Schedule))
+                    Extension.Equals(this.Schedule, input.Schedule)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.ConstantCoefficient == input.ConstantCoefficient ||
-                    (this.ConstantCoefficient != null &&
-                    this.ConstantCoefficient.Equals(input.ConstantCoefficient))
+                    Extension.Equals(this.ConstantCoefficient, input.ConstantCoefficient)
                 ) && base.Equals(input) && 
                 (
-                    this.TemperatureCoefficient == input.TemperatureCoefficient ||
-                    (this.TemperatureCoefficient != null &&
-                    this.TemperatureCoefficient.Equals(input.TemperatureCoefficient))
+                    Extension.Equals(this.TemperatureCoefficient, input.TemperatureCoefficient)
                 ) && base.Equals(input) && 
                 (
-                    this.VelocityCoefficient == input.VelocityCoefficient ||
-                    (this.VelocityCoefficient != null &&
-                    this.VelocityCoefficient.Equals(input.VelocityCoefficient))
+                    Extension.Equals(this.VelocityCoefficient, input.VelocityCoefficient)
                 );
         }
 

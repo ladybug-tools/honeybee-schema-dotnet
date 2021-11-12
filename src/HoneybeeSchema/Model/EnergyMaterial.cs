@@ -228,49 +228,31 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Thickness == input.Thickness ||
-                    (this.Thickness != null &&
-                    this.Thickness.Equals(input.Thickness))
+                    Extension.Equals(this.Thickness, input.Thickness)
                 ) && base.Equals(input) && 
                 (
-                    this.Conductivity == input.Conductivity ||
-                    (this.Conductivity != null &&
-                    this.Conductivity.Equals(input.Conductivity))
+                    Extension.Equals(this.Conductivity, input.Conductivity)
                 ) && base.Equals(input) && 
                 (
-                    this.Density == input.Density ||
-                    (this.Density != null &&
-                    this.Density.Equals(input.Density))
+                    Extension.Equals(this.Density, input.Density)
                 ) && base.Equals(input) && 
                 (
-                    this.SpecificHeat == input.SpecificHeat ||
-                    (this.SpecificHeat != null &&
-                    this.SpecificHeat.Equals(input.SpecificHeat))
+                    Extension.Equals(this.SpecificHeat, input.SpecificHeat)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.Roughness == input.Roughness ||
-                    (this.Roughness != null &&
-                    this.Roughness.Equals(input.Roughness))
+                    Extension.Equals(this.Roughness, input.Roughness)
                 ) && base.Equals(input) && 
                 (
-                    this.ThermalAbsorptance == input.ThermalAbsorptance ||
-                    (this.ThermalAbsorptance != null &&
-                    this.ThermalAbsorptance.Equals(input.ThermalAbsorptance))
+                    Extension.Equals(this.ThermalAbsorptance, input.ThermalAbsorptance)
                 ) && base.Equals(input) && 
                 (
-                    this.SolarAbsorptance == input.SolarAbsorptance ||
-                    (this.SolarAbsorptance != null &&
-                    this.SolarAbsorptance.Equals(input.SolarAbsorptance))
+                    Extension.Equals(this.SolarAbsorptance, input.SolarAbsorptance)
                 ) && base.Equals(input) && 
                 (
-                    this.VisibleAbsorptance == input.VisibleAbsorptance ||
-                    (this.VisibleAbsorptance != null &&
-                    this.VisibleAbsorptance.Equals(input.VisibleAbsorptance))
+                    Extension.Equals(this.VisibleAbsorptance, input.VisibleAbsorptance)
                 );
         }
 

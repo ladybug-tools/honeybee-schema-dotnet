@@ -189,29 +189,19 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.LowerLimit == input.LowerLimit ||
-                    (this.LowerLimit != null &&
-                    this.LowerLimit.Equals(input.LowerLimit))
+                    Extension.Equals(this.LowerLimit, input.LowerLimit)
                 ) && base.Equals(input) && 
                 (
-                    this.UpperLimit == input.UpperLimit ||
-                    (this.UpperLimit != null &&
-                    this.UpperLimit.Equals(input.UpperLimit))
+                    Extension.Equals(this.UpperLimit, input.UpperLimit)
                 ) && base.Equals(input) && 
                 (
-                    this.NumericType == input.NumericType ||
-                    (this.NumericType != null &&
-                    this.NumericType.Equals(input.NumericType))
+                    Extension.Equals(this.NumericType, input.NumericType)
                 ) && base.Equals(input) && 
                 (
-                    this.UnitType == input.UnitType ||
-                    (this.UnitType != null &&
-                    this.UnitType.Equals(input.UnitType))
+                    Extension.Equals(this.UnitType, input.UnitType)
                 );
         }
 

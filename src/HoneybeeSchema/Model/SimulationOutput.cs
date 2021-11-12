@@ -185,24 +185,16 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.ReportingFrequency == input.ReportingFrequency ||
-                    (this.ReportingFrequency != null &&
-                    this.ReportingFrequency.Equals(input.ReportingFrequency))
+                    Extension.Equals(this.ReportingFrequency, input.ReportingFrequency)
                 ) && base.Equals(input) && 
                 (
-                    this.IncludeSqlite == input.IncludeSqlite ||
-                    (this.IncludeSqlite != null &&
-                    this.IncludeSqlite.Equals(input.IncludeSqlite))
+                    Extension.Equals(this.IncludeSqlite, input.IncludeSqlite)
                 ) && base.Equals(input) && 
                 (
-                    this.IncludeHtml == input.IncludeHtml ||
-                    (this.IncludeHtml != null &&
-                    this.IncludeHtml.Equals(input.IncludeHtml))
+                    Extension.Equals(this.IncludeHtml, input.IncludeHtml)
                 ) && base.Equals(input) && 
                 (
                     this.Outputs == input.Outputs ||

@@ -169,19 +169,13 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.DryBulbMax == input.DryBulbMax ||
-                    (this.DryBulbMax != null &&
-                    this.DryBulbMax.Equals(input.DryBulbMax))
+                    Extension.Equals(this.DryBulbMax, input.DryBulbMax)
                 ) && base.Equals(input) && 
                 (
-                    this.DryBulbRange == input.DryBulbRange ||
-                    (this.DryBulbRange != null &&
-                    this.DryBulbRange.Equals(input.DryBulbRange))
+                    Extension.Equals(this.DryBulbRange, input.DryBulbRange)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 );
         }
 

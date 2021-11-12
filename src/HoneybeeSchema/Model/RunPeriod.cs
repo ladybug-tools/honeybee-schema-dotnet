@@ -195,9 +195,7 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
                     this.StartDate == input.StartDate ||
@@ -208,23 +206,17 @@ namespace HoneybeeSchema
                     Extension.AllEquals(this.EndDate, input.EndDate)
                 ) && base.Equals(input) && 
                 (
-                    this.StartDayOfWeek == input.StartDayOfWeek ||
-                    (this.StartDayOfWeek != null &&
-                    this.StartDayOfWeek.Equals(input.StartDayOfWeek))
+                    Extension.Equals(this.StartDayOfWeek, input.StartDayOfWeek)
                 ) && base.Equals(input) && 
                 (
                     this.Holidays == input.Holidays ||
                     Extension.AllEquals(this.Holidays, input.Holidays)
                 ) && base.Equals(input) && 
                 (
-                    this.DaylightSavingTime == input.DaylightSavingTime ||
-                    (this.DaylightSavingTime != null &&
-                    this.DaylightSavingTime.Equals(input.DaylightSavingTime))
+                    Extension.Equals(this.DaylightSavingTime, input.DaylightSavingTime)
                 ) && base.Equals(input) && 
                 (
-                    this.LeapYear == input.LeapYear ||
-                    (this.LeapYear != null &&
-                    this.LeapYear.Equals(input.LeapYear))
+                    Extension.Equals(this.LeapYear, input.LeapYear)
                 );
         }
 

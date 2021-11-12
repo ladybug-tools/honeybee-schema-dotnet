@@ -181,14 +181,10 @@ namespace HoneybeeSchema
                     Extension.AllEquals(this.Constructions, input.Constructions)
                 ) && base.Equals(input) && 
                 (
-                    this.Schedule == input.Schedule ||
-                    (this.Schedule != null &&
-                    this.Schedule.Equals(input.Schedule))
+                    Extension.Equals(this.Schedule, input.Schedule)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 );
         }
 

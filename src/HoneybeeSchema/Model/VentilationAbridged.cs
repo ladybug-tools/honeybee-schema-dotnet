@@ -202,34 +202,22 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.FlowPerPerson == input.FlowPerPerson ||
-                    (this.FlowPerPerson != null &&
-                    this.FlowPerPerson.Equals(input.FlowPerPerson))
+                    Extension.Equals(this.FlowPerPerson, input.FlowPerPerson)
                 ) && base.Equals(input) && 
                 (
-                    this.FlowPerArea == input.FlowPerArea ||
-                    (this.FlowPerArea != null &&
-                    this.FlowPerArea.Equals(input.FlowPerArea))
+                    Extension.Equals(this.FlowPerArea, input.FlowPerArea)
                 ) && base.Equals(input) && 
                 (
-                    this.AirChangesPerHour == input.AirChangesPerHour ||
-                    (this.AirChangesPerHour != null &&
-                    this.AirChangesPerHour.Equals(input.AirChangesPerHour))
+                    Extension.Equals(this.AirChangesPerHour, input.AirChangesPerHour)
                 ) && base.Equals(input) && 
                 (
-                    this.FlowPerZone == input.FlowPerZone ||
-                    (this.FlowPerZone != null &&
-                    this.FlowPerZone.Equals(input.FlowPerZone))
+                    Extension.Equals(this.FlowPerZone, input.FlowPerZone)
                 ) && base.Equals(input) && 
                 (
-                    this.Schedule == input.Schedule ||
-                    (this.Schedule != null &&
-                    this.Schedule.Equals(input.Schedule))
+                    Extension.Equals(this.Schedule, input.Schedule)
                 );
         }
 

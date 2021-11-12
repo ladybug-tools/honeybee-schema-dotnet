@@ -265,69 +265,43 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.ConductivityCoeffA == input.ConductivityCoeffA ||
-                    (this.ConductivityCoeffA != null &&
-                    this.ConductivityCoeffA.Equals(input.ConductivityCoeffA))
+                    Extension.Equals(this.ConductivityCoeffA, input.ConductivityCoeffA)
                 ) && base.Equals(input) && 
                 (
-                    this.ViscosityCoeffA == input.ViscosityCoeffA ||
-                    (this.ViscosityCoeffA != null &&
-                    this.ViscosityCoeffA.Equals(input.ViscosityCoeffA))
+                    Extension.Equals(this.ViscosityCoeffA, input.ViscosityCoeffA)
                 ) && base.Equals(input) && 
                 (
-                    this.SpecificHeatCoeffA == input.SpecificHeatCoeffA ||
-                    (this.SpecificHeatCoeffA != null &&
-                    this.SpecificHeatCoeffA.Equals(input.SpecificHeatCoeffA))
+                    Extension.Equals(this.SpecificHeatCoeffA, input.SpecificHeatCoeffA)
                 ) && base.Equals(input) && 
                 (
-                    this.SpecificHeatRatio == input.SpecificHeatRatio ||
-                    (this.SpecificHeatRatio != null &&
-                    this.SpecificHeatRatio.Equals(input.SpecificHeatRatio))
+                    Extension.Equals(this.SpecificHeatRatio, input.SpecificHeatRatio)
                 ) && base.Equals(input) && 
                 (
-                    this.MolecularWeight == input.MolecularWeight ||
-                    (this.MolecularWeight != null &&
-                    this.MolecularWeight.Equals(input.MolecularWeight))
+                    Extension.Equals(this.MolecularWeight, input.MolecularWeight)
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.Thickness == input.Thickness ||
-                    (this.Thickness != null &&
-                    this.Thickness.Equals(input.Thickness))
+                    Extension.Equals(this.Thickness, input.Thickness)
                 ) && base.Equals(input) && 
                 (
-                    this.ConductivityCoeffB == input.ConductivityCoeffB ||
-                    (this.ConductivityCoeffB != null &&
-                    this.ConductivityCoeffB.Equals(input.ConductivityCoeffB))
+                    Extension.Equals(this.ConductivityCoeffB, input.ConductivityCoeffB)
                 ) && base.Equals(input) && 
                 (
-                    this.ConductivityCoeffC == input.ConductivityCoeffC ||
-                    (this.ConductivityCoeffC != null &&
-                    this.ConductivityCoeffC.Equals(input.ConductivityCoeffC))
+                    Extension.Equals(this.ConductivityCoeffC, input.ConductivityCoeffC)
                 ) && base.Equals(input) && 
                 (
-                    this.ViscosityCoeffB == input.ViscosityCoeffB ||
-                    (this.ViscosityCoeffB != null &&
-                    this.ViscosityCoeffB.Equals(input.ViscosityCoeffB))
+                    Extension.Equals(this.ViscosityCoeffB, input.ViscosityCoeffB)
                 ) && base.Equals(input) && 
                 (
-                    this.ViscosityCoeffC == input.ViscosityCoeffC ||
-                    (this.ViscosityCoeffC != null &&
-                    this.ViscosityCoeffC.Equals(input.ViscosityCoeffC))
+                    Extension.Equals(this.ViscosityCoeffC, input.ViscosityCoeffC)
                 ) && base.Equals(input) && 
                 (
-                    this.SpecificHeatCoeffB == input.SpecificHeatCoeffB ||
-                    (this.SpecificHeatCoeffB != null &&
-                    this.SpecificHeatCoeffB.Equals(input.SpecificHeatCoeffB))
+                    Extension.Equals(this.SpecificHeatCoeffB, input.SpecificHeatCoeffB)
                 ) && base.Equals(input) && 
                 (
-                    this.SpecificHeatCoeffC == input.SpecificHeatCoeffC ||
-                    (this.SpecificHeatCoeffC != null &&
-                    this.SpecificHeatCoeffC.Equals(input.SpecificHeatCoeffC))
+                    Extension.Equals(this.SpecificHeatCoeffC, input.SpecificHeatCoeffC)
                 );
         }
 

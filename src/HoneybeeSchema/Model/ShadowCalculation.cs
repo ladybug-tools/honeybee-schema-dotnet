@@ -185,34 +185,22 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    (this.Type != null &&
-                    this.Type.Equals(input.Type))
+                    Extension.Equals(this.Type, input.Type)
                 ) && base.Equals(input) && 
                 (
-                    this.SolarDistribution == input.SolarDistribution ||
-                    (this.SolarDistribution != null &&
-                    this.SolarDistribution.Equals(input.SolarDistribution))
+                    Extension.Equals(this.SolarDistribution, input.SolarDistribution)
                 ) && base.Equals(input) && 
                 (
-                    this.CalculationMethod == input.CalculationMethod ||
-                    (this.CalculationMethod != null &&
-                    this.CalculationMethod.Equals(input.CalculationMethod))
+                    Extension.Equals(this.CalculationMethod, input.CalculationMethod)
                 ) && base.Equals(input) && 
                 (
-                    this.CalculationUpdateMethod == input.CalculationUpdateMethod ||
-                    (this.CalculationUpdateMethod != null &&
-                    this.CalculationUpdateMethod.Equals(input.CalculationUpdateMethod))
+                    Extension.Equals(this.CalculationUpdateMethod, input.CalculationUpdateMethod)
                 ) && base.Equals(input) && 
                 (
-                    this.CalculationFrequency == input.CalculationFrequency ||
-                    (this.CalculationFrequency != null &&
-                    this.CalculationFrequency.Equals(input.CalculationFrequency))
+                    Extension.Equals(this.CalculationFrequency, input.CalculationFrequency)
                 ) && base.Equals(input) && 
                 (
-                    this.MaximumFigures == input.MaximumFigures ||
-                    (this.MaximumFigures != null &&
-                    this.MaximumFigures.Equals(input.MaximumFigures))
+                    Extension.Equals(this.MaximumFigures, input.MaximumFigures)
                 );
         }
 
