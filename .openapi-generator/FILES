@@ -130,6 +130,7 @@ docs/FloorModifierSetAbridgedAllOf.md
 docs/FloorModifierSetAllOf.md
 docs/ForcedAirFurnace.md
 docs/ForcedAirFurnaceAllOf.md
+docs/FuelTypes.md
 docs/FurnaceEquipmentType.md
 docs/GasEquipment.md
 docs/GasEquipmentAbridged.md
@@ -217,6 +218,8 @@ docs/Plane.md
 docs/PlaneAllOf.md
 docs/Plastic.md
 docs/PlasticAllOf.md
+docs/ProcessAbridged.md
+docs/ProcessAbridgedAllOf.md
 docs/ProgramType.md
 docs/ProgramTypeAbridged.md
 docs/ProgramTypeAbridgedAllOf.md
@@ -489,6 +492,7 @@ src/HoneybeeSchema.Test/Model/FloorModifierSetAllOfTests.cs
 src/HoneybeeSchema.Test/Model/FloorModifierSetTests.cs
 src/HoneybeeSchema.Test/Model/ForcedAirFurnaceAllOfTests.cs
 src/HoneybeeSchema.Test/Model/ForcedAirFurnaceTests.cs
+src/HoneybeeSchema.Test/Model/FuelTypesTests.cs
 src/HoneybeeSchema.Test/Model/FurnaceEquipmentTypeTests.cs
 src/HoneybeeSchema.Test/Model/GasEquipmentAbridgedAllOfTests.cs
 src/HoneybeeSchema.Test/Model/GasEquipmentAbridgedTests.cs
@@ -575,6 +579,8 @@ src/HoneybeeSchema.Test/Model/PlaneAllOfTests.cs
 src/HoneybeeSchema.Test/Model/PlaneTests.cs
 src/HoneybeeSchema.Test/Model/PlasticAllOfTests.cs
 src/HoneybeeSchema.Test/Model/PlasticTests.cs
+src/HoneybeeSchema.Test/Model/ProcessAbridgedAllOfTests.cs
+src/HoneybeeSchema.Test/Model/ProcessAbridgedTests.cs
 src/HoneybeeSchema.Test/Model/ProgramTypeAbridgedAllOfTests.cs
 src/HoneybeeSchema.Test/Model/ProgramTypeAbridgedTests.cs
 src/HoneybeeSchema.Test/Model/ProgramTypeAllOfTests.cs
@@ -858,6 +864,7 @@ src/HoneybeeSchema/Model/FloorModifierSetAbridgedAllOf.cs
 src/HoneybeeSchema/Model/FloorModifierSetAllOf.cs
 src/HoneybeeSchema/Model/ForcedAirFurnace.cs
 src/HoneybeeSchema/Model/ForcedAirFurnaceAllOf.cs
+src/HoneybeeSchema/Model/FuelTypes.cs
 src/HoneybeeSchema/Model/FurnaceEquipmentType.cs
 src/HoneybeeSchema/Model/GasEquipment.cs
 src/HoneybeeSchema/Model/GasEquipmentAbridged.cs
@@ -945,6 +952,8 @@ src/HoneybeeSchema/Model/Plane.cs
 src/HoneybeeSchema/Model/PlaneAllOf.cs
 src/HoneybeeSchema/Model/Plastic.cs
 src/HoneybeeSchema/Model/PlasticAllOf.cs
+src/HoneybeeSchema/Model/ProcessAbridged.cs
+src/HoneybeeSchema/Model/ProcessAbridgedAllOf.cs
 src/HoneybeeSchema/Model/ProgramType.cs
 src/HoneybeeSchema/Model/ProgramTypeAbridged.cs
 src/HoneybeeSchema/Model/ProgramTypeAbridgedAllOf.cs

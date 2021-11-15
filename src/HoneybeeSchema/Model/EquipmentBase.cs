@@ -45,8 +45,8 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="wattsPerArea">Equipment level per floor area as [W/m2]. (required).</param>
         /// <param name="schedule">Identifier of the schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile. (required).</param>
-        /// <param name="radiantFraction">Number for the amount of long-wave radiation heat given off by electric equipment. Default value is 0. (default to 0D).</param>
-        /// <param name="latentFraction">Number for the amount of latent heat given off by electricequipment. Default value is 0. (default to 0D).</param>
+        /// <param name="radiantFraction">Number for the amount of long-wave radiation heat given off by equipment. Default value is 0. (default to 0D).</param>
+        /// <param name="latentFraction">Number for the amount of latent heat given off by equipment. Default value is 0. (default to 0D).</param>
         /// <param name="lostFraction">Number for the amount of “lost” heat being given off by equipment. The default value is 0. (default to 0D).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
@@ -92,15 +92,15 @@ namespace HoneybeeSchema
         [DataMember(Name = "schedule", IsRequired = true)]
         public string Schedule { get; set; } 
         /// <summary>
-        /// Number for the amount of long-wave radiation heat given off by electric equipment. Default value is 0.
+        /// Number for the amount of long-wave radiation heat given off by equipment. Default value is 0.
         /// </summary>
-        /// <value>Number for the amount of long-wave radiation heat given off by electric equipment. Default value is 0.</value>
+        /// <value>Number for the amount of long-wave radiation heat given off by equipment. Default value is 0.</value>
         [DataMember(Name = "radiant_fraction")]
         public double RadiantFraction { get; set; }  = 0D;
         /// <summary>
-        /// Number for the amount of latent heat given off by electricequipment. Default value is 0.
+        /// Number for the amount of latent heat given off by equipment. Default value is 0.
         /// </summary>
-        /// <value>Number for the amount of latent heat given off by electricequipment. Default value is 0.</value>
+        /// <value>Number for the amount of latent heat given off by equipment. Default value is 0.</value>
         [DataMember(Name = "latent_fraction")]
         public double LatentFraction { get; set; }  = 0D;
         /// <summary>

@@ -48,10 +48,11 @@ namespace HoneybeeSchema
         /// <param name="daylightingControl">An optional DaylightingControl object to dictate the dimming of lights. If None, the lighting will respond only to the schedule and not the daylight conditions within the room..</param>
         /// <param name="windowVentControl">An optional VentilationControl object to dictate the opening of windows. If None, the windows will never open..</param>
         /// <param name="internalMasses">An optional list of of InternalMass objects for thermal mass exposed to Room air. Note that internal masses assigned this way cannot \&quot;see\&quot; solar radiation that may potentially hit them and, as such, caution should be taken when using this component with internal mass objects that are not always in shade. Masses are factored into the the thermal calculations of the Room by undergoing heat transfer with the indoor air..</param>
+        /// <param name="processLoads">An optional list of of Process objects for process loads within the room. These can represent kilns, manufacturing equipment, and various industrial processes. They can also be used to represent wood burning fireplaces or certain pieces of equipment to be separated from the other end uses..</param>
         public RoomEnergyPropertiesAbridged
         (
            // Required parameters
-           string constructionSet= default, string programType= default, string hvac= default, string shw= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, ServiceHotWaterAbridged serviceHotWater= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default, DaylightingControl daylightingControl= default, VentilationControlAbridged windowVentControl= default, List<InternalMassAbridged> internalMasses= default// Optional parameters
+           string constructionSet= default, string programType= default, string hvac= default, string shw= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, ServiceHotWaterAbridged serviceHotWater= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default, DaylightingControl daylightingControl= default, VentilationControlAbridged windowVentControl= default, List<InternalMassAbridged> internalMasses= default, List<ProcessAbridged> processLoads= default// Optional parameters
         ) : base()// BaseClass
         {
             this.ConstructionSet = constructionSet;
@@ -69,6 +70,7 @@ namespace HoneybeeSchema
             this.DaylightingControl = daylightingControl;
             this.WindowVentControl = windowVentControl;
             this.InternalMasses = internalMasses;
+            this.ProcessLoads = processLoads;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "RoomEnergyPropertiesAbridged";
@@ -175,6 +177,12 @@ namespace HoneybeeSchema
         /// <value>An optional list of of InternalMass objects for thermal mass exposed to Room air. Note that internal masses assigned this way cannot \&quot;see\&quot; solar radiation that may potentially hit them and, as such, caution should be taken when using this component with internal mass objects that are not always in shade. Masses are factored into the the thermal calculations of the Room by undergoing heat transfer with the indoor air.</value>
         [DataMember(Name = "internal_masses")]
         public List<InternalMassAbridged> InternalMasses { get; set; } 
+        /// <summary>
+        /// An optional list of of Process objects for process loads within the room. These can represent kilns, manufacturing equipment, and various industrial processes. They can also be used to represent wood burning fireplaces or certain pieces of equipment to be separated from the other end uses.
+        /// </summary>
+        /// <value>An optional list of of Process objects for process loads within the room. These can represent kilns, manufacturing equipment, and various industrial processes. They can also be used to represent wood burning fireplaces or certain pieces of equipment to be separated from the other end uses.</value>
+        [DataMember(Name = "process_loads")]
+        public List<ProcessAbridged> ProcessLoads { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -212,6 +220,7 @@ namespace HoneybeeSchema
             sb.Append("  DaylightingControl: ").Append(DaylightingControl).Append("\n");
             sb.Append("  WindowVentControl: ").Append(WindowVentControl).Append("\n");
             sb.Append("  InternalMasses: ").Append(InternalMasses).Append("\n");
+            sb.Append("  ProcessLoads: ").Append(ProcessLoads).Append("\n");
             return sb.ToString();
         }
   
@@ -323,6 +332,10 @@ namespace HoneybeeSchema
                 (
                     this.InternalMasses == input.InternalMasses ||
                     Extension.AllEquals(this.InternalMasses, input.InternalMasses)
+                ) && base.Equals(input) && 
+                (
+                    this.ProcessLoads == input.ProcessLoads ||
+                    Extension.AllEquals(this.ProcessLoads, input.ProcessLoads)
                 );
         }
 
@@ -367,6 +380,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.WindowVentControl.GetHashCode();
                 if (this.InternalMasses != null)
                     hashCode = hashCode * 59 + this.InternalMasses.GetHashCode();
+                if (this.ProcessLoads != null)
+                    hashCode = hashCode * 59 + this.ProcessLoads.GetHashCode();
                 return hashCode;
             }
         }

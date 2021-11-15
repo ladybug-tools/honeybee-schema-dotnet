@@ -48,8 +48,8 @@ namespace HoneybeeSchema
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         /// <param name="wattsPerArea">Equipment level per floor area as [W/m2]. (required).</param>
         /// <param name="schedule">Identifier of the schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile. (required).</param>
-        /// <param name="radiantFraction">Number for the amount of long-wave radiation heat given off by electric equipment. Default value is 0. (default to 0D).</param>
-        /// <param name="latentFraction">Number for the amount of latent heat given off by electricequipment. Default value is 0. (default to 0D).</param>
+        /// <param name="radiantFraction">Number for the amount of long-wave radiation heat given off by equipment. Default value is 0. (default to 0D).</param>
+        /// <param name="latentFraction">Number for the amount of latent heat given off by equipment. Default value is 0. (default to 0D).</param>
         /// <param name="lostFraction">Number for the amount of “lost” heat being given off by equipment. The default value is 0. (default to 0D).</param>
         public GasEquipmentAbridged
         (
