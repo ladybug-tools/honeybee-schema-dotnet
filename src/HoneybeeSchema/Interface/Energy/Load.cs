@@ -18,6 +18,7 @@ namespace HoneybeeSchema
 	public partial class LightingAbridged: HoneybeeSchema.Energy.ILoad {}
 	public partial class People: HoneybeeSchema.Energy.ILoad {}
 	public partial class PeopleAbridged: HoneybeeSchema.Energy.ILoad {}
+	public partial class ProcessAbridged: HoneybeeSchema.Energy.ILoad {}
 	public partial class ServiceHotWater: HoneybeeSchema.Energy.ILoad {}
 	public partial class ServiceHotWaterAbridged: HoneybeeSchema.Energy.ILoad {}
 	public partial class Setpoint: HoneybeeSchema.Energy.ILoad {}
