@@ -37,13 +37,13 @@ namespace HoneybeeSchema
         /// <param name="fractionHeightOperable">A number for the fraction of the distance from the bottom of the window to the top that is operable (default to 1.0D).</param>
         /// <param name="dischargeCoefficient">A number that will be multipled by the area of the window in the stack (buoyancy-driven) part of the equation to account for additional friction from window geometry, insect screens, etc. Typical values include 0.45, for unobstructed windows WITH insect screens and 0.65 for unobstructed windows WITHOUT insect screens. This value should be lowered if windows are of an awning or casement type and are not allowed to fully open. (default to 0.45D).</param>
         /// <param name="windCrossVent">Boolean to indicate if there is an opening of roughly equal area on the opposite side of the Room such that wind-driven cross ventilation will be induced. If False, the assumption is that the operable area is primarily on one side of the Room and there is no wind-driven ventilation. (default to false).</param>
-        /// <param name="flowCoefficientClosed">An optional number in kg/s-m, at 1 Pa per meter of crack length, used to calculate the mass flow rate when the opening is closed; required to run an AirflowNetwork simulation. The DesignBuilder Cracks template defines the flow coefficient for a tight, low-leakage closed external window to be 0.00001, and the flow coefficient for a very poor, high-leakage closed external window to be 0.003..</param>
+        /// <param name="flowCoefficientClosed">An optional number in kg/s-m, at 1 Pa per meter of crack length, used to calculate the mass flow rate when the opening is closed; required to run an AirflowNetwork simulation. The DesignBuilder Cracks template defines the flow coefficient for a tight, low-leakage closed external window to be 0.00001, and the flow coefficient for a very poor, high-leakage closed external window to be 0.003. (default to 0D).</param>
         /// <param name="flowExponentClosed">An optional dimensionless number between 0.5 and 1 used to calculate the mass flow rate when the opening is closed; required to run an AirflowNetwork simulation. This value represents the leak geometry impact on airflow, with 0.5 generally corresponding to turbulent orifice flow and 1 generally corresponding to laminar flow. The default of 0.65 is representative of many cases of wall and window leakage, used when the exponent cannot be measured. (default to 0.65D).</param>
         /// <param name="twoWayThreshold">A number in kg/m3 indicating the minimum density difference above which two-way flow may occur due to stack effect, required to run an AirflowNetwork simulation. This value is required because the air density difference between two zones (which drives two-way air flow) will tend towards division by zero errors as the air density difference approaches zero. The default of 0.0001 is a typical default value used for AirflowNetwork openings. (default to 0.00010D).</param>
         public VentilationOpening
         (
            // Required parameters
-           double fractionAreaOperable = 0.5D, double fractionHeightOperable = 1.0D, double dischargeCoefficient = 0.45D, bool windCrossVent = false, double flowCoefficientClosed= default, double flowExponentClosed = 0.65D, double twoWayThreshold = 0.00010D// Optional parameters
+           double fractionAreaOperable = 0.5D, double fractionHeightOperable = 1.0D, double dischargeCoefficient = 0.45D, bool windCrossVent = false, double flowCoefficientClosed = 0D, double flowExponentClosed = 0.65D, double twoWayThreshold = 0.00010D// Optional parameters
         ) : base()// BaseClass
         {
             this.FractionAreaOperable = fractionAreaOperable;
@@ -98,7 +98,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>An optional number in kg/s-m, at 1 Pa per meter of crack length, used to calculate the mass flow rate when the opening is closed; required to run an AirflowNetwork simulation. The DesignBuilder Cracks template defines the flow coefficient for a tight, low-leakage closed external window to be 0.00001, and the flow coefficient for a very poor, high-leakage closed external window to be 0.003.</value>
         [DataMember(Name = "flow_coefficient_closed")]
-        public double FlowCoefficientClosed { get; set; } 
+        public double FlowCoefficientClosed { get; set; }  = 0D;
         /// <summary>
         /// An optional dimensionless number between 0.5 and 1 used to calculate the mass flow rate when the opening is closed; required to run an AirflowNetwork simulation. This value represents the leak geometry impact on airflow, with 0.5 generally corresponding to turbulent orifice flow and 1 generally corresponding to laminar flow. The default of 0.65 is representative of many cases of wall and window leakage, used when the exponent cannot be measured.
         /// </summary>

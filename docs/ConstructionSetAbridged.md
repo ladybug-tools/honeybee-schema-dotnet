@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **ApertureSet** | [**ApertureConstructionSetAbridged**](ApertureConstructionSetAbridged.md) | A ApertureConstructionSetAbridged object for this ConstructionSet. | [optional] 
 **DoorSet** | [**DoorConstructionSetAbridged**](DoorConstructionSetAbridged.md) | A DoorConstructionSetAbridged object for this ConstructionSet. | [optional] 
 **ShadeConstruction** | **string** | The identifier of a ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned. | [optional] 
-**AirBoundaryConstruction** | **string** | The identifier of an AirBoundaryConstruction to set the properties of Faces with an AirBoundary type. | [optional] 
+**AirBoundaryConstruction** | **string** | The identifier of an AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)

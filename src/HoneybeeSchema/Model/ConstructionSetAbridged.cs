@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         /// <param name="apertureSet">A ApertureConstructionSetAbridged object for this ConstructionSet..</param>
         /// <param name="doorSet">A DoorConstructionSetAbridged object for this ConstructionSet..</param>
         /// <param name="shadeConstruction">The identifier of a ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned..</param>
-        /// <param name="airBoundaryConstruction">The identifier of an AirBoundaryConstruction to set the properties of Faces with an AirBoundary type..</param>
+        /// <param name="airBoundaryConstruction">The identifier of an AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type..</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
@@ -119,9 +119,9 @@ namespace HoneybeeSchema
         [DataMember(Name = "shade_construction")]
         public string ShadeConstruction { get; set; } 
         /// <summary>
-        /// The identifier of an AirBoundaryConstruction to set the properties of Faces with an AirBoundary type.
+        /// The identifier of an AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type.
         /// </summary>
-        /// <value>The identifier of an AirBoundaryConstruction to set the properties of Faces with an AirBoundary type.</value>
+        /// <value>The identifier of an AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type.</value>
         [DataMember(Name = "air_boundary_construction")]
         public string AirBoundaryConstruction { get; set; } 
 
