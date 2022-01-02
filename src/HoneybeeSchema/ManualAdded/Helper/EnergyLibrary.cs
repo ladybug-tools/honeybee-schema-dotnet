@@ -715,13 +715,10 @@ namespace HoneybeeSchema.Helper
             if (!File.Exists(jsonFile))
                 throw new ArgumentException($"Invalid file: {jsonFile}");
 
-            using (var file = File.OpenText(jsonFile))
-            using (var reader = new JsonTextReader(file))
-            {
-                var jObjs = JToken.ReadFrom(reader);
-                T hbObjs = func(jObjs.ToString());
-                return hbObjs;
-            }
+            var text = File.ReadAllText(jsonFile);
+            T hbObjs = func(text);
+            return hbObjs;
+          
 
         }
 
@@ -731,6 +728,8 @@ namespace HoneybeeSchema.Helper
             if (!File.Exists(jsonFile))
                 throw new ArgumentException($"Invalid file: {jsonFile}");
 
+
+            var text = File.ReadAllText(jsonFile);
             using (var file = File.OpenText(jsonFile))
             using (var reader = new JsonTextReader(file))
             {
@@ -928,12 +927,13 @@ namespace HoneybeeSchema.Helper
 
         private static string GetLBTRootFromRegistry()
         {
+
             // windows
             var foundPath = string.Empty;
             var scr = @"/C REG QUERY HKEY_CURRENT_USER\SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL /s /v InstallLocation" + " | findstr \"ladybug_tools\"";
             //Registry.LocalMachine
             var startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.CreateNoWindow = false;
+            startInfo.CreateNoWindow = true;
             startInfo.UseShellExecute = false;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = scr;
@@ -947,14 +947,6 @@ namespace HoneybeeSchema.Helper
                 string outputs = exeProcess.StandardOutput.ReadToEnd().Trim();
 
                 exeProcess.Close();
-                if (string.IsNullOrEmpty(outputs))
-                {
-                    startInfo.Arguments = @"/C REG QUERY HKLM\SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL /s /v InstallLocation" + " | findstr \"ladybug_tools\"";
-                    exeProcess.StartInfo = startInfo;
-                    exeProcess.Start();
-                    exeProcess.WaitForExit();
-                    outputs = exeProcess.StandardOutput.ReadToEnd().Trim();
-                }
                 foundPath = outputs;
             }
 
