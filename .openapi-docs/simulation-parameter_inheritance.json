@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Documentation for Honeybee simulation-parameter schema",
-        "version": "1.47.1",
+        "version": "1.47.2",
         "title": "Honeybee Simulation Parameter Schema",
         "contact": {
             "name": "Ladybug Tools",
@@ -179,90 +179,6 @@
     "paths": {},
     "components": {
         "schemas": {
-            "HumidityTypes": {
-                "title": "HumidityTypes",
-                "description": "An enumeration.",
-                "enum": [
-                    "Wetbulb",
-                    "Dewpoint",
-                    "HumidityRatio",
-                    "Enthalpy"
-                ],
-                "type": "string"
-            },
-            "HumidityCondition": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "humidity_type": {
-                                "$ref": "#/components/schemas/HumidityTypes"
-                            },
-                            "humidity_value": {
-                                "title": "Humidity Value",
-                                "description": "The value correcponding to the humidity_type.",
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "HumidityCondition",
-                                "pattern": "^HumidityCondition$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "barometric_pressure": {
-                                "title": "Barometric Pressure",
-                                "description": "Barometric air pressure on the design day [Pa].",
-                                "default": 101325,
-                                "minimum": 31000,
-                                "maximum": 120000,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "rain": {
-                                "title": "Rain",
-                                "description": "Boolean to indicate rain on the design day.",
-                                "default": false,
-                                "type": "boolean"
-                            },
-                            "snow_on_ground": {
-                                "title": "Snow On Ground",
-                                "description": "Boolean to indicate snow on the ground during the design day.",
-                                "default": false,
-                                "type": "boolean"
-                            }
-                        },
-                        "required": [
-                            "humidity_type",
-                            "humidity_value"
-                        ],
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "HumidityCondition",
-                "description": "Used to specify humidity conditions on a design day.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "DaysOfWeek": {
-                "title": "DaysOfWeek",
-                "description": "An enumeration.",
-                "enum": [
-                    "Sunday",
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday"
-                ],
-                "type": "string"
-            },
             "DaylightSavingTime": {
                 "allOf": [
                     {
@@ -317,6 +233,100 @@
                 "discriminator": {
                     "propertyName": "type"
                 }
+            },
+            "ASHRAEClearSky": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_SkyCondition"
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "clearness"
+                        ],
+                        "properties": {
+                            "clearness": {
+                                "title": "Clearness",
+                                "description": "Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.",
+                                "minimum": 0,
+                                "maximum": 1.2,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "ASHRAEClearSky",
+                                "pattern": "^ASHRAEClearSky$",
+                                "type": "string",
+                                "readOnly": true
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "ASHRAEClearSky",
+                "description": "Used to specify sky conditions on a design day.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "DryBulbCondition": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "dry_bulb_max": {
+                                "title": "Dry Bulb Max",
+                                "description": "The maximum dry bulb temperature on the design day [C].",
+                                "minimum": -90,
+                                "maximum": 70,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "dry_bulb_range": {
+                                "title": "Dry Bulb Range",
+                                "description": "The difference between min and max temperatures on the design day [C].",
+                                "minimum": 0,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "DryBulbCondition",
+                                "pattern": "^DryBulbCondition$",
+                                "type": "string",
+                                "readOnly": true
+                            }
+                        },
+                        "required": [
+                            "dry_bulb_max",
+                            "dry_bulb_range"
+                        ],
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "DryBulbCondition",
+                "description": "Used to specify dry bulb conditions on a design day.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "DaysOfWeek": {
+                "title": "DaysOfWeek",
+                "description": "An enumeration.",
+                "enum": [
+                    "Sunday",
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday"
+                ],
+                "type": "string"
             },
             "RunPeriod": {
                 "allOf": [
@@ -411,6 +421,51 @@
                     "propertyName": "type"
                 }
             },
+            "ASHRAETau": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_SkyCondition"
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "tau_b",
+                            "tau_d"
+                        ],
+                        "properties": {
+                            "tau_b": {
+                                "title": "Tau B",
+                                "description": "Value for the beam optical depth. Typically found in .stat files.",
+                                "minimum": 0,
+                                "maximum": 1.2,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "tau_d": {
+                                "title": "Tau D",
+                                "description": "Value for the diffuse optical depth. Typically found in .stat files.",
+                                "minimum": 0,
+                                "maximum": 3,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "ASHRAETau",
+                                "pattern": "^ASHRAETau$",
+                                "type": "string",
+                                "readOnly": true
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "ASHRAETau",
+                "description": "Used to specify sky conditions on a design day.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
             "SimulationControl": {
                 "allOf": [
                     {
@@ -466,79 +521,6 @@
                     "propertyName": "type"
                 }
             },
-            "ReportingFrequency": {
-                "title": "ReportingFrequency",
-                "description": "An enumeration.",
-                "enum": [
-                    "Timestep",
-                    "Hourly",
-                    "Daily",
-                    "Monthly",
-                    "Annual"
-                ],
-                "type": "string"
-            },
-            "SimulationOutput": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "title": "Type",
-                                "default": "SimulationOutput",
-                                "pattern": "^SimulationOutput$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "reporting_frequency": {
-                                "default": "Hourly",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/ReportingFrequency"
-                                    }
-                                ]
-                            },
-                            "include_sqlite": {
-                                "title": "Include Sqlite",
-                                "description": "Boolean to note whether a SQLite report should be requested from the simulation.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "include_html": {
-                                "title": "Include Html",
-                                "description": "Boolean to note whether an HTML report should be requested from the simulation.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "outputs": {
-                                "title": "Outputs",
-                                "description": "A list of EnergyPlus output names as strings, which are requested from the simulation.",
-                                "type": "array",
-                                "items": {
-                                    "type": "string"
-                                }
-                            },
-                            "summary_reports": {
-                                "title": "Summary Reports",
-                                "description": "A list of EnergyPlus summary report names as strings.",
-                                "type": "array",
-                                "items": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "SimulationOutput",
-                "description": "Lists the outputs to report from the simulation and their format.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
             "WindCondition": {
                 "allOf": [
                     {
@@ -580,42 +562,6 @@
                 ],
                 "title": "WindCondition",
                 "description": "Used to specify wind conditions on a design day.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "ASHRAEClearSky": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_SkyCondition"
-                    },
-                    {
-                        "type": "object",
-                        "required": [
-                            "clearness"
-                        ],
-                        "properties": {
-                            "clearness": {
-                                "title": "Clearness",
-                                "description": "Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.",
-                                "minimum": 0,
-                                "maximum": 1.2,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "ASHRAEClearSky",
-                                "pattern": "^ASHRAEClearSky$",
-                                "type": "string",
-                                "readOnly": true
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "ASHRAEClearSky",
-                "description": "Used to specify sky conditions on a design day.",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -717,6 +663,67 @@
                     "propertyName": "type"
                 }
             },
+            "ReportingFrequency": {
+                "title": "ReportingFrequency",
+                "description": "An enumeration.",
+                "enum": [
+                    "Timestep",
+                    "Hourly",
+                    "Daily",
+                    "Monthly",
+                    "Annual"
+                ],
+                "type": "string"
+            },
+            "SimulationOutput": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "title": "Type",
+                                "default": "SimulationOutput",
+                                "pattern": "^SimulationOutput$",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "reporting_frequency": {
+                                "default": "Hourly",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/ReportingFrequency"
+                                    }
+                                ]
+                            },
+                            "outputs": {
+                                "title": "Outputs",
+                                "description": "A list of EnergyPlus output names as strings, which are requested from the simulation.",
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "summary_reports": {
+                                "title": "Summary Reports",
+                                "description": "A list of EnergyPlus summary report names as strings.",
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "SimulationOutput",
+                "description": "Lists the outputs to report from the simulation and their format.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
             "DesignDayTypes": {
                 "title": "DesignDayTypes",
                 "description": "An enumeration.",
@@ -735,7 +742,18 @@
                 ],
                 "type": "string"
             },
-            "DryBulbCondition": {
+            "HumidityTypes": {
+                "title": "HumidityTypes",
+                "description": "An enumeration.",
+                "enum": [
+                    "Wetbulb",
+                    "Dewpoint",
+                    "HumidityRatio",
+                    "Enthalpy"
+                ],
+                "type": "string"
+            },
+            "HumidityCondition": {
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
@@ -743,83 +761,53 @@
                     {
                         "type": "object",
                         "properties": {
-                            "dry_bulb_max": {
-                                "title": "Dry Bulb Max",
-                                "description": "The maximum dry bulb temperature on the design day [C].",
-                                "minimum": -90,
-                                "maximum": 70,
-                                "type": "number",
-                                "format": "double"
+                            "humidity_type": {
+                                "$ref": "#/components/schemas/HumidityTypes"
                             },
-                            "dry_bulb_range": {
-                                "title": "Dry Bulb Range",
-                                "description": "The difference between min and max temperatures on the design day [C].",
-                                "minimum": 0,
+                            "humidity_value": {
+                                "title": "Humidity Value",
+                                "description": "The value correcponding to the humidity_type.",
                                 "type": "number",
                                 "format": "double"
                             },
                             "type": {
                                 "title": "Type",
-                                "default": "DryBulbCondition",
-                                "pattern": "^DryBulbCondition$",
+                                "default": "HumidityCondition",
+                                "pattern": "^HumidityCondition$",
                                 "type": "string",
                                 "readOnly": true
+                            },
+                            "barometric_pressure": {
+                                "title": "Barometric Pressure",
+                                "description": "Barometric air pressure on the design day [Pa].",
+                                "default": 101325,
+                                "minimum": 31000,
+                                "maximum": 120000,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "rain": {
+                                "title": "Rain",
+                                "description": "Boolean to indicate rain on the design day.",
+                                "default": false,
+                                "type": "boolean"
+                            },
+                            "snow_on_ground": {
+                                "title": "Snow On Ground",
+                                "description": "Boolean to indicate snow on the ground during the design day.",
+                                "default": false,
+                                "type": "boolean"
                             }
                         },
                         "required": [
-                            "dry_bulb_max",
-                            "dry_bulb_range"
+                            "humidity_type",
+                            "humidity_value"
                         ],
                         "additionalProperties": false
                     }
                 ],
-                "title": "DryBulbCondition",
-                "description": "Used to specify dry bulb conditions on a design day.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "ASHRAETau": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_SkyCondition"
-                    },
-                    {
-                        "type": "object",
-                        "required": [
-                            "tau_b",
-                            "tau_d"
-                        ],
-                        "properties": {
-                            "tau_b": {
-                                "title": "Tau B",
-                                "description": "Value for the beam optical depth. Typically found in .stat files.",
-                                "minimum": 0,
-                                "maximum": 1.2,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "tau_d": {
-                                "title": "Tau D",
-                                "description": "Value for the diffuse optical depth. Typically found in .stat files.",
-                                "minimum": 0,
-                                "maximum": 3,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "ASHRAETau",
-                                "pattern": "^ASHRAETau$",
-                                "type": "string",
-                                "readOnly": true
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "ASHRAETau",
-                "description": "Used to specify sky conditions on a design day.",
+                "title": "HumidityCondition",
+                "description": "Used to specify humidity conditions on a design day.",
                 "discriminator": {
                     "propertyName": "type"
                 }

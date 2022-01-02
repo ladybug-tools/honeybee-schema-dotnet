@@ -39,19 +39,15 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="SimulationOutput" /> class.
         /// </summary>
         /// <param name="reportingFrequency">reportingFrequency.</param>
-        /// <param name="includeSqlite">Boolean to note whether a SQLite report should be requested from the simulation. (default to true).</param>
-        /// <param name="includeHtml">Boolean to note whether an HTML report should be requested from the simulation. (default to true).</param>
         /// <param name="outputs">A list of EnergyPlus output names as strings, which are requested from the simulation..</param>
         /// <param name="summaryReports">A list of EnergyPlus summary report names as strings..</param>
         public SimulationOutput
         (
            // Required parameters
-           ReportingFrequency reportingFrequency= ReportingFrequency.Hourly, bool includeSqlite = true, bool includeHtml = true, List<string> outputs= default, List<string> summaryReports= default// Optional parameters
+           ReportingFrequency reportingFrequency= ReportingFrequency.Hourly, List<string> outputs= default, List<string> summaryReports= default// Optional parameters
         ) : base()// BaseClass
         {
             this.ReportingFrequency = reportingFrequency;
-            this.IncludeSqlite = includeSqlite;
-            this.IncludeHtml = includeHtml;
             this.Outputs = outputs;
             this.SummaryReports = summaryReports;
 
@@ -70,18 +66,6 @@ namespace HoneybeeSchema
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "SimulationOutput";
 
-        /// <summary>
-        /// Boolean to note whether a SQLite report should be requested from the simulation.
-        /// </summary>
-        /// <value>Boolean to note whether a SQLite report should be requested from the simulation.</value>
-        [DataMember(Name = "include_sqlite")]
-        public bool IncludeSqlite { get; set; }  = true;
-        /// <summary>
-        /// Boolean to note whether an HTML report should be requested from the simulation.
-        /// </summary>
-        /// <value>Boolean to note whether an HTML report should be requested from the simulation.</value>
-        [DataMember(Name = "include_html")]
-        public bool IncludeHtml { get; set; }  = true;
         /// <summary>
         /// A list of EnergyPlus output names as strings, which are requested from the simulation.
         /// </summary>
@@ -117,8 +101,6 @@ namespace HoneybeeSchema
             sb.Append("SimulationOutput:\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  ReportingFrequency: ").Append(ReportingFrequency).Append("\n");
-            sb.Append("  IncludeSqlite: ").Append(IncludeSqlite).Append("\n");
-            sb.Append("  IncludeHtml: ").Append(IncludeHtml).Append("\n");
             sb.Append("  Outputs: ").Append(Outputs).Append("\n");
             sb.Append("  SummaryReports: ").Append(SummaryReports).Append("\n");
             return sb.ToString();
@@ -191,12 +173,6 @@ namespace HoneybeeSchema
                     Extension.Equals(this.ReportingFrequency, input.ReportingFrequency)
                 ) && base.Equals(input) && 
                 (
-                    Extension.Equals(this.IncludeSqlite, input.IncludeSqlite)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.IncludeHtml, input.IncludeHtml)
-                ) && base.Equals(input) && 
-                (
                     this.Outputs == input.Outputs ||
                     Extension.AllEquals(this.Outputs, input.Outputs)
                 ) && base.Equals(input) && 
@@ -219,10 +195,6 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.ReportingFrequency != null)
                     hashCode = hashCode * 59 + this.ReportingFrequency.GetHashCode();
-                if (this.IncludeSqlite != null)
-                    hashCode = hashCode * 59 + this.IncludeSqlite.GetHashCode();
-                if (this.IncludeHtml != null)
-                    hashCode = hashCode * 59 + this.IncludeHtml.GetHashCode();
                 if (this.Outputs != null)
                     hashCode = hashCode * 59 + this.Outputs.GetHashCode();
                 if (this.SummaryReports != null)
