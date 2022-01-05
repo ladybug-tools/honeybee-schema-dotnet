@@ -866,7 +866,7 @@ namespace HoneybeeSchema.Helper
                 var args = $"defaults read com.mcneel.rhinoceros User.PlugInRegistry.6.8b32d89c-3455-4c21-8fd7-7364c32a6feb.PlugIn.FileName";
 
                 var startInfo = new System.Diagnostics.ProcessStartInfo();
-                startInfo.CreateNoWindow = false;
+                startInfo.CreateNoWindow = true;
                 startInfo.UseShellExecute = false;
                 startInfo.FileName = "/bin/bash";
                 startInfo.Arguments = $"-c \"{args}\"";
@@ -932,30 +932,37 @@ namespace HoneybeeSchema.Helper
             var foundPath = string.Empty;
             var scr = @"/C REG QUERY HKEY_CURRENT_USER\SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL /s /v InstallLocation" + " | findstr \"ladybug_tools\"";
             //Registry.LocalMachine
-            var startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.CreateNoWindow = true;
-            startInfo.UseShellExecute = false;
-            startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = scr;
-            startInfo.RedirectStandardOutput = true;
 
-            using (var exeProcess = new System.Diagnostics.Process())
+            var stdout = new List<string>();
+            using (var p = new System.Diagnostics.Process())
             {
-                exeProcess.StartInfo = startInfo;
-                exeProcess.Start();
-                exeProcess.WaitForExit();
-                string outputs = exeProcess.StandardOutput.ReadToEnd().Trim();
+                p.StartInfo.FileName = "cmd.exe";
+                p.StartInfo.Arguments = scr;
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.RedirectStandardError = true;
+                p.StartInfo.CreateNoWindow = true;
+                p.Start();
 
-                exeProcess.Close();
-                foundPath = outputs;
+                //p.ErrorDataReceived += (s, m) => { if (m.Data != null) stdErr.Add(m.Data); };
+                p.OutputDataReceived += (s, m) => { if (m.Data != null) stdout.Add(m.Data); };
+                p.BeginErrorReadLine();
+                p.BeginOutputReadLine();
+
+                p.WaitForExit();
+                if (!p.HasExited)
+                {
+                    p.Kill();
+                }
+
             }
-
-
+            foundPath = stdout.LastOrDefault(_ => _.EndsWith("ladybug_tools")).Trim();
             if (!string.IsNullOrEmpty(foundPath))
             {
                 // get from installer's registry
                 // InstallLocation    REG_SZ    C:\Users\mingo\ladybug_tools test
-                foundPath = foundPath.Split(new[] { "REG_SZ" }, StringSplitOptions.RemoveEmptyEntries).Last().Trim();
+                foundPath = foundPath.Split(new[] { "REG_SZ" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault(_=>_.EndsWith("ladybug_tools")).Trim();
+
             }
 
             return foundPath;
