@@ -956,12 +956,12 @@ namespace HoneybeeSchema.Helper
                 }
 
             }
-            foundPath = stdout.LastOrDefault(_ => _.EndsWith("ladybug_tools")).Trim();
+            foundPath = stdout.LastOrDefault(_ => _.EndsWith("ladybug_tools"))?.Trim();
             if (!string.IsNullOrEmpty(foundPath))
             {
                 // get from installer's registry
                 // InstallLocation    REG_SZ    C:\Users\mingo\ladybug_tools test
-                foundPath = foundPath.Split(new[] { "REG_SZ" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault(_=>_.EndsWith("ladybug_tools")).Trim();
+                foundPath = foundPath.Split(new[] { "REG_SZ" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault(_=>_.EndsWith("ladybug_tools"))?.Trim();
 
             }
 
