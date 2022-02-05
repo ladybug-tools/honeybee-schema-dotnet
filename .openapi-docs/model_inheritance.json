@@ -1232,14 +1232,10 @@
             "Plane": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/IDdEnergyBaseModel"
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "construction",
-                            "area"
-                        ],
                         "properties": {
                             "n": {
                                 "title": "N",
@@ -1298,7 +1294,7 @@
             "Face3D": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/IDdEnergyBaseModel"
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
                     },
                     {
                         "type": "object",
@@ -7371,17 +7367,6 @@
                                 "pattern": "^RoofCeilingConstructionSet$",
                                 "type": "string",
                                 "readOnly": true
-                            },
-                            "x": {
-                                "title": "X",
-                                "description": "Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated.",
-                                "minItems": 3,
-                                "maxItems": 3,
-                                "type": "array",
-                                "items": {
-                                    "type": "number",
-                                    "format": "double"
-                                }
                             }
                         },
                         "additionalProperties": false
@@ -7555,9 +7540,6 @@
                                 "readOnly": true
                             }
                         },
-                        "required": [
-                            "boundary_condition_objects"
-                        ],
                         "additionalProperties": false
                     }
                 ],
@@ -7986,19 +7968,6 @@
                                 "pattern": "^WindowConstructionDynamic$",
                                 "type": "string",
                                 "readOnly": true
-                            },
-                            "dynamic_group_identifier": {
-                                "title": "Dynamic Group Identifier",
-                                "description": "An optional string to note the dynamic group '             'to which the Shade is a part of. Shades sharing the same '             'dynamic_group_identifier will have their states change in unison. '             'If None, the Shade is assumed to be static. (default: None).",
-                                "type": "string"
-                            },
-                            "states": {
-                                "title": "States",
-                                "description": "An optional list of abridged states (default: None).",
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/components/schemas/RadianceShadeStateAbridged"
-                                }
                             }
                         },
                         "additionalProperties": false
@@ -8700,7 +8669,8 @@
                                     }
                                 ]
                             }
-                        }
+                        },
+                        "additionalProperties": false
                     }
                 ],
                 "title": "VAV",
@@ -8728,11 +8698,6 @@
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "geometry",
-                            "boundary_condition",
-                            "properties"
-                        ],
                         "properties": {
                             "vintage": {
                                 "description": "Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards",
@@ -9663,9 +9628,6 @@
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "bsdf_data"
-                        ],
                         "properties": {
                             "vintage": {
                                 "description": "Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards",
@@ -10355,11 +10317,6 @@
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "position",
-                            "direction",
-                            "up_vector"
-                        ],
                         "properties": {
                             "type": {
                                 "title": "Type",
@@ -10724,17 +10681,6 @@
                     {
                         "type": "object",
                         "properties": {
-                            "sensor_position": {
-                                "title": "Sensor Position",
-                                "description": "A point as 3 (x, y, z) values for the position of the daylight sensor within the parent Room. This point should lie within the Room volume in order for the results to be meaningful.",
-                                "minItems": 3,
-                                "maxItems": 3,
-                                "type": "array",
-                                "items": {
-                                    "type": "number",
-                                    "format": "double"
-                                }
-                            },
                             "type": {
                                 "title": "Type",
                                 "default": "ModelEnergyProperties",
@@ -11385,9 +11331,6 @@
                                 ]
                             }
                         },
-                        "required": [
-                            "sensor_position"
-                        ],
                         "additionalProperties": false
                     }
                 ],
@@ -11838,11 +11781,6 @@
                                 "pattern": "^DoorModifierSet$",
                                 "type": "string",
                                 "readOnly": true
-                            },
-                            "modifier_set": {
-                                "title": "Modifier Set",
-                                "description": "An identifier for a unique Room-Assigned ModifierSet (default: None).",
-                                "type": "string"
                             }
                         },
                         "additionalProperties": false
@@ -11941,7 +11879,7 @@
             "WallModifierSet": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/BaseModifierSetAbridged"
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
                     },
                     {
                         "type": "object",
@@ -12123,7 +12061,7 @@
             "RoofCeilingModifierSet": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/BaseModifierSetAbridged"
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
                     },
                     {
                         "type": "object",
@@ -12995,72 +12933,6 @@
                     {
                         "type": "object",
                         "properties": {
-                            "exterior_modifier": {
-                                "title": "Exterior Modifier",
-                                "description": "A radiance modifier object for faces with an Outdoors boundary condition.",
-                                "anyOf": [
-                                    {
-                                        "$ref": "#/components/schemas/Plastic"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Glass"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/BSDF"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Glow"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Light"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Trans"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Metal"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Void"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Mirror"
-                                    }
-                                ]
-                            },
-                            "interior_modifier": {
-                                "title": "Interior Modifier",
-                                "description": "A radiance modifier object for faces with a boundary condition other than Outdoors.",
-                                "anyOf": [
-                                    {
-                                        "$ref": "#/components/schemas/Plastic"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Glass"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/BSDF"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Glow"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Light"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Trans"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Metal"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Void"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Mirror"
-                                    }
-                                ]
-                            },
                             "type": {
                                 "title": "Type",
                                 "default": "AperturePropertiesAbridged",
@@ -13074,8 +12946,7 @@
                             "radiance": {
                                 "$ref": "#/components/schemas/ApertureRadiancePropertiesAbridged"
                             }
-                        },
-                        "additionalProperties": false
+                        }
                     }
                 ],
                 "title": "AperturePropertiesAbridged",
@@ -13086,7 +12957,7 @@
             "Aperture": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                        "$ref": "#/components/schemas/IDdBaseModel"
                     },
                     {
                         "type": "object",
@@ -13096,36 +12967,12 @@
                             "properties"
                         ],
                         "properties": {
-                            "exterior_modifier": {
-                                "title": "Exterior Modifier",
-                                "description": "A radiance modifier object for faces with an Outdoors boundary condition.",
-                                "anyOf": [
+                            "geometry": {
+                                "title": "Geometry",
+                                "description": "Planar Face3D for the geometry.",
+                                "allOf": [
                                     {
-                                        "$ref": "#/components/schemas/Plastic"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Glass"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/BSDF"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Glow"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Light"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Trans"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Metal"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Void"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Mirror"
+                                        "$ref": "#/components/schemas/Face3D"
                                     }
                                 ]
                             },
@@ -13140,10 +12987,10 @@
                                     }
                                 ]
                             },
-                            "interior_glass_modifier": {
-                                "title": "Interior Glass Modifier",
-                                "description": "A modifier object for glass with a Surface boundary condition.",
-                                "anyOf": [
+                            "properties": {
+                                "title": "Properties",
+                                "description": "Extension properties for particular simulation engines (Radiance, EnergyPlus).",
+                                "allOf": [
                                     {
                                         "$ref": "#/components/schemas/AperturePropertiesAbridged"
                                     }
@@ -13314,19 +13161,8 @@
                                 "items": {
                                     "$ref": "#/components/schemas/Shade"
                                 }
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "Sensor",
-                                "pattern": "^Sensor$",
-                                "type": "string",
-                                "readOnly": true
                             }
                         },
-                        "required": [
-                            "pos",
-                            "dir"
-                        ],
                         "additionalProperties": false
                     }
                 ],
@@ -13336,235 +13172,114 @@
                     "propertyName": "type"
                 }
             },
-            "SensorGrid": {
+            "Room": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/_RadianceAsset"
+                        "$ref": "#/components/schemas/IDdBaseModel"
                     },
                     {
                         "type": "object",
                         "required": [
-                            "sensors"
+                            "faces",
+                            "properties"
                         ],
                         "properties": {
-                            "sensors": {
-                                "title": "Sensors",
-                                "description": "A list of sensors that belong to the grid.",
+                            "faces": {
+                                "title": "Faces",
+                                "description": "Faces that together form the closed volume of a room.",
+                                "minItems": 4,
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/Sensor"
+                                    "$ref": "#/components/schemas/Face"
                                 }
                             },
-                            "type": {
-                                "title": "Type",
-                                "default": "SensorGrid",
-                                "pattern": "^SensorGrid$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "mesh": {
-                                "title": "Mesh",
-                                "description": "An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D.",
+                            "properties": {
+                                "title": "Properties",
+                                "description": "Extension properties for particular simulation engines (Radiance, EnergyPlus).",
                                 "allOf": [
                                     {
-                                        "$ref": "#/components/schemas/Mesh3D"
+                                        "$ref": "#/components/schemas/RoomPropertiesAbridged"
                                     }
                                 ]
                             },
-                            "base_geometry": {
-                                "title": "Base Geometry",
-                                "description": "An optional array of Face3D used to represent the grid. There are no restrictions on how this property relates to the sensors and it is provided only to assist with the display of the grid when the number of sensors or the mesh is too large to be practically visualized.",
+                            "type": {
+                                "title": "Type",
+                                "default": "Room",
+                                "pattern": "^Room$",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "indoor_shades": {
+                                "title": "Indoor Shades",
+                                "description": "Shades assigned to the interior side of this object (eg. partitions, tables).",
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/Face3D"
+                                    "$ref": "#/components/schemas/Shade"
                                 }
                             },
-                            "group_identifier": {
-                                "title": "Group Identifier",
-                                "description": "An optional string to note the sensor grid group '             'to which the sensor is a part of. Grids sharing the same '             'group_identifier will be written to the same subfolder in Radiance '             'folder (default: None).",
+                            "outdoor_shades": {
+                                "title": "Outdoor Shades",
+                                "description": "Shades assigned to the exterior side of this object (eg. trees, landscaping).",
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Shade"
+                                }
+                            },
+                            "multiplier": {
+                                "title": "Multiplier",
+                                "description": "An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is mutliplied by the multiplier.",
+                                "default": 1,
+                                "minimum": 1,
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "story": {
+                                "title": "Story",
+                                "description": "Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model.",
+                                "maxLength": 100,
+                                "minLength": 1,
+                                "pattern": "[.A-Za-z0-9_-]",
                                 "type": "string"
                             }
                         },
                         "additionalProperties": false
                     }
                 ],
-                "title": "SensorGrid",
-                "description": "A grid of sensors.",
+                "title": "Room",
+                "description": "Base class for all objects requiring a identifiers acceptable for all engines.",
                 "discriminator": {
                     "propertyName": "type"
                 }
             },
-            "ModelRadianceProperties": {
+            "Units": {
+                "title": "Units",
+                "description": "An enumeration.",
+                "enum": [
+                    "Meters",
+                    "Millimeters",
+                    "Feet",
+                    "Inches",
+                    "Centimeters"
+                ],
+                "type": "string"
+            },
+            "Model": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                        "$ref": "#/components/schemas/IDdBaseModel"
                     },
                     {
                         "type": "object",
+                        "required": [
+                            "properties"
+                        ],
                         "properties": {
-                            "type": {
-                                "title": "Type",
-                                "default": "ModelRadianceProperties",
-                                "pattern": "^ModelRadianceProperties$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "global_modifier_set": {
-                                "title": "Global Modifier Set",
-                                "description": "Global Radiance modifier set.",
-                                "default": {
-                                    "type": "GlobalModifierSet",
-                                    "modifiers": [
-                                        {
-                                            "identifier": "generic_floor_0.20",
-                                            "display_name": null,
-                                            "type": "Plastic",
-                                            "modifier": null,
-                                            "dependencies": [],
-                                            "r_reflectance": 0.2,
-                                            "g_reflectance": 0.2,
-                                            "b_reflectance": 0.2,
-                                            "specularity": 0.0,
-                                            "roughness": 0.0
-                                        },
-                                        {
-                                            "identifier": "generic_wall_0.50",
-                                            "display_name": null,
-                                            "type": "Plastic",
-                                            "modifier": null,
-                                            "dependencies": [],
-                                            "r_reflectance": 0.5,
-                                            "g_reflectance": 0.5,
-                                            "b_reflectance": 0.5,
-                                            "specularity": 0.0,
-                                            "roughness": 0.0
-                                        },
-                                        {
-                                            "identifier": "generic_ceiling_0.80",
-                                            "display_name": null,
-                                            "type": "Plastic",
-                                            "modifier": null,
-                                            "dependencies": [],
-                                            "r_reflectance": 0.8,
-                                            "g_reflectance": 0.8,
-                                            "b_reflectance": 0.8,
-                                            "specularity": 0.0,
-                                            "roughness": 0.0
-                                        },
-                                        {
-                                            "identifier": "generic_opaque_door_0.50",
-                                            "display_name": null,
-                                            "type": "Plastic",
-                                            "modifier": null,
-                                            "dependencies": [],
-                                            "r_reflectance": 0.5,
-                                            "g_reflectance": 0.5,
-                                            "b_reflectance": 0.5,
-                                            "specularity": 0.0,
-                                            "roughness": 0.0
-                                        },
-                                        {
-                                            "identifier": "generic_interior_shade_0.50",
-                                            "display_name": null,
-                                            "type": "Plastic",
-                                            "modifier": null,
-                                            "dependencies": [],
-                                            "r_reflectance": 0.5,
-                                            "g_reflectance": 0.5,
-                                            "b_reflectance": 0.5,
-                                            "specularity": 0.0,
-                                            "roughness": 0.0
-                                        },
-                                        {
-                                            "identifier": "generic_exterior_shade_0.35",
-                                            "display_name": null,
-                                            "type": "Plastic",
-                                            "modifier": null,
-                                            "dependencies": [],
-                                            "r_reflectance": 0.35,
-                                            "g_reflectance": 0.35,
-                                            "b_reflectance": 0.35,
-                                            "specularity": 0.0,
-                                            "roughness": 0.0
-                                        },
-                                        {
-                                            "identifier": "generic_interior_window_vis_0.88",
-                                            "display_name": null,
-                                            "type": "Glass",
-                                            "modifier": null,
-                                            "dependencies": [],
-                                            "r_transmissivity": 0.9584154328610596,
-                                            "g_transmissivity": 0.9584154328610596,
-                                            "b_transmissivity": 0.9584154328610596,
-                                            "refraction_index": null
-                                        },
-                                        {
-                                            "identifier": "generic_exterior_window_vis_0.64",
-                                            "display_name": null,
-                                            "type": "Glass",
-                                            "modifier": null,
-                                            "dependencies": [],
-                                            "r_transmissivity": 0.6975761815384331,
-                                            "g_transmissivity": 0.6975761815384331,
-                                            "b_transmissivity": 0.6975761815384331,
-                                            "refraction_index": null
-                                        },
-                                        {
-                                            "identifier": "air_boundary",
-                                            "display_name": null,
-                                            "type": "Trans",
-                                            "modifier": null,
-                                            "dependencies": [],
-                                            "r_reflectance": 1.0,
-                                            "g_reflectance": 1.0,
-                                            "b_reflectance": 1.0,
-                                            "specularity": 0.0,
-                                            "roughness": 0.0,
-                                            "transmitted_diff": 1.0,
-                                            "transmitted_spec": 1.0
-                                        }
-                                    ],
-                                    "wall_set": {
-                                        "exterior_modifier": "generic_wall_0.50",
-                                        "interior_modifier": "generic_wall_0.50",
-                                        "type": "WallModifierSetAbridged"
-                                    },
-                                    "floor_set": {
-                                        "exterior_modifier": "generic_floor_0.20",
-                                        "interior_modifier": "generic_floor_0.20",
-                                        "type": "FloorModifierSetAbridged"
-                                    },
-                                    "roof_ceiling_set": {
-                                        "exterior_modifier": "generic_ceiling_0.80",
-                                        "interior_modifier": "generic_ceiling_0.80",
-                                        "type": "RoofCeilingModifierSetAbridged"
-                                    },
-                                    "aperture_set": {
-                                        "type": "ApertureModifierSetAbridged",
-                                        "window_modifier": "generic_exterior_window_vis_0.64",
-                                        "interior_modifier": "generic_interior_window_vis_0.88",
-                                        "skylight_modifier": "generic_exterior_window_vis_0.64",
-                                        "operable_modifier": "generic_exterior_window_vis_0.64"
-                                    },
-                                    "door_set": {
-                                        "exterior_modifier": "generic_opaque_door_0.50",
-                                        "interior_modifier": "generic_opaque_door_0.50",
-                                        "type": "DoorModifierSetAbridged",
-                                        "interior_glass_modifier": "generic_interior_window_vis_0.88",
-                                        "exterior_glass_modifier": "generic_exterior_window_vis_0.64",
-                                        "overhead_modifier": "generic_opaque_door_0.50"
-                                    },
-                                    "shade_set": {
-                                        "exterior_modifier": "generic_exterior_shade_0.35",
-                                        "interior_modifier": "generic_interior_shade_0.50",
-                                        "type": "ShadeModifierSetAbridged"
-                                    },
-                                    "air_boundary_modifier": "air_boundary"
-                                },
-                                "readOnly": true,
+                            "properties": {
+                                "title": "Properties",
+                                "description": "Extension properties for particular simulation engines (Radiance, EnergyPlus).",
                                 "allOf": [
                                     {
-                                        "$ref": "#/components/schemas/GlobalModifierSet"
+                                        "$ref": "#/components/schemas/ModelProperties"
                                     }
                                 ]
                             },
@@ -13596,74 +13311,64 @@
                                 "description": "A list of Faces in the model that lack a parent Room. Note that orphaned Faces are not acceptable for Models that are to be exported for energy simulation.",
                                 "type": "array",
                                 "items": {
-                                    "anyOf": [
-                                        {
-                                            "$ref": "#/components/schemas/Plastic"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/Glass"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/BSDF"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/Glow"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/Light"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/Trans"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/Metal"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/Void"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/Mirror"
-                                        }
-                                    ]
+                                    "$ref": "#/components/schemas/Face"
                                 }
                             },
-                            "modifier_sets": {
-                                "title": "Modifier Sets",
-                                "description": "A list of all unique Room-Assigned ModifierSets in the Model.",
+                            "orphaned_shades": {
+                                "title": "Orphaned Shades",
+                                "description": "A list of Shades in the model that lack a parent.",
                                 "type": "array",
                                 "items": {
-                                    "anyOf": [
-                                        {
-                                            "$ref": "#/components/schemas/ModifierSet"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/ModifierSetAbridged"
-                                        }
-                                    ]
+                                    "$ref": "#/components/schemas/Shade"
                                 }
                             },
-                            "sensor_grids": {
-                                "title": "Sensor Grids",
-                                "description": "An array of SensorGrids that are associated with the model.",
+                            "orphaned_apertures": {
+                                "title": "Orphaned Apertures",
+                                "description": "A list of Apertures in the model that lack a parent Face. Note that orphaned Apertures are not acceptable for Models that are to be exported for energy simulation.",
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/SensorGrid"
+                                    "$ref": "#/components/schemas/Aperture"
                                 }
                             },
-                            "views": {
-                                "title": "Views",
-                                "description": "An array of Views that are associated with the model.",
+                            "orphaned_doors": {
+                                "title": "Orphaned Doors",
+                                "description": "A list of Doors in the model that lack a parent Face. Note that orphaned Doors are not acceptable for Models that are to be exported for energy simulation.",
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/View"
+                                    "$ref": "#/components/schemas/Door"
                                 }
+                            },
+                            "units": {
+                                "description": "Text indicating the units in which the model geometry exists. This is used to scale the geometry to the correct units for simulation engines like EnergyPlus, which requires all geometry be in meters.",
+                                "default": "Meters",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/Units"
+                                    }
+                                ]
+                            },
+                            "tolerance": {
+                                "title": "Tolerance",
+                                "description": "The maximum difference between x, y, and z values at which vertices are considered equivalent. This value should be in the Model units and it is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a Model. The default of 0.01 is suitable for models in meters.",
+                                "default": 0.01,
+                                "minimum": 0,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "angle_tolerance": {
+                                "title": "Angle Tolerance",
+                                "description": "The max angle difference in degrees that vertices are allowed to differ from one another in order to consider them colinear. This value is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a given Model.",
+                                "default": 1.0,
+                                "minimum": 0,
+                                "type": "number",
+                                "format": "double"
                             }
                         },
                         "additionalProperties": false
                     }
                 ],
-                "title": "ModelRadianceProperties",
-                "description": "Radiance Properties for Honeybee Model.",
+                "title": "Model",
+                "description": "Base class for all objects requiring a identifiers acceptable for all engines.",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -13718,7 +13423,8 @@
                                 "type": "string",
                                 "readOnly": true
                             }
-                        }
+                        },
+                        "additionalProperties": false
                     }
                 ],
                 "title": "ModifierBase",
@@ -13730,7 +13436,7 @@
             "IDdRadianceBaseModel": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/IDdBaseModel"
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
                     },
                     {
                         "type": "object",
@@ -13756,7 +13462,7 @@
                             }
                         },
                         "required": [
-                            "properties"
+                            "identifier"
                         ],
                         "additionalProperties": false
                     }
@@ -14103,19 +13809,6 @@
                                     }
                                 ]
                             },
-                            "demand_controlled_ventilation": {
-                                "title": "Demand Controlled Ventilation",
-                                "description": "Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.",
-                                "default": false,
-                                "type": "boolean"
-                            },
-                            "doas_availability_schedule": {
-                                "title": "Doas Availability Schedule",
-                                "description": "An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on.",
-                                "maxLength": 100,
-                                "minLength": 1,
-                                "type": "string"
-                            },
                             "type": {
                                 "title": "Type",
                                 "default": "_FaceSubSet",
@@ -14326,7 +14019,7 @@
                     "propertyName": "type"
                 }
             },
-            "_AllAirBase": {
+            "_DOASBase": {
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/IDdEnergyBaseModel"
@@ -14340,15 +14033,6 @@
                                 "allOf": [
                                     {
                                         "$ref": "#/components/schemas/Vintages"
-                                    }
-                                ]
-                            },
-                            "economizer_type": {
-                                "description": "Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration).",
-                                "default": "NoEconomizer",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/AllAirEconomizerType"
                                     }
                                 ]
                             },
@@ -14376,44 +14060,26 @@
                                 "default": false,
                                 "type": "boolean"
                             },
+                            "doas_availability_schedule": {
+                                "title": "Doas Availability Schedule",
+                                "description": "An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on.",
+                                "maxLength": 100,
+                                "minLength": 1,
+                                "type": "string"
+                            },
                             "type": {
                                 "title": "Type",
-                                "default": "_AllAirBase",
+                                "default": "_DOASBase",
                                 "type": "string",
-                                "pattern": "^_AllAirBase$",
+                                "pattern": "^_DOASBase$",
                                 "readOnly": true
                             }
                         },
                         "additionalProperties": false
                     }
                 ],
-                "title": "_AllAirBase",
-                "description": "Base class for all-air systems.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "DatedBaseModel": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "title": "Type",
-                                "default": "DatedBaseModel",
-                                "type": "string",
-                                "pattern": "^DatedBaseModel$",
-                                "readOnly": true
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "DatedBaseModel",
-                "description": "Base class for all objects needing to check for a valid Date.",
+                "title": "_DOASBase",
+                "description": "Base class for DOAS systems.",
                 "discriminator": {
                     "propertyName": "type"
                 }
