@@ -80,6 +80,8 @@ docs/EnergyMaterial.md
 docs/EnergyMaterialAllOf.md
 docs/EnergyMaterialNoMass.md
 docs/EnergyMaterialNoMassAllOf.md
+docs/EnergyMaterialVegetation.md
+docs/EnergyMaterialVegetationAllOf.md
 docs/EnergyWindowMaterialBlind.md
 docs/EnergyWindowMaterialBlindAllOf.md
 docs/EnergyWindowMaterialGas.md
@@ -192,6 +194,7 @@ docs/ModifierSet.md
 docs/ModifierSetAbridged.md
 docs/ModifierSetAbridgedAllOf.md
 docs/ModifierSetAllOf.md
+docs/MoistureDiffusionModel.md
 docs/NoLimit.md
 docs/NoLimitAllOf.md
 docs/OpaqueConstruction.md
@@ -442,6 +445,8 @@ src/HoneybeeSchema.Test/Model/EnergyMaterialAllOfTests.cs
 src/HoneybeeSchema.Test/Model/EnergyMaterialNoMassAllOfTests.cs
 src/HoneybeeSchema.Test/Model/EnergyMaterialNoMassTests.cs
 src/HoneybeeSchema.Test/Model/EnergyMaterialTests.cs
+src/HoneybeeSchema.Test/Model/EnergyMaterialVegetationAllOfTests.cs
+src/HoneybeeSchema.Test/Model/EnergyMaterialVegetationTests.cs
 src/HoneybeeSchema.Test/Model/EnergyWindowMaterialBlindAllOfTests.cs
 src/HoneybeeSchema.Test/Model/EnergyWindowMaterialBlindTests.cs
 src/HoneybeeSchema.Test/Model/EnergyWindowMaterialGasAllOfTests.cs
@@ -554,6 +559,7 @@ src/HoneybeeSchema.Test/Model/ModifierSetAbridgedAllOfTests.cs
 src/HoneybeeSchema.Test/Model/ModifierSetAbridgedTests.cs
 src/HoneybeeSchema.Test/Model/ModifierSetAllOfTests.cs
 src/HoneybeeSchema.Test/Model/ModifierSetTests.cs
+src/HoneybeeSchema.Test/Model/MoistureDiffusionModelTests.cs
 src/HoneybeeSchema.Test/Model/NoLimitAllOfTests.cs
 src/HoneybeeSchema.Test/Model/NoLimitTests.cs
 src/HoneybeeSchema.Test/Model/OpaqueConstructionAbridgedAllOfTests.cs
@@ -814,6 +820,8 @@ src/HoneybeeSchema/Model/EnergyMaterial.cs
 src/HoneybeeSchema/Model/EnergyMaterialAllOf.cs
 src/HoneybeeSchema/Model/EnergyMaterialNoMass.cs
 src/HoneybeeSchema/Model/EnergyMaterialNoMassAllOf.cs
+src/HoneybeeSchema/Model/EnergyMaterialVegetation.cs
+src/HoneybeeSchema/Model/EnergyMaterialVegetationAllOf.cs
 src/HoneybeeSchema/Model/EnergyWindowMaterialBlind.cs
 src/HoneybeeSchema/Model/EnergyWindowMaterialBlindAllOf.cs
 src/HoneybeeSchema/Model/EnergyWindowMaterialGas.cs
@@ -926,6 +934,7 @@ src/HoneybeeSchema/Model/ModifierSet.cs
 src/HoneybeeSchema/Model/ModifierSetAbridged.cs
 src/HoneybeeSchema/Model/ModifierSetAbridgedAllOf.cs
 src/HoneybeeSchema/Model/ModifierSetAllOf.cs
+src/HoneybeeSchema/Model/MoistureDiffusionModel.cs
 src/HoneybeeSchema/Model/NoLimit.cs
 src/HoneybeeSchema/Model/NoLimitAllOf.cs
 src/HoneybeeSchema/Model/OpaqueConstruction.cs

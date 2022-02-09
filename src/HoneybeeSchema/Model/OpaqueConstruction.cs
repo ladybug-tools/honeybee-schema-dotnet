@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public OpaqueConstruction
         (
-            string identifier, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass>> materials, // Required parameters
+            string identifier, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyMaterialVegetation>> materials, // Required parameters
             string displayName= default, Object userData= default // Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
@@ -76,7 +76,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>List of opaque material definitions. The order of the materials is from exterior to interior.</value>
         [DataMember(Name = "materials", IsRequired = true)]
-        public List<AnyOf<EnergyMaterial,EnergyMaterialNoMass>> Materials { get; set; } 
+        public List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyMaterialVegetation>> Materials { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
