@@ -573,6 +573,52 @@ namespace HoneybeeSchema
             return names;
         }
 
+        public static Dictionary<string, object> GetUserData(this IDdBaseModel obj)
+        {
+            var ud = ToDictionary(obj.UserData);
+            obj.UserData = ud;
+            return ud;
+        }
+
+        public static void AddUserData(this IDdBaseModel obj, string key, object vaule)
+        {
+            if (obj == null || vaule == null || key == null)
+                return;
+
+            var ud = obj.GetUserData();
+            ud.TryAddUpdate(key, vaule);
+        }
+
+
+        public static Dictionary<string, object> ToDictionary(object userData)
+        {
+            if (userData is Dictionary<string, object> dd)
+                return dd;
+
+            var uds = new Dictionary<string, object>();
+            Newtonsoft.Json.Linq.JObject jObj = null;
+            if (userData is string)
+                jObj = Newtonsoft.Json.Linq.JObject.Parse(userData?.ToString());
+            else if (userData is Newtonsoft.Json.Linq.JObject j)
+                jObj = j;
+
+            if (jObj != null)
+            {
+                uds = jObj.Children()
+                   .OfType<Newtonsoft.Json.Linq.JProperty>()
+                   .ToDictionary(_ => _.Name, _ => _.Value as object);
+            }
+            return uds;
+
+        }
+
+        public static void TryAddUpdate<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, TValue value)
+        {
+            if (dictionary.TryGetValue(key, out var oldValue))
+                dictionary[key] = value;
+            else
+                dictionary.Add(key, value);
+        }
 
     }
 
