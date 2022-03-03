@@ -245,6 +245,16 @@ namespace HoneybeeSchema.Test
             Assert.IsTrue(res.FirstOrDefault().MemberNames.Contains("Identifier"));
   
         }
+
+        [Test]
+        public void UserDataTest()
+        {
+            instance.AddData("__layer__", "door 1");
+            var dup = instance.DuplicateDoor();
+            var dic = dup.GetUserData();
+            Assert.AreEqual(dic["__layer__"].ToString(), "door 1");
+
+        }
     }
 
 }
