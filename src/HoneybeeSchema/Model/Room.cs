@@ -48,6 +48,7 @@ namespace HoneybeeSchema
         /// <param name="indoorShades">Shades assigned to the interior side of this object (eg. partitions, tables)..</param>
         /// <param name="outdoorShades">Shades assigned to the exterior side of this object (eg. trees, landscaping)..</param>
         /// <param name="multiplier">An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is mutliplied by the multiplier. (default to 1).</param>
+        /// <param name="excludeFloorArea">A boolean for whether the Room floor area contributes to Models it is a part of. Note that this will not affect the floor_area property of this Room itself but it will ensure the Room floor area is excluded from any calculations when the Room is part of a Model, including EUI calculations. (default to false).</param>
         /// <param name="story">Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model..</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters. (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
@@ -55,7 +56,7 @@ namespace HoneybeeSchema
         public Room
         (
             string identifier, List<Face> faces, RoomPropertiesAbridged properties, // Required parameters
-            string displayName= default, Object userData= default, List<Shade> indoorShades= default, List<Shade> outdoorShades= default, int multiplier = 1, string story= default// Optional parameters
+            string displayName= default, Object userData= default, List<Shade> indoorShades= default, List<Shade> outdoorShades= default, int multiplier = 1, bool excludeFloorArea = false, string story= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             // to ensure "faces" is required (not null)
@@ -65,6 +66,7 @@ namespace HoneybeeSchema
             this.IndoorShades = indoorShades;
             this.OutdoorShades = outdoorShades;
             this.Multiplier = multiplier;
+            this.ExcludeFloorArea = excludeFloorArea;
             this.Story = story;
 
             // Set non-required readonly properties with defaultValue
@@ -113,6 +115,12 @@ namespace HoneybeeSchema
         [DataMember(Name = "multiplier")]
         public int Multiplier { get; set; }  = 1;
         /// <summary>
+        /// A boolean for whether the Room floor area contributes to Models it is a part of. Note that this will not affect the floor_area property of this Room itself but it will ensure the Room floor area is excluded from any calculations when the Room is part of a Model, including EUI calculations.
+        /// </summary>
+        /// <value>A boolean for whether the Room floor area contributes to Models it is a part of. Note that this will not affect the floor_area property of this Room itself but it will ensure the Room floor area is excluded from any calculations when the Room is part of a Model, including EUI calculations.</value>
+        [DataMember(Name = "exclude_floor_area")]
+        public bool ExcludeFloorArea { get; set; }  = false;
+        /// <summary>
         /// Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model.
         /// </summary>
         /// <value>Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model.</value>
@@ -148,6 +156,7 @@ namespace HoneybeeSchema
             sb.Append("  IndoorShades: ").Append(IndoorShades).Append("\n");
             sb.Append("  OutdoorShades: ").Append(OutdoorShades).Append("\n");
             sb.Append("  Multiplier: ").Append(Multiplier).Append("\n");
+            sb.Append("  ExcludeFloorArea: ").Append(ExcludeFloorArea).Append("\n");
             sb.Append("  Story: ").Append(Story).Append("\n");
             return sb.ToString();
         }
@@ -234,6 +243,9 @@ namespace HoneybeeSchema
                     Extension.Equals(this.Multiplier, input.Multiplier)
                 ) && base.Equals(input) && 
                 (
+                    Extension.Equals(this.ExcludeFloorArea, input.ExcludeFloorArea)
+                ) && base.Equals(input) && 
+                (
                     Extension.Equals(this.Story, input.Story)
                 );
         }
@@ -259,6 +271,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.OutdoorShades.GetHashCode();
                 if (this.Multiplier != null)
                     hashCode = hashCode * 59 + this.Multiplier.GetHashCode();
+                if (this.ExcludeFloorArea != null)
+                    hashCode = hashCode * 59 + this.ExcludeFloorArea.GetHashCode();
                 if (this.Story != null)
                     hashCode = hashCode * 59 + this.Story.GetHashCode();
                 return hashCode;
