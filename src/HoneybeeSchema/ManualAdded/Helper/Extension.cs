@@ -252,6 +252,9 @@ namespace HoneybeeSchema
                 case EnergyMaterialNoMass em:
                     modelEnergyCollection.Materials.Add(em);
                     break;
+                case EnergyMaterialVegetation em:
+                    modelEnergyCollection.Materials.Add(em);
+                    break;
                 case EnergyWindowMaterialBlind em:
                     modelEnergyCollection.Materials.Add(em);
                     break;
@@ -316,7 +319,18 @@ namespace HoneybeeSchema
                 case AirBoundaryConstructionAbridged em:
                     modelEnergyCollection.Constructions.Add(em);
                     break;
-
+                case WindowConstructionShadeAbridged em:
+                    modelEnergyCollection.Constructions.Add(em);
+                    break;
+                case WindowConstructionShade em:
+                    modelEnergyCollection.Constructions.Add(em);
+                    break;
+                case WindowConstructionDynamicAbridged em:
+                    modelEnergyCollection.Constructions.Add(em);
+                    break;
+                case WindowConstructionDynamic em:
+                    modelEnergyCollection.Constructions.Add(em);
+                    break;
                 default:
                     throw new ArgumentException($"{construction.GetType()}({construction.Identifier}) is not added to model");
 
