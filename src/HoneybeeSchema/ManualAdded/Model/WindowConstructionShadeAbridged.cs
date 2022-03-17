@@ -25,7 +25,7 @@
             this.VisibleTransmittance = this.WindowConstruction.VisibleTransmittance;
             return true;
         }
-        public Energy.IConstruction GenReversedConstruction() => null;
+        public Energy.IConstruction GenReversedConstruction() => this.DuplicateWindowConstructionShadeAbridged();
     }
 }
 ;
