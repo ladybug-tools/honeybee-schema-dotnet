@@ -24,7 +24,7 @@
             return true;
         }
 
-        public Energy.IConstruction GenReversedConstruction() => null;
+        public Energy.IConstruction GenReversedConstruction() => this.DuplicateWindowConstructionShade();
     }
 }
 ;

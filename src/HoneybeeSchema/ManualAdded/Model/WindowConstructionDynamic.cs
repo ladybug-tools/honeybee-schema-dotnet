@@ -4,7 +4,7 @@
     {
         public double VisibleTransmittance { get; private set; } = -999;
 
-        public Energy.IConstruction GenReversedConstruction() => null;
+        public Energy.IConstruction GenReversedConstruction() => this.DuplicateWindowConstructionDynamic();
     }
 }
 ;

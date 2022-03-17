@@ -40,11 +40,15 @@ namespace HoneybeeSchema
 
         }
 
+
         public Energy.IConstruction GenReversedConstruction()
         {
             var obj = this.DuplicateWindowConstructionAbridged();
             obj.Identifier = $"{obj.Identifier}_Rev";
             obj.Materials.Reverse();
+            // check if the original list is asymmetrical
+            if (obj.Materials.SequenceEqual(this.Materials))
+                obj.Identifier = this.Identifier;
             return obj;
         }
     }
