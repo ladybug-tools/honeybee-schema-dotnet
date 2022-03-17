@@ -3,6 +3,8 @@
     public partial class AirBoundaryConstruction
     {
         public double VisibleTransmittance => 1;
+
+        public Energy.IConstruction GenReversedConstruction() => null;
     }
 
 }
