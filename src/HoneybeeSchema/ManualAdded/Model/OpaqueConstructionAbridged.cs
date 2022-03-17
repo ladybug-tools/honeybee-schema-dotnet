@@ -34,7 +34,14 @@ namespace HoneybeeSchema
 
         }
 
-       
+        public Energy.IConstruction GenReversedConstruction()
+        {
+            var obj = this.DuplicateOpaqueConstructionAbridged();
+            obj.Identifier = $"{obj.Identifier}_Rev";
+            obj.Materials.Reverse();
+            return obj;
+        }
+
     }
 
 }

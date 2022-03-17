@@ -25,6 +25,7 @@
             this.VisibleTransmittance = this.WindowConstruction.VisibleTransmittance;
             return true;
         }
+        public Energy.IConstruction GenReversedConstruction() => null;
     }
 }
 ;
