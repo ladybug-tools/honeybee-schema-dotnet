@@ -2448,130 +2448,100 @@
                         "additionalProperties": false
                     }
                 ],
-                "title": "RoofCeilingModifierSet",
-                "description": "Set containing radiance modifiers needed for a model's roofs.",
+                "title": "NoLimit",
+                "description": "Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.",
                 "discriminator": {
                     "propertyName": "type"
                 }
             },
-            "ApertureModifierSet": {
+            "ScheduleNumericType": {
+                "title": "ScheduleNumericType",
+                "description": "Designates how the range values are validated.",
+                "enum": [
+                    "Continuous",
+                    "Discrete"
+                ],
+                "type": "string"
+            },
+            "ScheduleUnitType": {
+                "title": "ScheduleUnitType",
+                "description": "An enumeration.",
+                "enum": [
+                    "Dimensionless",
+                    "Temperature",
+                    "DeltaTemperature",
+                    "PrecipitationRate",
+                    "Angle",
+                    "ConvectionCoefficient",
+                    "ActivityLevel",
+                    "Velocity",
+                    "Capacity",
+                    "Power",
+                    "Availability",
+                    "Percent",
+                    "Control",
+                    "Mode"
+                ],
+                "type": "string"
+            },
+            "ScheduleTypeLimit": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                        "$ref": "#/components/schemas/EnergyBaseModel"
                     },
                     {
                         "type": "object",
                         "properties": {
                             "type": {
                                 "title": "Type",
-                                "default": "ApertureModifierSet",
-                                "pattern": "^ApertureModifierSet$",
+                                "default": "ScheduleTypeLimit",
+                                "pattern": "^ScheduleTypeLimit$",
                                 "type": "string",
                                 "readOnly": true
                             },
-                            "window_modifier": {
-                                "title": "Window Modifier",
-                                "description": "A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and Wall parent Face.",
+                            "lower_limit": {
+                                "title": "Lower Limit",
+                                "description": "Lower limit for the schedule type or NoLimit.",
+                                "default": {
+                                    "type": "NoLimit"
+                                },
                                 "anyOf": [
                                     {
-                                        "$ref": "#/components/schemas/Plastic"
+                                        "$ref": "#/components/schemas/NoLimit"
                                     },
                                     {
-                                        "$ref": "#/components/schemas/Glass"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/BSDF"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Glow"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Light"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Trans"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Metal"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Void"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Mirror"
+                                        "type": "number",
+                                        "format": "double"
                                     }
                                 ]
                             },
-                            "interior_modifier": {
-                                "title": "Interior Modifier",
-                                "description": "A modifier object for apertures with a Surface boundary condition.",
+                            "upper_limit": {
+                                "title": "Upper Limit",
+                                "description": "Upper limit for the schedule type or NoLimit.",
+                                "default": {
+                                    "type": "NoLimit"
+                                },
                                 "anyOf": [
                                     {
-                                        "$ref": "#/components/schemas/Plastic"
+                                        "$ref": "#/components/schemas/NoLimit"
                                     },
                                     {
-                                        "$ref": "#/components/schemas/Glass"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/BSDF"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Glow"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Light"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Trans"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Metal"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Void"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Mirror"
+                                        "type": "number",
+                                        "format": "double"
                                     }
                                 ]
                             },
-                            "skylight_modifier": {
-                                "title": "Skylight Modifier",
-                                "description": "A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.",
-                                "anyOf": [
+                            "numeric_type": {
+                                "default": "Continuous",
+                                "allOf": [
                                     {
-                                        "$ref": "#/components/schemas/Plastic"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Glass"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/BSDF"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Glow"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Light"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Trans"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Metal"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Void"
-                                    },
-                                    {
-                                        "$ref": "#/components/schemas/Mirror"
+                                        "$ref": "#/components/schemas/ScheduleNumericType"
                                     }
                                 ]
                             },
-                            "operable_modifier": {
-                                "title": "Operable Modifier",
-                                "description": "A modifier object for apertures with an Outdoors boundary condition and a True is_operable property.",
-                                "anyOf": [
+                            "unit_type": {
+                                "default": "Dimensionless",
+                                "allOf": [
                                     {
                                         "$ref": "#/components/schemas/ScheduleUnitType"
                                     }
@@ -2742,7 +2712,7 @@
             "EnergyMaterialNoMass": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                        "$ref": "#/components/schemas/IDdEnergyBaseModel"
                     },
                     {
                         "type": "object",
@@ -3146,14 +3116,10 @@
             "RoofCeilingConstructionSet": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/IDdEnergyBaseModel"
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "watts_per_area",
-                            "schedule"
-                        ],
                         "properties": {
                             "interior_construction": {
                                 "title": "Interior Construction",
@@ -3256,7 +3222,7 @@
             "Autocalculate": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/_EquipmentBase"
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
                     },
                     {
                         "type": "object",
@@ -3376,6 +3342,7 @@
                                 "description": "Long-wave transmittance at normal incidence.",
                                 "default": 0,
                                 "minimum": 0,
+                                "maximum": 1,
                                 "type": "number",
                                 "format": "double"
                             },
@@ -3384,6 +3351,7 @@
                                 "description": "Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.",
                                 "default": 0.84,
                                 "minimum": 0,
+                                "maximum": 1,
                                 "type": "number",
                                 "format": "double"
                             },
@@ -3392,6 +3360,7 @@
                                 "description": "Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.",
                                 "default": 0.84,
                                 "minimum": 0,
+                                "maximum": 1,
                                 "type": "number",
                                 "format": "double"
                             },
@@ -3478,66 +3447,119 @@
                     "propertyName": "type"
                 }
             },
-            "VentilationAbridged": {
+            "EnergyWindowMaterialGasCustom": {
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/IDdEnergyBaseModel"
                     },
                     {
                         "type": "object",
+                        "required": [
+                            "conductivity_coeff_a",
+                            "viscosity_coeff_a",
+                            "specific_heat_coeff_a",
+                            "specific_heat_ratio",
+                            "molecular_weight"
+                        ],
                         "properties": {
+                            "conductivity_coeff_a": {
+                                "title": "Conductivity Coeff A",
+                                "description": "The A coefficient for gas conductivity in W/(m-K).",
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "viscosity_coeff_a": {
+                                "title": "Viscosity Coeff A",
+                                "description": "The A coefficient for gas viscosity in kg/(m-s).",
+                                "exclusiveMinimum": 0,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "specific_heat_coeff_a": {
+                                "title": "Specific Heat Coeff A",
+                                "description": "The A coefficient for gas specific heat in J/(kg-K).",
+                                "exclusiveMinimum": 0,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "specific_heat_ratio": {
+                                "title": "Specific Heat Ratio",
+                                "description": "The specific heat ratio for gas.",
+                                "exclusiveMinimum": 1,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "molecular_weight": {
+                                "title": "Molecular Weight",
+                                "description": "The molecular weight for gas in g/mol.",
+                                "minimum": 20,
+                                "maximum": 200,
+                                "type": "number",
+                                "format": "double"
+                            },
                             "type": {
                                 "title": "Type",
-                                "default": "VentilationAbridged",
-                                "pattern": "^VentilationAbridged$",
+                                "default": "EnergyWindowMaterialGasCustom",
+                                "pattern": "^EnergyWindowMaterialGasCustom$",
                                 "type": "string",
                                 "readOnly": true
                             },
-                            "flow_per_person": {
-                                "title": "Flow Per Person",
-                                "description": "Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room.",
-                                "default": 0,
-                                "minimum": 0,
+                            "thickness": {
+                                "title": "Thickness",
+                                "description": "Thickness of the gas layer in meters. Default: 0.0125.",
+                                "default": 0.0125,
+                                "exclusiveMinimum": 0,
                                 "type": "number",
                                 "format": "double"
                             },
-                            "flow_per_area": {
-                                "title": "Flow Per Area",
-                                "description": "Intensity of ventilation in [m3/s per m2 of floor area].",
+                            "conductivity_coeff_b": {
+                                "title": "Conductivity Coeff B",
+                                "description": "The B coefficient for gas conductivity in W/(m-K2).",
                                 "default": 0,
-                                "minimum": 0,
                                 "type": "number",
                                 "format": "double"
                             },
-                            "air_changes_per_hour": {
-                                "title": "Air Changes Per Hour",
-                                "description": "Intensity of ventilation in air changes per hour (ACH) for the entire Room.",
+                            "conductivity_coeff_c": {
+                                "title": "Conductivity Coeff C",
+                                "description": "The C coefficient for gas conductivity in W/(m-K3).",
                                 "default": 0,
-                                "minimum": 0,
                                 "type": "number",
                                 "format": "double"
                             },
-                            "flow_per_zone": {
-                                "title": "Flow Per Zone",
-                                "description": "Intensity of ventilation in m3/s for the entire Room.",
+                            "viscosity_coeff_b": {
+                                "title": "Viscosity Coeff B",
+                                "description": "The B coefficient for gas viscosity in kg/(m-s-K).",
                                 "default": 0,
-                                "minimum": 0,
                                 "type": "number",
                                 "format": "double"
                             },
-                            "schedule": {
-                                "title": "Schedule",
-                                "description": "Identifier of the schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.",
-                                "maxLength": 100,
-                                "minLength": 1,
-                                "type": "string"
+                            "viscosity_coeff_c": {
+                                "title": "Viscosity Coeff C",
+                                "description": "The C coefficient for gas viscosity in kg/(m-s-K2).",
+                                "default": 0,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "specific_heat_coeff_b": {
+                                "title": "Specific Heat Coeff B",
+                                "description": "The B coefficient for gas specific heat in J/(kg-K2).",
+                                "default": 0,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "specific_heat_coeff_c": {
+                                "title": "Specific Heat Coeff C",
+                                "description": "The C coefficient for gas specific heat in J/(kg-K3).",
+                                "default": 0,
+                                "type": "number",
+                                "format": "double"
                             }
                         },
                         "additionalProperties": false
                     }
                 ],
-                "title": "VentilationAbridged",
-                "description": "Base class for all objects requiring an EnergyPlus identifier and user_data.",
+                "title": "EnergyWindowMaterialGasCustom",
+                "description": "Create single layer of custom gas.",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -3646,9 +3668,6 @@
                                 "readOnly": true
                             }
                         },
-                        "required": [
-                            "sensor_position"
-                        ],
                         "additionalProperties": false
                     }
                 ],
@@ -3661,7 +3680,7 @@
             "EnergyWindowMaterialShade": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                        "$ref": "#/components/schemas/IDdEnergyBaseModel"
                     },
                     {
                         "type": "object",
@@ -3823,11 +3842,6 @@
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "watts",
-                            "schedule",
-                            "fuel_type"
-                        ],
                         "properties": {
                             "type": {
                                 "title": "Type",
@@ -4564,23 +4578,8 @@
                                 "pattern": "^WindowConstructionDynamic$",
                                 "type": "string",
                                 "readOnly": true
-                            },
-                            "x": {
-                                "title": "X",
-                                "description": "Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated.",
-                                "minItems": 3,
-                                "maxItems": 3,
-                                "type": "array",
-                                "items": {
-                                    "type": "number",
-                                    "format": "double"
-                                }
                             }
                         },
-                        "required": [
-                            "n",
-                            "o"
-                        ],
                         "additionalProperties": false
                     }
                 ],
@@ -4598,21 +4597,6 @@
                     {
                         "type": "object",
                         "properties": {
-                            "boundary": {
-                                "title": "Boundary",
-                                "description": "A list of points representing the outer boundary vertices of the face. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.",
-                                "minItems": 3,
-                                "type": "array",
-                                "items": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "number",
-                                        "format": "double"
-                                    },
-                                    "minItems": 3,
-                                    "maxItems": 3
-                                }
-                            },
                             "type": {
                                 "title": "Type",
                                 "default": "ApertureConstructionSet",
@@ -4681,9 +4665,6 @@
                                 ]
                             }
                         },
-                        "required": [
-                            "boundary"
-                        ],
                         "additionalProperties": false
                     }
                 ],
@@ -4696,23 +4677,11 @@
             "DoorConstructionSet": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/IDdRadianceBaseModel"
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "geometry"
-                        ],
                         "properties": {
-                            "geometry": {
-                                "title": "Geometry",
-                                "description": "A ladybug_geometry Face3D.",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/Face3D"
-                                    }
-                                ]
-                            },
                             "type": {
                                 "title": "Type",
                                 "default": "DoorConstructionSet",
@@ -5314,22 +5283,6 @@
                                 "pattern": "^RoofCeilingConstructionSetAbridged$",
                                 "type": "string",
                                 "readOnly": true
-                            },
-                            "construction": {
-                                "title": "Construction",
-                                "description": "Identifier of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.",
-                                "maxLength": 100,
-                                "minLength": 1,
-                                "type": "string"
-                            },
-                            "vent_opening": {
-                                "title": "Vent Opening",
-                                "description": "An optional VentilationOpening to specify the operable portion of the Aperture.",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/VentilationOpening"
-                                    }
-                                ]
                             }
                         },
                         "additionalProperties": false
@@ -5349,24 +5302,6 @@
                     {
                         "type": "object",
                         "properties": {
-                            "vmtx_geometry": {
-                                "title": "Vmtx Geometry",
-                                "description": "A Face3D for the view matrix geometry (default: None).",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/Face3D"
-                                    }
-                                ]
-                            },
-                            "dmtx_geometry": {
-                                "title": "Dmtx Geometry",
-                                "description": "A Face3D for the daylight matrix geometry (default: None).",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/Face3D"
-                                    }
-                                ]
-                            },
                             "type": {
                                 "title": "Type",
                                 "default": "VentilationOpening",
@@ -5468,7 +5403,8 @@
                                 "type": "string",
                                 "readOnly": true
                             }
-                        }
+                        },
+                        "additionalProperties": false
                     }
                 ],
                 "title": "Ground",
@@ -5560,7 +5496,7 @@
             "Surface": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/_PropertiesBaseAbridged"
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
                     },
                     {
                         "type": "object",
@@ -5638,7 +5574,8 @@
                                 "default": false,
                                 "type": "boolean"
                             }
-                        }
+                        },
+                        "additionalProperties": false
                     }
                 ],
                 "title": "Shade",
@@ -5650,15 +5587,10 @@
             "ApertureEnergyPropertiesAbridged": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/IDdBaseModel"
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "geometry",
-                            "boundary_condition",
-                            "properties"
-                        ],
                         "properties": {
                             "type": {
                                 "title": "Type",
@@ -5744,13 +5676,6 @@
                     {
                         "type": "object",
                         "properties": {
-                            "flow_coefficient": {
-                                "title": "Flow Coefficient",
-                                "description": "A number in kg/s-m at 1 Pa per meter of crack length at the conditions defined in the ReferenceCrack condition; required to run an AirflowNetwork simulation. The DesignBuilder Cracks template defines the flow coefficient for a tight, low-leakage wall to be 0.00001 and 0.001 for external and internal constructions, respectively. Flow coefficients for a very poor, high-leakage wall are defined to be 0.0004 and 0.019 for external and internal constructions, respectively.",
-                                "exclusiveMinimum": 0,
-                                "type": "number",
-                                "format": "double"
-                            },
                             "type": {
                                 "title": "Type",
                                 "default": "ApertureRadiancePropertiesAbridged",
@@ -6279,7 +6204,7 @@
             "PeopleAbridged": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/BaseModifierSetAbridged"
+                        "$ref": "#/components/schemas/IDdEnergyBaseModel"
                     },
                     {
                         "type": "object",
@@ -6895,7 +6820,7 @@
             "InternalMassAbridged": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                        "$ref": "#/components/schemas/IDdEnergyBaseModel"
                     },
                     {
                         "type": "object",
@@ -6926,10 +6851,6 @@
                                 "readOnly": true
                             }
                         },
-                        "required": [
-                            "pos",
-                            "dir"
-                        ],
                         "additionalProperties": false
                     }
                 ],
@@ -7038,11 +6959,6 @@
                                 "format": "double"
                             }
                         },
-                        "required": [
-                            "r",
-                            "g",
-                            "b"
-                        ],
                         "additionalProperties": false
                     }
                 ],
@@ -7773,30 +7689,6 @@
                                 "pattern": "^WallModifierSetAbridged$",
                                 "type": "string",
                                 "readOnly": true
-                            },
-                            "solar_reflectance": {
-                                "title": "Solar Reflectance",
-                                "description": "A number for the solar reflectance of the construction.",
-                                "default": 0.2,
-                                "minimum": 0,
-                                "maximum": 1,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "visible_reflectance": {
-                                "title": "Visible Reflectance",
-                                "description": "A number for the visible reflectance of the construction.",
-                                "default": 0.2,
-                                "minimum": 0,
-                                "maximum": 1,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "is_specular": {
-                                "title": "Is Specular",
-                                "description": "Boolean to note whether the reflection off the shade is diffuse (False) or specular (True). Set to True if the construction is representing a glass facade or a mirror material.",
-                                "default": false,
-                                "type": "boolean"
                             }
                         },
                         "additionalProperties": false
@@ -7861,7 +7753,7 @@
             "ApertureModifierSetAbridged": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/_FaceSubSetAbridged"
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
                     },
                     {
                         "type": "object",
@@ -8963,9 +8855,6 @@
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "materials"
-                        ],
                         "properties": {
                             "type": {
                                 "title": "Type",
@@ -9451,26 +9340,15 @@
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "u_factor",
-                            "shgc"
-                        ],
                         "properties": {
-                            "u_factor": {
-                                "title": "U Factor",
-                                "description": "The overall heat transfer coefficient for window system in W/m2-K. Note that constructions with U-values above 5.8 cannot be assigned to skylights without EnergyPlus thorwing an error.",
-                                "exclusiveMinimum": 0,
-                                "maximum": 12,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "shgc": {
-                                "title": "Shgc",
-                                "description": "Unitless quantity for the Solar Heat Gain Coefficient (solar transmittance + conduction) at normal incidence and vertical orientation.",
-                                "exclusiveMinimum": 0,
-                                "exclusiveMaximum": 1,
-                                "type": "number",
-                                "format": "double"
+                            "vintage": {
+                                "description": "Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards",
+                                "default": "ASHRAE_2019",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/Vintages"
+                                    }
+                                ]
                             },
                             "type": {
                                 "title": "Type",
@@ -9593,32 +9471,15 @@
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "gas_types",
-                            "gas_fractions"
-                        ],
                         "properties": {
-                            "gas_types": {
-                                "description": "List of gases in the gas mixture.",
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/components/schemas/GasType"
-                                },
-                                "minItems": 2,
-                                "maxItems": 4
-                            },
-                            "gas_fractions": {
-                                "title": "Gas Fractions",
-                                "description": "A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1.",
-                                "minItems": 2,
-                                "maxItems": 4,
-                                "type": "array",
-                                "items": {
-                                    "type": "number",
-                                    "exclusiveMinimum": 0,
-                                    "exclusiveMaximum": 1,
-                                    "format": "double"
-                                }
+                            "vintage": {
+                                "description": "Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards",
+                                "default": "ASHRAE_2019",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/Vintages"
+                                    }
+                                ]
                             },
                             "sensible_heat_recovery": {
                                 "title": "Sensible Heat Recovery",
@@ -9684,9 +9545,6 @@
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "materials"
-                        ],
                         "properties": {
                             "type": {
                                 "title": "Type",
@@ -10139,17 +9997,7 @@
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "schedule_day"
-                        ],
                         "properties": {
-                            "schedule_day": {
-                                "title": "Schedule Day",
-                                "description": "The identifier of a ScheduleDay object associated with this rule.",
-                                "maxLength": 100,
-                                "minLength": 1,
-                                "type": "string"
-                            },
                             "type": {
                                 "title": "Type",
                                 "default": "GlobalConstructionSet",
@@ -11994,10 +11842,6 @@
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "people_per_area",
-                            "occupancy_schedule"
-                        ],
                         "properties": {
                             "vintage": {
                                 "description": "Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards",
@@ -12104,10 +11948,6 @@
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "watts_per_area",
-                            "schedule"
-                        ],
                         "properties": {
                             "type": {
                                 "title": "Type",
@@ -12180,10 +12020,6 @@
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "watts_per_area",
-                            "schedule"
-                        ],
                         "properties": {
                             "type": {
                                 "title": "Type",
@@ -12425,32 +12261,6 @@
                                 "pattern": "^GasEquipment$",
                                 "type": "string",
                                 "readOnly": true
-                            },
-                            "target_temperature": {
-                                "title": "Target Temperature",
-                                "description": "Number for the target temperature of water out of the tap (C). This the temperature after hot water has been mixed with cold water from the water mains. The default is 60C, which essentially assumes that the flow_per_area on this object is only for water straight out of the water heater.",
-                                "default": 60,
-                                "exclusiveMinimum": 0,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "sensible_fraction": {
-                                "title": "Sensible Fraction",
-                                "description": "A number between 0 and 1 for the fraction of the total hot water load given off as sensible heat in the zone.",
-                                "default": 0.2,
-                                "minimum": 0,
-                                "maximum": 1,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "latent_fraction": {
-                                "title": "Latent Fraction",
-                                "description": "A number between 0 and 1 for the fraction of the total hot water load that is latent.",
-                                "default": 0.05,
-                                "minimum": 0,
-                                "maximum": 1,
-                                "type": "number",
-                                "format": "double"
                             }
                         },
                         "additionalProperties": false
@@ -13659,97 +13469,6 @@
                     "propertyName": "type"
                 }
             },
-            "Room": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/IDdBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "required": [
-                            "faces",
-                            "properties"
-                        ],
-                        "properties": {
-                            "faces": {
-                                "title": "Faces",
-                                "description": "Faces that together form the closed volume of a room.",
-                                "minItems": 4,
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/components/schemas/Face"
-                                }
-                            },
-                            "properties": {
-                                "title": "Properties",
-                                "description": "Extension properties for particular simulation engines (Radiance, EnergyPlus).",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/RoomPropertiesAbridged"
-                                    }
-                                ]
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "Room",
-                                "pattern": "^Room$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "indoor_shades": {
-                                "title": "Indoor Shades",
-                                "description": "Shades assigned to the interior side of this object (eg. partitions, tables).",
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/components/schemas/Shade"
-                                }
-                            },
-                            "outdoor_shades": {
-                                "title": "Outdoor Shades",
-                                "description": "Shades assigned to the exterior side of this object (eg. trees, landscaping).",
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/components/schemas/Shade"
-                                }
-                            },
-                            "multiplier": {
-                                "title": "Multiplier",
-                                "description": "An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is mutliplied by the multiplier.",
-                                "default": 1,
-                                "minimum": 1,
-                                "type": "integer",
-                                "format": "int32"
-                            },
-                            "story": {
-                                "title": "Story",
-                                "description": "Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model.",
-                                "maxLength": 100,
-                                "minLength": 1,
-                                "pattern": "[.A-Za-z0-9_-]",
-                                "type": "string"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "Room",
-                "description": "Base class for all objects requiring a identifiers acceptable for all engines.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "Units": {
-                "title": "Units",
-                "description": "An enumeration.",
-                "enum": [
-                    "Meters",
-                    "Millimeters",
-                    "Feet",
-                    "Inches",
-                    "Centimeters"
-                ],
-                "type": "string"
-            },
             "Model": {
                 "allOf": [
                     {
@@ -14048,7 +13767,7 @@
                     "propertyName": "type"
                 }
             },
-            "_PropertiesBaseAbridged": {
+            "_FaceSubSetAbridged": {
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
@@ -14056,29 +13775,40 @@
                     {
                         "type": "object",
                         "properties": {
-                            "modifier": {
-                                "title": "Modifier",
-                                "description": "A string for a Honeybee Radiance Modifier (default: None).",
+                            "interior_construction": {
+                                "title": "Interior Construction",
+                                "description": "Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition.",
+                                "maxLength": 100,
+                                "minLength": 1,
                                 "type": "string"
                             },
-                            "modifier_blk": {
-                                "title": "Modifier Blk",
-                                "description": "A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).",
+                            "exterior_construction": {
+                                "title": "Exterior Construction",
+                                "description": "Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition.",
+                                "maxLength": 100,
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "ground_construction": {
+                                "title": "Ground Construction",
+                                "description": "Identifier for an OpaqueConstruction for faces with a Ground boundary condition.",
+                                "maxLength": 100,
+                                "minLength": 1,
                                 "type": "string"
                             },
                             "type": {
                                 "title": "Type",
-                                "default": "_PropertiesBaseAbridged",
+                                "default": "_FaceSubSetAbridged",
                                 "type": "string",
-                                "pattern": "^_PropertiesBaseAbridged$",
+                                "pattern": "^_FaceSubSetAbridged$",
                                 "readOnly": true
                             }
                         },
                         "additionalProperties": false
                     }
                 ],
-                "title": "_PropertiesBaseAbridged",
-                "description": "Base class of Abridged Radiance Properties.",
+                "title": "_FaceSubSetAbridged",
+                "description": "A set of constructions for wall, floor, or roof assemblies.",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -14211,7 +13941,7 @@
             "BaseModifierSet": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/IDdEnergyBaseModel"
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
                     },
                     {
                         "type": "object",
@@ -14432,7 +14162,7 @@
                     "propertyName": "type"
                 }
             },
-            "_DOASBase": {
+            "_AllAirBase": {
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/IDdEnergyBaseModel"
@@ -14446,6 +14176,15 @@
                                 "allOf": [
                                     {
                                         "$ref": "#/components/schemas/Vintages"
+                                    }
+                                ]
+                            },
+                            "economizer_type": {
+                                "description": "Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration).",
+                                "default": "NoEconomizer",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/AllAirEconomizerType"
                                     }
                                 ]
                             },
@@ -14473,113 +14212,89 @@
                                 "default": false,
                                 "type": "boolean"
                             },
-                            "doas_availability_schedule": {
-                                "title": "Doas Availability Schedule",
-                                "description": "An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on.",
+                            "type": {
+                                "title": "Type",
+                                "default": "_AllAirBase",
+                                "type": "string",
+                                "pattern": "^_AllAirBase$",
+                                "readOnly": true
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "_AllAirBase",
+                "description": "Base class for all-air systems.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "_EquipmentBase": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/IDdEnergyBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "watts_per_area",
+                            "schedule"
+                        ],
+                        "properties": {
+                            "watts_per_area": {
+                                "title": "Watts Per Area",
+                                "description": "Equipment level per floor area as [W/m2].",
+                                "minimum": 0,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "schedule": {
+                                "title": "Schedule",
+                                "description": "Identifier of the schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.",
                                 "maxLength": 100,
                                 "minLength": 1,
                                 "type": "string"
                             },
+                            "radiant_fraction": {
+                                "title": "Radiant Fraction",
+                                "description": "Number for the amount of long-wave radiation heat given off by equipment. Default value is 0.",
+                                "default": 0,
+                                "minimum": 0,
+                                "maximum": 1,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "latent_fraction": {
+                                "title": "Latent Fraction",
+                                "description": "Number for the amount of latent heat given off by equipment. Default value is 0.",
+                                "default": 0,
+                                "minimum": 0,
+                                "maximum": 1,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "lost_fraction": {
+                                "title": "Lost Fraction",
+                                "description": "Number for the amount of \u201clost\u201d heat being given off by equipment. The default value is 0.",
+                                "default": 0,
+                                "minimum": 0,
+                                "maximum": 1,
+                                "type": "number",
+                                "format": "double"
+                            },
                             "type": {
                                 "title": "Type",
-                                "default": "_DOASBase",
+                                "default": "_EquipmentBase",
                                 "type": "string",
-                                "pattern": "^_DOASBase$",
+                                "pattern": "^_EquipmentBase$",
                                 "readOnly": true
                             }
                         },
                         "additionalProperties": false
                     }
                 ],
-                "title": "_DOASBase",
-                "description": "Base class for DOAS systems.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "_FaceSubSet": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "interior_construction": {
-                                "title": "Interior Construction",
-                                "description": "An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition.",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/OpaqueConstruction"
-                                    }
-                                ]
-                            },
-                            "exterior_construction": {
-                                "title": "Exterior Construction",
-                                "description": "An OpaqueConstruction for walls with an Outdoors boundary condition.",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/OpaqueConstruction"
-                                    }
-                                ]
-                            },
-                            "ground_construction": {
-                                "title": "Ground Construction",
-                                "description": "An OpaqueConstruction for walls with a Ground boundary condition.",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/OpaqueConstruction"
-                                    }
-                                ]
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "_FaceSubSet",
-                                "type": "string",
-                                "pattern": "^_FaceSubSet$",
-                                "readOnly": true
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "_FaceSubSet",
-                "description": "A set of constructions for wall, floor, or roof assemblies.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "BaseModifierSetAbridged": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "exterior_modifier": {
-                                "title": "Exterior Modifier",
-                                "description": "Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.",
-                                "type": "string"
-                            },
-                            "interior_modifier": {
-                                "title": "Interior Modifier",
-                                "description": "Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors.",
-                                "type": "string"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "BaseModifierSetAbridged",
-                                "type": "string",
-                                "pattern": "^BaseModifierSetAbridged$",
-                                "readOnly": true
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "BaseModifierSetAbridged",
-                "description": "Base class for the abridged modifier sets assigned to Faces.",
+                "title": "_EquipmentBase",
+                "description": "Base class for all objects requiring an EnergyPlus identifier and user_data.",
                 "discriminator": {
                     "propertyName": "type"
                 }
