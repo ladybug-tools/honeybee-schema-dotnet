@@ -9,6 +9,7 @@ namespace HoneybeeSchema.Energy.Hvac
 namespace HoneybeeSchema
 {
 	public partial class FCUwithDOASAbridged: HoneybeeSchema.Energy.Hvac.IDoas {}
+	public partial class RadiantwithDOASAbridged: HoneybeeSchema.Energy.Hvac.IDoas {}
 	public partial class VRFwithDOASAbridged: HoneybeeSchema.Energy.Hvac.IDoas {}
 	public partial class WSHPwithDOASAbridged: HoneybeeSchema.Energy.Hvac.IDoas {}
 }

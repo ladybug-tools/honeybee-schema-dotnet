@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         /// <param name="outdoorShades">Shades assigned to the exterior side of this object (eg. trees, landscaping)..</param>
         /// <param name="multiplier">An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is mutliplied by the multiplier. (default to 1).</param>
         /// <param name="excludeFloorArea">A boolean for whether the Room floor area contributes to Models it is a part of. Note that this will not affect the floor_area property of this Room itself but it will ensure the Room floor area is excluded from any calculations when the Room is part of a Model, including EUI calculations. (default to false).</param>
-        /// <param name="story">Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model..</param>
+        /// <param name="story">Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model. Note that this property has no character restrictions..</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters and not contain any spaces or special characters. (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
@@ -121,9 +121,9 @@ namespace HoneybeeSchema
         [DataMember(Name = "exclude_floor_area")]
         public bool ExcludeFloorArea { get; set; }  = false;
         /// <summary>
-        /// Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model.
+        /// Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model. Note that this property has no character restrictions.
         /// </summary>
-        /// <value>Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model.</value>
+        /// <value>Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model. Note that this property has no character restrictions.</value>
         [DataMember(Name = "story")]
         public string Story { get; set; } 
 
@@ -302,25 +302,6 @@ namespace HoneybeeSchema
             if(this.Multiplier < (int)1)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Multiplier, must be a value greater than or equal to 1.", new [] { "Multiplier" });
-            }
-
-            // Story (string) maxLength
-            if(this.Story != null && this.Story.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Story, length must be less than 100.", new [] { "Story" });
-            }
-
-            // Story (string) minLength
-            if(this.Story != null && this.Story.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Story, length must be greater than 1.", new [] { "Story" });
-            }
-            
-            // Story (string) pattern
-            Regex regexStory = new Regex(@"[.A-Za-z0-9_-]", RegexOptions.CultureInvariant);
-            if (this.Story != null && false == regexStory.Match(this.Story).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Story, must match a pattern of " + regexStory, new [] { "Story" });
             }
 
             yield break;
