@@ -21,7 +21,7 @@ namespace HoneybeeSchema.Helper
         //public static string UserBuildingProgramTypesFolder => Path.Combine(DefaultStandardsFolder, "programtypes");
         //public static string UserScheduleFolder => Path.Combine(DefaultStandardsFolder, "schedules");
 
-        public static string PythonFolder => Path.Combine(LadybugToolsRootFolder, "python");
+        private static string PythonFolder => Pathes.PythonFolder;
         //private static string HoneybeeEnergyCLI => Path.Combine(PythonFolder, "");
 
         #region User Library
