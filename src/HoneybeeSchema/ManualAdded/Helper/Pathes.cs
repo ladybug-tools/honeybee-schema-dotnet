@@ -131,11 +131,11 @@ namespace HoneybeeSchema.Helper
                 var foundPath = SettingConfig.GetSavedSettings().LBTRootFolder;
 
                 // find it from registry
-                if (string.IsNullOrEmpty(foundPath))
+                if (string.IsNullOrEmpty(foundPath) || !Directory.Exists(foundPath))
                     foundPath = GetLBTRootFromRegistry();
 
                 // create a new ladybug_tools folder under ProgramFiles
-                if (string.IsNullOrEmpty(foundPath))
+                if (string.IsNullOrEmpty(foundPath) || !Directory.Exists(foundPath))
                 {
                     var programFile = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
                     foundPath = Directory.GetDirectories(programFile, "*ladybug_tools*", SearchOption.TopDirectoryOnly).FirstOrDefault();
