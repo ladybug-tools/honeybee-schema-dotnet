@@ -12,55 +12,38 @@ namespace HoneybeeSchema.Helper
 {
     public static partial class EnergyLibrary
     {
-        //private const string _defaultConstructionSetUrl = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/construction_set/constructionset_complete.json";
-        //private const string _defaultProgramTypesUrl = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/program_type/program_type_office.json";
-        //private const string _defaultHVACUrl = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/hvac/ideal_air_default.json";
-
-        //private static (string Url, string FilePath)[] _defaultLibraryFiles
-        //    = new (string Url, string FilePath)[3] {
-        //        (_defaultConstructionSetUrl, "defaultConstructionSets.json"),
-        //        (_defaultProgramTypesUrl, "defaultProgramTypes.json"),
-        //        (_defaultHVACUrl, "defaultHVACs.json" )
-        //    };
-        private static string _ladybugToolsRootFolder = string.Empty;
         /// <summary>
-        /// This will return the top main folder path of where ladybug_tools is.
+        /// This will return the top main folder path of where ladybug_tools is. Use HoneybeeSchema.Pathes.LadybugToolsRootFolder instead.
         /// </summary>
-        public static string LadybugToolsRootFolder
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(_ladybugToolsRootFolder))
-                    _ladybugToolsRootFolder = GetLadybugToolsInstallationPath();
-                return _ladybugToolsRootFolder;
-            }
-        }
-
-        public static string ResourcesStandardsFolder => Path.Combine(LadybugToolsRootFolder, "resources", "standards");
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
+        public static string LadybugToolsRootFolder => Pathes.LadybugToolsRootFolder;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
+        public static string ResourcesStandardsFolder => Pathes.ResourcesStandardsFolder;
         /// <summary>
         /// This returns ladybug_tools/resources/standards/honeybee_standards.
         /// </summary>
-        public static string DefaultStandardsFolder => Path.Combine(ResourcesStandardsFolder, "honeybee_standards");
-        private static List<string> _DefaultLibJsons => new List<string>()
-        {
-            Path.Combine(DefaultStandardsFolder,"energy_default.json"),
-            Path.Combine(DefaultStandardsFolder,"radiance_default.json")
-        };
+        ///   [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
+        public static string DefaultStandardsFolder => Pathes.DefaultStandardsFolder;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
+        private static List<string> _DefaultLibJsons => Pathes._DefaultLibJsons;
 
-
-        //public static string StandardsFolder { get; } = Path.Combine(ResourcesStandardsFolder, "honeybee_standards", "data");
 
 
         #region Honeybee OpenStudio Standards
 
         //honeybee_energy_standards
-        public static string EnergyStandardsFolder => Path.Combine(ResourcesStandardsFolder, "honeybee_energy_standards");
-        public static string BuildingVintagesFolder => Path.Combine(EnergyStandardsFolder, "programtypes_registry");
-        public static string BuildingProgramTypesFolder => Path.Combine(EnergyStandardsFolder, "programtypes");
-        public static string ConstructionsFolder => Path.Combine(EnergyStandardsFolder, "constructions");
-        public static string ConstructionSetFolder => Path.Combine(EnergyStandardsFolder, "constructionsets");
-        public static string ScheduleFolder => Path.Combine(EnergyStandardsFolder, "schedules");
-
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
+        public static string EnergyStandardsFolder => Pathes.EnergyStandardsFolder;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
+        public static string BuildingVintagesFolder => Pathes.BuildingVintagesFolder;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
+        public static string BuildingProgramTypesFolder => Pathes.BuildingProgramTypesFolder;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
+        public static string ConstructionsFolder => Pathes.ConstructionsFolder;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
+        public static string ConstructionSetFolder => Pathes.ConstructionSetFolder;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
+        public static string ScheduleFolder => Pathes.ScheduleFolder;
         private static ModelEnergyProperties _standardEnergyLibrary;
         public static ModelEnergyProperties StandardEnergyLibrary
         {
@@ -81,41 +64,13 @@ namespace HoneybeeSchema.Helper
                 return _standardEnergyLibrary;
             }
         }
-       
-        //BuildingVintages 2004, 2007, 2010, 2013, etc..
-        private static IEnumerable<string> _buildingVintages;
-        public static IEnumerable<string> BuildingVintages 
-        {
-            get
-            {
-                _buildingVintages = _buildingVintages ?? Directory.GetFiles(BuildingVintagesFolder, "*.json");
-                return _buildingVintages;
-            }
-        }
-
-
-        // ladybug_tools\resources\standards\honeybee_energy_standards\programtypes\2013_data.json
-        private static IEnumerable<string> _buildingTypeJsonFilePaths;
-        public static IEnumerable<string> BuildingTypeJsonFilePaths 
-        {
-            get
-            {
-                _buildingTypeJsonFilePaths = _buildingTypeJsonFilePaths ?? Directory.GetFiles(BuildingProgramTypesFolder, "*.json");
-                return _buildingTypeJsonFilePaths;
-            }
-        }
-
-
-        // ladybug_tools\resources\standards\honeybee_energy_standards\\constructionsets\2013_data.json
-        private static IEnumerable<string> _constructionsetJsonFilePaths;
-        public static IEnumerable<string> ConstructionsetJsonFilePaths
-        {
-            get
-            {
-                _constructionsetJsonFilePaths = _constructionsetJsonFilePaths ?? Directory.GetFiles(ConstructionSetFolder, "*.json");
-                return _constructionsetJsonFilePaths;
-            }
-        }
+        
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
+        public static IEnumerable<string> BuildingVintages => Pathes.BuildingVintages;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
+        public static IEnumerable<string> BuildingTypeJsonFilePaths => Pathes.BuildingTypeJsonFilePaths;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
+        public static IEnumerable<string> ConstructionsetJsonFilePaths => Pathes.ConstructionsetJsonFilePaths;
 
         // "2013::MediumOffice::OpenOffice"
         public static (ProgramTypeAbridged programType, IEnumerable<ScheduleRulesetAbridged> schedules) GetStandardProgramTypeByIdentifier(string standardProgramType)
@@ -857,116 +812,6 @@ namespace HoneybeeSchema.Helper
             }
         }
 
-        private static string GetLadybugToolsInstallationPath()
-        {
-            // Mac
-            if (System.Environment.OSVersion.Platform == PlatformID.Unix)
-            {
-                // this only looking for Rhino 6 for now
-                var args = $"defaults read com.mcneel.rhinoceros User.PlugInRegistry.6.8b32d89c-3455-4c21-8fd7-7364c32a6feb.PlugIn.FileName";
-
-                var startInfo = new System.Diagnostics.ProcessStartInfo();
-                startInfo.CreateNoWindow = true;
-                startInfo.UseShellExecute = false;
-                startInfo.FileName = "/bin/bash";
-                startInfo.Arguments = $"-c \"{args}\"";
-                startInfo.RedirectStandardOutput = true;
-
-                using (var exeProcess = new System.Diagnostics.Process())
-                {
-                    exeProcess.StartInfo = startInfo;
-                    exeProcess.Start();
-                    exeProcess.WaitForExit();
-                    string outputs = exeProcess.StandardOutput.ReadToEnd().Trim();
-
-                    if (string.IsNullOrEmpty(outputs))
-                        throw new ArgumentException("Ladybug Tools is not installed on this machine!");
-
-                    // "/Users/mingbo/ladybug_tools2/rhino/HoneybeeRhino.PlugIn.Mac.rhp"
-                    outputs = outputs.Split(new[] { "rhino" }, StringSplitOptions.RemoveEmptyEntries).First();
-
-                    if (!Directory.Exists(outputs))
-                        throw new ArgumentException("Ladybug Tools is not installed on this machine!");
-
-                    return outputs;
-                }
-
-            }
-            else
-            {
-                // windows
-                // check if there is a config in the folder
-                var foundPath = SettingConfig.GetSavedSettings().LBTRootFolder;
-
-                // find it from registry
-                if (string.IsNullOrEmpty(foundPath))
-                    foundPath = GetLBTRootFromRegistry();
-
-                // create a new ladybug_tools folder under user dir
-                if (string.IsNullOrEmpty(foundPath))
-                {
-                    var userDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-                    foundPath = Directory.GetDirectories(userDir, "*ladybug_tools*", SearchOption.TopDirectoryOnly).FirstOrDefault();
-                    if (!Directory.Exists(foundPath))
-                    {
-                        foundPath = Path.Combine(userDir, "ladybug_tools");
-                        Directory.CreateDirectory(foundPath);
-                    }
-
-                }
-
-                if (!Directory.Exists(foundPath))
-                    throw new ArgumentException($"Ladybug Tools is not installed on this machine! ({foundPath})");
-
-                return foundPath;
-            }
-
-
-
-        }
-
-        private static string GetLBTRootFromRegistry()
-        {
-
-            // windows
-            var foundPath = string.Empty;
-            var scr = @"/C REG QUERY HKEY_CURRENT_USER\SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL /s /v InstallLocation" + " | findstr \"ladybug_tools\"";
-            //Registry.LocalMachine
-
-            var stdout = new List<string>();
-            using (var p = new System.Diagnostics.Process())
-            {
-                p.StartInfo.FileName = "cmd.exe";
-                p.StartInfo.Arguments = scr;
-                p.StartInfo.UseShellExecute = false;
-                p.StartInfo.RedirectStandardOutput = true;
-                p.StartInfo.RedirectStandardError = true;
-                p.StartInfo.CreateNoWindow = true;
-                p.Start();
-
-                //p.ErrorDataReceived += (s, m) => { if (m.Data != null) stdErr.Add(m.Data); };
-                p.OutputDataReceived += (s, m) => { if (m.Data != null) stdout.Add(m.Data); };
-                p.BeginErrorReadLine();
-                p.BeginOutputReadLine();
-
-                p.WaitForExit();
-                if (!p.HasExited)
-                {
-                    p.Kill();
-                }
-
-            }
-            foundPath = stdout.LastOrDefault(_ => _.EndsWith("ladybug_tools"))?.Trim();
-            if (!string.IsNullOrEmpty(foundPath))
-            {
-                // get from installer's registry
-                // InstallLocation    REG_SZ    C:\Users\mingo\ladybug_tools test
-                foundPath = foundPath.Split(new[] { "REG_SZ" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault(_=>_.EndsWith("ladybug_tools"))?.Trim();
-
-            }
-
-            return foundPath;
-        }
         public static HB.Energy.IBuildingConstructionset GetConstructionSetByIdentifier(string identifier)
         {
             // TODO: change it to all construction set collection bucket
@@ -1044,81 +889,7 @@ namespace HoneybeeSchema.Helper
             return construction.Materials.Select(_ => GetWindowMaterialByIdentifier(_)).ToList();
         }
 
-        //private static HB.ModelEnergyProperties _inModelEnergyProperties;
-        ///// <summary>
-        ///// This is a temporary placeholder for keeping in model resource objects.
-        ///// </summary>
-        //public static HB.ModelEnergyProperties InModelEnergyProperties
-        //{
-        //    get
-        //    {
-        //        _inModelEnergyProperties = _inModelEnergyProperties ?? ModelEnergyProperties.Default.DuplicateModelEnergyProperties();
-        //        return _inModelEnergyProperties;
-        //    }
-        //    set
-        //    {
-        //        _inModelEnergyProperties = value;
-        //    }
-        //}
-
-        //private static HB.ModelRadianceProperties _inModelRadianceProperties;
-        ///// <summary>
-        ///// This is a temporary placeholder for keeping in model resource objects.
-        ///// </summary>
-        //public static HB.ModelRadianceProperties InModelRadianceProperties
-        //{
-        //    get
-        //    {
-        //        _inModelRadianceProperties = _inModelRadianceProperties ?? ModelRadianceProperties.Default.DuplicateModelRadianceProperties();
-        //        return _inModelRadianceProperties;
-        //    }
-        //    set
-        //    {
-        //        _inModelRadianceProperties = value;
-        //    }
-        //}
-
-        #endregion
-
-
-        public class SettingConfig
-        {
-            public string LBTRootFolder { get; set; }
-            public static string SettingPath => Path.Combine(ApplicationRoot, "settings.txt");
-            public static string ApplicationRoot => IsMac ?
-                Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(typeof(SettingConfig).Assembly.Location))))) :
-                Path.GetDirectoryName(typeof(SettingConfig).Assembly.Location);
-            public static bool IsMac => System.Environment.OSVersion.Platform == PlatformID.Unix;
-            public SettingConfig()
-            {
-                this.LBTRootFolder = string.Empty;
-            }
-
-            public static SettingConfig GetSavedSettings()
-            {
-                SettingConfig settings = null;
-                if (File.Exists(SettingPath))
-                {
-                    var text = File.ReadAllText(SettingPath);
-                    settings = Newtonsoft.Json.JsonConvert.DeserializeObject<SettingConfig>(text);
-                }
-                else
-                {
-                    settings = new SettingConfig();
-                    //settings.LBTRootFolder = @"C:\Users\mingo\ladybug_tools_revit";
-                    settings.SaveSettings();
-                }
-
-                return settings;
-            }
-
-            public bool SaveSettings()
-            {
-                string json = Newtonsoft.Json.JsonConvert.SerializeObject(this);
-                File.WriteAllText(SettingPath, json);
-                return File.Exists(SettingPath);
-            }
-        }
+#endregion
 
     }
 
