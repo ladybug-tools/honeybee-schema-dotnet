@@ -2588,11 +2588,31 @@
                                 },
                                 "anyOf": [
                                     {
-                                        "$ref": "#/components/schemas/NoLimit"
+                                        "$ref": "#/components/schemas/Plastic"
                                     },
                                     {
-                                        "type": "number",
-                                        "format": "double"
+                                        "$ref": "#/components/schemas/Glass"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/BSDF"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/Glow"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/Light"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/Trans"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/Metal"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/Void"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/Mirror"
                                     }
                                 ]
                             },
@@ -2731,7 +2751,7 @@
                                         "$ref": "#/components/schemas/Void"
                                     },
                                     {
-                                        "$ref": "#/components/schemas/ScheduleNumericType"
+                                        "$ref": "#/components/schemas/Mirror"
                                     }
                                 ]
                             },
@@ -3712,49 +3732,7 @@
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "conductivity_coeff_a",
-                            "viscosity_coeff_a",
-                            "specific_heat_coeff_a",
-                            "specific_heat_ratio",
-                            "molecular_weight"
-                        ],
                         "properties": {
-                            "conductivity_coeff_a": {
-                                "title": "Conductivity Coeff A",
-                                "description": "The A coefficient for gas conductivity in W/(m-K).",
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "viscosity_coeff_a": {
-                                "title": "Viscosity Coeff A",
-                                "description": "The A coefficient for gas viscosity in kg/(m-s).",
-                                "exclusiveMinimum": 0,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "specific_heat_coeff_a": {
-                                "title": "Specific Heat Coeff A",
-                                "description": "The A coefficient for gas specific heat in J/(kg-K).",
-                                "exclusiveMinimum": 0,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "specific_heat_ratio": {
-                                "title": "Specific Heat Ratio",
-                                "description": "The specific heat ratio for gas.",
-                                "exclusiveMinimum": 1,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "molecular_weight": {
-                                "title": "Molecular Weight",
-                                "description": "The molecular weight for gas in g/mol.",
-                                "minimum": 20,
-                                "maximum": 200,
-                                "type": "number",
-                                "format": "double"
-                            },
                             "type": {
                                 "title": "Type",
                                 "default": "ConstructionSetAbridged",
@@ -3958,7 +3936,7 @@
             "Plane": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/IDdEnergyBaseModel"
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
                     },
                     {
                         "type": "object",
@@ -5903,6 +5881,13 @@
                     {
                         "type": "object",
                         "properties": {
+                            "flow_coefficient": {
+                                "title": "Flow Coefficient",
+                                "description": "A number in kg/s-m at 1 Pa per meter of crack length at the conditions defined in the ReferenceCrack condition; required to run an AirflowNetwork simulation. The DesignBuilder Cracks template defines the flow coefficient for a tight, low-leakage wall to be 0.00001 and 0.001 for external and internal constructions, respectively. Flow coefficients for a very poor, high-leakage wall are defined to be 0.0004 and 0.019 for external and internal constructions, respectively.",
+                                "exclusiveMinimum": 0,
+                                "type": "number",
+                                "format": "double"
+                            },
                             "type": {
                                 "title": "Type",
                                 "default": "AFNCrack",
@@ -14387,40 +14372,40 @@
                     "propertyName": "type"
                 }
             },
-            "_EquipmentBase": {
+            "_FaceSubSet": {
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/IDdEnergyBaseModel"
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
                     },
                     {
                         "type": "object",
-                        "required": [
-                            "watts_per_area",
-                            "schedule"
-                        ],
                         "properties": {
-                            "watts_per_area": {
-                                "title": "Watts Per Area",
-                                "description": "Equipment level per floor area as [W/m2].",
-                                "minimum": 0,
-                                "type": "number",
-                                "format": "double"
+                            "interior_construction": {
+                                "title": "Interior Construction",
+                                "description": "An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition.",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/OpaqueConstruction"
+                                    }
+                                ]
                             },
-                            "schedule": {
-                                "title": "Schedule",
-                                "description": "Identifier of the schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.",
-                                "maxLength": 100,
-                                "minLength": 1,
-                                "type": "string"
+                            "exterior_construction": {
+                                "title": "Exterior Construction",
+                                "description": "An OpaqueConstruction for walls with an Outdoors boundary condition.",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/OpaqueConstruction"
+                                    }
+                                ]
                             },
-                            "radiant_fraction": {
-                                "title": "Radiant Fraction",
-                                "description": "Number for the amount of long-wave radiation heat given off by equipment. Default value is 0.",
-                                "default": 0,
-                                "minimum": 0,
-                                "maximum": 1,
-                                "type": "number",
-                                "format": "double"
+                            "ground_construction": {
+                                "title": "Ground Construction",
+                                "description": "An OpaqueConstruction for walls with a Ground boundary condition.",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/OpaqueConstruction"
+                                    }
+                                ]
                             },
                             "type": {
                                 "title": "Type",
