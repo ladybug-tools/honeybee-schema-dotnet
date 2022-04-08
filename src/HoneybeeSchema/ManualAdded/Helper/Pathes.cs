@@ -178,7 +178,7 @@ namespace HoneybeeSchema.Helper
 
             // windows
             var foundPath = string.Empty;
-            var scr = @"/C REG QUERY HKEY_CURRENT_USER\SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL /s /v InstallLocation" + " | findstr \"ladybug_tools\"";
+            var scr = @"/C REG QUERY HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\UNINSTALL /s /v InstallLocation" + " | findstr \"ladybug_tools\"";
             //Registry.LocalMachine
 
             var stdout = new List<string>();
