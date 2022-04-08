@@ -144,7 +144,7 @@ namespace HoneybeeSchema.Helper
             {
                 // windows
                 // check if there is a config in the folder
-                var foundPath = SettingConfig.GetSavedSettings().LBTRootFolder;
+                var foundPath = SettingConfig.GetSavedSettings()?.LBTRootFolder;
 
                 // find it from registry
                 if (string.IsNullOrEmpty(foundPath) || !Directory.Exists(foundPath))
