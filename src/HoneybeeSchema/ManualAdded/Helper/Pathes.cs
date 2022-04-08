@@ -13,7 +13,23 @@ namespace HoneybeeSchema.Helper
           Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(typeof(SettingConfig).Assembly.Location))))) :
           Path.GetDirectoryName(typeof(SettingConfig).Assembly.Location);
 
-        public static string SettingPath => Path.Combine(ApplicationRoot, "settings.txt");
+        public static string SettingPath 
+        { 
+            get 
+            {
+                var file = Path.Combine(ApplicationRoot, "settings.txt");
+                if (!IsWriteable(file))
+                {
+                    var userAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                    var podir = Path.Combine(userAppData, "ladybug_tools", "dotnet");
+                    if (!Directory.Exists(podir))
+                        Directory.CreateDirectory(podir);
+                    file = Path.Combine(podir, "settings.txt");
+                }
+                return file;
+
+            } 
+        } 
 
         private static string _ladybugToolsRootFolder = string.Empty;
         /// <summary>
@@ -198,6 +214,30 @@ namespace HoneybeeSchema.Helper
             }
 
             return foundPath;
+        }
+
+        private static bool IsWriteable(string filepath)
+        {
+            try
+            {
+                if (!File.Exists(filepath))
+                {
+                    File.WriteAllText(filepath, "");
+                    return true;
+                }
+              
+                using (var fs = new FileStream(filepath, FileMode.Open))
+                {
+                    //var canRead = fs.CanRead;
+                    var canWrite = fs.CanWrite;
+                    return canWrite;
+                }
+            }
+            catch (System.UnauthorizedAccessException)
+            {
+                return false;
+            }
+
         }
 
     }
