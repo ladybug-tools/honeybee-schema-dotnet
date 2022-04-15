@@ -17,7 +17,7 @@ new_version = f'{schema_version}.0'
 package_name = config_data["packageName"]
 
 # Check the version from nuget
-api = f'https://api.nuget.org/v3-flatcontainer/{package_name}/index.json'
+api = f'https://api.nuget.org/v3-flatcontainer/{package_name.lower()}/index.json'
 with urllib.request.urlopen(api) as r:
     data = json.loads(r.read())
     versions = [v for v in data['versions'] if v.startswith(schema_version)]
