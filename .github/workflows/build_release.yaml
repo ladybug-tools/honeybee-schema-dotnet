@@ -50,7 +50,7 @@ jobs:
     name: Update dependencies
     runs-on: ubuntu-latest
     needs: build
-    if: ${{ github.ref == 'refs/heads/master' && github.repository_owner == 'ladybug-tools' && contains(needs.build.outputs.tag, '.') }}
+    if: ${{ contains(needs.build.outputs.tag, '.') }}
     
     steps:
 
