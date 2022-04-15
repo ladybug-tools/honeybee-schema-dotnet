@@ -54,7 +54,7 @@ jobs:
     steps:
 
       - name: sleep for 10 minutes for PyPI update
-        run: sleep 60s
+        run: sleep 600s
         shell: bash
 
       - name: Update dragonfly-schema-dotnet
