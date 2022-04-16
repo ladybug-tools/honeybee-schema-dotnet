@@ -68,10 +68,11 @@ jobs:
         env:
           DISPATCH_REPO: ladybug-tools/dragonfly-schema-dotnet
           DEPS_TOKEN: ${{ secrets.DEPS_UPDATING }}
+          VERSION: ${{ needs.build.outputs.tag }}
         run: |
-          echo ${{ env.ReleaseVersion }} 
+          echo ${VERSION}
           curl -X POST https://api.github.com/repos/$DISPATCH_REPO/dispatches \
           -H "Accept: application/vnd.github.everest-preview+json" \
-          -d '{"event_type": "honeybee_schema_dotnet_release", "client_payload": {"version": "${{ env.ReleaseVersion }}"}}' \
+          -d '{"event_type": "honeybee_schema_dotnet_release", "client_payload": {"version": "${VERSION}"}}' \
           -u ladybugbot:$DEPS_TOKEN
 
