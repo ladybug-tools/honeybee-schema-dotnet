@@ -2,7 +2,7 @@ import re
 import os
 import json
 import urllib.request
-
+import subprocess 
 
 
 # Check the version from config
@@ -43,7 +43,7 @@ elif version_digits[-1] != '0':
 
 
 print(f'New version: {new_version}')
-os.environ["NEWVERSION"] = new_version
+
 
 # update the version
 assembly_file = os.path.join(os.getcwd(), 'src', package_name, f'{package_name}.csproj')
