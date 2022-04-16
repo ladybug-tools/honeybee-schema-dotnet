@@ -73,6 +73,6 @@ jobs:
           echo ${VERSION}
           curl -X POST https://api.github.com/repos/$DISPATCH_REPO/dispatches \
           -H "Accept: application/vnd.github.everest-preview+json" \
-          -d '{"event_type": "honeybee_schema_dotnet_release", "client_payload": {"version": "${VERSION}"}}' \
+          -d '{"event_type": "honeybee_schema_dotnet_release", "client_payload": {"version": ${VERSION}}}' \
           -u ladybugbot:$DEPS_TOKEN
 
