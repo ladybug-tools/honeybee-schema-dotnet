@@ -18,6 +18,7 @@ jobs:
       - name: Update Assembly Version
         shell: bash
         run: |
+          python .openapi-generator/update_assembly_version.py
           MSG=$(python .openapi-generator/update_assembly_version.py | grep "New version")
           VERSION=$(echo $MSG | tr 'New version:' ' ' | sed -e 's/^[[:space:]]*//')
           echo "ReleaseVersion $VERSION"
