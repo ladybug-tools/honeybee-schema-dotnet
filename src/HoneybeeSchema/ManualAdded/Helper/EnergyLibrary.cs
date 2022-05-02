@@ -802,6 +802,9 @@ namespace HoneybeeSchema.Helper
                         case nameof(HB.EnergyMaterialNoMass):
                             materials.Add(HB.EnergyMaterialNoMass.FromJson(item.ToString()));
                             break;
+                        case nameof(HB.EnergyMaterialVegetation):
+                            materials.Add(HB.EnergyMaterialVegetation.FromJson(item.ToString()));
+                            break;
                         default:
                             throw new ArgumentException($"{typeName} is not supported, please report this message to developers.");
                             //break;
