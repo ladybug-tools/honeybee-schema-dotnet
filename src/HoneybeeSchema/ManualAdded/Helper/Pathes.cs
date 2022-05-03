@@ -13,6 +13,9 @@ namespace HoneybeeSchema.Helper
           Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(typeof(SettingConfig).Assembly.Location))))) :
           Path.GetDirectoryName(typeof(SettingConfig).Assembly.Location);
 
+        public static string UserAppData => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ladybug_tools");
+        public static string UserAppDataDotnet => Path.Combine(UserAppData, "dotnet");
+
         public static string SettingPath 
         { 
             get 
@@ -20,8 +23,7 @@ namespace HoneybeeSchema.Helper
                 var file = Path.Combine(ApplicationRoot, "settings.txt");
                 if (!IsWriteable(file))
                 {
-                    var userAppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                    var podir = Path.Combine(userAppData, "ladybug_tools", "dotnet");
+                    var podir = UserAppDataDotnet;
                     if (!Directory.Exists(podir))
                         Directory.CreateDirectory(podir);
                     file = Path.Combine(podir, "settings.txt");
