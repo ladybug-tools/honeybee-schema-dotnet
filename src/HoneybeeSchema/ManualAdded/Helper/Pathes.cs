@@ -21,14 +21,26 @@ namespace HoneybeeSchema.Helper
             get 
             {
                 var file = Path.Combine(ApplicationRoot, "settings.txt");
-                if (!IsWriteable(file))
+                if (File.Exists(file))
+                    return file;
+                else // doesn't exist,
                 {
-                    var podir = UserAppDataDotnet;
-                    if (!Directory.Exists(podir))
-                        Directory.CreateDirectory(podir);
-                    file = Path.Combine(podir, "settings.txt");
+                    //  check if directory is writable first
+                    if (IsWriteable(file))
+                    {
+                        return file;
+                    }
+                    else
+                    {
+                        // if it is not writable then return user appdata folder
+                        var podir = UserAppDataDotnet;
+                        if (!Directory.Exists(podir))
+                            Directory.CreateDirectory(podir);
+                        file = Path.Combine(podir, "settings.txt");
+                        return file;
+                    }
                 }
-                return file;
+               
 
             } 
         } 
@@ -218,7 +230,7 @@ namespace HoneybeeSchema.Helper
             return foundPath;
         }
 
-        private static bool IsWriteable(string filepath)
+        internal static bool IsWriteable(string filepath)
         {
             try
             {
