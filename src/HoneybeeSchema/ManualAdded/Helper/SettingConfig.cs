@@ -24,13 +24,8 @@ namespace HoneybeeSchema.Helper
                 var text = File.ReadAllText(SettingPath);
                 settings = Newtonsoft.Json.JsonConvert.DeserializeObject<SettingConfig>(text);
             }
-            else
-            {
-                settings = new SettingConfig();
-                //settings.LBTRootFolder = @"C:\Users\mingo\ladybug_tools_revit";
-                settings.SaveSettings();
-            }
-
+            // do nothing if the file doesn't exist
+            // just return null
             return settings;
         }
 
