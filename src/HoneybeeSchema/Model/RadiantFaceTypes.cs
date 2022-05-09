@@ -48,7 +48,13 @@ namespace HoneybeeSchema
         /// Enum FloorWithCarpet for value: FloorWithCarpet
         /// </summary>
         [EnumMember(Value = "FloorWithCarpet")]
-        FloorWithCarpet = 3
+        FloorWithCarpet = 3,
+
+        /// <summary>
+        /// Enum CeilingMetalPanel for value: CeilingMetalPanel
+        /// </summary>
+        [EnumMember(Value = "CeilingMetalPanel")]
+        CeilingMetalPanel = 4
 
     }
 

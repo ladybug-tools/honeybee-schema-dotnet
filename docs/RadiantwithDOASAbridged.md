@@ -13,10 +13,9 @@ Name | Type | Description | Notes
 **DoasAvailabilitySchedule** | **string** | An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on. | [optional] 
 **Type** | **string** |  | [optional] [readonly] [default to "RadiantwithDOASAbridged"]
 **EquipmentType** | **RadiantwithDOASEquipmentType** | Text for the specific type of system equipment from the RadiantwithDOASEquipmentType enumeration. | [optional] 
-**ProportionalGain** | **double** | A fractional number for the proportional gain constant. Recommended values are 0.3 or less. | [optional] [default to 0.3D]
+**RadiantFaceType** | **RadiantFaceTypes** | Text to indicate which faces are thermally active by default. Note that this property has no effect when the rooms to which the HVAC system is assigned have constructions with internal source materials. In this case, those constructions will dictate the thermally active surfaces. | [optional] 
 **MinimumOperationTime** | **double** | A number for the minimum number of hours of operation for the radiant system before it shuts off. | [optional] [default to 1.0D]
 **SwitchOverTime** | **double** | A number for the minimum number of hours for when the system can switch between heating and cooling. | [optional] [default to 24.0D]
-**RadiantFaceType** | **RadiantFaceTypes** | Text to indicate which faces are thermally active by default. Note that this property has no effect when the rooms to which the HVAC system is assigned have constructions with internal source materials. In this case, those constructions will dictate the thermally active surfaces. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)

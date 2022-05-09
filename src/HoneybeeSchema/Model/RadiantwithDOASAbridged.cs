@@ -67,17 +67,16 @@ namespace HoneybeeSchema
         /// <param name="demandControlledVentilation">Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms. (default to false).</param>
         /// <param name="doasAvailabilitySchedule">An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on..</param>
         /// <param name="equipmentType">Text for the specific type of system equipment from the RadiantwithDOASEquipmentType enumeration..</param>
-        /// <param name="proportionalGain">A fractional number for the proportional gain constant. Recommended values are 0.3 or less. (default to 0.3D).</param>
+        /// <param name="radiantFaceType">Text to indicate which faces are thermally active by default. Note that this property has no effect when the rooms to which the HVAC system is assigned have constructions with internal source materials. In this case, those constructions will dictate the thermally active surfaces..</param>
         /// <param name="minimumOperationTime">A number for the minimum number of hours of operation for the radiant system before it shuts off. (default to 1.0D).</param>
         /// <param name="switchOverTime">A number for the minimum number of hours for when the system can switch between heating and cooling. (default to 24.0D).</param>
-        /// <param name="radiantFaceType">Text to indicate which faces are thermally active by default. Note that this property has no effect when the rooms to which the HVAC system is assigned have constructions with internal source materials. In this case, those constructions will dictate the thermally active surfaces..</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public RadiantwithDOASAbridged
         (
             string identifier, // Required parameters
-            string displayName= default, Object userData= default, Vintages vintage= Vintages.ASHRAE_2019, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, bool demandControlledVentilation = false, string doasAvailabilitySchedule= default, RadiantwithDOASEquipmentType equipmentType= RadiantwithDOASEquipmentType.DOAS_Radiant_Chiller_Boiler, double proportionalGain = 0.3D, double minimumOperationTime = 1.0D, double switchOverTime = 24.0D, RadiantFaceTypes radiantFaceType= RadiantFaceTypes.Floor// Optional parameters
+            string displayName= default, Object userData= default, Vintages vintage= Vintages.ASHRAE_2019, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, bool demandControlledVentilation = false, string doasAvailabilitySchedule= default, RadiantwithDOASEquipmentType equipmentType= RadiantwithDOASEquipmentType.DOAS_Radiant_Chiller_Boiler, RadiantFaceTypes radiantFaceType= RadiantFaceTypes.Floor, double minimumOperationTime = 1.0D, double switchOverTime = 24.0D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             this.Vintage = vintage;
@@ -86,10 +85,9 @@ namespace HoneybeeSchema
             this.DemandControlledVentilation = demandControlledVentilation;
             this.DoasAvailabilitySchedule = doasAvailabilitySchedule;
             this.EquipmentType = equipmentType;
-            this.ProportionalGain = proportionalGain;
+            this.RadiantFaceType = radiantFaceType;
             this.MinimumOperationTime = minimumOperationTime;
             this.SwitchOverTime = switchOverTime;
-            this.RadiantFaceType = radiantFaceType;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "RadiantwithDOASAbridged";
@@ -130,12 +128,6 @@ namespace HoneybeeSchema
         /// <value>An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on.</value>
         [DataMember(Name = "doas_availability_schedule")]
         public string DoasAvailabilitySchedule { get; set; } 
-        /// <summary>
-        /// A fractional number for the proportional gain constant. Recommended values are 0.3 or less.
-        /// </summary>
-        /// <value>A fractional number for the proportional gain constant. Recommended values are 0.3 or less.</value>
-        [DataMember(Name = "proportional_gain")]
-        public double ProportionalGain { get; set; }  = 0.3D;
         /// <summary>
         /// A number for the minimum number of hours of operation for the radiant system before it shuts off.
         /// </summary>
@@ -179,10 +171,9 @@ namespace HoneybeeSchema
             sb.Append("  DemandControlledVentilation: ").Append(DemandControlledVentilation).Append("\n");
             sb.Append("  DoasAvailabilitySchedule: ").Append(DoasAvailabilitySchedule).Append("\n");
             sb.Append("  EquipmentType: ").Append(EquipmentType).Append("\n");
-            sb.Append("  ProportionalGain: ").Append(ProportionalGain).Append("\n");
+            sb.Append("  RadiantFaceType: ").Append(RadiantFaceType).Append("\n");
             sb.Append("  MinimumOperationTime: ").Append(MinimumOperationTime).Append("\n");
             sb.Append("  SwitchOverTime: ").Append(SwitchOverTime).Append("\n");
-            sb.Append("  RadiantFaceType: ").Append(RadiantFaceType).Append("\n");
             return sb.ToString();
         }
   
@@ -268,16 +259,13 @@ namespace HoneybeeSchema
                     Extension.Equals(this.EquipmentType, input.EquipmentType)
                 ) && base.Equals(input) && 
                 (
-                    Extension.Equals(this.ProportionalGain, input.ProportionalGain)
+                    Extension.Equals(this.RadiantFaceType, input.RadiantFaceType)
                 ) && base.Equals(input) && 
                 (
                     Extension.Equals(this.MinimumOperationTime, input.MinimumOperationTime)
                 ) && base.Equals(input) && 
                 (
                     Extension.Equals(this.SwitchOverTime, input.SwitchOverTime)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.RadiantFaceType, input.RadiantFaceType)
                 );
         }
 
@@ -304,14 +292,12 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.EquipmentType != null)
                     hashCode = hashCode * 59 + this.EquipmentType.GetHashCode();
-                if (this.ProportionalGain != null)
-                    hashCode = hashCode * 59 + this.ProportionalGain.GetHashCode();
+                if (this.RadiantFaceType != null)
+                    hashCode = hashCode * 59 + this.RadiantFaceType.GetHashCode();
                 if (this.MinimumOperationTime != null)
                     hashCode = hashCode * 59 + this.MinimumOperationTime.GetHashCode();
                 if (this.SwitchOverTime != null)
                     hashCode = hashCode * 59 + this.SwitchOverTime.GetHashCode();
-                if (this.RadiantFaceType != null)
-                    hashCode = hashCode * 59 + this.RadiantFaceType.GetHashCode();
                 return hashCode;
             }
         }
@@ -371,20 +357,6 @@ namespace HoneybeeSchema
             if (this.Type != null && false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
-            }
-
-
-            
-            // ProportionalGain (double) maximum
-            if(this.ProportionalGain > (double)1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ProportionalGain, must be a value less than or equal to 1.", new [] { "ProportionalGain" });
-            }
-
-            // ProportionalGain (double) minimum
-            if(this.ProportionalGain < (double)0)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ProportionalGain, must be a value greater than or equal to 0.", new [] { "ProportionalGain" });
             }
 
             yield break;

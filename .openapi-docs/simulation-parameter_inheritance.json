@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Documentation for Honeybee simulation-parameter schema",
-        "version": "1.49.0",
+        "version": "1.49.1",
         "title": "Honeybee Simulation Parameter Schema",
         "contact": {
             "name": "Ladybug Tools",
@@ -179,61 +179,6 @@
     "paths": {},
     "components": {
         "schemas": {
-            "SimulationControl": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "title": "Type",
-                                "default": "SimulationControl",
-                                "pattern": "^SimulationControl$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "do_zone_sizing": {
-                                "title": "Do Zone Sizing",
-                                "description": "Boolean for whether the zone sizing calculation should be run.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "do_system_sizing": {
-                                "title": "Do System Sizing",
-                                "description": "Boolean for whether the system sizing calculation should be run.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "do_plant_sizing": {
-                                "title": "Do Plant Sizing",
-                                "description": "Boolean for whether the plant sizing calculation should be run.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "run_for_run_periods": {
-                                "title": "Run For Run Periods",
-                                "description": "Boolean for whether the simulation should be run for the sizing periods.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "run_for_sizing_periods": {
-                                "title": "Run For Sizing Periods",
-                                "description": "Boolean for whether the simulation should be run for the run periods.",
-                                "default": false,
-                                "type": "boolean"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "SimulationControl",
-                "description": "Used to specify which types of calculations to run.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
             "ReportingFrequency": {
                 "title": "ReportingFrequency",
                 "description": "An enumeration.",
@@ -291,6 +236,166 @@
                 ],
                 "title": "SimulationOutput",
                 "description": "Lists the outputs to report from the simulation and their format.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "WindCondition": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "wind_speed": {
+                                "title": "Wind Speed",
+                                "description": "Wind speed on the design day [m/s].",
+                                "minimum": 0,
+                                "maximum": 40,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "WindCondition",
+                                "pattern": "^WindCondition$",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "wind_direction": {
+                                "title": "Wind Direction",
+                                "description": "Wind direction on the design day [degrees].",
+                                "default": 0,
+                                "minimum": 0,
+                                "maximum": 360,
+                                "type": "number",
+                                "format": "double"
+                            }
+                        },
+                        "required": [
+                            "wind_speed"
+                        ],
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "WindCondition",
+                "description": "Used to specify wind conditions on a design day.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "ASHRAETau": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_SkyCondition"
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "tau_b",
+                            "tau_d"
+                        ],
+                        "properties": {
+                            "tau_b": {
+                                "title": "Tau B",
+                                "description": "Value for the beam optical depth. Typically found in .stat files.",
+                                "minimum": 0,
+                                "maximum": 1.2,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "tau_d": {
+                                "title": "Tau D",
+                                "description": "Value for the diffuse optical depth. Typically found in .stat files.",
+                                "minimum": 0,
+                                "maximum": 3,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "ASHRAETau",
+                                "pattern": "^ASHRAETau$",
+                                "type": "string",
+                                "readOnly": true
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "ASHRAETau",
+                "description": "Used to specify sky conditions on a design day.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "HumidityTypes": {
+                "title": "HumidityTypes",
+                "description": "An enumeration.",
+                "enum": [
+                    "Wetbulb",
+                    "Dewpoint",
+                    "HumidityRatio",
+                    "Enthalpy"
+                ],
+                "type": "string"
+            },
+            "HumidityCondition": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "humidity_type": {
+                                "$ref": "#/components/schemas/HumidityTypes"
+                            },
+                            "humidity_value": {
+                                "title": "Humidity Value",
+                                "description": "The value correcponding to the humidity_type.",
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "HumidityCondition",
+                                "pattern": "^HumidityCondition$",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "barometric_pressure": {
+                                "title": "Barometric Pressure",
+                                "description": "Barometric air pressure on the design day [Pa].",
+                                "default": 101325,
+                                "minimum": 31000,
+                                "maximum": 120000,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "rain": {
+                                "title": "Rain",
+                                "description": "Boolean to indicate rain on the design day.",
+                                "default": false,
+                                "type": "boolean"
+                            },
+                            "snow_on_ground": {
+                                "title": "Snow On Ground",
+                                "description": "Boolean to indicate snow on the ground during the design day.",
+                                "default": false,
+                                "type": "boolean"
+                            }
+                        },
+                        "required": [
+                            "humidity_type",
+                            "humidity_value"
+                        ],
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "HumidityCondition",
+                "description": "Used to specify humidity conditions on a design day.",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -457,6 +562,61 @@
                     "propertyName": "type"
                 }
             },
+            "SimulationControl": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "title": "Type",
+                                "default": "SimulationControl",
+                                "pattern": "^SimulationControl$",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "do_zone_sizing": {
+                                "title": "Do Zone Sizing",
+                                "description": "Boolean for whether the zone sizing calculation should be run.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "do_system_sizing": {
+                                "title": "Do System Sizing",
+                                "description": "Boolean for whether the system sizing calculation should be run.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "do_plant_sizing": {
+                                "title": "Do Plant Sizing",
+                                "description": "Boolean for whether the plant sizing calculation should be run.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "run_for_run_periods": {
+                                "title": "Run For Run Periods",
+                                "description": "Boolean for whether the simulation should be run for the sizing periods.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "run_for_sizing_periods": {
+                                "title": "Run For Sizing Periods",
+                                "description": "Boolean for whether the simulation should be run for the run periods.",
+                                "default": false,
+                                "type": "boolean"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "SimulationControl",
+                "description": "Used to specify which types of calculations to run.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
             "SolarDistribution": {
                 "title": "SolarDistribution",
                 "description": "An enumeration.",
@@ -616,121 +776,6 @@
                     "propertyName": "type"
                 }
             },
-            "HumidityTypes": {
-                "title": "HumidityTypes",
-                "description": "An enumeration.",
-                "enum": [
-                    "Wetbulb",
-                    "Dewpoint",
-                    "HumidityRatio",
-                    "Enthalpy"
-                ],
-                "type": "string"
-            },
-            "HumidityCondition": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "humidity_type": {
-                                "$ref": "#/components/schemas/HumidityTypes"
-                            },
-                            "humidity_value": {
-                                "title": "Humidity Value",
-                                "description": "The value correcponding to the humidity_type.",
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "HumidityCondition",
-                                "pattern": "^HumidityCondition$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "barometric_pressure": {
-                                "title": "Barometric Pressure",
-                                "description": "Barometric air pressure on the design day [Pa].",
-                                "default": 101325,
-                                "minimum": 31000,
-                                "maximum": 120000,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "rain": {
-                                "title": "Rain",
-                                "description": "Boolean to indicate rain on the design day.",
-                                "default": false,
-                                "type": "boolean"
-                            },
-                            "snow_on_ground": {
-                                "title": "Snow On Ground",
-                                "description": "Boolean to indicate snow on the ground during the design day.",
-                                "default": false,
-                                "type": "boolean"
-                            }
-                        },
-                        "required": [
-                            "humidity_type",
-                            "humidity_value"
-                        ],
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "HumidityCondition",
-                "description": "Used to specify humidity conditions on a design day.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "WindCondition": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "wind_speed": {
-                                "title": "Wind Speed",
-                                "description": "Wind speed on the design day [m/s].",
-                                "minimum": 0,
-                                "maximum": 40,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "WindCondition",
-                                "pattern": "^WindCondition$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "wind_direction": {
-                                "title": "Wind Direction",
-                                "description": "Wind direction on the design day [degrees].",
-                                "default": 0,
-                                "minimum": 0,
-                                "maximum": 360,
-                                "type": "number",
-                                "format": "double"
-                            }
-                        },
-                        "required": [
-                            "wind_speed"
-                        ],
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "WindCondition",
-                "description": "Used to specify wind conditions on a design day.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
             "ASHRAEClearSky": {
                 "allOf": [
                     {
@@ -762,51 +807,6 @@
                     }
                 ],
                 "title": "ASHRAEClearSky",
-                "description": "Used to specify sky conditions on a design day.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "ASHRAETau": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_SkyCondition"
-                    },
-                    {
-                        "type": "object",
-                        "required": [
-                            "tau_b",
-                            "tau_d"
-                        ],
-                        "properties": {
-                            "tau_b": {
-                                "title": "Tau B",
-                                "description": "Value for the beam optical depth. Typically found in .stat files.",
-                                "minimum": 0,
-                                "maximum": 1.2,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "tau_d": {
-                                "title": "Tau D",
-                                "description": "Value for the diffuse optical depth. Typically found in .stat files.",
-                                "minimum": 0,
-                                "maximum": 3,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "ASHRAETau",
-                                "pattern": "^ASHRAETau$",
-                                "type": "string",
-                                "readOnly": true
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "ASHRAETau",
                 "description": "Used to specify sky conditions on a design day.",
                 "discriminator": {
                     "propertyName": "type"
@@ -1051,31 +1051,6 @@
                     "propertyName": "type"
                 }
             },
-            "DatedBaseModel": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "title": "Type",
-                                "default": "DatedBaseModel",
-                                "type": "string",
-                                "pattern": "^DatedBaseModel$",
-                                "readOnly": true
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "DatedBaseModel",
-                "description": "Base class for all objects needing to check for a valid Date.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
             "_SkyCondition": {
                 "allOf": [
                     {
@@ -1117,6 +1092,31 @@
                 ],
                 "title": "_SkyCondition",
                 "description": "Used to specify sky conditions on a design day.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "DatedBaseModel": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "title": "Type",
+                                "default": "DatedBaseModel",
+                                "type": "string",
+                                "pattern": "^DatedBaseModel$",
+                                "readOnly": true
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "DatedBaseModel",
+                "description": "Base class for all objects needing to check for a valid Date.",
                 "discriminator": {
                     "propertyName": "type"
                 }
