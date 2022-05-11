@@ -37,14 +37,16 @@ os.mkdir(saving_dir)
 json_file1 = f"{base_url}/model_inheritance.json"
 # simulation-parameter
 json_file2 = f"{base_url}/simulation-parameter_inheritance.json"
-
+# validation report
+json_file3 = f"{base_url}/validation-report.json"
 
 files = [
     json_file1,
     json_file1.replace("inheritance.json", "mapper.json"),
     json_file2,
-    json_file2.replace("inheritance.json", "mapper.json")
-]
+    json_file2.replace("inheritance.json", "mapper.json"),
+    json_file3
+    ]
 
 for f in files:
     download(f, saving_dir)
