@@ -544,6 +544,51 @@
                     "propertyName": "type"
                 }
             },
+            "ASHRAETau": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_SkyCondition"
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "tau_b",
+                            "tau_d"
+                        ],
+                        "properties": {
+                            "tau_b": {
+                                "title": "Tau B",
+                                "description": "Value for the beam optical depth. Typically found in .stat files.",
+                                "minimum": 0,
+                                "maximum": 1.2,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "tau_d": {
+                                "title": "Tau D",
+                                "description": "Value for the diffuse optical depth. Typically found in .stat files.",
+                                "minimum": 0,
+                                "maximum": 3,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "ASHRAETau",
+                                "pattern": "^ASHRAETau$",
+                                "type": "string",
+                                "readOnly": true
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "ASHRAETau",
+                "description": "Used to specify sky conditions on a design day.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
             "DesignDay": {
                 "allOf": [
                     {
@@ -1006,6 +1051,31 @@
                     "propertyName": "type"
                 }
             },
+            "DatedBaseModel": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "title": "Type",
+                                "default": "DatedBaseModel",
+                                "type": "string",
+                                "pattern": "^DatedBaseModel$",
+                                "readOnly": true
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "DatedBaseModel",
+                "description": "Base class for all objects needing to check for a valid Date.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
             "_SkyCondition": {
                 "allOf": [
                     {
@@ -1047,31 +1117,6 @@
                 ],
                 "title": "_SkyCondition",
                 "description": "Used to specify sky conditions on a design day.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "DatedBaseModel": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "title": "Type",
-                                "default": "DatedBaseModel",
-                                "type": "string",
-                                "pattern": "^DatedBaseModel$",
-                                "readOnly": true
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "DatedBaseModel",
-                "description": "Base class for all objects needing to check for a valid Date.",
                 "discriminator": {
                     "propertyName": "type"
                 }

@@ -28,14 +28,14 @@ namespace HoneybeeSchema
     /// </summary>
     [Serializable]
     [DataContract(Name = "ParentObject")]
-    public partial class ParentObject : OpenAPIGenBaseModel, IEquatable<ParentObject>, IValidatableObject
+    public partial class ParentObject : IEquatable<ParentObject>, IValidatableObject
     {
         /// <summary>
         /// Text for the type of object that the parent is.
         /// </summary>
         /// <value>Text for the type of object that the parent is.</value>
         [DataMember(Name="type")]
-        public ParentObjectTypes ParentType { get; set; }   
+        public ParentObjectTypes Type { get; set; }   
         /// <summary>
         /// Initializes a new instance of the <see cref="ParentObject" /> class.
         /// </summary>
@@ -101,7 +101,7 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ParentObject:\n");
-            sb.Append("  Type: ").Append(ParentType).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             return sb.ToString();
@@ -160,7 +160,7 @@ namespace HoneybeeSchema
                 return false;
             return 
                 (
-                    Extension.Equals(this.ParentType, input.ParentType)
+                    Extension.Equals(this.Type, input.Type)
                 ) && 
                 (
                     Extension.Equals(this.Id, input.Id)
@@ -179,8 +179,8 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.ParentType != null)
-                    hashCode = hashCode * 59 + this.ParentType.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.Name != null)

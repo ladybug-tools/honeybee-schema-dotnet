@@ -28,14 +28,14 @@ namespace HoneybeeSchema
     /// </summary>
     [Serializable]
     [DataContract(Name = "ValidationError")]
-    public partial class ValidationError : OpenAPIGenBaseModel, IEquatable<ValidationError>, IValidatableObject
+    public partial class ValidationError : IEquatable<ValidationError>, IValidatableObject
     {
         /// <summary>
         /// Text for the Honeybee extension from which the error originated (from the ExtensionTypes enumeration).
         /// </summary>
         /// <value>Text for the Honeybee extension from which the error originated (from the ExtensionTypes enumeration).</value>
         [DataMember(Name="type")]
-        public ExtensionTypes ExtensionType { get; set; }   
+        public ExtensionTypes Type { get; set; }   
         /// <summary>
         /// Text for the type of object that caused the error.
         /// </summary>
@@ -144,7 +144,7 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("ValidationError:\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
-            sb.Append("  Type: ").Append(ExtensionType).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  ElementType: ").Append(ElementType).Append("\n");
             sb.Append("  ElementId: ").Append(ElementId).Append("\n");
             sb.Append("  Message: ").Append(Message).Append("\n");
@@ -210,7 +210,7 @@ namespace HoneybeeSchema
                     Extension.Equals(this.Code, input.Code)
                 ) && 
                 (
-                    Extension.Equals(this.ExtensionType, input.ExtensionType)
+                    Extension.Equals(this.Type, input.Type)
                 ) && 
                 (
                     Extension.Equals(this.ElementType, input.ElementType)
@@ -245,8 +245,8 @@ namespace HoneybeeSchema
                 int hashCode = 41;
                 if (this.Code != null)
                     hashCode = hashCode * 59 + this.Code.GetHashCode();
-                if (this.ExtensionType != null)
-                    hashCode = hashCode * 59 + this.ExtensionType.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.ElementType != null)
                     hashCode = hashCode * 59 + this.ElementType.GetHashCode();
                 if (this.ElementId != null)
