@@ -1,5 +1,5 @@
 
-# HoneybeeSchema.Model.ParentObjectTypes
+# HoneybeeSchema.Model.ParentTypes
 
 ## Properties
 

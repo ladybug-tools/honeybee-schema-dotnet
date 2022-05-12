@@ -24,49 +24,59 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// ParentObject
+    /// ValidationParent
     /// </summary>
     [Serializable]
-    [DataContract(Name = "ParentObject")]
-    public partial class ParentObject : IEquatable<ParentObject>, IValidatableObject
+    [DataContract(Name = "ValidationParent")]
+    public partial class ValidationParent : IEquatable<ValidationParent>, IValidatableObject
     {
         /// <summary>
         /// Text for the type of object that the parent is.
         /// </summary>
         /// <value>Text for the type of object that the parent is.</value>
-        [DataMember(Name="type")]
-        public ParentObjectTypes Type { get; set; }   
+        [DataMember(Name="parent_type")]
+        public ParentTypes ParentType { get; set; }   
         /// <summary>
-        /// Initializes a new instance of the <see cref="ParentObject" /> class.
+        /// Initializes a new instance of the <see cref="ValidationParent" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected ParentObject() 
+        protected ValidationParent() 
         { 
             // Set non-required readonly properties with defaultValue
+            this.Type = "ValidationParent";
         }
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="ParentObject" /> class.
+        /// Initializes a new instance of the <see cref="ValidationParent" /> class.
         /// </summary>
+        /// <param name="parentType">Text for the type of object that the parent is. (required).</param>
         /// <param name="id">Text string for the unique ID of the parent object. (required).</param>
         /// <param name="name">Display name of the parent object..</param>
-        public ParentObject
+        public ValidationParent
         (
-           string id, // Required parameters
+           ParentTypes parentType, string id, // Required parameters
            string name= default// Optional parameters
         )// BaseClass
         {
+            this.ParentType = parentType;
             // to ensure "id" is required (not null)
-            this.Id = id ?? throw new ArgumentNullException("id is a required property for ParentObject and cannot be null");
+            this.Id = id ?? throw new ArgumentNullException("id is a required property for ValidationParent and cannot be null");
             this.Name = name;
 
             // Set non-required readonly properties with defaultValue
+            this.Type = "ValidationParent";
 
             // check if object is valid, only check for inherited class
-            if (this.GetType() == typeof(ParentObject))
+            if (this.GetType() == typeof(ValidationParent))
                 this.IsValid(throwException: true);
         }
 
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type")]
+        public override string Type { get; protected set; }  = "ValidationParent";
 
         /// <summary>
         /// Text string for the unique ID of the parent object.
@@ -87,7 +97,7 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            return "ParentObject";
+            return "ValidationParent";
         }
 
         /// <summary>
@@ -100,9 +110,10 @@ namespace HoneybeeSchema
                 return this.ToString();
             
             var sb = new StringBuilder();
-            sb.Append("ParentObject:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("ValidationParent:\n");
+            sb.Append("  ParentType: ").Append(ParentType).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             return sb.ToString();
         }
@@ -110,10 +121,10 @@ namespace HoneybeeSchema
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>ParentObject object</returns>
-        public static ParentObject FromJson(string json)
+        /// <returns>ValidationParent object</returns>
+        public static ValidationParent FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<ParentObject>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<ValidationParent>(json, JsonSetting.AnyOfConvertSetting);
             if (obj == null)
                 return null;
             return obj.Type.ToLower() == obj.GetType().Name.ToLower() && obj.IsValid(throwException: true) ? obj : null;
@@ -122,8 +133,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>ParentObject object</returns>
-        public virtual ParentObject DuplicateParentObject()
+        /// <returns>ValidationParent object</returns>
+        public virtual ValidationParent DuplicateValidationParent()
         {
             return FromJson(this.ToJson());
         }
@@ -134,7 +145,7 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return DuplicateParentObject();
+            return DuplicateValidationParent();
         }
 
      
@@ -146,24 +157,27 @@ namespace HoneybeeSchema
         public override bool Equals(object input)
         {
             input = input is AnyOf anyOf ? anyOf.Obj : input;
-            return this.Equals(input as ParentObject);
+            return this.Equals(input as ValidationParent);
         }
 
         /// <summary>
-        /// Returns true if ParentObject instances are equal
+        /// Returns true if ValidationParent instances are equal
         /// </summary>
-        /// <param name="input">Instance of ParentObject to be compared</param>
+        /// <param name="input">Instance of ValidationParent to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ParentObject input)
+        public bool Equals(ValidationParent input)
         {
             if (input == null)
                 return false;
             return 
                 (
-                    Extension.Equals(this.Type, input.Type)
+                    Extension.Equals(this.ParentType, input.ParentType)
                 ) && 
                 (
                     Extension.Equals(this.Id, input.Id)
+                ) && 
+                (
+                    Extension.Equals(this.Type, input.Type)
                 ) && 
                 (
                     Extension.Equals(this.Name, input.Name)
@@ -179,10 +193,12 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.ParentType != null)
+                    hashCode = hashCode * 59 + this.ParentType.GetHashCode();
                 if (this.Id != null)
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
                 return hashCode;
@@ -213,6 +229,15 @@ namespace HoneybeeSchema
             if (this.Id != null && false == regexId.Match(this.Id).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Id, must match a pattern of " + regexId, new [] { "Id" });
+            }
+
+
+            
+            // Type (string) pattern
+            Regex regexType = new Regex(@"^ValidationParent$", RegexOptions.CultureInvariant);
+            if (this.Type != null && false == regexType.Match(this.Type).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
             yield break;

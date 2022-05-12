@@ -30,7 +30,7 @@ namespace HoneybeeSchema
     
     [JsonConverter(typeof(StringEnumConverter))]
     
-    public enum ParentObjectTypes
+    public enum ParentTypes
     {
         /// <summary>
         /// Enum Aperture for value: Aperture

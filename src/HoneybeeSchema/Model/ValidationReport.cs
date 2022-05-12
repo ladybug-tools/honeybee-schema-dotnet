@@ -51,7 +51,7 @@ namespace HoneybeeSchema
         public ValidationReport
         (
            string honeybeeCore, string honeybeeSchema, bool valid, // Required parameters
-           string fatalError = "", List<ValidationError> errors= default // Optional parameters
+           string fatalError = "", List<ValidationError> errors= default// Optional parameters
         )// BaseClass
         {
             // to ensure "honeybeeCore" is required (not null)
@@ -132,9 +132,9 @@ namespace HoneybeeSchema
             sb.Append("  HoneybeeCore: ").Append(HoneybeeCore).Append("\n");
             sb.Append("  HoneybeeSchema: ").Append(HoneybeeSchema).Append("\n");
             sb.Append("  Valid: ").Append(Valid).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  FatalError: ").Append(FatalError).Append("\n");
             sb.Append("  Errors: ").Append(Errors).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
             return sb.ToString();
         }
   
@@ -200,14 +200,14 @@ namespace HoneybeeSchema
                     Extension.Equals(this.Valid, input.Valid)
                 ) && 
                 (
+                    Extension.Equals(this.Type, input.Type)
+                ) && 
+                (
                     Extension.Equals(this.FatalError, input.FatalError)
                 ) && 
                 (
                     this.Errors == input.Errors ||
                     Extension.AllEquals(this.Errors, input.Errors)
-                ) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
                 );
         }
 
@@ -226,12 +226,12 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.HoneybeeSchema.GetHashCode();
                 if (this.Valid != null)
                     hashCode = hashCode * 59 + this.Valid.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.FatalError != null)
                     hashCode = hashCode * 59 + this.FatalError.GetHashCode();
                 if (this.Errors != null)
                     hashCode = hashCode * 59 + this.Errors.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
         }

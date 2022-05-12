@@ -34,8 +34,8 @@ namespace HoneybeeSchema
         /// Text for the Honeybee extension from which the error originated (from the ExtensionTypes enumeration).
         /// </summary>
         /// <value>Text for the Honeybee extension from which the error originated (from the ExtensionTypes enumeration).</value>
-        [DataMember(Name="type")]
-        public ExtensionTypes Type { get; set; }   
+        [DataMember(Name="extension_type")]
+        public ExtensionTypes ExtensionType { get; set; }   
         /// <summary>
         /// Text for the type of object that caused the error.
         /// </summary>
@@ -49,12 +49,14 @@ namespace HoneybeeSchema
         protected ValidationError() 
         { 
             // Set non-required readonly properties with defaultValue
+            this.Type = "ValidationError";
         }
         
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidationError" /> class.
         /// </summary>
         /// <param name="code">Text with 6 digits for the error code. The first two digits indicate whether the error is a core honeybee error (00) vs. an extension error (any non-zero number). The second two digits indicate the nature of the error (00 is an identifier error, 01 is a geometry error, 02 is an adjacency error). The third two digits are used to give a unique ID to each condition moving upwards from more specific/detailed objects/errors to coarser/more abstract objects/errors. (required).</param>
+        /// <param name="extensionType">Text for the Honeybee extension from which the error originated (from the ExtensionTypes enumeration). (required).</param>
         /// <param name="elementType">Text for the type of object that caused the error. (required).</param>
         /// <param name="elementId">Text string for the unique object ID that caused the error. Note that this can be the identifier of a core object like a Room or a Face. Or it can be for an extension object like a SensorGrid or a Construction. (required).</param>
         /// <param name="message">Text for the error message with a detailed description of what exactly is ivalid about the element. (required).</param>
@@ -63,12 +65,13 @@ namespace HoneybeeSchema
         /// <param name="topParents">A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved..</param>
         public ValidationError
         (
-           string code, ObjectTypes elementType, string elementId, string message, // Required parameters
-           string elementName= default, List<ParentObject> parents= default, List<ParentObject> topParents= default// Optional parameters
+           string code, ExtensionTypes extensionType, ObjectTypes elementType, string elementId, string message, // Required parameters
+           string elementName= default, List<ValidationParent> parents= default, List<ValidationParent> topParents= default// Optional parameters
         )// BaseClass
         {
             // to ensure "code" is required (not null)
             this.Code = code ?? throw new ArgumentNullException("code is a required property for ValidationError and cannot be null");
+            this.ExtensionType = extensionType;
             this.ElementType = elementType;
             // to ensure "elementId" is required (not null)
             this.ElementId = elementId ?? throw new ArgumentNullException("elementId is a required property for ValidationError and cannot be null");
@@ -79,12 +82,19 @@ namespace HoneybeeSchema
             this.TopParents = topParents;
 
             // Set non-required readonly properties with defaultValue
+            this.Type = "ValidationError";
 
             // check if object is valid, only check for inherited class
             if (this.GetType() == typeof(ValidationError))
                 this.IsValid(throwException: true);
         }
 
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Gets or Sets Type
+        /// </summary>
+        [DataMember(Name = "type")]
+        public override string Type { get; protected set; }  = "ValidationError";
 
         /// <summary>
         /// Text with 6 digits for the error code. The first two digits indicate whether the error is a core honeybee error (00) vs. an extension error (any non-zero number). The second two digits indicate the nature of the error (00 is an identifier error, 01 is a geometry error, 02 is an adjacency error). The third two digits are used to give a unique ID to each condition moving upwards from more specific/detailed objects/errors to coarser/more abstract objects/errors.
@@ -115,13 +125,13 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A list of the parent objects for the objet that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a perant Room. It will contain 2 for an Aperture that has a parent Face with a parent Room.</value>
         [DataMember(Name = "parents")]
-        public List<ParentObject> Parents { get; set; } 
+        public List<ValidationParent> Parents { get; set; } 
         /// <summary>
         /// A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved.
         /// </summary>
         /// <value>A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved.</value>
         [DataMember(Name = "top_parents")]
-        public List<ParentObject> TopParents { get; set; } 
+        public List<ValidationParent> TopParents { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -144,10 +154,11 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("ValidationError:\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  ExtensionType: ").Append(ExtensionType).Append("\n");
             sb.Append("  ElementType: ").Append(ElementType).Append("\n");
             sb.Append("  ElementId: ").Append(ElementId).Append("\n");
             sb.Append("  Message: ").Append(Message).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  ElementName: ").Append(ElementName).Append("\n");
             sb.Append("  Parents: ").Append(Parents).Append("\n");
             sb.Append("  TopParents: ").Append(TopParents).Append("\n");
@@ -210,7 +221,7 @@ namespace HoneybeeSchema
                     Extension.Equals(this.Code, input.Code)
                 ) && 
                 (
-                    Extension.Equals(this.Type, input.Type)
+                    Extension.Equals(this.ExtensionType, input.ExtensionType)
                 ) && 
                 (
                     Extension.Equals(this.ElementType, input.ElementType)
@@ -220,6 +231,9 @@ namespace HoneybeeSchema
                 ) && 
                 (
                     Extension.Equals(this.Message, input.Message)
+                ) && 
+                (
+                    Extension.Equals(this.Type, input.Type)
                 ) && 
                 (
                     Extension.Equals(this.ElementName, input.ElementName)
@@ -245,14 +259,16 @@ namespace HoneybeeSchema
                 int hashCode = 41;
                 if (this.Code != null)
                     hashCode = hashCode * 59 + this.Code.GetHashCode();
-                if (this.Type != null)
-                    hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.ExtensionType != null)
+                    hashCode = hashCode * 59 + this.ExtensionType.GetHashCode();
                 if (this.ElementType != null)
                     hashCode = hashCode * 59 + this.ElementType.GetHashCode();
                 if (this.ElementId != null)
                     hashCode = hashCode * 59 + this.ElementId.GetHashCode();
                 if (this.Message != null)
                     hashCode = hashCode * 59 + this.Message.GetHashCode();
+                if (this.Type != null)
+                    hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.ElementName != null)
                     hashCode = hashCode * 59 + this.ElementName.GetHashCode();
                 if (this.Parents != null)
@@ -306,6 +322,15 @@ namespace HoneybeeSchema
             if (this.ElementId != null && false == regexElementId.Match(this.ElementId).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ElementId, must match a pattern of " + regexElementId, new [] { "ElementId" });
+            }
+
+
+            
+            // Type (string) pattern
+            Regex regexType = new Regex(@"^ValidationError$", RegexOptions.CultureInvariant);
+            if (this.Type != null && false == regexType.Match(this.Type).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
             yield break;
