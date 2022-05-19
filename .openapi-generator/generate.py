@@ -13,8 +13,8 @@ json2 = os.path.join(doc_folder, 'simulation-parameter_inheritance.json')
 json3 = os.path.join(doc_folder, 'validation-report.json')
 
 # update version
-# python3 .openapi-generator/pre_gen_script.py ".openapi-docs/model_inheritance.json"
-subprocess.call(f"python3 {generator_folder}/pre_gen_script.py {json1}", shell=True)
+# python .openapi-generator/pre_gen_script.py ".openapi-docs/model_inheritance.json"
+subprocess.call(f"python {generator_folder}/pre_gen_script.py {json1}", shell=True)
 
 
 # run openapi tool to generate schema
@@ -30,32 +30,32 @@ subprocess.call(f"npx @openapitools/openapi-generator-cli generate -i {json3} -t
 
 
 # post process files
-# python3 .openapi-generator/post_gen_script.py ".openapi-docs/simulation-parameter_inheritance.json"
-# python3 .openapi-generator/post_gen_script.py ".openapi-docs/model_inheritance.json"
+# python .openapi-generator/post_gen_script.py ".openapi-docs/simulation-parameter_inheritance.json"
+# python .openapi-generator/post_gen_script.py ".openapi-docs/model_inheritance.json"
 time.sleep(1)
-subprocess.call(f"python3 {generator_folder}/post_gen_script.py {json2}", shell=True)
+subprocess.call(f"python {generator_folder}/post_gen_script.py {json2}", shell=True)
 time.sleep(1)
-subprocess.call(f"python3 {generator_folder}/post_gen_script.py {json1}", shell=True)
+subprocess.call(f"python {generator_folder}/post_gen_script.py {json1}", shell=True)
 time.sleep(1)
-subprocess.call(f"python3 {generator_folder}/post_gen_script.py {json3}", shell=True)
+subprocess.call(f"python {generator_folder}/post_gen_script.py {json3}", shell=True)
 
 # update global default
 time.sleep(1)
-subprocess.call(f"python3 {generator_folder}/create_global_default.py", shell=True)
+subprocess.call(f"python {generator_folder}/create_global_default.py", shell=True)
 
 # update assembly version
 time.sleep(1)
-subprocess.call(f"python3 {generator_folder}/update_assembly_version.py", shell=True)
+subprocess.call(f"python {generator_folder}/update_assembly_version.py", shell=True)
 
 
 json1 = os.path.join(doc_folder, 'model_mapper.json')
 json2 = os.path.join(doc_folder, 'simulation-parameter_mapper.json')
-# python3 .openapi-generator/create_interface.py ".openapi-docs/simulation-parameter_mapper.json"
-# python3 .openapi-generator/create_interface.py ".openapi-docs/model_mapper.json"
+# python .openapi-generator/create_interface.py ".openapi-docs/simulation-parameter_mapper.json"
+# python .openapi-generator/create_interface.py ".openapi-docs/model_mapper.json"
 time.sleep(1)
-subprocess.call(f"python3 {generator_folder}/create_interface.py {json2}", shell=True)
+subprocess.call(f"python {generator_folder}/create_interface.py {json2}", shell=True)
 time.sleep(1)
-subprocess.call(f"python3 {generator_folder}/create_interface.py {json1}", shell=True)
+subprocess.call(f"python {generator_folder}/create_interface.py {json1}", shell=True)
 
 
 # test to build the project
