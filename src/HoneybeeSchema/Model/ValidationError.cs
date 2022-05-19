@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Serializable]
     [DataContract(Name = "ValidationError")]
-    public partial class ValidationError : IEquatable<ValidationError>, IValidatableObject
+    public partial class ValidationError : OpenAPIGenBaseModel, IEquatable<ValidationError>, IValidatableObject
     {
         /// <summary>
         /// Text for the Honeybee extension from which the error originated (from the ExtensionTypes enumeration).
@@ -55,22 +55,25 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidationError" /> class.
         /// </summary>
-        /// <param name="code">Text with 6 digits for the error code. The first two digits indicate whether the error is a core honeybee error (00) vs. an extension error (any non-zero number). The second two digits indicate the nature of the error (00 is an identifier error, 01 is a geometry error, 02 is an adjacency error). The third two digits are used to give a unique ID to each condition moving upwards from more specific/detailed objects/errors to coarser/more abstract objects/errors. (required).</param>
+        /// <param name="code">Text with 6 digits for the error code. The first two digits indicate whether the error is a core honeybee error (00) vs. an extension error (any non-zero number). The second two digits indicate the nature of the error (00 is an identifier error, 01 is a geometry error, 02 is an adjacency error). The third two digits are used to give a unique ID to each condition moving upwards from more specific/detailed objects/errors to coarser/more abstract objects/errors. A full list of error codes can be found here: https://docs.pollination.cloud/user-manual/get-started/troubleshooting/help-with-modeling-error-codes (required).</param>
+        /// <param name="errorType">A human-readable version of the error code, typically not more than five words long. (required).</param>
         /// <param name="extensionType">Text for the Honeybee extension from which the error originated (from the ExtensionTypes enumeration). (required).</param>
         /// <param name="elementType">Text for the type of object that caused the error. (required).</param>
         /// <param name="elementId">Text string for the unique object ID that caused the error. Note that this can be the identifier of a core object like a Room or a Face. Or it can be for an extension object like a SensorGrid or a Construction. (required).</param>
-        /// <param name="message">Text for the error message with a detailed description of what exactly is ivalid about the element. (required).</param>
+        /// <param name="message">Text for the error message with a detailed description of what exactly is invalid about the element. (required).</param>
         /// <param name="elementName">Display name of the object that caused the error..</param>
-        /// <param name="parents">A list of the parent objects for the objet that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a perant Room. It will contain 2 for an Aperture that has a parent Face with a parent Room..</param>
+        /// <param name="parents">A list of the parent objects for the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room..</param>
         /// <param name="topParents">A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved..</param>
         public ValidationError
         (
-           string code, ExtensionTypes extensionType, ObjectTypes elementType, string elementId, string message, // Required parameters
+           string code, string errorType, ExtensionTypes extensionType, ObjectTypes elementType, string elementId, string message, // Required parameters
            string elementName= default, List<ValidationParent> parents= default, List<ValidationParent> topParents= default// Optional parameters
         )// BaseClass
         {
             // to ensure "code" is required (not null)
             this.Code = code ?? throw new ArgumentNullException("code is a required property for ValidationError and cannot be null");
+            // to ensure "errorType" is required (not null)
+            this.ErrorType = errorType ?? throw new ArgumentNullException("errorType is a required property for ValidationError and cannot be null");
             this.ExtensionType = extensionType;
             this.ElementType = elementType;
             // to ensure "elementId" is required (not null)
@@ -97,11 +100,17 @@ namespace HoneybeeSchema
         public override string Type { get; protected set; }  = "ValidationError";
 
         /// <summary>
-        /// Text with 6 digits for the error code. The first two digits indicate whether the error is a core honeybee error (00) vs. an extension error (any non-zero number). The second two digits indicate the nature of the error (00 is an identifier error, 01 is a geometry error, 02 is an adjacency error). The third two digits are used to give a unique ID to each condition moving upwards from more specific/detailed objects/errors to coarser/more abstract objects/errors.
+        /// Text with 6 digits for the error code. The first two digits indicate whether the error is a core honeybee error (00) vs. an extension error (any non-zero number). The second two digits indicate the nature of the error (00 is an identifier error, 01 is a geometry error, 02 is an adjacency error). The third two digits are used to give a unique ID to each condition moving upwards from more specific/detailed objects/errors to coarser/more abstract objects/errors. A full list of error codes can be found here: https://docs.pollination.cloud/user-manual/get-started/troubleshooting/help-with-modeling-error-codes
         /// </summary>
-        /// <value>Text with 6 digits for the error code. The first two digits indicate whether the error is a core honeybee error (00) vs. an extension error (any non-zero number). The second two digits indicate the nature of the error (00 is an identifier error, 01 is a geometry error, 02 is an adjacency error). The third two digits are used to give a unique ID to each condition moving upwards from more specific/detailed objects/errors to coarser/more abstract objects/errors.</value>
+        /// <value>Text with 6 digits for the error code. The first two digits indicate whether the error is a core honeybee error (00) vs. an extension error (any non-zero number). The second two digits indicate the nature of the error (00 is an identifier error, 01 is a geometry error, 02 is an adjacency error). The third two digits are used to give a unique ID to each condition moving upwards from more specific/detailed objects/errors to coarser/more abstract objects/errors. A full list of error codes can be found here: https://docs.pollination.cloud/user-manual/get-started/troubleshooting/help-with-modeling-error-codes</value>
         [DataMember(Name = "code", IsRequired = true)]
         public string Code { get; set; } 
+        /// <summary>
+        /// A human-readable version of the error code, typically not more than five words long.
+        /// </summary>
+        /// <value>A human-readable version of the error code, typically not more than five words long.</value>
+        [DataMember(Name = "error_type", IsRequired = true)]
+        public string ErrorType { get; set; } 
         /// <summary>
         /// Text string for the unique object ID that caused the error. Note that this can be the identifier of a core object like a Room or a Face. Or it can be for an extension object like a SensorGrid or a Construction.
         /// </summary>
@@ -109,9 +118,9 @@ namespace HoneybeeSchema
         [DataMember(Name = "element_id", IsRequired = true)]
         public string ElementId { get; set; } 
         /// <summary>
-        /// Text for the error message with a detailed description of what exactly is ivalid about the element.
+        /// Text for the error message with a detailed description of what exactly is invalid about the element.
         /// </summary>
-        /// <value>Text for the error message with a detailed description of what exactly is ivalid about the element.</value>
+        /// <value>Text for the error message with a detailed description of what exactly is invalid about the element.</value>
         [DataMember(Name = "message", IsRequired = true)]
         public string Message { get; set; } 
         /// <summary>
@@ -121,9 +130,9 @@ namespace HoneybeeSchema
         [DataMember(Name = "element_name")]
         public string ElementName { get; set; } 
         /// <summary>
-        /// A list of the parent objects for the objet that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a perant Room. It will contain 2 for an Aperture that has a parent Face with a parent Room.
+        /// A list of the parent objects for the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room.
         /// </summary>
-        /// <value>A list of the parent objects for the objet that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a perant Room. It will contain 2 for an Aperture that has a parent Face with a parent Room.</value>
+        /// <value>A list of the parent objects for the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room.</value>
         [DataMember(Name = "parents")]
         public List<ValidationParent> Parents { get; set; } 
         /// <summary>
@@ -154,6 +163,7 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("ValidationError:\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
+            sb.Append("  ErrorType: ").Append(ErrorType).Append("\n");
             sb.Append("  ExtensionType: ").Append(ExtensionType).Append("\n");
             sb.Append("  ElementType: ").Append(ElementType).Append("\n");
             sb.Append("  ElementId: ").Append(ElementId).Append("\n");
@@ -221,6 +231,9 @@ namespace HoneybeeSchema
                     Extension.Equals(this.Code, input.Code)
                 ) && 
                 (
+                    Extension.Equals(this.ErrorType, input.ErrorType)
+                ) && 
+                (
                     Extension.Equals(this.ExtensionType, input.ExtensionType)
                 ) && 
                 (
@@ -259,6 +272,8 @@ namespace HoneybeeSchema
                 int hashCode = 41;
                 if (this.Code != null)
                     hashCode = hashCode * 59 + this.Code.GetHashCode();
+                if (this.ErrorType != null)
+                    hashCode = hashCode * 59 + this.ErrorType.GetHashCode();
                 if (this.ExtensionType != null)
                     hashCode = hashCode * 59 + this.ExtensionType.GetHashCode();
                 if (this.ElementType != null)
