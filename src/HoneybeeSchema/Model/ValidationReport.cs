@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Serializable]
     [DataContract(Name = "ValidationReport")]
-    public partial class ValidationReport : OpenAPIGenBaseModel, IEquatable<ValidationReport>, IValidatableObject
+    public partial class ValidationReport : IEquatable<ValidationReport>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidationReport" /> class.
