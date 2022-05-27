@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Serializable]
     [DataContract(Name = "ValidationParent")]
-    public partial class ValidationParent : OpenAPIGenBaseModel, IEquatable<ValidationParent>, IValidatableObject
+    public partial class ValidationParent : IEquatable<ValidationParent>, IValidatableObject
     {
         /// <summary>
         /// Text for the type of object that the parent is.

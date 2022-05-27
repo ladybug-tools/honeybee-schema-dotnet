@@ -28,7 +28,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Serializable]
     [DataContract(Name = "ValidationError")]
-    public partial class ValidationError : OpenAPIGenBaseModel, IEquatable<ValidationError>, IValidatableObject
+    public partial class ValidationError : IEquatable<ValidationError>, IValidatableObject
     {
         /// <summary>
         /// Text for the Honeybee extension from which the error originated (from the ExtensionTypes enumeration).
