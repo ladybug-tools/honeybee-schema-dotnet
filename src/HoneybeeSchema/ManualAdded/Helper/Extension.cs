@@ -163,6 +163,24 @@ namespace HoneybeeSchema
             }
 
         }
+        public static void AddSHW(this ModelEnergyProperties modelEnergyCollection, SHWSystem havc)
+        {
+            modelEnergyCollection.Shws = modelEnergyCollection.Shws ?? new List<SHWSystem>();
+            var exist = modelEnergyCollection.Shws.Any(_ => _.Identifier == havc.Identifier);
+            if (exist)
+                return;
+
+            modelEnergyCollection.Shws.Add(havc);
+        }
+
+        public static void AddSHWs(this ModelEnergyProperties modelEnergyCollection, IEnumerable<SHWSystem> systems)
+        {
+            if (systems == null) return;
+            foreach (var item in systems)
+            {
+                modelEnergyCollection.AddSHW(item);
+            }
+        }
         public static void AddHVAC(this ModelEnergyProperties modelEnergyCollection, IHvac havc)
         {
             modelEnergyCollection.Hvacs = modelEnergyCollection.Hvacs ?? new List<AnyOf<IdealAirSystemAbridged, VAV, PVAV, PSZ, PTAC, ForcedAirFurnace, FCUwithDOASAbridged, WSHPwithDOASAbridged, VRFwithDOASAbridged, RadiantwithDOASAbridged, FCU, WSHP, VRF, Baseboard, EvaporativeCooler, Residential, WindowAC, GasUnitHeater, Radiant>>();
@@ -233,6 +251,7 @@ namespace HoneybeeSchema
                     throw new ArgumentException($"{havc.GetType()}({havc.Identifier}) is not added to model");
             }
         }
+     
         public static void AddHVACs(this ModelEnergyProperties modelEnergyCollection, IEnumerable<IHvac> havcs)
         {
             if (havcs == null) return;
