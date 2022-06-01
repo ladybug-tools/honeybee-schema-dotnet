@@ -308,7 +308,10 @@ namespace HoneybeeSchema.Helper
                     {
                         _defaultModelEnergyProperty.AddHVACs(DefaultHVACs.ToList());
                     }
-                    
+
+                    _defaultModelEnergyProperty.Shws = _defaultModelEnergyProperty.Shws ?? new List<SHWSystem>();
+
+
                 }
 
                 return _defaultModelEnergyProperty;
