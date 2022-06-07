@@ -54,7 +54,13 @@ namespace HoneybeeSchema
         /// Enum CeilingMetalPanel for value: CeilingMetalPanel
         /// </summary>
         [EnumMember(Value = "CeilingMetalPanel")]
-        CeilingMetalPanel = 4
+        CeilingMetalPanel = 4,
+
+        /// <summary>
+        /// Enum FloorWithHardwood for value: FloorWithHardwood
+        /// </summary>
+        [EnumMember(Value = "FloorWithHardwood")]
+        FloorWithHardwood = 5
 
     }
 
