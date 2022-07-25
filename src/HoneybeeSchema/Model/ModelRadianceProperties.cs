@@ -39,7 +39,7 @@ namespace HoneybeeSchema
         /// <param name="views">An array of Views that are associated with the model..</param>
         public ModelRadianceProperties
         (
-           // Required parameters
+            // Required parameters
            List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> modifiers= default, List<AnyOf<ModifierSet,ModifierSetAbridged>> modifierSets= default, List<SensorGrid> sensorGrids= default, List<View> views= default// Optional parameters
         ) : base()// BaseClass
         {

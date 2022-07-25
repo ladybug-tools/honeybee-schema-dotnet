@@ -47,7 +47,7 @@ namespace HoneybeeSchema
         public Surface
         (
            List<string> boundaryConditionObjects// Required parameters
-           // Optional parameters
+            // Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "boundaryConditionObjects" is required (not null)

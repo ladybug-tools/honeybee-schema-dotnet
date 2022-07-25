@@ -38,7 +38,7 @@ namespace HoneybeeSchema
         /// <param name="shades">A list of StateGeometryAbridged objects (default: None)..</param>
         public RadianceShadeStateAbridged
         (
-           // Required parameters
+            // Required parameters
            string modifier= default, string modifierDirect= default, List<StateGeometryAbridged> shades= default// Optional parameters
         ) : base()// BaseClass
         {

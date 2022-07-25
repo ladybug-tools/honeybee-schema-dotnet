@@ -57,7 +57,7 @@ namespace HoneybeeSchema
         public DesignDay
         (
            string name, DesignDayTypes dayType, DryBulbCondition dryBulbCondition, HumidityCondition humidityCondition, WindCondition windCondition, AnyOf<ASHRAEClearSky,ASHRAETau> skyCondition// Required parameters
-           // Optional parameters
+            // Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "name" is required (not null)

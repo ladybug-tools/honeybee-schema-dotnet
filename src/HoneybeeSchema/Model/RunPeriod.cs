@@ -47,7 +47,7 @@ namespace HoneybeeSchema
         /// <param name="leapYear">Boolean noting whether the simulation will be run for a leap year. (default to false).</param>
         public RunPeriod
         (
-           // Required parameters
+            // Required parameters
            List<int> startDate= default, List<int> endDate= default, DaysOfWeek startDayOfWeek= DaysOfWeek.Sunday, List<List<int>> holidays= default, DaylightSavingTime daylightSavingTime= default, bool leapYear = false// Optional parameters
         ) : base()// BaseClass
         {

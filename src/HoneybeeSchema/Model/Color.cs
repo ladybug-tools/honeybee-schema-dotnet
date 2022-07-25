@@ -24,7 +24,7 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// A mesh in 3D space.
+    /// A RGB color.
     /// </summary>
     [Serializable]
     [DataContract(Name = "Color")]
@@ -43,18 +43,20 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Color" /> class.
         /// </summary>
-        /// <param name="r">Integer for red value. (required).</param>
-        /// <param name="g">Integer for green value. (required).</param>
-        /// <param name="b">Integer for blue value. (required).</param>
+        /// <param name="r">Value for red channel. (required).</param>
+        /// <param name="g">Value for green channel. (required).</param>
+        /// <param name="b">Value for blue channel. (required).</param>
+        /// <param name="a">Value for the alpha channel, which defines the opacity as a number between 0 (fully transparent) and 255 (fully opaque). (default to 255).</param>
         public Color
         (
-           int r, int g, int b// Required parameters
-           // Optional parameters
+           int r, int g, int b, // Required parameters
+           int a = 255// Optional parameters
         ) : base()// BaseClass
         {
             this.R = r;
             this.G = g;
             this.B = b;
+            this.A = a;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Color";
@@ -72,23 +74,29 @@ namespace HoneybeeSchema
         public override string Type { get; protected set; }  = "Color";
 
         /// <summary>
-        /// Integer for red value.
+        /// Value for red channel.
         /// </summary>
-        /// <value>Integer for red value.</value>
+        /// <value>Value for red channel.</value>
         [DataMember(Name = "r", IsRequired = true)]
         public int R { get; set; } 
         /// <summary>
-        /// Integer for green value.
+        /// Value for green channel.
         /// </summary>
-        /// <value>Integer for green value.</value>
+        /// <value>Value for green channel.</value>
         [DataMember(Name = "g", IsRequired = true)]
         public int G { get; set; } 
         /// <summary>
-        /// Integer for blue value.
+        /// Value for blue channel.
         /// </summary>
-        /// <value>Integer for blue value.</value>
+        /// <value>Value for blue channel.</value>
         [DataMember(Name = "b", IsRequired = true)]
         public int B { get; set; } 
+        /// <summary>
+        /// Value for the alpha channel, which defines the opacity as a number between 0 (fully transparent) and 255 (fully opaque).
+        /// </summary>
+        /// <value>Value for the alpha channel, which defines the opacity as a number between 0 (fully transparent) and 255 (fully opaque).</value>
+        [DataMember(Name = "a")]
+        public int A { get; set; }  = 255;
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -114,6 +122,7 @@ namespace HoneybeeSchema
             sb.Append("  R: ").Append(R).Append("\n");
             sb.Append("  G: ").Append(G).Append("\n");
             sb.Append("  B: ").Append(B).Append("\n");
+            sb.Append("  A: ").Append(A).Append("\n");
             return sb.ToString();
         }
   
@@ -188,6 +197,9 @@ namespace HoneybeeSchema
                 ) && base.Equals(input) && 
                 (
                     Extension.Equals(this.Type, input.Type)
+                ) && base.Equals(input) && 
+                (
+                    Extension.Equals(this.A, input.A)
                 );
         }
 
@@ -208,6 +220,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.B.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.A != null)
+                    hashCode = hashCode * 59 + this.A.GetHashCode();
                 return hashCode;
             }
         }
@@ -269,6 +283,20 @@ namespace HoneybeeSchema
             if (this.Type != null && false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
+            }
+
+
+            
+            // A (int) maximum
+            if(this.A > (int)255)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for A, must be a value less than or equal to 255.", new [] { "A" });
+            }
+
+            // A (int) minimum
+            if(this.A < (int)0)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for A, must be a value greater than or equal to 0.", new [] { "A" });
             }
 
             yield break;

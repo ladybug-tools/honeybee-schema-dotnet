@@ -54,7 +54,7 @@ namespace HoneybeeSchema
         /// <param name="aspectRatio">Aspect ratio of a rectangular footprint, defined as the ratio of length of the short axis divided by the length of the long axis. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate. (default to 1D).</param>
         public VentilationSimulationControl
         (
-           // Required parameters
+            // Required parameters
            VentilationControlType ventControlType= VentilationControlType.SingleZone, double referenceTemperature = 20D, double referencePressure = 101325D, double referenceHumidityRatio = 0D, BuildingType buildingType= BuildingType.LowRise, double longAxisAngle = 0D, double aspectRatio = 1D// Optional parameters
         ) : base()// BaseClass
         {

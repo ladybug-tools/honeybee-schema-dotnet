@@ -38,7 +38,7 @@ namespace HoneybeeSchema
         /// <param name="coolingFactor">A number that will be multiplied by the peak cooling load for each zone in order to size the heating system. (default to 1.15D).</param>
         public SizingParameter
         (
-           // Required parameters
+            // Required parameters
            List<DesignDay> designDays= default, double heatingFactor = 1.25D, double coolingFactor = 1.15D// Optional parameters
         ) : base()// BaseClass
         {

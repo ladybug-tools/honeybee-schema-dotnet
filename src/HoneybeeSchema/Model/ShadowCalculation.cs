@@ -57,7 +57,7 @@ namespace HoneybeeSchema
         /// <param name="maximumFigures">Number of allowable figures in shadow overlap calculations. (default to 15000).</param>
         public ShadowCalculation
         (
-           // Required parameters
+            // Required parameters
            SolarDistribution solarDistribution= SolarDistribution.FullExteriorWithReflections, CalculationMethod calculationMethod= CalculationMethod.PolygonClipping, CalculationUpdateMethod calculationUpdateMethod= CalculationUpdateMethod.Periodic, int calculationFrequency = 30, int maximumFigures = 15000// Optional parameters
         ) : base()// BaseClass
         {

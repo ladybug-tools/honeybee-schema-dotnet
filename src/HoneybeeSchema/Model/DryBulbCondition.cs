@@ -48,7 +48,7 @@ namespace HoneybeeSchema
         public DryBulbCondition
         (
            double dryBulbMax, double dryBulbRange// Required parameters
-           // Optional parameters
+            // Optional parameters
         ) : base()// BaseClass
         {
             this.DryBulbMax = dryBulbMax;

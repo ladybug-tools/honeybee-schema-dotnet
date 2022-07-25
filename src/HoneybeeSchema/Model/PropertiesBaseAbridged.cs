@@ -37,7 +37,7 @@ namespace HoneybeeSchema
         /// <param name="modifierBlk">A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None)..</param>
         public PropertiesBaseAbridged
         (
-           // Required parameters
+            // Required parameters
            string modifier= default, string modifierBlk= default // Optional parameters
         ) : base()// BaseClass
         {

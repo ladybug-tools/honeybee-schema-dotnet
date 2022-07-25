@@ -51,7 +51,7 @@ namespace HoneybeeSchema
         public WindowConstructionDynamicAbridged
         (
             string identifier, List<WindowConstructionAbridged> constructions, string schedule, // Required parameters
-            string displayName= default, Object userData= default // Optional parameters
+            string displayName= default, Object userData= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             // to ensure "constructions" is required (not null)

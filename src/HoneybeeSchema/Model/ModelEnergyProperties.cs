@@ -44,7 +44,7 @@ namespace HoneybeeSchema
         /// <param name="ventilationSimulationControl">An optional parameter to define the global parameters for a ventilation cooling..</param>
         public ModelEnergyProperties
         (
-           // Required parameters
+            // Required parameters
            List<AnyOf<ConstructionSetAbridged,ConstructionSet>> constructionSets= default, List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,WindowConstructionShadeAbridged,AirBoundaryConstructionAbridged,OpaqueConstruction,WindowConstruction,WindowConstructionShade,WindowConstructionDynamicAbridged,WindowConstructionDynamic,AirBoundaryConstruction,ShadeConstruction>> constructions= default, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyMaterialVegetation,EnergyWindowMaterialGlazing,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialGas,EnergyWindowMaterialGasMixture,EnergyWindowMaterialGasCustom,EnergyWindowMaterialBlind,EnergyWindowMaterialShade>> materials= default, List<AnyOf<IdealAirSystemAbridged,VAV,PVAV,PSZ,PTAC,ForcedAirFurnace,FCUwithDOASAbridged,WSHPwithDOASAbridged,VRFwithDOASAbridged,RadiantwithDOASAbridged,FCU,WSHP,VRF,Baseboard,EvaporativeCooler,Residential,WindowAC,GasUnitHeater,Radiant>> hvacs= default, List<SHWSystem> shws= default, List<AnyOf<ProgramTypeAbridged,ProgramType>> programTypes= default, List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged,ScheduleRuleset,ScheduleFixedInterval>> schedules= default, List<ScheduleTypeLimit> scheduleTypeLimits= default, VentilationSimulationControl ventilationSimulationControl= default// Optional parameters
         ) : base()// BaseClass
         {

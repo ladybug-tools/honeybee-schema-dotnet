@@ -38,7 +38,7 @@ namespace HoneybeeSchema
         /// <param name="viewFactor">A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated..</param>
         public Outdoors
         (
-           // Required parameters
+            // Required parameters
            bool sunExposure = true, bool windExposure = true, AnyOf<Autocalculate,double> viewFactor= default// Optional parameters
         ) : base()// BaseClass
         {
