@@ -40,7 +40,7 @@ namespace HoneybeeSchema
         /// <param name="shades">A list of StateGeometryAbridged objects (default: None)..</param>
         public RadianceSubFaceStateAbridged
         (
-           // Required parameters
+            // Required parameters
             string modifier= default, string modifierDirect= default, List<StateGeometryAbridged> shades= default, Face3D vmtxGeometry= default, Face3D dmtxGeometry= default // Optional parameters
         ) : base(modifier: modifier, modifierDirect: modifierDirect, shades: shades)// BaseClass
         {

@@ -36,8 +36,8 @@ namespace HoneybeeSchema
         [JsonConstructorAttribute]
         public OpenAPIGenBaseModel
         (
-           // Required parameters
-           // Optional parameters
+            // Required parameters
+            // Optional parameters
         )// BaseClass
         {
 

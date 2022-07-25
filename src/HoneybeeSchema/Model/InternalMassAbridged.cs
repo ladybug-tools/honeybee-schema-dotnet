@@ -51,7 +51,7 @@ namespace HoneybeeSchema
         public InternalMassAbridged
         (
             string identifier, string construction, double area, // Required parameters
-            string displayName= default, Object userData= default // Optional parameters
+            string displayName= default, Object userData= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             // to ensure "construction" is required (not null)

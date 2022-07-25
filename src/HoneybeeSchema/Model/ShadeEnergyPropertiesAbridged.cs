@@ -37,7 +37,7 @@ namespace HoneybeeSchema
         /// <param name="transmittanceSchedule">Identifier of a schedule to set the transmittance of the shade, which can vary throughout the simulation. If None, the shade will be completely opaque..</param>
         public ShadeEnergyPropertiesAbridged
         (
-           // Required parameters
+            // Required parameters
            string construction= default, string transmittanceSchedule= default// Optional parameters
         ) : base()// BaseClass
         {

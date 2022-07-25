@@ -39,7 +39,7 @@ namespace HoneybeeSchema
         /// <param name="operableModifier">A modifier object for apertures with an Outdoors boundary condition and a True is_operable property..</param>
         public ApertureModifierSet
         (
-           // Required parameters
+            // Required parameters
            AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> windowModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> interiorModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> skylightModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> operableModifier= default// Optional parameters
         ) : base()// BaseClass
         {

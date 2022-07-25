@@ -39,7 +39,7 @@ namespace HoneybeeSchema
         /// <param name="operableModifier">Identifier of modifier object for apertures with an Outdoors boundary condition and a True is_operable property..</param>
         public ApertureModifierSetAbridged
         (
-           // Required parameters
+            // Required parameters
            string windowModifier= default, string interiorModifier= default, string skylightModifier= default, string operableModifier= default// Optional parameters
         ) : base()// BaseClass
         {

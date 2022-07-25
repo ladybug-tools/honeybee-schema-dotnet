@@ -42,7 +42,7 @@ namespace HoneybeeSchema
         /// <param name="twoWayThreshold">A number in kg/m3 indicating the minimum density difference above which two-way flow may occur due to stack effect, required to run an AirflowNetwork simulation. This value is required because the air density difference between two zones (which drives two-way air flow) will tend towards division by zero errors as the air density difference approaches zero. The default of 0.0001 is a typical default value used for AirflowNetwork openings. (default to 0.00010D).</param>
         public VentilationOpening
         (
-           // Required parameters
+            // Required parameters
            double fractionAreaOperable = 0.5D, double fractionHeightOperable = 1.0D, double dischargeCoefficient = 0.45D, bool windCrossVent = false, double flowCoefficientClosed = 0D, double flowExponentClosed = 0.65D, double twoWayThreshold = 0.00010D// Optional parameters
         ) : base()// BaseClass
         {

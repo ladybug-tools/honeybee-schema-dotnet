@@ -40,7 +40,7 @@ namespace HoneybeeSchema
         /// <param name="runForSizingPeriods">Boolean for whether the simulation should be run for the run periods. (default to false).</param>
         public SimulationControl
         (
-           // Required parameters
+            // Required parameters
            bool doZoneSizing = true, bool doSystemSizing = true, bool doPlantSizing = true, bool runForRunPeriods = true, bool runForSizingPeriods = false// Optional parameters
         ) : base()// BaseClass
         {

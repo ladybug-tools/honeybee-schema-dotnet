@@ -37,8 +37,8 @@ namespace HoneybeeSchema
         /// <param name="interiorModifier">Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors..</param>
         public FloorModifierSetAbridged
         (
-           // Required parameters
-            string exteriorModifier= default, string interiorModifier= default // Optional parameters
+            // Required parameters
+            string exteriorModifier= default, string interiorModifier= default// Optional parameters
         ) : base(exteriorModifier: exteriorModifier, interiorModifier: interiorModifier)// BaseClass
         {
 

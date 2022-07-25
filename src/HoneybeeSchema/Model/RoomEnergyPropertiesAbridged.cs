@@ -51,7 +51,7 @@ namespace HoneybeeSchema
         /// <param name="processLoads">An optional list of of Process objects for process loads within the room. These can represent kilns, manufacturing equipment, and various industrial processes. They can also be used to represent wood burning fireplaces or certain pieces of equipment to be separated from the other end uses..</param>
         public RoomEnergyPropertiesAbridged
         (
-           // Required parameters
+            // Required parameters
            string constructionSet= default, string programType= default, string hvac= default, string shw= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, ServiceHotWaterAbridged serviceHotWater= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default, DaylightingControl daylightingControl= default, VentilationControlAbridged windowVentControl= default, List<InternalMassAbridged> internalMasses= default, List<ProcessAbridged> processLoads= default// Optional parameters
         ) : base()// BaseClass
         {

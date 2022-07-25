@@ -37,7 +37,7 @@ namespace HoneybeeSchema
         /// <param name="radiance">radiance.</param>
         public ShadePropertiesAbridged
         (
-           // Required parameters
+            // Required parameters
            ShadeEnergyPropertiesAbridged energy= default, ShadeRadiancePropertiesAbridged radiance= default// Optional parameters
         ) : base()// BaseClass
         {

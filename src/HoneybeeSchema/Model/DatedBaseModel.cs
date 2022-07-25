@@ -36,8 +36,8 @@ namespace HoneybeeSchema
         [JsonConstructorAttribute]
         public DatedBaseModel
         (
-           // Required parameters
-           // Optional parameters
+            // Required parameters
+            // Optional parameters
         ) : base()// BaseClass
         {
 

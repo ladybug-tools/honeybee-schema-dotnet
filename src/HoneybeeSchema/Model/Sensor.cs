@@ -48,7 +48,7 @@ namespace HoneybeeSchema
         public Sensor
         (
            List<double> pos, List<double> dir// Required parameters
-           // Optional parameters
+            // Optional parameters
         ) : base()// BaseClass
         {
             // to ensure "pos" is required (not null)

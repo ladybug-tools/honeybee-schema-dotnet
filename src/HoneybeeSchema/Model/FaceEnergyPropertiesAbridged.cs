@@ -37,7 +37,7 @@ namespace HoneybeeSchema
         /// <param name="ventCrack">An optional AFNCrack to specify airflow through a surface crack used by the AirflowNetwork..</param>
         public FaceEnergyPropertiesAbridged
         (
-           // Required parameters
+            // Required parameters
            string construction= default, AFNCrack ventCrack= default// Optional parameters
         ) : base()// BaseClass
         {

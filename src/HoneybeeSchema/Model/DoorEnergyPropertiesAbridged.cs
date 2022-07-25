@@ -37,7 +37,7 @@ namespace HoneybeeSchema
         /// <param name="ventOpening">An optional VentilationOpening to specify the operable portion of the Door..</param>
         public DoorEnergyPropertiesAbridged
         (
-           // Required parameters
+            // Required parameters
            string construction= default, VentilationOpening ventOpening= default// Optional parameters
         ) : base()// BaseClass
         {

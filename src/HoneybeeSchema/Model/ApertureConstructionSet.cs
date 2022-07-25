@@ -39,7 +39,7 @@ namespace HoneybeeSchema
         /// <param name="operableConstruction">A WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property..</param>
         public ApertureConstructionSet
         (
-           // Required parameters
+            // Required parameters
            AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> interiorConstruction= default, AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> windowConstruction= default, AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> skylightConstruction= default, AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> operableConstruction= default// Optional parameters
         ) : base()// BaseClass
         {
