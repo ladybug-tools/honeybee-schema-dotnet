@@ -60,6 +60,16 @@ namespace HoneybeeSchema.Test
             Assert.IsInstanceOf(typeof(Door), instance);
         }
 
+        [Test]
+        public void FaceTest()
+        {
+            var j = @"
+{'display_name': 'Walls_Rv', 'identifier': 'Walls_Rv_6bd0662f_0', 'geometry': {'type': 'Face3D', 'plane': {'o': [-2.0, -0.5, 0.0], 'n': [0.0, -1.0, 0.0], 'type': 'Plane', 'x': [1.0, 0.0, 0.0]}, 'boundary': [[-2.0, -0.5, 0.25], [-2.0, -0.5, 0.0], [2.0, -0.5, 0.0], [2.0, -0.5, 0.25]]}, 'face_type': 'Wall', 'boundary_condition': {'view_factor': {'type': 'Autocalculate'}, 'sun_exposure': true, 'wind_exposure': true, 'type': 'Outdoors'}, 'type': 'Face', 'properties': {'radiance': {'type': 'FaceRadianceProperties'}, 'type': 'FaceProperties'}}
+";
+            var face = Face.FromJson(j);
+            Assert.IsNotNull(face);
+        }
+
         /// <summary>
         /// Test an instance of Door
         /// </summary>
