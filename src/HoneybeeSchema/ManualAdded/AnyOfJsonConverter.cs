@@ -59,7 +59,12 @@ namespace HoneybeeSchema
                 inputType = typeof(double);
                 data = double.Parse(data.ToString());
             }
-         
+            else if (data is long lo && allValidTypes.Contains(typeof(int)))
+            {
+                data = (int)lo;
+                inputType = typeof(int);
+            }
+
             if (validTypes.ToList().Contains(inputType))
             {
                 var obj = Activator.CreateInstance(objectType, new object[] {data});
