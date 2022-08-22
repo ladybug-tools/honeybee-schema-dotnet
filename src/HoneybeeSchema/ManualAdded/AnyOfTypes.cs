@@ -8,7 +8,7 @@ namespace HoneybeeSchema
 
     public class AnyOf
     {
-       
+
         public Object Obj { get; set; }
         internal virtual List<Type> AllValidTypes => new List<Type>() { typeof(object) };
 
@@ -32,11 +32,23 @@ namespace HoneybeeSchema
 
         internal void CheckType(object Object)
         {
+            if (Object == null)
+                return;
+
             var objType = Object.GetType();
+
+            // check if there is interface
+            var interfaceTypes = AllValidTypes.Where(_ => _.IsInterface).FirstOrDefault(_ => _.IsAssignableFrom(objType));
+            if (interfaceTypes != null)
+            {
+                this.Obj = Object;
+                return;
+            }
+
             var isValidType = this.AllValidTypes.Contains(objType);
             if (!isValidType)
             {
-                throw new ArgumentException("Not acceptable type!");
+                throw new ArgumentException($"Type {objType} doesn't match any of [{string.Join(", ", AllValidTypes.Select(_ => _.ToString()))}]");
             }
             else
             {
@@ -59,6 +71,8 @@ namespace HoneybeeSchema
         {
             if (ReferenceEquals(this, null))
                 return ReferenceEquals(obj, null) ? true : false;
+            if (obj is AnyOf anotherAnyOf)
+                return this.Obj.Equals(anotherAnyOf.Obj);
             return this.Obj.Equals(obj);
         }
         public override int GetHashCode()
@@ -71,15 +85,16 @@ namespace HoneybeeSchema
             return this.Obj.GetType();
         }
 
-        public static bool operator == (AnyOf obj, object anotherObj) 
+        public static bool operator ==(AnyOf obj, object anotherObj)
         {
             if (ReferenceEquals(obj, null))
                 return ReferenceEquals(anotherObj, null) ? true : false;
 
             return obj.Obj.Equals(anotherObj);
+            return obj.Equals(anotherObj);
         }
 
-        public static bool operator != (AnyOf obj, object anotherObj)
+        public static bool operator !=(AnyOf obj, object anotherObj)
         {
             return !(obj == anotherObj);
         }
@@ -109,11 +124,11 @@ namespace HoneybeeSchema
     }
 
 
-    public class AnyOf<T, K>: AnyOf
+    public class AnyOf<T, K> : AnyOf
     {
         internal override List<Type> AllValidTypes => new List<Type>() { typeof(T), typeof(K) };
 
-        public AnyOf(object obj):base(obj)
+        public AnyOf(object obj) : base(obj)
         {
         }
 
@@ -155,7 +170,7 @@ namespace HoneybeeSchema
 
     public class AnyOf<T, K, Q, W, E> : AnyOf
     {
-        internal override List<Type> AllValidTypes => new List<Type>() { typeof(T), typeof(K), typeof(Q), typeof(W) , typeof(E)};
+        internal override List<Type> AllValidTypes => new List<Type>() { typeof(T), typeof(K), typeof(Q), typeof(W), typeof(E) };
 
         public AnyOf(object obj) : base(obj)
         {
@@ -172,7 +187,7 @@ namespace HoneybeeSchema
 
     public class AnyOf<T, K, Q, W, E, R> : AnyOf
     {
-        internal override List<Type> AllValidTypes => new List<Type>() { typeof(T), typeof(K), typeof(Q), typeof(W) , typeof(E) , typeof(R)};
+        internal override List<Type> AllValidTypes => new List<Type>() { typeof(T), typeof(K), typeof(Q), typeof(W), typeof(E), typeof(R) };
 
         public AnyOf(object obj) : base(obj)
         {
@@ -188,7 +203,7 @@ namespace HoneybeeSchema
 
     public class AnyOf<T, K, Q, W, E, R, Y> : AnyOf
     {
-        internal override List<Type> AllValidTypes => new List<Type>() { 
+        internal override List<Type> AllValidTypes => new List<Type>() {
             typeof(T), typeof(K), typeof(Q), typeof(W) , typeof(E) , typeof(R), typeof(Y)
         };
 
@@ -207,7 +222,7 @@ namespace HoneybeeSchema
 
     public class AnyOf<T, K, Q, W, E, R, Y, U> : AnyOf
     {
-        internal override List<Type> AllValidTypes => new List<Type>() { 
+        internal override List<Type> AllValidTypes => new List<Type>() {
             typeof(T), typeof(K), typeof(Q), typeof(W), typeof(E), typeof(R), typeof(Y), typeof(U)
         };
 
@@ -229,7 +244,7 @@ namespace HoneybeeSchema
 
     public class AnyOf<T, K, Q, W, E, R, Y, U, I> : AnyOf
     {
-        internal override List<Type> AllValidTypes => new List<Type>() { 
+        internal override List<Type> AllValidTypes => new List<Type>() {
             typeof(T), typeof(K), typeof(Q), typeof(W), typeof(E), typeof(R), typeof(Y), typeof(U), typeof(I)
         };
 
@@ -252,7 +267,7 @@ namespace HoneybeeSchema
 
     public class AnyOf<T, K, Q, W, E, R, Y, U, I, O> : AnyOf
     {
-        internal override List<Type> AllValidTypes => new List<Type>() { 
+        internal override List<Type> AllValidTypes => new List<Type>() {
             typeof(T), typeof(K), typeof(Q), typeof(W), typeof(E), typeof(R), typeof(Y), typeof(U), typeof(I), typeof(O)
         };
 
@@ -275,7 +290,7 @@ namespace HoneybeeSchema
 
     public class AnyOf<T, K, Q, W, E, R, Y, U, I, O, P> : AnyOf
     {
-        internal override List<Type> AllValidTypes => new List<Type>() { 
+        internal override List<Type> AllValidTypes => new List<Type>() {
             typeof(T), typeof(K), typeof(Q), typeof(W), typeof(E), typeof(R), typeof(Y), typeof(U), typeof(I), typeof(O), typeof(P)
         };
 
@@ -299,7 +314,7 @@ namespace HoneybeeSchema
 
     public class AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A> : AnyOf
     {
-        internal override List<Type> AllValidTypes => new List<Type>() { 
+        internal override List<Type> AllValidTypes => new List<Type>() {
             typeof(T), typeof(K), typeof(Q), typeof(W), typeof(E), typeof(R), typeof(Y), typeof(U), typeof(I), typeof(O), typeof(P), typeof(A)
         };
 
@@ -327,7 +342,7 @@ namespace HoneybeeSchema
             typeof(T), typeof(K), typeof(Q), typeof(W), typeof(E), typeof(R), typeof(Y), typeof(U), typeof(I), typeof(O), typeof(P), typeof(A), typeof(B)
         };
 
-        public AnyOf(object obj) : base(obj){}
+        public AnyOf(object obj) : base(obj) { }
         public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B> b) => b.ToString();
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(b);
@@ -422,7 +437,7 @@ namespace HoneybeeSchema
     public class AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G> : AnyOf
     {
         internal override List<Type> AllValidTypes => new List<Type>() {
-            typeof(T), typeof(K), typeof(Q), typeof(W), typeof(E), typeof(R), typeof(Y), typeof(U), typeof(I), typeof(O), 
+            typeof(T), typeof(K), typeof(Q), typeof(W), typeof(E), typeof(R), typeof(Y), typeof(U), typeof(I), typeof(O),
             typeof(P), typeof(A), typeof(B), typeof(C), typeof(D), typeof(F), typeof(G)
         };
 
@@ -554,10 +569,10 @@ namespace HoneybeeSchema
 
         public static IEnumerable<T1> OfType<T1>(this IEnumerable<AnyOf> Source)
         {
-            return Source.Select(_ => _.Obj).OfType<T1>(); 
+            return Source.Select(_ => _.Obj).OfType<T1>();
         }
 
-        public static IEnumerable<T> Where<T>(this IEnumerable<T> Source, Func<object, bool> predicate) where T: AnyOf
+        public static IEnumerable<T> Where<T>(this IEnumerable<T> Source, Func<object, bool> predicate) where T : AnyOf
         {
             return Source.Where(_ => predicate(_.Obj));
         }
