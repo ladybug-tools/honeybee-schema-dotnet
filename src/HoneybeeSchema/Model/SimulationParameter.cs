@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         /// <param name="terrainType">Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms..</param>
         public SimulationParameter
         (
-           // Required parameters
+            // Required parameters
            SimulationOutput output= default, RunPeriod runPeriod= default, int timestep = 6, SimulationControl simulationControl= default, ShadowCalculation shadowCalculation= default, SizingParameter sizingParameter= default, double northAngle = 0D, TerrianTypes terrainType= TerrianTypes.City// Optional parameters
         ) : base()// BaseClass
         {
