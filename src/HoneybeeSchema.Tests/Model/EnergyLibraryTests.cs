@@ -61,6 +61,33 @@ namespace HoneybeeSchema.Test
 
         }
 
+
+        [Test]
+        public void WindowConstructionThermalTest()
+        {
+            var constrs = Helper.EnergyLibrary.DefaultConstructions;
+
+            var apts = constrs.OfType<WindowConstructionAbridged>();
+            Assert.IsTrue(apts.Any());
+
+            var cons = apts.FirstOrDefault().DuplicateWindowConstructionAbridged();
+            cons.Materials.Add("Generic Window Air Gap");
+            var thermalV = cons.CalThermalValues(ModelEnergyProperties.Default);
+            Assert.AreEqual(thermalV, false);
+            Assert.AreEqual(cons.RValue, -999);
+
+            cons.Materials.Add("Generic Clear Glass");
+            thermalV = cons.CalThermalValues(ModelEnergyProperties.Default);
+            Assert.AreEqual(thermalV, true);
+            Assert.AreNotEqual(cons.RValue, -999);
+
+            cons.Materials.Add("Generic Window Air Gap");
+            thermalV = cons.CalThermalValues(ModelEnergyProperties.Default);
+            Assert.AreEqual(thermalV, false);
+            Assert.AreEqual(cons.RValue, -999);
+
+        }
+
         [Test]
         public void MaterialsTest()
         {

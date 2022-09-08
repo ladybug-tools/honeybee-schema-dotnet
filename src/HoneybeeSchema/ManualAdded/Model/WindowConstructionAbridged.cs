@@ -36,7 +36,7 @@ namespace HoneybeeSchema
             this.SHGC = shgc;
             this.SolarTransmittance = solarT;
             this.VisibleTransmittance = vt;
-            return true;
+            return rv != -999;
 
         }
 
