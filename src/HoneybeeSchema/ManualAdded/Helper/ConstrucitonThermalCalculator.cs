@@ -38,11 +38,11 @@ namespace HoneybeeSchema
 
             // ensure all gas type materials are at even layer
             var groups = materials.Select((item, index) => new { Item = item, Index = index }).GroupBy(x => x.Index % 2 == 0);
-            var oddLayers = groups.FirstOrDefault(_ => _.Key == false).Select(_ => _.Item);
-            var evenLayers = groups.FirstOrDefault(_ => _.Key == true).Select(_ => _.Item);
+            var oddLayers = groups.FirstOrDefault(_ => _.Key == false)?.Select(_ => _.Item);
+            var evenLayers = groups.FirstOrDefault(_ => _.Key == true)?.Select(_ => _.Item);
 
-            var isAllOddLayersGas = oddLayers.All(_ => _ is Energy.IWindowMaterialGas);
-            var isAllEvenLayerSolid = evenLayers.All(_ => !(_ is Energy.IWindowMaterialGas));
+            var isAllOddLayersGas = (oddLayers?.All(_ => _ is Energy.IWindowMaterialGas)).GetValueOrDefault(true);
+            var isAllEvenLayerSolid = (evenLayers?.All(_ => !(_ is Energy.IWindowMaterialGas))).GetValueOrDefault(true);
             var isFirstLayerGas = materials.FirstOrDefault() is Energy.IWindowMaterialGas;
             var isLastLayerGas = materials.LastOrDefault() is Energy.IWindowMaterialGas;
 
