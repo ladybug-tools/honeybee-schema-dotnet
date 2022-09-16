@@ -58,7 +58,7 @@ namespace HoneybeeSchema
         public BSDF
         (
             string identifier, string bsdfData, // Required parameters
-            string displayName= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> dependencies= default, List<double> upOrientation= default, double thickness = 0D, string functionFile = ".", , string transform= default, List<double> frontDiffuseReflectance= default, List<double> backDiffuseReflectance= default, List<double> diffuseTransmittance= default // Optional parameters
+            string displayName= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> dependencies= default, List<double> upOrientation= default, double thickness = 0D, string functionFile = ".", string transform= default, List<double> frontDiffuseReflectance= default, List<double> backDiffuseReflectance= default, List<double> diffuseTransmittance= default // Optional parameters
         ) : base(identifier: identifier, displayName: displayName)// BaseClass
         {
             // to ensure "bsdfData" is required (not null)
