@@ -62,7 +62,7 @@ namespace HoneybeeSchema
         public ProcessAbridged
         (
             string identifier, double watts, string schedule, FuelTypes fuelType, // Required parameters
-            string displayName= default, Object userData= default, string endUseCategory = "Process", , double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D// Optional parameters
+            string displayName= default, Object userData= default, string endUseCategory = "Process", double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
         {
             this.Watts = watts;
