@@ -51,7 +51,7 @@ namespace HoneybeeSchema
         public ValidationReport
         (
            string honeybeeCore, string honeybeeSchema, bool valid, // Required parameters
-           string fatalError = "", List<ValidationError> errors= default// Optional parameters
+           string fatalError = "", , List<ValidationError> errors= default// Optional parameters
         )// BaseClass
         {
             // to ensure "honeybeeCore" is required (not null)
