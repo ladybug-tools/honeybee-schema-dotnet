@@ -104,9 +104,9 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Sensor:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Pos: ").Append(Pos).Append("\n");
-            sb.Append("  Dir: ").Append(Dir).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Pos: ").Append(this.Pos).Append("\n");
+            sb.Append("  Dir: ").Append(this.Dir).Append("\n");
             return sb.ToString();
         }
   
@@ -173,14 +173,12 @@ namespace HoneybeeSchema
                 (
                     this.Pos == input.Pos ||
                     Extension.AllEquals(this.Pos, input.Pos)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Dir == input.Dir ||
                     Extension.AllEquals(this.Dir, input.Dir)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                ) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

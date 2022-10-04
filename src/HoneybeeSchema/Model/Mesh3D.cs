@@ -112,10 +112,10 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Mesh3D:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Vertices: ").Append(Vertices).Append("\n");
-            sb.Append("  Faces: ").Append(Faces).Append("\n");
-            sb.Append("  Colors: ").Append(Colors).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Vertices: ").Append(this.Vertices).Append("\n");
+            sb.Append("  Faces: ").Append(this.Faces).Append("\n");
+            sb.Append("  Colors: ").Append(this.Colors).Append("\n");
             return sb.ToString();
         }
   
@@ -182,14 +182,12 @@ namespace HoneybeeSchema
                 (
                     this.Vertices == input.Vertices ||
                     Extension.AllEquals(this.Vertices, input.Vertices)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Faces == input.Faces ||
                     Extension.AllEquals(this.Faces, input.Faces)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
+                ) && 
+                    Extension.Equals(this.Type, input.Type) && 
                 (
                     this.Colors == input.Colors ||
                     Extension.AllEquals(this.Colors, input.Colors)

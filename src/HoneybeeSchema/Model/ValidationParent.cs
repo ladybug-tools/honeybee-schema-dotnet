@@ -111,10 +111,10 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ValidationParent:\n");
-            sb.Append("  ParentType: ").Append(ParentType).Append("\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  ParentType: ").Append(this.ParentType).Append("\n");
+            sb.Append("  Id: ").Append(this.Id).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Name: ").Append(this.Name).Append("\n");
             return sb.ToString();
         }
   
@@ -169,19 +169,11 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    Extension.Equals(this.ParentType, input.ParentType)
-                ) && 
-                (
-                    Extension.Equals(this.Id, input.Id)
-                ) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && 
-                (
-                    Extension.Equals(this.Name, input.Name)
-                );
+            return base.Equals(input) && 
+                    Extension.Equals(this.ParentType, input.ParentType) && 
+                    Extension.Equals(this.Id, input.Id) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.Name, input.Name);
         }
 
         /// <summary>

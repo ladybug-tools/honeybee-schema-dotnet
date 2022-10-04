@@ -77,7 +77,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, Object userData= default, Roughness roughness= Roughness.MediumRough, double thickness = 0.1D, double conductivity = 0.35D, double density = 1100D, double specificHeat = 1200D, double soilThermalAbsorptance = 0.9D, double soilSolarAbsorptance = 0.7D, double soilVisibleAbsorptance = 0.7D, double plantHeight = 0.2D, double leafAreaIndex = 1.0D, double leafReflectivity = 0.22D, double leafEmissivity = 0.95D, double minStomatalResist = 180D, double satVolMoistCont = 0.3D, double residualVolMoistCont = 0.01D, double initVolMoistCont = 0.01D, MoistureDiffusionModel moistDiffModel= MoistureDiffusionModel.Simple// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.Roughness = roughness;
             this.Thickness = thickness;
@@ -223,27 +223,27 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("EnergyMaterialVegetation:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  Roughness: ").Append(Roughness).Append("\n");
-            sb.Append("  Thickness: ").Append(Thickness).Append("\n");
-            sb.Append("  Conductivity: ").Append(Conductivity).Append("\n");
-            sb.Append("  Density: ").Append(Density).Append("\n");
-            sb.Append("  SpecificHeat: ").Append(SpecificHeat).Append("\n");
-            sb.Append("  SoilThermalAbsorptance: ").Append(SoilThermalAbsorptance).Append("\n");
-            sb.Append("  SoilSolarAbsorptance: ").Append(SoilSolarAbsorptance).Append("\n");
-            sb.Append("  SoilVisibleAbsorptance: ").Append(SoilVisibleAbsorptance).Append("\n");
-            sb.Append("  PlantHeight: ").Append(PlantHeight).Append("\n");
-            sb.Append("  LeafAreaIndex: ").Append(LeafAreaIndex).Append("\n");
-            sb.Append("  LeafReflectivity: ").Append(LeafReflectivity).Append("\n");
-            sb.Append("  LeafEmissivity: ").Append(LeafEmissivity).Append("\n");
-            sb.Append("  MinStomatalResist: ").Append(MinStomatalResist).Append("\n");
-            sb.Append("  SatVolMoistCont: ").Append(SatVolMoistCont).Append("\n");
-            sb.Append("  ResidualVolMoistCont: ").Append(ResidualVolMoistCont).Append("\n");
-            sb.Append("  InitVolMoistCont: ").Append(InitVolMoistCont).Append("\n");
-            sb.Append("  MoistDiffModel: ").Append(MoistDiffModel).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  Roughness: ").Append(this.Roughness).Append("\n");
+            sb.Append("  Thickness: ").Append(this.Thickness).Append("\n");
+            sb.Append("  Conductivity: ").Append(this.Conductivity).Append("\n");
+            sb.Append("  Density: ").Append(this.Density).Append("\n");
+            sb.Append("  SpecificHeat: ").Append(this.SpecificHeat).Append("\n");
+            sb.Append("  SoilThermalAbsorptance: ").Append(this.SoilThermalAbsorptance).Append("\n");
+            sb.Append("  SoilSolarAbsorptance: ").Append(this.SoilSolarAbsorptance).Append("\n");
+            sb.Append("  SoilVisibleAbsorptance: ").Append(this.SoilVisibleAbsorptance).Append("\n");
+            sb.Append("  PlantHeight: ").Append(this.PlantHeight).Append("\n");
+            sb.Append("  LeafAreaIndex: ").Append(this.LeafAreaIndex).Append("\n");
+            sb.Append("  LeafReflectivity: ").Append(this.LeafReflectivity).Append("\n");
+            sb.Append("  LeafEmissivity: ").Append(this.LeafEmissivity).Append("\n");
+            sb.Append("  MinStomatalResist: ").Append(this.MinStomatalResist).Append("\n");
+            sb.Append("  SatVolMoistCont: ").Append(this.SatVolMoistCont).Append("\n");
+            sb.Append("  ResidualVolMoistCont: ").Append(this.ResidualVolMoistCont).Append("\n");
+            sb.Append("  InitVolMoistCont: ").Append(this.InitVolMoistCont).Append("\n");
+            sb.Append("  MoistDiffModel: ").Append(this.MoistDiffModel).Append("\n");
             return sb.ToString();
         }
   
@@ -307,60 +307,24 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Roughness, input.Roughness)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Thickness, input.Thickness)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Conductivity, input.Conductivity)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Density, input.Density)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SpecificHeat, input.SpecificHeat)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SoilThermalAbsorptance, input.SoilThermalAbsorptance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SoilSolarAbsorptance, input.SoilSolarAbsorptance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SoilVisibleAbsorptance, input.SoilVisibleAbsorptance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.PlantHeight, input.PlantHeight)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.LeafAreaIndex, input.LeafAreaIndex)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.LeafReflectivity, input.LeafReflectivity)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.LeafEmissivity, input.LeafEmissivity)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.MinStomatalResist, input.MinStomatalResist)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SatVolMoistCont, input.SatVolMoistCont)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ResidualVolMoistCont, input.ResidualVolMoistCont)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.InitVolMoistCont, input.InitVolMoistCont)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.MoistDiffModel, input.MoistDiffModel)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.Roughness, input.Roughness) && 
+                    Extension.Equals(this.Thickness, input.Thickness) && 
+                    Extension.Equals(this.Conductivity, input.Conductivity) && 
+                    Extension.Equals(this.Density, input.Density) && 
+                    Extension.Equals(this.SpecificHeat, input.SpecificHeat) && 
+                    Extension.Equals(this.SoilThermalAbsorptance, input.SoilThermalAbsorptance) && 
+                    Extension.Equals(this.SoilSolarAbsorptance, input.SoilSolarAbsorptance) && 
+                    Extension.Equals(this.SoilVisibleAbsorptance, input.SoilVisibleAbsorptance) && 
+                    Extension.Equals(this.PlantHeight, input.PlantHeight) && 
+                    Extension.Equals(this.LeafAreaIndex, input.LeafAreaIndex) && 
+                    Extension.Equals(this.LeafReflectivity, input.LeafReflectivity) && 
+                    Extension.Equals(this.LeafEmissivity, input.LeafEmissivity) && 
+                    Extension.Equals(this.MinStomatalResist, input.MinStomatalResist) && 
+                    Extension.Equals(this.SatVolMoistCont, input.SatVolMoistCont) && 
+                    Extension.Equals(this.ResidualVolMoistCont, input.ResidualVolMoistCont) && 
+                    Extension.Equals(this.InitVolMoistCont, input.InitVolMoistCont) && 
+                    Extension.Equals(this.MoistDiffModel, input.MoistDiffModel);
         }
 
         /// <summary>

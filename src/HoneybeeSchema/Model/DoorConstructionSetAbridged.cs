@@ -116,12 +116,12 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("DoorConstructionSetAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  InteriorConstruction: ").Append(InteriorConstruction).Append("\n");
-            sb.Append("  ExteriorConstruction: ").Append(ExteriorConstruction).Append("\n");
-            sb.Append("  OverheadConstruction: ").Append(OverheadConstruction).Append("\n");
-            sb.Append("  ExteriorGlassConstruction: ").Append(ExteriorGlassConstruction).Append("\n");
-            sb.Append("  InteriorGlassConstruction: ").Append(InteriorGlassConstruction).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  InteriorConstruction: ").Append(this.InteriorConstruction).Append("\n");
+            sb.Append("  ExteriorConstruction: ").Append(this.ExteriorConstruction).Append("\n");
+            sb.Append("  OverheadConstruction: ").Append(this.OverheadConstruction).Append("\n");
+            sb.Append("  ExteriorGlassConstruction: ").Append(this.ExteriorGlassConstruction).Append("\n");
+            sb.Append("  InteriorGlassConstruction: ").Append(this.InteriorGlassConstruction).Append("\n");
             return sb.ToString();
         }
   
@@ -185,24 +185,12 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.InteriorConstruction, input.InteriorConstruction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ExteriorConstruction, input.ExteriorConstruction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.OverheadConstruction, input.OverheadConstruction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ExteriorGlassConstruction, input.ExteriorGlassConstruction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.InteriorGlassConstruction, input.InteriorGlassConstruction)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.InteriorConstruction, input.InteriorConstruction) && 
+                    Extension.Equals(this.ExteriorConstruction, input.ExteriorConstruction) && 
+                    Extension.Equals(this.OverheadConstruction, input.OverheadConstruction) && 
+                    Extension.Equals(this.ExteriorGlassConstruction, input.ExteriorGlassConstruction) && 
+                    Extension.Equals(this.InteriorGlassConstruction, input.InteriorGlassConstruction);
         }
 
         /// <summary>

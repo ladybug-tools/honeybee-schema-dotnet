@@ -124,13 +124,13 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("RunPeriod:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  StartDate: ").Append(StartDate).Append("\n");
-            sb.Append("  EndDate: ").Append(EndDate).Append("\n");
-            sb.Append("  StartDayOfWeek: ").Append(StartDayOfWeek).Append("\n");
-            sb.Append("  Holidays: ").Append(Holidays).Append("\n");
-            sb.Append("  DaylightSavingTime: ").Append(DaylightSavingTime).Append("\n");
-            sb.Append("  LeapYear: ").Append(LeapYear).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  StartDate: ").Append(this.StartDate).Append("\n");
+            sb.Append("  EndDate: ").Append(this.EndDate).Append("\n");
+            sb.Append("  StartDayOfWeek: ").Append(this.StartDayOfWeek).Append("\n");
+            sb.Append("  Holidays: ").Append(this.Holidays).Append("\n");
+            sb.Append("  DaylightSavingTime: ").Append(this.DaylightSavingTime).Append("\n");
+            sb.Append("  LeapYear: ").Append(this.LeapYear).Append("\n");
             return sb.ToString();
         }
   
@@ -194,30 +194,22 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.Type, input.Type) && 
                 (
                     this.StartDate == input.StartDate ||
                     Extension.AllEquals(this.StartDate, input.StartDate)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.EndDate == input.EndDate ||
                     Extension.AllEquals(this.EndDate, input.EndDate)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.StartDayOfWeek, input.StartDayOfWeek)
-                ) && base.Equals(input) && 
+                ) && 
+                    Extension.Equals(this.StartDayOfWeek, input.StartDayOfWeek) && 
                 (
                     this.Holidays == input.Holidays ||
                     Extension.AllEquals(this.Holidays, input.Holidays)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DaylightSavingTime, input.DaylightSavingTime)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.LeapYear, input.LeapYear)
-                );
+                ) && 
+                    Extension.Equals(this.DaylightSavingTime, input.DaylightSavingTime) && 
+                    Extension.Equals(this.LeapYear, input.LeapYear);
         }
 
         /// <summary>

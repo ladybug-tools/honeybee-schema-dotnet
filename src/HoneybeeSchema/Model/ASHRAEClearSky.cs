@@ -49,8 +49,8 @@ namespace HoneybeeSchema
         public ASHRAEClearSky
         (
             List<int> date, double clearness, // Required parameters
-            bool daylightSavings = false// Optional parameters
-        ) : base(date: date, daylightSavings: daylightSavings)// BaseClass
+            bool daylightSavings = false // Optional parameters
+        ) : base(date: date, daylightSavings: daylightSavings )// BaseClass
         {
             this.Clearness = clearness;
 
@@ -96,10 +96,10 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ASHRAEClearSky:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Date: ").Append(Date).Append("\n");
-            sb.Append("  DaylightSavings: ").Append(DaylightSavings).Append("\n");
-            sb.Append("  Clearness: ").Append(Clearness).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Date: ").Append(this.Date).Append("\n");
+            sb.Append("  DaylightSavings: ").Append(this.DaylightSavings).Append("\n");
+            sb.Append("  Clearness: ").Append(this.Clearness).Append("\n");
             return sb.ToString();
         }
   
@@ -163,12 +163,8 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Clearness, input.Clearness)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                    Extension.Equals(this.Clearness, input.Clearness) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

@@ -67,7 +67,7 @@ namespace HoneybeeSchema
         (
             string identifier, List<double> position, List<double> direction, List<double> upVector, // Required parameters
             string displayName= default, string roomIdentifier= default, List<List<string>> lightPath= default, ViewType viewType= ViewType.v, double hSize = 60D, double vSize = 60D, double shift= default, double lift= default, double foreClip= default, double aftClip= default, string groupIdentifier= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, roomIdentifier: roomIdentifier, lightPath: lightPath)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, roomIdentifier: roomIdentifier, lightPath: lightPath )// BaseClass
         {
             // to ensure "position" is required (not null)
             this.Position = position ?? throw new ArgumentNullException("position is a required property for View and cannot be null");
@@ -180,22 +180,22 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("View:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  RoomIdentifier: ").Append(RoomIdentifier).Append("\n");
-            sb.Append("  LightPath: ").Append(LightPath).Append("\n");
-            sb.Append("  Position: ").Append(Position).Append("\n");
-            sb.Append("  Direction: ").Append(Direction).Append("\n");
-            sb.Append("  UpVector: ").Append(UpVector).Append("\n");
-            sb.Append("  ViewType: ").Append(ViewType).Append("\n");
-            sb.Append("  HSize: ").Append(HSize).Append("\n");
-            sb.Append("  VSize: ").Append(VSize).Append("\n");
-            sb.Append("  Shift: ").Append(Shift).Append("\n");
-            sb.Append("  Lift: ").Append(Lift).Append("\n");
-            sb.Append("  ForeClip: ").Append(ForeClip).Append("\n");
-            sb.Append("  AftClip: ").Append(AftClip).Append("\n");
-            sb.Append("  GroupIdentifier: ").Append(GroupIdentifier).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  RoomIdentifier: ").Append(this.RoomIdentifier).Append("\n");
+            sb.Append("  LightPath: ").Append(this.LightPath).Append("\n");
+            sb.Append("  Position: ").Append(this.Position).Append("\n");
+            sb.Append("  Direction: ").Append(this.Direction).Append("\n");
+            sb.Append("  UpVector: ").Append(this.UpVector).Append("\n");
+            sb.Append("  ViewType: ").Append(this.ViewType).Append("\n");
+            sb.Append("  HSize: ").Append(this.HSize).Append("\n");
+            sb.Append("  VSize: ").Append(this.VSize).Append("\n");
+            sb.Append("  Shift: ").Append(this.Shift).Append("\n");
+            sb.Append("  Lift: ").Append(this.Lift).Append("\n");
+            sb.Append("  ForeClip: ").Append(this.ForeClip).Append("\n");
+            sb.Append("  AftClip: ").Append(this.AftClip).Append("\n");
+            sb.Append("  GroupIdentifier: ").Append(this.GroupIdentifier).Append("\n");
             return sb.ToString();
         }
   
@@ -262,42 +262,24 @@ namespace HoneybeeSchema
                 (
                     this.Position == input.Position ||
                     Extension.AllEquals(this.Position, input.Position)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Direction == input.Direction ||
                     Extension.AllEquals(this.Direction, input.Direction)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.UpVector == input.UpVector ||
                     Extension.AllEquals(this.UpVector, input.UpVector)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ViewType, input.ViewType)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.HSize, input.HSize)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.VSize, input.VSize)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Shift, input.Shift)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Lift, input.Lift)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ForeClip, input.ForeClip)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.AftClip, input.AftClip)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.GroupIdentifier, input.GroupIdentifier)
-                );
+                ) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.ViewType, input.ViewType) && 
+                    Extension.Equals(this.HSize, input.HSize) && 
+                    Extension.Equals(this.VSize, input.VSize) && 
+                    Extension.Equals(this.Shift, input.Shift) && 
+                    Extension.Equals(this.Lift, input.Lift) && 
+                    Extension.Equals(this.ForeClip, input.ForeClip) && 
+                    Extension.Equals(this.AftClip, input.AftClip) && 
+                    Extension.Equals(this.GroupIdentifier, input.GroupIdentifier);
         }
 
         /// <summary>

@@ -55,7 +55,7 @@ namespace HoneybeeSchema
         (
             string identifier, List<Sensor> sensors, // Required parameters
             string displayName= default, string roomIdentifier= default, List<List<string>> lightPath= default, Mesh3D mesh= default, List<Face3D> baseGeometry= default, string groupIdentifier= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, roomIdentifier: roomIdentifier, lightPath: lightPath)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, roomIdentifier: roomIdentifier, lightPath: lightPath )// BaseClass
         {
             // to ensure "sensors" is required (not null)
             this.Sensors = sensors ?? throw new ArgumentNullException("sensors is a required property for SensorGrid and cannot be null");
@@ -123,15 +123,15 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("SensorGrid:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  RoomIdentifier: ").Append(RoomIdentifier).Append("\n");
-            sb.Append("  LightPath: ").Append(LightPath).Append("\n");
-            sb.Append("  Sensors: ").Append(Sensors).Append("\n");
-            sb.Append("  Mesh: ").Append(Mesh).Append("\n");
-            sb.Append("  BaseGeometry: ").Append(BaseGeometry).Append("\n");
-            sb.Append("  GroupIdentifier: ").Append(GroupIdentifier).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  RoomIdentifier: ").Append(this.RoomIdentifier).Append("\n");
+            sb.Append("  LightPath: ").Append(this.LightPath).Append("\n");
+            sb.Append("  Sensors: ").Append(this.Sensors).Append("\n");
+            sb.Append("  Mesh: ").Append(this.Mesh).Append("\n");
+            sb.Append("  BaseGeometry: ").Append(this.BaseGeometry).Append("\n");
+            sb.Append("  GroupIdentifier: ").Append(this.GroupIdentifier).Append("\n");
             return sb.ToString();
         }
   
@@ -198,20 +198,14 @@ namespace HoneybeeSchema
                 (
                     this.Sensors == input.Sensors ||
                     Extension.AllEquals(this.Sensors, input.Sensors)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Mesh, input.Mesh)
-                ) && base.Equals(input) && 
+                ) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.Mesh, input.Mesh) && 
                 (
                     this.BaseGeometry == input.BaseGeometry ||
                     Extension.AllEquals(this.BaseGeometry, input.BaseGeometry)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.GroupIdentifier, input.GroupIdentifier)
-                );
+                ) && 
+                    Extension.Equals(this.GroupIdentifier, input.GroupIdentifier);
         }
 
         /// <summary>

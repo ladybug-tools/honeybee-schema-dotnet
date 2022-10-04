@@ -132,14 +132,14 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("VentilationSimulationControl:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  VentControlType: ").Append(VentControlType).Append("\n");
-            sb.Append("  ReferenceTemperature: ").Append(ReferenceTemperature).Append("\n");
-            sb.Append("  ReferencePressure: ").Append(ReferencePressure).Append("\n");
-            sb.Append("  ReferenceHumidityRatio: ").Append(ReferenceHumidityRatio).Append("\n");
-            sb.Append("  BuildingType: ").Append(BuildingType).Append("\n");
-            sb.Append("  LongAxisAngle: ").Append(LongAxisAngle).Append("\n");
-            sb.Append("  AspectRatio: ").Append(AspectRatio).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  VentControlType: ").Append(this.VentControlType).Append("\n");
+            sb.Append("  ReferenceTemperature: ").Append(this.ReferenceTemperature).Append("\n");
+            sb.Append("  ReferencePressure: ").Append(this.ReferencePressure).Append("\n");
+            sb.Append("  ReferenceHumidityRatio: ").Append(this.ReferenceHumidityRatio).Append("\n");
+            sb.Append("  BuildingType: ").Append(this.BuildingType).Append("\n");
+            sb.Append("  LongAxisAngle: ").Append(this.LongAxisAngle).Append("\n");
+            sb.Append("  AspectRatio: ").Append(this.AspectRatio).Append("\n");
             return sb.ToString();
         }
   
@@ -203,30 +203,14 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.VentControlType, input.VentControlType)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ReferenceTemperature, input.ReferenceTemperature)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ReferencePressure, input.ReferencePressure)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ReferenceHumidityRatio, input.ReferenceHumidityRatio)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.BuildingType, input.BuildingType)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.LongAxisAngle, input.LongAxisAngle)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.AspectRatio, input.AspectRatio)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.VentControlType, input.VentControlType) && 
+                    Extension.Equals(this.ReferenceTemperature, input.ReferenceTemperature) && 
+                    Extension.Equals(this.ReferencePressure, input.ReferencePressure) && 
+                    Extension.Equals(this.ReferenceHumidityRatio, input.ReferenceHumidityRatio) && 
+                    Extension.Equals(this.BuildingType, input.BuildingType) && 
+                    Extension.Equals(this.LongAxisAngle, input.LongAxisAngle) && 
+                    Extension.Equals(this.AspectRatio, input.AspectRatio);
         }
 
         /// <summary>

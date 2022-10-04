@@ -125,12 +125,12 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("HumidityCondition:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  HumidityType: ").Append(HumidityType).Append("\n");
-            sb.Append("  HumidityValue: ").Append(HumidityValue).Append("\n");
-            sb.Append("  BarometricPressure: ").Append(BarometricPressure).Append("\n");
-            sb.Append("  Rain: ").Append(Rain).Append("\n");
-            sb.Append("  SnowOnGround: ").Append(SnowOnGround).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  HumidityType: ").Append(this.HumidityType).Append("\n");
+            sb.Append("  HumidityValue: ").Append(this.HumidityValue).Append("\n");
+            sb.Append("  BarometricPressure: ").Append(this.BarometricPressure).Append("\n");
+            sb.Append("  Rain: ").Append(this.Rain).Append("\n");
+            sb.Append("  SnowOnGround: ").Append(this.SnowOnGround).Append("\n");
             return sb.ToString();
         }
   
@@ -194,24 +194,12 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.HumidityType, input.HumidityType)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.HumidityValue, input.HumidityValue)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.BarometricPressure, input.BarometricPressure)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Rain, input.Rain)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SnowOnGround, input.SnowOnGround)
-                );
+                    Extension.Equals(this.HumidityType, input.HumidityType) && 
+                    Extension.Equals(this.HumidityValue, input.HumidityValue) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.BarometricPressure, input.BarometricPressure) && 
+                    Extension.Equals(this.Rain, input.Rain) && 
+                    Extension.Equals(this.SnowOnGround, input.SnowOnGround);
         }
 
         /// <summary>

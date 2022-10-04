@@ -39,8 +39,8 @@ namespace HoneybeeSchema
         public WallConstructionSetAbridged
         (
             // Required parameters
-            string interiorConstruction= default, string exteriorConstruction= default, string groundConstruction= default// Optional parameters
-        ) : base(interiorConstruction: interiorConstruction, exteriorConstruction: exteriorConstruction, groundConstruction: groundConstruction)// BaseClass
+            string interiorConstruction= default, string exteriorConstruction= default, string groundConstruction= default // Optional parameters
+        ) : base(interiorConstruction: interiorConstruction, exteriorConstruction: exteriorConstruction, groundConstruction: groundConstruction )// BaseClass
         {
 
             // Set non-required readonly properties with defaultValue
@@ -79,10 +79,10 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("WallConstructionSetAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  InteriorConstruction: ").Append(InteriorConstruction).Append("\n");
-            sb.Append("  ExteriorConstruction: ").Append(ExteriorConstruction).Append("\n");
-            sb.Append("  GroundConstruction: ").Append(GroundConstruction).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  InteriorConstruction: ").Append(this.InteriorConstruction).Append("\n");
+            sb.Append("  ExteriorConstruction: ").Append(this.ExteriorConstruction).Append("\n");
+            sb.Append("  GroundConstruction: ").Append(this.GroundConstruction).Append("\n");
             return sb.ToString();
         }
   
@@ -146,9 +146,7 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

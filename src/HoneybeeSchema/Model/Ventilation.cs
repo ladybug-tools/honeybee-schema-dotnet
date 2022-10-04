@@ -55,7 +55,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, Object userData= default, double flowPerPerson = 0D, double flowPerArea = 0D, double airChangesPerHour = 0D, double flowPerZone = 0D, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.FlowPerPerson = flowPerPerson;
             this.FlowPerArea = flowPerArea;
@@ -129,15 +129,15 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Ventilation:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  FlowPerPerson: ").Append(FlowPerPerson).Append("\n");
-            sb.Append("  FlowPerArea: ").Append(FlowPerArea).Append("\n");
-            sb.Append("  AirChangesPerHour: ").Append(AirChangesPerHour).Append("\n");
-            sb.Append("  FlowPerZone: ").Append(FlowPerZone).Append("\n");
-            sb.Append("  Schedule: ").Append(Schedule).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  FlowPerPerson: ").Append(this.FlowPerPerson).Append("\n");
+            sb.Append("  FlowPerArea: ").Append(this.FlowPerArea).Append("\n");
+            sb.Append("  AirChangesPerHour: ").Append(this.AirChangesPerHour).Append("\n");
+            sb.Append("  FlowPerZone: ").Append(this.FlowPerZone).Append("\n");
+            sb.Append("  Schedule: ").Append(this.Schedule).Append("\n");
             return sb.ToString();
         }
   
@@ -201,24 +201,12 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.FlowPerPerson, input.FlowPerPerson)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.FlowPerArea, input.FlowPerArea)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.AirChangesPerHour, input.AirChangesPerHour)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.FlowPerZone, input.FlowPerZone)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Schedule, input.Schedule)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.FlowPerPerson, input.FlowPerPerson) && 
+                    Extension.Equals(this.FlowPerArea, input.FlowPerArea) && 
+                    Extension.Equals(this.AirChangesPerHour, input.AirChangesPerHour) && 
+                    Extension.Equals(this.FlowPerZone, input.FlowPerZone) && 
+                    Extension.Equals(this.Schedule, input.Schedule);
         }
 
         /// <summary>

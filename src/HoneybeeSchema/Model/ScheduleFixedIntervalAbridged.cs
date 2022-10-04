@@ -56,7 +56,7 @@ namespace HoneybeeSchema
         (
             string identifier, List<double> values, // Required parameters
             string displayName= default, Object userData= default, string scheduleTypeLimit= default, int timestep = 1, List<int> startDate= default, double placeholderValue = 0D, bool interpolate = false// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "values" is required (not null)
             this.Values = values ?? throw new ArgumentNullException("values is a required property for ScheduleFixedIntervalAbridged and cannot be null");
@@ -138,16 +138,16 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ScheduleFixedIntervalAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  Values: ").Append(Values).Append("\n");
-            sb.Append("  ScheduleTypeLimit: ").Append(ScheduleTypeLimit).Append("\n");
-            sb.Append("  Timestep: ").Append(Timestep).Append("\n");
-            sb.Append("  StartDate: ").Append(StartDate).Append("\n");
-            sb.Append("  PlaceholderValue: ").Append(PlaceholderValue).Append("\n");
-            sb.Append("  Interpolate: ").Append(Interpolate).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  Values: ").Append(this.Values).Append("\n");
+            sb.Append("  ScheduleTypeLimit: ").Append(this.ScheduleTypeLimit).Append("\n");
+            sb.Append("  Timestep: ").Append(this.Timestep).Append("\n");
+            sb.Append("  StartDate: ").Append(this.StartDate).Append("\n");
+            sb.Append("  PlaceholderValue: ").Append(this.PlaceholderValue).Append("\n");
+            sb.Append("  Interpolate: ").Append(this.Interpolate).Append("\n");
             return sb.ToString();
         }
   
@@ -214,26 +214,16 @@ namespace HoneybeeSchema
                 (
                     this.Values == input.Values ||
                     Extension.AllEquals(this.Values, input.Values)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ScheduleTypeLimit, input.ScheduleTypeLimit)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Timestep, input.Timestep)
-                ) && base.Equals(input) && 
+                ) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.ScheduleTypeLimit, input.ScheduleTypeLimit) && 
+                    Extension.Equals(this.Timestep, input.Timestep) && 
                 (
                     this.StartDate == input.StartDate ||
                     Extension.AllEquals(this.StartDate, input.StartDate)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.PlaceholderValue, input.PlaceholderValue)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Interpolate, input.Interpolate)
-                );
+                ) && 
+                    Extension.Equals(this.PlaceholderValue, input.PlaceholderValue) && 
+                    Extension.Equals(this.Interpolate, input.Interpolate);
         }
 
         /// <summary>

@@ -264,7 +264,7 @@ namespace HoneybeeSchema
 
         public static void AddMaterial(this ModelEnergyProperties modelEnergyCollection, IMaterial material)
         {
-            modelEnergyCollection.Materials = modelEnergyCollection.Materials ?? new List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyMaterialVegetation, EnergyWindowMaterialGlazing, EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialGas, EnergyWindowMaterialGasMixture, EnergyWindowMaterialGasCustom, EnergyWindowMaterialBlind, EnergyWindowMaterialShade>>();
+            modelEnergyCollection.Materials = modelEnergyCollection.Materials ?? new List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyMaterialVegetation, EnergyWindowMaterialGlazing, EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialGas, EnergyWindowMaterialGasMixture, EnergyWindowMaterialGasCustom, EnergyWindowFrame, EnergyWindowMaterialBlind, EnergyWindowMaterialShade>>();
             var exist = modelEnergyCollection.Materials.OfType<IMaterial>().Any(_ => _.Identifier == material.Identifier);
             if (exist)
                 return;

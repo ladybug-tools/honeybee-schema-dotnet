@@ -100,10 +100,10 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Outdoors:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  SunExposure: ").Append(SunExposure).Append("\n");
-            sb.Append("  WindExposure: ").Append(WindExposure).Append("\n");
-            sb.Append("  ViewFactor: ").Append(ViewFactor).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  SunExposure: ").Append(this.SunExposure).Append("\n");
+            sb.Append("  WindExposure: ").Append(this.WindExposure).Append("\n");
+            sb.Append("  ViewFactor: ").Append(this.ViewFactor).Append("\n");
             return sb.ToString();
         }
   
@@ -167,18 +167,10 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SunExposure, input.SunExposure)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.WindExposure, input.WindExposure)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ViewFactor, input.ViewFactor)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.SunExposure, input.SunExposure) && 
+                    Extension.Equals(this.WindExposure, input.WindExposure) && 
+                    Extension.Equals(this.ViewFactor, input.ViewFactor);
         }
 
         /// <summary>

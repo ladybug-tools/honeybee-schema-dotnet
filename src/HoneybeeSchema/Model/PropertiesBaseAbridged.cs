@@ -92,9 +92,9 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("PropertiesBaseAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Modifier: ").Append(Modifier).Append("\n");
-            sb.Append("  ModifierBlk: ").Append(ModifierBlk).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Modifier: ").Append(this.Modifier).Append("\n");
+            sb.Append("  ModifierBlk: ").Append(this.ModifierBlk).Append("\n");
             return sb.ToString();
         }
   
@@ -158,15 +158,9 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Modifier, input.Modifier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ModifierBlk, input.ModifierBlk)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                    Extension.Equals(this.Modifier, input.Modifier) && 
+                    Extension.Equals(this.ModifierBlk, input.ModifierBlk) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

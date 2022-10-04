@@ -62,7 +62,7 @@ namespace HoneybeeSchema
         (
             string identifier, double conductivityCoeffA, double viscosityCoeffA, double specificHeatCoeffA, double specificHeatRatio, double molecularWeight, // Required parameters
             string displayName= default, Object userData= default, double thickness = 0.0125D, double conductivityCoeffB = 0D, double conductivityCoeffC = 0D, double viscosityCoeffB = 0D, double viscosityCoeffC = 0D, double specificHeatCoeffB = 0D, double specificHeatCoeffC = 0D// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.ConductivityCoeffA = conductivityCoeffA;
             this.ViscosityCoeffA = viscosityCoeffA;
@@ -185,22 +185,22 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("EnergyWindowMaterialGasCustom:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  ConductivityCoeffA: ").Append(ConductivityCoeffA).Append("\n");
-            sb.Append("  ViscosityCoeffA: ").Append(ViscosityCoeffA).Append("\n");
-            sb.Append("  SpecificHeatCoeffA: ").Append(SpecificHeatCoeffA).Append("\n");
-            sb.Append("  SpecificHeatRatio: ").Append(SpecificHeatRatio).Append("\n");
-            sb.Append("  MolecularWeight: ").Append(MolecularWeight).Append("\n");
-            sb.Append("  Thickness: ").Append(Thickness).Append("\n");
-            sb.Append("  ConductivityCoeffB: ").Append(ConductivityCoeffB).Append("\n");
-            sb.Append("  ConductivityCoeffC: ").Append(ConductivityCoeffC).Append("\n");
-            sb.Append("  ViscosityCoeffB: ").Append(ViscosityCoeffB).Append("\n");
-            sb.Append("  ViscosityCoeffC: ").Append(ViscosityCoeffC).Append("\n");
-            sb.Append("  SpecificHeatCoeffB: ").Append(SpecificHeatCoeffB).Append("\n");
-            sb.Append("  SpecificHeatCoeffC: ").Append(SpecificHeatCoeffC).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  ConductivityCoeffA: ").Append(this.ConductivityCoeffA).Append("\n");
+            sb.Append("  ViscosityCoeffA: ").Append(this.ViscosityCoeffA).Append("\n");
+            sb.Append("  SpecificHeatCoeffA: ").Append(this.SpecificHeatCoeffA).Append("\n");
+            sb.Append("  SpecificHeatRatio: ").Append(this.SpecificHeatRatio).Append("\n");
+            sb.Append("  MolecularWeight: ").Append(this.MolecularWeight).Append("\n");
+            sb.Append("  Thickness: ").Append(this.Thickness).Append("\n");
+            sb.Append("  ConductivityCoeffB: ").Append(this.ConductivityCoeffB).Append("\n");
+            sb.Append("  ConductivityCoeffC: ").Append(this.ConductivityCoeffC).Append("\n");
+            sb.Append("  ViscosityCoeffB: ").Append(this.ViscosityCoeffB).Append("\n");
+            sb.Append("  ViscosityCoeffC: ").Append(this.ViscosityCoeffC).Append("\n");
+            sb.Append("  SpecificHeatCoeffB: ").Append(this.SpecificHeatCoeffB).Append("\n");
+            sb.Append("  SpecificHeatCoeffC: ").Append(this.SpecificHeatCoeffC).Append("\n");
             return sb.ToString();
         }
   
@@ -264,45 +264,19 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.ConductivityCoeffA, input.ConductivityCoeffA)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ViscosityCoeffA, input.ViscosityCoeffA)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SpecificHeatCoeffA, input.SpecificHeatCoeffA)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SpecificHeatRatio, input.SpecificHeatRatio)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.MolecularWeight, input.MolecularWeight)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Thickness, input.Thickness)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ConductivityCoeffB, input.ConductivityCoeffB)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ConductivityCoeffC, input.ConductivityCoeffC)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ViscosityCoeffB, input.ViscosityCoeffB)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ViscosityCoeffC, input.ViscosityCoeffC)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SpecificHeatCoeffB, input.SpecificHeatCoeffB)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SpecificHeatCoeffC, input.SpecificHeatCoeffC)
-                );
+                    Extension.Equals(this.ConductivityCoeffA, input.ConductivityCoeffA) && 
+                    Extension.Equals(this.ViscosityCoeffA, input.ViscosityCoeffA) && 
+                    Extension.Equals(this.SpecificHeatCoeffA, input.SpecificHeatCoeffA) && 
+                    Extension.Equals(this.SpecificHeatRatio, input.SpecificHeatRatio) && 
+                    Extension.Equals(this.MolecularWeight, input.MolecularWeight) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.Thickness, input.Thickness) && 
+                    Extension.Equals(this.ConductivityCoeffB, input.ConductivityCoeffB) && 
+                    Extension.Equals(this.ConductivityCoeffC, input.ConductivityCoeffC) && 
+                    Extension.Equals(this.ViscosityCoeffB, input.ViscosityCoeffB) && 
+                    Extension.Equals(this.ViscosityCoeffC, input.ViscosityCoeffC) && 
+                    Extension.Equals(this.SpecificHeatCoeffB, input.SpecificHeatCoeffB) && 
+                    Extension.Equals(this.SpecificHeatCoeffC, input.SpecificHeatCoeffC);
         }
 
         /// <summary>

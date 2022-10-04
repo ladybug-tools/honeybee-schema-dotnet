@@ -55,7 +55,7 @@ namespace HoneybeeSchema
         (
             string identifier, double peoplePerArea, AnyOf<ScheduleRuleset,ScheduleFixedInterval> occupancySchedule, // Required parameters
             string displayName= default, Object userData= default, AnyOf<ScheduleRuleset,ScheduleFixedInterval> activitySchedule= default, double radiantFraction = 0.3D, AnyOf<Autocalculate,double> latentFraction= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.PeoplePerArea = peoplePerArea;
             // to ensure "occupancySchedule" is required (not null)
@@ -130,15 +130,15 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("People:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  PeoplePerArea: ").Append(PeoplePerArea).Append("\n");
-            sb.Append("  OccupancySchedule: ").Append(OccupancySchedule).Append("\n");
-            sb.Append("  ActivitySchedule: ").Append(ActivitySchedule).Append("\n");
-            sb.Append("  RadiantFraction: ").Append(RadiantFraction).Append("\n");
-            sb.Append("  LatentFraction: ").Append(LatentFraction).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  PeoplePerArea: ").Append(this.PeoplePerArea).Append("\n");
+            sb.Append("  OccupancySchedule: ").Append(this.OccupancySchedule).Append("\n");
+            sb.Append("  ActivitySchedule: ").Append(this.ActivitySchedule).Append("\n");
+            sb.Append("  RadiantFraction: ").Append(this.RadiantFraction).Append("\n");
+            sb.Append("  LatentFraction: ").Append(this.LatentFraction).Append("\n");
             return sb.ToString();
         }
   
@@ -202,24 +202,12 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.PeoplePerArea, input.PeoplePerArea)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.OccupancySchedule, input.OccupancySchedule)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ActivitySchedule, input.ActivitySchedule)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.RadiantFraction, input.RadiantFraction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.LatentFraction, input.LatentFraction)
-                );
+                    Extension.Equals(this.PeoplePerArea, input.PeoplePerArea) && 
+                    Extension.Equals(this.OccupancySchedule, input.OccupancySchedule) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.ActivitySchedule, input.ActivitySchedule) && 
+                    Extension.Equals(this.RadiantFraction, input.RadiantFraction) && 
+                    Extension.Equals(this.LatentFraction, input.LatentFraction);
         }
 
         /// <summary>

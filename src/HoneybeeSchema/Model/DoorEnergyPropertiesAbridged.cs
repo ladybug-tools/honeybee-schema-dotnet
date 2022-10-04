@@ -92,9 +92,9 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("DoorEnergyPropertiesAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Construction: ").Append(Construction).Append("\n");
-            sb.Append("  VentOpening: ").Append(VentOpening).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Construction: ").Append(this.Construction).Append("\n");
+            sb.Append("  VentOpening: ").Append(this.VentOpening).Append("\n");
             return sb.ToString();
         }
   
@@ -158,15 +158,9 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Construction, input.Construction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.VentOpening, input.VentOpening)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.Construction, input.Construction) && 
+                    Extension.Equals(this.VentOpening, input.VentOpening);
         }
 
         /// <summary>

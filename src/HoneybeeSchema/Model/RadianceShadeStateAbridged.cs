@@ -100,10 +100,10 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("RadianceShadeStateAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Modifier: ").Append(Modifier).Append("\n");
-            sb.Append("  ModifierDirect: ").Append(ModifierDirect).Append("\n");
-            sb.Append("  Shades: ").Append(Shades).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Modifier: ").Append(this.Modifier).Append("\n");
+            sb.Append("  ModifierDirect: ").Append(this.ModifierDirect).Append("\n");
+            sb.Append("  Shades: ").Append(this.Shades).Append("\n");
             return sb.ToString();
         }
   
@@ -167,15 +167,9 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Modifier, input.Modifier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ModifierDirect, input.ModifierDirect)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.Modifier, input.Modifier) && 
+                    Extension.Equals(this.ModifierDirect, input.ModifierDirect) && 
                 (
                     this.Shades == input.Shades ||
                     Extension.AllEquals(this.Shades, input.Shades)

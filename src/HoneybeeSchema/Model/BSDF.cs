@@ -58,8 +58,8 @@ namespace HoneybeeSchema
         public BSDF
         (
             string identifier, string bsdfData, // Required parameters
-            string displayName= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> dependencies= default, List<double> upOrientation= default, double thickness = 0D, string functionFile = ".", , string transform= default, List<double> frontDiffuseReflectance= default, List<double> backDiffuseReflectance= default, List<double> diffuseTransmittance= default // Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+            string displayName= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> dependencies= default, List<double> upOrientation= default, double thickness = 0D, string functionFile = ".", string transform= default, List<double> frontDiffuseReflectance= default, List<double> backDiffuseReflectance= default, List<double> diffuseTransmittance= default // Optional parameters
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "bsdfData" is required (not null)
             this.BsdfData = bsdfData ?? throw new ArgumentNullException("bsdfData is a required property for BSDF and cannot be null");
@@ -170,19 +170,19 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("BSDF:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  BsdfData: ").Append(BsdfData).Append("\n");
-            sb.Append("  Modifier: ").Append(Modifier).Append("\n");
-            sb.Append("  Dependencies: ").Append(Dependencies).Append("\n");
-            sb.Append("  UpOrientation: ").Append(UpOrientation).Append("\n");
-            sb.Append("  Thickness: ").Append(Thickness).Append("\n");
-            sb.Append("  FunctionFile: ").Append(FunctionFile).Append("\n");
-            sb.Append("  Transform: ").Append(Transform).Append("\n");
-            sb.Append("  FrontDiffuseReflectance: ").Append(FrontDiffuseReflectance).Append("\n");
-            sb.Append("  BackDiffuseReflectance: ").Append(BackDiffuseReflectance).Append("\n");
-            sb.Append("  DiffuseTransmittance: ").Append(DiffuseTransmittance).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  BsdfData: ").Append(this.BsdfData).Append("\n");
+            sb.Append("  Modifier: ").Append(this.Modifier).Append("\n");
+            sb.Append("  Dependencies: ").Append(this.Dependencies).Append("\n");
+            sb.Append("  UpOrientation: ").Append(this.UpOrientation).Append("\n");
+            sb.Append("  Thickness: ").Append(this.Thickness).Append("\n");
+            sb.Append("  FunctionFile: ").Append(this.FunctionFile).Append("\n");
+            sb.Append("  Transform: ").Append(this.Transform).Append("\n");
+            sb.Append("  FrontDiffuseReflectance: ").Append(this.FrontDiffuseReflectance).Append("\n");
+            sb.Append("  BackDiffuseReflectance: ").Append(this.BackDiffuseReflectance).Append("\n");
+            sb.Append("  DiffuseTransmittance: ").Append(this.DiffuseTransmittance).Append("\n");
             return sb.ToString();
         }
   
@@ -246,44 +246,32 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.BsdfData, input.BsdfData)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Modifier, input.Modifier)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.BsdfData, input.BsdfData) && 
+                    Extension.Equals(this.Modifier, input.Modifier) && 
                 (
                     this.Dependencies == input.Dependencies ||
                     Extension.AllEquals(this.Dependencies, input.Dependencies)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.UpOrientation == input.UpOrientation ||
                     Extension.AllEquals(this.UpOrientation, input.UpOrientation)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Thickness, input.Thickness)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.FunctionFile, input.FunctionFile)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Transform, input.Transform)
-                ) && base.Equals(input) && 
+                ) && 
+                    Extension.Equals(this.Thickness, input.Thickness) && 
+                    Extension.Equals(this.FunctionFile, input.FunctionFile) && 
+                    Extension.Equals(this.Transform, input.Transform) && 
                 (
                     this.FrontDiffuseReflectance == input.FrontDiffuseReflectance ||
                     Extension.AllEquals(this.FrontDiffuseReflectance, input.FrontDiffuseReflectance)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.BackDiffuseReflectance == input.BackDiffuseReflectance ||
                     Extension.AllEquals(this.BackDiffuseReflectance, input.BackDiffuseReflectance)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.DiffuseTransmittance == input.DiffuseTransmittance ||
                     Extension.AllEquals(this.DiffuseTransmittance, input.DiffuseTransmittance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                ) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

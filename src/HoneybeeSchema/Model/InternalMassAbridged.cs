@@ -51,8 +51,8 @@ namespace HoneybeeSchema
         public InternalMassAbridged
         (
             string identifier, string construction, double area, // Required parameters
-            string displayName= default, Object userData= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+            string displayName= default, Object userData= default // Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "construction" is required (not null)
             this.Construction = construction ?? throw new ArgumentNullException("construction is a required property for InternalMassAbridged and cannot be null");
@@ -106,12 +106,12 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("InternalMassAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  Construction: ").Append(Construction).Append("\n");
-            sb.Append("  Area: ").Append(Area).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  Construction: ").Append(this.Construction).Append("\n");
+            sb.Append("  Area: ").Append(this.Area).Append("\n");
             return sb.ToString();
         }
   
@@ -175,15 +175,9 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Construction, input.Construction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Area, input.Area)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                    Extension.Equals(this.Construction, input.Construction) && 
+                    Extension.Equals(this.Area, input.Area) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

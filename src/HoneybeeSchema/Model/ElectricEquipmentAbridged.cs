@@ -54,8 +54,8 @@ namespace HoneybeeSchema
         public ElectricEquipmentAbridged
         (
             string identifier, double wattsPerArea, string schedule, // Required parameters
-            string displayName= default, Object userData= default, double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData, wattsPerArea: wattsPerArea, schedule: schedule, radiantFraction: radiantFraction, latentFraction: latentFraction, lostFraction: lostFraction)// BaseClass
+            string displayName= default, Object userData= default, double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D // Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, userData: userData, wattsPerArea: wattsPerArea, schedule: schedule, radiantFraction: radiantFraction, latentFraction: latentFraction, lostFraction: lostFraction )// BaseClass
         {
 
             // Set non-required readonly properties with defaultValue
@@ -94,15 +94,15 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ElectricEquipmentAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  WattsPerArea: ").Append(WattsPerArea).Append("\n");
-            sb.Append("  Schedule: ").Append(Schedule).Append("\n");
-            sb.Append("  RadiantFraction: ").Append(RadiantFraction).Append("\n");
-            sb.Append("  LatentFraction: ").Append(LatentFraction).Append("\n");
-            sb.Append("  LostFraction: ").Append(LostFraction).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  WattsPerArea: ").Append(this.WattsPerArea).Append("\n");
+            sb.Append("  Schedule: ").Append(this.Schedule).Append("\n");
+            sb.Append("  RadiantFraction: ").Append(this.RadiantFraction).Append("\n");
+            sb.Append("  LatentFraction: ").Append(this.LatentFraction).Append("\n");
+            sb.Append("  LostFraction: ").Append(this.LostFraction).Append("\n");
             return sb.ToString();
         }
   
@@ -166,9 +166,7 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

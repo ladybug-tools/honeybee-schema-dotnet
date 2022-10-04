@@ -112,10 +112,10 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Plane:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  N: ").Append(N).Append("\n");
-            sb.Append("  O: ").Append(O).Append("\n");
-            sb.Append("  X: ").Append(X).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  N: ").Append(this.N).Append("\n");
+            sb.Append("  O: ").Append(this.O).Append("\n");
+            sb.Append("  X: ").Append(this.X).Append("\n");
             return sb.ToString();
         }
   
@@ -182,14 +182,12 @@ namespace HoneybeeSchema
                 (
                     this.N == input.N ||
                     Extension.AllEquals(this.N, input.N)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.O == input.O ||
                     Extension.AllEquals(this.O, input.O)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
+                ) && 
+                    Extension.Equals(this.Type, input.Type) && 
                 (
                     this.X == input.X ||
                     Extension.AllEquals(this.X, input.X)

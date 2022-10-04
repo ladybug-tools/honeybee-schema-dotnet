@@ -61,9 +61,9 @@ namespace HoneybeeSchema
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public Face
         (
-            string identifier, Face3D geometry, FaceType faceType, AnyOf<Ground,Outdoors,Adiabatic,Surface> boundaryCondition, FacePropertiesAbridged properties, // Required parameters
+            string identifier, Face3D geometry, FaceType faceType, AnyOf<Ground,Outdoors,Adiabatic,Surface,OtherSideTemperature> boundaryCondition, FacePropertiesAbridged properties, // Required parameters
             string displayName= default, Object userData= default, List<Aperture> apertures= default, List<Door> doors= default, List<Shade> indoorShades= default, List<Shade> outdoorShades= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "geometry" is required (not null)
             this.Geometry = geometry ?? throw new ArgumentNullException("geometry is a required property for Face and cannot be null");
@@ -102,7 +102,7 @@ namespace HoneybeeSchema
         /// Gets or Sets BoundaryCondition
         /// </summary>
         [DataMember(Name = "boundary_condition", IsRequired = true)]
-        public AnyOf<Ground,Outdoors,Adiabatic,Surface> BoundaryCondition { get; set; } 
+        public AnyOf<Ground,Outdoors,Adiabatic,Surface,OtherSideTemperature> BoundaryCondition { get; set; } 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
@@ -154,18 +154,18 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Face:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  Geometry: ").Append(Geometry).Append("\n");
-            sb.Append("  FaceType: ").Append(FaceType).Append("\n");
-            sb.Append("  BoundaryCondition: ").Append(BoundaryCondition).Append("\n");
-            sb.Append("  Properties: ").Append(Properties).Append("\n");
-            sb.Append("  Apertures: ").Append(Apertures).Append("\n");
-            sb.Append("  Doors: ").Append(Doors).Append("\n");
-            sb.Append("  IndoorShades: ").Append(IndoorShades).Append("\n");
-            sb.Append("  OutdoorShades: ").Append(OutdoorShades).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  Geometry: ").Append(this.Geometry).Append("\n");
+            sb.Append("  FaceType: ").Append(this.FaceType).Append("\n");
+            sb.Append("  BoundaryCondition: ").Append(this.BoundaryCondition).Append("\n");
+            sb.Append("  Properties: ").Append(this.Properties).Append("\n");
+            sb.Append("  Apertures: ").Append(this.Apertures).Append("\n");
+            sb.Append("  Doors: ").Append(this.Doors).Append("\n");
+            sb.Append("  IndoorShades: ").Append(this.IndoorShades).Append("\n");
+            sb.Append("  OutdoorShades: ").Append(this.OutdoorShades).Append("\n");
             return sb.ToString();
         }
   
@@ -229,33 +229,23 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Geometry, input.Geometry)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.FaceType, input.FaceType)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.BoundaryCondition, input.BoundaryCondition)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Properties, input.Properties)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.Geometry, input.Geometry) && 
+                    Extension.Equals(this.FaceType, input.FaceType) && 
+                    Extension.Equals(this.BoundaryCondition, input.BoundaryCondition) && 
+                    Extension.Equals(this.Properties, input.Properties) && 
+                    Extension.Equals(this.Type, input.Type) && 
                 (
                     this.Apertures == input.Apertures ||
                     Extension.AllEquals(this.Apertures, input.Apertures)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Doors == input.Doors ||
                     Extension.AllEquals(this.Doors, input.Doors)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.IndoorShades == input.IndoorShades ||
                     Extension.AllEquals(this.IndoorShades, input.IndoorShades)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.OutdoorShades == input.OutdoorShades ||
                     Extension.AllEquals(this.OutdoorShades, input.OutdoorShades)

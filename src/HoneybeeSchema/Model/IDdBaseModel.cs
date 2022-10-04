@@ -111,10 +111,10 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("IDdBaseModel:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             return sb.ToString();
         }
   
@@ -178,18 +178,10 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Identifier, input.Identifier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DisplayName, input.DisplayName)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.UserData, input.UserData)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                    Extension.Equals(this.Identifier, input.Identifier) && 
+                    Extension.Equals(this.DisplayName, input.DisplayName) && 
+                    Extension.Equals(this.UserData, input.UserData) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

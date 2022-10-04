@@ -55,7 +55,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> dependencies= default, double rTransmissivity = 0.0D, double gTransmissivity = 0.0D, double bTransmissivity = 0.0D, double refractionIndex = 1.52D // Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             this.Modifier = modifier;
             this.Dependencies = dependencies;
@@ -136,15 +136,15 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Glass:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  Modifier: ").Append(Modifier).Append("\n");
-            sb.Append("  Dependencies: ").Append(Dependencies).Append("\n");
-            sb.Append("  RTransmissivity: ").Append(RTransmissivity).Append("\n");
-            sb.Append("  GTransmissivity: ").Append(GTransmissivity).Append("\n");
-            sb.Append("  BTransmissivity: ").Append(BTransmissivity).Append("\n");
-            sb.Append("  RefractionIndex: ").Append(RefractionIndex).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  Modifier: ").Append(this.Modifier).Append("\n");
+            sb.Append("  Dependencies: ").Append(this.Dependencies).Append("\n");
+            sb.Append("  RTransmissivity: ").Append(this.RTransmissivity).Append("\n");
+            sb.Append("  GTransmissivity: ").Append(this.GTransmissivity).Append("\n");
+            sb.Append("  BTransmissivity: ").Append(this.BTransmissivity).Append("\n");
+            sb.Append("  RefractionIndex: ").Append(this.RefractionIndex).Append("\n");
             return sb.ToString();
         }
   
@@ -208,28 +208,16 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Modifier, input.Modifier)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.Modifier, input.Modifier) && 
                 (
                     this.Dependencies == input.Dependencies ||
                     Extension.AllEquals(this.Dependencies, input.Dependencies)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.RTransmissivity, input.RTransmissivity)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.GTransmissivity, input.GTransmissivity)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.BTransmissivity, input.BTransmissivity)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.RefractionIndex, input.RefractionIndex)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                ) && 
+                    Extension.Equals(this.RTransmissivity, input.RTransmissivity) && 
+                    Extension.Equals(this.GTransmissivity, input.GTransmissivity) && 
+                    Extension.Equals(this.BTransmissivity, input.BTransmissivity) && 
+                    Extension.Equals(this.RefractionIndex, input.RefractionIndex) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

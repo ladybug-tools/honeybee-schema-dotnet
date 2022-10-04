@@ -92,9 +92,9 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("FaceEnergyPropertiesAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Construction: ").Append(Construction).Append("\n");
-            sb.Append("  VentCrack: ").Append(VentCrack).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Construction: ").Append(this.Construction).Append("\n");
+            sb.Append("  VentCrack: ").Append(this.VentCrack).Append("\n");
             return sb.ToString();
         }
   
@@ -158,15 +158,9 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Construction, input.Construction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.VentCrack, input.VentCrack)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.Construction, input.Construction) && 
+                    Extension.Equals(this.VentCrack, input.VentCrack);
         }
 
         /// <summary>

@@ -118,11 +118,11 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Color:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  R: ").Append(R).Append("\n");
-            sb.Append("  G: ").Append(G).Append("\n");
-            sb.Append("  B: ").Append(B).Append("\n");
-            sb.Append("  A: ").Append(A).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  R: ").Append(this.R).Append("\n");
+            sb.Append("  G: ").Append(this.G).Append("\n");
+            sb.Append("  B: ").Append(this.B).Append("\n");
+            sb.Append("  A: ").Append(this.A).Append("\n");
             return sb.ToString();
         }
   
@@ -186,21 +186,11 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.R, input.R)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.G, input.G)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.B, input.B)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.A, input.A)
-                );
+                    Extension.Equals(this.R, input.R) && 
+                    Extension.Equals(this.G, input.G) && 
+                    Extension.Equals(this.B, input.B) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.A, input.A);
         }
 
         /// <summary>

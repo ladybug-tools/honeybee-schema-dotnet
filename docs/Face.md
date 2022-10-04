@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **UserData** | **Object** | Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list). | [optional] 
 **Geometry** | [**Face3D**](Face3D.md) | Planar Face3D for the geometry. | 
 **FaceType** | **FaceType** |  | 
-**BoundaryCondition** | [**AnyOfGroundOutdoorsAdiabaticSurface**](AnyOfGroundOutdoorsAdiabaticSurface.md) |  | 
+**BoundaryCondition** | [**AnyOfGroundOutdoorsAdiabaticSurfaceOtherSideTemperature**](AnyOfGroundOutdoorsAdiabaticSurfaceOtherSideTemperature.md) |  | 
 **Properties** | [**FacePropertiesAbridged**](FacePropertiesAbridged.md) | Extension properties for particular simulation engines (Radiance, EnergyPlus). | 
 **Type** | **string** |  | [optional] [readonly] [default to "Face"]
 **Apertures** | [**List&lt;Aperture&gt;**](Aperture.md) | Apertures assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid. | [optional] 

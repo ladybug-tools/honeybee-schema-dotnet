@@ -60,7 +60,7 @@ namespace HoneybeeSchema
         (
             string identifier, double rValue, // Required parameters
             string displayName= default, Object userData= default, Roughness roughness= Roughness.MediumRough, double thermalAbsorptance = 0.9D, double solarAbsorptance = 0.7D, double visibleAbsorptance = 0.7D// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.RValue = rValue;
             this.Roughness = roughness;
@@ -128,15 +128,15 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("EnergyMaterialNoMass:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  RValue: ").Append(RValue).Append("\n");
-            sb.Append("  Roughness: ").Append(Roughness).Append("\n");
-            sb.Append("  ThermalAbsorptance: ").Append(ThermalAbsorptance).Append("\n");
-            sb.Append("  SolarAbsorptance: ").Append(SolarAbsorptance).Append("\n");
-            sb.Append("  VisibleAbsorptance: ").Append(VisibleAbsorptance).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  RValue: ").Append(this.RValue).Append("\n");
+            sb.Append("  Roughness: ").Append(this.Roughness).Append("\n");
+            sb.Append("  ThermalAbsorptance: ").Append(this.ThermalAbsorptance).Append("\n");
+            sb.Append("  SolarAbsorptance: ").Append(this.SolarAbsorptance).Append("\n");
+            sb.Append("  VisibleAbsorptance: ").Append(this.VisibleAbsorptance).Append("\n");
             return sb.ToString();
         }
   
@@ -200,24 +200,12 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.RValue, input.RValue)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Roughness, input.Roughness)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ThermalAbsorptance, input.ThermalAbsorptance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SolarAbsorptance, input.SolarAbsorptance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.VisibleAbsorptance, input.VisibleAbsorptance)
-                );
+                    Extension.Equals(this.RValue, input.RValue) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.Roughness, input.Roughness) && 
+                    Extension.Equals(this.ThermalAbsorptance, input.ThermalAbsorptance) && 
+                    Extension.Equals(this.SolarAbsorptance, input.SolarAbsorptance) && 
+                    Extension.Equals(this.VisibleAbsorptance, input.VisibleAbsorptance);
         }
 
         /// <summary>

@@ -53,7 +53,7 @@ namespace HoneybeeSchema
         (
             string identifier, Face3D geometry, ShadePropertiesAbridged properties, // Required parameters
             string displayName= default, Object userData= default, bool isDetached = false// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "geometry" is required (not null)
             this.Geometry = geometry ?? throw new ArgumentNullException("geometry is a required property for Shade and cannot be null");
@@ -115,13 +115,13 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Shade:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  Geometry: ").Append(Geometry).Append("\n");
-            sb.Append("  Properties: ").Append(Properties).Append("\n");
-            sb.Append("  IsDetached: ").Append(IsDetached).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  Geometry: ").Append(this.Geometry).Append("\n");
+            sb.Append("  Properties: ").Append(this.Properties).Append("\n");
+            sb.Append("  IsDetached: ").Append(this.IsDetached).Append("\n");
             return sb.ToString();
         }
   
@@ -185,18 +185,10 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Geometry, input.Geometry)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Properties, input.Properties)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.IsDetached, input.IsDetached)
-                );
+                    Extension.Equals(this.Geometry, input.Geometry) && 
+                    Extension.Equals(this.Properties, input.Properties) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.IsDetached, input.IsDetached);
         }
 
         /// <summary>

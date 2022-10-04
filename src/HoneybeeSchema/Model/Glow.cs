@@ -55,7 +55,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> dependencies= default, double rEmittance = 0.0D, double gEmittance = 0.0D, double bEmittance = 0.0D, double maxRadius = 0D // Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             this.Modifier = modifier;
             this.Dependencies = dependencies;
@@ -136,15 +136,15 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Glow:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  Modifier: ").Append(Modifier).Append("\n");
-            sb.Append("  Dependencies: ").Append(Dependencies).Append("\n");
-            sb.Append("  REmittance: ").Append(REmittance).Append("\n");
-            sb.Append("  GEmittance: ").Append(GEmittance).Append("\n");
-            sb.Append("  BEmittance: ").Append(BEmittance).Append("\n");
-            sb.Append("  MaxRadius: ").Append(MaxRadius).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  Modifier: ").Append(this.Modifier).Append("\n");
+            sb.Append("  Dependencies: ").Append(this.Dependencies).Append("\n");
+            sb.Append("  REmittance: ").Append(this.REmittance).Append("\n");
+            sb.Append("  GEmittance: ").Append(this.GEmittance).Append("\n");
+            sb.Append("  BEmittance: ").Append(this.BEmittance).Append("\n");
+            sb.Append("  MaxRadius: ").Append(this.MaxRadius).Append("\n");
             return sb.ToString();
         }
   
@@ -208,28 +208,16 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Modifier, input.Modifier)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.Modifier, input.Modifier) && 
                 (
                     this.Dependencies == input.Dependencies ||
                     Extension.AllEquals(this.Dependencies, input.Dependencies)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.REmittance, input.REmittance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.GEmittance, input.GEmittance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.BEmittance, input.BEmittance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.MaxRadius, input.MaxRadius)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                ) && 
+                    Extension.Equals(this.REmittance, input.REmittance) && 
+                    Extension.Equals(this.GEmittance, input.GEmittance) && 
+                    Extension.Equals(this.BEmittance, input.BEmittance) && 
+                    Extension.Equals(this.MaxRadius, input.MaxRadius) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

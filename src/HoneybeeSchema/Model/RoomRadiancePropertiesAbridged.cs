@@ -84,8 +84,8 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("RoomRadiancePropertiesAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  ModifierSet: ").Append(ModifierSet).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  ModifierSet: ").Append(this.ModifierSet).Append("\n");
             return sb.ToString();
         }
   
@@ -149,12 +149,8 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ModifierSet, input.ModifierSet)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.ModifierSet, input.ModifierSet);
         }
 
         /// <summary>

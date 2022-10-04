@@ -60,7 +60,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, Object userData= default, SHWEquipmentType equipmentType= SHWEquipmentType.Gas_WaterHeater, AnyOf<double,Autocalculate> heaterEfficiency= default, AnyOf<double,string> ambientCondition= default, double ambientLossCoefficient = 6D// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.EquipmentType = equipmentType;
             this.HeaterEfficiency = heaterEfficiency;
@@ -121,14 +121,14 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("SHWSystem:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  EquipmentType: ").Append(EquipmentType).Append("\n");
-            sb.Append("  HeaterEfficiency: ").Append(HeaterEfficiency).Append("\n");
-            sb.Append("  AmbientCondition: ").Append(AmbientCondition).Append("\n");
-            sb.Append("  AmbientLossCoefficient: ").Append(AmbientLossCoefficient).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  EquipmentType: ").Append(this.EquipmentType).Append("\n");
+            sb.Append("  HeaterEfficiency: ").Append(this.HeaterEfficiency).Append("\n");
+            sb.Append("  AmbientCondition: ").Append(this.AmbientCondition).Append("\n");
+            sb.Append("  AmbientLossCoefficient: ").Append(this.AmbientLossCoefficient).Append("\n");
             return sb.ToString();
         }
   
@@ -192,21 +192,11 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.EquipmentType, input.EquipmentType)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.HeaterEfficiency, input.HeaterEfficiency)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.AmbientCondition, input.AmbientCondition)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.AmbientLossCoefficient, input.AmbientLossCoefficient)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.EquipmentType, input.EquipmentType) && 
+                    Extension.Equals(this.HeaterEfficiency, input.HeaterEfficiency) && 
+                    Extension.Equals(this.AmbientCondition, input.AmbientCondition) && 
+                    Extension.Equals(this.AmbientLossCoefficient, input.AmbientLossCoefficient);
         }
 
         /// <summary>

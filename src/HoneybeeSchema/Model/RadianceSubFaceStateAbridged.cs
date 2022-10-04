@@ -42,7 +42,7 @@ namespace HoneybeeSchema
         (
             // Required parameters
             string modifier= default, string modifierDirect= default, List<StateGeometryAbridged> shades= default, Face3D vmtxGeometry= default, Face3D dmtxGeometry= default // Optional parameters
-        ) : base(modifier: modifier, modifierDirect: modifierDirect, shades: shades)// BaseClass
+        ) : base(modifier: modifier, modifierDirect: modifierDirect, shades: shades )// BaseClass
         {
             this.VmtxGeometry = vmtxGeometry;
             this.DmtxGeometry = dmtxGeometry;
@@ -95,12 +95,12 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("RadianceSubFaceStateAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Modifier: ").Append(Modifier).Append("\n");
-            sb.Append("  ModifierDirect: ").Append(ModifierDirect).Append("\n");
-            sb.Append("  Shades: ").Append(Shades).Append("\n");
-            sb.Append("  VmtxGeometry: ").Append(VmtxGeometry).Append("\n");
-            sb.Append("  DmtxGeometry: ").Append(DmtxGeometry).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Modifier: ").Append(this.Modifier).Append("\n");
+            sb.Append("  ModifierDirect: ").Append(this.ModifierDirect).Append("\n");
+            sb.Append("  Shades: ").Append(this.Shades).Append("\n");
+            sb.Append("  VmtxGeometry: ").Append(this.VmtxGeometry).Append("\n");
+            sb.Append("  DmtxGeometry: ").Append(this.DmtxGeometry).Append("\n");
             return sb.ToString();
         }
   
@@ -164,15 +164,9 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.VmtxGeometry, input.VmtxGeometry)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DmtxGeometry, input.DmtxGeometry)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                    Extension.Equals(this.VmtxGeometry, input.VmtxGeometry) && 
+                    Extension.Equals(this.DmtxGeometry, input.DmtxGeometry) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

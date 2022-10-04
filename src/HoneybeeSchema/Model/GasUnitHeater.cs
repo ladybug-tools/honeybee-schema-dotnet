@@ -64,7 +64,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, Object userData= default, Vintages vintage= Vintages.ASHRAE_2019, GasUnitHeaterEquipmentType equipmentType= GasUnitHeaterEquipmentType.GasHeaters// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.Vintage = vintage;
             this.EquipmentType = equipmentType;
@@ -105,12 +105,12 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("GasUnitHeater:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  Vintage: ").Append(Vintage).Append("\n");
-            sb.Append("  EquipmentType: ").Append(EquipmentType).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  Vintage: ").Append(this.Vintage).Append("\n");
+            sb.Append("  EquipmentType: ").Append(this.EquipmentType).Append("\n");
             return sb.ToString();
         }
   
@@ -174,15 +174,9 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Vintage, input.Vintage)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.EquipmentType, input.EquipmentType)
-                );
+                    Extension.Equals(this.Vintage, input.Vintage) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.EquipmentType, input.EquipmentType);
         }
 
         /// <summary>

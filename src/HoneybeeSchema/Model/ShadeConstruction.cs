@@ -53,7 +53,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, Object userData= default, double solarReflectance = 0.2D, double visibleReflectance = 0.2D, bool isSpecular = false// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.SolarReflectance = solarReflectance;
             this.VisibleReflectance = visibleReflectance;
@@ -113,13 +113,13 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ShadeConstruction:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  SolarReflectance: ").Append(SolarReflectance).Append("\n");
-            sb.Append("  VisibleReflectance: ").Append(VisibleReflectance).Append("\n");
-            sb.Append("  IsSpecular: ").Append(IsSpecular).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  SolarReflectance: ").Append(this.SolarReflectance).Append("\n");
+            sb.Append("  VisibleReflectance: ").Append(this.VisibleReflectance).Append("\n");
+            sb.Append("  IsSpecular: ").Append(this.IsSpecular).Append("\n");
             return sb.ToString();
         }
   
@@ -183,18 +183,10 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SolarReflectance, input.SolarReflectance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.VisibleReflectance, input.VisibleReflectance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.IsSpecular, input.IsSpecular)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.SolarReflectance, input.SolarReflectance) && 
+                    Extension.Equals(this.VisibleReflectance, input.VisibleReflectance) && 
+                    Extension.Equals(this.IsSpecular, input.IsSpecular);
         }
 
         /// <summary>

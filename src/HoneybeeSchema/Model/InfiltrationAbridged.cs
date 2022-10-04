@@ -55,7 +55,7 @@ namespace HoneybeeSchema
         (
             string identifier, double flowPerExteriorArea, string schedule, // Required parameters
             string displayName= default, Object userData= default, double constantCoefficient = 1D, double temperatureCoefficient = 0D, double velocityCoefficient = 0D// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.FlowPerExteriorArea = flowPerExteriorArea;
             // to ensure "schedule" is required (not null)
@@ -127,15 +127,15 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("InfiltrationAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  FlowPerExteriorArea: ").Append(FlowPerExteriorArea).Append("\n");
-            sb.Append("  Schedule: ").Append(Schedule).Append("\n");
-            sb.Append("  ConstantCoefficient: ").Append(ConstantCoefficient).Append("\n");
-            sb.Append("  TemperatureCoefficient: ").Append(TemperatureCoefficient).Append("\n");
-            sb.Append("  VelocityCoefficient: ").Append(VelocityCoefficient).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  FlowPerExteriorArea: ").Append(this.FlowPerExteriorArea).Append("\n");
+            sb.Append("  Schedule: ").Append(this.Schedule).Append("\n");
+            sb.Append("  ConstantCoefficient: ").Append(this.ConstantCoefficient).Append("\n");
+            sb.Append("  TemperatureCoefficient: ").Append(this.TemperatureCoefficient).Append("\n");
+            sb.Append("  VelocityCoefficient: ").Append(this.VelocityCoefficient).Append("\n");
             return sb.ToString();
         }
   
@@ -199,24 +199,12 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.FlowPerExteriorArea, input.FlowPerExteriorArea)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Schedule, input.Schedule)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ConstantCoefficient, input.ConstantCoefficient)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.TemperatureCoefficient, input.TemperatureCoefficient)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.VelocityCoefficient, input.VelocityCoefficient)
-                );
+                    Extension.Equals(this.FlowPerExteriorArea, input.FlowPerExteriorArea) && 
+                    Extension.Equals(this.Schedule, input.Schedule) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.ConstantCoefficient, input.ConstantCoefficient) && 
+                    Extension.Equals(this.TemperatureCoefficient, input.TemperatureCoefficient) && 
+                    Extension.Equals(this.VelocityCoefficient, input.VelocityCoefficient);
         }
 
         /// <summary>

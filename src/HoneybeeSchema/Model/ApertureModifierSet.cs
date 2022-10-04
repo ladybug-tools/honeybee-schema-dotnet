@@ -108,11 +108,11 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ApertureModifierSet:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  WindowModifier: ").Append(WindowModifier).Append("\n");
-            sb.Append("  InteriorModifier: ").Append(InteriorModifier).Append("\n");
-            sb.Append("  SkylightModifier: ").Append(SkylightModifier).Append("\n");
-            sb.Append("  OperableModifier: ").Append(OperableModifier).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  WindowModifier: ").Append(this.WindowModifier).Append("\n");
+            sb.Append("  InteriorModifier: ").Append(this.InteriorModifier).Append("\n");
+            sb.Append("  SkylightModifier: ").Append(this.SkylightModifier).Append("\n");
+            sb.Append("  OperableModifier: ").Append(this.OperableModifier).Append("\n");
             return sb.ToString();
         }
   
@@ -176,21 +176,11 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.WindowModifier, input.WindowModifier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.InteriorModifier, input.InteriorModifier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SkylightModifier, input.SkylightModifier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.OperableModifier, input.OperableModifier)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.WindowModifier, input.WindowModifier) && 
+                    Extension.Equals(this.InteriorModifier, input.InteriorModifier) && 
+                    Extension.Equals(this.SkylightModifier, input.SkylightModifier) && 
+                    Extension.Equals(this.OperableModifier, input.OperableModifier);
         }
 
         /// <summary>

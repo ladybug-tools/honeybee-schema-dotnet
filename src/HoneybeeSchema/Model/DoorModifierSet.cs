@@ -116,12 +116,12 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("DoorModifierSet:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  ExteriorModifier: ").Append(ExteriorModifier).Append("\n");
-            sb.Append("  InteriorModifier: ").Append(InteriorModifier).Append("\n");
-            sb.Append("  InteriorGlassModifier: ").Append(InteriorGlassModifier).Append("\n");
-            sb.Append("  ExteriorGlassModifier: ").Append(ExteriorGlassModifier).Append("\n");
-            sb.Append("  OverheadModifier: ").Append(OverheadModifier).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  ExteriorModifier: ").Append(this.ExteriorModifier).Append("\n");
+            sb.Append("  InteriorModifier: ").Append(this.InteriorModifier).Append("\n");
+            sb.Append("  InteriorGlassModifier: ").Append(this.InteriorGlassModifier).Append("\n");
+            sb.Append("  ExteriorGlassModifier: ").Append(this.ExteriorGlassModifier).Append("\n");
+            sb.Append("  OverheadModifier: ").Append(this.OverheadModifier).Append("\n");
             return sb.ToString();
         }
   
@@ -185,24 +185,12 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.ExteriorModifier, input.ExteriorModifier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.InteriorModifier, input.InteriorModifier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.InteriorGlassModifier, input.InteriorGlassModifier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ExteriorGlassModifier, input.ExteriorGlassModifier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.OverheadModifier, input.OverheadModifier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                    Extension.Equals(this.ExteriorModifier, input.ExteriorModifier) && 
+                    Extension.Equals(this.InteriorModifier, input.InteriorModifier) && 
+                    Extension.Equals(this.InteriorGlassModifier, input.InteriorGlassModifier) && 
+                    Extension.Equals(this.ExteriorGlassModifier, input.ExteriorGlassModifier) && 
+                    Extension.Equals(this.OverheadModifier, input.OverheadModifier) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

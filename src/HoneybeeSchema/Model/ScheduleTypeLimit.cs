@@ -63,7 +63,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, AnyOf<NoLimit,double> lowerLimit= default, AnyOf<NoLimit,double> upperLimit= default, ScheduleNumericType numericType= ScheduleNumericType.Continuous, ScheduleUnitType unitType= ScheduleUnitType.Dimensionless// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             this.LowerLimit = lowerLimit;
             this.UpperLimit = upperLimit;
@@ -118,13 +118,13 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ScheduleTypeLimit:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  LowerLimit: ").Append(LowerLimit).Append("\n");
-            sb.Append("  UpperLimit: ").Append(UpperLimit).Append("\n");
-            sb.Append("  NumericType: ").Append(NumericType).Append("\n");
-            sb.Append("  UnitType: ").Append(UnitType).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  LowerLimit: ").Append(this.LowerLimit).Append("\n");
+            sb.Append("  UpperLimit: ").Append(this.UpperLimit).Append("\n");
+            sb.Append("  NumericType: ").Append(this.NumericType).Append("\n");
+            sb.Append("  UnitType: ").Append(this.UnitType).Append("\n");
             return sb.ToString();
         }
   
@@ -188,21 +188,11 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.LowerLimit, input.LowerLimit)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.UpperLimit, input.UpperLimit)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.NumericType, input.NumericType)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.UnitType, input.UnitType)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.LowerLimit, input.LowerLimit) && 
+                    Extension.Equals(this.UpperLimit, input.UpperLimit) && 
+                    Extension.Equals(this.NumericType, input.NumericType) && 
+                    Extension.Equals(this.UnitType, input.UnitType);
         }
 
         /// <summary>

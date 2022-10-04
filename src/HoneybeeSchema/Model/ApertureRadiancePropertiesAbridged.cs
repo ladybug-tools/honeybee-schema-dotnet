@@ -41,7 +41,7 @@ namespace HoneybeeSchema
         (
             // Required parameters
             string modifier= default, string modifierBlk= default, string dynamicGroupIdentifier= default, List<RadianceSubFaceStateAbridged> states= default// Optional parameters
-        ) : base(modifier: modifier, modifierBlk: modifierBlk)// BaseClass
+        ) : base(modifier: modifier, modifierBlk: modifierBlk )// BaseClass
         {
             this.DynamicGroupIdentifier = dynamicGroupIdentifier;
             this.States = states;
@@ -94,11 +94,11 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ApertureRadiancePropertiesAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Modifier: ").Append(Modifier).Append("\n");
-            sb.Append("  ModifierBlk: ").Append(ModifierBlk).Append("\n");
-            sb.Append("  DynamicGroupIdentifier: ").Append(DynamicGroupIdentifier).Append("\n");
-            sb.Append("  States: ").Append(States).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Modifier: ").Append(this.Modifier).Append("\n");
+            sb.Append("  ModifierBlk: ").Append(this.ModifierBlk).Append("\n");
+            sb.Append("  DynamicGroupIdentifier: ").Append(this.DynamicGroupIdentifier).Append("\n");
+            sb.Append("  States: ").Append(this.States).Append("\n");
             return sb.ToString();
         }
   
@@ -162,12 +162,8 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DynamicGroupIdentifier, input.DynamicGroupIdentifier)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.DynamicGroupIdentifier, input.DynamicGroupIdentifier) && 
                 (
                     this.States == input.States ||
                     Extension.AllEquals(this.States, input.States)

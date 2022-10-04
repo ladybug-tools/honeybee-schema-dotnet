@@ -92,9 +92,9 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("DaylightSavingTime:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  StartDate: ").Append(StartDate).Append("\n");
-            sb.Append("  EndDate: ").Append(EndDate).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  StartDate: ").Append(this.StartDate).Append("\n");
+            sb.Append("  EndDate: ").Append(this.EndDate).Append("\n");
             return sb.ToString();
         }
   
@@ -158,13 +158,11 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.Type, input.Type) && 
                 (
                     this.StartDate == input.StartDate ||
                     Extension.AllEquals(this.StartDate, input.StartDate)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.EndDate == input.EndDate ||
                     Extension.AllEquals(this.EndDate, input.EndDate)

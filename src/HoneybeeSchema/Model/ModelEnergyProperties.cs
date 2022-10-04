@@ -45,7 +45,7 @@ namespace HoneybeeSchema
         public ModelEnergyProperties
         (
             // Required parameters
-           List<AnyOf<ConstructionSetAbridged,ConstructionSet>> constructionSets= default, List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,WindowConstructionShadeAbridged,AirBoundaryConstructionAbridged,OpaqueConstruction,WindowConstruction,WindowConstructionShade,WindowConstructionDynamicAbridged,WindowConstructionDynamic,AirBoundaryConstruction,ShadeConstruction>> constructions= default, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyMaterialVegetation,EnergyWindowMaterialGlazing,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialGas,EnergyWindowMaterialGasMixture,EnergyWindowMaterialGasCustom,EnergyWindowMaterialBlind,EnergyWindowMaterialShade>> materials= default, List<AnyOf<IdealAirSystemAbridged,VAV,PVAV,PSZ,PTAC,ForcedAirFurnace,FCUwithDOASAbridged,WSHPwithDOASAbridged,VRFwithDOASAbridged,RadiantwithDOASAbridged,FCU,WSHP,VRF,Baseboard,EvaporativeCooler,Residential,WindowAC,GasUnitHeater,Radiant>> hvacs= default, List<SHWSystem> shws= default, List<AnyOf<ProgramTypeAbridged,ProgramType>> programTypes= default, List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged,ScheduleRuleset,ScheduleFixedInterval>> schedules= default, List<ScheduleTypeLimit> scheduleTypeLimits= default, VentilationSimulationControl ventilationSimulationControl= default// Optional parameters
+           List<AnyOf<ConstructionSetAbridged,ConstructionSet>> constructionSets= default, List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,WindowConstructionShadeAbridged,AirBoundaryConstructionAbridged,OpaqueConstruction,WindowConstruction,WindowConstructionShade,WindowConstructionDynamicAbridged,WindowConstructionDynamic,AirBoundaryConstruction,ShadeConstruction>> constructions= default, List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyMaterialVegetation,EnergyWindowMaterialGlazing,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialGas,EnergyWindowMaterialGasMixture,EnergyWindowMaterialGasCustom,EnergyWindowFrame,EnergyWindowMaterialBlind,EnergyWindowMaterialShade>> materials= default, List<AnyOf<IdealAirSystemAbridged,VAV,PVAV,PSZ,PTAC,ForcedAirFurnace,FCUwithDOASAbridged,WSHPwithDOASAbridged,VRFwithDOASAbridged,RadiantwithDOASAbridged,FCU,WSHP,VRF,Baseboard,EvaporativeCooler,Residential,WindowAC,GasUnitHeater,Radiant>> hvacs= default, List<SHWSystem> shws= default, List<AnyOf<ProgramTypeAbridged,ProgramType>> programTypes= default, List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged,ScheduleRuleset,ScheduleFixedInterval>> schedules= default, List<ScheduleTypeLimit> scheduleTypeLimits= default, VentilationSimulationControl ventilationSimulationControl= default// Optional parameters
         ) : base()// BaseClass
         {
             this.ConstructionSets = constructionSets;
@@ -97,7 +97,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>A list of all unique materials in the model. This includes materials needed to make the Model constructions.</value>
         [DataMember(Name = "materials")]
-        public List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyMaterialVegetation,EnergyWindowMaterialGlazing,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialGas,EnergyWindowMaterialGasMixture,EnergyWindowMaterialGasCustom,EnergyWindowMaterialBlind,EnergyWindowMaterialShade>> Materials { get; set; } 
+        public List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyMaterialVegetation,EnergyWindowMaterialGlazing,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialGas,EnergyWindowMaterialGasMixture,EnergyWindowMaterialGasCustom,EnergyWindowFrame,EnergyWindowMaterialBlind,EnergyWindowMaterialShade>> Materials { get; set; } 
         /// <summary>
         /// List of all unique HVAC systems in the Model.
         /// </summary>
@@ -155,17 +155,17 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ModelEnergyProperties:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  GlobalConstructionSet: ").Append(GlobalConstructionSet).Append("\n");
-            sb.Append("  ConstructionSets: ").Append(ConstructionSets).Append("\n");
-            sb.Append("  Constructions: ").Append(Constructions).Append("\n");
-            sb.Append("  Materials: ").Append(Materials).Append("\n");
-            sb.Append("  Hvacs: ").Append(Hvacs).Append("\n");
-            sb.Append("  Shws: ").Append(Shws).Append("\n");
-            sb.Append("  ProgramTypes: ").Append(ProgramTypes).Append("\n");
-            sb.Append("  Schedules: ").Append(Schedules).Append("\n");
-            sb.Append("  ScheduleTypeLimits: ").Append(ScheduleTypeLimits).Append("\n");
-            sb.Append("  VentilationSimulationControl: ").Append(VentilationSimulationControl).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  GlobalConstructionSet: ").Append(this.GlobalConstructionSet).Append("\n");
+            sb.Append("  ConstructionSets: ").Append(this.ConstructionSets).Append("\n");
+            sb.Append("  Constructions: ").Append(this.Constructions).Append("\n");
+            sb.Append("  Materials: ").Append(this.Materials).Append("\n");
+            sb.Append("  Hvacs: ").Append(this.Hvacs).Append("\n");
+            sb.Append("  Shws: ").Append(this.Shws).Append("\n");
+            sb.Append("  ProgramTypes: ").Append(this.ProgramTypes).Append("\n");
+            sb.Append("  Schedules: ").Append(this.Schedules).Append("\n");
+            sb.Append("  ScheduleTypeLimits: ").Append(this.ScheduleTypeLimits).Append("\n");
+            sb.Append("  VentilationSimulationControl: ").Append(this.VentilationSimulationControl).Append("\n");
             return sb.ToString();
         }
   
@@ -229,47 +229,41 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.GlobalConstructionSet, input.GlobalConstructionSet)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.GlobalConstructionSet, input.GlobalConstructionSet) && 
                 (
                     this.ConstructionSets == input.ConstructionSets ||
                     Extension.AllEquals(this.ConstructionSets, input.ConstructionSets)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Constructions == input.Constructions ||
                     Extension.AllEquals(this.Constructions, input.Constructions)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Materials == input.Materials ||
                     Extension.AllEquals(this.Materials, input.Materials)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Hvacs == input.Hvacs ||
                     Extension.AllEquals(this.Hvacs, input.Hvacs)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Shws == input.Shws ||
                     Extension.AllEquals(this.Shws, input.Shws)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ProgramTypes == input.ProgramTypes ||
                     Extension.AllEquals(this.ProgramTypes, input.ProgramTypes)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Schedules == input.Schedules ||
                     Extension.AllEquals(this.Schedules, input.Schedules)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ScheduleTypeLimits == input.ScheduleTypeLimits ||
                     Extension.AllEquals(this.ScheduleTypeLimits, input.ScheduleTypeLimits)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.VentilationSimulationControl, input.VentilationSimulationControl)
-                );
+                ) && 
+                    Extension.Equals(this.VentilationSimulationControl, input.VentilationSimulationControl);
         }
 
         /// <summary>

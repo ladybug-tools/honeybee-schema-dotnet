@@ -51,7 +51,7 @@ namespace HoneybeeSchema
         public ValidationReport
         (
            string honeybeeCore, string honeybeeSchema, bool valid, // Required parameters
-           string fatalError = "", , List<ValidationError> errors= default// Optional parameters
+           string fatalError = "", List<ValidationError> errors= default// Optional parameters
         )// BaseClass
         {
             // to ensure "honeybeeCore" is required (not null)
@@ -129,12 +129,12 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ValidationReport:\n");
-            sb.Append("  HoneybeeCore: ").Append(HoneybeeCore).Append("\n");
-            sb.Append("  HoneybeeSchema: ").Append(HoneybeeSchema).Append("\n");
-            sb.Append("  Valid: ").Append(Valid).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  FatalError: ").Append(FatalError).Append("\n");
-            sb.Append("  Errors: ").Append(Errors).Append("\n");
+            sb.Append("  HoneybeeCore: ").Append(this.HoneybeeCore).Append("\n");
+            sb.Append("  HoneybeeSchema: ").Append(this.HoneybeeSchema).Append("\n");
+            sb.Append("  Valid: ").Append(this.Valid).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  FatalError: ").Append(this.FatalError).Append("\n");
+            sb.Append("  Errors: ").Append(this.Errors).Append("\n");
             return sb.ToString();
         }
   
@@ -189,22 +189,12 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    Extension.Equals(this.HoneybeeCore, input.HoneybeeCore)
-                ) && 
-                (
-                    Extension.Equals(this.HoneybeeSchema, input.HoneybeeSchema)
-                ) && 
-                (
-                    Extension.Equals(this.Valid, input.Valid)
-                ) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && 
-                (
-                    Extension.Equals(this.FatalError, input.FatalError)
-                ) && 
+            return base.Equals(input) && 
+                    Extension.Equals(this.HoneybeeCore, input.HoneybeeCore) && 
+                    Extension.Equals(this.HoneybeeSchema, input.HoneybeeSchema) && 
+                    Extension.Equals(this.Valid, input.Valid) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.FatalError, input.FatalError) && 
                 (
                     this.Errors == input.Errors ||
                     Extension.AllEquals(this.Errors, input.Errors)

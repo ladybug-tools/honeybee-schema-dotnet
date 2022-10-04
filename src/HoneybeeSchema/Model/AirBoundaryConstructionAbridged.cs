@@ -52,7 +52,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, Object userData= default, double airMixingPerArea = 0.1D, string airMixingSchedule= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.AirMixingPerArea = airMixingPerArea;
             this.AirMixingSchedule = airMixingSchedule;
@@ -105,12 +105,12 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("AirBoundaryConstructionAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  AirMixingPerArea: ").Append(AirMixingPerArea).Append("\n");
-            sb.Append("  AirMixingSchedule: ").Append(AirMixingSchedule).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  AirMixingPerArea: ").Append(this.AirMixingPerArea).Append("\n");
+            sb.Append("  AirMixingSchedule: ").Append(this.AirMixingSchedule).Append("\n");
             return sb.ToString();
         }
   
@@ -174,15 +174,9 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.AirMixingPerArea, input.AirMixingPerArea)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.AirMixingSchedule, input.AirMixingSchedule)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.AirMixingPerArea, input.AirMixingPerArea) && 
+                    Extension.Equals(this.AirMixingSchedule, input.AirMixingSchedule);
         }
 
         /// <summary>

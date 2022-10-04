@@ -64,7 +64,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, Object userData= default, double solarTransmittance = 0.4D, double solarReflectance = 0.5D, double visibleTransmittance = 0.4D, double visibleReflectance = 0.4D, double emissivity = 0.9D, double infraredTransmittance = 0D, double thickness = 0.005D, double conductivity = 0.1D, double distanceToGlass = 0.05D, double topOpeningMultiplier = 0.5D, double bottomOpeningMultiplier = 0.5D, double leftOpeningMultiplier = 0.5D, double rightOpeningMultiplier = 0.5D, double airflowPermeability = 0D// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.SolarTransmittance = solarTransmittance;
             this.SolarReflectance = solarReflectance;
@@ -201,24 +201,24 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("EnergyWindowMaterialShade:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  SolarTransmittance: ").Append(SolarTransmittance).Append("\n");
-            sb.Append("  SolarReflectance: ").Append(SolarReflectance).Append("\n");
-            sb.Append("  VisibleTransmittance: ").Append(VisibleTransmittance).Append("\n");
-            sb.Append("  VisibleReflectance: ").Append(VisibleReflectance).Append("\n");
-            sb.Append("  Emissivity: ").Append(Emissivity).Append("\n");
-            sb.Append("  InfraredTransmittance: ").Append(InfraredTransmittance).Append("\n");
-            sb.Append("  Thickness: ").Append(Thickness).Append("\n");
-            sb.Append("  Conductivity: ").Append(Conductivity).Append("\n");
-            sb.Append("  DistanceToGlass: ").Append(DistanceToGlass).Append("\n");
-            sb.Append("  TopOpeningMultiplier: ").Append(TopOpeningMultiplier).Append("\n");
-            sb.Append("  BottomOpeningMultiplier: ").Append(BottomOpeningMultiplier).Append("\n");
-            sb.Append("  LeftOpeningMultiplier: ").Append(LeftOpeningMultiplier).Append("\n");
-            sb.Append("  RightOpeningMultiplier: ").Append(RightOpeningMultiplier).Append("\n");
-            sb.Append("  AirflowPermeability: ").Append(AirflowPermeability).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  SolarTransmittance: ").Append(this.SolarTransmittance).Append("\n");
+            sb.Append("  SolarReflectance: ").Append(this.SolarReflectance).Append("\n");
+            sb.Append("  VisibleTransmittance: ").Append(this.VisibleTransmittance).Append("\n");
+            sb.Append("  VisibleReflectance: ").Append(this.VisibleReflectance).Append("\n");
+            sb.Append("  Emissivity: ").Append(this.Emissivity).Append("\n");
+            sb.Append("  InfraredTransmittance: ").Append(this.InfraredTransmittance).Append("\n");
+            sb.Append("  Thickness: ").Append(this.Thickness).Append("\n");
+            sb.Append("  Conductivity: ").Append(this.Conductivity).Append("\n");
+            sb.Append("  DistanceToGlass: ").Append(this.DistanceToGlass).Append("\n");
+            sb.Append("  TopOpeningMultiplier: ").Append(this.TopOpeningMultiplier).Append("\n");
+            sb.Append("  BottomOpeningMultiplier: ").Append(this.BottomOpeningMultiplier).Append("\n");
+            sb.Append("  LeftOpeningMultiplier: ").Append(this.LeftOpeningMultiplier).Append("\n");
+            sb.Append("  RightOpeningMultiplier: ").Append(this.RightOpeningMultiplier).Append("\n");
+            sb.Append("  AirflowPermeability: ").Append(this.AirflowPermeability).Append("\n");
             return sb.ToString();
         }
   
@@ -282,51 +282,21 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SolarTransmittance, input.SolarTransmittance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SolarReflectance, input.SolarReflectance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.VisibleTransmittance, input.VisibleTransmittance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.VisibleReflectance, input.VisibleReflectance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Emissivity, input.Emissivity)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.InfraredTransmittance, input.InfraredTransmittance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Thickness, input.Thickness)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Conductivity, input.Conductivity)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DistanceToGlass, input.DistanceToGlass)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.TopOpeningMultiplier, input.TopOpeningMultiplier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.BottomOpeningMultiplier, input.BottomOpeningMultiplier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.LeftOpeningMultiplier, input.LeftOpeningMultiplier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.RightOpeningMultiplier, input.RightOpeningMultiplier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.AirflowPermeability, input.AirflowPermeability)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.SolarTransmittance, input.SolarTransmittance) && 
+                    Extension.Equals(this.SolarReflectance, input.SolarReflectance) && 
+                    Extension.Equals(this.VisibleTransmittance, input.VisibleTransmittance) && 
+                    Extension.Equals(this.VisibleReflectance, input.VisibleReflectance) && 
+                    Extension.Equals(this.Emissivity, input.Emissivity) && 
+                    Extension.Equals(this.InfraredTransmittance, input.InfraredTransmittance) && 
+                    Extension.Equals(this.Thickness, input.Thickness) && 
+                    Extension.Equals(this.Conductivity, input.Conductivity) && 
+                    Extension.Equals(this.DistanceToGlass, input.DistanceToGlass) && 
+                    Extension.Equals(this.TopOpeningMultiplier, input.TopOpeningMultiplier) && 
+                    Extension.Equals(this.BottomOpeningMultiplier, input.BottomOpeningMultiplier) && 
+                    Extension.Equals(this.LeftOpeningMultiplier, input.LeftOpeningMultiplier) && 
+                    Extension.Equals(this.RightOpeningMultiplier, input.RightOpeningMultiplier) && 
+                    Extension.Equals(this.AirflowPermeability, input.AirflowPermeability);
         }
 
         /// <summary>

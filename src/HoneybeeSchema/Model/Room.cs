@@ -57,7 +57,7 @@ namespace HoneybeeSchema
         (
             string identifier, List<Face> faces, RoomPropertiesAbridged properties, // Required parameters
             string displayName= default, Object userData= default, List<Shade> indoorShades= default, List<Shade> outdoorShades= default, int multiplier = 1, bool excludeFloorArea = false, string story= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "faces" is required (not null)
             this.Faces = faces ?? throw new ArgumentNullException("faces is a required property for Room and cannot be null");
@@ -147,17 +147,17 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Room:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  Faces: ").Append(Faces).Append("\n");
-            sb.Append("  Properties: ").Append(Properties).Append("\n");
-            sb.Append("  IndoorShades: ").Append(IndoorShades).Append("\n");
-            sb.Append("  OutdoorShades: ").Append(OutdoorShades).Append("\n");
-            sb.Append("  Multiplier: ").Append(Multiplier).Append("\n");
-            sb.Append("  ExcludeFloorArea: ").Append(ExcludeFloorArea).Append("\n");
-            sb.Append("  Story: ").Append(Story).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  Faces: ").Append(this.Faces).Append("\n");
+            sb.Append("  Properties: ").Append(this.Properties).Append("\n");
+            sb.Append("  IndoorShades: ").Append(this.IndoorShades).Append("\n");
+            sb.Append("  OutdoorShades: ").Append(this.OutdoorShades).Append("\n");
+            sb.Append("  Multiplier: ").Append(this.Multiplier).Append("\n");
+            sb.Append("  ExcludeFloorArea: ").Append(this.ExcludeFloorArea).Append("\n");
+            sb.Append("  Story: ").Append(this.Story).Append("\n");
             return sb.ToString();
         }
   
@@ -224,30 +224,20 @@ namespace HoneybeeSchema
                 (
                     this.Faces == input.Faces ||
                     Extension.AllEquals(this.Faces, input.Faces)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Properties, input.Properties)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
+                ) && 
+                    Extension.Equals(this.Properties, input.Properties) && 
+                    Extension.Equals(this.Type, input.Type) && 
                 (
                     this.IndoorShades == input.IndoorShades ||
                     Extension.AllEquals(this.IndoorShades, input.IndoorShades)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.OutdoorShades == input.OutdoorShades ||
                     Extension.AllEquals(this.OutdoorShades, input.OutdoorShades)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Multiplier, input.Multiplier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ExcludeFloorArea, input.ExcludeFloorArea)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Story, input.Story)
-                );
+                ) && 
+                    Extension.Equals(this.Multiplier, input.Multiplier) && 
+                    Extension.Equals(this.ExcludeFloorArea, input.ExcludeFloorArea) && 
+                    Extension.Equals(this.Story, input.Story);
         }
 
         /// <summary>

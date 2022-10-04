@@ -50,8 +50,8 @@ namespace HoneybeeSchema
         public OpaqueConstructionAbridged
         (
             string identifier, List<string> materials, // Required parameters
-            string displayName= default, Object userData= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+            string displayName= default, Object userData= default // Optional parameters
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "materials" is required (not null)
             this.Materials = materials ?? throw new ArgumentNullException("materials is a required property for OpaqueConstructionAbridged and cannot be null");
@@ -98,11 +98,11 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("OpaqueConstructionAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  Materials: ").Append(Materials).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  Materials: ").Append(this.Materials).Append("\n");
             return sb.ToString();
         }
   
@@ -169,10 +169,8 @@ namespace HoneybeeSchema
                 (
                     this.Materials == input.Materials ||
                     Extension.AllEquals(this.Materials, input.Materials)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                ) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

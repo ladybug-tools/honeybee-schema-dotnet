@@ -57,7 +57,7 @@ namespace HoneybeeSchema
         /// <param name="beamSolarTransmittance">The beam solar transmittance of the slat, assumed to be independent of angle of incidence on the slat. Any transmitted beam radiation is assumed to be 100% diffuse (i.e., slats are translucent). The default value is 0. (default to 0D).</param>
         /// <param name="beamSolarReflectance">The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5. (default to 0.5D).</param>
         /// <param name="beamSolarReflectanceBack">The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5. (default to 0.5D).</param>
-        /// <param name="diffuseSolarTransmittance">The slat transmittance for hemisperically diffuse solar radiation. Default: 0. (default to 0D).</param>
+        /// <param name="diffuseSolarTransmittance">The slat transmittance for hemispherically diffuse solar radiation. Default: 0. (default to 0D).</param>
         /// <param name="diffuseSolarReflectance">The front-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5. (default to 0.5D).</param>
         /// <param name="diffuseSolarReflectanceBack">The back-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5. (default to 0.5D).</param>
         /// <param name="beamVisibleTransmittance">The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default: 0. (default to 0D).</param>
@@ -70,10 +70,10 @@ namespace HoneybeeSchema
         /// <param name="emissivity">Front side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9. (default to 0.9D).</param>
         /// <param name="emissivityBack">Back side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9. (default to 0.9D).</param>
         /// <param name="distanceToGlass">The distance from the mid-plane of the blind to the adjacent glass in meters. The default value is 0.05. (default to 0.05D).</param>
-        /// <param name="topOpeningMultiplier">The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. The default value is 0.5 (default to 0.5D).</param>
-        /// <param name="bottomOpeningMultiplier">The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. The default value is 0. (default to 0.5D).</param>
-        /// <param name="leftOpeningMultiplier">The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. The default value is 0.5. (default to 0.5D).</param>
-        /// <param name="rightOpeningMultiplier">The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. The default value is 0.5. (default to 0.5D).</param>
+        /// <param name="topOpeningMultiplier">The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. (default to 0.5D).</param>
+        /// <param name="bottomOpeningMultiplier">The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. (default to 0.5D).</param>
+        /// <param name="leftOpeningMultiplier">The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. (default to 0.5D).</param>
+        /// <param name="rightOpeningMultiplier">The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. (default to 0.5D).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
@@ -81,7 +81,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, Object userData= default, SlatOrientation slatOrientation= SlatOrientation.Horizontal, double slatWidth = 0.025D, double slatSeparation = 0.01875D, double slatThickness = 0.001D, double slatAngle = 45D, double slatConductivity = 221D, double beamSolarTransmittance = 0D, double beamSolarReflectance = 0.5D, double beamSolarReflectanceBack = 0.5D, double diffuseSolarTransmittance = 0D, double diffuseSolarReflectance = 0.5D, double diffuseSolarReflectanceBack = 0.5D, double beamVisibleTransmittance = 0D, double beamVisibleReflectance = 0.5D, double beamVisibleReflectanceBack = 0.5D, double diffuseVisibleTransmittance = 0D, double diffuseVisibleReflectance = 0.5D, double diffuseVisibleReflectanceBack = 0.5D, double infraredTransmittance = 0D, double emissivity = 0.9D, double emissivityBack = 0.9D, double distanceToGlass = 0.05D, double topOpeningMultiplier = 0.5D, double bottomOpeningMultiplier = 0.5D, double leftOpeningMultiplier = 0.5D, double rightOpeningMultiplier = 0.5D// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.SlatOrientation = slatOrientation;
             this.SlatWidth = slatWidth;
@@ -174,9 +174,9 @@ namespace HoneybeeSchema
         [DataMember(Name = "beam_solar_reflectance_back")]
         public double BeamSolarReflectanceBack { get; set; }  = 0.5D;
         /// <summary>
-        /// The slat transmittance for hemisperically diffuse solar radiation. Default: 0.
+        /// The slat transmittance for hemispherically diffuse solar radiation. Default: 0.
         /// </summary>
-        /// <value>The slat transmittance for hemisperically diffuse solar radiation. Default: 0.</value>
+        /// <value>The slat transmittance for hemispherically diffuse solar radiation. Default: 0.</value>
         [DataMember(Name = "diffuse_solar_transmittance")]
         public double DiffuseSolarTransmittance { get; set; }  = 0D;
         /// <summary>
@@ -252,27 +252,27 @@ namespace HoneybeeSchema
         [DataMember(Name = "distance_to_glass")]
         public double DistanceToGlass { get; set; }  = 0.05D;
         /// <summary>
-        /// The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. The default value is 0.5
+        /// The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade.
         /// </summary>
-        /// <value>The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. The default value is 0.5</value>
+        /// <value>The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade.</value>
         [DataMember(Name = "top_opening_multiplier")]
         public double TopOpeningMultiplier { get; set; }  = 0.5D;
         /// <summary>
-        /// The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. The default value is 0.
+        /// The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade.
         /// </summary>
-        /// <value>The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. The default value is 0.</value>
+        /// <value>The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade.</value>
         [DataMember(Name = "bottom_opening_multiplier")]
         public double BottomOpeningMultiplier { get; set; }  = 0.5D;
         /// <summary>
-        /// The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. The default value is 0.5.
+        /// The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade.
         /// </summary>
-        /// <value>The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. The default value is 0.5.</value>
+        /// <value>The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade.</value>
         [DataMember(Name = "left_opening_multiplier")]
         public double LeftOpeningMultiplier { get; set; }  = 0.5D;
         /// <summary>
-        /// The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. The default value is 0.5.
+        /// The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade.
         /// </summary>
-        /// <value>The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. The default value is 0.5.</value>
+        /// <value>The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade.</value>
         [DataMember(Name = "right_opening_multiplier")]
         public double RightOpeningMultiplier { get; set; }  = 0.5D;
 
@@ -296,36 +296,36 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("EnergyWindowMaterialBlind:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  SlatOrientation: ").Append(SlatOrientation).Append("\n");
-            sb.Append("  SlatWidth: ").Append(SlatWidth).Append("\n");
-            sb.Append("  SlatSeparation: ").Append(SlatSeparation).Append("\n");
-            sb.Append("  SlatThickness: ").Append(SlatThickness).Append("\n");
-            sb.Append("  SlatAngle: ").Append(SlatAngle).Append("\n");
-            sb.Append("  SlatConductivity: ").Append(SlatConductivity).Append("\n");
-            sb.Append("  BeamSolarTransmittance: ").Append(BeamSolarTransmittance).Append("\n");
-            sb.Append("  BeamSolarReflectance: ").Append(BeamSolarReflectance).Append("\n");
-            sb.Append("  BeamSolarReflectanceBack: ").Append(BeamSolarReflectanceBack).Append("\n");
-            sb.Append("  DiffuseSolarTransmittance: ").Append(DiffuseSolarTransmittance).Append("\n");
-            sb.Append("  DiffuseSolarReflectance: ").Append(DiffuseSolarReflectance).Append("\n");
-            sb.Append("  DiffuseSolarReflectanceBack: ").Append(DiffuseSolarReflectanceBack).Append("\n");
-            sb.Append("  BeamVisibleTransmittance: ").Append(BeamVisibleTransmittance).Append("\n");
-            sb.Append("  BeamVisibleReflectance: ").Append(BeamVisibleReflectance).Append("\n");
-            sb.Append("  BeamVisibleReflectanceBack: ").Append(BeamVisibleReflectanceBack).Append("\n");
-            sb.Append("  DiffuseVisibleTransmittance: ").Append(DiffuseVisibleTransmittance).Append("\n");
-            sb.Append("  DiffuseVisibleReflectance: ").Append(DiffuseVisibleReflectance).Append("\n");
-            sb.Append("  DiffuseVisibleReflectanceBack: ").Append(DiffuseVisibleReflectanceBack).Append("\n");
-            sb.Append("  InfraredTransmittance: ").Append(InfraredTransmittance).Append("\n");
-            sb.Append("  Emissivity: ").Append(Emissivity).Append("\n");
-            sb.Append("  EmissivityBack: ").Append(EmissivityBack).Append("\n");
-            sb.Append("  DistanceToGlass: ").Append(DistanceToGlass).Append("\n");
-            sb.Append("  TopOpeningMultiplier: ").Append(TopOpeningMultiplier).Append("\n");
-            sb.Append("  BottomOpeningMultiplier: ").Append(BottomOpeningMultiplier).Append("\n");
-            sb.Append("  LeftOpeningMultiplier: ").Append(LeftOpeningMultiplier).Append("\n");
-            sb.Append("  RightOpeningMultiplier: ").Append(RightOpeningMultiplier).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  SlatOrientation: ").Append(this.SlatOrientation).Append("\n");
+            sb.Append("  SlatWidth: ").Append(this.SlatWidth).Append("\n");
+            sb.Append("  SlatSeparation: ").Append(this.SlatSeparation).Append("\n");
+            sb.Append("  SlatThickness: ").Append(this.SlatThickness).Append("\n");
+            sb.Append("  SlatAngle: ").Append(this.SlatAngle).Append("\n");
+            sb.Append("  SlatConductivity: ").Append(this.SlatConductivity).Append("\n");
+            sb.Append("  BeamSolarTransmittance: ").Append(this.BeamSolarTransmittance).Append("\n");
+            sb.Append("  BeamSolarReflectance: ").Append(this.BeamSolarReflectance).Append("\n");
+            sb.Append("  BeamSolarReflectanceBack: ").Append(this.BeamSolarReflectanceBack).Append("\n");
+            sb.Append("  DiffuseSolarTransmittance: ").Append(this.DiffuseSolarTransmittance).Append("\n");
+            sb.Append("  DiffuseSolarReflectance: ").Append(this.DiffuseSolarReflectance).Append("\n");
+            sb.Append("  DiffuseSolarReflectanceBack: ").Append(this.DiffuseSolarReflectanceBack).Append("\n");
+            sb.Append("  BeamVisibleTransmittance: ").Append(this.BeamVisibleTransmittance).Append("\n");
+            sb.Append("  BeamVisibleReflectance: ").Append(this.BeamVisibleReflectance).Append("\n");
+            sb.Append("  BeamVisibleReflectanceBack: ").Append(this.BeamVisibleReflectanceBack).Append("\n");
+            sb.Append("  DiffuseVisibleTransmittance: ").Append(this.DiffuseVisibleTransmittance).Append("\n");
+            sb.Append("  DiffuseVisibleReflectance: ").Append(this.DiffuseVisibleReflectance).Append("\n");
+            sb.Append("  DiffuseVisibleReflectanceBack: ").Append(this.DiffuseVisibleReflectanceBack).Append("\n");
+            sb.Append("  InfraredTransmittance: ").Append(this.InfraredTransmittance).Append("\n");
+            sb.Append("  Emissivity: ").Append(this.Emissivity).Append("\n");
+            sb.Append("  EmissivityBack: ").Append(this.EmissivityBack).Append("\n");
+            sb.Append("  DistanceToGlass: ").Append(this.DistanceToGlass).Append("\n");
+            sb.Append("  TopOpeningMultiplier: ").Append(this.TopOpeningMultiplier).Append("\n");
+            sb.Append("  BottomOpeningMultiplier: ").Append(this.BottomOpeningMultiplier).Append("\n");
+            sb.Append("  LeftOpeningMultiplier: ").Append(this.LeftOpeningMultiplier).Append("\n");
+            sb.Append("  RightOpeningMultiplier: ").Append(this.RightOpeningMultiplier).Append("\n");
             return sb.ToString();
         }
   
@@ -389,87 +389,33 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SlatOrientation, input.SlatOrientation)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SlatWidth, input.SlatWidth)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SlatSeparation, input.SlatSeparation)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SlatThickness, input.SlatThickness)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SlatAngle, input.SlatAngle)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SlatConductivity, input.SlatConductivity)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.BeamSolarTransmittance, input.BeamSolarTransmittance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.BeamSolarReflectance, input.BeamSolarReflectance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.BeamSolarReflectanceBack, input.BeamSolarReflectanceBack)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DiffuseSolarTransmittance, input.DiffuseSolarTransmittance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DiffuseSolarReflectance, input.DiffuseSolarReflectance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DiffuseSolarReflectanceBack, input.DiffuseSolarReflectanceBack)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.BeamVisibleTransmittance, input.BeamVisibleTransmittance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.BeamVisibleReflectance, input.BeamVisibleReflectance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.BeamVisibleReflectanceBack, input.BeamVisibleReflectanceBack)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DiffuseVisibleTransmittance, input.DiffuseVisibleTransmittance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DiffuseVisibleReflectance, input.DiffuseVisibleReflectance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DiffuseVisibleReflectanceBack, input.DiffuseVisibleReflectanceBack)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.InfraredTransmittance, input.InfraredTransmittance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Emissivity, input.Emissivity)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.EmissivityBack, input.EmissivityBack)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DistanceToGlass, input.DistanceToGlass)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.TopOpeningMultiplier, input.TopOpeningMultiplier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.BottomOpeningMultiplier, input.BottomOpeningMultiplier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.LeftOpeningMultiplier, input.LeftOpeningMultiplier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.RightOpeningMultiplier, input.RightOpeningMultiplier)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.SlatOrientation, input.SlatOrientation) && 
+                    Extension.Equals(this.SlatWidth, input.SlatWidth) && 
+                    Extension.Equals(this.SlatSeparation, input.SlatSeparation) && 
+                    Extension.Equals(this.SlatThickness, input.SlatThickness) && 
+                    Extension.Equals(this.SlatAngle, input.SlatAngle) && 
+                    Extension.Equals(this.SlatConductivity, input.SlatConductivity) && 
+                    Extension.Equals(this.BeamSolarTransmittance, input.BeamSolarTransmittance) && 
+                    Extension.Equals(this.BeamSolarReflectance, input.BeamSolarReflectance) && 
+                    Extension.Equals(this.BeamSolarReflectanceBack, input.BeamSolarReflectanceBack) && 
+                    Extension.Equals(this.DiffuseSolarTransmittance, input.DiffuseSolarTransmittance) && 
+                    Extension.Equals(this.DiffuseSolarReflectance, input.DiffuseSolarReflectance) && 
+                    Extension.Equals(this.DiffuseSolarReflectanceBack, input.DiffuseSolarReflectanceBack) && 
+                    Extension.Equals(this.BeamVisibleTransmittance, input.BeamVisibleTransmittance) && 
+                    Extension.Equals(this.BeamVisibleReflectance, input.BeamVisibleReflectance) && 
+                    Extension.Equals(this.BeamVisibleReflectanceBack, input.BeamVisibleReflectanceBack) && 
+                    Extension.Equals(this.DiffuseVisibleTransmittance, input.DiffuseVisibleTransmittance) && 
+                    Extension.Equals(this.DiffuseVisibleReflectance, input.DiffuseVisibleReflectance) && 
+                    Extension.Equals(this.DiffuseVisibleReflectanceBack, input.DiffuseVisibleReflectanceBack) && 
+                    Extension.Equals(this.InfraredTransmittance, input.InfraredTransmittance) && 
+                    Extension.Equals(this.Emissivity, input.Emissivity) && 
+                    Extension.Equals(this.EmissivityBack, input.EmissivityBack) && 
+                    Extension.Equals(this.DistanceToGlass, input.DistanceToGlass) && 
+                    Extension.Equals(this.TopOpeningMultiplier, input.TopOpeningMultiplier) && 
+                    Extension.Equals(this.BottomOpeningMultiplier, input.BottomOpeningMultiplier) && 
+                    Extension.Equals(this.LeftOpeningMultiplier, input.LeftOpeningMultiplier) && 
+                    Extension.Equals(this.RightOpeningMultiplier, input.RightOpeningMultiplier);
         }
 
         /// <summary>

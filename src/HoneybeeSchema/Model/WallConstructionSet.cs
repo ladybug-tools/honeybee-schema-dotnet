@@ -100,10 +100,10 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("WallConstructionSet:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  InteriorConstruction: ").Append(InteriorConstruction).Append("\n");
-            sb.Append("  ExteriorConstruction: ").Append(ExteriorConstruction).Append("\n");
-            sb.Append("  GroundConstruction: ").Append(GroundConstruction).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  InteriorConstruction: ").Append(this.InteriorConstruction).Append("\n");
+            sb.Append("  ExteriorConstruction: ").Append(this.ExteriorConstruction).Append("\n");
+            sb.Append("  GroundConstruction: ").Append(this.GroundConstruction).Append("\n");
             return sb.ToString();
         }
   
@@ -167,18 +167,10 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.InteriorConstruction, input.InteriorConstruction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ExteriorConstruction, input.ExteriorConstruction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.GroundConstruction, input.GroundConstruction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                    Extension.Equals(this.InteriorConstruction, input.InteriorConstruction) && 
+                    Extension.Equals(this.ExteriorConstruction, input.ExteriorConstruction) && 
+                    Extension.Equals(this.GroundConstruction, input.GroundConstruction) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

@@ -102,9 +102,9 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("DryBulbCondition:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  DryBulbMax: ").Append(DryBulbMax).Append("\n");
-            sb.Append("  DryBulbRange: ").Append(DryBulbRange).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  DryBulbMax: ").Append(this.DryBulbMax).Append("\n");
+            sb.Append("  DryBulbRange: ").Append(this.DryBulbRange).Append("\n");
             return sb.ToString();
         }
   
@@ -168,15 +168,9 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.DryBulbMax, input.DryBulbMax)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DryBulbRange, input.DryBulbRange)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                    Extension.Equals(this.DryBulbMax, input.DryBulbMax) && 
+                    Extension.Equals(this.DryBulbRange, input.DryBulbRange) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

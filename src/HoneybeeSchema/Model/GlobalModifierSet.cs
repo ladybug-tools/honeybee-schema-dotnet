@@ -134,15 +134,15 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("GlobalModifierSet:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Modifiers: ").Append(Modifiers).Append("\n");
-            sb.Append("  WallSet: ").Append(WallSet).Append("\n");
-            sb.Append("  FloorSet: ").Append(FloorSet).Append("\n");
-            sb.Append("  RoofCeilingSet: ").Append(RoofCeilingSet).Append("\n");
-            sb.Append("  ApertureSet: ").Append(ApertureSet).Append("\n");
-            sb.Append("  DoorSet: ").Append(DoorSet).Append("\n");
-            sb.Append("  ShadeSet: ").Append(ShadeSet).Append("\n");
-            sb.Append("  AirBoundaryModifier: ").Append(AirBoundaryModifier).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Modifiers: ").Append(this.Modifiers).Append("\n");
+            sb.Append("  WallSet: ").Append(this.WallSet).Append("\n");
+            sb.Append("  FloorSet: ").Append(this.FloorSet).Append("\n");
+            sb.Append("  RoofCeilingSet: ").Append(this.RoofCeilingSet).Append("\n");
+            sb.Append("  ApertureSet: ").Append(this.ApertureSet).Append("\n");
+            sb.Append("  DoorSet: ").Append(this.DoorSet).Append("\n");
+            sb.Append("  ShadeSet: ").Append(this.ShadeSet).Append("\n");
+            sb.Append("  AirBoundaryModifier: ").Append(this.AirBoundaryModifier).Append("\n");
             return sb.ToString();
         }
   
@@ -206,34 +206,18 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.Type, input.Type) && 
                 (
                     this.Modifiers == input.Modifiers ||
                     Extension.AllEquals(this.Modifiers, input.Modifiers)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.WallSet, input.WallSet)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.FloorSet, input.FloorSet)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.RoofCeilingSet, input.RoofCeilingSet)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ApertureSet, input.ApertureSet)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DoorSet, input.DoorSet)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ShadeSet, input.ShadeSet)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.AirBoundaryModifier, input.AirBoundaryModifier)
-                );
+                ) && 
+                    Extension.Equals(this.WallSet, input.WallSet) && 
+                    Extension.Equals(this.FloorSet, input.FloorSet) && 
+                    Extension.Equals(this.RoofCeilingSet, input.RoofCeilingSet) && 
+                    Extension.Equals(this.ApertureSet, input.ApertureSet) && 
+                    Extension.Equals(this.DoorSet, input.DoorSet) && 
+                    Extension.Equals(this.ShadeSet, input.ShadeSet) && 
+                    Extension.Equals(this.AirBoundaryModifier, input.AirBoundaryModifier);
         }
 
         /// <summary>
