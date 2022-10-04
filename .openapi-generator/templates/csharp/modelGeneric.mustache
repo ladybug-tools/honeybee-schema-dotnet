@@ -70,8 +70,8 @@
         public {{classname}}
         (
             {{#parent}}{{#parentModel}}{{#allVars}}{{^isReadOnly}}{{#required}}{{{datatypeWithEnum}}} {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#hasMore}}, {{/hasMore}}{{/required}}{{/isReadOnly}}{{/allVars}}{{/parentModel}}{{/parent}}{{#vars}}{{^isReadOnly}}{{#required}}, {{{datatypeWithEnum}}} {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#hasMore}}, {{/hasMore}}{{/required}}{{/isReadOnly}}{{/vars}}{{#hasRequired}}{{#hasOptional}}, {{/hasOptional}}{{/hasRequired}}// Required parameters
-            {{#parent}}{{#parentModel}}{{#allVars}}{{^isReadOnly}}{{^required}}{{{datatypeWithEnum}}} {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#defaultValue}} = {{#isEnum}}{{{datatypeWithEnum}}}Enum""{{{defaultValue}}}""Enum{{/isEnum}}{{^isEnum}}{{{defaultValue}}}{{/isEnum}}{{/defaultValue}}{{^defaultValue}}= default{{/defaultValue}}{{#hasMore}}, {{/hasMore}}{{/required}}{{/isReadOnly}}{{/allVars}}{{/parentModel}}{{/parent}}{{#vars}}{{^isReadOnly}}{{^required}}, {{{datatypeWithEnum}}} {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#defaultValue}} = {{#isEnum}}{{{datatypeWithEnum}}}Enum""{{{defaultValue}}}""Enum{{/isEnum}}{{^isEnum}}{{{defaultValue}}}{{/isEnum}}{{/defaultValue}}{{^defaultValue}}= default{{/defaultValue}}{{#hasMore}}, {{/hasMore}}{{/required}}{{/isReadOnly}}{{/vars}}// Optional parameters
-        ){{#parent}} : base({{#parentModel}}{{#allVars}}{{^isReadOnly}}{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}: {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#hasMore}}, {{/hasMore}}{{/isReadOnly}}{{/allVars}}{{/parentModel}}){{/parent}}// BaseClass
+            {{#parent}}{{#parentModel}}{{#allVars}}{{^isReadOnly}}{{^required}}{{{datatypeWithEnum}}} {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#defaultValue}} = {{#isEnum}}{{{datatypeWithEnum}}}Enum""{{{defaultValue}}}""Enum{{/isEnum}}{{^isEnum}}{{{defaultValue}}}{{/isEnum}}{{/defaultValue}}{{^defaultValue}}= default{{/defaultValue}}, {{/required}}{{/isReadOnly}}{{/allVars}}{{/parentModel}}{{/parent}}{{#vars}}{{^isReadOnly}}{{^required}}, {{{datatypeWithEnum}}} {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}{{#defaultValue}} = {{#isEnum}}{{{datatypeWithEnum}}}Enum""{{{defaultValue}}}""Enum{{/isEnum}}{{^isEnum}}{{{defaultValue}}}{{/isEnum}}{{/defaultValue}}{{^defaultValue}}= default{{/defaultValue}}{{#hasMore}}, {{/hasMore}}{{/required}}{{/isReadOnly}}{{/vars}}// Optional parameters
+        ){{#parent}} : base({{#parentModel}}{{#allVars}}{{^isReadOnly}}{{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}: {{#lambda.camelcase_param}}{{name}}{{/lambda.camelcase_param}}, {{/isReadOnly}}{{/allVars}}{{/parentModel}}){{/parent}}// BaseClass
         {
             {{#vars}}
             {{^isInherited}}
@@ -194,7 +194,7 @@
             var sb = new StringBuilder();
             sb.Append("{{classname}}:\n");
             {{#allVars}}
-            sb.Append("  {{name}}: ").Append({{name}}).Append("\n");
+            sb.Append("  {{name}}: ").Append(this.{{name}}).Append("\n");
             {{/allVars}}
             return sb.ToString();
         }
@@ -260,14 +260,12 @@
         {
             if (input == null)
                 return false;
-            return {{#vars}}{{#parent}}base.Equals(input) && {{/parent}}{{^isContainer}}
-                (
-                    Extension.Equals(this.{{name}}, input.{{name}})
-                ){{#hasMore}} && {{/hasMore}}{{/isContainer}}{{#isContainer}}
+            return base.Equals(input) && {{#vars}}{{^isContainer}}
+                    Extension.Equals(this.{{name}}, input.{{name}}){{#hasMore}} && {{/hasMore}}{{/isContainer}}{{#isContainer}}
                 (
                     this.{{name}} == input.{{name}} ||
                     Extension.AllEquals(this.{{name}}, input.{{name}})
-                ){{#hasMore}} && {{/hasMore}}{{/isContainer}}{{/vars}}{{^vars}}{{#parent}}base.Equals(input){{/parent}}{{^parent}}false{{/parent}}{{/vars}};
+                ){{#hasMore}} && {{/hasMore}}{{/isContainer}}{{/vars}}{{^vars}}{{#parent}}{{/parent}}{{^parent}}false{{/parent}}{{/vars}};
         }
 
         /// <summary>
