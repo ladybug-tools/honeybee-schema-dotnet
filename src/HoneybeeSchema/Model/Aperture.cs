@@ -56,7 +56,7 @@ namespace HoneybeeSchema
         (
             string identifier, Face3D geometry, AnyOf<Outdoors,Surface> boundaryCondition, AperturePropertiesAbridged properties, // Required parameters
             string displayName= default, Object userData= default, bool isOperable = false, List<Shade> indoorShades= default, List<Shade> outdoorShades= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "geometry" is required (not null)
             this.Geometry = geometry ?? throw new ArgumentNullException("geometry is a required property for Aperture and cannot be null");
@@ -139,16 +139,16 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Aperture:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  Geometry: ").Append(Geometry).Append("\n");
-            sb.Append("  BoundaryCondition: ").Append(BoundaryCondition).Append("\n");
-            sb.Append("  Properties: ").Append(Properties).Append("\n");
-            sb.Append("  IsOperable: ").Append(IsOperable).Append("\n");
-            sb.Append("  IndoorShades: ").Append(IndoorShades).Append("\n");
-            sb.Append("  OutdoorShades: ").Append(OutdoorShades).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  Geometry: ").Append(this.Geometry).Append("\n");
+            sb.Append("  BoundaryCondition: ").Append(this.BoundaryCondition).Append("\n");
+            sb.Append("  Properties: ").Append(this.Properties).Append("\n");
+            sb.Append("  IsOperable: ").Append(this.IsOperable).Append("\n");
+            sb.Append("  IndoorShades: ").Append(this.IndoorShades).Append("\n");
+            sb.Append("  OutdoorShades: ").Append(this.OutdoorShades).Append("\n");
             return sb.ToString();
         }
   
@@ -212,25 +212,15 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Geometry, input.Geometry)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.BoundaryCondition, input.BoundaryCondition)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Properties, input.Properties)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.IsOperable, input.IsOperable)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.Geometry, input.Geometry) && 
+                    Extension.Equals(this.BoundaryCondition, input.BoundaryCondition) && 
+                    Extension.Equals(this.Properties, input.Properties) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.IsOperable, input.IsOperable) && 
                 (
                     this.IndoorShades == input.IndoorShades ||
                     Extension.AllEquals(this.IndoorShades, input.IndoorShades)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.OutdoorShades == input.OutdoorShades ||
                     Extension.AllEquals(this.OutdoorShades, input.OutdoorShades)

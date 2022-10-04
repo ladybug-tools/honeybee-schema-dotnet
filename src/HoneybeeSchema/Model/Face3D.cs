@@ -111,10 +111,10 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Face3D:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Boundary: ").Append(Boundary).Append("\n");
-            sb.Append("  Holes: ").Append(Holes).Append("\n");
-            sb.Append("  Plane: ").Append(Plane).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Boundary: ").Append(this.Boundary).Append("\n");
+            sb.Append("  Holes: ").Append(this.Holes).Append("\n");
+            sb.Append("  Plane: ").Append(this.Plane).Append("\n");
             return sb.ToString();
         }
   
@@ -181,17 +181,13 @@ namespace HoneybeeSchema
                 (
                     this.Boundary == input.Boundary ||
                     Extension.AllEquals(this.Boundary, input.Boundary)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
+                ) && 
+                    Extension.Equals(this.Type, input.Type) && 
                 (
                     this.Holes == input.Holes ||
                     Extension.AllEquals(this.Holes, input.Holes)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Plane, input.Plane)
-                );
+                ) && 
+                    Extension.Equals(this.Plane, input.Plane);
         }
 
         /// <summary>

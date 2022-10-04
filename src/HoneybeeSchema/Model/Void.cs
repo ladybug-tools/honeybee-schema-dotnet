@@ -77,7 +77,7 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Void:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
             return sb.ToString();
         }
   
@@ -141,9 +141,7 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

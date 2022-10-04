@@ -95,8 +95,8 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Surface:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  BoundaryConditionObjects: ").Append(BoundaryConditionObjects).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  BoundaryConditionObjects: ").Append(this.BoundaryConditionObjects).Append("\n");
             return sb.ToString();
         }
   
@@ -163,10 +163,8 @@ namespace HoneybeeSchema
                 (
                     this.BoundaryConditionObjects == input.BoundaryConditionObjects ||
                     Extension.AllEquals(this.BoundaryConditionObjects, input.BoundaryConditionObjects)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                ) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

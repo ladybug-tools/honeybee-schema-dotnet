@@ -135,13 +135,13 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("DaylightingControl:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  SensorPosition: ").Append(SensorPosition).Append("\n");
-            sb.Append("  IlluminanceSetpoint: ").Append(IlluminanceSetpoint).Append("\n");
-            sb.Append("  ControlFraction: ").Append(ControlFraction).Append("\n");
-            sb.Append("  MinPowerInput: ").Append(MinPowerInput).Append("\n");
-            sb.Append("  MinLightOutput: ").Append(MinLightOutput).Append("\n");
-            sb.Append("  OffAtMinimum: ").Append(OffAtMinimum).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  SensorPosition: ").Append(this.SensorPosition).Append("\n");
+            sb.Append("  IlluminanceSetpoint: ").Append(this.IlluminanceSetpoint).Append("\n");
+            sb.Append("  ControlFraction: ").Append(this.ControlFraction).Append("\n");
+            sb.Append("  MinPowerInput: ").Append(this.MinPowerInput).Append("\n");
+            sb.Append("  MinLightOutput: ").Append(this.MinLightOutput).Append("\n");
+            sb.Append("  OffAtMinimum: ").Append(this.OffAtMinimum).Append("\n");
             return sb.ToString();
         }
   
@@ -208,25 +208,13 @@ namespace HoneybeeSchema
                 (
                     this.SensorPosition == input.SensorPosition ||
                     Extension.AllEquals(this.SensorPosition, input.SensorPosition)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.IlluminanceSetpoint, input.IlluminanceSetpoint)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ControlFraction, input.ControlFraction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.MinPowerInput, input.MinPowerInput)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.MinLightOutput, input.MinLightOutput)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.OffAtMinimum, input.OffAtMinimum)
-                );
+                ) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.IlluminanceSetpoint, input.IlluminanceSetpoint) && 
+                    Extension.Equals(this.ControlFraction, input.ControlFraction) && 
+                    Extension.Equals(this.MinPowerInput, input.MinPowerInput) && 
+                    Extension.Equals(this.MinLightOutput, input.MinLightOutput) && 
+                    Extension.Equals(this.OffAtMinimum, input.OffAtMinimum);
         }
 
         /// <summary>

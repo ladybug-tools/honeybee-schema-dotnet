@@ -57,7 +57,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, Object userData= default, double thickness = 0.0125D, GasType gasType= GasType.Air// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.Thickness = thickness;
             this.GasType = gasType;
@@ -104,12 +104,12 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("EnergyWindowMaterialGas:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  Thickness: ").Append(Thickness).Append("\n");
-            sb.Append("  GasType: ").Append(GasType).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  Thickness: ").Append(this.Thickness).Append("\n");
+            sb.Append("  GasType: ").Append(this.GasType).Append("\n");
             return sb.ToString();
         }
   
@@ -173,15 +173,9 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Thickness, input.Thickness)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.GasType, input.GasType)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.Thickness, input.Thickness) && 
+                    Extension.Equals(this.GasType, input.GasType);
         }
 
         /// <summary>

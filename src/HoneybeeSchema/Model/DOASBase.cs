@@ -61,7 +61,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, Object userData= default, Vintages vintage= default, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, bool demandControlledVentilation = false, string doasAvailabilitySchedule= default // Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.Vintage = vintage;
             this.SensibleHeatRecovery = sensibleHeatRecovery;
@@ -129,15 +129,15 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("DOASBase:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  Vintage: ").Append(Vintage).Append("\n");
-            sb.Append("  SensibleHeatRecovery: ").Append(SensibleHeatRecovery).Append("\n");
-            sb.Append("  LatentHeatRecovery: ").Append(LatentHeatRecovery).Append("\n");
-            sb.Append("  DemandControlledVentilation: ").Append(DemandControlledVentilation).Append("\n");
-            sb.Append("  DoasAvailabilitySchedule: ").Append(DoasAvailabilitySchedule).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  Vintage: ").Append(this.Vintage).Append("\n");
+            sb.Append("  SensibleHeatRecovery: ").Append(this.SensibleHeatRecovery).Append("\n");
+            sb.Append("  LatentHeatRecovery: ").Append(this.LatentHeatRecovery).Append("\n");
+            sb.Append("  DemandControlledVentilation: ").Append(this.DemandControlledVentilation).Append("\n");
+            sb.Append("  DoasAvailabilitySchedule: ").Append(this.DoasAvailabilitySchedule).Append("\n");
             return sb.ToString();
         }
   
@@ -201,24 +201,12 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Vintage, input.Vintage)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SensibleHeatRecovery, input.SensibleHeatRecovery)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.LatentHeatRecovery, input.LatentHeatRecovery)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DemandControlledVentilation, input.DemandControlledVentilation)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DoasAvailabilitySchedule, input.DoasAvailabilitySchedule)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                    Extension.Equals(this.Vintage, input.Vintage) && 
+                    Extension.Equals(this.SensibleHeatRecovery, input.SensibleHeatRecovery) && 
+                    Extension.Equals(this.LatentHeatRecovery, input.LatentHeatRecovery) && 
+                    Extension.Equals(this.DemandControlledVentilation, input.DemandControlledVentilation) && 
+                    Extension.Equals(this.DoasAvailabilitySchedule, input.DoasAvailabilitySchedule) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

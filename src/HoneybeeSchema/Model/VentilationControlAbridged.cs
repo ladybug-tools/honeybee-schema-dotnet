@@ -124,13 +124,13 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("VentilationControlAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  MinIndoorTemperature: ").Append(MinIndoorTemperature).Append("\n");
-            sb.Append("  MaxIndoorTemperature: ").Append(MaxIndoorTemperature).Append("\n");
-            sb.Append("  MinOutdoorTemperature: ").Append(MinOutdoorTemperature).Append("\n");
-            sb.Append("  MaxOutdoorTemperature: ").Append(MaxOutdoorTemperature).Append("\n");
-            sb.Append("  DeltaTemperature: ").Append(DeltaTemperature).Append("\n");
-            sb.Append("  Schedule: ").Append(Schedule).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  MinIndoorTemperature: ").Append(this.MinIndoorTemperature).Append("\n");
+            sb.Append("  MaxIndoorTemperature: ").Append(this.MaxIndoorTemperature).Append("\n");
+            sb.Append("  MinOutdoorTemperature: ").Append(this.MinOutdoorTemperature).Append("\n");
+            sb.Append("  MaxOutdoorTemperature: ").Append(this.MaxOutdoorTemperature).Append("\n");
+            sb.Append("  DeltaTemperature: ").Append(this.DeltaTemperature).Append("\n");
+            sb.Append("  Schedule: ").Append(this.Schedule).Append("\n");
             return sb.ToString();
         }
   
@@ -194,27 +194,13 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.MinIndoorTemperature, input.MinIndoorTemperature)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.MaxIndoorTemperature, input.MaxIndoorTemperature)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.MinOutdoorTemperature, input.MinOutdoorTemperature)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.MaxOutdoorTemperature, input.MaxOutdoorTemperature)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DeltaTemperature, input.DeltaTemperature)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Schedule, input.Schedule)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.MinIndoorTemperature, input.MinIndoorTemperature) && 
+                    Extension.Equals(this.MaxIndoorTemperature, input.MaxIndoorTemperature) && 
+                    Extension.Equals(this.MinOutdoorTemperature, input.MinOutdoorTemperature) && 
+                    Extension.Equals(this.MaxOutdoorTemperature, input.MaxOutdoorTemperature) && 
+                    Extension.Equals(this.DeltaTemperature, input.DeltaTemperature) && 
+                    Extension.Equals(this.Schedule, input.Schedule);
         }
 
         /// <summary>

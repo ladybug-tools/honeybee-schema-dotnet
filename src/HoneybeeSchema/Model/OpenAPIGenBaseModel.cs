@@ -78,7 +78,7 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("OpenAPIGenBaseModel:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
             return sb.ToString();
         }
   
@@ -133,10 +133,8 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+            return base.Equals(input) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

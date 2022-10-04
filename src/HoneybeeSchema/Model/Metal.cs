@@ -56,7 +56,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> dependencies= default, double rReflectance = 0.0D, double gReflectance = 0.0D, double bReflectance = 0.0D, double specularity = 0.9D, double roughness = 0D // Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             this.Modifier = modifier;
             this.Dependencies = dependencies;
@@ -144,16 +144,16 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Metal:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  Modifier: ").Append(Modifier).Append("\n");
-            sb.Append("  Dependencies: ").Append(Dependencies).Append("\n");
-            sb.Append("  RReflectance: ").Append(RReflectance).Append("\n");
-            sb.Append("  GReflectance: ").Append(GReflectance).Append("\n");
-            sb.Append("  BReflectance: ").Append(BReflectance).Append("\n");
-            sb.Append("  Specularity: ").Append(Specularity).Append("\n");
-            sb.Append("  Roughness: ").Append(Roughness).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  Modifier: ").Append(this.Modifier).Append("\n");
+            sb.Append("  Dependencies: ").Append(this.Dependencies).Append("\n");
+            sb.Append("  RReflectance: ").Append(this.RReflectance).Append("\n");
+            sb.Append("  GReflectance: ").Append(this.GReflectance).Append("\n");
+            sb.Append("  BReflectance: ").Append(this.BReflectance).Append("\n");
+            sb.Append("  Specularity: ").Append(this.Specularity).Append("\n");
+            sb.Append("  Roughness: ").Append(this.Roughness).Append("\n");
             return sb.ToString();
         }
   
@@ -217,31 +217,17 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Modifier, input.Modifier)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.Modifier, input.Modifier) && 
                 (
                     this.Dependencies == input.Dependencies ||
                     Extension.AllEquals(this.Dependencies, input.Dependencies)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.RReflectance, input.RReflectance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.GReflectance, input.GReflectance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.BReflectance, input.BReflectance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Specularity, input.Specularity)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Roughness, input.Roughness)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                ) && 
+                    Extension.Equals(this.RReflectance, input.RReflectance) && 
+                    Extension.Equals(this.GReflectance, input.GReflectance) && 
+                    Extension.Equals(this.BReflectance, input.BReflectance) && 
+                    Extension.Equals(this.Specularity, input.Specularity) && 
+                    Extension.Equals(this.Roughness, input.Roughness) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

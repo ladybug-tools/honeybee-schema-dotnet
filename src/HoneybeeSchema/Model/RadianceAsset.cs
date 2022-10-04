@@ -51,7 +51,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, string roomIdentifier= default, List<List<string>> lightPath= default // Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             this.RoomIdentifier = roomIdentifier;
             this.LightPath = lightPath;
@@ -104,11 +104,11 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("RadianceAsset:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  RoomIdentifier: ").Append(RoomIdentifier).Append("\n");
-            sb.Append("  LightPath: ").Append(LightPath).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  RoomIdentifier: ").Append(this.RoomIdentifier).Append("\n");
+            sb.Append("  LightPath: ").Append(this.LightPath).Append("\n");
             return sb.ToString();
         }
   
@@ -172,16 +172,12 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.RoomIdentifier, input.RoomIdentifier)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.RoomIdentifier, input.RoomIdentifier) && 
                 (
                     this.LightPath == input.LightPath ||
                     Extension.AllEquals(this.LightPath, input.LightPath)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                ) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

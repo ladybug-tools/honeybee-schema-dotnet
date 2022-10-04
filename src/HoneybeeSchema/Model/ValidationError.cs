@@ -162,16 +162,16 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ValidationError:\n");
-            sb.Append("  Code: ").Append(Code).Append("\n");
-            sb.Append("  ErrorType: ").Append(ErrorType).Append("\n");
-            sb.Append("  ExtensionType: ").Append(ExtensionType).Append("\n");
-            sb.Append("  ElementType: ").Append(ElementType).Append("\n");
-            sb.Append("  ElementId: ").Append(ElementId).Append("\n");
-            sb.Append("  Message: ").Append(Message).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  ElementName: ").Append(ElementName).Append("\n");
-            sb.Append("  Parents: ").Append(Parents).Append("\n");
-            sb.Append("  TopParents: ").Append(TopParents).Append("\n");
+            sb.Append("  Code: ").Append(this.Code).Append("\n");
+            sb.Append("  ErrorType: ").Append(this.ErrorType).Append("\n");
+            sb.Append("  ExtensionType: ").Append(this.ExtensionType).Append("\n");
+            sb.Append("  ElementType: ").Append(this.ElementType).Append("\n");
+            sb.Append("  ElementId: ").Append(this.ElementId).Append("\n");
+            sb.Append("  Message: ").Append(this.Message).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  ElementName: ").Append(this.ElementName).Append("\n");
+            sb.Append("  Parents: ").Append(this.Parents).Append("\n");
+            sb.Append("  TopParents: ").Append(this.TopParents).Append("\n");
             return sb.ToString();
         }
   
@@ -226,31 +226,15 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return 
-                (
-                    Extension.Equals(this.Code, input.Code)
-                ) && 
-                (
-                    Extension.Equals(this.ErrorType, input.ErrorType)
-                ) && 
-                (
-                    Extension.Equals(this.ExtensionType, input.ExtensionType)
-                ) && 
-                (
-                    Extension.Equals(this.ElementType, input.ElementType)
-                ) && 
-                (
-                    Extension.Equals(this.ElementId, input.ElementId)
-                ) && 
-                (
-                    Extension.Equals(this.Message, input.Message)
-                ) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && 
-                (
-                    Extension.Equals(this.ElementName, input.ElementName)
-                ) && 
+            return base.Equals(input) && 
+                    Extension.Equals(this.Code, input.Code) && 
+                    Extension.Equals(this.ErrorType, input.ErrorType) && 
+                    Extension.Equals(this.ExtensionType, input.ExtensionType) && 
+                    Extension.Equals(this.ElementType, input.ElementType) && 
+                    Extension.Equals(this.ElementId, input.ElementId) && 
+                    Extension.Equals(this.Message, input.Message) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.ElementName, input.ElementName) && 
                 (
                     this.Parents == input.Parents ||
                     Extension.AllEquals(this.Parents, input.Parents)

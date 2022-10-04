@@ -54,7 +54,7 @@ namespace HoneybeeSchema
         (
             string identifier, AnyOf<ScheduleRuleset,ScheduleFixedInterval> coolingSchedule, AnyOf<ScheduleRuleset,ScheduleFixedInterval> heatingSchedule, // Required parameters
             string displayName= default, Object userData= default, AnyOf<ScheduleRuleset,ScheduleFixedInterval> humidifyingSchedule= default, AnyOf<ScheduleRuleset,ScheduleFixedInterval> dehumidifyingSchedule= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "coolingSchedule" is required (not null)
             this.CoolingSchedule = coolingSchedule ?? throw new ArgumentNullException("coolingSchedule is a required property for Setpoint and cannot be null");
@@ -123,14 +123,14 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Setpoint:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  CoolingSchedule: ").Append(CoolingSchedule).Append("\n");
-            sb.Append("  HeatingSchedule: ").Append(HeatingSchedule).Append("\n");
-            sb.Append("  HumidifyingSchedule: ").Append(HumidifyingSchedule).Append("\n");
-            sb.Append("  DehumidifyingSchedule: ").Append(DehumidifyingSchedule).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  CoolingSchedule: ").Append(this.CoolingSchedule).Append("\n");
+            sb.Append("  HeatingSchedule: ").Append(this.HeatingSchedule).Append("\n");
+            sb.Append("  HumidifyingSchedule: ").Append(this.HumidifyingSchedule).Append("\n");
+            sb.Append("  DehumidifyingSchedule: ").Append(this.DehumidifyingSchedule).Append("\n");
             return sb.ToString();
         }
   
@@ -194,21 +194,11 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.CoolingSchedule, input.CoolingSchedule)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.HeatingSchedule, input.HeatingSchedule)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.HumidifyingSchedule, input.HumidifyingSchedule)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DehumidifyingSchedule, input.DehumidifyingSchedule)
-                );
+                    Extension.Equals(this.CoolingSchedule, input.CoolingSchedule) && 
+                    Extension.Equals(this.HeatingSchedule, input.HeatingSchedule) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.HumidifyingSchedule, input.HumidifyingSchedule) && 
+                    Extension.Equals(this.DehumidifyingSchedule, input.DehumidifyingSchedule);
         }
 
         /// <summary>

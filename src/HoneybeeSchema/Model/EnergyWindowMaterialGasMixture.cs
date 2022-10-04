@@ -53,7 +53,7 @@ namespace HoneybeeSchema
         (
             string identifier, List<GasType> gasTypes, List<double> gasFractions, // Required parameters
             string displayName= default, Object userData= default, double thickness = 0.0125D// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "gasTypes" is required (not null)
             this.GasTypes = gasTypes ?? throw new ArgumentNullException("gasTypes is a required property for EnergyWindowMaterialGasMixture and cannot be null");
@@ -115,13 +115,13 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("EnergyWindowMaterialGasMixture:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  GasTypes: ").Append(GasTypes).Append("\n");
-            sb.Append("  GasFractions: ").Append(GasFractions).Append("\n");
-            sb.Append("  Thickness: ").Append(Thickness).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  GasTypes: ").Append(this.GasTypes).Append("\n");
+            sb.Append("  GasFractions: ").Append(this.GasFractions).Append("\n");
+            sb.Append("  Thickness: ").Append(this.Thickness).Append("\n");
             return sb.ToString();
         }
   
@@ -188,17 +188,13 @@ namespace HoneybeeSchema
                 (
                     this.GasTypes == input.GasTypes ||
                     Extension.AllEquals(this.GasTypes, input.GasTypes)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.GasFractions == input.GasFractions ||
                     Extension.AllEquals(this.GasFractions, input.GasFractions)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Thickness, input.Thickness)
-                );
+                ) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.Thickness, input.Thickness);
         }
 
         /// <summary>

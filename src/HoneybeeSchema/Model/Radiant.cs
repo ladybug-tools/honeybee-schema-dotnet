@@ -73,7 +73,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, Object userData= default, Vintages vintage= Vintages.ASHRAE_2019, RadiantEquipmentType equipmentType= RadiantEquipmentType.Radiant_Chiller_Boiler, RadiantFaceTypes radiantFaceType= RadiantFaceTypes.Floor, double minimumOperationTime = 1.0D, double switchOverTime = 24.0D// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.Vintage = vintage;
             this.EquipmentType = equipmentType;
@@ -129,15 +129,15 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Radiant:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  Vintage: ").Append(Vintage).Append("\n");
-            sb.Append("  EquipmentType: ").Append(EquipmentType).Append("\n");
-            sb.Append("  RadiantFaceType: ").Append(RadiantFaceType).Append("\n");
-            sb.Append("  MinimumOperationTime: ").Append(MinimumOperationTime).Append("\n");
-            sb.Append("  SwitchOverTime: ").Append(SwitchOverTime).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  Vintage: ").Append(this.Vintage).Append("\n");
+            sb.Append("  EquipmentType: ").Append(this.EquipmentType).Append("\n");
+            sb.Append("  RadiantFaceType: ").Append(this.RadiantFaceType).Append("\n");
+            sb.Append("  MinimumOperationTime: ").Append(this.MinimumOperationTime).Append("\n");
+            sb.Append("  SwitchOverTime: ").Append(this.SwitchOverTime).Append("\n");
             return sb.ToString();
         }
   
@@ -201,24 +201,12 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Vintage, input.Vintage)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.EquipmentType, input.EquipmentType)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.RadiantFaceType, input.RadiantFaceType)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.MinimumOperationTime, input.MinimumOperationTime)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SwitchOverTime, input.SwitchOverTime)
-                );
+                    Extension.Equals(this.Vintage, input.Vintage) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.EquipmentType, input.EquipmentType) && 
+                    Extension.Equals(this.RadiantFaceType, input.RadiantFaceType) && 
+                    Extension.Equals(this.MinimumOperationTime, input.MinimumOperationTime) && 
+                    Extension.Equals(this.SwitchOverTime, input.SwitchOverTime);
         }
 
         /// <summary>

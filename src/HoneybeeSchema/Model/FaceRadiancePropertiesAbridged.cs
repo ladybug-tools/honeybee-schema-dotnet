@@ -38,8 +38,8 @@ namespace HoneybeeSchema
         public FaceRadiancePropertiesAbridged
         (
             // Required parameters
-            string modifier= default, string modifierBlk= default// Optional parameters
-        ) : base(modifier: modifier, modifierBlk: modifierBlk)// BaseClass
+            string modifier= default, string modifierBlk= default // Optional parameters
+        ) : base(modifier: modifier, modifierBlk: modifierBlk )// BaseClass
         {
 
             // Set non-required readonly properties with defaultValue
@@ -78,9 +78,9 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("FaceRadiancePropertiesAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Modifier: ").Append(Modifier).Append("\n");
-            sb.Append("  ModifierBlk: ").Append(ModifierBlk).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Modifier: ").Append(this.Modifier).Append("\n");
+            sb.Append("  ModifierBlk: ").Append(this.ModifierBlk).Append("\n");
             return sb.ToString();
         }
   
@@ -144,9 +144,7 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

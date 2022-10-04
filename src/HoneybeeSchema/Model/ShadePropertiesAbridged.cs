@@ -90,9 +90,9 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ShadePropertiesAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Energy: ").Append(Energy).Append("\n");
-            sb.Append("  Radiance: ").Append(Radiance).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Energy: ").Append(this.Energy).Append("\n");
+            sb.Append("  Radiance: ").Append(this.Radiance).Append("\n");
             return sb.ToString();
         }
   
@@ -156,15 +156,9 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Energy, input.Energy)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Radiance, input.Radiance)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.Energy, input.Energy) && 
+                    Extension.Equals(this.Radiance, input.Radiance);
         }
 
         /// <summary>

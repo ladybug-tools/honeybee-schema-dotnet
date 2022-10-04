@@ -103,9 +103,9 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("SkyCondition:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Date: ").Append(Date).Append("\n");
-            sb.Append("  DaylightSavings: ").Append(DaylightSavings).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Date: ").Append(this.Date).Append("\n");
+            sb.Append("  DaylightSavings: ").Append(this.DaylightSavings).Append("\n");
             return sb.ToString();
         }
   
@@ -172,13 +172,9 @@ namespace HoneybeeSchema
                 (
                     this.Date == input.Date ||
                     Extension.AllEquals(this.Date, input.Date)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DaylightSavings, input.DaylightSavings)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                ) && 
+                    Extension.Equals(this.DaylightSavings, input.DaylightSavings) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

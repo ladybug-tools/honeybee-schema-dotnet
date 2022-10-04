@@ -108,11 +108,11 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ApertureConstructionSetAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  InteriorConstruction: ").Append(InteriorConstruction).Append("\n");
-            sb.Append("  WindowConstruction: ").Append(WindowConstruction).Append("\n");
-            sb.Append("  SkylightConstruction: ").Append(SkylightConstruction).Append("\n");
-            sb.Append("  OperableConstruction: ").Append(OperableConstruction).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  InteriorConstruction: ").Append(this.InteriorConstruction).Append("\n");
+            sb.Append("  WindowConstruction: ").Append(this.WindowConstruction).Append("\n");
+            sb.Append("  SkylightConstruction: ").Append(this.SkylightConstruction).Append("\n");
+            sb.Append("  OperableConstruction: ").Append(this.OperableConstruction).Append("\n");
             return sb.ToString();
         }
   
@@ -176,21 +176,11 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.InteriorConstruction, input.InteriorConstruction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.WindowConstruction, input.WindowConstruction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SkylightConstruction, input.SkylightConstruction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.OperableConstruction, input.OperableConstruction)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.InteriorConstruction, input.InteriorConstruction) && 
+                    Extension.Equals(this.WindowConstruction, input.WindowConstruction) && 
+                    Extension.Equals(this.SkylightConstruction, input.SkylightConstruction) && 
+                    Extension.Equals(this.OperableConstruction, input.OperableConstruction);
         }
 
         /// <summary>

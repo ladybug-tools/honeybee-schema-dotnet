@@ -38,8 +38,8 @@ namespace HoneybeeSchema
         public RoofCeilingModifierSetAbridged
         (
             // Required parameters
-            string exteriorModifier= default, string interiorModifier= default// Optional parameters
-        ) : base(exteriorModifier: exteriorModifier, interiorModifier: interiorModifier)// BaseClass
+            string exteriorModifier= default, string interiorModifier= default // Optional parameters
+        ) : base(exteriorModifier: exteriorModifier, interiorModifier: interiorModifier )// BaseClass
         {
 
             // Set non-required readonly properties with defaultValue
@@ -78,9 +78,9 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("RoofCeilingModifierSetAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  ExteriorModifier: ").Append(ExteriorModifier).Append("\n");
-            sb.Append("  InteriorModifier: ").Append(InteriorModifier).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  ExteriorModifier: ").Append(this.ExteriorModifier).Append("\n");
+            sb.Append("  InteriorModifier: ").Append(this.InteriorModifier).Append("\n");
             return sb.ToString();
         }
   
@@ -144,9 +144,7 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

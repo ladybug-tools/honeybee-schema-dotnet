@@ -102,9 +102,9 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("AFNCrack:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  FlowCoefficient: ").Append(FlowCoefficient).Append("\n");
-            sb.Append("  FlowExponent: ").Append(FlowExponent).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  FlowCoefficient: ").Append(this.FlowCoefficient).Append("\n");
+            sb.Append("  FlowExponent: ").Append(this.FlowExponent).Append("\n");
             return sb.ToString();
         }
   
@@ -168,15 +168,9 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.FlowCoefficient, input.FlowCoefficient)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.FlowExponent, input.FlowExponent)
-                );
+                    Extension.Equals(this.FlowCoefficient, input.FlowCoefficient) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.FlowExponent, input.FlowExponent);
         }
 
         /// <summary>

@@ -63,7 +63,7 @@ namespace HoneybeeSchema
         (
             string identifier, double thickness, double conductivity, double density, double specificHeat, // Required parameters
             string displayName= default, Object userData= default, Roughness roughness= Roughness.MediumRough, double thermalAbsorptance = 0.9D, double solarAbsorptance = 0.7D, double visibleAbsorptance = 0.7D// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.Thickness = thickness;
             this.Conductivity = conductivity;
@@ -152,18 +152,18 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("EnergyMaterial:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  Thickness: ").Append(Thickness).Append("\n");
-            sb.Append("  Conductivity: ").Append(Conductivity).Append("\n");
-            sb.Append("  Density: ").Append(Density).Append("\n");
-            sb.Append("  SpecificHeat: ").Append(SpecificHeat).Append("\n");
-            sb.Append("  Roughness: ").Append(Roughness).Append("\n");
-            sb.Append("  ThermalAbsorptance: ").Append(ThermalAbsorptance).Append("\n");
-            sb.Append("  SolarAbsorptance: ").Append(SolarAbsorptance).Append("\n");
-            sb.Append("  VisibleAbsorptance: ").Append(VisibleAbsorptance).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  Thickness: ").Append(this.Thickness).Append("\n");
+            sb.Append("  Conductivity: ").Append(this.Conductivity).Append("\n");
+            sb.Append("  Density: ").Append(this.Density).Append("\n");
+            sb.Append("  SpecificHeat: ").Append(this.SpecificHeat).Append("\n");
+            sb.Append("  Roughness: ").Append(this.Roughness).Append("\n");
+            sb.Append("  ThermalAbsorptance: ").Append(this.ThermalAbsorptance).Append("\n");
+            sb.Append("  SolarAbsorptance: ").Append(this.SolarAbsorptance).Append("\n");
+            sb.Append("  VisibleAbsorptance: ").Append(this.VisibleAbsorptance).Append("\n");
             return sb.ToString();
         }
   
@@ -227,33 +227,15 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Thickness, input.Thickness)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Conductivity, input.Conductivity)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Density, input.Density)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SpecificHeat, input.SpecificHeat)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Roughness, input.Roughness)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ThermalAbsorptance, input.ThermalAbsorptance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SolarAbsorptance, input.SolarAbsorptance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.VisibleAbsorptance, input.VisibleAbsorptance)
-                );
+                    Extension.Equals(this.Thickness, input.Thickness) && 
+                    Extension.Equals(this.Conductivity, input.Conductivity) && 
+                    Extension.Equals(this.Density, input.Density) && 
+                    Extension.Equals(this.SpecificHeat, input.SpecificHeat) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.Roughness, input.Roughness) && 
+                    Extension.Equals(this.ThermalAbsorptance, input.ThermalAbsorptance) && 
+                    Extension.Equals(this.SolarAbsorptance, input.SolarAbsorptance) && 
+                    Extension.Equals(this.VisibleAbsorptance, input.VisibleAbsorptance);
         }
 
         /// <summary>

@@ -66,7 +66,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, Object userData= default, EconomizerType economizerType= EconomizerType.DifferentialDryBulb, bool demandControlledVentilation = false, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, double heatingAirTemperature = 50D, double coolingAirTemperature = 13D, AnyOf<Autosize,NoLimit,double> heatingLimit= default, AnyOf<Autosize,NoLimit,double> coolingLimit= default, string heatingAvailability= default, string coolingAvailability= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.EconomizerType = economizerType;
             this.DemandControlledVentilation = demandControlledVentilation;
@@ -169,20 +169,20 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("IdealAirSystemAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  EconomizerType: ").Append(EconomizerType).Append("\n");
-            sb.Append("  DemandControlledVentilation: ").Append(DemandControlledVentilation).Append("\n");
-            sb.Append("  SensibleHeatRecovery: ").Append(SensibleHeatRecovery).Append("\n");
-            sb.Append("  LatentHeatRecovery: ").Append(LatentHeatRecovery).Append("\n");
-            sb.Append("  HeatingAirTemperature: ").Append(HeatingAirTemperature).Append("\n");
-            sb.Append("  CoolingAirTemperature: ").Append(CoolingAirTemperature).Append("\n");
-            sb.Append("  HeatingLimit: ").Append(HeatingLimit).Append("\n");
-            sb.Append("  CoolingLimit: ").Append(CoolingLimit).Append("\n");
-            sb.Append("  HeatingAvailability: ").Append(HeatingAvailability).Append("\n");
-            sb.Append("  CoolingAvailability: ").Append(CoolingAvailability).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  EconomizerType: ").Append(this.EconomizerType).Append("\n");
+            sb.Append("  DemandControlledVentilation: ").Append(this.DemandControlledVentilation).Append("\n");
+            sb.Append("  SensibleHeatRecovery: ").Append(this.SensibleHeatRecovery).Append("\n");
+            sb.Append("  LatentHeatRecovery: ").Append(this.LatentHeatRecovery).Append("\n");
+            sb.Append("  HeatingAirTemperature: ").Append(this.HeatingAirTemperature).Append("\n");
+            sb.Append("  CoolingAirTemperature: ").Append(this.CoolingAirTemperature).Append("\n");
+            sb.Append("  HeatingLimit: ").Append(this.HeatingLimit).Append("\n");
+            sb.Append("  CoolingLimit: ").Append(this.CoolingLimit).Append("\n");
+            sb.Append("  HeatingAvailability: ").Append(this.HeatingAvailability).Append("\n");
+            sb.Append("  CoolingAvailability: ").Append(this.CoolingAvailability).Append("\n");
             return sb.ToString();
         }
   
@@ -246,39 +246,17 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.EconomizerType, input.EconomizerType)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DemandControlledVentilation, input.DemandControlledVentilation)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SensibleHeatRecovery, input.SensibleHeatRecovery)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.LatentHeatRecovery, input.LatentHeatRecovery)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.HeatingAirTemperature, input.HeatingAirTemperature)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.CoolingAirTemperature, input.CoolingAirTemperature)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.HeatingLimit, input.HeatingLimit)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.CoolingLimit, input.CoolingLimit)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.HeatingAvailability, input.HeatingAvailability)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.CoolingAvailability, input.CoolingAvailability)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.EconomizerType, input.EconomizerType) && 
+                    Extension.Equals(this.DemandControlledVentilation, input.DemandControlledVentilation) && 
+                    Extension.Equals(this.SensibleHeatRecovery, input.SensibleHeatRecovery) && 
+                    Extension.Equals(this.LatentHeatRecovery, input.LatentHeatRecovery) && 
+                    Extension.Equals(this.HeatingAirTemperature, input.HeatingAirTemperature) && 
+                    Extension.Equals(this.CoolingAirTemperature, input.CoolingAirTemperature) && 
+                    Extension.Equals(this.HeatingLimit, input.HeatingLimit) && 
+                    Extension.Equals(this.CoolingLimit, input.CoolingLimit) && 
+                    Extension.Equals(this.HeatingAvailability, input.HeatingAvailability) && 
+                    Extension.Equals(this.CoolingAvailability, input.CoolingAvailability);
         }
 
         /// <summary>

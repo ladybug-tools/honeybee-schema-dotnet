@@ -116,12 +116,12 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("SimulationControl:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  DoZoneSizing: ").Append(DoZoneSizing).Append("\n");
-            sb.Append("  DoSystemSizing: ").Append(DoSystemSizing).Append("\n");
-            sb.Append("  DoPlantSizing: ").Append(DoPlantSizing).Append("\n");
-            sb.Append("  RunForRunPeriods: ").Append(RunForRunPeriods).Append("\n");
-            sb.Append("  RunForSizingPeriods: ").Append(RunForSizingPeriods).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  DoZoneSizing: ").Append(this.DoZoneSizing).Append("\n");
+            sb.Append("  DoSystemSizing: ").Append(this.DoSystemSizing).Append("\n");
+            sb.Append("  DoPlantSizing: ").Append(this.DoPlantSizing).Append("\n");
+            sb.Append("  RunForRunPeriods: ").Append(this.RunForRunPeriods).Append("\n");
+            sb.Append("  RunForSizingPeriods: ").Append(this.RunForSizingPeriods).Append("\n");
             return sb.ToString();
         }
   
@@ -185,24 +185,12 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DoZoneSizing, input.DoZoneSizing)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DoSystemSizing, input.DoSystemSizing)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DoPlantSizing, input.DoPlantSizing)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.RunForRunPeriods, input.RunForRunPeriods)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.RunForSizingPeriods, input.RunForSizingPeriods)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.DoZoneSizing, input.DoZoneSizing) && 
+                    Extension.Equals(this.DoSystemSizing, input.DoSystemSizing) && 
+                    Extension.Equals(this.DoPlantSizing, input.DoPlantSizing) && 
+                    Extension.Equals(this.RunForRunPeriods, input.RunForRunPeriods) && 
+                    Extension.Equals(this.RunForSizingPeriods, input.RunForSizingPeriods);
         }
 
         /// <summary>

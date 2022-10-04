@@ -57,7 +57,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, Object userData= default, Vintages vintage= default // Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.Vintage = vintage;
 
@@ -97,11 +97,11 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("HeatCoolBase:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  Vintage: ").Append(Vintage).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  Vintage: ").Append(this.Vintage).Append("\n");
             return sb.ToString();
         }
   
@@ -165,12 +165,8 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Vintage, input.Vintage)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                    Extension.Equals(this.Vintage, input.Vintage) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

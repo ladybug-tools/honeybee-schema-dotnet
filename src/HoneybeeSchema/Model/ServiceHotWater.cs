@@ -55,7 +55,7 @@ namespace HoneybeeSchema
         (
             string identifier, double flowPerArea, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule, // Required parameters
             string displayName= default, Object userData= default, double targetTemperature = 60D, double sensibleFraction = 0.2D, double latentFraction = 0.05D// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.FlowPerArea = flowPerArea;
             // to ensure "schedule" is required (not null)
@@ -130,15 +130,15 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ServiceHotWater:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  FlowPerArea: ").Append(FlowPerArea).Append("\n");
-            sb.Append("  Schedule: ").Append(Schedule).Append("\n");
-            sb.Append("  TargetTemperature: ").Append(TargetTemperature).Append("\n");
-            sb.Append("  SensibleFraction: ").Append(SensibleFraction).Append("\n");
-            sb.Append("  LatentFraction: ").Append(LatentFraction).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  FlowPerArea: ").Append(this.FlowPerArea).Append("\n");
+            sb.Append("  Schedule: ").Append(this.Schedule).Append("\n");
+            sb.Append("  TargetTemperature: ").Append(this.TargetTemperature).Append("\n");
+            sb.Append("  SensibleFraction: ").Append(this.SensibleFraction).Append("\n");
+            sb.Append("  LatentFraction: ").Append(this.LatentFraction).Append("\n");
             return sb.ToString();
         }
   
@@ -202,24 +202,12 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.FlowPerArea, input.FlowPerArea)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Schedule, input.Schedule)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.TargetTemperature, input.TargetTemperature)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SensibleFraction, input.SensibleFraction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.LatentFraction, input.LatentFraction)
-                );
+                    Extension.Equals(this.FlowPerArea, input.FlowPerArea) && 
+                    Extension.Equals(this.Schedule, input.Schedule) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.TargetTemperature, input.TargetTemperature) && 
+                    Extension.Equals(this.SensibleFraction, input.SensibleFraction) && 
+                    Extension.Equals(this.LatentFraction, input.LatentFraction);
         }
 
         /// <summary>

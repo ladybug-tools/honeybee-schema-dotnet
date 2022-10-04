@@ -50,8 +50,8 @@ namespace HoneybeeSchema
         public ASHRAETau
         (
             List<int> date, double tauB, double tauD, // Required parameters
-            bool daylightSavings = false// Optional parameters
-        ) : base(date: date, daylightSavings: daylightSavings)// BaseClass
+            bool daylightSavings = false // Optional parameters
+        ) : base(date: date, daylightSavings: daylightSavings )// BaseClass
         {
             this.TauB = tauB;
             this.TauD = tauD;
@@ -104,11 +104,11 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ASHRAETau:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Date: ").Append(Date).Append("\n");
-            sb.Append("  DaylightSavings: ").Append(DaylightSavings).Append("\n");
-            sb.Append("  TauB: ").Append(TauB).Append("\n");
-            sb.Append("  TauD: ").Append(TauD).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Date: ").Append(this.Date).Append("\n");
+            sb.Append("  DaylightSavings: ").Append(this.DaylightSavings).Append("\n");
+            sb.Append("  TauB: ").Append(this.TauB).Append("\n");
+            sb.Append("  TauD: ").Append(this.TauD).Append("\n");
             return sb.ToString();
         }
   
@@ -172,15 +172,9 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.TauB, input.TauB)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.TauD, input.TauD)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                    Extension.Equals(this.TauB, input.TauB) && 
+                    Extension.Equals(this.TauD, input.TauD) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

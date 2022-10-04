@@ -52,7 +52,7 @@ namespace HoneybeeSchema
         (
             string identifier, List<double> values, // Required parameters
             string displayName= default, List<List<int>> times= default, bool interpolate = false// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "values" is required (not null)
             this.Values = values ?? throw new ArgumentNullException("values is a required property for ScheduleDay and cannot be null");
@@ -113,12 +113,12 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ScheduleDay:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  Values: ").Append(Values).Append("\n");
-            sb.Append("  Times: ").Append(Times).Append("\n");
-            sb.Append("  Interpolate: ").Append(Interpolate).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  Values: ").Append(this.Values).Append("\n");
+            sb.Append("  Times: ").Append(this.Times).Append("\n");
+            sb.Append("  Interpolate: ").Append(this.Interpolate).Append("\n");
             return sb.ToString();
         }
   
@@ -185,17 +185,13 @@ namespace HoneybeeSchema
                 (
                     this.Values == input.Values ||
                     Extension.AllEquals(this.Values, input.Values)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
+                ) && 
+                    Extension.Equals(this.Type, input.Type) && 
                 (
                     this.Times == input.Times ||
                     Extension.AllEquals(this.Times, input.Times)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Interpolate, input.Interpolate)
-                );
+                ) && 
+                    Extension.Equals(this.Interpolate, input.Interpolate);
         }
 
         /// <summary>

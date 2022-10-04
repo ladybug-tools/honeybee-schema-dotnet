@@ -102,9 +102,9 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("WindCondition:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  WindSpeed: ").Append(WindSpeed).Append("\n");
-            sb.Append("  WindDirection: ").Append(WindDirection).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  WindSpeed: ").Append(this.WindSpeed).Append("\n");
+            sb.Append("  WindDirection: ").Append(this.WindDirection).Append("\n");
             return sb.ToString();
         }
   
@@ -168,15 +168,9 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.WindSpeed, input.WindSpeed)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.WindDirection, input.WindDirection)
-                );
+                    Extension.Equals(this.WindSpeed, input.WindSpeed) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.WindDirection, input.WindDirection);
         }
 
         /// <summary>

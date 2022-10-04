@@ -57,7 +57,7 @@ namespace HoneybeeSchema
         (
             string identifier, List<ScheduleDay> daySchedules, string defaultDaySchedule, // Required parameters
             string displayName= default, Object userData= default, List<ScheduleRuleAbridged> scheduleRules= default, string holidaySchedule= default, string summerDesigndaySchedule= default, string winterDesigndaySchedule= default, string scheduleTypeLimit= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "daySchedules" is required (not null)
             this.DaySchedules = daySchedules ?? throw new ArgumentNullException("daySchedules is a required property for ScheduleRulesetAbridged and cannot be null");
@@ -147,17 +147,17 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ScheduleRulesetAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  DaySchedules: ").Append(DaySchedules).Append("\n");
-            sb.Append("  DefaultDaySchedule: ").Append(DefaultDaySchedule).Append("\n");
-            sb.Append("  ScheduleRules: ").Append(ScheduleRules).Append("\n");
-            sb.Append("  HolidaySchedule: ").Append(HolidaySchedule).Append("\n");
-            sb.Append("  SummerDesigndaySchedule: ").Append(SummerDesigndaySchedule).Append("\n");
-            sb.Append("  WinterDesigndaySchedule: ").Append(WinterDesigndaySchedule).Append("\n");
-            sb.Append("  ScheduleTypeLimit: ").Append(ScheduleTypeLimit).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  DaySchedules: ").Append(this.DaySchedules).Append("\n");
+            sb.Append("  DefaultDaySchedule: ").Append(this.DefaultDaySchedule).Append("\n");
+            sb.Append("  ScheduleRules: ").Append(this.ScheduleRules).Append("\n");
+            sb.Append("  HolidaySchedule: ").Append(this.HolidaySchedule).Append("\n");
+            sb.Append("  SummerDesigndaySchedule: ").Append(this.SummerDesigndaySchedule).Append("\n");
+            sb.Append("  WinterDesigndaySchedule: ").Append(this.WinterDesigndaySchedule).Append("\n");
+            sb.Append("  ScheduleTypeLimit: ").Append(this.ScheduleTypeLimit).Append("\n");
             return sb.ToString();
         }
   
@@ -224,29 +224,17 @@ namespace HoneybeeSchema
                 (
                     this.DaySchedules == input.DaySchedules ||
                     Extension.AllEquals(this.DaySchedules, input.DaySchedules)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DefaultDaySchedule, input.DefaultDaySchedule)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
+                ) && 
+                    Extension.Equals(this.DefaultDaySchedule, input.DefaultDaySchedule) && 
+                    Extension.Equals(this.Type, input.Type) && 
                 (
                     this.ScheduleRules == input.ScheduleRules ||
                     Extension.AllEquals(this.ScheduleRules, input.ScheduleRules)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.HolidaySchedule, input.HolidaySchedule)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SummerDesigndaySchedule, input.SummerDesigndaySchedule)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.WinterDesigndaySchedule, input.WinterDesigndaySchedule)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ScheduleTypeLimit, input.ScheduleTypeLimit)
-                );
+                ) && 
+                    Extension.Equals(this.HolidaySchedule, input.HolidaySchedule) && 
+                    Extension.Equals(this.SummerDesigndaySchedule, input.SummerDesigndaySchedule) && 
+                    Extension.Equals(this.WinterDesigndaySchedule, input.WinterDesigndaySchedule) && 
+                    Extension.Equals(this.ScheduleTypeLimit, input.ScheduleTypeLimit);
         }
 
         /// <summary>

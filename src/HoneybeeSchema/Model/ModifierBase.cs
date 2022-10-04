@@ -48,8 +48,8 @@ namespace HoneybeeSchema
         public ModifierBase
         (
             string identifier, // Required parameters
-            string displayName= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+            string displayName= default // Optional parameters
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
 
             // Set non-required readonly properties with defaultValue
@@ -88,9 +88,9 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ModifierBase:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             return sb.ToString();
         }
   
@@ -154,9 +154,7 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

@@ -137,13 +137,13 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("DesignDay:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  DayType: ").Append(DayType).Append("\n");
-            sb.Append("  DryBulbCondition: ").Append(DryBulbCondition).Append("\n");
-            sb.Append("  HumidityCondition: ").Append(HumidityCondition).Append("\n");
-            sb.Append("  WindCondition: ").Append(WindCondition).Append("\n");
-            sb.Append("  SkyCondition: ").Append(SkyCondition).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Name: ").Append(this.Name).Append("\n");
+            sb.Append("  DayType: ").Append(this.DayType).Append("\n");
+            sb.Append("  DryBulbCondition: ").Append(this.DryBulbCondition).Append("\n");
+            sb.Append("  HumidityCondition: ").Append(this.HumidityCondition).Append("\n");
+            sb.Append("  WindCondition: ").Append(this.WindCondition).Append("\n");
+            sb.Append("  SkyCondition: ").Append(this.SkyCondition).Append("\n");
             return sb.ToString();
         }
   
@@ -207,27 +207,13 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Name, input.Name)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DayType, input.DayType)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DryBulbCondition, input.DryBulbCondition)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.HumidityCondition, input.HumidityCondition)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.WindCondition, input.WindCondition)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SkyCondition, input.SkyCondition)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                );
+                    Extension.Equals(this.Name, input.Name) && 
+                    Extension.Equals(this.DayType, input.DayType) && 
+                    Extension.Equals(this.DryBulbCondition, input.DryBulbCondition) && 
+                    Extension.Equals(this.HumidityCondition, input.HumidityCondition) && 
+                    Extension.Equals(this.WindCondition, input.WindCondition) && 
+                    Extension.Equals(this.SkyCondition, input.SkyCondition) && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>

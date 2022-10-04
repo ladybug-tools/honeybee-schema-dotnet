@@ -65,7 +65,7 @@ namespace HoneybeeSchema
 			this.Hvacs = this.Hvacs ?? new List<AnyOf<IdealAirSystemAbridged, VAV, PVAV, PSZ, PTAC, ForcedAirFurnace, FCUwithDOASAbridged, WSHPwithDOASAbridged, VRFwithDOASAbridged, RadiantwithDOASAbridged, FCU, WSHP, VRF, Baseboard, EvaporativeCooler, Residential, WindowAC, GasUnitHeater, Radiant>>();
 			this.Shws = this.Shws ?? new List<SHWSystem>();
 
-			this.Materials = this.Materials ?? new List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyMaterialVegetation, EnergyWindowMaterialGlazing, EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialGas, EnergyWindowMaterialGasMixture, EnergyWindowMaterialGasCustom, EnergyWindowMaterialBlind, EnergyWindowMaterialShade>>();
+			this.Materials = this.Materials ?? new List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyMaterialVegetation, EnergyWindowMaterialGlazing, EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialGas, EnergyWindowMaterialGasMixture, EnergyWindowMaterialGasCustom, EnergyWindowFrame, EnergyWindowMaterialBlind, EnergyWindowMaterialShade>>();
             this.ProgramTypes = this.ProgramTypes ?? new List<AnyOf<ProgramTypeAbridged, ProgramType>>();
             this.ScheduleTypeLimits = this.ScheduleTypeLimits ?? Default.ScheduleTypeLimits;
             this.Schedules = this.Schedules ?? new List<AnyOf<ScheduleRulesetAbridged, ScheduleFixedIntervalAbridged, ScheduleRuleset, ScheduleFixedInterval>>();

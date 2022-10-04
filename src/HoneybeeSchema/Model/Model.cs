@@ -44,7 +44,7 @@ namespace HoneybeeSchema
         { 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.50.4";
+            this.Version = "1.43.5";
         }
         
         /// <summary>
@@ -66,7 +66,7 @@ namespace HoneybeeSchema
         (
             string identifier, ModelProperties properties, // Required parameters
             string displayName= default, Object userData= default, List<Room> rooms= default, List<Face> orphanedFaces= default, List<Shade> orphanedShades= default, List<Aperture> orphanedApertures= default, List<Door> orphanedDoors= default, Units units= Units.Meters, double tolerance = 0.01D, double angleTolerance = 1.0D// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "properties" is required (not null)
             this.Properties = properties ?? throw new ArgumentNullException("properties is a required property for Model and cannot be null");
@@ -81,7 +81,7 @@ namespace HoneybeeSchema
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.50.4";
+            this.Version = "1.43.5";
 
             // check if object is valid, only check for inherited class
             if (this.GetType() == typeof(Model))
@@ -100,7 +100,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <value>Text string for the current version of the schema.</value>
         [DataMember(Name = "version")]
-        public string Version { get; protected set; }  = "1.50.4";
+        public string Version { get; protected set; }  = "1.43.5";
 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
@@ -171,20 +171,20 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Model:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  Properties: ").Append(Properties).Append("\n");
-            sb.Append("  Version: ").Append(Version).Append("\n");
-            sb.Append("  Rooms: ").Append(Rooms).Append("\n");
-            sb.Append("  OrphanedFaces: ").Append(OrphanedFaces).Append("\n");
-            sb.Append("  OrphanedShades: ").Append(OrphanedShades).Append("\n");
-            sb.Append("  OrphanedApertures: ").Append(OrphanedApertures).Append("\n");
-            sb.Append("  OrphanedDoors: ").Append(OrphanedDoors).Append("\n");
-            sb.Append("  Units: ").Append(Units).Append("\n");
-            sb.Append("  Tolerance: ").Append(Tolerance).Append("\n");
-            sb.Append("  AngleTolerance: ").Append(AngleTolerance).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  Properties: ").Append(this.Properties).Append("\n");
+            sb.Append("  Version: ").Append(this.Version).Append("\n");
+            sb.Append("  Rooms: ").Append(this.Rooms).Append("\n");
+            sb.Append("  OrphanedFaces: ").Append(this.OrphanedFaces).Append("\n");
+            sb.Append("  OrphanedShades: ").Append(this.OrphanedShades).Append("\n");
+            sb.Append("  OrphanedApertures: ").Append(this.OrphanedApertures).Append("\n");
+            sb.Append("  OrphanedDoors: ").Append(this.OrphanedDoors).Append("\n");
+            sb.Append("  Units: ").Append(this.Units).Append("\n");
+            sb.Append("  Tolerance: ").Append(this.Tolerance).Append("\n");
+            sb.Append("  AngleTolerance: ").Append(this.AngleTolerance).Append("\n");
             return sb.ToString();
         }
   
@@ -248,44 +248,32 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Properties, input.Properties)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Version, input.Version)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.Properties, input.Properties) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.Version, input.Version) && 
                 (
                     this.Rooms == input.Rooms ||
                     Extension.AllEquals(this.Rooms, input.Rooms)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.OrphanedFaces == input.OrphanedFaces ||
                     Extension.AllEquals(this.OrphanedFaces, input.OrphanedFaces)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.OrphanedShades == input.OrphanedShades ||
                     Extension.AllEquals(this.OrphanedShades, input.OrphanedShades)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.OrphanedApertures == input.OrphanedApertures ||
                     Extension.AllEquals(this.OrphanedApertures, input.OrphanedApertures)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.OrphanedDoors == input.OrphanedDoors ||
                     Extension.AllEquals(this.OrphanedDoors, input.OrphanedDoors)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Units, input.Units)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Tolerance, input.Tolerance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.AngleTolerance, input.AngleTolerance)
-                );
+                ) && 
+                    Extension.Equals(this.Units, input.Units) && 
+                    Extension.Equals(this.Tolerance, input.Tolerance) && 
+                    Extension.Equals(this.AngleTolerance, input.AngleTolerance);
         }
 
         /// <summary>

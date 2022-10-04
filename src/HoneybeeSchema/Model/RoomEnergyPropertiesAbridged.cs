@@ -204,23 +204,23 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("RoomEnergyPropertiesAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  ConstructionSet: ").Append(ConstructionSet).Append("\n");
-            sb.Append("  ProgramType: ").Append(ProgramType).Append("\n");
-            sb.Append("  Hvac: ").Append(Hvac).Append("\n");
-            sb.Append("  Shw: ").Append(Shw).Append("\n");
-            sb.Append("  People: ").Append(People).Append("\n");
-            sb.Append("  Lighting: ").Append(Lighting).Append("\n");
-            sb.Append("  ElectricEquipment: ").Append(ElectricEquipment).Append("\n");
-            sb.Append("  GasEquipment: ").Append(GasEquipment).Append("\n");
-            sb.Append("  ServiceHotWater: ").Append(ServiceHotWater).Append("\n");
-            sb.Append("  Infiltration: ").Append(Infiltration).Append("\n");
-            sb.Append("  Ventilation: ").Append(Ventilation).Append("\n");
-            sb.Append("  Setpoint: ").Append(Setpoint).Append("\n");
-            sb.Append("  DaylightingControl: ").Append(DaylightingControl).Append("\n");
-            sb.Append("  WindowVentControl: ").Append(WindowVentControl).Append("\n");
-            sb.Append("  InternalMasses: ").Append(InternalMasses).Append("\n");
-            sb.Append("  ProcessLoads: ").Append(ProcessLoads).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  ConstructionSet: ").Append(this.ConstructionSet).Append("\n");
+            sb.Append("  ProgramType: ").Append(this.ProgramType).Append("\n");
+            sb.Append("  Hvac: ").Append(this.Hvac).Append("\n");
+            sb.Append("  Shw: ").Append(this.Shw).Append("\n");
+            sb.Append("  People: ").Append(this.People).Append("\n");
+            sb.Append("  Lighting: ").Append(this.Lighting).Append("\n");
+            sb.Append("  ElectricEquipment: ").Append(this.ElectricEquipment).Append("\n");
+            sb.Append("  GasEquipment: ").Append(this.GasEquipment).Append("\n");
+            sb.Append("  ServiceHotWater: ").Append(this.ServiceHotWater).Append("\n");
+            sb.Append("  Infiltration: ").Append(this.Infiltration).Append("\n");
+            sb.Append("  Ventilation: ").Append(this.Ventilation).Append("\n");
+            sb.Append("  Setpoint: ").Append(this.Setpoint).Append("\n");
+            sb.Append("  DaylightingControl: ").Append(this.DaylightingControl).Append("\n");
+            sb.Append("  WindowVentControl: ").Append(this.WindowVentControl).Append("\n");
+            sb.Append("  InternalMasses: ").Append(this.InternalMasses).Append("\n");
+            sb.Append("  ProcessLoads: ").Append(this.ProcessLoads).Append("\n");
             return sb.ToString();
         }
   
@@ -284,55 +284,25 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ConstructionSet, input.ConstructionSet)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ProgramType, input.ProgramType)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Hvac, input.Hvac)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Shw, input.Shw)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.People, input.People)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Lighting, input.Lighting)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ElectricEquipment, input.ElectricEquipment)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.GasEquipment, input.GasEquipment)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ServiceHotWater, input.ServiceHotWater)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Infiltration, input.Infiltration)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Ventilation, input.Ventilation)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Setpoint, input.Setpoint)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DaylightingControl, input.DaylightingControl)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.WindowVentControl, input.WindowVentControl)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.ConstructionSet, input.ConstructionSet) && 
+                    Extension.Equals(this.ProgramType, input.ProgramType) && 
+                    Extension.Equals(this.Hvac, input.Hvac) && 
+                    Extension.Equals(this.Shw, input.Shw) && 
+                    Extension.Equals(this.People, input.People) && 
+                    Extension.Equals(this.Lighting, input.Lighting) && 
+                    Extension.Equals(this.ElectricEquipment, input.ElectricEquipment) && 
+                    Extension.Equals(this.GasEquipment, input.GasEquipment) && 
+                    Extension.Equals(this.ServiceHotWater, input.ServiceHotWater) && 
+                    Extension.Equals(this.Infiltration, input.Infiltration) && 
+                    Extension.Equals(this.Ventilation, input.Ventilation) && 
+                    Extension.Equals(this.Setpoint, input.Setpoint) && 
+                    Extension.Equals(this.DaylightingControl, input.DaylightingControl) && 
+                    Extension.Equals(this.WindowVentControl, input.WindowVentControl) && 
                 (
                     this.InternalMasses == input.InternalMasses ||
                     Extension.AllEquals(this.InternalMasses, input.InternalMasses)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ProcessLoads == input.ProcessLoads ||
                     Extension.AllEquals(this.ProcessLoads, input.ProcessLoads)

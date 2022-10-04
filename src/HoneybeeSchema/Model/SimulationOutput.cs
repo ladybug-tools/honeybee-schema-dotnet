@@ -99,10 +99,10 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("SimulationOutput:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  ReportingFrequency: ").Append(ReportingFrequency).Append("\n");
-            sb.Append("  Outputs: ").Append(Outputs).Append("\n");
-            sb.Append("  SummaryReports: ").Append(SummaryReports).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  ReportingFrequency: ").Append(this.ReportingFrequency).Append("\n");
+            sb.Append("  Outputs: ").Append(this.Outputs).Append("\n");
+            sb.Append("  SummaryReports: ").Append(this.SummaryReports).Append("\n");
             return sb.ToString();
         }
   
@@ -166,16 +166,12 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ReportingFrequency, input.ReportingFrequency)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.ReportingFrequency, input.ReportingFrequency) && 
                 (
                     this.Outputs == input.Outputs ||
                     Extension.AllEquals(this.Outputs, input.Outputs)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.SummaryReports == input.SummaryReports ||
                     Extension.AllEquals(this.SummaryReports, input.SummaryReports)

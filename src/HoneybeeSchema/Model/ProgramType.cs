@@ -58,7 +58,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, Object userData= default, People people= default, Lighting lighting= default, ElectricEquipment electricEquipment= default, GasEquipment gasEquipment= default, ServiceHotWater serviceHotWater= default, Infiltration infiltration= default, Ventilation ventilation= default, Setpoint setpoint= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.People = people;
             this.Lighting = lighting;
@@ -153,18 +153,18 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ProgramType:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  People: ").Append(People).Append("\n");
-            sb.Append("  Lighting: ").Append(Lighting).Append("\n");
-            sb.Append("  ElectricEquipment: ").Append(ElectricEquipment).Append("\n");
-            sb.Append("  GasEquipment: ").Append(GasEquipment).Append("\n");
-            sb.Append("  ServiceHotWater: ").Append(ServiceHotWater).Append("\n");
-            sb.Append("  Infiltration: ").Append(Infiltration).Append("\n");
-            sb.Append("  Ventilation: ").Append(Ventilation).Append("\n");
-            sb.Append("  Setpoint: ").Append(Setpoint).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  People: ").Append(this.People).Append("\n");
+            sb.Append("  Lighting: ").Append(this.Lighting).Append("\n");
+            sb.Append("  ElectricEquipment: ").Append(this.ElectricEquipment).Append("\n");
+            sb.Append("  GasEquipment: ").Append(this.GasEquipment).Append("\n");
+            sb.Append("  ServiceHotWater: ").Append(this.ServiceHotWater).Append("\n");
+            sb.Append("  Infiltration: ").Append(this.Infiltration).Append("\n");
+            sb.Append("  Ventilation: ").Append(this.Ventilation).Append("\n");
+            sb.Append("  Setpoint: ").Append(this.Setpoint).Append("\n");
             return sb.ToString();
         }
   
@@ -228,33 +228,15 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.People, input.People)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Lighting, input.Lighting)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ElectricEquipment, input.ElectricEquipment)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.GasEquipment, input.GasEquipment)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ServiceHotWater, input.ServiceHotWater)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Infiltration, input.Infiltration)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Ventilation, input.Ventilation)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Setpoint, input.Setpoint)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.People, input.People) && 
+                    Extension.Equals(this.Lighting, input.Lighting) && 
+                    Extension.Equals(this.ElectricEquipment, input.ElectricEquipment) && 
+                    Extension.Equals(this.GasEquipment, input.GasEquipment) && 
+                    Extension.Equals(this.ServiceHotWater, input.ServiceHotWater) && 
+                    Extension.Equals(this.Infiltration, input.Infiltration) && 
+                    Extension.Equals(this.Ventilation, input.Ventilation) && 
+                    Extension.Equals(this.Setpoint, input.Setpoint);
         }
 
         /// <summary>

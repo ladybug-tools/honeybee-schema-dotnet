@@ -100,10 +100,10 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("SizingParameter:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  DesignDays: ").Append(DesignDays).Append("\n");
-            sb.Append("  HeatingFactor: ").Append(HeatingFactor).Append("\n");
-            sb.Append("  CoolingFactor: ").Append(CoolingFactor).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  DesignDays: ").Append(this.DesignDays).Append("\n");
+            sb.Append("  HeatingFactor: ").Append(this.HeatingFactor).Append("\n");
+            sb.Append("  CoolingFactor: ").Append(this.CoolingFactor).Append("\n");
             return sb.ToString();
         }
   
@@ -167,19 +167,13 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.Type, input.Type) && 
                 (
                     this.DesignDays == input.DesignDays ||
                     Extension.AllEquals(this.DesignDays, input.DesignDays)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.HeatingFactor, input.HeatingFactor)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.CoolingFactor, input.CoolingFactor)
-                );
+                ) && 
+                    Extension.Equals(this.HeatingFactor, input.HeatingFactor) && 
+                    Extension.Equals(this.CoolingFactor, input.CoolingFactor);
         }
 
         /// <summary>

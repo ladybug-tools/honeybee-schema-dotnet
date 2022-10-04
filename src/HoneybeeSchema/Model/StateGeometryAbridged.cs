@@ -52,7 +52,7 @@ namespace HoneybeeSchema
         (
             string identifier, Face3D geometry, // Required parameters
             string displayName= default, string modifier= default, string modifierDirect= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "geometry" is required (not null)
             this.Geometry = geometry ?? throw new ArgumentNullException("geometry is a required property for StateGeometryAbridged and cannot be null");
@@ -113,12 +113,12 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("StateGeometryAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  Geometry: ").Append(Geometry).Append("\n");
-            sb.Append("  Modifier: ").Append(Modifier).Append("\n");
-            sb.Append("  ModifierDirect: ").Append(ModifierDirect).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  Geometry: ").Append(this.Geometry).Append("\n");
+            sb.Append("  Modifier: ").Append(this.Modifier).Append("\n");
+            sb.Append("  ModifierDirect: ").Append(this.ModifierDirect).Append("\n");
             return sb.ToString();
         }
   
@@ -182,18 +182,10 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Geometry, input.Geometry)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Modifier, input.Modifier)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ModifierDirect, input.ModifierDirect)
-                );
+                    Extension.Equals(this.Geometry, input.Geometry) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.Modifier, input.Modifier) && 
+                    Extension.Equals(this.ModifierDirect, input.ModifierDirect);
         }
 
         /// <summary>

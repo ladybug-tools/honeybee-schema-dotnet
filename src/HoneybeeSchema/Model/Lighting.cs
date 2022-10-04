@@ -56,7 +56,7 @@ namespace HoneybeeSchema
         (
             string identifier, double wattsPerArea, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule, // Required parameters
             string displayName= default, Object userData= default, double visibleFraction = 0.25D, double radiantFraction = 0.32D, double returnAirFraction = 0.0D, double baselineWattsPerArea = 11.84029D// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.WattsPerArea = wattsPerArea;
             // to ensure "schedule" is required (not null)
@@ -138,16 +138,16 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("Lighting:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  WattsPerArea: ").Append(WattsPerArea).Append("\n");
-            sb.Append("  Schedule: ").Append(Schedule).Append("\n");
-            sb.Append("  VisibleFraction: ").Append(VisibleFraction).Append("\n");
-            sb.Append("  RadiantFraction: ").Append(RadiantFraction).Append("\n");
-            sb.Append("  ReturnAirFraction: ").Append(ReturnAirFraction).Append("\n");
-            sb.Append("  BaselineWattsPerArea: ").Append(BaselineWattsPerArea).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  WattsPerArea: ").Append(this.WattsPerArea).Append("\n");
+            sb.Append("  Schedule: ").Append(this.Schedule).Append("\n");
+            sb.Append("  VisibleFraction: ").Append(this.VisibleFraction).Append("\n");
+            sb.Append("  RadiantFraction: ").Append(this.RadiantFraction).Append("\n");
+            sb.Append("  ReturnAirFraction: ").Append(this.ReturnAirFraction).Append("\n");
+            sb.Append("  BaselineWattsPerArea: ").Append(this.BaselineWattsPerArea).Append("\n");
             return sb.ToString();
         }
   
@@ -211,27 +211,13 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.WattsPerArea, input.WattsPerArea)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Schedule, input.Schedule)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.VisibleFraction, input.VisibleFraction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.RadiantFraction, input.RadiantFraction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ReturnAirFraction, input.ReturnAirFraction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.BaselineWattsPerArea, input.BaselineWattsPerArea)
-                );
+                    Extension.Equals(this.WattsPerArea, input.WattsPerArea) && 
+                    Extension.Equals(this.Schedule, input.Schedule) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.VisibleFraction, input.VisibleFraction) && 
+                    Extension.Equals(this.RadiantFraction, input.RadiantFraction) && 
+                    Extension.Equals(this.ReturnAirFraction, input.ReturnAirFraction) && 
+                    Extension.Equals(this.BaselineWattsPerArea, input.BaselineWattsPerArea);
         }
 
         /// <summary>

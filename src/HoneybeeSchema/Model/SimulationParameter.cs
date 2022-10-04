@@ -140,15 +140,15 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("SimulationParameter:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Output: ").Append(Output).Append("\n");
-            sb.Append("  RunPeriod: ").Append(RunPeriod).Append("\n");
-            sb.Append("  Timestep: ").Append(Timestep).Append("\n");
-            sb.Append("  SimulationControl: ").Append(SimulationControl).Append("\n");
-            sb.Append("  ShadowCalculation: ").Append(ShadowCalculation).Append("\n");
-            sb.Append("  SizingParameter: ").Append(SizingParameter).Append("\n");
-            sb.Append("  NorthAngle: ").Append(NorthAngle).Append("\n");
-            sb.Append("  TerrainType: ").Append(TerrainType).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Output: ").Append(this.Output).Append("\n");
+            sb.Append("  RunPeriod: ").Append(this.RunPeriod).Append("\n");
+            sb.Append("  Timestep: ").Append(this.Timestep).Append("\n");
+            sb.Append("  SimulationControl: ").Append(this.SimulationControl).Append("\n");
+            sb.Append("  ShadowCalculation: ").Append(this.ShadowCalculation).Append("\n");
+            sb.Append("  SizingParameter: ").Append(this.SizingParameter).Append("\n");
+            sb.Append("  NorthAngle: ").Append(this.NorthAngle).Append("\n");
+            sb.Append("  TerrainType: ").Append(this.TerrainType).Append("\n");
             return sb.ToString();
         }
   
@@ -212,33 +212,15 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Output, input.Output)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.RunPeriod, input.RunPeriod)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Timestep, input.Timestep)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SimulationControl, input.SimulationControl)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ShadowCalculation, input.ShadowCalculation)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SizingParameter, input.SizingParameter)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.NorthAngle, input.NorthAngle)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.TerrainType, input.TerrainType)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.Output, input.Output) && 
+                    Extension.Equals(this.RunPeriod, input.RunPeriod) && 
+                    Extension.Equals(this.Timestep, input.Timestep) && 
+                    Extension.Equals(this.SimulationControl, input.SimulationControl) && 
+                    Extension.Equals(this.ShadowCalculation, input.ShadowCalculation) && 
+                    Extension.Equals(this.SizingParameter, input.SizingParameter) && 
+                    Extension.Equals(this.NorthAngle, input.NorthAngle) && 
+                    Extension.Equals(this.TerrainType, input.TerrainType);
         }
 
         /// <summary>

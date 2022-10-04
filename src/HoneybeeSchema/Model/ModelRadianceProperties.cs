@@ -115,12 +115,12 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ModelRadianceProperties:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  GlobalModifierSet: ").Append(GlobalModifierSet).Append("\n");
-            sb.Append("  Modifiers: ").Append(Modifiers).Append("\n");
-            sb.Append("  ModifierSets: ").Append(ModifierSets).Append("\n");
-            sb.Append("  SensorGrids: ").Append(SensorGrids).Append("\n");
-            sb.Append("  Views: ").Append(Views).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  GlobalModifierSet: ").Append(this.GlobalModifierSet).Append("\n");
+            sb.Append("  Modifiers: ").Append(this.Modifiers).Append("\n");
+            sb.Append("  ModifierSets: ").Append(this.ModifierSets).Append("\n");
+            sb.Append("  SensorGrids: ").Append(this.SensorGrids).Append("\n");
+            sb.Append("  Views: ").Append(this.Views).Append("\n");
             return sb.ToString();
         }
   
@@ -184,24 +184,20 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.GlobalModifierSet, input.GlobalModifierSet)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.GlobalModifierSet, input.GlobalModifierSet) && 
                 (
                     this.Modifiers == input.Modifiers ||
                     Extension.AllEquals(this.Modifiers, input.Modifiers)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.ModifierSets == input.ModifierSets ||
                     Extension.AllEquals(this.ModifierSets, input.ModifierSets)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.SensorGrids == input.SensorGrids ||
                     Extension.AllEquals(this.SensorGrids, input.SensorGrids)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.Views == input.Views ||
                     Extension.AllEquals(this.Views, input.Views)

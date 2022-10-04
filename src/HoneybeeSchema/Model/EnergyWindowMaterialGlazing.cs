@@ -55,7 +55,7 @@ namespace HoneybeeSchema
         /// <param name="emissivityBack">Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating. (default to 0.84D).</param>
         /// <param name="conductivity">Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is  typical for clear glass without a low-e coating. (default to 0.9D).</param>
         /// <param name="dirtCorrection">Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean. (default to 1D).</param>
-        /// <param name="solarDiffusing">Takes values True and False. If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component. (default to false).</param>
+        /// <param name="solarDiffusing">If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component. (default to false).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
@@ -63,7 +63,7 @@ namespace HoneybeeSchema
         (
             string identifier, // Required parameters
             string displayName= default, Object userData= default, double thickness = 0.003D, double solarTransmittance = 0.85D, double solarReflectance = 0.075D, AnyOf<Autocalculate,double> solarReflectanceBack= default, double visibleTransmittance = 0.9D, double visibleReflectance = 0.075D, AnyOf<Autocalculate,double> visibleReflectanceBack= default, double infraredTransmittance = 0D, double emissivity = 0.84D, double emissivityBack = 0.84D, double conductivity = 0.9D, double dirtCorrection = 1D, bool solarDiffusing = false// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.Thickness = thickness;
             this.SolarTransmittance = solarTransmittance;
@@ -167,9 +167,9 @@ namespace HoneybeeSchema
         [DataMember(Name = "dirt_correction")]
         public double DirtCorrection { get; set; }  = 1D;
         /// <summary>
-        /// Takes values True and False. If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.
+        /// If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.
         /// </summary>
-        /// <value>Takes values True and False. If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.</value>
+        /// <value>If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.</value>
         [DataMember(Name = "solar_diffusing")]
         public bool SolarDiffusing { get; set; }  = false;
 
@@ -193,23 +193,23 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("EnergyWindowMaterialGlazing:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  Thickness: ").Append(Thickness).Append("\n");
-            sb.Append("  SolarTransmittance: ").Append(SolarTransmittance).Append("\n");
-            sb.Append("  SolarReflectance: ").Append(SolarReflectance).Append("\n");
-            sb.Append("  SolarReflectanceBack: ").Append(SolarReflectanceBack).Append("\n");
-            sb.Append("  VisibleTransmittance: ").Append(VisibleTransmittance).Append("\n");
-            sb.Append("  VisibleReflectance: ").Append(VisibleReflectance).Append("\n");
-            sb.Append("  VisibleReflectanceBack: ").Append(VisibleReflectanceBack).Append("\n");
-            sb.Append("  InfraredTransmittance: ").Append(InfraredTransmittance).Append("\n");
-            sb.Append("  Emissivity: ").Append(Emissivity).Append("\n");
-            sb.Append("  EmissivityBack: ").Append(EmissivityBack).Append("\n");
-            sb.Append("  Conductivity: ").Append(Conductivity).Append("\n");
-            sb.Append("  DirtCorrection: ").Append(DirtCorrection).Append("\n");
-            sb.Append("  SolarDiffusing: ").Append(SolarDiffusing).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  Thickness: ").Append(this.Thickness).Append("\n");
+            sb.Append("  SolarTransmittance: ").Append(this.SolarTransmittance).Append("\n");
+            sb.Append("  SolarReflectance: ").Append(this.SolarReflectance).Append("\n");
+            sb.Append("  SolarReflectanceBack: ").Append(this.SolarReflectanceBack).Append("\n");
+            sb.Append("  VisibleTransmittance: ").Append(this.VisibleTransmittance).Append("\n");
+            sb.Append("  VisibleReflectance: ").Append(this.VisibleReflectance).Append("\n");
+            sb.Append("  VisibleReflectanceBack: ").Append(this.VisibleReflectanceBack).Append("\n");
+            sb.Append("  InfraredTransmittance: ").Append(this.InfraredTransmittance).Append("\n");
+            sb.Append("  Emissivity: ").Append(this.Emissivity).Append("\n");
+            sb.Append("  EmissivityBack: ").Append(this.EmissivityBack).Append("\n");
+            sb.Append("  Conductivity: ").Append(this.Conductivity).Append("\n");
+            sb.Append("  DirtCorrection: ").Append(this.DirtCorrection).Append("\n");
+            sb.Append("  SolarDiffusing: ").Append(this.SolarDiffusing).Append("\n");
             return sb.ToString();
         }
   
@@ -273,48 +273,20 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Thickness, input.Thickness)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SolarTransmittance, input.SolarTransmittance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SolarReflectance, input.SolarReflectance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SolarReflectanceBack, input.SolarReflectanceBack)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.VisibleTransmittance, input.VisibleTransmittance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.VisibleReflectance, input.VisibleReflectance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.VisibleReflectanceBack, input.VisibleReflectanceBack)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.InfraredTransmittance, input.InfraredTransmittance)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Emissivity, input.Emissivity)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.EmissivityBack, input.EmissivityBack)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Conductivity, input.Conductivity)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DirtCorrection, input.DirtCorrection)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SolarDiffusing, input.SolarDiffusing)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.Thickness, input.Thickness) && 
+                    Extension.Equals(this.SolarTransmittance, input.SolarTransmittance) && 
+                    Extension.Equals(this.SolarReflectance, input.SolarReflectance) && 
+                    Extension.Equals(this.SolarReflectanceBack, input.SolarReflectanceBack) && 
+                    Extension.Equals(this.VisibleTransmittance, input.VisibleTransmittance) && 
+                    Extension.Equals(this.VisibleReflectance, input.VisibleReflectance) && 
+                    Extension.Equals(this.VisibleReflectanceBack, input.VisibleReflectanceBack) && 
+                    Extension.Equals(this.InfraredTransmittance, input.InfraredTransmittance) && 
+                    Extension.Equals(this.Emissivity, input.Emissivity) && 
+                    Extension.Equals(this.EmissivityBack, input.EmissivityBack) && 
+                    Extension.Equals(this.Conductivity, input.Conductivity) && 
+                    Extension.Equals(this.DirtCorrection, input.DirtCorrection) && 
+                    Extension.Equals(this.SolarDiffusing, input.SolarDiffusing);
         }
 
         /// <summary>

@@ -35,7 +35,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="fractionAreaOperable">A number for the fraction of the window area that is operable. (default to 0.5D).</param>
         /// <param name="fractionHeightOperable">A number for the fraction of the distance from the bottom of the window to the top that is operable (default to 1.0D).</param>
-        /// <param name="dischargeCoefficient">A number that will be multipled by the area of the window in the stack (buoyancy-driven) part of the equation to account for additional friction from window geometry, insect screens, etc. Typical values include 0.45, for unobstructed windows WITH insect screens and 0.65 for unobstructed windows WITHOUT insect screens. This value should be lowered if windows are of an awning or casement type and are not allowed to fully open. (default to 0.45D).</param>
+        /// <param name="dischargeCoefficient">A number that will be multiplied by the area of the window in the stack (buoyancy-driven) part of the equation to account for additional friction from window geometry, insect screens, etc. Typical values include 0.45, for unobstructed windows WITH insect screens and 0.65 for unobstructed windows WITHOUT insect screens. This value should be lowered if windows are of an awning or casement type and are not allowed to fully open. (default to 0.45D).</param>
         /// <param name="windCrossVent">Boolean to indicate if there is an opening of roughly equal area on the opposite side of the Room such that wind-driven cross ventilation will be induced. If False, the assumption is that the operable area is primarily on one side of the Room and there is no wind-driven ventilation. (default to false).</param>
         /// <param name="flowCoefficientClosed">An optional number in kg/s-m, at 1 Pa per meter of crack length, used to calculate the mass flow rate when the opening is closed; required to run an AirflowNetwork simulation. The DesignBuilder Cracks template defines the flow coefficient for a tight, low-leakage closed external window to be 0.00001, and the flow coefficient for a very poor, high-leakage closed external window to be 0.003. (default to 0D).</param>
         /// <param name="flowExponentClosed">An optional dimensionless number between 0.5 and 1 used to calculate the mass flow rate when the opening is closed; required to run an AirflowNetwork simulation. This value represents the leak geometry impact on airflow, with 0.5 generally corresponding to turbulent orifice flow and 1 generally corresponding to laminar flow. The default of 0.65 is representative of many cases of wall and window leakage, used when the exponent cannot be measured. (default to 0.65D).</param>
@@ -82,9 +82,9 @@ namespace HoneybeeSchema
         [DataMember(Name = "fraction_height_operable")]
         public double FractionHeightOperable { get; set; }  = 1.0D;
         /// <summary>
-        /// A number that will be multipled by the area of the window in the stack (buoyancy-driven) part of the equation to account for additional friction from window geometry, insect screens, etc. Typical values include 0.45, for unobstructed windows WITH insect screens and 0.65 for unobstructed windows WITHOUT insect screens. This value should be lowered if windows are of an awning or casement type and are not allowed to fully open.
+        /// A number that will be multiplied by the area of the window in the stack (buoyancy-driven) part of the equation to account for additional friction from window geometry, insect screens, etc. Typical values include 0.45, for unobstructed windows WITH insect screens and 0.65 for unobstructed windows WITHOUT insect screens. This value should be lowered if windows are of an awning or casement type and are not allowed to fully open.
         /// </summary>
-        /// <value>A number that will be multipled by the area of the window in the stack (buoyancy-driven) part of the equation to account for additional friction from window geometry, insect screens, etc. Typical values include 0.45, for unobstructed windows WITH insect screens and 0.65 for unobstructed windows WITHOUT insect screens. This value should be lowered if windows are of an awning or casement type and are not allowed to fully open.</value>
+        /// <value>A number that will be multiplied by the area of the window in the stack (buoyancy-driven) part of the equation to account for additional friction from window geometry, insect screens, etc. Typical values include 0.45, for unobstructed windows WITH insect screens and 0.65 for unobstructed windows WITHOUT insect screens. This value should be lowered if windows are of an awning or casement type and are not allowed to fully open.</value>
         [DataMember(Name = "discharge_coefficient")]
         public double DischargeCoefficient { get; set; }  = 0.45D;
         /// <summary>
@@ -132,14 +132,14 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("VentilationOpening:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  FractionAreaOperable: ").Append(FractionAreaOperable).Append("\n");
-            sb.Append("  FractionHeightOperable: ").Append(FractionHeightOperable).Append("\n");
-            sb.Append("  DischargeCoefficient: ").Append(DischargeCoefficient).Append("\n");
-            sb.Append("  WindCrossVent: ").Append(WindCrossVent).Append("\n");
-            sb.Append("  FlowCoefficientClosed: ").Append(FlowCoefficientClosed).Append("\n");
-            sb.Append("  FlowExponentClosed: ").Append(FlowExponentClosed).Append("\n");
-            sb.Append("  TwoWayThreshold: ").Append(TwoWayThreshold).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  FractionAreaOperable: ").Append(this.FractionAreaOperable).Append("\n");
+            sb.Append("  FractionHeightOperable: ").Append(this.FractionHeightOperable).Append("\n");
+            sb.Append("  DischargeCoefficient: ").Append(this.DischargeCoefficient).Append("\n");
+            sb.Append("  WindCrossVent: ").Append(this.WindCrossVent).Append("\n");
+            sb.Append("  FlowCoefficientClosed: ").Append(this.FlowCoefficientClosed).Append("\n");
+            sb.Append("  FlowExponentClosed: ").Append(this.FlowExponentClosed).Append("\n");
+            sb.Append("  TwoWayThreshold: ").Append(this.TwoWayThreshold).Append("\n");
             return sb.ToString();
         }
   
@@ -203,30 +203,14 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.FractionAreaOperable, input.FractionAreaOperable)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.FractionHeightOperable, input.FractionHeightOperable)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.DischargeCoefficient, input.DischargeCoefficient)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.WindCrossVent, input.WindCrossVent)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.FlowCoefficientClosed, input.FlowCoefficientClosed)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.FlowExponentClosed, input.FlowExponentClosed)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.TwoWayThreshold, input.TwoWayThreshold)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.FractionAreaOperable, input.FractionAreaOperable) && 
+                    Extension.Equals(this.FractionHeightOperable, input.FractionHeightOperable) && 
+                    Extension.Equals(this.DischargeCoefficient, input.DischargeCoefficient) && 
+                    Extension.Equals(this.WindCrossVent, input.WindCrossVent) && 
+                    Extension.Equals(this.FlowCoefficientClosed, input.FlowCoefficientClosed) && 
+                    Extension.Equals(this.FlowExponentClosed, input.FlowExponentClosed) && 
+                    Extension.Equals(this.TwoWayThreshold, input.TwoWayThreshold);
         }
 
         /// <summary>

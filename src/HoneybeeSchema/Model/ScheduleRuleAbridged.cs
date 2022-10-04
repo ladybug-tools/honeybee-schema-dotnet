@@ -167,17 +167,17 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ScheduleRuleAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  ScheduleDay: ").Append(ScheduleDay).Append("\n");
-            sb.Append("  ApplySunday: ").Append(ApplySunday).Append("\n");
-            sb.Append("  ApplyMonday: ").Append(ApplyMonday).Append("\n");
-            sb.Append("  ApplyTuesday: ").Append(ApplyTuesday).Append("\n");
-            sb.Append("  ApplyWednesday: ").Append(ApplyWednesday).Append("\n");
-            sb.Append("  ApplyThursday: ").Append(ApplyThursday).Append("\n");
-            sb.Append("  ApplyFriday: ").Append(ApplyFriday).Append("\n");
-            sb.Append("  ApplySaturday: ").Append(ApplySaturday).Append("\n");
-            sb.Append("  StartDate: ").Append(StartDate).Append("\n");
-            sb.Append("  EndDate: ").Append(EndDate).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  ScheduleDay: ").Append(this.ScheduleDay).Append("\n");
+            sb.Append("  ApplySunday: ").Append(this.ApplySunday).Append("\n");
+            sb.Append("  ApplyMonday: ").Append(this.ApplyMonday).Append("\n");
+            sb.Append("  ApplyTuesday: ").Append(this.ApplyTuesday).Append("\n");
+            sb.Append("  ApplyWednesday: ").Append(this.ApplyWednesday).Append("\n");
+            sb.Append("  ApplyThursday: ").Append(this.ApplyThursday).Append("\n");
+            sb.Append("  ApplyFriday: ").Append(this.ApplyFriday).Append("\n");
+            sb.Append("  ApplySaturday: ").Append(this.ApplySaturday).Append("\n");
+            sb.Append("  StartDate: ").Append(this.StartDate).Append("\n");
+            sb.Append("  EndDate: ").Append(this.EndDate).Append("\n");
             return sb.ToString();
         }
   
@@ -241,37 +241,19 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.ScheduleDay, input.ScheduleDay)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ApplySunday, input.ApplySunday)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ApplyMonday, input.ApplyMonday)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ApplyTuesday, input.ApplyTuesday)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ApplyWednesday, input.ApplyWednesday)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ApplyThursday, input.ApplyThursday)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ApplyFriday, input.ApplyFriday)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ApplySaturday, input.ApplySaturday)
-                ) && base.Equals(input) && 
+                    Extension.Equals(this.ScheduleDay, input.ScheduleDay) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.ApplySunday, input.ApplySunday) && 
+                    Extension.Equals(this.ApplyMonday, input.ApplyMonday) && 
+                    Extension.Equals(this.ApplyTuesday, input.ApplyTuesday) && 
+                    Extension.Equals(this.ApplyWednesday, input.ApplyWednesday) && 
+                    Extension.Equals(this.ApplyThursday, input.ApplyThursday) && 
+                    Extension.Equals(this.ApplyFriday, input.ApplyFriday) && 
+                    Extension.Equals(this.ApplySaturday, input.ApplySaturday) && 
                 (
                     this.StartDate == input.StartDate ||
                     Extension.AllEquals(this.StartDate, input.StartDate)
-                ) && base.Equals(input) && 
+                ) && 
                 (
                     this.EndDate == input.EndDate ||
                     Extension.AllEquals(this.EndDate, input.EndDate)

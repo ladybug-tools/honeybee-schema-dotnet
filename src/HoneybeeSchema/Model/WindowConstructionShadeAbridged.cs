@@ -31,9 +31,9 @@ namespace HoneybeeSchema
     public partial class WindowConstructionShadeAbridged : IDdEnergyBaseModel, IEquatable<WindowConstructionShadeAbridged>, IValidatableObject
     {
         /// <summary>
-        /// Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the \&quot;Between\&quot; option. Also note that, for a WindowConstruction with more than one gas gap, the \&quot;Between\&quot; option defalts to using the inner gap as this is the only option that EnergyPlus supports.
+        /// Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the \&quot;Between\&quot; option. Also note that, for a WindowConstruction with more than one gas gap, the \&quot;Between\&quot; option defaults to using the inner gap as this is the only option that EnergyPlus supports.
         /// </summary>
-        /// <value>Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the \&quot;Between\&quot; option. Also note that, for a WindowConstruction with more than one gas gap, the \&quot;Between\&quot; option defalts to using the inner gap as this is the only option that EnergyPlus supports.</value>
+        /// <value>Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the \&quot;Between\&quot; option. Also note that, for a WindowConstruction with more than one gas gap, the \&quot;Between\&quot; option defaults to using the inner gap as this is the only option that EnergyPlus supports.</value>
         [DataMember(Name="shade_location")]
         public ShadeLocation ShadeLocation { get; set; } = ShadeLocation.Interior;
         /// <summary>
@@ -57,7 +57,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="windowConstruction">A WindowConstructionAbridged object that serves as the \&quot;switched off\&quot; version of the construction (aka. the \&quot;bare construction\&quot;). The shade_material and shade_location will be used to modify this starting construction. (required).</param>
         /// <param name="shadeMaterial">Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly. (required).</param>
-        /// <param name="shadeLocation">Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the \&quot;Between\&quot; option. Also note that, for a WindowConstruction with more than one gas gap, the \&quot;Between\&quot; option defalts to using the inner gap as this is the only option that EnergyPlus supports..</param>
+        /// <param name="shadeLocation">Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the \&quot;Between\&quot; option. Also note that, for a WindowConstruction with more than one gas gap, the \&quot;Between\&quot; option defaults to using the inner gap as this is the only option that EnergyPlus supports..</param>
         /// <param name="controlType">Text to indicate how the shading device is controlled, which determines when the shading is “on” or “off.”.</param>
         /// <param name="setpoint">A number that corresponds to the specified control_type. This can be a value in (W/m2), (C) or (W) depending upon the control type.Note that this value cannot be None for any control type except \&quot;AlwaysOn.\&quot;.</param>
         /// <param name="schedule">An optional schedule identifier to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction..</param>
@@ -68,7 +68,7 @@ namespace HoneybeeSchema
         (
             string identifier, WindowConstructionAbridged windowConstruction, string shadeMaterial, // Required parameters
             string displayName= default, Object userData= default, ShadeLocation shadeLocation= ShadeLocation.Interior, ControlType controlType= ControlType.AlwaysOn, double setpoint= default, string schedule= default// Optional parameters
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)// BaseClass
+        ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "windowConstruction" is required (not null)
             this.WindowConstruction = windowConstruction ?? throw new ArgumentNullException("windowConstruction is a required property for WindowConstructionShadeAbridged and cannot be null");
@@ -139,16 +139,16 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("WindowConstructionShadeAbridged:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            sb.Append("  UserData: ").Append(UserData).Append("\n");
-            sb.Append("  WindowConstruction: ").Append(WindowConstruction).Append("\n");
-            sb.Append("  ShadeMaterial: ").Append(ShadeMaterial).Append("\n");
-            sb.Append("  ShadeLocation: ").Append(ShadeLocation).Append("\n");
-            sb.Append("  ControlType: ").Append(ControlType).Append("\n");
-            sb.Append("  Setpoint: ").Append(Setpoint).Append("\n");
-            sb.Append("  Schedule: ").Append(Schedule).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  WindowConstruction: ").Append(this.WindowConstruction).Append("\n");
+            sb.Append("  ShadeMaterial: ").Append(this.ShadeMaterial).Append("\n");
+            sb.Append("  ShadeLocation: ").Append(this.ShadeLocation).Append("\n");
+            sb.Append("  ControlType: ").Append(this.ControlType).Append("\n");
+            sb.Append("  Setpoint: ").Append(this.Setpoint).Append("\n");
+            sb.Append("  Schedule: ").Append(this.Schedule).Append("\n");
             return sb.ToString();
         }
   
@@ -212,27 +212,13 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.WindowConstruction, input.WindowConstruction)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ShadeMaterial, input.ShadeMaterial)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ShadeLocation, input.ShadeLocation)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.ControlType, input.ControlType)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Setpoint, input.Setpoint)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.Schedule, input.Schedule)
-                );
+                    Extension.Equals(this.WindowConstruction, input.WindowConstruction) && 
+                    Extension.Equals(this.ShadeMaterial, input.ShadeMaterial) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.ShadeLocation, input.ShadeLocation) && 
+                    Extension.Equals(this.ControlType, input.ControlType) && 
+                    Extension.Equals(this.Setpoint, input.Setpoint) && 
+                    Extension.Equals(this.Schedule, input.Schedule);
         }
 
         /// <summary>

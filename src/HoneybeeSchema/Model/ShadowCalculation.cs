@@ -115,12 +115,12 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ShadowCalculation:\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  SolarDistribution: ").Append(SolarDistribution).Append("\n");
-            sb.Append("  CalculationMethod: ").Append(CalculationMethod).Append("\n");
-            sb.Append("  CalculationUpdateMethod: ").Append(CalculationUpdateMethod).Append("\n");
-            sb.Append("  CalculationFrequency: ").Append(CalculationFrequency).Append("\n");
-            sb.Append("  MaximumFigures: ").Append(MaximumFigures).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  SolarDistribution: ").Append(this.SolarDistribution).Append("\n");
+            sb.Append("  CalculationMethod: ").Append(this.CalculationMethod).Append("\n");
+            sb.Append("  CalculationUpdateMethod: ").Append(this.CalculationUpdateMethod).Append("\n");
+            sb.Append("  CalculationFrequency: ").Append(this.CalculationFrequency).Append("\n");
+            sb.Append("  MaximumFigures: ").Append(this.MaximumFigures).Append("\n");
             return sb.ToString();
         }
   
@@ -184,24 +184,12 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                (
-                    Extension.Equals(this.Type, input.Type)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.SolarDistribution, input.SolarDistribution)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.CalculationMethod, input.CalculationMethod)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.CalculationUpdateMethod, input.CalculationUpdateMethod)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.CalculationFrequency, input.CalculationFrequency)
-                ) && base.Equals(input) && 
-                (
-                    Extension.Equals(this.MaximumFigures, input.MaximumFigures)
-                );
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.SolarDistribution, input.SolarDistribution) && 
+                    Extension.Equals(this.CalculationMethod, input.CalculationMethod) && 
+                    Extension.Equals(this.CalculationUpdateMethod, input.CalculationUpdateMethod) && 
+                    Extension.Equals(this.CalculationFrequency, input.CalculationFrequency) && 
+                    Extension.Equals(this.MaximumFigures, input.MaximumFigures);
         }
 
         /// <summary>
