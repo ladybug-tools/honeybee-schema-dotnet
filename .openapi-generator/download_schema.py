@@ -3,9 +3,11 @@ import urllib.request
 import json
 import shutil
 import sys
+import ssl
 
 
 def download(url, dir):
+    ssl._create_default_https_context = ssl._create_unverified_context
     json_url = urllib.request.urlopen(url)
     data = json.loads(json_url.read())
 

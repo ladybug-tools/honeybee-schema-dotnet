@@ -42,7 +42,7 @@ def get_allof_types(obj, allofList):
 
 def fix_constructor(read_data):
     regexs = [
-        r"(?<=(\w|\d)),\s*,\s*(?=\w)",
+        r"(?<=(\w|\d|\")),\s*,\s*(?=\w)",
         r"(?<=\s{12})\s*(,\s*)",  # remove "," at begining of line
         r"(?<=\(\n\s{12})\s*(,)(?=\s\w*.*, \/\/ Required parameters)",  # remove "," at begining of required
         r"(?<=\/\/ Required parameters\n\s{12})(,\s){1,}(?=\s*\w)",      # remove "," at begining of optional
