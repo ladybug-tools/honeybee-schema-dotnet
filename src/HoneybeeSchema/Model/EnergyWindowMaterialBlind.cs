@@ -57,7 +57,7 @@ namespace HoneybeeSchema
         /// <param name="beamSolarTransmittance">The beam solar transmittance of the slat, assumed to be independent of angle of incidence on the slat. Any transmitted beam radiation is assumed to be 100% diffuse (i.e., slats are translucent). The default value is 0. (default to 0D).</param>
         /// <param name="beamSolarReflectance">The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5. (default to 0.5D).</param>
         /// <param name="beamSolarReflectanceBack">The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5. (default to 0.5D).</param>
-        /// <param name="diffuseSolarTransmittance">The slat transmittance for hemispherically diffuse solar radiation. Default: 0. (default to 0D).</param>
+        /// <param name="diffuseSolarTransmittance">The slat transmittance for hemisperically diffuse solar radiation. Default: 0. (default to 0D).</param>
         /// <param name="diffuseSolarReflectance">The front-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5. (default to 0.5D).</param>
         /// <param name="diffuseSolarReflectanceBack">The back-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5. (default to 0.5D).</param>
         /// <param name="beamVisibleTransmittance">The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default: 0. (default to 0D).</param>
@@ -70,10 +70,10 @@ namespace HoneybeeSchema
         /// <param name="emissivity">Front side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9. (default to 0.9D).</param>
         /// <param name="emissivityBack">Back side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9. (default to 0.9D).</param>
         /// <param name="distanceToGlass">The distance from the mid-plane of the blind to the adjacent glass in meters. The default value is 0.05. (default to 0.05D).</param>
-        /// <param name="topOpeningMultiplier">The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. (default to 0.5D).</param>
-        /// <param name="bottomOpeningMultiplier">The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. (default to 0.5D).</param>
-        /// <param name="leftOpeningMultiplier">The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. (default to 0.5D).</param>
-        /// <param name="rightOpeningMultiplier">The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. (default to 0.5D).</param>
+        /// <param name="topOpeningMultiplier">The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. The default value is 0.5 (default to 0.5D).</param>
+        /// <param name="bottomOpeningMultiplier">The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. The default value is 0. (default to 0.5D).</param>
+        /// <param name="leftOpeningMultiplier">The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. The default value is 0.5. (default to 0.5D).</param>
+        /// <param name="rightOpeningMultiplier">The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. The default value is 0.5. (default to 0.5D).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
@@ -174,9 +174,9 @@ namespace HoneybeeSchema
         [DataMember(Name = "beam_solar_reflectance_back")]
         public double BeamSolarReflectanceBack { get; set; }  = 0.5D;
         /// <summary>
-        /// The slat transmittance for hemispherically diffuse solar radiation. Default: 0.
+        /// The slat transmittance for hemisperically diffuse solar radiation. Default: 0.
         /// </summary>
-        /// <value>The slat transmittance for hemispherically diffuse solar radiation. Default: 0.</value>
+        /// <value>The slat transmittance for hemisperically diffuse solar radiation. Default: 0.</value>
         [DataMember(Name = "diffuse_solar_transmittance")]
         public double DiffuseSolarTransmittance { get; set; }  = 0D;
         /// <summary>
@@ -252,27 +252,27 @@ namespace HoneybeeSchema
         [DataMember(Name = "distance_to_glass")]
         public double DistanceToGlass { get; set; }  = 0.05D;
         /// <summary>
-        /// The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade.
+        /// The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. The default value is 0.5
         /// </summary>
-        /// <value>The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade.</value>
+        /// <value>The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. The default value is 0.5</value>
         [DataMember(Name = "top_opening_multiplier")]
         public double TopOpeningMultiplier { get; set; }  = 0.5D;
         /// <summary>
-        /// The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade.
+        /// The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. The default value is 0.
         /// </summary>
-        /// <value>The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade.</value>
+        /// <value>The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. The default value is 0.</value>
         [DataMember(Name = "bottom_opening_multiplier")]
         public double BottomOpeningMultiplier { get; set; }  = 0.5D;
         /// <summary>
-        /// The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade.
+        /// The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. The default value is 0.5.
         /// </summary>
-        /// <value>The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade.</value>
+        /// <value>The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. The default value is 0.5.</value>
         [DataMember(Name = "left_opening_multiplier")]
         public double LeftOpeningMultiplier { get; set; }  = 0.5D;
         /// <summary>
-        /// The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade.
+        /// The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. The default value is 0.5.
         /// </summary>
-        /// <value>The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade.</value>
+        /// <value>The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. The default value is 0.5.</value>
         [DataMember(Name = "right_opening_multiplier")]
         public double RightOpeningMultiplier { get; set; }  = 0.5D;
 

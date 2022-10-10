@@ -55,7 +55,7 @@ namespace HoneybeeSchema
         /// <param name="emissivityBack">Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating. (default to 0.84D).</param>
         /// <param name="conductivity">Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is  typical for clear glass without a low-e coating. (default to 0.9D).</param>
         /// <param name="dirtCorrection">Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean. (default to 1D).</param>
-        /// <param name="solarDiffusing">If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component. (default to false).</param>
+        /// <param name="solarDiffusing">Takes values True and False. If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component. (default to false).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
@@ -167,9 +167,9 @@ namespace HoneybeeSchema
         [DataMember(Name = "dirt_correction")]
         public double DirtCorrection { get; set; }  = 1D;
         /// <summary>
-        /// If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.
+        /// Takes values True and False. If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.
         /// </summary>
-        /// <value>If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.</value>
+        /// <value>Takes values True and False. If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.</value>
         [DataMember(Name = "solar_diffusing")]
         public bool SolarDiffusing { get; set; }  = false;
 

@@ -51,94 +51,88 @@ namespace HoneybeeSchema
         Door = 3,
 
         /// <summary>
-        /// Enum SubFace for value: SubFace
-        /// </summary>
-        [EnumMember(Value = "SubFace")]
-        SubFace = 4,
-
-        /// <summary>
         /// Enum Face for value: Face
         /// </summary>
         [EnumMember(Value = "Face")]
-        Face = 5,
+        Face = 4,
 
         /// <summary>
         /// Enum Room for value: Room
         /// </summary>
         [EnumMember(Value = "Room")]
-        Room = 6,
+        Room = 5,
 
         /// <summary>
         /// Enum SensorGrid for value: SensorGrid
         /// </summary>
         [EnumMember(Value = "SensorGrid")]
-        SensorGrid = 7,
+        SensorGrid = 6,
 
         /// <summary>
         /// Enum View for value: View
         /// </summary>
         [EnumMember(Value = "View")]
-        View = 8,
+        View = 7,
 
         /// <summary>
         /// Enum Modifier for value: Modifier
         /// </summary>
         [EnumMember(Value = "Modifier")]
-        Modifier = 9,
+        Modifier = 8,
 
         /// <summary>
         /// Enum ModifierSet for value: ModifierSet
         /// </summary>
         [EnumMember(Value = "ModifierSet")]
-        ModifierSet = 10,
+        ModifierSet = 9,
 
         /// <summary>
         /// Enum Material for value: Material
         /// </summary>
         [EnumMember(Value = "Material")]
-        Material = 11,
+        Material = 10,
 
         /// <summary>
         /// Enum Construction for value: Construction
         /// </summary>
         [EnumMember(Value = "Construction")]
-        Construction = 12,
+        Construction = 11,
 
         /// <summary>
         /// Enum ConstructionSet for value: ConstructionSet
         /// </summary>
         [EnumMember(Value = "ConstructionSet")]
-        ConstructionSet = 13,
+        ConstructionSet = 12,
 
         /// <summary>
         /// Enum ScheduleTypeLimit for value: ScheduleTypeLimit
         /// </summary>
         [EnumMember(Value = "ScheduleTypeLimit")]
-        ScheduleTypeLimit = 14,
+        ScheduleTypeLimit = 13,
 
         /// <summary>
         /// Enum Schedule for value: Schedule
         /// </summary>
         [EnumMember(Value = "Schedule")]
-        Schedule = 15,
+        Schedule = 14,
 
         /// <summary>
         /// Enum ProgramType for value: ProgramType
         /// </summary>
         [EnumMember(Value = "ProgramType")]
-        ProgramType = 16,
+        ProgramType = 15,
 
         /// <summary>
         /// Enum HVAC for value: HVAC
         /// </summary>
         [EnumMember(Value = "HVAC")]
-        HVAC = 17,
+        HVAC = 16,
 
         /// <summary>
         /// Enum SHW for value: SHW
         /// </summary>
         [EnumMember(Value = "SHW")]
-        SHW = 18
+        SHW = 17
 
     }
 

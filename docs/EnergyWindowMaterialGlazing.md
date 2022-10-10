@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **EmissivityBack** | **double** | Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating. | [optional] [default to 0.84D]
 **Conductivity** | **double** | Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is  typical for clear glass without a low-e coating. | [optional] [default to 0.9D]
 **DirtCorrection** | **double** | Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean. | [optional] [default to 1D]
-**SolarDiffusing** | **bool** | If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component. | [optional] [default to false]
+**SolarDiffusing** | **bool** | Takes values True and False. If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component. | [optional] [default to false]
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)

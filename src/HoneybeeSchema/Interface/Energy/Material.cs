@@ -11,7 +11,6 @@ namespace HoneybeeSchema
 	public partial class EnergyMaterial: HoneybeeSchema.Energy.IMaterial {}
 	public partial class EnergyMaterialNoMass: HoneybeeSchema.Energy.IMaterial {}
 	public partial class EnergyMaterialVegetation: HoneybeeSchema.Energy.IMaterial {}
-	public partial class EnergyWindowFrame: HoneybeeSchema.Energy.IMaterial {}
 	public partial class EnergyWindowMaterialBlind: HoneybeeSchema.Energy.IMaterial {}
 	public partial class EnergyWindowMaterialGas: HoneybeeSchema.Energy.IMaterial {}
 	public partial class EnergyWindowMaterialGasCustom: HoneybeeSchema.Energy.IMaterial {}
