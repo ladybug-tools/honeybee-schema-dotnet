@@ -24,7 +24,7 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Low Temperature Radiant system.
+    /// Low temperature radiant HVAC system.  This HVAC template will change the floor and/or ceiling constructions of the Rooms that it is applied to, replacing them with a construction that aligns with the radiant_type property (eg. CeilingMetalPanel).  The heating and cooling needs of the space are met with the radiant constructions, which use chilled water at 12.8C (55F) and a hot water temperature somewhere between 32.2C (90F) and 49C (120F) (warmer temperatures are used in colder climate zones).  Note that radiant systems are particularly limited in cooling capacity and using them may result in many unmet hours. To reduce unmet hours, one can remove carpets, reduce internal loads, reduce solar and envelope gains during peak times, add thermal mass, and use an expanded comfort range.
     /// </summary>
     [Serializable]
     [DataContract(Name = "Radiant")]

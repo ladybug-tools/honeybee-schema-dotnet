@@ -24,7 +24,7 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Baseboard heating system. Intended for spaces only requiring heating.
+    /// Baseboard heating system.  Baseboard systems are intended for spaces only requiring heating and no ventilation or cooling. Each room/zone will get its own baseboard heating unit that satisfies the heating load.
     /// </summary>
     [Serializable]
     [DataContract(Name = "Baseboard")]

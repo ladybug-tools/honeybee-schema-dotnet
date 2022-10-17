@@ -24,7 +24,7 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Direct evaporative cooling systems (with optional heating).
+    /// Water Source Heat Pump (WSHP) heating/cooling system (with no ventilation).  Each room/zone receives its own Water Source Heat Pump (WSHP), which meets the heating and cooling loads of the space. All WSHPs are connected to the same water condenser loop, which has its temperature maintained by the equipment_type (eg. Boiler with Cooling Tower).
     /// </summary>
     [Serializable]
     [DataContract(Name = "WSHP")]
