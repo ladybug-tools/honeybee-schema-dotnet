@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **BeamSolarTransmittance** | **double** | The beam solar transmittance of the slat, assumed to be independent of angle of incidence on the slat. Any transmitted beam radiation is assumed to be 100% diffuse (i.e., slats are translucent). The default value is 0. | [optional] [default to 0D]
 **BeamSolarReflectance** | **double** | The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5. | [optional] [default to 0.5D]
 **BeamSolarReflectanceBack** | **double** | The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5. | [optional] [default to 0.5D]
-**DiffuseSolarTransmittance** | **double** | The slat transmittance for hemisperically diffuse solar radiation. Default: 0. | [optional] [default to 0D]
+**DiffuseSolarTransmittance** | **double** | The slat transmittance for hemispherically diffuse solar radiation. Default: 0. | [optional] [default to 0D]
 **DiffuseSolarReflectance** | **double** | The front-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5. | [optional] [default to 0.5D]
 **DiffuseSolarReflectanceBack** | **double** | The back-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5. | [optional] [default to 0.5D]
 **BeamVisibleTransmittance** | **double** | The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default: 0. | [optional] [default to 0D]
@@ -29,10 +29,10 @@ Name | Type | Description | Notes
 **Emissivity** | **double** | Front side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9. | [optional] [default to 0.9D]
 **EmissivityBack** | **double** | Back side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9. | [optional] [default to 0.9D]
 **DistanceToGlass** | **double** | The distance from the mid-plane of the blind to the adjacent glass in meters. The default value is 0.05. | [optional] [default to 0.05D]
-**TopOpeningMultiplier** | **double** | The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. The default value is 0.5 | [optional] [default to 0.5D]
-**BottomOpeningMultiplier** | **double** | The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. The default value is 0. | [optional] [default to 0.5D]
-**LeftOpeningMultiplier** | **double** | The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. The default value is 0.5. | [optional] [default to 0.5D]
-**RightOpeningMultiplier** | **double** | The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. The default value is 0.5. | [optional] [default to 0.5D]
+**TopOpeningMultiplier** | **double** | The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. | [optional] [default to 0.5D]
+**BottomOpeningMultiplier** | **double** | The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. | [optional] [default to 0.5D]
+**LeftOpeningMultiplier** | **double** | The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. | [optional] [default to 0.5D]
+**RightOpeningMultiplier** | **double** | The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. | [optional] [default to 0.5D]
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)

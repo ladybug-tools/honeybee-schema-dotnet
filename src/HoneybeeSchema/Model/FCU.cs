@@ -24,7 +24,7 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Fan Coil Unit (FCU) heating/cooling system (with no ventilation).
+    /// Fan Coil Unit (FCU) heating/cooling system (with no ventilation).  Each room/zone receives its own Fan Coil Unit (FCU), which meets the heating and cooling loads of the space. The cooling coil in the FCU is always chilled water cooling coil, which is connected to a chilled water loop operating at 6.7C (44F). The heating coil is a hot water coil except when when electric baseboards or gas heaters are specified. Hot water temperature is 82C (180F) for boiler/district heating and 49C (120F) when ASHP is used.
     /// </summary>
     [Serializable]
     [DataContract(Name = "FCU")]

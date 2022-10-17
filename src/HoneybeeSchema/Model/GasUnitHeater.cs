@@ -24,7 +24,7 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Gas unit heating system. Intended for spaces only requiring heating.
+    /// Gas unit heating system.  Gas unit systems are intended for spaces only requiring heating and no ventilation or cooling. Each room/zone will get its own gaa heating unit that satisfies the heating load.
     /// </summary>
     [Serializable]
     [DataContract(Name = "GasUnitHeater")]

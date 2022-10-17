@@ -24,7 +24,7 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Variable Refrigerant Flow (VRF) with DOAS HVAC system.
+    /// Variable Refrigerant Flow (VRF) with DOAS HVAC system.  All rooms/zones in the system are connected to a Dedicated Outdoor Air System (DOAS) that supplies a constant volume of ventilation air at the same temperature to all rooms/zones. The ventilation air temperature will vary from 21.1C (70F) to 15.5C (60F) depending on the outdoor air temperature (the DOAS supplies cooler air when outdoor conditions are warmer). The ventilation air temperature is maintained by a single speed direct expansion (DX) cooling coil along with a single-speed direct expansion (DX) heat pump with a backup electrical resistance coil.  Each room/zone also receives its own Variable Refrigerant Flow (VRF) terminal, which meets the heating and cooling loads of the space. All room/zone terminals are connected to the same outdoor unit, meaning that either all rooms must be in cooling or heating mode together.
     /// </summary>
     [Serializable]
     [DataContract(Name = "VRFwithDOASAbridged")]

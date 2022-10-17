@@ -24,7 +24,7 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Base class for all heating/cooling systems without any ventilation.
+    /// Base class for all heating/cooling systems without any ventilation.  These systems are only designed to satisfy heating + cooling demand and they cannot meet any minimum ventilation requirements.  As such, these systems tend to be used in residential or storage settings where meeting minimum ventilation requirements may not be required or the density of occupancy is so low that infiltration is enough to meet fresh air demand.
     /// </summary>
     [Serializable]
     [DataContract(Name = "_HeatCoolBase")]
