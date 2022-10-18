@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>1.49.0.28</Version>
+    <Version>1.51.5.0</Version>
     <Authors>Ladybug Tools</Authors>
     <Description>This is the .Net version of Honeybee Schema</Description>
     <Copyright>Copyright © 2022 Ladybug Tools LLC</Copyright>

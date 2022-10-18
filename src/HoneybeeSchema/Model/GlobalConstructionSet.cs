@@ -44,6 +44,7 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "GlobalConstructionSet";
             this.ShadeConstruction = "Generic Shade";
+            this.ContextConstruction = "Generic Context";
             this.AirBoundaryConstruction = "Generic Air Boundary";
 
             // check if object is valid, only check for inherited class
@@ -108,11 +109,18 @@ namespace HoneybeeSchema
         public DoorConstructionSetAbridged DoorSet { get; protected set; } 
         //============================================== is ReadOnly 
         /// <summary>
-        /// Global Honeybee Construction for Shades.
+        /// Global Honeybee Construction for building-attached Shades.
         /// </summary>
-        /// <value>Global Honeybee Construction for Shades.</value>
+        /// <value>Global Honeybee Construction for building-attached Shades.</value>
         [DataMember(Name = "shade_construction")]
         public string ShadeConstruction { get; protected set; }  = "Generic Shade";
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Global Honeybee Construction for context Shades.
+        /// </summary>
+        /// <value>Global Honeybee Construction for context Shades.</value>
+        [DataMember(Name = "context_construction")]
+        public string ContextConstruction { get; protected set; }  = "Generic Context";
         //============================================== is ReadOnly 
         /// <summary>
         /// Global Honeybee Construction for AirBoundary Faces.
@@ -151,6 +159,7 @@ namespace HoneybeeSchema
             sb.Append("  ApertureSet: ").Append(this.ApertureSet).Append("\n");
             sb.Append("  DoorSet: ").Append(this.DoorSet).Append("\n");
             sb.Append("  ShadeConstruction: ").Append(this.ShadeConstruction).Append("\n");
+            sb.Append("  ContextConstruction: ").Append(this.ContextConstruction).Append("\n");
             sb.Append("  AirBoundaryConstruction: ").Append(this.AirBoundaryConstruction).Append("\n");
             return sb.ToString();
         }
@@ -230,6 +239,7 @@ namespace HoneybeeSchema
                     Extension.Equals(this.ApertureSet, input.ApertureSet) && 
                     Extension.Equals(this.DoorSet, input.DoorSet) && 
                     Extension.Equals(this.ShadeConstruction, input.ShadeConstruction) && 
+                    Extension.Equals(this.ContextConstruction, input.ContextConstruction) && 
                     Extension.Equals(this.AirBoundaryConstruction, input.AirBoundaryConstruction);
         }
 
@@ -260,6 +270,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.DoorSet.GetHashCode();
                 if (this.ShadeConstruction != null)
                     hashCode = hashCode * 59 + this.ShadeConstruction.GetHashCode();
+                if (this.ContextConstruction != null)
+                    hashCode = hashCode * 59 + this.ContextConstruction.GetHashCode();
                 if (this.AirBoundaryConstruction != null)
                     hashCode = hashCode * 59 + this.AirBoundaryConstruction.GetHashCode();
                 return hashCode;

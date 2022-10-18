@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Documentation for Honeybee simulation-parameter schema",
-    "version": "1.51.4",
+    "version": "1.51.5",
     "title": "Honeybee Simulation Parameter Schema",
     "contact": {
       "name": "Ladybug Tools",
@@ -179,204 +179,6 @@
   "paths": {},
   "components": {
     "schemas": {
-      "DaysOfWeek": {
-        "title": "DaysOfWeek",
-        "description": "An enumeration.",
-        "enum": [
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ],
-        "type": "string"
-      },
-      "DaylightSavingTime": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DatedBaseModel"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "type": {
-                "title": "Type",
-                "default": "DaylightSavingTime",
-                "pattern": "^DaylightSavingTime$",
-                "type": "string",
-                "readOnly": true
-              },
-              "start_date": {
-                "title": "Start Date",
-                "description": "A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).",
-                "default": [
-                  3,
-                  12
-                ],
-                "minItems": 2,
-                "maxItems": 3,
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "end_date": {
-                "title": "End Date",
-                "description": "A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).",
-                "default": [
-                  11,
-                  5
-                ],
-                "minItems": 2,
-                "maxItems": 3,
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
-            "additionalProperties": false
-          }
-        ],
-        "title": "DaylightSavingTime",
-        "description": "Used to describe the daylight savings time for the simulation.",
-        "discriminator": {
-          "propertyName": "type"
-        }
-      },
-      "RunPeriod": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DatedBaseModel"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "type": {
-                "title": "Type",
-                "default": "RunPeriod",
-                "pattern": "^RunPeriod$",
-                "type": "string",
-                "readOnly": true
-              },
-              "start_date": {
-                "title": "Start Date",
-                "description": "A list of two integers for [month, day], representing the date for the start of the run period. Must be before the end date.",
-                "default": [
-                  1,
-                  1
-                ],
-                "minItems": 2,
-                "maxItems": 2,
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "end_date": {
-                "title": "End Date",
-                "description": "A list of two integers for [month, day], representing the date for the end of the run period. Must be after the start date.",
-                "default": [
-                  12,
-                  31
-                ],
-                "minItems": 2,
-                "maxItems": 2,
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "start_day_of_week": {
-                "description": "Text for the day of the week on which the simulation starts.",
-                "default": "Sunday",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DaysOfWeek"
-                  }
-                ]
-              },
-              "holidays": {
-                "title": "Holidays",
-                "description": "A list of lists where each sub-list consists of two integers for [month, day], representing a date which is a holiday within the simulation. If None, no holidays are applied.",
-                "type": "array",
-                "items": {
-                  "type": "array",
-                  "items": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "minItems": 2,
-                  "maxItems": 2
-                }
-              },
-              "daylight_saving_time": {
-                "title": "Daylight Saving Time",
-                "description": "A DaylightSavingTime to dictate the start and end dates of daylight saving time. If None, no daylight saving time is applied to the simulation.",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DaylightSavingTime"
-                  }
-                ]
-              },
-              "leap_year": {
-                "title": "Leap Year",
-                "description": "Boolean noting whether the simulation will be run for a leap year.",
-                "default": false,
-                "type": "boolean"
-              }
-            },
-            "additionalProperties": false
-          }
-        ],
-        "title": "RunPeriod",
-        "description": "Used to describe the time period over which to run the simulation.",
-        "discriminator": {
-          "propertyName": "type"
-        }
-      },
-      "ASHRAEClearSky": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/_SkyCondition"
-          },
-          {
-            "type": "object",
-            "required": [
-              "clearness"
-            ],
-            "properties": {
-              "clearness": {
-                "title": "Clearness",
-                "description": "Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.",
-                "minimum": 0,
-                "maximum": 1.2,
-                "type": "number",
-                "format": "double"
-              },
-              "type": {
-                "title": "Type",
-                "default": "ASHRAEClearSky",
-                "pattern": "^ASHRAEClearSky$",
-                "type": "string",
-                "readOnly": true
-              }
-            },
-            "additionalProperties": false
-          }
-        ],
-        "title": "ASHRAEClearSky",
-        "description": "Used to specify sky conditions on a design day.",
-        "discriminator": {
-          "propertyName": "type"
-        }
-      },
       "DesignDayTypes": {
         "title": "DesignDayTypes",
         "description": "An enumeration.",
@@ -550,6 +352,42 @@
         ],
         "title": "WindCondition",
         "description": "Used to specify wind conditions on a design day.",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "ASHRAEClearSky": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/_SkyCondition"
+          },
+          {
+            "type": "object",
+            "required": [
+              "clearness"
+            ],
+            "properties": {
+              "clearness": {
+                "title": "Clearness",
+                "description": "Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.",
+                "minimum": 0,
+                "maximum": 1.2,
+                "type": "number",
+                "format": "double"
+              },
+              "type": {
+                "title": "Type",
+                "default": "ASHRAEClearSky",
+                "pattern": "^ASHRAEClearSky$",
+                "type": "string",
+                "readOnly": true
+              }
+            },
+            "additionalProperties": false
+          }
+        ],
+        "title": "ASHRAEClearSky",
+        "description": "Used to specify sky conditions on a design day.",
         "discriminator": {
           "propertyName": "type"
         }
@@ -729,118 +567,57 @@
           "propertyName": "type"
         }
       },
-      "SimulationControl": {
+      "DaylightSavingTime": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+            "$ref": "#/components/schemas/DatedBaseModel"
           },
           {
             "type": "object",
             "properties": {
               "type": {
                 "title": "Type",
-                "default": "SimulationControl",
-                "pattern": "^SimulationControl$",
+                "default": "DaylightSavingTime",
+                "pattern": "^DaylightSavingTime$",
                 "type": "string",
                 "readOnly": true
               },
-              "do_zone_sizing": {
-                "title": "Do Zone Sizing",
-                "description": "Boolean for whether the zone sizing calculation should be run.",
-                "default": true,
-                "type": "boolean"
-              },
-              "do_system_sizing": {
-                "title": "Do System Sizing",
-                "description": "Boolean for whether the system sizing calculation should be run.",
-                "default": true,
-                "type": "boolean"
-              },
-              "do_plant_sizing": {
-                "title": "Do Plant Sizing",
-                "description": "Boolean for whether the plant sizing calculation should be run.",
-                "default": true,
-                "type": "boolean"
-              },
-              "run_for_run_periods": {
-                "title": "Run For Run Periods",
-                "description": "Boolean for whether the simulation should be run for the sizing periods.",
-                "default": true,
-                "type": "boolean"
-              },
-              "run_for_sizing_periods": {
-                "title": "Run For Sizing Periods",
-                "description": "Boolean for whether the simulation should be run for the run periods.",
-                "default": false,
-                "type": "boolean"
-              }
-            },
-            "additionalProperties": false
-          }
-        ],
-        "title": "SimulationControl",
-        "description": "Used to specify which types of calculations to run.",
-        "discriminator": {
-          "propertyName": "type"
-        }
-      },
-      "ReportingFrequency": {
-        "title": "ReportingFrequency",
-        "description": "An enumeration.",
-        "enum": [
-          "Timestep",
-          "Hourly",
-          "Daily",
-          "Monthly",
-          "Annual"
-        ],
-        "type": "string"
-      },
-      "SimulationOutput": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "type": {
-                "title": "Type",
-                "default": "SimulationOutput",
-                "pattern": "^SimulationOutput$",
-                "type": "string",
-                "readOnly": true
-              },
-              "reporting_frequency": {
-                "default": "Hourly",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReportingFrequency"
-                  }
-                ]
-              },
-              "outputs": {
-                "title": "Outputs",
-                "description": "A list of EnergyPlus output names as strings, which are requested from the simulation.",
+              "start_date": {
+                "title": "Start Date",
+                "description": "A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).",
+                "default": [
+                  3,
+                  12
+                ],
+                "minItems": 2,
+                "maxItems": 3,
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "integer",
+                  "format": "int32"
                 }
               },
-              "summary_reports": {
-                "title": "Summary Reports",
-                "description": "A list of EnergyPlus summary report names as strings.",
+              "end_date": {
+                "title": "End Date",
+                "description": "A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).",
+                "default": [
+                  11,
+                  5
+                ],
+                "minItems": 2,
+                "maxItems": 3,
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             },
             "additionalProperties": false
           }
         ],
-        "title": "SimulationOutput",
-        "description": "Lists the outputs to report from the simulation and their format.",
+        "title": "DaylightSavingTime",
+        "description": "Used to describe the daylight savings time for the simulation.",
         "discriminator": {
           "propertyName": "type"
         }
@@ -938,6 +715,229 @@
         ],
         "title": "ShadowCalculation",
         "description": "Used to describe settings for EnergyPlus shadow calculation.",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "ReportingFrequency": {
+        "title": "ReportingFrequency",
+        "description": "An enumeration.",
+        "enum": [
+          "Timestep",
+          "Hourly",
+          "Daily",
+          "Monthly",
+          "Annual"
+        ],
+        "type": "string"
+      },
+      "SimulationOutput": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "title": "Type",
+                "default": "SimulationOutput",
+                "pattern": "^SimulationOutput$",
+                "type": "string",
+                "readOnly": true
+              },
+              "reporting_frequency": {
+                "default": "Hourly",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ReportingFrequency"
+                  }
+                ]
+              },
+              "outputs": {
+                "title": "Outputs",
+                "description": "A list of EnergyPlus output names as strings, which are requested from the simulation.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "summary_reports": {
+                "title": "Summary Reports",
+                "description": "A list of EnergyPlus summary report names as strings.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        ],
+        "title": "SimulationOutput",
+        "description": "Lists the outputs to report from the simulation and their format.",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "DaysOfWeek": {
+        "title": "DaysOfWeek",
+        "description": "An enumeration.",
+        "enum": [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "type": "string"
+      },
+      "RunPeriod": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DatedBaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "title": "Type",
+                "default": "RunPeriod",
+                "pattern": "^RunPeriod$",
+                "type": "string",
+                "readOnly": true
+              },
+              "start_date": {
+                "title": "Start Date",
+                "description": "A list of two integers for [month, day], representing the date for the start of the run period. Must be before the end date.",
+                "default": [
+                  1,
+                  1
+                ],
+                "minItems": 2,
+                "maxItems": 2,
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "end_date": {
+                "title": "End Date",
+                "description": "A list of two integers for [month, day], representing the date for the end of the run period. Must be after the start date.",
+                "default": [
+                  12,
+                  31
+                ],
+                "minItems": 2,
+                "maxItems": 2,
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "start_day_of_week": {
+                "description": "Text for the day of the week on which the simulation starts.",
+                "default": "Sunday",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/DaysOfWeek"
+                  }
+                ]
+              },
+              "holidays": {
+                "title": "Holidays",
+                "description": "A list of lists where each sub-list consists of two integers for [month, day], representing a date which is a holiday within the simulation. If None, no holidays are applied.",
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                }
+              },
+              "daylight_saving_time": {
+                "title": "Daylight Saving Time",
+                "description": "A DaylightSavingTime to dictate the start and end dates of daylight saving time. If None, no daylight saving time is applied to the simulation.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/DaylightSavingTime"
+                  }
+                ]
+              },
+              "leap_year": {
+                "title": "Leap Year",
+                "description": "Boolean noting whether the simulation will be run for a leap year.",
+                "default": false,
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false
+          }
+        ],
+        "title": "RunPeriod",
+        "description": "Used to describe the time period over which to run the simulation.",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "SimulationControl": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "title": "Type",
+                "default": "SimulationControl",
+                "pattern": "^SimulationControl$",
+                "type": "string",
+                "readOnly": true
+              },
+              "do_zone_sizing": {
+                "title": "Do Zone Sizing",
+                "description": "Boolean for whether the zone sizing calculation should be run.",
+                "default": true,
+                "type": "boolean"
+              },
+              "do_system_sizing": {
+                "title": "Do System Sizing",
+                "description": "Boolean for whether the system sizing calculation should be run.",
+                "default": true,
+                "type": "boolean"
+              },
+              "do_plant_sizing": {
+                "title": "Do Plant Sizing",
+                "description": "Boolean for whether the plant sizing calculation should be run.",
+                "default": true,
+                "type": "boolean"
+              },
+              "run_for_run_periods": {
+                "title": "Run For Run Periods",
+                "description": "Boolean for whether the simulation should be run for the sizing periods.",
+                "default": true,
+                "type": "boolean"
+              },
+              "run_for_sizing_periods": {
+                "title": "Run For Sizing Periods",
+                "description": "Boolean for whether the simulation should be run for the run periods.",
+                "default": false,
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false
+          }
+        ],
+        "title": "SimulationControl",
+        "description": "Used to specify which types of calculations to run.",
         "discriminator": {
           "propertyName": "type"
         }
@@ -1051,31 +1051,6 @@
           "propertyName": "type"
         }
       },
-      "DatedBaseModel": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "type": {
-                "title": "Type",
-                "default": "DatedBaseModel",
-                "type": "string",
-                "pattern": "^DatedBaseModel$",
-                "readOnly": true
-              }
-            },
-            "additionalProperties": false
-          }
-        ],
-        "title": "DatedBaseModel",
-        "description": "Base class for all objects needing to check for a valid Date.",
-        "discriminator": {
-          "propertyName": "type"
-        }
-      },
       "_SkyCondition": {
         "allOf": [
           {
@@ -1117,6 +1092,31 @@
         ],
         "title": "_SkyCondition",
         "description": "Used to specify sky conditions on a design day.",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "DatedBaseModel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "title": "Type",
+                "default": "DatedBaseModel",
+                "type": "string",
+                "pattern": "^DatedBaseModel$",
+                "readOnly": true
+              }
+            },
+            "additionalProperties": false
+          }
+        ],
+        "title": "DatedBaseModel",
+        "description": "Base class for all objects needing to check for a valid Date.",
         "discriminator": {
           "propertyName": "type"
         }

@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **DoorSet** | [**DoorModifierSetAbridged**](DoorModifierSetAbridged.md) | Global Honeybee DoorModifierSet. | [optional] [readonly] 
 **ShadeSet** | [**ShadeModifierSetAbridged**](ShadeModifierSetAbridged.md) | Global Honeybee ShadeModifierSet. | [optional] [readonly] 
 **AirBoundaryModifier** | **string** | Global Honeybee Modifier for AirBoundary Faces. | [optional] [readonly] [default to "air_boundary"]
+**ContextModifier** | **string** | Global Honeybee Modifier for context Shades. | [optional] [readonly] [default to "generic_context_0.20"]
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)

@@ -44,6 +44,7 @@ namespace HoneybeeSchema
             // Set non-required readonly properties with defaultValue
             this.Type = "GlobalModifierSet";
             this.AirBoundaryModifier = "air_boundary";
+            this.ContextModifier = "generic_context_0.20";
 
             // check if object is valid, only check for inherited class
             if (this.GetType() == typeof(GlobalModifierSet))
@@ -112,6 +113,13 @@ namespace HoneybeeSchema
         /// <value>Global Honeybee Modifier for AirBoundary Faces.</value>
         [DataMember(Name = "air_boundary_modifier")]
         public string AirBoundaryModifier { get; protected set; }  = "air_boundary";
+        //============================================== is ReadOnly 
+        /// <summary>
+        /// Global Honeybee Modifier for context Shades.
+        /// </summary>
+        /// <value>Global Honeybee Modifier for context Shades.</value>
+        [DataMember(Name = "context_modifier")]
+        public string ContextModifier { get; protected set; }  = "generic_context_0.20";
 
 
         /// <summary>
@@ -143,6 +151,7 @@ namespace HoneybeeSchema
             sb.Append("  DoorSet: ").Append(this.DoorSet).Append("\n");
             sb.Append("  ShadeSet: ").Append(this.ShadeSet).Append("\n");
             sb.Append("  AirBoundaryModifier: ").Append(this.AirBoundaryModifier).Append("\n");
+            sb.Append("  ContextModifier: ").Append(this.ContextModifier).Append("\n");
             return sb.ToString();
         }
   
@@ -217,7 +226,8 @@ namespace HoneybeeSchema
                     Extension.Equals(this.ApertureSet, input.ApertureSet) && 
                     Extension.Equals(this.DoorSet, input.DoorSet) && 
                     Extension.Equals(this.ShadeSet, input.ShadeSet) && 
-                    Extension.Equals(this.AirBoundaryModifier, input.AirBoundaryModifier);
+                    Extension.Equals(this.AirBoundaryModifier, input.AirBoundaryModifier) && 
+                    Extension.Equals(this.ContextModifier, input.ContextModifier);
         }
 
         /// <summary>
@@ -247,6 +257,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.ShadeSet.GetHashCode();
                 if (this.AirBoundaryModifier != null)
                     hashCode = hashCode * 59 + this.AirBoundaryModifier.GetHashCode();
+                if (this.ContextModifier != null)
+                    hashCode = hashCode * 59 + this.ContextModifier.GetHashCode();
                 return hashCode;
             }
         }
