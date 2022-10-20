@@ -22,8 +22,12 @@ with urllib.request.urlopen(api) as r:
     data = json.loads(r.read())
     versions = data['versions']
     if versions != []:
-        new_version = versions[-1]
-        print(f'Found latest version on Nuget: {new_version}')
+        latest_version = versions[-1]
+        print(f'Found latest version on Nuget: {latest_version}')
+        if latest_version.startswith(schema_version):
+            new_version = latest_version
+        else:
+            print(f'Schema version {schema_version} is newer than the latest version on Nuget: {latest_version}')
 
 
 # increment version
