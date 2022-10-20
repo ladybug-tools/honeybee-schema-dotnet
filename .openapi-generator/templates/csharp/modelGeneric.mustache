@@ -1,6 +1,7 @@
     /// <summary>
     /// {{#description}}{{.}}{{/description}}{{^description}}{{classname}}{{/description}}
     /// </summary>
+    [Summary(@"{{#description}}{{.}}{{/description}}")]
     [Serializable]
     [DataContract(Name = "{{{name}}}")]
     {{>visibility}} partial class {{classname}} : {{#parent}}{{{parent}}}, {{/parent}}IEquatable<{{classname}}>{{#validatable}}, IValidatableObject{{/validatable}}
@@ -141,6 +142,7 @@
         /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{description}}{{/description}}
         /// </summary>{{#description}}
         /// <value>{{description}}</value>{{/description}}
+        [Summary(@"{{^description}}{{{name}}}{{/description}}{{#description}}{{description}}{{/description}}")]
         [DataMember(Name = "{{baseName}}"{{#required}}, IsRequired = true{{/required}})]{{#isDate}}
         [JsonConverter(typeof(OpenAPIDateConverter))]{{/isDate}}
         public {{{dataType}}} {{name}} { get; protected set; } {{#defaultValue}} = {{{defaultValue}}};{{/defaultValue}}
@@ -157,6 +159,7 @@
         /// {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{description}}{{/description}}
         /// </summary>{{#description}}
         /// <value>{{description}}</value>{{/description}}
+        [Summary(@"{{^description}}{{{name}}}{{/description}}{{#description}}{{description}}{{/description}}")]
         [DataMember(Name = "{{baseName}}"{{#required}}, IsRequired = true{{/required}})]{{#isDate}}
         [JsonConverter(typeof(OpenAPIDateConverter))]{{/isDate}}
         public {{{dataType}}} {{name}} { get; set; } {{#defaultValue}} = {{{defaultValue}}};{{/defaultValue}}
