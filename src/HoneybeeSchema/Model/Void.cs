@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Void modifier
     /// </summary>
+    [Summary(@"Void modifier")]
     [Serializable]
     [DataContract(Name = "Void")]
     public partial class Void : OpenAPIGenBaseModel, IEquatable<Void>, IValidatableObject
@@ -53,6 +54,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Void";
 

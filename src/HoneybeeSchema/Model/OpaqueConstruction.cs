@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Construction for opaque objects (Face, Shade, Door).
     /// </summary>
+    [Summary(@"Construction for opaque objects (Face, Shade, Door).")]
     [Serializable]
     [DataContract(Name = "OpaqueConstruction")]
     public partial class OpaqueConstruction : IDdEnergyBaseModel, IEquatable<OpaqueConstruction>, IValidatableObject
@@ -68,6 +69,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "OpaqueConstruction";
 
@@ -75,6 +77,7 @@ namespace HoneybeeSchema
         /// List of opaque material definitions. The order of the materials is from exterior to interior.
         /// </summary>
         /// <value>List of opaque material definitions. The order of the materials is from exterior to interior.</value>
+        [Summary(@"List of opaque material definitions. The order of the materials is from exterior to interior.")]
         [DataMember(Name = "materials", IsRequired = true)]
         public List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyMaterialVegetation>> Materials { get; set; } 
 

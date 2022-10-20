@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Window Air Conditioning cooling system (with optional heating).  Each room/zone will receive its own Packaged Terminal Air Conditioner (PTAC) with properties set to reflect a typical window air conditioning (AC) unit. No ventilation air is supplied by the unit and the cooling coil within the unit is a single-speed direct expansion (DX) cooling coil. Heating loads can be met with various options, including several types of baseboards, a furnace, or gas unit heaters.
     /// </summary>
+    [Summary(@"Window Air Conditioning cooling system (with optional heating).  Each room/zone will receive its own Packaged Terminal Air Conditioner (PTAC) with properties set to reflect a typical window air conditioning (AC) unit. No ventilation air is supplied by the unit and the cooling coil within the unit is a single-speed direct expansion (DX) cooling coil. Heating loads can be met with various options, including several types of baseboards, a furnace, or gas unit heaters.")]
     [Serializable]
     [DataContract(Name = "WindowAC")]
     public partial class WindowAC : IDdEnergyBaseModel, IEquatable<WindowAC>, IValidatableObject
@@ -81,6 +82,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "WindowAC";
 

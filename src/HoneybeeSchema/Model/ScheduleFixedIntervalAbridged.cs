@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify a start date and a list of values for a period of analysis.
     /// </summary>
+    [Summary(@"Used to specify a start date and a list of values for a period of analysis.")]
     [Serializable]
     [DataContract(Name = "ScheduleFixedIntervalAbridged")]
     public partial class ScheduleFixedIntervalAbridged : IDdEnergyBaseModel, IEquatable<ScheduleFixedIntervalAbridged>, IValidatableObject
@@ -78,6 +79,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ScheduleFixedIntervalAbridged";
 
@@ -85,36 +87,42 @@ namespace HoneybeeSchema
         /// A list of timeseries values occuring at each timestep over the course of the simulation.
         /// </summary>
         /// <value>A list of timeseries values occuring at each timestep over the course of the simulation.</value>
+        [Summary(@"A list of timeseries values occuring at each timestep over the course of the simulation.")]
         [DataMember(Name = "values", IsRequired = true)]
         public List<double> Values { get; set; } 
         /// <summary>
         /// Identifier of a ScheduleTypeLimit that will be used to validate schedule values against upper/lower limits and assign units to the schedule values. If None, no validation will occur.
         /// </summary>
         /// <value>Identifier of a ScheduleTypeLimit that will be used to validate schedule values against upper/lower limits and assign units to the schedule values. If None, no validation will occur.</value>
+        [Summary(@"Identifier of a ScheduleTypeLimit that will be used to validate schedule values against upper/lower limits and assign units to the schedule values. If None, no validation will occur.")]
         [DataMember(Name = "schedule_type_limit")]
         public string ScheduleTypeLimit { get; set; } 
         /// <summary>
         /// An integer for the number of steps per hour that the input values correspond to.  For example, if each value represents 30 minutes, the timestep is 2. For 15 minutes, it is 4.
         /// </summary>
         /// <value>An integer for the number of steps per hour that the input values correspond to.  For example, if each value represents 30 minutes, the timestep is 2. For 15 minutes, it is 4.</value>
+        [Summary(@"An integer for the number of steps per hour that the input values correspond to.  For example, if each value represents 30 minutes, the timestep is 2. For 15 minutes, it is 4.")]
         [DataMember(Name = "timestep")]
         public int Timestep { get; set; }  = 1;
         /// <summary>
         /// A list of two integers for [month, day], representing the start date when the schedule values begin to take effect.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the start date when the schedule values begin to take effect.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</value>
+        [Summary(@"A list of two integers for [month, day], representing the start date when the schedule values begin to take effect.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).")]
         [DataMember(Name = "start_date")]
         public List<int> StartDate { get; set; } 
         /// <summary>
         ///  A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period.
         /// </summary>
         /// <value> A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period.</value>
+        [Summary(@" A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period.")]
         [DataMember(Name = "placeholder_value")]
         public double PlaceholderValue { get; set; }  = 0D;
         /// <summary>
         /// Boolean to note whether values in between intervals should be linearly interpolated or whether successive values should take effect immediately upon the beginning time corresponding to them.
         /// </summary>
         /// <value>Boolean to note whether values in between intervals should be linearly interpolated or whether successive values should take effect immediately upon the beginning time corresponding to them.</value>
+        [Summary(@"Boolean to note whether values in between intervals should be linearly interpolated or whether successive values should take effect immediately upon the beginning time corresponding to them.")]
         [DataMember(Name = "interpolate")]
         public bool Interpolate { get; set; }  = false;
 

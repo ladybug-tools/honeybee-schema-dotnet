@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Construction for window objects (Aperture, Door).
     /// </summary>
+    [Summary(@"Construction for window objects (Aperture, Door).")]
     [Serializable]
     [DataContract(Name = "WindowConstructionAbridged")]
     public partial class WindowConstructionAbridged : IDdEnergyBaseModel, IEquatable<WindowConstructionAbridged>, IValidatableObject
@@ -70,6 +71,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "WindowConstructionAbridged";
 
@@ -77,12 +79,14 @@ namespace HoneybeeSchema
         /// List of strings for glazing or gas material identifiers. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.
         /// </summary>
         /// <value>List of strings for glazing or gas material identifiers. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.</value>
+        [Summary(@"List of strings for glazing or gas material identifiers. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.")]
         [DataMember(Name = "materials", IsRequired = true)]
         public List<string> Materials { get; set; } 
         /// <summary>
         /// An optional identifier for a frame material that surrounds the window construction.
         /// </summary>
         /// <value>An optional identifier for a frame material that surrounds the window construction.</value>
+        [Summary(@"An optional identifier for a frame material that surrounds the window construction.")]
         [DataMember(Name = "frame")]
         public string Frame { get; set; } 
 

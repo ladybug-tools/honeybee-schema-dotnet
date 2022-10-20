@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Set containing radiance modifiers needed for a model&#39;s roofs.
     /// </summary>
+    [Summary(@"Set containing radiance modifiers needed for a model&#39;s roofs.")]
     [Serializable]
     [DataContract(Name = "RoofCeilingModifierSet")]
     public partial class RoofCeilingModifierSet : OpenAPIGenBaseModel, IEquatable<RoofCeilingModifierSet>, IValidatableObject
@@ -56,6 +57,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "RoofCeilingModifierSet";
 
@@ -63,12 +65,14 @@ namespace HoneybeeSchema
         /// A radiance modifier object for faces with an Outdoors boundary condition.
         /// </summary>
         /// <value>A radiance modifier object for faces with an Outdoors boundary condition.</value>
+        [Summary(@"A radiance modifier object for faces with an Outdoors boundary condition.")]
         [DataMember(Name = "exterior_modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> ExteriorModifier { get; set; } 
         /// <summary>
         /// A radiance modifier object for faces with a boundary condition other than Outdoors.
         /// </summary>
         /// <value>A radiance modifier object for faces with a boundary condition other than Outdoors.</value>
+        [Summary(@"A radiance modifier object for faces with a boundary condition other than Outdoors.")]
         [DataMember(Name = "interior_modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> InteriorModifier { get; set; } 
 

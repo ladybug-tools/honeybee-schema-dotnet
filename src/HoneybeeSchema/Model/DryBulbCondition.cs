@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify dry bulb conditions on a design day.
     /// </summary>
+    [Summary(@"Used to specify dry bulb conditions on a design day.")]
     [Serializable]
     [DataContract(Name = "DryBulbCondition")]
     public partial class DryBulbCondition : OpenAPIGenBaseModel, IEquatable<DryBulbCondition>, IValidatableObject
@@ -66,6 +67,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "DryBulbCondition";
 
@@ -73,12 +75,14 @@ namespace HoneybeeSchema
         /// The maximum dry bulb temperature on the design day [C].
         /// </summary>
         /// <value>The maximum dry bulb temperature on the design day [C].</value>
+        [Summary(@"The maximum dry bulb temperature on the design day [C].")]
         [DataMember(Name = "dry_bulb_max", IsRequired = true)]
         public double DryBulbMax { get; set; } 
         /// <summary>
         /// The difference between min and max temperatures on the design day [C].
         /// </summary>
         /// <value>The difference between min and max temperatures on the design day [C].</value>
+        [Summary(@"The difference between min and max temperatures on the design day [C].")]
         [DataMember(Name = "dry_bulb_range", IsRequired = true)]
         public double DryBulbRange { get; set; } 
 

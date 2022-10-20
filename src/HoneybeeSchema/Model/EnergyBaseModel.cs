@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
+    [Summary(@"Base class for all objects requiring a valid EnergyPlus identifier.")]
     [Serializable]
     [DataContract(Name = "EnergyBaseModel")]
     public partial class EnergyBaseModel : OpenAPIGenBaseModel, IEquatable<EnergyBaseModel>, IValidatableObject
@@ -67,6 +68,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "EnergyBaseModel";
 
@@ -74,12 +76,14 @@ namespace HoneybeeSchema
         /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
         /// </summary>
         /// <value>Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
+        [Summary(@"Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).")]
         [DataMember(Name = "identifier", IsRequired = true)]
         public string Identifier { get; set; } 
         /// <summary>
         /// Display name of the object with no character restrictions.
         /// </summary>
         /// <value>Display name of the object with no character restrictions.</value>
+        [Summary(@"Display name of the object with no character restrictions.")]
         [DataMember(Name = "display_name")]
         public string DisplayName { get; set; } 
 

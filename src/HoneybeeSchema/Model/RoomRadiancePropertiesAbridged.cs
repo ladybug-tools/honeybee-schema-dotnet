@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Abridged Radiance Properties for Honeybee Room.
     /// </summary>
+    [Summary(@"Abridged Radiance Properties for Honeybee Room.")]
     [Serializable]
     [DataContract(Name = "RoomRadiancePropertiesAbridged")]
     public partial class RoomRadiancePropertiesAbridged : OpenAPIGenBaseModel, IEquatable<RoomRadiancePropertiesAbridged>, IValidatableObject
@@ -54,6 +55,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "RoomRadiancePropertiesAbridged";
 
@@ -61,6 +63,7 @@ namespace HoneybeeSchema
         /// An identifier for a unique Room-Assigned ModifierSet (default: None).
         /// </summary>
         /// <value>An identifier for a unique Room-Assigned ModifierSet (default: None).</value>
+        [Summary(@"An identifier for a unique Room-Assigned ModifierSet (default: None).")]
         [DataMember(Name = "modifier_set")]
         public string ModifierSet { get; set; } 
 

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Specifies the data types and limits for values contained in schedules.
     /// </summary>
+    [Summary(@"Specifies the data types and limits for values contained in schedules.")]
     [Serializable]
     [DataContract(Name = "ScheduleTypeLimit")]
     public partial class ScheduleTypeLimit : EnergyBaseModel, IEquatable<ScheduleTypeLimit>, IValidatableObject
@@ -82,6 +83,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ScheduleTypeLimit";
 
@@ -89,12 +91,14 @@ namespace HoneybeeSchema
         /// Lower limit for the schedule type or NoLimit.
         /// </summary>
         /// <value>Lower limit for the schedule type or NoLimit.</value>
+        [Summary(@"Lower limit for the schedule type or NoLimit.")]
         [DataMember(Name = "lower_limit")]
         public AnyOf<NoLimit,double> LowerLimit { get; set; } 
         /// <summary>
         /// Upper limit for the schedule type or NoLimit.
         /// </summary>
         /// <value>Upper limit for the schedule type or NoLimit.</value>
+        [Summary(@"Upper limit for the schedule type or NoLimit.")]
         [DataMember(Name = "upper_limit")]
         public AnyOf<NoLimit,double> UpperLimit { get; set; } 
 

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Create single layer of custom gas.
     /// </summary>
+    [Summary(@"Create single layer of custom gas.")]
     [Serializable]
     [DataContract(Name = "EnergyWindowMaterialGasCustom")]
     public partial class EnergyWindowMaterialGasCustom : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialGasCustom>, IValidatableObject
@@ -89,6 +90,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "EnergyWindowMaterialGasCustom";
 
@@ -96,72 +98,84 @@ namespace HoneybeeSchema
         /// The A coefficient for gas conductivity in W/(m-K).
         /// </summary>
         /// <value>The A coefficient for gas conductivity in W/(m-K).</value>
+        [Summary(@"The A coefficient for gas conductivity in W/(m-K).")]
         [DataMember(Name = "conductivity_coeff_a", IsRequired = true)]
         public double ConductivityCoeffA { get; set; } 
         /// <summary>
         /// The A coefficient for gas viscosity in kg/(m-s).
         /// </summary>
         /// <value>The A coefficient for gas viscosity in kg/(m-s).</value>
+        [Summary(@"The A coefficient for gas viscosity in kg/(m-s).")]
         [DataMember(Name = "viscosity_coeff_a", IsRequired = true)]
         public double ViscosityCoeffA { get; set; } 
         /// <summary>
         /// The A coefficient for gas specific heat in J/(kg-K).
         /// </summary>
         /// <value>The A coefficient for gas specific heat in J/(kg-K).</value>
+        [Summary(@"The A coefficient for gas specific heat in J/(kg-K).")]
         [DataMember(Name = "specific_heat_coeff_a", IsRequired = true)]
         public double SpecificHeatCoeffA { get; set; } 
         /// <summary>
         /// The specific heat ratio for gas.
         /// </summary>
         /// <value>The specific heat ratio for gas.</value>
+        [Summary(@"The specific heat ratio for gas.")]
         [DataMember(Name = "specific_heat_ratio", IsRequired = true)]
         public double SpecificHeatRatio { get; set; } 
         /// <summary>
         /// The molecular weight for gas in g/mol.
         /// </summary>
         /// <value>The molecular weight for gas in g/mol.</value>
+        [Summary(@"The molecular weight for gas in g/mol.")]
         [DataMember(Name = "molecular_weight", IsRequired = true)]
         public double MolecularWeight { get; set; } 
         /// <summary>
         /// Thickness of the gas layer in meters. Default: 0.0125.
         /// </summary>
         /// <value>Thickness of the gas layer in meters. Default: 0.0125.</value>
+        [Summary(@"Thickness of the gas layer in meters. Default: 0.0125.")]
         [DataMember(Name = "thickness")]
         public double Thickness { get; set; }  = 0.0125D;
         /// <summary>
         /// The B coefficient for gas conductivity in W/(m-K2).
         /// </summary>
         /// <value>The B coefficient for gas conductivity in W/(m-K2).</value>
+        [Summary(@"The B coefficient for gas conductivity in W/(m-K2).")]
         [DataMember(Name = "conductivity_coeff_b")]
         public double ConductivityCoeffB { get; set; }  = 0D;
         /// <summary>
         /// The C coefficient for gas conductivity in W/(m-K3).
         /// </summary>
         /// <value>The C coefficient for gas conductivity in W/(m-K3).</value>
+        [Summary(@"The C coefficient for gas conductivity in W/(m-K3).")]
         [DataMember(Name = "conductivity_coeff_c")]
         public double ConductivityCoeffC { get; set; }  = 0D;
         /// <summary>
         /// The B coefficient for gas viscosity in kg/(m-s-K).
         /// </summary>
         /// <value>The B coefficient for gas viscosity in kg/(m-s-K).</value>
+        [Summary(@"The B coefficient for gas viscosity in kg/(m-s-K).")]
         [DataMember(Name = "viscosity_coeff_b")]
         public double ViscosityCoeffB { get; set; }  = 0D;
         /// <summary>
         /// The C coefficient for gas viscosity in kg/(m-s-K2).
         /// </summary>
         /// <value>The C coefficient for gas viscosity in kg/(m-s-K2).</value>
+        [Summary(@"The C coefficient for gas viscosity in kg/(m-s-K2).")]
         [DataMember(Name = "viscosity_coeff_c")]
         public double ViscosityCoeffC { get; set; }  = 0D;
         /// <summary>
         /// The B coefficient for gas specific heat in J/(kg-K2).
         /// </summary>
         /// <value>The B coefficient for gas specific heat in J/(kg-K2).</value>
+        [Summary(@"The B coefficient for gas specific heat in J/(kg-K2).")]
         [DataMember(Name = "specific_heat_coeff_b")]
         public double SpecificHeatCoeffB { get; set; }  = 0D;
         /// <summary>
         /// The C coefficient for gas specific heat in J/(kg-K3).
         /// </summary>
         /// <value>The C coefficient for gas specific heat in J/(kg-K3).</value>
+        [Summary(@"The C coefficient for gas specific heat in J/(kg-K3).")]
         [DataMember(Name = "specific_heat_coeff_c")]
         public double SpecificHeatCoeffC { get; set; }  = 0D;
 

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance Properties for Honeybee Face Abridged.
     /// </summary>
+    [Summary(@"Radiance Properties for Honeybee Face Abridged.")]
     [Serializable]
     [DataContract(Name = "FaceRadiancePropertiesAbridged")]
     public partial class FaceRadiancePropertiesAbridged : PropertiesBaseAbridged, IEquatable<FaceRadiancePropertiesAbridged>, IValidatableObject
@@ -54,6 +55,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "FaceRadiancePropertiesAbridged";
 

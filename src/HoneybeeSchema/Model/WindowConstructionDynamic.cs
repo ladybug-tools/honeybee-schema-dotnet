@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Construction for window objects with an included shade layer.
     /// </summary>
+    [Summary(@"Construction for window objects with an included shade layer.")]
     [Serializable]
     [DataContract(Name = "WindowConstructionDynamic")]
     public partial class WindowConstructionDynamic : IDdEnergyBaseModel, IEquatable<WindowConstructionDynamic>, IValidatableObject
@@ -71,6 +72,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "WindowConstructionDynamic";
 
@@ -78,12 +80,14 @@ namespace HoneybeeSchema
         /// A list of WindowConstruction objects that define the various states that the dynamic window can assume.
         /// </summary>
         /// <value>A list of WindowConstruction objects that define the various states that the dynamic window can assume.</value>
+        [Summary(@"A list of WindowConstruction objects that define the various states that the dynamic window can assume.")]
         [DataMember(Name = "constructions", IsRequired = true)]
         public List<WindowConstruction> Constructions { get; set; } 
         /// <summary>
         /// A control schedule that dictates which constructions are active at given times throughout the simulation. The values of the schedule should be intergers and range from 0 to one less then the number of constructions. Zero indicates that the first construction is active, one indicates that the second on is active, etc. The schedule type limits of this schedule should be \&quot;Control Level.\&quot; If building custom schedule type limits that describe a particular range of states, the type limits should be \&quot;Discrete\&quot; and the unit type should be \&quot;Mode,\&quot; \&quot;Control,\&quot; or some other fractional unit.
         /// </summary>
         /// <value>A control schedule that dictates which constructions are active at given times throughout the simulation. The values of the schedule should be intergers and range from 0 to one less then the number of constructions. Zero indicates that the first construction is active, one indicates that the second on is active, etc. The schedule type limits of this schedule should be \&quot;Control Level.\&quot; If building custom schedule type limits that describe a particular range of states, the type limits should be \&quot;Discrete\&quot; and the unit type should be \&quot;Mode,\&quot; \&quot;Control,\&quot; or some other fractional unit.</value>
+        [Summary(@"A control schedule that dictates which constructions are active at given times throughout the simulation. The values of the schedule should be intergers and range from 0 to one less then the number of constructions. Zero indicates that the first construction is active, one indicates that the second on is active, etc. The schedule type limits of this schedule should be \&quot;Control Level.\&quot; If building custom schedule type limits that describe a particular range of states, the type limits should be \&quot;Discrete\&quot; and the unit type should be \&quot;Mode,\&quot; \&quot;Control,\&quot; or some other fractional unit.")]
         [DataMember(Name = "schedule", IsRequired = true)]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; } 
 

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Abridged set containing radiance modifiers needed for a model&#39;s Shade.
     /// </summary>
+    [Summary(@"Abridged set containing radiance modifiers needed for a model&#39;s Shade.")]
     [Serializable]
     [DataContract(Name = "ShadeModifierSetAbridged")]
     public partial class ShadeModifierSetAbridged : BaseModifierSetAbridged, IEquatable<ShadeModifierSetAbridged>, IValidatableObject
@@ -54,6 +55,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ShadeModifierSetAbridged";
 

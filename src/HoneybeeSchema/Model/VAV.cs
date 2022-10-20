@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Variable Air Volume (VAV) HVAC system (aka. System 7 or 8).  All rooms/zones are connected to a central air loop that is kept at a constant central temperature of 12.8C (55F). The central temperature is maintained by a cooling coil, which runs whenever the combination of return air and fresh outdoor air is greater than 12.8C, as well as a heating coil, which runs whenever the combination of return air and fresh outdoor air is less than 12.8C.  Each air terminal for the connected rooms/zones contains its own reheat coil, which runs whenever the room is not in need of the cooling supplied by the 12.8C central air.  The central cooling coil is always a chilled water coil, which is connected to a chilled water loop operating at 6.7C (44F). All heating coils are hot water coils except when Gas Coil equipment_type is used (in which case coils are gas) or when Parallel Fan-Powered (PFP) boxes equipment_type is used (in which case coils are electric resistance). Hot water temperature is 82C (180F) for boiler/district heating and 49C (120F) when ASHP is used.  VAV systems are the traditional baseline system for commercial buildings taller than 5 stories or larger than 14,000 m2 (150,000 ft2) of floor area.
     /// </summary>
+    [Summary(@"Variable Air Volume (VAV) HVAC system (aka. System 7 or 8).  All rooms/zones are connected to a central air loop that is kept at a constant central temperature of 12.8C (55F). The central temperature is maintained by a cooling coil, which runs whenever the combination of return air and fresh outdoor air is greater than 12.8C, as well as a heating coil, which runs whenever the combination of return air and fresh outdoor air is less than 12.8C.  Each air terminal for the connected rooms/zones contains its own reheat coil, which runs whenever the room is not in need of the cooling supplied by the 12.8C central air.  The central cooling coil is always a chilled water coil, which is connected to a chilled water loop operating at 6.7C (44F). All heating coils are hot water coils except when Gas Coil equipment_type is used (in which case coils are gas) or when Parallel Fan-Powered (PFP) boxes equipment_type is used (in which case coils are electric resistance). Hot water temperature is 82C (180F) for boiler/district heating and 49C (120F) when ASHP is used.  VAV systems are the traditional baseline system for commercial buildings taller than 5 stories or larger than 14,000 m2 (150,000 ft2) of floor area.")]
     [Serializable]
     [DataContract(Name = "VAV")]
     public partial class VAV : IDdEnergyBaseModel, IEquatable<VAV>, IValidatableObject
@@ -95,6 +96,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "VAV";
 
@@ -102,18 +104,21 @@ namespace HoneybeeSchema
         /// A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.</value>
+        [Summary(@"A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.")]
         [DataMember(Name = "sensible_heat_recovery")]
         public double SensibleHeatRecovery { get; set; }  = 0D;
         /// <summary>
         /// A number between 0 and 1 for the effectiveness of latent heat recovery within the system.
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of latent heat recovery within the system.</value>
+        [Summary(@"A number between 0 and 1 for the effectiveness of latent heat recovery within the system.")]
         [DataMember(Name = "latent_heat_recovery")]
         public double LatentHeatRecovery { get; set; }  = 0D;
         /// <summary>
         /// Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.
         /// </summary>
         /// <value>Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.</value>
+        [Summary(@"Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.")]
         [DataMember(Name = "demand_controlled_ventilation")]
         public bool DemandControlledVentilation { get; set; }  = false;
 

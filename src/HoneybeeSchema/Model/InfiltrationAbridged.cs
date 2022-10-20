@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring an EnergyPlus identifier and user_data.
     /// </summary>
+    [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
     [Serializable]
     [DataContract(Name = "InfiltrationAbridged")]
     public partial class InfiltrationAbridged : IDdEnergyBaseModel, IEquatable<InfiltrationAbridged>, IValidatableObject
@@ -76,6 +77,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "InfiltrationAbridged";
 
@@ -83,27 +85,32 @@ namespace HoneybeeSchema
         /// Number for the infiltration per exterior surface area in m3/s-m2.
         /// </summary>
         /// <value>Number for the infiltration per exterior surface area in m3/s-m2.</value>
+        [Summary(@"Number for the infiltration per exterior surface area in m3/s-m2.")]
         [DataMember(Name = "flow_per_exterior_area", IsRequired = true)]
         public double FlowPerExteriorArea { get; set; } 
         /// <summary>
         /// Identifier of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.
         /// </summary>
         /// <value>Identifier of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.</value>
+        [Summary(@"Identifier of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.")]
         [DataMember(Name = "schedule", IsRequired = true)]
         public string Schedule { get; set; } 
         /// <summary>
         /// Gets or Sets ConstantCoefficient
         /// </summary>
+        [Summary(@"ConstantCoefficient")]
         [DataMember(Name = "constant_coefficient")]
         public double ConstantCoefficient { get; set; }  = 1D;
         /// <summary>
         /// Gets or Sets TemperatureCoefficient
         /// </summary>
+        [Summary(@"TemperatureCoefficient")]
         [DataMember(Name = "temperature_coefficient")]
         public double TemperatureCoefficient { get; set; }  = 0D;
         /// <summary>
         /// Gets or Sets VelocityCoefficient
         /// </summary>
+        [Summary(@"VelocityCoefficient")]
         [DataMember(Name = "velocity_coefficient")]
         public double VelocityCoefficient { get; set; }  = 0D;
 

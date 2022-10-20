@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Construction for Air Boundary objects.
     /// </summary>
+    [Summary(@"Construction for Air Boundary objects.")]
     [Serializable]
     [DataContract(Name = "AirBoundaryConstruction")]
     public partial class AirBoundaryConstruction : IDdEnergyBaseModel, IEquatable<AirBoundaryConstruction>, IValidatableObject
@@ -69,6 +70,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "AirBoundaryConstruction";
 
@@ -76,12 +78,14 @@ namespace HoneybeeSchema
         /// A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system.
         /// </summary>
         /// <value>A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system.</value>
+        [Summary(@"A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system.")]
         [DataMember(Name = "air_mixing_per_area")]
         public double AirMixingPerArea { get; set; }  = 0.1D;
         /// <summary>
         /// A fractional schedule as a ScheduleRuleset or ScheduleFixedInterval for the air mixing schedule across the construction. If unspecified, an Always On schedule will be assumed.
         /// </summary>
         /// <value>A fractional schedule as a ScheduleRuleset or ScheduleFixedInterval for the air mixing schedule across the construction. If unspecified, an Always On schedule will be assumed.</value>
+        [Summary(@"A fractional schedule as a ScheduleRuleset or ScheduleFixedInterval for the air mixing schedule across the construction. If unspecified, an Always On schedule will be assumed.")]
         [DataMember(Name = "air_mixing_schedule")]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> AirMixingSchedule { get; set; } 
 

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance Properties for Honeybee Model.
     /// </summary>
+    [Summary(@"Radiance Properties for Honeybee Model.")]
     [Serializable]
     [DataContract(Name = "ModelRadianceProperties")]
     public partial class ModelRadianceProperties : OpenAPIGenBaseModel, IEquatable<ModelRadianceProperties>, IValidatableObject
@@ -60,6 +61,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ModelRadianceProperties";
         //============================================== is ReadOnly 
@@ -67,6 +69,7 @@ namespace HoneybeeSchema
         /// Global Radiance modifier set.
         /// </summary>
         /// <value>Global Radiance modifier set.</value>
+        [Summary(@"Global Radiance modifier set.")]
         [DataMember(Name = "global_modifier_set")]
         public GlobalModifierSet GlobalModifierSet { get; protected set; } = GlobalModifierSet.Default;
 
@@ -74,24 +77,28 @@ namespace HoneybeeSchema
         /// A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set.
         /// </summary>
         /// <value>A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set.</value>
+        [Summary(@"A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set.")]
         [DataMember(Name = "modifiers")]
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Modifiers { get; set; } 
         /// <summary>
         /// A list of all unique Room-Assigned ModifierSets in the Model.
         /// </summary>
         /// <value>A list of all unique Room-Assigned ModifierSets in the Model.</value>
+        [Summary(@"A list of all unique Room-Assigned ModifierSets in the Model.")]
         [DataMember(Name = "modifier_sets")]
         public List<AnyOf<ModifierSet,ModifierSetAbridged>> ModifierSets { get; set; } 
         /// <summary>
         /// An array of SensorGrids that are associated with the model.
         /// </summary>
         /// <value>An array of SensorGrids that are associated with the model.</value>
+        [Summary(@"An array of SensorGrids that are associated with the model.")]
         [DataMember(Name = "sensor_grids")]
         public List<SensorGrid> SensorGrids { get; set; } 
         /// <summary>
         /// An array of Views that are associated with the model.
         /// </summary>
         /// <value>An array of Views that are associated with the model.</value>
+        [Summary(@"An array of Views that are associated with the model.")]
         [DataMember(Name = "views")]
         public List<View> Views { get; set; } 
 

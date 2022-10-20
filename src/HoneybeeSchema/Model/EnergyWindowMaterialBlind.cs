@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Window blind material consisting of flat, equally-spaced slats.
     /// </summary>
+    [Summary(@"Window blind material consisting of flat, equally-spaced slats.")]
     [Serializable]
     [DataContract(Name = "EnergyWindowMaterialBlind")]
     public partial class EnergyWindowMaterialBlind : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialBlind>, IValidatableObject
@@ -122,6 +123,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "EnergyWindowMaterialBlind";
 
@@ -129,150 +131,175 @@ namespace HoneybeeSchema
         /// The width of slat measured from edge to edge in meters.
         /// </summary>
         /// <value>The width of slat measured from edge to edge in meters.</value>
+        [Summary(@"The width of slat measured from edge to edge in meters.")]
         [DataMember(Name = "slat_width")]
         public double SlatWidth { get; set; }  = 0.025D;
         /// <summary>
         /// The distance between the front of a slat and the back of the adjacent slat in meters.
         /// </summary>
         /// <value>The distance between the front of a slat and the back of the adjacent slat in meters.</value>
+        [Summary(@"The distance between the front of a slat and the back of the adjacent slat in meters.")]
         [DataMember(Name = "slat_separation")]
         public double SlatSeparation { get; set; }  = 0.01875D;
         /// <summary>
         /// The distance between the faces of a slat in meters. The default value is 0.001.
         /// </summary>
         /// <value>The distance between the faces of a slat in meters. The default value is 0.001.</value>
+        [Summary(@"The distance between the faces of a slat in meters. The default value is 0.001.")]
         [DataMember(Name = "slat_thickness")]
         public double SlatThickness { get; set; }  = 0.001D;
         /// <summary>
         /// The angle (degrees) between the glazing outward normal and the slat outward normal where the outward normal points away from the front face of the slat (degrees). The default value is 45.
         /// </summary>
         /// <value>The angle (degrees) between the glazing outward normal and the slat outward normal where the outward normal points away from the front face of the slat (degrees). The default value is 45.</value>
+        [Summary(@"The angle (degrees) between the glazing outward normal and the slat outward normal where the outward normal points away from the front face of the slat (degrees). The default value is 45.")]
         [DataMember(Name = "slat_angle")]
         public double SlatAngle { get; set; }  = 45D;
         /// <summary>
         /// The thermal conductivity of the slat in W/(m-K). Default: 221.
         /// </summary>
         /// <value>The thermal conductivity of the slat in W/(m-K). Default: 221.</value>
+        [Summary(@"The thermal conductivity of the slat in W/(m-K). Default: 221.")]
         [DataMember(Name = "slat_conductivity")]
         public double SlatConductivity { get; set; }  = 221D;
         /// <summary>
         /// The beam solar transmittance of the slat, assumed to be independent of angle of incidence on the slat. Any transmitted beam radiation is assumed to be 100% diffuse (i.e., slats are translucent). The default value is 0.
         /// </summary>
         /// <value>The beam solar transmittance of the slat, assumed to be independent of angle of incidence on the slat. Any transmitted beam radiation is assumed to be 100% diffuse (i.e., slats are translucent). The default value is 0.</value>
+        [Summary(@"The beam solar transmittance of the slat, assumed to be independent of angle of incidence on the slat. Any transmitted beam radiation is assumed to be 100% diffuse (i.e., slats are translucent). The default value is 0.")]
         [DataMember(Name = "beam_solar_transmittance")]
         public double BeamSolarTransmittance { get; set; }  = 0D;
         /// <summary>
         /// The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.
         /// </summary>
         /// <value>The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.</value>
+        [Summary(@"The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.")]
         [DataMember(Name = "beam_solar_reflectance")]
         public double BeamSolarReflectance { get; set; }  = 0.5D;
         /// <summary>
         /// The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.
         /// </summary>
         /// <value>The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.</value>
+        [Summary(@"The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.")]
         [DataMember(Name = "beam_solar_reflectance_back")]
         public double BeamSolarReflectanceBack { get; set; }  = 0.5D;
         /// <summary>
         /// The slat transmittance for hemispherically diffuse solar radiation. Default: 0.
         /// </summary>
         /// <value>The slat transmittance for hemispherically diffuse solar radiation. Default: 0.</value>
+        [Summary(@"The slat transmittance for hemispherically diffuse solar radiation. Default: 0.")]
         [DataMember(Name = "diffuse_solar_transmittance")]
         public double DiffuseSolarTransmittance { get; set; }  = 0D;
         /// <summary>
         /// The front-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5.
         /// </summary>
         /// <value>The front-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5.</value>
+        [Summary(@"The front-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5.")]
         [DataMember(Name = "diffuse_solar_reflectance")]
         public double DiffuseSolarReflectance { get; set; }  = 0.5D;
         /// <summary>
         /// The back-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5.
         /// </summary>
         /// <value>The back-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5.</value>
+        [Summary(@"The back-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5.")]
         [DataMember(Name = "diffuse_solar_reflectance_back")]
         public double DiffuseSolarReflectanceBack { get; set; }  = 0.5D;
         /// <summary>
         /// The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default: 0.
         /// </summary>
         /// <value>The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default: 0.</value>
+        [Summary(@"The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default: 0.")]
         [DataMember(Name = "beam_visible_transmittance")]
         public double BeamVisibleTransmittance { get; set; }  = 0D;
         /// <summary>
         /// The beam visible reflectance on the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.
         /// </summary>
         /// <value>The beam visible reflectance on the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.</value>
+        [Summary(@"The beam visible reflectance on the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.")]
         [DataMember(Name = "beam_visible_reflectance")]
         public double BeamVisibleReflectance { get; set; }  = 0.5D;
         /// <summary>
         /// The beam visible reflectance on the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.
         /// </summary>
         /// <value>The beam visible reflectance on the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.</value>
+        [Summary(@"The beam visible reflectance on the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5.")]
         [DataMember(Name = "beam_visible_reflectance_back")]
         public double BeamVisibleReflectanceBack { get; set; }  = 0.5D;
         /// <summary>
         /// The slat transmittance for hemispherically diffuse visible radiation. This value should equal “Slat Beam Visible Transmittance.”
         /// </summary>
         /// <value>The slat transmittance for hemispherically diffuse visible radiation. This value should equal “Slat Beam Visible Transmittance.”</value>
+        [Summary(@"The slat transmittance for hemispherically diffuse visible radiation. This value should equal “Slat Beam Visible Transmittance.”")]
         [DataMember(Name = "diffuse_visible_transmittance")]
         public double DiffuseVisibleTransmittance { get; set; }  = 0D;
         /// <summary>
         /// The front-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Front Side Slat Beam Visible Reflectance.” Default: 0.5.
         /// </summary>
         /// <value>The front-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Front Side Slat Beam Visible Reflectance.” Default: 0.5.</value>
+        [Summary(@"The front-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Front Side Slat Beam Visible Reflectance.” Default: 0.5.")]
         [DataMember(Name = "diffuse_visible_reflectance")]
         public double DiffuseVisibleReflectance { get; set; }  = 0.5D;
         /// <summary>
         /// The back-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Back Side Slat Beam Visible Reflectance. Default: 0.5.”
         /// </summary>
         /// <value>The back-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Back Side Slat Beam Visible Reflectance. Default: 0.5.”</value>
+        [Summary(@"The back-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Back Side Slat Beam Visible Reflectance. Default: 0.5.”")]
         [DataMember(Name = "diffuse_visible_reflectance_back")]
         public double DiffuseVisibleReflectanceBack { get; set; }  = 0.5D;
         /// <summary>
         /// The slat infrared hemispherical transmittance. It is zero for solid metallic, wooden or glass slats, but may be non-zero in some cases such as for thin plastic slats. The default value is 0.
         /// </summary>
         /// <value>The slat infrared hemispherical transmittance. It is zero for solid metallic, wooden or glass slats, but may be non-zero in some cases such as for thin plastic slats. The default value is 0.</value>
+        [Summary(@"The slat infrared hemispherical transmittance. It is zero for solid metallic, wooden or glass slats, but may be non-zero in some cases such as for thin plastic slats. The default value is 0.")]
         [DataMember(Name = "infrared_transmittance")]
         public double InfraredTransmittance { get; set; }  = 0D;
         /// <summary>
         /// Front side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9.
         /// </summary>
         /// <value>Front side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9.</value>
+        [Summary(@"Front side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9.")]
         [DataMember(Name = "emissivity")]
         public double Emissivity { get; set; }  = 0.9D;
         /// <summary>
         /// Back side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9.
         /// </summary>
         /// <value>Back side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9.</value>
+        [Summary(@"Back side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9.")]
         [DataMember(Name = "emissivity_back")]
         public double EmissivityBack { get; set; }  = 0.9D;
         /// <summary>
         /// The distance from the mid-plane of the blind to the adjacent glass in meters. The default value is 0.05.
         /// </summary>
         /// <value>The distance from the mid-plane of the blind to the adjacent glass in meters. The default value is 0.05.</value>
+        [Summary(@"The distance from the mid-plane of the blind to the adjacent glass in meters. The default value is 0.05.")]
         [DataMember(Name = "distance_to_glass")]
         public double DistanceToGlass { get; set; }  = 0.05D;
         /// <summary>
         /// The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade.
         /// </summary>
         /// <value>The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade.</value>
+        [Summary(@"The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade.")]
         [DataMember(Name = "top_opening_multiplier")]
         public double TopOpeningMultiplier { get; set; }  = 0.5D;
         /// <summary>
         /// The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade.
         /// </summary>
         /// <value>The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade.</value>
+        [Summary(@"The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade.")]
         [DataMember(Name = "bottom_opening_multiplier")]
         public double BottomOpeningMultiplier { get; set; }  = 0.5D;
         /// <summary>
         /// The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade.
         /// </summary>
         /// <value>The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade.</value>
+        [Summary(@"The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade.")]
         [DataMember(Name = "left_opening_multiplier")]
         public double LeftOpeningMultiplier { get; set; }  = 0.5D;
         /// <summary>
         /// The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade.
         /// </summary>
         /// <value>The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade.</value>
+        [Summary(@"The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade.")]
         [DataMember(Name = "right_opening_multiplier")]
         public double RightOpeningMultiplier { get; set; }  = 0.5D;
 

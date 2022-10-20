@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// RadianceShadeStateAbridged represents a single state for a dynamic Shade.
     /// </summary>
+    [Summary(@"RadianceShadeStateAbridged represents a single state for a dynamic Shade.")]
     [Serializable]
     [DataContract(Name = "RadianceShadeStateAbridged")]
     public partial class RadianceShadeStateAbridged : OpenAPIGenBaseModel, IEquatable<RadianceShadeStateAbridged>, IValidatableObject
@@ -58,6 +59,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "RadianceShadeStateAbridged";
 
@@ -65,18 +67,21 @@ namespace HoneybeeSchema
         /// A Radiance Modifier identifier (default: None).
         /// </summary>
         /// <value>A Radiance Modifier identifier (default: None).</value>
+        [Summary(@"A Radiance Modifier identifier (default: None).")]
         [DataMember(Name = "modifier")]
         public string Modifier { get; set; } 
         /// <summary>
         /// A Radiance Modifier identifier (default: None).
         /// </summary>
         /// <value>A Radiance Modifier identifier (default: None).</value>
+        [Summary(@"A Radiance Modifier identifier (default: None).")]
         [DataMember(Name = "modifier_direct")]
         public string ModifierDirect { get; set; } 
         /// <summary>
         /// A list of StateGeometryAbridged objects (default: None).
         /// </summary>
         /// <value>A list of StateGeometryAbridged objects (default: None).</value>
+        [Summary(@"A list of StateGeometryAbridged objects (default: None).")]
         [DataMember(Name = "shades")]
         public List<StateGeometryAbridged> Shades { get; set; } 
 

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring an EnergyPlus identifier and user_data.
     /// </summary>
+    [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
     [Serializable]
     [DataContract(Name = "InternalMassAbridged")]
     public partial class InternalMassAbridged : IDdEnergyBaseModel, IEquatable<InternalMassAbridged>, IValidatableObject
@@ -70,6 +71,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "InternalMassAbridged";
 
@@ -77,12 +79,14 @@ namespace HoneybeeSchema
         /// Identifier for an OpaqueConstruction that represents the material that the internal thermal mass is composed of.
         /// </summary>
         /// <value>Identifier for an OpaqueConstruction that represents the material that the internal thermal mass is composed of.</value>
+        [Summary(@"Identifier for an OpaqueConstruction that represents the material that the internal thermal mass is composed of.")]
         [DataMember(Name = "construction", IsRequired = true)]
         public string Construction { get; set; } 
         /// <summary>
         /// A number representing the surface area of the internal mass that is exposed to the Room air. This value should always be in square meters regardless of what units system the parent model is a part of.
         /// </summary>
         /// <value>A number representing the surface area of the internal mass that is exposed to the Room air. This value should always be in square meters regardless of what units system the parent model is a part of.</value>
+        [Summary(@"A number representing the surface area of the internal mass that is exposed to the Room air. This value should always be in square meters regardless of what units system the parent model is a part of.")]
         [DataMember(Name = "area", IsRequired = true)]
         public double Area { get; set; } 
 

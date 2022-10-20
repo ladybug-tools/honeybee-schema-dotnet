@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A single planar geometry that can be assigned to Radiance states.
     /// </summary>
+    [Summary(@"A single planar geometry that can be assigned to Radiance states.")]
     [Serializable]
     [DataContract(Name = "StateGeometryAbridged")]
     public partial class StateGeometryAbridged : IDdRadianceBaseModel, IEquatable<StateGeometryAbridged>, IValidatableObject
@@ -71,6 +72,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "StateGeometryAbridged";
 
@@ -78,18 +80,21 @@ namespace HoneybeeSchema
         /// A ladybug_geometry Face3D.
         /// </summary>
         /// <value>A ladybug_geometry Face3D.</value>
+        [Summary(@"A ladybug_geometry Face3D.")]
         [DataMember(Name = "geometry", IsRequired = true)]
         public Face3D Geometry { get; set; } 
         /// <summary>
         /// A string for a Honeybee Radiance Modifier identifier (default: None).
         /// </summary>
         /// <value>A string for a Honeybee Radiance Modifier identifier (default: None).</value>
+        [Summary(@"A string for a Honeybee Radiance Modifier identifier (default: None).")]
         [DataMember(Name = "modifier")]
         public string Modifier { get; set; } 
         /// <summary>
         /// A string for Honeybee Radiance Modifier identifiers to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).
         /// </summary>
         /// <value>A string for Honeybee Radiance Modifier identifiers to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).</value>
+        [Summary(@"A string for Honeybee Radiance Modifier identifiers to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).")]
         [DataMember(Name = "modifier_direct")]
         public string ModifierDirect { get; set; } 
 

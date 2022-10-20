@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A grid of sensors.
     /// </summary>
+    [Summary(@"A grid of sensors.")]
     [Serializable]
     [DataContract(Name = "SensorGrid")]
     public partial class SensorGrid : RadianceAsset, IEquatable<SensorGrid>, IValidatableObject
@@ -75,6 +76,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "SensorGrid";
 
@@ -82,24 +84,28 @@ namespace HoneybeeSchema
         /// A list of sensors that belong to the grid.
         /// </summary>
         /// <value>A list of sensors that belong to the grid.</value>
+        [Summary(@"A list of sensors that belong to the grid.")]
         [DataMember(Name = "sensors", IsRequired = true)]
         public List<Sensor> Sensors { get; set; } 
         /// <summary>
         /// An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D.
         /// </summary>
         /// <value>An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D.</value>
+        [Summary(@"An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D.")]
         [DataMember(Name = "mesh")]
         public Mesh3D Mesh { get; set; } 
         /// <summary>
         /// An optional array of Face3D used to represent the grid. There are no restrictions on how this property relates to the sensors and it is provided only to assist with the display of the grid when the number of sensors or the mesh is too large to be practically visualized.
         /// </summary>
         /// <value>An optional array of Face3D used to represent the grid. There are no restrictions on how this property relates to the sensors and it is provided only to assist with the display of the grid when the number of sensors or the mesh is too large to be practically visualized.</value>
+        [Summary(@"An optional array of Face3D used to represent the grid. There are no restrictions on how this property relates to the sensors and it is provided only to assist with the display of the grid when the number of sensors or the mesh is too large to be practically visualized.")]
         [DataMember(Name = "base_geometry")]
         public List<Face3D> BaseGeometry { get; set; } 
         /// <summary>
         /// An optional string to note the sensor grid group &#39;             &#39;to which the sensor is a part of. Grids sharing the same &#39;             &#39;group_identifier will be written to the same subfolder in Radiance &#39;             &#39;folder (default: None).
         /// </summary>
         /// <value>An optional string to note the sensor grid group &#39;             &#39;to which the sensor is a part of. Grids sharing the same &#39;             &#39;group_identifier will be written to the same subfolder in Radiance &#39;             &#39;folder (default: None).</value>
+        [Summary(@"An optional string to note the sensor grid group &#39;             &#39;to which the sensor is a part of. Grids sharing the same &#39;             &#39;group_identifier will be written to the same subfolder in Radiance &#39;             &#39;folder (default: None).")]
         [DataMember(Name = "group_identifier")]
         public string GroupIdentifier { get; set; } 
 

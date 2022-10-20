@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify sky conditions on a design day.
     /// </summary>
+    [Summary(@"Used to specify sky conditions on a design day.")]
     [Serializable]
     [DataContract(Name = "ASHRAEClearSky")]
     public partial class ASHRAEClearSky : SkyCondition, IEquatable<ASHRAEClearSky>, IValidatableObject
@@ -66,6 +67,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ASHRAEClearSky";
 
@@ -73,6 +75,7 @@ namespace HoneybeeSchema
         /// Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.
         /// </summary>
         /// <value>Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.</value>
+        [Summary(@"Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.")]
         [DataMember(Name = "clearness", IsRequired = true)]
         public double Clearness { get; set; } 
 

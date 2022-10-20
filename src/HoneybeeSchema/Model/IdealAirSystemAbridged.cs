@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Provides a model for an ideal HVAC system.
     /// </summary>
+    [Summary(@"Provides a model for an ideal HVAC system.")]
     [Serializable]
     [DataContract(Name = "IdealAirSystemAbridged")]
     public partial class IdealAirSystemAbridged : IDdEnergyBaseModel, IEquatable<IdealAirSystemAbridged>, IValidatableObject
@@ -91,6 +92,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "IdealAirSystemAbridged";
 
@@ -98,54 +100,63 @@ namespace HoneybeeSchema
         /// Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the zone.
         /// </summary>
         /// <value>Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the zone.</value>
+        [Summary(@"Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the zone.")]
         [DataMember(Name = "demand_controlled_ventilation")]
         public bool DemandControlledVentilation { get; set; }  = false;
         /// <summary>
         /// A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.</value>
+        [Summary(@"A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.")]
         [DataMember(Name = "sensible_heat_recovery")]
         public double SensibleHeatRecovery { get; set; }  = 0D;
         /// <summary>
         /// A number between 0 and 1 for the effectiveness of latent heat recovery within the system.
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of latent heat recovery within the system.</value>
+        [Summary(@"A number between 0 and 1 for the effectiveness of latent heat recovery within the system.")]
         [DataMember(Name = "latent_heat_recovery")]
         public double LatentHeatRecovery { get; set; }  = 0D;
         /// <summary>
         /// A number for the maximum heating supply air temperature [C].
         /// </summary>
         /// <value>A number for the maximum heating supply air temperature [C].</value>
+        [Summary(@"A number for the maximum heating supply air temperature [C].")]
         [DataMember(Name = "heating_air_temperature")]
         public double HeatingAirTemperature { get; set; }  = 50D;
         /// <summary>
         /// A number for the minimum cooling supply air temperature [C].
         /// </summary>
         /// <value>A number for the minimum cooling supply air temperature [C].</value>
+        [Summary(@"A number for the minimum cooling supply air temperature [C].")]
         [DataMember(Name = "cooling_air_temperature")]
         public double CoolingAirTemperature { get; set; }  = 13D;
         /// <summary>
         /// A number for the maximum heating capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the heating capacity.
         /// </summary>
         /// <value>A number for the maximum heating capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the heating capacity.</value>
+        [Summary(@"A number for the maximum heating capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the heating capacity.")]
         [DataMember(Name = "heating_limit")]
         public AnyOf<Autosize,NoLimit,double> HeatingLimit { get; set; } 
         /// <summary>
         /// A number for the maximum cooling capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the cooling capacity.
         /// </summary>
         /// <value>A number for the maximum cooling capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the cooling capacity.</value>
+        [Summary(@"A number for the maximum cooling capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the cooling capacity.")]
         [DataMember(Name = "cooling_limit")]
         public AnyOf<Autosize,NoLimit,double> CoolingLimit { get; set; } 
         /// <summary>
         /// An optional identifier of a schedule to set the availability of heating over the course of the simulation.
         /// </summary>
         /// <value>An optional identifier of a schedule to set the availability of heating over the course of the simulation.</value>
+        [Summary(@"An optional identifier of a schedule to set the availability of heating over the course of the simulation.")]
         [DataMember(Name = "heating_availability")]
         public string HeatingAvailability { get; set; } 
         /// <summary>
         /// An optional identifier of a schedule to set the availability of cooling over the course of the simulation.
         /// </summary>
         /// <value>An optional identifier of a schedule to set the availability of cooling over the course of the simulation.</value>
+        [Summary(@"An optional identifier of a schedule to set the availability of cooling over the course of the simulation.")]
         [DataMember(Name = "cooling_availability")]
         public string CoolingAvailability { get; set; } 
 

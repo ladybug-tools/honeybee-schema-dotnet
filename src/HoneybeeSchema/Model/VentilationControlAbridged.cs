@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
+    [Summary(@"Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.")]
     [Serializable]
     [DataContract(Name = "VentilationControlAbridged")]
     public partial class VentilationControlAbridged : OpenAPIGenBaseModel, IEquatable<VentilationControlAbridged>, IValidatableObject
@@ -64,6 +65,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "VentilationControlAbridged";
 
@@ -71,36 +73,42 @@ namespace HoneybeeSchema
         /// A number for the minimum indoor temperature at which to ventilate in Celsius. Typically, this variable is used to initiate ventilation.
         /// </summary>
         /// <value>A number for the minimum indoor temperature at which to ventilate in Celsius. Typically, this variable is used to initiate ventilation.</value>
+        [Summary(@"A number for the minimum indoor temperature at which to ventilate in Celsius. Typically, this variable is used to initiate ventilation.")]
         [DataMember(Name = "min_indoor_temperature")]
         public double MinIndoorTemperature { get; set; }  = -100D;
         /// <summary>
         /// A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a maximum temperature at which point ventilation is stopped and a cooling system is turned on.
         /// </summary>
         /// <value>A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a maximum temperature at which point ventilation is stopped and a cooling system is turned on.</value>
+        [Summary(@"A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a maximum temperature at which point ventilation is stopped and a cooling system is turned on.")]
         [DataMember(Name = "max_indoor_temperature")]
         public double MaxIndoorTemperature { get; set; }  = 100D;
         /// <summary>
         /// A number for the minimum outdoor temperature at which to ventilate in Celsius. This can be used to ensure ventilative cooling does not happen during the winter even if the Room is above the min_indoor_temperature.
         /// </summary>
         /// <value>A number for the minimum outdoor temperature at which to ventilate in Celsius. This can be used to ensure ventilative cooling does not happen during the winter even if the Room is above the min_indoor_temperature.</value>
+        [Summary(@"A number for the minimum outdoor temperature at which to ventilate in Celsius. This can be used to ensure ventilative cooling does not happen during the winter even if the Room is above the min_indoor_temperature.")]
         [DataMember(Name = "min_outdoor_temperature")]
         public double MinOutdoorTemperature { get; set; }  = -100D;
         /// <summary>
         /// A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a limit for when it is considered too hot outside for ventilative cooling.
         /// </summary>
         /// <value>A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a limit for when it is considered too hot outside for ventilative cooling.</value>
+        [Summary(@"A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a limit for when it is considered too hot outside for ventilative cooling.")]
         [DataMember(Name = "max_outdoor_temperature")]
         public double MaxOutdoorTemperature { get; set; }  = 100D;
         /// <summary>
         /// A number for the temperature differential in Celsius between indoor and outdoor below which ventilation is shut off.  This should usually be a positive number so that ventilation only occurs when the outdoors is cooler than the indoors. Negative numbers indicate how much hotter the outdoors can be than the indoors before ventilation is stopped.
         /// </summary>
         /// <value>A number for the temperature differential in Celsius between indoor and outdoor below which ventilation is shut off.  This should usually be a positive number so that ventilation only occurs when the outdoors is cooler than the indoors. Negative numbers indicate how much hotter the outdoors can be than the indoors before ventilation is stopped.</value>
+        [Summary(@"A number for the temperature differential in Celsius between indoor and outdoor below which ventilation is shut off.  This should usually be a positive number so that ventilation only occurs when the outdoors is cooler than the indoors. Negative numbers indicate how much hotter the outdoors can be than the indoors before ventilation is stopped.")]
         [DataMember(Name = "delta_temperature")]
         public double DeltaTemperature { get; set; }  = -100D;
         /// <summary>
         /// Identifier of the schedule for the ventilation over the course of the year. Note that this is applied on top of any setpoints. The type of this schedule should be On/Off and values should be either 0 (no possibility of ventilation) or 1 (ventilation possible).
         /// </summary>
         /// <value>Identifier of the schedule for the ventilation over the course of the year. Note that this is applied on top of any setpoints. The type of this schedule should be On/Off and values should be either 0 (no possibility of ventilation) or 1 (ventilation possible).</value>
+        [Summary(@"Identifier of the schedule for the ventilation over the course of the year. Note that this is applied on top of any setpoints. The type of this schedule should be On/Off and values should be either 0 (no possibility of ventilation) or 1 (ventilation possible).")]
         [DataMember(Name = "schedule")]
         public string Schedule { get; set; } 
 

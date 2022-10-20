@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// AperturePropertiesAbridged
     /// </summary>
+    [Summary(@"")]
     [Serializable]
     [DataContract(Name = "AperturePropertiesAbridged")]
     public partial class AperturePropertiesAbridged : OpenAPIGenBaseModel, IEquatable<AperturePropertiesAbridged>, IValidatableObject
@@ -56,17 +57,20 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "AperturePropertiesAbridged";
 
         /// <summary>
         /// Gets or Sets Energy
         /// </summary>
+        [Summary(@"Energy")]
         [DataMember(Name = "energy")]
         public ApertureEnergyPropertiesAbridged Energy { get; set; } 
         /// <summary>
         /// Gets or Sets Radiance
         /// </summary>
+        [Summary(@"Radiance")]
         [DataMember(Name = "radiance")]
         public ApertureRadiancePropertiesAbridged Radiance { get; set; } 
 

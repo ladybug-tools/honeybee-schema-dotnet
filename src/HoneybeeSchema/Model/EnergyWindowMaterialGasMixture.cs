@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Create a mixture of two to four different gases to fill the panes of multiple pane windows.
     /// </summary>
+    [Summary(@"Create a mixture of two to four different gases to fill the panes of multiple pane windows.")]
     [Serializable]
     [DataContract(Name = "EnergyWindowMaterialGasMixture")]
     public partial class EnergyWindowMaterialGasMixture : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialGasMixture>, IValidatableObject
@@ -73,6 +74,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "EnergyWindowMaterialGasMixture";
 
@@ -80,18 +82,21 @@ namespace HoneybeeSchema
         /// List of gases in the gas mixture.
         /// </summary>
         /// <value>List of gases in the gas mixture.</value>
+        [Summary(@"List of gases in the gas mixture.")]
         [DataMember(Name = "gas_types", IsRequired = true)]
         public List<GasType> GasTypes { get; set; } 
         /// <summary>
         /// A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1.
         /// </summary>
         /// <value>A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1.</value>
+        [Summary(@"A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1.")]
         [DataMember(Name = "gas_fractions", IsRequired = true)]
         public List<double> GasFractions { get; set; } 
         /// <summary>
         /// The thickness of the gas mixture layer in meters.
         /// </summary>
         /// <value>The thickness of the gas mixture layer in meters.</value>
+        [Summary(@"The thickness of the gas mixture layer in meters.")]
         [DataMember(Name = "thickness")]
         public double Thickness { get; set; }  = 0.0125D;
 

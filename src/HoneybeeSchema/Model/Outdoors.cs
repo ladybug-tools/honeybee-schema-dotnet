@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
+    [Summary(@"Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.")]
     [Serializable]
     [DataContract(Name = "Outdoors")]
     public partial class Outdoors : OpenAPIGenBaseModel, IEquatable<Outdoors>, IValidatableObject
@@ -58,6 +59,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Outdoors";
 
@@ -65,18 +67,21 @@ namespace HoneybeeSchema
         /// A boolean noting whether the boundary is exposed to sun.
         /// </summary>
         /// <value>A boolean noting whether the boundary is exposed to sun.</value>
+        [Summary(@"A boolean noting whether the boundary is exposed to sun.")]
         [DataMember(Name = "sun_exposure")]
         public bool SunExposure { get; set; }  = true;
         /// <summary>
         /// A boolean noting whether the boundary is exposed to wind.
         /// </summary>
         /// <value>A boolean noting whether the boundary is exposed to wind.</value>
+        [Summary(@"A boolean noting whether the boundary is exposed to wind.")]
         [DataMember(Name = "wind_exposure")]
         public bool WindExposure { get; set; }  = true;
         /// <summary>
         /// A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated.
         /// </summary>
         /// <value>A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated.</value>
+        [Summary(@"A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated.")]
         [DataMember(Name = "view_factor")]
         public AnyOf<Autocalculate,double> ViewFactor { get; set; } 
 

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects needing to check for a valid Date.
     /// </summary>
+    [Summary(@"Base class for all objects needing to check for a valid Date.")]
     [Serializable]
     [DataContract(Name = "DatedBaseModel")]
     public partial class DatedBaseModel : OpenAPIGenBaseModel, IEquatable<DatedBaseModel>, IValidatableObject
@@ -53,6 +54,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "DatedBaseModel";
 

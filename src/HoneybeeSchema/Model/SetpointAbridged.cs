@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify information about the setpoint schedule.
     /// </summary>
+    [Summary(@"Used to specify information about the setpoint schedule.")]
     [Serializable]
     [DataContract(Name = "SetpointAbridged")]
     public partial class SetpointAbridged : IDdEnergyBaseModel, IEquatable<SetpointAbridged>, IValidatableObject
@@ -75,6 +76,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "SetpointAbridged";
 
@@ -82,24 +84,28 @@ namespace HoneybeeSchema
         /// Identifier of the schedule for the cooling setpoint. The values in this schedule should be temperature in [C].
         /// </summary>
         /// <value>Identifier of the schedule for the cooling setpoint. The values in this schedule should be temperature in [C].</value>
+        [Summary(@"Identifier of the schedule for the cooling setpoint. The values in this schedule should be temperature in [C].")]
         [DataMember(Name = "cooling_schedule", IsRequired = true)]
         public string CoolingSchedule { get; set; } 
         /// <summary>
         /// Identifier of the schedule for the heating setpoint. The values in this schedule should be temperature in [C].
         /// </summary>
         /// <value>Identifier of the schedule for the heating setpoint. The values in this schedule should be temperature in [C].</value>
+        [Summary(@"Identifier of the schedule for the heating setpoint. The values in this schedule should be temperature in [C].")]
         [DataMember(Name = "heating_schedule", IsRequired = true)]
         public string HeatingSchedule { get; set; } 
         /// <summary>
         /// Identifier of the schedule for the humidification setpoint. The values in this schedule should be in [%].
         /// </summary>
         /// <value>Identifier of the schedule for the humidification setpoint. The values in this schedule should be in [%].</value>
+        [Summary(@"Identifier of the schedule for the humidification setpoint. The values in this schedule should be in [%].")]
         [DataMember(Name = "humidifying_schedule")]
         public string HumidifyingSchedule { get; set; } 
         /// <summary>
         /// Identifier of the schedule for the dehumidification setpoint. The values in this schedule should be in [%].
         /// </summary>
         /// <value>Identifier of the schedule for the dehumidification setpoint. The values in this schedule should be in [%].</value>
+        [Summary(@"Identifier of the schedule for the dehumidification setpoint. The values in this schedule should be in [%].")]
         [DataMember(Name = "dehumidifying_schedule")]
         public string DehumidifyingSchedule { get; set; } 
 

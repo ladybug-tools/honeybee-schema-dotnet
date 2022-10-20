@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Construction for window objects (Aperture, Door).
     /// </summary>
+    [Summary(@"Construction for window objects (Aperture, Door).")]
     [Serializable]
     [DataContract(Name = "WindowConstructionShade")]
     public partial class WindowConstructionShade : IDdEnergyBaseModel, IEquatable<WindowConstructionShade>, IValidatableObject
@@ -91,6 +92,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "WindowConstructionShade";
 
@@ -98,24 +100,28 @@ namespace HoneybeeSchema
         /// A WindowConstruction object that serves as the \&quot;switched off\&quot; version of the construction (aka. the \&quot;bare construction\&quot;). The shade_material and shade_location will be used to modify this starting construction.
         /// </summary>
         /// <value>A WindowConstruction object that serves as the \&quot;switched off\&quot; version of the construction (aka. the \&quot;bare construction\&quot;). The shade_material and shade_location will be used to modify this starting construction.</value>
+        [Summary(@"A WindowConstruction object that serves as the \&quot;switched off\&quot; version of the construction (aka. the \&quot;bare construction\&quot;). The shade_material and shade_location will be used to modify this starting construction.")]
         [DataMember(Name = "window_construction", IsRequired = true)]
         public WindowConstruction WindowConstruction { get; set; } 
         /// <summary>
         /// Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly.
         /// </summary>
         /// <value>Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly.</value>
+        [Summary(@"Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly.")]
         [DataMember(Name = "shade_material", IsRequired = true)]
         public AnyOf<EnergyWindowMaterialShade,EnergyWindowMaterialBlind,EnergyWindowMaterialGlazing> ShadeMaterial { get; set; } 
         /// <summary>
         /// A number that corresponds to the specified control_type. This can be a value in (W/m2), (C) or (W) depending upon the control type.Note that this value cannot be None for any control type except \&quot;AlwaysOn.\&quot;
         /// </summary>
         /// <value>A number that corresponds to the specified control_type. This can be a value in (W/m2), (C) or (W) depending upon the control type.Note that this value cannot be None for any control type except \&quot;AlwaysOn.\&quot;</value>
+        [Summary(@"A number that corresponds to the specified control_type. This can be a value in (W/m2), (C) or (W) depending upon the control type.Note that this value cannot be None for any control type except \&quot;AlwaysOn.\&quot;")]
         [DataMember(Name = "setpoint")]
         public double Setpoint { get; set; } 
         /// <summary>
         /// An optional ScheduleRuleset or ScheduleFixedInterval to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction.
         /// </summary>
         /// <value>An optional ScheduleRuleset or ScheduleFixedInterval to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction.</value>
+        [Summary(@"An optional ScheduleRuleset or ScheduleFixedInterval to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction.")]
         [DataMember(Name = "schedule")]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; } 
 

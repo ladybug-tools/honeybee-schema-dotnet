@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Fan Coil Unit (FCU) with DOAS HVAC system.  All rooms/zones in the system are connected to a Dedicated Outdoor Air System (DOAS) that supplies a constant volume of ventilation air at the same temperature to all rooms/zones. The ventilation air temperature will vary from 21.1C (70F) to 15.5C (60F) depending on the outdoor air temperature (the DOAS supplies cooler air when outdoor conditions are warmer). The ventilation air temperature is maintained by a chilled water cooling coil and a heating coil. The heating coil is a hot water coil except when electric baseboards or gas heaters are specified, in which case the heating coil is a single-speed direct expansion (DX) heat pump with a backup electrical resistance coil.  Each room/zone also receives its own Fan Coil Unit (FCU), which meets the heating and cooling loads of the space. The cooling coil in the FCU is always chilled water cooling coil, which is connected to a chilled water loop operating at 6.7C (44F). The heating coil is a hot water coil except when when electric baseboards or gas heaters are specified. Hot water temperature is 82C (180F) for boiler/district heating and 49C (120F) when ASHP is used.  The FCU with DOAS template is relatively close in performance to active chilled beams (ACBs). When using this template to represent ACBs, care must be taken to ensure that the DOAS ventilation air requirement is sufficient to extract the heating cooling from the ACB. If so, then this FCUwithDOAS template can be used but with the energy use of the FCU fans ignored.
     /// </summary>
+    [Summary(@"Fan Coil Unit (FCU) with DOAS HVAC system.  All rooms/zones in the system are connected to a Dedicated Outdoor Air System (DOAS) that supplies a constant volume of ventilation air at the same temperature to all rooms/zones. The ventilation air temperature will vary from 21.1C (70F) to 15.5C (60F) depending on the outdoor air temperature (the DOAS supplies cooler air when outdoor conditions are warmer). The ventilation air temperature is maintained by a chilled water cooling coil and a heating coil. The heating coil is a hot water coil except when electric baseboards or gas heaters are specified, in which case the heating coil is a single-speed direct expansion (DX) heat pump with a backup electrical resistance coil.  Each room/zone also receives its own Fan Coil Unit (FCU), which meets the heating and cooling loads of the space. The cooling coil in the FCU is always chilled water cooling coil, which is connected to a chilled water loop operating at 6.7C (44F). The heating coil is a hot water coil except when when electric baseboards or gas heaters are specified. Hot water temperature is 82C (180F) for boiler/district heating and 49C (120F) when ASHP is used.  The FCU with DOAS template is relatively close in performance to active chilled beams (ACBs). When using this template to represent ACBs, care must be taken to ensure that the DOAS ventilation air requirement is sufficient to extract the heating cooling from the ACB. If so, then this FCUwithDOAS template can be used but with the energy use of the FCU fans ignored.")]
     [Serializable]
     [DataContract(Name = "FCUwithDOASAbridged")]
     public partial class FCUwithDOASAbridged : IDdEnergyBaseModel, IEquatable<FCUwithDOASAbridged>, IValidatableObject
@@ -89,6 +90,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "FCUwithDOASAbridged";
 
@@ -96,24 +98,28 @@ namespace HoneybeeSchema
         /// A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.</value>
+        [Summary(@"A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.")]
         [DataMember(Name = "sensible_heat_recovery")]
         public double SensibleHeatRecovery { get; set; }  = 0D;
         /// <summary>
         /// A number between 0 and 1 for the effectiveness of latent heat recovery within the system.
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of latent heat recovery within the system.</value>
+        [Summary(@"A number between 0 and 1 for the effectiveness of latent heat recovery within the system.")]
         [DataMember(Name = "latent_heat_recovery")]
         public double LatentHeatRecovery { get; set; }  = 0D;
         /// <summary>
         /// Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.
         /// </summary>
         /// <value>Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.</value>
+        [Summary(@"Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.")]
         [DataMember(Name = "demand_controlled_ventilation")]
         public bool DemandControlledVentilation { get; set; }  = false;
         /// <summary>
         /// An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on.
         /// </summary>
         /// <value>An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on.</value>
+        [Summary(@"An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on.")]
         [DataMember(Name = "doas_availability_schedule")]
         public string DoasAvailabilitySchedule { get; set; } 
 

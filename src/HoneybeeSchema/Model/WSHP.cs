@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Water Source Heat Pump (WSHP) heating/cooling system (with no ventilation).  Each room/zone receives its own Water Source Heat Pump (WSHP), which meets the heating and cooling loads of the space. All WSHPs are connected to the same water condenser loop, which has its temperature maintained by the equipment_type (eg. Boiler with Cooling Tower).
     /// </summary>
+    [Summary(@"Water Source Heat Pump (WSHP) heating/cooling system (with no ventilation).  Each room/zone receives its own Water Source Heat Pump (WSHP), which meets the heating and cooling loads of the space. All WSHPs are connected to the same water condenser loop, which has its temperature maintained by the equipment_type (eg. Boiler with Cooling Tower).")]
     [Serializable]
     [DataContract(Name = "WSHP")]
     public partial class WSHP : IDdEnergyBaseModel, IEquatable<WSHP>, IValidatableObject
@@ -81,6 +82,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "WSHP";
 

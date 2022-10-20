@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A set of constructions for different surface types and boundary conditions.
     /// </summary>
+    [Summary(@"A set of constructions for different surface types and boundary conditions.")]
     [Serializable]
     [DataContract(Name = "ConstructionSetAbridged")]
     public partial class ConstructionSetAbridged : IDdEnergyBaseModel, IEquatable<ConstructionSetAbridged>, IValidatableObject
@@ -79,6 +80,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ConstructionSetAbridged";
 
@@ -86,42 +88,49 @@ namespace HoneybeeSchema
         /// A WallConstructionSetAbridged object for this ConstructionSet.
         /// </summary>
         /// <value>A WallConstructionSetAbridged object for this ConstructionSet.</value>
+        [Summary(@"A WallConstructionSetAbridged object for this ConstructionSet.")]
         [DataMember(Name = "wall_set")]
         public WallConstructionSetAbridged WallSet { get; set; } 
         /// <summary>
         /// A FloorConstructionSetAbridged object for this ConstructionSet.
         /// </summary>
         /// <value>A FloorConstructionSetAbridged object for this ConstructionSet.</value>
+        [Summary(@"A FloorConstructionSetAbridged object for this ConstructionSet.")]
         [DataMember(Name = "floor_set")]
         public FloorConstructionSetAbridged FloorSet { get; set; } 
         /// <summary>
         /// A RoofCeilingConstructionSetAbridged object for this ConstructionSet.
         /// </summary>
         /// <value>A RoofCeilingConstructionSetAbridged object for this ConstructionSet.</value>
+        [Summary(@"A RoofCeilingConstructionSetAbridged object for this ConstructionSet.")]
         [DataMember(Name = "roof_ceiling_set")]
         public RoofCeilingConstructionSetAbridged RoofCeilingSet { get; set; } 
         /// <summary>
         /// A ApertureConstructionSetAbridged object for this ConstructionSet.
         /// </summary>
         /// <value>A ApertureConstructionSetAbridged object for this ConstructionSet.</value>
+        [Summary(@"A ApertureConstructionSetAbridged object for this ConstructionSet.")]
         [DataMember(Name = "aperture_set")]
         public ApertureConstructionSetAbridged ApertureSet { get; set; } 
         /// <summary>
         /// A DoorConstructionSetAbridged object for this ConstructionSet.
         /// </summary>
         /// <value>A DoorConstructionSetAbridged object for this ConstructionSet.</value>
+        [Summary(@"A DoorConstructionSetAbridged object for this ConstructionSet.")]
         [DataMember(Name = "door_set")]
         public DoorConstructionSetAbridged DoorSet { get; set; } 
         /// <summary>
         /// The identifier of a ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned.
         /// </summary>
         /// <value>The identifier of a ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned.</value>
+        [Summary(@"The identifier of a ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned.")]
         [DataMember(Name = "shade_construction")]
         public string ShadeConstruction { get; set; } 
         /// <summary>
         /// The identifier of an AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type.
         /// </summary>
         /// <value>The identifier of an AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type.</value>
+        [Summary(@"The identifier of an AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type.")]
         [DataMember(Name = "air_boundary_construction")]
         public string AirBoundaryConstruction { get; set; } 
 

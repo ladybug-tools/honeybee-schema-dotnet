@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Lists the outputs to report from the simulation and their format.
     /// </summary>
+    [Summary(@"Lists the outputs to report from the simulation and their format.")]
     [Serializable]
     [DataContract(Name = "SimulationOutput")]
     public partial class SimulationOutput : OpenAPIGenBaseModel, IEquatable<SimulationOutput>, IValidatableObject
@@ -63,6 +64,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "SimulationOutput";
 
@@ -70,12 +72,14 @@ namespace HoneybeeSchema
         /// A list of EnergyPlus output names as strings, which are requested from the simulation.
         /// </summary>
         /// <value>A list of EnergyPlus output names as strings, which are requested from the simulation.</value>
+        [Summary(@"A list of EnergyPlus output names as strings, which are requested from the simulation.")]
         [DataMember(Name = "outputs")]
         public List<string> Outputs { get; set; } 
         /// <summary>
         /// A list of EnergyPlus summary report names as strings.
         /// </summary>
         /// <value>A list of EnergyPlus summary report names as strings.</value>
+        [Summary(@"A list of EnergyPlus summary report names as strings.")]
         [DataMember(Name = "summary_reports")]
         public List<string> SummaryReports { get; set; } 
 

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring an EnergyPlus identifier and user_data.
     /// </summary>
+    [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
     [Serializable]
     [DataContract(Name = "ServiceHotWater")]
     public partial class ServiceHotWater : IDdEnergyBaseModel, IEquatable<ServiceHotWater>, IValidatableObject
@@ -76,6 +77,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ServiceHotWater";
 
@@ -83,30 +85,35 @@ namespace HoneybeeSchema
         /// Number for the total volume flow rate of water per unit area of floor [L/h-m2].
         /// </summary>
         /// <value>Number for the total volume flow rate of water per unit area of floor [L/h-m2].</value>
+        [Summary(@"Number for the total volume flow rate of water per unit area of floor [L/h-m2].")]
         [DataMember(Name = "flow_per_area", IsRequired = true)]
         public double FlowPerArea { get; set; } 
         /// <summary>
         /// The schedule for the use of hot water over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile.
         /// </summary>
         /// <value>The schedule for the use of hot water over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile.</value>
+        [Summary(@"The schedule for the use of hot water over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile.")]
         [DataMember(Name = "schedule", IsRequired = true)]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; } 
         /// <summary>
         /// Number for the target temperature of water out of the tap (C). This the temperature after hot water has been mixed with cold water from the water mains. The default is 60C, which essentially assumes that the flow_per_area on this object is only for water straight out of the water heater.
         /// </summary>
         /// <value>Number for the target temperature of water out of the tap (C). This the temperature after hot water has been mixed with cold water from the water mains. The default is 60C, which essentially assumes that the flow_per_area on this object is only for water straight out of the water heater.</value>
+        [Summary(@"Number for the target temperature of water out of the tap (C). This the temperature after hot water has been mixed with cold water from the water mains. The default is 60C, which essentially assumes that the flow_per_area on this object is only for water straight out of the water heater.")]
         [DataMember(Name = "target_temperature")]
         public double TargetTemperature { get; set; }  = 60D;
         /// <summary>
         /// A number between 0 and 1 for the fraction of the total hot water load given off as sensible heat in the zone.
         /// </summary>
         /// <value>A number between 0 and 1 for the fraction of the total hot water load given off as sensible heat in the zone.</value>
+        [Summary(@"A number between 0 and 1 for the fraction of the total hot water load given off as sensible heat in the zone.")]
         [DataMember(Name = "sensible_fraction")]
         public double SensibleFraction { get; set; }  = 0.2D;
         /// <summary>
         /// A number between 0 and 1 for the fraction of the total hot water load that is latent.
         /// </summary>
         /// <value>A number between 0 and 1 for the fraction of the total hot water load that is latent.</value>
+        [Summary(@"A number between 0 and 1 for the fraction of the total hot water load that is latent.")]
         [DataMember(Name = "latent_fraction")]
         public double LatentFraction { get; set; }  = 0.05D;
 

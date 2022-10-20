@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to describe the daylight savings time for the simulation.
     /// </summary>
+    [Summary(@"Used to describe the daylight savings time for the simulation.")]
     [Serializable]
     [DataContract(Name = "DaylightSavingTime")]
     public partial class DaylightSavingTime : DatedBaseModel, IEquatable<DaylightSavingTime>, IValidatableObject
@@ -56,6 +57,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "DaylightSavingTime";
 
@@ -63,12 +65,14 @@ namespace HoneybeeSchema
         /// A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).</value>
+        [Summary(@"A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).")]
         [DataMember(Name = "start_date")]
         public List<int> StartDate { get; set; } 
         /// <summary>
         /// A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).</value>
+        [Summary(@"A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).")]
         [DataMember(Name = "end_date")]
         public List<int> EndDate { get; set; } 
 

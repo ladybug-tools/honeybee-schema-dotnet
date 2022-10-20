@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A single planar face in 3D space.
     /// </summary>
+    [Summary(@"A single planar face in 3D space.")]
     [Serializable]
     [DataContract(Name = "Face3D")]
     public partial class Face3D : OpenAPIGenBaseModel, IEquatable<Face3D>, IValidatableObject
@@ -69,6 +70,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Face3D";
 
@@ -76,18 +78,21 @@ namespace HoneybeeSchema
         /// A list of points representing the outer boundary vertices of the face. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.
         /// </summary>
         /// <value>A list of points representing the outer boundary vertices of the face. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.</value>
+        [Summary(@"A list of points representing the outer boundary vertices of the face. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.")]
         [DataMember(Name = "boundary", IsRequired = true)]
         public List<List<double>> Boundary { get; set; } 
         /// <summary>
         /// Optional list of lists with one list for each hole in the face.Each hole should be a list of at least 3 points and each point a list of 3 (x, y, z) values. If None, it will be assumed that there are no holes in the face.
         /// </summary>
         /// <value>Optional list of lists with one list for each hole in the face.Each hole should be a list of at least 3 points and each point a list of 3 (x, y, z) values. If None, it will be assumed that there are no holes in the face.</value>
+        [Summary(@"Optional list of lists with one list for each hole in the face.Each hole should be a list of at least 3 points and each point a list of 3 (x, y, z) values. If None, it will be assumed that there are no holes in the face.")]
         [DataMember(Name = "holes")]
         public List<List<List<double>>> Holes { get; set; } 
         /// <summary>
         /// Optional Plane indicating the plane in which the face exists.If None, the plane will usually be derived from the boundary points.
         /// </summary>
         /// <value>Optional Plane indicating the plane in which the face exists.If None, the plane will usually be derived from the boundary points.</value>
+        [Summary(@"Optional Plane indicating the plane in which the face exists.If None, the plane will usually be derived from the boundary points.")]
         [DataMember(Name = "plane")]
         public Plane Plane { get; set; } 
 

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance glass material.
     /// </summary>
+    [Summary(@"Radiance glass material.")]
     [Serializable]
     [DataContract(Name = "Glass")]
     public partial class Glass : ModifierBase, IEquatable<Glass>, IValidatableObject
@@ -76,6 +77,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Glass";
 
@@ -83,36 +85,42 @@ namespace HoneybeeSchema
         /// Material modifier.
         /// </summary>
         /// <value>Material modifier.</value>
+        [Summary(@"Material modifier.")]
         [DataMember(Name = "modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> Modifier { get; set; } 
         /// <summary>
         /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.
         /// </summary>
         /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.</value>
+        [Summary(@"List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.")]
         [DataMember(Name = "dependencies")]
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Dependencies { get; set; } 
         /// <summary>
         /// A value between 0 and 1 for the red channel transmissivity.
         /// </summary>
         /// <value>A value between 0 and 1 for the red channel transmissivity.</value>
+        [Summary(@"A value between 0 and 1 for the red channel transmissivity.")]
         [DataMember(Name = "r_transmissivity")]
         public double RTransmissivity { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the green channel transmissivity.
         /// </summary>
         /// <value>A value between 0 and 1 for the green channel transmissivity.</value>
+        [Summary(@"A value between 0 and 1 for the green channel transmissivity.")]
         [DataMember(Name = "g_transmissivity")]
         public double GTransmissivity { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the blue channel transmissivity.
         /// </summary>
         /// <value>A value between 0 and 1 for the blue channel transmissivity.</value>
+        [Summary(@"A value between 0 and 1 for the blue channel transmissivity.")]
         [DataMember(Name = "b_transmissivity")]
         public double BTransmissivity { get; set; }  = 0.0D;
         /// <summary>
         /// A value greater than 1 for the index of refraction. Typical values are 1.52 for float glass and 1.4 for ETFE.
         /// </summary>
         /// <value>A value greater than 1 for the index of refraction. Typical values are 1.52 for float glass and 1.4 for ETFE.</value>
+        [Summary(@"A value greater than 1 for the index of refraction. Typical values are 1.52 for float glass and 1.4 for ETFE.")]
         [DataMember(Name = "refraction_index")]
         public double RefractionIndex { get; set; }  = 1.52D;
 

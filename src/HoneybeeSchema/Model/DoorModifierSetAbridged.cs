@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Abridged set containing radiance modifiers needed for a model&#39;s Doors.
     /// </summary>
+    [Summary(@"Abridged set containing radiance modifiers needed for a model&#39;s Doors.")]
     [Serializable]
     [DataContract(Name = "DoorModifierSetAbridged")]
     public partial class DoorModifierSetAbridged : BaseModifierSetAbridged, IEquatable<DoorModifierSetAbridged>, IValidatableObject
@@ -60,6 +61,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "DoorModifierSetAbridged";
 
@@ -67,18 +69,21 @@ namespace HoneybeeSchema
         /// Identifier of modifier object for glass with a Surface boundary condition.
         /// </summary>
         /// <value>Identifier of modifier object for glass with a Surface boundary condition.</value>
+        [Summary(@"Identifier of modifier object for glass with a Surface boundary condition.")]
         [DataMember(Name = "interior_glass_modifier")]
         public string InteriorGlassModifier { get; set; } 
         /// <summary>
         /// Identifier of modifier object for glass with an Outdoors boundary condition.
         /// </summary>
         /// <value>Identifier of modifier object for glass with an Outdoors boundary condition.</value>
+        [Summary(@"Identifier of modifier object for glass with an Outdoors boundary condition.")]
         [DataMember(Name = "exterior_glass_modifier")]
         public string ExteriorGlassModifier { get; set; } 
         /// <summary>
         /// Identifier of a modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face.
         /// </summary>
         /// <value>Identifier of a modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face.</value>
+        [Summary(@"Identifier of a modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face.")]
         [DataMember(Name = "overhead_modifier")]
         public string OverheadModifier { get; set; } 
 

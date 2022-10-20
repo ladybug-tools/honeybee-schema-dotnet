@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// An object representing design day conditions.
     /// </summary>
+    [Summary(@"An object representing design day conditions.")]
     [Serializable]
     [DataContract(Name = "DesignDay")]
     public partial class DesignDay : OpenAPIGenBaseModel, IEquatable<DesignDay>, IValidatableObject
@@ -84,6 +85,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "DesignDay";
 
@@ -91,29 +93,34 @@ namespace HoneybeeSchema
         /// Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).
         /// </summary>
         /// <value>Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).</value>
+        [Summary(@"Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t).")]
         [DataMember(Name = "name", IsRequired = true)]
         public string Name { get; set; } 
         /// <summary>
         /// A DryBulbCondition describing temperature conditions on the design day.
         /// </summary>
         /// <value>A DryBulbCondition describing temperature conditions on the design day.</value>
+        [Summary(@"A DryBulbCondition describing temperature conditions on the design day.")]
         [DataMember(Name = "dry_bulb_condition", IsRequired = true)]
         public DryBulbCondition DryBulbCondition { get; set; } 
         /// <summary>
         /// A HumidityCondition describing humidity and precipitation conditions on the design day.
         /// </summary>
         /// <value>A HumidityCondition describing humidity and precipitation conditions on the design day.</value>
+        [Summary(@"A HumidityCondition describing humidity and precipitation conditions on the design day.")]
         [DataMember(Name = "humidity_condition", IsRequired = true)]
         public HumidityCondition HumidityCondition { get; set; } 
         /// <summary>
         /// A WindCondition describing wind conditions on the design day.
         /// </summary>
         /// <value>A WindCondition describing wind conditions on the design day.</value>
+        [Summary(@"A WindCondition describing wind conditions on the design day.")]
         [DataMember(Name = "wind_condition", IsRequired = true)]
         public WindCondition WindCondition { get; set; } 
         /// <summary>
         /// Gets or Sets SkyCondition
         /// </summary>
+        [Summary(@"SkyCondition")]
         [DataMember(Name = "sky_condition", IsRequired = true)]
         public AnyOf<ASHRAEClearSky,ASHRAETau> SkyCondition { get; set; } 
 

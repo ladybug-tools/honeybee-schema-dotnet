@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
+    [Summary(@"Base class for all objects requiring a identifiers acceptable for all engines.")]
     [Serializable]
     [DataContract(Name = "Aperture")]
     public partial class Aperture : IDdBaseModel, IEquatable<Aperture>, IValidatableObject
@@ -80,6 +81,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Aperture";
 
@@ -87,35 +89,41 @@ namespace HoneybeeSchema
         /// Planar Face3D for the geometry.
         /// </summary>
         /// <value>Planar Face3D for the geometry.</value>
+        [Summary(@"Planar Face3D for the geometry.")]
         [DataMember(Name = "geometry", IsRequired = true)]
         public Face3D Geometry { get; set; } 
         /// <summary>
         /// Gets or Sets BoundaryCondition
         /// </summary>
+        [Summary(@"BoundaryCondition")]
         [DataMember(Name = "boundary_condition", IsRequired = true)]
         public AnyOf<Outdoors,Surface> BoundaryCondition { get; set; } 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
+        [Summary(@"Extension properties for particular simulation engines (Radiance, EnergyPlus).")]
         [DataMember(Name = "properties", IsRequired = true)]
         public AperturePropertiesAbridged Properties { get; set; } 
         /// <summary>
         /// Boolean to note whether the Aperture can be opened for ventilation.
         /// </summary>
         /// <value>Boolean to note whether the Aperture can be opened for ventilation.</value>
+        [Summary(@"Boolean to note whether the Aperture can be opened for ventilation.")]
         [DataMember(Name = "is_operable")]
         public bool IsOperable { get; set; }  = false;
         /// <summary>
         /// Shades assigned to the interior side of this object (eg. window sill, light shelf).
         /// </summary>
         /// <value>Shades assigned to the interior side of this object (eg. window sill, light shelf).</value>
+        [Summary(@"Shades assigned to the interior side of this object (eg. window sill, light shelf).")]
         [DataMember(Name = "indoor_shades")]
         public List<Shade> IndoorShades { get; set; } 
         /// <summary>
         /// Shades assigned to the exterior side of this object (eg. mullions, louvers).
         /// </summary>
         /// <value>Shades assigned to the exterior side of this object (eg. mullions, louvers).</value>
+        [Summary(@"Shades assigned to the exterior side of this object (eg. mullions, louvers).")]
         [DataMember(Name = "outdoor_shades")]
         public List<Shade> OutdoorShades { get; set; } 
 

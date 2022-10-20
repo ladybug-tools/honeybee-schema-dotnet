@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// RoomPropertiesAbridged
     /// </summary>
+    [Summary(@"")]
     [Serializable]
     [DataContract(Name = "RoomPropertiesAbridged")]
     public partial class RoomPropertiesAbridged : OpenAPIGenBaseModel, IEquatable<RoomPropertiesAbridged>, IValidatableObject
@@ -56,17 +57,20 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "RoomPropertiesAbridged";
 
         /// <summary>
         /// Gets or Sets Energy
         /// </summary>
+        [Summary(@"Energy")]
         [DataMember(Name = "energy")]
         public RoomEnergyPropertiesAbridged Energy { get; set; } 
         /// <summary>
         /// Gets or Sets Radiance
         /// </summary>
+        [Summary(@"Radiance")]
         [DataMember(Name = "radiance")]
         public RoomRadiancePropertiesAbridged Radiance { get; set; } 
 

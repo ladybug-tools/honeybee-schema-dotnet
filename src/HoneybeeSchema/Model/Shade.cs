@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
+    [Summary(@"Base class for all objects requiring a identifiers acceptable for all engines.")]
     [Serializable]
     [DataContract(Name = "Shade")]
     public partial class Shade : IDdBaseModel, IEquatable<Shade>, IValidatableObject
@@ -73,6 +74,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Shade";
 
@@ -80,18 +82,21 @@ namespace HoneybeeSchema
         /// Planar Face3D for the geometry.
         /// </summary>
         /// <value>Planar Face3D for the geometry.</value>
+        [Summary(@"Planar Face3D for the geometry.")]
         [DataMember(Name = "geometry", IsRequired = true)]
         public Face3D Geometry { get; set; } 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
+        [Summary(@"Extension properties for particular simulation engines (Radiance, EnergyPlus).")]
         [DataMember(Name = "properties", IsRequired = true)]
         public ShadePropertiesAbridged Properties { get; set; } 
         /// <summary>
         /// Boolean to note whether this shade is detached from any of the other geometry in the model. Cases where this should be True include shade representing surrounding buildings or context. Note that this should always be False for shades assigned to parent objects.
         /// </summary>
         /// <value>Boolean to note whether this shade is detached from any of the other geometry in the model. Cases where this should be True include shade representing surrounding buildings or context. Note that this should always be False for shades assigned to parent objects.</value>
+        [Summary(@"Boolean to note whether this shade is detached from any of the other geometry in the model. Cases where this should be True include shade representing surrounding buildings or context. Note that this should always be False for shades assigned to parent objects.")]
         [DataMember(Name = "is_detached")]
         public bool IsDetached { get; set; }  = false;
 

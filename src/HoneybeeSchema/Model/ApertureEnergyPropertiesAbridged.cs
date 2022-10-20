@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
+    [Summary(@"Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.")]
     [Serializable]
     [DataContract(Name = "ApertureEnergyPropertiesAbridged")]
     public partial class ApertureEnergyPropertiesAbridged : OpenAPIGenBaseModel, IEquatable<ApertureEnergyPropertiesAbridged>, IValidatableObject
@@ -56,6 +57,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ApertureEnergyPropertiesAbridged";
 
@@ -63,12 +65,14 @@ namespace HoneybeeSchema
         /// Identifier of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.
         /// </summary>
         /// <value>Identifier of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.</value>
+        [Summary(@"Identifier of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.")]
         [DataMember(Name = "construction")]
         public string Construction { get; set; } 
         /// <summary>
         /// An optional VentilationOpening to specify the operable portion of the Aperture.
         /// </summary>
         /// <value>An optional VentilationOpening to specify the operable portion of the Aperture.</value>
+        [Summary(@"An optional VentilationOpening to specify the operable portion of the Aperture.")]
         [DataMember(Name = "vent_opening")]
         public VentilationOpening VentOpening { get; set; } 
 

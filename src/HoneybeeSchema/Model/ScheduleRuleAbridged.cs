@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Schedule rule including a ScheduleDay and when it should be applied..
     /// </summary>
+    [Summary(@"Schedule rule including a ScheduleDay and when it should be applied..")]
     [Serializable]
     [DataContract(Name = "ScheduleRuleAbridged")]
     public partial class ScheduleRuleAbridged : DatedBaseModel, IEquatable<ScheduleRuleAbridged>, IValidatableObject
@@ -83,6 +84,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ScheduleRuleAbridged";
 
@@ -90,60 +92,70 @@ namespace HoneybeeSchema
         /// The identifier of a ScheduleDay object associated with this rule.
         /// </summary>
         /// <value>The identifier of a ScheduleDay object associated with this rule.</value>
+        [Summary(@"The identifier of a ScheduleDay object associated with this rule.")]
         [DataMember(Name = "schedule_day", IsRequired = true)]
         public string ScheduleDay { get; set; } 
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Sundays.
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Sundays.</value>
+        [Summary(@"Boolean noting whether to apply schedule_day on Sundays.")]
         [DataMember(Name = "apply_sunday")]
         public bool ApplySunday { get; set; }  = false;
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Mondays.
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Mondays.</value>
+        [Summary(@"Boolean noting whether to apply schedule_day on Mondays.")]
         [DataMember(Name = "apply_monday")]
         public bool ApplyMonday { get; set; }  = false;
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Tuesdays.
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Tuesdays.</value>
+        [Summary(@"Boolean noting whether to apply schedule_day on Tuesdays.")]
         [DataMember(Name = "apply_tuesday")]
         public bool ApplyTuesday { get; set; }  = false;
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Wednesdays.
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Wednesdays.</value>
+        [Summary(@"Boolean noting whether to apply schedule_day on Wednesdays.")]
         [DataMember(Name = "apply_wednesday")]
         public bool ApplyWednesday { get; set; }  = false;
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Thursdays.
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Thursdays.</value>
+        [Summary(@"Boolean noting whether to apply schedule_day on Thursdays.")]
         [DataMember(Name = "apply_thursday")]
         public bool ApplyThursday { get; set; }  = false;
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Fridays.
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Fridays.</value>
+        [Summary(@"Boolean noting whether to apply schedule_day on Fridays.")]
         [DataMember(Name = "apply_friday")]
         public bool ApplyFriday { get; set; }  = false;
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Saturdays.
         /// </summary>
         /// <value>Boolean noting whether to apply schedule_day on Saturdays.</value>
+        [Summary(@"Boolean noting whether to apply schedule_day on Saturdays.")]
         [DataMember(Name = "apply_saturday")]
         public bool ApplySaturday { get; set; }  = false;
         /// <summary>
         /// A list of two integers for [month, day], representing the start date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the start date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</value>
+        [Summary(@"A list of two integers for [month, day], representing the start date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).")]
         [DataMember(Name = "start_date")]
         public List<int> StartDate { get; set; } 
         /// <summary>
         /// A list of two integers for [month, day], representing the end date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the end date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</value>
+        [Summary(@"A list of two integers for [month, day], representing the end date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).")]
         [DataMember(Name = "end_date")]
         public List<int> EndDate { get; set; } 
 

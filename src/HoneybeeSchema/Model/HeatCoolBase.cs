@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all heating/cooling systems without any ventilation.  These systems are only designed to satisfy heating + cooling demand and they cannot meet any minimum ventilation requirements.  As such, these systems tend to be used in residential or storage settings where meeting minimum ventilation requirements may not be required or the density of occupancy is so low that infiltration is enough to meet fresh air demand.
     /// </summary>
+    [Summary(@"Base class for all heating/cooling systems without any ventilation.  These systems are only designed to satisfy heating + cooling demand and they cannot meet any minimum ventilation requirements.  As such, these systems tend to be used in residential or storage settings where meeting minimum ventilation requirements may not be required or the density of occupancy is so low that infiltration is enough to meet fresh air demand.")]
     [Serializable]
     [DataContract(Name = "_HeatCoolBase")]
     public partial class HeatCoolBase : IDdEnergyBaseModel, IEquatable<HeatCoolBase>, IValidatableObject
@@ -73,6 +74,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "_HeatCoolBase";
 

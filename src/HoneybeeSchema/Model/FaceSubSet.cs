@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A set of constructions for wall, floor, or roof assemblies.
     /// </summary>
+    [Summary(@"A set of constructions for wall, floor, or roof assemblies.")]
     [Serializable]
     [DataContract(Name = "_FaceSubSet")]
     public partial class FaceSubSet : OpenAPIGenBaseModel, IEquatable<FaceSubSet>, IValidatableObject
@@ -58,6 +59,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "_FaceSubSet";
 
@@ -65,18 +67,21 @@ namespace HoneybeeSchema
         /// An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition.
         /// </summary>
         /// <value>An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition.</value>
+        [Summary(@"An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition.")]
         [DataMember(Name = "interior_construction")]
         public OpaqueConstruction InteriorConstruction { get; set; } 
         /// <summary>
         /// An OpaqueConstruction for walls with an Outdoors boundary condition.
         /// </summary>
         /// <value>An OpaqueConstruction for walls with an Outdoors boundary condition.</value>
+        [Summary(@"An OpaqueConstruction for walls with an Outdoors boundary condition.")]
         [DataMember(Name = "exterior_construction")]
         public OpaqueConstruction ExteriorConstruction { get; set; } 
         /// <summary>
         /// An OpaqueConstruction for walls with a Ground boundary condition.
         /// </summary>
         /// <value>An OpaqueConstruction for walls with a Ground boundary condition.</value>
+        [Summary(@"An OpaqueConstruction for walls with a Ground boundary condition.")]
         [DataMember(Name = "ground_construction")]
         public OpaqueConstruction GroundConstruction { get; set; } 
 

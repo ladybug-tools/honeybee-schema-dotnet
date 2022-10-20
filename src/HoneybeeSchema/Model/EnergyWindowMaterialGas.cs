@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Create single layer of gas in a window construction.  Can be combined with EnergyWindowMaterialGlazing to make multi-pane windows.
     /// </summary>
+    [Summary(@"Create single layer of gas in a window construction.  Can be combined with EnergyWindowMaterialGlazing to make multi-pane windows.")]
     [Serializable]
     [DataContract(Name = "EnergyWindowMaterialGas")]
     public partial class EnergyWindowMaterialGas : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialGas>, IValidatableObject
@@ -74,6 +75,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "EnergyWindowMaterialGas";
 
@@ -81,6 +83,7 @@ namespace HoneybeeSchema
         /// Thickness of the gas layer in meters. Default: 0.0125.
         /// </summary>
         /// <value>Thickness of the gas layer in meters. Default: 0.0125.</value>
+        [Summary(@"Thickness of the gas layer in meters. Default: 0.0125.")]
         [DataMember(Name = "thickness")]
         public double Thickness { get; set; }  = 0.0125D;
 

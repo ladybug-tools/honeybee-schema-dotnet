@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Describe an entire glazing system rather than individual layers.  Used when only very limited information is available on the glazing layers or when specific performance levels are being targeted.
     /// </summary>
+    [Summary(@"Describe an entire glazing system rather than individual layers.  Used when only very limited information is available on the glazing layers or when specific performance levels are being targeted.")]
     [Serializable]
     [DataContract(Name = "EnergyWindowMaterialSimpleGlazSys")]
     public partial class EnergyWindowMaterialSimpleGlazSys : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialSimpleGlazSys>, IValidatableObject
@@ -71,6 +72,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "EnergyWindowMaterialSimpleGlazSys";
 
@@ -78,18 +80,21 @@ namespace HoneybeeSchema
         /// The overall heat transfer coefficient for window system in W/m2-K. Note that constructions with U-values above 5.8 should not be assigned to skylights as this implies the resistance of the window is negative when air films are subtracted.
         /// </summary>
         /// <value>The overall heat transfer coefficient for window system in W/m2-K. Note that constructions with U-values above 5.8 should not be assigned to skylights as this implies the resistance of the window is negative when air films are subtracted.</value>
+        [Summary(@"The overall heat transfer coefficient for window system in W/m2-K. Note that constructions with U-values above 5.8 should not be assigned to skylights as this implies the resistance of the window is negative when air films are subtracted.")]
         [DataMember(Name = "u_factor", IsRequired = true)]
         public double UFactor { get; set; } 
         /// <summary>
         /// Unit-less quantity for the Solar Heat Gain Coefficient (solar transmittance + conduction) at normal incidence and vertical orientation.
         /// </summary>
         /// <value>Unit-less quantity for the Solar Heat Gain Coefficient (solar transmittance + conduction) at normal incidence and vertical orientation.</value>
+        [Summary(@"Unit-less quantity for the Solar Heat Gain Coefficient (solar transmittance + conduction) at normal incidence and vertical orientation.")]
         [DataMember(Name = "shgc", IsRequired = true)]
         public double Shgc { get; set; } 
         /// <summary>
         /// The fraction of visible light falling on the window that makes it through the glass at normal incidence.
         /// </summary>
         /// <value>The fraction of visible light falling on the window that makes it through the glass at normal incidence.</value>
+        [Summary(@"The fraction of visible light falling on the window that makes it through the glass at normal incidence.")]
         [DataMember(Name = "vt")]
         public double Vt { get; set; }  = 0.54D;
 

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// No mass opaque material representing a layer within an opaque construction.  Used when only the thermal resistance (R value) of the material is known.
     /// </summary>
+    [Summary(@"No mass opaque material representing a layer within an opaque construction.  Used when only the thermal resistance (R value) of the material is known.")]
     [Serializable]
     [DataContract(Name = "EnergyMaterialNoMass")]
     public partial class EnergyMaterialNoMass : IDdEnergyBaseModel, IEquatable<EnergyMaterialNoMass>, IValidatableObject
@@ -80,6 +81,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "EnergyMaterialNoMass";
 
@@ -87,24 +89,28 @@ namespace HoneybeeSchema
         /// The thermal resistance (R-value) of the material layer [m2-K/W].
         /// </summary>
         /// <value>The thermal resistance (R-value) of the material layer [m2-K/W].</value>
+        [Summary(@"The thermal resistance (R-value) of the material layer [m2-K/W].")]
         [DataMember(Name = "r_value", IsRequired = true)]
         public double RValue { get; set; } 
         /// <summary>
         /// Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9.
         /// </summary>
         /// <value>Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9.</value>
+        [Summary(@"Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9.")]
         [DataMember(Name = "thermal_absorptance")]
         public double ThermalAbsorptance { get; set; }  = 0.9D;
         /// <summary>
         /// Fraction of incident solar radiation absorbed by the material. Default: 0.7.
         /// </summary>
         /// <value>Fraction of incident solar radiation absorbed by the material. Default: 0.7.</value>
+        [Summary(@"Fraction of incident solar radiation absorbed by the material. Default: 0.7.")]
         [DataMember(Name = "solar_absorptance")]
         public double SolarAbsorptance { get; set; }  = 0.7D;
         /// <summary>
         /// Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7.
         /// </summary>
         /// <value>Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7.</value>
+        [Summary(@"Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7.")]
         [DataMember(Name = "visible_absorptance")]
         public double VisibleAbsorptance { get; set; }  = 0.7D;
 

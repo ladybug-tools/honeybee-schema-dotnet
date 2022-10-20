@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A mesh in 3D space.
     /// </summary>
+    [Summary(@"A mesh in 3D space.")]
     [Serializable]
     [DataContract(Name = "Mesh3D")]
     public partial class Mesh3D : OpenAPIGenBaseModel, IEquatable<Mesh3D>, IValidatableObject
@@ -70,6 +71,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Mesh3D";
 
@@ -77,18 +79,21 @@ namespace HoneybeeSchema
         /// A list of points representing the vertices of the mesh. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.
         /// </summary>
         /// <value>A list of points representing the vertices of the mesh. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.</value>
+        [Summary(@"A list of points representing the vertices of the mesh. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.")]
         [DataMember(Name = "vertices", IsRequired = true)]
         public List<List<double>> Vertices { get; set; } 
         /// <summary>
         /// A list of lists with each sub-list having either 3 or 4 integers. These integers correspond to indices within the list of vertices.
         /// </summary>
         /// <value>A list of lists with each sub-list having either 3 or 4 integers. These integers correspond to indices within the list of vertices.</value>
+        [Summary(@"A list of lists with each sub-list having either 3 or 4 integers. These integers correspond to indices within the list of vertices.")]
         [DataMember(Name = "faces", IsRequired = true)]
         public List<List<int>> Faces { get; set; } 
         /// <summary>
         /// An optional list of colors that correspond to either the faces of the mesh or the vertices of the mesh.
         /// </summary>
         /// <value>An optional list of colors that correspond to either the faces of the mesh or the vertices of the mesh.</value>
+        [Summary(@"An optional list of colors that correspond to either the faces of the mesh or the vertices of the mesh.")]
         [DataMember(Name = "colors")]
         public List<Color> Colors { get; set; } 
 

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Abridged set containing all modifiers needed to create a radiance model.
     /// </summary>
+    [Summary(@"Abridged set containing all modifiers needed to create a radiance model.")]
     [Serializable]
     [DataContract(Name = "ModifierSetAbridged")]
     public partial class ModifierSetAbridged : IDdRadianceBaseModel, IEquatable<ModifierSetAbridged>, IValidatableObject
@@ -78,6 +79,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ModifierSetAbridged";
 
@@ -85,42 +87,49 @@ namespace HoneybeeSchema
         /// Optional WallModifierSet object for this ModifierSet (default: None).
         /// </summary>
         /// <value>Optional WallModifierSet object for this ModifierSet (default: None).</value>
+        [Summary(@"Optional WallModifierSet object for this ModifierSet (default: None).")]
         [DataMember(Name = "wall_set")]
         public WallModifierSetAbridged WallSet { get; set; } 
         /// <summary>
         /// Optional FloorModifierSet object for this ModifierSet (default: None).
         /// </summary>
         /// <value>Optional FloorModifierSet object for this ModifierSet (default: None).</value>
+        [Summary(@"Optional FloorModifierSet object for this ModifierSet (default: None).")]
         [DataMember(Name = "floor_set")]
         public FloorModifierSetAbridged FloorSet { get; set; } 
         /// <summary>
         /// Optional RoofCeilingModifierSet object for this ModifierSet (default: None).
         /// </summary>
         /// <value>Optional RoofCeilingModifierSet object for this ModifierSet (default: None).</value>
+        [Summary(@"Optional RoofCeilingModifierSet object for this ModifierSet (default: None).")]
         [DataMember(Name = "roof_ceiling_set")]
         public RoofCeilingModifierSetAbridged RoofCeilingSet { get; set; } 
         /// <summary>
         /// Optional ApertureModifierSet object for this ModifierSet (default: None).
         /// </summary>
         /// <value>Optional ApertureModifierSet object for this ModifierSet (default: None).</value>
+        [Summary(@"Optional ApertureModifierSet object for this ModifierSet (default: None).")]
         [DataMember(Name = "aperture_set")]
         public ApertureModifierSetAbridged ApertureSet { get; set; } 
         /// <summary>
         /// Optional DoorModifierSet object for this ModifierSet (default: None).
         /// </summary>
         /// <value>Optional DoorModifierSet object for this ModifierSet (default: None).</value>
+        [Summary(@"Optional DoorModifierSet object for this ModifierSet (default: None).")]
         [DataMember(Name = "door_set")]
         public DoorModifierSetAbridged DoorSet { get; set; } 
         /// <summary>
         /// Optional ShadeModifierSet object for this ModifierSet (default: None).
         /// </summary>
         /// <value>Optional ShadeModifierSet object for this ModifierSet (default: None).</value>
+        [Summary(@"Optional ShadeModifierSet object for this ModifierSet (default: None).")]
         [DataMember(Name = "shade_set")]
         public ShadeModifierSetAbridged ShadeSet { get; set; } 
         /// <summary>
         /// Optional Modifier to be used for all Faces with an AirBoundary face type. If None, it will be the honeybee generic air wall modifier.
         /// </summary>
         /// <value>Optional Modifier to be used for all Faces with an AirBoundary face type. If None, it will be the honeybee generic air wall modifier.</value>
+        [Summary(@"Optional Modifier to be used for all Faces with an AirBoundary face type. If None, it will be the honeybee generic air wall modifier.")]
         [DataMember(Name = "air_boundary_modifier")]
         public string AirBoundaryModifier { get; set; } 
 

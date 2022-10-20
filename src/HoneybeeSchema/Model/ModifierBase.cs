@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for Radiance Modifiers
     /// </summary>
+    [Summary(@"Base class for Radiance Modifiers")]
     [Serializable]
     [DataContract(Name = "ModifierBase")]
     public partial class ModifierBase : IDdRadianceBaseModel, IEquatable<ModifierBase>, IValidatableObject
@@ -64,6 +65,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ModifierBase";
 

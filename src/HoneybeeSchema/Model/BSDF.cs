@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance BSDF (Bidirectional Scattering Distribution Function) material.
     /// </summary>
+    [Summary(@"Radiance BSDF (Bidirectional Scattering Distribution Function) material.")]
     [Serializable]
     [DataContract(Name = "BSDF")]
     public partial class BSDF : ModifierBase, IEquatable<BSDF>, IValidatableObject
@@ -86,6 +87,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "BSDF";
 
@@ -93,60 +95,70 @@ namespace HoneybeeSchema
         /// A string with the contents of the BSDF XML file.
         /// </summary>
         /// <value>A string with the contents of the BSDF XML file.</value>
+        [Summary(@"A string with the contents of the BSDF XML file.")]
         [DataMember(Name = "bsdf_data", IsRequired = true)]
         public string BsdfData { get; set; } 
         /// <summary>
         /// Material modifier.
         /// </summary>
         /// <value>Material modifier.</value>
+        [Summary(@"Material modifier.")]
         [DataMember(Name = "modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> Modifier { get; set; } 
         /// <summary>
         /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.
         /// </summary>
         /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.</value>
+        [Summary(@"List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.")]
         [DataMember(Name = "dependencies")]
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Dependencies { get; set; } 
         /// <summary>
         /// Vector as sequence that sets the hemisphere that the BSDF material faces.
         /// </summary>
         /// <value>Vector as sequence that sets the hemisphere that the BSDF material faces.</value>
+        [Summary(@"Vector as sequence that sets the hemisphere that the BSDF material faces.")]
         [DataMember(Name = "up_orientation")]
         public List<double> UpOrientation { get; set; } 
         /// <summary>
         /// Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative).
         /// </summary>
         /// <value>Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative).</value>
+        [Summary(@"Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative).")]
         [DataMember(Name = "thickness")]
         public double Thickness { get; set; }  = 0D;
         /// <summary>
         /// Optional input for function file. Using \&quot;.\&quot; will ensure that BSDF data is written to the root of wherever a given study is run.
         /// </summary>
         /// <value>Optional input for function file. Using \&quot;.\&quot; will ensure that BSDF data is written to the root of wherever a given study is run.</value>
+        [Summary(@"Optional input for function file. Using \&quot;.\&quot; will ensure that BSDF data is written to the root of wherever a given study is run.")]
         [DataMember(Name = "function_file")]
         public string FunctionFile { get; set; }  = ".";
         /// <summary>
         /// Optional transform input to scale the thickness and reorient the up vector.
         /// </summary>
         /// <value>Optional transform input to scale the thickness and reorient the up vector.</value>
+        [Summary(@"Optional transform input to scale the thickness and reorient the up vector.")]
         [DataMember(Name = "transform")]
         public string Transform { get; set; } 
         /// <summary>
         /// Optional additional front diffuse reflectance as sequence of three RGB numbers.
         /// </summary>
         /// <value>Optional additional front diffuse reflectance as sequence of three RGB numbers.</value>
+        [Summary(@"Optional additional front diffuse reflectance as sequence of three RGB numbers.")]
         [DataMember(Name = "front_diffuse_reflectance")]
         public List<double> FrontDiffuseReflectance { get; set; } 
         /// <summary>
         /// Optional additional back diffuse reflectance as sequence of three RGB numbers.
         /// </summary>
         /// <value>Optional additional back diffuse reflectance as sequence of three RGB numbers.</value>
+        [Summary(@"Optional additional back diffuse reflectance as sequence of three RGB numbers.")]
         [DataMember(Name = "back_diffuse_reflectance")]
         public List<double> BackDiffuseReflectance { get; set; } 
         /// <summary>
         /// Optional additional diffuse transmittance as sequence of three RGB numbers.
         /// </summary>
         /// <value>Optional additional diffuse transmittance as sequence of three RGB numbers.</value>
+        [Summary(@"Optional additional diffuse transmittance as sequence of three RGB numbers.")]
         [DataMember(Name = "diffuse_transmittance")]
         public List<double> DiffuseTransmittance { get; set; } 
 
