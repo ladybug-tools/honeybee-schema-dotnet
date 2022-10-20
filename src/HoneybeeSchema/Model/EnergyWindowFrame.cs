@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Opaque material representing a layer within an opaque construction.
     /// </summary>
+    [Summary(@"Opaque material representing a layer within an opaque construction.")]
     [Serializable]
     [DataContract(Name = "EnergyWindowFrame")]
     public partial class EnergyWindowFrame : IDdEnergyBaseModel, IEquatable<EnergyWindowFrame>, IValidatableObject
@@ -81,6 +82,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "EnergyWindowFrame";
 
@@ -88,48 +90,56 @@ namespace HoneybeeSchema
         /// Number for the width of frame in plane of window [m]. The frame width is assumed to be the same on all sides of window..
         /// </summary>
         /// <value>Number for the width of frame in plane of window [m]. The frame width is assumed to be the same on all sides of window..</value>
+        [Summary(@"Number for the width of frame in plane of window [m]. The frame width is assumed to be the same on all sides of window..")]
         [DataMember(Name = "width", IsRequired = true)]
         public double Width { get; set; } 
         /// <summary>
         /// Number for the thermal conductance of the frame material measured from inside to outside of the frame surface (no air films) and taking 2D conduction effects into account [W/m2-K].
         /// </summary>
         /// <value>Number for the thermal conductance of the frame material measured from inside to outside of the frame surface (no air films) and taking 2D conduction effects into account [W/m2-K].</value>
+        [Summary(@"Number for the thermal conductance of the frame material measured from inside to outside of the frame surface (no air films) and taking 2D conduction effects into account [W/m2-K].")]
         [DataMember(Name = "conductance", IsRequired = true)]
         public double Conductance { get; set; } 
         /// <summary>
         /// Number between 0 and 4 for the ratio of the glass conductance near the frame (excluding air films) divided by the glass conductance at the center of the glazing (excluding air films). This is used only for multi-pane glazing constructions. This ratio should usually be greater than 1.0 since the spacer material that separates the glass panes is usually more conductive than the gap between panes. A value of 1 effectively indicates no spacer. Values should usually be obtained from the LBNL WINDOW program so that the unique characteristics of the window construction can be accounted for.
         /// </summary>
         /// <value>Number between 0 and 4 for the ratio of the glass conductance near the frame (excluding air films) divided by the glass conductance at the center of the glazing (excluding air films). This is used only for multi-pane glazing constructions. This ratio should usually be greater than 1.0 since the spacer material that separates the glass panes is usually more conductive than the gap between panes. A value of 1 effectively indicates no spacer. Values should usually be obtained from the LBNL WINDOW program so that the unique characteristics of the window construction can be accounted for.</value>
+        [Summary(@"Number between 0 and 4 for the ratio of the glass conductance near the frame (excluding air films) divided by the glass conductance at the center of the glazing (excluding air films). This is used only for multi-pane glazing constructions. This ratio should usually be greater than 1.0 since the spacer material that separates the glass panes is usually more conductive than the gap between panes. A value of 1 effectively indicates no spacer. Values should usually be obtained from the LBNL WINDOW program so that the unique characteristics of the window construction can be accounted for.")]
         [DataMember(Name = "edge_to_center_ratio")]
         public double EdgeToCenterRatio { get; set; }  = 1D;
         /// <summary>
         /// Number for the distance that the frame projects outward from the outside face of the glazing [m]. This is used to calculate shadowing of frame onto glass, solar absorbed by the frame, IR emitted and absorbed by the frame, and convection from frame.
         /// </summary>
         /// <value>Number for the distance that the frame projects outward from the outside face of the glazing [m]. This is used to calculate shadowing of frame onto glass, solar absorbed by the frame, IR emitted and absorbed by the frame, and convection from frame.</value>
+        [Summary(@"Number for the distance that the frame projects outward from the outside face of the glazing [m]. This is used to calculate shadowing of frame onto glass, solar absorbed by the frame, IR emitted and absorbed by the frame, and convection from frame.")]
         [DataMember(Name = "outside_projection")]
         public double OutsideProjection { get; set; }  = 0D;
         /// <summary>
         /// Number for the distance that the frame projects inward from the inside face of the glazing [m]. This is used to calculate solar absorbed by the frame, IR emitted and absorbed by the frame, and convection from frame.
         /// </summary>
         /// <value>Number for the distance that the frame projects inward from the inside face of the glazing [m]. This is used to calculate solar absorbed by the frame, IR emitted and absorbed by the frame, and convection from frame.</value>
+        [Summary(@"Number for the distance that the frame projects inward from the inside face of the glazing [m]. This is used to calculate solar absorbed by the frame, IR emitted and absorbed by the frame, and convection from frame.")]
         [DataMember(Name = "inside_projection")]
         public double InsideProjection { get; set; }  = 0D;
         /// <summary>
         /// Fraction of incident long wavelength radiation that is absorbed by the frame material.
         /// </summary>
         /// <value>Fraction of incident long wavelength radiation that is absorbed by the frame material.</value>
+        [Summary(@"Fraction of incident long wavelength radiation that is absorbed by the frame material.")]
         [DataMember(Name = "thermal_absorptance")]
         public double ThermalAbsorptance { get; set; }  = 0.9D;
         /// <summary>
         /// Fraction of incident solar radiation absorbed by the frame material.
         /// </summary>
         /// <value>Fraction of incident solar radiation absorbed by the frame material.</value>
+        [Summary(@"Fraction of incident solar radiation absorbed by the frame material.")]
         [DataMember(Name = "solar_absorptance")]
         public double SolarAbsorptance { get; set; }  = 0.7D;
         /// <summary>
         /// Fraction of incident visible wavelength radiation absorbed by the frame material.
         /// </summary>
         /// <value>Fraction of incident visible wavelength radiation absorbed by the frame material.</value>
+        [Summary(@"Fraction of incident visible wavelength radiation absorbed by the frame material.")]
         [DataMember(Name = "visible_absorptance")]
         public double VisibleAbsorptance { get; set; }  = 0.7D;
 

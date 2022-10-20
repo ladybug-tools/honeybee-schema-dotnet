@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// OpenAPIGenBaseModel
     /// </summary>
+    [Summary(@"")]
     [Serializable]
     [DataContract(Name = "_OpenAPIGenBaseModel")]
     public partial class OpenAPIGenBaseModel : IEquatable<OpenAPIGenBaseModel>, IValidatableObject
@@ -54,6 +55,7 @@ namespace HoneybeeSchema
         /// A base class to use when there is no baseclass available to fall on.
         /// </summary>
         /// <value>A base class to use when there is no baseclass available to fall on.</value>
+        [Summary(@"A base class to use when there is no baseclass available to fall on.")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "InvalidType";
 

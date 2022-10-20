@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
+    [Summary(@"Base class for all objects requiring a identifiers acceptable for all engines.")]
     [Serializable]
     [DataContract(Name = "Room")]
     public partial class Room : IDdBaseModel, IEquatable<Room>, IValidatableObject
@@ -81,6 +82,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Room";
 
@@ -88,42 +90,49 @@ namespace HoneybeeSchema
         /// Faces that together form the closed volume of a room.
         /// </summary>
         /// <value>Faces that together form the closed volume of a room.</value>
+        [Summary(@"Faces that together form the closed volume of a room.")]
         [DataMember(Name = "faces", IsRequired = true)]
         public List<Face> Faces { get; set; } 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
+        [Summary(@"Extension properties for particular simulation engines (Radiance, EnergyPlus).")]
         [DataMember(Name = "properties", IsRequired = true)]
         public RoomPropertiesAbridged Properties { get; set; } 
         /// <summary>
         /// Shades assigned to the interior side of this object (eg. partitions, tables).
         /// </summary>
         /// <value>Shades assigned to the interior side of this object (eg. partitions, tables).</value>
+        [Summary(@"Shades assigned to the interior side of this object (eg. partitions, tables).")]
         [DataMember(Name = "indoor_shades")]
         public List<Shade> IndoorShades { get; set; } 
         /// <summary>
         /// Shades assigned to the exterior side of this object (eg. trees, landscaping).
         /// </summary>
         /// <value>Shades assigned to the exterior side of this object (eg. trees, landscaping).</value>
+        [Summary(@"Shades assigned to the exterior side of this object (eg. trees, landscaping).")]
         [DataMember(Name = "outdoor_shades")]
         public List<Shade> OutdoorShades { get; set; } 
         /// <summary>
         /// An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is multiplied by the multiplier.
         /// </summary>
         /// <value>An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is multiplied by the multiplier.</value>
+        [Summary(@"An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is multiplied by the multiplier.")]
         [DataMember(Name = "multiplier")]
         public int Multiplier { get; set; }  = 1;
         /// <summary>
         /// A boolean for whether the Room floor area contributes to Models it is a part of. Note that this will not affect the floor_area property of this Room itself but it will ensure the Room floor area is excluded from any calculations when the Room is part of a Model, including EUI calculations.
         /// </summary>
         /// <value>A boolean for whether the Room floor area contributes to Models it is a part of. Note that this will not affect the floor_area property of this Room itself but it will ensure the Room floor area is excluded from any calculations when the Room is part of a Model, including EUI calculations.</value>
+        [Summary(@"A boolean for whether the Room floor area contributes to Models it is a part of. Note that this will not affect the floor_area property of this Room itself but it will ensure the Room floor area is excluded from any calculations when the Room is part of a Model, including EUI calculations.")]
         [DataMember(Name = "exclude_floor_area")]
         public bool ExcludeFloorArea { get; set; }  = false;
         /// <summary>
         /// Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model. Note that this property has no character restrictions.
         /// </summary>
         /// <value>Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model. Note that this property has no character restrictions.</value>
+        [Summary(@"Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model. Note that this property has no character restrictions.")]
         [DataMember(Name = "story")]
         public string Story { get; set; } 
 

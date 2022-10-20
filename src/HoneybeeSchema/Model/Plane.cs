@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
+    [Summary(@"Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.")]
     [Serializable]
     [DataContract(Name = "Plane")]
     public partial class Plane : OpenAPIGenBaseModel, IEquatable<Plane>, IValidatableObject
@@ -70,6 +71,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Plane";
 
@@ -77,18 +79,21 @@ namespace HoneybeeSchema
         /// Plane normal as 3 (x, y, z) values.
         /// </summary>
         /// <value>Plane normal as 3 (x, y, z) values.</value>
+        [Summary(@"Plane normal as 3 (x, y, z) values.")]
         [DataMember(Name = "n", IsRequired = true)]
         public List<double> N { get; set; } 
         /// <summary>
         /// Plane origin as 3 (x, y, z) values
         /// </summary>
         /// <value>Plane origin as 3 (x, y, z) values</value>
+        [Summary(@"Plane origin as 3 (x, y, z) values")]
         [DataMember(Name = "o", IsRequired = true)]
         public List<double> O { get; set; } 
         /// <summary>
         /// Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated.
         /// </summary>
         /// <value>Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated.</value>
+        [Summary(@"Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated.")]
         [DataMember(Name = "x")]
         public List<double> X { get; set; } 
 

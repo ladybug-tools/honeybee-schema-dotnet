@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// The complete set of EnergyPlus Simulation Settings.
     /// </summary>
+    [Summary(@"The complete set of EnergyPlus Simulation Settings.")]
     [Serializable]
     [DataContract(Name = "SimulationParameter")]
     public partial class SimulationParameter : OpenAPIGenBaseModel, IEquatable<SimulationParameter>, IValidatableObject
@@ -74,6 +75,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "SimulationParameter";
 
@@ -81,42 +83,49 @@ namespace HoneybeeSchema
         /// A SimulationOutput that lists the desired outputs from the simulation and the format in which to report them.
         /// </summary>
         /// <value>A SimulationOutput that lists the desired outputs from the simulation and the format in which to report them.</value>
+        [Summary(@"A SimulationOutput that lists the desired outputs from the simulation and the format in which to report them.")]
         [DataMember(Name = "output")]
         public SimulationOutput Output { get; set; } 
         /// <summary>
         /// A RunPeriod to describe the time period over which to run the simulation.
         /// </summary>
         /// <value>A RunPeriod to describe the time period over which to run the simulation.</value>
+        [Summary(@"A RunPeriod to describe the time period over which to run the simulation.")]
         [DataMember(Name = "run_period")]
         public RunPeriod RunPeriod { get; set; } 
         /// <summary>
         /// An integer for the number of timesteps per hour at which the energy calculation will be run.
         /// </summary>
         /// <value>An integer for the number of timesteps per hour at which the energy calculation will be run.</value>
+        [Summary(@"An integer for the number of timesteps per hour at which the energy calculation will be run.")]
         [DataMember(Name = "timestep")]
         public int Timestep { get; set; }  = 6;
         /// <summary>
         /// A SimulationControl object that describes which types of calculations to run.
         /// </summary>
         /// <value>A SimulationControl object that describes which types of calculations to run.</value>
+        [Summary(@"A SimulationControl object that describes which types of calculations to run.")]
         [DataMember(Name = "simulation_control")]
         public SimulationControl SimulationControl { get; set; } 
         /// <summary>
         /// A ShadowCalculation object describing settings for the EnergyPlus Shadow Calculation.
         /// </summary>
         /// <value>A ShadowCalculation object describing settings for the EnergyPlus Shadow Calculation.</value>
+        [Summary(@"A ShadowCalculation object describing settings for the EnergyPlus Shadow Calculation.")]
         [DataMember(Name = "shadow_calculation")]
         public ShadowCalculation ShadowCalculation { get; set; } 
         /// <summary>
         /// A SizingParameter object with criteria for sizing the heating and cooling system.
         /// </summary>
         /// <value>A SizingParameter object with criteria for sizing the heating and cooling system.</value>
+        [Summary(@"A SizingParameter object with criteria for sizing the heating and cooling system.")]
         [DataMember(Name = "sizing_parameter")]
         public SizingParameter SizingParameter { get; set; } 
         /// <summary>
         /// A number between -360 and 360 for the north direction in degrees.This is the counterclockwise difference between the North and the positive Y-axis. 90 is West and 270 is East. Note that this is different than the convention used in EnergyPlus, which uses clockwise difference instead of counterclockwise difference.
         /// </summary>
         /// <value>A number between -360 and 360 for the north direction in degrees.This is the counterclockwise difference between the North and the positive Y-axis. 90 is West and 270 is East. Note that this is different than the convention used in EnergyPlus, which uses clockwise difference instead of counterclockwise difference.</value>
+        [Summary(@"A number between -360 and 360 for the north direction in degrees.This is the counterclockwise difference between the North and the positive Y-axis. 90 is West and 270 is East. Note that this is different than the convention used in EnergyPlus, which uses clockwise difference instead of counterclockwise difference.")]
         [DataMember(Name = "north_angle")]
         public double NorthAngle { get; set; }  = 0D;
 

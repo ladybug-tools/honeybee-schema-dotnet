@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for the abridged modifier sets assigned to Faces.
     /// </summary>
+    [Summary(@"Base class for the abridged modifier sets assigned to Faces.")]
     [Serializable]
     [DataContract(Name = "BaseModifierSetAbridged")]
     public partial class BaseModifierSetAbridged : OpenAPIGenBaseModel, IEquatable<BaseModifierSetAbridged>, IValidatableObject
@@ -56,6 +57,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "BaseModifierSetAbridged";
 
@@ -63,12 +65,14 @@ namespace HoneybeeSchema
         /// Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.
         /// </summary>
         /// <value>Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.</value>
+        [Summary(@"Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.")]
         [DataMember(Name = "exterior_modifier")]
         public string ExteriorModifier { get; set; } 
         /// <summary>
         /// Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors.
         /// </summary>
         /// <value>Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors.</value>
+        [Summary(@"Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors.")]
         [DataMember(Name = "interior_modifier")]
         public string InteriorModifier { get; set; } 
 

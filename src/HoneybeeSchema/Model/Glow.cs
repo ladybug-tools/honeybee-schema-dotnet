@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance Glow material.
     /// </summary>
+    [Summary(@"Radiance Glow material.")]
     [Serializable]
     [DataContract(Name = "Glow")]
     public partial class Glow : ModifierBase, IEquatable<Glow>, IValidatableObject
@@ -76,6 +77,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Glow";
 
@@ -83,36 +85,42 @@ namespace HoneybeeSchema
         /// Material modifier.
         /// </summary>
         /// <value>Material modifier.</value>
+        [Summary(@"Material modifier.")]
         [DataMember(Name = "modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> Modifier { get; set; } 
         /// <summary>
         /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.
         /// </summary>
         /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.</value>
+        [Summary(@"List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.")]
         [DataMember(Name = "dependencies")]
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Dependencies { get; set; } 
         /// <summary>
         /// A value between 0 and 1 for the red channel of the modifier.
         /// </summary>
         /// <value>A value between 0 and 1 for the red channel of the modifier.</value>
+        [Summary(@"A value between 0 and 1 for the red channel of the modifier.")]
         [DataMember(Name = "r_emittance")]
         public double REmittance { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the green channel of the modifier.
         /// </summary>
         /// <value>A value between 0 and 1 for the green channel of the modifier.</value>
+        [Summary(@"A value between 0 and 1 for the green channel of the modifier.")]
         [DataMember(Name = "g_emittance")]
         public double GEmittance { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the blue channel of the modifier.
         /// </summary>
         /// <value>A value between 0 and 1 for the blue channel of the modifier.</value>
+        [Summary(@"A value between 0 and 1 for the blue channel of the modifier.")]
         [DataMember(Name = "b_emittance")]
         public double BEmittance { get; set; }  = 0.0D;
         /// <summary>
         /// Maximum radius for shadow testing. Objects with zero radius are permissable and may participate in interreflection calculation (though they are not representative of real light sources). Negative values will never contribute to scene illumination.
         /// </summary>
         /// <value>Maximum radius for shadow testing. Objects with zero radius are permissable and may participate in interreflection calculation (though they are not representative of real light sources). Negative values will never contribute to scene illumination.</value>
+        [Summary(@"Maximum radius for shadow testing. Objects with zero radius are permissable and may participate in interreflection calculation (though they are not representative of real light sources). Negative values will never contribute to scene illumination.")]
         [DataMember(Name = "max_radius")]
         public double MaxRadius { get; set; }  = 0D;
 

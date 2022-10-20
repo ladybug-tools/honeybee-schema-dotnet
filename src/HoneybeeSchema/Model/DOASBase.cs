@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for Dedicated Outdoor Air System (DOAS) HVACs.  DOAS systems separate minimum ventilation supply from the satisfaction of heating + cooling demand. Ventilation air tends to be supplied at neutral temperatures (close to room air temperature) and heating / cooling loads are met with additional pieces of zone equipment (eg. Fan Coil Units (FCUs)).  Because DOAS systems only have to cool down and re-heat the minimum ventilation air, they tend to use less energy than all-air systems. They also tend to use less energy to distribute heating + cooling by pumping around hot/cold water or refrigerant instead of blowing hot/cold air. However, they do not provide as good of control over humidity and so they may not be appropriate for rooms with high latent loads like auditoriums, kitchens, laundromats, etc.
     /// </summary>
+    [Summary(@"Base class for Dedicated Outdoor Air System (DOAS) HVACs.  DOAS systems separate minimum ventilation supply from the satisfaction of heating + cooling demand. Ventilation air tends to be supplied at neutral temperatures (close to room air temperature) and heating / cooling loads are met with additional pieces of zone equipment (eg. Fan Coil Units (FCUs)).  Because DOAS systems only have to cool down and re-heat the minimum ventilation air, they tend to use less energy than all-air systems. They also tend to use less energy to distribute heating + cooling by pumping around hot/cold water or refrigerant instead of blowing hot/cold air. However, they do not provide as good of control over humidity and so they may not be appropriate for rooms with high latent loads like auditoriums, kitchens, laundromats, etc.")]
     [Serializable]
     [DataContract(Name = "_DOASBase")]
     public partial class DOASBase : IDdEnergyBaseModel, IEquatable<DOASBase>, IValidatableObject
@@ -81,6 +82,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "_DOASBase";
 
@@ -88,24 +90,28 @@ namespace HoneybeeSchema
         /// A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.</value>
+        [Summary(@"A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.")]
         [DataMember(Name = "sensible_heat_recovery")]
         public double SensibleHeatRecovery { get; set; }  = 0D;
         /// <summary>
         /// A number between 0 and 1 for the effectiveness of latent heat recovery within the system.
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of latent heat recovery within the system.</value>
+        [Summary(@"A number between 0 and 1 for the effectiveness of latent heat recovery within the system.")]
         [DataMember(Name = "latent_heat_recovery")]
         public double LatentHeatRecovery { get; set; }  = 0D;
         /// <summary>
         /// Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.
         /// </summary>
         /// <value>Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.</value>
+        [Summary(@"Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.")]
         [DataMember(Name = "demand_controlled_ventilation")]
         public bool DemandControlledVentilation { get; set; }  = false;
         /// <summary>
         /// An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on.
         /// </summary>
         /// <value>An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on.</value>
+        [Summary(@"An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on.")]
         [DataMember(Name = "doas_availability_schedule")]
         public string DoasAvailabilitySchedule { get; set; } 
 

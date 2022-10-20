@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify sky conditions on a design day.
     /// </summary>
+    [Summary(@"Used to specify sky conditions on a design day.")]
     [Serializable]
     [DataContract(Name = "ASHRAETau")]
     public partial class ASHRAETau : SkyCondition, IEquatable<ASHRAETau>, IValidatableObject
@@ -68,6 +69,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ASHRAETau";
 
@@ -75,12 +77,14 @@ namespace HoneybeeSchema
         /// Value for the beam optical depth. Typically found in .stat files.
         /// </summary>
         /// <value>Value for the beam optical depth. Typically found in .stat files.</value>
+        [Summary(@"Value for the beam optical depth. Typically found in .stat files.")]
         [DataMember(Name = "tau_b", IsRequired = true)]
         public double TauB { get; set; } 
         /// <summary>
         /// Value for the diffuse optical depth. Typically found in .stat files.
         /// </summary>
         /// <value>Value for the diffuse optical depth. Typically found in .stat files.</value>
+        [Summary(@"Value for the diffuse optical depth. Typically found in .stat files.")]
         [DataMember(Name = "tau_d", IsRequired = true)]
         public double TauD { get; set; } 
 

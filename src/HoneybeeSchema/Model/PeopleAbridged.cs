@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring an EnergyPlus identifier and user_data.
     /// </summary>
+    [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
     [Serializable]
     [DataContract(Name = "PeopleAbridged")]
     public partial class PeopleAbridged : IDdEnergyBaseModel, IEquatable<PeopleAbridged>, IValidatableObject
@@ -76,6 +77,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "PeopleAbridged";
 
@@ -83,30 +85,35 @@ namespace HoneybeeSchema
         /// People per floor area expressed as [people/m2]
         /// </summary>
         /// <value>People per floor area expressed as [people/m2]</value>
+        [Summary(@"People per floor area expressed as [people/m2]")]
         [DataMember(Name = "people_per_area", IsRequired = true)]
         public double PeoplePerArea { get; set; } 
         /// <summary>
         /// Identifier of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile.
         /// </summary>
         /// <value>Identifier of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile.</value>
+        [Summary(@"Identifier of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile.")]
         [DataMember(Name = "occupancy_schedule", IsRequired = true)]
         public string OccupancySchedule { get; set; } 
         /// <summary>
         /// Identifier of a schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated.
         /// </summary>
         /// <value>Identifier of a schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated.</value>
+        [Summary(@"Identifier of a schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated.")]
         [DataMember(Name = "activity_schedule")]
         public string ActivitySchedule { get; set; } 
         /// <summary>
         /// The radiant fraction of sensible heat released by people. (Default: 0.3).
         /// </summary>
         /// <value>The radiant fraction of sensible heat released by people. (Default: 0.3).</value>
+        [Summary(@"The radiant fraction of sensible heat released by people. (Default: 0.3).")]
         [DataMember(Name = "radiant_fraction")]
         public double RadiantFraction { get; set; }  = 0.3D;
         /// <summary>
         /// Number for the latent fraction of heat gain due to people or an Autocalculate object.
         /// </summary>
         /// <value>Number for the latent fraction of heat gain due to people or an Autocalculate object.</value>
+        [Summary(@"Number for the latent fraction of heat gain due to people or an Autocalculate object.")]
         [DataMember(Name = "latent_fraction")]
         public AnyOf<Autocalculate,double> LatentFraction { get; set; } 
 

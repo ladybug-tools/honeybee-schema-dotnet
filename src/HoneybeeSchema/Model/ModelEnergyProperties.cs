@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
+    [Summary(@"Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.")]
     [Serializable]
     [DataContract(Name = "ModelEnergyProperties")]
     public partial class ModelEnergyProperties : OpenAPIGenBaseModel, IEquatable<ModelEnergyProperties>, IValidatableObject
@@ -70,6 +71,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ModelEnergyProperties";
         //============================================== is ReadOnly 
@@ -77,6 +79,7 @@ namespace HoneybeeSchema
         /// Global Energy construction set.
         /// </summary>
         /// <value>Global Energy construction set.</value>
+        [Summary(@"Global Energy construction set.")]
         [DataMember(Name = "global_construction_set")]
         public GlobalConstructionSet GlobalConstructionSet { get; protected set; } = GlobalConstructionSet.Default;
 
@@ -84,54 +87,63 @@ namespace HoneybeeSchema
         /// List of all unique ConstructionSets in the Model.
         /// </summary>
         /// <value>List of all unique ConstructionSets in the Model.</value>
+        [Summary(@"List of all unique ConstructionSets in the Model.")]
         [DataMember(Name = "construction_sets")]
         public List<AnyOf<ConstructionSetAbridged,ConstructionSet>> ConstructionSets { get; set; } 
         /// <summary>
         /// A list of all unique constructions in the model. This includes constructions across all Faces, Apertures, Doors, Shades, Room ConstructionSets, and the global_construction_set.
         /// </summary>
         /// <value>A list of all unique constructions in the model. This includes constructions across all Faces, Apertures, Doors, Shades, Room ConstructionSets, and the global_construction_set.</value>
+        [Summary(@"A list of all unique constructions in the model. This includes constructions across all Faces, Apertures, Doors, Shades, Room ConstructionSets, and the global_construction_set.")]
         [DataMember(Name = "constructions")]
         public List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,WindowConstructionShadeAbridged,AirBoundaryConstructionAbridged,OpaqueConstruction,WindowConstruction,WindowConstructionShade,WindowConstructionDynamicAbridged,WindowConstructionDynamic,AirBoundaryConstruction,ShadeConstruction>> Constructions { get; set; } 
         /// <summary>
         /// A list of all unique materials in the model. This includes materials needed to make the Model constructions.
         /// </summary>
         /// <value>A list of all unique materials in the model. This includes materials needed to make the Model constructions.</value>
+        [Summary(@"A list of all unique materials in the model. This includes materials needed to make the Model constructions.")]
         [DataMember(Name = "materials")]
         public List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyMaterialVegetation,EnergyWindowMaterialGlazing,EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialGas,EnergyWindowMaterialGasMixture,EnergyWindowMaterialGasCustom,EnergyWindowFrame,EnergyWindowMaterialBlind,EnergyWindowMaterialShade>> Materials { get; set; } 
         /// <summary>
         /// List of all unique HVAC systems in the Model.
         /// </summary>
         /// <value>List of all unique HVAC systems in the Model.</value>
+        [Summary(@"List of all unique HVAC systems in the Model.")]
         [DataMember(Name = "hvacs")]
         public List<AnyOf<IdealAirSystemAbridged,VAV,PVAV,PSZ,PTAC,ForcedAirFurnace,FCUwithDOASAbridged,WSHPwithDOASAbridged,VRFwithDOASAbridged,RadiantwithDOASAbridged,FCU,WSHP,VRF,Baseboard,EvaporativeCooler,Residential,WindowAC,GasUnitHeater,Radiant>> Hvacs { get; set; } 
         /// <summary>
         /// List of all unique Service Hot Water (SHW) systems in the Model.
         /// </summary>
         /// <value>List of all unique Service Hot Water (SHW) systems in the Model.</value>
+        [Summary(@"List of all unique Service Hot Water (SHW) systems in the Model.")]
         [DataMember(Name = "shws")]
         public List<SHWSystem> Shws { get; set; } 
         /// <summary>
         /// List of all unique ProgramTypes in the Model.
         /// </summary>
         /// <value>List of all unique ProgramTypes in the Model.</value>
+        [Summary(@"List of all unique ProgramTypes in the Model.")]
         [DataMember(Name = "program_types")]
         public List<AnyOf<ProgramTypeAbridged,ProgramType>> ProgramTypes { get; set; } 
         /// <summary>
         /// A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades.
         /// </summary>
         /// <value>A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades.</value>
+        [Summary(@"A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades.")]
         [DataMember(Name = "schedules")]
         public List<AnyOf<ScheduleRulesetAbridged,ScheduleFixedIntervalAbridged,ScheduleRuleset,ScheduleFixedInterval>> Schedules { get; set; } 
         /// <summary>
         /// A list of all unique ScheduleTypeLimits in the model. This all ScheduleTypeLimits needed to make the Model schedules.
         /// </summary>
         /// <value>A list of all unique ScheduleTypeLimits in the model. This all ScheduleTypeLimits needed to make the Model schedules.</value>
+        [Summary(@"A list of all unique ScheduleTypeLimits in the model. This all ScheduleTypeLimits needed to make the Model schedules.")]
         [DataMember(Name = "schedule_type_limits")]
         public List<ScheduleTypeLimit> ScheduleTypeLimits { get; set; } 
         /// <summary>
         /// An optional parameter to define the global parameters for a ventilation cooling.
         /// </summary>
         /// <value>An optional parameter to define the global parameters for a ventilation cooling.</value>
+        [Summary(@"An optional parameter to define the global parameters for a ventilation cooling.")]
         [DataMember(Name = "ventilation_simulation_control")]
         public VentilationSimulationControl VentilationSimulationControl { get; set; } 
 

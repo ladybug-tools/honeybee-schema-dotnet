@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify heating and cooling sizing criteria and safety factors.
     /// </summary>
+    [Summary(@"Used to specify heating and cooling sizing criteria and safety factors.")]
     [Serializable]
     [DataContract(Name = "SizingParameter")]
     public partial class SizingParameter : OpenAPIGenBaseModel, IEquatable<SizingParameter>, IValidatableObject
@@ -58,6 +59,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "SizingParameter";
 
@@ -65,18 +67,21 @@ namespace HoneybeeSchema
         /// A list of DesignDays that represent the criteria for which the HVAC systems will be sized.
         /// </summary>
         /// <value>A list of DesignDays that represent the criteria for which the HVAC systems will be sized.</value>
+        [Summary(@"A list of DesignDays that represent the criteria for which the HVAC systems will be sized.")]
         [DataMember(Name = "design_days")]
         public List<DesignDay> DesignDays { get; set; } 
         /// <summary>
         /// A number that will be multiplied by the peak heating load for each zone in order to size the heating system.
         /// </summary>
         /// <value>A number that will be multiplied by the peak heating load for each zone in order to size the heating system.</value>
+        [Summary(@"A number that will be multiplied by the peak heating load for each zone in order to size the heating system.")]
         [DataMember(Name = "heating_factor")]
         public double HeatingFactor { get; set; }  = 1.25D;
         /// <summary>
         /// A number that will be multiplied by the peak cooling load for each zone in order to size the heating system.
         /// </summary>
         /// <value>A number that will be multiplied by the peak cooling load for each zone in order to size the heating system.</value>
+        [Summary(@"A number that will be multiplied by the peak cooling load for each zone in order to size the heating system.")]
         [DataMember(Name = "cooling_factor")]
         public double CoolingFactor { get; set; }  = 1.15D;
 

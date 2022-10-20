@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Construction for window objects (Aperture, Door).
     /// </summary>
+    [Summary(@"Construction for window objects (Aperture, Door).")]
     [Serializable]
     [DataContract(Name = "WindowConstruction")]
     public partial class WindowConstruction : IDdEnergyBaseModel, IEquatable<WindowConstruction>, IValidatableObject
@@ -70,6 +71,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "WindowConstruction";
 
@@ -77,12 +79,14 @@ namespace HoneybeeSchema
         /// List of glazing and gas material definitions. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.
         /// </summary>
         /// <value>List of glazing and gas material definitions. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.</value>
+        [Summary(@"List of glazing and gas material definitions. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.")]
         [DataMember(Name = "materials", IsRequired = true)]
         public List<AnyOf<EnergyWindowMaterialSimpleGlazSys,EnergyWindowMaterialGlazing,EnergyWindowMaterialGas,EnergyWindowMaterialGasCustom,EnergyWindowMaterialGasMixture>> Materials { get; set; } 
         /// <summary>
         /// An optional window frame material for the frame that surrounds the window construction.
         /// </summary>
         /// <value>An optional window frame material for the frame that surrounds the window construction.</value>
+        [Summary(@"An optional window frame material for the frame that surrounds the window construction.")]
         [DataMember(Name = "frame")]
         public EnergyWindowFrame Frame { get; set; } 
 

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Baseboard heating system.  Baseboard systems are intended for spaces only requiring heating and no ventilation or cooling. Each room/zone will get its own baseboard heating unit that satisfies the heating load.
     /// </summary>
+    [Summary(@"Baseboard heating system.  Baseboard systems are intended for spaces only requiring heating and no ventilation or cooling. Each room/zone will get its own baseboard heating unit that satisfies the heating load.")]
     [Serializable]
     [DataContract(Name = "Baseboard")]
     public partial class Baseboard : IDdEnergyBaseModel, IEquatable<Baseboard>, IValidatableObject
@@ -81,6 +82,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Baseboard";
 

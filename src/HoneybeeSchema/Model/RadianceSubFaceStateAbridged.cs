@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door.     
     /// </summary>
+    [Summary(@"RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door.     ")]
     [Serializable]
     [DataContract(Name = "RadianceSubFaceStateAbridged")]
     public partial class RadianceSubFaceStateAbridged : RadianceShadeStateAbridged, IEquatable<RadianceSubFaceStateAbridged>, IValidatableObject
@@ -59,6 +60,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "RadianceSubFaceStateAbridged";
 
@@ -66,12 +68,14 @@ namespace HoneybeeSchema
         /// A Face3D for the view matrix geometry (default: None).
         /// </summary>
         /// <value>A Face3D for the view matrix geometry (default: None).</value>
+        [Summary(@"A Face3D for the view matrix geometry (default: None).")]
         [DataMember(Name = "vmtx_geometry")]
         public Face3D VmtxGeometry { get; set; } 
         /// <summary>
         /// A Face3D for the daylight matrix geometry (default: None).
         /// </summary>
         /// <value>A Face3D for the daylight matrix geometry (default: None).</value>
+        [Summary(@"A Face3D for the daylight matrix geometry (default: None).")]
         [DataMember(Name = "dmtx_geometry")]
         public Face3D DmtxGeometry { get; set; } 
 

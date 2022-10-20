@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
+    [Summary(@"Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.")]
     [Serializable]
     [DataContract(Name = "RoomEnergyPropertiesAbridged")]
     public partial class RoomEnergyPropertiesAbridged : OpenAPIGenBaseModel, IEquatable<RoomEnergyPropertiesAbridged>, IValidatableObject
@@ -84,6 +85,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "RoomEnergyPropertiesAbridged";
 
@@ -91,96 +93,112 @@ namespace HoneybeeSchema
         /// Identifier of a ConstructionSet to specify all default constructions for the Faces, Apertures, and Doors of the Room. If None, the Room will use the Model global_construction_set.
         /// </summary>
         /// <value>Identifier of a ConstructionSet to specify all default constructions for the Faces, Apertures, and Doors of the Room. If None, the Room will use the Model global_construction_set.</value>
+        [Summary(@"Identifier of a ConstructionSet to specify all default constructions for the Faces, Apertures, and Doors of the Room. If None, the Room will use the Model global_construction_set.")]
         [DataMember(Name = "construction_set")]
         public string ConstructionSet { get; set; } 
         /// <summary>
         /// Identifier of a ProgramType to specify all default schedules and loads for the Room. If None, the Room will have no loads or setpoints.
         /// </summary>
         /// <value>Identifier of a ProgramType to specify all default schedules and loads for the Room. If None, the Room will have no loads or setpoints.</value>
+        [Summary(@"Identifier of a ProgramType to specify all default schedules and loads for the Room. If None, the Room will have no loads or setpoints.")]
         [DataMember(Name = "program_type")]
         public string ProgramType { get; set; } 
         /// <summary>
         /// An optional identifier of a HVAC system (such as an IdealAirSystem) that specifies how the Room is conditioned. If None, it will be assumed that the Room is not conditioned.
         /// </summary>
         /// <value>An optional identifier of a HVAC system (such as an IdealAirSystem) that specifies how the Room is conditioned. If None, it will be assumed that the Room is not conditioned.</value>
+        [Summary(@"An optional identifier of a HVAC system (such as an IdealAirSystem) that specifies how the Room is conditioned. If None, it will be assumed that the Room is not conditioned.")]
         [DataMember(Name = "hvac")]
         public string Hvac { get; set; } 
         /// <summary>
         /// An optional identifier of a Service Hot Water (SHW) system that specifies how the hot water load of the Room is met. If None, the hot water load will be met with a generic system that only measures thermal loadand does not account for system efficiencies.
         /// </summary>
         /// <value>An optional identifier of a Service Hot Water (SHW) system that specifies how the hot water load of the Room is met. If None, the hot water load will be met with a generic system that only measures thermal loadand does not account for system efficiencies.</value>
+        [Summary(@"An optional identifier of a Service Hot Water (SHW) system that specifies how the hot water load of the Room is met. If None, the hot water load will be met with a generic system that only measures thermal loadand does not account for system efficiencies.")]
         [DataMember(Name = "shw")]
         public string Shw { get; set; } 
         /// <summary>
         /// People object to describe the occupancy of the Room.
         /// </summary>
         /// <value>People object to describe the occupancy of the Room.</value>
+        [Summary(@"People object to describe the occupancy of the Room.")]
         [DataMember(Name = "people")]
         public PeopleAbridged People { get; set; } 
         /// <summary>
         /// Lighting object to describe the lighting usage of the Room.
         /// </summary>
         /// <value>Lighting object to describe the lighting usage of the Room.</value>
+        [Summary(@"Lighting object to describe the lighting usage of the Room.")]
         [DataMember(Name = "lighting")]
         public LightingAbridged Lighting { get; set; } 
         /// <summary>
         /// ElectricEquipment object to describe the electric equipment usage.
         /// </summary>
         /// <value>ElectricEquipment object to describe the electric equipment usage.</value>
+        [Summary(@"ElectricEquipment object to describe the electric equipment usage.")]
         [DataMember(Name = "electric_equipment")]
         public ElectricEquipmentAbridged ElectricEquipment { get; set; } 
         /// <summary>
         /// GasEquipment object to describe the gas equipment usage.
         /// </summary>
         /// <value>GasEquipment object to describe the gas equipment usage.</value>
+        [Summary(@"GasEquipment object to describe the gas equipment usage.")]
         [DataMember(Name = "gas_equipment")]
         public GasEquipmentAbridged GasEquipment { get; set; } 
         /// <summary>
         /// ServiceHotWater object to describe the hot water usage.
         /// </summary>
         /// <value>ServiceHotWater object to describe the hot water usage.</value>
+        [Summary(@"ServiceHotWater object to describe the hot water usage.")]
         [DataMember(Name = "service_hot_water")]
         public ServiceHotWaterAbridged ServiceHotWater { get; set; } 
         /// <summary>
         /// Infiltration object to to describe the outdoor air leakage.
         /// </summary>
         /// <value>Infiltration object to to describe the outdoor air leakage.</value>
+        [Summary(@"Infiltration object to to describe the outdoor air leakage.")]
         [DataMember(Name = "infiltration")]
         public InfiltrationAbridged Infiltration { get; set; } 
         /// <summary>
         /// Ventilation object for the minimum outdoor air requirement.
         /// </summary>
         /// <value>Ventilation object for the minimum outdoor air requirement.</value>
+        [Summary(@"Ventilation object for the minimum outdoor air requirement.")]
         [DataMember(Name = "ventilation")]
         public VentilationAbridged Ventilation { get; set; } 
         /// <summary>
         /// Setpoint object for the temperature setpoints of the Room.
         /// </summary>
         /// <value>Setpoint object for the temperature setpoints of the Room.</value>
+        [Summary(@"Setpoint object for the temperature setpoints of the Room.")]
         [DataMember(Name = "setpoint")]
         public SetpointAbridged Setpoint { get; set; } 
         /// <summary>
         /// An optional DaylightingControl object to dictate the dimming of lights. If None, the lighting will respond only to the schedule and not the daylight conditions within the room.
         /// </summary>
         /// <value>An optional DaylightingControl object to dictate the dimming of lights. If None, the lighting will respond only to the schedule and not the daylight conditions within the room.</value>
+        [Summary(@"An optional DaylightingControl object to dictate the dimming of lights. If None, the lighting will respond only to the schedule and not the daylight conditions within the room.")]
         [DataMember(Name = "daylighting_control")]
         public DaylightingControl DaylightingControl { get; set; } 
         /// <summary>
         /// An optional VentilationControl object to dictate the opening of windows. If None, the windows will never open.
         /// </summary>
         /// <value>An optional VentilationControl object to dictate the opening of windows. If None, the windows will never open.</value>
+        [Summary(@"An optional VentilationControl object to dictate the opening of windows. If None, the windows will never open.")]
         [DataMember(Name = "window_vent_control")]
         public VentilationControlAbridged WindowVentControl { get; set; } 
         /// <summary>
         /// An optional list of of InternalMass objects for thermal mass exposed to Room air. Note that internal masses assigned this way cannot \&quot;see\&quot; solar radiation that may potentially hit them and, as such, caution should be taken when using this component with internal mass objects that are not always in shade. Masses are factored into the the thermal calculations of the Room by undergoing heat transfer with the indoor air.
         /// </summary>
         /// <value>An optional list of of InternalMass objects for thermal mass exposed to Room air. Note that internal masses assigned this way cannot \&quot;see\&quot; solar radiation that may potentially hit them and, as such, caution should be taken when using this component with internal mass objects that are not always in shade. Masses are factored into the the thermal calculations of the Room by undergoing heat transfer with the indoor air.</value>
+        [Summary(@"An optional list of of InternalMass objects for thermal mass exposed to Room air. Note that internal masses assigned this way cannot \&quot;see\&quot; solar radiation that may potentially hit them and, as such, caution should be taken when using this component with internal mass objects that are not always in shade. Masses are factored into the the thermal calculations of the Room by undergoing heat transfer with the indoor air.")]
         [DataMember(Name = "internal_masses")]
         public List<InternalMassAbridged> InternalMasses { get; set; } 
         /// <summary>
         /// An optional list of of Process objects for process loads within the room. These can represent kilns, manufacturing equipment, and various industrial processes. They can also be used to represent wood burning fireplaces or certain pieces of equipment to be separated from the other end uses.
         /// </summary>
         /// <value>An optional list of of Process objects for process loads within the room. These can represent kilns, manufacturing equipment, and various industrial processes. They can also be used to represent wood burning fireplaces or certain pieces of equipment to be separated from the other end uses.</value>
+        [Summary(@"An optional list of of Process objects for process loads within the room. These can represent kilns, manufacturing equipment, and various industrial processes. They can also be used to represent wood burning fireplaces or certain pieces of equipment to be separated from the other end uses.")]
         [DataMember(Name = "process_loads")]
         public List<ProcessAbridged> ProcessLoads { get; set; } 
 

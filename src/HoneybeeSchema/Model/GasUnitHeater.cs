@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Gas unit heating system.  Gas unit systems are intended for spaces only requiring heating and no ventilation or cooling. Each room/zone will get its own gaa heating unit that satisfies the heating load.
     /// </summary>
+    [Summary(@"Gas unit heating system.  Gas unit systems are intended for spaces only requiring heating and no ventilation or cooling. Each room/zone will get its own gaa heating unit that satisfies the heating load.")]
     [Serializable]
     [DataContract(Name = "GasUnitHeater")]
     public partial class GasUnitHeater : IDdEnergyBaseModel, IEquatable<GasUnitHeater>, IValidatableObject
@@ -81,6 +82,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "GasUnitHeater";
 

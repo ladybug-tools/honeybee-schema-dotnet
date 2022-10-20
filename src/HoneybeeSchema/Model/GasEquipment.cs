@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring an EnergyPlus identifier and user_data.
     /// </summary>
+    [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
     [Serializable]
     [DataContract(Name = "GasEquipment")]
     public partial class GasEquipment : IDdEnergyBaseModel, IEquatable<GasEquipment>, IValidatableObject
@@ -76,6 +77,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "GasEquipment";
 
@@ -83,30 +85,35 @@ namespace HoneybeeSchema
         /// Equipment level per floor area as [W/m2].
         /// </summary>
         /// <value>Equipment level per floor area as [W/m2].</value>
+        [Summary(@"Equipment level per floor area as [W/m2].")]
         [DataMember(Name = "watts_per_area", IsRequired = true)]
         public double WattsPerArea { get; set; } 
         /// <summary>
         /// The schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.
         /// </summary>
         /// <value>The schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.</value>
+        [Summary(@"The schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.")]
         [DataMember(Name = "schedule", IsRequired = true)]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; } 
         /// <summary>
         /// Number for the amount of long-wave radiation heat given off by equipment. Default value is 0.
         /// </summary>
         /// <value>Number for the amount of long-wave radiation heat given off by equipment. Default value is 0.</value>
+        [Summary(@"Number for the amount of long-wave radiation heat given off by equipment. Default value is 0.")]
         [DataMember(Name = "radiant_fraction")]
         public double RadiantFraction { get; set; }  = 0D;
         /// <summary>
         /// Number for the amount of latent heat given off by equipment. Default value is 0.
         /// </summary>
         /// <value>Number for the amount of latent heat given off by equipment. Default value is 0.</value>
+        [Summary(@"Number for the amount of latent heat given off by equipment. Default value is 0.")]
         [DataMember(Name = "latent_fraction")]
         public double LatentFraction { get; set; }  = 0D;
         /// <summary>
         /// Number for the amount of “lost” heat being given off by equipment. The default value is 0.
         /// </summary>
         /// <value>Number for the amount of “lost” heat being given off by equipment. The default value is 0.</value>
+        [Summary(@"Number for the amount of “lost” heat being given off by equipment. The default value is 0.")]
         [DataMember(Name = "lost_fraction")]
         public double LostFraction { get; set; }  = 0D;
 

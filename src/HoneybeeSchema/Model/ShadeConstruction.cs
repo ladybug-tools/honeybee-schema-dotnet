@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Construction for Shade objects.
     /// </summary>
+    [Summary(@"Construction for Shade objects.")]
     [Serializable]
     [DataContract(Name = "ShadeConstruction")]
     public partial class ShadeConstruction : IDdEnergyBaseModel, IEquatable<ShadeConstruction>, IValidatableObject
@@ -71,6 +72,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ShadeConstruction";
 
@@ -78,18 +80,21 @@ namespace HoneybeeSchema
         /// A number for the solar reflectance of the construction.
         /// </summary>
         /// <value>A number for the solar reflectance of the construction.</value>
+        [Summary(@"A number for the solar reflectance of the construction.")]
         [DataMember(Name = "solar_reflectance")]
         public double SolarReflectance { get; set; }  = 0.2D;
         /// <summary>
         /// A number for the visible reflectance of the construction.
         /// </summary>
         /// <value>A number for the visible reflectance of the construction.</value>
+        [Summary(@"A number for the visible reflectance of the construction.")]
         [DataMember(Name = "visible_reflectance")]
         public double VisibleReflectance { get; set; }  = 0.2D;
         /// <summary>
         /// Boolean to note whether the reflection off the shade is diffuse (False) or specular (True). Set to True if the construction is representing a glass facade or a mirror material.
         /// </summary>
         /// <value>Boolean to note whether the reflection off the shade is diffuse (False) or specular (True). Set to True if the construction is representing a glass facade or a mirror material.</value>
+        [Summary(@"Boolean to note whether the reflection off the shade is diffuse (False) or specular (True). Set to True if the construction is representing a glass facade or a mirror material.")]
         [DataMember(Name = "is_specular")]
         public bool IsSpecular { get; set; }  = false;
 

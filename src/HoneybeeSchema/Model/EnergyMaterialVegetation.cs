@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Material representing vegetation on the exterior of an opaque construction.
     /// </summary>
+    [Summary(@"Material representing vegetation on the exterior of an opaque construction.")]
     [Serializable]
     [DataContract(Name = "EnergyMaterialVegetation")]
     public partial class EnergyMaterialVegetation : IDdEnergyBaseModel, IEquatable<EnergyMaterialVegetation>, IValidatableObject
@@ -109,6 +110,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "EnergyMaterialVegetation";
 
@@ -116,90 +118,105 @@ namespace HoneybeeSchema
         /// Thickness of the soil layer in meters.
         /// </summary>
         /// <value>Thickness of the soil layer in meters.</value>
+        [Summary(@"Thickness of the soil layer in meters.")]
         [DataMember(Name = "thickness")]
         public double Thickness { get; set; }  = 0.1D;
         /// <summary>
         /// Thermal conductivity of the dry soil in W/m-K.
         /// </summary>
         /// <value>Thermal conductivity of the dry soil in W/m-K.</value>
+        [Summary(@"Thermal conductivity of the dry soil in W/m-K.")]
         [DataMember(Name = "conductivity")]
         public double Conductivity { get; set; }  = 0.35D;
         /// <summary>
         /// Density of the dry soil in kg/m3.
         /// </summary>
         /// <value>Density of the dry soil in kg/m3.</value>
+        [Summary(@"Density of the dry soil in kg/m3.")]
         [DataMember(Name = "density")]
         public double Density { get; set; }  = 1100D;
         /// <summary>
         /// Specific heat of the dry soil in J/kg-K.
         /// </summary>
         /// <value>Specific heat of the dry soil in J/kg-K.</value>
+        [Summary(@"Specific heat of the dry soil in J/kg-K.")]
         [DataMember(Name = "specific_heat")]
         public double SpecificHeat { get; set; }  = 1200D;
         /// <summary>
         /// Fraction of incident long wavelength radiation that is absorbed by the soil. Default: 0.9.
         /// </summary>
         /// <value>Fraction of incident long wavelength radiation that is absorbed by the soil. Default: 0.9.</value>
+        [Summary(@"Fraction of incident long wavelength radiation that is absorbed by the soil. Default: 0.9.")]
         [DataMember(Name = "soil_thermal_absorptance")]
         public double SoilThermalAbsorptance { get; set; }  = 0.9D;
         /// <summary>
         /// Fraction of incident solar radiation absorbed by the soil. Default: 0.7.
         /// </summary>
         /// <value>Fraction of incident solar radiation absorbed by the soil. Default: 0.7.</value>
+        [Summary(@"Fraction of incident solar radiation absorbed by the soil. Default: 0.7.")]
         [DataMember(Name = "soil_solar_absorptance")]
         public double SoilSolarAbsorptance { get; set; }  = 0.7D;
         /// <summary>
         /// Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7.
         /// </summary>
         /// <value>Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7.</value>
+        [Summary(@"Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7.")]
         [DataMember(Name = "soil_visible_absorptance")]
         public double SoilVisibleAbsorptance { get; set; }  = 0.7D;
         /// <summary>
         /// The height of plants in the vegetation in meters.
         /// </summary>
         /// <value>The height of plants in the vegetation in meters.</value>
+        [Summary(@"The height of plants in the vegetation in meters.")]
         [DataMember(Name = "plant_height")]
         public double PlantHeight { get; set; }  = 0.2D;
         /// <summary>
         /// The projected leaf area per unit area of soil surface (aka. Leaf Area Index or LAI). Note that the fraction of vegetation cover is calculated directly from LAI using an empirical relation.
         /// </summary>
         /// <value>The projected leaf area per unit area of soil surface (aka. Leaf Area Index or LAI). Note that the fraction of vegetation cover is calculated directly from LAI using an empirical relation.</value>
+        [Summary(@"The projected leaf area per unit area of soil surface (aka. Leaf Area Index or LAI). Note that the fraction of vegetation cover is calculated directly from LAI using an empirical relation.")]
         [DataMember(Name = "leaf_area_index")]
         public double LeafAreaIndex { get; set; }  = 1.0D;
         /// <summary>
         /// The fraction of incident solar radiation that is reflected by the leaf surfaces. Solar radiation includes the visible spectrum as well as infrared and ultraviolet wavelengths. Typical values are 0.18 to 0.25.
         /// </summary>
         /// <value>The fraction of incident solar radiation that is reflected by the leaf surfaces. Solar radiation includes the visible spectrum as well as infrared and ultraviolet wavelengths. Typical values are 0.18 to 0.25.</value>
+        [Summary(@"The fraction of incident solar radiation that is reflected by the leaf surfaces. Solar radiation includes the visible spectrum as well as infrared and ultraviolet wavelengths. Typical values are 0.18 to 0.25.")]
         [DataMember(Name = "leaf_reflectivity")]
         public double LeafReflectivity { get; set; }  = 0.22D;
         /// <summary>
         /// The ratio of thermal radiation emitted from leaf surfaces to that emitted by an ideal black body at the same temperature.
         /// </summary>
         /// <value>The ratio of thermal radiation emitted from leaf surfaces to that emitted by an ideal black body at the same temperature.</value>
+        [Summary(@"The ratio of thermal radiation emitted from leaf surfaces to that emitted by an ideal black body at the same temperature.")]
         [DataMember(Name = "leaf_emissivity")]
         public double LeafEmissivity { get; set; }  = 0.95D;
         /// <summary>
         /// The resistance of the plants to moisture transport [s/m]. Plants with low values of stomatal resistance will result in higher evapotranspiration rates than plants with high resistance.
         /// </summary>
         /// <value>The resistance of the plants to moisture transport [s/m]. Plants with low values of stomatal resistance will result in higher evapotranspiration rates than plants with high resistance.</value>
+        [Summary(@"The resistance of the plants to moisture transport [s/m]. Plants with low values of stomatal resistance will result in higher evapotranspiration rates than plants with high resistance.")]
         [DataMember(Name = "min_stomatal_resist")]
         public double MinStomatalResist { get; set; }  = 180D;
         /// <summary>
         /// The saturation moisture content of the soil by volume.
         /// </summary>
         /// <value>The saturation moisture content of the soil by volume.</value>
+        [Summary(@"The saturation moisture content of the soil by volume.")]
         [DataMember(Name = "sat_vol_moist_cont")]
         public double SatVolMoistCont { get; set; }  = 0.3D;
         /// <summary>
         /// The residual moisture content of the soil by volume.
         /// </summary>
         /// <value>The residual moisture content of the soil by volume.</value>
+        [Summary(@"The residual moisture content of the soil by volume.")]
         [DataMember(Name = "residual_vol_moist_cont")]
         public double ResidualVolMoistCont { get; set; }  = 0.01D;
         /// <summary>
         /// The initial moisture content of the soil by volume.
         /// </summary>
         /// <value>The initial moisture content of the soil by volume.</value>
+        [Summary(@"The initial moisture content of the soil by volume.")]
         [DataMember(Name = "init_vol_moist_cont")]
         public double InitVolMoistCont { get; set; }  = 0.01D;
 

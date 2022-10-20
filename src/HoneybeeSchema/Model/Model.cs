@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
+    [Summary(@"Base class for all objects requiring a identifiers acceptable for all engines.")]
     [Serializable]
     [DataContract(Name = "Model")]
     public partial class Model : IDdBaseModel, IEquatable<Model>, IValidatableObject
@@ -92,6 +93,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Model";
         //============================================== is ReadOnly 
@@ -99,6 +101,7 @@ namespace HoneybeeSchema
         /// Text string for the current version of the schema.
         /// </summary>
         /// <value>Text string for the current version of the schema.</value>
+        [Summary(@"Text string for the current version of the schema.")]
         [DataMember(Name = "version")]
         public string Version { get; protected set; }  = "1.51.5";
 
@@ -106,48 +109,56 @@ namespace HoneybeeSchema
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
+        [Summary(@"Extension properties for particular simulation engines (Radiance, EnergyPlus).")]
         [DataMember(Name = "properties", IsRequired = true)]
         public ModelProperties Properties { get; set; } 
         /// <summary>
         /// A list of Rooms in the model.
         /// </summary>
         /// <value>A list of Rooms in the model.</value>
+        [Summary(@"A list of Rooms in the model.")]
         [DataMember(Name = "rooms")]
         public List<Room> Rooms { get; set; } 
         /// <summary>
         /// A list of Faces in the model that lack a parent Room. Note that orphaned Faces are not acceptable for Models that are to be exported for energy simulation.
         /// </summary>
         /// <value>A list of Faces in the model that lack a parent Room. Note that orphaned Faces are not acceptable for Models that are to be exported for energy simulation.</value>
+        [Summary(@"A list of Faces in the model that lack a parent Room. Note that orphaned Faces are not acceptable for Models that are to be exported for energy simulation.")]
         [DataMember(Name = "orphaned_faces")]
         public List<Face> OrphanedFaces { get; set; } 
         /// <summary>
         /// A list of Shades in the model that lack a parent.
         /// </summary>
         /// <value>A list of Shades in the model that lack a parent.</value>
+        [Summary(@"A list of Shades in the model that lack a parent.")]
         [DataMember(Name = "orphaned_shades")]
         public List<Shade> OrphanedShades { get; set; } 
         /// <summary>
         /// A list of Apertures in the model that lack a parent Face. Note that orphaned Apertures are not acceptable for Models that are to be exported for energy simulation.
         /// </summary>
         /// <value>A list of Apertures in the model that lack a parent Face. Note that orphaned Apertures are not acceptable for Models that are to be exported for energy simulation.</value>
+        [Summary(@"A list of Apertures in the model that lack a parent Face. Note that orphaned Apertures are not acceptable for Models that are to be exported for energy simulation.")]
         [DataMember(Name = "orphaned_apertures")]
         public List<Aperture> OrphanedApertures { get; set; } 
         /// <summary>
         /// A list of Doors in the model that lack a parent Face. Note that orphaned Doors are not acceptable for Models that are to be exported for energy simulation.
         /// </summary>
         /// <value>A list of Doors in the model that lack a parent Face. Note that orphaned Doors are not acceptable for Models that are to be exported for energy simulation.</value>
+        [Summary(@"A list of Doors in the model that lack a parent Face. Note that orphaned Doors are not acceptable for Models that are to be exported for energy simulation.")]
         [DataMember(Name = "orphaned_doors")]
         public List<Door> OrphanedDoors { get; set; } 
         /// <summary>
         /// The maximum difference between x, y, and z values at which vertices are considered equivalent. This value should be in the Model units and it is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a Model. The default of 0.01 is suitable for models in meters.
         /// </summary>
         /// <value>The maximum difference between x, y, and z values at which vertices are considered equivalent. This value should be in the Model units and it is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a Model. The default of 0.01 is suitable for models in meters.</value>
+        [Summary(@"The maximum difference between x, y, and z values at which vertices are considered equivalent. This value should be in the Model units and it is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a Model. The default of 0.01 is suitable for models in meters.")]
         [DataMember(Name = "tolerance")]
         public double Tolerance { get; set; }  = 0.01D;
         /// <summary>
         /// The max angle difference in degrees that vertices are allowed to differ from one another in order to consider them colinear. This value is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a given Model.
         /// </summary>
         /// <value>The max angle difference in degrees that vertices are allowed to differ from one another in order to consider them colinear. This value is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a given Model.</value>
+        [Summary(@"The max angle difference in degrees that vertices are allowed to differ from one another in order to consider them colinear. This value is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a given Model.")]
         [DataMember(Name = "angle_tolerance")]
         public double AngleTolerance { get; set; }  = 1.0D;
 

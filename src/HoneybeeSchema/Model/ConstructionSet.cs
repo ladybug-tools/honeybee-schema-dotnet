@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A set of constructions for different surface types and boundary conditions.
     /// </summary>
+    [Summary(@"A set of constructions for different surface types and boundary conditions.")]
     [Serializable]
     [DataContract(Name = "ConstructionSet")]
     public partial class ConstructionSet : IDdEnergyBaseModel, IEquatable<ConstructionSet>, IValidatableObject
@@ -79,6 +80,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ConstructionSet";
 
@@ -86,42 +88,49 @@ namespace HoneybeeSchema
         /// A WallConstructionSet object for this ConstructionSet.
         /// </summary>
         /// <value>A WallConstructionSet object for this ConstructionSet.</value>
+        [Summary(@"A WallConstructionSet object for this ConstructionSet.")]
         [DataMember(Name = "wall_set")]
         public WallConstructionSet WallSet { get; set; } 
         /// <summary>
         /// A FloorConstructionSet object for this ConstructionSet.
         /// </summary>
         /// <value>A FloorConstructionSet object for this ConstructionSet.</value>
+        [Summary(@"A FloorConstructionSet object for this ConstructionSet.")]
         [DataMember(Name = "floor_set")]
         public FloorConstructionSet FloorSet { get; set; } 
         /// <summary>
         /// A RoofCeilingConstructionSet object for this ConstructionSet.
         /// </summary>
         /// <value>A RoofCeilingConstructionSet object for this ConstructionSet.</value>
+        [Summary(@"A RoofCeilingConstructionSet object for this ConstructionSet.")]
         [DataMember(Name = "roof_ceiling_set")]
         public RoofCeilingConstructionSet RoofCeilingSet { get; set; } 
         /// <summary>
         /// A ApertureConstructionSet object for this ConstructionSet.
         /// </summary>
         /// <value>A ApertureConstructionSet object for this ConstructionSet.</value>
+        [Summary(@"A ApertureConstructionSet object for this ConstructionSet.")]
         [DataMember(Name = "aperture_set")]
         public ApertureConstructionSet ApertureSet { get; set; } 
         /// <summary>
         /// A DoorConstructionSet object for this ConstructionSet.
         /// </summary>
         /// <value>A DoorConstructionSet object for this ConstructionSet.</value>
+        [Summary(@"A DoorConstructionSet object for this ConstructionSet.")]
         [DataMember(Name = "door_set")]
         public DoorConstructionSet DoorSet { get; set; } 
         /// <summary>
         /// A ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned.
         /// </summary>
         /// <value>A ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned.</value>
+        [Summary(@"A ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned.")]
         [DataMember(Name = "shade_construction")]
         public ShadeConstruction ShadeConstruction { get; set; } 
         /// <summary>
         /// An AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type.
         /// </summary>
         /// <value>An AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type.</value>
+        [Summary(@"An AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type.")]
         [DataMember(Name = "air_boundary_construction")]
         public AnyOf<AirBoundaryConstruction,OpaqueConstruction> AirBoundaryConstruction { get; set; } 
 

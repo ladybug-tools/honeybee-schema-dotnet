@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
+    [Summary(@"Base class for all objects requiring a identifiers acceptable for all engines.")]
     [Serializable]
     [DataContract(Name = "Face")]
     public partial class Face : IDdBaseModel, IEquatable<Face>, IValidatableObject
@@ -89,6 +90,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Face";
 
@@ -96,41 +98,48 @@ namespace HoneybeeSchema
         /// Planar Face3D for the geometry.
         /// </summary>
         /// <value>Planar Face3D for the geometry.</value>
+        [Summary(@"Planar Face3D for the geometry.")]
         [DataMember(Name = "geometry", IsRequired = true)]
         public Face3D Geometry { get; set; } 
         /// <summary>
         /// Gets or Sets BoundaryCondition
         /// </summary>
+        [Summary(@"BoundaryCondition")]
         [DataMember(Name = "boundary_condition", IsRequired = true)]
         public AnyOf<Ground,Outdoors,Adiabatic,Surface,OtherSideTemperature> BoundaryCondition { get; set; } 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
         /// <value>Extension properties for particular simulation engines (Radiance, EnergyPlus).</value>
+        [Summary(@"Extension properties for particular simulation engines (Radiance, EnergyPlus).")]
         [DataMember(Name = "properties", IsRequired = true)]
         public FacePropertiesAbridged Properties { get; set; } 
         /// <summary>
         /// Apertures assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid.
         /// </summary>
         /// <value>Apertures assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid.</value>
+        [Summary(@"Apertures assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid.")]
         [DataMember(Name = "apertures")]
         public List<Aperture> Apertures { get; set; } 
         /// <summary>
         /// Doors assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid.
         /// </summary>
         /// <value>Doors assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid.</value>
+        [Summary(@"Doors assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid.")]
         [DataMember(Name = "doors")]
         public List<Door> Doors { get; set; } 
         /// <summary>
         /// Shades assigned to the interior side of this object.
         /// </summary>
         /// <value>Shades assigned to the interior side of this object.</value>
+        [Summary(@"Shades assigned to the interior side of this object.")]
         [DataMember(Name = "indoor_shades")]
         public List<Shade> IndoorShades { get; set; } 
         /// <summary>
         /// Shades assigned to the exterior side of this object (eg. balcony, overhang).
         /// </summary>
         /// <value>Shades assigned to the exterior side of this object (eg. balcony, overhang).</value>
+        [Summary(@"Shades assigned to the exterior side of this object (eg. balcony, overhang).")]
         [DataMember(Name = "outdoor_shades")]
         public List<Shade> OutdoorShades { get; set; } 
 

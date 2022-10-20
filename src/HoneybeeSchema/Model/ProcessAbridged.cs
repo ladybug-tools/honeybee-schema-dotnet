@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring an EnergyPlus identifier and user_data.
     /// </summary>
+    [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
     [Serializable]
     [DataContract(Name = "ProcessAbridged")]
     public partial class ProcessAbridged : IDdEnergyBaseModel, IEquatable<ProcessAbridged>, IValidatableObject
@@ -87,6 +88,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ProcessAbridged";
 
@@ -94,36 +96,42 @@ namespace HoneybeeSchema
         /// A number for the process load power in Watts.
         /// </summary>
         /// <value>A number for the process load power in Watts.</value>
+        [Summary(@"A number for the process load power in Watts.")]
         [DataMember(Name = "watts", IsRequired = true)]
         public double Watts { get; set; } 
         /// <summary>
         /// Identifier of the schedule for the use of the process over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts to yield a complete equipment profile.
         /// </summary>
         /// <value>Identifier of the schedule for the use of the process over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts to yield a complete equipment profile.</value>
+        [Summary(@"Identifier of the schedule for the use of the process over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts to yield a complete equipment profile.")]
         [DataMember(Name = "schedule", IsRequired = true)]
         public string Schedule { get; set; } 
         /// <summary>
         /// Text to indicate the end-use subcategory, which will identify the process load in the end use output. For example, “Cooking”, “Clothes Drying”, etc. A new meter for reporting is created for each unique subcategory.
         /// </summary>
         /// <value>Text to indicate the end-use subcategory, which will identify the process load in the end use output. For example, “Cooking”, “Clothes Drying”, etc. A new meter for reporting is created for each unique subcategory.</value>
+        [Summary(@"Text to indicate the end-use subcategory, which will identify the process load in the end use output. For example, “Cooking”, “Clothes Drying”, etc. A new meter for reporting is created for each unique subcategory.")]
         [DataMember(Name = "end_use_category")]
         public string EndUseCategory { get; set; }  = "Process";
         /// <summary>
         /// Number for the amount of long-wave radiation heat given off by the process load. Default value is 0.
         /// </summary>
         /// <value>Number for the amount of long-wave radiation heat given off by the process load. Default value is 0.</value>
+        [Summary(@"Number for the amount of long-wave radiation heat given off by the process load. Default value is 0.")]
         [DataMember(Name = "radiant_fraction")]
         public double RadiantFraction { get; set; }  = 0D;
         /// <summary>
         /// Number for the amount of latent heat given off by the process load. Default value is 0.
         /// </summary>
         /// <value>Number for the amount of latent heat given off by the process load. Default value is 0.</value>
+        [Summary(@"Number for the amount of latent heat given off by the process load. Default value is 0.")]
         [DataMember(Name = "latent_fraction")]
         public double LatentFraction { get; set; }  = 0D;
         /// <summary>
         /// Number for the amount of “lost” heat being given off by the process load. The default value is 0.
         /// </summary>
         /// <value>Number for the amount of “lost” heat being given off by the process load. The default value is 0.</value>
+        [Summary(@"Number for the amount of “lost” heat being given off by the process load. The default value is 0.")]
         [DataMember(Name = "lost_fraction")]
         public double LostFraction { get; set; }  = 0D;
 

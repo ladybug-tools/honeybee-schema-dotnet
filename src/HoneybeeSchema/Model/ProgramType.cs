@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring an EnergyPlus identifier and user_data.
     /// </summary>
+    [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
     [Serializable]
     [DataContract(Name = "ProgramType")]
     public partial class ProgramType : IDdEnergyBaseModel, IEquatable<ProgramType>, IValidatableObject
@@ -81,6 +82,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ProgramType";
 
@@ -88,48 +90,56 @@ namespace HoneybeeSchema
         /// People to describe the occupancy of the program. If None, no occupancy will be assumed for the program.
         /// </summary>
         /// <value>People to describe the occupancy of the program. If None, no occupancy will be assumed for the program.</value>
+        [Summary(@"People to describe the occupancy of the program. If None, no occupancy will be assumed for the program.")]
         [DataMember(Name = "people")]
         public People People { get; set; } 
         /// <summary>
         /// Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program.
         /// </summary>
         /// <value>Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program.</value>
+        [Summary(@"Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program.")]
         [DataMember(Name = "lighting")]
         public Lighting Lighting { get; set; } 
         /// <summary>
         /// ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed.
         /// </summary>
         /// <value>ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed.</value>
+        [Summary(@"ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed.")]
         [DataMember(Name = "electric_equipment")]
         public ElectricEquipment ElectricEquipment { get; set; } 
         /// <summary>
         /// GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed.
         /// </summary>
         /// <value>GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed.</value>
+        [Summary(@"GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed.")]
         [DataMember(Name = "gas_equipment")]
         public GasEquipment GasEquipment { get; set; } 
         /// <summary>
         /// ServiceHotWater object to describe the usage of hot water within the program. If None, no hot water will be assumed.
         /// </summary>
         /// <value>ServiceHotWater object to describe the usage of hot water within the program. If None, no hot water will be assumed.</value>
+        [Summary(@"ServiceHotWater object to describe the usage of hot water within the program. If None, no hot water will be assumed.")]
         [DataMember(Name = "service_hot_water")]
         public ServiceHotWater ServiceHotWater { get; set; } 
         /// <summary>
         /// Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program.
         /// </summary>
         /// <value>Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program.</value>
+        [Summary(@"Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program.")]
         [DataMember(Name = "infiltration")]
         public Infiltration Infiltration { get; set; } 
         /// <summary>
         /// Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed.
         /// </summary>
         /// <value>Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed.</value>
+        [Summary(@"Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed.")]
         [DataMember(Name = "ventilation")]
         public Ventilation Ventilation { get; set; } 
         /// <summary>
         /// Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.
         /// </summary>
         /// <value>Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.</value>
+        [Summary(@"Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.")]
         [DataMember(Name = "setpoint")]
         public Setpoint Setpoint { get; set; } 
 

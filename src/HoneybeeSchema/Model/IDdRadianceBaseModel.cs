@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring a valid Radiance identifier.
     /// </summary>
+    [Summary(@"Base class for all objects requiring a valid Radiance identifier.")]
     [Serializable]
     [DataContract(Name = "IDdRadianceBaseModel")]
     public partial class IDdRadianceBaseModel : OpenAPIGenBaseModel, IEquatable<IDdRadianceBaseModel>, IValidatableObject
@@ -67,6 +68,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "IDdRadianceBaseModel";
 
@@ -74,12 +76,14 @@ namespace HoneybeeSchema
         /// Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.
         /// </summary>
         /// <value>Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.</value>
+        [Summary(@"Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.")]
         [DataMember(Name = "identifier", IsRequired = true)]
         public string Identifier { get; set; } 
         /// <summary>
         /// Display name of the object with no character restrictions.
         /// </summary>
         /// <value>Display name of the object with no character restrictions.</value>
+        [Summary(@"Display name of the object with no character restrictions.")]
         [DataMember(Name = "display_name")]
         public string DisplayName { get; set; } 
 

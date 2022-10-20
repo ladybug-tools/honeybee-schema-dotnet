@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to describe settings for EnergyPlus shadow calculation.
     /// </summary>
+    [Summary(@"Used to describe settings for EnergyPlus shadow calculation.")]
     [Serializable]
     [DataContract(Name = "ShadowCalculation")]
     public partial class ShadowCalculation : OpenAPIGenBaseModel, IEquatable<ShadowCalculation>, IValidatableObject
@@ -79,6 +80,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ShadowCalculation";
 
@@ -86,12 +88,14 @@ namespace HoneybeeSchema
         /// Integer for the number of days in each period for which a unique shadow calculation will be performed. This field is only used if the Periodic calculation_method is used.
         /// </summary>
         /// <value>Integer for the number of days in each period for which a unique shadow calculation will be performed. This field is only used if the Periodic calculation_method is used.</value>
+        [Summary(@"Integer for the number of days in each period for which a unique shadow calculation will be performed. This field is only used if the Periodic calculation_method is used.")]
         [DataMember(Name = "calculation_frequency")]
         public int CalculationFrequency { get; set; }  = 30;
         /// <summary>
         /// Number of allowable figures in shadow overlap calculations.
         /// </summary>
         /// <value>Number of allowable figures in shadow overlap calculations.</value>
+        [Summary(@"Number of allowable figures in shadow overlap calculations.")]
         [DataMember(Name = "maximum_figures")]
         public int MaximumFigures { get; set; }  = 15000;
 

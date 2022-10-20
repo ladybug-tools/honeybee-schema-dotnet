@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify humidity conditions on a design day.
     /// </summary>
+    [Summary(@"Used to specify humidity conditions on a design day.")]
     [Serializable]
     [DataContract(Name = "HumidityCondition")]
     public partial class HumidityCondition : OpenAPIGenBaseModel, IEquatable<HumidityCondition>, IValidatableObject
@@ -77,6 +78,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "HumidityCondition";
 
@@ -84,24 +86,28 @@ namespace HoneybeeSchema
         /// The value correcponding to the humidity_type.
         /// </summary>
         /// <value>The value correcponding to the humidity_type.</value>
+        [Summary(@"The value correcponding to the humidity_type.")]
         [DataMember(Name = "humidity_value", IsRequired = true)]
         public double HumidityValue { get; set; } 
         /// <summary>
         /// Barometric air pressure on the design day [Pa].
         /// </summary>
         /// <value>Barometric air pressure on the design day [Pa].</value>
+        [Summary(@"Barometric air pressure on the design day [Pa].")]
         [DataMember(Name = "barometric_pressure")]
         public double BarometricPressure { get; set; }  = 101325D;
         /// <summary>
         /// Boolean to indicate rain on the design day.
         /// </summary>
         /// <value>Boolean to indicate rain on the design day.</value>
+        [Summary(@"Boolean to indicate rain on the design day.")]
         [DataMember(Name = "rain")]
         public bool Rain { get; set; }  = false;
         /// <summary>
         /// Boolean to indicate snow on the ground during the design day.
         /// </summary>
         /// <value>Boolean to indicate snow on the ground during the design day.</value>
+        [Summary(@"Boolean to indicate snow on the ground during the design day.")]
         [DataMember(Name = "snow_on_ground")]
         public bool SnowOnGround { get; set; }  = false;
 

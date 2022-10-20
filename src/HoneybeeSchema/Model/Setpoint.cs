@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify information about the setpoint schedule.
     /// </summary>
+    [Summary(@"Used to specify information about the setpoint schedule.")]
     [Serializable]
     [DataContract(Name = "Setpoint")]
     public partial class Setpoint : IDdEnergyBaseModel, IEquatable<Setpoint>, IValidatableObject
@@ -75,6 +76,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Setpoint";
 
@@ -82,24 +84,28 @@ namespace HoneybeeSchema
         /// Schedule for the cooling setpoint. The values in this schedule should be temperature in [C].
         /// </summary>
         /// <value>Schedule for the cooling setpoint. The values in this schedule should be temperature in [C].</value>
+        [Summary(@"Schedule for the cooling setpoint. The values in this schedule should be temperature in [C].")]
         [DataMember(Name = "cooling_schedule", IsRequired = true)]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> CoolingSchedule { get; set; } 
         /// <summary>
         /// Schedule for the heating setpoint. The values in this schedule should be temperature in [C].
         /// </summary>
         /// <value>Schedule for the heating setpoint. The values in this schedule should be temperature in [C].</value>
+        [Summary(@"Schedule for the heating setpoint. The values in this schedule should be temperature in [C].")]
         [DataMember(Name = "heating_schedule", IsRequired = true)]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> HeatingSchedule { get; set; } 
         /// <summary>
         /// Schedule for the humidification setpoint. The values in this schedule should be in [%].
         /// </summary>
         /// <value>Schedule for the humidification setpoint. The values in this schedule should be in [%].</value>
+        [Summary(@"Schedule for the humidification setpoint. The values in this schedule should be in [%].")]
         [DataMember(Name = "humidifying_schedule")]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> HumidifyingSchedule { get; set; } 
         /// <summary>
         /// Schedule for the dehumidification setpoint. The values in this schedule should be in [%].
         /// </summary>
         /// <value>Schedule for the dehumidification setpoint. The values in this schedule should be in [%].</value>
+        [Summary(@"Schedule for the dehumidification setpoint. The values in this schedule should be in [%].")]
         [DataMember(Name = "dehumidifying_schedule")]
         public AnyOf<ScheduleRuleset,ScheduleFixedInterval> DehumidifyingSchedule { get; set; } 
 

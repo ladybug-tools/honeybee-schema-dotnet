@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to describe the time period over which to run the simulation.
     /// </summary>
+    [Summary(@"Used to describe the time period over which to run the simulation.")]
     [Serializable]
     [DataContract(Name = "RunPeriod")]
     public partial class RunPeriod : DatedBaseModel, IEquatable<RunPeriod>, IValidatableObject
@@ -70,6 +71,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "RunPeriod";
 
@@ -77,30 +79,35 @@ namespace HoneybeeSchema
         /// A list of two integers for [month, day], representing the date for the start of the run period. Must be before the end date.
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the date for the start of the run period. Must be before the end date.</value>
+        [Summary(@"A list of two integers for [month, day], representing the date for the start of the run period. Must be before the end date.")]
         [DataMember(Name = "start_date")]
         public List<int> StartDate { get; set; } 
         /// <summary>
         /// A list of two integers for [month, day], representing the date for the end of the run period. Must be after the start date.
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the date for the end of the run period. Must be after the start date.</value>
+        [Summary(@"A list of two integers for [month, day], representing the date for the end of the run period. Must be after the start date.")]
         [DataMember(Name = "end_date")]
         public List<int> EndDate { get; set; } 
         /// <summary>
         /// A list of lists where each sub-list consists of two integers for [month, day], representing a date which is a holiday within the simulation. If None, no holidays are applied.
         /// </summary>
         /// <value>A list of lists where each sub-list consists of two integers for [month, day], representing a date which is a holiday within the simulation. If None, no holidays are applied.</value>
+        [Summary(@"A list of lists where each sub-list consists of two integers for [month, day], representing a date which is a holiday within the simulation. If None, no holidays are applied.")]
         [DataMember(Name = "holidays")]
         public List<List<int>> Holidays { get; set; } 
         /// <summary>
         /// A DaylightSavingTime to dictate the start and end dates of daylight saving time. If None, no daylight saving time is applied to the simulation.
         /// </summary>
         /// <value>A DaylightSavingTime to dictate the start and end dates of daylight saving time. If None, no daylight saving time is applied to the simulation.</value>
+        [Summary(@"A DaylightSavingTime to dictate the start and end dates of daylight saving time. If None, no daylight saving time is applied to the simulation.")]
         [DataMember(Name = "daylight_saving_time")]
         public DaylightSavingTime DaylightSavingTime { get; set; } 
         /// <summary>
         /// Boolean noting whether the simulation will be run for a leap year.
         /// </summary>
         /// <value>Boolean noting whether the simulation will be run for a leap year.</value>
+        [Summary(@"Boolean noting whether the simulation will be run for a leap year.")]
         [DataMember(Name = "leap_year")]
         public bool LeapYear { get; set; }  = false;
 

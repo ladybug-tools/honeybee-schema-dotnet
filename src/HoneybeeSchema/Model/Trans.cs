@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance Translucent material.
     /// </summary>
+    [Summary(@"Radiance Translucent material.")]
     [Serializable]
     [DataContract(Name = "Trans")]
     public partial class Trans : ModifierBase, IEquatable<Trans>, IValidatableObject
@@ -82,6 +83,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Trans";
 
@@ -89,54 +91,63 @@ namespace HoneybeeSchema
         /// Material modifier.
         /// </summary>
         /// <value>Material modifier.</value>
+        [Summary(@"Material modifier.")]
         [DataMember(Name = "modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> Modifier { get; set; } 
         /// <summary>
         /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.
         /// </summary>
         /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.</value>
+        [Summary(@"List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.")]
         [DataMember(Name = "dependencies")]
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Dependencies { get; set; } 
         /// <summary>
         /// A value between 0 and 1 for the red channel reflectance.
         /// </summary>
         /// <value>A value between 0 and 1 for the red channel reflectance.</value>
+        [Summary(@"A value between 0 and 1 for the red channel reflectance.")]
         [DataMember(Name = "r_reflectance")]
         public double RReflectance { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the green channel reflectance.
         /// </summary>
         /// <value>A value between 0 and 1 for the green channel reflectance.</value>
+        [Summary(@"A value between 0 and 1 for the green channel reflectance.")]
         [DataMember(Name = "g_reflectance")]
         public double GReflectance { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the blue channel reflectance.
         /// </summary>
         /// <value>A value between 0 and 1 for the blue channel reflectance.</value>
+        [Summary(@"A value between 0 and 1 for the blue channel reflectance.")]
         [DataMember(Name = "b_reflectance")]
         public double BReflectance { get; set; }  = 0.0D;
         /// <summary>
         /// A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials.
         /// </summary>
         /// <value>A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials.</value>
+        [Summary(@"A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials.")]
         [DataMember(Name = "specularity")]
         public double Specularity { get; set; }  = 0D;
         /// <summary>
         /// A value between 0 and 1 for the roughness, specified as the RMS slope of surface facets. Roughness greater than 0.2 are not realistic.
         /// </summary>
         /// <value>A value between 0 and 1 for the roughness, specified as the RMS slope of surface facets. Roughness greater than 0.2 are not realistic.</value>
+        [Summary(@"A value between 0 and 1 for the roughness, specified as the RMS slope of surface facets. Roughness greater than 0.2 are not realistic.")]
         [DataMember(Name = "roughness")]
         public double Roughness { get; set; }  = 0D;
         /// <summary>
         /// The fraction of transmitted light that is transmitted diffusely in a scattering fashion.
         /// </summary>
         /// <value>The fraction of transmitted light that is transmitted diffusely in a scattering fashion.</value>
+        [Summary(@"The fraction of transmitted light that is transmitted diffusely in a scattering fashion.")]
         [DataMember(Name = "transmitted_diff")]
         public double TransmittedDiff { get; set; }  = 0D;
         /// <summary>
         /// The fraction of transmitted light that is not diffusely scattered.
         /// </summary>
         /// <value>The fraction of transmitted light that is not diffusely scattered.</value>
+        [Summary(@"The fraction of transmitted light that is not diffusely scattered.")]
         [DataMember(Name = "transmitted_spec")]
         public double TransmittedSpec { get; set; }  = 0D;
 

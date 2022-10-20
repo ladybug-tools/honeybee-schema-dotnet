@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// ValidationError
     /// </summary>
+    [Summary(@"")]
     [Serializable]
     [DataContract(Name = "ValidationError")]
     public partial class ValidationError : IEquatable<ValidationError>, IValidatableObject
@@ -96,6 +97,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ValidationError";
 
@@ -103,42 +105,49 @@ namespace HoneybeeSchema
         /// Text with 6 digits for the error code. The first two digits indicate whether the error is a core honeybee error (00) vs. an extension error (any non-zero number). The second two digits indicate the nature of the error (00 is an identifier error, 01 is a geometry error, 02 is an adjacency error). The third two digits are used to give a unique ID to each condition moving upwards from more specific/detailed objects/errors to coarser/more abstract objects/errors. A full list of error codes can be found here: https://docs.pollination.cloud/user-manual/get-started/troubleshooting/help-with-modeling-error-codes
         /// </summary>
         /// <value>Text with 6 digits for the error code. The first two digits indicate whether the error is a core honeybee error (00) vs. an extension error (any non-zero number). The second two digits indicate the nature of the error (00 is an identifier error, 01 is a geometry error, 02 is an adjacency error). The third two digits are used to give a unique ID to each condition moving upwards from more specific/detailed objects/errors to coarser/more abstract objects/errors. A full list of error codes can be found here: https://docs.pollination.cloud/user-manual/get-started/troubleshooting/help-with-modeling-error-codes</value>
+        [Summary(@"Text with 6 digits for the error code. The first two digits indicate whether the error is a core honeybee error (00) vs. an extension error (any non-zero number). The second two digits indicate the nature of the error (00 is an identifier error, 01 is a geometry error, 02 is an adjacency error). The third two digits are used to give a unique ID to each condition moving upwards from more specific/detailed objects/errors to coarser/more abstract objects/errors. A full list of error codes can be found here: https://docs.pollination.cloud/user-manual/get-started/troubleshooting/help-with-modeling-error-codes")]
         [DataMember(Name = "code", IsRequired = true)]
         public string Code { get; set; } 
         /// <summary>
         /// A human-readable version of the error code, typically not more than five words long.
         /// </summary>
         /// <value>A human-readable version of the error code, typically not more than five words long.</value>
+        [Summary(@"A human-readable version of the error code, typically not more than five words long.")]
         [DataMember(Name = "error_type", IsRequired = true)]
         public string ErrorType { get; set; } 
         /// <summary>
         /// Text string for the unique object ID that caused the error. Note that this can be the identifier of a core object like a Room or a Face. Or it can be for an extension object like a SensorGrid or a Construction.
         /// </summary>
         /// <value>Text string for the unique object ID that caused the error. Note that this can be the identifier of a core object like a Room or a Face. Or it can be for an extension object like a SensorGrid or a Construction.</value>
+        [Summary(@"Text string for the unique object ID that caused the error. Note that this can be the identifier of a core object like a Room or a Face. Or it can be for an extension object like a SensorGrid or a Construction.")]
         [DataMember(Name = "element_id", IsRequired = true)]
         public string ElementId { get; set; } 
         /// <summary>
         /// Text for the error message with a detailed description of what exactly is invalid about the element.
         /// </summary>
         /// <value>Text for the error message with a detailed description of what exactly is invalid about the element.</value>
+        [Summary(@"Text for the error message with a detailed description of what exactly is invalid about the element.")]
         [DataMember(Name = "message", IsRequired = true)]
         public string Message { get; set; } 
         /// <summary>
         /// Display name of the object that caused the error.
         /// </summary>
         /// <value>Display name of the object that caused the error.</value>
+        [Summary(@"Display name of the object that caused the error.")]
         [DataMember(Name = "element_name")]
         public string ElementName { get; set; } 
         /// <summary>
         /// A list of the parent objects for the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room.
         /// </summary>
         /// <value>A list of the parent objects for the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room.</value>
+        [Summary(@"A list of the parent objects for the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room.")]
         [DataMember(Name = "parents")]
         public List<ValidationParent> Parents { get; set; } 
         /// <summary>
         /// A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved.
         /// </summary>
         /// <value>A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved.</value>
+        [Summary(@"A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved.")]
         [DataMember(Name = "top_parents")]
         public List<ValidationParent> TopParents { get; set; } 
 

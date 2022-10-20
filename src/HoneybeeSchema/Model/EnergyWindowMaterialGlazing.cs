@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Describe a single glass pane corresponding to a layer in a window construction.
     /// </summary>
+    [Summary(@"Describe a single glass pane corresponding to a layer in a window construction.")]
     [Serializable]
     [DataContract(Name = "EnergyWindowMaterialGlazing")]
     public partial class EnergyWindowMaterialGlazing : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialGlazing>, IValidatableObject
@@ -91,6 +92,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "EnergyWindowMaterialGlazing";
 
@@ -98,78 +100,91 @@ namespace HoneybeeSchema
         /// The surface-to-surface thickness of the glass in meters. Default:  0.003.
         /// </summary>
         /// <value>The surface-to-surface thickness of the glass in meters. Default:  0.003.</value>
+        [Summary(@"The surface-to-surface thickness of the glass in meters. Default:  0.003.")]
         [DataMember(Name = "thickness")]
         public double Thickness { get; set; }  = 0.003D;
         /// <summary>
         /// Transmittance of solar radiation through the glass at normal incidence. Default: 0.85 for clear glass.
         /// </summary>
         /// <value>Transmittance of solar radiation through the glass at normal incidence. Default: 0.85 for clear glass.</value>
+        [Summary(@"Transmittance of solar radiation through the glass at normal incidence. Default: 0.85 for clear glass.")]
         [DataMember(Name = "solar_transmittance")]
         public double SolarTransmittance { get; set; }  = 0.85D;
         /// <summary>
         /// Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default: 0.075 for clear glass.
         /// </summary>
         /// <value>Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default: 0.075 for clear glass.</value>
+        [Summary(@"Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default: 0.075 for clear glass.")]
         [DataMember(Name = "solar_reflectance")]
         public double SolarReflectance { get; set; }  = 0.075D;
         /// <summary>
         /// Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum.
         /// </summary>
         /// <value>Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum.</value>
+        [Summary(@"Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum.")]
         [DataMember(Name = "solar_reflectance_back")]
         public AnyOf<Autocalculate,double> SolarReflectanceBack { get; set; } 
         /// <summary>
         /// Transmittance of visible light through the glass at normal incidence. Default: 0.9 for clear glass.
         /// </summary>
         /// <value>Transmittance of visible light through the glass at normal incidence. Default: 0.9 for clear glass.</value>
+        [Summary(@"Transmittance of visible light through the glass at normal incidence. Default: 0.9 for clear glass.")]
         [DataMember(Name = "visible_transmittance")]
         public double VisibleTransmittance { get; set; }  = 0.9D;
         /// <summary>
         /// Reflectance of visible light off of the front side of the glass at normal incidence. Default: 0.075 for clear glass.
         /// </summary>
         /// <value>Reflectance of visible light off of the front side of the glass at normal incidence. Default: 0.075 for clear glass.</value>
+        [Summary(@"Reflectance of visible light off of the front side of the glass at normal incidence. Default: 0.075 for clear glass.")]
         [DataMember(Name = "visible_reflectance")]
         public double VisibleReflectance { get; set; }  = 0.075D;
         /// <summary>
         /// Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye.
         /// </summary>
         /// <value>Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye.</value>
+        [Summary(@"Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye.")]
         [DataMember(Name = "visible_reflectance_back")]
         public AnyOf<Autocalculate,double> VisibleReflectanceBack { get; set; } 
         /// <summary>
         /// Long-wave transmittance at normal incidence.
         /// </summary>
         /// <value>Long-wave transmittance at normal incidence.</value>
+        [Summary(@"Long-wave transmittance at normal incidence.")]
         [DataMember(Name = "infrared_transmittance")]
         public double InfraredTransmittance { get; set; }  = 0D;
         /// <summary>
         /// Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.
         /// </summary>
         /// <value>Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.</value>
+        [Summary(@"Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.")]
         [DataMember(Name = "emissivity")]
         public double Emissivity { get; set; }  = 0.84D;
         /// <summary>
         /// Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.
         /// </summary>
         /// <value>Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.</value>
+        [Summary(@"Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.")]
         [DataMember(Name = "emissivity_back")]
         public double EmissivityBack { get; set; }  = 0.84D;
         /// <summary>
         /// Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is  typical for clear glass without a low-e coating.
         /// </summary>
         /// <value>Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is  typical for clear glass without a low-e coating.</value>
+        [Summary(@"Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is  typical for clear glass without a low-e coating.")]
         [DataMember(Name = "conductivity")]
         public double Conductivity { get; set; }  = 0.9D;
         /// <summary>
         /// Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean.
         /// </summary>
         /// <value>Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean.</value>
+        [Summary(@"Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean.")]
         [DataMember(Name = "dirt_correction")]
         public double DirtCorrection { get; set; }  = 1D;
         /// <summary>
         /// If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.
         /// </summary>
         /// <value>If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.</value>
+        [Summary(@"If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.")]
         [DataMember(Name = "solar_diffusing")]
         public bool SolarDiffusing { get; set; }  = false;
 

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
+    [Summary(@"Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.")]
     [Serializable]
     [DataContract(Name = "GlobalConstructionSet")]
     public partial class GlobalConstructionSet : OpenAPIGenBaseModel, IEquatable<GlobalConstructionSet>, IValidatableObject
@@ -56,6 +57,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "GlobalConstructionSet";
         //============================================== is ReadOnly 
@@ -63,6 +65,7 @@ namespace HoneybeeSchema
         /// Global Honeybee Energy materials.
         /// </summary>
         /// <value>Global Honeybee Energy materials.</value>
+        [Summary(@"Global Honeybee Energy materials.")]
         [DataMember(Name = "materials")]
         public List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGlazing,EnergyWindowMaterialGas>> Materials { get; protected set; } 
         //============================================== is ReadOnly 
@@ -70,6 +73,7 @@ namespace HoneybeeSchema
         /// Global Honeybee Energy constructions.
         /// </summary>
         /// <value>Global Honeybee Energy constructions.</value>
+        [Summary(@"Global Honeybee Energy constructions.")]
         [DataMember(Name = "constructions")]
         public List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,ShadeConstruction,AirBoundaryConstructionAbridged>> Constructions { get; protected set; } 
         //============================================== is ReadOnly 
@@ -77,6 +81,7 @@ namespace HoneybeeSchema
         /// Global Honeybee WallConstructionSet.
         /// </summary>
         /// <value>Global Honeybee WallConstructionSet.</value>
+        [Summary(@"Global Honeybee WallConstructionSet.")]
         [DataMember(Name = "wall_set")]
         public WallConstructionSetAbridged WallSet { get; protected set; } 
         //============================================== is ReadOnly 
@@ -84,6 +89,7 @@ namespace HoneybeeSchema
         /// Global Honeybee FloorConstructionSet.
         /// </summary>
         /// <value>Global Honeybee FloorConstructionSet.</value>
+        [Summary(@"Global Honeybee FloorConstructionSet.")]
         [DataMember(Name = "floor_set")]
         public FloorConstructionSetAbridged FloorSet { get; protected set; } 
         //============================================== is ReadOnly 
@@ -91,6 +97,7 @@ namespace HoneybeeSchema
         /// Global Honeybee RoofCeilingConstructionSet.
         /// </summary>
         /// <value>Global Honeybee RoofCeilingConstructionSet.</value>
+        [Summary(@"Global Honeybee RoofCeilingConstructionSet.")]
         [DataMember(Name = "roof_ceiling_set")]
         public RoofCeilingConstructionSetAbridged RoofCeilingSet { get; protected set; } 
         //============================================== is ReadOnly 
@@ -98,6 +105,7 @@ namespace HoneybeeSchema
         /// Global Honeybee ApertureConstructionSet.
         /// </summary>
         /// <value>Global Honeybee ApertureConstructionSet.</value>
+        [Summary(@"Global Honeybee ApertureConstructionSet.")]
         [DataMember(Name = "aperture_set")]
         public ApertureConstructionSetAbridged ApertureSet { get; protected set; } 
         //============================================== is ReadOnly 
@@ -105,6 +113,7 @@ namespace HoneybeeSchema
         /// Global Honeybee DoorConstructionSet.
         /// </summary>
         /// <value>Global Honeybee DoorConstructionSet.</value>
+        [Summary(@"Global Honeybee DoorConstructionSet.")]
         [DataMember(Name = "door_set")]
         public DoorConstructionSetAbridged DoorSet { get; protected set; } 
         //============================================== is ReadOnly 
@@ -112,6 +121,7 @@ namespace HoneybeeSchema
         /// Global Honeybee Construction for building-attached Shades.
         /// </summary>
         /// <value>Global Honeybee Construction for building-attached Shades.</value>
+        [Summary(@"Global Honeybee Construction for building-attached Shades.")]
         [DataMember(Name = "shade_construction")]
         public string ShadeConstruction { get; protected set; }  = "Generic Shade";
         //============================================== is ReadOnly 
@@ -119,6 +129,7 @@ namespace HoneybeeSchema
         /// Global Honeybee Construction for context Shades.
         /// </summary>
         /// <value>Global Honeybee Construction for context Shades.</value>
+        [Summary(@"Global Honeybee Construction for context Shades.")]
         [DataMember(Name = "context_construction")]
         public string ContextConstruction { get; protected set; }  = "Generic Context";
         //============================================== is ReadOnly 
@@ -126,6 +137,7 @@ namespace HoneybeeSchema
         /// Global Honeybee Construction for AirBoundary Faces.
         /// </summary>
         /// <value>Global Honeybee Construction for AirBoundary Faces.</value>
+        [Summary(@"Global Honeybee Construction for AirBoundary Faces.")]
         [DataMember(Name = "air_boundary_construction")]
         public string AirBoundaryConstruction { get; protected set; }  = "Generic Air Boundary";
 

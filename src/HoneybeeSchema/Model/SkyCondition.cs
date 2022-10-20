@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify sky conditions on a design day.
     /// </summary>
+    [Summary(@"Used to specify sky conditions on a design day.")]
     [Serializable]
     [DataContract(Name = "_SkyCondition")]
     public partial class SkyCondition : OpenAPIGenBaseModel, IEquatable<SkyCondition>, IValidatableObject
@@ -67,6 +68,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "_SkyCondition";
 
@@ -74,12 +76,14 @@ namespace HoneybeeSchema
         /// A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).
         /// </summary>
         /// <value>A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</value>
+        [Summary(@"A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).")]
         [DataMember(Name = "date", IsRequired = true)]
         public List<int> Date { get; set; } 
         /// <summary>
         /// Boolean to indicate whether daylight savings time is active on the design day.
         /// </summary>
         /// <value>Boolean to indicate whether daylight savings time is active on the design day.</value>
+        [Summary(@"Boolean to indicate whether daylight savings time is active on the design day.")]
         [DataMember(Name = "daylight_savings")]
         public bool DaylightSavings { get; set; }  = false;
 

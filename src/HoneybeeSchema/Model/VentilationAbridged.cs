@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects requiring an EnergyPlus identifier and user_data.
     /// </summary>
+    [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
     [Serializable]
     [DataContract(Name = "VentilationAbridged")]
     public partial class VentilationAbridged : IDdEnergyBaseModel, IEquatable<VentilationAbridged>, IValidatableObject
@@ -75,6 +76,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "VentilationAbridged";
 
@@ -82,30 +84,35 @@ namespace HoneybeeSchema
         /// Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room.
         /// </summary>
         /// <value>Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room.</value>
+        [Summary(@"Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room.")]
         [DataMember(Name = "flow_per_person")]
         public double FlowPerPerson { get; set; }  = 0D;
         /// <summary>
         /// Intensity of ventilation in [m3/s per m2 of floor area].
         /// </summary>
         /// <value>Intensity of ventilation in [m3/s per m2 of floor area].</value>
+        [Summary(@"Intensity of ventilation in [m3/s per m2 of floor area].")]
         [DataMember(Name = "flow_per_area")]
         public double FlowPerArea { get; set; }  = 0D;
         /// <summary>
         /// Intensity of ventilation in air changes per hour (ACH) for the entire Room.
         /// </summary>
         /// <value>Intensity of ventilation in air changes per hour (ACH) for the entire Room.</value>
+        [Summary(@"Intensity of ventilation in air changes per hour (ACH) for the entire Room.")]
         [DataMember(Name = "air_changes_per_hour")]
         public double AirChangesPerHour { get; set; }  = 0D;
         /// <summary>
         /// Intensity of ventilation in m3/s for the entire Room.
         /// </summary>
         /// <value>Intensity of ventilation in m3/s for the entire Room.</value>
+        [Summary(@"Intensity of ventilation in m3/s for the entire Room.")]
         [DataMember(Name = "flow_per_zone")]
         public double FlowPerZone { get; set; }  = 0D;
         /// <summary>
         /// Identifier of the schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.
         /// </summary>
         /// <value>Identifier of the schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.</value>
+        [Summary(@"Identifier of the schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.")]
         [DataMember(Name = "schedule")]
         public string Schedule { get; set; } 
 

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Low temperature radiant HVAC system.  This HVAC template will change the floor and/or ceiling constructions of the Rooms that it is applied to, replacing them with a construction that aligns with the radiant_type property (eg. CeilingMetalPanel).  The heating and cooling needs of the space are met with the radiant constructions, which use chilled water at 12.8C (55F) and a hot water temperature somewhere between 32.2C (90F) and 49C (120F) (warmer temperatures are used in colder climate zones).  Note that radiant systems are particularly limited in cooling capacity and using them may result in many unmet hours. To reduce unmet hours, one can remove carpets, reduce internal loads, reduce solar and envelope gains during peak times, add thermal mass, and use an expanded comfort range.
     /// </summary>
+    [Summary(@"Low temperature radiant HVAC system.  This HVAC template will change the floor and/or ceiling constructions of the Rooms that it is applied to, replacing them with a construction that aligns with the radiant_type property (eg. CeilingMetalPanel).  The heating and cooling needs of the space are met with the radiant constructions, which use chilled water at 12.8C (55F) and a hot water temperature somewhere between 32.2C (90F) and 49C (120F) (warmer temperatures are used in colder climate zones).  Note that radiant systems are particularly limited in cooling capacity and using them may result in many unmet hours. To reduce unmet hours, one can remove carpets, reduce internal loads, reduce solar and envelope gains during peak times, add thermal mass, and use an expanded comfort range.")]
     [Serializable]
     [DataContract(Name = "Radiant")]
     public partial class Radiant : IDdEnergyBaseModel, IEquatable<Radiant>, IValidatableObject
@@ -93,6 +94,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Radiant";
 
@@ -100,12 +102,14 @@ namespace HoneybeeSchema
         /// A number for the minimum number of hours of operation for the radiant system before it shuts off.
         /// </summary>
         /// <value>A number for the minimum number of hours of operation for the radiant system before it shuts off.</value>
+        [Summary(@"A number for the minimum number of hours of operation for the radiant system before it shuts off.")]
         [DataMember(Name = "minimum_operation_time")]
         public double MinimumOperationTime { get; set; }  = 1.0D;
         /// <summary>
         /// A number for the minimum number of hours for when the system can switch between heating and cooling.
         /// </summary>
         /// <value>A number for the minimum number of hours for when the system can switch between heating and cooling.</value>
+        [Summary(@"A number for the minimum number of hours for when the system can switch between heating and cooling.")]
         [DataMember(Name = "switch_over_time")]
         public double SwitchOverTime { get; set; }  = 24.0D;
 

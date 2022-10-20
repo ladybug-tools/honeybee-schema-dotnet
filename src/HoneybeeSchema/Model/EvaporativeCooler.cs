@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Direct evaporative cooling systems (with optional heating).  Each room/zone will receive its own air loop sized to meet the sensible load, which contains an evaporative cooler that directly adds humidity to the room air to cool it. The loop contains an outdoor air mixer, which is used whenever the outdoor air has a lower wet bulb temperature than the return air from the room. In the event that the combination of outdoor and room return air air is too humid, a backup single-speed direct expansion (DX) cooling coil will be used. Heating loads can be met with various options, including several types of baseboards, a furnace, or gas unit heaters.
     /// </summary>
+    [Summary(@"Direct evaporative cooling systems (with optional heating).  Each room/zone will receive its own air loop sized to meet the sensible load, which contains an evaporative cooler that directly adds humidity to the room air to cool it. The loop contains an outdoor air mixer, which is used whenever the outdoor air has a lower wet bulb temperature than the return air from the room. In the event that the combination of outdoor and room return air air is too humid, a backup single-speed direct expansion (DX) cooling coil will be used. Heating loads can be met with various options, including several types of baseboards, a furnace, or gas unit heaters.")]
     [Serializable]
     [DataContract(Name = "EvaporativeCooler")]
     public partial class EvaporativeCooler : IDdEnergyBaseModel, IEquatable<EvaporativeCooler>, IValidatableObject
@@ -81,6 +82,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "EvaporativeCooler";
 

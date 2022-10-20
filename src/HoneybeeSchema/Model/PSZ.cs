@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Packaged Single-Zone (PSZ) HVAC system (aka. System 3 or 4).  Each room/zone receives its own air loop with its own single-speed direct expansion (DX) cooling coil, which will condition the supply air to a value in between 12.8C (55F) and 50C (122F) depending on the heating/cooling needs of the room/zone. As long as a Baseboard equipment_type is NOT selected, heating will be supplied by a heating coil in the air loop. Otherwise, heating is accomplished with baseboards and the air loop only supplies cooling and ventilation air. Fans are constant volume.  PSZ systems are the traditional baseline system for commercial buildings with less than 4 stories or less than 2,300 m2 (25,000 ft2) of floor area. They are also the default for all retail with less than 3 stories and all public assembly spaces.
     /// </summary>
+    [Summary(@"Packaged Single-Zone (PSZ) HVAC system (aka. System 3 or 4).  Each room/zone receives its own air loop with its own single-speed direct expansion (DX) cooling coil, which will condition the supply air to a value in between 12.8C (55F) and 50C (122F) depending on the heating/cooling needs of the room/zone. As long as a Baseboard equipment_type is NOT selected, heating will be supplied by a heating coil in the air loop. Otherwise, heating is accomplished with baseboards and the air loop only supplies cooling and ventilation air. Fans are constant volume.  PSZ systems are the traditional baseline system for commercial buildings with less than 4 stories or less than 2,300 m2 (25,000 ft2) of floor area. They are also the default for all retail with less than 3 stories and all public assembly spaces.")]
     [Serializable]
     [DataContract(Name = "PSZ")]
     public partial class PSZ : IDdEnergyBaseModel, IEquatable<PSZ>, IValidatableObject
@@ -95,6 +96,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "PSZ";
 
@@ -102,18 +104,21 @@ namespace HoneybeeSchema
         /// A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.</value>
+        [Summary(@"A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.")]
         [DataMember(Name = "sensible_heat_recovery")]
         public double SensibleHeatRecovery { get; set; }  = 0D;
         /// <summary>
         /// A number between 0 and 1 for the effectiveness of latent heat recovery within the system.
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of latent heat recovery within the system.</value>
+        [Summary(@"A number between 0 and 1 for the effectiveness of latent heat recovery within the system.")]
         [DataMember(Name = "latent_heat_recovery")]
         public double LatentHeatRecovery { get; set; }  = 0D;
         /// <summary>
         /// Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.
         /// </summary>
         /// <value>Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.</value>
+        [Summary(@"Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.")]
         [DataMember(Name = "demand_controlled_ventilation")]
         public bool DemandControlledVentilation { get; set; }  = false;
 

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance mirror material.
     /// </summary>
+    [Summary(@"Radiance mirror material.")]
     [Serializable]
     [DataContract(Name = "Mirror")]
     public partial class Mirror : ModifierBase, IEquatable<Mirror>, IValidatableObject
@@ -76,6 +77,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Mirror";
 
@@ -83,36 +85,42 @@ namespace HoneybeeSchema
         /// Material modifier.
         /// </summary>
         /// <value>Material modifier.</value>
+        [Summary(@"Material modifier.")]
         [DataMember(Name = "modifier")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> Modifier { get; set; } 
         /// <summary>
         /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.
         /// </summary>
         /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.</value>
+        [Summary(@"List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.")]
         [DataMember(Name = "dependencies")]
         public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Dependencies { get; set; } 
         /// <summary>
         /// A value between 0 and 1 for the red channel reflectance.
         /// </summary>
         /// <value>A value between 0 and 1 for the red channel reflectance.</value>
+        [Summary(@"A value between 0 and 1 for the red channel reflectance.")]
         [DataMember(Name = "r_reflectance")]
         public double RReflectance { get; set; }  = 1D;
         /// <summary>
         /// A value between 0 and 1 for the green channel reflectance.
         /// </summary>
         /// <value>A value between 0 and 1 for the green channel reflectance.</value>
+        [Summary(@"A value between 0 and 1 for the green channel reflectance.")]
         [DataMember(Name = "g_reflectance")]
         public double GReflectance { get; set; }  = 1D;
         /// <summary>
         /// A value between 0 and 1 for the blue channel reflectance.
         /// </summary>
         /// <value>A value between 0 and 1 for the blue channel reflectance.</value>
+        [Summary(@"A value between 0 and 1 for the blue channel reflectance.")]
         [DataMember(Name = "b_reflectance")]
         public double BReflectance { get; set; }  = 1D;
         /// <summary>
         /// An optional material (like the illum type) that may be used to specify a different material to be used for shading non-source rays. If None, this will keep the alternat_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance.
         /// </summary>
         /// <value>An optional material (like the illum type) that may be used to specify a different material to be used for shading non-source rays. If None, this will keep the alternat_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance.</value>
+        [Summary(@"An optional material (like the illum type) that may be used to specify a different material to be used for shading non-source rays. If None, this will keep the alternat_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance.")]
         [DataMember(Name = "alternate_material")]
         public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> AlternateMaterial { get; set; } 
 

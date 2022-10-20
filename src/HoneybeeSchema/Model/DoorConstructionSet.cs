@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A set of constructions for door assemblies.
     /// </summary>
+    [Summary(@"A set of constructions for door assemblies.")]
     [Serializable]
     [DataContract(Name = "DoorConstructionSet")]
     public partial class DoorConstructionSet : OpenAPIGenBaseModel, IEquatable<DoorConstructionSet>, IValidatableObject
@@ -62,6 +63,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "DoorConstructionSet";
 
@@ -69,30 +71,35 @@ namespace HoneybeeSchema
         /// An OpaqueConstruction for all opaque doors with a Surface boundary condition.
         /// </summary>
         /// <value>An OpaqueConstruction for all opaque doors with a Surface boundary condition.</value>
+        [Summary(@"An OpaqueConstruction for all opaque doors with a Surface boundary condition.")]
         [DataMember(Name = "interior_construction")]
         public OpaqueConstruction InteriorConstruction { get; set; } 
         /// <summary>
         /// An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face.
         /// </summary>
         /// <value>An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face.</value>
+        [Summary(@"An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face.")]
         [DataMember(Name = "exterior_construction")]
         public OpaqueConstruction ExteriorConstruction { get; set; } 
         /// <summary>
         /// An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face.
         /// </summary>
         /// <value>An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face.</value>
+        [Summary(@"An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face.")]
         [DataMember(Name = "overhead_construction")]
         public OpaqueConstruction OverheadConstruction { get; set; } 
         /// <summary>
         /// A WindowConstruction for all glass doors with an Outdoors boundary condition.
         /// </summary>
         /// <value>A WindowConstruction for all glass doors with an Outdoors boundary condition.</value>
+        [Summary(@"A WindowConstruction for all glass doors with an Outdoors boundary condition.")]
         [DataMember(Name = "exterior_glass_construction")]
         public AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> ExteriorGlassConstruction { get; set; } 
         /// <summary>
         /// A WindowConstruction for all glass doors with a Surface boundary condition.
         /// </summary>
         /// <value>A WindowConstruction for all glass doors with a Surface boundary condition.</value>
+        [Summary(@"A WindowConstruction for all glass doors with a Surface boundary condition.")]
         [DataMember(Name = "interior_glass_construction")]
         public AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> InteriorGlassConstruction { get; set; } 
 

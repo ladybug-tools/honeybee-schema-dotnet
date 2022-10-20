@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Forced Air Furnace HVAC system (aka. System 9 or 10).  Forced air furnaces are intended only for spaces only requiring heating and ventilation. Each room/zone receives its own air loop with its own gas heating coil, which will supply air at a temperature up to 50C (122F) to meet the heating needs of the room/zone. Fans are constant volume.  PTAC/HP systems are the traditional baseline system for storage spaces that only require heating.
     /// </summary>
+    [Summary(@"Forced Air Furnace HVAC system (aka. System 9 or 10).  Forced air furnaces are intended only for spaces only requiring heating and ventilation. Each room/zone receives its own air loop with its own gas heating coil, which will supply air at a temperature up to 50C (122F) to meet the heating needs of the room/zone. Fans are constant volume.  PTAC/HP systems are the traditional baseline system for storage spaces that only require heating.")]
     [Serializable]
     [DataContract(Name = "ForcedAirFurnace")]
     public partial class ForcedAirFurnace : IDdEnergyBaseModel, IEquatable<ForcedAirFurnace>, IValidatableObject
@@ -95,6 +96,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ForcedAirFurnace";
 
@@ -102,18 +104,21 @@ namespace HoneybeeSchema
         /// A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.</value>
+        [Summary(@"A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.")]
         [DataMember(Name = "sensible_heat_recovery")]
         public double SensibleHeatRecovery { get; set; }  = 0D;
         /// <summary>
         /// A number between 0 and 1 for the effectiveness of latent heat recovery within the system.
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of latent heat recovery within the system.</value>
+        [Summary(@"A number between 0 and 1 for the effectiveness of latent heat recovery within the system.")]
         [DataMember(Name = "latent_heat_recovery")]
         public double LatentHeatRecovery { get; set; }  = 0D;
         /// <summary>
         /// Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.
         /// </summary>
         /// <value>Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.</value>
+        [Summary(@"Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.")]
         [DataMember(Name = "demand_controlled_ventilation")]
         public bool DemandControlledVentilation { get; set; }  = false;
 

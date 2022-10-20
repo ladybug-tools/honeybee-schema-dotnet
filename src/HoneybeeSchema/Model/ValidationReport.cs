@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// ValidationReport
     /// </summary>
+    [Summary(@"")]
     [Serializable]
     [DataContract(Name = "ValidationReport")]
     public partial class ValidationReport : IEquatable<ValidationReport>, IValidatableObject
@@ -75,6 +76,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ValidationReport";
 
@@ -82,30 +84,35 @@ namespace HoneybeeSchema
         /// Text string for the version of honeybee-core that performed the validation.
         /// </summary>
         /// <value>Text string for the version of honeybee-core that performed the validation.</value>
+        [Summary(@"Text string for the version of honeybee-core that performed the validation.")]
         [DataMember(Name = "honeybee_core", IsRequired = true)]
         public string HoneybeeCore { get; set; } 
         /// <summary>
         /// Text string for the version of honeybee-schema that performed the validation.
         /// </summary>
         /// <value>Text string for the version of honeybee-schema that performed the validation.</value>
+        [Summary(@"Text string for the version of honeybee-schema that performed the validation.")]
         [DataMember(Name = "honeybee_schema", IsRequired = true)]
         public string HoneybeeSchema { get; set; } 
         /// <summary>
         /// Boolean to note whether the Model is valid or not.
         /// </summary>
         /// <value>Boolean to note whether the Model is valid or not.</value>
+        [Summary(@"Boolean to note whether the Model is valid or not.")]
         [DataMember(Name = "valid", IsRequired = true)]
         public bool Valid { get; set; } 
         /// <summary>
         /// A text string containing an exception if the Model failed to serialize. It will be an empty string if serialization was successful.
         /// </summary>
         /// <value>A text string containing an exception if the Model failed to serialize. It will be an empty string if serialization was successful.</value>
+        [Summary(@"A text string containing an exception if the Model failed to serialize. It will be an empty string if serialization was successful.")]
         [DataMember(Name = "fatal_error")]
         public string FatalError { get; set; }  = "";
         /// <summary>
         /// A list of objects for each error that was discovered in the model. This will be an empty list or None if no errors were found.
         /// </summary>
         /// <value>A list of objects for each error that was discovered in the model. This will be an empty list or None if no errors were found.</value>
+        [Summary(@"A list of objects for each error that was discovered in the model. This will be an empty list or None if no errors were found.")]
         [DataMember(Name = "errors")]
         public List<ValidationError> Errors { get; set; } 
 

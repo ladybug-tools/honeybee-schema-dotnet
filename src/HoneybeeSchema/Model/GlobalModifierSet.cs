@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
+    [Summary(@"Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.")]
     [Serializable]
     [DataContract(Name = "GlobalModifierSet")]
     public partial class GlobalModifierSet : OpenAPIGenBaseModel, IEquatable<GlobalModifierSet>, IValidatableObject
@@ -55,6 +56,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "GlobalModifierSet";
         //============================================== is ReadOnly 
@@ -62,6 +64,7 @@ namespace HoneybeeSchema
         /// Global Honeybee Radiance modifiers.
         /// </summary>
         /// <value>Global Honeybee Radiance modifiers.</value>
+        [Summary(@"Global Honeybee Radiance modifiers.")]
         [DataMember(Name = "modifiers")]
         public List<AnyOf<Plastic,Glass,Trans>> Modifiers { get; protected set; } 
         //============================================== is ReadOnly 
@@ -69,6 +72,7 @@ namespace HoneybeeSchema
         /// Global Honeybee WallModifierSet.
         /// </summary>
         /// <value>Global Honeybee WallModifierSet.</value>
+        [Summary(@"Global Honeybee WallModifierSet.")]
         [DataMember(Name = "wall_set")]
         public WallModifierSetAbridged WallSet { get; protected set; } 
         //============================================== is ReadOnly 
@@ -76,6 +80,7 @@ namespace HoneybeeSchema
         /// Global Honeybee FloorModifierSet.
         /// </summary>
         /// <value>Global Honeybee FloorModifierSet.</value>
+        [Summary(@"Global Honeybee FloorModifierSet.")]
         [DataMember(Name = "floor_set")]
         public FloorModifierSetAbridged FloorSet { get; protected set; } 
         //============================================== is ReadOnly 
@@ -83,6 +88,7 @@ namespace HoneybeeSchema
         /// Global Honeybee RoofCeilingModifierSet.
         /// </summary>
         /// <value>Global Honeybee RoofCeilingModifierSet.</value>
+        [Summary(@"Global Honeybee RoofCeilingModifierSet.")]
         [DataMember(Name = "roof_ceiling_set")]
         public RoofCeilingModifierSetAbridged RoofCeilingSet { get; protected set; } 
         //============================================== is ReadOnly 
@@ -90,6 +96,7 @@ namespace HoneybeeSchema
         /// Global Honeybee ApertureModifierSet.
         /// </summary>
         /// <value>Global Honeybee ApertureModifierSet.</value>
+        [Summary(@"Global Honeybee ApertureModifierSet.")]
         [DataMember(Name = "aperture_set")]
         public ApertureModifierSetAbridged ApertureSet { get; protected set; } 
         //============================================== is ReadOnly 
@@ -97,6 +104,7 @@ namespace HoneybeeSchema
         /// Global Honeybee DoorModifierSet.
         /// </summary>
         /// <value>Global Honeybee DoorModifierSet.</value>
+        [Summary(@"Global Honeybee DoorModifierSet.")]
         [DataMember(Name = "door_set")]
         public DoorModifierSetAbridged DoorSet { get; protected set; } 
         //============================================== is ReadOnly 
@@ -104,6 +112,7 @@ namespace HoneybeeSchema
         /// Global Honeybee ShadeModifierSet.
         /// </summary>
         /// <value>Global Honeybee ShadeModifierSet.</value>
+        [Summary(@"Global Honeybee ShadeModifierSet.")]
         [DataMember(Name = "shade_set")]
         public ShadeModifierSetAbridged ShadeSet { get; protected set; } 
         //============================================== is ReadOnly 
@@ -111,6 +120,7 @@ namespace HoneybeeSchema
         /// Global Honeybee Modifier for AirBoundary Faces.
         /// </summary>
         /// <value>Global Honeybee Modifier for AirBoundary Faces.</value>
+        [Summary(@"Global Honeybee Modifier for AirBoundary Faces.")]
         [DataMember(Name = "air_boundary_modifier")]
         public string AirBoundaryModifier { get; protected set; }  = "air_boundary";
         //============================================== is ReadOnly 
@@ -118,6 +128,7 @@ namespace HoneybeeSchema
         /// Global Honeybee Modifier for context Shades.
         /// </summary>
         /// <value>Global Honeybee Modifier for context Shades.</value>
+        [Summary(@"Global Honeybee Modifier for context Shades.")]
         [DataMember(Name = "context_modifier")]
         public string ContextModifier { get; protected set; }  = "generic_context_0.20";
 

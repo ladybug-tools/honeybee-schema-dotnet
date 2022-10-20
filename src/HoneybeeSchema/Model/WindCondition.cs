@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Used to specify wind conditions on a design day.
     /// </summary>
+    [Summary(@"Used to specify wind conditions on a design day.")]
     [Serializable]
     [DataContract(Name = "WindCondition")]
     public partial class WindCondition : OpenAPIGenBaseModel, IEquatable<WindCondition>, IValidatableObject
@@ -66,6 +67,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "WindCondition";
 
@@ -73,12 +75,14 @@ namespace HoneybeeSchema
         /// Wind speed on the design day [m/s].
         /// </summary>
         /// <value>Wind speed on the design day [m/s].</value>
+        [Summary(@"Wind speed on the design day [m/s].")]
         [DataMember(Name = "wind_speed", IsRequired = true)]
         public double WindSpeed { get; set; } 
         /// <summary>
         /// Wind direction on the design day [degrees].
         /// </summary>
         /// <value>Wind direction on the design day [degrees].</value>
+        [Summary(@"Wind direction on the design day [degrees].")]
         [DataMember(Name = "wind_direction")]
         public double WindDirection { get; set; }  = 0D;
 

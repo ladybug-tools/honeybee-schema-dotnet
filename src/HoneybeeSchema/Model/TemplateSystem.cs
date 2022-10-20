@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for HVAC systems following a standards template.
     /// </summary>
+    [Summary(@"Base class for HVAC systems following a standards template.")]
     [Serializable]
     [DataContract(Name = "_TemplateSystem")]
     public partial class TemplateSystem : IDdEnergyBaseModel, IEquatable<TemplateSystem>, IValidatableObject
@@ -73,6 +74,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "_TemplateSystem";
 

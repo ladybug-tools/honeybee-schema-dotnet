@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Opaque material representing a layer within an opaque construction.
     /// </summary>
+    [Summary(@"Opaque material representing a layer within an opaque construction.")]
     [Serializable]
     [DataContract(Name = "EnergyMaterial")]
     public partial class EnergyMaterial : IDdEnergyBaseModel, IEquatable<EnergyMaterial>, IValidatableObject
@@ -86,6 +87,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "EnergyMaterial";
 
@@ -93,42 +95,49 @@ namespace HoneybeeSchema
         /// Thickness of the material layer in meters.
         /// </summary>
         /// <value>Thickness of the material layer in meters.</value>
+        [Summary(@"Thickness of the material layer in meters.")]
         [DataMember(Name = "thickness", IsRequired = true)]
         public double Thickness { get; set; } 
         /// <summary>
         /// Thermal conductivity of the material layer in W/m-K.
         /// </summary>
         /// <value>Thermal conductivity of the material layer in W/m-K.</value>
+        [Summary(@"Thermal conductivity of the material layer in W/m-K.")]
         [DataMember(Name = "conductivity", IsRequired = true)]
         public double Conductivity { get; set; } 
         /// <summary>
         /// Density of the material layer in kg/m3.
         /// </summary>
         /// <value>Density of the material layer in kg/m3.</value>
+        [Summary(@"Density of the material layer in kg/m3.")]
         [DataMember(Name = "density", IsRequired = true)]
         public double Density { get; set; } 
         /// <summary>
         /// Specific heat of the material layer in J/kg-K.
         /// </summary>
         /// <value>Specific heat of the material layer in J/kg-K.</value>
+        [Summary(@"Specific heat of the material layer in J/kg-K.")]
         [DataMember(Name = "specific_heat", IsRequired = true)]
         public double SpecificHeat { get; set; } 
         /// <summary>
         /// Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9.
         /// </summary>
         /// <value>Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9.</value>
+        [Summary(@"Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9.")]
         [DataMember(Name = "thermal_absorptance")]
         public double ThermalAbsorptance { get; set; }  = 0.9D;
         /// <summary>
         /// Fraction of incident solar radiation absorbed by the material. Default: 0.7.
         /// </summary>
         /// <value>Fraction of incident solar radiation absorbed by the material. Default: 0.7.</value>
+        [Summary(@"Fraction of incident solar radiation absorbed by the material. Default: 0.7.")]
         [DataMember(Name = "solar_absorptance")]
         public double SolarAbsorptance { get; set; }  = 0.7D;
         /// <summary>
         /// Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7.
         /// </summary>
         /// <value>Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7.</value>
+        [Summary(@"Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7.")]
         [DataMember(Name = "visible_absorptance")]
         public double VisibleAbsorptance { get; set; }  = 0.7D;
 

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// FacePropertiesAbridged
     /// </summary>
+    [Summary(@"")]
     [Serializable]
     [DataContract(Name = "FacePropertiesAbridged")]
     public partial class FacePropertiesAbridged : OpenAPIGenBaseModel, IEquatable<FacePropertiesAbridged>, IValidatableObject
@@ -56,17 +57,20 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "FacePropertiesAbridged";
 
         /// <summary>
         /// Gets or Sets Energy
         /// </summary>
+        [Summary(@"Energy")]
         [DataMember(Name = "energy")]
         public FaceEnergyPropertiesAbridged Energy { get; set; } 
         /// <summary>
         /// Gets or Sets Radiance
         /// </summary>
+        [Summary(@"Radiance")]
         [DataMember(Name = "radiance")]
         public FaceRadiancePropertiesAbridged Radiance { get; set; } 
 

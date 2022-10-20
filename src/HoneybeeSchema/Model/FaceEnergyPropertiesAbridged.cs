@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
+    [Summary(@"Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.")]
     [Serializable]
     [DataContract(Name = "FaceEnergyPropertiesAbridged")]
     public partial class FaceEnergyPropertiesAbridged : OpenAPIGenBaseModel, IEquatable<FaceEnergyPropertiesAbridged>, IValidatableObject
@@ -56,6 +57,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "FaceEnergyPropertiesAbridged";
 
@@ -63,12 +65,14 @@ namespace HoneybeeSchema
         /// Identifier of an OpaqueConstruction for the Face. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.
         /// </summary>
         /// <value>Identifier of an OpaqueConstruction for the Face. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.</value>
+        [Summary(@"Identifier of an OpaqueConstruction for the Face. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.")]
         [DataMember(Name = "construction")]
         public string Construction { get; set; } 
         /// <summary>
         /// An optional AFNCrack to specify airflow through a surface crack used by the AirflowNetwork.
         /// </summary>
         /// <value>An optional AFNCrack to specify airflow through a surface crack used by the AirflowNetwork.</value>
+        [Summary(@"An optional AFNCrack to specify airflow through a surface crack used by the AirflowNetwork.")]
         [DataMember(Name = "vent_crack")]
         public AFNCrack VentCrack { get; set; } 
 

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Residential Air Conditioning, Heat Pump or Furnace system.  Residential HVAC systems are intended primarily for single-family homes and include a wide variety of options. In all cases, each room/zone will receive its own air loop WITHOUT an outdoor air inlet (air is simply being recirculated through the loop). Residential air conditioning (AC) systems are modeled using a unitary system with a single-speed direct expansion (DX) cooling coil in the loop. Residential heat pump (HP) systems use a single-speed DX heating coil in the unitary system and the residential furnace option uses a gas coil in the unitary system. In all cases, the properties of these coils are set to reflect a typical residential system.
     /// </summary>
+    [Summary(@"Residential Air Conditioning, Heat Pump or Furnace system.  Residential HVAC systems are intended primarily for single-family homes and include a wide variety of options. In all cases, each room/zone will receive its own air loop WITHOUT an outdoor air inlet (air is simply being recirculated through the loop). Residential air conditioning (AC) systems are modeled using a unitary system with a single-speed direct expansion (DX) cooling coil in the loop. Residential heat pump (HP) systems use a single-speed DX heating coil in the unitary system and the residential furnace option uses a gas coil in the unitary system. In all cases, the properties of these coils are set to reflect a typical residential system.")]
     [Serializable]
     [DataContract(Name = "Residential")]
     public partial class Residential : IDdEnergyBaseModel, IEquatable<Residential>, IValidatableObject
@@ -81,6 +82,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Residential";
 

@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A set of constructions for roof and ceiling assemblies.
     /// </summary>
+    [Summary(@"A set of constructions for roof and ceiling assemblies.")]
     [Serializable]
     [DataContract(Name = "RoofCeilingConstructionSetAbridged")]
     public partial class RoofCeilingConstructionSetAbridged : FaceSubSetAbridged, IEquatable<RoofCeilingConstructionSetAbridged>, IValidatableObject
@@ -55,6 +56,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "RoofCeilingConstructionSetAbridged";
 

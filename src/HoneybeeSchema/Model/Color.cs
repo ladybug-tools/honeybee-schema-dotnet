@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A RGB color.
     /// </summary>
+    [Summary(@"A RGB color.")]
     [Serializable]
     [DataContract(Name = "Color")]
     public partial class Color : OpenAPIGenBaseModel, IEquatable<Color>, IValidatableObject
@@ -70,6 +71,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Color";
 
@@ -77,24 +79,28 @@ namespace HoneybeeSchema
         /// Value for red channel.
         /// </summary>
         /// <value>Value for red channel.</value>
+        [Summary(@"Value for red channel.")]
         [DataMember(Name = "r", IsRequired = true)]
         public int R { get; set; } 
         /// <summary>
         /// Value for green channel.
         /// </summary>
         /// <value>Value for green channel.</value>
+        [Summary(@"Value for green channel.")]
         [DataMember(Name = "g", IsRequired = true)]
         public int G { get; set; } 
         /// <summary>
         /// Value for blue channel.
         /// </summary>
         /// <value>Value for blue channel.</value>
+        [Summary(@"Value for blue channel.")]
         [DataMember(Name = "b", IsRequired = true)]
         public int B { get; set; } 
         /// <summary>
         /// Value for the alpha channel, which defines the opacity as a number between 0 (fully transparent) and 255 (fully opaque).
         /// </summary>
         /// <value>Value for the alpha channel, which defines the opacity as a number between 0 (fully transparent) and 255 (fully opaque).</value>
+        [Summary(@"Value for the alpha channel, which defines the opacity as a number between 0 (fully transparent) and 255 (fully opaque).")]
         [DataMember(Name = "a")]
         public int A { get; set; }  = 255;
 

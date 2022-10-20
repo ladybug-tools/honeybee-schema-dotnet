@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Radiance Properties for Honeybee Aperture Abridged.
     /// </summary>
+    [Summary(@"Radiance Properties for Honeybee Aperture Abridged.")]
     [Serializable]
     [DataContract(Name = "ApertureRadiancePropertiesAbridged")]
     public partial class ApertureRadiancePropertiesAbridged : PropertiesBaseAbridged, IEquatable<ApertureRadiancePropertiesAbridged>, IValidatableObject
@@ -58,6 +59,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ApertureRadiancePropertiesAbridged";
 
@@ -65,12 +67,14 @@ namespace HoneybeeSchema
         /// An optional string to note the dynamic group &#39;             &#39;to which the Aperture is a part of. Apertures sharing the same &#39;             &#39;dynamic_group_identifier will have their states change in unison. &#39;             &#39;If None, the Aperture is assumed to be static. (default: None).
         /// </summary>
         /// <value>An optional string to note the dynamic group &#39;             &#39;to which the Aperture is a part of. Apertures sharing the same &#39;             &#39;dynamic_group_identifier will have their states change in unison. &#39;             &#39;If None, the Aperture is assumed to be static. (default: None).</value>
+        [Summary(@"An optional string to note the dynamic group &#39;             &#39;to which the Aperture is a part of. Apertures sharing the same &#39;             &#39;dynamic_group_identifier will have their states change in unison. &#39;             &#39;If None, the Aperture is assumed to be static. (default: None).")]
         [DataMember(Name = "dynamic_group_identifier")]
         public string DynamicGroupIdentifier { get; set; } 
         /// <summary>
         /// An optional list of abridged states (default: None).
         /// </summary>
         /// <value>An optional list of abridged states (default: None).</value>
+        [Summary(@"An optional list of abridged states (default: None).")]
         [DataMember(Name = "states")]
         public List<RadianceSubFaceStateAbridged> States { get; set; } 
 

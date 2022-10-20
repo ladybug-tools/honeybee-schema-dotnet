@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Base class of Abridged Radiance Properties.
     /// </summary>
+    [Summary(@"Base class of Abridged Radiance Properties.")]
     [Serializable]
     [DataContract(Name = "_PropertiesBaseAbridged")]
     public partial class PropertiesBaseAbridged : OpenAPIGenBaseModel, IEquatable<PropertiesBaseAbridged>, IValidatableObject
@@ -56,6 +57,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "_PropertiesBaseAbridged";
 
@@ -63,12 +65,14 @@ namespace HoneybeeSchema
         /// A string for a Honeybee Radiance Modifier (default: None).
         /// </summary>
         /// <value>A string for a Honeybee Radiance Modifier (default: None).</value>
+        [Summary(@"A string for a Honeybee Radiance Modifier (default: None).")]
         [DataMember(Name = "modifier")]
         public string Modifier { get; set; } 
         /// <summary>
         /// A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).
         /// </summary>
         /// <value>A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).</value>
+        [Summary(@"A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).")]
         [DataMember(Name = "modifier_blk")]
         public string ModifierBlk { get; set; } 
 

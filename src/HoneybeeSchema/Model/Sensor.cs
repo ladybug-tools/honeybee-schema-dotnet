@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// A single Radiance of sensors.
     /// </summary>
+    [Summary(@"A single Radiance of sensors.")]
     [Serializable]
     [DataContract(Name = "Sensor")]
     public partial class Sensor : OpenAPIGenBaseModel, IEquatable<Sensor>, IValidatableObject
@@ -68,6 +69,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "Sensor";
 
@@ -75,12 +77,14 @@ namespace HoneybeeSchema
         /// Position of sensor in space as an array of (x, y, z) values.
         /// </summary>
         /// <value>Position of sensor in space as an array of (x, y, z) values.</value>
+        [Summary(@"Position of sensor in space as an array of (x, y, z) values.")]
         [DataMember(Name = "pos", IsRequired = true)]
         public List<double> Pos { get; set; } 
         /// <summary>
         /// Direction of sensor as an array of (x, y, z) values.
         /// </summary>
         /// <value>Direction of sensor as an array of (x, y, z) values.</value>
+        [Summary(@"Direction of sensor as an array of (x, y, z) values.")]
         [DataMember(Name = "dir", IsRequired = true)]
         public List<double> Dir { get; set; } 
 

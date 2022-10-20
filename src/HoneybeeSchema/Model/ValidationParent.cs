@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// ValidationParent
     /// </summary>
+    [Summary(@"")]
     [Serializable]
     [DataContract(Name = "ValidationParent")]
     public partial class ValidationParent : IEquatable<ValidationParent>, IValidatableObject
@@ -75,6 +76,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ValidationParent";
 
@@ -82,12 +84,14 @@ namespace HoneybeeSchema
         /// Text string for the unique ID of the parent object.
         /// </summary>
         /// <value>Text string for the unique ID of the parent object.</value>
+        [Summary(@"Text string for the unique ID of the parent object.")]
         [DataMember(Name = "id", IsRequired = true)]
         public string Id { get; set; } 
         /// <summary>
         /// Display name of the parent object.
         /// </summary>
         /// <value>Display name of the parent object.</value>
+        [Summary(@"Display name of the parent object.")]
         [DataMember(Name = "name")]
         public string Name { get; set; } 
 

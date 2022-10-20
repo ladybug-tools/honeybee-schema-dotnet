@@ -26,6 +26,7 @@ namespace HoneybeeSchema
     /// <summary>
     /// Low Temperature Radiant with DOAS HVAC system.  This HVAC template will change the floor and/or ceiling constructions of the Rooms that it is applied to, replacing them with a construction that aligns with the radiant_type property (eg. CeilingMetalPanel).  All rooms/zones in the system are connected to a Dedicated Outdoor Air System (DOAS) that supplies a constant volume of ventilation air at the same temperature to all rooms/zones. The ventilation air temperature will vary from 21.1C (70F) to 15.5C (60F) depending on the outdoor air temperature (the DOAS supplies cooler air when outdoor conditions are warmer). The ventilation air temperature is maintained by a two-speed direct expansion (DX) cooling coil and a single-speed DX heating coil with backup electrical resistance heat.  The heating and cooling needs of the space are met with the radiant constructions, which use chilled water at 12.8C (55F) and a hot water temperature somewhere between 32.2C (90F) and 49C (120F) (warmer temperatures are used in colder climate zones).  Note that radiant systems are particularly limited in cooling capacity and using them may result in many unmet hours. To reduce unmet hours, one can remove carpets, reduce internal loads, reduce solar and envelope gains during peak times, add thermal mass, and use an expanded comfort range.
     /// </summary>
+    [Summary(@"Low Temperature Radiant with DOAS HVAC system.  This HVAC template will change the floor and/or ceiling constructions of the Rooms that it is applied to, replacing them with a construction that aligns with the radiant_type property (eg. CeilingMetalPanel).  All rooms/zones in the system are connected to a Dedicated Outdoor Air System (DOAS) that supplies a constant volume of ventilation air at the same temperature to all rooms/zones. The ventilation air temperature will vary from 21.1C (70F) to 15.5C (60F) depending on the outdoor air temperature (the DOAS supplies cooler air when outdoor conditions are warmer). The ventilation air temperature is maintained by a two-speed direct expansion (DX) cooling coil and a single-speed DX heating coil with backup electrical resistance heat.  The heating and cooling needs of the space are met with the radiant constructions, which use chilled water at 12.8C (55F) and a hot water temperature somewhere between 32.2C (90F) and 49C (120F) (warmer temperatures are used in colder climate zones).  Note that radiant systems are particularly limited in cooling capacity and using them may result in many unmet hours. To reduce unmet hours, one can remove carpets, reduce internal loads, reduce solar and envelope gains during peak times, add thermal mass, and use an expanded comfort range.")]
     [Serializable]
     [DataContract(Name = "RadiantwithDOASAbridged")]
     public partial class RadiantwithDOASAbridged : IDdEnergyBaseModel, IEquatable<RadiantwithDOASAbridged>, IValidatableObject
@@ -101,6 +102,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
+        [Summary(@"Type")]
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "RadiantwithDOASAbridged";
 
@@ -108,36 +110,42 @@ namespace HoneybeeSchema
         /// A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.</value>
+        [Summary(@"A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.")]
         [DataMember(Name = "sensible_heat_recovery")]
         public double SensibleHeatRecovery { get; set; }  = 0D;
         /// <summary>
         /// A number between 0 and 1 for the effectiveness of latent heat recovery within the system.
         /// </summary>
         /// <value>A number between 0 and 1 for the effectiveness of latent heat recovery within the system.</value>
+        [Summary(@"A number between 0 and 1 for the effectiveness of latent heat recovery within the system.")]
         [DataMember(Name = "latent_heat_recovery")]
         public double LatentHeatRecovery { get; set; }  = 0D;
         /// <summary>
         /// Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.
         /// </summary>
         /// <value>Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.</value>
+        [Summary(@"Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.")]
         [DataMember(Name = "demand_controlled_ventilation")]
         public bool DemandControlledVentilation { get; set; }  = false;
         /// <summary>
         /// An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on.
         /// </summary>
         /// <value>An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on.</value>
+        [Summary(@"An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on.")]
         [DataMember(Name = "doas_availability_schedule")]
         public string DoasAvailabilitySchedule { get; set; } 
         /// <summary>
         /// A number for the minimum number of hours of operation for the radiant system before it shuts off.
         /// </summary>
         /// <value>A number for the minimum number of hours of operation for the radiant system before it shuts off.</value>
+        [Summary(@"A number for the minimum number of hours of operation for the radiant system before it shuts off.")]
         [DataMember(Name = "minimum_operation_time")]
         public double MinimumOperationTime { get; set; }  = 1.0D;
         /// <summary>
         /// A number for the minimum number of hours for when the system can switch between heating and cooling.
         /// </summary>
         /// <value>A number for the minimum number of hours for when the system can switch between heating and cooling.</value>
+        [Summary(@"A number for the minimum number of hours for when the system can switch between heating and cooling.")]
         [DataMember(Name = "switch_over_time")]
         public double SwitchOverTime { get; set; }  = 24.0D;
 
