@@ -34,6 +34,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets ReportingFrequency
         /// </summary>
+        [Summary(@"ReportingFrequency")]
         [DataMember(Name="reporting_frequency")]
         public ReportingFrequency ReportingFrequency { get; set; } = ReportingFrequency.Hourly;
         /// <summary>

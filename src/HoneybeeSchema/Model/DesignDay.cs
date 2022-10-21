@@ -34,6 +34,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets DayType
         /// </summary>
+        [Summary(@"DayType")]
         [DataMember(Name="day_type")]
         public DesignDayTypes DayType { get; set; }   
         /// <summary>

@@ -34,6 +34,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets FaceType
         /// </summary>
+        [Summary(@"FaceType")]
         [DataMember(Name="face_type")]
         public FaceType FaceType { get; set; }   
         /// <summary>

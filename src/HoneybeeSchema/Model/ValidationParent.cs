@@ -35,6 +35,7 @@ namespace HoneybeeSchema
         /// Text for the type of object that the parent is.
         /// </summary>
         /// <value>Text for the type of object that the parent is.</value>
+        [Summary(@"Text for the type of object that the parent is.")]
         [DataMember(Name="parent_type")]
         public ParentTypes ParentType { get; set; }   
         /// <summary>

@@ -35,12 +35,14 @@ namespace HoneybeeSchema
         /// Text for the Honeybee extension from which the error originated (from the ExtensionTypes enumeration).
         /// </summary>
         /// <value>Text for the Honeybee extension from which the error originated (from the ExtensionTypes enumeration).</value>
+        [Summary(@"Text for the Honeybee extension from which the error originated (from the ExtensionTypes enumeration).")]
         [DataMember(Name="extension_type")]
         public ExtensionTypes ExtensionType { get; set; }   
         /// <summary>
         /// Text for the type of object that caused the error.
         /// </summary>
         /// <value>Text for the type of object that caused the error.</value>
+        [Summary(@"Text for the type of object that caused the error.")]
         [DataMember(Name="element_type")]
         public ObjectTypes ElementType { get; set; }   
         /// <summary>

@@ -34,11 +34,13 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets NumericType
         /// </summary>
+        [Summary(@"NumericType")]
         [DataMember(Name="numeric_type")]
         public ScheduleNumericType NumericType { get; set; } = ScheduleNumericType.Continuous;
         /// <summary>
         /// Gets or Sets UnitType
         /// </summary>
+        [Summary(@"UnitType")]
         [DataMember(Name="unit_type")]
         public ScheduleUnitType UnitType { get; set; } = ScheduleUnitType.Dimensionless;
         /// <summary>

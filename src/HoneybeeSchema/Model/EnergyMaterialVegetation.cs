@@ -34,11 +34,13 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Roughness
         /// </summary>
+        [Summary(@"Roughness")]
         [DataMember(Name="roughness")]
         public Roughness Roughness { get; set; } = Roughness.MediumRough;
         /// <summary>
         /// Gets or Sets MoistDiffModel
         /// </summary>
+        [Summary(@"MoistDiffModel")]
         [DataMember(Name="moist_diff_model")]
         public MoistureDiffusionModel MoistDiffModel { get; set; } = MoistureDiffusionModel.Simple;
         /// <summary>

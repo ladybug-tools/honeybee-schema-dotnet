@@ -35,12 +35,14 @@ namespace HoneybeeSchema
         /// Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards
         /// </summary>
         /// <value>Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards</value>
+        [Summary(@"Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards")]
         [DataMember(Name="vintage")]
         public Vintages Vintage { get; set; } = Vintages.ASHRAE_2019;
         /// <summary>
         /// Text for the specific type of system equipment from the FCUwithDOASEquipmentType enumeration.
         /// </summary>
         /// <value>Text for the specific type of system equipment from the FCUwithDOASEquipmentType enumeration.</value>
+        [Summary(@"Text for the specific type of system equipment from the FCUwithDOASEquipmentType enumeration.")]
         [DataMember(Name="equipment_type")]
         public FCUwithDOASEquipmentType EquipmentType { get; set; } = FCUwithDOASEquipmentType.DOAS_FCU_Chiller_Boiler;
         /// <summary>
