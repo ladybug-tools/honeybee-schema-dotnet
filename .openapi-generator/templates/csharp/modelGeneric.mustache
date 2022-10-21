@@ -26,6 +26,7 @@
         {{#description}}
         /// <value>{{description}}</value>
         {{/description}}
+        [Summary(@"{{^description}}{{{name}}}{{/description}}{{#description}}{{description}}{{/description}}")]
         [DataMember(Name="{{baseName}}")]
         public {{#complexType}}{{{complexType}}}{{/complexType}}{{^complexType}}{{{datatypeWithEnum}}}{{/complexType}}{{^isContainer}}{{^required}}{{^isEnum}}?{{/isEnum}}{{/required}}{{/isContainer}} {{name}} { get; set; }  {{#defaultValue}} = {{#isEnum}}{{{datatypeWithEnum}}}Enum""{{{defaultValue}}}""Enum{{/isEnum}}{{^isEnum}}{{{defaultValue}}}{{/isEnum}};{{/defaultValue}} 
         {{/isEnum}}
