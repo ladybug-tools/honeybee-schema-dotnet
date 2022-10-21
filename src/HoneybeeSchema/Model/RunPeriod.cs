@@ -35,6 +35,7 @@ namespace HoneybeeSchema
         /// Text for the day of the week on which the simulation starts.
         /// </summary>
         /// <value>Text for the day of the week on which the simulation starts.</value>
+        [Summary(@"Text for the day of the week on which the simulation starts.")]
         [DataMember(Name="start_day_of_week")]
         public DaysOfWeek StartDayOfWeek { get; set; } = DaysOfWeek.Sunday;
         /// <summary>

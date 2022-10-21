@@ -35,6 +35,7 @@ namespace HoneybeeSchema
         /// Text to denote the type of fuel consumed by the process. Using the \&quot;None\&quot; type indicates that no end uses will be associated with the process, only the zone gains.
         /// </summary>
         /// <value>Text to denote the type of fuel consumed by the process. Using the \&quot;None\&quot; type indicates that no end uses will be associated with the process, only the zone gains.</value>
+        [Summary(@"Text to denote the type of fuel consumed by the process. Using the \&quot;None\&quot; type indicates that no end uses will be associated with the process, only the zone gains.")]
         [DataMember(Name="fuel_type")]
         public FuelTypes FuelType { get; set; }   
         /// <summary>

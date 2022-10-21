@@ -34,6 +34,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets ViewType
         /// </summary>
+        [Summary(@"ViewType")]
         [DataMember(Name="view_type")]
         public ViewType ViewType { get; set; } = ViewType.v;
         /// <summary>

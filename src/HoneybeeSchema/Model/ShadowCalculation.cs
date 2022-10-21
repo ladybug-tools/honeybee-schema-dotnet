@@ -34,18 +34,21 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets SolarDistribution
         /// </summary>
+        [Summary(@"SolarDistribution")]
         [DataMember(Name="solar_distribution")]
         public SolarDistribution SolarDistribution { get; set; } = SolarDistribution.FullExteriorWithReflections;
         /// <summary>
         /// Text noting whether CPU-based polygon clipping method orGPU-based pixel counting method should be used. For low numbers of shadingsurfaces (less than ~200), PolygonClipping requires less runtime thanPixelCounting. However, PixelCounting runtime scales significantlybetter at higher numbers of shading surfaces. PixelCounting also hasno limitations related to zone concavity when used with any“FullInterior” solar distribution options.
         /// </summary>
         /// <value>Text noting whether CPU-based polygon clipping method orGPU-based pixel counting method should be used. For low numbers of shadingsurfaces (less than ~200), PolygonClipping requires less runtime thanPixelCounting. However, PixelCounting runtime scales significantlybetter at higher numbers of shading surfaces. PixelCounting also hasno limitations related to zone concavity when used with any“FullInterior” solar distribution options.</value>
+        [Summary(@"Text noting whether CPU-based polygon clipping method orGPU-based pixel counting method should be used. For low numbers of shadingsurfaces (less than ~200), PolygonClipping requires less runtime thanPixelCounting. However, PixelCounting runtime scales significantlybetter at higher numbers of shading surfaces. PixelCounting also hasno limitations related to zone concavity when used with any“FullInterior” solar distribution options.")]
         [DataMember(Name="calculation_method")]
         public CalculationMethod CalculationMethod { get; set; } = CalculationMethod.PolygonClipping;
         /// <summary>
         /// Text describing how often the solar and shading calculations are updated with respect to the flow of time in the simulation.
         /// </summary>
         /// <value>Text describing how often the solar and shading calculations are updated with respect to the flow of time in the simulation.</value>
+        [Summary(@"Text describing how often the solar and shading calculations are updated with respect to the flow of time in the simulation.")]
         [DataMember(Name="calculation_update_method")]
         public CalculationUpdateMethod CalculationUpdateMethod { get; set; } = CalculationUpdateMethod.Periodic;
         /// <summary>

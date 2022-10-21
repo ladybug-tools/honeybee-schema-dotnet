@@ -35,6 +35,7 @@ namespace HoneybeeSchema
         /// Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms.
         /// </summary>
         /// <value>Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms.</value>
+        [Summary(@"Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms.")]
         [DataMember(Name="terrain_type")]
         public TerrianTypes TerrainType { get; set; } = TerrianTypes.City;
         /// <summary>

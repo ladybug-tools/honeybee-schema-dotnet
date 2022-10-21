@@ -34,6 +34,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets HumidityType
         /// </summary>
+        [Summary(@"HumidityType")]
         [DataMember(Name="humidity_type")]
         public HumidityTypes HumidityType { get; set; }   
         /// <summary>

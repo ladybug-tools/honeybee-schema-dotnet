@@ -34,6 +34,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets Roughness
         /// </summary>
+        [Summary(@"Roughness")]
         [DataMember(Name="roughness")]
         public Roughness Roughness { get; set; } = Roughness.MediumRough;
         /// <summary>

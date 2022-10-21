@@ -35,6 +35,7 @@ namespace HoneybeeSchema
         /// Text indicating the units in which the model geometry exists. This is used to scale the geometry to the correct units for simulation engines like EnergyPlus, which requires all geometry be in meters.
         /// </summary>
         /// <value>Text indicating the units in which the model geometry exists. This is used to scale the geometry to the correct units for simulation engines like EnergyPlus, which requires all geometry be in meters.</value>
+        [Summary(@"Text indicating the units in which the model geometry exists. This is used to scale the geometry to the correct units for simulation engines like EnergyPlus, which requires all geometry be in meters.")]
         [DataMember(Name="units")]
         public Units Units { get; set; } = Units.Meters;
         /// <summary>

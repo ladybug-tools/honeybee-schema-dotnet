@@ -34,6 +34,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets GasType
         /// </summary>
+        [Summary(@"GasType")]
         [DataMember(Name="gas_type")]
         public GasType GasType { get; set; } = GasType.Air;
         /// <summary>

@@ -34,6 +34,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Gets or Sets SlatOrientation
         /// </summary>
+        [Summary(@"SlatOrientation")]
         [DataMember(Name="slat_orientation")]
         public SlatOrientation SlatOrientation { get; set; } = SlatOrientation.Horizontal;
         /// <summary>

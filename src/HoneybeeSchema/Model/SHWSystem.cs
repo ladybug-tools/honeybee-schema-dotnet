@@ -35,6 +35,7 @@ namespace HoneybeeSchema
         /// Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone.
         /// </summary>
         /// <value>Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone.</value>
+        [Summary(@"Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone.")]
         [DataMember(Name="equipment_type")]
         public SHWEquipmentType EquipmentType { get; set; } = SHWEquipmentType.Gas_WaterHeater;
         /// <summary>
