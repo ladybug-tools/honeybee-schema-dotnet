@@ -13,7 +13,7 @@ using NUnit.Framework;
 using System.Linq;
 using System.Collections.Generic;
 
-using HB = HoneybeeSchema;
+using HoneybeeSchema;
 using System.Net;
 
 namespace HoneybeeSchema.Test
@@ -40,7 +40,7 @@ namespace HoneybeeSchema.Test
             using (WebClient wc = new WebClient())
             {
                 var json = wc.DownloadString(url);
-                this.instance = HB.Model.FromJson(json);
+                this.instance = Model.FromJson(json);
             }
         }
 
@@ -60,7 +60,7 @@ namespace HoneybeeSchema.Test
         public void ModelInstanceTest()
         {
             // TODO uncomment below to test "IsInstanceOf" Model
-            Assert.IsInstanceOf(typeof(HB.Model), instance);
+            Assert.IsInstanceOf(typeof(Model), instance);
         }
 
 
@@ -169,6 +169,20 @@ namespace HoneybeeSchema.Test
             Assert.IsTrue(isSame);
         }
 
+        [Test]
+        public void HVACSummaryTest()
+        {
+            var dummy = new VAV("test");
+
+            // get class summary
+            var VAV = SummaryAttribute.GetSummary(typeof(VAV));
+            Assert.IsTrue(!string.IsNullOrEmpty(VAV));
+
+            // get property summary
+            var sr = SummaryAttribute.GetSummary(typeof(VAV), nameof(dummy.SensibleHeatRecovery));
+            Assert.IsTrue(!string.IsNullOrEmpty(sr));
+
+        }
     }
 
 }
