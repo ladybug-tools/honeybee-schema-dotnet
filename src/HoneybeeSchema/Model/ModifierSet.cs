@@ -56,7 +56,7 @@ namespace HoneybeeSchema
         public ModifierSet
         (
             string identifier, // Required parameters
-            string displayName= default, WallModifierSet wallSet= default, FloorModifierSet floorSet= default, RoofCeilingModifierSet roofCeilingSet= default, ApertureModifierSet apertureSet= default, DoorModifierSet doorSet= default, ShadeModifierSet shadeSet= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> airBoundaryModifier= default// Optional parameters
+            string displayName= default, WallModifierSet wallSet= default, FloorModifierSet floorSet= default, RoofCeilingModifierSet roofCeilingSet= default, ApertureModifierSet apertureSet= default, DoorModifierSet doorSet= default, ShadeModifierSet shadeSet= default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> airBoundaryModifier= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             this.WallSet = wallSet;
@@ -131,7 +131,7 @@ namespace HoneybeeSchema
         /// <value>An optional Modifier to be used for all Faces with an AirBoundary face type. If None, it will be the honeybee generic air wall modifier.</value>
         [Summary(@"An optional Modifier to be used for all Faces with an AirBoundary face type. If None, it will be the honeybee generic air wall modifier.")]
         [DataMember(Name = "air_boundary_modifier")]
-        public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> AirBoundaryModifier { get; set; } 
+        public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> AirBoundaryModifier { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -52,7 +52,7 @@ namespace HoneybeeSchema
         public AirBoundaryConstruction
         (
             string identifier, // Required parameters
-            string displayName= default, Object userData= default, double airMixingPerArea = 0.1D, AnyOf<ScheduleRuleset,ScheduleFixedInterval> airMixingSchedule= default// Optional parameters
+            string displayName= default, Object userData= default, double airMixingPerArea = 0.1D, AnyOf<ScheduleRuleset, ScheduleFixedInterval> airMixingSchedule= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.AirMixingPerArea = airMixingPerArea;
@@ -87,7 +87,7 @@ namespace HoneybeeSchema
         /// <value>A fractional schedule as a ScheduleRuleset or ScheduleFixedInterval for the air mixing schedule across the construction. If unspecified, an Always On schedule will be assumed.</value>
         [Summary(@"A fractional schedule as a ScheduleRuleset or ScheduleFixedInterval for the air mixing schedule across the construction. If unspecified, an Always On schedule will be assumed.")]
         [DataMember(Name = "air_mixing_schedule")]
-        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> AirMixingSchedule { get; set; } 
+        public AnyOf<ScheduleRuleset, ScheduleFixedInterval> AirMixingSchedule { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object

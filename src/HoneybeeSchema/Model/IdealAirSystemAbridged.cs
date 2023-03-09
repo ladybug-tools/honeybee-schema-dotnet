@@ -67,7 +67,7 @@ namespace HoneybeeSchema
         public IdealAirSystemAbridged
         (
             string identifier, // Required parameters
-            string displayName= default, Object userData= default, EconomizerType economizerType= EconomizerType.DifferentialDryBulb, bool demandControlledVentilation = false, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, double heatingAirTemperature = 50D, double coolingAirTemperature = 13D, AnyOf<Autosize,NoLimit,double> heatingLimit= default, AnyOf<Autosize,NoLimit,double> coolingLimit= default, string heatingAvailability= default, string coolingAvailability= default// Optional parameters
+            string displayName= default, Object userData= default, EconomizerType economizerType= EconomizerType.DifferentialDryBulb, bool demandControlledVentilation = false, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, double heatingAirTemperature = 50D, double coolingAirTemperature = 13D, AnyOf<Autosize, NoLimit, double> heatingLimit= default, AnyOf<Autosize, NoLimit, double> coolingLimit= default, string heatingAvailability= default, string coolingAvailability= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.EconomizerType = economizerType;
@@ -138,14 +138,14 @@ namespace HoneybeeSchema
         /// <value>A number for the maximum heating capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the heating capacity.</value>
         [Summary(@"A number for the maximum heating capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the heating capacity.")]
         [DataMember(Name = "heating_limit")]
-        public AnyOf<Autosize,NoLimit,double> HeatingLimit { get; set; } 
+        public AnyOf<Autosize, NoLimit, double> HeatingLimit { get; set; } 
         /// <summary>
         /// A number for the maximum cooling capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the cooling capacity.
         /// </summary>
         /// <value>A number for the maximum cooling capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the cooling capacity.</value>
         [Summary(@"A number for the maximum cooling capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the cooling capacity.")]
         [DataMember(Name = "cooling_limit")]
-        public AnyOf<Autosize,NoLimit,double> CoolingLimit { get; set; } 
+        public AnyOf<Autosize, NoLimit, double> CoolingLimit { get; set; } 
         /// <summary>
         /// An optional identifier of a schedule to set the availability of heating over the course of the simulation.
         /// </summary>

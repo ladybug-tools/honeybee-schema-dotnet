@@ -55,7 +55,7 @@ namespace HoneybeeSchema
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public Lighting
         (
-            string identifier, double wattsPerArea, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule, // Required parameters
+            string identifier, double wattsPerArea, AnyOf<ScheduleRuleset, ScheduleFixedInterval> schedule, // Required parameters
             string displayName= default, Object userData= default, double visibleFraction = 0.25D, double radiantFraction = 0.32D, double returnAirFraction = 0.0D, double baselineWattsPerArea = 11.84029D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
@@ -96,7 +96,7 @@ namespace HoneybeeSchema
         /// <value>The schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile.</value>
         [Summary(@"The schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile.")]
         [DataMember(Name = "schedule", IsRequired = true)]
-        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; } 
+        public AnyOf<ScheduleRuleset, ScheduleFixedInterval> Schedule { get; set; } 
         /// <summary>
         /// The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. (Default: 0.25).
         /// </summary>

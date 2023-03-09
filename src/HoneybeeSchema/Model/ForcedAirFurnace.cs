@@ -24,9 +24,9 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Forced Air Furnace HVAC system (aka. System 9 or 10).  Forced air furnaces are intended only for spaces only requiring heating and ventilation. Each room/zone receives its own air loop with its own gas heating coil, which will supply air at a temperature up to 50C (122F) to meet the heating needs of the room/zone. Fans are constant volume.  PTAC/HP systems are the traditional baseline system for storage spaces that only require heating.
+    /// Forced Air Furnace HVAC system (aka. System 9 or 10).  Forced air furnaces are intended only for spaces only requiring heating and ventilation. Each room/zone receives its own air loop with its own gas heating coil, which will supply air at a temperature up to 50C (122F) to meet the heating needs of the room/zone. Fans are constant volume.  ForcedAirFurnace systems are the traditional baseline system for storage spaces that only require heating.
     /// </summary>
-    [Summary(@"Forced Air Furnace HVAC system (aka. System 9 or 10).  Forced air furnaces are intended only for spaces only requiring heating and ventilation. Each room/zone receives its own air loop with its own gas heating coil, which will supply air at a temperature up to 50C (122F) to meet the heating needs of the room/zone. Fans are constant volume.  PTAC/HP systems are the traditional baseline system for storage spaces that only require heating.")]
+    [Summary(@"Forced Air Furnace HVAC system (aka. System 9 or 10).  Forced air furnaces are intended only for spaces only requiring heating and ventilation. Each room/zone receives its own air loop with its own gas heating coil, which will supply air at a temperature up to 50C (122F) to meet the heating needs of the room/zone. Fans are constant volume.  ForcedAirFurnace systems are the traditional baseline system for storage spaces that only require heating.")]
     [Serializable]
     [DataContract(Name = "ForcedAirFurnace")]
     public partial class ForcedAirFurnace : IDdEnergyBaseModel, IEquatable<ForcedAirFurnace>, IValidatableObject
@@ -38,13 +38,6 @@ namespace HoneybeeSchema
         [Summary(@"Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards")]
         [DataMember(Name="vintage")]
         public Vintages Vintage { get; set; } = Vintages.ASHRAE_2019;
-        /// <summary>
-        /// Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration).
-        /// </summary>
-        /// <value>Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration).</value>
-        [Summary(@"Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration).")]
-        [DataMember(Name="economizer_type")]
-        public AllAirEconomizerType EconomizerType { get; set; } = AllAirEconomizerType.NoEconomizer;
         /// <summary>
         /// Text for the specific type of system equipment from the FurnaceEquipmentType enumeration.
         /// </summary>
@@ -66,10 +59,6 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="ForcedAirFurnace" /> class.
         /// </summary>
         /// <param name="vintage">Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards.</param>
-        /// <param name="economizerType">Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration)..</param>
-        /// <param name="sensibleHeatRecovery">A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. (default to 0D).</param>
-        /// <param name="latentHeatRecovery">A number between 0 and 1 for the effectiveness of latent heat recovery within the system. (default to 0D).</param>
-        /// <param name="demandControlledVentilation">Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms. (default to false).</param>
         /// <param name="equipmentType">Text for the specific type of system equipment from the FurnaceEquipmentType enumeration..</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
@@ -77,14 +66,10 @@ namespace HoneybeeSchema
         public ForcedAirFurnace
         (
             string identifier, // Required parameters
-            string displayName= default, Object userData= default, Vintages vintage= Vintages.ASHRAE_2019, AllAirEconomizerType economizerType= AllAirEconomizerType.NoEconomizer, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, bool demandControlledVentilation = false, FurnaceEquipmentType equipmentType= FurnaceEquipmentType.Furnace// Optional parameters
+            string displayName= default, Object userData= default, Vintages vintage= Vintages.ASHRAE_2019, FurnaceEquipmentType equipmentType= FurnaceEquipmentType.Furnace// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.Vintage = vintage;
-            this.EconomizerType = economizerType;
-            this.SensibleHeatRecovery = sensibleHeatRecovery;
-            this.LatentHeatRecovery = latentHeatRecovery;
-            this.DemandControlledVentilation = demandControlledVentilation;
             this.EquipmentType = equipmentType;
 
             // Set non-required readonly properties with defaultValue
@@ -103,27 +88,6 @@ namespace HoneybeeSchema
         [DataMember(Name = "type")]
         public override string Type { get; protected set; }  = "ForcedAirFurnace";
 
-        /// <summary>
-        /// A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.
-        /// </summary>
-        /// <value>A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.</value>
-        [Summary(@"A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.")]
-        [DataMember(Name = "sensible_heat_recovery")]
-        public double SensibleHeatRecovery { get; set; }  = 0D;
-        /// <summary>
-        /// A number between 0 and 1 for the effectiveness of latent heat recovery within the system.
-        /// </summary>
-        /// <value>A number between 0 and 1 for the effectiveness of latent heat recovery within the system.</value>
-        [Summary(@"A number between 0 and 1 for the effectiveness of latent heat recovery within the system.")]
-        [DataMember(Name = "latent_heat_recovery")]
-        public double LatentHeatRecovery { get; set; }  = 0D;
-        /// <summary>
-        /// Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.
-        /// </summary>
-        /// <value>Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.</value>
-        [Summary(@"Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.")]
-        [DataMember(Name = "demand_controlled_ventilation")]
-        public bool DemandControlledVentilation { get; set; }  = false;
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -150,10 +114,6 @@ namespace HoneybeeSchema
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Vintage: ").Append(this.Vintage).Append("\n");
-            sb.Append("  EconomizerType: ").Append(this.EconomizerType).Append("\n");
-            sb.Append("  SensibleHeatRecovery: ").Append(this.SensibleHeatRecovery).Append("\n");
-            sb.Append("  LatentHeatRecovery: ").Append(this.LatentHeatRecovery).Append("\n");
-            sb.Append("  DemandControlledVentilation: ").Append(this.DemandControlledVentilation).Append("\n");
             sb.Append("  EquipmentType: ").Append(this.EquipmentType).Append("\n");
             return sb.ToString();
         }
@@ -219,10 +179,6 @@ namespace HoneybeeSchema
                 return false;
             return base.Equals(input) && 
                     Extension.Equals(this.Vintage, input.Vintage) && 
-                    Extension.Equals(this.EconomizerType, input.EconomizerType) && 
-                    Extension.Equals(this.SensibleHeatRecovery, input.SensibleHeatRecovery) && 
-                    Extension.Equals(this.LatentHeatRecovery, input.LatentHeatRecovery) && 
-                    Extension.Equals(this.DemandControlledVentilation, input.DemandControlledVentilation) && 
                     Extension.Equals(this.Type, input.Type) && 
                     Extension.Equals(this.EquipmentType, input.EquipmentType);
         }
@@ -238,14 +194,6 @@ namespace HoneybeeSchema
                 int hashCode = base.GetHashCode();
                 if (this.Vintage != null)
                     hashCode = hashCode * 59 + this.Vintage.GetHashCode();
-                if (this.EconomizerType != null)
-                    hashCode = hashCode * 59 + this.EconomizerType.GetHashCode();
-                if (this.SensibleHeatRecovery != null)
-                    hashCode = hashCode * 59 + this.SensibleHeatRecovery.GetHashCode();
-                if (this.LatentHeatRecovery != null)
-                    hashCode = hashCode * 59 + this.LatentHeatRecovery.GetHashCode();
-                if (this.DemandControlledVentilation != null)
-                    hashCode = hashCode * 59 + this.DemandControlledVentilation.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 if (this.EquipmentType != null)
@@ -262,34 +210,6 @@ namespace HoneybeeSchema
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             foreach(var x in base.BaseValidate(validationContext)) yield return x;
-
-            
-            // SensibleHeatRecovery (double) maximum
-            if(this.SensibleHeatRecovery > (double)1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SensibleHeatRecovery, must be a value less than or equal to 1.", new [] { "SensibleHeatRecovery" });
-            }
-
-            // SensibleHeatRecovery (double) minimum
-            if(this.SensibleHeatRecovery < (double)0)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SensibleHeatRecovery, must be a value greater than or equal to 0.", new [] { "SensibleHeatRecovery" });
-            }
-
-
-            
-            // LatentHeatRecovery (double) maximum
-            if(this.LatentHeatRecovery > (double)1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LatentHeatRecovery, must be a value less than or equal to 1.", new [] { "LatentHeatRecovery" });
-            }
-
-            // LatentHeatRecovery (double) minimum
-            if(this.LatentHeatRecovery < (double)0)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for LatentHeatRecovery, must be a value greater than or equal to 0.", new [] { "LatentHeatRecovery" });
-            }
-
 
             
             // Type (string) pattern

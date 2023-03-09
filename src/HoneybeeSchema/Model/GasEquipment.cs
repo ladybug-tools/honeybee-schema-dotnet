@@ -54,7 +54,7 @@ namespace HoneybeeSchema
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public GasEquipment
         (
-            string identifier, double wattsPerArea, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule, // Required parameters
+            string identifier, double wattsPerArea, AnyOf<ScheduleRuleset, ScheduleFixedInterval> schedule, // Required parameters
             string displayName= default, Object userData= default, double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D // Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
@@ -94,7 +94,7 @@ namespace HoneybeeSchema
         /// <value>The schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.</value>
         [Summary(@"The schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.")]
         [DataMember(Name = "schedule", IsRequired = true)]
-        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; } 
+        public AnyOf<ScheduleRuleset, ScheduleFixedInterval> Schedule { get; set; } 
         /// <summary>
         /// Number for the amount of long-wave radiation heat given off by equipment. Default value is 0.
         /// </summary>

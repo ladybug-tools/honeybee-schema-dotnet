@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Honeybee validation-report schema.",
-        "version": "1.52.0",
+        "version": "1.53.1",
         "title": "Honeybee Validation Report Schema",
         "contact": {
             "name": "Ladybug Tools",

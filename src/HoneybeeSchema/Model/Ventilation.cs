@@ -55,7 +55,7 @@ namespace HoneybeeSchema
         public Ventilation
         (
             string identifier, // Required parameters
-            string displayName= default, Object userData= default, double flowPerPerson = 0D, double flowPerArea = 0D, double airChangesPerHour = 0D, double flowPerZone = 0D, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule= default// Optional parameters
+            string displayName= default, Object userData= default, double flowPerPerson = 0D, double flowPerArea = 0D, double airChangesPerHour = 0D, double flowPerZone = 0D, AnyOf<ScheduleRuleset, ScheduleFixedInterval> schedule= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.FlowPerPerson = flowPerPerson;
@@ -114,7 +114,7 @@ namespace HoneybeeSchema
         /// <value>Schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.</value>
         [Summary(@"Schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.")]
         [DataMember(Name = "schedule")]
-        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; } 
+        public AnyOf<ScheduleRuleset, ScheduleFixedInterval> Schedule { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object

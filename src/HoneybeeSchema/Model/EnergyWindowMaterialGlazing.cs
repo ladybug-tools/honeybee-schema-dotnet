@@ -63,7 +63,7 @@ namespace HoneybeeSchema
         public EnergyWindowMaterialGlazing
         (
             string identifier, // Required parameters
-            string displayName= default, Object userData= default, double thickness = 0.003D, double solarTransmittance = 0.85D, double solarReflectance = 0.075D, AnyOf<Autocalculate,double> solarReflectanceBack= default, double visibleTransmittance = 0.9D, double visibleReflectance = 0.075D, AnyOf<Autocalculate,double> visibleReflectanceBack= default, double infraredTransmittance = 0D, double emissivity = 0.84D, double emissivityBack = 0.84D, double conductivity = 0.9D, double dirtCorrection = 1D, bool solarDiffusing = false// Optional parameters
+            string displayName= default, Object userData= default, double thickness = 0.003D, double solarTransmittance = 0.85D, double solarReflectance = 0.075D, AnyOf<Autocalculate, double> solarReflectanceBack= default, double visibleTransmittance = 0.9D, double visibleReflectance = 0.075D, AnyOf<Autocalculate, double> visibleReflectanceBack= default, double infraredTransmittance = 0D, double emissivity = 0.84D, double emissivityBack = 0.84D, double conductivity = 0.9D, double dirtCorrection = 1D, bool solarDiffusing = false// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.Thickness = thickness;
@@ -123,7 +123,7 @@ namespace HoneybeeSchema
         /// <value>Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum.</value>
         [Summary(@"Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum.")]
         [DataMember(Name = "solar_reflectance_back")]
-        public AnyOf<Autocalculate,double> SolarReflectanceBack { get; set; } 
+        public AnyOf<Autocalculate, double> SolarReflectanceBack { get; set; } 
         /// <summary>
         /// Transmittance of visible light through the glass at normal incidence. Default: 0.9 for clear glass.
         /// </summary>
@@ -144,7 +144,7 @@ namespace HoneybeeSchema
         /// <value>Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye.</value>
         [Summary(@"Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye.")]
         [DataMember(Name = "visible_reflectance_back")]
-        public AnyOf<Autocalculate,double> VisibleReflectanceBack { get; set; } 
+        public AnyOf<Autocalculate, double> VisibleReflectanceBack { get; set; } 
         /// <summary>
         /// Long-wave transmittance at normal incidence.
         /// </summary>

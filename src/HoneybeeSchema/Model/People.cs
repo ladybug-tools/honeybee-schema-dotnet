@@ -54,8 +54,8 @@ namespace HoneybeeSchema
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public People
         (
-            string identifier, double peoplePerArea, AnyOf<ScheduleRuleset,ScheduleFixedInterval> occupancySchedule, // Required parameters
-            string displayName= default, Object userData= default, AnyOf<ScheduleRuleset,ScheduleFixedInterval> activitySchedule= default, double radiantFraction = 0.3D, AnyOf<Autocalculate,double> latentFraction= default// Optional parameters
+            string identifier, double peoplePerArea, AnyOf<ScheduleRuleset, ScheduleFixedInterval> occupancySchedule, // Required parameters
+            string displayName= default, Object userData= default, AnyOf<ScheduleRuleset, ScheduleFixedInterval> activitySchedule= default, double radiantFraction = 0.3D, AnyOf<Autocalculate, double> latentFraction= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.PeoplePerArea = peoplePerArea;
@@ -94,14 +94,14 @@ namespace HoneybeeSchema
         /// <value>A schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile.</value>
         [Summary(@"A schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile.")]
         [DataMember(Name = "occupancy_schedule", IsRequired = true)]
-        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> OccupancySchedule { get; set; } 
+        public AnyOf<ScheduleRuleset, ScheduleFixedInterval> OccupancySchedule { get; set; } 
         /// <summary>
         /// A schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated.
         /// </summary>
         /// <value>A schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated.</value>
         [Summary(@"A schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated.")]
         [DataMember(Name = "activity_schedule")]
-        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> ActivitySchedule { get; set; } 
+        public AnyOf<ScheduleRuleset, ScheduleFixedInterval> ActivitySchedule { get; set; } 
         /// <summary>
         /// The radiant fraction of sensible heat released by people. (Default: 0.3).
         /// </summary>
@@ -115,7 +115,7 @@ namespace HoneybeeSchema
         /// <value>Number for the latent fraction of heat gain due to people or an Autocalculate object.</value>
         [Summary(@"Number for the latent fraction of heat gain due to people or an Autocalculate object.")]
         [DataMember(Name = "latent_fraction")]
-        public AnyOf<Autocalculate,double> LatentFraction { get; set; } 
+        public AnyOf<Autocalculate, double> LatentFraction { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object

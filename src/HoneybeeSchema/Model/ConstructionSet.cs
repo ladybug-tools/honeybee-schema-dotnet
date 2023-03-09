@@ -57,7 +57,7 @@ namespace HoneybeeSchema
         public ConstructionSet
         (
             string identifier, // Required parameters
-            string displayName= default, Object userData= default, WallConstructionSet wallSet= default, FloorConstructionSet floorSet= default, RoofCeilingConstructionSet roofCeilingSet= default, ApertureConstructionSet apertureSet= default, DoorConstructionSet doorSet= default, ShadeConstruction shadeConstruction= default, AnyOf<AirBoundaryConstruction,OpaqueConstruction> airBoundaryConstruction= default// Optional parameters
+            string displayName= default, Object userData= default, WallConstructionSet wallSet= default, FloorConstructionSet floorSet= default, RoofCeilingConstructionSet roofCeilingSet= default, ApertureConstructionSet apertureSet= default, DoorConstructionSet doorSet= default, ShadeConstruction shadeConstruction= default, AnyOf<AirBoundaryConstruction, OpaqueConstruction> airBoundaryConstruction= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.WallSet = wallSet;
@@ -132,7 +132,7 @@ namespace HoneybeeSchema
         /// <value>An AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type.</value>
         [Summary(@"An AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type.")]
         [DataMember(Name = "air_boundary_construction")]
-        public AnyOf<AirBoundaryConstruction,OpaqueConstruction> AirBoundaryConstruction { get; set; } 
+        public AnyOf<AirBoundaryConstruction, OpaqueConstruction> AirBoundaryConstruction { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object

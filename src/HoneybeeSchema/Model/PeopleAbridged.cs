@@ -55,7 +55,7 @@ namespace HoneybeeSchema
         public PeopleAbridged
         (
             string identifier, double peoplePerArea, string occupancySchedule, // Required parameters
-            string displayName= default, Object userData= default, string activitySchedule= default, double radiantFraction = 0.3D, AnyOf<Autocalculate,double> latentFraction= default// Optional parameters
+            string displayName= default, Object userData= default, string activitySchedule= default, double radiantFraction = 0.3D, AnyOf<Autocalculate, double> latentFraction= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.PeoplePerArea = peoplePerArea;
@@ -115,7 +115,7 @@ namespace HoneybeeSchema
         /// <value>Number for the latent fraction of heat gain due to people or an Autocalculate object.</value>
         [Summary(@"Number for the latent fraction of heat gain due to people or an Autocalculate object.")]
         [DataMember(Name = "latent_fraction")]
-        public AnyOf<Autocalculate,double> LatentFraction { get; set; } 
+        public AnyOf<Autocalculate, double> LatentFraction { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object

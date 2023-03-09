@@ -41,7 +41,7 @@ namespace HoneybeeSchema
         public ModelRadianceProperties
         (
             // Required parameters
-           List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> modifiers= default, List<AnyOf<ModifierSet,ModifierSetAbridged>> modifierSets= default, List<SensorGrid> sensorGrids= default, List<View> views= default// Optional parameters
+           List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>> modifiers= default, List<AnyOf<ModifierSet, ModifierSetAbridged>> modifierSets= default, List<SensorGrid> sensorGrids= default, List<View> views= default// Optional parameters
         ) : base()// BaseClass
         {
             this.Modifiers = modifiers;
@@ -79,14 +79,14 @@ namespace HoneybeeSchema
         /// <value>A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set.</value>
         [Summary(@"A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set.")]
         [DataMember(Name = "modifiers")]
-        public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Modifiers { get; set; } 
+        public List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>> Modifiers { get; set; } 
         /// <summary>
         /// A list of all unique Room-Assigned ModifierSets in the Model.
         /// </summary>
         /// <value>A list of all unique Room-Assigned ModifierSets in the Model.</value>
         [Summary(@"A list of all unique Room-Assigned ModifierSets in the Model.")]
         [DataMember(Name = "modifier_sets")]
-        public List<AnyOf<ModifierSet,ModifierSetAbridged>> ModifierSets { get; set; } 
+        public List<AnyOf<ModifierSet, ModifierSetAbridged>> ModifierSets { get; set; } 
         /// <summary>
         /// An array of SensorGrids that are associated with the model.
         /// </summary>

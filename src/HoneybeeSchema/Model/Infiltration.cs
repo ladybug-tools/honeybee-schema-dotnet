@@ -54,7 +54,7 @@ namespace HoneybeeSchema
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public Infiltration
         (
-            string identifier, double flowPerExteriorArea, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule, // Required parameters
+            string identifier, double flowPerExteriorArea, AnyOf<ScheduleRuleset, ScheduleFixedInterval> schedule, // Required parameters
             string displayName= default, Object userData= default, double constantCoefficient = 1D, double temperatureCoefficient = 0D, double velocityCoefficient = 0D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
@@ -94,7 +94,7 @@ namespace HoneybeeSchema
         /// <value>The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.</value>
         [Summary(@"The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.")]
         [DataMember(Name = "schedule", IsRequired = true)]
-        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; } 
+        public AnyOf<ScheduleRuleset, ScheduleFixedInterval> Schedule { get; set; } 
         /// <summary>
         /// Gets or Sets ConstantCoefficient
         /// </summary>

@@ -41,7 +41,7 @@ namespace HoneybeeSchema
         public ApertureConstructionSet
         (
             // Required parameters
-           AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> interiorConstruction= default, AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> windowConstruction= default, AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> skylightConstruction= default, AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> operableConstruction= default// Optional parameters
+           AnyOf<WindowConstruction, WindowConstructionShade, WindowConstructionDynamic> interiorConstruction= default, AnyOf<WindowConstruction, WindowConstructionShade, WindowConstructionDynamic> windowConstruction= default, AnyOf<WindowConstruction, WindowConstructionShade, WindowConstructionDynamic> skylightConstruction= default, AnyOf<WindowConstruction, WindowConstructionShade, WindowConstructionDynamic> operableConstruction= default// Optional parameters
         ) : base()// BaseClass
         {
             this.InteriorConstruction = interiorConstruction;
@@ -71,28 +71,28 @@ namespace HoneybeeSchema
         /// <value>A WindowConstruction for all apertures with a Surface boundary condition.</value>
         [Summary(@"A WindowConstruction for all apertures with a Surface boundary condition.")]
         [DataMember(Name = "interior_construction")]
-        public AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> InteriorConstruction { get; set; } 
+        public AnyOf<WindowConstruction, WindowConstructionShade, WindowConstructionDynamic> InteriorConstruction { get; set; } 
         /// <summary>
         /// A WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.
         /// </summary>
         /// <value>A WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.</value>
         [Summary(@"A WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.")]
         [DataMember(Name = "window_construction")]
-        public AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> WindowConstruction { get; set; } 
+        public AnyOf<WindowConstruction, WindowConstructionShade, WindowConstructionDynamic> WindowConstruction { get; set; } 
         /// <summary>
         /// A WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.
         /// </summary>
         /// <value>A WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.</value>
         [Summary(@"A WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.")]
         [DataMember(Name = "skylight_construction")]
-        public AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> SkylightConstruction { get; set; } 
+        public AnyOf<WindowConstruction, WindowConstructionShade, WindowConstructionDynamic> SkylightConstruction { get; set; } 
         /// <summary>
         /// A WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property.
         /// </summary>
         /// <value>A WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property.</value>
         [Summary(@"A WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property.")]
         [DataMember(Name = "operable_construction")]
-        public AnyOf<WindowConstruction,WindowConstructionShade,WindowConstructionDynamic> OperableConstruction { get; set; } 
+        public AnyOf<WindowConstruction, WindowConstructionShade, WindowConstructionDynamic> OperableConstruction { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -39,7 +39,7 @@ namespace HoneybeeSchema
         public OtherSideTemperature
         (
             // Required parameters
-           double heatTransferCoefficient = 0D, AnyOf<Autocalculate,double> temperature= default// Optional parameters
+           double heatTransferCoefficient = 0D, AnyOf<Autocalculate, double> temperature= default// Optional parameters
         ) : base()// BaseClass
         {
             this.HeatTransferCoefficient = heatTransferCoefficient;
@@ -74,7 +74,7 @@ namespace HoneybeeSchema
         /// <value>A temperature value in Celsius to note the temperature on the other side of the object. This input can also be an Autocalculate object to signify that the temperature is equal to the outdoor air temperature.</value>
         [Summary(@"A temperature value in Celsius to note the temperature on the other side of the object. This input can also be an Autocalculate object to signify that the temperature is equal to the outdoor air temperature.")]
         [DataMember(Name = "temperature")]
-        public AnyOf<Autocalculate,double> Temperature { get; set; } 
+        public AnyOf<Autocalculate, double> Temperature { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object

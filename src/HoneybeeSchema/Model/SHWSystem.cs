@@ -61,7 +61,7 @@ namespace HoneybeeSchema
         public SHWSystem
         (
             string identifier, // Required parameters
-            string displayName= default, Object userData= default, SHWEquipmentType equipmentType= SHWEquipmentType.Gas_WaterHeater, AnyOf<double,Autocalculate> heaterEfficiency= default, AnyOf<double,string> ambientCondition= default, double ambientLossCoefficient = 6D// Optional parameters
+            string displayName= default, Object userData= default, SHWEquipmentType equipmentType= SHWEquipmentType.Gas_WaterHeater, AnyOf<double, Autocalculate> heaterEfficiency= default, AnyOf<double, string> ambientCondition= default, double ambientLossCoefficient = 6D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             this.EquipmentType = equipmentType;
@@ -91,14 +91,14 @@ namespace HoneybeeSchema
         /// <value>A number for the efficiency of the heater within the system. For Gas systems, this is the efficiency of the burner. For HeatPump systems, this is the rated COP of the system. For electric systems, this should usually be set to 1. If set to Autocalculate, this value will automatically be set based on the equipment_type. Gas_WaterHeater - 0.8, Electric_WaterHeater - 1.0, HeatPump_WaterHeater - 3.5, Gas_TanklessHeater - 0.8, Electric_TanklessHeater - 1.0.</value>
         [Summary(@"A number for the efficiency of the heater within the system. For Gas systems, this is the efficiency of the burner. For HeatPump systems, this is the rated COP of the system. For electric systems, this should usually be set to 1. If set to Autocalculate, this value will automatically be set based on the equipment_type. Gas_WaterHeater - 0.8, Electric_WaterHeater - 1.0, HeatPump_WaterHeater - 3.5, Gas_TanklessHeater - 0.8, Electric_TanklessHeater - 1.0.")]
         [DataMember(Name = "heater_efficiency")]
-        public AnyOf<double,Autocalculate> HeaterEfficiency { get; set; } 
+        public AnyOf<double, Autocalculate> HeaterEfficiency { get; set; } 
         /// <summary>
         /// A number for the ambient temperature in which the hot water tank is located [C]. This can also be the identifier of a Room in which the tank is located.
         /// </summary>
         /// <value>A number for the ambient temperature in which the hot water tank is located [C]. This can also be the identifier of a Room in which the tank is located.</value>
         [Summary(@"A number for the ambient temperature in which the hot water tank is located [C]. This can also be the identifier of a Room in which the tank is located.")]
         [DataMember(Name = "ambient_condition")]
-        public AnyOf<double,string> AmbientCondition { get; set; } 
+        public AnyOf<double, string> AmbientCondition { get; set; } 
         /// <summary>
         /// A number for the loss of heat from the water heater tank to the surrounding ambient conditions [W/K].
         /// </summary>

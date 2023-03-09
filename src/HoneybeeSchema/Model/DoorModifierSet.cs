@@ -42,7 +42,7 @@ namespace HoneybeeSchema
         public DoorModifierSet
         (
             // Required parameters
-           AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> exteriorModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> interiorModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> interiorGlassModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> exteriorGlassModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> overheadModifier= default // Optional parameters
+           AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> exteriorModifier= default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> interiorModifier= default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> interiorGlassModifier= default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> exteriorGlassModifier= default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> overheadModifier= default // Optional parameters
         ) : base()// BaseClass
         {
             this.ExteriorModifier = exteriorModifier;
@@ -73,35 +73,35 @@ namespace HoneybeeSchema
         /// <value>A radiance modifier object for faces with an Outdoors boundary condition.</value>
         [Summary(@"A radiance modifier object for faces with an Outdoors boundary condition.")]
         [DataMember(Name = "exterior_modifier")]
-        public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> ExteriorModifier { get; set; } 
+        public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> ExteriorModifier { get; set; } 
         /// <summary>
         /// A radiance modifier object for faces with a boundary condition other than Outdoors.
         /// </summary>
         /// <value>A radiance modifier object for faces with a boundary condition other than Outdoors.</value>
         [Summary(@"A radiance modifier object for faces with a boundary condition other than Outdoors.")]
         [DataMember(Name = "interior_modifier")]
-        public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> InteriorModifier { get; set; } 
+        public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> InteriorModifier { get; set; } 
         /// <summary>
         /// A modifier object for glass with a Surface boundary condition.
         /// </summary>
         /// <value>A modifier object for glass with a Surface boundary condition.</value>
         [Summary(@"A modifier object for glass with a Surface boundary condition.")]
         [DataMember(Name = "interior_glass_modifier")]
-        public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> InteriorGlassModifier { get; set; } 
+        public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> InteriorGlassModifier { get; set; } 
         /// <summary>
         /// A modifier object for glass with an Outdoors boundary condition.
         /// </summary>
         /// <value>A modifier object for glass with an Outdoors boundary condition.</value>
         [Summary(@"A modifier object for glass with an Outdoors boundary condition.")]
         [DataMember(Name = "exterior_glass_modifier")]
-        public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> ExteriorGlassModifier { get; set; } 
+        public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> ExteriorGlassModifier { get; set; } 
         /// <summary>
         /// A window modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face.
         /// </summary>
         /// <value>A window modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face.</value>
         [Summary(@"A window modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face.")]
         [DataMember(Name = "overhead_modifier")]
-        public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> OverheadModifier { get; set; } 
+        public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> OverheadModifier { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object

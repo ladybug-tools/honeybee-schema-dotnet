@@ -63,7 +63,7 @@ namespace HoneybeeSchema
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public Face
         (
-            string identifier, Face3D geometry, FaceType faceType, AnyOf<Ground,Outdoors,Adiabatic,Surface,OtherSideTemperature> boundaryCondition, FacePropertiesAbridged properties, // Required parameters
+            string identifier, Face3D geometry, FaceType faceType, AnyOf<Ground, Outdoors, Adiabatic, Surface, OtherSideTemperature> boundaryCondition, FacePropertiesAbridged properties, // Required parameters
             string displayName= default, Object userData= default, List<Aperture> apertures= default, List<Door> doors= default, List<Shade> indoorShades= default, List<Shade> outdoorShades= default// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
@@ -107,7 +107,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"BoundaryCondition")]
         [DataMember(Name = "boundary_condition", IsRequired = true)]
-        public AnyOf<Ground,Outdoors,Adiabatic,Surface,OtherSideTemperature> BoundaryCondition { get; set; } 
+        public AnyOf<Ground, Outdoors, Adiabatic, Surface, OtherSideTemperature> BoundaryCondition { get; set; } 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>

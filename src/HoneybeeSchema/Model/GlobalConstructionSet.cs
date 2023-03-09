@@ -67,7 +67,7 @@ namespace HoneybeeSchema
         /// <value>Global Honeybee Energy materials.</value>
         [Summary(@"Global Honeybee Energy materials.")]
         [DataMember(Name = "materials")]
-        public List<AnyOf<EnergyMaterial,EnergyMaterialNoMass,EnergyWindowMaterialGlazing,EnergyWindowMaterialGas>> Materials { get; protected set; } 
+        public List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGlazing, EnergyWindowMaterialGas>> Materials { get; protected set; } 
         //============================================== is ReadOnly 
         /// <summary>
         /// Global Honeybee Energy constructions.
@@ -75,7 +75,7 @@ namespace HoneybeeSchema
         /// <value>Global Honeybee Energy constructions.</value>
         [Summary(@"Global Honeybee Energy constructions.")]
         [DataMember(Name = "constructions")]
-        public List<AnyOf<OpaqueConstructionAbridged,WindowConstructionAbridged,ShadeConstruction,AirBoundaryConstructionAbridged>> Constructions { get; protected set; } 
+        public List<AnyOf<OpaqueConstructionAbridged, WindowConstructionAbridged, ShadeConstruction, AirBoundaryConstructionAbridged>> Constructions { get; protected set; } 
         //============================================== is ReadOnly 
         /// <summary>
         /// Global Honeybee WallConstructionSet.

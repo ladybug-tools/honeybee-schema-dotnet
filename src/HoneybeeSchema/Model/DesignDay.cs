@@ -58,7 +58,7 @@ namespace HoneybeeSchema
         /// <param name="skyCondition">skyCondition (required).</param>
         public DesignDay
         (
-           string name, DesignDayTypes dayType, DryBulbCondition dryBulbCondition, HumidityCondition humidityCondition, WindCondition windCondition, AnyOf<ASHRAEClearSky,ASHRAETau> skyCondition// Required parameters
+           string name, DesignDayTypes dayType, DryBulbCondition dryBulbCondition, HumidityCondition humidityCondition, WindCondition windCondition, AnyOf<ASHRAEClearSky, ASHRAETau> skyCondition// Required parameters
             // Optional parameters
         ) : base()// BaseClass
         {
@@ -123,7 +123,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"SkyCondition")]
         [DataMember(Name = "sky_condition", IsRequired = true)]
-        public AnyOf<ASHRAEClearSky,ASHRAETau> SkyCondition { get; set; } 
+        public AnyOf<ASHRAEClearSky, ASHRAETau> SkyCondition { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object

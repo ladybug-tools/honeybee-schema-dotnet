@@ -36,7 +36,13 @@ namespace HoneybeeSchema
         /// Enum Furnace for value: Furnace
         /// </summary>
         [EnumMember(Value = "Furnace")]
-        Furnace = 1
+        Furnace = 1,
+
+        /// <summary>
+        /// Enum FurnaceElectric for value: Furnace_Electric
+        /// </summary>
+        [EnumMember(Value = "Furnace_Electric")]
+        Furnace_Electric = 2
 
     }
 

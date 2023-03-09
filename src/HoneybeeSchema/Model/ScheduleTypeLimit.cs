@@ -65,7 +65,7 @@ namespace HoneybeeSchema
         public ScheduleTypeLimit
         (
             string identifier, // Required parameters
-            string displayName= default, AnyOf<NoLimit,double> lowerLimit= default, AnyOf<NoLimit,double> upperLimit= default, ScheduleNumericType numericType= ScheduleNumericType.Continuous, ScheduleUnitType unitType= ScheduleUnitType.Dimensionless// Optional parameters
+            string displayName= default, AnyOf<NoLimit, double> lowerLimit= default, AnyOf<NoLimit, double> upperLimit= default, ScheduleNumericType numericType= ScheduleNumericType.Continuous, ScheduleUnitType unitType= ScheduleUnitType.Dimensionless// Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             this.LowerLimit = lowerLimit;
@@ -95,14 +95,14 @@ namespace HoneybeeSchema
         /// <value>Lower limit for the schedule type or NoLimit.</value>
         [Summary(@"Lower limit for the schedule type or NoLimit.")]
         [DataMember(Name = "lower_limit")]
-        public AnyOf<NoLimit,double> LowerLimit { get; set; } 
+        public AnyOf<NoLimit, double> LowerLimit { get; set; } 
         /// <summary>
         /// Upper limit for the schedule type or NoLimit.
         /// </summary>
         /// <value>Upper limit for the schedule type or NoLimit.</value>
         [Summary(@"Upper limit for the schedule type or NoLimit.")]
         [DataMember(Name = "upper_limit")]
-        public AnyOf<NoLimit,double> UpperLimit { get; set; } 
+        public AnyOf<NoLimit, double> UpperLimit { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object

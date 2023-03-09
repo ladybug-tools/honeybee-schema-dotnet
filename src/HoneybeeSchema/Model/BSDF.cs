@@ -59,7 +59,7 @@ namespace HoneybeeSchema
         public BSDF
         (
             string identifier, string bsdfData, // Required parameters
-            string displayName= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> modifier= default, List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> dependencies= default, List<double> upOrientation= default, double thickness = 0D, string functionFile = ".", string transform= default, List<double> frontDiffuseReflectance= default, List<double> backDiffuseReflectance= default, List<double> diffuseTransmittance= default // Optional parameters
+            string displayName= default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> modifier= default, List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>> dependencies= default, List<double> upOrientation= default, double thickness = 0D, string functionFile = ".", string transform= default, List<double> frontDiffuseReflectance= default, List<double> backDiffuseReflectance= default, List<double> diffuseTransmittance= default // Optional parameters
         ) : base(identifier: identifier, displayName: displayName )// BaseClass
         {
             // to ensure "bsdfData" is required (not null)
@@ -104,14 +104,14 @@ namespace HoneybeeSchema
         /// <value>Material modifier.</value>
         [Summary(@"Material modifier.")]
         [DataMember(Name = "modifier")]
-        public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> Modifier { get; set; } 
+        public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> Modifier { get; set; } 
         /// <summary>
         /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.
         /// </summary>
         /// <value>List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.</value>
         [Summary(@"List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.")]
         [DataMember(Name = "dependencies")]
-        public List<AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror>> Dependencies { get; set; } 
+        public List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>> Dependencies { get; set; } 
         /// <summary>
         /// Vector as sequence that sets the hemisphere that the BSDF material faces.
         /// </summary>

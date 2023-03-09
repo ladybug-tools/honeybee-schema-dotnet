@@ -32,20 +32,40 @@ namespace HoneybeeSchema
     public partial class SizingParameter : OpenAPIGenBaseModel, IEquatable<SizingParameter>, IValidatableObject
     {
         /// <summary>
+        /// Text to specify the efficiency standard, which will automatically set the efficiencies of all HVAC equipment when provided. Note that providing a standard here will cause the OpenStudio translation process to perform an additional sizing calculation with EnergyPlus, which is needed since the default efficiencies of equipment vary depending on their size. THIS WILL SIGNIFICANTLY INCREASE TRANSLATION TIME TO OPENSTUDIO. However, it is often worthwhile when the goal is to match the HVAC specification with a particular standard.
+        /// </summary>
+        /// <value>Text to specify the efficiency standard, which will automatically set the efficiencies of all HVAC equipment when provided. Note that providing a standard here will cause the OpenStudio translation process to perform an additional sizing calculation with EnergyPlus, which is needed since the default efficiencies of equipment vary depending on their size. THIS WILL SIGNIFICANTLY INCREASE TRANSLATION TIME TO OPENSTUDIO. However, it is often worthwhile when the goal is to match the HVAC specification with a particular standard.</value>
+        [Summary(@"Text to specify the efficiency standard, which will automatically set the efficiencies of all HVAC equipment when provided. Note that providing a standard here will cause the OpenStudio translation process to perform an additional sizing calculation with EnergyPlus, which is needed since the default efficiencies of equipment vary depending on their size. THIS WILL SIGNIFICANTLY INCREASE TRANSLATION TIME TO OPENSTUDIO. However, it is often worthwhile when the goal is to match the HVAC specification with a particular standard.")]
+        [DataMember(Name="efficiency_standard")]
+        public EfficiencyStandards EfficiencyStandard { get; set; }   
+        /// <summary>
+        /// Text indicating the ASHRAE climate zone to be used with the efficiency_standard. When unspecified, the climate zone will be inferred from the design days on this sizing parameter object.
+        /// </summary>
+        /// <value>Text indicating the ASHRAE climate zone to be used with the efficiency_standard. When unspecified, the climate zone will be inferred from the design days on this sizing parameter object.</value>
+        [Summary(@"Text indicating the ASHRAE climate zone to be used with the efficiency_standard. When unspecified, the climate zone will be inferred from the design days on this sizing parameter object.")]
+        [DataMember(Name="climate_zone")]
+        public ClimateZones ClimateZone { get; set; }   
+        /// <summary>
         /// Initializes a new instance of the <see cref="SizingParameter" /> class.
         /// </summary>
         /// <param name="designDays">A list of DesignDays that represent the criteria for which the HVAC systems will be sized..</param>
         /// <param name="heatingFactor">A number that will be multiplied by the peak heating load for each zone in order to size the heating system. (default to 1.25D).</param>
         /// <param name="coolingFactor">A number that will be multiplied by the peak cooling load for each zone in order to size the heating system. (default to 1.15D).</param>
+        /// <param name="efficiencyStandard">Text to specify the efficiency standard, which will automatically set the efficiencies of all HVAC equipment when provided. Note that providing a standard here will cause the OpenStudio translation process to perform an additional sizing calculation with EnergyPlus, which is needed since the default efficiencies of equipment vary depending on their size. THIS WILL SIGNIFICANTLY INCREASE TRANSLATION TIME TO OPENSTUDIO. However, it is often worthwhile when the goal is to match the HVAC specification with a particular standard..</param>
+        /// <param name="climateZone">Text indicating the ASHRAE climate zone to be used with the efficiency_standard. When unspecified, the climate zone will be inferred from the design days on this sizing parameter object..</param>
+        /// <param name="buildingType">Text for the building type to be used in the efficiency_standard. If the type is not recognized or is None, it will be assumed that the building is a generic NonResidential. The following have specified systems per the standard:  Residential, NonResidential, MidriseApartment, HighriseApartment, LargeOffice, MediumOffice, SmallOffice, Retail, StripMall, PrimarySchool, SecondarySchool, SmallHotel, LargeHotel, Hospital, Outpatient, Warehouse, SuperMarket, FullServiceRestaurant, QuickServiceRestaurant, Laboratory, Courthouse..</param>
         public SizingParameter
         (
             // Required parameters
-           List<DesignDay> designDays= default, double heatingFactor = 1.25D, double coolingFactor = 1.15D// Optional parameters
+           List<DesignDay> designDays= default, double heatingFactor = 1.25D, double coolingFactor = 1.15D, EfficiencyStandards efficiencyStandard= default, ClimateZones climateZone= default, string buildingType= default// Optional parameters
         ) : base()// BaseClass
         {
             this.DesignDays = designDays;
             this.HeatingFactor = heatingFactor;
             this.CoolingFactor = coolingFactor;
+            this.EfficiencyStandard = efficiencyStandard;
+            this.ClimateZone = climateZone;
+            this.BuildingType = buildingType;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "SizingParameter";
@@ -84,6 +104,13 @@ namespace HoneybeeSchema
         [Summary(@"A number that will be multiplied by the peak cooling load for each zone in order to size the heating system.")]
         [DataMember(Name = "cooling_factor")]
         public double CoolingFactor { get; set; }  = 1.15D;
+        /// <summary>
+        /// Text for the building type to be used in the efficiency_standard. If the type is not recognized or is None, it will be assumed that the building is a generic NonResidential. The following have specified systems per the standard:  Residential, NonResidential, MidriseApartment, HighriseApartment, LargeOffice, MediumOffice, SmallOffice, Retail, StripMall, PrimarySchool, SecondarySchool, SmallHotel, LargeHotel, Hospital, Outpatient, Warehouse, SuperMarket, FullServiceRestaurant, QuickServiceRestaurant, Laboratory, Courthouse.
+        /// </summary>
+        /// <value>Text for the building type to be used in the efficiency_standard. If the type is not recognized or is None, it will be assumed that the building is a generic NonResidential. The following have specified systems per the standard:  Residential, NonResidential, MidriseApartment, HighriseApartment, LargeOffice, MediumOffice, SmallOffice, Retail, StripMall, PrimarySchool, SecondarySchool, SmallHotel, LargeHotel, Hospital, Outpatient, Warehouse, SuperMarket, FullServiceRestaurant, QuickServiceRestaurant, Laboratory, Courthouse.</value>
+        [Summary(@"Text for the building type to be used in the efficiency_standard. If the type is not recognized or is None, it will be assumed that the building is a generic NonResidential. The following have specified systems per the standard:  Residential, NonResidential, MidriseApartment, HighriseApartment, LargeOffice, MediumOffice, SmallOffice, Retail, StripMall, PrimarySchool, SecondarySchool, SmallHotel, LargeHotel, Hospital, Outpatient, Warehouse, SuperMarket, FullServiceRestaurant, QuickServiceRestaurant, Laboratory, Courthouse.")]
+        [DataMember(Name = "building_type")]
+        public string BuildingType { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -109,6 +136,9 @@ namespace HoneybeeSchema
             sb.Append("  DesignDays: ").Append(this.DesignDays).Append("\n");
             sb.Append("  HeatingFactor: ").Append(this.HeatingFactor).Append("\n");
             sb.Append("  CoolingFactor: ").Append(this.CoolingFactor).Append("\n");
+            sb.Append("  EfficiencyStandard: ").Append(this.EfficiencyStandard).Append("\n");
+            sb.Append("  ClimateZone: ").Append(this.ClimateZone).Append("\n");
+            sb.Append("  BuildingType: ").Append(this.BuildingType).Append("\n");
             return sb.ToString();
         }
   
@@ -178,7 +208,10 @@ namespace HoneybeeSchema
                     Extension.AllEquals(this.DesignDays, input.DesignDays)
                 ) && 
                     Extension.Equals(this.HeatingFactor, input.HeatingFactor) && 
-                    Extension.Equals(this.CoolingFactor, input.CoolingFactor);
+                    Extension.Equals(this.CoolingFactor, input.CoolingFactor) && 
+                    Extension.Equals(this.EfficiencyStandard, input.EfficiencyStandard) && 
+                    Extension.Equals(this.ClimateZone, input.ClimateZone) && 
+                    Extension.Equals(this.BuildingType, input.BuildingType);
         }
 
         /// <summary>
@@ -198,6 +231,12 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.HeatingFactor.GetHashCode();
                 if (this.CoolingFactor != null)
                     hashCode = hashCode * 59 + this.CoolingFactor.GetHashCode();
+                if (this.EfficiencyStandard != null)
+                    hashCode = hashCode * 59 + this.EfficiencyStandard.GetHashCode();
+                if (this.ClimateZone != null)
+                    hashCode = hashCode * 59 + this.ClimateZone.GetHashCode();
+                if (this.BuildingType != null)
+                    hashCode = hashCode * 59 + this.BuildingType.GetHashCode();
                 return hashCode;
             }
         }

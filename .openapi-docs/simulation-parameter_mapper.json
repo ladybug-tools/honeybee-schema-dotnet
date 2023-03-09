@@ -19,8 +19,10 @@
     "enums": {
         "CalculationMethod": "honeybee_schema.energy.simulation",
         "CalculationUpdateMethod": "honeybee_schema.energy.simulation",
+        "ClimateZones": "honeybee_schema.energy.simulation",
         "DaysOfWeek": "honeybee_schema.energy.simulation",
         "DesignDayTypes": "honeybee_schema.energy.designday",
+        "EfficiencyStandards": "honeybee_schema.energy.simulation",
         "HumidityTypes": "honeybee_schema.energy.designday",
         "ReportingFrequency": "honeybee_schema.energy.simulation",
         "SolarDistribution": "honeybee_schema.energy.simulation",

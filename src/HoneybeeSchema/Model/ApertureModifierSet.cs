@@ -41,7 +41,7 @@ namespace HoneybeeSchema
         public ApertureModifierSet
         (
             // Required parameters
-           AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> windowModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> interiorModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> skylightModifier= default, AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> operableModifier= default// Optional parameters
+           AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> windowModifier= default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> interiorModifier= default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> skylightModifier= default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> operableModifier= default// Optional parameters
         ) : base()// BaseClass
         {
             this.WindowModifier = windowModifier;
@@ -71,28 +71,28 @@ namespace HoneybeeSchema
         /// <value>A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and Wall parent Face.</value>
         [Summary(@"A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and Wall parent Face.")]
         [DataMember(Name = "window_modifier")]
-        public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> WindowModifier { get; set; } 
+        public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> WindowModifier { get; set; } 
         /// <summary>
         /// A modifier object for apertures with a Surface boundary condition.
         /// </summary>
         /// <value>A modifier object for apertures with a Surface boundary condition.</value>
         [Summary(@"A modifier object for apertures with a Surface boundary condition.")]
         [DataMember(Name = "interior_modifier")]
-        public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> InteriorModifier { get; set; } 
+        public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> InteriorModifier { get; set; } 
         /// <summary>
         /// A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.
         /// </summary>
         /// <value>A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.</value>
         [Summary(@"A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.")]
         [DataMember(Name = "skylight_modifier")]
-        public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> SkylightModifier { get; set; } 
+        public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> SkylightModifier { get; set; } 
         /// <summary>
         /// A modifier object for apertures with an Outdoors boundary condition and a True is_operable property.
         /// </summary>
         /// <value>A modifier object for apertures with an Outdoors boundary condition and a True is_operable property.</value>
         [Summary(@"A modifier object for apertures with an Outdoors boundary condition and a True is_operable property.")]
         [DataMember(Name = "operable_modifier")]
-        public AnyOf<Plastic,Glass,BSDF,Glow,Light,Trans,Metal,Void,Mirror> OperableModifier { get; set; } 
+        public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> OperableModifier { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object

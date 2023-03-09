@@ -40,7 +40,7 @@ namespace HoneybeeSchema
         public Outdoors
         (
             // Required parameters
-           bool sunExposure = true, bool windExposure = true, AnyOf<Autocalculate,double> viewFactor= default// Optional parameters
+           bool sunExposure = true, bool windExposure = true, AnyOf<Autocalculate, double> viewFactor= default// Optional parameters
         ) : base()// BaseClass
         {
             this.SunExposure = sunExposure;
@@ -83,7 +83,7 @@ namespace HoneybeeSchema
         /// <value>A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated.</value>
         [Summary(@"A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated.")]
         [DataMember(Name = "view_factor")]
-        public AnyOf<Autocalculate,double> ViewFactor { get; set; } 
+        public AnyOf<Autocalculate, double> ViewFactor { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object

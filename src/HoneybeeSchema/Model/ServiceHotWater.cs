@@ -54,7 +54,7 @@ namespace HoneybeeSchema
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public ServiceHotWater
         (
-            string identifier, double flowPerArea, AnyOf<ScheduleRuleset,ScheduleFixedInterval> schedule, // Required parameters
+            string identifier, double flowPerArea, AnyOf<ScheduleRuleset, ScheduleFixedInterval> schedule, // Required parameters
             string displayName= default, Object userData= default, double targetTemperature = 60D, double sensibleFraction = 0.2D, double latentFraction = 0.05D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
@@ -94,7 +94,7 @@ namespace HoneybeeSchema
         /// <value>The schedule for the use of hot water over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile.</value>
         [Summary(@"The schedule for the use of hot water over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile.")]
         [DataMember(Name = "schedule", IsRequired = true)]
-        public AnyOf<ScheduleRuleset,ScheduleFixedInterval> Schedule { get; set; } 
+        public AnyOf<ScheduleRuleset, ScheduleFixedInterval> Schedule { get; set; } 
         /// <summary>
         /// Number for the target temperature of water out of the tap (C). This the temperature after hot water has been mixed with cold water from the water mains. The default is 60C, which essentially assumes that the flow_per_area on this object is only for water straight out of the water heater.
         /// </summary>
