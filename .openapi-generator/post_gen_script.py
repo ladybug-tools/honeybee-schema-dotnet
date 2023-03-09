@@ -43,9 +43,9 @@ def get_allof_types(obj, allofList):
 def fix_constructor(read_data):
     regexs = [
         r"(?<=(\w|\d|\")),\s*,\s*(?=\w)",
-        r"(?<=\s{12})\s*(,\s*)",  # remove "," at begining of line
-        r"(?<=\(\n\s{12})\s*(,)(?=\s\w*.*, \/\/ Required parameters)",  # remove "," at begining of required
-        r"(?<=\/\/ Required parameters\n\s{12})(,\s){1,}(?=\s*\w)",      # remove "," at begining of optional
+        r"(?<=\s{12})\s*(,\s*)",  # remove "," at beginning of line
+        r"(?<=\(\n\s{12})\s*(,)(?=\s\w*.*, \/\/ Required parameters)",  # remove "," at beginning of required
+        r"(?<=\/\/ Required parameters\n\s{12})(,\s){1,}(?=\s*\w)",      # remove "," at beginning of optional
         r"(?<=\w)(,\s){2,}(?=\s*\/\/ Required parameters\s*\n\s*(\w|,))",
         r"(,\s)+(?=\s*\/\/ Optional parameters)",
         r"(,\s)+(?=\s*\/\/ Required parameters\n\s+\/\/ Optional parameters)",
@@ -79,14 +79,15 @@ def get_enums(mapperJson):
         full_enum_names = []
         for key in enumItems.keys():
             name_space = enumItems[key].title().replace('_', '', 1).split('.')[0]
-            full_enum_name = f"{name_space}.{key}" #HoneybeeSchema.Roughness
+            # HoneybeeSchema.Roughness
+            full_enum_name = f"{name_space}.{key}"
             full_enum_names.append(full_enum_name)
 
     return full_enum_names
 
 
 def get_enum_parameters(modelJson, mapperJson):
-    enums = [x.split('.')[-1] for x in get_enums(mapperJson)] 
+    enums = [x.split('.')[-1] for x in get_enums(mapperJson)]
 
     with open(modelJson, "rb") as jsonFile:
         data = json.load(jsonFile)
@@ -199,15 +200,6 @@ def replace_regex(read_data):
         data = data.replace(s, n)
     return data
 
-def replace_AnyType(read_data):
-    data = read_data
-    replace_source = ['AnyType']
-    replace_new = ['object']
-    for s, n in zip(replace_source, replace_new):
-        data = data.replace(s, n)
-    print("|---Replacing %s to %s" % ('AnyType', 'object'))
-    return data
-    
 
 def add_override_to_type_property(read_data):
     data = read_data
@@ -231,14 +223,23 @@ def change_spec_type(read_data):
 
 def replace_anyof_type(read_data, anyof_types):
     data = read_data
+    # replace AnyOfXXXAAA types to AnyOf<XXX,AAA>
     for items in anyof_types:
         if len(items) > 0:
-            replace_source = "AnyOf%s" % ("".join(items).replace('number', 'double'))
-            replace_new = "AnyOf<%s>" % (",".join(items).replace('number', 'double'))
-            rex = "(%s)(?=[ >)])" % replace_source # find replace_source only with " "(space) or ">" follows
+            replace_source = "AnyOf%s" % ("".join(items))
+            replace_new = "AnyOf<%s>" % (", ".join(items).replace('number', 'double'))
+            rex = "(%s)(?=[ >)])" % replace_source  # find replace_source only with " "(space) or ">" follows
             if re.findall(rex, data) != []:
                 data = re.sub(rex, replace_new, data)
                 print("|---Replacing %s to %s" % (replace_source, replace_new))
+
+    # replace AnyType to Object
+    replace_source = "AnyType"
+    replace_new = "object"
+    rex = "(%s)(?=[ >)])" % replace_source  # find replace_source only with " "(space) or ">" follows
+    if re.findall(rex, data) != []:
+        data = re.sub(rex, replace_new, data)
+        print("|---Replacing %s to %s" % (replace_source, replace_new))
     return data
 
 
@@ -251,7 +252,7 @@ def check_csfiles(source_folder, anyof_types):
     for f in class_files:
         cs_file = os.path.join(source_folder, f)
         # remove enum file
-        class_name = f"{f.split('/')[-1].replace('.cs','')}"
+        # class_name = f"{f.split('/')[-1].replace('.cs','')}"
 
         print("\n-Checking %s" % cs_file)
         # read data
@@ -259,7 +260,6 @@ def check_csfiles(source_folder, anyof_types):
         data = f.read()
         # take care of anyof type
         data = replace_anyof_type(data, anyof_types)
-        data = replace_AnyType(data)
         # replace decimal/number to double
         # data = replace_decimal(data)
         data = replace_regex(data)
@@ -299,7 +299,7 @@ def get_allof_types_from_json(source_json_url):
     return unitItem
 
 
-def check_types(source_json_url, mapper_json):
+def check_types(source_json_url):
     all_types = get_allof_types_from_json(source_json_url)
 
     root = os.path.dirname(os.path.dirname(__file__))
@@ -335,7 +335,7 @@ def cleanup(projectName):
     for f in class_files:
         cs_file = os.path.join(docs_folder, f)
         os.remove(cs_file)
- 
+
 
 
 args = sys.argv[1:]
@@ -345,15 +345,17 @@ if args == []:
 else:
     json_file = args[0]
 
-name_space = get_package_name()
-mapper_json = json_file.replace("inheritance.json", "mapper.json")
 
+name_space = get_package_name()
 time.sleep(1)
 # clean up first
 cleanup(name_space)
-print(f"post processing {json_file} with {mapper_json}")
+check_types(json_file)
 
-check_types(json_file, mapper_json)
-# fix enums
-classes_enum_data = get_enum_parameters(json_file, mapper_json)
-fix_enums_with_defaults(classes_enum_data, f'./src/{name_space}/Model')
+mapper_json = json_file.replace("inheritance.json", "mapper.json")
+
+if os.path.exists(mapper_json) and mapper_json.endswith("mapper.json"):
+    print(f"post processing {json_file} with {mapper_json}")
+    # fix enums
+    classes_enum_data = get_enum_parameters(json_file, mapper_json)
+    fix_enums_with_defaults(classes_enum_data, f'./src/{name_space}/Model')
