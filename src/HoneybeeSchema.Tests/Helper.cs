@@ -11,7 +11,7 @@ namespace HoneybeeSchema.Test
         [Test]
         public void LadybugToolsFolderTest()
         {
-            var f = HoneybeeSchema.Helper.EnergyLibrary.LadybugToolsRootFolder;
+            var f = Helper.Paths.LadybugToolsRootFolder;
             Assert.IsTrue(Directory.Exists(f));
 
         }
@@ -19,7 +19,7 @@ namespace HoneybeeSchema.Test
         [Test]
         public void DefaultConstructionSetTest()
         {
-            var lbt = Helper.EnergyLibrary.LadybugToolsRootFolder;
+            var lbt = Helper.Paths.LadybugToolsRootFolder;
 
             var f = HoneybeeSchema.Helper.EnergyLibrary.DefaultConstructionSets;
             Assert.IsTrue(f.Any());

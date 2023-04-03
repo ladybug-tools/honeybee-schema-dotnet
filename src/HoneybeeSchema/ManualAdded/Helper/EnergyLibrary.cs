@@ -13,37 +13,37 @@ namespace HoneybeeSchema.Helper
     public static partial class EnergyLibrary
     {
         /// <summary>
-        /// This will return the top main folder path of where ladybug_tools is. Use HoneybeeSchema.Pathes.LadybugToolsRootFolder instead.
+        /// This will return the top main folder path of where ladybug_tools is. Use HoneybeeSchema.Paths.LadybugToolsRootFolder instead.
         /// </summary>
-        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
-        public static string LadybugToolsRootFolder => Pathes.LadybugToolsRootFolder;
-        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
-        public static string ResourcesStandardsFolder => Pathes.ResourcesStandardsFolder;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Paths", false)]
+        public static string LadybugToolsRootFolder => Paths.LadybugToolsRootFolder;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Paths", false)]
+        public static string ResourcesStandardsFolder => Paths.ResourcesStandardsFolder;
         /// <summary>
         /// This returns ladybug_tools/resources/standards/honeybee_standards.
         /// </summary>
-        ///   [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
-        public static string DefaultStandardsFolder => Pathes.DefaultStandardsFolder;
-        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
-        private static List<string> _DefaultLibJsons => Pathes._DefaultLibJsons;
+        ///   [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Paths", false)]
+        public static string DefaultStandardsFolder => Paths.DefaultStandardsFolder;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Paths", false)]
+        private static List<string> _DefaultLibJsons => Paths._DefaultLibJsons;
 
 
 
         #region Honeybee OpenStudio Standards
 
         //honeybee_energy_standards
-        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
-        public static string EnergyStandardsFolder => Pathes.EnergyStandardsFolder;
-        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
-        public static string BuildingVintagesFolder => Pathes.BuildingVintagesFolder;
-        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
-        public static string BuildingProgramTypesFolder => Pathes.BuildingProgramTypesFolder;
-        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
-        public static string ConstructionsFolder => Pathes.ConstructionsFolder;
-        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
-        public static string ConstructionSetFolder => Pathes.ConstructionSetFolder;
-        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
-        public static string ScheduleFolder => Pathes.ScheduleFolder;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Paths", false)]
+        public static string EnergyStandardsFolder => Paths.EnergyStandardsFolder;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Paths", false)]
+        public static string BuildingVintagesFolder => Paths.BuildingVintagesFolder;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Paths", false)]
+        public static string BuildingProgramTypesFolder => Paths.BuildingProgramTypesFolder;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Paths", false)]
+        public static string ConstructionsFolder => Paths.ConstructionsFolder;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Paths", false)]
+        public static string ConstructionSetFolder => Paths.ConstructionSetFolder;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Paths", false)]
+        public static string ScheduleFolder => Paths.ScheduleFolder;
         private static ModelEnergyProperties _standardEnergyLibrary;
         public static ModelEnergyProperties StandardEnergyLibrary
         {
@@ -65,12 +65,12 @@ namespace HoneybeeSchema.Helper
             }
         }
         
-        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
-        public static IEnumerable<string> BuildingVintages => Pathes.BuildingVintages;
-        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
-        public static IEnumerable<string> BuildingTypeJsonFilePaths => Pathes.BuildingTypeJsonFilePaths;
-        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Pathes", false)]
-        public static IEnumerable<string> ConstructionsetJsonFilePaths => Pathes.ConstructionsetJsonFilePaths;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Paths", false)]
+        public static IEnumerable<string> BuildingVintages => Paths.BuildingVintages;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Paths", false)]
+        public static IEnumerable<string> BuildingTypeJsonFilePaths => Paths.BuildingTypeJsonFilePaths;
+        [Obsolete("This is deprecated. This has been moved to HoneybeeSchema.Paths", false)]
+        public static IEnumerable<string> ConstructionsetJsonFilePaths => Paths.ConstructionsetJsonFilePaths;
 
         // "2013::MediumOffice::OpenOffice"
         public static (ProgramTypeAbridged programType, IEnumerable<ScheduleRulesetAbridged> schedules) GetStandardProgramTypeByIdentifier(string standardProgramType)
@@ -155,7 +155,7 @@ namespace HoneybeeSchema.Helper
                 {
                     //Load from Json 
                     var dic = new Dictionary<string, HB.ConstructionSetAbridged>();
-                    foreach (var jsonFile in ConstructionsetJsonFilePaths)
+                    foreach (var jsonFile in Paths.ConstructionsetJsonFilePaths)
                     {
                         var constructionSets = LoadLibrary(jsonFile, HB.ConstructionSetAbridged.FromJson);
                         dic = dic.Concat(constructionSets.ToDictionary(_ => _.Identifier, _ => _)).ToDictionary(_ => _.Key, _ => _.Value);
@@ -174,7 +174,7 @@ namespace HoneybeeSchema.Helper
             {
                 if (_standardsWindowConstructions == null)
                 {
-                    var contrs = LoadLibrary(Path.Combine(ConstructionsFolder, "window_construction.json"), HB.WindowConstructionAbridged.FromJson);
+                    var contrs = LoadLibrary(Path.Combine(Paths.ConstructionsFolder, "window_construction.json"), HB.WindowConstructionAbridged.FromJson);
                     _standardsWindowConstructions = contrs.ToDictionary(_ => _.Identifier, _ => _);
                 }
                 return _standardsWindowConstructions;
@@ -191,7 +191,7 @@ namespace HoneybeeSchema.Helper
 
                 if (_standardsOpaqueConstructions == null)
                 {
-                    var opaques = LoadLibrary(Path.Combine(ConstructionsFolder, "opaque_construction.json"), HB.OpaqueConstructionAbridged.FromJson);
+                    var opaques = LoadLibrary(Path.Combine(Paths.ConstructionsFolder, "opaque_construction.json"), HB.OpaqueConstructionAbridged.FromJson);
                     _standardsOpaqueConstructions = opaques.ToDictionary(_ => _.Identifier, _ => _);
                 }
                 return _standardsOpaqueConstructions;
@@ -209,7 +209,7 @@ namespace HoneybeeSchema.Helper
                 {
                     //Load from Json 
                     var dic = new Dictionary<string, HB.ProgramTypeAbridged>();
-                    foreach (var jsonFile in BuildingTypeJsonFilePaths)
+                    foreach (var jsonFile in Paths.BuildingTypeJsonFilePaths)
                     {
                         var programTypes = LoadLibrary(jsonFile, HB.ProgramTypeAbridged.FromJson);
                         dic = dic.Concat(programTypes.ToDictionary(_ => _.Identifier, _ => _)).ToDictionary(_ => _.Key, _ => _.Value);
@@ -231,7 +231,7 @@ namespace HoneybeeSchema.Helper
             {
                 if (_standardsWindowMaterials == null)
                 {
-                    var wins = LoadWindowMaterials(Path.Combine(ConstructionsFolder, "window_material.json"));
+                    var wins = LoadWindowMaterials(Path.Combine(Paths.ConstructionsFolder, "window_material.json"));
                     _standardsWindowMaterials = wins.ToDictionary(_ => _.Identifier, _ => _);
                 }
                 return _standardsWindowMaterials;
@@ -249,7 +249,7 @@ namespace HoneybeeSchema.Helper
             {
                 if (_standardsOpaqueMaterials == null)
                 {
-                    var opaMaterils = LoadOpqueMaterials(Path.Combine(ConstructionsFolder, "opaque_material.json"));
+                    var opaMaterils = LoadOpqueMaterials(Path.Combine(Paths.ConstructionsFolder, "opaque_material.json"));
                     _standardsOpaqueMaterials = opaMaterils.ToDictionary(_ => _.Identifier, _ => _);
                 }
                 return _standardsOpaqueMaterials;
@@ -266,7 +266,7 @@ namespace HoneybeeSchema.Helper
             {
                 if (_standardsSchedules == null)
                 {
-                    var sches = LoadLibraryParallel(Path.Combine(ScheduleFolder, "schedule.json"), HB.ScheduleRulesetAbridged.FromJson);
+                    var sches = LoadLibraryParallel(Path.Combine(Paths.ScheduleFolder, "schedule.json"), HB.ScheduleRulesetAbridged.FromJson);
                     _standardsSchedules = sches.ToDictionary(_ => _.Identifier, _ => _);
                 }
                 return _standardsSchedules;
@@ -289,9 +289,9 @@ namespace HoneybeeSchema.Helper
                 if (_defaultModelEnergyProperty == null)
                 {
                     // Load from local ladybug_tools folder
-                    if (File.Exists(_DefaultLibJsons[0]))
+                    if (File.Exists(Paths._DefaultLibJsons[0]))
                     {
-                        _defaultModelEnergyProperty = LoadHoneybeeObject(_DefaultLibJsons[0], HB.ModelEnergyProperties.FromJson);
+                        _defaultModelEnergyProperty = LoadHoneybeeObject(Paths._DefaultLibJsons[0], HB.ModelEnergyProperties.FromJson);
                     }
                     else
                     {
@@ -326,9 +326,9 @@ namespace HoneybeeSchema.Helper
                 if (_defaultModelRadianceProperty == null)
                 {
                     // Load from local ladybug_tools folder
-                    if (File.Exists(_DefaultLibJsons[0]))
+                    if (File.Exists(Paths._DefaultLibJsons[0]))
                     {
-                        _defaultModelRadianceProperty = LoadHoneybeeObject(_DefaultLibJsons[1], HB.ModelRadianceProperties.FromJson);
+                        _defaultModelRadianceProperty = LoadHoneybeeObject(Paths._DefaultLibJsons[1], HB.ModelRadianceProperties.FromJson);
                     }
                     else
                     {
@@ -703,7 +703,7 @@ namespace HoneybeeSchema.Helper
 
         public static Dictionary<string, IEnumerable<string>> LoadBuildingVintage(string buildingVintageFile)
         {
-            var vintageJson = Path.Combine(BuildingVintagesFolder, buildingVintageFile);
+            var vintageJson = Path.Combine(Paths.BuildingVintagesFolder, buildingVintageFile);
 
             if (!File.Exists(vintageJson))
                 throw new ArgumentException($"{vintageJson} doesn't exist");

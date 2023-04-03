@@ -41,13 +41,19 @@ json_file1 = f"{base_url}/model_inheritance.json"
 json_file2 = f"{base_url}/simulation-parameter_inheritance.json"
 # validation report
 json_file3 = f"{base_url}/validation-report.json"
+# comparison report
+json_file4 = f"{base_url}/comparison-report_inheritance.json"
+# sync-instructions report
+json_file5 = f"{base_url}/sync-instructions_inheritance.json"
 
 files = [
     json_file1,
     json_file1.replace("inheritance.json", "mapper.json"),
     json_file2,
     json_file2.replace("inheritance.json", "mapper.json"),
-    json_file3
+    json_file3,
+    json_file4,
+    json_file5
     ]
 
 for f in files:

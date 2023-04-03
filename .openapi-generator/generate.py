@@ -11,6 +11,8 @@ generator_folder = os.path.join(root, '.openapi-generator')
 json1 = os.path.join(doc_folder, 'model_inheritance.json')
 json2 = os.path.join(doc_folder, 'simulation-parameter_inheritance.json')
 json3 = os.path.join(doc_folder, 'validation-report.json')
+json4 = os.path.join(doc_folder, 'comparison-report_inheritance.json')
+json5 = os.path.join(doc_folder, 'sync-instructions_inheritance.json')
 
 # update version
 # python .openapi-generator/pre_gen_script.py ".openapi-docs/model_inheritance.json"
@@ -26,6 +28,8 @@ config = f"{generator_folder}/.openapi-config.json"
 subprocess.call(f"npx @openapitools/openapi-generator-cli generate -i {json2} -t {template} -g csharp -o . --skip-validate-spec -c {config}", shell=True)
 subprocess.call(f"npx @openapitools/openapi-generator-cli generate -i {json1} -t {template} -g csharp -o . --skip-validate-spec -c {config}", shell=True)
 subprocess.call(f"npx @openapitools/openapi-generator-cli generate -i {json3} -t {template} -g csharp -o . --skip-validate-spec -c {config}", shell=True)
+subprocess.call(f"npx @openapitools/openapi-generator-cli generate -i {json4} -t {template} -g csharp -o . --skip-validate-spec -c {config}", shell=True)
+subprocess.call(f"npx @openapitools/openapi-generator-cli generate -i {json5} -t {template} -g csharp -o . --skip-validate-spec -c {config}", shell=True)
 
 
 
@@ -38,6 +42,11 @@ time.sleep(1)
 subprocess.call(f"python {generator_folder}/post_gen_script.py {json1}", shell=True)
 time.sleep(1)
 subprocess.call(f"python {generator_folder}/post_gen_script.py {json3}", shell=True)
+time.sleep(1)
+subprocess.call(f"python {generator_folder}/post_gen_script.py {json4}", shell=True)
+time.sleep(1)
+subprocess.call(f"python {generator_folder}/post_gen_script.py {json5}", shell=True)
+
 
 # update global default
 time.sleep(1)
