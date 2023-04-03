@@ -6,7 +6,7 @@ using System.Text;
 
 namespace HoneybeeSchema.Helper
 {
-    public static class Pathes
+    public static class Paths
     {
         public static bool IsMac => System.Environment.OSVersion.Platform == PlatformID.Unix;
         public static string ApplicationRoot => IsMac ?
