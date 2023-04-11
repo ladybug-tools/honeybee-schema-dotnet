@@ -15,16 +15,24 @@ namespace HoneybeeSchema.Energy
     public partial interface IWindowConstruction
     {
     }
+
+    public partial interface IAirBoundaryConstruction
+    {
+    }
+    public partial interface IShadeConstruction
+    {
+    }
 }
 
 namespace HoneybeeSchema
 {
-   
-    //public partial class AirBoundaryConstruction : HoneybeeSchema.Energy.IConstruction { }
-    //public partial class AirBoundaryConstructionAbridged : HoneybeeSchema.Energy.IConstruction { }
+
+    public partial class AirBoundaryConstruction : HoneybeeSchema.Energy.IAirBoundaryConstruction { }
+    public partial class AirBoundaryConstructionAbridged : HoneybeeSchema.Energy.IAirBoundaryConstruction { }
+
     public partial class OpaqueConstruction : HoneybeeSchema.Energy.IOpaqueConstruction { }
     public partial class OpaqueConstructionAbridged : HoneybeeSchema.Energy.IOpaqueConstruction { }
-    //public partial class ShadeConstruction : HoneybeeSchema.Energy.IConstruction { }
+    public partial class ShadeConstruction : HoneybeeSchema.Energy.IShadeConstruction { }
 
     public partial class WindowConstruction : HoneybeeSchema.Energy.IWindowConstruction { }
     public partial class WindowConstructionAbridged : HoneybeeSchema.Energy.IWindowConstruction { }
