@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System;
+using System.Collections.Generic;
 
 namespace HoneybeeSchema
 {
@@ -16,6 +17,50 @@ namespace HoneybeeSchema
             this.Type = "HVACScenario";
         }
 
-        //public List<detailed> MyProperty { get; set; }
+        public HVACScenario(
+            string identifier, List<DetailedHVAC> hvacSystems, // Required parameters
+            string displayName = default, Object userData = default) // Optional parameters 
+            : base(identifier: identifier, displayName: displayName, userData: userData)
+        {
+            this.HVACSystems= hvacSystems ?? throw new ArgumentNullException(nameof(hvacSystems));
+
+            // Set non-required readonly properties with defaultValue
+            this.Type = "HVACScenario";
+
+            // check if object is valid, only check for inherited class
+            if (this.GetType() == typeof(HVACScenario))
+                this.IsValid(throwException: true);
+        }
+
+        [Summary(@"Type")]
+        [DataMember(Name = "type")]
+        public override string Type { get; protected set; } = "HVACScenario";
+
+        public override string ToString()
+        {
+            return $"HVACScenario: {this.DisplayName ?? this.Identifier}";
+        }
+
+        [Summary(@"HVACSystems")]
+        [DataMember(Name = "HVACSystems")]
+        public List<DetailedHVAC> HVACSystems { get; set; }
+
+
+        public static HVACScenario FromJson(string json)
+        {
+            var obj = JsonConvert.DeserializeObject<HVACScenario>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() && obj.IsValid(throwException: true) ? obj : null;
+        }
+
+        public bool Equals(HVACScenario input)
+        {
+            if (input == null)
+                return false;
+            return base.Equals(input) &&
+                    Extension.AllEquals(this.HVACSystems, input.HVACSystems) &&
+                    Extension.Equals(this.Type, input.Type);
+        }
     }
 }
