@@ -138,7 +138,31 @@ namespace HoneybeeSchema
         /// Enum SHW for value: SHW
         /// </summary>
         [EnumMember(Value = "SHW")]
-        SHW = 18
+        SHW = 18,
+
+        /// <summary>
+        /// Enum RoofSpecification for value: RoofSpecification
+        /// </summary>
+        [EnumMember(Value = "RoofSpecification")]
+        RoofSpecification = 19,
+
+        /// <summary>
+        /// Enum Room2D for value: Room2D
+        /// </summary>
+        [EnumMember(Value = "Room2D")]
+        Room2D = 20,
+
+        /// <summary>
+        /// Enum Story for value: Story
+        /// </summary>
+        [EnumMember(Value = "Story")]
+        Story = 21,
+
+        /// <summary>
+        /// Enum Building for value: Building
+        /// </summary>
+        [EnumMember(Value = "Building")]
+        Building = 22
 
     }
 

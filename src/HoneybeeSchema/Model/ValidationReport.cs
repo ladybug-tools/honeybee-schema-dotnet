@@ -44,22 +44,25 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidationReport" /> class.
         /// </summary>
-        /// <param name="honeybeeCore">Text string for the version of honeybee-core that performed the validation. (required).</param>
-        /// <param name="honeybeeSchema">Text string for the version of honeybee-schema that performed the validation. (required).</param>
+        /// <param name="appVersion">Text string for the version of honeybee-core or dragonfly-core that performed the validation. (required).</param>
+        /// <param name="schemaVersion">Text string for the version of honeybee-schema or dragonfly-schema that performed the validation. (required).</param>
         /// <param name="valid">Boolean to note whether the Model is valid or not. (required).</param>
+        /// <param name="appName">Text string for the name of the application that performed the validation. This is typically either Honeybee or Dragonfly. (default to &quot;Honeybee&quot;).</param>
         /// <param name="fatalError">A text string containing an exception if the Model failed to serialize. It will be an empty string if serialization was successful. (default to &quot;&quot;).</param>
         /// <param name="errors">A list of objects for each error that was discovered in the model. This will be an empty list or None if no errors were found..</param>
         public ValidationReport
         (
-           string honeybeeCore, string honeybeeSchema, bool valid, // Required parameters
-           string fatalError = "", List<ValidationError> errors= default// Optional parameters
+           string appVersion, string schemaVersion, bool valid, // Required parameters
+           string appName = "Honeybee", string fatalError = "", List<ValidationError> errors= default// Optional parameters
         )// BaseClass
         {
-            // to ensure "honeybeeCore" is required (not null)
-            this.HoneybeeCore = honeybeeCore ?? throw new ArgumentNullException("honeybeeCore is a required property for ValidationReport and cannot be null");
-            // to ensure "honeybeeSchema" is required (not null)
-            this.HoneybeeSchema = honeybeeSchema ?? throw new ArgumentNullException("honeybeeSchema is a required property for ValidationReport and cannot be null");
+            // to ensure "appVersion" is required (not null)
+            this.AppVersion = appVersion ?? throw new ArgumentNullException("appVersion is a required property for ValidationReport and cannot be null");
+            // to ensure "schemaVersion" is required (not null)
+            this.SchemaVersion = schemaVersion ?? throw new ArgumentNullException("schemaVersion is a required property for ValidationReport and cannot be null");
             this.Valid = valid;
+            // use default value if no "appName" provided
+            this.AppName = appName ?? "Honeybee";
             // use default value if no "fatalError" provided
             this.FatalError = fatalError ?? "";
             this.Errors = errors;
@@ -81,19 +84,19 @@ namespace HoneybeeSchema
         public override string Type { get; protected set; }  = "ValidationReport";
 
         /// <summary>
-        /// Text string for the version of honeybee-core that performed the validation.
+        /// Text string for the version of honeybee-core or dragonfly-core that performed the validation.
         /// </summary>
-        /// <value>Text string for the version of honeybee-core that performed the validation.</value>
-        [Summary(@"Text string for the version of honeybee-core that performed the validation.")]
-        [DataMember(Name = "honeybee_core", IsRequired = true)]
-        public string HoneybeeCore { get; set; } 
+        /// <value>Text string for the version of honeybee-core or dragonfly-core that performed the validation.</value>
+        [Summary(@"Text string for the version of honeybee-core or dragonfly-core that performed the validation.")]
+        [DataMember(Name = "app_version", IsRequired = true)]
+        public string AppVersion { get; set; } 
         /// <summary>
-        /// Text string for the version of honeybee-schema that performed the validation.
+        /// Text string for the version of honeybee-schema or dragonfly-schema that performed the validation.
         /// </summary>
-        /// <value>Text string for the version of honeybee-schema that performed the validation.</value>
-        [Summary(@"Text string for the version of honeybee-schema that performed the validation.")]
-        [DataMember(Name = "honeybee_schema", IsRequired = true)]
-        public string HoneybeeSchema { get; set; } 
+        /// <value>Text string for the version of honeybee-schema or dragonfly-schema that performed the validation.</value>
+        [Summary(@"Text string for the version of honeybee-schema or dragonfly-schema that performed the validation.")]
+        [DataMember(Name = "schema_version", IsRequired = true)]
+        public string SchemaVersion { get; set; } 
         /// <summary>
         /// Boolean to note whether the Model is valid or not.
         /// </summary>
@@ -101,6 +104,13 @@ namespace HoneybeeSchema
         [Summary(@"Boolean to note whether the Model is valid or not.")]
         [DataMember(Name = "valid", IsRequired = true)]
         public bool Valid { get; set; } 
+        /// <summary>
+        /// Text string for the name of the application that performed the validation. This is typically either Honeybee or Dragonfly.
+        /// </summary>
+        /// <value>Text string for the name of the application that performed the validation. This is typically either Honeybee or Dragonfly.</value>
+        [Summary(@"Text string for the name of the application that performed the validation. This is typically either Honeybee or Dragonfly.")]
+        [DataMember(Name = "app_name")]
+        public string AppName { get; set; }  = "Honeybee";
         /// <summary>
         /// A text string containing an exception if the Model failed to serialize. It will be an empty string if serialization was successful.
         /// </summary>
@@ -136,10 +146,11 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ValidationReport:\n");
-            sb.Append("  HoneybeeCore: ").Append(this.HoneybeeCore).Append("\n");
-            sb.Append("  HoneybeeSchema: ").Append(this.HoneybeeSchema).Append("\n");
+            sb.Append("  AppVersion: ").Append(this.AppVersion).Append("\n");
+            sb.Append("  SchemaVersion: ").Append(this.SchemaVersion).Append("\n");
             sb.Append("  Valid: ").Append(this.Valid).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  AppName: ").Append(this.AppName).Append("\n");
             sb.Append("  FatalError: ").Append(this.FatalError).Append("\n");
             sb.Append("  Errors: ").Append(this.Errors).Append("\n");
             return sb.ToString();
@@ -197,10 +208,11 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                    Extension.Equals(this.HoneybeeCore, input.HoneybeeCore) && 
-                    Extension.Equals(this.HoneybeeSchema, input.HoneybeeSchema) && 
+                    Extension.Equals(this.AppVersion, input.AppVersion) && 
+                    Extension.Equals(this.SchemaVersion, input.SchemaVersion) && 
                     Extension.Equals(this.Valid, input.Valid) && 
                     Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.AppName, input.AppName) && 
                     Extension.Equals(this.FatalError, input.FatalError) && 
                 (
                     this.Errors == input.Errors ||
@@ -217,14 +229,16 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.HoneybeeCore != null)
-                    hashCode = hashCode * 59 + this.HoneybeeCore.GetHashCode();
-                if (this.HoneybeeSchema != null)
-                    hashCode = hashCode * 59 + this.HoneybeeSchema.GetHashCode();
+                if (this.AppVersion != null)
+                    hashCode = hashCode * 59 + this.AppVersion.GetHashCode();
+                if (this.SchemaVersion != null)
+                    hashCode = hashCode * 59 + this.SchemaVersion.GetHashCode();
                 if (this.Valid != null)
                     hashCode = hashCode * 59 + this.Valid.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.AppName != null)
+                    hashCode = hashCode * 59 + this.AppName.GetHashCode();
                 if (this.FatalError != null)
                     hashCode = hashCode * 59 + this.FatalError.GetHashCode();
                 if (this.Errors != null)
@@ -242,20 +256,20 @@ namespace HoneybeeSchema
         {
 
             
-            // HoneybeeCore (string) pattern
-            Regex regexHoneybeeCore = new Regex(@"([0-9]+)\.([0-9]+)\.([0-9]+)", RegexOptions.CultureInvariant);
-            if (this.HoneybeeCore != null && false == regexHoneybeeCore.Match(this.HoneybeeCore).Success)
+            // AppVersion (string) pattern
+            Regex regexAppVersion = new Regex(@"([0-9]+)\.([0-9]+)\.([0-9]+)", RegexOptions.CultureInvariant);
+            if (this.AppVersion != null && false == regexAppVersion.Match(this.AppVersion).Success)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for HoneybeeCore, must match a pattern of " + regexHoneybeeCore, new [] { "HoneybeeCore" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for AppVersion, must match a pattern of " + regexAppVersion, new [] { "AppVersion" });
             }
 
 
             
-            // HoneybeeSchema (string) pattern
-            Regex regexHoneybeeSchema = new Regex(@"([0-9]+)\.([0-9]+)\.([0-9]+)", RegexOptions.CultureInvariant);
-            if (this.HoneybeeSchema != null && false == regexHoneybeeSchema.Match(this.HoneybeeSchema).Success)
+            // SchemaVersion (string) pattern
+            Regex regexSchemaVersion = new Regex(@"([0-9]+)\.([0-9]+)\.([0-9]+)", RegexOptions.CultureInvariant);
+            if (this.SchemaVersion != null && false == regexSchemaVersion.Match(this.SchemaVersion).Success)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for HoneybeeSchema, must match a pattern of " + regexHoneybeeSchema, new [] { "HoneybeeSchema" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SchemaVersion, must match a pattern of " + regexSchemaVersion, new [] { "SchemaVersion" });
             }
 
 

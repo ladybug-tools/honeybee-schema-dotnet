@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Documentation for Honeybee simulation-parameter schema",
-        "version": "1.53.1",
+        "version": "1.53.2",
         "title": "Honeybee Simulation Parameter Schema",
         "contact": {
             "name": "Ladybug Tools",
@@ -389,6 +389,106 @@
                     "propertyName": "type"
                 }
             },
+            "SimulationControl": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "title": "Type",
+                                "default": "SimulationControl",
+                                "pattern": "^SimulationControl$",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "do_zone_sizing": {
+                                "title": "Do Zone Sizing",
+                                "description": "Boolean for whether the zone sizing calculation should be run.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "do_system_sizing": {
+                                "title": "Do System Sizing",
+                                "description": "Boolean for whether the system sizing calculation should be run.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "do_plant_sizing": {
+                                "title": "Do Plant Sizing",
+                                "description": "Boolean for whether the plant sizing calculation should be run.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "run_for_run_periods": {
+                                "title": "Run For Run Periods",
+                                "description": "Boolean for whether the simulation should be run for the sizing periods.",
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "run_for_sizing_periods": {
+                                "title": "Run For Sizing Periods",
+                                "description": "Boolean for whether the simulation should be run for the run periods.",
+                                "default": false,
+                                "type": "boolean"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "SimulationControl",
+                "description": "Used to specify which types of calculations to run.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "WindCondition": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "wind_speed": {
+                                "title": "Wind Speed",
+                                "description": "Wind speed on the design day [m/s].",
+                                "minimum": 0,
+                                "maximum": 40,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "WindCondition",
+                                "pattern": "^WindCondition$",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "wind_direction": {
+                                "title": "Wind Direction",
+                                "description": "Wind direction on the design day [degrees].",
+                                "default": 0,
+                                "minimum": 0,
+                                "maximum": 360,
+                                "type": "number",
+                                "format": "double"
+                            }
+                        },
+                        "required": [
+                            "wind_speed"
+                        ],
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "WindCondition",
+                "description": "Used to specify wind conditions on a design day.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
             "DesignDayTypes": {
                 "title": "DesignDayTypes",
                 "description": "An enumeration.",
@@ -517,51 +617,6 @@
                 ],
                 "title": "HumidityCondition",
                 "description": "Used to specify humidity conditions on a design day.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "WindCondition": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "wind_speed": {
-                                "title": "Wind Speed",
-                                "description": "Wind speed on the design day [m/s].",
-                                "minimum": 0,
-                                "maximum": 40,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "WindCondition",
-                                "pattern": "^WindCondition$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "wind_direction": {
-                                "title": "Wind Direction",
-                                "description": "Wind direction on the design day [degrees].",
-                                "default": 0,
-                                "minimum": 0,
-                                "maximum": 360,
-                                "type": "number",
-                                "format": "double"
-                            }
-                        },
-                        "required": [
-                            "wind_speed"
-                        ],
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "WindCondition",
-                "description": "Used to specify wind conditions on a design day.",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -799,61 +854,6 @@
                 ],
                 "title": "SizingParameter",
                 "description": "Used to specify heating and cooling sizing criteria and safety factors.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "SimulationControl": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "title": "Type",
-                                "default": "SimulationControl",
-                                "pattern": "^SimulationControl$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "do_zone_sizing": {
-                                "title": "Do Zone Sizing",
-                                "description": "Boolean for whether the zone sizing calculation should be run.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "do_system_sizing": {
-                                "title": "Do System Sizing",
-                                "description": "Boolean for whether the system sizing calculation should be run.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "do_plant_sizing": {
-                                "title": "Do Plant Sizing",
-                                "description": "Boolean for whether the plant sizing calculation should be run.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "run_for_run_periods": {
-                                "title": "Run For Run Periods",
-                                "description": "Boolean for whether the simulation should be run for the sizing periods.",
-                                "default": true,
-                                "type": "boolean"
-                            },
-                            "run_for_sizing_periods": {
-                                "title": "Run For Sizing Periods",
-                                "description": "Boolean for whether the simulation should be run for the run periods.",
-                                "default": false,
-                                "type": "boolean"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "SimulationControl",
-                "description": "Used to specify which types of calculations to run.",
                 "discriminator": {
                     "propertyName": "type"
                 }

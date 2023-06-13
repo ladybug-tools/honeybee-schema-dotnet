@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Honeybee validation-report schema.",
-        "version": "1.53.1",
+        "version": "1.53.2",
         "title": "Honeybee Validation Report Schema",
         "contact": {
             "name": "Ladybug Tools",
@@ -73,7 +73,7 @@
         "schemas": {
             "ExtensionTypes": {
                 "title": "ExtensionTypes",
-                "description": "Types of Honeybee extensions.",
+                "description": "Types of Honeybee/Dragonfly extensions.",
                 "enum": [
                     "Core",
                     "Radiance",
@@ -102,7 +102,11 @@
                     "Schedule",
                     "ProgramType",
                     "HVAC",
-                    "SHW"
+                    "SHW",
+                    "RoofSpecification",
+                    "Room2D",
+                    "Story",
+                    "Building"
                 ],
                 "type": "string"
             },
@@ -113,7 +117,9 @@
                     "Aperture",
                     "Door",
                     "Face",
-                    "Room"
+                    "Room",
+                    "Story",
+                    "Building"
                 ],
                 "type": "string"
             },
@@ -243,15 +249,15 @@
                 "title": "ValidationReport",
                 "type": "object",
                 "properties": {
-                    "honeybee_core": {
-                        "title": "Honeybee Core",
-                        "description": "Text string for the version of honeybee-core that performed the validation.",
+                    "app_version": {
+                        "title": "App Version",
+                        "description": "Text string for the version of honeybee-core or dragonfly-core that performed the validation.",
                         "pattern": "([0-9]+)\\.([0-9]+)\\.([0-9]+)",
                         "type": "string"
                     },
-                    "honeybee_schema": {
-                        "title": "Honeybee Schema",
-                        "description": "Text string for the version of honeybee-schema that performed the validation.",
+                    "schema_version": {
+                        "title": "Schema Version",
+                        "description": "Text string for the version of honeybee-schema or dragonfly-schema that performed the validation.",
                         "pattern": "([0-9]+)\\.([0-9]+)\\.([0-9]+)",
                         "type": "string"
                     },
@@ -266,6 +272,12 @@
                         "pattern": "^ValidationReport$",
                         "type": "string",
                         "readOnly": true
+                    },
+                    "app_name": {
+                        "title": "App Name",
+                        "description": "Text string for the name of the application that performed the validation. This is typically either Honeybee or Dragonfly.",
+                        "default": "Honeybee",
+                        "type": "string"
                     },
                     "fatal_error": {
                         "title": "Fatal Error",
@@ -283,8 +295,8 @@
                     }
                 },
                 "required": [
-                    "honeybee_core",
-                    "honeybee_schema",
+                    "app_version",
+                    "schema_version",
                     "valid"
                 ]
             }
