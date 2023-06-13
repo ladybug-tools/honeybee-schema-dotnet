@@ -54,7 +54,19 @@ namespace HoneybeeSchema
         /// Enum Room for value: Room
         /// </summary>
         [EnumMember(Value = "Room")]
-        Room = 4
+        Room = 4,
+
+        /// <summary>
+        /// Enum Story for value: Story
+        /// </summary>
+        [EnumMember(Value = "Story")]
+        Story = 5,
+
+        /// <summary>
+        /// Enum Building for value: Building
+        /// </summary>
+        [EnumMember(Value = "Building")]
+        Building = 6
 
     }
 

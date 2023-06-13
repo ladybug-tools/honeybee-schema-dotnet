@@ -24,9 +24,9 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Types of Honeybee extensions.
+    /// Types of Honeybee/Dragonfly extensions.
     /// </summary>
-    /// <value>Types of Honeybee extensions.</value>
+    /// <value>Types of Honeybee/Dragonfly extensions.</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
