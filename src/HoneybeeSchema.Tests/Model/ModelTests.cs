@@ -183,6 +183,20 @@ namespace HoneybeeSchema.Test
             Assert.IsTrue(!string.IsNullOrEmpty(sr));
 
         }
+
+        [Test]
+        public void HVACScenarioTest()
+        {
+            var pairs = new Dictionary<string, string>();
+            pairs.Add("roomID1", "hvacID1");
+            pairs.Add("roomID2", "hvacID3");
+            var dummy = new HVACScenario("newID", pairs, "new scenario");
+
+            var dup = dummy.DuplicateHVACScenario();
+
+            Assert.AreEqual(dummy, dup);
+
+        }
     }
 
 }
