@@ -19,15 +19,31 @@ namespace HoneybeeSchema
 
         public static string GetSummary(Type t)
         {
-            var att = (SummaryAttribute)Attribute.GetCustomAttribute(t, typeof(SummaryAttribute));
-            return att?.Summary;
+            try
+            {
+                var att = (SummaryAttribute)Attribute.GetCustomAttribute(t, typeof(SummaryAttribute));
+                return att?.Summary;
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+           
         }
 
         public static string GetSummary(Type t, string property)
         {
-            var prop = t.GetProperty(property);
-            var att = (SummaryAttribute)Attribute.GetCustomAttribute(prop, typeof(SummaryAttribute));
-            return att?.Summary;
+            try
+            {
+                var prop = t.GetProperty(property);
+                var att = (SummaryAttribute)Attribute.GetCustomAttribute(prop, typeof(SummaryAttribute));
+                return att?.Summary;
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+           
         }
     }
 }
