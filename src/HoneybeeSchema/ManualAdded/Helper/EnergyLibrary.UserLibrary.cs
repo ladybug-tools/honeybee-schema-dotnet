@@ -182,7 +182,7 @@ namespace HoneybeeSchema.Helper
             var module = loadEnergy? "honeybee_energy": "honeybee_radiance";
          
             // load property
-            var cmd = $"-m {module} lib to-model-properties {userPath}";
+            var cmd = $"-m {module} lib to-model-properties --include-abridged {userPath}";
             var json = ExecuteCMD(cmd);
             if (!string.IsNullOrEmpty(json))
             {
