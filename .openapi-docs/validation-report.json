@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Honeybee validation-report schema.",
-        "version": "1.53.2",
+        "version": "1.53.3",
         "title": "Honeybee Validation Report Schema",
         "contact": {
             "name": "Ladybug Tools",
@@ -196,11 +196,14 @@
                     },
                     "element_id": {
                         "title": "Element Id",
-                        "description": "Text string for the unique object ID that caused the error. Note that this can be the identifier of a core object like a Room or a Face. Or it can be for an extension object like a SensorGrid or a Construction.",
-                        "maxLength": 100,
-                        "minLength": 1,
-                        "pattern": "^[^,;!\\n\\t]+$",
-                        "type": "string"
+                        "description": "A list of text strings for the unique object IDs that caused the error. The list typically contains a single item but there are some types errors that stem from multiple objects like mis-matched area adjacencies or overlapping Room geometries. Note that the IDs in this list can be the identifier of a core object like a Room or a Face or it can be for an extension object like a SensorGrid or a Construction.",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 100,
+                            "pattern": "^[^,;!\\n\\t]+$"
+                        }
                     },
                     "message": {
                         "title": "Message",
@@ -216,15 +219,21 @@
                     },
                     "element_name": {
                         "title": "Element Name",
-                        "description": "Display name of the object that caused the error.",
-                        "type": "string"
+                        "description": "A list of text strings for the display names of the objects that caused the error.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
                     },
                     "parents": {
                         "title": "Parents",
-                        "description": "A list of the parent objects for the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room.",
+                        "description": "A list lists where each sub-list corresponds to one of the objects in the element_id property. Each sub-list contains information for the parent objects of the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room.",
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/ValidationParent"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/ValidationParent"
+                            }
                         }
                     },
                     "top_parents": {

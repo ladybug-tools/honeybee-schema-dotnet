@@ -46,7 +46,7 @@ namespace HoneybeeSchema
         { 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.53.2";
+            this.Version = "1.53.3";
         }
         
         /// <summary>
@@ -83,7 +83,7 @@ namespace HoneybeeSchema
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.53.2";
+            this.Version = "1.53.3";
 
             // check if object is valid, only check for inherited class
             if (this.GetType() == typeof(Model))
@@ -104,7 +104,7 @@ namespace HoneybeeSchema
         /// <value>Text string for the current version of the schema.</value>
         [Summary(@"Text string for the current version of the schema.")]
         [DataMember(Name = "version")]
-        public string Version { get; protected set; }  = "1.53.2";
+        public string Version { get; protected set; }  = "1.53.3";
 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).

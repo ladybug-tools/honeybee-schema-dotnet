@@ -62,15 +62,15 @@ namespace HoneybeeSchema
         /// <param name="errorType">A human-readable version of the error code, typically not more than five words long. (required).</param>
         /// <param name="extensionType">Text for the Honeybee extension from which the error originated (from the ExtensionTypes enumeration). (required).</param>
         /// <param name="elementType">Text for the type of object that caused the error. (required).</param>
-        /// <param name="elementId">Text string for the unique object ID that caused the error. Note that this can be the identifier of a core object like a Room or a Face. Or it can be for an extension object like a SensorGrid or a Construction. (required).</param>
+        /// <param name="elementId">A list of text strings for the unique object IDs that caused the error. The list typically contains a single item but there are some types errors that stem from multiple objects like mis-matched area adjacencies or overlapping Room geometries. Note that the IDs in this list can be the identifier of a core object like a Room or a Face or it can be for an extension object like a SensorGrid or a Construction. (required).</param>
         /// <param name="message">Text for the error message with a detailed description of what exactly is invalid about the element. (required).</param>
-        /// <param name="elementName">Display name of the object that caused the error..</param>
-        /// <param name="parents">A list of the parent objects for the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room..</param>
+        /// <param name="elementName">A list of text strings for the display names of the objects that caused the error..</param>
+        /// <param name="parents">A list lists where each sub-list corresponds to one of the objects in the element_id property. Each sub-list contains information for the parent objects of the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room..</param>
         /// <param name="topParents">A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved..</param>
         public ValidationError
         (
-           string code, string errorType, ExtensionTypes extensionType, ObjectTypes elementType, string elementId, string message, // Required parameters
-           string elementName= default, List<ValidationParent> parents= default, List<ValidationParent> topParents= default// Optional parameters
+           string code, string errorType, ExtensionTypes extensionType, ObjectTypes elementType, List<string> elementId, string message, // Required parameters
+           List<string> elementName= default, List<List<ValidationParent>> parents= default, List<ValidationParent> topParents= default// Optional parameters
         )// BaseClass
         {
             // to ensure "code" is required (not null)
@@ -118,12 +118,12 @@ namespace HoneybeeSchema
         [DataMember(Name = "error_type", IsRequired = true)]
         public string ErrorType { get; set; } 
         /// <summary>
-        /// Text string for the unique object ID that caused the error. Note that this can be the identifier of a core object like a Room or a Face. Or it can be for an extension object like a SensorGrid or a Construction.
+        /// A list of text strings for the unique object IDs that caused the error. The list typically contains a single item but there are some types errors that stem from multiple objects like mis-matched area adjacencies or overlapping Room geometries. Note that the IDs in this list can be the identifier of a core object like a Room or a Face or it can be for an extension object like a SensorGrid or a Construction.
         /// </summary>
-        /// <value>Text string for the unique object ID that caused the error. Note that this can be the identifier of a core object like a Room or a Face. Or it can be for an extension object like a SensorGrid or a Construction.</value>
-        [Summary(@"Text string for the unique object ID that caused the error. Note that this can be the identifier of a core object like a Room or a Face. Or it can be for an extension object like a SensorGrid or a Construction.")]
+        /// <value>A list of text strings for the unique object IDs that caused the error. The list typically contains a single item but there are some types errors that stem from multiple objects like mis-matched area adjacencies or overlapping Room geometries. Note that the IDs in this list can be the identifier of a core object like a Room or a Face or it can be for an extension object like a SensorGrid or a Construction.</value>
+        [Summary(@"A list of text strings for the unique object IDs that caused the error. The list typically contains a single item but there are some types errors that stem from multiple objects like mis-matched area adjacencies or overlapping Room geometries. Note that the IDs in this list can be the identifier of a core object like a Room or a Face or it can be for an extension object like a SensorGrid or a Construction.")]
         [DataMember(Name = "element_id", IsRequired = true)]
-        public string ElementId { get; set; } 
+        public List<string> ElementId { get; set; } 
         /// <summary>
         /// Text for the error message with a detailed description of what exactly is invalid about the element.
         /// </summary>
@@ -132,19 +132,19 @@ namespace HoneybeeSchema
         [DataMember(Name = "message", IsRequired = true)]
         public string Message { get; set; } 
         /// <summary>
-        /// Display name of the object that caused the error.
+        /// A list of text strings for the display names of the objects that caused the error.
         /// </summary>
-        /// <value>Display name of the object that caused the error.</value>
-        [Summary(@"Display name of the object that caused the error.")]
+        /// <value>A list of text strings for the display names of the objects that caused the error.</value>
+        [Summary(@"A list of text strings for the display names of the objects that caused the error.")]
         [DataMember(Name = "element_name")]
-        public string ElementName { get; set; } 
+        public List<string> ElementName { get; set; } 
         /// <summary>
-        /// A list of the parent objects for the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room.
+        /// A list lists where each sub-list corresponds to one of the objects in the element_id property. Each sub-list contains information for the parent objects of the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room.
         /// </summary>
-        /// <value>A list of the parent objects for the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room.</value>
-        [Summary(@"A list of the parent objects for the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room.")]
+        /// <value>A list lists where each sub-list corresponds to one of the objects in the element_id property. Each sub-list contains information for the parent objects of the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room.</value>
+        [Summary(@"A list lists where each sub-list corresponds to one of the objects in the element_id property. Each sub-list contains information for the parent objects of the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room.")]
         [DataMember(Name = "parents")]
-        public List<ValidationParent> Parents { get; set; } 
+        public List<List<ValidationParent>> Parents { get; set; } 
         /// <summary>
         /// A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved.
         /// </summary>
@@ -242,10 +242,16 @@ namespace HoneybeeSchema
                     Extension.Equals(this.ErrorType, input.ErrorType) && 
                     Extension.Equals(this.ExtensionType, input.ExtensionType) && 
                     Extension.Equals(this.ElementType, input.ElementType) && 
-                    Extension.Equals(this.ElementId, input.ElementId) && 
+                (
+                    this.ElementId == input.ElementId ||
+                    Extension.AllEquals(this.ElementId, input.ElementId)
+                ) && 
                     Extension.Equals(this.Message, input.Message) && 
                     Extension.Equals(this.Type, input.Type) && 
-                    Extension.Equals(this.ElementName, input.ElementName) && 
+                (
+                    this.ElementName == input.ElementName ||
+                    Extension.AllEquals(this.ElementName, input.ElementName)
+                ) && 
                 (
                     this.Parents == input.Parents ||
                     Extension.AllEquals(this.Parents, input.Parents)
@@ -313,25 +319,6 @@ namespace HoneybeeSchema
             if (this.Code != null && false == regexCode.Match(this.Code).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Code, must match a pattern of " + regexCode, new [] { "Code" });
-            }
-
-            // ElementId (string) maxLength
-            if(this.ElementId != null && this.ElementId.Length > 100)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ElementId, length must be less than 100.", new [] { "ElementId" });
-            }
-
-            // ElementId (string) minLength
-            if(this.ElementId != null && this.ElementId.Length < 1)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ElementId, length must be greater than 1.", new [] { "ElementId" });
-            }
-            
-            // ElementId (string) pattern
-            Regex regexElementId = new Regex(@"^[^,;!\n\t]+$", RegexOptions.CultureInvariant);
-            if (this.ElementId != null && false == regexElementId.Match(this.ElementId).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ElementId, must match a pattern of " + regexElementId, new [] { "ElementId" });
             }
 
 
