@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Honeybee validation-report schema.",
-        "version": "1.53.3",
+        "version": "1.53.4",
         "title": "Honeybee Validation Report Schema",
         "contact": {
             "name": "Ladybug Tools",
@@ -30,6 +30,11 @@
             "description": "<SchemaDefinition schemaRef=\"#/components/schemas/ExtensionTypes\" />\n"
         },
         {
+            "name": "linesegment3d_model",
+            "x-displayName": "LineSegment3D",
+            "description": "<SchemaDefinition schemaRef=\"#/components/schemas/LineSegment3D\" />\n"
+        },
+        {
             "name": "objecttypes_model",
             "x-displayName": "ObjectTypes",
             "description": "<SchemaDefinition schemaRef=\"#/components/schemas/ObjectTypes\" />\n"
@@ -38,6 +43,11 @@
             "name": "parenttypes_model",
             "x-displayName": "ParentTypes",
             "description": "<SchemaDefinition schemaRef=\"#/components/schemas/ParentTypes\" />\n"
+        },
+        {
+            "name": "point3d_model",
+            "x-displayName": "Point3D",
+            "description": "<SchemaDefinition schemaRef=\"#/components/schemas/Point3D\" />\n"
         },
         {
             "name": "validationerror_model",
@@ -60,8 +70,10 @@
             "name": "Models",
             "tags": [
                 "extensiontypes_model",
+                "linesegment3d_model",
                 "objecttypes_model",
                 "parenttypes_model",
+                "point3d_model",
                 "validationerror_model",
                 "validationparent_model",
                 "validationreport_model"
@@ -161,6 +173,85 @@
                     "id"
                 ]
             },
+            "Point3D": {
+                "title": "Point3D",
+                "description": "A point object in 3D space.",
+                "type": "object",
+                "properties": {
+                    "x": {
+                        "title": "X",
+                        "description": "Number for X coordinate.",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "y": {
+                        "title": "Y",
+                        "description": "Number for Y coordinate.",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "z": {
+                        "title": "Z",
+                        "description": "Number for Z coordinate.",
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "type": {
+                        "title": "Type",
+                        "default": "Point3D",
+                        "pattern": "^Point3D$",
+                        "type": "string",
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "x",
+                    "y",
+                    "z"
+                ],
+                "additionalProperties": false
+            },
+            "LineSegment3D": {
+                "title": "LineSegment3D",
+                "description": "A single line segment face in 3D space.",
+                "type": "object",
+                "properties": {
+                    "p": {
+                        "title": "P",
+                        "description": "Line segment base point as 3 (x, y, z) values.",
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "type": "array",
+                        "items": {
+                            "type": "number",
+                            "format": "double"
+                        }
+                    },
+                    "v": {
+                        "title": "V",
+                        "description": "Line segment direction vector as 3 (x, y, z) values.",
+                        "minItems": 3,
+                        "maxItems": 3,
+                        "type": "array",
+                        "items": {
+                            "type": "number",
+                            "format": "double"
+                        }
+                    },
+                    "type": {
+                        "title": "Type",
+                        "default": "LineSegment3D",
+                        "pattern": "^LineSegment3D$",
+                        "type": "string",
+                        "readOnly": true
+                    }
+                },
+                "required": [
+                    "p",
+                    "v"
+                ],
+                "additionalProperties": false
+            },
             "ValidationError": {
                 "title": "ValidationError",
                 "type": "object",
@@ -242,6 +333,21 @@
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/ValidationParent"
+                        }
+                    },
+                    "helper_geometry": {
+                        "title": "Helper Geometry",
+                        "description": "An optional list of geometry objects that helps illustrate where exactly issues with invalid geometry exist within the Honeybee object. Examples include the naked and non-manifold line segments for non-solid Room geometries, the points of self-intersection for cases of self-intersecting geometry and out-of-plane vertices for non-planar objects. Oftentimes, zooming directly to these helper geometries will help end users understand invalid situations in their model faster than simple zooming to the invalid Honeybee object in its totality.",
+                        "type": "array",
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/components/schemas/Point3D"
+                                },
+                                {
+                                    "$ref": "#/components/schemas/LineSegment3D"
+                                }
+                            ]
                         }
                     }
                 },

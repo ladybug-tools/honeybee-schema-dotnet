@@ -67,10 +67,11 @@ namespace HoneybeeSchema
         /// <param name="elementName">A list of text strings for the display names of the objects that caused the error..</param>
         /// <param name="parents">A list lists where each sub-list corresponds to one of the objects in the element_id property. Each sub-list contains information for the parent objects of the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room..</param>
         /// <param name="topParents">A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved..</param>
+        /// <param name="helperGeometry">An optional list of geometry objects that helps illustrate where exactly issues with invalid geometry exist within the Honeybee object. Examples include the naked and non-manifold line segments for non-solid Room geometries, the points of self-intersection for cases of self-intersecting geometry and out-of-plane vertices for non-planar objects. Oftentimes, zooming directly to these helper geometries will help end users understand invalid situations in their model faster than simple zooming to the invalid Honeybee object in its totality..</param>
         public ValidationError
         (
            string code, string errorType, ExtensionTypes extensionType, ObjectTypes elementType, List<string> elementId, string message, // Required parameters
-           List<string> elementName= default, List<List<ValidationParent>> parents= default, List<ValidationParent> topParents= default// Optional parameters
+           List<string> elementName= default, List<List<ValidationParent>> parents= default, List<ValidationParent> topParents= default, List<AnyOf<Point3D, LineSegment3D>> helperGeometry= default// Optional parameters
         )// BaseClass
         {
             // to ensure "code" is required (not null)
@@ -86,6 +87,7 @@ namespace HoneybeeSchema
             this.ElementName = elementName;
             this.Parents = parents;
             this.TopParents = topParents;
+            this.HelperGeometry = helperGeometry;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "ValidationError";
@@ -152,6 +154,13 @@ namespace HoneybeeSchema
         [Summary(@"A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved.")]
         [DataMember(Name = "top_parents")]
         public List<ValidationParent> TopParents { get; set; } 
+        /// <summary>
+        /// An optional list of geometry objects that helps illustrate where exactly issues with invalid geometry exist within the Honeybee object. Examples include the naked and non-manifold line segments for non-solid Room geometries, the points of self-intersection for cases of self-intersecting geometry and out-of-plane vertices for non-planar objects. Oftentimes, zooming directly to these helper geometries will help end users understand invalid situations in their model faster than simple zooming to the invalid Honeybee object in its totality.
+        /// </summary>
+        /// <value>An optional list of geometry objects that helps illustrate where exactly issues with invalid geometry exist within the Honeybee object. Examples include the naked and non-manifold line segments for non-solid Room geometries, the points of self-intersection for cases of self-intersecting geometry and out-of-plane vertices for non-planar objects. Oftentimes, zooming directly to these helper geometries will help end users understand invalid situations in their model faster than simple zooming to the invalid Honeybee object in its totality.</value>
+        [Summary(@"An optional list of geometry objects that helps illustrate where exactly issues with invalid geometry exist within the Honeybee object. Examples include the naked and non-manifold line segments for non-solid Room geometries, the points of self-intersection for cases of self-intersecting geometry and out-of-plane vertices for non-planar objects. Oftentimes, zooming directly to these helper geometries will help end users understand invalid situations in their model faster than simple zooming to the invalid Honeybee object in its totality.")]
+        [DataMember(Name = "helper_geometry")]
+        public List<AnyOf<Point3D, LineSegment3D>> HelperGeometry { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -183,6 +192,7 @@ namespace HoneybeeSchema
             sb.Append("  ElementName: ").Append(this.ElementName).Append("\n");
             sb.Append("  Parents: ").Append(this.Parents).Append("\n");
             sb.Append("  TopParents: ").Append(this.TopParents).Append("\n");
+            sb.Append("  HelperGeometry: ").Append(this.HelperGeometry).Append("\n");
             return sb.ToString();
         }
   
@@ -259,6 +269,10 @@ namespace HoneybeeSchema
                 (
                     this.TopParents == input.TopParents ||
                     Extension.AllEquals(this.TopParents, input.TopParents)
+                ) && 
+                (
+                    this.HelperGeometry == input.HelperGeometry ||
+                    Extension.AllEquals(this.HelperGeometry, input.HelperGeometry)
                 );
         }
 
@@ -291,6 +305,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.Parents.GetHashCode();
                 if (this.TopParents != null)
                     hashCode = hashCode * 59 + this.TopParents.GetHashCode();
+                if (this.HelperGeometry != null)
+                    hashCode = hashCode * 59 + this.HelperGeometry.GetHashCode();
                 return hashCode;
             }
         }
