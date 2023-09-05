@@ -304,6 +304,9 @@ namespace HoneybeeSchema
                 case EnergyWindowMaterialSimpleGlazSys em:
                     modelEnergyCollection.Materials.Add(em);
                     break;
+                case EnergyWindowFrame em:
+                    modelEnergyCollection.Materials.Add(em);
+                    break;
                 default:
                     throw new ArgumentException($"{material.GetType()}({material.Identifier}) is not added to model");
             }
