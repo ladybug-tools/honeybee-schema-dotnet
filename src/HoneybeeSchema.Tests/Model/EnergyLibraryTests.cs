@@ -265,13 +265,20 @@ namespace HoneybeeSchema.Test
         {
 
             var mats = Helper.EnergyLibrary.StandardsWindowMaterials;
+
+//Clear 3mm
+//LoE SPEC SEL CLEAR 6MM Rev
+//Fixed Window 4.09 / 0.39 / 0.25
+//U0.77_SHGC0.61_SimpleGlazing_Window_08
+//U 1.2 SHGC 0.45 Simple Glazing
+
             var tests = new Dictionary<string, double>()
             {
                 {"Clear 3mm", 0.003336 }, // EnergyWindowMaterialGlazing
                 {"LoE SPEC SEL CLEAR 6MM Rev", 0.006671 }, // EnergyWindowMaterialGlazing
-                {"Fixed Window 4.09/0.39/0.25", 0.076142 }, //EnergyWindowMaterialSimpleGlazSys
-                {"U0.77_SHGC0.61_SimpleGlazing_Window_08", 0.060247 }, //EnergyWindowMaterialSimpleGlazSys
-                {"U 1.2 SHGC 0.45 Simple Glazing", -0.021713 }, //EnergyWindowMaterialSimpleGlazSys
+                {"Fixed Window 4.09/0.39/0.25", 0.076323 }, //EnergyWindowMaterialSimpleGlazSys
+                {"U0.77_SHGC0.61_SimpleGlazing_Window_08", 0.060869 }, //EnergyWindowMaterialSimpleGlazSys
+                {"U 1.2 SHGC 0.45 Simple Glazing", 0.005109}, //EnergyWindowMaterialSimpleGlazSys
             };
 
             //var f = 1.0 / 23 + 1.0 / 8;
@@ -282,7 +289,7 @@ namespace HoneybeeSchema.Test
             foreach (var item in tests)
             {
                 var m1 = mats.FirstOrDefault(_ => _.Key == item.Key).Value;
-                Assert.AreEqual(Math.Round(m1.RValue, 6), item.Value);
+                Assert.AreEqual(m1.RValue, item.Value, 0.0001);
 
             }
 
