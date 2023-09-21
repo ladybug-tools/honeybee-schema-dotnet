@@ -318,6 +318,18 @@ namespace HoneybeeSchema.Test
             invlaid.CalThermalValues(prop);
         }
 
+        [Test]
+        public void EnergyWindowMaterialSimpleGlazSysTest()
+        {
+
+            var glz = new EnergyWindowMaterialSimpleGlazSys("U 1.22 SHGC 0.25 Simple Glazing", 6.92716, 0.25, vt: 0.11);
+            Assert.AreEqual(glz.RValue, 0.005006, 0.01);
+            Assert.AreEqual(glz.UValue, 199.76, 0.01);
+
+            var glz2 = new EnergyWindowMaterialSimpleGlazSys("test", 5, 0.25, vt: 0.11);
+            Assert.AreEqual(glz2.RValue, 0.033019, 0.01);
+        }
+
     }
 
 }
