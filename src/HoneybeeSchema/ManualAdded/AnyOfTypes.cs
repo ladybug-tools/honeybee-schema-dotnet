@@ -59,7 +59,7 @@ namespace HoneybeeSchema
 
         public override string ToString()
         {
-            return this.Obj.ToString();
+            return this.Obj?.ToString();
         }
 
         public virtual string ToJson()
@@ -91,7 +91,6 @@ namespace HoneybeeSchema
                 return ReferenceEquals(anotherObj, null) ? true : false;
 
             return obj.Obj.Equals(anotherObj);
-            return obj.Equals(anotherObj);
         }
 
         public static bool operator !=(AnyOf obj, object anotherObj)
@@ -132,7 +131,7 @@ namespace HoneybeeSchema
         {
         }
 
-        public static implicit operator string(AnyOf<T, K> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K> b) => b?.ToString();
 
         public static implicit operator AnyOf<T, K>(T b) => new AnyOf<T, K>(b);
         public static implicit operator AnyOf<T, K>(K b) => new AnyOf<T, K>(b);
@@ -147,7 +146,7 @@ namespace HoneybeeSchema
         {
         }
 
-        public static implicit operator string(AnyOf<T, K, Q> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K, Q> b) => b?.ToString();
         public static implicit operator AnyOf<T, K, Q>(T b) => new AnyOf<T, K, Q>(b);
         public static implicit operator AnyOf<T, K, Q>(K b) => new AnyOf<T, K, Q>(b);
         public static implicit operator AnyOf<T, K, Q>(Q b) => new AnyOf<T, K, Q>(b);
@@ -161,7 +160,7 @@ namespace HoneybeeSchema
         {
         }
 
-        public static implicit operator string(AnyOf<T, K, Q, W> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K, Q, W> b) => b?.ToString();
         public static implicit operator AnyOf<T, K, Q, W>(T b) => new AnyOf<T, K, Q, W>(b);
         public static implicit operator AnyOf<T, K, Q, W>(K b) => new AnyOf<T, K, Q, W>(b);
         public static implicit operator AnyOf<T, K, Q, W>(Q b) => new AnyOf<T, K, Q, W>(b);
@@ -176,7 +175,7 @@ namespace HoneybeeSchema
         {
         }
 
-        public static implicit operator string(AnyOf<T, K, Q, W, E> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K, Q, W, E> b) => b?.ToString();
         public static implicit operator AnyOf<T, K, Q, W, E>(T b) => new AnyOf<T, K, Q, W, E>(b);
         public static implicit operator AnyOf<T, K, Q, W, E>(K b) => new AnyOf<T, K, Q, W, E>(b);
         public static implicit operator AnyOf<T, K, Q, W, E>(Q b) => new AnyOf<T, K, Q, W, E>(b);
@@ -192,7 +191,7 @@ namespace HoneybeeSchema
         public AnyOf(object obj) : base(obj)
         {
         }
-        public static implicit operator string(AnyOf<T, K, Q, W, E, R> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R> b) => b?.ToString();
         public static implicit operator AnyOf<T, K, Q, W, E, R>(T b) => new AnyOf<T, K, Q, W, E, R>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R>(K b) => new AnyOf<T, K, Q, W, E, R>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R>(Q b) => new AnyOf<T, K, Q, W, E, R>(b);
@@ -210,7 +209,7 @@ namespace HoneybeeSchema
         public AnyOf(object obj) : base(obj)
         {
         }
-        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y> b) => b?.ToString();
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y>(T b) => new AnyOf<T, K, Q, W, E, R, Y>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y>(K b) => new AnyOf<T, K, Q, W, E, R, Y>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y>(Q b) => new AnyOf<T, K, Q, W, E, R, Y>(b);
@@ -230,7 +229,7 @@ namespace HoneybeeSchema
         {
         }
 
-        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U> b) => b?.ToString();
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U>(b);
@@ -251,7 +250,7 @@ namespace HoneybeeSchema
         public AnyOf(object obj) : base(obj)
         {
         }
-        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I> b) => b?.ToString();
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I>(b);
@@ -274,7 +273,7 @@ namespace HoneybeeSchema
         public AnyOf(object obj) : base(obj)
         {
         }
-        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O> b) => b?.ToString();
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O>(b);
@@ -298,7 +297,7 @@ namespace HoneybeeSchema
         {
         }
 
-        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P> b) => b?.ToString();
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P>(b);
@@ -321,7 +320,7 @@ namespace HoneybeeSchema
         public AnyOf(object obj) : base(obj)
         {
         }
-        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A> b) => b?.ToString();
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A>(b);
@@ -343,7 +342,7 @@ namespace HoneybeeSchema
         };
 
         public AnyOf(object obj) : base(obj) { }
-        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B> b) => b?.ToString();
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B>(b);
@@ -366,7 +365,7 @@ namespace HoneybeeSchema
         };
 
         public AnyOf(object obj) : base(obj) { }
-        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C> b) => b?.ToString();
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C>(b);
@@ -390,7 +389,7 @@ namespace HoneybeeSchema
         };
 
         public AnyOf(object obj) : base(obj) { }
-        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D> b) => b?.ToString();
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D>(b);
@@ -415,7 +414,7 @@ namespace HoneybeeSchema
         };
 
         public AnyOf(object obj) : base(obj) { }
-        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F> b) => b?.ToString();
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F>(b);
@@ -442,7 +441,7 @@ namespace HoneybeeSchema
         };
 
         public AnyOf(object obj) : base(obj) { }
-        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G> b) => b?.ToString();
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G>(b);
@@ -470,7 +469,7 @@ namespace HoneybeeSchema
         };
 
         public AnyOf(object obj) : base(obj) { }
-        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H> b) => b?.ToString();
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H>(b);
@@ -499,7 +498,7 @@ namespace HoneybeeSchema
         };
 
         public AnyOf(object obj) : base(obj) { }
-        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J> b) => b?.ToString();
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J>(b);
@@ -528,7 +527,7 @@ namespace HoneybeeSchema
         };
 
         public AnyOf(object obj) : base(obj) { }
-        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M> b) => b.ToString();
+        public static implicit operator string(AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M> b) => b?.ToString();
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(T b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(K b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
         public static implicit operator AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(Q b) => new AnyOf<T, K, Q, W, E, R, Y, U, I, O, P, A, B, C, D, F, G, H, J, M>(b);
