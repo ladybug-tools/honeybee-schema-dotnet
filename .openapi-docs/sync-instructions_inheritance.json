@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Documentation for Honeybee sync-instructions schema",
-        "version": "1.53.4",
+        "version": "1.54.0",
         "title": "Honeybee Sync Instructions Schema",
         "contact": {
             "name": "Ladybug Tools",

@@ -46,7 +46,7 @@ namespace HoneybeeSchema
         { 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.53.4";
+            this.Version = "1.54.0";
         }
         
         /// <summary>
@@ -58,6 +58,7 @@ namespace HoneybeeSchema
         /// <param name="orphanedShades">A list of Shades in the model that lack a parent..</param>
         /// <param name="orphanedApertures">A list of Apertures in the model that lack a parent Face. Note that orphaned Apertures are not acceptable for Models that are to be exported for energy simulation..</param>
         /// <param name="orphanedDoors">A list of Doors in the model that lack a parent Face. Note that orphaned Doors are not acceptable for Models that are to be exported for energy simulation..</param>
+        /// <param name="shadeMeshes">A list of ShadeMesh in the model..</param>
         /// <param name="units">Text indicating the units in which the model geometry exists. This is used to scale the geometry to the correct units for simulation engines like EnergyPlus, which requires all geometry be in meters..</param>
         /// <param name="tolerance">The maximum difference between x, y, and z values at which vertices are considered equivalent. This value should be in the Model units and it is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a Model. The default of 0.01 is suitable for models in meters. (default to 0.01D).</param>
         /// <param name="angleTolerance">The max angle difference in degrees that vertices are allowed to differ from one another in order to consider them colinear. This value is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a given Model. (default to 1.0D).</param>
@@ -67,7 +68,7 @@ namespace HoneybeeSchema
         public Model
         (
             string identifier, ModelProperties properties, // Required parameters
-            string displayName= default, Object userData= default, List<Room> rooms= default, List<Face> orphanedFaces= default, List<Shade> orphanedShades= default, List<Aperture> orphanedApertures= default, List<Door> orphanedDoors= default, Units units= Units.Meters, double tolerance = 0.01D, double angleTolerance = 1.0D// Optional parameters
+            string displayName= default, Object userData= default, List<Room> rooms= default, List<Face> orphanedFaces= default, List<Shade> orphanedShades= default, List<Aperture> orphanedApertures= default, List<Door> orphanedDoors= default, List<ShadeMesh> shadeMeshes= default, Units units= Units.Meters, double tolerance = 0.01D, double angleTolerance = 1.0D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "properties" is required (not null)
@@ -77,13 +78,14 @@ namespace HoneybeeSchema
             this.OrphanedShades = orphanedShades;
             this.OrphanedApertures = orphanedApertures;
             this.OrphanedDoors = orphanedDoors;
+            this.ShadeMeshes = shadeMeshes;
             this.Units = units;
             this.Tolerance = tolerance;
             this.AngleTolerance = angleTolerance;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.53.4";
+            this.Version = "1.54.0";
 
             // check if object is valid, only check for inherited class
             if (this.GetType() == typeof(Model))
@@ -104,7 +106,7 @@ namespace HoneybeeSchema
         /// <value>Text string for the current version of the schema.</value>
         [Summary(@"Text string for the current version of the schema.")]
         [DataMember(Name = "version")]
-        public string Version { get; protected set; }  = "1.53.4";
+        public string Version { get; protected set; }  = "1.54.0";
 
         /// <summary>
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
@@ -148,6 +150,13 @@ namespace HoneybeeSchema
         [Summary(@"A list of Doors in the model that lack a parent Face. Note that orphaned Doors are not acceptable for Models that are to be exported for energy simulation.")]
         [DataMember(Name = "orphaned_doors")]
         public List<Door> OrphanedDoors { get; set; } 
+        /// <summary>
+        /// A list of ShadeMesh in the model.
+        /// </summary>
+        /// <value>A list of ShadeMesh in the model.</value>
+        [Summary(@"A list of ShadeMesh in the model.")]
+        [DataMember(Name = "shade_meshes")]
+        public List<ShadeMesh> ShadeMeshes { get; set; } 
         /// <summary>
         /// The maximum difference between x, y, and z values at which vertices are considered equivalent. This value should be in the Model units and it is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a Model. The default of 0.01 is suitable for models in meters.
         /// </summary>
@@ -194,6 +203,7 @@ namespace HoneybeeSchema
             sb.Append("  OrphanedShades: ").Append(this.OrphanedShades).Append("\n");
             sb.Append("  OrphanedApertures: ").Append(this.OrphanedApertures).Append("\n");
             sb.Append("  OrphanedDoors: ").Append(this.OrphanedDoors).Append("\n");
+            sb.Append("  ShadeMeshes: ").Append(this.ShadeMeshes).Append("\n");
             sb.Append("  Units: ").Append(this.Units).Append("\n");
             sb.Append("  Tolerance: ").Append(this.Tolerance).Append("\n");
             sb.Append("  AngleTolerance: ").Append(this.AngleTolerance).Append("\n");
@@ -283,6 +293,10 @@ namespace HoneybeeSchema
                     this.OrphanedDoors == input.OrphanedDoors ||
                     Extension.AllEquals(this.OrphanedDoors, input.OrphanedDoors)
                 ) && 
+                (
+                    this.ShadeMeshes == input.ShadeMeshes ||
+                    Extension.AllEquals(this.ShadeMeshes, input.ShadeMeshes)
+                ) && 
                     Extension.Equals(this.Units, input.Units) && 
                     Extension.Equals(this.Tolerance, input.Tolerance) && 
                     Extension.Equals(this.AngleTolerance, input.AngleTolerance);
@@ -313,6 +327,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.OrphanedApertures.GetHashCode();
                 if (this.OrphanedDoors != null)
                     hashCode = hashCode * 59 + this.OrphanedDoors.GetHashCode();
+                if (this.ShadeMeshes != null)
+                    hashCode = hashCode * 59 + this.ShadeMeshes.GetHashCode();
                 if (this.Units != null)
                     hashCode = hashCode * 59 + this.Units.GetHashCode();
                 if (this.Tolerance != null)
