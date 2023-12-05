@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Documentation for Honeybee sync-instructions schema",
-        "version": "1.54.0",
+        "version": "1.54.1",
         "title": "Honeybee Sync Instructions Schema",
         "contact": {
             "name": "Ladybug Tools",
@@ -89,7 +89,7 @@
                 ],
                 "type": "string"
             },
-            "DeletedInstruction": {
+            "AddedInstruction": {
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
@@ -124,15 +124,15 @@
                             },
                             "type": {
                                 "title": "Type",
-                                "default": "DeletedInstruction",
-                                "pattern": "^DeletedInstruction$",
+                                "default": "AddedInstruction",
+                                "pattern": "^AddedInstruction$",
                                 "type": "string",
                                 "readOnly": true
                             }
                         }
                     }
                 ],
-                "title": "DeletedInstruction",
+                "title": "AddedInstruction",
                 "discriminator": {
                     "propertyName": "type"
                 }
@@ -203,7 +203,7 @@
                     "propertyName": "type"
                 }
             },
-            "AddedInstruction": {
+            "DeletedInstruction": {
                 "allOf": [
                     {
                         "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
@@ -238,15 +238,15 @@
                             },
                             "type": {
                                 "title": "Type",
-                                "default": "AddedInstruction",
-                                "pattern": "^AddedInstruction$",
+                                "default": "DeletedInstruction",
+                                "pattern": "^DeletedInstruction$",
                                 "type": "string",
                                 "readOnly": true
                             }
                         }
                     }
                 ],
-                "title": "AddedInstruction",
+                "title": "DeletedInstruction",
                 "discriminator": {
                     "propertyName": "type"
                 }

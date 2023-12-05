@@ -43,15 +43,17 @@ namespace HoneybeeSchema
         /// <param name="reportingFrequency">reportingFrequency.</param>
         /// <param name="outputs">A list of EnergyPlus output names as strings, which are requested from the simulation..</param>
         /// <param name="summaryReports">A list of EnergyPlus summary report names as strings..</param>
+        /// <param name="unmetSetpointTolerance">A number in degrees Celsius for the difference that the zone conditions must be from the thermostat setpoint in order for the setpoint to be considered unmet. This will affect how unmet hours are reported in the output. ASHRAE 90.1 uses a tolerance of 1.11C, which is equivalent to 1.8F. (default to 1.11D).</param>
         public SimulationOutput
         (
             // Required parameters
-           ReportingFrequency reportingFrequency= ReportingFrequency.Hourly, List<string> outputs= default, List<string> summaryReports= default// Optional parameters
+           ReportingFrequency reportingFrequency= ReportingFrequency.Hourly, List<string> outputs= default, List<string> summaryReports= default, double unmetSetpointTolerance = 1.11D// Optional parameters
         ) : base()// BaseClass
         {
             this.ReportingFrequency = reportingFrequency;
             this.Outputs = outputs;
             this.SummaryReports = summaryReports;
+            this.UnmetSetpointTolerance = unmetSetpointTolerance;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "SimulationOutput";
@@ -83,6 +85,13 @@ namespace HoneybeeSchema
         [Summary(@"A list of EnergyPlus summary report names as strings.")]
         [DataMember(Name = "summary_reports")]
         public List<string> SummaryReports { get; set; } 
+        /// <summary>
+        /// A number in degrees Celsius for the difference that the zone conditions must be from the thermostat setpoint in order for the setpoint to be considered unmet. This will affect how unmet hours are reported in the output. ASHRAE 90.1 uses a tolerance of 1.11C, which is equivalent to 1.8F.
+        /// </summary>
+        /// <value>A number in degrees Celsius for the difference that the zone conditions must be from the thermostat setpoint in order for the setpoint to be considered unmet. This will affect how unmet hours are reported in the output. ASHRAE 90.1 uses a tolerance of 1.11C, which is equivalent to 1.8F.</value>
+        [Summary(@"A number in degrees Celsius for the difference that the zone conditions must be from the thermostat setpoint in order for the setpoint to be considered unmet. This will affect how unmet hours are reported in the output. ASHRAE 90.1 uses a tolerance of 1.11C, which is equivalent to 1.8F.")]
+        [DataMember(Name = "unmet_setpoint_tolerance")]
+        public double UnmetSetpointTolerance { get; set; }  = 1.11D;
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -108,6 +117,7 @@ namespace HoneybeeSchema
             sb.Append("  ReportingFrequency: ").Append(this.ReportingFrequency).Append("\n");
             sb.Append("  Outputs: ").Append(this.Outputs).Append("\n");
             sb.Append("  SummaryReports: ").Append(this.SummaryReports).Append("\n");
+            sb.Append("  UnmetSetpointTolerance: ").Append(this.UnmetSetpointTolerance).Append("\n");
             return sb.ToString();
         }
   
@@ -180,7 +190,8 @@ namespace HoneybeeSchema
                 (
                     this.SummaryReports == input.SummaryReports ||
                     Extension.AllEquals(this.SummaryReports, input.SummaryReports)
-                );
+                ) && 
+                    Extension.Equals(this.UnmetSetpointTolerance, input.UnmetSetpointTolerance);
         }
 
         /// <summary>
@@ -200,6 +211,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.Outputs.GetHashCode();
                 if (this.SummaryReports != null)
                     hashCode = hashCode * 59 + this.SummaryReports.GetHashCode();
+                if (this.UnmetSetpointTolerance != null)
+                    hashCode = hashCode * 59 + this.UnmetSetpointTolerance.GetHashCode();
                 return hashCode;
             }
         }
@@ -219,6 +232,20 @@ namespace HoneybeeSchema
             if (this.Type != null && false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
+            }
+
+
+            
+            // UnmetSetpointTolerance (double) maximum
+            if(this.UnmetSetpointTolerance > (double)10)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for UnmetSetpointTolerance, must be a value less than or equal to 10.", new [] { "UnmetSetpointTolerance" });
+            }
+
+            // UnmetSetpointTolerance (double) minimum
+            if(this.UnmetSetpointTolerance < (double)0)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for UnmetSetpointTolerance, must be a value greater than or equal to 0.", new [] { "UnmetSetpointTolerance" });
             }
 
             yield break;
