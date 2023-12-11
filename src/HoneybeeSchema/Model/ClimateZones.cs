@@ -36,115 +36,115 @@ namespace HoneybeeSchema
         /// Enum _0A for value: 0A
         /// </summary>
         [EnumMember(Value = "0A")]
-        0A = 1,
+        ASHRAE_0A = 1,
 
         /// <summary>
         /// Enum _1A for value: 1A
         /// </summary>
         [EnumMember(Value = "1A")]
-        1A = 2,
+        ASHRAE_1A = 2,
 
         /// <summary>
         /// Enum _2A for value: 2A
         /// </summary>
         [EnumMember(Value = "2A")]
-        2A = 3,
+        ASHRAE_2A = 3,
 
         /// <summary>
         /// Enum _3A for value: 3A
         /// </summary>
         [EnumMember(Value = "3A")]
-        3A = 4,
+        ASHRAE_3A = 4,
 
         /// <summary>
         /// Enum _4A for value: 4A
         /// </summary>
         [EnumMember(Value = "4A")]
-        4A = 5,
+        ASHRAE_4A = 5,
 
         /// <summary>
         /// Enum _5A for value: 5A
         /// </summary>
         [EnumMember(Value = "5A")]
-        5A = 6,
+        ASHRAE_5A = 6,
 
         /// <summary>
         /// Enum _6A for value: 6A
         /// </summary>
         [EnumMember(Value = "6A")]
-        6A = 7,
+        ASHRAE_6A = 7,
 
         /// <summary>
         /// Enum _0B for value: 0B
         /// </summary>
         [EnumMember(Value = "0B")]
-        0B = 8,
+        ASHRAE_0B = 8,
 
         /// <summary>
         /// Enum _1B for value: 1B
         /// </summary>
         [EnumMember(Value = "1B")]
-        1B = 9,
+        ASHRAE_1B = 9,
 
         /// <summary>
         /// Enum _2B for value: 2B
         /// </summary>
         [EnumMember(Value = "2B")]
-        2B = 10,
+        ASHRAE_2B = 10,
 
         /// <summary>
         /// Enum _3B for value: 3B
         /// </summary>
         [EnumMember(Value = "3B")]
-        3B = 11,
+        ASHRAE_3B = 11,
 
         /// <summary>
         /// Enum _4B for value: 4B
         /// </summary>
         [EnumMember(Value = "4B")]
-        4B = 12,
+        ASHRAE_4B = 12,
 
         /// <summary>
         /// Enum _5B for value: 5B
         /// </summary>
         [EnumMember(Value = "5B")]
-        5B = 13,
+        ASHRAE_5B = 13,
 
         /// <summary>
         /// Enum _6B for value: 6B
         /// </summary>
         [EnumMember(Value = "6B")]
-        6B = 14,
+        ASHRAE_6B = 14,
 
         /// <summary>
         /// Enum _3C for value: 3C
         /// </summary>
         [EnumMember(Value = "3C")]
-        3C = 15,
+        ASHRAE_3C = 15,
 
         /// <summary>
         /// Enum _4C for value: 4C
         /// </summary>
         [EnumMember(Value = "4C")]
-        4C = 16,
+        ASHRAE_4C = 16,
 
         /// <summary>
         /// Enum _5C for value: 5C
         /// </summary>
         [EnumMember(Value = "5C")]
-        5C = 17,
+        ASHRAE_5C = 17,
 
         /// <summary>
         /// Enum _7 for value: 7
         /// </summary>
         [EnumMember(Value = "7")]
-        7 = 18,
+        ASHRAE_7 = 18,
 
         /// <summary>
         /// Enum _8 for value: 8
         /// </summary>
         [EnumMember(Value = "8")]
-        8 = 19
+        ASHRAE_8 = 19
 
     }
 
