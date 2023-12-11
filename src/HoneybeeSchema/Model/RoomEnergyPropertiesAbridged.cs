@@ -48,12 +48,13 @@ namespace HoneybeeSchema
         /// <param name="setpoint">Setpoint object for the temperature setpoints of the Room..</param>
         /// <param name="daylightingControl">An optional DaylightingControl object to dictate the dimming of lights. If None, the lighting will respond only to the schedule and not the daylight conditions within the room..</param>
         /// <param name="windowVentControl">An optional VentilationControl object to dictate the opening of windows. If None, the windows will never open..</param>
+        /// <param name="fans">An optional list of VentilationFan objects for fans within the room. Note that these fans are not connected to the heating or cooling system and are meant to represent the intentional circulation of unconditioned outdoor air for the purposes of keeping a space cooler, drier or free of indoor pollutants (as in the case of kitchen or bathroom exhaust fans). For the specification of mechanical ventilation of conditioned outdoor air, the Room.ventilation property should be used and the Room should be given a HVAC that can meet this specification..</param>
         /// <param name="internalMasses">An optional list of of InternalMass objects for thermal mass exposed to Room air. Note that internal masses assigned this way cannot \&quot;see\&quot; solar radiation that may potentially hit them and, as such, caution should be taken when using this component with internal mass objects that are not always in shade. Masses are factored into the the thermal calculations of the Room by undergoing heat transfer with the indoor air..</param>
         /// <param name="processLoads">An optional list of of Process objects for process loads within the room. These can represent kilns, manufacturing equipment, and various industrial processes. They can also be used to represent wood burning fireplaces or certain pieces of equipment to be separated from the other end uses..</param>
         public RoomEnergyPropertiesAbridged
         (
             // Required parameters
-           string constructionSet= default, string programType= default, string hvac= default, string shw= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, ServiceHotWaterAbridged serviceHotWater= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default, DaylightingControl daylightingControl= default, VentilationControlAbridged windowVentControl= default, List<InternalMassAbridged> internalMasses= default, List<ProcessAbridged> processLoads= default// Optional parameters
+           string constructionSet= default, string programType= default, string hvac= default, string shw= default, PeopleAbridged people= default, LightingAbridged lighting= default, ElectricEquipmentAbridged electricEquipment= default, GasEquipmentAbridged gasEquipment= default, ServiceHotWaterAbridged serviceHotWater= default, InfiltrationAbridged infiltration= default, VentilationAbridged ventilation= default, SetpointAbridged setpoint= default, DaylightingControl daylightingControl= default, VentilationControlAbridged windowVentControl= default, List<VentilationFan> fans= default, List<InternalMassAbridged> internalMasses= default, List<ProcessAbridged> processLoads= default// Optional parameters
         ) : base()// BaseClass
         {
             this.ConstructionSet = constructionSet;
@@ -70,6 +71,7 @@ namespace HoneybeeSchema
             this.Setpoint = setpoint;
             this.DaylightingControl = daylightingControl;
             this.WindowVentControl = windowVentControl;
+            this.Fans = fans;
             this.InternalMasses = internalMasses;
             this.ProcessLoads = processLoads;
 
@@ -188,6 +190,13 @@ namespace HoneybeeSchema
         [DataMember(Name = "window_vent_control")]
         public VentilationControlAbridged WindowVentControl { get; set; } 
         /// <summary>
+        /// An optional list of VentilationFan objects for fans within the room. Note that these fans are not connected to the heating or cooling system and are meant to represent the intentional circulation of unconditioned outdoor air for the purposes of keeping a space cooler, drier or free of indoor pollutants (as in the case of kitchen or bathroom exhaust fans). For the specification of mechanical ventilation of conditioned outdoor air, the Room.ventilation property should be used and the Room should be given a HVAC that can meet this specification.
+        /// </summary>
+        /// <value>An optional list of VentilationFan objects for fans within the room. Note that these fans are not connected to the heating or cooling system and are meant to represent the intentional circulation of unconditioned outdoor air for the purposes of keeping a space cooler, drier or free of indoor pollutants (as in the case of kitchen or bathroom exhaust fans). For the specification of mechanical ventilation of conditioned outdoor air, the Room.ventilation property should be used and the Room should be given a HVAC that can meet this specification.</value>
+        [Summary(@"An optional list of VentilationFan objects for fans within the room. Note that these fans are not connected to the heating or cooling system and are meant to represent the intentional circulation of unconditioned outdoor air for the purposes of keeping a space cooler, drier or free of indoor pollutants (as in the case of kitchen or bathroom exhaust fans). For the specification of mechanical ventilation of conditioned outdoor air, the Room.ventilation property should be used and the Room should be given a HVAC that can meet this specification.")]
+        [DataMember(Name = "fans")]
+        public List<VentilationFan> Fans { get; set; } 
+        /// <summary>
         /// An optional list of of InternalMass objects for thermal mass exposed to Room air. Note that internal masses assigned this way cannot \&quot;see\&quot; solar radiation that may potentially hit them and, as such, caution should be taken when using this component with internal mass objects that are not always in shade. Masses are factored into the the thermal calculations of the Room by undergoing heat transfer with the indoor air.
         /// </summary>
         /// <value>An optional list of of InternalMass objects for thermal mass exposed to Room air. Note that internal masses assigned this way cannot \&quot;see\&quot; solar radiation that may potentially hit them and, as such, caution should be taken when using this component with internal mass objects that are not always in shade. Masses are factored into the the thermal calculations of the Room by undergoing heat transfer with the indoor air.</value>
@@ -237,6 +246,7 @@ namespace HoneybeeSchema
             sb.Append("  Setpoint: ").Append(this.Setpoint).Append("\n");
             sb.Append("  DaylightingControl: ").Append(this.DaylightingControl).Append("\n");
             sb.Append("  WindowVentControl: ").Append(this.WindowVentControl).Append("\n");
+            sb.Append("  Fans: ").Append(this.Fans).Append("\n");
             sb.Append("  InternalMasses: ").Append(this.InternalMasses).Append("\n");
             sb.Append("  ProcessLoads: ").Append(this.ProcessLoads).Append("\n");
             return sb.ToString();
@@ -318,6 +328,10 @@ namespace HoneybeeSchema
                     Extension.Equals(this.DaylightingControl, input.DaylightingControl) && 
                     Extension.Equals(this.WindowVentControl, input.WindowVentControl) && 
                 (
+                    this.Fans == input.Fans ||
+                    Extension.AllEquals(this.Fans, input.Fans)
+                ) && 
+                (
                     this.InternalMasses == input.InternalMasses ||
                     Extension.AllEquals(this.InternalMasses, input.InternalMasses)
                 ) && 
@@ -366,6 +380,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.DaylightingControl.GetHashCode();
                 if (this.WindowVentControl != null)
                     hashCode = hashCode * 59 + this.WindowVentControl.GetHashCode();
+                if (this.Fans != null)
+                    hashCode = hashCode * 59 + this.Fans.GetHashCode();
                 if (this.InternalMasses != null)
                     hashCode = hashCode * 59 + this.InternalMasses.GetHashCode();
                 if (this.ProcessLoads != null)
