@@ -29,7 +29,7 @@ namespace HoneybeeSchema
     [Summary(@"A point object in 3D space.")]
     [Serializable]
     [DataContract(Name = "Point3D")]
-    public partial class Point3D : IEquatable<Point3D>, IValidatableObject
+    public partial class Point3D : OpenAPIGenBaseModel, IEquatable<Point3D>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Point3D" /> class.
