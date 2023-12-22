@@ -618,14 +618,14 @@ namespace HoneybeeSchema
             return names;
         }
 
-        public static Dictionary<string, object> GetUserData(this IDdBaseModel obj)
+        public static Dictionary<string, object> GetUserData(this IIDdBaseModel obj)
         {
             var ud = ToDictionary(obj.UserData);
             obj.UserData = ud;
             return ud;
         }
 
-        public static void AddUserData(this IDdBaseModel obj, string key, object vaule)
+        public static void AddUserData(this IIDdBaseModel obj, string key, object vaule)
         {
             if (obj == null || vaule == null || key == null)
                 return;
