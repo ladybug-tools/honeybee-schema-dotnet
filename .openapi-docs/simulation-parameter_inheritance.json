@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Documentation for Honeybee simulation-parameter schema",
-        "version": "1.55.0",
+        "version": "1.57.2",
         "title": "Honeybee Simulation Parameter Schema",
         "contact": {
             "name": "Ladybug Tools",
@@ -191,121 +191,6 @@
     "paths": {},
     "components": {
         "schemas": {
-            "ReportingFrequency": {
-                "title": "ReportingFrequency",
-                "description": "An enumeration.",
-                "enum": [
-                    "Timestep",
-                    "Hourly",
-                    "Daily",
-                    "Monthly",
-                    "Annual"
-                ],
-                "type": "string"
-            },
-            "SimulationOutput": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "title": "Type",
-                                "default": "SimulationOutput",
-                                "pattern": "^SimulationOutput$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "reporting_frequency": {
-                                "default": "Hourly",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/ReportingFrequency"
-                                    }
-                                ]
-                            },
-                            "outputs": {
-                                "title": "Outputs",
-                                "description": "A list of EnergyPlus output names as strings, which are requested from the simulation.",
-                                "type": "array",
-                                "items": {
-                                    "type": "string"
-                                }
-                            },
-                            "summary_reports": {
-                                "title": "Summary Reports",
-                                "description": "A list of EnergyPlus summary report names as strings.",
-                                "type": "array",
-                                "items": {
-                                    "type": "string"
-                                }
-                            },
-                            "unmet_setpoint_tolerance": {
-                                "title": "Unmet Setpoint Tolerance",
-                                "description": "A number in degrees Celsius for the difference that the zone conditions must be from the thermostat setpoint in order for the setpoint to be considered unmet. This will affect how unmet hours are reported in the output. ASHRAE 90.1 uses a tolerance of 1.11C, which is equivalent to 1.8F.",
-                                "default": 1.11,
-                                "minimum": 0,
-                                "maximum": 10,
-                                "type": "number",
-                                "format": "double"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "SimulationOutput",
-                "description": "Lists the outputs to report from the simulation and their format.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "WindCondition": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "wind_speed": {
-                                "title": "Wind Speed",
-                                "description": "Wind speed on the design day [m/s].",
-                                "minimum": 0,
-                                "maximum": 40,
-                                "type": "number",
-                                "format": "double"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "WindCondition",
-                                "pattern": "^WindCondition$",
-                                "type": "string",
-                                "readOnly": true
-                            },
-                            "wind_direction": {
-                                "title": "Wind Direction",
-                                "description": "Wind direction on the design day [degrees].",
-                                "default": 0,
-                                "minimum": 0,
-                                "maximum": 360,
-                                "type": "number",
-                                "format": "double"
-                            }
-                        },
-                        "required": [
-                            "wind_speed"
-                        ],
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "WindCondition",
-                "description": "Used to specify wind conditions on a design day.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
             "HumidityTypes": {
                 "title": "HumidityTypes",
                 "description": "An enumeration.",
@@ -376,20 +261,6 @@
                     "propertyName": "type"
                 }
             },
-            "DaysOfWeek": {
-                "title": "DaysOfWeek",
-                "description": "An enumeration.",
-                "enum": [
-                    "Sunday",
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday"
-                ],
-                "type": "string"
-            },
             "DaylightSavingTime": {
                 "allOf": [
                     {
@@ -444,6 +315,90 @@
                 "discriminator": {
                     "propertyName": "type"
                 }
+            },
+            "ReportingFrequency": {
+                "title": "ReportingFrequency",
+                "description": "An enumeration.",
+                "enum": [
+                    "Timestep",
+                    "Hourly",
+                    "Daily",
+                    "Monthly",
+                    "Annual"
+                ],
+                "type": "string"
+            },
+            "SimulationOutput": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "title": "Type",
+                                "default": "SimulationOutput",
+                                "pattern": "^SimulationOutput$",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "reporting_frequency": {
+                                "default": "Hourly",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/ReportingFrequency"
+                                    }
+                                ]
+                            },
+                            "outputs": {
+                                "title": "Outputs",
+                                "description": "A list of EnergyPlus output names as strings, which are requested from the simulation.",
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "summary_reports": {
+                                "title": "Summary Reports",
+                                "description": "A list of EnergyPlus summary report names as strings.",
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "unmet_setpoint_tolerance": {
+                                "title": "Unmet Setpoint Tolerance",
+                                "description": "A number in degrees Celsius for the difference that the zone conditions must be from the thermostat setpoint in order for the setpoint to be considered unmet. This will affect how unmet hours are reported in the output. ASHRAE 90.1 uses a tolerance of 1.11C, which is equivalent to 1.8F.",
+                                "default": 1.11,
+                                "minimum": 0,
+                                "maximum": 10,
+                                "type": "number",
+                                "format": "double"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "SimulationOutput",
+                "description": "Lists the outputs to report from the simulation and their format.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "DaysOfWeek": {
+                "title": "DaysOfWeek",
+                "description": "An enumeration.",
+                "enum": [
+                    "Sunday",
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday"
+                ],
+                "type": "string"
             },
             "RunPeriod": {
                 "allOf": [
@@ -752,6 +707,87 @@
                     "propertyName": "type"
                 }
             },
+            "WindCondition": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "wind_speed": {
+                                "title": "Wind Speed",
+                                "description": "Wind speed on the design day [m/s].",
+                                "minimum": 0,
+                                "maximum": 40,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "WindCondition",
+                                "pattern": "^WindCondition$",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "wind_direction": {
+                                "title": "Wind Direction",
+                                "description": "Wind direction on the design day [degrees].",
+                                "default": 0,
+                                "minimum": 0,
+                                "maximum": 360,
+                                "type": "number",
+                                "format": "double"
+                            }
+                        },
+                        "required": [
+                            "wind_speed"
+                        ],
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "WindCondition",
+                "description": "Used to specify wind conditions on a design day.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "ASHRAEClearSky": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_SkyCondition"
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "clearness"
+                        ],
+                        "properties": {
+                            "clearness": {
+                                "title": "Clearness",
+                                "description": "Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.",
+                                "minimum": 0,
+                                "maximum": 1.2,
+                                "type": "number",
+                                "format": "double"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "ASHRAEClearSky",
+                                "pattern": "^ASHRAEClearSky$",
+                                "type": "string",
+                                "readOnly": true
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "ASHRAEClearSky",
+                "description": "Used to specify sky conditions on a design day.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
             "ASHRAETau": {
                 "allOf": [
                     {
@@ -978,6 +1014,12 @@
                                 "title": "Building Type",
                                 "description": "Text for the building type to be used in the efficiency_standard. If the type is not recognized or is None, it will be assumed that the building is a generic NonResidential. The following have specified systems per the standard:  Residential, NonResidential, MidriseApartment, HighriseApartment, LargeOffice, MediumOffice, SmallOffice, Retail, StripMall, PrimarySchool, SecondarySchool, SmallHotel, LargeHotel, Hospital, Outpatient, Warehouse, SuperMarket, FullServiceRestaurant, QuickServiceRestaurant, Laboratory, Courthouse.",
                                 "type": "string"
+                            },
+                            "bypass_efficiency_sizing": {
+                                "title": "Bypass Efficiency Sizing",
+                                "description": "A boolean to indicate whether the efficiency standard should trigger an sizing run that sets the efficiencies of all HVAC equipment in the Model (False) or the standard should only be written into the OSM and the sizing run should be bypassed (True). Bypassing the sizing run is useful when you only want to check that the overall HVAC system architecture is correct and you do not want to wait the extra time that it takes to run the sizing calculation.",
+                                "default": false,
+                                "type": "boolean"
                             }
                         },
                         "additionalProperties": false
@@ -1098,6 +1140,31 @@
                     "propertyName": "type"
                 }
             },
+            "DatedBaseModel": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "title": "Type",
+                                "default": "DatedBaseModel",
+                                "type": "string",
+                                "pattern": "^DatedBaseModel$",
+                                "readOnly": true
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ],
+                "title": "DatedBaseModel",
+                "description": "Base class for all objects needing to check for a valid Date.",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
             "_SkyCondition": {
                 "allOf": [
                     {
@@ -1139,31 +1206,6 @@
                 ],
                 "title": "_SkyCondition",
                 "description": "Used to specify sky conditions on a design day.",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "DatedBaseModel": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "title": "Type",
-                                "default": "DatedBaseModel",
-                                "type": "string",
-                                "pattern": "^DatedBaseModel$",
-                                "readOnly": true
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ],
-                "title": "DatedBaseModel",
-                "description": "Base class for all objects needing to check for a valid Date.",
                 "discriminator": {
                     "propertyName": "type"
                 }

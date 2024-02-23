@@ -54,10 +54,11 @@ namespace HoneybeeSchema
         /// <param name="efficiencyStandard">Text to specify the efficiency standard, which will automatically set the efficiencies of all HVAC equipment when provided. Note that providing a standard here will cause the OpenStudio translation process to perform an additional sizing calculation with EnergyPlus, which is needed since the default efficiencies of equipment vary depending on their size. THIS WILL SIGNIFICANTLY INCREASE TRANSLATION TIME TO OPENSTUDIO. However, it is often worthwhile when the goal is to match the HVAC specification with a particular standard..</param>
         /// <param name="climateZone">Text indicating the ASHRAE climate zone to be used with the efficiency_standard. When unspecified, the climate zone will be inferred from the design days on this sizing parameter object..</param>
         /// <param name="buildingType">Text for the building type to be used in the efficiency_standard. If the type is not recognized or is None, it will be assumed that the building is a generic NonResidential. The following have specified systems per the standard:  Residential, NonResidential, MidriseApartment, HighriseApartment, LargeOffice, MediumOffice, SmallOffice, Retail, StripMall, PrimarySchool, SecondarySchool, SmallHotel, LargeHotel, Hospital, Outpatient, Warehouse, SuperMarket, FullServiceRestaurant, QuickServiceRestaurant, Laboratory, Courthouse..</param>
+        /// <param name="bypassEfficiencySizing">A boolean to indicate whether the efficiency standard should trigger an sizing run that sets the efficiencies of all HVAC equipment in the Model (False) or the standard should only be written into the OSM and the sizing run should be bypassed (True). Bypassing the sizing run is useful when you only want to check that the overall HVAC system architecture is correct and you do not want to wait the extra time that it takes to run the sizing calculation. (default to false).</param>
         public SizingParameter
         (
             // Required parameters
-           List<DesignDay> designDays= default, double heatingFactor = 1.25D, double coolingFactor = 1.15D, EfficiencyStandards efficiencyStandard= default, ClimateZones climateZone= default, string buildingType= default// Optional parameters
+           List<DesignDay> designDays= default, double heatingFactor = 1.25D, double coolingFactor = 1.15D, EfficiencyStandards efficiencyStandard= default, ClimateZones climateZone= default, string buildingType= default, bool bypassEfficiencySizing = false// Optional parameters
         ) : base()// BaseClass
         {
             this.DesignDays = designDays;
@@ -66,6 +67,7 @@ namespace HoneybeeSchema
             this.EfficiencyStandard = efficiencyStandard;
             this.ClimateZone = climateZone;
             this.BuildingType = buildingType;
+            this.BypassEfficiencySizing = bypassEfficiencySizing;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "SizingParameter";
@@ -111,6 +113,13 @@ namespace HoneybeeSchema
         [Summary(@"Text for the building type to be used in the efficiency_standard. If the type is not recognized or is None, it will be assumed that the building is a generic NonResidential. The following have specified systems per the standard:  Residential, NonResidential, MidriseApartment, HighriseApartment, LargeOffice, MediumOffice, SmallOffice, Retail, StripMall, PrimarySchool, SecondarySchool, SmallHotel, LargeHotel, Hospital, Outpatient, Warehouse, SuperMarket, FullServiceRestaurant, QuickServiceRestaurant, Laboratory, Courthouse.")]
         [DataMember(Name = "building_type")]
         public string BuildingType { get; set; } 
+        /// <summary>
+        /// A boolean to indicate whether the efficiency standard should trigger an sizing run that sets the efficiencies of all HVAC equipment in the Model (False) or the standard should only be written into the OSM and the sizing run should be bypassed (True). Bypassing the sizing run is useful when you only want to check that the overall HVAC system architecture is correct and you do not want to wait the extra time that it takes to run the sizing calculation.
+        /// </summary>
+        /// <value>A boolean to indicate whether the efficiency standard should trigger an sizing run that sets the efficiencies of all HVAC equipment in the Model (False) or the standard should only be written into the OSM and the sizing run should be bypassed (True). Bypassing the sizing run is useful when you only want to check that the overall HVAC system architecture is correct and you do not want to wait the extra time that it takes to run the sizing calculation.</value>
+        [Summary(@"A boolean to indicate whether the efficiency standard should trigger an sizing run that sets the efficiencies of all HVAC equipment in the Model (False) or the standard should only be written into the OSM and the sizing run should be bypassed (True). Bypassing the sizing run is useful when you only want to check that the overall HVAC system architecture is correct and you do not want to wait the extra time that it takes to run the sizing calculation.")]
+        [DataMember(Name = "bypass_efficiency_sizing")]
+        public bool BypassEfficiencySizing { get; set; }  = false;
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -139,6 +148,7 @@ namespace HoneybeeSchema
             sb.Append("  EfficiencyStandard: ").Append(this.EfficiencyStandard).Append("\n");
             sb.Append("  ClimateZone: ").Append(this.ClimateZone).Append("\n");
             sb.Append("  BuildingType: ").Append(this.BuildingType).Append("\n");
+            sb.Append("  BypassEfficiencySizing: ").Append(this.BypassEfficiencySizing).Append("\n");
             return sb.ToString();
         }
   
@@ -211,7 +221,8 @@ namespace HoneybeeSchema
                     Extension.Equals(this.CoolingFactor, input.CoolingFactor) && 
                     Extension.Equals(this.EfficiencyStandard, input.EfficiencyStandard) && 
                     Extension.Equals(this.ClimateZone, input.ClimateZone) && 
-                    Extension.Equals(this.BuildingType, input.BuildingType);
+                    Extension.Equals(this.BuildingType, input.BuildingType) && 
+                    Extension.Equals(this.BypassEfficiencySizing, input.BypassEfficiencySizing);
         }
 
         /// <summary>
@@ -237,6 +248,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.ClimateZone.GetHashCode();
                 if (this.BuildingType != null)
                     hashCode = hashCode * 59 + this.BuildingType.GetHashCode();
+                if (this.BypassEfficiencySizing != null)
+                    hashCode = hashCode * 59 + this.BypassEfficiencySizing.GetHashCode();
                 return hashCode;
             }
         }
