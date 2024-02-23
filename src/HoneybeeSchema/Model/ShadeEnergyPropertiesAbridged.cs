@@ -36,14 +36,16 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="construction">Identifier of a ShadeConstruction to set the reflectance and specularity of the Shade. If None, the construction is set by theparent Room construction_set, the Model global_construction_set or (in the case fo an orphaned shade) the EnergyPlus default of 0.2 diffuse reflectance..</param>
         /// <param name="transmittanceSchedule">Identifier of a schedule to set the transmittance of the shade, which can vary throughout the simulation. If None, the shade will be completely opaque..</param>
+        /// <param name="pvProperties">An optional PVProperties object to specify photovoltaic behavior of the Shade. If None, the Shade will have no Photovoltaic properties. Note that the normal of the Shade is important in determining the performance of the shade as a PV geometry..</param>
         public ShadeEnergyPropertiesAbridged
         (
             // Required parameters
-           string construction= default, string transmittanceSchedule= default// Optional parameters
+           string construction= default, string transmittanceSchedule= default, PVProperties pvProperties= default// Optional parameters
         ) : base()// BaseClass
         {
             this.Construction = construction;
             this.TransmittanceSchedule = transmittanceSchedule;
+            this.PvProperties = pvProperties;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "ShadeEnergyPropertiesAbridged";
@@ -75,6 +77,13 @@ namespace HoneybeeSchema
         [Summary(@"Identifier of a schedule to set the transmittance of the shade, which can vary throughout the simulation. If None, the shade will be completely opaque.")]
         [DataMember(Name = "transmittance_schedule")]
         public string TransmittanceSchedule { get; set; } 
+        /// <summary>
+        /// An optional PVProperties object to specify photovoltaic behavior of the Shade. If None, the Shade will have no Photovoltaic properties. Note that the normal of the Shade is important in determining the performance of the shade as a PV geometry.
+        /// </summary>
+        /// <value>An optional PVProperties object to specify photovoltaic behavior of the Shade. If None, the Shade will have no Photovoltaic properties. Note that the normal of the Shade is important in determining the performance of the shade as a PV geometry.</value>
+        [Summary(@"An optional PVProperties object to specify photovoltaic behavior of the Shade. If None, the Shade will have no Photovoltaic properties. Note that the normal of the Shade is important in determining the performance of the shade as a PV geometry.")]
+        [DataMember(Name = "pv_properties")]
+        public PVProperties PvProperties { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -99,6 +108,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  Construction: ").Append(this.Construction).Append("\n");
             sb.Append("  TransmittanceSchedule: ").Append(this.TransmittanceSchedule).Append("\n");
+            sb.Append("  PvProperties: ").Append(this.PvProperties).Append("\n");
             return sb.ToString();
         }
   
@@ -164,7 +174,8 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                     Extension.Equals(this.Type, input.Type) && 
                     Extension.Equals(this.Construction, input.Construction) && 
-                    Extension.Equals(this.TransmittanceSchedule, input.TransmittanceSchedule);
+                    Extension.Equals(this.TransmittanceSchedule, input.TransmittanceSchedule) && 
+                    Extension.Equals(this.PvProperties, input.PvProperties);
         }
 
         /// <summary>
@@ -182,6 +193,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.Construction.GetHashCode();
                 if (this.TransmittanceSchedule != null)
                     hashCode = hashCode * 59 + this.TransmittanceSchedule.GetHashCode();
+                if (this.PvProperties != null)
+                    hashCode = hashCode * 59 + this.PvProperties.GetHashCode();
                 return hashCode;
             }
         }

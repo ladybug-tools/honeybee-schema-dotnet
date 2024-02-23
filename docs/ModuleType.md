@@ -1,5 +1,5 @@
 
-# HoneybeeSchema.Model.BuildingTypes
+# HoneybeeSchema.Model.ModuleType
 
 ## Properties
 

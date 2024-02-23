@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Documentation for Honeybee sync-instructions schema",
-        "version": "1.55.0",
+        "version": "1.57.2",
         "title": "Honeybee Sync Instructions Schema",
         "contact": {
             "name": "Ladybug Tools",
@@ -238,15 +238,15 @@
                             },
                             "type": {
                                 "title": "Type",
-                                "default": "DeletedInstruction",
-                                "pattern": "^DeletedInstruction$",
+                                "default": "AddedInstruction",
+                                "pattern": "^AddedInstruction$",
                                 "type": "string",
                                 "readOnly": true
                             }
                         }
                     }
                 ],
-                "title": "DeletedInstruction",
+                "title": "AddedInstruction",
                 "discriminator": {
                     "propertyName": "type"
                 }

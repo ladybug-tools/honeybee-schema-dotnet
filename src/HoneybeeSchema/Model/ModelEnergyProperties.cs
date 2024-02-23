@@ -43,10 +43,11 @@ namespace HoneybeeSchema
         /// <param name="schedules">A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades..</param>
         /// <param name="scheduleTypeLimits">A list of all unique ScheduleTypeLimits in the model. This all ScheduleTypeLimits needed to make the Model schedules..</param>
         /// <param name="ventilationSimulationControl">An optional parameter to define the global parameters for a ventilation cooling..</param>
+        /// <param name="electricLoadCenter">An optional parameter object that defines the properties of the model electric loads center that manages on site electricity generation and conversion..</param>
         public ModelEnergyProperties
         (
             // Required parameters
-           List<AnyOf<ConstructionSetAbridged, ConstructionSet>> constructionSets= default, List<AnyOf<OpaqueConstructionAbridged, WindowConstructionAbridged, WindowConstructionShadeAbridged, AirBoundaryConstructionAbridged, OpaqueConstruction, WindowConstruction, WindowConstructionShade, WindowConstructionDynamicAbridged, WindowConstructionDynamic, AirBoundaryConstruction, ShadeConstruction>> constructions= default, List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyMaterialVegetation, EnergyWindowMaterialGlazing, EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialGas, EnergyWindowMaterialGasMixture, EnergyWindowMaterialGasCustom, EnergyWindowFrame, EnergyWindowMaterialBlind, EnergyWindowMaterialShade>> materials= default, List<AnyOf<IdealAirSystemAbridged, VAV, PVAV, PSZ, PTAC, ForcedAirFurnace, FCUwithDOASAbridged, WSHPwithDOASAbridged, VRFwithDOASAbridged, RadiantwithDOASAbridged, FCU, WSHP, VRF, Baseboard, EvaporativeCooler, Residential, WindowAC, GasUnitHeater, Radiant, DetailedHVAC>> hvacs= default, List<SHWSystem> shws= default, List<AnyOf<ProgramTypeAbridged, ProgramType>> programTypes= default, List<AnyOf<ScheduleRulesetAbridged, ScheduleFixedIntervalAbridged, ScheduleRuleset, ScheduleFixedInterval>> schedules= default, List<ScheduleTypeLimit> scheduleTypeLimits= default, VentilationSimulationControl ventilationSimulationControl= default// Optional parameters
+           List<AnyOf<ConstructionSetAbridged, ConstructionSet>> constructionSets= default, List<AnyOf<OpaqueConstructionAbridged, WindowConstructionAbridged, WindowConstructionShadeAbridged, AirBoundaryConstructionAbridged, OpaqueConstruction, WindowConstruction, WindowConstructionShade, WindowConstructionDynamicAbridged, WindowConstructionDynamic, AirBoundaryConstruction, ShadeConstruction>> constructions= default, List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyMaterialVegetation, EnergyWindowMaterialGlazing, EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialGas, EnergyWindowMaterialGasMixture, EnergyWindowMaterialGasCustom, EnergyWindowFrame, EnergyWindowMaterialBlind, EnergyWindowMaterialShade>> materials= default, List<AnyOf<IdealAirSystemAbridged, VAV, PVAV, PSZ, PTAC, ForcedAirFurnace, FCUwithDOASAbridged, WSHPwithDOASAbridged, VRFwithDOASAbridged, RadiantwithDOASAbridged, FCU, WSHP, VRF, Baseboard, EvaporativeCooler, Residential, WindowAC, GasUnitHeater, Radiant, DetailedHVAC>> hvacs= default, List<SHWSystem> shws= default, List<AnyOf<ProgramTypeAbridged, ProgramType>> programTypes= default, List<AnyOf<ScheduleRulesetAbridged, ScheduleFixedIntervalAbridged, ScheduleRuleset, ScheduleFixedInterval>> schedules= default, List<ScheduleTypeLimit> scheduleTypeLimits= default, VentilationSimulationControl ventilationSimulationControl= default, ElectricLoadCenter electricLoadCenter= default// Optional parameters
         ) : base()// BaseClass
         {
             this.ConstructionSets = constructionSets;
@@ -58,6 +59,7 @@ namespace HoneybeeSchema
             this.Schedules = schedules;
             this.ScheduleTypeLimits = scheduleTypeLimits;
             this.VentilationSimulationControl = ventilationSimulationControl;
+            this.ElectricLoadCenter = electricLoadCenter;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "ModelEnergyProperties";
@@ -146,6 +148,13 @@ namespace HoneybeeSchema
         [Summary(@"An optional parameter to define the global parameters for a ventilation cooling.")]
         [DataMember(Name = "ventilation_simulation_control")]
         public VentilationSimulationControl VentilationSimulationControl { get; set; } 
+        /// <summary>
+        /// An optional parameter object that defines the properties of the model electric loads center that manages on site electricity generation and conversion.
+        /// </summary>
+        /// <value>An optional parameter object that defines the properties of the model electric loads center that manages on site electricity generation and conversion.</value>
+        [Summary(@"An optional parameter object that defines the properties of the model electric loads center that manages on site electricity generation and conversion.")]
+        [DataMember(Name = "electric_load_center")]
+        public ElectricLoadCenter ElectricLoadCenter { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -178,6 +187,7 @@ namespace HoneybeeSchema
             sb.Append("  Schedules: ").Append(this.Schedules).Append("\n");
             sb.Append("  ScheduleTypeLimits: ").Append(this.ScheduleTypeLimits).Append("\n");
             sb.Append("  VentilationSimulationControl: ").Append(this.VentilationSimulationControl).Append("\n");
+            sb.Append("  ElectricLoadCenter: ").Append(this.ElectricLoadCenter).Append("\n");
             return sb.ToString();
         }
   
@@ -275,7 +285,8 @@ namespace HoneybeeSchema
                     this.ScheduleTypeLimits == input.ScheduleTypeLimits ||
                     Extension.AllEquals(this.ScheduleTypeLimits, input.ScheduleTypeLimits)
                 ) && 
-                    Extension.Equals(this.VentilationSimulationControl, input.VentilationSimulationControl);
+                    Extension.Equals(this.VentilationSimulationControl, input.VentilationSimulationControl) && 
+                    Extension.Equals(this.ElectricLoadCenter, input.ElectricLoadCenter);
         }
 
         /// <summary>
@@ -309,6 +320,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.ScheduleTypeLimits.GetHashCode();
                 if (this.VentilationSimulationControl != null)
                     hashCode = hashCode * 59 + this.VentilationSimulationControl.GetHashCode();
+                if (this.ElectricLoadCenter != null)
+                    hashCode = hashCode * 59 + this.ElectricLoadCenter.GetHashCode();
                 return hashCode;
             }
         }
