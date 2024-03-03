@@ -2,11 +2,8 @@
 {
     public partial class Light
     {
-        public double Reflectance { get; private set; }
-        public double Transmittance { get; private set; }
-        public double Emittance { get; private set; }
 
-        public bool CalVisualValues()
+        public override bool CalVisualValues()
         {
             this.Reflectance = -999;
             this.Transmittance = -999;
