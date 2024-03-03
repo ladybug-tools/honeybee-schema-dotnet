@@ -35,12 +35,12 @@ namespace HoneybeeSchema.Test
         [SetUp]
         public void Init()
         {
-            //var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/modifier/modifier_glass_generic_exterior_window.json";
-            //using (WebClient wc = new WebClient())
-            //{
-            //    var json = wc.DownloadString(url);
-            //    this.instance = HB.Glass.FromJson(json);
-            //}
+            var url = @"https://raw.githubusercontent.com/ladybug-tools/honeybee-schema/master/samples/modifier/modifier_glass_generic_exterior_window.json";
+            using (WebClient wc = new WebClient())
+            {
+                var json = wc.DownloadString(url);
+                this.instance = HB.Glass.FromJson(json);
+            }
 
 
             //var dir = Path.GetDirectoryName(this.GetType().Assembly.Location);
