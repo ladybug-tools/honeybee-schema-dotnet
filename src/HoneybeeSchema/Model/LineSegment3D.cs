@@ -29,7 +29,7 @@ namespace HoneybeeSchema
     [Summary(@"A single line segment face in 3D space.")]
     [Serializable]
     [DataContract(Name = "LineSegment3D")]
-    public partial class LineSegment3D : OpenAPIGenBaseModel, IEquatable<LineSegment3D>, IValidatableObject
+    public partial class LineSegment3D : IEquatable<LineSegment3D>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LineSegment3D" /> class.
