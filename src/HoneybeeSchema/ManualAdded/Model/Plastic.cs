@@ -2,15 +2,11 @@
 {
     public partial class Plastic
     {
-        public double Reflectance { get; private set; }
-        public double Transmittance { get; private set; }
-        public double Emittance { get; private set; }
-
-        public bool CalVisualValues()
+        public override bool CalVisualValues()
         {
             this.Reflectance = RadianceVisualCalculator.AvgReflectance(this.RReflectance, this.GReflectance, this.BReflectance, this.Specularity);
-            this.Transmittance = 0;
-            this.Emittance = 0;
+            this.Transmittance = -999;
+            this.Emittance = -999;
             return true;
         }
     }
