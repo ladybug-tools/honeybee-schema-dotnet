@@ -67,10 +67,10 @@ namespace HoneybeeSchema.Test
             var mats = ModelRadianceProperties.Default.ModifierList;
             var tests = new Dictionary<string, (double, double, double)>()
             {
-                {"generic_exterior_window_vis_0.64", (0.36, 0.64 , 0) }, //glass
-                {"generic_floor_0.20", (0.20, 0 , 0) }, //plastic
+                {"generic_exterior_window_vis_0.64", (0.36, 0.64 , -999) }, //glass
+                {"generic_floor_0.20", (0.20, -999 , -999) }, //plastic
                 { "white_glow",  (-999, -999 , 1)}, //glow
-                {"air_boundary", (1 , 1 , 0) }, //trans
+                {"air_boundary", (1 , 1 , -999) }, //trans
             };
 
             foreach (var item in tests)
@@ -81,9 +81,9 @@ namespace HoneybeeSchema.Test
                 var trans = item.Value.Item2;
                 var emmi = item.Value.Item3;
 
-                Assert.AreEqual(Math.Round(m1.Reflectance, 2), refl);
-                Assert.AreEqual(Math.Round(m1.Transmittance, 2), trans);
-                Assert.AreEqual(Math.Round(m1.Emittance, 2), emmi);
+                Assert.AreEqual(m1.Reflectance, refl, 0.001);
+                Assert.AreEqual(m1.Transmittance, trans, 0.001);
+                Assert.AreEqual(m1.Emittance, emmi, 0.001);
             }
 
         }
