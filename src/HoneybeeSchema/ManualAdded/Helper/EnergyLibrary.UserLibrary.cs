@@ -1,8 +1,5 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using HB = HoneybeeSchema;
@@ -196,22 +193,10 @@ namespace HoneybeeSchema.Helper
 
             string ExecuteCMD(string command)
             {
-                using (var p = new System.Diagnostics.Process())
+                try
                 {
-                    p.StartInfo.FileName = python;
-                    p.StartInfo.Arguments = command;
-                    p.StartInfo.UseShellExecute = false;
-                    p.StartInfo.RedirectStandardOutput = true;
-                    p.StartInfo.RedirectStandardError = true;
-                    p.StartInfo.CreateNoWindow = true;
-                    p.Start();
-
-                    var outputs = p.StandardOutput.ReadToEnd();
-                    var errs = p.StandardError.ReadToEnd();
-
-                    p.WaitForExit();
-                    if (!string.IsNullOrEmpty(errs))
-                        throw new ArgumentException($"Failed to load user library: {errs}");
+                    if (!PythonCommand.ExePythonCommand(command, out var outputs))
+                        return null; 
                     if (outputs.StartsWith("{") && outputs.EndsWith("}"))
                         return outputs;
 
@@ -220,6 +205,13 @@ namespace HoneybeeSchema.Helper
                     outputs = outputs.Substring(s, e - s + 1);
                     return outputs;
                 }
+                catch (Exception ee)
+                {
+                    throw new ArgumentException($"Failed to load user library", ee);
+                    throw;
+                }
+        
+             
             }
         }
 
