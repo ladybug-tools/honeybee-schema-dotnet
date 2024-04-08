@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Documentation for Honeybee comparison-report schema",
-        "version": "1.57.2",
+        "version": "1.57.3",
         "title": "Honeybee Comparison Report Schema",
         "contact": {
             "name": "Ladybug Tools",

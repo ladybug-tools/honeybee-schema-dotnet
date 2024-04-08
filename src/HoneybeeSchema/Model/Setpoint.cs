@@ -48,13 +48,14 @@ namespace HoneybeeSchema
         /// <param name="heatingSchedule">Schedule for the heating setpoint. The values in this schedule should be temperature in [C]. (required).</param>
         /// <param name="humidifyingSchedule">Schedule for the humidification setpoint. The values in this schedule should be in [%]..</param>
         /// <param name="dehumidifyingSchedule">Schedule for the dehumidification setpoint. The values in this schedule should be in [%]..</param>
+        /// <param name="setpointCutoutDifference">An optional positive number for the temperature difference between the cutout temperature and the setpoint temperature. Specifying a non-zero number here is useful for modeling the throttling range associated with a given setup of setpoint controls and HVAC equipment. Throttling ranges describe the range where a zone is slightly over-cooled or over-heated beyond the thermostat setpoint. They are used to avoid situations where HVAC systems turn on only to turn off a few minutes later, thereby wearing out the parts of mechanical systems faster. They can have a minor impact on energy consumption and can often have significant impacts on occupant thermal comfort, though using the default value of zero will often yield results that are close enough when trying to estimate the annual heating/cooling energy use. Specifying a value of zero effectively assumes that the system will turn on whenever conditions are outside the setpoint range and will cut out as soon as the setpoint is reached. (default to 0D).</param>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be &lt; 100 characters, use only ASCII characters and exclude (, ; ! \\n \\t). (required).</param>
         /// <param name="displayName">Display name of the object with no character restrictions..</param>
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list)..</param>
         public Setpoint
         (
             string identifier, AnyOf<ScheduleRuleset, ScheduleFixedInterval> coolingSchedule, AnyOf<ScheduleRuleset, ScheduleFixedInterval> heatingSchedule, // Required parameters
-            string displayName= default, Object userData= default, AnyOf<ScheduleRuleset, ScheduleFixedInterval> humidifyingSchedule= default, AnyOf<ScheduleRuleset, ScheduleFixedInterval> dehumidifyingSchedule= default// Optional parameters
+            string displayName= default, Object userData= default, AnyOf<ScheduleRuleset, ScheduleFixedInterval> humidifyingSchedule= default, AnyOf<ScheduleRuleset, ScheduleFixedInterval> dehumidifyingSchedule= default, double setpointCutoutDifference = 0D// Optional parameters
         ) : base(identifier: identifier, displayName: displayName, userData: userData )// BaseClass
         {
             // to ensure "coolingSchedule" is required (not null)
@@ -63,6 +64,7 @@ namespace HoneybeeSchema
             this.HeatingSchedule = heatingSchedule ?? throw new ArgumentNullException("heatingSchedule is a required property for Setpoint and cannot be null");
             this.HumidifyingSchedule = humidifyingSchedule;
             this.DehumidifyingSchedule = dehumidifyingSchedule;
+            this.SetpointCutoutDifference = setpointCutoutDifference;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "Setpoint";
@@ -108,6 +110,13 @@ namespace HoneybeeSchema
         [Summary(@"Schedule for the dehumidification setpoint. The values in this schedule should be in [%].")]
         [DataMember(Name = "dehumidifying_schedule")]
         public AnyOf<ScheduleRuleset, ScheduleFixedInterval> DehumidifyingSchedule { get; set; } 
+        /// <summary>
+        /// An optional positive number for the temperature difference between the cutout temperature and the setpoint temperature. Specifying a non-zero number here is useful for modeling the throttling range associated with a given setup of setpoint controls and HVAC equipment. Throttling ranges describe the range where a zone is slightly over-cooled or over-heated beyond the thermostat setpoint. They are used to avoid situations where HVAC systems turn on only to turn off a few minutes later, thereby wearing out the parts of mechanical systems faster. They can have a minor impact on energy consumption and can often have significant impacts on occupant thermal comfort, though using the default value of zero will often yield results that are close enough when trying to estimate the annual heating/cooling energy use. Specifying a value of zero effectively assumes that the system will turn on whenever conditions are outside the setpoint range and will cut out as soon as the setpoint is reached.
+        /// </summary>
+        /// <value>An optional positive number for the temperature difference between the cutout temperature and the setpoint temperature. Specifying a non-zero number here is useful for modeling the throttling range associated with a given setup of setpoint controls and HVAC equipment. Throttling ranges describe the range where a zone is slightly over-cooled or over-heated beyond the thermostat setpoint. They are used to avoid situations where HVAC systems turn on only to turn off a few minutes later, thereby wearing out the parts of mechanical systems faster. They can have a minor impact on energy consumption and can often have significant impacts on occupant thermal comfort, though using the default value of zero will often yield results that are close enough when trying to estimate the annual heating/cooling energy use. Specifying a value of zero effectively assumes that the system will turn on whenever conditions are outside the setpoint range and will cut out as soon as the setpoint is reached.</value>
+        [Summary(@"An optional positive number for the temperature difference between the cutout temperature and the setpoint temperature. Specifying a non-zero number here is useful for modeling the throttling range associated with a given setup of setpoint controls and HVAC equipment. Throttling ranges describe the range where a zone is slightly over-cooled or over-heated beyond the thermostat setpoint. They are used to avoid situations where HVAC systems turn on only to turn off a few minutes later, thereby wearing out the parts of mechanical systems faster. They can have a minor impact on energy consumption and can often have significant impacts on occupant thermal comfort, though using the default value of zero will often yield results that are close enough when trying to estimate the annual heating/cooling energy use. Specifying a value of zero effectively assumes that the system will turn on whenever conditions are outside the setpoint range and will cut out as soon as the setpoint is reached.")]
+        [DataMember(Name = "setpoint_cutout_difference")]
+        public double SetpointCutoutDifference { get; set; }  = 0D;
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -137,6 +146,7 @@ namespace HoneybeeSchema
             sb.Append("  HeatingSchedule: ").Append(this.HeatingSchedule).Append("\n");
             sb.Append("  HumidifyingSchedule: ").Append(this.HumidifyingSchedule).Append("\n");
             sb.Append("  DehumidifyingSchedule: ").Append(this.DehumidifyingSchedule).Append("\n");
+            sb.Append("  SetpointCutoutDifference: ").Append(this.SetpointCutoutDifference).Append("\n");
             return sb.ToString();
         }
   
@@ -204,7 +214,8 @@ namespace HoneybeeSchema
                     Extension.Equals(this.HeatingSchedule, input.HeatingSchedule) && 
                     Extension.Equals(this.Type, input.Type) && 
                     Extension.Equals(this.HumidifyingSchedule, input.HumidifyingSchedule) && 
-                    Extension.Equals(this.DehumidifyingSchedule, input.DehumidifyingSchedule);
+                    Extension.Equals(this.DehumidifyingSchedule, input.DehumidifyingSchedule) && 
+                    Extension.Equals(this.SetpointCutoutDifference, input.SetpointCutoutDifference);
         }
 
         /// <summary>
@@ -226,6 +237,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.HumidifyingSchedule.GetHashCode();
                 if (this.DehumidifyingSchedule != null)
                     hashCode = hashCode * 59 + this.DehumidifyingSchedule.GetHashCode();
+                if (this.SetpointCutoutDifference != null)
+                    hashCode = hashCode * 59 + this.SetpointCutoutDifference.GetHashCode();
                 return hashCode;
             }
         }
@@ -245,6 +258,14 @@ namespace HoneybeeSchema
             if (this.Type != null && false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
+            }
+
+
+            
+            // SetpointCutoutDifference (double) minimum
+            if(this.SetpointCutoutDifference < (double)0)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SetpointCutoutDifference, must be a value greater than or equal to 0.", new [] { "SetpointCutoutDifference" });
             }
 
             yield break;
