@@ -195,7 +195,7 @@ namespace HoneybeeSchema.Helper
             {
                 try
                 {
-                    if (!PythonCommand.ExePythonCommand(command, out var outputs))
+                    if (!PythonCommand.ExePythonCommand(command, false, out var outputs))
                         return null; 
                     if (outputs.StartsWith("{") && outputs.EndsWith("}"))
                         return outputs;
