@@ -1,4 +1,5 @@
-﻿using System;
+﻿extern alias LBTNewtonSoft; 
+using System;
 using System.IO;
 
 namespace HoneybeeSchema.Helper
@@ -22,7 +23,7 @@ namespace HoneybeeSchema.Helper
             if (File.Exists(SettingPath))
             {
                 var text = File.ReadAllText(SettingPath);
-                settings = Newtonsoft.Json.JsonConvert.DeserializeObject<SettingConfig>(text);
+                settings = LBTNewtonSoft.Newtonsoft.Json.JsonConvert.DeserializeObject<SettingConfig>(text);
             }
             // do nothing if the file doesn't exist
             // just return null
@@ -31,7 +32,7 @@ namespace HoneybeeSchema.Helper
 
         public bool SaveSettings()
         {
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(this);
+            string json = LBTNewtonSoft.Newtonsoft.Json.JsonConvert.SerializeObject(this);
             File.WriteAllText(SettingPath, json);
             return File.Exists(SettingPath);
         }

@@ -1,6 +1,6 @@
-
+extern alias LBTNewtonSoft;
 using HoneybeeSchema.Energy;
-using Newtonsoft.Json.Linq;
+using LBTNewtonSoft::Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -641,16 +641,16 @@ namespace HoneybeeSchema
                 return dd;
 
             var uds = new Dictionary<string, object>();
-            Newtonsoft.Json.Linq.JObject jObj = null;
+            JObject jObj = null;
             if (userData is string)
-                jObj = Newtonsoft.Json.Linq.JObject.Parse(userData?.ToString());
-            else if (userData is Newtonsoft.Json.Linq.JObject j)
+                jObj = JObject.Parse(userData?.ToString());
+            else if (userData is JObject j)
                 jObj = j;
 
             if (jObj != null)
             {
                 uds = jObj.Children()
-                   .OfType<Newtonsoft.Json.Linq.JProperty>()
+                   .OfType<JProperty>()
                    .ToDictionary(_ => _.Name, _ => _.Value as object);
             }
             return uds;
