@@ -1,4 +1,4 @@
-﻿using System;
+﻿extern alias LBTNewtonSoft; using System;
 
 namespace HoneybeeSchema
 {

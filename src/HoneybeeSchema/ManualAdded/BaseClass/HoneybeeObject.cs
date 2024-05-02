@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿extern alias LBTNewtonSoft;
+using LBTNewtonSoft::Newtonsoft.Json;
 using System.Runtime.Serialization;
 
 

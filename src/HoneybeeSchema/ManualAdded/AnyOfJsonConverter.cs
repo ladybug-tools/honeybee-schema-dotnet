@@ -1,5 +1,6 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿extern alias LBTNewtonSoft;
+using LBTNewtonSoft::Newtonsoft.Json;
+using LBTNewtonSoft::Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
 
