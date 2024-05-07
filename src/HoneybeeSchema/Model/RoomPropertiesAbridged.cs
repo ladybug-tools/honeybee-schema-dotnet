@@ -37,14 +37,16 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="energy">energy.</param>
         /// <param name="radiance">radiance.</param>
+        /// <param name="doe2">doe2.</param>
         public RoomPropertiesAbridged
         (
             // Required parameters
-           RoomEnergyPropertiesAbridged energy= default, RoomRadiancePropertiesAbridged radiance= default// Optional parameters
+           RoomEnergyPropertiesAbridged energy= default, RoomRadiancePropertiesAbridged radiance= default, RoomDoe2Properties doe2= default// Optional parameters
         ) : base()// BaseClass
         {
             this.Energy = energy;
             this.Radiance = radiance;
+            this.Doe2 = doe2;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "RoomPropertiesAbridged";
@@ -74,6 +76,12 @@ namespace HoneybeeSchema
         [Summary(@"Radiance")]
         [DataMember(Name = "radiance")]
         public RoomRadiancePropertiesAbridged Radiance { get; set; } 
+        /// <summary>
+        /// Gets or Sets Doe2
+        /// </summary>
+        [Summary(@"Doe2")]
+        [DataMember(Name = "doe2")]
+        public RoomDoe2Properties Doe2 { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -98,6 +106,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  Energy: ").Append(this.Energy).Append("\n");
             sb.Append("  Radiance: ").Append(this.Radiance).Append("\n");
+            sb.Append("  Doe2: ").Append(this.Doe2).Append("\n");
             return sb.ToString();
         }
   
@@ -163,7 +172,8 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                     Extension.Equals(this.Type, input.Type) && 
                     Extension.Equals(this.Energy, input.Energy) && 
-                    Extension.Equals(this.Radiance, input.Radiance);
+                    Extension.Equals(this.Radiance, input.Radiance) && 
+                    Extension.Equals(this.Doe2, input.Doe2);
         }
 
         /// <summary>
@@ -181,6 +191,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.Energy.GetHashCode();
                 if (this.Radiance != null)
                     hashCode = hashCode * 59 + this.Radiance.GetHashCode();
+                if (this.Doe2 != null)
+                    hashCode = hashCode * 59 + this.Doe2.GetHashCode();
                 return hashCode;
             }
         }

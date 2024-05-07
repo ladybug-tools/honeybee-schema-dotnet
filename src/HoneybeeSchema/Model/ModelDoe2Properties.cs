@@ -25,34 +25,29 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// ModelProperties
+    /// Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.
     /// </summary>
-    [Summary(@"")]
+    [Summary(@"Base class for all objects that are not extensible with additional keys.  This effectively includes all objects except for the Properties classes that are assigned to geometry objects.")]
     [Serializable]
-    [DataContract(Name = "ModelProperties")]
-    public partial class ModelProperties : OpenAPIGenBaseModel, IEquatable<ModelProperties>, IValidatableObject
+    [DataContract(Name = "ModelDoe2Properties")]
+    public partial class ModelDoe2Properties : OpenAPIGenBaseModel, IEquatable<ModelDoe2Properties>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModelProperties" /> class.
+        /// Initializes a new instance of the <see cref="ModelDoe2Properties" /> class.
         /// </summary>
-        /// <param name="energy">energy.</param>
-        /// <param name="radiance">radiance.</param>
-        /// <param name="doe2">doe2.</param>
-        public ModelProperties
+        [JsonConstructorAttribute]
+        public ModelDoe2Properties
         (
             // Required parameters
-           ModelEnergyProperties energy= default, ModelRadianceProperties radiance= default, ModelDoe2Properties doe2= default// Optional parameters
+            // Optional parameters
         ) : base()// BaseClass
         {
-            this.Energy = energy;
-            this.Radiance = radiance;
-            this.Doe2 = doe2;
 
             // Set non-required readonly properties with defaultValue
-            this.Type = "ModelProperties";
+            this.Type = "ModelDoe2Properties";
 
             // check if object is valid, only check for inherited class
-            if (this.GetType() == typeof(ModelProperties))
+            if (this.GetType() == typeof(ModelDoe2Properties))
                 this.IsValid(throwException: true);
         }
 
@@ -62,26 +57,8 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Type")]
         [DataMember(Name = "type")]
-        public override string Type { get; protected set; }  = "ModelProperties";
+        public override string Type { get; protected set; }  = "ModelDoe2Properties";
 
-        /// <summary>
-        /// Gets or Sets Energy
-        /// </summary>
-        [Summary(@"Energy")]
-        [DataMember(Name = "energy")]
-        public ModelEnergyProperties Energy { get; set; } 
-        /// <summary>
-        /// Gets or Sets Radiance
-        /// </summary>
-        [Summary(@"Radiance")]
-        [DataMember(Name = "radiance")]
-        public ModelRadianceProperties Radiance { get; set; } 
-        /// <summary>
-        /// Gets or Sets Doe2
-        /// </summary>
-        [Summary(@"Doe2")]
-        [DataMember(Name = "doe2")]
-        public ModelDoe2Properties Doe2 { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -89,7 +66,7 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            return "ModelProperties";
+            return "ModelDoe2Properties";
         }
 
         /// <summary>
@@ -102,21 +79,18 @@ namespace HoneybeeSchema
                 return this.ToString();
             
             var sb = new StringBuilder();
-            sb.Append("ModelProperties:\n");
+            sb.Append("ModelDoe2Properties:\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
-            sb.Append("  Energy: ").Append(this.Energy).Append("\n");
-            sb.Append("  Radiance: ").Append(this.Radiance).Append("\n");
-            sb.Append("  Doe2: ").Append(this.Doe2).Append("\n");
             return sb.ToString();
         }
   
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>ModelProperties object</returns>
-        public static ModelProperties FromJson(string json)
+        /// <returns>ModelDoe2Properties object</returns>
+        public static ModelDoe2Properties FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<ModelProperties>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<ModelDoe2Properties>(json, JsonSetting.AnyOfConvertSetting);
             if (obj == null)
                 return null;
             return obj.Type.ToLower() == obj.GetType().Name.ToLower() && obj.IsValid(throwException: true) ? obj : null;
@@ -125,8 +99,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>ModelProperties object</returns>
-        public virtual ModelProperties DuplicateModelProperties()
+        /// <returns>ModelDoe2Properties object</returns>
+        public virtual ModelDoe2Properties DuplicateModelDoe2Properties()
         {
             return FromJson(this.ToJson());
         }
@@ -137,7 +111,7 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return DuplicateModelProperties();
+            return DuplicateModelDoe2Properties();
         }
 
         /// <summary>
@@ -146,7 +120,7 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
         {
-            return DuplicateModelProperties();
+            return DuplicateModelDoe2Properties();
         }
      
         /// <summary>
@@ -157,23 +131,20 @@ namespace HoneybeeSchema
         public override bool Equals(object input)
         {
             input = input is AnyOf anyOf ? anyOf.Obj : input;
-            return this.Equals(input as ModelProperties);
+            return this.Equals(input as ModelDoe2Properties);
         }
 
         /// <summary>
-        /// Returns true if ModelProperties instances are equal
+        /// Returns true if ModelDoe2Properties instances are equal
         /// </summary>
-        /// <param name="input">Instance of ModelProperties to be compared</param>
+        /// <param name="input">Instance of ModelDoe2Properties to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(ModelProperties input)
+        public bool Equals(ModelDoe2Properties input)
         {
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                    Extension.Equals(this.Type, input.Type) && 
-                    Extension.Equals(this.Energy, input.Energy) && 
-                    Extension.Equals(this.Radiance, input.Radiance) && 
-                    Extension.Equals(this.Doe2, input.Doe2);
+                    Extension.Equals(this.Type, input.Type);
         }
 
         /// <summary>
@@ -187,12 +158,6 @@ namespace HoneybeeSchema
                 int hashCode = base.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
-                if (this.Energy != null)
-                    hashCode = hashCode * 59 + this.Energy.GetHashCode();
-                if (this.Radiance != null)
-                    hashCode = hashCode * 59 + this.Radiance.GetHashCode();
-                if (this.Doe2 != null)
-                    hashCode = hashCode * 59 + this.Doe2.GetHashCode();
                 return hashCode;
             }
         }
@@ -208,7 +173,7 @@ namespace HoneybeeSchema
 
             
             // Type (string) pattern
-            Regex regexType = new Regex(@"^ModelProperties$", RegexOptions.CultureInvariant);
+            Regex regexType = new Regex(@"^ModelDoe2Properties$", RegexOptions.CultureInvariant);
             if (this.Type != null && false == regexType.Match(this.Type).Success)
             {
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
