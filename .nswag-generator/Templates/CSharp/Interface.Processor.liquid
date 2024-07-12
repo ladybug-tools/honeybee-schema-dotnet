@@ -1,0 +1,16 @@
+﻿// Auto-generated
+using System.Collections.Generic;
+
+namespace ModelEditorSDK.Model;
+
+public interface {{InterfaceName}}
+{
+	{% for method in Methods %} {%- assign skipComma = true %}
+	/// <summary>
+    /// {{method.Document}}
+    /// </summary>{% for param in method.Params %}
+	/// <param name="{{param.Name}}">{{param.Document}}</param>{% endfor %}
+    /// <returns>{{method.ReturnDoc}}</returns>
+	{{method.ReturnTypeName}} {{method.MethodName}}({% for param in method.Params %}{%- if skipComma %}{%- assign skipComma = false %}{% else %}, {% endif %}{{param.TypeName}} {{param.Name}}{%if param.HasDefaultValue %} = {{param.DefaultValue}}{% endif %}{% endfor %});
+	{% endfor %}
+}

@@ -1,10 +1,12 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29709.97
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HoneybeeSchema", "src\HoneybeeSchema\HoneybeeSchema.csproj", "{7C1337B8-495C-4C13-A1AD-2DACB7107076}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HoneybeeSchema.Tests", "src\HoneybeeSchema.Tests\HoneybeeSchema.Tests.csproj", "{2CBDE6F4-6A8B-4813-BF26-879F5072EDC0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generator", ".nswag-generator\Generator.csproj", "{B28F8B71-5281-47F5-AD3D-BB630148BD30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +22,10 @@ Global
 		{2CBDE6F4-6A8B-4813-BF26-879F5072EDC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CBDE6F4-6A8B-4813-BF26-879F5072EDC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CBDE6F4-6A8B-4813-BF26-879F5072EDC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B28F8B71-5281-47F5-AD3D-BB630148BD30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B28F8B71-5281-47F5-AD3D-BB630148BD30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B28F8B71-5281-47F5-AD3D-BB630148BD30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B28F8B71-5281-47F5-AD3D-BB630148BD30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
