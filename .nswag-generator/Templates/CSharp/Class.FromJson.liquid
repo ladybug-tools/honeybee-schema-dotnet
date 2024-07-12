@@ -1,0 +1,8 @@
+﻿public static {{ ClassName }} FromJson(string data)
+{
+{%- if HasInheritance %}
+    return FromJson<{{ ClassName }}>(data);
+{%- else %}
+    return Newtonsoft.Json.JsonConvert.DeserializeObject<{{ ClassName }}>(data);
+{%- endif %}
+}

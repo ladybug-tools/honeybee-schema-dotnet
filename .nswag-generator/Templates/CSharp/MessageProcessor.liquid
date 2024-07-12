@@ -1,0 +1,76 @@
+﻿extern alias LBTNewtonsoft;
+
+using LBTNewtonsoft::Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+// Auto-generated
+namespace ModelEditorSDK.Model;
+public partial class {{ClassName}}
+{
+    public static MessageBus ProcessMessageBus(MessageBus msg)
+    {
+        MessageBus msgBus = msg;
+        MessageBus msgBack = null;
+        try
+        {
+            var method = msgBus.MethodName;
+            switch (method)
+            {
+                {%- for method in Methods %}
+                case MethodName.{{method.MethodName}}:
+                    msgBack = Process{{method.MethodName}}(msgBus);
+                    break;
+                {%- endfor %}
+                default:
+                    throw new ArgumentException($"Non-supported method {method}");
+            }
+
+
+        }
+        catch (Exception e)
+        {
+            msgBack = msgBus == null ? MessageBus.ErrorBus(e) : msgBus.ToErrorBus(e);
+            LogHelper.LogError(e);
+        }
+
+        if (msgBack == null)
+            msgBack = MessageBus.ErrorBus("Unknown Error!");
+        return msgBack;
+    }
+
+    {%- for method in Methods %} {%- assign skipComma = true %}
+
+    /// <summary>
+    /// {{method.Document}}
+    /// </summary>
+    private static MessageBus Process{{method.MethodName}}(MessageBus msg)
+    {
+        MessageBus msgBack;
+        var mParams = msg.MethodParams;
+        {%- for param in method.Params %}
+
+        {%- if param.HasDefaultValue %}
+        var {{param.Name}} = msg.TryGetParam<{{param.TypeName}}>("{{param.Name}}", out var _{{param.Name}}) ? _{{param.Name}} : {{param.DefaultValue}};
+        {% else %}
+        var {{param.Name}} = msg.TryGetParam<{{param.TypeName}}>("{{param.Name}}", out var _{{param.Name}}) 
+            ? _{{param.Name}} 
+            : throw new ArgumentException("Missing argument {{param.Name}} of {{method.MethodName}}. Please contact developers!");
+        {% endif %}
+        {%- endfor %}
+        // Execute
+        {%- if method.HasReturn %}
+        var returnData = Processor.{{method.MethodName}}({% for param in method.Params %}{%- if skipComma %}{%- assign skipComma = false %}{% else %}, {% endif %}{{param.Name}}: {{param.Name}}{% endfor %});
+        msgBack = msg.ToReturnBus(returnData);
+        {% else %}
+        Processor.{{method.MethodName}}({% for param in method.Params %}{%- if skipComma %}{%- assign skipComma = false %}{% else %}, {% endif %}{{param.Name}}: {{param.Name}}{% endfor %});
+        msgBack = msg.ToReturnBus(true); 
+        {% endif %}
+        return msgBack;
+    }
+
+
+    {%- endfor %}
+
+}

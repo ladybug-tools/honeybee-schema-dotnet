@@ -1,0 +1,28 @@
+﻿// Auto-generated
+
+import { MessageParamHelper } from "./MessageParam";
+import { MessageBusHelper } from "./MessageBus";
+import { MessageParam, MethodName } from "./ModelEditorSDK";
+{%- assign skipComma = true %}
+import { {% for type in SchemaTypes %} {%- if skipComma %}{%- assign skipComma = false %}{% else %}, {% endif %}{{type}}{% endfor %} } from "./ModelEditorSDK";
+import { waitForExecution, ConvertToMap } from "../utils/globalFunctions";
+{% for method in Methods %} {%- assign skipComma = true %}
+
+
+export const {{method.MethodName}} = async ({% for param in method.Params %}{%- if skipComma %}{%- assign skipComma = false %}{% else %}, {% endif %} {{param.Name}}: {{param.TypeName}}{%if param.HasDefaultValue %} = {{param.DefaultValue}}{% endif %}{% endfor %}) => {
+
+  const params: MessageParam[] = [{% for param in method.Params %}{%- if param.HasDefaultValue == false %}
+    MessageParamHelper.MessageParam("{{param.Name}}", {{param.Name}}),{% endif %}{% endfor %}
+  ];
+  {% for param in method.Params -%}
+  {%- if param.HasDefaultValue == true %}
+  if({{param.Name}})params.push(MessageParamHelper.MessageParam("{{param.Name}}", {{param.Name}}));{% endif %}{% endfor %}
+
+  var obj =  MessageBusHelper.MessageBus(MethodName.{{method.MethodName}}, params);
+  {%- if method.HasReturn %}
+  const done: {{method.ReturnTypeName}} = {% if method.NeedReturnTypeConverter %}ConvertTo{{method.ReturnTypeName}}(await waitForExecution(obj));{% else %}await waitForExecution(obj);{% endif %}
+  return done;
+  {% else %}
+  await waitForExecution(obj);{% endif %}
+};
+{% endfor %}
