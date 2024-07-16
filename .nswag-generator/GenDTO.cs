@@ -8,6 +8,7 @@ using NJsonSchema.Generation;
 using NJsonSchema.Visitors;
 using NSwag;
 using NSwag.CodeGeneration;
+using Newtonsoft.Json.Linq;
 
 namespace SchemaGenerator;
 
@@ -27,11 +28,53 @@ internal class GenDTO
 
 
         //var schemaFile = System.IO.Path.Combine(outputDir, "schema.json");
-        var schemaFile = @"C:\Users\mingo\Repos\pollination\honeybee-schema-dotnet\.openapi-docs\model_inheritance.json";
-        var json = System.IO.File.ReadAllText(schemaFile, System.Text.Encoding.UTF8);
-        Console.WriteLine($"Reading schema from {schemaFile}");
+        var jsons = new[]
+        { 
+            "model_inheritance.json",
+            "simulation-parameter_inheritance.json",
+            "validation-report.json",
+            "comparison-report_inheritance.json",
+            "sync-instructions_inheritance.json",
+            "project-information_inheritance.json"
 
-        var doc = OpenApiDocument.FromJsonAsync(json).Result;
+        };
+
+        var dic = @"C:\Users\mingo\Repos\pollination\honeybee-schema-dotnet\.openapi-docs";
+      
+
+        JObject docJson = null;
+        JObject jSchemas = null;
+        // combine all schema components
+        foreach (var j in jsons)
+        {
+            var schemaFile = System.IO.Path.Combine(dic, j);
+            var json = System.IO.File.ReadAllText(schemaFile, System.Text.Encoding.UTF8);
+            Console.WriteLine($"Reading schema from {schemaFile}");
+            var jDocObj = JObject.Parse(json);
+
+
+            var schemas = jDocObj["components"]["schemas"] as JObject;
+            //var arrays = JArray.Parse(schemas.Values);
+            if (docJson == null)
+            {
+                docJson = jDocObj;
+                jSchemas = schemas;
+                continue;
+            }
+
+            jSchemas.Merge(schemas, new JsonMergeSettings
+            {
+                MergeArrayHandling = MergeArrayHandling.Union
+            });
+
+        }
+
+
+        docJson["components"]["schemas"] = jSchemas;
+
+        var doc = OpenApiDocument.FromJsonAsync(docJson.ToString()).Result;
+
+
 
         //var csFile = ConvertToCSharp(doc, rootDir, outputDir);
         //var targetCs = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(rootDir), "CSharpSDK", "Model", System.IO.Path.GetFileName(csFile));
