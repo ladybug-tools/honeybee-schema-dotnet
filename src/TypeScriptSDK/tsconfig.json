@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "baseUrl": "./models",
+    "rootDir": "./models",
     "target": "ESNext",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "allowJs": true,
@@ -17,5 +19,6 @@
   },
   "include": [
     "models"
-  ]
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
