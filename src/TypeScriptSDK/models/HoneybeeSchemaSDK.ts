@@ -969,6 +969,131 @@ export class _OpenAPIGenBaseModel implements I_OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
+        if (data["type"] === "DryBulbCondition") {
+            let result = new DryBulbCondition();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "SimulationOutput") {
+            let result = new SimulationOutput();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "DaylightSavingTime") {
+            let result = new DaylightSavingTime();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "RunPeriod") {
+            let result = new RunPeriod();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "SimulationControl") {
+            let result = new SimulationControl();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ShadowCalculation") {
+            let result = new ShadowCalculation();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "HumidityCondition") {
+            let result = new HumidityCondition();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "WindCondition") {
+            let result = new WindCondition();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ASHRAEClearSky") {
+            let result = new ASHRAEClearSky();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "_SkyCondition") {
+            let result = new _SkyCondition();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ASHRAETau") {
+            let result = new ASHRAETau();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "DesignDay") {
+            let result = new DesignDay();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "SizingParameter") {
+            let result = new SizingParameter();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "SimulationParameter") {
+            let result = new SimulationParameter();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ChangedObject") {
+            let result = new ChangedObject();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "DeletedObject") {
+            let result = new DeletedObject();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "AddedObject") {
+            let result = new AddedObject();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ComparisonReport") {
+            let result = new ComparisonReport();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "_DiffObjectBase") {
+            let result = new _DiffObjectBase();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "AddedInstruction") {
+            let result = new AddedInstruction();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "DeletedInstruction") {
+            let result = new DeletedInstruction();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ChangedInstruction") {
+            let result = new ChangedInstruction();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "SyncInstructions") {
+            let result = new SyncInstructions();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Location") {
+            let result = new Location();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ProjectInfo") {
+            let result = new ProjectInfo();
+            result.init(data);
+            return result;
+        }
         let result = new _OpenAPIGenBaseModel();
         result.init(data);
         return result;
@@ -3017,6 +3142,16 @@ export class DatedBaseModel extends _OpenAPIGenBaseModel implements IDatedBaseMo
         data = typeof data === 'object' ? data : {};
         if (data["type"] === "ScheduleRuleAbridged") {
             let result = new ScheduleRuleAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "DaylightSavingTime") {
+            let result = new DaylightSavingTime();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "RunPeriod") {
+            let result = new RunPeriod();
             result.init(data);
             return result;
         }
@@ -15058,6 +15193,2588 @@ export interface I_FaceSubSet extends I_OpenAPIGenBaseModel {
     type?: string;
 }
 
+/** Used to specify dry bulb conditions on a design day. */
+export class DryBulbCondition extends _OpenAPIGenBaseModel implements IDryBulbCondition {
+    /** The maximum dry bulb temperature on the design day [C]. */
+    dry_bulb_max!: number;
+    /** The difference between min and max temperatures on the design day [C]. */
+    dry_bulb_range!: number;
+    readonly type: string = "DryBulbCondition";
+
+    constructor(data?: IDryBulbCondition) {
+        super(data);
+        if (!data) {
+            this.type = "DryBulbCondition";
+        }
+        this._discriminator = "DryBulbCondition";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.dry_bulb_max = _data["dry_bulb_max"];
+            this.dry_bulb_range = _data["dry_bulb_range"];
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "DryBulbCondition";
+        }
+    }
+
+    static override fromJS(data: any): DryBulbCondition {
+        data = typeof data === 'object' ? data : {};
+        let result = new DryBulbCondition();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["dry_bulb_max"] = this.dry_bulb_max;
+        data["dry_bulb_range"] = this.dry_bulb_range;
+        data["type"] = this.type;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+/** Used to specify dry bulb conditions on a design day. */
+export interface IDryBulbCondition extends I_OpenAPIGenBaseModel {
+    /** The maximum dry bulb temperature on the design day [C]. */
+    dry_bulb_max: number;
+    /** The difference between min and max temperatures on the design day [C]. */
+    dry_bulb_range: number;
+    type?: string;
+}
+
+/** An enumeration. */
+export enum ReportingFrequency {
+    Timestep = "Timestep",
+    Hourly = "Hourly",
+    Daily = "Daily",
+    Monthly = "Monthly",
+    Annual = "Annual",
+}
+
+/** Lists the outputs to report from the simulation and their format. */
+export class SimulationOutput extends _OpenAPIGenBaseModel implements ISimulationOutput {
+    readonly type: string = "SimulationOutput";
+    reporting_frequency?: ReportingFrequency;
+    /** A list of EnergyPlus output names as strings, which are requested from the simulation. */
+    outputs?: string[];
+    /** A list of EnergyPlus summary report names as strings. */
+    summary_reports?: string[];
+    /** A number in degrees Celsius for the difference that the zone conditions must be from the thermostat setpoint in order for the setpoint to be considered unmet. This will affect how unmet hours are reported in the output. ASHRAE 90.1 uses a tolerance of 1.11C, which is equivalent to 1.8F. */
+    unmet_setpoint_tolerance?: number;
+
+    constructor(data?: ISimulationOutput) {
+        super(data);
+        if (!data) {
+            this.type = "SimulationOutput";
+            this.reporting_frequency = ReportingFrequency.Hourly;
+            this.unmet_setpoint_tolerance = 1.11;
+        }
+        this._discriminator = "SimulationOutput";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "SimulationOutput";
+            this.reporting_frequency = _data["reporting_frequency"] !== undefined ? _data["reporting_frequency"] : ReportingFrequency.Hourly;
+            if (Array.isArray(_data["outputs"])) {
+                this.outputs = [] as any;
+                for (let item of _data["outputs"])
+                    this.outputs!.push(item);
+            }
+            if (Array.isArray(_data["summary_reports"])) {
+                this.summary_reports = [] as any;
+                for (let item of _data["summary_reports"])
+                    this.summary_reports!.push(item);
+            }
+            this.unmet_setpoint_tolerance = _data["unmet_setpoint_tolerance"] !== undefined ? _data["unmet_setpoint_tolerance"] : 1.11;
+        }
+    }
+
+    static override fromJS(data: any): SimulationOutput {
+        data = typeof data === 'object' ? data : {};
+        let result = new SimulationOutput();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["reporting_frequency"] = this.reporting_frequency;
+        if (Array.isArray(this.outputs)) {
+            data["outputs"] = [];
+            for (let item of this.outputs)
+                data["outputs"].push(item);
+        }
+        if (Array.isArray(this.summary_reports)) {
+            data["summary_reports"] = [];
+            for (let item of this.summary_reports)
+                data["summary_reports"].push(item);
+        }
+        data["unmet_setpoint_tolerance"] = this.unmet_setpoint_tolerance;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+/** Lists the outputs to report from the simulation and their format. */
+export interface ISimulationOutput extends I_OpenAPIGenBaseModel {
+    type?: string;
+    reporting_frequency?: ReportingFrequency;
+    /** A list of EnergyPlus output names as strings, which are requested from the simulation. */
+    outputs?: string[];
+    /** A list of EnergyPlus summary report names as strings. */
+    summary_reports?: string[];
+    /** A number in degrees Celsius for the difference that the zone conditions must be from the thermostat setpoint in order for the setpoint to be considered unmet. This will affect how unmet hours are reported in the output. ASHRAE 90.1 uses a tolerance of 1.11C, which is equivalent to 1.8F. */
+    unmet_setpoint_tolerance?: number;
+}
+
+/** An enumeration. */
+export enum DaysOfWeek {
+    Sunday = "Sunday",
+    Monday = "Monday",
+    Tuesday = "Tuesday",
+    Wednesday = "Wednesday",
+    Thursday = "Thursday",
+    Friday = "Friday",
+    Saturday = "Saturday",
+}
+
+/** Used to describe the daylight savings time for the simulation. */
+export class DaylightSavingTime extends DatedBaseModel implements IDaylightSavingTime {
+    readonly type: string = "DaylightSavingTime";
+    /** A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017). */
+    start_date?: number[];
+    /** A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017). */
+    end_date?: number[];
+
+    constructor(data?: IDaylightSavingTime) {
+        super(data);
+        if (!data) {
+            this.type = "DaylightSavingTime";
+        }
+        this._discriminator = "DaylightSavingTime";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "DaylightSavingTime";
+            if (Array.isArray(_data["start_date"])) {
+                this.start_date = [] as any;
+                for (let item of _data["start_date"])
+                    this.start_date!.push(item);
+            }
+            if (Array.isArray(_data["end_date"])) {
+                this.end_date = [] as any;
+                for (let item of _data["end_date"])
+                    this.end_date!.push(item);
+            }
+        }
+    }
+
+    static override fromJS(data: any): DaylightSavingTime {
+        data = typeof data === 'object' ? data : {};
+        let result = new DaylightSavingTime();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        if (Array.isArray(this.start_date)) {
+            data["start_date"] = [];
+            for (let item of this.start_date)
+                data["start_date"].push(item);
+        }
+        if (Array.isArray(this.end_date)) {
+            data["end_date"] = [];
+            for (let item of this.end_date)
+                data["end_date"].push(item);
+        }
+        super.toJSON(data);
+        return data;
+    }
+}
+
+/** Used to describe the daylight savings time for the simulation. */
+export interface IDaylightSavingTime extends IDatedBaseModel {
+    type?: string;
+    /** A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017). */
+    start_date?: number[];
+    /** A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017). */
+    end_date?: number[];
+}
+
+/** Used to describe the time period over which to run the simulation. */
+export class RunPeriod extends DatedBaseModel implements IRunPeriod {
+    readonly type: string = "RunPeriod";
+    /** A list of two integers for [month, day], representing the date for the start of the run period. Must be before the end date. */
+    start_date?: number[];
+    /** A list of two integers for [month, day], representing the date for the end of the run period. Must be after the start date. */
+    end_date?: number[];
+    /** Text for the day of the week on which the simulation starts. */
+    start_day_of_week?: DaysOfWeek;
+    /** A list of lists where each sub-list consists of two integers for [month, day], representing a date which is a holiday within the simulation. If None, no holidays are applied. */
+    holidays?: number[][];
+    /** A DaylightSavingTime to dictate the start and end dates of daylight saving time. If None, no daylight saving time is applied to the simulation. */
+    daylight_saving_time?: DaylightSavingTime;
+    /** Boolean noting whether the simulation will be run for a leap year. */
+    leap_year?: boolean;
+
+    constructor(data?: IRunPeriod) {
+        super(data);
+        if (!data) {
+            this.type = "RunPeriod";
+            this.start_day_of_week = DaysOfWeek.Sunday;
+            this.leap_year = false;
+        }
+        this._discriminator = "RunPeriod";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "RunPeriod";
+            if (Array.isArray(_data["start_date"])) {
+                this.start_date = [] as any;
+                for (let item of _data["start_date"])
+                    this.start_date!.push(item);
+            }
+            if (Array.isArray(_data["end_date"])) {
+                this.end_date = [] as any;
+                for (let item of _data["end_date"])
+                    this.end_date!.push(item);
+            }
+            this.start_day_of_week = _data["start_day_of_week"] !== undefined ? _data["start_day_of_week"] : DaysOfWeek.Sunday;
+            if (Array.isArray(_data["holidays"])) {
+                this.holidays = [] as any;
+                for (let item of _data["holidays"])
+                    this.holidays!.push(item);
+            }
+            this.daylight_saving_time = _data["daylight_saving_time"] ? DaylightSavingTime.fromJS(_data["daylight_saving_time"]) : <any>undefined;
+            this.leap_year = _data["leap_year"] !== undefined ? _data["leap_year"] : false;
+        }
+    }
+
+    static override fromJS(data: any): RunPeriod {
+        data = typeof data === 'object' ? data : {};
+        let result = new RunPeriod();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        if (Array.isArray(this.start_date)) {
+            data["start_date"] = [];
+            for (let item of this.start_date)
+                data["start_date"].push(item);
+        }
+        if (Array.isArray(this.end_date)) {
+            data["end_date"] = [];
+            for (let item of this.end_date)
+                data["end_date"].push(item);
+        }
+        data["start_day_of_week"] = this.start_day_of_week;
+        if (Array.isArray(this.holidays)) {
+            data["holidays"] = [];
+            for (let item of this.holidays)
+                data["holidays"].push(item);
+        }
+        data["daylight_saving_time"] = this.daylight_saving_time ? this.daylight_saving_time.toJSON() : <any>undefined;
+        data["leap_year"] = this.leap_year;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+/** Used to describe the time period over which to run the simulation. */
+export interface IRunPeriod extends IDatedBaseModel {
+    type?: string;
+    /** A list of two integers for [month, day], representing the date for the start of the run period. Must be before the end date. */
+    start_date?: number[];
+    /** A list of two integers for [month, day], representing the date for the end of the run period. Must be after the start date. */
+    end_date?: number[];
+    /** Text for the day of the week on which the simulation starts. */
+    start_day_of_week?: DaysOfWeek;
+    /** A list of lists where each sub-list consists of two integers for [month, day], representing a date which is a holiday within the simulation. If None, no holidays are applied. */
+    holidays?: number[][];
+    /** A DaylightSavingTime to dictate the start and end dates of daylight saving time. If None, no daylight saving time is applied to the simulation. */
+    daylight_saving_time?: DaylightSavingTime;
+    /** Boolean noting whether the simulation will be run for a leap year. */
+    leap_year?: boolean;
+}
+
+/** Used to specify which types of calculations to run. */
+export class SimulationControl extends _OpenAPIGenBaseModel implements ISimulationControl {
+    readonly type: string = "SimulationControl";
+    /** Boolean for whether the zone sizing calculation should be run. */
+    do_zone_sizing?: boolean;
+    /** Boolean for whether the system sizing calculation should be run. */
+    do_system_sizing?: boolean;
+    /** Boolean for whether the plant sizing calculation should be run. */
+    do_plant_sizing?: boolean;
+    /** Boolean for whether the simulation should be run for the sizing periods. */
+    run_for_run_periods?: boolean;
+    /** Boolean for whether the simulation should be run for the run periods. */
+    run_for_sizing_periods?: boolean;
+
+    constructor(data?: ISimulationControl) {
+        super(data);
+        if (!data) {
+            this.type = "SimulationControl";
+            this.do_zone_sizing = true;
+            this.do_system_sizing = true;
+            this.do_plant_sizing = true;
+            this.run_for_run_periods = true;
+            this.run_for_sizing_periods = false;
+        }
+        this._discriminator = "SimulationControl";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "SimulationControl";
+            this.do_zone_sizing = _data["do_zone_sizing"] !== undefined ? _data["do_zone_sizing"] : true;
+            this.do_system_sizing = _data["do_system_sizing"] !== undefined ? _data["do_system_sizing"] : true;
+            this.do_plant_sizing = _data["do_plant_sizing"] !== undefined ? _data["do_plant_sizing"] : true;
+            this.run_for_run_periods = _data["run_for_run_periods"] !== undefined ? _data["run_for_run_periods"] : true;
+            this.run_for_sizing_periods = _data["run_for_sizing_periods"] !== undefined ? _data["run_for_sizing_periods"] : false;
+        }
+    }
+
+    static override fromJS(data: any): SimulationControl {
+        data = typeof data === 'object' ? data : {};
+        let result = new SimulationControl();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["do_zone_sizing"] = this.do_zone_sizing;
+        data["do_system_sizing"] = this.do_system_sizing;
+        data["do_plant_sizing"] = this.do_plant_sizing;
+        data["run_for_run_periods"] = this.run_for_run_periods;
+        data["run_for_sizing_periods"] = this.run_for_sizing_periods;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+/** Used to specify which types of calculations to run. */
+export interface ISimulationControl extends I_OpenAPIGenBaseModel {
+    type?: string;
+    /** Boolean for whether the zone sizing calculation should be run. */
+    do_zone_sizing?: boolean;
+    /** Boolean for whether the system sizing calculation should be run. */
+    do_system_sizing?: boolean;
+    /** Boolean for whether the plant sizing calculation should be run. */
+    do_plant_sizing?: boolean;
+    /** Boolean for whether the simulation should be run for the sizing periods. */
+    run_for_run_periods?: boolean;
+    /** Boolean for whether the simulation should be run for the run periods. */
+    run_for_sizing_periods?: boolean;
+}
+
+/** An enumeration. */
+export enum SolarDistribution {
+    MinimalShadowing = "MinimalShadowing",
+    FullExterior = "FullExterior",
+    FullInteriorAndExterior = "FullInteriorAndExterior",
+    FullExteriorWithReflections = "FullExteriorWithReflections",
+    FullInteriorAndExteriorWithReflections = "FullInteriorAndExteriorWithReflections",
+}
+
+/** An enumeration. */
+export enum CalculationMethod {
+    PolygonClipping = "PolygonClipping",
+    PixelCounting = "PixelCounting",
+}
+
+/** An enumeration. */
+export enum CalculationUpdateMethod {
+    Periodic = "Periodic",
+    Timestep = "Timestep",
+}
+
+/** Used to describe settings for EnergyPlus shadow calculation. */
+export class ShadowCalculation extends _OpenAPIGenBaseModel implements IShadowCalculation {
+    readonly type: string = "ShadowCalculation";
+    solar_distribution?: SolarDistribution;
+    /** Text noting whether CPU-based polygon clipping method orGPU-based pixel counting method should be used. For low numbers of shadingsurfaces (less than ~200), PolygonClipping requires less runtime thanPixelCounting. However, PixelCounting runtime scales significantlybetter at higher numbers of shading surfaces. PixelCounting also hasno limitations related to zone concavity when used with any“FullInterior” solar distribution options. */
+    calculation_method?: CalculationMethod;
+    /** Text describing how often the solar and shading calculations are updated with respect to the flow of time in the simulation. */
+    calculation_update_method?: CalculationUpdateMethod;
+    /** Integer for the number of days in each period for which a unique shadow calculation will be performed. This field is only used if the Periodic calculation_method is used. */
+    calculation_frequency?: number;
+    /** Number of allowable figures in shadow overlap calculations. */
+    maximum_figures?: number;
+
+    constructor(data?: IShadowCalculation) {
+        super(data);
+        if (!data) {
+            this.type = "ShadowCalculation";
+            this.solar_distribution = SolarDistribution.FullExteriorWithReflections;
+            this.calculation_method = CalculationMethod.PolygonClipping;
+            this.calculation_update_method = CalculationUpdateMethod.Periodic;
+            this.calculation_frequency = 30;
+            this.maximum_figures = 15000;
+        }
+        this._discriminator = "ShadowCalculation";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "ShadowCalculation";
+            this.solar_distribution = _data["solar_distribution"] !== undefined ? _data["solar_distribution"] : SolarDistribution.FullExteriorWithReflections;
+            this.calculation_method = _data["calculation_method"] !== undefined ? _data["calculation_method"] : CalculationMethod.PolygonClipping;
+            this.calculation_update_method = _data["calculation_update_method"] !== undefined ? _data["calculation_update_method"] : CalculationUpdateMethod.Periodic;
+            this.calculation_frequency = _data["calculation_frequency"] !== undefined ? _data["calculation_frequency"] : 30;
+            this.maximum_figures = _data["maximum_figures"] !== undefined ? _data["maximum_figures"] : 15000;
+        }
+    }
+
+    static override fromJS(data: any): ShadowCalculation {
+        data = typeof data === 'object' ? data : {};
+        let result = new ShadowCalculation();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["solar_distribution"] = this.solar_distribution;
+        data["calculation_method"] = this.calculation_method;
+        data["calculation_update_method"] = this.calculation_update_method;
+        data["calculation_frequency"] = this.calculation_frequency;
+        data["maximum_figures"] = this.maximum_figures;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+/** Used to describe settings for EnergyPlus shadow calculation. */
+export interface IShadowCalculation extends I_OpenAPIGenBaseModel {
+    type?: string;
+    solar_distribution?: SolarDistribution;
+    /** Text noting whether CPU-based polygon clipping method orGPU-based pixel counting method should be used. For low numbers of shadingsurfaces (less than ~200), PolygonClipping requires less runtime thanPixelCounting. However, PixelCounting runtime scales significantlybetter at higher numbers of shading surfaces. PixelCounting also hasno limitations related to zone concavity when used with any“FullInterior” solar distribution options. */
+    calculation_method?: CalculationMethod;
+    /** Text describing how often the solar and shading calculations are updated with respect to the flow of time in the simulation. */
+    calculation_update_method?: CalculationUpdateMethod;
+    /** Integer for the number of days in each period for which a unique shadow calculation will be performed. This field is only used if the Periodic calculation_method is used. */
+    calculation_frequency?: number;
+    /** Number of allowable figures in shadow overlap calculations. */
+    maximum_figures?: number;
+}
+
+/** An enumeration. */
+export enum DesignDayTypes {
+    SummerDesignDay = "SummerDesignDay",
+    WinterDesignDay = "WinterDesignDay",
+    Sunday = "Sunday",
+    Monday = "Monday",
+    Tuesday = "Tuesday",
+    Wednesday = "Wednesday",
+    Thursday = "Thursday",
+    Friday = "Friday",
+    Holiday = "Holiday",
+    CustomDay1 = "CustomDay1",
+    CustomDay2 = "CustomDay2",
+}
+
+/** An enumeration. */
+export enum HumidityTypes {
+    Wetbulb = "Wetbulb",
+    Dewpoint = "Dewpoint",
+    HumidityRatio = "HumidityRatio",
+    Enthalpy = "Enthalpy",
+}
+
+/** Used to specify humidity conditions on a design day. */
+export class HumidityCondition extends _OpenAPIGenBaseModel implements IHumidityCondition {
+    humidity_type!: HumidityTypes;
+    /** The value correcponding to the humidity_type. */
+    humidity_value!: number;
+    readonly type: string = "HumidityCondition";
+    /** Barometric air pressure on the design day [Pa]. */
+    barometric_pressure?: number;
+    /** Boolean to indicate rain on the design day. */
+    rain?: boolean;
+    /** Boolean to indicate snow on the ground during the design day. */
+    snow_on_ground?: boolean;
+
+    constructor(data?: IHumidityCondition) {
+        super(data);
+        if (!data) {
+            this.type = "HumidityCondition";
+            this.barometric_pressure = 101325;
+            this.rain = false;
+            this.snow_on_ground = false;
+        }
+        this._discriminator = "HumidityCondition";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.humidity_type = _data["humidity_type"];
+            this.humidity_value = _data["humidity_value"];
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "HumidityCondition";
+            this.barometric_pressure = _data["barometric_pressure"] !== undefined ? _data["barometric_pressure"] : 101325;
+            this.rain = _data["rain"] !== undefined ? _data["rain"] : false;
+            this.snow_on_ground = _data["snow_on_ground"] !== undefined ? _data["snow_on_ground"] : false;
+        }
+    }
+
+    static override fromJS(data: any): HumidityCondition {
+        data = typeof data === 'object' ? data : {};
+        let result = new HumidityCondition();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["humidity_type"] = this.humidity_type;
+        data["humidity_value"] = this.humidity_value;
+        data["type"] = this.type;
+        data["barometric_pressure"] = this.barometric_pressure;
+        data["rain"] = this.rain;
+        data["snow_on_ground"] = this.snow_on_ground;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+/** Used to specify humidity conditions on a design day. */
+export interface IHumidityCondition extends I_OpenAPIGenBaseModel {
+    humidity_type: HumidityTypes;
+    /** The value correcponding to the humidity_type. */
+    humidity_value: number;
+    type?: string;
+    /** Barometric air pressure on the design day [Pa]. */
+    barometric_pressure?: number;
+    /** Boolean to indicate rain on the design day. */
+    rain?: boolean;
+    /** Boolean to indicate snow on the ground during the design day. */
+    snow_on_ground?: boolean;
+}
+
+/** Used to specify wind conditions on a design day. */
+export class WindCondition extends _OpenAPIGenBaseModel implements IWindCondition {
+    /** Wind speed on the design day [m/s]. */
+    wind_speed!: number;
+    readonly type: string = "WindCondition";
+    /** Wind direction on the design day [degrees]. */
+    wind_direction?: number;
+
+    constructor(data?: IWindCondition) {
+        super(data);
+        if (!data) {
+            this.type = "WindCondition";
+            this.wind_direction = 0;
+        }
+        this._discriminator = "WindCondition";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.wind_speed = _data["wind_speed"];
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "WindCondition";
+            this.wind_direction = _data["wind_direction"] !== undefined ? _data["wind_direction"] : 0;
+        }
+    }
+
+    static override fromJS(data: any): WindCondition {
+        data = typeof data === 'object' ? data : {};
+        let result = new WindCondition();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["wind_speed"] = this.wind_speed;
+        data["type"] = this.type;
+        data["wind_direction"] = this.wind_direction;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+/** Used to specify wind conditions on a design day. */
+export interface IWindCondition extends I_OpenAPIGenBaseModel {
+    /** Wind speed on the design day [m/s]. */
+    wind_speed: number;
+    type?: string;
+    /** Wind direction on the design day [degrees]. */
+    wind_direction?: number;
+}
+
+/** Used to specify sky conditions on a design day. */
+export class _SkyCondition extends _OpenAPIGenBaseModel implements I_SkyCondition {
+    /** A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case). */
+    date!: number[];
+    /** Boolean to indicate whether daylight savings time is active on the design day. */
+    daylight_savings?: boolean;
+    readonly type: string = "_SkyCondition";
+
+    constructor(data?: I_SkyCondition) {
+        super(data);
+        if (!data) {
+            this.date = [];
+            this.daylight_savings = false;
+            this.type = "_SkyCondition";
+        }
+        this._discriminator = "_SkyCondition";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            if (Array.isArray(_data["date"])) {
+                this.date = [] as any;
+                for (let item of _data["date"])
+                    this.date!.push(item);
+            }
+            this.daylight_savings = _data["daylight_savings"] !== undefined ? _data["daylight_savings"] : false;
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "_SkyCondition";
+        }
+    }
+
+    static override fromJS(data: any): _SkyCondition {
+        data = typeof data === 'object' ? data : {};
+        if (data["type"] === "ASHRAEClearSky") {
+            let result = new ASHRAEClearSky();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ASHRAETau") {
+            let result = new ASHRAETau();
+            result.init(data);
+            return result;
+        }
+        let result = new _SkyCondition();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.date)) {
+            data["date"] = [];
+            for (let item of this.date)
+                data["date"].push(item);
+        }
+        data["daylight_savings"] = this.daylight_savings;
+        data["type"] = this.type;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+/** Used to specify sky conditions on a design day. */
+export interface I_SkyCondition extends I_OpenAPIGenBaseModel {
+    /** A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case). */
+    date: number[];
+    /** Boolean to indicate whether daylight savings time is active on the design day. */
+    daylight_savings?: boolean;
+    type?: string;
+}
+
+/** Used to specify sky conditions on a design day. */
+export class ASHRAEClearSky extends _SkyCondition implements IASHRAEClearSky {
+    /** Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level. */
+    clearness!: number;
+    readonly type: string = "ASHRAEClearSky";
+
+    constructor(data?: IASHRAEClearSky) {
+        super(data);
+        if (!data) {
+            this.type = "ASHRAEClearSky";
+        }
+        this._discriminator = "ASHRAEClearSky";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.clearness = _data["clearness"];
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "ASHRAEClearSky";
+        }
+    }
+
+    static override fromJS(data: any): ASHRAEClearSky {
+        data = typeof data === 'object' ? data : {};
+        let result = new ASHRAEClearSky();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["clearness"] = this.clearness;
+        data["type"] = this.type;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+/** Used to specify sky conditions on a design day. */
+export interface IASHRAEClearSky extends I_SkyCondition {
+    /** Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level. */
+    clearness: number;
+    type?: string;
+}
+
+/** Used to specify sky conditions on a design day. */
+export class ASHRAETau extends _SkyCondition implements IASHRAETau {
+    /** Value for the beam optical depth. Typically found in .stat files. */
+    tau_b!: number;
+    /** Value for the diffuse optical depth. Typically found in .stat files. */
+    tau_d!: number;
+    readonly type: string = "ASHRAETau";
+
+    constructor(data?: IASHRAETau) {
+        super(data);
+        if (!data) {
+            this.type = "ASHRAETau";
+        }
+        this._discriminator = "ASHRAETau";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.tau_b = _data["tau_b"];
+            this.tau_d = _data["tau_d"];
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "ASHRAETau";
+        }
+    }
+
+    static override fromJS(data: any): ASHRAETau {
+        data = typeof data === 'object' ? data : {};
+        let result = new ASHRAETau();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["tau_b"] = this.tau_b;
+        data["tau_d"] = this.tau_d;
+        data["type"] = this.type;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+/** Used to specify sky conditions on a design day. */
+export interface IASHRAETau extends I_SkyCondition {
+    /** Value for the beam optical depth. Typically found in .stat files. */
+    tau_b: number;
+    /** Value for the diffuse optical depth. Typically found in .stat files. */
+    tau_d: number;
+    type?: string;
+}
+
+/** An object representing design day conditions. */
+export class DesignDay extends _OpenAPIGenBaseModel implements IDesignDay {
+    /** Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t). */
+    name!: string;
+    day_type!: DesignDayTypes;
+    /** A DryBulbCondition describing temperature conditions on the design day. */
+    dry_bulb_condition!: DryBulbCondition;
+    /** A HumidityCondition describing humidity and precipitation conditions on the design day. */
+    humidity_condition!: HumidityCondition;
+    /** A WindCondition describing wind conditions on the design day. */
+    wind_condition!: WindCondition;
+    sky_condition!: Sky_condition;
+    readonly type: string = "DesignDay";
+
+    constructor(data?: IDesignDay) {
+        super(data);
+        if (!data) {
+            this.dry_bulb_condition = new DryBulbCondition();
+            this.humidity_condition = new HumidityCondition();
+            this.wind_condition = new WindCondition();
+            this.type = "DesignDay";
+        }
+        this._discriminator = "DesignDay";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.name = _data["name"];
+            this.day_type = _data["day_type"];
+            this.dry_bulb_condition = _data["dry_bulb_condition"] ? DryBulbCondition.fromJS(_data["dry_bulb_condition"]) : new DryBulbCondition();
+            this.humidity_condition = _data["humidity_condition"] ? HumidityCondition.fromJS(_data["humidity_condition"]) : new HumidityCondition();
+            this.wind_condition = _data["wind_condition"] ? WindCondition.fromJS(_data["wind_condition"]) : new WindCondition();
+            this.sky_condition = _data["sky_condition"];
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "DesignDay";
+        }
+    }
+
+    static override fromJS(data: any): DesignDay {
+        data = typeof data === 'object' ? data : {};
+        let result = new DesignDay();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["day_type"] = this.day_type;
+        data["dry_bulb_condition"] = this.dry_bulb_condition ? this.dry_bulb_condition.toJSON() : <any>undefined;
+        data["humidity_condition"] = this.humidity_condition ? this.humidity_condition.toJSON() : <any>undefined;
+        data["wind_condition"] = this.wind_condition ? this.wind_condition.toJSON() : <any>undefined;
+        data["sky_condition"] = this.sky_condition;
+        data["type"] = this.type;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+/** An object representing design day conditions. */
+export interface IDesignDay extends I_OpenAPIGenBaseModel {
+    /** Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t). */
+    name: string;
+    day_type: DesignDayTypes;
+    /** A DryBulbCondition describing temperature conditions on the design day. */
+    dry_bulb_condition: DryBulbCondition;
+    /** A HumidityCondition describing humidity and precipitation conditions on the design day. */
+    humidity_condition: HumidityCondition;
+    /** A WindCondition describing wind conditions on the design day. */
+    wind_condition: WindCondition;
+    sky_condition: Sky_condition;
+    type?: string;
+}
+
+/** An enumeration. */
+export enum EfficiencyStandards {
+    ASHRAE_2019 = "ASHRAE_2019",
+    ASHRAE_2016 = "ASHRAE_2016",
+    ASHRAE_2013 = "ASHRAE_2013",
+    ASHRAE_2010 = "ASHRAE_2010",
+    ASHRAE_2007 = "ASHRAE_2007",
+    ASHRAE_2004 = "ASHRAE_2004",
+    DOE_Ref_1980_2004 = "DOE_Ref_1980_2004",
+    DOE_Ref_Pre_1980 = "DOE_Ref_Pre_1980",
+}
+
+/** An enumeration. */
+export enum ClimateZones {
+    _0A = "0A",
+    _1A = "1A",
+    _2A = "2A",
+    _3A = "3A",
+    _4A = "4A",
+    _5A = "5A",
+    _6A = "6A",
+    _0B = "0B",
+    _1B = "1B",
+    _2B = "2B",
+    _3B = "3B",
+    _4B = "4B",
+    _5B = "5B",
+    _6B = "6B",
+    _3C = "3C",
+    _4C = "4C",
+    _5C = "5C",
+    _7 = "7",
+    _8 = "8",
+}
+
+/** Used to specify heating and cooling sizing criteria and safety factors. */
+export class SizingParameter extends _OpenAPIGenBaseModel implements ISizingParameter {
+    readonly type: string = "SizingParameter";
+    /** A list of DesignDays that represent the criteria for which the HVAC systems will be sized. */
+    design_days?: DesignDay[];
+    /** A number that will be multiplied by the peak heating load for each zone in order to size the heating system. */
+    heating_factor?: number;
+    /** A number that will be multiplied by the peak cooling load for each zone in order to size the heating system. */
+    cooling_factor?: number;
+    /** Text to specify the efficiency standard, which will automatically set the efficiencies of all HVAC equipment when provided. Note that providing a standard here will cause the OpenStudio translation process to perform an additional sizing calculation with EnergyPlus, which is needed since the default efficiencies of equipment vary depending on their size. THIS WILL SIGNIFICANTLY INCREASE TRANSLATION TIME TO OPENSTUDIO. However, it is often worthwhile when the goal is to match the HVAC specification with a particular standard. */
+    efficiency_standard?: EfficiencyStandards;
+    /** Text indicating the ASHRAE climate zone to be used with the efficiency_standard. When unspecified, the climate zone will be inferred from the design days on this sizing parameter object. */
+    climate_zone?: ClimateZones;
+    /** Text for the building type to be used in the efficiency_standard. If the type is not recognized or is None, it will be assumed that the building is a generic NonResidential. The following have specified systems per the standard:  Residential, NonResidential, MidriseApartment, HighriseApartment, LargeOffice, MediumOffice, SmallOffice, Retail, StripMall, PrimarySchool, SecondarySchool, SmallHotel, LargeHotel, Hospital, Outpatient, Warehouse, SuperMarket, FullServiceRestaurant, QuickServiceRestaurant, Laboratory, Courthouse. */
+    building_type?: string;
+    /** A boolean to indicate whether the efficiency standard should trigger an sizing run that sets the efficiencies of all HVAC equipment in the Model (False) or the standard should only be written into the OSM and the sizing run should be bypassed (True). Bypassing the sizing run is useful when you only want to check that the overall HVAC system architecture is correct and you do not want to wait the extra time that it takes to run the sizing calculation. */
+    bypass_efficiency_sizing?: boolean;
+
+    constructor(data?: ISizingParameter) {
+        super(data);
+        if (!data) {
+            this.type = "SizingParameter";
+            this.heating_factor = 1.25;
+            this.cooling_factor = 1.15;
+            this.bypass_efficiency_sizing = false;
+        }
+        this._discriminator = "SizingParameter";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "SizingParameter";
+            if (Array.isArray(_data["design_days"])) {
+                this.design_days = [] as any;
+                for (let item of _data["design_days"])
+                    this.design_days!.push(DesignDay.fromJS(item));
+            }
+            this.heating_factor = _data["heating_factor"] !== undefined ? _data["heating_factor"] : 1.25;
+            this.cooling_factor = _data["cooling_factor"] !== undefined ? _data["cooling_factor"] : 1.15;
+            this.efficiency_standard = _data["efficiency_standard"];
+            this.climate_zone = _data["climate_zone"];
+            this.building_type = _data["building_type"];
+            this.bypass_efficiency_sizing = _data["bypass_efficiency_sizing"] !== undefined ? _data["bypass_efficiency_sizing"] : false;
+        }
+    }
+
+    static override fromJS(data: any): SizingParameter {
+        data = typeof data === 'object' ? data : {};
+        let result = new SizingParameter();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        if (Array.isArray(this.design_days)) {
+            data["design_days"] = [];
+            for (let item of this.design_days)
+                data["design_days"].push(item.toJSON());
+        }
+        data["heating_factor"] = this.heating_factor;
+        data["cooling_factor"] = this.cooling_factor;
+        data["efficiency_standard"] = this.efficiency_standard;
+        data["climate_zone"] = this.climate_zone;
+        data["building_type"] = this.building_type;
+        data["bypass_efficiency_sizing"] = this.bypass_efficiency_sizing;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+/** Used to specify heating and cooling sizing criteria and safety factors. */
+export interface ISizingParameter extends I_OpenAPIGenBaseModel {
+    type?: string;
+    /** A list of DesignDays that represent the criteria for which the HVAC systems will be sized. */
+    design_days?: DesignDay[];
+    /** A number that will be multiplied by the peak heating load for each zone in order to size the heating system. */
+    heating_factor?: number;
+    /** A number that will be multiplied by the peak cooling load for each zone in order to size the heating system. */
+    cooling_factor?: number;
+    /** Text to specify the efficiency standard, which will automatically set the efficiencies of all HVAC equipment when provided. Note that providing a standard here will cause the OpenStudio translation process to perform an additional sizing calculation with EnergyPlus, which is needed since the default efficiencies of equipment vary depending on their size. THIS WILL SIGNIFICANTLY INCREASE TRANSLATION TIME TO OPENSTUDIO. However, it is often worthwhile when the goal is to match the HVAC specification with a particular standard. */
+    efficiency_standard?: EfficiencyStandards;
+    /** Text indicating the ASHRAE climate zone to be used with the efficiency_standard. When unspecified, the climate zone will be inferred from the design days on this sizing parameter object. */
+    climate_zone?: ClimateZones;
+    /** Text for the building type to be used in the efficiency_standard. If the type is not recognized or is None, it will be assumed that the building is a generic NonResidential. The following have specified systems per the standard:  Residential, NonResidential, MidriseApartment, HighriseApartment, LargeOffice, MediumOffice, SmallOffice, Retail, StripMall, PrimarySchool, SecondarySchool, SmallHotel, LargeHotel, Hospital, Outpatient, Warehouse, SuperMarket, FullServiceRestaurant, QuickServiceRestaurant, Laboratory, Courthouse. */
+    building_type?: string;
+    /** A boolean to indicate whether the efficiency standard should trigger an sizing run that sets the efficiencies of all HVAC equipment in the Model (False) or the standard should only be written into the OSM and the sizing run should be bypassed (True). Bypassing the sizing run is useful when you only want to check that the overall HVAC system architecture is correct and you do not want to wait the extra time that it takes to run the sizing calculation. */
+    bypass_efficiency_sizing?: boolean;
+}
+
+/** An enumeration. */
+export enum TerrianTypes {
+    Ocean = "Ocean",
+    Country = "Country",
+    Suburbs = "Suburbs",
+    Urban = "Urban",
+    City = "City",
+}
+
+/** The complete set of EnergyPlus Simulation Settings. */
+export class SimulationParameter extends _OpenAPIGenBaseModel implements ISimulationParameter {
+    readonly type: string = "SimulationParameter";
+    /** A SimulationOutput that lists the desired outputs from the simulation and the format in which to report them. */
+    output?: SimulationOutput;
+    /** A RunPeriod to describe the time period over which to run the simulation. */
+    run_period?: RunPeriod;
+    /** An integer for the number of timesteps per hour at which the energy calculation will be run. */
+    timestep?: number;
+    /** A SimulationControl object that describes which types of calculations to run. */
+    simulation_control?: SimulationControl;
+    /** A ShadowCalculation object describing settings for the EnergyPlus Shadow Calculation. */
+    shadow_calculation?: ShadowCalculation;
+    /** A SizingParameter object with criteria for sizing the heating and cooling system. */
+    sizing_parameter?: SizingParameter;
+    /** A number between -360 and 360 for the north direction in degrees.This is the counterclockwise difference between the North and the positive Y-axis. 90 is West and 270 is East. Note that this is different than the convention used in EnergyPlus, which uses clockwise difference instead of counterclockwise difference. */
+    north_angle?: number;
+    /** Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms. */
+    terrain_type?: TerrianTypes;
+
+    constructor(data?: ISimulationParameter) {
+        super(data);
+        if (!data) {
+            this.type = "SimulationParameter";
+            this.timestep = 6;
+            this.north_angle = 0;
+            this.terrain_type = TerrianTypes.City;
+        }
+        this._discriminator = "SimulationParameter";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "SimulationParameter";
+            this.output = _data["output"] ? SimulationOutput.fromJS(_data["output"]) : <any>undefined;
+            this.run_period = _data["run_period"] ? RunPeriod.fromJS(_data["run_period"]) : <any>undefined;
+            this.timestep = _data["timestep"] !== undefined ? _data["timestep"] : 6;
+            this.simulation_control = _data["simulation_control"] ? SimulationControl.fromJS(_data["simulation_control"]) : <any>undefined;
+            this.shadow_calculation = _data["shadow_calculation"] ? ShadowCalculation.fromJS(_data["shadow_calculation"]) : <any>undefined;
+            this.sizing_parameter = _data["sizing_parameter"] ? SizingParameter.fromJS(_data["sizing_parameter"]) : <any>undefined;
+            this.north_angle = _data["north_angle"] !== undefined ? _data["north_angle"] : 0;
+            this.terrain_type = _data["terrain_type"] !== undefined ? _data["terrain_type"] : TerrianTypes.City;
+        }
+    }
+
+    static override fromJS(data: any): SimulationParameter {
+        data = typeof data === 'object' ? data : {};
+        let result = new SimulationParameter();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["type"] = this.type;
+        data["output"] = this.output ? this.output.toJSON() : <any>undefined;
+        data["run_period"] = this.run_period ? this.run_period.toJSON() : <any>undefined;
+        data["timestep"] = this.timestep;
+        data["simulation_control"] = this.simulation_control ? this.simulation_control.toJSON() : <any>undefined;
+        data["shadow_calculation"] = this.shadow_calculation ? this.shadow_calculation.toJSON() : <any>undefined;
+        data["sizing_parameter"] = this.sizing_parameter ? this.sizing_parameter.toJSON() : <any>undefined;
+        data["north_angle"] = this.north_angle;
+        data["terrain_type"] = this.terrain_type;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+/** The complete set of EnergyPlus Simulation Settings. */
+export interface ISimulationParameter extends I_OpenAPIGenBaseModel {
+    type?: string;
+    /** A SimulationOutput that lists the desired outputs from the simulation and the format in which to report them. */
+    output?: SimulationOutput;
+    /** A RunPeriod to describe the time period over which to run the simulation. */
+    run_period?: RunPeriod;
+    /** An integer for the number of timesteps per hour at which the energy calculation will be run. */
+    timestep?: number;
+    /** A SimulationControl object that describes which types of calculations to run. */
+    simulation_control?: SimulationControl;
+    /** A ShadowCalculation object describing settings for the EnergyPlus Shadow Calculation. */
+    shadow_calculation?: ShadowCalculation;
+    /** A SizingParameter object with criteria for sizing the heating and cooling system. */
+    sizing_parameter?: SizingParameter;
+    /** A number between -360 and 360 for the north direction in degrees.This is the counterclockwise difference between the North and the positive Y-axis. 90 is West and 270 is East. Note that this is different than the convention used in EnergyPlus, which uses clockwise difference instead of counterclockwise difference. */
+    north_angle?: number;
+    /** Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms. */
+    terrain_type?: TerrianTypes;
+}
+
+/** Types of Honeybee/Dragonfly extensions. */
+export enum ExtensionTypes {
+    Core = "Core",
+    Radiance = "Radiance",
+    Energy = "Energy",
+}
+
+/** Types of Honeybee objects. */
+export enum ObjectTypes {
+    Shade = "Shade",
+    Aperture = "Aperture",
+    Door = "Door",
+    SubFace = "SubFace",
+    Face = "Face",
+    Room = "Room",
+    SensorGrid = "SensorGrid",
+    View = "View",
+    Modifier = "Modifier",
+    ModifierSet = "ModifierSet",
+    Material = "Material",
+    Construction = "Construction",
+    ConstructionSet = "ConstructionSet",
+    ScheduleTypeLimit = "ScheduleTypeLimit",
+    Schedule = "Schedule",
+    ProgramType = "ProgramType",
+    HVAC = "HVAC",
+    SHW = "SHW",
+    RoofSpecification = "RoofSpecification",
+    Room2D = "Room2D",
+    Story = "Story",
+    Building = "Building",
+}
+
+/** Types of Honeybee objects that can be parents. */
+export enum ParentTypes {
+    Aperture = "Aperture",
+    Door = "Door",
+    Face = "Face",
+    Room = "Room",
+    Story = "Story",
+    Building = "Building",
+}
+
+export class ValidationParent implements IValidationParent {
+    /** Text for the type of object that the parent is. */
+    parent_type!: ParentTypes;
+    /** Text string for the unique ID of the parent object. */
+    id!: string;
+    readonly type?: string;
+    /** Display name of the parent object. */
+    name?: string;
+
+    [key: string]: any;
+
+    constructor(data?: IValidationParent) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.type = "ValidationParent";
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.parent_type = _data["parent_type"];
+            this.id = _data["id"];
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "ValidationParent";
+            this.name = _data["name"];
+        }
+    }
+
+    static fromJS(data: any): ValidationParent {
+        data = typeof data === 'object' ? data : {};
+        let result = new ValidationParent();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["parent_type"] = this.parent_type;
+        data["id"] = this.id;
+        data["type"] = this.type;
+        data["name"] = this.name;
+        return data;
+    }
+}
+
+export interface IValidationParent {
+    /** Text for the type of object that the parent is. */
+    parent_type: ParentTypes;
+    /** Text string for the unique ID of the parent object. */
+    id: string;
+    type?: string;
+    /** Display name of the parent object. */
+    name?: string;
+
+    [key: string]: any;
+}
+
+/** A point object in 3D space. */
+export class Point3D implements IPoint3D {
+    /** Number for X coordinate. */
+    x!: number;
+    /** Number for Y coordinate. */
+    y!: number;
+    /** Number for Z coordinate. */
+    z!: number;
+    readonly type?: string;
+
+    constructor(data?: IPoint3D) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.type = "Point3D";
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.x = _data["x"];
+            this.y = _data["y"];
+            this.z = _data["z"];
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "Point3D";
+        }
+    }
+
+    static fromJS(data: any): Point3D {
+        data = typeof data === 'object' ? data : {};
+        let result = new Point3D();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["x"] = this.x;
+        data["y"] = this.y;
+        data["z"] = this.z;
+        data["type"] = this.type;
+        return data;
+    }
+}
+
+/** A point object in 3D space. */
+export interface IPoint3D {
+    /** Number for X coordinate. */
+    x: number;
+    /** Number for Y coordinate. */
+    y: number;
+    /** Number for Z coordinate. */
+    z: number;
+    type?: string;
+}
+
+/** A single line segment face in 3D space. */
+export class LineSegment3D implements ILineSegment3D {
+    /** Line segment base point as 3 (x, y, z) values. */
+    p!: number[];
+    /** Line segment direction vector as 3 (x, y, z) values. */
+    v!: number[];
+    readonly type?: string;
+
+    constructor(data?: ILineSegment3D) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.p = [];
+            this.v = [];
+            this.type = "LineSegment3D";
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["p"])) {
+                this.p = [] as any;
+                for (let item of _data["p"])
+                    this.p!.push(item);
+            }
+            if (Array.isArray(_data["v"])) {
+                this.v = [] as any;
+                for (let item of _data["v"])
+                    this.v!.push(item);
+            }
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "LineSegment3D";
+        }
+    }
+
+    static fromJS(data: any): LineSegment3D {
+        data = typeof data === 'object' ? data : {};
+        let result = new LineSegment3D();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.p)) {
+            data["p"] = [];
+            for (let item of this.p)
+                data["p"].push(item);
+        }
+        if (Array.isArray(this.v)) {
+            data["v"] = [];
+            for (let item of this.v)
+                data["v"].push(item);
+        }
+        data["type"] = this.type;
+        return data;
+    }
+}
+
+/** A single line segment face in 3D space. */
+export interface ILineSegment3D {
+    /** Line segment base point as 3 (x, y, z) values. */
+    p: number[];
+    /** Line segment direction vector as 3 (x, y, z) values. */
+    v: number[];
+    type?: string;
+}
+
+export class ValidationError implements IValidationError {
+    /** Text with 6 digits for the error code. The first two digits indicate whether the error is a core honeybee error (00) vs. an extension error (any non-zero number). The second two digits indicate the nature of the error (00 is an identifier error, 01 is a geometry error, 02 is an adjacency error). The third two digits are used to give a unique ID to each condition moving upwards from more specific/detailed objects/errors to coarser/more abstract objects/errors. A full list of error codes can be found here: https://docs.pollination.cloud/user-manual/get-started/troubleshooting/help-with-modeling-error-codes */
+    code!: string;
+    /** A human-readable version of the error code, typically not more than five words long. */
+    error_type!: string;
+    /** Text for the Honeybee extension from which the error originated (from the ExtensionTypes enumeration). */
+    extension_type!: ExtensionTypes;
+    /** Text for the type of object that caused the error. */
+    element_type!: ObjectTypes;
+    /** A list of text strings for the unique object IDs that caused the error. The list typically contains a single item but there are some types errors that stem from multiple objects like mis-matched area adjacencies or overlapping Room geometries. Note that the IDs in this list can be the identifier of a core object like a Room or a Face or it can be for an extension object like a SensorGrid or a Construction. */
+    element_id!: string[];
+    /** Text for the error message with a detailed description of what exactly is invalid about the element. */
+    message!: string;
+    readonly type?: string;
+    /** A list of text strings for the display names of the objects that caused the error. */
+    element_name?: string[];
+    /** A list lists where each sub-list corresponds to one of the objects in the element_id property. Each sub-list contains information for the parent objects of the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room. */
+    parents?: ValidationParent[][];
+    /** A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved. */
+    top_parents?: ValidationParent[];
+    /** An optional list of geometry objects that helps illustrate where exactly issues with invalid geometry exist within the Honeybee object. Examples include the naked and non-manifold line segments for non-solid Room geometries, the points of self-intersection for cases of self-intersecting geometry and out-of-plane vertices for non-planar objects. Oftentimes, zooming directly to these helper geometries will help end users understand invalid situations in their model faster than simple zooming to the invalid Honeybee object in its totality. */
+    helper_geometry?: Helper_geometry[];
+
+    [key: string]: any;
+
+    constructor(data?: IValidationError) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.element_id = [];
+            this.type = "ValidationError";
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.code = _data["code"];
+            this.error_type = _data["error_type"];
+            this.extension_type = _data["extension_type"];
+            this.element_type = _data["element_type"];
+            if (Array.isArray(_data["element_id"])) {
+                this.element_id = [] as any;
+                for (let item of _data["element_id"])
+                    this.element_id!.push(item);
+            }
+            this.message = _data["message"];
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "ValidationError";
+            if (Array.isArray(_data["element_name"])) {
+                this.element_name = [] as any;
+                for (let item of _data["element_name"])
+                    this.element_name!.push(item);
+            }
+            if (Array.isArray(_data["parents"])) {
+                this.parents = [] as any;
+                for (let item of _data["parents"])
+                    this.parents!.push(item);
+            }
+            if (Array.isArray(_data["top_parents"])) {
+                this.top_parents = [] as any;
+                for (let item of _data["top_parents"])
+                    this.top_parents!.push(ValidationParent.fromJS(item));
+            }
+            if (Array.isArray(_data["helper_geometry"])) {
+                this.helper_geometry = [] as any;
+                for (let item of _data["helper_geometry"])
+                    this.helper_geometry!.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): ValidationError {
+        data = typeof data === 'object' ? data : {};
+        let result = new ValidationError();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["code"] = this.code;
+        data["error_type"] = this.error_type;
+        data["extension_type"] = this.extension_type;
+        data["element_type"] = this.element_type;
+        if (Array.isArray(this.element_id)) {
+            data["element_id"] = [];
+            for (let item of this.element_id)
+                data["element_id"].push(item);
+        }
+        data["message"] = this.message;
+        data["type"] = this.type;
+        if (Array.isArray(this.element_name)) {
+            data["element_name"] = [];
+            for (let item of this.element_name)
+                data["element_name"].push(item);
+        }
+        if (Array.isArray(this.parents)) {
+            data["parents"] = [];
+            for (let item of this.parents)
+                data["parents"].push(item);
+        }
+        if (Array.isArray(this.top_parents)) {
+            data["top_parents"] = [];
+            for (let item of this.top_parents)
+                data["top_parents"].push(item.toJSON());
+        }
+        if (Array.isArray(this.helper_geometry)) {
+            data["helper_geometry"] = [];
+            for (let item of this.helper_geometry)
+                data["helper_geometry"].push(item);
+        }
+        return data;
+    }
+}
+
+export interface IValidationError {
+    /** Text with 6 digits for the error code. The first two digits indicate whether the error is a core honeybee error (00) vs. an extension error (any non-zero number). The second two digits indicate the nature of the error (00 is an identifier error, 01 is a geometry error, 02 is an adjacency error). The third two digits are used to give a unique ID to each condition moving upwards from more specific/detailed objects/errors to coarser/more abstract objects/errors. A full list of error codes can be found here: https://docs.pollination.cloud/user-manual/get-started/troubleshooting/help-with-modeling-error-codes */
+    code: string;
+    /** A human-readable version of the error code, typically not more than five words long. */
+    error_type: string;
+    /** Text for the Honeybee extension from which the error originated (from the ExtensionTypes enumeration). */
+    extension_type: ExtensionTypes;
+    /** Text for the type of object that caused the error. */
+    element_type: ObjectTypes;
+    /** A list of text strings for the unique object IDs that caused the error. The list typically contains a single item but there are some types errors that stem from multiple objects like mis-matched area adjacencies or overlapping Room geometries. Note that the IDs in this list can be the identifier of a core object like a Room or a Face or it can be for an extension object like a SensorGrid or a Construction. */
+    element_id: string[];
+    /** Text for the error message with a detailed description of what exactly is invalid about the element. */
+    message: string;
+    type?: string;
+    /** A list of text strings for the display names of the objects that caused the error. */
+    element_name?: string[];
+    /** A list lists where each sub-list corresponds to one of the objects in the element_id property. Each sub-list contains information for the parent objects of the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room. */
+    parents?: ValidationParent[][];
+    /** A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved. */
+    top_parents?: ValidationParent[];
+    /** An optional list of geometry objects that helps illustrate where exactly issues with invalid geometry exist within the Honeybee object. Examples include the naked and non-manifold line segments for non-solid Room geometries, the points of self-intersection for cases of self-intersecting geometry and out-of-plane vertices for non-planar objects. Oftentimes, zooming directly to these helper geometries will help end users understand invalid situations in their model faster than simple zooming to the invalid Honeybee object in its totality. */
+    helper_geometry?: Helper_geometry[];
+
+    [key: string]: any;
+}
+
+export class ValidationReport implements IValidationReport {
+    /** Text string for the version of honeybee-core or dragonfly-core that performed the validation. */
+    app_version!: string;
+    /** Text string for the version of honeybee-schema or dragonfly-schema that performed the validation. */
+    schema_version!: string;
+    /** Boolean to note whether the Model is valid or not. */
+    valid!: boolean;
+    readonly type?: string;
+    /** Text string for the name of the application that performed the validation. This is typically either Honeybee or Dragonfly. */
+    app_name?: string;
+    /** A text string containing an exception if the Model failed to serialize. It will be an empty string if serialization was successful. */
+    fatal_error?: string;
+    /** A list of objects for each error that was discovered in the model. This will be an empty list or None if no errors were found. */
+    errors?: ValidationError[];
+
+    [key: string]: any;
+
+    constructor(data?: IValidationReport) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.type = "ValidationReport";
+            this.app_name = "Honeybee";
+            this.fatal_error = "";
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.app_version = _data["app_version"];
+            this.schema_version = _data["schema_version"];
+            this.valid = _data["valid"];
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "ValidationReport";
+            this.app_name = _data["app_name"] !== undefined ? _data["app_name"] : "Honeybee";
+            this.fatal_error = _data["fatal_error"] !== undefined ? _data["fatal_error"] : "";
+            if (Array.isArray(_data["errors"])) {
+                this.errors = [] as any;
+                for (let item of _data["errors"])
+                    this.errors!.push(ValidationError.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ValidationReport {
+        data = typeof data === 'object' ? data : {};
+        let result = new ValidationReport();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["app_version"] = this.app_version;
+        data["schema_version"] = this.schema_version;
+        data["valid"] = this.valid;
+        data["type"] = this.type;
+        data["app_name"] = this.app_name;
+        data["fatal_error"] = this.fatal_error;
+        if (Array.isArray(this.errors)) {
+            data["errors"] = [];
+            for (let item of this.errors)
+                data["errors"].push(item.toJSON());
+        }
+        return data;
+    }
+}
+
+export interface IValidationReport {
+    /** Text string for the version of honeybee-core or dragonfly-core that performed the validation. */
+    app_version: string;
+    /** Text string for the version of honeybee-schema or dragonfly-schema that performed the validation. */
+    schema_version: string;
+    /** Boolean to note whether the Model is valid or not. */
+    valid: boolean;
+    type?: string;
+    /** Text string for the name of the application that performed the validation. This is typically either Honeybee or Dragonfly. */
+    app_name?: string;
+    /** A text string containing an exception if the Model failed to serialize. It will be an empty string if serialization was successful. */
+    fatal_error?: string;
+    /** A list of objects for each error that was discovered in the model. This will be an empty list or None if no errors were found. */
+    errors?: ValidationError[];
+
+    [key: string]: any;
+}
+
+/** Types of Honeybee geometry objects. */
+export enum GeometryObjectTypes {
+    Shade = "Shade",
+    Aperture = "Aperture",
+    Door = "Door",
+    Face = "Face",
+    Room = "Room",
+}
+
+export class ChangedObject extends _OpenAPIGenBaseModel implements IChangedObject {
+    /** Text for the type of object that has been changed. */
+    element_type!: GeometryObjectTypes;
+    /** Text string for the unique object ID that has changed. */
+    element_id!: string;
+    /** A boolean to note whether the geometry of the object has changed (True) or not (False). For the case of a Room, any change in the geometry of child Faces, Apertures or Doors will cause this property to be True. Note that this property is only True if the change in geometry produces a visible change greater than the base model tolerance. So converting the model between different unit systems, removing colinear vertices, or doing other transformations that are common for export to simulation engines will not trigger this property to become True. */
+    geometry_changed!: boolean;
+    /** A list of DisplayFace3D dictionaries for the new, changed geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been changed. Note that this attribute is always included in the ChangedObject, even when geometry_changed is False. */
+    geometry!: any[];
+    /** Text string for the display name of the object that has changed. */
+    element_name?: string;
+    /** A boolean to note whether the energy properties of the object have changed (True) or not (False) such that it is possible for the properties of the changed object to be applied to the base model. For Rooms, this property will only be true if the energy property assigned to the Room has changed and will not be true if a property assigned to an individual child Face or Aperture has changed. */
+    energy_changed?: boolean;
+    /** A boolean to note whether the radiance properties of the object have changed (True) or not (False) such that it is possible for the properties of the changed object to be applied to the base model. For Rooms, this property will only be true if the radiance property assigned to the Room has changed and will not be true if a property assigned to an individual child Face or Aperture has changed. */
+    radiance_changed?: boolean;
+    /** A list of DisplayFace3D dictionaries for the existing (base) geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been changed. This attribute is optional and will NOT be output if geometry_changed is False. */
+    existing_geometry?: any[];
+    readonly type: string = "ChangedObject";
+
+    [key: string]: any;
+
+    constructor(data?: IChangedObject) {
+        super(data);
+        if (!data) {
+            this.geometry = [];
+            this.energy_changed = false;
+            this.radiance_changed = false;
+            this.type = "ChangedObject";
+        }
+        this._discriminator = "ChangedObject";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.element_type = _data["element_type"];
+            this.element_id = _data["element_id"];
+            this.geometry_changed = _data["geometry_changed"];
+            if (Array.isArray(_data["geometry"])) {
+                this.geometry = [] as any;
+                for (let item of _data["geometry"])
+                    this.geometry!.push(item);
+            }
+            this.element_name = _data["element_name"];
+            this.energy_changed = _data["energy_changed"] !== undefined ? _data["energy_changed"] : false;
+            this.radiance_changed = _data["radiance_changed"] !== undefined ? _data["radiance_changed"] : false;
+            if (Array.isArray(_data["existing_geometry"])) {
+                this.existing_geometry = [] as any;
+                for (let item of _data["existing_geometry"])
+                    this.existing_geometry!.push(item);
+            }
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "ChangedObject";
+        }
+    }
+
+    static override fromJS(data: any): ChangedObject {
+        data = typeof data === 'object' ? data : {};
+        let result = new ChangedObject();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["element_type"] = this.element_type;
+        data["element_id"] = this.element_id;
+        data["geometry_changed"] = this.geometry_changed;
+        if (Array.isArray(this.geometry)) {
+            data["geometry"] = [];
+            for (let item of this.geometry)
+                data["geometry"].push(item);
+        }
+        data["element_name"] = this.element_name;
+        data["energy_changed"] = this.energy_changed;
+        data["radiance_changed"] = this.radiance_changed;
+        if (Array.isArray(this.existing_geometry)) {
+            data["existing_geometry"] = [];
+            for (let item of this.existing_geometry)
+                data["existing_geometry"].push(item);
+        }
+        data["type"] = this.type;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IChangedObject extends I_OpenAPIGenBaseModel {
+    /** Text for the type of object that has been changed. */
+    element_type: GeometryObjectTypes;
+    /** Text string for the unique object ID that has changed. */
+    element_id: string;
+    /** A boolean to note whether the geometry of the object has changed (True) or not (False). For the case of a Room, any change in the geometry of child Faces, Apertures or Doors will cause this property to be True. Note that this property is only True if the change in geometry produces a visible change greater than the base model tolerance. So converting the model between different unit systems, removing colinear vertices, or doing other transformations that are common for export to simulation engines will not trigger this property to become True. */
+    geometry_changed: boolean;
+    /** A list of DisplayFace3D dictionaries for the new, changed geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been changed. Note that this attribute is always included in the ChangedObject, even when geometry_changed is False. */
+    geometry: any[];
+    /** Text string for the display name of the object that has changed. */
+    element_name?: string;
+    /** A boolean to note whether the energy properties of the object have changed (True) or not (False) such that it is possible for the properties of the changed object to be applied to the base model. For Rooms, this property will only be true if the energy property assigned to the Room has changed and will not be true if a property assigned to an individual child Face or Aperture has changed. */
+    energy_changed?: boolean;
+    /** A boolean to note whether the radiance properties of the object have changed (True) or not (False) such that it is possible for the properties of the changed object to be applied to the base model. For Rooms, this property will only be true if the radiance property assigned to the Room has changed and will not be true if a property assigned to an individual child Face or Aperture has changed. */
+    radiance_changed?: boolean;
+    /** A list of DisplayFace3D dictionaries for the existing (base) geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been changed. This attribute is optional and will NOT be output if geometry_changed is False. */
+    existing_geometry?: any[];
+    type?: string;
+
+    [key: string]: any;
+}
+
+export class DeletedObject extends _OpenAPIGenBaseModel implements IDeletedObject {
+    /** Text for the type of object that has been changed. */
+    element_type!: GeometryObjectTypes;
+    /** Text string for the unique object ID that has changed. */
+    element_id!: string;
+    /** A list of DisplayFace3D dictionaries for the deleted geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been deleted. */
+    geometry!: any[];
+    /** Text string for the display name of the object that has changed. */
+    element_name?: string;
+    readonly type: string = "DeletedObject";
+
+    [key: string]: any;
+
+    constructor(data?: IDeletedObject) {
+        super(data);
+        if (!data) {
+            this.geometry = [];
+            this.type = "DeletedObject";
+        }
+        this._discriminator = "DeletedObject";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.element_type = _data["element_type"];
+            this.element_id = _data["element_id"];
+            if (Array.isArray(_data["geometry"])) {
+                this.geometry = [] as any;
+                for (let item of _data["geometry"])
+                    this.geometry!.push(item);
+            }
+            this.element_name = _data["element_name"];
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "DeletedObject";
+        }
+    }
+
+    static override fromJS(data: any): DeletedObject {
+        data = typeof data === 'object' ? data : {};
+        let result = new DeletedObject();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["element_type"] = this.element_type;
+        data["element_id"] = this.element_id;
+        if (Array.isArray(this.geometry)) {
+            data["geometry"] = [];
+            for (let item of this.geometry)
+                data["geometry"].push(item);
+        }
+        data["element_name"] = this.element_name;
+        data["type"] = this.type;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IDeletedObject extends I_OpenAPIGenBaseModel {
+    /** Text for the type of object that has been changed. */
+    element_type: GeometryObjectTypes;
+    /** Text string for the unique object ID that has changed. */
+    element_id: string;
+    /** A list of DisplayFace3D dictionaries for the deleted geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been deleted. */
+    geometry: any[];
+    /** Text string for the display name of the object that has changed. */
+    element_name?: string;
+    type?: string;
+
+    [key: string]: any;
+}
+
+export class AddedObject extends _OpenAPIGenBaseModel implements IAddedObject {
+    /** Text for the type of object that has been changed. */
+    element_type!: GeometryObjectTypes;
+    /** Text string for the unique object ID that has changed. */
+    element_id!: string;
+    /** A list of DisplayFace3D dictionaries for the added geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been added. */
+    geometry!: any[];
+    /** Text string for the display name of the object that has changed. */
+    element_name?: string;
+    readonly type: string = "AddedObject";
+
+    [key: string]: any;
+
+    constructor(data?: IAddedObject) {
+        super(data);
+        if (!data) {
+            this.geometry = [];
+            this.type = "AddedObject";
+        }
+        this._discriminator = "AddedObject";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.element_type = _data["element_type"];
+            this.element_id = _data["element_id"];
+            if (Array.isArray(_data["geometry"])) {
+                this.geometry = [] as any;
+                for (let item of _data["geometry"])
+                    this.geometry!.push(item);
+            }
+            this.element_name = _data["element_name"];
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "AddedObject";
+        }
+    }
+
+    static override fromJS(data: any): AddedObject {
+        data = typeof data === 'object' ? data : {};
+        let result = new AddedObject();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["element_type"] = this.element_type;
+        data["element_id"] = this.element_id;
+        if (Array.isArray(this.geometry)) {
+            data["geometry"] = [];
+            for (let item of this.geometry)
+                data["geometry"].push(item);
+        }
+        data["element_name"] = this.element_name;
+        data["type"] = this.type;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IAddedObject extends I_OpenAPIGenBaseModel {
+    /** Text for the type of object that has been changed. */
+    element_type: GeometryObjectTypes;
+    /** Text string for the unique object ID that has changed. */
+    element_id: string;
+    /** A list of DisplayFace3D dictionaries for the added geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been added. */
+    geometry: any[];
+    /** Text string for the display name of the object that has changed. */
+    element_name?: string;
+    type?: string;
+
+    [key: string]: any;
+}
+
+export class ComparisonReport extends _OpenAPIGenBaseModel implements IComparisonReport {
+    readonly type: string = "ComparisonReport";
+    /** A list of ChangedObject definitions for each top-level object that has changed in the model. To be a changed object, the object identifier must be the same in both models but some other property (either geometry or extension attributes) has experienced a meaningful change. */
+    changed_objects?: ChangedObject[];
+    /** A list of DeletedObject definitions for each top-level object that has been deleted in the process of going from the base model to the new model. */
+    deleted_objects?: DeletedObject[];
+    /** A list of AddedObject definitions for each top-level object that has been added in the process of going from the base model to the new model. */
+    added_objects?: AddedObject[];
+
+    [key: string]: any;
+
+    constructor(data?: IComparisonReport) {
+        super(data);
+        if (!data) {
+            this.type = "ComparisonReport";
+        }
+        this._discriminator = "ComparisonReport";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "ComparisonReport";
+            if (Array.isArray(_data["changed_objects"])) {
+                this.changed_objects = [] as any;
+                for (let item of _data["changed_objects"])
+                    this.changed_objects!.push(ChangedObject.fromJS(item));
+            }
+            if (Array.isArray(_data["deleted_objects"])) {
+                this.deleted_objects = [] as any;
+                for (let item of _data["deleted_objects"])
+                    this.deleted_objects!.push(DeletedObject.fromJS(item));
+            }
+            if (Array.isArray(_data["added_objects"])) {
+                this.added_objects = [] as any;
+                for (let item of _data["added_objects"])
+                    this.added_objects!.push(AddedObject.fromJS(item));
+            }
+        }
+    }
+
+    static override fromJS(data: any): ComparisonReport {
+        data = typeof data === 'object' ? data : {};
+        let result = new ComparisonReport();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["type"] = this.type;
+        if (Array.isArray(this.changed_objects)) {
+            data["changed_objects"] = [];
+            for (let item of this.changed_objects)
+                data["changed_objects"].push(item.toJSON());
+        }
+        if (Array.isArray(this.deleted_objects)) {
+            data["deleted_objects"] = [];
+            for (let item of this.deleted_objects)
+                data["deleted_objects"].push(item.toJSON());
+        }
+        if (Array.isArray(this.added_objects)) {
+            data["added_objects"] = [];
+            for (let item of this.added_objects)
+                data["added_objects"].push(item.toJSON());
+        }
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IComparisonReport extends I_OpenAPIGenBaseModel {
+    type?: string;
+    /** A list of ChangedObject definitions for each top-level object that has changed in the model. To be a changed object, the object identifier must be the same in both models but some other property (either geometry or extension attributes) has experienced a meaningful change. */
+    changed_objects?: ChangedObject[];
+    /** A list of DeletedObject definitions for each top-level object that has been deleted in the process of going from the base model to the new model. */
+    deleted_objects?: DeletedObject[];
+    /** A list of AddedObject definitions for each top-level object that has been added in the process of going from the base model to the new model. */
+    added_objects?: AddedObject[];
+
+    [key: string]: any;
+}
+
+export class _DiffObjectBase extends _OpenAPIGenBaseModel implements I_DiffObjectBase {
+    /** Text for the type of object that has been changed. */
+    element_type!: GeometryObjectTypes;
+    /** Text string for the unique object ID that has changed. */
+    element_id!: string;
+    /** Text string for the display name of the object that has changed. */
+    element_name?: string;
+    readonly type: string = "_DiffObjectBase";
+
+    [key: string]: any;
+
+    constructor(data?: I_DiffObjectBase) {
+        super(data);
+        if (!data) {
+            this.type = "_DiffObjectBase";
+        }
+        this._discriminator = "_DiffObjectBase";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.element_type = _data["element_type"];
+            this.element_id = _data["element_id"];
+            this.element_name = _data["element_name"];
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "_DiffObjectBase";
+        }
+    }
+
+    static override fromJS(data: any): _DiffObjectBase {
+        data = typeof data === 'object' ? data : {};
+        let result = new _DiffObjectBase();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["element_type"] = this.element_type;
+        data["element_id"] = this.element_id;
+        data["element_name"] = this.element_name;
+        data["type"] = this.type;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface I_DiffObjectBase extends I_OpenAPIGenBaseModel {
+    /** Text for the type of object that has been changed. */
+    element_type: GeometryObjectTypes;
+    /** Text string for the unique object ID that has changed. */
+    element_id: string;
+    /** Text string for the display name of the object that has changed. */
+    element_name?: string;
+    type?: string;
+
+    [key: string]: any;
+}
+
+export class AddedInstruction extends _OpenAPIGenBaseModel implements IAddedInstruction {
+    /** Text for the type of object that has been changed. */
+    element_type!: GeometryObjectTypes;
+    /** Text string for the unique object ID that has changed. */
+    element_id!: string;
+    /** Text string for the display name of the object that has changed. */
+    element_name?: string;
+    readonly type: string = "AddedInstruction";
+
+    [key: string]: any;
+
+    constructor(data?: IAddedInstruction) {
+        super(data);
+        if (!data) {
+            this.type = "AddedInstruction";
+        }
+        this._discriminator = "AddedInstruction";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.element_type = _data["element_type"];
+            this.element_id = _data["element_id"];
+            this.element_name = _data["element_name"];
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "AddedInstruction";
+        }
+    }
+
+    static override fromJS(data: any): AddedInstruction {
+        data = typeof data === 'object' ? data : {};
+        let result = new AddedInstruction();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["element_type"] = this.element_type;
+        data["element_id"] = this.element_id;
+        data["element_name"] = this.element_name;
+        data["type"] = this.type;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IAddedInstruction extends I_OpenAPIGenBaseModel {
+    /** Text for the type of object that has been changed. */
+    element_type: GeometryObjectTypes;
+    /** Text string for the unique object ID that has changed. */
+    element_id: string;
+    /** Text string for the display name of the object that has changed. */
+    element_name?: string;
+    type?: string;
+
+    [key: string]: any;
+}
+
+export class DeletedInstruction extends _OpenAPIGenBaseModel implements IDeletedInstruction {
+    /** Text for the type of object that has been changed. */
+    element_type!: GeometryObjectTypes;
+    /** Text string for the unique object ID that has changed. */
+    element_id!: string;
+    /** Text string for the display name of the object that has changed. */
+    element_name?: string;
+    readonly type: string = "DeletedInstruction";
+
+    [key: string]: any;
+
+    constructor(data?: IDeletedInstruction) {
+        super(data);
+        if (!data) {
+            this.type = "DeletedInstruction";
+        }
+        this._discriminator = "DeletedInstruction";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.element_type = _data["element_type"];
+            this.element_id = _data["element_id"];
+            this.element_name = _data["element_name"];
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "DeletedInstruction";
+        }
+    }
+
+    static override fromJS(data: any): DeletedInstruction {
+        data = typeof data === 'object' ? data : {};
+        let result = new DeletedInstruction();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["element_type"] = this.element_type;
+        data["element_id"] = this.element_id;
+        data["element_name"] = this.element_name;
+        data["type"] = this.type;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IDeletedInstruction extends I_OpenAPIGenBaseModel {
+    /** Text for the type of object that has been changed. */
+    element_type: GeometryObjectTypes;
+    /** Text string for the unique object ID that has changed. */
+    element_id: string;
+    /** Text string for the display name of the object that has changed. */
+    element_name?: string;
+    type?: string;
+
+    [key: string]: any;
+}
+
+export class ChangedInstruction extends _OpenAPIGenBaseModel implements IChangedInstruction {
+    /** Text for the type of object that has been changed. */
+    element_type!: GeometryObjectTypes;
+    /** Text string for the unique object ID that has changed. */
+    element_id!: string;
+    /** Text string for the display name of the object that has changed. */
+    element_name?: string;
+    /** A boolean to note whether the geometry of the object in the new/updated model should replace the base/existing geometry (True) or the existing geometry should be kept (False). */
+    update_geometry?: boolean;
+    /** A boolean to note whether the energy properties of the object in the new/updated model should replace the base/existing energy properties (True) or the base/existing energy properties should be kept (False). */
+    update_energy?: boolean;
+    /** A boolean to note whether the radiance properties of the object in the new/updated model should replace the base/existing radiance properties (True) or the base/existing radiance properties should be kept (False). */
+    update_radiance?: boolean;
+    readonly type: string = "ChangedInstruction";
+
+    [key: string]: any;
+
+    constructor(data?: IChangedInstruction) {
+        super(data);
+        if (!data) {
+            this.update_geometry = true;
+            this.update_energy = true;
+            this.update_radiance = true;
+            this.type = "ChangedInstruction";
+        }
+        this._discriminator = "ChangedInstruction";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.element_type = _data["element_type"];
+            this.element_id = _data["element_id"];
+            this.element_name = _data["element_name"];
+            this.update_geometry = _data["update_geometry"] !== undefined ? _data["update_geometry"] : true;
+            this.update_energy = _data["update_energy"] !== undefined ? _data["update_energy"] : true;
+            this.update_radiance = _data["update_radiance"] !== undefined ? _data["update_radiance"] : true;
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "ChangedInstruction";
+        }
+    }
+
+    static override fromJS(data: any): ChangedInstruction {
+        data = typeof data === 'object' ? data : {};
+        let result = new ChangedInstruction();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["element_type"] = this.element_type;
+        data["element_id"] = this.element_id;
+        data["element_name"] = this.element_name;
+        data["update_geometry"] = this.update_geometry;
+        data["update_energy"] = this.update_energy;
+        data["update_radiance"] = this.update_radiance;
+        data["type"] = this.type;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IChangedInstruction extends I_OpenAPIGenBaseModel {
+    /** Text for the type of object that has been changed. */
+    element_type: GeometryObjectTypes;
+    /** Text string for the unique object ID that has changed. */
+    element_id: string;
+    /** Text string for the display name of the object that has changed. */
+    element_name?: string;
+    /** A boolean to note whether the geometry of the object in the new/updated model should replace the base/existing geometry (True) or the existing geometry should be kept (False). */
+    update_geometry?: boolean;
+    /** A boolean to note whether the energy properties of the object in the new/updated model should replace the base/existing energy properties (True) or the base/existing energy properties should be kept (False). */
+    update_energy?: boolean;
+    /** A boolean to note whether the radiance properties of the object in the new/updated model should replace the base/existing radiance properties (True) or the base/existing radiance properties should be kept (False). */
+    update_radiance?: boolean;
+    type?: string;
+
+    [key: string]: any;
+}
+
+export class SyncInstructions extends _OpenAPIGenBaseModel implements ISyncInstructions {
+    readonly type: string = "SyncInstructions";
+    /** A list of ChangedInstruction definitions for each top-level object with properties to transfer from the new/updated model to the base/existing model. */
+    changed_objects?: ChangedInstruction[];
+    /** A list of DeletedInstruction definitions for each top-level object to be deleted from the base/existing model. */
+    deleted_objects?: DeletedInstruction[];
+    /** A list of AddedInstruction definitions for each top-level object to be added to the base/existing model from the new/updated model. */
+    added_objects?: AddedInstruction[];
+
+    [key: string]: any;
+
+    constructor(data?: ISyncInstructions) {
+        super(data);
+        if (!data) {
+            this.type = "SyncInstructions";
+        }
+        this._discriminator = "SyncInstructions";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "SyncInstructions";
+            if (Array.isArray(_data["changed_objects"])) {
+                this.changed_objects = [] as any;
+                for (let item of _data["changed_objects"])
+                    this.changed_objects!.push(ChangedInstruction.fromJS(item));
+            }
+            if (Array.isArray(_data["deleted_objects"])) {
+                this.deleted_objects = [] as any;
+                for (let item of _data["deleted_objects"])
+                    this.deleted_objects!.push(DeletedInstruction.fromJS(item));
+            }
+            if (Array.isArray(_data["added_objects"])) {
+                this.added_objects = [] as any;
+                for (let item of _data["added_objects"])
+                    this.added_objects!.push(AddedInstruction.fromJS(item));
+            }
+        }
+    }
+
+    static override fromJS(data: any): SyncInstructions {
+        data = typeof data === 'object' ? data : {};
+        let result = new SyncInstructions();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["type"] = this.type;
+        if (Array.isArray(this.changed_objects)) {
+            data["changed_objects"] = [];
+            for (let item of this.changed_objects)
+                data["changed_objects"].push(item.toJSON());
+        }
+        if (Array.isArray(this.deleted_objects)) {
+            data["deleted_objects"] = [];
+            for (let item of this.deleted_objects)
+                data["deleted_objects"].push(item.toJSON());
+        }
+        if (Array.isArray(this.added_objects)) {
+            data["added_objects"] = [];
+            for (let item of this.added_objects)
+                data["added_objects"].push(item.toJSON());
+        }
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface ISyncInstructions extends I_OpenAPIGenBaseModel {
+    type?: string;
+    /** A list of ChangedInstruction definitions for each top-level object with properties to transfer from the new/updated model to the base/existing model. */
+    changed_objects?: ChangedInstruction[];
+    /** A list of DeletedInstruction definitions for each top-level object to be deleted from the base/existing model. */
+    deleted_objects?: DeletedInstruction[];
+    /** A list of AddedInstruction definitions for each top-level object to be added to the base/existing model from the new/updated model. */
+    added_objects?: AddedInstruction[];
+
+    [key: string]: any;
+}
+
+/** A Ladybug Location. */
+export class Location extends _OpenAPIGenBaseModel implements ILocation {
+    readonly type: string = "Location";
+    /** Name of the city as a string. */
+    city?: string;
+    /** Location latitude between -90 and 90 (Default: 0). */
+    latitude?: number;
+    /** Location longitude between -180 (west) and 180 (east) (Default: 0). */
+    longitude?: number;
+    /** Time zone between -12 hours (west) and +14 hours (east). If None, the time zone will be an estimated integer value derived from the longitude in accordance with solar time. */
+    time_zone?: Time_zone;
+    /** A number for elevation of the location in meters. (Default: 0). */
+    elevation?: number;
+    /** ID of the location if the location is representing a weather station. */
+    station_id?: string;
+    /** Source of data (e.g. TMY, TMY3). */
+    source?: string;
+
+    [key: string]: any;
+
+    constructor(data?: ILocation) {
+        super(data);
+        if (!data) {
+            this.type = "Location";
+            this.city = "-";
+            this.latitude = 0;
+            this.longitude = 0;
+            this.elevation = 0;
+        }
+        this._discriminator = "Location";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "Location";
+            this.city = _data["city"] !== undefined ? _data["city"] : "-";
+            this.latitude = _data["latitude"] !== undefined ? _data["latitude"] : 0;
+            this.longitude = _data["longitude"] !== undefined ? _data["longitude"] : 0;
+            this.time_zone = _data["time_zone"];
+            this.elevation = _data["elevation"] !== undefined ? _data["elevation"] : 0;
+            this.station_id = _data["station_id"];
+            this.source = _data["source"];
+        }
+    }
+
+    static override fromJS(data: any): Location {
+        data = typeof data === 'object' ? data : {};
+        let result = new Location();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["type"] = this.type;
+        data["city"] = this.city;
+        data["latitude"] = this.latitude;
+        data["longitude"] = this.longitude;
+        data["time_zone"] = this.time_zone;
+        data["elevation"] = this.elevation;
+        data["station_id"] = this.station_id;
+        data["source"] = this.source;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+/** A Ladybug Location. */
+export interface ILocation extends I_OpenAPIGenBaseModel {
+    type?: string;
+    /** Name of the city as a string. */
+    city?: string;
+    /** Location latitude between -90 and 90 (Default: 0). */
+    latitude?: number;
+    /** Location longitude between -180 (west) and 180 (east) (Default: 0). */
+    longitude?: number;
+    /** Time zone between -12 hours (west) and +14 hours (east). If None, the time zone will be an estimated integer value derived from the longitude in accordance with solar time. */
+    time_zone?: Time_zone;
+    /** A number for elevation of the location in meters. (Default: 0). */
+    elevation?: number;
+    /** ID of the location if the location is representing a weather station. */
+    station_id?: string;
+    /** Source of data (e.g. TMY, TMY3). */
+    source?: string;
+
+    [key: string]: any;
+}
+
+/** An enumeration. */
+export enum BuildingTypes {
+    Residential = "Residential",
+    NonResidential = "NonResidential",
+    MidriseApartment = "MidriseApartment",
+    HighriseApartment = "HighriseApartment",
+    LargeOffice = "LargeOffice",
+    MediumOffice = "MediumOffice",
+    SmallOffice = "SmallOffice",
+    Retail = "Retail",
+    StripMall = "StripMall",
+    PrimarySchool = "PrimarySchool",
+    SecondarySchool = "SecondarySchool",
+    SmallHotel = "SmallHotel",
+    LargeHotel = "LargeHotel",
+    Hospital = "Hospital",
+    Outpatient = "Outpatient",
+    Warehouse = "Warehouse",
+    SuperMarket = "SuperMarket",
+    FullServiceRestaurant = "FullServiceRestaurant",
+    QuickServiceRestaurant = "QuickServiceRestaurant",
+    Laboratory = "Laboratory",
+    Courthouse = "Courthouse",
+}
+
+/** Project information. */
+export class ProjectInfo extends _OpenAPIGenBaseModel implements IProjectInfo {
+    readonly type: string = "ProjectInfo";
+    /** A number between -360 to 360 where positive values rotate the compass counterclockwise (towards the West) and negative values rotate the compass clockwise (towards the East). */
+    north?: number;
+    /** A list of URLs to zip files that includes EPW, DDY and STAT files. You can find these URLs from the EPWMAP. The first URL will be used as the primary weather file. */
+    weather_urls?: string[];
+    /** Project location. This value is usually generated from the information in the weather files. */
+    location?: Location;
+    /** Project location climate zone. */
+    ashrae_climate_zone?: ClimateZones;
+    /** A list of building types for the project. The first building type is considered the primary type for the project. */
+    building_type?: BuildingTypes[];
+    /** A list of building vintages (e.g. ASHRAE_2019, ASHRAE_2016). */
+    vintage?: EfficiencyStandards[];
+
+    [key: string]: any;
+
+    constructor(data?: IProjectInfo) {
+        super(data);
+        if (!data) {
+            this.type = "ProjectInfo";
+            this.north = 0;
+        }
+        this._discriminator = "ProjectInfo";
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            (<any>this).type = _data["type"] !== undefined ? _data["type"] : "ProjectInfo";
+            this.north = _data["north"] !== undefined ? _data["north"] : 0;
+            if (Array.isArray(_data["weather_urls"])) {
+                this.weather_urls = [] as any;
+                for (let item of _data["weather_urls"])
+                    this.weather_urls!.push(item);
+            }
+            this.location = _data["location"] ? Location.fromJS(_data["location"]) : <any>undefined;
+            this.ashrae_climate_zone = _data["ashrae_climate_zone"];
+            if (Array.isArray(_data["building_type"])) {
+                this.building_type = [] as any;
+                for (let item of _data["building_type"])
+                    this.building_type!.push(item);
+            }
+            if (Array.isArray(_data["vintage"])) {
+                this.vintage = [] as any;
+                for (let item of _data["vintage"])
+                    this.vintage!.push(item);
+            }
+        }
+    }
+
+    static override fromJS(data: any): ProjectInfo {
+        data = typeof data === 'object' ? data : {};
+        let result = new ProjectInfo();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["type"] = this.type;
+        data["north"] = this.north;
+        if (Array.isArray(this.weather_urls)) {
+            data["weather_urls"] = [];
+            for (let item of this.weather_urls)
+                data["weather_urls"].push(item);
+        }
+        data["location"] = this.location ? this.location.toJSON() : <any>undefined;
+        data["ashrae_climate_zone"] = this.ashrae_climate_zone;
+        if (Array.isArray(this.building_type)) {
+            data["building_type"] = [];
+            for (let item of this.building_type)
+                data["building_type"].push(item);
+        }
+        if (Array.isArray(this.vintage)) {
+            data["vintage"] = [];
+            for (let item of this.vintage)
+                data["vintage"].push(item);
+        }
+        super.toJSON(data);
+        return data;
+    }
+}
+
+/** Project information. */
+export interface IProjectInfo extends I_OpenAPIGenBaseModel {
+    type?: string;
+    /** A number between -360 to 360 where positive values rotate the compass counterclockwise (towards the West) and negative values rotate the compass clockwise (towards the East). */
+    north?: number;
+    /** A list of URLs to zip files that includes EPW, DDY and STAT files. You can find these URLs from the EPWMAP. The first URL will be used as the primary weather file. */
+    weather_urls?: string[];
+    /** Project location. This value is usually generated from the information in the weather files. */
+    location?: Location;
+    /** Project location climate zone. */
+    ashrae_climate_zone?: ClimateZones;
+    /** A list of building types for the project. The first building type is considered the primary type for the project. */
+    building_type?: BuildingTypes[];
+    /** A list of building vintages (e.g. ASHRAE_2019, ASHRAE_2016). */
+    vintage?: EfficiencyStandards[];
+
+    [key: string]: any;
+}
+
 export class Solar_reflectance_back implements ISolar_reflectance_back {
 
     [key: string]: any;
@@ -19146,6 +21863,138 @@ export class interior_modifier6 implements Iinterior_modifier6 {
 }
 
 export interface Iinterior_modifier6 {
+
+    [key: string]: any;
+}
+
+export class Sky_condition implements ISky_condition {
+
+    [key: string]: any;
+
+    constructor(data?: ISky_condition) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+        }
+    }
+
+    static fromJS(data: any): Sky_condition {
+        data = typeof data === 'object' ? data : {};
+        let result = new Sky_condition();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        return data;
+    }
+}
+
+export interface ISky_condition {
+
+    [key: string]: any;
+}
+
+export class Helper_geometry implements IHelper_geometry {
+
+    [key: string]: any;
+
+    constructor(data?: IHelper_geometry) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+        }
+    }
+
+    static fromJS(data: any): Helper_geometry {
+        data = typeof data === 'object' ? data : {};
+        let result = new Helper_geometry();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        return data;
+    }
+}
+
+export interface IHelper_geometry {
+
+    [key: string]: any;
+}
+
+export class Time_zone implements ITime_zone {
+
+    [key: string]: any;
+
+    constructor(data?: ITime_zone) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+        }
+    }
+
+    static fromJS(data: any): Time_zone {
+        data = typeof data === 'object' ? data : {};
+        let result = new Time_zone();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        return data;
+    }
+}
+
+export interface ITime_zone {
 
     [key: string]: any;
 }
