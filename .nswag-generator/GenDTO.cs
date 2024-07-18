@@ -9,6 +9,10 @@ using NJsonSchema.Visitors;
 using NSwag;
 using NSwag.CodeGeneration;
 using Newtonsoft.Json.Linq;
+using Fluid;
+using TemplateModels;
+using System.IO;
+using NJsonSchema.CodeGeneration.TypeScript;
 
 namespace SchemaGenerator;
 
@@ -24,12 +28,13 @@ internal class GenDTO
 
         var rootDir = System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(workingDir));
         var outputDir = System.IO.Path.Combine(rootDir, "Output");
+        var templateDir = System.IO.Path.Combine(rootDir, "Templates");
         System.IO.Directory.CreateDirectory(outputDir);
 
 
         //var schemaFile = System.IO.Path.Combine(outputDir, "schema.json");
         var jsons = new[]
-        { 
+        {
             "model_inheritance.json",
             "simulation-parameter_inheritance.json",
             "validation-report.json",
@@ -39,7 +44,7 @@ internal class GenDTO
 
         };
 
-        var dic = @"C:\Users\mingo\Repos\pollination\honeybee-schema-dotnet\.openapi-docs";
+        var dic = @"D:\Dev\Schema\honeybee-schema-dotnet\.openapi-docs";
       
 
         JObject docJson = null;
@@ -74,6 +79,37 @@ internal class GenDTO
 
         var doc = OpenApiDocument.FromJsonAsync(docJson.ToString()).Result;
 
+        // tsTemplate
+        //var tsTemplate = System.IO.Path.Combine(templateDir, "TypeScript");
+        //var sc = doc.Components.Schemas;
+        //foreach (var item in sc)
+        //{
+        //    var key = item.Key;
+        //    var value = item.Value;
+
+        //    //if (key == "Location")
+        //    //{
+        //    //    var timez = value.ActualProperties["time_zone"];
+        //    //    var isAny = timez.AnyOf;
+        //    //}
+
+        //    if (key != "_OpenAPIGenBaseModel")
+        //    {
+        //        continue;
+        //    }
+
+        //    var isAb = value.IsAbstract;
+        //    //value.IsAbstract = false;
+
+
+        //    var classModel = new ClassTemplateModel(doc, value);
+        //    var tsFile = GenClass(tsTemplate, classModel, outputDir, ".ts");
+        //    Console.WriteLine($"Generated file is added as {tsFile}");
+
+        //}
+
+        var tsFile = ConvertToTypeScript(doc, rootDir, outputDir);
+        Console.WriteLine($"Generated file is added as {tsFile}");
 
 
         //var csFile = ConvertToCSharp(doc, rootDir, outputDir);
@@ -81,12 +117,13 @@ internal class GenDTO
         //System.IO.File.Copy(csFile, targetCs, true);
         //Console.WriteLine($"Generated file is added as {targetCs}");
 
-        var tsFile = ConvertToTypeScript(doc, outputDir);
+
+
         //var dir = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(rootDir), "TypeScriptSDK", "models");
         //System.IO.Directory.CreateDirectory(dir);
         //var targetTs = System.IO.Path.Combine(dir, System.IO.Path.GetFileName(tsFile));
         //System.IO.File.Copy(tsFile, targetTs, true);
-        Console.WriteLine($"Generated file is added as {tsFile}");
+
 
         // generate processors
         //GenProcessor.Execute();
@@ -124,7 +161,7 @@ internal class GenDTO
     //    return csharpFile;
     //}
 
-    private static string ConvertToTypeScript(OpenApiDocument apiDoc, string outputDir)
+    private static string ConvertToTypeScript(OpenApiDocument apiDoc, string rootDir, string outputDir)
     {
         // convert it to TypeScript
         var tsSettings = new NSwag.CodeGeneration.TypeScript.TypeScriptClientGeneratorSettings()
@@ -142,11 +179,15 @@ internal class GenDTO
                 TypeScriptVersion = 4.3m,
                 GenerateDefaultValues = true,
                 ConvertConstructorInterfaceData = false,
+                
+                TemplateDirectory =   System.IO.Path.Combine(rootDir, "Templates", "TypeScript"),
                 //EnumStyle = NJsonSchema.CodeGeneration.TypeScript.TypeScriptEnumStyle.StringLiteral,
             }
             //,ConfigurationClass =
         };
-        var tsGenerator = new NSwag.CodeGeneration.TypeScript.TypeScriptClientGenerator(apiDoc, tsSettings);
+        var resolver = new CustomTypeResolver(tsSettings.TypeScriptGeneratorSettings);
+        var tsGenerator = new NSwag.CodeGeneration.TypeScript.TypeScriptClientGenerator(apiDoc, tsSettings, resolver);
+        //var generator = new TypeScriptGenerator(apiDoc, settings, resolver);
         var tsCode = tsGenerator.GenerateFile();
 
         // post process
@@ -158,6 +199,8 @@ internal class GenDTO
 
         return tsFile;
     }
+
+   
 
     //private static OpenApiDocument GenSdkDoc()
     //{
@@ -328,7 +371,58 @@ internal class GenDTO
         //schema.Definitions.Add(classTypeName, gblRef);
     }
 
+    private static string GenClass(string templateDir, ClassTemplateModel model, string outputDir, string fileExt = ".cs")
+    {
+        var templateSource = File.ReadAllText(Path.Combine(templateDir, "Class.liquid"), System.Text.Encoding.UTF8);
+        var code = Gen(templateSource, model);
+        var file = System.IO.Path.Combine(outputDir, $"{model.ClassName}{fileExt}");
+        System.IO.File.WriteAllText(file, code, System.Text.Encoding.UTF8);
+        return file;
+    }
+
+    private static string Gen(string templateSource, object model)
+    {
+
+        var parser = new FluidParser();
+        var options = new TemplateOptions();
+        options.MemberAccessStrategy.Register<ClassTemplateModel>();
+        options.MemberAccessStrategy.Register<MethodTemplateModel>();
+        options.MemberAccessStrategy.Register<ParamTemplateModel>();
+
+        if (parser.TryParse(templateSource, out var template, out var error))
+        {
+            var context = new TemplateContext(model, options);
+            var code = template.Render(context);
+            return code;
+        }
+        else
+        {
+            return $"Error: {error}";
+        }
+    }
+
     //private static 
+}
+
+
+public class CustomTypeResolver : TypeScriptTypeResolver
+{
+    public CustomTypeResolver(TypeScriptGeneratorSettings settings) : base(settings) { }
+
+    public override string Resolve(JsonSchema schema, bool isNullable, string typeNameHint)
+    {
+        if (schema.AnyOf.Count > 0)
+        {
+            var types = new List<string>();
+            foreach (var subSchema in schema.AnyOf)
+            {
+                types.Add(Resolve(subSchema, isNullable, typeNameHint));
+            }
+            return string.Join(" | ", types);
+        }
+        return base.Resolve(schema, isNullable, typeNameHint);
+    }
+
 }
 //public class DoubleToDecimalVisitor : JsonSchemaVisitorBase
 //{
