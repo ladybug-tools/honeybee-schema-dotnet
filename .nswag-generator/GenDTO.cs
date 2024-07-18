@@ -413,12 +413,16 @@ public class CustomTypeResolver : TypeScriptTypeResolver
     {
         if (schema.AnyOf.Count > 0)
         {
+            var isArray = schema.ParentSchema.IsArray;
+
             var types = new List<string>();
             foreach (var subSchema in schema.AnyOf)
             {
                 types.Add(Resolve(subSchema, isNullable, typeNameHint));
             }
-            return string.Join(" | ", types);
+
+            var ts = string.Join(" | ", types);
+            return isArray ? $"({ts})" : ts;
         }
         return base.Resolve(schema, isNullable, typeNameHint);
     }
