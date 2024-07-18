@@ -11,7 +11,7 @@ on:
 jobs:
   release:
     name: release
-    if: github.repository_owner == 'pollination'
+    if: github.repository_owner == 'ladybug-tools'
     runs-on: ubuntu-latest
     env:
       CI: ""
@@ -27,15 +27,18 @@ jobs:
           node-version: lts/*
 
       - name: Install dependencies
-        run: make module-install
+        working-directory: src/TypeScriptSDK
+        run: npm i
 
       - name: Build module
-        run: make module-prod
+        working-directory: src/TypeScriptSDK
+        run: npm run build
 
       - name: Install semantic-release
         run: npm install -g semantic-release@18.0.0
 
       - name: Release
+        working-directory: src/TypeScriptSDK
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -43,4 +46,4 @@ jobs:
           GIT_AUTHOR_EMAIL: ${{ secrets.POLLINATION_LADYBUGBOT_EMAIL }}
           GIT_COMMITTER_NAME: ladybugbot
           GIT_COMMITTER_EMAIL: ${{ secrets.POLLINATION_LADYBUGBOT_EMAIL }}
-        run: make NPM-publish
+        run: npx semantic-release@^18.0.0 --branches master
