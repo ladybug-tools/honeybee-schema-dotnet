@@ -9,8 +9,8 @@ using NJsonSchema.Visitors;
 using NSwag;
 using NSwag.CodeGeneration;
 using Newtonsoft.Json.Linq;
-using Fluid;
-using TemplateModels;
+// using Fluid;
+// using TemplateModels;
 using System.IO;
 using NJsonSchema.CodeGeneration.TypeScript;
 
@@ -371,35 +371,35 @@ internal class GenDTO
         //schema.Definitions.Add(classTypeName, gblRef);
     }
 
-    private static string GenClass(string templateDir, ClassTemplateModel model, string outputDir, string fileExt = ".cs")
-    {
-        var templateSource = File.ReadAllText(Path.Combine(templateDir, "Class.liquid"), System.Text.Encoding.UTF8);
-        var code = Gen(templateSource, model);
-        var file = System.IO.Path.Combine(outputDir, $"{model.ClassName}{fileExt}");
-        System.IO.File.WriteAllText(file, code, System.Text.Encoding.UTF8);
-        return file;
-    }
+    //private static string GenClass(string templateDir, ClassTemplateModel model, string outputDir, string fileExt = ".cs")
+    //{
+    //    var templateSource = File.ReadAllText(Path.Combine(templateDir, "Class.liquid"), System.Text.Encoding.UTF8);
+    //    var code = Gen(templateSource, model);
+    //    var file = System.IO.Path.Combine(outputDir, $"{model.ClassName}{fileExt}");
+    //    System.IO.File.WriteAllText(file, code, System.Text.Encoding.UTF8);
+    //    return file;
+    //}
 
-    private static string Gen(string templateSource, object model)
-    {
+    //private static string Gen(string templateSource, object model)
+    //{
 
-        var parser = new FluidParser();
-        var options = new TemplateOptions();
-        options.MemberAccessStrategy.Register<ClassTemplateModel>();
-        options.MemberAccessStrategy.Register<MethodTemplateModel>();
-        options.MemberAccessStrategy.Register<ParamTemplateModel>();
+    //    var parser = new FluidParser();
+    //    var options = new TemplateOptions();
+    //    options.MemberAccessStrategy.Register<ClassTemplateModel>();
+    //    options.MemberAccessStrategy.Register<MethodTemplateModel>();
+    //    options.MemberAccessStrategy.Register<ParamTemplateModel>();
 
-        if (parser.TryParse(templateSource, out var template, out var error))
-        {
-            var context = new TemplateContext(model, options);
-            var code = template.Render(context);
-            return code;
-        }
-        else
-        {
-            return $"Error: {error}";
-        }
-    }
+    //    if (parser.TryParse(templateSource, out var template, out var error))
+    //    {
+    //        var context = new TemplateContext(model, options);
+    //        var code = template.Render(context);
+    //        return code;
+    //    }
+    //    else
+    //    {
+    //        return $"Error: {error}";
+    //    }
+    //}
 
     //private static 
 }
