@@ -2520,13 +2520,13 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel implements I
     /** Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default: 0.075 for clear glass. */
     solar_reflectance?: number;
     /** Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum. */
-    solar_reflectance_back?: Solar_reflectance_back;
+    solar_reflectance_back?: Autocalculate | number;
     /** Transmittance of visible light through the glass at normal incidence. Default: 0.9 for clear glass. */
     visible_transmittance?: number;
     /** Reflectance of visible light off of the front side of the glass at normal incidence. Default: 0.075 for clear glass. */
     visible_reflectance?: number;
     /** Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye. */
-    visible_reflectance_back?: Visible_reflectance_back;
+    visible_reflectance_back?: Autocalculate | number;
     /** Long-wave transmittance at normal incidence. */
     infrared_transmittance?: number;
     /** Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating. */
@@ -2617,13 +2617,13 @@ export interface IEnergyWindowMaterialGlazing extends IIDdEnergyBaseModel {
     /** Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default: 0.075 for clear glass. */
     solar_reflectance?: number;
     /** Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum. */
-    solar_reflectance_back?: Solar_reflectance_back;
+    solar_reflectance_back?: Autocalculate | number;
     /** Transmittance of visible light through the glass at normal incidence. Default: 0.9 for clear glass. */
     visible_transmittance?: number;
     /** Reflectance of visible light off of the front side of the glass at normal incidence. Default: 0.075 for clear glass. */
     visible_reflectance?: number;
     /** Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye. */
-    visible_reflectance_back?: Visible_reflectance_back;
+    visible_reflectance_back?: Autocalculate | number;
     /** Long-wave transmittance at normal incidence. */
     infrared_transmittance?: number;
     /** Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating. */
@@ -2987,7 +2987,7 @@ export interface IEnergyWindowFrame extends IIDdEnergyBaseModel {
 /** Construction for window objects (Aperture, Door). */
 export class WindowConstruction extends IDdEnergyBaseModel implements IWindowConstruction {
     /** List of glazing and gas material definitions. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer. */
-    materials!: Materials[];
+    materials!: EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas | EnergyWindowMaterialGasCustom | EnergyWindowMaterialGasMixture[];
     readonly type: string = "WindowConstruction";
     /** An optional window frame material for the frame that surrounds the window construction. */
     frame?: EnergyWindowFrame;
@@ -3038,7 +3038,7 @@ export class WindowConstruction extends IDdEnergyBaseModel implements IWindowCon
 /** Construction for window objects (Aperture, Door). */
 export interface IWindowConstruction extends IIDdEnergyBaseModel {
     /** List of glazing and gas material definitions. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer. */
-    materials: Materials[];
+    materials: EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas | EnergyWindowMaterialGasCustom | EnergyWindowMaterialGasMixture[];
     type?: string;
     /** An optional window frame material for the frame that surrounds the window construction. */
     frame?: EnergyWindowFrame;
@@ -3362,9 +3362,9 @@ export enum ScheduleUnitType {
 export class ScheduleTypeLimit extends EnergyBaseModel implements IScheduleTypeLimit {
     readonly type: string = "ScheduleTypeLimit";
     /** Lower limit for the schedule type or NoLimit. */
-    lower_limit?: Lower_limit;
+    lower_limit?: NoLimit | number;
     /** Upper limit for the schedule type or NoLimit. */
-    upper_limit?: Upper_limit;
+    upper_limit?: NoLimit | number;
     numeric_type?: ScheduleNumericType;
     unit_type?: ScheduleUnitType;
 
@@ -3412,9 +3412,9 @@ export class ScheduleTypeLimit extends EnergyBaseModel implements IScheduleTypeL
 export interface IScheduleTypeLimit extends IEnergyBaseModel {
     type?: string;
     /** Lower limit for the schedule type or NoLimit. */
-    lower_limit?: Lower_limit;
+    lower_limit?: NoLimit | number;
     /** Upper limit for the schedule type or NoLimit. */
-    upper_limit?: Upper_limit;
+    upper_limit?: NoLimit | number;
     numeric_type?: ScheduleNumericType;
     unit_type?: ScheduleUnitType;
 }
@@ -3617,7 +3617,7 @@ export class WindowConstructionDynamic extends IDdEnergyBaseModel implements IWi
     /** A list of WindowConstruction objects that define the various states that the dynamic window can assume. */
     constructions!: WindowConstruction[];
     /** A control schedule that dictates which constructions are active at given times throughout the simulation. The values of the schedule should be integers and range from 0 to one less then the number of constructions. Zero indicates that the first construction is active, one indicates that the second on is active, etc. The schedule type limits of this schedule should be "Control Level." If building custom schedule type limits that describe a particular range of states, the type limits should be "Discrete" and the unit type should be "Mode," "Control," or some other fractional unit. */
-    schedule!: Schedule;
+    schedule!: ScheduleRuleset | ScheduleFixedInterval;
     readonly type: string = "WindowConstructionDynamic";
 
     constructor(data?: IWindowConstructionDynamic) {
@@ -3668,7 +3668,7 @@ export interface IWindowConstructionDynamic extends IIDdEnergyBaseModel {
     /** A list of WindowConstruction objects that define the various states that the dynamic window can assume. */
     constructions: WindowConstruction[];
     /** A control schedule that dictates which constructions are active at given times throughout the simulation. The values of the schedule should be integers and range from 0 to one less then the number of constructions. Zero indicates that the first construction is active, one indicates that the second on is active, etc. The schedule type limits of this schedule should be "Control Level." If building custom schedule type limits that describe a particular range of states, the type limits should be "Discrete" and the unit type should be "Mode," "Control," or some other fractional unit. */
-    schedule: Schedule;
+    schedule: ScheduleRuleset | ScheduleFixedInterval;
     type?: string;
 }
 
@@ -4797,7 +4797,7 @@ export interface IEnergyMaterialVegetation extends IIDdEnergyBaseModel {
 /** Construction for opaque objects (Face, Shade, Door). */
 export class OpaqueConstruction extends IDdEnergyBaseModel implements IOpaqueConstruction {
     /** List of opaque material definitions. The order of the materials is from exterior to interior. */
-    materials!: materials[];
+    materials!: EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation[];
     readonly type: string = "OpaqueConstruction";
 
     constructor(data?: IOpaqueConstruction) {
@@ -4844,7 +4844,7 @@ export class OpaqueConstruction extends IDdEnergyBaseModel implements IOpaqueCon
 /** Construction for opaque objects (Face, Shade, Door). */
 export interface IOpaqueConstruction extends IIDdEnergyBaseModel {
     /** List of opaque material definitions. The order of the materials is from exterior to interior. */
-    materials: materials[];
+    materials: EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation[];
     type?: string;
 }
 
@@ -5406,7 +5406,7 @@ export class WindowConstructionShade extends IDdEnergyBaseModel implements IWind
     /** A WindowConstruction object that serves as the "switched off" version of the construction (aka. the "bare construction"). The shade_material and shade_location will be used to modify this starting construction. */
     window_construction!: WindowConstruction;
     /** Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly. */
-    shade_material!: Shade_material;
+    shade_material!: EnergyWindowMaterialShade | EnergyWindowMaterialBlind | EnergyWindowMaterialGlazing;
     readonly type: string = "WindowConstructionShade";
     /** Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the "Between" option. Also note that, for a WindowConstruction with more than one gas gap, the "Between" option defaults to using the inner gap as this is the only option that EnergyPlus supports. */
     shade_location?: ShadeLocation;
@@ -5415,7 +5415,7 @@ export class WindowConstructionShade extends IDdEnergyBaseModel implements IWind
     /** A number that corresponds to the specified control_type. This can be a value in (W/m2), (C) or (W) depending upon the control type.Note that this value cannot be None for any control type except "AlwaysOn." */
     setpoint?: number;
     /** An optional ScheduleRuleset or ScheduleFixedInterval to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction. */
-    schedule?: schedule;
+    schedule?: ScheduleRuleset | ScheduleFixedInterval;
 
     constructor(data?: IWindowConstructionShade) {
         super(data);
@@ -5467,7 +5467,7 @@ export interface IWindowConstructionShade extends IIDdEnergyBaseModel {
     /** A WindowConstruction object that serves as the "switched off" version of the construction (aka. the "bare construction"). The shade_material and shade_location will be used to modify this starting construction. */
     window_construction: WindowConstruction;
     /** Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly. */
-    shade_material: Shade_material;
+    shade_material: EnergyWindowMaterialShade | EnergyWindowMaterialBlind | EnergyWindowMaterialGlazing;
     type?: string;
     /** Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the "Between" option. Also note that, for a WindowConstruction with more than one gas gap, the "Between" option defaults to using the inner gap as this is the only option that EnergyPlus supports. */
     shade_location?: ShadeLocation;
@@ -5476,20 +5476,20 @@ export interface IWindowConstructionShade extends IIDdEnergyBaseModel {
     /** A number that corresponds to the specified control_type. This can be a value in (W/m2), (C) or (W) depending upon the control type.Note that this value cannot be None for any control type except "AlwaysOn." */
     setpoint?: number;
     /** An optional ScheduleRuleset or ScheduleFixedInterval to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction. */
-    schedule?: schedule;
+    schedule?: ScheduleRuleset | ScheduleFixedInterval;
 }
 
 /** A set of constructions for aperture assemblies. */
 export class ApertureConstructionSet extends _OpenAPIGenBaseModel implements IApertureConstructionSet {
     readonly type: string = "ApertureConstructionSet";
     /** A WindowConstruction for all apertures with a Surface boundary condition. */
-    interior_construction?: Interior_construction;
+    interior_construction?: WindowConstruction | WindowConstructionShade | WindowConstructionDynamic;
     /** A WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face. */
-    window_construction?: Window_construction;
+    window_construction?: WindowConstruction | WindowConstructionShade | WindowConstructionDynamic;
     /** A WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face. */
-    skylight_construction?: Skylight_construction;
+    skylight_construction?: WindowConstruction | WindowConstructionShade | WindowConstructionDynamic;
     /** A WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property. */
-    operable_construction?: Operable_construction;
+    operable_construction?: WindowConstruction | WindowConstructionShade | WindowConstructionDynamic;
 
     constructor(data?: IApertureConstructionSet) {
         super(data);
@@ -5533,13 +5533,13 @@ export class ApertureConstructionSet extends _OpenAPIGenBaseModel implements IAp
 export interface IApertureConstructionSet extends I_OpenAPIGenBaseModel {
     type?: string;
     /** A WindowConstruction for all apertures with a Surface boundary condition. */
-    interior_construction?: Interior_construction;
+    interior_construction?: WindowConstruction | WindowConstructionShade | WindowConstructionDynamic;
     /** A WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face. */
-    window_construction?: Window_construction;
+    window_construction?: WindowConstruction | WindowConstructionShade | WindowConstructionDynamic;
     /** A WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face. */
-    skylight_construction?: Skylight_construction;
+    skylight_construction?: WindowConstruction | WindowConstructionShade | WindowConstructionDynamic;
     /** A WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property. */
-    operable_construction?: Operable_construction;
+    operable_construction?: WindowConstruction | WindowConstructionShade | WindowConstructionDynamic;
 }
 
 /** A set of constructions for door assemblies. */
@@ -5552,9 +5552,9 @@ export class DoorConstructionSet extends _OpenAPIGenBaseModel implements IDoorCo
     /** An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face. */
     overhead_construction?: OpaqueConstruction;
     /** A WindowConstruction for all glass doors with an Outdoors boundary condition. */
-    exterior_glass_construction?: Exterior_glass_construction;
+    exterior_glass_construction?: WindowConstruction | WindowConstructionShade | WindowConstructionDynamic;
     /** A WindowConstruction for all glass doors with a Surface boundary condition. */
-    interior_glass_construction?: Interior_glass_construction;
+    interior_glass_construction?: WindowConstruction | WindowConstructionShade | WindowConstructionDynamic;
 
     constructor(data?: IDoorConstructionSet) {
         super(data);
@@ -5606,9 +5606,9 @@ export interface IDoorConstructionSet extends I_OpenAPIGenBaseModel {
     /** An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face. */
     overhead_construction?: OpaqueConstruction;
     /** A WindowConstruction for all glass doors with an Outdoors boundary condition. */
-    exterior_glass_construction?: Exterior_glass_construction;
+    exterior_glass_construction?: WindowConstruction | WindowConstructionShade | WindowConstructionDynamic;
     /** A WindowConstruction for all glass doors with a Surface boundary condition. */
-    interior_glass_construction?: Interior_glass_construction;
+    interior_glass_construction?: WindowConstruction | WindowConstructionShade | WindowConstructionDynamic;
 }
 
 /** Construction for Shade objects. */
@@ -5677,7 +5677,7 @@ export class AirBoundaryConstruction extends IDdEnergyBaseModel implements IAirB
     /** A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system. */
     air_mixing_per_area?: number;
     /** A fractional schedule as a ScheduleRuleset or ScheduleFixedInterval for the air mixing schedule across the construction. If unspecified, an Always On schedule will be assumed. */
-    air_mixing_schedule?: Air_mixing_schedule;
+    air_mixing_schedule?: ScheduleRuleset | ScheduleFixedInterval;
 
     constructor(data?: IAirBoundaryConstruction) {
         super(data);
@@ -5720,7 +5720,7 @@ export interface IAirBoundaryConstruction extends IIDdEnergyBaseModel {
     /** A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system. */
     air_mixing_per_area?: number;
     /** A fractional schedule as a ScheduleRuleset or ScheduleFixedInterval for the air mixing schedule across the construction. If unspecified, an Always On schedule will be assumed. */
-    air_mixing_schedule?: Air_mixing_schedule;
+    air_mixing_schedule?: ScheduleRuleset | ScheduleFixedInterval;
 }
 
 /** A set of constructions for different surface types and boundary conditions. */
@@ -5739,7 +5739,7 @@ export class ConstructionSet extends IDdEnergyBaseModel implements IConstruction
     /** A ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned. */
     shade_construction?: ShadeConstruction;
     /** An AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type. */
-    air_boundary_construction?: Air_boundary_construction;
+    air_boundary_construction?: AirBoundaryConstruction | OpaqueConstruction;
 
     constructor(data?: IConstructionSet) {
         super(data);
@@ -5801,7 +5801,7 @@ export interface IConstructionSet extends IIDdEnergyBaseModel {
     /** A ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned. */
     shade_construction?: ShadeConstruction;
     /** An AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type. */
-    air_boundary_construction?: Air_boundary_construction;
+    air_boundary_construction?: AirBoundaryConstruction | OpaqueConstruction;
 }
 
 /** An enumeration. */
@@ -6090,9 +6090,9 @@ export interface IModifierBase extends IIDdRadianceBaseModel {
 /** Radiance mirror material. */
 export class Mirror extends ModifierBase implements IMirror {
     /** Material modifier. */
-    modifier?: Modifier;
+    modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: Dependencies[];
+    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
     /** A value between 0 and 1 for the red channel reflectance. */
     r_reflectance?: number;
     /** A value between 0 and 1 for the green channel reflectance. */
@@ -6100,7 +6100,7 @@ export class Mirror extends ModifierBase implements IMirror {
     /** A value between 0 and 1 for the blue channel reflectance. */
     b_reflectance?: number;
     /** An optional material (like the illum type) that may be used to specify a different material to be used for shading non-source rays. If None, this will keep the alternat_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance. */
-    alternate_material?: Alternate_material;
+    alternate_material?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     readonly type: string = "Mirror";
 
     constructor(data?: IMirror) {
@@ -6159,9 +6159,9 @@ export class Mirror extends ModifierBase implements IMirror {
 /** Radiance mirror material. */
 export interface IMirror extends IModifierBase {
     /** Material modifier. */
-    modifier?: Modifier;
+    modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: Dependencies[];
+    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
     /** A value between 0 and 1 for the red channel reflectance. */
     r_reflectance?: number;
     /** A value between 0 and 1 for the green channel reflectance. */
@@ -6169,16 +6169,16 @@ export interface IMirror extends IModifierBase {
     /** A value between 0 and 1 for the blue channel reflectance. */
     b_reflectance?: number;
     /** An optional material (like the illum type) that may be used to specify a different material to be used for shading non-source rays. If None, this will keep the alternat_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance. */
-    alternate_material?: Alternate_material;
+    alternate_material?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     type?: string;
 }
 
 /** Radiance metal material. */
 export class Metal extends ModifierBase implements IMetal {
     /** Material modifier. */
-    modifier?: modifier;
+    modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: dependencies[];
+    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
     /** A value between 0 and 1 for the red channel reflectance. */
     r_reflectance?: number;
     /** A value between 0 and 1 for the green channel reflectance. */
@@ -6251,9 +6251,9 @@ export class Metal extends ModifierBase implements IMetal {
 /** Radiance metal material. */
 export interface IMetal extends IModifierBase {
     /** Material modifier. */
-    modifier?: modifier;
+    modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: dependencies[];
+    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
     /** A value between 0 and 1 for the red channel reflectance. */
     r_reflectance?: number;
     /** A value between 0 and 1 for the green channel reflectance. */
@@ -6270,9 +6270,9 @@ export interface IMetal extends IModifierBase {
 /** Radiance Translucent material. */
 export class Trans extends ModifierBase implements ITrans {
     /** Material modifier. */
-    modifier?: modifier2;
+    modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: dependencies2[];
+    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
     /** A value between 0 and 1 for the red channel reflectance. */
     r_reflectance?: number;
     /** A value between 0 and 1 for the green channel reflectance. */
@@ -6355,9 +6355,9 @@ export class Trans extends ModifierBase implements ITrans {
 /** Radiance Translucent material. */
 export interface ITrans extends IModifierBase {
     /** Material modifier. */
-    modifier?: modifier2;
+    modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: dependencies2[];
+    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
     /** A value between 0 and 1 for the red channel reflectance. */
     r_reflectance?: number;
     /** A value between 0 and 1 for the green channel reflectance. */
@@ -6378,9 +6378,9 @@ export interface ITrans extends IModifierBase {
 /** Radiance Light material. */
 export class Light extends ModifierBase implements ILight {
     /** Material modifier. */
-    modifier?: modifier3;
+    modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: dependencies3[];
+    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
     /** A value between 0 and 1 for the red channel of the modifier. */
     r_emittance?: number;
     /** A value between 0 and 1 for the green channel of the modifier. */
@@ -6443,9 +6443,9 @@ export class Light extends ModifierBase implements ILight {
 /** Radiance Light material. */
 export interface ILight extends IModifierBase {
     /** Material modifier. */
-    modifier?: modifier3;
+    modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: dependencies3[];
+    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
     /** A value between 0 and 1 for the red channel of the modifier. */
     r_emittance?: number;
     /** A value between 0 and 1 for the green channel of the modifier. */
@@ -6458,9 +6458,9 @@ export interface ILight extends IModifierBase {
 /** Radiance Glow material. */
 export class Glow extends ModifierBase implements IGlow {
     /** Material modifier. */
-    modifier?: modifier4;
+    modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: dependencies4[];
+    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
     /** A value between 0 and 1 for the red channel of the modifier. */
     r_emittance?: number;
     /** A value between 0 and 1 for the green channel of the modifier. */
@@ -6528,9 +6528,9 @@ export class Glow extends ModifierBase implements IGlow {
 /** Radiance Glow material. */
 export interface IGlow extends IModifierBase {
     /** Material modifier. */
-    modifier?: modifier4;
+    modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: dependencies4[];
+    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
     /** A value between 0 and 1 for the red channel of the modifier. */
     r_emittance?: number;
     /** A value between 0 and 1 for the green channel of the modifier. */
@@ -6547,9 +6547,9 @@ export class BSDF extends ModifierBase implements IBSDF {
     /** A string with the contents of the BSDF XML file. */
     bsdf_data!: string;
     /** Material modifier. */
-    modifier?: modifier5;
+    modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: dependencies5[];
+    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
     /** Vector as sequence that sets the hemisphere that the BSDF material faces. */
     up_orientation?: number[];
     /** Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative). */
@@ -6663,9 +6663,9 @@ export interface IBSDF extends IModifierBase {
     /** A string with the contents of the BSDF XML file. */
     bsdf_data: string;
     /** Material modifier. */
-    modifier?: modifier5;
+    modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: dependencies5[];
+    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
     /** Vector as sequence that sets the hemisphere that the BSDF material faces. */
     up_orientation?: number[];
     /** Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative). */
@@ -6686,9 +6686,9 @@ export interface IBSDF extends IModifierBase {
 /** Radiance glass material. */
 export class Glass extends ModifierBase implements IGlass {
     /** Material modifier. */
-    modifier?: modifier6;
+    modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: dependencies6[];
+    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
     /** A value between 0 and 1 for the red channel transmissivity. */
     r_transmissivity?: number;
     /** A value between 0 and 1 for the green channel transmissivity. */
@@ -6756,9 +6756,9 @@ export class Glass extends ModifierBase implements IGlass {
 /** Radiance glass material. */
 export interface IGlass extends IModifierBase {
     /** Material modifier. */
-    modifier?: modifier6;
+    modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: dependencies6[];
+    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
     /** A value between 0 and 1 for the red channel transmissivity. */
     r_transmissivity?: number;
     /** A value between 0 and 1 for the green channel transmissivity. */
@@ -6773,9 +6773,9 @@ export interface IGlass extends IModifierBase {
 /** Radiance plastic material. */
 export class Plastic extends ModifierBase implements IPlastic {
     /** Material modifier. */
-    modifier?: modifier7;
+    modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: dependencies7[];
+    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
     /** A value between 0 and 1 for the red channel reflectance. */
     r_reflectance?: number;
     /** A value between 0 and 1 for the green channel reflectance. */
@@ -6848,9 +6848,9 @@ export class Plastic extends ModifierBase implements IPlastic {
 /** Radiance plastic material. */
 export interface IPlastic extends IModifierBase {
     /** Material modifier. */
-    modifier?: modifier7;
+    modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: dependencies7[];
+    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
     /** A value between 0 and 1 for the red channel reflectance. */
     r_reflectance?: number;
     /** A value between 0 and 1 for the green channel reflectance. */
@@ -6867,9 +6867,9 @@ export interface IPlastic extends IModifierBase {
 /** Set containing radiance modifiers needed for a model's Floors. */
 export class FloorModifierSet extends _OpenAPIGenBaseModel implements IFloorModifierSet {
     /** A radiance modifier object for faces with an Outdoors boundary condition. */
-    exterior_modifier?: Exterior_modifier;
+    exterior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A radiance modifier object for faces with a boundary condition other than Outdoors. */
-    interior_modifier?: Interior_modifier;
+    interior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     readonly type: string = "FloorModifierSet";
 
     constructor(data?: IFloorModifierSet) {
@@ -6909,9 +6909,9 @@ export class FloorModifierSet extends _OpenAPIGenBaseModel implements IFloorModi
 /** Set containing radiance modifiers needed for a model's Floors. */
 export interface IFloorModifierSet extends I_OpenAPIGenBaseModel {
     /** A radiance modifier object for faces with an Outdoors boundary condition. */
-    exterior_modifier?: Exterior_modifier;
+    exterior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A radiance modifier object for faces with a boundary condition other than Outdoors. */
-    interior_modifier?: Interior_modifier;
+    interior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     type?: string;
 }
 
@@ -6970,7 +6970,7 @@ export class Outdoors extends _OpenAPIGenBaseModel implements IOutdoors {
     /** A boolean noting whether the boundary is exposed to wind. */
     wind_exposure?: boolean;
     /** A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated. */
-    view_factor?: View_factor;
+    view_factor?: Autocalculate | number;
 
     constructor(data?: IOutdoors) {
         super(data);
@@ -7018,7 +7018,7 @@ export interface IOutdoors extends I_OpenAPIGenBaseModel {
     /** A boolean noting whether the boundary is exposed to wind. */
     wind_exposure?: boolean;
     /** A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated. */
-    view_factor?: View_factor;
+    view_factor?: Autocalculate | number;
 }
 
 /** Base class for all objects that are not extensible with additional keys. This effectively includes all objects except for the Properties classes that are assigned to geometry objects. */
@@ -7120,7 +7120,7 @@ export class OtherSideTemperature extends _OpenAPIGenBaseModel implements IOther
     /** A value in W/m2-K to indicate the combined convective/radiative film coefficient. If equal to 0, then the specified temperature above is equal to the exterior surface temperature. Otherwise, the temperature above is considered the outside air temperature and this coefficient is used to determine the difference between this outside air temperature and the exterior surface temperature. */
     heat_transfer_coefficient?: number;
     /** A temperature value in Celsius to note the temperature on the other side of the object. This input can also be an Autocalculate object to signify that the temperature is equal to the outdoor air temperature. */
-    temperature?: Temperature;
+    temperature?: Autocalculate | number;
 
     constructor(data?: IOtherSideTemperature) {
         super(data);
@@ -7163,7 +7163,7 @@ export interface IOtherSideTemperature extends I_OpenAPIGenBaseModel {
     /** A value in W/m2-K to indicate the combined convective/radiative film coefficient. If equal to 0, then the specified temperature above is equal to the exterior surface temperature. Otherwise, the temperature above is considered the outside air temperature and this coefficient is used to determine the difference between this outside air temperature and the exterior surface temperature. */
     heat_transfer_coefficient?: number;
     /** A temperature value in Celsius to note the temperature on the other side of the object. This input can also be an Autocalculate object to signify that the temperature is equal to the outdoor air temperature. */
-    temperature?: Temperature;
+    temperature?: Autocalculate | number;
 }
 
 /** Base class for all objects that are not extensible with additional keys. This effectively includes all objects except for the Properties classes that are assigned to geometry objects. */
@@ -7611,7 +7611,7 @@ export interface IAperturePropertiesAbridged extends I_OpenAPIGenBaseModel {
 export class Aperture extends IDdBaseModel implements IAperture {
     /** Planar Face3D for the geometry. */
     geometry!: Face3D;
-    boundary_condition!: Boundary_condition;
+    boundary_condition!: Outdoors | Surface;
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
     properties!: AperturePropertiesAbridged;
     readonly type: string = "Aperture";
@@ -7687,7 +7687,7 @@ export class Aperture extends IDdBaseModel implements IAperture {
 export interface IAperture extends IIDdBaseModel {
     /** Planar Face3D for the geometry. */
     geometry: Face3D;
-    boundary_condition: Boundary_condition;
+    boundary_condition: Outdoors | Surface;
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
     properties: AperturePropertiesAbridged;
     type?: string;
@@ -7760,7 +7760,7 @@ export interface IDoorPropertiesAbridged extends I_OpenAPIGenBaseModel {
 export class Door extends IDdBaseModel implements IDoor {
     /** Planar Face3D for the geometry. */
     geometry!: Face3D;
-    boundary_condition!: boundary_condition;
+    boundary_condition!: Outdoors | Surface;
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
     properties!: DoorPropertiesAbridged;
     readonly type: string = "Door";
@@ -7836,7 +7836,7 @@ export class Door extends IDdBaseModel implements IDoor {
 export interface IDoor extends IIDdBaseModel {
     /** Planar Face3D for the geometry. */
     geometry: Face3D;
-    boundary_condition: boundary_condition;
+    boundary_condition: Outdoors | Surface;
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
     properties: DoorPropertiesAbridged;
     type?: string;
@@ -7949,7 +7949,7 @@ export class Face extends IDdBaseModel implements IFace {
     /** Planar Face3D for the geometry. */
     geometry!: Face3D;
     face_type!: FaceType;
-    boundary_condition!: boundary_condition2;
+    boundary_condition!: Ground | Outdoors | Adiabatic | Surface | OtherSideTemperature;
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
     properties!: FacePropertiesAbridged;
     readonly type: string = "Face";
@@ -8047,7 +8047,7 @@ export interface IFace extends IIDdBaseModel {
     /** Planar Face3D for the geometry. */
     geometry: Face3D;
     face_type: FaceType;
-    boundary_condition: boundary_condition2;
+    boundary_condition: Ground | Outdoors | Adiabatic | Surface | OtherSideTemperature;
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
     properties: FacePropertiesAbridged;
     type?: string;
@@ -8638,7 +8638,7 @@ export interface IShadeModifierSetAbridged extends IBaseModifierSetAbridged {
 export class GlobalModifierSet extends _OpenAPIGenBaseModel implements IGlobalModifierSet {
     readonly type: string = "GlobalModifierSet";
     /** Global Honeybee Radiance modifiers. */
-    readonly modifiers?: Modifiers[];
+    readonly modifiers?: Plastic | Glass | Trans[];
     /** Global Honeybee WallModifierSet. */
     readonly wall_set?: WallModifierSetAbridged;
     /** Global Honeybee FloorModifierSet. */
@@ -8718,7 +8718,7 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel implements IGlobalMo
 export interface IGlobalModifierSet extends I_OpenAPIGenBaseModel {
     type?: string;
     /** Global Honeybee Radiance modifiers. */
-    modifiers?: Modifiers[];
+    modifiers?: Plastic | Glass | Trans[];
     /** Global Honeybee WallModifierSet. */
     wall_set?: WallModifierSetAbridged;
     /** Global Honeybee FloorModifierSet. */
@@ -9176,9 +9176,9 @@ export interface IApertureConstructionSetAbridged extends I_OpenAPIGenBaseModel 
 export class GlobalConstructionSet extends _OpenAPIGenBaseModel implements IGlobalConstructionSet {
     readonly type: string = "GlobalConstructionSet";
     /** Global Honeybee Energy materials. */
-    readonly materials?: materials2[];
+    readonly materials?: EnergyMaterial | EnergyMaterialNoMass | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas[];
     /** Global Honeybee Energy constructions. */
-    readonly constructions?: Constructions[];
+    readonly constructions?: OpaqueConstructionAbridged | WindowConstructionAbridged | ShadeConstruction | AirBoundaryConstructionAbridged[];
     /** Global Honeybee WallConstructionSet. */
     readonly wall_set?: WallConstructionSetAbridged;
     /** Global Honeybee FloorConstructionSet. */
@@ -9269,9 +9269,9 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel implements IGlob
 export interface IGlobalConstructionSet extends I_OpenAPIGenBaseModel {
     type?: string;
     /** Global Honeybee Energy materials. */
-    materials?: materials2[];
+    materials?: EnergyMaterial | EnergyMaterialNoMass | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas[];
     /** Global Honeybee Energy constructions. */
-    constructions?: Constructions[];
+    constructions?: OpaqueConstructionAbridged | WindowConstructionAbridged | ShadeConstruction | AirBoundaryConstructionAbridged[];
     /** Global Honeybee WallConstructionSet. */
     wall_set?: WallConstructionSetAbridged;
     /** Global Honeybee FloorConstructionSet. */
@@ -9571,9 +9571,9 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel implements IIdeal
     /** A number for the minimum cooling supply air temperature [C]. */
     cooling_air_temperature?: number;
     /** A number for the maximum heating capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the heating capacity. */
-    heating_limit?: Heating_limit;
+    heating_limit?: Autosize | NoLimit | number;
     /** A number for the maximum cooling capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the cooling capacity. */
-    cooling_limit?: Cooling_limit;
+    cooling_limit?: Autosize | NoLimit | number;
     /** An optional identifier of a schedule to set the availability of heating over the course of the simulation. */
     heating_availability?: string;
     /** An optional identifier of a schedule to set the availability of cooling over the course of the simulation. */
@@ -9651,9 +9651,9 @@ export interface IIdealAirSystemAbridged extends IIDdEnergyBaseModel {
     /** A number for the minimum cooling supply air temperature [C]. */
     cooling_air_temperature?: number;
     /** A number for the maximum heating capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the heating capacity. */
-    heating_limit?: Heating_limit;
+    heating_limit?: Autosize | NoLimit | number;
     /** A number for the maximum cooling capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the cooling capacity. */
-    cooling_limit?: Cooling_limit;
+    cooling_limit?: Autosize | NoLimit | number;
     /** An optional identifier of a schedule to set the availability of heating over the course of the simulation. */
     heating_availability?: string;
     /** An optional identifier of a schedule to set the availability of cooling over the course of the simulation. */
@@ -10803,9 +10803,9 @@ export class SHWSystem extends IDdEnergyBaseModel implements ISHWSystem {
     /** Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone. */
     equipment_type?: SHWEquipmentType;
     /** A number for the efficiency of the heater within the system. For Gas systems, this is the efficiency of the burner. For HeatPump systems, this is the rated COP of the system. For electric systems, this should usually be set to 1. If set to Autocalculate, this value will automatically be set based on the equipment_type. Gas_WaterHeater - 0.8, Electric_WaterHeater - 1.0, HeatPump_WaterHeater - 3.5, Gas_TanklessHeater - 0.8, Electric_TanklessHeater - 1.0. */
-    heater_efficiency?: Heater_efficiency;
+    heater_efficiency?: number | Autocalculate;
     /** A number for the ambient temperature in which the hot water tank is located [C]. This can also be the identifier of a Room in which the tank is located. */
-    ambient_condition?: Ambient_condition;
+    ambient_condition?: number | string;
     /** A number for the loss of heat from the water heater tank to the surrounding ambient conditions [W/K]. */
     ambient_loss_coefficient?: number;
 
@@ -10855,9 +10855,9 @@ export interface ISHWSystem extends IIDdEnergyBaseModel {
     /** Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone. */
     equipment_type?: SHWEquipmentType;
     /** A number for the efficiency of the heater within the system. For Gas systems, this is the efficiency of the burner. For HeatPump systems, this is the rated COP of the system. For electric systems, this should usually be set to 1. If set to Autocalculate, this value will automatically be set based on the equipment_type. Gas_WaterHeater - 0.8, Electric_WaterHeater - 1.0, HeatPump_WaterHeater - 3.5, Gas_TanklessHeater - 0.8, Electric_TanklessHeater - 1.0. */
-    heater_efficiency?: Heater_efficiency;
+    heater_efficiency?: number | Autocalculate;
     /** A number for the ambient temperature in which the hot water tank is located [C]. This can also be the identifier of a Room in which the tank is located. */
-    ambient_condition?: Ambient_condition;
+    ambient_condition?: number | string;
     /** A number for the loss of heat from the water heater tank to the surrounding ambient conditions [W/K]. */
     ambient_loss_coefficient?: number;
 }
@@ -10874,7 +10874,7 @@ export class PeopleAbridged extends IDdEnergyBaseModel implements IPeopleAbridge
     /** The radiant fraction of sensible heat released by people. (Default: 0.3). */
     radiant_fraction?: number;
     /** Number for the latent fraction of heat gain due to people or an Autocalculate object. */
-    latent_fraction?: Latent_fraction;
+    latent_fraction?: Autocalculate | number;
 
     constructor(data?: IPeopleAbridged) {
         super(data);
@@ -10929,7 +10929,7 @@ export interface IPeopleAbridged extends IIDdEnergyBaseModel {
     /** The radiant fraction of sensible heat released by people. (Default: 0.3). */
     radiant_fraction?: number;
     /** Number for the latent fraction of heat gain due to people or an Autocalculate object. */
-    latent_fraction?: Latent_fraction;
+    latent_fraction?: Autocalculate | number;
 }
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
@@ -11544,14 +11544,14 @@ export class People extends IDdEnergyBaseModel implements IPeople {
     /** People per floor area expressed as [people/m2] */
     people_per_area!: number;
     /** A schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile. */
-    occupancy_schedule!: Occupancy_schedule;
+    occupancy_schedule!: ScheduleRuleset | ScheduleFixedInterval;
     readonly type: string = "People";
     /** A schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated. */
-    activity_schedule?: Activity_schedule;
+    activity_schedule?: ScheduleRuleset | ScheduleFixedInterval;
     /** The radiant fraction of sensible heat released by people. (Default: 0.3). */
     radiant_fraction?: number;
     /** Number for the latent fraction of heat gain due to people or an Autocalculate object. */
-    latent_fraction?: latent_fraction;
+    latent_fraction?: Autocalculate | number;
 
     constructor(data?: IPeople) {
         super(data);
@@ -11599,14 +11599,14 @@ export interface IPeople extends IIDdEnergyBaseModel {
     /** People per floor area expressed as [people/m2] */
     people_per_area: number;
     /** A schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile. */
-    occupancy_schedule: Occupancy_schedule;
+    occupancy_schedule: ScheduleRuleset | ScheduleFixedInterval;
     type?: string;
     /** A schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated. */
-    activity_schedule?: Activity_schedule;
+    activity_schedule?: ScheduleRuleset | ScheduleFixedInterval;
     /** The radiant fraction of sensible heat released by people. (Default: 0.3). */
     radiant_fraction?: number;
     /** Number for the latent fraction of heat gain due to people or an Autocalculate object. */
-    latent_fraction?: latent_fraction;
+    latent_fraction?: Autocalculate | number;
 }
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
@@ -11614,7 +11614,7 @@ export class Lighting extends IDdEnergyBaseModel implements ILighting {
     /** Lighting per floor area as [W/m2]. */
     watts_per_area!: number;
     /** The schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile. */
-    schedule!: schedule2;
+    schedule!: ScheduleRuleset | ScheduleFixedInterval;
     readonly type: string = "Lighting";
     /** The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. (Default: 0.25). */
     visible_fraction?: number;
@@ -11676,7 +11676,7 @@ export interface ILighting extends IIDdEnergyBaseModel {
     /** Lighting per floor area as [W/m2]. */
     watts_per_area: number;
     /** The schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile. */
-    schedule: schedule2;
+    schedule: ScheduleRuleset | ScheduleFixedInterval;
     type?: string;
     /** The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. (Default: 0.25). */
     visible_fraction?: number;
@@ -11693,7 +11693,7 @@ export class ElectricEquipment extends IDdEnergyBaseModel implements IElectricEq
     /** Equipment level per floor area as [W/m2]. */
     watts_per_area!: number;
     /** The schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile. */
-    schedule!: schedule3;
+    schedule!: ScheduleRuleset | ScheduleFixedInterval;
     /** Number for the amount of long-wave radiation heat given off by equipment. Default value is 0. */
     radiant_fraction?: number;
     /** Number for the amount of latent heat given off by equipment. Default value is 0. */
@@ -11750,7 +11750,7 @@ export interface IElectricEquipment extends IIDdEnergyBaseModel {
     /** Equipment level per floor area as [W/m2]. */
     watts_per_area: number;
     /** The schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile. */
-    schedule: schedule3;
+    schedule: ScheduleRuleset | ScheduleFixedInterval;
     /** Number for the amount of long-wave radiation heat given off by equipment. Default value is 0. */
     radiant_fraction?: number;
     /** Number for the amount of latent heat given off by equipment. Default value is 0. */
@@ -11765,7 +11765,7 @@ export class GasEquipment extends IDdEnergyBaseModel implements IGasEquipment {
     /** Equipment level per floor area as [W/m2]. */
     watts_per_area!: number;
     /** The schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile. */
-    schedule!: schedule4;
+    schedule!: ScheduleRuleset | ScheduleFixedInterval;
     /** Number for the amount of long-wave radiation heat given off by equipment. Default value is 0. */
     radiant_fraction?: number;
     /** Number for the amount of latent heat given off by equipment. Default value is 0. */
@@ -11822,7 +11822,7 @@ export interface IGasEquipment extends IIDdEnergyBaseModel {
     /** Equipment level per floor area as [W/m2]. */
     watts_per_area: number;
     /** The schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile. */
-    schedule: schedule4;
+    schedule: ScheduleRuleset | ScheduleFixedInterval;
     /** Number for the amount of long-wave radiation heat given off by equipment. Default value is 0. */
     radiant_fraction?: number;
     /** Number for the amount of latent heat given off by equipment. Default value is 0. */
@@ -11837,7 +11837,7 @@ export class ServiceHotWater extends IDdEnergyBaseModel implements IServiceHotWa
     /** Number for the total volume flow rate of water per unit area of floor [L/h-m2]. */
     flow_per_area!: number;
     /** The schedule for the use of hot water over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile. */
-    schedule!: schedule5;
+    schedule!: ScheduleRuleset | ScheduleFixedInterval;
     readonly type: string = "ServiceHotWater";
     /** Number for the target temperature of water out of the tap (C). This the temperature after hot water has been mixed with cold water from the water mains. The default is 60C, which essentially assumes that the flow_per_area on this object is only for water straight out of the water heater. */
     target_temperature?: number;
@@ -11894,7 +11894,7 @@ export interface IServiceHotWater extends IIDdEnergyBaseModel {
     /** Number for the total volume flow rate of water per unit area of floor [L/h-m2]. */
     flow_per_area: number;
     /** The schedule for the use of hot water over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile. */
-    schedule: schedule5;
+    schedule: ScheduleRuleset | ScheduleFixedInterval;
     type?: string;
     /** Number for the target temperature of water out of the tap (C). This the temperature after hot water has been mixed with cold water from the water mains. The default is 60C, which essentially assumes that the flow_per_area on this object is only for water straight out of the water heater. */
     target_temperature?: number;
@@ -11909,7 +11909,7 @@ export class Infiltration extends IDdEnergyBaseModel implements IInfiltration {
     /** Number for the infiltration per exterior surface area in m3/s-m2. */
     flow_per_exterior_area!: number;
     /** The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile. */
-    schedule!: schedule6;
+    schedule!: ScheduleRuleset | ScheduleFixedInterval;
     readonly type: string = "Infiltration";
     constant_coefficient?: number;
     temperature_coefficient?: number;
@@ -11963,7 +11963,7 @@ export interface IInfiltration extends IIDdEnergyBaseModel {
     /** Number for the infiltration per exterior surface area in m3/s-m2. */
     flow_per_exterior_area: number;
     /** The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile. */
-    schedule: schedule6;
+    schedule: ScheduleRuleset | ScheduleFixedInterval;
     type?: string;
     constant_coefficient?: number;
     temperature_coefficient?: number;
@@ -11982,7 +11982,7 @@ export class Ventilation extends IDdEnergyBaseModel implements IVentilation {
     /** Intensity of ventilation in m3/s for the entire Room. */
     flow_per_zone?: number;
     /** Schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile. */
-    schedule?: schedule7;
+    schedule?: ScheduleRuleset | ScheduleFixedInterval;
 
     constructor(data?: IVentilation) {
         super(data);
@@ -12040,20 +12040,20 @@ export interface IVentilation extends IIDdEnergyBaseModel {
     /** Intensity of ventilation in m3/s for the entire Room. */
     flow_per_zone?: number;
     /** Schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile. */
-    schedule?: schedule7;
+    schedule?: ScheduleRuleset | ScheduleFixedInterval;
 }
 
 /** Used to specify information about the setpoint schedule. */
 export class Setpoint extends IDdEnergyBaseModel implements ISetpoint {
     /** Schedule for the cooling setpoint. The values in this schedule should be temperature in [C]. */
-    cooling_schedule!: Cooling_schedule;
+    cooling_schedule!: ScheduleRuleset | ScheduleFixedInterval;
     /** Schedule for the heating setpoint. The values in this schedule should be temperature in [C]. */
-    heating_schedule!: Heating_schedule;
+    heating_schedule!: ScheduleRuleset | ScheduleFixedInterval;
     readonly type: string = "Setpoint";
     /** Schedule for the humidification setpoint. The values in this schedule should be in [%]. */
-    humidifying_schedule?: Humidifying_schedule;
+    humidifying_schedule?: ScheduleRuleset | ScheduleFixedInterval;
     /** Schedule for the dehumidification setpoint. The values in this schedule should be in [%]. */
-    dehumidifying_schedule?: Dehumidifying_schedule;
+    dehumidifying_schedule?: ScheduleRuleset | ScheduleFixedInterval;
     /** An optional positive number for the temperature difference between the cutout temperature and the setpoint temperature. Specifying a non-zero number here is useful for modeling the throttling range associated with a given setup of setpoint controls and HVAC equipment. Throttling ranges describe the range where a zone is slightly over-cooled or over-heated beyond the thermostat setpoint. They are used to avoid situations where HVAC systems turn on only to turn off a few minutes later, thereby wearing out the parts of mechanical systems faster. They can have a minor impact on energy consumption and can often have significant impacts on occupant thermal comfort, though using the default value of zero will often yield results that are close enough when trying to estimate the annual heating/cooling energy use. Specifying a value of zero effectively assumes that the system will turn on whenever conditions are outside the setpoint range and will cut out as soon as the setpoint is reached. */
     setpoint_cutout_difference?: number;
 
@@ -12101,14 +12101,14 @@ export class Setpoint extends IDdEnergyBaseModel implements ISetpoint {
 /** Used to specify information about the setpoint schedule. */
 export interface ISetpoint extends IIDdEnergyBaseModel {
     /** Schedule for the cooling setpoint. The values in this schedule should be temperature in [C]. */
-    cooling_schedule: Cooling_schedule;
+    cooling_schedule: ScheduleRuleset | ScheduleFixedInterval;
     /** Schedule for the heating setpoint. The values in this schedule should be temperature in [C]. */
-    heating_schedule: Heating_schedule;
+    heating_schedule: ScheduleRuleset | ScheduleFixedInterval;
     type?: string;
     /** Schedule for the humidification setpoint. The values in this schedule should be in [%]. */
-    humidifying_schedule?: Humidifying_schedule;
+    humidifying_schedule?: ScheduleRuleset | ScheduleFixedInterval;
     /** Schedule for the dehumidification setpoint. The values in this schedule should be in [%]. */
-    dehumidifying_schedule?: Dehumidifying_schedule;
+    dehumidifying_schedule?: ScheduleRuleset | ScheduleFixedInterval;
     /** An optional positive number for the temperature difference between the cutout temperature and the setpoint temperature. Specifying a non-zero number here is useful for modeling the throttling range associated with a given setup of setpoint controls and HVAC equipment. Throttling ranges describe the range where a zone is slightly over-cooled or over-heated beyond the thermostat setpoint. They are used to avoid situations where HVAC systems turn on only to turn off a few minutes later, thereby wearing out the parts of mechanical systems faster. They can have a minor impact on energy consumption and can often have significant impacts on occupant thermal comfort, though using the default value of zero will often yield results that are close enough when trying to estimate the annual heating/cooling energy use. Specifying a value of zero effectively assumes that the system will turn on whenever conditions are outside the setpoint range and will cut out as soon as the setpoint is reached. */
     setpoint_cutout_difference?: number;
 }
@@ -12500,19 +12500,19 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel implements IMode
     /** Global Energy construction set. */
     readonly global_construction_set?: GlobalConstructionSet;
     /** List of all unique ConstructionSets in the Model. */
-    construction_sets?: Construction_sets[];
+    construction_sets?: ConstructionSetAbridged | ConstructionSet[];
     /** A list of all unique constructions in the model. This includes constructions across all Faces, Apertures, Doors, Shades, Room ConstructionSets, and the global_construction_set. */
-    constructions?: constructions[];
+    constructions?: OpaqueConstructionAbridged | WindowConstructionAbridged | WindowConstructionShadeAbridged | AirBoundaryConstructionAbridged | OpaqueConstruction | WindowConstruction | WindowConstructionShade | WindowConstructionDynamicAbridged | WindowConstructionDynamic | AirBoundaryConstruction | ShadeConstruction[];
     /** A list of all unique materials in the model. This includes materials needed to make the Model constructions. */
-    materials?: materials3[];
+    materials?: EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation | EnergyWindowMaterialGlazing | EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGas | EnergyWindowMaterialGasMixture | EnergyWindowMaterialGasCustom | EnergyWindowFrame | EnergyWindowMaterialBlind | EnergyWindowMaterialShade[];
     /** List of all unique HVAC systems in the Model. */
-    hvacs?: Hvacs[];
+    hvacs?: IdealAirSystemAbridged | VAV | PVAV | PSZ | PTAC | ForcedAirFurnace | FCUwithDOASAbridged | WSHPwithDOASAbridged | VRFwithDOASAbridged | RadiantwithDOASAbridged | FCU | WSHP | VRF | Baseboard | EvaporativeCooler | Residential | WindowAC | GasUnitHeater | Radiant | DetailedHVAC[];
     /** List of all unique Service Hot Water (SHW) systems in the Model. */
     shws?: SHWSystem[];
     /** List of all unique ProgramTypes in the Model. */
-    program_types?: Program_types[];
+    program_types?: ProgramTypeAbridged | ProgramType[];
     /** A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades. */
-    schedules?: Schedules[];
+    schedules?: ScheduleRulesetAbridged | ScheduleFixedIntervalAbridged | ScheduleRuleset | ScheduleFixedInterval[];
     /** A list of all unique ScheduleTypeLimits in the model. This all ScheduleTypeLimits needed to make the Model schedules. */
     schedule_type_limits?: ScheduleTypeLimit[];
     /** An optional parameter to define the global parameters for a ventilation cooling. */
@@ -12642,19 +12642,19 @@ export interface IModelEnergyProperties extends I_OpenAPIGenBaseModel {
     /** Global Energy construction set. */
     global_construction_set?: GlobalConstructionSet;
     /** List of all unique ConstructionSets in the Model. */
-    construction_sets?: Construction_sets[];
+    construction_sets?: ConstructionSetAbridged | ConstructionSet[];
     /** A list of all unique constructions in the model. This includes constructions across all Faces, Apertures, Doors, Shades, Room ConstructionSets, and the global_construction_set. */
-    constructions?: constructions[];
+    constructions?: OpaqueConstructionAbridged | WindowConstructionAbridged | WindowConstructionShadeAbridged | AirBoundaryConstructionAbridged | OpaqueConstruction | WindowConstruction | WindowConstructionShade | WindowConstructionDynamicAbridged | WindowConstructionDynamic | AirBoundaryConstruction | ShadeConstruction[];
     /** A list of all unique materials in the model. This includes materials needed to make the Model constructions. */
-    materials?: materials3[];
+    materials?: EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation | EnergyWindowMaterialGlazing | EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGas | EnergyWindowMaterialGasMixture | EnergyWindowMaterialGasCustom | EnergyWindowFrame | EnergyWindowMaterialBlind | EnergyWindowMaterialShade[];
     /** List of all unique HVAC systems in the Model. */
-    hvacs?: Hvacs[];
+    hvacs?: IdealAirSystemAbridged | VAV | PVAV | PSZ | PTAC | ForcedAirFurnace | FCUwithDOASAbridged | WSHPwithDOASAbridged | VRFwithDOASAbridged | RadiantwithDOASAbridged | FCU | WSHP | VRF | Baseboard | EvaporativeCooler | Residential | WindowAC | GasUnitHeater | Radiant | DetailedHVAC[];
     /** List of all unique Service Hot Water (SHW) systems in the Model. */
     shws?: SHWSystem[];
     /** List of all unique ProgramTypes in the Model. */
-    program_types?: Program_types[];
+    program_types?: ProgramTypeAbridged | ProgramType[];
     /** A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades. */
-    schedules?: Schedules[];
+    schedules?: ScheduleRulesetAbridged | ScheduleFixedIntervalAbridged | ScheduleRuleset | ScheduleFixedInterval[];
     /** A list of all unique ScheduleTypeLimits in the model. This all ScheduleTypeLimits needed to make the Model schedules. */
     schedule_type_limits?: ScheduleTypeLimit[];
     /** An optional parameter to define the global parameters for a ventilation cooling. */
@@ -12666,9 +12666,9 @@ export interface IModelEnergyProperties extends I_OpenAPIGenBaseModel {
 /** Set containing radiance modifiers needed for a model's Shade. */
 export class ShadeModifierSet extends _OpenAPIGenBaseModel implements IShadeModifierSet {
     /** A radiance modifier object for faces with an Outdoors boundary condition. */
-    exterior_modifier?: exterior_modifier;
+    exterior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A radiance modifier object for faces with a boundary condition other than Outdoors. */
-    interior_modifier?: interior_modifier;
+    interior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     readonly type: string = "ShadeModifierSet";
 
     constructor(data?: IShadeModifierSet) {
@@ -12708,9 +12708,9 @@ export class ShadeModifierSet extends _OpenAPIGenBaseModel implements IShadeModi
 /** Set containing radiance modifiers needed for a model's Shade. */
 export interface IShadeModifierSet extends I_OpenAPIGenBaseModel {
     /** A radiance modifier object for faces with an Outdoors boundary condition. */
-    exterior_modifier?: exterior_modifier;
+    exterior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A radiance modifier object for faces with a boundary condition other than Outdoors. */
-    interior_modifier?: interior_modifier;
+    interior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     type?: string;
 }
 
@@ -12929,9 +12929,9 @@ export interface IView extends I_RadianceAsset {
 /** Set containing radiance modifiers needed for a model's Walls. */
 export class WallModifierSet extends _OpenAPIGenBaseModel implements IWallModifierSet {
     /** A radiance modifier object for faces with an Outdoors boundary condition. */
-    exterior_modifier?: exterior_modifier2;
+    exterior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A radiance modifier object for faces with a boundary condition other than Outdoors. */
-    interior_modifier?: interior_modifier2;
+    interior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     readonly type: string = "WallModifierSet";
 
     constructor(data?: IWallModifierSet) {
@@ -12971,18 +12971,18 @@ export class WallModifierSet extends _OpenAPIGenBaseModel implements IWallModifi
 /** Set containing radiance modifiers needed for a model's Walls. */
 export interface IWallModifierSet extends I_OpenAPIGenBaseModel {
     /** A radiance modifier object for faces with an Outdoors boundary condition. */
-    exterior_modifier?: exterior_modifier2;
+    exterior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A radiance modifier object for faces with a boundary condition other than Outdoors. */
-    interior_modifier?: interior_modifier2;
+    interior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     type?: string;
 }
 
 /** Set containing radiance modifiers needed for a model's roofs. */
 export class RoofCeilingModifierSet extends _OpenAPIGenBaseModel implements IRoofCeilingModifierSet {
     /** A radiance modifier object for faces with an Outdoors boundary condition. */
-    exterior_modifier?: exterior_modifier3;
+    exterior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A radiance modifier object for faces with a boundary condition other than Outdoors. */
-    interior_modifier?: interior_modifier3;
+    interior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     readonly type: string = "RoofCeilingModifierSet";
 
     constructor(data?: IRoofCeilingModifierSet) {
@@ -13022,9 +13022,9 @@ export class RoofCeilingModifierSet extends _OpenAPIGenBaseModel implements IRoo
 /** Set containing radiance modifiers needed for a model's roofs. */
 export interface IRoofCeilingModifierSet extends I_OpenAPIGenBaseModel {
     /** A radiance modifier object for faces with an Outdoors boundary condition. */
-    exterior_modifier?: exterior_modifier3;
+    exterior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A radiance modifier object for faces with a boundary condition other than Outdoors. */
-    interior_modifier?: interior_modifier3;
+    interior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     type?: string;
 }
 
@@ -13032,13 +13032,13 @@ export interface IRoofCeilingModifierSet extends I_OpenAPIGenBaseModel {
 export class ApertureModifierSet extends _OpenAPIGenBaseModel implements IApertureModifierSet {
     readonly type: string = "ApertureModifierSet";
     /** A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and Wall parent Face. */
-    window_modifier?: Window_modifier;
+    window_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A modifier object for apertures with a Surface boundary condition. */
-    interior_modifier?: interior_modifier4;
+    interior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face. */
-    skylight_modifier?: Skylight_modifier;
+    skylight_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A modifier object for apertures with an Outdoors boundary condition and a True is_operable property. */
-    operable_modifier?: Operable_modifier;
+    operable_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
 
     constructor(data?: IApertureModifierSet) {
         super(data);
@@ -13082,27 +13082,27 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel implements IApertu
 export interface IApertureModifierSet extends I_OpenAPIGenBaseModel {
     type?: string;
     /** A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and Wall parent Face. */
-    window_modifier?: Window_modifier;
+    window_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A modifier object for apertures with a Surface boundary condition. */
-    interior_modifier?: interior_modifier4;
+    interior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face. */
-    skylight_modifier?: Skylight_modifier;
+    skylight_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A modifier object for apertures with an Outdoors boundary condition and a True is_operable property. */
-    operable_modifier?: Operable_modifier;
+    operable_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
 }
 
 /** Set containing radiance modifiers needed for a model's Doors. */
 export class DoorModifierSet extends _OpenAPIGenBaseModel implements IDoorModifierSet {
     /** A radiance modifier object for faces with an Outdoors boundary condition. */
-    exterior_modifier?: exterior_modifier4;
+    exterior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A radiance modifier object for faces with a boundary condition other than Outdoors. */
-    interior_modifier?: interior_modifier5;
+    interior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A modifier object for glass with a Surface boundary condition. */
-    interior_glass_modifier?: Interior_glass_modifier;
+    interior_glass_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A modifier object for glass with an Outdoors boundary condition. */
-    exterior_glass_modifier?: Exterior_glass_modifier;
+    exterior_glass_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A window modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face. */
-    overhead_modifier?: Overhead_modifier;
+    overhead_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     readonly type: string = "DoorModifierSet";
 
     constructor(data?: IDoorModifierSet) {
@@ -13148,15 +13148,15 @@ export class DoorModifierSet extends _OpenAPIGenBaseModel implements IDoorModifi
 /** Set containing radiance modifiers needed for a model's Doors. */
 export interface IDoorModifierSet extends I_OpenAPIGenBaseModel {
     /** A radiance modifier object for faces with an Outdoors boundary condition. */
-    exterior_modifier?: exterior_modifier4;
+    exterior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A radiance modifier object for faces with a boundary condition other than Outdoors. */
-    interior_modifier?: interior_modifier5;
+    interior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A modifier object for glass with a Surface boundary condition. */
-    interior_glass_modifier?: Interior_glass_modifier;
+    interior_glass_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A modifier object for glass with an Outdoors boundary condition. */
-    exterior_glass_modifier?: Exterior_glass_modifier;
+    exterior_glass_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A window modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face. */
-    overhead_modifier?: Overhead_modifier;
+    overhead_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     type?: string;
 }
 
@@ -13176,7 +13176,7 @@ export class ModifierSet extends IDdRadianceBaseModel implements IModifierSet {
     /** An optional ShadeModifierSet object for this ModifierSet. (default: None). */
     shade_set?: ShadeModifierSet;
     /** An optional Modifier to be used for all Faces with an AirBoundary face type. If None, it will be the honeybee generic air wall modifier. */
-    air_boundary_modifier?: Air_boundary_modifier;
+    air_boundary_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
 
     constructor(data?: IModifierSet) {
         super(data);
@@ -13238,7 +13238,7 @@ export interface IModifierSet extends IIDdRadianceBaseModel {
     /** An optional ShadeModifierSet object for this ModifierSet. (default: None). */
     shade_set?: ShadeModifierSet;
     /** An optional Modifier to be used for all Faces with an AirBoundary face type. If None, it will be the honeybee generic air wall modifier. */
-    air_boundary_modifier?: Air_boundary_modifier;
+    air_boundary_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
 }
 
 /** Abridged set containing all modifiers needed to create a radiance model. */
@@ -13624,9 +13624,9 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel implements IMo
     /** Global Radiance modifier set. */
     readonly global_modifier_set?: GlobalModifierSet;
     /** A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set. */
-    modifiers?: modifiers[];
+    modifiers?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
     /** A list of all unique Room-Assigned ModifierSets in the Model. */
-    modifier_sets?: Modifier_sets[];
+    modifier_sets?: ModifierSet | ModifierSetAbridged[];
     /** An array of SensorGrids that are associated with the model. */
     sensor_grids?: SensorGrid[];
     /** An array of Views that are associated with the model. */
@@ -13710,9 +13710,9 @@ export interface IModelRadianceProperties extends I_OpenAPIGenBaseModel {
     /** Global Radiance modifier set. */
     global_modifier_set?: GlobalModifierSet;
     /** A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set. */
-    modifiers?: modifiers[];
+    modifiers?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
     /** A list of all unique Room-Assigned ModifierSets in the Model. */
-    modifier_sets?: Modifier_sets[];
+    modifier_sets?: ModifierSet | ModifierSetAbridged[];
     /** An array of SensorGrids that are associated with the model. */
     sensor_grids?: SensorGrid[];
     /** An array of Views that are associated with the model. */
@@ -14215,15 +14215,15 @@ export interface IRoomEnergyPropertiesAbridged extends I_OpenAPIGenBaseModel {
 export class RoomDoe2Properties extends _OpenAPIGenBaseModel implements IRoomDoe2Properties {
     readonly type: string = "RoomDoe2Properties";
     /** A number for the design supply air flow rate for the zone the Room is assigned to (cfm). This establishes the minimum allowed design air flow. Note that the actual design flow may be larger. If Autocalculate, this parameter will not be written into the INP. */
-    assigned_flow?: Assigned_flow;
+    assigned_flow?: Autocalculate | number;
     /** A number for the design supply air flow rate to the zone per unit floor area (cfm/ft2). If Autocalculate, this parameter will not be written into the INP. */
-    flow_per_area?: Flow_per_area;
+    flow_per_area?: Autocalculate | number;
     /** A number between 0 and 1 for the minimum allowable zone air supply flow rate, expressed as a fraction of design flow rate. Applicable to variable-volume type systems only. If Autocalculate, this parameter will not be written into the INP. */
-    min_flow_ratio?: Min_flow_ratio;
+    min_flow_ratio?: Autocalculate | number;
     /** A number for the minimum air flow per square foot of floor area (cfm/ft2). This is an alternative way of specifying the min_flow_ratio. If Autocalculate, this parameter will not be written into the INP. */
-    min_flow_per_area?: Min_flow_per_area;
+    min_flow_per_area?: Autocalculate | number;
     /** A number between 0 and 1 for the ratio of the maximum (or fixed) heating airflow to the cooling airflow. The specific meaning varies according to the type of zone terminal. If Autocalculate, this parameter will not be written into the INP. */
-    hmax_flow_ratio?: Hmax_flow_ratio;
+    hmax_flow_ratio?: Autocalculate | number;
 
     constructor(data?: IRoomDoe2Properties) {
         super(data);
@@ -14269,15 +14269,15 @@ export class RoomDoe2Properties extends _OpenAPIGenBaseModel implements IRoomDoe
 export interface IRoomDoe2Properties extends I_OpenAPIGenBaseModel {
     type?: string;
     /** A number for the design supply air flow rate for the zone the Room is assigned to (cfm). This establishes the minimum allowed design air flow. Note that the actual design flow may be larger. If Autocalculate, this parameter will not be written into the INP. */
-    assigned_flow?: Assigned_flow;
+    assigned_flow?: Autocalculate | number;
     /** A number for the design supply air flow rate to the zone per unit floor area (cfm/ft2). If Autocalculate, this parameter will not be written into the INP. */
-    flow_per_area?: Flow_per_area;
+    flow_per_area?: Autocalculate | number;
     /** A number between 0 and 1 for the minimum allowable zone air supply flow rate, expressed as a fraction of design flow rate. Applicable to variable-volume type systems only. If Autocalculate, this parameter will not be written into the INP. */
-    min_flow_ratio?: Min_flow_ratio;
+    min_flow_ratio?: Autocalculate | number;
     /** A number for the minimum air flow per square foot of floor area (cfm/ft2). This is an alternative way of specifying the min_flow_ratio. If Autocalculate, this parameter will not be written into the INP. */
-    min_flow_per_area?: Min_flow_per_area;
+    min_flow_per_area?: Autocalculate | number;
     /** A number between 0 and 1 for the ratio of the maximum (or fixed) heating airflow to the cooling airflow. The specific meaning varies according to the type of zone terminal. If Autocalculate, this parameter will not be written into the INP. */
-    hmax_flow_ratio?: Hmax_flow_ratio;
+    hmax_flow_ratio?: Autocalculate | number;
 }
 
 export class RoomPropertiesAbridged extends _OpenAPIGenBaseModel implements IRoomPropertiesAbridged {
@@ -15088,9 +15088,9 @@ export interface I_DOASBase extends IIDdEnergyBaseModel {
 /** Base class for the modifier sets assigned to Faces. */
 export class BaseModifierSet extends _OpenAPIGenBaseModel implements IBaseModifierSet {
     /** A radiance modifier object for faces with an Outdoors boundary condition. */
-    exterior_modifier?: exterior_modifier5;
+    exterior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A radiance modifier object for faces with a boundary condition other than Outdoors. */
-    interior_modifier?: interior_modifier6;
+    interior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     readonly type: string = "BaseModifierSet";
 
     constructor(data?: IBaseModifierSet) {
@@ -15130,9 +15130,9 @@ export class BaseModifierSet extends _OpenAPIGenBaseModel implements IBaseModifi
 /** Base class for the modifier sets assigned to Faces. */
 export interface IBaseModifierSet extends I_OpenAPIGenBaseModel {
     /** A radiance modifier object for faces with an Outdoors boundary condition. */
-    exterior_modifier?: exterior_modifier5;
+    exterior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** A radiance modifier object for faces with a boundary condition other than Outdoors. */
-    interior_modifier?: interior_modifier6;
+    interior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     type?: string;
 }
 
@@ -16001,7 +16001,7 @@ export class DesignDay extends _OpenAPIGenBaseModel implements IDesignDay {
     humidity_condition!: HumidityCondition;
     /** A WindCondition describing wind conditions on the design day. */
     wind_condition!: WindCondition;
-    sky_condition!: Sky_condition;
+    sky_condition!: ASHRAEClearSky | ASHRAETau;
     readonly type: string = "DesignDay";
 
     constructor(data?: IDesignDay) {
@@ -16060,7 +16060,7 @@ export interface IDesignDay extends I_OpenAPIGenBaseModel {
     humidity_condition: HumidityCondition;
     /** A WindCondition describing wind conditions on the design day. */
     wind_condition: WindCondition;
-    sky_condition: Sky_condition;
+    sky_condition: ASHRAEClearSky | ASHRAETau;
     type?: string;
 }
 
@@ -16553,7 +16553,7 @@ export class ValidationError implements IValidationError {
     /** A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved. */
     top_parents?: ValidationParent[];
     /** An optional list of geometry objects that helps illustrate where exactly issues with invalid geometry exist within the Honeybee object. Examples include the naked and non-manifold line segments for non-solid Room geometries, the points of self-intersection for cases of self-intersecting geometry and out-of-plane vertices for non-planar objects. Oftentimes, zooming directly to these helper geometries will help end users understand invalid situations in their model faster than simple zooming to the invalid Honeybee object in its totality. */
-    helper_geometry?: Helper_geometry[];
+    helper_geometry?: Point3D | LineSegment3D[];
 
     [key: string]: any;
 
@@ -16679,7 +16679,7 @@ export interface IValidationError {
     /** A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved. */
     top_parents?: ValidationParent[];
     /** An optional list of geometry objects that helps illustrate where exactly issues with invalid geometry exist within the Honeybee object. Examples include the naked and non-manifold line segments for non-solid Room geometries, the points of self-intersection for cases of self-intersecting geometry and out-of-plane vertices for non-planar objects. Oftentimes, zooming directly to these helper geometries will help end users understand invalid situations in their model faster than simple zooming to the invalid Honeybee object in its totality. */
-    helper_geometry?: Helper_geometry[];
+    helper_geometry?: Point3D | LineSegment3D[];
 
     [key: string]: any;
 }
@@ -17551,7 +17551,7 @@ export class Location extends _OpenAPIGenBaseModel implements ILocation {
     /** Location longitude between -180 (west) and 180 (east) (Default: 0). */
     longitude?: number;
     /** Time zone between -12 hours (west) and +14 hours (east). If None, the time zone will be an estimated integer value derived from the longitude in accordance with solar time. */
-    time_zone?: Time_zone;
+    time_zone?: Autocalculate | number;
     /** A number for elevation of the location in meters. (Default: 0). */
     elevation?: number;
     /** ID of the location if the location is representing a weather station. */
@@ -17627,7 +17627,7 @@ export interface ILocation extends I_OpenAPIGenBaseModel {
     /** Location longitude between -180 (west) and 180 (east) (Default: 0). */
     longitude?: number;
     /** Time zone between -12 hours (west) and +14 hours (east). If None, the time zone will be an estimated integer value derived from the longitude in accordance with solar time. */
-    time_zone?: Time_zone;
+    time_zone?: Autocalculate | number;
     /** A number for elevation of the location in meters. (Default: 0). */
     elevation?: number;
     /** ID of the location if the location is representing a weather station. */
@@ -17771,4230 +17771,6 @@ export interface IProjectInfo extends I_OpenAPIGenBaseModel {
     building_type?: BuildingTypes[];
     /** A list of building vintages (e.g. ASHRAE_2019, ASHRAE_2016). */
     vintage?: EfficiencyStandards[];
-
-    [key: string]: any;
-}
-
-export class Solar_reflectance_back implements ISolar_reflectance_back {
-
-    [key: string]: any;
-
-    constructor(data?: ISolar_reflectance_back) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Solar_reflectance_back {
-        data = typeof data === 'object' ? data : {};
-        let result = new Solar_reflectance_back();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface ISolar_reflectance_back {
-
-    [key: string]: any;
-}
-
-export class Visible_reflectance_back implements IVisible_reflectance_back {
-
-    [key: string]: any;
-
-    constructor(data?: IVisible_reflectance_back) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Visible_reflectance_back {
-        data = typeof data === 'object' ? data : {};
-        let result = new Visible_reflectance_back();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IVisible_reflectance_back {
-
-    [key: string]: any;
-}
-
-export class Materials implements IMaterials {
-
-    [key: string]: any;
-
-    constructor(data?: IMaterials) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Materials {
-        data = typeof data === 'object' ? data : {};
-        let result = new Materials();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IMaterials {
-
-    [key: string]: any;
-}
-
-export class Lower_limit implements ILower_limit {
-
-    [key: string]: any;
-
-    constructor(data?: ILower_limit) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Lower_limit {
-        data = typeof data === 'object' ? data : {};
-        let result = new Lower_limit();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface ILower_limit {
-
-    [key: string]: any;
-}
-
-export class Upper_limit implements IUpper_limit {
-
-    [key: string]: any;
-
-    constructor(data?: IUpper_limit) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Upper_limit {
-        data = typeof data === 'object' ? data : {};
-        let result = new Upper_limit();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IUpper_limit {
-
-    [key: string]: any;
-}
-
-export class Schedule implements ISchedule {
-
-    [key: string]: any;
-
-    constructor(data?: ISchedule) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Schedule {
-        data = typeof data === 'object' ? data : {};
-        let result = new Schedule();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface ISchedule {
-
-    [key: string]: any;
-}
-
-export class materials implements Imaterials {
-
-    [key: string]: any;
-
-    constructor(data?: Imaterials) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): materials {
-        data = typeof data === 'object' ? data : {};
-        let result = new materials();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Imaterials {
-
-    [key: string]: any;
-}
-
-export class Shade_material implements IShade_material {
-
-    [key: string]: any;
-
-    constructor(data?: IShade_material) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Shade_material {
-        data = typeof data === 'object' ? data : {};
-        let result = new Shade_material();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IShade_material {
-
-    [key: string]: any;
-}
-
-export class schedule implements Ischedule {
-
-    [key: string]: any;
-
-    constructor(data?: Ischedule) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): schedule {
-        data = typeof data === 'object' ? data : {};
-        let result = new schedule();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Ischedule {
-
-    [key: string]: any;
-}
-
-export class Interior_construction implements IInterior_construction {
-
-    [key: string]: any;
-
-    constructor(data?: IInterior_construction) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Interior_construction {
-        data = typeof data === 'object' ? data : {};
-        let result = new Interior_construction();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IInterior_construction {
-
-    [key: string]: any;
-}
-
-export class Window_construction implements IWindow_construction {
-
-    [key: string]: any;
-
-    constructor(data?: IWindow_construction) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Window_construction {
-        data = typeof data === 'object' ? data : {};
-        let result = new Window_construction();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IWindow_construction {
-
-    [key: string]: any;
-}
-
-export class Skylight_construction implements ISkylight_construction {
-
-    [key: string]: any;
-
-    constructor(data?: ISkylight_construction) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Skylight_construction {
-        data = typeof data === 'object' ? data : {};
-        let result = new Skylight_construction();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface ISkylight_construction {
-
-    [key: string]: any;
-}
-
-export class Operable_construction implements IOperable_construction {
-
-    [key: string]: any;
-
-    constructor(data?: IOperable_construction) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Operable_construction {
-        data = typeof data === 'object' ? data : {};
-        let result = new Operable_construction();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IOperable_construction {
-
-    [key: string]: any;
-}
-
-export class Exterior_glass_construction implements IExterior_glass_construction {
-
-    [key: string]: any;
-
-    constructor(data?: IExterior_glass_construction) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Exterior_glass_construction {
-        data = typeof data === 'object' ? data : {};
-        let result = new Exterior_glass_construction();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IExterior_glass_construction {
-
-    [key: string]: any;
-}
-
-export class Interior_glass_construction implements IInterior_glass_construction {
-
-    [key: string]: any;
-
-    constructor(data?: IInterior_glass_construction) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Interior_glass_construction {
-        data = typeof data === 'object' ? data : {};
-        let result = new Interior_glass_construction();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IInterior_glass_construction {
-
-    [key: string]: any;
-}
-
-export class Air_mixing_schedule implements IAir_mixing_schedule {
-
-    [key: string]: any;
-
-    constructor(data?: IAir_mixing_schedule) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Air_mixing_schedule {
-        data = typeof data === 'object' ? data : {};
-        let result = new Air_mixing_schedule();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IAir_mixing_schedule {
-
-    [key: string]: any;
-}
-
-export class Air_boundary_construction implements IAir_boundary_construction {
-
-    [key: string]: any;
-
-    constructor(data?: IAir_boundary_construction) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Air_boundary_construction {
-        data = typeof data === 'object' ? data : {};
-        let result = new Air_boundary_construction();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IAir_boundary_construction {
-
-    [key: string]: any;
-}
-
-export class Modifier implements IModifier {
-
-    [key: string]: any;
-
-    constructor(data?: IModifier) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Modifier {
-        data = typeof data === 'object' ? data : {};
-        let result = new Modifier();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IModifier {
-
-    [key: string]: any;
-}
-
-export class Dependencies implements IDependencies {
-
-    [key: string]: any;
-
-    constructor(data?: IDependencies) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Dependencies {
-        data = typeof data === 'object' ? data : {};
-        let result = new Dependencies();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IDependencies {
-
-    [key: string]: any;
-}
-
-export class Alternate_material implements IAlternate_material {
-
-    [key: string]: any;
-
-    constructor(data?: IAlternate_material) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Alternate_material {
-        data = typeof data === 'object' ? data : {};
-        let result = new Alternate_material();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IAlternate_material {
-
-    [key: string]: any;
-}
-
-export class modifier implements Imodifier {
-
-    [key: string]: any;
-
-    constructor(data?: Imodifier) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): modifier {
-        data = typeof data === 'object' ? data : {};
-        let result = new modifier();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Imodifier {
-
-    [key: string]: any;
-}
-
-export class dependencies implements Idependencies {
-
-    [key: string]: any;
-
-    constructor(data?: Idependencies) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): dependencies {
-        data = typeof data === 'object' ? data : {};
-        let result = new dependencies();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Idependencies {
-
-    [key: string]: any;
-}
-
-export class modifier2 implements Imodifier2 {
-
-    [key: string]: any;
-
-    constructor(data?: Imodifier2) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): modifier2 {
-        data = typeof data === 'object' ? data : {};
-        let result = new modifier2();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Imodifier2 {
-
-    [key: string]: any;
-}
-
-export class dependencies2 implements Idependencies2 {
-
-    [key: string]: any;
-
-    constructor(data?: Idependencies2) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): dependencies2 {
-        data = typeof data === 'object' ? data : {};
-        let result = new dependencies2();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Idependencies2 {
-
-    [key: string]: any;
-}
-
-export class modifier3 implements Imodifier3 {
-
-    [key: string]: any;
-
-    constructor(data?: Imodifier3) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): modifier3 {
-        data = typeof data === 'object' ? data : {};
-        let result = new modifier3();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Imodifier3 {
-
-    [key: string]: any;
-}
-
-export class dependencies3 implements Idependencies3 {
-
-    [key: string]: any;
-
-    constructor(data?: Idependencies3) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): dependencies3 {
-        data = typeof data === 'object' ? data : {};
-        let result = new dependencies3();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Idependencies3 {
-
-    [key: string]: any;
-}
-
-export class modifier4 implements Imodifier4 {
-
-    [key: string]: any;
-
-    constructor(data?: Imodifier4) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): modifier4 {
-        data = typeof data === 'object' ? data : {};
-        let result = new modifier4();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Imodifier4 {
-
-    [key: string]: any;
-}
-
-export class dependencies4 implements Idependencies4 {
-
-    [key: string]: any;
-
-    constructor(data?: Idependencies4) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): dependencies4 {
-        data = typeof data === 'object' ? data : {};
-        let result = new dependencies4();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Idependencies4 {
-
-    [key: string]: any;
-}
-
-export class modifier5 implements Imodifier5 {
-
-    [key: string]: any;
-
-    constructor(data?: Imodifier5) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): modifier5 {
-        data = typeof data === 'object' ? data : {};
-        let result = new modifier5();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Imodifier5 {
-
-    [key: string]: any;
-}
-
-export class dependencies5 implements Idependencies5 {
-
-    [key: string]: any;
-
-    constructor(data?: Idependencies5) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): dependencies5 {
-        data = typeof data === 'object' ? data : {};
-        let result = new dependencies5();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Idependencies5 {
-
-    [key: string]: any;
-}
-
-export class modifier6 implements Imodifier6 {
-
-    [key: string]: any;
-
-    constructor(data?: Imodifier6) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): modifier6 {
-        data = typeof data === 'object' ? data : {};
-        let result = new modifier6();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Imodifier6 {
-
-    [key: string]: any;
-}
-
-export class dependencies6 implements Idependencies6 {
-
-    [key: string]: any;
-
-    constructor(data?: Idependencies6) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): dependencies6 {
-        data = typeof data === 'object' ? data : {};
-        let result = new dependencies6();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Idependencies6 {
-
-    [key: string]: any;
-}
-
-export class modifier7 implements Imodifier7 {
-
-    [key: string]: any;
-
-    constructor(data?: Imodifier7) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): modifier7 {
-        data = typeof data === 'object' ? data : {};
-        let result = new modifier7();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Imodifier7 {
-
-    [key: string]: any;
-}
-
-export class dependencies7 implements Idependencies7 {
-
-    [key: string]: any;
-
-    constructor(data?: Idependencies7) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): dependencies7 {
-        data = typeof data === 'object' ? data : {};
-        let result = new dependencies7();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Idependencies7 {
-
-    [key: string]: any;
-}
-
-export class Exterior_modifier implements IExterior_modifier {
-
-    [key: string]: any;
-
-    constructor(data?: IExterior_modifier) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Exterior_modifier {
-        data = typeof data === 'object' ? data : {};
-        let result = new Exterior_modifier();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IExterior_modifier {
-
-    [key: string]: any;
-}
-
-export class Interior_modifier implements IInterior_modifier {
-
-    [key: string]: any;
-
-    constructor(data?: IInterior_modifier) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Interior_modifier {
-        data = typeof data === 'object' ? data : {};
-        let result = new Interior_modifier();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IInterior_modifier {
-
-    [key: string]: any;
-}
-
-export class View_factor implements IView_factor {
-
-    [key: string]: any;
-
-    constructor(data?: IView_factor) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): View_factor {
-        data = typeof data === 'object' ? data : {};
-        let result = new View_factor();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IView_factor {
-
-    [key: string]: any;
-}
-
-export class Temperature implements ITemperature {
-
-    [key: string]: any;
-
-    constructor(data?: ITemperature) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Temperature {
-        data = typeof data === 'object' ? data : {};
-        let result = new Temperature();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface ITemperature {
-
-    [key: string]: any;
-}
-
-export class Boundary_condition implements IBoundary_condition {
-
-    [key: string]: any;
-
-    constructor(data?: IBoundary_condition) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Boundary_condition {
-        data = typeof data === 'object' ? data : {};
-        let result = new Boundary_condition();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IBoundary_condition {
-
-    [key: string]: any;
-}
-
-export class boundary_condition implements Iboundary_condition {
-
-    [key: string]: any;
-
-    constructor(data?: Iboundary_condition) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): boundary_condition {
-        data = typeof data === 'object' ? data : {};
-        let result = new boundary_condition();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Iboundary_condition {
-
-    [key: string]: any;
-}
-
-export class boundary_condition2 implements Iboundary_condition2 {
-
-    [key: string]: any;
-
-    constructor(data?: Iboundary_condition2) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): boundary_condition2 {
-        data = typeof data === 'object' ? data : {};
-        let result = new boundary_condition2();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Iboundary_condition2 {
-
-    [key: string]: any;
-}
-
-export class Modifiers implements IModifiers {
-
-    [key: string]: any;
-
-    constructor(data?: IModifiers) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Modifiers {
-        data = typeof data === 'object' ? data : {};
-        let result = new Modifiers();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IModifiers {
-
-    [key: string]: any;
-}
-
-export class materials2 implements Imaterials2 {
-
-    [key: string]: any;
-
-    constructor(data?: Imaterials2) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): materials2 {
-        data = typeof data === 'object' ? data : {};
-        let result = new materials2();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Imaterials2 {
-
-    [key: string]: any;
-}
-
-export class Constructions implements IConstructions {
-
-    [key: string]: any;
-
-    constructor(data?: IConstructions) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Constructions {
-        data = typeof data === 'object' ? data : {};
-        let result = new Constructions();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IConstructions {
-
-    [key: string]: any;
-}
-
-export class Heating_limit implements IHeating_limit {
-
-    [key: string]: any;
-
-    constructor(data?: IHeating_limit) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Heating_limit {
-        data = typeof data === 'object' ? data : {};
-        let result = new Heating_limit();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IHeating_limit {
-
-    [key: string]: any;
-}
-
-export class Cooling_limit implements ICooling_limit {
-
-    [key: string]: any;
-
-    constructor(data?: ICooling_limit) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Cooling_limit {
-        data = typeof data === 'object' ? data : {};
-        let result = new Cooling_limit();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface ICooling_limit {
-
-    [key: string]: any;
-}
-
-export class Heater_efficiency implements IHeater_efficiency {
-
-    [key: string]: any;
-
-    constructor(data?: IHeater_efficiency) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Heater_efficiency {
-        data = typeof data === 'object' ? data : {};
-        let result = new Heater_efficiency();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IHeater_efficiency {
-
-    [key: string]: any;
-}
-
-export class Ambient_condition implements IAmbient_condition {
-
-    [key: string]: any;
-
-    constructor(data?: IAmbient_condition) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Ambient_condition {
-        data = typeof data === 'object' ? data : {};
-        let result = new Ambient_condition();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IAmbient_condition {
-
-    [key: string]: any;
-}
-
-export class Latent_fraction implements ILatent_fraction {
-
-    [key: string]: any;
-
-    constructor(data?: ILatent_fraction) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Latent_fraction {
-        data = typeof data === 'object' ? data : {};
-        let result = new Latent_fraction();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface ILatent_fraction {
-
-    [key: string]: any;
-}
-
-export class Occupancy_schedule implements IOccupancy_schedule {
-
-    [key: string]: any;
-
-    constructor(data?: IOccupancy_schedule) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Occupancy_schedule {
-        data = typeof data === 'object' ? data : {};
-        let result = new Occupancy_schedule();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IOccupancy_schedule {
-
-    [key: string]: any;
-}
-
-export class Activity_schedule implements IActivity_schedule {
-
-    [key: string]: any;
-
-    constructor(data?: IActivity_schedule) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Activity_schedule {
-        data = typeof data === 'object' ? data : {};
-        let result = new Activity_schedule();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IActivity_schedule {
-
-    [key: string]: any;
-}
-
-export class latent_fraction implements Ilatent_fraction {
-
-    [key: string]: any;
-
-    constructor(data?: Ilatent_fraction) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): latent_fraction {
-        data = typeof data === 'object' ? data : {};
-        let result = new latent_fraction();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Ilatent_fraction {
-
-    [key: string]: any;
-}
-
-export class schedule2 implements Ischedule2 {
-
-    [key: string]: any;
-
-    constructor(data?: Ischedule2) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): schedule2 {
-        data = typeof data === 'object' ? data : {};
-        let result = new schedule2();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Ischedule2 {
-
-    [key: string]: any;
-}
-
-export class schedule3 implements Ischedule3 {
-
-    [key: string]: any;
-
-    constructor(data?: Ischedule3) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): schedule3 {
-        data = typeof data === 'object' ? data : {};
-        let result = new schedule3();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Ischedule3 {
-
-    [key: string]: any;
-}
-
-export class schedule4 implements Ischedule4 {
-
-    [key: string]: any;
-
-    constructor(data?: Ischedule4) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): schedule4 {
-        data = typeof data === 'object' ? data : {};
-        let result = new schedule4();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Ischedule4 {
-
-    [key: string]: any;
-}
-
-export class schedule5 implements Ischedule5 {
-
-    [key: string]: any;
-
-    constructor(data?: Ischedule5) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): schedule5 {
-        data = typeof data === 'object' ? data : {};
-        let result = new schedule5();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Ischedule5 {
-
-    [key: string]: any;
-}
-
-export class schedule6 implements Ischedule6 {
-
-    [key: string]: any;
-
-    constructor(data?: Ischedule6) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): schedule6 {
-        data = typeof data === 'object' ? data : {};
-        let result = new schedule6();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Ischedule6 {
-
-    [key: string]: any;
-}
-
-export class schedule7 implements Ischedule7 {
-
-    [key: string]: any;
-
-    constructor(data?: Ischedule7) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): schedule7 {
-        data = typeof data === 'object' ? data : {};
-        let result = new schedule7();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Ischedule7 {
-
-    [key: string]: any;
-}
-
-export class Cooling_schedule implements ICooling_schedule {
-
-    [key: string]: any;
-
-    constructor(data?: ICooling_schedule) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Cooling_schedule {
-        data = typeof data === 'object' ? data : {};
-        let result = new Cooling_schedule();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface ICooling_schedule {
-
-    [key: string]: any;
-}
-
-export class Heating_schedule implements IHeating_schedule {
-
-    [key: string]: any;
-
-    constructor(data?: IHeating_schedule) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Heating_schedule {
-        data = typeof data === 'object' ? data : {};
-        let result = new Heating_schedule();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IHeating_schedule {
-
-    [key: string]: any;
-}
-
-export class Humidifying_schedule implements IHumidifying_schedule {
-
-    [key: string]: any;
-
-    constructor(data?: IHumidifying_schedule) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Humidifying_schedule {
-        data = typeof data === 'object' ? data : {};
-        let result = new Humidifying_schedule();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IHumidifying_schedule {
-
-    [key: string]: any;
-}
-
-export class Dehumidifying_schedule implements IDehumidifying_schedule {
-
-    [key: string]: any;
-
-    constructor(data?: IDehumidifying_schedule) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Dehumidifying_schedule {
-        data = typeof data === 'object' ? data : {};
-        let result = new Dehumidifying_schedule();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IDehumidifying_schedule {
-
-    [key: string]: any;
-}
-
-export class Construction_sets implements IConstruction_sets {
-
-    [key: string]: any;
-
-    constructor(data?: IConstruction_sets) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Construction_sets {
-        data = typeof data === 'object' ? data : {};
-        let result = new Construction_sets();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IConstruction_sets {
-
-    [key: string]: any;
-}
-
-export class constructions implements Iconstructions {
-
-    [key: string]: any;
-
-    constructor(data?: Iconstructions) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): constructions {
-        data = typeof data === 'object' ? data : {};
-        let result = new constructions();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Iconstructions {
-
-    [key: string]: any;
-}
-
-export class materials3 implements Imaterials3 {
-
-    [key: string]: any;
-
-    constructor(data?: Imaterials3) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): materials3 {
-        data = typeof data === 'object' ? data : {};
-        let result = new materials3();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Imaterials3 {
-
-    [key: string]: any;
-}
-
-export class Hvacs implements IHvacs {
-
-    [key: string]: any;
-
-    constructor(data?: IHvacs) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Hvacs {
-        data = typeof data === 'object' ? data : {};
-        let result = new Hvacs();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IHvacs {
-
-    [key: string]: any;
-}
-
-export class Program_types implements IProgram_types {
-
-    [key: string]: any;
-
-    constructor(data?: IProgram_types) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Program_types {
-        data = typeof data === 'object' ? data : {};
-        let result = new Program_types();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IProgram_types {
-
-    [key: string]: any;
-}
-
-export class Schedules implements ISchedules {
-
-    [key: string]: any;
-
-    constructor(data?: ISchedules) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Schedules {
-        data = typeof data === 'object' ? data : {};
-        let result = new Schedules();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface ISchedules {
-
-    [key: string]: any;
-}
-
-export class exterior_modifier implements Iexterior_modifier {
-
-    [key: string]: any;
-
-    constructor(data?: Iexterior_modifier) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): exterior_modifier {
-        data = typeof data === 'object' ? data : {};
-        let result = new exterior_modifier();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Iexterior_modifier {
-
-    [key: string]: any;
-}
-
-export class interior_modifier implements Iinterior_modifier {
-
-    [key: string]: any;
-
-    constructor(data?: Iinterior_modifier) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): interior_modifier {
-        data = typeof data === 'object' ? data : {};
-        let result = new interior_modifier();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Iinterior_modifier {
-
-    [key: string]: any;
-}
-
-export class exterior_modifier2 implements Iexterior_modifier2 {
-
-    [key: string]: any;
-
-    constructor(data?: Iexterior_modifier2) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): exterior_modifier2 {
-        data = typeof data === 'object' ? data : {};
-        let result = new exterior_modifier2();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Iexterior_modifier2 {
-
-    [key: string]: any;
-}
-
-export class interior_modifier2 implements Iinterior_modifier2 {
-
-    [key: string]: any;
-
-    constructor(data?: Iinterior_modifier2) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): interior_modifier2 {
-        data = typeof data === 'object' ? data : {};
-        let result = new interior_modifier2();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Iinterior_modifier2 {
-
-    [key: string]: any;
-}
-
-export class exterior_modifier3 implements Iexterior_modifier3 {
-
-    [key: string]: any;
-
-    constructor(data?: Iexterior_modifier3) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): exterior_modifier3 {
-        data = typeof data === 'object' ? data : {};
-        let result = new exterior_modifier3();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Iexterior_modifier3 {
-
-    [key: string]: any;
-}
-
-export class interior_modifier3 implements Iinterior_modifier3 {
-
-    [key: string]: any;
-
-    constructor(data?: Iinterior_modifier3) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): interior_modifier3 {
-        data = typeof data === 'object' ? data : {};
-        let result = new interior_modifier3();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Iinterior_modifier3 {
-
-    [key: string]: any;
-}
-
-export class Window_modifier implements IWindow_modifier {
-
-    [key: string]: any;
-
-    constructor(data?: IWindow_modifier) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Window_modifier {
-        data = typeof data === 'object' ? data : {};
-        let result = new Window_modifier();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IWindow_modifier {
-
-    [key: string]: any;
-}
-
-export class interior_modifier4 implements Iinterior_modifier4 {
-
-    [key: string]: any;
-
-    constructor(data?: Iinterior_modifier4) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): interior_modifier4 {
-        data = typeof data === 'object' ? data : {};
-        let result = new interior_modifier4();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Iinterior_modifier4 {
-
-    [key: string]: any;
-}
-
-export class Skylight_modifier implements ISkylight_modifier {
-
-    [key: string]: any;
-
-    constructor(data?: ISkylight_modifier) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Skylight_modifier {
-        data = typeof data === 'object' ? data : {};
-        let result = new Skylight_modifier();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface ISkylight_modifier {
-
-    [key: string]: any;
-}
-
-export class Operable_modifier implements IOperable_modifier {
-
-    [key: string]: any;
-
-    constructor(data?: IOperable_modifier) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Operable_modifier {
-        data = typeof data === 'object' ? data : {};
-        let result = new Operable_modifier();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IOperable_modifier {
-
-    [key: string]: any;
-}
-
-export class exterior_modifier4 implements Iexterior_modifier4 {
-
-    [key: string]: any;
-
-    constructor(data?: Iexterior_modifier4) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): exterior_modifier4 {
-        data = typeof data === 'object' ? data : {};
-        let result = new exterior_modifier4();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Iexterior_modifier4 {
-
-    [key: string]: any;
-}
-
-export class interior_modifier5 implements Iinterior_modifier5 {
-
-    [key: string]: any;
-
-    constructor(data?: Iinterior_modifier5) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): interior_modifier5 {
-        data = typeof data === 'object' ? data : {};
-        let result = new interior_modifier5();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Iinterior_modifier5 {
-
-    [key: string]: any;
-}
-
-export class Interior_glass_modifier implements IInterior_glass_modifier {
-
-    [key: string]: any;
-
-    constructor(data?: IInterior_glass_modifier) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Interior_glass_modifier {
-        data = typeof data === 'object' ? data : {};
-        let result = new Interior_glass_modifier();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IInterior_glass_modifier {
-
-    [key: string]: any;
-}
-
-export class Exterior_glass_modifier implements IExterior_glass_modifier {
-
-    [key: string]: any;
-
-    constructor(data?: IExterior_glass_modifier) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Exterior_glass_modifier {
-        data = typeof data === 'object' ? data : {};
-        let result = new Exterior_glass_modifier();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IExterior_glass_modifier {
-
-    [key: string]: any;
-}
-
-export class Overhead_modifier implements IOverhead_modifier {
-
-    [key: string]: any;
-
-    constructor(data?: IOverhead_modifier) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Overhead_modifier {
-        data = typeof data === 'object' ? data : {};
-        let result = new Overhead_modifier();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IOverhead_modifier {
-
-    [key: string]: any;
-}
-
-export class Air_boundary_modifier implements IAir_boundary_modifier {
-
-    [key: string]: any;
-
-    constructor(data?: IAir_boundary_modifier) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Air_boundary_modifier {
-        data = typeof data === 'object' ? data : {};
-        let result = new Air_boundary_modifier();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IAir_boundary_modifier {
-
-    [key: string]: any;
-}
-
-export class modifiers implements Imodifiers {
-
-    [key: string]: any;
-
-    constructor(data?: Imodifiers) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): modifiers {
-        data = typeof data === 'object' ? data : {};
-        let result = new modifiers();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Imodifiers {
-
-    [key: string]: any;
-}
-
-export class Modifier_sets implements IModifier_sets {
-
-    [key: string]: any;
-
-    constructor(data?: IModifier_sets) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Modifier_sets {
-        data = typeof data === 'object' ? data : {};
-        let result = new Modifier_sets();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IModifier_sets {
-
-    [key: string]: any;
-}
-
-export class Assigned_flow implements IAssigned_flow {
-
-    [key: string]: any;
-
-    constructor(data?: IAssigned_flow) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Assigned_flow {
-        data = typeof data === 'object' ? data : {};
-        let result = new Assigned_flow();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IAssigned_flow {
-
-    [key: string]: any;
-}
-
-export class Flow_per_area implements IFlow_per_area {
-
-    [key: string]: any;
-
-    constructor(data?: IFlow_per_area) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Flow_per_area {
-        data = typeof data === 'object' ? data : {};
-        let result = new Flow_per_area();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IFlow_per_area {
-
-    [key: string]: any;
-}
-
-export class Min_flow_ratio implements IMin_flow_ratio {
-
-    [key: string]: any;
-
-    constructor(data?: IMin_flow_ratio) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Min_flow_ratio {
-        data = typeof data === 'object' ? data : {};
-        let result = new Min_flow_ratio();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IMin_flow_ratio {
-
-    [key: string]: any;
-}
-
-export class Min_flow_per_area implements IMin_flow_per_area {
-
-    [key: string]: any;
-
-    constructor(data?: IMin_flow_per_area) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Min_flow_per_area {
-        data = typeof data === 'object' ? data : {};
-        let result = new Min_flow_per_area();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IMin_flow_per_area {
-
-    [key: string]: any;
-}
-
-export class Hmax_flow_ratio implements IHmax_flow_ratio {
-
-    [key: string]: any;
-
-    constructor(data?: IHmax_flow_ratio) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Hmax_flow_ratio {
-        data = typeof data === 'object' ? data : {};
-        let result = new Hmax_flow_ratio();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IHmax_flow_ratio {
-
-    [key: string]: any;
-}
-
-export class exterior_modifier5 implements Iexterior_modifier5 {
-
-    [key: string]: any;
-
-    constructor(data?: Iexterior_modifier5) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): exterior_modifier5 {
-        data = typeof data === 'object' ? data : {};
-        let result = new exterior_modifier5();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Iexterior_modifier5 {
-
-    [key: string]: any;
-}
-
-export class interior_modifier6 implements Iinterior_modifier6 {
-
-    [key: string]: any;
-
-    constructor(data?: Iinterior_modifier6) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): interior_modifier6 {
-        data = typeof data === 'object' ? data : {};
-        let result = new interior_modifier6();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface Iinterior_modifier6 {
-
-    [key: string]: any;
-}
-
-export class Sky_condition implements ISky_condition {
-
-    [key: string]: any;
-
-    constructor(data?: ISky_condition) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Sky_condition {
-        data = typeof data === 'object' ? data : {};
-        let result = new Sky_condition();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface ISky_condition {
-
-    [key: string]: any;
-}
-
-export class Helper_geometry implements IHelper_geometry {
-
-    [key: string]: any;
-
-    constructor(data?: IHelper_geometry) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Helper_geometry {
-        data = typeof data === 'object' ? data : {};
-        let result = new Helper_geometry();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface IHelper_geometry {
-
-    [key: string]: any;
-}
-
-export class Time_zone implements ITime_zone {
-
-    [key: string]: any;
-
-    constructor(data?: ITime_zone) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-        }
-    }
-
-    static fromJS(data: any): Time_zone {
-        data = typeof data === 'object' ? data : {};
-        let result = new Time_zone();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        return data;
-    }
-}
-
-export interface ITime_zone {
 
     [key: string]: any;
 }
