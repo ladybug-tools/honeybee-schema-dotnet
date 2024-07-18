@@ -2987,7 +2987,7 @@ export interface IEnergyWindowFrame extends IIDdEnergyBaseModel {
 /** Construction for window objects (Aperture, Door). */
 export class WindowConstruction extends IDdEnergyBaseModel implements IWindowConstruction {
     /** List of glazing and gas material definitions. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer. */
-    materials!: EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas | EnergyWindowMaterialGasCustom | EnergyWindowMaterialGasMixture[];
+    materials!: (EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas | EnergyWindowMaterialGasCustom | EnergyWindowMaterialGasMixture)[];
     readonly type: string = "WindowConstruction";
     /** An optional window frame material for the frame that surrounds the window construction. */
     frame?: EnergyWindowFrame;
@@ -3038,7 +3038,7 @@ export class WindowConstruction extends IDdEnergyBaseModel implements IWindowCon
 /** Construction for window objects (Aperture, Door). */
 export interface IWindowConstruction extends IIDdEnergyBaseModel {
     /** List of glazing and gas material definitions. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer. */
-    materials: EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas | EnergyWindowMaterialGasCustom | EnergyWindowMaterialGasMixture[];
+    materials: (EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas | EnergyWindowMaterialGasCustom | EnergyWindowMaterialGasMixture)[];
     type?: string;
     /** An optional window frame material for the frame that surrounds the window construction. */
     frame?: EnergyWindowFrame;
@@ -4797,7 +4797,7 @@ export interface IEnergyMaterialVegetation extends IIDdEnergyBaseModel {
 /** Construction for opaque objects (Face, Shade, Door). */
 export class OpaqueConstruction extends IDdEnergyBaseModel implements IOpaqueConstruction {
     /** List of opaque material definitions. The order of the materials is from exterior to interior. */
-    materials!: EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation[];
+    materials!: (EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation)[];
     readonly type: string = "OpaqueConstruction";
 
     constructor(data?: IOpaqueConstruction) {
@@ -4844,7 +4844,7 @@ export class OpaqueConstruction extends IDdEnergyBaseModel implements IOpaqueCon
 /** Construction for opaque objects (Face, Shade, Door). */
 export interface IOpaqueConstruction extends IIDdEnergyBaseModel {
     /** List of opaque material definitions. The order of the materials is from exterior to interior. */
-    materials: EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation[];
+    materials: (EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation)[];
     type?: string;
 }
 
@@ -6092,7 +6092,7 @@ export class Mirror extends ModifierBase implements IMirror {
     /** Material modifier. */
     modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
     /** A value between 0 and 1 for the red channel reflectance. */
     r_reflectance?: number;
     /** A value between 0 and 1 for the green channel reflectance. */
@@ -6161,7 +6161,7 @@ export interface IMirror extends IModifierBase {
     /** Material modifier. */
     modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
     /** A value between 0 and 1 for the red channel reflectance. */
     r_reflectance?: number;
     /** A value between 0 and 1 for the green channel reflectance. */
@@ -6178,7 +6178,7 @@ export class Metal extends ModifierBase implements IMetal {
     /** Material modifier. */
     modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
     /** A value between 0 and 1 for the red channel reflectance. */
     r_reflectance?: number;
     /** A value between 0 and 1 for the green channel reflectance. */
@@ -6253,7 +6253,7 @@ export interface IMetal extends IModifierBase {
     /** Material modifier. */
     modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
     /** A value between 0 and 1 for the red channel reflectance. */
     r_reflectance?: number;
     /** A value between 0 and 1 for the green channel reflectance. */
@@ -6272,7 +6272,7 @@ export class Trans extends ModifierBase implements ITrans {
     /** Material modifier. */
     modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
     /** A value between 0 and 1 for the red channel reflectance. */
     r_reflectance?: number;
     /** A value between 0 and 1 for the green channel reflectance. */
@@ -6357,7 +6357,7 @@ export interface ITrans extends IModifierBase {
     /** Material modifier. */
     modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
     /** A value between 0 and 1 for the red channel reflectance. */
     r_reflectance?: number;
     /** A value between 0 and 1 for the green channel reflectance. */
@@ -6380,7 +6380,7 @@ export class Light extends ModifierBase implements ILight {
     /** Material modifier. */
     modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
     /** A value between 0 and 1 for the red channel of the modifier. */
     r_emittance?: number;
     /** A value between 0 and 1 for the green channel of the modifier. */
@@ -6445,7 +6445,7 @@ export interface ILight extends IModifierBase {
     /** Material modifier. */
     modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
     /** A value between 0 and 1 for the red channel of the modifier. */
     r_emittance?: number;
     /** A value between 0 and 1 for the green channel of the modifier. */
@@ -6460,7 +6460,7 @@ export class Glow extends ModifierBase implements IGlow {
     /** Material modifier. */
     modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
     /** A value between 0 and 1 for the red channel of the modifier. */
     r_emittance?: number;
     /** A value between 0 and 1 for the green channel of the modifier. */
@@ -6530,7 +6530,7 @@ export interface IGlow extends IModifierBase {
     /** Material modifier. */
     modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
     /** A value between 0 and 1 for the red channel of the modifier. */
     r_emittance?: number;
     /** A value between 0 and 1 for the green channel of the modifier. */
@@ -6549,7 +6549,7 @@ export class BSDF extends ModifierBase implements IBSDF {
     /** Material modifier. */
     modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
     /** Vector as sequence that sets the hemisphere that the BSDF material faces. */
     up_orientation?: number[];
     /** Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative). */
@@ -6665,7 +6665,7 @@ export interface IBSDF extends IModifierBase {
     /** Material modifier. */
     modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
     /** Vector as sequence that sets the hemisphere that the BSDF material faces. */
     up_orientation?: number[];
     /** Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative). */
@@ -6688,7 +6688,7 @@ export class Glass extends ModifierBase implements IGlass {
     /** Material modifier. */
     modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
     /** A value between 0 and 1 for the red channel transmissivity. */
     r_transmissivity?: number;
     /** A value between 0 and 1 for the green channel transmissivity. */
@@ -6758,7 +6758,7 @@ export interface IGlass extends IModifierBase {
     /** Material modifier. */
     modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
     /** A value between 0 and 1 for the red channel transmissivity. */
     r_transmissivity?: number;
     /** A value between 0 and 1 for the green channel transmissivity. */
@@ -6775,7 +6775,7 @@ export class Plastic extends ModifierBase implements IPlastic {
     /** Material modifier. */
     modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
     /** A value between 0 and 1 for the red channel reflectance. */
     r_reflectance?: number;
     /** A value between 0 and 1 for the green channel reflectance. */
@@ -6850,7 +6850,7 @@ export interface IPlastic extends IModifierBase {
     /** Material modifier. */
     modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
     /** A value between 0 and 1 for the red channel reflectance. */
     r_reflectance?: number;
     /** A value between 0 and 1 for the green channel reflectance. */
@@ -8638,7 +8638,7 @@ export interface IShadeModifierSetAbridged extends IBaseModifierSetAbridged {
 export class GlobalModifierSet extends _OpenAPIGenBaseModel implements IGlobalModifierSet {
     readonly type: string = "GlobalModifierSet";
     /** Global Honeybee Radiance modifiers. */
-    readonly modifiers?: Plastic | Glass | Trans[];
+    readonly modifiers?: (Plastic | Glass | Trans)[];
     /** Global Honeybee WallModifierSet. */
     readonly wall_set?: WallModifierSetAbridged;
     /** Global Honeybee FloorModifierSet. */
@@ -8718,7 +8718,7 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel implements IGlobalMo
 export interface IGlobalModifierSet extends I_OpenAPIGenBaseModel {
     type?: string;
     /** Global Honeybee Radiance modifiers. */
-    modifiers?: Plastic | Glass | Trans[];
+    modifiers?: (Plastic | Glass | Trans)[];
     /** Global Honeybee WallModifierSet. */
     wall_set?: WallModifierSetAbridged;
     /** Global Honeybee FloorModifierSet. */
@@ -9176,9 +9176,9 @@ export interface IApertureConstructionSetAbridged extends I_OpenAPIGenBaseModel 
 export class GlobalConstructionSet extends _OpenAPIGenBaseModel implements IGlobalConstructionSet {
     readonly type: string = "GlobalConstructionSet";
     /** Global Honeybee Energy materials. */
-    readonly materials?: EnergyMaterial | EnergyMaterialNoMass | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas[];
+    readonly materials?: (EnergyMaterial | EnergyMaterialNoMass | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas)[];
     /** Global Honeybee Energy constructions. */
-    readonly constructions?: OpaqueConstructionAbridged | WindowConstructionAbridged | ShadeConstruction | AirBoundaryConstructionAbridged[];
+    readonly constructions?: (OpaqueConstructionAbridged | WindowConstructionAbridged | ShadeConstruction | AirBoundaryConstructionAbridged)[];
     /** Global Honeybee WallConstructionSet. */
     readonly wall_set?: WallConstructionSetAbridged;
     /** Global Honeybee FloorConstructionSet. */
@@ -9269,9 +9269,9 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel implements IGlob
 export interface IGlobalConstructionSet extends I_OpenAPIGenBaseModel {
     type?: string;
     /** Global Honeybee Energy materials. */
-    materials?: EnergyMaterial | EnergyMaterialNoMass | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas[];
+    materials?: (EnergyMaterial | EnergyMaterialNoMass | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas)[];
     /** Global Honeybee Energy constructions. */
-    constructions?: OpaqueConstructionAbridged | WindowConstructionAbridged | ShadeConstruction | AirBoundaryConstructionAbridged[];
+    constructions?: (OpaqueConstructionAbridged | WindowConstructionAbridged | ShadeConstruction | AirBoundaryConstructionAbridged)[];
     /** Global Honeybee WallConstructionSet. */
     wall_set?: WallConstructionSetAbridged;
     /** Global Honeybee FloorConstructionSet. */
@@ -12500,19 +12500,19 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel implements IMode
     /** Global Energy construction set. */
     readonly global_construction_set?: GlobalConstructionSet;
     /** List of all unique ConstructionSets in the Model. */
-    construction_sets?: ConstructionSetAbridged | ConstructionSet[];
+    construction_sets?: (ConstructionSetAbridged | ConstructionSet)[];
     /** A list of all unique constructions in the model. This includes constructions across all Faces, Apertures, Doors, Shades, Room ConstructionSets, and the global_construction_set. */
-    constructions?: OpaqueConstructionAbridged | WindowConstructionAbridged | WindowConstructionShadeAbridged | AirBoundaryConstructionAbridged | OpaqueConstruction | WindowConstruction | WindowConstructionShade | WindowConstructionDynamicAbridged | WindowConstructionDynamic | AirBoundaryConstruction | ShadeConstruction[];
+    constructions?: (OpaqueConstructionAbridged | WindowConstructionAbridged | WindowConstructionShadeAbridged | AirBoundaryConstructionAbridged | OpaqueConstruction | WindowConstruction | WindowConstructionShade | WindowConstructionDynamicAbridged | WindowConstructionDynamic | AirBoundaryConstruction | ShadeConstruction)[];
     /** A list of all unique materials in the model. This includes materials needed to make the Model constructions. */
-    materials?: EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation | EnergyWindowMaterialGlazing | EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGas | EnergyWindowMaterialGasMixture | EnergyWindowMaterialGasCustom | EnergyWindowFrame | EnergyWindowMaterialBlind | EnergyWindowMaterialShade[];
+    materials?: (EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation | EnergyWindowMaterialGlazing | EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGas | EnergyWindowMaterialGasMixture | EnergyWindowMaterialGasCustom | EnergyWindowFrame | EnergyWindowMaterialBlind | EnergyWindowMaterialShade)[];
     /** List of all unique HVAC systems in the Model. */
-    hvacs?: IdealAirSystemAbridged | VAV | PVAV | PSZ | PTAC | ForcedAirFurnace | FCUwithDOASAbridged | WSHPwithDOASAbridged | VRFwithDOASAbridged | RadiantwithDOASAbridged | FCU | WSHP | VRF | Baseboard | EvaporativeCooler | Residential | WindowAC | GasUnitHeater | Radiant | DetailedHVAC[];
+    hvacs?: (IdealAirSystemAbridged | VAV | PVAV | PSZ | PTAC | ForcedAirFurnace | FCUwithDOASAbridged | WSHPwithDOASAbridged | VRFwithDOASAbridged | RadiantwithDOASAbridged | FCU | WSHP | VRF | Baseboard | EvaporativeCooler | Residential | WindowAC | GasUnitHeater | Radiant | DetailedHVAC)[];
     /** List of all unique Service Hot Water (SHW) systems in the Model. */
     shws?: SHWSystem[];
     /** List of all unique ProgramTypes in the Model. */
-    program_types?: ProgramTypeAbridged | ProgramType[];
+    program_types?: (ProgramTypeAbridged | ProgramType)[];
     /** A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades. */
-    schedules?: ScheduleRulesetAbridged | ScheduleFixedIntervalAbridged | ScheduleRuleset | ScheduleFixedInterval[];
+    schedules?: (ScheduleRulesetAbridged | ScheduleFixedIntervalAbridged | ScheduleRuleset | ScheduleFixedInterval)[];
     /** A list of all unique ScheduleTypeLimits in the model. This all ScheduleTypeLimits needed to make the Model schedules. */
     schedule_type_limits?: ScheduleTypeLimit[];
     /** An optional parameter to define the global parameters for a ventilation cooling. */
@@ -12642,19 +12642,19 @@ export interface IModelEnergyProperties extends I_OpenAPIGenBaseModel {
     /** Global Energy construction set. */
     global_construction_set?: GlobalConstructionSet;
     /** List of all unique ConstructionSets in the Model. */
-    construction_sets?: ConstructionSetAbridged | ConstructionSet[];
+    construction_sets?: (ConstructionSetAbridged | ConstructionSet)[];
     /** A list of all unique constructions in the model. This includes constructions across all Faces, Apertures, Doors, Shades, Room ConstructionSets, and the global_construction_set. */
-    constructions?: OpaqueConstructionAbridged | WindowConstructionAbridged | WindowConstructionShadeAbridged | AirBoundaryConstructionAbridged | OpaqueConstruction | WindowConstruction | WindowConstructionShade | WindowConstructionDynamicAbridged | WindowConstructionDynamic | AirBoundaryConstruction | ShadeConstruction[];
+    constructions?: (OpaqueConstructionAbridged | WindowConstructionAbridged | WindowConstructionShadeAbridged | AirBoundaryConstructionAbridged | OpaqueConstruction | WindowConstruction | WindowConstructionShade | WindowConstructionDynamicAbridged | WindowConstructionDynamic | AirBoundaryConstruction | ShadeConstruction)[];
     /** A list of all unique materials in the model. This includes materials needed to make the Model constructions. */
-    materials?: EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation | EnergyWindowMaterialGlazing | EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGas | EnergyWindowMaterialGasMixture | EnergyWindowMaterialGasCustom | EnergyWindowFrame | EnergyWindowMaterialBlind | EnergyWindowMaterialShade[];
+    materials?: (EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation | EnergyWindowMaterialGlazing | EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGas | EnergyWindowMaterialGasMixture | EnergyWindowMaterialGasCustom | EnergyWindowFrame | EnergyWindowMaterialBlind | EnergyWindowMaterialShade)[];
     /** List of all unique HVAC systems in the Model. */
-    hvacs?: IdealAirSystemAbridged | VAV | PVAV | PSZ | PTAC | ForcedAirFurnace | FCUwithDOASAbridged | WSHPwithDOASAbridged | VRFwithDOASAbridged | RadiantwithDOASAbridged | FCU | WSHP | VRF | Baseboard | EvaporativeCooler | Residential | WindowAC | GasUnitHeater | Radiant | DetailedHVAC[];
+    hvacs?: (IdealAirSystemAbridged | VAV | PVAV | PSZ | PTAC | ForcedAirFurnace | FCUwithDOASAbridged | WSHPwithDOASAbridged | VRFwithDOASAbridged | RadiantwithDOASAbridged | FCU | WSHP | VRF | Baseboard | EvaporativeCooler | Residential | WindowAC | GasUnitHeater | Radiant | DetailedHVAC)[];
     /** List of all unique Service Hot Water (SHW) systems in the Model. */
     shws?: SHWSystem[];
     /** List of all unique ProgramTypes in the Model. */
-    program_types?: ProgramTypeAbridged | ProgramType[];
+    program_types?: (ProgramTypeAbridged | ProgramType)[];
     /** A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades. */
-    schedules?: ScheduleRulesetAbridged | ScheduleFixedIntervalAbridged | ScheduleRuleset | ScheduleFixedInterval[];
+    schedules?: (ScheduleRulesetAbridged | ScheduleFixedIntervalAbridged | ScheduleRuleset | ScheduleFixedInterval)[];
     /** A list of all unique ScheduleTypeLimits in the model. This all ScheduleTypeLimits needed to make the Model schedules. */
     schedule_type_limits?: ScheduleTypeLimit[];
     /** An optional parameter to define the global parameters for a ventilation cooling. */
@@ -13624,9 +13624,9 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel implements IMo
     /** Global Radiance modifier set. */
     readonly global_modifier_set?: GlobalModifierSet;
     /** A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set. */
-    modifiers?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
+    modifiers?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
     /** A list of all unique Room-Assigned ModifierSets in the Model. */
-    modifier_sets?: ModifierSet | ModifierSetAbridged[];
+    modifier_sets?: (ModifierSet | ModifierSetAbridged)[];
     /** An array of SensorGrids that are associated with the model. */
     sensor_grids?: SensorGrid[];
     /** An array of Views that are associated with the model. */
@@ -13710,9 +13710,9 @@ export interface IModelRadianceProperties extends I_OpenAPIGenBaseModel {
     /** Global Radiance modifier set. */
     global_modifier_set?: GlobalModifierSet;
     /** A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set. */
-    modifiers?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror[];
+    modifiers?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
     /** A list of all unique Room-Assigned ModifierSets in the Model. */
-    modifier_sets?: ModifierSet | ModifierSetAbridged[];
+    modifier_sets?: (ModifierSet | ModifierSetAbridged)[];
     /** An array of SensorGrids that are associated with the model. */
     sensor_grids?: SensorGrid[];
     /** An array of Views that are associated with the model. */
@@ -16553,7 +16553,7 @@ export class ValidationError implements IValidationError {
     /** A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved. */
     top_parents?: ValidationParent[];
     /** An optional list of geometry objects that helps illustrate where exactly issues with invalid geometry exist within the Honeybee object. Examples include the naked and non-manifold line segments for non-solid Room geometries, the points of self-intersection for cases of self-intersecting geometry and out-of-plane vertices for non-planar objects. Oftentimes, zooming directly to these helper geometries will help end users understand invalid situations in their model faster than simple zooming to the invalid Honeybee object in its totality. */
-    helper_geometry?: Point3D | LineSegment3D[];
+    helper_geometry?: (Point3D | LineSegment3D)[];
 
     [key: string]: any;
 
@@ -16679,7 +16679,7 @@ export interface IValidationError {
     /** A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved. */
     top_parents?: ValidationParent[];
     /** An optional list of geometry objects that helps illustrate where exactly issues with invalid geometry exist within the Honeybee object. Examples include the naked and non-manifold line segments for non-solid Room geometries, the points of self-intersection for cases of self-intersecting geometry and out-of-plane vertices for non-planar objects. Oftentimes, zooming directly to these helper geometries will help end users understand invalid situations in their model faster than simple zooming to the invalid Honeybee object in its totality. */
-    helper_geometry?: Point3D | LineSegment3D[];
+    helper_geometry?: (Point3D | LineSegment3D)[];
 
     [key: string]: any;
 }
