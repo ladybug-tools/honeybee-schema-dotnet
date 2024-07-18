@@ -1,6 +1,6 @@
 {
   "name": "@pollination/honeybee-schema-sdk",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "publishConfig": {
     "access": "restricted"
   },
