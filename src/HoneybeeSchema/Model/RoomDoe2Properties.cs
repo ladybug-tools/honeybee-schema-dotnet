@@ -40,10 +40,11 @@ namespace HoneybeeSchema
         /// <param name="minFlowRatio">A number between 0 and 1 for the minimum allowable zone air supply flow rate, expressed as a fraction of design flow rate. Applicable to variable-volume type systems only. If Autocalculate, this parameter will not be written into the INP..</param>
         /// <param name="minFlowPerArea">A number for the minimum air flow per square foot of floor area (cfm/ft2). This is an alternative way of specifying the min_flow_ratio. If Autocalculate, this parameter will not be written into the INP..</param>
         /// <param name="hmaxFlowRatio">A number between 0 and 1 for the ratio of the maximum (or fixed) heating airflow to the cooling airflow. The specific meaning varies according to the type of zone terminal. If Autocalculate, this parameter will not be written into the INP..</param>
+        /// <param name="spacePolygonGeometry">An optional horizontal Face3D object, which will be used to set the SPACE polygon during export to INP. If None, the SPACE polygon is auto-calculated from the 3D Room geometry. Specifying a geometry here can help overcome some limitations of this auto-calculation, particularly for cases where the floors of the Room are composed of AirBoundaries..</param>
         public RoomDoe2Properties
         (
             // Required parameters
-           AnyOf<Autocalculate, double> assignedFlow= default, AnyOf<Autocalculate, double> flowPerArea= default, AnyOf<Autocalculate, double> minFlowRatio= default, AnyOf<Autocalculate, double> minFlowPerArea= default, AnyOf<Autocalculate, double> hmaxFlowRatio= default// Optional parameters
+           AnyOf<Autocalculate, double> assignedFlow= default, AnyOf<Autocalculate, double> flowPerArea= default, AnyOf<Autocalculate, double> minFlowRatio= default, AnyOf<Autocalculate, double> minFlowPerArea= default, AnyOf<Autocalculate, double> hmaxFlowRatio= default, Face3D spacePolygonGeometry= default// Optional parameters
         ) : base()// BaseClass
         {
             this.AssignedFlow = assignedFlow;
@@ -51,6 +52,7 @@ namespace HoneybeeSchema
             this.MinFlowRatio = minFlowRatio;
             this.MinFlowPerArea = minFlowPerArea;
             this.HmaxFlowRatio = hmaxFlowRatio;
+            this.SpacePolygonGeometry = spacePolygonGeometry;
 
             // Set non-required readonly properties with defaultValue
             this.Type = "RoomDoe2Properties";
@@ -103,6 +105,13 @@ namespace HoneybeeSchema
         [Summary(@"A number between 0 and 1 for the ratio of the maximum (or fixed) heating airflow to the cooling airflow. The specific meaning varies according to the type of zone terminal. If Autocalculate, this parameter will not be written into the INP.")]
         [DataMember(Name = "hmax_flow_ratio")]
         public AnyOf<Autocalculate, double> HmaxFlowRatio { get; set; } 
+        /// <summary>
+        /// An optional horizontal Face3D object, which will be used to set the SPACE polygon during export to INP. If None, the SPACE polygon is auto-calculated from the 3D Room geometry. Specifying a geometry here can help overcome some limitations of this auto-calculation, particularly for cases where the floors of the Room are composed of AirBoundaries.
+        /// </summary>
+        /// <value>An optional horizontal Face3D object, which will be used to set the SPACE polygon during export to INP. If None, the SPACE polygon is auto-calculated from the 3D Room geometry. Specifying a geometry here can help overcome some limitations of this auto-calculation, particularly for cases where the floors of the Room are composed of AirBoundaries.</value>
+        [Summary(@"An optional horizontal Face3D object, which will be used to set the SPACE polygon during export to INP. If None, the SPACE polygon is auto-calculated from the 3D Room geometry. Specifying a geometry here can help overcome some limitations of this auto-calculation, particularly for cases where the floors of the Room are composed of AirBoundaries.")]
+        [DataMember(Name = "space_polygon_geometry")]
+        public Face3D SpacePolygonGeometry { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -130,6 +139,7 @@ namespace HoneybeeSchema
             sb.Append("  MinFlowRatio: ").Append(this.MinFlowRatio).Append("\n");
             sb.Append("  MinFlowPerArea: ").Append(this.MinFlowPerArea).Append("\n");
             sb.Append("  HmaxFlowRatio: ").Append(this.HmaxFlowRatio).Append("\n");
+            sb.Append("  SpacePolygonGeometry: ").Append(this.SpacePolygonGeometry).Append("\n");
             return sb.ToString();
         }
   
@@ -198,7 +208,8 @@ namespace HoneybeeSchema
                     Extension.Equals(this.FlowPerArea, input.FlowPerArea) && 
                     Extension.Equals(this.MinFlowRatio, input.MinFlowRatio) && 
                     Extension.Equals(this.MinFlowPerArea, input.MinFlowPerArea) && 
-                    Extension.Equals(this.HmaxFlowRatio, input.HmaxFlowRatio);
+                    Extension.Equals(this.HmaxFlowRatio, input.HmaxFlowRatio) && 
+                    Extension.Equals(this.SpacePolygonGeometry, input.SpacePolygonGeometry);
         }
 
         /// <summary>
@@ -222,6 +233,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.MinFlowPerArea.GetHashCode();
                 if (this.HmaxFlowRatio != null)
                     hashCode = hashCode * 59 + this.HmaxFlowRatio.GetHashCode();
+                if (this.SpacePolygonGeometry != null)
+                    hashCode = hashCode * 59 + this.SpacePolygonGeometry.GetHashCode();
                 return hashCode;
             }
         }

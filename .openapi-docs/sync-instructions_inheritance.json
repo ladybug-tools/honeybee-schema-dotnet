@@ -3,7 +3,7 @@
     "servers": [],
     "info": {
         "description": "Documentation for Honeybee sync-instructions schema",
-        "version": "1.58.0",
+        "version": "1.58.1",
         "title": "Honeybee Sync Instructions Schema",
         "contact": {
             "name": "Ladybug Tools",
@@ -89,102 +89,6 @@
                 ],
                 "type": "string"
             },
-            "AddedInstruction": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "required": [
-                            "element_type",
-                            "element_id"
-                        ],
-                        "properties": {
-                            "element_type": {
-                                "description": "Text for the type of object that has been changed.",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/GeometryObjectTypes"
-                                    }
-                                ]
-                            },
-                            "element_id": {
-                                "title": "Element Id",
-                                "description": "Text string for the unique object ID that has changed.",
-                                "maxLength": 100,
-                                "minLength": 1,
-                                "pattern": "^[^,;!\\n\\t]+$",
-                                "type": "string"
-                            },
-                            "element_name": {
-                                "title": "Element Name",
-                                "description": "Text string for the display name of the object that has changed.",
-                                "type": "string"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "AddedInstruction",
-                                "pattern": "^AddedInstruction$",
-                                "type": "string",
-                                "readOnly": true
-                            }
-                        }
-                    }
-                ],
-                "title": "AddedInstruction",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
-            "DeletedInstruction": {
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-                    },
-                    {
-                        "type": "object",
-                        "required": [
-                            "element_type",
-                            "element_id"
-                        ],
-                        "properties": {
-                            "element_type": {
-                                "description": "Text for the type of object that has been changed.",
-                                "allOf": [
-                                    {
-                                        "$ref": "#/components/schemas/GeometryObjectTypes"
-                                    }
-                                ]
-                            },
-                            "element_id": {
-                                "title": "Element Id",
-                                "description": "Text string for the unique object ID that has changed.",
-                                "maxLength": 100,
-                                "minLength": 1,
-                                "pattern": "^[^,;!\\n\\t]+$",
-                                "type": "string"
-                            },
-                            "element_name": {
-                                "title": "Element Name",
-                                "description": "Text string for the display name of the object that has changed.",
-                                "type": "string"
-                            },
-                            "type": {
-                                "title": "Type",
-                                "default": "DeletedInstruction",
-                                "pattern": "^DeletedInstruction$",
-                                "type": "string",
-                                "readOnly": true
-                            }
-                        }
-                    }
-                ],
-                "title": "DeletedInstruction",
-                "discriminator": {
-                    "propertyName": "type"
-                }
-            },
             "ChangedInstruction": {
                 "allOf": [
                     {
@@ -247,6 +151,102 @@
                     }
                 ],
                 "title": "ChangedInstruction",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "DeletedInstruction": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "element_type",
+                            "element_id"
+                        ],
+                        "properties": {
+                            "element_type": {
+                                "description": "Text for the type of object that has been changed.",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/GeometryObjectTypes"
+                                    }
+                                ]
+                            },
+                            "element_id": {
+                                "title": "Element Id",
+                                "description": "Text string for the unique object ID that has changed.",
+                                "maxLength": 100,
+                                "minLength": 1,
+                                "pattern": "^[^,;!\\n\\t]+$",
+                                "type": "string"
+                            },
+                            "element_name": {
+                                "title": "Element Name",
+                                "description": "Text string for the display name of the object that has changed.",
+                                "type": "string"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "DeletedInstruction",
+                                "pattern": "^DeletedInstruction$",
+                                "type": "string",
+                                "readOnly": true
+                            }
+                        }
+                    }
+                ],
+                "title": "DeletedInstruction",
+                "discriminator": {
+                    "propertyName": "type"
+                }
+            },
+            "AddedInstruction": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "element_type",
+                            "element_id"
+                        ],
+                        "properties": {
+                            "element_type": {
+                                "description": "Text for the type of object that has been changed.",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/GeometryObjectTypes"
+                                    }
+                                ]
+                            },
+                            "element_id": {
+                                "title": "Element Id",
+                                "description": "Text string for the unique object ID that has changed.",
+                                "maxLength": 100,
+                                "minLength": 1,
+                                "pattern": "^[^,;!\\n\\t]+$",
+                                "type": "string"
+                            },
+                            "element_name": {
+                                "title": "Element Name",
+                                "description": "Text string for the display name of the object that has changed.",
+                                "type": "string"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "default": "AddedInstruction",
+                                "pattern": "^AddedInstruction$",
+                                "type": "string",
+                                "readOnly": true
+                            }
+                        }
+                    }
+                ],
+                "title": "AddedInstruction",
                 "discriminator": {
                     "propertyName": "type"
                 }

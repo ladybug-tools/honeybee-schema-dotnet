@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **MinFlowRatio** | [**AnyOfAutocalculatenumber**](AnyOfAutocalculatenumber.md) | A number between 0 and 1 for the minimum allowable zone air supply flow rate, expressed as a fraction of design flow rate. Applicable to variable-volume type systems only. If Autocalculate, this parameter will not be written into the INP. | [optional] 
 **MinFlowPerArea** | [**AnyOfAutocalculatenumber**](AnyOfAutocalculatenumber.md) | A number for the minimum air flow per square foot of floor area (cfm/ft2). This is an alternative way of specifying the min_flow_ratio. If Autocalculate, this parameter will not be written into the INP. | [optional] 
 **HmaxFlowRatio** | [**AnyOfAutocalculatenumber**](AnyOfAutocalculatenumber.md) | A number between 0 and 1 for the ratio of the maximum (or fixed) heating airflow to the cooling airflow. The specific meaning varies according to the type of zone terminal. If Autocalculate, this parameter will not be written into the INP. | [optional] 
+**SpacePolygonGeometry** | [**Face3D**](Face3D.md) | An optional horizontal Face3D object, which will be used to set the SPACE polygon during export to INP. If None, the SPACE polygon is auto-calculated from the 3D Room geometry. Specifying a geometry here can help overcome some limitations of this auto-calculation, particularly for cases where the floors of the Room are composed of AirBoundaries. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to API list]](../README.md#documentation-for-api-endpoints)
