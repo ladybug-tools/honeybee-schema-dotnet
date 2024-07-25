@@ -1,9 +1,6 @@
 {
   "name": "@pollination/honeybee-schema-sdk",
   "license": "MIT",
-  "publishConfig": {
-    "access": "restricted"
-  },
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
