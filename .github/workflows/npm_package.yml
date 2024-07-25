@@ -35,7 +35,8 @@ jobs:
         run: npm run build
 
       - name: Publish to npm
-        working-directory: src/TypeScriptSDK
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish
+        run: |
+          cd ./src/TypeScriptSDK
+          npm publish
