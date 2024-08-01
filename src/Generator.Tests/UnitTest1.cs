@@ -1,6 +1,8 @@
 using NSwag;
 using NJsonSchema;
 using NJsonSchema.CodeGeneration;
+using SchemaGenerator;
+using TemplateModels;
 
 namespace Generator.Tests
 {
@@ -8,14 +10,16 @@ namespace Generator.Tests
     {
 
         static string workingDir = Environment.CurrentDirectory;
+        static string rootDir = workingDir.Substring(0, workingDir.IndexOf("src"));
         static OpenApiDocument doc = null;
         [SetUp]
         public void Setup()
         {
 
             Console.WriteLine($"Current working dir: {workingDir}");
-            var dic = @"D:\Dev\Schema\honeybee-schema-dotnet\.openapi-docs\";
-            var jsonFile = @"D:\Dev\Schema\honeybee-schema-dotnet\.openapi-docs\project-information_inheritance.json";
+            var docDic = System.IO.Path.Combine(rootDir, ".openapi-docs");
+            var jsonFile = System.IO.Path.Combine(docDic, "project-information_inheritance.json");
+         
             var json = System.IO.File.ReadAllText( jsonFile );
             doc = OpenApiDocument.FromJsonAsync(json).Result;
            
@@ -47,5 +51,76 @@ namespace Generator.Tests
 
         }
 
+        [Test]
+        public void TestReadOnlyPropertyModel()
+        {
+            var json = doc.Components.Schemas["_OpenAPIGenBaseModel"];
+            var prop = json.ActualProperties.FirstOrDefault();
+
+            Assert.That("Type", Is.EqualTo(prop.Value.Title));
+            var IsReadOnly = prop.Value.IsReadOnly;
+            Assert.That(IsReadOnly, Is.True);
+
+        }
+
+        [Test]
+        public void TestGenerateClass()
+        {
+            var json = doc.Components.Schemas["_OpenAPIGenBaseModel"];
+
+            var classModel = new ClassTemplateModel(doc, json);
+
+            Assert.That(classModel.DerivedClasses.Count, Is.GreaterThan(5));
+            //var prop = json.ActualProperties.FirstOrDefault();
+
+            var templateDir = System.IO.Path.Combine(rootDir, ".nswag-generator\\Templates\\TypeScript");
+            var templateSource = File.ReadAllText(Path.Combine(templateDir, "Class2.liquid"), System.Text.Encoding.UTF8);
+
+            var code = SchemaGenerator.GenDTO.Gen(templateSource, classModel);
+
+            StringAssert.Contains("type!: String", code);
+
+        }
+
+        [Test]
+        public void TestInheritanceClass()
+        {
+            var json = doc.Components.Schemas["ProjectInfo"];
+
+            Assert.That(json, Is.Not.Null);
+
+            var baseClass = json.InheritedSchema;
+            Assert.That(baseClass, Is.Not.Null);
+            Assert.That(baseClass.Title, Is.EqualTo("_OpenAPIGenBaseModel"));
+
+        }
+
+        [Test]
+        public void TestReferencePropertyType()
+        {
+            var json = doc.Components.Schemas["ProjectInfo"];
+            var classModel = new ClassTemplateModel(doc, json);
+            Assert.That(classModel, Is.Not.Null);
+
+            var location = classModel.Properties.FirstOrDefault(_ => _.PropertyName == "location");
+            Assert.That(location, Is.Not.Null);
+
+        }
+
+
+        [Test]
+        public void TestAutocalculateNumberParameter()
+        {
+            var json = doc.Components.Schemas["Location"];
+            var classModel = new ClassTemplateModel(doc, json);
+
+            var autoCalParameter = classModel.Properties.FirstOrDefault(_ => _.PropertyName == "time_zone");
+            Assert.That(autoCalParameter, Is.Not.Null);
+
+            var type = autoCalParameter.Type;
+
+            Assert.That(type, Is.EqualTo("Autocalculate | number"));
+
+        }
     }
 }

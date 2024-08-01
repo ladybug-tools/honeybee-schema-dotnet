@@ -1,0 +1,10 @@
+﻿// Auto-generated
+
+{% if HasDescription -%}
+/** {{ Description }} */
+{% endif -%}
+export enum {{ EnumName }} {
+{%  for item in EnumItems -%}
+    {{ item.Key }} = "{{ item.Value }}",
+{%  endfor -%}
+}

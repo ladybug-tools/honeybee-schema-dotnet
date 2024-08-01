@@ -13,10 +13,12 @@ using Newtonsoft.Json.Linq;
 // using TemplateModels;
 using System.IO;
 using NJsonSchema.CodeGeneration.TypeScript;
+using TemplateModels;
+using Fluid;
 
 namespace SchemaGenerator;
 
-internal class GenDTO
+public class GenDTO
 {
     static string _sdkName = "HoneybeeSchemaSDK";
     static string workingDir = Environment.CurrentDirectory;
@@ -35,24 +37,23 @@ internal class GenDTO
         //var schemaFile = System.IO.Path.Combine(outputDir, "schema.json");
         var jsons = new[]
         {
-            "model_inheritance.json",
-            "simulation-parameter_inheritance.json",
-            "validation-report.json",
-            "comparison-report_inheritance.json",
-            "sync-instructions_inheritance.json",
+            //"model_inheritance.json",
+            //"simulation-parameter_inheritance.json",
+            //"validation-report.json",
+            //"comparison-report_inheritance.json",
+            //"sync-instructions_inheritance.json",
             "project-information_inheritance.json"
 
         };
 
-        var dic = @"D:\Dev\Schema\honeybee-schema-dotnet\.openapi-docs";
-      
-
+        var docDir = System.IO.Path.Combine(System.IO.Path.GetDirectoryName( rootDir), ".openapi-docs");
+        
         JObject docJson = null;
         JObject jSchemas = null;
         // combine all schema components
         foreach (var j in jsons)
         {
-            var schemaFile = System.IO.Path.Combine(dic, j);
+            var schemaFile = System.IO.Path.Combine(docDir, j);
             var json = System.IO.File.ReadAllText(schemaFile, System.Text.Encoding.UTF8);
             Console.WriteLine($"Reading schema from {schemaFile}");
             var jDocObj = JObject.Parse(json);
@@ -78,38 +79,39 @@ internal class GenDTO
         docJson["components"]["schemas"] = jSchemas;
 
         var doc = OpenApiDocument.FromJsonAsync(docJson.ToString()).Result;
+        //var tsFile = ConvertToTypeScript(doc, rootDir, outputDir);
+        //Console.WriteLine($"Generated file is added as {tsFile}");
+
 
         // tsTemplate
-        //var tsTemplate = System.IO.Path.Combine(templateDir, "TypeScript");
-        //var sc = doc.Components.Schemas;
-        //foreach (var item in sc)
-        //{
-        //    var key = item.Key;
-        //    var value = item.Value;
+        var tsTemplate = System.IO.Path.Combine(templateDir, "TypeScript");
+        var sc = doc.Components.Schemas;
+        var classModels = new List<ClassTemplateModel>();
+        foreach (var item in sc)
+        {
+            var key = item.Key;
+            var value = item.Value;
 
-        //    //if (key == "Location")
-        //    //{
-        //    //    var timez = value.ActualProperties["time_zone"];
-        //    //    var isAny = timez.AnyOf;
-        //    //}
+            if (value.IsEnumeration)
+            {
+                var m = new EnumTemplateModel(value);
+                var tsFile = GenEnum(tsTemplate, m, outputDir, ".ts");
+                Console.WriteLine($"Generated file is added as {tsFile}");
+            }
+            else
+            {
+                //class
+                var m = new ClassTemplateModel(doc, value);
+                var tsFile = GenClass(tsTemplate, m, outputDir, ".ts");
+                Console.WriteLine($"Generated file is added as {tsFile}");
+            }
 
-        //    if (key != "_OpenAPIGenBaseModel")
-        //    {
-        //        continue;
-        //    }
+           
+        
 
-        //    var isAb = value.IsAbstract;
-        //    //value.IsAbstract = false;
+        }
 
 
-        //    var classModel = new ClassTemplateModel(doc, value);
-        //    var tsFile = GenClass(tsTemplate, classModel, outputDir, ".ts");
-        //    Console.WriteLine($"Generated file is added as {tsFile}");
-
-        //}
-
-        var tsFile = ConvertToTypeScript(doc, rootDir, outputDir);
-        Console.WriteLine($"Generated file is added as {tsFile}");
 
 
         //var csFile = ConvertToCSharp(doc, rootDir, outputDir);
@@ -371,35 +373,48 @@ internal class GenDTO
         //schema.Definitions.Add(classTypeName, gblRef);
     }
 
-    //private static string GenClass(string templateDir, ClassTemplateModel model, string outputDir, string fileExt = ".cs")
-    //{
-    //    var templateSource = File.ReadAllText(Path.Combine(templateDir, "Class.liquid"), System.Text.Encoding.UTF8);
-    //    var code = Gen(templateSource, model);
-    //    var file = System.IO.Path.Combine(outputDir, $"{model.ClassName}{fileExt}");
-    //    System.IO.File.WriteAllText(file, code, System.Text.Encoding.UTF8);
-    //    return file;
-    //}
+    private static string GenClass(string templateDir, ClassTemplateModel model, string outputDir, string fileExt = ".cs")
+    {
+        var templateSource = File.ReadAllText(Path.Combine(templateDir, "Class2.liquid"), System.Text.Encoding.UTF8);
+        var code = Gen(templateSource, model);
+        var file = System.IO.Path.Combine(outputDir, $"{model.ClassName}{fileExt}");
+        System.IO.File.WriteAllText(file, code, System.Text.Encoding.UTF8);
+        return file;
+    }
 
-    //private static string Gen(string templateSource, object model)
-    //{
+    private static string GenEnum(string templateDir, EnumTemplateModel model, string outputDir, string fileExt = ".cs")
+    {
+        var templateSource = File.ReadAllText(Path.Combine(templateDir, "Enum.liquid"), System.Text.Encoding.UTF8);
+        var code = Gen(templateSource, model);
+        var file = System.IO.Path.Combine(outputDir, $"{model.EnumName}{fileExt}");
+        System.IO.File.WriteAllText(file, code, System.Text.Encoding.UTF8);
+        return file;
+    }
 
-    //    var parser = new FluidParser();
-    //    var options = new TemplateOptions();
-    //    options.MemberAccessStrategy.Register<ClassTemplateModel>();
-    //    options.MemberAccessStrategy.Register<MethodTemplateModel>();
-    //    options.MemberAccessStrategy.Register<ParamTemplateModel>();
+    public static string Gen(string templateSource, object model)
+    {
 
-    //    if (parser.TryParse(templateSource, out var template, out var error))
-    //    {
-    //        var context = new TemplateContext(model, options);
-    //        var code = template.Render(context);
-    //        return code;
-    //    }
-    //    else
-    //    {
-    //        return $"Error: {error}";
-    //    }
-    //}
+        var parser = new FluidParser();
+        var options = new TemplateOptions();
+        options.MemberAccessStrategy.Register<ClassTemplateModel>();
+        options.MemberAccessStrategy.Register<EnumTemplateModel>();
+        options.MemberAccessStrategy.Register<PropertyTemplateModel>();
+        options.MemberAccessStrategy.Register<EnumItemTemplateModel>();
+        //options.MemberAccessStrategy.Register<MethodTemplateModel>();
+        //options.MemberAccessStrategy.Register<ParamTemplateModel>();
+        options.Greedy = false;
+
+        if (parser.TryParse(templateSource, out var template, out var error))
+        {
+            var context = new TemplateContext(model, options);
+            var code = template.Render(context);
+            return code;
+        }
+        else
+        {
+            return $"Error: {error}";
+        }
+    }
 
     //private static 
 }

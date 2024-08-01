@@ -1,0 +1,75 @@
+{% if HasTsImports -%}
+{% for Import in TsImports -%}
+import { {{ Import }} } from "./{{ Import }}";
+{% endfor -%}
+{% endif -%}
+
+{% if HasDescription -%}
+/** {{ Description }} */
+{% endif -%}
+export {% if IsAbstract %}abstract {% endif %}class {{ ClassName }}{% if HasInheritance %} extends {{ Inheritance }}{% endif %} {
+{% for property in Properties -%}
+{%  if property.HasDescription -%}
+    /** {{ property.Description }} */
+{%  endif -%}
+    {{ property.PropertyName }}{% if property.IsOptional %}?{% else %}!{% endif %}: {{ property.Type }}{{ property.TypePostfix }};
+{% endfor -%}
+
+    static {% if HasInheritance %}override {% endif %}fromJS(data: any{% if HandleReferences %}, _mappings?: any{% endif %}): {{ ClassName }}{% if HandleReferences %} | null{% endif %} {
+        data = typeof data === 'object' ? data : {};
+{% if HandleReferences -%}
+        {%     for derivedClass in DerivedClasses -%}
+                if (data["{{ BaseDiscriminator }}"] === "{{ derivedClass.Discriminator }}")
+        {%       if derivedClass.IsAbstract -%}
+                    throw new Error("The abstract class '{{ derivedClass.ClassName }}' cannot be instantiated.");
+        {%       else -%}
+                    return createInstance<{{ derivedClass.ClassName }}>(data, _mappings, {{ derivedClass.ClassName }});
+        {%       endif -%}
+        {%     endfor -%}
+{%   if IsAbstract %}
+        throw new Error("The abstract class '{{ ClassName }}' cannot be instantiated.");
+{%   else %}
+        return createInstance<{{ ClassName }}>(data, _mappings, {{ ClassName }});
+{%   endif %}
+{% else %}
+{%     for derivedClass in DerivedClasses -%}
+        if (data["{{ BaseDiscriminator }}"] === "{{ derivedClass.Discriminator }}") {
+{%       if derivedClass.IsAbstract -%}
+            throw new Error("The abstract class '{{ derivedClass.ClassName }}' cannot be instantiated.");
+{%       else %}
+            let result = new {{ derivedClass.ClassName }}();
+            result.init(data);
+            return result;
+{%       endif -%}
+        }
+{%     endfor -%}
+{%     if IsAbstract -%}
+        throw new Error("The abstract class '{{ ClassName }}' cannot be instantiated.");
+{%     else %}
+        let result = new {{ ClassName }}();
+        result.init(data);
+        return result;
+{%     endif %}
+{% endif %}
+    }
+
+    {% if HasInheritance %}override {% endif %}toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+
+{% if HasDiscriminator -%}
+        data["{{ BaseDiscriminator }}"] = this._discriminator;
+{% endif -%}
+{% for property in Properties -%}
+        {{ property.ConvertToJavaScriptCode | tab }}
+{% endfor -%}
+{% if HasInheritance -%}
+        super.toJSON(data);
+{% endif -%}
+        return data;
+    }
+}
