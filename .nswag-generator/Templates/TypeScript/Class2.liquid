@@ -77,8 +77,8 @@ export {% if IsAbstract %}abstract {% endif %}class {{ ClassName }}{% if HasInhe
         let result = new {{ ClassName }}();
         result.init(data);
         return result;
-{%     endif %}
-{% endif %}
+{%     endif -%}
+{% endif -%}
     }
 
     {% if HasInheritance %}override {% endif %}toJSON(data?: any) {

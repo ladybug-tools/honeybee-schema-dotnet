@@ -37,8 +37,6 @@ export abstract class _OpenAPIGenBaseModel {
             return result;
         }
         throw new Error("The abstract class '_OpenAPIGenBaseModel' cannot be instantiated.");
-
-
     }
 
     toJSON(data?: any) {
