@@ -28,6 +28,7 @@ public class ClassTemplateModel
     public List<string> SchemaTypes { get; set; }
     public List<ClassTemplateModel> DerivedClasses { get; set; }
 
+    public bool HasProperties => Properties.Any();
     public List<PropertyTemplateModel> Properties { get; set; }
     public List<string> TsImports { get; set; } = new List<string>();
     public bool HasTsImports => TsImports.Any();

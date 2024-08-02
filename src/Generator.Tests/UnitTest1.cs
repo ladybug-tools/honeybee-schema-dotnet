@@ -122,5 +122,26 @@ namespace Generator.Tests
             Assert.That(type, Is.EqualTo("Autocalculate | number"));
 
         }
+
+        [Test]
+        public void TestPropertyDefaultValue()
+        {
+            var json = doc.Components.Schemas["Location"];
+            var classModel = new ClassTemplateModel(doc, json);
+
+            // test string type property
+            var typeP = classModel.Properties.FirstOrDefault(_ => _.PropertyName == "type");
+            Assert.That(typeP, Is.Not.Null);
+
+            var type = typeP.Type;
+            Assert.That(type, Is.EqualTo("string"));
+
+            Assert.That(typeP.DefaultCodeFormat, Is.EqualTo("\"Location\""));
+
+            // test object type property
+            var timezoneP = classModel.Properties.FirstOrDefault(_ => _.PropertyName == "time_zone");
+            Assert.That(timezoneP.DefaultCodeFormat, Is.EqualTo("new Autocalculate();"));
+
+        }
     }
 }
