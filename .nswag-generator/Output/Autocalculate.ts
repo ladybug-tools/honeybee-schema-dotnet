@@ -27,8 +27,6 @@ export class Autocalculate extends _OpenAPIGenBaseModel {
         let result = new Autocalculate();
         result.init(data);
         return result;
-
-
     }
 
     override toJSON(data?: any) {

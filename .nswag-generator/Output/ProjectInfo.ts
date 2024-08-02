@@ -47,8 +47,6 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
         let result = new ProjectInfo();
         result.init(data);
         return result;
-
-
     }
 
     override toJSON(data?: any) {

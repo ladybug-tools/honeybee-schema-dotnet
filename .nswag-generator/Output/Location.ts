@@ -51,8 +51,6 @@ export class Location extends _OpenAPIGenBaseModel {
         let result = new Location();
         result.init(data);
         return result;
-
-
     }
 
     override toJSON(data?: any) {
