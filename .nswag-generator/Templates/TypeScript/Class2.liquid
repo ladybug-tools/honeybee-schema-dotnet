@@ -12,8 +12,36 @@ export {% if IsAbstract %}abstract {% endif %}class {{ ClassName }}{% if HasInhe
 {%  if property.HasDescription -%}
     /** {{ property.Description }} */
 {%  endif -%}
-    {{ property.PropertyName }}{% if property.IsOptional %}?{% else %}!{% endif %}: {{ property.Type }}{{ property.TypePostfix }};
+    {{ property.PropertyName }}{% if property.IsRequired %}!{% else %}?{% endif %}: {{ property.Type }}{{ property.TypePostfix }};
 {% endfor -%}
+
+    constructor() {
+{%      if HasInheritance -%}
+        super();
+{%      endif -%}
+{% if HasProperties -%}
+{%      for property in Properties -%}
+{%      if property.HasDefault -%}
+        this.{{ property.PropertyName }} = {{ property.DefaultCodeFormat | strip | tab }};
+{%      endif -%}
+{%      endfor -%}
+{%  endif -%}
+    }
+
+
+    {% if HasInheritance %}override {% endif %}init(_data?: any) {
+{%      if HasInheritance -%}
+        super.init(_data);
+{%      endif -%}
+{% if HasProperties -%}
+        if (_data) {
+{%      for property in Properties -%}
+            {{ property.ConvertToClassCode | strip | tab }}
+{%      endfor -%}
+        }
+{% endif -%}
+    }
+
 
     static {% if HasInheritance %}override {% endif %}fromJS(data: any{% if HandleReferences %}, _mappings?: any{% endif %}): {{ ClassName }}{% if HandleReferences %} | null{% endif %} {
         data = typeof data === 'object' ? data : {};
@@ -55,15 +83,11 @@ export {% if IsAbstract %}abstract {% endif %}class {{ ClassName }}{% if HasInhe
 
     {% if HasInheritance %}override {% endif %}toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-
         for (var property in this) {
             if (this.hasOwnProperty(property))
                 data[property] = this[property];
         }
 
-{% if HasDiscriminator -%}
-        data["{{ BaseDiscriminator }}"] = this._discriminator;
-{% endif -%}
 {% for property in Properties -%}
         {{ property.ConvertToJavaScriptCode | tab }}
 {% endfor -%}
