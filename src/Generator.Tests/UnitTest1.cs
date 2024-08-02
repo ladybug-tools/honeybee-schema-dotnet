@@ -96,6 +96,18 @@ namespace Generator.Tests
         }
 
         [Test]
+        public void TestBaseDiscriminatorAndDiscriminator()
+        {
+            var json = doc.Components.Schemas["_OpenAPIGenBaseModel"];
+
+            Assert.That(json, Is.Not.Null);
+            var derivedJson = doc.Components.Schemas["ProjectInfo"];
+
+            Assert.That(json.Discriminator, Is.EqualTo("type"));
+
+        }
+
+        [Test]
         public void TestReferencePropertyType()
         {
             var json = doc.Components.Schemas["ProjectInfo"];
