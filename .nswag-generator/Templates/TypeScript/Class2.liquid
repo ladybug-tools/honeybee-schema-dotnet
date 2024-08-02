@@ -64,7 +64,7 @@ export {% if IsAbstract %}abstract {% endif %}class {{ ClassName }}{% if HasInhe
         if (data["{{ BaseDiscriminator }}"] === "{{ derivedClass.Discriminator }}") {
 {%       if derivedClass.IsAbstract -%}
             throw new Error("The abstract class '{{ derivedClass.ClassName }}' cannot be instantiated.");
-{%       else %}
+{%       else -%}
             let result = new {{ derivedClass.ClassName }}();
             result.init(data);
             return result;

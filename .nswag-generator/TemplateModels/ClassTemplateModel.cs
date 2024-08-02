@@ -12,12 +12,11 @@ namespace TemplateModels;
 
 public class ClassTemplateModel
 {
-    public static string BaseDiscriminator = "type";
     public bool IsAbstract { get; set; }
     public bool IsInterface { get; set; }
     public string InterfaceName { get; set; }
     public string ClassName { get; set; }
-    public string Discriminator { get; set; }
+
     public string Inheritance { get; set; }
     public JsonSchema InheritedSchema { get; set; }
 
@@ -33,24 +32,28 @@ public class ClassTemplateModel
     public List<string> TsImports { get; set; } = new List<string>();
     public bool HasTsImports => TsImports.Any();
 
+    public string Discriminator { get; set; }
+    public string BaseDiscriminator { get; set; } // type reference keyword: "type"
     public ClassTemplateModel(OpenApiDocument doc, JsonSchema json)
     {
 
         IsAbstract = json.InheritedSchema == null;
         Description = json.Description;
+        BaseDiscriminator = json.Discriminator;
 
-        
+
+
         //Methods = classType.GetMethods().Select(_ => new MethodTemplateModel(_, GetDoc(xmlDoc, _))).ToList();
         //IsInterface = classType.IsInterface;
 
         ClassName = json.Title;
-        Discriminator = json.Discriminator;
-        
+        Discriminator = ClassName;
+
         //InterfaceName = name.StartsWith("I") ? name : $"I{name}";
 
         //SchemaTypes = Methods.SelectMany(_=>_.SchemaTypes)?.Distinct()?.ToList();
 
-        Properties = json.ActualProperties.Select(_=>new PropertyTemplateModel(_.Key, _.Value)).ToList();
+        Properties = json.ActualProperties.Select(_ => new PropertyTemplateModel(_.Key, _.Value)).ToList();
 
         DerivedClasses = json.GetDerivedSchemas(doc).Select(_ => new ClassTemplateModel(doc, _.Key)).ToList();
 
@@ -58,13 +61,18 @@ public class ClassTemplateModel
         InheritedSchema = json.InheritedSchema;
         Inheritance = InheritedSchema?.Title;
 
-        TsImports = Properties.SelectMany(_=>_.TsImports).ToList();
+        TsImports = Properties.SelectMany(_ => _.TsImports).ToList();
 
+        // add base class reference
         if (!string.IsNullOrEmpty(Inheritance))
             TsImports.Add(Inheritance);
+
+        // add derived class references
+        var dcs = DerivedClasses.Select(_ => _.ClassName);
+        TsImports?.AddRange(dcs);
 
         TsImports = TsImports.Distinct().ToList();
     }
 
-    
+
 }

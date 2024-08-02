@@ -1,4 +1,7 @@
-﻿
+﻿import { Autocalculate } from "./Autocalculate";
+import { Location } from "./Location";
+import { ProjectInfo } from "./ProjectInfo";
+
 export abstract class _OpenAPIGenBaseModel {
     /** A base class to use when there is no baseclass available to fall on. */
     type?: string;
@@ -18,20 +21,17 @@ export abstract class _OpenAPIGenBaseModel {
     static fromJS(data: any): _OpenAPIGenBaseModel {
         data = typeof data === 'object' ? data : {};
 
-        if (data[""] === "type") {
-
+        if (data["type"] === "Autocalculate") {
             let result = new Autocalculate();
             result.init(data);
             return result;
         }
-        if (data[""] === "type") {
-
+        if (data["type"] === "Location") {
             let result = new Location();
             result.init(data);
             return result;
         }
-        if (data[""] === "type") {
-
+        if (data["type"] === "ProjectInfo") {
             let result = new ProjectInfo();
             result.init(data);
             return result;
