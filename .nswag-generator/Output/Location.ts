@@ -48,7 +48,6 @@ export class Location extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): Location {
         data = typeof data === 'object' ? data : {};
 
-
         let result = new Location();
         result.init(data);
         return result;
