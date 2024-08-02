@@ -44,7 +44,6 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): ProjectInfo {
         data = typeof data === 'object' ? data : {};
 
-
         let result = new ProjectInfo();
         result.init(data);
         return result;

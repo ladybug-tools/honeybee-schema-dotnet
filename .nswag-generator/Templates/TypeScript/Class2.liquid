@@ -73,7 +73,7 @@ export {% if IsAbstract %}abstract {% endif %}class {{ ClassName }}{% if HasInhe
 {%     endfor -%}
 {%     if IsAbstract -%}
         throw new Error("The abstract class '{{ ClassName }}' cannot be instantiated.");
-{%     else %}
+{%     else -%}
         let result = new {{ ClassName }}();
         result.init(data);
         return result;

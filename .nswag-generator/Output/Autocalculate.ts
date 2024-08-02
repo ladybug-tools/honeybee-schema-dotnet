@@ -24,7 +24,6 @@ export class Autocalculate extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): Autocalculate {
         data = typeof data === 'object' ? data : {};
 
-
         let result = new Autocalculate();
         result.init(data);
         return result;
