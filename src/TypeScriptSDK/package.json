@@ -17,6 +17,8 @@
     "vite": "^4.1.0",
     "vite-plugin-dts": "^3.9.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "class-validator": "^0.14.1"
+  },
   "version": "1.58.1-1"
 }
