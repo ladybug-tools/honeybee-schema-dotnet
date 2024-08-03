@@ -1,10 +1,14 @@
-﻿import { Autocalculate } from "./Autocalculate";
+﻿import { IsString, IsOptional, validate } from 'class-validator';
+import { Autocalculate } from "./Autocalculate";
 import { Location } from "./Location";
 import { ProjectInfo } from "./ProjectInfo";
 
 export abstract class _OpenAPIGenBaseModel {
+    @IsString()
+    @IsOptional()
     /** A base class to use when there is no baseclass available to fall on. */
     type?: string;
+	
 
     constructor() {
         this.type = "InvalidType";

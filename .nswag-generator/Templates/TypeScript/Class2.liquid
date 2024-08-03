@@ -1,3 +1,4 @@
+import { {{TsValidatorImportsCode}} } from 'class-validator';
 {% if HasTsImports -%}
 {% for Import in TsImports -%}
 import { {{ Import }} } from "./{{ Import }}";
@@ -9,10 +10,16 @@ import { {{ Import }} } from "./{{ Import }}";
 {% endif -%}
 export {% if IsAbstract %}abstract {% endif %}class {{ ClassName }}{% if HasInheritance %} extends {{ Inheritance }}{% endif %} {
 {% for property in Properties -%}
+{%  if property.HasValidationDecorators -%}
+{%  for decorator in property.ValidationDecorators -%}
+    {{ decorator }}
+{%  endfor -%}
+{%  endif -%}
 {%  if property.HasDescription -%}
     /** {{ property.Description }} */
 {%  endif -%}
     {{ property.PropertyName }}{% if property.IsRequired %}!{% else %}?{% endif %}: {{ property.Type }}{{ property.TypePostfix }};
+	
 {% endfor -%}
 
     constructor() {
@@ -20,12 +27,12 @@ export {% if IsAbstract %}abstract {% endif %}class {{ ClassName }}{% if HasInhe
         super();
 {%      endif -%}
 {% if HasProperties -%}
-{%      for property in Properties -%}
+{%  for property in Properties -%}
 {%      if property.HasDefault -%}
         this.{{ property.PropertyName }} = {{ property.DefaultCodeFormat | strip | tab }};
 {%      endif -%}
-{%      endfor -%}
-{%  endif -%}
+{%  endfor -%}
+{% endif -%}
     }
 
 

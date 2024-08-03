@@ -1,23 +1,47 @@
-﻿import { Autocalculate } from "./Autocalculate";
+﻿import { IsString, IsOptional, IsNumber, validate } from 'class-validator';
+import { Autocalculate } from "./Autocalculate";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A Ladybug Location. */
 export class Location extends _OpenAPIGenBaseModel {
+    @IsString()
+    @IsOptional()
     type?: string;
+	
+    @IsString()
+    @IsOptional()
     /** Name of the city as a string. */
     city?: string;
+	
+    @IsNumber()
+    @IsOptional()
     /** Location latitude between -90 and 90 (Default: 0). */
     latitude?: number;
+	
+    @IsNumber()
+    @IsOptional()
     /** Location longitude between -180 (west) and 180 (east) (Default: 0). */
     longitude?: number;
+	
+    @IsOptional()
     /** Time zone between -12 hours (west) and +14 hours (east). If None, the time zone will be an estimated integer value derived from the longitude in accordance with solar time. */
     time_zone?: Autocalculate | number;
+	
+    @IsNumber()
+    @IsOptional()
     /** A number for elevation of the location in meters. (Default: 0). */
     elevation?: number;
+	
+    @IsString()
+    @IsOptional()
     /** ID of the location if the location is representing a weather station. */
     station_id?: string;
+	
+    @IsString()
+    @IsOptional()
     /** Source of data (e.g. TMY, TMY3). */
     source?: string;
+	
 
     constructor() {
         super();

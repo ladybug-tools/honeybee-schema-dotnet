@@ -24,6 +24,10 @@ public class PropertyTemplateModel
     public object? Default {  get; set; }
     public string DefaultCodeFormat { get; set; }
     public bool HasDefault => Default != null;
+
+    public bool HasValidationDecorators => ValidationDecorators.Any();
+    public List<string> ValidationDecorators { get; set; }
+
     public PropertyTemplateModel(string name, JsonSchemaProperty json)
     {
         
@@ -38,7 +42,7 @@ public class PropertyTemplateModel
         IsReadOnly = json.IsReadOnly;
         IsRequired = json.IsRequired;
 
-
+        // check types
         if (IsAnyOf)
         {
             var types = new List<string>();
@@ -92,6 +96,11 @@ public class PropertyTemplateModel
 
         ConvertToJavaScriptCode = $"data[\"{PropertyName}\"] = this.{PropertyName};";
         ConvertToClassCode = Default == null ? $"this.{PropertyName} = _data[\"{PropertyName}\"];" : $"this.{PropertyName} = _data[\"{PropertyName}\"] !== undefined ? _data[\"{PropertyName}\"] : {DefaultCodeFormat};";
+
+        //validation decorators
+        ValidationDecorators = GetValidationDecorators(json);
+
+
     }
 
     public static string ConvertToTypeScriptType(string type)
@@ -106,6 +115,56 @@ public class PropertyTemplateModel
         {"Number", "number" },
         {"Boolean", "boolean" }
     };
+
+    public static List<string> GetValidationDecorators(JsonSchemaProperty json)
+    {
+        var result = new List<string>();
+        if (json.IsArray)
+        {
+            result.Add("@IsArray()");
+            result.Add("@ValidateNested({ each: true })");
+        }
+        else
+        {
+            var propType = json.Type.ToString();
+            if (json.HasReference)
+            {
+                //result.Add("@IsObject()");
+                var refPropType = json.ActualSchema.Title;
+                result.Add($"@IsInstance({refPropType})");
+                result.Add("@ValidateNested()");
+            }
+            else if (propType == "Integer")
+            {
+                result.Add($"@IsInt()");
+            }
+            else if (propType == "Number")
+            {
+                result.Add($"@IsNumber()");
+            }
+            else if (propType == "String")
+            {
+                result.Add($"@IsString()");
+            }
+            else
+            {
+                //result.Add($"@IsObject()");
+            }
+        }
+
+        if (json.IsRequired)
+        {
+            result.Add($"@IsDefined()");
+        }
+        else
+        {
+            result.Add($"@IsOptional()");
+        }
+
+
+        return result;
+      
+    }
 
     public void AddTsInputTypes(string type)
     {

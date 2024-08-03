@@ -15,7 +15,7 @@ public class EnumTemplateModel
     {
         Description = json.Description;
         EnumName = json.Title;
-        EnumItems = json.Enumeration.Select(_=>_.ToString()).Select((_ , i)=> new EnumItemTemplateModel( i, _)).ToList();
+        EnumItems = json.Enumeration.Select(_ => _.ToString()).Select((_, i) => new EnumItemTemplateModel(i, _)).ToList();
 
 
         //ClimateZone 

@@ -119,6 +119,20 @@ namespace Generator.Tests
 
         }
 
+        [Test]
+        public void TestValidator()
+        {
+            var json = doc.Components.Schemas["ProjectInfo"];
+            var classModel = new ClassTemplateModel(doc, json);
+
+            var validators = classModel.TsValidatorImports;
+            Assert.That(validators.Count, Is.Not.Zero);
+            CollectionAssert.Contains(validators, "ValidateNested");
+            CollectionAssert.Contains(validators, "IsInstance");
+            CollectionAssert.Contains(validators, "validate");
+
+        }
+
 
         [Test]
         public void TestAutocalculateNumberParameter()
