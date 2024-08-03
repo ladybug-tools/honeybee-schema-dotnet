@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsNumber, IsArray, ValidateNested, IsInstance, validate } from 'class-validator';
+﻿import { IsString, IsOptional, IsNumber, IsArray, ValidateNested, IsInstance, validate, ValidationError } from 'class-validator';
 import { Location } from "./Location";
 import { ClimateZones } from "./ClimateZones";
 import { BuildingTypes } from "./BuildingTypes";
@@ -76,7 +76,7 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
         return result;
     }
 
-    override toJSON(data?: any) {
+	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         for (var property in this) {
             if (this.hasOwnProperty(property))
@@ -92,5 +92,14 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
         data["vintage"] = this.vintage;
         super.toJSON(data);
         return data;
+    }
+
+	async validate(): Promise<boolean> {
+        const errors = await validate(this);
+        if (errors.length > 0){
+			const errorMessages = errors.map((error: ValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+      		throw new Error(`Validation failed: ${errorMessages}`);
+		}
+        return true;
     }
 }

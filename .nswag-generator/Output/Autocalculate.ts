@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, validate } from 'class-validator';
+﻿import { IsString, IsOptional, validate, ValidationError } from 'class-validator';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.
@@ -33,7 +33,7 @@ export class Autocalculate extends _OpenAPIGenBaseModel {
         return result;
     }
 
-    override toJSON(data?: any) {
+	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         for (var property in this) {
             if (this.hasOwnProperty(property))
@@ -43,5 +43,14 @@ export class Autocalculate extends _OpenAPIGenBaseModel {
         data["type"] = this.type;
         super.toJSON(data);
         return data;
+    }
+
+	async validate(): Promise<boolean> {
+        const errors = await validate(this);
+        if (errors.length > 0){
+			const errorMessages = errors.map((error: ValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+      		throw new Error(`Validation failed: ${errorMessages}`);
+		}
+        return true;
     }
 }
