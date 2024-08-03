@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsNumber, validate } from 'class-validator';
+﻿import { IsString, IsOptional, IsNumber, validate, ValidationError } from 'class-validator';
 import { Autocalculate } from "./Autocalculate";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
@@ -77,7 +77,7 @@ export class Location extends _OpenAPIGenBaseModel {
         return result;
     }
 
-    override toJSON(data?: any) {
+	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         for (var property in this) {
             if (this.hasOwnProperty(property))
@@ -94,5 +94,14 @@ export class Location extends _OpenAPIGenBaseModel {
         data["source"] = this.source;
         super.toJSON(data);
         return data;
+    }
+
+	async validate(): Promise<boolean> {
+        const errors = await validate(this);
+        if (errors.length > 0){
+			const errorMessages = errors.map((error: ValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+      		throw new Error(`Validation failed: ${errorMessages}`);
+		}
+        return true;
     }
 }

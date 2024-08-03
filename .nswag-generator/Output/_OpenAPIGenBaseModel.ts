@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, validate } from 'class-validator';
+﻿import { IsString, IsOptional, validate, ValidationError } from 'class-validator';
 import { Autocalculate } from "./Autocalculate";
 import { Location } from "./Location";
 import { ProjectInfo } from "./ProjectInfo";
@@ -43,7 +43,7 @@ export abstract class _OpenAPIGenBaseModel {
         throw new Error("The abstract class '_OpenAPIGenBaseModel' cannot be instantiated.");
     }
 
-    toJSON(data?: any) {
+	toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         for (var property in this) {
             if (this.hasOwnProperty(property))
@@ -53,4 +53,5 @@ export abstract class _OpenAPIGenBaseModel {
         data["type"] = this.type;
         return data;
     }
+
 }
