@@ -1,11 +1,15 @@
-﻿import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+﻿import { IsString, IsOptional, validate } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.
 
 This effectively includes all objects except for the Properties classes
 that are assigned to geometry objects. */
 export class Autocalculate extends _OpenAPIGenBaseModel {
+    @IsString()
+    @IsOptional()
     type?: string;
+	
 
     constructor() {
         super();

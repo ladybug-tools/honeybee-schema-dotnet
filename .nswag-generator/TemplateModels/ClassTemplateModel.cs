@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace TemplateModels;
 
@@ -31,9 +32,12 @@ public class ClassTemplateModel
     public List<PropertyTemplateModel> Properties { get; set; }
     public List<string> TsImports { get; set; } = new List<string>();
     public bool HasTsImports => TsImports.Any();
-
+    public List<string> TsValidatorImports { get; set; }
+    public string TsValidatorImportsCode { get; set; }
     public string Discriminator { get; set; }
     public string BaseDiscriminator { get; set; } // type reference keyword: "type"
+
+    
     public ClassTemplateModel(OpenApiDocument doc, JsonSchema json)
     {
 
@@ -72,7 +76,27 @@ public class ClassTemplateModel
         TsImports?.AddRange(dcs);
 
         TsImports = TsImports.Distinct().ToList();
+
+        var paramValidators = Properties.SelectMany(_=>_.ValidationDecorators).Select(_=> ValidationDecoratorToImport(_)).ToList();
+        paramValidators.Add("validate");
+        TsValidatorImports = paramValidators.Distinct().ToList();
+        TsValidatorImportsCode = string.Join(", ", TsValidatorImports);
     }
+
+    public static string ValidationDecoratorToImport(string decorator) 
+    {
+        string pattern = @"@([a-zA-Z]+)\(";
+        Match match = Regex.Match(decorator, pattern);
+        if (match.Success)
+        {
+            return match.Groups[1].Value;
+        }
+        else
+        {
+            return decorator;
+        }
+    }
+
 
 
 }
