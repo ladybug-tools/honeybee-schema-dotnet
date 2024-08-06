@@ -102,8 +102,11 @@ namespace Generator.Tests
 
             Assert.That(json, Is.Not.Null);
             var derivedJson = doc.Components.Schemas["ProjectInfo"];
-
             Assert.That(json.Discriminator, Is.EqualTo("type"));
+
+            //ClimateZones
+            var cz = doc.Components.Schemas["ClimateZones"];
+            Assert.That(cz.IsEnumeration, Is.True);
 
         }
 
@@ -116,8 +119,13 @@ namespace Generator.Tests
 
             var location = classModel.Properties.FirstOrDefault(_ => _.PropertyName == "location");
             Assert.That(location, Is.Not.Null);
+            CollectionAssert.Contains(location.ValidationDecorators, "@IsInstance(Location)");
 
+            var cz = classModel.Properties.FirstOrDefault(_ => _.PropertyName == "ashrae_climate_zone");
+            Assert.That(cz, Is.Not.Null);
+            CollectionAssert.Contains(location.ValidationDecorators, "@IsEnum(ClimateZones)");
         }
+
 
         [Test]
         public void TestValidator()
