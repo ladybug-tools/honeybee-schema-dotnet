@@ -87,31 +87,41 @@ public class GenDTO
         var tsTemplate = System.IO.Path.Combine(templateDir, "TypeScript");
         var sc = doc.Components.Schemas;
         var classModels = new List<ClassTemplateModel>();
+        var srcDir = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(rootDir), "src", "TypeScriptSDK", "models");
+        if (System.IO.Directory.Exists(srcDir)) 
+            System.IO.Directory.Delete(srcDir, true);
+        System.IO.Directory.CreateDirectory(srcDir);
+
         foreach (var item in sc)
         {
             var key = item.Key;
             var value = item.Value;
-
+            var tsFile = string.Empty;
             if (value.IsEnumeration)
             {
                 var m = new EnumTemplateModel(value);
-                var tsFile = GenEnum(tsTemplate, m, outputDir, ".ts");
-                Console.WriteLine($"Generated file is added as {tsFile}");
+                tsFile = GenEnum(tsTemplate, m, outputDir, ".ts");
             }
             else
             {
                 //class
                 var m = new ClassTemplateModel(doc, value);
-                var tsFile = GenClass(tsTemplate, m, outputDir, ".ts");
-                Console.WriteLine($"Generated file is added as {tsFile}");
+                tsFile = GenClass(tsTemplate, m, outputDir, ".ts");
             }
 
-           
-        
-
+            // copy to src dir
+            var targetSrcTs = System.IO.Path.Combine(srcDir, System.IO.Path.GetFileName(tsFile));
+            System.IO.File.Copy(tsFile, targetSrcTs, true); 
+            Console.WriteLine($"Generated file is added as {targetSrcTs}");
         }
 
-
+        // gen TypeScript index.ts
+        var indexTsPath = System.IO.Path.Combine(srcDir, "index.ts");
+        var tsFiles = System.IO.Directory.GetFiles(srcDir, "*.ts");
+        var names = tsFiles.Select(_ => System.IO.Path.GetFileNameWithoutExtension(_)).ToList();
+        var indexModel = new IndexTemplateModel();
+        indexModel.Files = names;
+        GenIndex(tsTemplate, indexModel, srcDir, ".ts");
 
 
         //var csFile = ConvertToCSharp(doc, rootDir, outputDir);
@@ -391,6 +401,15 @@ public class GenDTO
         return file;
     }
 
+    private static string GenIndex(string templateDir, IndexTemplateModel model, string outputDir, string fileExt = ".cs")
+    {
+        var templateSource = File.ReadAllText(Path.Combine(templateDir, "Index.liquid"), System.Text.Encoding.UTF8);
+        var code = Gen(templateSource, model);
+        var file = System.IO.Path.Combine(outputDir, $"index{fileExt}");
+        System.IO.File.WriteAllText(file, code, System.Text.Encoding.UTF8);
+        return file;
+    }
+
     public static string Gen(string templateSource, object model)
     {
 
@@ -400,7 +419,7 @@ public class GenDTO
         options.MemberAccessStrategy.Register<EnumTemplateModel>();
         options.MemberAccessStrategy.Register<PropertyTemplateModel>();
         options.MemberAccessStrategy.Register<EnumItemTemplateModel>();
-        //options.MemberAccessStrategy.Register<MethodTemplateModel>();
+        options.MemberAccessStrategy.Register<IndexTemplateModel>();
         //options.MemberAccessStrategy.Register<ParamTemplateModel>();
         options.Greedy = false;
 
