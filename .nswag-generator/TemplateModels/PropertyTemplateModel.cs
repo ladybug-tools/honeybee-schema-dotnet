@@ -129,9 +129,16 @@ public class PropertyTemplateModel
             var propType = json.Type.ToString();
             if (json.HasReference)
             {
-                //result.Add("@IsObject()");
                 var refPropType = json.ActualSchema.Title;
-                result.Add($"@IsInstance({refPropType})");
+                if (json.ActualSchema.IsEnumeration)
+                {
+                    result.Add($"@IsEnum({refPropType})");
+                }
+                else
+                {
+                    result.Add($"@IsInstance({refPropType})");
+                }
+             
                 result.Add("@ValidateNested()");
             }
             else if (propType == "Integer")

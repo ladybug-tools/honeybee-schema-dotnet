@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsNumber, IsArray, ValidateNested, IsInstance, validate, ValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsNumber, IsArray, ValidateNested, IsInstance, IsEnum, validate, ValidationError } from 'class-validator';
 import { Location } from "./Location";
 import { ClimateZones } from "./ClimateZones";
 import { BuildingTypes } from "./BuildingTypes";
@@ -28,7 +28,7 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
     /** Project location. This value is usually generated from the information in the weather files. */
     location?: Location;
 	
-    @IsInstance(ClimateZones)
+    @IsEnum(ClimateZones)
     @ValidateNested()
     @IsOptional()
     /** Project location climate zone. */
