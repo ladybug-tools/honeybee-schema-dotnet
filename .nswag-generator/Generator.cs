@@ -11,27 +11,25 @@ namespace SchemaGenerator;
 
 internal class Generator
 {
-    static string _sdkName = "ModelEditorSDK";
-    static string workingDir = Environment.CurrentDirectory;
+    private static readonly string _generatorFolder = ".nswag-generator";
+    public static string sdkName = "ModelEditorSDK";
+    public static string workingDir = Environment.CurrentDirectory;
+    public static string rootDir => workingDir.Substring(0, workingDir.IndexOf(_generatorFolder) + _generatorFolder.Length);
     static void Main(string[] args)
     {
 
         Console.WriteLine($"Current working dir: {workingDir}");
         Console.WriteLine(string.Join(",", args));
 
-        var rootDir = System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(workingDir));
+        if (!System.IO.Directory.Exists(rootDir))
+            throw new ArgumentException($"Invalid {rootDir}");
+        Console.WriteLine($"Current root dir: {rootDir}");
+
         var outputDir = System.IO.Path.Combine(rootDir, "Output");
         System.IO.Directory.CreateDirectory(outputDir);
 
         GenDTO.Execute();
-        //var f = @"C:\Users\mingo\Repos\pollination\honeybee-schema-dotnet\.nswag-generator\Output\HoneybeeSchemaSDK.ts";
-        //var tsCode = System.IO.File.ReadAllText(f);
-        //tsCode = Processor.ProcessTypeScript(tsCode);
 
-        //var aa = "";
-
-        // generate processors
-        //GenProcessor.Execute();
     }
 
 }

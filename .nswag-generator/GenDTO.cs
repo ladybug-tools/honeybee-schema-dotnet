@@ -20,15 +20,15 @@ namespace SchemaGenerator;
 
 public class GenDTO
 {
-    static string _sdkName = "HoneybeeSchemaSDK";
-    static string workingDir = Environment.CurrentDirectory;
+    static string _sdkName => Generator.sdkName;
+    static string workingDir => Generator.workingDir;
+    static string rootDir => Generator.rootDir;
     internal static void Execute()
     {
 
         Console.WriteLine($"Current working dir: {workingDir}");
         //Console.WriteLine(string.Join(",", args));
 
-        var rootDir = System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(workingDir));
         var outputDir = System.IO.Path.Combine(rootDir, "Output");
         var templateDir = System.IO.Path.Combine(rootDir, "Templates");
         System.IO.Directory.CreateDirectory(outputDir);
