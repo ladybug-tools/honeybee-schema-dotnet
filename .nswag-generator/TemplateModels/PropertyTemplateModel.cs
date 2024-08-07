@@ -1,5 +1,6 @@
 ﻿
 using NJsonSchema;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -43,55 +44,7 @@ public class PropertyTemplateModel
         IsRequired = json.IsRequired;
 
         // check types
-        if (IsAnyOf)
-        {
-            var types = new List<string>();
-            foreach (var item in AnyOf)
-            {
-                var typeName = string.Empty;
-                if (item.HasReference)
-                {
-                    typeName = item.ActualSchema.Title;
-                    AddTsInputTypes(typeName);
-                }
-                else
-                {
-                    typeName = item.Type.ToString();
-                }
-                types.Add(typeName);
-            }
-
-            var tps = types.Select(_=> ConvertToTypeScriptType(_)).ToList();
-            Type = string.Join(" | ", tps);
-        }
-        else
-        {
-            if (json.IsArray)
-            {
-                var arrayItem = json.Item;
-                var itemType = arrayItem.Type.ToString();
-                if (arrayItem.HasReference)
-                {
-                    itemType = arrayItem.ActualSchema.Title;
-                    AddTsInputTypes(itemType);
-                }
-
-                Type = $"{ConvertToTypeScriptType(itemType)} []"; 
-            }
-            else
-            {
-                var propType = json.Type.ToString();
-                if (json.HasReference)
-                {
-                    propType = json.ActualSchema.Title;
-                    AddTsInputTypes(propType);
-                }
-                Type = ConvertToTypeScriptType(propType);
-            }
-            
-        }
-
-
+        Type = GetTypeScriptType(json, AddTsImportTypes);
 
 
         ConvertToJavaScriptCode = $"data[\"{PropertyName}\"] = this.{PropertyName};";
@@ -102,6 +55,72 @@ public class PropertyTemplateModel
 
 
     }
+
+    
+
+    public static string GetTypeScriptType(JsonSchema json, Action<string> collectImportType)
+    {
+        var type = string.Empty;
+        if ((json.AnyOf?.Any()).GetValueOrDefault())
+        {
+            var types = GetAnyOfTypes(json, collectImportType);
+            var tps = types.Select(_ => ConvertToTypeScriptType(_)).ToList();
+            type = $"({string.Join(" | ", tps)})";
+        }
+        else if (json.IsArray)
+        {
+            var arrayItem = json.Item;
+            var itemType = GetTypeScriptType(arrayItem, collectImportType);
+            type = $"{ConvertToTypeScriptType(itemType)} []";
+        }
+        else
+        {
+            var propType = json.Type.ToString();
+            if (json.HasReference)
+            {
+                propType = HandleReferenceType(json, collectImportType);
+            }
+            type = ConvertToTypeScriptType(propType);
+        }
+
+        return type;
+    }
+
+    public static List<string> GetAnyOfTypes(JsonSchema json, Action<string> collectImportType)
+    {
+        var types = new List<string>();
+        var anyof = json.AnyOf;
+        foreach (var item in anyof)
+        {
+            var typeName = HandleType(item, collectImportType);
+            types.Add(typeName);
+        }
+
+        return types;
+    }
+
+
+    private static string HandleType(JsonSchema json, Action<string> collectImportType)
+    {
+        var type = string.Empty;
+        if (json.HasReference)
+        {
+            type = HandleReferenceType(json, collectImportType);
+        }
+        else
+        {
+            type = json.Type.ToString();
+        }
+        return type;
+    }
+
+    private static string HandleReferenceType(JsonSchema json, Action<string> collectImportType)
+    {
+        var typeName = json.ActualSchema.Title;
+        collectImportType(typeName);
+        return typeName;
+    }
+
 
     public static string ConvertToTypeScriptType(string type)
     {
@@ -177,7 +196,7 @@ public class PropertyTemplateModel
       
     }
 
-    public void AddTsInputTypes(string type)
+    public void AddTsImportTypes(string type)
     {
         if (type == Type)
             return;
