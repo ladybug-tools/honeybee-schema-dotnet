@@ -1,7 +1,7 @@
 ﻿import { IsString, IsDefined, IsBoolean, IsOptional, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { ValidationError } from "./ValidationError";
 
-export abstract class ValidationReport {
+export class ValidationReport {
     @IsString()
     @IsDefined()
     /** Text string for the version of honeybee-core or dragonfly-core that performed the validation. */
@@ -61,7 +61,9 @@ export abstract class ValidationReport {
     static fromJS(data: any): ValidationReport {
         data = typeof data === 'object' ? data : {};
 
-        throw new Error("The abstract class 'ValidationReport' cannot be instantiated.");
+        let result = new ValidationReport();
+        result.init(data);
+        return result;
     }
 
 	toJSON(data?: any) {
