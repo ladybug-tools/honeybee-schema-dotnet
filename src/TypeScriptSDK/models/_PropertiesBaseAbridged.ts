@@ -1,10 +1,10 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ShadeRadiancePropertiesAbridged } from "./ShadeRadiancePropertiesAbridged";
+import { ApertureRadiancePropertiesAbridged } from "./ApertureRadiancePropertiesAbridged";
 import { DoorRadiancePropertiesAbridged } from "./DoorRadiancePropertiesAbridged";
 import { FaceRadiancePropertiesAbridged } from "./FaceRadiancePropertiesAbridged";
 import { ShadeMeshRadiancePropertiesAbridged } from "./ShadeMeshRadiancePropertiesAbridged";
-import { ApertureRadiancePropertiesAbridged } from "./ApertureRadiancePropertiesAbridged";
 
 /** Base class of Abridged Radiance Properties. */
 export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
@@ -47,6 +47,11 @@ export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
+        if (data["type"] === "ApertureRadiancePropertiesAbridged") {
+            let result = new ApertureRadiancePropertiesAbridged();
+            result.init(data);
+            return result;
+        }
         if (data["type"] === "DoorRadiancePropertiesAbridged") {
             let result = new DoorRadiancePropertiesAbridged();
             result.init(data);
@@ -59,11 +64,6 @@ export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
         }
         if (data["type"] === "ShadeMeshRadiancePropertiesAbridged") {
             let result = new ShadeMeshRadiancePropertiesAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ApertureRadiancePropertiesAbridged") {
-            let result = new ApertureRadiancePropertiesAbridged();
             result.init(data);
             return result;
         }

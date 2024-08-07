@@ -1,11 +1,11 @@
 ﻿import { IsString, IsDefined, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Shade } from "./Shade";
-import { Door } from "./Door";
-import { ShadeMesh } from "./ShadeMesh";
 import { Aperture } from "./Aperture";
+import { Door } from "./Door";
 import { Face } from "./Face";
 import { Room } from "./Room";
+import { ShadeMesh } from "./ShadeMesh";
 import { Model } from "./Model";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
@@ -54,18 +54,13 @@ export class IDdBaseModel extends _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "Door") {
-            let result = new Door();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ShadeMesh") {
-            let result = new ShadeMesh();
-            result.init(data);
-            return result;
-        }
         if (data["type"] === "Aperture") {
             let result = new Aperture();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Door") {
+            let result = new Door();
             result.init(data);
             return result;
         }
@@ -76,6 +71,11 @@ export class IDdBaseModel extends _OpenAPIGenBaseModel {
         }
         if (data["type"] === "Room") {
             let result = new Room();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ShadeMesh") {
+            let result = new ShadeMesh();
             result.init(data);
             return result;
         }

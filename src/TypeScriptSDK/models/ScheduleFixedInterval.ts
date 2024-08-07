@@ -7,7 +7,7 @@ export class ScheduleFixedInterval extends IDdEnergyBaseModel {
     @IsArray()
     @ValidateNested({ each: true })
     @IsDefined()
-    /** A list of timeseries values occuring at each timestep over the course of the simulation. */
+    /** A list of timeseries values occurring at each timestep over the course of the simulation. */
     values!: number [];
 	
     @IsString()

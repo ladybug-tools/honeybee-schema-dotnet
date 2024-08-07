@@ -9,9 +9,9 @@ import { Glow } from "./Glow";
 import { Light } from "./Light";
 import { Trans } from "./Trans";
 import { Metal } from "./Metal";
+import { ModifierSet } from "./ModifierSet";
 import { StateGeometryAbridged } from "./StateGeometryAbridged";
 import { ModifierSetAbridged } from "./ModifierSetAbridged";
-import { ModifierSet } from "./ModifierSet";
 import { SensorGrid } from "./SensorGrid";
 import { _RadianceAsset } from "./_RadianceAsset";
 import { View } from "./View";
@@ -97,6 +97,11 @@ export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
+        if (data["type"] === "ModifierSet") {
+            let result = new ModifierSet();
+            result.init(data);
+            return result;
+        }
         if (data["type"] === "StateGeometryAbridged") {
             let result = new StateGeometryAbridged();
             result.init(data);
@@ -104,11 +109,6 @@ export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
         }
         if (data["type"] === "ModifierSetAbridged") {
             let result = new ModifierSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ModifierSet") {
-            let result = new ModifierSet();
             result.init(data);
             return result;
         }

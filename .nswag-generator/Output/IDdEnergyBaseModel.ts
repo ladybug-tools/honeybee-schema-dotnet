@@ -1,12 +1,62 @@
 ﻿import { IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
 import { EnergyBaseModel } from "./EnergyBaseModel";
-import { DetailedHVAC } from "./DetailedHVAC";
-import { RadiantwithDOASAbridged } from "./RadiantwithDOASAbridged";
-import { WindowAC } from "./WindowAC";
-import { IdealAirSystemAbridged } from "./IdealAirSystemAbridged";
+import { EnergyMaterial } from "./EnergyMaterial";
+import { EnergyMaterialNoMass } from "./EnergyMaterialNoMass";
+import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
+import { EnergyWindowMaterialGas } from "./EnergyWindowMaterialGas";
+import { OpaqueConstructionAbridged } from "./OpaqueConstructionAbridged";
+import { WindowConstructionAbridged } from "./WindowConstructionAbridged";
 import { ShadeConstruction } from "./ShadeConstruction";
+import { AirBoundaryConstructionAbridged } from "./AirBoundaryConstructionAbridged";
+import { ConstructionSetAbridged } from "./ConstructionSetAbridged";
+import { EnergyMaterialVegetation } from "./EnergyMaterialVegetation";
+import { OpaqueConstruction } from "./OpaqueConstruction";
+import { EnergyWindowMaterialSimpleGlazSys } from "./EnergyWindowMaterialSimpleGlazSys";
+import { EnergyWindowMaterialGasCustom } from "./EnergyWindowMaterialGasCustom";
+import { EnergyWindowMaterialGasMixture } from "./EnergyWindowMaterialGasMixture";
+import { EnergyWindowFrame } from "./EnergyWindowFrame";
+import { WindowConstruction } from "./WindowConstruction";
+import { EnergyWindowMaterialShade } from "./EnergyWindowMaterialShade";
+import { EnergyWindowMaterialBlind } from "./EnergyWindowMaterialBlind";
 import { ScheduleRuleset } from "./ScheduleRuleset";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
+import { WindowConstructionShade } from "./WindowConstructionShade";
+import { WindowConstructionDynamic } from "./WindowConstructionDynamic";
+import { AirBoundaryConstruction } from "./AirBoundaryConstruction";
+import { ConstructionSet } from "./ConstructionSet";
+import { WindowConstructionShadeAbridged } from "./WindowConstructionShadeAbridged";
+import { WindowConstructionDynamicAbridged } from "./WindowConstructionDynamicAbridged";
+import { IdealAirSystemAbridged } from "./IdealAirSystemAbridged";
+import { VAV } from "./VAV";
+import { PVAV } from "./PVAV";
+import { PSZ } from "./PSZ";
+import { PTAC } from "./PTAC";
+import { ForcedAirFurnace } from "./ForcedAirFurnace";
+import { FCUwithDOASAbridged } from "./FCUwithDOASAbridged";
+import { WSHPwithDOASAbridged } from "./WSHPwithDOASAbridged";
+import { VRFwithDOASAbridged } from "./VRFwithDOASAbridged";
+import { RadiantwithDOASAbridged } from "./RadiantwithDOASAbridged";
+import { FCU } from "./FCU";
+import { WSHP } from "./WSHP";
+import { VRF } from "./VRF";
+import { Baseboard } from "./Baseboard";
+import { EvaporativeCooler } from "./EvaporativeCooler";
+import { Residential } from "./Residential";
+import { WindowAC } from "./WindowAC";
+import { GasUnitHeater } from "./GasUnitHeater";
+import { Radiant } from "./Radiant";
+import { DetailedHVAC } from "./DetailedHVAC";
+import { SHWSystem } from "./SHWSystem";
+import { PeopleAbridged } from "./PeopleAbridged";
+import { LightingAbridged } from "./LightingAbridged";
+import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
+import { _EquipmentBase } from "./_EquipmentBase";
+import { GasEquipmentAbridged } from "./GasEquipmentAbridged";
+import { ServiceHotWaterAbridged } from "./ServiceHotWaterAbridged";
+import { InfiltrationAbridged } from "./InfiltrationAbridged";
+import { VentilationAbridged } from "./VentilationAbridged";
+import { SetpointAbridged } from "./SetpointAbridged";
+import { ProgramTypeAbridged } from "./ProgramTypeAbridged";
 import { People } from "./People";
 import { Lighting } from "./Lighting";
 import { ElectricEquipment } from "./ElectricEquipment";
@@ -16,63 +66,13 @@ import { Infiltration } from "./Infiltration";
 import { Ventilation } from "./Ventilation";
 import { Setpoint } from "./Setpoint";
 import { ProgramType } from "./ProgramType";
-import { PeopleAbridged } from "./PeopleAbridged";
-import { VAV } from "./VAV";
-import { EnergyMaterial } from "./EnergyMaterial";
-import { EnergyMaterialNoMass } from "./EnergyMaterialNoMass";
-import { EnergyMaterialVegetation } from "./EnergyMaterialVegetation";
-import { OpaqueConstruction } from "./OpaqueConstruction";
-import { EnergyWindowMaterialSimpleGlazSys } from "./EnergyWindowMaterialSimpleGlazSys";
-import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
-import { EnergyWindowMaterialGas } from "./EnergyWindowMaterialGas";
-import { EnergyWindowMaterialGasCustom } from "./EnergyWindowMaterialGasCustom";
-import { EnergyWindowMaterialGasMixture } from "./EnergyWindowMaterialGasMixture";
-import { EnergyWindowFrame } from "./EnergyWindowFrame";
-import { WindowConstruction } from "./WindowConstruction";
-import { EnergyWindowMaterialShade } from "./EnergyWindowMaterialShade";
-import { EnergyWindowMaterialBlind } from "./EnergyWindowMaterialBlind";
-import { WindowConstructionShade } from "./WindowConstructionShade";
-import { WindowConstructionDynamic } from "./WindowConstructionDynamic";
-import { AirBoundaryConstruction } from "./AirBoundaryConstruction";
-import { ConstructionSet } from "./ConstructionSet";
-import { PVAV } from "./PVAV";
-import { Radiant } from "./Radiant";
-import { GasEquipmentAbridged } from "./GasEquipmentAbridged";
-import { _EquipmentBase } from "./_EquipmentBase";
-import { ForcedAirFurnace } from "./ForcedAirFurnace";
-import { VentilationAbridged } from "./VentilationAbridged";
-import { OpaqueConstructionAbridged } from "./OpaqueConstructionAbridged";
-import { WindowConstructionAbridged } from "./WindowConstructionAbridged";
-import { AirBoundaryConstructionAbridged } from "./AirBoundaryConstructionAbridged";
-import { ConstructionSetAbridged } from "./ConstructionSetAbridged";
-import { WindowConstructionShadeAbridged } from "./WindowConstructionShadeAbridged";
-import { WindowConstructionDynamicAbridged } from "./WindowConstructionDynamicAbridged";
-import { PSZ } from "./PSZ";
-import { PTAC } from "./PTAC";
-import { FCUwithDOASAbridged } from "./FCUwithDOASAbridged";
-import { WSHPwithDOASAbridged } from "./WSHPwithDOASAbridged";
-import { VRFwithDOASAbridged } from "./VRFwithDOASAbridged";
-import { FCU } from "./FCU";
-import { WSHP } from "./WSHP";
-import { VRF } from "./VRF";
-import { Baseboard } from "./Baseboard";
-import { EvaporativeCooler } from "./EvaporativeCooler";
-import { Residential } from "./Residential";
-import { GasUnitHeater } from "./GasUnitHeater";
-import { SHWSystem } from "./SHWSystem";
-import { LightingAbridged } from "./LightingAbridged";
-import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
-import { ServiceHotWaterAbridged } from "./ServiceHotWaterAbridged";
-import { InfiltrationAbridged } from "./InfiltrationAbridged";
-import { SetpointAbridged } from "./SetpointAbridged";
-import { ProgramTypeAbridged } from "./ProgramTypeAbridged";
 import { ScheduleRulesetAbridged } from "./ScheduleRulesetAbridged";
 import { ScheduleFixedIntervalAbridged } from "./ScheduleFixedIntervalAbridged";
 import { InternalMassAbridged } from "./InternalMassAbridged";
 import { ProcessAbridged } from "./ProcessAbridged";
-import { _DOASBase } from "./_DOASBase";
-import { _TemplateSystem } from "./_TemplateSystem";
 import { _HeatCoolBase } from "./_HeatCoolBase";
+import { _TemplateSystem } from "./_TemplateSystem";
+import { _DOASBase } from "./_DOASBase";
 import { _AllAirBase } from "./_AllAirBase";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
@@ -104,28 +104,93 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
     static override fromJS(data: any): IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
 
-        if (data["type"] === "DetailedHVAC") {
-            let result = new DetailedHVAC();
+        if (data["type"] === "EnergyMaterial") {
+            let result = new EnergyMaterial();
             result.init(data);
             return result;
         }
-        if (data["type"] === "RadiantwithDOASAbridged") {
-            let result = new RadiantwithDOASAbridged();
+        if (data["type"] === "EnergyMaterialNoMass") {
+            let result = new EnergyMaterialNoMass();
             result.init(data);
             return result;
         }
-        if (data["type"] === "WindowAC") {
-            let result = new WindowAC();
+        if (data["type"] === "EnergyWindowMaterialGlazing") {
+            let result = new EnergyWindowMaterialGlazing();
             result.init(data);
             return result;
         }
-        if (data["type"] === "IdealAirSystemAbridged") {
-            let result = new IdealAirSystemAbridged();
+        if (data["type"] === "EnergyWindowMaterialGas") {
+            let result = new EnergyWindowMaterialGas();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "OpaqueConstructionAbridged") {
+            let result = new OpaqueConstructionAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "WindowConstructionAbridged") {
+            let result = new WindowConstructionAbridged();
             result.init(data);
             return result;
         }
         if (data["type"] === "ShadeConstruction") {
             let result = new ShadeConstruction();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "AirBoundaryConstructionAbridged") {
+            let result = new AirBoundaryConstructionAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ConstructionSetAbridged") {
+            let result = new ConstructionSetAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "EnergyMaterialVegetation") {
+            let result = new EnergyMaterialVegetation();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "OpaqueConstruction") {
+            let result = new OpaqueConstruction();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "EnergyWindowMaterialSimpleGlazSys") {
+            let result = new EnergyWindowMaterialSimpleGlazSys();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "EnergyWindowMaterialGasCustom") {
+            let result = new EnergyWindowMaterialGasCustom();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "EnergyWindowMaterialGasMixture") {
+            let result = new EnergyWindowMaterialGasMixture();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "EnergyWindowFrame") {
+            let result = new EnergyWindowFrame();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "WindowConstruction") {
+            let result = new WindowConstruction();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "EnergyWindowMaterialShade") {
+            let result = new EnergyWindowMaterialShade();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "EnergyWindowMaterialBlind") {
+            let result = new EnergyWindowMaterialBlind();
             result.init(data);
             return result;
         }
@@ -136,6 +201,191 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
         }
         if (data["type"] === "ScheduleFixedInterval") {
             let result = new ScheduleFixedInterval();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "WindowConstructionShade") {
+            let result = new WindowConstructionShade();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "WindowConstructionDynamic") {
+            let result = new WindowConstructionDynamic();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "AirBoundaryConstruction") {
+            let result = new AirBoundaryConstruction();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ConstructionSet") {
+            let result = new ConstructionSet();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "WindowConstructionShadeAbridged") {
+            let result = new WindowConstructionShadeAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "WindowConstructionDynamicAbridged") {
+            let result = new WindowConstructionDynamicAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "IdealAirSystemAbridged") {
+            let result = new IdealAirSystemAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "VAV") {
+            let result = new VAV();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "PVAV") {
+            let result = new PVAV();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "PSZ") {
+            let result = new PSZ();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "PTAC") {
+            let result = new PTAC();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ForcedAirFurnace") {
+            let result = new ForcedAirFurnace();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "FCUwithDOASAbridged") {
+            let result = new FCUwithDOASAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "WSHPwithDOASAbridged") {
+            let result = new WSHPwithDOASAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "VRFwithDOASAbridged") {
+            let result = new VRFwithDOASAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "RadiantwithDOASAbridged") {
+            let result = new RadiantwithDOASAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "FCU") {
+            let result = new FCU();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "WSHP") {
+            let result = new WSHP();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "VRF") {
+            let result = new VRF();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Baseboard") {
+            let result = new Baseboard();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "EvaporativeCooler") {
+            let result = new EvaporativeCooler();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Residential") {
+            let result = new Residential();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "WindowAC") {
+            let result = new WindowAC();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "GasUnitHeater") {
+            let result = new GasUnitHeater();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Radiant") {
+            let result = new Radiant();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "DetailedHVAC") {
+            let result = new DetailedHVAC();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "SHWSystem") {
+            let result = new SHWSystem();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "PeopleAbridged") {
+            let result = new PeopleAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "LightingAbridged") {
+            let result = new LightingAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ElectricEquipmentAbridged") {
+            let result = new ElectricEquipmentAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "_EquipmentBase") {
+            let result = new _EquipmentBase();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "GasEquipmentAbridged") {
+            let result = new GasEquipmentAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ServiceHotWaterAbridged") {
+            let result = new ServiceHotWaterAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "InfiltrationAbridged") {
+            let result = new InfiltrationAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "VentilationAbridged") {
+            let result = new VentilationAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "SetpointAbridged") {
+            let result = new SetpointAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ProgramTypeAbridged") {
+            let result = new ProgramTypeAbridged();
             result.init(data);
             return result;
         }
@@ -184,256 +434,6 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "PeopleAbridged") {
-            let result = new PeopleAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "VAV") {
-            let result = new VAV();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "EnergyMaterial") {
-            let result = new EnergyMaterial();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "EnergyMaterialNoMass") {
-            let result = new EnergyMaterialNoMass();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "EnergyMaterialVegetation") {
-            let result = new EnergyMaterialVegetation();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "OpaqueConstruction") {
-            let result = new OpaqueConstruction();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "EnergyWindowMaterialSimpleGlazSys") {
-            let result = new EnergyWindowMaterialSimpleGlazSys();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "EnergyWindowMaterialGlazing") {
-            let result = new EnergyWindowMaterialGlazing();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "EnergyWindowMaterialGas") {
-            let result = new EnergyWindowMaterialGas();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "EnergyWindowMaterialGasCustom") {
-            let result = new EnergyWindowMaterialGasCustom();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "EnergyWindowMaterialGasMixture") {
-            let result = new EnergyWindowMaterialGasMixture();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "EnergyWindowFrame") {
-            let result = new EnergyWindowFrame();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "WindowConstruction") {
-            let result = new WindowConstruction();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "EnergyWindowMaterialShade") {
-            let result = new EnergyWindowMaterialShade();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "EnergyWindowMaterialBlind") {
-            let result = new EnergyWindowMaterialBlind();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "WindowConstructionShade") {
-            let result = new WindowConstructionShade();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "WindowConstructionDynamic") {
-            let result = new WindowConstructionDynamic();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "AirBoundaryConstruction") {
-            let result = new AirBoundaryConstruction();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ConstructionSet") {
-            let result = new ConstructionSet();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "PVAV") {
-            let result = new PVAV();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Radiant") {
-            let result = new Radiant();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "GasEquipmentAbridged") {
-            let result = new GasEquipmentAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "_EquipmentBase") {
-            let result = new _EquipmentBase();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ForcedAirFurnace") {
-            let result = new ForcedAirFurnace();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "VentilationAbridged") {
-            let result = new VentilationAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "OpaqueConstructionAbridged") {
-            let result = new OpaqueConstructionAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "WindowConstructionAbridged") {
-            let result = new WindowConstructionAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "AirBoundaryConstructionAbridged") {
-            let result = new AirBoundaryConstructionAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ConstructionSetAbridged") {
-            let result = new ConstructionSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "WindowConstructionShadeAbridged") {
-            let result = new WindowConstructionShadeAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "WindowConstructionDynamicAbridged") {
-            let result = new WindowConstructionDynamicAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "PSZ") {
-            let result = new PSZ();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "PTAC") {
-            let result = new PTAC();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "FCUwithDOASAbridged") {
-            let result = new FCUwithDOASAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "WSHPwithDOASAbridged") {
-            let result = new WSHPwithDOASAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "VRFwithDOASAbridged") {
-            let result = new VRFwithDOASAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "FCU") {
-            let result = new FCU();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "WSHP") {
-            let result = new WSHP();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "VRF") {
-            let result = new VRF();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Baseboard") {
-            let result = new Baseboard();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "EvaporativeCooler") {
-            let result = new EvaporativeCooler();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Residential") {
-            let result = new Residential();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "GasUnitHeater") {
-            let result = new GasUnitHeater();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "SHWSystem") {
-            let result = new SHWSystem();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "LightingAbridged") {
-            let result = new LightingAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ElectricEquipmentAbridged") {
-            let result = new ElectricEquipmentAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ServiceHotWaterAbridged") {
-            let result = new ServiceHotWaterAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "InfiltrationAbridged") {
-            let result = new InfiltrationAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "SetpointAbridged") {
-            let result = new SetpointAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ProgramTypeAbridged") {
-            let result = new ProgramTypeAbridged();
-            result.init(data);
-            return result;
-        }
         if (data["type"] === "ScheduleRulesetAbridged") {
             let result = new ScheduleRulesetAbridged();
             result.init(data);
@@ -454,8 +454,8 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "_DOASBase") {
-            let result = new _DOASBase();
+        if (data["type"] === "_HeatCoolBase") {
+            let result = new _HeatCoolBase();
             result.init(data);
             return result;
         }
@@ -464,8 +464,8 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "_HeatCoolBase") {
-            let result = new _HeatCoolBase();
+        if (data["type"] === "_DOASBase") {
+            let result = new _DOASBase();
             result.init(data);
             return result;
         }
