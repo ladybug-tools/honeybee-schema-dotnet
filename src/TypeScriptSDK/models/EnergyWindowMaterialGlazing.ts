@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsNumber, validate, ValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsNumber, IsBoolean, validate, ValidationError } from 'class-validator';
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -66,6 +66,7 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
     /** Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean. */
     dirt_correction?: number;
 	
+    @IsBoolean()
     @IsOptional()
     /** If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component. */
     solar_diffusing?: boolean;
@@ -86,7 +87,7 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
         this.emissivity_back = 0.84;
         this.conductivity = 0.9;
         this.dirt_correction = 1;
-        this.solar_diffusing = False;
+        this.solar_diffusing = false;
     }
 
 
@@ -106,7 +107,7 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
             this.emissivity_back = _data["emissivity_back"] !== undefined ? _data["emissivity_back"] : 0.84;
             this.conductivity = _data["conductivity"] !== undefined ? _data["conductivity"] : 0.9;
             this.dirt_correction = _data["dirt_correction"] !== undefined ? _data["dirt_correction"] : 1;
-            this.solar_diffusing = _data["solar_diffusing"] !== undefined ? _data["solar_diffusing"] : False;
+            this.solar_diffusing = _data["solar_diffusing"] !== undefined ? _data["solar_diffusing"] : false;
         }
     }
 

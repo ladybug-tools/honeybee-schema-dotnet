@@ -1,4 +1,4 @@
-﻿import { IsString, IsDefined, IsOptional, IsArray, ValidateNested, validate, ValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, IsOptional, IsBoolean, IsArray, ValidateNested, validate, ValidationError } from 'class-validator';
 import { DatedBaseModel } from "./DatedBaseModel";
 
 /** Schedule rule including a ScheduleDay and when it should be applied.. */
@@ -12,30 +12,37 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
     @IsOptional()
     type?: string;
 	
+    @IsBoolean()
     @IsOptional()
     /** Boolean noting whether to apply schedule_day on Sundays. */
     apply_sunday?: boolean;
 	
+    @IsBoolean()
     @IsOptional()
     /** Boolean noting whether to apply schedule_day on Mondays. */
     apply_monday?: boolean;
 	
+    @IsBoolean()
     @IsOptional()
     /** Boolean noting whether to apply schedule_day on Tuesdays. */
     apply_tuesday?: boolean;
 	
+    @IsBoolean()
     @IsOptional()
     /** Boolean noting whether to apply schedule_day on Wednesdays. */
     apply_wednesday?: boolean;
 	
+    @IsBoolean()
     @IsOptional()
     /** Boolean noting whether to apply schedule_day on Thursdays. */
     apply_thursday?: boolean;
 	
+    @IsBoolean()
     @IsOptional()
     /** Boolean noting whether to apply schedule_day on Fridays. */
     apply_friday?: boolean;
 	
+    @IsBoolean()
     @IsOptional()
     /** Boolean noting whether to apply schedule_day on Saturdays. */
     apply_saturday?: boolean;
@@ -56,13 +63,13 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
     constructor() {
         super();
         this.type = "ScheduleRuleAbridged";
-        this.apply_sunday = False;
-        this.apply_monday = False;
-        this.apply_tuesday = False;
-        this.apply_wednesday = False;
-        this.apply_thursday = False;
-        this.apply_friday = False;
-        this.apply_saturday = False;
+        this.apply_sunday = false;
+        this.apply_monday = false;
+        this.apply_tuesday = false;
+        this.apply_wednesday = false;
+        this.apply_thursday = false;
+        this.apply_friday = false;
+        this.apply_saturday = false;
         this.start_date = [
   1,
   1
@@ -79,13 +86,13 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
         if (_data) {
             this.schedule_day = _data["schedule_day"];
             this.type = _data["type"] !== undefined ? _data["type"] : "ScheduleRuleAbridged";
-            this.apply_sunday = _data["apply_sunday"] !== undefined ? _data["apply_sunday"] : False;
-            this.apply_monday = _data["apply_monday"] !== undefined ? _data["apply_monday"] : False;
-            this.apply_tuesday = _data["apply_tuesday"] !== undefined ? _data["apply_tuesday"] : False;
-            this.apply_wednesday = _data["apply_wednesday"] !== undefined ? _data["apply_wednesday"] : False;
-            this.apply_thursday = _data["apply_thursday"] !== undefined ? _data["apply_thursday"] : False;
-            this.apply_friday = _data["apply_friday"] !== undefined ? _data["apply_friday"] : False;
-            this.apply_saturday = _data["apply_saturday"] !== undefined ? _data["apply_saturday"] : False;
+            this.apply_sunday = _data["apply_sunday"] !== undefined ? _data["apply_sunday"] : false;
+            this.apply_monday = _data["apply_monday"] !== undefined ? _data["apply_monday"] : false;
+            this.apply_tuesday = _data["apply_tuesday"] !== undefined ? _data["apply_tuesday"] : false;
+            this.apply_wednesday = _data["apply_wednesday"] !== undefined ? _data["apply_wednesday"] : false;
+            this.apply_thursday = _data["apply_thursday"] !== undefined ? _data["apply_thursday"] : false;
+            this.apply_friday = _data["apply_friday"] !== undefined ? _data["apply_friday"] : false;
+            this.apply_saturday = _data["apply_saturday"] !== undefined ? _data["apply_saturday"] : false;
             this.start_date = _data["start_date"] !== undefined ? _data["start_date"] : [
   1,
   1

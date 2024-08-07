@@ -1,4 +1,4 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsInt, IsNumber, validate, ValidationError } from 'class-validator';
+﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsInt, IsNumber, IsBoolean, validate, ValidationError } from 'class-validator';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Used to specify a start date and a list of values for a period of analysis. */
@@ -34,6 +34,7 @@ export class ScheduleFixedIntervalAbridged extends IDdEnergyBaseModel {
     /**  A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period. */
     placeholder_value?: number;
 	
+    @IsBoolean()
     @IsOptional()
     /** Boolean to note whether values in between intervals should be linearly interpolated or whether successive values should take effect immediately upon the beginning time corresponding to them. */
     interpolate?: boolean;
@@ -48,7 +49,7 @@ export class ScheduleFixedIntervalAbridged extends IDdEnergyBaseModel {
   1
 ];
         this.placeholder_value = 0;
-        this.interpolate = False;
+        this.interpolate = false;
     }
 
 
@@ -64,7 +65,7 @@ export class ScheduleFixedIntervalAbridged extends IDdEnergyBaseModel {
   1
 ];
             this.placeholder_value = _data["placeholder_value"] !== undefined ? _data["placeholder_value"] : 0;
-            this.interpolate = _data["interpolate"] !== undefined ? _data["interpolate"] : False;
+            this.interpolate = _data["interpolate"] !== undefined ? _data["interpolate"] : false;
         }
     }
 

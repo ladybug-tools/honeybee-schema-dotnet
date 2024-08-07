@@ -1,4 +1,4 @@
-﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsArray, validate, ValidationError } from 'class-validator';
+﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsBoolean, IsArray, validate, ValidationError } from 'class-validator';
 import { Face3D } from "./Face3D";
 import { Outdoors } from "./Outdoors";
 import { Surface } from "./Surface";
@@ -27,6 +27,7 @@ export class Aperture extends IDdBaseModel {
     @IsOptional()
     type?: string;
 	
+    @IsBoolean()
     @IsOptional()
     /** Boolean to note whether the Aperture can be opened for ventilation. */
     is_operable?: boolean;
@@ -47,7 +48,7 @@ export class Aperture extends IDdBaseModel {
     constructor() {
         super();
         this.type = "Aperture";
-        this.is_operable = False;
+        this.is_operable = false;
     }
 
 
@@ -58,7 +59,7 @@ export class Aperture extends IDdBaseModel {
             this.boundary_condition = _data["boundary_condition"];
             this.properties = _data["properties"];
             this.type = _data["type"] !== undefined ? _data["type"] : "Aperture";
-            this.is_operable = _data["is_operable"] !== undefined ? _data["is_operable"] : False;
+            this.is_operable = _data["is_operable"] !== undefined ? _data["is_operable"] : false;
             this.indoor_shades = _data["indoor_shades"];
             this.outdoor_shades = _data["outdoor_shades"];
         }

@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsArray, ValidateNested, IsNumber, IsEnum, validate, ValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsArray, ValidateNested, IsNumber, IsEnum, IsBoolean, validate, ValidationError } from 'class-validator';
 import { DesignDay } from "./DesignDay";
 import { EfficiencyStandards } from "./EfficiencyStandards";
 import { ClimateZones } from "./ClimateZones";
@@ -43,6 +43,7 @@ export class SizingParameter extends _OpenAPIGenBaseModel {
     /** Text for the building type to be used in the efficiency_standard. If the type is not recognized or is None, it will be assumed that the building is a generic NonResidential. The following have specified systems per the standard:  Residential, NonResidential, MidriseApartment, HighriseApartment, LargeOffice, MediumOffice, SmallOffice, Retail, StripMall, PrimarySchool, SecondarySchool, SmallHotel, LargeHotel, Hospital, Outpatient, Warehouse, SuperMarket, FullServiceRestaurant, QuickServiceRestaurant, Laboratory, Courthouse. */
     building_type?: string;
 	
+    @IsBoolean()
     @IsOptional()
     /** A boolean to indicate whether the efficiency standard should trigger an sizing run that sets the efficiencies of all HVAC equipment in the Model (False) or the standard should only be written into the OSM and the sizing run should be bypassed (True). Bypassing the sizing run is useful when you only want to check that the overall HVAC system architecture is correct and you do not want to wait the extra time that it takes to run the sizing calculation. */
     bypass_efficiency_sizing?: boolean;
@@ -53,7 +54,7 @@ export class SizingParameter extends _OpenAPIGenBaseModel {
         this.type = "SizingParameter";
         this.heating_factor = 1.25;
         this.cooling_factor = 1.15;
-        this.bypass_efficiency_sizing = False;
+        this.bypass_efficiency_sizing = false;
     }
 
 
@@ -67,7 +68,7 @@ export class SizingParameter extends _OpenAPIGenBaseModel {
             this.efficiency_standard = _data["efficiency_standard"];
             this.climate_zone = _data["climate_zone"];
             this.building_type = _data["building_type"];
-            this.bypass_efficiency_sizing = _data["bypass_efficiency_sizing"] !== undefined ? _data["bypass_efficiency_sizing"] : False;
+            this.bypass_efficiency_sizing = _data["bypass_efficiency_sizing"] !== undefined ? _data["bypass_efficiency_sizing"] : false;
         }
     }
 

@@ -1,4 +1,4 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError } from 'class-validator';
+﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsBoolean, validate, ValidationError } from 'class-validator';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 
 /** Used to describe the daily schedule for a single simulation day. */
@@ -19,6 +19,7 @@ export class ScheduleDay extends EnergyBaseModel {
     /** A list of lists with each sub-list possesing 2 values for [hour, minute]. The length of the master list must match the length of the values list. Each time in the master list represents the time of day that the corresponding value begins to take effect. For example [(0,0), (9,0), (17,0)] in combination with the values [0, 1, 0] denotes a schedule value of 0 from 0:00 to 9:00, a value of 1 from 9:00 to 17:00 and 0 from 17:00 to the end of the day. Note that this representation of times as the "time of beginning" is a different convention than EnergyPlus, which uses "time until". */
     times?: Array [];
 	
+    @IsBoolean()
     @IsOptional()
     /** Boolean to note whether values in between times should be linearly interpolated or whether successive values should take effect immediately upon the beginning time corresponding to them. */
     interpolate?: boolean;
@@ -31,7 +32,7 @@ export class ScheduleDay extends EnergyBaseModel {
   0,
   0
 ];
-        this.interpolate = False;
+        this.interpolate = false;
     }
 
 
@@ -44,7 +45,7 @@ export class ScheduleDay extends EnergyBaseModel {
   0,
   0
 ];
-            this.interpolate = _data["interpolate"] !== undefined ? _data["interpolate"] : False;
+            this.interpolate = _data["interpolate"] !== undefined ? _data["interpolate"] : false;
         }
     }
 

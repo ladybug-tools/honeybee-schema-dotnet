@@ -1,4 +1,4 @@
-﻿import { IsEnum, ValidateNested, IsDefined, IsString, IsArray, IsOptional, validate, ValidationError } from 'class-validator';
+﻿import { IsEnum, ValidateNested, IsDefined, IsString, IsBoolean, IsArray, IsOptional, validate, ValidationError } from 'class-validator';
 import { GeometryObjectTypes } from "./GeometryObjectTypes";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
@@ -14,6 +14,7 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
     /** Text string for the unique object ID that has changed. */
     element_id!: string;
 	
+    @IsBoolean()
     @IsDefined()
     /** A boolean to note whether the geometry of the object has changed (True) or not (False). For the case of a Room, any change in the geometry of child Faces, Apertures or Doors will cause this property to be True. Note that this property is only True if the change in geometry produces a visible change greater than the base model tolerance. So converting the model between different unit systems, removing colinear vertices, or doing other transformations that are common for export to simulation engines will not trigger this property to become True. */
     geometry_changed!: boolean;
@@ -29,10 +30,12 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
     /** Text string for the display name of the object that has changed. */
     element_name?: string;
 	
+    @IsBoolean()
     @IsOptional()
     /** A boolean to note whether the energy properties of the object have changed (True) or not (False) such that it is possible for the properties of the changed object to be applied to the base model. For Rooms, this property will only be true if the energy property assigned to the Room has changed and will not be true if a property assigned to an individual child Face or Aperture has changed. */
     energy_changed?: boolean;
 	
+    @IsBoolean()
     @IsOptional()
     /** A boolean to note whether the radiance properties of the object have changed (True) or not (False) such that it is possible for the properties of the changed object to be applied to the base model. For Rooms, this property will only be true if the radiance property assigned to the Room has changed and will not be true if a property assigned to an individual child Face or Aperture has changed. */
     radiance_changed?: boolean;
@@ -50,8 +53,8 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
 
     constructor() {
         super();
-        this.energy_changed = False;
-        this.radiance_changed = False;
+        this.energy_changed = false;
+        this.radiance_changed = false;
         this.type = "ChangedObject";
     }
 
@@ -64,8 +67,8 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
             this.geometry_changed = _data["geometry_changed"];
             this.geometry = _data["geometry"];
             this.element_name = _data["element_name"];
-            this.energy_changed = _data["energy_changed"] !== undefined ? _data["energy_changed"] : False;
-            this.radiance_changed = _data["radiance_changed"] !== undefined ? _data["radiance_changed"] : False;
+            this.energy_changed = _data["energy_changed"] !== undefined ? _data["energy_changed"] : false;
+            this.radiance_changed = _data["radiance_changed"] !== undefined ? _data["radiance_changed"] : false;
             this.existing_geometry = _data["existing_geometry"];
             this.type = _data["type"] !== undefined ? _data["type"] : "ChangedObject";
         }

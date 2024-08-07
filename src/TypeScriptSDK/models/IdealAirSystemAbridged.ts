@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsEnum, ValidateNested, IsNumber, validate, ValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsEnum, ValidateNested, IsBoolean, IsNumber, validate, ValidationError } from 'class-validator';
 import { EconomizerType } from "./EconomizerType";
 import { Autosize } from "./Autosize";
 import { NoLimit } from "./NoLimit";
@@ -16,6 +16,7 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
     /** Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone. */
     economizer_type?: EconomizerType;
 	
+    @IsBoolean()
     @IsOptional()
     /** Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the zone. */
     demand_controlled_ventilation?: boolean;
@@ -63,7 +64,7 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
         super();
         this.type = "IdealAirSystemAbridged";
         this.economizer_type = EconomizerType.DifferentialDryBulb;
-        this.demand_controlled_ventilation = False;
+        this.demand_controlled_ventilation = false;
         this.sensible_heat_recovery = 0;
         this.latent_heat_recovery = 0;
         this.heating_air_temperature = 50;
@@ -78,7 +79,7 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
         if (_data) {
             this.type = _data["type"] !== undefined ? _data["type"] : "IdealAirSystemAbridged";
             this.economizer_type = _data["economizer_type"] !== undefined ? _data["economizer_type"] : EconomizerType.DifferentialDryBulb;
-            this.demand_controlled_ventilation = _data["demand_controlled_ventilation"] !== undefined ? _data["demand_controlled_ventilation"] : False;
+            this.demand_controlled_ventilation = _data["demand_controlled_ventilation"] !== undefined ? _data["demand_controlled_ventilation"] : false;
             this.sensible_heat_recovery = _data["sensible_heat_recovery"] !== undefined ? _data["sensible_heat_recovery"] : 0;
             this.latent_heat_recovery = _data["latent_heat_recovery"] !== undefined ? _data["latent_heat_recovery"] : 0;
             this.heating_air_temperature = _data["heating_air_temperature"] !== undefined ? _data["heating_air_temperature"] : 50;
