@@ -74,8 +74,9 @@ public class ClassTemplateModel
         // add derived class references
         var dcs = DerivedClasses.Select(_ => _.ClassName);
         TsImports?.AddRange(dcs);
+        // remove importing self
+        TsImports = TsImports.Where(_=>_!= ClassName).Distinct().ToList();
 
-        TsImports = TsImports.Distinct().ToList();
 
         var paramValidators = Properties.SelectMany(_=>_.ValidationDecorators).Select(_=> ValidationDecoratorToImport(_)).ToList();
         paramValidators.Add("validate");

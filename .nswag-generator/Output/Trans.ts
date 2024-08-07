@@ -4,7 +4,6 @@ import { Glass } from "./Glass";
 import { BSDF } from "./BSDF";
 import { Glow } from "./Glow";
 import { Light } from "./Light";
-import { Trans } from "./Trans";
 import { Metal } from "./Metal";
 import { Void } from "./Void";
 import { Mirror } from "./Mirror";
