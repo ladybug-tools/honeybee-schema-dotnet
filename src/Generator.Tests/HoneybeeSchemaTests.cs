@@ -27,7 +27,7 @@ namespace Generator.Tests
 
 
         [Test]
-        public void TestBaseDiscriminatorAndDiscriminator()
+        public void TestArrayOfAnyOfTypes()
         {
             var json = doc.Components.Schemas["Light"];
             var prop = json.ActualProperties.First(_=>_.Key == "dependencies").Value;
@@ -44,5 +44,25 @@ namespace Generator.Tests
 
         }
 
+        //GlobalModifierSet
+        [Test]
+        public void TestGlobalModifierSet()
+        {
+            var json = doc.Components.Schemas["GlobalModifierSet"];
+            var prop = json.ActualProperties.First(_ => _.Key == "modifiers").Value;
+
+            Assert.That(prop.IsArray, Is.True);
+
+            // test any type
+            Assert.That(prop.Item.AnyOf.Count, Is.AtLeast(1));
+
+            // test PropertyModel
+            var pm = new PropertyTemplateModel("modifiers", prop);
+            var tp = pm.Type;
+            StringAssert.AreEqualIgnoringCase(tp, "(Plastic | Glass | Trans) []");
+            var df = pm.DefaultCodeFormat;
+            StringAssert.Contains("Plastic.fromJS", df);
+
+        }
     }
 }
