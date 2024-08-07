@@ -78,10 +78,10 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
         this.thickness = 0.003;
         this.solar_transmittance = 0.85;
         this.solar_reflectance = 0.075;
-        this.solar_reflectance_back = new Autocalculate();;
+        this.solar_reflectance_back = new Autocalculate();
         this.visible_transmittance = 0.9;
         this.visible_reflectance = 0.075;
-        this.visible_reflectance_back = new Autocalculate();;
+        this.visible_reflectance_back = new Autocalculate();
         this.infrared_transmittance = 0;
         this.emissivity = 0.84;
         this.emissivity_back = 0.84;
@@ -98,10 +98,10 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
             this.thickness = _data["thickness"] !== undefined ? _data["thickness"] : 0.003;
             this.solar_transmittance = _data["solar_transmittance"] !== undefined ? _data["solar_transmittance"] : 0.85;
             this.solar_reflectance = _data["solar_reflectance"] !== undefined ? _data["solar_reflectance"] : 0.075;
-            this.solar_reflectance_back = _data["solar_reflectance_back"] !== undefined ? _data["solar_reflectance_back"] : new Autocalculate();;
+            this.solar_reflectance_back = _data["solar_reflectance_back"] !== undefined ? _data["solar_reflectance_back"] : new Autocalculate();
             this.visible_transmittance = _data["visible_transmittance"] !== undefined ? _data["visible_transmittance"] : 0.9;
             this.visible_reflectance = _data["visible_reflectance"] !== undefined ? _data["visible_reflectance"] : 0.075;
-            this.visible_reflectance_back = _data["visible_reflectance_back"] !== undefined ? _data["visible_reflectance_back"] : new Autocalculate();;
+            this.visible_reflectance_back = _data["visible_reflectance_back"] !== undefined ? _data["visible_reflectance_back"] : new Autocalculate();
             this.infrared_transmittance = _data["infrared_transmittance"] !== undefined ? _data["infrared_transmittance"] : 0;
             this.emissivity = _data["emissivity"] !== undefined ? _data["emissivity"] : 0.84;
             this.emissivity_back = _data["emissivity_back"] !== undefined ? _data["emissivity_back"] : 0.84;

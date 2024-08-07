@@ -44,7 +44,7 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
     constructor() {
         super();
         this.type = "ModelRadianceProperties";
-        this.global_modifier_set = new GlobalModifierSet();;
+        this.global_modifier_set = new GlobalModifierSet();
     }
 
 
@@ -52,7 +52,7 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
         super.init(_data);
         if (_data) {
             this.type = _data["type"] !== undefined ? _data["type"] : "ModelRadianceProperties";
-            this.global_modifier_set = _data["global_modifier_set"] !== undefined ? _data["global_modifier_set"] : new GlobalModifierSet();;
+            this.global_modifier_set = _data["global_modifier_set"] !== undefined ? _data["global_modifier_set"] : new GlobalModifierSet();
             this.modifiers = _data["modifiers"];
             this.modifier_sets = _data["modifier_sets"];
             this.sensor_grids = _data["sensor_grids"];

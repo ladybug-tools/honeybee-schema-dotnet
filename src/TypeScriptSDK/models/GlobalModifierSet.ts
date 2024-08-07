@@ -194,12 +194,12 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
     "transmitted_spec": 1.0
   }
 ];
-        this.wall_set = new WallModifierSetAbridged();;
-        this.floor_set = new FloorModifierSetAbridged();;
-        this.roof_ceiling_set = new RoofCeilingModifierSetAbridged();;
-        this.aperture_set = new ApertureModifierSetAbridged();;
-        this.door_set = new DoorModifierSetAbridged();;
-        this.shade_set = new ShadeModifierSetAbridged();;
+        this.wall_set = new WallModifierSetAbridged();
+        this.floor_set = new FloorModifierSetAbridged();
+        this.roof_ceiling_set = new RoofCeilingModifierSetAbridged();
+        this.aperture_set = new ApertureModifierSetAbridged();
+        this.door_set = new DoorModifierSetAbridged();
+        this.shade_set = new ShadeModifierSetAbridged();
         this.air_boundary_modifier = "air_boundary";
         this.context_modifier = "generic_context_0.20";
     }
@@ -331,12 +331,12 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
     "transmitted_spec": 1.0
   }
 ];
-            this.wall_set = _data["wall_set"] !== undefined ? _data["wall_set"] : new WallModifierSetAbridged();;
-            this.floor_set = _data["floor_set"] !== undefined ? _data["floor_set"] : new FloorModifierSetAbridged();;
-            this.roof_ceiling_set = _data["roof_ceiling_set"] !== undefined ? _data["roof_ceiling_set"] : new RoofCeilingModifierSetAbridged();;
-            this.aperture_set = _data["aperture_set"] !== undefined ? _data["aperture_set"] : new ApertureModifierSetAbridged();;
-            this.door_set = _data["door_set"] !== undefined ? _data["door_set"] : new DoorModifierSetAbridged();;
-            this.shade_set = _data["shade_set"] !== undefined ? _data["shade_set"] : new ShadeModifierSetAbridged();;
+            this.wall_set = _data["wall_set"] !== undefined ? _data["wall_set"] : new WallModifierSetAbridged();
+            this.floor_set = _data["floor_set"] !== undefined ? _data["floor_set"] : new FloorModifierSetAbridged();
+            this.roof_ceiling_set = _data["roof_ceiling_set"] !== undefined ? _data["roof_ceiling_set"] : new RoofCeilingModifierSetAbridged();
+            this.aperture_set = _data["aperture_set"] !== undefined ? _data["aperture_set"] : new ApertureModifierSetAbridged();
+            this.door_set = _data["door_set"] !== undefined ? _data["door_set"] : new DoorModifierSetAbridged();
+            this.shade_set = _data["shade_set"] !== undefined ? _data["shade_set"] : new ShadeModifierSetAbridged();
             this.air_boundary_modifier = _data["air_boundary_modifier"] !== undefined ? _data["air_boundary_modifier"] : "air_boundary";
             this.context_modifier = _data["context_modifier"] !== undefined ? _data["context_modifier"] : "generic_context_0.20";
         }

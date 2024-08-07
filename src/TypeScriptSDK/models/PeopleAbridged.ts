@@ -37,7 +37,7 @@ export class PeopleAbridged extends IDdEnergyBaseModel {
         super();
         this.type = "PeopleAbridged";
         this.radiant_fraction = 0.3;
-        this.latent_fraction = new Autocalculate();;
+        this.latent_fraction = new Autocalculate();
     }
 
 
@@ -49,7 +49,7 @@ export class PeopleAbridged extends IDdEnergyBaseModel {
             this.type = _data["type"] !== undefined ? _data["type"] : "PeopleAbridged";
             this.activity_schedule = _data["activity_schedule"];
             this.radiant_fraction = _data["radiant_fraction"] !== undefined ? _data["radiant_fraction"] : 0.3;
-            this.latent_fraction = _data["latent_fraction"] !== undefined ? _data["latent_fraction"] : new Autocalculate();;
+            this.latent_fraction = _data["latent_fraction"] !== undefined ? _data["latent_fraction"] : new Autocalculate();
         }
     }
 

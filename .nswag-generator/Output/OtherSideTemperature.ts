@@ -25,7 +25,7 @@ export class OtherSideTemperature extends _OpenAPIGenBaseModel {
         super();
         this.type = "OtherSideTemperature";
         this.heat_transfer_coefficient = 0;
-        this.temperature = new Autocalculate();;
+        this.temperature = new Autocalculate();
     }
 
 
@@ -34,7 +34,7 @@ export class OtherSideTemperature extends _OpenAPIGenBaseModel {
         if (_data) {
             this.type = _data["type"] !== undefined ? _data["type"] : "OtherSideTemperature";
             this.heat_transfer_coefficient = _data["heat_transfer_coefficient"] !== undefined ? _data["heat_transfer_coefficient"] : 0;
-            this.temperature = _data["temperature"] !== undefined ? _data["temperature"] : new Autocalculate();;
+            this.temperature = _data["temperature"] !== undefined ? _data["temperature"] : new Autocalculate();
         }
     }
 

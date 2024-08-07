@@ -69,8 +69,8 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
         this.latent_heat_recovery = 0;
         this.heating_air_temperature = 50;
         this.cooling_air_temperature = 13;
-        this.heating_limit = new Autosize();;
-        this.cooling_limit = new Autosize();;
+        this.heating_limit = new Autosize();
+        this.cooling_limit = new Autosize();
     }
 
 
@@ -84,8 +84,8 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
             this.latent_heat_recovery = _data["latent_heat_recovery"] !== undefined ? _data["latent_heat_recovery"] : 0;
             this.heating_air_temperature = _data["heating_air_temperature"] !== undefined ? _data["heating_air_temperature"] : 50;
             this.cooling_air_temperature = _data["cooling_air_temperature"] !== undefined ? _data["cooling_air_temperature"] : 13;
-            this.heating_limit = _data["heating_limit"] !== undefined ? _data["heating_limit"] : new Autosize();;
-            this.cooling_limit = _data["cooling_limit"] !== undefined ? _data["cooling_limit"] : new Autosize();;
+            this.heating_limit = _data["heating_limit"] !== undefined ? _data["heating_limit"] : new Autosize();
+            this.cooling_limit = _data["cooling_limit"] !== undefined ? _data["cooling_limit"] : new Autosize();
             this.heating_availability = _data["heating_availability"];
             this.cooling_availability = _data["cooling_availability"];
         }

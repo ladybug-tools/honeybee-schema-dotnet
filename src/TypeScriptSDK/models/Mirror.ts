@@ -47,7 +47,7 @@ export class Mirror extends ModifierBase {
 
     constructor() {
         super();
-        this.modifier = new Void();;
+        this.modifier = new Void();
         this.r_reflectance = 1;
         this.g_reflectance = 1;
         this.b_reflectance = 1;
@@ -58,7 +58,7 @@ export class Mirror extends ModifierBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.modifier = _data["modifier"] !== undefined ? _data["modifier"] : new Void();;
+            this.modifier = _data["modifier"] !== undefined ? _data["modifier"] : new Void();
             this.dependencies = _data["dependencies"];
             this.r_reflectance = _data["r_reflectance"] !== undefined ? _data["r_reflectance"] : 1;
             this.g_reflectance = _data["g_reflectance"] !== undefined ? _data["g_reflectance"] : 1;

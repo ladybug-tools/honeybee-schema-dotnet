@@ -204,7 +204,7 @@ public class PropertyTemplateModel
         {
             if (jObj.TryGetValue("type", out var vType))
             {
-                defaultCodeFormat = $"new {vType}();";
+                defaultCodeFormat = $"new {vType}()";
             }
         }
         else if (prop.Type.ToString() == "Boolean")
