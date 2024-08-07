@@ -1,7 +1,7 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 
 /** A point object in 3D space. */
-export abstract class Point3D {
+export class Point3D {
     @IsNumber()
     @IsDefined()
     /** Number for X coordinate. */
@@ -40,7 +40,9 @@ export abstract class Point3D {
     static fromJS(data: any): Point3D {
         data = typeof data === 'object' ? data : {};
 
-        throw new Error("The abstract class 'Point3D' cannot be instantiated.");
+        let result = new Point3D();
+        result.init(data);
+        return result;
     }
 
 	toJSON(data?: any) {

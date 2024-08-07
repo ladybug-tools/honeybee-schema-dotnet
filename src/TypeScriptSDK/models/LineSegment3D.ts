@@ -1,7 +1,7 @@
 ﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 
 /** A single line segment face in 3D space. */
-export abstract class LineSegment3D {
+export class LineSegment3D {
     @IsArray()
     @ValidateNested({ each: true })
     @IsDefined()
@@ -36,7 +36,9 @@ export abstract class LineSegment3D {
     static fromJS(data: any): LineSegment3D {
         data = typeof data === 'object' ? data : {};
 
-        throw new Error("The abstract class 'LineSegment3D' cannot be instantiated.");
+        let result = new LineSegment3D();
+        result.init(data);
+        return result;
     }
 
 	toJSON(data?: any) {

@@ -1,7 +1,7 @@
 ﻿import { IsEnum, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { ParentTypes } from "./ParentTypes";
 
-export abstract class ValidationParent {
+export class ValidationParent {
     @IsEnum(ParentTypes)
     @ValidateNested()
     @IsDefined()
@@ -41,7 +41,9 @@ export abstract class ValidationParent {
     static fromJS(data: any): ValidationParent {
         data = typeof data === 'object' ? data : {};
 
-        throw new Error("The abstract class 'ValidationParent' cannot be instantiated.");
+        let result = new ValidationParent();
+        result.init(data);
+        return result;
     }
 
 	toJSON(data?: any) {
