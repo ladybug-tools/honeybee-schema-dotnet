@@ -37,17 +37,17 @@ public class GenDTO
         //var schemaFile = System.IO.Path.Combine(outputDir, "schema.json");
         var jsons = new[]
         {
-            //"model_inheritance.json",
-            //"simulation-parameter_inheritance.json",
-            //"validation-report.json",
-            //"comparison-report_inheritance.json",
-            //"sync-instructions_inheritance.json",
+            "model_inheritance.json",
+            "simulation-parameter_inheritance.json",
+            "validation-report.json",
+            "comparison-report_inheritance.json",
+            "sync-instructions_inheritance.json",
             "project-information_inheritance.json"
 
         };
 
-        var docDir = System.IO.Path.Combine(System.IO.Path.GetDirectoryName( rootDir), ".openapi-docs");
-        
+        var docDir = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(rootDir), ".openapi-docs");
+
         JObject docJson = null;
         JObject jSchemas = null;
         // combine all schema components
@@ -88,7 +88,7 @@ public class GenDTO
         var sc = doc.Components.Schemas;
         var classModels = new List<ClassTemplateModel>();
         var srcDir = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(rootDir), "src", "TypeScriptSDK", "models");
-        if (System.IO.Directory.Exists(srcDir)) 
+        if (System.IO.Directory.Exists(srcDir))
             System.IO.Directory.Delete(srcDir, true);
         System.IO.Directory.CreateDirectory(srcDir);
 
@@ -111,7 +111,7 @@ public class GenDTO
 
             // copy to src dir
             var targetSrcTs = System.IO.Path.Combine(srcDir, System.IO.Path.GetFileName(tsFile));
-            System.IO.File.Copy(tsFile, targetSrcTs, true); 
+            System.IO.File.Copy(tsFile, targetSrcTs, true);
             Console.WriteLine($"Generated file is added as {targetSrcTs}");
         }
 
@@ -191,7 +191,7 @@ public class GenDTO
                 TypeScriptVersion = 4.3m,
                 GenerateDefaultValues = true,
                 ConvertConstructorInterfaceData = false,
-                
+
                 TemplateDirectory =   System.IO.Path.Combine(rootDir, "Templates", "TypeScript"),
                 //EnumStyle = NJsonSchema.CodeGeneration.TypeScript.TypeScriptEnumStyle.StringLiteral,
             }
@@ -212,7 +212,7 @@ public class GenDTO
         return tsFile;
     }
 
-   
+
 
     //private static OpenApiDocument GenSdkDoc()
     //{
