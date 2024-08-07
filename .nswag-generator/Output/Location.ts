@@ -49,7 +49,7 @@ export class Location extends _OpenAPIGenBaseModel {
         this.city = "-";
         this.latitude = 0;
         this.longitude = 0;
-        this.time_zone = new Autocalculate();;
+        this.time_zone = new Autocalculate();
         this.elevation = 0;
     }
 
@@ -61,7 +61,7 @@ export class Location extends _OpenAPIGenBaseModel {
             this.city = _data["city"] !== undefined ? _data["city"] : "-";
             this.latitude = _data["latitude"] !== undefined ? _data["latitude"] : 0;
             this.longitude = _data["longitude"] !== undefined ? _data["longitude"] : 0;
-            this.time_zone = _data["time_zone"] !== undefined ? _data["time_zone"] : new Autocalculate();;
+            this.time_zone = _data["time_zone"] !== undefined ? _data["time_zone"] : new Autocalculate();
             this.elevation = _data["elevation"] !== undefined ? _data["elevation"] : 0;
             this.station_id = _data["station_id"];
             this.source = _data["source"];

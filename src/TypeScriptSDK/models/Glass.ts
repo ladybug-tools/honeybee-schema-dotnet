@@ -48,7 +48,7 @@ export class Glass extends ModifierBase {
 
     constructor() {
         super();
-        this.modifier = new Void();;
+        this.modifier = new Void();
         this.r_transmissivity = 0;
         this.g_transmissivity = 0;
         this.b_transmissivity = 0;
@@ -60,7 +60,7 @@ export class Glass extends ModifierBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.modifier = _data["modifier"] !== undefined ? _data["modifier"] : new Void();;
+            this.modifier = _data["modifier"] !== undefined ? _data["modifier"] : new Void();
             this.dependencies = _data["dependencies"];
             this.r_transmissivity = _data["r_transmissivity"] !== undefined ? _data["r_transmissivity"] : 0;
             this.g_transmissivity = _data["g_transmissivity"] !== undefined ? _data["g_transmissivity"] : 0;

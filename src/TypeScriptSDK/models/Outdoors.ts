@@ -31,7 +31,7 @@ export class Outdoors extends _OpenAPIGenBaseModel {
         this.type = "Outdoors";
         this.sun_exposure = true;
         this.wind_exposure = true;
-        this.view_factor = new Autocalculate();;
+        this.view_factor = new Autocalculate();
     }
 
 
@@ -41,7 +41,7 @@ export class Outdoors extends _OpenAPIGenBaseModel {
             this.type = _data["type"] !== undefined ? _data["type"] : "Outdoors";
             this.sun_exposure = _data["sun_exposure"] !== undefined ? _data["sun_exposure"] : true;
             this.wind_exposure = _data["wind_exposure"] !== undefined ? _data["wind_exposure"] : true;
-            this.view_factor = _data["view_factor"] !== undefined ? _data["view_factor"] : new Autocalculate();;
+            this.view_factor = _data["view_factor"] !== undefined ? _data["view_factor"] : new Autocalculate();
         }
     }
 

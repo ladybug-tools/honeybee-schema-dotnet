@@ -72,7 +72,7 @@ export class BSDF extends ModifierBase {
 
     constructor() {
         super();
-        this.modifier = new Void();;
+        this.modifier = new Void();
         this.up_orientation = [
   0.01,
   0.01,
@@ -88,7 +88,7 @@ export class BSDF extends ModifierBase {
         super.init(_data);
         if (_data) {
             this.bsdf_data = _data["bsdf_data"];
-            this.modifier = _data["modifier"] !== undefined ? _data["modifier"] : new Void();;
+            this.modifier = _data["modifier"] !== undefined ? _data["modifier"] : new Void();
             this.dependencies = _data["dependencies"];
             this.up_orientation = _data["up_orientation"] !== undefined ? _data["up_orientation"] : [
   0.01,

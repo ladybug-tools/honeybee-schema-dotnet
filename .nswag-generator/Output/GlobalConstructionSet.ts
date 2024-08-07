@@ -467,11 +467,11 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
     ]
   }
 ];
-        this.wall_set = new WallConstructionSetAbridged();;
-        this.floor_set = new FloorConstructionSetAbridged();;
-        this.roof_ceiling_set = new RoofCeilingConstructionSetAbridged();;
-        this.aperture_set = new ApertureConstructionSetAbridged();;
-        this.door_set = new DoorConstructionSetAbridged();;
+        this.wall_set = new WallConstructionSetAbridged();
+        this.floor_set = new FloorConstructionSetAbridged();
+        this.roof_ceiling_set = new RoofCeilingConstructionSetAbridged();
+        this.aperture_set = new ApertureConstructionSetAbridged();
+        this.door_set = new DoorConstructionSetAbridged();
         this.shade_construction = "Generic Shade";
         this.context_construction = "Generic Context";
         this.air_boundary_construction = "Generic Air Boundary";
@@ -873,11 +873,11 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
     ]
   }
 ];
-            this.wall_set = _data["wall_set"] !== undefined ? _data["wall_set"] : new WallConstructionSetAbridged();;
-            this.floor_set = _data["floor_set"] !== undefined ? _data["floor_set"] : new FloorConstructionSetAbridged();;
-            this.roof_ceiling_set = _data["roof_ceiling_set"] !== undefined ? _data["roof_ceiling_set"] : new RoofCeilingConstructionSetAbridged();;
-            this.aperture_set = _data["aperture_set"] !== undefined ? _data["aperture_set"] : new ApertureConstructionSetAbridged();;
-            this.door_set = _data["door_set"] !== undefined ? _data["door_set"] : new DoorConstructionSetAbridged();;
+            this.wall_set = _data["wall_set"] !== undefined ? _data["wall_set"] : new WallConstructionSetAbridged();
+            this.floor_set = _data["floor_set"] !== undefined ? _data["floor_set"] : new FloorConstructionSetAbridged();
+            this.roof_ceiling_set = _data["roof_ceiling_set"] !== undefined ? _data["roof_ceiling_set"] : new RoofCeilingConstructionSetAbridged();
+            this.aperture_set = _data["aperture_set"] !== undefined ? _data["aperture_set"] : new ApertureConstructionSetAbridged();
+            this.door_set = _data["door_set"] !== undefined ? _data["door_set"] : new DoorConstructionSetAbridged();
             this.shade_construction = _data["shade_construction"] !== undefined ? _data["shade_construction"] : "Generic Shade";
             this.context_construction = _data["context_construction"] !== undefined ? _data["context_construction"] : "Generic Context";
             this.air_boundary_construction = _data["air_boundary_construction"] !== undefined ? _data["air_boundary_construction"] : "Generic Air Boundary";

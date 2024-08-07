@@ -33,7 +33,7 @@ export class SHWSystem extends IDdEnergyBaseModel {
         super();
         this.type = "SHWSystem";
         this.equipment_type = SHWEquipmentType.Gas_WaterHeater;
-        this.heater_efficiency = new Autocalculate();;
+        this.heater_efficiency = new Autocalculate();
         this.ambient_condition = 22;
         this.ambient_loss_coefficient = 6;
     }
@@ -44,7 +44,7 @@ export class SHWSystem extends IDdEnergyBaseModel {
         if (_data) {
             this.type = _data["type"] !== undefined ? _data["type"] : "SHWSystem";
             this.equipment_type = _data["equipment_type"] !== undefined ? _data["equipment_type"] : SHWEquipmentType.Gas_WaterHeater;
-            this.heater_efficiency = _data["heater_efficiency"] !== undefined ? _data["heater_efficiency"] : new Autocalculate();;
+            this.heater_efficiency = _data["heater_efficiency"] !== undefined ? _data["heater_efficiency"] : new Autocalculate();
             this.ambient_condition = _data["ambient_condition"] !== undefined ? _data["ambient_condition"] : 22;
             this.ambient_loss_coefficient = _data["ambient_loss_coefficient"] !== undefined ? _data["ambient_loss_coefficient"] : 6;
         }

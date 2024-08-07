@@ -85,7 +85,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
     constructor() {
         super();
         this.type = "ModelEnergyProperties";
-        this.global_construction_set = new GlobalConstructionSet();;
+        this.global_construction_set = new GlobalConstructionSet();
     }
 
 
@@ -93,7 +93,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
         super.init(_data);
         if (_data) {
             this.type = _data["type"] !== undefined ? _data["type"] : "ModelEnergyProperties";
-            this.global_construction_set = _data["global_construction_set"] !== undefined ? _data["global_construction_set"] : new GlobalConstructionSet();;
+            this.global_construction_set = _data["global_construction_set"] !== undefined ? _data["global_construction_set"] : new GlobalConstructionSet();
             this.construction_sets = _data["construction_sets"];
             this.constructions = _data["constructions"];
             this.materials = _data["materials"];

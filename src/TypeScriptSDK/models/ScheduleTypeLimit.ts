@@ -32,8 +32,8 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
     constructor() {
         super();
         this.type = "ScheduleTypeLimit";
-        this.lower_limit = new NoLimit();;
-        this.upper_limit = new NoLimit();;
+        this.lower_limit = new NoLimit();
+        this.upper_limit = new NoLimit();
         this.numeric_type = ScheduleNumericType.Continuous;
         this.unit_type = ScheduleUnitType.Dimensionless;
     }
@@ -43,8 +43,8 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
         super.init(_data);
         if (_data) {
             this.type = _data["type"] !== undefined ? _data["type"] : "ScheduleTypeLimit";
-            this.lower_limit = _data["lower_limit"] !== undefined ? _data["lower_limit"] : new NoLimit();;
-            this.upper_limit = _data["upper_limit"] !== undefined ? _data["upper_limit"] : new NoLimit();;
+            this.lower_limit = _data["lower_limit"] !== undefined ? _data["lower_limit"] : new NoLimit();
+            this.upper_limit = _data["upper_limit"] !== undefined ? _data["upper_limit"] : new NoLimit();
             this.numeric_type = _data["numeric_type"] !== undefined ? _data["numeric_type"] : ScheduleNumericType.Continuous;
             this.unit_type = _data["unit_type"] !== undefined ? _data["unit_type"] : ScheduleUnitType.Dimensionless;
         }

@@ -43,7 +43,7 @@ export class Light extends ModifierBase {
 
     constructor() {
         super();
-        this.modifier = new Void();;
+        this.modifier = new Void();
         this.r_emittance = 0;
         this.g_emittance = 0;
         this.b_emittance = 0;
@@ -54,7 +54,7 @@ export class Light extends ModifierBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.modifier = _data["modifier"] !== undefined ? _data["modifier"] : new Void();;
+            this.modifier = _data["modifier"] !== undefined ? _data["modifier"] : new Void();
             this.dependencies = _data["dependencies"];
             this.r_emittance = _data["r_emittance"] !== undefined ? _data["r_emittance"] : 0;
             this.g_emittance = _data["g_emittance"] !== undefined ? _data["g_emittance"] : 0;

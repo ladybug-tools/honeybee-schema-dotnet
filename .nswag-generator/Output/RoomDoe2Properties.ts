@@ -42,11 +42,11 @@ export class RoomDoe2Properties extends _OpenAPIGenBaseModel {
     constructor() {
         super();
         this.type = "RoomDoe2Properties";
-        this.assigned_flow = new Autocalculate();;
-        this.flow_per_area = new Autocalculate();;
-        this.min_flow_ratio = new Autocalculate();;
-        this.min_flow_per_area = new Autocalculate();;
-        this.hmax_flow_ratio = new Autocalculate();;
+        this.assigned_flow = new Autocalculate();
+        this.flow_per_area = new Autocalculate();
+        this.min_flow_ratio = new Autocalculate();
+        this.min_flow_per_area = new Autocalculate();
+        this.hmax_flow_ratio = new Autocalculate();
     }
 
 
@@ -54,11 +54,11 @@ export class RoomDoe2Properties extends _OpenAPIGenBaseModel {
         super.init(_data);
         if (_data) {
             this.type = _data["type"] !== undefined ? _data["type"] : "RoomDoe2Properties";
-            this.assigned_flow = _data["assigned_flow"] !== undefined ? _data["assigned_flow"] : new Autocalculate();;
-            this.flow_per_area = _data["flow_per_area"] !== undefined ? _data["flow_per_area"] : new Autocalculate();;
-            this.min_flow_ratio = _data["min_flow_ratio"] !== undefined ? _data["min_flow_ratio"] : new Autocalculate();;
-            this.min_flow_per_area = _data["min_flow_per_area"] !== undefined ? _data["min_flow_per_area"] : new Autocalculate();;
-            this.hmax_flow_ratio = _data["hmax_flow_ratio"] !== undefined ? _data["hmax_flow_ratio"] : new Autocalculate();;
+            this.assigned_flow = _data["assigned_flow"] !== undefined ? _data["assigned_flow"] : new Autocalculate();
+            this.flow_per_area = _data["flow_per_area"] !== undefined ? _data["flow_per_area"] : new Autocalculate();
+            this.min_flow_ratio = _data["min_flow_ratio"] !== undefined ? _data["min_flow_ratio"] : new Autocalculate();
+            this.min_flow_per_area = _data["min_flow_per_area"] !== undefined ? _data["min_flow_per_area"] : new Autocalculate();
+            this.hmax_flow_ratio = _data["hmax_flow_ratio"] !== undefined ? _data["hmax_flow_ratio"] : new Autocalculate();
             this.space_polygon_geometry = _data["space_polygon_geometry"];
         }
     }
