@@ -6,7 +6,7 @@ using TemplateModels;
 
 namespace Generator.Tests
 {
-    public class HoneybeeSchemaTests
+    public class ProjectInfomationTests
     {
 
         static string workingDir = Environment.CurrentDirectory;
