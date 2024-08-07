@@ -1,4 +1,4 @@
-﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsArray, validate, ValidationError } from 'class-validator';
+﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsBoolean, IsArray, validate, ValidationError } from 'class-validator';
 import { Face3D } from "./Face3D";
 import { Outdoors } from "./Outdoors";
 import { Surface } from "./Surface";
@@ -27,6 +27,7 @@ export class Door extends IDdBaseModel {
     @IsOptional()
     type?: string;
 	
+    @IsBoolean()
     @IsOptional()
     /** Boolean to note whether this object is a glass door as opposed to an opaque door. */
     is_glass?: boolean;
@@ -47,7 +48,7 @@ export class Door extends IDdBaseModel {
     constructor() {
         super();
         this.type = "Door";
-        this.is_glass = False;
+        this.is_glass = false;
     }
 
 
@@ -58,7 +59,7 @@ export class Door extends IDdBaseModel {
             this.boundary_condition = _data["boundary_condition"];
             this.properties = _data["properties"];
             this.type = _data["type"] !== undefined ? _data["type"] : "Door";
-            this.is_glass = _data["is_glass"] !== undefined ? _data["is_glass"] : False;
+            this.is_glass = _data["is_glass"] !== undefined ? _data["is_glass"] : false;
             this.indoor_shades = _data["indoor_shades"];
             this.outdoor_shades = _data["outdoor_shades"];
         }

@@ -1,4 +1,4 @@
-﻿import { IsEnum, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError } from 'class-validator';
+﻿import { IsEnum, ValidateNested, IsDefined, IsString, IsOptional, IsBoolean, validate, ValidationError } from 'class-validator';
 import { GeometryObjectTypes } from "./GeometryObjectTypes";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
@@ -19,14 +19,17 @@ export class ChangedInstruction extends _OpenAPIGenBaseModel {
     /** Text string for the display name of the object that has changed. */
     element_name?: string;
 	
+    @IsBoolean()
     @IsOptional()
     /** A boolean to note whether the geometry of the object in the new/updated model should replace the base/existing geometry (True) or the existing geometry should be kept (False). */
     update_geometry?: boolean;
 	
+    @IsBoolean()
     @IsOptional()
     /** A boolean to note whether the energy properties of the object in the new/updated model should replace the base/existing energy properties (True) or the base/existing energy properties should be kept (False). */
     update_energy?: boolean;
 	
+    @IsBoolean()
     @IsOptional()
     /** A boolean to note whether the radiance properties of the object in the new/updated model should replace the base/existing radiance properties (True) or the base/existing radiance properties should be kept (False). */
     update_radiance?: boolean;
@@ -38,9 +41,9 @@ export class ChangedInstruction extends _OpenAPIGenBaseModel {
 
     constructor() {
         super();
-        this.update_geometry = True;
-        this.update_energy = True;
-        this.update_radiance = True;
+        this.update_geometry = true;
+        this.update_energy = true;
+        this.update_radiance = true;
         this.type = "ChangedInstruction";
     }
 
@@ -51,9 +54,9 @@ export class ChangedInstruction extends _OpenAPIGenBaseModel {
             this.element_type = _data["element_type"];
             this.element_id = _data["element_id"];
             this.element_name = _data["element_name"];
-            this.update_geometry = _data["update_geometry"] !== undefined ? _data["update_geometry"] : True;
-            this.update_energy = _data["update_energy"] !== undefined ? _data["update_energy"] : True;
-            this.update_radiance = _data["update_radiance"] !== undefined ? _data["update_radiance"] : True;
+            this.update_geometry = _data["update_geometry"] !== undefined ? _data["update_geometry"] : true;
+            this.update_energy = _data["update_energy"] !== undefined ? _data["update_energy"] : true;
+            this.update_radiance = _data["update_radiance"] !== undefined ? _data["update_radiance"] : true;
             this.type = _data["type"] !== undefined ? _data["type"] : "ChangedInstruction";
         }
     }

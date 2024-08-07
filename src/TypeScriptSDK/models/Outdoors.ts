@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, validate, ValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsBoolean, validate, ValidationError } from 'class-validator';
 import { Autocalculate } from "./Autocalculate";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
@@ -11,10 +11,12 @@ export class Outdoors extends _OpenAPIGenBaseModel {
     @IsOptional()
     type?: string;
 	
+    @IsBoolean()
     @IsOptional()
     /** A boolean noting whether the boundary is exposed to sun. */
     sun_exposure?: boolean;
 	
+    @IsBoolean()
     @IsOptional()
     /** A boolean noting whether the boundary is exposed to wind. */
     wind_exposure?: boolean;
@@ -27,8 +29,8 @@ export class Outdoors extends _OpenAPIGenBaseModel {
     constructor() {
         super();
         this.type = "Outdoors";
-        this.sun_exposure = True;
-        this.wind_exposure = True;
+        this.sun_exposure = true;
+        this.wind_exposure = true;
         this.view_factor = new Autocalculate();;
     }
 
@@ -37,8 +39,8 @@ export class Outdoors extends _OpenAPIGenBaseModel {
         super.init(_data);
         if (_data) {
             this.type = _data["type"] !== undefined ? _data["type"] : "Outdoors";
-            this.sun_exposure = _data["sun_exposure"] !== undefined ? _data["sun_exposure"] : True;
-            this.wind_exposure = _data["wind_exposure"] !== undefined ? _data["wind_exposure"] : True;
+            this.sun_exposure = _data["sun_exposure"] !== undefined ? _data["sun_exposure"] : true;
+            this.wind_exposure = _data["wind_exposure"] !== undefined ? _data["wind_exposure"] : true;
             this.view_factor = _data["view_factor"] !== undefined ? _data["view_factor"] : new Autocalculate();;
         }
     }

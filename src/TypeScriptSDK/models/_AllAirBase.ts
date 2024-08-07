@@ -1,4 +1,4 @@
-﻿import { IsEnum, ValidateNested, IsOptional, IsNumber, IsString, validate, ValidationError } from 'class-validator';
+﻿import { IsEnum, ValidateNested, IsOptional, IsNumber, IsBoolean, IsString, validate, ValidationError } from 'class-validator';
 import { Vintages } from "./Vintages";
 import { AllAirEconomizerType } from "./AllAirEconomizerType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -33,6 +33,7 @@ export class _AllAirBase extends IDdEnergyBaseModel {
     /** A number between 0 and 1 for the effectiveness of latent heat recovery within the system. */
     latent_heat_recovery?: number;
 	
+    @IsBoolean()
     @IsOptional()
     /** Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms. */
     demand_controlled_ventilation?: boolean;
@@ -48,7 +49,7 @@ export class _AllAirBase extends IDdEnergyBaseModel {
         this.economizer_type = AllAirEconomizerType.NoEconomizer;
         this.sensible_heat_recovery = 0;
         this.latent_heat_recovery = 0;
-        this.demand_controlled_ventilation = False;
+        this.demand_controlled_ventilation = false;
         this.type = "_AllAirBase";
     }
 
@@ -60,7 +61,7 @@ export class _AllAirBase extends IDdEnergyBaseModel {
             this.economizer_type = _data["economizer_type"] !== undefined ? _data["economizer_type"] : AllAirEconomizerType.NoEconomizer;
             this.sensible_heat_recovery = _data["sensible_heat_recovery"] !== undefined ? _data["sensible_heat_recovery"] : 0;
             this.latent_heat_recovery = _data["latent_heat_recovery"] !== undefined ? _data["latent_heat_recovery"] : 0;
-            this.demand_controlled_ventilation = _data["demand_controlled_ventilation"] !== undefined ? _data["demand_controlled_ventilation"] : False;
+            this.demand_controlled_ventilation = _data["demand_controlled_ventilation"] !== undefined ? _data["demand_controlled_ventilation"] : false;
             this.type = _data["type"] !== undefined ? _data["type"] : "_AllAirBase";
         }
     }

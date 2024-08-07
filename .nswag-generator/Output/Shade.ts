@@ -1,4 +1,4 @@
-﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError } from 'class-validator';
+﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsBoolean, validate, ValidationError } from 'class-validator';
 import { Face3D } from "./Face3D";
 import { ShadePropertiesAbridged } from "./ShadePropertiesAbridged";
 import { IDdBaseModel } from "./IDdBaseModel";
@@ -21,6 +21,7 @@ export class Shade extends IDdBaseModel {
     @IsOptional()
     type?: string;
 	
+    @IsBoolean()
     @IsOptional()
     /** Boolean to note whether this shade is detached from any of the other geometry in the model. Cases where this should be True include shade representing surrounding buildings or context. Note that this should always be False for shades assigned to parent objects. */
     is_detached?: boolean;
@@ -29,7 +30,7 @@ export class Shade extends IDdBaseModel {
     constructor() {
         super();
         this.type = "Shade";
-        this.is_detached = False;
+        this.is_detached = false;
     }
 
 
@@ -39,7 +40,7 @@ export class Shade extends IDdBaseModel {
             this.geometry = _data["geometry"];
             this.properties = _data["properties"];
             this.type = _data["type"] !== undefined ? _data["type"] : "Shade";
-            this.is_detached = _data["is_detached"] !== undefined ? _data["is_detached"] : False;
+            this.is_detached = _data["is_detached"] !== undefined ? _data["is_detached"] : false;
         }
     }
 

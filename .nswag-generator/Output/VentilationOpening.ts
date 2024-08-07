@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsNumber, validate, ValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsNumber, IsBoolean, validate, ValidationError } from 'class-validator';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.
@@ -25,6 +25,7 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
     /** A number that will be multiplied by the area of the window in the stack (buoyancy-driven) part of the equation to account for additional friction from window geometry, insect screens, etc. Typical values include 0.45, for unobstructed windows WITH insect screens and 0.65 for unobstructed windows WITHOUT insect screens. This value should be lowered if windows are of an awning or casement type and are not allowed to fully open. */
     discharge_coefficient?: number;
 	
+    @IsBoolean()
     @IsOptional()
     /** Boolean to indicate if there is an opening of roughly equal area on the opposite side of the Room such that wind-driven cross ventilation will be induced. If False, the assumption is that the operable area is primarily on one side of the Room and there is no wind-driven ventilation. */
     wind_cross_vent?: boolean;
@@ -51,7 +52,7 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
         this.fraction_area_operable = 0.5;
         this.fraction_height_operable = 1;
         this.discharge_coefficient = 0.45;
-        this.wind_cross_vent = False;
+        this.wind_cross_vent = false;
         this.flow_coefficient_closed = 0;
         this.flow_exponent_closed = 0.65;
         this.two_way_threshold = 0.0001;
@@ -65,7 +66,7 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
             this.fraction_area_operable = _data["fraction_area_operable"] !== undefined ? _data["fraction_area_operable"] : 0.5;
             this.fraction_height_operable = _data["fraction_height_operable"] !== undefined ? _data["fraction_height_operable"] : 1;
             this.discharge_coefficient = _data["discharge_coefficient"] !== undefined ? _data["discharge_coefficient"] : 0.45;
-            this.wind_cross_vent = _data["wind_cross_vent"] !== undefined ? _data["wind_cross_vent"] : False;
+            this.wind_cross_vent = _data["wind_cross_vent"] !== undefined ? _data["wind_cross_vent"] : false;
             this.flow_coefficient_closed = _data["flow_coefficient_closed"] !== undefined ? _data["flow_coefficient_closed"] : 0;
             this.flow_exponent_closed = _data["flow_exponent_closed"] !== undefined ? _data["flow_exponent_closed"] : 0.65;
             this.two_way_threshold = _data["two_way_threshold"] !== undefined ? _data["two_way_threshold"] : 0.0001;

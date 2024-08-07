@@ -1,4 +1,4 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsOptional, IsString, validate, ValidationError } from 'class-validator';
+﻿import { IsArray, ValidateNested, IsDefined, IsBoolean, IsOptional, IsString, validate, ValidationError } from 'class-validator';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ASHRAEClearSky } from "./ASHRAEClearSky";
 import { ASHRAETau } from "./ASHRAETau";
@@ -11,6 +11,7 @@ export class _SkyCondition extends _OpenAPIGenBaseModel {
     /** A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case). */
     date!: number [];
 	
+    @IsBoolean()
     @IsOptional()
     /** Boolean to indicate whether daylight savings time is active on the design day. */
     daylight_savings?: boolean;
@@ -22,7 +23,7 @@ export class _SkyCondition extends _OpenAPIGenBaseModel {
 
     constructor() {
         super();
-        this.daylight_savings = False;
+        this.daylight_savings = false;
         this.type = "_SkyCondition";
     }
 
@@ -31,7 +32,7 @@ export class _SkyCondition extends _OpenAPIGenBaseModel {
         super.init(_data);
         if (_data) {
             this.date = _data["date"];
-            this.daylight_savings = _data["daylight_savings"] !== undefined ? _data["daylight_savings"] : False;
+            this.daylight_savings = _data["daylight_savings"] !== undefined ? _data["daylight_savings"] : false;
             this.type = _data["type"] !== undefined ? _data["type"] : "_SkyCondition";
         }
     }

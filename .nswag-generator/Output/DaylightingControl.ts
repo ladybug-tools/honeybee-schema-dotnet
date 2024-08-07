@@ -1,4 +1,4 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsNumber, validate, ValidationError } from 'class-validator';
+﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsNumber, IsBoolean, validate, ValidationError } from 'class-validator';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.
@@ -36,6 +36,7 @@ export class DaylightingControl extends _OpenAPIGenBaseModel {
     /** A number between 0 and 1 the lowest lighting output the lighting system can dim down to, expressed as a fraction of maximum light output. */
     min_light_output?: number;
 	
+    @IsBoolean()
     @IsOptional()
     /** Boolean to note whether lights should switch off completely when they get to the minimum power input. */
     off_at_minimum?: boolean;
@@ -48,7 +49,7 @@ export class DaylightingControl extends _OpenAPIGenBaseModel {
         this.control_fraction = 1;
         this.min_power_input = 0.3;
         this.min_light_output = 0.2;
-        this.off_at_minimum = False;
+        this.off_at_minimum = false;
     }
 
 
@@ -61,7 +62,7 @@ export class DaylightingControl extends _OpenAPIGenBaseModel {
             this.control_fraction = _data["control_fraction"] !== undefined ? _data["control_fraction"] : 1;
             this.min_power_input = _data["min_power_input"] !== undefined ? _data["min_power_input"] : 0.3;
             this.min_light_output = _data["min_light_output"] !== undefined ? _data["min_light_output"] : 0.2;
-            this.off_at_minimum = _data["off_at_minimum"] !== undefined ? _data["off_at_minimum"] : False;
+            this.off_at_minimum = _data["off_at_minimum"] !== undefined ? _data["off_at_minimum"] : false;
         }
     }
 

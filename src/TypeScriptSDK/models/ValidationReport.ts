@@ -1,4 +1,4 @@
-﻿import { IsString, IsDefined, IsOptional, IsArray, ValidateNested, validate, ValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, IsBoolean, IsOptional, IsArray, ValidateNested, validate, ValidationError } from 'class-validator';
 import { ValidationError } from "./ValidationError";
 
 export abstract class ValidationReport {
@@ -12,6 +12,7 @@ export abstract class ValidationReport {
     /** Text string for the version of honeybee-schema or dragonfly-schema that performed the validation. */
     schema_version!: string;
 	
+    @IsBoolean()
     @IsDefined()
     /** Boolean to note whether the Model is valid or not. */
     valid!: boolean;

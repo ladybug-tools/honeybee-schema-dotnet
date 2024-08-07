@@ -153,6 +153,10 @@ public class PropertyTemplateModel
             {
                 result.Add($"@IsString()");
             }
+            else if (propType == "Boolean")
+            {
+                result.Add($"@IsBoolean()");
+            }
             else
             {
                 //result.Add($"@IsObject()");
@@ -184,7 +188,8 @@ public class PropertyTemplateModel
     {
         var defaultValue = prop.Default;
         var defaultCodeFormat = string.Empty;
-        //var propType = 
+        if (defaultValue == null) return defaultCodeFormat;
+
         if (defaultValue is string)
         {
             defaultCodeFormat = $"\"{defaultValue}\"";
@@ -201,6 +206,10 @@ public class PropertyTemplateModel
             {
                 defaultCodeFormat = $"new {vType}();";
             }
+        }
+        else if (prop.Type.ToString() == "Boolean")
+        {
+            defaultCodeFormat = defaultValue.ToString().ToLower();
         }
         else
         {

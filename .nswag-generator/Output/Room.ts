@@ -1,4 +1,4 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsInstance, IsString, IsOptional, IsInt, validate, ValidationError } from 'class-validator';
+﻿import { IsArray, ValidateNested, IsDefined, IsInstance, IsString, IsOptional, IsInt, IsBoolean, validate, ValidationError } from 'class-validator';
 import { Face } from "./Face";
 import { RoomPropertiesAbridged } from "./RoomPropertiesAbridged";
 import { Shade } from "./Shade";
@@ -39,6 +39,7 @@ export class Room extends IDdBaseModel {
     /** An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is multiplied by the multiplier. */
     multiplier?: number;
 	
+    @IsBoolean()
     @IsOptional()
     /** A boolean for whether the Room floor area contributes to Models it is a part of. Note that this will not affect the floor_area property of this Room itself but it will ensure the Room floor area is excluded from any calculations when the Room is part of a Model, including EUI calculations. */
     exclude_floor_area?: boolean;
@@ -53,7 +54,7 @@ export class Room extends IDdBaseModel {
         super();
         this.type = "Room";
         this.multiplier = 1;
-        this.exclude_floor_area = False;
+        this.exclude_floor_area = false;
     }
 
 
@@ -66,7 +67,7 @@ export class Room extends IDdBaseModel {
             this.indoor_shades = _data["indoor_shades"];
             this.outdoor_shades = _data["outdoor_shades"];
             this.multiplier = _data["multiplier"] !== undefined ? _data["multiplier"] : 1;
-            this.exclude_floor_area = _data["exclude_floor_area"] !== undefined ? _data["exclude_floor_area"] : False;
+            this.exclude_floor_area = _data["exclude_floor_area"] !== undefined ? _data["exclude_floor_area"] : false;
             this.story = _data["story"];
         }
     }

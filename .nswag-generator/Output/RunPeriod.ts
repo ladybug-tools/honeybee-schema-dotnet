@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsArray, ValidateNested, IsEnum, IsInstance, validate, ValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsArray, ValidateNested, IsEnum, IsInstance, IsBoolean, validate, ValidationError } from 'class-validator';
 import { DaysOfWeek } from "./DaysOfWeek";
 import { DaylightSavingTime } from "./DaylightSavingTime";
 import { DatedBaseModel } from "./DatedBaseModel";
@@ -39,6 +39,7 @@ export class RunPeriod extends DatedBaseModel {
     /** A DaylightSavingTime to dictate the start and end dates of daylight saving time. If None, no daylight saving time is applied to the simulation. */
     daylight_saving_time?: DaylightSavingTime;
 	
+    @IsBoolean()
     @IsOptional()
     /** Boolean noting whether the simulation will be run for a leap year. */
     leap_year?: boolean;
@@ -56,7 +57,7 @@ export class RunPeriod extends DatedBaseModel {
   31
 ];
         this.start_day_of_week = DaysOfWeek.Sunday;
-        this.leap_year = False;
+        this.leap_year = false;
     }
 
 
@@ -75,7 +76,7 @@ export class RunPeriod extends DatedBaseModel {
             this.start_day_of_week = _data["start_day_of_week"] !== undefined ? _data["start_day_of_week"] : DaysOfWeek.Sunday;
             this.holidays = _data["holidays"];
             this.daylight_saving_time = _data["daylight_saving_time"];
-            this.leap_year = _data["leap_year"] !== undefined ? _data["leap_year"] : False;
+            this.leap_year = _data["leap_year"] !== undefined ? _data["leap_year"] : false;
         }
     }
 
