@@ -33,7 +33,7 @@ public class PropertyTemplateModel
         
         PropertyName = name;
         Default = json.Default;
-        DefaultCodeFormat = ConvertTsDefaultValue(Default);
+        DefaultCodeFormat = ConvertTsDefaultValue(json);
 
         Description = json.Description;
 
@@ -180,25 +180,33 @@ public class PropertyTemplateModel
         TsImports.Add(type);
     }
 
-    private static string ConvertTsDefaultValue(object? _defualt)
+    private static string ConvertTsDefaultValue(JsonSchemaProperty prop)
     {
-        var _defaultCodeFormat = string.Empty;
-        if (_defualt is string)
+        var defaultValue = prop.Default;
+        var defaultCodeFormat = string.Empty;
+        //var propType = 
+        if (defaultValue is string)
         {
-            _defaultCodeFormat = $"\"{_defualt}\"";
+            defaultCodeFormat = $"\"{defaultValue}\"";
+            if (prop.ActualSchema.IsEnumeration)
+            {
+                var enumType = prop.ActualSchema.Title;
+                defaultCodeFormat = $"{enumType}.{defaultValue}";
+            }
+                
         }
-        else if (_defualt is Newtonsoft.Json.Linq.JObject jObj)
+        else if (defaultValue is Newtonsoft.Json.Linq.JObject jObj)
         {
             if (jObj.TryGetValue("type", out var vType))
             {
-                _defaultCodeFormat = $"new {vType}();";
+                defaultCodeFormat = $"new {vType}();";
             }
         }
         else
         {
-            _defaultCodeFormat = _defualt?.ToString();
+            defaultCodeFormat = defaultValue?.ToString();
         }
 
-        return _defaultCodeFormat;
+        return defaultCodeFormat;
     }
 }
