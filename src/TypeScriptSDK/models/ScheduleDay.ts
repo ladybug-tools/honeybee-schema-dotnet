@@ -28,7 +28,7 @@ export class ScheduleDay extends EnergyBaseModel {
     constructor() {
         super();
         this.type = "ScheduleDay";
-        this.times = [0, 0];
+        this.times = [[0, 0]];
         this.interpolate = false;
     }
 
@@ -38,7 +38,7 @@ export class ScheduleDay extends EnergyBaseModel {
         if (_data) {
             this.values = _data["values"];
             this.type = _data["type"] !== undefined ? _data["type"] : "ScheduleDay";
-            this.times = _data["times"] !== undefined ? _data["times"] : [0, 0];
+            this.times = _data["times"] !== undefined ? _data["times"] : [[0, 0]];
             this.interpolate = _data["interpolate"] !== undefined ? _data["interpolate"] : false;
         }
     }
