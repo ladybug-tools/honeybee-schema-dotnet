@@ -1,4 +1,4 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsInstance, validate, ValidationError } from 'class-validator';
+﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
 import { EnergyWindowMaterialSimpleGlazSys } from "./EnergyWindowMaterialSimpleGlazSys";
 import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
 import { EnergyWindowMaterialGas } from "./EnergyWindowMaterialGas";
@@ -67,7 +67,7 @@ export class WindowConstruction extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: ValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

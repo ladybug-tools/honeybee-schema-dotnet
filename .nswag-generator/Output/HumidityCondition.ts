@@ -1,4 +1,4 @@
-﻿import { IsEnum, ValidateNested, IsDefined, IsNumber, IsString, IsOptional, IsBoolean, validate, ValidationError } from 'class-validator';
+﻿import { IsEnum, ValidateNested, IsDefined, IsNumber, IsString, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { HumidityTypes } from "./HumidityTypes";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
@@ -84,7 +84,7 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: ValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

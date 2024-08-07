@@ -1,4 +1,4 @@
-﻿import { IsString, IsDefined, IsOptional, IsBoolean, IsArray, ValidateNested, validate, ValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, IsOptional, IsBoolean, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { DatedBaseModel } from "./DatedBaseModel";
 
 /** Schedule rule including a ScheduleDay and when it should be applied.. */
@@ -138,7 +138,7 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: ValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

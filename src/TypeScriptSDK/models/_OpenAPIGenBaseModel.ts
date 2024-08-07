@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, validate, ValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Void } from "./Void";
 import { Mirror } from "./Mirror";
 import { ModifierBase } from "./ModifierBase";

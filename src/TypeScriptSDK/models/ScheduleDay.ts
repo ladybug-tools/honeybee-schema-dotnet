@@ -1,4 +1,4 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsBoolean, validate, ValidationError } from 'class-validator';
+﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 
 /** Used to describe the daily schedule for a single simulation day. */
@@ -76,7 +76,7 @@ export class ScheduleDay extends EnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: ValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

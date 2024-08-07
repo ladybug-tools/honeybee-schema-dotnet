@@ -1,4 +1,4 @@
-﻿import { IsString, IsDefined, IsBoolean, IsOptional, IsArray, ValidateNested, validate, ValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, IsBoolean, IsOptional, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { ValidationError } from "./ValidationError";
 
 export abstract class ValidationReport {

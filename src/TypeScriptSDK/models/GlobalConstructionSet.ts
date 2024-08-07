@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsArray, ValidateNested, IsInstance, validate, ValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsArray, ValidateNested, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
 import { EnergyMaterial } from "./EnergyMaterial";
 import { EnergyMaterialNoMass } from "./EnergyMaterialNoMass";
 import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
@@ -926,7 +926,7 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: ValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsArray, ValidateNested, validate, ValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged";
 import { _PropertiesBaseAbridged } from "./_PropertiesBaseAbridged";
 
@@ -61,7 +61,7 @@ export class ShadeRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: ValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

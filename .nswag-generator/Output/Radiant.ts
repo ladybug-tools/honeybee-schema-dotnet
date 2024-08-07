@@ -1,4 +1,4 @@
-﻿import { IsEnum, ValidateNested, IsOptional, IsString, IsNumber, validate, ValidationError } from 'class-validator';
+﻿import { IsEnum, ValidateNested, IsOptional, IsString, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Vintages } from "./Vintages";
 import { RadiantEquipmentType } from "./RadiantEquipmentType";
 import { RadiantFaceTypes } from "./RadiantFaceTypes";
@@ -105,7 +105,7 @@ export class Radiant extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: ValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

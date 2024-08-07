@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -82,7 +82,7 @@ export class PeopleAbridged extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: ValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

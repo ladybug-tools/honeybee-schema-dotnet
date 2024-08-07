@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsEnum, ValidateNested, IsArray, IsNumber, validate, ValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsEnum, ValidateNested, IsArray, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
 import { ReportingFrequency } from "./ReportingFrequency";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
@@ -78,7 +78,7 @@ export class SimulationOutput extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: ValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;
