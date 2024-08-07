@@ -12,19 +12,19 @@ export class ApertureConstructionSet extends _OpenAPIGenBaseModel {
 	
     @IsOptional()
     /** A WindowConstruction for all apertures with a Surface boundary condition. */
-    interior_construction?: WindowConstruction | WindowConstructionShade | WindowConstructionDynamic;
+    interior_construction?: (WindowConstruction | WindowConstructionShade | WindowConstructionDynamic);
 	
     @IsOptional()
     /** A WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face. */
-    window_construction?: WindowConstruction | WindowConstructionShade | WindowConstructionDynamic;
+    window_construction?: (WindowConstruction | WindowConstructionShade | WindowConstructionDynamic);
 	
     @IsOptional()
     /** A WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face. */
-    skylight_construction?: WindowConstruction | WindowConstructionShade | WindowConstructionDynamic;
+    skylight_construction?: (WindowConstruction | WindowConstructionShade | WindowConstructionDynamic);
 	
     @IsOptional()
     /** A WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property. */
-    operable_construction?: WindowConstruction | WindowConstructionShade | WindowConstructionDynamic;
+    operable_construction?: (WindowConstruction | WindowConstructionShade | WindowConstructionDynamic);
 	
 
     constructor() {

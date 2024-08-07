@@ -7,11 +7,11 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 export class Setpoint extends IDdEnergyBaseModel {
     @IsDefined()
     /** Schedule for the cooling setpoint. The values in this schedule should be temperature in [C]. */
-    cooling_schedule!: ScheduleRuleset | ScheduleFixedInterval;
+    cooling_schedule!: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @IsDefined()
     /** Schedule for the heating setpoint. The values in this schedule should be temperature in [C]. */
-    heating_schedule!: ScheduleRuleset | ScheduleFixedInterval;
+    heating_schedule!: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @IsString()
     @IsOptional()
@@ -19,11 +19,11 @@ export class Setpoint extends IDdEnergyBaseModel {
 	
     @IsOptional()
     /** Schedule for the humidification setpoint. The values in this schedule should be in [%]. */
-    humidifying_schedule?: ScheduleRuleset | ScheduleFixedInterval;
+    humidifying_schedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @IsOptional()
     /** Schedule for the dehumidification setpoint. The values in this schedule should be in [%]. */
-    dehumidifying_schedule?: ScheduleRuleset | ScheduleFixedInterval;
+    dehumidifying_schedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @IsNumber()
     @IsOptional()

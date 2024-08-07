@@ -25,7 +25,7 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
 	
     @IsOptional()
     /** Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum. */
-    solar_reflectance_back?: Autocalculate | number;
+    solar_reflectance_back?: (Autocalculate | number);
 	
     @IsNumber()
     @IsOptional()
@@ -39,7 +39,7 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
 	
     @IsOptional()
     /** Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye. */
-    visible_reflectance_back?: Autocalculate | number;
+    visible_reflectance_back?: (Autocalculate | number);
 	
     @IsNumber()
     @IsOptional()

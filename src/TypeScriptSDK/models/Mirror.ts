@@ -13,13 +13,13 @@ import { ModifierBase } from "./ModifierBase";
 export class Mirror extends ModifierBase {
     @IsOptional()
     /** Material modifier. */
-    modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
+    modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsArray()
     @ValidateNested({ each: true })
     @IsOptional()
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: None [];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) [];
 	
     @IsNumber()
     @IsOptional()
@@ -38,7 +38,7 @@ export class Mirror extends ModifierBase {
 	
     @IsOptional()
     /** An optional material (like the illum type) that may be used to specify a different material to be used for shading non-source rays. If None, this will keep the alternat_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance. */
-    alternate_material?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
+    alternate_material?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsString()
     @IsOptional()

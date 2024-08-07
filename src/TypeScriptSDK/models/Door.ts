@@ -15,7 +15,7 @@ export class Door extends IDdBaseModel {
     geometry!: Face3D;
 	
     @IsDefined()
-    boundary_condition!: Outdoors | Surface;
+    boundary_condition!: (Outdoors | Surface);
 	
     @IsInstance(DoorPropertiesAbridged)
     @ValidateNested()

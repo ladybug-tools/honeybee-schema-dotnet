@@ -2,6 +2,8 @@
 import { ExtensionTypes } from "./ExtensionTypes";
 import { ObjectTypes } from "./ObjectTypes";
 import { ValidationParent } from "./ValidationParent";
+import { Point3D } from "./Point3D";
+import { LineSegment3D } from "./LineSegment3D";
 
 export abstract class ValidationError {
     @IsString()
@@ -51,7 +53,7 @@ export abstract class ValidationError {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list lists where each sub-list corresponds to one of the objects in the element_id property. Each sub-list contains information for the parent objects of the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room. */
-    parents?: Array [];
+    parents?: ValidationParent [] [];
 	
     @IsArray()
     @ValidateNested({ each: true })
@@ -63,7 +65,7 @@ export abstract class ValidationError {
     @ValidateNested({ each: true })
     @IsOptional()
     /** An optional list of geometry objects that helps illustrate where exactly issues with invalid geometry exist within the Honeybee object. Examples include the naked and non-manifold line segments for non-solid Room geometries, the points of self-intersection for cases of self-intersecting geometry and out-of-plane vertices for non-planar objects. Oftentimes, zooming directly to these helper geometries will help end users understand invalid situations in their model faster than simple zooming to the invalid Honeybee object in its totality. */
-    helper_geometry?: None [];
+    helper_geometry?: (Point3D | LineSegment3D) [];
 	
 
     constructor() {

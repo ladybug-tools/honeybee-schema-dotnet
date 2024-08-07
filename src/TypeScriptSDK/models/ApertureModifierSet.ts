@@ -18,19 +18,19 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel {
 	
     @IsOptional()
     /** A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and Wall parent Face. */
-    window_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
+    window_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsOptional()
     /** A modifier object for apertures with a Surface boundary condition. */
-    interior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
+    interior_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsOptional()
     /** A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face. */
-    skylight_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
+    skylight_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsOptional()
     /** A modifier object for apertures with an Outdoors boundary condition and a True is_operable property. */
-    operable_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
+    operable_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
 
     constructor() {

@@ -25,7 +25,7 @@ export class Location extends _OpenAPIGenBaseModel {
 	
     @IsOptional()
     /** Time zone between -12 hours (west) and +14 hours (east). If None, the time zone will be an estimated integer value derived from the longitude in accordance with solar time. */
-    time_zone?: Autocalculate | number;
+    time_zone?: (Autocalculate | number);
 	
     @IsNumber()
     @IsOptional()

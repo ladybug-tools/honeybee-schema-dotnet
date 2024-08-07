@@ -15,7 +15,7 @@ export class Aperture extends IDdBaseModel {
     geometry!: Face3D;
 	
     @IsDefined()
-    boundary_condition!: Outdoors | Surface;
+    boundary_condition!: (Outdoors | Surface);
 	
     @IsInstance(AperturePropertiesAbridged)
     @ValidateNested()

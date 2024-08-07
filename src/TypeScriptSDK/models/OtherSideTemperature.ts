@@ -18,7 +18,7 @@ export class OtherSideTemperature extends _OpenAPIGenBaseModel {
 	
     @IsOptional()
     /** A temperature value in Celsius to note the temperature on the other side of the object. This input can also be an Autocalculate object to signify that the temperature is equal to the outdoor air temperature. */
-    temperature?: Autocalculate | number;
+    temperature?: (Autocalculate | number);
 	
 
     constructor() {

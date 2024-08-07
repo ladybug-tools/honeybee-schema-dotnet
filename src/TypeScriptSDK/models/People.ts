@@ -13,7 +13,7 @@ export class People extends IDdEnergyBaseModel {
 	
     @IsDefined()
     /** A schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile. */
-    occupancy_schedule!: ScheduleRuleset | ScheduleFixedInterval;
+    occupancy_schedule!: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @IsString()
     @IsOptional()
@@ -21,7 +21,7 @@ export class People extends IDdEnergyBaseModel {
 	
     @IsOptional()
     /** A schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated. */
-    activity_schedule?: ScheduleRuleset | ScheduleFixedInterval;
+    activity_schedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @IsNumber()
     @IsOptional()
@@ -30,7 +30,7 @@ export class People extends IDdEnergyBaseModel {
 	
     @IsOptional()
     /** Number for the latent fraction of heat gain due to people or an Autocalculate object. */
-    latent_fraction?: Autocalculate | number;
+    latent_fraction?: (Autocalculate | number);
 	
 
     constructor() {

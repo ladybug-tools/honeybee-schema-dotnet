@@ -31,7 +31,7 @@ export class Ventilation extends IDdEnergyBaseModel {
 	
     @IsOptional()
     /** Schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile. */
-    schedule?: ScheduleRuleset | ScheduleFixedInterval;
+    schedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
 
     constructor() {

@@ -1,4 +1,7 @@
 ﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError } from 'class-validator';
+import { EnergyMaterial } from "./EnergyMaterial";
+import { EnergyMaterialNoMass } from "./EnergyMaterialNoMass";
+import { EnergyMaterialVegetation } from "./EnergyMaterialVegetation";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Construction for opaque objects (Face, Shade, Door). */
@@ -7,7 +10,7 @@ export class OpaqueConstruction extends IDdEnergyBaseModel {
     @ValidateNested({ each: true })
     @IsDefined()
     /** List of opaque material definitions. The order of the materials is from exterior to interior. */
-    materials!: None [];
+    materials!: (EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation) [];
 	
     @IsString()
     @IsOptional()

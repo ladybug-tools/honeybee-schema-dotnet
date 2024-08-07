@@ -14,23 +14,23 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 export class DoorModifierSet extends _OpenAPIGenBaseModel {
     @IsOptional()
     /** A radiance modifier object for faces with an Outdoors boundary condition. */
-    exterior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
+    exterior_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsOptional()
     /** A radiance modifier object for faces with a boundary condition other than Outdoors. */
-    interior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
+    interior_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsOptional()
     /** A modifier object for glass with a Surface boundary condition. */
-    interior_glass_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
+    interior_glass_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsOptional()
     /** A modifier object for glass with an Outdoors boundary condition. */
-    exterior_glass_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
+    exterior_glass_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsOptional()
     /** A window modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face. */
-    overhead_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
+    overhead_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsString()
     @IsOptional()

@@ -60,7 +60,7 @@ export class ModifierSet extends IDdRadianceBaseModel {
 	
     @IsOptional()
     /** An optional Modifier to be used for all Faces with an AirBoundary face type. If None, it will be the honeybee generic air wall modifier. */
-    air_boundary_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
+    air_boundary_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
 
     constructor() {

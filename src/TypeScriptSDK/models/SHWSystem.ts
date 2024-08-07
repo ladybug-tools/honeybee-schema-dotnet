@@ -17,11 +17,11 @@ export class SHWSystem extends IDdEnergyBaseModel {
 	
     @IsOptional()
     /** A number for the efficiency of the heater within the system. For Gas systems, this is the efficiency of the burner. For HeatPump systems, this is the rated COP of the system. For electric systems, this should usually be set to 1. If set to Autocalculate, this value will automatically be set based on the equipment_type. Gas_WaterHeater - 0.8, Electric_WaterHeater - 1.0, HeatPump_WaterHeater - 3.5, Gas_TanklessHeater - 0.8, Electric_TanklessHeater - 1.0. */
-    heater_efficiency?: number | Autocalculate;
+    heater_efficiency?: (number | Autocalculate);
 	
     @IsOptional()
     /** A number for the ambient temperature in which the hot water tank is located [C]. This can also be the identifier of a Room in which the tank is located. */
-    ambient_condition?: number | string;
+    ambient_condition?: (number | string);
 	
     @IsNumber()
     @IsOptional()

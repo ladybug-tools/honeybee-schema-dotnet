@@ -1,5 +1,16 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, IsArray, validate, ValidationError } from 'class-validator';
 import { GlobalModifierSet } from "./GlobalModifierSet";
+import { Plastic } from "./Plastic";
+import { Glass } from "./Glass";
+import { BSDF } from "./BSDF";
+import { Glow } from "./Glow";
+import { Light } from "./Light";
+import { Trans } from "./Trans";
+import { Metal } from "./Metal";
+import { Void } from "./Void";
+import { Mirror } from "./Mirror";
+import { ModifierSet } from "./ModifierSet";
+import { ModifierSetAbridged } from "./ModifierSetAbridged";
 import { SensorGrid } from "./SensorGrid";
 import { View } from "./View";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
@@ -20,13 +31,13 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set. */
-    modifiers?: None [];
+    modifiers?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) [];
 	
     @IsArray()
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of all unique Room-Assigned ModifierSets in the Model. */
-    modifier_sets?: None [];
+    modifier_sets?: (ModifierSet | ModifierSetAbridged) [];
 	
     @IsArray()
     @ValidateNested({ each: true })

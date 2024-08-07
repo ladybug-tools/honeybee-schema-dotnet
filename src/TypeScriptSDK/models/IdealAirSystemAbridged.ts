@@ -43,11 +43,11 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
 	
     @IsOptional()
     /** A number for the maximum heating capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the heating capacity. */
-    heating_limit?: Autosize | NoLimit | number;
+    heating_limit?: (Autosize | NoLimit | number);
 	
     @IsOptional()
     /** A number for the maximum cooling capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the cooling capacity. */
-    cooling_limit?: Autosize | NoLimit | number;
+    cooling_limit?: (Autosize | NoLimit | number);
 	
     @IsString()
     @IsOptional()

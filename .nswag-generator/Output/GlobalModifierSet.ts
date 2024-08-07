@@ -1,4 +1,7 @@
 ﻿import { IsString, IsOptional, IsArray, ValidateNested, IsInstance, validate, ValidationError } from 'class-validator';
+import { Plastic } from "./Plastic";
+import { Glass } from "./Glass";
+import { Trans } from "./Trans";
 import { WallModifierSetAbridged } from "./WallModifierSetAbridged";
 import { FloorModifierSetAbridged } from "./FloorModifierSetAbridged";
 import { RoofCeilingModifierSetAbridged } from "./RoofCeilingModifierSetAbridged";
@@ -20,7 +23,7 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** Global Honeybee Radiance modifiers. */
-    modifiers?: None [];
+    modifiers?: (Plastic | Glass | Trans) [];
 	
     @IsInstance(WallModifierSetAbridged)
     @ValidateNested()

@@ -1,4 +1,12 @@
 ﻿import { IsString, IsOptional, IsArray, ValidateNested, IsInstance, validate, ValidationError } from 'class-validator';
+import { EnergyMaterial } from "./EnergyMaterial";
+import { EnergyMaterialNoMass } from "./EnergyMaterialNoMass";
+import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
+import { EnergyWindowMaterialGas } from "./EnergyWindowMaterialGas";
+import { OpaqueConstructionAbridged } from "./OpaqueConstructionAbridged";
+import { WindowConstructionAbridged } from "./WindowConstructionAbridged";
+import { ShadeConstruction } from "./ShadeConstruction";
+import { AirBoundaryConstructionAbridged } from "./AirBoundaryConstructionAbridged";
 import { WallConstructionSetAbridged } from "./WallConstructionSetAbridged";
 import { FloorConstructionSetAbridged } from "./FloorConstructionSetAbridged";
 import { RoofCeilingConstructionSetAbridged } from "./RoofCeilingConstructionSetAbridged";
@@ -19,13 +27,13 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** Global Honeybee Energy materials. */
-    materials?: None [];
+    materials?: (EnergyMaterial | EnergyMaterialNoMass | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas) [];
 	
     @IsArray()
     @ValidateNested({ each: true })
     @IsOptional()
     /** Global Honeybee Energy constructions. */
-    constructions?: None [];
+    constructions?: (OpaqueConstructionAbridged | WindowConstructionAbridged | ShadeConstruction | AirBoundaryConstructionAbridged) [];
 	
     @IsInstance(WallConstructionSetAbridged)
     @ValidateNested()

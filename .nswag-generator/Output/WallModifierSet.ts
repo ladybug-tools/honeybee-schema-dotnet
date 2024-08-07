@@ -14,11 +14,11 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 export class WallModifierSet extends _OpenAPIGenBaseModel {
     @IsOptional()
     /** A radiance modifier object for faces with an Outdoors boundary condition. */
-    exterior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
+    exterior_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsOptional()
     /** A radiance modifier object for faces with a boundary condition other than Outdoors. */
-    interior_modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
+    interior_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsString()
     @IsOptional()

@@ -30,7 +30,7 @@ export class PeopleAbridged extends IDdEnergyBaseModel {
 	
     @IsOptional()
     /** Number for the latent fraction of heat gain due to people or an Autocalculate object. */
-    latent_fraction?: Autocalculate | number;
+    latent_fraction?: (Autocalculate | number);
 	
 
     constructor() {

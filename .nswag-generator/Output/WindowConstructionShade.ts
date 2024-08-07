@@ -19,7 +19,7 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
 	
     @IsDefined()
     /** Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly. */
-    shade_material!: EnergyWindowMaterialShade | EnergyWindowMaterialBlind | EnergyWindowMaterialGlazing;
+    shade_material!: (EnergyWindowMaterialShade | EnergyWindowMaterialBlind | EnergyWindowMaterialGlazing);
 	
     @IsString()
     @IsOptional()
@@ -44,7 +44,7 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
 	
     @IsOptional()
     /** An optional ScheduleRuleset or ScheduleFixedInterval to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction. */
-    schedule?: ScheduleRuleset | ScheduleFixedInterval;
+    schedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
 
     constructor() {
