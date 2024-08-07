@@ -80,7 +80,7 @@ public class ClassTemplateModel
 
         var paramValidators = Properties.SelectMany(_=>_.ValidationDecorators).Select(_=> ValidationDecoratorToImport(_)).ToList();
         paramValidators.Add("validate");
-        paramValidators.Add("ValidationError");
+        paramValidators.Add("ValidationError as TsValidationError");
         TsValidatorImports = paramValidators.Distinct().ToList();
         TsValidatorImportsCode = string.Join(", ", TsValidatorImports);
     }
