@@ -78,7 +78,15 @@ namespace Generator.Tests
             StringAssert.AreEqualIgnoringCase(tp, "number [] []");
             var df = pm.DefaultCodeFormat;
             StringAssert.Contains("[[0, 0]]", df);
+        }
 
+        [Test]
+        public void TestRadianceShadeStateAbridged()
+        {
+            var json = doc.Components.Schemas["RadianceShadeStateAbridged"];
+
+            var pm = new ClassTemplateModel(doc, json);
+            Assert.That(pm.IsAbstract, Is.False);
         }
     }
 }

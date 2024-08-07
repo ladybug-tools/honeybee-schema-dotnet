@@ -60,7 +60,7 @@ public class ClassTemplateModel
         InheritedSchema = json.InheritedSchema;
         Inheritance = InheritedSchema?.Title;
 
-        IsAbstract = DerivedClasses.Any();
+        IsAbstract = DerivedClasses.Any() && InheritedSchema == null;
 
 
         TsImports = Properties.SelectMany(_ => _.TsImports).ToList();
