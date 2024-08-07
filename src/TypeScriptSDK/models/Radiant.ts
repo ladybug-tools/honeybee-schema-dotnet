@@ -1,8 +1,8 @@
 ﻿import { IsEnum, ValidateNested, IsOptional, IsString, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Vintages } from "./Vintages";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { RadiantEquipmentType } from "./RadiantEquipmentType";
 import { RadiantFaceTypes } from "./RadiantFaceTypes";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { Vintages } from "./Vintages";
 
 /** Low temperature radiant HVAC system.
 

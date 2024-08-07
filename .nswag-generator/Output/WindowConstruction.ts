@@ -1,10 +1,10 @@
 ﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
-import { EnergyWindowMaterialSimpleGlazSys } from "./EnergyWindowMaterialSimpleGlazSys";
-import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
+import { EnergyWindowFrame } from "./EnergyWindowFrame";
 import { EnergyWindowMaterialGas } from "./EnergyWindowMaterialGas";
 import { EnergyWindowMaterialGasCustom } from "./EnergyWindowMaterialGasCustom";
 import { EnergyWindowMaterialGasMixture } from "./EnergyWindowMaterialGasMixture";
-import { EnergyWindowFrame } from "./EnergyWindowFrame";
+import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
+import { EnergyWindowMaterialSimpleGlazSys } from "./EnergyWindowMaterialSimpleGlazSys";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Construction for window objects (Aperture, Door). */

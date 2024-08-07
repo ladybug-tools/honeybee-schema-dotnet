@@ -1,19 +1,19 @@
 ﻿import { IsString, IsDefined, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { Mirror } from "./Mirror";
-import { ModifierBase } from "./ModifierBase";
-import { Plastic } from "./Plastic";
-import { Glass } from "./Glass";
+import { _RadianceAsset } from "./_RadianceAsset";
 import { BSDF } from "./BSDF";
+import { Glass } from "./Glass";
 import { Glow } from "./Glow";
 import { Light } from "./Light";
-import { Trans } from "./Trans";
 import { Metal } from "./Metal";
+import { Mirror } from "./Mirror";
+import { ModifierBase } from "./ModifierBase";
 import { ModifierSet } from "./ModifierSet";
-import { StateGeometryAbridged } from "./StateGeometryAbridged";
 import { ModifierSetAbridged } from "./ModifierSetAbridged";
+import { Plastic } from "./Plastic";
 import { SensorGrid } from "./SensorGrid";
-import { _RadianceAsset } from "./_RadianceAsset";
+import { StateGeometryAbridged } from "./StateGeometryAbridged";
+import { Trans } from "./Trans";
 import { View } from "./View";
 
 /** Base class for all objects requiring a valid Radiance identifier. */

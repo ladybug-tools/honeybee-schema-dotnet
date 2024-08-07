@@ -1,7 +1,7 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+import { IDdBaseModel } from "./IDdBaseModel";
 import { Mesh3D } from "./Mesh3D";
 import { ShadeMeshPropertiesAbridged } from "./ShadeMeshPropertiesAbridged";
-import { IDdBaseModel } from "./IDdBaseModel";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class ShadeMesh extends IDdBaseModel {

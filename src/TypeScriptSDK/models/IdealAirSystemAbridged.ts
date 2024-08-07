@@ -1,8 +1,8 @@
 ﻿import { IsString, IsOptional, IsEnum, ValidateNested, IsBoolean, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { EconomizerType } from "./EconomizerType";
 import { Autosize } from "./Autosize";
-import { NoLimit } from "./NoLimit";
+import { EconomizerType } from "./EconomizerType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { NoLimit } from "./NoLimit";
 
 /** Provides a model for an ideal HVAC system. */
 export class IdealAirSystemAbridged extends IDdEnergyBaseModel {

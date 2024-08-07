@@ -1,8 +1,8 @@
 ﻿import { IsEnum, ValidateNested, IsOptional, IsNumber, IsBoolean, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Vintages } from "./Vintages";
 import { AllAirEconomizerType } from "./AllAirEconomizerType";
-import { PSZEquipmentType } from "./PSZEquipmentType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { PSZEquipmentType } from "./PSZEquipmentType";
+import { Vintages } from "./Vintages";
 
 /** Packaged Single-Zone (PSZ) HVAC system (aka. System 3 or 4).
 

@@ -1,7 +1,7 @@
 ﻿import { IsString, IsOptional, IsNumber, IsEnum, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { EnergyBaseModel } from "./EnergyBaseModel";
 import { ModuleType } from "./ModuleType";
 import { MountingType } from "./MountingType";
-import { EnergyBaseModel } from "./EnergyBaseModel";
 
 /** Base class for all objects requiring a valid EnergyPlus identifier. */
 export class PVProperties extends EnergyBaseModel {

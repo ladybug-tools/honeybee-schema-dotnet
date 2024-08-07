@@ -1,20 +1,20 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { WallModifierSet } from "./WallModifierSet";
-import { FloorModifierSet } from "./FloorModifierSet";
-import { RoofCeilingModifierSet } from "./RoofCeilingModifierSet";
 import { ApertureModifierSet } from "./ApertureModifierSet";
-import { DoorModifierSet } from "./DoorModifierSet";
-import { ShadeModifierSet } from "./ShadeModifierSet";
-import { Plastic } from "./Plastic";
-import { Glass } from "./Glass";
 import { BSDF } from "./BSDF";
+import { DoorModifierSet } from "./DoorModifierSet";
+import { FloorModifierSet } from "./FloorModifierSet";
+import { Glass } from "./Glass";
 import { Glow } from "./Glow";
-import { Light } from "./Light";
-import { Trans } from "./Trans";
-import { Metal } from "./Metal";
-import { Void } from "./Void";
-import { Mirror } from "./Mirror";
 import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
+import { Light } from "./Light";
+import { Metal } from "./Metal";
+import { Mirror } from "./Mirror";
+import { Plastic } from "./Plastic";
+import { RoofCeilingModifierSet } from "./RoofCeilingModifierSet";
+import { ShadeModifierSet } from "./ShadeModifierSet";
+import { Trans } from "./Trans";
+import { Void } from "./Void";
+import { WallModifierSet } from "./WallModifierSet";
 
 /** Set containing all radiance modifiers needed to create a radiance model. */
 export class ModifierSet extends IDdRadianceBaseModel {

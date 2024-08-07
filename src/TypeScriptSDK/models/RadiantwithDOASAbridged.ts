@@ -1,8 +1,8 @@
 ﻿import { IsEnum, ValidateNested, IsOptional, IsNumber, IsBoolean, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Vintages } from "./Vintages";
-import { RadiantwithDOASEquipmentType } from "./RadiantwithDOASEquipmentType";
-import { RadiantFaceTypes } from "./RadiantFaceTypes";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { RadiantFaceTypes } from "./RadiantFaceTypes";
+import { RadiantwithDOASEquipmentType } from "./RadiantwithDOASEquipmentType";
+import { Vintages } from "./Vintages";
 
 /** Low Temperature Radiant with DOAS HVAC system.
 

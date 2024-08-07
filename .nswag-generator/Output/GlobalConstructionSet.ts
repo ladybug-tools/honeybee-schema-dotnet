@@ -1,18 +1,18 @@
 ﻿import { IsString, IsOptional, IsArray, ValidateNested, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
-import { EnergyMaterial } from "./EnergyMaterial";
-import { EnergyMaterialNoMass } from "./EnergyMaterialNoMass";
-import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
-import { EnergyWindowMaterialGas } from "./EnergyWindowMaterialGas";
-import { OpaqueConstructionAbridged } from "./OpaqueConstructionAbridged";
-import { WindowConstructionAbridged } from "./WindowConstructionAbridged";
-import { ShadeConstruction } from "./ShadeConstruction";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AirBoundaryConstructionAbridged } from "./AirBoundaryConstructionAbridged";
-import { WallConstructionSetAbridged } from "./WallConstructionSetAbridged";
-import { FloorConstructionSetAbridged } from "./FloorConstructionSetAbridged";
-import { RoofCeilingConstructionSetAbridged } from "./RoofCeilingConstructionSetAbridged";
 import { ApertureConstructionSetAbridged } from "./ApertureConstructionSetAbridged";
 import { DoorConstructionSetAbridged } from "./DoorConstructionSetAbridged";
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { EnergyMaterial } from "./EnergyMaterial";
+import { EnergyMaterialNoMass } from "./EnergyMaterialNoMass";
+import { EnergyWindowMaterialGas } from "./EnergyWindowMaterialGas";
+import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
+import { FloorConstructionSetAbridged } from "./FloorConstructionSetAbridged";
+import { OpaqueConstructionAbridged } from "./OpaqueConstructionAbridged";
+import { RoofCeilingConstructionSetAbridged } from "./RoofCeilingConstructionSetAbridged";
+import { ShadeConstruction } from "./ShadeConstruction";
+import { WallConstructionSetAbridged } from "./WallConstructionSetAbridged";
+import { WindowConstructionAbridged } from "./WindowConstructionAbridged";
 
 /** Base class for all objects that are not extensible with additional keys.
 

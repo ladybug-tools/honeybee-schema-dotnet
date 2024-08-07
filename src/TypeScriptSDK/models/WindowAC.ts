@@ -1,7 +1,7 @@
 ﻿import { IsEnum, ValidateNested, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 import { WindowACEquipmentType } from "./WindowACEquipmentType";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Window Air Conditioning cooling system (with optional heating).
 

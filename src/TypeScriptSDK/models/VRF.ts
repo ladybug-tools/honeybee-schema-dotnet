@@ -1,7 +1,7 @@
 ﻿import { IsEnum, ValidateNested, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 import { VRFEquipmentType } from "./VRFEquipmentType";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Variable Refrigerant Flow (VRF) heating/cooling system (with no ventilation).
 

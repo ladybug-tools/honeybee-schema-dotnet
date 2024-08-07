@@ -1,16 +1,16 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsEnum, IsString, IsOptional, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Face3D } from "./Face3D";
-import { FaceType } from "./FaceType";
-import { Ground } from "./Ground";
-import { Outdoors } from "./Outdoors";
 import { Adiabatic } from "./Adiabatic";
-import { Surface } from "./Surface";
-import { OtherSideTemperature } from "./OtherSideTemperature";
-import { FacePropertiesAbridged } from "./FacePropertiesAbridged";
 import { Aperture } from "./Aperture";
 import { Door } from "./Door";
-import { Shade } from "./Shade";
+import { Face3D } from "./Face3D";
+import { FacePropertiesAbridged } from "./FacePropertiesAbridged";
+import { FaceType } from "./FaceType";
+import { Ground } from "./Ground";
 import { IDdBaseModel } from "./IDdBaseModel";
+import { OtherSideTemperature } from "./OtherSideTemperature";
+import { Outdoors } from "./Outdoors";
+import { Shade } from "./Shade";
+import { Surface } from "./Surface";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Face extends IDdBaseModel {

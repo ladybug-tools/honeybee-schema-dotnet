@@ -1,7 +1,7 @@
 ﻿import { IsEnum, ValidateNested, IsOptional, IsNumber, IsBoolean, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 import { WSHPwithDOASEquipmentType } from "./WSHPwithDOASEquipmentType";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Water Source Heat Pump (WSHP) with DOAS HVAC system.
 

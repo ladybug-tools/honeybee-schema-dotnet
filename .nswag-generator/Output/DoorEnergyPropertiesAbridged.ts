@@ -1,6 +1,6 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { VentilationOpening } from "./VentilationOpening";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { VentilationOpening } from "./VentilationOpening";
 
 /** Base class for all objects that are not extensible with additional keys.
 

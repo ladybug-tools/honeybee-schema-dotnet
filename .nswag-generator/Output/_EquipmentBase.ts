@@ -1,7 +1,7 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
 import { GasEquipmentAbridged } from "./GasEquipmentAbridged";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class _EquipmentBase extends IDdEnergyBaseModel {

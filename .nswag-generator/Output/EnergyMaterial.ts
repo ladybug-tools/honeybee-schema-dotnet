@@ -1,6 +1,6 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, IsEnum, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Roughness } from "./Roughness";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { Roughness } from "./Roughness";
 
 /** Opaque material representing a layer within an opaque construction. */
 export class EnergyMaterial extends IDdEnergyBaseModel {

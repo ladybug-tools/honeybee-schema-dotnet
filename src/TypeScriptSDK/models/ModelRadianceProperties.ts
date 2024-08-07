@@ -1,19 +1,19 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { GlobalModifierSet } from "./GlobalModifierSet";
-import { Plastic } from "./Plastic";
-import { Glass } from "./Glass";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BSDF } from "./BSDF";
+import { Glass } from "./Glass";
+import { GlobalModifierSet } from "./GlobalModifierSet";
 import { Glow } from "./Glow";
 import { Light } from "./Light";
-import { Trans } from "./Trans";
 import { Metal } from "./Metal";
-import { Void } from "./Void";
 import { Mirror } from "./Mirror";
 import { ModifierSet } from "./ModifierSet";
 import { ModifierSetAbridged } from "./ModifierSetAbridged";
+import { Plastic } from "./Plastic";
 import { SensorGrid } from "./SensorGrid";
+import { Trans } from "./Trans";
 import { View } from "./View";
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { Void } from "./Void";
 
 /** Radiance Properties for Honeybee Model. */
 export class ModelRadianceProperties extends _OpenAPIGenBaseModel {

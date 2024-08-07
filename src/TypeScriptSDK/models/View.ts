@@ -1,6 +1,6 @@
 ﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { ViewType } from "./ViewType";
 import { _RadianceAsset } from "./_RadianceAsset";
+import { ViewType } from "./ViewType";
 
 /** A single Radiance of sensors. */
 export class View extends _RadianceAsset {

@@ -1,13 +1,13 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { People } from "./People";
-import { Lighting } from "./Lighting";
 import { ElectricEquipment } from "./ElectricEquipment";
 import { GasEquipment } from "./GasEquipment";
-import { ServiceHotWater } from "./ServiceHotWater";
-import { Infiltration } from "./Infiltration";
-import { Ventilation } from "./Ventilation";
-import { Setpoint } from "./Setpoint";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { Infiltration } from "./Infiltration";
+import { Lighting } from "./Lighting";
+import { People } from "./People";
+import { ServiceHotWater } from "./ServiceHotWater";
+import { Setpoint } from "./Setpoint";
+import { Ventilation } from "./Ventilation";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class ProgramType extends IDdEnergyBaseModel {

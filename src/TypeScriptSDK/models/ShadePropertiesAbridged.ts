@@ -1,7 +1,7 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ShadeEnergyPropertiesAbridged } from "./ShadeEnergyPropertiesAbridged";
 import { ShadeRadiancePropertiesAbridged } from "./ShadeRadiancePropertiesAbridged";
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 export class ShadePropertiesAbridged extends _OpenAPIGenBaseModel {
     @IsString()

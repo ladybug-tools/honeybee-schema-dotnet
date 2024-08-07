@@ -1,10 +1,10 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsBoolean, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Face3D } from "./Face3D";
-import { Outdoors } from "./Outdoors";
-import { Surface } from "./Surface";
 import { AperturePropertiesAbridged } from "./AperturePropertiesAbridged";
-import { Shade } from "./Shade";
+import { Face3D } from "./Face3D";
 import { IDdBaseModel } from "./IDdBaseModel";
+import { Outdoors } from "./Outdoors";
+import { Shade } from "./Shade";
+import { Surface } from "./Surface";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Aperture extends IDdBaseModel {

@@ -1,18 +1,18 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { PeopleAbridged } from "./PeopleAbridged";
-import { LightingAbridged } from "./LightingAbridged";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { DaylightingControl } from "./DaylightingControl";
 import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
 import { GasEquipmentAbridged } from "./GasEquipmentAbridged";
-import { ServiceHotWaterAbridged } from "./ServiceHotWaterAbridged";
 import { InfiltrationAbridged } from "./InfiltrationAbridged";
-import { VentilationAbridged } from "./VentilationAbridged";
+import { InternalMassAbridged } from "./InternalMassAbridged";
+import { LightingAbridged } from "./LightingAbridged";
+import { PeopleAbridged } from "./PeopleAbridged";
+import { ProcessAbridged } from "./ProcessAbridged";
+import { ServiceHotWaterAbridged } from "./ServiceHotWaterAbridged";
 import { SetpointAbridged } from "./SetpointAbridged";
-import { DaylightingControl } from "./DaylightingControl";
+import { VentilationAbridged } from "./VentilationAbridged";
 import { VentilationControlAbridged } from "./VentilationControlAbridged";
 import { VentilationFan } from "./VentilationFan";
-import { InternalMassAbridged } from "./InternalMassAbridged";
-import { ProcessAbridged } from "./ProcessAbridged";
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.
 

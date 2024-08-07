@@ -1,8 +1,8 @@
 ﻿import { IsEnum, ValidateNested, IsOptional, IsNumber, IsBoolean, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Vintages } from "./Vintages";
 import { AllAirEconomizerType } from "./AllAirEconomizerType";
-import { VAVEquipmentType } from "./VAVEquipmentType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { VAVEquipmentType } from "./VAVEquipmentType";
+import { Vintages } from "./Vintages";
 
 /** Variable Air Volume (VAV) HVAC system (aka. System 7 or 8).
 

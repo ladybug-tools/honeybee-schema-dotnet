@@ -1,13 +1,13 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsArray, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { ModelProperties } from "./ModelProperties";
-import { Room } from "./Room";
-import { Face } from "./Face";
-import { Shade } from "./Shade";
 import { Aperture } from "./Aperture";
 import { Door } from "./Door";
+import { Face } from "./Face";
+import { IDdBaseModel } from "./IDdBaseModel";
+import { ModelProperties } from "./ModelProperties";
+import { Room } from "./Room";
+import { Shade } from "./Shade";
 import { ShadeMesh } from "./ShadeMesh";
 import { Units } from "./Units";
-import { IDdBaseModel } from "./IDdBaseModel";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Model extends IDdBaseModel {

@@ -1,7 +1,7 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { FaceEnergyPropertiesAbridged } from "./FaceEnergyPropertiesAbridged";
 import { FaceRadiancePropertiesAbridged } from "./FaceRadiancePropertiesAbridged";
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 export class FacePropertiesAbridged extends _OpenAPIGenBaseModel {
     @IsString()

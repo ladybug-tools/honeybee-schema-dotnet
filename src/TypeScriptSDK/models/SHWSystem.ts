@@ -1,7 +1,7 @@
 ﻿import { IsString, IsOptional, IsEnum, ValidateNested, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { SHWEquipmentType } from "./SHWEquipmentType";
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { SHWEquipmentType } from "./SHWEquipmentType";
 
 /** Provides a model for a Service Hot Water system. */
 export class SHWSystem extends IDdEnergyBaseModel {

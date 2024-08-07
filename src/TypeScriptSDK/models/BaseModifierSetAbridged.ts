@@ -1,10 +1,10 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { WallModifierSetAbridged } from "./WallModifierSetAbridged";
+import { DoorModifierSetAbridged } from "./DoorModifierSetAbridged";
 import { FloorModifierSetAbridged } from "./FloorModifierSetAbridged";
 import { RoofCeilingModifierSetAbridged } from "./RoofCeilingModifierSetAbridged";
-import { DoorModifierSetAbridged } from "./DoorModifierSetAbridged";
 import { ShadeModifierSetAbridged } from "./ShadeModifierSetAbridged";
+import { WallModifierSetAbridged } from "./WallModifierSetAbridged";
 
 /** Base class for the abridged modifier sets assigned to Faces. */
 export class BaseModifierSetAbridged extends _OpenAPIGenBaseModel {

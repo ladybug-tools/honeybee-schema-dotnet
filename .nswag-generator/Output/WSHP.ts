@@ -1,7 +1,7 @@
 ﻿import { IsEnum, ValidateNested, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 import { WSHPEquipmentType } from "./WSHPEquipmentType";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Water Source Heat Pump (WSHP) heating/cooling system (with no ventilation).
 

@@ -1,8 +1,8 @@
 ﻿import { IsString, IsOptional, IsEnum, ValidateNested, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
-import { SolarDistribution } from "./SolarDistribution";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { CalculationMethod } from "./CalculationMethod";
 import { CalculationUpdateMethod } from "./CalculationUpdateMethod";
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { SolarDistribution } from "./SolarDistribution";
 
 /** Used to describe settings for EnergyPlus shadow calculation. */
 export class ShadowCalculation extends _OpenAPIGenBaseModel {
