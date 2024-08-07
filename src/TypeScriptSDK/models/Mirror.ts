@@ -7,7 +7,6 @@ import { Light } from "./Light";
 import { Trans } from "./Trans";
 import { Metal } from "./Metal";
 import { Void } from "./Void";
-import { Mirror } from "./Mirror";
 import { ModifierBase } from "./ModifierBase";
 
 /** Radiance mirror material. */

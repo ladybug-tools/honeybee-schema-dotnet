@@ -1,7 +1,6 @@
 ﻿import { IsString, IsDefined, IsOptional, IsArray, ValidateNested, IsNumber, validate, ValidationError } from 'class-validator';
 import { Plastic } from "./Plastic";
 import { Glass } from "./Glass";
-import { BSDF } from "./BSDF";
 import { Glow } from "./Glow";
 import { Light } from "./Light";
 import { Trans } from "./Trans";
