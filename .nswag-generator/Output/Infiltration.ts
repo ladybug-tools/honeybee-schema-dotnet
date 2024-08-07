@@ -12,7 +12,7 @@ export class Infiltration extends IDdEnergyBaseModel {
 	
     @IsDefined()
     /** The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile. */
-    schedule!: ScheduleRuleset | ScheduleFixedInterval;
+    schedule!: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @IsString()
     @IsOptional()

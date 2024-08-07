@@ -12,7 +12,7 @@ export class ElectricEquipment extends IDdEnergyBaseModel {
 	
     @IsDefined()
     /** The schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile. */
-    schedule!: ScheduleRuleset | ScheduleFixedInterval;
+    schedule!: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @IsNumber()
     @IsOptional()

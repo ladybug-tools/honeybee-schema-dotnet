@@ -53,7 +53,7 @@ export class ConstructionSet extends IDdEnergyBaseModel {
 	
     @IsOptional()
     /** An AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type. */
-    air_boundary_construction?: AirBoundaryConstruction | OpaqueConstruction;
+    air_boundary_construction?: (AirBoundaryConstruction | OpaqueConstruction);
 	
 
     constructor() {

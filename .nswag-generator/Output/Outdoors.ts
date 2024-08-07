@@ -23,7 +23,7 @@ export class Outdoors extends _OpenAPIGenBaseModel {
 	
     @IsOptional()
     /** A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated. */
-    view_factor?: Autocalculate | number;
+    view_factor?: (Autocalculate | number);
 	
 
     constructor() {

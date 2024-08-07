@@ -38,7 +38,7 @@ export class DesignDay extends _OpenAPIGenBaseModel {
     wind_condition!: WindCondition;
 	
     @IsDefined()
-    sky_condition!: ASHRAEClearSky | ASHRAETau;
+    sky_condition!: (ASHRAEClearSky | ASHRAETau);
 	
     @IsString()
     @IsOptional()

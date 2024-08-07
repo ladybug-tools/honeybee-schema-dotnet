@@ -26,7 +26,7 @@ export class Face extends IDdBaseModel {
     face_type!: FaceType;
 	
     @IsDefined()
-    boundary_condition!: Ground | Outdoors | Adiabatic | Surface | OtherSideTemperature;
+    boundary_condition!: (Ground | Outdoors | Adiabatic | Surface | OtherSideTemperature);
 	
     @IsInstance(FacePropertiesAbridged)
     @ValidateNested()

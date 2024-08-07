@@ -18,13 +18,13 @@ export class BSDF extends ModifierBase {
 	
     @IsOptional()
     /** Material modifier. */
-    modifier?: Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror;
+    modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsArray()
     @ValidateNested({ each: true })
     @IsOptional()
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: None [];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) [];
 	
     @IsArray()
     @ValidateNested({ each: true })

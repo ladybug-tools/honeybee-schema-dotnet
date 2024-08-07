@@ -31,7 +31,7 @@ export class RunPeriod extends DatedBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of lists where each sub-list consists of two integers for [month, day], representing a date which is a holiday within the simulation. If None, no holidays are applied. */
-    holidays?: Array [];
+    holidays?: number [] [];
 	
     @IsInstance(DaylightSavingTime)
     @ValidateNested()

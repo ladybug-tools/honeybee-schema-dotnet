@@ -1,4 +1,9 @@
 ﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsInstance, validate, ValidationError } from 'class-validator';
+import { EnergyWindowMaterialSimpleGlazSys } from "./EnergyWindowMaterialSimpleGlazSys";
+import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
+import { EnergyWindowMaterialGas } from "./EnergyWindowMaterialGas";
+import { EnergyWindowMaterialGasCustom } from "./EnergyWindowMaterialGasCustom";
+import { EnergyWindowMaterialGasMixture } from "./EnergyWindowMaterialGasMixture";
 import { EnergyWindowFrame } from "./EnergyWindowFrame";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -8,7 +13,7 @@ export class WindowConstruction extends IDdEnergyBaseModel {
     @ValidateNested({ each: true })
     @IsDefined()
     /** List of glazing and gas material definitions. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer. */
-    materials!: None [];
+    materials!: (EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas | EnergyWindowMaterialGasCustom | EnergyWindowMaterialGasMixture) [];
 	
     @IsString()
     @IsOptional()

@@ -12,7 +12,7 @@ export class Lighting extends IDdEnergyBaseModel {
 	
     @IsDefined()
     /** The schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile. */
-    schedule!: ScheduleRuleset | ScheduleFixedInterval;
+    schedule!: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @IsString()
     @IsOptional()

@@ -31,11 +31,11 @@ export class DoorConstructionSet extends _OpenAPIGenBaseModel {
 	
     @IsOptional()
     /** A WindowConstruction for all glass doors with an Outdoors boundary condition. */
-    exterior_glass_construction?: WindowConstruction | WindowConstructionShade | WindowConstructionDynamic;
+    exterior_glass_construction?: (WindowConstruction | WindowConstructionShade | WindowConstructionDynamic);
 	
     @IsOptional()
     /** A WindowConstruction for all glass doors with a Surface boundary condition. */
-    interior_glass_construction?: WindowConstruction | WindowConstructionShade | WindowConstructionDynamic;
+    interior_glass_construction?: (WindowConstruction | WindowConstructionShade | WindowConstructionDynamic);
 	
 
     constructor() {

@@ -16,7 +16,7 @@ export class AirBoundaryConstruction extends IDdEnergyBaseModel {
 	
     @IsOptional()
     /** A fractional schedule as a ScheduleRuleset or ScheduleFixedInterval for the air mixing schedule across the construction. If unspecified, an Always On schedule will be assumed. */
-    air_mixing_schedule?: ScheduleRuleset | ScheduleFixedInterval;
+    air_mixing_schedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
 
     constructor() {

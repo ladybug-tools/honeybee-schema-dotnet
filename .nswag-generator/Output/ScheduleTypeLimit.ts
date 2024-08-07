@@ -12,11 +12,11 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
 	
     @IsOptional()
     /** Lower limit for the schedule type or NoLimit. */
-    lower_limit?: NoLimit | number;
+    lower_limit?: (NoLimit | number);
 	
     @IsOptional()
     /** Upper limit for the schedule type or NoLimit. */
-    upper_limit?: NoLimit | number;
+    upper_limit?: (NoLimit | number);
 	
     @IsEnum(ScheduleNumericType)
     @ValidateNested()
