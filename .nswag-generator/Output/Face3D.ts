@@ -1,6 +1,6 @@
 ﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Plane } from "./Plane";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { Plane } from "./Plane";
 
 /** A single planar face in 3D space. */
 export class Face3D extends _OpenAPIGenBaseModel {

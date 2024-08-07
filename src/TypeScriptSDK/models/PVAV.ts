@@ -1,8 +1,8 @@
 ﻿import { IsEnum, ValidateNested, IsOptional, IsNumber, IsBoolean, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Vintages } from "./Vintages";
 import { AllAirEconomizerType } from "./AllAirEconomizerType";
-import { PVAVEquipmentType } from "./PVAVEquipmentType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { PVAVEquipmentType } from "./PVAVEquipmentType";
+import { Vintages } from "./Vintages";
 
 /** Packaged Variable Air Volume (PVAV) HVAC system (aka. System 5 or 6).
 

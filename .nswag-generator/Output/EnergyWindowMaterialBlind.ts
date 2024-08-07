@@ -1,6 +1,6 @@
 ﻿import { IsString, IsOptional, IsEnum, ValidateNested, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { SlatOrientation } from "./SlatOrientation";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { SlatOrientation } from "./SlatOrientation";
 
 /** Window blind material consisting of flat, equally-spaced slats. */
 export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {

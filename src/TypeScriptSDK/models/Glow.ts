@@ -1,13 +1,13 @@
 ﻿import { IsOptional, IsArray, ValidateNested, IsNumber, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Plastic } from "./Plastic";
-import { Glass } from "./Glass";
 import { BSDF } from "./BSDF";
+import { Glass } from "./Glass";
 import { Light } from "./Light";
-import { Trans } from "./Trans";
 import { Metal } from "./Metal";
-import { Void } from "./Void";
 import { Mirror } from "./Mirror";
 import { ModifierBase } from "./ModifierBase";
+import { Plastic } from "./Plastic";
+import { Trans } from "./Trans";
+import { Void } from "./Void";
 
 /** Radiance Glow material. */
 export class Glow extends ModifierBase {

@@ -1,7 +1,7 @@
 ﻿import { IsEnum, ValidateNested, IsOptional, IsNumber, IsBoolean, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 import { VRFwithDOASEquipmentType } from "./VRFwithDOASEquipmentType";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Variable Refrigerant Flow (VRF) with DOAS HVAC system.
 

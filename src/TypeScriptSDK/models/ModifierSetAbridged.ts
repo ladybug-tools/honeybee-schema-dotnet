@@ -1,11 +1,11 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { WallModifierSetAbridged } from "./WallModifierSetAbridged";
-import { FloorModifierSetAbridged } from "./FloorModifierSetAbridged";
-import { RoofCeilingModifierSetAbridged } from "./RoofCeilingModifierSetAbridged";
 import { ApertureModifierSetAbridged } from "./ApertureModifierSetAbridged";
 import { DoorModifierSetAbridged } from "./DoorModifierSetAbridged";
-import { ShadeModifierSetAbridged } from "./ShadeModifierSetAbridged";
+import { FloorModifierSetAbridged } from "./FloorModifierSetAbridged";
 import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
+import { RoofCeilingModifierSetAbridged } from "./RoofCeilingModifierSetAbridged";
+import { ShadeModifierSetAbridged } from "./ShadeModifierSetAbridged";
+import { WallModifierSetAbridged } from "./WallModifierSetAbridged";
 
 /** Abridged set containing all modifiers needed to create a radiance model. */
 export class ModifierSetAbridged extends IDdRadianceBaseModel {

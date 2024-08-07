@@ -1,8 +1,8 @@
 ﻿import { IsString, IsOptional, IsEnum, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { EnergyBaseModel } from "./EnergyBaseModel";
 import { NoLimit } from "./NoLimit";
 import { ScheduleNumericType } from "./ScheduleNumericType";
 import { ScheduleUnitType } from "./ScheduleUnitType";
-import { EnergyBaseModel } from "./EnergyBaseModel";
 
 /** Specifies the data types and limits for values contained in schedules. */
 export class ScheduleTypeLimit extends EnergyBaseModel {

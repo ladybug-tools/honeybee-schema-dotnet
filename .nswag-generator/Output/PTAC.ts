@@ -1,7 +1,7 @@
 ﻿import { IsEnum, ValidateNested, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Vintages } from "./Vintages";
-import { PTACEquipmentType } from "./PTACEquipmentType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { PTACEquipmentType } from "./PTACEquipmentType";
+import { Vintages } from "./Vintages";
 
 /** Packaged Terminal Air Conditioning (PTAC/HP) HVAC system. (aka. System 1 or 2).
 

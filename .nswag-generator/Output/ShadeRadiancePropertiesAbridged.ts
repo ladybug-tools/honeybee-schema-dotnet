@@ -1,6 +1,6 @@
 ﻿import { IsString, IsOptional, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged";
 import { _PropertiesBaseAbridged } from "./_PropertiesBaseAbridged";
+import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged";
 
 /** Radiance Properties for Honeybee Shade Abridged. */
 export class ShadeRadiancePropertiesAbridged extends _PropertiesBaseAbridged {

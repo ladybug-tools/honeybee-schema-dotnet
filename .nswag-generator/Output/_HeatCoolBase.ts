@@ -1,6 +1,6 @@
 ﻿import { IsEnum, ValidateNested, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Vintages } from "./Vintages";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { Vintages } from "./Vintages";
 
 /** Base class for all heating/cooling systems without any ventilation.
 

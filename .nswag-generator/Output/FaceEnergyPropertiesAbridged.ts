@@ -1,6 +1,6 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { AFNCrack } from "./AFNCrack";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { AFNCrack } from "./AFNCrack";
 
 /** Base class for all objects that are not extensible with additional keys.
 

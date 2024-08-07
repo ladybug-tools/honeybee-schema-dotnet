@@ -1,11 +1,11 @@
 ﻿import { IsString, IsDefined, IsEnum, ValidateNested, IsInstance, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { ASHRAEClearSky } from "./ASHRAEClearSky";
+import { ASHRAETau } from "./ASHRAETau";
 import { DesignDayTypes } from "./DesignDayTypes";
 import { DryBulbCondition } from "./DryBulbCondition";
 import { HumidityCondition } from "./HumidityCondition";
 import { WindCondition } from "./WindCondition";
-import { ASHRAEClearSky } from "./ASHRAEClearSky";
-import { ASHRAETau } from "./ASHRAETau";
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** An object representing design day conditions. */
 export class DesignDay extends _OpenAPIGenBaseModel {

@@ -1,8 +1,8 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { WallConstructionSetAbridged } from "./WallConstructionSetAbridged";
 import { FloorConstructionSetAbridged } from "./FloorConstructionSetAbridged";
 import { RoofCeilingConstructionSetAbridged } from "./RoofCeilingConstructionSetAbridged";
+import { WallConstructionSetAbridged } from "./WallConstructionSetAbridged";
 
 /** A set of constructions for wall, floor, or roof assemblies. */
 export class _FaceSubSetAbridged extends _OpenAPIGenBaseModel {

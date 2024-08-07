@@ -1,8 +1,8 @@
 ﻿import { IsArray, ValidateNested, IsDefined, IsInstance, IsString, IsOptional, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Face } from "./Face";
+import { IDdBaseModel } from "./IDdBaseModel";
 import { RoomPropertiesAbridged } from "./RoomPropertiesAbridged";
 import { Shade } from "./Shade";
-import { IDdBaseModel } from "./IDdBaseModel";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Room extends IDdBaseModel {

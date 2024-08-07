@@ -1,8 +1,8 @@
 ﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleDay } from "./ScheduleDay";
 import { ScheduleRuleAbridged } from "./ScheduleRuleAbridged";
 import { ScheduleTypeLimit } from "./ScheduleTypeLimit";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Used to define a schedule for a default day, further described by ScheduleRule. */
 export class ScheduleRuleset extends IDdEnergyBaseModel {

@@ -1,7 +1,7 @@
 ﻿import { IsEnum, ValidateNested, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Vintages } from "./Vintages";
 import { FurnaceEquipmentType } from "./FurnaceEquipmentType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { Vintages } from "./Vintages";
 
 /** Forced Air Furnace HVAC system (aka. System 9 or 10).
 

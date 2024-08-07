@@ -1,14 +1,14 @@
 ﻿import { IsString, IsOptional, IsArray, ValidateNested, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Plastic } from "./Plastic";
-import { Glass } from "./Glass";
-import { Trans } from "./Trans";
-import { WallModifierSetAbridged } from "./WallModifierSetAbridged";
-import { FloorModifierSetAbridged } from "./FloorModifierSetAbridged";
-import { RoofCeilingModifierSetAbridged } from "./RoofCeilingModifierSetAbridged";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ApertureModifierSetAbridged } from "./ApertureModifierSetAbridged";
 import { DoorModifierSetAbridged } from "./DoorModifierSetAbridged";
+import { FloorModifierSetAbridged } from "./FloorModifierSetAbridged";
+import { Glass } from "./Glass";
+import { Plastic } from "./Plastic";
+import { RoofCeilingModifierSetAbridged } from "./RoofCeilingModifierSetAbridged";
 import { ShadeModifierSetAbridged } from "./ShadeModifierSetAbridged";
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { Trans } from "./Trans";
+import { WallModifierSetAbridged } from "./WallModifierSetAbridged";
 
 /** Base class for all objects that are not extensible with additional keys.
 

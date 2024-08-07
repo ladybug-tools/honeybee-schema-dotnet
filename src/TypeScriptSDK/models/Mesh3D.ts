@@ -1,6 +1,6 @@
 ﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Color } from "./Color";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { Color } from "./Color";
 
 /** A mesh in 3D space. */
 export class Mesh3D extends _OpenAPIGenBaseModel {

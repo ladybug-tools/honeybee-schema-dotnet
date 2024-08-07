@@ -1,7 +1,7 @@
 ﻿import { IsString, IsOptional, IsArray, ValidateNested, IsEnum, IsInstance, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { DaysOfWeek } from "./DaysOfWeek";
-import { DaylightSavingTime } from "./DaylightSavingTime";
 import { DatedBaseModel } from "./DatedBaseModel";
+import { DaylightSavingTime } from "./DaylightSavingTime";
+import { DaysOfWeek } from "./DaysOfWeek";
 
 /** Used to describe the time period over which to run the simulation. */
 export class RunPeriod extends DatedBaseModel {

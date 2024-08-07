@@ -1,6 +1,6 @@
 ﻿import { IsEnum, ValidateNested, IsOptional, IsNumber, IsBoolean, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Vintages } from "./Vintages";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { Vintages } from "./Vintages";
 
 /** Base class for Dedicated Outdoor Air System (DOAS) HVACs.
 

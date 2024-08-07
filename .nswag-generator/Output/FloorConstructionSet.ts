@@ -1,6 +1,6 @@
 ﻿import { IsInstance, ValidateNested, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
-import { OpaqueConstruction } from "./OpaqueConstruction";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { OpaqueConstruction } from "./OpaqueConstruction";
 
 /** A set of constructions for floor assemblies. */
 export class FloorConstructionSet extends _OpenAPIGenBaseModel {

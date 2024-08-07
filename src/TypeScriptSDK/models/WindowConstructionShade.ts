@@ -1,13 +1,13 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { WindowConstruction } from "./WindowConstruction";
-import { EnergyWindowMaterialShade } from "./EnergyWindowMaterialShade";
+import { ControlType } from "./ControlType";
 import { EnergyWindowMaterialBlind } from "./EnergyWindowMaterialBlind";
 import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
-import { ShadeLocation } from "./ShadeLocation";
-import { ControlType } from "./ControlType";
-import { ScheduleRuleset } from "./ScheduleRuleset";
-import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
+import { EnergyWindowMaterialShade } from "./EnergyWindowMaterialShade";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
+import { ScheduleRuleset } from "./ScheduleRuleset";
+import { ShadeLocation } from "./ShadeLocation";
+import { WindowConstruction } from "./WindowConstruction";
 
 /** Construction for window objects (Aperture, Door). */
 export class WindowConstructionShade extends IDdEnergyBaseModel {

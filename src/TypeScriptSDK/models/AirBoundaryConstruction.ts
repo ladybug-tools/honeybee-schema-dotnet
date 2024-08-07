@@ -1,7 +1,7 @@
 ﻿import { IsString, IsOptional, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { ScheduleRuleset } from "./ScheduleRuleset";
-import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
+import { ScheduleRuleset } from "./ScheduleRuleset";
 
 /** Construction for Air Boundary objects. */
 export class AirBoundaryConstruction extends IDdEnergyBaseModel {

@@ -1,10 +1,10 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { ShadeRadiancePropertiesAbridged } from "./ShadeRadiancePropertiesAbridged";
 import { ApertureRadiancePropertiesAbridged } from "./ApertureRadiancePropertiesAbridged";
 import { DoorRadiancePropertiesAbridged } from "./DoorRadiancePropertiesAbridged";
 import { FaceRadiancePropertiesAbridged } from "./FaceRadiancePropertiesAbridged";
 import { ShadeMeshRadiancePropertiesAbridged } from "./ShadeMeshRadiancePropertiesAbridged";
+import { ShadeRadiancePropertiesAbridged } from "./ShadeRadiancePropertiesAbridged";
 
 /** Base class of Abridged Radiance Properties. */
 export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {

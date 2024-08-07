@@ -1,8 +1,8 @@
 ﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { WindowConstruction } from "./WindowConstruction";
-import { ScheduleRuleset } from "./ScheduleRuleset";
-import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
+import { ScheduleRuleset } from "./ScheduleRuleset";
+import { WindowConstruction } from "./WindowConstruction";
 
 /** Construction for window objects with an included shade layer. */
 export class WindowConstructionDynamic extends IDdEnergyBaseModel {

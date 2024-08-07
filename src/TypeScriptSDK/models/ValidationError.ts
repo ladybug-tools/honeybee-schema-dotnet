@@ -1,9 +1,9 @@
 ﻿import { IsString, IsDefined, IsEnum, ValidateNested, IsArray, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { ExtensionTypes } from "./ExtensionTypes";
-import { ObjectTypes } from "./ObjectTypes";
-import { ValidationParent } from "./ValidationParent";
-import { Point3D } from "./Point3D";
 import { LineSegment3D } from "./LineSegment3D";
+import { ObjectTypes } from "./ObjectTypes";
+import { Point3D } from "./Point3D";
+import { ValidationParent } from "./ValidationParent";
 
 export class ValidationError {
     @IsString()

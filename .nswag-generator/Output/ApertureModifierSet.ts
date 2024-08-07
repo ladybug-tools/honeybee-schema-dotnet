@@ -1,14 +1,14 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Plastic } from "./Plastic";
-import { Glass } from "./Glass";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BSDF } from "./BSDF";
+import { Glass } from "./Glass";
 import { Glow } from "./Glow";
 import { Light } from "./Light";
-import { Trans } from "./Trans";
 import { Metal } from "./Metal";
-import { Void } from "./Void";
 import { Mirror } from "./Mirror";
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { Plastic } from "./Plastic";
+import { Trans } from "./Trans";
+import { Void } from "./Void";
 
 /** Set containing radiance modifiers needed for a model's Apertures. */
 export class ApertureModifierSet extends _OpenAPIGenBaseModel {

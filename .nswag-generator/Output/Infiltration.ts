@@ -1,7 +1,7 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { ScheduleRuleset } from "./ScheduleRuleset";
-import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
+import { ScheduleRuleset } from "./ScheduleRuleset";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class Infiltration extends IDdEnergyBaseModel {

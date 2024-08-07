@@ -37,7 +37,7 @@ public class ClassTemplateModel
     public string Discriminator { get; set; }
     public string BaseDiscriminator { get; set; } // type reference keyword: "type"
 
-    
+
     public ClassTemplateModel(OpenApiDocument doc, JsonSchema json)
     {
         Description = json.Description;
@@ -73,17 +73,17 @@ public class ClassTemplateModel
         var dcs = DerivedClasses.Select(_ => _.ClassName);
         TsImports?.AddRange(dcs);
         // remove importing self
-        TsImports = TsImports.Where(_=>_!= ClassName).Distinct().ToList();
+        TsImports = TsImports.Where(_ => _ != ClassName).Distinct().OrderBy(_ => _).ToList();
 
 
-        var paramValidators = Properties.SelectMany(_=>_.ValidationDecorators).Select(_=> ValidationDecoratorToImport(_)).ToList();
+        var paramValidators = Properties.SelectMany(_ => _.ValidationDecorators).Select(_ => ValidationDecoratorToImport(_)).ToList();
         paramValidators.Add("validate");
         paramValidators.Add("ValidationError as TsValidationError");
         TsValidatorImports = paramValidators.Distinct().ToList();
         TsValidatorImportsCode = string.Join(", ", TsValidatorImports);
     }
 
-    public static string ValidationDecoratorToImport(string decorator) 
+    public static string ValidationDecoratorToImport(string decorator)
     {
         string pattern = @"@([a-zA-Z]+)\(";
         Match match = Regex.Match(decorator, pattern);

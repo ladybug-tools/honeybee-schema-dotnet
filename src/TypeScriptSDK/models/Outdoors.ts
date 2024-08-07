@@ -1,6 +1,6 @@
 ﻿import { IsString, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Autocalculate } from "./Autocalculate";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { Autocalculate } from "./Autocalculate";
 
 /** Base class for all objects that are not extensible with additional keys.
 

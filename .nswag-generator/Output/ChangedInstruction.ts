@@ -1,6 +1,6 @@
 ﻿import { IsEnum, ValidateNested, IsDefined, IsString, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { GeometryObjectTypes } from "./GeometryObjectTypes";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { GeometryObjectTypes } from "./GeometryObjectTypes";
 
 export class ChangedInstruction extends _OpenAPIGenBaseModel {
     @IsEnum(GeometryObjectTypes)

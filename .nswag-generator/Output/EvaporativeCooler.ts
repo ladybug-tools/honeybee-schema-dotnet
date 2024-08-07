@@ -1,7 +1,7 @@
 ﻿import { IsEnum, ValidateNested, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Vintages } from "./Vintages";
 import { EvaporativeCoolerEquipmentType } from "./EvaporativeCoolerEquipmentType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { Vintages } from "./Vintages";
 
 /** Direct evaporative cooling systems (with optional heating).
 

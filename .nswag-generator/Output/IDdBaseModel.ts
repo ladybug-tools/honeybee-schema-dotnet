@@ -1,12 +1,12 @@
 ﻿import { IsString, IsDefined, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { Shade } from "./Shade";
 import { Aperture } from "./Aperture";
 import { Door } from "./Door";
 import { Face } from "./Face";
-import { Room } from "./Room";
-import { ShadeMesh } from "./ShadeMesh";
 import { Model } from "./Model";
+import { Room } from "./Room";
+import { Shade } from "./Shade";
+import { ShadeMesh } from "./ShadeMesh";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class IDdBaseModel extends _OpenAPIGenBaseModel {

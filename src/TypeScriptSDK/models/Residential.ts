@@ -1,7 +1,7 @@
 ﻿import { IsEnum, ValidateNested, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Vintages } from "./Vintages";
-import { ResidentialEquipmentType } from "./ResidentialEquipmentType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { ResidentialEquipmentType } from "./ResidentialEquipmentType";
+import { Vintages } from "./Vintages";
 
 /** Residential Air Conditioning, Heat Pump or Furnace system.
 
