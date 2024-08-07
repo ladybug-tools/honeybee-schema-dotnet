@@ -1,4 +1,5 @@
 ﻿
+using Newtonsoft.Json.Linq;
 using NJsonSchema;
 using System;
 using System.Collections.Generic;
@@ -219,31 +220,9 @@ public class PropertyTemplateModel
             }
                 
         }
-        else if (defaultValue is Newtonsoft.Json.Linq.JObject jObj)
+        else if (defaultValue is Newtonsoft.Json.Linq.JToken jToken)
         {
-            if (jObj.TryGetValue("type", out var vType))
-            {
-                defaultCodeFormat = $"new {vType}()";
-            }
-        }
-        else if (defaultValue is Newtonsoft.Json.Linq.JArray jArray)
-        {
-            var arrayCode = new List<string> ();
-            var separator = $", ";
-            foreach (var item in jArray)
-            {
-                if (item is Newtonsoft.Json.Linq.JObject itemObj && itemObj.TryGetValue("type", out var vType))
-                {
-                    arrayCode.Add($"{vType}.fromJS({item})");
-                    separator = $",{Environment.NewLine}";
-                }
-                else
-                {
-                    arrayCode.Add(item.ToString());
-                }
-            }
-            defaultCodeFormat = $"[{string.Join(separator, arrayCode)}]" ;
-
+            defaultCodeFormat = GetDefaultFromJson(jToken);
         }
         else if (prop.Type.ToString() == "Boolean")
         {
@@ -252,6 +231,39 @@ public class PropertyTemplateModel
         else
         {
             defaultCodeFormat = defaultValue?.ToString();
+        }
+
+        return defaultCodeFormat;
+    }
+
+    private static string GetDefaultFromJson(JToken jContainer)
+    {
+        var defaultCodeFormat = string.Empty;
+        if (jContainer is Newtonsoft.Json.Linq.JObject jObj)
+        {
+            if (jObj.TryGetValue("type", out var vType))
+            {
+                var isFullJsonObj = jObj.Values().Count() > 1;
+                defaultCodeFormat = isFullJsonObj? $"{vType}.fromJS({jObj})": $"new {vType}()";
+            }
+            else
+            {
+                defaultCodeFormat = jContainer.ToString();
+            }
+        }
+        else if (jContainer is Newtonsoft.Json.Linq.JArray jArray)
+        {
+            var arrayCode = new List<string>();
+            var separator = $", ";
+            foreach (var item in jArray)
+            {
+                arrayCode.Add(GetDefaultFromJson(item).ToString());
+            }
+            defaultCodeFormat = $"[{string.Join(separator, arrayCode)}]";
+        }
+        else
+        {
+            defaultCodeFormat = jContainer.ToString();
         }
 
         return defaultCodeFormat;

@@ -61,7 +61,23 @@ namespace Generator.Tests
             var tp = pm.Type;
             StringAssert.AreEqualIgnoringCase(tp, "(Plastic | Glass | Trans) []");
             var df = pm.DefaultCodeFormat;
-            StringAssert.Contains("Plastic.fromJS", df);
+            StringAssert.Contains("[Plastic.fromJS(", df);
+
+        }
+
+        [Test]
+        public void TestScheduleDay()
+        {
+            var json = doc.Components.Schemas["ScheduleDay"];
+            var prop = json.ActualProperties.First(_ => _.Key == "times").Value;
+            Assert.That(prop.IsArray, Is.True);
+
+            // test PropertyModel
+            var pm = new PropertyTemplateModel("times", prop);
+            var tp = pm.Type;
+            StringAssert.AreEqualIgnoringCase(tp, "number [] []");
+            var df = pm.DefaultCodeFormat;
+            StringAssert.Contains("[[0, 0]]", df);
 
         }
     }
