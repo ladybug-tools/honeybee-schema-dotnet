@@ -30,18 +30,18 @@ namespace HoneybeeSchema
     [Summary(@"A single line segment face in 3D space.")]
     [Serializable]
     [DataContract(Name = "LineSegment3D")]
-    public partial class LineSegment3D : OpenAPIGenBaseModel, IEquatable<LineSegment3D>, IValidatableObject
+    public partial class LineSegment3D : IEquatable<LineSegment3D>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LineSegment3D" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected LineSegment3D()
-        {
+        protected LineSegment3D() 
+        { 
             // Set non-required readonly properties with defaultValue
             this.Type = "LineSegment3D";
         }
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="LineSegment3D" /> class.
         /// </summary>
@@ -50,7 +50,7 @@ namespace HoneybeeSchema
         public LineSegment3D
         (
            List<double> p, List<double> v// Required parameters
-                                         // Optional parameters
+            // Optional parameters
         )// BaseClass
         {
             // to ensure "p" is required (not null)
@@ -72,7 +72,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Type")]
         [DataMember(Name = "type")]
-        public override string Type { get; protected set; } = "LineSegment3D";
+        public override string Type { get; protected set; }  = "LineSegment3D";
 
         /// <summary>
         /// Line segment base point as 3 (x, y, z) values.
@@ -80,14 +80,14 @@ namespace HoneybeeSchema
         /// <value>Line segment base point as 3 (x, y, z) values.</value>
         [Summary(@"Line segment base point as 3 (x, y, z) values.")]
         [DataMember(Name = "p", IsRequired = true)]
-        public List<double> P { get; set; }
+        public List<double> P { get; set; } 
         /// <summary>
         /// Line segment direction vector as 3 (x, y, z) values.
         /// </summary>
         /// <value>Line segment direction vector as 3 (x, y, z) values.</value>
         [Summary(@"Line segment direction vector as 3 (x, y, z) values.")]
         [DataMember(Name = "v", IsRequired = true)]
-        public List<double> V { get; set; }
+        public List<double> V { get; set; } 
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -106,7 +106,7 @@ namespace HoneybeeSchema
         {
             if (!detailed)
                 return this.ToString();
-
+            
             var sb = new StringBuilder();
             sb.Append("LineSegment3D:\n");
             sb.Append("  P: ").Append(this.P).Append("\n");
@@ -114,7 +114,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             return sb.ToString();
         }
-
+  
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
@@ -145,7 +145,7 @@ namespace HoneybeeSchema
             return DuplicateLineSegment3D();
         }
 
-
+     
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
@@ -166,15 +166,15 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) &&
+            return base.Equals(input) && 
                 (
                     this.P == input.P ||
                     Extension.AllEquals(this.P, input.P)
-                ) &&
+                ) && 
                 (
                     this.V == input.V ||
                     Extension.AllEquals(this.V, input.V)
-                ) &&
+                ) && 
                     Extension.Equals(this.Type, input.Type);
         }
 
@@ -205,12 +205,12 @@ namespace HoneybeeSchema
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
 
-
+            
             // Type (string) pattern
             Regex regexType = new Regex(@"^LineSegment3D$", RegexOptions.CultureInvariant);
             if (this.Type != null && false == regexType.Match(this.Type).Success)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new[] { "Type" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
             }
 
             yield break;
