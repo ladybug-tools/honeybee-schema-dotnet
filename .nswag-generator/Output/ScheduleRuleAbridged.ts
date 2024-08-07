@@ -70,14 +70,8 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
         this.apply_thursday = false;
         this.apply_friday = false;
         this.apply_saturday = false;
-        this.start_date = [
-  1,
-  1
-];
-        this.end_date = [
-  12,
-  31
-];
+        this.start_date = [1, 1];
+        this.end_date = [12, 31];
     }
 
 
@@ -93,14 +87,8 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
             this.apply_thursday = _data["apply_thursday"] !== undefined ? _data["apply_thursday"] : false;
             this.apply_friday = _data["apply_friday"] !== undefined ? _data["apply_friday"] : false;
             this.apply_saturday = _data["apply_saturday"] !== undefined ? _data["apply_saturday"] : false;
-            this.start_date = _data["start_date"] !== undefined ? _data["start_date"] : [
-  1,
-  1
-];
-            this.end_date = _data["end_date"] !== undefined ? _data["end_date"] : [
-  12,
-  31
-];
+            this.start_date = _data["start_date"] !== undefined ? _data["start_date"] : [1, 1];
+            this.end_date = _data["end_date"] !== undefined ? _data["end_date"] : [12, 31];
         }
     }
 

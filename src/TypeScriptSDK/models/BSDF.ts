@@ -73,11 +73,7 @@ export class BSDF extends ModifierBase {
     constructor() {
         super();
         this.modifier = new Void();
-        this.up_orientation = [
-  0.01,
-  0.01,
-  1.0
-];
+        this.up_orientation = [0.01, 0.01, 1];
         this.thickness = 0;
         this.function_file = ".";
         this.type = "BSDF";
@@ -90,11 +86,7 @@ export class BSDF extends ModifierBase {
             this.bsdf_data = _data["bsdf_data"];
             this.modifier = _data["modifier"] !== undefined ? _data["modifier"] : new Void();
             this.dependencies = _data["dependencies"];
-            this.up_orientation = _data["up_orientation"] !== undefined ? _data["up_orientation"] : [
-  0.01,
-  0.01,
-  1.0
-];
+            this.up_orientation = _data["up_orientation"] !== undefined ? _data["up_orientation"] : [0.01, 0.01, 1];
             this.thickness = _data["thickness"] !== undefined ? _data["thickness"] : 0;
             this.function_file = _data["function_file"] !== undefined ? _data["function_file"] : ".";
             this.transform = _data["transform"];

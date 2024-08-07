@@ -48,14 +48,8 @@ export class RunPeriod extends DatedBaseModel {
     constructor() {
         super();
         this.type = "RunPeriod";
-        this.start_date = [
-  1,
-  1
-];
-        this.end_date = [
-  12,
-  31
-];
+        this.start_date = [1, 1];
+        this.end_date = [12, 31];
         this.start_day_of_week = DaysOfWeek.Sunday;
         this.leap_year = false;
     }
@@ -65,14 +59,8 @@ export class RunPeriod extends DatedBaseModel {
         super.init(_data);
         if (_data) {
             this.type = _data["type"] !== undefined ? _data["type"] : "RunPeriod";
-            this.start_date = _data["start_date"] !== undefined ? _data["start_date"] : [
-  1,
-  1
-];
-            this.end_date = _data["end_date"] !== undefined ? _data["end_date"] : [
-  12,
-  31
-];
+            this.start_date = _data["start_date"] !== undefined ? _data["start_date"] : [1, 1];
+            this.end_date = _data["end_date"] !== undefined ? _data["end_date"] : [12, 31];
             this.start_day_of_week = _data["start_day_of_week"] !== undefined ? _data["start_day_of_week"] : DaysOfWeek.Sunday;
             this.holidays = _data["holidays"];
             this.daylight_saving_time = _data["daylight_saving_time"];

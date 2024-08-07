@@ -46,10 +46,7 @@ export class ScheduleFixedInterval extends IDdEnergyBaseModel {
         super();
         this.type = "ScheduleFixedInterval";
         this.timestep = 1;
-        this.start_date = [
-  1,
-  1
-];
+        this.start_date = [1, 1];
         this.placeholder_value = 0;
         this.interpolate = false;
     }
@@ -62,10 +59,7 @@ export class ScheduleFixedInterval extends IDdEnergyBaseModel {
             this.type = _data["type"] !== undefined ? _data["type"] : "ScheduleFixedInterval";
             this.schedule_type_limit = _data["schedule_type_limit"];
             this.timestep = _data["timestep"] !== undefined ? _data["timestep"] : 1;
-            this.start_date = _data["start_date"] !== undefined ? _data["start_date"] : [
-  1,
-  1
-];
+            this.start_date = _data["start_date"] !== undefined ? _data["start_date"] : [1, 1];
             this.placeholder_value = _data["placeholder_value"] !== undefined ? _data["placeholder_value"] : 0;
             this.interpolate = _data["interpolate"] !== undefined ? _data["interpolate"] : false;
         }

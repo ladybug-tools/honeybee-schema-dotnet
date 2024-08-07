@@ -23,14 +23,8 @@ export class DaylightSavingTime extends DatedBaseModel {
     constructor() {
         super();
         this.type = "DaylightSavingTime";
-        this.start_date = [
-  3,
-  12
-];
-        this.end_date = [
-  11,
-  5
-];
+        this.start_date = [3, 12];
+        this.end_date = [11, 5];
     }
 
 
@@ -38,14 +32,8 @@ export class DaylightSavingTime extends DatedBaseModel {
         super.init(_data);
         if (_data) {
             this.type = _data["type"] !== undefined ? _data["type"] : "DaylightSavingTime";
-            this.start_date = _data["start_date"] !== undefined ? _data["start_date"] : [
-  3,
-  12
-];
-            this.end_date = _data["end_date"] !== undefined ? _data["end_date"] : [
-  11,
-  5
-];
+            this.start_date = _data["start_date"] !== undefined ? _data["start_date"] : [3, 12];
+            this.end_date = _data["end_date"] !== undefined ? _data["end_date"] : [11, 5];
         }
     }
 
