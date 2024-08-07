@@ -40,11 +40,8 @@ public class ClassTemplateModel
     
     public ClassTemplateModel(OpenApiDocument doc, JsonSchema json)
     {
-
-        IsAbstract = json.InheritedSchema == null;
         Description = json.Description;
         BaseDiscriminator = json.Discriminator;
-
 
 
         //Methods = classType.GetMethods().Select(_ => new MethodTemplateModel(_, GetDoc(xmlDoc, _))).ToList();
@@ -60,10 +57,11 @@ public class ClassTemplateModel
         Properties = json.ActualProperties.Select(_ => new PropertyTemplateModel(_.Key, _.Value)).ToList();
 
         DerivedClasses = json.GetDerivedSchemas(doc).Select(_ => new ClassTemplateModel(doc, _.Key)).ToList();
-
-
         InheritedSchema = json.InheritedSchema;
         Inheritance = InheritedSchema?.Title;
+
+        IsAbstract = DerivedClasses.Any();
+
 
         TsImports = Properties.SelectMany(_ => _.TsImports).ToList();
 
