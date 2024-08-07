@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, IsEnum, ValidateNested, IsInstance, validate, ValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, IsString, IsOptional, IsEnum, ValidateNested, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
 import { VentilationType } from "./VentilationType";
 import { VentilationControlAbridged } from "./VentilationControlAbridged";
 import { EnergyBaseModel } from "./EnergyBaseModel";
@@ -85,7 +85,7 @@ export class VentilationFan extends EnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: ValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

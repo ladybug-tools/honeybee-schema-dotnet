@@ -1,4 +1,4 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsInstance, IsInt, IsNumber, IsBoolean, validate, ValidationError } from 'class-validator';
+﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsInstance, IsInt, IsNumber, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { ScheduleTypeLimit } from "./ScheduleTypeLimit";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -101,7 +101,7 @@ export class ScheduleFixedInterval extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: ValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

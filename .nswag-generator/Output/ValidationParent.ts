@@ -1,4 +1,4 @@
-﻿import { IsEnum, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError } from 'class-validator';
+﻿import { IsEnum, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { ParentTypes } from "./ParentTypes";
 
 export abstract class ValidationParent {

@@ -1,4 +1,4 @@
-﻿import { IsString, IsDefined, IsEnum, ValidateNested, IsArray, IsOptional, validate, ValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, IsEnum, ValidateNested, IsArray, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { ExtensionTypes } from "./ExtensionTypes";
 import { ObjectTypes } from "./ObjectTypes";
 import { ValidationParent } from "./ValidationParent";
