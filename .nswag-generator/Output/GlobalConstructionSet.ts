@@ -97,8 +97,7 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.65,
   "visible_absorptance": 0.65
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic Acoustic Tile",
   "display_name": null,
   "user_data": null,
@@ -111,8 +110,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.2,
   "visible_absorptance": 0.2
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic 25mm Wood",
   "display_name": null,
   "user_data": null,
@@ -125,8 +123,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.5,
   "visible_absorptance": 0.5
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic HW Concrete",
   "display_name": null,
   "user_data": null,
@@ -139,16 +136,14 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.8,
   "visible_absorptance": 0.8
-}),
-EnergyWindowMaterialGas.fromJS({
+}), EnergyWindowMaterialGas.fromJS({
   "identifier": "Generic Window Air Gap",
   "display_name": null,
   "user_data": null,
   "type": "EnergyWindowMaterialGas",
   "thickness": 0.0127,
   "gas_type": "Air"
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic Gypsum Board",
   "display_name": null,
   "user_data": null,
@@ -161,8 +156,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.5,
   "visible_absorptance": 0.5
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic Wall Air Gap",
   "display_name": null,
   "user_data": null,
@@ -175,8 +169,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.7,
   "visible_absorptance": 0.7
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic Ceiling Air Gap",
   "display_name": null,
   "user_data": null,
@@ -189,8 +182,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.7,
   "visible_absorptance": 0.7
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic Brick",
   "display_name": null,
   "user_data": null,
@@ -203,8 +195,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.65,
   "visible_absorptance": 0.65
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic 50mm Insulation",
   "display_name": null,
   "user_data": null,
@@ -217,8 +208,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.7,
   "visible_absorptance": 0.7
-}),
-EnergyWindowMaterialGlazing.fromJS({
+}), EnergyWindowMaterialGlazing.fromJS({
   "identifier": "Generic Low-e Glass",
   "display_name": null,
   "user_data": null,
@@ -236,8 +226,7 @@ EnergyWindowMaterialGlazing.fromJS({
   "conductivity": 1.0,
   "dirt_correction": 1.0,
   "solar_diffusing": false
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic Painted Metal",
   "display_name": null,
   "user_data": null,
@@ -250,8 +239,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.5,
   "visible_absorptance": 0.5
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic LW Concrete",
   "display_name": null,
   "user_data": null,
@@ -264,8 +252,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.8,
   "visible_absorptance": 0.8
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic 25mm Insulation",
   "display_name": null,
   "user_data": null,
@@ -278,8 +265,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.7,
   "visible_absorptance": 0.7
-}),
-EnergyWindowMaterialGlazing.fromJS({
+}), EnergyWindowMaterialGlazing.fromJS({
   "identifier": "Generic Clear Glass",
   "display_name": null,
   "user_data": null,
@@ -306,8 +292,7 @@ EnergyWindowMaterialGlazing.fromJS({
   "materials": [
     "Generic 25mm Wood"
   ]
-}),
-WindowConstructionAbridged.fromJS({
+}), WindowConstructionAbridged.fromJS({
   "identifier": "Generic Single Pane",
   "display_name": null,
   "user_data": null,
@@ -316,8 +301,7 @@ WindowConstructionAbridged.fromJS({
     "Generic Clear Glass"
   ],
   "frame": null
-}),
-ShadeConstruction.fromJS({
+}), ShadeConstruction.fromJS({
   "identifier": "Generic Shade",
   "display_name": null,
   "user_data": null,
@@ -325,8 +309,7 @@ ShadeConstruction.fromJS({
   "solar_reflectance": 0.35,
   "visible_reflectance": 0.35,
   "is_specular": false
-}),
-ShadeConstruction.fromJS({
+}), ShadeConstruction.fromJS({
   "identifier": "Generic Context",
   "display_name": null,
   "user_data": null,
@@ -334,8 +317,7 @@ ShadeConstruction.fromJS({
   "solar_reflectance": 0.2,
   "visible_reflectance": 0.2,
   "is_specular": false
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Interior Ceiling",
   "display_name": null,
   "user_data": null,
@@ -345,8 +327,7 @@ OpaqueConstructionAbridged.fromJS({
     "Generic Ceiling Air Gap",
     "Generic Acoustic Tile"
   ]
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Interior Wall",
   "display_name": null,
   "user_data": null,
@@ -356,8 +337,7 @@ OpaqueConstructionAbridged.fromJS({
     "Generic Wall Air Gap",
     "Generic Gypsum Board"
   ]
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Exposed Floor",
   "display_name": null,
   "user_data": null,
@@ -368,8 +348,7 @@ OpaqueConstructionAbridged.fromJS({
     "Generic 50mm Insulation",
     "Generic LW Concrete"
   ]
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Interior Floor",
   "display_name": null,
   "user_data": null,
@@ -379,8 +358,7 @@ OpaqueConstructionAbridged.fromJS({
     "Generic Ceiling Air Gap",
     "Generic LW Concrete"
   ]
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Ground Slab",
   "display_name": null,
   "user_data": null,
@@ -389,8 +367,7 @@ OpaqueConstructionAbridged.fromJS({
     "Generic 50mm Insulation",
     "Generic HW Concrete"
   ]
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Roof",
   "display_name": null,
   "user_data": null,
@@ -402,8 +379,7 @@ OpaqueConstructionAbridged.fromJS({
     "Generic Ceiling Air Gap",
     "Generic Acoustic Tile"
   ]
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Exterior Wall",
   "display_name": null,
   "user_data": null,
@@ -415,8 +391,7 @@ OpaqueConstructionAbridged.fromJS({
     "Generic Wall Air Gap",
     "Generic Gypsum Board"
   ]
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Underground Wall",
   "display_name": null,
   "user_data": null,
@@ -427,16 +402,14 @@ OpaqueConstructionAbridged.fromJS({
     "Generic Wall Air Gap",
     "Generic Gypsum Board"
   ]
-}),
-AirBoundaryConstructionAbridged.fromJS({
+}), AirBoundaryConstructionAbridged.fromJS({
   "identifier": "Generic Air Boundary",
   "display_name": null,
   "user_data": null,
   "type": "AirBoundaryConstructionAbridged",
   "air_mixing_per_area": 0.1,
   "air_mixing_schedule": "Always On"
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Underground Roof",
   "display_name": null,
   "user_data": null,
@@ -447,8 +420,7 @@ OpaqueConstructionAbridged.fromJS({
     "Generic Ceiling Air Gap",
     "Generic Acoustic Tile"
   ]
-}),
-WindowConstructionAbridged.fromJS({
+}), WindowConstructionAbridged.fromJS({
   "identifier": "Generic Double Pane",
   "display_name": null,
   "user_data": null,
@@ -459,8 +431,7 @@ WindowConstructionAbridged.fromJS({
     "Generic Clear Glass"
   ],
   "frame": null
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Exterior Door",
   "display_name": null,
   "user_data": null,
@@ -471,11 +442,39 @@ OpaqueConstructionAbridged.fromJS({
     "Generic Painted Metal"
   ]
 })];
-        this.wall_set = new WallConstructionSetAbridged();
-        this.floor_set = new FloorConstructionSetAbridged();
-        this.roof_ceiling_set = new RoofCeilingConstructionSetAbridged();
-        this.aperture_set = new ApertureConstructionSetAbridged();
-        this.door_set = new DoorConstructionSetAbridged();
+        this.wall_set = WallConstructionSetAbridged.fromJS({
+  "interior_construction": "Generic Interior Wall",
+  "exterior_construction": "Generic Exterior Wall",
+  "ground_construction": "Generic Underground Wall",
+  "type": "WallConstructionSetAbridged"
+});
+        this.floor_set = FloorConstructionSetAbridged.fromJS({
+  "interior_construction": "Generic Interior Floor",
+  "exterior_construction": "Generic Exposed Floor",
+  "ground_construction": "Generic Ground Slab",
+  "type": "FloorConstructionSetAbridged"
+});
+        this.roof_ceiling_set = RoofCeilingConstructionSetAbridged.fromJS({
+  "interior_construction": "Generic Interior Ceiling",
+  "exterior_construction": "Generic Roof",
+  "ground_construction": "Generic Underground Roof",
+  "type": "RoofCeilingConstructionSetAbridged"
+});
+        this.aperture_set = ApertureConstructionSetAbridged.fromJS({
+  "type": "ApertureConstructionSetAbridged",
+  "interior_construction": "Generic Single Pane",
+  "window_construction": "Generic Double Pane",
+  "skylight_construction": "Generic Double Pane",
+  "operable_construction": "Generic Double Pane"
+});
+        this.door_set = DoorConstructionSetAbridged.fromJS({
+  "type": "DoorConstructionSetAbridged",
+  "interior_construction": "Generic Interior Door",
+  "exterior_construction": "Generic Exterior Door",
+  "overhead_construction": "Generic Exterior Door",
+  "exterior_glass_construction": "Generic Double Pane",
+  "interior_glass_construction": "Generic Single Pane"
+});
         this.shade_construction = "Generic Shade";
         this.context_construction = "Generic Context";
         this.air_boundary_construction = "Generic Air Boundary";
@@ -499,8 +498,7 @@ OpaqueConstructionAbridged.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.65,
   "visible_absorptance": 0.65
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic Acoustic Tile",
   "display_name": null,
   "user_data": null,
@@ -513,8 +511,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.2,
   "visible_absorptance": 0.2
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic 25mm Wood",
   "display_name": null,
   "user_data": null,
@@ -527,8 +524,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.5,
   "visible_absorptance": 0.5
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic HW Concrete",
   "display_name": null,
   "user_data": null,
@@ -541,16 +537,14 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.8,
   "visible_absorptance": 0.8
-}),
-EnergyWindowMaterialGas.fromJS({
+}), EnergyWindowMaterialGas.fromJS({
   "identifier": "Generic Window Air Gap",
   "display_name": null,
   "user_data": null,
   "type": "EnergyWindowMaterialGas",
   "thickness": 0.0127,
   "gas_type": "Air"
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic Gypsum Board",
   "display_name": null,
   "user_data": null,
@@ -563,8 +557,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.5,
   "visible_absorptance": 0.5
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic Wall Air Gap",
   "display_name": null,
   "user_data": null,
@@ -577,8 +570,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.7,
   "visible_absorptance": 0.7
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic Ceiling Air Gap",
   "display_name": null,
   "user_data": null,
@@ -591,8 +583,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.7,
   "visible_absorptance": 0.7
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic Brick",
   "display_name": null,
   "user_data": null,
@@ -605,8 +596,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.65,
   "visible_absorptance": 0.65
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic 50mm Insulation",
   "display_name": null,
   "user_data": null,
@@ -619,8 +609,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.7,
   "visible_absorptance": 0.7
-}),
-EnergyWindowMaterialGlazing.fromJS({
+}), EnergyWindowMaterialGlazing.fromJS({
   "identifier": "Generic Low-e Glass",
   "display_name": null,
   "user_data": null,
@@ -638,8 +627,7 @@ EnergyWindowMaterialGlazing.fromJS({
   "conductivity": 1.0,
   "dirt_correction": 1.0,
   "solar_diffusing": false
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic Painted Metal",
   "display_name": null,
   "user_data": null,
@@ -652,8 +640,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.5,
   "visible_absorptance": 0.5
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic LW Concrete",
   "display_name": null,
   "user_data": null,
@@ -666,8 +653,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.8,
   "visible_absorptance": 0.8
-}),
-EnergyMaterial.fromJS({
+}), EnergyMaterial.fromJS({
   "identifier": "Generic 25mm Insulation",
   "display_name": null,
   "user_data": null,
@@ -680,8 +666,7 @@ EnergyMaterial.fromJS({
   "thermal_absorptance": 0.9,
   "solar_absorptance": 0.7,
   "visible_absorptance": 0.7
-}),
-EnergyWindowMaterialGlazing.fromJS({
+}), EnergyWindowMaterialGlazing.fromJS({
   "identifier": "Generic Clear Glass",
   "display_name": null,
   "user_data": null,
@@ -708,8 +693,7 @@ EnergyWindowMaterialGlazing.fromJS({
   "materials": [
     "Generic 25mm Wood"
   ]
-}),
-WindowConstructionAbridged.fromJS({
+}), WindowConstructionAbridged.fromJS({
   "identifier": "Generic Single Pane",
   "display_name": null,
   "user_data": null,
@@ -718,8 +702,7 @@ WindowConstructionAbridged.fromJS({
     "Generic Clear Glass"
   ],
   "frame": null
-}),
-ShadeConstruction.fromJS({
+}), ShadeConstruction.fromJS({
   "identifier": "Generic Shade",
   "display_name": null,
   "user_data": null,
@@ -727,8 +710,7 @@ ShadeConstruction.fromJS({
   "solar_reflectance": 0.35,
   "visible_reflectance": 0.35,
   "is_specular": false
-}),
-ShadeConstruction.fromJS({
+}), ShadeConstruction.fromJS({
   "identifier": "Generic Context",
   "display_name": null,
   "user_data": null,
@@ -736,8 +718,7 @@ ShadeConstruction.fromJS({
   "solar_reflectance": 0.2,
   "visible_reflectance": 0.2,
   "is_specular": false
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Interior Ceiling",
   "display_name": null,
   "user_data": null,
@@ -747,8 +728,7 @@ OpaqueConstructionAbridged.fromJS({
     "Generic Ceiling Air Gap",
     "Generic Acoustic Tile"
   ]
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Interior Wall",
   "display_name": null,
   "user_data": null,
@@ -758,8 +738,7 @@ OpaqueConstructionAbridged.fromJS({
     "Generic Wall Air Gap",
     "Generic Gypsum Board"
   ]
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Exposed Floor",
   "display_name": null,
   "user_data": null,
@@ -770,8 +749,7 @@ OpaqueConstructionAbridged.fromJS({
     "Generic 50mm Insulation",
     "Generic LW Concrete"
   ]
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Interior Floor",
   "display_name": null,
   "user_data": null,
@@ -781,8 +759,7 @@ OpaqueConstructionAbridged.fromJS({
     "Generic Ceiling Air Gap",
     "Generic LW Concrete"
   ]
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Ground Slab",
   "display_name": null,
   "user_data": null,
@@ -791,8 +768,7 @@ OpaqueConstructionAbridged.fromJS({
     "Generic 50mm Insulation",
     "Generic HW Concrete"
   ]
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Roof",
   "display_name": null,
   "user_data": null,
@@ -804,8 +780,7 @@ OpaqueConstructionAbridged.fromJS({
     "Generic Ceiling Air Gap",
     "Generic Acoustic Tile"
   ]
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Exterior Wall",
   "display_name": null,
   "user_data": null,
@@ -817,8 +792,7 @@ OpaqueConstructionAbridged.fromJS({
     "Generic Wall Air Gap",
     "Generic Gypsum Board"
   ]
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Underground Wall",
   "display_name": null,
   "user_data": null,
@@ -829,16 +803,14 @@ OpaqueConstructionAbridged.fromJS({
     "Generic Wall Air Gap",
     "Generic Gypsum Board"
   ]
-}),
-AirBoundaryConstructionAbridged.fromJS({
+}), AirBoundaryConstructionAbridged.fromJS({
   "identifier": "Generic Air Boundary",
   "display_name": null,
   "user_data": null,
   "type": "AirBoundaryConstructionAbridged",
   "air_mixing_per_area": 0.1,
   "air_mixing_schedule": "Always On"
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Underground Roof",
   "display_name": null,
   "user_data": null,
@@ -849,8 +821,7 @@ OpaqueConstructionAbridged.fromJS({
     "Generic Ceiling Air Gap",
     "Generic Acoustic Tile"
   ]
-}),
-WindowConstructionAbridged.fromJS({
+}), WindowConstructionAbridged.fromJS({
   "identifier": "Generic Double Pane",
   "display_name": null,
   "user_data": null,
@@ -861,8 +832,7 @@ WindowConstructionAbridged.fromJS({
     "Generic Clear Glass"
   ],
   "frame": null
-}),
-OpaqueConstructionAbridged.fromJS({
+}), OpaqueConstructionAbridged.fromJS({
   "identifier": "Generic Exterior Door",
   "display_name": null,
   "user_data": null,
@@ -873,11 +843,39 @@ OpaqueConstructionAbridged.fromJS({
     "Generic Painted Metal"
   ]
 })];
-            this.wall_set = _data["wall_set"] !== undefined ? _data["wall_set"] : new WallConstructionSetAbridged();
-            this.floor_set = _data["floor_set"] !== undefined ? _data["floor_set"] : new FloorConstructionSetAbridged();
-            this.roof_ceiling_set = _data["roof_ceiling_set"] !== undefined ? _data["roof_ceiling_set"] : new RoofCeilingConstructionSetAbridged();
-            this.aperture_set = _data["aperture_set"] !== undefined ? _data["aperture_set"] : new ApertureConstructionSetAbridged();
-            this.door_set = _data["door_set"] !== undefined ? _data["door_set"] : new DoorConstructionSetAbridged();
+            this.wall_set = _data["wall_set"] !== undefined ? _data["wall_set"] : WallConstructionSetAbridged.fromJS({
+  "interior_construction": "Generic Interior Wall",
+  "exterior_construction": "Generic Exterior Wall",
+  "ground_construction": "Generic Underground Wall",
+  "type": "WallConstructionSetAbridged"
+});
+            this.floor_set = _data["floor_set"] !== undefined ? _data["floor_set"] : FloorConstructionSetAbridged.fromJS({
+  "interior_construction": "Generic Interior Floor",
+  "exterior_construction": "Generic Exposed Floor",
+  "ground_construction": "Generic Ground Slab",
+  "type": "FloorConstructionSetAbridged"
+});
+            this.roof_ceiling_set = _data["roof_ceiling_set"] !== undefined ? _data["roof_ceiling_set"] : RoofCeilingConstructionSetAbridged.fromJS({
+  "interior_construction": "Generic Interior Ceiling",
+  "exterior_construction": "Generic Roof",
+  "ground_construction": "Generic Underground Roof",
+  "type": "RoofCeilingConstructionSetAbridged"
+});
+            this.aperture_set = _data["aperture_set"] !== undefined ? _data["aperture_set"] : ApertureConstructionSetAbridged.fromJS({
+  "type": "ApertureConstructionSetAbridged",
+  "interior_construction": "Generic Single Pane",
+  "window_construction": "Generic Double Pane",
+  "skylight_construction": "Generic Double Pane",
+  "operable_construction": "Generic Double Pane"
+});
+            this.door_set = _data["door_set"] !== undefined ? _data["door_set"] : DoorConstructionSetAbridged.fromJS({
+  "type": "DoorConstructionSetAbridged",
+  "interior_construction": "Generic Interior Door",
+  "exterior_construction": "Generic Exterior Door",
+  "overhead_construction": "Generic Exterior Door",
+  "exterior_glass_construction": "Generic Double Pane",
+  "interior_glass_construction": "Generic Single Pane"
+});
             this.shade_construction = _data["shade_construction"] !== undefined ? _data["shade_construction"] : "Generic Shade";
             this.context_construction = _data["context_construction"] !== undefined ? _data["context_construction"] : "Generic Context";
             this.air_boundary_construction = _data["air_boundary_construction"] !== undefined ? _data["air_boundary_construction"] : "Generic Air Boundary";
