@@ -226,6 +226,25 @@ public class PropertyTemplateModel
                 defaultCodeFormat = $"new {vType}()";
             }
         }
+        else if (defaultValue is Newtonsoft.Json.Linq.JArray jArray)
+        {
+            var arrayCode = new List<string> ();
+            var separator = $", ";
+            foreach (var item in jArray)
+            {
+                if (item is Newtonsoft.Json.Linq.JObject itemObj && itemObj.TryGetValue("type", out var vType))
+                {
+                    arrayCode.Add($"{vType}.fromJS({item})");
+                    separator = $",{Environment.NewLine}";
+                }
+                else
+                {
+                    arrayCode.Add(item.ToString());
+                }
+            }
+            defaultCodeFormat = $"[{string.Join(separator, arrayCode)}]" ;
+
+        }
         else if (prop.Type.ToString() == "Boolean")
         {
             defaultCodeFormat = defaultValue.ToString().ToLower();
