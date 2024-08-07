@@ -82,7 +82,7 @@ export class Model extends IDdBaseModel {
     constructor() {
         super();
         this.type = "Model";
-        this.version = "1.58.1";
+        this.version = "1.58.2";
         this.units = Units.Meters;
         this.tolerance = 0.01;
         this.angle_tolerance = 1;
@@ -94,7 +94,7 @@ export class Model extends IDdBaseModel {
         if (_data) {
             this.properties = _data["properties"];
             this.type = _data["type"] !== undefined ? _data["type"] : "Model";
-            this.version = _data["version"] !== undefined ? _data["version"] : "1.58.1";
+            this.version = _data["version"] !== undefined ? _data["version"] : "1.58.2";
             this.rooms = _data["rooms"];
             this.orphaned_faces = _data["orphaned_faces"];
             this.orphaned_shades = _data["orphaned_shades"];

@@ -1,7 +1,7 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
-import { GasEquipmentAbridged } from "./GasEquipmentAbridged";
 import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
+import { GasEquipmentAbridged } from "./GasEquipmentAbridged";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class _EquipmentBase extends IDdEnergyBaseModel {
@@ -60,13 +60,13 @@ export class _EquipmentBase extends IDdEnergyBaseModel {
     static override fromJS(data: any): _EquipmentBase {
         data = typeof data === 'object' ? data : {};
 
-        if (data["type"] === "GasEquipmentAbridged") {
-            let result = new GasEquipmentAbridged();
+        if (data["type"] === "ElectricEquipmentAbridged") {
+            let result = new ElectricEquipmentAbridged();
             result.init(data);
             return result;
         }
-        if (data["type"] === "ElectricEquipmentAbridged") {
-            let result = new ElectricEquipmentAbridged();
+        if (data["type"] === "GasEquipmentAbridged") {
+            let result = new GasEquipmentAbridged();
             result.init(data);
             return result;
         }
