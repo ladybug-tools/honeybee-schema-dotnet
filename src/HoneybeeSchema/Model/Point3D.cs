@@ -30,18 +30,18 @@ namespace HoneybeeSchema
     [Summary(@"A point object in 3D space.")]
     [Serializable]
     [DataContract(Name = "Point3D")]
-    public partial class Point3D : IEquatable<Point3D>, IValidatableObject
+    public partial class Point3D : OpenAPIGenBaseModel, IEquatable<Point3D>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Point3D" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected Point3D() 
-        { 
+        protected Point3D()
+        {
             // Set non-required readonly properties with defaultValue
             this.Type = "Point3D";
         }
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Point3D" /> class.
         /// </summary>
@@ -51,7 +51,7 @@ namespace HoneybeeSchema
         public Point3D
         (
            double x, double y, double z// Required parameters
-            // Optional parameters
+                                       // Optional parameters
         )// BaseClass
         {
             this.X = x;
@@ -72,7 +72,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Type")]
         [DataMember(Name = "type")]
-        public override string Type { get; protected set; }  = "Point3D";
+        public override string Type { get; protected set; } = "Point3D";
 
         /// <summary>
         /// Number for X coordinate.
@@ -80,21 +80,21 @@ namespace HoneybeeSchema
         /// <value>Number for X coordinate.</value>
         [Summary(@"Number for X coordinate.")]
         [DataMember(Name = "x", IsRequired = true)]
-        public double X { get; set; } 
+        public double X { get; set; }
         /// <summary>
         /// Number for Y coordinate.
         /// </summary>
         /// <value>Number for Y coordinate.</value>
         [Summary(@"Number for Y coordinate.")]
         [DataMember(Name = "y", IsRequired = true)]
-        public double Y { get; set; } 
+        public double Y { get; set; }
         /// <summary>
         /// Number for Z coordinate.
         /// </summary>
         /// <value>Number for Z coordinate.</value>
         [Summary(@"Number for Z coordinate.")]
         [DataMember(Name = "z", IsRequired = true)]
-        public double Z { get; set; } 
+        public double Z { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -113,7 +113,7 @@ namespace HoneybeeSchema
         {
             if (!detailed)
                 return this.ToString();
-            
+
             var sb = new StringBuilder();
             sb.Append("Point3D:\n");
             sb.Append("  X: ").Append(this.X).Append("\n");
@@ -122,7 +122,7 @@ namespace HoneybeeSchema
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             return sb.ToString();
         }
-  
+
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
@@ -153,7 +153,7 @@ namespace HoneybeeSchema
             return DuplicatePoint3D();
         }
 
-     
+
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
@@ -174,10 +174,10 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
-                    Extension.Equals(this.X, input.X) && 
-                    Extension.Equals(this.Y, input.Y) && 
-                    Extension.Equals(this.Z, input.Z) && 
+            return base.Equals(input) &&
+                    Extension.Equals(this.X, input.X) &&
+                    Extension.Equals(this.Y, input.Y) &&
+                    Extension.Equals(this.Z, input.Z) &&
                     Extension.Equals(this.Type, input.Type);
         }
 
@@ -210,12 +210,12 @@ namespace HoneybeeSchema
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
 
-            
+
             // Type (string) pattern
             Regex regexType = new Regex(@"^Point3D$", RegexOptions.CultureInvariant);
             if (this.Type != null && false == regexType.Match(this.Type).Success)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new [] { "Type" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Type, must match a pattern of " + regexType, new[] { "Type" });
             }
 
             yield break;
