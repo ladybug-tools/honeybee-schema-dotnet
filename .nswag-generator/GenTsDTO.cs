@@ -13,12 +13,12 @@ using Newtonsoft.Json.Linq;
 // using TemplateModels;
 using System.IO;
 using NJsonSchema.CodeGeneration.TypeScript;
-using TemplateModels;
 using Fluid;
+using TemplateModels.TypeScript;
 
 namespace SchemaGenerator;
 
-public class GenDTO
+public class GenTsDTO
 {
     static string _sdkName => Generator.sdkName;
     static string workingDir => Generator.workingDir;
@@ -415,12 +415,18 @@ public class GenDTO
 
         var parser = new FluidParser();
         var options = new TemplateOptions();
-        options.MemberAccessStrategy.Register<ClassTemplateModel>();
-        options.MemberAccessStrategy.Register<EnumTemplateModel>();
-        options.MemberAccessStrategy.Register<PropertyTemplateModel>();
-        options.MemberAccessStrategy.Register<EnumItemTemplateModel>();
-        options.MemberAccessStrategy.Register<IndexTemplateModel>();
-        //options.MemberAccessStrategy.Register<ParamTemplateModel>();
+        var tps = typeof(GenTsDTO).Assembly
+            .GetTypes()
+            .Where(_=>_.IsPublic)
+            .Where(t => t.Namespace.StartsWith("TemplateModels.Base") || t.Namespace.StartsWith("TemplateModels.TypeScript"))
+            .ToList();
+
+        foreach (var item in tps)
+        {
+            options.MemberAccessStrategy.Register(item);
+        }
+
+    
         options.Greedy = false;
 
         if (parser.TryParse(templateSource, out var template, out var error))

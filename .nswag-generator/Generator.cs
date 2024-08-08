@@ -28,7 +28,7 @@ internal class Generator
         var outputDir = System.IO.Path.Combine(rootDir, "Output");
         System.IO.Directory.CreateDirectory(outputDir);
 
-        GenDTO.Execute();
+        GenTsDTO.Execute();
 
     }
 

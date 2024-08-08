@@ -1,31 +1,16 @@
-﻿
+﻿using TemplateModels.Base;
 using NJsonSchema;
 using NJsonSchema.CodeGeneration;
 using NSwag;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
 
-namespace TemplateModels;
+namespace TemplateModels.TypeScript;
 
-public class ClassTemplateModel
+public class ClassTemplateModel : ClassTemplateModelBase
 {
-    public bool IsAbstract { get; set; }
-    public bool IsInterface { get; set; }
-    public string InterfaceName { get; set; }
-    public string ClassName { get; set; }
 
-    public string Inheritance { get; set; }
-    public JsonSchema InheritedSchema { get; set; }
-
-    public bool HasInheritance => !string.IsNullOrEmpty(Inheritance);
-    public bool HasDescription => !string.IsNullOrEmpty(Description);
-    public string Description { get; set; }
-    //public List<MethodTemplateModel> Methods { get; set; }
-    public List<string> SchemaTypes { get; set; }
     public List<ClassTemplateModel> DerivedClasses { get; set; }
 
     public bool HasProperties => Properties.Any();
@@ -34,34 +19,18 @@ public class ClassTemplateModel
     public bool HasTsImports => TsImports.Any();
     public List<string> TsValidatorImports { get; set; }
     public string TsValidatorImportsCode { get; set; }
-    public string Discriminator { get; set; }
-    public string BaseDiscriminator { get; set; } // type reference keyword: "type"
 
 
-    public ClassTemplateModel(OpenApiDocument doc, JsonSchema json)
+
+    public ClassTemplateModel(OpenApiDocument doc, JsonSchema json) : base(doc, json)
     {
-        Description = json.Description;
-        BaseDiscriminator = json.Discriminator;
-
-
-        //Methods = classType.GetMethods().Select(_ => new MethodTemplateModel(_, GetDoc(xmlDoc, _))).ToList();
-        //IsInterface = classType.IsInterface;
-
-        ClassName = json.Title;
-        Discriminator = ClassName;
-
-        //InterfaceName = name.StartsWith("I") ? name : $"I{name}";
-
-        //SchemaTypes = Methods.SelectMany(_=>_.SchemaTypes)?.Distinct()?.ToList();
 
         Properties = json.ActualProperties.Select(_ => new PropertyTemplateModel(_.Key, _.Value)).ToList();
 
         DerivedClasses = json.GetDerivedSchemas(doc).Select(_ => new ClassTemplateModel(doc, _.Key)).ToList();
-        InheritedSchema = json.InheritedSchema;
-        Inheritance = InheritedSchema?.Title;
+
 
         IsAbstract = DerivedClasses.Any() && InheritedSchema == null;
-
 
         TsImports = Properties.SelectMany(_ => _.TsImports).ToList();
 

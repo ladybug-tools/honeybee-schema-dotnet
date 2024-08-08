@@ -2,9 +2,9 @@ using NSwag;
 using NJsonSchema;
 using NJsonSchema.CodeGeneration;
 using SchemaGenerator;
-using TemplateModels;
+using TemplateModels.TypeScript;
 
-namespace Generator.Tests
+namespace Generator.Tests.TypeScript
 {
     public class ProjectInfomationTests
     {
@@ -17,12 +17,12 @@ namespace Generator.Tests
         {
 
             Console.WriteLine($"Current working dir: {workingDir}");
-            var docDic = System.IO.Path.Combine(rootDir, ".openapi-docs");
-            var jsonFile = System.IO.Path.Combine(docDic, "project-information_inheritance.json");
-         
-            var json = System.IO.File.ReadAllText( jsonFile );
+            var docDic = Path.Combine(rootDir, ".openapi-docs");
+            var jsonFile = Path.Combine(docDic, "project-information_inheritance.json");
+
+            var json = File.ReadAllText(jsonFile);
             doc = OpenApiDocument.FromJsonAsync(json).Result;
-           
+
         }
 
         [Test]
@@ -32,8 +32,8 @@ namespace Generator.Tests
             Assert.That(schemas, Is.Not.Count.EqualTo(0));
 
 
-            var names = schemas.Select(_=>_.Key).ToList();
-            var titles = schemas.Select(_=>_.Value.Title).ToList();
+            var names = schemas.Select(_ => _.Key).ToList();
+            var titles = schemas.Select(_ => _.Value.Title).ToList();
             CollectionAssert.AreEqual(names, titles);
         }
 
@@ -73,10 +73,10 @@ namespace Generator.Tests
             Assert.That(classModel.DerivedClasses.Count, Is.GreaterThan(5));
             //var prop = json.ActualProperties.FirstOrDefault();
 
-            var templateDir = System.IO.Path.Combine(rootDir, ".nswag-generator\\Templates\\TypeScript");
+            var templateDir = Path.Combine(rootDir, ".nswag-generator\\Templates\\TypeScript");
             var templateSource = File.ReadAllText(Path.Combine(templateDir, "Class2.liquid"), System.Text.Encoding.UTF8);
 
-            var code = SchemaGenerator.GenDTO.Gen(templateSource, classModel);
+            var code = GenTsDTO.Gen(templateSource, classModel);
 
             StringAssert.Contains("type!: String", code);
 

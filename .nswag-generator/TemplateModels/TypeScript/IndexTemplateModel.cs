@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TemplateModels;
+namespace TemplateModels.TypeScript;
 
 public class IndexTemplateModel
 {

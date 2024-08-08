@@ -1,48 +1,36 @@
 ﻿
+using TemplateModels.Base;
 using Newtonsoft.Json.Linq;
 using NJsonSchema;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TemplateModels;
+namespace TemplateModels.TypeScript;
 
-public class PropertyTemplateModel
+public class PropertyTemplateModel: PropertyTemplateModelBase
 {
-    public string PropertyName { get; set; }
-    public string Type { get; set; }
-    public bool IsReadOnly { get; set; }
-    public bool IsRequired { get; set; }
-    public bool HasDescription => !string.IsNullOrEmpty(Description);
-    public string Description { get; set; }
+  
+    
     public string ConvertToJavaScriptCode { get; set; } // for TS: property value to JS object
     public string ConvertToClassCode { get; set; } // for TS: JSON object to class property
 
-    public bool IsAnyOf { get; set; }
-    public List<JsonSchema> AnyOf { get; set; }
+
 
     public List<string> TsImports { get; set; } = new List<string>();
     public bool HasTsImports => TsImports.Any();
-    public object? Default {  get; set; }
-    public string DefaultCodeFormat { get; set; }
-    public bool HasDefault => Default != null;
+ 
+   
 
     public bool HasValidationDecorators => ValidationDecorators.Any();
     public List<string> ValidationDecorators { get; set; }
 
-    public PropertyTemplateModel(string name, JsonSchemaProperty json)
+    public PropertyTemplateModel(string name, JsonSchemaProperty json):base(name, json)
     {
         
-        PropertyName = name;
-        Default = json.Default;
+      
         DefaultCodeFormat = ConvertTsDefaultValue(json);
 
-        Description = json.Description;
-
-        AnyOf = json.AnyOf?.ToList();
-        IsAnyOf = (AnyOf?.Any()).GetValueOrDefault();
-        IsReadOnly = json.IsReadOnly;
-        IsRequired = json.IsRequired;
 
         // check types
         Type = GetTypeScriptType(json, AddTsImportTypes);
