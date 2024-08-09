@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NJsonSchema;
-using NJsonSchema.Generation;
-using NJsonSchema.Visitors;
-using NSwag;
-using NSwag.CodeGeneration;
 
 namespace SchemaGenerator;
 
@@ -28,7 +21,8 @@ internal class Generator
         var outputDir = System.IO.Path.Combine(rootDir, "Output");
         System.IO.Directory.CreateDirectory(outputDir);
 
-        GenTsDTO.Execute();
+        //GenTsDTO.Execute();
+        GenCsDTO.Execute();
 
     }
 

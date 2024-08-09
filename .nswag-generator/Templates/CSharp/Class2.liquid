@@ -1,0 +1,186 @@
+﻿/* 
+ * Honeybee Schema
+ *
+ * Contact: info@ladybug.tools
+ */
+
+extern alias LBTNewtonSoft;
+using System;
+using System.Linq;
+using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Runtime.Serialization;
+using LBTNewtonSoft::Newtonsoft.Json;
+using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+
+
+namespace HoneybeeSchema
+{
+	{%- if HasDescription -%}
+    /// <summary>
+    /// {{ Description }}
+    /// </summary>
+	{%- endif -%}
+    [Summary(@"{{ Description }}")]
+    [Serializable]
+    [DataContract(Name = "{{ ClassName }}")]
+    public partial class {{ ClassName }} : {{ Inheritance }}, IEquatable<{{ ClassName }}>, IValidatableObject
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="{{ ClassName }}" /> class.
+        /// </summary>
+	{%-  for property in Properties -%}
+        {%- if property.IsReadOnly == false -%}
+        /// <param name="{{ property.CsParameterName }}">{{ property.Description }}</param>
+        {%- endif -%}
+    {%- endfor -%}{%- assign skipComma = true -%}
+        public {{ ClassName }}
+        (
+           {% for property in Properties -%}{% if property.IsReadOnly == false %}{% if skipComma %}{% assign skipComma = false %}{% else %}, {% endif %}{{ property.ConstructionParameterCode }}{% endif %}{%- endfor %}
+        ){%  if HasInheritance %} : base()// BaseClass{% endif %}
+        {
+		{%-  for property in Properties -%}
+		    {%- if property.IsReadOnly == false -%}
+            this.{{ property.CsPropertyName }} = {{ property.CsParameterName }};
+		    {%- endif -%}
+		{%- endfor -%}
+
+            // Set non-required readonly properties with defaultValue
+		{%-  for property in Properties -%}
+		    {%- if property.IsReadOnly -%}
+            this.{{ property.CsPropertyName }} = {{ property.DefaultCodeFormat }};
+		    {%- endif -%}
+		{%- endfor -%}
+
+            // check if object is valid, only check for inherited class
+            if (this.GetType() == typeof({{ ClassName }}))
+                this.IsValid(throwException: true);
+        }
+
+	
+	{%  for property in Properties %}
+        /// <summary>
+        /// {{ property.Description }}
+        /// </summary>
+        [Summary(@"{{ property.Description }}")]
+        [DataMember(Name = "{{ property.PropertyName }}")]
+        public {{ property.Type }} {{ property.CsPropertyName }} { get;{% if property.IsReadOnly %} protected{% endif %} set; } {% if property.HasDefault %} = {{ property.DefaultCodeFormat }};{% endif -%}
+	{%- endfor -%}
+
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public override string ToString()
+        {
+            return "{{ ClassName }}";
+        }
+
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+        public override string ToString(bool detailed)
+        {
+            if (!detailed)
+                return this.ToString();
+            
+            var sb = new StringBuilder();
+            sb.Append("{{ ClassName }}:\n");
+            {%-  for property in Properties -%}
+            sb.Append("  {{ property.CsPropertyName }}: ").Append(this.{{ property.CsPropertyName }}).Append("\n");
+            {%- endfor -%}
+            return sb.ToString();
+        }
+
+
+          
+        /// <summary>
+        /// Returns the object from JSON string
+        /// </summary>
+        /// <returns>{{ ClassName }} object</returns>
+        public static {{ ClassName }} FromJson(string json)
+        {
+            var obj = JsonConvert.DeserializeObject<{{ ClassName }}>(json, JsonSetting.AnyOfConvertSetting);
+            if (obj == null)
+                return null;
+            return obj.Type.ToLower() == obj.GetType().Name.ToLower() && obj.IsValid(throwException: true) ? obj : null;
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>{{ ClassName }} object</returns>
+        public virtual {{ ClassName }} Duplicate{{ ClassName }}()
+        {
+            return FromJson(this.ToJson());
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel Duplicate()
+        {
+            return Duplicate{{ ClassName }}();
+        }
+
+        /// <summary>
+        /// Creates a new instance with the same properties.
+        /// </summary>
+        /// <returns>OpenAPIGenBaseModel</returns>
+        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        {
+            return Duplicate{{ ClassName }}();
+        }
+     
+        /// <summary>
+        /// Returns true if objects are equal
+        /// </summary>
+        /// <param name="input">Object to be compared</param>
+        /// <returns>Boolean</returns>
+        public override bool Equals(object input)
+        {
+            input = input is AnyOf anyOf ? anyOf.Obj : input;
+            return this.Equals(input as {{ ClassName }});
+        }
+
+        /// <summary>
+        /// Returns true if {{ ClassName }} instances are equal
+        /// </summary>
+        /// <param name="input">Instance of {{ ClassName }} to be compared</param>
+        /// <returns>Boolean</returns>
+        public bool Equals({{ ClassName }} input)
+        {
+            {%- assign skipComma = true -%}
+            if (input == null)
+                return false;
+            return base.Equals(input){% for property in Properties %} && 
+                    Extension.Equals(this.{{ property.CsPropertyName }}, input.{{ property.CsPropertyName }}) {%- endfor -%};
+        }
+
+        /// <summary>
+        /// Gets the hash code
+        /// </summary>
+        /// <returns>Hash code</returns>
+        public override int GetHashCode()
+        {
+            unchecked // Overflow is fine, just wrap
+            {
+                int hashCode = base.GetHashCode();
+                {%-  for property in Properties -%}
+                if (this.{{ property.CsPropertyName }} != null)
+                    hashCode = hashCode * 59 + this.{{ property.CsPropertyName }}.GetHashCode();
+                {%- endfor -%}
+                return hashCode;
+            }
+        }
+    }
+}

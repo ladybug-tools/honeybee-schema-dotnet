@@ -28,22 +28,13 @@
 {%- template Class.Annotations -%}
 {{ TypeAccessModifier }} {% if IsAbstract %}abstract {% endif %}partial {% if GenerateNativeRecords %}record{% else %}class{% endif %} {{ClassName}} {%- template Class.Inheritance %}
 {
-{%- if IsTuple -%}
-    public {{ ClassName }}({%- for tupleType in TupleTypes %}{{ tupleType }} item{{ forloop.index }}{%- if forloop.last == false %}, {% endif %}{% endfor %}) : base({%- for tupleType in TupleTypes %}item{{ forloop.index }}{%- if forloop.last == false %}, {% endif %}{% endfor %})
-    {
-    }
 
-{%- endif -%}
-{%- if RenderInpc or RenderPrism -%}
+
 {%- for property in Properties -%}
     private {{ property.Type }} {{ property.FieldName }}{%- if property.HasDefaultValue %} = {{ property.DefaultValue }}{% elsif GenerateNullableReferenceTypes %} = default!{%- endif %};
 {%- endfor -%}
 
-{%- endif -%}
     {%- template Class.Constructor -%}
-{%- if RenderRecord -%}
-    {% template Class.Constructor.Record -%}
-{%- endif -%}
 
 {% template Class.Property %}
 
