@@ -9,13 +9,16 @@ using System.Linq;
 namespace HoneybeeSchema
 {
 
-    public static class Extension 
-	{
+    public static class Extension
+    {
         public static bool AllEquals(IList x, IList y)
         {
+            if (x == y)
+                return true;
+
             if (x != null && y != null)
             {
-                if (x.Count <=0 || y.Count <= 0)
+                if (x.Count <= 0 || y.Count <= 0)
                     return x.Count == y.Count;
 
                 //Test if it is points List<List<double>> with the length of 3
@@ -23,7 +26,7 @@ namespace HoneybeeSchema
                 {
                     var px = x.Cast<double>().ToList();
                     var py = y.Cast<double>().ToList();
-                    var dis = CalDistanceSquare(px, py); 
+                    var dis = CalDistanceSquare(px, py);
                     var tol = 0.000001;
                     return dis <= tol;
                 }
@@ -81,29 +84,29 @@ namespace HoneybeeSchema
             return disSquare;
 
         }
-		public static Energy.ILoad Duplicate(this Energy.ILoad load)
-		{
-			return load.Duplicate() as Energy.ILoad;
-		}
-		public static Energy.IMaterial Duplicate(this Energy.IMaterial material)
-		{
-			return material.Duplicate() as Energy.IMaterial;
-		}
+        public static Energy.ILoad Duplicate(this Energy.ILoad load)
+        {
+            return load.Duplicate() as Energy.ILoad;
+        }
+        public static Energy.IMaterial Duplicate(this Energy.IMaterial material)
+        {
+            return material.Duplicate() as Energy.IMaterial;
+        }
 
-		public static Energy.IConstruction Duplicate(this Energy.IConstruction construction)
-		{
-			return construction.Duplicate() as Energy.IConstruction;
-		}
+        public static Energy.IConstruction Duplicate(this Energy.IConstruction construction)
+        {
+            return construction.Duplicate() as Energy.IConstruction;
+        }
 
-		public static Energy.IConstructionset Duplicate(this Energy.IConstructionset constructionSet)
-		{
-			return constructionSet.Duplicate() as Energy.IConstructionset;
-		}
+        public static Energy.IConstructionset Duplicate(this Energy.IConstructionset constructionSet)
+        {
+            return constructionSet.Duplicate() as Energy.IConstructionset;
+        }
 
         public static void AddConstructionSet(this ModelEnergyProperties modelEnergyCollection, IBuildingConstructionset constructionset)
         {
             modelEnergyCollection.ConstructionSets = modelEnergyCollection.ConstructionSets ?? new List<AnyOf<ConstructionSetAbridged, ConstructionSet>>();
-             
+
             var exist = modelEnergyCollection.ConstructionSets.OfType<IIDdBase>().Any(_ => _.Identifier == constructionset.Identifier);
             if (exist)
                 return;
@@ -254,7 +257,7 @@ namespace HoneybeeSchema
                     throw new ArgumentException($"{havc.GetType()}({havc.Identifier}) is not added to model");
             }
         }
-     
+
         public static void AddHVACs(this ModelEnergyProperties modelEnergyCollection, IEnumerable<IHvac> havcs)
         {
             if (havcs == null) return;
@@ -412,7 +415,7 @@ namespace HoneybeeSchema
             }
         }
 
-        public static void AddScheduleTypeLimit(this ModelEnergyProperties modelEnergyCollection,  ScheduleTypeLimit scheduleTypeLimit)
+        public static void AddScheduleTypeLimit(this ModelEnergyProperties modelEnergyCollection, ScheduleTypeLimit scheduleTypeLimit)
         {
             modelEnergyCollection.ScheduleTypeLimits = modelEnergyCollection.ScheduleTypeLimits ?? new List<ScheduleTypeLimit>();
             var exist = modelEnergyCollection.ScheduleTypeLimits.Any(_ => _.Identifier == scheduleTypeLimit.Identifier);
