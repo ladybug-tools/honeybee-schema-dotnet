@@ -37,9 +37,18 @@ namespace Generator.Tests.CSharp
             Assert.That(classModel.HasDerivedClasses, Is.True);
             //var prop = json.ActualProperties.FirstOrDefault();
 
+        }
+
+        [Test]
+        public void TestInheritedProperty()
+        {
+            var json = doc.Components.Schemas["Autocalculate"];
+
+            var classModel = new ClassTemplateModel(doc, json);
+            var parentProp = classModel.Properties.First();
+            Assert.That(parentProp.IsInherited, Is.True);
 
         }
 
-     
     }
 }

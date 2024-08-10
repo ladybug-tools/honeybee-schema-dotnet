@@ -26,6 +26,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
     public bool HasMaximum => Maximum.HasValue;
     public decimal? Minimum { get; set; }
     public bool HasMinimum => Minimum.HasValue;
+    public bool IsInherited { get; set; }
 
     public PropertyTemplateModel(string name, JsonSchemaProperty json):base(name, json)
     {
@@ -52,6 +53,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
         Maximum = json.Maximum;
         Minimum = json.Minimum;
 
+        //IsInherited = json.AllInheritedSchemas
     }
 
 
