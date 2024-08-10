@@ -69,7 +69,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
         {
             var arrayItem = json.Item;
             var itemType = GetTypeString(arrayItem);
-            type = $"{ConvertToType(itemType)} []";
+            type = $"List<{ConvertToType(itemType)}>";
         }
         else
         {
@@ -130,7 +130,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
         {"String", "string" },
         {"Integer", "int" },
         {"Number", "double" },
-        {"Boolean", "boolean" }
+        {"Boolean", "bool" }
     };
 
     
