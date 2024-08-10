@@ -393,7 +393,7 @@ public class GenCsDTO: GenDTO
     {
         var templateSource = File.ReadAllText(Path.Combine(templateDir, "Class2.liquid"), System.Text.Encoding.UTF8);
         var code = Gen(templateSource, model);
-        var file = System.IO.Path.Combine(outputDir, $"{model.ClassName}{fileExt}");
+        var file = System.IO.Path.Combine(outputDir, $"{model.CsClassName}{fileExt}");
         System.IO.File.WriteAllText(file, code, System.Text.Encoding.UTF8);
         return file;
     }
