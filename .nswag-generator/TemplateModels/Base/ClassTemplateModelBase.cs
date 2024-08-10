@@ -7,9 +7,9 @@ public class ClassTemplateModelBase
 {
     public bool IsAbstract { get; set; }
     public string ClassName { get; set; }
-    public string Inheritance { get; set; }
+    public string Inheritance { get; set; } // parent
     public JsonSchema InheritedSchema { get; set; }
-    public bool HasInheritance => !string.IsNullOrEmpty(Inheritance);
+    public bool HasInheritance => !string.IsNullOrEmpty(Inheritance); // has parent
     public bool HasDescription => !string.IsNullOrEmpty(Description);
     public string Description { get; set; }
     public string Discriminator { get; set; }

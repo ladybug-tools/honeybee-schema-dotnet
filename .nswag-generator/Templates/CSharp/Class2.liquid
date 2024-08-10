@@ -29,7 +29,7 @@ namespace HoneybeeSchema
     [Summary(@"{{ Description }}")]
     [Serializable]
     [DataContract(Name = "{{ ClassName }}")]
-    public partial class {{ CsClassName }} : {{ Inheritance }}, IEquatable<{{ CsClassName }}>, IValidatableObject
+    public partial class {{ CsClassName }} :{% if HasInheritance %} {{ Inheritance }},{% endif %} IEquatable<{{ CsClassName }}>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="{{ CsClassName }}" /> class.
@@ -174,7 +174,7 @@ namespace HoneybeeSchema
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = base.GetHashCode();
+                int hashCode = {% if HasInheritance %}base.GetHashCode(){% else %}41{% endif %};
                 {%-  for property in Properties -%}
                 if (this.{{ property.CsPropertyName }} != null)
                     hashCode = hashCode * 59 + this.{{ property.CsPropertyName }}.GetHashCode();
@@ -183,6 +183,25 @@ namespace HoneybeeSchema
             }
         }
 
+    {%- if HasInheritance == false -%}
+        /// <summary>
+        /// To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            return this.BaseValidate(validationContext);
+        }
+
+        /// <summary>
+        /// To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        protected IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> BaseValidate(ValidationContext validationContext)
+        {
+    {%- else -%}
         /// <summary>
         /// To validate all properties of the instance
         /// </summary>
@@ -191,6 +210,7 @@ namespace HoneybeeSchema
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             foreach(var x in base.BaseValidate(validationContext)) yield return x;
+    {%- endif -%}
             {%- for property in Properties -%}
             {%- if property.HasMaximum -%}
             // {{ property.CsPropertyName }} ({{ property.Type }}) maximum

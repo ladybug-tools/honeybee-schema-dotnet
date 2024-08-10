@@ -12,8 +12,8 @@ public class ClassTemplateModel : ClassTemplateModelBase
 {
     public string CsClassName { get; set; }
     
-    public List<ClassTemplateModel> DerivedClasses { get; set; }
-
+    public List<ClassTemplateModel> DerivedClasses { get; set; } // children
+    public bool HasDerivedClasses => DerivedClasses.Any(); // has children
     public bool HasProperties => Properties.Any();
     public List<PropertyTemplateModel> Properties { get; set; }
     //public List<string> TsImports { get; set; } = new List<string>();
