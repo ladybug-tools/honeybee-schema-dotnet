@@ -31,6 +31,21 @@ namespace HoneybeeSchema
     [DataContract(Name = "{{ ClassName }}")]
     public partial class {{ CsClassName }} :{% if HasInheritance %} {{ Inheritance }},{% endif %} IEquatable<{{ CsClassName }}>, IValidatableObject
     {
+    {%- if hasOnlyReadOnly == false -%}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="{{CsClassName}}" /> class.
+        /// </summary>
+        [JsonConstructorAttribute]
+        protected {{CsClassName}}() 
+        { 
+            // Set non-required readonly properties with defaultValue
+        {%-  for property in Properties -%}
+            {%- if property.IsReadOnly -%}
+            this.{{ property.CsPropertyName }} = {{ property.DefaultCodeFormat }};
+            {%- endif -%}
+        {%- endfor -%}
+        }
+    {%- endif -%}
         /// <summary>
         /// Initializes a new instance of the <see cref="{{ CsClassName }}" /> class.
         /// </summary>
@@ -38,7 +53,11 @@ namespace HoneybeeSchema
         {%- if property.IsReadOnly == false -%}
         /// <param name="{{ property.CsParameterName }}">{{ property.Description }}</param>
         {%- endif -%}
-    {%- endfor -%}{%- assign skipComma = true -%}
+    {%- endfor -%}
+    {%- if hasOnlyReadOnly -%}
+        [JsonConstructorAttribute]
+    {%- endif -%}
+    {%- assign skipComma = true -%}
         public {{ CsClassName }}
         (
            {% for property in Properties -%}{% if property.IsReadOnly == false %}{% if skipComma %}{% assign skipComma = false %}{% else %}, {% endif %}{{ property.ConstructionParameterCode }}{% endif %}{%- endfor %}

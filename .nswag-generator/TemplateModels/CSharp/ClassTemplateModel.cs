@@ -20,7 +20,7 @@ public class ClassTemplateModel : ClassTemplateModelBase
     //public bool HasTsImports => TsImports.Any();
     //public List<string> TsValidatorImports { get; set; }
     //public string TsValidatorImportsCode { get; set; }
-
+    public bool hasOnlyReadOnly { get; set; }
 
 
     public ClassTemplateModel(OpenApiDocument doc, JsonSchema json) : base(doc, json)
@@ -38,8 +38,9 @@ public class ClassTemplateModel : ClassTemplateModelBase
 
         // add derived class references
         var dcs = DerivedClasses.Select(_ => _.ClassName);
- 
-    
+        hasOnlyReadOnly = Properties.All(_=>_.IsReadOnly);
+
+
     }
 
     public static string ValidationDecoratorToImport(string decorator)
