@@ -12,7 +12,7 @@ public class EnumTemplateModelBase
     public List<EnumItemTemplateModelBase> EnumItems { get; set; }
     public EnumTemplateModelBase(JsonSchema json)
     {
-        Description = json.Description;
+        Description = json.Description?.Replace("\n", "\\n");
         EnumName = json.Title;
         EnumItems = json.Enumeration.Select(_ => _.ToString()).Select((_, i) => new EnumItemTemplateModelBase(i, _)).ToList();
 

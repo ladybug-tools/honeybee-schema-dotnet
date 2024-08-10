@@ -177,5 +177,18 @@ namespace Generator.Tests.TypeScript
             Assert.That(timezoneP.DefaultCodeFormat, Is.EqualTo("new Autocalculate();"));
 
         }
+
+        [Test]
+        public void TestAutocalculateDescription()
+        {
+            var json = doc.Components.Schemas["Autocalculate"];
+            Assert.That(json, Is.Not.Null);
+
+            StringAssert.Contains("\n",json.Description);
+
+            var model = new ClassTemplateModel(doc, json);
+            StringAssert.Contains("\\n", model.Description);
+
+        }
     }
 }
