@@ -20,6 +20,12 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
     
     public bool HasValidationDecorators => ValidationDecorators.Any();
     public List<string> ValidationDecorators { get; set; }
+    public string Pattern { get; set; }
+    public bool HasPattern => !string.IsNullOrEmpty(Pattern);
+    public decimal? Maximum { get; set; }
+    public bool HasMaximum => Maximum.HasValue;
+    public decimal? Minimum { get; set; }
+    public bool HasMinimum => Minimum.HasValue;
 
     public PropertyTemplateModel(string name, JsonSchemaProperty json):base(name, json)
     {
@@ -42,14 +48,9 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
             ConstructionParameterCode = $"{ConstructionParameterCode} = {optionalValue}";
         }
 
-
-
-        //ConvertToJavaScriptCode = $"data[\"{PropertyName}\"] = this.{PropertyName};";
-        //ConvertToClassCode = Default == null ? $"this.{PropertyName} = _data[\"{PropertyName}\"];" : $"this.{PropertyName} = _data[\"{PropertyName}\"] !== undefined ? _data[\"{PropertyName}\"] : {DefaultCodeFormat};";
-
-        //validation decorators
-        //ValidationDecorators = GetValidationDecorators(json);
-
+        Pattern = json.Pattern;
+        Maximum = json.Maximum;
+        Minimum = json.Minimum;
 
     }
 

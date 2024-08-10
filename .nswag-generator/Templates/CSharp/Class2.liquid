@@ -182,5 +182,40 @@ namespace HoneybeeSchema
                 return hashCode;
             }
         }
+
+        /// <summary>
+        /// To validate all properties of the instance
+        /// </summary>
+        /// <param name="validationContext">Validation context</param>
+        /// <returns>Validation Result</returns>
+        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            foreach(var x in base.BaseValidate(validationContext)) yield return x;
+            {%- for property in Properties -%}
+            {%- if property.HasMaximum -%}
+            // {{ property.CsPropertyName }} ({{ property.Type }}) maximum
+            if(this.{{ property.CsPropertyName }} > ({{ property.Type }}){{ property.Maximum }})
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for {{ property.CsPropertyName }}, must be a value less than or equal to {{ property.Maximum }}.", new [] { "{{ property.CsPropertyName }}" });
+            }
+            {%- endif -%}
+            {%- if property.HasMinimum -%}
+            // {{ property.CsPropertyName }} ({{ property.Type }}) minimum
+            if(this.{{ property.CsPropertyName }} < ({{ property.Type }}){{ property.Minimum }})
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for {{ property.CsPropertyName }}, must be a value greater than or equal to {{ property.Minimum }}.", new [] { "{{ property.CsPropertyName }}" });
+            }
+            {%- endif -%}
+            {%- if property.HasPattern -%}
+            // {{ property.CsPropertyName }} ({{ property.Type }}) pattern
+            Regex regexType = new Regex(@"{{ property.Pattern }}", RegexOptions.CultureInvariant);
+            if (this.{{ property.CsPropertyName }} != null && false == regexType.Match(this.{{ property.CsPropertyName }}).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for {{ property.CsPropertyName }}, must match a pattern of " + regexType, new [] { "{{ property.CsPropertyName }}" });
+            }
+            {%- endif -%}
+            {%- endfor -%}
+            yield break;
+        }
     }
 }
