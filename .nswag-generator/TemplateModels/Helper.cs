@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -167,7 +168,61 @@ namespace TemplateModels
             return typeName;
         }
 
+        public static string CleanName(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
 
+            // Remove invalid characters
+            string cleaned = Regex.Replace(input, @"[^a-zA-Z0-9]", "");
+
+            // Ensure the name starts with a letter or underscore
+            if (!Regex.IsMatch(cleaned, @"^[a-zA-Z]"))
+            {
+                cleaned = "_" + cleaned;
+            }
+
+            return cleaned;
+        }
+
+        public static string ToPascalCase(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return input;
+            }
+
+            var words = input.Split(new[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < words.Length; i++)
+            {
+                words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
+            }
+
+            return string.Join(string.Empty, words);
+        }
+
+        public static string ToCamelCase(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return input;
+            }
+
+            var words = input.Split(new[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (i == 0)
+                {
+                    words[i] = words[i].ToLower();
+                }
+                else
+                {
+                    words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
+                }
+            }
+
+            return string.Join(string.Empty, words);
+        }
 
 
     }

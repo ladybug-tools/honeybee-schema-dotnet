@@ -32,8 +32,8 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
         // check types
         Type = GetTypeString(json);
 
-        CsParameterName = ToCamelCase(PropertyName);
-        CsPropertyName = ToPascalCase(PropertyName);
+        CsParameterName = Helper.ToCamelCase(PropertyName);
+        CsPropertyName = Helper.ToPascalCase(PropertyName);
         DefaultCodeFormat = ConvertDefaultValue(json);
 
         Description = String.IsNullOrEmpty(Description)? CsPropertyName : Description;
@@ -54,63 +54,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
 
     }
 
-    public static string CleanName(string input)
-    {
-        if (string.IsNullOrEmpty(input))
-        {
-            throw new ArgumentException("Input cannot be null or empty", nameof(input));
-        }
 
-        // Remove invalid characters
-        string cleaned = Regex.Replace(input, @"[^a-zA-Z0-9]", "");
-
-        // Ensure the name starts with a letter or underscore
-        if (!Regex.IsMatch(cleaned, @"^[a-zA-Z]"))
-        {
-            cleaned = "_" + cleaned;
-        }
-
-        return cleaned;
-    }
-
-    private static string ToPascalCase(string input)
-    {
-        if (string.IsNullOrEmpty(input))
-        {
-            return input;
-        }
-
-        var words = input.Split(new[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
-        for (int i = 0; i < words.Length; i++)
-        {
-            words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
-        }
-
-        return string.Join(string.Empty, words);
-    }
-
-    private static string ToCamelCase(string input)
-    {
-        if (string.IsNullOrEmpty(input))
-        {
-            return input;
-        }
-
-        var words = input.Split(new[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
-        for (int i = 0; i < words.Length; i++)
-        {
-            if (i == 0)
-            {
-                words[i] = words[i].ToLower();
-            }
-            else
-            {
-                words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
-            }
-        }
-
-        return string.Join(string.Empty, words);
-    }
 
     public static string GetTypeString(JsonSchema json)
     {

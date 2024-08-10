@@ -10,7 +10,8 @@ namespace TemplateModels.CSharp;
 
 public class ClassTemplateModel : ClassTemplateModelBase
 {
-
+    public string CsClassName { get; set; }
+    
     public List<ClassTemplateModel> DerivedClasses { get; set; }
 
     public bool HasProperties => Properties.Any();
@@ -31,7 +32,8 @@ public class ClassTemplateModel : ClassTemplateModelBase
 
 
         IsAbstract = DerivedClasses.Any() && InheritedSchema == null;
-
+        CsClassName = Helper.CleanName(ClassName);
+        Inheritance = Helper.CleanName(Inheritance);
 
 
         // add derived class references

@@ -29,17 +29,17 @@ namespace HoneybeeSchema
     [Summary(@"{{ Description }}")]
     [Serializable]
     [DataContract(Name = "{{ ClassName }}")]
-    public partial class {{ ClassName }} : {{ Inheritance }}, IEquatable<{{ ClassName }}>, IValidatableObject
+    public partial class {{ CsClassName }} : {{ Inheritance }}, IEquatable<{{ CsClassName }}>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="{{ ClassName }}" /> class.
+        /// Initializes a new instance of the <see cref="{{ CsClassName }}" /> class.
         /// </summary>
 	{%-  for property in Properties -%}
         {%- if property.IsReadOnly == false -%}
         /// <param name="{{ property.CsParameterName }}">{{ property.Description }}</param>
         {%- endif -%}
     {%- endfor -%}{%- assign skipComma = true -%}
-        public {{ ClassName }}
+        public {{ CsClassName }}
         (
            {% for property in Properties -%}{% if property.IsReadOnly == false %}{% if skipComma %}{% assign skipComma = false %}{% else %}, {% endif %}{{ property.ConstructionParameterCode }}{% endif %}{%- endfor %}
         ){%  if HasInheritance %} : base()// BaseClass{% endif %}
@@ -58,7 +58,7 @@ namespace HoneybeeSchema
 		{%- endfor -%}
 
             // check if object is valid, only check for inherited class
-            if (this.GetType() == typeof({{ ClassName }}))
+            if (this.GetType() == typeof({{ CsClassName }}))
                 this.IsValid(throwException: true);
         }
 
@@ -79,7 +79,7 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            return "{{ ClassName }}";
+            return "{{ CsClassName }}";
         }
 
 
@@ -93,7 +93,7 @@ namespace HoneybeeSchema
                 return this.ToString();
             
             var sb = new StringBuilder();
-            sb.Append("{{ ClassName }}:\n");
+            sb.Append("{{ CsClassName }}:\n");
             {%-  for property in Properties -%}
             sb.Append("  {{ property.CsPropertyName }}: ").Append(this.{{ property.CsPropertyName }}).Append("\n");
             {%- endfor -%}
@@ -105,10 +105,10 @@ namespace HoneybeeSchema
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>{{ ClassName }} object</returns>
-        public static {{ ClassName }} FromJson(string json)
+        /// <returns>{{ CsClassName }} object</returns>
+        public static {{ CsClassName }} FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<{{ ClassName }}>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<{{ CsClassName }}>(json, JsonSetting.AnyOfConvertSetting);
             if (obj == null)
                 return null;
             return obj.Type.ToLower() == obj.GetType().Name.ToLower() && obj.IsValid(throwException: true) ? obj : null;
@@ -117,8 +117,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>{{ ClassName }} object</returns>
-        public virtual {{ ClassName }} Duplicate{{ ClassName }}()
+        /// <returns>{{ CsClassName }} object</returns>
+        public virtual {{ CsClassName }} Duplicate{{ CsClassName }}()
         {
             return FromJson(this.ToJson());
         }
@@ -129,7 +129,7 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel Duplicate()
         {
-            return Duplicate{{ ClassName }}();
+            return Duplicate{{ CsClassName }}();
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace HoneybeeSchema
         /// <returns>OpenAPIGenBaseModel</returns>
         public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
         {
-            return Duplicate{{ ClassName }}();
+            return Duplicate{{ CsClassName }}();
         }
      
         /// <summary>
@@ -149,15 +149,15 @@ namespace HoneybeeSchema
         public override bool Equals(object input)
         {
             input = input is AnyOf anyOf ? anyOf.Obj : input;
-            return this.Equals(input as {{ ClassName }});
+            return this.Equals(input as {{ CsClassName }});
         }
 
         /// <summary>
-        /// Returns true if {{ ClassName }} instances are equal
+        /// Returns true if {{ CsClassName }} instances are equal
         /// </summary>
-        /// <param name="input">Instance of {{ ClassName }} to be compared</param>
+        /// <param name="input">Instance of {{ CsClassName }} to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals({{ ClassName }} input)
+        public bool Equals({{ CsClassName }} input)
         {
             {%- assign skipComma = true -%}
             if (input == null)
