@@ -27,6 +27,8 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
     public decimal? Minimum { get; set; }
     public bool HasMinimum => Minimum.HasValue;
     public bool IsInherited { get; set; }
+    public bool IsValueType { get; set; }
+    public bool IsEnumType { get; set; }
 
     public PropertyTemplateModel(string name, JsonSchemaProperty json):base(name, json)
     {
@@ -54,7 +56,8 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
         Maximum = json.Maximum;
         Minimum = json.Minimum;
 
-        //IsInherited = json.AllInheritedSchemas
+        IsEnumType = json.ActualSchema.IsEnumeration;
+        IsValueType = CsValueType.Contains(Type) || IsEnumType;
     }
 
 
@@ -134,6 +137,11 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
         {"Integer", "int" },
         {"Number", "double" },
         {"Boolean", "bool" }
+    };
+
+    public static List<string> CsValueType = new List<string>
+    {
+        "int", "double","bool"
     };
 
     

@@ -40,9 +40,9 @@ namespace HoneybeeSchema
         { 
             // Set non-required readonly properties with defaultValue
         {%-  for property in Properties -%}
-            {%- if property.IsReadOnly -%}
+		    {%- if property.IsReadOnly -%}{%- if property.HasDefault -%}
             this.{{ property.CsPropertyName }} = {{ property.DefaultCodeFormat }};
-            {%- endif -%}
+            {%- endif -%}{%- endif -%}
         {%- endfor -%}
         }
     {%- endif -%}
@@ -64,16 +64,20 @@ namespace HoneybeeSchema
         ){%  if HasInheritance %} : base({% assign skipComma = true %}{% for property in ParentProperties -%}{% if property.IsReadOnly == false %}{% if skipComma %}{% assign skipComma = false %}{% else %}, {% endif %}{{ property.CsParameterName }}: {{ property.CsParameterName }}{% endif %}{%- endfor %}){% endif %}
         {
 		{%-  for property in Properties -%}
-		    {%- if property.IsReadOnly == false -%}
+        {%- if property.IsReadOnly == false -%}
+            {%- if property.IsValueType -%}
             this.{{ property.CsPropertyName }} = {{ property.CsParameterName }};
-		    {%- endif -%}
+            {%- else -%}
+            this.{{ property.CsPropertyName }} = {{ property.CsParameterName }}{% if property.HasDefault %} ?? {{ property.DefaultCodeFormat }}{% elsif property.IsRequired %} ?? throw new ArgumentNullException("{{ property.CsParameterName }} is a required property for {{ CsClassName }} and cannot be null"){%- endif -%};
+            {%- endif -%}
+        {%- endif -%}
 		{%- endfor -%}
 
             // Set non-required readonly properties with defaultValue
 		{%-  for property in Properties -%}
-		    {%- if property.IsReadOnly -%}
+		    {%- if property.IsReadOnly and property.IsRequired == false and property.HasDefault -%}
             this.{{ property.CsPropertyName }} = {{ property.DefaultCodeFormat }};
-		    {%- endif -%}
+            {%- endif -%}
 		{%- endfor -%}
 
             // check if object is valid, only check for inherited class
@@ -88,7 +92,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"{{ property.Description }}")]
         [DataMember(Name = "{{ property.PropertyName }}")]
-        public{% if property.IsInherited %} override{% else %}{% if HasInheritance == false %} virtual{% endif %}{% endif %} {{ property.Type }} {{ property.CsPropertyName }} { get;{% if property.IsReadOnly %} protected{% endif %} set; } {% if property.HasDefault %} = {{ property.DefaultCodeFormat }};{% endif -%}
+        public{% if property.IsInherited %} override{% else %}{% if HasInheritance == false %} virtual{% endif %}{% endif %} {{ property.Type }} {{ property.CsPropertyName }} { get;{% if property.IsReadOnly %} protected{% endif %} set; }{% if property.HasDefault %} = {{ property.DefaultCodeFormat }};{% endif -%}
 	{%- endfor -%}
 
 
@@ -207,7 +211,7 @@ namespace HoneybeeSchema
             }
         }
 
-        
+
     {%- if HasInheritance == false -%}
         /// <summary>
         /// To validate all properties of the instance
