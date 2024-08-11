@@ -29,7 +29,10 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
     public bool IsInherited { get; set; }
     public bool IsValueType { get; set; }
     public bool IsEnumType { get; set; }
-
+    public int? MaxLength { get; set; }
+    public bool HasMaxLength => MaxLength.HasValue;
+    public int? MinLength { get; set; }
+    public bool HasMinLength => MinLength.HasValue;
     public PropertyTemplateModel(string name, JsonSchemaProperty json):base(name, json)
     {
         // check types
@@ -55,6 +58,8 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
         Pattern = json.Pattern;
         Maximum = json.Maximum;
         Minimum = json.Minimum;
+        MaxLength = json.MaxLength;
+        MinLength = json.MinLength;
 
         IsEnumType = json.ActualSchema.IsEnumeration;
         IsValueType = CsValueType.Contains(Type) || IsEnumType;
