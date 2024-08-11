@@ -88,7 +88,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"{{ property.Description }}")]
         [DataMember(Name = "{{ property.PropertyName }}")]
-        public{% if property.IsInherited %} override{% endif %} {{ property.Type }} {{ property.CsPropertyName }} { get;{% if property.IsReadOnly %} protected{% endif %} set; } {% if property.HasDefault %} = {{ property.DefaultCodeFormat }};{% endif -%}
+        public{% if property.IsInherited %} override{% else %}{% if HasInheritance == false %} virtual{% endif %}{% endif %} {{ property.Type }} {{ property.CsPropertyName }} { get;{% if property.IsReadOnly %} protected{% endif %} set; } {% if property.HasDefault %} = {{ property.DefaultCodeFormat }};{% endif -%}
 	{%- endfor -%}
 
 
