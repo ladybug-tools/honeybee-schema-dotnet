@@ -141,7 +141,8 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
         {"String", "string" },
         {"Integer", "int" },
         {"Number", "double" },
-        {"Boolean", "bool" }
+        {"Boolean", "bool" },
+        {"Object", "object" }
     };
 
     public static List<string> CsValueType = new List<string>
