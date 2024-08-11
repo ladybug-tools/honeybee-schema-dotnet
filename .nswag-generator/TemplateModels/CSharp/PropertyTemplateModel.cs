@@ -196,7 +196,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
             {
                 arrayCode.Add(GetDefaultFromJson(item).ToString());
             }
-            defaultCodeFormat = $"[{string.Join(separator, arrayCode)}]";
+            defaultCodeFormat = $"(new []{{{string.Join(separator, arrayCode)}}}).ToList()";
         }
         else
         {
