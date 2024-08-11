@@ -1,16 +1,16 @@
-﻿using System.Linq;
+﻿//using System.Linq;
 
-namespace HoneybeeSchema
-{
-    public partial class ValidationError : OpenAPIGenBaseModel
-    {
-    }
+//namespace HoneybeeSchema
+//{
+//    public partial class ValidationError : OpenAPIGenBaseModel
+//    {
+//    }
 
-    public partial class ValidationParent : OpenAPIGenBaseModel
-    {
-    }
+//    public partial class ValidationParent : OpenAPIGenBaseModel
+//    {
+//    }
 
-    public partial class ValidationReport : OpenAPIGenBaseModel
-    {
-    }
-}
+//    public partial class ValidationReport : OpenAPIGenBaseModel
+//    {
+//    }
+//}
