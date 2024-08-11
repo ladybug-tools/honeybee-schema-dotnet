@@ -26,7 +26,7 @@ public class PropertyTemplateModelBase
         PropertyName = name;
         Default = json.Default;
 
-        Description = json.Description?.Replace("\n", "\\n");
+        Description = json.Description?.Replace("\n", "\\n")?.Replace("\"", "\"\"");
 
         AnyOf = json.AnyOf?.ToList();
         IsAnyOf = (AnyOf?.Any()).GetValueOrDefault();

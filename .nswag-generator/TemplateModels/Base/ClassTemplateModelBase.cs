@@ -17,7 +17,7 @@ public class ClassTemplateModelBase
 
     public ClassTemplateModelBase(OpenApiDocument doc, JsonSchema json)
     {
-        Description = json.Description?.Replace("\n", "\\n");
+        Description = json.Description?.Replace("\n", "\\n")?.Replace("\"", "\"\"");
         BaseDiscriminator = json.Discriminator;
 
         ClassName = json.Title;
