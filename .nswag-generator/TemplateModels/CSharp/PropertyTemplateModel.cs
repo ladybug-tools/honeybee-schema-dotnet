@@ -26,7 +26,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
     public bool HasMaximum => Maximum.HasValue;
     public decimal? Minimum { get; set; }
     public bool HasMinimum => Minimum.HasValue;
-    public bool IsInherited { get; set; }
+    //public bool IsInherited { get; set; }
     public bool IsValueType { get; set; }
     public bool IsEnumType { get; set; }
     public int? MaxLength { get; set; }

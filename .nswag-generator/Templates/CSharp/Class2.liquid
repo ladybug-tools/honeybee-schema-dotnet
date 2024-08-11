@@ -39,7 +39,7 @@ namespace HoneybeeSchema
         protected {{CsClassName}}() 
         { 
             // Set non-required readonly properties with defaultValue
-        {%-  for property in Properties -%}
+        {%-  for property in AllProperties -%}
 		    {%- if property.IsReadOnly -%}{%- if property.HasDefault -%}
             this.{{ property.CsPropertyName }} = {{ property.DefaultCodeFormat }};
             {%- endif -%}{%- endif -%}
@@ -97,7 +97,7 @@ namespace HoneybeeSchema
         [MinLength({{ property.MinLength }})]{% endif %}{% if property.HasMaxLength %}
         [MaxLength({{ property.MaxLength }})]{% endif %}
         [DataMember(Name = "{{ property.PropertyName }}"{% if property.IsRequired %}, IsRequired = true{% endif %})]
-        public{% if property.IsInherited %} override{% else %}{% if HasInheritance == false %} virtual{% endif %}{% endif %} {{ property.Type }} {{ property.CsPropertyName }} { get;{% if property.IsReadOnly %} protected{% endif %} set; }{% if property.HasDefault %} = {{ property.DefaultCodeFormat }};{% endif %}
+        public {{ property.Type }} {{ property.CsPropertyName }} { get;{% if property.IsReadOnly %} protected{% endif %} set; }{% if property.HasDefault %} = {{ property.DefaultCodeFormat }};{% endif %}
 	{%- endfor -%}
 
 

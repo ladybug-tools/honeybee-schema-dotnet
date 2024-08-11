@@ -28,18 +28,25 @@ public class ClassTemplateModel : ClassTemplateModelBase
 
         Properties = json.ActualProperties.Select(_ => new PropertyTemplateModel(_.Key, _.Value)).ToList();
         ParentProperties = InheritedSchema?.ActualProperties?.Select(_ => new PropertyTemplateModel(_.Key, _.Value))?.ToList();
-        ParentProperties?.ForEach(p => p.IsInherited = true);
+        //ParentProperties?.ForEach(p => p.IsInherited = true);
         var parentPropertyNames = ParentProperties?.Select(p => p.PropertyName)?.ToList();
+
         if (parentPropertyNames != null && parentPropertyNames.Any())
         {
-            foreach (var item in Properties)
-            {
-                item.IsInherited = parentPropertyNames.Contains(item.PropertyName);
+            var gps = Properties.GroupBy(_ => parentPropertyNames.Contains(_.PropertyName));
+            var allContains = gps.FirstOrDefault(_ => _.Key == true)?.ToList(); // overlapping
+            if (allContains != null && allContains.Any()) {
+                //remove from properties
+                Properties = Properties.Where(_ => !parentPropertyNames.Contains(_.PropertyName)).ToList();
+                // replace in parent props
+                ParentProperties= ParentProperties.Select(_=> allContains.FirstOrDefault(o=>o.PropertyName ==_.PropertyName)?? _).ToList();
             }
+          
         }
 
+
         var allProps = ParentProperties != null ? Properties.Concat(ParentProperties) : Properties;
-        AllProperties = allProps.DistinctBy(_=>_.PropertyName).OrderByDescending(_ => _.IsRequired).ToList();
+        AllProperties = allProps.DistinctBy(_ => _.PropertyName).OrderByDescending(_ => _.IsRequired).ToList();
 
         DerivedClasses = json.GetDerivedSchemas(doc).Select(_ => new ClassTemplateModel(doc, _.Key)).ToList();
 
