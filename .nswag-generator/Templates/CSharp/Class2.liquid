@@ -151,26 +151,26 @@ namespace HoneybeeSchema
             return FromJson(this.ToJson());
         }
 
-
+        {%- if HasInheritance -%} 
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel Duplicate()
+        /// <returns>{{ Inheritance }}</returns>
+        public override {{ Inheritance }} Duplicate{{ Inheritance }}()
         {
             return Duplicate{{ CsClassName }}();
         }
-
-
+        {%- else -%}
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        /// <returns>{{ CsClassName }}</returns>
+        public {{ CsClassName }} Duplicate()
         {
             return Duplicate{{ CsClassName }}();
         }
-     
+        {%- endif -%}
+
 
         /// <summary>
         /// Returns true if objects are equal
@@ -216,7 +216,7 @@ namespace HoneybeeSchema
             }
         }
 
-    {% if HasInheritance == false %} 
+    {%- if HasInheritance == false -%} 
         public bool IsValid(bool throwException = false)
         {
             var res = this.Validate();
@@ -250,7 +250,7 @@ namespace HoneybeeSchema
 
             yield break;
         }
-    {% endif %}
+    {%- endif -%}
 
     }
 }
