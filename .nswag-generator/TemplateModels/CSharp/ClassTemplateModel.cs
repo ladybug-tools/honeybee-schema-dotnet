@@ -39,7 +39,7 @@ public class ClassTemplateModel : ClassTemplateModelBase
         }
 
         var allProps = ParentProperties != null ? Properties.Concat(ParentProperties) : Properties;
-        AllProperties = allProps.OrderByDescending(_ => _.IsRequired).ToList();
+        AllProperties = allProps.DistinctBy(_=>_.PropertyName).OrderByDescending(_ => _.IsRequired).ToList();
 
         DerivedClasses = json.GetDerivedSchemas(doc).Select(_ => new ClassTemplateModel(doc, _.Key)).ToList();
 
