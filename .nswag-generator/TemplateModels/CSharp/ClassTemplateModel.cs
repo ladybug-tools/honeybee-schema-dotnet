@@ -27,7 +27,7 @@ public class ClassTemplateModel : ClassTemplateModelBase
     {
 
         Properties = json.ActualProperties.Select(_ => new PropertyTemplateModel(_.Key, _.Value)).ToList();
-        ParentProperties = InheritedSchema?.ActualProperties?.Select(_ => new PropertyTemplateModel(_.Key, _.Value))?.ToList();
+        ParentProperties = json.AllInheritedSchemas?.SelectMany(_=>_.ActualProperties)?.Select(_ => new PropertyTemplateModel(_.Key, _.Value))?.DistinctBy(_ => _.PropertyName).ToList();
         //ParentProperties?.ForEach(p => p.IsInherited = true);
         var parentPropertyNames = ParentProperties?.Select(p => p.PropertyName)?.ToList();
 
@@ -45,7 +45,7 @@ public class ClassTemplateModel : ClassTemplateModelBase
         }
 
 
-        var allProps = ParentProperties != null ? Properties.Concat(ParentProperties) : Properties;
+        var allProps = ParentProperties != null ? ParentProperties.Concat(Properties) : Properties;
         AllProperties = allProps.DistinctBy(_ => _.PropertyName).OrderByDescending(_ => _.IsRequired).ToList();
 
         DerivedClasses = json.GetDerivedSchemas(doc).Select(_ => new ClassTemplateModel(doc, _.Key)).ToList();
