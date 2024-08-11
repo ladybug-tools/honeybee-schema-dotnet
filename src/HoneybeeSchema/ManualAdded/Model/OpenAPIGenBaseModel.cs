@@ -6,6 +6,8 @@ namespace HoneybeeSchema
 {
     public partial class OpenAPIGenBaseModel : HoneybeeObject
     {
+        public override string GetType => this.Type;
+
         //public bool IsValid(bool throwException = false)
         //{
         //    var res = this.Validate();
