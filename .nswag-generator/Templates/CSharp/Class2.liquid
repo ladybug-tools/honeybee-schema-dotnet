@@ -57,7 +57,6 @@ namespace HoneybeeSchema
     {%- if hasOnlyReadOnly -%}
         [JsonConstructorAttribute]
     {%- endif -%}
-    
         public {{ CsClassName }}
         (
             {% assign skipComma = true -%}{% for property in AllProperties -%}{% if property.IsReadOnly == false %}{% if skipComma %}{% assign skipComma = false %}{% else %}, {% endif %}{{ property.ConstructionParameterCode }}{% endif %}{%- endfor %}

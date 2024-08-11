@@ -58,7 +58,7 @@ public class ClassTemplateModel : ClassTemplateModelBase
 
         // add derived class references
         var dcs = DerivedClasses.Select(_ => _.ClassName);
-        hasOnlyReadOnly = Properties.All(_ => _.IsReadOnly);
+        hasOnlyReadOnly = AllProperties.All(_ => _.IsReadOnly);
 
 
     }
