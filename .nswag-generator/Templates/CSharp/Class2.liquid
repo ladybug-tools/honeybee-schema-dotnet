@@ -182,7 +182,7 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input){% for property in Properties %} && 
-                    Extension.Equals(this.{{ property.CsPropertyName }}, input.{{ property.CsPropertyName }}) {%- endfor -%};
+                    Extension.{%- if property.IsArray -%}AllEquals{% else %}Equals{% endif %}(this.{{ property.CsPropertyName }}, input.{{ property.CsPropertyName }}) {%- endfor -%};
         }
 
         /// <summary>

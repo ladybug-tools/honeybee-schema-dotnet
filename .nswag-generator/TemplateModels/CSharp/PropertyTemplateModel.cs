@@ -46,6 +46,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
             optionalValue = optionalValue.StartsWith("new ")? 
                 "default" :
                 optionalValue;
+            optionalValue = IsArray ? "default" : optionalValue;
             ConstructionParameterCode = $"{ConstructionParameterCode} = {optionalValue}";
         }
 
