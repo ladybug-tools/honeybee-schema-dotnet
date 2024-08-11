@@ -38,7 +38,7 @@ namespace HoneybeeSchema
         [JsonConstructorAttribute]
         protected {{CsClassName}}() 
         { 
-            // Set non-required readonly properties with defaultValue
+            // Set readonly properties with defaultValue
         {%-  for property in AllProperties -%}
 		    {%- if property.IsReadOnly -%}{%- if property.HasDefault -%}
             this.{{ property.CsPropertyName }} = {{ property.DefaultCodeFormat }};
@@ -73,9 +73,9 @@ namespace HoneybeeSchema
         {%- endif -%}
 		{%- endfor -%}
 
-            // Set non-required readonly properties with defaultValue
-		{%-  for property in Properties -%}
-		    {%- if property.IsReadOnly and property.IsRequired == false and property.HasDefault -%}
+            // Set readonly properties with defaultValue
+		{%-  for property in AllProperties -%}
+		    {%- if property.IsReadOnly and property.HasDefault -%}
             this.{{ property.CsPropertyName }} = {{ property.DefaultCodeFormat }};
             {%- endif -%}
 		{%- endfor -%}
