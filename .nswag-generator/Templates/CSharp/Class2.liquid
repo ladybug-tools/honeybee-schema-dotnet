@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="{{ CsClassName }}" /> class.
         /// </summary>
-	{%-  for property in Properties -%}
+	{%-  for property in AllProperties -%}
         {%- if property.IsReadOnly == false -%}
         /// <param name="{{ property.CsParameterName }}">{{ property.Description }}</param>
         {%- endif -%}
@@ -57,11 +57,11 @@ namespace HoneybeeSchema
     {%- if hasOnlyReadOnly -%}
         [JsonConstructorAttribute]
     {%- endif -%}
-    {%- assign skipComma = true -%}
+    
         public {{ CsClassName }}
         (
-           {% for property in Properties -%}{% if property.IsReadOnly == false %}{% if skipComma %}{% assign skipComma = false %}{% else %}, {% endif %}{{ property.ConstructionParameterCode }}{% endif %}{%- endfor %}
-        ){%  if HasInheritance %} : base()// BaseClass{% endif %}
+            {% assign skipComma = true -%}{% for property in AllProperties -%}{% if property.IsReadOnly == false %}{% if skipComma %}{% assign skipComma = false %}{% else %}, {% endif %}{{ property.ConstructionParameterCode }}{% endif %}{%- endfor %}
+        ){%  if HasInheritance %} : base({% assign skipComma = true %}{% for property in ParentProperties -%}{% if property.IsReadOnly == false %}{% if skipComma %}{% assign skipComma = false %}{% else %}, {% endif %}{{ property.CsParameterName }}: {{ property.CsParameterName }}{% endif %}{%- endfor %}){% endif %}
         {
 		{%-  for property in Properties -%}
 		    {%- if property.IsReadOnly == false -%}
@@ -113,14 +113,13 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("{{ CsClassName }}:\n");
-            {%-  for property in Properties -%}
+            {%-  for property in AllProperties -%}
             sb.Append("  {{ property.CsPropertyName }}: ").Append(this.{{ property.CsPropertyName }}).Append("\n");
             {%- endfor -%}
             return sb.ToString();
         }
 
 
-          
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
@@ -133,6 +132,7 @@ namespace HoneybeeSchema
             return obj.Type.ToLower() == obj.GetType().Name.ToLower() && obj.IsValid(throwException: true) ? obj : null;
         }
 
+
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
@@ -141,6 +141,7 @@ namespace HoneybeeSchema
         {
             return FromJson(this.ToJson());
         }
+
 
         /// <summary>
         /// Creates a new instance with the same properties.
@@ -151,6 +152,7 @@ namespace HoneybeeSchema
             return Duplicate{{ CsClassName }}();
         }
 
+
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
@@ -160,6 +162,7 @@ namespace HoneybeeSchema
             return Duplicate{{ CsClassName }}();
         }
      
+
         /// <summary>
         /// Returns true if objects are equal
         /// </summary>
@@ -170,6 +173,7 @@ namespace HoneybeeSchema
             input = input is AnyOf anyOf ? anyOf.Obj : input;
             return this.Equals(input as {{ CsClassName }});
         }
+
 
         /// <summary>
         /// Returns true if {{ CsClassName }} instances are equal
@@ -184,6 +188,7 @@ namespace HoneybeeSchema
             return base.Equals(input){% for property in Properties %} && 
                     Extension.{%- if property.IsArray -%}AllEquals{% else %}Equals{% endif %}(this.{{ property.CsPropertyName }}, input.{{ property.CsPropertyName }}) {%- endfor -%};
         }
+
 
         /// <summary>
         /// Gets the hash code
@@ -202,6 +207,7 @@ namespace HoneybeeSchema
             }
         }
 
+        
     {%- if HasInheritance == false -%}
         /// <summary>
         /// To validate all properties of the instance

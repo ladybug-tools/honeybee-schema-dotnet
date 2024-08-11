@@ -22,12 +22,13 @@ public class ClassTemplateModel : ClassTemplateModelBase
     //public string TsValidatorImportsCode { get; set; }
     public bool hasOnlyReadOnly { get; set; }
     public List<PropertyTemplateModel> ParentProperties { get; set; }
-
+    public List<PropertyTemplateModel> AllProperties { get; set; }
     public ClassTemplateModel(OpenApiDocument doc, JsonSchema json) : base(doc, json)
     {
 
         Properties = json.ActualProperties.Select(_ => new PropertyTemplateModel(_.Key, _.Value)).ToList();
         ParentProperties = InheritedSchema?.ActualProperties?.Select(_ => new PropertyTemplateModel(_.Key, _.Value))?.ToList();
+        ParentProperties?.ForEach(p => p.IsInherited = true);
         var parentPropertyNames = ParentProperties?.Select(p => p.PropertyName)?.ToList();
         if (parentPropertyNames != null && parentPropertyNames.Any())
         {
@@ -37,6 +38,8 @@ public class ClassTemplateModel : ClassTemplateModelBase
             }
         }
 
+        var allProps = ParentProperties != null ? Properties.Concat(ParentProperties) : Properties;
+        AllProperties = allProps.OrderByDescending(_ => _.IsRequired).ToList();
 
         DerivedClasses = json.GetDerivedSchemas(doc).Select(_ => new ClassTemplateModel(doc, _.Key)).ToList();
 
