@@ -195,7 +195,8 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
             if (jObj.TryGetValue("type", out var vType))
             {
                 var isFullJsonObj = jObj.Values().Count() > 1;
-                defaultCodeFormat = isFullJsonObj? $"{vType}.fromJS({jObj})": $"new {vType}()";
+                var formateJson = isFullJsonObj ? jObj.ToString()?.Replace("\"", "\"\"") : "";
+                defaultCodeFormat = isFullJsonObj? $"{vType}.FromJson(@\"{formateJson}\")" : $"new {vType}()";
             }
             else
             {
