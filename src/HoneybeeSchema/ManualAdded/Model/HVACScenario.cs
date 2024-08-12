@@ -11,7 +11,7 @@ namespace HoneybeeSchema
     [Summary(@"A design option of HVAC scenario that contains a map of Room - HVAC ID pairs")]
     [Serializable]
     [DataContract(Name = "HVACScenario")]
-    public class HVACScenario : IDdBaseModel, IEquatable<HVACScenario>, IValidatableObject
+    public class HVACScenario : IDdBaseModel, IEquatable<HVACScenario>
     {
         [JsonConstructorAttribute]
         protected HVACScenario()
@@ -24,7 +24,7 @@ namespace HoneybeeSchema
             string displayName = default, Object userData = default) // Optional parameters 
             : base(identifier: identifier, displayName: displayName, userData: userData)
         {
-            this.RoomHVACPairs= roomHvacPairs ?? throw new ArgumentNullException(nameof(roomHvacPairs));
+            this.RoomHVACPairs = roomHvacPairs ?? throw new ArgumentNullException(nameof(roomHvacPairs));
 
             // Set non-required readonly properties with defaultValue
             this.Type = "HVACScenario";
@@ -34,10 +34,6 @@ namespace HoneybeeSchema
                 this.IsValid(throwException: true);
         }
 
-        [Summary(@"Type")]
-        [DataMember(Name = "type")]
-        public override string Type { get; protected set; } = "HVACScenario";
-
         public override string ToString()
         {
             return $"HVACScenario: {this.DisplayName ?? this.Identifier}";
@@ -45,7 +41,7 @@ namespace HoneybeeSchema
 
         [Summary(@"HVACSystems")]
         [DataMember(Name = "HVACSystems")]
-        public Dictionary<string,string> RoomHVACPairs { get; set; }
+        public Dictionary<string, string> RoomHVACPairs { get; set; }
 
 
         public static HVACScenario FromJson(string json)
