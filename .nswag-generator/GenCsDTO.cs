@@ -140,6 +140,7 @@ public class GenCsDTO: GenDTO
         //System.IO.Directory.CreateDirectory(srcDir);
 
         ClassTemplateModel.SDKName = _sdkName;
+        EnumTemplateModel.SDKName = _sdkName;
 
         foreach (var item in sc)
         {
@@ -148,8 +149,8 @@ public class GenCsDTO: GenDTO
             var file = string.Empty;
             if (value.IsEnumeration)
             {
-                //var m = new EnumTemplateModel(value);
-                //tsFile = GenEnum(template, m, outputDir, ".ts");
+                var m = new EnumTemplateModel(value);
+                file = GenEnum(template, m, outputDir, ".cs");
             }
             else
             {
@@ -400,17 +401,17 @@ public class GenCsDTO: GenDTO
         return file;
     }
 
-    //private static string GenEnum(string templateDir, EnumTemplateModel model, string outputDir, string fileExt = ".cs")
-    //{
-    //    var templateSource = File.ReadAllText(Path.Combine(templateDir, "Enum.liquid"), System.Text.Encoding.UTF8);
-    //    var code = Gen(templateSource, model);
-    //    var file = System.IO.Path.Combine(outputDir, $"{model.EnumName}{fileExt}");
-    //    System.IO.File.WriteAllText(file, code, System.Text.Encoding.UTF8);
-    //    return file;
-    //}
+    private static string GenEnum(string templateDir, EnumTemplateModel model, string outputDir, string fileExt = ".cs")
+    {
+        var templateSource = File.ReadAllText(Path.Combine(templateDir, "Enum.liquid"), System.Text.Encoding.UTF8);
+        var code = Gen(templateSource, model);
+        var file = System.IO.Path.Combine(outputDir, $"{model.EnumName}{fileExt}");
+        System.IO.File.WriteAllText(file, code, System.Text.Encoding.UTF8);
+        return file;
+    }
 
 
-   
+
 
     //private static 
 }

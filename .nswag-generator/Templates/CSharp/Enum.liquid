@@ -1,22 +1,28 @@
-﻿{%- if HasDescription -%}
-/// <summary>
-/// {{ Description | csharpdocs }}
-/// </summary>
-{%- endif -%}
-{%- if IsEnumAsBitFlags -%}
-[System.Flags]
-{%- endif -%}
-{{ TypeAccessModifier }} enum {{ Name }}{%- if HasExtendedValueRange %} : long{% endif %}
-{
-{%- for enum in Enums %}
-{%-   if IsStringEnum -%}
-    [System.Runtime.Serialization.EnumMember(Value = @"{{ enum.Value | replace: '"', '""' }}")]
-{%-   endif -%}
-{%- if IsEnumAsBitFlags -%}
-    {{ enum.Name }} = {{ enum.InternalFlagValue }},
-{%- else -%}
-    {{ enum.Name }} = {{ enum.InternalValue }},
-{%- endif -%}
+﻿/* 
+ * Honeybee Schema
+ *
+ * Contact: info@ladybug.tools
+ */
 
-{%- endfor %}
+ extern alias LBTNewtonSoft;
+ using System.Runtime.Serialization;
+ using LBTNewtonSoft::Newtonsoft.Json;
+ using LBTNewtonSoft::Newtonsoft.Json.Converters;
+
+namespace {{ NameSpaceName }}
+{
+	{%- if HasDescription -%}
+    /// <summary>
+    /// {{ Description }}
+    /// </summary>
+	{%- endif -%}
+    [JsonConverter(typeof(StringEnumConverter))]
+    public enum {{ EnumName }}{%- if HasExtendedValueRange %} : long{% endif %}
+    {
+    {%- for enum in EnumItems %}
+        [EnumMember(Value = "{{ enum.Value }}")]
+        {{ enum.Key }} = {{ enum.Index }},
+    {%- endfor %}
+    }
+ 
 }
