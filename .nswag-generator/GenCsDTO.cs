@@ -84,11 +84,11 @@ public class GenCsDTO: GenDTO
         //var schemaFile = System.IO.Path.Combine(outputDir, "schema.json");
         var jsons = new[]
         {
-            //"model_inheritance.json",
-            //"simulation-parameter_inheritance.json",
-            //"validation-report.json",
-            //"comparison-report_inheritance.json",
-            //"sync-instructions_inheritance.json",
+            "model_inheritance.json",
+            "simulation-parameter_inheritance.json",
+            "validation-report.json",
+            "comparison-report_inheritance.json",
+            "sync-instructions_inheritance.json",
             "project-information_inheritance.json"
 
         };
@@ -134,10 +134,12 @@ public class GenCsDTO: GenDTO
         var template = System.IO.Path.Combine(templateDir, TargetLanguage);
         var sc = doc.Components.Schemas;
         var classModels = new List<ClassTemplateModel>();
-        var srcDir = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(rootDir), "src", "HoneybeeSchema", "Model");
+        var srcDir = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(rootDir), "src", _sdkName, "Model");
         //if (System.IO.Directory.Exists(srcDir))
         //    System.IO.Directory.Delete(srcDir, true);
         //System.IO.Directory.CreateDirectory(srcDir);
+
+        ClassTemplateModel.SDKName = _sdkName;
 
         foreach (var item in sc)
         {

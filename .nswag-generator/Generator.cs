@@ -5,7 +5,7 @@ namespace SchemaGenerator;
 internal class Generator
 {
     private static readonly string _generatorFolder = ".nswag-generator";
-    public static string sdkName = "ModelEditorSDK";
+    public static string sdkName = "HoneybeeSchema";
     public static string workingDir = Environment.CurrentDirectory;
     public static string rootDir => workingDir.Substring(0, workingDir.IndexOf(_generatorFolder) + _generatorFolder.Length);
     static void Main(string[] args)
