@@ -42,24 +42,11 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
         CsPropertyName = Helper.ToPascalCase(PropertyName);
         DefaultCodeFormat = ConvertDefaultValue(json);
 
-        // check List of AnyOf type
-        if (IsArray && (json.Item.AnyOf?.Any()).GetValueOrDefault() && HasDefault) 
-        {
-            DefaultCodeFormat = DefaultCodeFormat.Replace("(new []", $"(new {Type}");
-        }
+     
 
         Description = String.IsNullOrEmpty(Description)? CsPropertyName : Description;
 
-        ConstructionParameterCode = $"{Type} {CsParameterName}";
-        if (!this.IsRequired)
-        {
-            var optionalValue = string.IsNullOrEmpty(DefaultCodeFormat) ? "default" : DefaultCodeFormat;
-            optionalValue = optionalValue.StartsWith("new ")? 
-                "default" :
-                optionalValue;
-            optionalValue = IsArray ? "default" : optionalValue;
-            ConstructionParameterCode = $"{ConstructionParameterCode} = {optionalValue}";
-        }
+       
 
         Pattern = json.Pattern;
         Maximum = json.Maximum;
@@ -69,6 +56,23 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
 
         IsEnumType = json.ActualSchema.IsEnumeration;
         IsValueType = CsValueType.Contains(Type) || IsEnumType;
+
+
+        // check List of AnyOf type
+        if (IsArray && (json.Item.AnyOf?.Any()).GetValueOrDefault() && HasDefault)
+        {
+            DefaultCodeFormat = DefaultCodeFormat.Replace("(new []", $"(new {Type}");
+        }
+        // check default value for constructor parameter
+        ConstructionParameterCode = $"{Type} {CsParameterName}";
+        if (!this.IsRequired)
+        {
+            var optionalValue = string.IsNullOrEmpty(DefaultCodeFormat) ? "default" : DefaultCodeFormat;
+            optionalValue = IsArray ? "default" : optionalValue;
+            optionalValue = Type.StartsWith("AnyOf") ? "default" : optionalValue;
+            optionalValue = optionalValue.StartsWith("new ") ? "default" : optionalValue;
+            ConstructionParameterCode = $"{ConstructionParameterCode} = {optionalValue}";
+        }
     }
 
 
@@ -153,7 +157,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
 
     public static List<string> CsValueType = new List<string>
     {
-        "int", "double","bool"
+        "int", "double", "bool"
     };
 
     
