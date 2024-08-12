@@ -82,10 +82,10 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("FloorConstructionSetAbridged:\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  InteriorConstruction: ").Append(this.InteriorConstruction).Append("\n");
             sb.Append("  ExteriorConstruction: ").Append(this.ExteriorConstruction).Append("\n");
             sb.Append("  GroundConstruction: ").Append(this.GroundConstruction).Append("\n");
-            sb.Append("  Type: ").Append(this.Type).Append("\n");
             return sb.ToString();
         }
 

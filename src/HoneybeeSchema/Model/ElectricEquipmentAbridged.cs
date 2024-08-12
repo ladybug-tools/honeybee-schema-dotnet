@@ -41,18 +41,18 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ElectricEquipmentAbridged" /> class.
         /// </summary>
+        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
         /// <param name="wattsPerArea">Equipment level per floor area as [W/m2].</param>
         /// <param name="schedule">Identifier of the schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.</param>
-        /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
+        /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="radiantFraction">Number for the amount of long-wave radiation heat given off by equipment. Default value is 0.</param>
         /// <param name="latentFraction">Number for the amount of latent heat given off by equipment. Default value is 0.</param>
         /// <param name="lostFraction">Number for the amount of “lost” heat being given off by equipment. The default value is 0.</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
-        /// <param name="displayName">Display name of the object with no character restrictions.</param>
         public ElectricEquipmentAbridged
         (
-            double wattsPerArea, string schedule, string identifier, double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D, object userData = default, string displayName = default
-        ) : base(wattsPerArea: wattsPerArea, schedule: schedule, radiantFraction: radiantFraction, latentFraction: latentFraction, lostFraction: lostFraction, userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, double wattsPerArea, string schedule, string displayName = default, object userData = default, double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D
+        ) : base(identifier: identifier, displayName: displayName, userData: userData, wattsPerArea: wattsPerArea, schedule: schedule, radiantFraction: radiantFraction, latentFraction: latentFraction, lostFraction: lostFraction)
         {
 
             // Set readonly properties with defaultValue
@@ -87,15 +87,15 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ElectricEquipmentAbridged:\n");
+            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  WattsPerArea: ").Append(this.WattsPerArea).Append("\n");
             sb.Append("  Schedule: ").Append(this.Schedule).Append("\n");
-            sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  RadiantFraction: ").Append(this.RadiantFraction).Append("\n");
             sb.Append("  LatentFraction: ").Append(this.LatentFraction).Append("\n");
             sb.Append("  LostFraction: ").Append(this.LostFraction).Append("\n");
-            sb.Append("  Type: ").Append(this.Type).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
-            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             return sb.ToString();
         }
 

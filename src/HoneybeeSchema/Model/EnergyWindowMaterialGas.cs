@@ -42,14 +42,14 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialGas" /> class.
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="thickness">Thickness of the gas layer in meters. Default: 0.0125.</param>
         /// <param name="gasType">GasType</param>
         public EnergyWindowMaterialGas
         (
-            string identifier, object userData = default, string displayName = default, double thickness = 0.0125D, GasType gasType = GasType.Air
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, string displayName = default, object userData = default, double thickness = 0.0125D, GasType gasType = GasType.Air
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.Thickness = thickness;
             this.GasType = gasType;
@@ -101,9 +101,9 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("EnergyWindowMaterialGas:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Thickness: ").Append(this.Thickness).Append("\n");
             sb.Append("  GasType: ").Append(this.GasType).Append("\n");
             return sb.ToString();

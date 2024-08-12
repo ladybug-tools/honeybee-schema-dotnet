@@ -45,16 +45,16 @@ namespace HoneybeeSchema
         /// <param name="watts">A number for the process load power in Watts.</param>
         /// <param name="schedule">Identifier of the schedule for the use of the process over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts to yield a complete equipment profile.</param>
         /// <param name="fuelType">Text to denote the type of fuel consumed by the process. Using the ""None"" type indicates that no end uses will be associated with the process, only the zone gains.</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="endUseCategory">Text to indicate the end-use subcategory, which will identify the process load in the end use output. For example, “Cooking”, “Clothes Drying”, etc. A new meter for reporting is created for each unique subcategory.</param>
         /// <param name="radiantFraction">Number for the amount of long-wave radiation heat given off by the process load. Default value is 0.</param>
         /// <param name="latentFraction">Number for the amount of latent heat given off by the process load. Default value is 0.</param>
         /// <param name="lostFraction">Number for the amount of “lost” heat being given off by the process load. The default value is 0.</param>
         public ProcessAbridged
         (
-            string identifier, double watts, string schedule, FuelTypes fuelType, object userData = default, string displayName = default, string endUseCategory = "Process", double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, double watts, string schedule, FuelTypes fuelType, string displayName = default, object userData = default, string endUseCategory = "Process", double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.Watts = watts;
             this.Schedule = schedule ?? throw new ArgumentNullException("schedule is a required property for ProcessAbridged and cannot be null");
@@ -160,9 +160,9 @@ namespace HoneybeeSchema
             sb.Append("  Watts: ").Append(this.Watts).Append("\n");
             sb.Append("  Schedule: ").Append(this.Schedule).Append("\n");
             sb.Append("  FuelType: ").Append(this.FuelType).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  EndUseCategory: ").Append(this.EndUseCategory).Append("\n");
             sb.Append("  RadiantFraction: ").Append(this.RadiantFraction).Append("\n");
             sb.Append("  LatentFraction: ").Append(this.LatentFraction).Append("\n");

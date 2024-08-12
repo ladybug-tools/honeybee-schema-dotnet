@@ -99,9 +99,9 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ApertureRadiancePropertiesAbridged:\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  Modifier: ").Append(this.Modifier).Append("\n");
             sb.Append("  ModifierBlk: ").Append(this.ModifierBlk).Append("\n");
-            sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DynamicGroupIdentifier: ").Append(this.DynamicGroupIdentifier).Append("\n");
             sb.Append("  States: ").Append(this.States).Append("\n");
             return sb.ToString();

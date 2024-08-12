@@ -47,8 +47,8 @@ namespace HoneybeeSchema
         /// <param name="specificHeatCoeffA">The A coefficient for gas specific heat in J/(kg-K).</param>
         /// <param name="specificHeatRatio">The specific heat ratio for gas.</param>
         /// <param name="molecularWeight">The molecular weight for gas in g/mol.</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="thickness">Thickness of the gas layer in meters. Default: 0.0125.</param>
         /// <param name="conductivityCoeffB">The B coefficient for gas conductivity in W/(m-K2).</param>
         /// <param name="conductivityCoeffC">The C coefficient for gas conductivity in W/(m-K3).</param>
@@ -58,8 +58,8 @@ namespace HoneybeeSchema
         /// <param name="specificHeatCoeffC">The C coefficient for gas specific heat in J/(kg-K3).</param>
         public EnergyWindowMaterialGasCustom
         (
-            string identifier, double conductivityCoeffA, double viscosityCoeffA, double specificHeatCoeffA, double specificHeatRatio, double molecularWeight, object userData = default, string displayName = default, double thickness = 0.0125D, double conductivityCoeffB = 0D, double conductivityCoeffC = 0D, double viscosityCoeffB = 0D, double viscosityCoeffC = 0D, double specificHeatCoeffB = 0D, double specificHeatCoeffC = 0D
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, double conductivityCoeffA, double viscosityCoeffA, double specificHeatCoeffA, double specificHeatRatio, double molecularWeight, string displayName = default, object userData = default, double thickness = 0.0125D, double conductivityCoeffB = 0D, double conductivityCoeffC = 0D, double viscosityCoeffB = 0D, double viscosityCoeffC = 0D, double specificHeatCoeffB = 0D, double specificHeatCoeffC = 0D
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.ConductivityCoeffA = conductivityCoeffA;
             this.ViscosityCoeffA = viscosityCoeffA;
@@ -202,9 +202,9 @@ namespace HoneybeeSchema
             sb.Append("  SpecificHeatCoeffA: ").Append(this.SpecificHeatCoeffA).Append("\n");
             sb.Append("  SpecificHeatRatio: ").Append(this.SpecificHeatRatio).Append("\n");
             sb.Append("  MolecularWeight: ").Append(this.MolecularWeight).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Thickness: ").Append(this.Thickness).Append("\n");
             sb.Append("  ConductivityCoeffB: ").Append(this.ConductivityCoeffB).Append("\n");
             sb.Append("  ConductivityCoeffC: ").Append(this.ConductivityCoeffC).Append("\n");

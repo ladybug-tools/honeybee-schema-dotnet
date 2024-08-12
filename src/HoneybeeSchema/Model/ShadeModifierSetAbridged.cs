@@ -81,9 +81,9 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("ShadeModifierSetAbridged:\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  ExteriorModifier: ").Append(this.ExteriorModifier).Append("\n");
             sb.Append("  InteriorModifier: ").Append(this.InteriorModifier).Append("\n");
-            sb.Append("  Type: ").Append(this.Type).Append("\n");
             return sb.ToString();
         }
 

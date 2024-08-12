@@ -44,13 +44,13 @@ namespace HoneybeeSchema
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
         /// <param name="gasTypes">List of gases in the gas mixture.</param>
         /// <param name="gasFractions">A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1.</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="thickness">The thickness of the gas mixture layer in meters.</param>
         public EnergyWindowMaterialGasMixture
         (
-            string identifier, List<GasType> gasTypes, List<double> gasFractions, object userData = default, string displayName = default, double thickness = 0.0125D
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, List<GasType> gasTypes, List<double> gasFractions, string displayName = default, object userData = default, double thickness = 0.0125D
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.GasTypes = gasTypes ?? throw new ArgumentNullException("gasTypes is a required property for EnergyWindowMaterialGasMixture and cannot be null");
             this.GasFractions = gasFractions ?? throw new ArgumentNullException("gasFractions is a required property for EnergyWindowMaterialGasMixture and cannot be null");
@@ -114,9 +114,9 @@ namespace HoneybeeSchema
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  GasTypes: ").Append(this.GasTypes).Append("\n");
             sb.Append("  GasFractions: ").Append(this.GasFractions).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Thickness: ").Append(this.Thickness).Append("\n");
             return sb.ToString();
         }

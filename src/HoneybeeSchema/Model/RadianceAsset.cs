@@ -103,8 +103,8 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("RadianceAsset:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  RoomIdentifier: ").Append(this.RoomIdentifier).Append("\n");
             sb.Append("  LightPath: ").Append(this.LightPath).Append("\n");
             return sb.ToString();

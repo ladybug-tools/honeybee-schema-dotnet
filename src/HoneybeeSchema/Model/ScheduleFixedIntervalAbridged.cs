@@ -43,8 +43,8 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
         /// <param name="values">A list of timeseries values occurring at each timestep over the course of the simulation.</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="scheduleTypeLimit">Identifier of a ScheduleTypeLimit that will be used to validate schedule values against upper/lower limits and assign units to the schedule values. If None, no validation will occur.</param>
         /// <param name="timestep">An integer for the number of steps per hour that the input values correspond to.  For example, if each value represents 30 minutes, the timestep is 2. For 15 minutes, it is 4.</param>
         /// <param name="startDate">A list of two integers for [month, day], representing the start date when the schedule values begin to take effect.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</param>
@@ -52,8 +52,8 @@ namespace HoneybeeSchema
         /// <param name="interpolate">Boolean to note whether values in between intervals should be linearly interpolated or whether successive values should take effect immediately upon the beginning time corresponding to them.</param>
         public ScheduleFixedIntervalAbridged
         (
-            string identifier, List<double> values, object userData = default, string displayName = default, string scheduleTypeLimit = default, int timestep = 1, List<int> startDate = default, double placeholderValue = 0D, bool interpolate = false
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, List<double> values, string displayName = default, object userData = default, string scheduleTypeLimit = default, int timestep = 1, List<int> startDate = default, double placeholderValue = 0D, bool interpolate = false
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.Values = values ?? throw new ArgumentNullException("values is a required property for ScheduleFixedIntervalAbridged and cannot be null");
             this.ScheduleTypeLimit = scheduleTypeLimit;
@@ -141,9 +141,9 @@ namespace HoneybeeSchema
             sb.Append("ScheduleFixedIntervalAbridged:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  Values: ").Append(this.Values).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  ScheduleTypeLimit: ").Append(this.ScheduleTypeLimit).Append("\n");
             sb.Append("  Timestep: ").Append(this.Timestep).Append("\n");
             sb.Append("  StartDate: ").Append(this.StartDate).Append("\n");

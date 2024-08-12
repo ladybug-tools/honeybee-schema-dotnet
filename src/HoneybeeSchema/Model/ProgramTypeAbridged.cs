@@ -42,8 +42,8 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="ProgramTypeAbridged" /> class.
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="people">People to describe the occupancy of the program. If None, no occupancy will be assumed for the program.</param>
         /// <param name="lighting">Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program.</param>
         /// <param name="electricEquipment">ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed.</param>
@@ -54,8 +54,8 @@ namespace HoneybeeSchema
         /// <param name="setpoint">Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.</param>
         public ProgramTypeAbridged
         (
-            string identifier, object userData = default, string displayName = default, PeopleAbridged people = default, LightingAbridged lighting = default, ElectricEquipmentAbridged electricEquipment = default, GasEquipmentAbridged gasEquipment = default, ServiceHotWaterAbridged serviceHotWater = default, InfiltrationAbridged infiltration = default, VentilationAbridged ventilation = default, SetpointAbridged setpoint = default
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, string displayName = default, object userData = default, PeopleAbridged people = default, LightingAbridged lighting = default, ElectricEquipmentAbridged electricEquipment = default, GasEquipmentAbridged gasEquipment = default, ServiceHotWaterAbridged serviceHotWater = default, InfiltrationAbridged infiltration = default, VentilationAbridged ventilation = default, SetpointAbridged setpoint = default
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.People = people;
             this.Lighting = lighting;
@@ -155,9 +155,9 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("ProgramTypeAbridged:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  People: ").Append(this.People).Append("\n");
             sb.Append("  Lighting: ").Append(this.Lighting).Append("\n");
             sb.Append("  ElectricEquipment: ").Append(this.ElectricEquipment).Append("\n");

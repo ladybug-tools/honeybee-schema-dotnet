@@ -43,16 +43,16 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
         /// <param name="rValue">The thermal resistance (R-value) of the material layer [m2-K/W].</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="roughness">Roughness</param>
         /// <param name="thermalAbsorptance">Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9.</param>
         /// <param name="solarAbsorptance">Fraction of incident solar radiation absorbed by the material. Default: 0.7.</param>
         /// <param name="visibleAbsorptance">Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7.</param>
         public EnergyMaterialNoMass
         (
-            string identifier, double rValue, object userData = default, string displayName = default, Roughness roughness = Roughness.MediumRough, double thermalAbsorptance = 0.9D, double solarAbsorptance = 0.7D, double visibleAbsorptance = 0.7D
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, double rValue, string displayName = default, object userData = default, Roughness roughness = Roughness.MediumRough, double thermalAbsorptance = 0.9D, double solarAbsorptance = 0.7D, double visibleAbsorptance = 0.7D
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.RValue = rValue;
             this.Roughness = roughness;
@@ -134,9 +134,9 @@ namespace HoneybeeSchema
             sb.Append("EnergyMaterialNoMass:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  RValue: ").Append(this.RValue).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Roughness: ").Append(this.Roughness).Append("\n");
             sb.Append("  ThermalAbsorptance: ").Append(this.ThermalAbsorptance).Append("\n");
             sb.Append("  SolarAbsorptance: ").Append(this.SolarAbsorptance).Append("\n");

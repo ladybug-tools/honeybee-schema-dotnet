@@ -141,8 +141,9 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
-                    Extension.Equals(this.Type, input.Type);
+            var isSame = base.Equals(input);
+                  isSame =  Extension.Equals(this.Type, input.Type);
+            return isSame;
         }
 
 

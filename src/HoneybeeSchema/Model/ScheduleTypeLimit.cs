@@ -118,8 +118,8 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("ScheduleTypeLimit:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  LowerLimit: ").Append(this.LowerLimit).Append("\n");
             sb.Append("  UpperLimit: ").Append(this.UpperLimit).Append("\n");
             sb.Append("  NumericType: ").Append(this.NumericType).Append("\n");

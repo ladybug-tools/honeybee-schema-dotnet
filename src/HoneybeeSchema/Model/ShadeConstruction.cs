@@ -42,15 +42,15 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="ShadeConstruction" /> class.
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="solarReflectance">A number for the solar reflectance of the construction.</param>
         /// <param name="visibleReflectance">A number for the visible reflectance of the construction.</param>
         /// <param name="isSpecular">Boolean to note whether the reflection off the shade is diffuse (False) or specular (True). Set to True if the construction is representing a glass facade or a mirror material.</param>
         public ShadeConstruction
         (
-            string identifier, object userData = default, string displayName = default, double solarReflectance = 0.2D, double visibleReflectance = 0.2D, bool isSpecular = false
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, string displayName = default, object userData = default, double solarReflectance = 0.2D, double visibleReflectance = 0.2D, bool isSpecular = false
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.SolarReflectance = solarReflectance;
             this.VisibleReflectance = visibleReflectance;
@@ -112,9 +112,9 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("ShadeConstruction:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  SolarReflectance: ").Append(this.SolarReflectance).Append("\n");
             sb.Append("  VisibleReflectance: ").Append(this.VisibleReflectance).Append("\n");
             sb.Append("  IsSpecular: ").Append(this.IsSpecular).Append("\n");

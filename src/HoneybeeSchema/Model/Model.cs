@@ -187,9 +187,9 @@ namespace HoneybeeSchema
             sb.Append("Model:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  Properties: ").Append(this.Properties).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  UserData: ").Append(this.UserData).Append("\n");
-            sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  Version: ").Append(this.Version).Append("\n");
             sb.Append("  Rooms: ").Append(this.Rooms).Append("\n");
             sb.Append("  OrphanedFaces: ").Append(this.OrphanedFaces).Append("\n");

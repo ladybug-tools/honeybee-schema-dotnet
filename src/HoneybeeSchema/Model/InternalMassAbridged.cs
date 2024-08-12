@@ -44,12 +44,12 @@ namespace HoneybeeSchema
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
         /// <param name="construction">Identifier for an OpaqueConstruction that represents the material that the internal thermal mass is composed of.</param>
         /// <param name="area">A number representing the surface area of the internal mass that is exposed to the Room air. This value should always be in square meters regardless of what units system the parent model is a part of.</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         public InternalMassAbridged
         (
-            string identifier, string construction, double area, object userData = default, string displayName = default
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, string construction, double area, string displayName = default, object userData = default
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.Construction = construction ?? throw new ArgumentNullException("construction is a required property for InternalMassAbridged and cannot be null");
             this.Area = area;
@@ -107,9 +107,9 @@ namespace HoneybeeSchema
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  Construction: ").Append(this.Construction).Append("\n");
             sb.Append("  Area: ").Append(this.Area).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             return sb.ToString();
         }
 

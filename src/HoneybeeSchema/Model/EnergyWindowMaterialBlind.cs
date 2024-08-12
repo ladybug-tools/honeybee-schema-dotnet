@@ -42,8 +42,8 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialBlind" /> class.
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="slatOrientation">SlatOrientation</param>
         /// <param name="slatWidth">The width of slat measured from edge to edge in meters.</param>
         /// <param name="slatSeparation">The distance between the front of a slat and the back of the adjacent slat in meters.</param>
@@ -72,8 +72,8 @@ namespace HoneybeeSchema
         /// <param name="rightOpeningMultiplier">The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade.</param>
         public EnergyWindowMaterialBlind
         (
-            string identifier, object userData = default, string displayName = default, SlatOrientation slatOrientation = SlatOrientation.Horizontal, double slatWidth = 0.025D, double slatSeparation = 0.01875D, double slatThickness = 0.001D, double slatAngle = 45D, double slatConductivity = 221D, double beamSolarTransmittance = 0D, double beamSolarReflectance = 0.5D, double beamSolarReflectanceBack = 0.5D, double diffuseSolarTransmittance = 0D, double diffuseSolarReflectance = 0.5D, double diffuseSolarReflectanceBack = 0.5D, double beamVisibleTransmittance = 0D, double beamVisibleReflectance = 0.5D, double beamVisibleReflectanceBack = 0.5D, double diffuseVisibleTransmittance = 0D, double diffuseVisibleReflectance = 0.5D, double diffuseVisibleReflectanceBack = 0.5D, double infraredTransmittance = 0D, double emissivity = 0.9D, double emissivityBack = 0.9D, double distanceToGlass = 0.05D, double topOpeningMultiplier = 0.5D, double bottomOpeningMultiplier = 0.5D, double leftOpeningMultiplier = 0.5D, double rightOpeningMultiplier = 0.5D
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, string displayName = default, object userData = default, SlatOrientation slatOrientation = SlatOrientation.Horizontal, double slatWidth = 0.025D, double slatSeparation = 0.01875D, double slatThickness = 0.001D, double slatAngle = 45D, double slatConductivity = 221D, double beamSolarTransmittance = 0D, double beamSolarReflectance = 0.5D, double beamSolarReflectanceBack = 0.5D, double diffuseSolarTransmittance = 0D, double diffuseSolarReflectance = 0.5D, double diffuseSolarReflectanceBack = 0.5D, double beamVisibleTransmittance = 0D, double beamVisibleReflectance = 0.5D, double beamVisibleReflectanceBack = 0.5D, double diffuseVisibleTransmittance = 0D, double diffuseVisibleReflectance = 0.5D, double diffuseVisibleReflectanceBack = 0.5D, double infraredTransmittance = 0D, double emissivity = 0.9D, double emissivityBack = 0.9D, double distanceToGlass = 0.05D, double topOpeningMultiplier = 0.5D, double bottomOpeningMultiplier = 0.5D, double leftOpeningMultiplier = 0.5D, double rightOpeningMultiplier = 0.5D
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.SlatOrientation = slatOrientation;
             this.SlatWidth = slatWidth;
@@ -341,9 +341,9 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("EnergyWindowMaterialBlind:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  SlatOrientation: ").Append(this.SlatOrientation).Append("\n");
             sb.Append("  SlatWidth: ").Append(this.SlatWidth).Append("\n");
             sb.Append("  SlatSeparation: ").Append(this.SlatSeparation).Append("\n");

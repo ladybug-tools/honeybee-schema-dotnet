@@ -42,8 +42,8 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="IdealAirSystemAbridged" /> class.
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="economizerType">Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone.</param>
         /// <param name="demandControlledVentilation">Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the zone.</param>
         /// <param name="sensibleHeatRecovery">A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.</param>
@@ -56,8 +56,8 @@ namespace HoneybeeSchema
         /// <param name="coolingAvailability">An optional identifier of a schedule to set the availability of cooling over the course of the simulation.</param>
         public IdealAirSystemAbridged
         (
-            string identifier, object userData = default, string displayName = default, EconomizerType economizerType = EconomizerType.DifferentialDryBulb, bool demandControlledVentilation = false, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, double heatingAirTemperature = 50D, double coolingAirTemperature = 13D, AnyOf<Autosize, NoLimit, double> heatingLimit = default, AnyOf<Autosize, NoLimit, double> coolingLimit = default, string heatingAvailability = default, string coolingAvailability = default
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, string displayName = default, object userData = default, EconomizerType economizerType = EconomizerType.DifferentialDryBulb, bool demandControlledVentilation = false, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, double heatingAirTemperature = 50D, double coolingAirTemperature = 13D, AnyOf<Autosize, NoLimit, double> heatingLimit = default, AnyOf<Autosize, NoLimit, double> coolingLimit = default, string heatingAvailability = default, string coolingAvailability = default
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.EconomizerType = economizerType;
             this.DemandControlledVentilation = demandControlledVentilation;
@@ -179,9 +179,9 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("IdealAirSystemAbridged:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  EconomizerType: ").Append(this.EconomizerType).Append("\n");
             sb.Append("  DemandControlledVentilation: ").Append(this.DemandControlledVentilation).Append("\n");
             sb.Append("  SensibleHeatRecovery: ").Append(this.SensibleHeatRecovery).Append("\n");

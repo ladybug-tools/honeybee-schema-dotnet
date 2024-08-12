@@ -129,8 +129,8 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("PVProperties:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
-            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  RatedEfficiency: ").Append(this.RatedEfficiency).Append("\n");
             sb.Append("  ActiveAreaFraction: ").Append(this.ActiveAreaFraction).Append("\n");
             sb.Append("  ModuleType: ").Append(this.ModuleType).Append("\n");

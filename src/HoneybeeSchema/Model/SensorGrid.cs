@@ -43,16 +43,16 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="identifier">Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files.</param>
         /// <param name="sensors">A list of sensors that belong to the grid.</param>
+        /// <param name="displayName">Display name of the object with no character restrictions.</param>
         /// <param name="roomIdentifier">Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model.</param>
         /// <param name="lightPath">Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [[""SouthWindow1""], [""static_apertures"", ""NorthWindow2""]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation.</param>
-        /// <param name="displayName">Display name of the object with no character restrictions.</param>
         /// <param name="mesh">An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D.</param>
         /// <param name="baseGeometry">An optional array of Face3D used to represent the grid. There are no restrictions on how this property relates to the sensors and it is provided only to assist with the display of the grid when the number of sensors or the mesh is too large to be practically visualized.</param>
         /// <param name="groupIdentifier">An optional string to note the sensor grid group '             'to which the sensor is a part of. Grids sharing the same '             'group_identifier will be written to the same subfolder in Radiance '             'folder (default: None).</param>
         public SensorGrid
         (
-            string identifier, List<Sensor> sensors, string roomIdentifier = default, List<List<string>> lightPath = default, string displayName = default, Mesh3D mesh = default, List<Face3D> baseGeometry = default, string groupIdentifier = default
-        ) : base(roomIdentifier: roomIdentifier, lightPath: lightPath, identifier: identifier, displayName: displayName)
+            string identifier, List<Sensor> sensors, string displayName = default, string roomIdentifier = default, List<List<string>> lightPath = default, Mesh3D mesh = default, List<Face3D> baseGeometry = default, string groupIdentifier = default
+        ) : base(identifier: identifier, displayName: displayName, roomIdentifier: roomIdentifier, lightPath: lightPath)
         {
             this.Sensors = sensors ?? throw new ArgumentNullException("sensors is a required property for SensorGrid and cannot be null");
             this.Mesh = mesh;
@@ -122,10 +122,10 @@ namespace HoneybeeSchema
             sb.Append("SensorGrid:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  Sensors: ").Append(this.Sensors).Append("\n");
-            sb.Append("  RoomIdentifier: ").Append(this.RoomIdentifier).Append("\n");
-            sb.Append("  LightPath: ").Append(this.LightPath).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  RoomIdentifier: ").Append(this.RoomIdentifier).Append("\n");
+            sb.Append("  LightPath: ").Append(this.LightPath).Append("\n");
             sb.Append("  Mesh: ").Append(this.Mesh).Append("\n");
             sb.Append("  BaseGeometry: ").Append(this.BaseGeometry).Append("\n");
             sb.Append("  GroupIdentifier: ").Append(this.GroupIdentifier).Append("\n");

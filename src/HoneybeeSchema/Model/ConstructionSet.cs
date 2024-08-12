@@ -42,8 +42,8 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="ConstructionSet" /> class.
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="wallSet">A WallConstructionSet object for this ConstructionSet.</param>
         /// <param name="floorSet">A FloorConstructionSet object for this ConstructionSet.</param>
         /// <param name="roofCeilingSet">A RoofCeilingConstructionSet object for this ConstructionSet.</param>
@@ -53,8 +53,8 @@ namespace HoneybeeSchema
         /// <param name="airBoundaryConstruction">An AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type.</param>
         public ConstructionSet
         (
-            string identifier, object userData = default, string displayName = default, WallConstructionSet wallSet = default, FloorConstructionSet floorSet = default, RoofCeilingConstructionSet roofCeilingSet = default, ApertureConstructionSet apertureSet = default, DoorConstructionSet doorSet = default, ShadeConstruction shadeConstruction = default, AnyOf<AirBoundaryConstruction, OpaqueConstruction> airBoundaryConstruction = default
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, string displayName = default, object userData = default, WallConstructionSet wallSet = default, FloorConstructionSet floorSet = default, RoofCeilingConstructionSet roofCeilingSet = default, ApertureConstructionSet apertureSet = default, DoorConstructionSet doorSet = default, ShadeConstruction shadeConstruction = default, AnyOf<AirBoundaryConstruction, OpaqueConstruction> airBoundaryConstruction = default
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.WallSet = wallSet;
             this.FloorSet = floorSet;
@@ -146,9 +146,9 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("ConstructionSet:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  WallSet: ").Append(this.WallSet).Append("\n");
             sb.Append("  FloorSet: ").Append(this.FloorSet).Append("\n");
             sb.Append("  RoofCeilingSet: ").Append(this.RoofCeilingSet).Append("\n");

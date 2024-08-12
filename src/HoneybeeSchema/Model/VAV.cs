@@ -42,8 +42,8 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="VAV" /> class.
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="vintage">Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards</param>
         /// <param name="economizerType">Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration).</param>
         /// <param name="sensibleHeatRecovery">A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.</param>
@@ -52,8 +52,8 @@ namespace HoneybeeSchema
         /// <param name="equipmentType">Text for the specific type of system equipment from the VAVEquipmentType enumeration.</param>
         public VAV
         (
-            string identifier, object userData = default, string displayName = default, Vintages vintage = Vintages.ASHRAE_2019, AllAirEconomizerType economizerType = AllAirEconomizerType.NoEconomizer, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, bool demandControlledVentilation = false, VAVEquipmentType equipmentType = VAVEquipmentType.VAV_Chiller_Boiler
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, string displayName = default, object userData = default, Vintages vintage = Vintages.ASHRAE_2019, AllAirEconomizerType economizerType = AllAirEconomizerType.NoEconomizer, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, bool demandControlledVentilation = false, VAVEquipmentType equipmentType = VAVEquipmentType.VAV_Chiller_Boiler
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.Vintage = vintage;
             this.EconomizerType = economizerType;
@@ -139,9 +139,9 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("VAV:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Vintage: ").Append(this.Vintage).Append("\n");
             sb.Append("  EconomizerType: ").Append(this.EconomizerType).Append("\n");
             sb.Append("  SensibleHeatRecovery: ").Append(this.SensibleHeatRecovery).Append("\n");

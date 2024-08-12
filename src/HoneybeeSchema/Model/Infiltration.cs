@@ -44,15 +44,15 @@ namespace HoneybeeSchema
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
         /// <param name="flowPerExteriorArea">Number for the infiltration per exterior surface area in m3/s-m2.</param>
         /// <param name="schedule">The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="constantCoefficient">ConstantCoefficient</param>
         /// <param name="temperatureCoefficient">TemperatureCoefficient</param>
         /// <param name="velocityCoefficient">VelocityCoefficient</param>
         public Infiltration
         (
-            string identifier, double flowPerExteriorArea, AnyOf<ScheduleRuleset, ScheduleFixedInterval> schedule, object userData = default, string displayName = default, double constantCoefficient = 1D, double temperatureCoefficient = 0D, double velocityCoefficient = 0D
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, double flowPerExteriorArea, AnyOf<ScheduleRuleset, ScheduleFixedInterval> schedule, string displayName = default, object userData = default, double constantCoefficient = 1D, double temperatureCoefficient = 0D, double velocityCoefficient = 0D
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.FlowPerExteriorArea = flowPerExteriorArea;
             this.Schedule = schedule ?? throw new ArgumentNullException("schedule is a required property for Infiltration and cannot be null");
@@ -136,9 +136,9 @@ namespace HoneybeeSchema
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  FlowPerExteriorArea: ").Append(this.FlowPerExteriorArea).Append("\n");
             sb.Append("  Schedule: ").Append(this.Schedule).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  ConstantCoefficient: ").Append(this.ConstantCoefficient).Append("\n");
             sb.Append("  TemperatureCoefficient: ").Append(this.TemperatureCoefficient).Append("\n");
             sb.Append("  VelocityCoefficient: ").Append(this.VelocityCoefficient).Append("\n");

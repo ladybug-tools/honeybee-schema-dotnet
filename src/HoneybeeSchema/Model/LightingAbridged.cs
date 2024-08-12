@@ -44,16 +44,16 @@ namespace HoneybeeSchema
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
         /// <param name="wattsPerArea">Lighting per floor area as [W/m2].</param>
         /// <param name="schedule">Identifier of the schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile.</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="visibleFraction">The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. (Default: 0.25).</param>
         /// <param name="radiantFraction">The fraction of heat from lights that is long-wave radiation. (Default: 0.32).</param>
         /// <param name="returnAirFraction">The fraction of the heat from lights that goes into the zone return air. (Default: 0).</param>
         /// <param name="baselineWattsPerArea">The baseline lighting power density in [W/m2] of floor area. This baseline is useful to track how much better the installed lights are in comparison to a standard like ASHRAE 90.1. If set to None, it will default to 11.84029 W/m2, which is that ASHRAE 90.1-2004 baseline for an office.</param>
         public LightingAbridged
         (
-            string identifier, double wattsPerArea, string schedule, object userData = default, string displayName = default, double visibleFraction = 0.25D, double radiantFraction = 0.32D, double returnAirFraction = 0D, double baselineWattsPerArea = 11.84029D
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, double wattsPerArea, string schedule, string displayName = default, object userData = default, double visibleFraction = 0.25D, double radiantFraction = 0.32D, double returnAirFraction = 0D, double baselineWattsPerArea = 11.84029D
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.WattsPerArea = wattsPerArea;
             this.Schedule = schedule ?? throw new ArgumentNullException("schedule is a required property for LightingAbridged and cannot be null");
@@ -148,9 +148,9 @@ namespace HoneybeeSchema
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  WattsPerArea: ").Append(this.WattsPerArea).Append("\n");
             sb.Append("  Schedule: ").Append(this.Schedule).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  VisibleFraction: ").Append(this.VisibleFraction).Append("\n");
             sb.Append("  RadiantFraction: ").Append(this.RadiantFraction).Append("\n");
             sb.Append("  ReturnAirFraction: ").Append(this.ReturnAirFraction).Append("\n");

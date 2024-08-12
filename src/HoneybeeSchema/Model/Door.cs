@@ -143,9 +143,9 @@ namespace HoneybeeSchema
             sb.Append("  Geometry: ").Append(this.Geometry).Append("\n");
             sb.Append("  BoundaryCondition: ").Append(this.BoundaryCondition).Append("\n");
             sb.Append("  Properties: ").Append(this.Properties).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  UserData: ").Append(this.UserData).Append("\n");
-            sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  IsGlass: ").Append(this.IsGlass).Append("\n");
             sb.Append("  IndoorShades: ").Append(this.IndoorShades).Append("\n");
             sb.Append("  OutdoorShades: ").Append(this.OutdoorShades).Append("\n");
@@ -209,13 +209,15 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
-                    Extension.Equals(this.Geometry, input.Geometry) && 
-                    Extension.Equals(this.BoundaryCondition, input.BoundaryCondition) && 
-                    Extension.Equals(this.Properties, input.Properties) && 
-                    Extension.Equals(this.IsGlass, input.IsGlass) && 
-                    Extension.AllEquals(this.IndoorShades, input.IndoorShades) && 
-                    Extension.AllEquals(this.OutdoorShades, input.OutdoorShades);
+            var isSame = base.Equals(input);
+            isSame = Extension.Equals(this.Geometry, input.Geometry);
+            isSame = Extension.Equals(this.BoundaryCondition, input.BoundaryCondition);
+            isSame = Extension.Equals(this.Properties, input.Properties);
+            isSame = Extension.Equals(this.IsGlass, input.IsGlass);
+            isSame = Extension.AllEquals(this.IndoorShades, input.IndoorShades);
+            isSame = Extension.AllEquals(this.OutdoorShades, input.OutdoorShades);
+
+            return isSame;
         }
 
 

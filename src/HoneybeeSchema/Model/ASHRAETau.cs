@@ -106,8 +106,8 @@ namespace HoneybeeSchema
             sb.Append("  Date: ").Append(this.Date).Append("\n");
             sb.Append("  TauB: ").Append(this.TauB).Append("\n");
             sb.Append("  TauD: ").Append(this.TauD).Append("\n");
-            sb.Append("  DaylightSavings: ").Append(this.DaylightSavings).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  DaylightSavings: ").Append(this.DaylightSavings).Append("\n");
             return sb.ToString();
         }
 

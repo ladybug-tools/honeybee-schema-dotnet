@@ -114,9 +114,9 @@ namespace HoneybeeSchema
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  Geometry: ").Append(this.Geometry).Append("\n");
             sb.Append("  Properties: ").Append(this.Properties).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  UserData: ").Append(this.UserData).Append("\n");
-            sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  IsDetached: ").Append(this.IsDetached).Append("\n");
             return sb.ToString();
         }

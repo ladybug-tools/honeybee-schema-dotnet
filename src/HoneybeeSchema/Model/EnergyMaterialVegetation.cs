@@ -42,8 +42,8 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="EnergyMaterialVegetation" /> class.
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="roughness">Roughness</param>
         /// <param name="thickness">Thickness of the soil layer in meters.</param>
         /// <param name="conductivity">Thermal conductivity of the dry soil in W/m-K.</param>
@@ -63,8 +63,8 @@ namespace HoneybeeSchema
         /// <param name="moistDiffModel">MoistDiffModel</param>
         public EnergyMaterialVegetation
         (
-            string identifier, object userData = default, string displayName = default, Roughness roughness = Roughness.MediumRough, double thickness = 0.1D, double conductivity = 0.35D, double density = 1100D, double specificHeat = 1200D, double soilThermalAbsorptance = 0.9D, double soilSolarAbsorptance = 0.7D, double soilVisibleAbsorptance = 0.7D, double plantHeight = 0.2D, double leafAreaIndex = 1D, double leafReflectivity = 0.22D, double leafEmissivity = 0.95D, double minStomatalResist = 180D, double satVolMoistCont = 0.3D, double residualVolMoistCont = 0.01D, double initVolMoistCont = 0.01D, MoistureDiffusionModel moistDiffModel = MoistureDiffusionModel.Simple
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, string displayName = default, object userData = default, Roughness roughness = Roughness.MediumRough, double thickness = 0.1D, double conductivity = 0.35D, double density = 1100D, double specificHeat = 1200D, double soilThermalAbsorptance = 0.9D, double soilSolarAbsorptance = 0.7D, double soilVisibleAbsorptance = 0.7D, double plantHeight = 0.2D, double leafAreaIndex = 1D, double leafReflectivity = 0.22D, double leafEmissivity = 0.95D, double minStomatalResist = 180D, double satVolMoistCont = 0.3D, double residualVolMoistCont = 0.01D, double initVolMoistCont = 0.01D, MoistureDiffusionModel moistDiffModel = MoistureDiffusionModel.Simple
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.Roughness = roughness;
             this.Thickness = thickness;
@@ -249,9 +249,9 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("EnergyMaterialVegetation:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Roughness: ").Append(this.Roughness).Append("\n");
             sb.Append("  Thickness: ").Append(this.Thickness).Append("\n");
             sb.Append("  Conductivity: ").Append(this.Conductivity).Append("\n");

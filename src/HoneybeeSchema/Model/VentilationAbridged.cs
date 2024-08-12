@@ -42,8 +42,8 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="VentilationAbridged" /> class.
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="flowPerPerson">Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room.</param>
         /// <param name="flowPerArea">Intensity of ventilation in [m3/s per m2 of floor area].</param>
         /// <param name="airChangesPerHour">Intensity of ventilation in air changes per hour (ACH) for the entire Room.</param>
@@ -51,8 +51,8 @@ namespace HoneybeeSchema
         /// <param name="schedule">Identifier of the schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.</param>
         public VentilationAbridged
         (
-            string identifier, object userData = default, string displayName = default, double flowPerPerson = 0D, double flowPerArea = 0D, double airChangesPerHour = 0D, double flowPerZone = 0D, string schedule = default
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, string displayName = default, object userData = default, double flowPerPerson = 0D, double flowPerArea = 0D, double airChangesPerHour = 0D, double flowPerZone = 0D, string schedule = default
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.FlowPerPerson = flowPerPerson;
             this.FlowPerArea = flowPerArea;
@@ -134,9 +134,9 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("VentilationAbridged:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  FlowPerPerson: ").Append(this.FlowPerPerson).Append("\n");
             sb.Append("  FlowPerArea: ").Append(this.FlowPerArea).Append("\n");
             sb.Append("  AirChangesPerHour: ").Append(this.AirChangesPerHour).Append("\n");

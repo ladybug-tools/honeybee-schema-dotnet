@@ -42,16 +42,16 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="SHWSystem" /> class.
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="equipmentType">Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone.</param>
         /// <param name="heaterEfficiency">A number for the efficiency of the heater within the system. For Gas systems, this is the efficiency of the burner. For HeatPump systems, this is the rated COP of the system. For electric systems, this should usually be set to 1. If set to Autocalculate, this value will automatically be set based on the equipment_type. Gas_WaterHeater - 0.8, Electric_WaterHeater - 1.0, HeatPump_WaterHeater - 3.5, Gas_TanklessHeater - 0.8, Electric_TanklessHeater - 1.0.</param>
         /// <param name="ambientCondition">A number for the ambient temperature in which the hot water tank is located [C]. This can also be the identifier of a Room in which the tank is located.</param>
         /// <param name="ambientLossCoefficient">A number for the loss of heat from the water heater tank to the surrounding ambient conditions [W/K].</param>
         public SHWSystem
         (
-            string identifier, object userData = default, string displayName = default, SHWEquipmentType equipmentType = SHWEquipmentType.Gas_WaterHeater, AnyOf<double, Autocalculate> heaterEfficiency = default, AnyOf<double, string> ambientCondition = default, double ambientLossCoefficient = 6D
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, string displayName = default, object userData = default, SHWEquipmentType equipmentType = SHWEquipmentType.Gas_WaterHeater, AnyOf<double, Autocalculate> heaterEfficiency = default, AnyOf<double, string> ambientCondition = default, double ambientLossCoefficient = 6D
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.EquipmentType = equipmentType;
             this.HeaterEfficiency = heaterEfficiency ?? new Autocalculate();
@@ -119,9 +119,9 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("SHWSystem:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  EquipmentType: ").Append(this.EquipmentType).Append("\n");
             sb.Append("  HeaterEfficiency: ").Append(this.HeaterEfficiency).Append("\n");
             sb.Append("  AmbientCondition: ").Append(this.AmbientCondition).Append("\n");

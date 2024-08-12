@@ -44,16 +44,16 @@ namespace HoneybeeSchema
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
         /// <param name="windowConstruction">A WindowConstructionAbridged object that serves as the ""switched off"" version of the construction (aka. the ""bare construction""). The shade_material and shade_location will be used to modify this starting construction.</param>
         /// <param name="shadeMaterial">Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly.</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="shadeLocation">Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the ""Between"" option. Also note that, for a WindowConstruction with more than one gas gap, the ""Between"" option defaults to using the inner gap as this is the only option that EnergyPlus supports.</param>
         /// <param name="controlType">Text to indicate how the shading device is controlled, which determines when the shading is “on” or “off.”</param>
         /// <param name="setpoint">A number that corresponds to the specified control_type. This can be a value in (W/m2), (C) or (W) depending upon the control type.Note that this value cannot be None for any control type except ""AlwaysOn.""</param>
         /// <param name="schedule">An optional schedule identifier to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction.</param>
         public WindowConstructionShadeAbridged
         (
-            string identifier, WindowConstructionAbridged windowConstruction, string shadeMaterial, object userData = default, string displayName = default, ShadeLocation shadeLocation = ShadeLocation.Interior, ControlType controlType = ControlType.AlwaysOn, double setpoint = default, string schedule = default
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, WindowConstructionAbridged windowConstruction, string shadeMaterial, string displayName = default, object userData = default, ShadeLocation shadeLocation = ShadeLocation.Interior, ControlType controlType = ControlType.AlwaysOn, double setpoint = default, string schedule = default
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.WindowConstruction = windowConstruction ?? throw new ArgumentNullException("windowConstruction is a required property for WindowConstructionShadeAbridged and cannot be null");
             this.ShadeMaterial = shadeMaterial ?? throw new ArgumentNullException("shadeMaterial is a required property for WindowConstructionShadeAbridged and cannot be null");
@@ -145,9 +145,9 @@ namespace HoneybeeSchema
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  WindowConstruction: ").Append(this.WindowConstruction).Append("\n");
             sb.Append("  ShadeMaterial: ").Append(this.ShadeMaterial).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  ShadeLocation: ").Append(this.ShadeLocation).Append("\n");
             sb.Append("  ControlType: ").Append(this.ControlType).Append("\n");
             sb.Append("  Setpoint: ").Append(this.Setpoint).Append("\n");

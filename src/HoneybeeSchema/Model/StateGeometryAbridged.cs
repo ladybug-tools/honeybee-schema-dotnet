@@ -111,8 +111,8 @@ namespace HoneybeeSchema
             sb.Append("StateGeometryAbridged:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  Geometry: ").Append(this.Geometry).Append("\n");
-            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  Modifier: ").Append(this.Modifier).Append("\n");
             sb.Append("  ModifierDirect: ").Append(this.ModifierDirect).Append("\n");
             return sb.ToString();

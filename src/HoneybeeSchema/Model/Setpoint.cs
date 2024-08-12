@@ -44,15 +44,15 @@ namespace HoneybeeSchema
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
         /// <param name="coolingSchedule">Schedule for the cooling setpoint. The values in this schedule should be temperature in [C].</param>
         /// <param name="heatingSchedule">Schedule for the heating setpoint. The values in this schedule should be temperature in [C].</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="humidifyingSchedule">Schedule for the humidification setpoint. The values in this schedule should be in [%].</param>
         /// <param name="dehumidifyingSchedule">Schedule for the dehumidification setpoint. The values in this schedule should be in [%].</param>
         /// <param name="setpointCutoutDifference">An optional positive number for the temperature difference between the cutout temperature and the setpoint temperature. Specifying a non-zero number here is useful for modeling the throttling range associated with a given setup of setpoint controls and HVAC equipment. Throttling ranges describe the range where a zone is slightly over-cooled or over-heated beyond the thermostat setpoint. They are used to avoid situations where HVAC systems turn on only to turn off a few minutes later, thereby wearing out the parts of mechanical systems faster. They can have a minor impact on energy consumption and can often have significant impacts on occupant thermal comfort, though using the default value of zero will often yield results that are close enough when trying to estimate the annual heating/cooling energy use. Specifying a value of zero effectively assumes that the system will turn on whenever conditions are outside the setpoint range and will cut out as soon as the setpoint is reached.</param>
         public Setpoint
         (
-            string identifier, AnyOf<ScheduleRuleset, ScheduleFixedInterval> coolingSchedule, AnyOf<ScheduleRuleset, ScheduleFixedInterval> heatingSchedule, object userData = default, string displayName = default, AnyOf<ScheduleRuleset, ScheduleFixedInterval> humidifyingSchedule = default, AnyOf<ScheduleRuleset, ScheduleFixedInterval> dehumidifyingSchedule = default, double setpointCutoutDifference = 0D
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, AnyOf<ScheduleRuleset, ScheduleFixedInterval> coolingSchedule, AnyOf<ScheduleRuleset, ScheduleFixedInterval> heatingSchedule, string displayName = default, object userData = default, AnyOf<ScheduleRuleset, ScheduleFixedInterval> humidifyingSchedule = default, AnyOf<ScheduleRuleset, ScheduleFixedInterval> dehumidifyingSchedule = default, double setpointCutoutDifference = 0D
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.CoolingSchedule = coolingSchedule ?? throw new ArgumentNullException("coolingSchedule is a required property for Setpoint and cannot be null");
             this.HeatingSchedule = heatingSchedule ?? throw new ArgumentNullException("heatingSchedule is a required property for Setpoint and cannot be null");
@@ -133,9 +133,9 @@ namespace HoneybeeSchema
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  CoolingSchedule: ").Append(this.CoolingSchedule).Append("\n");
             sb.Append("  HeatingSchedule: ").Append(this.HeatingSchedule).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  HumidifyingSchedule: ").Append(this.HumidifyingSchedule).Append("\n");
             sb.Append("  DehumidifyingSchedule: ").Append(this.DehumidifyingSchedule).Append("\n");
             sb.Append("  SetpointCutoutDifference: ").Append(this.SetpointCutoutDifference).Append("\n");

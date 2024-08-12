@@ -44,8 +44,8 @@ namespace HoneybeeSchema
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
         /// <param name="width">Number for the width of frame in plane of window [m]. The frame width is assumed to be the same on all sides of window..</param>
         /// <param name="conductance">Number for the thermal conductance of the frame material measured from inside to outside of the frame surface (no air films) and taking 2D conduction effects into account [W/m2-K].</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="edgeToCenterRatio">Number between 0 and 4 for the ratio of the glass conductance near the frame (excluding air films) divided by the glass conductance at the center of the glazing (excluding air films). This is used only for multi-pane glazing constructions. This ratio should usually be greater than 1.0 since the spacer material that separates the glass panes is usually more conductive than the gap between panes. A value of 1 effectively indicates no spacer. Values should usually be obtained from the LBNL WINDOW program so that the unique characteristics of the window construction can be accounted for.</param>
         /// <param name="outsideProjection">Number for the distance that the frame projects outward from the outside face of the glazing [m]. This is used to calculate shadowing of frame onto glass, solar absorbed by the frame, IR emitted and absorbed by the frame, and convection from frame.</param>
         /// <param name="insideProjection">Number for the distance that the frame projects inward from the inside face of the glazing [m]. This is used to calculate solar absorbed by the frame, IR emitted and absorbed by the frame, and convection from frame.</param>
@@ -54,8 +54,8 @@ namespace HoneybeeSchema
         /// <param name="visibleAbsorptance">Fraction of incident visible wavelength radiation absorbed by the frame material.</param>
         public EnergyWindowFrame
         (
-            string identifier, double width, double conductance, object userData = default, string displayName = default, double edgeToCenterRatio = 1D, double outsideProjection = 0D, double insideProjection = 0D, double thermalAbsorptance = 0.9D, double solarAbsorptance = 0.7D, double visibleAbsorptance = 0.7D
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, double width, double conductance, string displayName = default, object userData = default, double edgeToCenterRatio = 1D, double outsideProjection = 0D, double insideProjection = 0D, double thermalAbsorptance = 0.9D, double solarAbsorptance = 0.7D, double visibleAbsorptance = 0.7D
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.Width = width;
             this.Conductance = conductance;
@@ -166,9 +166,9 @@ namespace HoneybeeSchema
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  Width: ").Append(this.Width).Append("\n");
             sb.Append("  Conductance: ").Append(this.Conductance).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  EdgeToCenterRatio: ").Append(this.EdgeToCenterRatio).Append("\n");
             sb.Append("  OutsideProjection: ").Append(this.OutsideProjection).Append("\n");
             sb.Append("  InsideProjection: ").Append(this.InsideProjection).Append("\n");

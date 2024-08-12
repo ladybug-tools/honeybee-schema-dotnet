@@ -111,8 +111,8 @@ namespace HoneybeeSchema
             sb.Append("ScheduleDay:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  Values: ").Append(this.Values).Append("\n");
-            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  Times: ").Append(this.Times).Append("\n");
             sb.Append("  Interpolate: ").Append(this.Interpolate).Append("\n");
             return sb.ToString();

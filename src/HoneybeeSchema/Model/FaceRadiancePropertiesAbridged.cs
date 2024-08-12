@@ -81,9 +81,9 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("FaceRadiancePropertiesAbridged:\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  Modifier: ").Append(this.Modifier).Append("\n");
             sb.Append("  ModifierBlk: ").Append(this.ModifierBlk).Append("\n");
-            sb.Append("  Type: ").Append(this.Type).Append("\n");
             return sb.ToString();
         }
 

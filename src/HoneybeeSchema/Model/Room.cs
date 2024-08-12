@@ -151,9 +151,9 @@ namespace HoneybeeSchema
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  Faces: ").Append(this.Faces).Append("\n");
             sb.Append("  Properties: ").Append(this.Properties).Append("\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  UserData: ").Append(this.UserData).Append("\n");
-            sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  IndoorShades: ").Append(this.IndoorShades).Append("\n");
             sb.Append("  OutdoorShades: ").Append(this.OutdoorShades).Append("\n");
             sb.Append("  Multiplier: ").Append(this.Multiplier).Append("\n");

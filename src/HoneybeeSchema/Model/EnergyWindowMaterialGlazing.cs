@@ -42,8 +42,8 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialGlazing" /> class.
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="thickness">The surface-to-surface thickness of the glass in meters. Default:  0.003.</param>
         /// <param name="solarTransmittance">Transmittance of solar radiation through the glass at normal incidence. Default: 0.85 for clear glass.</param>
         /// <param name="solarReflectance">Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default: 0.075 for clear glass.</param>
@@ -59,8 +59,8 @@ namespace HoneybeeSchema
         /// <param name="solarDiffusing">If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.</param>
         public EnergyWindowMaterialGlazing
         (
-            string identifier, object userData = default, string displayName = default, double thickness = 0.003D, double solarTransmittance = 0.85D, double solarReflectance = 0.075D, AnyOf<Autocalculate, double> solarReflectanceBack = default, double visibleTransmittance = 0.9D, double visibleReflectance = 0.075D, AnyOf<Autocalculate, double> visibleReflectanceBack = default, double infraredTransmittance = 0D, double emissivity = 0.84D, double emissivityBack = 0.84D, double conductivity = 0.9D, double dirtCorrection = 1D, bool solarDiffusing = false
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, string displayName = default, object userData = default, double thickness = 0.003D, double solarTransmittance = 0.85D, double solarReflectance = 0.075D, AnyOf<Autocalculate, double> solarReflectanceBack = default, double visibleTransmittance = 0.9D, double visibleReflectance = 0.075D, AnyOf<Autocalculate, double> visibleReflectanceBack = default, double infraredTransmittance = 0D, double emissivity = 0.84D, double emissivityBack = 0.84D, double conductivity = 0.9D, double dirtCorrection = 1D, bool solarDiffusing = false
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.Thickness = thickness;
             this.SolarTransmittance = solarTransmittance;
@@ -207,9 +207,9 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("EnergyWindowMaterialGlazing:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Thickness: ").Append(this.Thickness).Append("\n");
             sb.Append("  SolarTransmittance: ").Append(this.SolarTransmittance).Append("\n");
             sb.Append("  SolarReflectance: ").Append(this.SolarReflectance).Append("\n");

@@ -45,9 +45,9 @@ namespace HoneybeeSchema
         /// <param name="position">The view position (-vp) as an array of (x, y, z) values.This is the focal point of a perspective view or the center of a parallel projection.</param>
         /// <param name="direction">The view direction (-vd) as an array of (x, y, z) values.The length of this vector indicates the focal distance as needed by the pixel depth of field (-pd) in rpict.</param>
         /// <param name="upVector">The view up (-vu) vector as an array of (x, y, z) values.</param>
+        /// <param name="displayName">Display name of the object with no character restrictions.</param>
         /// <param name="roomIdentifier">Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model.</param>
         /// <param name="lightPath">Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [[""SouthWindow1""], [""static_apertures"", ""NorthWindow2""]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation.</param>
-        /// <param name="displayName">Display name of the object with no character restrictions.</param>
         /// <param name="viewType">ViewType</param>
         /// <param name="hSize">A number for the horizontal field of view in degrees (for all perspective projections including fisheye). For a parallel projection, this is the view width in world coordinates.</param>
         /// <param name="vSize">A number for the vertical field of view in degrees (for all perspective projections including fisheye). For a parallel projection, this is the view width in world coordinates.</param>
@@ -58,8 +58,8 @@ namespace HoneybeeSchema
         /// <param name="groupIdentifier">An optional string to note the view group '             'to which the sensor is a part of. Views sharing the same '             'group_identifier will be written to the same subfolder in Radiance '             'folder (default: None).</param>
         public View
         (
-            string identifier, List<double> position, List<double> direction, List<double> upVector, string roomIdentifier = default, List<List<string>> lightPath = default, string displayName = default, ViewType viewType = ViewType.v, double hSize = 60D, double vSize = 60D, double shift = default, double lift = default, double foreClip = default, double aftClip = default, string groupIdentifier = default
-        ) : base(roomIdentifier: roomIdentifier, lightPath: lightPath, identifier: identifier, displayName: displayName)
+            string identifier, List<double> position, List<double> direction, List<double> upVector, string displayName = default, string roomIdentifier = default, List<List<string>> lightPath = default, ViewType viewType = ViewType.v, double hSize = 60D, double vSize = 60D, double shift = default, double lift = default, double foreClip = default, double aftClip = default, string groupIdentifier = default
+        ) : base(identifier: identifier, displayName: displayName, roomIdentifier: roomIdentifier, lightPath: lightPath)
         {
             this.Position = position ?? throw new ArgumentNullException("position is a required property for View and cannot be null");
             this.Direction = direction ?? throw new ArgumentNullException("direction is a required property for View and cannot be null");
@@ -189,10 +189,10 @@ namespace HoneybeeSchema
             sb.Append("  Position: ").Append(this.Position).Append("\n");
             sb.Append("  Direction: ").Append(this.Direction).Append("\n");
             sb.Append("  UpVector: ").Append(this.UpVector).Append("\n");
-            sb.Append("  RoomIdentifier: ").Append(this.RoomIdentifier).Append("\n");
-            sb.Append("  LightPath: ").Append(this.LightPath).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  RoomIdentifier: ").Append(this.RoomIdentifier).Append("\n");
+            sb.Append("  LightPath: ").Append(this.LightPath).Append("\n");
             sb.Append("  ViewType: ").Append(this.ViewType).Append("\n");
             sb.Append("  HSize: ").Append(this.HSize).Append("\n");
             sb.Append("  VSize: ").Append(this.VSize).Append("\n");

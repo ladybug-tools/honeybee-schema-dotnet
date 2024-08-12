@@ -108,9 +108,9 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("DoorModifierSetAbridged:\n");
+            sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  ExteriorModifier: ").Append(this.ExteriorModifier).Append("\n");
             sb.Append("  InteriorModifier: ").Append(this.InteriorModifier).Append("\n");
-            sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  InteriorGlassModifier: ").Append(this.InteriorGlassModifier).Append("\n");
             sb.Append("  ExteriorGlassModifier: ").Append(this.ExteriorGlassModifier).Append("\n");
             sb.Append("  OverheadModifier: ").Append(this.OverheadModifier).Append("\n");

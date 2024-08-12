@@ -43,13 +43,13 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
         /// <param name="materials">List of glazing and gas material definitions. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="frame">An optional window frame material for the frame that surrounds the window construction.</param>
         public WindowConstruction
         (
-            string identifier, List<AnyOf<EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialGlazing, EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, EnergyWindowMaterialGasMixture>> materials, object userData = default, string displayName = default, EnergyWindowFrame frame = default
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, List<AnyOf<EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialGlazing, EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, EnergyWindowMaterialGasMixture>> materials, string displayName = default, object userData = default, EnergyWindowFrame frame = default
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.Materials = materials ?? throw new ArgumentNullException("materials is a required property for WindowConstruction and cannot be null");
             this.Frame = frame;
@@ -103,9 +103,9 @@ namespace HoneybeeSchema
             sb.Append("WindowConstruction:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  Materials: ").Append(this.Materials).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Frame: ").Append(this.Frame).Append("\n");
             return sb.ToString();
         }

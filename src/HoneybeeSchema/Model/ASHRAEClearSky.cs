@@ -94,8 +94,8 @@ namespace HoneybeeSchema
             sb.Append("ASHRAEClearSky:\n");
             sb.Append("  Date: ").Append(this.Date).Append("\n");
             sb.Append("  Clearness: ").Append(this.Clearness).Append("\n");
-            sb.Append("  DaylightSavings: ").Append(this.DaylightSavings).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  DaylightSavings: ").Append(this.DaylightSavings).Append("\n");
             return sb.ToString();
         }
 

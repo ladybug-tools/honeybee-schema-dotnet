@@ -43,12 +43,12 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
         /// <param name="materials">List of opaque material definitions. The order of the materials is from exterior to interior.</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         public OpaqueConstruction
         (
-            string identifier, List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyMaterialVegetation>> materials, object userData = default, string displayName = default
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyMaterialVegetation>> materials, string displayName = default, object userData = default
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.Materials = materials ?? throw new ArgumentNullException("materials is a required property for OpaqueConstruction and cannot be null");
 
@@ -94,9 +94,9 @@ namespace HoneybeeSchema
             sb.Append("OpaqueConstruction:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  Materials: ").Append(this.Materials).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             return sb.ToString();
         }
 

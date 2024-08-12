@@ -134,8 +134,8 @@ namespace HoneybeeSchema
             sb.Append("  FlowRate: ").Append(this.FlowRate).Append("\n");
             sb.Append("  PressureRise: ").Append(this.PressureRise).Append("\n");
             sb.Append("  Efficiency: ").Append(this.Efficiency).Append("\n");
-            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  VentilationType: ").Append(this.VentilationType).Append("\n");
             sb.Append("  Control: ").Append(this.Control).Append("\n");
             return sb.ToString();

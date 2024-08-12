@@ -42,14 +42,14 @@ namespace HoneybeeSchema
         /// Initializes a new instance of the <see cref="AirBoundaryConstruction" /> class.
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="airMixingPerArea">A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system.</param>
         /// <param name="airMixingSchedule">A fractional schedule as a ScheduleRuleset or ScheduleFixedInterval for the air mixing schedule across the construction. If unspecified, an Always On schedule will be assumed.</param>
         public AirBoundaryConstruction
         (
-            string identifier, object userData = default, string displayName = default, double airMixingPerArea = 0.1D, AnyOf<ScheduleRuleset, ScheduleFixedInterval> airMixingSchedule = default
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, string displayName = default, object userData = default, double airMixingPerArea = 0.1D, AnyOf<ScheduleRuleset, ScheduleFixedInterval> airMixingSchedule = default
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.AirMixingPerArea = airMixingPerArea;
             this.AirMixingSchedule = airMixingSchedule;
@@ -102,9 +102,9 @@ namespace HoneybeeSchema
             var sb = new StringBuilder();
             sb.Append("AirBoundaryConstruction:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  AirMixingPerArea: ").Append(this.AirMixingPerArea).Append("\n");
             sb.Append("  AirMixingSchedule: ").Append(this.AirMixingSchedule).Append("\n");
             return sb.ToString();

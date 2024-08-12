@@ -44,12 +44,12 @@ namespace HoneybeeSchema
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
         /// <param name="constructions">A list of WindowConstructionAbridged objects that define the various states that the dynamic window can assume.</param>
         /// <param name="schedule">An identifier for a control schedule that dictates which constructions are active at given times throughout the simulation. The values of the schedule should be integers and range from 0 to one less then the number of constructions. Zero indicates that the first construction is active, one indicates that the second on is active, etc. The schedule type limits of this schedule should be ""Control Level."" If building custom schedule type limits that describe a particular range of states, the type limits should be ""Discrete"" and the unit type should be ""Mode,"" ""Control,"" or some other fractional unit.</param>
-        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
+        /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         public WindowConstructionDynamicAbridged
         (
-            string identifier, List<WindowConstructionAbridged> constructions, string schedule, object userData = default, string displayName = default
-        ) : base(userData: userData, identifier: identifier, displayName: displayName)
+            string identifier, List<WindowConstructionAbridged> constructions, string schedule, string displayName = default, object userData = default
+        ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.Constructions = constructions ?? throw new ArgumentNullException("constructions is a required property for WindowConstructionDynamicAbridged and cannot be null");
             this.Schedule = schedule ?? throw new ArgumentNullException("schedule is a required property for WindowConstructionDynamicAbridged and cannot be null");
@@ -107,9 +107,9 @@ namespace HoneybeeSchema
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  Constructions: ").Append(this.Constructions).Append("\n");
             sb.Append("  Schedule: ").Append(this.Schedule).Append("\n");
-            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
+            sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             return sb.ToString();
         }
 
