@@ -142,7 +142,7 @@ namespace HoneybeeSchema
 
 
         {%- if HasInheritance  == false -%} 
-        public override string ToJson(bool indented = false)
+        public virtual string ToJson(bool indented = false)
         {
             var format = indented ? Formatting.Indented : Formatting.None;
             return JsonConvert.SerializeObject(this, format, JsonSetting.AnyOfConvertSetting);

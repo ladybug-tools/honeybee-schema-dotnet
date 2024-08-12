@@ -4,9 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 namespace HoneybeeSchema
 {
-    public partial class OpenAPIGenBaseModel : HoneybeeObject
+    public partial class OpenAPIGenBaseModel : IHoneybeeObject
     {
-        public override string GetType => this.Type;
 
         //public bool IsValid(bool throwException = false)
         //{
@@ -41,6 +40,36 @@ namespace HoneybeeSchema
         //    }
 
         //    yield break;
+        //}
+
+        public static bool operator ==(OpenAPIGenBaseModel left, OpenAPIGenBaseModel right)
+        {
+            if (left is null)
+            {
+                if (right is null)
+                {
+                    return true;
+                }
+
+                // Only the left side is null.
+                return false;
+            }
+            // Equals handles case of null on right side.
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(OpenAPIGenBaseModel left, OpenAPIGenBaseModel right)
+        {
+            return !(left == right);
+        }
+
+        //public override bool Equals(object obj)
+        //{
+        //    if (obj == null)
+        //        return false;
+        //    if (obj is HoneybeeObject input)
+        //        return Extension.Equals(this.GetType, input.GetType);
+        //    return false;
         //}
     }
 
