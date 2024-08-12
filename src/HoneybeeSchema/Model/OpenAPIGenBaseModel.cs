@@ -141,9 +141,8 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            var isSame = base.Equals(input);
-                  isSame =  Extension.Equals(this.Type, input.Type);
-            return isSame;
+            return true && 
+                    Extension.Equals(this.Type, input.Type);
         }
 
 
@@ -160,6 +159,27 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
+        }
+
+        public static bool operator ==(OpenAPIGenBaseModel left, OpenAPIGenBaseModel right)
+        {
+            if (left is null)
+            {
+                if (right is null)
+                {
+                    return true;
+                }
+
+                // Only the left side is null.
+                return false;
+            }
+            // Equals handles case of null on right side.
+            return object.Equals(left, right);
+        }
+
+        public static bool operator !=(OpenAPIGenBaseModel left, OpenAPIGenBaseModel right)
+        {
+            return !(left == right);
         }
 
         public bool IsValid(bool throwException = false)

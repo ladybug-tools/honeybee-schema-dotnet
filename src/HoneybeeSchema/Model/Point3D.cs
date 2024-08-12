@@ -186,7 +186,7 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return true && 
                     Extension.Equals(this.X, input.X) && 
                     Extension.Equals(this.Y, input.Y) && 
                     Extension.Equals(this.Z, input.Z) && 
@@ -213,6 +213,27 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
                 return hashCode;
             }
+        }
+
+        public static bool operator ==(Point3D left, Point3D right)
+        {
+            if (left is null)
+            {
+                if (right is null)
+                {
+                    return true;
+                }
+
+                // Only the left side is null.
+                return false;
+            }
+            // Equals handles case of null on right side.
+            return object.Equals(left, right);
+        }
+
+        public static bool operator !=(Point3D left, Point3D right)
+        {
+            return !(left == right);
         }
 
         public bool IsValid(bool throwException = false)

@@ -209,15 +209,13 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            var isSame = base.Equals(input);
-            isSame = Extension.Equals(this.Geometry, input.Geometry);
-            isSame = Extension.Equals(this.BoundaryCondition, input.BoundaryCondition);
-            isSame = Extension.Equals(this.Properties, input.Properties);
-            isSame = Extension.Equals(this.IsGlass, input.IsGlass);
-            isSame = Extension.AllEquals(this.IndoorShades, input.IndoorShades);
-            isSame = Extension.AllEquals(this.OutdoorShades, input.OutdoorShades);
-
-            return isSame;
+            return base.Equals(input) && 
+                    Extension.Equals(this.Geometry, input.Geometry) && 
+                    Extension.Equals(this.BoundaryCondition, input.BoundaryCondition) && 
+                    Extension.Equals(this.Properties, input.Properties) && 
+                    Extension.Equals(this.IsGlass, input.IsGlass) && 
+                    Extension.AllEquals(this.IndoorShades, input.IndoorShades) && 
+                    Extension.AllEquals(this.OutdoorShades, input.OutdoorShades);
         }
 
 

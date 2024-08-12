@@ -259,7 +259,7 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
+            return true && 
                     Extension.Equals(this.Code, input.Code) && 
                     Extension.Equals(this.ErrorType, input.ErrorType) && 
                     Extension.Equals(this.ExtensionType, input.ExtensionType) && 
@@ -307,6 +307,27 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.HelperGeometry.GetHashCode();
                 return hashCode;
             }
+        }
+
+        public static bool operator ==(ValidationError left, ValidationError right)
+        {
+            if (left is null)
+            {
+                if (right is null)
+                {
+                    return true;
+                }
+
+                // Only the left side is null.
+                return false;
+            }
+            // Equals handles case of null on right side.
+            return object.Equals(left, right);
+        }
+
+        public static bool operator !=(ValidationError left, ValidationError right)
+        {
+            return !(left == right);
         }
 
         public bool IsValid(bool throwException = false)
