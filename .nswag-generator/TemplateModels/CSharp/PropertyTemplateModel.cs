@@ -42,6 +42,12 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
         CsPropertyName = Helper.ToPascalCase(PropertyName);
         DefaultCodeFormat = ConvertDefaultValue(json);
 
+        // check List of AnyOf type
+        if (IsArray && (json.Item.AnyOf?.Any()).GetValueOrDefault() && HasDefault) 
+        {
+            DefaultCodeFormat = DefaultCodeFormat.Replace("(new []", $"(new {Type}");
+        }
+
         Description = String.IsNullOrEmpty(Description)? CsPropertyName : Description;
 
         ConstructionParameterCode = $"{Type} {CsParameterName}";

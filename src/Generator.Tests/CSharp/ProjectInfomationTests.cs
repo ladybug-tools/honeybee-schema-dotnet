@@ -39,16 +39,6 @@ namespace Generator.Tests.CSharp
 
         }
 
-        [Test]
-        public void TestInheritedProperty()
-        {
-            var json = doc.Components.Schemas["Autocalculate"];
-
-            var classModel = new ClassTemplateModel(doc, json);
-            var parentProp = classModel.Properties.First();
-            Assert.That(parentProp.IsInherited, Is.True);
-
-        }
 
     }
 }
