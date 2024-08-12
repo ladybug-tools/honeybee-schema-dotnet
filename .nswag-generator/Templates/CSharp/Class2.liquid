@@ -203,10 +203,9 @@ namespace {{ NameSpaceName }}
         /// <returns>Boolean</returns>
         public bool Equals({{ CsClassName }} input)
         {
-            {%- assign skipComma = true -%}
             if (input == null)
                 return false;
-            return base.Equals(input){% for property in Properties %} && 
+            return {% if HasInheritance == false %}true{% else %}base.Equals(input){% endif %}{%- assign skipComma = true -%}{% for property in Properties %} && 
                     Extension.{%- if property.IsArray -%}AllEquals{% else %}Equals{% endif %}(this.{{ property.CsPropertyName }}, input.{{ property.CsPropertyName }}) {%- endfor -%};
         }
 

@@ -55,7 +55,7 @@ namespace HoneybeeSchema
                 return false;
             }
             // Equals handles case of null on right side.
-            return left.Equals(right);
+            return object.Equals(left,right);
         }
 
         public static bool operator !=(OpenAPIGenBaseModel left, OpenAPIGenBaseModel right)
