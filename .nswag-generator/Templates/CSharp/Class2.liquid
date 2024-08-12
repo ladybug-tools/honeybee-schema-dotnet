@@ -41,7 +41,7 @@ namespace HoneybeeSchema
             // Set readonly properties with defaultValue
         {%-  for property in AllProperties -%}
 		    {%- if property.IsReadOnly -%}{%- if property.HasDefault -%}
-            this.{{ property.CsPropertyName }} = {{ property.DefaultCodeFormat }};
+            this.{{ property.CsPropertyName }} = {% if property.HasVeryLongDefault %}{{ property.CsPropertyName }}Default{% else %}{{ property.DefaultCodeFormat }}{% endif %};
             {%- endif -%}{%- endif -%}
         {%- endfor -%}
         }
@@ -67,7 +67,7 @@ namespace HoneybeeSchema
             {%- if property.IsValueType -%}
             this.{{ property.CsPropertyName }} = {{ property.CsParameterName }};
             {%- else -%}
-            this.{{ property.CsPropertyName }} = {{ property.CsParameterName }}{% if property.HasDefault %} ?? {{ property.DefaultCodeFormat }}{% elsif property.IsRequired %} ?? throw new ArgumentNullException("{{ property.CsParameterName }} is a required property for {{ CsClassName }} and cannot be null"){%- endif -%};
+            this.{{ property.CsPropertyName }} = {{ property.CsParameterName }}{% if property.HasDefault %} ?? {% if property.HasVeryLongDefault %}{{ property.CsPropertyName }}Default{% else %}{{ property.DefaultCodeFormat }}{% endif %}{% elsif property.IsRequired %} ?? throw new ArgumentNullException("{{ property.CsParameterName }} is a required property for {{ CsClassName }} and cannot be null"){%- endif -%};
             {%- endif -%}
         {%- endif -%}
 		{%- endfor -%}
@@ -75,7 +75,7 @@ namespace HoneybeeSchema
             // Set readonly properties with defaultValue
 		{%-  for property in AllProperties -%}
 		    {%- if property.IsReadOnly and property.HasDefault -%}
-            this.{{ property.CsPropertyName }} = {{ property.DefaultCodeFormat }};
+            this.{{ property.CsPropertyName }} = {% if property.HasVeryLongDefault %}{{ property.CsPropertyName }}Default{% else %}{{ property.DefaultCodeFormat }}{% endif %};
             {%- endif -%}
 		{%- endfor -%}
 
@@ -86,6 +86,9 @@ namespace HoneybeeSchema
 
 	
 	{%  for property in Properties %}
+        {%- if property.HasVeryLongDefault -%}
+        public static readonly {{ property.Type }} {{ property.CsPropertyName }}Default = {{ property.DefaultCodeFormat }};
+        {%- endif -%}
         /// <summary>
         /// {{ property.Description }}
         /// </summary>
@@ -96,7 +99,7 @@ namespace HoneybeeSchema
         [MinLength({{ property.MinLength }})]{% endif %}{% if property.HasMaxLength %}
         [MaxLength({{ property.MaxLength }})]{% endif %}
         [DataMember(Name = "{{ property.PropertyName }}"{% if property.IsRequired %}, IsRequired = true{% endif %})]
-        public {{ property.Type }} {{ property.CsPropertyName }} { get;{% if property.IsReadOnly %} protected{% endif %} set; }{% if property.HasDefault %} = {{ property.DefaultCodeFormat }};{% endif %}
+        public {{ property.Type }} {{ property.CsPropertyName }} { get;{% if property.IsReadOnly %} protected{% endif %} set; }{% if property.HasDefault %} = {% if property.HasVeryLongDefault %}{{ property.CsPropertyName }}Default{% else %}{{ property.DefaultCodeFormat }}{% endif %};{% endif %}
 	{%- endfor -%}
 
 

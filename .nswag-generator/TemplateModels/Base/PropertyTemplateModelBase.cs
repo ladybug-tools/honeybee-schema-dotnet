@@ -16,7 +16,7 @@ public class PropertyTemplateModelBase
     public object Default { get; set; }
     public string DefaultCodeFormat { get; set; }
     public bool HasDefault => Default != null;
-
+    public bool HasVeryLongDefault => HasDefault && (DefaultCodeFormat?.Length > 100);
     public bool IsAnyOf { get; set; }
     public List<JsonSchema> AnyOf { get; set; }
 
