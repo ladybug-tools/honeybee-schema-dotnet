@@ -197,3 +197,4 @@ $RECYCLE.BIN/
 
 src/HoneybeeSchema/Client/
 src/HoneybeeSchema/Properties/PublishProfiles/FolderProfile.pubxml
+.nswag-generator/Output
