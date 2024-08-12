@@ -42,26 +42,26 @@ namespace HoneybeeSchema
         //    yield break;
         //}
 
-        public static bool operator ==(OpenAPIGenBaseModel left, OpenAPIGenBaseModel right)
-        {
-            if (left is null)
-            {
-                if (right is null)
-                {
-                    return true;
-                }
+        //public static bool operator ==(OpenAPIGenBaseModel left, OpenAPIGenBaseModel right)
+        //{
+        //    if (left is null)
+        //    {
+        //        if (right is null)
+        //        {
+        //            return true;
+        //        }
 
-                // Only the left side is null.
-                return false;
-            }
-            // Equals handles case of null on right side.
-            return object.Equals(left,right);
-        }
+        //        // Only the left side is null.
+        //        return false;
+        //    }
+        //    // Equals handles case of null on right side.
+        //    return object.Equals(left,right);
+        //}
 
-        public static bool operator !=(OpenAPIGenBaseModel left, OpenAPIGenBaseModel right)
-        {
-            return !(left == right);
-        }
+        //public static bool operator !=(OpenAPIGenBaseModel left, OpenAPIGenBaseModel right)
+        //{
+        //    return !(left == right);
+        //}
 
         //public override bool Equals(object obj)
         //{
