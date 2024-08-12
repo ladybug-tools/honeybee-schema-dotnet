@@ -29,7 +29,7 @@ public class ClassTemplateModel : ClassTemplateModelBase
     {
 
         Properties = json.ActualProperties.Select(_ => new PropertyTemplateModel(_.Key, _.Value)).ToList();
-        ParentProperties = json.AllInheritedSchemas?.SelectMany(_=>_.ActualProperties)?.Select(_ => new PropertyTemplateModel(_.Key, _.Value))?.DistinctBy(_ => _.PropertyName).ToList();
+        ParentProperties = json.AllInheritedSchemas?.Reverse()?.SelectMany(_=>_.ActualProperties)?.Select(_ => new PropertyTemplateModel(_.Key, _.Value))?.DistinctBy(_ => _.PropertyName).ToList();
         //ParentProperties?.ForEach(p => p.IsInherited = true);
         var parentPropertyNames = ParentProperties?.Select(p => p.PropertyName)?.ToList();
 
