@@ -10,6 +10,8 @@ namespace TemplateModels.CSharp;
 
 public class ClassTemplateModel : ClassTemplateModelBase
 {
+    public static string SDKName { get; set; }
+    public string NameSpaceName => SDKName;
     public string CsClassName { get; set; }
 
     public List<ClassTemplateModel> DerivedClasses { get; set; } // children

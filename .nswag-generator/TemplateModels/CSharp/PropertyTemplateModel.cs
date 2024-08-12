@@ -11,6 +11,7 @@ namespace TemplateModels.CSharp;
 
 public class PropertyTemplateModel: PropertyTemplateModelBase
 {
+    public static string NameSpaceName => ClassTemplateModel.SDKName;
     public string CsPropertyName { get; set; }
     public string CsParameterName { get; set; }
     public string ConstructionParameterCode { get; set; }
@@ -206,7 +207,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
             {
                 var isFullJsonObj = jObj.Values().Count() > 1;
                 var formateJson = isFullJsonObj ? jObj.ToString()?.Replace("\"", "\"\"") : "";
-                defaultCodeFormat = isFullJsonObj? $"{vType}.FromJson(@\"{formateJson}\")" : $"new {vType}()";
+                defaultCodeFormat = isFullJsonObj? $"{NameSpaceName}.{vType}.FromJson(@\"{formateJson}\")" : $"new {vType}()";
             }
             else
             {
