@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace HoneybeeSchema
 {
@@ -666,6 +667,30 @@ namespace HoneybeeSchema
                 dictionary[key] = value;
             else
                 dictionary.Add(key, value);
+        }
+
+        public static T To<T>(this string json)
+        {
+            if (string.IsNullOrEmpty(json))
+            {
+                throw new ArgumentException("JSON string cannot be null or empty", nameof(json));
+            }
+
+            MethodInfo methodInfo = typeof(T).GetMethod("FromJson", BindingFlags.Public | BindingFlags.Static);
+            if (methodInfo == null)
+            {
+                throw new InvalidOperationException($"Type {typeof(T)} does not have a public static FromJson method.");
+            }
+
+            try
+            {
+                var obj = methodInfo.Invoke(null, new object[] { json });
+                return (T)obj;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Error deserializing JSON to object", ex);
+            }
         }
 
     }

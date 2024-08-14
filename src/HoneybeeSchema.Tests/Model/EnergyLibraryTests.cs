@@ -337,6 +337,19 @@ namespace HoneybeeSchema.Test
             Assert.AreEqual(glz2.RValue, 0.033019, 0.01);
         }
 
+
+        [Test]
+        public void EnergyMaterialsDefault()
+        {
+            var dd = GlobalConstructionSet.MaterialsDefault;
+            var obj = dd.First()?.Obj;
+            Assert.IsTrue(obj is EnergyMaterial);
+            var m = obj as EnergyMaterial;
+            Assert.AreEqual(m.Density, 1120);
+            StringAssert.AreEqualIgnoringCase("Generic Roof Membrane", m.Identifier);
+        }
+
+
     }
 
 }

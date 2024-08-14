@@ -237,7 +237,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
             {
                 var isFullJsonObj = jObj.Values().Count() > 1;
                 var formateJson = isFullJsonObj ? jObj.ToString()?.Replace("\"", "\"\"") : "";
-                defaultCodeFormat = isFullJsonObj? $"{NameSpaceName}.{vType}.FromJson(@\"{formateJson}\")" : $"new {vType}()";
+                defaultCodeFormat = isFullJsonObj? $"(@\"{formateJson}\").To<{vType}>()" : $"new {vType}()";
             }
             else
             {
