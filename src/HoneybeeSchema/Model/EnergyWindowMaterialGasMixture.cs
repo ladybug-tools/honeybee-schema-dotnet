@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Create a mixture of two to four different gases to fill the panes of multiple\npane windows.
     /// </summary>
     [Summary(@"Create a mixture of two to four different gases to fill the panes of multiple\npane windows.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "EnergyWindowMaterialGasMixture")]
-    public partial class EnergyWindowMaterialGasMixture : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialGasMixture>
+    public partial class EnergyWindowMaterialGasMixture : IDdEnergyBaseModel, System.IEquatable<EnergyWindowMaterialGasMixture>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialGasMixture" /> class.
@@ -52,8 +51,8 @@ namespace HoneybeeSchema
             string identifier, List<GasType> gasTypes, List<double> gasFractions, string displayName = default, object userData = default, double thickness = 0.0125D
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
-            this.GasTypes = gasTypes ?? throw new ArgumentNullException("gasTypes is a required property for EnergyWindowMaterialGasMixture and cannot be null");
-            this.GasFractions = gasFractions ?? throw new ArgumentNullException("gasFractions is a required property for EnergyWindowMaterialGasMixture and cannot be null");
+            this.GasTypes = gasTypes ?? throw new System.ArgumentNullException("gasTypes is a required property for EnergyWindowMaterialGasMixture and cannot be null");
+            this.GasFractions = gasFractions ?? throw new System.ArgumentNullException("gasFractions is a required property for EnergyWindowMaterialGasMixture and cannot be null");
             this.Thickness = thickness;
 
             // Set readonly properties with defaultValue

@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,13 +18,12 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     [Summary(@"")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "ValidationReport")]
-    public partial class ValidationReport : IEquatable<ValidationReport>
+    public partial class ValidationReport : System.IEquatable<ValidationReport>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidationReport" /> class.
@@ -49,8 +48,8 @@ namespace HoneybeeSchema
             string appVersion, string schemaVersion, bool valid, string appName = "Honeybee", string fatalError = "", List<ValidationError> errors = default
         )
         {
-            this.AppVersion = appVersion ?? throw new ArgumentNullException("appVersion is a required property for ValidationReport and cannot be null");
-            this.SchemaVersion = schemaVersion ?? throw new ArgumentNullException("schemaVersion is a required property for ValidationReport and cannot be null");
+            this.AppVersion = appVersion ?? throw new System.ArgumentNullException("appVersion is a required property for ValidationReport and cannot be null");
+            this.SchemaVersion = schemaVersion ?? throw new System.ArgumentNullException("schemaVersion is a required property for ValidationReport and cannot be null");
             this.Valid = valid;
             this.AppName = appName ?? "Honeybee";
             this.FatalError = fatalError ?? "";
@@ -283,7 +282,7 @@ namespace HoneybeeSchema
 
             var resMsgs = string.Join( "; ", res.Select(_ => _.ErrorMessage));
             if (throwException)
-                throw new ArgumentException($"This is an invalid {this.Type} object! Error: {resMsgs}");
+                throw new System.ArgumentException($"This is an invalid {this.Type} object! Error: {resMsgs}");
             else
                 return false;
         }

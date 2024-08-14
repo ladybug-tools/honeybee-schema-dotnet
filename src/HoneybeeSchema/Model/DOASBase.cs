@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Base class for Dedicated Outdoor Air System (DOAS) HVACs.\n\nDOAS systems separate minimum ventilation supply from the satisfaction of heating\n+ cooling demand. Ventilation air tends to be supplied at neutral temperatures\n(close to room air temperature) and heating / cooling loads are met with additional\npieces of zone equipment (eg. Fan Coil Units (FCUs)).\n\nBecause DOAS systems only have to cool down and re-heat the minimum ventilation air,\nthey tend to use less energy than all-air systems. They also tend to use less energy\nto distribute heating + cooling by pumping around hot/cold water or refrigerant\ninstead of blowing hot/cold air. However, they do not provide as good of control\nover humidity and so they may not be appropriate for rooms with high latent loads\nlike auditoriums, kitchens, laundromats, etc.
     /// </summary>
     [Summary(@"Base class for Dedicated Outdoor Air System (DOAS) HVACs.\n\nDOAS systems separate minimum ventilation supply from the satisfaction of heating\n+ cooling demand. Ventilation air tends to be supplied at neutral temperatures\n(close to room air temperature) and heating / cooling loads are met with additional\npieces of zone equipment (eg. Fan Coil Units (FCUs)).\n\nBecause DOAS systems only have to cool down and re-heat the minimum ventilation air,\nthey tend to use less energy than all-air systems. They also tend to use less energy\nto distribute heating + cooling by pumping around hot/cold water or refrigerant\ninstead of blowing hot/cold air. However, they do not provide as good of control\nover humidity and so they may not be appropriate for rooms with high latent loads\nlike auditoriums, kitchens, laundromats, etc.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "_DOASBase")]
-    public partial class DOASBase : IDdEnergyBaseModel, IEquatable<DOASBase>
+    public partial class DOASBase : IDdEnergyBaseModel, System.IEquatable<DOASBase>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DOASBase" /> class.

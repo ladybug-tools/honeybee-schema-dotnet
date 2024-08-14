@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Packaged Variable Air Volume (PVAV) HVAC system (aka. System 5 or 6).\n\nAll rooms/zones are connected to a central air loop that is kept at a constant\ncentral temperature of 12.8C (55F). The central temperature is maintained by a\ncooling coil, which runs whenever the combination of return air and fresh outdoor\nair is greater than 12.8C, as well as a heating coil, which runs whenever\nthe combination of return air and fresh outdoor air is less than 12.8C.\n\nEach air terminal for the connected rooms/zones contains its own reheat coil,\nwhich runs whenever the room is not in need of the cooling supplied by the 12.8C\ncentral air.\n\nThe central cooling coil is always a two-speed direct expansion (DX) coil.\nAll heating coils are hot water coils except when Gas Coil equipment_type is\nused (in which case the central coil is gas and all reheat is electric)\nor when Parallel Fan-Powered (PFP) boxes equipment_type is used (in which case\ncoils are electric resistance). Hot water temperature is 82C (180F) for\nboiler/district heating and 49C (120F) when ASHP is used.\n\nPVAV systems are the traditional baseline system for commercial buildings\nwith than 4-5 stories or between 2,300 m2 and 14,000 m2 (25,000 ft2 and\n150,000 ft2) of floor area.
     /// </summary>
     [Summary(@"Packaged Variable Air Volume (PVAV) HVAC system (aka. System 5 or 6).\n\nAll rooms/zones are connected to a central air loop that is kept at a constant\ncentral temperature of 12.8C (55F). The central temperature is maintained by a\ncooling coil, which runs whenever the combination of return air and fresh outdoor\nair is greater than 12.8C, as well as a heating coil, which runs whenever\nthe combination of return air and fresh outdoor air is less than 12.8C.\n\nEach air terminal for the connected rooms/zones contains its own reheat coil,\nwhich runs whenever the room is not in need of the cooling supplied by the 12.8C\ncentral air.\n\nThe central cooling coil is always a two-speed direct expansion (DX) coil.\nAll heating coils are hot water coils except when Gas Coil equipment_type is\nused (in which case the central coil is gas and all reheat is electric)\nor when Parallel Fan-Powered (PFP) boxes equipment_type is used (in which case\ncoils are electric resistance). Hot water temperature is 82C (180F) for\nboiler/district heating and 49C (120F) when ASHP is used.\n\nPVAV systems are the traditional baseline system for commercial buildings\nwith than 4-5 stories or between 2,300 m2 and 14,000 m2 (25,000 ft2 and\n150,000 ft2) of floor area.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "PVAV")]
-    public partial class PVAV : IDdEnergyBaseModel, IEquatable<PVAV>
+    public partial class PVAV : IDdEnergyBaseModel, System.IEquatable<PVAV>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PVAV" /> class.

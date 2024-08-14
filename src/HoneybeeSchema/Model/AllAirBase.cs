@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Base class for all-air systems.\n\nAll-air systems provide both ventilation and heating + cooling demand with\nthe same stream of warm/cool air. As such, they often grant tight control\nover zone humidity. However, because such systems often involve the\ncooling of air only to reheat it again, they are often more energy intensive\nthan systems that separate ventilation from the meeting of thermal loads.
     /// </summary>
     [Summary(@"Base class for all-air systems.\n\nAll-air systems provide both ventilation and heating + cooling demand with\nthe same stream of warm/cool air. As such, they often grant tight control\nover zone humidity. However, because such systems often involve the\ncooling of air only to reheat it again, they are often more energy intensive\nthan systems that separate ventilation from the meeting of thermal loads.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "_AllAirBase")]
-    public partial class AllAirBase : IDdEnergyBaseModel, IEquatable<AllAirBase>
+    public partial class AllAirBase : IDdEnergyBaseModel, System.IEquatable<AllAirBase>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AllAirBase" /> class.

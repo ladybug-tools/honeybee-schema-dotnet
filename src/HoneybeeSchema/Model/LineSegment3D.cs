@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// A single line segment face in 3D space.
     /// </summary>
     [Summary(@"A single line segment face in 3D space.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "LineSegment3D")]
-    public partial class LineSegment3D : IEquatable<LineSegment3D>
+    public partial class LineSegment3D : System.IEquatable<LineSegment3D>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LineSegment3D" /> class.
@@ -48,8 +47,8 @@ namespace HoneybeeSchema
             List<double> p, List<double> v
         )
         {
-            this.P = p ?? throw new ArgumentNullException("p is a required property for LineSegment3D and cannot be null");
-            this.V = v ?? throw new ArgumentNullException("v is a required property for LineSegment3D and cannot be null");
+            this.P = p ?? throw new System.ArgumentNullException("p is a required property for LineSegment3D and cannot be null");
+            this.V = v ?? throw new System.ArgumentNullException("v is a required property for LineSegment3D and cannot be null");
 
             // Set readonly properties with defaultValue
             this.Type = "LineSegment3D";
@@ -231,7 +230,7 @@ namespace HoneybeeSchema
 
             var resMsgs = string.Join( "; ", res.Select(_ => _.ErrorMessage));
             if (throwException)
-                throw new ArgumentException($"This is an invalid {this.Type} object! Error: {resMsgs}");
+                throw new System.ArgumentException($"This is an invalid {this.Type} object! Error: {resMsgs}");
             else
                 return false;
         }

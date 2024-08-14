@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [Summary(@"Base class for all objects requiring a identifiers acceptable for all engines.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "Room")]
-    public partial class Room : IDdBaseModel, IEquatable<Room>
+    public partial class Room : IDdBaseModel, System.IEquatable<Room>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Room" /> class.
@@ -56,8 +55,8 @@ namespace HoneybeeSchema
             string identifier, List<Face> faces, RoomPropertiesAbridged properties, string displayName = default, object userData = default, List<Shade> indoorShades = default, List<Shade> outdoorShades = default, int multiplier = 1, bool excludeFloorArea = false, string story = default
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
-            this.Faces = faces ?? throw new ArgumentNullException("faces is a required property for Room and cannot be null");
-            this.Properties = properties ?? throw new ArgumentNullException("properties is a required property for Room and cannot be null");
+            this.Faces = faces ?? throw new System.ArgumentNullException("faces is a required property for Room and cannot be null");
+            this.Properties = properties ?? throw new System.ArgumentNullException("properties is a required property for Room and cannot be null");
             this.IndoorShades = indoorShades;
             this.OutdoorShades = outdoorShades;
             this.Multiplier = multiplier;

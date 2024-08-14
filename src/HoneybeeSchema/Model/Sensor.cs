@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// A single Radiance of sensors.
     /// </summary>
     [Summary(@"A single Radiance of sensors.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "Sensor")]
-    public partial class Sensor : OpenAPIGenBaseModel, IEquatable<Sensor>
+    public partial class Sensor : OpenAPIGenBaseModel, System.IEquatable<Sensor>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Sensor" /> class.
@@ -48,8 +47,8 @@ namespace HoneybeeSchema
             List<double> pos, List<double> dir
         ) : base()
         {
-            this.Pos = pos ?? throw new ArgumentNullException("pos is a required property for Sensor and cannot be null");
-            this.Dir = dir ?? throw new ArgumentNullException("dir is a required property for Sensor and cannot be null");
+            this.Pos = pos ?? throw new System.ArgumentNullException("pos is a required property for Sensor and cannot be null");
+            this.Dir = dir ?? throw new System.ArgumentNullException("dir is a required property for Sensor and cannot be null");
 
             // Set readonly properties with defaultValue
             this.Type = "Sensor";

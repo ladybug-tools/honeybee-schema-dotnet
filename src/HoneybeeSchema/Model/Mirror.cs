@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Radiance mirror material.
     /// </summary>
     [Summary(@"Radiance mirror material.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "Mirror")]
-    public partial class Mirror : ModifierBase, IEquatable<Mirror>
+    public partial class Mirror : ModifierBase, System.IEquatable<Mirror>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Mirror" /> class.

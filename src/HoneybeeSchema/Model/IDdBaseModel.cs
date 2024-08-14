@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [Summary(@"Base class for all objects requiring a identifiers acceptable for all engines.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "IDdBaseModel")]
-    public partial class IDdBaseModel : OpenAPIGenBaseModel, IEquatable<IDdBaseModel>
+    public partial class IDdBaseModel : OpenAPIGenBaseModel, System.IEquatable<IDdBaseModel>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IDdBaseModel" /> class.
@@ -49,7 +48,7 @@ namespace HoneybeeSchema
             string identifier, string displayName = default, object userData = default
         ) : base()
         {
-            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for IDdBaseModel and cannot be null");
+            this.Identifier = identifier ?? throw new System.ArgumentNullException("identifier is a required property for IDdBaseModel and cannot be null");
             this.DisplayName = displayName;
             this.UserData = userData;
 

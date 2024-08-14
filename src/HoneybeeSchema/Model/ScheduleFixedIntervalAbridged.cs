@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Used to specify a start date and a list of values for a period of analysis.
     /// </summary>
     [Summary(@"Used to specify a start date and a list of values for a period of analysis.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "ScheduleFixedIntervalAbridged")]
-    public partial class ScheduleFixedIntervalAbridged : IDdEnergyBaseModel, IEquatable<ScheduleFixedIntervalAbridged>
+    public partial class ScheduleFixedIntervalAbridged : IDdEnergyBaseModel, System.IEquatable<ScheduleFixedIntervalAbridged>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleFixedIntervalAbridged" /> class.
@@ -55,10 +54,10 @@ namespace HoneybeeSchema
             string identifier, List<double> values, string displayName = default, object userData = default, string scheduleTypeLimit = default, int timestep = 1, List<int> startDate = default, double placeholderValue = 0D, bool interpolate = false
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
-            this.Values = values ?? throw new ArgumentNullException("values is a required property for ScheduleFixedIntervalAbridged and cannot be null");
+            this.Values = values ?? throw new System.ArgumentNullException("values is a required property for ScheduleFixedIntervalAbridged and cannot be null");
             this.ScheduleTypeLimit = scheduleTypeLimit;
             this.Timestep = timestep;
-            this.StartDate = startDate ?? (new []{1, 1}).ToList();
+            this.StartDate = startDate ?? new List<int>{ 1, 1 };
             this.PlaceholderValue = placeholderValue;
             this.Interpolate = interpolate;
 
@@ -101,7 +100,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of two integers for [month, day], representing the start date when the schedule values begin to take effect.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).")]
         [DataMember(Name = "start_date")]
-        public List<int> StartDate { get; set; } = (new []{1, 1}).ToList();
+        public List<int> StartDate { get; set; } = new List<int>{ 1, 1 };
 
         /// <summary>
         ///  A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period.

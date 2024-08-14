@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Abridged Radiance Properties for Honeybee Room.
     /// </summary>
     [Summary(@"Abridged Radiance Properties for Honeybee Room.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "RoomRadiancePropertiesAbridged")]
-    public partial class RoomRadiancePropertiesAbridged : OpenAPIGenBaseModel, IEquatable<RoomRadiancePropertiesAbridged>
+    public partial class RoomRadiancePropertiesAbridged : OpenAPIGenBaseModel, System.IEquatable<RoomRadiancePropertiesAbridged>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RoomRadiancePropertiesAbridged" /> class.

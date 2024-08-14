@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// A set of constructions for floor assemblies.
     /// </summary>
     [Summary(@"A set of constructions for floor assemblies.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "FloorConstructionSet")]
-    public partial class FloorConstructionSet : OpenAPIGenBaseModel, IEquatable<FloorConstructionSet>
+    public partial class FloorConstructionSet : OpenAPIGenBaseModel, System.IEquatable<FloorConstructionSet>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FloorConstructionSet" /> class.

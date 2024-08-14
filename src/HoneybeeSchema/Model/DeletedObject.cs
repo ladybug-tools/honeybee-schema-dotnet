@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,13 +18,12 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     [Summary(@"")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "DeletedObject")]
-    public partial class DeletedObject : OpenAPIGenBaseModel, IEquatable<DeletedObject>
+    public partial class DeletedObject : OpenAPIGenBaseModel, System.IEquatable<DeletedObject>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DeletedObject" /> class.
@@ -48,8 +47,8 @@ namespace HoneybeeSchema
         ) : base()
         {
             this.ElementType = elementType;
-            this.ElementId = elementId ?? throw new ArgumentNullException("elementId is a required property for DeletedObject and cannot be null");
-            this.Geometry = geometry ?? throw new ArgumentNullException("geometry is a required property for DeletedObject and cannot be null");
+            this.ElementId = elementId ?? throw new System.ArgumentNullException("elementId is a required property for DeletedObject and cannot be null");
+            this.Geometry = geometry ?? throw new System.ArgumentNullException("geometry is a required property for DeletedObject and cannot be null");
             this.ElementName = elementName;
 
             // Set readonly properties with defaultValue

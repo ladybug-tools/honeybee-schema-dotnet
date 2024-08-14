@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.
     /// </summary>
     [Summary(@"Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "DaylightingControl")]
-    public partial class DaylightingControl : OpenAPIGenBaseModel, IEquatable<DaylightingControl>
+    public partial class DaylightingControl : OpenAPIGenBaseModel, System.IEquatable<DaylightingControl>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DaylightingControl" /> class.
@@ -52,7 +51,7 @@ namespace HoneybeeSchema
             List<double> sensorPosition, double illuminanceSetpoint = 300D, double controlFraction = 1D, double minPowerInput = 0.3D, double minLightOutput = 0.2D, bool offAtMinimum = false
         ) : base()
         {
-            this.SensorPosition = sensorPosition ?? throw new ArgumentNullException("sensorPosition is a required property for DaylightingControl and cannot be null");
+            this.SensorPosition = sensorPosition ?? throw new System.ArgumentNullException("sensorPosition is a required property for DaylightingControl and cannot be null");
             this.IlluminanceSetpoint = illuminanceSetpoint;
             this.ControlFraction = controlFraction;
             this.MinPowerInput = minPowerInput;

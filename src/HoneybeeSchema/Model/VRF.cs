@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Variable Refrigerant Flow (VRF) heating/cooling system (with no ventilation).\n\nEach room/zone receives its own Variable Refrigerant Flow (VRF) terminal,\nwhich meets the heating and cooling loads of the space. All room/zone terminals\nare connected to the same outdoor unit, meaning that either all rooms must be\nin cooling or heating mode together.
     /// </summary>
     [Summary(@"Variable Refrigerant Flow (VRF) heating/cooling system (with no ventilation).\n\nEach room/zone receives its own Variable Refrigerant Flow (VRF) terminal,\nwhich meets the heating and cooling loads of the space. All room/zone terminals\nare connected to the same outdoor unit, meaning that either all rooms must be\nin cooling or heating mode together.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "VRF")]
-    public partial class VRF : IDdEnergyBaseModel, IEquatable<VRF>
+    public partial class VRF : IDdEnergyBaseModel, System.IEquatable<VRF>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="VRF" /> class.

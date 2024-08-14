@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Specifies the data types and limits for values contained in schedules.
     /// </summary>
     [Summary(@"Specifies the data types and limits for values contained in schedules.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "ScheduleTypeLimit")]
-    public partial class ScheduleTypeLimit : EnergyBaseModel, IEquatable<ScheduleTypeLimit>
+    public partial class ScheduleTypeLimit : EnergyBaseModel, System.IEquatable<ScheduleTypeLimit>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleTypeLimit" /> class.

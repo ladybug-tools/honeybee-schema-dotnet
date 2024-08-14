@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.
     /// </summary>
     [Summary(@"Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "RoomDoe2Properties")]
-    public partial class RoomDoe2Properties : OpenAPIGenBaseModel, IEquatable<RoomDoe2Properties>
+    public partial class RoomDoe2Properties : OpenAPIGenBaseModel, System.IEquatable<RoomDoe2Properties>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RoomDoe2Properties" /> class.

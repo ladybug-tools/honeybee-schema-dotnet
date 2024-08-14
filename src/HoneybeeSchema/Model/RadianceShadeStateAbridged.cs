@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// RadianceShadeStateAbridged represents a single state for a dynamic Shade.
     /// </summary>
     [Summary(@"RadianceShadeStateAbridged represents a single state for a dynamic Shade.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "RadianceShadeStateAbridged")]
-    public partial class RadianceShadeStateAbridged : OpenAPIGenBaseModel, IEquatable<RadianceShadeStateAbridged>
+    public partial class RadianceShadeStateAbridged : OpenAPIGenBaseModel, System.IEquatable<RadianceShadeStateAbridged>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RadianceShadeStateAbridged" /> class.

@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Used to describe the time period over which to run the simulation.
     /// </summary>
     [Summary(@"Used to describe the time period over which to run the simulation.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "RunPeriod")]
-    public partial class RunPeriod : DatedBaseModel, IEquatable<RunPeriod>
+    public partial class RunPeriod : DatedBaseModel, System.IEquatable<RunPeriod>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RunPeriod" /> class.
@@ -52,8 +51,8 @@ namespace HoneybeeSchema
             List<int> startDate = default, List<int> endDate = default, DaysOfWeek startDayOfWeek = DaysOfWeek.Sunday, List<List<int>> holidays = default, DaylightSavingTime daylightSavingTime = default, bool leapYear = false
         ) : base()
         {
-            this.StartDate = startDate ?? (new []{1, 1}).ToList();
-            this.EndDate = endDate ?? (new []{12, 31}).ToList();
+            this.StartDate = startDate ?? new List<int>{ 1, 1 };
+            this.EndDate = endDate ?? new List<int>{ 12, 31 };
             this.StartDayOfWeek = startDayOfWeek;
             this.Holidays = holidays;
             this.DaylightSavingTime = daylightSavingTime;
@@ -74,14 +73,14 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of two integers for [month, day], representing the date for the start of the run period. Must be before the end date.")]
         [DataMember(Name = "start_date")]
-        public List<int> StartDate { get; set; } = (new []{1, 1}).ToList();
+        public List<int> StartDate { get; set; } = new List<int>{ 1, 1 };
 
         /// <summary>
         /// A list of two integers for [month, day], representing the date for the end of the run period. Must be after the start date.
         /// </summary>
         [Summary(@"A list of two integers for [month, day], representing the date for the end of the run period. Must be after the start date.")]
         [DataMember(Name = "end_date")]
-        public List<int> EndDate { get; set; } = (new []{12, 31}).ToList();
+        public List<int> EndDate { get; set; } = new List<int>{ 12, 31 };
 
         /// <summary>
         /// Text for the day of the week on which the simulation starts.

@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Set containing radiance modifiers needed for a model's Apertures.
     /// </summary>
     [Summary(@"Set containing radiance modifiers needed for a model's Apertures.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "ApertureModifierSet")]
-    public partial class ApertureModifierSet : OpenAPIGenBaseModel, IEquatable<ApertureModifierSet>
+    public partial class ApertureModifierSet : OpenAPIGenBaseModel, System.IEquatable<ApertureModifierSet>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ApertureModifierSet" /> class.

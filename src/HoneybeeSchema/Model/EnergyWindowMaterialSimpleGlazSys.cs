@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Describe an entire glazing system rather than individual layers.\n\nUsed when only very limited information is available on the glazing layers or when\nspecific performance levels are being targeted.
     /// </summary>
     [Summary(@"Describe an entire glazing system rather than individual layers.\n\nUsed when only very limited information is available on the glazing layers or when\nspecific performance levels are being targeted.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "EnergyWindowMaterialSimpleGlazSys")]
-    public partial class EnergyWindowMaterialSimpleGlazSys : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialSimpleGlazSys>
+    public partial class EnergyWindowMaterialSimpleGlazSys : IDdEnergyBaseModel, System.IEquatable<EnergyWindowMaterialSimpleGlazSys>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialSimpleGlazSys" /> class.

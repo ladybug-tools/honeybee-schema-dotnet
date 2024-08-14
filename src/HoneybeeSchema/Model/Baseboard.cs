@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Baseboard heating system.\n\nBaseboard systems are intended for spaces only requiring heating and\nno ventilation or cooling. Each room/zone will get its own baseboard\nheating unit that satisfies the heating load.
     /// </summary>
     [Summary(@"Baseboard heating system.\n\nBaseboard systems are intended for spaces only requiring heating and\nno ventilation or cooling. Each room/zone will get its own baseboard\nheating unit that satisfies the heating load.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "Baseboard")]
-    public partial class Baseboard : IDdEnergyBaseModel, IEquatable<Baseboard>
+    public partial class Baseboard : IDdEnergyBaseModel, System.IEquatable<Baseboard>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Baseboard" /> class.

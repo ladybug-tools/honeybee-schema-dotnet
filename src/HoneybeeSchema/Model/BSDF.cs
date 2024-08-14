@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Radiance BSDF (Bidirectional Scattering Distribution Function) material.
     /// </summary>
     [Summary(@"Radiance BSDF (Bidirectional Scattering Distribution Function) material.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "BSDF")]
-    public partial class BSDF : ModifierBase, IEquatable<BSDF>
+    public partial class BSDF : ModifierBase, System.IEquatable<BSDF>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BSDF" /> class.
@@ -58,10 +57,10 @@ namespace HoneybeeSchema
             string identifier, string bsdfData, string displayName = default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> modifier = default, List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>> dependencies = default, List<double> upOrientation = default, double thickness = 0D, string functionFile = ".", string transform = default, List<double> frontDiffuseReflectance = default, List<double> backDiffuseReflectance = default, List<double> diffuseTransmittance = default
         ) : base(identifier: identifier, displayName: displayName)
         {
-            this.BsdfData = bsdfData ?? throw new ArgumentNullException("bsdfData is a required property for BSDF and cannot be null");
+            this.BsdfData = bsdfData ?? throw new System.ArgumentNullException("bsdfData is a required property for BSDF and cannot be null");
             this.Modifier = modifier ?? new Void();
             this.Dependencies = dependencies;
-            this.UpOrientation = upOrientation ?? (new []{0.01, 0.01, 1}).ToList();
+            this.UpOrientation = upOrientation ?? new List<double>{ 0.01, 0.01, 1 };
             this.Thickness = thickness;
             this.FunctionFile = functionFile ?? ".";
             this.Transform = transform;
@@ -106,7 +105,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Vector as sequence that sets the hemisphere that the BSDF material faces.")]
         [DataMember(Name = "up_orientation")]
-        public List<double> UpOrientation { get; set; } = (new []{0.01, 0.01, 1}).ToList();
+        public List<double> UpOrientation { get; set; } = new List<double>{ 0.01, 0.01, 1 };
 
         /// <summary>
         /// Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative).

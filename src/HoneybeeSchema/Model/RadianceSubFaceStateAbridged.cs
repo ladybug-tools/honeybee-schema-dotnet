@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door.\n    
     /// </summary>
     [Summary(@"RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door.\n    ")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "RadianceSubFaceStateAbridged")]
-    public partial class RadianceSubFaceStateAbridged : RadianceShadeStateAbridged, IEquatable<RadianceSubFaceStateAbridged>
+    public partial class RadianceSubFaceStateAbridged : RadianceShadeStateAbridged, System.IEquatable<RadianceSubFaceStateAbridged>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RadianceSubFaceStateAbridged" /> class.

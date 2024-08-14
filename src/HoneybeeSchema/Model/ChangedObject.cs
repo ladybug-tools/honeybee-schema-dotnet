@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,13 +18,12 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     [Summary(@"")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "ChangedObject")]
-    public partial class ChangedObject : OpenAPIGenBaseModel, IEquatable<ChangedObject>
+    public partial class ChangedObject : OpenAPIGenBaseModel, System.IEquatable<ChangedObject>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChangedObject" /> class.
@@ -52,9 +51,9 @@ namespace HoneybeeSchema
         ) : base()
         {
             this.ElementType = elementType;
-            this.ElementId = elementId ?? throw new ArgumentNullException("elementId is a required property for ChangedObject and cannot be null");
+            this.ElementId = elementId ?? throw new System.ArgumentNullException("elementId is a required property for ChangedObject and cannot be null");
             this.GeometryChanged = geometryChanged;
-            this.Geometry = geometry ?? throw new ArgumentNullException("geometry is a required property for ChangedObject and cannot be null");
+            this.Geometry = geometry ?? throw new System.ArgumentNullException("geometry is a required property for ChangedObject and cannot be null");
             this.ElementName = elementName;
             this.EnergyChanged = energyChanged;
             this.RadianceChanged = radianceChanged;

@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Used to define a schedule for a default day, further described by ScheduleRule.
     /// </summary>
     [Summary(@"Used to define a schedule for a default day, further described by ScheduleRule.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "ScheduleRuleset")]
-    public partial class ScheduleRuleset : IDdEnergyBaseModel, IEquatable<ScheduleRuleset>
+    public partial class ScheduleRuleset : IDdEnergyBaseModel, System.IEquatable<ScheduleRuleset>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleRuleset" /> class.
@@ -56,8 +55,8 @@ namespace HoneybeeSchema
             string identifier, List<ScheduleDay> daySchedules, string defaultDaySchedule, string displayName = default, object userData = default, List<ScheduleRuleAbridged> scheduleRules = default, string holidaySchedule = default, string summerDesigndaySchedule = default, string winterDesigndaySchedule = default, ScheduleTypeLimit scheduleTypeLimit = default
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
-            this.DaySchedules = daySchedules ?? throw new ArgumentNullException("daySchedules is a required property for ScheduleRuleset and cannot be null");
-            this.DefaultDaySchedule = defaultDaySchedule ?? throw new ArgumentNullException("defaultDaySchedule is a required property for ScheduleRuleset and cannot be null");
+            this.DaySchedules = daySchedules ?? throw new System.ArgumentNullException("daySchedules is a required property for ScheduleRuleset and cannot be null");
+            this.DefaultDaySchedule = defaultDaySchedule ?? throw new System.ArgumentNullException("defaultDaySchedule is a required property for ScheduleRuleset and cannot be null");
             this.ScheduleRules = scheduleRules;
             this.HolidaySchedule = holidaySchedule;
             this.SummerDesigndaySchedule = summerDesigndaySchedule;

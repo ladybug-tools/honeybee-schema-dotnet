@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// A mesh in 3D space.
     /// </summary>
     [Summary(@"A mesh in 3D space.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "Mesh3D")]
-    public partial class Mesh3D : OpenAPIGenBaseModel, IEquatable<Mesh3D>
+    public partial class Mesh3D : OpenAPIGenBaseModel, System.IEquatable<Mesh3D>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Mesh3D" /> class.
@@ -49,8 +48,8 @@ namespace HoneybeeSchema
             List<List<double>> vertices, List<List<int>> faces, List<Color> colors = default
         ) : base()
         {
-            this.Vertices = vertices ?? throw new ArgumentNullException("vertices is a required property for Mesh3D and cannot be null");
-            this.Faces = faces ?? throw new ArgumentNullException("faces is a required property for Mesh3D and cannot be null");
+            this.Vertices = vertices ?? throw new System.ArgumentNullException("vertices is a required property for Mesh3D and cannot be null");
+            this.Faces = faces ?? throw new System.ArgumentNullException("faces is a required property for Mesh3D and cannot be null");
             this.Colors = colors;
 
             // Set readonly properties with defaultValue

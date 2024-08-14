@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Set containing radiance modifiers needed for a model's roofs.
     /// </summary>
     [Summary(@"Set containing radiance modifiers needed for a model's roofs.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "RoofCeilingModifierSet")]
-    public partial class RoofCeilingModifierSet : OpenAPIGenBaseModel, IEquatable<RoofCeilingModifierSet>
+    public partial class RoofCeilingModifierSet : OpenAPIGenBaseModel, System.IEquatable<RoofCeilingModifierSet>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RoofCeilingModifierSet" /> class.

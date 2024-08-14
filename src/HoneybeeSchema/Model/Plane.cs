@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.
     /// </summary>
     [Summary(@"Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "Plane")]
-    public partial class Plane : OpenAPIGenBaseModel, IEquatable<Plane>
+    public partial class Plane : OpenAPIGenBaseModel, System.IEquatable<Plane>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Plane" /> class.
@@ -49,8 +48,8 @@ namespace HoneybeeSchema
             List<double> n, List<double> o, List<double> x = default
         ) : base()
         {
-            this.N = n ?? throw new ArgumentNullException("n is a required property for Plane and cannot be null");
-            this.O = o ?? throw new ArgumentNullException("o is a required property for Plane and cannot be null");
+            this.N = n ?? throw new System.ArgumentNullException("n is a required property for Plane and cannot be null");
+            this.O = o ?? throw new System.ArgumentNullException("o is a required property for Plane and cannot be null");
             this.X = x;
 
             // Set readonly properties with defaultValue

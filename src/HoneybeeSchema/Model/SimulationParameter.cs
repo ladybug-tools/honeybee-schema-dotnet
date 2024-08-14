@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// The complete set of EnergyPlus Simulation Settings.
     /// </summary>
     [Summary(@"The complete set of EnergyPlus Simulation Settings.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "SimulationParameter")]
-    public partial class SimulationParameter : OpenAPIGenBaseModel, IEquatable<SimulationParameter>
+    public partial class SimulationParameter : OpenAPIGenBaseModel, System.IEquatable<SimulationParameter>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SimulationParameter" /> class.

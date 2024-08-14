@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// A single planar face in 3D space.
     /// </summary>
     [Summary(@"A single planar face in 3D space.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "Face3D")]
-    public partial class Face3D : OpenAPIGenBaseModel, IEquatable<Face3D>
+    public partial class Face3D : OpenAPIGenBaseModel, System.IEquatable<Face3D>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Face3D" /> class.
@@ -49,7 +48,7 @@ namespace HoneybeeSchema
             List<List<double>> boundary, List<List<List<double>>> holes = default, Plane plane = default
         ) : base()
         {
-            this.Boundary = boundary ?? throw new ArgumentNullException("boundary is a required property for Face3D and cannot be null");
+            this.Boundary = boundary ?? throw new System.ArgumentNullException("boundary is a required property for Face3D and cannot be null");
             this.Holes = holes;
             this.Plane = plane;
 

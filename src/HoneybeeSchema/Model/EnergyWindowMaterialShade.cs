@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// This object specifies the properties of window shade materials.
     /// </summary>
     [Summary(@"This object specifies the properties of window shade materials.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "EnergyWindowMaterialShade")]
-    public partial class EnergyWindowMaterialShade : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialShade>
+    public partial class EnergyWindowMaterialShade : IDdEnergyBaseModel, System.IEquatable<EnergyWindowMaterialShade>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialShade" /> class.

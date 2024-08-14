@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// An object representing design day conditions.
     /// </summary>
     [Summary(@"An object representing design day conditions.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "DesignDay")]
-    public partial class DesignDay : OpenAPIGenBaseModel, IEquatable<DesignDay>
+    public partial class DesignDay : OpenAPIGenBaseModel, System.IEquatable<DesignDay>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DesignDay" /> class.
@@ -52,12 +51,12 @@ namespace HoneybeeSchema
             string name, DesignDayTypes dayType, DryBulbCondition dryBulbCondition, HumidityCondition humidityCondition, WindCondition windCondition, AnyOf<ASHRAEClearSky, ASHRAETau> skyCondition
         ) : base()
         {
-            this.Name = name ?? throw new ArgumentNullException("name is a required property for DesignDay and cannot be null");
+            this.Name = name ?? throw new System.ArgumentNullException("name is a required property for DesignDay and cannot be null");
             this.DayType = dayType;
-            this.DryBulbCondition = dryBulbCondition ?? throw new ArgumentNullException("dryBulbCondition is a required property for DesignDay and cannot be null");
-            this.HumidityCondition = humidityCondition ?? throw new ArgumentNullException("humidityCondition is a required property for DesignDay and cannot be null");
-            this.WindCondition = windCondition ?? throw new ArgumentNullException("windCondition is a required property for DesignDay and cannot be null");
-            this.SkyCondition = skyCondition ?? throw new ArgumentNullException("skyCondition is a required property for DesignDay and cannot be null");
+            this.DryBulbCondition = dryBulbCondition ?? throw new System.ArgumentNullException("dryBulbCondition is a required property for DesignDay and cannot be null");
+            this.HumidityCondition = humidityCondition ?? throw new System.ArgumentNullException("humidityCondition is a required property for DesignDay and cannot be null");
+            this.WindCondition = windCondition ?? throw new System.ArgumentNullException("windCondition is a required property for DesignDay and cannot be null");
+            this.SkyCondition = skyCondition ?? throw new System.ArgumentNullException("skyCondition is a required property for DesignDay and cannot be null");
 
             // Set readonly properties with defaultValue
             this.Type = "DesignDay";

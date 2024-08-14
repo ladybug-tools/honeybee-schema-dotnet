@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Variable Refrigerant Flow (VRF) with DOAS HVAC system.\n\nAll rooms/zones in the system are connected to a Dedicated Outdoor Air System\n(DOAS) that supplies a constant volume of ventilation air at the same temperature\nto all rooms/zones. The ventilation air temperature will vary from 21.1C (70F)\nto 15.5C (60F) depending on the outdoor air temperature (the DOAS supplies cooler air\nwhen outdoor conditions are warmer). The ventilation air temperature is maintained\nby a single speed direct expansion (DX) cooling coil along with a single-speed\ndirect expansion (DX) heat pump with a backup electrical resistance coil.\n\nEach room/zone also receives its own Variable Refrigerant Flow (VRF) terminal,\nwhich meets the heating and cooling loads of the space. All room/zone terminals\nare connected to the same outdoor unit, meaning that either all rooms must be\nin cooling or heating mode together.
     /// </summary>
     [Summary(@"Variable Refrigerant Flow (VRF) with DOAS HVAC system.\n\nAll rooms/zones in the system are connected to a Dedicated Outdoor Air System\n(DOAS) that supplies a constant volume of ventilation air at the same temperature\nto all rooms/zones. The ventilation air temperature will vary from 21.1C (70F)\nto 15.5C (60F) depending on the outdoor air temperature (the DOAS supplies cooler air\nwhen outdoor conditions are warmer). The ventilation air temperature is maintained\nby a single speed direct expansion (DX) cooling coil along with a single-speed\ndirect expansion (DX) heat pump with a backup electrical resistance coil.\n\nEach room/zone also receives its own Variable Refrigerant Flow (VRF) terminal,\nwhich meets the heating and cooling loads of the space. All room/zone terminals\nare connected to the same outdoor unit, meaning that either all rooms must be\nin cooling or heating mode together.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "VRFwithDOASAbridged")]
-    public partial class VRFwithDOASAbridged : IDdEnergyBaseModel, IEquatable<VRFwithDOASAbridged>
+    public partial class VRFwithDOASAbridged : IDdEnergyBaseModel, System.IEquatable<VRFwithDOASAbridged>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="VRFwithDOASAbridged" /> class.

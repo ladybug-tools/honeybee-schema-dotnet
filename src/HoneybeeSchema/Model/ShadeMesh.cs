@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [Summary(@"Base class for all objects requiring a identifiers acceptable for all engines.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "ShadeMesh")]
-    public partial class ShadeMesh : IDdBaseModel, IEquatable<ShadeMesh>
+    public partial class ShadeMesh : IDdBaseModel, System.IEquatable<ShadeMesh>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ShadeMesh" /> class.
@@ -52,8 +51,8 @@ namespace HoneybeeSchema
             string identifier, Mesh3D geometry, ShadeMeshPropertiesAbridged properties, string displayName = default, object userData = default, bool isDetached = true
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
-            this.Geometry = geometry ?? throw new ArgumentNullException("geometry is a required property for ShadeMesh and cannot be null");
-            this.Properties = properties ?? throw new ArgumentNullException("properties is a required property for ShadeMesh and cannot be null");
+            this.Geometry = geometry ?? throw new System.ArgumentNullException("geometry is a required property for ShadeMesh and cannot be null");
+            this.Properties = properties ?? throw new System.ArgumentNullException("properties is a required property for ShadeMesh and cannot be null");
             this.IsDetached = isDetached;
 
             // Set readonly properties with defaultValue

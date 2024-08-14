@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [Summary(@"Base class for all objects requiring a identifiers acceptable for all engines.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "Aperture")]
-    public partial class Aperture : IDdBaseModel, IEquatable<Aperture>
+    public partial class Aperture : IDdBaseModel, System.IEquatable<Aperture>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Aperture" /> class.
@@ -55,9 +54,9 @@ namespace HoneybeeSchema
             string identifier, Face3D geometry, AnyOf<Outdoors, Surface> boundaryCondition, AperturePropertiesAbridged properties, string displayName = default, object userData = default, bool isOperable = false, List<Shade> indoorShades = default, List<Shade> outdoorShades = default
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
-            this.Geometry = geometry ?? throw new ArgumentNullException("geometry is a required property for Aperture and cannot be null");
-            this.BoundaryCondition = boundaryCondition ?? throw new ArgumentNullException("boundaryCondition is a required property for Aperture and cannot be null");
-            this.Properties = properties ?? throw new ArgumentNullException("properties is a required property for Aperture and cannot be null");
+            this.Geometry = geometry ?? throw new System.ArgumentNullException("geometry is a required property for Aperture and cannot be null");
+            this.BoundaryCondition = boundaryCondition ?? throw new System.ArgumentNullException("boundaryCondition is a required property for Aperture and cannot be null");
+            this.Properties = properties ?? throw new System.ArgumentNullException("properties is a required property for Aperture and cannot be null");
             this.IsOperable = isOperable;
             this.IndoorShades = indoorShades;
             this.OutdoorShades = outdoorShades;

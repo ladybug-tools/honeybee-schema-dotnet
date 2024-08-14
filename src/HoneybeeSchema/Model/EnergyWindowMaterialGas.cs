@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Create single layer of gas in a window construction.\n\nCan be combined with EnergyWindowMaterialGlazing to make multi-pane windows.
     /// </summary>
     [Summary(@"Create single layer of gas in a window construction.\n\nCan be combined with EnergyWindowMaterialGlazing to make multi-pane windows.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "EnergyWindowMaterialGas")]
-    public partial class EnergyWindowMaterialGas : IDdEnergyBaseModel, IEquatable<EnergyWindowMaterialGas>
+    public partial class EnergyWindowMaterialGas : IDdEnergyBaseModel, System.IEquatable<EnergyWindowMaterialGas>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialGas" /> class.

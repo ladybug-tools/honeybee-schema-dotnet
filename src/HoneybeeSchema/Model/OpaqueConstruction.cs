@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Construction for opaque objects (Face, Shade, Door).
     /// </summary>
     [Summary(@"Construction for opaque objects (Face, Shade, Door).")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "OpaqueConstruction")]
-    public partial class OpaqueConstruction : IDdEnergyBaseModel, IEquatable<OpaqueConstruction>
+    public partial class OpaqueConstruction : IDdEnergyBaseModel, System.IEquatable<OpaqueConstruction>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="OpaqueConstruction" /> class.
@@ -50,7 +49,7 @@ namespace HoneybeeSchema
             string identifier, List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyMaterialVegetation>> materials, string displayName = default, object userData = default
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
-            this.Materials = materials ?? throw new ArgumentNullException("materials is a required property for OpaqueConstruction and cannot be null");
+            this.Materials = materials ?? throw new System.ArgumentNullException("materials is a required property for OpaqueConstruction and cannot be null");
 
             // Set readonly properties with defaultValue
             this.Type = "OpaqueConstruction";

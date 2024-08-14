@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Water Source Heat Pump (WSHP) with DOAS HVAC system.\n\nAll rooms/zones in the system are connected to a Dedicated Outdoor Air System\n(DOAS) that supplies a constant volume of ventilation air at the same temperature\nto all rooms/zones. The ventilation air temperature will vary from 21.1C (70F)\nto 15.5C (60F) depending on the outdoor air temperature (the DOAS supplies cooler air\nwhen outdoor conditions are warmer). The ventilation air temperature is maintained\nby a chilled water cooling coil and a hot water heating coil except when the\nground source heat pump (GSHP) option is selected. In this case, the ventilation\nair temperature is maintained by a two-speed direct expansion (DX) cooling coil\nand a single-speed DX heating coil with backup electrical resistance heat.\n\nEach room/zone also receives its own Water Source Heat Pump (WSHP), which meets\nthe heating and cooling loads of the space. All WSHPs are connected to the\nsame water condenser loop, which has its temperature maintained by the\nequipment_type (eg. Boiler with Cooling Tower).
     /// </summary>
     [Summary(@"Water Source Heat Pump (WSHP) with DOAS HVAC system.\n\nAll rooms/zones in the system are connected to a Dedicated Outdoor Air System\n(DOAS) that supplies a constant volume of ventilation air at the same temperature\nto all rooms/zones. The ventilation air temperature will vary from 21.1C (70F)\nto 15.5C (60F) depending on the outdoor air temperature (the DOAS supplies cooler air\nwhen outdoor conditions are warmer). The ventilation air temperature is maintained\nby a chilled water cooling coil and a hot water heating coil except when the\nground source heat pump (GSHP) option is selected. In this case, the ventilation\nair temperature is maintained by a two-speed direct expansion (DX) cooling coil\nand a single-speed DX heating coil with backup electrical resistance heat.\n\nEach room/zone also receives its own Water Source Heat Pump (WSHP), which meets\nthe heating and cooling loads of the space. All WSHPs are connected to the\nsame water condenser loop, which has its temperature maintained by the\nequipment_type (eg. Boiler with Cooling Tower).")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "WSHPwithDOASAbridged")]
-    public partial class WSHPwithDOASAbridged : IDdEnergyBaseModel, IEquatable<WSHPwithDOASAbridged>
+    public partial class WSHPwithDOASAbridged : IDdEnergyBaseModel, System.IEquatable<WSHPwithDOASAbridged>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="WSHPwithDOASAbridged" /> class.

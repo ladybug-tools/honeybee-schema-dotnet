@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Used to describe the daylight savings time for the simulation.
     /// </summary>
     [Summary(@"Used to describe the daylight savings time for the simulation.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "DaylightSavingTime")]
-    public partial class DaylightSavingTime : DatedBaseModel, IEquatable<DaylightSavingTime>
+    public partial class DaylightSavingTime : DatedBaseModel, System.IEquatable<DaylightSavingTime>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DaylightSavingTime" /> class.
@@ -48,8 +47,8 @@ namespace HoneybeeSchema
             List<int> startDate = default, List<int> endDate = default
         ) : base()
         {
-            this.StartDate = startDate ?? (new []{3, 12}).ToList();
-            this.EndDate = endDate ?? (new []{11, 5}).ToList();
+            this.StartDate = startDate ?? new List<int>{ 3, 12 };
+            this.EndDate = endDate ?? new List<int>{ 11, 5 };
 
             // Set readonly properties with defaultValue
             this.Type = "DaylightSavingTime";
@@ -66,14 +65,14 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).")]
         [DataMember(Name = "start_date")]
-        public List<int> StartDate { get; set; } = (new []{3, 12}).ToList();
+        public List<int> StartDate { get; set; } = new List<int>{ 3, 12 };
 
         /// <summary>
         /// A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).
         /// </summary>
         [Summary(@"A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).")]
         [DataMember(Name = "end_date")]
-        public List<int> EndDate { get; set; } = (new []{11, 5}).ToList();
+        public List<int> EndDate { get; set; } = new List<int>{ 11, 5 };
 
 
         /// <summary>

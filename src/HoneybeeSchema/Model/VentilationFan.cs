@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [Summary(@"Base class for all objects requiring a valid EnergyPlus identifier.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "VentilationFan")]
-    public partial class VentilationFan : EnergyBaseModel, IEquatable<VentilationFan>
+    public partial class VentilationFan : EnergyBaseModel, System.IEquatable<VentilationFan>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="VentilationFan" /> class.

@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Gas unit heating system.\n\nGas unit systems are intended for spaces only requiring heating and no\nventilation or cooling. Each room/zone will get its own gaa heating unit\nthat satisfies the heating load.
     /// </summary>
     [Summary(@"Gas unit heating system.\n\nGas unit systems are intended for spaces only requiring heating and no\nventilation or cooling. Each room/zone will get its own gaa heating unit\nthat satisfies the heating load.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "GasUnitHeater")]
-    public partial class GasUnitHeater : IDdEnergyBaseModel, IEquatable<GasUnitHeater>
+    public partial class GasUnitHeater : IDdEnergyBaseModel, System.IEquatable<GasUnitHeater>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GasUnitHeater" /> class.

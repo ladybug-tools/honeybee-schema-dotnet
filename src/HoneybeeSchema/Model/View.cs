@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// A single Radiance of sensors.
     /// </summary>
     [Summary(@"A single Radiance of sensors.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "View")]
-    public partial class View : RadianceAsset, IEquatable<View>
+    public partial class View : RadianceAsset, System.IEquatable<View>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="View" /> class.
@@ -61,9 +60,9 @@ namespace HoneybeeSchema
             string identifier, List<double> position, List<double> direction, List<double> upVector, string displayName = default, string roomIdentifier = default, List<List<string>> lightPath = default, ViewType viewType = ViewType.v, double hSize = 60D, double vSize = 60D, double shift = default, double lift = default, double foreClip = default, double aftClip = default, string groupIdentifier = default
         ) : base(identifier: identifier, displayName: displayName, roomIdentifier: roomIdentifier, lightPath: lightPath)
         {
-            this.Position = position ?? throw new ArgumentNullException("position is a required property for View and cannot be null");
-            this.Direction = direction ?? throw new ArgumentNullException("direction is a required property for View and cannot be null");
-            this.UpVector = upVector ?? throw new ArgumentNullException("upVector is a required property for View and cannot be null");
+            this.Position = position ?? throw new System.ArgumentNullException("position is a required property for View and cannot be null");
+            this.Direction = direction ?? throw new System.ArgumentNullException("direction is a required property for View and cannot be null");
+            this.UpVector = upVector ?? throw new System.ArgumentNullException("upVector is a required property for View and cannot be null");
             this.ViewType = viewType;
             this.HSize = hSize;
             this.VSize = vSize;

@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// No mass opaque material representing a layer within an opaque construction.\n\nUsed when only the thermal resistance (R value) of the material is known.
     /// </summary>
     [Summary(@"No mass opaque material representing a layer within an opaque construction.\n\nUsed when only the thermal resistance (R value) of the material is known.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "EnergyMaterialNoMass")]
-    public partial class EnergyMaterialNoMass : IDdEnergyBaseModel, IEquatable<EnergyMaterialNoMass>
+    public partial class EnergyMaterialNoMass : IDdEnergyBaseModel, System.IEquatable<EnergyMaterialNoMass>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyMaterialNoMass" /> class.

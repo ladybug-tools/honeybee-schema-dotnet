@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Used to specify dry bulb conditions on a design day.
     /// </summary>
     [Summary(@"Used to specify dry bulb conditions on a design day.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "DryBulbCondition")]
-    public partial class DryBulbCondition : OpenAPIGenBaseModel, IEquatable<DryBulbCondition>
+    public partial class DryBulbCondition : OpenAPIGenBaseModel, System.IEquatable<DryBulbCondition>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DryBulbCondition" /> class.

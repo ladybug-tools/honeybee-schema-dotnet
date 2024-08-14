@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Detailed HVAC system object defined using IronBug or OpenStudio .NET bindings.
     /// </summary>
     [Summary(@"Detailed HVAC system object defined using IronBug or OpenStudio .NET bindings.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "DetailedHVAC")]
-    public partial class DetailedHVAC : IDdEnergyBaseModel, IEquatable<DetailedHVAC>
+    public partial class DetailedHVAC : IDdEnergyBaseModel, System.IEquatable<DetailedHVAC>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DetailedHVAC" /> class.
@@ -50,7 +49,7 @@ namespace HoneybeeSchema
             string identifier, object specification, string displayName = default, object userData = default
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
-            this.Specification = specification ?? throw new ArgumentNullException("specification is a required property for DetailedHVAC and cannot be null");
+            this.Specification = specification ?? throw new System.ArgumentNullException("specification is a required property for DetailedHVAC and cannot be null");
 
             // Set readonly properties with defaultValue
             this.Type = "DetailedHVAC";

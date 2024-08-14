@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,13 +18,12 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     [Summary(@"")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "DeletedInstruction")]
-    public partial class DeletedInstruction : OpenAPIGenBaseModel, IEquatable<DeletedInstruction>
+    public partial class DeletedInstruction : OpenAPIGenBaseModel, System.IEquatable<DeletedInstruction>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DeletedInstruction" /> class.
@@ -47,7 +46,7 @@ namespace HoneybeeSchema
         ) : base()
         {
             this.ElementType = elementType;
-            this.ElementId = elementId ?? throw new ArgumentNullException("elementId is a required property for DeletedInstruction and cannot be null");
+            this.ElementId = elementId ?? throw new System.ArgumentNullException("elementId is a required property for DeletedInstruction and cannot be null");
             this.ElementName = elementName;
 
             // Set readonly properties with defaultValue

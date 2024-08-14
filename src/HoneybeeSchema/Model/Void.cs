@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Void modifier
     /// </summary>
     [Summary(@"Void modifier")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "Void")]
-    public partial class Void : OpenAPIGenBaseModel, IEquatable<Void>
+    public partial class Void : OpenAPIGenBaseModel, System.IEquatable<Void>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Void" /> class.

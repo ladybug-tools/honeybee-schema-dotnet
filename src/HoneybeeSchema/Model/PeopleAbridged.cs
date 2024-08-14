@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Base class for all objects requiring an EnergyPlus identifier and user_data.
     /// </summary>
     [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "PeopleAbridged")]
-    public partial class PeopleAbridged : IDdEnergyBaseModel, IEquatable<PeopleAbridged>
+    public partial class PeopleAbridged : IDdEnergyBaseModel, System.IEquatable<PeopleAbridged>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PeopleAbridged" /> class.
@@ -55,7 +54,7 @@ namespace HoneybeeSchema
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.PeoplePerArea = peoplePerArea;
-            this.OccupancySchedule = occupancySchedule ?? throw new ArgumentNullException("occupancySchedule is a required property for PeopleAbridged and cannot be null");
+            this.OccupancySchedule = occupancySchedule ?? throw new System.ArgumentNullException("occupancySchedule is a required property for PeopleAbridged and cannot be null");
             this.ActivitySchedule = activitySchedule;
             this.RadiantFraction = radiantFraction;
             this.LatentFraction = latentFraction ?? new Autocalculate();

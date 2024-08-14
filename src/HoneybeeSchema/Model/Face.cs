@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [Summary(@"Base class for all objects requiring a identifiers acceptable for all engines.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "Face")]
-    public partial class Face : IDdBaseModel, IEquatable<Face>
+    public partial class Face : IDdBaseModel, System.IEquatable<Face>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Face" /> class.
@@ -57,10 +56,10 @@ namespace HoneybeeSchema
             string identifier, Face3D geometry, FaceType faceType, AnyOf<Ground, Outdoors, Adiabatic, Surface, OtherSideTemperature> boundaryCondition, FacePropertiesAbridged properties, string displayName = default, object userData = default, List<Aperture> apertures = default, List<Door> doors = default, List<Shade> indoorShades = default, List<Shade> outdoorShades = default
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
-            this.Geometry = geometry ?? throw new ArgumentNullException("geometry is a required property for Face and cannot be null");
+            this.Geometry = geometry ?? throw new System.ArgumentNullException("geometry is a required property for Face and cannot be null");
             this.FaceType = faceType;
-            this.BoundaryCondition = boundaryCondition ?? throw new ArgumentNullException("boundaryCondition is a required property for Face and cannot be null");
-            this.Properties = properties ?? throw new ArgumentNullException("properties is a required property for Face and cannot be null");
+            this.BoundaryCondition = boundaryCondition ?? throw new System.ArgumentNullException("boundaryCondition is a required property for Face and cannot be null");
+            this.Properties = properties ?? throw new System.ArgumentNullException("properties is a required property for Face and cannot be null");
             this.Apertures = apertures;
             this.Doors = doors;
             this.IndoorShades = indoorShades;

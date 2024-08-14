@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Base class for all objects requiring a valid EnergyPlus identifier.
     /// </summary>
     [Summary(@"Base class for all objects requiring a valid EnergyPlus identifier.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "EnergyBaseModel")]
-    public partial class EnergyBaseModel : OpenAPIGenBaseModel, IEquatable<EnergyBaseModel>
+    public partial class EnergyBaseModel : OpenAPIGenBaseModel, System.IEquatable<EnergyBaseModel>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyBaseModel" /> class.
@@ -48,7 +47,7 @@ namespace HoneybeeSchema
             string identifier, string displayName = default
         ) : base()
         {
-            this.Identifier = identifier ?? throw new ArgumentNullException("identifier is a required property for EnergyBaseModel and cannot be null");
+            this.Identifier = identifier ?? throw new System.ArgumentNullException("identifier is a required property for EnergyBaseModel and cannot be null");
             this.DisplayName = displayName;
 
             // Set readonly properties with defaultValue

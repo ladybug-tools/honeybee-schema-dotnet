@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Provides a model for an ideal HVAC system.
     /// </summary>
     [Summary(@"Provides a model for an ideal HVAC system.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "IdealAirSystemAbridged")]
-    public partial class IdealAirSystemAbridged : IDdEnergyBaseModel, IEquatable<IdealAirSystemAbridged>
+    public partial class IdealAirSystemAbridged : IDdEnergyBaseModel, System.IEquatable<IdealAirSystemAbridged>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IdealAirSystemAbridged" /> class.

@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Base class for the modifier sets assigned to Faces.
     /// </summary>
     [Summary(@"Base class for the modifier sets assigned to Faces.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "BaseModifierSet")]
-    public partial class BaseModifierSet : OpenAPIGenBaseModel, IEquatable<BaseModifierSet>
+    public partial class BaseModifierSet : OpenAPIGenBaseModel, System.IEquatable<BaseModifierSet>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseModifierSet" /> class.

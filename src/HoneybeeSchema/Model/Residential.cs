@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Residential Air Conditioning, Heat Pump or Furnace system.\n\nResidential HVAC systems are intended primarily for single-family homes and\ninclude a wide variety of options. In all cases, each room/zone will receive\nits own air loop WITHOUT an outdoor air inlet (air is simply being recirculated\nthrough the loop). Residential air conditioning (AC) systems are modeled\nusing a unitary system with a single-speed direct expansion (DX) cooling\ncoil in the loop. Residential heat pump (HP) systems use a single-speed DX\nheating coil in the unitary system and the residential furnace option uses\na gas coil in the unitary system. In all cases, the properties of these coils\nare set to reflect a typical residential system.
     /// </summary>
     [Summary(@"Residential Air Conditioning, Heat Pump or Furnace system.\n\nResidential HVAC systems are intended primarily for single-family homes and\ninclude a wide variety of options. In all cases, each room/zone will receive\nits own air loop WITHOUT an outdoor air inlet (air is simply being recirculated\nthrough the loop). Residential air conditioning (AC) systems are modeled\nusing a unitary system with a single-speed direct expansion (DX) cooling\ncoil in the loop. Residential heat pump (HP) systems use a single-speed DX\nheating coil in the unitary system and the residential furnace option uses\na gas coil in the unitary system. In all cases, the properties of these coils\nare set to reflect a typical residential system.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "Residential")]
-    public partial class Residential : IDdEnergyBaseModel, IEquatable<Residential>
+    public partial class Residential : IDdEnergyBaseModel, System.IEquatable<Residential>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Residential" /> class.

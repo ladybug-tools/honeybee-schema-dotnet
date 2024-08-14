@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Construction for window objects with an included shade layer.
     /// </summary>
     [Summary(@"Construction for window objects with an included shade layer.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "WindowConstructionDynamic")]
-    public partial class WindowConstructionDynamic : IDdEnergyBaseModel, IEquatable<WindowConstructionDynamic>
+    public partial class WindowConstructionDynamic : IDdEnergyBaseModel, System.IEquatable<WindowConstructionDynamic>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowConstructionDynamic" /> class.
@@ -51,8 +50,8 @@ namespace HoneybeeSchema
             string identifier, List<WindowConstruction> constructions, AnyOf<ScheduleRuleset, ScheduleFixedInterval> schedule, string displayName = default, object userData = default
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
-            this.Constructions = constructions ?? throw new ArgumentNullException("constructions is a required property for WindowConstructionDynamic and cannot be null");
-            this.Schedule = schedule ?? throw new ArgumentNullException("schedule is a required property for WindowConstructionDynamic and cannot be null");
+            this.Constructions = constructions ?? throw new System.ArgumentNullException("constructions is a required property for WindowConstructionDynamic and cannot be null");
+            this.Schedule = schedule ?? throw new System.ArgumentNullException("schedule is a required property for WindowConstructionDynamic and cannot be null");
 
             // Set readonly properties with defaultValue
             this.Type = "WindowConstructionDynamic";

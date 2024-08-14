@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Used to describe settings for EnergyPlus shadow calculation.
     /// </summary>
     [Summary(@"Used to describe settings for EnergyPlus shadow calculation.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "ShadowCalculation")]
-    public partial class ShadowCalculation : OpenAPIGenBaseModel, IEquatable<ShadowCalculation>
+    public partial class ShadowCalculation : OpenAPIGenBaseModel, System.IEquatable<ShadowCalculation>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ShadowCalculation" /> class.

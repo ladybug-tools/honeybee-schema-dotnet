@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Construction for window objects (Aperture, Door).
     /// </summary>
     [Summary(@"Construction for window objects (Aperture, Door).")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "WindowConstructionShade")]
-    public partial class WindowConstructionShade : IDdEnergyBaseModel, IEquatable<WindowConstructionShade>
+    public partial class WindowConstructionShade : IDdEnergyBaseModel, System.IEquatable<WindowConstructionShade>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowConstructionShade" /> class.
@@ -55,8 +54,8 @@ namespace HoneybeeSchema
             string identifier, WindowConstruction windowConstruction, AnyOf<EnergyWindowMaterialShade, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing> shadeMaterial, string displayName = default, object userData = default, ShadeLocation shadeLocation = ShadeLocation.Interior, ControlType controlType = ControlType.AlwaysOn, double setpoint = default, AnyOf<ScheduleRuleset, ScheduleFixedInterval> schedule = default
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
-            this.WindowConstruction = windowConstruction ?? throw new ArgumentNullException("windowConstruction is a required property for WindowConstructionShade and cannot be null");
-            this.ShadeMaterial = shadeMaterial ?? throw new ArgumentNullException("shadeMaterial is a required property for WindowConstructionShade and cannot be null");
+            this.WindowConstruction = windowConstruction ?? throw new System.ArgumentNullException("windowConstruction is a required property for WindowConstructionShade and cannot be null");
+            this.ShadeMaterial = shadeMaterial ?? throw new System.ArgumentNullException("shadeMaterial is a required property for WindowConstructionShade and cannot be null");
             this.ShadeLocation = shadeLocation;
             this.ControlType = controlType;
             this.Setpoint = setpoint;

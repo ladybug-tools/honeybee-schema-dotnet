@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Construction for window objects (Aperture, Door).
     /// </summary>
     [Summary(@"Construction for window objects (Aperture, Door).")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "WindowConstructionAbridged")]
-    public partial class WindowConstructionAbridged : IDdEnergyBaseModel, IEquatable<WindowConstructionAbridged>
+    public partial class WindowConstructionAbridged : IDdEnergyBaseModel, System.IEquatable<WindowConstructionAbridged>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowConstructionAbridged" /> class.
@@ -51,7 +50,7 @@ namespace HoneybeeSchema
             string identifier, List<string> materials, string displayName = default, object userData = default, string frame = default
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
-            this.Materials = materials ?? throw new ArgumentNullException("materials is a required property for WindowConstructionAbridged and cannot be null");
+            this.Materials = materials ?? throw new System.ArgumentNullException("materials is a required property for WindowConstructionAbridged and cannot be null");
             this.Frame = frame;
 
             // Set readonly properties with defaultValue

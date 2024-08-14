@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,13 +18,12 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     [Summary(@"")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "AperturePropertiesAbridged")]
-    public partial class AperturePropertiesAbridged : OpenAPIGenBaseModel, IEquatable<AperturePropertiesAbridged>
+    public partial class AperturePropertiesAbridged : OpenAPIGenBaseModel, System.IEquatable<AperturePropertiesAbridged>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AperturePropertiesAbridged" /> class.

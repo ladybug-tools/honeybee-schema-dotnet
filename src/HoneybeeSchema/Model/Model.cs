@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [Summary(@"Base class for all objects requiring a identifiers acceptable for all engines.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "Model")]
-    public partial class Model : IDdBaseModel, IEquatable<Model>
+    public partial class Model : IDdBaseModel, System.IEquatable<Model>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Model" /> class.
@@ -60,7 +59,7 @@ namespace HoneybeeSchema
             string identifier, ModelProperties properties, string displayName = default, object userData = default, List<Room> rooms = default, List<Face> orphanedFaces = default, List<Shade> orphanedShades = default, List<Aperture> orphanedApertures = default, List<Door> orphanedDoors = default, List<ShadeMesh> shadeMeshes = default, Units units = Units.Meters, double tolerance = 0.01D, double angleTolerance = 1D
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
-            this.Properties = properties ?? throw new ArgumentNullException("properties is a required property for Model and cannot be null");
+            this.Properties = properties ?? throw new System.ArgumentNullException("properties is a required property for Model and cannot be null");
             this.Rooms = rooms;
             this.OrphanedFaces = orphanedFaces;
             this.OrphanedShades = orphanedShades;

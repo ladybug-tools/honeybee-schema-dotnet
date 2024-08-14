@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// A grid of sensors.
     /// </summary>
     [Summary(@"A grid of sensors.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "SensorGrid")]
-    public partial class SensorGrid : RadianceAsset, IEquatable<SensorGrid>
+    public partial class SensorGrid : RadianceAsset, System.IEquatable<SensorGrid>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SensorGrid" /> class.
@@ -54,7 +53,7 @@ namespace HoneybeeSchema
             string identifier, List<Sensor> sensors, string displayName = default, string roomIdentifier = default, List<List<string>> lightPath = default, Mesh3D mesh = default, List<Face3D> baseGeometry = default, string groupIdentifier = default
         ) : base(identifier: identifier, displayName: displayName, roomIdentifier: roomIdentifier, lightPath: lightPath)
         {
-            this.Sensors = sensors ?? throw new ArgumentNullException("sensors is a required property for SensorGrid and cannot be null");
+            this.Sensors = sensors ?? throw new System.ArgumentNullException("sensors is a required property for SensorGrid and cannot be null");
             this.Mesh = mesh;
             this.BaseGeometry = baseGeometry;
             this.GroupIdentifier = groupIdentifier;

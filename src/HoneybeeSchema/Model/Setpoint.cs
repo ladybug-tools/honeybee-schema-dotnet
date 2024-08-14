@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Used to specify information about the setpoint schedule.
     /// </summary>
     [Summary(@"Used to specify information about the setpoint schedule.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "Setpoint")]
-    public partial class Setpoint : IDdEnergyBaseModel, IEquatable<Setpoint>
+    public partial class Setpoint : IDdEnergyBaseModel, System.IEquatable<Setpoint>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Setpoint" /> class.
@@ -54,8 +53,8 @@ namespace HoneybeeSchema
             string identifier, AnyOf<ScheduleRuleset, ScheduleFixedInterval> coolingSchedule, AnyOf<ScheduleRuleset, ScheduleFixedInterval> heatingSchedule, string displayName = default, object userData = default, AnyOf<ScheduleRuleset, ScheduleFixedInterval> humidifyingSchedule = default, AnyOf<ScheduleRuleset, ScheduleFixedInterval> dehumidifyingSchedule = default, double setpointCutoutDifference = 0D
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
-            this.CoolingSchedule = coolingSchedule ?? throw new ArgumentNullException("coolingSchedule is a required property for Setpoint and cannot be null");
-            this.HeatingSchedule = heatingSchedule ?? throw new ArgumentNullException("heatingSchedule is a required property for Setpoint and cannot be null");
+            this.CoolingSchedule = coolingSchedule ?? throw new System.ArgumentNullException("coolingSchedule is a required property for Setpoint and cannot be null");
+            this.HeatingSchedule = heatingSchedule ?? throw new System.ArgumentNullException("heatingSchedule is a required property for Setpoint and cannot be null");
             this.HumidifyingSchedule = humidifyingSchedule;
             this.DehumidifyingSchedule = dehumidifyingSchedule;
             this.SetpointCutoutDifference = setpointCutoutDifference;

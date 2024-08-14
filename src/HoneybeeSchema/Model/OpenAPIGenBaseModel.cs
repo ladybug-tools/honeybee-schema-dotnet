@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,13 +18,12 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     [Summary(@"")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "_OpenAPIGenBaseModel")]
-    public partial class OpenAPIGenBaseModel : IEquatable<OpenAPIGenBaseModel>
+    public partial class OpenAPIGenBaseModel : System.IEquatable<OpenAPIGenBaseModel>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenAPIGenBaseModel" /> class.
@@ -191,7 +190,7 @@ namespace HoneybeeSchema
 
             var resMsgs = string.Join( "; ", res.Select(_ => _.ErrorMessage));
             if (throwException)
-                throw new ArgumentException($"This is an invalid {this.Type} object! Error: {resMsgs}");
+                throw new System.ArgumentException($"This is an invalid {this.Type} object! Error: {resMsgs}");
             else
                 return false;
         }

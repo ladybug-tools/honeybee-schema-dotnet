@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Base class for all objects requiring a identifiers acceptable for all engines.
     /// </summary>
     [Summary(@"Base class for all objects requiring a identifiers acceptable for all engines.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "Shade")]
-    public partial class Shade : IDdBaseModel, IEquatable<Shade>
+    public partial class Shade : IDdBaseModel, System.IEquatable<Shade>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Shade" /> class.
@@ -52,8 +51,8 @@ namespace HoneybeeSchema
             string identifier, Face3D geometry, ShadePropertiesAbridged properties, string displayName = default, object userData = default, bool isDetached = false
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
-            this.Geometry = geometry ?? throw new ArgumentNullException("geometry is a required property for Shade and cannot be null");
-            this.Properties = properties ?? throw new ArgumentNullException("properties is a required property for Shade and cannot be null");
+            this.Geometry = geometry ?? throw new System.ArgumentNullException("geometry is a required property for Shade and cannot be null");
+            this.Properties = properties ?? throw new System.ArgumentNullException("properties is a required property for Shade and cannot be null");
             this.IsDetached = isDetached;
 
             // Set readonly properties with defaultValue

@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Used to describe the daily schedule for a single simulation day.
     /// </summary>
     [Summary(@"Used to describe the daily schedule for a single simulation day.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "ScheduleDay")]
-    public partial class ScheduleDay : EnergyBaseModel, IEquatable<ScheduleDay>
+    public partial class ScheduleDay : EnergyBaseModel, System.IEquatable<ScheduleDay>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleDay" /> class.
@@ -51,8 +50,8 @@ namespace HoneybeeSchema
             string identifier, List<double> values, string displayName = default, List<List<int>> times = default, bool interpolate = false
         ) : base(identifier: identifier, displayName: displayName)
         {
-            this.Values = values ?? throw new ArgumentNullException("values is a required property for ScheduleDay and cannot be null");
-            this.Times = times ?? (new []{(new []{0, 0}).ToList()}).ToList();
+            this.Values = values ?? throw new System.ArgumentNullException("values is a required property for ScheduleDay and cannot be null");
+            this.Times = times ?? new List<List<int>>{ new List<int>{ 0, 0 } };
             this.Interpolate = interpolate;
 
             // Set readonly properties with defaultValue
@@ -78,7 +77,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of lists with each sub-list possessing 2 values for [hour, minute]. The length of the master list must match the length of the values list. Each time in the master list represents the time of day that the corresponding value begins to take effect. For example [(0,0), (9,0), (17,0)] in combination with the values [0, 1, 0] denotes a schedule value of 0 from 0:00 to 9:00, a value of 1 from 9:00 to 17:00 and 0 from 17:00 to the end of the day. Note that this representation of times as the ""time of beginning"" is a different convention than EnergyPlus, which uses ""time until"".")]
         [DataMember(Name = "times")]
-        public List<List<int>> Times { get; set; } = (new []{(new []{0, 0}).ToList()}).ToList();
+        public List<List<int>> Times { get; set; } = new List<List<int>>{ new List<int>{ 0, 0 } };
 
         /// <summary>
         /// Boolean to note whether values in between times should be linearly interpolated or whether successive values should take effect immediately upon the beginning time corresponding to them.

@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Used to specify heating and cooling sizing criteria and safety factors.
     /// </summary>
     [Summary(@"Used to specify heating and cooling sizing criteria and safety factors.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "SizingParameter")]
-    public partial class SizingParameter : OpenAPIGenBaseModel, IEquatable<SizingParameter>
+    public partial class SizingParameter : OpenAPIGenBaseModel, System.IEquatable<SizingParameter>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SizingParameter" /> class.

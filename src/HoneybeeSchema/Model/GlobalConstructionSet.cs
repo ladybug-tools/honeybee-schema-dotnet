@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.
     /// </summary>
     [Summary(@"Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "GlobalConstructionSet")]
-    public partial class GlobalConstructionSet : OpenAPIGenBaseModel, IEquatable<GlobalConstructionSet>
+    public partial class GlobalConstructionSet : OpenAPIGenBaseModel, System.IEquatable<GlobalConstructionSet>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GlobalConstructionSet" /> class.
@@ -59,7 +58,7 @@ namespace HoneybeeSchema
 
 	
 	
-        public static readonly List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGlazing, EnergyWindowMaterialGas>> MaterialsDefault = (new List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGlazing, EnergyWindowMaterialGas>>{HoneybeeSchema.EnergyMaterial.FromJson(@"{
+        public static readonly List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGlazing, EnergyWindowMaterialGas>> MaterialsDefault = new List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGlazing, EnergyWindowMaterialGas>>{ HoneybeeSchema.EnergyMaterial.FromJson(@"{
   ""identifier"": ""Generic Roof Membrane"",
   ""display_name"": null,
   ""user_data"": null,
@@ -258,7 +257,7 @@ namespace HoneybeeSchema
   ""conductivity"": 1.0,
   ""dirt_correction"": 1.0,
   ""solar_diffusing"": false
-}")}).ToList();
+}") };
         /// <summary>
         /// Global Honeybee Energy materials.
         /// </summary>
@@ -266,7 +265,7 @@ namespace HoneybeeSchema
         [DataMember(Name = "materials")]
         public List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGlazing, EnergyWindowMaterialGas>> Materials { get; protected set; } = MaterialsDefault;
 
-        public static readonly List<AnyOf<OpaqueConstructionAbridged, WindowConstructionAbridged, ShadeConstruction, AirBoundaryConstructionAbridged>> ConstructionsDefault = (new List<AnyOf<OpaqueConstructionAbridged, WindowConstructionAbridged, ShadeConstruction, AirBoundaryConstructionAbridged>>{HoneybeeSchema.OpaqueConstructionAbridged.FromJson(@"{
+        public static readonly List<AnyOf<OpaqueConstructionAbridged, WindowConstructionAbridged, ShadeConstruction, AirBoundaryConstructionAbridged>> ConstructionsDefault = new List<AnyOf<OpaqueConstructionAbridged, WindowConstructionAbridged, ShadeConstruction, AirBoundaryConstructionAbridged>>{ HoneybeeSchema.OpaqueConstructionAbridged.FromJson(@"{
   ""identifier"": ""Generic Interior Door"",
   ""display_name"": null,
   ""user_data"": null,
@@ -423,7 +422,7 @@ namespace HoneybeeSchema
     ""Generic 25mm Insulation"",
     ""Generic Painted Metal""
   ]
-}")}).ToList();
+}") };
         /// <summary>
         /// Global Honeybee Energy constructions.
         /// </summary>

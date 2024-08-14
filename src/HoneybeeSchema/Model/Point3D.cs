@@ -1,11 +1,11 @@
 ﻿/* 
- * Honeybee Schema
+ * HoneybeeSchema
  *
  * Contact: info@ladybug.tools
  */
 
 extern alias LBTNewtonSoft;
-using System;
+//using System;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -18,16 +18,15 @@ using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace HoneybeeSchema
 {
     /// <summary>
     /// A point object in 3D space.
     /// </summary>
     [Summary(@"A point object in 3D space.")]
-    [Serializable]
+    [System.Serializable]
     [DataContract(Name = "Point3D")]
-    public partial class Point3D : IEquatable<Point3D>
+    public partial class Point3D : System.IEquatable<Point3D>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Point3D" /> class.
@@ -245,7 +244,7 @@ namespace HoneybeeSchema
 
             var resMsgs = string.Join( "; ", res.Select(_ => _.ErrorMessage));
             if (throwException)
-                throw new ArgumentException($"This is an invalid {this.Type} object! Error: {resMsgs}");
+                throw new System.ArgumentException($"This is an invalid {this.Type} object! Error: {resMsgs}");
             else
                 return false;
         }
