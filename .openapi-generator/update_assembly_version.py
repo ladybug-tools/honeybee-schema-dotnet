@@ -30,7 +30,6 @@ with urllib.request.urlopen(api) as r:
             print(f'Schema version {schema_version} is newer than the latest version on Nuget: {latest_version}')
 
 
-
 print(f'Getting an existing version: {new_version}')
 
 # increment version
@@ -39,12 +38,14 @@ print(version_digits)
 
 
 if len(version_digits) == 3:
-    new_version = f'{new_version}-1'
+    new_version = f'{new_version}-v1'
 else:
-    v = int(version_digits[-1]) + 1
+    lastV = version_digits[-1]
+    lastV = lastV.replace("v","")
+    v = int(lastV) + 1
     version_digits = version_digits[0:-1]
     version = '.'.join(version_digits)
-    new_version = f'{version}-{v}'
+    new_version = f'{version}-v{v}'
 
 print(f'New version: {new_version}')
 
