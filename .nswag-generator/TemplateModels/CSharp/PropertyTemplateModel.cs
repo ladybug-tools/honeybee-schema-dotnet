@@ -60,9 +60,9 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
 
 
         // check List of AnyOf type
-        if (IsArray && (json.Item.AnyOf?.Any()).GetValueOrDefault() && HasDefault)
+        if (IsArray && HasDefault)
         {
-            DefaultCodeFormat = DefaultCodeFormat.Replace("(new []", $"(new {Type}");
+            DefaultCodeFormat = DefaultCodeFormat.Replace("new TYPE()", $"new {Type}()");
         }
         // check default value for constructor parameter
         ConstructionParameterCode = $"{Type} {CsParameterName}";
@@ -222,7 +222,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
             {
                 arrayCode.Add(GetDefaultFromJson(item).ToString());
             }
-            defaultCodeFormat = $"(new []{{{string.Join(separator, arrayCode)}}}).ToList()";
+            defaultCodeFormat = $"new TYPE(){{{string.Join(separator, arrayCode)}}}";
         }
         else
         {
