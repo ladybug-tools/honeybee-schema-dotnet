@@ -53,7 +53,29 @@ namespace Generator.Tests.CSharp
             var prop = classModel.Properties.First(_ => _.CsPropertyName == "Modifiers");
             Assert.IsNotNull(prop);
 
-            StringAssert.StartsWith("(new List<AnyOf<", prop.DefaultCodeFormat);
+            StringAssert.StartsWith("new List<AnyOf<", prop.DefaultCodeFormat);
+        }
+
+        [Test]
+        public void TestDeepestItemTypeOfList()
+        {
+            var json = doc.Components.Schemas["ScheduleDay"];
+            var jsProp = json.ActualProperties.First(_ => _.Key == "times");
+            var type = PropertyTemplateModel.GetListTypeString(jsProp.Value, out var deepestItemType);
+            StringAssert.AreEqualIgnoringCase("List<List<int>>", type);
+            StringAssert.AreEqualIgnoringCase("int", deepestItemType);
+        }
+
+        [Test]
+        public void TestDefaultValueOfListType()
+        {
+            var json = doc.Components.Schemas["ScheduleDay"];
+
+            var classModel = new ClassTemplateModel(doc, json);
+            var prop = classModel.Properties.First(_ => _.CsPropertyName == "Times");
+            Assert.IsNotNull(prop);
+
+            StringAssert.StartsWith("new List<List<int>>{new List<int>{", prop.DefaultCodeFormat);
         }
 
     }
