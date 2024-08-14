@@ -78,7 +78,7 @@ namespace HoneybeeSchema
 
 	
 	
-        public static readonly GlobalConstructionSet GlobalConstructionSetDefault = HoneybeeSchema.GlobalConstructionSet.FromJson(@"{
+        public static readonly GlobalConstructionSet GlobalConstructionSetDefault = (@"{
   ""type"": ""GlobalConstructionSet"",
   ""materials"": [
     {
@@ -507,7 +507,7 @@ namespace HoneybeeSchema
   ""shade_construction"": ""Generic Shade"",
   ""context_construction"": ""Generic Context"",
   ""air_boundary_construction"": ""Generic Air Boundary""
-}");
+}").To<GlobalConstructionSet>();
         /// <summary>
         /// Global Energy construction set.
         /// </summary>

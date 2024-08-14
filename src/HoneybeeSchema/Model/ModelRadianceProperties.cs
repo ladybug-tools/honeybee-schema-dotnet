@@ -66,7 +66,7 @@ namespace HoneybeeSchema
 
 	
 	
-        public static readonly GlobalModifierSet GlobalModifierSetDefault = HoneybeeSchema.GlobalModifierSet.FromJson(@"{
+        public static readonly GlobalModifierSet GlobalModifierSetDefault = (@"{
   ""type"": ""GlobalModifierSet"",
   ""modifiers"": [
     {
@@ -227,7 +227,7 @@ namespace HoneybeeSchema
   },
   ""air_boundary_modifier"": ""air_boundary"",
   ""context_modifier"": ""generic_context_0.20""
-}");
+}").To<GlobalModifierSet>();
         /// <summary>
         /// Global Radiance modifier set.
         /// </summary>

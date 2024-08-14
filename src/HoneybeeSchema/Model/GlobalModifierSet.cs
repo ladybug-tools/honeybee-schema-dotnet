@@ -57,7 +57,7 @@ namespace HoneybeeSchema
 
 	
 	
-        public static readonly List<AnyOf<Plastic, Glass, Trans>> ModifiersDefault = new List<AnyOf<Plastic, Glass, Trans>>{ HoneybeeSchema.Plastic.FromJson(@"{
+        public static readonly List<AnyOf<Plastic, Glass, Trans>> ModifiersDefault = new List<AnyOf<Plastic, Glass, Trans>>{ (@"{
   ""identifier"": ""generic_floor_0.20"",
   ""display_name"": null,
   ""type"": ""Plastic"",
@@ -68,7 +68,7 @@ namespace HoneybeeSchema
   ""b_reflectance"": 0.2,
   ""specularity"": 0.0,
   ""roughness"": 0.0
-}"), HoneybeeSchema.Plastic.FromJson(@"{
+}").To<Plastic>(), (@"{
   ""identifier"": ""generic_wall_0.50"",
   ""display_name"": null,
   ""type"": ""Plastic"",
@@ -79,7 +79,7 @@ namespace HoneybeeSchema
   ""b_reflectance"": 0.5,
   ""specularity"": 0.0,
   ""roughness"": 0.0
-}"), HoneybeeSchema.Plastic.FromJson(@"{
+}").To<Plastic>(), (@"{
   ""identifier"": ""generic_ceiling_0.80"",
   ""display_name"": null,
   ""type"": ""Plastic"",
@@ -90,7 +90,7 @@ namespace HoneybeeSchema
   ""b_reflectance"": 0.8,
   ""specularity"": 0.0,
   ""roughness"": 0.0
-}"), HoneybeeSchema.Plastic.FromJson(@"{
+}").To<Plastic>(), (@"{
   ""identifier"": ""generic_opaque_door_0.50"",
   ""display_name"": null,
   ""type"": ""Plastic"",
@@ -101,7 +101,7 @@ namespace HoneybeeSchema
   ""b_reflectance"": 0.5,
   ""specularity"": 0.0,
   ""roughness"": 0.0
-}"), HoneybeeSchema.Plastic.FromJson(@"{
+}").To<Plastic>(), (@"{
   ""identifier"": ""generic_interior_shade_0.50"",
   ""display_name"": null,
   ""type"": ""Plastic"",
@@ -112,7 +112,7 @@ namespace HoneybeeSchema
   ""b_reflectance"": 0.5,
   ""specularity"": 0.0,
   ""roughness"": 0.0
-}"), HoneybeeSchema.Plastic.FromJson(@"{
+}").To<Plastic>(), (@"{
   ""identifier"": ""generic_exterior_shade_0.35"",
   ""display_name"": null,
   ""type"": ""Plastic"",
@@ -123,7 +123,7 @@ namespace HoneybeeSchema
   ""b_reflectance"": 0.35,
   ""specularity"": 0.0,
   ""roughness"": 0.0
-}"), HoneybeeSchema.Plastic.FromJson(@"{
+}").To<Plastic>(), (@"{
   ""identifier"": ""generic_context_0.20"",
   ""display_name"": null,
   ""type"": ""Plastic"",
@@ -134,7 +134,7 @@ namespace HoneybeeSchema
   ""b_reflectance"": 0.2,
   ""specularity"": 0.0,
   ""roughness"": 0.0
-}"), HoneybeeSchema.Glass.FromJson(@"{
+}").To<Plastic>(), (@"{
   ""identifier"": ""generic_interior_window_vis_0.88"",
   ""display_name"": null,
   ""type"": ""Glass"",
@@ -144,7 +144,7 @@ namespace HoneybeeSchema
   ""g_transmissivity"": 0.9584154328610596,
   ""b_transmissivity"": 0.9584154328610596,
   ""refraction_index"": null
-}"), HoneybeeSchema.Glass.FromJson(@"{
+}").To<Glass>(), (@"{
   ""identifier"": ""generic_exterior_window_vis_0.64"",
   ""display_name"": null,
   ""type"": ""Glass"",
@@ -154,7 +154,7 @@ namespace HoneybeeSchema
   ""g_transmissivity"": 0.6975761815384331,
   ""b_transmissivity"": 0.6975761815384331,
   ""refraction_index"": null
-}"), HoneybeeSchema.Trans.FromJson(@"{
+}").To<Glass>(), (@"{
   ""identifier"": ""air_boundary"",
   ""display_name"": null,
   ""type"": ""Trans"",
@@ -167,7 +167,7 @@ namespace HoneybeeSchema
   ""roughness"": 0.0,
   ""transmitted_diff"": 1.0,
   ""transmitted_spec"": 1.0
-}") };
+}").To<Trans>() };
         /// <summary>
         /// Global Honeybee Radiance modifiers.
         /// </summary>
@@ -175,11 +175,11 @@ namespace HoneybeeSchema
         [DataMember(Name = "modifiers")]
         public List<AnyOf<Plastic, Glass, Trans>> Modifiers { get; protected set; } = ModifiersDefault;
 
-        public static readonly WallModifierSetAbridged WallSetDefault = HoneybeeSchema.WallModifierSetAbridged.FromJson(@"{
+        public static readonly WallModifierSetAbridged WallSetDefault = (@"{
   ""exterior_modifier"": ""generic_wall_0.50"",
   ""interior_modifier"": ""generic_wall_0.50"",
   ""type"": ""WallModifierSetAbridged""
-}");
+}").To<WallModifierSetAbridged>();
         /// <summary>
         /// Global Honeybee WallModifierSet.
         /// </summary>
@@ -187,11 +187,11 @@ namespace HoneybeeSchema
         [DataMember(Name = "wall_set")]
         public WallModifierSetAbridged WallSet { get; protected set; } = WallSetDefault;
 
-        public static readonly FloorModifierSetAbridged FloorSetDefault = HoneybeeSchema.FloorModifierSetAbridged.FromJson(@"{
+        public static readonly FloorModifierSetAbridged FloorSetDefault = (@"{
   ""exterior_modifier"": ""generic_floor_0.20"",
   ""interior_modifier"": ""generic_floor_0.20"",
   ""type"": ""FloorModifierSetAbridged""
-}");
+}").To<FloorModifierSetAbridged>();
         /// <summary>
         /// Global Honeybee FloorModifierSet.
         /// </summary>
@@ -199,11 +199,11 @@ namespace HoneybeeSchema
         [DataMember(Name = "floor_set")]
         public FloorModifierSetAbridged FloorSet { get; protected set; } = FloorSetDefault;
 
-        public static readonly RoofCeilingModifierSetAbridged RoofCeilingSetDefault = HoneybeeSchema.RoofCeilingModifierSetAbridged.FromJson(@"{
+        public static readonly RoofCeilingModifierSetAbridged RoofCeilingSetDefault = (@"{
   ""exterior_modifier"": ""generic_ceiling_0.80"",
   ""interior_modifier"": ""generic_ceiling_0.80"",
   ""type"": ""RoofCeilingModifierSetAbridged""
-}");
+}").To<RoofCeilingModifierSetAbridged>();
         /// <summary>
         /// Global Honeybee RoofCeilingModifierSet.
         /// </summary>
@@ -211,13 +211,13 @@ namespace HoneybeeSchema
         [DataMember(Name = "roof_ceiling_set")]
         public RoofCeilingModifierSetAbridged RoofCeilingSet { get; protected set; } = RoofCeilingSetDefault;
 
-        public static readonly ApertureModifierSetAbridged ApertureSetDefault = HoneybeeSchema.ApertureModifierSetAbridged.FromJson(@"{
+        public static readonly ApertureModifierSetAbridged ApertureSetDefault = (@"{
   ""type"": ""ApertureModifierSetAbridged"",
   ""window_modifier"": ""generic_exterior_window_vis_0.64"",
   ""interior_modifier"": ""generic_interior_window_vis_0.88"",
   ""skylight_modifier"": ""generic_exterior_window_vis_0.64"",
   ""operable_modifier"": ""generic_exterior_window_vis_0.64""
-}");
+}").To<ApertureModifierSetAbridged>();
         /// <summary>
         /// Global Honeybee ApertureModifierSet.
         /// </summary>
@@ -225,14 +225,14 @@ namespace HoneybeeSchema
         [DataMember(Name = "aperture_set")]
         public ApertureModifierSetAbridged ApertureSet { get; protected set; } = ApertureSetDefault;
 
-        public static readonly DoorModifierSetAbridged DoorSetDefault = HoneybeeSchema.DoorModifierSetAbridged.FromJson(@"{
+        public static readonly DoorModifierSetAbridged DoorSetDefault = (@"{
   ""exterior_modifier"": ""generic_opaque_door_0.50"",
   ""interior_modifier"": ""generic_opaque_door_0.50"",
   ""type"": ""DoorModifierSetAbridged"",
   ""interior_glass_modifier"": ""generic_interior_window_vis_0.88"",
   ""exterior_glass_modifier"": ""generic_exterior_window_vis_0.64"",
   ""overhead_modifier"": ""generic_opaque_door_0.50""
-}");
+}").To<DoorModifierSetAbridged>();
         /// <summary>
         /// Global Honeybee DoorModifierSet.
         /// </summary>
@@ -240,11 +240,11 @@ namespace HoneybeeSchema
         [DataMember(Name = "door_set")]
         public DoorModifierSetAbridged DoorSet { get; protected set; } = DoorSetDefault;
 
-        public static readonly ShadeModifierSetAbridged ShadeSetDefault = HoneybeeSchema.ShadeModifierSetAbridged.FromJson(@"{
+        public static readonly ShadeModifierSetAbridged ShadeSetDefault = (@"{
   ""exterior_modifier"": ""generic_exterior_shade_0.35"",
   ""interior_modifier"": ""generic_interior_shade_0.50"",
   ""type"": ""ShadeModifierSetAbridged""
-}");
+}").To<ShadeModifierSetAbridged>();
         /// <summary>
         /// Global Honeybee ShadeModifierSet.
         /// </summary>

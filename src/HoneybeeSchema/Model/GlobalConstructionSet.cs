@@ -58,7 +58,7 @@ namespace HoneybeeSchema
 
 	
 	
-        public static readonly List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGlazing, EnergyWindowMaterialGas>> MaterialsDefault = new List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGlazing, EnergyWindowMaterialGas>>{ HoneybeeSchema.EnergyMaterial.FromJson(@"{
+        public static readonly List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGlazing, EnergyWindowMaterialGas>> MaterialsDefault = new List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGlazing, EnergyWindowMaterialGas>>{ (@"{
   ""identifier"": ""Generic Roof Membrane"",
   ""display_name"": null,
   ""user_data"": null,
@@ -71,7 +71,7 @@ namespace HoneybeeSchema
   ""thermal_absorptance"": 0.9,
   ""solar_absorptance"": 0.65,
   ""visible_absorptance"": 0.65
-}"), HoneybeeSchema.EnergyMaterial.FromJson(@"{
+}").To<EnergyMaterial>(), (@"{
   ""identifier"": ""Generic Acoustic Tile"",
   ""display_name"": null,
   ""user_data"": null,
@@ -84,7 +84,7 @@ namespace HoneybeeSchema
   ""thermal_absorptance"": 0.9,
   ""solar_absorptance"": 0.2,
   ""visible_absorptance"": 0.2
-}"), HoneybeeSchema.EnergyMaterial.FromJson(@"{
+}").To<EnergyMaterial>(), (@"{
   ""identifier"": ""Generic 25mm Wood"",
   ""display_name"": null,
   ""user_data"": null,
@@ -97,7 +97,7 @@ namespace HoneybeeSchema
   ""thermal_absorptance"": 0.9,
   ""solar_absorptance"": 0.5,
   ""visible_absorptance"": 0.5
-}"), HoneybeeSchema.EnergyMaterial.FromJson(@"{
+}").To<EnergyMaterial>(), (@"{
   ""identifier"": ""Generic HW Concrete"",
   ""display_name"": null,
   ""user_data"": null,
@@ -110,14 +110,14 @@ namespace HoneybeeSchema
   ""thermal_absorptance"": 0.9,
   ""solar_absorptance"": 0.8,
   ""visible_absorptance"": 0.8
-}"), HoneybeeSchema.EnergyWindowMaterialGas.FromJson(@"{
+}").To<EnergyMaterial>(), (@"{
   ""identifier"": ""Generic Window Air Gap"",
   ""display_name"": null,
   ""user_data"": null,
   ""type"": ""EnergyWindowMaterialGas"",
   ""thickness"": 0.0127,
   ""gas_type"": ""Air""
-}"), HoneybeeSchema.EnergyMaterial.FromJson(@"{
+}").To<EnergyWindowMaterialGas>(), (@"{
   ""identifier"": ""Generic Gypsum Board"",
   ""display_name"": null,
   ""user_data"": null,
@@ -130,7 +130,7 @@ namespace HoneybeeSchema
   ""thermal_absorptance"": 0.9,
   ""solar_absorptance"": 0.5,
   ""visible_absorptance"": 0.5
-}"), HoneybeeSchema.EnergyMaterial.FromJson(@"{
+}").To<EnergyMaterial>(), (@"{
   ""identifier"": ""Generic Wall Air Gap"",
   ""display_name"": null,
   ""user_data"": null,
@@ -143,7 +143,7 @@ namespace HoneybeeSchema
   ""thermal_absorptance"": 0.9,
   ""solar_absorptance"": 0.7,
   ""visible_absorptance"": 0.7
-}"), HoneybeeSchema.EnergyMaterial.FromJson(@"{
+}").To<EnergyMaterial>(), (@"{
   ""identifier"": ""Generic Ceiling Air Gap"",
   ""display_name"": null,
   ""user_data"": null,
@@ -156,7 +156,7 @@ namespace HoneybeeSchema
   ""thermal_absorptance"": 0.9,
   ""solar_absorptance"": 0.7,
   ""visible_absorptance"": 0.7
-}"), HoneybeeSchema.EnergyMaterial.FromJson(@"{
+}").To<EnergyMaterial>(), (@"{
   ""identifier"": ""Generic Brick"",
   ""display_name"": null,
   ""user_data"": null,
@@ -169,7 +169,7 @@ namespace HoneybeeSchema
   ""thermal_absorptance"": 0.9,
   ""solar_absorptance"": 0.65,
   ""visible_absorptance"": 0.65
-}"), HoneybeeSchema.EnergyMaterial.FromJson(@"{
+}").To<EnergyMaterial>(), (@"{
   ""identifier"": ""Generic 50mm Insulation"",
   ""display_name"": null,
   ""user_data"": null,
@@ -182,7 +182,7 @@ namespace HoneybeeSchema
   ""thermal_absorptance"": 0.9,
   ""solar_absorptance"": 0.7,
   ""visible_absorptance"": 0.7
-}"), HoneybeeSchema.EnergyWindowMaterialGlazing.FromJson(@"{
+}").To<EnergyMaterial>(), (@"{
   ""identifier"": ""Generic Low-e Glass"",
   ""display_name"": null,
   ""user_data"": null,
@@ -200,7 +200,7 @@ namespace HoneybeeSchema
   ""conductivity"": 1.0,
   ""dirt_correction"": 1.0,
   ""solar_diffusing"": false
-}"), HoneybeeSchema.EnergyMaterial.FromJson(@"{
+}").To<EnergyWindowMaterialGlazing>(), (@"{
   ""identifier"": ""Generic Painted Metal"",
   ""display_name"": null,
   ""user_data"": null,
@@ -213,7 +213,7 @@ namespace HoneybeeSchema
   ""thermal_absorptance"": 0.9,
   ""solar_absorptance"": 0.5,
   ""visible_absorptance"": 0.5
-}"), HoneybeeSchema.EnergyMaterial.FromJson(@"{
+}").To<EnergyMaterial>(), (@"{
   ""identifier"": ""Generic LW Concrete"",
   ""display_name"": null,
   ""user_data"": null,
@@ -226,7 +226,7 @@ namespace HoneybeeSchema
   ""thermal_absorptance"": 0.9,
   ""solar_absorptance"": 0.8,
   ""visible_absorptance"": 0.8
-}"), HoneybeeSchema.EnergyMaterial.FromJson(@"{
+}").To<EnergyMaterial>(), (@"{
   ""identifier"": ""Generic 25mm Insulation"",
   ""display_name"": null,
   ""user_data"": null,
@@ -239,7 +239,7 @@ namespace HoneybeeSchema
   ""thermal_absorptance"": 0.9,
   ""solar_absorptance"": 0.7,
   ""visible_absorptance"": 0.7
-}"), HoneybeeSchema.EnergyWindowMaterialGlazing.FromJson(@"{
+}").To<EnergyMaterial>(), (@"{
   ""identifier"": ""Generic Clear Glass"",
   ""display_name"": null,
   ""user_data"": null,
@@ -257,7 +257,7 @@ namespace HoneybeeSchema
   ""conductivity"": 1.0,
   ""dirt_correction"": 1.0,
   ""solar_diffusing"": false
-}") };
+}").To<EnergyWindowMaterialGlazing>() };
         /// <summary>
         /// Global Honeybee Energy materials.
         /// </summary>
@@ -265,7 +265,7 @@ namespace HoneybeeSchema
         [DataMember(Name = "materials")]
         public List<AnyOf<EnergyMaterial, EnergyMaterialNoMass, EnergyWindowMaterialGlazing, EnergyWindowMaterialGas>> Materials { get; protected set; } = MaterialsDefault;
 
-        public static readonly List<AnyOf<OpaqueConstructionAbridged, WindowConstructionAbridged, ShadeConstruction, AirBoundaryConstructionAbridged>> ConstructionsDefault = new List<AnyOf<OpaqueConstructionAbridged, WindowConstructionAbridged, ShadeConstruction, AirBoundaryConstructionAbridged>>{ HoneybeeSchema.OpaqueConstructionAbridged.FromJson(@"{
+        public static readonly List<AnyOf<OpaqueConstructionAbridged, WindowConstructionAbridged, ShadeConstruction, AirBoundaryConstructionAbridged>> ConstructionsDefault = new List<AnyOf<OpaqueConstructionAbridged, WindowConstructionAbridged, ShadeConstruction, AirBoundaryConstructionAbridged>>{ (@"{
   ""identifier"": ""Generic Interior Door"",
   ""display_name"": null,
   ""user_data"": null,
@@ -273,7 +273,7 @@ namespace HoneybeeSchema
   ""materials"": [
     ""Generic 25mm Wood""
   ]
-}"), HoneybeeSchema.WindowConstructionAbridged.FromJson(@"{
+}").To<OpaqueConstructionAbridged>(), (@"{
   ""identifier"": ""Generic Single Pane"",
   ""display_name"": null,
   ""user_data"": null,
@@ -282,7 +282,7 @@ namespace HoneybeeSchema
     ""Generic Clear Glass""
   ],
   ""frame"": null
-}"), HoneybeeSchema.ShadeConstruction.FromJson(@"{
+}").To<WindowConstructionAbridged>(), (@"{
   ""identifier"": ""Generic Shade"",
   ""display_name"": null,
   ""user_data"": null,
@@ -290,7 +290,7 @@ namespace HoneybeeSchema
   ""solar_reflectance"": 0.35,
   ""visible_reflectance"": 0.35,
   ""is_specular"": false
-}"), HoneybeeSchema.ShadeConstruction.FromJson(@"{
+}").To<ShadeConstruction>(), (@"{
   ""identifier"": ""Generic Context"",
   ""display_name"": null,
   ""user_data"": null,
@@ -298,7 +298,7 @@ namespace HoneybeeSchema
   ""solar_reflectance"": 0.2,
   ""visible_reflectance"": 0.2,
   ""is_specular"": false
-}"), HoneybeeSchema.OpaqueConstructionAbridged.FromJson(@"{
+}").To<ShadeConstruction>(), (@"{
   ""identifier"": ""Generic Interior Ceiling"",
   ""display_name"": null,
   ""user_data"": null,
@@ -308,7 +308,7 @@ namespace HoneybeeSchema
     ""Generic Ceiling Air Gap"",
     ""Generic Acoustic Tile""
   ]
-}"), HoneybeeSchema.OpaqueConstructionAbridged.FromJson(@"{
+}").To<OpaqueConstructionAbridged>(), (@"{
   ""identifier"": ""Generic Interior Wall"",
   ""display_name"": null,
   ""user_data"": null,
@@ -318,7 +318,7 @@ namespace HoneybeeSchema
     ""Generic Wall Air Gap"",
     ""Generic Gypsum Board""
   ]
-}"), HoneybeeSchema.OpaqueConstructionAbridged.FromJson(@"{
+}").To<OpaqueConstructionAbridged>(), (@"{
   ""identifier"": ""Generic Exposed Floor"",
   ""display_name"": null,
   ""user_data"": null,
@@ -329,7 +329,7 @@ namespace HoneybeeSchema
     ""Generic 50mm Insulation"",
     ""Generic LW Concrete""
   ]
-}"), HoneybeeSchema.OpaqueConstructionAbridged.FromJson(@"{
+}").To<OpaqueConstructionAbridged>(), (@"{
   ""identifier"": ""Generic Interior Floor"",
   ""display_name"": null,
   ""user_data"": null,
@@ -339,7 +339,7 @@ namespace HoneybeeSchema
     ""Generic Ceiling Air Gap"",
     ""Generic LW Concrete""
   ]
-}"), HoneybeeSchema.OpaqueConstructionAbridged.FromJson(@"{
+}").To<OpaqueConstructionAbridged>(), (@"{
   ""identifier"": ""Generic Ground Slab"",
   ""display_name"": null,
   ""user_data"": null,
@@ -348,7 +348,7 @@ namespace HoneybeeSchema
     ""Generic 50mm Insulation"",
     ""Generic HW Concrete""
   ]
-}"), HoneybeeSchema.OpaqueConstructionAbridged.FromJson(@"{
+}").To<OpaqueConstructionAbridged>(), (@"{
   ""identifier"": ""Generic Roof"",
   ""display_name"": null,
   ""user_data"": null,
@@ -360,7 +360,7 @@ namespace HoneybeeSchema
     ""Generic Ceiling Air Gap"",
     ""Generic Acoustic Tile""
   ]
-}"), HoneybeeSchema.OpaqueConstructionAbridged.FromJson(@"{
+}").To<OpaqueConstructionAbridged>(), (@"{
   ""identifier"": ""Generic Exterior Wall"",
   ""display_name"": null,
   ""user_data"": null,
@@ -372,7 +372,7 @@ namespace HoneybeeSchema
     ""Generic Wall Air Gap"",
     ""Generic Gypsum Board""
   ]
-}"), HoneybeeSchema.OpaqueConstructionAbridged.FromJson(@"{
+}").To<OpaqueConstructionAbridged>(), (@"{
   ""identifier"": ""Generic Underground Wall"",
   ""display_name"": null,
   ""user_data"": null,
@@ -383,14 +383,14 @@ namespace HoneybeeSchema
     ""Generic Wall Air Gap"",
     ""Generic Gypsum Board""
   ]
-}"), HoneybeeSchema.AirBoundaryConstructionAbridged.FromJson(@"{
+}").To<OpaqueConstructionAbridged>(), (@"{
   ""identifier"": ""Generic Air Boundary"",
   ""display_name"": null,
   ""user_data"": null,
   ""type"": ""AirBoundaryConstructionAbridged"",
   ""air_mixing_per_area"": 0.1,
   ""air_mixing_schedule"": ""Always On""
-}"), HoneybeeSchema.OpaqueConstructionAbridged.FromJson(@"{
+}").To<AirBoundaryConstructionAbridged>(), (@"{
   ""identifier"": ""Generic Underground Roof"",
   ""display_name"": null,
   ""user_data"": null,
@@ -401,7 +401,7 @@ namespace HoneybeeSchema
     ""Generic Ceiling Air Gap"",
     ""Generic Acoustic Tile""
   ]
-}"), HoneybeeSchema.WindowConstructionAbridged.FromJson(@"{
+}").To<OpaqueConstructionAbridged>(), (@"{
   ""identifier"": ""Generic Double Pane"",
   ""display_name"": null,
   ""user_data"": null,
@@ -412,7 +412,7 @@ namespace HoneybeeSchema
     ""Generic Clear Glass""
   ],
   ""frame"": null
-}"), HoneybeeSchema.OpaqueConstructionAbridged.FromJson(@"{
+}").To<WindowConstructionAbridged>(), (@"{
   ""identifier"": ""Generic Exterior Door"",
   ""display_name"": null,
   ""user_data"": null,
@@ -422,7 +422,7 @@ namespace HoneybeeSchema
     ""Generic 25mm Insulation"",
     ""Generic Painted Metal""
   ]
-}") };
+}").To<OpaqueConstructionAbridged>() };
         /// <summary>
         /// Global Honeybee Energy constructions.
         /// </summary>
@@ -430,12 +430,12 @@ namespace HoneybeeSchema
         [DataMember(Name = "constructions")]
         public List<AnyOf<OpaqueConstructionAbridged, WindowConstructionAbridged, ShadeConstruction, AirBoundaryConstructionAbridged>> Constructions { get; protected set; } = ConstructionsDefault;
 
-        public static readonly WallConstructionSetAbridged WallSetDefault = HoneybeeSchema.WallConstructionSetAbridged.FromJson(@"{
+        public static readonly WallConstructionSetAbridged WallSetDefault = (@"{
   ""interior_construction"": ""Generic Interior Wall"",
   ""exterior_construction"": ""Generic Exterior Wall"",
   ""ground_construction"": ""Generic Underground Wall"",
   ""type"": ""WallConstructionSetAbridged""
-}");
+}").To<WallConstructionSetAbridged>();
         /// <summary>
         /// Global Honeybee WallConstructionSet.
         /// </summary>
@@ -443,12 +443,12 @@ namespace HoneybeeSchema
         [DataMember(Name = "wall_set")]
         public WallConstructionSetAbridged WallSet { get; protected set; } = WallSetDefault;
 
-        public static readonly FloorConstructionSetAbridged FloorSetDefault = HoneybeeSchema.FloorConstructionSetAbridged.FromJson(@"{
+        public static readonly FloorConstructionSetAbridged FloorSetDefault = (@"{
   ""interior_construction"": ""Generic Interior Floor"",
   ""exterior_construction"": ""Generic Exposed Floor"",
   ""ground_construction"": ""Generic Ground Slab"",
   ""type"": ""FloorConstructionSetAbridged""
-}");
+}").To<FloorConstructionSetAbridged>();
         /// <summary>
         /// Global Honeybee FloorConstructionSet.
         /// </summary>
@@ -456,12 +456,12 @@ namespace HoneybeeSchema
         [DataMember(Name = "floor_set")]
         public FloorConstructionSetAbridged FloorSet { get; protected set; } = FloorSetDefault;
 
-        public static readonly RoofCeilingConstructionSetAbridged RoofCeilingSetDefault = HoneybeeSchema.RoofCeilingConstructionSetAbridged.FromJson(@"{
+        public static readonly RoofCeilingConstructionSetAbridged RoofCeilingSetDefault = (@"{
   ""interior_construction"": ""Generic Interior Ceiling"",
   ""exterior_construction"": ""Generic Roof"",
   ""ground_construction"": ""Generic Underground Roof"",
   ""type"": ""RoofCeilingConstructionSetAbridged""
-}");
+}").To<RoofCeilingConstructionSetAbridged>();
         /// <summary>
         /// Global Honeybee RoofCeilingConstructionSet.
         /// </summary>
@@ -469,13 +469,13 @@ namespace HoneybeeSchema
         [DataMember(Name = "roof_ceiling_set")]
         public RoofCeilingConstructionSetAbridged RoofCeilingSet { get; protected set; } = RoofCeilingSetDefault;
 
-        public static readonly ApertureConstructionSetAbridged ApertureSetDefault = HoneybeeSchema.ApertureConstructionSetAbridged.FromJson(@"{
+        public static readonly ApertureConstructionSetAbridged ApertureSetDefault = (@"{
   ""type"": ""ApertureConstructionSetAbridged"",
   ""interior_construction"": ""Generic Single Pane"",
   ""window_construction"": ""Generic Double Pane"",
   ""skylight_construction"": ""Generic Double Pane"",
   ""operable_construction"": ""Generic Double Pane""
-}");
+}").To<ApertureConstructionSetAbridged>();
         /// <summary>
         /// Global Honeybee ApertureConstructionSet.
         /// </summary>
@@ -483,14 +483,14 @@ namespace HoneybeeSchema
         [DataMember(Name = "aperture_set")]
         public ApertureConstructionSetAbridged ApertureSet { get; protected set; } = ApertureSetDefault;
 
-        public static readonly DoorConstructionSetAbridged DoorSetDefault = HoneybeeSchema.DoorConstructionSetAbridged.FromJson(@"{
+        public static readonly DoorConstructionSetAbridged DoorSetDefault = (@"{
   ""type"": ""DoorConstructionSetAbridged"",
   ""interior_construction"": ""Generic Interior Door"",
   ""exterior_construction"": ""Generic Exterior Door"",
   ""overhead_construction"": ""Generic Exterior Door"",
   ""exterior_glass_construction"": ""Generic Double Pane"",
   ""interior_glass_construction"": ""Generic Single Pane""
-}");
+}").To<DoorConstructionSetAbridged>();
         /// <summary>
         /// Global Honeybee DoorConstructionSet.
         /// </summary>
