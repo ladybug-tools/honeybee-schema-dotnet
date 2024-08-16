@@ -26,7 +26,7 @@ internal class Generator
         GetSchemaJsonFiles();
 
         //GenTsDTO.Execute();
-        // GenCsDTO.Execute();
+        GenCsDTO.Execute();
 
     }
 

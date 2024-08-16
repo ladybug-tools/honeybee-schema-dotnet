@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
+namespace SchemaGenerator;
 public static class HttpHelper
 {
     private static HttpClient _httpClient
