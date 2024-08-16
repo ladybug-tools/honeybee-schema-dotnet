@@ -119,7 +119,7 @@ namespace HoneybeeSchema
         /// A number between -360 and 360 for the north direction in degrees.This is the counterclockwise difference between the North and the positive Y-axis. 90 is West and 270 is East. Note that this is different than the convention used in EnergyPlus, which uses clockwise difference instead of counterclockwise difference.
         /// </summary>
         [Summary(@"A number between -360 and 360 for the north direction in degrees.This is the counterclockwise difference between the North and the positive Y-axis. 90 is West and 270 is East. Note that this is different than the convention used in EnergyPlus, which uses clockwise difference instead of counterclockwise difference.")]
-        [Range(-360, double.MaxValue)]
+        [Range(-360, 360)]
         [DataMember(Name = "north_angle")]
         public double NorthAngle { get; set; } = 0D;
 
