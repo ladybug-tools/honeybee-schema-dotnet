@@ -78,5 +78,19 @@ namespace Generator.Tests.CSharp
             StringAssert.StartsWith("new List<List<int>>{new List<int>{", prop.DefaultCodeFormat);
         }
 
+        [Test]
+        public void TestMapper()
+        {
+            var docDic = Path.Combine(rootDir, ".openapi-docs");
+            var mapper = Path.Combine(docDic, "model_mapper.json");
+
+            var interfaces = GenInterface.ReadJson(mapper);
+            var namespece = "honeybee_schema.energy.hvac.doas";
+
+            var model = new InterfaceTemplateModel(namespece, interfaces[namespece]);
+            StringAssert.AreEqualIgnoringCase("HoneybeeSchema.Energy.Hvac", model.InterfaceNameSpace);
+
+        }
+
     }
 }

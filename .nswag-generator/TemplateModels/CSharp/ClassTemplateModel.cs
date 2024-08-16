@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace TemplateModels.CSharp;
-
 public class ClassTemplateModel : ClassTemplateModelBase
 {
     public static string SDKName { get; set; }

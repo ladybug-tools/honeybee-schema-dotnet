@@ -18,8 +18,7 @@ using TemplateModels.CSharp;
 using TemplateModels;
 
 namespace SchemaGenerator;
-
-public class GenDTO
+public partial class Generator
 {
     public static string TargetLanguage { get; set; } = "CSharp";
     private static TemplateOptions _templateOptions;
@@ -30,7 +29,7 @@ public class GenDTO
             if (_templateOptions == null)
             {
                 var options = new TemplateOptions();
-                var tps = typeof(GenDTO).Assembly
+                var tps = typeof(Generator).Assembly
                     .GetTypes()
                     .Where(_ => _.IsPublic)
                     .Where(t => t.Namespace.StartsWith("TemplateModels.Base") || t.Namespace.StartsWith($"TemplateModels.{TargetLanguage}"))
@@ -65,7 +64,7 @@ public class GenDTO
     }
 }
 
-public class GenCsDTO : GenDTO
+public class GenCsDTO : Generator
 {
     static string _sdkName => Generator.sdkName;
     static string workingDir => Generator.workingDir;
