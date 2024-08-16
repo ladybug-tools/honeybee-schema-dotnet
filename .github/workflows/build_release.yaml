@@ -21,7 +21,7 @@ jobs:
           cd ./.nswag-generator
           dotnet run --genCsModel --genCsInterface --updateVersion
           MSG=$(dotnet run --updateVersion | grep "New version")
-          VERSION=$(echo $MSG | grep -oP '(?<=New version: )[^ ]+')
+          VERSION=$(echo $MSG | awk -F': ' '{print $2}')
           echo "ReleaseVersion $VERSION"
           echo "ReleaseVersion=$VERSION" >> $GITHUB_ENV
 
