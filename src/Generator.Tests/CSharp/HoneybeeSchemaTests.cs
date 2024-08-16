@@ -92,5 +92,16 @@ namespace Generator.Tests.CSharp
 
         }
 
+        [Test]
+        public void TestVersionUpdater()
+        {
+            SchemaGenerator.Generator.UpdateVersions();
+            //var api = $"https://api.nuget.org/v3-flatcontainer/{sdkName.ToLower()}/index.json";
+
+            //var docDic = HttpHelper.ReadJson(
+            //StringAssert.AreEqualIgnoringCase("HoneybeeSchema.Energy.Hvac", model.InterfaceNameSpace);
+
+        }
+
     }
 }

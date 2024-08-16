@@ -1,5 +1,6 @@
 ﻿
 
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -71,7 +72,12 @@ public static class HttpHelper
             return outputPath;
         }
     }
-
+    public static JObject ReadJson(string jsonUrl)
+    {
+        var json = _httpClient.GetStringAsync(jsonUrl).GetAwaiter().GetResult();
+        var jDocObj = JObject.Parse(json);
+        return jDocObj;
+    }
     public static List<string> DownloadPollinationAssets(string targetDir, string apiUrl, string fileExtension = default)
     {
         return DownloadGithubAssets(_httpClientPollination, targetDir, apiUrl, fileExtension);
