@@ -3,52 +3,41 @@ name: CI-On-Dispatch
 on: repository_dispatch
 
 jobs:
-
   bump_honeybee_schema:
     name: "Check Event"
     runs-on: ubuntu-latest
     if: github.event.action == 'honeybee_schema_release'
     steps:
+      - name: "Checkout Master Branch"
+        uses: actions/checkout@v2
+        with:
+          ref: refs/heads/master
+          token: ${{ secrets.DEPS_UPDATING }}
 
-    - name: "Checkout Master Branch"
-      uses: actions/checkout@v2
-      with:
-        ref: refs/heads/master
-        token: ${{ secrets.DEPS_UPDATING }}
-        
-    - name: "Run Update Script"
-      env:
-        VERSION: ${{ github.event.client_payload.version }}
-      run: |
-        export CLEAN_VERSION=$(echo $VERSION | sed 's/v//g')
-        sed -i --regexp-extended 's/(honeybee-schema==).*/honeybee-schema=='"$CLEAN_VERSION"'/' requirements.txt
+      - name: "Run Update Script"
+        env:
+          VERSION: ${{ github.event.client_payload.version }}
+        run: |
+          export CLEAN_VERSION=$(echo $VERSION | sed 's/v//g')
+          sed -i --regexp-extended 's/(honeybee-schema==).*/honeybee-schema=='"$CLEAN_VERSION"'/' requirements.txt
 
-    - name: Set up Java
-      uses: actions/setup-java@v1
-      with:
-        java-version: 1.8
-        java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
-        architecture: x64 # (x64 or x86) - defaults to x64
+      - name: "Run Update Script"
+        run: |
+          cd ./.nswag-generator\
+          dotnet run --download --genCsModel --genCsInterface
 
+      - name: "Run build"
+        run: |
+          cd ./src/HoneybeeSchema
+          dotnet build
 
-    - name: "Install OpenAPI-generator"
-      run: |
-        npm install @openapitools/openapi-generator-cli
-      
-
-    - name: "Run Update Script"
-      run: |
-        python3 .openapi-generator/download_schema.py
-        python3 .openapi-generator/generate.py
-
-
-    - name: "Commit and Push Changes"
-      id: push
-      env:
-        VERSION: ${{ github.event.client_payload.version }}
-      run: |
-        git config --global user.name 'ladybugbot'
-        git config --global user.email 'ladybugbot@users.noreply.github.com'
-        git add .
-        git commit -m "fix(deps): Bump honeybee-schema to $VERSION"
-        git push
+      - name: "Commit and Push Changes"
+        id: push
+        env:
+          VERSION: ${{ github.event.client_payload.version }}
+        run: |
+          git config --global user.name 'ladybugbot'
+          git config --global user.email 'ladybugbot@users.noreply.github.com'
+          git add .
+          git commit -m "fix(deps): Bump honeybee-schema to $VERSION"
+          git push
