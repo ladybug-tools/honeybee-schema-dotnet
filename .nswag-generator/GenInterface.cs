@@ -20,6 +20,7 @@ public class GenInterface : Generator
         var docDir = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(rootDir), ".openapi-docs");
         var mapper = System.IO.Path.Combine(docDir, "model_mapper.json");
         var interfaceDir = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(rootDir), "src", sdkName, "Interface");
+        System.IO.Directory.Delete(interfaceDir, true);
 
         var interfaces = ReadJson(mapper);
 
@@ -37,7 +38,7 @@ public class GenInterface : Generator
             var dir = System.IO.Path.Combine(interfaceDir, model.SubFolder);
             if (!System.IO.Directory.Exists(dir))
                 System.IO.Directory.CreateDirectory(dir);
-            var file = System.IO.Path.Combine(dir, $"{model.InterfaceName.Substring(1)}.cs");
+            var file = System.IO.Path.Combine(dir, $"{model.InterfaceName}.cs");
             System.IO.File.WriteAllText(file, code, System.Text.Encoding.UTF8);
             if (System.IO.File.Exists(file))
             {
