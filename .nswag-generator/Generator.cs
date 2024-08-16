@@ -21,8 +21,43 @@ internal class Generator
         var outputDir = System.IO.Path.Combine(rootDir, "Output");
         System.IO.Directory.CreateDirectory(outputDir);
 
+        // download all json files
+        HttpHelper.SetUp();
+        GetSchemaJsonFiles();
+
         //GenTsDTO.Execute();
-        GenCsDTO.Execute();
+        // GenCsDTO.Execute();
+
+    }
+
+
+    // Download all schema jsons
+    static void GetSchemaJsonFiles()
+    {
+        var baseURL = @"https://www.ladybug.tools/honeybee-schema";
+        var files = new string[] {
+            "model_inheritance.json",
+            "model_mapper.json",
+            "simulation-parameter_inheritance.json",
+            "simulation-parameter_mapper.json",
+            "validation-report.json",
+            "comparison-report_inheritance.json",
+            "sync-instructions_inheritance.json",
+            "project-information_inheritance.json"
+            };
+
+        var dir = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(rootDir), ".openapi-docs");
+        if (System.IO.Directory.Exists(dir))
+            System.IO.Directory.Delete(dir, true);
+        System.IO.Directory.CreateDirectory(dir);
+        foreach (var f in files)
+        {
+            var url = $"{baseURL}/{f}";
+            var saveAs = System.IO.Path.Combine(dir, f);
+            var savedAs = HttpHelper.DownloadFile(url, saveAs);
+            if (!System.IO.File.Exists(savedAs))
+                throw new ArgumentException($"Failed to rename file to {saveAs}");
+        }
 
     }
 
