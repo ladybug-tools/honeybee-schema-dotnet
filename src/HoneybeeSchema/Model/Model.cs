@@ -36,7 +36,7 @@ namespace HoneybeeSchema
         { 
             // Set readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.58.2";
+            this.Version = "1.58.3";
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="Model" /> class.
@@ -72,7 +72,7 @@ namespace HoneybeeSchema
 
             // Set readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.58.2";
+            this.Version = "1.58.3";
 
             // check if object is valid, only check for inherited class
             if (this.GetType() == typeof(Model))
@@ -95,7 +95,7 @@ namespace HoneybeeSchema
         [Summary(@"Text string for the current version of the schema.")]
         [RegularExpression(@"([0-9]+)\.([0-9]+)\.([0-9]+)")]
         [DataMember(Name = "version")]
-        public string Version { get; protected set; } = "1.58.2";
+        public string Version { get; protected set; } = "1.58.3";
 
         /// <summary>
         /// A list of Rooms in the model.
