@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Linq;
 
 namespace SchemaGenerator;
 
-internal class Generator
+public partial class Generator
 {
     private static readonly string _generatorFolder = ".nswag-generator";
     public static string sdkName = "HoneybeeSchema";
@@ -21,12 +22,26 @@ internal class Generator
         var outputDir = System.IO.Path.Combine(rootDir, "Output");
         System.IO.Directory.CreateDirectory(outputDir);
 
+        args = args ?? new string[] {"--download", "--genCsModel", "--genCsInterface"};
+
         // download all json files
-        HttpHelper.SetUp();
-        GetSchemaJsonFiles();
+        if (args.Contains("--download"))
+        {
+            HttpHelper.SetUp();
+            GetSchemaJsonFiles();
+        }
 
         //GenTsDTO.Execute();
-        GenCsDTO.Execute();
+        if (args.Contains("--genCsModel"))
+        {
+            GenCsDTO.Execute();
+        }
+
+        //Generate Interfaces
+        if (args.Contains("--genCsInterface"))
+        {
+            GenInterface.Execute();
+        }
 
     }
 
