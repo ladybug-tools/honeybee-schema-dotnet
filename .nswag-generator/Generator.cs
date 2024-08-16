@@ -25,7 +25,7 @@ public partial class Generator
         var outputDir = System.IO.Path.Combine(rootDir, "Output");
         System.IO.Directory.CreateDirectory(outputDir);
 
-        args = args ?? new string[] { "--download", "--genCsModel", "--genCsInterface", "--updateVersion" };
+        args = args ?? new string[] { "--download", "--genTsModel", "--genCsModel", "--genCsInterface", "--updateVersion" };
 
         // download all json files
         if (args.Contains("--download"))
@@ -34,7 +34,11 @@ public partial class Generator
             GetSchemaJsonFiles();
         }
 
-        //GenTsDTO.Execute();
+        if (args.Contains("--genTsModel"))
+        {
+            GenTsDTO.Execute();
+        }
+
         if (args.Contains("--genCsModel"))
         {
             GenCsDTO.Execute();
