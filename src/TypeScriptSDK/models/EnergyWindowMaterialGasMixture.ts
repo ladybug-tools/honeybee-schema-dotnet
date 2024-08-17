@@ -2,8 +2,7 @@
 import { GasType } from "./GasType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
-/** Create a mixture of two to four different gases to fill the panes of multiple
-pane windows. */
+/** Create a mixture of two to four different gases to fill the panes of multiple\npane windows. */
 export class EnergyWindowMaterialGasMixture extends IDdEnergyBaseModel {
     @IsArray()
     @ValidateNested({ each: true })

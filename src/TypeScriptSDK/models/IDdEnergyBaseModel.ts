@@ -114,41 +114,6 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "EnergyWindowMaterialGlazing") {
-            let result = new EnergyWindowMaterialGlazing();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "EnergyWindowMaterialGas") {
-            let result = new EnergyWindowMaterialGas();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "OpaqueConstructionAbridged") {
-            let result = new OpaqueConstructionAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "WindowConstructionAbridged") {
-            let result = new WindowConstructionAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ShadeConstruction") {
-            let result = new ShadeConstruction();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "AirBoundaryConstructionAbridged") {
-            let result = new AirBoundaryConstructionAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ConstructionSetAbridged") {
-            let result = new ConstructionSetAbridged();
-            result.init(data);
-            return result;
-        }
         if (data["type"] === "EnergyMaterialVegetation") {
             let result = new EnergyMaterialVegetation();
             result.init(data);
@@ -161,6 +126,16 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
         }
         if (data["type"] === "EnergyWindowMaterialSimpleGlazSys") {
             let result = new EnergyWindowMaterialSimpleGlazSys();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "EnergyWindowMaterialGlazing") {
+            let result = new EnergyWindowMaterialGlazing();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "EnergyWindowMaterialGas") {
+            let result = new EnergyWindowMaterialGas();
             result.init(data);
             return result;
         }
@@ -214,6 +189,11 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
             result.init(data);
             return result;
         }
+        if (data["type"] === "ShadeConstruction") {
+            let result = new ShadeConstruction();
+            result.init(data);
+            return result;
+        }
         if (data["type"] === "AirBoundaryConstruction") {
             let result = new AirBoundaryConstruction();
             result.init(data);
@@ -221,6 +201,36 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
         }
         if (data["type"] === "ConstructionSet") {
             let result = new ConstructionSet();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Lighting") {
+            let result = new Lighting();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "FCUwithDOASAbridged") {
+            let result = new FCUwithDOASAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "OpaqueConstructionAbridged") {
+            let result = new OpaqueConstructionAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "WindowConstructionAbridged") {
+            let result = new WindowConstructionAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "AirBoundaryConstructionAbridged") {
+            let result = new AirBoundaryConstructionAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ConstructionSetAbridged") {
+            let result = new ConstructionSetAbridged();
             result.init(data);
             return result;
         }
@@ -261,11 +271,6 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
         }
         if (data["type"] === "ForcedAirFurnace") {
             let result = new ForcedAirFurnace();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "FCUwithDOASAbridged") {
-            let result = new FCUwithDOASAbridged();
             result.init(data);
             return result;
         }
@@ -394,11 +399,6 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "Lighting") {
-            let result = new Lighting();
-            result.init(data);
-            return result;
-        }
         if (data["type"] === "ElectricEquipment") {
             let result = new ElectricEquipment();
             result.init(data);
@@ -444,18 +444,18 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "InternalMassAbridged") {
-            let result = new InternalMassAbridged();
-            result.init(data);
-            return result;
-        }
         if (data["type"] === "ProcessAbridged") {
             let result = new ProcessAbridged();
             result.init(data);
             return result;
         }
-        if (data["type"] === "_HeatCoolBase") {
-            let result = new _HeatCoolBase();
+        if (data["type"] === "InternalMassAbridged") {
+            let result = new InternalMassAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "_DOASBase") {
+            let result = new _DOASBase();
             result.init(data);
             return result;
         }
@@ -464,8 +464,8 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "_DOASBase") {
-            let result = new _DOASBase();
+        if (data["type"] === "_HeatCoolBase") {
+            let result = new _HeatCoolBase();
             result.init(data);
             return result;
         }

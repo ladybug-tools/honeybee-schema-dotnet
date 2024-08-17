@@ -3,17 +3,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ResidentialEquipmentType } from "./ResidentialEquipmentType";
 import { Vintages } from "./Vintages";
 
-/** Residential Air Conditioning, Heat Pump or Furnace system.
-
-Residential HVAC systems are intended primarily for single-family homes and
-include a wide variety of options. In all cases, each room/zone will receive
-its own air loop WITHOUT an outdoor air inlet (air is simply being recirculated
-through the loop). Residential air conditioning (AC) systems are modeled
-using a unitary system with a single-speed direct expansion (DX) cooling
-coil in the loop. Residential heat pump (HP) systems use a single-speed DX
-heating coil in the unitary system and the residential furnace option uses
-a gas coil in the unitary system. In all cases, the properties of these coils
-are set to reflect a typical residential system. */
+/** Residential Air Conditioning, Heat Pump or Furnace system.\n\nResidential HVAC systems are intended primarily for single-family homes and\ninclude a wide variety of options. In all cases, each room/zone will receive\nits own air loop WITHOUT an outdoor air inlet (air is simply being recirculated\nthrough the loop). Residential air conditioning (AC) systems are modeled\nusing a unitary system with a single-speed direct expansion (DX) cooling\ncoil in the loop. Residential heat pump (HP) systems use a single-speed DX\nheating coil in the unitary system and the residential furnace option uses\na gas coil in the unitary system. In all cases, the properties of these coils\nare set to reflect a typical residential system. */
 export class Residential extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
     @ValidateNested()

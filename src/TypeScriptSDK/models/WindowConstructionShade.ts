@@ -14,7 +14,7 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
     @IsInstance(WindowConstruction)
     @ValidateNested()
     @IsDefined()
-    /** A WindowConstruction object that serves as the "switched off" version of the construction (aka. the "bare construction"). The shade_material and shade_location will be used to modify this starting construction. */
+    /** A WindowConstruction object that serves as the ""switched off"" version of the construction (aka. the ""bare construction""). The shade_material and shade_location will be used to modify this starting construction. */
     window_construction!: WindowConstruction;
 	
     @IsDefined()
@@ -28,7 +28,7 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
     @IsEnum(ShadeLocation)
     @ValidateNested()
     @IsOptional()
-    /** Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the "Between" option. Also note that, for a WindowConstruction with more than one gas gap, the "Between" option defaults to using the inner gap as this is the only option that EnergyPlus supports. */
+    /** Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the ""Between"" option. Also note that, for a WindowConstruction with more than one gas gap, the ""Between"" option defaults to using the inner gap as this is the only option that EnergyPlus supports. */
     shade_location?: ShadeLocation;
 	
     @IsEnum(ControlType)
@@ -39,7 +39,7 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
-    /** A number that corresponds to the specified control_type. This can be a value in (W/m2), (C) or (W) depending upon the control type.Note that this value cannot be None for any control type except "AlwaysOn." */
+    /** A number that corresponds to the specified control_type. This can be a value in (W/m2), (C) or (W) depending upon the control type.Note that this value cannot be None for any control type except ""AlwaysOn."" */
     setpoint?: number;
 	
     @IsOptional()

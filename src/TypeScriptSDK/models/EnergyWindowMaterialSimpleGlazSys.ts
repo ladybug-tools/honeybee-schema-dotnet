@@ -1,10 +1,7 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
-/** Describe an entire glazing system rather than individual layers.
-
-Used when only very limited information is available on the glazing layers or when
-specific performance levels are being targeted. */
+/** Describe an entire glazing system rather than individual layers.\n\nUsed when only very limited information is available on the glazing layers or when\nspecific performance levels are being targeted. */
 export class EnergyWindowMaterialSimpleGlazSys extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()

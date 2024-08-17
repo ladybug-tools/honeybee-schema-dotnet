@@ -3,14 +3,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { PTACEquipmentType } from "./PTACEquipmentType";
 import { Vintages } from "./Vintages";
 
-/** Packaged Terminal Air Conditioning (PTAC/HP) HVAC system. (aka. System 1 or 2).
-
-Each room/zone receives its own packaged unit that supplies heating, cooling
-and ventilation. Cooling is always done via a single-speed direct expansion (DX)
-cooling coil. Heating can be done via a heating coil in the unit or via an
-external baseboard. Fans are constant volume.
-
-PTAC/HP systems are the traditional baseline system for residential buildings. */
+/** Packaged Terminal Air Conditioning (PTAC/HP) HVAC system. (aka. System 1 or 2).\n\nEach room/zone receives its own packaged unit that supplies heating, cooling\nand ventilation. Cooling is always done via a single-speed direct expansion (DX)\ncooling coil. Heating can be done via a heating coil in the unit or via an\nexternal baseboard. Fans are constant volume.\n\nPTAC/HP systems are the traditional baseline system for residential buildings. */
 export class PTAC extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
     @ValidateNested()

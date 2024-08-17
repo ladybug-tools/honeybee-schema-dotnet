@@ -227,6 +227,76 @@ export abstract class _OpenAPIGenBaseModel {
     static fromJS(data: any): _OpenAPIGenBaseModel {
         data = typeof data === 'object' ? data : {};
 
+        if (data["type"] === "Void") {
+            let result = new Void();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Mirror") {
+            let result = new Mirror();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ModifierBase") {
+            let result = new ModifierBase();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "IDdRadianceBaseModel") {
+            let result = new IDdRadianceBaseModel();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Plastic") {
+            let result = new Plastic();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Glass") {
+            let result = new Glass();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "BSDF") {
+            let result = new BSDF();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Glow") {
+            let result = new Glow();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Light") {
+            let result = new Light();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Trans") {
+            let result = new Trans();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Metal") {
+            let result = new Metal();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ApertureModifierSet") {
+            let result = new ApertureModifierSet();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "RoofCeilingModifierSetAbridged") {
+            let result = new RoofCeilingModifierSetAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "BaseModifierSetAbridged") {
+            let result = new BaseModifierSetAbridged();
+            result.init(data);
+            return result;
+        }
         if (data["type"] === "EnergyMaterial") {
             let result = new EnergyMaterial();
             result.init(data);
@@ -244,81 +314,6 @@ export abstract class _OpenAPIGenBaseModel {
         }
         if (data["type"] === "EnergyMaterialNoMass") {
             let result = new EnergyMaterialNoMass();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Autocalculate") {
-            let result = new Autocalculate();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "EnergyWindowMaterialGlazing") {
-            let result = new EnergyWindowMaterialGlazing();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "EnergyWindowMaterialGas") {
-            let result = new EnergyWindowMaterialGas();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "OpaqueConstructionAbridged") {
-            let result = new OpaqueConstructionAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "WindowConstructionAbridged") {
-            let result = new WindowConstructionAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ShadeConstruction") {
-            let result = new ShadeConstruction();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "AirBoundaryConstructionAbridged") {
-            let result = new AirBoundaryConstructionAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "WallConstructionSetAbridged") {
-            let result = new WallConstructionSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "_FaceSubSetAbridged") {
-            let result = new _FaceSubSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "FloorConstructionSetAbridged") {
-            let result = new FloorConstructionSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "RoofCeilingConstructionSetAbridged") {
-            let result = new RoofCeilingConstructionSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ApertureConstructionSetAbridged") {
-            let result = new ApertureConstructionSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "DoorConstructionSetAbridged") {
-            let result = new DoorConstructionSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "GlobalConstructionSet") {
-            let result = new GlobalConstructionSet();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ConstructionSetAbridged") {
-            let result = new ConstructionSetAbridged();
             result.init(data);
             return result;
         }
@@ -349,6 +344,21 @@ export abstract class _OpenAPIGenBaseModel {
         }
         if (data["type"] === "EnergyWindowMaterialSimpleGlazSys") {
             let result = new EnergyWindowMaterialSimpleGlazSys();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Autocalculate") {
+            let result = new Autocalculate();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "EnergyWindowMaterialGlazing") {
+            let result = new EnergyWindowMaterialGlazing();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "EnergyWindowMaterialGas") {
+            let result = new EnergyWindowMaterialGas();
             result.init(data);
             return result;
         }
@@ -437,6 +447,11 @@ export abstract class _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
+        if (data["type"] === "ShadeConstruction") {
+            let result = new ShadeConstruction();
+            result.init(data);
+            return result;
+        }
         if (data["type"] === "AirBoundaryConstruction") {
             let result = new AirBoundaryConstruction();
             result.init(data);
@@ -444,6 +459,96 @@ export abstract class _OpenAPIGenBaseModel {
         }
         if (data["type"] === "ConstructionSet") {
             let result = new ConstructionSet();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "DoorModifierSetAbridged") {
+            let result = new DoorModifierSetAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "View") {
+            let result = new View();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "_RadianceAsset") {
+            let result = new _RadianceAsset();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Lighting") {
+            let result = new Lighting();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "VentilationOpening") {
+            let result = new VentilationOpening();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "DoorEnergyPropertiesAbridged") {
+            let result = new DoorEnergyPropertiesAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "FCUwithDOASAbridged") {
+            let result = new FCUwithDOASAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "OpaqueConstructionAbridged") {
+            let result = new OpaqueConstructionAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "WindowConstructionAbridged") {
+            let result = new WindowConstructionAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "AirBoundaryConstructionAbridged") {
+            let result = new AirBoundaryConstructionAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "WallConstructionSetAbridged") {
+            let result = new WallConstructionSetAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "_FaceSubSetAbridged") {
+            let result = new _FaceSubSetAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "FloorConstructionSetAbridged") {
+            let result = new FloorConstructionSetAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "RoofCeilingConstructionSetAbridged") {
+            let result = new RoofCeilingConstructionSetAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ApertureConstructionSetAbridged") {
+            let result = new ApertureConstructionSetAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "DoorConstructionSetAbridged") {
+            let result = new DoorConstructionSetAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "GlobalConstructionSet") {
+            let result = new GlobalConstructionSet();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ConstructionSetAbridged") {
+            let result = new ConstructionSetAbridged();
             result.init(data);
             return result;
         }
@@ -489,11 +594,6 @@ export abstract class _OpenAPIGenBaseModel {
         }
         if (data["type"] === "ForcedAirFurnace") {
             let result = new ForcedAirFurnace();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "FCUwithDOASAbridged") {
-            let result = new FCUwithDOASAbridged();
             result.init(data);
             return result;
         }
@@ -622,11 +722,6 @@ export abstract class _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "Lighting") {
-            let result = new Lighting();
-            result.init(data);
-            return result;
-        }
         if (data["type"] === "ElectricEquipment") {
             let result = new ElectricEquipment();
             result.init(data);
@@ -687,93 +782,18 @@ export abstract class _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "Void") {
-            let result = new Void();
+        if (data["type"] === "ShadeMeshRadiancePropertiesAbridged") {
+            let result = new ShadeMeshRadiancePropertiesAbridged();
             result.init(data);
             return result;
         }
-        if (data["type"] === "Mirror") {
-            let result = new Mirror();
+        if (data["type"] === "_PropertiesBaseAbridged") {
+            let result = new _PropertiesBaseAbridged();
             result.init(data);
             return result;
         }
-        if (data["type"] === "ModifierBase") {
-            let result = new ModifierBase();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "IDdRadianceBaseModel") {
-            let result = new IDdRadianceBaseModel();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Plastic") {
-            let result = new Plastic();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Glass") {
-            let result = new Glass();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "BSDF") {
-            let result = new BSDF();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Glow") {
-            let result = new Glow();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Light") {
-            let result = new Light();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Trans") {
-            let result = new Trans();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Metal") {
-            let result = new Metal();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "WallModifierSet") {
-            let result = new WallModifierSet();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "FloorModifierSet") {
-            let result = new FloorModifierSet();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "RoofCeilingModifierSet") {
-            let result = new RoofCeilingModifierSet();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ApertureModifierSet") {
-            let result = new ApertureModifierSet();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "DoorModifierSet") {
-            let result = new DoorModifierSet();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ShadeModifierSet") {
-            let result = new ShadeModifierSet();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ModifierSet") {
-            let result = new ModifierSet();
+        if (data["type"] === "AFNCrack") {
+            let result = new AFNCrack();
             result.init(data);
             return result;
         }
@@ -787,8 +807,28 @@ export abstract class _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "Ground") {
-            let result = new Ground();
+        if (data["type"] === "StateGeometryAbridged") {
+            let result = new StateGeometryAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "RadianceSubFaceStateAbridged") {
+            let result = new RadianceSubFaceStateAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "RadianceShadeStateAbridged") {
+            let result = new RadianceShadeStateAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ApertureRadiancePropertiesAbridged") {
+            let result = new ApertureRadiancePropertiesAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ApertureModifierSetAbridged") {
+            let result = new ApertureModifierSetAbridged();
             result.init(data);
             return result;
         }
@@ -797,13 +837,43 @@ export abstract class _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "Adiabatic") {
-            let result = new Adiabatic();
+        if (data["type"] === "Surface") {
+            let result = new Surface();
             result.init(data);
             return result;
         }
-        if (data["type"] === "Surface") {
-            let result = new Surface();
+        if (data["type"] === "ModelDoe2Properties") {
+            let result = new ModelDoe2Properties();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "DoorModifierSet") {
+            let result = new DoorModifierSet();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Sensor") {
+            let result = new Sensor();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "DoorRadiancePropertiesAbridged") {
+            let result = new DoorRadiancePropertiesAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "DoorPropertiesAbridged") {
+            let result = new DoorPropertiesAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Ground") {
+            let result = new Ground();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Adiabatic") {
+            let result = new Adiabatic();
             result.init(data);
             return result;
         }
@@ -822,23 +892,8 @@ export abstract class _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "StateGeometryAbridged") {
-            let result = new StateGeometryAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "RadianceShadeStateAbridged") {
-            let result = new RadianceShadeStateAbridged();
-            result.init(data);
-            return result;
-        }
         if (data["type"] === "ShadeRadiancePropertiesAbridged") {
             let result = new ShadeRadiancePropertiesAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "_PropertiesBaseAbridged") {
-            let result = new _PropertiesBaseAbridged();
             result.init(data);
             return result;
         }
@@ -857,23 +912,8 @@ export abstract class _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "VentilationOpening") {
-            let result = new VentilationOpening();
-            result.init(data);
-            return result;
-        }
         if (data["type"] === "ApertureEnergyPropertiesAbridged") {
             let result = new ApertureEnergyPropertiesAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "RadianceSubFaceStateAbridged") {
-            let result = new RadianceSubFaceStateAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ApertureRadiancePropertiesAbridged") {
-            let result = new ApertureRadiancePropertiesAbridged();
             result.init(data);
             return result;
         }
@@ -887,28 +927,8 @@ export abstract class _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "DoorEnergyPropertiesAbridged") {
-            let result = new DoorEnergyPropertiesAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "DoorRadiancePropertiesAbridged") {
-            let result = new DoorRadiancePropertiesAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "DoorPropertiesAbridged") {
-            let result = new DoorPropertiesAbridged();
-            result.init(data);
-            return result;
-        }
         if (data["type"] === "Door") {
             let result = new Door();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "AFNCrack") {
-            let result = new AFNCrack();
             result.init(data);
             return result;
         }
@@ -932,11 +952,6 @@ export abstract class _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "DaylightingControl") {
-            let result = new DaylightingControl();
-            result.init(data);
-            return result;
-        }
         if (data["type"] === "VentilationControlAbridged") {
             let result = new VentilationControlAbridged();
             result.init(data);
@@ -947,13 +962,58 @@ export abstract class _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "InternalMassAbridged") {
-            let result = new InternalMassAbridged();
+        if (data["type"] === "Color") {
+            let result = new Color();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "Mesh3D") {
+            let result = new Mesh3D();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "SensorGrid") {
+            let result = new SensorGrid();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "WallModifierSet") {
+            let result = new WallModifierSet();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "FloorModifierSet") {
+            let result = new FloorModifierSet();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "RoofCeilingModifierSet") {
+            let result = new RoofCeilingModifierSet();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ShadeModifierSet") {
+            let result = new ShadeModifierSet();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ModifierSet") {
+            let result = new ModifierSet();
             result.init(data);
             return result;
         }
         if (data["type"] === "ProcessAbridged") {
             let result = new ProcessAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "DaylightingControl") {
+            let result = new DaylightingControl();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "InternalMassAbridged") {
+            let result = new InternalMassAbridged();
             result.init(data);
             return result;
         }
@@ -982,8 +1042,18 @@ export abstract class _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "ModelDoe2Properties") {
-            let result = new ModelDoe2Properties();
+        if (data["type"] === "ShadeMeshEnergyPropertiesAbridged") {
+            let result = new ShadeMeshEnergyPropertiesAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ShadeMeshPropertiesAbridged") {
+            let result = new ShadeMeshPropertiesAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ShadeMesh") {
+            let result = new ShadeMesh();
             result.init(data);
             return result;
         }
@@ -992,28 +1062,8 @@ export abstract class _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "BaseModifierSetAbridged") {
-            let result = new BaseModifierSetAbridged();
-            result.init(data);
-            return result;
-        }
         if (data["type"] === "FloorModifierSetAbridged") {
             let result = new FloorModifierSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "RoofCeilingModifierSetAbridged") {
-            let result = new RoofCeilingModifierSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ApertureModifierSetAbridged") {
-            let result = new ApertureModifierSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "DoorModifierSetAbridged") {
-            let result = new DoorModifierSetAbridged();
             result.init(data);
             return result;
         }
@@ -1032,36 +1082,6 @@ export abstract class _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "Sensor") {
-            let result = new Sensor();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Color") {
-            let result = new Color();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Mesh3D") {
-            let result = new Mesh3D();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "SensorGrid") {
-            let result = new SensorGrid();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "_RadianceAsset") {
-            let result = new _RadianceAsset();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "View") {
-            let result = new View();
-            result.init(data);
-            return result;
-        }
         if (data["type"] === "ModelRadianceProperties") {
             let result = new ModelRadianceProperties();
             result.init(data);
@@ -1072,38 +1092,8 @@ export abstract class _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "ShadeMeshEnergyPropertiesAbridged") {
-            let result = new ShadeMeshEnergyPropertiesAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ShadeMeshRadiancePropertiesAbridged") {
-            let result = new ShadeMeshRadiancePropertiesAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ShadeMeshPropertiesAbridged") {
-            let result = new ShadeMeshPropertiesAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ShadeMesh") {
-            let result = new ShadeMesh();
-            result.init(data);
-            return result;
-        }
         if (data["type"] === "Model") {
             let result = new Model();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "_HeatCoolBase") {
-            let result = new _HeatCoolBase();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "_TemplateSystem") {
-            let result = new _TemplateSystem();
             result.init(data);
             return result;
         }
@@ -1112,8 +1102,13 @@ export abstract class _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "BaseModifierSet") {
-            let result = new BaseModifierSet();
+        if (data["type"] === "_TemplateSystem") {
+            let result = new _TemplateSystem();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "_HeatCoolBase") {
+            let result = new _HeatCoolBase();
             result.init(data);
             return result;
         }
@@ -1122,18 +1117,18 @@ export abstract class _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
+        if (data["type"] === "BaseModifierSet") {
+            let result = new BaseModifierSet();
+            result.init(data);
+            return result;
+        }
         if (data["type"] === "_AllAirBase") {
             let result = new _AllAirBase();
             result.init(data);
             return result;
         }
-        if (data["type"] === "ASHRAEClearSky") {
-            let result = new ASHRAEClearSky();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "_SkyCondition") {
-            let result = new _SkyCondition();
+        if (data["type"] === "SimulationControl") {
+            let result = new SimulationControl();
             result.init(data);
             return result;
         }
@@ -1149,11 +1144,6 @@ export abstract class _OpenAPIGenBaseModel {
         }
         if (data["type"] === "RunPeriod") {
             let result = new RunPeriod();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "SimulationControl") {
-            let result = new SimulationControl();
             result.init(data);
             return result;
         }
@@ -1174,6 +1164,16 @@ export abstract class _OpenAPIGenBaseModel {
         }
         if (data["type"] === "WindCondition") {
             let result = new WindCondition();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ASHRAEClearSky") {
+            let result = new ASHRAEClearSky();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "_SkyCondition") {
+            let result = new _SkyCondition();
             result.init(data);
             return result;
         }

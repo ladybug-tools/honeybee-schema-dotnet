@@ -42,8 +42,8 @@ export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): _PropertiesBaseAbridged {
         data = typeof data === 'object' ? data : {};
 
-        if (data["type"] === "ShadeRadiancePropertiesAbridged") {
-            let result = new ShadeRadiancePropertiesAbridged();
+        if (data["type"] === "ShadeMeshRadiancePropertiesAbridged") {
+            let result = new ShadeMeshRadiancePropertiesAbridged();
             result.init(data);
             return result;
         }
@@ -57,13 +57,13 @@ export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "FaceRadiancePropertiesAbridged") {
-            let result = new FaceRadiancePropertiesAbridged();
+        if (data["type"] === "ShadeRadiancePropertiesAbridged") {
+            let result = new ShadeRadiancePropertiesAbridged();
             result.init(data);
             return result;
         }
-        if (data["type"] === "ShadeMeshRadiancePropertiesAbridged") {
-            let result = new ShadeMeshRadiancePropertiesAbridged();
+        if (data["type"] === "FaceRadiancePropertiesAbridged") {
+            let result = new FaceRadiancePropertiesAbridged();
             result.init(data);
             return result;
         }

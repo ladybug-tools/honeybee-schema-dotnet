@@ -3,14 +3,7 @@ import { FCUEquipmentType } from "./FCUEquipmentType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 
-/** Fan Coil Unit (FCU) heating/cooling system (with no ventilation).
-
-Each room/zone receives its own Fan Coil Unit (FCU), which meets the heating
-and cooling loads of the space. The cooling coil in the FCU is always chilled
-water cooling coil, which is connected to a chilled water loop operating
-at 6.7C (44F). The heating coil is a hot water coil except when when electric
-baseboards or gas heaters are specified. Hot water temperature is 82C (180F) for
-boiler/district heating and 49C (120F) when ASHP is used. */
+/** Fan Coil Unit (FCU) heating/cooling system (with no ventilation).\n\nEach room/zone receives its own Fan Coil Unit (FCU), which meets the heating\nand cooling loads of the space. The cooling coil in the FCU is always chilled\nwater cooling coil, which is connected to a chilled water loop operating\nat 6.7C (44F). The heating coil is a hot water coil except when when electric\nbaseboards or gas heaters are specified. Hot water temperature is 82C (180F) for\nboiler/district heating and 49C (120F) when ASHP is used. */
 export class FCU extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
     @ValidateNested()

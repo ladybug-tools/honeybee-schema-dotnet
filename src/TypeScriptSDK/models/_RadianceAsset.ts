@@ -13,7 +13,7 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
     @IsArray()
     @ValidateNested({ each: true })
     @IsOptional()
-    /** Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [["SouthWindow1"], ["static_apertures", "NorthWindow2"]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation. */
+    /** Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [[""SouthWindow1""], [""static_apertures"", ""NorthWindow2""]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation. */
     light_path?: string [] [];
 	
     @IsString()
@@ -40,13 +40,13 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
     static override fromJS(data: any): _RadianceAsset {
         data = typeof data === 'object' ? data : {};
 
-        if (data["type"] === "SensorGrid") {
-            let result = new SensorGrid();
+        if (data["type"] === "View") {
+            let result = new View();
             result.init(data);
             return result;
         }
-        if (data["type"] === "View") {
-            let result = new View();
+        if (data["type"] === "SensorGrid") {
+            let result = new SensorGrid();
             result.init(data);
             return result;
         }

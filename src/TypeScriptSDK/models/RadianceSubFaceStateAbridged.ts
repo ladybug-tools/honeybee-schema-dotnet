@@ -2,8 +2,7 @@
 import { Face3D } from "./Face3D";
 import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged";
 
-/** RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door.
-     */
+/** RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door.\n     */
 export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
     @IsInstance(Face3D)
     @ValidateNested()
