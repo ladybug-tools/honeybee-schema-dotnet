@@ -39,7 +39,7 @@ export class BSDF extends ModifierBase {
 	
     @IsString()
     @IsOptional()
-    /** Optional input for function file. Using "." will ensure that BSDF data is written to the root of wherever a given study is run. */
+    /** Optional input for function file. Using ""."" will ensure that BSDF data is written to the root of wherever a given study is run. */
     function_file?: string;
 	
     @IsString()

@@ -17,7 +17,7 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
     @IsEnum(FuelTypes)
     @ValidateNested()
     @IsDefined()
-    /** Text to denote the type of fuel consumed by the process. Using the "None" type indicates that no end uses will be associated with the process, only the zone gains. */
+    /** Text to denote the type of fuel consumed by the process. Using the ""None"" type indicates that no end uses will be associated with the process, only the zone gains. */
     fuel_type!: FuelTypes;
 	
     @IsString()

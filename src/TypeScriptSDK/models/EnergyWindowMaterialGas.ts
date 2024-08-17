@@ -2,9 +2,7 @@
 import { GasType } from "./GasType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
-/** Create single layer of gas in a window construction.
-
-Can be combined with EnergyWindowMaterialGlazing to make multi-pane windows. */
+/** Create single layer of gas in a window construction.\n\nCan be combined with EnergyWindowMaterialGlazing to make multi-pane windows. */
 export class EnergyWindowMaterialGas extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()

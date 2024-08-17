@@ -3,15 +3,7 @@ import { FurnaceEquipmentType } from "./FurnaceEquipmentType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 
-/** Forced Air Furnace HVAC system (aka. System 9 or 10).
-
-Forced air furnaces are intended only for spaces only requiring heating and
-ventilation. Each room/zone receives its own air loop with its own gas heating
-coil, which will supply air at a temperature up to 50C (122F) to meet the
-heating needs of the room/zone. Fans are constant volume.
-
-ForcedAirFurnace systems are the traditional baseline system for storage
-spaces that only require heating. */
+/** Forced Air Furnace HVAC system (aka. System 9 or 10).\n\nForced air furnaces are intended only for spaces only requiring heating and\nventilation. Each room/zone receives its own air loop with its own gas heating\ncoil, which will supply air at a temperature up to 50C (122F) to meet the\nheating needs of the room/zone. Fans are constant volume.\n\nForcedAirFurnace systems are the traditional baseline system for storage\nspaces that only require heating. */
 export class ForcedAirFurnace extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
     @ValidateNested()

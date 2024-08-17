@@ -42,16 +42,6 @@ export class BaseModifierSetAbridged extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): BaseModifierSetAbridged {
         data = typeof data === 'object' ? data : {};
 
-        if (data["type"] === "WallModifierSetAbridged") {
-            let result = new WallModifierSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "FloorModifierSetAbridged") {
-            let result = new FloorModifierSetAbridged();
-            result.init(data);
-            return result;
-        }
         if (data["type"] === "RoofCeilingModifierSetAbridged") {
             let result = new RoofCeilingModifierSetAbridged();
             result.init(data);
@@ -59,6 +49,16 @@ export class BaseModifierSetAbridged extends _OpenAPIGenBaseModel {
         }
         if (data["type"] === "DoorModifierSetAbridged") {
             let result = new DoorModifierSetAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "WallModifierSetAbridged") {
+            let result = new WallModifierSetAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "FloorModifierSetAbridged") {
+            let result = new FloorModifierSetAbridged();
             result.init(data);
             return result;
         }

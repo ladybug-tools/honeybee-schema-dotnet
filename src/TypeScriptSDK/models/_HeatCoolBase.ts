@@ -2,14 +2,7 @@
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 
-/** Base class for all heating/cooling systems without any ventilation.
-
-These systems are only designed to satisfy heating + cooling demand and they
-cannot meet any minimum ventilation requirements.
-
-As such, these systems tend to be used in residential or storage settings where
-meeting minimum ventilation requirements may not be required or the density
-of occupancy is so low that infiltration is enough to meet fresh air demand. */
+/** Base class for all heating/cooling systems without any ventilation.\n\nThese systems are only designed to satisfy heating + cooling demand and they\ncannot meet any minimum ventilation requirements.\n\nAs such, these systems tend to be used in residential or storage settings where\nmeeting minimum ventilation requirements may not be required or the density\nof occupancy is so low that infiltration is enough to meet fresh air demand. */
 export class _HeatCoolBase extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
     @ValidateNested()

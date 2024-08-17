@@ -4,29 +4,7 @@ import { RadiantFaceTypes } from "./RadiantFaceTypes";
 import { RadiantwithDOASEquipmentType } from "./RadiantwithDOASEquipmentType";
 import { Vintages } from "./Vintages";
 
-/** Low Temperature Radiant with DOAS HVAC system.
-
-This HVAC template will change the floor and/or ceiling constructions
-of the Rooms that it is applied to, replacing them with a construction that
-aligns with the radiant_type property (eg. CeilingMetalPanel).
-
-All rooms/zones in the system are connected to a Dedicated Outdoor Air System
-(DOAS) that supplies a constant volume of ventilation air at the same temperature
-to all rooms/zones. The ventilation air temperature will vary from 21.1C (70F)
-to 15.5C (60F) depending on the outdoor air temperature (the DOAS supplies cooler air
-when outdoor conditions are warmer). The ventilation air temperature is maintained
-by a two-speed direct expansion (DX) cooling coil and a single-speed DX
-heating coil with backup electrical resistance heat.
-
-The heating and cooling needs of the space are met with the radiant constructions,
-which use chilled water at 12.8C (55F) and a hot water temperature somewhere
-between 32.2C (90F) and 49C (120F) (warmer temperatures are used in colder
-climate zones).
-
-Note that radiant systems are particularly limited in cooling capacity and
-using them may result in many unmet hours. To reduce unmet hours, one can
-remove carpets, reduce internal loads, reduce solar and envelope gains during
-peak times, add thermal mass, and use an expanded comfort range. */
+/** Low Temperature Radiant with DOAS HVAC system.\n\nThis HVAC template will change the floor and/or ceiling constructions\nof the Rooms that it is applied to, replacing them with a construction that\naligns with the radiant_type property (eg. CeilingMetalPanel).\n\nAll rooms/zones in the system are connected to a Dedicated Outdoor Air System\n(DOAS) that supplies a constant volume of ventilation air at the same temperature\nto all rooms/zones. The ventilation air temperature will vary from 21.1C (70F)\nto 15.5C (60F) depending on the outdoor air temperature (the DOAS supplies cooler air\nwhen outdoor conditions are warmer). The ventilation air temperature is maintained\nby a two-speed direct expansion (DX) cooling coil and a single-speed DX\nheating coil with backup electrical resistance heat.\n\nThe heating and cooling needs of the space are met with the radiant constructions,\nwhich use chilled water at 12.8C (55F) and a hot water temperature somewhere\nbetween 32.2C (90F) and 49C (120F) (warmer temperatures are used in colder\nclimate zones).\n\nNote that radiant systems are particularly limited in cooling capacity and\nusing them may result in many unmet hours. To reduce unmet hours, one can\nremove carpets, reduce internal loads, reduce solar and envelope gains during\npeak times, add thermal mass, and use an expanded comfort range. */
 export class RadiantwithDOASAbridged extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
     @ValidateNested()

@@ -4,20 +4,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { PSZEquipmentType } from "./PSZEquipmentType";
 import { Vintages } from "./Vintages";
 
-/** Packaged Single-Zone (PSZ) HVAC system (aka. System 3 or 4).
-
-Each room/zone receives its own air loop with its own single-speed direct expansion
-(DX) cooling coil, which will condition the supply air to a value in between
-12.8C (55F) and 50C (122F) depending on the heating/cooling needs of the room/zone.
-As long as a Baseboard equipment_type is NOT selected, heating will be supplied
-by a heating coil in the air loop. Otherwise, heating is accomplished with
-baseboards and the air loop only supplies cooling and ventilation air.
-Fans are constant volume.
-
-PSZ systems are the traditional baseline system for commercial buildings
-with less than 4 stories or less than 2,300 m2 (25,000 ft2) of floor area.
-They are also the default for all retail with less than 3 stories and all public
-assembly spaces. */
+/** Packaged Single-Zone (PSZ) HVAC system (aka. System 3 or 4).\n\nEach room/zone receives its own air loop with its own single-speed direct expansion\n(DX) cooling coil, which will condition the supply air to a value in between\n12.8C (55F) and 50C (122F) depending on the heating/cooling needs of the room/zone.\nAs long as a Baseboard equipment_type is NOT selected, heating will be supplied\nby a heating coil in the air loop. Otherwise, heating is accomplished with\nbaseboards and the air loop only supplies cooling and ventilation air.\nFans are constant volume.\n\nPSZ systems are the traditional baseline system for commercial buildings\nwith less than 4 stories or less than 2,300 m2 (25,000 ft2) of floor area.\nThey are also the default for all retail with less than 3 stories and all public\nassembly spaces. */
 export class PSZ extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
     @ValidateNested()

@@ -3,12 +3,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 import { VRFEquipmentType } from "./VRFEquipmentType";
 
-/** Variable Refrigerant Flow (VRF) heating/cooling system (with no ventilation).
-
-Each room/zone receives its own Variable Refrigerant Flow (VRF) terminal,
-which meets the heating and cooling loads of the space. All room/zone terminals
-are connected to the same outdoor unit, meaning that either all rooms must be
-in cooling or heating mode together. */
+/** Variable Refrigerant Flow (VRF) heating/cooling system (with no ventilation).\n\nEach room/zone receives its own Variable Refrigerant Flow (VRF) terminal,\nwhich meets the heating and cooling loads of the space. All room/zone terminals\nare connected to the same outdoor unit, meaning that either all rooms must be\nin cooling or heating mode together. */
 export class VRF extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
     @ValidateNested()

@@ -2,10 +2,7 @@
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Autocalculate } from "./Autocalculate";
 
-/** Base class for all objects that are not extensible with additional keys.
-
-This effectively includes all objects except for the Properties classes
-that are assigned to geometry objects. */
+/** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class OtherSideTemperature extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()

@@ -97,23 +97,8 @@ export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "ModifierSet") {
-            let result = new ModifierSet();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "StateGeometryAbridged") {
-            let result = new StateGeometryAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ModifierSetAbridged") {
-            let result = new ModifierSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "SensorGrid") {
-            let result = new SensorGrid();
+        if (data["type"] === "View") {
+            let result = new View();
             result.init(data);
             return result;
         }
@@ -122,8 +107,23 @@ export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "View") {
-            let result = new View();
+        if (data["type"] === "StateGeometryAbridged") {
+            let result = new StateGeometryAbridged();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "SensorGrid") {
+            let result = new SensorGrid();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ModifierSet") {
+            let result = new ModifierSet();
+            result.init(data);
+            return result;
+        }
+        if (data["type"] === "ModifierSetAbridged") {
+            let result = new ModifierSetAbridged();
             result.init(data);
             return result;
         }
