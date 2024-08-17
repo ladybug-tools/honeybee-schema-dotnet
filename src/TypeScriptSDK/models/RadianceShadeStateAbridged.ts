@@ -1,10 +1,10 @@
 ﻿import { IsString, IsOptional, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 import { RadianceSubFaceStateAbridged } from "./RadianceSubFaceStateAbridged";
 import { StateGeometryAbridged } from "./StateGeometryAbridged";
 
 /** RadianceShadeStateAbridged represents a single state for a dynamic Shade. */
-export class RadianceShadeStateAbridged extends _OpenAPIGenBaseModel {
+export class RadianceShadeStateAbridged extends OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

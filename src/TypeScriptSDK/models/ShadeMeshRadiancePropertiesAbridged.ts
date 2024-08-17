@@ -1,8 +1,8 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _PropertiesBaseAbridged } from "./_PropertiesBaseAbridged";
+import { PropertiesBaseAbridged } from "./PropertiesBaseAbridged";
 
 /** Radiance Properties for Honeybee ShadeMesh Abridged. */
-export class ShadeMeshRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
+export class ShadeMeshRadiancePropertiesAbridged extends PropertiesBaseAbridged {
     @IsString()
     @IsOptional()
     type?: string;

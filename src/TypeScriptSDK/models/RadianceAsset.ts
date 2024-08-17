@@ -4,7 +4,7 @@ import { SensorGrid } from "./SensorGrid";
 import { View } from "./View";
 
 /** Hidden base class for all Radiance Assets. */
-export class _RadianceAsset extends IDdRadianceBaseModel {
+export class RadianceAsset extends IDdRadianceBaseModel {
     @IsString()
     @IsOptional()
     /** Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model. */
@@ -37,7 +37,7 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
     }
 
 
-    static override fromJS(data: any): _RadianceAsset {
+    static override fromJS(data: any): RadianceAsset {
         data = typeof data === 'object' ? data : {};
 
         if (data["type"] === "View") {
@@ -50,7 +50,7 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
             result.init(data);
             return result;
         }
-        let result = new _RadianceAsset();
+        let result = new RadianceAsset();
         result.init(data);
         return result;
     }

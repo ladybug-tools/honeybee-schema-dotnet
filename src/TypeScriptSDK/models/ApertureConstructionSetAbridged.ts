@@ -1,8 +1,8 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 
 /** A set of constructions for aperture assemblies. */
-export class ApertureConstructionSetAbridged extends _OpenAPIGenBaseModel {
+export class ApertureConstructionSetAbridged extends OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

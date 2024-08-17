@@ -1,8 +1,8 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 
 /** Used to specify dry bulb conditions on a design day. */
-export class DryBulbCondition extends _OpenAPIGenBaseModel {
+export class DryBulbCondition extends OpenAPIGenBaseModel {
     @IsNumber()
     @IsDefined()
     /** The maximum dry bulb temperature on the design day [C]. */

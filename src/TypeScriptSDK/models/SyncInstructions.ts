@@ -1,10 +1,10 @@
 ﻿import { IsString, IsOptional, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AddedInstruction } from "./AddedInstruction";
 import { ChangedInstruction } from "./ChangedInstruction";
 import { DeletedInstruction } from "./DeletedInstruction";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 
-export class SyncInstructions extends _OpenAPIGenBaseModel {
+export class SyncInstructions extends OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

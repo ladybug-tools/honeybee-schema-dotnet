@@ -1,15 +1,15 @@
 ﻿import { IsString, IsDefined, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Aperture } from "./Aperture";
 import { Door } from "./Door";
 import { Face } from "./Face";
 import { Model } from "./Model";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 import { Room } from "./Room";
 import { Shade } from "./Shade";
 import { ShadeMesh } from "./ShadeMesh";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
-export class IDdBaseModel extends _OpenAPIGenBaseModel {
+export class IDdBaseModel extends OpenAPIGenBaseModel {
     @IsString()
     @IsDefined()
     /** Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be < 100 characters and not contain any spaces or special characters. */

@@ -1,16 +1,12 @@
 ﻿import { IsString, IsDefined, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _AllAirBase } from "./_AllAirBase";
-import { _DOASBase } from "./_DOASBase";
-import { _EquipmentBase } from "./_EquipmentBase";
-import { _HeatCoolBase } from "./_HeatCoolBase";
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { _TemplateSystem } from "./_TemplateSystem";
 import { AirBoundaryConstruction } from "./AirBoundaryConstruction";
 import { AirBoundaryConstructionAbridged } from "./AirBoundaryConstructionAbridged";
+import { AllAirBase } from "./AllAirBase";
 import { Baseboard } from "./Baseboard";
 import { ConstructionSet } from "./ConstructionSet";
 import { ConstructionSetAbridged } from "./ConstructionSetAbridged";
 import { DetailedHVAC } from "./DetailedHVAC";
+import { DOASBase } from "./DOASBase";
 import { ElectricEquipment } from "./ElectricEquipment";
 import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
 import { EnergyMaterial } from "./EnergyMaterial";
@@ -24,6 +20,7 @@ import { EnergyWindowMaterialGasMixture } from "./EnergyWindowMaterialGasMixture
 import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
 import { EnergyWindowMaterialShade } from "./EnergyWindowMaterialShade";
 import { EnergyWindowMaterialSimpleGlazSys } from "./EnergyWindowMaterialSimpleGlazSys";
+import { EquipmentBase } from "./EquipmentBase";
 import { EvaporativeCooler } from "./EvaporativeCooler";
 import { FCU } from "./FCU";
 import { FCUwithDOASAbridged } from "./FCUwithDOASAbridged";
@@ -31,6 +28,7 @@ import { ForcedAirFurnace } from "./ForcedAirFurnace";
 import { GasEquipment } from "./GasEquipment";
 import { GasEquipmentAbridged } from "./GasEquipmentAbridged";
 import { GasUnitHeater } from "./GasUnitHeater";
+import { HeatCoolBase } from "./HeatCoolBase";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { IdealAirSystemAbridged } from "./IdealAirSystemAbridged";
 import { Infiltration } from "./Infiltration";
@@ -40,6 +38,7 @@ import { Lighting } from "./Lighting";
 import { LightingAbridged } from "./LightingAbridged";
 import { OpaqueConstruction } from "./OpaqueConstruction";
 import { OpaqueConstructionAbridged } from "./OpaqueConstructionAbridged";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 import { People } from "./People";
 import { PeopleAbridged } from "./PeopleAbridged";
 import { ProcessAbridged } from "./ProcessAbridged";
@@ -64,6 +63,7 @@ import { Setpoint } from "./Setpoint";
 import { SetpointAbridged } from "./SetpointAbridged";
 import { ShadeConstruction } from "./ShadeConstruction";
 import { SHWSystem } from "./SHWSystem";
+import { TemplateSystem } from "./TemplateSystem";
 import { VAV } from "./VAV";
 import { Ventilation } from "./Ventilation";
 import { VentilationAbridged } from "./VentilationAbridged";
@@ -81,7 +81,7 @@ import { WSHP } from "./WSHP";
 import { WSHPwithDOASAbridged } from "./WSHPwithDOASAbridged";
 
 /** Base class for all objects requiring a valid EnergyPlus identifier. */
-export class EnergyBaseModel extends _OpenAPIGenBaseModel {
+export class EnergyBaseModel extends OpenAPIGenBaseModel {
     @IsString()
     @IsDefined()
     /** Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t). */
@@ -386,8 +386,8 @@ export class EnergyBaseModel extends _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "_EquipmentBase") {
-            let result = new _EquipmentBase();
+        if (data["type"] === "EquipmentBase") {
+            let result = new EquipmentBase();
             result.init(data);
             return result;
         }
@@ -491,23 +491,23 @@ export class EnergyBaseModel extends _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "_DOASBase") {
-            let result = new _DOASBase();
+        if (data["type"] === "DOASBase") {
+            let result = new DOASBase();
             result.init(data);
             return result;
         }
-        if (data["type"] === "_TemplateSystem") {
-            let result = new _TemplateSystem();
+        if (data["type"] === "TemplateSystem") {
+            let result = new TemplateSystem();
             result.init(data);
             return result;
         }
-        if (data["type"] === "_HeatCoolBase") {
-            let result = new _HeatCoolBase();
+        if (data["type"] === "HeatCoolBase") {
+            let result = new HeatCoolBase();
             result.init(data);
             return result;
         }
-        if (data["type"] === "_AllAirBase") {
-            let result = new _AllAirBase();
+        if (data["type"] === "AllAirBase") {
+            let result = new AllAirBase();
             result.init(data);
             return result;
         }

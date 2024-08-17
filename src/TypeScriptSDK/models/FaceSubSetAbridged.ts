@@ -1,11 +1,11 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { FloorConstructionSetAbridged } from "./FloorConstructionSetAbridged";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 import { RoofCeilingConstructionSetAbridged } from "./RoofCeilingConstructionSetAbridged";
 import { WallConstructionSetAbridged } from "./WallConstructionSetAbridged";
 
 /** A set of constructions for wall, floor, or roof assemblies. */
-export class _FaceSubSetAbridged extends _OpenAPIGenBaseModel {
+export class FaceSubSetAbridged extends OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     /** Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition. */
@@ -43,7 +43,7 @@ export class _FaceSubSetAbridged extends _OpenAPIGenBaseModel {
     }
 
 
-    static override fromJS(data: any): _FaceSubSetAbridged {
+    static override fromJS(data: any): FaceSubSetAbridged {
         data = typeof data === 'object' ? data : {};
 
         if (data["type"] === "WallConstructionSetAbridged") {
@@ -61,7 +61,7 @@ export class _FaceSubSetAbridged extends _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        let result = new _FaceSubSetAbridged();
+        let result = new FaceSubSetAbridged();
         result.init(data);
         return result;
     }

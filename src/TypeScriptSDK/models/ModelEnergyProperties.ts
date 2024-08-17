@@ -1,5 +1,4 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AirBoundaryConstruction } from "./AirBoundaryConstruction";
 import { AirBoundaryConstructionAbridged } from "./AirBoundaryConstructionAbridged";
 import { Baseboard } from "./Baseboard";
@@ -27,6 +26,7 @@ import { GlobalConstructionSet } from "./GlobalConstructionSet";
 import { IdealAirSystemAbridged } from "./IdealAirSystemAbridged";
 import { OpaqueConstruction } from "./OpaqueConstruction";
 import { OpaqueConstructionAbridged } from "./OpaqueConstructionAbridged";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 import { ProgramType } from "./ProgramType";
 import { ProgramTypeAbridged } from "./ProgramTypeAbridged";
 import { PSZ } from "./PSZ";
@@ -57,7 +57,7 @@ import { WSHP } from "./WSHP";
 import { WSHPwithDOASAbridged } from "./WSHPwithDOASAbridged";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
-export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
+export class ModelEnergyProperties extends OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

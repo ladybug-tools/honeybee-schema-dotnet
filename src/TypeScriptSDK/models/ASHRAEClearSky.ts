@@ -1,8 +1,8 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _SkyCondition } from "./_SkyCondition";
+import { SkyCondition } from "./SkyCondition";
 
 /** Used to specify sky conditions on a design day. */
-export class ASHRAEClearSky extends _SkyCondition {
+export class ASHRAEClearSky extends SkyCondition {
     @IsNumber()
     @IsDefined()
     /** Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level. */

@@ -1,8 +1,8 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 
 /** Void modifier */
-export class Void extends _OpenAPIGenBaseModel {
+export class Void extends OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

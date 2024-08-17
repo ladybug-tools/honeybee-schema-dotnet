@@ -1,8 +1,8 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 
 /** Abridged set containing radiance modifiers needed for a model's Apertures. */
-export class ApertureModifierSetAbridged extends _OpenAPIGenBaseModel {
+export class ApertureModifierSetAbridged extends OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

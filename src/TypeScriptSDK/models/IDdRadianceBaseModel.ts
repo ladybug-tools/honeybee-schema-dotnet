@@ -1,6 +1,4 @@
 ﻿import { IsString, IsDefined, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { _RadianceAsset } from "./_RadianceAsset";
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
 import { Glow } from "./Glow";
@@ -10,14 +8,16 @@ import { Mirror } from "./Mirror";
 import { ModifierBase } from "./ModifierBase";
 import { ModifierSet } from "./ModifierSet";
 import { ModifierSetAbridged } from "./ModifierSetAbridged";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 import { Plastic } from "./Plastic";
+import { RadianceAsset } from "./RadianceAsset";
 import { SensorGrid } from "./SensorGrid";
 import { StateGeometryAbridged } from "./StateGeometryAbridged";
 import { Trans } from "./Trans";
 import { View } from "./View";
 
 /** Base class for all objects requiring a valid Radiance identifier. */
-export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
+export class IDdRadianceBaseModel extends OpenAPIGenBaseModel {
     @IsString()
     @IsDefined()
     /** Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. */
@@ -102,8 +102,8 @@ export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "_RadianceAsset") {
-            let result = new _RadianceAsset();
+        if (data["type"] === "RadianceAsset") {
+            let result = new RadianceAsset();
             result.init(data);
             return result;
         }

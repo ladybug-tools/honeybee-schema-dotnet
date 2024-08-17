@@ -1,10 +1,10 @@
 ﻿import { IsString, IsOptional, IsEnum, ValidateNested, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BuildingType } from "./BuildingType";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 import { VentilationControlType } from "./VentilationControlType";
 
 /** The global parameters used in the ventilation simulation. */
-export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
+export class VentilationSimulationControl extends OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;
