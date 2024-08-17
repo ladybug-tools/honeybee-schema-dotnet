@@ -1,9 +1,9 @@
 ﻿import { IsString, IsOptional, IsEnum, ValidateNested, IsArray, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 import { ReportingFrequency } from "./ReportingFrequency";
 
 /** Lists the outputs to report from the simulation and their format. */
-export class SimulationOutput extends _OpenAPIGenBaseModel {
+export class SimulationOutput extends OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

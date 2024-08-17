@@ -1,12 +1,12 @@
 ﻿import { IsString, IsOptional, IsNumber, IsArray, ValidateNested, IsInstance, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BuildingTypes } from "./BuildingTypes";
 import { ClimateZones } from "./ClimateZones";
 import { EfficiencyStandards } from "./EfficiencyStandards";
 import { Location } from "./Location";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 
 /** Project information. */
-export class ProjectInfo extends _OpenAPIGenBaseModel {
+export class ProjectInfo extends OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

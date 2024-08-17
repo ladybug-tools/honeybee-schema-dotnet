@@ -1,8 +1,8 @@
 ﻿import { IsEnum, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { GeometryObjectTypes } from "./GeometryObjectTypes";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 
-export class _DiffObjectBase extends _OpenAPIGenBaseModel {
+export class DiffObjectBase extends OpenAPIGenBaseModel {
     @IsEnum(GeometryObjectTypes)
     @ValidateNested()
     @IsDefined()
@@ -41,10 +41,10 @@ export class _DiffObjectBase extends _OpenAPIGenBaseModel {
     }
 
 
-    static override fromJS(data: any): _DiffObjectBase {
+    static override fromJS(data: any): DiffObjectBase {
         data = typeof data === 'object' ? data : {};
 
-        let result = new _DiffObjectBase();
+        let result = new DiffObjectBase();
         result.init(data);
         return result;
     }

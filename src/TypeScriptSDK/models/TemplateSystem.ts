@@ -2,8 +2,8 @@
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 
-/** Base class for all heating/cooling systems without any ventilation.\n\nThese systems are only designed to satisfy heating + cooling demand and they\ncannot meet any minimum ventilation requirements.\n\nAs such, these systems tend to be used in residential or storage settings where\nmeeting minimum ventilation requirements may not be required or the density\nof occupancy is so low that infiltration is enough to meet fresh air demand. */
-export class _HeatCoolBase extends IDdEnergyBaseModel {
+/** Base class for HVAC systems following a standards template. */
+export class TemplateSystem extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
     @ValidateNested()
     @IsOptional()
@@ -18,7 +18,7 @@ export class _HeatCoolBase extends IDdEnergyBaseModel {
     constructor() {
         super();
         this.vintage = Vintages.ASHRAE_2019;
-        this.type = "_HeatCoolBase";
+        this.type = "_TemplateSystem";
     }
 
 
@@ -26,15 +26,15 @@ export class _HeatCoolBase extends IDdEnergyBaseModel {
         super.init(_data);
         if (_data) {
             this.vintage = _data["vintage"] !== undefined ? _data["vintage"] : Vintages.ASHRAE_2019;
-            this.type = _data["type"] !== undefined ? _data["type"] : "_HeatCoolBase";
+            this.type = _data["type"] !== undefined ? _data["type"] : "_TemplateSystem";
         }
     }
 
 
-    static override fromJS(data: any): _HeatCoolBase {
+    static override fromJS(data: any): TemplateSystem {
         data = typeof data === 'object' ? data : {};
 
-        let result = new _HeatCoolBase();
+        let result = new TemplateSystem();
         result.init(data);
         return result;
     }

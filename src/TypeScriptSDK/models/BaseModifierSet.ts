@@ -1,17 +1,17 @@
 ﻿import { IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
 import { Glow } from "./Glow";
 import { Light } from "./Light";
 import { Metal } from "./Metal";
 import { Mirror } from "./Mirror";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 import { Plastic } from "./Plastic";
 import { Trans } from "./Trans";
 import { Void } from "./Void";
 
 /** Base class for the modifier sets assigned to Faces. */
-export class BaseModifierSet extends _OpenAPIGenBaseModel {
+export class BaseModifierSet extends OpenAPIGenBaseModel {
     @IsOptional()
     /** A radiance modifier object for faces with an Outdoors boundary condition. */
     exterior_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);

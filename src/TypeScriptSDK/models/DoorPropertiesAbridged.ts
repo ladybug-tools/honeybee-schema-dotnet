@@ -1,9 +1,9 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { DoorEnergyPropertiesAbridged } from "./DoorEnergyPropertiesAbridged";
 import { DoorRadiancePropertiesAbridged } from "./DoorRadiancePropertiesAbridged";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 
-export class DoorPropertiesAbridged extends _OpenAPIGenBaseModel {
+export class DoorPropertiesAbridged extends OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

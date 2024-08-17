@@ -1,8 +1,8 @@
 ﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 
 /** A single Radiance of sensors. */
-export class Sensor extends _OpenAPIGenBaseModel {
+export class Sensor extends OpenAPIGenBaseModel {
     @IsArray()
     @ValidateNested({ each: true })
     @IsDefined()

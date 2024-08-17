@@ -1,11 +1,11 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { DaylightingControl } from "./DaylightingControl";
 import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
 import { GasEquipmentAbridged } from "./GasEquipmentAbridged";
 import { InfiltrationAbridged } from "./InfiltrationAbridged";
 import { InternalMassAbridged } from "./InternalMassAbridged";
 import { LightingAbridged } from "./LightingAbridged";
+import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 import { PeopleAbridged } from "./PeopleAbridged";
 import { ProcessAbridged } from "./ProcessAbridged";
 import { ServiceHotWaterAbridged } from "./ServiceHotWaterAbridged";
@@ -15,7 +15,7 @@ import { VentilationControlAbridged } from "./VentilationControlAbridged";
 import { VentilationFan } from "./VentilationFan";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
-export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
+export class RoomEnergyPropertiesAbridged extends OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

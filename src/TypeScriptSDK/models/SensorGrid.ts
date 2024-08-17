@@ -1,11 +1,11 @@
 ﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _RadianceAsset } from "./_RadianceAsset";
 import { Face3D } from "./Face3D";
 import { Mesh3D } from "./Mesh3D";
+import { RadianceAsset } from "./RadianceAsset";
 import { Sensor } from "./Sensor";
 
 /** A grid of sensors. */
-export class SensorGrid extends _RadianceAsset {
+export class SensorGrid extends RadianceAsset {
     @IsArray()
     @ValidateNested({ each: true })
     @IsDefined()

@@ -1,15 +1,12 @@
 ﻿import { IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _AllAirBase } from "./_AllAirBase";
-import { _DOASBase } from "./_DOASBase";
-import { _EquipmentBase } from "./_EquipmentBase";
-import { _HeatCoolBase } from "./_HeatCoolBase";
-import { _TemplateSystem } from "./_TemplateSystem";
 import { AirBoundaryConstruction } from "./AirBoundaryConstruction";
 import { AirBoundaryConstructionAbridged } from "./AirBoundaryConstructionAbridged";
+import { AllAirBase } from "./AllAirBase";
 import { Baseboard } from "./Baseboard";
 import { ConstructionSet } from "./ConstructionSet";
 import { ConstructionSetAbridged } from "./ConstructionSetAbridged";
 import { DetailedHVAC } from "./DetailedHVAC";
+import { DOASBase } from "./DOASBase";
 import { ElectricEquipment } from "./ElectricEquipment";
 import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
 import { EnergyBaseModel } from "./EnergyBaseModel";
@@ -24,6 +21,7 @@ import { EnergyWindowMaterialGasMixture } from "./EnergyWindowMaterialGasMixture
 import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
 import { EnergyWindowMaterialShade } from "./EnergyWindowMaterialShade";
 import { EnergyWindowMaterialSimpleGlazSys } from "./EnergyWindowMaterialSimpleGlazSys";
+import { EquipmentBase } from "./EquipmentBase";
 import { EvaporativeCooler } from "./EvaporativeCooler";
 import { FCU } from "./FCU";
 import { FCUwithDOASAbridged } from "./FCUwithDOASAbridged";
@@ -31,6 +29,7 @@ import { ForcedAirFurnace } from "./ForcedAirFurnace";
 import { GasEquipment } from "./GasEquipment";
 import { GasEquipmentAbridged } from "./GasEquipmentAbridged";
 import { GasUnitHeater } from "./GasUnitHeater";
+import { HeatCoolBase } from "./HeatCoolBase";
 import { IdealAirSystemAbridged } from "./IdealAirSystemAbridged";
 import { Infiltration } from "./Infiltration";
 import { InfiltrationAbridged } from "./InfiltrationAbridged";
@@ -60,6 +59,7 @@ import { Setpoint } from "./Setpoint";
 import { SetpointAbridged } from "./SetpointAbridged";
 import { ShadeConstruction } from "./ShadeConstruction";
 import { SHWSystem } from "./SHWSystem";
+import { TemplateSystem } from "./TemplateSystem";
 import { VAV } from "./VAV";
 import { Ventilation } from "./Ventilation";
 import { VentilationAbridged } from "./VentilationAbridged";
@@ -359,8 +359,8 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "_EquipmentBase") {
-            let result = new _EquipmentBase();
+        if (data["type"] === "EquipmentBase") {
+            let result = new EquipmentBase();
             result.init(data);
             return result;
         }
@@ -454,23 +454,23 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "_DOASBase") {
-            let result = new _DOASBase();
+        if (data["type"] === "DOASBase") {
+            let result = new DOASBase();
             result.init(data);
             return result;
         }
-        if (data["type"] === "_TemplateSystem") {
-            let result = new _TemplateSystem();
+        if (data["type"] === "TemplateSystem") {
+            let result = new TemplateSystem();
             result.init(data);
             return result;
         }
-        if (data["type"] === "_HeatCoolBase") {
-            let result = new _HeatCoolBase();
+        if (data["type"] === "HeatCoolBase") {
+            let result = new HeatCoolBase();
             result.init(data);
             return result;
         }
-        if (data["type"] === "_AllAirBase") {
-            let result = new _AllAirBase();
+        if (data["type"] === "AllAirBase") {
+            let result = new AllAirBase();
             result.init(data);
             return result;
         }

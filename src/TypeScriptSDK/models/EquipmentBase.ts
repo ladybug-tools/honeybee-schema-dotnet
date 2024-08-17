@@ -4,7 +4,7 @@ import { GasEquipmentAbridged } from "./GasEquipmentAbridged";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
-export class _EquipmentBase extends IDdEnergyBaseModel {
+export class EquipmentBase extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
     /** Equipment level per floor area as [W/m2]. */
@@ -57,7 +57,7 @@ export class _EquipmentBase extends IDdEnergyBaseModel {
     }
 
 
-    static override fromJS(data: any): _EquipmentBase {
+    static override fromJS(data: any): EquipmentBase {
         data = typeof data === 'object' ? data : {};
 
         if (data["type"] === "ElectricEquipmentAbridged") {
@@ -70,7 +70,7 @@ export class _EquipmentBase extends IDdEnergyBaseModel {
             result.init(data);
             return result;
         }
-        let result = new _EquipmentBase();
+        let result = new EquipmentBase();
         result.init(data);
         return result;
     }

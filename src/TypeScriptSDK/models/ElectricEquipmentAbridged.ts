@@ -1,8 +1,8 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { _EquipmentBase } from "./_EquipmentBase";
+import { EquipmentBase } from "./EquipmentBase";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
-export class ElectricEquipmentAbridged extends _EquipmentBase {
+export class ElectricEquipmentAbridged extends EquipmentBase {
     @IsString()
     @IsOptional()
     type?: string;
