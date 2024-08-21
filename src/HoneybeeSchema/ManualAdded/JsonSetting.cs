@@ -19,9 +19,12 @@ namespace HoneybeeSchema
 					{
 						NullValueHandling = NullValueHandling.Ignore,
                         //DefaultValueHandling = DefaultValueHandling.,
-                        Converters = new List<JsonConverter>() { new AnyOfJsonConverter() }
+                        Converters = new List<JsonConverter>() { new AnyOfJsonConverter() },
+						ObjectCreationHandling = ObjectCreationHandling.Replace,
+						
 					};
 				}
+			
 				return _setting; 
 			}
 		}
