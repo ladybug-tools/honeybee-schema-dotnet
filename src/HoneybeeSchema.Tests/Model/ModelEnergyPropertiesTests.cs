@@ -141,6 +141,21 @@ namespace HoneybeeSchema.Test
 
             Assert.AreEqual(o.DaySchedules.First().Identifier, "OfficeMedium CLGSETP_SCH_YES_OPTIMUM_Default");
         }
+
+        [Test]
+        public void ScheduleLightingTest()
+        {
+            // TODO unit test for the property 'Schedules'
+            var obj = this.instance.Schedules.Where(_ => (_.Obj as ScheduleRulesetAbridged).Identifier == "Generic Office Lighting").First();
+            var o = obj.Obj as ScheduleRulesetAbridged;
+            Assert.That(o, Is.Not.Null);
+            Assert.IsTrue(o.IsValid(true));
+
+            foreach (var item in o.DaySchedules)
+            {
+                Assert.AreEqual(item.Times.Count, item.Values.Count);
+            }
+        }
         /// <summary>
         /// Test the property 'ScheduleTypeLimits'
         /// </summary>
