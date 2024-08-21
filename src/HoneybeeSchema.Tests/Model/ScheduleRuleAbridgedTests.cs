@@ -28,6 +28,44 @@ namespace HoneybeeSchema.Test
             Assert.True(!json.Contains("display_name"));
         }
 
+        [Test]
+        public void ScheduleDayTest()
+        {
+            var json = @"
+{
+    ""values"": [
+        0.05,
+        0.04311628,
+        0.05
+    ],
+    ""times"": [
+                                
+        [
+            0,
+            0
+        ],
+        [
+            6,
+            0
+        ],
+        [
+            18,
+            0
+        ]
+    ],
+    ""interpolate"": false,
+    ""identifier"": ""OfficeMedium BLDG_LIGHT_SCH_2013_Sun"",
+    ""type"": ""ScheduleDay""
+}";
+
+
+            var day = ScheduleDay.FromJson(json);
+
+            Assert.AreEqual(day.Identifier, "OfficeMedium BLDG_LIGHT_SCH_2013_Sun");
+            Assert.That(day.Values.Count, Is.EqualTo(3));
+            Assert.That(day.Times.Count, Is.EqualTo(3));
+        }
+
 
     }
 
