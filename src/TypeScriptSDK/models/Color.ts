@@ -1,8 +1,8 @@
 ﻿import { IsInt, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A RGB color. */
-export class Color extends OpenAPIGenBaseModel {
+export class Color extends _OpenAPIGenBaseModel {
     @IsInt()
     @IsDefined()
     /** Value for red channel. */

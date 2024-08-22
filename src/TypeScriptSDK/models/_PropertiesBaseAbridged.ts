@@ -1,13 +1,13 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ApertureRadiancePropertiesAbridged } from "./ApertureRadiancePropertiesAbridged";
 import { DoorRadiancePropertiesAbridged } from "./DoorRadiancePropertiesAbridged";
 import { FaceRadiancePropertiesAbridged } from "./FaceRadiancePropertiesAbridged";
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 import { ShadeMeshRadiancePropertiesAbridged } from "./ShadeMeshRadiancePropertiesAbridged";
 import { ShadeRadiancePropertiesAbridged } from "./ShadeRadiancePropertiesAbridged";
 
 /** Base class of Abridged Radiance Properties. */
-export class PropertiesBaseAbridged extends OpenAPIGenBaseModel {
+export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     /** A string for a Honeybee Radiance Modifier (default: None). */
@@ -39,7 +39,7 @@ export class PropertiesBaseAbridged extends OpenAPIGenBaseModel {
     }
 
 
-    static override fromJS(data: any): PropertiesBaseAbridged {
+    static override fromJS(data: any): _PropertiesBaseAbridged {
         data = typeof data === 'object' ? data : {};
 
         if (data["type"] === "ShadeMeshRadiancePropertiesAbridged") {
@@ -67,7 +67,7 @@ export class PropertiesBaseAbridged extends OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        let result = new PropertiesBaseAbridged();
+        let result = new _PropertiesBaseAbridged();
         result.init(data);
         return result;
     }

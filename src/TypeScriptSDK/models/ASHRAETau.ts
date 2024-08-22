@@ -1,8 +1,8 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { SkyCondition } from "./SkyCondition";
+import { _SkyCondition } from "./_SkyCondition";
 
 /** Used to specify sky conditions on a design day. */
-export class ASHRAETau extends SkyCondition {
+export class ASHRAETau extends _SkyCondition {
     @IsNumber()
     @IsDefined()
     /** Value for the beam optical depth. Typically found in .stat files. */

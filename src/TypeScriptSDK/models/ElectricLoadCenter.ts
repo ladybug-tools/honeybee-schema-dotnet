@@ -1,8 +1,8 @@
 ﻿import { IsString, IsOptional, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
-export class ElectricLoadCenter extends OpenAPIGenBaseModel {
+export class ElectricLoadCenter extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

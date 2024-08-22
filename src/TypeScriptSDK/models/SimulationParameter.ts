@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, IsInt, IsNumber, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { RunPeriod } from "./RunPeriod";
 import { ShadowCalculation } from "./ShadowCalculation";
 import { SimulationControl } from "./SimulationControl";
@@ -8,7 +8,7 @@ import { SizingParameter } from "./SizingParameter";
 import { TerrianTypes } from "./TerrianTypes";
 
 /** The complete set of EnergyPlus Simulation Settings. */
-export class SimulationParameter extends OpenAPIGenBaseModel {
+export class SimulationParameter extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

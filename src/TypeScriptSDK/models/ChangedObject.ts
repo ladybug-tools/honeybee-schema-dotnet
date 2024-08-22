@@ -1,8 +1,8 @@
 ﻿import { IsEnum, ValidateNested, IsDefined, IsString, IsBoolean, IsArray, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { GeometryObjectTypes } from "./GeometryObjectTypes";
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 
-export class ChangedObject extends OpenAPIGenBaseModel {
+export class ChangedObject extends _OpenAPIGenBaseModel {
     @IsEnum(GeometryObjectTypes)
     @ValidateNested()
     @IsDefined()

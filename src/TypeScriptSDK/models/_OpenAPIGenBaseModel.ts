@@ -1,11 +1,21 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _AllAirBase } from "./_AllAirBase";
+import { _DiffObjectBase } from "./_DiffObjectBase";
+import { _DOASBase } from "./_DOASBase";
+import { _EquipmentBase } from "./_EquipmentBase";
+import { _FaceSubSet } from "./_FaceSubSet";
+import { _FaceSubSetAbridged } from "./_FaceSubSetAbridged";
+import { _HeatCoolBase } from "./_HeatCoolBase";
+import { _PropertiesBaseAbridged } from "./_PropertiesBaseAbridged";
+import { _RadianceAsset } from "./_RadianceAsset";
+import { _SkyCondition } from "./_SkyCondition";
+import { _TemplateSystem } from "./_TemplateSystem";
 import { AddedInstruction } from "./AddedInstruction";
 import { AddedObject } from "./AddedObject";
 import { Adiabatic } from "./Adiabatic";
 import { AFNCrack } from "./AFNCrack";
 import { AirBoundaryConstruction } from "./AirBoundaryConstruction";
 import { AirBoundaryConstructionAbridged } from "./AirBoundaryConstructionAbridged";
-import { AllAirBase } from "./AllAirBase";
 import { Aperture } from "./Aperture";
 import { ApertureConstructionSet } from "./ApertureConstructionSet";
 import { ApertureConstructionSetAbridged } from "./ApertureConstructionSetAbridged";
@@ -35,8 +45,6 @@ import { DeletedInstruction } from "./DeletedInstruction";
 import { DeletedObject } from "./DeletedObject";
 import { DesignDay } from "./DesignDay";
 import { DetailedHVAC } from "./DetailedHVAC";
-import { DiffObjectBase } from "./DiffObjectBase";
-import { DOASBase } from "./DOASBase";
 import { Door } from "./Door";
 import { DoorConstructionSet } from "./DoorConstructionSet";
 import { DoorConstructionSetAbridged } from "./DoorConstructionSetAbridged";
@@ -61,15 +69,12 @@ import { EnergyWindowMaterialGasMixture } from "./EnergyWindowMaterialGasMixture
 import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
 import { EnergyWindowMaterialShade } from "./EnergyWindowMaterialShade";
 import { EnergyWindowMaterialSimpleGlazSys } from "./EnergyWindowMaterialSimpleGlazSys";
-import { EquipmentBase } from "./EquipmentBase";
 import { EvaporativeCooler } from "./EvaporativeCooler";
 import { Face } from "./Face";
 import { Face3D } from "./Face3D";
 import { FaceEnergyPropertiesAbridged } from "./FaceEnergyPropertiesAbridged";
 import { FacePropertiesAbridged } from "./FacePropertiesAbridged";
 import { FaceRadiancePropertiesAbridged } from "./FaceRadiancePropertiesAbridged";
-import { FaceSubSet } from "./FaceSubSet";
-import { FaceSubSetAbridged } from "./FaceSubSetAbridged";
 import { FCU } from "./FCU";
 import { FCUwithDOASAbridged } from "./FCUwithDOASAbridged";
 import { FloorConstructionSet } from "./FloorConstructionSet";
@@ -85,7 +90,6 @@ import { GlobalConstructionSet } from "./GlobalConstructionSet";
 import { GlobalModifierSet } from "./GlobalModifierSet";
 import { Glow } from "./Glow";
 import { Ground } from "./Ground";
-import { HeatCoolBase } from "./HeatCoolBase";
 import { HumidityCondition } from "./HumidityCondition";
 import { IDdBaseModel } from "./IDdBaseModel";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -122,12 +126,10 @@ import { ProcessAbridged } from "./ProcessAbridged";
 import { ProgramType } from "./ProgramType";
 import { ProgramTypeAbridged } from "./ProgramTypeAbridged";
 import { ProjectInfo } from "./ProjectInfo";
-import { PropertiesBaseAbridged } from "./PropertiesBaseAbridged";
 import { PSZ } from "./PSZ";
 import { PTAC } from "./PTAC";
 import { PVAV } from "./PVAV";
 import { PVProperties } from "./PVProperties";
-import { RadianceAsset } from "./RadianceAsset";
 import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged";
 import { RadianceSubFaceStateAbridged } from "./RadianceSubFaceStateAbridged";
 import { Radiant } from "./Radiant";
@@ -173,11 +175,9 @@ import { SimulationControl } from "./SimulationControl";
 import { SimulationOutput } from "./SimulationOutput";
 import { SimulationParameter } from "./SimulationParameter";
 import { SizingParameter } from "./SizingParameter";
-import { SkyCondition } from "./SkyCondition";
 import { StateGeometryAbridged } from "./StateGeometryAbridged";
 import { Surface } from "./Surface";
 import { SyncInstructions } from "./SyncInstructions";
-import { TemplateSystem } from "./TemplateSystem";
 import { Trans } from "./Trans";
 import { VAV } from "./VAV";
 import { Ventilation } from "./Ventilation";
@@ -205,7 +205,7 @@ import { WindowConstructionShadeAbridged } from "./WindowConstructionShadeAbridg
 import { WSHP } from "./WSHP";
 import { WSHPwithDOASAbridged } from "./WSHPwithDOASAbridged";
 
-export abstract class OpenAPIGenBaseModel {
+export abstract class _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     /** A base class to use when there is no baseclass available to fall on. */
@@ -224,7 +224,7 @@ export abstract class OpenAPIGenBaseModel {
     }
 
 
-    static fromJS(data: any): OpenAPIGenBaseModel {
+    static fromJS(data: any): _OpenAPIGenBaseModel {
         data = typeof data === 'object' ? data : {};
 
         if (data["type"] === "Void") {
@@ -472,8 +472,8 @@ export abstract class OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "RadianceAsset") {
-            let result = new RadianceAsset();
+        if (data["type"] === "_RadianceAsset") {
+            let result = new _RadianceAsset();
             result.init(data);
             return result;
         }
@@ -517,8 +517,8 @@ export abstract class OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "FaceSubSetAbridged") {
-            let result = new FaceSubSetAbridged();
+        if (data["type"] === "_FaceSubSetAbridged") {
+            let result = new _FaceSubSetAbridged();
             result.init(data);
             return result;
         }
@@ -682,8 +682,8 @@ export abstract class OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "EquipmentBase") {
-            let result = new EquipmentBase();
+        if (data["type"] === "_EquipmentBase") {
+            let result = new _EquipmentBase();
             result.init(data);
             return result;
         }
@@ -787,8 +787,8 @@ export abstract class OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "PropertiesBaseAbridged") {
-            let result = new PropertiesBaseAbridged();
+        if (data["type"] === "_PropertiesBaseAbridged") {
+            let result = new _PropertiesBaseAbridged();
             result.init(data);
             return result;
         }
@@ -1097,23 +1097,23 @@ export abstract class OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "DOASBase") {
-            let result = new DOASBase();
+        if (data["type"] === "_DOASBase") {
+            let result = new _DOASBase();
             result.init(data);
             return result;
         }
-        if (data["type"] === "TemplateSystem") {
-            let result = new TemplateSystem();
+        if (data["type"] === "_TemplateSystem") {
+            let result = new _TemplateSystem();
             result.init(data);
             return result;
         }
-        if (data["type"] === "HeatCoolBase") {
-            let result = new HeatCoolBase();
+        if (data["type"] === "_HeatCoolBase") {
+            let result = new _HeatCoolBase();
             result.init(data);
             return result;
         }
-        if (data["type"] === "FaceSubSet") {
-            let result = new FaceSubSet();
+        if (data["type"] === "_FaceSubSet") {
+            let result = new _FaceSubSet();
             result.init(data);
             return result;
         }
@@ -1122,8 +1122,8 @@ export abstract class OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "AllAirBase") {
-            let result = new AllAirBase();
+        if (data["type"] === "_AllAirBase") {
+            let result = new _AllAirBase();
             result.init(data);
             return result;
         }
@@ -1172,8 +1172,8 @@ export abstract class OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "SkyCondition") {
-            let result = new SkyCondition();
+        if (data["type"] === "_SkyCondition") {
+            let result = new _SkyCondition();
             result.init(data);
             return result;
         }
@@ -1217,8 +1217,8 @@ export abstract class OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        if (data["type"] === "DiffObjectBase") {
-            let result = new DiffObjectBase();
+        if (data["type"] === "_DiffObjectBase") {
+            let result = new _DiffObjectBase();
             result.init(data);
             return result;
         }
@@ -1252,7 +1252,7 @@ export abstract class OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        throw new Error("The abstract class 'OpenAPIGenBaseModel' cannot be instantiated.");
+        throw new Error("The abstract class '_OpenAPIGenBaseModel' cannot be instantiated.");
     }
 
 	toJSON(data?: any) {

@@ -2,7 +2,7 @@
 
 namespace HoneybeeSchema
 {
-	public partial interface IBase {}
+	public partial interface IIDdBaseModel {}
 }
 
 
@@ -10,6 +10,6 @@ namespace HoneybeeSchema
 namespace HoneybeeSchema
 {
 	
-	public partial class IDdBaseModel: HoneybeeSchema.IBase {}
+	public partial class IDdBaseModel: HoneybeeSchema.IIDdBaseModel {}
 	
 }

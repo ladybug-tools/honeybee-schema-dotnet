@@ -1,9 +1,9 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AFNCrack } from "./AFNCrack";
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
-export class FaceEnergyPropertiesAbridged extends OpenAPIGenBaseModel {
+export class FaceEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

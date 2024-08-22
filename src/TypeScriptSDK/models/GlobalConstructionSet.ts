@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsArray, ValidateNested, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AirBoundaryConstructionAbridged } from "./AirBoundaryConstructionAbridged";
 import { ApertureConstructionSetAbridged } from "./ApertureConstructionSetAbridged";
 import { DoorConstructionSetAbridged } from "./DoorConstructionSetAbridged";
@@ -8,14 +9,13 @@ import { EnergyWindowMaterialGas } from "./EnergyWindowMaterialGas";
 import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
 import { FloorConstructionSetAbridged } from "./FloorConstructionSetAbridged";
 import { OpaqueConstructionAbridged } from "./OpaqueConstructionAbridged";
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 import { RoofCeilingConstructionSetAbridged } from "./RoofCeilingConstructionSetAbridged";
 import { ShadeConstruction } from "./ShadeConstruction";
 import { WallConstructionSetAbridged } from "./WallConstructionSetAbridged";
 import { WindowConstructionAbridged } from "./WindowConstructionAbridged";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
-export class GlobalConstructionSet extends OpenAPIGenBaseModel {
+export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

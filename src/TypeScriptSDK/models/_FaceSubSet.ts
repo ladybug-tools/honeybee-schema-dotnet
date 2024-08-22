@@ -1,9 +1,9 @@
 ﻿import { IsInstance, ValidateNested, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { OpaqueConstruction } from "./OpaqueConstruction";
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 
 /** A set of constructions for wall, floor, or roof assemblies. */
-export class FaceSubSet extends OpenAPIGenBaseModel {
+export class _FaceSubSet extends _OpenAPIGenBaseModel {
     @IsInstance(OpaqueConstruction)
     @ValidateNested()
     @IsOptional()
@@ -44,10 +44,10 @@ export class FaceSubSet extends OpenAPIGenBaseModel {
     }
 
 
-    static override fromJS(data: any): FaceSubSet {
+    static override fromJS(data: any): _FaceSubSet {
         data = typeof data === 'object' ? data : {};
 
-        let result = new FaceSubSet();
+        let result = new _FaceSubSet();
         result.init(data);
         return result;
     }
