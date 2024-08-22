@@ -1,9 +1,9 @@
 ﻿import { IsString, IsOptional, IsArray, ValidateNested, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ApertureModifierSetAbridged } from "./ApertureModifierSetAbridged";
 import { DoorModifierSetAbridged } from "./DoorModifierSetAbridged";
 import { FloorModifierSetAbridged } from "./FloorModifierSetAbridged";
 import { Glass } from "./Glass";
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 import { Plastic } from "./Plastic";
 import { RoofCeilingModifierSetAbridged } from "./RoofCeilingModifierSetAbridged";
 import { ShadeModifierSetAbridged } from "./ShadeModifierSetAbridged";
@@ -11,7 +11,7 @@ import { Trans } from "./Trans";
 import { WallModifierSetAbridged } from "./WallModifierSetAbridged";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
-export class GlobalModifierSet extends OpenAPIGenBaseModel {
+export class GlobalModifierSet extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

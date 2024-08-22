@@ -1,10 +1,10 @@
 ﻿import { IsString, IsOptional, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AddedObject } from "./AddedObject";
 import { ChangedObject } from "./ChangedObject";
 import { DeletedObject } from "./DeletedObject";
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 
-export class ComparisonReport extends OpenAPIGenBaseModel {
+export class ComparisonReport extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

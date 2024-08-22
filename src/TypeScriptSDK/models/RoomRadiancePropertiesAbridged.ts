@@ -1,8 +1,8 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Abridged Radiance Properties for Honeybee Room. */
-export class RoomRadiancePropertiesAbridged extends OpenAPIGenBaseModel {
+export class RoomRadiancePropertiesAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

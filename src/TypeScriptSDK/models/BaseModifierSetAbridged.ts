@@ -1,13 +1,13 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { DoorModifierSetAbridged } from "./DoorModifierSetAbridged";
 import { FloorModifierSetAbridged } from "./FloorModifierSetAbridged";
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 import { RoofCeilingModifierSetAbridged } from "./RoofCeilingModifierSetAbridged";
 import { ShadeModifierSetAbridged } from "./ShadeModifierSetAbridged";
 import { WallModifierSetAbridged } from "./WallModifierSetAbridged";
 
 /** Base class for the abridged modifier sets assigned to Faces. */
-export class BaseModifierSetAbridged extends OpenAPIGenBaseModel {
+export class BaseModifierSetAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     /** Identifier for a radiance modifier object for faces with an  Outdoors boundary condition. */

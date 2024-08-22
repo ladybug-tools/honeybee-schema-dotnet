@@ -1,9 +1,9 @@
 ﻿import { IsInstance, ValidateNested, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { OpaqueConstruction } from "./OpaqueConstruction";
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 
 /** A set of constructions for wall assemblies. */
-export class WallConstructionSet extends OpenAPIGenBaseModel {
+export class WallConstructionSet extends _OpenAPIGenBaseModel {
     @IsInstance(OpaqueConstruction)
     @ValidateNested()
     @IsOptional()

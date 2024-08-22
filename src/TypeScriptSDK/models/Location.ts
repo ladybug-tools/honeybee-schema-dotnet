@@ -1,9 +1,9 @@
 ﻿import { IsString, IsOptional, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Autocalculate } from "./Autocalculate";
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 
 /** A Ladybug Location. */
-export class Location extends OpenAPIGenBaseModel {
+export class Location extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

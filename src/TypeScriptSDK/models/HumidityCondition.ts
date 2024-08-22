@@ -1,9 +1,9 @@
 ﻿import { IsEnum, ValidateNested, IsDefined, IsNumber, IsString, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { HumidityTypes } from "./HumidityTypes";
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 
 /** Used to specify humidity conditions on a design day. */
-export class HumidityCondition extends OpenAPIGenBaseModel {
+export class HumidityCondition extends _OpenAPIGenBaseModel {
     @IsEnum(HumidityTypes)
     @ValidateNested()
     @IsDefined()

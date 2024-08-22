@@ -1,8 +1,8 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Used to specify wind conditions on a design day. */
-export class WindCondition extends OpenAPIGenBaseModel {
+export class WindCondition extends _OpenAPIGenBaseModel {
     @IsNumber()
     @IsDefined()
     /** Wind speed on the design day [m/s]. */

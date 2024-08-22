@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "@pollination/honeybee-schema-sdk",
   "license": "MIT",
   "main": "dist/index.cjs.js",
@@ -20,5 +20,5 @@
   "dependencies": {
     "class-validator": "^0.14.1"
   },
-  "version": "1.58.1-1"
+  "version": "1.58.3-v5"
 }

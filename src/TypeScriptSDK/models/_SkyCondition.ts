@@ -1,10 +1,10 @@
 ﻿import { IsArray, ValidateNested, IsDefined, IsBoolean, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ASHRAEClearSky } from "./ASHRAEClearSky";
 import { ASHRAETau } from "./ASHRAETau";
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 
 /** Used to specify sky conditions on a design day. */
-export class SkyCondition extends OpenAPIGenBaseModel {
+export class _SkyCondition extends _OpenAPIGenBaseModel {
     @IsArray()
     @ValidateNested({ each: true })
     @IsDefined()
@@ -38,7 +38,7 @@ export class SkyCondition extends OpenAPIGenBaseModel {
     }
 
 
-    static override fromJS(data: any): SkyCondition {
+    static override fromJS(data: any): _SkyCondition {
         data = typeof data === 'object' ? data : {};
 
         if (data["type"] === "ASHRAEClearSky") {
@@ -51,7 +51,7 @@ export class SkyCondition extends OpenAPIGenBaseModel {
             result.init(data);
             return result;
         }
-        let result = new SkyCondition();
+        let result = new _SkyCondition();
         result.init(data);
         return result;
     }

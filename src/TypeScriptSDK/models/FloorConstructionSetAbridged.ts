@@ -1,8 +1,8 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { FaceSubSetAbridged } from "./FaceSubSetAbridged";
+import { _FaceSubSetAbridged } from "./_FaceSubSetAbridged";
 
 /** A set of constructions for floor assemblies. */
-export class FloorConstructionSetAbridged extends FaceSubSetAbridged {
+export class FloorConstructionSetAbridged extends _FaceSubSetAbridged {
     @IsString()
     @IsOptional()
     type?: string;

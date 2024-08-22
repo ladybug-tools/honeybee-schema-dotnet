@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
 import { GlobalModifierSet } from "./GlobalModifierSet";
@@ -8,7 +9,6 @@ import { Metal } from "./Metal";
 import { Mirror } from "./Mirror";
 import { ModifierSet } from "./ModifierSet";
 import { ModifierSetAbridged } from "./ModifierSetAbridged";
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 import { Plastic } from "./Plastic";
 import { SensorGrid } from "./SensorGrid";
 import { Trans } from "./Trans";
@@ -16,7 +16,7 @@ import { View } from "./View";
 import { Void } from "./Void";
 
 /** Radiance Properties for Honeybee Model. */
-export class ModelRadianceProperties extends OpenAPIGenBaseModel {
+export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

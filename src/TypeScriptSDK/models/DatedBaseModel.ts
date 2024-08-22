@@ -1,11 +1,11 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { DaylightSavingTime } from "./DaylightSavingTime";
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 import { RunPeriod } from "./RunPeriod";
 import { ScheduleRuleAbridged } from "./ScheduleRuleAbridged";
 
 /** Base class for all objects needing to check for a valid Date. */
-export class DatedBaseModel extends OpenAPIGenBaseModel {
+export class DatedBaseModel extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

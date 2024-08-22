@@ -1,8 +1,8 @@
 ﻿import { IsString, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Used to specify which types of calculations to run. */
-export class SimulationControl extends OpenAPIGenBaseModel {
+export class SimulationControl extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;

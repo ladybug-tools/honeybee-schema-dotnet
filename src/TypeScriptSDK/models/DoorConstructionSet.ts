@@ -1,12 +1,12 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { OpaqueConstruction } from "./OpaqueConstruction";
-import { OpenAPIGenBaseModel } from "./OpenAPIGenBaseModel";
 import { WindowConstruction } from "./WindowConstruction";
 import { WindowConstructionDynamic } from "./WindowConstructionDynamic";
 import { WindowConstructionShade } from "./WindowConstructionShade";
 
 /** A set of constructions for door assemblies. */
-export class DoorConstructionSet extends OpenAPIGenBaseModel {
+export class DoorConstructionSet extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     type?: string;
