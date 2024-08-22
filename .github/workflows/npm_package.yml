@@ -30,7 +30,7 @@ jobs:
       - name: generate files
         run: |
           cd ./.nswag-generator
-          dotnet run --updateVersion
+          node -v
 
       - name: Install dependencies
         working-directory: src/TypeScriptSDK
