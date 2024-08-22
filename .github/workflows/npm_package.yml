@@ -36,8 +36,10 @@ jobs:
       - name: Install dependencies
         working-directory: src/TypeScriptSDK
         run: |
+          rm -rf node_modules
+          npm cache clean --force
+          npm install
           npm install vite-plugin-dts --save-dev
-          npm i
 
       - name: Build module
         working-directory: src/TypeScriptSDK
