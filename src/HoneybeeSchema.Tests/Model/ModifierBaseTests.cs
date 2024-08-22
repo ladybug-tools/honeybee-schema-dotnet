@@ -87,6 +87,13 @@ namespace HoneybeeSchema.Test
             }
 
         }
+
+        [Test]
+        public void SensorGridTest()
+        {
+            var obj = new SensorGrid("id", new List<Sensor>());
+            Assert.IsTrue(obj is IIDdBase);
+        }
     }
 
 }
