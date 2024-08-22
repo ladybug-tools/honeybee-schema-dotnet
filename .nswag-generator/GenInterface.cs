@@ -68,8 +68,8 @@ public class GenInterface : Generator
             // clean up names
             className = TemplateModels.Helper.CleanName(className);
 
-            if (nameSpace.EndsWith("._Base"))
-                nameSpace.Replace("._Base", className);
+            if (nameSpace.EndsWith("._base"))
+                nameSpace = nameSpace.Replace("._base", $".{className}");
 
             if (!interfaces.ContainsKey(nameSpace))
                 interfaces.Add(nameSpace, new List<string>());
