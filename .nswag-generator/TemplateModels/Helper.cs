@@ -195,7 +195,7 @@ namespace TemplateModels
             var words = input.Split(new[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < words.Length; i++)
             {
-                words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
+                words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1);
             }
 
             return string.Join(string.Empty, words);
