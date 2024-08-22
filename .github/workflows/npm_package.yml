@@ -27,9 +27,10 @@ jobs:
           node-version: "20"
           registry-url: "https://registry.npmjs.org"
 
-      - run: printenv
-      - run: node -v
-      - run: npm -v
+      - name: generate files
+        run: |
+          cd ./.nswag-generator
+          dotnet run --genTsModel --updateVersion
 
       - name: Install dependencies
         working-directory: src/TypeScriptSDK
