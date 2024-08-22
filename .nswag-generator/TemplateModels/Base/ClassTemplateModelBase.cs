@@ -20,9 +20,9 @@ public class ClassTemplateModelBase
         Description = json.Description?.Replace("\n", "\\n")?.Replace("\"", "\"\"");
         BaseDiscriminator = json.Discriminator;
 
-        ClassName = Helper.CleanName(json.Title);
+        ClassName = json.Title;
         Discriminator = ClassName;
         InheritedSchema = json.InheritedSchema;
-        Inheritance = Helper.CleanName(InheritedSchema?.Title);
+        Inheritance = InheritedSchema?.Title;
     }
 }
