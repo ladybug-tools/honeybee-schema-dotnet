@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "@pollination/honeybee-schema-sdk",
   "license": "MIT",
   "main": "dist/index.cjs.js",
@@ -15,7 +15,7 @@
     "@types/node": "^20.14.2",
     "typescript": "^4.9.5",
     "vite": "^4.1.0",
-    "vite-plugin-dts": "^3.9.0"
+    "vite-plugin-dts": "^3.9.1"
   },
   "dependencies": {
     "class-validator": "^0.14.1"
