@@ -35,8 +35,7 @@ jobs:
         working-directory: src/TypeScriptSDK
         run: |
           npm cache clean --force
-          npm cache clean --force
-          npm ci
+          npm install
           npm ls
 
       - name: Build module
