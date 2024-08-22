@@ -27,26 +27,18 @@ jobs:
           node-version: "20"
           registry-url: "https://registry.npmjs.org"
 
-      - name: generate files
-        run: |
-          cd ./.nswag-generator
-          dotnet run --genTsModel --updateVersion
+      - run: printenv
+      - run: node -v
+      - run: npm -v
 
       - name: Install dependencies
         working-directory: src/TypeScriptSDK
         run: |
-          rm -rf node_modules
           npm cache clean --force
-          npm install
-          npm install vite-plugin-dts --save-dev
+          npm cache clean --force
+          npm ci
+          npm ls
 
       - name: Build module
         working-directory: src/TypeScriptSDK
         run: npm run build
-
-      - name: Publish to npm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          cd ./src/TypeScriptSDK
-          npm publish
