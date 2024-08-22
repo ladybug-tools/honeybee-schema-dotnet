@@ -25,7 +25,9 @@ public partial class Generator
         var outputDir = System.IO.Path.Combine(rootDir, "Output");
         System.IO.Directory.CreateDirectory(outputDir);
 
-        args = args ?? new string[] { "--download", "--genTsModel", "--genCsModel", "--genCsInterface", "--updateVersion" };
+        if (args == null || !args.Any()) 
+            args = new string[] { "--download", "--genTsModel", "--genCsModel", "--genCsInterface", "--updateVersion" };
+
 
         // download all json files
         if (args.Contains("--download"))
