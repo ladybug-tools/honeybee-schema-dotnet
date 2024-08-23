@@ -12,8 +12,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: "Checkout Master Branch"
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Update Assembly Version
         shell: bash
@@ -52,10 +51,7 @@ jobs:
       CI: ""
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@v4
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -83,6 +79,8 @@ jobs:
     needs: [buildCSharp, buildTypeScript]
 
     steps:
+      - uses: actions/checkout@v4
+
       - name: Release CSharp
         working-directory: src/HoneybeeSchema
         run: |
