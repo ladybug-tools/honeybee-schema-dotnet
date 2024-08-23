@@ -41,6 +41,16 @@ jobs:
         working-directory: src/HoneybeeSchema.Tests
         run: dotnet test --configuration Release
 
+      - name: Release CSharp
+        working-directory: src/HoneybeeSchema
+        run: dotnet pack --configuration Release --output ./../../
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nugetPackage
+          path: ./*.nupkg
+
     outputs:
       tag: ${{ env.ReleaseVersion }}
 
@@ -72,28 +82,42 @@ jobs:
         working-directory: src/TypeScriptSDK
         run: npm run build
 
+      - name: Pack package
+        working-directory: src/TypeScriptSDK
+        run: |
+          npm pack
+          cp ./*.tgz ./../../
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: npmPackage
+          path: ./*.tgz
+
   release:
     name: both CSharp and TypeScript SDK
     if: github.ref == 'refs/heads/master'
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: [buildCSharp, buildTypeScript]
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Download artifact - nuget
+        uses: actions/download-artifact@v4
+        with:
+          name: nugetPackage
+
+      - name: Download artifact - npm
+        uses: actions/download-artifact@v4
+        with:
+          name: npmPackage
 
       - name: Release CSharp
-        working-directory: src/HoneybeeSchema
-        run: |
-          dotnet restore
-          dotnet build --configuration Release
-          dotnet pack --configuration Release
-          dotnet nuget push bin\Release\HoneybeeSchema.*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
+        run: dotnet nuget push ./*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
 
       - name: Publish to npm
-        working-directory: src/TypeScriptSDK
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --access public
+        run: npm publish ./*.tgz --access public
 
   updateDownstremRepo:
     name: Update dependencies
