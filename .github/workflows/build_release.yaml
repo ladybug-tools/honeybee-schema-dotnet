@@ -101,6 +101,11 @@ jobs:
     needs: [buildCSharp, buildTypeScript]
 
     steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+
       - name: Download artifact - nuget
         uses: actions/download-artifact@v4
         with:
