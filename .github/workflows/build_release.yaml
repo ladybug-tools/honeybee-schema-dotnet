@@ -10,6 +10,9 @@ jobs:
   buildCSharp:
     name: Build release CSharp
     runs-on: windows-latest
+    concurrency:
+      group: ${{ github.ref }}
+      cancel-in-progress: true
 
     steps:
       - name: "Checkout Master Branch"
@@ -53,11 +56,15 @@ jobs:
     outputs:
       tag: ${{ env.ReleaseVersion }}
 
-  BuildTypeScript:
+  buildTypeScript:
     name: Build release TypeScript
     runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.ref }}
+      cancel-in-progress: true
     env:
       CI: ""
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -90,7 +97,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish --access public
 
-  UpdateDownstremRepo:
+  updateDownstremRepo:
     name: Update dependencies
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
