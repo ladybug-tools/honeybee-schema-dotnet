@@ -75,7 +75,7 @@ jobs:
   release:
     name: both CSharp and TypeScript SDK
     if: github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: [buildCSharp, buildTypeScript]
 
     steps:
