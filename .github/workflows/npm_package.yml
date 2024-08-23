@@ -36,4 +36,5 @@ jobs:
 
       - name: Build module
         working-directory: src/TypeScriptSDK
-        run: npm run build
+        run: |
+          npm run build
