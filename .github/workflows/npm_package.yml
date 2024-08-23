@@ -12,7 +12,6 @@ on:
 jobs:
   release:
     name: release
-    if: github.repository_owner == 'ladybug-tools'
     runs-on: ubuntu-latest
     env:
       CI: ""
@@ -35,9 +34,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: src/TypeScriptSDK
-        run: |
-          npm install vite-plugin-dts --save-dev
-          npm i
+        run: npm i
 
       - name: Build module
         working-directory: src/TypeScriptSDK

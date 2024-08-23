@@ -25,7 +25,7 @@ public partial class Generator
         var outputDir = System.IO.Path.Combine(rootDir, "Output");
         System.IO.Directory.CreateDirectory(outputDir);
 
-        if (args == null || !args.Any()) 
+        if (args == null || !args.Any())
             args = new string[] { "--download", "--genTsModel", "--genCsModel", "--genCsInterface", "--updateVersion" };
 
 
@@ -138,9 +138,9 @@ public partial class Generator
 
         //# update the version for TypeScript
         var tsFile = System.IO.Path.Combine(root, "src", "TypeScriptSDK", "package.json");
-        file = System.IO.File.ReadAllText(tsFile);
+        file = System.IO.File.ReadAllText(tsFile, Encoding.UTF8);
         newFile = Regex.Replace(file, @"(?<=version"": "")[^""]+(?="")", newVersion);
-        System.IO.File.WriteAllText(tsFile, newFile, Encoding.UTF8);
+        System.IO.File.WriteAllText(tsFile, newFile, new UTF8Encoding(false));
 
     }
 }
