@@ -1,5 +1,5 @@
 {
-  "name": "@ladybug-tools/honeybee-schema-sdk",
+  "name": "honeybee-schema-sdk",
   "license": "MIT",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
