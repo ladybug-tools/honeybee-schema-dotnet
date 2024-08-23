@@ -84,6 +84,8 @@ jobs:
       - name: Release CSharp
         working-directory: src/HoneybeeSchema
         run: |
+          dotnet restore
+          dotnet build --configuration Release
           dotnet pack --configuration Release
           dotnet nuget push bin\Release\HoneybeeSchema.*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
 
