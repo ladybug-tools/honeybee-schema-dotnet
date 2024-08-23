@@ -27,10 +27,6 @@ jobs:
           node-version: "20"
           registry-url: "https://registry.npmjs.org"
 
-      - name: generate files
-        run: |
-          node -v
-
       - name: Install dependencies
         working-directory: src/TypeScriptSDK
         run: |
