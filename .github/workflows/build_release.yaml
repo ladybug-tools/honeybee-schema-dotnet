@@ -128,14 +128,14 @@ jobs:
     name: Update dependencies
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
-    needs: [release]
+    needs: [release, buildCSharp]
 
     steps:
       - name: Wait for NuGet package to be available
         shell: bash
         run: |
           PACKAGE_NAME="HoneybeeSchema"
-          PACKAGE_VERSION="${{ needs.build.outputs.tag }}"
+          PACKAGE_VERSION="${{ needs.buildCSharp.outputs.tag }}"
           MAX_ATTEMPTS=30
           SLEEP_TIME=60
 
