@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace SchemaGenerator;
 
@@ -102,9 +103,10 @@ public partial class Generator
 
         // Check the version from nuget
         var api = $"https://api.nuget.org/v3-flatcontainer/{sdkName.ToLower()}/index.json";
-        var versions = HttpHelper.ReadJson(api)["versions"] as JArray;
+        var versions = (HttpHelper.ReadJson(api)["versions"] as JArray)?.Select(_ => _.ToString())?.ToList();
         if (versions != null && versions.Any())
         {
+            versions.Sort(new VersionComparer());
             var lastVersion = versions.Last().ToString();
             Console.WriteLine($"Found latest version on Nuget: {lastVersion}");
             if (lastVersion.StartsWith(newVersion))
@@ -116,16 +118,13 @@ public partial class Generator
 
         Console.WriteLine($"Getting an existing version: {newVersion}");
         var digits = newVersion.Split(new[] { '.', '-' });
-        if (digits.Length == 3)
-        {
-            newVersion = $"{newVersion}-v1";
-        }
-        else
+        if (digits.Length == 4)
         {
             var lastV = digits.LastOrDefault().Replace("v", "");
             var v = int.Parse(lastV) + 1;
             newVersion = string.Join(".", digits.SkipLast(1)) + $"-v{v}";
         }
+
         Console.WriteLine($"New version: {newVersion}");
 
 
@@ -142,5 +141,46 @@ public partial class Generator
         newFile = Regex.Replace(file, @"(?<=version"": "")[^""]+(?="")", newVersion);
         System.IO.File.WriteAllText(tsFile, newFile, new UTF8Encoding(false));
 
+    }
+
+
+
+}
+
+
+public class VersionComparer : IComparer<string>
+{
+    public int Compare(string x, string y)
+    {
+        if (x == null) return y == null ? 0 : -1;
+        if (y == null) return 1;
+
+        var regex = new Regex(@"(\d+|\D+)");
+        var xParts = regex.Matches(x);
+        var yParts = regex.Matches(y);
+
+        int maxLength = Math.Max(xParts.Count, yParts.Count);
+        for (int i = 0; i < maxLength; i++)
+        {
+            if (i >= xParts.Count) return -1;
+            if (i >= yParts.Count) return 1;
+
+            var xPart = xParts[i].Value;
+            var yPart = yParts[i].Value;
+
+            int result;
+            if (int.TryParse(xPart, out int xNum) && int.TryParse(yPart, out int yNum))
+            {
+                result = xNum.CompareTo(yNum);
+            }
+            else
+            {
+                result = string.Compare(xPart, yPart, StringComparison.Ordinal);
+            }
+
+            if (result != 0) return result;
+        }
+
+        return 0;
     }
 }
