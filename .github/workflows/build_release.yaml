@@ -136,30 +136,31 @@ jobs:
         run: |
           PACKAGE_NAME="HoneybeeSchema"
           PACKAGE_VERSION="${{ needs.buildCSharp.outputs.tag }}"
-          MAX_ATTEMPTS=30
+          MAX_ATTEMPTS=10
           SLEEP_TIME=60
 
           for ((i=1;i<=MAX_ATTEMPTS;i++)); do
-            echo "Checking for package $PACKAGE_NAME version $PACKAGE_VERSION (Attempt $i/$MAX_ATTEMPTS)..."
-            if dotnet nuget search $PACKAGE_NAME --source https://api.nuget.org/v3/index.json --prerelease --include-delisted | grep $PACKAGE_VERSION; then
-              echo "Package $PACKAGE_NAME version $PACKAGE_VERSION is available!"
+            RESPONSE=$(curl --silent --fail "https://api.nuget.org/v3-flatcontainer/$PACKAGE_NAME/$PACKAGE_VERSION/$PACKAGE_NAME.nuspec")
+            if [[ $RESPONSE != *"<Error><Code>BlobNotFound</Code><Message>"* ]]; then
+              echo "Package ($PACKAGE_NAME/$PACKAGE_VERSION) is available on NuGet."
               exit 0
+            else
+              echo "Package ($PACKAGE_NAME/$PACKAGE_VERSION) is not available yet. Retry $i/$MAX_ATTEMPTS."
+              sleep $SLEEP_TIME
             fi
-            echo "Package not available yet. Sleeping for $SLEEP_TIME seconds..."
-            sleep $SLEEP_TIME
           done
 
-          echo "Package $PACKAGE_NAME version $PACKAGE_VERSION was not found after $MAX_ATTEMPTS attempts."
+          echo "Package ($PACKAGE_NAME/$PACKAGE_VERSION) is not available after $MAX_ATTEMPTS retries."
           exit 1
 
       - name: Update dragonfly-schema-dotnet
         env:
           DISPATCH_REPO: ladybug-tools/dragonfly-schema-dotnet
           DEPS_TOKEN: ${{ secrets.DEPS_UPDATING }}
-          VERSION: ${{ needs.build.outputs.tag }}
+          VERSION: ${{ needs.buildCSharp.outputs.tag }}
         run: |
           echo ${VERSION}
           curl -X POST https://api.github.com/repos/$DISPATCH_REPO/dispatches \
           -H "Accept: application/vnd.github.everest-preview+json" \
-          -d '{"event_type": "honeybee_schema_dotnet_release", "client_payload": {"version": "${{ needs.build.outputs.tag }}"}}' \
+          -d '{"event_type": "honeybee_schema_dotnet_release", "client_payload": {"version": "${{ needs.buildCSharp.outputs.tag }}"}}' \
           -u ladybugbot:$DEPS_TOKEN
