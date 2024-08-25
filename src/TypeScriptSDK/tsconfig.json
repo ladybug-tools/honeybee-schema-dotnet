@@ -5,7 +5,7 @@
     "target": "ESNext",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "allowJs": true,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
