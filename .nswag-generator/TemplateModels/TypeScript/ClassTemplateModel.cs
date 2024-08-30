@@ -38,9 +38,6 @@ public class ClassTemplateModel : ClassTemplateModelBase
         if (!string.IsNullOrEmpty(Inheritance))
             TsImports.Add(Inheritance);
 
-        // add derived class references
-        var dcs = DerivedClasses.Select(_ => _.ClassName);
-        TsImports?.AddRange(dcs);
         // remove importing self
         TsImports = TsImports.Where(_ => _ != ClassName).Distinct().OrderBy(_ => _).ToList();
 
