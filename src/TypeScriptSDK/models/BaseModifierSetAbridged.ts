@@ -1,10 +1,5 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { DoorModifierSetAbridged } from "./DoorModifierSetAbridged";
-import { FloorModifierSetAbridged } from "./FloorModifierSetAbridged";
-import { RoofCeilingModifierSetAbridged } from "./RoofCeilingModifierSetAbridged";
-import { ShadeModifierSetAbridged } from "./ShadeModifierSetAbridged";
-import { WallModifierSetAbridged } from "./WallModifierSetAbridged";
 
 /** Base class for the abridged modifier sets assigned to Faces. */
 export class BaseModifierSetAbridged extends _OpenAPIGenBaseModel {
@@ -42,31 +37,6 @@ export class BaseModifierSetAbridged extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): BaseModifierSetAbridged {
         data = typeof data === 'object' ? data : {};
 
-        if (data["type"] === "RoofCeilingModifierSetAbridged") {
-            let result = new RoofCeilingModifierSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "DoorModifierSetAbridged") {
-            let result = new DoorModifierSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "WallModifierSetAbridged") {
-            let result = new WallModifierSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "FloorModifierSetAbridged") {
-            let result = new FloorModifierSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ShadeModifierSetAbridged") {
-            let result = new ShadeModifierSetAbridged();
-            result.init(data);
-            return result;
-        }
         let result = new BaseModifierSetAbridged();
         result.init(data);
         return result;

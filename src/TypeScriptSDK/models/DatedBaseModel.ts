@@ -1,8 +1,5 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { DaylightSavingTime } from "./DaylightSavingTime";
-import { RunPeriod } from "./RunPeriod";
-import { ScheduleRuleAbridged } from "./ScheduleRuleAbridged";
 
 /** Base class for all objects needing to check for a valid Date. */
 export class DatedBaseModel extends _OpenAPIGenBaseModel {
@@ -28,21 +25,6 @@ export class DatedBaseModel extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): DatedBaseModel {
         data = typeof data === 'object' ? data : {};
 
-        if (data["type"] === "ScheduleRuleAbridged") {
-            let result = new ScheduleRuleAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "DaylightSavingTime") {
-            let result = new DaylightSavingTime();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "RunPeriod") {
-            let result = new RunPeriod();
-            result.init(data);
-            return result;
-        }
         let result = new DatedBaseModel();
         result.init(data);
         return result;
