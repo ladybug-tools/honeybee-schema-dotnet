@@ -1,17 +1,14 @@
-import dts from "vite-plugin-dts";
-import path from "path";
-import { defineConfig, UserConfig } from "vite";
+import { defineConfig, UserConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-  base: "./",
-  plugins: [dts({ rollupTypes: true })],
+  plugins: [tsconfigPaths()],
   build: {
-    sourcemap: false,
     lib: {
-      entry: path.resolve(__dirname, "./index.ts"),
-      name: "mylib",
-      formats: ["es", "cjs", "umd", "iife"],
-      fileName: (format) => `index.${format}.js`,
+      entry: './index.ts',
+      name: 'schema',
+      fileName: (format) => `index.${format}.js`
     },
-  },
+    
+  }
 } satisfies UserConfig);
