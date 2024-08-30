@@ -1,10 +1,5 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { ApertureRadiancePropertiesAbridged } from "./ApertureRadiancePropertiesAbridged";
-import { DoorRadiancePropertiesAbridged } from "./DoorRadiancePropertiesAbridged";
-import { FaceRadiancePropertiesAbridged } from "./FaceRadiancePropertiesAbridged";
-import { ShadeMeshRadiancePropertiesAbridged } from "./ShadeMeshRadiancePropertiesAbridged";
-import { ShadeRadiancePropertiesAbridged } from "./ShadeRadiancePropertiesAbridged";
 
 /** Base class of Abridged Radiance Properties. */
 export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
@@ -42,31 +37,6 @@ export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): _PropertiesBaseAbridged {
         data = typeof data === 'object' ? data : {};
 
-        if (data["type"] === "ShadeMeshRadiancePropertiesAbridged") {
-            let result = new ShadeMeshRadiancePropertiesAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ApertureRadiancePropertiesAbridged") {
-            let result = new ApertureRadiancePropertiesAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "DoorRadiancePropertiesAbridged") {
-            let result = new DoorRadiancePropertiesAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ShadeRadiancePropertiesAbridged") {
-            let result = new ShadeRadiancePropertiesAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "FaceRadiancePropertiesAbridged") {
-            let result = new FaceRadiancePropertiesAbridged();
-            result.init(data);
-            return result;
-        }
         let result = new _PropertiesBaseAbridged();
         result.init(data);
         return result;

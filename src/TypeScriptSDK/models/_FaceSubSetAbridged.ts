@@ -1,8 +1,5 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { FloorConstructionSetAbridged } from "./FloorConstructionSetAbridged";
-import { RoofCeilingConstructionSetAbridged } from "./RoofCeilingConstructionSetAbridged";
-import { WallConstructionSetAbridged } from "./WallConstructionSetAbridged";
 
 /** A set of constructions for wall, floor, or roof assemblies. */
 export class _FaceSubSetAbridged extends _OpenAPIGenBaseModel {
@@ -46,21 +43,6 @@ export class _FaceSubSetAbridged extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): _FaceSubSetAbridged {
         data = typeof data === 'object' ? data : {};
 
-        if (data["type"] === "WallConstructionSetAbridged") {
-            let result = new WallConstructionSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "FloorConstructionSetAbridged") {
-            let result = new FloorConstructionSetAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "RoofCeilingConstructionSetAbridged") {
-            let result = new RoofCeilingConstructionSetAbridged();
-            result.init(data);
-            return result;
-        }
         let result = new _FaceSubSetAbridged();
         result.init(data);
         return result;

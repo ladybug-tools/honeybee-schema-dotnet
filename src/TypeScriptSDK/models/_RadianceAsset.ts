@@ -1,7 +1,5 @@
 ﻿import { IsString, IsOptional, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
-import { SensorGrid } from "./SensorGrid";
-import { View } from "./View";
 
 /** Hidden base class for all Radiance Assets. */
 export class _RadianceAsset extends IDdRadianceBaseModel {
@@ -40,16 +38,6 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
     static override fromJS(data: any): _RadianceAsset {
         data = typeof data === 'object' ? data : {};
 
-        if (data["type"] === "View") {
-            let result = new View();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "SensorGrid") {
-            let result = new SensorGrid();
-            result.init(data);
-            return result;
-        }
         let result = new _RadianceAsset();
         result.init(data);
         return result;

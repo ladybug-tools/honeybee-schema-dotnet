@@ -1,12 +1,5 @@
 ﻿import { IsString, IsDefined, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { Aperture } from "./Aperture";
-import { Door } from "./Door";
-import { Face } from "./Face";
-import { Model } from "./Model";
-import { Room } from "./Room";
-import { Shade } from "./Shade";
-import { ShadeMesh } from "./ShadeMesh";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class IDdBaseModel extends _OpenAPIGenBaseModel {
@@ -49,41 +42,6 @@ export class IDdBaseModel extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): IDdBaseModel {
         data = typeof data === 'object' ? data : {};
 
-        if (data["type"] === "Shade") {
-            let result = new Shade();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Aperture") {
-            let result = new Aperture();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Door") {
-            let result = new Door();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Face") {
-            let result = new Face();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Room") {
-            let result = new Room();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ShadeMesh") {
-            let result = new ShadeMesh();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Model") {
-            let result = new Model();
-            result.init(data);
-            return result;
-        }
         let result = new IDdBaseModel();
         result.init(data);
         return result;

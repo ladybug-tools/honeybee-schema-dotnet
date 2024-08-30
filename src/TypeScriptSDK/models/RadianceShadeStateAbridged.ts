@@ -1,6 +1,5 @@
 ﻿import { IsString, IsOptional, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { RadianceSubFaceStateAbridged } from "./RadianceSubFaceStateAbridged";
 import { StateGeometryAbridged } from "./StateGeometryAbridged";
 
 /** RadianceShadeStateAbridged represents a single state for a dynamic Shade. */
@@ -46,11 +45,6 @@ export class RadianceShadeStateAbridged extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): RadianceShadeStateAbridged {
         data = typeof data === 'object' ? data : {};
 
-        if (data["type"] === "RadianceSubFaceStateAbridged") {
-            let result = new RadianceSubFaceStateAbridged();
-            result.init(data);
-            return result;
-        }
         let result = new RadianceShadeStateAbridged();
         result.init(data);
         return result;

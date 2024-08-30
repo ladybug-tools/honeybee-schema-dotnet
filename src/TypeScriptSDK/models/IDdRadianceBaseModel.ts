@@ -1,20 +1,5 @@
 ﻿import { IsString, IsDefined, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { _RadianceAsset } from "./_RadianceAsset";
-import { BSDF } from "./BSDF";
-import { Glass } from "./Glass";
-import { Glow } from "./Glow";
-import { Light } from "./Light";
-import { Metal } from "./Metal";
-import { Mirror } from "./Mirror";
-import { ModifierBase } from "./ModifierBase";
-import { ModifierSet } from "./ModifierSet";
-import { ModifierSetAbridged } from "./ModifierSetAbridged";
-import { Plastic } from "./Plastic";
-import { SensorGrid } from "./SensorGrid";
-import { StateGeometryAbridged } from "./StateGeometryAbridged";
-import { Trans } from "./Trans";
-import { View } from "./View";
 
 /** Base class for all objects requiring a valid Radiance identifier. */
 export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
@@ -52,81 +37,6 @@ export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): IDdRadianceBaseModel {
         data = typeof data === 'object' ? data : {};
 
-        if (data["type"] === "Mirror") {
-            let result = new Mirror();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ModifierBase") {
-            let result = new ModifierBase();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Plastic") {
-            let result = new Plastic();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Glass") {
-            let result = new Glass();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "BSDF") {
-            let result = new BSDF();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Glow") {
-            let result = new Glow();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Light") {
-            let result = new Light();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Trans") {
-            let result = new Trans();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "Metal") {
-            let result = new Metal();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "View") {
-            let result = new View();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "_RadianceAsset") {
-            let result = new _RadianceAsset();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "StateGeometryAbridged") {
-            let result = new StateGeometryAbridged();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "SensorGrid") {
-            let result = new SensorGrid();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ModifierSet") {
-            let result = new ModifierSet();
-            result.init(data);
-            return result;
-        }
-        if (data["type"] === "ModifierSetAbridged") {
-            let result = new ModifierSetAbridged();
-            result.init(data);
-            return result;
-        }
         let result = new IDdRadianceBaseModel();
         result.init(data);
         return result;
