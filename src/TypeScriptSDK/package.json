@@ -1,24 +1,26 @@
 {
   "name": "honeybee-schema",
   "license": "MIT",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "version": "1.58.3-v8",
   "type": "module",
   "scripts": {
-    "build": "tsc && vite build"
+    "build": "tsc && vite build",
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "fix": "gts fix",
+    "prepare": "npm.cmd run compile",
+    "pretest": "npm.cmd run compile",
+    "posttest": "npm.cmd run lint"
   },
   "devDependencies": {
-    "@types/node": "^20.14.2",
-    "typescript": "^4.9.5",
-    "vite": "^4.1.0",
-    "vite-plugin-dts": "^3.9.1"
+    "@types/node": "20.12.7",
+    "gts": "^5.3.1",
+    "typescript": "^5.4.3",
+    "vite": "^5.4.1",
+    "vite-tsconfig-paths": "^5.0.1"
   },
   "dependencies": {
     "class-validator": "^0.14.1"
-  },
-  "version": "1.58.3-v7"
+  }
 }
