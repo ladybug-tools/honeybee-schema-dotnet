@@ -8,10 +8,10 @@ using System.Linq;
 
 namespace TemplateModels.TypeScript;
 
-public class PropertyTemplateModel: PropertyTemplateModelBase
+public class PropertyTemplateModel : PropertyTemplateModelBase
 {
-  
-    
+
+
     public string ConvertToJavaScriptCode { get; set; } // for TS: property value to JS object
     public string ConvertToClassCode { get; set; } // for TS: JSON object to class property
 
@@ -19,16 +19,16 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
 
     public List<string> TsImports { get; set; } = new List<string>();
     public bool HasTsImports => TsImports.Any();
- 
-   
+
+
 
     public bool HasValidationDecorators => ValidationDecorators.Any();
     public List<string> ValidationDecorators { get; set; }
 
-    public PropertyTemplateModel(string name, JsonSchemaProperty json):base(name, json)
+    public PropertyTemplateModel(string name, JsonSchemaProperty json) : base(name, json)
     {
-        
-      
+
+
         DefaultCodeFormat = ConvertTsDefaultValue(json);
 
 
@@ -38,14 +38,13 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
 
         ConvertToJavaScriptCode = $"data[\"{PropertyName}\"] = this.{PropertyName};";
         ConvertToClassCode = $"this.{PropertyName} = obj.{PropertyName};";
-
         //validation decorators
         ValidationDecorators = GetValidationDecorators(json);
 
 
     }
 
-    
+
 
     public static string GetTypeScriptType(JsonSchema json, Action<string> collectImportType)
     {
@@ -113,7 +112,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
 
     public static string ConvertToTypeScriptType(string type)
     {
-        return TsTypeMapper.TryGetValue(type, out var result)? result: type;
+        return TsTypeMapper.TryGetValue(type, out var result) ? result : type;
     }
 
     public static Dictionary<string, string> TsTypeMapper = new Dictionary<string, string>
@@ -136,8 +135,8 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
             result.AddRange(decos);
             return result;
         }
-           
-            
+
+
         var propType = json.Type.ToString();
         if (json.HasReference)
         {
@@ -149,7 +148,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
             }
             else
             {
-                result.Add(isArrayItem ? $"@IsInstance({refPropType}, {{ each: true }})": $"@IsInstance({refPropType})");
+                result.Add(isArrayItem ? $"@IsInstance({refPropType}, {{ each: true }})" : $"@IsInstance({refPropType})");
                 result.Add($"@Type(() => {refPropType})");
                 result.Add(isArrayItem ? "@ValidateNested({ each: true })" : "@ValidateNested()");
             }
@@ -204,7 +203,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
 
 
         return result;
-      
+
     }
 
     public void AddTsImportTypes(string type)
@@ -228,7 +227,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
                 var enumType = prop.ActualSchema.Title;
                 defaultCodeFormat = $"{enumType}.{defaultValue}";
             }
-                
+
         }
         else if (defaultValue is Newtonsoft.Json.Linq.JToken jToken)
         {
@@ -254,7 +253,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
             if (jObj.TryGetValue("type", out var vType))
             {
                 var isFullJsonObj = jObj.Values().Count() > 1;
-                defaultCodeFormat = isFullJsonObj? $"{vType}.fromJS({jObj})": $"new {vType}()";
+                defaultCodeFormat = isFullJsonObj ? $"{vType}.fromJS({jObj})" : $"new {vType}()";
             }
             else
             {

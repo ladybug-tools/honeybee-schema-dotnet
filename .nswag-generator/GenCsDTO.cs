@@ -1,68 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json;
 using NJsonSchema;
 using NJsonSchema.Generation;
-using NJsonSchema.Visitors;
 using NSwag;
-using NSwag.CodeGeneration;
 using Newtonsoft.Json.Linq;
-// using Fluid;
-// using TemplateModels;
 using System.IO;
-using NJsonSchema.CodeGeneration.TypeScript;
-using Fluid;
 using TemplateModels.CSharp;
 using TemplateModels;
 
 namespace SchemaGenerator;
-public partial class Generator
-{
-    public static string TargetLanguage { get; set; } = "CSharp";
-    private static TemplateOptions _templateOptions;
-    private static TemplateOptions TemplateOptions
-    {
-        get
-        {
-            if (_templateOptions == null)
-            {
-                var options = new TemplateOptions();
-                var tps = typeof(Generator).Assembly
-                    .GetTypes()
-                    .Where(_ => _.IsPublic)
-                    .Where(t => t.Namespace.StartsWith("TemplateModels.Base") || t.Namespace.StartsWith($"TemplateModels.{TargetLanguage}"))
-                    .ToList();
-
-                foreach (var item in tps)
-                {
-                    options.MemberAccessStrategy.Register(item);
-                }
-
-                options.Greedy = false;
-                _templateOptions = options;
-            }
-
-            return _templateOptions;
-        }
-    }
-
-    public static string Gen(string templateSource, object model)
-    {
-        var parser = new FluidParser();
-        if (parser.TryParse(templateSource, out var template, out var error))
-        {
-            var context = new TemplateContext(model, TemplateOptions);
-            var code = template.Render(context);
-            return code;
-        }
-        else
-        {
-            return $"Error: {error}";
-        }
-    }
-}
 
 public class GenCsDTO : Generator
 {
@@ -71,7 +18,7 @@ public class GenCsDTO : Generator
     static string rootDir => Generator.rootDir;
     internal static void Execute()
     {
-        TargetLanguage = "CSharp";
+        TemplateModels.Helper.Language = TemplateModels.TargetLanguage.CSharp;
         Console.WriteLine($"Current working dir: {workingDir}");
         //Console.WriteLine(string.Join(",", args));
 
@@ -81,21 +28,13 @@ public class GenCsDTO : Generator
 
 
         //var schemaFile = System.IO.Path.Combine(outputDir, "schema.json");
-        var jsons = new[]
-        {
-            "model_inheritance.json",
-            "simulation-parameter_inheritance.json",
-            "validation-report.json",
-            "comparison-report_inheritance.json",
-            "sync-instructions_inheritance.json",
-            "project-information_inheritance.json"
-
-        };
+        var jsons = _config.files.Where(_ => !_.Contains("_mapper.json"));
 
         var docDir = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(rootDir), ".openapi-docs");
 
         JObject docJson = null;
         JObject jSchemas = null;
+        Mapper docMapper = null;
         // combine all schema components
         foreach (var j in jsons)
         {
@@ -103,14 +42,17 @@ public class GenCsDTO : Generator
             var json = System.IO.File.ReadAllText(schemaFile, System.Text.Encoding.UTF8);
             Console.WriteLine($"Reading schema from {schemaFile}");
             var jDocObj = JObject.Parse(json);
-
-
             var schemas = jDocObj["components"]["schemas"] as JObject;
-            //var arrays = JArray.Parse(schemas.Values);
+
+            // read mapper
+            var mapperFile = System.IO.Path.Combine(docDir, j.Replace("_inheritance", "_mapper"));
+            var mapper = ReadMapper(mapperFile);
+
             if (docJson == null)
             {
                 docJson = jDocObj;
                 jSchemas = schemas;
+                docMapper = mapper;
                 continue;
             }
 
@@ -118,6 +60,7 @@ public class GenCsDTO : Generator
             {
                 MergeArrayHandling = MergeArrayHandling.Union
             });
+            docMapper.Merge(mapper);
 
         }
 
@@ -130,22 +73,31 @@ public class GenCsDTO : Generator
 
 
         // template
-        var template = System.IO.Path.Combine(templateDir, TargetLanguage);
+        var template = System.IO.Path.Combine(templateDir, TemplateModels.Helper.Language.ToString());
         var sc = doc.Components.Schemas;
         var classModels = new List<ClassTemplateModel>();
         var srcDir = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(rootDir), "src", _sdkName, "Model");
-        //if (System.IO.Directory.Exists(srcDir))
-        //    System.IO.Directory.Delete(srcDir, true);
-        //System.IO.Directory.CreateDirectory(srcDir);
 
         ClassTemplateModel.SDKName = _sdkName;
         EnumTemplateModel.SDKName = _sdkName;
+        ClassTemplateModel.CsImports = docMapper.All
+            .Select(_=>_.Module.Split(".").First()) // get the package name: honeybee_schema.radiance.modifierset
+            .Distinct() //honeybee_schema, dragonfly_schema
+            .Where(_=>_!= moduleName) //dragonfly_schema
+            .Select(_=> Helper.ToPascalCase(_)).ToList(); //DragonflySchema
 
         foreach (var item in sc)
         {
             var key = item.Key;
             var value = item.Value;
             var file = string.Empty;
+            var module = docMapper.TryGetModule(key);
+
+            // skip 
+            if (!string.IsNullOrEmpty(module) && !module.StartsWith(moduleName)) 
+                continue;
+
+
             if (value.IsEnumeration)
             {
                 var m = new EnumTemplateModel(value);
@@ -410,9 +362,6 @@ public class GenCsDTO : Generator
     }
 
 
-
-
-    //private static 
 }
 
 
