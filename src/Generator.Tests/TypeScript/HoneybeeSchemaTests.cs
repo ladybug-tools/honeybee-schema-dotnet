@@ -88,5 +88,36 @@ namespace Generator.Tests.TypeScript
             var pm = new ClassTemplateModel(doc, json);
             Assert.That(pm.IsAbstract, Is.False);
         }
+
+        [Test]
+        public void TestPropertyDecoratorsScheduleDay()
+        {
+            var json = doc.Components.Schemas["ScheduleDay"];
+            var classModel = new ClassTemplateModel(doc, json);
+            Assert.That(classModel, Is.Not.Null);
+
+            var weathers = classModel.Properties.FirstOrDefault(_ => _.PropertyName == "times");
+            Assert.That(weathers, Is.Not.Null);
+            CollectionAssert.Contains(weathers.ValidationDecorators, "@IsArray()");
+            CollectionAssert.Contains(weathers.ValidationDecorators, "@IsArray({ each: true })");
+            CollectionAssert.Contains(weathers.ValidationDecorators, "@ValidateNested({each: true })");
+            CollectionAssert.Contains(weathers.ValidationDecorators, "@Type(() => Array)");
+            CollectionAssert.Contains(weathers.ValidationDecorators, "@IsInt({ each: true })");
+
+        }
+
+        [Test]
+        public void TestPropertyDecoratorsView()
+        {
+            var json = doc.Components.Schemas["View"];
+            var classModel = new ClassTemplateModel(doc, json);
+            Assert.That(classModel, Is.Not.Null);
+
+            var weathers = classModel.Properties.FirstOrDefault(_ => _.PropertyName == "position");
+            Assert.That(weathers, Is.Not.Null);
+            CollectionAssert.Contains(weathers.ValidationDecorators, "@IsArray()");
+            CollectionAssert.Contains(weathers.ValidationDecorators, "@IsNumber({},{ each: true })");
+
+        }
     }
 }

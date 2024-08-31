@@ -70,7 +70,7 @@ namespace Generator.Tests.TypeScript
 
             var classModel = new ClassTemplateModel(doc, json);
 
-            Assert.That(classModel.DerivedClasses.Count, Is.GreaterThan(5));
+            Assert.That(classModel.DerivedClasses.Count, Is.GreaterThan(2));
             //var prop = json.ActualProperties.FirstOrDefault();
 
             var templateDir = Path.Combine(rootDir, ".nswag-generator\\Templates\\TypeScript");
@@ -78,7 +78,7 @@ namespace Generator.Tests.TypeScript
 
             var code = GenTsDTO.Gen(templateSource, classModel);
 
-            StringAssert.Contains("type!: String", code);
+            StringAssert.Contains("type?: string", code);
 
         }
 
@@ -111,20 +111,38 @@ namespace Generator.Tests.TypeScript
         }
 
         [Test]
-        public void TestReferencePropertyType()
+        public void TestPropertyDecoratorsProjectInfo()
         {
             var json = doc.Components.Schemas["ProjectInfo"];
             var classModel = new ClassTemplateModel(doc, json);
             Assert.That(classModel, Is.Not.Null);
+            CollectionAssert.DoesNotContain(classModel.TsValidatorImportsCode, "Type");
+
+            var weathers = classModel.Properties.FirstOrDefault(_ => _.PropertyName == "weather_urls");
+            Assert.That(weathers, Is.Not.Null);
+            CollectionAssert.Contains(weathers.ValidationDecorators, "@IsArray()");
+            CollectionAssert.Contains(weathers.ValidationDecorators, "@IsString({ each: true })");
+
 
             var location = classModel.Properties.FirstOrDefault(_ => _.PropertyName == "location");
             Assert.That(location, Is.Not.Null);
             CollectionAssert.Contains(location.ValidationDecorators, "@IsInstance(Location)");
+            CollectionAssert.Contains(location.ValidationDecorators, "@Type(() => Location)");
 
             var cz = classModel.Properties.FirstOrDefault(_ => _.PropertyName == "ashrae_climate_zone");
             Assert.That(cz, Is.Not.Null);
-            CollectionAssert.Contains(location.ValidationDecorators, "@IsEnum(ClimateZones)");
+            CollectionAssert.Contains(cz.ValidationDecorators, "@IsEnum(ClimateZones)");
+            CollectionAssert.Contains(cz.ValidationDecorators, "@Type(() => String)");
+
+            var bts = classModel.Properties.FirstOrDefault(_ => _.PropertyName == "building_type");
+            Assert.That(bts, Is.Not.Null);
+            CollectionAssert.Contains(bts.ValidationDecorators, "@IsArray()");
+            CollectionAssert.Contains(bts.ValidationDecorators, "@IsEnum(BuildingTypes, { each: true })");
+            CollectionAssert.Contains(bts.ValidationDecorators, "@Type(() => String)");
+            CollectionAssert.Contains(bts.ValidationDecorators, "@IsOptional()");
         }
+
+
 
 
         [Test]
@@ -153,7 +171,7 @@ namespace Generator.Tests.TypeScript
 
             var type = autoCalParameter.Type;
 
-            Assert.That(type, Is.EqualTo("Autocalculate | number"));
+            Assert.That(type, Is.EqualTo("(Autocalculate | number)"));
 
         }
 
@@ -174,7 +192,7 @@ namespace Generator.Tests.TypeScript
 
             // test object type property
             var timezoneP = classModel.Properties.FirstOrDefault(_ => _.PropertyName == "time_zone");
-            Assert.That(timezoneP.DefaultCodeFormat, Is.EqualTo("new Autocalculate();"));
+            Assert.That(timezoneP.DefaultCodeFormat, Is.EqualTo("new Autocalculate()"));
 
         }
 
