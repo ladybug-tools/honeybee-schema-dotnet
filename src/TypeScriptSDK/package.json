@@ -11,16 +11,22 @@
     "fix": "gts fix",
     "prepare": "tsc",
     "pretest": "tsc",
-    "posttest": "npm.cmd run lint"
+    "posttest": "npm.cmd run lint",
+    "test": "jest"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.12",
     "@types/node": "20.12.7",
+    "class-transformer": "^0.5.1",
     "gts": "^5.3.1",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
     "typescript": "^5.4.3",
     "vite": "^5.4.1",
     "vite-tsconfig-paths": "^5.0.1"
   },
   "dependencies": {
-    "class-validator": "^0.14.1"
+    "class-validator": "^0.14.1",
+    "reflect-metadata": "^0.2.2"
   }
 }
