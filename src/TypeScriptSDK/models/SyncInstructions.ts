@@ -1,4 +1,5 @@
-﻿import { IsString, IsOptional, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AddedInstruction } from "./AddedInstruction";
 import { ChangedInstruction } from "./ChangedInstruction";
@@ -10,18 +11,24 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
     type?: string;
 	
     @IsArray()
+    @IsInstance(ChangedInstruction, { each: true })
+    @Type(() => ChangedInstruction)
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of ChangedInstruction definitions for each top-level object with properties to transfer from the new/updated model to the base/existing model. */
     changed_objects?: ChangedInstruction [];
 	
     @IsArray()
+    @IsInstance(DeletedInstruction, { each: true })
+    @Type(() => DeletedInstruction)
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of DeletedInstruction definitions for each top-level object to be deleted from the base/existing model. */
     deleted_objects?: DeletedInstruction [];
 	
     @IsArray()
+    @IsInstance(AddedInstruction, { each: true })
+    @Type(() => AddedInstruction)
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of AddedInstruction definitions for each top-level object to be added to the base/existing model from the new/updated model. */
@@ -37,10 +44,11 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "SyncInstructions";
-            this.changed_objects = _data["changed_objects"];
-            this.deleted_objects = _data["deleted_objects"];
-            this.added_objects = _data["added_objects"];
+            const obj = plainToClass(SyncInstructions, _data);
+            this.type = obj.type;
+            this.changed_objects = obj.changed_objects;
+            this.deleted_objects = obj.deleted_objects;
+            this.added_objects = obj.added_objects;
         }
     }
 
@@ -71,7 +79,7 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

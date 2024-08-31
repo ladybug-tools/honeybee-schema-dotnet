@@ -1,4 +1,5 @@
-﻿import { IsString, IsOptional, IsNumber, IsEnum, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsNumber, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { GasType } from "./GasType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -14,7 +15,7 @@ export class EnergyWindowMaterialGas extends IDdEnergyBaseModel {
     thickness?: number;
 	
     @IsEnum(GasType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     gas_type?: GasType;
 	
@@ -30,9 +31,10 @@ export class EnergyWindowMaterialGas extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "EnergyWindowMaterialGas";
-            this.thickness = _data["thickness"] !== undefined ? _data["thickness"] : 0.0125;
-            this.gas_type = _data["gas_type"] !== undefined ? _data["gas_type"] : GasType.Air;
+            const obj = plainToClass(EnergyWindowMaterialGas, _data);
+            this.type = obj.type;
+            this.thickness = obj.thickness;
+            this.gas_type = obj.gas_type;
         }
     }
 
@@ -62,7 +64,7 @@ export class EnergyWindowMaterialGas extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

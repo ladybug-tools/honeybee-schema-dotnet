@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 
 export abstract class _OpenAPIGenBaseModel {
     @IsString()
@@ -13,9 +14,6 @@ export abstract class _OpenAPIGenBaseModel {
 
 
     init(_data?: any) {
-        if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "InvalidType";
-        }
     }
 
 

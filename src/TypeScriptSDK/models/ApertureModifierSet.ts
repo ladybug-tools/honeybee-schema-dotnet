@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
@@ -42,11 +43,12 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "ApertureModifierSet";
-            this.window_modifier = _data["window_modifier"];
-            this.interior_modifier = _data["interior_modifier"];
-            this.skylight_modifier = _data["skylight_modifier"];
-            this.operable_modifier = _data["operable_modifier"];
+            const obj = plainToClass(ApertureModifierSet, _data);
+            this.type = obj.type;
+            this.window_modifier = obj.window_modifier;
+            this.interior_modifier = obj.interior_modifier;
+            this.skylight_modifier = obj.skylight_modifier;
+            this.operable_modifier = obj.operable_modifier;
         }
     }
 
@@ -78,7 +80,7 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

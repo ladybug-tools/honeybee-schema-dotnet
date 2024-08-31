@@ -1,10 +1,12 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { Face3D } from "./Face3D";
 import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 
 /** A single planar geometry that can be assigned to Radiance states. */
 export class StateGeometryAbridged extends IDdRadianceBaseModel {
     @IsInstance(Face3D)
+    @Type(() => Face3D)
     @ValidateNested()
     @IsDefined()
     /** A ladybug_geometry Face3D. */
@@ -34,10 +36,11 @@ export class StateGeometryAbridged extends IDdRadianceBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.geometry = _data["geometry"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "StateGeometryAbridged";
-            this.modifier = _data["modifier"];
-            this.modifier_direct = _data["modifier_direct"];
+            const obj = plainToClass(StateGeometryAbridged, _data);
+            this.geometry = obj.geometry;
+            this.type = obj.type;
+            this.modifier = obj.modifier;
+            this.modifier_direct = obj.modifier_direct;
         }
     }
 
@@ -68,7 +71,7 @@ export class StateGeometryAbridged extends IDdRadianceBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

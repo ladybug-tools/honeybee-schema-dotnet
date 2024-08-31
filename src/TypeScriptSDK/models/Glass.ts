@@ -1,4 +1,5 @@
-﻿import { IsOptional, IsArray, ValidateNested, IsNumber, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsOptional, IsArray, IsNumber, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { BSDF } from "./BSDF";
 import { Glow } from "./Glow";
 import { Light } from "./Light";
@@ -16,7 +17,6 @@ export class Glass extends ModifierBase {
     modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsArray()
-    @ValidateNested({ each: true })
     @IsOptional()
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
     dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) [];
@@ -60,13 +60,14 @@ export class Glass extends ModifierBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.modifier = _data["modifier"] !== undefined ? _data["modifier"] : new Void();
-            this.dependencies = _data["dependencies"];
-            this.r_transmissivity = _data["r_transmissivity"] !== undefined ? _data["r_transmissivity"] : 0;
-            this.g_transmissivity = _data["g_transmissivity"] !== undefined ? _data["g_transmissivity"] : 0;
-            this.b_transmissivity = _data["b_transmissivity"] !== undefined ? _data["b_transmissivity"] : 0;
-            this.refraction_index = _data["refraction_index"] !== undefined ? _data["refraction_index"] : 1.52;
-            this.type = _data["type"] !== undefined ? _data["type"] : "Glass";
+            const obj = plainToClass(Glass, _data);
+            this.modifier = obj.modifier;
+            this.dependencies = obj.dependencies;
+            this.r_transmissivity = obj.r_transmissivity;
+            this.g_transmissivity = obj.g_transmissivity;
+            this.b_transmissivity = obj.b_transmissivity;
+            this.refraction_index = obj.refraction_index;
+            this.type = obj.type;
         }
     }
 
@@ -100,7 +101,7 @@ export class Glass extends ModifierBase {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

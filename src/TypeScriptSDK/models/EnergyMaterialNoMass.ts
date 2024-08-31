@@ -1,4 +1,5 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, IsEnum, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, IsString, IsOptional, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Roughness } from "./Roughness";
 
@@ -14,7 +15,7 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsEnum(Roughness)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     roughness?: Roughness;
 	
@@ -47,12 +48,13 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.r_value = _data["r_value"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "EnergyMaterialNoMass";
-            this.roughness = _data["roughness"] !== undefined ? _data["roughness"] : Roughness.MediumRough;
-            this.thermal_absorptance = _data["thermal_absorptance"] !== undefined ? _data["thermal_absorptance"] : 0.9;
-            this.solar_absorptance = _data["solar_absorptance"] !== undefined ? _data["solar_absorptance"] : 0.7;
-            this.visible_absorptance = _data["visible_absorptance"] !== undefined ? _data["visible_absorptance"] : 0.7;
+            const obj = plainToClass(EnergyMaterialNoMass, _data);
+            this.r_value = obj.r_value;
+            this.type = obj.type;
+            this.roughness = obj.roughness;
+            this.thermal_absorptance = obj.thermal_absorptance;
+            this.solar_absorptance = obj.solar_absorptance;
+            this.visible_absorptance = obj.visible_absorptance;
         }
     }
 
@@ -85,7 +87,7 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

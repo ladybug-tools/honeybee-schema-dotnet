@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { ScheduleRuleset } from "./ScheduleRuleset";
@@ -47,12 +48,13 @@ export class Ventilation extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "Ventilation";
-            this.flow_per_person = _data["flow_per_person"] !== undefined ? _data["flow_per_person"] : 0;
-            this.flow_per_area = _data["flow_per_area"] !== undefined ? _data["flow_per_area"] : 0;
-            this.air_changes_per_hour = _data["air_changes_per_hour"] !== undefined ? _data["air_changes_per_hour"] : 0;
-            this.flow_per_zone = _data["flow_per_zone"] !== undefined ? _data["flow_per_zone"] : 0;
-            this.schedule = _data["schedule"];
+            const obj = plainToClass(Ventilation, _data);
+            this.type = obj.type;
+            this.flow_per_person = obj.flow_per_person;
+            this.flow_per_area = obj.flow_per_area;
+            this.air_changes_per_hour = obj.air_changes_per_hour;
+            this.flow_per_zone = obj.flow_per_zone;
+            this.schedule = obj.schedule;
         }
     }
 
@@ -85,7 +87,7 @@ export class Ventilation extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

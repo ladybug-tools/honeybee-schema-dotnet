@@ -1,10 +1,11 @@
-﻿import { IsEnum, ValidateNested, IsDefined, IsString, IsArray, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsDefined, IsString, IsArray, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { GeometryObjectTypes } from "./GeometryObjectTypes";
 
 export class DeletedObject extends _OpenAPIGenBaseModel {
     @IsEnum(GeometryObjectTypes)
-    @ValidateNested()
+    @Type(() => String)
     @IsDefined()
     /** Text for the type of object that has been changed. */
     element_type!: GeometryObjectTypes;
@@ -15,7 +16,6 @@ export class DeletedObject extends _OpenAPIGenBaseModel {
     element_id!: string;
 	
     @IsArray()
-    @ValidateNested({ each: true })
     @IsDefined()
     /** A list of DisplayFace3D dictionaries for the deleted geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been deleted. */
     geometry!: Object [];
@@ -39,11 +39,12 @@ export class DeletedObject extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.element_type = _data["element_type"];
-            this.element_id = _data["element_id"];
-            this.geometry = _data["geometry"];
-            this.element_name = _data["element_name"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "DeletedObject";
+            const obj = plainToClass(DeletedObject, _data);
+            this.element_type = obj.element_type;
+            this.element_id = obj.element_id;
+            this.geometry = obj.geometry;
+            this.element_name = obj.element_name;
+            this.type = obj.type;
         }
     }
 
@@ -75,7 +76,7 @@ export class DeletedObject extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

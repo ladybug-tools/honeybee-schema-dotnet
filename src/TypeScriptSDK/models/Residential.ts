@@ -1,4 +1,5 @@
-﻿import { IsEnum, ValidateNested, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ResidentialEquipmentType } from "./ResidentialEquipmentType";
 import { Vintages } from "./Vintages";
@@ -6,7 +7,7 @@ import { Vintages } from "./Vintages";
 /** Residential Air Conditioning, Heat Pump or Furnace system.\n\nResidential HVAC systems are intended primarily for single-family homes and\ninclude a wide variety of options. In all cases, each room/zone will receive\nits own air loop WITHOUT an outdoor air inlet (air is simply being recirculated\nthrough the loop). Residential air conditioning (AC) systems are modeled\nusing a unitary system with a single-speed direct expansion (DX) cooling\ncoil in the loop. Residential heat pump (HP) systems use a single-speed DX\nheating coil in the unitary system and the residential furnace option uses\na gas coil in the unitary system. In all cases, the properties of these coils\nare set to reflect a typical residential system. */
 export class Residential extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
     vintage?: Vintages;
@@ -16,7 +17,7 @@ export class Residential extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsEnum(ResidentialEquipmentType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text for the specific type of system equipment from the ResidentialEquipmentType enumeration. */
     equipment_type?: ResidentialEquipmentType;
@@ -33,9 +34,10 @@ export class Residential extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.vintage = _data["vintage"] !== undefined ? _data["vintage"] : Vintages.ASHRAE_2019;
-            this.type = _data["type"] !== undefined ? _data["type"] : "Residential";
-            this.equipment_type = _data["equipment_type"] !== undefined ? _data["equipment_type"] : ResidentialEquipmentType.ResidentialAC_ElectricBaseboard;
+            const obj = plainToClass(Residential, _data);
+            this.vintage = obj.vintage;
+            this.type = obj.type;
+            this.equipment_type = obj.equipment_type;
         }
     }
 
@@ -65,7 +67,7 @@ export class Residential extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

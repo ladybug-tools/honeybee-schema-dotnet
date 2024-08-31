@@ -1,4 +1,5 @@
-﻿import { IsString, IsOptional, IsEnum, ValidateNested, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { MoistureDiffusionModel } from "./MoistureDiffusionModel";
 import { Roughness } from "./Roughness";
@@ -10,7 +11,7 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsEnum(Roughness)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     roughness?: Roughness;
 	
@@ -90,7 +91,7 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     init_vol_moist_cont?: number;
 	
     @IsEnum(MoistureDiffusionModel)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     moist_diff_model?: MoistureDiffusionModel;
 	
@@ -121,24 +122,25 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "EnergyMaterialVegetation";
-            this.roughness = _data["roughness"] !== undefined ? _data["roughness"] : Roughness.MediumRough;
-            this.thickness = _data["thickness"] !== undefined ? _data["thickness"] : 0.1;
-            this.conductivity = _data["conductivity"] !== undefined ? _data["conductivity"] : 0.35;
-            this.density = _data["density"] !== undefined ? _data["density"] : 1100;
-            this.specific_heat = _data["specific_heat"] !== undefined ? _data["specific_heat"] : 1200;
-            this.soil_thermal_absorptance = _data["soil_thermal_absorptance"] !== undefined ? _data["soil_thermal_absorptance"] : 0.9;
-            this.soil_solar_absorptance = _data["soil_solar_absorptance"] !== undefined ? _data["soil_solar_absorptance"] : 0.7;
-            this.soil_visible_absorptance = _data["soil_visible_absorptance"] !== undefined ? _data["soil_visible_absorptance"] : 0.7;
-            this.plant_height = _data["plant_height"] !== undefined ? _data["plant_height"] : 0.2;
-            this.leaf_area_index = _data["leaf_area_index"] !== undefined ? _data["leaf_area_index"] : 1;
-            this.leaf_reflectivity = _data["leaf_reflectivity"] !== undefined ? _data["leaf_reflectivity"] : 0.22;
-            this.leaf_emissivity = _data["leaf_emissivity"] !== undefined ? _data["leaf_emissivity"] : 0.95;
-            this.min_stomatal_resist = _data["min_stomatal_resist"] !== undefined ? _data["min_stomatal_resist"] : 180;
-            this.sat_vol_moist_cont = _data["sat_vol_moist_cont"] !== undefined ? _data["sat_vol_moist_cont"] : 0.3;
-            this.residual_vol_moist_cont = _data["residual_vol_moist_cont"] !== undefined ? _data["residual_vol_moist_cont"] : 0.01;
-            this.init_vol_moist_cont = _data["init_vol_moist_cont"] !== undefined ? _data["init_vol_moist_cont"] : 0.01;
-            this.moist_diff_model = _data["moist_diff_model"] !== undefined ? _data["moist_diff_model"] : MoistureDiffusionModel.Simple;
+            const obj = plainToClass(EnergyMaterialVegetation, _data);
+            this.type = obj.type;
+            this.roughness = obj.roughness;
+            this.thickness = obj.thickness;
+            this.conductivity = obj.conductivity;
+            this.density = obj.density;
+            this.specific_heat = obj.specific_heat;
+            this.soil_thermal_absorptance = obj.soil_thermal_absorptance;
+            this.soil_solar_absorptance = obj.soil_solar_absorptance;
+            this.soil_visible_absorptance = obj.soil_visible_absorptance;
+            this.plant_height = obj.plant_height;
+            this.leaf_area_index = obj.leaf_area_index;
+            this.leaf_reflectivity = obj.leaf_reflectivity;
+            this.leaf_emissivity = obj.leaf_emissivity;
+            this.min_stomatal_resist = obj.min_stomatal_resist;
+            this.sat_vol_moist_cont = obj.sat_vol_moist_cont;
+            this.residual_vol_moist_cont = obj.residual_vol_moist_cont;
+            this.init_vol_moist_cont = obj.init_vol_moist_cont;
+            this.moist_diff_model = obj.moist_diff_model;
         }
     }
 
@@ -183,7 +185,7 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

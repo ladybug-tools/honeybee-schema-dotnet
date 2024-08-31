@@ -1,4 +1,5 @@
-﻿import { IsString, IsOptional, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { StateGeometryAbridged } from "./StateGeometryAbridged";
 
@@ -19,6 +20,8 @@ export class RadianceShadeStateAbridged extends _OpenAPIGenBaseModel {
     modifier_direct?: string;
 	
     @IsArray()
+    @IsInstance(StateGeometryAbridged, { each: true })
+    @Type(() => StateGeometryAbridged)
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of StateGeometryAbridged objects (default: None). */
@@ -34,10 +37,11 @@ export class RadianceShadeStateAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "RadianceShadeStateAbridged";
-            this.modifier = _data["modifier"];
-            this.modifier_direct = _data["modifier_direct"];
-            this.shades = _data["shades"];
+            const obj = plainToClass(RadianceShadeStateAbridged, _data);
+            this.type = obj.type;
+            this.modifier = obj.modifier;
+            this.modifier_direct = obj.modifier_direct;
+            this.shades = obj.shades;
         }
     }
 
@@ -68,7 +72,7 @@ export class RadianceShadeStateAbridged extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

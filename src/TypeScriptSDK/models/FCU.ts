@@ -1,4 +1,5 @@
-﻿import { IsEnum, ValidateNested, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { FCUEquipmentType } from "./FCUEquipmentType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
@@ -6,7 +7,7 @@ import { Vintages } from "./Vintages";
 /** Fan Coil Unit (FCU) heating/cooling system (with no ventilation).\n\nEach room/zone receives its own Fan Coil Unit (FCU), which meets the heating\nand cooling loads of the space. The cooling coil in the FCU is always chilled\nwater cooling coil, which is connected to a chilled water loop operating\nat 6.7C (44F). The heating coil is a hot water coil except when when electric\nbaseboards or gas heaters are specified. Hot water temperature is 82C (180F) for\nboiler/district heating and 49C (120F) when ASHP is used. */
 export class FCU extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
     vintage?: Vintages;
@@ -16,7 +17,7 @@ export class FCU extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsEnum(FCUEquipmentType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text for the specific type of system equipment from the FCUEquipmentType enumeration. */
     equipment_type?: FCUEquipmentType;
@@ -33,9 +34,10 @@ export class FCU extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.vintage = _data["vintage"] !== undefined ? _data["vintage"] : Vintages.ASHRAE_2019;
-            this.type = _data["type"] !== undefined ? _data["type"] : "FCU";
-            this.equipment_type = _data["equipment_type"] !== undefined ? _data["equipment_type"] : FCUEquipmentType.FCU_Chiller_Boiler;
+            const obj = plainToClass(FCU, _data);
+            this.vintage = obj.vintage;
+            this.type = obj.type;
+            this.equipment_type = obj.equipment_type;
         }
     }
 
@@ -65,7 +67,7 @@ export class FCU extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

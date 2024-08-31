@@ -1,4 +1,5 @@
-﻿import { IsEnum, ValidateNested, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 import { WindowACEquipmentType } from "./WindowACEquipmentType";
@@ -6,7 +7,7 @@ import { WindowACEquipmentType } from "./WindowACEquipmentType";
 /** Window Air Conditioning cooling system (with optional heating).\n\nEach room/zone will receive its own Packaged Terminal Air Conditioner (PTAC)\nwith properties set to reflect a typical window air conditioning (AC) unit.\nNo ventilation air is supplied by the unit and the cooling coil within the\nunit is a single-speed direct expansion (DX) cooling coil. Heating loads\ncan be met with various options, including several types of baseboards,\na furnace, or gas unit heaters. */
 export class WindowAC extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
     vintage?: Vintages;
@@ -16,7 +17,7 @@ export class WindowAC extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsEnum(WindowACEquipmentType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text for the specific type of system equipment from the WindowACEquipmentType enumeration. */
     equipment_type?: WindowACEquipmentType;
@@ -33,9 +34,10 @@ export class WindowAC extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.vintage = _data["vintage"] !== undefined ? _data["vintage"] : Vintages.ASHRAE_2019;
-            this.type = _data["type"] !== undefined ? _data["type"] : "WindowAC";
-            this.equipment_type = _data["equipment_type"] !== undefined ? _data["equipment_type"] : WindowACEquipmentType.WindowAC_ElectricBaseboard;
+            const obj = plainToClass(WindowAC, _data);
+            this.vintage = obj.vintage;
+            this.type = obj.type;
+            this.equipment_type = obj.equipment_type;
         }
     }
 
@@ -65,7 +67,7 @@ export class WindowAC extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

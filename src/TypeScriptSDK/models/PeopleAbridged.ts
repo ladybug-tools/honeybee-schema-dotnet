@@ -1,4 +1,5 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -44,12 +45,13 @@ export class PeopleAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.people_per_area = _data["people_per_area"];
-            this.occupancy_schedule = _data["occupancy_schedule"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "PeopleAbridged";
-            this.activity_schedule = _data["activity_schedule"];
-            this.radiant_fraction = _data["radiant_fraction"] !== undefined ? _data["radiant_fraction"] : 0.3;
-            this.latent_fraction = _data["latent_fraction"] !== undefined ? _data["latent_fraction"] : new Autocalculate();
+            const obj = plainToClass(PeopleAbridged, _data);
+            this.people_per_area = obj.people_per_area;
+            this.occupancy_schedule = obj.occupancy_schedule;
+            this.type = obj.type;
+            this.activity_schedule = obj.activity_schedule;
+            this.radiant_fraction = obj.radiant_fraction;
+            this.latent_fraction = obj.latent_fraction;
         }
     }
 
@@ -82,7 +84,7 @@ export class PeopleAbridged extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

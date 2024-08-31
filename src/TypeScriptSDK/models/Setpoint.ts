@@ -1,4 +1,5 @@
 ﻿import { IsDefined, IsString, IsOptional, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { ScheduleRuleset } from "./ScheduleRuleset";
@@ -41,12 +42,13 @@ export class Setpoint extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.cooling_schedule = _data["cooling_schedule"];
-            this.heating_schedule = _data["heating_schedule"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "Setpoint";
-            this.humidifying_schedule = _data["humidifying_schedule"];
-            this.dehumidifying_schedule = _data["dehumidifying_schedule"];
-            this.setpoint_cutout_difference = _data["setpoint_cutout_difference"] !== undefined ? _data["setpoint_cutout_difference"] : 0;
+            const obj = plainToClass(Setpoint, _data);
+            this.cooling_schedule = obj.cooling_schedule;
+            this.heating_schedule = obj.heating_schedule;
+            this.type = obj.type;
+            this.humidifying_schedule = obj.humidifying_schedule;
+            this.dehumidifying_schedule = obj.dehumidifying_schedule;
+            this.setpoint_cutout_difference = obj.setpoint_cutout_difference;
         }
     }
 
@@ -79,7 +81,7 @@ export class Setpoint extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

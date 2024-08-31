@@ -1,4 +1,5 @@
-﻿import { IsString, IsOptional, IsEnum, ValidateNested, IsArray, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsEnum, IsArray, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ReportingFrequency } from "./ReportingFrequency";
 
@@ -9,18 +10,18 @@ export class SimulationOutput extends _OpenAPIGenBaseModel {
     type?: string;
 	
     @IsEnum(ReportingFrequency)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     reporting_frequency?: ReportingFrequency;
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsString({ each: true })
     @IsOptional()
     /** A list of EnergyPlus output names as strings, which are requested from the simulation. */
     outputs?: string [];
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsString({ each: true })
     @IsOptional()
     /** A list of EnergyPlus summary report names as strings. */
     summary_reports?: string [];
@@ -42,11 +43,12 @@ export class SimulationOutput extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "SimulationOutput";
-            this.reporting_frequency = _data["reporting_frequency"] !== undefined ? _data["reporting_frequency"] : ReportingFrequency.Hourly;
-            this.outputs = _data["outputs"];
-            this.summary_reports = _data["summary_reports"];
-            this.unmet_setpoint_tolerance = _data["unmet_setpoint_tolerance"] !== undefined ? _data["unmet_setpoint_tolerance"] : 1.11;
+            const obj = plainToClass(SimulationOutput, _data);
+            this.type = obj.type;
+            this.reporting_frequency = obj.reporting_frequency;
+            this.outputs = obj.outputs;
+            this.summary_reports = obj.summary_reports;
+            this.unmet_setpoint_tolerance = obj.unmet_setpoint_tolerance;
         }
     }
 
@@ -78,7 +80,7 @@ export class SimulationOutput extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

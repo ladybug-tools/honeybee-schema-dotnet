@@ -1,4 +1,5 @@
-﻿import { IsEnum, ValidateNested, IsOptional, IsNumber, IsBoolean, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsOptional, IsNumber, IsBoolean, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { AllAirEconomizerType } from "./AllAirEconomizerType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { PSZEquipmentType } from "./PSZEquipmentType";
@@ -7,13 +8,13 @@ import { Vintages } from "./Vintages";
 /** Packaged Single-Zone (PSZ) HVAC system (aka. System 3 or 4).\n\nEach room/zone receives its own air loop with its own single-speed direct expansion\n(DX) cooling coil, which will condition the supply air to a value in between\n12.8C (55F) and 50C (122F) depending on the heating/cooling needs of the room/zone.\nAs long as a Baseboard equipment_type is NOT selected, heating will be supplied\nby a heating coil in the air loop. Otherwise, heating is accomplished with\nbaseboards and the air loop only supplies cooling and ventilation air.\nFans are constant volume.\n\nPSZ systems are the traditional baseline system for commercial buildings\nwith less than 4 stories or less than 2,300 m2 (25,000 ft2) of floor area.\nThey are also the default for all retail with less than 3 stories and all public\nassembly spaces. */
 export class PSZ extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
     vintage?: Vintages;
 	
     @IsEnum(AllAirEconomizerType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration). */
     economizer_type?: AllAirEconomizerType;
@@ -38,7 +39,7 @@ export class PSZ extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsEnum(PSZEquipmentType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text for the specific type of system equipment from the PVAVEquipmentType enumeration. */
     equipment_type?: PSZEquipmentType;
@@ -59,13 +60,14 @@ export class PSZ extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.vintage = _data["vintage"] !== undefined ? _data["vintage"] : Vintages.ASHRAE_2019;
-            this.economizer_type = _data["economizer_type"] !== undefined ? _data["economizer_type"] : AllAirEconomizerType.NoEconomizer;
-            this.sensible_heat_recovery = _data["sensible_heat_recovery"] !== undefined ? _data["sensible_heat_recovery"] : 0;
-            this.latent_heat_recovery = _data["latent_heat_recovery"] !== undefined ? _data["latent_heat_recovery"] : 0;
-            this.demand_controlled_ventilation = _data["demand_controlled_ventilation"] !== undefined ? _data["demand_controlled_ventilation"] : false;
-            this.type = _data["type"] !== undefined ? _data["type"] : "PSZ";
-            this.equipment_type = _data["equipment_type"] !== undefined ? _data["equipment_type"] : PSZEquipmentType.PSZAC_ElectricBaseboard;
+            const obj = plainToClass(PSZ, _data);
+            this.vintage = obj.vintage;
+            this.economizer_type = obj.economizer_type;
+            this.sensible_heat_recovery = obj.sensible_heat_recovery;
+            this.latent_heat_recovery = obj.latent_heat_recovery;
+            this.demand_controlled_ventilation = obj.demand_controlled_ventilation;
+            this.type = obj.type;
+            this.equipment_type = obj.equipment_type;
         }
     }
 
@@ -99,7 +101,7 @@ export class PSZ extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

@@ -1,4 +1,5 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { EnergyMaterial } from "./EnergyMaterial";
 import { EnergyMaterialNoMass } from "./EnergyMaterialNoMass";
 import { EnergyMaterialVegetation } from "./EnergyMaterialVegetation";
@@ -7,7 +8,6 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 /** Construction for opaque objects (Face, Shade, Door). */
 export class OpaqueConstruction extends IDdEnergyBaseModel {
     @IsArray()
-    @ValidateNested({ each: true })
     @IsDefined()
     /** List of opaque material definitions. The order of the materials is from exterior to interior. */
     materials!: (EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation) [];
@@ -26,8 +26,9 @@ export class OpaqueConstruction extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.materials = _data["materials"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "OpaqueConstruction";
+            const obj = plainToClass(OpaqueConstruction, _data);
+            this.materials = obj.materials;
+            this.type = obj.type;
         }
     }
 
@@ -56,7 +57,7 @@ export class OpaqueConstruction extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

@@ -1,4 +1,5 @@
-﻿import { IsEnum, ValidateNested, IsOptional, IsNumber, IsBoolean, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsOptional, IsNumber, IsBoolean, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 import { VRFwithDOASEquipmentType } from "./VRFwithDOASEquipmentType";
@@ -6,7 +7,7 @@ import { VRFwithDOASEquipmentType } from "./VRFwithDOASEquipmentType";
 /** Variable Refrigerant Flow (VRF) with DOAS HVAC system.\n\nAll rooms/zones in the system are connected to a Dedicated Outdoor Air System\n(DOAS) that supplies a constant volume of ventilation air at the same temperature\nto all rooms/zones. The ventilation air temperature will vary from 21.1C (70F)\nto 15.5C (60F) depending on the outdoor air temperature (the DOAS supplies cooler air\nwhen outdoor conditions are warmer). The ventilation air temperature is maintained\nby a single speed direct expansion (DX) cooling coil along with a single-speed\ndirect expansion (DX) heat pump with a backup electrical resistance coil.\n\nEach room/zone also receives its own Variable Refrigerant Flow (VRF) terminal,\nwhich meets the heating and cooling loads of the space. All room/zone terminals\nare connected to the same outdoor unit, meaning that either all rooms must be\nin cooling or heating mode together. */
 export class VRFwithDOASAbridged extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
     vintage?: Vintages;
@@ -36,7 +37,7 @@ export class VRFwithDOASAbridged extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsEnum(VRFwithDOASEquipmentType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text for the specific type of system equipment from the VRFwithDOASEquipmentType enumeration. */
     equipment_type?: VRFwithDOASEquipmentType;
@@ -56,13 +57,14 @@ export class VRFwithDOASAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.vintage = _data["vintage"] !== undefined ? _data["vintage"] : Vintages.ASHRAE_2019;
-            this.sensible_heat_recovery = _data["sensible_heat_recovery"] !== undefined ? _data["sensible_heat_recovery"] : 0;
-            this.latent_heat_recovery = _data["latent_heat_recovery"] !== undefined ? _data["latent_heat_recovery"] : 0;
-            this.demand_controlled_ventilation = _data["demand_controlled_ventilation"] !== undefined ? _data["demand_controlled_ventilation"] : false;
-            this.doas_availability_schedule = _data["doas_availability_schedule"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "VRFwithDOASAbridged";
-            this.equipment_type = _data["equipment_type"] !== undefined ? _data["equipment_type"] : VRFwithDOASEquipmentType.DOAS_VRF;
+            const obj = plainToClass(VRFwithDOASAbridged, _data);
+            this.vintage = obj.vintage;
+            this.sensible_heat_recovery = obj.sensible_heat_recovery;
+            this.latent_heat_recovery = obj.latent_heat_recovery;
+            this.demand_controlled_ventilation = obj.demand_controlled_ventilation;
+            this.doas_availability_schedule = obj.doas_availability_schedule;
+            this.type = obj.type;
+            this.equipment_type = obj.equipment_type;
         }
     }
 
@@ -96,7 +98,7 @@ export class VRFwithDOASAbridged extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

@@ -1,4 +1,5 @@
-﻿import { IsString, IsOptional, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AddedObject } from "./AddedObject";
 import { ChangedObject } from "./ChangedObject";
@@ -10,18 +11,24 @@ export class ComparisonReport extends _OpenAPIGenBaseModel {
     type?: string;
 	
     @IsArray()
+    @IsInstance(ChangedObject, { each: true })
+    @Type(() => ChangedObject)
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of ChangedObject definitions for each top-level object that has changed in the model. To be a changed object, the object identifier must be the same in both models but some other property (either geometry or extension attributes) has experienced a meaningful change. */
     changed_objects?: ChangedObject [];
 	
     @IsArray()
+    @IsInstance(DeletedObject, { each: true })
+    @Type(() => DeletedObject)
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of DeletedObject definitions for each top-level object that has been deleted in the process of going from the base model to the new model. */
     deleted_objects?: DeletedObject [];
 	
     @IsArray()
+    @IsInstance(AddedObject, { each: true })
+    @Type(() => AddedObject)
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of AddedObject definitions for each top-level object that has been added in the process of going from the base model to the new model. */
@@ -37,10 +44,11 @@ export class ComparisonReport extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "ComparisonReport";
-            this.changed_objects = _data["changed_objects"];
-            this.deleted_objects = _data["deleted_objects"];
-            this.added_objects = _data["added_objects"];
+            const obj = plainToClass(ComparisonReport, _data);
+            this.type = obj.type;
+            this.changed_objects = obj.changed_objects;
+            this.deleted_objects = obj.deleted_objects;
+            this.added_objects = obj.added_objects;
         }
     }
 
@@ -71,7 +79,7 @@ export class ComparisonReport extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

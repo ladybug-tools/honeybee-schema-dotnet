@@ -1,10 +1,11 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsString, IsDefined, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Construction for window objects (Aperture, Door). */
 export class WindowConstructionAbridged extends IDdEnergyBaseModel {
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsString({ each: true })
     @IsDefined()
     /** List of strings for glazing or gas material identifiers. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer. */
     materials!: string [];
@@ -28,9 +29,10 @@ export class WindowConstructionAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.materials = _data["materials"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "WindowConstructionAbridged";
-            this.frame = _data["frame"];
+            const obj = plainToClass(WindowConstructionAbridged, _data);
+            this.materials = obj.materials;
+            this.type = obj.type;
+            this.frame = obj.frame;
         }
     }
 
@@ -60,7 +62,7 @@ export class WindowConstructionAbridged extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

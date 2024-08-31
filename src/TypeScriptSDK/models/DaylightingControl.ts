@@ -1,10 +1,11 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsNumber, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class DaylightingControl extends _OpenAPIGenBaseModel {
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({},{ each: true })
     @IsDefined()
     /** A point as 3 (x, y, z) values for the position of the daylight sensor within the parent Room. This point should lie within the Room volume in order for the results to be meaningful. */
     sensor_position!: number [];
@@ -53,13 +54,14 @@ export class DaylightingControl extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.sensor_position = _data["sensor_position"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "DaylightingControl";
-            this.illuminance_setpoint = _data["illuminance_setpoint"] !== undefined ? _data["illuminance_setpoint"] : 300;
-            this.control_fraction = _data["control_fraction"] !== undefined ? _data["control_fraction"] : 1;
-            this.min_power_input = _data["min_power_input"] !== undefined ? _data["min_power_input"] : 0.3;
-            this.min_light_output = _data["min_light_output"] !== undefined ? _data["min_light_output"] : 0.2;
-            this.off_at_minimum = _data["off_at_minimum"] !== undefined ? _data["off_at_minimum"] : false;
+            const obj = plainToClass(DaylightingControl, _data);
+            this.sensor_position = obj.sensor_position;
+            this.type = obj.type;
+            this.illuminance_setpoint = obj.illuminance_setpoint;
+            this.control_fraction = obj.control_fraction;
+            this.min_power_input = obj.min_power_input;
+            this.min_light_output = obj.min_light_output;
+            this.off_at_minimum = obj.off_at_minimum;
         }
     }
 
@@ -93,7 +95,7 @@ export class DaylightingControl extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

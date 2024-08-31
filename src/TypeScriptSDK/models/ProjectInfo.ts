@@ -1,4 +1,5 @@
-﻿import { IsString, IsOptional, IsNumber, IsArray, ValidateNested, IsInstance, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsNumber, IsArray, IsInstance, ValidateNested, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BuildingTypes } from "./BuildingTypes";
 import { ClimateZones } from "./ClimateZones";
@@ -17,31 +18,34 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
     north?: number;
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsString({ each: true })
     @IsOptional()
     /** A list of URLs to zip files that includes EPW, DDY and STAT files. You can find these URLs from the EPWMAP. The first URL will be used as the primary weather file. */
     weather_urls?: string [];
 	
     @IsInstance(Location)
+    @Type(() => Location)
     @ValidateNested()
     @IsOptional()
     /** Project location. This value is usually generated from the information in the weather files. */
     location?: Location;
 	
     @IsEnum(ClimateZones)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Project location climate zone. */
     ashrae_climate_zone?: ClimateZones;
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsEnum(BuildingTypes, { each: true })
+    @Type(() => String)
     @IsOptional()
     /** A list of building types for the project. The first building type is considered the primary type for the project. */
     building_type?: BuildingTypes [];
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsEnum(EfficiencyStandards, { each: true })
+    @Type(() => String)
     @IsOptional()
     /** A list of building vintages (e.g. ASHRAE_2019, ASHRAE_2016). */
     vintage?: EfficiencyStandards [];
@@ -57,13 +61,14 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "ProjectInfo";
-            this.north = _data["north"] !== undefined ? _data["north"] : 0;
-            this.weather_urls = _data["weather_urls"];
-            this.location = _data["location"];
-            this.ashrae_climate_zone = _data["ashrae_climate_zone"];
-            this.building_type = _data["building_type"];
-            this.vintage = _data["vintage"];
+            const obj = plainToClass(ProjectInfo, _data);
+            this.type = obj.type;
+            this.north = obj.north;
+            this.weather_urls = obj.weather_urls;
+            this.location = obj.location;
+            this.ashrae_climate_zone = obj.ashrae_climate_zone;
+            this.building_type = obj.building_type;
+            this.vintage = obj.vintage;
         }
     }
 
@@ -97,7 +102,7 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

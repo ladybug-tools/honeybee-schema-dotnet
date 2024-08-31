@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Used to specify which types of calculations to run. */
@@ -47,12 +48,13 @@ export class SimulationControl extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "SimulationControl";
-            this.do_zone_sizing = _data["do_zone_sizing"] !== undefined ? _data["do_zone_sizing"] : true;
-            this.do_system_sizing = _data["do_system_sizing"] !== undefined ? _data["do_system_sizing"] : true;
-            this.do_plant_sizing = _data["do_plant_sizing"] !== undefined ? _data["do_plant_sizing"] : true;
-            this.run_for_run_periods = _data["run_for_run_periods"] !== undefined ? _data["run_for_run_periods"] : true;
-            this.run_for_sizing_periods = _data["run_for_sizing_periods"] !== undefined ? _data["run_for_sizing_periods"] : false;
+            const obj = plainToClass(SimulationControl, _data);
+            this.type = obj.type;
+            this.do_zone_sizing = obj.do_zone_sizing;
+            this.do_system_sizing = obj.do_system_sizing;
+            this.do_plant_sizing = obj.do_plant_sizing;
+            this.run_for_run_periods = obj.run_for_run_periods;
+            this.run_for_sizing_periods = obj.run_for_sizing_periods;
         }
     }
 
@@ -85,7 +87,7 @@ export class SimulationControl extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

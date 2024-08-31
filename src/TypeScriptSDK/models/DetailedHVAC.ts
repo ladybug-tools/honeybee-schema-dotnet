@@ -1,4 +1,5 @@
 ﻿import { IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Detailed HVAC system object defined using IronBug or OpenStudio .NET bindings. */
@@ -21,8 +22,9 @@ export class DetailedHVAC extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.specification = _data["specification"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "DetailedHVAC";
+            const obj = plainToClass(DetailedHVAC, _data);
+            this.specification = obj.specification;
+            this.type = obj.type;
         }
     }
 
@@ -51,7 +53,7 @@ export class DetailedHVAC extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

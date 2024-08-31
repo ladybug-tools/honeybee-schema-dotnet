@@ -1,17 +1,24 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, ValidateNested, IsNumber, IsDefined, IsInt, IsString, IsOptional, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Color } from "./Color";
 
 /** A mesh in 3D space. */
 export class Mesh3D extends _OpenAPIGenBaseModel {
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsArray({ each: true })
+    @ValidateNested({each: true })
+    @Type(() => Array)
+    @IsNumber({},{ each: true })
     @IsDefined()
     /** A list of points representing the vertices of the mesh. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values. */
     vertices!: number [] [];
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsArray({ each: true })
+    @ValidateNested({each: true })
+    @Type(() => Array)
+    @IsInt({ each: true })
     @IsDefined()
     /** A list of lists with each sub-list having either 3 or 4 integers. These integers correspond to indices within the list of vertices. */
     faces!: number [] [];
@@ -21,6 +28,8 @@ export class Mesh3D extends _OpenAPIGenBaseModel {
     type?: string;
 	
     @IsArray()
+    @IsInstance(Color, { each: true })
+    @Type(() => Color)
     @ValidateNested({ each: true })
     @IsOptional()
     /** An optional list of colors that correspond to either the faces of the mesh or the vertices of the mesh. */
@@ -36,10 +45,11 @@ export class Mesh3D extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.vertices = _data["vertices"];
-            this.faces = _data["faces"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "Mesh3D";
-            this.colors = _data["colors"];
+            const obj = plainToClass(Mesh3D, _data);
+            this.vertices = obj.vertices;
+            this.faces = obj.faces;
+            this.type = obj.type;
+            this.colors = obj.colors;
         }
     }
 
@@ -70,7 +80,7 @@ export class Mesh3D extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

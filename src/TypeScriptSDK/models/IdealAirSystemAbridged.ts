@@ -1,4 +1,5 @@
-﻿import { IsString, IsOptional, IsEnum, ValidateNested, IsBoolean, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsEnum, IsBoolean, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { Autosize } from "./Autosize";
 import { EconomizerType } from "./EconomizerType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -11,7 +12,7 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsEnum(EconomizerType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone. */
     economizer_type?: EconomizerType;
@@ -77,17 +78,18 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "IdealAirSystemAbridged";
-            this.economizer_type = _data["economizer_type"] !== undefined ? _data["economizer_type"] : EconomizerType.DifferentialDryBulb;
-            this.demand_controlled_ventilation = _data["demand_controlled_ventilation"] !== undefined ? _data["demand_controlled_ventilation"] : false;
-            this.sensible_heat_recovery = _data["sensible_heat_recovery"] !== undefined ? _data["sensible_heat_recovery"] : 0;
-            this.latent_heat_recovery = _data["latent_heat_recovery"] !== undefined ? _data["latent_heat_recovery"] : 0;
-            this.heating_air_temperature = _data["heating_air_temperature"] !== undefined ? _data["heating_air_temperature"] : 50;
-            this.cooling_air_temperature = _data["cooling_air_temperature"] !== undefined ? _data["cooling_air_temperature"] : 13;
-            this.heating_limit = _data["heating_limit"] !== undefined ? _data["heating_limit"] : new Autosize();
-            this.cooling_limit = _data["cooling_limit"] !== undefined ? _data["cooling_limit"] : new Autosize();
-            this.heating_availability = _data["heating_availability"];
-            this.cooling_availability = _data["cooling_availability"];
+            const obj = plainToClass(IdealAirSystemAbridged, _data);
+            this.type = obj.type;
+            this.economizer_type = obj.economizer_type;
+            this.demand_controlled_ventilation = obj.demand_controlled_ventilation;
+            this.sensible_heat_recovery = obj.sensible_heat_recovery;
+            this.latent_heat_recovery = obj.latent_heat_recovery;
+            this.heating_air_temperature = obj.heating_air_temperature;
+            this.cooling_air_temperature = obj.cooling_air_temperature;
+            this.heating_limit = obj.heating_limit;
+            this.cooling_limit = obj.cooling_limit;
+            this.heating_availability = obj.heating_availability;
+            this.cooling_availability = obj.cooling_availability;
         }
     }
 
@@ -125,7 +127,7 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

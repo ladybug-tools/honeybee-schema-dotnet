@@ -1,4 +1,5 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Describe an entire glazing system rather than individual layers.\n\nUsed when only very limited information is available on the glazing layers or when\nspecific performance levels are being targeted. */
@@ -33,10 +34,11 @@ export class EnergyWindowMaterialSimpleGlazSys extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.u_factor = _data["u_factor"];
-            this.shgc = _data["shgc"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "EnergyWindowMaterialSimpleGlazSys";
-            this.vt = _data["vt"] !== undefined ? _data["vt"] : 0.54;
+            const obj = plainToClass(EnergyWindowMaterialSimpleGlazSys, _data);
+            this.u_factor = obj.u_factor;
+            this.shgc = obj.shgc;
+            this.type = obj.type;
+            this.vt = obj.vt;
         }
     }
 
@@ -67,7 +69,7 @@ export class EnergyWindowMaterialSimpleGlazSys extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

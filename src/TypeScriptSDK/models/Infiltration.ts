@@ -1,4 +1,5 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { ScheduleRuleset } from "./ScheduleRuleset";
@@ -43,12 +44,13 @@ export class Infiltration extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.flow_per_exterior_area = _data["flow_per_exterior_area"];
-            this.schedule = _data["schedule"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "Infiltration";
-            this.constant_coefficient = _data["constant_coefficient"] !== undefined ? _data["constant_coefficient"] : 1;
-            this.temperature_coefficient = _data["temperature_coefficient"] !== undefined ? _data["temperature_coefficient"] : 0;
-            this.velocity_coefficient = _data["velocity_coefficient"] !== undefined ? _data["velocity_coefficient"] : 0;
+            const obj = plainToClass(Infiltration, _data);
+            this.flow_per_exterior_area = obj.flow_per_exterior_area;
+            this.schedule = obj.schedule;
+            this.type = obj.type;
+            this.constant_coefficient = obj.constant_coefficient;
+            this.temperature_coefficient = obj.temperature_coefficient;
+            this.velocity_coefficient = obj.velocity_coefficient;
         }
     }
 
@@ -81,7 +83,7 @@ export class Infiltration extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

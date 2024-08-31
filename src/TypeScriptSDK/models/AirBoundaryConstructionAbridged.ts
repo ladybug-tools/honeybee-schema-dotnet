@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Construction for Air Boundary objects. */
@@ -28,9 +29,10 @@ export class AirBoundaryConstructionAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "AirBoundaryConstructionAbridged";
-            this.air_mixing_per_area = _data["air_mixing_per_area"] !== undefined ? _data["air_mixing_per_area"] : 0.1;
-            this.air_mixing_schedule = _data["air_mixing_schedule"];
+            const obj = plainToClass(AirBoundaryConstructionAbridged, _data);
+            this.type = obj.type;
+            this.air_mixing_per_area = obj.air_mixing_per_area;
+            this.air_mixing_schedule = obj.air_mixing_schedule;
         }
     }
 
@@ -60,7 +62,7 @@ export class AirBoundaryConstructionAbridged extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

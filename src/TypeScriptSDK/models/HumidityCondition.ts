@@ -1,11 +1,12 @@
-﻿import { IsEnum, ValidateNested, IsDefined, IsNumber, IsString, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsDefined, IsNumber, IsString, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { HumidityTypes } from "./HumidityTypes";
 
 /** Used to specify humidity conditions on a design day. */
 export class HumidityCondition extends _OpenAPIGenBaseModel {
     @IsEnum(HumidityTypes)
-    @ValidateNested()
+    @Type(() => String)
     @IsDefined()
     humidity_type!: HumidityTypes;
 	
@@ -46,12 +47,13 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.humidity_type = _data["humidity_type"];
-            this.humidity_value = _data["humidity_value"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "HumidityCondition";
-            this.barometric_pressure = _data["barometric_pressure"] !== undefined ? _data["barometric_pressure"] : 101325;
-            this.rain = _data["rain"] !== undefined ? _data["rain"] : false;
-            this.snow_on_ground = _data["snow_on_ground"] !== undefined ? _data["snow_on_ground"] : false;
+            const obj = plainToClass(HumidityCondition, _data);
+            this.humidity_type = obj.humidity_type;
+            this.humidity_value = obj.humidity_value;
+            this.type = obj.type;
+            this.barometric_pressure = obj.barometric_pressure;
+            this.rain = obj.rain;
+            this.snow_on_ground = obj.snow_on_ground;
         }
     }
 
@@ -84,7 +86,7 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

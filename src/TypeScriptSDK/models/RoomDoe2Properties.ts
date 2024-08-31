@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Autocalculate } from "./Autocalculate";
 import { Face3D } from "./Face3D";
@@ -30,6 +31,7 @@ export class RoomDoe2Properties extends _OpenAPIGenBaseModel {
     hmax_flow_ratio?: (Autocalculate | number);
 	
     @IsInstance(Face3D)
+    @Type(() => Face3D)
     @ValidateNested()
     @IsOptional()
     /** An optional horizontal Face3D object, which will be used to set the SPACE polygon during export to INP. If None, the SPACE polygon is auto-calculated from the 3D Room geometry. Specifying a geometry here can help overcome some limitations of this auto-calculation, particularly for cases where the floors of the Room are composed of AirBoundaries. */
@@ -50,13 +52,14 @@ export class RoomDoe2Properties extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "RoomDoe2Properties";
-            this.assigned_flow = _data["assigned_flow"] !== undefined ? _data["assigned_flow"] : new Autocalculate();
-            this.flow_per_area = _data["flow_per_area"] !== undefined ? _data["flow_per_area"] : new Autocalculate();
-            this.min_flow_ratio = _data["min_flow_ratio"] !== undefined ? _data["min_flow_ratio"] : new Autocalculate();
-            this.min_flow_per_area = _data["min_flow_per_area"] !== undefined ? _data["min_flow_per_area"] : new Autocalculate();
-            this.hmax_flow_ratio = _data["hmax_flow_ratio"] !== undefined ? _data["hmax_flow_ratio"] : new Autocalculate();
-            this.space_polygon_geometry = _data["space_polygon_geometry"];
+            const obj = plainToClass(RoomDoe2Properties, _data);
+            this.type = obj.type;
+            this.assigned_flow = obj.assigned_flow;
+            this.flow_per_area = obj.flow_per_area;
+            this.min_flow_ratio = obj.min_flow_ratio;
+            this.min_flow_per_area = obj.min_flow_per_area;
+            this.hmax_flow_ratio = obj.hmax_flow_ratio;
+            this.space_polygon_geometry = obj.space_polygon_geometry;
         }
     }
 
@@ -90,7 +93,7 @@ export class RoomDoe2Properties extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

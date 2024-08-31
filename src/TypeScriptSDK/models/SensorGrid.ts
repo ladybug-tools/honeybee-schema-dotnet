@@ -1,4 +1,5 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _RadianceAsset } from "./_RadianceAsset";
 import { Face3D } from "./Face3D";
 import { Mesh3D } from "./Mesh3D";
@@ -7,6 +8,8 @@ import { Sensor } from "./Sensor";
 /** A grid of sensors. */
 export class SensorGrid extends _RadianceAsset {
     @IsArray()
+    @IsInstance(Sensor, { each: true })
+    @Type(() => Sensor)
     @ValidateNested({ each: true })
     @IsDefined()
     /** A list of sensors that belong to the grid. */
@@ -17,12 +20,15 @@ export class SensorGrid extends _RadianceAsset {
     type?: string;
 	
     @IsInstance(Mesh3D)
+    @Type(() => Mesh3D)
     @ValidateNested()
     @IsOptional()
     /** An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D. */
     mesh?: Mesh3D;
 	
     @IsArray()
+    @IsInstance(Face3D, { each: true })
+    @Type(() => Face3D)
     @ValidateNested({ each: true })
     @IsOptional()
     /** An optional array of Face3D used to represent the grid. There are no restrictions on how this property relates to the sensors and it is provided only to assist with the display of the grid when the number of sensors or the mesh is too large to be practically visualized. */
@@ -43,11 +49,12 @@ export class SensorGrid extends _RadianceAsset {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.sensors = _data["sensors"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "SensorGrid";
-            this.mesh = _data["mesh"];
-            this.base_geometry = _data["base_geometry"];
-            this.group_identifier = _data["group_identifier"];
+            const obj = plainToClass(SensorGrid, _data);
+            this.sensors = obj.sensors;
+            this.type = obj.type;
+            this.mesh = obj.mesh;
+            this.base_geometry = obj.base_geometry;
+            this.group_identifier = obj.group_identifier;
         }
     }
 
@@ -79,7 +86,7 @@ export class SensorGrid extends _RadianceAsset {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

@@ -1,16 +1,17 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class Plane extends _OpenAPIGenBaseModel {
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({},{ each: true })
     @IsDefined()
     /** Plane normal as 3 (x, y, z) values. */
     n!: number [];
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({},{ each: true })
     @IsDefined()
     /** Plane origin as 3 (x, y, z) values */
     o!: number [];
@@ -20,7 +21,7 @@ export class Plane extends _OpenAPIGenBaseModel {
     type?: string;
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({},{ each: true })
     @IsOptional()
     /** Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated. */
     x?: number [];
@@ -35,10 +36,11 @@ export class Plane extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.n = _data["n"];
-            this.o = _data["o"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "Plane";
-            this.x = _data["x"];
+            const obj = plainToClass(Plane, _data);
+            this.n = obj.n;
+            this.o = obj.o;
+            this.type = obj.type;
+            this.x = obj.x;
         }
     }
 
@@ -69,7 +71,7 @@ export class Plane extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

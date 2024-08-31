@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _PropertiesBaseAbridged } from "./_PropertiesBaseAbridged";
 
 /** Radiance Properties for Honeybee Face Abridged. */
@@ -17,7 +18,8 @@ export class FaceRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "FaceRadiancePropertiesAbridged";
+            const obj = plainToClass(FaceRadiancePropertiesAbridged, _data);
+            this.type = obj.type;
         }
     }
 
@@ -45,7 +47,7 @@ export class FaceRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

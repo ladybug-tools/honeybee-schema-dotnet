@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { FaceEnergyPropertiesAbridged } from "./FaceEnergyPropertiesAbridged";
 import { FaceRadiancePropertiesAbridged } from "./FaceRadiancePropertiesAbridged";
@@ -9,11 +10,13 @@ export class FacePropertiesAbridged extends _OpenAPIGenBaseModel {
     type?: string;
 	
     @IsInstance(FaceEnergyPropertiesAbridged)
+    @Type(() => FaceEnergyPropertiesAbridged)
     @ValidateNested()
     @IsOptional()
     energy?: FaceEnergyPropertiesAbridged;
 	
     @IsInstance(FaceRadiancePropertiesAbridged)
+    @Type(() => FaceRadiancePropertiesAbridged)
     @ValidateNested()
     @IsOptional()
     radiance?: FaceRadiancePropertiesAbridged;
@@ -28,9 +31,10 @@ export class FacePropertiesAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "FacePropertiesAbridged";
-            this.energy = _data["energy"];
-            this.radiance = _data["radiance"];
+            const obj = plainToClass(FacePropertiesAbridged, _data);
+            this.type = obj.type;
+            this.energy = obj.energy;
+            this.radiance = obj.radiance;
         }
     }
 
@@ -60,7 +64,7 @@ export class FacePropertiesAbridged extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

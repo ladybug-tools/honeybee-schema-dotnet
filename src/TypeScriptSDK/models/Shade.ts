@@ -1,4 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { Face3D } from "./Face3D";
 import { IDdBaseModel } from "./IDdBaseModel";
 import { ShadePropertiesAbridged } from "./ShadePropertiesAbridged";
@@ -6,12 +7,14 @@ import { ShadePropertiesAbridged } from "./ShadePropertiesAbridged";
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Shade extends IDdBaseModel {
     @IsInstance(Face3D)
+    @Type(() => Face3D)
     @ValidateNested()
     @IsDefined()
     /** Planar Face3D for the geometry. */
     geometry!: Face3D;
 	
     @IsInstance(ShadePropertiesAbridged)
+    @Type(() => ShadePropertiesAbridged)
     @ValidateNested()
     @IsDefined()
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
@@ -37,10 +40,11 @@ export class Shade extends IDdBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.geometry = _data["geometry"];
-            this.properties = _data["properties"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "Shade";
-            this.is_detached = _data["is_detached"] !== undefined ? _data["is_detached"] : false;
+            const obj = plainToClass(Shade, _data);
+            this.geometry = obj.geometry;
+            this.properties = obj.properties;
+            this.type = obj.type;
+            this.is_detached = obj.is_detached;
         }
     }
 
@@ -71,7 +75,7 @@ export class Shade extends IDdBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

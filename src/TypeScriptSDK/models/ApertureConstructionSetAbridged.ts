@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A set of constructions for aperture assemblies. */
@@ -37,11 +38,12 @@ export class ApertureConstructionSetAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "ApertureConstructionSetAbridged";
-            this.interior_construction = _data["interior_construction"];
-            this.window_construction = _data["window_construction"];
-            this.skylight_construction = _data["skylight_construction"];
-            this.operable_construction = _data["operable_construction"];
+            const obj = plainToClass(ApertureConstructionSetAbridged, _data);
+            this.type = obj.type;
+            this.interior_construction = obj.interior_construction;
+            this.window_construction = obj.window_construction;
+            this.skylight_construction = obj.skylight_construction;
+            this.operable_construction = obj.operable_construction;
         }
     }
 
@@ -73,7 +75,7 @@ export class ApertureConstructionSetAbridged extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

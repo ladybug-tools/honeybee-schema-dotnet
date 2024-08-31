@@ -1,4 +1,5 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Create single layer of custom gas. */
@@ -84,19 +85,20 @@ export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.conductivity_coeff_a = _data["conductivity_coeff_a"];
-            this.viscosity_coeff_a = _data["viscosity_coeff_a"];
-            this.specific_heat_coeff_a = _data["specific_heat_coeff_a"];
-            this.specific_heat_ratio = _data["specific_heat_ratio"];
-            this.molecular_weight = _data["molecular_weight"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "EnergyWindowMaterialGasCustom";
-            this.thickness = _data["thickness"] !== undefined ? _data["thickness"] : 0.0125;
-            this.conductivity_coeff_b = _data["conductivity_coeff_b"] !== undefined ? _data["conductivity_coeff_b"] : 0;
-            this.conductivity_coeff_c = _data["conductivity_coeff_c"] !== undefined ? _data["conductivity_coeff_c"] : 0;
-            this.viscosity_coeff_b = _data["viscosity_coeff_b"] !== undefined ? _data["viscosity_coeff_b"] : 0;
-            this.viscosity_coeff_c = _data["viscosity_coeff_c"] !== undefined ? _data["viscosity_coeff_c"] : 0;
-            this.specific_heat_coeff_b = _data["specific_heat_coeff_b"] !== undefined ? _data["specific_heat_coeff_b"] : 0;
-            this.specific_heat_coeff_c = _data["specific_heat_coeff_c"] !== undefined ? _data["specific_heat_coeff_c"] : 0;
+            const obj = plainToClass(EnergyWindowMaterialGasCustom, _data);
+            this.conductivity_coeff_a = obj.conductivity_coeff_a;
+            this.viscosity_coeff_a = obj.viscosity_coeff_a;
+            this.specific_heat_coeff_a = obj.specific_heat_coeff_a;
+            this.specific_heat_ratio = obj.specific_heat_ratio;
+            this.molecular_weight = obj.molecular_weight;
+            this.type = obj.type;
+            this.thickness = obj.thickness;
+            this.conductivity_coeff_b = obj.conductivity_coeff_b;
+            this.conductivity_coeff_c = obj.conductivity_coeff_c;
+            this.viscosity_coeff_b = obj.viscosity_coeff_b;
+            this.viscosity_coeff_c = obj.viscosity_coeff_c;
+            this.specific_heat_coeff_b = obj.specific_heat_coeff_b;
+            this.specific_heat_coeff_c = obj.specific_heat_coeff_c;
         }
     }
 
@@ -136,7 +138,7 @@ export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

@@ -1,4 +1,5 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
@@ -45,12 +46,13 @@ export class ServiceHotWaterAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.flow_per_area = _data["flow_per_area"];
-            this.schedule = _data["schedule"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "ServiceHotWaterAbridged";
-            this.target_temperature = _data["target_temperature"] !== undefined ? _data["target_temperature"] : 60;
-            this.sensible_fraction = _data["sensible_fraction"] !== undefined ? _data["sensible_fraction"] : 0.2;
-            this.latent_fraction = _data["latent_fraction"] !== undefined ? _data["latent_fraction"] : 0.05;
+            const obj = plainToClass(ServiceHotWaterAbridged, _data);
+            this.flow_per_area = obj.flow_per_area;
+            this.schedule = obj.schedule;
+            this.type = obj.type;
+            this.target_temperature = obj.target_temperature;
+            this.sensible_fraction = obj.sensible_fraction;
+            this.latent_fraction = obj.latent_fraction;
         }
     }
 
@@ -83,7 +85,7 @@ export class ServiceHotWaterAbridged extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

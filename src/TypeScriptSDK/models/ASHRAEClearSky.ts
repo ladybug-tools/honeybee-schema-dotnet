@@ -1,4 +1,5 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _SkyCondition } from "./_SkyCondition";
 
 /** Used to specify sky conditions on a design day. */
@@ -22,8 +23,9 @@ export class ASHRAEClearSky extends _SkyCondition {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.clearness = _data["clearness"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "ASHRAEClearSky";
+            const obj = plainToClass(ASHRAEClearSky, _data);
+            this.clearness = obj.clearness;
+            this.type = obj.type;
         }
     }
 
@@ -52,7 +54,7 @@ export class ASHRAEClearSky extends _SkyCondition {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

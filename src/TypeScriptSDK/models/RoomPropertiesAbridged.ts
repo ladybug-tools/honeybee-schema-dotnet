@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { RoomDoe2Properties } from "./RoomDoe2Properties";
 import { RoomEnergyPropertiesAbridged } from "./RoomEnergyPropertiesAbridged";
@@ -10,16 +11,19 @@ export class RoomPropertiesAbridged extends _OpenAPIGenBaseModel {
     type?: string;
 	
     @IsInstance(RoomEnergyPropertiesAbridged)
+    @Type(() => RoomEnergyPropertiesAbridged)
     @ValidateNested()
     @IsOptional()
     energy?: RoomEnergyPropertiesAbridged;
 	
     @IsInstance(RoomRadiancePropertiesAbridged)
+    @Type(() => RoomRadiancePropertiesAbridged)
     @ValidateNested()
     @IsOptional()
     radiance?: RoomRadiancePropertiesAbridged;
 	
     @IsInstance(RoomDoe2Properties)
+    @Type(() => RoomDoe2Properties)
     @ValidateNested()
     @IsOptional()
     doe2?: RoomDoe2Properties;
@@ -34,10 +38,11 @@ export class RoomPropertiesAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "RoomPropertiesAbridged";
-            this.energy = _data["energy"];
-            this.radiance = _data["radiance"];
-            this.doe2 = _data["doe2"];
+            const obj = plainToClass(RoomPropertiesAbridged, _data);
+            this.type = obj.type;
+            this.energy = obj.energy;
+            this.radiance = obj.radiance;
+            this.doe2 = obj.doe2;
         }
     }
 
@@ -68,7 +73,7 @@ export class RoomPropertiesAbridged extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

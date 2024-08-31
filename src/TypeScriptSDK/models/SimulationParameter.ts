@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, IsInt, IsNumber, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { RunPeriod } from "./RunPeriod";
 import { ShadowCalculation } from "./ShadowCalculation";
@@ -14,12 +15,14 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
     type?: string;
 	
     @IsInstance(SimulationOutput)
+    @Type(() => SimulationOutput)
     @ValidateNested()
     @IsOptional()
     /** A SimulationOutput that lists the desired outputs from the simulation and the format in which to report them. */
     output?: SimulationOutput;
 	
     @IsInstance(RunPeriod)
+    @Type(() => RunPeriod)
     @ValidateNested()
     @IsOptional()
     /** A RunPeriod to describe the time period over which to run the simulation. */
@@ -31,18 +34,21 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
     timestep?: number;
 	
     @IsInstance(SimulationControl)
+    @Type(() => SimulationControl)
     @ValidateNested()
     @IsOptional()
     /** A SimulationControl object that describes which types of calculations to run. */
     simulation_control?: SimulationControl;
 	
     @IsInstance(ShadowCalculation)
+    @Type(() => ShadowCalculation)
     @ValidateNested()
     @IsOptional()
     /** A ShadowCalculation object describing settings for the EnergyPlus Shadow Calculation. */
     shadow_calculation?: ShadowCalculation;
 	
     @IsInstance(SizingParameter)
+    @Type(() => SizingParameter)
     @ValidateNested()
     @IsOptional()
     /** A SizingParameter object with criteria for sizing the heating and cooling system. */
@@ -54,7 +60,7 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
     north_angle?: number;
 	
     @IsEnum(TerrianTypes)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms. */
     terrain_type?: TerrianTypes;
@@ -72,15 +78,16 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "SimulationParameter";
-            this.output = _data["output"];
-            this.run_period = _data["run_period"];
-            this.timestep = _data["timestep"] !== undefined ? _data["timestep"] : 6;
-            this.simulation_control = _data["simulation_control"];
-            this.shadow_calculation = _data["shadow_calculation"];
-            this.sizing_parameter = _data["sizing_parameter"];
-            this.north_angle = _data["north_angle"] !== undefined ? _data["north_angle"] : 0;
-            this.terrain_type = _data["terrain_type"] !== undefined ? _data["terrain_type"] : TerrianTypes.City;
+            const obj = plainToClass(SimulationParameter, _data);
+            this.type = obj.type;
+            this.output = obj.output;
+            this.run_period = obj.run_period;
+            this.timestep = obj.timestep;
+            this.simulation_control = obj.simulation_control;
+            this.shadow_calculation = obj.shadow_calculation;
+            this.sizing_parameter = obj.sizing_parameter;
+            this.north_angle = obj.north_angle;
+            this.terrain_type = obj.terrain_type;
         }
     }
 
@@ -116,7 +123,7 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

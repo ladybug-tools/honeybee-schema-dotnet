@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { ApertureModifierSetAbridged } from "./ApertureModifierSetAbridged";
 import { DoorModifierSetAbridged } from "./DoorModifierSetAbridged";
 import { FloorModifierSetAbridged } from "./FloorModifierSetAbridged";
@@ -14,36 +15,42 @@ export class ModifierSetAbridged extends IDdRadianceBaseModel {
     type?: string;
 	
     @IsInstance(WallModifierSetAbridged)
+    @Type(() => WallModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
     /** Optional WallModifierSet object for this ModifierSet (default: None). */
     wall_set?: WallModifierSetAbridged;
 	
     @IsInstance(FloorModifierSetAbridged)
+    @Type(() => FloorModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
     /** Optional FloorModifierSet object for this ModifierSet (default: None). */
     floor_set?: FloorModifierSetAbridged;
 	
     @IsInstance(RoofCeilingModifierSetAbridged)
+    @Type(() => RoofCeilingModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
     /** Optional RoofCeilingModifierSet object for this ModifierSet (default: None). */
     roof_ceiling_set?: RoofCeilingModifierSetAbridged;
 	
     @IsInstance(ApertureModifierSetAbridged)
+    @Type(() => ApertureModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
     /** Optional ApertureModifierSet object for this ModifierSet (default: None). */
     aperture_set?: ApertureModifierSetAbridged;
 	
     @IsInstance(DoorModifierSetAbridged)
+    @Type(() => DoorModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
     /** Optional DoorModifierSet object for this ModifierSet (default: None). */
     door_set?: DoorModifierSetAbridged;
 	
     @IsInstance(ShadeModifierSetAbridged)
+    @Type(() => ShadeModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
     /** Optional ShadeModifierSet object for this ModifierSet (default: None). */
@@ -64,14 +71,15 @@ export class ModifierSetAbridged extends IDdRadianceBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "ModifierSetAbridged";
-            this.wall_set = _data["wall_set"];
-            this.floor_set = _data["floor_set"];
-            this.roof_ceiling_set = _data["roof_ceiling_set"];
-            this.aperture_set = _data["aperture_set"];
-            this.door_set = _data["door_set"];
-            this.shade_set = _data["shade_set"];
-            this.air_boundary_modifier = _data["air_boundary_modifier"];
+            const obj = plainToClass(ModifierSetAbridged, _data);
+            this.type = obj.type;
+            this.wall_set = obj.wall_set;
+            this.floor_set = obj.floor_set;
+            this.roof_ceiling_set = obj.roof_ceiling_set;
+            this.aperture_set = obj.aperture_set;
+            this.door_set = obj.door_set;
+            this.shade_set = obj.shade_set;
+            this.air_boundary_modifier = obj.air_boundary_modifier;
         }
     }
 
@@ -106,7 +114,7 @@ export class ModifierSetAbridged extends IDdRadianceBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

@@ -1,4 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsArray, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { Aperture } from "./Aperture";
 import { Door } from "./Door";
 import { Face } from "./Face";
@@ -12,6 +13,7 @@ import { Units } from "./Units";
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Model extends IDdBaseModel {
     @IsInstance(ModelProperties)
+    @Type(() => ModelProperties)
     @ValidateNested()
     @IsDefined()
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
@@ -27,43 +29,55 @@ export class Model extends IDdBaseModel {
     version?: string;
 	
     @IsArray()
+    @IsInstance(Room, { each: true })
+    @Type(() => Room)
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of Rooms in the model. */
     rooms?: Room [];
 	
     @IsArray()
+    @IsInstance(Face, { each: true })
+    @Type(() => Face)
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of Faces in the model that lack a parent Room. Note that orphaned Faces are not acceptable for Models that are to be exported for energy simulation. */
     orphaned_faces?: Face [];
 	
     @IsArray()
+    @IsInstance(Shade, { each: true })
+    @Type(() => Shade)
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of Shades in the model that lack a parent. */
     orphaned_shades?: Shade [];
 	
     @IsArray()
+    @IsInstance(Aperture, { each: true })
+    @Type(() => Aperture)
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of Apertures in the model that lack a parent Face. Note that orphaned Apertures are not acceptable for Models that are to be exported for energy simulation. */
     orphaned_apertures?: Aperture [];
 	
     @IsArray()
+    @IsInstance(Door, { each: true })
+    @Type(() => Door)
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of Doors in the model that lack a parent Face. Note that orphaned Doors are not acceptable for Models that are to be exported for energy simulation. */
     orphaned_doors?: Door [];
 	
     @IsArray()
+    @IsInstance(ShadeMesh, { each: true })
+    @Type(() => ShadeMesh)
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of ShadeMesh in the model. */
     shade_meshes?: ShadeMesh [];
 	
     @IsEnum(Units)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text indicating the units in which the model geometry exists. This is used to scale the geometry to the correct units for simulation engines like EnergyPlus, which requires all geometry be in meters. */
     units?: Units;
@@ -92,18 +106,19 @@ export class Model extends IDdBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.properties = _data["properties"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "Model";
-            this.version = _data["version"] !== undefined ? _data["version"] : "1.58.3";
-            this.rooms = _data["rooms"];
-            this.orphaned_faces = _data["orphaned_faces"];
-            this.orphaned_shades = _data["orphaned_shades"];
-            this.orphaned_apertures = _data["orphaned_apertures"];
-            this.orphaned_doors = _data["orphaned_doors"];
-            this.shade_meshes = _data["shade_meshes"];
-            this.units = _data["units"] !== undefined ? _data["units"] : Units.Meters;
-            this.tolerance = _data["tolerance"] !== undefined ? _data["tolerance"] : 0.01;
-            this.angle_tolerance = _data["angle_tolerance"] !== undefined ? _data["angle_tolerance"] : 1;
+            const obj = plainToClass(Model, _data);
+            this.properties = obj.properties;
+            this.type = obj.type;
+            this.version = obj.version;
+            this.rooms = obj.rooms;
+            this.orphaned_faces = obj.orphaned_faces;
+            this.orphaned_shades = obj.orphaned_shades;
+            this.orphaned_apertures = obj.orphaned_apertures;
+            this.orphaned_doors = obj.orphaned_doors;
+            this.shade_meshes = obj.shade_meshes;
+            this.units = obj.units;
+            this.tolerance = obj.tolerance;
+            this.angle_tolerance = obj.angle_tolerance;
         }
     }
 
@@ -142,7 +157,7 @@ export class Model extends IDdBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

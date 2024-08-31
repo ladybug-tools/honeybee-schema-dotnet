@@ -1,4 +1,5 @@
-﻿import { IsString, IsOptional, IsEnum, ValidateNested, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { SlatOrientation } from "./SlatOrientation";
 
@@ -9,7 +10,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsEnum(SlatOrientation)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     slat_orientation?: SlatOrientation;
 	
@@ -174,33 +175,34 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "EnergyWindowMaterialBlind";
-            this.slat_orientation = _data["slat_orientation"] !== undefined ? _data["slat_orientation"] : SlatOrientation.Horizontal;
-            this.slat_width = _data["slat_width"] !== undefined ? _data["slat_width"] : 0.025;
-            this.slat_separation = _data["slat_separation"] !== undefined ? _data["slat_separation"] : 0.01875;
-            this.slat_thickness = _data["slat_thickness"] !== undefined ? _data["slat_thickness"] : 0.001;
-            this.slat_angle = _data["slat_angle"] !== undefined ? _data["slat_angle"] : 45;
-            this.slat_conductivity = _data["slat_conductivity"] !== undefined ? _data["slat_conductivity"] : 221;
-            this.beam_solar_transmittance = _data["beam_solar_transmittance"] !== undefined ? _data["beam_solar_transmittance"] : 0;
-            this.beam_solar_reflectance = _data["beam_solar_reflectance"] !== undefined ? _data["beam_solar_reflectance"] : 0.5;
-            this.beam_solar_reflectance_back = _data["beam_solar_reflectance_back"] !== undefined ? _data["beam_solar_reflectance_back"] : 0.5;
-            this.diffuse_solar_transmittance = _data["diffuse_solar_transmittance"] !== undefined ? _data["diffuse_solar_transmittance"] : 0;
-            this.diffuse_solar_reflectance = _data["diffuse_solar_reflectance"] !== undefined ? _data["diffuse_solar_reflectance"] : 0.5;
-            this.diffuse_solar_reflectance_back = _data["diffuse_solar_reflectance_back"] !== undefined ? _data["diffuse_solar_reflectance_back"] : 0.5;
-            this.beam_visible_transmittance = _data["beam_visible_transmittance"] !== undefined ? _data["beam_visible_transmittance"] : 0;
-            this.beam_visible_reflectance = _data["beam_visible_reflectance"] !== undefined ? _data["beam_visible_reflectance"] : 0.5;
-            this.beam_visible_reflectance_back = _data["beam_visible_reflectance_back"] !== undefined ? _data["beam_visible_reflectance_back"] : 0.5;
-            this.diffuse_visible_transmittance = _data["diffuse_visible_transmittance"] !== undefined ? _data["diffuse_visible_transmittance"] : 0;
-            this.diffuse_visible_reflectance = _data["diffuse_visible_reflectance"] !== undefined ? _data["diffuse_visible_reflectance"] : 0.5;
-            this.diffuse_visible_reflectance_back = _data["diffuse_visible_reflectance_back"] !== undefined ? _data["diffuse_visible_reflectance_back"] : 0.5;
-            this.infrared_transmittance = _data["infrared_transmittance"] !== undefined ? _data["infrared_transmittance"] : 0;
-            this.emissivity = _data["emissivity"] !== undefined ? _data["emissivity"] : 0.9;
-            this.emissivity_back = _data["emissivity_back"] !== undefined ? _data["emissivity_back"] : 0.9;
-            this.distance_to_glass = _data["distance_to_glass"] !== undefined ? _data["distance_to_glass"] : 0.05;
-            this.top_opening_multiplier = _data["top_opening_multiplier"] !== undefined ? _data["top_opening_multiplier"] : 0.5;
-            this.bottom_opening_multiplier = _data["bottom_opening_multiplier"] !== undefined ? _data["bottom_opening_multiplier"] : 0.5;
-            this.left_opening_multiplier = _data["left_opening_multiplier"] !== undefined ? _data["left_opening_multiplier"] : 0.5;
-            this.right_opening_multiplier = _data["right_opening_multiplier"] !== undefined ? _data["right_opening_multiplier"] : 0.5;
+            const obj = plainToClass(EnergyWindowMaterialBlind, _data);
+            this.type = obj.type;
+            this.slat_orientation = obj.slat_orientation;
+            this.slat_width = obj.slat_width;
+            this.slat_separation = obj.slat_separation;
+            this.slat_thickness = obj.slat_thickness;
+            this.slat_angle = obj.slat_angle;
+            this.slat_conductivity = obj.slat_conductivity;
+            this.beam_solar_transmittance = obj.beam_solar_transmittance;
+            this.beam_solar_reflectance = obj.beam_solar_reflectance;
+            this.beam_solar_reflectance_back = obj.beam_solar_reflectance_back;
+            this.diffuse_solar_transmittance = obj.diffuse_solar_transmittance;
+            this.diffuse_solar_reflectance = obj.diffuse_solar_reflectance;
+            this.diffuse_solar_reflectance_back = obj.diffuse_solar_reflectance_back;
+            this.beam_visible_transmittance = obj.beam_visible_transmittance;
+            this.beam_visible_reflectance = obj.beam_visible_reflectance;
+            this.beam_visible_reflectance_back = obj.beam_visible_reflectance_back;
+            this.diffuse_visible_transmittance = obj.diffuse_visible_transmittance;
+            this.diffuse_visible_reflectance = obj.diffuse_visible_reflectance;
+            this.diffuse_visible_reflectance_back = obj.diffuse_visible_reflectance_back;
+            this.infrared_transmittance = obj.infrared_transmittance;
+            this.emissivity = obj.emissivity;
+            this.emissivity_back = obj.emissivity_back;
+            this.distance_to_glass = obj.distance_to_glass;
+            this.top_opening_multiplier = obj.top_opening_multiplier;
+            this.bottom_opening_multiplier = obj.bottom_opening_multiplier;
+            this.left_opening_multiplier = obj.left_opening_multiplier;
+            this.right_opening_multiplier = obj.right_opening_multiplier;
         }
     }
 
@@ -254,7 +256,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

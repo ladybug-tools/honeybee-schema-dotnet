@@ -1,4 +1,5 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Opaque material representing a layer within an opaque construction. */
@@ -63,15 +64,16 @@ export class EnergyWindowFrame extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.width = _data["width"];
-            this.conductance = _data["conductance"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "EnergyWindowFrame";
-            this.edge_to_center_ratio = _data["edge_to_center_ratio"] !== undefined ? _data["edge_to_center_ratio"] : 1;
-            this.outside_projection = _data["outside_projection"] !== undefined ? _data["outside_projection"] : 0;
-            this.inside_projection = _data["inside_projection"] !== undefined ? _data["inside_projection"] : 0;
-            this.thermal_absorptance = _data["thermal_absorptance"] !== undefined ? _data["thermal_absorptance"] : 0.9;
-            this.solar_absorptance = _data["solar_absorptance"] !== undefined ? _data["solar_absorptance"] : 0.7;
-            this.visible_absorptance = _data["visible_absorptance"] !== undefined ? _data["visible_absorptance"] : 0.7;
+            const obj = plainToClass(EnergyWindowFrame, _data);
+            this.width = obj.width;
+            this.conductance = obj.conductance;
+            this.type = obj.type;
+            this.edge_to_center_ratio = obj.edge_to_center_ratio;
+            this.outside_projection = obj.outside_projection;
+            this.inside_projection = obj.inside_projection;
+            this.thermal_absorptance = obj.thermal_absorptance;
+            this.solar_absorptance = obj.solar_absorptance;
+            this.visible_absorptance = obj.visible_absorptance;
         }
     }
 
@@ -107,7 +109,7 @@ export class EnergyWindowFrame extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

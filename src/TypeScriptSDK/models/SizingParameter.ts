@@ -1,4 +1,5 @@
-﻿import { IsString, IsOptional, IsArray, ValidateNested, IsNumber, IsEnum, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsArray, IsInstance, ValidateNested, IsNumber, IsEnum, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ClimateZones } from "./ClimateZones";
 import { DesignDay } from "./DesignDay";
@@ -11,6 +12,8 @@ export class SizingParameter extends _OpenAPIGenBaseModel {
     type?: string;
 	
     @IsArray()
+    @IsInstance(DesignDay, { each: true })
+    @Type(() => DesignDay)
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of DesignDays that represent the criteria for which the HVAC systems will be sized. */
@@ -27,13 +30,13 @@ export class SizingParameter extends _OpenAPIGenBaseModel {
     cooling_factor?: number;
 	
     @IsEnum(EfficiencyStandards)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text to specify the efficiency standard, which will automatically set the efficiencies of all HVAC equipment when provided. Note that providing a standard here will cause the OpenStudio translation process to perform an additional sizing calculation with EnergyPlus, which is needed since the default efficiencies of equipment vary depending on their size. THIS WILL SIGNIFICANTLY INCREASE TRANSLATION TIME TO OPENSTUDIO. However, it is often worthwhile when the goal is to match the HVAC specification with a particular standard. */
     efficiency_standard?: EfficiencyStandards;
 	
     @IsEnum(ClimateZones)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text indicating the ASHRAE climate zone to be used with the efficiency_standard. When unspecified, the climate zone will be inferred from the design days on this sizing parameter object. */
     climate_zone?: ClimateZones;
@@ -61,14 +64,15 @@ export class SizingParameter extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "SizingParameter";
-            this.design_days = _data["design_days"];
-            this.heating_factor = _data["heating_factor"] !== undefined ? _data["heating_factor"] : 1.25;
-            this.cooling_factor = _data["cooling_factor"] !== undefined ? _data["cooling_factor"] : 1.15;
-            this.efficiency_standard = _data["efficiency_standard"];
-            this.climate_zone = _data["climate_zone"];
-            this.building_type = _data["building_type"];
-            this.bypass_efficiency_sizing = _data["bypass_efficiency_sizing"] !== undefined ? _data["bypass_efficiency_sizing"] : false;
+            const obj = plainToClass(SizingParameter, _data);
+            this.type = obj.type;
+            this.design_days = obj.design_days;
+            this.heating_factor = obj.heating_factor;
+            this.cooling_factor = obj.cooling_factor;
+            this.efficiency_standard = obj.efficiency_standard;
+            this.climate_zone = obj.climate_zone;
+            this.building_type = obj.building_type;
+            this.bypass_efficiency_sizing = obj.bypass_efficiency_sizing;
         }
     }
 
@@ -103,7 +107,7 @@ export class SizingParameter extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;
