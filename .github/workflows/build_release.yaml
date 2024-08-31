@@ -82,6 +82,10 @@ jobs:
         working-directory: src/TypeScriptSDK
         run: npm run build
 
+      - name: Unit tests
+        working-directory: src/TypeScriptSDK
+        run: npm run test
+
       - name: Pack package
         working-directory: src/TypeScriptSDK
         run: |
@@ -139,6 +143,7 @@ jobs:
           MAX_ATTEMPTS=10
           SLEEP_TIME=60
 
+          sleep $SLEEP_TIME
           for ((i=1;i<=MAX_ATTEMPTS;i++)); do
             RESPONSE=$(curl --silent --fail "https://api.nuget.org/v3-flatcontainer/$PACKAGE_NAME/$PACKAGE_VERSION/$PACKAGE_NAME.nuspec")
             if [[ $RESPONSE != *"<Error><Code>BlobNotFound</Code><Message>"* ]]; then
