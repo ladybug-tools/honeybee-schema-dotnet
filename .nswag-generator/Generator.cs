@@ -4,13 +4,18 @@ using System.Text;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using System.IO;
+using Fluid;
 
 namespace SchemaGenerator;
 
 public partial class Generator
 {
     private static readonly string _generatorFolder = ".nswag-generator";
-    public static string sdkName = "HoneybeeSchema";
+    protected static Config _config;
+    public static string sdkName => _config.sdkName; //"DragonflySchema";
+    public static string moduleName => _config.moduleName; // "dragonfly_schema";
+
     public static string workingDir = Environment.CurrentDirectory;
     public static string rootDir => workingDir.Substring(0, workingDir.IndexOf(_generatorFolder) + _generatorFolder.Length);
     static void Main(string[] args)
@@ -26,8 +31,30 @@ public partial class Generator
         var outputDir = System.IO.Path.Combine(rootDir, "Output");
         System.IO.Directory.CreateDirectory(outputDir);
 
+        var supportedArgs = new string[] { "--download", "--genTsModel", "--genCsModel", "--genCsInterface", "--updateVersion", "--config" };
         if (args == null || !args.Any())
-            args = new string[] { "--download", "--genTsModel", "--genCsModel", "--genCsInterface", "--updateVersion" };
+            args = supportedArgs;
+
+        if (args.Any(_=> !supportedArgs.Contains(_))) 
+            throw new ArgumentException($"Only following arguments are supported: {string.Join(",", supportedArgs)}");
+
+
+        // get config.json
+        var argList = args.ToList();
+        var configIndex = argList.IndexOf("--config");
+        var configPath = Path.Combine(rootDir, "config.json");
+        if (configIndex >= 0 && !string.IsNullOrEmpty(argList.ElementAtOrDefault(configIndex+1)))
+        {
+            var p = System.IO.Path.GetFullPath(argList.ElementAtOrDefault(configIndex + 1));
+            if (System.IO.Path.GetExtension(p).ToLower() == ".json")
+            {
+                configPath = p;
+            }
+        }
+
+        // set configs
+        var configJson = File.ReadAllText(configPath);
+        _config = Newtonsoft.Json.JsonConvert.DeserializeObject<Config>(configJson);
 
 
         // download all json files
@@ -62,17 +89,8 @@ public partial class Generator
     // Download all schema jsons
     static void GetSchemaJsonFiles()
     {
-        var baseURL = @"https://www.ladybug.tools/honeybee-schema";
-        var files = new string[] {
-            "model_inheritance.json",
-            "model_mapper.json",
-            "simulation-parameter_inheritance.json",
-            "simulation-parameter_mapper.json",
-            "validation-report.json",
-            "comparison-report_inheritance.json",
-            "sync-instructions_inheritance.json",
-            "project-information_inheritance.json"
-            };
+        var baseURL = _config.baseURL;
+        var files = _config.files;
 
         var dir = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(rootDir), ".openapi-docs");
         if (System.IO.Directory.Exists(dir))
@@ -141,6 +159,67 @@ public partial class Generator
         newFile = Regex.Replace(file, @"(?<=version"": "")[^""]+(?="")", newVersion);
         System.IO.File.WriteAllText(tsFile, newFile, new UTF8Encoding(false));
 
+    }
+
+    
+    private static TemplateOptions _templateOptions;
+    private static TemplateOptions TemplateOptions
+    {
+        get
+        {
+            if (_templateOptions == null)
+            {
+                var options = new TemplateOptions();
+                var tps = typeof(Generator).Assembly
+                    .GetTypes()
+                    .Where(_ => _.IsPublic)
+                    .Where(t => t.Namespace.StartsWith("TemplateModels.Base") || t.Namespace.StartsWith($"TemplateModels.{TemplateModels.Helper.Language}"))
+                    .ToList();
+
+                foreach (var item in tps)
+                {
+                    options.MemberAccessStrategy.Register(item);
+                }
+
+                options.Greedy = false;
+                _templateOptions = options;
+            }
+
+            return _templateOptions;
+        }
+    }
+
+    public static string Gen(string templateSource, object model)
+    {
+        var parser = new FluidParser();
+        if (parser.TryParse(templateSource, out var template, out var error))
+        {
+            var context = new TemplateContext(model, TemplateOptions);
+            var code = template.Render(context);
+            return code;
+        }
+        else
+        {
+            return $"Error: {error}";
+        }
+    }
+
+    public static Mapper ReadMapper(string mapperFilePath)
+    {
+        if (!System.IO.File.Exists(mapperFilePath) || !mapperFilePath.EndsWith("_mapper.json"))
+            return null;
+        Console.WriteLine( $"Reading mapper from: {mapperFilePath}");
+        var mapperJson = System.IO.File.ReadAllText(mapperFilePath);
+        var data = JObject.Parse(mapperJson);
+        var classItems = (data["classes"] as JObject).Properties();
+        var enumItems = (data["enums"] as JObject).Properties();
+
+
+        var cls = classItems?.Select(_ => new MapperItem(_.Name, _.Value.ToString()))?.ToList();
+        var enms = enumItems?.Select(_ => new MapperItem(_.Name, _.Value.ToString()))?.ToList();
+
+        var mapper = new Mapper(cls, enms);
+        return mapper;
     }
 
 

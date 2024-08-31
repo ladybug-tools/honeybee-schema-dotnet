@@ -18,14 +18,11 @@ using TemplateModels.TypeScript;
 
 namespace SchemaGenerator;
 
-public class GenTsDTO
+public class GenTsDTO : Generator
 {
-    static string _sdkName => Generator.sdkName;
-    static string workingDir => Generator.workingDir;
-    static string rootDir => Generator.rootDir;
     internal static void Execute()
     {
-
+        TemplateModels.Helper.Language = TemplateModels.TargetLanguage.TypeScript;
         Console.WriteLine($"Current working dir: {workingDir}");
         //Console.WriteLine(string.Join(",", args));
 
@@ -34,37 +31,31 @@ public class GenTsDTO
         System.IO.Directory.CreateDirectory(outputDir);
 
 
-        //var schemaFile = System.IO.Path.Combine(outputDir, "schema.json");
-        var jsons = new[]
-        {
-            "model_inheritance.json",
-            "simulation-parameter_inheritance.json",
-            "validation-report.json",
-            "comparison-report_inheritance.json",
-            "sync-instructions_inheritance.json",
-            "project-information_inheritance.json"
-
-        };
-
+        var jsons = _config.files.Where(_ => !_.Contains("_mapper.json"));
         var docDir = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(rootDir), ".openapi-docs");
 
         JObject docJson = null;
         JObject jSchemas = null;
+        Mapper docMapper = null;
         // combine all schema components
         foreach (var j in jsons)
         {
+            // read schema
             var schemaFile = System.IO.Path.Combine(docDir, j);
             var json = System.IO.File.ReadAllText(schemaFile, System.Text.Encoding.UTF8);
             Console.WriteLine($"Reading schema from {schemaFile}");
             var jDocObj = JObject.Parse(json);
-
-
             var schemas = jDocObj["components"]["schemas"] as JObject;
-            //var arrays = JArray.Parse(schemas.Values);
+
+            // read mapper
+            var mapperFile = System.IO.Path.Combine(docDir, j.Replace("_inheritance", "_mapper"));
+            var mapper = ReadMapper(mapperFile);
+
             if (docJson == null)
             {
                 docJson = jDocObj;
                 jSchemas = schemas;
+                docMapper = mapper;
                 continue;
             }
 
@@ -72,6 +63,7 @@ public class GenTsDTO
             {
                 MergeArrayHandling = MergeArrayHandling.Union
             });
+            docMapper.Merge(mapper);
 
         }
 
@@ -84,7 +76,7 @@ public class GenTsDTO
 
 
         // tsTemplate
-        var tsTemplate = System.IO.Path.Combine(templateDir, "TypeScript");
+        var tsTemplate = System.IO.Path.Combine(templateDir, TemplateModels.Helper.Language.ToString());
         var sc = doc.Components.Schemas;
         var classModels = new List<ClassTemplateModel>();
         var srcDir = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(rootDir), "src", "TypeScriptSDK", "models");
@@ -97,6 +89,12 @@ public class GenTsDTO
             var key = item.Key;
             var value = item.Value;
             var tsFile = string.Empty;
+            var module = docMapper.TryGetModule(key);
+
+            // skip 
+            if (!string.IsNullOrEmpty(module) && !module.StartsWith(moduleName))
+                continue;
+
             if (value.IsEnumeration)
             {
                 var m = new EnumTemplateModel(value);
@@ -105,7 +103,7 @@ public class GenTsDTO
             else
             {
                 //class
-                var m = new ClassTemplateModel(doc, value);
+                var m = new ClassTemplateModel(doc, value, docMapper);
                 tsFile = GenClass(tsTemplate, m, outputDir, ".ts");
             }
 
@@ -252,38 +250,38 @@ public class GenTsDTO
         return file;
     }
 
-    public static string Gen(string templateSource, object model)
-    {
+    //public static string Gen(string templateSource, object model)
+    //{
 
-        var parser = new FluidParser();
-        var options = new TemplateOptions();
-        var tps = typeof(GenTsDTO).Assembly
-            .GetTypes()
-            .Where(_=>_.IsPublic)
-            .Where(t => t.Namespace.StartsWith("TemplateModels.Base") || t.Namespace.StartsWith("TemplateModels.TypeScript"))
-            .ToList();
+    //    var parser = new FluidParser();
+    //    var options = new TemplateOptions();
+    //    var tps = typeof(GenTsDTO).Assembly
+    //        .GetTypes()
+    //        .Where(_ => _.IsPublic)
+    //        .Where(t => t.Namespace.StartsWith("TemplateModels.Base") || t.Namespace.StartsWith("TemplateModels.TypeScript"))
+    //        .ToList();
 
-        foreach (var item in tps)
-        {
-            options.MemberAccessStrategy.Register(item);
-        }
+    //    foreach (var item in tps)
+    //    {
+    //        options.MemberAccessStrategy.Register(item);
+    //    }
 
-    
-        options.Greedy = false;
 
-        if (parser.TryParse(templateSource, out var template, out var error))
-        {
-            var context = new TemplateContext(model, options);
-            var code = template.Render(context);
-            return code;
-        }
-        else
-        {
-            return $"Error: {error}";
-        }
-    }
+    //    options.Greedy = false;
 
-    //private static 
+    //    if (parser.TryParse(templateSource, out var template, out var error))
+    //    {
+    //        var context = new TemplateContext(model, options);
+    //        var code = template.Render(context);
+    //        return code;
+    //    }
+    //    else
+    //    {
+    //        return $"Error: {error}";
+    //    }
+    //}
+
+
 }
 
 

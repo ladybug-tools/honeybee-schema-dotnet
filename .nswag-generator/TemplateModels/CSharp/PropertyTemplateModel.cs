@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace TemplateModels.CSharp;
 
-public class PropertyTemplateModel: PropertyTemplateModelBase
+public class PropertyTemplateModel : PropertyTemplateModelBase
 {
     public static string NameSpaceName => ClassTemplateModel.SDKName;
     public string CsPropertyName { get; set; }
@@ -18,7 +18,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
 
     public List<string> TsImports { get; set; } = new List<string>();
     public bool HasTsImports => TsImports.Any();
-    
+
     public bool HasValidationDecorators => ValidationDecorators.Any();
     public List<string> ValidationDecorators { get; set; }
     public string Pattern { get; set; }
@@ -34,7 +34,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
     public bool HasMaxLength => MaxLength.HasValue;
     public int? MinLength { get; set; }
     public bool HasMinLength => MinLength.HasValue;
-    public PropertyTemplateModel(string name, JsonSchemaProperty json):base(name, json)
+    public PropertyTemplateModel(string name, JsonSchemaProperty json) : base(name, json)
     {
         DefaultCodeFormat = ConvertDefaultValue(json);
         CsParameterName = Helper.ToCamelCase(PropertyName);
@@ -52,13 +52,13 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
         }
         else
         {
-            Type =  GetTypeString(json);
+            Type = GetTypeString(json);
         }
-       
 
-        Description = String.IsNullOrEmpty(Description)? CsPropertyName : Description;
 
-       
+        Description = String.IsNullOrEmpty(Description) ? CsPropertyName : Description;
+
+
 
         Pattern = json.Pattern;
         Maximum = json.Maximum;
@@ -70,7 +70,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
         IsValueType = CsValueType.Contains(Type) || IsEnumType;
 
 
-       
+
         // check default value for constructor parameter
         ConstructionParameterCode = $"{Type} {CsParameterName}";
         if (!this.IsRequired)
@@ -85,7 +85,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
 
 
 
-    public static string GetTypeString(JsonSchema json )
+    public static string GetTypeString(JsonSchema json)
     {
         var type = string.Empty;
         if ((json.AnyOf?.Any()).GetValueOrDefault())
@@ -130,7 +130,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
             itemType = ConvertToType(itemType);
             deepestItemType = itemType;
         }
-    
+
         type = $"List<{itemType}>";
 
         return type;
@@ -174,7 +174,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
 
     public static string ConvertToType(string type)
     {
-        return TypeMapper.TryGetValue(type, out var result)? result: type;
+        return TypeMapper.TryGetValue(type, out var result) ? result : type;
     }
 
     public static Dictionary<string, string> TypeMapper = new Dictionary<string, string>
@@ -191,7 +191,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
         "int", "double", "bool"
     };
 
-    
+
     private static string ConvertDefaultValue(JsonSchemaProperty prop)
     {
         var defaultValue = prop.Default;
@@ -206,7 +206,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
                 var enumType = prop.ActualSchema.Title;
                 defaultCodeFormat = $"{enumType}.{defaultValue}";
             }
-                
+
         }
         else if (defaultValue is Newtonsoft.Json.Linq.JToken jToken)
         {
@@ -237,7 +237,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
             {
                 var isFullJsonObj = jObj.Values().Count() > 1;
                 var formateJson = isFullJsonObj ? jObj.ToString()?.Replace("\"", "\"\"") : "";
-                defaultCodeFormat = isFullJsonObj? $"(@\"{formateJson}\").To<{vType}>()" : $"new {vType}()";
+                defaultCodeFormat = isFullJsonObj ? $"(@\"{formateJson}\").To<{vType}>()" : $"new {vType}()";
             }
             else
             {
@@ -258,7 +258,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
                 arrayCode.Add(GetDefaultFromJson(item).ToString());
             }
             defaultCodeFormat = $"new List<{itemTypeKey}>{{ {string.Join(separator, arrayCode)} }}";
-            
+
         }
         else
         {

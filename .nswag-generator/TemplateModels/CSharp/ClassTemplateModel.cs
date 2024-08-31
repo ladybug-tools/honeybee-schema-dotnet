@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace TemplateModels.CSharp;
+
 public class ClassTemplateModel : ClassTemplateModelBase
 {
     public static string SDKName { get; set; }
@@ -17,10 +18,8 @@ public class ClassTemplateModel : ClassTemplateModelBase
     public bool HasDerivedClasses => DerivedClasses.Any(); // has children
     public bool HasProperties => Properties.Any();
     public List<PropertyTemplateModel> Properties { get; set; }
-    //public List<string> TsImports { get; set; } = new List<string>();
-    //public bool HasTsImports => TsImports.Any();
-    //public List<string> TsValidatorImports { get; set; }
-    //public string TsValidatorImportsCode { get; set; }
+    public static List<string> CsImports { get; set; } = new List<string>();
+    public bool HasCsImports => CsImports.Any();
     public bool hasOnlyReadOnly { get; set; }
     public List<PropertyTemplateModel> ParentProperties { get; set; }
     public List<PropertyTemplateModel> AllProperties { get; set; }
@@ -62,20 +61,6 @@ public class ClassTemplateModel : ClassTemplateModelBase
         hasOnlyReadOnly = AllProperties.All(_ => _.IsReadOnly);
 
 
-    }
-
-    public static string ValidationDecoratorToImport(string decorator)
-    {
-        string pattern = @"@([a-zA-Z]+)\(";
-        Match match = Regex.Match(decorator, pattern);
-        if (match.Success)
-        {
-            return match.Groups[1].Value;
-        }
-        else
-        {
-            return decorator;
-        }
     }
 
 

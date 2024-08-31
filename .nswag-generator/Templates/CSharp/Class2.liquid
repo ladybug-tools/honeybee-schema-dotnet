@@ -17,6 +17,11 @@ using System.Runtime.Serialization;
 using LBTNewtonSoft::Newtonsoft.Json;
 using LBTNewtonSoft::Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
+{% if HasCsImports -%}
+{% for Import in CsImports -%}
+using { {{ Import }} };
+{% endfor -%}
+{% endif -%}
 
 namespace {{ NameSpaceName }}
 {

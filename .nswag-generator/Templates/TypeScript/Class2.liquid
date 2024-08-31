@@ -2,7 +2,7 @@ import { {{TsValidatorImportsCode}} } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 {% if HasTsImports -%}
 {% for Import in TsImports -%}
-import { {{ Import }} } from "./{{ Import }}";
+import { {{ Import.Name }} } from "{{ Import.From }}";
 {% endfor -%}
 {% endif -%}
 
