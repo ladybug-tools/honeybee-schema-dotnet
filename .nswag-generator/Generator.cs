@@ -162,31 +162,43 @@ public partial class Generator
     }
 
     
-    private static TemplateOptions _templateOptions;
-    private static TemplateOptions TemplateOptions
+    private static TemplateOptions _TsTemplateOptions;
+    private static TemplateOptions _CsTemplateOptions;
+    private static TemplateOptions GetTemplateOptions(TemplateModels.TargetLanguage language)
     {
-        get
+        switch (language)
         {
-            if (_templateOptions == null)
+            case TemplateModels.TargetLanguage.CSharp:
+                _CsTemplateOptions = _CsTemplateOptions ?? getOptions();
+                return _CsTemplateOptions;
+                break;
+            case TemplateModels.TargetLanguage.TypeScript:
+                _TsTemplateOptions = _TsTemplateOptions ?? getOptions();
+                return _TsTemplateOptions;
+                break;
+            default:
+                throw new ArgumentException($"Non-supported {language}");
+                break;
+        }
+
+        TemplateOptions getOptions()
+        {
+            var options = new TemplateOptions();
+            var tps = typeof(Generator).Assembly
+                .GetTypes()
+                .Where(_ => _.IsPublic)
+                .Where(t => t.Namespace.StartsWith("TemplateModels.Base") || t.Namespace.StartsWith($"TemplateModels.{language}"))
+                .ToList();
+
+            foreach (var item in tps)
             {
-                var options = new TemplateOptions();
-                var tps = typeof(Generator).Assembly
-                    .GetTypes()
-                    .Where(_ => _.IsPublic)
-                    .Where(t => t.Namespace.StartsWith("TemplateModels.Base") || t.Namespace.StartsWith($"TemplateModels.{TemplateModels.Helper.Language}"))
-                    .ToList();
-
-                foreach (var item in tps)
-                {
-                    options.MemberAccessStrategy.Register(item);
-                }
-
-                options.Greedy = false;
-                _templateOptions = options;
+                options.MemberAccessStrategy.Register(item);
             }
 
-            return _templateOptions;
+            options.Greedy = false;
+            return options;
         }
+
     }
 
     public static string Gen(string templateSource, object model)
@@ -194,7 +206,7 @@ public partial class Generator
         var parser = new FluidParser();
         if (parser.TryParse(templateSource, out var template, out var error))
         {
-            var context = new TemplateContext(model, TemplateOptions);
+            var context = new TemplateContext(model, GetTemplateOptions(TemplateModels.Helper.Language));
             var code = template.Render(context);
             return code;
         }
