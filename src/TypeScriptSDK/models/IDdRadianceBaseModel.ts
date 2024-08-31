@@ -1,4 +1,5 @@
 ﻿import { IsString, IsDefined, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects requiring a valid Radiance identifier. */
@@ -27,9 +28,10 @@ export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.identifier = _data["identifier"];
-            this.display_name = _data["display_name"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "IDdRadianceBaseModel";
+            const obj = plainToClass(IDdRadianceBaseModel, _data);
+            this.identifier = obj.identifier;
+            this.display_name = obj.display_name;
+            this.type = obj.type;
         }
     }
 
@@ -59,7 +61,7 @@ export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

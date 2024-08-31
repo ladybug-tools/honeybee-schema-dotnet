@@ -1,4 +1,5 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleDay } from "./ScheduleDay";
 import { ScheduleRuleAbridged } from "./ScheduleRuleAbridged";
@@ -6,6 +7,8 @@ import { ScheduleRuleAbridged } from "./ScheduleRuleAbridged";
 /** Used to define a schedule for a default day, further described by ScheduleRule. */
 export class ScheduleRulesetAbridged extends IDdEnergyBaseModel {
     @IsArray()
+    @IsInstance(ScheduleDay, { each: true })
+    @Type(() => ScheduleDay)
     @ValidateNested({ each: true })
     @IsDefined()
     /** A list of ScheduleDays that are referenced in the other keys of this ScheduleRulesetAbridged. */
@@ -21,6 +24,8 @@ export class ScheduleRulesetAbridged extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsArray()
+    @IsInstance(ScheduleRuleAbridged, { each: true })
+    @Type(() => ScheduleRuleAbridged)
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of ScheduleRuleAbridged that note exceptions to the default_day_schedule. These rules should be ordered from highest to lowest priority. */
@@ -56,14 +61,15 @@ export class ScheduleRulesetAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.day_schedules = _data["day_schedules"];
-            this.default_day_schedule = _data["default_day_schedule"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "ScheduleRulesetAbridged";
-            this.schedule_rules = _data["schedule_rules"];
-            this.holiday_schedule = _data["holiday_schedule"];
-            this.summer_designday_schedule = _data["summer_designday_schedule"];
-            this.winter_designday_schedule = _data["winter_designday_schedule"];
-            this.schedule_type_limit = _data["schedule_type_limit"];
+            const obj = plainToClass(ScheduleRulesetAbridged, _data);
+            this.day_schedules = obj.day_schedules;
+            this.default_day_schedule = obj.default_day_schedule;
+            this.type = obj.type;
+            this.schedule_rules = obj.schedule_rules;
+            this.holiday_schedule = obj.holiday_schedule;
+            this.summer_designday_schedule = obj.summer_designday_schedule;
+            this.winter_designday_schedule = obj.winter_designday_schedule;
+            this.schedule_type_limit = obj.schedule_type_limit;
         }
     }
 
@@ -98,7 +104,7 @@ export class ScheduleRulesetAbridged extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

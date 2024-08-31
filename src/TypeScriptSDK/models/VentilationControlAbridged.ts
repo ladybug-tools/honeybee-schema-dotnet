@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
@@ -52,13 +53,14 @@ export class VentilationControlAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "VentilationControlAbridged";
-            this.min_indoor_temperature = _data["min_indoor_temperature"] !== undefined ? _data["min_indoor_temperature"] : -100;
-            this.max_indoor_temperature = _data["max_indoor_temperature"] !== undefined ? _data["max_indoor_temperature"] : 100;
-            this.min_outdoor_temperature = _data["min_outdoor_temperature"] !== undefined ? _data["min_outdoor_temperature"] : -100;
-            this.max_outdoor_temperature = _data["max_outdoor_temperature"] !== undefined ? _data["max_outdoor_temperature"] : 100;
-            this.delta_temperature = _data["delta_temperature"] !== undefined ? _data["delta_temperature"] : -100;
-            this.schedule = _data["schedule"];
+            const obj = plainToClass(VentilationControlAbridged, _data);
+            this.type = obj.type;
+            this.min_indoor_temperature = obj.min_indoor_temperature;
+            this.max_indoor_temperature = obj.max_indoor_temperature;
+            this.min_outdoor_temperature = obj.min_outdoor_temperature;
+            this.max_outdoor_temperature = obj.max_outdoor_temperature;
+            this.delta_temperature = obj.delta_temperature;
+            this.schedule = obj.schedule;
         }
     }
 
@@ -92,7 +94,7 @@ export class VentilationControlAbridged extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

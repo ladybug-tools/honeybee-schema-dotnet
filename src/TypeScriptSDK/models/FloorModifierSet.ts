@@ -1,4 +1,5 @@
 ﻿import { IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
@@ -34,9 +35,10 @@ export class FloorModifierSet extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.exterior_modifier = _data["exterior_modifier"];
-            this.interior_modifier = _data["interior_modifier"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "FloorModifierSet";
+            const obj = plainToClass(FloorModifierSet, _data);
+            this.exterior_modifier = obj.exterior_modifier;
+            this.interior_modifier = obj.interior_modifier;
+            this.type = obj.type;
         }
     }
 
@@ -66,7 +68,7 @@ export class FloorModifierSet extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

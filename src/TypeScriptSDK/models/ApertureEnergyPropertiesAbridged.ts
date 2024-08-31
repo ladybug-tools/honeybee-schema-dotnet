@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { VentilationOpening } from "./VentilationOpening";
 
@@ -14,6 +15,7 @@ export class ApertureEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     construction?: string;
 	
     @IsInstance(VentilationOpening)
+    @Type(() => VentilationOpening)
     @ValidateNested()
     @IsOptional()
     /** An optional VentilationOpening to specify the operable portion of the Aperture. */
@@ -29,9 +31,10 @@ export class ApertureEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "ApertureEnergyPropertiesAbridged";
-            this.construction = _data["construction"];
-            this.vent_opening = _data["vent_opening"];
+            const obj = plainToClass(ApertureEnergyPropertiesAbridged, _data);
+            this.type = obj.type;
+            this.construction = obj.construction;
+            this.vent_opening = obj.vent_opening;
         }
     }
 
@@ -61,7 +64,7 @@ export class ApertureEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

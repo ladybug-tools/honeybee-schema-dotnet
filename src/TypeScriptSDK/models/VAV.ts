@@ -1,4 +1,5 @@
-﻿import { IsEnum, ValidateNested, IsOptional, IsNumber, IsBoolean, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsOptional, IsNumber, IsBoolean, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { AllAirEconomizerType } from "./AllAirEconomizerType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { VAVEquipmentType } from "./VAVEquipmentType";
@@ -7,13 +8,13 @@ import { Vintages } from "./Vintages";
 /** Variable Air Volume (VAV) HVAC system (aka. System 7 or 8).\n\nAll rooms/zones are connected to a central air loop that is kept at a constant\ncentral temperature of 12.8C (55F). The central temperature is maintained by a\ncooling coil, which runs whenever the combination of return air and fresh outdoor\nair is greater than 12.8C, as well as a heating coil, which runs whenever\nthe combination of return air and fresh outdoor air is less than 12.8C.\n\nEach air terminal for the connected rooms/zones contains its own reheat coil,\nwhich runs whenever the room is not in need of the cooling supplied by the 12.8C\ncentral air.\n\nThe central cooling coil is always a chilled water coil, which is connected to a\nchilled water loop operating at 6.7C (44F). All heating coils are hot water coils\nexcept when Gas Coil equipment_type is used (in which case coils are gas)\nor when Parallel Fan-Powered (PFP) boxes equipment_type is used (in which case\ncoils are electric resistance). Hot water temperature is 82C (180F) for\nboiler/district heating and 49C (120F) when ASHP is used.\n\nVAV systems are the traditional baseline system for commercial buildings\ntaller than 5 stories or larger than 14,000 m2 (150,000 ft2) of floor area. */
 export class VAV extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
     vintage?: Vintages;
 	
     @IsEnum(AllAirEconomizerType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration). */
     economizer_type?: AllAirEconomizerType;
@@ -38,7 +39,7 @@ export class VAV extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsEnum(VAVEquipmentType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text for the specific type of system equipment from the VAVEquipmentType enumeration. */
     equipment_type?: VAVEquipmentType;
@@ -59,13 +60,14 @@ export class VAV extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.vintage = _data["vintage"] !== undefined ? _data["vintage"] : Vintages.ASHRAE_2019;
-            this.economizer_type = _data["economizer_type"] !== undefined ? _data["economizer_type"] : AllAirEconomizerType.NoEconomizer;
-            this.sensible_heat_recovery = _data["sensible_heat_recovery"] !== undefined ? _data["sensible_heat_recovery"] : 0;
-            this.latent_heat_recovery = _data["latent_heat_recovery"] !== undefined ? _data["latent_heat_recovery"] : 0;
-            this.demand_controlled_ventilation = _data["demand_controlled_ventilation"] !== undefined ? _data["demand_controlled_ventilation"] : false;
-            this.type = _data["type"] !== undefined ? _data["type"] : "VAV";
-            this.equipment_type = _data["equipment_type"] !== undefined ? _data["equipment_type"] : VAVEquipmentType.VAV_Chiller_Boiler;
+            const obj = plainToClass(VAV, _data);
+            this.vintage = obj.vintage;
+            this.economizer_type = obj.economizer_type;
+            this.sensible_heat_recovery = obj.sensible_heat_recovery;
+            this.latent_heat_recovery = obj.latent_heat_recovery;
+            this.demand_controlled_ventilation = obj.demand_controlled_ventilation;
+            this.type = obj.type;
+            this.equipment_type = obj.equipment_type;
         }
     }
 
@@ -99,7 +101,7 @@ export class VAV extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

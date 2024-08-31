@@ -1,4 +1,5 @@
-﻿import { IsString, IsOptional, IsEnum, ValidateNested, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsEnum, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { CalculationMethod } from "./CalculationMethod";
 import { CalculationUpdateMethod } from "./CalculationUpdateMethod";
@@ -11,18 +12,18 @@ export class ShadowCalculation extends _OpenAPIGenBaseModel {
     type?: string;
 	
     @IsEnum(SolarDistribution)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     solar_distribution?: SolarDistribution;
 	
     @IsEnum(CalculationMethod)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text noting whether CPU-based polygon clipping method orGPU-based pixel counting method should be used. For low numbers of shadingsurfaces (less than ~200), PolygonClipping requires less runtime thanPixelCounting. However, PixelCounting runtime scales significantlybetter at higher numbers of shading surfaces. PixelCounting also hasno limitations related to zone concavity when used with any“FullInterior” solar distribution options. */
     calculation_method?: CalculationMethod;
 	
     @IsEnum(CalculationUpdateMethod)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text describing how often the solar and shading calculations are updated with respect to the flow of time in the simulation. */
     calculation_update_method?: CalculationUpdateMethod;
@@ -52,12 +53,13 @@ export class ShadowCalculation extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "ShadowCalculation";
-            this.solar_distribution = _data["solar_distribution"] !== undefined ? _data["solar_distribution"] : SolarDistribution.FullExteriorWithReflections;
-            this.calculation_method = _data["calculation_method"] !== undefined ? _data["calculation_method"] : CalculationMethod.PolygonClipping;
-            this.calculation_update_method = _data["calculation_update_method"] !== undefined ? _data["calculation_update_method"] : CalculationUpdateMethod.Periodic;
-            this.calculation_frequency = _data["calculation_frequency"] !== undefined ? _data["calculation_frequency"] : 30;
-            this.maximum_figures = _data["maximum_figures"] !== undefined ? _data["maximum_figures"] : 15000;
+            const obj = plainToClass(ShadowCalculation, _data);
+            this.type = obj.type;
+            this.solar_distribution = obj.solar_distribution;
+            this.calculation_method = obj.calculation_method;
+            this.calculation_update_method = obj.calculation_update_method;
+            this.calculation_frequency = obj.calculation_frequency;
+            this.maximum_figures = obj.maximum_figures;
         }
     }
 
@@ -90,7 +92,7 @@ export class ShadowCalculation extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

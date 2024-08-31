@@ -1,10 +1,11 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, ValidateNested, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 
 /** Used to describe the daily schedule for a single simulation day. */
 export class ScheduleDay extends EnergyBaseModel {
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({},{ each: true })
     @IsDefined()
     /** A list of floats or integers for the values of the schedule. The length of this list must match the length of the times list. */
     values!: number [];
@@ -14,7 +15,10 @@ export class ScheduleDay extends EnergyBaseModel {
     type?: string;
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsArray({ each: true })
+    @ValidateNested({each: true })
+    @Type(() => Array)
+    @IsInt({ each: true })
     @IsOptional()
     /** A list of lists with each sub-list possessing 2 values for [hour, minute]. The length of the master list must match the length of the values list. Each time in the master list represents the time of day that the corresponding value begins to take effect. For example [(0,0), (9,0), (17,0)] in combination with the values [0, 1, 0] denotes a schedule value of 0 from 0:00 to 9:00, a value of 1 from 9:00 to 17:00 and 0 from 17:00 to the end of the day. Note that this representation of times as the ""time of beginning"" is a different convention than EnergyPlus, which uses ""time until"". */
     times?: number [] [];
@@ -36,10 +40,11 @@ export class ScheduleDay extends EnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.values = _data["values"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "ScheduleDay";
-            this.times = _data["times"] !== undefined ? _data["times"] : [[0, 0]];
-            this.interpolate = _data["interpolate"] !== undefined ? _data["interpolate"] : false;
+            const obj = plainToClass(ScheduleDay, _data);
+            this.values = obj.values;
+            this.type = obj.type;
+            this.times = obj.times;
+            this.interpolate = obj.interpolate;
         }
     }
 
@@ -70,7 +75,7 @@ export class ScheduleDay extends EnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

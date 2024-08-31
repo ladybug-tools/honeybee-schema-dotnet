@@ -1,4 +1,5 @@
-﻿import { IsEnum, ValidateNested, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { GasUnitHeaterEquipmentType } from "./GasUnitHeaterEquipmentType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
@@ -6,7 +7,7 @@ import { Vintages } from "./Vintages";
 /** Gas unit heating system.\n\nGas unit systems are intended for spaces only requiring heating and no\nventilation or cooling. Each room/zone will get its own gaa heating unit\nthat satisfies the heating load. */
 export class GasUnitHeater extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
     vintage?: Vintages;
@@ -16,7 +17,7 @@ export class GasUnitHeater extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsEnum(GasUnitHeaterEquipmentType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text for the specific type of system equipment from the GasUnitHeaterEquipmentType enumeration. */
     equipment_type?: GasUnitHeaterEquipmentType;
@@ -33,9 +34,10 @@ export class GasUnitHeater extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.vintage = _data["vintage"] !== undefined ? _data["vintage"] : Vintages.ASHRAE_2019;
-            this.type = _data["type"] !== undefined ? _data["type"] : "GasUnitHeater";
-            this.equipment_type = _data["equipment_type"] !== undefined ? _data["equipment_type"] : GasUnitHeaterEquipmentType.GasHeaters;
+            const obj = plainToClass(GasUnitHeater, _data);
+            this.vintage = obj.vintage;
+            this.type = obj.type;
+            this.equipment_type = obj.equipment_type;
         }
     }
 
@@ -65,7 +67,7 @@ export class GasUnitHeater extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

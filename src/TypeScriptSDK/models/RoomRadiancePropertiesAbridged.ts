@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Abridged Radiance Properties for Honeybee Room. */
@@ -22,8 +23,9 @@ export class RoomRadiancePropertiesAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "RoomRadiancePropertiesAbridged";
-            this.modifier_set = _data["modifier_set"];
+            const obj = plainToClass(RoomRadiancePropertiesAbridged, _data);
+            this.type = obj.type;
+            this.modifier_set = obj.modifier_set;
         }
     }
 
@@ -52,7 +54,7 @@ export class RoomRadiancePropertiesAbridged extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

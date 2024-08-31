@@ -1,4 +1,5 @@
-﻿import { IsString, IsOptional, IsEnum, ValidateNested, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { SHWEquipmentType } from "./SHWEquipmentType";
@@ -10,7 +11,7 @@ export class SHWSystem extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsEnum(SHWEquipmentType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone. */
     equipment_type?: SHWEquipmentType;
@@ -42,11 +43,12 @@ export class SHWSystem extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "SHWSystem";
-            this.equipment_type = _data["equipment_type"] !== undefined ? _data["equipment_type"] : SHWEquipmentType.Gas_WaterHeater;
-            this.heater_efficiency = _data["heater_efficiency"] !== undefined ? _data["heater_efficiency"] : new Autocalculate();
-            this.ambient_condition = _data["ambient_condition"] !== undefined ? _data["ambient_condition"] : 22;
-            this.ambient_loss_coefficient = _data["ambient_loss_coefficient"] !== undefined ? _data["ambient_loss_coefficient"] : 6;
+            const obj = plainToClass(SHWSystem, _data);
+            this.type = obj.type;
+            this.equipment_type = obj.equipment_type;
+            this.heater_efficiency = obj.heater_efficiency;
+            this.ambient_condition = obj.ambient_condition;
+            this.ambient_loss_coefficient = obj.ambient_loss_coefficient;
         }
     }
 
@@ -78,7 +80,7 @@ export class SHWSystem extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

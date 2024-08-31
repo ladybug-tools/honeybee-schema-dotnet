@@ -1,4 +1,5 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsDefined, IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { EnergyWindowFrame } from "./EnergyWindowFrame";
 import { EnergyWindowMaterialGas } from "./EnergyWindowMaterialGas";
 import { EnergyWindowMaterialGasCustom } from "./EnergyWindowMaterialGasCustom";
@@ -10,7 +11,6 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 /** Construction for window objects (Aperture, Door). */
 export class WindowConstruction extends IDdEnergyBaseModel {
     @IsArray()
-    @ValidateNested({ each: true })
     @IsDefined()
     /** List of glazing and gas material definitions. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer. */
     materials!: (EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas | EnergyWindowMaterialGasCustom | EnergyWindowMaterialGasMixture) [];
@@ -20,6 +20,7 @@ export class WindowConstruction extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsInstance(EnergyWindowFrame)
+    @Type(() => EnergyWindowFrame)
     @ValidateNested()
     @IsOptional()
     /** An optional window frame material for the frame that surrounds the window construction. */
@@ -35,9 +36,10 @@ export class WindowConstruction extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.materials = _data["materials"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "WindowConstruction";
-            this.frame = _data["frame"];
+            const obj = plainToClass(WindowConstruction, _data);
+            this.materials = obj.materials;
+            this.type = obj.type;
+            this.frame = obj.frame;
         }
     }
 
@@ -67,7 +69,7 @@ export class WindowConstruction extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

@@ -1,15 +1,16 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 
 /** A single line segment face in 3D space. */
 export class LineSegment3D {
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({},{ each: true })
     @IsDefined()
     /** Line segment base point as 3 (x, y, z) values. */
     p!: number [];
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({},{ each: true })
     @IsDefined()
     /** Line segment direction vector as 3 (x, y, z) values. */
     v!: number [];
@@ -26,9 +27,10 @@ export class LineSegment3D {
 
     init(_data?: any) {
         if (_data) {
-            this.p = _data["p"];
-            this.v = _data["v"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "LineSegment3D";
+            const obj = plainToClass(LineSegment3D, _data);
+            this.p = obj.p;
+            this.v = obj.v;
+            this.type = obj.type;
         }
     }
 

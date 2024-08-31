@@ -1,10 +1,11 @@
-﻿import { IsEnum, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { GeometryObjectTypes } from "./GeometryObjectTypes";
 
 export class _DiffObjectBase extends _OpenAPIGenBaseModel {
     @IsEnum(GeometryObjectTypes)
-    @ValidateNested()
+    @Type(() => String)
     @IsDefined()
     /** Text for the type of object that has been changed. */
     element_type!: GeometryObjectTypes;
@@ -33,10 +34,11 @@ export class _DiffObjectBase extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.element_type = _data["element_type"];
-            this.element_id = _data["element_id"];
-            this.element_name = _data["element_name"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "_DiffObjectBase";
+            const obj = plainToClass(_DiffObjectBase, _data);
+            this.element_type = obj.element_type;
+            this.element_id = obj.element_id;
+            this.element_name = obj.element_name;
+            this.type = obj.type;
         }
     }
 
@@ -67,7 +69,7 @@ export class _DiffObjectBase extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

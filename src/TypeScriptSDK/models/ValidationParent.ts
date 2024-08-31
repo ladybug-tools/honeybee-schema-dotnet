@@ -1,9 +1,10 @@
-﻿import { IsEnum, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { ParentTypes } from "./ParentTypes";
 
 export class ValidationParent {
     @IsEnum(ParentTypes)
-    @ValidateNested()
+    @Type(() => String)
     @IsDefined()
     /** Text for the type of object that the parent is. */
     parent_type!: ParentTypes;
@@ -30,10 +31,11 @@ export class ValidationParent {
 
     init(_data?: any) {
         if (_data) {
-            this.parent_type = _data["parent_type"];
-            this.id = _data["id"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "ValidationParent";
-            this.name = _data["name"];
+            const obj = plainToClass(ValidationParent, _data);
+            this.parent_type = obj.parent_type;
+            this.id = obj.id;
+            this.type = obj.type;
+            this.name = obj.name;
         }
     }
 

@@ -1,4 +1,5 @@
-﻿import { IsString, IsDefined, IsEnum, ValidateNested, IsArray, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, IsEnum, IsArray, IsOptional, ValidateNested, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { ExtensionTypes } from "./ExtensionTypes";
 import { LineSegment3D } from "./LineSegment3D";
 import { ObjectTypes } from "./ObjectTypes";
@@ -17,19 +18,19 @@ export class ValidationError {
     error_type!: string;
 	
     @IsEnum(ExtensionTypes)
-    @ValidateNested()
+    @Type(() => String)
     @IsDefined()
     /** Text for the Honeybee extension from which the error originated (from the ExtensionTypes enumeration). */
     extension_type!: ExtensionTypes;
 	
     @IsEnum(ObjectTypes)
-    @ValidateNested()
+    @Type(() => String)
     @IsDefined()
     /** Text for the type of object that caused the error. */
     element_type!: ObjectTypes;
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsString({ each: true })
     @IsDefined()
     /** A list of text strings for the unique object IDs that caused the error. The list typically contains a single item but there are some types errors that stem from multiple objects like mis-matched area adjacencies or overlapping Room geometries. Note that the IDs in this list can be the identifier of a core object like a Room or a Face or it can be for an extension object like a SensorGrid or a Construction. */
     element_id!: string [];
@@ -44,25 +45,31 @@ export class ValidationError {
     type?: string;
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsString({ each: true })
     @IsOptional()
     /** A list of text strings for the display names of the objects that caused the error. */
     element_name?: string [];
 	
     @IsArray()
+    @IsArray({ each: true })
+    @ValidateNested({each: true })
+    @Type(() => Array)
+    @IsInstance(ValidationParent, { each: true })
+    @Type(() => ValidationParent)
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list lists where each sub-list corresponds to one of the objects in the element_id property. Each sub-list contains information for the parent objects of the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room. */
     parents?: ValidationParent [] [];
 	
     @IsArray()
+    @IsInstance(ValidationParent, { each: true })
+    @Type(() => ValidationParent)
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved. */
     top_parents?: ValidationParent [];
 	
     @IsArray()
-    @ValidateNested({ each: true })
     @IsOptional()
     /** An optional list of geometry objects that helps illustrate where exactly issues with invalid geometry exist within the Honeybee object. Examples include the naked and non-manifold line segments for non-solid Room geometries, the points of self-intersection for cases of self-intersecting geometry and out-of-plane vertices for non-planar objects. Oftentimes, zooming directly to these helper geometries will help end users understand invalid situations in their model faster than simple zooming to the invalid Honeybee object in its totality. */
     helper_geometry?: (Point3D | LineSegment3D) [];
@@ -75,17 +82,18 @@ export class ValidationError {
 
     init(_data?: any) {
         if (_data) {
-            this.code = _data["code"];
-            this.error_type = _data["error_type"];
-            this.extension_type = _data["extension_type"];
-            this.element_type = _data["element_type"];
-            this.element_id = _data["element_id"];
-            this.message = _data["message"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "ValidationError";
-            this.element_name = _data["element_name"];
-            this.parents = _data["parents"];
-            this.top_parents = _data["top_parents"];
-            this.helper_geometry = _data["helper_geometry"];
+            const obj = plainToClass(ValidationError, _data);
+            this.code = obj.code;
+            this.error_type = obj.error_type;
+            this.extension_type = obj.extension_type;
+            this.element_type = obj.element_type;
+            this.element_id = obj.element_id;
+            this.message = obj.message;
+            this.type = obj.type;
+            this.element_name = obj.element_name;
+            this.parents = obj.parents;
+            this.top_parents = obj.top_parents;
+            this.helper_geometry = obj.helper_geometry;
         }
     }
 

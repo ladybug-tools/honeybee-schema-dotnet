@@ -1,4 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { ControlType } from "./ControlType";
 import { EnergyWindowMaterialBlind } from "./EnergyWindowMaterialBlind";
 import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
@@ -12,6 +13,7 @@ import { WindowConstruction } from "./WindowConstruction";
 /** Construction for window objects (Aperture, Door). */
 export class WindowConstructionShade extends IDdEnergyBaseModel {
     @IsInstance(WindowConstruction)
+    @Type(() => WindowConstruction)
     @ValidateNested()
     @IsDefined()
     /** A WindowConstruction object that serves as the ""switched off"" version of the construction (aka. the ""bare construction""). The shade_material and shade_location will be used to modify this starting construction. */
@@ -26,13 +28,13 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsEnum(ShadeLocation)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the ""Between"" option. Also note that, for a WindowConstruction with more than one gas gap, the ""Between"" option defaults to using the inner gap as this is the only option that EnergyPlus supports. */
     shade_location?: ShadeLocation;
 	
     @IsEnum(ControlType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text to indicate how the shading device is controlled, which determines when the shading is “on” or “off.” */
     control_type?: ControlType;
@@ -58,13 +60,14 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.window_construction = _data["window_construction"];
-            this.shade_material = _data["shade_material"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "WindowConstructionShade";
-            this.shade_location = _data["shade_location"] !== undefined ? _data["shade_location"] : ShadeLocation.Interior;
-            this.control_type = _data["control_type"] !== undefined ? _data["control_type"] : ControlType.AlwaysOn;
-            this.setpoint = _data["setpoint"];
-            this.schedule = _data["schedule"];
+            const obj = plainToClass(WindowConstructionShade, _data);
+            this.window_construction = obj.window_construction;
+            this.shade_material = obj.shade_material;
+            this.type = obj.type;
+            this.shade_location = obj.shade_location;
+            this.control_type = obj.control_type;
+            this.setpoint = obj.setpoint;
+            this.schedule = obj.schedule;
         }
     }
 
@@ -98,7 +101,7 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

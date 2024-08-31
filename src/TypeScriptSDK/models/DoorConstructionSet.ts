@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { OpaqueConstruction } from "./OpaqueConstruction";
 import { WindowConstruction } from "./WindowConstruction";
@@ -12,18 +13,21 @@ export class DoorConstructionSet extends _OpenAPIGenBaseModel {
     type?: string;
 	
     @IsInstance(OpaqueConstruction)
+    @Type(() => OpaqueConstruction)
     @ValidateNested()
     @IsOptional()
     /** An OpaqueConstruction for all opaque doors with a Surface boundary condition. */
     interior_construction?: OpaqueConstruction;
 	
     @IsInstance(OpaqueConstruction)
+    @Type(() => OpaqueConstruction)
     @ValidateNested()
     @IsOptional()
     /** An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face. */
     exterior_construction?: OpaqueConstruction;
 	
     @IsInstance(OpaqueConstruction)
+    @Type(() => OpaqueConstruction)
     @ValidateNested()
     @IsOptional()
     /** An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face. */
@@ -47,12 +51,13 @@ export class DoorConstructionSet extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "DoorConstructionSet";
-            this.interior_construction = _data["interior_construction"];
-            this.exterior_construction = _data["exterior_construction"];
-            this.overhead_construction = _data["overhead_construction"];
-            this.exterior_glass_construction = _data["exterior_glass_construction"];
-            this.interior_glass_construction = _data["interior_glass_construction"];
+            const obj = plainToClass(DoorConstructionSet, _data);
+            this.type = obj.type;
+            this.interior_construction = obj.interior_construction;
+            this.exterior_construction = obj.exterior_construction;
+            this.overhead_construction = obj.overhead_construction;
+            this.exterior_glass_construction = obj.exterior_glass_construction;
+            this.interior_glass_construction = obj.interior_glass_construction;
         }
     }
 
@@ -85,7 +90,7 @@ export class DoorConstructionSet extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

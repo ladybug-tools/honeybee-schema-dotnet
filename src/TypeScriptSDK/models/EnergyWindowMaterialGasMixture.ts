@@ -1,17 +1,19 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsEnum, IsDefined, IsNumber, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { GasType } from "./GasType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Create a mixture of two to four different gases to fill the panes of multiple\npane windows. */
 export class EnergyWindowMaterialGasMixture extends IDdEnergyBaseModel {
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsEnum(GasType, { each: true })
+    @Type(() => String)
     @IsDefined()
     /** List of gases in the gas mixture. */
     gas_types!: GasType [];
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({},{ each: true })
     @IsDefined()
     /** A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1. */
     gas_fractions!: number [];
@@ -36,10 +38,11 @@ export class EnergyWindowMaterialGasMixture extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.gas_types = _data["gas_types"];
-            this.gas_fractions = _data["gas_fractions"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "EnergyWindowMaterialGasMixture";
-            this.thickness = _data["thickness"] !== undefined ? _data["thickness"] : 0.0125;
+            const obj = plainToClass(EnergyWindowMaterialGasMixture, _data);
+            this.gas_types = obj.gas_types;
+            this.gas_fractions = obj.gas_fractions;
+            this.type = obj.type;
+            this.thickness = obj.thickness;
         }
     }
 
@@ -70,7 +73,7 @@ export class EnergyWindowMaterialGasMixture extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

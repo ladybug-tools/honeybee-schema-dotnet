@@ -1,4 +1,5 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 
 /** A point object in 3D space. */
 export class Point3D {
@@ -29,10 +30,11 @@ export class Point3D {
 
     init(_data?: any) {
         if (_data) {
-            this.x = _data["x"];
-            this.y = _data["y"];
-            this.z = _data["z"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "Point3D";
+            const obj = plainToClass(Point3D, _data);
+            this.x = obj.x;
+            this.y = obj.y;
+            this.z = obj.z;
+            this.type = obj.type;
         }
     }
 

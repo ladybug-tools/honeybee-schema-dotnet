@@ -1,4 +1,5 @@
-﻿import { IsOptional, IsArray, ValidateNested, IsNumber, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsOptional, IsArray, IsNumber, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
 import { Glow } from "./Glow";
@@ -16,7 +17,6 @@ export class Metal extends ModifierBase {
     modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsArray()
-    @ValidateNested({ each: true })
     @IsOptional()
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
     dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) [];
@@ -66,14 +66,15 @@ export class Metal extends ModifierBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.modifier = _data["modifier"] !== undefined ? _data["modifier"] : new Void();
-            this.dependencies = _data["dependencies"];
-            this.r_reflectance = _data["r_reflectance"] !== undefined ? _data["r_reflectance"] : 0;
-            this.g_reflectance = _data["g_reflectance"] !== undefined ? _data["g_reflectance"] : 0;
-            this.b_reflectance = _data["b_reflectance"] !== undefined ? _data["b_reflectance"] : 0;
-            this.specularity = _data["specularity"] !== undefined ? _data["specularity"] : 0.9;
-            this.roughness = _data["roughness"] !== undefined ? _data["roughness"] : 0;
-            this.type = _data["type"] !== undefined ? _data["type"] : "Metal";
+            const obj = plainToClass(Metal, _data);
+            this.modifier = obj.modifier;
+            this.dependencies = obj.dependencies;
+            this.r_reflectance = obj.r_reflectance;
+            this.g_reflectance = obj.g_reflectance;
+            this.b_reflectance = obj.b_reflectance;
+            this.specularity = obj.specularity;
+            this.roughness = obj.roughness;
+            this.type = obj.type;
         }
     }
 
@@ -108,7 +109,7 @@ export class Metal extends ModifierBase {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

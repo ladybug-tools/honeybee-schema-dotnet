@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsNumber, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
@@ -59,14 +60,15 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "VentilationOpening";
-            this.fraction_area_operable = _data["fraction_area_operable"] !== undefined ? _data["fraction_area_operable"] : 0.5;
-            this.fraction_height_operable = _data["fraction_height_operable"] !== undefined ? _data["fraction_height_operable"] : 1;
-            this.discharge_coefficient = _data["discharge_coefficient"] !== undefined ? _data["discharge_coefficient"] : 0.45;
-            this.wind_cross_vent = _data["wind_cross_vent"] !== undefined ? _data["wind_cross_vent"] : false;
-            this.flow_coefficient_closed = _data["flow_coefficient_closed"] !== undefined ? _data["flow_coefficient_closed"] : 0;
-            this.flow_exponent_closed = _data["flow_exponent_closed"] !== undefined ? _data["flow_exponent_closed"] : 0.65;
-            this.two_way_threshold = _data["two_way_threshold"] !== undefined ? _data["two_way_threshold"] : 0.0001;
+            const obj = plainToClass(VentilationOpening, _data);
+            this.type = obj.type;
+            this.fraction_area_operable = obj.fraction_area_operable;
+            this.fraction_height_operable = obj.fraction_height_operable;
+            this.discharge_coefficient = obj.discharge_coefficient;
+            this.wind_cross_vent = obj.wind_cross_vent;
+            this.flow_coefficient_closed = obj.flow_coefficient_closed;
+            this.flow_exponent_closed = obj.flow_exponent_closed;
+            this.two_way_threshold = obj.two_way_threshold;
         }
     }
 
@@ -101,7 +103,7 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

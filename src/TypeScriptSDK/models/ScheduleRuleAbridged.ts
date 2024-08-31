@@ -1,4 +1,5 @@
-﻿import { IsString, IsDefined, IsOptional, IsBoolean, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, IsOptional, IsBoolean, IsArray, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { DatedBaseModel } from "./DatedBaseModel";
 
 /** Schedule rule including a ScheduleDay and when it should be applied.. */
@@ -48,13 +49,13 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
     apply_saturday?: boolean;
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsInt({ each: true })
     @IsOptional()
     /** A list of two integers for [month, day], representing the start date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case). */
     start_date?: number [];
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsInt({ each: true })
     @IsOptional()
     /** A list of two integers for [month, day], representing the end date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case). */
     end_date?: number [];
@@ -78,17 +79,18 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.schedule_day = _data["schedule_day"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "ScheduleRuleAbridged";
-            this.apply_sunday = _data["apply_sunday"] !== undefined ? _data["apply_sunday"] : false;
-            this.apply_monday = _data["apply_monday"] !== undefined ? _data["apply_monday"] : false;
-            this.apply_tuesday = _data["apply_tuesday"] !== undefined ? _data["apply_tuesday"] : false;
-            this.apply_wednesday = _data["apply_wednesday"] !== undefined ? _data["apply_wednesday"] : false;
-            this.apply_thursday = _data["apply_thursday"] !== undefined ? _data["apply_thursday"] : false;
-            this.apply_friday = _data["apply_friday"] !== undefined ? _data["apply_friday"] : false;
-            this.apply_saturday = _data["apply_saturday"] !== undefined ? _data["apply_saturday"] : false;
-            this.start_date = _data["start_date"] !== undefined ? _data["start_date"] : [1, 1];
-            this.end_date = _data["end_date"] !== undefined ? _data["end_date"] : [12, 31];
+            const obj = plainToClass(ScheduleRuleAbridged, _data);
+            this.schedule_day = obj.schedule_day;
+            this.type = obj.type;
+            this.apply_sunday = obj.apply_sunday;
+            this.apply_monday = obj.apply_monday;
+            this.apply_tuesday = obj.apply_tuesday;
+            this.apply_wednesday = obj.apply_wednesday;
+            this.apply_thursday = obj.apply_thursday;
+            this.apply_friday = obj.apply_friday;
+            this.apply_saturday = obj.apply_saturday;
+            this.start_date = obj.start_date;
+            this.end_date = obj.end_date;
         }
     }
 
@@ -126,7 +128,7 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

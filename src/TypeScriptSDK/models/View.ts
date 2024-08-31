@@ -1,23 +1,24 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _RadianceAsset } from "./_RadianceAsset";
 import { ViewType } from "./ViewType";
 
 /** A single Radiance of sensors. */
 export class View extends _RadianceAsset {
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({},{ each: true })
     @IsDefined()
     /** The view position (-vp) as an array of (x, y, z) values.This is the focal point of a perspective view or the center of a parallel projection. */
     position!: number [];
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({},{ each: true })
     @IsDefined()
     /** The view direction (-vd) as an array of (x, y, z) values.The length of this vector indicates the focal distance as needed by the pixel depth of field (-pd) in rpict. */
     direction!: number [];
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({},{ each: true })
     @IsDefined()
     /** The view up (-vu) vector as an array of (x, y, z) values. */
     up_vector!: number [];
@@ -27,7 +28,7 @@ export class View extends _RadianceAsset {
     type?: string;
 	
     @IsEnum(ViewType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     view_type?: ViewType;
 	
@@ -79,18 +80,19 @@ export class View extends _RadianceAsset {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.position = _data["position"];
-            this.direction = _data["direction"];
-            this.up_vector = _data["up_vector"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "View";
-            this.view_type = _data["view_type"] !== undefined ? _data["view_type"] : ViewType.v;
-            this.h_size = _data["h_size"] !== undefined ? _data["h_size"] : 60;
-            this.v_size = _data["v_size"] !== undefined ? _data["v_size"] : 60;
-            this.shift = _data["shift"];
-            this.lift = _data["lift"];
-            this.fore_clip = _data["fore_clip"];
-            this.aft_clip = _data["aft_clip"];
-            this.group_identifier = _data["group_identifier"];
+            const obj = plainToClass(View, _data);
+            this.position = obj.position;
+            this.direction = obj.direction;
+            this.up_vector = obj.up_vector;
+            this.type = obj.type;
+            this.view_type = obj.view_type;
+            this.h_size = obj.h_size;
+            this.v_size = obj.v_size;
+            this.shift = obj.shift;
+            this.lift = obj.lift;
+            this.fore_clip = obj.fore_clip;
+            this.aft_clip = obj.aft_clip;
+            this.group_identifier = obj.group_identifier;
         }
     }
 
@@ -129,7 +131,7 @@ export class View extends _RadianceAsset {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

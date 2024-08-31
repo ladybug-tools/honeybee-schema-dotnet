@@ -1,4 +1,5 @@
-﻿import { IsString, IsOptional, IsEnum, ValidateNested, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BuildingType } from "./BuildingType";
 import { VentilationControlType } from "./VentilationControlType";
@@ -10,7 +11,7 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
     type?: string;
 	
     @IsEnum(VentilationControlType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text indicating type of ventilation control. Choices are: SingleZone, MultiZoneWithDistribution, MultiZoneWithoutDistribution. The MultiZone options will model air flow with the AirflowNetwork model, which is generally more accurate then the SingleZone option, but will take considerably longer to simulate, and requires defining more ventilation parameters to explicitly account for weather and building-induced pressure differences, and the leakage geometry corresponding to specific windows, doors, and surface cracks. */
     vent_control_type?: VentilationControlType;
@@ -31,7 +32,7 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
     reference_humidity_ratio?: number;
 	
     @IsEnum(BuildingType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text indicating relationship between building footprint and height used to calculate the wind pressure coefficients for exterior surfaces.Choices are: LowRise and HighRise. LowRise corresponds to rectangular building whose height is less then three times the width and length of the footprint. HighRise corresponds to a rectangular building whose height is more than three times the width and length of the footprint. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate. */
     building_type?: BuildingType;
@@ -63,14 +64,15 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "VentilationSimulationControl";
-            this.vent_control_type = _data["vent_control_type"] !== undefined ? _data["vent_control_type"] : VentilationControlType.SingleZone;
-            this.reference_temperature = _data["reference_temperature"] !== undefined ? _data["reference_temperature"] : 20;
-            this.reference_pressure = _data["reference_pressure"] !== undefined ? _data["reference_pressure"] : 101325;
-            this.reference_humidity_ratio = _data["reference_humidity_ratio"] !== undefined ? _data["reference_humidity_ratio"] : 0;
-            this.building_type = _data["building_type"] !== undefined ? _data["building_type"] : BuildingType.LowRise;
-            this.long_axis_angle = _data["long_axis_angle"] !== undefined ? _data["long_axis_angle"] : 0;
-            this.aspect_ratio = _data["aspect_ratio"] !== undefined ? _data["aspect_ratio"] : 1;
+            const obj = plainToClass(VentilationSimulationControl, _data);
+            this.type = obj.type;
+            this.vent_control_type = obj.vent_control_type;
+            this.reference_temperature = obj.reference_temperature;
+            this.reference_pressure = obj.reference_pressure;
+            this.reference_humidity_ratio = obj.reference_humidity_ratio;
+            this.building_type = obj.building_type;
+            this.long_axis_angle = obj.long_axis_angle;
+            this.aspect_ratio = obj.aspect_ratio;
         }
     }
 
@@ -105,7 +107,7 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

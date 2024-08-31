@@ -1,10 +1,13 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { WindowConstructionAbridged } from "./WindowConstructionAbridged";
 
 /** Construction for window objects with an included shade layer. */
 export class WindowConstructionDynamicAbridged extends IDdEnergyBaseModel {
     @IsArray()
+    @IsInstance(WindowConstructionAbridged, { each: true })
+    @Type(() => WindowConstructionAbridged)
     @ValidateNested({ each: true })
     @IsDefined()
     /** A list of WindowConstructionAbridged objects that define the various states that the dynamic window can assume. */
@@ -29,9 +32,10 @@ export class WindowConstructionDynamicAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.constructions = _data["constructions"];
-            this.schedule = _data["schedule"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "WindowConstructionDynamicAbridged";
+            const obj = plainToClass(WindowConstructionDynamicAbridged, _data);
+            this.constructions = obj.constructions;
+            this.schedule = obj.schedule;
+            this.type = obj.type;
         }
     }
 
@@ -61,7 +65,7 @@ export class WindowConstructionDynamicAbridged extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

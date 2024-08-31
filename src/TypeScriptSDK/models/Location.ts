@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Autocalculate } from "./Autocalculate";
 
@@ -57,14 +58,15 @@ export class Location extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "Location";
-            this.city = _data["city"] !== undefined ? _data["city"] : "-";
-            this.latitude = _data["latitude"] !== undefined ? _data["latitude"] : 0;
-            this.longitude = _data["longitude"] !== undefined ? _data["longitude"] : 0;
-            this.time_zone = _data["time_zone"] !== undefined ? _data["time_zone"] : new Autocalculate();
-            this.elevation = _data["elevation"] !== undefined ? _data["elevation"] : 0;
-            this.station_id = _data["station_id"];
-            this.source = _data["source"];
+            const obj = plainToClass(Location, _data);
+            this.type = obj.type;
+            this.city = obj.city;
+            this.latitude = obj.latitude;
+            this.longitude = obj.longitude;
+            this.time_zone = obj.time_zone;
+            this.elevation = obj.elevation;
+            this.station_id = obj.station_id;
+            this.source = obj.source;
         }
     }
 
@@ -99,7 +101,7 @@ export class Location extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

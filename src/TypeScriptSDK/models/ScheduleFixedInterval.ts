@@ -1,11 +1,12 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsInstance, IsInt, IsNumber, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, IsInstance, ValidateNested, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleTypeLimit } from "./ScheduleTypeLimit";
 
 /** Used to specify a start date and a list of values for a period of analysis. */
 export class ScheduleFixedInterval extends IDdEnergyBaseModel {
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({},{ each: true })
     @IsDefined()
     /** A list of timeseries values occurring at each timestep over the course of the simulation. */
     values!: number [];
@@ -15,6 +16,7 @@ export class ScheduleFixedInterval extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsInstance(ScheduleTypeLimit)
+    @Type(() => ScheduleTypeLimit)
     @ValidateNested()
     @IsOptional()
     /** ScheduleTypeLimit object that will be used to validate schedule values against upper/lower limits and assign units to the schedule values. If None, no validation will occur. */
@@ -26,7 +28,7 @@ export class ScheduleFixedInterval extends IDdEnergyBaseModel {
     timestep?: number;
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsInt({ each: true })
     @IsOptional()
     /** A list of two integers for [month, day], representing the start date when the schedule values begin to take effect.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case). */
     start_date?: number [];
@@ -55,13 +57,14 @@ export class ScheduleFixedInterval extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.values = _data["values"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "ScheduleFixedInterval";
-            this.schedule_type_limit = _data["schedule_type_limit"];
-            this.timestep = _data["timestep"] !== undefined ? _data["timestep"] : 1;
-            this.start_date = _data["start_date"] !== undefined ? _data["start_date"] : [1, 1];
-            this.placeholder_value = _data["placeholder_value"] !== undefined ? _data["placeholder_value"] : 0;
-            this.interpolate = _data["interpolate"] !== undefined ? _data["interpolate"] : false;
+            const obj = plainToClass(ScheduleFixedInterval, _data);
+            this.values = obj.values;
+            this.type = obj.type;
+            this.schedule_type_limit = obj.schedule_type_limit;
+            this.timestep = obj.timestep;
+            this.start_date = obj.start_date;
+            this.placeholder_value = obj.placeholder_value;
+            this.interpolate = obj.interpolate;
         }
     }
 
@@ -95,7 +98,7 @@ export class ScheduleFixedInterval extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

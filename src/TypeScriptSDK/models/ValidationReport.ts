@@ -1,4 +1,5 @@
-﻿import { IsString, IsDefined, IsBoolean, IsOptional, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, IsBoolean, IsOptional, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { ValidationError } from "./ValidationError";
 
 export class ValidationReport {
@@ -32,6 +33,8 @@ export class ValidationReport {
     fatal_error?: string;
 	
     @IsArray()
+    @IsInstance(ValidationError, { each: true })
+    @Type(() => ValidationError)
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of objects for each error that was discovered in the model. This will be an empty list or None if no errors were found. */
@@ -47,13 +50,14 @@ export class ValidationReport {
 
     init(_data?: any) {
         if (_data) {
-            this.app_version = _data["app_version"];
-            this.schema_version = _data["schema_version"];
-            this.valid = _data["valid"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "ValidationReport";
-            this.app_name = _data["app_name"] !== undefined ? _data["app_name"] : "Honeybee";
-            this.fatal_error = _data["fatal_error"] !== undefined ? _data["fatal_error"] : "";
-            this.errors = _data["errors"];
+            const obj = plainToClass(ValidationReport, _data);
+            this.app_version = obj.app_version;
+            this.schema_version = obj.schema_version;
+            this.valid = obj.valid;
+            this.type = obj.type;
+            this.app_name = obj.app_name;
+            this.fatal_error = obj.fatal_error;
+            this.errors = obj.errors;
         }
     }
 

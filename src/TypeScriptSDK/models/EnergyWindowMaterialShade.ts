@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** This object specifies the properties of window shade materials. */
@@ -101,21 +102,22 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "EnergyWindowMaterialShade";
-            this.solar_transmittance = _data["solar_transmittance"] !== undefined ? _data["solar_transmittance"] : 0.4;
-            this.solar_reflectance = _data["solar_reflectance"] !== undefined ? _data["solar_reflectance"] : 0.5;
-            this.visible_transmittance = _data["visible_transmittance"] !== undefined ? _data["visible_transmittance"] : 0.4;
-            this.visible_reflectance = _data["visible_reflectance"] !== undefined ? _data["visible_reflectance"] : 0.4;
-            this.emissivity = _data["emissivity"] !== undefined ? _data["emissivity"] : 0.9;
-            this.infrared_transmittance = _data["infrared_transmittance"] !== undefined ? _data["infrared_transmittance"] : 0;
-            this.thickness = _data["thickness"] !== undefined ? _data["thickness"] : 0.005;
-            this.conductivity = _data["conductivity"] !== undefined ? _data["conductivity"] : 0.1;
-            this.distance_to_glass = _data["distance_to_glass"] !== undefined ? _data["distance_to_glass"] : 0.05;
-            this.top_opening_multiplier = _data["top_opening_multiplier"] !== undefined ? _data["top_opening_multiplier"] : 0.5;
-            this.bottom_opening_multiplier = _data["bottom_opening_multiplier"] !== undefined ? _data["bottom_opening_multiplier"] : 0.5;
-            this.left_opening_multiplier = _data["left_opening_multiplier"] !== undefined ? _data["left_opening_multiplier"] : 0.5;
-            this.right_opening_multiplier = _data["right_opening_multiplier"] !== undefined ? _data["right_opening_multiplier"] : 0.5;
-            this.airflow_permeability = _data["airflow_permeability"] !== undefined ? _data["airflow_permeability"] : 0;
+            const obj = plainToClass(EnergyWindowMaterialShade, _data);
+            this.type = obj.type;
+            this.solar_transmittance = obj.solar_transmittance;
+            this.solar_reflectance = obj.solar_reflectance;
+            this.visible_transmittance = obj.visible_transmittance;
+            this.visible_reflectance = obj.visible_reflectance;
+            this.emissivity = obj.emissivity;
+            this.infrared_transmittance = obj.infrared_transmittance;
+            this.thickness = obj.thickness;
+            this.conductivity = obj.conductivity;
+            this.distance_to_glass = obj.distance_to_glass;
+            this.top_opening_multiplier = obj.top_opening_multiplier;
+            this.bottom_opening_multiplier = obj.bottom_opening_multiplier;
+            this.left_opening_multiplier = obj.left_opening_multiplier;
+            this.right_opening_multiplier = obj.right_opening_multiplier;
+            this.airflow_permeability = obj.airflow_permeability;
         }
     }
 
@@ -157,7 +159,7 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

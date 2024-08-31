@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AFNCrack } from "./AFNCrack";
 
@@ -14,6 +15,7 @@ export class FaceEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     construction?: string;
 	
     @IsInstance(AFNCrack)
+    @Type(() => AFNCrack)
     @ValidateNested()
     @IsOptional()
     /** An optional AFNCrack to specify airflow through a surface crack used by the AirflowNetwork. */
@@ -29,9 +31,10 @@ export class FaceEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "FaceEnergyPropertiesAbridged";
-            this.construction = _data["construction"];
-            this.vent_crack = _data["vent_crack"];
+            const obj = plainToClass(FaceEnergyPropertiesAbridged, _data);
+            this.type = obj.type;
+            this.construction = obj.construction;
+            this.vent_crack = obj.vent_crack;
         }
     }
 
@@ -61,7 +64,7 @@ export class FaceEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

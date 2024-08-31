@@ -1,4 +1,5 @@
-﻿import { IsString, IsOptional, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsArray, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { DatedBaseModel } from "./DatedBaseModel";
 
 /** Used to describe the daylight savings time for the simulation. */
@@ -8,13 +9,13 @@ export class DaylightSavingTime extends DatedBaseModel {
     type?: string;
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsInt({ each: true })
     @IsOptional()
     /** A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017). */
     start_date?: number [];
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsInt({ each: true })
     @IsOptional()
     /** A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017). */
     end_date?: number [];
@@ -31,9 +32,10 @@ export class DaylightSavingTime extends DatedBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "DaylightSavingTime";
-            this.start_date = _data["start_date"] !== undefined ? _data["start_date"] : [3, 12];
-            this.end_date = _data["end_date"] !== undefined ? _data["end_date"] : [11, 5];
+            const obj = plainToClass(DaylightSavingTime, _data);
+            this.type = obj.type;
+            this.start_date = obj.start_date;
+            this.end_date = obj.end_date;
         }
     }
 
@@ -63,7 +65,7 @@ export class DaylightSavingTime extends DatedBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

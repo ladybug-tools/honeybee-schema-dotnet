@@ -1,4 +1,5 @@
-﻿import { IsString, IsOptional, IsEnum, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 import { NoLimit } from "./NoLimit";
 import { ScheduleNumericType } from "./ScheduleNumericType";
@@ -19,12 +20,12 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
     upper_limit?: (NoLimit | number);
 	
     @IsEnum(ScheduleNumericType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     numeric_type?: ScheduleNumericType;
 	
     @IsEnum(ScheduleUnitType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     unit_type?: ScheduleUnitType;
 	
@@ -42,11 +43,12 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "ScheduleTypeLimit";
-            this.lower_limit = _data["lower_limit"] !== undefined ? _data["lower_limit"] : new NoLimit();
-            this.upper_limit = _data["upper_limit"] !== undefined ? _data["upper_limit"] : new NoLimit();
-            this.numeric_type = _data["numeric_type"] !== undefined ? _data["numeric_type"] : ScheduleNumericType.Continuous;
-            this.unit_type = _data["unit_type"] !== undefined ? _data["unit_type"] : ScheduleUnitType.Dimensionless;
+            const obj = plainToClass(ScheduleTypeLimit, _data);
+            this.type = obj.type;
+            this.lower_limit = obj.lower_limit;
+            this.upper_limit = obj.upper_limit;
+            this.numeric_type = obj.numeric_type;
+            this.unit_type = obj.unit_type;
         }
     }
 
@@ -78,7 +80,7 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

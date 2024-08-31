@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { PVProperties } from "./PVProperties";
 
@@ -19,6 +20,7 @@ export class ShadeEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     transmittance_schedule?: string;
 	
     @IsInstance(PVProperties)
+    @Type(() => PVProperties)
     @ValidateNested()
     @IsOptional()
     /** An optional PVProperties object to specify photovoltaic behavior of the Shade. If None, the Shade will have no Photovoltaic properties. Note that the normal of the Shade is important in determining the performance of the shade as a PV geometry. */
@@ -34,10 +36,11 @@ export class ShadeEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "ShadeEnergyPropertiesAbridged";
-            this.construction = _data["construction"];
-            this.transmittance_schedule = _data["transmittance_schedule"];
-            this.pv_properties = _data["pv_properties"];
+            const obj = plainToClass(ShadeEnergyPropertiesAbridged, _data);
+            this.type = obj.type;
+            this.construction = obj.construction;
+            this.transmittance_schedule = obj.transmittance_schedule;
+            this.pv_properties = obj.pv_properties;
         }
     }
 
@@ -68,7 +71,7 @@ export class ShadeEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

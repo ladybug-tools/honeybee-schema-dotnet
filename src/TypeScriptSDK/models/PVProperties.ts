@@ -1,4 +1,5 @@
-﻿import { IsString, IsOptional, IsNumber, IsEnum, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsNumber, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 import { ModuleType } from "./ModuleType";
 import { MountingType } from "./MountingType";
@@ -20,13 +21,13 @@ export class PVProperties extends EnergyBaseModel {
     active_area_fraction?: number;
 	
     @IsEnum(ModuleType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text to indicate the type of solar module. This is used to determine the temperature coefficients used in the simulation of the photovoltaic modules. When the rated_efficiency is between 12-18%, the Standard type is typically most appropriate. When the rated_efficiency is greater than 18%, the Premium type is likely more appropriate. When the rated_efficiency is less than 12%, this likely refers to a case where the ThinFilm module type is most appropriate. */
     module_type?: ModuleType;
 	
     @IsEnum(MountingType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text to indicate the type of mounting and/or tracking used for the photovoltaic array. Note that the OneAxis options have an axis of rotation that is determined by the azimuth of the parent Shade geometry. Also note that, in the case of one or two axis tracking, shadows on the (static) parent Shade geometry still reduce the electrical output, enabling the simulation to account for large context geometry casting shadows on the array. However, the effects of smaller detailed shading may be improperly accounted for and self shading of the dynamic panel geometry is only accounted for via the tracking_ground_coverage_ratio property on this object. FixedOpenRack refers to ground or roof mounting where the air flows freely. FixedRoofMounted refers to mounting flush with the roof with limited air flow. OneAxis refers to a fixed tilt and azimuth, which define an axis of rotation. OneAxisBacktracking is the same as OneAxis but with controls to reduce self-shade at low sun angles. TwoAxis refers to a dynamic tilt and azimuth that track the sun. */
     mounting_type?: MountingType;
@@ -51,12 +52,13 @@ export class PVProperties extends EnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "PVProperties";
-            this.rated_efficiency = _data["rated_efficiency"] !== undefined ? _data["rated_efficiency"] : 0.15;
-            this.active_area_fraction = _data["active_area_fraction"] !== undefined ? _data["active_area_fraction"] : 0.9;
-            this.module_type = _data["module_type"] !== undefined ? _data["module_type"] : ModuleType.Standard;
-            this.mounting_type = _data["mounting_type"] !== undefined ? _data["mounting_type"] : MountingType.FixedOpenRack;
-            this.system_loss_fraction = _data["system_loss_fraction"] !== undefined ? _data["system_loss_fraction"] : 0.14;
+            const obj = plainToClass(PVProperties, _data);
+            this.type = obj.type;
+            this.rated_efficiency = obj.rated_efficiency;
+            this.active_area_fraction = obj.active_area_fraction;
+            this.module_type = obj.module_type;
+            this.mounting_type = obj.mounting_type;
+            this.system_loss_fraction = obj.system_loss_fraction;
         }
     }
 
@@ -89,7 +91,7 @@ export class PVProperties extends EnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

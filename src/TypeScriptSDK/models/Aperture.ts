@@ -1,4 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsBoolean, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { AperturePropertiesAbridged } from "./AperturePropertiesAbridged";
 import { Face3D } from "./Face3D";
 import { IDdBaseModel } from "./IDdBaseModel";
@@ -9,6 +10,7 @@ import { Surface } from "./Surface";
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Aperture extends IDdBaseModel {
     @IsInstance(Face3D)
+    @Type(() => Face3D)
     @ValidateNested()
     @IsDefined()
     /** Planar Face3D for the geometry. */
@@ -18,6 +20,7 @@ export class Aperture extends IDdBaseModel {
     boundary_condition!: (Outdoors | Surface);
 	
     @IsInstance(AperturePropertiesAbridged)
+    @Type(() => AperturePropertiesAbridged)
     @ValidateNested()
     @IsDefined()
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
@@ -33,12 +36,16 @@ export class Aperture extends IDdBaseModel {
     is_operable?: boolean;
 	
     @IsArray()
+    @IsInstance(Shade, { each: true })
+    @Type(() => Shade)
     @ValidateNested({ each: true })
     @IsOptional()
     /** Shades assigned to the interior side of this object (eg. window sill, light shelf). */
     indoor_shades?: Shade [];
 	
     @IsArray()
+    @IsInstance(Shade, { each: true })
+    @Type(() => Shade)
     @ValidateNested({ each: true })
     @IsOptional()
     /** Shades assigned to the exterior side of this object (eg. mullions, louvers). */
@@ -55,13 +62,14 @@ export class Aperture extends IDdBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.geometry = _data["geometry"];
-            this.boundary_condition = _data["boundary_condition"];
-            this.properties = _data["properties"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "Aperture";
-            this.is_operable = _data["is_operable"] !== undefined ? _data["is_operable"] : false;
-            this.indoor_shades = _data["indoor_shades"];
-            this.outdoor_shades = _data["outdoor_shades"];
+            const obj = plainToClass(Aperture, _data);
+            this.geometry = obj.geometry;
+            this.boundary_condition = obj.boundary_condition;
+            this.properties = obj.properties;
+            this.type = obj.type;
+            this.is_operable = obj.is_operable;
+            this.indoor_shades = obj.indoor_shades;
+            this.outdoor_shades = obj.outdoor_shades;
         }
     }
 
@@ -95,7 +103,7 @@ export class Aperture extends IDdBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

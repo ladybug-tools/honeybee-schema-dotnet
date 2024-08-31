@@ -1,4 +1,5 @@
 ﻿import { IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
@@ -21,8 +22,9 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.user_data = _data["user_data"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "IDdEnergyBaseModel";
+            const obj = plainToClass(IDdEnergyBaseModel, _data);
+            this.user_data = obj.user_data;
+            this.type = obj.type;
         }
     }
 
@@ -51,7 +53,7 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

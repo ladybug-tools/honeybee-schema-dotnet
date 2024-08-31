@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { DaylightingControl } from "./DaylightingControl";
 import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
@@ -41,78 +42,94 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     shw?: string;
 	
     @IsInstance(PeopleAbridged)
+    @Type(() => PeopleAbridged)
     @ValidateNested()
     @IsOptional()
     /** People object to describe the occupancy of the Room. */
     people?: PeopleAbridged;
 	
     @IsInstance(LightingAbridged)
+    @Type(() => LightingAbridged)
     @ValidateNested()
     @IsOptional()
     /** Lighting object to describe the lighting usage of the Room. */
     lighting?: LightingAbridged;
 	
     @IsInstance(ElectricEquipmentAbridged)
+    @Type(() => ElectricEquipmentAbridged)
     @ValidateNested()
     @IsOptional()
     /** ElectricEquipment object to describe the electric equipment usage. */
     electric_equipment?: ElectricEquipmentAbridged;
 	
     @IsInstance(GasEquipmentAbridged)
+    @Type(() => GasEquipmentAbridged)
     @ValidateNested()
     @IsOptional()
     /** GasEquipment object to describe the gas equipment usage. */
     gas_equipment?: GasEquipmentAbridged;
 	
     @IsInstance(ServiceHotWaterAbridged)
+    @Type(() => ServiceHotWaterAbridged)
     @ValidateNested()
     @IsOptional()
     /** ServiceHotWater object to describe the hot water usage. */
     service_hot_water?: ServiceHotWaterAbridged;
 	
     @IsInstance(InfiltrationAbridged)
+    @Type(() => InfiltrationAbridged)
     @ValidateNested()
     @IsOptional()
     /** Infiltration object to to describe the outdoor air leakage. */
     infiltration?: InfiltrationAbridged;
 	
     @IsInstance(VentilationAbridged)
+    @Type(() => VentilationAbridged)
     @ValidateNested()
     @IsOptional()
     /** Ventilation object for the minimum outdoor air requirement. */
     ventilation?: VentilationAbridged;
 	
     @IsInstance(SetpointAbridged)
+    @Type(() => SetpointAbridged)
     @ValidateNested()
     @IsOptional()
     /** Setpoint object for the temperature setpoints of the Room. */
     setpoint?: SetpointAbridged;
 	
     @IsInstance(DaylightingControl)
+    @Type(() => DaylightingControl)
     @ValidateNested()
     @IsOptional()
     /** An optional DaylightingControl object to dictate the dimming of lights. If None, the lighting will respond only to the schedule and not the daylight conditions within the room. */
     daylighting_control?: DaylightingControl;
 	
     @IsInstance(VentilationControlAbridged)
+    @Type(() => VentilationControlAbridged)
     @ValidateNested()
     @IsOptional()
     /** An optional VentilationControl object to dictate the opening of windows. If None, the windows will never open. */
     window_vent_control?: VentilationControlAbridged;
 	
     @IsArray()
+    @IsInstance(VentilationFan, { each: true })
+    @Type(() => VentilationFan)
     @ValidateNested({ each: true })
     @IsOptional()
     /** An optional list of VentilationFan objects for fans within the room. Note that these fans are not connected to the heating or cooling system and are meant to represent the intentional circulation of unconditioned outdoor air for the purposes of keeping a space cooler, drier or free of indoor pollutants (as in the case of kitchen or bathroom exhaust fans). For the specification of mechanical ventilation of conditioned outdoor air, the Room.ventilation property should be used and the Room should be given a HVAC that can meet this specification. */
     fans?: VentilationFan [];
 	
     @IsArray()
+    @IsInstance(InternalMassAbridged, { each: true })
+    @Type(() => InternalMassAbridged)
     @ValidateNested({ each: true })
     @IsOptional()
     /** An optional list of of InternalMass objects for thermal mass exposed to Room air. Note that internal masses assigned this way cannot ""see"" solar radiation that may potentially hit them and, as such, caution should be taken when using this component with internal mass objects that are not always in shade. Masses are factored into the the thermal calculations of the Room by undergoing heat transfer with the indoor air. */
     internal_masses?: InternalMassAbridged [];
 	
     @IsArray()
+    @IsInstance(ProcessAbridged, { each: true })
+    @Type(() => ProcessAbridged)
     @ValidateNested({ each: true })
     @IsOptional()
     /** An optional list of of Process objects for process loads within the room. These can represent kilns, manufacturing equipment, and various industrial processes. They can also be used to represent wood burning fireplaces or certain pieces of equipment to be separated from the other end uses. */
@@ -128,24 +145,25 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "RoomEnergyPropertiesAbridged";
-            this.construction_set = _data["construction_set"];
-            this.program_type = _data["program_type"];
-            this.hvac = _data["hvac"];
-            this.shw = _data["shw"];
-            this.people = _data["people"];
-            this.lighting = _data["lighting"];
-            this.electric_equipment = _data["electric_equipment"];
-            this.gas_equipment = _data["gas_equipment"];
-            this.service_hot_water = _data["service_hot_water"];
-            this.infiltration = _data["infiltration"];
-            this.ventilation = _data["ventilation"];
-            this.setpoint = _data["setpoint"];
-            this.daylighting_control = _data["daylighting_control"];
-            this.window_vent_control = _data["window_vent_control"];
-            this.fans = _data["fans"];
-            this.internal_masses = _data["internal_masses"];
-            this.process_loads = _data["process_loads"];
+            const obj = plainToClass(RoomEnergyPropertiesAbridged, _data);
+            this.type = obj.type;
+            this.construction_set = obj.construction_set;
+            this.program_type = obj.program_type;
+            this.hvac = obj.hvac;
+            this.shw = obj.shw;
+            this.people = obj.people;
+            this.lighting = obj.lighting;
+            this.electric_equipment = obj.electric_equipment;
+            this.gas_equipment = obj.gas_equipment;
+            this.service_hot_water = obj.service_hot_water;
+            this.infiltration = obj.infiltration;
+            this.ventilation = obj.ventilation;
+            this.setpoint = obj.setpoint;
+            this.daylighting_control = obj.daylighting_control;
+            this.window_vent_control = obj.window_vent_control;
+            this.fans = obj.fans;
+            this.internal_masses = obj.internal_masses;
+            this.process_loads = obj.process_loads;
         }
     }
 
@@ -190,7 +208,7 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

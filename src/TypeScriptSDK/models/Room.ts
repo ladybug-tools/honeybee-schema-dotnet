@@ -1,4 +1,5 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsInstance, IsString, IsOptional, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { Face } from "./Face";
 import { IDdBaseModel } from "./IDdBaseModel";
 import { RoomPropertiesAbridged } from "./RoomPropertiesAbridged";
@@ -7,12 +8,15 @@ import { Shade } from "./Shade";
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Room extends IDdBaseModel {
     @IsArray()
+    @IsInstance(Face, { each: true })
+    @Type(() => Face)
     @ValidateNested({ each: true })
     @IsDefined()
     /** Faces that together form the closed volume of a room. */
     faces!: Face [];
 	
     @IsInstance(RoomPropertiesAbridged)
+    @Type(() => RoomPropertiesAbridged)
     @ValidateNested()
     @IsDefined()
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
@@ -23,12 +27,16 @@ export class Room extends IDdBaseModel {
     type?: string;
 	
     @IsArray()
+    @IsInstance(Shade, { each: true })
+    @Type(() => Shade)
     @ValidateNested({ each: true })
     @IsOptional()
     /** Shades assigned to the interior side of this object (eg. partitions, tables). */
     indoor_shades?: Shade [];
 	
     @IsArray()
+    @IsInstance(Shade, { each: true })
+    @Type(() => Shade)
     @ValidateNested({ each: true })
     @IsOptional()
     /** Shades assigned to the exterior side of this object (eg. trees, landscaping). */
@@ -61,14 +69,15 @@ export class Room extends IDdBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.faces = _data["faces"];
-            this.properties = _data["properties"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "Room";
-            this.indoor_shades = _data["indoor_shades"];
-            this.outdoor_shades = _data["outdoor_shades"];
-            this.multiplier = _data["multiplier"] !== undefined ? _data["multiplier"] : 1;
-            this.exclude_floor_area = _data["exclude_floor_area"] !== undefined ? _data["exclude_floor_area"] : false;
-            this.story = _data["story"];
+            const obj = plainToClass(Room, _data);
+            this.faces = obj.faces;
+            this.properties = obj.properties;
+            this.type = obj.type;
+            this.indoor_shades = obj.indoor_shades;
+            this.outdoor_shades = obj.outdoor_shades;
+            this.multiplier = obj.multiplier;
+            this.exclude_floor_area = obj.exclude_floor_area;
+            this.story = obj.story;
         }
     }
 
@@ -103,7 +112,7 @@ export class Room extends IDdBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsNumber, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -94,20 +95,21 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "EnergyWindowMaterialGlazing";
-            this.thickness = _data["thickness"] !== undefined ? _data["thickness"] : 0.003;
-            this.solar_transmittance = _data["solar_transmittance"] !== undefined ? _data["solar_transmittance"] : 0.85;
-            this.solar_reflectance = _data["solar_reflectance"] !== undefined ? _data["solar_reflectance"] : 0.075;
-            this.solar_reflectance_back = _data["solar_reflectance_back"] !== undefined ? _data["solar_reflectance_back"] : new Autocalculate();
-            this.visible_transmittance = _data["visible_transmittance"] !== undefined ? _data["visible_transmittance"] : 0.9;
-            this.visible_reflectance = _data["visible_reflectance"] !== undefined ? _data["visible_reflectance"] : 0.075;
-            this.visible_reflectance_back = _data["visible_reflectance_back"] !== undefined ? _data["visible_reflectance_back"] : new Autocalculate();
-            this.infrared_transmittance = _data["infrared_transmittance"] !== undefined ? _data["infrared_transmittance"] : 0;
-            this.emissivity = _data["emissivity"] !== undefined ? _data["emissivity"] : 0.84;
-            this.emissivity_back = _data["emissivity_back"] !== undefined ? _data["emissivity_back"] : 0.84;
-            this.conductivity = _data["conductivity"] !== undefined ? _data["conductivity"] : 0.9;
-            this.dirt_correction = _data["dirt_correction"] !== undefined ? _data["dirt_correction"] : 1;
-            this.solar_diffusing = _data["solar_diffusing"] !== undefined ? _data["solar_diffusing"] : false;
+            const obj = plainToClass(EnergyWindowMaterialGlazing, _data);
+            this.type = obj.type;
+            this.thickness = obj.thickness;
+            this.solar_transmittance = obj.solar_transmittance;
+            this.solar_reflectance = obj.solar_reflectance;
+            this.solar_reflectance_back = obj.solar_reflectance_back;
+            this.visible_transmittance = obj.visible_transmittance;
+            this.visible_reflectance = obj.visible_reflectance;
+            this.visible_reflectance_back = obj.visible_reflectance_back;
+            this.infrared_transmittance = obj.infrared_transmittance;
+            this.emissivity = obj.emissivity;
+            this.emissivity_back = obj.emissivity_back;
+            this.conductivity = obj.conductivity;
+            this.dirt_correction = obj.dirt_correction;
+            this.solar_diffusing = obj.solar_diffusing;
         }
     }
 
@@ -148,7 +150,7 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

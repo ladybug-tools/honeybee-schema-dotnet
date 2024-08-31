@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { BaseModifierSetAbridged } from "./BaseModifierSetAbridged";
 
 /** Abridged set containing radiance modifiers needed for a model's Doors. */
@@ -32,10 +33,11 @@ export class DoorModifierSetAbridged extends BaseModifierSetAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "DoorModifierSetAbridged";
-            this.interior_glass_modifier = _data["interior_glass_modifier"];
-            this.exterior_glass_modifier = _data["exterior_glass_modifier"];
-            this.overhead_modifier = _data["overhead_modifier"];
+            const obj = plainToClass(DoorModifierSetAbridged, _data);
+            this.type = obj.type;
+            this.interior_glass_modifier = obj.interior_glass_modifier;
+            this.exterior_glass_modifier = obj.exterior_glass_modifier;
+            this.overhead_modifier = obj.overhead_modifier;
         }
     }
 
@@ -66,7 +68,7 @@ export class DoorModifierSetAbridged extends BaseModifierSetAbridged {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

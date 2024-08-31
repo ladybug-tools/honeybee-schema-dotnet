@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 
 /** Hidden base class for all Radiance Assets. */
@@ -9,7 +10,10 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
     room_identifier?: string;
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsArray({ each: true })
+    @ValidateNested({each: true })
+    @Type(() => Array)
+    @IsString({ each: true })
     @IsOptional()
     /** Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [[""SouthWindow1""], [""static_apertures"", ""NorthWindow2""]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation. */
     light_path?: string [] [];
@@ -28,9 +32,10 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.room_identifier = _data["room_identifier"];
-            this.light_path = _data["light_path"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "_RadianceAsset";
+            const obj = plainToClass(_RadianceAsset, _data);
+            this.room_identifier = obj.room_identifier;
+            this.light_path = obj.light_path;
+            this.type = obj.type;
         }
     }
 
@@ -60,7 +65,7 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

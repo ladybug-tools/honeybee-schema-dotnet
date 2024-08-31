@@ -1,4 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsEnum, IsString, IsOptional, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { Adiabatic } from "./Adiabatic";
 import { Aperture } from "./Aperture";
 import { Door } from "./Door";
@@ -15,13 +16,14 @@ import { Surface } from "./Surface";
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Face extends IDdBaseModel {
     @IsInstance(Face3D)
+    @Type(() => Face3D)
     @ValidateNested()
     @IsDefined()
     /** Planar Face3D for the geometry. */
     geometry!: Face3D;
 	
     @IsEnum(FaceType)
-    @ValidateNested()
+    @Type(() => String)
     @IsDefined()
     face_type!: FaceType;
 	
@@ -29,6 +31,7 @@ export class Face extends IDdBaseModel {
     boundary_condition!: (Ground | Outdoors | Adiabatic | Surface | OtherSideTemperature);
 	
     @IsInstance(FacePropertiesAbridged)
+    @Type(() => FacePropertiesAbridged)
     @ValidateNested()
     @IsDefined()
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
@@ -39,24 +42,32 @@ export class Face extends IDdBaseModel {
     type?: string;
 	
     @IsArray()
+    @IsInstance(Aperture, { each: true })
+    @Type(() => Aperture)
     @ValidateNested({ each: true })
     @IsOptional()
     /** Apertures assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid. */
     apertures?: Aperture [];
 	
     @IsArray()
+    @IsInstance(Door, { each: true })
+    @Type(() => Door)
     @ValidateNested({ each: true })
     @IsOptional()
     /** Doors assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid. */
     doors?: Door [];
 	
     @IsArray()
+    @IsInstance(Shade, { each: true })
+    @Type(() => Shade)
     @ValidateNested({ each: true })
     @IsOptional()
     /** Shades assigned to the interior side of this object. */
     indoor_shades?: Shade [];
 	
     @IsArray()
+    @IsInstance(Shade, { each: true })
+    @Type(() => Shade)
     @ValidateNested({ each: true })
     @IsOptional()
     /** Shades assigned to the exterior side of this object (eg. balcony, overhang). */
@@ -72,15 +83,16 @@ export class Face extends IDdBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.geometry = _data["geometry"];
-            this.face_type = _data["face_type"];
-            this.boundary_condition = _data["boundary_condition"];
-            this.properties = _data["properties"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "Face";
-            this.apertures = _data["apertures"];
-            this.doors = _data["doors"];
-            this.indoor_shades = _data["indoor_shades"];
-            this.outdoor_shades = _data["outdoor_shades"];
+            const obj = plainToClass(Face, _data);
+            this.geometry = obj.geometry;
+            this.face_type = obj.face_type;
+            this.boundary_condition = obj.boundary_condition;
+            this.properties = obj.properties;
+            this.type = obj.type;
+            this.apertures = obj.apertures;
+            this.doors = obj.doors;
+            this.indoor_shades = obj.indoor_shades;
+            this.outdoor_shades = obj.outdoor_shades;
         }
     }
 
@@ -116,7 +128,7 @@ export class Face extends IDdBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

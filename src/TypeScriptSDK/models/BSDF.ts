@@ -1,4 +1,5 @@
-﻿import { IsString, IsDefined, IsOptional, IsArray, ValidateNested, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, IsOptional, IsArray, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { Glass } from "./Glass";
 import { Glow } from "./Glow";
 import { Light } from "./Light";
@@ -21,13 +22,12 @@ export class BSDF extends ModifierBase {
     modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsArray()
-    @ValidateNested({ each: true })
     @IsOptional()
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
     dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) [];
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({},{ each: true })
     @IsOptional()
     /** Vector as sequence that sets the hemisphere that the BSDF material faces. */
     up_orientation?: number [];
@@ -48,19 +48,19 @@ export class BSDF extends ModifierBase {
     transform?: string;
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({},{ each: true })
     @IsOptional()
     /** Optional additional front diffuse reflectance as sequence of three RGB numbers. */
     front_diffuse_reflectance?: number [];
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({},{ each: true })
     @IsOptional()
     /** Optional additional back diffuse reflectance as sequence of three RGB numbers. */
     back_diffuse_reflectance?: number [];
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({},{ each: true })
     @IsOptional()
     /** Optional additional diffuse transmittance as sequence of three RGB numbers. */
     diffuse_transmittance?: number [];
@@ -83,17 +83,18 @@ export class BSDF extends ModifierBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.bsdf_data = _data["bsdf_data"];
-            this.modifier = _data["modifier"] !== undefined ? _data["modifier"] : new Void();
-            this.dependencies = _data["dependencies"];
-            this.up_orientation = _data["up_orientation"] !== undefined ? _data["up_orientation"] : [0.01, 0.01, 1];
-            this.thickness = _data["thickness"] !== undefined ? _data["thickness"] : 0;
-            this.function_file = _data["function_file"] !== undefined ? _data["function_file"] : ".";
-            this.transform = _data["transform"];
-            this.front_diffuse_reflectance = _data["front_diffuse_reflectance"];
-            this.back_diffuse_reflectance = _data["back_diffuse_reflectance"];
-            this.diffuse_transmittance = _data["diffuse_transmittance"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "BSDF";
+            const obj = plainToClass(BSDF, _data);
+            this.bsdf_data = obj.bsdf_data;
+            this.modifier = obj.modifier;
+            this.dependencies = obj.dependencies;
+            this.up_orientation = obj.up_orientation;
+            this.thickness = obj.thickness;
+            this.function_file = obj.function_file;
+            this.transform = obj.transform;
+            this.front_diffuse_reflectance = obj.front_diffuse_reflectance;
+            this.back_diffuse_reflectance = obj.back_diffuse_reflectance;
+            this.diffuse_transmittance = obj.diffuse_transmittance;
+            this.type = obj.type;
         }
     }
 
@@ -131,7 +132,7 @@ export class BSDF extends ModifierBase {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { ApertureConstructionSetAbridged } from "./ApertureConstructionSetAbridged";
 import { DoorConstructionSetAbridged } from "./DoorConstructionSetAbridged";
 import { FloorConstructionSetAbridged } from "./FloorConstructionSetAbridged";
@@ -13,30 +14,35 @@ export class ConstructionSetAbridged extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsInstance(WallConstructionSetAbridged)
+    @Type(() => WallConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
     /** A WallConstructionSetAbridged object for this ConstructionSet. */
     wall_set?: WallConstructionSetAbridged;
 	
     @IsInstance(FloorConstructionSetAbridged)
+    @Type(() => FloorConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
     /** A FloorConstructionSetAbridged object for this ConstructionSet. */
     floor_set?: FloorConstructionSetAbridged;
 	
     @IsInstance(RoofCeilingConstructionSetAbridged)
+    @Type(() => RoofCeilingConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
     /** A RoofCeilingConstructionSetAbridged object for this ConstructionSet. */
     roof_ceiling_set?: RoofCeilingConstructionSetAbridged;
 	
     @IsInstance(ApertureConstructionSetAbridged)
+    @Type(() => ApertureConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
     /** A ApertureConstructionSetAbridged object for this ConstructionSet. */
     aperture_set?: ApertureConstructionSetAbridged;
 	
     @IsInstance(DoorConstructionSetAbridged)
+    @Type(() => DoorConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
     /** A DoorConstructionSetAbridged object for this ConstructionSet. */
@@ -62,14 +68,15 @@ export class ConstructionSetAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "ConstructionSetAbridged";
-            this.wall_set = _data["wall_set"];
-            this.floor_set = _data["floor_set"];
-            this.roof_ceiling_set = _data["roof_ceiling_set"];
-            this.aperture_set = _data["aperture_set"];
-            this.door_set = _data["door_set"];
-            this.shade_construction = _data["shade_construction"];
-            this.air_boundary_construction = _data["air_boundary_construction"];
+            const obj = plainToClass(ConstructionSetAbridged, _data);
+            this.type = obj.type;
+            this.wall_set = obj.wall_set;
+            this.floor_set = obj.floor_set;
+            this.roof_ceiling_set = obj.roof_ceiling_set;
+            this.aperture_set = obj.aperture_set;
+            this.door_set = obj.door_set;
+            this.shade_construction = obj.shade_construction;
+            this.air_boundary_construction = obj.air_boundary_construction;
         }
     }
 
@@ -104,7 +111,7 @@ export class ConstructionSetAbridged extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

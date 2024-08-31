@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Autocalculate } from "./Autocalculate";
 
@@ -29,9 +30,10 @@ export class OtherSideTemperature extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "OtherSideTemperature";
-            this.heat_transfer_coefficient = _data["heat_transfer_coefficient"] !== undefined ? _data["heat_transfer_coefficient"] : 0;
-            this.temperature = _data["temperature"] !== undefined ? _data["temperature"] : new Autocalculate();
+            const obj = plainToClass(OtherSideTemperature, _data);
+            this.type = obj.type;
+            this.heat_transfer_coefficient = obj.heat_transfer_coefficient;
+            this.temperature = obj.temperature;
         }
     }
 
@@ -61,7 +63,7 @@ export class OtherSideTemperature extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

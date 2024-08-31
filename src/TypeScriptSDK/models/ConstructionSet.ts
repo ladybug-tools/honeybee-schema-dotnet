@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { AirBoundaryConstruction } from "./AirBoundaryConstruction";
 import { ApertureConstructionSet } from "./ApertureConstructionSet";
 import { DoorConstructionSet } from "./DoorConstructionSet";
@@ -16,36 +17,42 @@ export class ConstructionSet extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsInstance(WallConstructionSet)
+    @Type(() => WallConstructionSet)
     @ValidateNested()
     @IsOptional()
     /** A WallConstructionSet object for this ConstructionSet. */
     wall_set?: WallConstructionSet;
 	
     @IsInstance(FloorConstructionSet)
+    @Type(() => FloorConstructionSet)
     @ValidateNested()
     @IsOptional()
     /** A FloorConstructionSet object for this ConstructionSet. */
     floor_set?: FloorConstructionSet;
 	
     @IsInstance(RoofCeilingConstructionSet)
+    @Type(() => RoofCeilingConstructionSet)
     @ValidateNested()
     @IsOptional()
     /** A RoofCeilingConstructionSet object for this ConstructionSet. */
     roof_ceiling_set?: RoofCeilingConstructionSet;
 	
     @IsInstance(ApertureConstructionSet)
+    @Type(() => ApertureConstructionSet)
     @ValidateNested()
     @IsOptional()
     /** A ApertureConstructionSet object for this ConstructionSet. */
     aperture_set?: ApertureConstructionSet;
 	
     @IsInstance(DoorConstructionSet)
+    @Type(() => DoorConstructionSet)
     @ValidateNested()
     @IsOptional()
     /** A DoorConstructionSet object for this ConstructionSet. */
     door_set?: DoorConstructionSet;
 	
     @IsInstance(ShadeConstruction)
+    @Type(() => ShadeConstruction)
     @ValidateNested()
     @IsOptional()
     /** A ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned. */
@@ -65,14 +72,15 @@ export class ConstructionSet extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "ConstructionSet";
-            this.wall_set = _data["wall_set"];
-            this.floor_set = _data["floor_set"];
-            this.roof_ceiling_set = _data["roof_ceiling_set"];
-            this.aperture_set = _data["aperture_set"];
-            this.door_set = _data["door_set"];
-            this.shade_construction = _data["shade_construction"];
-            this.air_boundary_construction = _data["air_boundary_construction"];
+            const obj = plainToClass(ConstructionSet, _data);
+            this.type = obj.type;
+            this.wall_set = obj.wall_set;
+            this.floor_set = obj.floor_set;
+            this.roof_ceiling_set = obj.roof_ceiling_set;
+            this.aperture_set = obj.aperture_set;
+            this.door_set = obj.door_set;
+            this.shade_construction = obj.shade_construction;
+            this.air_boundary_construction = obj.air_boundary_construction;
         }
     }
 
@@ -107,7 +115,7 @@ export class ConstructionSet extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

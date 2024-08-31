@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsNumber, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Construction for Shade objects. */
@@ -35,10 +36,11 @@ export class ShadeConstruction extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "ShadeConstruction";
-            this.solar_reflectance = _data["solar_reflectance"] !== undefined ? _data["solar_reflectance"] : 0.2;
-            this.visible_reflectance = _data["visible_reflectance"] !== undefined ? _data["visible_reflectance"] : 0.2;
-            this.is_specular = _data["is_specular"] !== undefined ? _data["is_specular"] : false;
+            const obj = plainToClass(ShadeConstruction, _data);
+            this.type = obj.type;
+            this.solar_reflectance = obj.solar_reflectance;
+            this.visible_reflectance = obj.visible_reflectance;
+            this.is_specular = obj.is_specular;
         }
     }
 
@@ -69,7 +71,7 @@ export class ShadeConstruction extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

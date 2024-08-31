@@ -1,16 +1,17 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A single Radiance of sensors. */
 export class Sensor extends _OpenAPIGenBaseModel {
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({},{ each: true })
     @IsDefined()
     /** Position of sensor in space as an array of (x, y, z) values. */
     pos!: number [];
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({},{ each: true })
     @IsDefined()
     /** Direction of sensor as an array of (x, y, z) values. */
     dir!: number [];
@@ -29,9 +30,10 @@ export class Sensor extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.pos = _data["pos"];
-            this.dir = _data["dir"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "Sensor";
+            const obj = plainToClass(Sensor, _data);
+            this.pos = obj.pos;
+            this.dir = obj.dir;
+            this.type = obj.type;
         }
     }
 
@@ -61,7 +63,7 @@ export class Sensor extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

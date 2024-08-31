@@ -1,11 +1,15 @@
-﻿import { IsArray, ValidateNested, IsDefined, IsString, IsOptional, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, ValidateNested, IsNumber, IsDefined, IsString, IsOptional, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Plane } from "./Plane";
 
 /** A single planar face in 3D space. */
 export class Face3D extends _OpenAPIGenBaseModel {
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsArray({ each: true })
+    @ValidateNested({each: true })
+    @Type(() => Array)
+    @IsNumber({},{ each: true })
     @IsDefined()
     /** A list of points representing the outer boundary vertices of the face. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values. */
     boundary!: number [] [];
@@ -15,12 +19,19 @@ export class Face3D extends _OpenAPIGenBaseModel {
     type?: string;
 	
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsArray({ each: true })
+    @ValidateNested({each: true })
+    @Type(() => Array)
+    @IsArray({ each: true })
+    @ValidateNested({each: true })
+    @Type(() => Array)
+    @IsNumber({},{ each: true })
     @IsOptional()
     /** Optional list of lists with one list for each hole in the face.Each hole should be a list of at least 3 points and each point a list of 3 (x, y, z) values. If None, it will be assumed that there are no holes in the face. */
     holes?: number [] [] [];
 	
     @IsInstance(Plane)
+    @Type(() => Plane)
     @ValidateNested()
     @IsOptional()
     /** Optional Plane indicating the plane in which the face exists.If None, the plane will usually be derived from the boundary points. */
@@ -36,10 +47,11 @@ export class Face3D extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.boundary = _data["boundary"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "Face3D";
-            this.holes = _data["holes"];
-            this.plane = _data["plane"];
+            const obj = plainToClass(Face3D, _data);
+            this.boundary = obj.boundary;
+            this.type = obj.type;
+            this.holes = obj.holes;
+            this.plane = obj.plane;
         }
     }
 
@@ -70,7 +82,7 @@ export class Face3D extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

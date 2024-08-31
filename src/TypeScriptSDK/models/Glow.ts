@@ -1,4 +1,5 @@
-﻿import { IsOptional, IsArray, ValidateNested, IsNumber, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsOptional, IsArray, IsNumber, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
 import { Light } from "./Light";
@@ -16,7 +17,6 @@ export class Glow extends ModifierBase {
     modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsArray()
-    @ValidateNested({ each: true })
     @IsOptional()
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
     dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) [];
@@ -60,13 +60,14 @@ export class Glow extends ModifierBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.modifier = _data["modifier"] !== undefined ? _data["modifier"] : new Void();
-            this.dependencies = _data["dependencies"];
-            this.r_emittance = _data["r_emittance"] !== undefined ? _data["r_emittance"] : 0;
-            this.g_emittance = _data["g_emittance"] !== undefined ? _data["g_emittance"] : 0;
-            this.b_emittance = _data["b_emittance"] !== undefined ? _data["b_emittance"] : 0;
-            this.max_radius = _data["max_radius"] !== undefined ? _data["max_radius"] : 0;
-            this.type = _data["type"] !== undefined ? _data["type"] : "Glow";
+            const obj = plainToClass(Glow, _data);
+            this.modifier = obj.modifier;
+            this.dependencies = obj.dependencies;
+            this.r_emittance = obj.r_emittance;
+            this.g_emittance = obj.g_emittance;
+            this.b_emittance = obj.b_emittance;
+            this.max_radius = obj.max_radius;
+            this.type = obj.type;
         }
     }
 
@@ -100,7 +101,7 @@ export class Glow extends ModifierBase {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

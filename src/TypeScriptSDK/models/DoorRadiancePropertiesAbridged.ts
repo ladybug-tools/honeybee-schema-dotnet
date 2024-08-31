@@ -1,4 +1,5 @@
-﻿import { IsString, IsOptional, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { _PropertiesBaseAbridged } from "./_PropertiesBaseAbridged";
 import { RadianceSubFaceStateAbridged } from "./RadianceSubFaceStateAbridged";
 
@@ -14,6 +15,8 @@ export class DoorRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
     dynamic_group_identifier?: string;
 	
     @IsArray()
+    @IsInstance(RadianceSubFaceStateAbridged, { each: true })
+    @Type(() => RadianceSubFaceStateAbridged)
     @ValidateNested({ each: true })
     @IsOptional()
     /** An optional list of abridged states (default: None). */
@@ -29,9 +32,10 @@ export class DoorRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "DoorRadiancePropertiesAbridged";
-            this.dynamic_group_identifier = _data["dynamic_group_identifier"];
-            this.states = _data["states"];
+            const obj = plainToClass(DoorRadiancePropertiesAbridged, _data);
+            this.type = obj.type;
+            this.dynamic_group_identifier = obj.dynamic_group_identifier;
+            this.states = obj.states;
         }
     }
 
@@ -61,7 +65,7 @@ export class DoorRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

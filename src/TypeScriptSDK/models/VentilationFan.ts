@@ -1,4 +1,5 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, IsEnum, ValidateNested, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, IsString, IsOptional, IsEnum, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 import { VentilationControlAbridged } from "./VentilationControlAbridged";
 import { VentilationType } from "./VentilationType";
@@ -25,12 +26,13 @@ export class VentilationFan extends EnergyBaseModel {
     type?: string;
 	
     @IsEnum(VentilationType)
-    @ValidateNested()
+    @Type(() => String)
     @IsOptional()
     /** Text to indicate the type of type of ventilation. Choose from the options below. For either Exhaust or Intake, values for fan pressure and efficiency define the fan electric consumption. For Exhaust ventilation, the conditions of the air entering the space are assumed to be equivalent to outside air conditions. For Intake and Balanced ventilation, an appropriate amount of fan heat is added to the entering air stream. For Balanced ventilation, both an intake fan and an exhaust fan are assumed to co-exist, both having the same flow rate and power consumption (using the entered values for fan pressure rise and fan total efficiency). Thus, the fan electric consumption for Balanced ventilation is twice that for the Exhaust or Intake ventilation types which employ only a single fan. */
     ventilation_type?: VentilationType;
 	
     @IsInstance(VentilationControlAbridged)
+    @Type(() => VentilationControlAbridged)
     @ValidateNested()
     @IsOptional()
     /** A VentilationControl object that dictates the conditions under which the fan is turned on. If None, a default VentilationControl will be generated, which will keep the fan on all of the time. */
@@ -47,12 +49,13 @@ export class VentilationFan extends EnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.flow_rate = _data["flow_rate"];
-            this.pressure_rise = _data["pressure_rise"];
-            this.efficiency = _data["efficiency"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "VentilationFan";
-            this.ventilation_type = _data["ventilation_type"] !== undefined ? _data["ventilation_type"] : VentilationType.Balanced;
-            this.control = _data["control"];
+            const obj = plainToClass(VentilationFan, _data);
+            this.flow_rate = obj.flow_rate;
+            this.pressure_rise = obj.pressure_rise;
+            this.efficiency = obj.efficiency;
+            this.type = obj.type;
+            this.ventilation_type = obj.ventilation_type;
+            this.control = obj.control;
         }
     }
 
@@ -85,7 +88,7 @@ export class VentilationFan extends EnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

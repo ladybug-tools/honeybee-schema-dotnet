@@ -1,4 +1,5 @@
-﻿import { IsOptional, IsArray, ValidateNested, IsNumber, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsOptional, IsArray, IsNumber, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
 import { Glow } from "./Glow";
@@ -16,7 +17,6 @@ export class Mirror extends ModifierBase {
     modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsArray()
-    @ValidateNested({ each: true })
     @IsOptional()
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
     dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) [];
@@ -58,13 +58,14 @@ export class Mirror extends ModifierBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.modifier = _data["modifier"] !== undefined ? _data["modifier"] : new Void();
-            this.dependencies = _data["dependencies"];
-            this.r_reflectance = _data["r_reflectance"] !== undefined ? _data["r_reflectance"] : 1;
-            this.g_reflectance = _data["g_reflectance"] !== undefined ? _data["g_reflectance"] : 1;
-            this.b_reflectance = _data["b_reflectance"] !== undefined ? _data["b_reflectance"] : 1;
-            this.alternate_material = _data["alternate_material"];
-            this.type = _data["type"] !== undefined ? _data["type"] : "Mirror";
+            const obj = plainToClass(Mirror, _data);
+            this.modifier = obj.modifier;
+            this.dependencies = obj.dependencies;
+            this.r_reflectance = obj.r_reflectance;
+            this.g_reflectance = obj.g_reflectance;
+            this.b_reflectance = obj.b_reflectance;
+            this.alternate_material = obj.alternate_material;
+            this.type = obj.type;
         }
     }
 
@@ -98,7 +99,7 @@ export class Mirror extends ModifierBase {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;

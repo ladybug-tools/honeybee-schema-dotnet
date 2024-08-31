@@ -1,4 +1,5 @@
 ﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 import { ElectricEquipment } from "./ElectricEquipment";
 import { GasEquipment } from "./GasEquipment";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -16,48 +17,56 @@ export class ProgramType extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsInstance(People)
+    @Type(() => People)
     @ValidateNested()
     @IsOptional()
     /** People to describe the occupancy of the program. If None, no occupancy will be assumed for the program. */
     people?: People;
 	
     @IsInstance(Lighting)
+    @Type(() => Lighting)
     @ValidateNested()
     @IsOptional()
     /** Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program. */
     lighting?: Lighting;
 	
     @IsInstance(ElectricEquipment)
+    @Type(() => ElectricEquipment)
     @ValidateNested()
     @IsOptional()
     /** ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed. */
     electric_equipment?: ElectricEquipment;
 	
     @IsInstance(GasEquipment)
+    @Type(() => GasEquipment)
     @ValidateNested()
     @IsOptional()
     /** GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed. */
     gas_equipment?: GasEquipment;
 	
     @IsInstance(ServiceHotWater)
+    @Type(() => ServiceHotWater)
     @ValidateNested()
     @IsOptional()
     /** ServiceHotWater object to describe the usage of hot water within the program. If None, no hot water will be assumed. */
     service_hot_water?: ServiceHotWater;
 	
     @IsInstance(Infiltration)
+    @Type(() => Infiltration)
     @ValidateNested()
     @IsOptional()
     /** Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program. */
     infiltration?: Infiltration;
 	
     @IsInstance(Ventilation)
+    @Type(() => Ventilation)
     @ValidateNested()
     @IsOptional()
     /** Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed. */
     ventilation?: Ventilation;
 	
     @IsInstance(Setpoint)
+    @Type(() => Setpoint)
     @ValidateNested()
     @IsOptional()
     /** Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned. */
@@ -73,15 +82,16 @@ export class ProgramType extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            this.type = _data["type"] !== undefined ? _data["type"] : "ProgramType";
-            this.people = _data["people"];
-            this.lighting = _data["lighting"];
-            this.electric_equipment = _data["electric_equipment"];
-            this.gas_equipment = _data["gas_equipment"];
-            this.service_hot_water = _data["service_hot_water"];
-            this.infiltration = _data["infiltration"];
-            this.ventilation = _data["ventilation"];
-            this.setpoint = _data["setpoint"];
+            const obj = plainToClass(ProgramType, _data);
+            this.type = obj.type;
+            this.people = obj.people;
+            this.lighting = obj.lighting;
+            this.electric_equipment = obj.electric_equipment;
+            this.gas_equipment = obj.gas_equipment;
+            this.service_hot_water = obj.service_hot_water;
+            this.infiltration = obj.infiltration;
+            this.ventilation = obj.ventilation;
+            this.setpoint = obj.setpoint;
         }
     }
 
@@ -117,7 +127,7 @@ export class ProgramType extends IDdEnergyBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;
