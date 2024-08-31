@@ -42,7 +42,7 @@ public class ClassTemplateModel : ClassTemplateModelBase
         TsImports = TsImports.Where(_ => _ != ClassName).Distinct().OrderBy(_ => _).ToList();
 
 
-        var paramValidators = Properties.SelectMany(_ => _.ValidationDecorators).Select(_ => ValidationDecoratorToImport(_)).ToList();
+        var paramValidators = Properties.SelectMany(_ => _.ValidationDecorators).Select(_ => ValidationDecoratorToImport(_)).Where(_ => _ != "Type").ToList();
         paramValidators.Add("validate");
         paramValidators.Add("ValidationError as TsValidationError");
         TsValidatorImports = paramValidators.Distinct().ToList();

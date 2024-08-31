@@ -37,7 +37,7 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
 
 
         ConvertToJavaScriptCode = $"data[\"{PropertyName}\"] = this.{PropertyName};";
-        ConvertToClassCode = Default == null ? $"this.{PropertyName} = _data[\"{PropertyName}\"];" : $"this.{PropertyName} = _data[\"{PropertyName}\"] !== undefined ? _data[\"{PropertyName}\"] : {DefaultCodeFormat};";
+        ConvertToClassCode = $"this.{PropertyName} = obj.{PropertyName};";
 
         //validation decorators
         ValidationDecorators = GetValidationDecorators(json);
@@ -124,51 +124,73 @@ public class PropertyTemplateModel: PropertyTemplateModelBase
         {"Boolean", "boolean" }
     };
 
+    private static List<string> GetValidationDecorators(JsonSchema json, bool isArrayItem)
+    {
+        var result = new List<string>();
+        if (json.IsArray)
+        {
+            result.Add("@IsArray({ each: true })"); // Ensures each item in the array is also an array.
+            result.Add("@ValidateNested({each: true })");// Ensures each item in the array is validated as a nested object.
+            result.Add($"@Type(() => Array)"); //Helps class-transformer understand that each item in the array should be treated as an array.
+            var decos = GetValidationDecorators(json.Item, true);
+            result.AddRange(decos);
+            return result;
+        }
+           
+            
+        var propType = json.Type.ToString();
+        if (json.HasReference)
+        {
+            var refPropType = json.ActualSchema.Title;
+            if (json.ActualSchema.IsEnumeration)
+            {
+                result.Add(isArrayItem ? $"@IsEnum({refPropType}, {{ each: true }})" : $"@IsEnum({refPropType})");
+                result.Add($"@Type(() => String)");
+            }
+            else
+            {
+                result.Add(isArrayItem ? $"@IsInstance({refPropType}, {{ each: true }})": $"@IsInstance({refPropType})");
+                result.Add($"@Type(() => {refPropType})");
+                result.Add(isArrayItem ? "@ValidateNested({ each: true })" : "@ValidateNested()");
+            }
+
+        }
+        else if (propType == "Integer")
+        {
+            result.Add(isArrayItem ? "@IsInt({ each: true })" : "@IsInt()");
+        }
+        else if (propType == "Number")
+        {
+            result.Add(isArrayItem ? "@IsNumber({},{ each: true })" : "@IsNumber()");
+        }
+        else if (propType == "String")
+        {
+            result.Add(isArrayItem ? "@IsString({ each: true })" : "@IsString()");
+        }
+        else if (propType == "Boolean")
+        {
+            result.Add(isArrayItem ? "@IsBoolean({ each: true })" : "@IsBoolean()");
+        }
+        else
+        {
+            //result.Add($"@IsObject()");
+        }
+
+        return result;
+    }
     public static List<string> GetValidationDecorators(JsonSchemaProperty json)
     {
         var result = new List<string>();
         if (json.IsArray)
         {
             result.Add("@IsArray()");
-            result.Add("@ValidateNested({ each: true })");
+            var decos = GetValidationDecorators(json.Item, isArrayItem: true);
+            result.AddRange(decos);
         }
         else
         {
-            var propType = json.Type.ToString();
-            if (json.HasReference)
-            {
-                var refPropType = json.ActualSchema.Title;
-                if (json.ActualSchema.IsEnumeration)
-                {
-                    result.Add($"@IsEnum({refPropType})");
-                }
-                else
-                {
-                    result.Add($"@IsInstance({refPropType})");
-                }
-             
-                result.Add("@ValidateNested()");
-            }
-            else if (propType == "Integer")
-            {
-                result.Add($"@IsInt()");
-            }
-            else if (propType == "Number")
-            {
-                result.Add($"@IsNumber()");
-            }
-            else if (propType == "String")
-            {
-                result.Add($"@IsString()");
-            }
-            else if (propType == "Boolean")
-            {
-                result.Add($"@IsBoolean()");
-            }
-            else
-            {
-                //result.Add($"@IsObject()");
-            }
+            var decos = GetValidationDecorators(json, isArrayItem: false);
+            result.AddRange(decos);
         }
 
         if (json.IsRequired)

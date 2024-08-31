@@ -1,4 +1,5 @@
 import { {{TsValidatorImportsCode}} } from 'class-validator';
+import { Type, plainToClass } from 'class-transformer';
 {% if HasTsImports -%}
 {% for Import in TsImports -%}
 import { {{ Import }} } from "./{{ Import }}";
@@ -40,8 +41,9 @@ export {% if IsAbstract %}abstract {% endif %}class {{ ClassName }}{% if HasInhe
 {%      if HasInheritance -%}
         super.init(_data);
 {%      endif -%}
-{% if HasProperties -%}
+{% if HasProperties and IsAbstract == false -%}
         if (_data) {
+            const obj = plainToClass({{ ClassName }}, _data);
 {%      for property in Properties -%}
             {{ property.ConvertToClassCode | strip | tab }}
 {%      endfor -%}
@@ -82,7 +84,7 @@ export {% if IsAbstract %}abstract {% endif %}class {{ ClassName }}{% if HasInhe
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || {}).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;
