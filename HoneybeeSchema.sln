@@ -6,10 +6,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HoneybeeSchema", "src\Honey
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HoneybeeSchema.Tests", "src\HoneybeeSchema.Tests\HoneybeeSchema.Tests.csproj", "{2CBDE6F4-6A8B-4813-BF26-879F5072EDC0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generator", ".nswag-generator\Generator.csproj", "{B28F8B71-5281-47F5-AD3D-BB630148BD30}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator.Tests", "src\Generator.Tests\Generator.Tests.csproj", "{0B9C9A06-DE05-4DC3-BED6-ABD991C1C81D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
