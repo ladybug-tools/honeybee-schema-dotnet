@@ -60,6 +60,16 @@ test('test invalid north in ProjectInfo', () => {
 
 });
 
+test('test invalid type in ProjectInfo', () => {
+  const json = `{
+  "type": "ProjectInfo1"
+  }`;
+  const jsonObj = JSON.parse(json);
+  const proj = ProjectInfo.fromJS(jsonObj);
+  expect(proj.validate()).rejects.toThrow("Validation failed: type must match /^ProjectInfo$/ regular expression");
+
+});
+
 
 test('test ProjectInfo', () => {
   const json = {
