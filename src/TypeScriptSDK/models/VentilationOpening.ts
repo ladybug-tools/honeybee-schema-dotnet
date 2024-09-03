@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsNumber, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
@@ -6,20 +6,27 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 export class VentilationOpening extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^VentilationOpening$/)
     type?: string;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A number for the fraction of the window area that is operable. */
     fraction_area_operable?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A number for the fraction of the distance from the bottom of the window to the top that is operable */
     fraction_height_operable?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A number that will be multiplied by the area of the window in the stack (buoyancy-driven) part of the equation to account for additional friction from window geometry, insect screens, etc. Typical values include 0.45, for unobstructed windows WITH insect screens and 0.65 for unobstructed windows WITHOUT insect screens. This value should be lowered if windows are of an awning or casement type and are not allowed to fully open. */
     discharge_coefficient?: number;
 	
@@ -30,11 +37,14 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** An optional number in kg/s-m, at 1 Pa per meter of crack length, used to calculate the mass flow rate when the opening is closed; required to run an AirflowNetwork simulation. The DesignBuilder Cracks template defines the flow coefficient for a tight, low-leakage closed external window to be 0.00001, and the flow coefficient for a very poor, high-leakage closed external window to be 0.003. */
     flow_coefficient_closed?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0.5)
+    @Max(1)
     /** An optional dimensionless number between 0.5 and 1 used to calculate the mass flow rate when the opening is closed; required to run an AirflowNetwork simulation. This value represents the leak geometry impact on airflow, with 0.5 generally corresponding to turbulent orifice flow and 1 generally corresponding to laminar flow. The default of 0.65 is representative of many cases of wall and window leakage, used when the exponent cannot be measured. */
     flow_exponent_closed?: number;
 	

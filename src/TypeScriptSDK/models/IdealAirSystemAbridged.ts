@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsEnum, IsBoolean, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsEnum, IsBoolean, IsNumber, Min, Max, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { Autosize } from "./Autosize";
 import { EconomizerType } from "./EconomizerType";
@@ -9,6 +9,7 @@ import { NoLimit } from "./NoLimit";
 export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^IdealAirSystemAbridged$/)
     type?: string;
 	
     @IsEnum(EconomizerType)
@@ -24,11 +25,15 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. */
     sensible_heat_recovery?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A number between 0 and 1 for the effectiveness of latent heat recovery within the system. */
     latent_heat_recovery?: number;
 	
@@ -52,11 +57,15 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** An optional identifier of a schedule to set the availability of heating over the course of the simulation. */
     heating_availability?: string;
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** An optional identifier of a schedule to set the availability of cooling over the course of the simulation. */
     cooling_availability?: string;
 	

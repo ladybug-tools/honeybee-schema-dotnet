@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsOptional, Max, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
@@ -8,6 +8,7 @@ import { ScheduleRuleset } from "./ScheduleRuleset";
 export class GasEquipment extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
+    @Min(0)
     /** Equipment level per floor area as [W/m2]. */
     watts_per_area!: number;
 	
@@ -17,21 +18,28 @@ export class GasEquipment extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Number for the amount of long-wave radiation heat given off by equipment. Default value is 0. */
     radiant_fraction?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Number for the amount of latent heat given off by equipment. Default value is 0. */
     latent_fraction?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Number for the amount of “lost” heat being given off by equipment. The default value is 0. */
     lost_fraction?: number;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^GasEquipment$/)
     type?: string;
 	
 

@@ -1,4 +1,4 @@
-﻿import { IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -10,6 +10,7 @@ export class DetailedHVAC extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^DetailedHVAC$/)
     type?: string;
 	
 

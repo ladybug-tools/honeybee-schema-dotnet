@@ -1,4 +1,4 @@
-﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsInstance, ValidateNested, IsDefined, IsString, MinLength, MaxLength, IsOptional, Matches, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { ControlType } from "./ControlType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -16,11 +16,14 @@ export class WindowConstructionShadeAbridged extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsDefined()
+    @MinLength(1)
+    @MaxLength(100)
     /** Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly. */
     shade_material!: string;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^WindowConstructionShadeAbridged$/)
     type?: string;
 	
     @IsEnum(ShadeLocation)
@@ -42,6 +45,8 @@ export class WindowConstructionShadeAbridged extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** An optional schedule identifier to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction. */
     schedule?: string;
 	

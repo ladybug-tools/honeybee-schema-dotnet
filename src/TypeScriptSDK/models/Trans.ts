@@ -1,4 +1,4 @@
-﻿import { IsOptional, IsArray, IsNumber, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsOptional, IsArray, IsNumber, Min, Max, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
@@ -23,41 +23,56 @@ export class Trans extends ModifierBase {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A value between 0 and 1 for the red channel reflectance. */
     r_reflectance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A value between 0 and 1 for the green channel reflectance. */
     g_reflectance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A value between 0 and 1 for the blue channel reflectance. */
     b_reflectance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials. */
     specularity?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A value between 0 and 1 for the roughness, specified as the RMS slope of surface facets. Roughness greater than 0.2 are not realistic. */
     roughness?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** The fraction of transmitted light that is transmitted diffusely in a scattering fashion. */
     transmitted_diff?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** The fraction of transmitted light that is not diffusely scattered. */
     transmitted_spec?: number;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^Trans$/)
     type?: string;
 	
 

@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Autocalculate } from "./Autocalculate";
@@ -7,10 +7,12 @@ import { Autocalculate } from "./Autocalculate";
 export class OtherSideTemperature extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^OtherSideTemperature$/)
     type?: string;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** A value in W/m2-K to indicate the combined convective/radiative film coefficient. If equal to 0, then the specified temperature above is equal to the exterior surface temperature. Otherwise, the temperature above is considered the outside air temperature and this coefficient is used to determine the difference between this outside air temperature and the exterior surface temperature. */
     heat_transfer_coefficient?: number;
 	

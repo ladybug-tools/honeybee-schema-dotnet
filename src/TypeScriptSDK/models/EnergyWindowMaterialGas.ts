@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsNumber, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsNumber, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { GasType } from "./GasType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -7,6 +7,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 export class EnergyWindowMaterialGas extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^EnergyWindowMaterialGas$/)
     type?: string;
 	
     @IsNumber()

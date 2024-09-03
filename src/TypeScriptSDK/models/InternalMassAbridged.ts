@@ -1,4 +1,4 @@
-﻿import { IsString, IsDefined, IsNumber, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, MinLength, MaxLength, IsNumber, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -6,6 +6,8 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 export class InternalMassAbridged extends IDdEnergyBaseModel {
     @IsString()
     @IsDefined()
+    @MinLength(1)
+    @MaxLength(100)
     /** Identifier for an OpaqueConstruction that represents the material that the internal thermal mass is composed of. */
     construction!: string;
 	
@@ -16,6 +18,7 @@ export class InternalMassAbridged extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^InternalMassAbridged$/)
     type?: string;
 	
 

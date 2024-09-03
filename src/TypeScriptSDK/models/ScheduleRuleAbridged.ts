@@ -1,4 +1,4 @@
-﻿import { IsString, IsDefined, IsOptional, IsBoolean, IsArray, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, MinLength, MaxLength, IsOptional, Matches, IsBoolean, IsArray, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { DatedBaseModel } from "./DatedBaseModel";
 
@@ -6,11 +6,14 @@ import { DatedBaseModel } from "./DatedBaseModel";
 export class ScheduleRuleAbridged extends DatedBaseModel {
     @IsString()
     @IsDefined()
+    @MinLength(1)
+    @MaxLength(100)
     /** The identifier of a ScheduleDay object associated with this rule. */
     schedule_day!: string;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^ScheduleRuleAbridged$/)
     type?: string;
 	
     @IsBoolean()

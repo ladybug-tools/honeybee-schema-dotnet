@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
@@ -6,16 +6,20 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 export class DryBulbCondition extends _OpenAPIGenBaseModel {
     @IsNumber()
     @IsDefined()
+    @Min(-90)
+    @Max(70)
     /** The maximum dry bulb temperature on the design day [C]. */
     dry_bulb_max!: number;
 	
     @IsNumber()
     @IsDefined()
+    @Min(0)
     /** The difference between min and max temperatures on the design day [C]. */
     dry_bulb_range!: number;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^DryBulbCondition$/)
     type?: string;
 	
 

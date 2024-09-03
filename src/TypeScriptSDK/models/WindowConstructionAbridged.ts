@@ -1,4 +1,4 @@
-﻿import { IsArray, IsString, IsDefined, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsString, IsDefined, IsOptional, Matches, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -12,10 +12,13 @@ export class WindowConstructionAbridged extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^WindowConstructionAbridged$/)
     type?: string;
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** An optional identifier for a frame material that surrounds the window construction. */
     frame?: string;
 	

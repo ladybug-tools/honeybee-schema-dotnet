@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AddedInstruction } from "./AddedInstruction";
@@ -8,6 +8,7 @@ import { DeletedInstruction } from "./DeletedInstruction";
 export class SyncInstructions extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^SyncInstructions$/)
     type?: string;
 	
     @IsArray()

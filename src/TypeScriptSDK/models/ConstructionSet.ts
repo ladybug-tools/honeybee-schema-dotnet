@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { AirBoundaryConstruction } from "./AirBoundaryConstruction";
 import { ApertureConstructionSet } from "./ApertureConstructionSet";
@@ -14,6 +14,7 @@ import { WallConstructionSet } from "./WallConstructionSet";
 export class ConstructionSet extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^ConstructionSet$/)
     type?: string;
 	
     @IsInstance(WallConstructionSet)

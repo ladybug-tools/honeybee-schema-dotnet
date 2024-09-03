@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
@@ -6,35 +6,48 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 export class VentilationControlAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^VentilationControlAbridged$/)
     type?: string;
 	
     @IsNumber()
     @IsOptional()
+    @Min(-100)
+    @Max(100)
     /** A number for the minimum indoor temperature at which to ventilate in Celsius. Typically, this variable is used to initiate ventilation. */
     min_indoor_temperature?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(-100)
+    @Max(100)
     /** A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a maximum temperature at which point ventilation is stopped and a cooling system is turned on. */
     max_indoor_temperature?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(-100)
+    @Max(100)
     /** A number for the minimum outdoor temperature at which to ventilate in Celsius. This can be used to ensure ventilative cooling does not happen during the winter even if the Room is above the min_indoor_temperature. */
     min_outdoor_temperature?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(-100)
+    @Max(100)
     /** A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a limit for when it is considered too hot outside for ventilative cooling. */
     max_outdoor_temperature?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(-100)
+    @Max(100)
     /** A number for the temperature differential in Celsius between indoor and outdoor below which ventilation is shut off.  This should usually be a positive number so that ventilation only occurs when the outdoors is cooler than the indoors. Negative numbers indicate how much hotter the outdoors can be than the indoors before ventilation is stopped. */
     delta_temperature?: number;
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** Identifier of the schedule for the ventilation over the course of the year. Note that this is applied on top of any setpoints. The type of this schedule should be On/Off and values should be either 0 (no possibility of ventilation) or 1 (ventilation possible). */
     schedule?: string;
 	

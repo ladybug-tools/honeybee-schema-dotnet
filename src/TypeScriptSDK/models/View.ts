@@ -1,4 +1,4 @@
-﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _RadianceAsset } from "./_RadianceAsset";
 import { ViewType } from "./ViewType";
@@ -25,6 +25,7 @@ export class View extends _RadianceAsset {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^View$/)
     type?: string;
 	
     @IsEnum(ViewType)

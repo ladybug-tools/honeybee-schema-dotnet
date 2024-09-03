@@ -1,4 +1,4 @@
-﻿import { IsEnum, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { PTACEquipmentType } from "./PTACEquipmentType";
@@ -14,6 +14,7 @@ export class PTAC extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^PTAC$/)
     type?: string;
 	
     @IsEnum(PTACEquipmentType)

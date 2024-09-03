@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
@@ -6,21 +6,28 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 export class _FaceSubSetAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition. */
     interior_construction?: string;
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition. */
     exterior_construction?: string;
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** Identifier for an OpaqueConstruction for faces with a Ground boundary condition. */
     ground_construction?: string;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^_FaceSubSetAbridged$/)
     type?: string;
 	
 

@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
@@ -8,6 +8,7 @@ import { ScheduleRuleset } from "./ScheduleRuleset";
 export class Lighting extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
+    @Min(0)
     /** Lighting per floor area as [W/m2]. */
     watts_per_area!: number;
 	
@@ -17,25 +18,33 @@ export class Lighting extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^Lighting$/)
     type?: string;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. (Default: 0.25). */
     visible_fraction?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** The fraction of heat from lights that is long-wave radiation. (Default: 0.32). */
     radiant_fraction?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** The fraction of the heat from lights that goes into the zone return air. (Default: 0). */
     return_air_fraction?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The baseline lighting power density in [W/m2] of floor area. This baseline is useful to track how much better the installed lights are in comparison to a standard like ASHRAE 90.1. If set to None, it will default to 11.84029 W/m2, which is that ASHRAE 90.1-2004 baseline for an office. */
     baseline_watts_per_area?: number;
 	

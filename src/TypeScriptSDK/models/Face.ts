@@ -1,4 +1,4 @@
-﻿import { IsInstance, ValidateNested, IsDefined, IsEnum, IsString, IsOptional, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsInstance, ValidateNested, IsDefined, IsEnum, IsString, IsOptional, Matches, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { Adiabatic } from "./Adiabatic";
 import { Aperture } from "./Aperture";
@@ -39,6 +39,7 @@ export class Face extends IDdBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^Face$/)
     type?: string;
 	
     @IsArray()

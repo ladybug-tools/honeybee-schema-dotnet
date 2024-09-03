@@ -1,4 +1,4 @@
-﻿import { IsEnum, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ResidentialEquipmentType } from "./ResidentialEquipmentType";
@@ -14,6 +14,7 @@ export class Residential extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^Residential$/)
     type?: string;
 	
     @IsEnum(ResidentialEquipmentType)

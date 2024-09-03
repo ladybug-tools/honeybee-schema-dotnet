@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ApertureEnergyPropertiesAbridged } from "./ApertureEnergyPropertiesAbridged";
@@ -7,6 +7,7 @@ import { ApertureRadiancePropertiesAbridged } from "./ApertureRadianceProperties
 export class AperturePropertiesAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^AperturePropertiesAbridged$/)
     type?: string;
 	
     @IsInstance(ApertureEnergyPropertiesAbridged)

@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
@@ -8,10 +8,12 @@ import { ScheduleRuleset } from "./ScheduleRuleset";
 export class AirBoundaryConstruction extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^AirBoundaryConstruction$/)
     type?: string;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system. */
     air_mixing_per_area?: number;
 	

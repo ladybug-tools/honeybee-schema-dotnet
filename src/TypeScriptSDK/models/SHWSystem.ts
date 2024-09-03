@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -8,6 +8,7 @@ import { SHWEquipmentType } from "./SHWEquipmentType";
 export class SHWSystem extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^SHWSystem$/)
     type?: string;
 	
     @IsEnum(SHWEquipmentType)

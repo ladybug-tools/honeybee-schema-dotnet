@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsEnum, IsNumber, Max, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { SlatOrientation } from "./SlatOrientation";
@@ -7,6 +7,7 @@ import { SlatOrientation } from "./SlatOrientation";
 export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^EnergyWindowMaterialBlind$/)
     type?: string;
 	
     @IsEnum(SlatOrientation)
@@ -16,21 +17,26 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Max(1)
     /** The width of slat measured from edge to edge in meters. */
     slat_width?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Max(1)
     /** The distance between the front of a slat and the back of the adjacent slat in meters. */
     slat_separation?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Max(0.1)
     /** The distance between the faces of a slat in meters. The default value is 0.001. */
     slat_thickness?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(180)
     /** The angle (degrees) between the glazing outward normal and the slat outward normal where the outward normal points away from the front face of the slat (degrees). The default value is 45. */
     slat_angle?: number;
 	
@@ -41,101 +47,126 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The beam solar transmittance of the slat, assumed to be independent of angle of incidence on the slat. Any transmitted beam radiation is assumed to be 100% diffuse (i.e., slats are translucent). The default value is 0. */
     beam_solar_transmittance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5. */
     beam_solar_reflectance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5. */
     beam_solar_reflectance_back?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The slat transmittance for hemispherically diffuse solar radiation. Default: 0. */
     diffuse_solar_transmittance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The front-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5. */
     diffuse_solar_reflectance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The back-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5. */
     diffuse_solar_reflectance_back?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default: 0. */
     beam_visible_transmittance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The beam visible reflectance on the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5. */
     beam_visible_reflectance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The beam visible reflectance on the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5. */
     beam_visible_reflectance_back?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The slat transmittance for hemispherically diffuse visible radiation. This value should equal “Slat Beam Visible Transmittance.” */
     diffuse_visible_transmittance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The front-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Front Side Slat Beam Visible Reflectance.” Default: 0.5. */
     diffuse_visible_reflectance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The back-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Back Side Slat Beam Visible Reflectance. Default: 0.5.” */
     diffuse_visible_reflectance_back?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The slat infrared hemispherical transmittance. It is zero for solid metallic, wooden or glass slats, but may be non-zero in some cases such as for thin plastic slats. The default value is 0. */
     infrared_transmittance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** Front side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9. */
     emissivity?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** Back side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9. */
     emissivity_back?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0.01)
+    @Max(1)
     /** The distance from the mid-plane of the blind to the adjacent glass in meters. The default value is 0.05. */
     distance_to_glass?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. */
     top_opening_multiplier?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. */
     bottom_opening_multiplier?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. */
     left_opening_multiplier?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. */
     right_opening_multiplier?: number;
 	

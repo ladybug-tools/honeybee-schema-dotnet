@@ -1,4 +1,4 @@
-﻿import { IsEnum, IsDefined, IsNumber, IsString, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsDefined, IsNumber, IsString, IsOptional, Matches, Min, Max, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { HumidityTypes } from "./HumidityTypes";
@@ -17,10 +17,13 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^HumidityCondition$/)
     type?: string;
 	
     @IsNumber()
     @IsOptional()
+    @Min(31000)
+    @Max(120000)
     /** Barometric air pressure on the design day [Pa]. */
     barometric_pressure?: number;
 	

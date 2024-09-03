@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsInstance, ValidateNested, IsInt, IsNumber, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, IsInt, Min, Max, IsNumber, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { RunPeriod } from "./RunPeriod";
@@ -12,6 +12,7 @@ import { TerrianTypes } from "./TerrianTypes";
 export class SimulationParameter extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^SimulationParameter$/)
     type?: string;
 	
     @IsInstance(SimulationOutput)
@@ -30,6 +31,8 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
 	
     @IsInt()
     @IsOptional()
+    @Min(1)
+    @Max(60)
     /** An integer for the number of timesteps per hour at which the energy calculation will be run. */
     timestep?: number;
 	
@@ -56,6 +59,8 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(-360)
+    @Max(360)
     /** A number between -360 and 360 for the north direction in degrees.This is the counterclockwise difference between the North and the positive Y-axis. 90 is West and 270 is East. Note that this is different than the convention used in EnergyPlus, which uses clockwise difference instead of counterclockwise difference. */
     north_angle?: number;
 	

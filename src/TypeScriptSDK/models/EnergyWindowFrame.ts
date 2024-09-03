@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Max, IsString, IsOptional, Matches, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -6,6 +6,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 export class EnergyWindowFrame extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
+    @Max(1)
     /** Number for the width of frame in plane of window [m]. The frame width is assumed to be the same on all sides of window.. */
     width!: number;
 	
@@ -16,35 +17,46 @@ export class EnergyWindowFrame extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^EnergyWindowFrame$/)
     type?: string;
 	
     @IsNumber()
     @IsOptional()
+    @Max(4)
     /** Number between 0 and 4 for the ratio of the glass conductance near the frame (excluding air films) divided by the glass conductance at the center of the glazing (excluding air films). This is used only for multi-pane glazing constructions. This ratio should usually be greater than 1.0 since the spacer material that separates the glass panes is usually more conductive than the gap between panes. A value of 1 effectively indicates no spacer. Values should usually be obtained from the LBNL WINDOW program so that the unique characteristics of the window construction can be accounted for. */
     edge_to_center_ratio?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(0.5)
     /** Number for the distance that the frame projects outward from the outside face of the glazing [m]. This is used to calculate shadowing of frame onto glass, solar absorbed by the frame, IR emitted and absorbed by the frame, and convection from frame. */
     outside_projection?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(0.5)
     /** Number for the distance that the frame projects inward from the inside face of the glazing [m]. This is used to calculate solar absorbed by the frame, IR emitted and absorbed by the frame, and convection from frame. */
     inside_projection?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Max(0.99999)
     /** Fraction of incident long wavelength radiation that is absorbed by the frame material. */
     thermal_absorptance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Fraction of incident solar radiation absorbed by the frame material. */
     solar_absorptance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Fraction of incident visible wavelength radiation absorbed by the frame material. */
     visible_absorptance?: number;
 	

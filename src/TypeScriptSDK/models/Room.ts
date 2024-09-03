@@ -1,4 +1,4 @@
-﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsInt, Min, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { Face } from "./Face";
 import { IDdBaseModel } from "./IDdBaseModel";
@@ -24,6 +24,7 @@ export class Room extends IDdBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^Room$/)
     type?: string;
 	
     @IsArray()
@@ -44,6 +45,7 @@ export class Room extends IDdBaseModel {
 	
     @IsInt()
     @IsOptional()
+    @Min(1)
     /** An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is multiplied by the multiplier. */
     multiplier?: number;
 	

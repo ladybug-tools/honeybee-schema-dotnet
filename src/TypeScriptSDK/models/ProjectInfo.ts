@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsNumber, IsArray, IsInstance, ValidateNested, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, IsArray, IsInstance, ValidateNested, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BuildingTypes } from "./BuildingTypes";
@@ -10,10 +10,13 @@ import { Location } from "./Location";
 export class ProjectInfo extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^ProjectInfo$/)
     type?: string;
 	
     @IsNumber()
     @IsOptional()
+    @Min(-360)
+    @Max(360)
     /** A number between -360 to 360 where positive values rotate the compass counterclockwise (towards the West) and negative values rotate the compass clockwise (towards the East). */
     north?: number;
 	

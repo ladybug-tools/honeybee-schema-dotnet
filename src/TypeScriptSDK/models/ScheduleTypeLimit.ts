@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 import { NoLimit } from "./NoLimit";
@@ -9,6 +9,7 @@ import { ScheduleUnitType } from "./ScheduleUnitType";
 export class ScheduleTypeLimit extends EnergyBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^ScheduleTypeLimit$/)
     type?: string;
 	
     @IsOptional()

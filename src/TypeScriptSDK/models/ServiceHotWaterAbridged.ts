@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -6,16 +6,20 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 export class ServiceHotWaterAbridged extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
+    @Min(0)
     /** Number for the total volume flow rate of water per unit area of floor [L/h-m2]. */
     flow_per_area!: number;
 	
     @IsString()
     @IsDefined()
+    @MinLength(1)
+    @MaxLength(100)
     /** Identifier of the schedule for the hot water use over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile. */
     schedule!: string;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^ServiceHotWaterAbridged$/)
     type?: string;
 	
     @IsNumber()
@@ -25,11 +29,15 @@ export class ServiceHotWaterAbridged extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A number between 0 and 1 for the fraction of the total hot water load given off as sensible heat in the zone. */
     sensible_fraction?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A number between 0 and 1 for the fraction of the total hot water load that is latent. */
     latent_fraction?: number;
 	

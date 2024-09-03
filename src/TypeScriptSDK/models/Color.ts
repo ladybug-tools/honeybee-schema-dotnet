@@ -1,4 +1,4 @@
-﻿import { IsInt, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsInt, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
@@ -6,25 +6,34 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 export class Color extends _OpenAPIGenBaseModel {
     @IsInt()
     @IsDefined()
+    @Min(0)
+    @Max(255)
     /** Value for red channel. */
     r!: number;
 	
     @IsInt()
     @IsDefined()
+    @Min(0)
+    @Max(255)
     /** Value for green channel. */
     g!: number;
 	
     @IsInt()
     @IsDefined()
+    @Min(0)
+    @Max(255)
     /** Value for blue channel. */
     b!: number;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^Color$/)
     type?: string;
 	
     @IsInt()
     @IsOptional()
+    @Min(0)
+    @Max(255)
     /** Value for the alpha channel, which defines the opacity as a number between 0 (fully transparent) and 255 (fully opaque). */
     a?: number;
 	

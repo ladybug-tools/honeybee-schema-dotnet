@@ -1,4 +1,4 @@
-﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { Face3D } from "./Face3D";
 import { IDdBaseModel } from "./IDdBaseModel";
@@ -22,6 +22,7 @@ export class Shade extends IDdBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^Shade$/)
     type?: string;
 	
     @IsBoolean()

@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { ApertureModifierSet } from "./ApertureModifierSet";
 import { BSDF } from "./BSDF";
@@ -21,6 +21,7 @@ import { WallModifierSet } from "./WallModifierSet";
 export class ModifierSet extends IDdRadianceBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^ModifierSet$/)
     type?: string;
 	
     @IsInstance(WallModifierSet)

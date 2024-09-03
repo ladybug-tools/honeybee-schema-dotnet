@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AirBoundaryConstructionAbridged } from "./AirBoundaryConstructionAbridged";
@@ -19,6 +19,7 @@ import { WindowConstructionAbridged } from "./WindowConstructionAbridged";
 export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^GlobalConstructionSet$/)
     type?: string;
 	
     @IsArray()

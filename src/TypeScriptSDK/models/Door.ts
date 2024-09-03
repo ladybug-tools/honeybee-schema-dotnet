@@ -1,4 +1,4 @@
-﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsBoolean, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsBoolean, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { DoorPropertiesAbridged } from "./DoorPropertiesAbridged";
 import { Face3D } from "./Face3D";
@@ -28,6 +28,7 @@ export class Door extends IDdBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^Door$/)
     type?: string;
 	
     @IsBoolean()

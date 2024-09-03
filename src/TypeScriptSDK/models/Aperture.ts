@@ -1,4 +1,4 @@
-﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsBoolean, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsBoolean, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { AperturePropertiesAbridged } from "./AperturePropertiesAbridged";
 import { Face3D } from "./Face3D";
@@ -28,6 +28,7 @@ export class Aperture extends IDdBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^Aperture$/)
     type?: string;
 	
     @IsBoolean()

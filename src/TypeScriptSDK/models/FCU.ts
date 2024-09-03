@@ -1,4 +1,4 @@
-﻿import { IsEnum, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { FCUEquipmentType } from "./FCUEquipmentType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -14,6 +14,7 @@ export class FCU extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^FCU$/)
     type?: string;
 	
     @IsEnum(FCUEquipmentType)

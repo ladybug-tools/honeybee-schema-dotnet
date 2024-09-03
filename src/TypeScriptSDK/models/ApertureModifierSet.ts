@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BSDF } from "./BSDF";
@@ -15,6 +15,7 @@ import { Void } from "./Void";
 export class ApertureModifierSet extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^ApertureModifierSet$/)
     type?: string;
 	
     @IsOptional()

@@ -1,4 +1,4 @@
-﻿import { IsArray, IsDefined, IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsDefined, IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { EnergyWindowFrame } from "./EnergyWindowFrame";
 import { EnergyWindowMaterialGas } from "./EnergyWindowMaterialGas";
@@ -17,6 +17,7 @@ export class WindowConstruction extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^WindowConstruction$/)
     type?: string;
 	
     @IsInstance(EnergyWindowFrame)

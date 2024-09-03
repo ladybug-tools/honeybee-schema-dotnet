@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsArray, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsArray, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { DatedBaseModel } from "./DatedBaseModel";
 
@@ -6,6 +6,7 @@ import { DatedBaseModel } from "./DatedBaseModel";
 export class DaylightSavingTime extends DatedBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^DaylightSavingTime$/)
     type?: string;
 	
     @IsArray()

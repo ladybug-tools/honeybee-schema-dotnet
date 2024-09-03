@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsString, IsEnum, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsEnum, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { FuelTypes } from "./FuelTypes";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -7,11 +7,14 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 export class ProcessAbridged extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
+    @Min(0)
     /** A number for the process load power in Watts. */
     watts!: number;
 	
     @IsString()
     @IsDefined()
+    @MinLength(1)
+    @MaxLength(100)
     /** Identifier of the schedule for the use of the process over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts to yield a complete equipment profile. */
     schedule!: string;
 	
@@ -23,25 +26,34 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^ProcessAbridged$/)
     type?: string;
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** Text to indicate the end-use subcategory, which will identify the process load in the end use output. For example, “Cooking”, “Clothes Drying”, etc. A new meter for reporting is created for each unique subcategory. */
     end_use_category?: string;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Number for the amount of long-wave radiation heat given off by the process load. Default value is 0. */
     radiant_fraction?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Number for the amount of latent heat given off by the process load. Default value is 0. */
     latent_fraction?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Number for the amount of “lost” heat being given off by the process load. The default value is 0. */
     lost_fraction?: number;
 	

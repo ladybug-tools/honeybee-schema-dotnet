@@ -1,4 +1,4 @@
-﻿import { IsString, IsDefined, IsEnum, IsInstance, ValidateNested, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, MinLength, MaxLength, IsEnum, IsInstance, ValidateNested, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ASHRAEClearSky } from "./ASHRAEClearSky";
@@ -12,6 +12,8 @@ import { WindCondition } from "./WindCondition";
 export class DesignDay extends _OpenAPIGenBaseModel {
     @IsString()
     @IsDefined()
+    @MinLength(1)
+    @MaxLength(100)
     /** Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t). */
     name!: string;
 	
@@ -46,6 +48,7 @@ export class DesignDay extends _OpenAPIGenBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^DesignDay$/)
     type?: string;
 	
 

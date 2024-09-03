@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
@@ -6,15 +6,20 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 export class WindCondition extends _OpenAPIGenBaseModel {
     @IsNumber()
     @IsDefined()
+    @Min(0)
+    @Max(40)
     /** Wind speed on the design day [m/s]. */
     wind_speed!: number;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^WindCondition$/)
     type?: string;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(360)
     /** Wind direction on the design day [degrees]. */
     wind_direction?: number;
 	

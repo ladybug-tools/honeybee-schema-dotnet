@@ -1,4 +1,4 @@
-﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _RadianceAsset } from "./_RadianceAsset";
 import { Face3D } from "./Face3D";
@@ -17,6 +17,7 @@ export class SensorGrid extends _RadianceAsset {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^SensorGrid$/)
     type?: string;
 	
     @IsInstance(Mesh3D)

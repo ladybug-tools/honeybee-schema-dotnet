@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
@@ -8,6 +8,7 @@ import { ScheduleRuleset } from "./ScheduleRuleset";
 export class ServiceHotWater extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
+    @Min(0)
     /** Number for the total volume flow rate of water per unit area of floor [L/h-m2]. */
     flow_per_area!: number;
 	
@@ -17,6 +18,7 @@ export class ServiceHotWater extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^ServiceHotWater$/)
     type?: string;
 	
     @IsNumber()
@@ -26,11 +28,15 @@ export class ServiceHotWater extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A number between 0 and 1 for the fraction of the total hot water load given off as sensible heat in the zone. */
     sensible_fraction?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A number between 0 and 1 for the fraction of the total hot water load that is latent. */
     latent_fraction?: number;
 	

@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { ApertureConstructionSetAbridged } from "./ApertureConstructionSetAbridged";
 import { DoorConstructionSetAbridged } from "./DoorConstructionSetAbridged";
@@ -11,6 +11,7 @@ import { WallConstructionSetAbridged } from "./WallConstructionSetAbridged";
 export class ConstructionSetAbridged extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^ConstructionSetAbridged$/)
     type?: string;
 	
     @IsInstance(WallConstructionSetAbridged)
@@ -50,11 +51,15 @@ export class ConstructionSetAbridged extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** The identifier of a ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned. */
     shade_construction?: string;
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** The identifier of an AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type. */
     air_boundary_construction?: string;
 	
