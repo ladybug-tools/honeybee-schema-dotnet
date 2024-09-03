@@ -1,4 +1,4 @@
-﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { Face3D } from "./Face3D";
 import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
@@ -14,6 +14,7 @@ export class StateGeometryAbridged extends IDdRadianceBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^StateGeometryAbridged$/)
     type?: string;
 	
     @IsString()

@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
@@ -6,30 +6,41 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 export class DoorConstructionSetAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^DoorConstructionSetAbridged$/)
     type?: string;
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** Identifier for an OpaqueConstruction for all opaque doors with a Surface boundary condition. */
     interior_construction?: string;
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** Identifier for an OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face. */
     exterior_construction?: string;
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** Identifier for an OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face. */
     overhead_construction?: string;
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** Identifier for a WindowConstruction for all glass doors with an Outdoors boundary condition. */
     exterior_glass_construction?: string;
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** Identifier for a WindowConstruction for all glass doors with a Surface boundary condition. */
     interior_glass_construction?: string;
 	

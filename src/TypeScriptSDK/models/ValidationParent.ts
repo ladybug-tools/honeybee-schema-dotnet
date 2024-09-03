@@ -1,4 +1,4 @@
-﻿import { IsEnum, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsDefined, IsString, Matches, MinLength, MaxLength, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { ParentTypes } from "./ParentTypes";
 
@@ -11,11 +11,15 @@ export class ValidationParent {
 	
     @IsString()
     @IsDefined()
+    @Matches(/^[.A-Za-z0-9_-]+$/)
+    @MinLength(1)
+    @MaxLength(100)
     /** Text string for the unique ID of the parent object. */
     id!: string;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^ValidationParent$/)
     type?: string;
 	
     @IsString()

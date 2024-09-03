@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
@@ -8,25 +8,30 @@ import { ScheduleRuleset } from "./ScheduleRuleset";
 export class Ventilation extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^Ventilation$/)
     type?: string;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room. */
     flow_per_person?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** Intensity of ventilation in [m3/s per m2 of floor area]. */
     flow_per_area?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** Intensity of ventilation in air changes per hour (ACH) for the entire Room. */
     air_changes_per_hour?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** Intensity of ventilation in m3/s for the entire Room. */
     flow_per_zone?: number;
 	

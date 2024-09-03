@@ -1,4 +1,4 @@
-﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, ValidateNested, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, ValidateNested, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 
@@ -12,6 +12,7 @@ export class ScheduleDay extends EnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^ScheduleDay$/)
     type?: string;
 	
     @IsArray()

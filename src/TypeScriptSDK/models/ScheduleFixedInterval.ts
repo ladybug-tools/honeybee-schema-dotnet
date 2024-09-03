@@ -1,4 +1,4 @@
-﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, IsInstance, ValidateNested, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, IsInstance, ValidateNested, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleTypeLimit } from "./ScheduleTypeLimit";
@@ -13,6 +13,7 @@ export class ScheduleFixedInterval extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^ScheduleFixedInterval$/)
     type?: string;
 	
     @IsInstance(ScheduleTypeLimit)

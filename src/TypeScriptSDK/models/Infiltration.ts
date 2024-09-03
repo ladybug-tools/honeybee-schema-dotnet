@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
@@ -8,6 +8,7 @@ import { ScheduleRuleset } from "./ScheduleRuleset";
 export class Infiltration extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
+    @Min(0)
     /** Number for the infiltration per exterior surface area in m3/s-m2. */
     flow_per_exterior_area!: number;
 	
@@ -17,18 +18,22 @@ export class Infiltration extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^Infiltration$/)
     type?: string;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     constant_coefficient?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     temperature_coefficient?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     velocity_coefficient?: number;
 	
 

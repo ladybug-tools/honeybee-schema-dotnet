@@ -1,4 +1,4 @@
-﻿import { IsString, IsDefined, IsOptional, IsArray, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, IsOptional, IsArray, IsNumber, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { Glass } from "./Glass";
 import { Glow } from "./Glow";
@@ -39,11 +39,15 @@ export class BSDF extends ModifierBase {
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** Optional input for function file. Using ""."" will ensure that BSDF data is written to the root of wherever a given study is run. */
     function_file?: string;
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** Optional transform input to scale the thickness and reorient the up vector. */
     transform?: string;
 	
@@ -67,6 +71,7 @@ export class BSDF extends ModifierBase {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^BSDF$/)
     type?: string;
 	
 

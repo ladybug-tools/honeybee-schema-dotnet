@@ -1,15 +1,17 @@
-﻿import { IsString, IsDefined, IsBoolean, IsOptional, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, Matches, IsBoolean, IsOptional, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { ValidationError } from "./ValidationError";
 
 export class ValidationReport {
     @IsString()
     @IsDefined()
+    @Matches(/([0-9]+)\.([0-9]+)\.([0-9]+)/)
     /** Text string for the version of honeybee-core or dragonfly-core that performed the validation. */
     app_version!: string;
 	
     @IsString()
     @IsDefined()
+    @Matches(/([0-9]+)\.([0-9]+)\.([0-9]+)/)
     /** Text string for the version of honeybee-schema or dragonfly-schema that performed the validation. */
     schema_version!: string;
 	
@@ -20,6 +22,7 @@ export class ValidationReport {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^ValidationReport$/)
     type?: string;
 	
     @IsString()

@@ -1,4 +1,4 @@
-﻿import { IsEnum, IsOptional, IsNumber, IsBoolean, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsOptional, IsNumber, Min, Max, IsBoolean, IsString, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
@@ -14,11 +14,15 @@ export class VRFwithDOASAbridged extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. */
     sensible_heat_recovery?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A number between 0 and 1 for the effectiveness of latent heat recovery within the system. */
     latent_heat_recovery?: number;
 	
@@ -29,11 +33,14 @@ export class VRFwithDOASAbridged extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on. */
     doas_availability_schedule?: string;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^VRFwithDOASAbridged$/)
     type?: string;
 	
     @IsEnum(VRFwithDOASEquipmentType)

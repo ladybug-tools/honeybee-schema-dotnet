@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsArray, IsInstance, ValidateNested, IsNumber, IsEnum, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, IsNumber, IsEnum, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ClimateZones } from "./ClimateZones";
@@ -9,6 +9,7 @@ import { EfficiencyStandards } from "./EfficiencyStandards";
 export class SizingParameter extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^SizingParameter$/)
     type?: string;
 	
     @IsArray()

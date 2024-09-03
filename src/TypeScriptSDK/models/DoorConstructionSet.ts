@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { OpaqueConstruction } from "./OpaqueConstruction";
@@ -10,6 +10,7 @@ import { WindowConstructionShade } from "./WindowConstructionShade";
 export class DoorConstructionSet extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^DoorConstructionSet$/)
     type?: string;
 	
     @IsInstance(OpaqueConstruction)

@@ -1,4 +1,4 @@
-﻿import { IsArray, IsEnum, IsDefined, IsNumber, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsEnum, IsDefined, IsNumber, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { GasType } from "./GasType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -20,6 +20,7 @@ export class EnergyWindowMaterialGasMixture extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^EnergyWindowMaterialGasMixture$/)
     type?: string;
 	
     @IsNumber()

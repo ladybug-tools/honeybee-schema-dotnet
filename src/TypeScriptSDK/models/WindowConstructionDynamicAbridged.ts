@@ -1,4 +1,4 @@
-﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, MinLength, MaxLength, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { WindowConstructionAbridged } from "./WindowConstructionAbridged";
@@ -15,11 +15,14 @@ export class WindowConstructionDynamicAbridged extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsDefined()
+    @MinLength(1)
+    @MaxLength(100)
     /** An identifier for a control schedule that dictates which constructions are active at given times throughout the simulation. The values of the schedule should be integers and range from 0 to one less then the number of constructions. Zero indicates that the first construction is active, one indicates that the second on is active, etc. The schedule type limits of this schedule should be ""Control Level."" If building custom schedule type limits that describe a particular range of states, the type limits should be ""Discrete"" and the unit type should be ""Mode,"" ""Control,"" or some other fractional unit. */
     schedule!: string;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^WindowConstructionDynamicAbridged$/)
     type?: string;
 	
 

@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -9,6 +9,7 @@ import { ScheduleRuleset } from "./ScheduleRuleset";
 export class People extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
+    @Min(0)
     /** People per floor area expressed as [people/m2] */
     people_per_area!: number;
 	
@@ -18,6 +19,7 @@ export class People extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^People$/)
     type?: string;
 	
     @IsOptional()
@@ -26,6 +28,8 @@ export class People extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** The radiant fraction of sensible heat released by people. (Default: 0.3). */
     radiant_fraction?: number;
 	

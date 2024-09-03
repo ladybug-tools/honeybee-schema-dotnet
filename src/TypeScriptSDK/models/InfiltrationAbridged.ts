@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -6,28 +6,35 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 export class InfiltrationAbridged extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
+    @Min(0)
     /** Number for the infiltration per exterior surface area in m3/s-m2. */
     flow_per_exterior_area!: number;
 	
     @IsString()
     @IsDefined()
+    @MinLength(1)
+    @MaxLength(100)
     /** Identifier of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile. */
     schedule!: string;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^InfiltrationAbridged$/)
     type?: string;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     constant_coefficient?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     temperature_coefficient?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     velocity_coefficient?: number;
 	
 

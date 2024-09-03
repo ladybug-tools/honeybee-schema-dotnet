@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsNumber, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -7,6 +7,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^EnergyWindowMaterialGlazing$/)
     type?: string;
 	
     @IsNumber()
@@ -16,11 +17,15 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Transmittance of solar radiation through the glass at normal incidence. Default: 0.85 for clear glass. */
     solar_transmittance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default: 0.075 for clear glass. */
     solar_reflectance?: number;
 	
@@ -30,11 +35,15 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Transmittance of visible light through the glass at normal incidence. Default: 0.9 for clear glass. */
     visible_transmittance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Reflectance of visible light off of the front side of the glass at normal incidence. Default: 0.075 for clear glass. */
     visible_reflectance?: number;
 	
@@ -44,16 +53,22 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Long-wave transmittance at normal incidence. */
     infrared_transmittance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating. */
     emissivity?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating. */
     emissivity_back?: number;
 	

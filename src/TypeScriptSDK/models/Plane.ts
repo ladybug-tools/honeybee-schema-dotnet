@@ -1,4 +1,4 @@
-﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
@@ -18,6 +18,7 @@ export class Plane extends _OpenAPIGenBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^Plane$/)
     type?: string;
 	
     @IsArray()

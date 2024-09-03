@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Autocalculate } from "./Autocalculate";
@@ -7,6 +7,7 @@ import { Autocalculate } from "./Autocalculate";
 export class Location extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^Location$/)
     type?: string;
 	
     @IsString()

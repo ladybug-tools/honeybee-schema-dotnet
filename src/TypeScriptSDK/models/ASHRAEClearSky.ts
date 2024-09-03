@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _SkyCondition } from "./_SkyCondition";
 
@@ -6,11 +6,14 @@ import { _SkyCondition } from "./_SkyCondition";
 export class ASHRAEClearSky extends _SkyCondition {
     @IsNumber()
     @IsDefined()
+    @Min(0)
+    @Max(1.2)
     /** Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level. */
     clearness!: number;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^ASHRAEClearSky$/)
     type?: string;
 	
 

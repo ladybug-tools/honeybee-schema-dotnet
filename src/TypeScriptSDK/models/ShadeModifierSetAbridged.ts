@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { BaseModifierSetAbridged } from "./BaseModifierSetAbridged";
 
@@ -6,6 +6,7 @@ import { BaseModifierSetAbridged } from "./BaseModifierSetAbridged";
 export class ShadeModifierSetAbridged extends BaseModifierSetAbridged {
     @IsString()
     @IsOptional()
+    @Matches(/^ShadeModifierSetAbridged$/)
     type?: string;
 	
 

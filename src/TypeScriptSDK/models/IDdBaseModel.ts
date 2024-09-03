@@ -1,4 +1,4 @@
-﻿import { IsString, IsDefined, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, Matches, MinLength, MaxLength, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
@@ -6,6 +6,9 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 export class IDdBaseModel extends _OpenAPIGenBaseModel {
     @IsString()
     @IsDefined()
+    @Matches(/^[.A-Za-z0-9_-]+$/)
+    @MinLength(1)
+    @MaxLength(100)
     /** Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be < 100 characters and not contain any spaces or special characters. */
     identifier!: string;
 	
@@ -20,6 +23,7 @@ export class IDdBaseModel extends _OpenAPIGenBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^IDdBaseModel$/)
     type?: string;
 	
 

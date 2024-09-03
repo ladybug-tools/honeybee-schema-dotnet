@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsEnum, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsEnum, IsInt, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { CalculationMethod } from "./CalculationMethod";
@@ -9,6 +9,7 @@ import { SolarDistribution } from "./SolarDistribution";
 export class ShadowCalculation extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^ShadowCalculation$/)
     type?: string;
 	
     @IsEnum(SolarDistribution)
@@ -30,11 +31,13 @@ export class ShadowCalculation extends _OpenAPIGenBaseModel {
 	
     @IsInt()
     @IsOptional()
+    @Min(1)
     /** Integer for the number of days in each period for which a unique shadow calculation will be performed. This field is only used if the Periodic calculation_method is used. */
     calculation_frequency?: number;
 	
     @IsInt()
     @IsOptional()
+    @Min(200)
     /** Number of allowable figures in shadow overlap calculations. */
     maximum_figures?: number;
 	

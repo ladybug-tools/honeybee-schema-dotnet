@@ -1,4 +1,4 @@
-﻿import { IsOptional, IsArray, IsNumber, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsOptional, IsArray, IsNumber, Min, Max, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
@@ -23,21 +23,28 @@ export class Light extends ModifierBase {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A value between 0 and 1 for the red channel of the modifier. */
     r_emittance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A value between 0 and 1 for the green channel of the modifier. */
     g_emittance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A value between 0 and 1 for the blue channel of the modifier. */
     b_emittance?: number;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^Light$/)
     type?: string;
 	
 

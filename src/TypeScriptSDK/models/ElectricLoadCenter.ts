@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsNumber, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
@@ -6,10 +6,12 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 export class ElectricLoadCenter extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^ElectricLoadCenter$/)
     type?: string;
 	
     @IsNumber()
     @IsOptional()
+    @Max(1)
     /** A number between 0 and 1 for the load center inverter nominal rated DC-to-AC conversion efficiency. An inverter converts DC power, such as that output by photovoltaic panels, to AC power, such as that distributed by the electrical grid and is available from standard electrical outlets. Inverter efficiency is defined as the inverter rated AC power output divided by its rated DC power output. */
     inverter_efficiency?: number;
 	

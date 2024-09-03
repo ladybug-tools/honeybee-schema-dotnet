@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _FaceSubSetAbridged } from "./_FaceSubSetAbridged";
 
@@ -6,6 +6,7 @@ import { _FaceSubSetAbridged } from "./_FaceSubSetAbridged";
 export class RoofCeilingConstructionSetAbridged extends _FaceSubSetAbridged {
     @IsString()
     @IsOptional()
+    @Matches(/^RoofCeilingConstructionSetAbridged$/)
     type?: string;
 	
 

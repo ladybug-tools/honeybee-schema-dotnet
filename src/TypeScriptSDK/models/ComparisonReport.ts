@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AddedObject } from "./AddedObject";
@@ -8,6 +8,7 @@ import { DeletedObject } from "./DeletedObject";
 export class ComparisonReport extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^ComparisonReport$/)
     type?: string;
 	
     @IsArray()

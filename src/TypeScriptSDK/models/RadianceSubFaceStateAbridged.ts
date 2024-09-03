@@ -1,4 +1,4 @@
-﻿import { IsInstance, ValidateNested, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsInstance, ValidateNested, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { Face3D } from "./Face3D";
 import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged";
@@ -21,6 +21,7 @@ export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^RadianceSubFaceStateAbridged$/)
     type?: string;
 	
 

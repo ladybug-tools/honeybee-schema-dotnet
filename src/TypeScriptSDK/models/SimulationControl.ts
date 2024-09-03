@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
@@ -6,6 +6,7 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 export class SimulationControl extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^SimulationControl$/)
     type?: string;
 	
     @IsBoolean()

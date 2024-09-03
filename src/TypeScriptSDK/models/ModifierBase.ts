@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 
@@ -6,6 +6,7 @@ import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 export class ModifierBase extends IDdRadianceBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^ModifierBase$/)
     type?: string;
 	
 

@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _PropertiesBaseAbridged } from "./_PropertiesBaseAbridged";
 import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged";
@@ -7,6 +7,7 @@ import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged";
 export class ShadeRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
     @IsString()
     @IsOptional()
+    @Matches(/^ShadeRadiancePropertiesAbridged$/)
     type?: string;
 	
     @IsString()

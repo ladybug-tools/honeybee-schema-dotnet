@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsEnum, IsArray, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsEnum, IsArray, IsNumber, Min, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ReportingFrequency } from "./ReportingFrequency";
@@ -7,6 +7,7 @@ import { ReportingFrequency } from "./ReportingFrequency";
 export class SimulationOutput extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^SimulationOutput$/)
     type?: string;
 	
     @IsEnum(ReportingFrequency)
@@ -28,6 +29,8 @@ export class SimulationOutput extends _OpenAPIGenBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(10)
     /** A number in degrees Celsius for the difference that the zone conditions must be from the thermostat setpoint in order for the setpoint to be considered unmet. This will affect how unmet hours are reported in the output. ASHRAE 90.1 uses a tolerance of 1.11C, which is equivalent to 1.8F. */
     unmet_setpoint_tolerance?: number;
 	

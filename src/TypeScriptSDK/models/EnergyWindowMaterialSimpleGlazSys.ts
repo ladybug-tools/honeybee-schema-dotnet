@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -6,6 +6,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 export class EnergyWindowMaterialSimpleGlazSys extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
+    @Max(12)
     /** The overall heat transfer coefficient for window system in W/m2-K. Note that constructions with U-values above 5.8 should not be assigned to skylights as this implies the resistance of the window is negative when air films are subtracted. */
     u_factor!: number;
 	
@@ -16,6 +17,7 @@ export class EnergyWindowMaterialSimpleGlazSys extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^EnergyWindowMaterialSimpleGlazSys$/)
     type?: string;
 	
     @IsNumber()

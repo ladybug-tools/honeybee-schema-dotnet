@@ -1,4 +1,4 @@
-﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, MinLength, MaxLength, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -12,10 +12,13 @@ export class ScheduleFixedIntervalAbridged extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^ScheduleFixedIntervalAbridged$/)
     type?: string;
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** Identifier of a ScheduleTypeLimit that will be used to validate schedule values against upper/lower limits and assign units to the schedule values. If None, no validation will occur. */
     schedule_type_limit?: string;
 	

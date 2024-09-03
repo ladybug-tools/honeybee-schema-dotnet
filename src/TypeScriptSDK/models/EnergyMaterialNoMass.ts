@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, IsEnum, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Roughness } from "./Roughness";
@@ -7,11 +7,13 @@ import { Roughness } from "./Roughness";
 export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
+    @Min(0.001)
     /** The thermal resistance (R-value) of the material layer [m2-K/W]. */
     r_value!: number;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^EnergyMaterialNoMass$/)
     type?: string;
 	
     @IsEnum(Roughness)
@@ -21,16 +23,21 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Max(0.99999)
     /** Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9. */
     thermal_absorptance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Fraction of incident solar radiation absorbed by the material. Default: 0.7. */
     solar_absorptance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7. */
     visible_absorptance?: number;
 	

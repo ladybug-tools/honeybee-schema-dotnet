@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsInstance, ValidateNested, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BSDF } from "./BSDF";
@@ -20,6 +20,7 @@ import { Void } from "./Void";
 export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^ModelRadianceProperties$/)
     type?: string;
 	
     @IsInstance(GlobalModifierSet)

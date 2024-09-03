@@ -1,4 +1,4 @@
-﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { ControlType } from "./ControlType";
 import { EnergyWindowMaterialBlind } from "./EnergyWindowMaterialBlind";
@@ -25,6 +25,7 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^WindowConstructionShade$/)
     type?: string;
 	
     @IsEnum(ShadeLocation)

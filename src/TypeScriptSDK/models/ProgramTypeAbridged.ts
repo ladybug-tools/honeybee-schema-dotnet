@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
 import { GasEquipmentAbridged } from "./GasEquipmentAbridged";
@@ -14,6 +14,7 @@ import { VentilationAbridged } from "./VentilationAbridged";
 export class ProgramTypeAbridged extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^ProgramTypeAbridged$/)
     type?: string;
 	
     @IsInstance(PeopleAbridged)

@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _SkyCondition } from "./_SkyCondition";
 
@@ -6,16 +6,21 @@ import { _SkyCondition } from "./_SkyCondition";
 export class ASHRAETau extends _SkyCondition {
     @IsNumber()
     @IsDefined()
+    @Min(0)
+    @Max(1.2)
     /** Value for the beam optical depth. Typically found in .stat files. */
     tau_b!: number;
 	
     @IsNumber()
     @IsDefined()
+    @Min(0)
+    @Max(3)
     /** Value for the diffuse optical depth. Typically found in .stat files. */
     tau_d!: number;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^ASHRAETau$/)
     type?: string;
 	
 

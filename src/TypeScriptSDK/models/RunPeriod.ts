@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsArray, IsInt, IsEnum, ValidateNested, IsInstance, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsArray, IsInt, IsEnum, ValidateNested, IsInstance, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { DatedBaseModel } from "./DatedBaseModel";
 import { DaylightSavingTime } from "./DaylightSavingTime";
@@ -8,6 +8,7 @@ import { DaysOfWeek } from "./DaysOfWeek";
 export class RunPeriod extends DatedBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^RunPeriod$/)
     type?: string;
 	
     @IsArray()

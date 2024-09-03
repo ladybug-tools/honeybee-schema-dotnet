@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { WindowConstruction } from "./WindowConstruction";
@@ -9,6 +9,7 @@ import { WindowConstructionShade } from "./WindowConstructionShade";
 export class ApertureConstructionSet extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^ApertureConstructionSet$/)
     type?: string;
 	
     @IsOptional()

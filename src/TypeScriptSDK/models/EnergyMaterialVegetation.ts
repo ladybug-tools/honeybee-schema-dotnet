@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsEnum, IsNumber, Max, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { MoistureDiffusionModel } from "./MoistureDiffusionModel";
@@ -8,6 +8,7 @@ import { Roughness } from "./Roughness";
 export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^EnergyMaterialVegetation$/)
     type?: string;
 	
     @IsEnum(Roughness)
@@ -17,6 +18,7 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Max(3)
     /** Thickness of the soil layer in meters. */
     thickness?: number;
 	
@@ -32,61 +34,83 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(100)
     /** Specific heat of the dry soil in J/kg-K. */
     specific_heat?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Max(0.99999)
     /** Fraction of incident long wavelength radiation that is absorbed by the soil. Default: 0.9. */
     soil_thermal_absorptance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Fraction of incident solar radiation absorbed by the soil. Default: 0.7. */
     soil_solar_absorptance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7. */
     soil_visible_absorptance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0.005)
+    @Max(1.0)
     /** The height of plants in the vegetation in meters. */
     plant_height?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0.001)
+    @Max(5.0)
     /** The projected leaf area per unit area of soil surface (aka. Leaf Area Index or LAI). Note that the fraction of vegetation cover is calculated directly from LAI using an empirical relation. */
     leaf_area_index?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0.005)
+    @Max(0.5)
     /** The fraction of incident solar radiation that is reflected by the leaf surfaces. Solar radiation includes the visible spectrum as well as infrared and ultraviolet wavelengths. Typical values are 0.18 to 0.25. */
     leaf_reflectivity?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0.8)
+    @Max(1.0)
     /** The ratio of thermal radiation emitted from leaf surfaces to that emitted by an ideal black body at the same temperature. */
     leaf_emissivity?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(50)
+    @Max(300)
     /** The resistance of the plants to moisture transport [s/m]. Plants with low values of stomatal resistance will result in higher evapotranspiration rates than plants with high resistance. */
     min_stomatal_resist?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0.1)
+    @Max(0.5)
     /** The saturation moisture content of the soil by volume. */
     sat_vol_moist_cont?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0.01)
+    @Max(0.1)
     /** The residual moisture content of the soil by volume. */
     residual_vol_moist_cont?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0.05)
+    @Max(0.5)
     /** The initial moisture content of the soil by volume. */
     init_vol_moist_cont?: number;
 	

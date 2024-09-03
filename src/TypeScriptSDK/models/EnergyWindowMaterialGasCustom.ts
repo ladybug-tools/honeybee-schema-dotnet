@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -26,11 +26,14 @@ export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsDefined()
+    @Min(20)
+    @Max(200)
     /** The molecular weight for gas in g/mol. */
     molecular_weight!: number;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^EnergyWindowMaterialGasCustom$/)
     type?: string;
 	
     @IsNumber()

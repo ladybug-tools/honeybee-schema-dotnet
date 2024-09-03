@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -6,25 +6,30 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^EnergyWindowMaterialShade$/)
     type?: string;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default: 0.4. */
     solar_transmittance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The reflectance averaged over the solar spectrum. It us assumed same on both sides of shade and independent of incidence angle. Default value is 0.5 */
     solar_reflectance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default: 0.4. */
     visible_transmittance?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default: 0.4 */
     visible_reflectance?: number;
 	
@@ -35,6 +40,7 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** The effective long-wave transmittance. It is assumed independent of incidence angle. Default: 0. */
     infrared_transmittance?: number;
 	
@@ -50,31 +56,43 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0.001)
+    @Max(1)
     /** The distance from shade to adjacent glass in meters. Default value is 0.05 */
     distance_to_glass?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. Default: 0.5. */
     top_opening_multiplier?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. Default: 0.5. */
     bottom_opening_multiplier?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. Default: 0.5. */
     left_opening_multiplier?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. Default: 0.5. */
     right_opening_multiplier?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(0.8)
     /** The fraction of the shade surface that is open to air flow. If air cannot pass through the shade material, airflow_permeability = 0. Default: 0. */
     airflow_permeability?: number;
 	

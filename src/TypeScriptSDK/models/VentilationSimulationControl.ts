@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsEnum, IsNumber, Min, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BuildingType } from "./BuildingType";
@@ -8,6 +8,7 @@ import { VentilationControlType } from "./VentilationControlType";
 export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^VentilationSimulationControl$/)
     type?: string;
 	
     @IsEnum(VentilationControlType)
@@ -18,16 +19,20 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(-273.15)
     /** Reference temperature measurement in Celsius under which the surface crack data were obtained. */
     reference_temperature?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(31000)
+    @Max(120000)
     /** Reference barometric pressure measurement in Pascals under which the surface crack data were obtained. */
     reference_pressure?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
     /** Reference humidity ratio measurement in kgWater/kgDryAir under which the surface crack data were obtained. */
     reference_humidity_ratio?: number;
 	
@@ -39,11 +44,14 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(180)
     /** The clockwise rotation in degrees from true North of the long axis of the building. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate. */
     long_axis_angle?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Max(1)
     /** Aspect ratio of a rectangular footprint, defined as the ratio of length of the short axis divided by the length of the long axis. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate. */
     aspect_ratio?: number;
 	

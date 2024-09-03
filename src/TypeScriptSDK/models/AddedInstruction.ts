@@ -1,4 +1,4 @@
-﻿import { IsEnum, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsDefined, IsString, Matches, MinLength, MaxLength, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { GeometryObjectTypes } from "./GeometryObjectTypes";
@@ -12,6 +12,9 @@ export class AddedInstruction extends _OpenAPIGenBaseModel {
 	
     @IsString()
     @IsDefined()
+    @Matches(/^[^,;!\n\t]+$/)
+    @MinLength(1)
+    @MaxLength(100)
     /** Text string for the unique object ID that has changed. */
     element_id!: string;
 	
@@ -22,6 +25,7 @@ export class AddedInstruction extends _OpenAPIGenBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^AddedInstruction$/)
     type?: string;
 	
 

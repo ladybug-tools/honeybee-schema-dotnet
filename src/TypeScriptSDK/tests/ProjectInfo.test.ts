@@ -54,7 +54,9 @@ test('test invalid north in ProjectInfo', () => {
   }`;
   const jsonObj = JSON.parse(json);
   const proj = ProjectInfo.fromJS(jsonObj);
-  expect(proj.validate()).rejects.toThrow("Validation failed: each value in vintage must be one of the following values: ASHRAE_2019, ASHRAE_2016, ASHRAE_2013, ASHRAE_2010, ASHRAE_2007, ASHRAE_2004, DOE_Ref_1980_2004, DOE_Ref_Pre_1980");
+  expect(proj.north).toBe(888);
+
+  expect(proj.validate()).rejects.toThrow("Validation failed: north must not be greater than 360");
 
 });
 

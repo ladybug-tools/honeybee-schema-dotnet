@@ -1,4 +1,4 @@
-﻿import { IsEnum, IsOptional, IsNumber, IsBoolean, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsOptional, IsNumber, Min, Max, IsBoolean, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { AllAirEconomizerType } from "./AllAirEconomizerType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -21,11 +21,15 @@ export class VAV extends IDdEnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. */
     sensible_heat_recovery?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A number between 0 and 1 for the effectiveness of latent heat recovery within the system. */
     latent_heat_recovery?: number;
 	
@@ -36,6 +40,7 @@ export class VAV extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^VAV$/)
     type?: string;
 	
     @IsEnum(VAVEquipmentType)

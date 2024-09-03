@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsNumber, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsNumber, Max, IsEnum, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 import { ModuleType } from "./ModuleType";
@@ -8,6 +8,7 @@ import { MountingType } from "./MountingType";
 export class PVProperties extends EnergyBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^PVProperties$/)
     type?: string;
 	
     @IsNumber()
@@ -17,6 +18,7 @@ export class PVProperties extends EnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Max(1)
     /** The fraction of the parent Shade geometry that is covered in active solar cells. This fraction includes the difference between the PV panel (aka. PV module) area and the active cells within the panel as well as any losses for how the (typically rectangular) panels can be arranged on the Shade geometry. When the parent Shade geometry represents just the solar panels, this fraction is typically around 0.9 given that the framing elements of the panel reduce the overall active area. (Default: 0.9, assuming parent Shade geometry represents only the PV panel geometry). */
     active_area_fraction?: number;
 	
@@ -34,6 +36,8 @@ export class PVProperties extends EnergyBaseModel {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A number between 0 and 1 for the fraction of the electricity output lost due to factors other than EPW weather conditions, panel efficiency/type, active area, mounting, and inverter conversion from DC to AC. Factors that should be accounted for in this input include soiling, snow, wiring losses, electrical connection losses, manufacturer defects/tolerances/mismatch in cell characteristics, losses from power grid availability, and losses due to age or light-induced degradation. Losses from these factors tend to be between 10-20% but can vary widely depending on the installation, maintenance and the grid to which the panels are connected.. */
     system_loss_fraction?: number;
 	

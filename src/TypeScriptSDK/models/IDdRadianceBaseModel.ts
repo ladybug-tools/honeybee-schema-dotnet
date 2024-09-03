@@ -1,4 +1,4 @@
-﻿import { IsString, IsDefined, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, Matches, MinLength, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
@@ -6,6 +6,8 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
     @IsString()
     @IsDefined()
+    @Matches(/^[.A-Za-z0-9_-]+$/)
+    @MinLength(1)
     /** Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. */
     identifier!: string;
 	
@@ -16,6 +18,7 @@ export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^IDdRadianceBaseModel$/)
     type?: string;
 	
 

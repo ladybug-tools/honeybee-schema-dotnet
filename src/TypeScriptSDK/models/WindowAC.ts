@@ -1,4 +1,4 @@
-﻿import { IsEnum, IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
@@ -14,6 +14,7 @@ export class WindowAC extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^WindowAC$/)
     type?: string;
 	
     @IsEnum(WindowACEquipmentType)

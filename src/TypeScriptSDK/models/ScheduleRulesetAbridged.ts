@@ -1,4 +1,4 @@
-﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, MinLength, MaxLength, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleDay } from "./ScheduleDay";
@@ -16,11 +16,14 @@ export class ScheduleRulesetAbridged extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsDefined()
+    @MinLength(1)
+    @MaxLength(100)
     /** An identifier for the ScheduleDay that will be used for all days when no ScheduleRule is applied. This ScheduleDay must be in the day_schedules. */
     default_day_schedule!: string;
 	
     @IsString()
     @IsOptional()
+    @Matches(/^ScheduleRulesetAbridged$/)
     type?: string;
 	
     @IsArray()
@@ -33,21 +36,29 @@ export class ScheduleRulesetAbridged extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** An identifier for the ScheduleDay that will be used for holidays. This ScheduleDay must be in the day_schedules. */
     holiday_schedule?: string;
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** An identifier for the ScheduleDay that will be used for the summer design day. This ScheduleDay must be in the day_schedules. */
     summer_designday_schedule?: string;
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** An identifier for the ScheduleDay that will be used for the winter design day. This ScheduleDay must be in the day_schedules. */
     winter_designday_schedule?: string;
 	
     @IsString()
     @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
     /** Identifier of a ScheduleTypeLimit that will be used to validate schedule values against upper/lower limits and assign units to the schedule values. If None, no validation will occur. */
     schedule_type_limit?: string;
 	

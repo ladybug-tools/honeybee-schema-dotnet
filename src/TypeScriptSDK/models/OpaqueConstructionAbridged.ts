@@ -1,4 +1,4 @@
-﻿import { IsArray, IsString, IsDefined, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsString, IsDefined, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -12,6 +12,7 @@ export class OpaqueConstructionAbridged extends IDdEnergyBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^OpaqueConstructionAbridged$/)
     type?: string;
 	
 

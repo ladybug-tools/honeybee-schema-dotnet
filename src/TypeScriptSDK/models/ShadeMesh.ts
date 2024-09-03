@@ -1,4 +1,4 @@
-﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { IDdBaseModel } from "./IDdBaseModel";
 import { Mesh3D } from "./Mesh3D";
@@ -22,6 +22,7 @@ export class ShadeMesh extends IDdBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^ShadeMesh$/)
     type?: string;
 	
     @IsBoolean()

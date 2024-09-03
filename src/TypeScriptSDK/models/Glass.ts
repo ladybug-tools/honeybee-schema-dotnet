@@ -1,4 +1,4 @@
-﻿import { IsOptional, IsArray, IsNumber, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsOptional, IsArray, IsNumber, Min, Max, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { BSDF } from "./BSDF";
 import { Glow } from "./Glow";
@@ -23,16 +23,22 @@ export class Glass extends ModifierBase {
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A value between 0 and 1 for the red channel transmissivity. */
     r_transmissivity?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A value between 0 and 1 for the green channel transmissivity. */
     g_transmissivity?: number;
 	
     @IsNumber()
     @IsOptional()
+    @Min(0)
+    @Max(1)
     /** A value between 0 and 1 for the blue channel transmissivity. */
     b_transmissivity?: number;
 	
@@ -43,6 +49,7 @@ export class Glass extends ModifierBase {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^Glass$/)
     type?: string;
 	
 

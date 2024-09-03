@@ -1,4 +1,4 @@
-﻿import { IsOptional, IsString, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BSDF } from "./BSDF";
@@ -35,6 +35,7 @@ export class DoorModifierSet extends _OpenAPIGenBaseModel {
 	
     @IsString()
     @IsOptional()
+    @Matches(/^DoorModifierSet$/)
     type?: string;
 	
 

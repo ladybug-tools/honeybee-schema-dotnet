@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ModelDoe2Properties } from "./ModelDoe2Properties";
@@ -8,6 +8,7 @@ import { ModelRadianceProperties } from "./ModelRadianceProperties";
 export class ModelProperties extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Matches(/^ModelProperties$/)
     type?: string;
 	
     @IsInstance(ModelEnergyProperties)
