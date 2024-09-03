@@ -11,7 +11,6 @@
     "fix": "gts fix",
     "prepare": "tsc",
     "pretest": "tsc",
-    "posttest": "npm.cmd run lint",
     "test": "jest"
   },
   "devDependencies": {
