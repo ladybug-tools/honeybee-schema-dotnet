@@ -13,6 +13,7 @@ jobs:
         with:
           ref: refs/heads/master
           token: ${{ secrets.DEPS_UPDATING }}
+          submodules: recursive
 
       - name: "Run Update Script"
         env:
@@ -23,7 +24,7 @@ jobs:
 
       - name: "Run Update Script"
         run: |
-          cd ./.nswag-generator\
+          cd ./.generator/SchemaGenerator
           dotnet run --download --genCsModel --genCsInterface --genTsModel --updateVersion
 
       - name: "Run build"
