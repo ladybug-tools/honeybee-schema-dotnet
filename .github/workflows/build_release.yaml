@@ -142,7 +142,7 @@ jobs:
       - name: Wait for NuGet package to be available
         shell: bash
         run: |
-          PACKAGE_NAME="HoneybeeSchema"
+          PACKAGE_NAME="honeybeeschema"
           PACKAGE_VERSION="${{ needs.buildCSharp.outputs.tag }}"
           MAX_ATTEMPTS=10
           SLEEP_TIME=60
