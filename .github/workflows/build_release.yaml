@@ -13,11 +13,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Update Assembly Version
         shell: bash
         run: |
-          cd ./.nswag-generator
+          cd ./.generator/SchemaGenerator
           dotnet run --genCsModel --genCsInterface --updateVersion
           MSG=$(dotnet run --updateVersion | grep "New version")
           VERSION=$(echo $MSG | awk -F': ' '{print $2}')
@@ -62,6 +64,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -71,7 +75,7 @@ jobs:
 
       - name: generate files
         run: |
-          cd ./.nswag-generator
+          cd ./.generator/SchemaGenerator
           dotnet run --genTsModel --updateVersion
 
       - name: Install dependencies
