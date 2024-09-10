@@ -1,24 +1,19 @@
-﻿import { IsArray, ValidateNested, IsNumber, IsDefined, IsInt, IsString, IsOptional, Matches, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsDefined, IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
+import { IsNestedNumberArray, IsNestedIntegerArray } from "./../helpers/class-validator";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Color } from "./Color";
 
 /** A mesh in 3D space. */
 export class Mesh3D extends _OpenAPIGenBaseModel {
     @IsArray()
-    @IsArray({ each: true })
-    @ValidateNested({each: true })
-    @Type(() => Array)
-    @IsNumber({},{ each: true })
+    @IsNestedNumberArray()
     @IsDefined()
     /** A list of points representing the vertices of the mesh. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values. */
     vertices!: number [] [];
 	
     @IsArray()
-    @IsArray({ each: true })
-    @ValidateNested({each: true })
-    @Type(() => Array)
-    @IsInt({ each: true })
+    @IsNestedIntegerArray()
     @IsDefined()
     /** A list of lists with each sub-list having either 3 or 4 integers. These integers correspond to indices within the list of vertices. */
     faces!: number [] [];
