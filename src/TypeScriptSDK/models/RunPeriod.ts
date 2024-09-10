@@ -1,5 +1,6 @@
-﻿import { IsString, IsOptional, Matches, IsArray, IsInt, IsEnum, ValidateNested, IsInstance, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, IsArray, IsInt, IsEnum, IsInstance, ValidateNested, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
+import { IsNestedIntegerArray } from "./../helpers/class-validator";
 import { DatedBaseModel } from "./DatedBaseModel";
 import { DaylightSavingTime } from "./DaylightSavingTime";
 import { DaysOfWeek } from "./DaysOfWeek";
@@ -30,10 +31,7 @@ export class RunPeriod extends DatedBaseModel {
     start_day_of_week?: DaysOfWeek;
 	
     @IsArray()
-    @IsArray({ each: true })
-    @ValidateNested({each: true })
-    @Type(() => Array)
-    @IsInt({ each: true })
+    @IsNestedIntegerArray()
     @IsOptional()
     /** A list of lists where each sub-list consists of two integers for [month, day], representing a date which is a holiday within the simulation. If None, no holidays are applied. */
     holidays?: number [] [];

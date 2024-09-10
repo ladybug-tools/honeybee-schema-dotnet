@@ -1,5 +1,6 @@
-﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, IsArray, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass } from 'class-transformer';
+import { IsNestedStringArray } from "./../helpers/class-validator";
 import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 
 /** Hidden base class for all Radiance Assets. */
@@ -13,10 +14,7 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
     room_identifier?: string;
 	
     @IsArray()
-    @IsArray({ each: true })
-    @ValidateNested({each: true })
-    @Type(() => Array)
-    @IsString({ each: true })
+    @IsNestedStringArray()
     @IsOptional()
     /** Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [[""SouthWindow1""], [""static_apertures"", ""NorthWindow2""]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation. */
     light_path?: string [] [];
