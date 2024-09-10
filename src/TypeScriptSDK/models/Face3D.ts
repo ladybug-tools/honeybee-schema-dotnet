@@ -1,18 +1,28 @@
 ﻿import { IsArray, ValidateNested, IsNumber, IsDefined, IsString, IsOptional, Matches, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type,Transform, plainToClass } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Plane } from "./Plane";
 
+export class NumberArray extends Array<number>
+{
+    constructor(...items: number[]) {
+        super(...items);
+    }
+}
+
 /** A single planar face in 3D space. */
 export class Face3D extends _OpenAPIGenBaseModel {
-    @IsArray()
+    // @IsArray()
     @IsArray({ each: true })
-    @ValidateNested({each: true })
-    @Type(() => Array)
-    @IsNumber({},{ each: true })
+    @ValidateNested({ each: true })
+    // @Type(() => NumberArray)
+    @IsInstance(NumberArray,{each: true })
+    // @IsNumber({},{ each: true })
     @IsDefined()
+    // @Transform(({ value }) => new NumberArray(...value), { toClassOnly: true })
+    @Transform(({ value }) => value.map((arr: number[]) => new NumberArray(...arr)), { toClassOnly: true })
     /** A list of points representing the outer boundary vertices of the face. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values. */
-    boundary!: number [] [];
+    boundary!: NumberArray [];
 	
     @IsString()
     @IsOptional()
@@ -83,7 +93,7 @@ export class Face3D extends _OpenAPIGenBaseModel {
 	async validate(): Promise<boolean> {
         const errors = await validate(this);
         if (errors.length > 0){
-			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error.property]).join(', ')).join('; ');
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error]).join(', ')).join('; ');
       		throw new Error(`Validation failed: ${errorMessages}`);
 		}
         return true;
