@@ -69,7 +69,7 @@ export class ShadeConstruction extends IDdEnergyBaseModel {
         data["solar_reflectance"] = this.solar_reflectance;
         data["visible_reflectance"] = this.visible_reflectance;
         data["is_specular"] = this.is_specular;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

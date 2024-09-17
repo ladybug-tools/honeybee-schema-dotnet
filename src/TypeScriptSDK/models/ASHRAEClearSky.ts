@@ -50,7 +50,7 @@ export class ASHRAEClearSky extends _SkyCondition {
 
         data["clearness"] = this.clearness;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

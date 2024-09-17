@@ -60,7 +60,7 @@ export class FaceEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
         data["type"] = this.type;
         data["construction"] = this.construction;
         data["vent_crack"] = this.vent_crack;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

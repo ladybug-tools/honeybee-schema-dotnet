@@ -82,7 +82,7 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
         data["barometric_pressure"] = this.barometric_pressure;
         data["rain"] = this.rain;
         data["snow_on_ground"] = this.snow_on_ground;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

@@ -101,7 +101,7 @@ export class SizingParameter extends _OpenAPIGenBaseModel {
         data["climate_zone"] = this.climate_zone;
         data["building_type"] = this.building_type;
         data["bypass_efficiency_sizing"] = this.bypass_efficiency_sizing;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

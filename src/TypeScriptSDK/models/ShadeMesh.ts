@@ -69,7 +69,7 @@ export class ShadeMesh extends IDdBaseModel {
         data["properties"] = this.properties;
         data["type"] = this.type;
         data["is_detached"] = this.is_detached;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

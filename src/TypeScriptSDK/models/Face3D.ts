@@ -68,7 +68,7 @@ export class Face3D extends _OpenAPIGenBaseModel {
         data["type"] = this.type;
         data["holes"] = this.holes;
         data["plane"] = this.plane;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

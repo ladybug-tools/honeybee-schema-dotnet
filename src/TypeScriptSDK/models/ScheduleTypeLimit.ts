@@ -74,7 +74,7 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
         data["upper_limit"] = this.upper_limit;
         data["numeric_type"] = this.numeric_type;
         data["unit_type"] = this.unit_type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

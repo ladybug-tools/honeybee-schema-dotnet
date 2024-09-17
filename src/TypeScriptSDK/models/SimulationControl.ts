@@ -81,7 +81,7 @@ export class SimulationControl extends _OpenAPIGenBaseModel {
         data["do_plant_sizing"] = this.do_plant_sizing;
         data["run_for_run_periods"] = this.run_for_run_periods;
         data["run_for_sizing_periods"] = this.run_for_sizing_periods;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

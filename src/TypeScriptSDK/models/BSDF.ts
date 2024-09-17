@@ -130,7 +130,7 @@ export class BSDF extends ModifierBase {
         data["back_diffuse_reflectance"] = this.back_diffuse_reflectance;
         data["diffuse_transmittance"] = this.diffuse_transmittance;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

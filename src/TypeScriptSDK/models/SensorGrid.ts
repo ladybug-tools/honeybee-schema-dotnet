@@ -80,7 +80,7 @@ export class SensorGrid extends _RadianceAsset {
         data["mesh"] = this.mesh;
         data["base_geometry"] = this.base_geometry;
         data["group_identifier"] = this.group_identifier;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

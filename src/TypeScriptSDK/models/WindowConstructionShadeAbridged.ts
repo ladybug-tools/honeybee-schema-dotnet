@@ -96,7 +96,7 @@ export class WindowConstructionShadeAbridged extends IDdEnergyBaseModel {
         data["control_type"] = this.control_type;
         data["setpoint"] = this.setpoint;
         data["schedule"] = this.schedule;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

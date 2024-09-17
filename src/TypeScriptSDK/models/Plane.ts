@@ -65,7 +65,7 @@ export class Plane extends _OpenAPIGenBaseModel {
         data["o"] = this.o;
         data["type"] = this.type;
         data["x"] = this.x;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

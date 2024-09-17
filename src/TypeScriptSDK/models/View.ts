@@ -125,7 +125,7 @@ export class View extends _RadianceAsset {
         data["fore_clip"] = this.fore_clip;
         data["aft_clip"] = this.aft_clip;
         data["group_identifier"] = this.group_identifier;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

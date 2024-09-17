@@ -51,7 +51,7 @@ export class OpaqueConstruction extends IDdEnergyBaseModel {
 
         data["materials"] = this.materials;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

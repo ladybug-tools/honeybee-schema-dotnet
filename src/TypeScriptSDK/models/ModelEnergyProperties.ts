@@ -615,7 +615,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
         data["schedule_type_limits"] = this.schedule_type_limits;
         data["ventilation_simulation_control"] = this.ventilation_simulation_control;
         data["electric_load_center"] = this.electric_load_center;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

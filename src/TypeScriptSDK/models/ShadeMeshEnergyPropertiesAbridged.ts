@@ -59,7 +59,7 @@ export class ShadeMeshEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
         data["type"] = this.type;
         data["construction"] = this.construction;
         data["transmittance_schedule"] = this.transmittance_schedule;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

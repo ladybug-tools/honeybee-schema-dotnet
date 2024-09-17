@@ -88,7 +88,7 @@ export class _EquipmentBase extends IDdEnergyBaseModel {
         data["latent_fraction"] = this.latent_fraction;
         data["lost_fraction"] = this.lost_fraction;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

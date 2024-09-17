@@ -58,7 +58,7 @@ export class OtherSideTemperature extends _OpenAPIGenBaseModel {
         data["type"] = this.type;
         data["heat_transfer_coefficient"] = this.heat_transfer_coefficient;
         data["temperature"] = this.temperature;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

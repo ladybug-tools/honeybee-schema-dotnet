@@ -57,7 +57,7 @@ export class _SkyCondition extends _OpenAPIGenBaseModel {
         data["date"] = this.date;
         data["daylight_savings"] = this.daylight_savings;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

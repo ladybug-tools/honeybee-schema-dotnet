@@ -95,7 +95,7 @@ export class DaylightingControl extends _OpenAPIGenBaseModel {
         data["min_power_input"] = this.min_power_input;
         data["min_light_output"] = this.min_light_output;
         data["off_at_minimum"] = this.off_at_minimum;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

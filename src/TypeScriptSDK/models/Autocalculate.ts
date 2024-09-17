@@ -41,7 +41,7 @@ export class Autocalculate extends _OpenAPIGenBaseModel {
         }
 
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

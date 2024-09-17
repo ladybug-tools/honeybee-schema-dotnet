@@ -58,7 +58,7 @@ export class AirBoundaryConstruction extends IDdEnergyBaseModel {
         data["type"] = this.type;
         data["air_mixing_per_area"] = this.air_mixing_per_area;
         data["air_mixing_schedule"] = this.air_mixing_schedule;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

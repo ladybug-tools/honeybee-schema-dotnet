@@ -59,7 +59,8 @@ export class Point3D {
         data["y"] = this.y;
         data["z"] = this.z;
         data["type"] = this.type;
-        return data;
+        return Object.fromEntries(
+            Object.entries(data).filter(([_, v]) => v !== undefined));
     }
 
 }

@@ -121,7 +121,7 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
         data["sizing_parameter"] = this.sizing_parameter;
         data["north_angle"] = this.north_angle;
         data["terrain_type"] = this.terrain_type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

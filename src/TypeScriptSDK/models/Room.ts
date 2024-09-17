@@ -107,7 +107,7 @@ export class Room extends IDdBaseModel {
         data["multiplier"] = this.multiplier;
         data["exclude_floor_area"] = this.exclude_floor_area;
         data["story"] = this.story;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

@@ -99,7 +99,7 @@ export class Mirror extends ModifierBase {
         data["b_reflectance"] = this.b_reflectance;
         data["alternate_material"] = this.alternate_material;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

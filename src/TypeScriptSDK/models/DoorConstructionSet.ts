@@ -84,7 +84,7 @@ export class DoorConstructionSet extends _OpenAPIGenBaseModel {
         data["overhead_construction"] = this.overhead_construction;
         data["exterior_glass_construction"] = this.exterior_glass_construction;
         data["interior_glass_construction"] = this.interior_glass_construction;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

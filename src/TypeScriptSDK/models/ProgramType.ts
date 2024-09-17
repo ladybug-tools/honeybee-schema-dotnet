@@ -121,7 +121,7 @@ export class ProgramType extends IDdEnergyBaseModel {
         data["infiltration"] = this.infiltration;
         data["ventilation"] = this.ventilation;
         data["setpoint"] = this.setpoint;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

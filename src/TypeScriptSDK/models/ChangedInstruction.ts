@@ -90,7 +90,7 @@ export class ChangedInstruction extends _OpenAPIGenBaseModel {
         data["update_energy"] = this.update_energy;
         data["update_radiance"] = this.update_radiance;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

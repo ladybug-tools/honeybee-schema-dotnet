@@ -48,7 +48,7 @@ export class RoomRadiancePropertiesAbridged extends _OpenAPIGenBaseModel {
 
         data["type"] = this.type;
         data["modifier_set"] = this.modifier_set;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

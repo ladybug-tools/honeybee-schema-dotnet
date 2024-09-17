@@ -73,7 +73,7 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
         data["changed_objects"] = this.changed_objects;
         data["deleted_objects"] = this.deleted_objects;
         data["added_objects"] = this.added_objects;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

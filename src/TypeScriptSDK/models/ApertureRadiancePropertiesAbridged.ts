@@ -59,7 +59,7 @@ export class ApertureRadiancePropertiesAbridged extends _PropertiesBaseAbridged 
         data["type"] = this.type;
         data["dynamic_group_identifier"] = this.dynamic_group_identifier;
         data["states"] = this.states;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

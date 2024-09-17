@@ -69,7 +69,7 @@ export class Mesh3D extends _OpenAPIGenBaseModel {
         data["faces"] = this.faces;
         data["type"] = this.type;
         data["colors"] = this.colors;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

@@ -47,7 +47,7 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
 
         data["user_data"] = this.user_data;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

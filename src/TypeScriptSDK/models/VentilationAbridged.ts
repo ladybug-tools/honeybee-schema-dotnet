@@ -86,7 +86,7 @@ export class VentilationAbridged extends IDdEnergyBaseModel {
         data["air_changes_per_hour"] = this.air_changes_per_hour;
         data["flow_per_zone"] = this.flow_per_zone;
         data["schedule"] = this.schedule;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

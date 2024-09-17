@@ -65,7 +65,7 @@ export class StateGeometryAbridged extends IDdRadianceBaseModel {
         data["type"] = this.type;
         data["modifier"] = this.modifier;
         data["modifier_direct"] = this.modifier_direct;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

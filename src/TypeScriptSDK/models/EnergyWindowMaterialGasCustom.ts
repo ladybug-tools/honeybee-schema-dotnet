@@ -134,7 +134,7 @@ export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
         data["viscosity_coeff_c"] = this.viscosity_coeff_c;
         data["specific_heat_coeff_b"] = this.specific_heat_coeff_b;
         data["specific_heat_coeff_c"] = this.specific_heat_coeff_c;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

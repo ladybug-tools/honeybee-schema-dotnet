@@ -88,7 +88,7 @@ export class ShadowCalculation extends _OpenAPIGenBaseModel {
         data["calculation_update_method"] = this.calculation_update_method;
         data["calculation_frequency"] = this.calculation_frequency;
         data["maximum_figures"] = this.maximum_figures;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

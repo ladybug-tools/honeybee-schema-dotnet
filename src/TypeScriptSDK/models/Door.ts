@@ -97,7 +97,7 @@ export class Door extends IDdBaseModel {
         data["is_glass"] = this.is_glass;
         data["indoor_shades"] = this.indoor_shades;
         data["outdoor_shades"] = this.outdoor_shades;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

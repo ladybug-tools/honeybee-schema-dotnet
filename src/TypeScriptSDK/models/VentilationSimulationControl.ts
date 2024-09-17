@@ -108,7 +108,7 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
         data["building_type"] = this.building_type;
         data["long_axis_angle"] = this.long_axis_angle;
         data["aspect_ratio"] = this.aspect_ratio;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

@@ -55,7 +55,7 @@ export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
         data["modifier"] = this.modifier;
         data["modifier_blk"] = this.modifier_blk;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

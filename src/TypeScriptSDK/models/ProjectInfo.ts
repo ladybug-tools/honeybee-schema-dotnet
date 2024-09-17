@@ -98,7 +98,7 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
         data["ashrae_climate_zone"] = this.ashrae_climate_zone;
         data["building_type"] = this.building_type;
         data["vintage"] = this.vintage;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

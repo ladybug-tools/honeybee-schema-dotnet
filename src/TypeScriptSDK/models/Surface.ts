@@ -49,7 +49,7 @@ export class Surface extends _OpenAPIGenBaseModel {
 
         data["boundary_condition_objects"] = this.boundary_condition_objects;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

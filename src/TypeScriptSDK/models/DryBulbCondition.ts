@@ -58,7 +58,7 @@ export class DryBulbCondition extends _OpenAPIGenBaseModel {
         data["dry_bulb_max"] = this.dry_bulb_max;
         data["dry_bulb_range"] = this.dry_bulb_range;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

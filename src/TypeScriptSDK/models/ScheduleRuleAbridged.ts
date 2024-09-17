@@ -124,7 +124,7 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
         data["apply_saturday"] = this.apply_saturday;
         data["start_date"] = this.start_date;
         data["end_date"] = this.end_date;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

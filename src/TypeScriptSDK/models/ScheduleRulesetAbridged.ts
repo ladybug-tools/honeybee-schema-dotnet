@@ -108,7 +108,7 @@ export class ScheduleRulesetAbridged extends IDdEnergyBaseModel {
         data["summer_designday_schedule"] = this.summer_designday_schedule;
         data["winter_designday_schedule"] = this.winter_designday_schedule;
         data["schedule_type_limit"] = this.schedule_type_limit;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

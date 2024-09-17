@@ -89,7 +89,7 @@ export class _AllAirBase extends IDdEnergyBaseModel {
         data["latent_heat_recovery"] = this.latent_heat_recovery;
         data["demand_controlled_ventilation"] = this.demand_controlled_ventilation;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

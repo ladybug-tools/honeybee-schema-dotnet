@@ -87,7 +87,7 @@ export class Radiant extends IDdEnergyBaseModel {
         data["radiant_face_type"] = this.radiant_face_type;
         data["minimum_operation_time"] = this.minimum_operation_time;
         data["switch_over_time"] = this.switch_over_time;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

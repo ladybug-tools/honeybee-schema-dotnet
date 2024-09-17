@@ -128,7 +128,8 @@ export class ValidationError {
         data["parents"] = this.parents;
         data["top_parents"] = this.top_parents;
         data["helper_geometry"] = this.helper_geometry;
-        return data;
+        return Object.fromEntries(
+            Object.entries(data).filter(([_, v]) => v !== undefined));
     }
 
 }

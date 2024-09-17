@@ -51,7 +51,7 @@ export class _HeatCoolBase extends IDdEnergyBaseModel {
 
         data["vintage"] = this.vintage;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

@@ -58,7 +58,7 @@ export class ElectricLoadCenter extends _OpenAPIGenBaseModel {
         data["type"] = this.type;
         data["inverter_efficiency"] = this.inverter_efficiency;
         data["inverter_dc_to_ac_size_ratio"] = this.inverter_dc_to_ac_size_ratio;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

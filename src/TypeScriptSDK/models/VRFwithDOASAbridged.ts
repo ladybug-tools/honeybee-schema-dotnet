@@ -98,7 +98,7 @@ export class VRFwithDOASAbridged extends IDdEnergyBaseModel {
         data["doas_availability_schedule"] = this.doas_availability_schedule;
         data["type"] = this.type;
         data["equipment_type"] = this.equipment_type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

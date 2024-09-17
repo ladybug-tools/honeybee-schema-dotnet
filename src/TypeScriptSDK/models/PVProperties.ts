@@ -88,7 +88,7 @@ export class PVProperties extends EnergyBaseModel {
         data["module_type"] = this.module_type;
         data["mounting_type"] = this.mounting_type;
         data["system_loss_fraction"] = this.system_loss_fraction;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

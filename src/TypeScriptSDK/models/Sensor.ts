@@ -57,7 +57,7 @@ export class Sensor extends _OpenAPIGenBaseModel {
         data["pos"] = this.pos;
         data["dir"] = this.dir;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

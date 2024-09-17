@@ -41,7 +41,7 @@ export class FloorConstructionSetAbridged extends _FaceSubSetAbridged {
         }
 
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

@@ -82,7 +82,7 @@ export class InfiltrationAbridged extends IDdEnergyBaseModel {
         data["constant_coefficient"] = this.constant_coefficient;
         data["temperature_coefficient"] = this.temperature_coefficient;
         data["velocity_coefficient"] = this.velocity_coefficient;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

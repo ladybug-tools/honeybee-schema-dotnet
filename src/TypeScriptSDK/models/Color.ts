@@ -78,7 +78,7 @@ export class Color extends _OpenAPIGenBaseModel {
         data["b"] = this.b;
         data["type"] = this.type;
         data["a"] = this.a;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 
