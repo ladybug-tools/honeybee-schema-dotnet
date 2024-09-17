@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _SkyCondition } from "./_SkyCondition";
 
 /** Used to specify sky conditions on a design day. */
@@ -60,7 +60,7 @@ export class ASHRAETau extends _SkyCondition {
         data["tau_d"] = this.tau_d;
         data["type"] = this.type;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

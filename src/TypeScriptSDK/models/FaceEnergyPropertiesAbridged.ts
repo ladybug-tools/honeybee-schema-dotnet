@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AFNCrack } from "./AFNCrack";
 
@@ -61,7 +61,7 @@ export class FaceEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
         data["construction"] = this.construction;
         data["vent_crack"] = this.vent_crack;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

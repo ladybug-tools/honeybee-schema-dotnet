@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Create single layer of custom gas. */
@@ -135,7 +135,7 @@ export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
         data["specific_heat_coeff_b"] = this.specific_heat_coeff_b;
         data["specific_heat_coeff_c"] = this.specific_heat_coeff_c;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

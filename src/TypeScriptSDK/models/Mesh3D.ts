@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsDefined, IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { IsNestedNumberArray, IsNestedIntegerArray } from "./../helpers/class-validator";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Color } from "./Color";
@@ -70,7 +70,7 @@ export class Mesh3D extends _OpenAPIGenBaseModel {
         data["type"] = this.type;
         data["colors"] = this.colors;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

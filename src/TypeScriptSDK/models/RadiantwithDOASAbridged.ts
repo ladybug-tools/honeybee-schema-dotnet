@@ -1,5 +1,5 @@
 ﻿import { IsEnum, IsOptional, IsNumber, Min, Max, IsBoolean, IsString, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { RadiantFaceTypes } from "./RadiantFaceTypes";
 import { RadiantwithDOASEquipmentType } from "./RadiantwithDOASEquipmentType";
@@ -125,7 +125,7 @@ export class RadiantwithDOASAbridged extends IDdEnergyBaseModel {
         data["minimum_operation_time"] = this.minimum_operation_time;
         data["switch_over_time"] = this.switch_over_time;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

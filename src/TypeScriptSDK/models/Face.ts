@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsEnum, IsString, IsOptional, Matches, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { Adiabatic } from "./Adiabatic";
 import { Aperture } from "./Aperture";
 import { Door } from "./Door";
@@ -123,7 +123,7 @@ export class Face extends IDdBaseModel {
         data["indoor_shades"] = this.indoor_shades;
         data["outdoor_shades"] = this.outdoor_shades;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

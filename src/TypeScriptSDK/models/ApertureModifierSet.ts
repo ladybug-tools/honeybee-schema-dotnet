@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
@@ -75,7 +75,7 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel {
         data["skylight_modifier"] = this.skylight_modifier;
         data["operable_modifier"] = this.operable_modifier;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

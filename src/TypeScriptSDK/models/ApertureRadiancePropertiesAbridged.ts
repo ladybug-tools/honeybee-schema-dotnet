@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _PropertiesBaseAbridged } from "./_PropertiesBaseAbridged";
 import { RadianceSubFaceStateAbridged } from "./RadianceSubFaceStateAbridged";
 
@@ -60,7 +60,7 @@ export class ApertureRadiancePropertiesAbridged extends _PropertiesBaseAbridged 
         data["dynamic_group_identifier"] = this.dynamic_group_identifier;
         data["states"] = this.states;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { FaceEnergyPropertiesAbridged } from "./FaceEnergyPropertiesAbridged";
 import { FaceRadiancePropertiesAbridged } from "./FaceRadiancePropertiesAbridged";
@@ -59,7 +59,7 @@ export class FacePropertiesAbridged extends _OpenAPIGenBaseModel {
         data["energy"] = this.energy;
         data["radiance"] = this.radiance;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

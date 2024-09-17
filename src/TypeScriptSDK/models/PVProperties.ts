@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Max, IsEnum, Min, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 import { ModuleType } from "./ModuleType";
 import { MountingType } from "./MountingType";
@@ -89,7 +89,7 @@ export class PVProperties extends EnergyBaseModel {
         data["mounting_type"] = this.mounting_type;
         data["system_loss_fraction"] = this.system_loss_fraction;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

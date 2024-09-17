@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { IDdBaseModel } from "./IDdBaseModel";
 import { Mesh3D } from "./Mesh3D";
 import { ShadeMeshPropertiesAbridged } from "./ShadeMeshPropertiesAbridged";
@@ -70,7 +70,7 @@ export class ShadeMesh extends IDdBaseModel {
         data["type"] = this.type;
         data["is_detached"] = this.is_detached;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

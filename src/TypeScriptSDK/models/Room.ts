@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsInt, Min, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { Face } from "./Face";
 import { IDdBaseModel } from "./IDdBaseModel";
 import { RoomPropertiesAbridged } from "./RoomPropertiesAbridged";
@@ -108,7 +108,7 @@ export class Room extends IDdBaseModel {
         data["exclude_floor_area"] = this.exclude_floor_area;
         data["story"] = this.story;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

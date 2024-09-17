@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsArray, IsEnum, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { Aperture } from "./Aperture";
 import { Door } from "./Door";
 import { Face } from "./Face";
@@ -155,7 +155,7 @@ export class Model extends IDdBaseModel {
         data["tolerance"] = this.tolerance;
         data["angle_tolerance"] = this.angle_tolerance;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

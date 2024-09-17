@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, IsInstance, ValidateNested, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleTypeLimit } from "./ScheduleTypeLimit";
 
@@ -93,7 +93,7 @@ export class ScheduleFixedInterval extends IDdEnergyBaseModel {
         data["placeholder_value"] = this.placeholder_value;
         data["interpolate"] = this.interpolate;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

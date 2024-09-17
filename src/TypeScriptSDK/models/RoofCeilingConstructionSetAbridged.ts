@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _FaceSubSetAbridged } from "./_FaceSubSetAbridged";
 
 /** A set of constructions for roof and ceiling assemblies. */
@@ -42,7 +42,7 @@ export class RoofCeilingConstructionSetAbridged extends _FaceSubSetAbridged {
 
         data["type"] = this.type;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

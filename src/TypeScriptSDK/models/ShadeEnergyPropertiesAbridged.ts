@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { PVProperties } from "./PVProperties";
 
@@ -70,7 +70,7 @@ export class ShadeEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
         data["transmittance_schedule"] = this.transmittance_schedule;
         data["pv_properties"] = this.pv_properties;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

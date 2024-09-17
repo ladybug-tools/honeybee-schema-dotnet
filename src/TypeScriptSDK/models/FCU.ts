@@ -1,5 +1,5 @@
 ﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { FCUEquipmentType } from "./FCUEquipmentType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
@@ -62,7 +62,7 @@ export class FCU extends IDdEnergyBaseModel {
         data["type"] = this.type;
         data["equipment_type"] = this.equipment_type;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

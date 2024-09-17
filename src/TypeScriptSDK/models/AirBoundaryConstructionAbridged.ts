@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Construction for Air Boundary objects. */
@@ -60,7 +60,7 @@ export class AirBoundaryConstructionAbridged extends IDdEnergyBaseModel {
         data["air_mixing_per_area"] = this.air_mixing_per_area;
         data["air_mixing_schedule"] = this.air_mixing_schedule;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

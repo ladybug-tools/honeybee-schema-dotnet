@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsString, IsDefined, IsOptional, Matches, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Construction for window objects (Aperture, Door). */
@@ -59,7 +59,7 @@ export class WindowConstructionAbridged extends IDdEnergyBaseModel {
         data["type"] = this.type;
         data["frame"] = this.frame;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

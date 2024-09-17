@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
@@ -261,7 +261,7 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
         data["sensor_grids"] = this.sensor_grids;
         data["views"] = this.views;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

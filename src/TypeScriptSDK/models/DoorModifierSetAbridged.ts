@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { BaseModifierSetAbridged } from "./BaseModifierSetAbridged";
 
 /** Abridged set containing radiance modifiers needed for a model's Doors. */
@@ -63,7 +63,7 @@ export class DoorModifierSetAbridged extends BaseModifierSetAbridged {
         data["exterior_glass_modifier"] = this.exterior_glass_modifier;
         data["overhead_modifier"] = this.overhead_modifier;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

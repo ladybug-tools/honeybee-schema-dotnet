@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
 import { GasEquipmentAbridged } from "./GasEquipmentAbridged";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -122,7 +122,7 @@ export class ProgramTypeAbridged extends IDdEnergyBaseModel {
         data["ventilation"] = this.ventilation;
         data["setpoint"] = this.setpoint;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

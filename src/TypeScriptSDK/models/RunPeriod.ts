@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInt, IsEnum, IsInstance, ValidateNested, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { IsNestedIntegerArray } from "./../helpers/class-validator";
 import { DatedBaseModel } from "./DatedBaseModel";
 import { DaylightSavingTime } from "./DaylightSavingTime";
@@ -97,7 +97,7 @@ export class RunPeriod extends DatedBaseModel {
         data["daylight_saving_time"] = this.daylight_saving_time;
         data["leap_year"] = this.leap_year;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsInt, Min, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { CalculationMethod } from "./CalculationMethod";
 import { CalculationUpdateMethod } from "./CalculationUpdateMethod";
@@ -89,7 +89,7 @@ export class ShadowCalculation extends _OpenAPIGenBaseModel {
         data["calculation_frequency"] = this.calculation_frequency;
         data["maximum_figures"] = this.maximum_figures;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

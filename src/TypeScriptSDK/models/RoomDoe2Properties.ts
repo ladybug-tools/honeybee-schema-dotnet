@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Autocalculate } from "./Autocalculate";
 import { Face3D } from "./Face3D";
@@ -88,7 +88,7 @@ export class RoomDoe2Properties extends _OpenAPIGenBaseModel {
         data["hmax_flow_ratio"] = this.hmax_flow_ratio;
         data["space_polygon_geometry"] = this.space_polygon_geometry;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

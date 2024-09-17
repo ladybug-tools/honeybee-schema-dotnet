@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AirBoundaryConstructionAbridged } from "./AirBoundaryConstructionAbridged";
 import { ApertureConstructionSetAbridged } from "./ApertureConstructionSetAbridged";
@@ -529,7 +529,7 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
         data["context_construction"] = this.context_construction;
         data["air_boundary_construction"] = this.air_boundary_construction;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

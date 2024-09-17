@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Autocalculate } from "./Autocalculate";
 
@@ -96,7 +96,7 @@ export class Location extends _OpenAPIGenBaseModel {
         data["station_id"] = this.station_id;
         data["source"] = this.source;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

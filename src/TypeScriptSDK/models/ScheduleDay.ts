@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { IsNestedIntegerArray } from "./../helpers/class-validator";
 import { EnergyBaseModel } from "./EnergyBaseModel";
 
@@ -68,7 +68,7 @@ export class ScheduleDay extends EnergyBaseModel {
         data["times"] = this.times;
         data["interpolate"] = this.interpolate;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

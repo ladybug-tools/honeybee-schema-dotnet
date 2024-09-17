@@ -1,5 +1,5 @@
 ﻿import { IsOptional, IsArray, IsNumber, Min, Max, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { BSDF } from "./BSDF";
 import { Glow } from "./Glow";
 import { Light } from "./Light";
@@ -102,7 +102,7 @@ export class Glass extends ModifierBase {
         data["refraction_index"] = this.refraction_index;
         data["type"] = this.type;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

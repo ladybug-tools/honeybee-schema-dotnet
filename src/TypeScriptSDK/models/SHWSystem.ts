@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { SHWEquipmentType } from "./SHWEquipmentType";
@@ -75,7 +75,7 @@ export class SHWSystem extends IDdEnergyBaseModel {
         data["ambient_condition"] = this.ambient_condition;
         data["ambient_loss_coefficient"] = this.ambient_loss_coefficient;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

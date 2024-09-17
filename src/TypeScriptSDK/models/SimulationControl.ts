@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Used to specify which types of calculations to run. */
@@ -82,7 +82,7 @@ export class SimulationControl extends _OpenAPIGenBaseModel {
         data["run_for_run_periods"] = this.run_for_run_periods;
         data["run_for_sizing_periods"] = this.run_for_sizing_periods;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

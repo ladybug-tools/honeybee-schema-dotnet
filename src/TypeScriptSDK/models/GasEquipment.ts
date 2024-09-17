@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Min, IsOptional, Max, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { ScheduleRuleset } from "./ScheduleRuleset";
@@ -88,7 +88,7 @@ export class GasEquipment extends IDdEnergyBaseModel {
         data["lost_fraction"] = this.lost_fraction;
         data["type"] = this.type;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

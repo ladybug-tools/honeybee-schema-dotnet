@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { ApertureConstructionSetAbridged } from "./ApertureConstructionSetAbridged";
 import { DoorConstructionSetAbridged } from "./DoorConstructionSetAbridged";
 import { FloorConstructionSetAbridged } from "./FloorConstructionSetAbridged";
@@ -110,7 +110,7 @@ export class ConstructionSetAbridged extends IDdEnergyBaseModel {
         data["shade_construction"] = this.shade_construction;
         data["air_boundary_construction"] = this.air_boundary_construction;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

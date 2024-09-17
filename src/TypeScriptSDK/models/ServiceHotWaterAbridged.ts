@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
@@ -87,7 +87,7 @@ export class ServiceHotWaterAbridged extends IDdEnergyBaseModel {
         data["sensible_fraction"] = this.sensible_fraction;
         data["latent_fraction"] = this.latent_fraction;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

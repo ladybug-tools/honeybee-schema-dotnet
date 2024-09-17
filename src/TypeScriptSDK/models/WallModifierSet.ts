@@ -1,5 +1,5 @@
 ﻿import { IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
@@ -63,7 +63,7 @@ export class WallModifierSet extends _OpenAPIGenBaseModel {
         data["interior_modifier"] = this.interior_modifier;
         data["type"] = this.type;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {
