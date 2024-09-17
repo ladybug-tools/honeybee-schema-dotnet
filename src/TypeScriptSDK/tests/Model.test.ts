@@ -80,11 +80,28 @@ test('test toJson', () => {
   expect(hasPlane).toBe(false);
 
   obj = new Face3D();
+  console.log(typeof obj);
+
   obj.plane = new Plane();
+  let p = obj.plane;
+  let isPlaneType = p instanceof Plane;
+  console.log(isPlaneType);
+  expect(isPlaneType).toBe(true);
+
+
   json = obj.toJSON();
   hasPlane = json.hasOwnProperty('plane');
   expect(hasPlane).toBe(true);
-  console.log(json)
+  console.log(json);
+
+  // const json2 = JSON.stringify(json);
+  // json = JSON.parse(json2);
+
+  p = json.plane;
+  isPlaneType = p instanceof Plane;
+  console.log(isPlaneType);
+  expect(isPlaneType).toBe(false);
+
 
 
 });
