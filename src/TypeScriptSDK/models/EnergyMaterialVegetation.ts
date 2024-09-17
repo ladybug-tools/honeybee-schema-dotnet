@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsNumber, Max, Min, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { MoistureDiffusionModel } from "./MoistureDiffusionModel";
 import { Roughness } from "./Roughness";
@@ -203,7 +203,7 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
         data["init_vol_moist_cont"] = this.init_vol_moist_cont;
         data["moist_diff_model"] = this.moist_diff_model;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

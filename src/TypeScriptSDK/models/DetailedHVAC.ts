@@ -1,5 +1,5 @@
 ﻿import { IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Detailed HVAC system object defined using IronBug or OpenStudio .NET bindings. */
@@ -48,7 +48,7 @@ export class DetailedHVAC extends IDdEnergyBaseModel {
         data["specification"] = this.specification;
         data["type"] = this.type;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

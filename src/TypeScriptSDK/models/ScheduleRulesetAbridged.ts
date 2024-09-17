@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, MinLength, MaxLength, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleDay } from "./ScheduleDay";
 import { ScheduleRuleAbridged } from "./ScheduleRuleAbridged";
@@ -109,7 +109,7 @@ export class ScheduleRulesetAbridged extends IDdEnergyBaseModel {
         data["winter_designday_schedule"] = this.winter_designday_schedule;
         data["schedule_type_limit"] = this.schedule_type_limit;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AddedObject } from "./AddedObject";
 import { ChangedObject } from "./ChangedObject";
@@ -74,7 +74,7 @@ export class ComparisonReport extends _OpenAPIGenBaseModel {
         data["deleted_objects"] = this.deleted_objects;
         data["added_objects"] = this.added_objects;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

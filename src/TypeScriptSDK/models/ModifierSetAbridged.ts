@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { ApertureModifierSetAbridged } from "./ApertureModifierSetAbridged";
 import { DoorModifierSetAbridged } from "./DoorModifierSetAbridged";
 import { FloorModifierSetAbridged } from "./FloorModifierSetAbridged";
@@ -109,7 +109,7 @@ export class ModifierSetAbridged extends IDdRadianceBaseModel {
         data["shade_set"] = this.shade_set;
         data["air_boundary_modifier"] = this.air_boundary_modifier;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

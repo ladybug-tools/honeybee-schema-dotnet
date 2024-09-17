@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** This object specifies the properties of window shade materials. */
@@ -171,7 +171,7 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
         data["right_opening_multiplier"] = this.right_opening_multiplier;
         data["airflow_permeability"] = this.airflow_permeability;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

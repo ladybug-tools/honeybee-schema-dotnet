@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { EnergyMaterial } from "./EnergyMaterial";
 import { EnergyMaterialNoMass } from "./EnergyMaterialNoMass";
 import { EnergyMaterialVegetation } from "./EnergyMaterialVegetation";
@@ -52,7 +52,7 @@ export class OpaqueConstruction extends IDdEnergyBaseModel {
         data["materials"] = this.materials;
         data["type"] = this.type;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

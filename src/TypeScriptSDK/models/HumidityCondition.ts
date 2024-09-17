@@ -1,5 +1,5 @@
 ﻿import { IsEnum, IsDefined, IsNumber, IsString, IsOptional, Matches, Min, Max, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { HumidityTypes } from "./HumidityTypes";
 
@@ -83,7 +83,7 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
         data["rain"] = this.rain;
         data["snow_on_ground"] = this.snow_on_ground;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

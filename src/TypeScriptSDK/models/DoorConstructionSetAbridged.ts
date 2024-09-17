@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A set of constructions for door assemblies. */
@@ -87,7 +87,7 @@ export class DoorConstructionSetAbridged extends _OpenAPIGenBaseModel {
         data["exterior_glass_construction"] = this.exterior_glass_construction;
         data["interior_glass_construction"] = this.interior_glass_construction;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

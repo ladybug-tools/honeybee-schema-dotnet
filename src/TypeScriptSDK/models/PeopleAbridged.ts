@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -86,7 +86,7 @@ export class PeopleAbridged extends IDdEnergyBaseModel {
         data["radiant_fraction"] = this.radiant_fraction;
         data["latent_fraction"] = this.latent_fraction;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

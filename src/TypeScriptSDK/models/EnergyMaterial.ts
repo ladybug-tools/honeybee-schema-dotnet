@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Max, Min, IsString, IsOptional, Matches, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Roughness } from "./Roughness";
 
@@ -110,7 +110,7 @@ export class EnergyMaterial extends IDdEnergyBaseModel {
         data["solar_absorptance"] = this.solar_absorptance;
         data["visible_absorptance"] = this.visible_absorptance;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

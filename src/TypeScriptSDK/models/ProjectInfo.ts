@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, IsArray, IsInstance, ValidateNested, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BuildingTypes } from "./BuildingTypes";
 import { ClimateZones } from "./ClimateZones";
@@ -99,7 +99,7 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
         data["building_type"] = this.building_type;
         data["vintage"] = this.vintage;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

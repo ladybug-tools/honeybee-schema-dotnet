@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsEnum, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { FuelTypes } from "./FuelTypes";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -108,7 +108,7 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
         data["latent_fraction"] = this.latent_fraction;
         data["lost_fraction"] = this.lost_fraction;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

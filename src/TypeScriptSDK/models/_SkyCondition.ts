@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsInt, IsDefined, IsBoolean, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Used to specify sky conditions on a design day. */
@@ -58,7 +58,7 @@ export class _SkyCondition extends _OpenAPIGenBaseModel {
         data["daylight_savings"] = this.daylight_savings;
         data["type"] = this.type;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

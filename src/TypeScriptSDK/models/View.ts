@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _RadianceAsset } from "./_RadianceAsset";
 import { ViewType } from "./ViewType";
 
@@ -126,7 +126,7 @@ export class View extends _RadianceAsset {
         data["aft_clip"] = this.aft_clip;
         data["group_identifier"] = this.group_identifier;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

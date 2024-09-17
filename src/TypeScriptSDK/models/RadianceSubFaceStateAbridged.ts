@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { Face3D } from "./Face3D";
 import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged";
 
@@ -61,7 +61,7 @@ export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
         data["dmtx_geometry"] = this.dmtx_geometry;
         data["type"] = this.type;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

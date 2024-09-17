@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsNumber, Min, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BuildingType } from "./BuildingType";
 import { VentilationControlType } from "./VentilationControlType";
@@ -109,7 +109,7 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
         data["long_axis_angle"] = this.long_axis_angle;
         data["aspect_ratio"] = this.aspect_ratio;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

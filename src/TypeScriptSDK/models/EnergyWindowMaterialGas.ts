@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { GasType } from "./GasType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -59,7 +59,7 @@ export class EnergyWindowMaterialGas extends IDdEnergyBaseModel {
         data["thickness"] = this.thickness;
         data["gas_type"] = this.gas_type;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

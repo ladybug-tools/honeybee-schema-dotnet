@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 import { NoLimit } from "./NoLimit";
 import { ScheduleNumericType } from "./ScheduleNumericType";
@@ -75,7 +75,7 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
         data["numeric_type"] = this.numeric_type;
         data["unit_type"] = this.unit_type;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

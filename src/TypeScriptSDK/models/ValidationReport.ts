@@ -1,5 +1,5 @@
 ﻿import { IsString, IsDefined, Matches, IsBoolean, IsOptional, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { ValidationError } from "./ValidationError";
 
 export class ValidationReport {

@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 
 /** A single line segment face in 3D space. */
 export class LineSegment3D {

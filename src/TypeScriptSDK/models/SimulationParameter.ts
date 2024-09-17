@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, IsInt, Min, Max, IsNumber, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { RunPeriod } from "./RunPeriod";
 import { ShadowCalculation } from "./ShadowCalculation";
@@ -122,7 +122,7 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
         data["north_angle"] = this.north_angle;
         data["terrain_type"] = this.terrain_type;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

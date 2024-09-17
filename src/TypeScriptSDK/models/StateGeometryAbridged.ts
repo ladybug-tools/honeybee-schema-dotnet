@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { Face3D } from "./Face3D";
 import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 
@@ -66,7 +66,7 @@ export class StateGeometryAbridged extends IDdRadianceBaseModel {
         data["modifier"] = this.modifier;
         data["modifier_direct"] = this.modifier_direct;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

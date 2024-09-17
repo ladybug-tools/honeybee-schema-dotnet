@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { WindowConstruction } from "./WindowConstruction";
 import { WindowConstructionDynamic } from "./WindowConstructionDynamic";
@@ -69,7 +69,7 @@ export class ApertureConstructionSet extends _OpenAPIGenBaseModel {
         data["skylight_construction"] = this.skylight_construction;
         data["operable_construction"] = this.operable_construction;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

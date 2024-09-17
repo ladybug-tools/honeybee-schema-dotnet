@@ -1,5 +1,5 @@
 ﻿import { IsEnum, IsDefined, IsString, Matches, MinLength, MaxLength, IsBoolean, IsArray, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { GeometryObjectTypes } from "./GeometryObjectTypes";
 
@@ -104,7 +104,7 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
         data["existing_geometry"] = this.existing_geometry;
         data["type"] = this.type;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

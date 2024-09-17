@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsArray, IsNumber, Min, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ReportingFrequency } from "./ReportingFrequency";
 
@@ -77,7 +77,7 @@ export class SimulationOutput extends _OpenAPIGenBaseModel {
         data["summary_reports"] = this.summary_reports;
         data["unmet_setpoint_tolerance"] = this.unmet_setpoint_tolerance;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

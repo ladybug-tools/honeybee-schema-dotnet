@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, Matches, Min, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Properties for airflow through a crack. */
@@ -59,7 +59,7 @@ export class AFNCrack extends _OpenAPIGenBaseModel {
         data["type"] = this.type;
         data["flow_exponent"] = this.flow_exponent;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

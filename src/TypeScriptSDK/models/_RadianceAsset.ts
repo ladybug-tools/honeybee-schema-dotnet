@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { IsNestedStringArray } from "./../helpers/class-validator";
 import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 
@@ -61,7 +61,7 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
         data["light_path"] = this.light_path;
         data["type"] = this.type;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

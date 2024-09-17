@@ -1,5 +1,5 @@
 ﻿import { IsString, IsDefined, Matches, MinLength, MaxLength, IsEnum, IsArray, IsOptional, ValidateNested, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { ExtensionTypes } from "./ExtensionTypes";
 import { LineSegment3D } from "./LineSegment3D";
 import { ObjectTypes } from "./ObjectTypes";

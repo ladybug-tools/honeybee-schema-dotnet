@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { DatedBaseModel } from "./DatedBaseModel";
 
 /** Used to describe the daylight savings time for the simulation. */
@@ -60,7 +60,7 @@ export class DaylightSavingTime extends DatedBaseModel {
         data["start_date"] = this.start_date;
         data["end_date"] = this.end_date;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

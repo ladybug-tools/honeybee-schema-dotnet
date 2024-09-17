@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _RadianceAsset } from "./_RadianceAsset";
 import { Face3D } from "./Face3D";
 import { Mesh3D } from "./Mesh3D";
@@ -81,7 +81,7 @@ export class SensorGrid extends _RadianceAsset {
         data["base_geometry"] = this.base_geometry;
         data["group_identifier"] = this.group_identifier;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

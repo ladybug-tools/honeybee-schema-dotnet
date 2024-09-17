@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AirBoundaryConstruction } from "./AirBoundaryConstruction";
 import { AirBoundaryConstructionAbridged } from "./AirBoundaryConstructionAbridged";
@@ -616,7 +616,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
         data["ventilation_simulation_control"] = this.ventilation_simulation_control;
         data["electric_load_center"] = this.electric_load_center;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {

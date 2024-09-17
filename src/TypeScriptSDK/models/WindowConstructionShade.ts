@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain } from 'class-transformer';
 import { ControlType } from "./ControlType";
 import { EnergyWindowMaterialBlind } from "./EnergyWindowMaterialBlind";
 import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
@@ -96,7 +96,7 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
         data["setpoint"] = this.setpoint;
         data["schedule"] = this.schedule;
         data = super.toJSON(data);
-        return data;
+        return instanceToPlain(data);
     }
 
 	async validate(): Promise<boolean> {
