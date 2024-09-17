@@ -59,7 +59,7 @@ export class ASHRAETau extends _SkyCondition {
         data["tau_b"] = this.tau_b;
         data["tau_d"] = this.tau_d;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

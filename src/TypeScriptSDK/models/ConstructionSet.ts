@@ -109,7 +109,7 @@ export class ConstructionSet extends IDdEnergyBaseModel {
         data["door_set"] = this.door_set;
         data["shade_construction"] = this.shade_construction;
         data["air_boundary_construction"] = this.air_boundary_construction;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

@@ -41,7 +41,7 @@ export class WallModifierSetAbridged extends BaseModifierSetAbridged {
         }
 
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

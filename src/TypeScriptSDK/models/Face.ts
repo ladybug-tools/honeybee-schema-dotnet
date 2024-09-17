@@ -122,7 +122,7 @@ export class Face extends IDdBaseModel {
         data["doors"] = this.doors;
         data["indoor_shades"] = this.indoor_shades;
         data["outdoor_shades"] = this.outdoor_shades;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

@@ -280,7 +280,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
         data["bottom_opening_multiplier"] = this.bottom_opening_multiplier;
         data["left_opening_multiplier"] = this.left_opening_multiplier;
         data["right_opening_multiplier"] = this.right_opening_multiplier;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

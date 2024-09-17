@@ -65,7 +65,7 @@ export class Outdoors extends _OpenAPIGenBaseModel {
         data["sun_exposure"] = this.sun_exposure;
         data["wind_exposure"] = this.wind_exposure;
         data["view_factor"] = this.view_factor;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

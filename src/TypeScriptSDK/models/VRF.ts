@@ -61,7 +61,7 @@ export class VRF extends IDdEnergyBaseModel {
         data["vintage"] = this.vintage;
         data["type"] = this.type;
         data["equipment_type"] = this.equipment_type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

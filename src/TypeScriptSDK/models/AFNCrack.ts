@@ -58,7 +58,7 @@ export class AFNCrack extends _OpenAPIGenBaseModel {
         data["flow_coefficient"] = this.flow_coefficient;
         data["type"] = this.type;
         data["flow_exponent"] = this.flow_exponent;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

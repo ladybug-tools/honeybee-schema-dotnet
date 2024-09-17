@@ -88,7 +88,7 @@ export class _DOASBase extends IDdEnergyBaseModel {
         data["demand_controlled_ventilation"] = this.demand_controlled_ventilation;
         data["doas_availability_schedule"] = this.doas_availability_schedule;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

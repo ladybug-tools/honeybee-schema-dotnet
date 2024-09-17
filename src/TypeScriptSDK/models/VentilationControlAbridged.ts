@@ -100,7 +100,7 @@ export class VentilationControlAbridged extends _OpenAPIGenBaseModel {
         data["max_outdoor_temperature"] = this.max_outdoor_temperature;
         data["delta_temperature"] = this.delta_temperature;
         data["schedule"] = this.schedule;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

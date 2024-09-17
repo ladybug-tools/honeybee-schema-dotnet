@@ -86,7 +86,7 @@ export class ServiceHotWaterAbridged extends IDdEnergyBaseModel {
         data["target_temperature"] = this.target_temperature;
         data["sensible_fraction"] = this.sensible_fraction;
         data["latent_fraction"] = this.latent_fraction;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

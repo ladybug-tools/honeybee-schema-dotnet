@@ -57,7 +57,7 @@ export class InternalMassAbridged extends IDdEnergyBaseModel {
         data["construction"] = this.construction;
         data["area"] = this.area;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

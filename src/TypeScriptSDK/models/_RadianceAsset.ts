@@ -60,7 +60,7 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
         data["room_identifier"] = this.room_identifier;
         data["light_path"] = this.light_path;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

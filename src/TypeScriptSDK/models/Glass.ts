@@ -101,7 +101,7 @@ export class Glass extends ModifierBase {
         data["b_transmissivity"] = this.b_transmissivity;
         data["refraction_index"] = this.refraction_index;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

@@ -202,7 +202,7 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
         data["residual_vol_moist_cont"] = this.residual_vol_moist_cont;
         data["init_vol_moist_cont"] = this.init_vol_moist_cont;
         data["moist_diff_model"] = this.moist_diff_model;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

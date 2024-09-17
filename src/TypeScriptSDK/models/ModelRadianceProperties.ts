@@ -260,7 +260,7 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
         data["modifier_sets"] = this.modifier_sets;
         data["sensor_grids"] = this.sensor_grids;
         data["views"] = this.views;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

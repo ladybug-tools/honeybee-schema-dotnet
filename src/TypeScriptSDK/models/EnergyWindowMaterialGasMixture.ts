@@ -67,7 +67,7 @@ export class EnergyWindowMaterialGasMixture extends IDdEnergyBaseModel {
         data["gas_fractions"] = this.gas_fractions;
         data["type"] = this.type;
         data["thickness"] = this.thickness;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

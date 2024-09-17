@@ -85,7 +85,7 @@ export class PeopleAbridged extends IDdEnergyBaseModel {
         data["activity_schedule"] = this.activity_schedule;
         data["radiant_fraction"] = this.radiant_fraction;
         data["latent_fraction"] = this.latent_fraction;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

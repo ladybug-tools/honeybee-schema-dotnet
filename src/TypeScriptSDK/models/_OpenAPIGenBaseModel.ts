@@ -31,7 +31,8 @@ export abstract class _OpenAPIGenBaseModel {
         }
 
         data["type"] = this.type;
-        return data;
+        return Object.fromEntries(
+            Object.entries(data).filter(([_, v]) => v !== undefined));
     }
 
 }

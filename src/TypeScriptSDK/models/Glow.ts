@@ -101,7 +101,7 @@ export class Glow extends ModifierBase {
         data["b_emittance"] = this.b_emittance;
         data["max_radius"] = this.max_radius;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

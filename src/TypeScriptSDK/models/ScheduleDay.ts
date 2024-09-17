@@ -67,7 +67,7 @@ export class ScheduleDay extends EnergyBaseModel {
         data["type"] = this.type;
         data["times"] = this.times;
         data["interpolate"] = this.interpolate;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

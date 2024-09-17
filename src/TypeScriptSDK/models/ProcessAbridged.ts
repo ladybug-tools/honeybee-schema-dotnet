@@ -107,7 +107,7 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
         data["radiant_fraction"] = this.radiant_fraction;
         data["latent_fraction"] = this.latent_fraction;
         data["lost_fraction"] = this.lost_fraction;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

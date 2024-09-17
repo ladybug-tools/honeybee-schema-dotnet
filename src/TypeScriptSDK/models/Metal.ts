@@ -113,7 +113,7 @@ export class Metal extends ModifierBase {
         data["specularity"] = this.specularity;
         data["roughness"] = this.roughness;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

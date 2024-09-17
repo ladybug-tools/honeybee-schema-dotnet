@@ -93,7 +93,7 @@ export class Light extends ModifierBase {
         data["g_emittance"] = this.g_emittance;
         data["b_emittance"] = this.b_emittance;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

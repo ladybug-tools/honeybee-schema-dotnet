@@ -129,7 +129,7 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
         data["cooling_limit"] = this.cooling_limit;
         data["heating_availability"] = this.heating_availability;
         data["cooling_availability"] = this.cooling_availability;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

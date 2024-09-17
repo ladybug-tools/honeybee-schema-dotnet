@@ -210,7 +210,7 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
         data["fans"] = this.fans;
         data["internal_masses"] = this.internal_masses;
         data["process_loads"] = this.process_loads;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

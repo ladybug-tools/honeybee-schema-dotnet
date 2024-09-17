@@ -41,7 +41,7 @@ export class ElectricEquipmentAbridged extends _EquipmentBase {
         }
 
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

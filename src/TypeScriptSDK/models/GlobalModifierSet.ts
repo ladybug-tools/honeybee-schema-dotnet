@@ -273,7 +273,7 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
         data["shade_set"] = this.shade_set;
         data["air_boundary_modifier"] = this.air_boundary_modifier;
         data["context_modifier"] = this.context_modifier;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

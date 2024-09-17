@@ -170,7 +170,7 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
         data["left_opening_multiplier"] = this.left_opening_multiplier;
         data["right_opening_multiplier"] = this.right_opening_multiplier;
         data["airflow_permeability"] = this.airflow_permeability;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

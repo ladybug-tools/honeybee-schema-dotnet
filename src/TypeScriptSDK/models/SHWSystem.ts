@@ -74,7 +74,7 @@ export class SHWSystem extends IDdEnergyBaseModel {
         data["heater_efficiency"] = this.heater_efficiency;
         data["ambient_condition"] = this.ambient_condition;
         data["ambient_loss_coefficient"] = this.ambient_loss_coefficient;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

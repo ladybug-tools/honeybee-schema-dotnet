@@ -66,7 +66,7 @@ export class RadianceShadeStateAbridged extends _OpenAPIGenBaseModel {
         data["modifier"] = this.modifier;
         data["modifier_direct"] = this.modifier_direct;
         data["shades"] = this.shades;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

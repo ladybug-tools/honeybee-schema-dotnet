@@ -66,7 +66,7 @@ export class DeletedInstruction extends _OpenAPIGenBaseModel {
         data["element_id"] = this.element_id;
         data["element_name"] = this.element_name;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

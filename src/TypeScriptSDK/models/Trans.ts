@@ -133,7 +133,7 @@ export class Trans extends ModifierBase {
         data["transmitted_diff"] = this.transmitted_diff;
         data["transmitted_spec"] = this.transmitted_spec;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

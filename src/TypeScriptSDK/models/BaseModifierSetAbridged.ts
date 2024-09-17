@@ -55,7 +55,7 @@ export class BaseModifierSetAbridged extends _OpenAPIGenBaseModel {
         data["exterior_modifier"] = this.exterior_modifier;
         data["interior_modifier"] = this.interior_modifier;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

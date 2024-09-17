@@ -58,7 +58,7 @@ export class FacePropertiesAbridged extends _OpenAPIGenBaseModel {
         data["type"] = this.type;
         data["energy"] = this.energy;
         data["radiance"] = this.radiance;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

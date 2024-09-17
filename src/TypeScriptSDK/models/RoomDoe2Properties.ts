@@ -87,7 +87,7 @@ export class RoomDoe2Properties extends _OpenAPIGenBaseModel {
         data["min_flow_per_area"] = this.min_flow_per_area;
         data["hmax_flow_ratio"] = this.hmax_flow_ratio;
         data["space_polygon_geometry"] = this.space_polygon_geometry;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

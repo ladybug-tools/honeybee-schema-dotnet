@@ -158,7 +158,7 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
         data["conductivity"] = this.conductivity;
         data["dirt_correction"] = this.dirt_correction;
         data["solar_diffusing"] = this.solar_diffusing;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

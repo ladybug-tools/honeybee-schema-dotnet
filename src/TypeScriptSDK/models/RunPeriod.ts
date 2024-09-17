@@ -96,7 +96,7 @@ export class RunPeriod extends DatedBaseModel {
         data["holidays"] = this.holidays;
         data["daylight_saving_time"] = this.daylight_saving_time;
         data["leap_year"] = this.leap_year;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

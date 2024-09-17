@@ -1,5 +1,5 @@
 import { plainToClass } from "class-transformer";
-import { Model, Face3D, Glass } from "../models";
+import { Model, Face3D, Glass, Plane } from "../models";
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -69,4 +69,23 @@ test('test glass', () => {
 
 });
 
+
+
+test('test toJson', () => {
+  let obj = new Face3D();
+
+  let json = obj.toJSON();
+  let hasPlane = json.hasOwnProperty('plane');
+  console.log(json)
+  expect(hasPlane).toBe(false);
+
+  obj = new Face3D();
+  obj.plane = new Plane();
+  json = obj.toJSON();
+  hasPlane = json.hasOwnProperty('plane');
+  expect(hasPlane).toBe(true);
+  console.log(json)
+
+
+});
 

@@ -95,7 +95,7 @@ export class Location extends _OpenAPIGenBaseModel {
         data["elevation"] = this.elevation;
         data["station_id"] = this.station_id;
         data["source"] = this.source;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

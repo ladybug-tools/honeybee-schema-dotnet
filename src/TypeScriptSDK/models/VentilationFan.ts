@@ -84,7 +84,7 @@ export class VentilationFan extends EnergyBaseModel {
         data["type"] = this.type;
         data["ventilation_type"] = this.ventilation_type;
         data["control"] = this.control;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

@@ -103,7 +103,7 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
         data["radiance_changed"] = this.radiance_changed;
         data["existing_geometry"] = this.existing_geometry;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

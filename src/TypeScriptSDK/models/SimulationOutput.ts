@@ -76,7 +76,7 @@ export class SimulationOutput extends _OpenAPIGenBaseModel {
         data["outputs"] = this.outputs;
         data["summary_reports"] = this.summary_reports;
         data["unmet_setpoint_tolerance"] = this.unmet_setpoint_tolerance;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

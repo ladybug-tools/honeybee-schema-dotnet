@@ -96,7 +96,7 @@ export class Lighting extends IDdEnergyBaseModel {
         data["radiant_fraction"] = this.radiant_fraction;
         data["return_air_fraction"] = this.return_air_fraction;
         data["baseline_watts_per_area"] = this.baseline_watts_per_area;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

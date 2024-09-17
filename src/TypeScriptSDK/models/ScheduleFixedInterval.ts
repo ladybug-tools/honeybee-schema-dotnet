@@ -92,7 +92,7 @@ export class ScheduleFixedInterval extends IDdEnergyBaseModel {
         data["start_date"] = this.start_date;
         data["placeholder_value"] = this.placeholder_value;
         data["interpolate"] = this.interpolate;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

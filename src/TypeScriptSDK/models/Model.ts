@@ -154,7 +154,7 @@ export class Model extends IDdBaseModel {
         data["units"] = this.units;
         data["tolerance"] = this.tolerance;
         data["angle_tolerance"] = this.angle_tolerance;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

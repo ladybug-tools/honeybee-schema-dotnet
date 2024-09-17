@@ -528,7 +528,7 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
         data["shade_construction"] = this.shade_construction;
         data["context_construction"] = this.context_construction;
         data["air_boundary_construction"] = this.air_boundary_construction;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

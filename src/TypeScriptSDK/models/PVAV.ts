@@ -99,7 +99,7 @@ export class PVAV extends IDdEnergyBaseModel {
         data["demand_controlled_ventilation"] = this.demand_controlled_ventilation;
         data["type"] = this.type;
         data["equipment_type"] = this.equipment_type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

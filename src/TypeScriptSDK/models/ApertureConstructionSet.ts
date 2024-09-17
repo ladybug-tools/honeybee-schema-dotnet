@@ -68,7 +68,7 @@ export class ApertureConstructionSet extends _OpenAPIGenBaseModel {
         data["window_construction"] = this.window_construction;
         data["skylight_construction"] = this.skylight_construction;
         data["operable_construction"] = this.operable_construction;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

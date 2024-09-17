@@ -106,7 +106,7 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
         data["flow_coefficient_closed"] = this.flow_coefficient_closed;
         data["flow_exponent_closed"] = this.flow_exponent_closed;
         data["two_way_threshold"] = this.two_way_threshold;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

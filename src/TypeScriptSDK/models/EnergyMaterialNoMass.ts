@@ -87,7 +87,7 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
         data["thermal_absorptance"] = this.thermal_absorptance;
         data["solar_absorptance"] = this.solar_absorptance;
         data["visible_absorptance"] = this.visible_absorptance;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

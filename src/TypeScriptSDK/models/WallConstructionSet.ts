@@ -69,7 +69,7 @@ export class WallConstructionSet extends _OpenAPIGenBaseModel {
         data["exterior_construction"] = this.exterior_construction;
         data["ground_construction"] = this.ground_construction;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

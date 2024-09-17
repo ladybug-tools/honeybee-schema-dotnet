@@ -60,7 +60,7 @@ export class DoorEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
         data["type"] = this.type;
         data["construction"] = this.construction;
         data["vent_opening"] = this.vent_opening;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

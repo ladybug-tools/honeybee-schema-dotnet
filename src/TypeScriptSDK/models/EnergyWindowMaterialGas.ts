@@ -58,7 +58,7 @@ export class EnergyWindowMaterialGas extends IDdEnergyBaseModel {
         data["type"] = this.type;
         data["thickness"] = this.thickness;
         data["gas_type"] = this.gas_type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

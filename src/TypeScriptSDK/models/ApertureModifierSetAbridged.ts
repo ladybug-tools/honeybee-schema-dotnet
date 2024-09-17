@@ -69,7 +69,7 @@ export class ApertureModifierSetAbridged extends _OpenAPIGenBaseModel {
         data["interior_modifier"] = this.interior_modifier;
         data["skylight_modifier"] = this.skylight_modifier;
         data["operable_modifier"] = this.operable_modifier;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

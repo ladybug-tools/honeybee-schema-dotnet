@@ -58,7 +58,7 @@ export class EnergyBaseModel extends _OpenAPIGenBaseModel {
         data["identifier"] = this.identifier;
         data["display_name"] = this.display_name;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

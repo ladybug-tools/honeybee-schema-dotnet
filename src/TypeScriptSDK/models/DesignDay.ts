@@ -95,7 +95,7 @@ export class DesignDay extends _OpenAPIGenBaseModel {
         data["wind_condition"] = this.wind_condition;
         data["sky_condition"] = this.sky_condition;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

@@ -87,7 +87,8 @@ export class ValidationReport {
         data["app_name"] = this.app_name;
         data["fatal_error"] = this.fatal_error;
         data["errors"] = this.errors;
-        return data;
+        return Object.fromEntries(
+            Object.entries(data).filter(([_, v]) => v !== undefined));
     }
 
 }

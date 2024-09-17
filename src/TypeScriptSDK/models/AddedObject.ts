@@ -73,7 +73,7 @@ export class AddedObject extends _OpenAPIGenBaseModel {
         data["geometry"] = this.geometry;
         data["element_name"] = this.element_name;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

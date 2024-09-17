@@ -80,7 +80,7 @@ export class DoorModifierSet extends _OpenAPIGenBaseModel {
         data["exterior_glass_modifier"] = this.exterior_glass_modifier;
         data["overhead_modifier"] = this.overhead_modifier;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

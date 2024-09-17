@@ -108,7 +108,7 @@ export class ModifierSetAbridged extends IDdRadianceBaseModel {
         data["door_set"] = this.door_set;
         data["shade_set"] = this.shade_set;
         data["air_boundary_modifier"] = this.air_boundary_modifier;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

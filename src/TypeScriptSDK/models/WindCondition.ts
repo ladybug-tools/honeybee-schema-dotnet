@@ -60,7 +60,7 @@ export class WindCondition extends _OpenAPIGenBaseModel {
         data["wind_speed"] = this.wind_speed;
         data["type"] = this.type;
         data["wind_direction"] = this.wind_direction;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

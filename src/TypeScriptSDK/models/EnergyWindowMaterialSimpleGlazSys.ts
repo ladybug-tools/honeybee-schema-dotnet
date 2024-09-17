@@ -64,7 +64,7 @@ export class EnergyWindowMaterialSimpleGlazSys extends IDdEnergyBaseModel {
         data["shgc"] = this.shgc;
         data["type"] = this.type;
         data["vt"] = this.vt;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

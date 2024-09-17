@@ -67,7 +67,7 @@ export class ModelProperties extends _OpenAPIGenBaseModel {
         data["energy"] = this.energy;
         data["radiance"] = this.radiance;
         data["doe2"] = this.doe2;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

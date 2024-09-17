@@ -60,7 +60,7 @@ export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
         data["vmtx_geometry"] = this.vmtx_geometry;
         data["dmtx_geometry"] = this.dmtx_geometry;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

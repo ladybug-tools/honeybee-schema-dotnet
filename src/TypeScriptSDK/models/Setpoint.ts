@@ -76,7 +76,7 @@ export class Setpoint extends IDdEnergyBaseModel {
         data["humidifying_schedule"] = this.humidifying_schedule;
         data["dehumidifying_schedule"] = this.dehumidifying_schedule;
         data["setpoint_cutout_difference"] = this.setpoint_cutout_difference;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

@@ -63,7 +63,7 @@ export class WindowConstruction extends IDdEnergyBaseModel {
         data["materials"] = this.materials;
         data["type"] = this.type;
         data["frame"] = this.frame;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 

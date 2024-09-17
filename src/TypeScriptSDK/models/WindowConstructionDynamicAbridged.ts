@@ -61,7 +61,7 @@ export class WindowConstructionDynamicAbridged extends IDdEnergyBaseModel {
         data["constructions"] = this.constructions;
         data["schedule"] = this.schedule;
         data["type"] = this.type;
-        super.toJSON(data);
+        data = super.toJSON(data);
         return data;
     }
 
