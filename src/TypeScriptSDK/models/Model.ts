@@ -100,7 +100,7 @@ export class Model extends IDdBaseModel {
     constructor() {
         super();
         this.type = "Model";
-        this.version = "1.58.3";
+        this.version = "1.58.4";
         this.units = Units.Meters;
         this.tolerance = 0.01;
         this.angle_tolerance = 1;

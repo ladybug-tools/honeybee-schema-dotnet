@@ -7,7 +7,7 @@ import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 export class _RadianceAsset extends IDdRadianceBaseModel {
     @IsString()
     @IsOptional()
-    @Matches(/[.A-Za-z0-9_-]/)
+    @Matches(/^[.A-Za-z0-9_-]+$/)
     @MinLength(1)
     @MaxLength(100)
     /** Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model. */
