@@ -66,7 +66,7 @@ namespace HoneybeeSchema
         /// Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model.
         /// </summary>
         [Summary(@"Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model.")]
-        [RegularExpression(@"[.A-Za-z0-9_-]")]
+        [RegularExpression(@"^[.A-Za-z0-9_-]+$")]
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "room_identifier")]
