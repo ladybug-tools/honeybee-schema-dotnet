@@ -1,0 +1,16 @@
+{
+    "sdkName": "HoneybeeSchema",
+    "moduleName":"honeybee_schema",
+    "baseURL": "https://www.ladybug.tools/honeybee-schema",
+    "files":[
+        "model_inheritance.json",
+        "model_mapper.json",
+        "simulation-parameter_inheritance.json",
+        "simulation-parameter_mapper.json",
+        "validation-report.json",
+        "comparison-report_inheritance.json",
+        "sync-instructions_inheritance.json",
+        "project-information_inheritance.json"
+    ]
+
+}
