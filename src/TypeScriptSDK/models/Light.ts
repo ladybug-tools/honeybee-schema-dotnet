@@ -61,7 +61,7 @@ export class Light extends ModifierBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Light, _data);
+            const obj = plainToClass(Light, _data, { enableImplicitConversion: true });
             this.modifier = obj.modifier;
             this.dependencies = obj.dependencies;
             this.r_emittance = obj.r_emittance;

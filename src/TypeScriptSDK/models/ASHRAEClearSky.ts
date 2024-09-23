@@ -26,7 +26,7 @@ export class ASHRAEClearSky extends _SkyCondition {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ASHRAEClearSky, _data);
+            const obj = plainToClass(ASHRAEClearSky, _data, { enableImplicitConversion: true });
             this.clearness = obj.clearness;
             this.type = obj.type;
         }

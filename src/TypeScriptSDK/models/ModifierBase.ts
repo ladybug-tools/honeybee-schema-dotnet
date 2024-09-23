@@ -19,7 +19,7 @@ export class ModifierBase extends IDdRadianceBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ModifierBase, _data);
+            const obj = plainToClass(ModifierBase, _data, { enableImplicitConversion: true });
             this.type = obj.type;
         }
     }

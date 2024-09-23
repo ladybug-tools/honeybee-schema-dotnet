@@ -54,7 +54,7 @@ export class SetpointAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(SetpointAbridged, _data);
+            const obj = plainToClass(SetpointAbridged, _data, { enableImplicitConversion: true });
             this.cooling_schedule = obj.cooling_schedule;
             this.heating_schedule = obj.heating_schedule;
             this.type = obj.type;

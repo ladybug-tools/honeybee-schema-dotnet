@@ -88,7 +88,7 @@ export class BSDF extends ModifierBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(BSDF, _data);
+            const obj = plainToClass(BSDF, _data, { enableImplicitConversion: true });
             this.bsdf_data = obj.bsdf_data;
             this.modifier = obj.modifier;
             this.dependencies = obj.dependencies;

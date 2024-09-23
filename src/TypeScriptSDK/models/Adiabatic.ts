@@ -19,7 +19,7 @@ export class Adiabatic extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Adiabatic, _data);
+            const obj = plainToClass(Adiabatic, _data, { enableImplicitConversion: true });
             this.type = obj.type;
         }
     }

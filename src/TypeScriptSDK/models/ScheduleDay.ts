@@ -39,7 +39,7 @@ export class ScheduleDay extends EnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ScheduleDay, _data);
+            const obj = plainToClass(ScheduleDay, _data, { enableImplicitConversion: true });
             this.values = obj.values;
             this.type = obj.type;
             this.times = obj.times;

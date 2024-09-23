@@ -50,7 +50,7 @@ export class SensorGrid extends _RadianceAsset {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(SensorGrid, _data);
+            const obj = plainToClass(SensorGrid, _data, { enableImplicitConversion: true });
             this.sensors = obj.sensors;
             this.type = obj.type;
             this.mesh = obj.mesh;

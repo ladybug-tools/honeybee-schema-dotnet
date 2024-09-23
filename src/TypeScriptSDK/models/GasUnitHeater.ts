@@ -35,7 +35,7 @@ export class GasUnitHeater extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(GasUnitHeater, _data);
+            const obj = plainToClass(GasUnitHeater, _data, { enableImplicitConversion: true });
             this.vintage = obj.vintage;
             this.type = obj.type;
             this.equipment_type = obj.equipment_type;

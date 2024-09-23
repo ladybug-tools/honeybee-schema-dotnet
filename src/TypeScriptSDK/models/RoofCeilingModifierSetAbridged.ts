@@ -19,7 +19,7 @@ export class RoofCeilingModifierSetAbridged extends BaseModifierSetAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(RoofCeilingModifierSetAbridged, _data);
+            const obj = plainToClass(RoofCeilingModifierSetAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
         }
     }

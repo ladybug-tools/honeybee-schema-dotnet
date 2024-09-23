@@ -19,7 +19,7 @@ export class Autosize extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Autosize, _data);
+            const obj = plainToClass(Autosize, _data, { enableImplicitConversion: true });
             this.type = obj.type;
         }
     }

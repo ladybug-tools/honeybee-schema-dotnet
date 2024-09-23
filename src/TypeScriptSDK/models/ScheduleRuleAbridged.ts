@@ -82,7 +82,7 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ScheduleRuleAbridged, _data);
+            const obj = plainToClass(ScheduleRuleAbridged, _data, { enableImplicitConversion: true });
             this.schedule_day = obj.schedule_day;
             this.type = obj.type;
             this.apply_sunday = obj.apply_sunday;

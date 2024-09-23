@@ -72,7 +72,7 @@ export class ModifierSetAbridged extends IDdRadianceBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ModifierSetAbridged, _data);
+            const obj = plainToClass(ModifierSetAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.wall_set = obj.wall_set;
             this.floor_set = obj.floor_set;

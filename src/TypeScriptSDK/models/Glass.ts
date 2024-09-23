@@ -67,7 +67,7 @@ export class Glass extends ModifierBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Glass, _data);
+            const obj = plainToClass(Glass, _data, { enableImplicitConversion: true });
             this.modifier = obj.modifier;
             this.dependencies = obj.dependencies;
             this.r_transmissivity = obj.r_transmissivity;

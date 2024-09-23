@@ -37,7 +37,7 @@ export class Plane extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Plane, _data);
+            const obj = plainToClass(Plane, _data, { enableImplicitConversion: true });
             this.n = obj.n;
             this.o = obj.o;
             this.type = obj.type;

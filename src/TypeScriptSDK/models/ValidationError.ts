@@ -86,7 +86,7 @@ export class ValidationError {
 
     init(_data?: any) {
         if (_data) {
-            const obj = plainToClass(ValidationError, _data);
+            const obj = plainToClass(ValidationError, _data, { enableImplicitConversion: true });
             this.code = obj.code;
             this.error_type = obj.error_type;
             this.extension_type = obj.extension_type;

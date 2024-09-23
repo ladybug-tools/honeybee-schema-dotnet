@@ -110,7 +110,7 @@ export class Model extends IDdBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Model, _data);
+            const obj = plainToClass(Model, _data, { enableImplicitConversion: true });
             this.properties = obj.properties;
             this.type = obj.type;
             this.version = obj.version;

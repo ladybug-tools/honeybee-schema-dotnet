@@ -48,7 +48,7 @@ export class DoorModifierSet extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DoorModifierSet, _data);
+            const obj = plainToClass(DoorModifierSet, _data, { enableImplicitConversion: true });
             this.exterior_modifier = obj.exterior_modifier;
             this.interior_modifier = obj.interior_modifier;
             this.interior_glass_modifier = obj.interior_glass_modifier;

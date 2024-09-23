@@ -33,7 +33,7 @@ export class DaylightSavingTime extends DatedBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DaylightSavingTime, _data);
+            const obj = plainToClass(DaylightSavingTime, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.start_date = obj.start_date;
             this.end_date = obj.end_date;

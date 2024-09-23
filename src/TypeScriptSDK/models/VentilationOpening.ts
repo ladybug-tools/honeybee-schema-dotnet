@@ -70,7 +70,7 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(VentilationOpening, _data);
+            const obj = plainToClass(VentilationOpening, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.fraction_area_operable = obj.fraction_area_operable;
             this.fraction_height_operable = obj.fraction_height_operable;

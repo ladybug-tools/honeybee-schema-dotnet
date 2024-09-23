@@ -34,7 +34,7 @@ export class ApertureEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ApertureEnergyPropertiesAbridged, _data);
+            const obj = plainToClass(ApertureEnergyPropertiesAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.construction = obj.construction;
             this.vent_opening = obj.vent_opening;

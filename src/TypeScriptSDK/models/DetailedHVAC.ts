@@ -23,7 +23,7 @@ export class DetailedHVAC extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DetailedHVAC, _data);
+            const obj = plainToClass(DetailedHVAC, _data, { enableImplicitConversion: true });
             this.specification = obj.specification;
             this.type = obj.type;
         }

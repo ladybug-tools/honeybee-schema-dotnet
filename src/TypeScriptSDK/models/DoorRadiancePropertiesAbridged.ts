@@ -33,7 +33,7 @@ export class DoorRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DoorRadiancePropertiesAbridged, _data);
+            const obj = plainToClass(DoorRadiancePropertiesAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.dynamic_group_identifier = obj.dynamic_group_identifier;
             this.states = obj.states;

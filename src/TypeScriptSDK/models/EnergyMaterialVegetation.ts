@@ -146,7 +146,7 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyMaterialVegetation, _data);
+            const obj = plainToClass(EnergyMaterialVegetation, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.roughness = obj.roughness;
             this.thickness = obj.thickness;

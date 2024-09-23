@@ -77,7 +77,7 @@ export class Metal extends ModifierBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Metal, _data);
+            const obj = plainToClass(Metal, _data, { enableImplicitConversion: true });
             this.modifier = obj.modifier;
             this.dependencies = obj.dependencies;
             this.r_reflectance = obj.r_reflectance;

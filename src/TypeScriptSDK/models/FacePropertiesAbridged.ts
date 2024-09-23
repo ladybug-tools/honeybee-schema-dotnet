@@ -32,7 +32,7 @@ export class FacePropertiesAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(FacePropertiesAbridged, _data);
+            const obj = plainToClass(FacePropertiesAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.energy = obj.energy;
             this.radiance = obj.radiance;

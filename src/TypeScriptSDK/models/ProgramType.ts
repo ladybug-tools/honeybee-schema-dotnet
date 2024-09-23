@@ -83,7 +83,7 @@ export class ProgramType extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ProgramType, _data);
+            const obj = plainToClass(ProgramType, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.people = obj.people;
             this.lighting = obj.lighting;

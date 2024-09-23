@@ -45,7 +45,7 @@ export class ComparisonReport extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ComparisonReport, _data);
+            const obj = plainToClass(ComparisonReport, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.changed_objects = obj.changed_objects;
             this.deleted_objects = obj.deleted_objects;

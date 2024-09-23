@@ -120,7 +120,7 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyWindowMaterialShade, _data);
+            const obj = plainToClass(EnergyWindowMaterialShade, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.solar_transmittance = obj.solar_transmittance;
             this.solar_reflectance = obj.solar_reflectance;

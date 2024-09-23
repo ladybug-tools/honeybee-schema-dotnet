@@ -19,7 +19,7 @@ export class Autocalculate extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Autocalculate, _data);
+            const obj = plainToClass(Autocalculate, _data, { enableImplicitConversion: true });
             this.type = obj.type;
         }
     }

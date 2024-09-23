@@ -49,7 +49,7 @@ export class Infiltration extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Infiltration, _data);
+            const obj = plainToClass(Infiltration, _data, { enableImplicitConversion: true });
             this.flow_per_exterior_area = obj.flow_per_exterior_area;
             this.schedule = obj.schedule;
             this.type = obj.type;

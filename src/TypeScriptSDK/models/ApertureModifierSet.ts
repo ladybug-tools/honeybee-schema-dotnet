@@ -44,7 +44,7 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ApertureModifierSet, _data);
+            const obj = plainToClass(ApertureModifierSet, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.window_modifier = obj.window_modifier;
             this.interior_modifier = obj.interior_modifier;

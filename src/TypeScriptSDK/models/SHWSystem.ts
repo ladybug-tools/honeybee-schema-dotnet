@@ -44,7 +44,7 @@ export class SHWSystem extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(SHWSystem, _data);
+            const obj = plainToClass(SHWSystem, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.equipment_type = obj.equipment_type;
             this.heater_efficiency = obj.heater_efficiency;

@@ -32,7 +32,7 @@ export class WindowConstructionAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(WindowConstructionAbridged, _data);
+            const obj = plainToClass(WindowConstructionAbridged, _data, { enableImplicitConversion: true });
             this.materials = obj.materials;
             this.type = obj.type;
             this.frame = obj.frame;

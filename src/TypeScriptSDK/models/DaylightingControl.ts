@@ -61,7 +61,7 @@ export class DaylightingControl extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DaylightingControl, _data);
+            const obj = plainToClass(DaylightingControl, _data, { enableImplicitConversion: true });
             this.sensor_position = obj.sensor_position;
             this.type = obj.type;
             this.illuminance_setpoint = obj.illuminance_setpoint;

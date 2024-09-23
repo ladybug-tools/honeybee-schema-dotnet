@@ -27,7 +27,7 @@ export class _HeatCoolBase extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(_HeatCoolBase, _data);
+            const obj = plainToClass(_HeatCoolBase, _data, { enableImplicitConversion: true });
             this.vintage = obj.vintage;
             this.type = obj.type;
         }

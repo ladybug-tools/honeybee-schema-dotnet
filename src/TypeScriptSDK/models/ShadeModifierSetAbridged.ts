@@ -19,7 +19,7 @@ export class ShadeModifierSetAbridged extends BaseModifierSetAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ShadeModifierSetAbridged, _data);
+            const obj = plainToClass(ShadeModifierSetAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
         }
     }
