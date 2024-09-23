@@ -95,11 +95,6 @@ export class ScheduleRulesetAbridged extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["day_schedules"] = this.day_schedules;
         data["default_day_schedule"] = this.default_day_schedule;
         data["type"] = this.type;
@@ -121,3 +116,4 @@ export class ScheduleRulesetAbridged extends IDdEnergyBaseModel {
         return true;
     }
 }
+

@@ -85,11 +85,6 @@ export class Aperture extends IDdBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["geometry"] = this.geometry;
         data["boundary_condition"] = this.boundary_condition;
         data["properties"] = this.properties;
@@ -110,3 +105,4 @@ export class Aperture extends IDdBaseModel {
         return true;
     }
 }
+

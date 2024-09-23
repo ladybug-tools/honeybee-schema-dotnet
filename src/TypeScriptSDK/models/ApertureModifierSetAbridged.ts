@@ -59,11 +59,6 @@ export class ApertureModifierSetAbridged extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["type"] = this.type;
         data["window_modifier"] = this.window_modifier;
         data["interior_modifier"] = this.interior_modifier;
@@ -82,3 +77,4 @@ export class ApertureModifierSetAbridged extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

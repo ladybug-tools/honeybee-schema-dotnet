@@ -116,11 +116,6 @@ export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["conductivity_coeff_a"] = this.conductivity_coeff_a;
         data["viscosity_coeff_a"] = this.viscosity_coeff_a;
         data["specific_heat_coeff_a"] = this.specific_heat_coeff_a;
@@ -147,3 +142,4 @@ export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
         return true;
     }
 }
+

@@ -113,11 +113,6 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["type"] = this.type;
         data["economizer_type"] = this.economizer_type;
         data["demand_controlled_ventilation"] = this.demand_controlled_ventilation;
@@ -142,3 +137,4 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
         return true;
     }
 }
+

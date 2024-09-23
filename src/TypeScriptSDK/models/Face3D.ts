@@ -59,11 +59,6 @@ export class Face3D extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["boundary"] = this.boundary;
         data["type"] = this.type;
         data["holes"] = this.holes;
@@ -81,3 +76,4 @@ export class Face3D extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

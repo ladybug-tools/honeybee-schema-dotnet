@@ -150,11 +150,6 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["type"] = this.type;
         data["solar_transmittance"] = this.solar_transmittance;
         data["solar_reflectance"] = this.solar_reflectance;
@@ -183,3 +178,4 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
         return true;
     }
 }
+

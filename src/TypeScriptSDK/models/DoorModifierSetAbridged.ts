@@ -53,11 +53,6 @@ export class DoorModifierSetAbridged extends BaseModifierSetAbridged {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["type"] = this.type;
         data["interior_glass_modifier"] = this.interior_glass_modifier;
         data["exterior_glass_modifier"] = this.exterior_glass_modifier;
@@ -75,3 +70,4 @@ export class DoorModifierSetAbridged extends BaseModifierSetAbridged {
         return true;
     }
 }
+

@@ -52,11 +52,6 @@ export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["vmtx_geometry"] = this.vmtx_geometry;
         data["dmtx_geometry"] = this.dmtx_geometry;
         data["type"] = this.type;
@@ -73,3 +68,4 @@ export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
         return true;
     }
 }
+

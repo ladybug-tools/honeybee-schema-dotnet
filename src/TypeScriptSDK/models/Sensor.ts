@@ -49,11 +49,6 @@ export class Sensor extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["pos"] = this.pos;
         data["dir"] = this.dir;
         data["type"] = this.type;
@@ -70,3 +65,4 @@ export class Sensor extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

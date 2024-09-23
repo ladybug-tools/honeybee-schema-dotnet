@@ -76,11 +76,6 @@ export class GasEquipment extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["watts_per_area"] = this.watts_per_area;
         data["schedule"] = this.schedule;
         data["radiant_fraction"] = this.radiant_fraction;
@@ -100,3 +95,4 @@ export class GasEquipment extends IDdEnergyBaseModel {
         return true;
     }
 }
+

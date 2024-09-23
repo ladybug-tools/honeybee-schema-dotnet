@@ -108,11 +108,6 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["schedule_day"] = this.schedule_day;
         data["type"] = this.type;
         data["apply_sunday"] = this.apply_sunday;
@@ -137,3 +132,4 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
         return true;
     }
 }
+

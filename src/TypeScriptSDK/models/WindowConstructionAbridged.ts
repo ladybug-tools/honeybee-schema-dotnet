@@ -50,11 +50,6 @@ export class WindowConstructionAbridged extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["materials"] = this.materials;
         data["type"] = this.type;
         data["frame"] = this.frame;
@@ -71,3 +66,4 @@ export class WindowConstructionAbridged extends IDdEnergyBaseModel {
         return true;
     }
 }
+

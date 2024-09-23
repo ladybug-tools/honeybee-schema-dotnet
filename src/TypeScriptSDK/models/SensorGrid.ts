@@ -70,11 +70,6 @@ export class SensorGrid extends _RadianceAsset {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["sensors"] = this.sensors;
         data["type"] = this.type;
         data["mesh"] = this.mesh;
@@ -93,3 +88,4 @@ export class SensorGrid extends _RadianceAsset {
         return true;
     }
 }
+

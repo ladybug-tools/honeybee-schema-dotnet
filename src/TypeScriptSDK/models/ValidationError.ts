@@ -112,11 +112,6 @@ export class ValidationError {
 
 	toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["code"] = this.code;
         data["error_type"] = this.error_type;
         data["extension_type"] = this.extension_type;
@@ -128,8 +123,21 @@ export class ValidationError {
         data["parents"] = this.parents;
         data["top_parents"] = this.top_parents;
         data["helper_geometry"] = this.helper_geometry;
-        return Object.fromEntries(
-            Object.entries(data).filter(([_, v]) => v !== undefined));
+        return removeUndefinedProperties(data);
     }
 
+}
+
+function removeUndefinedProperties(obj: any): any {
+    if (Array.isArray(obj)) {
+        return obj.map(removeUndefinedProperties);
+    } else if (obj !== null && typeof obj === 'object') {
+        return Object.entries(obj)
+        .filter(([_, value]) => value !== undefined)
+        .reduce((acc, [key, value]) => {
+            acc[key] = removeUndefinedProperties(value);
+            return acc;
+        }, {} as any);
+    }
+    return obj;
 }

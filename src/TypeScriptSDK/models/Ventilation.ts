@@ -74,11 +74,6 @@ export class Ventilation extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["type"] = this.type;
         data["flow_per_person"] = this.flow_per_person;
         data["flow_per_area"] = this.flow_per_area;
@@ -98,3 +93,4 @@ export class Ventilation extends IDdEnergyBaseModel {
         return true;
     }
 }
+

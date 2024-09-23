@@ -53,11 +53,6 @@ export class Baseboard extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["vintage"] = this.vintage;
         data["type"] = this.type;
         data["equipment_type"] = this.equipment_type;
@@ -74,3 +69,4 @@ export class Baseboard extends IDdEnergyBaseModel {
         return true;
     }
 }
+

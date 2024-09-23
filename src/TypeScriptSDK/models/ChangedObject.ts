@@ -89,11 +89,6 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["element_type"] = this.element_type;
         data["element_id"] = this.element_id;
         data["geometry_changed"] = this.geometry_changed;
@@ -116,3 +111,4 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

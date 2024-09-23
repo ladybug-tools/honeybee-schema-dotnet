@@ -49,11 +49,6 @@ export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["identifier"] = this.identifier;
         data["display_name"] = this.display_name;
         data["type"] = this.type;
@@ -70,3 +65,4 @@ export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

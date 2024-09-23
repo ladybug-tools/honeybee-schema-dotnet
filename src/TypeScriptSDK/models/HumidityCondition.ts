@@ -71,11 +71,6 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["humidity_type"] = this.humidity_type;
         data["humidity_value"] = this.humidity_value;
         data["type"] = this.type;
@@ -95,3 +90,4 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

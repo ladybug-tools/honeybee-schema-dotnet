@@ -52,11 +52,6 @@ export class WindCondition extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["wind_speed"] = this.wind_speed;
         data["type"] = this.type;
         data["wind_direction"] = this.wind_direction;
@@ -73,3 +68,4 @@ export class WindCondition extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

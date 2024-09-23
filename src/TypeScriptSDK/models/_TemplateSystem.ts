@@ -44,11 +44,6 @@ export class _TemplateSystem extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["vintage"] = this.vintage;
         data["type"] = this.type;
         data = super.toJSON(data);
@@ -64,3 +59,4 @@ export class _TemplateSystem extends IDdEnergyBaseModel {
         return true;
     }
 }
+

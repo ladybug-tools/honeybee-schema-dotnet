@@ -94,11 +94,6 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["watts"] = this.watts;
         data["schedule"] = this.schedule;
         data["fuel_type"] = this.fuel_type;
@@ -120,3 +115,4 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
         return true;
     }
 }
+

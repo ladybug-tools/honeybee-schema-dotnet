@@ -70,11 +70,6 @@ export class SimulationControl extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["type"] = this.type;
         data["do_zone_sizing"] = this.do_zone_sizing;
         data["do_system_sizing"] = this.do_system_sizing;
@@ -94,3 +89,4 @@ export class SimulationControl extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

@@ -58,11 +58,6 @@ export class ScheduleDay extends EnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["values"] = this.values;
         data["type"] = this.type;
         data["times"] = this.times;
@@ -80,3 +75,4 @@ export class ScheduleDay extends EnergyBaseModel {
         return true;
     }
 }
+

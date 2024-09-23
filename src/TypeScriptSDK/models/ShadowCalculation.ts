@@ -77,11 +77,6 @@ export class ShadowCalculation extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["type"] = this.type;
         data["solar_distribution"] = this.solar_distribution;
         data["calculation_method"] = this.calculation_method;
@@ -101,3 +96,4 @@ export class ShadowCalculation extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

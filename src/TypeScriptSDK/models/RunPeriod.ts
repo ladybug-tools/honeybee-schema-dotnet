@@ -84,11 +84,6 @@ export class RunPeriod extends DatedBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["type"] = this.type;
         data["start_date"] = this.start_date;
         data["end_date"] = this.end_date;
@@ -109,3 +104,4 @@ export class RunPeriod extends DatedBaseModel {
         return true;
     }
 }
+

@@ -50,11 +50,6 @@ export class ElectricLoadCenter extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["type"] = this.type;
         data["inverter_efficiency"] = this.inverter_efficiency;
         data["inverter_dc_to_ac_size_ratio"] = this.inverter_dc_to_ac_size_ratio;
@@ -71,3 +66,4 @@ export class ElectricLoadCenter extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

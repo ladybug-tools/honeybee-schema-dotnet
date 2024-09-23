@@ -114,11 +114,6 @@ export class BSDF extends ModifierBase {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["bsdf_data"] = this.bsdf_data;
         data["modifier"] = this.modifier;
         data["dependencies"] = this.dependencies;
@@ -143,3 +138,4 @@ export class BSDF extends ModifierBase {
         return true;
     }
 }
+

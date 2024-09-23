@@ -95,11 +95,6 @@ export class ModifierSetAbridged extends IDdRadianceBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["type"] = this.type;
         data["wall_set"] = this.wall_set;
         data["floor_set"] = this.floor_set;
@@ -121,3 +116,4 @@ export class ModifierSetAbridged extends IDdRadianceBaseModel {
         return true;
     }
 }
+

@@ -55,11 +55,6 @@ export class EnergyWindowMaterialSimpleGlazSys extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["u_factor"] = this.u_factor;
         data["shgc"] = this.shgc;
         data["type"] = this.type;
@@ -77,3 +72,4 @@ export class EnergyWindowMaterialSimpleGlazSys extends IDdEnergyBaseModel {
         return true;
     }
 }
+
