@@ -36,7 +36,7 @@ export class EnergyWindowMaterialSimpleGlazSys extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyWindowMaterialSimpleGlazSys, _data);
+            const obj = plainToClass(EnergyWindowMaterialSimpleGlazSys, _data, { enableImplicitConversion: true });
             this.u_factor = obj.u_factor;
             this.shgc = obj.shgc;
             this.type = obj.type;

@@ -19,7 +19,7 @@ export class FaceRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(FaceRadiancePropertiesAbridged, _data);
+            const obj = plainToClass(FaceRadiancePropertiesAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
         }
     }

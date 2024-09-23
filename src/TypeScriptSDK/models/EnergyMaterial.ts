@@ -71,7 +71,7 @@ export class EnergyMaterial extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyMaterial, _data);
+            const obj = plainToClass(EnergyMaterial, _data, { enableImplicitConversion: true });
             this.thickness = obj.thickness;
             this.conductivity = obj.conductivity;
             this.density = obj.density;

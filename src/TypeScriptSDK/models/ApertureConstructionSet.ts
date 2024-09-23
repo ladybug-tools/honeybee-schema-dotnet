@@ -38,7 +38,7 @@ export class ApertureConstructionSet extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ApertureConstructionSet, _data);
+            const obj = plainToClass(ApertureConstructionSet, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.interior_construction = obj.interior_construction;
             this.window_construction = obj.window_construction;

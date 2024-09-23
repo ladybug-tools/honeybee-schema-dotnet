@@ -37,7 +37,7 @@ export class StateGeometryAbridged extends IDdRadianceBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(StateGeometryAbridged, _data);
+            const obj = plainToClass(StateGeometryAbridged, _data, { enableImplicitConversion: true });
             this.geometry = obj.geometry;
             this.type = obj.type;
             this.modifier = obj.modifier;

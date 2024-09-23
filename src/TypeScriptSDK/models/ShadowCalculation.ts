@@ -56,7 +56,7 @@ export class ShadowCalculation extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ShadowCalculation, _data);
+            const obj = plainToClass(ShadowCalculation, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.solar_distribution = obj.solar_distribution;
             this.calculation_method = obj.calculation_method;

@@ -41,7 +41,7 @@ export class ShadeConstruction extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ShadeConstruction, _data);
+            const obj = plainToClass(ShadeConstruction, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.solar_reflectance = obj.solar_reflectance;
             this.visible_reflectance = obj.visible_reflectance;

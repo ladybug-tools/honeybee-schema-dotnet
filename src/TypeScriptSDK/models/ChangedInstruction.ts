@@ -56,7 +56,7 @@ export class ChangedInstruction extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ChangedInstruction, _data);
+            const obj = plainToClass(ChangedInstruction, _data, { enableImplicitConversion: true });
             this.element_type = obj.element_type;
             this.element_id = obj.element_id;
             this.element_name = obj.element_name;

@@ -34,7 +34,7 @@ export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(RadianceSubFaceStateAbridged, _data);
+            const obj = plainToClass(RadianceSubFaceStateAbridged, _data, { enableImplicitConversion: true });
             this.vmtx_geometry = obj.vmtx_geometry;
             this.dmtx_geometry = obj.dmtx_geometry;
             this.type = obj.type;

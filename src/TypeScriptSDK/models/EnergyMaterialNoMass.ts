@@ -55,7 +55,7 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyMaterialNoMass, _data);
+            const obj = plainToClass(EnergyMaterialNoMass, _data, { enableImplicitConversion: true });
             this.r_value = obj.r_value;
             this.type = obj.type;
             this.roughness = obj.roughness;

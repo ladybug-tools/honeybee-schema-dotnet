@@ -65,7 +65,7 @@ export class PSZ extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(PSZ, _data);
+            const obj = plainToClass(PSZ, _data, { enableImplicitConversion: true });
             this.vintage = obj.vintage;
             this.economizer_type = obj.economizer_type;
             this.sensible_heat_recovery = obj.sensible_heat_recovery;

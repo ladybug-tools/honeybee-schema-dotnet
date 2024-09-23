@@ -41,7 +41,7 @@ export class _FaceSubSet extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(_FaceSubSet, _data);
+            const obj = plainToClass(_FaceSubSet, _data, { enableImplicitConversion: true });
             this.interior_construction = obj.interior_construction;
             this.exterior_construction = obj.exterior_construction;
             this.ground_construction = obj.ground_construction;

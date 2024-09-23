@@ -34,7 +34,7 @@ export class WindowConstructionDynamic extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(WindowConstructionDynamic, _data);
+            const obj = plainToClass(WindowConstructionDynamic, _data, { enableImplicitConversion: true });
             this.constructions = obj.constructions;
             this.schedule = obj.schedule;
             this.type = obj.type;

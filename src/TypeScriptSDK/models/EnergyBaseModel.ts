@@ -32,7 +32,7 @@ export class EnergyBaseModel extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyBaseModel, _data);
+            const obj = plainToClass(EnergyBaseModel, _data, { enableImplicitConversion: true });
             this.identifier = obj.identifier;
             this.display_name = obj.display_name;
             this.type = obj.type;

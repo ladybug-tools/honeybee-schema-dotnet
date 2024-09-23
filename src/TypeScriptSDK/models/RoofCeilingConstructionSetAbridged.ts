@@ -19,7 +19,7 @@ export class RoofCeilingConstructionSetAbridged extends _FaceSubSetAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(RoofCeilingConstructionSetAbridged, _data);
+            const obj = plainToClass(RoofCeilingConstructionSetAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
         }
     }

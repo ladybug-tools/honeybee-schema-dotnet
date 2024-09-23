@@ -81,7 +81,7 @@ export class View extends _RadianceAsset {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(View, _data);
+            const obj = plainToClass(View, _data, { enableImplicitConversion: true });
             this.position = obj.position;
             this.direction = obj.direction;
             this.up_vector = obj.up_vector;

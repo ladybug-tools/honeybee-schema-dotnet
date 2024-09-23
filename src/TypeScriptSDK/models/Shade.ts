@@ -41,7 +41,7 @@ export class Shade extends IDdBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Shade, _data);
+            const obj = plainToClass(Shade, _data, { enableImplicitConversion: true });
             this.geometry = obj.geometry;
             this.properties = obj.properties;
             this.type = obj.type;

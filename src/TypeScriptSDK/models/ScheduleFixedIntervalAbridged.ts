@@ -57,7 +57,7 @@ export class ScheduleFixedIntervalAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ScheduleFixedIntervalAbridged, _data);
+            const obj = plainToClass(ScheduleFixedIntervalAbridged, _data, { enableImplicitConversion: true });
             this.values = obj.values;
             this.type = obj.type;
             this.schedule_type_limit = obj.schedule_type_limit;

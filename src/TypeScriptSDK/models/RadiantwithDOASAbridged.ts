@@ -84,7 +84,7 @@ export class RadiantwithDOASAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(RadiantwithDOASAbridged, _data);
+            const obj = plainToClass(RadiantwithDOASAbridged, _data, { enableImplicitConversion: true });
             this.vintage = obj.vintage;
             this.sensible_heat_recovery = obj.sensible_heat_recovery;
             this.latent_heat_recovery = obj.latent_heat_recovery;

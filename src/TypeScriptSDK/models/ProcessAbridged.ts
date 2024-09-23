@@ -71,7 +71,7 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ProcessAbridged, _data);
+            const obj = plainToClass(ProcessAbridged, _data, { enableImplicitConversion: true });
             this.watts = obj.watts;
             this.schedule = obj.schedule;
             this.fuel_type = obj.fuel_type;

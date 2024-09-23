@@ -32,7 +32,7 @@ export class OtherSideTemperature extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(OtherSideTemperature, _data);
+            const obj = plainToClass(OtherSideTemperature, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.heat_transfer_coefficient = obj.heat_transfer_coefficient;
             this.temperature = obj.temperature;

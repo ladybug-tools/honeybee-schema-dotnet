@@ -66,7 +66,7 @@ export class VentilationControlAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(VentilationControlAbridged, _data);
+            const obj = plainToClass(VentilationControlAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.min_indoor_temperature = obj.min_indoor_temperature;
             this.max_indoor_temperature = obj.max_indoor_temperature;

@@ -61,7 +61,7 @@ export class DesignDay extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DesignDay, _data);
+            const obj = plainToClass(DesignDay, _data, { enableImplicitConversion: true });
             this.name = obj.name;
             this.day_type = obj.day_type;
             this.dry_bulb_condition = obj.dry_bulb_condition;

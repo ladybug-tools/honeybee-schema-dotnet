@@ -29,7 +29,7 @@ export class BaseModifierSetAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(BaseModifierSetAbridged, _data);
+            const obj = plainToClass(BaseModifierSetAbridged, _data, { enableImplicitConversion: true });
             this.exterior_modifier = obj.exterior_modifier;
             this.interior_modifier = obj.interior_modifier;
             this.type = obj.type;

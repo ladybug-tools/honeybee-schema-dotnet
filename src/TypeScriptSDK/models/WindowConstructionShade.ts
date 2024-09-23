@@ -61,7 +61,7 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(WindowConstructionShade, _data);
+            const obj = plainToClass(WindowConstructionShade, _data, { enableImplicitConversion: true });
             this.window_construction = obj.window_construction;
             this.shade_material = obj.shade_material;
             this.type = obj.type;

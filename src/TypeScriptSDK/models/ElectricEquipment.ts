@@ -55,7 +55,7 @@ export class ElectricEquipment extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ElectricEquipment, _data);
+            const obj = plainToClass(ElectricEquipment, _data, { enableImplicitConversion: true });
             this.watts_per_area = obj.watts_per_area;
             this.schedule = obj.schedule;
             this.radiant_fraction = obj.radiant_fraction;

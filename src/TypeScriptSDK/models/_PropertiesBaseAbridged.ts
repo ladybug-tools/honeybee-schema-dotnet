@@ -29,7 +29,7 @@ export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(_PropertiesBaseAbridged, _data);
+            const obj = plainToClass(_PropertiesBaseAbridged, _data, { enableImplicitConversion: true });
             this.modifier = obj.modifier;
             this.modifier_blk = obj.modifier_blk;
             this.type = obj.type;

@@ -233,7 +233,7 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(GlobalModifierSet, _data);
+            const obj = plainToClass(GlobalModifierSet, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.modifiers = obj.modifiers;
             this.wall_set = obj.wall_set;

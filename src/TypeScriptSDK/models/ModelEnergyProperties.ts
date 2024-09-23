@@ -571,7 +571,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ModelEnergyProperties, _data);
+            const obj = plainToClass(ModelEnergyProperties, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.global_construction_set = obj.global_construction_set;
             this.construction_sets = obj.construction_sets;

@@ -83,7 +83,7 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(SimulationParameter, _data);
+            const obj = plainToClass(SimulationParameter, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.output = obj.output;
             this.run_period = obj.run_period;

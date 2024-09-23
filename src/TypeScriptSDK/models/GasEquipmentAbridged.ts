@@ -19,7 +19,7 @@ export class GasEquipmentAbridged extends _EquipmentBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(GasEquipmentAbridged, _data);
+            const obj = plainToClass(GasEquipmentAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
         }
     }

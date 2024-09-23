@@ -19,7 +19,7 @@ export class WallConstructionSetAbridged extends _FaceSubSetAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(WallConstructionSetAbridged, _data);
+            const obj = plainToClass(WallConstructionSetAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
         }
     }

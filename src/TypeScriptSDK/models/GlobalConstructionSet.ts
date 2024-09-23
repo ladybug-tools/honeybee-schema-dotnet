@@ -486,7 +486,7 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(GlobalConstructionSet, _data);
+            const obj = plainToClass(GlobalConstructionSet, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.materials = obj.materials;
             this.constructions = obj.constructions;

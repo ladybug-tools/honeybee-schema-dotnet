@@ -40,7 +40,7 @@ export class Face3D extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Face3D, _data);
+            const obj = plainToClass(Face3D, _data, { enableImplicitConversion: true });
             this.boundary = obj.boundary;
             this.type = obj.type;
             this.holes = obj.holes;

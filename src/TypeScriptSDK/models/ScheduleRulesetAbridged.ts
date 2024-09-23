@@ -72,7 +72,7 @@ export class ScheduleRulesetAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ScheduleRulesetAbridged, _data);
+            const obj = plainToClass(ScheduleRulesetAbridged, _data, { enableImplicitConversion: true });
             this.day_schedules = obj.day_schedules;
             this.default_day_schedule = obj.default_day_schedule;
             this.type = obj.type;

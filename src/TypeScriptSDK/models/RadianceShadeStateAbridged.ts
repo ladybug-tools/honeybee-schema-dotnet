@@ -38,7 +38,7 @@ export class RadianceShadeStateAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(RadianceShadeStateAbridged, _data);
+            const obj = plainToClass(RadianceShadeStateAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.modifier = obj.modifier;
             this.modifier_direct = obj.modifier_direct;

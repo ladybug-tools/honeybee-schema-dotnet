@@ -46,7 +46,7 @@ export class SimulationOutput extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(SimulationOutput, _data);
+            const obj = plainToClass(SimulationOutput, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.reporting_frequency = obj.reporting_frequency;
             this.outputs = obj.outputs;

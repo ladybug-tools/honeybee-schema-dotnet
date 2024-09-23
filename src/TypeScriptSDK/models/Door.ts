@@ -63,7 +63,7 @@ export class Door extends IDdBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Door, _data);
+            const obj = plainToClass(Door, _data, { enableImplicitConversion: true });
             this.geometry = obj.geometry;
             this.boundary_condition = obj.boundary_condition;
             this.properties = obj.properties;

@@ -64,7 +64,7 @@ export class WSHPwithDOASAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(WSHPwithDOASAbridged, _data);
+            const obj = plainToClass(WSHPwithDOASAbridged, _data, { enableImplicitConversion: true });
             this.vintage = obj.vintage;
             this.sensible_heat_recovery = obj.sensible_heat_recovery;
             this.latent_heat_recovery = obj.latent_heat_recovery;

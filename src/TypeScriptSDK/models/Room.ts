@@ -71,7 +71,7 @@ export class Room extends IDdBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Room, _data);
+            const obj = plainToClass(Room, _data, { enableImplicitConversion: true });
             this.faces = obj.faces;
             this.properties = obj.properties;
             this.type = obj.type;

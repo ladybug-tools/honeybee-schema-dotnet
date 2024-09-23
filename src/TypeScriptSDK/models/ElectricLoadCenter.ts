@@ -32,7 +32,7 @@ export class ElectricLoadCenter extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ElectricLoadCenter, _data);
+            const obj = plainToClass(ElectricLoadCenter, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.inverter_efficiency = obj.inverter_efficiency;
             this.inverter_dc_to_ac_size_ratio = obj.inverter_dc_to_ac_size_ratio;

@@ -35,7 +35,7 @@ export class WSHP extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(WSHP, _data);
+            const obj = plainToClass(WSHP, _data, { enableImplicitConversion: true });
             this.vintage = obj.vintage;
             this.type = obj.type;
             this.equipment_type = obj.equipment_type;

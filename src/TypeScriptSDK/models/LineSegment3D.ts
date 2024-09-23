@@ -28,7 +28,7 @@ export class LineSegment3D {
 
     init(_data?: any) {
         if (_data) {
-            const obj = plainToClass(LineSegment3D, _data);
+            const obj = plainToClass(LineSegment3D, _data, { enableImplicitConversion: true });
             this.p = obj.p;
             this.v = obj.v;
             this.type = obj.type;

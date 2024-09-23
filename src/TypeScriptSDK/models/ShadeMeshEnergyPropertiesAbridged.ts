@@ -33,7 +33,7 @@ export class ShadeMeshEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ShadeMeshEnergyPropertiesAbridged, _data);
+            const obj = plainToClass(ShadeMeshEnergyPropertiesAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.construction = obj.construction;
             this.transmittance_schedule = obj.transmittance_schedule;

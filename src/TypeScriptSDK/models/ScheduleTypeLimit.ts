@@ -44,7 +44,7 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ScheduleTypeLimit, _data);
+            const obj = plainToClass(ScheduleTypeLimit, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.lower_limit = obj.lower_limit;
             this.upper_limit = obj.upper_limit;

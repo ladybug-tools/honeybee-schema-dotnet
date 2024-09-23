@@ -49,7 +49,7 @@ export class SimulationControl extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(SimulationControl, _data);
+            const obj = plainToClass(SimulationControl, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.do_zone_sizing = obj.do_zone_sizing;
             this.do_system_sizing = obj.do_system_sizing;

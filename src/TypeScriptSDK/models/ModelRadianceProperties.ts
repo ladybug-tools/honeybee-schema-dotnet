@@ -228,7 +228,7 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ModelRadianceProperties, _data);
+            const obj = plainToClass(ModelRadianceProperties, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.global_modifier_set = obj.global_modifier_set;
             this.modifiers = obj.modifiers;

@@ -35,7 +35,7 @@ export class ValidationParent {
 
     init(_data?: any) {
         if (_data) {
-            const obj = plainToClass(ValidationParent, _data);
+            const obj = plainToClass(ValidationParent, _data, { enableImplicitConversion: true });
             this.parent_type = obj.parent_type;
             this.id = obj.id;
             this.type = obj.type;

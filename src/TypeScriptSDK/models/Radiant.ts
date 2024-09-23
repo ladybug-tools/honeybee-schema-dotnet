@@ -55,7 +55,7 @@ export class Radiant extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Radiant, _data);
+            const obj = plainToClass(Radiant, _data, { enableImplicitConversion: true });
             this.vintage = obj.vintage;
             this.type = obj.type;
             this.equipment_type = obj.equipment_type;

@@ -65,7 +65,7 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ChangedObject, _data);
+            const obj = plainToClass(ChangedObject, _data, { enableImplicitConversion: true });
             this.element_type = obj.element_type;
             this.element_id = obj.element_id;
             this.geometry_changed = obj.geometry_changed;
