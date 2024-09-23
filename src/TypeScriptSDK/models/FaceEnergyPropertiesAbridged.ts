@@ -52,11 +52,6 @@ export class FaceEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["type"] = this.type;
         data["construction"] = this.construction;
         data["vent_crack"] = this.vent_crack;
@@ -73,3 +68,4 @@ export class FaceEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

@@ -95,11 +95,6 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["type"] = this.type;
         data["vent_control_type"] = this.vent_control_type;
         data["reference_temperature"] = this.reference_temperature;
@@ -121,3 +116,4 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

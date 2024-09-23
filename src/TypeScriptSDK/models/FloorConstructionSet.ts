@@ -60,11 +60,6 @@ export class FloorConstructionSet extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["interior_construction"] = this.interior_construction;
         data["exterior_construction"] = this.exterior_construction;
         data["ground_construction"] = this.ground_construction;
@@ -82,3 +77,4 @@ export class FloorConstructionSet extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

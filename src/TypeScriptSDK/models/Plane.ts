@@ -56,11 +56,6 @@ export class Plane extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["n"] = this.n;
         data["o"] = this.o;
         data["type"] = this.type;
@@ -78,3 +73,4 @@ export class Plane extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

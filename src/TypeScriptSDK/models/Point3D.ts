@@ -50,17 +50,25 @@ export class Point3D {
 
 	toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["x"] = this.x;
         data["y"] = this.y;
         data["z"] = this.z;
         data["type"] = this.type;
-        return Object.fromEntries(
-            Object.entries(data).filter(([_, v]) => v !== undefined));
+        return removeUndefinedProperties(data);
     }
 
+}
+
+function removeUndefinedProperties(obj: any): any {
+    if (Array.isArray(obj)) {
+        return obj.map(removeUndefinedProperties);
+    } else if (obj !== null && typeof obj === 'object') {
+        return Object.entries(obj)
+        .filter(([_, value]) => value !== undefined)
+        .reduce((acc, [key, value]) => {
+            acc[key] = removeUndefinedProperties(value);
+            return acc;
+        }, {} as any);
+    }
+    return obj;
 }

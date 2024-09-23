@@ -51,11 +51,6 @@ export class ASHRAETau extends _SkyCondition {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["tau_b"] = this.tau_b;
         data["tau_d"] = this.tau_d;
         data["type"] = this.type;
@@ -72,3 +67,4 @@ export class ASHRAETau extends _SkyCondition {
         return true;
     }
 }
+

@@ -75,11 +75,6 @@ export class SetpointAbridged extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["cooling_schedule"] = this.cooling_schedule;
         data["heating_schedule"] = this.heating_schedule;
         data["type"] = this.type;
@@ -99,3 +94,4 @@ export class SetpointAbridged extends IDdEnergyBaseModel {
         return true;
     }
 }
+

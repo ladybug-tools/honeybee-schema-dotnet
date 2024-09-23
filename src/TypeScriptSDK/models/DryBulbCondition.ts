@@ -50,11 +50,6 @@ export class DryBulbCondition extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["dry_bulb_max"] = this.dry_bulb_max;
         data["dry_bulb_range"] = this.dry_bulb_range;
         data["type"] = this.type;
@@ -71,3 +66,4 @@ export class DryBulbCondition extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

@@ -89,11 +89,6 @@ export class Glow extends ModifierBase {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["modifier"] = this.modifier;
         data["dependencies"] = this.dependencies;
         data["r_emittance"] = this.r_emittance;
@@ -114,3 +109,4 @@ export class Glow extends ModifierBase {
         return true;
     }
 }
+

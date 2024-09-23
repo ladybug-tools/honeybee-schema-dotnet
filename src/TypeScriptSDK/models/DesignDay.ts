@@ -83,11 +83,6 @@ export class DesignDay extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["name"] = this.name;
         data["day_type"] = this.day_type;
         data["dry_bulb_condition"] = this.dry_bulb_condition;
@@ -108,3 +103,4 @@ export class DesignDay extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

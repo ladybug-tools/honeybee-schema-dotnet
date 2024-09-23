@@ -108,11 +108,6 @@ export class View extends _RadianceAsset {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["position"] = this.position;
         data["direction"] = this.direction;
         data["up_vector"] = this.up_vector;
@@ -138,3 +133,4 @@ export class View extends _RadianceAsset {
         return true;
     }
 }
+

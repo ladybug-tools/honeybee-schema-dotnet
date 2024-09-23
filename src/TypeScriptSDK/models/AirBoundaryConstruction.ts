@@ -50,11 +50,6 @@ export class AirBoundaryConstruction extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["type"] = this.type;
         data["air_mixing_per_area"] = this.air_mixing_per_area;
         data["air_mixing_schedule"] = this.air_mixing_schedule;
@@ -71,3 +66,4 @@ export class AirBoundaryConstruction extends IDdEnergyBaseModel {
         return true;
     }
 }
+

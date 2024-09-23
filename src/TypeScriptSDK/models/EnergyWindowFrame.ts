@@ -100,11 +100,6 @@ export class EnergyWindowFrame extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["width"] = this.width;
         data["conductance"] = this.conductance;
         data["type"] = this.type;
@@ -127,3 +122,4 @@ export class EnergyWindowFrame extends IDdEnergyBaseModel {
         return true;
     }
 }
+

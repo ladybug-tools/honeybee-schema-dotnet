@@ -52,11 +52,6 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["room_identifier"] = this.room_identifier;
         data["light_path"] = this.light_path;
         data["type"] = this.type;
@@ -73,3 +68,4 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
         return true;
     }
 }
+

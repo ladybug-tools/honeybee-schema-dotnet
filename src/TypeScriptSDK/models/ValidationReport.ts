@@ -75,11 +75,6 @@ export class ValidationReport {
 
 	toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["app_version"] = this.app_version;
         data["schema_version"] = this.schema_version;
         data["valid"] = this.valid;
@@ -87,8 +82,21 @@ export class ValidationReport {
         data["app_name"] = this.app_name;
         data["fatal_error"] = this.fatal_error;
         data["errors"] = this.errors;
-        return Object.fromEntries(
-            Object.entries(data).filter(([_, v]) => v !== undefined));
+        return removeUndefinedProperties(data);
     }
 
+}
+
+function removeUndefinedProperties(obj: any): any {
+    if (Array.isArray(obj)) {
+        return obj.map(removeUndefinedProperties);
+    } else if (obj !== null && typeof obj === 'object') {
+        return Object.entries(obj)
+        .filter(([_, value]) => value !== undefined)
+        .reduce((acc, [key, value]) => {
+            acc[key] = removeUndefinedProperties(value);
+            return acc;
+        }, {} as any);
+    }
+    return obj;
 }

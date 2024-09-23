@@ -95,11 +95,6 @@ export class EnergyMaterial extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["thickness"] = this.thickness;
         data["conductivity"] = this.conductivity;
         data["density"] = this.density;
@@ -122,3 +117,4 @@ export class EnergyMaterial extends IDdEnergyBaseModel {
         return true;
     }
 }
+

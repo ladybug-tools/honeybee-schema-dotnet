@@ -512,11 +512,6 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["type"] = this.type;
         data["materials"] = this.materials;
         data["constructions"] = this.constructions;
@@ -541,3 +536,4 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

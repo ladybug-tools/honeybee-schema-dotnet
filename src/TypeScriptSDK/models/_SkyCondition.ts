@@ -49,11 +49,6 @@ export class _SkyCondition extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["date"] = this.date;
         data["daylight_savings"] = this.daylight_savings;
         data["type"] = this.type;
@@ -70,3 +65,4 @@ export class _SkyCondition extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

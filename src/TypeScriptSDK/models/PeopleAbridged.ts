@@ -74,11 +74,6 @@ export class PeopleAbridged extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["people_per_area"] = this.people_per_area;
         data["occupancy_schedule"] = this.occupancy_schedule;
         data["type"] = this.type;
@@ -98,3 +93,4 @@ export class PeopleAbridged extends IDdEnergyBaseModel {
         return true;
     }
 }
+

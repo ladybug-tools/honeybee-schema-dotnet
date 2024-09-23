@@ -73,11 +73,6 @@ export class VentilationFan extends EnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["flow_rate"] = this.flow_rate;
         data["pressure_rise"] = this.pressure_rise;
         data["efficiency"] = this.efficiency;
@@ -97,3 +92,4 @@ export class VentilationFan extends EnergyBaseModel {
         return true;
     }
 }
+

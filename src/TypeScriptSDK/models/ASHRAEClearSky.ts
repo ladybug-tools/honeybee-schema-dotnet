@@ -43,11 +43,6 @@ export class ASHRAEClearSky extends _SkyCondition {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["clearness"] = this.clearness;
         data["type"] = this.type;
         data = super.toJSON(data);
@@ -63,3 +58,4 @@ export class ASHRAEClearSky extends _SkyCondition {
         return true;
     }
 }
+

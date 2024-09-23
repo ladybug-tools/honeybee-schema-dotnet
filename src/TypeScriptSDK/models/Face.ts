@@ -108,11 +108,6 @@ export class Face extends IDdBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["geometry"] = this.geometry;
         data["face_type"] = this.face_type;
         data["boundary_condition"] = this.boundary_condition;
@@ -135,3 +130,4 @@ export class Face extends IDdBaseModel {
         return true;
     }
 }
+

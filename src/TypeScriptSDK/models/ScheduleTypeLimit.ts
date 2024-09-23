@@ -64,11 +64,6 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["type"] = this.type;
         data["lower_limit"] = this.lower_limit;
         data["upper_limit"] = this.upper_limit;
@@ -87,3 +82,4 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
         return true;
     }
 }
+

@@ -1,5 +1,5 @@
 import { plainToClass } from "class-transformer";
-import { Model, Face3D, Glass, Plane } from "../models";
+import { Model, Face3D, Glass, Plane, Face } from "../models";
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -76,33 +76,29 @@ test('test toJson', () => {
 
   let json = obj.toJSON();
   let hasPlane = json.hasOwnProperty('plane');
-  console.log(json)
   expect(hasPlane).toBe(false);
+  // expect(json)('plane');
+  expect(json).not.toEqual(expect.objectContaining({ plane: expect.anything() }));
 
   obj = new Face3D();
   console.log(typeof obj);
 
   obj.plane = new Plane();
-  let p = obj.plane;
-  let isPlaneType = p instanceof Plane;
-  console.log(isPlaneType);
-  expect(isPlaneType).toBe(true);
+  expect(obj.plane).toBeInstanceOf(Plane);
 
 
   json = obj.toJSON();
-  hasPlane = json.hasOwnProperty('plane');
-  expect(hasPlane).toBe(true);
-  console.log(json);
-
-  // const json2 = JSON.stringify(json);
-  // json = JSON.parse(json2);
-
-  p = json.plane;
-  isPlaneType = p instanceof Plane;
-  console.log(isPlaneType);
-  expect(isPlaneType).toBe(false);
-
-
+  expect(json).toHaveProperty('plane');
+  expect(json.plane).toBeInstanceOf(Plane);
 
 });
 
+test('test toJson2', () => {
+  let obj = new Face();
+  expect(obj).toHaveProperty('apertures');
+  expect(obj.apertures).toBeUndefined();
+
+  let jsonObj = obj.toJSON();
+  const hasProp = jsonObj.hasOwnProperty('apertures');
+  expect(hasProp).toBe(false);
+});

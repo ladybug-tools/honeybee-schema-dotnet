@@ -78,11 +78,6 @@ export class _AllAirBase extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["vintage"] = this.vintage;
         data["economizer_type"] = this.economizer_type;
         data["sensible_heat_recovery"] = this.sensible_heat_recovery;
@@ -102,3 +97,4 @@ export class _AllAirBase extends IDdEnergyBaseModel {
         return true;
     }
 }
+

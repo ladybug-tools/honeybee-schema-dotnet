@@ -51,11 +51,6 @@ export class ApertureRadiancePropertiesAbridged extends _PropertiesBaseAbridged 
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["type"] = this.type;
         data["dynamic_group_identifier"] = this.dynamic_group_identifier;
         data["states"] = this.states;
@@ -72,3 +67,4 @@ export class ApertureRadiancePropertiesAbridged extends _PropertiesBaseAbridged 
         return true;
     }
 }
+

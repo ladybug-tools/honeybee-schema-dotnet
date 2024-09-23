@@ -68,11 +68,6 @@ export class Color extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["r"] = this.r;
         data["g"] = this.g;
         data["b"] = this.b;
@@ -91,3 +86,4 @@ export class Color extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+

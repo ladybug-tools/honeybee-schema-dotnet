@@ -60,11 +60,6 @@ export class ShadeConstruction extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["type"] = this.type;
         data["solar_reflectance"] = this.solar_reflectance;
         data["visible_reflectance"] = this.visible_reflectance;
@@ -82,3 +77,4 @@ export class ShadeConstruction extends IDdEnergyBaseModel {
         return true;
     }
 }
+

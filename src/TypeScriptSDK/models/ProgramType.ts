@@ -107,11 +107,6 @@ export class ProgramType extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["type"] = this.type;
         data["people"] = this.people;
         data["lighting"] = this.lighting;
@@ -134,3 +129,4 @@ export class ProgramType extends IDdEnergyBaseModel {
         return true;
     }
 }
+

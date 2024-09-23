@@ -42,11 +42,6 @@ export class Surface extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-
         data["boundary_condition_objects"] = this.boundary_condition_objects;
         data["type"] = this.type;
         data = super.toJSON(data);
@@ -62,3 +57,4 @@ export class Surface extends _OpenAPIGenBaseModel {
         return true;
     }
 }
+
