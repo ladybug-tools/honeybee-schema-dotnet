@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsDefined, IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { EnergyWindowFrame } from "./EnergyWindowFrame";
 import { EnergyWindowMaterialGas } from "./EnergyWindowMaterialGas";
 import { EnergyWindowMaterialGasCustom } from "./EnergyWindowMaterialGasCustom";
@@ -12,6 +12,14 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 export class WindowConstruction extends IDdEnergyBaseModel {
     @IsArray()
     @IsDefined()
+    @Transform(({ value }) => value.map((item: any) => {
+      if (item.type === 'EnergyWindowMaterialSimpleGlazSys') return EnergyWindowMaterialSimpleGlazSys.fromJS(item);
+      else if (item.type === 'EnergyWindowMaterialGlazing') return EnergyWindowMaterialGlazing.fromJS(item);
+      else if (item.type === 'EnergyWindowMaterialGas') return EnergyWindowMaterialGas.fromJS(item);
+      else if (item.type === 'EnergyWindowMaterialGasCustom') return EnergyWindowMaterialGasCustom.fromJS(item);
+      else if (item.type === 'EnergyWindowMaterialGasMixture') return EnergyWindowMaterialGasMixture.fromJS(item);
+      else return item;
+    }))
     /** List of glazing and gas material definitions. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer. */
     materials!: (EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas | EnergyWindowMaterialGasCustom | EnergyWindowMaterialGasMixture) [];
 	
@@ -48,6 +56,13 @@ export class WindowConstruction extends IDdEnergyBaseModel {
     static override fromJS(data: any): WindowConstruction {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new WindowConstruction();
         result.init(data);
         return result;

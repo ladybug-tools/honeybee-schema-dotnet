@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { _FaceSubSetAbridged } from "./_FaceSubSetAbridged";
 
 /** A set of constructions for roof and ceiling assemblies. */
@@ -28,6 +28,13 @@ export class RoofCeilingConstructionSetAbridged extends _FaceSubSetAbridged {
     static override fromJS(data: any): RoofCeilingConstructionSetAbridged {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new RoofCeilingConstructionSetAbridged();
         result.init(data);
         return result;

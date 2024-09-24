@@ -1,5 +1,5 @@
 ﻿import { IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
@@ -14,10 +14,36 @@ import { Void } from "./Void";
 /** Set containing radiance modifiers needed for a model's Floors. */
 export class FloorModifierSet extends _OpenAPIGenBaseModel {
     @IsOptional()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item.type === 'Glass') return Glass.fromJS(item);
+      else if (item.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item.type === 'Glow') return Glow.fromJS(item);
+      else if (item.type === 'Light') return Light.fromJS(item);
+      else if (item.type === 'Trans') return Trans.fromJS(item);
+      else if (item.type === 'Metal') return Metal.fromJS(item);
+      else if (item.type === 'Void') return Void.fromJS(item);
+      else if (item.type === 'Mirror') return Mirror.fromJS(item);
+      else return item;
+    })
     /** A radiance modifier object for faces with an Outdoors boundary condition. */
     exterior_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsOptional()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item.type === 'Glass') return Glass.fromJS(item);
+      else if (item.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item.type === 'Glow') return Glow.fromJS(item);
+      else if (item.type === 'Light') return Light.fromJS(item);
+      else if (item.type === 'Trans') return Trans.fromJS(item);
+      else if (item.type === 'Metal') return Metal.fromJS(item);
+      else if (item.type === 'Void') return Void.fromJS(item);
+      else if (item.type === 'Mirror') return Mirror.fromJS(item);
+      else return item;
+    })
     /** A radiance modifier object for faces with a boundary condition other than Outdoors. */
     interior_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
@@ -47,6 +73,13 @@ export class FloorModifierSet extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): FloorModifierSet {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new FloorModifierSet();
         result.init(data);
         return result;

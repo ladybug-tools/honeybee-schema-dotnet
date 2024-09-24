@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, MinLength, MaxLength, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { WindowConstructionAbridged } from "./WindowConstructionAbridged";
 
@@ -46,6 +46,13 @@ export class WindowConstructionDynamicAbridged extends IDdEnergyBaseModel {
     static override fromJS(data: any): WindowConstructionDynamicAbridged {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new WindowConstructionDynamicAbridged();
         result.init(data);
         return result;

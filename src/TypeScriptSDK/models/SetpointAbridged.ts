@@ -1,5 +1,5 @@
 ﻿import { IsString, IsDefined, MinLength, MaxLength, IsOptional, Matches, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Used to specify information about the setpoint schedule. */
@@ -68,6 +68,13 @@ export class SetpointAbridged extends IDdEnergyBaseModel {
     static override fromJS(data: any): SetpointAbridged {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new SetpointAbridged();
         result.init(data);
         return result;

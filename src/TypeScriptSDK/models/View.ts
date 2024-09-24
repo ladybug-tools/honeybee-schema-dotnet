@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { _RadianceAsset } from "./_RadianceAsset";
 import { ViewType } from "./ViewType";
 
@@ -101,6 +101,13 @@ export class View extends _RadianceAsset {
     static override fromJS(data: any): View {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new View();
         result.init(data);
         return result;

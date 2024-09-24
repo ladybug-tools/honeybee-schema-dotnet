@@ -1,5 +1,5 @@
 ﻿import { IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
@@ -33,6 +33,13 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
     static override fromJS(data: any): IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new IDdEnergyBaseModel();
         result.init(data);
         return result;

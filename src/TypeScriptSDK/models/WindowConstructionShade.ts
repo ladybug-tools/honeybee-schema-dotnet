@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { ControlType } from "./ControlType";
 import { EnergyWindowMaterialBlind } from "./EnergyWindowMaterialBlind";
 import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
@@ -20,6 +20,13 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
     window_construction!: WindowConstruction;
 	
     @IsDefined()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'EnergyWindowMaterialShade') return EnergyWindowMaterialShade.fromJS(item);
+      else if (item.type === 'EnergyWindowMaterialBlind') return EnergyWindowMaterialBlind.fromJS(item);
+      else if (item.type === 'EnergyWindowMaterialGlazing') return EnergyWindowMaterialGlazing.fromJS(item);
+      else return item;
+    })
     /** Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly. */
     shade_material!: (EnergyWindowMaterialShade | EnergyWindowMaterialBlind | EnergyWindowMaterialGlazing);
 	
@@ -46,6 +53,12 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
     setpoint?: number;
 	
     @IsOptional()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
+      else if (item.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
+      else return item;
+    })
     /** An optional ScheduleRuleset or ScheduleFixedInterval to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction. */
     schedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
@@ -76,6 +89,13 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
     static override fromJS(data: any): WindowConstructionShade {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new WindowConstructionShade();
         result.init(data);
         return result;

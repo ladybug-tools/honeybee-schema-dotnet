@@ -1,5 +1,5 @@
 ﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ResidentialEquipmentType } from "./ResidentialEquipmentType";
 import { Vintages } from "./Vintages";
@@ -46,6 +46,13 @@ export class Residential extends IDdEnergyBaseModel {
     static override fromJS(data: any): Residential {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new Residential();
         result.init(data);
         return result;

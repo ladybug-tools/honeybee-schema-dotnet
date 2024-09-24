@@ -1,5 +1,5 @@
 ﻿import { IsEnum, IsOptional, IsString, Matches, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { RadiantEquipmentType } from "./RadiantEquipmentType";
 import { RadiantFaceTypes } from "./RadiantFaceTypes";
@@ -69,6 +69,13 @@ export class Radiant extends IDdEnergyBaseModel {
     static override fromJS(data: any): Radiant {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new Radiant();
         result.init(data);
         return result;

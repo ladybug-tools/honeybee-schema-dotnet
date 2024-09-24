@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { IsNestedStringArray } from "./../helpers/class-validator";
 import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 
@@ -45,6 +45,13 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
     static override fromJS(data: any): _RadianceAsset {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new _RadianceAsset();
         result.init(data);
         return result;

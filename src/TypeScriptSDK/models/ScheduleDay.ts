@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { IsNestedIntegerArray } from "./../helpers/class-validator";
 import { EnergyBaseModel } from "./EnergyBaseModel";
 
@@ -51,6 +51,13 @@ export class ScheduleDay extends EnergyBaseModel {
     static override fromJS(data: any): ScheduleDay {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new ScheduleDay();
         result.init(data);
         return result;

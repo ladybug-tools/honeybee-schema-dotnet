@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { AirBoundaryConstruction } from "./AirBoundaryConstruction";
 import { ApertureConstructionSet } from "./ApertureConstructionSet";
 import { DoorConstructionSet } from "./DoorConstructionSet";
@@ -60,6 +60,12 @@ export class ConstructionSet extends IDdEnergyBaseModel {
     shade_construction?: ShadeConstruction;
 	
     @IsOptional()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'AirBoundaryConstruction') return AirBoundaryConstruction.fromJS(item);
+      else if (item.type === 'OpaqueConstruction') return OpaqueConstruction.fromJS(item);
+      else return item;
+    })
     /** An AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type. */
     air_boundary_construction?: (AirBoundaryConstruction | OpaqueConstruction);
 	
@@ -89,6 +95,13 @@ export class ConstructionSet extends IDdEnergyBaseModel {
     static override fromJS(data: any): ConstructionSet {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new ConstructionSet();
         result.init(data);
         return result;

@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { _PropertiesBaseAbridged } from "./_PropertiesBaseAbridged";
 import { RadianceSubFaceStateAbridged } from "./RadianceSubFaceStateAbridged";
 
@@ -44,6 +44,13 @@ export class DoorRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
     static override fromJS(data: any): DoorRadiancePropertiesAbridged {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new DoorRadiancePropertiesAbridged();
         result.init(data);
         return result;

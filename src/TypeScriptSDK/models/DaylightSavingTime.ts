@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { DatedBaseModel } from "./DatedBaseModel";
 
 /** Used to describe the daylight savings time for the simulation. */
@@ -44,6 +44,13 @@ export class DaylightSavingTime extends DatedBaseModel {
     static override fromJS(data: any): DaylightSavingTime {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new DaylightSavingTime();
         result.init(data);
         return result;

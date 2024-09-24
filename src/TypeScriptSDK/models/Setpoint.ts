@@ -1,5 +1,5 @@
 ﻿import { IsDefined, IsString, IsOptional, Matches, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { ScheduleRuleset } from "./ScheduleRuleset";
@@ -7,10 +7,22 @@ import { ScheduleRuleset } from "./ScheduleRuleset";
 /** Used to specify information about the setpoint schedule. */
 export class Setpoint extends IDdEnergyBaseModel {
     @IsDefined()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
+      else if (item.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
+      else return item;
+    })
     /** Schedule for the cooling setpoint. The values in this schedule should be temperature in [C]. */
     cooling_schedule!: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @IsDefined()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
+      else if (item.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
+      else return item;
+    })
     /** Schedule for the heating setpoint. The values in this schedule should be temperature in [C]. */
     heating_schedule!: (ScheduleRuleset | ScheduleFixedInterval);
 	
@@ -20,10 +32,22 @@ export class Setpoint extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsOptional()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
+      else if (item.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
+      else return item;
+    })
     /** Schedule for the humidification setpoint. The values in this schedule should be in [%]. */
     humidifying_schedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @IsOptional()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
+      else if (item.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
+      else return item;
+    })
     /** Schedule for the dehumidification setpoint. The values in this schedule should be in [%]. */
     dehumidifying_schedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
@@ -58,6 +82,13 @@ export class Setpoint extends IDdEnergyBaseModel {
     static override fromJS(data: any): Setpoint {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new Setpoint();
         result.init(data);
         return result;

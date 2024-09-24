@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AirBoundaryConstructionAbridged } from "./AirBoundaryConstructionAbridged";
 import { ApertureConstructionSetAbridged } from "./ApertureConstructionSetAbridged";
@@ -24,11 +24,25 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
 	
     @IsArray()
     @IsOptional()
+    @Transform(({ value }) => value.map((item: any) => {
+      if (item.type === 'EnergyMaterial') return EnergyMaterial.fromJS(item);
+      else if (item.type === 'EnergyMaterialNoMass') return EnergyMaterialNoMass.fromJS(item);
+      else if (item.type === 'EnergyWindowMaterialGlazing') return EnergyWindowMaterialGlazing.fromJS(item);
+      else if (item.type === 'EnergyWindowMaterialGas') return EnergyWindowMaterialGas.fromJS(item);
+      else return item;
+    }))
     /** Global Honeybee Energy materials. */
     materials?: (EnergyMaterial | EnergyMaterialNoMass | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas) [];
 	
     @IsArray()
     @IsOptional()
+    @Transform(({ value }) => value.map((item: any) => {
+      if (item.type === 'OpaqueConstructionAbridged') return OpaqueConstructionAbridged.fromJS(item);
+      else if (item.type === 'WindowConstructionAbridged') return WindowConstructionAbridged.fromJS(item);
+      else if (item.type === 'ShadeConstruction') return ShadeConstruction.fromJS(item);
+      else if (item.type === 'AirBoundaryConstructionAbridged') return AirBoundaryConstructionAbridged.fromJS(item);
+      else return item;
+    }))
     /** Global Honeybee Energy constructions. */
     constructions?: (OpaqueConstructionAbridged | WindowConstructionAbridged | ShadeConstruction | AirBoundaryConstructionAbridged) [];
 	
@@ -505,6 +519,13 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): GlobalConstructionSet {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new GlobalConstructionSet();
         result.init(data);
         return result;

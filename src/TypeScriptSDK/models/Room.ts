@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsInt, Min, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { Face } from "./Face";
 import { IDdBaseModel } from "./IDdBaseModel";
 import { RoomPropertiesAbridged } from "./RoomPropertiesAbridged";
@@ -87,6 +87,13 @@ export class Room extends IDdBaseModel {
     static override fromJS(data: any): Room {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new Room();
         result.init(data);
         return result;

@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { Face3D } from "./Face3D";
 import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged";
 
@@ -45,6 +45,13 @@ export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
     static override fromJS(data: any): RadianceSubFaceStateAbridged {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new RadianceSubFaceStateAbridged();
         result.init(data);
         return result;

@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AirBoundaryConstruction } from "./AirBoundaryConstruction";
 import { AirBoundaryConstructionAbridged } from "./AirBoundaryConstructionAbridged";
@@ -73,21 +73,77 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
 	
     @IsArray()
     @IsOptional()
+    @Transform(({ value }) => value.map((item: any) => {
+      if (item.type === 'ConstructionSetAbridged') return ConstructionSetAbridged.fromJS(item);
+      else if (item.type === 'ConstructionSet') return ConstructionSet.fromJS(item);
+      else return item;
+    }))
     /** List of all unique ConstructionSets in the Model. */
     construction_sets?: (ConstructionSetAbridged | ConstructionSet) [];
 	
     @IsArray()
     @IsOptional()
+    @Transform(({ value }) => value.map((item: any) => {
+      if (item.type === 'OpaqueConstructionAbridged') return OpaqueConstructionAbridged.fromJS(item);
+      else if (item.type === 'WindowConstructionAbridged') return WindowConstructionAbridged.fromJS(item);
+      else if (item.type === 'WindowConstructionShadeAbridged') return WindowConstructionShadeAbridged.fromJS(item);
+      else if (item.type === 'AirBoundaryConstructionAbridged') return AirBoundaryConstructionAbridged.fromJS(item);
+      else if (item.type === 'OpaqueConstruction') return OpaqueConstruction.fromJS(item);
+      else if (item.type === 'WindowConstruction') return WindowConstruction.fromJS(item);
+      else if (item.type === 'WindowConstructionShade') return WindowConstructionShade.fromJS(item);
+      else if (item.type === 'WindowConstructionDynamicAbridged') return WindowConstructionDynamicAbridged.fromJS(item);
+      else if (item.type === 'WindowConstructionDynamic') return WindowConstructionDynamic.fromJS(item);
+      else if (item.type === 'AirBoundaryConstruction') return AirBoundaryConstruction.fromJS(item);
+      else if (item.type === 'ShadeConstruction') return ShadeConstruction.fromJS(item);
+      else return item;
+    }))
     /** A list of all unique constructions in the model. This includes constructions across all Faces, Apertures, Doors, Shades, Room ConstructionSets, and the global_construction_set. */
     constructions?: (OpaqueConstructionAbridged | WindowConstructionAbridged | WindowConstructionShadeAbridged | AirBoundaryConstructionAbridged | OpaqueConstruction | WindowConstruction | WindowConstructionShade | WindowConstructionDynamicAbridged | WindowConstructionDynamic | AirBoundaryConstruction | ShadeConstruction) [];
 	
     @IsArray()
     @IsOptional()
+    @Transform(({ value }) => value.map((item: any) => {
+      if (item.type === 'EnergyMaterial') return EnergyMaterial.fromJS(item);
+      else if (item.type === 'EnergyMaterialNoMass') return EnergyMaterialNoMass.fromJS(item);
+      else if (item.type === 'EnergyMaterialVegetation') return EnergyMaterialVegetation.fromJS(item);
+      else if (item.type === 'EnergyWindowMaterialGlazing') return EnergyWindowMaterialGlazing.fromJS(item);
+      else if (item.type === 'EnergyWindowMaterialSimpleGlazSys') return EnergyWindowMaterialSimpleGlazSys.fromJS(item);
+      else if (item.type === 'EnergyWindowMaterialGas') return EnergyWindowMaterialGas.fromJS(item);
+      else if (item.type === 'EnergyWindowMaterialGasMixture') return EnergyWindowMaterialGasMixture.fromJS(item);
+      else if (item.type === 'EnergyWindowMaterialGasCustom') return EnergyWindowMaterialGasCustom.fromJS(item);
+      else if (item.type === 'EnergyWindowFrame') return EnergyWindowFrame.fromJS(item);
+      else if (item.type === 'EnergyWindowMaterialBlind') return EnergyWindowMaterialBlind.fromJS(item);
+      else if (item.type === 'EnergyWindowMaterialShade') return EnergyWindowMaterialShade.fromJS(item);
+      else return item;
+    }))
     /** A list of all unique materials in the model. This includes materials needed to make the Model constructions. */
     materials?: (EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation | EnergyWindowMaterialGlazing | EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGas | EnergyWindowMaterialGasMixture | EnergyWindowMaterialGasCustom | EnergyWindowFrame | EnergyWindowMaterialBlind | EnergyWindowMaterialShade) [];
 	
     @IsArray()
     @IsOptional()
+    @Transform(({ value }) => value.map((item: any) => {
+      if (item.type === 'IdealAirSystemAbridged') return IdealAirSystemAbridged.fromJS(item);
+      else if (item.type === 'VAV') return VAV.fromJS(item);
+      else if (item.type === 'PVAV') return PVAV.fromJS(item);
+      else if (item.type === 'PSZ') return PSZ.fromJS(item);
+      else if (item.type === 'PTAC') return PTAC.fromJS(item);
+      else if (item.type === 'ForcedAirFurnace') return ForcedAirFurnace.fromJS(item);
+      else if (item.type === 'FCUwithDOASAbridged') return FCUwithDOASAbridged.fromJS(item);
+      else if (item.type === 'WSHPwithDOASAbridged') return WSHPwithDOASAbridged.fromJS(item);
+      else if (item.type === 'VRFwithDOASAbridged') return VRFwithDOASAbridged.fromJS(item);
+      else if (item.type === 'RadiantwithDOASAbridged') return RadiantwithDOASAbridged.fromJS(item);
+      else if (item.type === 'FCU') return FCU.fromJS(item);
+      else if (item.type === 'WSHP') return WSHP.fromJS(item);
+      else if (item.type === 'VRF') return VRF.fromJS(item);
+      else if (item.type === 'Baseboard') return Baseboard.fromJS(item);
+      else if (item.type === 'EvaporativeCooler') return EvaporativeCooler.fromJS(item);
+      else if (item.type === 'Residential') return Residential.fromJS(item);
+      else if (item.type === 'WindowAC') return WindowAC.fromJS(item);
+      else if (item.type === 'GasUnitHeater') return GasUnitHeater.fromJS(item);
+      else if (item.type === 'Radiant') return Radiant.fromJS(item);
+      else if (item.type === 'DetailedHVAC') return DetailedHVAC.fromJS(item);
+      else return item;
+    }))
     /** List of all unique HVAC systems in the Model. */
     hvacs?: (IdealAirSystemAbridged | VAV | PVAV | PSZ | PTAC | ForcedAirFurnace | FCUwithDOASAbridged | WSHPwithDOASAbridged | VRFwithDOASAbridged | RadiantwithDOASAbridged | FCU | WSHP | VRF | Baseboard | EvaporativeCooler | Residential | WindowAC | GasUnitHeater | Radiant | DetailedHVAC) [];
 	
@@ -101,11 +157,23 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
 	
     @IsArray()
     @IsOptional()
+    @Transform(({ value }) => value.map((item: any) => {
+      if (item.type === 'ProgramTypeAbridged') return ProgramTypeAbridged.fromJS(item);
+      else if (item.type === 'ProgramType') return ProgramType.fromJS(item);
+      else return item;
+    }))
     /** List of all unique ProgramTypes in the Model. */
     program_types?: (ProgramTypeAbridged | ProgramType) [];
 	
     @IsArray()
     @IsOptional()
+    @Transform(({ value }) => value.map((item: any) => {
+      if (item.type === 'ScheduleRulesetAbridged') return ScheduleRulesetAbridged.fromJS(item);
+      else if (item.type === 'ScheduleFixedIntervalAbridged') return ScheduleFixedIntervalAbridged.fromJS(item);
+      else if (item.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
+      else if (item.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
+      else return item;
+    }))
     /** A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades. */
     schedules?: (ScheduleRulesetAbridged | ScheduleFixedIntervalAbridged | ScheduleRuleset | ScheduleFixedInterval) [];
 	
@@ -591,6 +659,13 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): ModelEnergyProperties {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new ModelEnergyProperties();
         result.init(data);
         return result;

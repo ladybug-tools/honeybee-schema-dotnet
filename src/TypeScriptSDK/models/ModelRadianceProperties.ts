@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
@@ -32,11 +32,28 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
 	
     @IsArray()
     @IsOptional()
+    @Transform(({ value }) => value.map((item: any) => {
+      if (item.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item.type === 'Glass') return Glass.fromJS(item);
+      else if (item.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item.type === 'Glow') return Glow.fromJS(item);
+      else if (item.type === 'Light') return Light.fromJS(item);
+      else if (item.type === 'Trans') return Trans.fromJS(item);
+      else if (item.type === 'Metal') return Metal.fromJS(item);
+      else if (item.type === 'Void') return Void.fromJS(item);
+      else if (item.type === 'Mirror') return Mirror.fromJS(item);
+      else return item;
+    }))
     /** A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set. */
     modifiers?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) [];
 	
     @IsArray()
     @IsOptional()
+    @Transform(({ value }) => value.map((item: any) => {
+      if (item.type === 'ModifierSet') return ModifierSet.fromJS(item);
+      else if (item.type === 'ModifierSetAbridged') return ModifierSetAbridged.fromJS(item);
+      else return item;
+    }))
     /** A list of all unique Room-Assigned ModifierSets in the Model. */
     modifier_sets?: (ModifierSet | ModifierSetAbridged) [];
 	
@@ -242,6 +259,13 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): ModelRadianceProperties {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new ModelRadianceProperties();
         result.init(data);
         return result;

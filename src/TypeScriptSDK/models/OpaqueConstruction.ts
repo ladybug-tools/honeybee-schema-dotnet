@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { EnergyMaterial } from "./EnergyMaterial";
 import { EnergyMaterialNoMass } from "./EnergyMaterialNoMass";
 import { EnergyMaterialVegetation } from "./EnergyMaterialVegetation";
@@ -9,6 +9,12 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 export class OpaqueConstruction extends IDdEnergyBaseModel {
     @IsArray()
     @IsDefined()
+    @Transform(({ value }) => value.map((item: any) => {
+      if (item.type === 'EnergyMaterial') return EnergyMaterial.fromJS(item);
+      else if (item.type === 'EnergyMaterialNoMass') return EnergyMaterialNoMass.fromJS(item);
+      else if (item.type === 'EnergyMaterialVegetation') return EnergyMaterialVegetation.fromJS(item);
+      else return item;
+    }))
     /** List of opaque material definitions. The order of the materials is from exterior to interior. */
     materials!: (EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation) [];
 	
@@ -37,6 +43,13 @@ export class OpaqueConstruction extends IDdEnergyBaseModel {
     static override fromJS(data: any): OpaqueConstruction {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new OpaqueConstruction();
         result.init(data);
         return result;

@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { ApertureModifierSet } from "./ApertureModifierSet";
 import { BSDF } from "./BSDF";
 import { DoorModifierSet } from "./DoorModifierSet";
@@ -67,6 +67,19 @@ export class ModifierSet extends IDdRadianceBaseModel {
     shade_set?: ShadeModifierSet;
 	
     @IsOptional()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item.type === 'Glass') return Glass.fromJS(item);
+      else if (item.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item.type === 'Glow') return Glow.fromJS(item);
+      else if (item.type === 'Light') return Light.fromJS(item);
+      else if (item.type === 'Trans') return Trans.fromJS(item);
+      else if (item.type === 'Metal') return Metal.fromJS(item);
+      else if (item.type === 'Void') return Void.fromJS(item);
+      else if (item.type === 'Mirror') return Mirror.fromJS(item);
+      else return item;
+    })
     /** An optional Modifier to be used for all Faces with an AirBoundary face type. If None, it will be the honeybee generic air wall modifier. */
     air_boundary_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
@@ -96,6 +109,13 @@ export class ModifierSet extends IDdRadianceBaseModel {
     static override fromJS(data: any): ModifierSet {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new ModifierSet();
         result.init(data);
         return result;

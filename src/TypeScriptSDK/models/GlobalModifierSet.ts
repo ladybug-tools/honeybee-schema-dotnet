@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ApertureModifierSetAbridged } from "./ApertureModifierSetAbridged";
 import { DoorModifierSetAbridged } from "./DoorModifierSetAbridged";
@@ -20,6 +20,12 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
 	
     @IsArray()
     @IsOptional()
+    @Transform(({ value }) => value.map((item: any) => {
+      if (item.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item.type === 'Glass') return Glass.fromJS(item);
+      else if (item.type === 'Trans') return Trans.fromJS(item);
+      else return item;
+    }))
     /** Global Honeybee Radiance modifiers. */
     modifiers?: (Plastic | Glass | Trans) [];
 	
@@ -251,6 +257,13 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): GlobalModifierSet {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new GlobalModifierSet();
         result.init(data);
         return result;

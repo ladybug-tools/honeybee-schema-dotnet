@@ -1,5 +1,5 @@
 ﻿import { IsString, IsDefined, MinLength, MaxLength, IsEnum, IsInstance, ValidateNested, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ASHRAEClearSky } from "./ASHRAEClearSky";
 import { ASHRAETau } from "./ASHRAETau";
@@ -44,6 +44,12 @@ export class DesignDay extends _OpenAPIGenBaseModel {
     wind_condition!: WindCondition;
 	
     @IsDefined()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'ASHRAEClearSky') return ASHRAEClearSky.fromJS(item);
+      else if (item.type === 'ASHRAETau') return ASHRAETau.fromJS(item);
+      else return item;
+    })
     sky_condition!: (ASHRAEClearSky | ASHRAETau);
 	
     @IsString()
@@ -76,6 +82,13 @@ export class DesignDay extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): DesignDay {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new DesignDay();
         result.init(data);
         return result;

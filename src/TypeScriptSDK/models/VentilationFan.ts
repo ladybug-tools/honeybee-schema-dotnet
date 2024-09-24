@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, IsEnum, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 import { VentilationControlAbridged } from "./VentilationControlAbridged";
 import { VentilationType } from "./VentilationType";
@@ -66,6 +66,13 @@ export class VentilationFan extends EnergyBaseModel {
     static override fromJS(data: any): VentilationFan {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new VentilationFan();
         result.init(data);
         return result;
