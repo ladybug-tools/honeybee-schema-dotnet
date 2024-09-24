@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsBoolean, IsNumber, Min, Max, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { Autosize } from "./Autosize";
 import { EconomizerType } from "./EconomizerType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -106,6 +106,13 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
     static override fromJS(data: any): IdealAirSystemAbridged {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new IdealAirSystemAbridged();
         result.init(data);
         return result;

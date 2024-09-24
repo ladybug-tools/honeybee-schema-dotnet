@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsBoolean, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { DoorPropertiesAbridged } from "./DoorPropertiesAbridged";
 import { Face3D } from "./Face3D";
 import { IDdBaseModel } from "./IDdBaseModel";
@@ -17,6 +17,12 @@ export class Door extends IDdBaseModel {
     geometry!: Face3D;
 	
     @IsDefined()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'Outdoors') return Outdoors.fromJS(item);
+      else if (item.type === 'Surface') return Surface.fromJS(item);
+      else return item;
+    })
     boundary_condition!: (Outdoors | Surface);
 	
     @IsInstance(DoorPropertiesAbridged)
@@ -78,6 +84,13 @@ export class Door extends IDdBaseModel {
     static override fromJS(data: any): Door {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new Door();
         result.init(data);
         return result;

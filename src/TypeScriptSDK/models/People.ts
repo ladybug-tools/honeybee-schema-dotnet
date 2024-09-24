@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
@@ -14,6 +14,12 @@ export class People extends IDdEnergyBaseModel {
     people_per_area!: number;
 	
     @IsDefined()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
+      else if (item.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
+      else return item;
+    })
     /** A schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile. */
     occupancy_schedule!: (ScheduleRuleset | ScheduleFixedInterval);
 	
@@ -23,6 +29,12 @@ export class People extends IDdEnergyBaseModel {
     type?: string;
 	
     @IsOptional()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
+      else if (item.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
+      else return item;
+    })
     /** A schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated. */
     activity_schedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
@@ -63,6 +75,13 @@ export class People extends IDdEnergyBaseModel {
     static override fromJS(data: any): People {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new People();
         result.init(data);
         return result;

@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { WindowConstruction } from "./WindowConstruction";
 import { WindowConstructionDynamic } from "./WindowConstructionDynamic";
@@ -13,18 +13,46 @@ export class ApertureConstructionSet extends _OpenAPIGenBaseModel {
     type?: string;
 	
     @IsOptional()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'WindowConstruction') return WindowConstruction.fromJS(item);
+      else if (item.type === 'WindowConstructionShade') return WindowConstructionShade.fromJS(item);
+      else if (item.type === 'WindowConstructionDynamic') return WindowConstructionDynamic.fromJS(item);
+      else return item;
+    })
     /** A WindowConstruction for all apertures with a Surface boundary condition. */
     interior_construction?: (WindowConstruction | WindowConstructionShade | WindowConstructionDynamic);
 	
     @IsOptional()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'WindowConstruction') return WindowConstruction.fromJS(item);
+      else if (item.type === 'WindowConstructionShade') return WindowConstructionShade.fromJS(item);
+      else if (item.type === 'WindowConstructionDynamic') return WindowConstructionDynamic.fromJS(item);
+      else return item;
+    })
     /** A WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face. */
     window_construction?: (WindowConstruction | WindowConstructionShade | WindowConstructionDynamic);
 	
     @IsOptional()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'WindowConstruction') return WindowConstruction.fromJS(item);
+      else if (item.type === 'WindowConstructionShade') return WindowConstructionShade.fromJS(item);
+      else if (item.type === 'WindowConstructionDynamic') return WindowConstructionDynamic.fromJS(item);
+      else return item;
+    })
     /** A WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face. */
     skylight_construction?: (WindowConstruction | WindowConstructionShade | WindowConstructionDynamic);
 	
     @IsOptional()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'WindowConstruction') return WindowConstruction.fromJS(item);
+      else if (item.type === 'WindowConstructionShade') return WindowConstructionShade.fromJS(item);
+      else if (item.type === 'WindowConstructionDynamic') return WindowConstructionDynamic.fromJS(item);
+      else return item;
+    })
     /** A WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property. */
     operable_construction?: (WindowConstruction | WindowConstructionShade | WindowConstructionDynamic);
 	
@@ -51,6 +79,13 @@ export class ApertureConstructionSet extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): ApertureConstructionSet {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new ApertureConstructionSet();
         result.init(data);
         return result;

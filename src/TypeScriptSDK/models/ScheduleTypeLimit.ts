@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 import { NoLimit } from "./NoLimit";
 import { ScheduleNumericType } from "./ScheduleNumericType";
@@ -57,6 +57,13 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
     static override fromJS(data: any): ScheduleTypeLimit {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new ScheduleTypeLimit();
         result.init(data);
         return result;

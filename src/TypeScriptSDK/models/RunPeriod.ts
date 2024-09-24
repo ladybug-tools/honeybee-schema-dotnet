@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInt, IsEnum, IsInstance, ValidateNested, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { IsNestedIntegerArray } from "./../helpers/class-validator";
 import { DatedBaseModel } from "./DatedBaseModel";
 import { DaylightSavingTime } from "./DaylightSavingTime";
@@ -77,6 +77,13 @@ export class RunPeriod extends DatedBaseModel {
     static override fromJS(data: any): RunPeriod {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new RunPeriod();
         result.init(data);
         return result;

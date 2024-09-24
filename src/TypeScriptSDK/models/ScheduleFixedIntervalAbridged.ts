@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, MinLength, MaxLength, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Used to specify a start date and a list of values for a period of analysis. */
@@ -72,6 +72,13 @@ export class ScheduleFixedIntervalAbridged extends IDdEnergyBaseModel {
     static override fromJS(data: any): ScheduleFixedIntervalAbridged {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new ScheduleFixedIntervalAbridged();
         result.init(data);
         return result;

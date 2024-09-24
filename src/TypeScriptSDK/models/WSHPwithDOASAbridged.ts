@@ -1,5 +1,5 @@
 ﻿import { IsEnum, IsOptional, IsNumber, Min, Max, IsBoolean, IsString, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 import { WSHPwithDOASEquipmentType } from "./WSHPwithDOASEquipmentType";
@@ -79,6 +79,13 @@ export class WSHPwithDOASAbridged extends IDdEnergyBaseModel {
     static override fromJS(data: any): WSHPwithDOASAbridged {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new WSHPwithDOASAbridged();
         result.init(data);
         return result;

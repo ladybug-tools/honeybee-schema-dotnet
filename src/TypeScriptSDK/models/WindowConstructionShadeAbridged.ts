@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, MinLength, MaxLength, IsOptional, Matches, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { ControlType } from "./ControlType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ShadeLocation } from "./ShadeLocation";
@@ -77,6 +77,13 @@ export class WindowConstructionShadeAbridged extends IDdEnergyBaseModel {
     static override fromJS(data: any): WindowConstructionShadeAbridged {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new WindowConstructionShadeAbridged();
         result.init(data);
         return result;

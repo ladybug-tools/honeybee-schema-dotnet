@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { PVProperties } from "./PVProperties";
 
@@ -53,6 +53,13 @@ export class ShadeEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): ShadeEnergyPropertiesAbridged {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new ShadeEnergyPropertiesAbridged();
         result.init(data);
         return result;

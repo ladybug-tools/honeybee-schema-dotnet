@@ -1,5 +1,5 @@
 ﻿import { IsString, IsDefined, Matches, MinLength, MaxLength, IsEnum, IsArray, IsOptional, ValidateNested, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { ExtensionTypes } from "./ExtensionTypes";
 import { LineSegment3D } from "./LineSegment3D";
 import { ObjectTypes } from "./ObjectTypes";
@@ -75,6 +75,11 @@ export class ValidationError {
 	
     @IsArray()
     @IsOptional()
+    @Transform(({ value }) => value.map((item: any) => {
+      if (item.type === 'Point3D') return Point3D.fromJS(item);
+      else if (item.type === 'LineSegment3D') return LineSegment3D.fromJS(item);
+      else return item;
+    }))
     /** An optional list of geometry objects that helps illustrate where exactly issues with invalid geometry exist within the Honeybee object. Examples include the naked and non-manifold line segments for non-solid Room geometries, the points of self-intersection for cases of self-intersecting geometry and out-of-plane vertices for non-planar objects. Oftentimes, zooming directly to these helper geometries will help end users understand invalid situations in their model faster than simple zooming to the invalid Honeybee object in its totality. */
     helper_geometry?: (Point3D | LineSegment3D) [];
 	
@@ -105,6 +110,13 @@ export class ValidationError {
     static fromJS(data: any): ValidationError {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new ValidationError();
         result.init(data);
         return result;

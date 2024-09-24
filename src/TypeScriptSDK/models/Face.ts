@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsEnum, IsString, IsOptional, Matches, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { Adiabatic } from "./Adiabatic";
 import { Aperture } from "./Aperture";
 import { Door } from "./Door";
@@ -28,6 +28,15 @@ export class Face extends IDdBaseModel {
     face_type!: FaceType;
 	
     @IsDefined()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'Ground') return Ground.fromJS(item);
+      else if (item.type === 'Outdoors') return Outdoors.fromJS(item);
+      else if (item.type === 'Adiabatic') return Adiabatic.fromJS(item);
+      else if (item.type === 'Surface') return Surface.fromJS(item);
+      else if (item.type === 'OtherSideTemperature') return OtherSideTemperature.fromJS(item);
+      else return item;
+    })
     boundary_condition!: (Ground | Outdoors | Adiabatic | Surface | OtherSideTemperature);
 	
     @IsInstance(FacePropertiesAbridged)
@@ -101,6 +110,13 @@ export class Face extends IDdBaseModel {
     static override fromJS(data: any): Face {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new Face();
         result.init(data);
         return result;

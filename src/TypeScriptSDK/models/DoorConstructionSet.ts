@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { OpaqueConstruction } from "./OpaqueConstruction";
 import { WindowConstruction } from "./WindowConstruction";
@@ -35,10 +35,24 @@ export class DoorConstructionSet extends _OpenAPIGenBaseModel {
     overhead_construction?: OpaqueConstruction;
 	
     @IsOptional()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'WindowConstruction') return WindowConstruction.fromJS(item);
+      else if (item.type === 'WindowConstructionShade') return WindowConstructionShade.fromJS(item);
+      else if (item.type === 'WindowConstructionDynamic') return WindowConstructionDynamic.fromJS(item);
+      else return item;
+    })
     /** A WindowConstruction for all glass doors with an Outdoors boundary condition. */
     exterior_glass_construction?: (WindowConstruction | WindowConstructionShade | WindowConstructionDynamic);
 	
     @IsOptional()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'WindowConstruction') return WindowConstruction.fromJS(item);
+      else if (item.type === 'WindowConstructionShade') return WindowConstructionShade.fromJS(item);
+      else if (item.type === 'WindowConstructionDynamic') return WindowConstructionDynamic.fromJS(item);
+      else return item;
+    })
     /** A WindowConstruction for all glass doors with a Surface boundary condition. */
     interior_glass_construction?: (WindowConstruction | WindowConstructionShade | WindowConstructionDynamic);
 	
@@ -66,6 +80,13 @@ export class DoorConstructionSet extends _OpenAPIGenBaseModel {
     static override fromJS(data: any): DoorConstructionSet {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new DoorConstructionSet();
         result.init(data);
         return result;

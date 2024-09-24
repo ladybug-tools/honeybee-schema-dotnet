@@ -1,5 +1,5 @@
 import { plainToClass } from "class-transformer";
-import { Model, Face3D, Glass, Plane, Face } from "../models";
+import { Model, Face3D, Glass, Plane, Face, GlobalModifierSet, Plastic } from "../models";
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -102,3 +102,82 @@ test('test toJson2', () => {
   const hasProp = jsonObj.hasOwnProperty('apertures');
   expect(hasProp).toBe(false);
 });
+
+
+const GlobalModifierSetData = {
+  "shade_set": {
+      "type": "ShadeModifierSetAbridged",
+      "interior_modifier": "generic_interior_shade_0.50",
+      "exterior_modifier": "generic_exterior_shade_0.35"
+  },
+  "roof_ceiling_set": {
+      "type": "RoofCeilingModifierSetAbridged",
+      "interior_modifier": "generic_ceiling_0.80",
+      "exterior_modifier": "generic_ceiling_0.80"
+  },
+  "context_modifier": "generic_context_0.20",
+  "modifiers": [
+      {
+          "dependencies": [],
+          "modifier": null,
+          "g_reflectance": 0.5,
+          "identifier": "generic_wall_0.50",
+          "specularity": 0,
+          "b_reflectance": 0.5,
+          "r_reflectance": 0.5,
+          "type": "Plastic",
+          "roughness": 0
+      },
+      {
+          "b_transmissivity": 0.9584154328610596,
+          "r_transmissivity": 0.9584154328610596,
+          "modifier": null,
+          "identifier": "generic_interior_window_vis_0.88",
+          "refraction_index": null,
+          "type": "Glass",
+          "dependencies": [],
+          "g_transmissivity": 0.9584154328610596
+      }
+  ],
+  
+  "type": "GlobalModifierSet",
+};
+
+test('test modifiers', () => {
+  const data = GlobalModifierSetData;
+  
+  const obj = GlobalModifierSet.fromJS(data);
+  const mod = obj.modifiers?.at(0);
+  expect(mod).toBeInstanceOf(Plastic);
+  expect(mod?.identifier).toBe('generic_wall_0.50');
+}
+);
+
+
+test('test GlobalModifierSet', () => {
+  const obj = new GlobalModifierSet();
+  const mod = obj.modifiers?.at(0);
+  expect(mod).toBeInstanceOf(Plastic);
+  expect(mod?.identifier).toBe('generic_floor_0.20');
+}
+);
+
+
+test('test Plastic', () => {
+  const data = {
+    "dependencies": [],
+    "modifier": null,
+    "g_reflectance": 0.5,
+    "identifier": "generic_wall_0.50",
+    "specularity": 0,
+    "b_reflectance": 0.5,
+    "r_reflectance": 0.5,
+    "type": "Plastic",
+    "roughness": 0
+};
+
+  const obj = Plastic.fromJS(data);
+  expect(obj).toBeInstanceOf(Plastic);
+  expect(obj?.identifier).toBe('generic_wall_0.50');
+}
+);

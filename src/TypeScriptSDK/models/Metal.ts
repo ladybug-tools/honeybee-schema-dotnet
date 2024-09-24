@@ -1,5 +1,5 @@
 ﻿import { IsOptional, IsArray, IsNumber, Min, Max, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
 import { Glow } from "./Glow";
@@ -13,11 +13,36 @@ import { Void } from "./Void";
 /** Radiance metal material. */
 export class Metal extends ModifierBase {
     @IsOptional()
+    @Transform(({ value }) => {
+      const item = value;
+      if (item.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item.type === 'Glass') return Glass.fromJS(item);
+      else if (item.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item.type === 'Glow') return Glow.fromJS(item);
+      else if (item.type === 'Light') return Light.fromJS(item);
+      else if (item.type === 'Trans') return Trans.fromJS(item);
+      else if (item.type === 'Metal') return Metal.fromJS(item);
+      else if (item.type === 'Void') return Void.fromJS(item);
+      else if (item.type === 'Mirror') return Mirror.fromJS(item);
+      else return item;
+    })
     /** Material modifier. */
     modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsArray()
     @IsOptional()
+    @Transform(({ value }) => value.map((item: any) => {
+      if (item.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item.type === 'Glass') return Glass.fromJS(item);
+      else if (item.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item.type === 'Glow') return Glow.fromJS(item);
+      else if (item.type === 'Light') return Light.fromJS(item);
+      else if (item.type === 'Trans') return Trans.fromJS(item);
+      else if (item.type === 'Metal') return Metal.fromJS(item);
+      else if (item.type === 'Void') return Void.fromJS(item);
+      else if (item.type === 'Mirror') return Mirror.fromJS(item);
+      else return item;
+    }))
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
     dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) [];
 	
@@ -93,6 +118,13 @@ export class Metal extends ModifierBase {
     static override fromJS(data: any): Metal {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new Metal();
         result.init(data);
         return result;

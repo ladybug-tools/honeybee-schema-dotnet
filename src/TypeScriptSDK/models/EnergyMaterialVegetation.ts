@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsNumber, Max, Min, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { MoistureDiffusionModel } from "./MoistureDiffusionModel";
 import { Roughness } from "./Roughness";
@@ -172,6 +172,13 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     static override fromJS(data: any): EnergyMaterialVegetation {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new EnergyMaterialVegetation();
         result.init(data);
         return result;

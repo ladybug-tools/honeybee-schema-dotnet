@@ -1,5 +1,5 @@
 ﻿import { IsEnum, IsDefined, IsString, Matches, MinLength, MaxLength, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
 import { ParentTypes } from "./ParentTypes";
 
 export class ValidationParent {
@@ -47,6 +47,13 @@ export class ValidationParent {
     static fromJS(data: any): ValidationParent {
         data = typeof data === 'object' ? data : {};
 
+        if (Array.isArray(data)) {
+            const obj:any = {};
+            for (var property in data) {
+                obj[property] = data[property];
+            }
+            data = obj;
+        }
         let result = new ValidationParent();
         result.init(data);
         return result;
