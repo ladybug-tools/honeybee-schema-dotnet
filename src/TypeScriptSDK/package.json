@@ -1,7 +1,7 @@
 {
   "name": "honeybee-schema",
   "license": "MIT",
-  "version": "1.58.4",
+  "version": "1.58.4-v1",
   "type": "module",
   "scripts": {
     "build": "tsc && vite build",
