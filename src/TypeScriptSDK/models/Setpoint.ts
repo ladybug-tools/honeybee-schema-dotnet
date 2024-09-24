@@ -9,8 +9,8 @@ export class Setpoint extends IDdEnergyBaseModel {
     @IsDefined()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
-      else if (item.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
+      if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
+      else if (item?.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
       else return item;
     })
     /** Schedule for the cooling setpoint. The values in this schedule should be temperature in [C]. */
@@ -19,8 +19,8 @@ export class Setpoint extends IDdEnergyBaseModel {
     @IsDefined()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
-      else if (item.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
+      if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
+      else if (item?.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
       else return item;
     })
     /** Schedule for the heating setpoint. The values in this schedule should be temperature in [C]. */
@@ -34,8 +34,8 @@ export class Setpoint extends IDdEnergyBaseModel {
     @IsOptional()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
-      else if (item.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
+      if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
+      else if (item?.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
       else return item;
     })
     /** Schedule for the humidification setpoint. The values in this schedule should be in [%]. */
@@ -44,8 +44,8 @@ export class Setpoint extends IDdEnergyBaseModel {
     @IsOptional()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
-      else if (item.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
+      if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
+      else if (item?.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
       else return item;
     })
     /** Schedule for the dehumidification setpoint. The values in this schedule should be in [%]. */

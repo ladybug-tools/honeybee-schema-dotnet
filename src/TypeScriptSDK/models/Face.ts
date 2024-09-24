@@ -30,11 +30,11 @@ export class Face extends IDdBaseModel {
     @IsDefined()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'Ground') return Ground.fromJS(item);
-      else if (item.type === 'Outdoors') return Outdoors.fromJS(item);
-      else if (item.type === 'Adiabatic') return Adiabatic.fromJS(item);
-      else if (item.type === 'Surface') return Surface.fromJS(item);
-      else if (item.type === 'OtherSideTemperature') return OtherSideTemperature.fromJS(item);
+      if (item?.type === 'Ground') return Ground.fromJS(item);
+      else if (item?.type === 'Outdoors') return Outdoors.fromJS(item);
+      else if (item?.type === 'Adiabatic') return Adiabatic.fromJS(item);
+      else if (item?.type === 'Surface') return Surface.fromJS(item);
+      else if (item?.type === 'OtherSideTemperature') return OtherSideTemperature.fromJS(item);
       else return item;
     })
     boundary_condition!: (Ground | Outdoors | Adiabatic | Surface | OtherSideTemperature);

@@ -77,7 +77,6 @@ test('test toJson', () => {
   let json = obj.toJSON();
   let hasPlane = json.hasOwnProperty('plane');
   expect(hasPlane).toBe(false);
-  // expect(json)('plane');
   expect(json).not.toEqual(expect.objectContaining({ plane: expect.anything() }));
 
   obj = new Face3D();
@@ -86,10 +85,10 @@ test('test toJson', () => {
   obj.plane = new Plane();
   expect(obj.plane).toBeInstanceOf(Plane);
 
-
+  // test toJSON to plain object
   json = obj.toJSON();
   expect(json).toHaveProperty('plane');
-  expect(json.plane).toBeInstanceOf(Plane);
+  expect( json.plane instanceof Plane).toBe(false);
 
 });
 
@@ -150,6 +149,10 @@ test('test modifiers', () => {
   const mod = obj.modifiers?.at(0);
   expect(mod).toBeInstanceOf(Plastic);
   expect(mod?.identifier).toBe('generic_wall_0.50');
+
+  const glass = obj.modifiers?.at(1) as Glass;
+  expect(glass).toBeInstanceOf(Glass);
+  expect(glass.b_transmissivity).toBe(0.9584154328610596);
 }
 );
 

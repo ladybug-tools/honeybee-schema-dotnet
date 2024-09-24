@@ -22,9 +22,9 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
     @IsDefined()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'EnergyWindowMaterialShade') return EnergyWindowMaterialShade.fromJS(item);
-      else if (item.type === 'EnergyWindowMaterialBlind') return EnergyWindowMaterialBlind.fromJS(item);
-      else if (item.type === 'EnergyWindowMaterialGlazing') return EnergyWindowMaterialGlazing.fromJS(item);
+      if (item?.type === 'EnergyWindowMaterialShade') return EnergyWindowMaterialShade.fromJS(item);
+      else if (item?.type === 'EnergyWindowMaterialBlind') return EnergyWindowMaterialBlind.fromJS(item);
+      else if (item?.type === 'EnergyWindowMaterialGlazing') return EnergyWindowMaterialGlazing.fromJS(item);
       else return item;
     })
     /** Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly. */
@@ -55,8 +55,8 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
     @IsOptional()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
-      else if (item.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
+      if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
+      else if (item?.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
       else return item;
     })
     /** An optional ScheduleRuleset or ScheduleFixedInterval to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction. */

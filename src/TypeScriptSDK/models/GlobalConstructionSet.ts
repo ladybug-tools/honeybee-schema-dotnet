@@ -25,10 +25,10 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsOptional()
     @Transform(({ value }) => value.map((item: any) => {
-      if (item.type === 'EnergyMaterial') return EnergyMaterial.fromJS(item);
-      else if (item.type === 'EnergyMaterialNoMass') return EnergyMaterialNoMass.fromJS(item);
-      else if (item.type === 'EnergyWindowMaterialGlazing') return EnergyWindowMaterialGlazing.fromJS(item);
-      else if (item.type === 'EnergyWindowMaterialGas') return EnergyWindowMaterialGas.fromJS(item);
+      if (item?.type === 'EnergyMaterial') return EnergyMaterial.fromJS(item);
+      else if (item?.type === 'EnergyMaterialNoMass') return EnergyMaterialNoMass.fromJS(item);
+      else if (item?.type === 'EnergyWindowMaterialGlazing') return EnergyWindowMaterialGlazing.fromJS(item);
+      else if (item?.type === 'EnergyWindowMaterialGas') return EnergyWindowMaterialGas.fromJS(item);
       else return item;
     }))
     /** Global Honeybee Energy materials. */
@@ -37,10 +37,10 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsOptional()
     @Transform(({ value }) => value.map((item: any) => {
-      if (item.type === 'OpaqueConstructionAbridged') return OpaqueConstructionAbridged.fromJS(item);
-      else if (item.type === 'WindowConstructionAbridged') return WindowConstructionAbridged.fromJS(item);
-      else if (item.type === 'ShadeConstruction') return ShadeConstruction.fromJS(item);
-      else if (item.type === 'AirBoundaryConstructionAbridged') return AirBoundaryConstructionAbridged.fromJS(item);
+      if (item?.type === 'OpaqueConstructionAbridged') return OpaqueConstructionAbridged.fromJS(item);
+      else if (item?.type === 'WindowConstructionAbridged') return WindowConstructionAbridged.fromJS(item);
+      else if (item?.type === 'ShadeConstruction') return ShadeConstruction.fromJS(item);
+      else if (item?.type === 'AirBoundaryConstructionAbridged') return AirBoundaryConstructionAbridged.fromJS(item);
       else return item;
     }))
     /** Global Honeybee Energy constructions. */

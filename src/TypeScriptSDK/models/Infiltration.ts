@@ -15,8 +15,8 @@ export class Infiltration extends IDdEnergyBaseModel {
     @IsDefined()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
-      else if (item.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
+      if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
+      else if (item?.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
       else return item;
     })
     /** The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile. */

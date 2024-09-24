@@ -46,8 +46,8 @@ export class DesignDay extends _OpenAPIGenBaseModel {
     @IsDefined()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'ASHRAEClearSky') return ASHRAEClearSky.fromJS(item);
-      else if (item.type === 'ASHRAETau') return ASHRAETau.fromJS(item);
+      if (item?.type === 'ASHRAEClearSky') return ASHRAEClearSky.fromJS(item);
+      else if (item?.type === 'ASHRAETau') return ASHRAETau.fromJS(item);
       else return item;
     })
     sky_condition!: (ASHRAEClearSky | ASHRAETau);

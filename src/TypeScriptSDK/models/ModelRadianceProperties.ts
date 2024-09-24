@@ -33,15 +33,15 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsOptional()
     @Transform(({ value }) => value.map((item: any) => {
-      if (item.type === 'Plastic') return Plastic.fromJS(item);
-      else if (item.type === 'Glass') return Glass.fromJS(item);
-      else if (item.type === 'BSDF') return BSDF.fromJS(item);
-      else if (item.type === 'Glow') return Glow.fromJS(item);
-      else if (item.type === 'Light') return Light.fromJS(item);
-      else if (item.type === 'Trans') return Trans.fromJS(item);
-      else if (item.type === 'Metal') return Metal.fromJS(item);
-      else if (item.type === 'Void') return Void.fromJS(item);
-      else if (item.type === 'Mirror') return Mirror.fromJS(item);
+      if (item?.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item?.type === 'Glass') return Glass.fromJS(item);
+      else if (item?.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item?.type === 'Glow') return Glow.fromJS(item);
+      else if (item?.type === 'Light') return Light.fromJS(item);
+      else if (item?.type === 'Trans') return Trans.fromJS(item);
+      else if (item?.type === 'Metal') return Metal.fromJS(item);
+      else if (item?.type === 'Void') return Void.fromJS(item);
+      else if (item?.type === 'Mirror') return Mirror.fromJS(item);
       else return item;
     }))
     /** A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set. */
@@ -50,8 +50,8 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsOptional()
     @Transform(({ value }) => value.map((item: any) => {
-      if (item.type === 'ModifierSet') return ModifierSet.fromJS(item);
-      else if (item.type === 'ModifierSetAbridged') return ModifierSetAbridged.fromJS(item);
+      if (item?.type === 'ModifierSet') return ModifierSet.fromJS(item);
+      else if (item?.type === 'ModifierSetAbridged') return ModifierSetAbridged.fromJS(item);
       else return item;
     }))
     /** A list of all unique Room-Assigned ModifierSets in the Model. */
