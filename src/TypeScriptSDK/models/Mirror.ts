@@ -15,15 +15,15 @@ export class Mirror extends ModifierBase {
     @IsOptional()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'Plastic') return Plastic.fromJS(item);
-      else if (item.type === 'Glass') return Glass.fromJS(item);
-      else if (item.type === 'BSDF') return BSDF.fromJS(item);
-      else if (item.type === 'Glow') return Glow.fromJS(item);
-      else if (item.type === 'Light') return Light.fromJS(item);
-      else if (item.type === 'Trans') return Trans.fromJS(item);
-      else if (item.type === 'Metal') return Metal.fromJS(item);
-      else if (item.type === 'Void') return Void.fromJS(item);
-      else if (item.type === 'Mirror') return Mirror.fromJS(item);
+      if (item?.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item?.type === 'Glass') return Glass.fromJS(item);
+      else if (item?.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item?.type === 'Glow') return Glow.fromJS(item);
+      else if (item?.type === 'Light') return Light.fromJS(item);
+      else if (item?.type === 'Trans') return Trans.fromJS(item);
+      else if (item?.type === 'Metal') return Metal.fromJS(item);
+      else if (item?.type === 'Void') return Void.fromJS(item);
+      else if (item?.type === 'Mirror') return Mirror.fromJS(item);
       else return item;
     })
     /** Material modifier. */
@@ -32,15 +32,15 @@ export class Mirror extends ModifierBase {
     @IsArray()
     @IsOptional()
     @Transform(({ value }) => value.map((item: any) => {
-      if (item.type === 'Plastic') return Plastic.fromJS(item);
-      else if (item.type === 'Glass') return Glass.fromJS(item);
-      else if (item.type === 'BSDF') return BSDF.fromJS(item);
-      else if (item.type === 'Glow') return Glow.fromJS(item);
-      else if (item.type === 'Light') return Light.fromJS(item);
-      else if (item.type === 'Trans') return Trans.fromJS(item);
-      else if (item.type === 'Metal') return Metal.fromJS(item);
-      else if (item.type === 'Void') return Void.fromJS(item);
-      else if (item.type === 'Mirror') return Mirror.fromJS(item);
+      if (item?.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item?.type === 'Glass') return Glass.fromJS(item);
+      else if (item?.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item?.type === 'Glow') return Glow.fromJS(item);
+      else if (item?.type === 'Light') return Light.fromJS(item);
+      else if (item?.type === 'Trans') return Trans.fromJS(item);
+      else if (item?.type === 'Metal') return Metal.fromJS(item);
+      else if (item?.type === 'Void') return Void.fromJS(item);
+      else if (item?.type === 'Mirror') return Mirror.fromJS(item);
       else return item;
     }))
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
@@ -70,15 +70,15 @@ export class Mirror extends ModifierBase {
     @IsOptional()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'Plastic') return Plastic.fromJS(item);
-      else if (item.type === 'Glass') return Glass.fromJS(item);
-      else if (item.type === 'BSDF') return BSDF.fromJS(item);
-      else if (item.type === 'Glow') return Glow.fromJS(item);
-      else if (item.type === 'Light') return Light.fromJS(item);
-      else if (item.type === 'Trans') return Trans.fromJS(item);
-      else if (item.type === 'Metal') return Metal.fromJS(item);
-      else if (item.type === 'Void') return Void.fromJS(item);
-      else if (item.type === 'Mirror') return Mirror.fromJS(item);
+      if (item?.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item?.type === 'Glass') return Glass.fromJS(item);
+      else if (item?.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item?.type === 'Glow') return Glow.fromJS(item);
+      else if (item?.type === 'Light') return Light.fromJS(item);
+      else if (item?.type === 'Trans') return Trans.fromJS(item);
+      else if (item?.type === 'Metal') return Metal.fromJS(item);
+      else if (item?.type === 'Void') return Void.fromJS(item);
+      else if (item?.type === 'Mirror') return Mirror.fromJS(item);
       else return item;
     })
     /** An optional material (like the illum type) that may be used to specify a different material to be used for shading non-source rays. If None, this will keep the alternat_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance. */

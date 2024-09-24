@@ -21,15 +21,15 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel {
     @IsOptional()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'Plastic') return Plastic.fromJS(item);
-      else if (item.type === 'Glass') return Glass.fromJS(item);
-      else if (item.type === 'BSDF') return BSDF.fromJS(item);
-      else if (item.type === 'Glow') return Glow.fromJS(item);
-      else if (item.type === 'Light') return Light.fromJS(item);
-      else if (item.type === 'Trans') return Trans.fromJS(item);
-      else if (item.type === 'Metal') return Metal.fromJS(item);
-      else if (item.type === 'Void') return Void.fromJS(item);
-      else if (item.type === 'Mirror') return Mirror.fromJS(item);
+      if (item?.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item?.type === 'Glass') return Glass.fromJS(item);
+      else if (item?.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item?.type === 'Glow') return Glow.fromJS(item);
+      else if (item?.type === 'Light') return Light.fromJS(item);
+      else if (item?.type === 'Trans') return Trans.fromJS(item);
+      else if (item?.type === 'Metal') return Metal.fromJS(item);
+      else if (item?.type === 'Void') return Void.fromJS(item);
+      else if (item?.type === 'Mirror') return Mirror.fromJS(item);
       else return item;
     })
     /** A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and Wall parent Face. */
@@ -38,15 +38,15 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel {
     @IsOptional()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'Plastic') return Plastic.fromJS(item);
-      else if (item.type === 'Glass') return Glass.fromJS(item);
-      else if (item.type === 'BSDF') return BSDF.fromJS(item);
-      else if (item.type === 'Glow') return Glow.fromJS(item);
-      else if (item.type === 'Light') return Light.fromJS(item);
-      else if (item.type === 'Trans') return Trans.fromJS(item);
-      else if (item.type === 'Metal') return Metal.fromJS(item);
-      else if (item.type === 'Void') return Void.fromJS(item);
-      else if (item.type === 'Mirror') return Mirror.fromJS(item);
+      if (item?.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item?.type === 'Glass') return Glass.fromJS(item);
+      else if (item?.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item?.type === 'Glow') return Glow.fromJS(item);
+      else if (item?.type === 'Light') return Light.fromJS(item);
+      else if (item?.type === 'Trans') return Trans.fromJS(item);
+      else if (item?.type === 'Metal') return Metal.fromJS(item);
+      else if (item?.type === 'Void') return Void.fromJS(item);
+      else if (item?.type === 'Mirror') return Mirror.fromJS(item);
       else return item;
     })
     /** A modifier object for apertures with a Surface boundary condition. */
@@ -55,15 +55,15 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel {
     @IsOptional()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'Plastic') return Plastic.fromJS(item);
-      else if (item.type === 'Glass') return Glass.fromJS(item);
-      else if (item.type === 'BSDF') return BSDF.fromJS(item);
-      else if (item.type === 'Glow') return Glow.fromJS(item);
-      else if (item.type === 'Light') return Light.fromJS(item);
-      else if (item.type === 'Trans') return Trans.fromJS(item);
-      else if (item.type === 'Metal') return Metal.fromJS(item);
-      else if (item.type === 'Void') return Void.fromJS(item);
-      else if (item.type === 'Mirror') return Mirror.fromJS(item);
+      if (item?.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item?.type === 'Glass') return Glass.fromJS(item);
+      else if (item?.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item?.type === 'Glow') return Glow.fromJS(item);
+      else if (item?.type === 'Light') return Light.fromJS(item);
+      else if (item?.type === 'Trans') return Trans.fromJS(item);
+      else if (item?.type === 'Metal') return Metal.fromJS(item);
+      else if (item?.type === 'Void') return Void.fromJS(item);
+      else if (item?.type === 'Mirror') return Mirror.fromJS(item);
       else return item;
     })
     /** A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face. */
@@ -72,15 +72,15 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel {
     @IsOptional()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'Plastic') return Plastic.fromJS(item);
-      else if (item.type === 'Glass') return Glass.fromJS(item);
-      else if (item.type === 'BSDF') return BSDF.fromJS(item);
-      else if (item.type === 'Glow') return Glow.fromJS(item);
-      else if (item.type === 'Light') return Light.fromJS(item);
-      else if (item.type === 'Trans') return Trans.fromJS(item);
-      else if (item.type === 'Metal') return Metal.fromJS(item);
-      else if (item.type === 'Void') return Void.fromJS(item);
-      else if (item.type === 'Mirror') return Mirror.fromJS(item);
+      if (item?.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item?.type === 'Glass') return Glass.fromJS(item);
+      else if (item?.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item?.type === 'Glow') return Glow.fromJS(item);
+      else if (item?.type === 'Light') return Light.fromJS(item);
+      else if (item?.type === 'Trans') return Trans.fromJS(item);
+      else if (item?.type === 'Metal') return Metal.fromJS(item);
+      else if (item?.type === 'Void') return Void.fromJS(item);
+      else if (item?.type === 'Mirror') return Mirror.fromJS(item);
       else return item;
     })
     /** A modifier object for apertures with an Outdoors boundary condition and a True is_operable property. */

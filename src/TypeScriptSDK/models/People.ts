@@ -16,8 +16,8 @@ export class People extends IDdEnergyBaseModel {
     @IsDefined()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
-      else if (item.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
+      if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
+      else if (item?.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
       else return item;
     })
     /** A schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile. */
@@ -31,8 +31,8 @@ export class People extends IDdEnergyBaseModel {
     @IsOptional()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
-      else if (item.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
+      if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
+      else if (item?.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
       else return item;
     })
     /** A schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated. */

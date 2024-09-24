@@ -10,9 +10,9 @@ export class OpaqueConstruction extends IDdEnergyBaseModel {
     @IsArray()
     @IsDefined()
     @Transform(({ value }) => value.map((item: any) => {
-      if (item.type === 'EnergyMaterial') return EnergyMaterial.fromJS(item);
-      else if (item.type === 'EnergyMaterialNoMass') return EnergyMaterialNoMass.fromJS(item);
-      else if (item.type === 'EnergyMaterialVegetation') return EnergyMaterialVegetation.fromJS(item);
+      if (item?.type === 'EnergyMaterial') return EnergyMaterial.fromJS(item);
+      else if (item?.type === 'EnergyMaterialNoMass') return EnergyMaterialNoMass.fromJS(item);
+      else if (item?.type === 'EnergyMaterialVegetation') return EnergyMaterialVegetation.fromJS(item);
       else return item;
     }))
     /** List of opaque material definitions. The order of the materials is from exterior to interior. */

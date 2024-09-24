@@ -38,8 +38,8 @@ export class Ventilation extends IDdEnergyBaseModel {
     @IsOptional()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
-      else if (item.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
+      if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
+      else if (item?.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
       else return item;
     })
     /** Schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile. */

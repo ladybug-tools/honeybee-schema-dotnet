@@ -19,8 +19,8 @@ export class Aperture extends IDdBaseModel {
     @IsDefined()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'Outdoors') return Outdoors.fromJS(item);
-      else if (item.type === 'Surface') return Surface.fromJS(item);
+      if (item?.type === 'Outdoors') return Outdoors.fromJS(item);
+      else if (item?.type === 'Surface') return Surface.fromJS(item);
       else return item;
     })
     boundary_condition!: (Outdoors | Surface);

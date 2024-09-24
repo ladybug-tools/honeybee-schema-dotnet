@@ -62,8 +62,8 @@ export class ConstructionSet extends IDdEnergyBaseModel {
     @IsOptional()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'AirBoundaryConstruction') return AirBoundaryConstruction.fromJS(item);
-      else if (item.type === 'OpaqueConstruction') return OpaqueConstruction.fromJS(item);
+      if (item?.type === 'AirBoundaryConstruction') return AirBoundaryConstruction.fromJS(item);
+      else if (item?.type === 'OpaqueConstruction') return OpaqueConstruction.fromJS(item);
       else return item;
     })
     /** An AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type. */

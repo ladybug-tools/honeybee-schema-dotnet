@@ -21,9 +21,9 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsOptional()
     @Transform(({ value }) => value.map((item: any) => {
-      if (item.type === 'Plastic') return Plastic.fromJS(item);
-      else if (item.type === 'Glass') return Glass.fromJS(item);
-      else if (item.type === 'Trans') return Trans.fromJS(item);
+      if (item?.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item?.type === 'Glass') return Glass.fromJS(item);
+      else if (item?.type === 'Trans') return Trans.fromJS(item);
       else return item;
     }))
     /** Global Honeybee Radiance modifiers. */

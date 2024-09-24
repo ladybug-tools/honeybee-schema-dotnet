@@ -37,9 +37,9 @@ export class DoorConstructionSet extends _OpenAPIGenBaseModel {
     @IsOptional()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'WindowConstruction') return WindowConstruction.fromJS(item);
-      else if (item.type === 'WindowConstructionShade') return WindowConstructionShade.fromJS(item);
-      else if (item.type === 'WindowConstructionDynamic') return WindowConstructionDynamic.fromJS(item);
+      if (item?.type === 'WindowConstruction') return WindowConstruction.fromJS(item);
+      else if (item?.type === 'WindowConstructionShade') return WindowConstructionShade.fromJS(item);
+      else if (item?.type === 'WindowConstructionDynamic') return WindowConstructionDynamic.fromJS(item);
       else return item;
     })
     /** A WindowConstruction for all glass doors with an Outdoors boundary condition. */
@@ -48,9 +48,9 @@ export class DoorConstructionSet extends _OpenAPIGenBaseModel {
     @IsOptional()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'WindowConstruction') return WindowConstruction.fromJS(item);
-      else if (item.type === 'WindowConstructionShade') return WindowConstructionShade.fromJS(item);
-      else if (item.type === 'WindowConstructionDynamic') return WindowConstructionDynamic.fromJS(item);
+      if (item?.type === 'WindowConstruction') return WindowConstruction.fromJS(item);
+      else if (item?.type === 'WindowConstructionShade') return WindowConstructionShade.fromJS(item);
+      else if (item?.type === 'WindowConstructionDynamic') return WindowConstructionDynamic.fromJS(item);
       else return item;
     })
     /** A WindowConstruction for all glass doors with a Surface boundary condition. */

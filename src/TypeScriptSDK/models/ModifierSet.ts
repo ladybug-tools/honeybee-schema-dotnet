@@ -69,15 +69,15 @@ export class ModifierSet extends IDdRadianceBaseModel {
     @IsOptional()
     @Transform(({ value }) => {
       const item = value;
-      if (item.type === 'Plastic') return Plastic.fromJS(item);
-      else if (item.type === 'Glass') return Glass.fromJS(item);
-      else if (item.type === 'BSDF') return BSDF.fromJS(item);
-      else if (item.type === 'Glow') return Glow.fromJS(item);
-      else if (item.type === 'Light') return Light.fromJS(item);
-      else if (item.type === 'Trans') return Trans.fromJS(item);
-      else if (item.type === 'Metal') return Metal.fromJS(item);
-      else if (item.type === 'Void') return Void.fromJS(item);
-      else if (item.type === 'Mirror') return Mirror.fromJS(item);
+      if (item?.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item?.type === 'Glass') return Glass.fromJS(item);
+      else if (item?.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item?.type === 'Glow') return Glow.fromJS(item);
+      else if (item?.type === 'Light') return Light.fromJS(item);
+      else if (item?.type === 'Trans') return Trans.fromJS(item);
+      else if (item?.type === 'Metal') return Metal.fromJS(item);
+      else if (item?.type === 'Void') return Void.fromJS(item);
+      else if (item?.type === 'Mirror') return Mirror.fromJS(item);
       else return item;
     })
     /** An optional Modifier to be used for all Faces with an AirBoundary face type. If None, it will be the honeybee generic air wall modifier. */
