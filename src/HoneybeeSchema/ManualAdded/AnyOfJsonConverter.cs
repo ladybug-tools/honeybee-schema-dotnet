@@ -49,7 +49,7 @@ namespace HoneybeeSchema
                     throw new ArgumentException($"Unable to load {reader.Path}");
                 }
             }
-           
+
 
             var inputType = data.GetType();
 
@@ -60,30 +60,30 @@ namespace HoneybeeSchema
                 inputType = typeof(double);
                 data = double.Parse(data.ToString());
             }
-            else if (data is long lo && allValidTypes.Contains(typeof(int)))
+            else if ((data is long || data is double) && allValidTypes.Contains(typeof(int)))
             {
-                data = (int)lo;
+                data = int.Parse(data?.ToString());
                 inputType = typeof(int);
             }
 
             if (validTypes.ToList().Contains(inputType))
             {
-                var obj = Activator.CreateInstance(objectType, new object[] {data});
+                var obj = Activator.CreateInstance(objectType, new object[] { data });
                 return obj as AnyOf;
             }
             else
             {
-                throw new ArgumentException($"{data} is {inputType} type, which doesn't match any of [{string.Join(", ", validTypes.Select(_=>_.ToString()))}]");
+                throw new ArgumentException($"{data} is {inputType} type, which doesn't match any of [{string.Join(", ", validTypes.Select(_ => _.ToString()))}]");
             }
 
         }
 
-        public override void WriteJson(JsonWriter writer,  AnyOf value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, AnyOf value, JsonSerializer serializer)
         {
             JToken t = JToken.FromObject(value.Obj, serializer);
             t.WriteTo(writer);
         }
 
-      
+
     }
 }
