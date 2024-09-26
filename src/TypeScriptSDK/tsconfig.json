@@ -3,7 +3,6 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "commonjs",
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -18,7 +17,8 @@
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "emitDeclarationOnly": true,
+    // "noEmit": true,
 
     /* Linting */
     "strict": true,
@@ -27,6 +27,6 @@
     
     "noFallthroughCasesInSwitch": true
   },
-  "include": [ "models", "helpers", "tests"],
+  "include": [ "models", "helpers"],
   "exclude": [ "node_modules" ]
 }
