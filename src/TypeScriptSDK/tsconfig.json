@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "module": "ESNext",
+    "module": "commonjs",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -14,7 +14,7 @@
     "sourceMap": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    // "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
@@ -28,5 +28,5 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [ "models", "helpers", "tests"],
-  "exclude": ["node_modules"]
+  "exclude": [ "node_modules" ]
 }
