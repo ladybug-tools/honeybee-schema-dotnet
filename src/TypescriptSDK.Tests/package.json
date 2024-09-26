@@ -2,7 +2,7 @@
   "name": "typescriptsdk.tests",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
     "compile": "tsc",
     "test": "jest"
@@ -17,9 +17,10 @@
     "jest": "^29.7.0",
     "reflect-metadata": "^0.2.2",
     "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
   },
   "dependencies": {
-    "honeybee-schema": "file:../TypeScriptSDK"
+    "honeybee-schema": "file:../TypeScriptSDK/honeybee-schema-1.5804.0.tgz"
   }
 }
