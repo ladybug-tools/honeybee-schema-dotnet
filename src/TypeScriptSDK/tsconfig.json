@@ -10,17 +10,17 @@
     "outDir": "./dist",
     "incremental": true,                              /* Enable incremental compilation */
     "composite": true,                                /* Enable constraints that allow a TypeScript project to be used with project references. */
-    "sourceMap": true,
+    // "sourceMap": true,
 
     /* Bundler mode */
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "emitDeclarationOnly": true,
-    "declaration": true,
-    "declarationMap": true,
-    // "noEmit": true,
+    // "emitDeclarationOnly": true,
+    // "declaration": true,
+    // "declarationMap": true,
+    "noEmit": true,
 
     /* Linting */
     "strict": true,
