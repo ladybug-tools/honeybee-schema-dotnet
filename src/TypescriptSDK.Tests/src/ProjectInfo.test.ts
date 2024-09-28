@@ -1,5 +1,14 @@
 import { ProjectInfo, Location } from "honeybee-schema";
 
+test('ProjectInfo toJson', () => {
+  const obj = new ProjectInfo();
+  obj.north = 10;
+  const jsonObj = obj.toJSON();
+  expect(jsonObj.north).toBe(10);
+}
+);
+
+
 test('test location', () => {
   const json = {
   "city": "My city",

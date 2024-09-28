@@ -6,11 +6,3 @@ test('adds 1 + 2 to equal 3', () => {
 });
 
 
-test('tt', () => {
-  const obj = new ProjectInfo();
-  obj.north = 10;
-  const jsonObj = obj.toJSON();
-  expect(jsonObj.north).toBe(10);
-}
-);
-
