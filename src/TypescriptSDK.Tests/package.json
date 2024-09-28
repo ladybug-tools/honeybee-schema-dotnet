@@ -8,9 +8,10 @@
     "class-transformer": "^0.5.1",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
   },
   "dependencies": {
-    "honeybee-schema": "file:../TypeScriptSDK/honeybee-schema-1.5804.0.tgz"
+    "honeybee-schema": "latest"
   }
 }
