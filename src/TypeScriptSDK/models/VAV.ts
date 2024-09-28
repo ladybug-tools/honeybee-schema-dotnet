@@ -1,9 +1,9 @@
 ﻿import { IsEnum, IsOptional, IsNumber, Min, Max, IsBoolean, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { AllAirEconomizerType } from "./AllAirEconomizerType";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
-import { VAVEquipmentType } from "./VAVEquipmentType";
-import { Vintages } from "./Vintages";
+import { AllAirEconomizerType } from "./AllAirEconomizerType.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { VAVEquipmentType } from "./VAVEquipmentType.ts";
+import { Vintages } from "./Vintages.ts";
 
 /** Variable Air Volume (VAV) HVAC system (aka. System 7 or 8).\n\nAll rooms/zones are connected to a central air loop that is kept at a constant\ncentral temperature of 12.8C (55F). The central temperature is maintained by a\ncooling coil, which runs whenever the combination of return air and fresh outdoor\nair is greater than 12.8C, as well as a heating coil, which runs whenever\nthe combination of return air and fresh outdoor air is less than 12.8C.\n\nEach air terminal for the connected rooms/zones contains its own reheat coil,\nwhich runs whenever the room is not in need of the cooling supplied by the 12.8C\ncentral air.\n\nThe central cooling coil is always a chilled water coil, which is connected to a\nchilled water loop operating at 6.7C (44F). All heating coils are hot water coils\nexcept when Gas Coil equipment_type is used (in which case coils are gas)\nor when Parallel Fan-Powered (PFP) boxes equipment_type is used (in which case\ncoils are electric resistance). Hot water temperature is 82C (180F) for\nboiler/district heating and 49C (120F) when ASHP is used.\n\nVAV systems are the traditional baseline system for commercial buildings\ntaller than 5 stories or larger than 14,000 m2 (150,000 ft2) of floor area. */
 export class VAV extends IDdEnergyBaseModel {

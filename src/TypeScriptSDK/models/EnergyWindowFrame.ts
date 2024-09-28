@@ -1,6 +1,6 @@
 ﻿import { IsNumber, IsDefined, Max, IsString, IsOptional, Matches, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
 
 /** Opaque material representing a layer within an opaque construction. */
 export class EnergyWindowFrame extends IDdEnergyBaseModel {

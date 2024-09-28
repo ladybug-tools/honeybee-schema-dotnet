@@ -1,9 +1,9 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInt, IsEnum, IsInstance, ValidateNested, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IsNestedIntegerArray } from "./../helpers/class-validator";
-import { DatedBaseModel } from "./DatedBaseModel";
-import { DaylightSavingTime } from "./DaylightSavingTime";
-import { DaysOfWeek } from "./DaysOfWeek";
+import { IsNestedIntegerArray } from "./../helpers/class-validator.ts";
+import { DatedBaseModel } from "./DatedBaseModel.ts";
+import { DaylightSavingTime } from "./DaylightSavingTime.ts";
+import { DaysOfWeek } from "./DaysOfWeek.ts";
 
 /** Used to describe the time period over which to run the simulation. */
 export class RunPeriod extends DatedBaseModel {

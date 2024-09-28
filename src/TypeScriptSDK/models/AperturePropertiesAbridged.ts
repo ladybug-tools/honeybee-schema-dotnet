@@ -1,8 +1,8 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { ApertureEnergyPropertiesAbridged } from "./ApertureEnergyPropertiesAbridged";
-import { ApertureRadiancePropertiesAbridged } from "./ApertureRadiancePropertiesAbridged";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
+import { ApertureEnergyPropertiesAbridged } from "./ApertureEnergyPropertiesAbridged.ts";
+import { ApertureRadiancePropertiesAbridged } from "./ApertureRadiancePropertiesAbridged.ts";
 
 export class AperturePropertiesAbridged extends _OpenAPIGenBaseModel {
     @IsString()

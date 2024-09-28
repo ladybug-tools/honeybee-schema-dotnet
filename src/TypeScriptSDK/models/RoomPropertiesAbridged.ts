@@ -1,9 +1,9 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { RoomDoe2Properties } from "./RoomDoe2Properties";
-import { RoomEnergyPropertiesAbridged } from "./RoomEnergyPropertiesAbridged";
-import { RoomRadiancePropertiesAbridged } from "./RoomRadiancePropertiesAbridged";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
+import { RoomDoe2Properties } from "./RoomDoe2Properties.ts";
+import { RoomEnergyPropertiesAbridged } from "./RoomEnergyPropertiesAbridged.ts";
+import { RoomRadiancePropertiesAbridged } from "./RoomRadiancePropertiesAbridged.ts";
 
 export class RoomPropertiesAbridged extends _OpenAPIGenBaseModel {
     @IsString()

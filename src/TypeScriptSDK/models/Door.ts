@@ -1,11 +1,11 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsBoolean, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { DoorPropertiesAbridged } from "./DoorPropertiesAbridged";
-import { Face3D } from "./Face3D";
-import { IDdBaseModel } from "./IDdBaseModel";
-import { Outdoors } from "./Outdoors";
-import { Shade } from "./Shade";
-import { Surface } from "./Surface";
+import { DoorPropertiesAbridged } from "./DoorPropertiesAbridged.ts";
+import { Face3D } from "./Face3D.ts";
+import { IDdBaseModel } from "./IDdBaseModel.ts";
+import { Outdoors } from "./Outdoors.ts";
+import { Shade } from "./Shade.ts";
+import { Surface } from "./Surface.ts";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Door extends IDdBaseModel {

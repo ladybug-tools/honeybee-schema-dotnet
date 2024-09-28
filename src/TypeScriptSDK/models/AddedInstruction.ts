@@ -1,7 +1,7 @@
 ﻿import { IsEnum, IsDefined, IsString, Matches, MinLength, MaxLength, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { GeometryObjectTypes } from "./GeometryObjectTypes";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
+import { GeometryObjectTypes } from "./GeometryObjectTypes.ts";
 
 export class AddedInstruction extends _OpenAPIGenBaseModel {
     @IsEnum(GeometryObjectTypes)

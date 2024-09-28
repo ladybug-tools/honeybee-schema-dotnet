@@ -1,7 +1,7 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsNumber, Max, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
-import { SlatOrientation } from "./SlatOrientation";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { SlatOrientation } from "./SlatOrientation.ts";
 
 /** Window blind material consisting of flat, equally-spaced slats. */
 export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {

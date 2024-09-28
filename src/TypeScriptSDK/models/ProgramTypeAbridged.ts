@@ -1,14 +1,14 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
-import { GasEquipmentAbridged } from "./GasEquipmentAbridged";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
-import { InfiltrationAbridged } from "./InfiltrationAbridged";
-import { LightingAbridged } from "./LightingAbridged";
-import { PeopleAbridged } from "./PeopleAbridged";
-import { ServiceHotWaterAbridged } from "./ServiceHotWaterAbridged";
-import { SetpointAbridged } from "./SetpointAbridged";
-import { VentilationAbridged } from "./VentilationAbridged";
+import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged.ts";
+import { GasEquipmentAbridged } from "./GasEquipmentAbridged.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { InfiltrationAbridged } from "./InfiltrationAbridged.ts";
+import { LightingAbridged } from "./LightingAbridged.ts";
+import { PeopleAbridged } from "./PeopleAbridged.ts";
+import { ServiceHotWaterAbridged } from "./ServiceHotWaterAbridged.ts";
+import { SetpointAbridged } from "./SetpointAbridged.ts";
+import { VentilationAbridged } from "./VentilationAbridged.ts";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class ProgramTypeAbridged extends IDdEnergyBaseModel {

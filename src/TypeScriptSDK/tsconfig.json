@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ES6",
     "skipLibCheck": true,
@@ -13,11 +13,13 @@
     "sourceMap": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "emitDeclarationOnly": true,
+    "declaration": true,
+    "declarationMap": true,
     // "noEmit": true,
 
     /* Linting */
@@ -27,6 +29,6 @@
     
     "noFallthroughCasesInSwitch": true
   },
-  "include": [ "models", "helpers"],
+  "include": [ "models", "helpers", "index.ts"],
   "exclude": [ "node_modules" ]
 }

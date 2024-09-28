@@ -1,7 +1,7 @@
 ﻿import { IsInstance, ValidateNested, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { OpaqueConstruction } from "./OpaqueConstruction";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
+import { OpaqueConstruction } from "./OpaqueConstruction.ts";
 
 /** A set of constructions for floor assemblies. */
 export class FloorConstructionSet extends _OpenAPIGenBaseModel {

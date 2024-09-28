@@ -1,9 +1,9 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { AddedInstruction } from "./AddedInstruction";
-import { ChangedInstruction } from "./ChangedInstruction";
-import { DeletedInstruction } from "./DeletedInstruction";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
+import { AddedInstruction } from "./AddedInstruction.ts";
+import { ChangedInstruction } from "./ChangedInstruction.ts";
+import { DeletedInstruction } from "./DeletedInstruction.ts";
 
 export class SyncInstructions extends _OpenAPIGenBaseModel {
     @IsString()

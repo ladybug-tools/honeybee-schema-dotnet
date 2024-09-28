@@ -1,6 +1,6 @@
 ﻿import { IsString, IsOptional, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
 
 /** A set of constructions for wall, floor, or roof assemblies. */
 export class _FaceSubSetAbridged extends _OpenAPIGenBaseModel {

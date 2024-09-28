@@ -1,6 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _EquipmentBase } from "./_EquipmentBase";
+import { _EquipmentBase } from "./_EquipmentBase.ts";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class ElectricEquipmentAbridged extends _EquipmentBase {

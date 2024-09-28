@@ -1,6 +1,6 @@
 ﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _SkyCondition } from "./_SkyCondition";
+import { _SkyCondition } from "./_SkyCondition.ts";
 
 /** Used to specify sky conditions on a design day. */
 export class ASHRAEClearSky extends _SkyCondition {

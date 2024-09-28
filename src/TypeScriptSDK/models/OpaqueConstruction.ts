@@ -1,9 +1,9 @@
 ﻿import { IsArray, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { EnergyMaterial } from "./EnergyMaterial";
-import { EnergyMaterialNoMass } from "./EnergyMaterialNoMass";
-import { EnergyMaterialVegetation } from "./EnergyMaterialVegetation";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { EnergyMaterial } from "./EnergyMaterial.ts";
+import { EnergyMaterialNoMass } from "./EnergyMaterialNoMass.ts";
+import { EnergyMaterialVegetation } from "./EnergyMaterialVegetation.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
 
 /** Construction for opaque objects (Face, Shade, Door). */
 export class OpaqueConstruction extends IDdEnergyBaseModel {

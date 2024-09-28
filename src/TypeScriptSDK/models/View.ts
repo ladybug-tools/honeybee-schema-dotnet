@@ -1,7 +1,7 @@
 ﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _RadianceAsset } from "./_RadianceAsset";
-import { ViewType } from "./ViewType";
+import { _RadianceAsset } from "./_RadianceAsset.ts";
+import { ViewType } from "./ViewType.ts";
 
 /** A single Radiance of sensors. */
 export class View extends _RadianceAsset {

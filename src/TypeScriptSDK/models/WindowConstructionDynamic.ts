@@ -1,9 +1,9 @@
 ﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
-import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
-import { ScheduleRuleset } from "./ScheduleRuleset";
-import { WindowConstruction } from "./WindowConstruction";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { ScheduleFixedInterval } from "./ScheduleFixedInterval.ts";
+import { ScheduleRuleset } from "./ScheduleRuleset.ts";
+import { WindowConstruction } from "./WindowConstruction.ts";
 
 /** Construction for window objects with an included shade layer. */
 export class WindowConstructionDynamic extends IDdEnergyBaseModel {

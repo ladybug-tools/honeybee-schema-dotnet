@@ -1,7 +1,7 @@
 ﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, MinLength, MaxLength, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
-import { WindowConstructionAbridged } from "./WindowConstructionAbridged";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { WindowConstructionAbridged } from "./WindowConstructionAbridged.ts";
 
 /** Construction for window objects with an included shade layer. */
 export class WindowConstructionDynamicAbridged extends IDdEnergyBaseModel {

@@ -1,6 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { DatedBaseModel } from "./DatedBaseModel";
+import { DatedBaseModel } from "./DatedBaseModel.ts";
 
 /** Used to describe the daylight savings time for the simulation. */
 export class DaylightSavingTime extends DatedBaseModel {

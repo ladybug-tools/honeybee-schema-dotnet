@@ -1,9 +1,9 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, IsNumber, IsEnum, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { ClimateZones } from "./ClimateZones";
-import { DesignDay } from "./DesignDay";
-import { EfficiencyStandards } from "./EfficiencyStandards";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
+import { ClimateZones } from "./ClimateZones.ts";
+import { DesignDay } from "./DesignDay.ts";
+import { EfficiencyStandards } from "./EfficiencyStandards.ts";
 
 /** Used to specify heating and cooling sizing criteria and safety factors. */
 export class SizingParameter extends _OpenAPIGenBaseModel {

@@ -1,8 +1,8 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsNumber, Min, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { BuildingType } from "./BuildingType";
-import { VentilationControlType } from "./VentilationControlType";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
+import { BuildingType } from "./BuildingType.ts";
+import { VentilationControlType } from "./VentilationControlType.ts";
 
 /** The global parameters used in the ventilation simulation. */
 export class VentilationSimulationControl extends _OpenAPIGenBaseModel {

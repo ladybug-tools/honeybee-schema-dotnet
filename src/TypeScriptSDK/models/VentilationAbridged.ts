@@ -1,6 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class VentilationAbridged extends IDdEnergyBaseModel {

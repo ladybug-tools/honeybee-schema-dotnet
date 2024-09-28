@@ -1,8 +1,8 @@
 ﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { EvaporativeCoolerEquipmentType } from "./EvaporativeCoolerEquipmentType";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
-import { Vintages } from "./Vintages";
+import { EvaporativeCoolerEquipmentType } from "./EvaporativeCoolerEquipmentType.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { Vintages } from "./Vintages.ts";
 
 /** Direct evaporative cooling systems (with optional heating).\n\nEach room/zone will receive its own air loop sized to meet the sensible load,\nwhich contains an evaporative cooler that directly adds humidity to the room\nair to cool it. The loop contains an outdoor air mixer, which is used whenever\nthe outdoor air has a lower wet bulb temperature than the return air from\nthe room. In the event that the combination of outdoor and room return air\nair is too humid, a backup single-speed direct expansion (DX) cooling coil\nwill be used. Heating loads can be met with various options, including\nseveral types of baseboards, a furnace, or gas unit heaters. */
 export class EvaporativeCooler extends IDdEnergyBaseModel {

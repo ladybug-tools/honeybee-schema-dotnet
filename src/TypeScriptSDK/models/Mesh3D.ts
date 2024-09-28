@@ -1,8 +1,8 @@
 ﻿import { IsArray, IsDefined, IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IsNestedNumberArray, IsNestedIntegerArray } from "./../helpers/class-validator";
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { Color } from "./Color";
+import { IsNestedNumberArray, IsNestedIntegerArray } from "./../helpers/class-validator.ts";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
+import { Color } from "./Color.ts";
 
 /** A mesh in 3D space. */
 export class Mesh3D extends _OpenAPIGenBaseModel {
