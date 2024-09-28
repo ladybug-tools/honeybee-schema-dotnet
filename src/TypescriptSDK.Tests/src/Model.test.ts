@@ -5,9 +5,9 @@ import * as path from 'path';
 
 test('test model', () => {
   const dir = path.dirname(path.dirname(path.dirname(__dirname)));
-  console.log(dir);
+  // console.log(dir);
   const sampleDir = path.join(dir, 'samples');
-  console.log(sampleDir);
+  // console.log(sampleDir);
 
   const filePath = path.join(sampleDir, 'ShoeBox.json');
   const jsonData = fs.readFileSync(filePath, 'utf8');
@@ -63,9 +63,6 @@ test('test glass', () => {
   const loc = Glass.fromJS(json);
   expect(loc.validate()).resolves.toBe(true);
 
-  console.log(typeof loc.modifier)
-
-  
 
 });
 
@@ -80,7 +77,6 @@ test('test toJson', () => {
   expect(json).not.toEqual(expect.objectContaining({ plane: expect.anything() }));
 
   obj = new Face3D();
-  console.log(typeof obj);
 
   obj.plane = new Plane();
   expect(obj.plane).toBeInstanceOf(Plane);
