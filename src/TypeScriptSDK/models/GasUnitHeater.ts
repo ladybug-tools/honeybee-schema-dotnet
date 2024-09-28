@@ -1,8 +1,8 @@
 ﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { GasUnitHeaterEquipmentType } from "./GasUnitHeaterEquipmentType";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
-import { Vintages } from "./Vintages";
+import { GasUnitHeaterEquipmentType } from "./GasUnitHeaterEquipmentType.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { Vintages } from "./Vintages.ts";
 
 /** Gas unit heating system.\n\nGas unit systems are intended for spaces only requiring heating and no\nventilation or cooling. Each room/zone will get its own gaa heating unit\nthat satisfies the heating load. */
 export class GasUnitHeater extends IDdEnergyBaseModel {

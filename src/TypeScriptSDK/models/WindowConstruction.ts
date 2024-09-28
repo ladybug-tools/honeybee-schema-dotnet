@@ -1,12 +1,12 @@
 ﻿import { IsArray, IsDefined, IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { EnergyWindowFrame } from "./EnergyWindowFrame";
-import { EnergyWindowMaterialGas } from "./EnergyWindowMaterialGas";
-import { EnergyWindowMaterialGasCustom } from "./EnergyWindowMaterialGasCustom";
-import { EnergyWindowMaterialGasMixture } from "./EnergyWindowMaterialGasMixture";
-import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
-import { EnergyWindowMaterialSimpleGlazSys } from "./EnergyWindowMaterialSimpleGlazSys";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { EnergyWindowFrame } from "./EnergyWindowFrame.ts";
+import { EnergyWindowMaterialGas } from "./EnergyWindowMaterialGas.ts";
+import { EnergyWindowMaterialGasCustom } from "./EnergyWindowMaterialGasCustom.ts";
+import { EnergyWindowMaterialGasMixture } from "./EnergyWindowMaterialGasMixture.ts";
+import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing.ts";
+import { EnergyWindowMaterialSimpleGlazSys } from "./EnergyWindowMaterialSimpleGlazSys.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
 
 /** Construction for window objects (Aperture, Door). */
 export class WindowConstruction extends IDdEnergyBaseModel {

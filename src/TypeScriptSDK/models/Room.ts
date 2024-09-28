@@ -1,9 +1,9 @@
 ﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsInt, Min, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { Face } from "./Face";
-import { IDdBaseModel } from "./IDdBaseModel";
-import { RoomPropertiesAbridged } from "./RoomPropertiesAbridged";
-import { Shade } from "./Shade";
+import { Face } from "./Face.ts";
+import { IDdBaseModel } from "./IDdBaseModel.ts";
+import { RoomPropertiesAbridged } from "./RoomPropertiesAbridged.ts";
+import { Shade } from "./Shade.ts";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Room extends IDdBaseModel {

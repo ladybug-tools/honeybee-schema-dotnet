@@ -1,6 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
 
 /** This object specifies the properties of window shade materials. */
 export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {

@@ -1,12 +1,12 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, IsInt, Min, Max, IsNumber, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { RunPeriod } from "./RunPeriod";
-import { ShadowCalculation } from "./ShadowCalculation";
-import { SimulationControl } from "./SimulationControl";
-import { SimulationOutput } from "./SimulationOutput";
-import { SizingParameter } from "./SizingParameter";
-import { TerrianTypes } from "./TerrianTypes";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
+import { RunPeriod } from "./RunPeriod.ts";
+import { ShadowCalculation } from "./ShadowCalculation.ts";
+import { SimulationControl } from "./SimulationControl.ts";
+import { SimulationOutput } from "./SimulationOutput.ts";
+import { SizingParameter } from "./SizingParameter.ts";
+import { TerrianTypes } from "./TerrianTypes.ts";
 
 /** The complete set of EnergyPlus Simulation Settings. */
 export class SimulationParameter extends _OpenAPIGenBaseModel {

@@ -1,9 +1,9 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, MinLength, MaxLength, IsOptional, Matches, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { ControlType } from "./ControlType";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
-import { ShadeLocation } from "./ShadeLocation";
-import { WindowConstructionAbridged } from "./WindowConstructionAbridged";
+import { ControlType } from "./ControlType.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { ShadeLocation } from "./ShadeLocation.ts";
+import { WindowConstructionAbridged } from "./WindowConstructionAbridged.ts";
 
 /** Construction for window objects with an included shade layer. */
 export class WindowConstructionShadeAbridged extends IDdEnergyBaseModel {

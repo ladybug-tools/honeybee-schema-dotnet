@@ -1,8 +1,8 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { Autocalculate } from "./Autocalculate";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
-import { SHWEquipmentType } from "./SHWEquipmentType";
+import { Autocalculate } from "./Autocalculate.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { SHWEquipmentType } from "./SHWEquipmentType.ts";
 
 /** Provides a model for a Service Hot Water system. */
 export class SHWSystem extends IDdEnergyBaseModel {

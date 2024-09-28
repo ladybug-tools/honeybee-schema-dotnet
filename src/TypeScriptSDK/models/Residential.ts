@@ -1,8 +1,8 @@
 ﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
-import { ResidentialEquipmentType } from "./ResidentialEquipmentType";
-import { Vintages } from "./Vintages";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { ResidentialEquipmentType } from "./ResidentialEquipmentType.ts";
+import { Vintages } from "./Vintages.ts";
 
 /** Residential Air Conditioning, Heat Pump or Furnace system.\n\nResidential HVAC systems are intended primarily for single-family homes and\ninclude a wide variety of options. In all cases, each room/zone will receive\nits own air loop WITHOUT an outdoor air inlet (air is simply being recirculated\nthrough the loop). Residential air conditioning (AC) systems are modeled\nusing a unitary system with a single-speed direct expansion (DX) cooling\ncoil in the loop. Residential heat pump (HP) systems use a single-speed DX\nheating coil in the unitary system and the residential furnace option uses\na gas coil in the unitary system. In all cases, the properties of these coils\nare set to reflect a typical residential system. */
 export class Residential extends IDdEnergyBaseModel {

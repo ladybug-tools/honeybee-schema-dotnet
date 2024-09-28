@@ -1,8 +1,8 @@
 ﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, MinLength, MaxLength, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
-import { ScheduleDay } from "./ScheduleDay";
-import { ScheduleRuleAbridged } from "./ScheduleRuleAbridged";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { ScheduleDay } from "./ScheduleDay.ts";
+import { ScheduleRuleAbridged } from "./ScheduleRuleAbridged.ts";
 
 /** Used to define a schedule for a default day, further described by ScheduleRule. */
 export class ScheduleRulesetAbridged extends IDdEnergyBaseModel {

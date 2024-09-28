@@ -1,12 +1,12 @@
 ﻿import { IsString, IsDefined, MinLength, MaxLength, IsEnum, IsInstance, ValidateNested, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { ASHRAEClearSky } from "./ASHRAEClearSky";
-import { ASHRAETau } from "./ASHRAETau";
-import { DesignDayTypes } from "./DesignDayTypes";
-import { DryBulbCondition } from "./DryBulbCondition";
-import { HumidityCondition } from "./HumidityCondition";
-import { WindCondition } from "./WindCondition";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
+import { ASHRAEClearSky } from "./ASHRAEClearSky.ts";
+import { ASHRAETau } from "./ASHRAETau.ts";
+import { DesignDayTypes } from "./DesignDayTypes.ts";
+import { DryBulbCondition } from "./DryBulbCondition.ts";
+import { HumidityCondition } from "./HumidityCondition.ts";
+import { WindCondition } from "./WindCondition.ts";
 
 /** An object representing design day conditions. */
 export class DesignDay extends _OpenAPIGenBaseModel {

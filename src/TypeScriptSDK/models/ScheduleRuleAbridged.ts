@@ -1,6 +1,6 @@
 ﻿import { IsString, IsDefined, MinLength, MaxLength, IsOptional, Matches, IsBoolean, IsArray, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { DatedBaseModel } from "./DatedBaseModel";
+import { DatedBaseModel } from "./DatedBaseModel.ts";
 
 /** Schedule rule including a ScheduleDay and when it should be applied.. */
 export class ScheduleRuleAbridged extends DatedBaseModel {

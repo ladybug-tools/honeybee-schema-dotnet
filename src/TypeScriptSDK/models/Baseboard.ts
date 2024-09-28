@@ -1,8 +1,8 @@
 ﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { BaseboardEquipmentType } from "./BaseboardEquipmentType";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
-import { Vintages } from "./Vintages";
+import { BaseboardEquipmentType } from "./BaseboardEquipmentType.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { Vintages } from "./Vintages.ts";
 
 /** Baseboard heating system.\n\nBaseboard systems are intended for spaces only requiring heating and\nno ventilation or cooling. Each room/zone will get its own baseboard\nheating unit that satisfies the heating load. */
 export class Baseboard extends IDdEnergyBaseModel {

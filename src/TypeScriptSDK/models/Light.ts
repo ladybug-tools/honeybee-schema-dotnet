@@ -1,14 +1,14 @@
 ﻿import { IsOptional, IsArray, IsNumber, Min, Max, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { BSDF } from "./BSDF";
-import { Glass } from "./Glass";
-import { Glow } from "./Glow";
-import { Metal } from "./Metal";
-import { Mirror } from "./Mirror";
-import { ModifierBase } from "./ModifierBase";
-import { Plastic } from "./Plastic";
-import { Trans } from "./Trans";
-import { Void } from "./Void";
+import { BSDF } from "./BSDF.ts";
+import { Glass } from "./Glass.ts";
+import { Glow } from "./Glow.ts";
+import { Metal } from "./Metal.ts";
+import { Mirror } from "./Mirror.ts";
+import { ModifierBase } from "./ModifierBase.ts";
+import { Plastic } from "./Plastic.ts";
+import { Trans } from "./Trans.ts";
+import { Void } from "./Void.ts";
 
 /** Radiance Light material. */
 export class Light extends ModifierBase {

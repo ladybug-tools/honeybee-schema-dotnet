@@ -1,9 +1,9 @@
 ﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _RadianceAsset } from "./_RadianceAsset";
-import { Face3D } from "./Face3D";
-import { Mesh3D } from "./Mesh3D";
-import { Sensor } from "./Sensor";
+import { _RadianceAsset } from "./_RadianceAsset.ts";
+import { Face3D } from "./Face3D.ts";
+import { Mesh3D } from "./Mesh3D.ts";
+import { Sensor } from "./Sensor.ts";
 
 /** A grid of sensors. */
 export class SensorGrid extends _RadianceAsset {

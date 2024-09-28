@@ -1,7 +1,7 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { StateGeometryAbridged } from "./StateGeometryAbridged";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
+import { StateGeometryAbridged } from "./StateGeometryAbridged.ts";
 
 /** RadianceShadeStateAbridged represents a single state for a dynamic Shade. */
 export class RadianceShadeStateAbridged extends _OpenAPIGenBaseModel {

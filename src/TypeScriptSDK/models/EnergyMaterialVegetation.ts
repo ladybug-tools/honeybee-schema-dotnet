@@ -1,8 +1,8 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsNumber, Max, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
-import { MoistureDiffusionModel } from "./MoistureDiffusionModel";
-import { Roughness } from "./Roughness";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { MoistureDiffusionModel } from "./MoistureDiffusionModel.ts";
+import { Roughness } from "./Roughness.ts";
 
 /** Material representing vegetation on the exterior of an opaque construction. */
 export class EnergyMaterialVegetation extends IDdEnergyBaseModel {

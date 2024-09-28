@@ -1,10 +1,10 @@
 ﻿import { IsString, IsDefined, Matches, MinLength, MaxLength, IsEnum, IsArray, IsOptional, ValidateNested, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { ExtensionTypes } from "./ExtensionTypes";
-import { LineSegment3D } from "./LineSegment3D";
-import { ObjectTypes } from "./ObjectTypes";
-import { Point3D } from "./Point3D";
-import { ValidationParent } from "./ValidationParent";
+import { ExtensionTypes } from "./ExtensionTypes.ts";
+import { LineSegment3D } from "./LineSegment3D.ts";
+import { ObjectTypes } from "./ObjectTypes.ts";
+import { Point3D } from "./Point3D.ts";
+import { ValidationParent } from "./ValidationParent.ts";
 
 export class ValidationError {
     @IsString()

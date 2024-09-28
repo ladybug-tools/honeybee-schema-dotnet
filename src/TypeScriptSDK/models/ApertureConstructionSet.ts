@@ -1,9 +1,9 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { WindowConstruction } from "./WindowConstruction";
-import { WindowConstructionDynamic } from "./WindowConstructionDynamic";
-import { WindowConstructionShade } from "./WindowConstructionShade";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
+import { WindowConstruction } from "./WindowConstruction.ts";
+import { WindowConstructionDynamic } from "./WindowConstructionDynamic.ts";
+import { WindowConstructionShade } from "./WindowConstructionShade.ts";
 
 /** A set of constructions for aperture assemblies. */
 export class ApertureConstructionSet extends _OpenAPIGenBaseModel {

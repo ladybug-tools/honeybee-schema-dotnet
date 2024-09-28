@@ -1,8 +1,8 @@
 ﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
-import { Vintages } from "./Vintages";
-import { WSHPEquipmentType } from "./WSHPEquipmentType";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { Vintages } from "./Vintages.ts";
+import { WSHPEquipmentType } from "./WSHPEquipmentType.ts";
 
 /** Water Source Heat Pump (WSHP) heating/cooling system (with no ventilation).\n\nEach room/zone receives its own Water Source Heat Pump (WSHP), which meets\nthe heating and cooling loads of the space. All WSHPs are connected to the\nsame water condenser loop, which has its temperature maintained by the\nequipment_type (eg. Boiler with Cooling Tower). */
 export class WSHP extends IDdEnergyBaseModel {

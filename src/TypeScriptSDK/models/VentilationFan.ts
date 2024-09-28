@@ -1,8 +1,8 @@
 ﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, IsEnum, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { EnergyBaseModel } from "./EnergyBaseModel";
-import { VentilationControlAbridged } from "./VentilationControlAbridged";
-import { VentilationType } from "./VentilationType";
+import { EnergyBaseModel } from "./EnergyBaseModel.ts";
+import { VentilationControlAbridged } from "./VentilationControlAbridged.ts";
+import { VentilationType } from "./VentilationType.ts";
 
 /** Base class for all objects requiring a valid EnergyPlus identifier. */
 export class VentilationFan extends EnergyBaseModel {

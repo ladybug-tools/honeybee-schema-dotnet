@@ -1,8 +1,8 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
-import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
-import { ScheduleRuleset } from "./ScheduleRuleset";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { ScheduleFixedInterval } from "./ScheduleFixedInterval.ts";
+import { ScheduleRuleset } from "./ScheduleRuleset.ts";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class Lighting extends IDdEnergyBaseModel {

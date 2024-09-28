@@ -1,7 +1,7 @@
 ﻿import { IsInstance, ValidateNested, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { Face3D } from "./Face3D";
-import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged";
+import { Face3D } from "./Face3D.ts";
+import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged.ts";
 
 /** RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door.\n     */
 export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {

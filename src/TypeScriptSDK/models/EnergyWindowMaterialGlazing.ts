@@ -1,7 +1,7 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { Autocalculate } from "./Autocalculate";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { Autocalculate } from "./Autocalculate.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
 
 /** Describe a single glass pane corresponding to a layer in a window construction. */
 export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
