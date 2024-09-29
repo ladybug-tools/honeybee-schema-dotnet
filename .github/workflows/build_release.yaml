@@ -27,7 +27,7 @@ jobs:
       ReleaseVersion: ${{ env.ReleaseVersion }}
 
   buildCSharp:
-    name: Build release CSharp
+    name: Build CSharp
     runs-on: windows-latest
     needs: [genNewVersion]
     env:
@@ -72,7 +72,7 @@ jobs:
           path: ./*.nupkg
 
   buildTypeScript:
-    name: Build release TypeScript
+    name: Build TypeScript
     runs-on: ubuntu-latest
     needs: [genNewVersion]
     env:
@@ -99,13 +99,13 @@ jobs:
         working-directory: src/TypeScriptSDK
         run: npm i
 
-      - name: Build module
-        working-directory: src/TypeScriptSDK
-        run: |
-          npm run build
-          npm run bundle:dts
+      # - name: Build and bundle module
+      #   working-directory: src/TypeScriptSDK
+      #   run: |
+      #     npm run build
+      #     npm run bundle:dts
 
-      - name: Pack package
+      - name: Build and pack package
         working-directory: src/TypeScriptSDK
         run: |
           npm pack
@@ -124,7 +124,7 @@ jobs:
           path: ./*.tgz
 
   release:
-    name: release both CSharp and TypeScript SDK
+    name: Release both CSharp and TypeScript SDK
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     needs: [buildCSharp, buildTypeScript]
