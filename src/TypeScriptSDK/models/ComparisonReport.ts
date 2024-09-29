@@ -1,9 +1,9 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
-import { AddedObject } from "./AddedObject.ts";
-import { ChangedObject } from "./ChangedObject.ts";
-import { DeletedObject } from "./DeletedObject.ts";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { AddedObject } from "./AddedObject";
+import { ChangedObject } from "./ChangedObject";
+import { DeletedObject } from "./DeletedObject";
 
 export class ComparisonReport extends _OpenAPIGenBaseModel {
     @IsString()

@@ -1,11 +1,11 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { ApertureConstructionSetAbridged } from "./ApertureConstructionSetAbridged.ts";
-import { DoorConstructionSetAbridged } from "./DoorConstructionSetAbridged.ts";
-import { FloorConstructionSetAbridged } from "./FloorConstructionSetAbridged.ts";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
-import { RoofCeilingConstructionSetAbridged } from "./RoofCeilingConstructionSetAbridged.ts";
-import { WallConstructionSetAbridged } from "./WallConstructionSetAbridged.ts";
+import { ApertureConstructionSetAbridged } from "./ApertureConstructionSetAbridged";
+import { DoorConstructionSetAbridged } from "./DoorConstructionSetAbridged";
+import { FloorConstructionSetAbridged } from "./FloorConstructionSetAbridged";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { RoofCeilingConstructionSetAbridged } from "./RoofCeilingConstructionSetAbridged";
+import { WallConstructionSetAbridged } from "./WallConstructionSetAbridged";
 
 /** A set of constructions for different surface types and boundary conditions. */
 export class ConstructionSetAbridged extends IDdEnergyBaseModel {

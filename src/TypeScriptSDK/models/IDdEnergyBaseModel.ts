@@ -1,6 +1,6 @@
 ﻿import { IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { EnergyBaseModel } from "./EnergyBaseModel.ts";
+import { EnergyBaseModel } from "./EnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class IDdEnergyBaseModel extends EnergyBaseModel {

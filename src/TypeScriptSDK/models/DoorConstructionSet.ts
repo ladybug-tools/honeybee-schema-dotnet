@@ -1,10 +1,10 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
-import { OpaqueConstruction } from "./OpaqueConstruction.ts";
-import { WindowConstruction } from "./WindowConstruction.ts";
-import { WindowConstructionDynamic } from "./WindowConstructionDynamic.ts";
-import { WindowConstructionShade } from "./WindowConstructionShade.ts";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { OpaqueConstruction } from "./OpaqueConstruction";
+import { WindowConstruction } from "./WindowConstruction";
+import { WindowConstructionDynamic } from "./WindowConstructionDynamic";
+import { WindowConstructionShade } from "./WindowConstructionShade";
 
 /** A set of constructions for door assemblies. */
 export class DoorConstructionSet extends _OpenAPIGenBaseModel {

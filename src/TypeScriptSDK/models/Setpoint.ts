@@ -1,8 +1,8 @@
 ﻿import { IsDefined, IsString, IsOptional, Matches, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
-import { ScheduleFixedInterval } from "./ScheduleFixedInterval.ts";
-import { ScheduleRuleset } from "./ScheduleRuleset.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
+import { ScheduleRuleset } from "./ScheduleRuleset";
 
 /** Used to specify information about the setpoint schedule. */
 export class Setpoint extends IDdEnergyBaseModel {

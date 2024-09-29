@@ -1,7 +1,7 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IsNestedStringArray } from "./../helpers/class-validator.ts";
-import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel.ts";
+import { IsNestedStringArray } from "./../helpers/class-validator";
+import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 
 /** Hidden base class for all Radiance Assets. */
 export class _RadianceAsset extends IDdRadianceBaseModel {

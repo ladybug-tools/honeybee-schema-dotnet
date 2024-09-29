@@ -1,6 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Construction for Shade objects. */
 export class ShadeConstruction extends IDdEnergyBaseModel {

@@ -1,10 +1,10 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, IsArray, IsInstance, ValidateNested, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
-import { BuildingTypes } from "./BuildingTypes.ts";
-import { ClimateZones } from "./ClimateZones.ts";
-import { EfficiencyStandards } from "./EfficiencyStandards.ts";
-import { Location } from "./Location.ts";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { BuildingTypes } from "./BuildingTypes";
+import { ClimateZones } from "./ClimateZones";
+import { EfficiencyStandards } from "./EfficiencyStandards";
+import { Location } from "./Location";
 
 /** Project information. */
 export class ProjectInfo extends _OpenAPIGenBaseModel {

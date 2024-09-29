@@ -1,19 +1,19 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, IsInstance, ValidateNested, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
-import { DaylightingControl } from "./DaylightingControl.ts";
-import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged.ts";
-import { GasEquipmentAbridged } from "./GasEquipmentAbridged.ts";
-import { InfiltrationAbridged } from "./InfiltrationAbridged.ts";
-import { InternalMassAbridged } from "./InternalMassAbridged.ts";
-import { LightingAbridged } from "./LightingAbridged.ts";
-import { PeopleAbridged } from "./PeopleAbridged.ts";
-import { ProcessAbridged } from "./ProcessAbridged.ts";
-import { ServiceHotWaterAbridged } from "./ServiceHotWaterAbridged.ts";
-import { SetpointAbridged } from "./SetpointAbridged.ts";
-import { VentilationAbridged } from "./VentilationAbridged.ts";
-import { VentilationControlAbridged } from "./VentilationControlAbridged.ts";
-import { VentilationFan } from "./VentilationFan.ts";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { DaylightingControl } from "./DaylightingControl";
+import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
+import { GasEquipmentAbridged } from "./GasEquipmentAbridged";
+import { InfiltrationAbridged } from "./InfiltrationAbridged";
+import { InternalMassAbridged } from "./InternalMassAbridged";
+import { LightingAbridged } from "./LightingAbridged";
+import { PeopleAbridged } from "./PeopleAbridged";
+import { ProcessAbridged } from "./ProcessAbridged";
+import { ServiceHotWaterAbridged } from "./ServiceHotWaterAbridged";
+import { SetpointAbridged } from "./SetpointAbridged";
+import { VentilationAbridged } from "./VentilationAbridged";
+import { VentilationControlAbridged } from "./VentilationControlAbridged";
+import { VentilationFan } from "./VentilationFan";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {

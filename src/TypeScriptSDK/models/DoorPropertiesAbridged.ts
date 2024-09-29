@@ -1,8 +1,8 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
-import { DoorEnergyPropertiesAbridged } from "./DoorEnergyPropertiesAbridged.ts";
-import { DoorRadiancePropertiesAbridged } from "./DoorRadiancePropertiesAbridged.ts";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { DoorEnergyPropertiesAbridged } from "./DoorEnergyPropertiesAbridged";
+import { DoorRadiancePropertiesAbridged } from "./DoorRadiancePropertiesAbridged";
 
 export class DoorPropertiesAbridged extends _OpenAPIGenBaseModel {
     @IsString()

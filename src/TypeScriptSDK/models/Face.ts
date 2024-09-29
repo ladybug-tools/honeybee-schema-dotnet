@@ -1,17 +1,17 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsEnum, IsString, IsOptional, Matches, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { Adiabatic } from "./Adiabatic.ts";
-import { Aperture } from "./Aperture.ts";
-import { Door } from "./Door.ts";
-import { Face3D } from "./Face3D.ts";
-import { FacePropertiesAbridged } from "./FacePropertiesAbridged.ts";
-import { FaceType } from "./FaceType.ts";
-import { Ground } from "./Ground.ts";
-import { IDdBaseModel } from "./IDdBaseModel.ts";
-import { OtherSideTemperature } from "./OtherSideTemperature.ts";
-import { Outdoors } from "./Outdoors.ts";
-import { Shade } from "./Shade.ts";
-import { Surface } from "./Surface.ts";
+import { Adiabatic } from "./Adiabatic";
+import { Aperture } from "./Aperture";
+import { Door } from "./Door";
+import { Face3D } from "./Face3D";
+import { FacePropertiesAbridged } from "./FacePropertiesAbridged";
+import { FaceType } from "./FaceType";
+import { Ground } from "./Ground";
+import { IDdBaseModel } from "./IDdBaseModel";
+import { OtherSideTemperature } from "./OtherSideTemperature";
+import { Outdoors } from "./Outdoors";
+import { Shade } from "./Shade";
+import { Surface } from "./Surface";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Face extends IDdBaseModel {

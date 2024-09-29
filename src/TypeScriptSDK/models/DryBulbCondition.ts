@@ -1,6 +1,6 @@
 ﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Used to specify dry bulb conditions on a design day. */
 export class DryBulbCondition extends _OpenAPIGenBaseModel {

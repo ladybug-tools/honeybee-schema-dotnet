@@ -1,8 +1,8 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { Face3D } from "./Face3D.ts";
-import { IDdBaseModel } from "./IDdBaseModel.ts";
-import { ShadePropertiesAbridged } from "./ShadePropertiesAbridged.ts";
+import { Face3D } from "./Face3D";
+import { IDdBaseModel } from "./IDdBaseModel";
+import { ShadePropertiesAbridged } from "./ShadePropertiesAbridged";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Shade extends IDdBaseModel {

@@ -1,6 +1,6 @@
 ﻿import { IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Detailed HVAC system object defined using IronBug or OpenStudio .NET bindings. */
 export class DetailedHVAC extends IDdEnergyBaseModel {

@@ -1,14 +1,14 @@
 ﻿import { IsString, IsDefined, IsOptional, IsArray, IsNumber, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { Glass } from "./Glass.ts";
-import { Glow } from "./Glow.ts";
-import { Light } from "./Light.ts";
-import { Metal } from "./Metal.ts";
-import { Mirror } from "./Mirror.ts";
-import { ModifierBase } from "./ModifierBase.ts";
-import { Plastic } from "./Plastic.ts";
-import { Trans } from "./Trans.ts";
-import { Void } from "./Void.ts";
+import { Glass } from "./Glass";
+import { Glow } from "./Glow";
+import { Light } from "./Light";
+import { Metal } from "./Metal";
+import { Mirror } from "./Mirror";
+import { ModifierBase } from "./ModifierBase";
+import { Plastic } from "./Plastic";
+import { Trans } from "./Trans";
+import { Void } from "./Void";
 
 /** Radiance BSDF (Bidirectional Scattering Distribution Function) material. */
 export class BSDF extends ModifierBase {

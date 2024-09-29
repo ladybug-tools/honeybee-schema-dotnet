@@ -1,7 +1,7 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { Face3D } from "./Face3D.ts";
-import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel.ts";
+import { Face3D } from "./Face3D";
+import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 
 /** A single planar geometry that can be assigned to Radiance states. */
 export class StateGeometryAbridged extends IDdRadianceBaseModel {

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "module": "ES6",
+    "module": "CommonJS",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -13,14 +13,14 @@
     // "sourceMap": true,
 
     /* Bundler mode */
-    "moduleResolution": "Bundler",
-    "allowImportingTsExtensions": true,
+    "moduleResolution": "Node",
+    // "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     // "emitDeclarationOnly": true,
-    // "declaration": true,
-    // "declarationMap": true,
-    "noEmit": true,
+    "declaration": true,
+    "declarationMap": true,
+    // "noEmit": true,
 
     /* Linting */
     "strict": true,

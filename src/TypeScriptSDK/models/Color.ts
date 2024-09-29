@@ -1,6 +1,6 @@
 ﻿import { IsInt, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A RGB color. */
 export class Color extends _OpenAPIGenBaseModel {

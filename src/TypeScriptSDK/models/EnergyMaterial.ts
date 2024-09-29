@@ -1,7 +1,7 @@
 ﻿import { IsNumber, IsDefined, Max, Min, IsString, IsOptional, Matches, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
-import { Roughness } from "./Roughness.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { Roughness } from "./Roughness";
 
 /** Opaque material representing a layer within an opaque construction. */
 export class EnergyMaterial extends IDdEnergyBaseModel {

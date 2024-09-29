@@ -1,7 +1,7 @@
 ﻿import { IsArray, IsEnum, IsDefined, IsNumber, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { GasType } from "./GasType.ts";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { GasType } from "./GasType";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Create a mixture of two to four different gases to fill the panes of multiple\npane windows. */
 export class EnergyWindowMaterialGasMixture extends IDdEnergyBaseModel {

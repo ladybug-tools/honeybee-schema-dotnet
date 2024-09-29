@@ -1,6 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A set of constructions for aperture assemblies. */
 export class ApertureConstructionSetAbridged extends _OpenAPIGenBaseModel {

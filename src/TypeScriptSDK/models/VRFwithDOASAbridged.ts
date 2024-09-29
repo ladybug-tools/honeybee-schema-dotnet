@@ -1,8 +1,8 @@
 ﻿import { IsEnum, IsOptional, IsNumber, Min, Max, IsBoolean, IsString, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
-import { Vintages } from "./Vintages.ts";
-import { VRFwithDOASEquipmentType } from "./VRFwithDOASEquipmentType.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { Vintages } from "./Vintages";
+import { VRFwithDOASEquipmentType } from "./VRFwithDOASEquipmentType";
 
 /** Variable Refrigerant Flow (VRF) with DOAS HVAC system.\n\nAll rooms/zones in the system are connected to a Dedicated Outdoor Air System\n(DOAS) that supplies a constant volume of ventilation air at the same temperature\nto all rooms/zones. The ventilation air temperature will vary from 21.1C (70F)\nto 15.5C (60F) depending on the outdoor air temperature (the DOAS supplies cooler air\nwhen outdoor conditions are warmer). The ventilation air temperature is maintained\nby a single speed direct expansion (DX) cooling coil along with a single-speed\ndirect expansion (DX) heat pump with a backup electrical resistance coil.\n\nEach room/zone also receives its own Variable Refrigerant Flow (VRF) terminal,\nwhich meets the heating and cooling loads of the space. All room/zone terminals\nare connected to the same outdoor unit, meaning that either all rooms must be\nin cooling or heating mode together. */
 export class VRFwithDOASAbridged extends IDdEnergyBaseModel {

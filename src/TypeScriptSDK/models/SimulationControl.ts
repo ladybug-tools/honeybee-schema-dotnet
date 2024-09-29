@@ -1,6 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Used to specify which types of calculations to run. */
 export class SimulationControl extends _OpenAPIGenBaseModel {

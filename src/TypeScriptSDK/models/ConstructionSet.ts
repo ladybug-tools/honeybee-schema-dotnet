@@ -1,14 +1,14 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { AirBoundaryConstruction } from "./AirBoundaryConstruction.ts";
-import { ApertureConstructionSet } from "./ApertureConstructionSet.ts";
-import { DoorConstructionSet } from "./DoorConstructionSet.ts";
-import { FloorConstructionSet } from "./FloorConstructionSet.ts";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
-import { OpaqueConstruction } from "./OpaqueConstruction.ts";
-import { RoofCeilingConstructionSet } from "./RoofCeilingConstructionSet.ts";
-import { ShadeConstruction } from "./ShadeConstruction.ts";
-import { WallConstructionSet } from "./WallConstructionSet.ts";
+import { AirBoundaryConstruction } from "./AirBoundaryConstruction";
+import { ApertureConstructionSet } from "./ApertureConstructionSet";
+import { DoorConstructionSet } from "./DoorConstructionSet";
+import { FloorConstructionSet } from "./FloorConstructionSet";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { OpaqueConstruction } from "./OpaqueConstruction";
+import { RoofCeilingConstructionSet } from "./RoofCeilingConstructionSet";
+import { ShadeConstruction } from "./ShadeConstruction";
+import { WallConstructionSet } from "./WallConstructionSet";
 
 /** A set of constructions for different surface types and boundary conditions. */
 export class ConstructionSet extends IDdEnergyBaseModel {

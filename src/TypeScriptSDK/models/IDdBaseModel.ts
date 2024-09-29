@@ -1,6 +1,6 @@
 ﻿import { IsString, IsDefined, Matches, MinLength, MaxLength, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class IDdBaseModel extends _OpenAPIGenBaseModel {

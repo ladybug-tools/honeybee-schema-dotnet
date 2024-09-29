@@ -1,6 +1,6 @@
 ﻿import { IsNumber, IsDefined, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Describe an entire glazing system rather than individual layers.\n\nUsed when only very limited information is available on the glazing layers or when\nspecific performance levels are being targeted. */
 export class EnergyWindowMaterialSimpleGlazSys extends IDdEnergyBaseModel {

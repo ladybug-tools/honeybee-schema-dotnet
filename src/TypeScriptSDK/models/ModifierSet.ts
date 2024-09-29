@@ -1,21 +1,21 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { ApertureModifierSet } from "./ApertureModifierSet.ts";
-import { BSDF } from "./BSDF.ts";
-import { DoorModifierSet } from "./DoorModifierSet.ts";
-import { FloorModifierSet } from "./FloorModifierSet.ts";
-import { Glass } from "./Glass.ts";
-import { Glow } from "./Glow.ts";
-import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel.ts";
-import { Light } from "./Light.ts";
-import { Metal } from "./Metal.ts";
-import { Mirror } from "./Mirror.ts";
-import { Plastic } from "./Plastic.ts";
-import { RoofCeilingModifierSet } from "./RoofCeilingModifierSet.ts";
-import { ShadeModifierSet } from "./ShadeModifierSet.ts";
-import { Trans } from "./Trans.ts";
-import { Void } from "./Void.ts";
-import { WallModifierSet } from "./WallModifierSet.ts";
+import { ApertureModifierSet } from "./ApertureModifierSet";
+import { BSDF } from "./BSDF";
+import { DoorModifierSet } from "./DoorModifierSet";
+import { FloorModifierSet } from "./FloorModifierSet";
+import { Glass } from "./Glass";
+import { Glow } from "./Glow";
+import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
+import { Light } from "./Light";
+import { Metal } from "./Metal";
+import { Mirror } from "./Mirror";
+import { Plastic } from "./Plastic";
+import { RoofCeilingModifierSet } from "./RoofCeilingModifierSet";
+import { ShadeModifierSet } from "./ShadeModifierSet";
+import { Trans } from "./Trans";
+import { Void } from "./Void";
+import { WallModifierSet } from "./WallModifierSet";
 
 /** Set containing all radiance modifiers needed to create a radiance model. */
 export class ModifierSet extends IDdRadianceBaseModel {

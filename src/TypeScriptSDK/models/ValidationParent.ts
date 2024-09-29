@@ -1,6 +1,6 @@
 ﻿import { IsEnum, IsDefined, IsString, Matches, MinLength, MaxLength, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { ParentTypes } from "./ParentTypes.ts";
+import { ParentTypes } from "./ParentTypes";
 
 export class ValidationParent {
     @IsEnum(ParentTypes)
