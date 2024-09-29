@@ -1,6 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { BaseModifierSetAbridged } from "./BaseModifierSetAbridged.ts";
+import { BaseModifierSetAbridged } from "./BaseModifierSetAbridged";
 
 /** Abridged set containing radiance modifiers needed for a model's Roofs. */
 export class RoofCeilingModifierSetAbridged extends BaseModifierSetAbridged {

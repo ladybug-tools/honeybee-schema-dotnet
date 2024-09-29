@@ -1,9 +1,9 @@
 ﻿import { IsEnum, IsOptional, IsString, Matches, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
-import { RadiantEquipmentType } from "./RadiantEquipmentType.ts";
-import { RadiantFaceTypes } from "./RadiantFaceTypes.ts";
-import { Vintages } from "./Vintages.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { RadiantEquipmentType } from "./RadiantEquipmentType";
+import { RadiantFaceTypes } from "./RadiantFaceTypes";
+import { Vintages } from "./Vintages";
 
 /** Low temperature radiant HVAC system.\n\nThis HVAC template will change the floor and/or ceiling constructions\nof the Rooms that it is applied to, replacing them with a construction that\naligns with the radiant_type property (eg. CeilingMetalPanel).\n\nThe heating and cooling needs of the space are met with the radiant constructions,\nwhich use chilled water at 12.8C (55F) and a hot water temperature somewhere\nbetween 32.2C (90F) and 49C (120F) (warmer temperatures are used in colder\nclimate zones).\n\nNote that radiant systems are particularly limited in cooling capacity and\nusing them may result in many unmet hours. To reduce unmet hours, one can\nremove carpets, reduce internal loads, reduce solar and envelope gains during\npeak times, add thermal mass, and use an expanded comfort range. */
 export class Radiant extends IDdEnergyBaseModel {

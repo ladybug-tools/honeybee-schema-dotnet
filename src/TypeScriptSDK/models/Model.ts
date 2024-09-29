@@ -1,14 +1,14 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsArray, IsEnum, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { Aperture } from "./Aperture.ts";
-import { Door } from "./Door.ts";
-import { Face } from "./Face.ts";
-import { IDdBaseModel } from "./IDdBaseModel.ts";
-import { ModelProperties } from "./ModelProperties.ts";
-import { Room } from "./Room.ts";
-import { Shade } from "./Shade.ts";
-import { ShadeMesh } from "./ShadeMesh.ts";
-import { Units } from "./Units.ts";
+import { Aperture } from "./Aperture";
+import { Door } from "./Door";
+import { Face } from "./Face";
+import { IDdBaseModel } from "./IDdBaseModel";
+import { ModelProperties } from "./ModelProperties";
+import { Room } from "./Room";
+import { Shade } from "./Shade";
+import { ShadeMesh } from "./ShadeMesh";
+import { Units } from "./Units";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Model extends IDdBaseModel {

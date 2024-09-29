@@ -1,9 +1,9 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsInt, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
-import { CalculationMethod } from "./CalculationMethod.ts";
-import { CalculationUpdateMethod } from "./CalculationUpdateMethod.ts";
-import { SolarDistribution } from "./SolarDistribution.ts";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { CalculationMethod } from "./CalculationMethod";
+import { CalculationUpdateMethod } from "./CalculationUpdateMethod";
+import { SolarDistribution } from "./SolarDistribution";
 
 /** Used to describe settings for EnergyPlus shadow calculation. */
 export class ShadowCalculation extends _OpenAPIGenBaseModel {

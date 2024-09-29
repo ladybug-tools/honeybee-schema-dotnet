@@ -1,8 +1,8 @@
 ﻿import { IsArray, IsDefined, IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IsNestedNumberArray } from "./../helpers/class-validator.ts";
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
-import { Plane } from "./Plane.ts";
+import { IsNestedNumberArray } from "./../helpers/class-validator";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { Plane } from "./Plane";
 
 /** A single planar face in 3D space. */
 export class Face3D extends _OpenAPIGenBaseModel {

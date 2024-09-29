@@ -1,7 +1,7 @@
 ﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, IsInstance, ValidateNested, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
-import { ScheduleTypeLimit } from "./ScheduleTypeLimit.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { ScheduleTypeLimit } from "./ScheduleTypeLimit";
 
 /** Used to specify a start date and a list of values for a period of analysis. */
 export class ScheduleFixedInterval extends IDdEnergyBaseModel {

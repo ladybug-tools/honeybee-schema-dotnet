@@ -1,15 +1,15 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
-import { ApertureModifierSetAbridged } from "./ApertureModifierSetAbridged.ts";
-import { DoorModifierSetAbridged } from "./DoorModifierSetAbridged.ts";
-import { FloorModifierSetAbridged } from "./FloorModifierSetAbridged.ts";
-import { Glass } from "./Glass.ts";
-import { Plastic } from "./Plastic.ts";
-import { RoofCeilingModifierSetAbridged } from "./RoofCeilingModifierSetAbridged.ts";
-import { ShadeModifierSetAbridged } from "./ShadeModifierSetAbridged.ts";
-import { Trans } from "./Trans.ts";
-import { WallModifierSetAbridged } from "./WallModifierSetAbridged.ts";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { ApertureModifierSetAbridged } from "./ApertureModifierSetAbridged";
+import { DoorModifierSetAbridged } from "./DoorModifierSetAbridged";
+import { FloorModifierSetAbridged } from "./FloorModifierSetAbridged";
+import { Glass } from "./Glass";
+import { Plastic } from "./Plastic";
+import { RoofCeilingModifierSetAbridged } from "./RoofCeilingModifierSetAbridged";
+import { ShadeModifierSetAbridged } from "./ShadeModifierSetAbridged";
+import { Trans } from "./Trans";
+import { WallModifierSetAbridged } from "./WallModifierSetAbridged";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class GlobalModifierSet extends _OpenAPIGenBaseModel {

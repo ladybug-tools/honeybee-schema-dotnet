@@ -1,7 +1,7 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { GasType } from "./GasType.ts";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { GasType } from "./GasType";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Create single layer of gas in a window construction.\n\nCan be combined with EnergyWindowMaterialGlazing to make multi-pane windows. */
 export class EnergyWindowMaterialGas extends IDdEnergyBaseModel {

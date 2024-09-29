@@ -1,9 +1,9 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { EnergyBaseModel } from "./EnergyBaseModel.ts";
-import { NoLimit } from "./NoLimit.ts";
-import { ScheduleNumericType } from "./ScheduleNumericType.ts";
-import { ScheduleUnitType } from "./ScheduleUnitType.ts";
+import { EnergyBaseModel } from "./EnergyBaseModel";
+import { NoLimit } from "./NoLimit";
+import { ScheduleNumericType } from "./ScheduleNumericType";
+import { ScheduleUnitType } from "./ScheduleUnitType";
 
 /** Specifies the data types and limits for values contained in schedules. */
 export class ScheduleTypeLimit extends EnergyBaseModel {

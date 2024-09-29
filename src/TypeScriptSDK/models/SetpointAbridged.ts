@@ -1,6 +1,6 @@
 ﻿import { IsString, IsDefined, MinLength, MaxLength, IsOptional, Matches, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Used to specify information about the setpoint schedule. */
 export class SetpointAbridged extends IDdEnergyBaseModel {

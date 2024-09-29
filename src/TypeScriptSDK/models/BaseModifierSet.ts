@@ -1,15 +1,15 @@
 ﻿import { IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
-import { BSDF } from "./BSDF.ts";
-import { Glass } from "./Glass.ts";
-import { Glow } from "./Glow.ts";
-import { Light } from "./Light.ts";
-import { Metal } from "./Metal.ts";
-import { Mirror } from "./Mirror.ts";
-import { Plastic } from "./Plastic.ts";
-import { Trans } from "./Trans.ts";
-import { Void } from "./Void.ts";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { BSDF } from "./BSDF";
+import { Glass } from "./Glass";
+import { Glow } from "./Glow";
+import { Light } from "./Light";
+import { Metal } from "./Metal";
+import { Mirror } from "./Mirror";
+import { Plastic } from "./Plastic";
+import { Trans } from "./Trans";
+import { Void } from "./Void";
 
 /** Base class for the modifier sets assigned to Faces. */
 export class BaseModifierSet extends _OpenAPIGenBaseModel {

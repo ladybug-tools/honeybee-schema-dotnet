@@ -1,7 +1,7 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel.ts";
-import { Autocalculate } from "./Autocalculate.ts";
+import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { Autocalculate } from "./Autocalculate";
 
 /** A Ladybug Location. */
 export class Location extends _OpenAPIGenBaseModel {

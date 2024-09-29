@@ -1,6 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel.ts";
+import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 
 /** Base class for Radiance Modifiers */
 export class ModifierBase extends IDdRadianceBaseModel {

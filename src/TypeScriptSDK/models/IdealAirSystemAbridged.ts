@@ -1,9 +1,9 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsBoolean, IsNumber, Min, Max, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { Autosize } from "./Autosize.ts";
-import { EconomizerType } from "./EconomizerType.ts";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
-import { NoLimit } from "./NoLimit.ts";
+import { Autosize } from "./Autosize";
+import { EconomizerType } from "./EconomizerType";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { NoLimit } from "./NoLimit";
 
 /** Provides a model for an ideal HVAC system. */
 export class IdealAirSystemAbridged extends IDdEnergyBaseModel {

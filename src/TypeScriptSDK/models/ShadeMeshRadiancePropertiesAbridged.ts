@@ -1,6 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { _PropertiesBaseAbridged } from "./_PropertiesBaseAbridged.ts";
+import { _PropertiesBaseAbridged } from "./_PropertiesBaseAbridged";
 
 /** Radiance Properties for Honeybee ShadeMesh Abridged. */
 export class ShadeMeshRadiancePropertiesAbridged extends _PropertiesBaseAbridged {

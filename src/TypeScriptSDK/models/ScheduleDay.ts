@@ -1,7 +1,7 @@
 ﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { IsNestedIntegerArray } from "./../helpers/class-validator.ts";
-import { EnergyBaseModel } from "./EnergyBaseModel.ts";
+import { IsNestedIntegerArray } from "./../helpers/class-validator";
+import { EnergyBaseModel } from "./EnergyBaseModel";
 
 /** Used to describe the daily schedule for a single simulation day. */
 export class ScheduleDay extends EnergyBaseModel {

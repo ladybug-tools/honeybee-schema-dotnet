@@ -1,14 +1,14 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { ControlType } from "./ControlType.ts";
-import { EnergyWindowMaterialBlind } from "./EnergyWindowMaterialBlind.ts";
-import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing.ts";
-import { EnergyWindowMaterialShade } from "./EnergyWindowMaterialShade.ts";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
-import { ScheduleFixedInterval } from "./ScheduleFixedInterval.ts";
-import { ScheduleRuleset } from "./ScheduleRuleset.ts";
-import { ShadeLocation } from "./ShadeLocation.ts";
-import { WindowConstruction } from "./WindowConstruction.ts";
+import { ControlType } from "./ControlType";
+import { EnergyWindowMaterialBlind } from "./EnergyWindowMaterialBlind";
+import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
+import { EnergyWindowMaterialShade } from "./EnergyWindowMaterialShade";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
+import { ScheduleRuleset } from "./ScheduleRuleset";
+import { ShadeLocation } from "./ShadeLocation";
+import { WindowConstruction } from "./WindowConstruction";
 
 /** Construction for window objects (Aperture, Door). */
 export class WindowConstructionShade extends IDdEnergyBaseModel {

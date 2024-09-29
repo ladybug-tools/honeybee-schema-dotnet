@@ -1,2 +1,2 @@
-export * from "./models/index.ts";
-export * from "./helpers/class-validator.ts"
+export * from "./models/index";
+export * from "./helpers/class-validator"

@@ -1,7 +1,7 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { Autocalculate } from "./Autocalculate.ts";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
+import { Autocalculate } from "./Autocalculate";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class PeopleAbridged extends IDdEnergyBaseModel {

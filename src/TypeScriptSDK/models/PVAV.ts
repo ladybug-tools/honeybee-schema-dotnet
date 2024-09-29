@@ -1,9 +1,9 @@
 ﻿import { IsEnum, IsOptional, IsNumber, Min, Max, IsBoolean, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { AllAirEconomizerType } from "./AllAirEconomizerType.ts";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
-import { PVAVEquipmentType } from "./PVAVEquipmentType.ts";
-import { Vintages } from "./Vintages.ts";
+import { AllAirEconomizerType } from "./AllAirEconomizerType";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { PVAVEquipmentType } from "./PVAVEquipmentType";
+import { Vintages } from "./Vintages";
 
 /** Packaged Variable Air Volume (PVAV) HVAC system (aka. System 5 or 6).\n\nAll rooms/zones are connected to a central air loop that is kept at a constant\ncentral temperature of 12.8C (55F). The central temperature is maintained by a\ncooling coil, which runs whenever the combination of return air and fresh outdoor\nair is greater than 12.8C, as well as a heating coil, which runs whenever\nthe combination of return air and fresh outdoor air is less than 12.8C.\n\nEach air terminal for the connected rooms/zones contains its own reheat coil,\nwhich runs whenever the room is not in need of the cooling supplied by the 12.8C\ncentral air.\n\nThe central cooling coil is always a two-speed direct expansion (DX) coil.\nAll heating coils are hot water coils except when Gas Coil equipment_type is\nused (in which case the central coil is gas and all reheat is electric)\nor when Parallel Fan-Powered (PFP) boxes equipment_type is used (in which case\ncoils are electric resistance). Hot water temperature is 82C (180F) for\nboiler/district heating and 49C (120F) when ASHP is used.\n\nPVAV systems are the traditional baseline system for commercial buildings\nwith than 4-5 stories or between 2,300 m2 and 14,000 m2 (25,000 ft2 and\n150,000 ft2) of floor area. */
 export class PVAV extends IDdEnergyBaseModel {

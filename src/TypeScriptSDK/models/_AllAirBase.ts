@@ -1,8 +1,8 @@
 ﻿import { IsEnum, IsOptional, IsNumber, Min, Max, IsBoolean, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
-import { AllAirEconomizerType } from "./AllAirEconomizerType.ts";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel.ts";
-import { Vintages } from "./Vintages.ts";
+import { AllAirEconomizerType } from "./AllAirEconomizerType";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { Vintages } from "./Vintages";
 
 /** Base class for all-air systems.\n\nAll-air systems provide both ventilation and heating + cooling demand with\nthe same stream of warm/cool air. As such, they often grant tight control\nover zone humidity. However, because such systems often involve the\ncooling of air only to reheat it again, they are often more energy intensive\nthan systems that separate ventilation from the meeting of thermal loads. */
 export class _AllAirBase extends IDdEnergyBaseModel {
