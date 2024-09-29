@@ -96,17 +96,17 @@ jobs:
           dotnet run --genTsModel --updateVersion
 
       - name: Install dependencies
-        working-directory: src/TypeScriptSDK
+        working-directory: src/TypescriptSDK
         run: npm i
 
       # - name: Build and bundle module
-      #   working-directory: src/TypeScriptSDK
+      #   working-directory: src/TypescriptSDK
       #   run: |
       #     npm run build
       #     npm run bundle:dts
 
       - name: Build and pack package
-        working-directory: src/TypeScriptSDK
+        working-directory: src/TypescriptSDK
         run: |
           npm pack
           cp ./*.tgz ./../../
@@ -114,7 +114,7 @@ jobs:
       - name: Unit tests
         working-directory: src/TypescriptSDK.Tests
         run: |
-          npm i ./../TypeScriptSDK/honeybee-schema-${{env.RELEASE_VERSION}}.tgz
+          npm i ./../TypescriptSDK/honeybee-schema-${{env.RELEASE_VERSION}}.tgz
           npm run test
 
       - name: Upload artifact
