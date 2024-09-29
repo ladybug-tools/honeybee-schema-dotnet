@@ -1,5 +1,5 @@
 import { plainToClass } from "class-transformer";
-import { Model, Face3D, Glass, Plane, Face, GlobalModifierSet, Plastic } from "honeybee-schema";
+import { Model, Face3D, Glass, Plane, Face, GlobalModifierSet, Plastic, DoorConstructionSetAbridged } from "honeybee-schema";
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -19,7 +19,8 @@ test('test model', () => {
   expect(model.validate()).resolves.toBe(true);
 
 
-  model.properties.radiance
+  const doorSet = model.properties.energy?.global_construction_set?.door_set;
+  expect(doorSet).toBeInstanceOf(DoorConstructionSetAbridged);
 });
 
 
@@ -44,6 +45,8 @@ test('test face3D', () => {
   const loc2 = plainToClass(Face3D, json2);
   expect(loc2.validate()).rejects.toThrow("Validation failed");
 
+  const loc3 = Face3D.fromJS(json);
+  expect(loc.validate()).resolves.toBe(true);
 
 });
 
