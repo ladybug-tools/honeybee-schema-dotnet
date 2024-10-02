@@ -4,7 +4,7 @@
   "version": "1.5804.0",
   "description": "Honeybee Schema's typescript version",
   "author": "Ladybug Tools",
-  "type": "module",
+  "type": "commonjs",
   "files": [
     "dist"
   ],
