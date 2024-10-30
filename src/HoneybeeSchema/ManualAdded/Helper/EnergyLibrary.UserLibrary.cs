@@ -18,7 +18,7 @@ namespace HoneybeeSchema.Helper
         //public static string UserBuildingProgramTypesFolder => Path.Combine(DefaultStandardsFolder, "programtypes");
         //public static string UserScheduleFolder => Path.Combine(DefaultStandardsFolder, "schedules");
 
-        private static string PythonFolder => Paths.PythonFolder;
+        //private static string PythonFolder => Paths.PythonFolder;
         //private static string HoneybeeEnergyCLI => Path.Combine(PythonFolder, "");
 
         #region User Library
@@ -172,7 +172,6 @@ namespace HoneybeeSchema.Helper
 
         private static HB.ModelProperties LoadFromUserLibraryFolder(bool loadEnergy, string userLibFolder = default)
         {
-            var python = Path.Combine(PythonFolder, "python");
             var userPath = Directory.Exists(userLibFolder) ? $"-s \"{userLibFolder}\"" : string.Empty;
             var prop = new ModelProperties();
 
@@ -211,8 +210,42 @@ namespace HoneybeeSchema.Helper
                     throw;
                 }
         
-             
             }
+        }
+
+        public static bool AddEnergyCustomLib(string energyPropHbJsonPath, out string log)
+        {
+            var temp = energyPropHbJsonPath;
+            if (!File.Exists(temp)) throw new ArgumentException($"Invalid file path: {temp}");
+
+            //https://www.ladybug.tools/honeybee-energy/docs/cli/lib.html#honeybee-energy-lib-add
+            //honeybee-energy lib add [OPTIONS] PROPERTIES_FILE
+            var arg = $"-m honeybee_energy lib add \"{temp}\"";
+            var done = PythonCommand.ExePythonCommand(arg, true, out log);
+            return done;
+        }
+
+
+        public static bool AddRadianceCustomLib(string radPropHbJsonPath, out string log)
+        {
+            var temp = radPropHbJsonPath;
+            if (!File.Exists(temp)) throw new ArgumentException($"Invalid file path: {temp}");
+
+            //https://www.ladybug.tools/honeybee-radiance/docs/cli/lib.html#honeybee-radiance-lib-add
+            //honeybee-radiance lib add [OPTIONS] PROPERTIES_FILE
+            var arg = $"-m honeybee_radiance lib add \"{temp}\"";
+            var done = PythonCommand.ExePythonCommand(arg, true, out log);
+            return done;
+        }
+
+
+        public static bool PurgeUserLib(out string log)
+        {
+            //https://www.ladybug.tools/honeybee-core/docs/cli/lib.html#honeybee-lib-purge
+            //honeybee lib purge [OPTIONS] PROPERTIES_FILE
+            var arg = $"-m honeybee lib purge";
+            var done = PythonCommand.ExePythonCommand(arg, true, out log);
+            return done;
         }
 
 
