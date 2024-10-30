@@ -1,4 +1,4 @@
-[![Build](https://github.com/ladybug-tools/honeybee-schema-dotnet/workflows/CD/badge.svg)](https://github.com/ladybug-tools/honeybee-schema-dotnet/actions) [![NuGet Version and Downloads count](https://buildstats.info/nuget/HoneybeeSchema?dWidth=50)](https://www.nuget.org/packages/HoneybeeSchema)
+[![Build](https://github.com/ladybug-tools/honeybee-schema-dotnet/actions/workflows/build_release.yaml/badge.svg)](https://github.com/ladybug-tools/honeybee-schema-dotnet/actions/workflows/build_release.yaml) [![NuGet Version](https://img.shields.io/nuget/v/HoneybeeSchema)](https://www.nuget.org/packages/HoneybeeSchema) [![NuGet Downloads](https://img.shields.io/nuget/dt/HoneybeeSchema)](https://www.nuget.org/packages/HoneybeeSchema)
 
 # HoneybeeSchema - the C# library for the Honeybee Project Information Schema
 
