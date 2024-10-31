@@ -4,7 +4,7 @@ on: repository_dispatch
 
 jobs:
   bump_honeybee_schema:
-    name: "Check Event"
+    name: "Bump honeybee_schema"
     runs-on: ubuntu-latest
     if: github.event.action == 'honeybee_schema_release'
     steps:
@@ -15,14 +15,14 @@ jobs:
           token: ${{ secrets.DEPS_UPDATING }}
           submodules: recursive
 
-      - name: "Run Update Script"
+      - name: "Update version in requirements.txt"
         env:
           VERSION: ${{ github.event.client_payload.version }}
         run: |
           export CLEAN_VERSION=$(echo $VERSION | sed 's/v//g')
           sed -i --regexp-extended 's/(honeybee-schema==).*/honeybee-schema=='"$CLEAN_VERSION"'/' requirements.txt
 
-      - name: "Run Update Script"
+      - name: "Run SchemaGenerator"
         run: |
           cd ./.generator/SchemaGenerator
           dotnet run --download --genCsModel --genCsInterface --genTsModel --updateVersion
@@ -40,5 +40,5 @@ jobs:
           git config --global user.name 'ladybugbot'
           git config --global user.email 'ladybugbot@users.noreply.github.com'
           git add .
-          git commit -m "fix(deps): Bump honeybee-schema to $VERSION"
+          git commit -m "fix(deps): Bump honeybee-schema openapi doc to $VERSION"
           git push
