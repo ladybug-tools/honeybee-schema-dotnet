@@ -151,6 +151,24 @@ namespace HoneybeeSchema.Test
         }
 
         [Test]
+        public void PropertySerializationTest()
+        {
+
+            var obj = ModelProperties.Default;
+            var sch = obj.Energy.Schedules.OfType<ScheduleRulesetAbridged>().First();
+            var day = sch.DaySchedules.First();
+
+            var json = obj.ToJson();
+            var obj2 = ModelProperties.FromJson(json);
+            var sch2 = obj2.Energy.Schedules.OfType<ScheduleRulesetAbridged>().First();
+            var day2 = sch2.DaySchedules.First();
+
+            Assert.AreEqual(day.Values.Count, day.Times.Count);
+            Assert.AreEqual(day2.Values.Count, day2.Times.Count);
+          
+        }
+
+        [Test]
         public void VersionTest()
         {
             var version = this.instance.Version;
