@@ -72,7 +72,7 @@ export class View extends _RadianceAsset {
     constructor() {
         super();
         this.type = "View";
-        this.view_type = ViewType.v;
+        this.view_type = ViewType.V;
         this.h_size = 60;
         this.v_size = 60;
     }
