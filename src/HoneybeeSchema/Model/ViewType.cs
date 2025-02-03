@@ -19,22 +19,22 @@ namespace HoneybeeSchema
     {
 
         [EnumMember(Value = "v")]
-        v = 1,
+        V = 1,
 
         [EnumMember(Value = "h")]
-        h = 2,
+        H = 2,
 
         [EnumMember(Value = "l")]
-        l = 3,
+        L = 3,
 
         [EnumMember(Value = "c")]
-        c = 4,
+        C = 4,
 
         [EnumMember(Value = "a")]
-        a = 5,
+        A = 5,
 
         [EnumMember(Value = "s")]
-        s = 6,
+        S = 6,
 
     }
  

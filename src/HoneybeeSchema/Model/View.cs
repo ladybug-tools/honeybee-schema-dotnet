@@ -57,7 +57,7 @@ namespace HoneybeeSchema
         /// <param name="groupIdentifier">An optional string to note the view group '             'to which the sensor is a part of. Views sharing the same '             'group_identifier will be written to the same subfolder in Radiance '             'folder (default: None).</param>
         public View
         (
-            string identifier, List<double> position, List<double> direction, List<double> upVector, string displayName = default, string roomIdentifier = default, List<List<string>> lightPath = default, ViewType viewType = ViewType.v, double hSize = 60D, double vSize = 60D, double shift = default, double lift = default, double foreClip = default, double aftClip = default, string groupIdentifier = default
+            string identifier, List<double> position, List<double> direction, List<double> upVector, string displayName = default, string roomIdentifier = default, List<List<string>> lightPath = default, ViewType viewType = ViewType.V, double hSize = 60D, double vSize = 60D, double shift = default, double lift = default, double foreClip = default, double aftClip = default, string groupIdentifier = default
         ) : base(identifier: identifier, displayName: displayName, roomIdentifier: roomIdentifier, lightPath: lightPath)
         {
             this.Position = position ?? throw new System.ArgumentNullException("position is a required property for View and cannot be null");
@@ -111,7 +111,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"ViewType")]
         [DataMember(Name = "view_type")]
-        public ViewType ViewType { get; set; } = ViewType.v;
+        public ViewType ViewType { get; set; } = ViewType.V;
 
         /// <summary>
         /// A number for the horizontal field of view in degrees (for all perspective projections including fisheye). For a parallel projection, this is the view width in world coordinates.
