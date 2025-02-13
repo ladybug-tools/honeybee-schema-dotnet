@@ -9,7 +9,7 @@
     "dist"
   ],
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "esbuild src/index.ts --bundle --outfile=dist/index.js --loader:.ts=ts --platform=node --target=es2015",
     "bundle:dts": "dts-bundle-generator -o dist/index.d.ts src/index.ts",
