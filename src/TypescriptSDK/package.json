@@ -11,8 +11,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "esbuild index.ts --bundle --outfile=dist/index.js --loader:.ts=ts --platform=node --target=es2015",
-    "bundle:dts": "dts-bundle-generator -o dist/index.d.ts index.ts",
+    "build": "esbuild src/index.ts --bundle --outfile=dist/index.js --loader:.ts=ts --platform=node --target=es2015",
+    "bundle:dts": "dts-bundle-generator -o dist/index.d.ts src/index.ts",
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
