@@ -1,5 +1,5 @@
 ﻿// Auto-generated
-
+import 'reflect-metadata';  // Must have for class validator // Ensure this is at the top
 export * from "./_AllAirBase";
 export * from "./_DiffObjectBase";
 export * from "./_DOASBase";
