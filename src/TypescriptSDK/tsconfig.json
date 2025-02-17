@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
+    "target": "ES2015",
     "useDefineForClassFields": true,
-    "module": "ES2022",
+    "module": "ES2015",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     // "declarationDir": "./dist/types",
     "outDir": "./dist",
-    "incremental": true,                              /* Enable incremental compilation */
-    "composite": true,                                /* Enable constraints that allow a TypeScript project to be used with project references. */
+    // "incremental": true,                              /* Enable incremental compilation */
+    // "composite": true,                                /* Enable constraints that allow a TypeScript project to be used with project references. */
     // "sourceMap": true,
 
     /* Bundler mode */
