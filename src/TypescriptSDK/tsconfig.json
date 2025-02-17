@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2022",
     "useDefineForClassFields": true,
-    "module": "CommonJS",
+    "module": "ES2022",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
+    // "declarationDir": "./dist/types",
     "outDir": "./dist",
     "incremental": true,                              /* Enable incremental compilation */
     "composite": true,                                /* Enable constraints that allow a TypeScript project to be used with project references. */
@@ -29,6 +30,5 @@
     
     "noFallthroughCasesInSwitch": true
   },
-  "include": [ "src"],
-  "exclude": [ "node_modules" ]
+  "include": [ "src" ]
 }
