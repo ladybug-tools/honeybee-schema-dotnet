@@ -99,16 +99,10 @@ jobs:
         working-directory: src/TypescriptSDK
         run: npm i
 
-      # - name: Build and bundle module
-      #   working-directory: src/TypescriptSDK
-      #   run: |
-      #     npm run build
-      #     npm run bundle:dts
-
       - name: Build and pack package
         working-directory: src/TypescriptSDK
         run: |
-          npm pack
+          npm run custom-pack
           cp ./*.tgz ./../../
 
       - name: Unit tests

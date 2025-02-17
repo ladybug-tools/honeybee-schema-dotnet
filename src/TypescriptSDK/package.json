@@ -8,17 +8,21 @@
   "files": [
     "dist"
   ],
-  "main": "dist/src/index.js",
-  "types": "dist/src/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "custom-pack": "npm run build && npm run bundle:dts && npm pack",
-    "build": "npm run clean && esbuild src/index.ts --bundle --outfile=dist/index.js --loader:.ts=ts --platform=node --target=es2015",
+    "dev": "tsc --watch",
+    "check": "tsc --noEmit",
+    "build:tsc": "npm run clean && tsc --build",
+    "build:dts": "tsc --emitDeclarationOnly",
+    "build:esbuild": "esbuild src/index.ts --bundle --outdir=dist --sourcemap --format=esm",
+    "build": "npm run clean && npm run check && npm run bundle:dts && npm run build:esbuild",
     "bundle:dts": "dts-bundle-generator -o dist/index.d.ts src/index.ts",
+    "custom-pack": "npm run build && npm pack",
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
-    "fix": "gts fix",
-    "prepare": "tsc"
+    "fix": "gts fix"
   },
   "devDependencies": {
     "@types/node": "^22.7.4",
