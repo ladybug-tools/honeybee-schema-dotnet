@@ -1,7 +1,7 @@
 {
   "name": "honeybee-schema",
   "license": "MIT",
-  "version": "1.5804.6",
+  "version": "1.5804.15",
   "description": "Honeybee Schema's typescript version",
   "author": "Ladybug Tools",
   "type": "module",
@@ -16,7 +16,7 @@
     "check": "tsc --noEmit",
     "build:tsc": "npm run clean && tsc --build",
     "build:dts": "tsc --emitDeclarationOnly",
-    "build:tsup": "tsup src/index.ts --out-dir ./dist --sourcemap --dts --format cjs --format esm",
+    "build:tsup": "tsup src/index.ts --out-dir ./dist --sourcemap --dts --clean --format cjs,esm --external class-validator,class-transformer,reflect-metadata",
     "build": "npm run clean && npm run check && npm run build:tsup",
     "custom-pack": "npm run build && npm pack",
     "lint": "gts lint",
