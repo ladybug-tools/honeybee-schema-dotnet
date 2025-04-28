@@ -118,7 +118,9 @@ jobs:
     name: Release both CSharp and TypeScript SDK
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
-    needs: [buildCSharp, buildTypeScript]
+    needs: [genNewVersion, buildCSharp, buildTypeScript]
+    env:
+      RELEASE_VERSION: ${{ needs.genNewVersion.outputs.ReleaseVersion }}
 
     steps:
       - name: Download artifact - nuget
@@ -138,6 +140,15 @@ jobs:
         run: |
           npm set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           npm publish ./*.tgz --access public
+
+      - name: Create Github Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          gh release create v${{env.RELEASE_VERSION}} \
+            --title "Release v${{env.RELEASE_VERSION}}" \
+            --generate-notes \
+            *.nupkg *.tgz
 
   updateDownstremRepo:
     name: Update dependencies
