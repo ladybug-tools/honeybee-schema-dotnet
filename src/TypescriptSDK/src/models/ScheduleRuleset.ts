@@ -13,7 +13,7 @@ export class ScheduleRuleset extends IDdEnergyBaseModel {
     @ValidateNested({ each: true })
     @IsDefined()
     /** A list of ScheduleDays that are referenced in the other keys of this ScheduleRulesetAbridged. */
-    day_schedules!: ScheduleDay [];
+    day_schedules!: ScheduleDay[];
 	
     @IsString()
     @IsDefined()
@@ -34,7 +34,7 @@ export class ScheduleRuleset extends IDdEnergyBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of ScheduleRuleAbridged that note exceptions to the default_day_schedule. These rules should be ordered from highest to lowest priority. */
-    schedule_rules?: ScheduleRuleAbridged [];
+    schedule_rules?: ScheduleRuleAbridged[];
 	
     @IsString()
     @IsOptional()

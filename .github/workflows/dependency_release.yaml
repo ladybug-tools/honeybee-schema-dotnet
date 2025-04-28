@@ -29,7 +29,7 @@ jobs:
 
       - name: "Run build"
         run: |
-          cd ./src/HoneybeeSchema
+          cd ./src/CSharpSDK
           dotnet build
 
       - name: "Commit and Push Changes"

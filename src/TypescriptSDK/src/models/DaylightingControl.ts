@@ -8,7 +8,7 @@ export class DaylightingControl extends _OpenAPIGenBaseModel {
     @IsNumber({},{ each: true })
     @IsDefined()
     /** A point as 3 (x, y, z) values for the position of the daylight sensor within the parent Room. This point should lie within the Room volume in order for the results to be meaningful. */
-    sensor_position!: number [];
+    sensor_position!: number[];
 	
     @IsString()
     @IsOptional()

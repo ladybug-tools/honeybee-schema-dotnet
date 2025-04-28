@@ -19,7 +19,7 @@ export class SizingParameter extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of DesignDays that represent the criteria for which the HVAC systems will be sized. */
-    design_days?: DesignDay [];
+    design_days?: DesignDay[];
 	
     @IsNumber()
     @IsOptional()

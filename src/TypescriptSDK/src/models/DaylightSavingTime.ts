@@ -14,13 +14,13 @@ export class DaylightSavingTime extends DatedBaseModel {
     @IsInt({ each: true })
     @IsOptional()
     /** A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017). */
-    start_date?: number [];
+    start_date?: number[];
 	
     @IsArray()
     @IsInt({ each: true })
     @IsOptional()
     /** A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017). */
-    end_date?: number [];
+    end_date?: number[];
 	
 
     constructor() {

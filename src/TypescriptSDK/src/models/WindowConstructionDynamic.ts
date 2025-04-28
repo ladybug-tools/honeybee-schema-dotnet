@@ -13,7 +13,7 @@ export class WindowConstructionDynamic extends IDdEnergyBaseModel {
     @ValidateNested({ each: true })
     @IsDefined()
     /** A list of WindowConstruction objects that define the various states that the dynamic window can assume. */
-    constructions!: WindowConstruction [];
+    constructions!: WindowConstruction[];
 	
     @IsDefined()
     @Transform(({ value }) => {

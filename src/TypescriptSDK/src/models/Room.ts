@@ -13,7 +13,7 @@ export class Room extends IDdBaseModel {
     @ValidateNested({ each: true })
     @IsDefined()
     /** Faces that together form the closed volume of a room. */
-    faces!: Face [];
+    faces!: Face[];
 	
     @IsInstance(RoomPropertiesAbridged)
     @Type(() => RoomPropertiesAbridged)
@@ -34,7 +34,7 @@ export class Room extends IDdBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** Shades assigned to the interior side of this object (eg. partitions, tables). */
-    indoor_shades?: Shade [];
+    indoor_shades?: Shade[];
 	
     @IsArray()
     @IsInstance(Shade, { each: true })
@@ -42,7 +42,7 @@ export class Room extends IDdBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** Shades assigned to the exterior side of this object (eg. trees, landscaping). */
-    outdoor_shades?: Shade [];
+    outdoor_shades?: Shade[];
 	
     @IsInt()
     @IsOptional()
@@ -54,6 +54,11 @@ export class Room extends IDdBaseModel {
     @IsOptional()
     /** A boolean for whether the Room floor area contributes to Models it is a part of. Note that this will not affect the floor_area property of this Room itself but it will ensure the Room floor area is excluded from any calculations when the Room is part of a Model, including EUI calculations. */
     exclude_floor_area?: boolean;
+	
+    @IsString()
+    @IsOptional()
+    /** Text string for for the zone identifier to which this Room belongs. Rooms sharing the same zone identifier are considered part of the same zone in a Model. If the zone identifier has not been specified, it will be the same as the Room identifier in the destination engine. Note that this property has no character restrictions. */
+    zone?: string;
 	
     @IsString()
     @IsOptional()
@@ -80,6 +85,7 @@ export class Room extends IDdBaseModel {
             this.outdoor_shades = obj.outdoor_shades;
             this.multiplier = obj.multiplier;
             this.exclude_floor_area = obj.exclude_floor_area;
+            this.zone = obj.zone;
             this.story = obj.story;
         }
     }
@@ -109,6 +115,7 @@ export class Room extends IDdBaseModel {
         data["outdoor_shades"] = this.outdoor_shades;
         data["multiplier"] = this.multiplier;
         data["exclude_floor_area"] = this.exclude_floor_area;
+        data["zone"] = this.zone;
         data["story"] = this.story;
         data = super.toJSON(data);
         return instanceToPlain(data);

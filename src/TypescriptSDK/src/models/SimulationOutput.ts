@@ -21,13 +21,13 @@ export class SimulationOutput extends _OpenAPIGenBaseModel {
     @IsString({ each: true })
     @IsOptional()
     /** A list of EnergyPlus output names as strings, which are requested from the simulation. */
-    outputs?: string [];
+    outputs?: string[];
 	
     @IsArray()
     @IsString({ each: true })
     @IsOptional()
     /** A list of EnergyPlus summary report names as strings. */
-    summary_reports?: string [];
+    summary_reports?: string[];
 	
     @IsNumber()
     @IsOptional()

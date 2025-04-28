@@ -11,7 +11,7 @@ export class WindowConstructionDynamicAbridged extends IDdEnergyBaseModel {
     @ValidateNested({ each: true })
     @IsDefined()
     /** A list of WindowConstructionAbridged objects that define the various states that the dynamic window can assume. */
-    constructions!: WindowConstructionAbridged [];
+    constructions!: WindowConstructionAbridged[];
 	
     @IsString()
     @IsDefined()

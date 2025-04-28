@@ -13,7 +13,7 @@ export class SensorGrid extends _RadianceAsset {
     @ValidateNested({ each: true })
     @IsDefined()
     /** A list of sensors that belong to the grid. */
-    sensors!: Sensor [];
+    sensors!: Sensor[];
 	
     @IsString()
     @IsOptional()
@@ -34,7 +34,7 @@ export class SensorGrid extends _RadianceAsset {
     @ValidateNested({ each: true })
     @IsOptional()
     /** An optional array of Face3D used to represent the grid. There are no restrictions on how this property relates to the sensors and it is provided only to assist with the display of the grid when the number of sensors or the mesh is too large to be practically visualized. */
-    base_geometry?: Face3D [];
+    base_geometry?: Face3D[];
 	
     @IsString()
     @IsOptional()

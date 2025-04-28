@@ -22,7 +22,7 @@ export class ShadeRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
     @ValidateNested({ each: true })
     @IsOptional()
     /** An optional list of abridged states (default: None). */
-    states?: RadianceShadeStateAbridged [];
+    states?: RadianceShadeStateAbridged[];
 	
 
     constructor() {

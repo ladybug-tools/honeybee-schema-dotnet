@@ -8,7 +8,7 @@ export class WindowConstructionAbridged extends IDdEnergyBaseModel {
     @IsString({ each: true })
     @IsDefined()
     /** List of strings for glazing or gas material identifiers. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer. */
-    materials!: string [];
+    materials!: string[];
 	
     @IsString()
     @IsOptional()

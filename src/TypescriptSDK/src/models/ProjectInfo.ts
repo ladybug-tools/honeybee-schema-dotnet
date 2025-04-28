@@ -25,7 +25,7 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
     @IsString({ each: true })
     @IsOptional()
     /** A list of URLs to zip files that includes EPW, DDY and STAT files. You can find these URLs from the EPWMAP. The first URL will be used as the primary weather file. */
-    weather_urls?: string [];
+    weather_urls?: string[];
 	
     @IsInstance(Location)
     @Type(() => Location)
@@ -45,14 +45,14 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
     @Type(() => String)
     @IsOptional()
     /** A list of building types for the project. The first building type is considered the primary type for the project. */
-    building_type?: BuildingTypes [];
+    building_type?: BuildingTypes[];
 	
     @IsArray()
     @IsEnum(EfficiencyStandards, { each: true })
     @Type(() => String)
     @IsOptional()
     /** A list of building vintages (e.g. ASHRAE_2019, ASHRAE_2016). */
-    vintage?: EfficiencyStandards [];
+    vintage?: EfficiencyStandards[];
 	
 
     constructor() {

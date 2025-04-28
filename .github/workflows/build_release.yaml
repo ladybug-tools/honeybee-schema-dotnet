@@ -39,14 +39,12 @@ jobs:
           submodules: recursive
 
       - name: Generate files
-        shell: bash
         run: |
-          cd ./.generator/SchemaGenerator
-          dotnet run --genCsModel --genCsInterface --updateVersion
+          make cs-sdk
 
       - name: Create key pair for signing the assembly
         if: github.ref == 'refs/heads/master'
-        working-directory: src/HoneybeeSchema
+        working-directory: src/CSharpSDK
         run: |
           "C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\sn.exe" -k HoneybeeSchema.snk
           ls
@@ -58,11 +56,11 @@ jobs:
           dotnet build --configuration Release
 
       - name: Run Unit Tests
-        working-directory: src/HoneybeeSchema.Tests
+        working-directory: src/CSharpSDK.Tests
         run: dotnet test --configuration Release
 
       - name: Release CSharp
-        working-directory: src/HoneybeeSchema
+        working-directory: src/CSharpSDK
         run: dotnet pack --configuration Release --output ./../../
 
       - name: Upload artifact
@@ -92,8 +90,7 @@ jobs:
 
       - name: generate files
         run: |
-          cd ./.generator/SchemaGenerator
-          dotnet run --genTsModel --updateVersion
+          make ts-sdk
 
       - name: Install dependencies
         working-directory: src/TypescriptSDK

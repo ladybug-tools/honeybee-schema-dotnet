@@ -46,7 +46,7 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
       else return item;
     }))
     /** A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set. */
-    modifiers?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) [];
+    modifiers?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
 	
     @IsArray()
     @IsOptional()
@@ -56,7 +56,7 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
       else return item;
     }))
     /** A list of all unique Room-Assigned ModifierSets in the Model. */
-    modifier_sets?: (ModifierSet | ModifierSetAbridged) [];
+    modifier_sets?: (ModifierSet | ModifierSetAbridged)[];
 	
     @IsArray()
     @IsInstance(SensorGrid, { each: true })
@@ -64,7 +64,7 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** An array of SensorGrids that are associated with the model. */
-    sensor_grids?: SensorGrid [];
+    sensor_grids?: SensorGrid[];
 	
     @IsArray()
     @IsInstance(View, { each: true })
@@ -72,7 +72,7 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** An array of Views that are associated with the model. */
-    views?: View [];
+    views?: View[];
 	
 
     constructor() {

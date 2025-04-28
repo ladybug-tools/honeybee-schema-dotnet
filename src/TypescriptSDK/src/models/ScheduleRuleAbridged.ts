@@ -56,13 +56,13 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
     @IsInt({ each: true })
     @IsOptional()
     /** A list of two integers for [month, day], representing the start date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case). */
-    start_date?: number [];
+    start_date?: number[];
 	
     @IsArray()
     @IsInt({ each: true })
     @IsOptional()
     /** A list of two integers for [month, day], representing the end date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case). */
-    end_date?: number [];
+    end_date?: number[];
 	
 
     constructor() {

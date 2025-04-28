@@ -42,7 +42,7 @@ export class ValidationReport {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of objects for each error that was discovered in the model. This will be an empty list or None if no errors were found. */
-    errors?: ValidationError [];
+    errors?: ValidationError[];
 	
 
     constructor() {

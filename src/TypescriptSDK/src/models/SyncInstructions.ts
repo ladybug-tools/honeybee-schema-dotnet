@@ -18,7 +18,7 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of ChangedInstruction definitions for each top-level object with properties to transfer from the new/updated model to the base/existing model. */
-    changed_objects?: ChangedInstruction [];
+    changed_objects?: ChangedInstruction[];
 	
     @IsArray()
     @IsInstance(DeletedInstruction, { each: true })
@@ -26,7 +26,7 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of DeletedInstruction definitions for each top-level object to be deleted from the base/existing model. */
-    deleted_objects?: DeletedInstruction [];
+    deleted_objects?: DeletedInstruction[];
 	
     @IsArray()
     @IsInstance(AddedInstruction, { each: true })
@@ -34,7 +34,7 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of AddedInstruction definitions for each top-level object to be added to the base/existing model from the new/updated model. */
-    added_objects?: AddedInstruction [];
+    added_objects?: AddedInstruction[];
 	
 
     constructor() {

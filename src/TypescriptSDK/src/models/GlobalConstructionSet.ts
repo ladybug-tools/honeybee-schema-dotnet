@@ -33,7 +33,7 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
       else return item;
     }))
     /** Global Honeybee Energy materials. */
-    materials?: (EnergyMaterial | EnergyMaterialNoMass | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas) [];
+    materials?: (EnergyMaterial | EnergyMaterialNoMass | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas)[];
 	
     @IsArray()
     @IsOptional()
@@ -45,7 +45,7 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
       else return item;
     }))
     /** Global Honeybee Energy constructions. */
-    constructions?: (OpaqueConstructionAbridged | WindowConstructionAbridged | ShadeConstruction | AirBoundaryConstructionAbridged) [];
+    constructions?: (OpaqueConstructionAbridged | WindowConstructionAbridged | ShadeConstruction | AirBoundaryConstructionAbridged)[];
 	
     @IsInstance(WallConstructionSetAbridged)
     @Type(() => WallConstructionSetAbridged)

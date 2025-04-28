@@ -21,7 +21,7 @@ export class AddedObject extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsDefined()
     /** A list of DisplayFace3D dictionaries for the added geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been added. */
-    geometry!: Object [];
+    geometry!: Object[];
 	
     @IsString()
     @IsOptional()

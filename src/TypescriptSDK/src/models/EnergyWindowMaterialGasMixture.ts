@@ -10,13 +10,13 @@ export class EnergyWindowMaterialGasMixture extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsDefined()
     /** List of gases in the gas mixture. */
-    gas_types!: GasType [];
+    gas_types!: GasType[];
 	
     @IsArray()
     @IsNumber({},{ each: true })
     @IsDefined()
     /** A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1. */
-    gas_fractions!: number [];
+    gas_fractions!: number[];
 	
     @IsString()
     @IsOptional()

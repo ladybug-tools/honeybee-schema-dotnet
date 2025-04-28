@@ -27,7 +27,7 @@ export class RadianceShadeStateAbridged extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of StateGeometryAbridged objects (default: None). */
-    shades?: StateGeometryAbridged [];
+    shades?: StateGeometryAbridged[];
 	
 
     constructor() {

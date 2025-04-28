@@ -37,7 +37,7 @@ export class Model extends IDdBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of Rooms in the model. */
-    rooms?: Room [];
+    rooms?: Room[];
 	
     @IsArray()
     @IsInstance(Face, { each: true })
@@ -45,7 +45,7 @@ export class Model extends IDdBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of Faces in the model that lack a parent Room. Note that orphaned Faces are not acceptable for Models that are to be exported for energy simulation. */
-    orphaned_faces?: Face [];
+    orphaned_faces?: Face[];
 	
     @IsArray()
     @IsInstance(Shade, { each: true })
@@ -53,7 +53,7 @@ export class Model extends IDdBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of Shades in the model that lack a parent. */
-    orphaned_shades?: Shade [];
+    orphaned_shades?: Shade[];
 	
     @IsArray()
     @IsInstance(Aperture, { each: true })
@@ -61,7 +61,7 @@ export class Model extends IDdBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of Apertures in the model that lack a parent Face. Note that orphaned Apertures are not acceptable for Models that are to be exported for energy simulation. */
-    orphaned_apertures?: Aperture [];
+    orphaned_apertures?: Aperture[];
 	
     @IsArray()
     @IsInstance(Door, { each: true })
@@ -69,7 +69,7 @@ export class Model extends IDdBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of Doors in the model that lack a parent Face. Note that orphaned Doors are not acceptable for Models that are to be exported for energy simulation. */
-    orphaned_doors?: Door [];
+    orphaned_doors?: Door[];
 	
     @IsArray()
     @IsInstance(ShadeMesh, { each: true })
@@ -77,7 +77,7 @@ export class Model extends IDdBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of ShadeMesh in the model. */
-    shade_meshes?: ShadeMesh [];
+    shade_meshes?: ShadeMesh[];
 	
     @IsEnum(Units)
     @Type(() => String)
@@ -101,7 +101,7 @@ export class Model extends IDdBaseModel {
     constructor() {
         super();
         this.type = "Model";
-        this.version = "1.58.4";
+        this.version = "1.59.0";
         this.units = Units.Meters;
         this.tolerance = 0.01;
         this.angle_tolerance = 1;

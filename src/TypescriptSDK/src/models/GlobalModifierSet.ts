@@ -28,7 +28,7 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
       else return item;
     }))
     /** Global Honeybee Radiance modifiers. */
-    modifiers?: (Plastic | Glass | Trans) [];
+    modifiers?: (Plastic | Glass | Trans)[];
 	
     @IsInstance(WallModifierSetAbridged)
     @Type(() => WallModifierSetAbridged)

@@ -8,7 +8,7 @@ export class ScheduleFixedIntervalAbridged extends IDdEnergyBaseModel {
     @IsNumber({},{ each: true })
     @IsDefined()
     /** A list of timeseries values occurring at each timestep over the course of the simulation. */
-    values!: number [];
+    values!: number[];
 	
     @IsString()
     @IsOptional()
@@ -32,7 +32,7 @@ export class ScheduleFixedIntervalAbridged extends IDdEnergyBaseModel {
     @IsInt({ each: true })
     @IsOptional()
     /** A list of two integers for [month, day], representing the start date when the schedule values begin to take effect.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case). */
-    start_date?: number [];
+    start_date?: number[];
 	
     @IsNumber()
     @IsOptional()

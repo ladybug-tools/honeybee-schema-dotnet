@@ -50,7 +50,7 @@ export class Door extends IDdBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** Shades assigned to the interior side of this object. */
-    indoor_shades?: Shade [];
+    indoor_shades?: Shade[];
 	
     @IsArray()
     @IsInstance(Shade, { each: true })
@@ -58,7 +58,7 @@ export class Door extends IDdBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** Shades assigned to the exterior side of this object (eg. entryway awning). */
-    outdoor_shades?: Shade [];
+    outdoor_shades?: Shade[];
 	
 
     constructor() {

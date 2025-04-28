@@ -17,13 +17,13 @@ export class RunPeriod extends DatedBaseModel {
     @IsInt({ each: true })
     @IsOptional()
     /** A list of two integers for [month, day], representing the date for the start of the run period. Must be before the end date. */
-    start_date?: number [];
+    start_date?: number[];
 	
     @IsArray()
     @IsInt({ each: true })
     @IsOptional()
     /** A list of two integers for [month, day], representing the date for the end of the run period. Must be after the start date. */
-    end_date?: number [];
+    end_date?: number[];
 	
     @IsEnum(DaysOfWeek)
     @Type(() => String)
@@ -35,7 +35,7 @@ export class RunPeriod extends DatedBaseModel {
     @IsNestedIntegerArray()
     @IsOptional()
     /** A list of lists where each sub-list consists of two integers for [month, day], representing a date which is a holiday within the simulation. If None, no holidays are applied. */
-    holidays?: number [] [];
+    holidays?: number[][];
 	
     @IsInstance(DaylightSavingTime)
     @Type(() => DaylightSavingTime)

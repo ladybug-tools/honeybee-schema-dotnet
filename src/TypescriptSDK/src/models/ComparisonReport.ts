@@ -18,7 +18,7 @@ export class ComparisonReport extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of ChangedObject definitions for each top-level object that has changed in the model. To be a changed object, the object identifier must be the same in both models but some other property (either geometry or extension attributes) has experienced a meaningful change. */
-    changed_objects?: ChangedObject [];
+    changed_objects?: ChangedObject[];
 	
     @IsArray()
     @IsInstance(DeletedObject, { each: true })
@@ -26,7 +26,7 @@ export class ComparisonReport extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of DeletedObject definitions for each top-level object that has been deleted in the process of going from the base model to the new model. */
-    deleted_objects?: DeletedObject [];
+    deleted_objects?: DeletedObject[];
 	
     @IsArray()
     @IsInstance(AddedObject, { each: true })
@@ -34,7 +34,7 @@ export class ComparisonReport extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of AddedObject definitions for each top-level object that has been added in the process of going from the base model to the new model. */
-    added_objects?: AddedObject [];
+    added_objects?: AddedObject[];
 	
 
     constructor() {

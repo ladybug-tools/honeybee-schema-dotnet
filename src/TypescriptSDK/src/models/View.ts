@@ -9,19 +9,19 @@ export class View extends _RadianceAsset {
     @IsNumber({},{ each: true })
     @IsDefined()
     /** The view position (-vp) as an array of (x, y, z) values.This is the focal point of a perspective view or the center of a parallel projection. */
-    position!: number [];
+    position!: number[];
 	
     @IsArray()
     @IsNumber({},{ each: true })
     @IsDefined()
     /** The view direction (-vd) as an array of (x, y, z) values.The length of this vector indicates the focal distance as needed by the pixel depth of field (-pd) in rpict. */
-    direction!: number [];
+    direction!: number[];
 	
     @IsArray()
     @IsNumber({},{ each: true })
     @IsDefined()
     /** The view up (-vu) vector as an array of (x, y, z) values. */
-    up_vector!: number [];
+    up_vector!: number[];
 	
     @IsString()
     @IsOptional()

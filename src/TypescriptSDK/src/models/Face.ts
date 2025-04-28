@@ -60,7 +60,7 @@ export class Face extends IDdBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** Apertures assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid. */
-    apertures?: Aperture [];
+    apertures?: Aperture[];
 	
     @IsArray()
     @IsInstance(Door, { each: true })
@@ -68,7 +68,7 @@ export class Face extends IDdBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** Doors assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid. */
-    doors?: Door [];
+    doors?: Door[];
 	
     @IsArray()
     @IsInstance(Shade, { each: true })
@@ -76,7 +76,7 @@ export class Face extends IDdBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** Shades assigned to the interior side of this object. */
-    indoor_shades?: Shade [];
+    indoor_shades?: Shade[];
 	
     @IsArray()
     @IsInstance(Shade, { each: true })
@@ -84,7 +84,7 @@ export class Face extends IDdBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** Shades assigned to the exterior side of this object (eg. balcony, overhang). */
-    outdoor_shades?: Shade [];
+    outdoor_shades?: Shade[];
 	
 
     constructor() {

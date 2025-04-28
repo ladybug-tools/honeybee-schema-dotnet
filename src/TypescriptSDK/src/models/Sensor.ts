@@ -8,13 +8,13 @@ export class Sensor extends _OpenAPIGenBaseModel {
     @IsNumber({},{ each: true })
     @IsDefined()
     /** Position of sensor in space as an array of (x, y, z) values. */
-    pos!: number [];
+    pos!: number[];
 	
     @IsArray()
     @IsNumber({},{ each: true })
     @IsDefined()
     /** Direction of sensor as an array of (x, y, z) values. */
-    dir!: number [];
+    dir!: number[];
 	
     @IsString()
     @IsOptional()

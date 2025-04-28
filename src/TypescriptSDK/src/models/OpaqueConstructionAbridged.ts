@@ -8,7 +8,7 @@ export class OpaqueConstructionAbridged extends IDdEnergyBaseModel {
     @IsString({ each: true })
     @IsDefined()
     /** List of strings for opaque material identifiers. The order of the materials is from exterior to interior. */
-    materials!: string [];
+    materials!: string[];
 	
     @IsString()
     @IsOptional()

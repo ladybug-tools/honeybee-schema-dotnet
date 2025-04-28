@@ -26,7 +26,7 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsDefined()
     /** A list of DisplayFace3D dictionaries for the new, changed geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been changed. Note that this attribute is always included in the ChangedObject, even when geometry_changed is False. */
-    geometry!: Object [];
+    geometry!: Object[];
 	
     @IsString()
     @IsOptional()
@@ -46,7 +46,7 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsOptional()
     /** A list of DisplayFace3D dictionaries for the existing (base) geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been changed. This attribute is optional and will NOT be output if geometry_changed is False. */
-    existing_geometry?: Object [];
+    existing_geometry?: Object[];
 	
     @IsString()
     @IsOptional()

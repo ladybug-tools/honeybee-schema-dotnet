@@ -12,7 +12,7 @@ export class ValidationError {
     @Matches(/([0-9]+)/)
     @MinLength(6)
     @MaxLength(6)
-    /** Text with 6 digits for the error code. The first two digits indicate whether the error is a core honeybee error (00) vs. an extension error (any non-zero number). The second two digits indicate the nature of the error (00 is an identifier error, 01 is a geometry error, 02 is an adjacency error). The third two digits are used to give a unique ID to each condition moving upwards from more specific/detailed objects/errors to coarser/more abstract objects/errors. A full list of error codes can be found here: https://docs.pollination.cloud/user-manual/get-started/troubleshooting/help-with-modeling-error-codes */
+    /** Text with 6 digits for the error code. The first two digits indicate whether the error is a core honeybee error (00) vs. an extension error (any non-zero number). The second two digits indicate the nature of the error (00 is an identifier error, 01 is a geometry error, 02 is an adjacency error). The third two digits are used to give a unique ID to each condition moving upwards from more specific/detailed objects/errors to coarser/more abstract objects/errors. A full list of error codes can be found here: https://docs.pollination.solutions/user-manual/rhino-plugin/troubleshooting/help-with-modeling-error-codes */
     code!: string;
 	
     @IsString()
@@ -36,7 +36,7 @@ export class ValidationError {
     @IsString({ each: true })
     @IsDefined()
     /** A list of text strings for the unique object IDs that caused the error. The list typically contains a single item but there are some types errors that stem from multiple objects like mis-matched area adjacencies or overlapping Room geometries. Note that the IDs in this list can be the identifier of a core object like a Room or a Face or it can be for an extension object like a SensorGrid or a Construction. */
-    element_id!: string [];
+    element_id!: string[];
 	
     @IsString()
     @IsDefined()
@@ -53,7 +53,7 @@ export class ValidationError {
     @IsString({ each: true })
     @IsOptional()
     /** A list of text strings for the display names of the objects that caused the error. */
-    element_name?: string [];
+    element_name?: string[];
 	
     @IsArray()
     @IsArray({ each: true })
@@ -64,7 +64,7 @@ export class ValidationError {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list lists where each sub-list corresponds to one of the objects in the element_id property. Each sub-list contains information for the parent objects of the object that caused the error. This can be useful for locating the problematic object in the model. This will contain 1 item for a Face with a parent Room. It will contain 2 for an Aperture that has a parent Face with a parent Room. */
-    parents?: ValidationParent [] [];
+    parents?: ValidationParent[][];
 	
     @IsArray()
     @IsInstance(ValidationParent, { each: true })
@@ -72,7 +72,7 @@ export class ValidationError {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of top-level parent objects for the specific case of duplicate child-object identifiers, where several top-level parents are involved. */
-    top_parents?: ValidationParent [];
+    top_parents?: ValidationParent[];
 	
     @IsArray()
     @IsOptional()
@@ -82,7 +82,7 @@ export class ValidationError {
       else return item;
     }))
     /** An optional list of geometry objects that helps illustrate where exactly issues with invalid geometry exist within the Honeybee object. Examples include the naked and non-manifold line segments for non-solid Room geometries, the points of self-intersection for cases of self-intersecting geometry and out-of-plane vertices for non-planar objects. Oftentimes, zooming directly to these helper geometries will help end users understand invalid situations in their model faster than simple zooming to the invalid Honeybee object in its totality. */
-    helper_geometry?: (Point3D | LineSegment3D) [];
+    helper_geometry?: (Point3D | LineSegment3D)[];
 	
 
     constructor() {

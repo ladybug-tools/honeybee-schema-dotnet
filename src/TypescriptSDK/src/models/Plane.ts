@@ -8,13 +8,13 @@ export class Plane extends _OpenAPIGenBaseModel {
     @IsNumber({},{ each: true })
     @IsDefined()
     /** Plane normal as 3 (x, y, z) values. */
-    n!: number [];
+    n!: number[];
 	
     @IsArray()
     @IsNumber({},{ each: true })
     @IsDefined()
     /** Plane origin as 3 (x, y, z) values */
-    o!: number [];
+    o!: number[];
 	
     @IsString()
     @IsOptional()
@@ -26,7 +26,7 @@ export class Plane extends _OpenAPIGenBaseModel {
     @IsNumber({},{ each: true })
     @IsOptional()
     /** Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated. */
-    x?: number [];
+    x?: number[];
 	
 
     constructor() {

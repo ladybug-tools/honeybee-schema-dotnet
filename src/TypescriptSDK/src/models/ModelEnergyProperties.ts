@@ -80,7 +80,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
       else return item;
     }))
     /** List of all unique ConstructionSets in the Model. */
-    construction_sets?: (ConstructionSetAbridged | ConstructionSet) [];
+    construction_sets?: (ConstructionSetAbridged | ConstructionSet)[];
 	
     @IsArray()
     @IsOptional()
@@ -99,7 +99,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
       else return item;
     }))
     /** A list of all unique constructions in the model. This includes constructions across all Faces, Apertures, Doors, Shades, Room ConstructionSets, and the global_construction_set. */
-    constructions?: (OpaqueConstructionAbridged | WindowConstructionAbridged | WindowConstructionShadeAbridged | AirBoundaryConstructionAbridged | OpaqueConstruction | WindowConstruction | WindowConstructionShade | WindowConstructionDynamicAbridged | WindowConstructionDynamic | AirBoundaryConstruction | ShadeConstruction) [];
+    constructions?: (OpaqueConstructionAbridged | WindowConstructionAbridged | WindowConstructionShadeAbridged | AirBoundaryConstructionAbridged | OpaqueConstruction | WindowConstruction | WindowConstructionShade | WindowConstructionDynamicAbridged | WindowConstructionDynamic | AirBoundaryConstruction | ShadeConstruction)[];
 	
     @IsArray()
     @IsOptional()
@@ -118,7 +118,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
       else return item;
     }))
     /** A list of all unique materials in the model. This includes materials needed to make the Model constructions. */
-    materials?: (EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation | EnergyWindowMaterialGlazing | EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGas | EnergyWindowMaterialGasMixture | EnergyWindowMaterialGasCustom | EnergyWindowFrame | EnergyWindowMaterialBlind | EnergyWindowMaterialShade) [];
+    materials?: (EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation | EnergyWindowMaterialGlazing | EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGas | EnergyWindowMaterialGasMixture | EnergyWindowMaterialGasCustom | EnergyWindowFrame | EnergyWindowMaterialBlind | EnergyWindowMaterialShade)[];
 	
     @IsArray()
     @IsOptional()
@@ -146,7 +146,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
       else return item;
     }))
     /** List of all unique HVAC systems in the Model. */
-    hvacs?: (IdealAirSystemAbridged | VAV | PVAV | PSZ | PTAC | ForcedAirFurnace | FCUwithDOASAbridged | WSHPwithDOASAbridged | VRFwithDOASAbridged | RadiantwithDOASAbridged | FCU | WSHP | VRF | Baseboard | EvaporativeCooler | Residential | WindowAC | GasUnitHeater | Radiant | DetailedHVAC) [];
+    hvacs?: (IdealAirSystemAbridged | VAV | PVAV | PSZ | PTAC | ForcedAirFurnace | FCUwithDOASAbridged | WSHPwithDOASAbridged | VRFwithDOASAbridged | RadiantwithDOASAbridged | FCU | WSHP | VRF | Baseboard | EvaporativeCooler | Residential | WindowAC | GasUnitHeater | Radiant | DetailedHVAC)[];
 	
     @IsArray()
     @IsInstance(SHWSystem, { each: true })
@@ -154,7 +154,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** List of all unique Service Hot Water (SHW) systems in the Model. */
-    shws?: SHWSystem [];
+    shws?: SHWSystem[];
 	
     @IsArray()
     @IsOptional()
@@ -164,7 +164,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
       else return item;
     }))
     /** List of all unique ProgramTypes in the Model. */
-    program_types?: (ProgramTypeAbridged | ProgramType) [];
+    program_types?: (ProgramTypeAbridged | ProgramType)[];
 	
     @IsArray()
     @IsOptional()
@@ -176,7 +176,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
       else return item;
     }))
     /** A list of all unique schedules in the model. This includes schedules across all HVAC systems, ProgramTypes, Rooms, and Shades. */
-    schedules?: (ScheduleRulesetAbridged | ScheduleFixedIntervalAbridged | ScheduleRuleset | ScheduleFixedInterval) [];
+    schedules?: (ScheduleRulesetAbridged | ScheduleFixedIntervalAbridged | ScheduleRuleset | ScheduleFixedInterval)[];
 	
     @IsArray()
     @IsInstance(ScheduleTypeLimit, { each: true })
@@ -184,7 +184,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** A list of all unique ScheduleTypeLimits in the model. This all ScheduleTypeLimits needed to make the Model schedules. */
-    schedule_type_limits?: ScheduleTypeLimit [];
+    schedule_type_limits?: ScheduleTypeLimit[];
 	
     @IsInstance(VentilationSimulationControl)
     @Type(() => VentilationSimulationControl)

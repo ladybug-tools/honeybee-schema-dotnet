@@ -7,13 +7,13 @@ export class LineSegment3D {
     @IsNumber({},{ each: true })
     @IsDefined()
     /** Line segment base point as 3 (x, y, z) values. */
-    p!: number [];
+    p!: number[];
 	
     @IsArray()
     @IsNumber({},{ each: true })
     @IsDefined()
     /** Line segment direction vector as 3 (x, y, z) values. */
-    v!: number [];
+    v!: number[];
 	
     @IsString()
     @IsOptional()

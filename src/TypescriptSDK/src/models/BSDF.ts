@@ -49,13 +49,13 @@ export class BSDF extends ModifierBase {
       else return item;
     }))
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) [];
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
 	
     @IsArray()
     @IsNumber({},{ each: true })
     @IsOptional()
     /** Vector as sequence that sets the hemisphere that the BSDF material faces. */
-    up_orientation?: number [];
+    up_orientation?: number[];
 	
     @IsNumber()
     @IsOptional()
@@ -80,19 +80,19 @@ export class BSDF extends ModifierBase {
     @IsNumber({},{ each: true })
     @IsOptional()
     /** Optional additional front diffuse reflectance as sequence of three RGB numbers. */
-    front_diffuse_reflectance?: number [];
+    front_diffuse_reflectance?: number[];
 	
     @IsArray()
     @IsNumber({},{ each: true })
     @IsOptional()
     /** Optional additional back diffuse reflectance as sequence of three RGB numbers. */
-    back_diffuse_reflectance?: number [];
+    back_diffuse_reflectance?: number[];
 	
     @IsArray()
     @IsNumber({},{ each: true })
     @IsOptional()
     /** Optional additional diffuse transmittance as sequence of three RGB numbers. */
-    diffuse_transmittance?: number [];
+    diffuse_transmittance?: number[];
 	
     @IsString()
     @IsOptional()

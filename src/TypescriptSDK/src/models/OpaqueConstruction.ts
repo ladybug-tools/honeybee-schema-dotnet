@@ -16,7 +16,7 @@ export class OpaqueConstruction extends IDdEnergyBaseModel {
       else return item;
     }))
     /** List of opaque material definitions. The order of the materials is from exterior to interior. */
-    materials!: (EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation) [];
+    materials!: (EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation)[];
 	
     @IsString()
     @IsOptional()

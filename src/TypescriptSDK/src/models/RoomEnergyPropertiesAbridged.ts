@@ -127,7 +127,7 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** An optional list of VentilationFan objects for fans within the room. Note that these fans are not connected to the heating or cooling system and are meant to represent the intentional circulation of unconditioned outdoor air for the purposes of keeping a space cooler, drier or free of indoor pollutants (as in the case of kitchen or bathroom exhaust fans). For the specification of mechanical ventilation of conditioned outdoor air, the Room.ventilation property should be used and the Room should be given a HVAC that can meet this specification. */
-    fans?: VentilationFan [];
+    fans?: VentilationFan[];
 	
     @IsArray()
     @IsInstance(InternalMassAbridged, { each: true })
@@ -135,7 +135,7 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** An optional list of of InternalMass objects for thermal mass exposed to Room air. Note that internal masses assigned this way cannot ""see"" solar radiation that may potentially hit them and, as such, caution should be taken when using this component with internal mass objects that are not always in shade. Masses are factored into the the thermal calculations of the Room by undergoing heat transfer with the indoor air. */
-    internal_masses?: InternalMassAbridged [];
+    internal_masses?: InternalMassAbridged[];
 	
     @IsArray()
     @IsInstance(ProcessAbridged, { each: true })
@@ -143,7 +143,7 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** An optional list of of Process objects for process loads within the room. These can represent kilns, manufacturing equipment, and various industrial processes. They can also be used to represent wood burning fireplaces or certain pieces of equipment to be separated from the other end uses. */
-    process_loads?: ProcessAbridged [];
+    process_loads?: ProcessAbridged[];
 	
 
     constructor() {

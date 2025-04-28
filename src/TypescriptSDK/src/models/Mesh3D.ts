@@ -10,13 +10,13 @@ export class Mesh3D extends _OpenAPIGenBaseModel {
     @IsNestedNumberArray()
     @IsDefined()
     /** A list of points representing the vertices of the mesh. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values. */
-    vertices!: number [] [];
+    vertices!: number[][];
 	
     @IsArray()
     @IsNestedIntegerArray()
     @IsDefined()
     /** A list of lists with each sub-list having either 3 or 4 integers. These integers correspond to indices within the list of vertices. */
-    faces!: number [] [];
+    faces!: number[][];
 	
     @IsString()
     @IsOptional()
@@ -30,7 +30,7 @@ export class Mesh3D extends _OpenAPIGenBaseModel {
     @ValidateNested({ each: true })
     @IsOptional()
     /** An optional list of colors that correspond to either the faces of the mesh or the vertices of the mesh. */
-    colors?: Color [];
+    colors?: Color[];
 	
 
     constructor() {
