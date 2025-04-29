@@ -123,6 +123,8 @@ jobs:
       RELEASE_VERSION: ${{ needs.genNewVersion.outputs.ReleaseVersion }}
 
     steps:
+      - uses: actions/checkout@v4
+
       - name: Download artifact - nuget
         uses: actions/download-artifact@v4
         with:
