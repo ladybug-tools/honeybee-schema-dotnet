@@ -143,14 +143,14 @@ jobs:
           npm set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           npm publish ./*.tgz --access public
 
-      - name: Create Github Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          gh release create v${{env.RELEASE_VERSION}} \
-            --title "Release v${{env.RELEASE_VERSION}}" \
-            --generate-notes \
-            *.nupkg *.tgz
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{env.RELEASE_VERSION}}
+          token: ${{ secrets.GH_TOKEN }}
+          files: |
+            *.nupkg
+            *.tgz
 
   updateDownstremRepo:
     name: Update dependencies
