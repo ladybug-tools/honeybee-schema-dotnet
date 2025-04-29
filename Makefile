@@ -2,7 +2,7 @@
 
 NEW_RELEASE_VERSION ?= 0.0.1
 download:
-	cd ./.generator/SchemaGenerator && dotnet run --download
+	cd ./.generator/SchemaGenerator && dotnet run --download --updateVersion
 
 sdk:
 	cd ./.generator/SchemaGenerator && dotnet run --download --genCsModel --genCsInterface --genTsModel --updateVersion
