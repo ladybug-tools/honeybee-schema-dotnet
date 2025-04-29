@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HoneybeeSchema\HoneybeeSchema.csproj" />
+    <ProjectReference Include="..\CSharpSDK\HoneybeeSchema.csproj" />
   </ItemGroup>
 
 </Project>
