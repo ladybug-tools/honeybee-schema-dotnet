@@ -135,6 +135,15 @@ jobs:
         with:
           name: npmPackage
 
+      - name: Create Github Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create v${{env.RELEASE_VERSION}} \
+            --title "Release v${{env.RELEASE_VERSION}}" \
+            --generate-notes \
+            *.nupkg *.tgz
+
       - name: Release CSharp
         run: dotnet nuget push ./*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
 
@@ -142,15 +151,6 @@ jobs:
         run: |
           npm set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           npm publish ./*.tgz --access public
-
-      - name: Create Github Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          gh release create v${{env.RELEASE_VERSION}} \
-            --title "Release v${{env.RELEASE_VERSION}}" \
-            --generate-notes \
-            *.nupkg *.tgz
 
   updateDownstremRepo:
     name: Update dependencies
