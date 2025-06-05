@@ -73,7 +73,7 @@ export class DoorConstructionSet extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DoorConstructionSet, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(DoorConstructionSet, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "DoorConstructionSet";
             this.interiorConstruction = obj.interiorConstruction;
             this.exteriorConstruction = obj.exteriorConstruction;

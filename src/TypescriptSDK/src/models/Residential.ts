@@ -39,7 +39,7 @@ export class Residential extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Residential, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(Residential, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.type = obj.type ?? "Residential";
             this.equipmentType = obj.equipmentType ?? ResidentialEquipmentType.ResidentialAC_ElectricBaseboard;

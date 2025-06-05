@@ -50,7 +50,7 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(SyncInstructions, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(SyncInstructions, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "SyncInstructions";
             this.changedObjects = obj.changedObjects;
             this.deletedObjects = obj.deletedObjects;

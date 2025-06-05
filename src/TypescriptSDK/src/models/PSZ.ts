@@ -73,7 +73,7 @@ export class PSZ extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(PSZ, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(PSZ, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.economizerType = obj.economizerType ?? AllAirEconomizerType.NoEconomizer;
             this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;

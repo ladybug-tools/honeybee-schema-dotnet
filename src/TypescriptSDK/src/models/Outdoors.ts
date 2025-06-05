@@ -42,7 +42,7 @@ export class Outdoors extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Outdoors, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(Outdoors, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "Outdoors";
             this.sunExposure = obj.sunExposure ?? true;
             this.windExposure = obj.windExposure ?? true;

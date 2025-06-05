@@ -38,7 +38,7 @@ export class WindCondition extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(WindCondition, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(WindCondition, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.windSpeed = obj.windSpeed;
             this.type = obj.type ?? "WindCondition";
             this.windDirection = obj.windDirection ?? 0;

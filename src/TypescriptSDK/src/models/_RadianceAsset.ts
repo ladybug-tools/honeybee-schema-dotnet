@@ -38,7 +38,7 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(_RadianceAsset, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(_RadianceAsset, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.roomIdentifier = obj.roomIdentifier;
             this.lightPath = obj.lightPath;
             this.type = obj.type ?? "_RadianceAsset";

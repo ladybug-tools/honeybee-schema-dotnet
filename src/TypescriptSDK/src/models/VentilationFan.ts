@@ -59,7 +59,7 @@ export class VentilationFan extends EnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(VentilationFan, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(VentilationFan, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.flowRate = obj.flowRate;
             this.pressureRise = obj.pressureRise;
             this.efficiency = obj.efficiency;

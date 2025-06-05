@@ -125,7 +125,7 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyWindowMaterialGlazing, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(EnergyWindowMaterialGlazing, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "EnergyWindowMaterialGlazing";
             this.thickness = obj.thickness ?? 0.003;
             this.solarTransmittance = obj.solarTransmittance ?? 0.85;

@@ -506,7 +506,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsOptional()
     @Expose({ name: "construction_sets" })
-    @Transform(({ value }) => value.map((item: any) => {
+    @Transform(({ value }) => value?.map((item: any) => {
       if (item?.type === 'ConstructionSetAbridged') return ConstructionSetAbridged.fromJS(item);
       else if (item?.type === 'ConstructionSet') return ConstructionSet.fromJS(item);
       else return item;
@@ -517,7 +517,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsOptional()
     @Expose({ name: "constructions" })
-    @Transform(({ value }) => value.map((item: any) => {
+    @Transform(({ value }) => value?.map((item: any) => {
       if (item?.type === 'OpaqueConstructionAbridged') return OpaqueConstructionAbridged.fromJS(item);
       else if (item?.type === 'WindowConstructionAbridged') return WindowConstructionAbridged.fromJS(item);
       else if (item?.type === 'WindowConstructionShadeAbridged') return WindowConstructionShadeAbridged.fromJS(item);
@@ -537,7 +537,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsOptional()
     @Expose({ name: "materials" })
-    @Transform(({ value }) => value.map((item: any) => {
+    @Transform(({ value }) => value?.map((item: any) => {
       if (item?.type === 'EnergyMaterial') return EnergyMaterial.fromJS(item);
       else if (item?.type === 'EnergyMaterialNoMass') return EnergyMaterialNoMass.fromJS(item);
       else if (item?.type === 'EnergyMaterialVegetation') return EnergyMaterialVegetation.fromJS(item);
@@ -557,7 +557,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsOptional()
     @Expose({ name: "hvacs" })
-    @Transform(({ value }) => value.map((item: any) => {
+    @Transform(({ value }) => value?.map((item: any) => {
       if (item?.type === 'IdealAirSystemAbridged') return IdealAirSystemAbridged.fromJS(item);
       else if (item?.type === 'VAV') return VAV.fromJS(item);
       else if (item?.type === 'PVAV') return PVAV.fromJS(item);
@@ -595,7 +595,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsOptional()
     @Expose({ name: "program_types" })
-    @Transform(({ value }) => value.map((item: any) => {
+    @Transform(({ value }) => value?.map((item: any) => {
       if (item?.type === 'ProgramTypeAbridged') return ProgramTypeAbridged.fromJS(item);
       else if (item?.type === 'ProgramType') return ProgramType.fromJS(item);
       else return item;
@@ -606,7 +606,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsOptional()
     @Expose({ name: "schedules" })
-    @Transform(({ value }) => value.map((item: any) => {
+    @Transform(({ value }) => value?.map((item: any) => {
       if (item?.type === 'ScheduleRulesetAbridged') return ScheduleRulesetAbridged.fromJS(item);
       else if (item?.type === 'ScheduleFixedIntervalAbridged') return ScheduleFixedIntervalAbridged.fromJS(item);
       else if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
@@ -1081,7 +1081,7 @@ export class ModelEnergyProperties extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ModelEnergyProperties, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(ModelEnergyProperties, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "ModelEnergyProperties";
             this.globalConstructionSet = obj.globalConstructionSet ?? GlobalConstructionSet.fromJS({
   "type": "GlobalConstructionSet",

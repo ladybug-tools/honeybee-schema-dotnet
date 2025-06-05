@@ -50,7 +50,7 @@ export class SHWSystem extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(SHWSystem, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(SHWSystem, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "SHWSystem";
             this.equipmentType = obj.equipmentType ?? SHWEquipmentType.Gas_WaterHeater;
             this.heaterEfficiency = obj.heaterEfficiency ?? new Autocalculate();

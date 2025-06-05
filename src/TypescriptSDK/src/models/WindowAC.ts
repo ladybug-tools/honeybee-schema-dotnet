@@ -39,7 +39,7 @@ export class WindowAC extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(WindowAC, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(WindowAC, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.type = obj.type ?? "WindowAC";
             this.equipmentType = obj.equipmentType ?? WindowACEquipmentType.WindowAC_ElectricBaseboard;

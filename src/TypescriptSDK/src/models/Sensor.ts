@@ -35,7 +35,7 @@ export class Sensor extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Sensor, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(Sensor, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.pos = obj.pos;
             this.dir = obj.dir;
             this.type = obj.type ?? "Sensor";

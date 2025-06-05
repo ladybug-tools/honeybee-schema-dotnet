@@ -86,7 +86,7 @@ export class EnergyWindowFrame extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyWindowFrame, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(EnergyWindowFrame, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.width = obj.width;
             this.conductance = obj.conductance;
             this.type = obj.type ?? "EnergyWindowFrame";

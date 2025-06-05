@@ -75,7 +75,7 @@ export class Setpoint extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Setpoint, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(Setpoint, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.coolingSchedule = obj.coolingSchedule;
             this.heatingSchedule = obj.heatingSchedule;
             this.type = obj.type ?? "Setpoint";

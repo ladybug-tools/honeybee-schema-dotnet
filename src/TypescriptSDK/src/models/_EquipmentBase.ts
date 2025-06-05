@@ -63,7 +63,7 @@ export class _EquipmentBase extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(_EquipmentBase, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(_EquipmentBase, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.wattsPerArea = obj.wattsPerArea;
             this.schedule = obj.schedule;
             this.radiantFraction = obj.radiantFraction ?? 0;

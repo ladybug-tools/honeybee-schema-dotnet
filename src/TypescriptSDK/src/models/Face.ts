@@ -105,7 +105,7 @@ export class Face extends IDdBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Face, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(Face, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.geometry = obj.geometry;
             this.faceType = obj.faceType;
             this.boundaryCondition = obj.boundaryCondition;

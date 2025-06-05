@@ -27,7 +27,7 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsOptional()
     @Expose({ name: "materials" })
-    @Transform(({ value }) => value.map((item: any) => {
+    @Transform(({ value }) => value?.map((item: any) => {
       if (item?.type === 'EnergyMaterial') return EnergyMaterial.fromJS(item);
       else if (item?.type === 'EnergyMaterialNoMass') return EnergyMaterialNoMass.fromJS(item);
       else if (item?.type === 'EnergyWindowMaterialGlazing') return EnergyWindowMaterialGlazing.fromJS(item);
@@ -239,7 +239,7 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsOptional()
     @Expose({ name: "constructions" })
-    @Transform(({ value }) => value.map((item: any) => {
+    @Transform(({ value }) => value?.map((item: any) => {
       if (item?.type === 'OpaqueConstructionAbridged') return OpaqueConstructionAbridged.fromJS(item);
       else if (item?.type === 'WindowConstructionAbridged') return WindowConstructionAbridged.fromJS(item);
       else if (item?.type === 'ShadeConstruction') return ShadeConstruction.fromJS(item);
@@ -896,7 +896,7 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(GlobalConstructionSet, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(GlobalConstructionSet, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "GlobalConstructionSet";
             this.materials = obj.materials ?? [EnergyMaterial.fromJS({
   "identifier": "Generic Roof Membrane",

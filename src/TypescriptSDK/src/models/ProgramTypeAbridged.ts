@@ -93,7 +93,7 @@ export class ProgramTypeAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ProgramTypeAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(ProgramTypeAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "ProgramTypeAbridged";
             this.people = obj.people;
             this.lighting = obj.lighting;

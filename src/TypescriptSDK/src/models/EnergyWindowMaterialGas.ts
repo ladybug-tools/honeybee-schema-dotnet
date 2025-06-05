@@ -37,7 +37,7 @@ export class EnergyWindowMaterialGas extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyWindowMaterialGas, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(EnergyWindowMaterialGas, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "EnergyWindowMaterialGas";
             this.thickness = obj.thickness ?? 0.0125;
             this.gasType = obj.gasType ?? GasType.Air;

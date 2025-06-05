@@ -35,7 +35,7 @@ export class _SkyCondition extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(_SkyCondition, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(_SkyCondition, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.date = obj.date;
             this.daylightSavings = obj.daylightSavings ?? false;
             this.type = obj.type ?? "_SkyCondition";

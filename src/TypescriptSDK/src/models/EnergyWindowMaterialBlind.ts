@@ -235,7 +235,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyWindowMaterialBlind, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(EnergyWindowMaterialBlind, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "EnergyWindowMaterialBlind";
             this.slatOrientation = obj.slatOrientation ?? SlatOrientation.Horizontal;
             this.slatWidth = obj.slatWidth ?? 0.025;

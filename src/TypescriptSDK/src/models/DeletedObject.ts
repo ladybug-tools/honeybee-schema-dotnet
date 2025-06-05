@@ -49,7 +49,7 @@ export class DeletedObject extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DeletedObject, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(DeletedObject, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.elementType = obj.elementType;
             this.elementId = obj.elementId;
             this.geometry = obj.geometry;

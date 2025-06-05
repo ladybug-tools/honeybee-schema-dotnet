@@ -41,7 +41,7 @@ export class IDdBaseModel extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(IDdBaseModel, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(IDdBaseModel, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.identifier = obj.identifier;
             this.displayName = obj.displayName;
             this.userData = obj.userData;

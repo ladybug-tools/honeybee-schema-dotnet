@@ -62,7 +62,7 @@ export class Radiant extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Radiant, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(Radiant, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.type = obj.type ?? "Radiant";
             this.equipmentType = obj.equipmentType ?? RadiantEquipmentType.Radiant_Chiller_Boiler;

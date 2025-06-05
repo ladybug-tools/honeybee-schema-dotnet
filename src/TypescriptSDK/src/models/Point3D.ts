@@ -36,7 +36,7 @@ export class Point3D {
 
     init(_data?: any) {
         if (_data) {
-            const obj = plainToClass(Point3D, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(Point3D, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.x = obj.x;
             this.y = obj.y;
             this.z = obj.z;

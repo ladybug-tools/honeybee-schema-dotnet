@@ -99,7 +99,7 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(IdealAirSystemAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(IdealAirSystemAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "IdealAirSystemAbridged";
             this.economizerType = obj.economizerType ?? EconomizerType.DifferentialDryBulb;
             this.demandControlledVentilation = obj.demandControlledVentilation ?? false;

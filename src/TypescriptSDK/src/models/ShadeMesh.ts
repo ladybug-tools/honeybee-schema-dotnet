@@ -46,7 +46,7 @@ export class ShadeMesh extends IDdBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ShadeMesh, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(ShadeMesh, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.geometry = obj.geometry;
             this.properties = obj.properties;
             this.type = obj.type ?? "ShadeMesh";

@@ -60,7 +60,7 @@ export class InfiltrationAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(InfiltrationAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(InfiltrationAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.flowPerExteriorArea = obj.flowPerExteriorArea;
             this.schedule = obj.schedule;
             this.type = obj.type ?? "InfiltrationAbridged";

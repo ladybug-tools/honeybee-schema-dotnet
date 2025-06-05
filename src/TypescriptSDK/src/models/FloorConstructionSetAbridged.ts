@@ -21,7 +21,7 @@ export class FloorConstructionSetAbridged extends _FaceSubSetAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(FloorConstructionSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(FloorConstructionSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "FloorConstructionSetAbridged";
         }
     }

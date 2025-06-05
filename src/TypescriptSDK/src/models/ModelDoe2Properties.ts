@@ -21,7 +21,7 @@ export class ModelDoe2Properties extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ModelDoe2Properties, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(ModelDoe2Properties, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "ModelDoe2Properties";
         }
     }

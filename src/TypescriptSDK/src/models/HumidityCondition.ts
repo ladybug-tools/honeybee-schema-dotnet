@@ -58,7 +58,7 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(HumidityCondition, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(HumidityCondition, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.humidityType = obj.humidityType;
             this.humidityValue = obj.humidityValue;
             this.type = obj.type ?? "HumidityCondition";

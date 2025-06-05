@@ -28,7 +28,7 @@ export class Surface extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Surface, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(Surface, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.boundaryConditionObjects = obj.boundaryConditionObjects;
             this.type = obj.type ?? "Surface";
         }

@@ -66,7 +66,7 @@ export class FloorModifierSet extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(FloorModifierSet, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(FloorModifierSet, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.exteriorModifier = obj.exteriorModifier;
             this.interiorModifier = obj.interiorModifier;
             this.type = obj.type ?? "FloorModifierSet";
