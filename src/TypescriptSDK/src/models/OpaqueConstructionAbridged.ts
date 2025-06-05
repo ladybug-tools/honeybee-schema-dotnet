@@ -28,7 +28,7 @@ export class OpaqueConstructionAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(OpaqueConstructionAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(OpaqueConstructionAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.materials = obj.materials;
             this.type = obj.type ?? "OpaqueConstructionAbridged";
         }

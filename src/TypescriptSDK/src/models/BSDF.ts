@@ -39,7 +39,7 @@ export class BSDF extends ModifierBase {
     @IsArray()
     @IsOptional()
     @Expose({ name: "dependencies" })
-    @Transform(({ value }) => value.map((item: any) => {
+    @Transform(({ value }) => value?.map((item: any) => {
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
       else if (item?.type === 'Glass') return Glass.fromJS(item);
       else if (item?.type === 'BSDF') return BSDF.fromJS(item);
@@ -125,7 +125,7 @@ export class BSDF extends ModifierBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(BSDF, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(BSDF, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.bsdfData = obj.bsdfData;
             this.modifier = obj.modifier ?? new Void();
             this.dependencies = obj.dependencies;

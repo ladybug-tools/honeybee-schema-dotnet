@@ -87,7 +87,7 @@ export class ValidationError {
     @IsArray()
     @IsOptional()
     @Expose({ name: "helper_geometry" })
-    @Transform(({ value }) => value.map((item: any) => {
+    @Transform(({ value }) => value?.map((item: any) => {
       if (item?.type === 'Point3D') return Point3D.fromJS(item);
       else if (item?.type === 'LineSegment3D') return LineSegment3D.fromJS(item);
       else return item;
@@ -103,7 +103,7 @@ export class ValidationError {
 
     init(_data?: any) {
         if (_data) {
-            const obj = plainToClass(ValidationError, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(ValidationError, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.code = obj.code;
             this.errorType = obj.errorType;
             this.extensionType = obj.extensionType;

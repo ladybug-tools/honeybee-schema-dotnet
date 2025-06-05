@@ -21,7 +21,7 @@ export class ElectricEquipmentAbridged extends _EquipmentBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ElectricEquipmentAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(ElectricEquipmentAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "ElectricEquipmentAbridged";
         }
     }

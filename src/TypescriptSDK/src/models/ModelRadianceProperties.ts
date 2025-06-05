@@ -197,7 +197,7 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsOptional()
     @Expose({ name: "modifiers" })
-    @Transform(({ value }) => value.map((item: any) => {
+    @Transform(({ value }) => value?.map((item: any) => {
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
       else if (item?.type === 'Glass') return Glass.fromJS(item);
       else if (item?.type === 'BSDF') return BSDF.fromJS(item);
@@ -215,7 +215,7 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsOptional()
     @Expose({ name: "modifier_sets" })
-    @Transform(({ value }) => value.map((item: any) => {
+    @Transform(({ value }) => value?.map((item: any) => {
       if (item?.type === 'ModifierSet') return ModifierSet.fromJS(item);
       else if (item?.type === 'ModifierSetAbridged') return ModifierSetAbridged.fromJS(item);
       else return item;
@@ -413,7 +413,7 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ModelRadianceProperties, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(ModelRadianceProperties, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "ModelRadianceProperties";
             this.globalModifierSet = obj.globalModifierSet ?? GlobalModifierSet.fromJS({
   "type": "GlobalModifierSet",

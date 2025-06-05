@@ -61,7 +61,7 @@ export class ValidationReport {
 
     init(_data?: any) {
         if (_data) {
-            const obj = plainToClass(ValidationReport, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(ValidationReport, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.appVersion = obj.appVersion;
             this.schemaVersion = obj.schemaVersion;
             this.valid = obj.valid;

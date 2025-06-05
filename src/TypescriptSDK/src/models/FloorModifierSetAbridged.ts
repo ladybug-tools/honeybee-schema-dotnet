@@ -21,7 +21,7 @@ export class FloorModifierSetAbridged extends BaseModifierSetAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(FloorModifierSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(FloorModifierSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "FloorModifierSetAbridged";
         }
     }

@@ -36,7 +36,7 @@ export class ElectricLoadCenter extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ElectricLoadCenter, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(ElectricLoadCenter, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "ElectricLoadCenter";
             this.inverterEfficiency = obj.inverterEfficiency ?? 0.96;
             this.inverterDcToAcSizeRatio = obj.inverterDcToAcSizeRatio ?? 1.1;

@@ -68,7 +68,7 @@ export class Location extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Location, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(Location, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "Location";
             this.city = obj.city ?? "-";
             this.latitude = obj.latitude ?? 0;

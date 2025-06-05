@@ -21,7 +21,7 @@ export class WallModifierSetAbridged extends BaseModifierSetAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(WallModifierSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(WallModifierSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "WallModifierSetAbridged";
         }
     }

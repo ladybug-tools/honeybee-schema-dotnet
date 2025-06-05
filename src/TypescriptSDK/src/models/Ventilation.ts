@@ -66,7 +66,7 @@ export class Ventilation extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Ventilation, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(Ventilation, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "Ventilation";
             this.flowPerPerson = obj.flowPerPerson ?? 0;
             this.flowPerArea = obj.flowPerArea ?? 0;

@@ -37,7 +37,7 @@ export class ShadeRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ShadeRadiancePropertiesAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(ShadeRadiancePropertiesAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "ShadeRadiancePropertiesAbridged";
             this.dynamicGroupIdentifier = obj.dynamicGroupIdentifier;
             this.states = obj.states;

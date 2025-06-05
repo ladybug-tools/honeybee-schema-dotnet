@@ -76,7 +76,7 @@ export class Lighting extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Lighting, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(Lighting, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.wattsPerArea = obj.wattsPerArea;
             this.schedule = obj.schedule;
             this.type = obj.type ?? "Lighting";

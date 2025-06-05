@@ -36,7 +36,7 @@ export class AFNCrack extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(AFNCrack, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(AFNCrack, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.flowCoefficient = obj.flowCoefficient;
             this.type = obj.type ?? "AFNCrack";
             this.flowExponent = obj.flowExponent ?? 0.65;

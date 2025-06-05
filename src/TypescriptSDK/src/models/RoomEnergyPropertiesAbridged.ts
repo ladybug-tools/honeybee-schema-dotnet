@@ -173,7 +173,7 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(RoomEnergyPropertiesAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(RoomEnergyPropertiesAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "RoomEnergyPropertiesAbridged";
             this.constructionSet = obj.constructionSet;
             this.programType = obj.programType;

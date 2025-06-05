@@ -102,7 +102,7 @@ export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyWindowMaterialGasCustom, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(EnergyWindowMaterialGasCustom, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.conductivityCoeffA = obj.conductivityCoeffA;
             this.viscosityCoeffA = obj.viscosityCoeffA;
             this.specificHeatCoeffA = obj.specificHeatCoeffA;

@@ -72,7 +72,7 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ProjectInfo, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(ProjectInfo, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "ProjectInfo";
             this.north = obj.north ?? 0;
             this.weatherUrls = obj.weatherUrls;

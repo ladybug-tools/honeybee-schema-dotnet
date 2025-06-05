@@ -37,7 +37,7 @@ export class ASHRAETau extends _SkyCondition {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ASHRAETau, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(ASHRAETau, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.tauB = obj.tauB;
             this.tauD = obj.tauD;
             this.type = obj.type ?? "ASHRAETau";

@@ -23,7 +23,7 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsOptional()
     @Expose({ name: "modifiers" })
-    @Transform(({ value }) => value.map((item: any) => {
+    @Transform(({ value }) => value?.map((item: any) => {
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
       else if (item?.type === 'Glass') return Glass.fromJS(item);
       else if (item?.type === 'Trans') return Trans.fromJS(item);
@@ -389,7 +389,7 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(GlobalModifierSet, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(GlobalModifierSet, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "GlobalModifierSet";
             this.modifiers = obj.modifiers ?? [Plastic.fromJS({
   "identifier": "generic_floor_0.20",

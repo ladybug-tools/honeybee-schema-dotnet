@@ -61,7 +61,7 @@ export class ServiceHotWaterAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ServiceHotWaterAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(ServiceHotWaterAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.flowPerArea = obj.flowPerArea;
             this.schedule = obj.schedule;
             this.type = obj.type ?? "ServiceHotWaterAbridged";

@@ -36,7 +36,7 @@ export class DryBulbCondition extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DryBulbCondition, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(DryBulbCondition, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.dryBulbMax = obj.dryBulbMax;
             this.dryBulbRange = obj.dryBulbRange;
             this.type = obj.type ?? "DryBulbCondition";

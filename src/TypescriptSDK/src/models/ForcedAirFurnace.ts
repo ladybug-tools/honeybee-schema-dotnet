@@ -39,7 +39,7 @@ export class ForcedAirFurnace extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ForcedAirFurnace, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(ForcedAirFurnace, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.type = obj.type ?? "ForcedAirFurnace";
             this.equipmentType = obj.equipmentType ?? FurnaceEquipmentType.Furnace;

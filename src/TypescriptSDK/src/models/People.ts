@@ -68,7 +68,7 @@ export class People extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(People, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(People, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.peoplePerArea = obj.peoplePerArea;
             this.occupancySchedule = obj.occupancySchedule;
             this.type = obj.type ?? "People";

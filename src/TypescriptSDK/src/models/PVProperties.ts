@@ -63,7 +63,7 @@ export class PVProperties extends EnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(PVProperties, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(PVProperties, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "PVProperties";
             this.ratedEfficiency = obj.ratedEfficiency ?? 0.15;
             this.activeAreaFraction = obj.activeAreaFraction ?? 0.9;

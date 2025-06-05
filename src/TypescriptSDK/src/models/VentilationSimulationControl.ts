@@ -81,7 +81,7 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(VentilationSimulationControl, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(VentilationSimulationControl, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "VentilationSimulationControl";
             this.ventControlType = obj.ventControlType ?? VentilationControlType.SingleZone;
             this.referenceTemperature = obj.referenceTemperature ?? 20;

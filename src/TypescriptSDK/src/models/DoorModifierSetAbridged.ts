@@ -39,7 +39,7 @@ export class DoorModifierSetAbridged extends BaseModifierSetAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DoorModifierSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(DoorModifierSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "DoorModifierSetAbridged";
             this.interiorGlassModifier = obj.interiorGlassModifier;
             this.exteriorGlassModifier = obj.exteriorGlassModifier;

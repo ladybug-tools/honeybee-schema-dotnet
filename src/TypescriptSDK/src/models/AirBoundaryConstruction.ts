@@ -42,7 +42,7 @@ export class AirBoundaryConstruction extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(AirBoundaryConstruction, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(AirBoundaryConstruction, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.type = obj.type ?? "AirBoundaryConstruction";
             this.airMixingPerArea = obj.airMixingPerArea ?? 0.1;
             this.airMixingSchedule = obj.airMixingSchedule;

@@ -35,7 +35,7 @@ export class InternalMassAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(InternalMassAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(InternalMassAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.construction = obj.construction;
             this.area = obj.area;
             this.type = obj.type ?? "InternalMassAbridged";

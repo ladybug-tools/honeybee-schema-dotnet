@@ -10,7 +10,7 @@ export class OpaqueConstruction extends IDdEnergyBaseModel {
     @IsArray()
     @IsDefined()
     @Expose({ name: "materials" })
-    @Transform(({ value }) => value.map((item: any) => {
+    @Transform(({ value }) => value?.map((item: any) => {
       if (item?.type === 'EnergyMaterial') return EnergyMaterial.fromJS(item);
       else if (item?.type === 'EnergyMaterialNoMass') return EnergyMaterialNoMass.fromJS(item);
       else if (item?.type === 'EnergyMaterialVegetation') return EnergyMaterialVegetation.fromJS(item);
@@ -36,7 +36,7 @@ export class OpaqueConstruction extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(OpaqueConstruction, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(OpaqueConstruction, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.materials = obj.materials;
             this.type = obj.type ?? "OpaqueConstruction";
         }

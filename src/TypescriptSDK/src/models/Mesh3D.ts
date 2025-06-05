@@ -46,7 +46,7 @@ export class Mesh3D extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Mesh3D, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(Mesh3D, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.vertices = obj.vertices;
             this.faces = obj.faces;
             this.type = obj.type ?? "Mesh3D";

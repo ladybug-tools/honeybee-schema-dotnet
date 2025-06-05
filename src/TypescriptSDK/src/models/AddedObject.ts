@@ -49,7 +49,7 @@ export class AddedObject extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(AddedObject, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(AddedObject, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.elementType = obj.elementType;
             this.elementId = obj.elementId;
             this.geometry = obj.geometry;

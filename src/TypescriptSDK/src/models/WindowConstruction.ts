@@ -13,7 +13,7 @@ export class WindowConstruction extends IDdEnergyBaseModel {
     @IsArray()
     @IsDefined()
     @Expose({ name: "materials" })
-    @Transform(({ value }) => value.map((item: any) => {
+    @Transform(({ value }) => value?.map((item: any) => {
       if (item?.type === 'EnergyWindowMaterialSimpleGlazSys') return EnergyWindowMaterialSimpleGlazSys.fromJS(item);
       else if (item?.type === 'EnergyWindowMaterialGlazing') return EnergyWindowMaterialGlazing.fromJS(item);
       else if (item?.type === 'EnergyWindowMaterialGas') return EnergyWindowMaterialGas.fromJS(item);
@@ -49,7 +49,7 @@ export class WindowConstruction extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(WindowConstruction, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            const obj = plainToClass(WindowConstruction, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
             this.materials = obj.materials;
             this.type = obj.type ?? "WindowConstruction";
             this.frame = obj.frame;
