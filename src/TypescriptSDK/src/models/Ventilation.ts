@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { ScheduleRuleset } from "./ScheduleRuleset";
@@ -9,34 +9,40 @@ export class Ventilation extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^Ventilation$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Ventilation";
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
+    @Expose({ name: "flow_per_person" })
     /** Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room. */
-    flow_per_person?: number;
+    flowPerPerson: number = 0;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
+    @Expose({ name: "flow_per_area" })
     /** Intensity of ventilation in [m3/s per m2 of floor area]. */
-    flow_per_area?: number;
+    flowPerArea: number = 0;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
+    @Expose({ name: "air_changes_per_hour" })
     /** Intensity of ventilation in air changes per hour (ACH) for the entire Room. */
-    air_changes_per_hour?: number;
+    airChangesPerHour: number = 0;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
+    @Expose({ name: "flow_per_zone" })
     /** Intensity of ventilation in m3/s for the entire Room. */
-    flow_per_zone?: number;
+    flowPerZone: number = 0;
 	
     @IsOptional()
+    @Expose({ name: "schedule" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
@@ -50,10 +56,10 @@ export class Ventilation extends IDdEnergyBaseModel {
     constructor() {
         super();
         this.type = "Ventilation";
-        this.flow_per_person = 0;
-        this.flow_per_area = 0;
-        this.air_changes_per_hour = 0;
-        this.flow_per_zone = 0;
+        this.flowPerPerson = 0;
+        this.flowPerArea = 0;
+        this.airChangesPerHour = 0;
+        this.flowPerZone = 0;
     }
 
 
@@ -62,10 +68,10 @@ export class Ventilation extends IDdEnergyBaseModel {
         if (_data) {
             const obj = plainToClass(Ventilation, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.flow_per_person = obj.flow_per_person;
-            this.flow_per_area = obj.flow_per_area;
-            this.air_changes_per_hour = obj.air_changes_per_hour;
-            this.flow_per_zone = obj.flow_per_zone;
+            this.flowPerPerson = obj.flowPerPerson;
+            this.flowPerArea = obj.flowPerArea;
+            this.airChangesPerHour = obj.airChangesPerHour;
+            this.flowPerZone = obj.flowPerZone;
             this.schedule = obj.schedule;
         }
     }
@@ -89,10 +95,10 @@ export class Ventilation extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["flow_per_person"] = this.flow_per_person;
-        data["flow_per_area"] = this.flow_per_area;
-        data["air_changes_per_hour"] = this.air_changes_per_hour;
-        data["flow_per_zone"] = this.flow_per_zone;
+        data["flow_per_person"] = this.flowPerPerson;
+        data["flow_per_area"] = this.flowPerArea;
+        data["air_changes_per_hour"] = this.airChangesPerHour;
+        data["flow_per_zone"] = this.flowPerZone;
         data["schedule"] = this.schedule;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -107,4 +113,3 @@ export class Ventilation extends IDdEnergyBaseModel {
         return true;
     }
 }
-

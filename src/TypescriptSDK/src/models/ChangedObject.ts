@@ -1,5 +1,5 @@
 ﻿import { IsEnum, IsDefined, IsString, Matches, MinLength, MaxLength, IsBoolean, IsArray, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { GeometryObjectTypes } from "./GeometryObjectTypes";
 
@@ -7,58 +7,67 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
     @IsEnum(GeometryObjectTypes)
     @Type(() => String)
     @IsDefined()
+    @Expose({ name: "element_type" })
     /** Text for the type of object that has been changed. */
-    element_type!: GeometryObjectTypes;
+    elementType!: GeometryObjectTypes;
 	
     @IsString()
     @IsDefined()
     @Matches(/^[^,;!\n\t]+$/)
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "element_id" })
     /** Text string for the unique object ID that has changed. */
-    element_id!: string;
+    elementId!: string;
 	
     @IsBoolean()
     @IsDefined()
+    @Expose({ name: "geometry_changed" })
     /** A boolean to note whether the geometry of the object has changed (True) or not (False). For the case of a Room, any change in the geometry of child Faces, Apertures or Doors will cause this property to be True. Note that this property is only True if the change in geometry produces a visible change greater than the base model tolerance. So converting the model between different unit systems, removing colinear vertices, or doing other transformations that are common for export to simulation engines will not trigger this property to become True. */
-    geometry_changed!: boolean;
+    geometryChanged!: boolean;
 	
     @IsArray()
     @IsDefined()
+    @Expose({ name: "geometry" })
     /** A list of DisplayFace3D dictionaries for the new, changed geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been changed. Note that this attribute is always included in the ChangedObject, even when geometry_changed is False. */
     geometry!: Object[];
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "element_name" })
     /** Text string for the display name of the object that has changed. */
-    element_name?: string;
+    elementName?: string;
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "energy_changed" })
     /** A boolean to note whether the energy properties of the object have changed (True) or not (False) such that it is possible for the properties of the changed object to be applied to the base model. For Rooms, this property will only be true if the energy property assigned to the Room has changed and will not be true if a property assigned to an individual child Face or Aperture has changed. */
-    energy_changed?: boolean;
+    energyChanged: boolean = false;
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "radiance_changed" })
     /** A boolean to note whether the radiance properties of the object have changed (True) or not (False) such that it is possible for the properties of the changed object to be applied to the base model. For Rooms, this property will only be true if the radiance property assigned to the Room has changed and will not be true if a property assigned to an individual child Face or Aperture has changed. */
-    radiance_changed?: boolean;
+    radianceChanged: boolean = false;
 	
     @IsArray()
     @IsOptional()
+    @Expose({ name: "existing_geometry" })
     /** A list of DisplayFace3D dictionaries for the existing (base) geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been changed. This attribute is optional and will NOT be output if geometry_changed is False. */
-    existing_geometry?: Object[];
+    existingGeometry?: Object[];
 	
     @IsString()
     @IsOptional()
     @Matches(/^ChangedObject$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ChangedObject";
 	
 
     constructor() {
         super();
-        this.energy_changed = false;
-        this.radiance_changed = false;
+        this.energyChanged = false;
+        this.radianceChanged = false;
         this.type = "ChangedObject";
     }
 
@@ -67,14 +76,14 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(ChangedObject, _data, { enableImplicitConversion: true });
-            this.element_type = obj.element_type;
-            this.element_id = obj.element_id;
-            this.geometry_changed = obj.geometry_changed;
+            this.elementType = obj.elementType;
+            this.elementId = obj.elementId;
+            this.geometryChanged = obj.geometryChanged;
             this.geometry = obj.geometry;
-            this.element_name = obj.element_name;
-            this.energy_changed = obj.energy_changed;
-            this.radiance_changed = obj.radiance_changed;
-            this.existing_geometry = obj.existing_geometry;
+            this.elementName = obj.elementName;
+            this.energyChanged = obj.energyChanged;
+            this.radianceChanged = obj.radianceChanged;
+            this.existingGeometry = obj.existingGeometry;
             this.type = obj.type;
         }
     }
@@ -97,14 +106,14 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["element_type"] = this.element_type;
-        data["element_id"] = this.element_id;
-        data["geometry_changed"] = this.geometry_changed;
+        data["element_type"] = this.elementType;
+        data["element_id"] = this.elementId;
+        data["geometry_changed"] = this.geometryChanged;
         data["geometry"] = this.geometry;
-        data["element_name"] = this.element_name;
-        data["energy_changed"] = this.energy_changed;
-        data["radiance_changed"] = this.radiance_changed;
-        data["existing_geometry"] = this.existing_geometry;
+        data["element_name"] = this.elementName;
+        data["energy_changed"] = this.energyChanged;
+        data["radiance_changed"] = this.radianceChanged;
+        data["existing_geometry"] = this.existingGeometry;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -119,4 +128,3 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

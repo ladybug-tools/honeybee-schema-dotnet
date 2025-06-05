@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsString, IsDefined, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Construction for opaque objects (Face, Shade, Door). */
@@ -7,14 +7,16 @@ export class OpaqueConstructionAbridged extends IDdEnergyBaseModel {
     @IsArray()
     @IsString({ each: true })
     @IsDefined()
+    @Expose({ name: "materials" })
     /** List of strings for opaque material identifiers. The order of the materials is from exterior to interior. */
     materials!: string[];
 	
     @IsString()
     @IsOptional()
     @Matches(/^OpaqueConstructionAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "OpaqueConstructionAbridged";
 	
 
     constructor() {
@@ -65,4 +67,3 @@ export class OpaqueConstructionAbridged extends IDdEnergyBaseModel {
         return true;
     }
 }
-

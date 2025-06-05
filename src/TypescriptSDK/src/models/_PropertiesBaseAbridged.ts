@@ -1,24 +1,27 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class of Abridged Radiance Properties. */
 export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Expose({ name: "modifier" })
     /** A string for a Honeybee Radiance Modifier (default: None). */
     modifier?: string;
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "modifier_blk" })
     /** A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None). */
-    modifier_blk?: string;
+    modifierBlk?: string;
 	
     @IsString()
     @IsOptional()
     @Matches(/^_PropertiesBaseAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "_PropertiesBaseAbridged";
 	
 
     constructor() {
@@ -32,7 +35,7 @@ export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
         if (_data) {
             const obj = plainToClass(_PropertiesBaseAbridged, _data, { enableImplicitConversion: true });
             this.modifier = obj.modifier;
-            this.modifier_blk = obj.modifier_blk;
+            this.modifierBlk = obj.modifierBlk;
             this.type = obj.type;
         }
     }
@@ -56,7 +59,7 @@ export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["modifier"] = this.modifier;
-        data["modifier_blk"] = this.modifier_blk;
+        data["modifier_blk"] = this.modifierBlk;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -71,4 +74,3 @@ export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

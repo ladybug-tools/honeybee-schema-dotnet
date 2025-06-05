@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects needing to check for a valid Date. */
@@ -7,8 +7,9 @@ export class DatedBaseModel extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^DatedBaseModel$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "DatedBaseModel";
 	
 
     constructor() {
@@ -57,4 +58,3 @@ export class DatedBaseModel extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

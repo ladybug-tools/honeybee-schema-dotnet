@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AFNCrack } from "./AFNCrack";
 
@@ -8,13 +8,15 @@ export class FaceEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^FaceEnergyPropertiesAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "FaceEnergyPropertiesAbridged";
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "construction" })
     /** Identifier of an OpaqueConstruction for the Face. If None, the construction is set by the parent Room construction_set or the Model global_construction_set. */
     construction?: string;
 	
@@ -22,8 +24,9 @@ export class FaceEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @Type(() => AFNCrack)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "vent_crack" })
     /** An optional AFNCrack to specify airflow through a surface crack used by the AirflowNetwork. */
-    vent_crack?: AFNCrack;
+    ventCrack?: AFNCrack;
 	
 
     constructor() {
@@ -38,7 +41,7 @@ export class FaceEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
             const obj = plainToClass(FaceEnergyPropertiesAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.construction = obj.construction;
-            this.vent_crack = obj.vent_crack;
+            this.ventCrack = obj.ventCrack;
         }
     }
 
@@ -62,7 +65,7 @@ export class FaceEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
         data["construction"] = this.construction;
-        data["vent_crack"] = this.vent_crack;
+        data["vent_crack"] = this.ventCrack;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -76,4 +79,3 @@ export class FaceEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

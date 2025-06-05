@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -8,103 +8,117 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^EnergyWindowMaterialGlazing$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "EnergyWindowMaterialGlazing";
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "thickness" })
     /** The surface-to-surface thickness of the glass in meters. Default:  0.003. */
-    thickness?: number;
+    thickness: number = 0.003;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "solar_transmittance" })
     /** Transmittance of solar radiation through the glass at normal incidence. Default: 0.85 for clear glass. */
-    solar_transmittance?: number;
+    solarTransmittance: number = 0.85;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "solar_reflectance" })
     /** Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default: 0.075 for clear glass. */
-    solar_reflectance?: number;
+    solarReflectance: number = 0.075;
 	
     @IsOptional()
+    @Expose({ name: "solar_reflectance_back" })
     /** Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum. */
-    solar_reflectance_back?: (Autocalculate | number);
+    solarReflectanceBack: (Autocalculate | number) = new Autocalculate();
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "visible_transmittance" })
     /** Transmittance of visible light through the glass at normal incidence. Default: 0.9 for clear glass. */
-    visible_transmittance?: number;
+    visibleTransmittance: number = 0.9;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "visible_reflectance" })
     /** Reflectance of visible light off of the front side of the glass at normal incidence. Default: 0.075 for clear glass. */
-    visible_reflectance?: number;
+    visibleReflectance: number = 0.075;
 	
     @IsOptional()
+    @Expose({ name: "visible_reflectance_back" })
     /** Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye. */
-    visible_reflectance_back?: (Autocalculate | number);
+    visibleReflectanceBack: (Autocalculate | number) = new Autocalculate();
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "infrared_transmittance" })
     /** Long-wave transmittance at normal incidence. */
-    infrared_transmittance?: number;
+    infraredTransmittance: number = 0;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "emissivity" })
     /** Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating. */
-    emissivity?: number;
+    emissivity: number = 0.84;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "emissivity_back" })
     /** Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating. */
-    emissivity_back?: number;
+    emissivityBack: number = 0.84;
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "conductivity" })
     /** Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is  typical for clear glass without a low-e coating. */
-    conductivity?: number;
+    conductivity: number = 0.9;
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "dirt_correction" })
     /** Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean. */
-    dirt_correction?: number;
+    dirtCorrection: number = 1;
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "solar_diffusing" })
     /** If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component. */
-    solar_diffusing?: boolean;
+    solarDiffusing: boolean = false;
 	
 
     constructor() {
         super();
         this.type = "EnergyWindowMaterialGlazing";
         this.thickness = 0.003;
-        this.solar_transmittance = 0.85;
-        this.solar_reflectance = 0.075;
-        this.solar_reflectance_back = new Autocalculate();
-        this.visible_transmittance = 0.9;
-        this.visible_reflectance = 0.075;
-        this.visible_reflectance_back = new Autocalculate();
-        this.infrared_transmittance = 0;
+        this.solarTransmittance = 0.85;
+        this.solarReflectance = 0.075;
+        this.solarReflectanceBack = new Autocalculate();
+        this.visibleTransmittance = 0.9;
+        this.visibleReflectance = 0.075;
+        this.visibleReflectanceBack = new Autocalculate();
+        this.infraredTransmittance = 0;
         this.emissivity = 0.84;
-        this.emissivity_back = 0.84;
+        this.emissivityBack = 0.84;
         this.conductivity = 0.9;
-        this.dirt_correction = 1;
-        this.solar_diffusing = false;
+        this.dirtCorrection = 1;
+        this.solarDiffusing = false;
     }
 
 
@@ -114,18 +128,18 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
             const obj = plainToClass(EnergyWindowMaterialGlazing, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.thickness = obj.thickness;
-            this.solar_transmittance = obj.solar_transmittance;
-            this.solar_reflectance = obj.solar_reflectance;
-            this.solar_reflectance_back = obj.solar_reflectance_back;
-            this.visible_transmittance = obj.visible_transmittance;
-            this.visible_reflectance = obj.visible_reflectance;
-            this.visible_reflectance_back = obj.visible_reflectance_back;
-            this.infrared_transmittance = obj.infrared_transmittance;
+            this.solarTransmittance = obj.solarTransmittance;
+            this.solarReflectance = obj.solarReflectance;
+            this.solarReflectanceBack = obj.solarReflectanceBack;
+            this.visibleTransmittance = obj.visibleTransmittance;
+            this.visibleReflectance = obj.visibleReflectance;
+            this.visibleReflectanceBack = obj.visibleReflectanceBack;
+            this.infraredTransmittance = obj.infraredTransmittance;
             this.emissivity = obj.emissivity;
-            this.emissivity_back = obj.emissivity_back;
+            this.emissivityBack = obj.emissivityBack;
             this.conductivity = obj.conductivity;
-            this.dirt_correction = obj.dirt_correction;
-            this.solar_diffusing = obj.solar_diffusing;
+            this.dirtCorrection = obj.dirtCorrection;
+            this.solarDiffusing = obj.solarDiffusing;
         }
     }
 
@@ -149,18 +163,18 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
         data["thickness"] = this.thickness;
-        data["solar_transmittance"] = this.solar_transmittance;
-        data["solar_reflectance"] = this.solar_reflectance;
-        data["solar_reflectance_back"] = this.solar_reflectance_back;
-        data["visible_transmittance"] = this.visible_transmittance;
-        data["visible_reflectance"] = this.visible_reflectance;
-        data["visible_reflectance_back"] = this.visible_reflectance_back;
-        data["infrared_transmittance"] = this.infrared_transmittance;
+        data["solar_transmittance"] = this.solarTransmittance;
+        data["solar_reflectance"] = this.solarReflectance;
+        data["solar_reflectance_back"] = this.solarReflectanceBack;
+        data["visible_transmittance"] = this.visibleTransmittance;
+        data["visible_reflectance"] = this.visibleReflectance;
+        data["visible_reflectance_back"] = this.visibleReflectanceBack;
+        data["infrared_transmittance"] = this.infraredTransmittance;
         data["emissivity"] = this.emissivity;
-        data["emissivity_back"] = this.emissivity_back;
+        data["emissivity_back"] = this.emissivityBack;
         data["conductivity"] = this.conductivity;
-        data["dirt_correction"] = this.dirt_correction;
-        data["solar_diffusing"] = this.solar_diffusing;
+        data["dirt_correction"] = this.dirtCorrection;
+        data["solar_diffusing"] = this.solarDiffusing;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -174,4 +188,3 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
         return true;
     }
 }
-

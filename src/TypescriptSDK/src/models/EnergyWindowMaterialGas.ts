@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { GasType } from "./GasType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -8,26 +8,29 @@ export class EnergyWindowMaterialGas extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^EnergyWindowMaterialGas$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "EnergyWindowMaterialGas";
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "thickness" })
     /** Thickness of the gas layer in meters. Default: 0.0125. */
-    thickness?: number;
+    thickness: number = 0.0125;
 	
     @IsEnum(GasType)
     @Type(() => String)
     @IsOptional()
-    /** GasType */
-    gas_type?: GasType;
+    @Expose({ name: "gas_type" })
+    /** gasType */
+    gasType: GasType = GasType.Air;
 	
 
     constructor() {
         super();
         this.type = "EnergyWindowMaterialGas";
         this.thickness = 0.0125;
-        this.gas_type = GasType.Air;
+        this.gasType = GasType.Air;
     }
 
 
@@ -37,7 +40,7 @@ export class EnergyWindowMaterialGas extends IDdEnergyBaseModel {
             const obj = plainToClass(EnergyWindowMaterialGas, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.thickness = obj.thickness;
-            this.gas_type = obj.gas_type;
+            this.gasType = obj.gasType;
         }
     }
 
@@ -61,7 +64,7 @@ export class EnergyWindowMaterialGas extends IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
         data["thickness"] = this.thickness;
-        data["gas_type"] = this.gas_type;
+        data["gas_type"] = this.gasType;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -75,4 +78,3 @@ export class EnergyWindowMaterialGas extends IDdEnergyBaseModel {
         return true;
     }
 }
-

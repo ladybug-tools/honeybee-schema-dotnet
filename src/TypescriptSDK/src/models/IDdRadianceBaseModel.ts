@@ -1,5 +1,5 @@
 ﻿import { IsString, IsDefined, Matches, MinLength, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects requiring a valid Radiance identifier. */
@@ -8,19 +8,22 @@ export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
     @IsDefined()
     @Matches(/^[.A-Za-z0-9_-]+$/)
     @MinLength(1)
+    @Expose({ name: "identifier" })
     /** Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. */
     identifier!: string;
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "display_name" })
     /** Display name of the object with no character restrictions. */
-    display_name?: string;
+    displayName?: string;
 	
     @IsString()
     @IsOptional()
     @Matches(/^IDdRadianceBaseModel$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "IDdRadianceBaseModel";
 	
 
     constructor() {
@@ -34,7 +37,7 @@ export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
         if (_data) {
             const obj = plainToClass(IDdRadianceBaseModel, _data, { enableImplicitConversion: true });
             this.identifier = obj.identifier;
-            this.display_name = obj.display_name;
+            this.displayName = obj.displayName;
             this.type = obj.type;
         }
     }
@@ -58,7 +61,7 @@ export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["identifier"] = this.identifier;
-        data["display_name"] = this.display_name;
+        data["display_name"] = this.displayName;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -73,4 +76,3 @@ export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

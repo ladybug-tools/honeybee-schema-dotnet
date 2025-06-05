@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { Face3D } from "./Face3D";
 import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged";
 
@@ -9,21 +9,24 @@ export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
     @Type(() => Face3D)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "vmtx_geometry" })
     /** A Face3D for the view matrix geometry (default: None). */
-    vmtx_geometry?: Face3D;
+    vmtxGeometry?: Face3D;
 	
     @IsInstance(Face3D)
     @Type(() => Face3D)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "dmtx_geometry" })
     /** A Face3D for the daylight matrix geometry (default: None). */
-    dmtx_geometry?: Face3D;
+    dmtxGeometry?: Face3D;
 	
     @IsString()
     @IsOptional()
     @Matches(/^RadianceSubFaceStateAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "RadianceSubFaceStateAbridged";
 	
 
     constructor() {
@@ -36,8 +39,8 @@ export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(RadianceSubFaceStateAbridged, _data, { enableImplicitConversion: true });
-            this.vmtx_geometry = obj.vmtx_geometry;
-            this.dmtx_geometry = obj.dmtx_geometry;
+            this.vmtxGeometry = obj.vmtxGeometry;
+            this.dmtxGeometry = obj.dmtxGeometry;
             this.type = obj.type;
         }
     }
@@ -60,8 +63,8 @@ export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["vmtx_geometry"] = this.vmtx_geometry;
-        data["dmtx_geometry"] = this.dmtx_geometry;
+        data["vmtx_geometry"] = this.vmtxGeometry;
+        data["dmtx_geometry"] = this.dmtxGeometry;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -76,4 +79,3 @@ export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
         return true;
     }
 }
-

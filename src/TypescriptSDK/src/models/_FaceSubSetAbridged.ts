@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A set of constructions for wall, floor, or roof assemblies. */
@@ -8,28 +8,32 @@ export class _FaceSubSetAbridged extends _OpenAPIGenBaseModel {
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "interior_construction" })
     /** Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition. */
-    interior_construction?: string;
+    interiorConstruction?: string;
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "exterior_construction" })
     /** Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition. */
-    exterior_construction?: string;
+    exteriorConstruction?: string;
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "ground_construction" })
     /** Identifier for an OpaqueConstruction for faces with a Ground boundary condition. */
-    ground_construction?: string;
+    groundConstruction?: string;
 	
     @IsString()
     @IsOptional()
     @Matches(/^_FaceSubSetAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "_FaceSubSetAbridged";
 	
 
     constructor() {
@@ -42,9 +46,9 @@ export class _FaceSubSetAbridged extends _OpenAPIGenBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(_FaceSubSetAbridged, _data, { enableImplicitConversion: true });
-            this.interior_construction = obj.interior_construction;
-            this.exterior_construction = obj.exterior_construction;
-            this.ground_construction = obj.ground_construction;
+            this.interiorConstruction = obj.interiorConstruction;
+            this.exteriorConstruction = obj.exteriorConstruction;
+            this.groundConstruction = obj.groundConstruction;
             this.type = obj.type;
         }
     }
@@ -67,9 +71,9 @@ export class _FaceSubSetAbridged extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["interior_construction"] = this.interior_construction;
-        data["exterior_construction"] = this.exterior_construction;
-        data["ground_construction"] = this.ground_construction;
+        data["interior_construction"] = this.interiorConstruction;
+        data["exterior_construction"] = this.exteriorConstruction;
+        data["ground_construction"] = this.groundConstruction;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -84,4 +88,3 @@ export class _FaceSubSetAbridged extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

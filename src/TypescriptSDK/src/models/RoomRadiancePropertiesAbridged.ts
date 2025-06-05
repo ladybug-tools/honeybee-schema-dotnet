@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Abridged Radiance Properties for Honeybee Room. */
@@ -7,13 +7,15 @@ export class RoomRadiancePropertiesAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^RoomRadiancePropertiesAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "RoomRadiancePropertiesAbridged";
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "modifier_set" })
     /** An identifier for a unique Room-Assigned ModifierSet (default: None). */
-    modifier_set?: string;
+    modifierSet?: string;
 	
 
     constructor() {
@@ -27,7 +29,7 @@ export class RoomRadiancePropertiesAbridged extends _OpenAPIGenBaseModel {
         if (_data) {
             const obj = plainToClass(RoomRadiancePropertiesAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.modifier_set = obj.modifier_set;
+            this.modifierSet = obj.modifierSet;
         }
     }
 
@@ -50,7 +52,7 @@ export class RoomRadiancePropertiesAbridged extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["modifier_set"] = this.modifier_set;
+        data["modifier_set"] = this.modifierSet;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -64,4 +66,3 @@ export class RoomRadiancePropertiesAbridged extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

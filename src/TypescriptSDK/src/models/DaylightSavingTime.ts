@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { DatedBaseModel } from "./DatedBaseModel";
 
 /** Used to describe the daylight savings time for the simulation. */
@@ -7,27 +7,30 @@ export class DaylightSavingTime extends DatedBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^DaylightSavingTime$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "DaylightSavingTime";
 	
     @IsArray()
     @IsInt({ each: true })
     @IsOptional()
+    @Expose({ name: "start_date" })
     /** A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017). */
-    start_date?: number[];
+    startDate: number[] = [3, 12];
 	
     @IsArray()
     @IsInt({ each: true })
     @IsOptional()
+    @Expose({ name: "end_date" })
     /** A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017). */
-    end_date?: number[];
+    endDate: number[] = [11, 5];
 	
 
     constructor() {
         super();
         this.type = "DaylightSavingTime";
-        this.start_date = [3, 12];
-        this.end_date = [11, 5];
+        this.startDate = [3, 12];
+        this.endDate = [11, 5];
     }
 
 
@@ -36,8 +39,8 @@ export class DaylightSavingTime extends DatedBaseModel {
         if (_data) {
             const obj = plainToClass(DaylightSavingTime, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.start_date = obj.start_date;
-            this.end_date = obj.end_date;
+            this.startDate = obj.startDate;
+            this.endDate = obj.endDate;
         }
     }
 
@@ -60,8 +63,8 @@ export class DaylightSavingTime extends DatedBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["start_date"] = this.start_date;
-        data["end_date"] = this.end_date;
+        data["start_date"] = this.startDate;
+        data["end_date"] = this.endDate;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -75,4 +78,3 @@ export class DaylightSavingTime extends DatedBaseModel {
         return true;
     }
 }
-

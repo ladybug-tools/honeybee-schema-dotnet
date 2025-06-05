@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A set of constructions for door assemblies. */
@@ -7,43 +7,49 @@ export class DoorConstructionSetAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^DoorConstructionSetAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "DoorConstructionSetAbridged";
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "interior_construction" })
     /** Identifier for an OpaqueConstruction for all opaque doors with a Surface boundary condition. */
-    interior_construction?: string;
+    interiorConstruction?: string;
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "exterior_construction" })
     /** Identifier for an OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face. */
-    exterior_construction?: string;
+    exteriorConstruction?: string;
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "overhead_construction" })
     /** Identifier for an OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face. */
-    overhead_construction?: string;
+    overheadConstruction?: string;
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "exterior_glass_construction" })
     /** Identifier for a WindowConstruction for all glass doors with an Outdoors boundary condition. */
-    exterior_glass_construction?: string;
+    exteriorGlassConstruction?: string;
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "interior_glass_construction" })
     /** Identifier for a WindowConstruction for all glass doors with a Surface boundary condition. */
-    interior_glass_construction?: string;
+    interiorGlassConstruction?: string;
 	
 
     constructor() {
@@ -57,11 +63,11 @@ export class DoorConstructionSetAbridged extends _OpenAPIGenBaseModel {
         if (_data) {
             const obj = plainToClass(DoorConstructionSetAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.interior_construction = obj.interior_construction;
-            this.exterior_construction = obj.exterior_construction;
-            this.overhead_construction = obj.overhead_construction;
-            this.exterior_glass_construction = obj.exterior_glass_construction;
-            this.interior_glass_construction = obj.interior_glass_construction;
+            this.interiorConstruction = obj.interiorConstruction;
+            this.exteriorConstruction = obj.exteriorConstruction;
+            this.overheadConstruction = obj.overheadConstruction;
+            this.exteriorGlassConstruction = obj.exteriorGlassConstruction;
+            this.interiorGlassConstruction = obj.interiorGlassConstruction;
         }
     }
 
@@ -84,11 +90,11 @@ export class DoorConstructionSetAbridged extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["interior_construction"] = this.interior_construction;
-        data["exterior_construction"] = this.exterior_construction;
-        data["overhead_construction"] = this.overhead_construction;
-        data["exterior_glass_construction"] = this.exterior_glass_construction;
-        data["interior_glass_construction"] = this.interior_glass_construction;
+        data["interior_construction"] = this.interiorConstruction;
+        data["exterior_construction"] = this.exteriorConstruction;
+        data["overhead_construction"] = this.overheadConstruction;
+        data["exterior_glass_construction"] = this.exteriorGlassConstruction;
+        data["interior_glass_construction"] = this.interiorGlassConstruction;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -102,4 +108,3 @@ export class DoorConstructionSetAbridged extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

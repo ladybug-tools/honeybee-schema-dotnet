@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsString, IsDefined, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
@@ -7,14 +7,16 @@ export class Surface extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsString({ each: true })
     @IsDefined()
+    @Expose({ name: "boundary_condition_objects" })
     /** A list of up to 3 object identifiers that are adjacent to this one. The first object is always the one that is immediately adjacent and is of the same object type (Face, Aperture, Door). When this boundary condition is applied to a Face, the second object in the tuple will be the parent Room of the adjacent object. When the boundary condition is applied to a sub-face (Door or Aperture), the second object will be the parent Face of the adjacent sub-face and the third object will be the parent Room of the adjacent sub-face. */
-    boundary_condition_objects!: string[];
+    boundaryConditionObjects!: string[];
 	
     @IsString()
     @IsOptional()
     @Matches(/^Surface$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Surface";
 	
 
     constructor() {
@@ -27,7 +29,7 @@ export class Surface extends _OpenAPIGenBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(Surface, _data, { enableImplicitConversion: true });
-            this.boundary_condition_objects = obj.boundary_condition_objects;
+            this.boundaryConditionObjects = obj.boundaryConditionObjects;
             this.type = obj.type;
         }
     }
@@ -50,7 +52,7 @@ export class Surface extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["boundary_condition_objects"] = this.boundary_condition_objects;
+        data["boundary_condition_objects"] = this.boundaryConditionObjects;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -65,4 +67,3 @@ export class Surface extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Used to specify wind conditions on a design day. */
@@ -8,27 +8,30 @@ export class WindCondition extends _OpenAPIGenBaseModel {
     @IsDefined()
     @Min(0)
     @Max(40)
+    @Expose({ name: "wind_speed" })
     /** Wind speed on the design day [m/s]. */
-    wind_speed!: number;
+    windSpeed!: number;
 	
     @IsString()
     @IsOptional()
     @Matches(/^WindCondition$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "WindCondition";
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(360)
+    @Expose({ name: "wind_direction" })
     /** Wind direction on the design day [degrees]. */
-    wind_direction?: number;
+    windDirection: number = 0;
 	
 
     constructor() {
         super();
         this.type = "WindCondition";
-        this.wind_direction = 0;
+        this.windDirection = 0;
     }
 
 
@@ -36,9 +39,9 @@ export class WindCondition extends _OpenAPIGenBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(WindCondition, _data, { enableImplicitConversion: true });
-            this.wind_speed = obj.wind_speed;
+            this.windSpeed = obj.windSpeed;
             this.type = obj.type;
-            this.wind_direction = obj.wind_direction;
+            this.windDirection = obj.windDirection;
         }
     }
 
@@ -60,9 +63,9 @@ export class WindCondition extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["wind_speed"] = this.wind_speed;
+        data["wind_speed"] = this.windSpeed;
         data["type"] = this.type;
-        data["wind_direction"] = this.wind_direction;
+        data["wind_direction"] = this.windDirection;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -76,4 +79,3 @@ export class WindCondition extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

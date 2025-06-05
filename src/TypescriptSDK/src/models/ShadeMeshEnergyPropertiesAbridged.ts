@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
@@ -7,13 +7,15 @@ export class ShadeMeshEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^ShadeMeshEnergyPropertiesAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ShadeMeshEnergyPropertiesAbridged";
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "construction" })
     /** Identifier of a ShadeConstruction to set the reflectance and specularity of the Shade. If None, it will be a generic context construction that is completely diffuse with 0.2 visible and solar reflectance. Unless it is building attached, in which case it will be set by the default generic ConstructionSet. */
     construction?: string;
 	
@@ -21,8 +23,9 @@ export class ShadeMeshEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "transmittance_schedule" })
     /** Identifier of a schedule to set the transmittance of the shade, which can vary throughout the simulation. If None, the shade will be completely opaque. */
-    transmittance_schedule?: string;
+    transmittanceSchedule?: string;
 	
 
     constructor() {
@@ -37,7 +40,7 @@ export class ShadeMeshEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
             const obj = plainToClass(ShadeMeshEnergyPropertiesAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.construction = obj.construction;
-            this.transmittance_schedule = obj.transmittance_schedule;
+            this.transmittanceSchedule = obj.transmittanceSchedule;
         }
     }
 
@@ -61,7 +64,7 @@ export class ShadeMeshEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
         data["construction"] = this.construction;
-        data["transmittance_schedule"] = this.transmittance_schedule;
+        data["transmittance_schedule"] = this.transmittanceSchedule;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -75,4 +78,3 @@ export class ShadeMeshEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

@@ -1,5 +1,5 @@
 ﻿import { IsEnum, IsDefined, IsNumber, IsString, IsOptional, Matches, Min, Max, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { HumidityTypes } from "./HumidityTypes";
 
@@ -8,44 +8,50 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
     @IsEnum(HumidityTypes)
     @Type(() => String)
     @IsDefined()
-    /** HumidityType */
-    humidity_type!: HumidityTypes;
+    @Expose({ name: "humidity_type" })
+    /** humidityType */
+    humidityType!: HumidityTypes;
 	
     @IsNumber()
     @IsDefined()
+    @Expose({ name: "humidity_value" })
     /** The value correcponding to the humidity_type. */
-    humidity_value!: number;
+    humidityValue!: number;
 	
     @IsString()
     @IsOptional()
     @Matches(/^HumidityCondition$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "HumidityCondition";
 	
     @IsNumber()
     @IsOptional()
     @Min(31000)
     @Max(120000)
+    @Expose({ name: "barometric_pressure" })
     /** Barometric air pressure on the design day [Pa]. */
-    barometric_pressure?: number;
+    barometricPressure: number = 101325;
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "rain" })
     /** Boolean to indicate rain on the design day. */
-    rain?: boolean;
+    rain: boolean = false;
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "snow_on_ground" })
     /** Boolean to indicate snow on the ground during the design day. */
-    snow_on_ground?: boolean;
+    snowOnGround: boolean = false;
 	
 
     constructor() {
         super();
         this.type = "HumidityCondition";
-        this.barometric_pressure = 101325;
+        this.barometricPressure = 101325;
         this.rain = false;
-        this.snow_on_ground = false;
+        this.snowOnGround = false;
     }
 
 
@@ -53,12 +59,12 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(HumidityCondition, _data, { enableImplicitConversion: true });
-            this.humidity_type = obj.humidity_type;
-            this.humidity_value = obj.humidity_value;
+            this.humidityType = obj.humidityType;
+            this.humidityValue = obj.humidityValue;
             this.type = obj.type;
-            this.barometric_pressure = obj.barometric_pressure;
+            this.barometricPressure = obj.barometricPressure;
             this.rain = obj.rain;
-            this.snow_on_ground = obj.snow_on_ground;
+            this.snowOnGround = obj.snowOnGround;
         }
     }
 
@@ -80,12 +86,12 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["humidity_type"] = this.humidity_type;
-        data["humidity_value"] = this.humidity_value;
+        data["humidity_type"] = this.humidityType;
+        data["humidity_value"] = this.humidityValue;
         data["type"] = this.type;
-        data["barometric_pressure"] = this.barometric_pressure;
+        data["barometric_pressure"] = this.barometricPressure;
         data["rain"] = this.rain;
-        data["snow_on_ground"] = this.snow_on_ground;
+        data["snow_on_ground"] = this.snowOnGround;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -99,4 +105,3 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

@@ -1,5 +1,5 @@
 ﻿import { IsDefined, IsString, IsOptional, Matches, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { ScheduleRuleset } from "./ScheduleRuleset";
@@ -7,6 +7,7 @@ import { ScheduleRuleset } from "./ScheduleRuleset";
 /** Used to specify information about the setpoint schedule. */
 export class Setpoint extends IDdEnergyBaseModel {
     @IsDefined()
+    @Expose({ name: "cooling_schedule" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
@@ -14,9 +15,10 @@ export class Setpoint extends IDdEnergyBaseModel {
       else return item;
     })
     /** Schedule for the cooling setpoint. The values in this schedule should be temperature in [C]. */
-    cooling_schedule!: (ScheduleRuleset | ScheduleFixedInterval);
+    coolingSchedule!: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @IsDefined()
+    @Expose({ name: "heating_schedule" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
@@ -24,15 +26,17 @@ export class Setpoint extends IDdEnergyBaseModel {
       else return item;
     })
     /** Schedule for the heating setpoint. The values in this schedule should be temperature in [C]. */
-    heating_schedule!: (ScheduleRuleset | ScheduleFixedInterval);
+    heatingSchedule!: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @IsString()
     @IsOptional()
     @Matches(/^Setpoint$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Setpoint";
 	
     @IsOptional()
+    @Expose({ name: "humidifying_schedule" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
@@ -40,9 +44,10 @@ export class Setpoint extends IDdEnergyBaseModel {
       else return item;
     })
     /** Schedule for the humidification setpoint. The values in this schedule should be in [%]. */
-    humidifying_schedule?: (ScheduleRuleset | ScheduleFixedInterval);
+    humidifyingSchedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @IsOptional()
+    @Expose({ name: "dehumidifying_schedule" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
@@ -50,19 +55,20 @@ export class Setpoint extends IDdEnergyBaseModel {
       else return item;
     })
     /** Schedule for the dehumidification setpoint. The values in this schedule should be in [%]. */
-    dehumidifying_schedule?: (ScheduleRuleset | ScheduleFixedInterval);
+    dehumidifyingSchedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
+    @Expose({ name: "setpoint_cutout_difference" })
     /** An optional positive number for the temperature difference between the cutout temperature and the setpoint temperature. Specifying a non-zero number here is useful for modeling the throttling range associated with a given setup of setpoint controls and HVAC equipment. Throttling ranges describe the range where a zone is slightly over-cooled or over-heated beyond the thermostat setpoint. They are used to avoid situations where HVAC systems turn on only to turn off a few minutes later, thereby wearing out the parts of mechanical systems faster. They can have a minor impact on energy consumption and can often have significant impacts on occupant thermal comfort, though using the default value of zero will often yield results that are close enough when trying to estimate the annual heating/cooling energy use. Specifying a value of zero effectively assumes that the system will turn on whenever conditions are outside the setpoint range and will cut out as soon as the setpoint is reached. */
-    setpoint_cutout_difference?: number;
+    setpointCutoutDifference: number = 0;
 	
 
     constructor() {
         super();
         this.type = "Setpoint";
-        this.setpoint_cutout_difference = 0;
+        this.setpointCutoutDifference = 0;
     }
 
 
@@ -70,12 +76,12 @@ export class Setpoint extends IDdEnergyBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(Setpoint, _data, { enableImplicitConversion: true });
-            this.cooling_schedule = obj.cooling_schedule;
-            this.heating_schedule = obj.heating_schedule;
+            this.coolingSchedule = obj.coolingSchedule;
+            this.heatingSchedule = obj.heatingSchedule;
             this.type = obj.type;
-            this.humidifying_schedule = obj.humidifying_schedule;
-            this.dehumidifying_schedule = obj.dehumidifying_schedule;
-            this.setpoint_cutout_difference = obj.setpoint_cutout_difference;
+            this.humidifyingSchedule = obj.humidifyingSchedule;
+            this.dehumidifyingSchedule = obj.dehumidifyingSchedule;
+            this.setpointCutoutDifference = obj.setpointCutoutDifference;
         }
     }
 
@@ -97,12 +103,12 @@ export class Setpoint extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["cooling_schedule"] = this.cooling_schedule;
-        data["heating_schedule"] = this.heating_schedule;
+        data["cooling_schedule"] = this.coolingSchedule;
+        data["heating_schedule"] = this.heatingSchedule;
         data["type"] = this.type;
-        data["humidifying_schedule"] = this.humidifying_schedule;
-        data["dehumidifying_schedule"] = this.dehumidifying_schedule;
-        data["setpoint_cutout_difference"] = this.setpoint_cutout_difference;
+        data["humidifying_schedule"] = this.humidifyingSchedule;
+        data["dehumidifying_schedule"] = this.dehumidifyingSchedule;
+        data["setpoint_cutout_difference"] = this.setpointCutoutDifference;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -116,4 +122,3 @@ export class Setpoint extends IDdEnergyBaseModel {
         return true;
     }
 }
-

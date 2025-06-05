@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { Face3D } from "./Face3D";
 import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 
@@ -9,24 +9,28 @@ export class StateGeometryAbridged extends IDdRadianceBaseModel {
     @Type(() => Face3D)
     @ValidateNested()
     @IsDefined()
+    @Expose({ name: "geometry" })
     /** A ladybug_geometry Face3D. */
     geometry!: Face3D;
 	
     @IsString()
     @IsOptional()
     @Matches(/^StateGeometryAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "StateGeometryAbridged";
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "modifier" })
     /** A string for a Honeybee Radiance Modifier identifier (default: None). */
     modifier?: string;
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "modifier_direct" })
     /** A string for Honeybee Radiance Modifier identifiers to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None). */
-    modifier_direct?: string;
+    modifierDirect?: string;
 	
 
     constructor() {
@@ -42,7 +46,7 @@ export class StateGeometryAbridged extends IDdRadianceBaseModel {
             this.geometry = obj.geometry;
             this.type = obj.type;
             this.modifier = obj.modifier;
-            this.modifier_direct = obj.modifier_direct;
+            this.modifierDirect = obj.modifierDirect;
         }
     }
 
@@ -67,7 +71,7 @@ export class StateGeometryAbridged extends IDdRadianceBaseModel {
         data["geometry"] = this.geometry;
         data["type"] = this.type;
         data["modifier"] = this.modifier;
-        data["modifier_direct"] = this.modifier_direct;
+        data["modifier_direct"] = this.modifierDirect;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -81,4 +85,3 @@ export class StateGeometryAbridged extends IDdRadianceBaseModel {
         return true;
     }
 }
-

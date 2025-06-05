@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ApertureModifierSetAbridged } from "./ApertureModifierSetAbridged";
 import { DoorModifierSetAbridged } from "./DoorModifierSetAbridged";
@@ -16,11 +16,13 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^GlobalModifierSet$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "GlobalModifierSet";
 	
     @IsArray()
     @IsOptional()
+    @Expose({ name: "modifiers" })
     @Transform(({ value }) => value.map((item: any) => {
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
       else if (item?.type === 'Glass') return Glass.fromJS(item);
@@ -28,59 +30,206 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
       else return item;
     }))
     /** Global Honeybee Radiance modifiers. */
-    modifiers?: (Plastic | Glass | Trans)[];
+    modifiers: (Plastic | Glass | Trans)[] = [Plastic.fromJS({
+  "identifier": "generic_floor_0.20",
+  "display_name": null,
+  "type": "Plastic",
+  "modifier": null,
+  "dependencies": [],
+  "r_reflectance": 0.2,
+  "g_reflectance": 0.2,
+  "b_reflectance": 0.2,
+  "specularity": 0.0,
+  "roughness": 0.0
+}), Plastic.fromJS({
+  "identifier": "generic_wall_0.50",
+  "display_name": null,
+  "type": "Plastic",
+  "modifier": null,
+  "dependencies": [],
+  "r_reflectance": 0.5,
+  "g_reflectance": 0.5,
+  "b_reflectance": 0.5,
+  "specularity": 0.0,
+  "roughness": 0.0
+}), Plastic.fromJS({
+  "identifier": "generic_ceiling_0.80",
+  "display_name": null,
+  "type": "Plastic",
+  "modifier": null,
+  "dependencies": [],
+  "r_reflectance": 0.8,
+  "g_reflectance": 0.8,
+  "b_reflectance": 0.8,
+  "specularity": 0.0,
+  "roughness": 0.0
+}), Plastic.fromJS({
+  "identifier": "generic_opaque_door_0.50",
+  "display_name": null,
+  "type": "Plastic",
+  "modifier": null,
+  "dependencies": [],
+  "r_reflectance": 0.5,
+  "g_reflectance": 0.5,
+  "b_reflectance": 0.5,
+  "specularity": 0.0,
+  "roughness": 0.0
+}), Plastic.fromJS({
+  "identifier": "generic_interior_shade_0.50",
+  "display_name": null,
+  "type": "Plastic",
+  "modifier": null,
+  "dependencies": [],
+  "r_reflectance": 0.5,
+  "g_reflectance": 0.5,
+  "b_reflectance": 0.5,
+  "specularity": 0.0,
+  "roughness": 0.0
+}), Plastic.fromJS({
+  "identifier": "generic_exterior_shade_0.35",
+  "display_name": null,
+  "type": "Plastic",
+  "modifier": null,
+  "dependencies": [],
+  "r_reflectance": 0.35,
+  "g_reflectance": 0.35,
+  "b_reflectance": 0.35,
+  "specularity": 0.0,
+  "roughness": 0.0
+}), Plastic.fromJS({
+  "identifier": "generic_context_0.20",
+  "display_name": null,
+  "type": "Plastic",
+  "modifier": null,
+  "dependencies": [],
+  "r_reflectance": 0.2,
+  "g_reflectance": 0.2,
+  "b_reflectance": 0.2,
+  "specularity": 0.0,
+  "roughness": 0.0
+}), Glass.fromJS({
+  "identifier": "generic_interior_window_vis_0.88",
+  "display_name": null,
+  "type": "Glass",
+  "modifier": null,
+  "dependencies": [],
+  "r_transmissivity": 0.9584154328610596,
+  "g_transmissivity": 0.9584154328610596,
+  "b_transmissivity": 0.9584154328610596,
+  "refraction_index": null
+}), Glass.fromJS({
+  "identifier": "generic_exterior_window_vis_0.64",
+  "display_name": null,
+  "type": "Glass",
+  "modifier": null,
+  "dependencies": [],
+  "r_transmissivity": 0.6975761815384331,
+  "g_transmissivity": 0.6975761815384331,
+  "b_transmissivity": 0.6975761815384331,
+  "refraction_index": null
+}), Trans.fromJS({
+  "identifier": "air_boundary",
+  "display_name": null,
+  "type": "Trans",
+  "modifier": null,
+  "dependencies": [],
+  "r_reflectance": 1.0,
+  "g_reflectance": 1.0,
+  "b_reflectance": 1.0,
+  "specularity": 0.0,
+  "roughness": 0.0,
+  "transmitted_diff": 1.0,
+  "transmitted_spec": 1.0
+})];
 	
     @IsInstance(WallModifierSetAbridged)
     @Type(() => WallModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "wall_set" })
     /** Global Honeybee WallModifierSet. */
-    wall_set?: WallModifierSetAbridged;
+    wallSet: WallModifierSetAbridged = WallModifierSetAbridged.fromJS({
+  "exterior_modifier": "generic_wall_0.50",
+  "interior_modifier": "generic_wall_0.50",
+  "type": "WallModifierSetAbridged"
+});
 	
     @IsInstance(FloorModifierSetAbridged)
     @Type(() => FloorModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "floor_set" })
     /** Global Honeybee FloorModifierSet. */
-    floor_set?: FloorModifierSetAbridged;
+    floorSet: FloorModifierSetAbridged = FloorModifierSetAbridged.fromJS({
+  "exterior_modifier": "generic_floor_0.20",
+  "interior_modifier": "generic_floor_0.20",
+  "type": "FloorModifierSetAbridged"
+});
 	
     @IsInstance(RoofCeilingModifierSetAbridged)
     @Type(() => RoofCeilingModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "roof_ceiling_set" })
     /** Global Honeybee RoofCeilingModifierSet. */
-    roof_ceiling_set?: RoofCeilingModifierSetAbridged;
+    roofCeilingSet: RoofCeilingModifierSetAbridged = RoofCeilingModifierSetAbridged.fromJS({
+  "exterior_modifier": "generic_ceiling_0.80",
+  "interior_modifier": "generic_ceiling_0.80",
+  "type": "RoofCeilingModifierSetAbridged"
+});
 	
     @IsInstance(ApertureModifierSetAbridged)
     @Type(() => ApertureModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "aperture_set" })
     /** Global Honeybee ApertureModifierSet. */
-    aperture_set?: ApertureModifierSetAbridged;
+    apertureSet: ApertureModifierSetAbridged = ApertureModifierSetAbridged.fromJS({
+  "type": "ApertureModifierSetAbridged",
+  "window_modifier": "generic_exterior_window_vis_0.64",
+  "interior_modifier": "generic_interior_window_vis_0.88",
+  "skylight_modifier": "generic_exterior_window_vis_0.64",
+  "operable_modifier": "generic_exterior_window_vis_0.64"
+});
 	
     @IsInstance(DoorModifierSetAbridged)
     @Type(() => DoorModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "door_set" })
     /** Global Honeybee DoorModifierSet. */
-    door_set?: DoorModifierSetAbridged;
+    doorSet: DoorModifierSetAbridged = DoorModifierSetAbridged.fromJS({
+  "exterior_modifier": "generic_opaque_door_0.50",
+  "interior_modifier": "generic_opaque_door_0.50",
+  "type": "DoorModifierSetAbridged",
+  "interior_glass_modifier": "generic_interior_window_vis_0.88",
+  "exterior_glass_modifier": "generic_exterior_window_vis_0.64",
+  "overhead_modifier": "generic_opaque_door_0.50"
+});
 	
     @IsInstance(ShadeModifierSetAbridged)
     @Type(() => ShadeModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "shade_set" })
     /** Global Honeybee ShadeModifierSet. */
-    shade_set?: ShadeModifierSetAbridged;
+    shadeSet: ShadeModifierSetAbridged = ShadeModifierSetAbridged.fromJS({
+  "exterior_modifier": "generic_exterior_shade_0.35",
+  "interior_modifier": "generic_interior_shade_0.50",
+  "type": "ShadeModifierSetAbridged"
+});
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "air_boundary_modifier" })
     /** Global Honeybee Modifier for AirBoundary Faces. */
-    air_boundary_modifier?: string;
+    airBoundaryModifier: string = "air_boundary";
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "context_modifier" })
     /** Global Honeybee Modifier for context Shades. */
-    context_modifier?: string;
+    contextModifier: string = "generic_context_0.20";
 	
 
     constructor() {
@@ -197,29 +346,29 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
   "transmitted_diff": 1.0,
   "transmitted_spec": 1.0
 })];
-        this.wall_set = WallModifierSetAbridged.fromJS({
+        this.wallSet = WallModifierSetAbridged.fromJS({
   "exterior_modifier": "generic_wall_0.50",
   "interior_modifier": "generic_wall_0.50",
   "type": "WallModifierSetAbridged"
 });
-        this.floor_set = FloorModifierSetAbridged.fromJS({
+        this.floorSet = FloorModifierSetAbridged.fromJS({
   "exterior_modifier": "generic_floor_0.20",
   "interior_modifier": "generic_floor_0.20",
   "type": "FloorModifierSetAbridged"
 });
-        this.roof_ceiling_set = RoofCeilingModifierSetAbridged.fromJS({
+        this.roofCeilingSet = RoofCeilingModifierSetAbridged.fromJS({
   "exterior_modifier": "generic_ceiling_0.80",
   "interior_modifier": "generic_ceiling_0.80",
   "type": "RoofCeilingModifierSetAbridged"
 });
-        this.aperture_set = ApertureModifierSetAbridged.fromJS({
+        this.apertureSet = ApertureModifierSetAbridged.fromJS({
   "type": "ApertureModifierSetAbridged",
   "window_modifier": "generic_exterior_window_vis_0.64",
   "interior_modifier": "generic_interior_window_vis_0.88",
   "skylight_modifier": "generic_exterior_window_vis_0.64",
   "operable_modifier": "generic_exterior_window_vis_0.64"
 });
-        this.door_set = DoorModifierSetAbridged.fromJS({
+        this.doorSet = DoorModifierSetAbridged.fromJS({
   "exterior_modifier": "generic_opaque_door_0.50",
   "interior_modifier": "generic_opaque_door_0.50",
   "type": "DoorModifierSetAbridged",
@@ -227,13 +376,13 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
   "exterior_glass_modifier": "generic_exterior_window_vis_0.64",
   "overhead_modifier": "generic_opaque_door_0.50"
 });
-        this.shade_set = ShadeModifierSetAbridged.fromJS({
+        this.shadeSet = ShadeModifierSetAbridged.fromJS({
   "exterior_modifier": "generic_exterior_shade_0.35",
   "interior_modifier": "generic_interior_shade_0.50",
   "type": "ShadeModifierSetAbridged"
 });
-        this.air_boundary_modifier = "air_boundary";
-        this.context_modifier = "generic_context_0.20";
+        this.airBoundaryModifier = "air_boundary";
+        this.contextModifier = "generic_context_0.20";
     }
 
 
@@ -243,14 +392,14 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
             const obj = plainToClass(GlobalModifierSet, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.modifiers = obj.modifiers;
-            this.wall_set = obj.wall_set;
-            this.floor_set = obj.floor_set;
-            this.roof_ceiling_set = obj.roof_ceiling_set;
-            this.aperture_set = obj.aperture_set;
-            this.door_set = obj.door_set;
-            this.shade_set = obj.shade_set;
-            this.air_boundary_modifier = obj.air_boundary_modifier;
-            this.context_modifier = obj.context_modifier;
+            this.wallSet = obj.wallSet;
+            this.floorSet = obj.floorSet;
+            this.roofCeilingSet = obj.roofCeilingSet;
+            this.apertureSet = obj.apertureSet;
+            this.doorSet = obj.doorSet;
+            this.shadeSet = obj.shadeSet;
+            this.airBoundaryModifier = obj.airBoundaryModifier;
+            this.contextModifier = obj.contextModifier;
         }
     }
 
@@ -274,14 +423,14 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
         data["modifiers"] = this.modifiers;
-        data["wall_set"] = this.wall_set;
-        data["floor_set"] = this.floor_set;
-        data["roof_ceiling_set"] = this.roof_ceiling_set;
-        data["aperture_set"] = this.aperture_set;
-        data["door_set"] = this.door_set;
-        data["shade_set"] = this.shade_set;
-        data["air_boundary_modifier"] = this.air_boundary_modifier;
-        data["context_modifier"] = this.context_modifier;
+        data["wall_set"] = this.wallSet;
+        data["floor_set"] = this.floorSet;
+        data["roof_ceiling_set"] = this.roofCeilingSet;
+        data["aperture_set"] = this.apertureSet;
+        data["door_set"] = this.doorSet;
+        data["shade_set"] = this.shadeSet;
+        data["air_boundary_modifier"] = this.airBoundaryModifier;
+        data["context_modifier"] = this.contextModifier;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -295,4 +444,3 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

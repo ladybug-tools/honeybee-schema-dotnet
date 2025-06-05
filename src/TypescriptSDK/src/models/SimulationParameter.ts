@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, IsInt, Min, Max, IsNumber, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { RunPeriod } from "./RunPeriod";
 import { ShadowCalculation } from "./ShadowCalculation";
@@ -13,13 +13,15 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^SimulationParameter$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "SimulationParameter";
 	
     @IsInstance(SimulationOutput)
     @Type(() => SimulationOutput)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "output" })
     /** A SimulationOutput that lists the desired outputs from the simulation and the format in which to report them. */
     output?: SimulationOutput;
 	
@@ -27,57 +29,64 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
     @Type(() => RunPeriod)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "run_period" })
     /** A RunPeriod to describe the time period over which to run the simulation. */
-    run_period?: RunPeriod;
+    runPeriod?: RunPeriod;
 	
     @IsInt()
     @IsOptional()
     @Min(1)
     @Max(60)
+    @Expose({ name: "timestep" })
     /** An integer for the number of timesteps per hour at which the energy calculation will be run. */
-    timestep?: number;
+    timestep: number = 6;
 	
     @IsInstance(SimulationControl)
     @Type(() => SimulationControl)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "simulation_control" })
     /** A SimulationControl object that describes which types of calculations to run. */
-    simulation_control?: SimulationControl;
+    simulationControl?: SimulationControl;
 	
     @IsInstance(ShadowCalculation)
     @Type(() => ShadowCalculation)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "shadow_calculation" })
     /** A ShadowCalculation object describing settings for the EnergyPlus Shadow Calculation. */
-    shadow_calculation?: ShadowCalculation;
+    shadowCalculation?: ShadowCalculation;
 	
     @IsInstance(SizingParameter)
     @Type(() => SizingParameter)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "sizing_parameter" })
     /** A SizingParameter object with criteria for sizing the heating and cooling system. */
-    sizing_parameter?: SizingParameter;
+    sizingParameter?: SizingParameter;
 	
     @IsNumber()
     @IsOptional()
     @Min(-360)
     @Max(360)
+    @Expose({ name: "north_angle" })
     /** A number between -360 and 360 for the north direction in degrees.This is the counterclockwise difference between the North and the positive Y-axis. 90 is West and 270 is East. Note that this is different than the convention used in EnergyPlus, which uses clockwise difference instead of counterclockwise difference. */
-    north_angle?: number;
+    northAngle: number = 0;
 	
     @IsEnum(TerrianTypes)
     @Type(() => String)
     @IsOptional()
+    @Expose({ name: "terrain_type" })
     /** Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms. */
-    terrain_type?: TerrianTypes;
+    terrainType: TerrianTypes = TerrianTypes.City;
 	
 
     constructor() {
         super();
         this.type = "SimulationParameter";
         this.timestep = 6;
-        this.north_angle = 0;
-        this.terrain_type = TerrianTypes.City;
+        this.northAngle = 0;
+        this.terrainType = TerrianTypes.City;
     }
 
 
@@ -87,13 +96,13 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
             const obj = plainToClass(SimulationParameter, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.output = obj.output;
-            this.run_period = obj.run_period;
+            this.runPeriod = obj.runPeriod;
             this.timestep = obj.timestep;
-            this.simulation_control = obj.simulation_control;
-            this.shadow_calculation = obj.shadow_calculation;
-            this.sizing_parameter = obj.sizing_parameter;
-            this.north_angle = obj.north_angle;
-            this.terrain_type = obj.terrain_type;
+            this.simulationControl = obj.simulationControl;
+            this.shadowCalculation = obj.shadowCalculation;
+            this.sizingParameter = obj.sizingParameter;
+            this.northAngle = obj.northAngle;
+            this.terrainType = obj.terrainType;
         }
     }
 
@@ -117,13 +126,13 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
         data["output"] = this.output;
-        data["run_period"] = this.run_period;
+        data["run_period"] = this.runPeriod;
         data["timestep"] = this.timestep;
-        data["simulation_control"] = this.simulation_control;
-        data["shadow_calculation"] = this.shadow_calculation;
-        data["sizing_parameter"] = this.sizing_parameter;
-        data["north_angle"] = this.north_angle;
-        data["terrain_type"] = this.terrain_type;
+        data["simulation_control"] = this.simulationControl;
+        data["shadow_calculation"] = this.shadowCalculation;
+        data["sizing_parameter"] = this.sizingParameter;
+        data["north_angle"] = this.northAngle;
+        data["terrain_type"] = this.terrainType;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -137,4 +146,3 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

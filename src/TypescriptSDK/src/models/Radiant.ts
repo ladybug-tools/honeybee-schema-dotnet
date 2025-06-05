@@ -1,5 +1,5 @@
 ﻿import { IsEnum, IsOptional, IsString, Matches, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { RadiantEquipmentType } from "./RadiantEquipmentType";
 import { RadiantFaceTypes } from "./RadiantFaceTypes";
@@ -10,46 +10,52 @@ export class Radiant extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
     @Type(() => String)
     @IsOptional()
+    @Expose({ name: "vintage" })
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
-    vintage?: Vintages;
+    vintage: Vintages = Vintages.ASHRAE_2019;
 	
     @IsString()
     @IsOptional()
     @Matches(/^Radiant$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Radiant";
 	
     @IsEnum(RadiantEquipmentType)
     @Type(() => String)
     @IsOptional()
+    @Expose({ name: "equipment_type" })
     /** Text for the specific type of system equipment from the RadiantEquipmentType enumeration. */
-    equipment_type?: RadiantEquipmentType;
+    equipmentType: RadiantEquipmentType = RadiantEquipmentType.Radiant_Chiller_Boiler;
 	
     @IsEnum(RadiantFaceTypes)
     @Type(() => String)
     @IsOptional()
+    @Expose({ name: "radiant_face_type" })
     /** Text to indicate which faces are thermally active by default. Note that this property has no effect when the rooms to which the HVAC system is assigned have constructions with internal source materials. In this case, those constructions will dictate the thermally active surfaces. */
-    radiant_face_type?: RadiantFaceTypes;
+    radiantFaceType: RadiantFaceTypes = RadiantFaceTypes.Floor;
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "minimum_operation_time" })
     /** A number for the minimum number of hours of operation for the radiant system before it shuts off. */
-    minimum_operation_time?: number;
+    minimumOperationTime: number = 1;
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "switch_over_time" })
     /** A number for the minimum number of hours for when the system can switch between heating and cooling. */
-    switch_over_time?: number;
+    switchOverTime: number = 24;
 	
 
     constructor() {
         super();
         this.vintage = Vintages.ASHRAE_2019;
         this.type = "Radiant";
-        this.equipment_type = RadiantEquipmentType.Radiant_Chiller_Boiler;
-        this.radiant_face_type = RadiantFaceTypes.Floor;
-        this.minimum_operation_time = 1;
-        this.switch_over_time = 24;
+        this.equipmentType = RadiantEquipmentType.Radiant_Chiller_Boiler;
+        this.radiantFaceType = RadiantFaceTypes.Floor;
+        this.minimumOperationTime = 1;
+        this.switchOverTime = 24;
     }
 
 
@@ -59,10 +65,10 @@ export class Radiant extends IDdEnergyBaseModel {
             const obj = plainToClass(Radiant, _data, { enableImplicitConversion: true });
             this.vintage = obj.vintage;
             this.type = obj.type;
-            this.equipment_type = obj.equipment_type;
-            this.radiant_face_type = obj.radiant_face_type;
-            this.minimum_operation_time = obj.minimum_operation_time;
-            this.switch_over_time = obj.switch_over_time;
+            this.equipmentType = obj.equipmentType;
+            this.radiantFaceType = obj.radiantFaceType;
+            this.minimumOperationTime = obj.minimumOperationTime;
+            this.switchOverTime = obj.switchOverTime;
         }
     }
 
@@ -86,10 +92,10 @@ export class Radiant extends IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
         data["vintage"] = this.vintage;
         data["type"] = this.type;
-        data["equipment_type"] = this.equipment_type;
-        data["radiant_face_type"] = this.radiant_face_type;
-        data["minimum_operation_time"] = this.minimum_operation_time;
-        data["switch_over_time"] = this.switch_over_time;
+        data["equipment_type"] = this.equipmentType;
+        data["radiant_face_type"] = this.radiantFaceType;
+        data["minimum_operation_time"] = this.minimumOperationTime;
+        data["switch_over_time"] = this.switchOverTime;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -103,4 +109,3 @@ export class Radiant extends IDdEnergyBaseModel {
         return true;
     }
 }
-

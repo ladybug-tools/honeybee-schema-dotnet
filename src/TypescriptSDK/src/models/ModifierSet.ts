@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { ApertureModifierSet } from "./ApertureModifierSet";
 import { BSDF } from "./BSDF";
 import { DoorModifierSet } from "./DoorModifierSet";
@@ -22,52 +22,60 @@ export class ModifierSet extends IDdRadianceBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^ModifierSet$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ModifierSet";
 	
     @IsInstance(WallModifierSet)
     @Type(() => WallModifierSet)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "wall_set" })
     /** An optional WallModifierSet object for this ModifierSet. (default: None). */
-    wall_set?: WallModifierSet;
+    wallSet?: WallModifierSet;
 	
     @IsInstance(FloorModifierSet)
     @Type(() => FloorModifierSet)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "floor_set" })
     /** An optional FloorModifierSet object for this ModifierSet. (default: None). */
-    floor_set?: FloorModifierSet;
+    floorSet?: FloorModifierSet;
 	
     @IsInstance(RoofCeilingModifierSet)
     @Type(() => RoofCeilingModifierSet)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "roof_ceiling_set" })
     /** An optional RoofCeilingModifierSet object for this ModifierSet. (default: None). */
-    roof_ceiling_set?: RoofCeilingModifierSet;
+    roofCeilingSet?: RoofCeilingModifierSet;
 	
     @IsInstance(ApertureModifierSet)
     @Type(() => ApertureModifierSet)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "aperture_set" })
     /** An optional ApertureModifierSet object for this ModifierSet. (default: None). */
-    aperture_set?: ApertureModifierSet;
+    apertureSet?: ApertureModifierSet;
 	
     @IsInstance(DoorModifierSet)
     @Type(() => DoorModifierSet)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "door_set" })
     /** An optional DoorModifierSet object for this ModifierSet. (default: None). */
-    door_set?: DoorModifierSet;
+    doorSet?: DoorModifierSet;
 	
     @IsInstance(ShadeModifierSet)
     @Type(() => ShadeModifierSet)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "shade_set" })
     /** An optional ShadeModifierSet object for this ModifierSet. (default: None). */
-    shade_set?: ShadeModifierSet;
+    shadeSet?: ShadeModifierSet;
 	
     @IsOptional()
+    @Expose({ name: "air_boundary_modifier" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
@@ -82,7 +90,7 @@ export class ModifierSet extends IDdRadianceBaseModel {
       else return item;
     })
     /** An optional Modifier to be used for all Faces with an AirBoundary face type. If None, it will be the honeybee generic air wall modifier. */
-    air_boundary_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
+    airBoundaryModifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
 
     constructor() {
@@ -96,13 +104,13 @@ export class ModifierSet extends IDdRadianceBaseModel {
         if (_data) {
             const obj = plainToClass(ModifierSet, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.wall_set = obj.wall_set;
-            this.floor_set = obj.floor_set;
-            this.roof_ceiling_set = obj.roof_ceiling_set;
-            this.aperture_set = obj.aperture_set;
-            this.door_set = obj.door_set;
-            this.shade_set = obj.shade_set;
-            this.air_boundary_modifier = obj.air_boundary_modifier;
+            this.wallSet = obj.wallSet;
+            this.floorSet = obj.floorSet;
+            this.roofCeilingSet = obj.roofCeilingSet;
+            this.apertureSet = obj.apertureSet;
+            this.doorSet = obj.doorSet;
+            this.shadeSet = obj.shadeSet;
+            this.airBoundaryModifier = obj.airBoundaryModifier;
         }
     }
 
@@ -125,13 +133,13 @@ export class ModifierSet extends IDdRadianceBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["wall_set"] = this.wall_set;
-        data["floor_set"] = this.floor_set;
-        data["roof_ceiling_set"] = this.roof_ceiling_set;
-        data["aperture_set"] = this.aperture_set;
-        data["door_set"] = this.door_set;
-        data["shade_set"] = this.shade_set;
-        data["air_boundary_modifier"] = this.air_boundary_modifier;
+        data["wall_set"] = this.wallSet;
+        data["floor_set"] = this.floorSet;
+        data["roof_ceiling_set"] = this.roofCeilingSet;
+        data["aperture_set"] = this.apertureSet;
+        data["door_set"] = this.doorSet;
+        data["shade_set"] = this.shadeSet;
+        data["air_boundary_modifier"] = this.airBoundaryModifier;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -145,4 +153,3 @@ export class ModifierSet extends IDdRadianceBaseModel {
         return true;
     }
 }
-

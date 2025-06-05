@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** This object specifies the properties of window shade materials. */
@@ -7,114 +7,129 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^EnergyWindowMaterialShade$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "EnergyWindowMaterialShade";
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
+    @Expose({ name: "solar_transmittance" })
     /** The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default: 0.4. */
-    solar_transmittance?: number;
+    solarTransmittance: number = 0.4;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
+    @Expose({ name: "solar_reflectance" })
     /** The reflectance averaged over the solar spectrum. It us assumed same on both sides of shade and independent of incidence angle. Default value is 0.5 */
-    solar_reflectance?: number;
+    solarReflectance: number = 0.5;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
+    @Expose({ name: "visible_transmittance" })
     /** The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default: 0.4. */
-    visible_transmittance?: number;
+    visibleTransmittance: number = 0.4;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
+    @Expose({ name: "visible_reflectance" })
     /** The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default: 0.4 */
-    visible_reflectance?: number;
+    visibleReflectance: number = 0.4;
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "emissivity" })
     /** The effective long-wave infrared hemispherical emissivity. It is assumed same on both sides of shade. Default: 0.9. */
-    emissivity?: number;
+    emissivity: number = 0.9;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
+    @Expose({ name: "infrared_transmittance" })
     /** The effective long-wave transmittance. It is assumed independent of incidence angle. Default: 0. */
-    infrared_transmittance?: number;
+    infraredTransmittance: number = 0;
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "thickness" })
     /** The thickness of the shade material in meters. Default: 0.005. */
-    thickness?: number;
+    thickness: number = 0.005;
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "conductivity" })
     /** The conductivity of the shade material in W/(m-K). Default value is 0.1. */
-    conductivity?: number;
+    conductivity: number = 0.1;
 	
     @IsNumber()
     @IsOptional()
     @Min(0.001)
     @Max(1)
+    @Expose({ name: "distance_to_glass" })
     /** The distance from shade to adjacent glass in meters. Default value is 0.05 */
-    distance_to_glass?: number;
+    distanceToGlass: number = 0.05;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "top_opening_multiplier" })
     /** The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. Default: 0.5. */
-    top_opening_multiplier?: number;
+    topOpeningMultiplier: number = 0.5;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "bottom_opening_multiplier" })
     /** The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. Default: 0.5. */
-    bottom_opening_multiplier?: number;
+    bottomOpeningMultiplier: number = 0.5;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "left_opening_multiplier" })
     /** The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. Default: 0.5. */
-    left_opening_multiplier?: number;
+    leftOpeningMultiplier: number = 0.5;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "right_opening_multiplier" })
     /** The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. Default: 0.5. */
-    right_opening_multiplier?: number;
+    rightOpeningMultiplier: number = 0.5;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(0.8)
+    @Expose({ name: "airflow_permeability" })
     /** The fraction of the shade surface that is open to air flow. If air cannot pass through the shade material, airflow_permeability = 0. Default: 0. */
-    airflow_permeability?: number;
+    airflowPermeability: number = 0;
 	
 
     constructor() {
         super();
         this.type = "EnergyWindowMaterialShade";
-        this.solar_transmittance = 0.4;
-        this.solar_reflectance = 0.5;
-        this.visible_transmittance = 0.4;
-        this.visible_reflectance = 0.4;
+        this.solarTransmittance = 0.4;
+        this.solarReflectance = 0.5;
+        this.visibleTransmittance = 0.4;
+        this.visibleReflectance = 0.4;
         this.emissivity = 0.9;
-        this.infrared_transmittance = 0;
+        this.infraredTransmittance = 0;
         this.thickness = 0.005;
         this.conductivity = 0.1;
-        this.distance_to_glass = 0.05;
-        this.top_opening_multiplier = 0.5;
-        this.bottom_opening_multiplier = 0.5;
-        this.left_opening_multiplier = 0.5;
-        this.right_opening_multiplier = 0.5;
-        this.airflow_permeability = 0;
+        this.distanceToGlass = 0.05;
+        this.topOpeningMultiplier = 0.5;
+        this.bottomOpeningMultiplier = 0.5;
+        this.leftOpeningMultiplier = 0.5;
+        this.rightOpeningMultiplier = 0.5;
+        this.airflowPermeability = 0;
     }
 
 
@@ -123,20 +138,20 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
         if (_data) {
             const obj = plainToClass(EnergyWindowMaterialShade, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.solar_transmittance = obj.solar_transmittance;
-            this.solar_reflectance = obj.solar_reflectance;
-            this.visible_transmittance = obj.visible_transmittance;
-            this.visible_reflectance = obj.visible_reflectance;
+            this.solarTransmittance = obj.solarTransmittance;
+            this.solarReflectance = obj.solarReflectance;
+            this.visibleTransmittance = obj.visibleTransmittance;
+            this.visibleReflectance = obj.visibleReflectance;
             this.emissivity = obj.emissivity;
-            this.infrared_transmittance = obj.infrared_transmittance;
+            this.infraredTransmittance = obj.infraredTransmittance;
             this.thickness = obj.thickness;
             this.conductivity = obj.conductivity;
-            this.distance_to_glass = obj.distance_to_glass;
-            this.top_opening_multiplier = obj.top_opening_multiplier;
-            this.bottom_opening_multiplier = obj.bottom_opening_multiplier;
-            this.left_opening_multiplier = obj.left_opening_multiplier;
-            this.right_opening_multiplier = obj.right_opening_multiplier;
-            this.airflow_permeability = obj.airflow_permeability;
+            this.distanceToGlass = obj.distanceToGlass;
+            this.topOpeningMultiplier = obj.topOpeningMultiplier;
+            this.bottomOpeningMultiplier = obj.bottomOpeningMultiplier;
+            this.leftOpeningMultiplier = obj.leftOpeningMultiplier;
+            this.rightOpeningMultiplier = obj.rightOpeningMultiplier;
+            this.airflowPermeability = obj.airflowPermeability;
         }
     }
 
@@ -159,20 +174,20 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["solar_transmittance"] = this.solar_transmittance;
-        data["solar_reflectance"] = this.solar_reflectance;
-        data["visible_transmittance"] = this.visible_transmittance;
-        data["visible_reflectance"] = this.visible_reflectance;
+        data["solar_transmittance"] = this.solarTransmittance;
+        data["solar_reflectance"] = this.solarReflectance;
+        data["visible_transmittance"] = this.visibleTransmittance;
+        data["visible_reflectance"] = this.visibleReflectance;
         data["emissivity"] = this.emissivity;
-        data["infrared_transmittance"] = this.infrared_transmittance;
+        data["infrared_transmittance"] = this.infraredTransmittance;
         data["thickness"] = this.thickness;
         data["conductivity"] = this.conductivity;
-        data["distance_to_glass"] = this.distance_to_glass;
-        data["top_opening_multiplier"] = this.top_opening_multiplier;
-        data["bottom_opening_multiplier"] = this.bottom_opening_multiplier;
-        data["left_opening_multiplier"] = this.left_opening_multiplier;
-        data["right_opening_multiplier"] = this.right_opening_multiplier;
-        data["airflow_permeability"] = this.airflow_permeability;
+        data["distance_to_glass"] = this.distanceToGlass;
+        data["top_opening_multiplier"] = this.topOpeningMultiplier;
+        data["bottom_opening_multiplier"] = this.bottomOpeningMultiplier;
+        data["left_opening_multiplier"] = this.leftOpeningMultiplier;
+        data["right_opening_multiplier"] = this.rightOpeningMultiplier;
+        data["airflow_permeability"] = this.airflowPermeability;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -186,4 +201,3 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
         return true;
     }
 }
-

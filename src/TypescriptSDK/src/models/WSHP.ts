@@ -1,5 +1,5 @@
 ﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 import { WSHPEquipmentType } from "./WSHPEquipmentType";
@@ -9,27 +9,30 @@ export class WSHP extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
     @Type(() => String)
     @IsOptional()
+    @Expose({ name: "vintage" })
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
-    vintage?: Vintages;
+    vintage: Vintages = Vintages.ASHRAE_2019;
 	
     @IsString()
     @IsOptional()
     @Matches(/^WSHP$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "WSHP";
 	
     @IsEnum(WSHPEquipmentType)
     @Type(() => String)
     @IsOptional()
+    @Expose({ name: "equipment_type" })
     /** Text for the specific type of system equipment from the WSHPEquipmentType enumeration. */
-    equipment_type?: WSHPEquipmentType;
+    equipmentType: WSHPEquipmentType = WSHPEquipmentType.WSHP_FluidCooler_Boiler;
 	
 
     constructor() {
         super();
         this.vintage = Vintages.ASHRAE_2019;
         this.type = "WSHP";
-        this.equipment_type = WSHPEquipmentType.WSHP_FluidCooler_Boiler;
+        this.equipmentType = WSHPEquipmentType.WSHP_FluidCooler_Boiler;
     }
 
 
@@ -39,7 +42,7 @@ export class WSHP extends IDdEnergyBaseModel {
             const obj = plainToClass(WSHP, _data, { enableImplicitConversion: true });
             this.vintage = obj.vintage;
             this.type = obj.type;
-            this.equipment_type = obj.equipment_type;
+            this.equipmentType = obj.equipmentType;
         }
     }
 
@@ -63,7 +66,7 @@ export class WSHP extends IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
         data["vintage"] = this.vintage;
         data["type"] = this.type;
-        data["equipment_type"] = this.equipment_type;
+        data["equipment_type"] = this.equipmentType;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -77,4 +80,3 @@ export class WSHP extends IDdEnergyBaseModel {
         return true;
     }
 }
-

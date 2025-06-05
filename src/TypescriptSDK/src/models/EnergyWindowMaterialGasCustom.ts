@@ -1,88 +1,101 @@
 ﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Create single layer of custom gas. */
 export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
+    @Expose({ name: "conductivity_coeff_a" })
     /** The A coefficient for gas conductivity in W/(m-K). */
-    conductivity_coeff_a!: number;
+    conductivityCoeffA!: number;
 	
     @IsNumber()
     @IsDefined()
+    @Expose({ name: "viscosity_coeff_a" })
     /** The A coefficient for gas viscosity in kg/(m-s). */
-    viscosity_coeff_a!: number;
+    viscosityCoeffA!: number;
 	
     @IsNumber()
     @IsDefined()
+    @Expose({ name: "specific_heat_coeff_a" })
     /** The A coefficient for gas specific heat in J/(kg-K). */
-    specific_heat_coeff_a!: number;
+    specificHeatCoeffA!: number;
 	
     @IsNumber()
     @IsDefined()
+    @Expose({ name: "specific_heat_ratio" })
     /** The specific heat ratio for gas. */
-    specific_heat_ratio!: number;
+    specificHeatRatio!: number;
 	
     @IsNumber()
     @IsDefined()
     @Min(20)
     @Max(200)
+    @Expose({ name: "molecular_weight" })
     /** The molecular weight for gas in g/mol. */
-    molecular_weight!: number;
+    molecularWeight!: number;
 	
     @IsString()
     @IsOptional()
     @Matches(/^EnergyWindowMaterialGasCustom$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "EnergyWindowMaterialGasCustom";
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "thickness" })
     /** Thickness of the gas layer in meters. Default: 0.0125. */
-    thickness?: number;
+    thickness: number = 0.0125;
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "conductivity_coeff_b" })
     /** The B coefficient for gas conductivity in W/(m-K2). */
-    conductivity_coeff_b?: number;
+    conductivityCoeffB: number = 0;
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "conductivity_coeff_c" })
     /** The C coefficient for gas conductivity in W/(m-K3). */
-    conductivity_coeff_c?: number;
+    conductivityCoeffC: number = 0;
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "viscosity_coeff_b" })
     /** The B coefficient for gas viscosity in kg/(m-s-K). */
-    viscosity_coeff_b?: number;
+    viscosityCoeffB: number = 0;
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "viscosity_coeff_c" })
     /** The C coefficient for gas viscosity in kg/(m-s-K2). */
-    viscosity_coeff_c?: number;
+    viscosityCoeffC: number = 0;
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "specific_heat_coeff_b" })
     /** The B coefficient for gas specific heat in J/(kg-K2). */
-    specific_heat_coeff_b?: number;
+    specificHeatCoeffB: number = 0;
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "specific_heat_coeff_c" })
     /** The C coefficient for gas specific heat in J/(kg-K3). */
-    specific_heat_coeff_c?: number;
+    specificHeatCoeffC: number = 0;
 	
 
     constructor() {
         super();
         this.type = "EnergyWindowMaterialGasCustom";
         this.thickness = 0.0125;
-        this.conductivity_coeff_b = 0;
-        this.conductivity_coeff_c = 0;
-        this.viscosity_coeff_b = 0;
-        this.viscosity_coeff_c = 0;
-        this.specific_heat_coeff_b = 0;
-        this.specific_heat_coeff_c = 0;
+        this.conductivityCoeffB = 0;
+        this.conductivityCoeffC = 0;
+        this.viscosityCoeffB = 0;
+        this.viscosityCoeffC = 0;
+        this.specificHeatCoeffB = 0;
+        this.specificHeatCoeffC = 0;
     }
 
 
@@ -90,19 +103,19 @@ export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(EnergyWindowMaterialGasCustom, _data, { enableImplicitConversion: true });
-            this.conductivity_coeff_a = obj.conductivity_coeff_a;
-            this.viscosity_coeff_a = obj.viscosity_coeff_a;
-            this.specific_heat_coeff_a = obj.specific_heat_coeff_a;
-            this.specific_heat_ratio = obj.specific_heat_ratio;
-            this.molecular_weight = obj.molecular_weight;
+            this.conductivityCoeffA = obj.conductivityCoeffA;
+            this.viscosityCoeffA = obj.viscosityCoeffA;
+            this.specificHeatCoeffA = obj.specificHeatCoeffA;
+            this.specificHeatRatio = obj.specificHeatRatio;
+            this.molecularWeight = obj.molecularWeight;
             this.type = obj.type;
             this.thickness = obj.thickness;
-            this.conductivity_coeff_b = obj.conductivity_coeff_b;
-            this.conductivity_coeff_c = obj.conductivity_coeff_c;
-            this.viscosity_coeff_b = obj.viscosity_coeff_b;
-            this.viscosity_coeff_c = obj.viscosity_coeff_c;
-            this.specific_heat_coeff_b = obj.specific_heat_coeff_b;
-            this.specific_heat_coeff_c = obj.specific_heat_coeff_c;
+            this.conductivityCoeffB = obj.conductivityCoeffB;
+            this.conductivityCoeffC = obj.conductivityCoeffC;
+            this.viscosityCoeffB = obj.viscosityCoeffB;
+            this.viscosityCoeffC = obj.viscosityCoeffC;
+            this.specificHeatCoeffB = obj.specificHeatCoeffB;
+            this.specificHeatCoeffC = obj.specificHeatCoeffC;
         }
     }
 
@@ -124,19 +137,19 @@ export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["conductivity_coeff_a"] = this.conductivity_coeff_a;
-        data["viscosity_coeff_a"] = this.viscosity_coeff_a;
-        data["specific_heat_coeff_a"] = this.specific_heat_coeff_a;
-        data["specific_heat_ratio"] = this.specific_heat_ratio;
-        data["molecular_weight"] = this.molecular_weight;
+        data["conductivity_coeff_a"] = this.conductivityCoeffA;
+        data["viscosity_coeff_a"] = this.viscosityCoeffA;
+        data["specific_heat_coeff_a"] = this.specificHeatCoeffA;
+        data["specific_heat_ratio"] = this.specificHeatRatio;
+        data["molecular_weight"] = this.molecularWeight;
         data["type"] = this.type;
         data["thickness"] = this.thickness;
-        data["conductivity_coeff_b"] = this.conductivity_coeff_b;
-        data["conductivity_coeff_c"] = this.conductivity_coeff_c;
-        data["viscosity_coeff_b"] = this.viscosity_coeff_b;
-        data["viscosity_coeff_c"] = this.viscosity_coeff_c;
-        data["specific_heat_coeff_b"] = this.specific_heat_coeff_b;
-        data["specific_heat_coeff_c"] = this.specific_heat_coeff_c;
+        data["conductivity_coeff_b"] = this.conductivityCoeffB;
+        data["conductivity_coeff_c"] = this.conductivityCoeffC;
+        data["viscosity_coeff_b"] = this.viscosityCoeffB;
+        data["viscosity_coeff_c"] = this.viscosityCoeffC;
+        data["specific_heat_coeff_b"] = this.specificHeatCoeffB;
+        data["specific_heat_coeff_c"] = this.specificHeatCoeffC;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -150,4 +163,3 @@ export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
         return true;
     }
 }
-

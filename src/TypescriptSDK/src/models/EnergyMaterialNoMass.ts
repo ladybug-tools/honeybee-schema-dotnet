@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, IsEnum, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Roughness } from "./Roughness";
 
@@ -8,49 +8,55 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
     @Min(0.001)
+    @Expose({ name: "r_value" })
     /** The thermal resistance (R-value) of the material layer [m2-K/W]. */
-    r_value!: number;
+    rValue!: number;
 	
     @IsString()
     @IsOptional()
     @Matches(/^EnergyMaterialNoMass$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "EnergyMaterialNoMass";
 	
     @IsEnum(Roughness)
     @Type(() => String)
     @IsOptional()
-    /** Roughness */
-    roughness?: Roughness;
+    @Expose({ name: "roughness" })
+    /** roughness */
+    roughness: Roughness = Roughness.MediumRough;
 	
     @IsNumber()
     @IsOptional()
     @Max(0.99999)
+    @Expose({ name: "thermal_absorptance" })
     /** Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9. */
-    thermal_absorptance?: number;
+    thermalAbsorptance: number = 0.9;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "solar_absorptance" })
     /** Fraction of incident solar radiation absorbed by the material. Default: 0.7. */
-    solar_absorptance?: number;
+    solarAbsorptance: number = 0.7;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "visible_absorptance" })
     /** Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7. */
-    visible_absorptance?: number;
+    visibleAbsorptance: number = 0.7;
 	
 
     constructor() {
         super();
         this.type = "EnergyMaterialNoMass";
         this.roughness = Roughness.MediumRough;
-        this.thermal_absorptance = 0.9;
-        this.solar_absorptance = 0.7;
-        this.visible_absorptance = 0.7;
+        this.thermalAbsorptance = 0.9;
+        this.solarAbsorptance = 0.7;
+        this.visibleAbsorptance = 0.7;
     }
 
 
@@ -58,12 +64,12 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(EnergyMaterialNoMass, _data, { enableImplicitConversion: true });
-            this.r_value = obj.r_value;
+            this.rValue = obj.rValue;
             this.type = obj.type;
             this.roughness = obj.roughness;
-            this.thermal_absorptance = obj.thermal_absorptance;
-            this.solar_absorptance = obj.solar_absorptance;
-            this.visible_absorptance = obj.visible_absorptance;
+            this.thermalAbsorptance = obj.thermalAbsorptance;
+            this.solarAbsorptance = obj.solarAbsorptance;
+            this.visibleAbsorptance = obj.visibleAbsorptance;
         }
     }
 
@@ -85,12 +91,12 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["r_value"] = this.r_value;
+        data["r_value"] = this.rValue;
         data["type"] = this.type;
         data["roughness"] = this.roughness;
-        data["thermal_absorptance"] = this.thermal_absorptance;
-        data["solar_absorptance"] = this.solar_absorptance;
-        data["visible_absorptance"] = this.visible_absorptance;
+        data["thermal_absorptance"] = this.thermalAbsorptance;
+        data["solar_absorptance"] = this.solarAbsorptance;
+        data["visible_absorptance"] = this.visibleAbsorptance;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -104,4 +110,3 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
         return true;
     }
 }
-

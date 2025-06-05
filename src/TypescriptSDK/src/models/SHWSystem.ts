@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { SHWEquipmentType } from "./SHWEquipmentType";
@@ -9,36 +9,41 @@ export class SHWSystem extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^SHWSystem$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "SHWSystem";
 	
     @IsEnum(SHWEquipmentType)
     @Type(() => String)
     @IsOptional()
+    @Expose({ name: "equipment_type" })
     /** Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone. */
-    equipment_type?: SHWEquipmentType;
+    equipmentType: SHWEquipmentType = SHWEquipmentType.Gas_WaterHeater;
 	
     @IsOptional()
+    @Expose({ name: "heater_efficiency" })
     /** A number for the efficiency of the heater within the system. For Gas systems, this is the efficiency of the burner. For HeatPump systems, this is the rated COP of the system. For electric systems, this should usually be set to 1. If set to Autocalculate, this value will automatically be set based on the equipment_type. Gas_WaterHeater - 0.8, Electric_WaterHeater - 1.0, HeatPump_WaterHeater - 3.5, Gas_TanklessHeater - 0.8, Electric_TanklessHeater - 1.0. */
-    heater_efficiency?: (number | Autocalculate);
+    heaterEfficiency: (number | Autocalculate) = new Autocalculate();
 	
     @IsOptional()
+    @Expose({ name: "ambient_condition" })
     /** A number for the ambient temperature in which the hot water tank is located [C]. This can also be the identifier of a Room in which the tank is located. */
-    ambient_condition?: (number | string);
+    ambientCondition: (number | string) = 22;
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "ambient_loss_coefficient" })
     /** A number for the loss of heat from the water heater tank to the surrounding ambient conditions [W/K]. */
-    ambient_loss_coefficient?: number;
+    ambientLossCoefficient: number = 6;
 	
 
     constructor() {
         super();
         this.type = "SHWSystem";
-        this.equipment_type = SHWEquipmentType.Gas_WaterHeater;
-        this.heater_efficiency = new Autocalculate();
-        this.ambient_condition = 22;
-        this.ambient_loss_coefficient = 6;
+        this.equipmentType = SHWEquipmentType.Gas_WaterHeater;
+        this.heaterEfficiency = new Autocalculate();
+        this.ambientCondition = 22;
+        this.ambientLossCoefficient = 6;
     }
 
 
@@ -47,10 +52,10 @@ export class SHWSystem extends IDdEnergyBaseModel {
         if (_data) {
             const obj = plainToClass(SHWSystem, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.equipment_type = obj.equipment_type;
-            this.heater_efficiency = obj.heater_efficiency;
-            this.ambient_condition = obj.ambient_condition;
-            this.ambient_loss_coefficient = obj.ambient_loss_coefficient;
+            this.equipmentType = obj.equipmentType;
+            this.heaterEfficiency = obj.heaterEfficiency;
+            this.ambientCondition = obj.ambientCondition;
+            this.ambientLossCoefficient = obj.ambientLossCoefficient;
         }
     }
 
@@ -73,10 +78,10 @@ export class SHWSystem extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["equipment_type"] = this.equipment_type;
-        data["heater_efficiency"] = this.heater_efficiency;
-        data["ambient_condition"] = this.ambient_condition;
-        data["ambient_loss_coefficient"] = this.ambient_loss_coefficient;
+        data["equipment_type"] = this.equipmentType;
+        data["heater_efficiency"] = this.heaterEfficiency;
+        data["ambient_condition"] = this.ambientCondition;
+        data["ambient_loss_coefficient"] = this.ambientLossCoefficient;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -90,4 +95,3 @@ export class SHWSystem extends IDdEnergyBaseModel {
         return true;
     }
 }
-

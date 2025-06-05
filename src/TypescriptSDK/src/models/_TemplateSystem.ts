@@ -1,5 +1,5 @@
 ﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 
@@ -8,14 +8,16 @@ export class _TemplateSystem extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
     @Type(() => String)
     @IsOptional()
+    @Expose({ name: "vintage" })
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
-    vintage?: Vintages;
+    vintage: Vintages = Vintages.ASHRAE_2019;
 	
     @IsString()
     @IsOptional()
     @Matches(/^_TemplateSystem$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "_TemplateSystem";
 	
 
     constructor() {
@@ -67,4 +69,3 @@ export class _TemplateSystem extends IDdEnergyBaseModel {
         return true;
     }
 }
-

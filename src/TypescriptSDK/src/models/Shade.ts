@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { Face3D } from "./Face3D";
 import { IDdBaseModel } from "./IDdBaseModel";
 import { ShadePropertiesAbridged } from "./ShadePropertiesAbridged";
@@ -10,6 +10,7 @@ export class Shade extends IDdBaseModel {
     @Type(() => Face3D)
     @ValidateNested()
     @IsDefined()
+    @Expose({ name: "geometry" })
     /** Planar Face3D for the geometry. */
     geometry!: Face3D;
 	
@@ -17,25 +18,28 @@ export class Shade extends IDdBaseModel {
     @Type(() => ShadePropertiesAbridged)
     @ValidateNested()
     @IsDefined()
+    @Expose({ name: "properties" })
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
     properties!: ShadePropertiesAbridged;
 	
     @IsString()
     @IsOptional()
     @Matches(/^Shade$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Shade";
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "is_detached" })
     /** Boolean to note whether this shade is detached from any of the other geometry in the model. Cases where this should be True include shade representing surrounding buildings or context. Note that this should always be False for shades assigned to parent objects. */
-    is_detached?: boolean;
+    isDetached: boolean = false;
 	
 
     constructor() {
         super();
         this.type = "Shade";
-        this.is_detached = false;
+        this.isDetached = false;
     }
 
 
@@ -46,7 +50,7 @@ export class Shade extends IDdBaseModel {
             this.geometry = obj.geometry;
             this.properties = obj.properties;
             this.type = obj.type;
-            this.is_detached = obj.is_detached;
+            this.isDetached = obj.isDetached;
         }
     }
 
@@ -71,7 +75,7 @@ export class Shade extends IDdBaseModel {
         data["geometry"] = this.geometry;
         data["properties"] = this.properties;
         data["type"] = this.type;
-        data["is_detached"] = this.is_detached;
+        data["is_detached"] = this.isDetached;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -85,4 +89,3 @@ export class Shade extends IDdBaseModel {
         return true;
     }
 }
-

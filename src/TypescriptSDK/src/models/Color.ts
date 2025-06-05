@@ -1,5 +1,5 @@
 ﻿import { IsInt, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A RGB color. */
@@ -8,6 +8,7 @@ export class Color extends _OpenAPIGenBaseModel {
     @IsDefined()
     @Min(0)
     @Max(255)
+    @Expose({ name: "r" })
     /** Value for red channel. */
     r!: number;
 	
@@ -15,6 +16,7 @@ export class Color extends _OpenAPIGenBaseModel {
     @IsDefined()
     @Min(0)
     @Max(255)
+    @Expose({ name: "g" })
     /** Value for green channel. */
     g!: number;
 	
@@ -22,21 +24,24 @@ export class Color extends _OpenAPIGenBaseModel {
     @IsDefined()
     @Min(0)
     @Max(255)
+    @Expose({ name: "b" })
     /** Value for blue channel. */
     b!: number;
 	
     @IsString()
     @IsOptional()
     @Matches(/^Color$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Color";
 	
     @IsInt()
     @IsOptional()
     @Min(0)
     @Max(255)
+    @Expose({ name: "a" })
     /** Value for the alpha channel, which defines the opacity as a number between 0 (fully transparent) and 255 (fully opaque). */
-    a?: number;
+    a: number = 255;
 	
 
     constructor() {
@@ -94,4 +99,3 @@ export class Color extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, IsInstance, ValidateNested, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { DaylightingControl } from "./DaylightingControl";
 import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
@@ -20,27 +20,31 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^RoomEnergyPropertiesAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "RoomEnergyPropertiesAbridged";
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "construction_set" })
     /** Identifier of a ConstructionSet to specify all default constructions for the Faces, Apertures, and Doors of the Room. If None, the Room will use the Model global_construction_set. */
-    construction_set?: string;
+    constructionSet?: string;
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "program_type" })
     /** Identifier of a ProgramType to specify all default schedules and loads for the Room. If None, the Room will have no loads or setpoints. */
-    program_type?: string;
+    programType?: string;
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "hvac" })
     /** An optional identifier of a HVAC system (such as an IdealAirSystem) that specifies how the Room is conditioned. If None, it will be assumed that the Room is not conditioned. */
     hvac?: string;
 	
@@ -48,6 +52,7 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "shw" })
     /** An optional identifier of a Service Hot Water (SHW) system that specifies how the hot water load of the Room is met. If None, the hot water load will be met with a generic system that only measures thermal loadand does not account for system efficiencies. */
     shw?: string;
 	
@@ -55,6 +60,7 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @Type(() => PeopleAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "people" })
     /** People object to describe the occupancy of the Room. */
     people?: PeopleAbridged;
 	
@@ -62,6 +68,7 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @Type(() => LightingAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "lighting" })
     /** Lighting object to describe the lighting usage of the Room. */
     lighting?: LightingAbridged;
 	
@@ -69,27 +76,31 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @Type(() => ElectricEquipmentAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "electric_equipment" })
     /** ElectricEquipment object to describe the electric equipment usage. */
-    electric_equipment?: ElectricEquipmentAbridged;
+    electricEquipment?: ElectricEquipmentAbridged;
 	
     @IsInstance(GasEquipmentAbridged)
     @Type(() => GasEquipmentAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "gas_equipment" })
     /** GasEquipment object to describe the gas equipment usage. */
-    gas_equipment?: GasEquipmentAbridged;
+    gasEquipment?: GasEquipmentAbridged;
 	
     @IsInstance(ServiceHotWaterAbridged)
     @Type(() => ServiceHotWaterAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "service_hot_water" })
     /** ServiceHotWater object to describe the hot water usage. */
-    service_hot_water?: ServiceHotWaterAbridged;
+    serviceHotWater?: ServiceHotWaterAbridged;
 	
     @IsInstance(InfiltrationAbridged)
     @Type(() => InfiltrationAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "infiltration" })
     /** Infiltration object to to describe the outdoor air leakage. */
     infiltration?: InfiltrationAbridged;
 	
@@ -97,6 +108,7 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @Type(() => VentilationAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "ventilation" })
     /** Ventilation object for the minimum outdoor air requirement. */
     ventilation?: VentilationAbridged;
 	
@@ -104,6 +116,7 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @Type(() => SetpointAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "setpoint" })
     /** Setpoint object for the temperature setpoints of the Room. */
     setpoint?: SetpointAbridged;
 	
@@ -111,21 +124,24 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @Type(() => DaylightingControl)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "daylighting_control" })
     /** An optional DaylightingControl object to dictate the dimming of lights. If None, the lighting will respond only to the schedule and not the daylight conditions within the room. */
-    daylighting_control?: DaylightingControl;
+    daylightingControl?: DaylightingControl;
 	
     @IsInstance(VentilationControlAbridged)
     @Type(() => VentilationControlAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "window_vent_control" })
     /** An optional VentilationControl object to dictate the opening of windows. If None, the windows will never open. */
-    window_vent_control?: VentilationControlAbridged;
+    windowVentControl?: VentilationControlAbridged;
 	
     @IsArray()
     @IsInstance(VentilationFan, { each: true })
     @Type(() => VentilationFan)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "fans" })
     /** An optional list of VentilationFan objects for fans within the room. Note that these fans are not connected to the heating or cooling system and are meant to represent the intentional circulation of unconditioned outdoor air for the purposes of keeping a space cooler, drier or free of indoor pollutants (as in the case of kitchen or bathroom exhaust fans). For the specification of mechanical ventilation of conditioned outdoor air, the Room.ventilation property should be used and the Room should be given a HVAC that can meet this specification. */
     fans?: VentilationFan[];
 	
@@ -134,16 +150,18 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @Type(() => InternalMassAbridged)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "internal_masses" })
     /** An optional list of of InternalMass objects for thermal mass exposed to Room air. Note that internal masses assigned this way cannot ""see"" solar radiation that may potentially hit them and, as such, caution should be taken when using this component with internal mass objects that are not always in shade. Masses are factored into the the thermal calculations of the Room by undergoing heat transfer with the indoor air. */
-    internal_masses?: InternalMassAbridged[];
+    internalMasses?: InternalMassAbridged[];
 	
     @IsArray()
     @IsInstance(ProcessAbridged, { each: true })
     @Type(() => ProcessAbridged)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "process_loads" })
     /** An optional list of of Process objects for process loads within the room. These can represent kilns, manufacturing equipment, and various industrial processes. They can also be used to represent wood burning fireplaces or certain pieces of equipment to be separated from the other end uses. */
-    process_loads?: ProcessAbridged[];
+    processLoads?: ProcessAbridged[];
 	
 
     constructor() {
@@ -157,23 +175,23 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
         if (_data) {
             const obj = plainToClass(RoomEnergyPropertiesAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.construction_set = obj.construction_set;
-            this.program_type = obj.program_type;
+            this.constructionSet = obj.constructionSet;
+            this.programType = obj.programType;
             this.hvac = obj.hvac;
             this.shw = obj.shw;
             this.people = obj.people;
             this.lighting = obj.lighting;
-            this.electric_equipment = obj.electric_equipment;
-            this.gas_equipment = obj.gas_equipment;
-            this.service_hot_water = obj.service_hot_water;
+            this.electricEquipment = obj.electricEquipment;
+            this.gasEquipment = obj.gasEquipment;
+            this.serviceHotWater = obj.serviceHotWater;
             this.infiltration = obj.infiltration;
             this.ventilation = obj.ventilation;
             this.setpoint = obj.setpoint;
-            this.daylighting_control = obj.daylighting_control;
-            this.window_vent_control = obj.window_vent_control;
+            this.daylightingControl = obj.daylightingControl;
+            this.windowVentControl = obj.windowVentControl;
             this.fans = obj.fans;
-            this.internal_masses = obj.internal_masses;
-            this.process_loads = obj.process_loads;
+            this.internalMasses = obj.internalMasses;
+            this.processLoads = obj.processLoads;
         }
     }
 
@@ -196,23 +214,23 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["construction_set"] = this.construction_set;
-        data["program_type"] = this.program_type;
+        data["construction_set"] = this.constructionSet;
+        data["program_type"] = this.programType;
         data["hvac"] = this.hvac;
         data["shw"] = this.shw;
         data["people"] = this.people;
         data["lighting"] = this.lighting;
-        data["electric_equipment"] = this.electric_equipment;
-        data["gas_equipment"] = this.gas_equipment;
-        data["service_hot_water"] = this.service_hot_water;
+        data["electric_equipment"] = this.electricEquipment;
+        data["gas_equipment"] = this.gasEquipment;
+        data["service_hot_water"] = this.serviceHotWater;
         data["infiltration"] = this.infiltration;
         data["ventilation"] = this.ventilation;
         data["setpoint"] = this.setpoint;
-        data["daylighting_control"] = this.daylighting_control;
-        data["window_vent_control"] = this.window_vent_control;
+        data["daylighting_control"] = this.daylightingControl;
+        data["window_vent_control"] = this.windowVentControl;
         data["fans"] = this.fans;
-        data["internal_masses"] = this.internal_masses;
-        data["process_loads"] = this.process_loads;
+        data["internal_masses"] = this.internalMasses;
+        data["process_loads"] = this.processLoads;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -226,4 +244,3 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

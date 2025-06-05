@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsDefined, IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { EnergyWindowFrame } from "./EnergyWindowFrame";
 import { EnergyWindowMaterialGas } from "./EnergyWindowMaterialGas";
 import { EnergyWindowMaterialGasCustom } from "./EnergyWindowMaterialGasCustom";
@@ -12,6 +12,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 export class WindowConstruction extends IDdEnergyBaseModel {
     @IsArray()
     @IsDefined()
+    @Expose({ name: "materials" })
     @Transform(({ value }) => value.map((item: any) => {
       if (item?.type === 'EnergyWindowMaterialSimpleGlazSys') return EnergyWindowMaterialSimpleGlazSys.fromJS(item);
       else if (item?.type === 'EnergyWindowMaterialGlazing') return EnergyWindowMaterialGlazing.fromJS(item);
@@ -26,13 +27,15 @@ export class WindowConstruction extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^WindowConstruction$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "WindowConstruction";
 	
     @IsInstance(EnergyWindowFrame)
     @Type(() => EnergyWindowFrame)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "frame" })
     /** An optional window frame material for the frame that surrounds the window construction. */
     frame?: EnergyWindowFrame;
 	
@@ -87,4 +90,3 @@ export class WindowConstruction extends IDdEnergyBaseModel {
         return true;
     }
 }
-

@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Max, Min, IsString, IsOptional, Matches, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Roughness } from "./Roughness";
 
@@ -8,65 +8,74 @@ export class EnergyMaterial extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
     @Max(3)
+    @Expose({ name: "thickness" })
     /** Thickness of the material layer in meters. */
     thickness!: number;
 	
     @IsNumber()
     @IsDefined()
+    @Expose({ name: "conductivity" })
     /** Thermal conductivity of the material layer in W/m-K. */
     conductivity!: number;
 	
     @IsNumber()
     @IsDefined()
+    @Expose({ name: "density" })
     /** Density of the material layer in kg/m3. */
     density!: number;
 	
     @IsNumber()
     @IsDefined()
     @Min(100)
+    @Expose({ name: "specific_heat" })
     /** Specific heat of the material layer in J/kg-K. */
-    specific_heat!: number;
+    specificHeat!: number;
 	
     @IsString()
     @IsOptional()
     @Matches(/^EnergyMaterial$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "EnergyMaterial";
 	
     @IsEnum(Roughness)
     @Type(() => String)
     @IsOptional()
-    /** Roughness */
-    roughness?: Roughness;
+    @Expose({ name: "roughness" })
+    /** roughness */
+    roughness: Roughness = Roughness.MediumRough;
 	
     @IsNumber()
     @IsOptional()
     @Max(0.99999)
+    @Expose({ name: "thermal_absorptance" })
     /** Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9. */
-    thermal_absorptance?: number;
+    thermalAbsorptance: number = 0.9;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "solar_absorptance" })
     /** Fraction of incident solar radiation absorbed by the material. Default: 0.7. */
-    solar_absorptance?: number;
+    solarAbsorptance: number = 0.7;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "visible_absorptance" })
     /** Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7. */
-    visible_absorptance?: number;
+    visibleAbsorptance: number = 0.7;
 	
 
     constructor() {
         super();
         this.type = "EnergyMaterial";
         this.roughness = Roughness.MediumRough;
-        this.thermal_absorptance = 0.9;
-        this.solar_absorptance = 0.7;
-        this.visible_absorptance = 0.7;
+        this.thermalAbsorptance = 0.9;
+        this.solarAbsorptance = 0.7;
+        this.visibleAbsorptance = 0.7;
     }
 
 
@@ -77,12 +86,12 @@ export class EnergyMaterial extends IDdEnergyBaseModel {
             this.thickness = obj.thickness;
             this.conductivity = obj.conductivity;
             this.density = obj.density;
-            this.specific_heat = obj.specific_heat;
+            this.specificHeat = obj.specificHeat;
             this.type = obj.type;
             this.roughness = obj.roughness;
-            this.thermal_absorptance = obj.thermal_absorptance;
-            this.solar_absorptance = obj.solar_absorptance;
-            this.visible_absorptance = obj.visible_absorptance;
+            this.thermalAbsorptance = obj.thermalAbsorptance;
+            this.solarAbsorptance = obj.solarAbsorptance;
+            this.visibleAbsorptance = obj.visibleAbsorptance;
         }
     }
 
@@ -107,12 +116,12 @@ export class EnergyMaterial extends IDdEnergyBaseModel {
         data["thickness"] = this.thickness;
         data["conductivity"] = this.conductivity;
         data["density"] = this.density;
-        data["specific_heat"] = this.specific_heat;
+        data["specific_heat"] = this.specificHeat;
         data["type"] = this.type;
         data["roughness"] = this.roughness;
-        data["thermal_absorptance"] = this.thermal_absorptance;
-        data["solar_absorptance"] = this.solar_absorptance;
-        data["visible_absorptance"] = this.visible_absorptance;
+        data["thermal_absorptance"] = this.thermalAbsorptance;
+        data["solar_absorptance"] = this.solarAbsorptance;
+        data["visible_absorptance"] = this.visibleAbsorptance;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -126,4 +135,3 @@ export class EnergyMaterial extends IDdEnergyBaseModel {
         return true;
     }
 }
-

@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ApertureEnergyPropertiesAbridged } from "./ApertureEnergyPropertiesAbridged";
 import { ApertureRadiancePropertiesAbridged } from "./ApertureRadiancePropertiesAbridged";
@@ -8,21 +8,24 @@ export class AperturePropertiesAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^AperturePropertiesAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "AperturePropertiesAbridged";
 	
     @IsInstance(ApertureEnergyPropertiesAbridged)
     @Type(() => ApertureEnergyPropertiesAbridged)
     @ValidateNested()
     @IsOptional()
-    /** Energy */
+    @Expose({ name: "energy" })
+    /** energy */
     energy?: ApertureEnergyPropertiesAbridged;
 	
     @IsInstance(ApertureRadiancePropertiesAbridged)
     @Type(() => ApertureRadiancePropertiesAbridged)
     @ValidateNested()
     @IsOptional()
-    /** Radiance */
+    @Expose({ name: "radiance" })
+    /** radiance */
     radiance?: ApertureRadiancePropertiesAbridged;
 	
 
@@ -76,4 +79,3 @@ export class AperturePropertiesAbridged extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

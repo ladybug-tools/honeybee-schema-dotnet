@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Used to specify which types of calculations to run. */
@@ -7,43 +7,49 @@ export class SimulationControl extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^SimulationControl$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "SimulationControl";
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "do_zone_sizing" })
     /** Boolean for whether the zone sizing calculation should be run. */
-    do_zone_sizing?: boolean;
+    doZoneSizing: boolean = true;
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "do_system_sizing" })
     /** Boolean for whether the system sizing calculation should be run. */
-    do_system_sizing?: boolean;
+    doSystemSizing: boolean = true;
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "do_plant_sizing" })
     /** Boolean for whether the plant sizing calculation should be run. */
-    do_plant_sizing?: boolean;
+    doPlantSizing: boolean = true;
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "run_for_run_periods" })
     /** Boolean for whether the simulation should be run for the sizing periods. */
-    run_for_run_periods?: boolean;
+    runForRunPeriods: boolean = true;
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "run_for_sizing_periods" })
     /** Boolean for whether the simulation should be run for the run periods. */
-    run_for_sizing_periods?: boolean;
+    runForSizingPeriods: boolean = false;
 	
 
     constructor() {
         super();
         this.type = "SimulationControl";
-        this.do_zone_sizing = true;
-        this.do_system_sizing = true;
-        this.do_plant_sizing = true;
-        this.run_for_run_periods = true;
-        this.run_for_sizing_periods = false;
+        this.doZoneSizing = true;
+        this.doSystemSizing = true;
+        this.doPlantSizing = true;
+        this.runForRunPeriods = true;
+        this.runForSizingPeriods = false;
     }
 
 
@@ -52,11 +58,11 @@ export class SimulationControl extends _OpenAPIGenBaseModel {
         if (_data) {
             const obj = plainToClass(SimulationControl, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.do_zone_sizing = obj.do_zone_sizing;
-            this.do_system_sizing = obj.do_system_sizing;
-            this.do_plant_sizing = obj.do_plant_sizing;
-            this.run_for_run_periods = obj.run_for_run_periods;
-            this.run_for_sizing_periods = obj.run_for_sizing_periods;
+            this.doZoneSizing = obj.doZoneSizing;
+            this.doSystemSizing = obj.doSystemSizing;
+            this.doPlantSizing = obj.doPlantSizing;
+            this.runForRunPeriods = obj.runForRunPeriods;
+            this.runForSizingPeriods = obj.runForSizingPeriods;
         }
     }
 
@@ -79,11 +85,11 @@ export class SimulationControl extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["do_zone_sizing"] = this.do_zone_sizing;
-        data["do_system_sizing"] = this.do_system_sizing;
-        data["do_plant_sizing"] = this.do_plant_sizing;
-        data["run_for_run_periods"] = this.run_for_run_periods;
-        data["run_for_sizing_periods"] = this.run_for_sizing_periods;
+        data["do_zone_sizing"] = this.doZoneSizing;
+        data["do_system_sizing"] = this.doSystemSizing;
+        data["do_plant_sizing"] = this.doPlantSizing;
+        data["run_for_run_periods"] = this.runForRunPeriods;
+        data["run_for_sizing_periods"] = this.runForSizingPeriods;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -97,4 +103,3 @@ export class SimulationControl extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

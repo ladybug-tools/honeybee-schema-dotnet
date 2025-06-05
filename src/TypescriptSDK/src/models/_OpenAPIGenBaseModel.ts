@@ -1,11 +1,12 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 
 export abstract class _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Expose({ name: "type" })
     /** A base class to use when there is no baseclass available to fall on. */
-    type?: string;
+    type: string = "InvalidType";
 	
 
     constructor() {
@@ -26,21 +27,15 @@ export abstract class _OpenAPIGenBaseModel {
 	toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        return removeUndefinedProperties(data);
+        return instanceToPlain(data);
     }
 
-}
-
-function removeUndefinedProperties(obj: any): any {
-    if (Array.isArray(obj)) {
-        return obj.map(removeUndefinedProperties);
-    } else if (obj !== null && typeof obj === 'object') {
-        return Object.entries(obj)
-        .filter(([_, value]) => value !== undefined)
-        .reduce((acc, [key, value]) => {
-            acc[key] = removeUndefinedProperties(value);
-            return acc;
-        }, {} as any);
+	async validate(): Promise<boolean> {
+        const errors = await validate(this);
+        if (errors.length > 0){
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error]).join(', ')).join('; ');
+      		throw new Error(`Validation failed: ${errorMessages}`);
+		}
+        return true;
     }
-    return obj;
 }

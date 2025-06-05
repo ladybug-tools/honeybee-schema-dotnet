@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
@@ -10,10 +10,12 @@ export class People extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
     @Min(0)
+    @Expose({ name: "people_per_area" })
     /** People per floor area expressed as [people/m2] */
-    people_per_area!: number;
+    peoplePerArea!: number;
 	
     @IsDefined()
+    @Expose({ name: "occupancy_schedule" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
@@ -21,15 +23,17 @@ export class People extends IDdEnergyBaseModel {
       else return item;
     })
     /** A schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile. */
-    occupancy_schedule!: (ScheduleRuleset | ScheduleFixedInterval);
+    occupancySchedule!: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @IsString()
     @IsOptional()
     @Matches(/^People$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "People";
 	
     @IsOptional()
+    @Expose({ name: "activity_schedule" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
@@ -37,25 +41,27 @@ export class People extends IDdEnergyBaseModel {
       else return item;
     })
     /** A schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated. */
-    activity_schedule?: (ScheduleRuleset | ScheduleFixedInterval);
+    activitySchedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "radiant_fraction" })
     /** The radiant fraction of sensible heat released by people. (Default: 0.3). */
-    radiant_fraction?: number;
+    radiantFraction: number = 0.3;
 	
     @IsOptional()
+    @Expose({ name: "latent_fraction" })
     /** Number for the latent fraction of heat gain due to people or an Autocalculate object. */
-    latent_fraction?: (Autocalculate | number);
+    latentFraction: (Autocalculate | number) = new Autocalculate();
 	
 
     constructor() {
         super();
         this.type = "People";
-        this.radiant_fraction = 0.3;
-        this.latent_fraction = new Autocalculate();
+        this.radiantFraction = 0.3;
+        this.latentFraction = new Autocalculate();
     }
 
 
@@ -63,12 +69,12 @@ export class People extends IDdEnergyBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(People, _data, { enableImplicitConversion: true });
-            this.people_per_area = obj.people_per_area;
-            this.occupancy_schedule = obj.occupancy_schedule;
+            this.peoplePerArea = obj.peoplePerArea;
+            this.occupancySchedule = obj.occupancySchedule;
             this.type = obj.type;
-            this.activity_schedule = obj.activity_schedule;
-            this.radiant_fraction = obj.radiant_fraction;
-            this.latent_fraction = obj.latent_fraction;
+            this.activitySchedule = obj.activitySchedule;
+            this.radiantFraction = obj.radiantFraction;
+            this.latentFraction = obj.latentFraction;
         }
     }
 
@@ -90,12 +96,12 @@ export class People extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["people_per_area"] = this.people_per_area;
-        data["occupancy_schedule"] = this.occupancy_schedule;
+        data["people_per_area"] = this.peoplePerArea;
+        data["occupancy_schedule"] = this.occupancySchedule;
         data["type"] = this.type;
-        data["activity_schedule"] = this.activity_schedule;
-        data["radiant_fraction"] = this.radiant_fraction;
-        data["latent_fraction"] = this.latent_fraction;
+        data["activity_schedule"] = this.activitySchedule;
+        data["radiant_fraction"] = this.radiantFraction;
+        data["latent_fraction"] = this.latentFraction;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -109,4 +115,3 @@ export class People extends IDdEnergyBaseModel {
         return true;
     }
 }
-

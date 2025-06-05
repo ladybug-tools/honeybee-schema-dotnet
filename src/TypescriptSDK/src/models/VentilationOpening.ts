@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
@@ -7,64 +7,72 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^VentilationOpening$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "VentilationOpening";
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "fraction_area_operable" })
     /** A number for the fraction of the window area that is operable. */
-    fraction_area_operable?: number;
+    fractionAreaOperable: number = 0.5;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "fraction_height_operable" })
     /** A number for the fraction of the distance from the bottom of the window to the top that is operable */
-    fraction_height_operable?: number;
+    fractionHeightOperable: number = 1;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "discharge_coefficient" })
     /** A number that will be multiplied by the area of the window in the stack (buoyancy-driven) part of the equation to account for additional friction from window geometry, insect screens, etc. Typical values include 0.45, for unobstructed windows WITH insect screens and 0.65 for unobstructed windows WITHOUT insect screens. This value should be lowered if windows are of an awning or casement type and are not allowed to fully open. */
-    discharge_coefficient?: number;
+    dischargeCoefficient: number = 0.45;
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "wind_cross_vent" })
     /** Boolean to indicate if there is an opening of roughly equal area on the opposite side of the Room such that wind-driven cross ventilation will be induced. If False, the assumption is that the operable area is primarily on one side of the Room and there is no wind-driven ventilation. */
-    wind_cross_vent?: boolean;
+    windCrossVent: boolean = false;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
+    @Expose({ name: "flow_coefficient_closed" })
     /** An optional number in kg/s-m, at 1 Pa per meter of crack length, used to calculate the mass flow rate when the opening is closed; required to run an AirflowNetwork simulation. The DesignBuilder Cracks template defines the flow coefficient for a tight, low-leakage closed external window to be 0.00001, and the flow coefficient for a very poor, high-leakage closed external window to be 0.003. */
-    flow_coefficient_closed?: number;
+    flowCoefficientClosed: number = 0;
 	
     @IsNumber()
     @IsOptional()
     @Min(0.5)
     @Max(1)
+    @Expose({ name: "flow_exponent_closed" })
     /** An optional dimensionless number between 0.5 and 1 used to calculate the mass flow rate when the opening is closed; required to run an AirflowNetwork simulation. This value represents the leak geometry impact on airflow, with 0.5 generally corresponding to turbulent orifice flow and 1 generally corresponding to laminar flow. The default of 0.65 is representative of many cases of wall and window leakage, used when the exponent cannot be measured. */
-    flow_exponent_closed?: number;
+    flowExponentClosed: number = 0.65;
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "two_way_threshold" })
     /** A number in kg/m3 indicating the minimum density difference above which two-way flow may occur due to stack effect, required to run an AirflowNetwork simulation. This value is required because the air density difference between two zones (which drives two-way air flow) will tend towards division by zero errors as the air density difference approaches zero. The default of 0.0001 is a typical default value used for AirflowNetwork openings. */
-    two_way_threshold?: number;
+    twoWayThreshold: number = 0.0001;
 	
 
     constructor() {
         super();
         this.type = "VentilationOpening";
-        this.fraction_area_operable = 0.5;
-        this.fraction_height_operable = 1;
-        this.discharge_coefficient = 0.45;
-        this.wind_cross_vent = false;
-        this.flow_coefficient_closed = 0;
-        this.flow_exponent_closed = 0.65;
-        this.two_way_threshold = 0.0001;
+        this.fractionAreaOperable = 0.5;
+        this.fractionHeightOperable = 1;
+        this.dischargeCoefficient = 0.45;
+        this.windCrossVent = false;
+        this.flowCoefficientClosed = 0;
+        this.flowExponentClosed = 0.65;
+        this.twoWayThreshold = 0.0001;
     }
 
 
@@ -73,13 +81,13 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
         if (_data) {
             const obj = plainToClass(VentilationOpening, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.fraction_area_operable = obj.fraction_area_operable;
-            this.fraction_height_operable = obj.fraction_height_operable;
-            this.discharge_coefficient = obj.discharge_coefficient;
-            this.wind_cross_vent = obj.wind_cross_vent;
-            this.flow_coefficient_closed = obj.flow_coefficient_closed;
-            this.flow_exponent_closed = obj.flow_exponent_closed;
-            this.two_way_threshold = obj.two_way_threshold;
+            this.fractionAreaOperable = obj.fractionAreaOperable;
+            this.fractionHeightOperable = obj.fractionHeightOperable;
+            this.dischargeCoefficient = obj.dischargeCoefficient;
+            this.windCrossVent = obj.windCrossVent;
+            this.flowCoefficientClosed = obj.flowCoefficientClosed;
+            this.flowExponentClosed = obj.flowExponentClosed;
+            this.twoWayThreshold = obj.twoWayThreshold;
         }
     }
 
@@ -102,13 +110,13 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["fraction_area_operable"] = this.fraction_area_operable;
-        data["fraction_height_operable"] = this.fraction_height_operable;
-        data["discharge_coefficient"] = this.discharge_coefficient;
-        data["wind_cross_vent"] = this.wind_cross_vent;
-        data["flow_coefficient_closed"] = this.flow_coefficient_closed;
-        data["flow_exponent_closed"] = this.flow_exponent_closed;
-        data["two_way_threshold"] = this.two_way_threshold;
+        data["fraction_area_operable"] = this.fractionAreaOperable;
+        data["fraction_height_operable"] = this.fractionHeightOperable;
+        data["discharge_coefficient"] = this.dischargeCoefficient;
+        data["wind_cross_vent"] = this.windCrossVent;
+        data["flow_coefficient_closed"] = this.flowCoefficientClosed;
+        data["flow_exponent_closed"] = this.flowExponentClosed;
+        data["two_way_threshold"] = this.twoWayThreshold;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -122,4 +130,3 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

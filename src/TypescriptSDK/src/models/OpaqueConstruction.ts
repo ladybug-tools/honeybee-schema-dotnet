@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { EnergyMaterial } from "./EnergyMaterial";
 import { EnergyMaterialNoMass } from "./EnergyMaterialNoMass";
 import { EnergyMaterialVegetation } from "./EnergyMaterialVegetation";
@@ -9,6 +9,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 export class OpaqueConstruction extends IDdEnergyBaseModel {
     @IsArray()
     @IsDefined()
+    @Expose({ name: "materials" })
     @Transform(({ value }) => value.map((item: any) => {
       if (item?.type === 'EnergyMaterial') return EnergyMaterial.fromJS(item);
       else if (item?.type === 'EnergyMaterialNoMass') return EnergyMaterialNoMass.fromJS(item);
@@ -21,8 +22,9 @@ export class OpaqueConstruction extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^OpaqueConstruction$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "OpaqueConstruction";
 	
 
     constructor() {
@@ -73,4 +75,3 @@ export class OpaqueConstruction extends IDdEnergyBaseModel {
         return true;
     }
 }
-

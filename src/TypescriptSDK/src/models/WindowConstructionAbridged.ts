@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsString, IsDefined, IsOptional, Matches, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Construction for window objects (Aperture, Door). */
@@ -7,19 +7,22 @@ export class WindowConstructionAbridged extends IDdEnergyBaseModel {
     @IsArray()
     @IsString({ each: true })
     @IsDefined()
+    @Expose({ name: "materials" })
     /** List of strings for glazing or gas material identifiers. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer. */
     materials!: string[];
 	
     @IsString()
     @IsOptional()
     @Matches(/^WindowConstructionAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "WindowConstructionAbridged";
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "frame" })
     /** An optional identifier for a frame material that surrounds the window construction. */
     frame?: string;
 	
@@ -74,4 +77,3 @@ export class WindowConstructionAbridged extends IDdEnergyBaseModel {
         return true;
     }
 }
-

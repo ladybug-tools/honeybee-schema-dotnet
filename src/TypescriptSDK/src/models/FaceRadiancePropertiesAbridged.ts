@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _PropertiesBaseAbridged } from "./_PropertiesBaseAbridged";
 
 /** Radiance Properties for Honeybee Face Abridged. */
@@ -7,8 +7,9 @@ export class FaceRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
     @IsString()
     @IsOptional()
     @Matches(/^FaceRadiancePropertiesAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "FaceRadiancePropertiesAbridged";
 	
 
     constructor() {
@@ -57,4 +58,3 @@ export class FaceRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
         return true;
     }
 }
-

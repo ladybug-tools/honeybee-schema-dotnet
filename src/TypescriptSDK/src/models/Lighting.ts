@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { ScheduleRuleset } from "./ScheduleRuleset";
@@ -9,10 +9,12 @@ export class Lighting extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
     @Min(0)
+    @Expose({ name: "watts_per_area" })
     /** Lighting per floor area as [W/m2]. */
-    watts_per_area!: number;
+    wattsPerArea!: number;
 	
     @IsDefined()
+    @Expose({ name: "schedule" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
@@ -25,44 +27,49 @@ export class Lighting extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^Lighting$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Lighting";
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "visible_fraction" })
     /** The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. (Default: 0.25). */
-    visible_fraction?: number;
+    visibleFraction: number = 0.25;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "radiant_fraction" })
     /** The fraction of heat from lights that is long-wave radiation. (Default: 0.32). */
-    radiant_fraction?: number;
+    radiantFraction: number = 0.32;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "return_air_fraction" })
     /** The fraction of the heat from lights that goes into the zone return air. (Default: 0). */
-    return_air_fraction?: number;
+    returnAirFraction: number = 0;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
+    @Expose({ name: "baseline_watts_per_area" })
     /** The baseline lighting power density in [W/m2] of floor area. This baseline is useful to track how much better the installed lights are in comparison to a standard like ASHRAE 90.1. If set to None, it will default to 11.84029 W/m2, which is that ASHRAE 90.1-2004 baseline for an office. */
-    baseline_watts_per_area?: number;
+    baselineWattsPerArea: number = 11.84029;
 	
 
     constructor() {
         super();
         this.type = "Lighting";
-        this.visible_fraction = 0.25;
-        this.radiant_fraction = 0.32;
-        this.return_air_fraction = 0;
-        this.baseline_watts_per_area = 11.84029;
+        this.visibleFraction = 0.25;
+        this.radiantFraction = 0.32;
+        this.returnAirFraction = 0;
+        this.baselineWattsPerArea = 11.84029;
     }
 
 
@@ -70,13 +77,13 @@ export class Lighting extends IDdEnergyBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(Lighting, _data, { enableImplicitConversion: true });
-            this.watts_per_area = obj.watts_per_area;
+            this.wattsPerArea = obj.wattsPerArea;
             this.schedule = obj.schedule;
             this.type = obj.type;
-            this.visible_fraction = obj.visible_fraction;
-            this.radiant_fraction = obj.radiant_fraction;
-            this.return_air_fraction = obj.return_air_fraction;
-            this.baseline_watts_per_area = obj.baseline_watts_per_area;
+            this.visibleFraction = obj.visibleFraction;
+            this.radiantFraction = obj.radiantFraction;
+            this.returnAirFraction = obj.returnAirFraction;
+            this.baselineWattsPerArea = obj.baselineWattsPerArea;
         }
     }
 
@@ -98,13 +105,13 @@ export class Lighting extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["watts_per_area"] = this.watts_per_area;
+        data["watts_per_area"] = this.wattsPerArea;
         data["schedule"] = this.schedule;
         data["type"] = this.type;
-        data["visible_fraction"] = this.visible_fraction;
-        data["radiant_fraction"] = this.radiant_fraction;
-        data["return_air_fraction"] = this.return_air_fraction;
-        data["baseline_watts_per_area"] = this.baseline_watts_per_area;
+        data["visible_fraction"] = this.visibleFraction;
+        data["radiant_fraction"] = this.radiantFraction;
+        data["return_air_fraction"] = this.returnAirFraction;
+        data["baseline_watts_per_area"] = this.baselineWattsPerArea;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -118,4 +125,3 @@ export class Lighting extends IDdEnergyBaseModel {
         return true;
     }
 }
-

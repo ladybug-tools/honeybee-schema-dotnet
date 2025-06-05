@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AddedInstruction } from "./AddedInstruction";
 import { ChangedInstruction } from "./ChangedInstruction";
@@ -9,32 +9,36 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^SyncInstructions$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "SyncInstructions";
 	
     @IsArray()
     @IsInstance(ChangedInstruction, { each: true })
     @Type(() => ChangedInstruction)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "changed_objects" })
     /** A list of ChangedInstruction definitions for each top-level object with properties to transfer from the new/updated model to the base/existing model. */
-    changed_objects?: ChangedInstruction[];
+    changedObjects?: ChangedInstruction[];
 	
     @IsArray()
     @IsInstance(DeletedInstruction, { each: true })
     @Type(() => DeletedInstruction)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "deleted_objects" })
     /** A list of DeletedInstruction definitions for each top-level object to be deleted from the base/existing model. */
-    deleted_objects?: DeletedInstruction[];
+    deletedObjects?: DeletedInstruction[];
 	
     @IsArray()
     @IsInstance(AddedInstruction, { each: true })
     @Type(() => AddedInstruction)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "added_objects" })
     /** A list of AddedInstruction definitions for each top-level object to be added to the base/existing model from the new/updated model. */
-    added_objects?: AddedInstruction[];
+    addedObjects?: AddedInstruction[];
 	
 
     constructor() {
@@ -48,9 +52,9 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
         if (_data) {
             const obj = plainToClass(SyncInstructions, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.changed_objects = obj.changed_objects;
-            this.deleted_objects = obj.deleted_objects;
-            this.added_objects = obj.added_objects;
+            this.changedObjects = obj.changedObjects;
+            this.deletedObjects = obj.deletedObjects;
+            this.addedObjects = obj.addedObjects;
         }
     }
 
@@ -73,9 +77,9 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["changed_objects"] = this.changed_objects;
-        data["deleted_objects"] = this.deleted_objects;
-        data["added_objects"] = this.added_objects;
+        data["changed_objects"] = this.changedObjects;
+        data["deleted_objects"] = this.deletedObjects;
+        data["added_objects"] = this.addedObjects;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -89,4 +93,3 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

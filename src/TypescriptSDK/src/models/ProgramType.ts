@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { ElectricEquipment } from "./ElectricEquipment";
 import { GasEquipment } from "./GasEquipment";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -15,13 +15,15 @@ export class ProgramType extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^ProgramType$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ProgramType";
 	
     @IsInstance(People)
     @Type(() => People)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "people" })
     /** People to describe the occupancy of the program. If None, no occupancy will be assumed for the program. */
     people?: People;
 	
@@ -29,6 +31,7 @@ export class ProgramType extends IDdEnergyBaseModel {
     @Type(() => Lighting)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "lighting" })
     /** Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program. */
     lighting?: Lighting;
 	
@@ -36,27 +39,31 @@ export class ProgramType extends IDdEnergyBaseModel {
     @Type(() => ElectricEquipment)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "electric_equipment" })
     /** ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed. */
-    electric_equipment?: ElectricEquipment;
+    electricEquipment?: ElectricEquipment;
 	
     @IsInstance(GasEquipment)
     @Type(() => GasEquipment)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "gas_equipment" })
     /** GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed. */
-    gas_equipment?: GasEquipment;
+    gasEquipment?: GasEquipment;
 	
     @IsInstance(ServiceHotWater)
     @Type(() => ServiceHotWater)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "service_hot_water" })
     /** ServiceHotWater object to describe the usage of hot water within the program. If None, no hot water will be assumed. */
-    service_hot_water?: ServiceHotWater;
+    serviceHotWater?: ServiceHotWater;
 	
     @IsInstance(Infiltration)
     @Type(() => Infiltration)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "infiltration" })
     /** Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program. */
     infiltration?: Infiltration;
 	
@@ -64,6 +71,7 @@ export class ProgramType extends IDdEnergyBaseModel {
     @Type(() => Ventilation)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "ventilation" })
     /** Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed. */
     ventilation?: Ventilation;
 	
@@ -71,6 +79,7 @@ export class ProgramType extends IDdEnergyBaseModel {
     @Type(() => Setpoint)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "setpoint" })
     /** Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned. */
     setpoint?: Setpoint;
 	
@@ -88,9 +97,9 @@ export class ProgramType extends IDdEnergyBaseModel {
             this.type = obj.type;
             this.people = obj.people;
             this.lighting = obj.lighting;
-            this.electric_equipment = obj.electric_equipment;
-            this.gas_equipment = obj.gas_equipment;
-            this.service_hot_water = obj.service_hot_water;
+            this.electricEquipment = obj.electricEquipment;
+            this.gasEquipment = obj.gasEquipment;
+            this.serviceHotWater = obj.serviceHotWater;
             this.infiltration = obj.infiltration;
             this.ventilation = obj.ventilation;
             this.setpoint = obj.setpoint;
@@ -118,9 +127,9 @@ export class ProgramType extends IDdEnergyBaseModel {
         data["type"] = this.type;
         data["people"] = this.people;
         data["lighting"] = this.lighting;
-        data["electric_equipment"] = this.electric_equipment;
-        data["gas_equipment"] = this.gas_equipment;
-        data["service_hot_water"] = this.service_hot_water;
+        data["electric_equipment"] = this.electricEquipment;
+        data["gas_equipment"] = this.gasEquipment;
+        data["service_hot_water"] = this.serviceHotWater;
         data["infiltration"] = this.infiltration;
         data["ventilation"] = this.ventilation;
         data["setpoint"] = this.setpoint;
@@ -137,4 +146,3 @@ export class ProgramType extends IDdEnergyBaseModel {
         return true;
     }
 }
-
