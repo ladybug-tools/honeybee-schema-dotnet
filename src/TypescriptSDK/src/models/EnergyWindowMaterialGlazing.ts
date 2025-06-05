@@ -125,21 +125,21 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyWindowMaterialGlazing, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.thickness = obj.thickness;
-            this.solarTransmittance = obj.solarTransmittance;
-            this.solarReflectance = obj.solarReflectance;
-            this.solarReflectanceBack = obj.solarReflectanceBack;
-            this.visibleTransmittance = obj.visibleTransmittance;
-            this.visibleReflectance = obj.visibleReflectance;
-            this.visibleReflectanceBack = obj.visibleReflectanceBack;
-            this.infraredTransmittance = obj.infraredTransmittance;
-            this.emissivity = obj.emissivity;
-            this.emissivityBack = obj.emissivityBack;
-            this.conductivity = obj.conductivity;
-            this.dirtCorrection = obj.dirtCorrection;
-            this.solarDiffusing = obj.solarDiffusing;
+            const obj = plainToClass(EnergyWindowMaterialGlazing, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "EnergyWindowMaterialGlazing";
+            this.thickness = obj.thickness ?? 0.003;
+            this.solarTransmittance = obj.solarTransmittance ?? 0.85;
+            this.solarReflectance = obj.solarReflectance ?? 0.075;
+            this.solarReflectanceBack = obj.solarReflectanceBack ?? new Autocalculate();
+            this.visibleTransmittance = obj.visibleTransmittance ?? 0.9;
+            this.visibleReflectance = obj.visibleReflectance ?? 0.075;
+            this.visibleReflectanceBack = obj.visibleReflectanceBack ?? new Autocalculate();
+            this.infraredTransmittance = obj.infraredTransmittance ?? 0;
+            this.emissivity = obj.emissivity ?? 0.84;
+            this.emissivityBack = obj.emissivityBack ?? 0.84;
+            this.conductivity = obj.conductivity ?? 0.9;
+            this.dirtCorrection = obj.dirtCorrection ?? 1;
+            this.solarDiffusing = obj.solarDiffusing ?? false;
         }
     }
 
@@ -161,22 +161,22 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["thickness"] = this.thickness;
-        data["solar_transmittance"] = this.solarTransmittance;
-        data["solar_reflectance"] = this.solarReflectance;
-        data["solar_reflectance_back"] = this.solarReflectanceBack;
-        data["visible_transmittance"] = this.visibleTransmittance;
-        data["visible_reflectance"] = this.visibleReflectance;
-        data["visible_reflectance_back"] = this.visibleReflectanceBack;
-        data["infrared_transmittance"] = this.infraredTransmittance;
-        data["emissivity"] = this.emissivity;
-        data["emissivity_back"] = this.emissivityBack;
-        data["conductivity"] = this.conductivity;
-        data["dirt_correction"] = this.dirtCorrection;
-        data["solar_diffusing"] = this.solarDiffusing;
+        data["type"] = this.type ?? "EnergyWindowMaterialGlazing";
+        data["thickness"] = this.thickness ?? 0.003;
+        data["solar_transmittance"] = this.solarTransmittance ?? 0.85;
+        data["solar_reflectance"] = this.solarReflectance ?? 0.075;
+        data["solar_reflectance_back"] = this.solarReflectanceBack ?? new Autocalculate();
+        data["visible_transmittance"] = this.visibleTransmittance ?? 0.9;
+        data["visible_reflectance"] = this.visibleReflectance ?? 0.075;
+        data["visible_reflectance_back"] = this.visibleReflectanceBack ?? new Autocalculate();
+        data["infrared_transmittance"] = this.infraredTransmittance ?? 0;
+        data["emissivity"] = this.emissivity ?? 0.84;
+        data["emissivity_back"] = this.emissivityBack ?? 0.84;
+        data["conductivity"] = this.conductivity ?? 0.9;
+        data["dirt_correction"] = this.dirtCorrection ?? 1;
+        data["solar_diffusing"] = this.solarDiffusing ?? false;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

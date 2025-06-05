@@ -72,14 +72,14 @@ export class VRFwithDOASAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(VRFwithDOASAbridged, _data, { enableImplicitConversion: true });
-            this.vintage = obj.vintage;
-            this.sensibleHeatRecovery = obj.sensibleHeatRecovery;
-            this.latentHeatRecovery = obj.latentHeatRecovery;
-            this.demandControlledVentilation = obj.demandControlledVentilation;
+            const obj = plainToClass(VRFwithDOASAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
+            this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
+            this.demandControlledVentilation = obj.demandControlledVentilation ?? false;
             this.doasAvailabilitySchedule = obj.doasAvailabilitySchedule;
-            this.type = obj.type;
-            this.equipmentType = obj.equipmentType;
+            this.type = obj.type ?? "VRFwithDOASAbridged";
+            this.equipmentType = obj.equipmentType ?? VRFwithDOASEquipmentType.DOAS_VRF;
         }
     }
 
@@ -101,15 +101,15 @@ export class VRFwithDOASAbridged extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["vintage"] = this.vintage;
-        data["sensible_heat_recovery"] = this.sensibleHeatRecovery;
-        data["latent_heat_recovery"] = this.latentHeatRecovery;
-        data["demand_controlled_ventilation"] = this.demandControlledVentilation;
+        data["vintage"] = this.vintage ?? Vintages.ASHRAE_2019;
+        data["sensible_heat_recovery"] = this.sensibleHeatRecovery ?? 0;
+        data["latent_heat_recovery"] = this.latentHeatRecovery ?? 0;
+        data["demand_controlled_ventilation"] = this.demandControlledVentilation ?? false;
         data["doas_availability_schedule"] = this.doasAvailabilitySchedule;
-        data["type"] = this.type;
-        data["equipment_type"] = this.equipmentType;
+        data["type"] = this.type ?? "VRFwithDOASAbridged";
+        data["equipment_type"] = this.equipmentType ?? VRFwithDOASEquipmentType.DOAS_VRF;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

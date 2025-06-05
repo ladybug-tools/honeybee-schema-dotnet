@@ -39,8 +39,8 @@ export class DoorModifierSetAbridged extends BaseModifierSetAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DoorModifierSetAbridged, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
+            const obj = plainToClass(DoorModifierSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "DoorModifierSetAbridged";
             this.interiorGlassModifier = obj.interiorGlassModifier;
             this.exteriorGlassModifier = obj.exteriorGlassModifier;
             this.overheadModifier = obj.overheadModifier;
@@ -65,12 +65,12 @@ export class DoorModifierSetAbridged extends BaseModifierSetAbridged {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["type"] = this.type ?? "DoorModifierSetAbridged";
         data["interior_glass_modifier"] = this.interiorGlassModifier;
         data["exterior_glass_modifier"] = this.exteriorGlassModifier;
         data["overhead_modifier"] = this.overheadModifier;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

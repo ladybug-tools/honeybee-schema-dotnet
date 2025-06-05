@@ -69,14 +69,14 @@ export class DaylightingControl extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DaylightingControl, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(DaylightingControl, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.sensorPosition = obj.sensorPosition;
-            this.type = obj.type;
-            this.illuminanceSetpoint = obj.illuminanceSetpoint;
-            this.controlFraction = obj.controlFraction;
-            this.minPowerInput = obj.minPowerInput;
-            this.minLightOutput = obj.minLightOutput;
-            this.offAtMinimum = obj.offAtMinimum;
+            this.type = obj.type ?? "DaylightingControl";
+            this.illuminanceSetpoint = obj.illuminanceSetpoint ?? 300;
+            this.controlFraction = obj.controlFraction ?? 1;
+            this.minPowerInput = obj.minPowerInput ?? 0.3;
+            this.minLightOutput = obj.minLightOutput ?? 0.2;
+            this.offAtMinimum = obj.offAtMinimum ?? false;
         }
     }
 
@@ -99,14 +99,14 @@ export class DaylightingControl extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["sensor_position"] = this.sensorPosition;
-        data["type"] = this.type;
-        data["illuminance_setpoint"] = this.illuminanceSetpoint;
-        data["control_fraction"] = this.controlFraction;
-        data["min_power_input"] = this.minPowerInput;
-        data["min_light_output"] = this.minLightOutput;
-        data["off_at_minimum"] = this.offAtMinimum;
+        data["type"] = this.type ?? "DaylightingControl";
+        data["illuminance_setpoint"] = this.illuminanceSetpoint ?? 300;
+        data["control_fraction"] = this.controlFraction ?? 1;
+        data["min_power_input"] = this.minPowerInput ?? 0.3;
+        data["min_light_output"] = this.minLightOutput ?? 0.2;
+        data["off_at_minimum"] = this.offAtMinimum ?? false;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

@@ -26,9 +26,9 @@ export class DetailedHVAC extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DetailedHVAC, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(DetailedHVAC, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.specification = obj.specification;
-            this.type = obj.type;
+            this.type = obj.type ?? "DetailedHVAC";
         }
     }
 
@@ -51,9 +51,9 @@ export class DetailedHVAC extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["specification"] = this.specification;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "DetailedHVAC";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

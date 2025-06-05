@@ -49,9 +49,9 @@ export class WindowConstruction extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(WindowConstruction, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(WindowConstruction, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.materials = obj.materials;
-            this.type = obj.type;
+            this.type = obj.type ?? "WindowConstruction";
             this.frame = obj.frame;
         }
     }
@@ -75,10 +75,10 @@ export class WindowConstruction extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["materials"] = this.materials;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "WindowConstruction";
         data["frame"] = this.frame;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

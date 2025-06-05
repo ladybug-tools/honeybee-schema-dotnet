@@ -62,13 +62,13 @@ export class Radiant extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Radiant, _data, { enableImplicitConversion: true });
-            this.vintage = obj.vintage;
-            this.type = obj.type;
-            this.equipmentType = obj.equipmentType;
-            this.radiantFaceType = obj.radiantFaceType;
-            this.minimumOperationTime = obj.minimumOperationTime;
-            this.switchOverTime = obj.switchOverTime;
+            const obj = plainToClass(Radiant, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.type = obj.type ?? "Radiant";
+            this.equipmentType = obj.equipmentType ?? RadiantEquipmentType.Radiant_Chiller_Boiler;
+            this.radiantFaceType = obj.radiantFaceType ?? RadiantFaceTypes.Floor;
+            this.minimumOperationTime = obj.minimumOperationTime ?? 1;
+            this.switchOverTime = obj.switchOverTime ?? 24;
         }
     }
 
@@ -90,14 +90,14 @@ export class Radiant extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["vintage"] = this.vintage;
-        data["type"] = this.type;
-        data["equipment_type"] = this.equipmentType;
-        data["radiant_face_type"] = this.radiantFaceType;
-        data["minimum_operation_time"] = this.minimumOperationTime;
-        data["switch_over_time"] = this.switchOverTime;
+        data["vintage"] = this.vintage ?? Vintages.ASHRAE_2019;
+        data["type"] = this.type ?? "Radiant";
+        data["equipment_type"] = this.equipmentType ?? RadiantEquipmentType.Radiant_Chiller_Boiler;
+        data["radiant_face_type"] = this.radiantFaceType ?? RadiantFaceTypes.Floor;
+        data["minimum_operation_time"] = this.minimumOperationTime ?? 1;
+        data["switch_over_time"] = this.switchOverTime ?? 24;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

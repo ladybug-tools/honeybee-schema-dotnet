@@ -73,14 +73,14 @@ export class VAV extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(VAV, _data, { enableImplicitConversion: true });
-            this.vintage = obj.vintage;
-            this.economizerType = obj.economizerType;
-            this.sensibleHeatRecovery = obj.sensibleHeatRecovery;
-            this.latentHeatRecovery = obj.latentHeatRecovery;
-            this.demandControlledVentilation = obj.demandControlledVentilation;
-            this.type = obj.type;
-            this.equipmentType = obj.equipmentType;
+            const obj = plainToClass(VAV, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.economizerType = obj.economizerType ?? AllAirEconomizerType.NoEconomizer;
+            this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
+            this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
+            this.demandControlledVentilation = obj.demandControlledVentilation ?? false;
+            this.type = obj.type ?? "VAV";
+            this.equipmentType = obj.equipmentType ?? VAVEquipmentType.VAV_Chiller_Boiler;
         }
     }
 
@@ -102,15 +102,15 @@ export class VAV extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["vintage"] = this.vintage;
-        data["economizer_type"] = this.economizerType;
-        data["sensible_heat_recovery"] = this.sensibleHeatRecovery;
-        data["latent_heat_recovery"] = this.latentHeatRecovery;
-        data["demand_controlled_ventilation"] = this.demandControlledVentilation;
-        data["type"] = this.type;
-        data["equipment_type"] = this.equipmentType;
+        data["vintage"] = this.vintage ?? Vintages.ASHRAE_2019;
+        data["economizer_type"] = this.economizerType ?? AllAirEconomizerType.NoEconomizer;
+        data["sensible_heat_recovery"] = this.sensibleHeatRecovery ?? 0;
+        data["latent_heat_recovery"] = this.latentHeatRecovery ?? 0;
+        data["demand_controlled_ventilation"] = this.demandControlledVentilation ?? false;
+        data["type"] = this.type ?? "VAV";
+        data["equipment_type"] = this.equipmentType ?? VAVEquipmentType.VAV_Chiller_Boiler;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

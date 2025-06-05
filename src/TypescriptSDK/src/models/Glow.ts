@@ -100,14 +100,14 @@ export class Glow extends ModifierBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Glow, _data, { enableImplicitConversion: true });
-            this.modifier = obj.modifier;
+            const obj = plainToClass(Glow, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.modifier = obj.modifier ?? new Void();
             this.dependencies = obj.dependencies;
-            this.rEmittance = obj.rEmittance;
-            this.gEmittance = obj.gEmittance;
-            this.bEmittance = obj.bEmittance;
-            this.maxRadius = obj.maxRadius;
-            this.type = obj.type;
+            this.rEmittance = obj.rEmittance ?? 0;
+            this.gEmittance = obj.gEmittance ?? 0;
+            this.bEmittance = obj.bEmittance ?? 0;
+            this.maxRadius = obj.maxRadius ?? 0;
+            this.type = obj.type ?? "Glow";
         }
     }
 
@@ -129,15 +129,15 @@ export class Glow extends ModifierBase {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["modifier"] = this.modifier;
+        data["modifier"] = this.modifier ?? new Void();
         data["dependencies"] = this.dependencies;
-        data["r_emittance"] = this.rEmittance;
-        data["g_emittance"] = this.gEmittance;
-        data["b_emittance"] = this.bEmittance;
-        data["max_radius"] = this.maxRadius;
-        data["type"] = this.type;
+        data["r_emittance"] = this.rEmittance ?? 0;
+        data["g_emittance"] = this.gEmittance ?? 0;
+        data["b_emittance"] = this.bEmittance ?? 0;
+        data["max_radius"] = this.maxRadius ?? 0;
+        data["type"] = this.type ?? "Glow";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

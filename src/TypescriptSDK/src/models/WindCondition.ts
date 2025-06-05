@@ -38,10 +38,10 @@ export class WindCondition extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(WindCondition, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(WindCondition, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.windSpeed = obj.windSpeed;
-            this.type = obj.type;
-            this.windDirection = obj.windDirection;
+            this.type = obj.type ?? "WindCondition";
+            this.windDirection = obj.windDirection ?? 0;
         }
     }
 
@@ -64,10 +64,10 @@ export class WindCondition extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["wind_speed"] = this.windSpeed;
-        data["type"] = this.type;
-        data["wind_direction"] = this.windDirection;
+        data["type"] = this.type ?? "WindCondition";
+        data["wind_direction"] = this.windDirection ?? 0;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

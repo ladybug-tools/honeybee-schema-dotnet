@@ -129,17 +129,17 @@ export class Trans extends ModifierBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Trans, _data, { enableImplicitConversion: true });
-            this.modifier = obj.modifier;
+            const obj = plainToClass(Trans, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.modifier = obj.modifier ?? new Void();
             this.dependencies = obj.dependencies;
-            this.rReflectance = obj.rReflectance;
-            this.gReflectance = obj.gReflectance;
-            this.bReflectance = obj.bReflectance;
-            this.specularity = obj.specularity;
-            this.roughness = obj.roughness;
-            this.transmittedDiff = obj.transmittedDiff;
-            this.transmittedSpec = obj.transmittedSpec;
-            this.type = obj.type;
+            this.rReflectance = obj.rReflectance ?? 0;
+            this.gReflectance = obj.gReflectance ?? 0;
+            this.bReflectance = obj.bReflectance ?? 0;
+            this.specularity = obj.specularity ?? 0;
+            this.roughness = obj.roughness ?? 0;
+            this.transmittedDiff = obj.transmittedDiff ?? 0;
+            this.transmittedSpec = obj.transmittedSpec ?? 0;
+            this.type = obj.type ?? "Trans";
         }
     }
 
@@ -161,18 +161,18 @@ export class Trans extends ModifierBase {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["modifier"] = this.modifier;
+        data["modifier"] = this.modifier ?? new Void();
         data["dependencies"] = this.dependencies;
-        data["r_reflectance"] = this.rReflectance;
-        data["g_reflectance"] = this.gReflectance;
-        data["b_reflectance"] = this.bReflectance;
-        data["specularity"] = this.specularity;
-        data["roughness"] = this.roughness;
-        data["transmitted_diff"] = this.transmittedDiff;
-        data["transmitted_spec"] = this.transmittedSpec;
-        data["type"] = this.type;
+        data["r_reflectance"] = this.rReflectance ?? 0;
+        data["g_reflectance"] = this.gReflectance ?? 0;
+        data["b_reflectance"] = this.bReflectance ?? 0;
+        data["specularity"] = this.specularity ?? 0;
+        data["roughness"] = this.roughness ?? 0;
+        data["transmitted_diff"] = this.transmittedDiff ?? 0;
+        data["transmitted_spec"] = this.transmittedSpec ?? 0;
+        data["type"] = this.type ?? "Trans";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

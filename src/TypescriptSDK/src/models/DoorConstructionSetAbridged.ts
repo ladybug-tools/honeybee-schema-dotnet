@@ -61,8 +61,8 @@ export class DoorConstructionSetAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DoorConstructionSetAbridged, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
+            const obj = plainToClass(DoorConstructionSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "DoorConstructionSetAbridged";
             this.interiorConstruction = obj.interiorConstruction;
             this.exteriorConstruction = obj.exteriorConstruction;
             this.overheadConstruction = obj.overheadConstruction;
@@ -89,14 +89,14 @@ export class DoorConstructionSetAbridged extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["type"] = this.type ?? "DoorConstructionSetAbridged";
         data["interior_construction"] = this.interiorConstruction;
         data["exterior_construction"] = this.exteriorConstruction;
         data["overhead_construction"] = this.overheadConstruction;
         data["exterior_glass_construction"] = this.exteriorGlassConstruction;
         data["interior_glass_construction"] = this.interiorGlassConstruction;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

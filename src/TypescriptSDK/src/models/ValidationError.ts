@@ -103,14 +103,14 @@ export class ValidationError {
 
     init(_data?: any) {
         if (_data) {
-            const obj = plainToClass(ValidationError, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(ValidationError, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.code = obj.code;
             this.errorType = obj.errorType;
             this.extensionType = obj.extensionType;
             this.elementType = obj.elementType;
             this.elementId = obj.elementId;
             this.message = obj.message;
-            this.type = obj.type;
+            this.type = obj.type ?? "ValidationError";
             this.elementName = obj.elementName;
             this.parents = obj.parents;
             this.topParents = obj.topParents;
@@ -142,12 +142,12 @@ export class ValidationError {
         data["element_type"] = this.elementType;
         data["element_id"] = this.elementId;
         data["message"] = this.message;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "ValidationError";
         data["element_name"] = this.elementName;
         data["parents"] = this.parents;
         data["top_parents"] = this.topParents;
         data["helper_geometry"] = this.helperGeometry;
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

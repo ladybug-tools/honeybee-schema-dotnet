@@ -59,12 +59,12 @@ export class VentilationFan extends EnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(VentilationFan, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(VentilationFan, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.flowRate = obj.flowRate;
             this.pressureRise = obj.pressureRise;
             this.efficiency = obj.efficiency;
-            this.type = obj.type;
-            this.ventilationType = obj.ventilationType;
+            this.type = obj.type ?? "VentilationFan";
+            this.ventilationType = obj.ventilationType ?? VentilationType.Balanced;
             this.control = obj.control;
         }
     }
@@ -90,11 +90,11 @@ export class VentilationFan extends EnergyBaseModel {
         data["flow_rate"] = this.flowRate;
         data["pressure_rise"] = this.pressureRise;
         data["efficiency"] = this.efficiency;
-        data["type"] = this.type;
-        data["ventilation_type"] = this.ventilationType;
+        data["type"] = this.type ?? "VentilationFan";
+        data["ventilation_type"] = this.ventilationType ?? VentilationType.Balanced;
         data["control"] = this.control;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

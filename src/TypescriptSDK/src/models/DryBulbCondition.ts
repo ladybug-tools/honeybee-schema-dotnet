@@ -36,10 +36,10 @@ export class DryBulbCondition extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DryBulbCondition, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(DryBulbCondition, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.dryBulbMax = obj.dryBulbMax;
             this.dryBulbRange = obj.dryBulbRange;
-            this.type = obj.type;
+            this.type = obj.type ?? "DryBulbCondition";
         }
     }
 
@@ -63,9 +63,9 @@ export class DryBulbCondition extends _OpenAPIGenBaseModel {
         data = typeof data === 'object' ? data : {};
         data["dry_bulb_max"] = this.dryBulbMax;
         data["dry_bulb_range"] = this.dryBulbRange;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "DryBulbCondition";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

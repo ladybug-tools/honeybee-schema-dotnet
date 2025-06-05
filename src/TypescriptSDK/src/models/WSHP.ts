@@ -39,10 +39,10 @@ export class WSHP extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(WSHP, _data, { enableImplicitConversion: true });
-            this.vintage = obj.vintage;
-            this.type = obj.type;
-            this.equipmentType = obj.equipmentType;
+            const obj = plainToClass(WSHP, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.type = obj.type ?? "WSHP";
+            this.equipmentType = obj.equipmentType ?? WSHPEquipmentType.WSHP_FluidCooler_Boiler;
         }
     }
 
@@ -64,11 +64,11 @@ export class WSHP extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["vintage"] = this.vintage;
-        data["type"] = this.type;
-        data["equipment_type"] = this.equipmentType;
+        data["vintage"] = this.vintage ?? Vintages.ASHRAE_2019;
+        data["type"] = this.type ?? "WSHP";
+        data["equipment_type"] = this.equipmentType ?? WSHPEquipmentType.WSHP_FluidCooler_Boiler;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

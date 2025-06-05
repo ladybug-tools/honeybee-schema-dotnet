@@ -37,10 +37,10 @@ export class EnergyWindowMaterialGas extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyWindowMaterialGas, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.thickness = obj.thickness;
-            this.gasType = obj.gasType;
+            const obj = plainToClass(EnergyWindowMaterialGas, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "EnergyWindowMaterialGas";
+            this.thickness = obj.thickness ?? 0.0125;
+            this.gasType = obj.gasType ?? GasType.Air;
         }
     }
 
@@ -62,11 +62,11 @@ export class EnergyWindowMaterialGas extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["thickness"] = this.thickness;
-        data["gas_type"] = this.gasType;
+        data["type"] = this.type ?? "EnergyWindowMaterialGas";
+        data["thickness"] = this.thickness ?? 0.0125;
+        data["gas_type"] = this.gasType ?? GasType.Air;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

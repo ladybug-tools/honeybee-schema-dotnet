@@ -65,14 +65,14 @@ export class ScheduleFixedIntervalAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ScheduleFixedIntervalAbridged, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(ScheduleFixedIntervalAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.values = obj.values;
-            this.type = obj.type;
+            this.type = obj.type ?? "ScheduleFixedIntervalAbridged";
             this.scheduleTypeLimit = obj.scheduleTypeLimit;
-            this.timestep = obj.timestep;
-            this.startDate = obj.startDate;
-            this.placeholderValue = obj.placeholderValue;
-            this.interpolate = obj.interpolate;
+            this.timestep = obj.timestep ?? 1;
+            this.startDate = obj.startDate ?? [1, 1];
+            this.placeholderValue = obj.placeholderValue ?? 0;
+            this.interpolate = obj.interpolate ?? false;
         }
     }
 
@@ -95,14 +95,14 @@ export class ScheduleFixedIntervalAbridged extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["values"] = this.values;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "ScheduleFixedIntervalAbridged";
         data["schedule_type_limit"] = this.scheduleTypeLimit;
-        data["timestep"] = this.timestep;
-        data["start_date"] = this.startDate;
-        data["placeholder_value"] = this.placeholderValue;
-        data["interpolate"] = this.interpolate;
+        data["timestep"] = this.timestep ?? 1;
+        data["start_date"] = this.startDate ?? [1, 1];
+        data["placeholder_value"] = this.placeholderValue ?? 0;
+        data["interpolate"] = this.interpolate ?? false;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

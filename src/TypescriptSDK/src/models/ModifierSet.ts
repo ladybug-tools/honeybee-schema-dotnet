@@ -102,8 +102,8 @@ export class ModifierSet extends IDdRadianceBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ModifierSet, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
+            const obj = plainToClass(ModifierSet, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "ModifierSet";
             this.wallSet = obj.wallSet;
             this.floorSet = obj.floorSet;
             this.roofCeilingSet = obj.roofCeilingSet;
@@ -132,7 +132,7 @@ export class ModifierSet extends IDdRadianceBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["type"] = this.type ?? "ModifierSet";
         data["wall_set"] = this.wallSet;
         data["floor_set"] = this.floorSet;
         data["roof_ceiling_set"] = this.roofCeilingSet;
@@ -141,7 +141,7 @@ export class ModifierSet extends IDdRadianceBaseModel {
         data["shade_set"] = this.shadeSet;
         data["air_boundary_modifier"] = this.airBoundaryModifier;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

@@ -58,13 +58,13 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(HumidityCondition, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(HumidityCondition, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.humidityType = obj.humidityType;
             this.humidityValue = obj.humidityValue;
-            this.type = obj.type;
-            this.barometricPressure = obj.barometricPressure;
-            this.rain = obj.rain;
-            this.snowOnGround = obj.snowOnGround;
+            this.type = obj.type ?? "HumidityCondition";
+            this.barometricPressure = obj.barometricPressure ?? 101325;
+            this.rain = obj.rain ?? false;
+            this.snowOnGround = obj.snowOnGround ?? false;
         }
     }
 
@@ -88,12 +88,12 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
         data = typeof data === 'object' ? data : {};
         data["humidity_type"] = this.humidityType;
         data["humidity_value"] = this.humidityValue;
-        data["type"] = this.type;
-        data["barometric_pressure"] = this.barometricPressure;
-        data["rain"] = this.rain;
-        data["snow_on_ground"] = this.snowOnGround;
+        data["type"] = this.type ?? "HumidityCondition";
+        data["barometric_pressure"] = this.barometricPressure ?? 101325;
+        data["rain"] = this.rain ?? false;
+        data["snow_on_ground"] = this.snowOnGround ?? false;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

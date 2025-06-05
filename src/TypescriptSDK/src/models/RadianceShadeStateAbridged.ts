@@ -43,8 +43,8 @@ export class RadianceShadeStateAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(RadianceShadeStateAbridged, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
+            const obj = plainToClass(RadianceShadeStateAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "RadianceShadeStateAbridged";
             this.modifier = obj.modifier;
             this.modifierDirect = obj.modifierDirect;
             this.shades = obj.shades;
@@ -69,12 +69,12 @@ export class RadianceShadeStateAbridged extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["type"] = this.type ?? "RadianceShadeStateAbridged";
         data["modifier"] = this.modifier;
         data["modifier_direct"] = this.modifierDirect;
         data["shades"] = this.shades;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

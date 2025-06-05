@@ -43,11 +43,11 @@ export class AddedInstruction extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(AddedInstruction, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(AddedInstruction, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.elementType = obj.elementType;
             this.elementId = obj.elementId;
             this.elementName = obj.elementName;
-            this.type = obj.type;
+            this.type = obj.type ?? "AddedInstruction";
         }
     }
 
@@ -72,9 +72,9 @@ export class AddedInstruction extends _OpenAPIGenBaseModel {
         data["element_type"] = this.elementType;
         data["element_id"] = this.elementId;
         data["element_name"] = this.elementName;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "AddedInstruction";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

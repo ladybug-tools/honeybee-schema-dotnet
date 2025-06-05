@@ -68,13 +68,13 @@ export class People extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(People, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(People, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.peoplePerArea = obj.peoplePerArea;
             this.occupancySchedule = obj.occupancySchedule;
-            this.type = obj.type;
+            this.type = obj.type ?? "People";
             this.activitySchedule = obj.activitySchedule;
-            this.radiantFraction = obj.radiantFraction;
-            this.latentFraction = obj.latentFraction;
+            this.radiantFraction = obj.radiantFraction ?? 0.3;
+            this.latentFraction = obj.latentFraction ?? new Autocalculate();
         }
     }
 
@@ -98,12 +98,12 @@ export class People extends IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
         data["people_per_area"] = this.peoplePerArea;
         data["occupancy_schedule"] = this.occupancySchedule;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "People";
         data["activity_schedule"] = this.activitySchedule;
-        data["radiant_fraction"] = this.radiantFraction;
-        data["latent_fraction"] = this.latentFraction;
+        data["radiant_fraction"] = this.radiantFraction ?? 0.3;
+        data["latent_fraction"] = this.latentFraction ?? new Autocalculate();
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

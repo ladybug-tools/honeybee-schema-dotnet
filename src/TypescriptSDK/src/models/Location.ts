@@ -68,13 +68,13 @@ export class Location extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Location, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.city = obj.city;
-            this.latitude = obj.latitude;
-            this.longitude = obj.longitude;
-            this.timeZone = obj.timeZone;
-            this.elevation = obj.elevation;
+            const obj = plainToClass(Location, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "Location";
+            this.city = obj.city ?? "-";
+            this.latitude = obj.latitude ?? 0;
+            this.longitude = obj.longitude ?? 0;
+            this.timeZone = obj.timeZone ?? new Autocalculate();
+            this.elevation = obj.elevation ?? 0;
             this.stationId = obj.stationId;
             this.source = obj.source;
         }
@@ -98,16 +98,16 @@ export class Location extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["city"] = this.city;
-        data["latitude"] = this.latitude;
-        data["longitude"] = this.longitude;
-        data["time_zone"] = this.timeZone;
-        data["elevation"] = this.elevation;
+        data["type"] = this.type ?? "Location";
+        data["city"] = this.city ?? "-";
+        data["latitude"] = this.latitude ?? 0;
+        data["longitude"] = this.longitude ?? 0;
+        data["time_zone"] = this.timeZone ?? new Autocalculate();
+        data["elevation"] = this.elevation ?? 0;
         data["station_id"] = this.stationId;
         data["source"] = this.source;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

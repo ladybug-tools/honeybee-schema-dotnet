@@ -61,13 +61,13 @@ export class SetpointAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(SetpointAbridged, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(SetpointAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.coolingSchedule = obj.coolingSchedule;
             this.heatingSchedule = obj.heatingSchedule;
-            this.type = obj.type;
+            this.type = obj.type ?? "SetpointAbridged";
             this.humidifyingSchedule = obj.humidifyingSchedule;
             this.dehumidifyingSchedule = obj.dehumidifyingSchedule;
-            this.setpointCutoutDifference = obj.setpointCutoutDifference;
+            this.setpointCutoutDifference = obj.setpointCutoutDifference ?? 0;
         }
     }
 
@@ -91,12 +91,12 @@ export class SetpointAbridged extends IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
         data["cooling_schedule"] = this.coolingSchedule;
         data["heating_schedule"] = this.heatingSchedule;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "SetpointAbridged";
         data["humidifying_schedule"] = this.humidifyingSchedule;
         data["dehumidifying_schedule"] = this.dehumidifyingSchedule;
-        data["setpoint_cutout_difference"] = this.setpointCutoutDifference;
+        data["setpoint_cutout_difference"] = this.setpointCutoutDifference ?? 0;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

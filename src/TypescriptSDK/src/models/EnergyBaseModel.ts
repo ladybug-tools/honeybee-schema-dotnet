@@ -36,10 +36,10 @@ export class EnergyBaseModel extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyBaseModel, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(EnergyBaseModel, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.identifier = obj.identifier;
             this.displayName = obj.displayName;
-            this.type = obj.type;
+            this.type = obj.type ?? "EnergyBaseModel";
         }
     }
 
@@ -63,9 +63,9 @@ export class EnergyBaseModel extends _OpenAPIGenBaseModel {
         data = typeof data === 'object' ? data : {};
         data["identifier"] = this.identifier;
         data["display_name"] = this.displayName;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "EnergyBaseModel";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

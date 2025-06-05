@@ -136,22 +136,22 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyWindowMaterialShade, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.solarTransmittance = obj.solarTransmittance;
-            this.solarReflectance = obj.solarReflectance;
-            this.visibleTransmittance = obj.visibleTransmittance;
-            this.visibleReflectance = obj.visibleReflectance;
-            this.emissivity = obj.emissivity;
-            this.infraredTransmittance = obj.infraredTransmittance;
-            this.thickness = obj.thickness;
-            this.conductivity = obj.conductivity;
-            this.distanceToGlass = obj.distanceToGlass;
-            this.topOpeningMultiplier = obj.topOpeningMultiplier;
-            this.bottomOpeningMultiplier = obj.bottomOpeningMultiplier;
-            this.leftOpeningMultiplier = obj.leftOpeningMultiplier;
-            this.rightOpeningMultiplier = obj.rightOpeningMultiplier;
-            this.airflowPermeability = obj.airflowPermeability;
+            const obj = plainToClass(EnergyWindowMaterialShade, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "EnergyWindowMaterialShade";
+            this.solarTransmittance = obj.solarTransmittance ?? 0.4;
+            this.solarReflectance = obj.solarReflectance ?? 0.5;
+            this.visibleTransmittance = obj.visibleTransmittance ?? 0.4;
+            this.visibleReflectance = obj.visibleReflectance ?? 0.4;
+            this.emissivity = obj.emissivity ?? 0.9;
+            this.infraredTransmittance = obj.infraredTransmittance ?? 0;
+            this.thickness = obj.thickness ?? 0.005;
+            this.conductivity = obj.conductivity ?? 0.1;
+            this.distanceToGlass = obj.distanceToGlass ?? 0.05;
+            this.topOpeningMultiplier = obj.topOpeningMultiplier ?? 0.5;
+            this.bottomOpeningMultiplier = obj.bottomOpeningMultiplier ?? 0.5;
+            this.leftOpeningMultiplier = obj.leftOpeningMultiplier ?? 0.5;
+            this.rightOpeningMultiplier = obj.rightOpeningMultiplier ?? 0.5;
+            this.airflowPermeability = obj.airflowPermeability ?? 0;
         }
     }
 
@@ -173,23 +173,23 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["solar_transmittance"] = this.solarTransmittance;
-        data["solar_reflectance"] = this.solarReflectance;
-        data["visible_transmittance"] = this.visibleTransmittance;
-        data["visible_reflectance"] = this.visibleReflectance;
-        data["emissivity"] = this.emissivity;
-        data["infrared_transmittance"] = this.infraredTransmittance;
-        data["thickness"] = this.thickness;
-        data["conductivity"] = this.conductivity;
-        data["distance_to_glass"] = this.distanceToGlass;
-        data["top_opening_multiplier"] = this.topOpeningMultiplier;
-        data["bottom_opening_multiplier"] = this.bottomOpeningMultiplier;
-        data["left_opening_multiplier"] = this.leftOpeningMultiplier;
-        data["right_opening_multiplier"] = this.rightOpeningMultiplier;
-        data["airflow_permeability"] = this.airflowPermeability;
+        data["type"] = this.type ?? "EnergyWindowMaterialShade";
+        data["solar_transmittance"] = this.solarTransmittance ?? 0.4;
+        data["solar_reflectance"] = this.solarReflectance ?? 0.5;
+        data["visible_transmittance"] = this.visibleTransmittance ?? 0.4;
+        data["visible_reflectance"] = this.visibleReflectance ?? 0.4;
+        data["emissivity"] = this.emissivity ?? 0.9;
+        data["infrared_transmittance"] = this.infraredTransmittance ?? 0;
+        data["thickness"] = this.thickness ?? 0.005;
+        data["conductivity"] = this.conductivity ?? 0.1;
+        data["distance_to_glass"] = this.distanceToGlass ?? 0.05;
+        data["top_opening_multiplier"] = this.topOpeningMultiplier ?? 0.5;
+        data["bottom_opening_multiplier"] = this.bottomOpeningMultiplier ?? 0.5;
+        data["left_opening_multiplier"] = this.leftOpeningMultiplier ?? 0.5;
+        data["right_opening_multiplier"] = this.rightOpeningMultiplier ?? 0.5;
+        data["airflow_permeability"] = this.airflowPermeability ?? 0;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

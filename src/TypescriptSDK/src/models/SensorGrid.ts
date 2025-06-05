@@ -56,9 +56,9 @@ export class SensorGrid extends _RadianceAsset {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(SensorGrid, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(SensorGrid, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.sensors = obj.sensors;
-            this.type = obj.type;
+            this.type = obj.type ?? "SensorGrid";
             this.mesh = obj.mesh;
             this.baseGeometry = obj.baseGeometry;
             this.groupIdentifier = obj.groupIdentifier;
@@ -84,12 +84,12 @@ export class SensorGrid extends _RadianceAsset {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["sensors"] = this.sensors;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "SensorGrid";
         data["mesh"] = this.mesh;
         data["base_geometry"] = this.baseGeometry;
         data["group_identifier"] = this.groupIdentifier;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

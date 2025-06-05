@@ -46,10 +46,10 @@ export class Mesh3D extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Mesh3D, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(Mesh3D, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.vertices = obj.vertices;
             this.faces = obj.faces;
-            this.type = obj.type;
+            this.type = obj.type ?? "Mesh3D";
             this.colors = obj.colors;
         }
     }
@@ -74,10 +74,10 @@ export class Mesh3D extends _OpenAPIGenBaseModel {
         data = typeof data === 'object' ? data : {};
         data["vertices"] = this.vertices;
         data["faces"] = this.faces;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "Mesh3D";
         data["colors"] = this.colors;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

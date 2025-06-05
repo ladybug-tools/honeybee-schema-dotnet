@@ -44,11 +44,11 @@ export class ScheduleDay extends EnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ScheduleDay, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(ScheduleDay, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.values = obj.values;
-            this.type = obj.type;
-            this.times = obj.times;
-            this.interpolate = obj.interpolate;
+            this.type = obj.type ?? "ScheduleDay";
+            this.times = obj.times ?? [[0, 0]];
+            this.interpolate = obj.interpolate ?? false;
         }
     }
 
@@ -71,11 +71,11 @@ export class ScheduleDay extends EnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["values"] = this.values;
-        data["type"] = this.type;
-        data["times"] = this.times;
-        data["interpolate"] = this.interpolate;
+        data["type"] = this.type ?? "ScheduleDay";
+        data["times"] = this.times ?? [[0, 0]];
+        data["interpolate"] = this.interpolate ?? false;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

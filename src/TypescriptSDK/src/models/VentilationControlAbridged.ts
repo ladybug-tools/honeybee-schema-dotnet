@@ -74,13 +74,13 @@ export class VentilationControlAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(VentilationControlAbridged, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.minIndoorTemperature = obj.minIndoorTemperature;
-            this.maxIndoorTemperature = obj.maxIndoorTemperature;
-            this.minOutdoorTemperature = obj.minOutdoorTemperature;
-            this.maxOutdoorTemperature = obj.maxOutdoorTemperature;
-            this.deltaTemperature = obj.deltaTemperature;
+            const obj = plainToClass(VentilationControlAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "VentilationControlAbridged";
+            this.minIndoorTemperature = obj.minIndoorTemperature ?? -100;
+            this.maxIndoorTemperature = obj.maxIndoorTemperature ?? 100;
+            this.minOutdoorTemperature = obj.minOutdoorTemperature ?? -100;
+            this.maxOutdoorTemperature = obj.maxOutdoorTemperature ?? 100;
+            this.deltaTemperature = obj.deltaTemperature ?? -100;
             this.schedule = obj.schedule;
         }
     }
@@ -103,15 +103,15 @@ export class VentilationControlAbridged extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["min_indoor_temperature"] = this.minIndoorTemperature;
-        data["max_indoor_temperature"] = this.maxIndoorTemperature;
-        data["min_outdoor_temperature"] = this.minOutdoorTemperature;
-        data["max_outdoor_temperature"] = this.maxOutdoorTemperature;
-        data["delta_temperature"] = this.deltaTemperature;
+        data["type"] = this.type ?? "VentilationControlAbridged";
+        data["min_indoor_temperature"] = this.minIndoorTemperature ?? -100;
+        data["max_indoor_temperature"] = this.maxIndoorTemperature ?? 100;
+        data["min_outdoor_temperature"] = this.minOutdoorTemperature ?? -100;
+        data["max_outdoor_temperature"] = this.maxOutdoorTemperature ?? 100;
+        data["delta_temperature"] = this.deltaTemperature ?? -100;
         data["schedule"] = this.schedule;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

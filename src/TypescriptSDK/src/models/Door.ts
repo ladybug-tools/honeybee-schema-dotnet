@@ -78,12 +78,12 @@ export class Door extends IDdBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Door, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(Door, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.geometry = obj.geometry;
             this.boundaryCondition = obj.boundaryCondition;
             this.properties = obj.properties;
-            this.type = obj.type;
-            this.isGlass = obj.isGlass;
+            this.type = obj.type ?? "Door";
+            this.isGlass = obj.isGlass ?? false;
             this.indoorShades = obj.indoorShades;
             this.outdoorShades = obj.outdoorShades;
         }
@@ -110,12 +110,12 @@ export class Door extends IDdBaseModel {
         data["geometry"] = this.geometry;
         data["boundary_condition"] = this.boundaryCondition;
         data["properties"] = this.properties;
-        data["type"] = this.type;
-        data["is_glass"] = this.isGlass;
+        data["type"] = this.type ?? "Door";
+        data["is_glass"] = this.isGlass ?? false;
         data["indoor_shades"] = this.indoorShades;
         data["outdoor_shades"] = this.outdoorShades;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

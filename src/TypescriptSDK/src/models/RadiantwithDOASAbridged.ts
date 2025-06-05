@@ -95,17 +95,17 @@ export class RadiantwithDOASAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(RadiantwithDOASAbridged, _data, { enableImplicitConversion: true });
-            this.vintage = obj.vintage;
-            this.sensibleHeatRecovery = obj.sensibleHeatRecovery;
-            this.latentHeatRecovery = obj.latentHeatRecovery;
-            this.demandControlledVentilation = obj.demandControlledVentilation;
+            const obj = plainToClass(RadiantwithDOASAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
+            this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
+            this.demandControlledVentilation = obj.demandControlledVentilation ?? false;
             this.doasAvailabilitySchedule = obj.doasAvailabilitySchedule;
-            this.type = obj.type;
-            this.equipmentType = obj.equipmentType;
-            this.radiantFaceType = obj.radiantFaceType;
-            this.minimumOperationTime = obj.minimumOperationTime;
-            this.switchOverTime = obj.switchOverTime;
+            this.type = obj.type ?? "RadiantwithDOASAbridged";
+            this.equipmentType = obj.equipmentType ?? RadiantwithDOASEquipmentType.DOAS_Radiant_Chiller_Boiler;
+            this.radiantFaceType = obj.radiantFaceType ?? RadiantFaceTypes.Floor;
+            this.minimumOperationTime = obj.minimumOperationTime ?? 1;
+            this.switchOverTime = obj.switchOverTime ?? 24;
         }
     }
 
@@ -127,18 +127,18 @@ export class RadiantwithDOASAbridged extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["vintage"] = this.vintage;
-        data["sensible_heat_recovery"] = this.sensibleHeatRecovery;
-        data["latent_heat_recovery"] = this.latentHeatRecovery;
-        data["demand_controlled_ventilation"] = this.demandControlledVentilation;
+        data["vintage"] = this.vintage ?? Vintages.ASHRAE_2019;
+        data["sensible_heat_recovery"] = this.sensibleHeatRecovery ?? 0;
+        data["latent_heat_recovery"] = this.latentHeatRecovery ?? 0;
+        data["demand_controlled_ventilation"] = this.demandControlledVentilation ?? false;
         data["doas_availability_schedule"] = this.doasAvailabilitySchedule;
-        data["type"] = this.type;
-        data["equipment_type"] = this.equipmentType;
-        data["radiant_face_type"] = this.radiantFaceType;
-        data["minimum_operation_time"] = this.minimumOperationTime;
-        data["switch_over_time"] = this.switchOverTime;
+        data["type"] = this.type ?? "RadiantwithDOASAbridged";
+        data["equipment_type"] = this.equipmentType ?? RadiantwithDOASEquipmentType.DOAS_Radiant_Chiller_Boiler;
+        data["radiant_face_type"] = this.radiantFaceType ?? RadiantFaceTypes.Floor;
+        data["minimum_operation_time"] = this.minimumOperationTime ?? 1;
+        data["switch_over_time"] = this.switchOverTime ?? 24;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

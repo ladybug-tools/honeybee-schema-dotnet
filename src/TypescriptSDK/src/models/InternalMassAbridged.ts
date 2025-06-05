@@ -35,10 +35,10 @@ export class InternalMassAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(InternalMassAbridged, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(InternalMassAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.construction = obj.construction;
             this.area = obj.area;
-            this.type = obj.type;
+            this.type = obj.type ?? "InternalMassAbridged";
         }
     }
 
@@ -62,9 +62,9 @@ export class InternalMassAbridged extends IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
         data["construction"] = this.construction;
         data["area"] = this.area;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "InternalMassAbridged";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

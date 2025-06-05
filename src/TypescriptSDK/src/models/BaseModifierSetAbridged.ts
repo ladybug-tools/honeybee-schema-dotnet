@@ -33,10 +33,10 @@ export class BaseModifierSetAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(BaseModifierSetAbridged, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(BaseModifierSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.exteriorModifier = obj.exteriorModifier;
             this.interiorModifier = obj.interiorModifier;
-            this.type = obj.type;
+            this.type = obj.type ?? "BaseModifierSetAbridged";
         }
     }
 
@@ -60,9 +60,9 @@ export class BaseModifierSetAbridged extends _OpenAPIGenBaseModel {
         data = typeof data === 'object' ? data : {};
         data["exterior_modifier"] = this.exteriorModifier;
         data["interior_modifier"] = this.interiorModifier;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "BaseModifierSetAbridged";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

@@ -93,8 +93,8 @@ export class ProgramTypeAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ProgramTypeAbridged, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
+            const obj = plainToClass(ProgramTypeAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "ProgramTypeAbridged";
             this.people = obj.people;
             this.lighting = obj.lighting;
             this.electricEquipment = obj.electricEquipment;
@@ -124,7 +124,7 @@ export class ProgramTypeAbridged extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["type"] = this.type ?? "ProgramTypeAbridged";
         data["people"] = this.people;
         data["lighting"] = this.lighting;
         data["electric_equipment"] = this.electricEquipment;
@@ -134,7 +134,7 @@ export class ProgramTypeAbridged extends IDdEnergyBaseModel {
         data["ventilation"] = this.ventilation;
         data["setpoint"] = this.setpoint;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

@@ -32,10 +32,10 @@ export class LineSegment3D {
 
     init(_data?: any) {
         if (_data) {
-            const obj = plainToClass(LineSegment3D, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(LineSegment3D, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.p = obj.p;
             this.v = obj.v;
-            this.type = obj.type;
+            this.type = obj.type ?? "LineSegment3D";
         }
     }
 
@@ -59,8 +59,8 @@ export class LineSegment3D {
         data = typeof data === 'object' ? data : {};
         data["p"] = this.p;
         data["v"] = this.v;
-        data["type"] = this.type;
-        return instanceToPlain(data);
+        data["type"] = this.type ?? "LineSegment3D";
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

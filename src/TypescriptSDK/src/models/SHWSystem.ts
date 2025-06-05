@@ -50,12 +50,12 @@ export class SHWSystem extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(SHWSystem, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.equipmentType = obj.equipmentType;
-            this.heaterEfficiency = obj.heaterEfficiency;
-            this.ambientCondition = obj.ambientCondition;
-            this.ambientLossCoefficient = obj.ambientLossCoefficient;
+            const obj = plainToClass(SHWSystem, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "SHWSystem";
+            this.equipmentType = obj.equipmentType ?? SHWEquipmentType.Gas_WaterHeater;
+            this.heaterEfficiency = obj.heaterEfficiency ?? new Autocalculate();
+            this.ambientCondition = obj.ambientCondition ?? 22;
+            this.ambientLossCoefficient = obj.ambientLossCoefficient ?? 6;
         }
     }
 
@@ -77,13 +77,13 @@ export class SHWSystem extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["equipment_type"] = this.equipmentType;
-        data["heater_efficiency"] = this.heaterEfficiency;
-        data["ambient_condition"] = this.ambientCondition;
-        data["ambient_loss_coefficient"] = this.ambientLossCoefficient;
+        data["type"] = this.type ?? "SHWSystem";
+        data["equipment_type"] = this.equipmentType ?? SHWEquipmentType.Gas_WaterHeater;
+        data["heater_efficiency"] = this.heaterEfficiency ?? new Autocalculate();
+        data["ambient_condition"] = this.ambientCondition ?? 22;
+        data["ambient_loss_coefficient"] = this.ambientLossCoefficient ?? 6;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

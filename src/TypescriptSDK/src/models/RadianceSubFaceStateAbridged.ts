@@ -38,10 +38,10 @@ export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(RadianceSubFaceStateAbridged, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(RadianceSubFaceStateAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.vmtxGeometry = obj.vmtxGeometry;
             this.dmtxGeometry = obj.dmtxGeometry;
-            this.type = obj.type;
+            this.type = obj.type ?? "RadianceSubFaceStateAbridged";
         }
     }
 
@@ -65,9 +65,9 @@ export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
         data = typeof data === 'object' ? data : {};
         data["vmtx_geometry"] = this.vmtxGeometry;
         data["dmtx_geometry"] = this.dmtxGeometry;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "RadianceSubFaceStateAbridged";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

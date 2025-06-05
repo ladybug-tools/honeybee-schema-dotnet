@@ -26,9 +26,9 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(IDdEnergyBaseModel, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(IDdEnergyBaseModel, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.userData = obj.userData;
-            this.type = obj.type;
+            this.type = obj.type ?? "IDdEnergyBaseModel";
         }
     }
 
@@ -51,9 +51,9 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["user_data"] = this.userData;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "IDdEnergyBaseModel";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

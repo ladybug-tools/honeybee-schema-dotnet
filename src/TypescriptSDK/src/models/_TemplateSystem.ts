@@ -30,9 +30,9 @@ export class _TemplateSystem extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(_TemplateSystem, _data, { enableImplicitConversion: true });
-            this.vintage = obj.vintage;
-            this.type = obj.type;
+            const obj = plainToClass(_TemplateSystem, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.type = obj.type ?? "_TemplateSystem";
         }
     }
 
@@ -54,10 +54,10 @@ export class _TemplateSystem extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["vintage"] = this.vintage;
-        data["type"] = this.type;
+        data["vintage"] = this.vintage ?? Vintages.ASHRAE_2019;
+        data["type"] = this.type ?? "_TemplateSystem";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

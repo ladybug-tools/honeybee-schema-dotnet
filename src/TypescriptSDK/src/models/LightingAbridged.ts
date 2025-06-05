@@ -71,14 +71,14 @@ export class LightingAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(LightingAbridged, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(LightingAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.wattsPerArea = obj.wattsPerArea;
             this.schedule = obj.schedule;
-            this.type = obj.type;
-            this.visibleFraction = obj.visibleFraction;
-            this.radiantFraction = obj.radiantFraction;
-            this.returnAirFraction = obj.returnAirFraction;
-            this.baselineWattsPerArea = obj.baselineWattsPerArea;
+            this.type = obj.type ?? "LightingAbridged";
+            this.visibleFraction = obj.visibleFraction ?? 0.25;
+            this.radiantFraction = obj.radiantFraction ?? 0.32;
+            this.returnAirFraction = obj.returnAirFraction ?? 0;
+            this.baselineWattsPerArea = obj.baselineWattsPerArea ?? 11.84029;
         }
     }
 
@@ -102,13 +102,13 @@ export class LightingAbridged extends IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
         data["watts_per_area"] = this.wattsPerArea;
         data["schedule"] = this.schedule;
-        data["type"] = this.type;
-        data["visible_fraction"] = this.visibleFraction;
-        data["radiant_fraction"] = this.radiantFraction;
-        data["return_air_fraction"] = this.returnAirFraction;
-        data["baseline_watts_per_area"] = this.baselineWattsPerArea;
+        data["type"] = this.type ?? "LightingAbridged";
+        data["visible_fraction"] = this.visibleFraction ?? 0.25;
+        data["radiant_fraction"] = this.radiantFraction ?? 0.32;
+        data["return_air_fraction"] = this.returnAirFraction ?? 0;
+        data["baseline_watts_per_area"] = this.baselineWattsPerArea ?? 11.84029;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

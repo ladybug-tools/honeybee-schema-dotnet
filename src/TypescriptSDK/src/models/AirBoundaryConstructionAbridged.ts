@@ -37,9 +37,9 @@ export class AirBoundaryConstructionAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(AirBoundaryConstructionAbridged, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.airMixingPerArea = obj.airMixingPerArea;
+            const obj = plainToClass(AirBoundaryConstructionAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "AirBoundaryConstructionAbridged";
+            this.airMixingPerArea = obj.airMixingPerArea ?? 0.1;
             this.airMixingSchedule = obj.airMixingSchedule;
         }
     }
@@ -62,11 +62,11 @@ export class AirBoundaryConstructionAbridged extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["air_mixing_per_area"] = this.airMixingPerArea;
+        data["type"] = this.type ?? "AirBoundaryConstructionAbridged";
+        data["air_mixing_per_area"] = this.airMixingPerArea ?? 0.1;
         data["air_mixing_schedule"] = this.airMixingSchedule;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

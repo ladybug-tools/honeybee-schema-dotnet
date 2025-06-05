@@ -33,10 +33,10 @@ export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(_PropertiesBaseAbridged, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(_PropertiesBaseAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.modifier = obj.modifier;
             this.modifierBlk = obj.modifierBlk;
-            this.type = obj.type;
+            this.type = obj.type ?? "_PropertiesBaseAbridged";
         }
     }
 
@@ -60,9 +60,9 @@ export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
         data = typeof data === 'object' ? data : {};
         data["modifier"] = this.modifier;
         data["modifier_blk"] = this.modifierBlk;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "_PropertiesBaseAbridged";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

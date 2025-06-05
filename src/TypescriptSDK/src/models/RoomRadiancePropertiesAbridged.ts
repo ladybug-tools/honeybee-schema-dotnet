@@ -27,8 +27,8 @@ export class RoomRadiancePropertiesAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(RoomRadiancePropertiesAbridged, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
+            const obj = plainToClass(RoomRadiancePropertiesAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "RoomRadiancePropertiesAbridged";
             this.modifierSet = obj.modifierSet;
         }
     }
@@ -51,10 +51,10 @@ export class RoomRadiancePropertiesAbridged extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["type"] = this.type ?? "RoomRadiancePropertiesAbridged";
         data["modifier_set"] = this.modifierSet;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

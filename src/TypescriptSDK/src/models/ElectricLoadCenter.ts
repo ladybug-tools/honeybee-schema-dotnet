@@ -36,10 +36,10 @@ export class ElectricLoadCenter extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ElectricLoadCenter, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.inverterEfficiency = obj.inverterEfficiency;
-            this.inverterDcToAcSizeRatio = obj.inverterDcToAcSizeRatio;
+            const obj = plainToClass(ElectricLoadCenter, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "ElectricLoadCenter";
+            this.inverterEfficiency = obj.inverterEfficiency ?? 0.96;
+            this.inverterDcToAcSizeRatio = obj.inverterDcToAcSizeRatio ?? 1.1;
         }
     }
 
@@ -61,11 +61,11 @@ export class ElectricLoadCenter extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["inverter_efficiency"] = this.inverterEfficiency;
-        data["inverter_dc_to_ac_size_ratio"] = this.inverterDcToAcSizeRatio;
+        data["type"] = this.type ?? "ElectricLoadCenter";
+        data["inverter_efficiency"] = this.inverterEfficiency ?? 0.96;
+        data["inverter_dc_to_ac_size_ratio"] = this.inverterDcToAcSizeRatio ?? 1.1;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

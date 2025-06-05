@@ -36,10 +36,10 @@ export class AFNCrack extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(AFNCrack, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(AFNCrack, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.flowCoefficient = obj.flowCoefficient;
-            this.type = obj.type;
-            this.flowExponent = obj.flowExponent;
+            this.type = obj.type ?? "AFNCrack";
+            this.flowExponent = obj.flowExponent ?? 0.65;
         }
     }
 
@@ -62,10 +62,10 @@ export class AFNCrack extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["flow_coefficient"] = this.flowCoefficient;
-        data["type"] = this.type;
-        data["flow_exponent"] = this.flowExponent;
+        data["type"] = this.type ?? "AFNCrack";
+        data["flow_exponent"] = this.flowExponent ?? 0.65;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

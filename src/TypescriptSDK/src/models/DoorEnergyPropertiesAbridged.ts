@@ -38,8 +38,8 @@ export class DoorEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DoorEnergyPropertiesAbridged, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
+            const obj = plainToClass(DoorEnergyPropertiesAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "DoorEnergyPropertiesAbridged";
             this.construction = obj.construction;
             this.ventOpening = obj.ventOpening;
         }
@@ -63,11 +63,11 @@ export class DoorEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["type"] = this.type ?? "DoorEnergyPropertiesAbridged";
         data["construction"] = this.construction;
         data["vent_opening"] = this.ventOpening;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

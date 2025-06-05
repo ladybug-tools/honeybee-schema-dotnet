@@ -41,11 +41,11 @@ export class EnergyWindowMaterialSimpleGlazSys extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyWindowMaterialSimpleGlazSys, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(EnergyWindowMaterialSimpleGlazSys, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.uFactor = obj.uFactor;
             this.shgc = obj.shgc;
-            this.type = obj.type;
-            this.vt = obj.vt;
+            this.type = obj.type ?? "EnergyWindowMaterialSimpleGlazSys";
+            this.vt = obj.vt ?? 0.54;
         }
     }
 
@@ -69,10 +69,10 @@ export class EnergyWindowMaterialSimpleGlazSys extends IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
         data["u_factor"] = this.uFactor;
         data["shgc"] = this.shgc;
-        data["type"] = this.type;
-        data["vt"] = this.vt;
+        data["type"] = this.type ?? "EnergyWindowMaterialSimpleGlazSys";
+        data["vt"] = this.vt ?? 0.54;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

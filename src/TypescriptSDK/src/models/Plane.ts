@@ -42,10 +42,10 @@ export class Plane extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Plane, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(Plane, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.n = obj.n;
             this.o = obj.o;
-            this.type = obj.type;
+            this.type = obj.type ?? "Plane";
             this.x = obj.x;
         }
     }
@@ -70,10 +70,10 @@ export class Plane extends _OpenAPIGenBaseModel {
         data = typeof data === 'object' ? data : {};
         data["n"] = this.n;
         data["o"] = this.o;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "Plane";
         data["x"] = this.x;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

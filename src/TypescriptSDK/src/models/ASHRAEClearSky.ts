@@ -29,9 +29,9 @@ export class ASHRAEClearSky extends _SkyCondition {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ASHRAEClearSky, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(ASHRAEClearSky, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.clearness = obj.clearness;
-            this.type = obj.type;
+            this.type = obj.type ?? "ASHRAEClearSky";
         }
     }
 
@@ -54,9 +54,9 @@ export class ASHRAEClearSky extends _SkyCondition {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["clearness"] = this.clearness;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "ASHRAEClearSky";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

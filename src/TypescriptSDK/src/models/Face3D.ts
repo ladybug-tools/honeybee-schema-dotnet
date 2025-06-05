@@ -45,9 +45,9 @@ export class Face3D extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Face3D, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(Face3D, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.boundary = obj.boundary;
-            this.type = obj.type;
+            this.type = obj.type ?? "Face3D";
             this.holes = obj.holes;
             this.plane = obj.plane;
         }
@@ -72,11 +72,11 @@ export class Face3D extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["boundary"] = this.boundary;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "Face3D";
         data["holes"] = this.holes;
         data["plane"] = this.plane;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

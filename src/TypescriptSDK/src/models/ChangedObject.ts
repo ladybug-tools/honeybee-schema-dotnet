@@ -75,16 +75,16 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ChangedObject, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(ChangedObject, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.elementType = obj.elementType;
             this.elementId = obj.elementId;
             this.geometryChanged = obj.geometryChanged;
             this.geometry = obj.geometry;
             this.elementName = obj.elementName;
-            this.energyChanged = obj.energyChanged;
-            this.radianceChanged = obj.radianceChanged;
+            this.energyChanged = obj.energyChanged ?? false;
+            this.radianceChanged = obj.radianceChanged ?? false;
             this.existingGeometry = obj.existingGeometry;
-            this.type = obj.type;
+            this.type = obj.type ?? "ChangedObject";
         }
     }
 
@@ -111,12 +111,12 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
         data["geometry_changed"] = this.geometryChanged;
         data["geometry"] = this.geometry;
         data["element_name"] = this.elementName;
-        data["energy_changed"] = this.energyChanged;
-        data["radiance_changed"] = this.radianceChanged;
+        data["energy_changed"] = this.energyChanged ?? false;
+        data["radiance_changed"] = this.radianceChanged ?? false;
         data["existing_geometry"] = this.existingGeometry;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "ChangedObject";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

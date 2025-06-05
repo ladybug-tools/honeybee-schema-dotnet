@@ -52,12 +52,12 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ScheduleTypeLimit, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.lowerLimit = obj.lowerLimit;
-            this.upperLimit = obj.upperLimit;
-            this.numericType = obj.numericType;
-            this.unitType = obj.unitType;
+            const obj = plainToClass(ScheduleTypeLimit, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "ScheduleTypeLimit";
+            this.lowerLimit = obj.lowerLimit ?? new NoLimit();
+            this.upperLimit = obj.upperLimit ?? new NoLimit();
+            this.numericType = obj.numericType ?? ScheduleNumericType.Continuous;
+            this.unitType = obj.unitType ?? ScheduleUnitType.Dimensionless;
         }
     }
 
@@ -79,13 +79,13 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["lower_limit"] = this.lowerLimit;
-        data["upper_limit"] = this.upperLimit;
-        data["numeric_type"] = this.numericType;
-        data["unit_type"] = this.unitType;
+        data["type"] = this.type ?? "ScheduleTypeLimit";
+        data["lower_limit"] = this.lowerLimit ?? new NoLimit();
+        data["upper_limit"] = this.upperLimit ?? new NoLimit();
+        data["numeric_type"] = this.numericType ?? ScheduleNumericType.Continuous;
+        data["unit_type"] = this.unitType ?? ScheduleUnitType.Dimensionless;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

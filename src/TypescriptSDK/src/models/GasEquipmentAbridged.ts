@@ -21,8 +21,8 @@ export class GasEquipmentAbridged extends _EquipmentBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(GasEquipmentAbridged, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
+            const obj = plainToClass(GasEquipmentAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "GasEquipmentAbridged";
         }
     }
 
@@ -44,9 +44,9 @@ export class GasEquipmentAbridged extends _EquipmentBase {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["type"] = this.type ?? "GasEquipmentAbridged";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

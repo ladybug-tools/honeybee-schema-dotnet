@@ -77,14 +77,14 @@ export class DesignDay extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DesignDay, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(DesignDay, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.name = obj.name;
             this.dayType = obj.dayType;
             this.dryBulbCondition = obj.dryBulbCondition;
             this.humidityCondition = obj.humidityCondition;
             this.windCondition = obj.windCondition;
             this.skyCondition = obj.skyCondition;
-            this.type = obj.type;
+            this.type = obj.type ?? "DesignDay";
         }
     }
 
@@ -112,9 +112,9 @@ export class DesignDay extends _OpenAPIGenBaseModel {
         data["humidity_condition"] = this.humidityCondition;
         data["wind_condition"] = this.windCondition;
         data["sky_condition"] = this.skyCondition;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "DesignDay";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

@@ -36,11 +36,11 @@ export class Point3D {
 
     init(_data?: any) {
         if (_data) {
-            const obj = plainToClass(Point3D, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(Point3D, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.x = obj.x;
             this.y = obj.y;
             this.z = obj.z;
-            this.type = obj.type;
+            this.type = obj.type ?? "Point3D";
         }
     }
 
@@ -65,8 +65,8 @@ export class Point3D {
         data["x"] = this.x;
         data["y"] = this.y;
         data["z"] = this.z;
-        data["type"] = this.type;
-        return instanceToPlain(data);
+        data["type"] = this.type ?? "Point3D";
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

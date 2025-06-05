@@ -111,14 +111,14 @@ export class Mirror extends ModifierBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Mirror, _data, { enableImplicitConversion: true });
-            this.modifier = obj.modifier;
+            const obj = plainToClass(Mirror, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.modifier = obj.modifier ?? new Void();
             this.dependencies = obj.dependencies;
-            this.rReflectance = obj.rReflectance;
-            this.gReflectance = obj.gReflectance;
-            this.bReflectance = obj.bReflectance;
+            this.rReflectance = obj.rReflectance ?? 1;
+            this.gReflectance = obj.gReflectance ?? 1;
+            this.bReflectance = obj.bReflectance ?? 1;
             this.alternateMaterial = obj.alternateMaterial;
-            this.type = obj.type;
+            this.type = obj.type ?? "Mirror";
         }
     }
 
@@ -140,15 +140,15 @@ export class Mirror extends ModifierBase {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["modifier"] = this.modifier;
+        data["modifier"] = this.modifier ?? new Void();
         data["dependencies"] = this.dependencies;
-        data["r_reflectance"] = this.rReflectance;
-        data["g_reflectance"] = this.gReflectance;
-        data["b_reflectance"] = this.bReflectance;
+        data["r_reflectance"] = this.rReflectance ?? 1;
+        data["g_reflectance"] = this.gReflectance ?? 1;
+        data["b_reflectance"] = this.bReflectance ?? 1;
         data["alternate_material"] = this.alternateMaterial;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "Mirror";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

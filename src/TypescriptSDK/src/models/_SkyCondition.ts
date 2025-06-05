@@ -35,10 +35,10 @@ export class _SkyCondition extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(_SkyCondition, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(_SkyCondition, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.date = obj.date;
-            this.daylightSavings = obj.daylightSavings;
-            this.type = obj.type;
+            this.daylightSavings = obj.daylightSavings ?? false;
+            this.type = obj.type ?? "_SkyCondition";
         }
     }
 
@@ -61,10 +61,10 @@ export class _SkyCondition extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["date"] = this.date;
-        data["daylight_savings"] = this.daylightSavings;
-        data["type"] = this.type;
+        data["daylight_savings"] = this.daylightSavings ?? false;
+        data["type"] = this.type ?? "_SkyCondition";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

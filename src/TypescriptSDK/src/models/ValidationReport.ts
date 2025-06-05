@@ -61,13 +61,13 @@ export class ValidationReport {
 
     init(_data?: any) {
         if (_data) {
-            const obj = plainToClass(ValidationReport, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(ValidationReport, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.appVersion = obj.appVersion;
             this.schemaVersion = obj.schemaVersion;
             this.valid = obj.valid;
-            this.type = obj.type;
-            this.appName = obj.appName;
-            this.fatalError = obj.fatalError;
+            this.type = obj.type ?? "ValidationReport";
+            this.appName = obj.appName ?? "Honeybee";
+            this.fatalError = obj.fatalError ?? "";
             this.errors = obj.errors;
         }
     }
@@ -93,11 +93,11 @@ export class ValidationReport {
         data["app_version"] = this.appVersion;
         data["schema_version"] = this.schemaVersion;
         data["valid"] = this.valid;
-        data["type"] = this.type;
-        data["app_name"] = this.appName;
-        data["fatal_error"] = this.fatalError;
+        data["type"] = this.type ?? "ValidationReport";
+        data["app_name"] = this.appName ?? "Honeybee";
+        data["fatal_error"] = this.fatalError ?? "";
         data["errors"] = this.errors;
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

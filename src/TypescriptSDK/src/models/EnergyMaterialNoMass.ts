@@ -63,13 +63,13 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyMaterialNoMass, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(EnergyMaterialNoMass, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.rValue = obj.rValue;
-            this.type = obj.type;
-            this.roughness = obj.roughness;
-            this.thermalAbsorptance = obj.thermalAbsorptance;
-            this.solarAbsorptance = obj.solarAbsorptance;
-            this.visibleAbsorptance = obj.visibleAbsorptance;
+            this.type = obj.type ?? "EnergyMaterialNoMass";
+            this.roughness = obj.roughness ?? Roughness.MediumRough;
+            this.thermalAbsorptance = obj.thermalAbsorptance ?? 0.9;
+            this.solarAbsorptance = obj.solarAbsorptance ?? 0.7;
+            this.visibleAbsorptance = obj.visibleAbsorptance ?? 0.7;
         }
     }
 
@@ -92,13 +92,13 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["r_value"] = this.rValue;
-        data["type"] = this.type;
-        data["roughness"] = this.roughness;
-        data["thermal_absorptance"] = this.thermalAbsorptance;
-        data["solar_absorptance"] = this.solarAbsorptance;
-        data["visible_absorptance"] = this.visibleAbsorptance;
+        data["type"] = this.type ?? "EnergyMaterialNoMass";
+        data["roughness"] = this.roughness ?? Roughness.MediumRough;
+        data["thermal_absorptance"] = this.thermalAbsorptance ?? 0.9;
+        data["solar_absorptance"] = this.solarAbsorptance ?? 0.7;
+        data["visible_absorptance"] = this.visibleAbsorptance ?? 0.7;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

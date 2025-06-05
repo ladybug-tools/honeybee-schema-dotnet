@@ -60,13 +60,13 @@ export class InfiltrationAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(InfiltrationAbridged, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(InfiltrationAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.flowPerExteriorArea = obj.flowPerExteriorArea;
             this.schedule = obj.schedule;
-            this.type = obj.type;
-            this.constantCoefficient = obj.constantCoefficient;
-            this.temperatureCoefficient = obj.temperatureCoefficient;
-            this.velocityCoefficient = obj.velocityCoefficient;
+            this.type = obj.type ?? "InfiltrationAbridged";
+            this.constantCoefficient = obj.constantCoefficient ?? 1;
+            this.temperatureCoefficient = obj.temperatureCoefficient ?? 0;
+            this.velocityCoefficient = obj.velocityCoefficient ?? 0;
         }
     }
 
@@ -90,12 +90,12 @@ export class InfiltrationAbridged extends IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
         data["flow_per_exterior_area"] = this.flowPerExteriorArea;
         data["schedule"] = this.schedule;
-        data["type"] = this.type;
-        data["constant_coefficient"] = this.constantCoefficient;
-        data["temperature_coefficient"] = this.temperatureCoefficient;
-        data["velocity_coefficient"] = this.velocityCoefficient;
+        data["type"] = this.type ?? "InfiltrationAbridged";
+        data["constant_coefficient"] = this.constantCoefficient ?? 1;
+        data["temperature_coefficient"] = this.temperatureCoefficient ?? 0;
+        data["velocity_coefficient"] = this.velocityCoefficient ?? 0;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {
