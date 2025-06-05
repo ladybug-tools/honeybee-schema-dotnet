@@ -15,11 +15,11 @@ test('test model', () => {
 
   const json = JSON.parse(jsonData);
   const model = Model.fromJS(json);
-  expect(model.display_name).toBe("ShoeBox0.5");
+  expect(model.displayName).toBe("ShoeBox0.5");
   expect(model.validate()).resolves.toBe(true);
 
 
-  const doorSet = model.properties.energy?.global_construction_set?.door_set;
+  const doorSet = model.properties.energy?.globalConstructionSet?.doorSet;
   expect(doorSet).toBeInstanceOf(DoorConstructionSetAbridged);
 });
 
@@ -31,7 +31,7 @@ test('test face3D', () => {
       [5.0, 0.0, 3.3],
       [5.0, 0.0, 0.0]
     ]
-  }
+  };
   const loc = plainToClass(Face3D, json);
   expect(loc.validate()).resolves.toBe(true);
 
@@ -41,7 +41,7 @@ test('test face3D', () => {
       [5.0, 0.0, "aa"],
       [5.0, 0.0, 0.0]
     ]
-  }
+  };
   const loc2 = plainToClass(Face3D, json2);
   expect(loc2.validate()).rejects.toThrow("Validation failed");
 
@@ -53,7 +53,7 @@ test('test face3D', () => {
 test('test glass', () => {
   const json = {
     "modifier": {
-        "type": "Void"
+      "type": "Void"
     },
     "type": "Glass",
     "identifier": "generic_interior_window_vis_0.88",
@@ -62,7 +62,7 @@ test('test glass', () => {
     "b_transmissivity": 0.9584154328610596,
     "refraction_index": null,
     "dependencies": []
-  }
+  };
   const loc = Glass.fromJS(json);
   expect(loc.validate()).resolves.toBe(true);
 
@@ -87,7 +87,7 @@ test('test toJson', () => {
   // test toJSON to plain object
   json = obj.toJSON();
   expect(json).toHaveProperty('plane');
-  expect( json.plane instanceof Plane).toBe(false);
+  expect(json.plane instanceof Plane).toBe(false);
 
 });
 
@@ -104,46 +104,46 @@ test('test toJson2', () => {
 
 const GlobalModifierSetData = {
   "shade_set": {
-      "type": "ShadeModifierSetAbridged",
-      "interior_modifier": "generic_interior_shade_0.50",
-      "exterior_modifier": "generic_exterior_shade_0.35"
+    "type": "ShadeModifierSetAbridged",
+    "interior_modifier": "generic_interior_shade_0.50",
+    "exterior_modifier": "generic_exterior_shade_0.35"
   },
   "roof_ceiling_set": {
-      "type": "RoofCeilingModifierSetAbridged",
-      "interior_modifier": "generic_ceiling_0.80",
-      "exterior_modifier": "generic_ceiling_0.80"
+    "type": "RoofCeilingModifierSetAbridged",
+    "interior_modifier": "generic_ceiling_0.80",
+    "exterior_modifier": "generic_ceiling_0.80"
   },
   "context_modifier": "generic_context_0.20",
   "modifiers": [
-      {
-          "dependencies": [],
-          "modifier": null,
-          "g_reflectance": 0.5,
-          "identifier": "generic_wall_0.50",
-          "specularity": 0,
-          "b_reflectance": 0.5,
-          "r_reflectance": 0.5,
-          "type": "Plastic",
-          "roughness": 0
-      },
-      {
-          "b_transmissivity": 0.9584154328610596,
-          "r_transmissivity": 0.9584154328610596,
-          "modifier": null,
-          "identifier": "generic_interior_window_vis_0.88",
-          "refraction_index": null,
-          "type": "Glass",
-          "dependencies": [],
-          "g_transmissivity": 0.9584154328610596
-      }
+    {
+      "dependencies": [],
+      "modifier": null,
+      "g_reflectance": 0.5,
+      "identifier": "generic_wall_0.50",
+      "specularity": 0,
+      "b_reflectance": 0.5,
+      "r_reflectance": 0.5,
+      "type": "Plastic",
+      "roughness": 0
+    },
+    {
+      "b_transmissivity": 0.9584154328610596,
+      "r_transmissivity": 0.9584154328610596,
+      "modifier": null,
+      "identifier": "generic_interior_window_vis_0.88",
+      "refraction_index": null,
+      "type": "Glass",
+      "dependencies": [],
+      "g_transmissivity": 0.9584154328610596
+    }
   ],
-  
+
   "type": "GlobalModifierSet",
 };
 
 test('test modifiers', () => {
   const data = GlobalModifierSetData;
-  
+
   const obj = GlobalModifierSet.fromJS(data);
   const mod = obj.modifiers?.at(0);
   expect(mod).toBeInstanceOf(Plastic);
@@ -151,7 +151,7 @@ test('test modifiers', () => {
 
   const glass = obj.modifiers?.at(1) as Glass;
   expect(glass).toBeInstanceOf(Glass);
-  expect(glass.b_transmissivity).toBe(0.9584154328610596);
+  expect(glass.bTransmissivity).toBe(0.9584154328610596);
 }
 );
 
@@ -173,13 +173,18 @@ test('test Plastic', () => {
     "identifier": "generic_wall_0.50",
     "specularity": 0,
     "b_reflectance": 0.5,
-    "r_reflectance": 0.5,
+    "r_reflectance": 0.551,
     "type": "Plastic",
     "roughness": 0
-};
+  };
 
   const obj = Plastic.fromJS(data);
   expect(obj).toBeInstanceOf(Plastic);
   expect(obj?.identifier).toBe('generic_wall_0.50');
+  expect(obj?.rReflectance).toBe(0.551);
+
+  const jsObj = obj.toJSON();
+  expect(jsObj?.r_reflectance).toBe(0.551);
+
 }
 );
