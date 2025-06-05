@@ -24,13 +24,15 @@ jobs:
 
       - name: "Run SchemaGenerator"
         run: |
-          cd ./.generator/SchemaGenerator
-          dotnet run --download --genCsModel --genCsInterface --genTsModel --updateVersion
+          make sdk
 
       - name: "Run build"
         run: |
-          cd ./src/CSharpSDK
-          dotnet build
+          make build
+
+      - name: "Run tests"
+        run: |
+          make test
 
       - name: "Commit and Push Changes"
         id: push
