@@ -1,5 +1,5 @@
 ﻿import { IsString, IsDefined, Matches, MinLength, MaxLength, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects requiring a valid EnergyPlus identifier. */
@@ -9,19 +9,22 @@ export class EnergyBaseModel extends _OpenAPIGenBaseModel {
     @Matches(/^[^,;!\n\t]+$/)
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "identifier" })
     /** Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t). */
     identifier!: string;
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "display_name" })
     /** Display name of the object with no character restrictions. */
-    display_name?: string;
+    displayName?: string;
 	
     @IsString()
     @IsOptional()
     @Matches(/^EnergyBaseModel$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "EnergyBaseModel";
 	
 
     constructor() {
@@ -35,7 +38,7 @@ export class EnergyBaseModel extends _OpenAPIGenBaseModel {
         if (_data) {
             const obj = plainToClass(EnergyBaseModel, _data, { enableImplicitConversion: true });
             this.identifier = obj.identifier;
-            this.display_name = obj.display_name;
+            this.displayName = obj.displayName;
             this.type = obj.type;
         }
     }
@@ -59,7 +62,7 @@ export class EnergyBaseModel extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["identifier"] = this.identifier;
-        data["display_name"] = this.display_name;
+        data["display_name"] = this.displayName;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -74,4 +77,3 @@ export class EnergyBaseModel extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

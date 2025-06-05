@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { RoomDoe2Properties } from "./RoomDoe2Properties";
 import { RoomEnergyPropertiesAbridged } from "./RoomEnergyPropertiesAbridged";
@@ -9,28 +9,32 @@ export class RoomPropertiesAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^RoomPropertiesAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "RoomPropertiesAbridged";
 	
     @IsInstance(RoomEnergyPropertiesAbridged)
     @Type(() => RoomEnergyPropertiesAbridged)
     @ValidateNested()
     @IsOptional()
-    /** Energy */
+    @Expose({ name: "energy" })
+    /** energy */
     energy?: RoomEnergyPropertiesAbridged;
 	
     @IsInstance(RoomRadiancePropertiesAbridged)
     @Type(() => RoomRadiancePropertiesAbridged)
     @ValidateNested()
     @IsOptional()
-    /** Radiance */
+    @Expose({ name: "radiance" })
+    /** radiance */
     radiance?: RoomRadiancePropertiesAbridged;
 	
     @IsInstance(RoomDoe2Properties)
     @Type(() => RoomDoe2Properties)
     @ValidateNested()
     @IsOptional()
-    /** Doe2 */
+    @Expose({ name: "doe2" })
+    /** doe2 */
     doe2?: RoomDoe2Properties;
 	
 
@@ -86,4 +90,3 @@ export class RoomPropertiesAbridged extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

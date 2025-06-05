@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { BaseModifierSetAbridged } from "./BaseModifierSetAbridged";
 
 /** Abridged set containing radiance modifiers needed for a model's Doors. */
@@ -7,23 +7,27 @@ export class DoorModifierSetAbridged extends BaseModifierSetAbridged {
     @IsString()
     @IsOptional()
     @Matches(/^DoorModifierSetAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "DoorModifierSetAbridged";
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "interior_glass_modifier" })
     /** Identifier of modifier object for glass with a Surface boundary condition. */
-    interior_glass_modifier?: string;
+    interiorGlassModifier?: string;
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "exterior_glass_modifier" })
     /** Identifier of modifier object for glass with an Outdoors boundary condition. */
-    exterior_glass_modifier?: string;
+    exteriorGlassModifier?: string;
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "overhead_modifier" })
     /** Identifier of a modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face. */
-    overhead_modifier?: string;
+    overheadModifier?: string;
 	
 
     constructor() {
@@ -37,9 +41,9 @@ export class DoorModifierSetAbridged extends BaseModifierSetAbridged {
         if (_data) {
             const obj = plainToClass(DoorModifierSetAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.interior_glass_modifier = obj.interior_glass_modifier;
-            this.exterior_glass_modifier = obj.exterior_glass_modifier;
-            this.overhead_modifier = obj.overhead_modifier;
+            this.interiorGlassModifier = obj.interiorGlassModifier;
+            this.exteriorGlassModifier = obj.exteriorGlassModifier;
+            this.overheadModifier = obj.overheadModifier;
         }
     }
 
@@ -62,9 +66,9 @@ export class DoorModifierSetAbridged extends BaseModifierSetAbridged {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["interior_glass_modifier"] = this.interior_glass_modifier;
-        data["exterior_glass_modifier"] = this.exterior_glass_modifier;
-        data["overhead_modifier"] = this.overhead_modifier;
+        data["interior_glass_modifier"] = this.interiorGlassModifier;
+        data["exterior_glass_modifier"] = this.exteriorGlassModifier;
+        data["overhead_modifier"] = this.overheadModifier;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -78,4 +82,3 @@ export class DoorModifierSetAbridged extends BaseModifierSetAbridged {
         return true;
     }
 }
-

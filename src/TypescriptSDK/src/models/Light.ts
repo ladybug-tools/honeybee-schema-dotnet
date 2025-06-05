@@ -1,5 +1,5 @@
 ﻿import { IsOptional, IsArray, IsNumber, Min, Max, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
 import { Glow } from "./Glow";
@@ -13,6 +13,7 @@ import { Void } from "./Void";
 /** Radiance Light material. */
 export class Light extends ModifierBase {
     @IsOptional()
+    @Expose({ name: "modifier" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
@@ -27,10 +28,11 @@ export class Light extends ModifierBase {
       else return item;
     })
     /** Material modifier. */
-    modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
+    modifier: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) = new Void();
 	
     @IsArray()
     @IsOptional()
+    @Expose({ name: "dependencies" })
     @Transform(({ value }) => value.map((item: any) => {
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
       else if (item?.type === 'Glass') return Glass.fromJS(item);
@@ -50,36 +52,40 @@ export class Light extends ModifierBase {
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "r_emittance" })
     /** A value between 0 and 1 for the red channel of the modifier. */
-    r_emittance?: number;
+    rEmittance: number = 0;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "g_emittance" })
     /** A value between 0 and 1 for the green channel of the modifier. */
-    g_emittance?: number;
+    gEmittance: number = 0;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "b_emittance" })
     /** A value between 0 and 1 for the blue channel of the modifier. */
-    b_emittance?: number;
+    bEmittance: number = 0;
 	
     @IsString()
     @IsOptional()
     @Matches(/^Light$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Light";
 	
 
     constructor() {
         super();
         this.modifier = new Void();
-        this.r_emittance = 0;
-        this.g_emittance = 0;
-        this.b_emittance = 0;
+        this.rEmittance = 0;
+        this.gEmittance = 0;
+        this.bEmittance = 0;
         this.type = "Light";
     }
 
@@ -90,9 +96,9 @@ export class Light extends ModifierBase {
             const obj = plainToClass(Light, _data, { enableImplicitConversion: true });
             this.modifier = obj.modifier;
             this.dependencies = obj.dependencies;
-            this.r_emittance = obj.r_emittance;
-            this.g_emittance = obj.g_emittance;
-            this.b_emittance = obj.b_emittance;
+            this.rEmittance = obj.rEmittance;
+            this.gEmittance = obj.gEmittance;
+            this.bEmittance = obj.bEmittance;
             this.type = obj.type;
         }
     }
@@ -117,9 +123,9 @@ export class Light extends ModifierBase {
         data = typeof data === 'object' ? data : {};
         data["modifier"] = this.modifier;
         data["dependencies"] = this.dependencies;
-        data["r_emittance"] = this.r_emittance;
-        data["g_emittance"] = this.g_emittance;
-        data["b_emittance"] = this.b_emittance;
+        data["r_emittance"] = this.rEmittance;
+        data["g_emittance"] = this.gEmittance;
+        data["b_emittance"] = this.bEmittance;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -134,4 +140,3 @@ export class Light extends ModifierBase {
         return true;
     }
 }
-

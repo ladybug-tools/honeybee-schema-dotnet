@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { BaseModifierSetAbridged } from "./BaseModifierSetAbridged";
 
 /** Abridged set containing radiance modifiers needed for a model's Walls. */
@@ -7,8 +7,9 @@ export class WallModifierSetAbridged extends BaseModifierSetAbridged {
     @IsString()
     @IsOptional()
     @Matches(/^WallModifierSetAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "WallModifierSetAbridged";
 	
 
     constructor() {
@@ -57,4 +58,3 @@ export class WallModifierSetAbridged extends BaseModifierSetAbridged {
         return true;
     }
 }
-

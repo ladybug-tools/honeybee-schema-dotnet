@@ -1,25 +1,28 @@
 ﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 
 /** A single line segment face in 3D space. */
 export class LineSegment3D {
     @IsArray()
     @IsNumber({},{ each: true })
     @IsDefined()
+    @Expose({ name: "p" })
     /** Line segment base point as 3 (x, y, z) values. */
     p!: number[];
 	
     @IsArray()
     @IsNumber({},{ each: true })
     @IsDefined()
+    @Expose({ name: "v" })
     /** Line segment direction vector as 3 (x, y, z) values. */
     v!: number[];
 	
     @IsString()
     @IsOptional()
     @Matches(/^LineSegment3D$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "LineSegment3D";
 	
 
     constructor() {
@@ -57,21 +60,15 @@ export class LineSegment3D {
         data["p"] = this.p;
         data["v"] = this.v;
         data["type"] = this.type;
-        return removeUndefinedProperties(data);
+        return instanceToPlain(data);
     }
 
-}
-
-function removeUndefinedProperties(obj: any): any {
-    if (Array.isArray(obj)) {
-        return obj.map(removeUndefinedProperties);
-    } else if (obj !== null && typeof obj === 'object') {
-        return Object.entries(obj)
-        .filter(([_, value]) => value !== undefined)
-        .reduce((acc, [key, value]) => {
-            acc[key] = removeUndefinedProperties(value);
-            return acc;
-        }, {} as any);
+	async validate(): Promise<boolean> {
+        const errors = await validate(this);
+        if (errors.length > 0){
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error]).join(', ')).join('; ');
+      		throw new Error(`Validation failed: ${errorMessages}`);
+		}
+        return true;
     }
-    return obj;
 }

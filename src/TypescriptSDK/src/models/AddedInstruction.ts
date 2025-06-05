@@ -1,5 +1,5 @@
 ﻿import { IsEnum, IsDefined, IsString, Matches, MinLength, MaxLength, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { GeometryObjectTypes } from "./GeometryObjectTypes";
 
@@ -7,27 +7,31 @@ export class AddedInstruction extends _OpenAPIGenBaseModel {
     @IsEnum(GeometryObjectTypes)
     @Type(() => String)
     @IsDefined()
+    @Expose({ name: "element_type" })
     /** Text for the type of object that has been changed. */
-    element_type!: GeometryObjectTypes;
+    elementType!: GeometryObjectTypes;
 	
     @IsString()
     @IsDefined()
     @Matches(/^[^,;!\n\t]+$/)
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "element_id" })
     /** Text string for the unique object ID that has changed. */
-    element_id!: string;
+    elementId!: string;
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "element_name" })
     /** Text string for the display name of the object that has changed. */
-    element_name?: string;
+    elementName?: string;
 	
     @IsString()
     @IsOptional()
     @Matches(/^AddedInstruction$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "AddedInstruction";
 	
 
     constructor() {
@@ -40,9 +44,9 @@ export class AddedInstruction extends _OpenAPIGenBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(AddedInstruction, _data, { enableImplicitConversion: true });
-            this.element_type = obj.element_type;
-            this.element_id = obj.element_id;
-            this.element_name = obj.element_name;
+            this.elementType = obj.elementType;
+            this.elementId = obj.elementId;
+            this.elementName = obj.elementName;
             this.type = obj.type;
         }
     }
@@ -65,9 +69,9 @@ export class AddedInstruction extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["element_type"] = this.element_type;
-        data["element_id"] = this.element_id;
-        data["element_name"] = this.element_name;
+        data["element_type"] = this.elementType;
+        data["element_id"] = this.elementId;
+        data["element_name"] = this.elementName;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -82,4 +86,3 @@ export class AddedInstruction extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

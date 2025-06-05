@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A single Radiance of sensors. */
@@ -7,20 +7,23 @@ export class Sensor extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsNumber({},{ each: true })
     @IsDefined()
+    @Expose({ name: "pos" })
     /** Position of sensor in space as an array of (x, y, z) values. */
     pos!: number[];
 	
     @IsArray()
     @IsNumber({},{ each: true })
     @IsDefined()
+    @Expose({ name: "dir" })
     /** Direction of sensor as an array of (x, y, z) values. */
     dir!: number[];
 	
     @IsString()
     @IsOptional()
     @Matches(/^Sensor$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Sensor";
 	
 
     constructor() {
@@ -73,4 +76,3 @@ export class Sensor extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

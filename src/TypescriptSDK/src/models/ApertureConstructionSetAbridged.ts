@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A set of constructions for aperture assemblies. */
@@ -7,36 +7,41 @@ export class ApertureConstructionSetAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^ApertureConstructionSetAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ApertureConstructionSetAbridged";
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "interior_construction" })
     /** Identifier for a WindowConstruction for all apertures with a Surface boundary condition. */
-    interior_construction?: string;
+    interiorConstruction?: string;
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "window_construction" })
     /** Identifier for a WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face. */
-    window_construction?: string;
+    windowConstruction?: string;
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "skylight_construction" })
     /** Identifier for a WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face. */
-    skylight_construction?: string;
+    skylightConstruction?: string;
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "operable_construction" })
     /** Identifier for a WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property. */
-    operable_construction?: string;
+    operableConstruction?: string;
 	
 
     constructor() {
@@ -50,10 +55,10 @@ export class ApertureConstructionSetAbridged extends _OpenAPIGenBaseModel {
         if (_data) {
             const obj = plainToClass(ApertureConstructionSetAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.interior_construction = obj.interior_construction;
-            this.window_construction = obj.window_construction;
-            this.skylight_construction = obj.skylight_construction;
-            this.operable_construction = obj.operable_construction;
+            this.interiorConstruction = obj.interiorConstruction;
+            this.windowConstruction = obj.windowConstruction;
+            this.skylightConstruction = obj.skylightConstruction;
+            this.operableConstruction = obj.operableConstruction;
         }
     }
 
@@ -76,10 +81,10 @@ export class ApertureConstructionSetAbridged extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["interior_construction"] = this.interior_construction;
-        data["window_construction"] = this.window_construction;
-        data["skylight_construction"] = this.skylight_construction;
-        data["operable_construction"] = this.operable_construction;
+        data["interior_construction"] = this.interiorConstruction;
+        data["window_construction"] = this.windowConstruction;
+        data["skylight_construction"] = this.skylightConstruction;
+        data["operable_construction"] = this.operableConstruction;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -93,4 +98,3 @@ export class ApertureConstructionSetAbridged extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

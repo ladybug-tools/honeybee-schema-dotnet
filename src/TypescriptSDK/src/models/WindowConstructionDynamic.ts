@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { ScheduleRuleset } from "./ScheduleRuleset";
@@ -12,10 +12,12 @@ export class WindowConstructionDynamic extends IDdEnergyBaseModel {
     @Type(() => WindowConstruction)
     @ValidateNested({ each: true })
     @IsDefined()
+    @Expose({ name: "constructions" })
     /** A list of WindowConstruction objects that define the various states that the dynamic window can assume. */
     constructions!: WindowConstruction[];
 	
     @IsDefined()
+    @Expose({ name: "schedule" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
@@ -28,8 +30,9 @@ export class WindowConstructionDynamic extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^WindowConstructionDynamic$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "WindowConstructionDynamic";
 	
 
     constructor() {
@@ -82,4 +85,3 @@ export class WindowConstructionDynamic extends IDdEnergyBaseModel {
         return true;
     }
 }
-

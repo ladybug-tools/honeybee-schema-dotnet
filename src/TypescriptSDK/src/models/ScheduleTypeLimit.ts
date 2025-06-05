@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 import { NoLimit } from "./NoLimit";
 import { ScheduleNumericType } from "./ScheduleNumericType";
@@ -10,37 +10,42 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^ScheduleTypeLimit$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ScheduleTypeLimit";
 	
     @IsOptional()
+    @Expose({ name: "lower_limit" })
     /** Lower limit for the schedule type or NoLimit. */
-    lower_limit?: (NoLimit | number);
+    lowerLimit: (NoLimit | number) = new NoLimit();
 	
     @IsOptional()
+    @Expose({ name: "upper_limit" })
     /** Upper limit for the schedule type or NoLimit. */
-    upper_limit?: (NoLimit | number);
+    upperLimit: (NoLimit | number) = new NoLimit();
 	
     @IsEnum(ScheduleNumericType)
     @Type(() => String)
     @IsOptional()
-    /** NumericType */
-    numeric_type?: ScheduleNumericType;
+    @Expose({ name: "numeric_type" })
+    /** numericType */
+    numericType: ScheduleNumericType = ScheduleNumericType.Continuous;
 	
     @IsEnum(ScheduleUnitType)
     @Type(() => String)
     @IsOptional()
-    /** UnitType */
-    unit_type?: ScheduleUnitType;
+    @Expose({ name: "unit_type" })
+    /** unitType */
+    unitType: ScheduleUnitType = ScheduleUnitType.Dimensionless;
 	
 
     constructor() {
         super();
         this.type = "ScheduleTypeLimit";
-        this.lower_limit = new NoLimit();
-        this.upper_limit = new NoLimit();
-        this.numeric_type = ScheduleNumericType.Continuous;
-        this.unit_type = ScheduleUnitType.Dimensionless;
+        this.lowerLimit = new NoLimit();
+        this.upperLimit = new NoLimit();
+        this.numericType = ScheduleNumericType.Continuous;
+        this.unitType = ScheduleUnitType.Dimensionless;
     }
 
 
@@ -49,10 +54,10 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
         if (_data) {
             const obj = plainToClass(ScheduleTypeLimit, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.lower_limit = obj.lower_limit;
-            this.upper_limit = obj.upper_limit;
-            this.numeric_type = obj.numeric_type;
-            this.unit_type = obj.unit_type;
+            this.lowerLimit = obj.lowerLimit;
+            this.upperLimit = obj.upperLimit;
+            this.numericType = obj.numericType;
+            this.unitType = obj.unitType;
         }
     }
 
@@ -75,10 +80,10 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["lower_limit"] = this.lower_limit;
-        data["upper_limit"] = this.upper_limit;
-        data["numeric_type"] = this.numeric_type;
-        data["unit_type"] = this.unit_type;
+        data["lower_limit"] = this.lowerLimit;
+        data["upper_limit"] = this.upperLimit;
+        data["numeric_type"] = this.numericType;
+        data["unit_type"] = this.unitType;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -92,4 +97,3 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
         return true;
     }
 }
-

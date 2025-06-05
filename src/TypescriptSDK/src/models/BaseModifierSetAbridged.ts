@@ -1,24 +1,27 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for the abridged modifier sets assigned to Faces. */
 export class BaseModifierSetAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
+    @Expose({ name: "exterior_modifier" })
     /** Identifier for a radiance modifier object for faces with an  Outdoors boundary condition. */
-    exterior_modifier?: string;
+    exteriorModifier?: string;
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "interior_modifier" })
     /** Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors. */
-    interior_modifier?: string;
+    interiorModifier?: string;
 	
     @IsString()
     @IsOptional()
     @Matches(/^BaseModifierSetAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "BaseModifierSetAbridged";
 	
 
     constructor() {
@@ -31,8 +34,8 @@ export class BaseModifierSetAbridged extends _OpenAPIGenBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(BaseModifierSetAbridged, _data, { enableImplicitConversion: true });
-            this.exterior_modifier = obj.exterior_modifier;
-            this.interior_modifier = obj.interior_modifier;
+            this.exteriorModifier = obj.exteriorModifier;
+            this.interiorModifier = obj.interiorModifier;
             this.type = obj.type;
         }
     }
@@ -55,8 +58,8 @@ export class BaseModifierSetAbridged extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["exterior_modifier"] = this.exterior_modifier;
-        data["interior_modifier"] = this.interior_modifier;
+        data["exterior_modifier"] = this.exteriorModifier;
+        data["interior_modifier"] = this.interiorModifier;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -71,4 +74,3 @@ export class BaseModifierSetAbridged extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

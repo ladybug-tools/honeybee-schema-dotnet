@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsBoolean, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { DoorPropertiesAbridged } from "./DoorPropertiesAbridged";
 import { Face3D } from "./Face3D";
 import { IDdBaseModel } from "./IDdBaseModel";
@@ -13,58 +13,65 @@ export class Door extends IDdBaseModel {
     @Type(() => Face3D)
     @ValidateNested()
     @IsDefined()
+    @Expose({ name: "geometry" })
     /** Planar Face3D for the geometry. */
     geometry!: Face3D;
 	
     @IsDefined()
+    @Expose({ name: "boundary_condition" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'Outdoors') return Outdoors.fromJS(item);
       else if (item?.type === 'Surface') return Surface.fromJS(item);
       else return item;
     })
-    /** BoundaryCondition */
-    boundary_condition!: (Outdoors | Surface);
+    /** boundaryCondition */
+    boundaryCondition!: (Outdoors | Surface);
 	
     @IsInstance(DoorPropertiesAbridged)
     @Type(() => DoorPropertiesAbridged)
     @ValidateNested()
     @IsDefined()
+    @Expose({ name: "properties" })
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
     properties!: DoorPropertiesAbridged;
 	
     @IsString()
     @IsOptional()
     @Matches(/^Door$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Door";
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "is_glass" })
     /** Boolean to note whether this object is a glass door as opposed to an opaque door. */
-    is_glass?: boolean;
+    isGlass: boolean = false;
 	
     @IsArray()
     @IsInstance(Shade, { each: true })
     @Type(() => Shade)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "indoor_shades" })
     /** Shades assigned to the interior side of this object. */
-    indoor_shades?: Shade[];
+    indoorShades?: Shade[];
 	
     @IsArray()
     @IsInstance(Shade, { each: true })
     @Type(() => Shade)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "outdoor_shades" })
     /** Shades assigned to the exterior side of this object (eg. entryway awning). */
-    outdoor_shades?: Shade[];
+    outdoorShades?: Shade[];
 	
 
     constructor() {
         super();
         this.type = "Door";
-        this.is_glass = false;
+        this.isGlass = false;
     }
 
 
@@ -73,12 +80,12 @@ export class Door extends IDdBaseModel {
         if (_data) {
             const obj = plainToClass(Door, _data, { enableImplicitConversion: true });
             this.geometry = obj.geometry;
-            this.boundary_condition = obj.boundary_condition;
+            this.boundaryCondition = obj.boundaryCondition;
             this.properties = obj.properties;
             this.type = obj.type;
-            this.is_glass = obj.is_glass;
-            this.indoor_shades = obj.indoor_shades;
-            this.outdoor_shades = obj.outdoor_shades;
+            this.isGlass = obj.isGlass;
+            this.indoorShades = obj.indoorShades;
+            this.outdoorShades = obj.outdoorShades;
         }
     }
 
@@ -101,12 +108,12 @@ export class Door extends IDdBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["geometry"] = this.geometry;
-        data["boundary_condition"] = this.boundary_condition;
+        data["boundary_condition"] = this.boundaryCondition;
         data["properties"] = this.properties;
         data["type"] = this.type;
-        data["is_glass"] = this.is_glass;
-        data["indoor_shades"] = this.indoor_shades;
-        data["outdoor_shades"] = this.outdoor_shades;
+        data["is_glass"] = this.isGlass;
+        data["indoor_shades"] = this.indoorShades;
+        data["outdoor_shades"] = this.outdoorShades;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -120,4 +127,3 @@ export class Door extends IDdBaseModel {
         return true;
     }
 }
-

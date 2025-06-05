@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _SkyCondition } from "./_SkyCondition";
 
 /** Used to specify sky conditions on a design day. */
@@ -8,14 +8,16 @@ export class ASHRAEClearSky extends _SkyCondition {
     @IsDefined()
     @Min(0)
     @Max(1.2)
+    @Expose({ name: "clearness" })
     /** Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level. */
     clearness!: number;
 	
     @IsString()
     @IsOptional()
     @Matches(/^ASHRAEClearSky$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ASHRAEClearSky";
 	
 
     constructor() {
@@ -66,4 +68,3 @@ export class ASHRAEClearSky extends _SkyCondition {
         return true;
     }
 }
-

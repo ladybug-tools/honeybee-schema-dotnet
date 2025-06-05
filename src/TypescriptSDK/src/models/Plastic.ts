@@ -1,5 +1,5 @@
 ﻿import { IsOptional, IsArray, IsNumber, Min, Max, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
 import { Glow } from "./Glow";
@@ -13,6 +13,7 @@ import { Void } from "./Void";
 /** Radiance plastic material. */
 export class Plastic extends ModifierBase {
     @IsOptional()
+    @Expose({ name: "modifier" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
@@ -27,10 +28,11 @@ export class Plastic extends ModifierBase {
       else return item;
     })
     /** Material modifier. */
-    modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
+    modifier: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) = new Void();
 	
     @IsArray()
     @IsOptional()
+    @Expose({ name: "dependencies" })
     @Transform(({ value }) => value.map((item: any) => {
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
       else if (item?.type === 'Glass') return Glass.fromJS(item);
@@ -50,50 +52,56 @@ export class Plastic extends ModifierBase {
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "r_reflectance" })
     /** A value between 0 and 1 for the red channel reflectance. */
-    r_reflectance?: number;
+    rReflectance: number = 0;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "g_reflectance" })
     /** A value between 0 and 1 for the green channel reflectance. */
-    g_reflectance?: number;
+    gReflectance: number = 0;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "b_reflectance" })
     /** A value between 0 and 1 for the blue channel reflectance. */
-    b_reflectance?: number;
+    bReflectance: number = 0;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "specularity" })
     /** A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials. */
-    specularity?: number;
+    specularity: number = 0;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "roughness" })
     /** A value between 0 and 1 for the roughness, specified as the RMS slope of surface facets. Roughness greater than 0.2 are not realistic. */
-    roughness?: number;
+    roughness: number = 0;
 	
     @IsString()
     @IsOptional()
     @Matches(/^Plastic$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Plastic";
 	
 
     constructor() {
         super();
         this.modifier = new Void();
-        this.r_reflectance = 0;
-        this.g_reflectance = 0;
-        this.b_reflectance = 0;
+        this.rReflectance = 0;
+        this.gReflectance = 0;
+        this.bReflectance = 0;
         this.specularity = 0;
         this.roughness = 0;
         this.type = "Plastic";
@@ -106,9 +114,9 @@ export class Plastic extends ModifierBase {
             const obj = plainToClass(Plastic, _data, { enableImplicitConversion: true });
             this.modifier = obj.modifier;
             this.dependencies = obj.dependencies;
-            this.r_reflectance = obj.r_reflectance;
-            this.g_reflectance = obj.g_reflectance;
-            this.b_reflectance = obj.b_reflectance;
+            this.rReflectance = obj.rReflectance;
+            this.gReflectance = obj.gReflectance;
+            this.bReflectance = obj.bReflectance;
             this.specularity = obj.specularity;
             this.roughness = obj.roughness;
             this.type = obj.type;
@@ -135,9 +143,9 @@ export class Plastic extends ModifierBase {
         data = typeof data === 'object' ? data : {};
         data["modifier"] = this.modifier;
         data["dependencies"] = this.dependencies;
-        data["r_reflectance"] = this.r_reflectance;
-        data["g_reflectance"] = this.g_reflectance;
-        data["b_reflectance"] = this.b_reflectance;
+        data["r_reflectance"] = this.rReflectance;
+        data["g_reflectance"] = this.gReflectance;
+        data["b_reflectance"] = this.bReflectance;
         data["specularity"] = this.specularity;
         data["roughness"] = this.roughness;
         data["type"] = this.type;
@@ -154,4 +162,3 @@ export class Plastic extends ModifierBase {
         return true;
     }
 }
-

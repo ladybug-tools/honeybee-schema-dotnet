@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { OpaqueConstruction } from "./OpaqueConstruction";
 
@@ -9,28 +9,32 @@ export class FloorConstructionSet extends _OpenAPIGenBaseModel {
     @Type(() => OpaqueConstruction)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "interior_construction" })
     /** An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition. */
-    interior_construction?: OpaqueConstruction;
+    interiorConstruction?: OpaqueConstruction;
 	
     @IsInstance(OpaqueConstruction)
     @Type(() => OpaqueConstruction)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "exterior_construction" })
     /** An OpaqueConstruction for walls with an Outdoors boundary condition. */
-    exterior_construction?: OpaqueConstruction;
+    exteriorConstruction?: OpaqueConstruction;
 	
     @IsInstance(OpaqueConstruction)
     @Type(() => OpaqueConstruction)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "ground_construction" })
     /** An OpaqueConstruction for walls with a Ground boundary condition. */
-    ground_construction?: OpaqueConstruction;
+    groundConstruction?: OpaqueConstruction;
 	
     @IsString()
     @IsOptional()
     @Matches(/^FloorConstructionSet$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "FloorConstructionSet";
 	
 
     constructor() {
@@ -43,9 +47,9 @@ export class FloorConstructionSet extends _OpenAPIGenBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(FloorConstructionSet, _data, { enableImplicitConversion: true });
-            this.interior_construction = obj.interior_construction;
-            this.exterior_construction = obj.exterior_construction;
-            this.ground_construction = obj.ground_construction;
+            this.interiorConstruction = obj.interiorConstruction;
+            this.exteriorConstruction = obj.exteriorConstruction;
+            this.groundConstruction = obj.groundConstruction;
             this.type = obj.type;
         }
     }
@@ -68,9 +72,9 @@ export class FloorConstructionSet extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["interior_construction"] = this.interior_construction;
-        data["exterior_construction"] = this.exterior_construction;
-        data["ground_construction"] = this.ground_construction;
+        data["interior_construction"] = this.interiorConstruction;
+        data["exterior_construction"] = this.exteriorConstruction;
+        data["ground_construction"] = this.groundConstruction;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -85,4 +89,3 @@ export class FloorConstructionSet extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

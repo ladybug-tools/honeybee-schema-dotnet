@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsDefined, IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IsNestedNumberArray, IsNestedIntegerArray } from "./../helpers/class-validator";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Color } from "./Color";
@@ -9,26 +9,30 @@ export class Mesh3D extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsNestedNumberArray()
     @IsDefined()
+    @Expose({ name: "vertices" })
     /** A list of points representing the vertices of the mesh. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values. */
     vertices!: number[][];
 	
     @IsArray()
     @IsNestedIntegerArray()
     @IsDefined()
+    @Expose({ name: "faces" })
     /** A list of lists with each sub-list having either 3 or 4 integers. These integers correspond to indices within the list of vertices. */
     faces!: number[][];
 	
     @IsString()
     @IsOptional()
     @Matches(/^Mesh3D$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Mesh3D";
 	
     @IsArray()
     @IsInstance(Color, { each: true })
     @Type(() => Color)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "colors" })
     /** An optional list of colors that correspond to either the faces of the mesh or the vertices of the mesh. */
     colors?: Color[];
 	
@@ -85,4 +89,3 @@ export class Mesh3D extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

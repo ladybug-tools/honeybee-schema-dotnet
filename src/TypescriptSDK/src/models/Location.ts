@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Autocalculate } from "./Autocalculate";
 
@@ -8,40 +8,48 @@ export class Location extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^Location$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Location";
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "city" })
     /** Name of the city as a string. */
-    city?: string;
+    city: string = "-";
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "latitude" })
     /** Location latitude between -90 and 90 (Default: 0). */
-    latitude?: number;
+    latitude: number = 0;
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "longitude" })
     /** Location longitude between -180 (west) and 180 (east) (Default: 0). */
-    longitude?: number;
+    longitude: number = 0;
 	
     @IsOptional()
+    @Expose({ name: "time_zone" })
     /** Time zone between -12 hours (west) and +14 hours (east). If None, the time zone will be an estimated integer value derived from the longitude in accordance with solar time. */
-    time_zone?: (Autocalculate | number);
+    timeZone: (Autocalculate | number) = new Autocalculate();
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "elevation" })
     /** A number for elevation of the location in meters. (Default: 0). */
-    elevation?: number;
+    elevation: number = 0;
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "station_id" })
     /** ID of the location if the location is representing a weather station. */
-    station_id?: string;
+    stationId?: string;
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "source" })
     /** Source of data (e.g. TMY, TMY3). */
     source?: string;
 	
@@ -52,7 +60,7 @@ export class Location extends _OpenAPIGenBaseModel {
         this.city = "-";
         this.latitude = 0;
         this.longitude = 0;
-        this.time_zone = new Autocalculate();
+        this.timeZone = new Autocalculate();
         this.elevation = 0;
     }
 
@@ -65,9 +73,9 @@ export class Location extends _OpenAPIGenBaseModel {
             this.city = obj.city;
             this.latitude = obj.latitude;
             this.longitude = obj.longitude;
-            this.time_zone = obj.time_zone;
+            this.timeZone = obj.timeZone;
             this.elevation = obj.elevation;
-            this.station_id = obj.station_id;
+            this.stationId = obj.stationId;
             this.source = obj.source;
         }
     }
@@ -94,9 +102,9 @@ export class Location extends _OpenAPIGenBaseModel {
         data["city"] = this.city;
         data["latitude"] = this.latitude;
         data["longitude"] = this.longitude;
-        data["time_zone"] = this.time_zone;
+        data["time_zone"] = this.timeZone;
         data["elevation"] = this.elevation;
-        data["station_id"] = this.station_id;
+        data["station_id"] = this.stationId;
         data["source"] = this.source;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -111,4 +119,3 @@ export class Location extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

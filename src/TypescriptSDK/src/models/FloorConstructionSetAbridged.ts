@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _FaceSubSetAbridged } from "./_FaceSubSetAbridged";
 
 /** A set of constructions for floor assemblies. */
@@ -7,8 +7,9 @@ export class FloorConstructionSetAbridged extends _FaceSubSetAbridged {
     @IsString()
     @IsOptional()
     @Matches(/^FloorConstructionSetAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "FloorConstructionSetAbridged";
 	
 
     constructor() {
@@ -57,4 +58,3 @@ export class FloorConstructionSetAbridged extends _FaceSubSetAbridged {
         return true;
     }
 }
-

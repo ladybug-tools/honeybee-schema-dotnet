@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsOptional, Max, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
@@ -7,13 +7,15 @@ export class _EquipmentBase extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
     @Min(0)
+    @Expose({ name: "watts_per_area" })
     /** Equipment level per floor area as [W/m2]. */
-    watts_per_area!: number;
+    wattsPerArea!: number;
 	
     @IsString()
     @IsDefined()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "schedule" })
     /** Identifier of the schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile. */
     schedule!: string;
 	
@@ -21,35 +23,39 @@ export class _EquipmentBase extends IDdEnergyBaseModel {
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "radiant_fraction" })
     /** Number for the amount of long-wave radiation heat given off by equipment. Default value is 0. */
-    radiant_fraction?: number;
+    radiantFraction: number = 0;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "latent_fraction" })
     /** Number for the amount of latent heat given off by equipment. Default value is 0. */
-    latent_fraction?: number;
+    latentFraction: number = 0;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "lost_fraction" })
     /** Number for the amount of “lost” heat being given off by equipment. The default value is 0. */
-    lost_fraction?: number;
+    lostFraction: number = 0;
 	
     @IsString()
     @IsOptional()
     @Matches(/^_EquipmentBase$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "_EquipmentBase";
 	
 
     constructor() {
         super();
-        this.radiant_fraction = 0;
-        this.latent_fraction = 0;
-        this.lost_fraction = 0;
+        this.radiantFraction = 0;
+        this.latentFraction = 0;
+        this.lostFraction = 0;
         this.type = "_EquipmentBase";
     }
 
@@ -58,11 +64,11 @@ export class _EquipmentBase extends IDdEnergyBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(_EquipmentBase, _data, { enableImplicitConversion: true });
-            this.watts_per_area = obj.watts_per_area;
+            this.wattsPerArea = obj.wattsPerArea;
             this.schedule = obj.schedule;
-            this.radiant_fraction = obj.radiant_fraction;
-            this.latent_fraction = obj.latent_fraction;
-            this.lost_fraction = obj.lost_fraction;
+            this.radiantFraction = obj.radiantFraction;
+            this.latentFraction = obj.latentFraction;
+            this.lostFraction = obj.lostFraction;
             this.type = obj.type;
         }
     }
@@ -85,11 +91,11 @@ export class _EquipmentBase extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["watts_per_area"] = this.watts_per_area;
+        data["watts_per_area"] = this.wattsPerArea;
         data["schedule"] = this.schedule;
-        data["radiant_fraction"] = this.radiant_fraction;
-        data["latent_fraction"] = this.latent_fraction;
-        data["lost_fraction"] = this.lost_fraction;
+        data["radiant_fraction"] = this.radiantFraction;
+        data["latent_fraction"] = this.latentFraction;
+        data["lost_fraction"] = this.lostFraction;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -104,4 +110,3 @@ export class _EquipmentBase extends IDdEnergyBaseModel {
         return true;
     }
 }
-

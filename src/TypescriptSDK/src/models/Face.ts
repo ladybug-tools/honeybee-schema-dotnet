@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsEnum, IsString, IsOptional, Matches, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { Adiabatic } from "./Adiabatic";
 import { Aperture } from "./Aperture";
 import { Door } from "./Door";
@@ -19,16 +19,19 @@ export class Face extends IDdBaseModel {
     @Type(() => Face3D)
     @ValidateNested()
     @IsDefined()
+    @Expose({ name: "geometry" })
     /** Planar Face3D for the geometry. */
     geometry!: Face3D;
 	
     @IsEnum(FaceType)
     @Type(() => String)
     @IsDefined()
-    /** FaceType */
-    face_type!: FaceType;
+    @Expose({ name: "face_type" })
+    /** faceType */
+    faceType!: FaceType;
 	
     @IsDefined()
+    @Expose({ name: "boundary_condition" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'Ground') return Ground.fromJS(item);
@@ -38,27 +41,30 @@ export class Face extends IDdBaseModel {
       else if (item?.type === 'OtherSideTemperature') return OtherSideTemperature.fromJS(item);
       else return item;
     })
-    /** BoundaryCondition */
-    boundary_condition!: (Ground | Outdoors | Adiabatic | Surface | OtherSideTemperature);
+    /** boundaryCondition */
+    boundaryCondition!: (Ground | Outdoors | Adiabatic | Surface | OtherSideTemperature);
 	
     @IsInstance(FacePropertiesAbridged)
     @Type(() => FacePropertiesAbridged)
     @ValidateNested()
     @IsDefined()
+    @Expose({ name: "properties" })
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
     properties!: FacePropertiesAbridged;
 	
     @IsString()
     @IsOptional()
     @Matches(/^Face$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Face";
 	
     @IsArray()
     @IsInstance(Aperture, { each: true })
     @Type(() => Aperture)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "apertures" })
     /** Apertures assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid. */
     apertures?: Aperture[];
 	
@@ -67,6 +73,7 @@ export class Face extends IDdBaseModel {
     @Type(() => Door)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "doors" })
     /** Doors assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid. */
     doors?: Door[];
 	
@@ -75,16 +82,18 @@ export class Face extends IDdBaseModel {
     @Type(() => Shade)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "indoor_shades" })
     /** Shades assigned to the interior side of this object. */
-    indoor_shades?: Shade[];
+    indoorShades?: Shade[];
 	
     @IsArray()
     @IsInstance(Shade, { each: true })
     @Type(() => Shade)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "outdoor_shades" })
     /** Shades assigned to the exterior side of this object (eg. balcony, overhang). */
-    outdoor_shades?: Shade[];
+    outdoorShades?: Shade[];
 	
 
     constructor() {
@@ -98,14 +107,14 @@ export class Face extends IDdBaseModel {
         if (_data) {
             const obj = plainToClass(Face, _data, { enableImplicitConversion: true });
             this.geometry = obj.geometry;
-            this.face_type = obj.face_type;
-            this.boundary_condition = obj.boundary_condition;
+            this.faceType = obj.faceType;
+            this.boundaryCondition = obj.boundaryCondition;
             this.properties = obj.properties;
             this.type = obj.type;
             this.apertures = obj.apertures;
             this.doors = obj.doors;
-            this.indoor_shades = obj.indoor_shades;
-            this.outdoor_shades = obj.outdoor_shades;
+            this.indoorShades = obj.indoorShades;
+            this.outdoorShades = obj.outdoorShades;
         }
     }
 
@@ -128,14 +137,14 @@ export class Face extends IDdBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["geometry"] = this.geometry;
-        data["face_type"] = this.face_type;
-        data["boundary_condition"] = this.boundary_condition;
+        data["face_type"] = this.faceType;
+        data["boundary_condition"] = this.boundaryCondition;
         data["properties"] = this.properties;
         data["type"] = this.type;
         data["apertures"] = this.apertures;
         data["doors"] = this.doors;
-        data["indoor_shades"] = this.indoor_shades;
-        data["outdoor_shades"] = this.outdoor_shades;
+        data["indoor_shades"] = this.indoorShades;
+        data["outdoor_shades"] = this.outdoorShades;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -149,4 +158,3 @@ export class Face extends IDdBaseModel {
         return true;
     }
 }
-

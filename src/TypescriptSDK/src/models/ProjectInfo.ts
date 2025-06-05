@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, IsArray, IsInstance, ValidateNested, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BuildingTypes } from "./BuildingTypes";
 import { ClimateZones } from "./ClimateZones";
@@ -11,46 +11,53 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^ProjectInfo$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ProjectInfo";
 	
     @IsNumber()
     @IsOptional()
     @Min(-360)
     @Max(360)
+    @Expose({ name: "north" })
     /** A number between -360 to 360 where positive values rotate the compass counterclockwise (towards the West) and negative values rotate the compass clockwise (towards the East). */
-    north?: number;
+    north: number = 0;
 	
     @IsArray()
     @IsString({ each: true })
     @IsOptional()
+    @Expose({ name: "weather_urls" })
     /** A list of URLs to zip files that includes EPW, DDY and STAT files. You can find these URLs from the EPWMAP. The first URL will be used as the primary weather file. */
-    weather_urls?: string[];
+    weatherUrls?: string[];
 	
     @IsInstance(Location)
     @Type(() => Location)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "location" })
     /** Project location. This value is usually generated from the information in the weather files. */
     location?: Location;
 	
     @IsEnum(ClimateZones)
     @Type(() => String)
     @IsOptional()
+    @Expose({ name: "ashrae_climate_zone" })
     /** Project location climate zone. */
-    ashrae_climate_zone?: ClimateZones;
+    ashraeClimateZone?: ClimateZones;
 	
     @IsArray()
     @IsEnum(BuildingTypes, { each: true })
     @Type(() => String)
     @IsOptional()
+    @Expose({ name: "building_type" })
     /** A list of building types for the project. The first building type is considered the primary type for the project. */
-    building_type?: BuildingTypes[];
+    buildingType?: BuildingTypes[];
 	
     @IsArray()
     @IsEnum(EfficiencyStandards, { each: true })
     @Type(() => String)
     @IsOptional()
+    @Expose({ name: "vintage" })
     /** A list of building vintages (e.g. ASHRAE_2019, ASHRAE_2016). */
     vintage?: EfficiencyStandards[];
 	
@@ -68,10 +75,10 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
             const obj = plainToClass(ProjectInfo, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.north = obj.north;
-            this.weather_urls = obj.weather_urls;
+            this.weatherUrls = obj.weatherUrls;
             this.location = obj.location;
-            this.ashrae_climate_zone = obj.ashrae_climate_zone;
-            this.building_type = obj.building_type;
+            this.ashraeClimateZone = obj.ashraeClimateZone;
+            this.buildingType = obj.buildingType;
             this.vintage = obj.vintage;
         }
     }
@@ -96,10 +103,10 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
         data["north"] = this.north;
-        data["weather_urls"] = this.weather_urls;
+        data["weather_urls"] = this.weatherUrls;
         data["location"] = this.location;
-        data["ashrae_climate_zone"] = this.ashrae_climate_zone;
-        data["building_type"] = this.building_type;
+        data["ashrae_climate_zone"] = this.ashraeClimateZone;
+        data["building_type"] = this.buildingType;
         data["vintage"] = this.vintage;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -114,4 +121,3 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

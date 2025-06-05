@@ -1,5 +1,5 @@
 ﻿import { IsString, IsDefined, MinLength, MaxLength, IsEnum, IsInstance, ValidateNested, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ASHRAEClearSky } from "./ASHRAEClearSky";
 import { ASHRAETau } from "./ASHRAETau";
@@ -14,51 +14,58 @@ export class DesignDay extends _OpenAPIGenBaseModel {
     @IsDefined()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "name" })
     /** Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t). */
     name!: string;
 	
     @IsEnum(DesignDayTypes)
     @Type(() => String)
     @IsDefined()
-    /** DayType */
-    day_type!: DesignDayTypes;
+    @Expose({ name: "day_type" })
+    /** dayType */
+    dayType!: DesignDayTypes;
 	
     @IsInstance(DryBulbCondition)
     @Type(() => DryBulbCondition)
     @ValidateNested()
     @IsDefined()
+    @Expose({ name: "dry_bulb_condition" })
     /** A DryBulbCondition describing temperature conditions on the design day. */
-    dry_bulb_condition!: DryBulbCondition;
+    dryBulbCondition!: DryBulbCondition;
 	
     @IsInstance(HumidityCondition)
     @Type(() => HumidityCondition)
     @ValidateNested()
     @IsDefined()
+    @Expose({ name: "humidity_condition" })
     /** A HumidityCondition describing humidity and precipitation conditions on the design day. */
-    humidity_condition!: HumidityCondition;
+    humidityCondition!: HumidityCondition;
 	
     @IsInstance(WindCondition)
     @Type(() => WindCondition)
     @ValidateNested()
     @IsDefined()
+    @Expose({ name: "wind_condition" })
     /** A WindCondition describing wind conditions on the design day. */
-    wind_condition!: WindCondition;
+    windCondition!: WindCondition;
 	
     @IsDefined()
+    @Expose({ name: "sky_condition" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'ASHRAEClearSky') return ASHRAEClearSky.fromJS(item);
       else if (item?.type === 'ASHRAETau') return ASHRAETau.fromJS(item);
       else return item;
     })
-    /** SkyCondition */
-    sky_condition!: (ASHRAEClearSky | ASHRAETau);
+    /** skyCondition */
+    skyCondition!: (ASHRAEClearSky | ASHRAETau);
 	
     @IsString()
     @IsOptional()
     @Matches(/^DesignDay$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "DesignDay";
 	
 
     constructor() {
@@ -72,11 +79,11 @@ export class DesignDay extends _OpenAPIGenBaseModel {
         if (_data) {
             const obj = plainToClass(DesignDay, _data, { enableImplicitConversion: true });
             this.name = obj.name;
-            this.day_type = obj.day_type;
-            this.dry_bulb_condition = obj.dry_bulb_condition;
-            this.humidity_condition = obj.humidity_condition;
-            this.wind_condition = obj.wind_condition;
-            this.sky_condition = obj.sky_condition;
+            this.dayType = obj.dayType;
+            this.dryBulbCondition = obj.dryBulbCondition;
+            this.humidityCondition = obj.humidityCondition;
+            this.windCondition = obj.windCondition;
+            this.skyCondition = obj.skyCondition;
             this.type = obj.type;
         }
     }
@@ -100,11 +107,11 @@ export class DesignDay extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
-        data["day_type"] = this.day_type;
-        data["dry_bulb_condition"] = this.dry_bulb_condition;
-        data["humidity_condition"] = this.humidity_condition;
-        data["wind_condition"] = this.wind_condition;
-        data["sky_condition"] = this.sky_condition;
+        data["day_type"] = this.dayType;
+        data["dry_bulb_condition"] = this.dryBulbCondition;
+        data["humidity_condition"] = this.humidityCondition;
+        data["wind_condition"] = this.windCondition;
+        data["sky_condition"] = this.skyCondition;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -119,4 +126,3 @@ export class DesignDay extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

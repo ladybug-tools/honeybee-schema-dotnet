@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Construction for Shade objects. */
@@ -7,35 +7,39 @@ export class ShadeConstruction extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^ShadeConstruction$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ShadeConstruction";
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "solar_reflectance" })
     /** A number for the solar reflectance of the construction. */
-    solar_reflectance?: number;
+    solarReflectance: number = 0.2;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "visible_reflectance" })
     /** A number for the visible reflectance of the construction. */
-    visible_reflectance?: number;
+    visibleReflectance: number = 0.2;
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "is_specular" })
     /** Boolean to note whether the reflection off the shade is diffuse (False) or specular (True). Set to True if the construction is representing a glass facade or a mirror material. */
-    is_specular?: boolean;
+    isSpecular: boolean = false;
 	
 
     constructor() {
         super();
         this.type = "ShadeConstruction";
-        this.solar_reflectance = 0.2;
-        this.visible_reflectance = 0.2;
-        this.is_specular = false;
+        this.solarReflectance = 0.2;
+        this.visibleReflectance = 0.2;
+        this.isSpecular = false;
     }
 
 
@@ -44,9 +48,9 @@ export class ShadeConstruction extends IDdEnergyBaseModel {
         if (_data) {
             const obj = plainToClass(ShadeConstruction, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.solar_reflectance = obj.solar_reflectance;
-            this.visible_reflectance = obj.visible_reflectance;
-            this.is_specular = obj.is_specular;
+            this.solarReflectance = obj.solarReflectance;
+            this.visibleReflectance = obj.visibleReflectance;
+            this.isSpecular = obj.isSpecular;
         }
     }
 
@@ -69,9 +73,9 @@ export class ShadeConstruction extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["solar_reflectance"] = this.solar_reflectance;
-        data["visible_reflectance"] = this.visible_reflectance;
-        data["is_specular"] = this.is_specular;
+        data["solar_reflectance"] = this.solarReflectance;
+        data["visible_reflectance"] = this.visibleReflectance;
+        data["is_specular"] = this.isSpecular;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -85,4 +89,3 @@ export class ShadeConstruction extends IDdEnergyBaseModel {
         return true;
     }
 }
-

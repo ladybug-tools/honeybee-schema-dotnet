@@ -1,5 +1,5 @@
 ﻿import { IsOptional, IsArray, IsNumber, Min, Max, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { BSDF } from "./BSDF";
 import { Glow } from "./Glow";
 import { Light } from "./Light";
@@ -13,6 +13,7 @@ import { Void } from "./Void";
 /** Radiance glass material. */
 export class Glass extends ModifierBase {
     @IsOptional()
+    @Expose({ name: "modifier" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
@@ -27,10 +28,11 @@ export class Glass extends ModifierBase {
       else return item;
     })
     /** Material modifier. */
-    modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
+    modifier: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) = new Void();
 	
     @IsArray()
     @IsOptional()
+    @Expose({ name: "dependencies" })
     @Transform(({ value }) => value.map((item: any) => {
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
       else if (item?.type === 'Glass') return Glass.fromJS(item);
@@ -50,42 +52,47 @@ export class Glass extends ModifierBase {
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "r_transmissivity" })
     /** A value between 0 and 1 for the red channel transmissivity. */
-    r_transmissivity?: number;
+    rTransmissivity: number = 0;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "g_transmissivity" })
     /** A value between 0 and 1 for the green channel transmissivity. */
-    g_transmissivity?: number;
+    gTransmissivity: number = 0;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "b_transmissivity" })
     /** A value between 0 and 1 for the blue channel transmissivity. */
-    b_transmissivity?: number;
+    bTransmissivity: number = 0;
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "refraction_index" })
     /** A value greater than 1 for the index of refraction. Typical values are 1.52 for float glass and 1.4 for ETFE. */
-    refraction_index?: number;
+    refractionIndex: number = 1.52;
 	
     @IsString()
     @IsOptional()
     @Matches(/^Glass$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Glass";
 	
 
     constructor() {
         super();
         this.modifier = new Void();
-        this.r_transmissivity = 0;
-        this.g_transmissivity = 0;
-        this.b_transmissivity = 0;
-        this.refraction_index = 1.52;
+        this.rTransmissivity = 0;
+        this.gTransmissivity = 0;
+        this.bTransmissivity = 0;
+        this.refractionIndex = 1.52;
         this.type = "Glass";
     }
 
@@ -96,10 +103,10 @@ export class Glass extends ModifierBase {
             const obj = plainToClass(Glass, _data, { enableImplicitConversion: true });
             this.modifier = obj.modifier;
             this.dependencies = obj.dependencies;
-            this.r_transmissivity = obj.r_transmissivity;
-            this.g_transmissivity = obj.g_transmissivity;
-            this.b_transmissivity = obj.b_transmissivity;
-            this.refraction_index = obj.refraction_index;
+            this.rTransmissivity = obj.rTransmissivity;
+            this.gTransmissivity = obj.gTransmissivity;
+            this.bTransmissivity = obj.bTransmissivity;
+            this.refractionIndex = obj.refractionIndex;
             this.type = obj.type;
         }
     }
@@ -124,10 +131,10 @@ export class Glass extends ModifierBase {
         data = typeof data === 'object' ? data : {};
         data["modifier"] = this.modifier;
         data["dependencies"] = this.dependencies;
-        data["r_transmissivity"] = this.r_transmissivity;
-        data["g_transmissivity"] = this.g_transmissivity;
-        data["b_transmissivity"] = this.b_transmissivity;
-        data["refraction_index"] = this.refraction_index;
+        data["r_transmissivity"] = this.rTransmissivity;
+        data["g_transmissivity"] = this.gTransmissivity;
+        data["b_transmissivity"] = this.bTransmissivity;
+        data["refraction_index"] = this.refractionIndex;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -142,4 +149,3 @@ export class Glass extends ModifierBase {
         return true;
     }
 }
-

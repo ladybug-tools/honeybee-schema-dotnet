@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
@@ -7,24 +7,28 @@ export class Plane extends _OpenAPIGenBaseModel {
     @IsArray()
     @IsNumber({},{ each: true })
     @IsDefined()
+    @Expose({ name: "n" })
     /** Plane normal as 3 (x, y, z) values. */
     n!: number[];
 	
     @IsArray()
     @IsNumber({},{ each: true })
     @IsDefined()
+    @Expose({ name: "o" })
     /** Plane origin as 3 (x, y, z) values */
     o!: number[];
 	
     @IsString()
     @IsOptional()
     @Matches(/^Plane$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Plane";
 	
     @IsArray()
     @IsNumber({},{ each: true })
     @IsOptional()
+    @Expose({ name: "x" })
     /** Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated. */
     x?: number[];
 	
@@ -81,4 +85,3 @@ export class Plane extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

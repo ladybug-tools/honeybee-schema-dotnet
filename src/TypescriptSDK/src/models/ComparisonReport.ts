@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AddedObject } from "./AddedObject";
 import { ChangedObject } from "./ChangedObject";
@@ -9,32 +9,36 @@ export class ComparisonReport extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^ComparisonReport$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ComparisonReport";
 	
     @IsArray()
     @IsInstance(ChangedObject, { each: true })
     @Type(() => ChangedObject)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "changed_objects" })
     /** A list of ChangedObject definitions for each top-level object that has changed in the model. To be a changed object, the object identifier must be the same in both models but some other property (either geometry or extension attributes) has experienced a meaningful change. */
-    changed_objects?: ChangedObject[];
+    changedObjects?: ChangedObject[];
 	
     @IsArray()
     @IsInstance(DeletedObject, { each: true })
     @Type(() => DeletedObject)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "deleted_objects" })
     /** A list of DeletedObject definitions for each top-level object that has been deleted in the process of going from the base model to the new model. */
-    deleted_objects?: DeletedObject[];
+    deletedObjects?: DeletedObject[];
 	
     @IsArray()
     @IsInstance(AddedObject, { each: true })
     @Type(() => AddedObject)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "added_objects" })
     /** A list of AddedObject definitions for each top-level object that has been added in the process of going from the base model to the new model. */
-    added_objects?: AddedObject[];
+    addedObjects?: AddedObject[];
 	
 
     constructor() {
@@ -48,9 +52,9 @@ export class ComparisonReport extends _OpenAPIGenBaseModel {
         if (_data) {
             const obj = plainToClass(ComparisonReport, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.changed_objects = obj.changed_objects;
-            this.deleted_objects = obj.deleted_objects;
-            this.added_objects = obj.added_objects;
+            this.changedObjects = obj.changedObjects;
+            this.deletedObjects = obj.deletedObjects;
+            this.addedObjects = obj.addedObjects;
         }
     }
 
@@ -73,9 +77,9 @@ export class ComparisonReport extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["changed_objects"] = this.changed_objects;
-        data["deleted_objects"] = this.deleted_objects;
-        data["added_objects"] = this.added_objects;
+        data["changed_objects"] = this.changedObjects;
+        data["deleted_objects"] = this.deletedObjects;
+        data["added_objects"] = this.addedObjects;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -89,4 +93,3 @@ export class ComparisonReport extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

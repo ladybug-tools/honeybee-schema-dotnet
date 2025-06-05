@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { ControlType } from "./ControlType";
 import { EnergyWindowMaterialBlind } from "./EnergyWindowMaterialBlind";
 import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
@@ -16,10 +16,12 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
     @Type(() => WindowConstruction)
     @ValidateNested()
     @IsDefined()
+    @Expose({ name: "window_construction" })
     /** A WindowConstruction object that serves as the ""switched off"" version of the construction (aka. the ""bare construction""). The shade_material and shade_location will be used to modify this starting construction. */
-    window_construction!: WindowConstruction;
+    windowConstruction!: WindowConstruction;
 	
     @IsDefined()
+    @Expose({ name: "shade_material" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'EnergyWindowMaterialShade') return EnergyWindowMaterialShade.fromJS(item);
@@ -28,32 +30,37 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
       else return item;
     })
     /** Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly. */
-    shade_material!: (EnergyWindowMaterialShade | EnergyWindowMaterialBlind | EnergyWindowMaterialGlazing);
+    shadeMaterial!: (EnergyWindowMaterialShade | EnergyWindowMaterialBlind | EnergyWindowMaterialGlazing);
 	
     @IsString()
     @IsOptional()
     @Matches(/^WindowConstructionShade$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "WindowConstructionShade";
 	
     @IsEnum(ShadeLocation)
     @Type(() => String)
     @IsOptional()
+    @Expose({ name: "shade_location" })
     /** Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the ""Between"" option. Also note that, for a WindowConstruction with more than one gas gap, the ""Between"" option defaults to using the inner gap as this is the only option that EnergyPlus supports. */
-    shade_location?: ShadeLocation;
+    shadeLocation: ShadeLocation = ShadeLocation.Interior;
 	
     @IsEnum(ControlType)
     @Type(() => String)
     @IsOptional()
+    @Expose({ name: "control_type" })
     /** Text to indicate how the shading device is controlled, which determines when the shading is “on” or “off.” */
-    control_type?: ControlType;
+    controlType: ControlType = ControlType.AlwaysOn;
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "setpoint" })
     /** A number that corresponds to the specified control_type. This can be a value in (W/m2), (C) or (W) depending upon the control type.Note that this value cannot be None for any control type except ""AlwaysOn."" */
     setpoint?: number;
 	
     @IsOptional()
+    @Expose({ name: "schedule" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
@@ -67,8 +74,8 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
     constructor() {
         super();
         this.type = "WindowConstructionShade";
-        this.shade_location = ShadeLocation.Interior;
-        this.control_type = ControlType.AlwaysOn;
+        this.shadeLocation = ShadeLocation.Interior;
+        this.controlType = ControlType.AlwaysOn;
     }
 
 
@@ -76,11 +83,11 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(WindowConstructionShade, _data, { enableImplicitConversion: true });
-            this.window_construction = obj.window_construction;
-            this.shade_material = obj.shade_material;
+            this.windowConstruction = obj.windowConstruction;
+            this.shadeMaterial = obj.shadeMaterial;
             this.type = obj.type;
-            this.shade_location = obj.shade_location;
-            this.control_type = obj.control_type;
+            this.shadeLocation = obj.shadeLocation;
+            this.controlType = obj.controlType;
             this.setpoint = obj.setpoint;
             this.schedule = obj.schedule;
         }
@@ -104,11 +111,11 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["window_construction"] = this.window_construction;
-        data["shade_material"] = this.shade_material;
+        data["window_construction"] = this.windowConstruction;
+        data["shade_material"] = this.shadeMaterial;
         data["type"] = this.type;
-        data["shade_location"] = this.shade_location;
-        data["control_type"] = this.control_type;
+        data["shade_location"] = this.shadeLocation;
+        data["control_type"] = this.controlType;
         data["setpoint"] = this.setpoint;
         data["schedule"] = this.schedule;
         data = super.toJSON(data);
@@ -124,4 +131,3 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
         return true;
     }
 }
-

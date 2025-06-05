@@ -1,5 +1,5 @@
 ﻿import { IsEnum, IsOptional, IsNumber, Min, Max, IsBoolean, IsString, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 import { VRFwithDOASEquipmentType } from "./VRFwithDOASEquipmentType";
@@ -9,56 +9,63 @@ export class VRFwithDOASAbridged extends IDdEnergyBaseModel {
     @IsEnum(Vintages)
     @Type(() => String)
     @IsOptional()
+    @Expose({ name: "vintage" })
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
-    vintage?: Vintages;
+    vintage: Vintages = Vintages.ASHRAE_2019;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "sensible_heat_recovery" })
     /** A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. */
-    sensible_heat_recovery?: number;
+    sensibleHeatRecovery: number = 0;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "latent_heat_recovery" })
     /** A number between 0 and 1 for the effectiveness of latent heat recovery within the system. */
-    latent_heat_recovery?: number;
+    latentHeatRecovery: number = 0;
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "demand_controlled_ventilation" })
     /** Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms. */
-    demand_controlled_ventilation?: boolean;
+    demandControlledVentilation: boolean = false;
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "doas_availability_schedule" })
     /** An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on. */
-    doas_availability_schedule?: string;
+    doasAvailabilitySchedule?: string;
 	
     @IsString()
     @IsOptional()
     @Matches(/^VRFwithDOASAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "VRFwithDOASAbridged";
 	
     @IsEnum(VRFwithDOASEquipmentType)
     @Type(() => String)
     @IsOptional()
+    @Expose({ name: "equipment_type" })
     /** Text for the specific type of system equipment from the VRFwithDOASEquipmentType enumeration. */
-    equipment_type?: VRFwithDOASEquipmentType;
+    equipmentType: VRFwithDOASEquipmentType = VRFwithDOASEquipmentType.DOAS_VRF;
 	
 
     constructor() {
         super();
         this.vintage = Vintages.ASHRAE_2019;
-        this.sensible_heat_recovery = 0;
-        this.latent_heat_recovery = 0;
-        this.demand_controlled_ventilation = false;
+        this.sensibleHeatRecovery = 0;
+        this.latentHeatRecovery = 0;
+        this.demandControlledVentilation = false;
         this.type = "VRFwithDOASAbridged";
-        this.equipment_type = VRFwithDOASEquipmentType.DOAS_VRF;
+        this.equipmentType = VRFwithDOASEquipmentType.DOAS_VRF;
     }
 
 
@@ -67,12 +74,12 @@ export class VRFwithDOASAbridged extends IDdEnergyBaseModel {
         if (_data) {
             const obj = plainToClass(VRFwithDOASAbridged, _data, { enableImplicitConversion: true });
             this.vintage = obj.vintage;
-            this.sensible_heat_recovery = obj.sensible_heat_recovery;
-            this.latent_heat_recovery = obj.latent_heat_recovery;
-            this.demand_controlled_ventilation = obj.demand_controlled_ventilation;
-            this.doas_availability_schedule = obj.doas_availability_schedule;
+            this.sensibleHeatRecovery = obj.sensibleHeatRecovery;
+            this.latentHeatRecovery = obj.latentHeatRecovery;
+            this.demandControlledVentilation = obj.demandControlledVentilation;
+            this.doasAvailabilitySchedule = obj.doasAvailabilitySchedule;
             this.type = obj.type;
-            this.equipment_type = obj.equipment_type;
+            this.equipmentType = obj.equipmentType;
         }
     }
 
@@ -95,12 +102,12 @@ export class VRFwithDOASAbridged extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["vintage"] = this.vintage;
-        data["sensible_heat_recovery"] = this.sensible_heat_recovery;
-        data["latent_heat_recovery"] = this.latent_heat_recovery;
-        data["demand_controlled_ventilation"] = this.demand_controlled_ventilation;
-        data["doas_availability_schedule"] = this.doas_availability_schedule;
+        data["sensible_heat_recovery"] = this.sensibleHeatRecovery;
+        data["latent_heat_recovery"] = this.latentHeatRecovery;
+        data["demand_controlled_ventilation"] = this.demandControlledVentilation;
+        data["doas_availability_schedule"] = this.doasAvailabilitySchedule;
         data["type"] = this.type;
-        data["equipment_type"] = this.equipment_type;
+        data["equipment_type"] = this.equipmentType;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -114,4 +121,3 @@ export class VRFwithDOASAbridged extends IDdEnergyBaseModel {
         return true;
     }
 }
-

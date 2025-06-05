@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
@@ -7,8 +7,9 @@ export class Autocalculate extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^Autocalculate$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Autocalculate";
 	
 
     constructor() {
@@ -57,4 +58,3 @@ export class Autocalculate extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

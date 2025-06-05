@@ -1,5 +1,5 @@
 ﻿import { IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
@@ -14,6 +14,7 @@ import { Void } from "./Void";
 /** Base class for the modifier sets assigned to Faces. */
 export class BaseModifierSet extends _OpenAPIGenBaseModel {
     @IsOptional()
+    @Expose({ name: "exterior_modifier" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
@@ -28,9 +29,10 @@ export class BaseModifierSet extends _OpenAPIGenBaseModel {
       else return item;
     })
     /** A radiance modifier object for faces with an Outdoors boundary condition. */
-    exterior_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
+    exteriorModifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsOptional()
+    @Expose({ name: "interior_modifier" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
@@ -45,13 +47,14 @@ export class BaseModifierSet extends _OpenAPIGenBaseModel {
       else return item;
     })
     /** A radiance modifier object for faces with a boundary condition other than Outdoors. */
-    interior_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
+    interiorModifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsString()
     @IsOptional()
     @Matches(/^BaseModifierSet$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "BaseModifierSet";
 	
 
     constructor() {
@@ -64,8 +67,8 @@ export class BaseModifierSet extends _OpenAPIGenBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(BaseModifierSet, _data, { enableImplicitConversion: true });
-            this.exterior_modifier = obj.exterior_modifier;
-            this.interior_modifier = obj.interior_modifier;
+            this.exteriorModifier = obj.exteriorModifier;
+            this.interiorModifier = obj.interiorModifier;
             this.type = obj.type;
         }
     }
@@ -88,8 +91,8 @@ export class BaseModifierSet extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["exterior_modifier"] = this.exterior_modifier;
-        data["interior_modifier"] = this.interior_modifier;
+        data["exterior_modifier"] = this.exteriorModifier;
+        data["interior_modifier"] = this.interiorModifier;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -104,4 +107,3 @@ export class BaseModifierSet extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

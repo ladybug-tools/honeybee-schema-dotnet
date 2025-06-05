@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInt, IsEnum, IsInstance, ValidateNested, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IsNestedIntegerArray } from "./../helpers/class-validator";
 import { DatedBaseModel } from "./DatedBaseModel";
 import { DaylightSavingTime } from "./DaylightSavingTime";
@@ -10,30 +10,35 @@ export class RunPeriod extends DatedBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^RunPeriod$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "RunPeriod";
 	
     @IsArray()
     @IsInt({ each: true })
     @IsOptional()
+    @Expose({ name: "start_date" })
     /** A list of two integers for [month, day], representing the date for the start of the run period. Must be before the end date. */
-    start_date?: number[];
+    startDate: number[] = [1, 1];
 	
     @IsArray()
     @IsInt({ each: true })
     @IsOptional()
+    @Expose({ name: "end_date" })
     /** A list of two integers for [month, day], representing the date for the end of the run period. Must be after the start date. */
-    end_date?: number[];
+    endDate: number[] = [12, 31];
 	
     @IsEnum(DaysOfWeek)
     @Type(() => String)
     @IsOptional()
+    @Expose({ name: "start_day_of_week" })
     /** Text for the day of the week on which the simulation starts. */
-    start_day_of_week?: DaysOfWeek;
+    startDayOfWeek: DaysOfWeek = DaysOfWeek.Sunday;
 	
     @IsArray()
     @IsNestedIntegerArray()
     @IsOptional()
+    @Expose({ name: "holidays" })
     /** A list of lists where each sub-list consists of two integers for [month, day], representing a date which is a holiday within the simulation. If None, no holidays are applied. */
     holidays?: number[][];
 	
@@ -41,22 +46,24 @@ export class RunPeriod extends DatedBaseModel {
     @Type(() => DaylightSavingTime)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "daylight_saving_time" })
     /** A DaylightSavingTime to dictate the start and end dates of daylight saving time. If None, no daylight saving time is applied to the simulation. */
-    daylight_saving_time?: DaylightSavingTime;
+    daylightSavingTime?: DaylightSavingTime;
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "leap_year" })
     /** Boolean noting whether the simulation will be run for a leap year. */
-    leap_year?: boolean;
+    leapYear: boolean = false;
 	
 
     constructor() {
         super();
         this.type = "RunPeriod";
-        this.start_date = [1, 1];
-        this.end_date = [12, 31];
-        this.start_day_of_week = DaysOfWeek.Sunday;
-        this.leap_year = false;
+        this.startDate = [1, 1];
+        this.endDate = [12, 31];
+        this.startDayOfWeek = DaysOfWeek.Sunday;
+        this.leapYear = false;
     }
 
 
@@ -65,12 +72,12 @@ export class RunPeriod extends DatedBaseModel {
         if (_data) {
             const obj = plainToClass(RunPeriod, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.start_date = obj.start_date;
-            this.end_date = obj.end_date;
-            this.start_day_of_week = obj.start_day_of_week;
+            this.startDate = obj.startDate;
+            this.endDate = obj.endDate;
+            this.startDayOfWeek = obj.startDayOfWeek;
             this.holidays = obj.holidays;
-            this.daylight_saving_time = obj.daylight_saving_time;
-            this.leap_year = obj.leap_year;
+            this.daylightSavingTime = obj.daylightSavingTime;
+            this.leapYear = obj.leapYear;
         }
     }
 
@@ -93,12 +100,12 @@ export class RunPeriod extends DatedBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["start_date"] = this.start_date;
-        data["end_date"] = this.end_date;
-        data["start_day_of_week"] = this.start_day_of_week;
+        data["start_date"] = this.startDate;
+        data["end_date"] = this.endDate;
+        data["start_day_of_week"] = this.startDayOfWeek;
         data["holidays"] = this.holidays;
-        data["daylight_saving_time"] = this.daylight_saving_time;
-        data["leap_year"] = this.leap_year;
+        data["daylight_saving_time"] = this.daylightSavingTime;
+        data["leap_year"] = this.leapYear;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -112,4 +119,3 @@ export class RunPeriod extends DatedBaseModel {
         return true;
     }
 }
-

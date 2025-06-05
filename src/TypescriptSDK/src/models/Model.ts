@@ -1,5 +1,5 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsArray, IsEnum, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { Aperture } from "./Aperture";
 import { Door } from "./Door";
 import { Face } from "./Face";
@@ -16,26 +16,30 @@ export class Model extends IDdBaseModel {
     @Type(() => ModelProperties)
     @ValidateNested()
     @IsDefined()
+    @Expose({ name: "properties" })
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
     properties!: ModelProperties;
 	
     @IsString()
     @IsOptional()
     @Matches(/^Model$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Model";
 	
     @IsString()
     @IsOptional()
     @Matches(/([0-9]+)\.([0-9]+)\.([0-9]+)/)
+    @Expose({ name: "version" })
     /** Text string for the current version of the schema. */
-    version?: string;
+    version: string = "1.59.0";
 	
     @IsArray()
     @IsInstance(Room, { each: true })
     @Type(() => Room)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "rooms" })
     /** A list of Rooms in the model. */
     rooms?: Room[];
 	
@@ -44,58 +48,66 @@ export class Model extends IDdBaseModel {
     @Type(() => Face)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "orphaned_faces" })
     /** A list of Faces in the model that lack a parent Room. Note that orphaned Faces are not acceptable for Models that are to be exported for energy simulation. */
-    orphaned_faces?: Face[];
+    orphanedFaces?: Face[];
 	
     @IsArray()
     @IsInstance(Shade, { each: true })
     @Type(() => Shade)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "orphaned_shades" })
     /** A list of Shades in the model that lack a parent. */
-    orphaned_shades?: Shade[];
+    orphanedShades?: Shade[];
 	
     @IsArray()
     @IsInstance(Aperture, { each: true })
     @Type(() => Aperture)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "orphaned_apertures" })
     /** A list of Apertures in the model that lack a parent Face. Note that orphaned Apertures are not acceptable for Models that are to be exported for energy simulation. */
-    orphaned_apertures?: Aperture[];
+    orphanedApertures?: Aperture[];
 	
     @IsArray()
     @IsInstance(Door, { each: true })
     @Type(() => Door)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "orphaned_doors" })
     /** A list of Doors in the model that lack a parent Face. Note that orphaned Doors are not acceptable for Models that are to be exported for energy simulation. */
-    orphaned_doors?: Door[];
+    orphanedDoors?: Door[];
 	
     @IsArray()
     @IsInstance(ShadeMesh, { each: true })
     @Type(() => ShadeMesh)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "shade_meshes" })
     /** A list of ShadeMesh in the model. */
-    shade_meshes?: ShadeMesh[];
+    shadeMeshes?: ShadeMesh[];
 	
     @IsEnum(Units)
     @Type(() => String)
     @IsOptional()
+    @Expose({ name: "units" })
     /** Text indicating the units in which the model geometry exists. This is used to scale the geometry to the correct units for simulation engines like EnergyPlus, which requires all geometry be in meters. */
-    units?: Units;
+    units: Units = Units.Meters;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
+    @Expose({ name: "tolerance" })
     /** The maximum difference between x, y, and z values at which vertices are considered equivalent. This value should be in the Model units and it is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a Model. The default of 0.01 is suitable for models in meters. */
-    tolerance?: number;
+    tolerance: number = 0.01;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
+    @Expose({ name: "angle_tolerance" })
     /** The max angle difference in degrees that vertices are allowed to differ from one another in order to consider them colinear. This value is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a given Model. */
-    angle_tolerance?: number;
+    angleTolerance: number = 1;
 	
 
     constructor() {
@@ -104,7 +116,7 @@ export class Model extends IDdBaseModel {
         this.version = "1.59.0";
         this.units = Units.Meters;
         this.tolerance = 0.01;
-        this.angle_tolerance = 1;
+        this.angleTolerance = 1;
     }
 
 
@@ -116,14 +128,14 @@ export class Model extends IDdBaseModel {
             this.type = obj.type;
             this.version = obj.version;
             this.rooms = obj.rooms;
-            this.orphaned_faces = obj.orphaned_faces;
-            this.orphaned_shades = obj.orphaned_shades;
-            this.orphaned_apertures = obj.orphaned_apertures;
-            this.orphaned_doors = obj.orphaned_doors;
-            this.shade_meshes = obj.shade_meshes;
+            this.orphanedFaces = obj.orphanedFaces;
+            this.orphanedShades = obj.orphanedShades;
+            this.orphanedApertures = obj.orphanedApertures;
+            this.orphanedDoors = obj.orphanedDoors;
+            this.shadeMeshes = obj.shadeMeshes;
             this.units = obj.units;
             this.tolerance = obj.tolerance;
-            this.angle_tolerance = obj.angle_tolerance;
+            this.angleTolerance = obj.angleTolerance;
         }
     }
 
@@ -149,14 +161,14 @@ export class Model extends IDdBaseModel {
         data["type"] = this.type;
         data["version"] = this.version;
         data["rooms"] = this.rooms;
-        data["orphaned_faces"] = this.orphaned_faces;
-        data["orphaned_shades"] = this.orphaned_shades;
-        data["orphaned_apertures"] = this.orphaned_apertures;
-        data["orphaned_doors"] = this.orphaned_doors;
-        data["shade_meshes"] = this.shade_meshes;
+        data["orphaned_faces"] = this.orphanedFaces;
+        data["orphaned_shades"] = this.orphanedShades;
+        data["orphaned_apertures"] = this.orphanedApertures;
+        data["orphaned_doors"] = this.orphanedDoors;
+        data["shade_meshes"] = this.shadeMeshes;
         data["units"] = this.units;
         data["tolerance"] = this.tolerance;
-        data["angle_tolerance"] = this.angle_tolerance;
+        data["angle_tolerance"] = this.angleTolerance;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -170,4 +182,3 @@ export class Model extends IDdBaseModel {
         return true;
     }
 }
-

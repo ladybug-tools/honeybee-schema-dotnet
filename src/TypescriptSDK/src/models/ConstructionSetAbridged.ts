@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { ApertureConstructionSetAbridged } from "./ApertureConstructionSetAbridged";
 import { DoorConstructionSetAbridged } from "./DoorConstructionSetAbridged";
 import { FloorConstructionSetAbridged } from "./FloorConstructionSetAbridged";
@@ -12,57 +12,65 @@ export class ConstructionSetAbridged extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^ConstructionSetAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ConstructionSetAbridged";
 	
     @IsInstance(WallConstructionSetAbridged)
     @Type(() => WallConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "wall_set" })
     /** A WallConstructionSetAbridged object for this ConstructionSet. */
-    wall_set?: WallConstructionSetAbridged;
+    wallSet?: WallConstructionSetAbridged;
 	
     @IsInstance(FloorConstructionSetAbridged)
     @Type(() => FloorConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "floor_set" })
     /** A FloorConstructionSetAbridged object for this ConstructionSet. */
-    floor_set?: FloorConstructionSetAbridged;
+    floorSet?: FloorConstructionSetAbridged;
 	
     @IsInstance(RoofCeilingConstructionSetAbridged)
     @Type(() => RoofCeilingConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "roof_ceiling_set" })
     /** A RoofCeilingConstructionSetAbridged object for this ConstructionSet. */
-    roof_ceiling_set?: RoofCeilingConstructionSetAbridged;
+    roofCeilingSet?: RoofCeilingConstructionSetAbridged;
 	
     @IsInstance(ApertureConstructionSetAbridged)
     @Type(() => ApertureConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "aperture_set" })
     /** A ApertureConstructionSetAbridged object for this ConstructionSet. */
-    aperture_set?: ApertureConstructionSetAbridged;
+    apertureSet?: ApertureConstructionSetAbridged;
 	
     @IsInstance(DoorConstructionSetAbridged)
     @Type(() => DoorConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "door_set" })
     /** A DoorConstructionSetAbridged object for this ConstructionSet. */
-    door_set?: DoorConstructionSetAbridged;
+    doorSet?: DoorConstructionSetAbridged;
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "shade_construction" })
     /** The identifier of a ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned. */
-    shade_construction?: string;
+    shadeConstruction?: string;
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "air_boundary_construction" })
     /** The identifier of an AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type. */
-    air_boundary_construction?: string;
+    airBoundaryConstruction?: string;
 	
 
     constructor() {
@@ -76,13 +84,13 @@ export class ConstructionSetAbridged extends IDdEnergyBaseModel {
         if (_data) {
             const obj = plainToClass(ConstructionSetAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.wall_set = obj.wall_set;
-            this.floor_set = obj.floor_set;
-            this.roof_ceiling_set = obj.roof_ceiling_set;
-            this.aperture_set = obj.aperture_set;
-            this.door_set = obj.door_set;
-            this.shade_construction = obj.shade_construction;
-            this.air_boundary_construction = obj.air_boundary_construction;
+            this.wallSet = obj.wallSet;
+            this.floorSet = obj.floorSet;
+            this.roofCeilingSet = obj.roofCeilingSet;
+            this.apertureSet = obj.apertureSet;
+            this.doorSet = obj.doorSet;
+            this.shadeConstruction = obj.shadeConstruction;
+            this.airBoundaryConstruction = obj.airBoundaryConstruction;
         }
     }
 
@@ -105,13 +113,13 @@ export class ConstructionSetAbridged extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["wall_set"] = this.wall_set;
-        data["floor_set"] = this.floor_set;
-        data["roof_ceiling_set"] = this.roof_ceiling_set;
-        data["aperture_set"] = this.aperture_set;
-        data["door_set"] = this.door_set;
-        data["shade_construction"] = this.shade_construction;
-        data["air_boundary_construction"] = this.air_boundary_construction;
+        data["wall_set"] = this.wallSet;
+        data["floor_set"] = this.floorSet;
+        data["roof_ceiling_set"] = this.roofCeilingSet;
+        data["aperture_set"] = this.apertureSet;
+        data["door_set"] = this.doorSet;
+        data["shade_construction"] = this.shadeConstruction;
+        data["air_boundary_construction"] = this.airBoundaryConstruction;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -125,4 +133,3 @@ export class ConstructionSetAbridged extends IDdEnergyBaseModel {
         return true;
     }
 }
-

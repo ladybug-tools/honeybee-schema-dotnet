@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Autocalculate } from "./Autocalculate";
 
@@ -8,30 +8,34 @@ export class Outdoors extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^Outdoors$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Outdoors";
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "sun_exposure" })
     /** A boolean noting whether the boundary is exposed to sun. */
-    sun_exposure?: boolean;
+    sunExposure: boolean = true;
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "wind_exposure" })
     /** A boolean noting whether the boundary is exposed to wind. */
-    wind_exposure?: boolean;
+    windExposure: boolean = true;
 	
     @IsOptional()
+    @Expose({ name: "view_factor" })
     /** A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated. */
-    view_factor?: (Autocalculate | number);
+    viewFactor: (Autocalculate | number) = new Autocalculate();
 	
 
     constructor() {
         super();
         this.type = "Outdoors";
-        this.sun_exposure = true;
-        this.wind_exposure = true;
-        this.view_factor = new Autocalculate();
+        this.sunExposure = true;
+        this.windExposure = true;
+        this.viewFactor = new Autocalculate();
     }
 
 
@@ -40,9 +44,9 @@ export class Outdoors extends _OpenAPIGenBaseModel {
         if (_data) {
             const obj = plainToClass(Outdoors, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.sun_exposure = obj.sun_exposure;
-            this.wind_exposure = obj.wind_exposure;
-            this.view_factor = obj.view_factor;
+            this.sunExposure = obj.sunExposure;
+            this.windExposure = obj.windExposure;
+            this.viewFactor = obj.viewFactor;
         }
     }
 
@@ -65,9 +69,9 @@ export class Outdoors extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["sun_exposure"] = this.sun_exposure;
-        data["wind_exposure"] = this.wind_exposure;
-        data["view_factor"] = this.view_factor;
+        data["sun_exposure"] = this.sunExposure;
+        data["wind_exposure"] = this.windExposure;
+        data["view_factor"] = this.viewFactor;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -81,4 +85,3 @@ export class Outdoors extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

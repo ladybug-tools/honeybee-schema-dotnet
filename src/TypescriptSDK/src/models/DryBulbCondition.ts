@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Used to specify dry bulb conditions on a design day. */
@@ -8,20 +8,23 @@ export class DryBulbCondition extends _OpenAPIGenBaseModel {
     @IsDefined()
     @Min(-90)
     @Max(70)
+    @Expose({ name: "dry_bulb_max" })
     /** The maximum dry bulb temperature on the design day [C]. */
-    dry_bulb_max!: number;
+    dryBulbMax!: number;
 	
     @IsNumber()
     @IsDefined()
     @Min(0)
+    @Expose({ name: "dry_bulb_range" })
     /** The difference between min and max temperatures on the design day [C]. */
-    dry_bulb_range!: number;
+    dryBulbRange!: number;
 	
     @IsString()
     @IsOptional()
     @Matches(/^DryBulbCondition$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "DryBulbCondition";
 	
 
     constructor() {
@@ -34,8 +37,8 @@ export class DryBulbCondition extends _OpenAPIGenBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(DryBulbCondition, _data, { enableImplicitConversion: true });
-            this.dry_bulb_max = obj.dry_bulb_max;
-            this.dry_bulb_range = obj.dry_bulb_range;
+            this.dryBulbMax = obj.dryBulbMax;
+            this.dryBulbRange = obj.dryBulbRange;
             this.type = obj.type;
         }
     }
@@ -58,8 +61,8 @@ export class DryBulbCondition extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["dry_bulb_max"] = this.dry_bulb_max;
-        data["dry_bulb_range"] = this.dry_bulb_range;
+        data["dry_bulb_max"] = this.dryBulbMax;
+        data["dry_bulb_range"] = this.dryBulbRange;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -74,4 +77,3 @@ export class DryBulbCondition extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ModelDoe2Properties } from "./ModelDoe2Properties";
 import { ModelEnergyProperties } from "./ModelEnergyProperties";
@@ -9,28 +9,32 @@ export class ModelProperties extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^ModelProperties$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ModelProperties";
 	
     @IsInstance(ModelEnergyProperties)
     @Type(() => ModelEnergyProperties)
     @ValidateNested()
     @IsOptional()
-    /** Energy */
+    @Expose({ name: "energy" })
+    /** energy */
     energy?: ModelEnergyProperties;
 	
     @IsInstance(ModelRadianceProperties)
     @Type(() => ModelRadianceProperties)
     @ValidateNested()
     @IsOptional()
-    /** Radiance */
+    @Expose({ name: "radiance" })
+    /** radiance */
     radiance?: ModelRadianceProperties;
 	
     @IsInstance(ModelDoe2Properties)
     @Type(() => ModelDoe2Properties)
     @ValidateNested()
     @IsOptional()
-    /** Doe2 */
+    @Expose({ name: "doe2" })
+    /** doe2 */
     doe2?: ModelDoe2Properties;
 	
 
@@ -86,4 +90,3 @@ export class ModelProperties extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

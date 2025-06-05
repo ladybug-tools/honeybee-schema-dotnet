@@ -1,30 +1,34 @@
 ﻿import { IsEnum, IsDefined, IsString, Matches, MinLength, MaxLength, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { ParentTypes } from "./ParentTypes";
 
 export class ValidationParent {
     @IsEnum(ParentTypes)
     @Type(() => String)
     @IsDefined()
+    @Expose({ name: "parent_type" })
     /** Text for the type of object that the parent is. */
-    parent_type!: ParentTypes;
+    parentType!: ParentTypes;
 	
     @IsString()
     @IsDefined()
     @Matches(/^[.A-Za-z0-9_-]+$/)
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "id" })
     /** Text string for the unique ID of the parent object. */
     id!: string;
 	
     @IsString()
     @IsOptional()
     @Matches(/^ValidationParent$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ValidationParent";
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "name" })
     /** Display name of the parent object. */
     name?: string;
 	
@@ -37,7 +41,7 @@ export class ValidationParent {
     init(_data?: any) {
         if (_data) {
             const obj = plainToClass(ValidationParent, _data, { enableImplicitConversion: true });
-            this.parent_type = obj.parent_type;
+            this.parentType = obj.parentType;
             this.id = obj.id;
             this.type = obj.type;
             this.name = obj.name;
@@ -62,25 +66,19 @@ export class ValidationParent {
 
 	toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["parent_type"] = this.parent_type;
+        data["parent_type"] = this.parentType;
         data["id"] = this.id;
         data["type"] = this.type;
         data["name"] = this.name;
-        return removeUndefinedProperties(data);
+        return instanceToPlain(data);
     }
 
-}
-
-function removeUndefinedProperties(obj: any): any {
-    if (Array.isArray(obj)) {
-        return obj.map(removeUndefinedProperties);
-    } else if (obj !== null && typeof obj === 'object') {
-        return Object.entries(obj)
-        .filter(([_, value]) => value !== undefined)
-        .reduce((acc, [key, value]) => {
-            acc[key] = removeUndefinedProperties(value);
-            return acc;
-        }, {} as any);
+	async validate(): Promise<boolean> {
+        const errors = await validate(this);
+        if (errors.length > 0){
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error]).join(', ')).join('; ');
+      		throw new Error(`Validation failed: ${errorMessages}`);
+		}
+        return true;
     }
-    return obj;
 }

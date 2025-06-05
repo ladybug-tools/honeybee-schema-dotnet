@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsEnum, IsDefined, IsNumber, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { GasType } from "./GasType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -9,25 +9,29 @@ export class EnergyWindowMaterialGasMixture extends IDdEnergyBaseModel {
     @IsEnum(GasType, { each: true })
     @Type(() => String)
     @IsDefined()
+    @Expose({ name: "gas_types" })
     /** List of gases in the gas mixture. */
-    gas_types!: GasType[];
+    gasTypes!: GasType[];
 	
     @IsArray()
     @IsNumber({},{ each: true })
     @IsDefined()
+    @Expose({ name: "gas_fractions" })
     /** A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1. */
-    gas_fractions!: number[];
+    gasFractions!: number[];
 	
     @IsString()
     @IsOptional()
     @Matches(/^EnergyWindowMaterialGasMixture$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "EnergyWindowMaterialGasMixture";
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "thickness" })
     /** The thickness of the gas mixture layer in meters. */
-    thickness?: number;
+    thickness: number = 0.0125;
 	
 
     constructor() {
@@ -41,8 +45,8 @@ export class EnergyWindowMaterialGasMixture extends IDdEnergyBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(EnergyWindowMaterialGasMixture, _data, { enableImplicitConversion: true });
-            this.gas_types = obj.gas_types;
-            this.gas_fractions = obj.gas_fractions;
+            this.gasTypes = obj.gasTypes;
+            this.gasFractions = obj.gasFractions;
             this.type = obj.type;
             this.thickness = obj.thickness;
         }
@@ -66,8 +70,8 @@ export class EnergyWindowMaterialGasMixture extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["gas_types"] = this.gas_types;
-        data["gas_fractions"] = this.gas_fractions;
+        data["gas_types"] = this.gasTypes;
+        data["gas_fractions"] = this.gasFractions;
         data["type"] = this.type;
         data["thickness"] = this.thickness;
         data = super.toJSON(data);
@@ -83,4 +87,3 @@ export class EnergyWindowMaterialGasMixture extends IDdEnergyBaseModel {
         return true;
     }
 }
-

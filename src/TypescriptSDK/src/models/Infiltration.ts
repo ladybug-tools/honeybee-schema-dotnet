@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { ScheduleRuleset } from "./ScheduleRuleset";
@@ -9,10 +9,12 @@ export class Infiltration extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
     @Min(0)
+    @Expose({ name: "flow_per_exterior_area" })
     /** Number for the infiltration per exterior surface area in m3/s-m2. */
-    flow_per_exterior_area!: number;
+    flowPerExteriorArea!: number;
 	
     @IsDefined()
+    @Expose({ name: "schedule" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
@@ -25,34 +27,38 @@ export class Infiltration extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^Infiltration$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Infiltration";
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
-    /** ConstantCoefficient */
-    constant_coefficient?: number;
+    @Expose({ name: "constant_coefficient" })
+    /** constantCoefficient */
+    constantCoefficient: number = 1;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
-    /** TemperatureCoefficient */
-    temperature_coefficient?: number;
+    @Expose({ name: "temperature_coefficient" })
+    /** temperatureCoefficient */
+    temperatureCoefficient: number = 0;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
-    /** VelocityCoefficient */
-    velocity_coefficient?: number;
+    @Expose({ name: "velocity_coefficient" })
+    /** velocityCoefficient */
+    velocityCoefficient: number = 0;
 	
 
     constructor() {
         super();
         this.type = "Infiltration";
-        this.constant_coefficient = 1;
-        this.temperature_coefficient = 0;
-        this.velocity_coefficient = 0;
+        this.constantCoefficient = 1;
+        this.temperatureCoefficient = 0;
+        this.velocityCoefficient = 0;
     }
 
 
@@ -60,12 +66,12 @@ export class Infiltration extends IDdEnergyBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(Infiltration, _data, { enableImplicitConversion: true });
-            this.flow_per_exterior_area = obj.flow_per_exterior_area;
+            this.flowPerExteriorArea = obj.flowPerExteriorArea;
             this.schedule = obj.schedule;
             this.type = obj.type;
-            this.constant_coefficient = obj.constant_coefficient;
-            this.temperature_coefficient = obj.temperature_coefficient;
-            this.velocity_coefficient = obj.velocity_coefficient;
+            this.constantCoefficient = obj.constantCoefficient;
+            this.temperatureCoefficient = obj.temperatureCoefficient;
+            this.velocityCoefficient = obj.velocityCoefficient;
         }
     }
 
@@ -87,12 +93,12 @@ export class Infiltration extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["flow_per_exterior_area"] = this.flow_per_exterior_area;
+        data["flow_per_exterior_area"] = this.flowPerExteriorArea;
         data["schedule"] = this.schedule;
         data["type"] = this.type;
-        data["constant_coefficient"] = this.constant_coefficient;
-        data["temperature_coefficient"] = this.temperature_coefficient;
-        data["velocity_coefficient"] = this.velocity_coefficient;
+        data["constant_coefficient"] = this.constantCoefficient;
+        data["temperature_coefficient"] = this.temperatureCoefficient;
+        data["velocity_coefficient"] = this.velocityCoefficient;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -106,4 +112,3 @@ export class Infiltration extends IDdEnergyBaseModel {
         return true;
     }
 }
-

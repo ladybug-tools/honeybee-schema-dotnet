@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _PropertiesBaseAbridged } from "./_PropertiesBaseAbridged";
 import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged";
 
@@ -8,19 +8,22 @@ export class ShadeRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
     @IsString()
     @IsOptional()
     @Matches(/^ShadeRadiancePropertiesAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ShadeRadiancePropertiesAbridged";
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "dynamic_group_identifier" })
     /** An optional string to note the dynamic group '             'to which the Shade is a part of. Shades sharing the same '             'dynamic_group_identifier will have their states change in unison. '             'If None, the Shade is assumed to be static. (default: None). */
-    dynamic_group_identifier?: string;
+    dynamicGroupIdentifier?: string;
 	
     @IsArray()
     @IsInstance(RadianceShadeStateAbridged, { each: true })
     @Type(() => RadianceShadeStateAbridged)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "states" })
     /** An optional list of abridged states (default: None). */
     states?: RadianceShadeStateAbridged[];
 	
@@ -36,7 +39,7 @@ export class ShadeRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
         if (_data) {
             const obj = plainToClass(ShadeRadiancePropertiesAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.dynamic_group_identifier = obj.dynamic_group_identifier;
+            this.dynamicGroupIdentifier = obj.dynamicGroupIdentifier;
             this.states = obj.states;
         }
     }
@@ -60,7 +63,7 @@ export class ShadeRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["dynamic_group_identifier"] = this.dynamic_group_identifier;
+        data["dynamic_group_identifier"] = this.dynamicGroupIdentifier;
         data["states"] = this.states;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -75,4 +78,3 @@ export class ShadeRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
         return true;
     }
 }
-

@@ -1,5 +1,5 @@
 ﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _RadianceAsset } from "./_RadianceAsset";
 import { Face3D } from "./Face3D";
 import { Mesh3D } from "./Mesh3D";
@@ -12,19 +12,22 @@ export class SensorGrid extends _RadianceAsset {
     @Type(() => Sensor)
     @ValidateNested({ each: true })
     @IsDefined()
+    @Expose({ name: "sensors" })
     /** A list of sensors that belong to the grid. */
     sensors!: Sensor[];
 	
     @IsString()
     @IsOptional()
     @Matches(/^SensorGrid$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "SensorGrid";
 	
     @IsInstance(Mesh3D)
     @Type(() => Mesh3D)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "mesh" })
     /** An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D. */
     mesh?: Mesh3D;
 	
@@ -33,13 +36,15 @@ export class SensorGrid extends _RadianceAsset {
     @Type(() => Face3D)
     @ValidateNested({ each: true })
     @IsOptional()
+    @Expose({ name: "base_geometry" })
     /** An optional array of Face3D used to represent the grid. There are no restrictions on how this property relates to the sensors and it is provided only to assist with the display of the grid when the number of sensors or the mesh is too large to be practically visualized. */
-    base_geometry?: Face3D[];
+    baseGeometry?: Face3D[];
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "group_identifier" })
     /** An optional string to note the sensor grid group '             'to which the sensor is a part of. Grids sharing the same '             'group_identifier will be written to the same subfolder in Radiance '             'folder (default: None). */
-    group_identifier?: string;
+    groupIdentifier?: string;
 	
 
     constructor() {
@@ -55,8 +60,8 @@ export class SensorGrid extends _RadianceAsset {
             this.sensors = obj.sensors;
             this.type = obj.type;
             this.mesh = obj.mesh;
-            this.base_geometry = obj.base_geometry;
-            this.group_identifier = obj.group_identifier;
+            this.baseGeometry = obj.baseGeometry;
+            this.groupIdentifier = obj.groupIdentifier;
         }
     }
 
@@ -81,8 +86,8 @@ export class SensorGrid extends _RadianceAsset {
         data["sensors"] = this.sensors;
         data["type"] = this.type;
         data["mesh"] = this.mesh;
-        data["base_geometry"] = this.base_geometry;
-        data["group_identifier"] = this.group_identifier;
+        data["base_geometry"] = this.baseGeometry;
+        data["group_identifier"] = this.groupIdentifier;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -96,4 +101,3 @@ export class SensorGrid extends _RadianceAsset {
         return true;
     }
 }
-

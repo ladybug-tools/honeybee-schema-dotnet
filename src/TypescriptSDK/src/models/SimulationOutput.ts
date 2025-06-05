@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsArray, IsNumber, Min, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ReportingFrequency } from "./ReportingFrequency";
 
@@ -8,40 +8,45 @@ export class SimulationOutput extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^SimulationOutput$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "SimulationOutput";
 	
     @IsEnum(ReportingFrequency)
     @Type(() => String)
     @IsOptional()
-    /** ReportingFrequency */
-    reporting_frequency?: ReportingFrequency;
+    @Expose({ name: "reporting_frequency" })
+    /** reportingFrequency */
+    reportingFrequency: ReportingFrequency = ReportingFrequency.Hourly;
 	
     @IsArray()
     @IsString({ each: true })
     @IsOptional()
+    @Expose({ name: "outputs" })
     /** A list of EnergyPlus output names as strings, which are requested from the simulation. */
     outputs?: string[];
 	
     @IsArray()
     @IsString({ each: true })
     @IsOptional()
+    @Expose({ name: "summary_reports" })
     /** A list of EnergyPlus summary report names as strings. */
-    summary_reports?: string[];
+    summaryReports?: string[];
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(10)
+    @Expose({ name: "unmet_setpoint_tolerance" })
     /** A number in degrees Celsius for the difference that the zone conditions must be from the thermostat setpoint in order for the setpoint to be considered unmet. This will affect how unmet hours are reported in the output. ASHRAE 90.1 uses a tolerance of 1.11C, which is equivalent to 1.8F. */
-    unmet_setpoint_tolerance?: number;
+    unmetSetpointTolerance: number = 1.11;
 	
 
     constructor() {
         super();
         this.type = "SimulationOutput";
-        this.reporting_frequency = ReportingFrequency.Hourly;
-        this.unmet_setpoint_tolerance = 1.11;
+        this.reportingFrequency = ReportingFrequency.Hourly;
+        this.unmetSetpointTolerance = 1.11;
     }
 
 
@@ -50,10 +55,10 @@ export class SimulationOutput extends _OpenAPIGenBaseModel {
         if (_data) {
             const obj = plainToClass(SimulationOutput, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.reporting_frequency = obj.reporting_frequency;
+            this.reportingFrequency = obj.reportingFrequency;
             this.outputs = obj.outputs;
-            this.summary_reports = obj.summary_reports;
-            this.unmet_setpoint_tolerance = obj.unmet_setpoint_tolerance;
+            this.summaryReports = obj.summaryReports;
+            this.unmetSetpointTolerance = obj.unmetSetpointTolerance;
         }
     }
 
@@ -76,10 +81,10 @@ export class SimulationOutput extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["reporting_frequency"] = this.reporting_frequency;
+        data["reporting_frequency"] = this.reportingFrequency;
         data["outputs"] = this.outputs;
-        data["summary_reports"] = this.summary_reports;
-        data["unmet_setpoint_tolerance"] = this.unmet_setpoint_tolerance;
+        data["summary_reports"] = this.summaryReports;
+        data["unmet_setpoint_tolerance"] = this.unmetSetpointTolerance;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -93,4 +98,3 @@ export class SimulationOutput extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _EquipmentBase } from "./_EquipmentBase";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
@@ -7,8 +7,9 @@ export class GasEquipmentAbridged extends _EquipmentBase {
     @IsString()
     @IsOptional()
     @Matches(/^GasEquipmentAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "GasEquipmentAbridged";
 	
 
     constructor() {
@@ -57,4 +58,3 @@ export class GasEquipmentAbridged extends _EquipmentBase {
         return true;
     }
 }
-

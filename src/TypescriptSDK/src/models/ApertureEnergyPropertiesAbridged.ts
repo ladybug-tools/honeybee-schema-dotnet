@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { VentilationOpening } from "./VentilationOpening";
 
@@ -8,13 +8,15 @@ export class ApertureEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^ApertureEnergyPropertiesAbridged$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ApertureEnergyPropertiesAbridged";
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "construction" })
     /** Identifier of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set. */
     construction?: string;
 	
@@ -22,8 +24,9 @@ export class ApertureEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @Type(() => VentilationOpening)
     @ValidateNested()
     @IsOptional()
+    @Expose({ name: "vent_opening" })
     /** An optional VentilationOpening to specify the operable portion of the Aperture. */
-    vent_opening?: VentilationOpening;
+    ventOpening?: VentilationOpening;
 	
 
     constructor() {
@@ -38,7 +41,7 @@ export class ApertureEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
             const obj = plainToClass(ApertureEnergyPropertiesAbridged, _data, { enableImplicitConversion: true });
             this.type = obj.type;
             this.construction = obj.construction;
-            this.vent_opening = obj.vent_opening;
+            this.ventOpening = obj.ventOpening;
         }
     }
 
@@ -62,7 +65,7 @@ export class ApertureEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
         data["construction"] = this.construction;
-        data["vent_opening"] = this.vent_opening;
+        data["vent_opening"] = this.ventOpening;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -76,4 +79,3 @@ export class ApertureEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

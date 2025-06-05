@@ -1,5 +1,5 @@
 ﻿import { IsString, IsDefined, IsOptional, IsArray, IsNumber, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { Glass } from "./Glass";
 import { Glow } from "./Glow";
 import { Light } from "./Light";
@@ -14,10 +14,12 @@ import { Void } from "./Void";
 export class BSDF extends ModifierBase {
     @IsString()
     @IsDefined()
+    @Expose({ name: "bsdf_data" })
     /** A string with the contents of the BSDF XML file. */
-    bsdf_data!: string;
+    bsdfData!: string;
 	
     @IsOptional()
+    @Expose({ name: "modifier" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
@@ -32,10 +34,11 @@ export class BSDF extends ModifierBase {
       else return item;
     })
     /** Material modifier. */
-    modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
+    modifier: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) = new Void();
 	
     @IsArray()
     @IsOptional()
+    @Expose({ name: "dependencies" })
     @Transform(({ value }) => value.map((item: any) => {
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
       else if (item?.type === 'Glass') return Glass.fromJS(item);
@@ -54,59 +57,67 @@ export class BSDF extends ModifierBase {
     @IsArray()
     @IsNumber({},{ each: true })
     @IsOptional()
+    @Expose({ name: "up_orientation" })
     /** Vector as sequence that sets the hemisphere that the BSDF material faces. */
-    up_orientation?: number[];
+    upOrientation: number[] = [0.01, 0.01, 1];
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "thickness" })
     /** Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative). */
-    thickness?: number;
+    thickness: number = 0;
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "function_file" })
     /** Optional input for function file. Using ""."" will ensure that BSDF data is written to the root of wherever a given study is run. */
-    function_file?: string;
+    functionFile: string = ".";
 	
     @IsString()
     @IsOptional()
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "transform" })
     /** Optional transform input to scale the thickness and reorient the up vector. */
     transform?: string;
 	
     @IsArray()
     @IsNumber({},{ each: true })
     @IsOptional()
+    @Expose({ name: "front_diffuse_reflectance" })
     /** Optional additional front diffuse reflectance as sequence of three RGB numbers. */
-    front_diffuse_reflectance?: number[];
+    frontDiffuseReflectance?: number[];
 	
     @IsArray()
     @IsNumber({},{ each: true })
     @IsOptional()
+    @Expose({ name: "back_diffuse_reflectance" })
     /** Optional additional back diffuse reflectance as sequence of three RGB numbers. */
-    back_diffuse_reflectance?: number[];
+    backDiffuseReflectance?: number[];
 	
     @IsArray()
     @IsNumber({},{ each: true })
     @IsOptional()
+    @Expose({ name: "diffuse_transmittance" })
     /** Optional additional diffuse transmittance as sequence of three RGB numbers. */
-    diffuse_transmittance?: number[];
+    diffuseTransmittance?: number[];
 	
     @IsString()
     @IsOptional()
     @Matches(/^BSDF$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "BSDF";
 	
 
     constructor() {
         super();
         this.modifier = new Void();
-        this.up_orientation = [0.01, 0.01, 1];
+        this.upOrientation = [0.01, 0.01, 1];
         this.thickness = 0;
-        this.function_file = ".";
+        this.functionFile = ".";
         this.type = "BSDF";
     }
 
@@ -115,16 +126,16 @@ export class BSDF extends ModifierBase {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(BSDF, _data, { enableImplicitConversion: true });
-            this.bsdf_data = obj.bsdf_data;
+            this.bsdfData = obj.bsdfData;
             this.modifier = obj.modifier;
             this.dependencies = obj.dependencies;
-            this.up_orientation = obj.up_orientation;
+            this.upOrientation = obj.upOrientation;
             this.thickness = obj.thickness;
-            this.function_file = obj.function_file;
+            this.functionFile = obj.functionFile;
             this.transform = obj.transform;
-            this.front_diffuse_reflectance = obj.front_diffuse_reflectance;
-            this.back_diffuse_reflectance = obj.back_diffuse_reflectance;
-            this.diffuse_transmittance = obj.diffuse_transmittance;
+            this.frontDiffuseReflectance = obj.frontDiffuseReflectance;
+            this.backDiffuseReflectance = obj.backDiffuseReflectance;
+            this.diffuseTransmittance = obj.diffuseTransmittance;
             this.type = obj.type;
         }
     }
@@ -147,16 +158,16 @@ export class BSDF extends ModifierBase {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["bsdf_data"] = this.bsdf_data;
+        data["bsdf_data"] = this.bsdfData;
         data["modifier"] = this.modifier;
         data["dependencies"] = this.dependencies;
-        data["up_orientation"] = this.up_orientation;
+        data["up_orientation"] = this.upOrientation;
         data["thickness"] = this.thickness;
-        data["function_file"] = this.function_file;
+        data["function_file"] = this.functionFile;
         data["transform"] = this.transform;
-        data["front_diffuse_reflectance"] = this.front_diffuse_reflectance;
-        data["back_diffuse_reflectance"] = this.back_diffuse_reflectance;
-        data["diffuse_transmittance"] = this.diffuse_transmittance;
+        data["front_diffuse_reflectance"] = this.frontDiffuseReflectance;
+        data["back_diffuse_reflectance"] = this.backDiffuseReflectance;
+        data["diffuse_transmittance"] = this.diffuseTransmittance;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -171,4 +182,3 @@ export class BSDF extends ModifierBase {
         return true;
     }
 }
-

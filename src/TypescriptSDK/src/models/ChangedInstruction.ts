@@ -1,5 +1,5 @@
 ﻿import { IsEnum, IsDefined, IsString, Matches, MinLength, MaxLength, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { GeometryObjectTypes } from "./GeometryObjectTypes";
 
@@ -7,49 +7,56 @@ export class ChangedInstruction extends _OpenAPIGenBaseModel {
     @IsEnum(GeometryObjectTypes)
     @Type(() => String)
     @IsDefined()
+    @Expose({ name: "element_type" })
     /** Text for the type of object that has been changed. */
-    element_type!: GeometryObjectTypes;
+    elementType!: GeometryObjectTypes;
 	
     @IsString()
     @IsDefined()
     @Matches(/^[^,;!\n\t]+$/)
     @MinLength(1)
     @MaxLength(100)
+    @Expose({ name: "element_id" })
     /** Text string for the unique object ID that has changed. */
-    element_id!: string;
+    elementId!: string;
 	
     @IsString()
     @IsOptional()
+    @Expose({ name: "element_name" })
     /** Text string for the display name of the object that has changed. */
-    element_name?: string;
+    elementName?: string;
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "update_geometry" })
     /** A boolean to note whether the geometry of the object in the new/updated model should replace the base/existing geometry (True) or the existing geometry should be kept (False). */
-    update_geometry?: boolean;
+    updateGeometry: boolean = true;
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "update_energy" })
     /** A boolean to note whether the energy properties of the object in the new/updated model should replace the base/existing energy properties (True) or the base/existing energy properties should be kept (False). */
-    update_energy?: boolean;
+    updateEnergy: boolean = true;
 	
     @IsBoolean()
     @IsOptional()
+    @Expose({ name: "update_radiance" })
     /** A boolean to note whether the radiance properties of the object in the new/updated model should replace the base/existing radiance properties (True) or the base/existing radiance properties should be kept (False). */
-    update_radiance?: boolean;
+    updateRadiance: boolean = true;
 	
     @IsString()
     @IsOptional()
     @Matches(/^ChangedInstruction$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ChangedInstruction";
 	
 
     constructor() {
         super();
-        this.update_geometry = true;
-        this.update_energy = true;
-        this.update_radiance = true;
+        this.updateGeometry = true;
+        this.updateEnergy = true;
+        this.updateRadiance = true;
         this.type = "ChangedInstruction";
     }
 
@@ -58,12 +65,12 @@ export class ChangedInstruction extends _OpenAPIGenBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(ChangedInstruction, _data, { enableImplicitConversion: true });
-            this.element_type = obj.element_type;
-            this.element_id = obj.element_id;
-            this.element_name = obj.element_name;
-            this.update_geometry = obj.update_geometry;
-            this.update_energy = obj.update_energy;
-            this.update_radiance = obj.update_radiance;
+            this.elementType = obj.elementType;
+            this.elementId = obj.elementId;
+            this.elementName = obj.elementName;
+            this.updateGeometry = obj.updateGeometry;
+            this.updateEnergy = obj.updateEnergy;
+            this.updateRadiance = obj.updateRadiance;
             this.type = obj.type;
         }
     }
@@ -86,12 +93,12 @@ export class ChangedInstruction extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["element_type"] = this.element_type;
-        data["element_id"] = this.element_id;
-        data["element_name"] = this.element_name;
-        data["update_geometry"] = this.update_geometry;
-        data["update_energy"] = this.update_energy;
-        data["update_radiance"] = this.update_radiance;
+        data["element_type"] = this.elementType;
+        data["element_id"] = this.elementId;
+        data["element_name"] = this.elementName;
+        data["update_geometry"] = this.updateGeometry;
+        data["update_energy"] = this.updateEnergy;
+        data["update_radiance"] = this.updateRadiance;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -106,4 +113,3 @@ export class ChangedInstruction extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-

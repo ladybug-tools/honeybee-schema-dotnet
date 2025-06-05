@@ -1,5 +1,5 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { ScheduleRuleset } from "./ScheduleRuleset";
@@ -9,10 +9,12 @@ export class ServiceHotWater extends IDdEnergyBaseModel {
     @IsNumber()
     @IsDefined()
     @Min(0)
+    @Expose({ name: "flow_per_area" })
     /** Number for the total volume flow rate of water per unit area of floor [L/h-m2]. */
-    flow_per_area!: number;
+    flowPerArea!: number;
 	
     @IsDefined()
+    @Expose({ name: "schedule" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'ScheduleRuleset') return ScheduleRuleset.fromJS(item);
@@ -25,35 +27,39 @@ export class ServiceHotWater extends IDdEnergyBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^ServiceHotWater$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ServiceHotWater";
 	
     @IsNumber()
     @IsOptional()
+    @Expose({ name: "target_temperature" })
     /** Number for the target temperature of water out of the tap (C). This the temperature after hot water has been mixed with cold water from the water mains. The default is 60C, which essentially assumes that the flow_per_area on this object is only for water straight out of the water heater. */
-    target_temperature?: number;
+    targetTemperature: number = 60;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "sensible_fraction" })
     /** A number between 0 and 1 for the fraction of the total hot water load given off as sensible heat in the zone. */
-    sensible_fraction?: number;
+    sensibleFraction: number = 0.2;
 	
     @IsNumber()
     @IsOptional()
     @Min(0)
     @Max(1)
+    @Expose({ name: "latent_fraction" })
     /** A number between 0 and 1 for the fraction of the total hot water load that is latent. */
-    latent_fraction?: number;
+    latentFraction: number = 0.05;
 	
 
     constructor() {
         super();
         this.type = "ServiceHotWater";
-        this.target_temperature = 60;
-        this.sensible_fraction = 0.2;
-        this.latent_fraction = 0.05;
+        this.targetTemperature = 60;
+        this.sensibleFraction = 0.2;
+        this.latentFraction = 0.05;
     }
 
 
@@ -61,12 +67,12 @@ export class ServiceHotWater extends IDdEnergyBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(ServiceHotWater, _data, { enableImplicitConversion: true });
-            this.flow_per_area = obj.flow_per_area;
+            this.flowPerArea = obj.flowPerArea;
             this.schedule = obj.schedule;
             this.type = obj.type;
-            this.target_temperature = obj.target_temperature;
-            this.sensible_fraction = obj.sensible_fraction;
-            this.latent_fraction = obj.latent_fraction;
+            this.targetTemperature = obj.targetTemperature;
+            this.sensibleFraction = obj.sensibleFraction;
+            this.latentFraction = obj.latentFraction;
         }
     }
 
@@ -88,12 +94,12 @@ export class ServiceHotWater extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["flow_per_area"] = this.flow_per_area;
+        data["flow_per_area"] = this.flowPerArea;
         data["schedule"] = this.schedule;
         data["type"] = this.type;
-        data["target_temperature"] = this.target_temperature;
-        data["sensible_fraction"] = this.sensible_fraction;
-        data["latent_fraction"] = this.latent_fraction;
+        data["target_temperature"] = this.targetTemperature;
+        data["sensible_fraction"] = this.sensibleFraction;
+        data["latent_fraction"] = this.latentFraction;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -107,4 +113,3 @@ export class ServiceHotWater extends IDdEnergyBaseModel {
         return true;
     }
 }
-

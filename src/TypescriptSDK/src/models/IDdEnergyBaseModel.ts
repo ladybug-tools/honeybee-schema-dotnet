@@ -1,18 +1,20 @@
 ﻿import { IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class IDdEnergyBaseModel extends EnergyBaseModel {
     @IsOptional()
+    @Expose({ name: "user_data" })
     /** Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list). */
-    user_data?: Object;
+    userData?: Object;
 	
     @IsString()
     @IsOptional()
     @Matches(/^IDdEnergyBaseModel$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "IDdEnergyBaseModel";
 	
 
     constructor() {
@@ -25,7 +27,7 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
         super.init(_data);
         if (_data) {
             const obj = plainToClass(IDdEnergyBaseModel, _data, { enableImplicitConversion: true });
-            this.user_data = obj.user_data;
+            this.userData = obj.userData;
             this.type = obj.type;
         }
     }
@@ -48,7 +50,7 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["user_data"] = this.user_data;
+        data["user_data"] = this.userData;
         data["type"] = this.type;
         data = super.toJSON(data);
         return instanceToPlain(data);
@@ -63,4 +65,3 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
         return true;
     }
 }
-

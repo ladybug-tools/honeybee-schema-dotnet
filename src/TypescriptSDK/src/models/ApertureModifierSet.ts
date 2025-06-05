@@ -1,5 +1,5 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Transform } from 'class-transformer';
+import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
@@ -16,10 +16,12 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Matches(/^ApertureModifierSet$/)
-    /** Type */
-    type?: string;
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ApertureModifierSet";
 	
     @IsOptional()
+    @Expose({ name: "window_modifier" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
@@ -34,9 +36,10 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel {
       else return item;
     })
     /** A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and Wall parent Face. */
-    window_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
+    windowModifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsOptional()
+    @Expose({ name: "interior_modifier" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
@@ -51,9 +54,10 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel {
       else return item;
     })
     /** A modifier object for apertures with a Surface boundary condition. */
-    interior_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
+    interiorModifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsOptional()
+    @Expose({ name: "skylight_modifier" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
@@ -68,9 +72,10 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel {
       else return item;
     })
     /** A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face. */
-    skylight_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
+    skylightModifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @IsOptional()
+    @Expose({ name: "operable_modifier" })
     @Transform(({ value }) => {
       const item = value;
       if (item?.type === 'Plastic') return Plastic.fromJS(item);
@@ -85,7 +90,7 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel {
       else return item;
     })
     /** A modifier object for apertures with an Outdoors boundary condition and a True is_operable property. */
-    operable_modifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
+    operableModifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
 
     constructor() {
@@ -99,10 +104,10 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel {
         if (_data) {
             const obj = plainToClass(ApertureModifierSet, _data, { enableImplicitConversion: true });
             this.type = obj.type;
-            this.window_modifier = obj.window_modifier;
-            this.interior_modifier = obj.interior_modifier;
-            this.skylight_modifier = obj.skylight_modifier;
-            this.operable_modifier = obj.operable_modifier;
+            this.windowModifier = obj.windowModifier;
+            this.interiorModifier = obj.interiorModifier;
+            this.skylightModifier = obj.skylightModifier;
+            this.operableModifier = obj.operableModifier;
         }
     }
 
@@ -125,10 +130,10 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type;
-        data["window_modifier"] = this.window_modifier;
-        data["interior_modifier"] = this.interior_modifier;
-        data["skylight_modifier"] = this.skylight_modifier;
-        data["operable_modifier"] = this.operable_modifier;
+        data["window_modifier"] = this.windowModifier;
+        data["interior_modifier"] = this.interiorModifier;
+        data["skylight_modifier"] = this.skylightModifier;
+        data["operable_modifier"] = this.operableModifier;
         data = super.toJSON(data);
         return instanceToPlain(data);
     }
@@ -142,4 +147,3 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel {
         return true;
     }
 }
-
