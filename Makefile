@@ -33,5 +33,5 @@ ts-build:
 	cp ./src/TypeScriptSDK/*.tgz ./
 
 ts-test:
-	cd ./src/TypeScriptSDK.Tests && npm i ./../TypeScriptSDK/dragonfly-schema-$(NEW_RELEASE_VERSION).tgz
+	cd ./src/TypeScriptSDK.Tests && npm i ./../TypeScriptSDK/*-$(NEW_RELEASE_VERSION).tgz
 	cd ./src/TypeScriptSDK.Tests && npm run test
