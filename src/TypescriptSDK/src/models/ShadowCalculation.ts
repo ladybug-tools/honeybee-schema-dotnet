@@ -64,13 +64,13 @@ export class ShadowCalculation extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ShadowCalculation, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.solarDistribution = obj.solarDistribution;
-            this.calculationMethod = obj.calculationMethod;
-            this.calculationUpdateMethod = obj.calculationUpdateMethod;
-            this.calculationFrequency = obj.calculationFrequency;
-            this.maximumFigures = obj.maximumFigures;
+            const obj = plainToClass(ShadowCalculation, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "ShadowCalculation";
+            this.solarDistribution = obj.solarDistribution ?? SolarDistribution.FullExteriorWithReflections;
+            this.calculationMethod = obj.calculationMethod ?? CalculationMethod.PolygonClipping;
+            this.calculationUpdateMethod = obj.calculationUpdateMethod ?? CalculationUpdateMethod.Periodic;
+            this.calculationFrequency = obj.calculationFrequency ?? 30;
+            this.maximumFigures = obj.maximumFigures ?? 15000;
         }
     }
 
@@ -92,14 +92,14 @@ export class ShadowCalculation extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["solar_distribution"] = this.solarDistribution;
-        data["calculation_method"] = this.calculationMethod;
-        data["calculation_update_method"] = this.calculationUpdateMethod;
-        data["calculation_frequency"] = this.calculationFrequency;
-        data["maximum_figures"] = this.maximumFigures;
+        data["type"] = this.type ?? "ShadowCalculation";
+        data["solar_distribution"] = this.solarDistribution ?? SolarDistribution.FullExteriorWithReflections;
+        data["calculation_method"] = this.calculationMethod ?? CalculationMethod.PolygonClipping;
+        data["calculation_update_method"] = this.calculationUpdateMethod ?? CalculationUpdateMethod.Periodic;
+        data["calculation_frequency"] = this.calculationFrequency ?? 30;
+        data["maximum_figures"] = this.maximumFigures ?? 15000;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

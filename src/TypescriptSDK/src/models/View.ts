@@ -95,14 +95,14 @@ export class View extends _RadianceAsset {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(View, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(View, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.position = obj.position;
             this.direction = obj.direction;
             this.upVector = obj.upVector;
-            this.type = obj.type;
-            this.viewType = obj.viewType;
-            this.hSize = obj.hSize;
-            this.vSize = obj.vSize;
+            this.type = obj.type ?? "View";
+            this.viewType = obj.viewType ?? ViewType.V;
+            this.hSize = obj.hSize ?? 60;
+            this.vSize = obj.vSize ?? 60;
             this.shift = obj.shift;
             this.lift = obj.lift;
             this.foreClip = obj.foreClip;
@@ -132,17 +132,17 @@ export class View extends _RadianceAsset {
         data["position"] = this.position;
         data["direction"] = this.direction;
         data["up_vector"] = this.upVector;
-        data["type"] = this.type;
-        data["view_type"] = this.viewType;
-        data["h_size"] = this.hSize;
-        data["v_size"] = this.vSize;
+        data["type"] = this.type ?? "View";
+        data["view_type"] = this.viewType ?? ViewType.V;
+        data["h_size"] = this.hSize ?? 60;
+        data["v_size"] = this.vSize ?? 60;
         data["shift"] = this.shift;
         data["lift"] = this.lift;
         data["fore_clip"] = this.foreClip;
         data["aft_clip"] = this.aftClip;
         data["group_identifier"] = this.groupIdentifier;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

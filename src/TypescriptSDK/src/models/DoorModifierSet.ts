@@ -120,13 +120,13 @@ export class DoorModifierSet extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DoorModifierSet, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(DoorModifierSet, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.exteriorModifier = obj.exteriorModifier;
             this.interiorModifier = obj.interiorModifier;
             this.interiorGlassModifier = obj.interiorGlassModifier;
             this.exteriorGlassModifier = obj.exteriorGlassModifier;
             this.overheadModifier = obj.overheadModifier;
-            this.type = obj.type;
+            this.type = obj.type ?? "DoorModifierSet";
         }
     }
 
@@ -153,9 +153,9 @@ export class DoorModifierSet extends _OpenAPIGenBaseModel {
         data["interior_glass_modifier"] = this.interiorGlassModifier;
         data["exterior_glass_modifier"] = this.exteriorGlassModifier;
         data["overhead_modifier"] = this.overheadModifier;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "DoorModifierSet";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

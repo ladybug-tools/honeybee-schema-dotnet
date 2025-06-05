@@ -68,13 +68,13 @@ export class ElectricEquipment extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ElectricEquipment, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(ElectricEquipment, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.wattsPerArea = obj.wattsPerArea;
             this.schedule = obj.schedule;
-            this.radiantFraction = obj.radiantFraction;
-            this.latentFraction = obj.latentFraction;
-            this.lostFraction = obj.lostFraction;
-            this.type = obj.type;
+            this.radiantFraction = obj.radiantFraction ?? 0;
+            this.latentFraction = obj.latentFraction ?? 0;
+            this.lostFraction = obj.lostFraction ?? 0;
+            this.type = obj.type ?? "ElectricEquipment";
         }
     }
 
@@ -98,12 +98,12 @@ export class ElectricEquipment extends IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
         data["watts_per_area"] = this.wattsPerArea;
         data["schedule"] = this.schedule;
-        data["radiant_fraction"] = this.radiantFraction;
-        data["latent_fraction"] = this.latentFraction;
-        data["lost_fraction"] = this.lostFraction;
-        data["type"] = this.type;
+        data["radiant_fraction"] = this.radiantFraction ?? 0;
+        data["latent_fraction"] = this.latentFraction ?? 0;
+        data["lost_fraction"] = this.lostFraction ?? 0;
+        data["type"] = this.type ?? "ElectricEquipment";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

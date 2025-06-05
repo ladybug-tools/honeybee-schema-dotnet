@@ -82,8 +82,8 @@ export class ConstructionSetAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ConstructionSetAbridged, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
+            const obj = plainToClass(ConstructionSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "ConstructionSetAbridged";
             this.wallSet = obj.wallSet;
             this.floorSet = obj.floorSet;
             this.roofCeilingSet = obj.roofCeilingSet;
@@ -112,7 +112,7 @@ export class ConstructionSetAbridged extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["type"] = this.type ?? "ConstructionSetAbridged";
         data["wall_set"] = this.wallSet;
         data["floor_set"] = this.floorSet;
         data["roof_ceiling_set"] = this.roofCeilingSet;
@@ -121,7 +121,7 @@ export class ConstructionSetAbridged extends IDdEnergyBaseModel {
         data["shade_construction"] = this.shadeConstruction;
         data["air_boundary_construction"] = this.airBoundaryConstruction;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

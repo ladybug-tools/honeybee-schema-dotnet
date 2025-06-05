@@ -21,8 +21,8 @@ export class ModifierBase extends IDdRadianceBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ModifierBase, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
+            const obj = plainToClass(ModifierBase, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "ModifierBase";
         }
     }
 
@@ -44,9 +44,9 @@ export class ModifierBase extends IDdRadianceBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["type"] = this.type ?? "ModifierBase";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

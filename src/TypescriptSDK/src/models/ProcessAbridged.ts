@@ -80,15 +80,15 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ProcessAbridged, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(ProcessAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.watts = obj.watts;
             this.schedule = obj.schedule;
             this.fuelType = obj.fuelType;
-            this.type = obj.type;
-            this.endUseCategory = obj.endUseCategory;
-            this.radiantFraction = obj.radiantFraction;
-            this.latentFraction = obj.latentFraction;
-            this.lostFraction = obj.lostFraction;
+            this.type = obj.type ?? "ProcessAbridged";
+            this.endUseCategory = obj.endUseCategory ?? "Process";
+            this.radiantFraction = obj.radiantFraction ?? 0;
+            this.latentFraction = obj.latentFraction ?? 0;
+            this.lostFraction = obj.lostFraction ?? 0;
         }
     }
 
@@ -113,13 +113,13 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
         data["watts"] = this.watts;
         data["schedule"] = this.schedule;
         data["fuel_type"] = this.fuelType;
-        data["type"] = this.type;
-        data["end_use_category"] = this.endUseCategory;
-        data["radiant_fraction"] = this.radiantFraction;
-        data["latent_fraction"] = this.latentFraction;
-        data["lost_fraction"] = this.lostFraction;
+        data["type"] = this.type ?? "ProcessAbridged";
+        data["end_use_category"] = this.endUseCategory ?? "Process";
+        data["radiant_fraction"] = this.radiantFraction ?? 0;
+        data["latent_fraction"] = this.latentFraction ?? 0;
+        data["lost_fraction"] = this.lostFraction ?? 0;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

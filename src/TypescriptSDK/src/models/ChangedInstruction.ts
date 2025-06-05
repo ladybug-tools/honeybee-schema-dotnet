@@ -64,14 +64,14 @@ export class ChangedInstruction extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ChangedInstruction, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(ChangedInstruction, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.elementType = obj.elementType;
             this.elementId = obj.elementId;
             this.elementName = obj.elementName;
-            this.updateGeometry = obj.updateGeometry;
-            this.updateEnergy = obj.updateEnergy;
-            this.updateRadiance = obj.updateRadiance;
-            this.type = obj.type;
+            this.updateGeometry = obj.updateGeometry ?? true;
+            this.updateEnergy = obj.updateEnergy ?? true;
+            this.updateRadiance = obj.updateRadiance ?? true;
+            this.type = obj.type ?? "ChangedInstruction";
         }
     }
 
@@ -96,12 +96,12 @@ export class ChangedInstruction extends _OpenAPIGenBaseModel {
         data["element_type"] = this.elementType;
         data["element_id"] = this.elementId;
         data["element_name"] = this.elementName;
-        data["update_geometry"] = this.updateGeometry;
-        data["update_energy"] = this.updateEnergy;
-        data["update_radiance"] = this.updateRadiance;
-        data["type"] = this.type;
+        data["update_geometry"] = this.updateGeometry ?? true;
+        data["update_energy"] = this.updateEnergy ?? true;
+        data["update_radiance"] = this.updateRadiance ?? true;
+        data["type"] = this.type ?? "ChangedInstruction";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

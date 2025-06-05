@@ -167,25 +167,25 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyMaterialVegetation, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.roughness = obj.roughness;
-            this.thickness = obj.thickness;
-            this.conductivity = obj.conductivity;
-            this.density = obj.density;
-            this.specificHeat = obj.specificHeat;
-            this.soilThermalAbsorptance = obj.soilThermalAbsorptance;
-            this.soilSolarAbsorptance = obj.soilSolarAbsorptance;
-            this.soilVisibleAbsorptance = obj.soilVisibleAbsorptance;
-            this.plantHeight = obj.plantHeight;
-            this.leafAreaIndex = obj.leafAreaIndex;
-            this.leafReflectivity = obj.leafReflectivity;
-            this.leafEmissivity = obj.leafEmissivity;
-            this.minStomatalResist = obj.minStomatalResist;
-            this.satVolMoistCont = obj.satVolMoistCont;
-            this.residualVolMoistCont = obj.residualVolMoistCont;
-            this.initVolMoistCont = obj.initVolMoistCont;
-            this.moistDiffModel = obj.moistDiffModel;
+            const obj = plainToClass(EnergyMaterialVegetation, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "EnergyMaterialVegetation";
+            this.roughness = obj.roughness ?? Roughness.MediumRough;
+            this.thickness = obj.thickness ?? 0.1;
+            this.conductivity = obj.conductivity ?? 0.35;
+            this.density = obj.density ?? 1100;
+            this.specificHeat = obj.specificHeat ?? 1200;
+            this.soilThermalAbsorptance = obj.soilThermalAbsorptance ?? 0.9;
+            this.soilSolarAbsorptance = obj.soilSolarAbsorptance ?? 0.7;
+            this.soilVisibleAbsorptance = obj.soilVisibleAbsorptance ?? 0.7;
+            this.plantHeight = obj.plantHeight ?? 0.2;
+            this.leafAreaIndex = obj.leafAreaIndex ?? 1;
+            this.leafReflectivity = obj.leafReflectivity ?? 0.22;
+            this.leafEmissivity = obj.leafEmissivity ?? 0.95;
+            this.minStomatalResist = obj.minStomatalResist ?? 180;
+            this.satVolMoistCont = obj.satVolMoistCont ?? 0.3;
+            this.residualVolMoistCont = obj.residualVolMoistCont ?? 0.01;
+            this.initVolMoistCont = obj.initVolMoistCont ?? 0.01;
+            this.moistDiffModel = obj.moistDiffModel ?? MoistureDiffusionModel.Simple;
         }
     }
 
@@ -207,26 +207,26 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["roughness"] = this.roughness;
-        data["thickness"] = this.thickness;
-        data["conductivity"] = this.conductivity;
-        data["density"] = this.density;
-        data["specific_heat"] = this.specificHeat;
-        data["soil_thermal_absorptance"] = this.soilThermalAbsorptance;
-        data["soil_solar_absorptance"] = this.soilSolarAbsorptance;
-        data["soil_visible_absorptance"] = this.soilVisibleAbsorptance;
-        data["plant_height"] = this.plantHeight;
-        data["leaf_area_index"] = this.leafAreaIndex;
-        data["leaf_reflectivity"] = this.leafReflectivity;
-        data["leaf_emissivity"] = this.leafEmissivity;
-        data["min_stomatal_resist"] = this.minStomatalResist;
-        data["sat_vol_moist_cont"] = this.satVolMoistCont;
-        data["residual_vol_moist_cont"] = this.residualVolMoistCont;
-        data["init_vol_moist_cont"] = this.initVolMoistCont;
-        data["moist_diff_model"] = this.moistDiffModel;
+        data["type"] = this.type ?? "EnergyMaterialVegetation";
+        data["roughness"] = this.roughness ?? Roughness.MediumRough;
+        data["thickness"] = this.thickness ?? 0.1;
+        data["conductivity"] = this.conductivity ?? 0.35;
+        data["density"] = this.density ?? 1100;
+        data["specific_heat"] = this.specificHeat ?? 1200;
+        data["soil_thermal_absorptance"] = this.soilThermalAbsorptance ?? 0.9;
+        data["soil_solar_absorptance"] = this.soilSolarAbsorptance ?? 0.7;
+        data["soil_visible_absorptance"] = this.soilVisibleAbsorptance ?? 0.7;
+        data["plant_height"] = this.plantHeight ?? 0.2;
+        data["leaf_area_index"] = this.leafAreaIndex ?? 1;
+        data["leaf_reflectivity"] = this.leafReflectivity ?? 0.22;
+        data["leaf_emissivity"] = this.leafEmissivity ?? 0.95;
+        data["min_stomatal_resist"] = this.minStomatalResist ?? 180;
+        data["sat_vol_moist_cont"] = this.satVolMoistCont ?? 0.3;
+        data["residual_vol_moist_cont"] = this.residualVolMoistCont ?? 0.01;
+        data["init_vol_moist_cont"] = this.initVolMoistCont ?? 0.01;
+        data["moist_diff_model"] = this.moistDiffModel ?? MoistureDiffusionModel.Simple;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

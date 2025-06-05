@@ -37,10 +37,10 @@ export class ASHRAETau extends _SkyCondition {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ASHRAETau, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(ASHRAETau, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.tauB = obj.tauB;
             this.tauD = obj.tauD;
-            this.type = obj.type;
+            this.type = obj.type ?? "ASHRAETau";
         }
     }
 
@@ -64,9 +64,9 @@ export class ASHRAETau extends _SkyCondition {
         data = typeof data === 'object' ? data : {};
         data["tau_b"] = this.tauB;
         data["tau_d"] = this.tauD;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "ASHRAETau";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

@@ -86,14 +86,14 @@ export class Room extends IDdBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Room, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(Room, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.faces = obj.faces;
             this.properties = obj.properties;
-            this.type = obj.type;
+            this.type = obj.type ?? "Room";
             this.indoorShades = obj.indoorShades;
             this.outdoorShades = obj.outdoorShades;
-            this.multiplier = obj.multiplier;
-            this.excludeFloorArea = obj.excludeFloorArea;
+            this.multiplier = obj.multiplier ?? 1;
+            this.excludeFloorArea = obj.excludeFloorArea ?? false;
             this.zone = obj.zone;
             this.story = obj.story;
         }
@@ -119,15 +119,15 @@ export class Room extends IDdBaseModel {
         data = typeof data === 'object' ? data : {};
         data["faces"] = this.faces;
         data["properties"] = this.properties;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "Room";
         data["indoor_shades"] = this.indoorShades;
         data["outdoor_shades"] = this.outdoorShades;
-        data["multiplier"] = this.multiplier;
-        data["exclude_floor_area"] = this.excludeFloorArea;
+        data["multiplier"] = this.multiplier ?? 1;
+        data["exclude_floor_area"] = this.excludeFloorArea ?? false;
         data["zone"] = this.zone;
         data["story"] = this.story;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

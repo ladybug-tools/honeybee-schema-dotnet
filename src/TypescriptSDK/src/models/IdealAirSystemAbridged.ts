@@ -99,16 +99,16 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(IdealAirSystemAbridged, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.economizerType = obj.economizerType;
-            this.demandControlledVentilation = obj.demandControlledVentilation;
-            this.sensibleHeatRecovery = obj.sensibleHeatRecovery;
-            this.latentHeatRecovery = obj.latentHeatRecovery;
-            this.heatingAirTemperature = obj.heatingAirTemperature;
-            this.coolingAirTemperature = obj.coolingAirTemperature;
-            this.heatingLimit = obj.heatingLimit;
-            this.coolingLimit = obj.coolingLimit;
+            const obj = plainToClass(IdealAirSystemAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "IdealAirSystemAbridged";
+            this.economizerType = obj.economizerType ?? EconomizerType.DifferentialDryBulb;
+            this.demandControlledVentilation = obj.demandControlledVentilation ?? false;
+            this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
+            this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
+            this.heatingAirTemperature = obj.heatingAirTemperature ?? 50;
+            this.coolingAirTemperature = obj.coolingAirTemperature ?? 13;
+            this.heatingLimit = obj.heatingLimit ?? new Autosize();
+            this.coolingLimit = obj.coolingLimit ?? new Autosize();
             this.heatingAvailability = obj.heatingAvailability;
             this.coolingAvailability = obj.coolingAvailability;
         }
@@ -132,19 +132,19 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["economizer_type"] = this.economizerType;
-        data["demand_controlled_ventilation"] = this.demandControlledVentilation;
-        data["sensible_heat_recovery"] = this.sensibleHeatRecovery;
-        data["latent_heat_recovery"] = this.latentHeatRecovery;
-        data["heating_air_temperature"] = this.heatingAirTemperature;
-        data["cooling_air_temperature"] = this.coolingAirTemperature;
-        data["heating_limit"] = this.heatingLimit;
-        data["cooling_limit"] = this.coolingLimit;
+        data["type"] = this.type ?? "IdealAirSystemAbridged";
+        data["economizer_type"] = this.economizerType ?? EconomizerType.DifferentialDryBulb;
+        data["demand_controlled_ventilation"] = this.demandControlledVentilation ?? false;
+        data["sensible_heat_recovery"] = this.sensibleHeatRecovery ?? 0;
+        data["latent_heat_recovery"] = this.latentHeatRecovery ?? 0;
+        data["heating_air_temperature"] = this.heatingAirTemperature ?? 50;
+        data["cooling_air_temperature"] = this.coolingAirTemperature ?? 13;
+        data["heating_limit"] = this.heatingLimit ?? new Autosize();
+        data["cooling_limit"] = this.coolingLimit ?? new Autosize();
         data["heating_availability"] = this.heatingAvailability;
         data["cooling_availability"] = this.coolingAvailability;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

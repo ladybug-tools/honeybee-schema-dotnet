@@ -26,8 +26,8 @@ export abstract class _OpenAPIGenBaseModel {
 
 	toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        return instanceToPlain(data);
+        data["type"] = this.type ?? "InvalidType";
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

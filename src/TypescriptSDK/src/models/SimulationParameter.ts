@@ -93,16 +93,16 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(SimulationParameter, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
+            const obj = plainToClass(SimulationParameter, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "SimulationParameter";
             this.output = obj.output;
             this.runPeriod = obj.runPeriod;
-            this.timestep = obj.timestep;
+            this.timestep = obj.timestep ?? 6;
             this.simulationControl = obj.simulationControl;
             this.shadowCalculation = obj.shadowCalculation;
             this.sizingParameter = obj.sizingParameter;
-            this.northAngle = obj.northAngle;
-            this.terrainType = obj.terrainType;
+            this.northAngle = obj.northAngle ?? 0;
+            this.terrainType = obj.terrainType ?? TerrianTypes.City;
         }
     }
 
@@ -124,17 +124,17 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["type"] = this.type ?? "SimulationParameter";
         data["output"] = this.output;
         data["run_period"] = this.runPeriod;
-        data["timestep"] = this.timestep;
+        data["timestep"] = this.timestep ?? 6;
         data["simulation_control"] = this.simulationControl;
         data["shadow_calculation"] = this.shadowCalculation;
         data["sizing_parameter"] = this.sizingParameter;
-        data["north_angle"] = this.northAngle;
-        data["terrain_type"] = this.terrainType;
+        data["north_angle"] = this.northAngle ?? 0;
+        data["terrain_type"] = this.terrainType ?? TerrianTypes.City;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

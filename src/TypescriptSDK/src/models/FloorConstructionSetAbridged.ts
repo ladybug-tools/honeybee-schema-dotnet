@@ -21,8 +21,8 @@ export class FloorConstructionSetAbridged extends _FaceSubSetAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(FloorConstructionSetAbridged, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
+            const obj = plainToClass(FloorConstructionSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "FloorConstructionSetAbridged";
         }
     }
 
@@ -44,9 +44,9 @@ export class FloorConstructionSetAbridged extends _FaceSubSetAbridged {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["type"] = this.type ?? "FloorConstructionSetAbridged";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

@@ -79,15 +79,15 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(VentilationOpening, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.fractionAreaOperable = obj.fractionAreaOperable;
-            this.fractionHeightOperable = obj.fractionHeightOperable;
-            this.dischargeCoefficient = obj.dischargeCoefficient;
-            this.windCrossVent = obj.windCrossVent;
-            this.flowCoefficientClosed = obj.flowCoefficientClosed;
-            this.flowExponentClosed = obj.flowExponentClosed;
-            this.twoWayThreshold = obj.twoWayThreshold;
+            const obj = plainToClass(VentilationOpening, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "VentilationOpening";
+            this.fractionAreaOperable = obj.fractionAreaOperable ?? 0.5;
+            this.fractionHeightOperable = obj.fractionHeightOperable ?? 1;
+            this.dischargeCoefficient = obj.dischargeCoefficient ?? 0.45;
+            this.windCrossVent = obj.windCrossVent ?? false;
+            this.flowCoefficientClosed = obj.flowCoefficientClosed ?? 0;
+            this.flowExponentClosed = obj.flowExponentClosed ?? 0.65;
+            this.twoWayThreshold = obj.twoWayThreshold ?? 0.0001;
         }
     }
 
@@ -109,16 +109,16 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["fraction_area_operable"] = this.fractionAreaOperable;
-        data["fraction_height_operable"] = this.fractionHeightOperable;
-        data["discharge_coefficient"] = this.dischargeCoefficient;
-        data["wind_cross_vent"] = this.windCrossVent;
-        data["flow_coefficient_closed"] = this.flowCoefficientClosed;
-        data["flow_exponent_closed"] = this.flowExponentClosed;
-        data["two_way_threshold"] = this.twoWayThreshold;
+        data["type"] = this.type ?? "VentilationOpening";
+        data["fraction_area_operable"] = this.fractionAreaOperable ?? 0.5;
+        data["fraction_height_operable"] = this.fractionHeightOperable ?? 1;
+        data["discharge_coefficient"] = this.dischargeCoefficient ?? 0.45;
+        data["wind_cross_vent"] = this.windCrossVent ?? false;
+        data["flow_coefficient_closed"] = this.flowCoefficientClosed ?? 0;
+        data["flow_exponent_closed"] = this.flowExponentClosed ?? 0.65;
+        data["two_way_threshold"] = this.twoWayThreshold ?? 0.0001;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

@@ -46,11 +46,11 @@ export class Shade extends IDdBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Shade, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(Shade, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.geometry = obj.geometry;
             this.properties = obj.properties;
-            this.type = obj.type;
-            this.isDetached = obj.isDetached;
+            this.type = obj.type ?? "Shade";
+            this.isDetached = obj.isDetached ?? false;
         }
     }
 
@@ -74,10 +74,10 @@ export class Shade extends IDdBaseModel {
         data = typeof data === 'object' ? data : {};
         data["geometry"] = this.geometry;
         data["properties"] = this.properties;
-        data["type"] = this.type;
-        data["is_detached"] = this.isDetached;
+        data["type"] = this.type ?? "Shade";
+        data["is_detached"] = this.isDetached ?? false;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

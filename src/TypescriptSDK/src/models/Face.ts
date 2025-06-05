@@ -105,12 +105,12 @@ export class Face extends IDdBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Face, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(Face, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.geometry = obj.geometry;
             this.faceType = obj.faceType;
             this.boundaryCondition = obj.boundaryCondition;
             this.properties = obj.properties;
-            this.type = obj.type;
+            this.type = obj.type ?? "Face";
             this.apertures = obj.apertures;
             this.doors = obj.doors;
             this.indoorShades = obj.indoorShades;
@@ -140,13 +140,13 @@ export class Face extends IDdBaseModel {
         data["face_type"] = this.faceType;
         data["boundary_condition"] = this.boundaryCondition;
         data["properties"] = this.properties;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "Face";
         data["apertures"] = this.apertures;
         data["doors"] = this.doors;
         data["indoor_shades"] = this.indoorShades;
         data["outdoor_shades"] = this.outdoorShades;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

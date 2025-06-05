@@ -61,13 +61,13 @@ export class RoomDoe2Properties extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(RoomDoe2Properties, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.assignedFlow = obj.assignedFlow;
-            this.flowPerArea = obj.flowPerArea;
-            this.minFlowRatio = obj.minFlowRatio;
-            this.minFlowPerArea = obj.minFlowPerArea;
-            this.hmaxFlowRatio = obj.hmaxFlowRatio;
+            const obj = plainToClass(RoomDoe2Properties, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "RoomDoe2Properties";
+            this.assignedFlow = obj.assignedFlow ?? new Autocalculate();
+            this.flowPerArea = obj.flowPerArea ?? new Autocalculate();
+            this.minFlowRatio = obj.minFlowRatio ?? new Autocalculate();
+            this.minFlowPerArea = obj.minFlowPerArea ?? new Autocalculate();
+            this.hmaxFlowRatio = obj.hmaxFlowRatio ?? new Autocalculate();
             this.spacePolygonGeometry = obj.spacePolygonGeometry;
         }
     }
@@ -90,15 +90,15 @@ export class RoomDoe2Properties extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["assigned_flow"] = this.assignedFlow;
-        data["flow_per_area"] = this.flowPerArea;
-        data["min_flow_ratio"] = this.minFlowRatio;
-        data["min_flow_per_area"] = this.minFlowPerArea;
-        data["hmax_flow_ratio"] = this.hmaxFlowRatio;
+        data["type"] = this.type ?? "RoomDoe2Properties";
+        data["assigned_flow"] = this.assignedFlow ?? new Autocalculate();
+        data["flow_per_area"] = this.flowPerArea ?? new Autocalculate();
+        data["min_flow_ratio"] = this.minFlowRatio ?? new Autocalculate();
+        data["min_flow_per_area"] = this.minFlowPerArea ?? new Autocalculate();
+        data["hmax_flow_ratio"] = this.hmaxFlowRatio ?? new Autocalculate();
         data["space_polygon_geometry"] = this.spacePolygonGeometry;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

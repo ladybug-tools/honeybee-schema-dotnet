@@ -125,18 +125,18 @@ export class BSDF extends ModifierBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(BSDF, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(BSDF, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.bsdfData = obj.bsdfData;
-            this.modifier = obj.modifier;
+            this.modifier = obj.modifier ?? new Void();
             this.dependencies = obj.dependencies;
-            this.upOrientation = obj.upOrientation;
-            this.thickness = obj.thickness;
-            this.functionFile = obj.functionFile;
+            this.upOrientation = obj.upOrientation ?? [0.01, 0.01, 1];
+            this.thickness = obj.thickness ?? 0;
+            this.functionFile = obj.functionFile ?? ".";
             this.transform = obj.transform;
             this.frontDiffuseReflectance = obj.frontDiffuseReflectance;
             this.backDiffuseReflectance = obj.backDiffuseReflectance;
             this.diffuseTransmittance = obj.diffuseTransmittance;
-            this.type = obj.type;
+            this.type = obj.type ?? "BSDF";
         }
     }
 
@@ -159,18 +159,18 @@ export class BSDF extends ModifierBase {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["bsdf_data"] = this.bsdfData;
-        data["modifier"] = this.modifier;
+        data["modifier"] = this.modifier ?? new Void();
         data["dependencies"] = this.dependencies;
-        data["up_orientation"] = this.upOrientation;
-        data["thickness"] = this.thickness;
-        data["function_file"] = this.functionFile;
+        data["up_orientation"] = this.upOrientation ?? [0.01, 0.01, 1];
+        data["thickness"] = this.thickness ?? 0;
+        data["function_file"] = this.functionFile ?? ".";
         data["transform"] = this.transform;
         data["front_diffuse_reflectance"] = this.frontDiffuseReflectance;
         data["back_diffuse_reflectance"] = this.backDiffuseReflectance;
         data["diffuse_transmittance"] = this.diffuseTransmittance;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "BSDF";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

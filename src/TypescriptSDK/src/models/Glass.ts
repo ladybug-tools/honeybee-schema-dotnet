@@ -100,14 +100,14 @@ export class Glass extends ModifierBase {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Glass, _data, { enableImplicitConversion: true });
-            this.modifier = obj.modifier;
+            const obj = plainToClass(Glass, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.modifier = obj.modifier ?? new Void();
             this.dependencies = obj.dependencies;
-            this.rTransmissivity = obj.rTransmissivity;
-            this.gTransmissivity = obj.gTransmissivity;
-            this.bTransmissivity = obj.bTransmissivity;
-            this.refractionIndex = obj.refractionIndex;
-            this.type = obj.type;
+            this.rTransmissivity = obj.rTransmissivity ?? 0;
+            this.gTransmissivity = obj.gTransmissivity ?? 0;
+            this.bTransmissivity = obj.bTransmissivity ?? 0;
+            this.refractionIndex = obj.refractionIndex ?? 1.52;
+            this.type = obj.type ?? "Glass";
         }
     }
 
@@ -129,15 +129,15 @@ export class Glass extends ModifierBase {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["modifier"] = this.modifier;
+        data["modifier"] = this.modifier ?? new Void();
         data["dependencies"] = this.dependencies;
-        data["r_transmissivity"] = this.rTransmissivity;
-        data["g_transmissivity"] = this.gTransmissivity;
-        data["b_transmissivity"] = this.bTransmissivity;
-        data["refraction_index"] = this.refractionIndex;
-        data["type"] = this.type;
+        data["r_transmissivity"] = this.rTransmissivity ?? 0;
+        data["g_transmissivity"] = this.gTransmissivity ?? 0;
+        data["b_transmissivity"] = this.bTransmissivity ?? 0;
+        data["refraction_index"] = this.refractionIndex ?? 1.52;
+        data["type"] = this.type ?? "Glass";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

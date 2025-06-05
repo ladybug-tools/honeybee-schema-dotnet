@@ -94,18 +94,18 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ScheduleRuleAbridged, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(ScheduleRuleAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.scheduleDay = obj.scheduleDay;
-            this.type = obj.type;
-            this.applySunday = obj.applySunday;
-            this.applyMonday = obj.applyMonday;
-            this.applyTuesday = obj.applyTuesday;
-            this.applyWednesday = obj.applyWednesday;
-            this.applyThursday = obj.applyThursday;
-            this.applyFriday = obj.applyFriday;
-            this.applySaturday = obj.applySaturday;
-            this.startDate = obj.startDate;
-            this.endDate = obj.endDate;
+            this.type = obj.type ?? "ScheduleRuleAbridged";
+            this.applySunday = obj.applySunday ?? false;
+            this.applyMonday = obj.applyMonday ?? false;
+            this.applyTuesday = obj.applyTuesday ?? false;
+            this.applyWednesday = obj.applyWednesday ?? false;
+            this.applyThursday = obj.applyThursday ?? false;
+            this.applyFriday = obj.applyFriday ?? false;
+            this.applySaturday = obj.applySaturday ?? false;
+            this.startDate = obj.startDate ?? [1, 1];
+            this.endDate = obj.endDate ?? [12, 31];
         }
     }
 
@@ -128,18 +128,18 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["schedule_day"] = this.scheduleDay;
-        data["type"] = this.type;
-        data["apply_sunday"] = this.applySunday;
-        data["apply_monday"] = this.applyMonday;
-        data["apply_tuesday"] = this.applyTuesday;
-        data["apply_wednesday"] = this.applyWednesday;
-        data["apply_thursday"] = this.applyThursday;
-        data["apply_friday"] = this.applyFriday;
-        data["apply_saturday"] = this.applySaturday;
-        data["start_date"] = this.startDate;
-        data["end_date"] = this.endDate;
+        data["type"] = this.type ?? "ScheduleRuleAbridged";
+        data["apply_sunday"] = this.applySunday ?? false;
+        data["apply_monday"] = this.applyMonday ?? false;
+        data["apply_tuesday"] = this.applyTuesday ?? false;
+        data["apply_wednesday"] = this.applyWednesday ?? false;
+        data["apply_thursday"] = this.applyThursday ?? false;
+        data["apply_friday"] = this.applyFriday ?? false;
+        data["apply_saturday"] = this.applySaturday ?? false;
+        data["start_date"] = this.startDate ?? [1, 1];
+        data["end_date"] = this.endDate ?? [12, 31];
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

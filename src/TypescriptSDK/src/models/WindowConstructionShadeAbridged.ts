@@ -70,12 +70,12 @@ export class WindowConstructionShadeAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(WindowConstructionShadeAbridged, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(WindowConstructionShadeAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.windowConstruction = obj.windowConstruction;
             this.shadeMaterial = obj.shadeMaterial;
-            this.type = obj.type;
-            this.shadeLocation = obj.shadeLocation;
-            this.controlType = obj.controlType;
+            this.type = obj.type ?? "WindowConstructionShadeAbridged";
+            this.shadeLocation = obj.shadeLocation ?? ShadeLocation.Interior;
+            this.controlType = obj.controlType ?? ControlType.AlwaysOn;
             this.setpoint = obj.setpoint;
             this.schedule = obj.schedule;
         }
@@ -101,13 +101,13 @@ export class WindowConstructionShadeAbridged extends IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
         data["window_construction"] = this.windowConstruction;
         data["shade_material"] = this.shadeMaterial;
-        data["type"] = this.type;
-        data["shade_location"] = this.shadeLocation;
-        data["control_type"] = this.controlType;
+        data["type"] = this.type ?? "WindowConstructionShadeAbridged";
+        data["shade_location"] = this.shadeLocation ?? ShadeLocation.Interior;
+        data["control_type"] = this.controlType ?? ControlType.AlwaysOn;
         data["setpoint"] = this.setpoint;
         data["schedule"] = this.schedule;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

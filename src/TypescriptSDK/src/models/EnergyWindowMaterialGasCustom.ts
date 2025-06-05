@@ -102,20 +102,20 @@ export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyWindowMaterialGasCustom, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(EnergyWindowMaterialGasCustom, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.conductivityCoeffA = obj.conductivityCoeffA;
             this.viscosityCoeffA = obj.viscosityCoeffA;
             this.specificHeatCoeffA = obj.specificHeatCoeffA;
             this.specificHeatRatio = obj.specificHeatRatio;
             this.molecularWeight = obj.molecularWeight;
-            this.type = obj.type;
-            this.thickness = obj.thickness;
-            this.conductivityCoeffB = obj.conductivityCoeffB;
-            this.conductivityCoeffC = obj.conductivityCoeffC;
-            this.viscosityCoeffB = obj.viscosityCoeffB;
-            this.viscosityCoeffC = obj.viscosityCoeffC;
-            this.specificHeatCoeffB = obj.specificHeatCoeffB;
-            this.specificHeatCoeffC = obj.specificHeatCoeffC;
+            this.type = obj.type ?? "EnergyWindowMaterialGasCustom";
+            this.thickness = obj.thickness ?? 0.0125;
+            this.conductivityCoeffB = obj.conductivityCoeffB ?? 0;
+            this.conductivityCoeffC = obj.conductivityCoeffC ?? 0;
+            this.viscosityCoeffB = obj.viscosityCoeffB ?? 0;
+            this.viscosityCoeffC = obj.viscosityCoeffC ?? 0;
+            this.specificHeatCoeffB = obj.specificHeatCoeffB ?? 0;
+            this.specificHeatCoeffC = obj.specificHeatCoeffC ?? 0;
         }
     }
 
@@ -142,16 +142,16 @@ export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
         data["specific_heat_coeff_a"] = this.specificHeatCoeffA;
         data["specific_heat_ratio"] = this.specificHeatRatio;
         data["molecular_weight"] = this.molecularWeight;
-        data["type"] = this.type;
-        data["thickness"] = this.thickness;
-        data["conductivity_coeff_b"] = this.conductivityCoeffB;
-        data["conductivity_coeff_c"] = this.conductivityCoeffC;
-        data["viscosity_coeff_b"] = this.viscosityCoeffB;
-        data["viscosity_coeff_c"] = this.viscosityCoeffC;
-        data["specific_heat_coeff_b"] = this.specificHeatCoeffB;
-        data["specific_heat_coeff_c"] = this.specificHeatCoeffC;
+        data["type"] = this.type ?? "EnergyWindowMaterialGasCustom";
+        data["thickness"] = this.thickness ?? 0.0125;
+        data["conductivity_coeff_b"] = this.conductivityCoeffB ?? 0;
+        data["conductivity_coeff_c"] = this.conductivityCoeffC ?? 0;
+        data["viscosity_coeff_b"] = this.viscosityCoeffB ?? 0;
+        data["viscosity_coeff_c"] = this.viscosityCoeffC ?? 0;
+        data["specific_heat_coeff_b"] = this.specificHeatCoeffB ?? 0;
+        data["specific_heat_coeff_c"] = this.specificHeatCoeffC ?? 0;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

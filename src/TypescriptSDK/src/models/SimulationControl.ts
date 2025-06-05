@@ -56,13 +56,13 @@ export class SimulationControl extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(SimulationControl, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.doZoneSizing = obj.doZoneSizing;
-            this.doSystemSizing = obj.doSystemSizing;
-            this.doPlantSizing = obj.doPlantSizing;
-            this.runForRunPeriods = obj.runForRunPeriods;
-            this.runForSizingPeriods = obj.runForSizingPeriods;
+            const obj = plainToClass(SimulationControl, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "SimulationControl";
+            this.doZoneSizing = obj.doZoneSizing ?? true;
+            this.doSystemSizing = obj.doSystemSizing ?? true;
+            this.doPlantSizing = obj.doPlantSizing ?? true;
+            this.runForRunPeriods = obj.runForRunPeriods ?? true;
+            this.runForSizingPeriods = obj.runForSizingPeriods ?? false;
         }
     }
 
@@ -84,14 +84,14 @@ export class SimulationControl extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["do_zone_sizing"] = this.doZoneSizing;
-        data["do_system_sizing"] = this.doSystemSizing;
-        data["do_plant_sizing"] = this.doPlantSizing;
-        data["run_for_run_periods"] = this.runForRunPeriods;
-        data["run_for_sizing_periods"] = this.runForSizingPeriods;
+        data["type"] = this.type ?? "SimulationControl";
+        data["do_zone_sizing"] = this.doZoneSizing ?? true;
+        data["do_system_sizing"] = this.doSystemSizing ?? true;
+        data["do_plant_sizing"] = this.doPlantSizing ?? true;
+        data["run_for_run_periods"] = this.runForRunPeriods ?? true;
+        data["run_for_sizing_periods"] = this.runForSizingPeriods ?? false;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

@@ -70,14 +70,14 @@ export class RunPeriod extends DatedBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(RunPeriod, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.startDate = obj.startDate;
-            this.endDate = obj.endDate;
-            this.startDayOfWeek = obj.startDayOfWeek;
+            const obj = plainToClass(RunPeriod, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "RunPeriod";
+            this.startDate = obj.startDate ?? [1, 1];
+            this.endDate = obj.endDate ?? [12, 31];
+            this.startDayOfWeek = obj.startDayOfWeek ?? DaysOfWeek.Sunday;
             this.holidays = obj.holidays;
             this.daylightSavingTime = obj.daylightSavingTime;
-            this.leapYear = obj.leapYear;
+            this.leapYear = obj.leapYear ?? false;
         }
     }
 
@@ -99,15 +99,15 @@ export class RunPeriod extends DatedBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["start_date"] = this.startDate;
-        data["end_date"] = this.endDate;
-        data["start_day_of_week"] = this.startDayOfWeek;
+        data["type"] = this.type ?? "RunPeriod";
+        data["start_date"] = this.startDate ?? [1, 1];
+        data["end_date"] = this.endDate ?? [12, 31];
+        data["start_day_of_week"] = this.startDayOfWeek ?? DaysOfWeek.Sunday;
         data["holidays"] = this.holidays;
         data["daylight_saving_time"] = this.daylightSavingTime;
-        data["leap_year"] = this.leapYear;
+        data["leap_year"] = this.leapYear ?? false;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

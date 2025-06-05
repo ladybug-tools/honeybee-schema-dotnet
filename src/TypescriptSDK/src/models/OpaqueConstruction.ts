@@ -36,9 +36,9 @@ export class OpaqueConstruction extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(OpaqueConstruction, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(OpaqueConstruction, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.materials = obj.materials;
-            this.type = obj.type;
+            this.type = obj.type ?? "OpaqueConstruction";
         }
     }
 
@@ -61,9 +61,9 @@ export class OpaqueConstruction extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["materials"] = this.materials;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "OpaqueConstruction";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

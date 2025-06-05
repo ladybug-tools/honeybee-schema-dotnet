@@ -21,8 +21,8 @@ export class DatedBaseModel extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DatedBaseModel, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
+            const obj = plainToClass(DatedBaseModel, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "DatedBaseModel";
         }
     }
 
@@ -44,9 +44,9 @@ export class DatedBaseModel extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["type"] = this.type ?? "DatedBaseModel";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

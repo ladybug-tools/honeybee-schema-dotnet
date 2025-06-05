@@ -42,9 +42,9 @@ export class StateGeometryAbridged extends IDdRadianceBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(StateGeometryAbridged, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(StateGeometryAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.geometry = obj.geometry;
-            this.type = obj.type;
+            this.type = obj.type ?? "StateGeometryAbridged";
             this.modifier = obj.modifier;
             this.modifierDirect = obj.modifierDirect;
         }
@@ -69,11 +69,11 @@ export class StateGeometryAbridged extends IDdRadianceBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["geometry"] = this.geometry;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "StateGeometryAbridged";
         data["modifier"] = this.modifier;
         data["modifier_direct"] = this.modifierDirect;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

@@ -74,15 +74,15 @@ export class SizingParameter extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(SizingParameter, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
+            const obj = plainToClass(SizingParameter, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "SizingParameter";
             this.designDays = obj.designDays;
-            this.heatingFactor = obj.heatingFactor;
-            this.coolingFactor = obj.coolingFactor;
+            this.heatingFactor = obj.heatingFactor ?? 1.25;
+            this.coolingFactor = obj.coolingFactor ?? 1.15;
             this.efficiencyStandard = obj.efficiencyStandard;
             this.climateZone = obj.climateZone;
             this.buildingType = obj.buildingType;
-            this.bypassEfficiencySizing = obj.bypassEfficiencySizing;
+            this.bypassEfficiencySizing = obj.bypassEfficiencySizing ?? false;
         }
     }
 
@@ -104,16 +104,16 @@ export class SizingParameter extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["type"] = this.type ?? "SizingParameter";
         data["design_days"] = this.designDays;
-        data["heating_factor"] = this.heatingFactor;
-        data["cooling_factor"] = this.coolingFactor;
+        data["heating_factor"] = this.heatingFactor ?? 1.25;
+        data["cooling_factor"] = this.coolingFactor ?? 1.15;
         data["efficiency_standard"] = this.efficiencyStandard;
         data["climate_zone"] = this.climateZone;
         data["building_type"] = this.buildingType;
-        data["bypass_efficiency_sizing"] = this.bypassEfficiencySizing;
+        data["bypass_efficiency_sizing"] = this.bypassEfficiencySizing ?? false;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

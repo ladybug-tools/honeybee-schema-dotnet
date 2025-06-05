@@ -35,10 +35,10 @@ export class Sensor extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Sensor, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(Sensor, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.pos = obj.pos;
             this.dir = obj.dir;
-            this.type = obj.type;
+            this.type = obj.type ?? "Sensor";
         }
     }
 
@@ -62,9 +62,9 @@ export class Sensor extends _OpenAPIGenBaseModel {
         data = typeof data === 'object' ? data : {};
         data["pos"] = this.pos;
         data["dir"] = this.dir;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "Sensor";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

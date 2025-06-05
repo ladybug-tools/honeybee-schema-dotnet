@@ -47,8 +47,8 @@ export class RoomPropertiesAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(RoomPropertiesAbridged, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
+            const obj = plainToClass(RoomPropertiesAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "RoomPropertiesAbridged";
             this.energy = obj.energy;
             this.radiance = obj.radiance;
             this.doe2 = obj.doe2;
@@ -73,12 +73,12 @@ export class RoomPropertiesAbridged extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["type"] = this.type ?? "RoomPropertiesAbridged";
         data["energy"] = this.energy;
         data["radiance"] = this.radiance;
         data["doe2"] = this.doe2;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

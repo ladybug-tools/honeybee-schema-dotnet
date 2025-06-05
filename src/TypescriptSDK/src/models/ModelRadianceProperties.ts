@@ -413,9 +413,170 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ModelRadianceProperties, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.globalModifierSet = obj.globalModifierSet;
+            const obj = plainToClass(ModelRadianceProperties, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "ModelRadianceProperties";
+            this.globalModifierSet = obj.globalModifierSet ?? GlobalModifierSet.fromJS({
+  "type": "GlobalModifierSet",
+  "modifiers": [
+    {
+      "identifier": "generic_floor_0.20",
+      "display_name": null,
+      "type": "Plastic",
+      "modifier": null,
+      "dependencies": [],
+      "r_reflectance": 0.2,
+      "g_reflectance": 0.2,
+      "b_reflectance": 0.2,
+      "specularity": 0.0,
+      "roughness": 0.0
+    },
+    {
+      "identifier": "generic_wall_0.50",
+      "display_name": null,
+      "type": "Plastic",
+      "modifier": null,
+      "dependencies": [],
+      "r_reflectance": 0.5,
+      "g_reflectance": 0.5,
+      "b_reflectance": 0.5,
+      "specularity": 0.0,
+      "roughness": 0.0
+    },
+    {
+      "identifier": "generic_ceiling_0.80",
+      "display_name": null,
+      "type": "Plastic",
+      "modifier": null,
+      "dependencies": [],
+      "r_reflectance": 0.8,
+      "g_reflectance": 0.8,
+      "b_reflectance": 0.8,
+      "specularity": 0.0,
+      "roughness": 0.0
+    },
+    {
+      "identifier": "generic_opaque_door_0.50",
+      "display_name": null,
+      "type": "Plastic",
+      "modifier": null,
+      "dependencies": [],
+      "r_reflectance": 0.5,
+      "g_reflectance": 0.5,
+      "b_reflectance": 0.5,
+      "specularity": 0.0,
+      "roughness": 0.0
+    },
+    {
+      "identifier": "generic_interior_shade_0.50",
+      "display_name": null,
+      "type": "Plastic",
+      "modifier": null,
+      "dependencies": [],
+      "r_reflectance": 0.5,
+      "g_reflectance": 0.5,
+      "b_reflectance": 0.5,
+      "specularity": 0.0,
+      "roughness": 0.0
+    },
+    {
+      "identifier": "generic_exterior_shade_0.35",
+      "display_name": null,
+      "type": "Plastic",
+      "modifier": null,
+      "dependencies": [],
+      "r_reflectance": 0.35,
+      "g_reflectance": 0.35,
+      "b_reflectance": 0.35,
+      "specularity": 0.0,
+      "roughness": 0.0
+    },
+    {
+      "identifier": "generic_context_0.20",
+      "display_name": null,
+      "type": "Plastic",
+      "modifier": null,
+      "dependencies": [],
+      "r_reflectance": 0.2,
+      "g_reflectance": 0.2,
+      "b_reflectance": 0.2,
+      "specularity": 0.0,
+      "roughness": 0.0
+    },
+    {
+      "identifier": "generic_interior_window_vis_0.88",
+      "display_name": null,
+      "type": "Glass",
+      "modifier": null,
+      "dependencies": [],
+      "r_transmissivity": 0.9584154328610596,
+      "g_transmissivity": 0.9584154328610596,
+      "b_transmissivity": 0.9584154328610596,
+      "refraction_index": null
+    },
+    {
+      "identifier": "generic_exterior_window_vis_0.64",
+      "display_name": null,
+      "type": "Glass",
+      "modifier": null,
+      "dependencies": [],
+      "r_transmissivity": 0.6975761815384331,
+      "g_transmissivity": 0.6975761815384331,
+      "b_transmissivity": 0.6975761815384331,
+      "refraction_index": null
+    },
+    {
+      "identifier": "air_boundary",
+      "display_name": null,
+      "type": "Trans",
+      "modifier": null,
+      "dependencies": [],
+      "r_reflectance": 1.0,
+      "g_reflectance": 1.0,
+      "b_reflectance": 1.0,
+      "specularity": 0.0,
+      "roughness": 0.0,
+      "transmitted_diff": 1.0,
+      "transmitted_spec": 1.0
+    }
+  ],
+  "wall_set": {
+    "exterior_modifier": "generic_wall_0.50",
+    "interior_modifier": "generic_wall_0.50",
+    "type": "WallModifierSetAbridged"
+  },
+  "floor_set": {
+    "exterior_modifier": "generic_floor_0.20",
+    "interior_modifier": "generic_floor_0.20",
+    "type": "FloorModifierSetAbridged"
+  },
+  "roof_ceiling_set": {
+    "exterior_modifier": "generic_ceiling_0.80",
+    "interior_modifier": "generic_ceiling_0.80",
+    "type": "RoofCeilingModifierSetAbridged"
+  },
+  "aperture_set": {
+    "type": "ApertureModifierSetAbridged",
+    "window_modifier": "generic_exterior_window_vis_0.64",
+    "interior_modifier": "generic_interior_window_vis_0.88",
+    "skylight_modifier": "generic_exterior_window_vis_0.64",
+    "operable_modifier": "generic_exterior_window_vis_0.64"
+  },
+  "door_set": {
+    "exterior_modifier": "generic_opaque_door_0.50",
+    "interior_modifier": "generic_opaque_door_0.50",
+    "type": "DoorModifierSetAbridged",
+    "interior_glass_modifier": "generic_interior_window_vis_0.88",
+    "exterior_glass_modifier": "generic_exterior_window_vis_0.64",
+    "overhead_modifier": "generic_opaque_door_0.50"
+  },
+  "shade_set": {
+    "exterior_modifier": "generic_exterior_shade_0.35",
+    "interior_modifier": "generic_interior_shade_0.50",
+    "type": "ShadeModifierSetAbridged"
+  },
+  "air_boundary_modifier": "air_boundary",
+  "context_modifier": "generic_context_0.20"
+});
             this.modifiers = obj.modifiers;
             this.modifierSets = obj.modifierSets;
             this.sensorGrids = obj.sensorGrids;
@@ -441,14 +602,175 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["global_modifier_set"] = this.globalModifierSet;
+        data["type"] = this.type ?? "ModelRadianceProperties";
+        data["global_modifier_set"] = this.globalModifierSet ?? GlobalModifierSet.fromJS({
+  "type": "GlobalModifierSet",
+  "modifiers": [
+    {
+      "identifier": "generic_floor_0.20",
+      "display_name": null,
+      "type": "Plastic",
+      "modifier": null,
+      "dependencies": [],
+      "r_reflectance": 0.2,
+      "g_reflectance": 0.2,
+      "b_reflectance": 0.2,
+      "specularity": 0.0,
+      "roughness": 0.0
+    },
+    {
+      "identifier": "generic_wall_0.50",
+      "display_name": null,
+      "type": "Plastic",
+      "modifier": null,
+      "dependencies": [],
+      "r_reflectance": 0.5,
+      "g_reflectance": 0.5,
+      "b_reflectance": 0.5,
+      "specularity": 0.0,
+      "roughness": 0.0
+    },
+    {
+      "identifier": "generic_ceiling_0.80",
+      "display_name": null,
+      "type": "Plastic",
+      "modifier": null,
+      "dependencies": [],
+      "r_reflectance": 0.8,
+      "g_reflectance": 0.8,
+      "b_reflectance": 0.8,
+      "specularity": 0.0,
+      "roughness": 0.0
+    },
+    {
+      "identifier": "generic_opaque_door_0.50",
+      "display_name": null,
+      "type": "Plastic",
+      "modifier": null,
+      "dependencies": [],
+      "r_reflectance": 0.5,
+      "g_reflectance": 0.5,
+      "b_reflectance": 0.5,
+      "specularity": 0.0,
+      "roughness": 0.0
+    },
+    {
+      "identifier": "generic_interior_shade_0.50",
+      "display_name": null,
+      "type": "Plastic",
+      "modifier": null,
+      "dependencies": [],
+      "r_reflectance": 0.5,
+      "g_reflectance": 0.5,
+      "b_reflectance": 0.5,
+      "specularity": 0.0,
+      "roughness": 0.0
+    },
+    {
+      "identifier": "generic_exterior_shade_0.35",
+      "display_name": null,
+      "type": "Plastic",
+      "modifier": null,
+      "dependencies": [],
+      "r_reflectance": 0.35,
+      "g_reflectance": 0.35,
+      "b_reflectance": 0.35,
+      "specularity": 0.0,
+      "roughness": 0.0
+    },
+    {
+      "identifier": "generic_context_0.20",
+      "display_name": null,
+      "type": "Plastic",
+      "modifier": null,
+      "dependencies": [],
+      "r_reflectance": 0.2,
+      "g_reflectance": 0.2,
+      "b_reflectance": 0.2,
+      "specularity": 0.0,
+      "roughness": 0.0
+    },
+    {
+      "identifier": "generic_interior_window_vis_0.88",
+      "display_name": null,
+      "type": "Glass",
+      "modifier": null,
+      "dependencies": [],
+      "r_transmissivity": 0.9584154328610596,
+      "g_transmissivity": 0.9584154328610596,
+      "b_transmissivity": 0.9584154328610596,
+      "refraction_index": null
+    },
+    {
+      "identifier": "generic_exterior_window_vis_0.64",
+      "display_name": null,
+      "type": "Glass",
+      "modifier": null,
+      "dependencies": [],
+      "r_transmissivity": 0.6975761815384331,
+      "g_transmissivity": 0.6975761815384331,
+      "b_transmissivity": 0.6975761815384331,
+      "refraction_index": null
+    },
+    {
+      "identifier": "air_boundary",
+      "display_name": null,
+      "type": "Trans",
+      "modifier": null,
+      "dependencies": [],
+      "r_reflectance": 1.0,
+      "g_reflectance": 1.0,
+      "b_reflectance": 1.0,
+      "specularity": 0.0,
+      "roughness": 0.0,
+      "transmitted_diff": 1.0,
+      "transmitted_spec": 1.0
+    }
+  ],
+  "wall_set": {
+    "exterior_modifier": "generic_wall_0.50",
+    "interior_modifier": "generic_wall_0.50",
+    "type": "WallModifierSetAbridged"
+  },
+  "floor_set": {
+    "exterior_modifier": "generic_floor_0.20",
+    "interior_modifier": "generic_floor_0.20",
+    "type": "FloorModifierSetAbridged"
+  },
+  "roof_ceiling_set": {
+    "exterior_modifier": "generic_ceiling_0.80",
+    "interior_modifier": "generic_ceiling_0.80",
+    "type": "RoofCeilingModifierSetAbridged"
+  },
+  "aperture_set": {
+    "type": "ApertureModifierSetAbridged",
+    "window_modifier": "generic_exterior_window_vis_0.64",
+    "interior_modifier": "generic_interior_window_vis_0.88",
+    "skylight_modifier": "generic_exterior_window_vis_0.64",
+    "operable_modifier": "generic_exterior_window_vis_0.64"
+  },
+  "door_set": {
+    "exterior_modifier": "generic_opaque_door_0.50",
+    "interior_modifier": "generic_opaque_door_0.50",
+    "type": "DoorModifierSetAbridged",
+    "interior_glass_modifier": "generic_interior_window_vis_0.88",
+    "exterior_glass_modifier": "generic_exterior_window_vis_0.64",
+    "overhead_modifier": "generic_opaque_door_0.50"
+  },
+  "shade_set": {
+    "exterior_modifier": "generic_exterior_shade_0.35",
+    "interior_modifier": "generic_interior_shade_0.50",
+    "type": "ShadeModifierSetAbridged"
+  },
+  "air_boundary_modifier": "air_boundary",
+  "context_modifier": "generic_context_0.20"
+});
         data["modifiers"] = this.modifiers;
         data["modifier_sets"] = this.modifierSets;
         data["sensor_grids"] = this.sensorGrids;
         data["views"] = this.views;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

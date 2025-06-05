@@ -66,13 +66,13 @@ export class ServiceHotWater extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ServiceHotWater, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(ServiceHotWater, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.flowPerArea = obj.flowPerArea;
             this.schedule = obj.schedule;
-            this.type = obj.type;
-            this.targetTemperature = obj.targetTemperature;
-            this.sensibleFraction = obj.sensibleFraction;
-            this.latentFraction = obj.latentFraction;
+            this.type = obj.type ?? "ServiceHotWater";
+            this.targetTemperature = obj.targetTemperature ?? 60;
+            this.sensibleFraction = obj.sensibleFraction ?? 0.2;
+            this.latentFraction = obj.latentFraction ?? 0.05;
         }
     }
 
@@ -96,12 +96,12 @@ export class ServiceHotWater extends IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
         data["flow_per_area"] = this.flowPerArea;
         data["schedule"] = this.schedule;
-        data["type"] = this.type;
-        data["target_temperature"] = this.targetTemperature;
-        data["sensible_fraction"] = this.sensibleFraction;
-        data["latent_fraction"] = this.latentFraction;
+        data["type"] = this.type ?? "ServiceHotWater";
+        data["target_temperature"] = this.targetTemperature ?? 60;
+        data["sensible_fraction"] = this.sensibleFraction ?? 0.2;
+        data["latent_fraction"] = this.latentFraction ?? 0.05;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

@@ -50,8 +50,8 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(SyncInstructions, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
+            const obj = plainToClass(SyncInstructions, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "SyncInstructions";
             this.changedObjects = obj.changedObjects;
             this.deletedObjects = obj.deletedObjects;
             this.addedObjects = obj.addedObjects;
@@ -76,12 +76,12 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["type"] = this.type ?? "SyncInstructions";
         data["changed_objects"] = this.changedObjects;
         data["deleted_objects"] = this.deletedObjects;
         data["added_objects"] = this.addedObjects;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

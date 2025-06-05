@@ -28,9 +28,9 @@ export class Surface extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Surface, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(Surface, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.boundaryConditionObjects = obj.boundaryConditionObjects;
-            this.type = obj.type;
+            this.type = obj.type ?? "Surface";
         }
     }
 
@@ -53,9 +53,9 @@ export class Surface extends _OpenAPIGenBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["boundary_condition_objects"] = this.boundaryConditionObjects;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "Surface";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

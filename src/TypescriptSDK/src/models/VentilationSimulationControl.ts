@@ -81,15 +81,15 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(VentilationSimulationControl, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.ventControlType = obj.ventControlType;
-            this.referenceTemperature = obj.referenceTemperature;
-            this.referencePressure = obj.referencePressure;
-            this.referenceHumidityRatio = obj.referenceHumidityRatio;
-            this.buildingType = obj.buildingType;
-            this.longAxisAngle = obj.longAxisAngle;
-            this.aspectRatio = obj.aspectRatio;
+            const obj = plainToClass(VentilationSimulationControl, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "VentilationSimulationControl";
+            this.ventControlType = obj.ventControlType ?? VentilationControlType.SingleZone;
+            this.referenceTemperature = obj.referenceTemperature ?? 20;
+            this.referencePressure = obj.referencePressure ?? 101325;
+            this.referenceHumidityRatio = obj.referenceHumidityRatio ?? 0;
+            this.buildingType = obj.buildingType ?? BuildingType.LowRise;
+            this.longAxisAngle = obj.longAxisAngle ?? 0;
+            this.aspectRatio = obj.aspectRatio ?? 1;
         }
     }
 
@@ -111,16 +111,16 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["vent_control_type"] = this.ventControlType;
-        data["reference_temperature"] = this.referenceTemperature;
-        data["reference_pressure"] = this.referencePressure;
-        data["reference_humidity_ratio"] = this.referenceHumidityRatio;
-        data["building_type"] = this.buildingType;
-        data["long_axis_angle"] = this.longAxisAngle;
-        data["aspect_ratio"] = this.aspectRatio;
+        data["type"] = this.type ?? "VentilationSimulationControl";
+        data["vent_control_type"] = this.ventControlType ?? VentilationControlType.SingleZone;
+        data["reference_temperature"] = this.referenceTemperature ?? 20;
+        data["reference_pressure"] = this.referencePressure ?? 101325;
+        data["reference_humidity_ratio"] = this.referenceHumidityRatio ?? 0;
+        data["building_type"] = this.buildingType ?? BuildingType.LowRise;
+        data["long_axis_angle"] = this.longAxisAngle ?? 0;
+        data["aspect_ratio"] = this.aspectRatio ?? 1;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

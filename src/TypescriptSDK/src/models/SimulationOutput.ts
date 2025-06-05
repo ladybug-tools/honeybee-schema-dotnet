@@ -53,12 +53,12 @@ export class SimulationOutput extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(SimulationOutput, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.reportingFrequency = obj.reportingFrequency;
+            const obj = plainToClass(SimulationOutput, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "SimulationOutput";
+            this.reportingFrequency = obj.reportingFrequency ?? ReportingFrequency.Hourly;
             this.outputs = obj.outputs;
             this.summaryReports = obj.summaryReports;
-            this.unmetSetpointTolerance = obj.unmetSetpointTolerance;
+            this.unmetSetpointTolerance = obj.unmetSetpointTolerance ?? 1.11;
         }
     }
 
@@ -80,13 +80,13 @@ export class SimulationOutput extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["reporting_frequency"] = this.reportingFrequency;
+        data["type"] = this.type ?? "SimulationOutput";
+        data["reporting_frequency"] = this.reportingFrequency ?? ReportingFrequency.Hourly;
         data["outputs"] = this.outputs;
         data["summary_reports"] = this.summaryReports;
-        data["unmet_setpoint_tolerance"] = this.unmetSetpointTolerance;
+        data["unmet_setpoint_tolerance"] = this.unmetSetpointTolerance ?? 1.11;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

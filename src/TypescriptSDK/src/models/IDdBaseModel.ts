@@ -41,11 +41,11 @@ export class IDdBaseModel extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(IDdBaseModel, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(IDdBaseModel, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.identifier = obj.identifier;
             this.displayName = obj.displayName;
             this.userData = obj.userData;
-            this.type = obj.type;
+            this.type = obj.type ?? "IDdBaseModel";
         }
     }
 
@@ -70,9 +70,9 @@ export class IDdBaseModel extends _OpenAPIGenBaseModel {
         data["identifier"] = this.identifier;
         data["display_name"] = this.displayName;
         data["user_data"] = this.userData;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "IDdBaseModel";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

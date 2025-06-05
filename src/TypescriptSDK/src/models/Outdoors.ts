@@ -42,11 +42,11 @@ export class Outdoors extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Outdoors, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.sunExposure = obj.sunExposure;
-            this.windExposure = obj.windExposure;
-            this.viewFactor = obj.viewFactor;
+            const obj = plainToClass(Outdoors, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "Outdoors";
+            this.sunExposure = obj.sunExposure ?? true;
+            this.windExposure = obj.windExposure ?? true;
+            this.viewFactor = obj.viewFactor ?? new Autocalculate();
         }
     }
 
@@ -68,12 +68,12 @@ export class Outdoors extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["sun_exposure"] = this.sunExposure;
-        data["wind_exposure"] = this.windExposure;
-        data["view_factor"] = this.viewFactor;
+        data["type"] = this.type ?? "Outdoors";
+        data["sun_exposure"] = this.sunExposure ?? true;
+        data["wind_exposure"] = this.windExposure ?? true;
+        data["view_factor"] = this.viewFactor ?? new Autocalculate();
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

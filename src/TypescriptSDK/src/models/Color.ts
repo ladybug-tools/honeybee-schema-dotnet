@@ -54,12 +54,12 @@ export class Color extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Color, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(Color, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.r = obj.r;
             this.g = obj.g;
             this.b = obj.b;
-            this.type = obj.type;
-            this.a = obj.a;
+            this.type = obj.type ?? "Color";
+            this.a = obj.a ?? 255;
         }
     }
 
@@ -84,10 +84,10 @@ export class Color extends _OpenAPIGenBaseModel {
         data["r"] = this.r;
         data["g"] = this.g;
         data["b"] = this.b;
-        data["type"] = this.type;
-        data["a"] = this.a;
+        data["type"] = this.type ?? "Color";
+        data["a"] = this.a ?? 255;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

@@ -36,10 +36,10 @@ export class OtherSideTemperature extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(OtherSideTemperature, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.heatTransferCoefficient = obj.heatTransferCoefficient;
-            this.temperature = obj.temperature;
+            const obj = plainToClass(OtherSideTemperature, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "OtherSideTemperature";
+            this.heatTransferCoefficient = obj.heatTransferCoefficient ?? 0;
+            this.temperature = obj.temperature ?? new Autocalculate();
         }
     }
 
@@ -61,11 +61,11 @@ export class OtherSideTemperature extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["heat_transfer_coefficient"] = this.heatTransferCoefficient;
-        data["temperature"] = this.temperature;
+        data["type"] = this.type ?? "OtherSideTemperature";
+        data["heat_transfer_coefficient"] = this.heatTransferCoefficient ?? 0;
+        data["temperature"] = this.temperature ?? new Autocalculate();
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

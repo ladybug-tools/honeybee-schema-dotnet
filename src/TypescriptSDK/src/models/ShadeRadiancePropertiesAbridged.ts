@@ -37,8 +37,8 @@ export class ShadeRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ShadeRadiancePropertiesAbridged, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
+            const obj = plainToClass(ShadeRadiancePropertiesAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "ShadeRadiancePropertiesAbridged";
             this.dynamicGroupIdentifier = obj.dynamicGroupIdentifier;
             this.states = obj.states;
         }
@@ -62,11 +62,11 @@ export class ShadeRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["type"] = this.type ?? "ShadeRadiancePropertiesAbridged";
         data["dynamic_group_identifier"] = this.dynamicGroupIdentifier;
         data["states"] = this.states;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

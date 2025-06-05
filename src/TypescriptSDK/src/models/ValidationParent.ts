@@ -40,10 +40,10 @@ export class ValidationParent {
 
     init(_data?: any) {
         if (_data) {
-            const obj = plainToClass(ValidationParent, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(ValidationParent, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.parentType = obj.parentType;
             this.id = obj.id;
-            this.type = obj.type;
+            this.type = obj.type ?? "ValidationParent";
             this.name = obj.name;
         }
     }
@@ -68,9 +68,9 @@ export class ValidationParent {
         data = typeof data === 'object' ? data : {};
         data["parent_type"] = this.parentType;
         data["id"] = this.id;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "ValidationParent";
         data["name"] = this.name;
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

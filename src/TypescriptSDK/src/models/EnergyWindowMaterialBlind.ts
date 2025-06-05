@@ -235,34 +235,34 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyWindowMaterialBlind, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.slatOrientation = obj.slatOrientation;
-            this.slatWidth = obj.slatWidth;
-            this.slatSeparation = obj.slatSeparation;
-            this.slatThickness = obj.slatThickness;
-            this.slatAngle = obj.slatAngle;
-            this.slatConductivity = obj.slatConductivity;
-            this.beamSolarTransmittance = obj.beamSolarTransmittance;
-            this.beamSolarReflectance = obj.beamSolarReflectance;
-            this.beamSolarReflectanceBack = obj.beamSolarReflectanceBack;
-            this.diffuseSolarTransmittance = obj.diffuseSolarTransmittance;
-            this.diffuseSolarReflectance = obj.diffuseSolarReflectance;
-            this.diffuseSolarReflectanceBack = obj.diffuseSolarReflectanceBack;
-            this.beamVisibleTransmittance = obj.beamVisibleTransmittance;
-            this.beamVisibleReflectance = obj.beamVisibleReflectance;
-            this.beamVisibleReflectanceBack = obj.beamVisibleReflectanceBack;
-            this.diffuseVisibleTransmittance = obj.diffuseVisibleTransmittance;
-            this.diffuseVisibleReflectance = obj.diffuseVisibleReflectance;
-            this.diffuseVisibleReflectanceBack = obj.diffuseVisibleReflectanceBack;
-            this.infraredTransmittance = obj.infraredTransmittance;
-            this.emissivity = obj.emissivity;
-            this.emissivityBack = obj.emissivityBack;
-            this.distanceToGlass = obj.distanceToGlass;
-            this.topOpeningMultiplier = obj.topOpeningMultiplier;
-            this.bottomOpeningMultiplier = obj.bottomOpeningMultiplier;
-            this.leftOpeningMultiplier = obj.leftOpeningMultiplier;
-            this.rightOpeningMultiplier = obj.rightOpeningMultiplier;
+            const obj = plainToClass(EnergyWindowMaterialBlind, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "EnergyWindowMaterialBlind";
+            this.slatOrientation = obj.slatOrientation ?? SlatOrientation.Horizontal;
+            this.slatWidth = obj.slatWidth ?? 0.025;
+            this.slatSeparation = obj.slatSeparation ?? 0.01875;
+            this.slatThickness = obj.slatThickness ?? 0.001;
+            this.slatAngle = obj.slatAngle ?? 45;
+            this.slatConductivity = obj.slatConductivity ?? 221;
+            this.beamSolarTransmittance = obj.beamSolarTransmittance ?? 0;
+            this.beamSolarReflectance = obj.beamSolarReflectance ?? 0.5;
+            this.beamSolarReflectanceBack = obj.beamSolarReflectanceBack ?? 0.5;
+            this.diffuseSolarTransmittance = obj.diffuseSolarTransmittance ?? 0;
+            this.diffuseSolarReflectance = obj.diffuseSolarReflectance ?? 0.5;
+            this.diffuseSolarReflectanceBack = obj.diffuseSolarReflectanceBack ?? 0.5;
+            this.beamVisibleTransmittance = obj.beamVisibleTransmittance ?? 0;
+            this.beamVisibleReflectance = obj.beamVisibleReflectance ?? 0.5;
+            this.beamVisibleReflectanceBack = obj.beamVisibleReflectanceBack ?? 0.5;
+            this.diffuseVisibleTransmittance = obj.diffuseVisibleTransmittance ?? 0;
+            this.diffuseVisibleReflectance = obj.diffuseVisibleReflectance ?? 0.5;
+            this.diffuseVisibleReflectanceBack = obj.diffuseVisibleReflectanceBack ?? 0.5;
+            this.infraredTransmittance = obj.infraredTransmittance ?? 0;
+            this.emissivity = obj.emissivity ?? 0.9;
+            this.emissivityBack = obj.emissivityBack ?? 0.9;
+            this.distanceToGlass = obj.distanceToGlass ?? 0.05;
+            this.topOpeningMultiplier = obj.topOpeningMultiplier ?? 0.5;
+            this.bottomOpeningMultiplier = obj.bottomOpeningMultiplier ?? 0.5;
+            this.leftOpeningMultiplier = obj.leftOpeningMultiplier ?? 0.5;
+            this.rightOpeningMultiplier = obj.rightOpeningMultiplier ?? 0.5;
         }
     }
 
@@ -284,35 +284,35 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["slat_orientation"] = this.slatOrientation;
-        data["slat_width"] = this.slatWidth;
-        data["slat_separation"] = this.slatSeparation;
-        data["slat_thickness"] = this.slatThickness;
-        data["slat_angle"] = this.slatAngle;
-        data["slat_conductivity"] = this.slatConductivity;
-        data["beam_solar_transmittance"] = this.beamSolarTransmittance;
-        data["beam_solar_reflectance"] = this.beamSolarReflectance;
-        data["beam_solar_reflectance_back"] = this.beamSolarReflectanceBack;
-        data["diffuse_solar_transmittance"] = this.diffuseSolarTransmittance;
-        data["diffuse_solar_reflectance"] = this.diffuseSolarReflectance;
-        data["diffuse_solar_reflectance_back"] = this.diffuseSolarReflectanceBack;
-        data["beam_visible_transmittance"] = this.beamVisibleTransmittance;
-        data["beam_visible_reflectance"] = this.beamVisibleReflectance;
-        data["beam_visible_reflectance_back"] = this.beamVisibleReflectanceBack;
-        data["diffuse_visible_transmittance"] = this.diffuseVisibleTransmittance;
-        data["diffuse_visible_reflectance"] = this.diffuseVisibleReflectance;
-        data["diffuse_visible_reflectance_back"] = this.diffuseVisibleReflectanceBack;
-        data["infrared_transmittance"] = this.infraredTransmittance;
-        data["emissivity"] = this.emissivity;
-        data["emissivity_back"] = this.emissivityBack;
-        data["distance_to_glass"] = this.distanceToGlass;
-        data["top_opening_multiplier"] = this.topOpeningMultiplier;
-        data["bottom_opening_multiplier"] = this.bottomOpeningMultiplier;
-        data["left_opening_multiplier"] = this.leftOpeningMultiplier;
-        data["right_opening_multiplier"] = this.rightOpeningMultiplier;
+        data["type"] = this.type ?? "EnergyWindowMaterialBlind";
+        data["slat_orientation"] = this.slatOrientation ?? SlatOrientation.Horizontal;
+        data["slat_width"] = this.slatWidth ?? 0.025;
+        data["slat_separation"] = this.slatSeparation ?? 0.01875;
+        data["slat_thickness"] = this.slatThickness ?? 0.001;
+        data["slat_angle"] = this.slatAngle ?? 45;
+        data["slat_conductivity"] = this.slatConductivity ?? 221;
+        data["beam_solar_transmittance"] = this.beamSolarTransmittance ?? 0;
+        data["beam_solar_reflectance"] = this.beamSolarReflectance ?? 0.5;
+        data["beam_solar_reflectance_back"] = this.beamSolarReflectanceBack ?? 0.5;
+        data["diffuse_solar_transmittance"] = this.diffuseSolarTransmittance ?? 0;
+        data["diffuse_solar_reflectance"] = this.diffuseSolarReflectance ?? 0.5;
+        data["diffuse_solar_reflectance_back"] = this.diffuseSolarReflectanceBack ?? 0.5;
+        data["beam_visible_transmittance"] = this.beamVisibleTransmittance ?? 0;
+        data["beam_visible_reflectance"] = this.beamVisibleReflectance ?? 0.5;
+        data["beam_visible_reflectance_back"] = this.beamVisibleReflectanceBack ?? 0.5;
+        data["diffuse_visible_transmittance"] = this.diffuseVisibleTransmittance ?? 0;
+        data["diffuse_visible_reflectance"] = this.diffuseVisibleReflectance ?? 0.5;
+        data["diffuse_visible_reflectance_back"] = this.diffuseVisibleReflectanceBack ?? 0.5;
+        data["infrared_transmittance"] = this.infraredTransmittance ?? 0;
+        data["emissivity"] = this.emissivity ?? 0.9;
+        data["emissivity_back"] = this.emissivityBack ?? 0.9;
+        data["distance_to_glass"] = this.distanceToGlass ?? 0.05;
+        data["top_opening_multiplier"] = this.topOpeningMultiplier ?? 0.5;
+        data["bottom_opening_multiplier"] = this.bottomOpeningMultiplier ?? 0.5;
+        data["left_opening_multiplier"] = this.leftOpeningMultiplier ?? 0.5;
+        data["right_opening_multiplier"] = this.rightOpeningMultiplier ?? 0.5;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

@@ -39,10 +39,10 @@ export class WindowConstructionDynamicAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(WindowConstructionDynamicAbridged, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(WindowConstructionDynamicAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.constructions = obj.constructions;
             this.schedule = obj.schedule;
-            this.type = obj.type;
+            this.type = obj.type ?? "WindowConstructionDynamicAbridged";
         }
     }
 
@@ -66,9 +66,9 @@ export class WindowConstructionDynamicAbridged extends IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
         data["constructions"] = this.constructions;
         data["schedule"] = this.schedule;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "WindowConstructionDynamicAbridged";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

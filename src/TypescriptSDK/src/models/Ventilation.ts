@@ -66,12 +66,12 @@ export class Ventilation extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Ventilation, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.flowPerPerson = obj.flowPerPerson;
-            this.flowPerArea = obj.flowPerArea;
-            this.airChangesPerHour = obj.airChangesPerHour;
-            this.flowPerZone = obj.flowPerZone;
+            const obj = plainToClass(Ventilation, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "Ventilation";
+            this.flowPerPerson = obj.flowPerPerson ?? 0;
+            this.flowPerArea = obj.flowPerArea ?? 0;
+            this.airChangesPerHour = obj.airChangesPerHour ?? 0;
+            this.flowPerZone = obj.flowPerZone ?? 0;
             this.schedule = obj.schedule;
         }
     }
@@ -94,14 +94,14 @@ export class Ventilation extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["flow_per_person"] = this.flowPerPerson;
-        data["flow_per_area"] = this.flowPerArea;
-        data["air_changes_per_hour"] = this.airChangesPerHour;
-        data["flow_per_zone"] = this.flowPerZone;
+        data["type"] = this.type ?? "Ventilation";
+        data["flow_per_person"] = this.flowPerPerson ?? 0;
+        data["flow_per_area"] = this.flowPerArea ?? 0;
+        data["air_changes_per_hour"] = this.airChangesPerHour ?? 0;
+        data["flow_per_zone"] = this.flowPerZone ?? 0;
         data["schedule"] = this.schedule;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

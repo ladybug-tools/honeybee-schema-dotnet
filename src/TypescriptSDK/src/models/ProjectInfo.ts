@@ -72,9 +72,9 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ProjectInfo, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.north = obj.north;
+            const obj = plainToClass(ProjectInfo, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "ProjectInfo";
+            this.north = obj.north ?? 0;
             this.weatherUrls = obj.weatherUrls;
             this.location = obj.location;
             this.ashraeClimateZone = obj.ashraeClimateZone;
@@ -101,15 +101,15 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["north"] = this.north;
+        data["type"] = this.type ?? "ProjectInfo";
+        data["north"] = this.north ?? 0;
         data["weather_urls"] = this.weatherUrls;
         data["location"] = this.location;
         data["ashrae_climate_zone"] = this.ashraeClimateZone;
         data["building_type"] = this.buildingType;
         data["vintage"] = this.vintage;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

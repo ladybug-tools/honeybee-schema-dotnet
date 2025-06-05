@@ -37,10 +37,10 @@ export class DaylightSavingTime extends DatedBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(DaylightSavingTime, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.startDate = obj.startDate;
-            this.endDate = obj.endDate;
+            const obj = plainToClass(DaylightSavingTime, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "DaylightSavingTime";
+            this.startDate = obj.startDate ?? [3, 12];
+            this.endDate = obj.endDate ?? [11, 5];
         }
     }
 
@@ -62,11 +62,11 @@ export class DaylightSavingTime extends DatedBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["start_date"] = this.startDate;
-        data["end_date"] = this.endDate;
+        data["type"] = this.type ?? "DaylightSavingTime";
+        data["start_date"] = this.startDate ?? [3, 12];
+        data["end_date"] = this.endDate ?? [11, 5];
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

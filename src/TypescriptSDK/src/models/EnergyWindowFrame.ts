@@ -86,16 +86,16 @@ export class EnergyWindowFrame extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(EnergyWindowFrame, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(EnergyWindowFrame, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.width = obj.width;
             this.conductance = obj.conductance;
-            this.type = obj.type;
-            this.edgeToCenterRatio = obj.edgeToCenterRatio;
-            this.outsideProjection = obj.outsideProjection;
-            this.insideProjection = obj.insideProjection;
-            this.thermalAbsorptance = obj.thermalAbsorptance;
-            this.solarAbsorptance = obj.solarAbsorptance;
-            this.visibleAbsorptance = obj.visibleAbsorptance;
+            this.type = obj.type ?? "EnergyWindowFrame";
+            this.edgeToCenterRatio = obj.edgeToCenterRatio ?? 1;
+            this.outsideProjection = obj.outsideProjection ?? 0;
+            this.insideProjection = obj.insideProjection ?? 0;
+            this.thermalAbsorptance = obj.thermalAbsorptance ?? 0.9;
+            this.solarAbsorptance = obj.solarAbsorptance ?? 0.7;
+            this.visibleAbsorptance = obj.visibleAbsorptance ?? 0.7;
         }
     }
 
@@ -119,15 +119,15 @@ export class EnergyWindowFrame extends IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
         data["width"] = this.width;
         data["conductance"] = this.conductance;
-        data["type"] = this.type;
-        data["edge_to_center_ratio"] = this.edgeToCenterRatio;
-        data["outside_projection"] = this.outsideProjection;
-        data["inside_projection"] = this.insideProjection;
-        data["thermal_absorptance"] = this.thermalAbsorptance;
-        data["solar_absorptance"] = this.solarAbsorptance;
-        data["visible_absorptance"] = this.visibleAbsorptance;
+        data["type"] = this.type ?? "EnergyWindowFrame";
+        data["edge_to_center_ratio"] = this.edgeToCenterRatio ?? 1;
+        data["outside_projection"] = this.outsideProjection ?? 0;
+        data["inside_projection"] = this.insideProjection ?? 0;
+        data["thermal_absorptance"] = this.thermalAbsorptance ?? 0.9;
+        data["solar_absorptance"] = this.solarAbsorptance ?? 0.7;
+        data["visible_absorptance"] = this.visibleAbsorptance ?? 0.7;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

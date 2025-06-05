@@ -81,10 +81,10 @@ export class ScheduleRulesetAbridged extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ScheduleRulesetAbridged, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(ScheduleRulesetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.daySchedules = obj.daySchedules;
             this.defaultDaySchedule = obj.defaultDaySchedule;
-            this.type = obj.type;
+            this.type = obj.type ?? "ScheduleRulesetAbridged";
             this.scheduleRules = obj.scheduleRules;
             this.holidaySchedule = obj.holidaySchedule;
             this.summerDesigndaySchedule = obj.summerDesigndaySchedule;
@@ -113,14 +113,14 @@ export class ScheduleRulesetAbridged extends IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
         data["day_schedules"] = this.daySchedules;
         data["default_day_schedule"] = this.defaultDaySchedule;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "ScheduleRulesetAbridged";
         data["schedule_rules"] = this.scheduleRules;
         data["holiday_schedule"] = this.holidaySchedule;
         data["summer_designday_schedule"] = this.summerDesigndaySchedule;
         data["winter_designday_schedule"] = this.winterDesigndaySchedule;
         data["schedule_type_limit"] = this.scheduleTypeLimit;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

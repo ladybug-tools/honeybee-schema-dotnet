@@ -46,11 +46,11 @@ export class ShadeConstruction extends IDdEnergyBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ShadeConstruction, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
-            this.solarReflectance = obj.solarReflectance;
-            this.visibleReflectance = obj.visibleReflectance;
-            this.isSpecular = obj.isSpecular;
+            const obj = plainToClass(ShadeConstruction, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "ShadeConstruction";
+            this.solarReflectance = obj.solarReflectance ?? 0.2;
+            this.visibleReflectance = obj.visibleReflectance ?? 0.2;
+            this.isSpecular = obj.isSpecular ?? false;
         }
     }
 
@@ -72,12 +72,12 @@ export class ShadeConstruction extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
-        data["solar_reflectance"] = this.solarReflectance;
-        data["visible_reflectance"] = this.visibleReflectance;
-        data["is_specular"] = this.isSpecular;
+        data["type"] = this.type ?? "ShadeConstruction";
+        data["solar_reflectance"] = this.solarReflectance ?? 0.2;
+        data["visible_reflectance"] = this.visibleReflectance ?? 0.2;
+        data["is_specular"] = this.isSpecular ?? false;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

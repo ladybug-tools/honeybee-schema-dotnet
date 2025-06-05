@@ -53,8 +53,8 @@ export class ApertureConstructionSetAbridged extends _OpenAPIGenBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(ApertureConstructionSetAbridged, _data, { enableImplicitConversion: true });
-            this.type = obj.type;
+            const obj = plainToClass(ApertureConstructionSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
+            this.type = obj.type ?? "ApertureConstructionSetAbridged";
             this.interiorConstruction = obj.interiorConstruction;
             this.windowConstruction = obj.windowConstruction;
             this.skylightConstruction = obj.skylightConstruction;
@@ -80,13 +80,13 @@ export class ApertureConstructionSetAbridged extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["type"] = this.type;
+        data["type"] = this.type ?? "ApertureConstructionSetAbridged";
         data["interior_construction"] = this.interiorConstruction;
         data["window_construction"] = this.windowConstruction;
         data["skylight_construction"] = this.skylightConstruction;
         data["operable_construction"] = this.operableConstruction;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

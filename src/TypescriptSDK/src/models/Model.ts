@@ -123,19 +123,19 @@ export class Model extends IDdBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(Model, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(Model, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.properties = obj.properties;
-            this.type = obj.type;
-            this.version = obj.version;
+            this.type = obj.type ?? "Model";
+            this.version = obj.version ?? "1.59.0";
             this.rooms = obj.rooms;
             this.orphanedFaces = obj.orphanedFaces;
             this.orphanedShades = obj.orphanedShades;
             this.orphanedApertures = obj.orphanedApertures;
             this.orphanedDoors = obj.orphanedDoors;
             this.shadeMeshes = obj.shadeMeshes;
-            this.units = obj.units;
-            this.tolerance = obj.tolerance;
-            this.angleTolerance = obj.angleTolerance;
+            this.units = obj.units ?? Units.Meters;
+            this.tolerance = obj.tolerance ?? 0.01;
+            this.angleTolerance = obj.angleTolerance ?? 1;
         }
     }
 
@@ -158,19 +158,19 @@ export class Model extends IDdBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["properties"] = this.properties;
-        data["type"] = this.type;
-        data["version"] = this.version;
+        data["type"] = this.type ?? "Model";
+        data["version"] = this.version ?? "1.59.0";
         data["rooms"] = this.rooms;
         data["orphaned_faces"] = this.orphanedFaces;
         data["orphaned_shades"] = this.orphanedShades;
         data["orphaned_apertures"] = this.orphanedApertures;
         data["orphaned_doors"] = this.orphanedDoors;
         data["shade_meshes"] = this.shadeMeshes;
-        data["units"] = this.units;
-        data["tolerance"] = this.tolerance;
-        data["angle_tolerance"] = this.angleTolerance;
+        data["units"] = this.units ?? Units.Meters;
+        data["tolerance"] = this.tolerance ?? 0.01;
+        data["angle_tolerance"] = this.angleTolerance ?? 1;
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {

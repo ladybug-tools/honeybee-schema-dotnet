@@ -38,10 +38,10 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
     override init(_data?: any) {
         super.init(_data);
         if (_data) {
-            const obj = plainToClass(_RadianceAsset, _data, { enableImplicitConversion: true });
+            const obj = plainToClass(_RadianceAsset, _data, { enableImplicitConversion: true, exposeUnsetFields: false });
             this.roomIdentifier = obj.roomIdentifier;
             this.lightPath = obj.lightPath;
-            this.type = obj.type;
+            this.type = obj.type ?? "_RadianceAsset";
         }
     }
 
@@ -65,9 +65,9 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
         data = typeof data === 'object' ? data : {};
         data["room_identifier"] = this.roomIdentifier;
         data["light_path"] = this.lightPath;
-        data["type"] = this.type;
+        data["type"] = this.type ?? "_RadianceAsset";
         data = super.toJSON(data);
-        return instanceToPlain(data);
+        return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
 	async validate(): Promise<boolean> {
