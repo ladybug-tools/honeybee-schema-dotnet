@@ -188,3 +188,58 @@ test('test Plastic', () => {
 
 }
 );
+
+test('test Glass', () => {
+  const data = {
+    "b_transmissivity": 0.9584154328610596,
+    "r_transmissivity": 0.9584154328610596,
+    "modifier": null,
+    "identifier": "generic_interior_window_vis_0.88",
+    "refraction_index": null,
+    "type": "Glass",
+    "dependencies": [],
+    "g_transmissivity": 0.9584154328610596
+  };
+
+  const obj = Glass.fromJS(data);
+  expect(obj).toBeInstanceOf(Glass);
+  expect(obj?.identifier).toBe('generic_interior_window_vis_0.88');
+  expect(obj?.rTransmissivity).toBe(0.9584154328610596);
+
+  const jsObj = obj.toJSON();
+  expect(jsObj?.r_transmissivity).toBe(0.9584154328610596);
+
+
+}
+);
+
+
+test('test Glass with undefined dependencies', () => {
+  const data = {
+    "type": "Glass",
+    "dependencies": undefined,
+    "g_transmissivity": 0.9584154328610596
+  };
+
+  const g1 = new Glass();
+  g1.init(data);
+  expect(g1?.gTransmissivity).toBe(0.9584154328610596);
+  expect(g1?.dependencies).toBe(undefined);
+
+  const g2 = plainToClass(Glass, data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
+  expect(g2?.gTransmissivity).toBe(0.9584154328610596);
+  expect(g2?.dependencies).toBe(undefined);
+
+
+  const obj = Glass.fromJS(data);
+  expect(obj).toBeInstanceOf(Glass);
+  expect(obj?.refractionIndex).toBe(1.52); // test default value
+  expect(obj?.gTransmissivity).toBe(0.9584154328610596);
+
+  const jsObj = obj.toJSON();
+  expect(jsObj?.g_transmissivity).toBe(0.9584154328610596);
+
+  expect(jsObj.hasOwnProperty('dependencies')).toBe(false);
+
+}
+);
