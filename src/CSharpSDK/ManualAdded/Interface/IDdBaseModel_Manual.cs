@@ -14,6 +14,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Get UserData in Dictionary
         /// </summary>
+        [System.Text.Json.Serialization.JsonIgnore]
         public System.Collections.Generic.Dictionary<string, object> UserDictionary => this.GetUserData();
         /// <summary>
         /// Add a new value to UserData
@@ -26,9 +27,10 @@ namespace HoneybeeSchema
        
     public partial class IDdEnergyBaseModel: IIDdBaseModel
     {
-            /// <summary>
+        /// <summary>
         /// Get UserData in Dictionary
         /// </summary>
+        [System.Text.Json.Serialization.JsonIgnore]
         public System.Collections.Generic.Dictionary<string, object> UserDictionary => this.GetUserData();
         /// <summary>
         /// Add a new value to UserData
