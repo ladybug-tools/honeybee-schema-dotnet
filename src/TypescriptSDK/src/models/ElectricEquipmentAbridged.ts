@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _EquipmentBase } from "./_EquipmentBase";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
@@ -19,10 +20,9 @@ export class ElectricEquipmentAbridged extends _EquipmentBase {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ElectricEquipmentAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "ElectricEquipmentAbridged";
+            const obj = deepTransform(ElectricEquipmentAbridged, _data);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿import { IsString, IsDefined, MinLength, MaxLength, IsOptional, Matches, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Used to specify information about the setpoint schedule. */
@@ -59,15 +60,9 @@ export class SetpointAbridged extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(SetpointAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.coolingSchedule = obj.coolingSchedule;
-            this.heatingSchedule = obj.heatingSchedule;
-            this.type = obj.type ?? "SetpointAbridged";
-            this.humidifyingSchedule = obj.humidifyingSchedule;
-            this.dehumidifyingSchedule = obj.dehumidifyingSchedule;
-            this.setpointCutoutDifference = obj.setpointCutoutDifference ?? 0;
+            const obj = deepTransform(SetpointAbridged, _data);
         }
     }
 

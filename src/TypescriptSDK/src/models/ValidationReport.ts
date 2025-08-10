@@ -1,5 +1,6 @@
 ﻿import { IsString, IsDefined, Matches, IsBoolean, IsOptional, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { ValidationError } from "./ValidationError";
 
 export class ValidationReport {
@@ -60,15 +61,9 @@ export class ValidationReport {
 
 
     init(_data?: any) {
+
         if (_data) {
-            const obj = plainToClass(ValidationReport, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.appVersion = obj.appVersion;
-            this.schemaVersion = obj.schemaVersion;
-            this.valid = obj.valid;
-            this.type = obj.type ?? "ValidationReport";
-            this.appName = obj.appName ?? "Honeybee";
-            this.fatalError = obj.fatalError ?? "";
-            this.errors = obj.errors;
+            const obj = deepTransform(ValidationReport, _data);
         }
     }
 

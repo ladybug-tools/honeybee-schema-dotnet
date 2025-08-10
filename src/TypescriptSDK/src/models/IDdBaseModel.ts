@@ -1,5 +1,6 @@
 ﻿import { IsString, IsDefined, Matches, MinLength, MaxLength, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
@@ -39,13 +40,9 @@ export class IDdBaseModel extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(IDdBaseModel, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.identifier = obj.identifier;
-            this.displayName = obj.displayName;
-            this.userData = obj.userData;
-            this.type = obj.type ?? "IDdBaseModel";
+            const obj = deepTransform(IDdBaseModel, _data);
         }
     }
 

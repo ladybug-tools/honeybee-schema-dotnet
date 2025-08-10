@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _FaceSubSetAbridged } from "./_FaceSubSetAbridged";
 
 /** A set of constructions for roof and ceiling assemblies. */
@@ -19,10 +20,9 @@ export class RoofCeilingConstructionSetAbridged extends _FaceSubSetAbridged {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(RoofCeilingConstructionSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "RoofCeilingConstructionSetAbridged";
+            const obj = deepTransform(RoofCeilingConstructionSetAbridged, _data);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, MinLength, MaxLength, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleDay } from "./ScheduleDay";
 import { ScheduleRuleAbridged } from "./ScheduleRuleAbridged";
@@ -80,17 +81,9 @@ export class ScheduleRuleset extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ScheduleRuleset, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.daySchedules = obj.daySchedules;
-            this.defaultDaySchedule = obj.defaultDaySchedule;
-            this.type = obj.type ?? "ScheduleRuleset";
-            this.scheduleRules = obj.scheduleRules;
-            this.holidaySchedule = obj.holidaySchedule;
-            this.summerDesigndaySchedule = obj.summerDesigndaySchedule;
-            this.winterDesigndaySchedule = obj.winterDesigndaySchedule;
-            this.scheduleTypeLimit = obj.scheduleTypeLimit;
+            const obj = deepTransform(ScheduleRuleset, _data);
         }
     }
 

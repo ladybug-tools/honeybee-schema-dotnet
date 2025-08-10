@@ -1,5 +1,6 @@
 ﻿import { IsEnum, IsOptional, IsNumber, Min, Max, IsBoolean, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { AllAirEconomizerType } from "./AllAirEconomizerType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { VAVEquipmentType } from "./VAVEquipmentType";
@@ -71,16 +72,9 @@ export class VAV extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(VAV, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
-            this.economizerType = obj.economizerType ?? AllAirEconomizerType.NoEconomizer;
-            this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
-            this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
-            this.demandControlledVentilation = obj.demandControlledVentilation ?? false;
-            this.type = obj.type ?? "VAV";
-            this.equipmentType = obj.equipmentType ?? VAVEquipmentType.VAV_Chiller_Boiler;
+            const obj = deepTransform(VAV, _data);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsArray, IsEnum, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { Aperture } from "./Aperture";
 import { Door } from "./Door";
 import { Face } from "./Face";
@@ -121,21 +122,9 @@ export class Model extends IDdBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(Model, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.properties = obj.properties;
-            this.type = obj.type ?? "Model";
-            this.version = obj.version ?? "1.59.0";
-            this.rooms = obj.rooms;
-            this.orphanedFaces = obj.orphanedFaces;
-            this.orphanedShades = obj.orphanedShades;
-            this.orphanedApertures = obj.orphanedApertures;
-            this.orphanedDoors = obj.orphanedDoors;
-            this.shadeMeshes = obj.shadeMeshes;
-            this.units = obj.units ?? Units.Meters;
-            this.tolerance = obj.tolerance ?? 0.01;
-            this.angleTolerance = obj.angleTolerance ?? 1;
+            const obj = deepTransform(Model, _data);
         }
     }
 

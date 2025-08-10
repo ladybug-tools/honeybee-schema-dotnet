@@ -1,5 +1,6 @@
 ﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IsNestedIntegerArray } from "./../helpers/class-validator";
 import { EnergyBaseModel } from "./EnergyBaseModel";
 
@@ -42,13 +43,9 @@ export class ScheduleDay extends EnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ScheduleDay, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.values = obj.values;
-            this.type = obj.type ?? "ScheduleDay";
-            this.times = obj.times ?? [[0, 0]];
-            this.interpolate = obj.interpolate ?? false;
+            const obj = deepTransform(ScheduleDay, _data);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A set of constructions for aperture assemblies. */
@@ -51,14 +52,9 @@ export class ApertureConstructionSetAbridged extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ApertureConstructionSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "ApertureConstructionSetAbridged";
-            this.interiorConstruction = obj.interiorConstruction;
-            this.windowConstruction = obj.windowConstruction;
-            this.skylightConstruction = obj.skylightConstruction;
-            this.operableConstruction = obj.operableConstruction;
+            const obj = deepTransform(ApertureConstructionSetAbridged, _data);
         }
     }
 

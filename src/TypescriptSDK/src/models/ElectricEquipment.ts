@@ -1,5 +1,6 @@
 ﻿import { IsNumber, IsDefined, Min, IsOptional, Max, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { ScheduleRuleset } from "./ScheduleRuleset";
@@ -66,15 +67,9 @@ export class ElectricEquipment extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ElectricEquipment, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.wattsPerArea = obj.wattsPerArea;
-            this.schedule = obj.schedule;
-            this.radiantFraction = obj.radiantFraction ?? 0;
-            this.latentFraction = obj.latentFraction ?? 0;
-            this.lostFraction = obj.lostFraction ?? 0;
-            this.type = obj.type ?? "ElectricEquipment";
+            const obj = deepTransform(ElectricEquipment, _data);
         }
     }
 

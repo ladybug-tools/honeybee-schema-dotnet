@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { ApertureModifierSetAbridged } from "./ApertureModifierSetAbridged";
 import { DoorModifierSetAbridged } from "./DoorModifierSetAbridged";
 import { FloorModifierSetAbridged } from "./FloorModifierSetAbridged";
@@ -79,17 +80,9 @@ export class ModifierSetAbridged extends IDdRadianceBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ModifierSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "ModifierSetAbridged";
-            this.wallSet = obj.wallSet;
-            this.floorSet = obj.floorSet;
-            this.roofCeilingSet = obj.roofCeilingSet;
-            this.apertureSet = obj.apertureSet;
-            this.doorSet = obj.doorSet;
-            this.shadeSet = obj.shadeSet;
-            this.airBoundaryModifier = obj.airBoundaryModifier;
+            const obj = deepTransform(ModifierSetAbridged, _data);
         }
     }
 

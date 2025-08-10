@@ -1,5 +1,6 @@
 ﻿import { IsEnum, IsOptional, IsNumber, Min, Max, IsBoolean, IsString, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 import { WSHPwithDOASEquipmentType } from "./WSHPwithDOASEquipmentType";
@@ -70,16 +71,9 @@ export class WSHPwithDOASAbridged extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(WSHPwithDOASAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
-            this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
-            this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
-            this.demandControlledVentilation = obj.demandControlledVentilation ?? false;
-            this.doasAvailabilitySchedule = obj.doasAvailabilitySchedule;
-            this.type = obj.type ?? "WSHPwithDOASAbridged";
-            this.equipmentType = obj.equipmentType ?? WSHPwithDOASEquipmentType.DOAS_WSHP_FluidCooler_Boiler;
+            const obj = deepTransform(WSHPwithDOASAbridged, _data);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Used to specify wind conditions on a design day. */
@@ -36,12 +37,9 @@ export class WindCondition extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(WindCondition, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.windSpeed = obj.windSpeed;
-            this.type = obj.type ?? "WindCondition";
-            this.windDirection = obj.windDirection ?? 0;
+            const obj = deepTransform(WindCondition, _data);
         }
     }
 

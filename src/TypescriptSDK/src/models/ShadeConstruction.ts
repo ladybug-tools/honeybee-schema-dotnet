@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Construction for Shade objects. */
@@ -44,13 +45,9 @@ export class ShadeConstruction extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ShadeConstruction, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "ShadeConstruction";
-            this.solarReflectance = obj.solarReflectance ?? 0.2;
-            this.visibleReflectance = obj.visibleReflectance ?? 0.2;
-            this.isSpecular = obj.isSpecular ?? false;
+            const obj = deepTransform(ShadeConstruction, _data);
         }
     }
 

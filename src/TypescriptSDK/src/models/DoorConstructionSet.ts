@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { OpaqueConstruction } from "./OpaqueConstruction";
 import { WindowConstruction } from "./WindowConstruction";
@@ -71,15 +72,9 @@ export class DoorConstructionSet extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(DoorConstructionSet, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "DoorConstructionSet";
-            this.interiorConstruction = obj.interiorConstruction;
-            this.exteriorConstruction = obj.exteriorConstruction;
-            this.overheadConstruction = obj.overheadConstruction;
-            this.exteriorGlassConstruction = obj.exteriorGlassConstruction;
-            this.interiorGlassConstruction = obj.interiorGlassConstruction;
+            const obj = deepTransform(DoorConstructionSet, _data);
         }
     }
 

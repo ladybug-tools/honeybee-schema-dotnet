@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 
 /** Base class for Radiance Modifiers */
@@ -19,10 +20,9 @@ export class ModifierBase extends IDdRadianceBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ModifierBase, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "ModifierBase";
+            const obj = deepTransform(ModifierBase, _data);
         }
     }
 

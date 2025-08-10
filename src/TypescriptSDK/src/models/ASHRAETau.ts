@@ -1,5 +1,6 @@
 ﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _SkyCondition } from "./_SkyCondition";
 
 /** Used to specify sky conditions on a design day. */
@@ -35,12 +36,9 @@ export class ASHRAETau extends _SkyCondition {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ASHRAETau, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.tauB = obj.tauB;
-            this.tauD = obj.tauD;
-            this.type = obj.type ?? "ASHRAETau";
+            const obj = deepTransform(ASHRAETau, _data);
         }
     }
 

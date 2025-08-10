@@ -1,5 +1,6 @@
 ﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { EvaporativeCoolerEquipmentType } from "./EvaporativeCoolerEquipmentType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
@@ -37,12 +38,9 @@ export class EvaporativeCooler extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(EvaporativeCooler, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
-            this.type = obj.type ?? "EvaporativeCooler";
-            this.equipmentType = obj.equipmentType ?? EvaporativeCoolerEquipmentType.EvapCoolers_ElectricBaseboard;
+            const obj = deepTransform(EvaporativeCooler, _data);
         }
     }
 

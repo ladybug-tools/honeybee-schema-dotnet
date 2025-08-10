@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
@@ -77,17 +78,9 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(VentilationOpening, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "VentilationOpening";
-            this.fractionAreaOperable = obj.fractionAreaOperable ?? 0.5;
-            this.fractionHeightOperable = obj.fractionHeightOperable ?? 1;
-            this.dischargeCoefficient = obj.dischargeCoefficient ?? 0.45;
-            this.windCrossVent = obj.windCrossVent ?? false;
-            this.flowCoefficientClosed = obj.flowCoefficientClosed ?? 0;
-            this.flowExponentClosed = obj.flowExponentClosed ?? 0.65;
-            this.twoWayThreshold = obj.twoWayThreshold ?? 0.0001;
+            const obj = deepTransform(VentilationOpening, _data);
         }
     }
 

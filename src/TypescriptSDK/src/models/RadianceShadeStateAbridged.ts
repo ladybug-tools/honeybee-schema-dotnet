@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { StateGeometryAbridged } from "./StateGeometryAbridged";
 
@@ -41,13 +42,9 @@ export class RadianceShadeStateAbridged extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(RadianceShadeStateAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "RadianceShadeStateAbridged";
-            this.modifier = obj.modifier;
-            this.modifierDirect = obj.modifierDirect;
-            this.shades = obj.shades;
+            const obj = deepTransform(RadianceShadeStateAbridged, _data);
         }
     }
 

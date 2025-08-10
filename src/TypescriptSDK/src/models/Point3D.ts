@@ -1,5 +1,6 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 
 /** A point object in 3D space. */
 export class Point3D {
@@ -35,12 +36,9 @@ export class Point3D {
 
 
     init(_data?: any) {
+
         if (_data) {
-            const obj = plainToClass(Point3D, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.x = obj.x;
-            this.y = obj.y;
-            this.z = obj.z;
-            this.type = obj.type ?? "Point3D";
+            const obj = deepTransform(Point3D, _data);
         }
     }
 

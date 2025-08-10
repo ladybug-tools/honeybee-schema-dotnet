@@ -1,5 +1,6 @@
 ﻿import { IsOptional, IsArray, IsNumber, Min, Max, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
 import { Glow } from "./Glow";
@@ -127,19 +128,9 @@ export class Trans extends ModifierBase {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(Trans, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.modifier = obj.modifier ?? new Void();
-            this.dependencies = obj.dependencies;
-            this.rReflectance = obj.rReflectance ?? 0;
-            this.gReflectance = obj.gReflectance ?? 0;
-            this.bReflectance = obj.bReflectance ?? 0;
-            this.specularity = obj.specularity ?? 0;
-            this.roughness = obj.roughness ?? 0;
-            this.transmittedDiff = obj.transmittedDiff ?? 0;
-            this.transmittedSpec = obj.transmittedSpec ?? 0;
-            this.type = obj.type ?? "Trans";
+            const obj = deepTransform(Trans, _data);
         }
     }
 

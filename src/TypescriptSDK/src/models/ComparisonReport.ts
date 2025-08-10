@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AddedObject } from "./AddedObject";
 import { ChangedObject } from "./ChangedObject";
@@ -48,13 +49,9 @@ export class ComparisonReport extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ComparisonReport, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "ComparisonReport";
-            this.changedObjects = obj.changedObjects;
-            this.deletedObjects = obj.deletedObjects;
-            this.addedObjects = obj.addedObjects;
+            const obj = deepTransform(ComparisonReport, _data);
         }
     }
 

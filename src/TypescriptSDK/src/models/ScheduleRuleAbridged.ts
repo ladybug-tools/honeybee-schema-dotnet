@@ -1,5 +1,6 @@
 ﻿import { IsString, IsDefined, MinLength, MaxLength, IsOptional, Matches, IsBoolean, IsArray, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { DatedBaseModel } from "./DatedBaseModel";
 
 /** Schedule rule including a ScheduleDay and when it should be applied.. */
@@ -92,20 +93,9 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ScheduleRuleAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.scheduleDay = obj.scheduleDay;
-            this.type = obj.type ?? "ScheduleRuleAbridged";
-            this.applySunday = obj.applySunday ?? false;
-            this.applyMonday = obj.applyMonday ?? false;
-            this.applyTuesday = obj.applyTuesday ?? false;
-            this.applyWednesday = obj.applyWednesday ?? false;
-            this.applyThursday = obj.applyThursday ?? false;
-            this.applyFriday = obj.applyFriday ?? false;
-            this.applySaturday = obj.applySaturday ?? false;
-            this.startDate = obj.startDate ?? [1, 1];
-            this.endDate = obj.endDate ?? [12, 31];
+            const obj = deepTransform(ScheduleRuleAbridged, _data);
         }
     }
 

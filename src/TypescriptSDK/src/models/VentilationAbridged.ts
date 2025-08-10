@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
@@ -59,15 +60,9 @@ export class VentilationAbridged extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(VentilationAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "VentilationAbridged";
-            this.flowPerPerson = obj.flowPerPerson ?? 0;
-            this.flowPerArea = obj.flowPerArea ?? 0;
-            this.airChangesPerHour = obj.airChangesPerHour ?? 0;
-            this.flowPerZone = obj.flowPerZone ?? 0;
-            this.schedule = obj.schedule;
+            const obj = deepTransform(VentilationAbridged, _data);
         }
     }
 

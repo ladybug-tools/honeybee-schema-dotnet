@@ -1,5 +1,6 @@
 ﻿import { IsEnum, IsDefined, IsString, Matches, MinLength, MaxLength, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { GeometryObjectTypes } from "./GeometryObjectTypes";
 
@@ -62,16 +63,9 @@ export class ChangedInstruction extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ChangedInstruction, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.elementType = obj.elementType;
-            this.elementId = obj.elementId;
-            this.elementName = obj.elementName;
-            this.updateGeometry = obj.updateGeometry ?? true;
-            this.updateEnergy = obj.updateEnergy ?? true;
-            this.updateRadiance = obj.updateRadiance ?? true;
-            this.type = obj.type ?? "ChangedInstruction";
+            const obj = deepTransform(ChangedInstruction, _data);
         }
     }
 

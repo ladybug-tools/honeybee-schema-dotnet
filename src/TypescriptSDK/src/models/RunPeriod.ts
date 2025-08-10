@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInt, IsEnum, IsInstance, ValidateNested, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IsNestedIntegerArray } from "./../helpers/class-validator";
 import { DatedBaseModel } from "./DatedBaseModel";
 import { DaylightSavingTime } from "./DaylightSavingTime";
@@ -68,16 +69,9 @@ export class RunPeriod extends DatedBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(RunPeriod, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "RunPeriod";
-            this.startDate = obj.startDate ?? [1, 1];
-            this.endDate = obj.endDate ?? [12, 31];
-            this.startDayOfWeek = obj.startDayOfWeek ?? DaysOfWeek.Sunday;
-            this.holidays = obj.holidays;
-            this.daylightSavingTime = obj.daylightSavingTime;
-            this.leapYear = obj.leapYear ?? false;
+            const obj = deepTransform(RunPeriod, _data);
         }
     }
 

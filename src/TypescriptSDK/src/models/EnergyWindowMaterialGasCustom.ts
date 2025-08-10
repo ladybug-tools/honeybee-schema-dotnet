@@ -1,5 +1,6 @@
 ﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Create single layer of custom gas. */
@@ -100,22 +101,9 @@ export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(EnergyWindowMaterialGasCustom, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.conductivityCoeffA = obj.conductivityCoeffA;
-            this.viscosityCoeffA = obj.viscosityCoeffA;
-            this.specificHeatCoeffA = obj.specificHeatCoeffA;
-            this.specificHeatRatio = obj.specificHeatRatio;
-            this.molecularWeight = obj.molecularWeight;
-            this.type = obj.type ?? "EnergyWindowMaterialGasCustom";
-            this.thickness = obj.thickness ?? 0.0125;
-            this.conductivityCoeffB = obj.conductivityCoeffB ?? 0;
-            this.conductivityCoeffC = obj.conductivityCoeffC ?? 0;
-            this.viscosityCoeffB = obj.viscosityCoeffB ?? 0;
-            this.viscosityCoeffC = obj.viscosityCoeffC ?? 0;
-            this.specificHeatCoeffB = obj.specificHeatCoeffB ?? 0;
-            this.specificHeatCoeffC = obj.specificHeatCoeffC ?? 0;
+            const obj = deepTransform(EnergyWindowMaterialGasCustom, _data);
         }
     }
 

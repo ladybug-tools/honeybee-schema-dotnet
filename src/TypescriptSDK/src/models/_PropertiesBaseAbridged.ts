@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class of Abridged Radiance Properties. */
@@ -31,12 +32,9 @@ export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(_PropertiesBaseAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.modifier = obj.modifier;
-            this.modifierBlk = obj.modifierBlk;
-            this.type = obj.type ?? "_PropertiesBaseAbridged";
+            const obj = deepTransform(_PropertiesBaseAbridged, _data);
         }
     }
 

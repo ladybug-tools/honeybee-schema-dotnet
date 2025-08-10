@@ -1,5 +1,6 @@
 ﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, MinLength, MaxLength, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Used to specify a start date and a list of values for a period of analysis. */
@@ -63,16 +64,9 @@ export class ScheduleFixedIntervalAbridged extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ScheduleFixedIntervalAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.values = obj.values;
-            this.type = obj.type ?? "ScheduleFixedIntervalAbridged";
-            this.scheduleTypeLimit = obj.scheduleTypeLimit;
-            this.timestep = obj.timestep ?? 1;
-            this.startDate = obj.startDate ?? [1, 1];
-            this.placeholderValue = obj.placeholderValue ?? 0;
-            this.interpolate = obj.interpolate ?? false;
+            const obj = deepTransform(ScheduleFixedIntervalAbridged, _data);
         }
     }
 

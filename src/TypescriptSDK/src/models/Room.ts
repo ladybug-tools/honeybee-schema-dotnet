@@ -1,5 +1,6 @@
 ﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsInt, Min, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { Face } from "./Face";
 import { IDdBaseModel } from "./IDdBaseModel";
 import { RoomPropertiesAbridged } from "./RoomPropertiesAbridged";
@@ -84,18 +85,9 @@ export class Room extends IDdBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(Room, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.faces = obj.faces;
-            this.properties = obj.properties;
-            this.type = obj.type ?? "Room";
-            this.indoorShades = obj.indoorShades;
-            this.outdoorShades = obj.outdoorShades;
-            this.multiplier = obj.multiplier ?? 1;
-            this.excludeFloorArea = obj.excludeFloorArea ?? false;
-            this.zone = obj.zone;
-            this.story = obj.story;
+            const obj = deepTransform(Room, _data);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Autocalculate } from "./Autocalculate";
 import { Face3D } from "./Face3D";
@@ -59,16 +60,9 @@ export class RoomDoe2Properties extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(RoomDoe2Properties, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "RoomDoe2Properties";
-            this.assignedFlow = obj.assignedFlow ?? new Autocalculate();
-            this.flowPerArea = obj.flowPerArea ?? new Autocalculate();
-            this.minFlowRatio = obj.minFlowRatio ?? new Autocalculate();
-            this.minFlowPerArea = obj.minFlowPerArea ?? new Autocalculate();
-            this.hmaxFlowRatio = obj.hmaxFlowRatio ?? new Autocalculate();
-            this.spacePolygonGeometry = obj.spacePolygonGeometry;
+            const obj = deepTransform(RoomDoe2Properties, _data);
         }
     }
 

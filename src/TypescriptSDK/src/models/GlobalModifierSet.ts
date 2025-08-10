@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ApertureModifierSetAbridged } from "./ApertureModifierSetAbridged";
 import { DoorModifierSetAbridged } from "./DoorModifierSetAbridged";
@@ -387,158 +388,9 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(GlobalModifierSet, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "GlobalModifierSet";
-            this.modifiers = obj.modifiers ?? [Plastic.fromJS({
-  "identifier": "generic_floor_0.20",
-  "display_name": null,
-  "type": "Plastic",
-  "modifier": null,
-  "dependencies": [],
-  "r_reflectance": 0.2,
-  "g_reflectance": 0.2,
-  "b_reflectance": 0.2,
-  "specularity": 0.0,
-  "roughness": 0.0
-}), Plastic.fromJS({
-  "identifier": "generic_wall_0.50",
-  "display_name": null,
-  "type": "Plastic",
-  "modifier": null,
-  "dependencies": [],
-  "r_reflectance": 0.5,
-  "g_reflectance": 0.5,
-  "b_reflectance": 0.5,
-  "specularity": 0.0,
-  "roughness": 0.0
-}), Plastic.fromJS({
-  "identifier": "generic_ceiling_0.80",
-  "display_name": null,
-  "type": "Plastic",
-  "modifier": null,
-  "dependencies": [],
-  "r_reflectance": 0.8,
-  "g_reflectance": 0.8,
-  "b_reflectance": 0.8,
-  "specularity": 0.0,
-  "roughness": 0.0
-}), Plastic.fromJS({
-  "identifier": "generic_opaque_door_0.50",
-  "display_name": null,
-  "type": "Plastic",
-  "modifier": null,
-  "dependencies": [],
-  "r_reflectance": 0.5,
-  "g_reflectance": 0.5,
-  "b_reflectance": 0.5,
-  "specularity": 0.0,
-  "roughness": 0.0
-}), Plastic.fromJS({
-  "identifier": "generic_interior_shade_0.50",
-  "display_name": null,
-  "type": "Plastic",
-  "modifier": null,
-  "dependencies": [],
-  "r_reflectance": 0.5,
-  "g_reflectance": 0.5,
-  "b_reflectance": 0.5,
-  "specularity": 0.0,
-  "roughness": 0.0
-}), Plastic.fromJS({
-  "identifier": "generic_exterior_shade_0.35",
-  "display_name": null,
-  "type": "Plastic",
-  "modifier": null,
-  "dependencies": [],
-  "r_reflectance": 0.35,
-  "g_reflectance": 0.35,
-  "b_reflectance": 0.35,
-  "specularity": 0.0,
-  "roughness": 0.0
-}), Plastic.fromJS({
-  "identifier": "generic_context_0.20",
-  "display_name": null,
-  "type": "Plastic",
-  "modifier": null,
-  "dependencies": [],
-  "r_reflectance": 0.2,
-  "g_reflectance": 0.2,
-  "b_reflectance": 0.2,
-  "specularity": 0.0,
-  "roughness": 0.0
-}), Glass.fromJS({
-  "identifier": "generic_interior_window_vis_0.88",
-  "display_name": null,
-  "type": "Glass",
-  "modifier": null,
-  "dependencies": [],
-  "r_transmissivity": 0.9584154328610596,
-  "g_transmissivity": 0.9584154328610596,
-  "b_transmissivity": 0.9584154328610596,
-  "refraction_index": null
-}), Glass.fromJS({
-  "identifier": "generic_exterior_window_vis_0.64",
-  "display_name": null,
-  "type": "Glass",
-  "modifier": null,
-  "dependencies": [],
-  "r_transmissivity": 0.6975761815384331,
-  "g_transmissivity": 0.6975761815384331,
-  "b_transmissivity": 0.6975761815384331,
-  "refraction_index": null
-}), Trans.fromJS({
-  "identifier": "air_boundary",
-  "display_name": null,
-  "type": "Trans",
-  "modifier": null,
-  "dependencies": [],
-  "r_reflectance": 1.0,
-  "g_reflectance": 1.0,
-  "b_reflectance": 1.0,
-  "specularity": 0.0,
-  "roughness": 0.0,
-  "transmitted_diff": 1.0,
-  "transmitted_spec": 1.0
-})];
-            this.wallSet = obj.wallSet ?? WallModifierSetAbridged.fromJS({
-  "exterior_modifier": "generic_wall_0.50",
-  "interior_modifier": "generic_wall_0.50",
-  "type": "WallModifierSetAbridged"
-});
-            this.floorSet = obj.floorSet ?? FloorModifierSetAbridged.fromJS({
-  "exterior_modifier": "generic_floor_0.20",
-  "interior_modifier": "generic_floor_0.20",
-  "type": "FloorModifierSetAbridged"
-});
-            this.roofCeilingSet = obj.roofCeilingSet ?? RoofCeilingModifierSetAbridged.fromJS({
-  "exterior_modifier": "generic_ceiling_0.80",
-  "interior_modifier": "generic_ceiling_0.80",
-  "type": "RoofCeilingModifierSetAbridged"
-});
-            this.apertureSet = obj.apertureSet ?? ApertureModifierSetAbridged.fromJS({
-  "type": "ApertureModifierSetAbridged",
-  "window_modifier": "generic_exterior_window_vis_0.64",
-  "interior_modifier": "generic_interior_window_vis_0.88",
-  "skylight_modifier": "generic_exterior_window_vis_0.64",
-  "operable_modifier": "generic_exterior_window_vis_0.64"
-});
-            this.doorSet = obj.doorSet ?? DoorModifierSetAbridged.fromJS({
-  "exterior_modifier": "generic_opaque_door_0.50",
-  "interior_modifier": "generic_opaque_door_0.50",
-  "type": "DoorModifierSetAbridged",
-  "interior_glass_modifier": "generic_interior_window_vis_0.88",
-  "exterior_glass_modifier": "generic_exterior_window_vis_0.64",
-  "overhead_modifier": "generic_opaque_door_0.50"
-});
-            this.shadeSet = obj.shadeSet ?? ShadeModifierSetAbridged.fromJS({
-  "exterior_modifier": "generic_exterior_shade_0.35",
-  "interior_modifier": "generic_interior_shade_0.50",
-  "type": "ShadeModifierSetAbridged"
-});
-            this.airBoundaryModifier = obj.airBoundaryModifier ?? "air_boundary";
-            this.contextModifier = obj.contextModifier ?? "generic_context_0.20";
+            const obj = deepTransform(GlobalModifierSet, _data);
         }
     }
 

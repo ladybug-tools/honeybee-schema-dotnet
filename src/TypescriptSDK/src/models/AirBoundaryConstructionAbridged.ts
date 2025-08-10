@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Construction for Air Boundary objects. */
@@ -35,12 +36,9 @@ export class AirBoundaryConstructionAbridged extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(AirBoundaryConstructionAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "AirBoundaryConstructionAbridged";
-            this.airMixingPerArea = obj.airMixingPerArea ?? 0.1;
-            this.airMixingSchedule = obj.airMixingSchedule;
+            const obj = deepTransform(AirBoundaryConstructionAbridged, _data);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _RadianceAsset } from "./_RadianceAsset";
 import { ViewType } from "./ViewType";
 
@@ -93,21 +94,9 @@ export class View extends _RadianceAsset {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(View, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.position = obj.position;
-            this.direction = obj.direction;
-            this.upVector = obj.upVector;
-            this.type = obj.type ?? "View";
-            this.viewType = obj.viewType ?? ViewType.V;
-            this.hSize = obj.hSize ?? 60;
-            this.vSize = obj.vSize ?? 60;
-            this.shift = obj.shift;
-            this.lift = obj.lift;
-            this.foreClip = obj.foreClip;
-            this.aftClip = obj.aftClip;
-            this.groupIdentifier = obj.groupIdentifier;
+            const obj = deepTransform(View, _data);
         }
     }
 

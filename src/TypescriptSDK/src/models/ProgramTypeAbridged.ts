@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
 import { GasEquipmentAbridged } from "./GasEquipmentAbridged";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -91,18 +92,9 @@ export class ProgramTypeAbridged extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ProgramTypeAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "ProgramTypeAbridged";
-            this.people = obj.people;
-            this.lighting = obj.lighting;
-            this.electricEquipment = obj.electricEquipment;
-            this.gasEquipment = obj.gasEquipment;
-            this.serviceHotWater = obj.serviceHotWater;
-            this.infiltration = obj.infiltration;
-            this.ventilation = obj.ventilation;
-            this.setpoint = obj.setpoint;
+            const obj = deepTransform(ProgramTypeAbridged, _data);
         }
     }
 

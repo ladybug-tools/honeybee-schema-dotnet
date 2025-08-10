@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A set of constructions for door assemblies. */
@@ -59,15 +60,9 @@ export class DoorConstructionSetAbridged extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(DoorConstructionSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "DoorConstructionSetAbridged";
-            this.interiorConstruction = obj.interiorConstruction;
-            this.exteriorConstruction = obj.exteriorConstruction;
-            this.overheadConstruction = obj.overheadConstruction;
-            this.exteriorGlassConstruction = obj.exteriorGlassConstruction;
-            this.interiorGlassConstruction = obj.interiorGlassConstruction;
+            const obj = deepTransform(DoorConstructionSetAbridged, _data);
         }
     }
 

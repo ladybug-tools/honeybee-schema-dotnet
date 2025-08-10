@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IsNestedStringArray } from "./../helpers/class-validator";
 import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 
@@ -36,12 +37,9 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(_RadianceAsset, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.roomIdentifier = obj.roomIdentifier;
-            this.lightPath = obj.lightPath;
-            this.type = obj.type ?? "_RadianceAsset";
+            const obj = deepTransform(_RadianceAsset, _data);
         }
     }
 

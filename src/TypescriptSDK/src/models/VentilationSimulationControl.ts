@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsNumber, Min, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BuildingType } from "./BuildingType";
 import { VentilationControlType } from "./VentilationControlType";
@@ -79,17 +80,9 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(VentilationSimulationControl, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "VentilationSimulationControl";
-            this.ventControlType = obj.ventControlType ?? VentilationControlType.SingleZone;
-            this.referenceTemperature = obj.referenceTemperature ?? 20;
-            this.referencePressure = obj.referencePressure ?? 101325;
-            this.referenceHumidityRatio = obj.referenceHumidityRatio ?? 0;
-            this.buildingType = obj.buildingType ?? BuildingType.LowRise;
-            this.longAxisAngle = obj.longAxisAngle ?? 0;
-            this.aspectRatio = obj.aspectRatio ?? 1;
+            const obj = deepTransform(VentilationSimulationControl, _data);
         }
     }
 

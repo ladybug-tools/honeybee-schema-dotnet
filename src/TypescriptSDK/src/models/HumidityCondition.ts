@@ -1,5 +1,6 @@
 ﻿import { IsEnum, IsDefined, IsNumber, IsString, IsOptional, Matches, Min, Max, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { HumidityTypes } from "./HumidityTypes";
 
@@ -56,15 +57,9 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(HumidityCondition, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.humidityType = obj.humidityType;
-            this.humidityValue = obj.humidityValue;
-            this.type = obj.type ?? "HumidityCondition";
-            this.barometricPressure = obj.barometricPressure ?? 101325;
-            this.rain = obj.rain ?? false;
-            this.snowOnGround = obj.snowOnGround ?? false;
+            const obj = deepTransform(HumidityCondition, _data);
         }
     }
 

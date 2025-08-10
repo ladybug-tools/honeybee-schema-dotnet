@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { PVProperties } from "./PVProperties";
 
@@ -44,13 +45,9 @@ export class ShadeEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ShadeEnergyPropertiesAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "ShadeEnergyPropertiesAbridged";
-            this.construction = obj.construction;
-            this.transmittanceSchedule = obj.transmittanceSchedule;
-            this.pvProperties = obj.pvProperties;
+            const obj = deepTransform(ShadeEnergyPropertiesAbridged, _data);
         }
     }
 

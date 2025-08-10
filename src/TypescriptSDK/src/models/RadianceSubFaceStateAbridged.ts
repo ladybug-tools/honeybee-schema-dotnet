@@ -1,5 +1,6 @@
 ﻿import { IsInstance, ValidateNested, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { Face3D } from "./Face3D";
 import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged";
 
@@ -36,12 +37,9 @@ export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(RadianceSubFaceStateAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.vmtxGeometry = obj.vmtxGeometry;
-            this.dmtxGeometry = obj.dmtxGeometry;
-            this.type = obj.type ?? "RadianceSubFaceStateAbridged";
+            const obj = deepTransform(RadianceSubFaceStateAbridged, _data);
         }
     }
 

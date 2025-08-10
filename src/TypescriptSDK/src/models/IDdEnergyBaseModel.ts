@@ -1,5 +1,6 @@
 ﻿import { IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
@@ -24,11 +25,9 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(IDdEnergyBaseModel, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.userData = obj.userData;
-            this.type = obj.type ?? "IDdEnergyBaseModel";
+            const obj = deepTransform(IDdEnergyBaseModel, _data);
         }
     }
 

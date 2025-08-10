@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Used to specify which types of calculations to run. */
@@ -54,15 +55,9 @@ export class SimulationControl extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(SimulationControl, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "SimulationControl";
-            this.doZoneSizing = obj.doZoneSizing ?? true;
-            this.doSystemSizing = obj.doSystemSizing ?? true;
-            this.doPlantSizing = obj.doPlantSizing ?? true;
-            this.runForRunPeriods = obj.runForRunPeriods ?? true;
-            this.runForSizingPeriods = obj.runForSizingPeriods ?? false;
+            const obj = deepTransform(SimulationControl, _data);
         }
     }
 

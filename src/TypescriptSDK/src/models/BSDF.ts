@@ -1,5 +1,6 @@
 ﻿import { IsString, IsDefined, IsOptional, IsArray, IsNumber, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { Glass } from "./Glass";
 import { Glow } from "./Glow";
 import { Light } from "./Light";
@@ -123,20 +124,9 @@ export class BSDF extends ModifierBase {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(BSDF, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.bsdfData = obj.bsdfData;
-            this.modifier = obj.modifier ?? new Void();
-            this.dependencies = obj.dependencies;
-            this.upOrientation = obj.upOrientation ?? [0.01, 0.01, 1];
-            this.thickness = obj.thickness ?? 0;
-            this.functionFile = obj.functionFile ?? ".";
-            this.transform = obj.transform;
-            this.frontDiffuseReflectance = obj.frontDiffuseReflectance;
-            this.backDiffuseReflectance = obj.backDiffuseReflectance;
-            this.diffuseTransmittance = obj.diffuseTransmittance;
-            this.type = obj.type ?? "BSDF";
+            const obj = deepTransform(BSDF, _data);
         }
     }
 

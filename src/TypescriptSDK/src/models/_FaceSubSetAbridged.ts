@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A set of constructions for wall, floor, or roof assemblies. */
@@ -43,13 +44,9 @@ export class _FaceSubSetAbridged extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(_FaceSubSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.interiorConstruction = obj.interiorConstruction;
-            this.exteriorConstruction = obj.exteriorConstruction;
-            this.groundConstruction = obj.groundConstruction;
-            this.type = obj.type ?? "_FaceSubSetAbridged";
+            const obj = deepTransform(_FaceSubSetAbridged, _data);
         }
     }
 

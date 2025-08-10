@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -123,23 +124,9 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(EnergyWindowMaterialGlazing, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "EnergyWindowMaterialGlazing";
-            this.thickness = obj.thickness ?? 0.003;
-            this.solarTransmittance = obj.solarTransmittance ?? 0.85;
-            this.solarReflectance = obj.solarReflectance ?? 0.075;
-            this.solarReflectanceBack = obj.solarReflectanceBack ?? new Autocalculate();
-            this.visibleTransmittance = obj.visibleTransmittance ?? 0.9;
-            this.visibleReflectance = obj.visibleReflectance ?? 0.075;
-            this.visibleReflectanceBack = obj.visibleReflectanceBack ?? new Autocalculate();
-            this.infraredTransmittance = obj.infraredTransmittance ?? 0;
-            this.emissivity = obj.emissivity ?? 0.84;
-            this.emissivityBack = obj.emissivityBack ?? 0.84;
-            this.conductivity = obj.conductivity ?? 0.9;
-            this.dirtCorrection = obj.dirtCorrection ?? 1;
-            this.solarDiffusing = obj.solarDiffusing ?? false;
+            const obj = deepTransform(EnergyWindowMaterialGlazing, _data);
         }
     }
 

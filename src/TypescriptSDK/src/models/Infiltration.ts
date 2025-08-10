@@ -1,5 +1,6 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { ScheduleRuleset } from "./ScheduleRuleset";
@@ -63,15 +64,9 @@ export class Infiltration extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(Infiltration, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.flowPerExteriorArea = obj.flowPerExteriorArea;
-            this.schedule = obj.schedule;
-            this.type = obj.type ?? "Infiltration";
-            this.constantCoefficient = obj.constantCoefficient ?? 1;
-            this.temperatureCoefficient = obj.temperatureCoefficient ?? 0;
-            this.velocityCoefficient = obj.velocityCoefficient ?? 0;
+            const obj = deepTransform(Infiltration, _data);
         }
     }
 

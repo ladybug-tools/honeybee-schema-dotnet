@@ -1,5 +1,6 @@
 ﻿import { IsEnum, IsDefined, IsString, Matches, MinLength, MaxLength, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { ParentTypes } from "./ParentTypes";
 
 export class ValidationParent {
@@ -39,12 +40,9 @@ export class ValidationParent {
 
 
     init(_data?: any) {
+
         if (_data) {
-            const obj = plainToClass(ValidationParent, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.parentType = obj.parentType;
-            this.id = obj.id;
-            this.type = obj.type ?? "ValidationParent";
-            this.name = obj.name;
+            const obj = deepTransform(ValidationParent, _data);
         }
     }
 

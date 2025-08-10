@@ -1,5 +1,6 @@
 ﻿import { IsEnum, IsOptional, IsNumber, Min, Max, IsBoolean, IsString, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { RadiantFaceTypes } from "./RadiantFaceTypes";
 import { RadiantwithDOASEquipmentType } from "./RadiantwithDOASEquipmentType";
@@ -93,19 +94,9 @@ export class RadiantwithDOASAbridged extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(RadiantwithDOASAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
-            this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
-            this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
-            this.demandControlledVentilation = obj.demandControlledVentilation ?? false;
-            this.doasAvailabilitySchedule = obj.doasAvailabilitySchedule;
-            this.type = obj.type ?? "RadiantwithDOASAbridged";
-            this.equipmentType = obj.equipmentType ?? RadiantwithDOASEquipmentType.DOAS_Radiant_Chiller_Boiler;
-            this.radiantFaceType = obj.radiantFaceType ?? RadiantFaceTypes.Floor;
-            this.minimumOperationTime = obj.minimumOperationTime ?? 1;
-            this.switchOverTime = obj.switchOverTime ?? 24;
+            const obj = deepTransform(RadiantwithDOASAbridged, _data);
         }
     }
 

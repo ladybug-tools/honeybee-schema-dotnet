@@ -1,5 +1,6 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
@@ -58,15 +59,9 @@ export class InfiltrationAbridged extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(InfiltrationAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.flowPerExteriorArea = obj.flowPerExteriorArea;
-            this.schedule = obj.schedule;
-            this.type = obj.type ?? "InfiltrationAbridged";
-            this.constantCoefficient = obj.constantCoefficient ?? 1;
-            this.temperatureCoefficient = obj.temperatureCoefficient ?? 0;
-            this.velocityCoefficient = obj.velocityCoefficient ?? 0;
+            const obj = deepTransform(InfiltrationAbridged, _data);
         }
     }
 

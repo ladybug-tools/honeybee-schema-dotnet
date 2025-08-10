@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Max, IsEnum, Min, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 import { ModuleType } from "./ModuleType";
 import { MountingType } from "./MountingType";
@@ -61,15 +62,9 @@ export class PVProperties extends EnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(PVProperties, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "PVProperties";
-            this.ratedEfficiency = obj.ratedEfficiency ?? 0.15;
-            this.activeAreaFraction = obj.activeAreaFraction ?? 0.9;
-            this.moduleType = obj.moduleType ?? ModuleType.Standard;
-            this.mountingType = obj.mountingType ?? MountingType.FixedOpenRack;
-            this.systemLossFraction = obj.systemLossFraction ?? 0.14;
+            const obj = deepTransform(PVProperties, _data);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsEnum, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { FuelTypes } from "./FuelTypes";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -78,17 +79,9 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ProcessAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.watts = obj.watts;
-            this.schedule = obj.schedule;
-            this.fuelType = obj.fuelType;
-            this.type = obj.type ?? "ProcessAbridged";
-            this.endUseCategory = obj.endUseCategory ?? "Process";
-            this.radiantFraction = obj.radiantFraction ?? 0;
-            this.latentFraction = obj.latentFraction ?? 0;
-            this.lostFraction = obj.lostFraction ?? 0;
+            const obj = deepTransform(ProcessAbridged, _data);
         }
     }
 

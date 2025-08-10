@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AddedInstruction } from "./AddedInstruction";
 import { ChangedInstruction } from "./ChangedInstruction";
@@ -48,13 +49,9 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(SyncInstructions, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "SyncInstructions";
-            this.changedObjects = obj.changedObjects;
-            this.deletedObjects = obj.deletedObjects;
-            this.addedObjects = obj.addedObjects;
+            const obj = deepTransform(SyncInstructions, _data);
         }
     }
 

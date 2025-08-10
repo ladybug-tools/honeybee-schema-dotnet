@@ -1,5 +1,6 @@
 ﻿import { IsNumber, IsDefined, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Describe an entire glazing system rather than individual layers.\n\nUsed when only very limited information is available on the glazing layers or when\nspecific performance levels are being targeted. */
@@ -39,13 +40,9 @@ export class EnergyWindowMaterialSimpleGlazSys extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(EnergyWindowMaterialSimpleGlazSys, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.uFactor = obj.uFactor;
-            this.shgc = obj.shgc;
-            this.type = obj.type ?? "EnergyWindowMaterialSimpleGlazSys";
-            this.vt = obj.vt ?? 0.54;
+            const obj = deepTransform(EnergyWindowMaterialSimpleGlazSys, _data);
         }
     }
 

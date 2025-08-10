@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 import { NoLimit } from "./NoLimit";
 import { ScheduleNumericType } from "./ScheduleNumericType";
@@ -50,14 +51,9 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ScheduleTypeLimit, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "ScheduleTypeLimit";
-            this.lowerLimit = obj.lowerLimit ?? new NoLimit();
-            this.upperLimit = obj.upperLimit ?? new NoLimit();
-            this.numericType = obj.numericType ?? ScheduleNumericType.Continuous;
-            this.unitType = obj.unitType ?? ScheduleUnitType.Dimensionless;
+            const obj = deepTransform(ScheduleTypeLimit, _data);
         }
     }
 

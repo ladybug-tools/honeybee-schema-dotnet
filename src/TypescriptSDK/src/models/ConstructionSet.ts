@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { AirBoundaryConstruction } from "./AirBoundaryConstruction";
 import { ApertureConstructionSet } from "./ApertureConstructionSet";
 import { DoorConstructionSet } from "./DoorConstructionSet";
@@ -86,17 +87,9 @@ export class ConstructionSet extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ConstructionSet, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "ConstructionSet";
-            this.wallSet = obj.wallSet;
-            this.floorSet = obj.floorSet;
-            this.roofCeilingSet = obj.roofCeilingSet;
-            this.apertureSet = obj.apertureSet;
-            this.doorSet = obj.doorSet;
-            this.shadeConstruction = obj.shadeConstruction;
-            this.airBoundaryConstruction = obj.airBoundaryConstruction;
+            const obj = deepTransform(ConstructionSet, _data);
         }
     }
 
