@@ -23,6 +23,7 @@ export class Autocalculate extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(Autocalculate, _data);
+            this.type = obj.type ?? "Autocalculate";
         }
     }
 

@@ -23,6 +23,15 @@ export class GasEquipmentAbridged extends _EquipmentBase {
 
         if (_data) {
             const obj = deepTransform(GasEquipmentAbridged, _data);
+            this.type = obj.type ?? "GasEquipmentAbridged";
+            this.wattsPerArea = obj.wattsPerArea;
+            this.schedule = obj.schedule;
+            this.radiantFraction = obj.radiantFraction ?? 0;
+            this.latentFraction = obj.latentFraction ?? 0;
+            this.lostFraction = obj.lostFraction ?? 0;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

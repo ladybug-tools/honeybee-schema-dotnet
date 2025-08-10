@@ -95,6 +95,14 @@ export class Light extends ModifierBase {
 
         if (_data) {
             const obj = deepTransform(Light, _data);
+            this.modifier = obj.modifier ?? new Void();
+            this.dependencies = obj.dependencies;
+            this.rEmittance = obj.rEmittance ?? 0;
+            this.gEmittance = obj.gEmittance ?? 0;
+            this.bEmittance = obj.bEmittance ?? 0;
+            this.type = obj.type ?? "Light";
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

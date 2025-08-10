@@ -76,6 +76,13 @@ export class VentilationControlAbridged extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(VentilationControlAbridged, _data);
+            this.type = obj.type ?? "VentilationControlAbridged";
+            this.minIndoorTemperature = obj.minIndoorTemperature ?? -100;
+            this.maxIndoorTemperature = obj.maxIndoorTemperature ?? 100;
+            this.minOutdoorTemperature = obj.minOutdoorTemperature ?? -100;
+            this.maxOutdoorTemperature = obj.maxOutdoorTemperature ?? 100;
+            this.deltaTemperature = obj.deltaTemperature ?? -100;
+            this.schedule = obj.schedule;
         }
     }
 

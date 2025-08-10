@@ -138,6 +138,24 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(EnergyWindowMaterialShade, _data);
+            this.type = obj.type ?? "EnergyWindowMaterialShade";
+            this.solarTransmittance = obj.solarTransmittance ?? 0.4;
+            this.solarReflectance = obj.solarReflectance ?? 0.5;
+            this.visibleTransmittance = obj.visibleTransmittance ?? 0.4;
+            this.visibleReflectance = obj.visibleReflectance ?? 0.4;
+            this.emissivity = obj.emissivity ?? 0.9;
+            this.infraredTransmittance = obj.infraredTransmittance ?? 0;
+            this.thickness = obj.thickness ?? 0.005;
+            this.conductivity = obj.conductivity ?? 0.1;
+            this.distanceToGlass = obj.distanceToGlass ?? 0.05;
+            this.topOpeningMultiplier = obj.topOpeningMultiplier ?? 0.5;
+            this.bottomOpeningMultiplier = obj.bottomOpeningMultiplier ?? 0.5;
+            this.leftOpeningMultiplier = obj.leftOpeningMultiplier ?? 0.5;
+            this.rightOpeningMultiplier = obj.rightOpeningMultiplier ?? 0.5;
+            this.airflowPermeability = obj.airflowPermeability ?? 0;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

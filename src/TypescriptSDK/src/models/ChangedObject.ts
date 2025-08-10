@@ -77,6 +77,15 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(ChangedObject, _data);
+            this.elementType = obj.elementType;
+            this.elementId = obj.elementId;
+            this.geometryChanged = obj.geometryChanged;
+            this.geometry = obj.geometry;
+            this.elementName = obj.elementName;
+            this.energyChanged = obj.energyChanged ?? false;
+            this.radianceChanged = obj.radianceChanged ?? false;
+            this.existingGeometry = obj.existingGeometry;
+            this.type = obj.type ?? "ChangedObject";
         }
     }
 

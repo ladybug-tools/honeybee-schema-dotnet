@@ -46,6 +46,12 @@ export class ScheduleDay extends EnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(ScheduleDay, _data);
+            this.values = obj.values;
+            this.type = obj.type ?? "ScheduleDay";
+            this.times = obj.times ?? [[0, 0]];
+            this.interpolate = obj.interpolate ?? false;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

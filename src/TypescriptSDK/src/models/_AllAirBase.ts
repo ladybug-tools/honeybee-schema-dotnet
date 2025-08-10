@@ -13,14 +13,14 @@ export class _AllAirBase extends IDdEnergyBaseModel {
     @Expose({ name: "vintage" })
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
     vintage: Vintages = Vintages.ASHRAE_2019;
-
+	
     @IsEnum(AllAirEconomizerType)
     @Type(() => String)
     @IsOptional()
     @Expose({ name: "economizer_type" })
     /** Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration). */
     economizerType: AllAirEconomizerType = AllAirEconomizerType.NoEconomizer;
-
+	
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -28,7 +28,7 @@ export class _AllAirBase extends IDdEnergyBaseModel {
     @Expose({ name: "sensible_heat_recovery" })
     /** A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. */
     sensibleHeatRecovery: number = 0;
-
+	
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -36,22 +36,22 @@ export class _AllAirBase extends IDdEnergyBaseModel {
     @Expose({ name: "latent_heat_recovery" })
     /** A number between 0 and 1 for the effectiveness of latent heat recovery within the system. */
     latentHeatRecovery: number = 0;
-
+	
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "demand_controlled_ventilation" })
     /** Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms. */
     demandControlledVentilation: boolean = false;
-
+	
     @IsString()
     @IsOptional()
     @Matches(/^_AllAirBase$/)
     @Expose({ name: "type" })
     /** type */
     type: string = "_AllAirBase";
+	
 
-
-    constructor () {
+    constructor() {
         super();
         this.vintage = Vintages.ASHRAE_2019;
         this.economizerType = AllAirEconomizerType.NoEconomizer;
@@ -66,6 +66,15 @@ export class _AllAirBase extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(_AllAirBase, _data);
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.economizerType = obj.economizerType ?? AllAirEconomizerType.NoEconomizer;
+            this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
+            this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
+            this.demandControlledVentilation = obj.demandControlledVentilation ?? false;
+            this.type = obj.type ?? "_AllAirBase";
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 
@@ -74,7 +83,7 @@ export class _AllAirBase extends IDdEnergyBaseModel {
         data = typeof data === 'object' ? data : {};
 
         if (Array.isArray(data)) {
-            const obj: any = {};
+            const obj:any = {};
             for (var property in data) {
                 obj[property] = data[property];
             }
@@ -85,7 +94,7 @@ export class _AllAirBase extends IDdEnergyBaseModel {
         return result;
     }
 
-    override toJSON(data?: any) {
+	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["vintage"] = this.vintage ?? Vintages.ASHRAE_2019;
         data["economizer_type"] = this.economizerType ?? AllAirEconomizerType.NoEconomizer;
@@ -97,12 +106,12 @@ export class _AllAirBase extends IDdEnergyBaseModel {
         return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
-    async validate(): Promise<boolean> {
+	async validate(): Promise<boolean> {
         const errors = await validate(this);
-        if (errors.length > 0) {
-            const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error]).join(', ')).join('; ');
-            throw new Error(`Validation failed: ${errorMessages}`);
-        }
+        if (errors.length > 0){
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error]).join(', ')).join('; ');
+      		throw new Error(`Validation failed: ${errorMessages}`);
+		}
         return true;
     }
 }

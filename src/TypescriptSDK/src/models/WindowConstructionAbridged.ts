@@ -38,6 +38,12 @@ export class WindowConstructionAbridged extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(WindowConstructionAbridged, _data);
+            this.materials = obj.materials;
+            this.type = obj.type ?? "WindowConstructionAbridged";
+            this.frame = obj.frame;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

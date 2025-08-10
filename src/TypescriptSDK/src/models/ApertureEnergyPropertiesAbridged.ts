@@ -40,6 +40,9 @@ export class ApertureEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(ApertureEnergyPropertiesAbridged, _data);
+            this.type = obj.type ?? "ApertureEnergyPropertiesAbridged";
+            this.construction = obj.construction;
+            this.ventOpening = obj.ventOpening;
         }
     }
 

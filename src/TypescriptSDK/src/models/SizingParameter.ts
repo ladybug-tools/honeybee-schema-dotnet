@@ -76,6 +76,14 @@ export class SizingParameter extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(SizingParameter, _data);
+            this.type = obj.type ?? "SizingParameter";
+            this.designDays = obj.designDays;
+            this.heatingFactor = obj.heatingFactor ?? 1.25;
+            this.coolingFactor = obj.coolingFactor ?? 1.15;
+            this.efficiencyStandard = obj.efficiencyStandard;
+            this.climateZone = obj.climateZone;
+            this.buildingType = obj.buildingType;
+            this.bypassEfficiencySizing = obj.bypassEfficiencySizing ?? false;
         }
     }
 

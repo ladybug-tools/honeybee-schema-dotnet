@@ -79,6 +79,13 @@ export class DesignDay extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(DesignDay, _data);
+            this.name = obj.name;
+            this.dayType = obj.dayType;
+            this.dryBulbCondition = obj.dryBulbCondition;
+            this.humidityCondition = obj.humidityCondition;
+            this.windCondition = obj.windCondition;
+            this.skyCondition = obj.skyCondition;
+            this.type = obj.type ?? "DesignDay";
         }
     }
 

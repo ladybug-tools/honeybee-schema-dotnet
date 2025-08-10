@@ -45,6 +45,10 @@ export class DeletedInstruction extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(DeletedInstruction, _data);
+            this.elementType = obj.elementType;
+            this.elementId = obj.elementId;
+            this.elementName = obj.elementName;
+            this.type = obj.type ?? "DeletedInstruction";
         }
     }
 

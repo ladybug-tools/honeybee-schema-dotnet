@@ -40,6 +40,11 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
 
         if (_data) {
             const obj = deepTransform(_RadianceAsset, _data);
+            this.roomIdentifier = obj.roomIdentifier;
+            this.lightPath = obj.lightPath;
+            this.type = obj.type ?? "_RadianceAsset";
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

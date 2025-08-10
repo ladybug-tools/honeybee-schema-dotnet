@@ -64,6 +64,15 @@ export class Radiant extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(Radiant, _data);
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.type = obj.type ?? "Radiant";
+            this.equipmentType = obj.equipmentType ?? RadiantEquipmentType.Radiant_Chiller_Boiler;
+            this.radiantFaceType = obj.radiantFaceType ?? RadiantFaceTypes.Floor;
+            this.minimumOperationTime = obj.minimumOperationTime ?? 1;
+            this.switchOverTime = obj.switchOverTime ?? 24;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

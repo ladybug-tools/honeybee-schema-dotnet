@@ -23,6 +23,7 @@ export class NoLimit extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(NoLimit, _data);
+            this.type = obj.type ?? "NoLimit";
         }
     }
 

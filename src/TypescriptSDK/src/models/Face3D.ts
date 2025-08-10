@@ -47,6 +47,10 @@ export class Face3D extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(Face3D, _data);
+            this.boundary = obj.boundary;
+            this.type = obj.type ?? "Face3D";
+            this.holes = obj.holes;
+            this.plane = obj.plane;
         }
     }
 

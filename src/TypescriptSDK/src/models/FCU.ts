@@ -41,6 +41,12 @@ export class FCU extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(FCU, _data);
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.type = obj.type ?? "FCU";
+            this.equipmentType = obj.equipmentType ?? FCUEquipmentType.FCU_Chiller_Boiler;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

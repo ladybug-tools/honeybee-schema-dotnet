@@ -23,6 +23,9 @@ export class FaceRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
 
         if (_data) {
             const obj = deepTransform(FaceRadiancePropertiesAbridged, _data);
+            this.type = obj.type ?? "FaceRadiancePropertiesAbridged";
+            this.modifier = obj.modifier;
+            this.modifierBlk = obj.modifierBlk;
         }
     }
 

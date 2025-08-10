@@ -113,6 +113,15 @@ export class Mirror extends ModifierBase {
 
         if (_data) {
             const obj = deepTransform(Mirror, _data);
+            this.modifier = obj.modifier ?? new Void();
+            this.dependencies = obj.dependencies;
+            this.rReflectance = obj.rReflectance ?? 1;
+            this.gReflectance = obj.gReflectance ?? 1;
+            this.bReflectance = obj.bReflectance ?? 1;
+            this.alternateMaterial = obj.alternateMaterial;
+            this.type = obj.type ?? "Mirror";
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

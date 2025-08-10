@@ -37,6 +37,12 @@ export class InternalMassAbridged extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(InternalMassAbridged, _data);
+            this.construction = obj.construction;
+            this.area = obj.area;
+            this.type = obj.type ?? "InternalMassAbridged";
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

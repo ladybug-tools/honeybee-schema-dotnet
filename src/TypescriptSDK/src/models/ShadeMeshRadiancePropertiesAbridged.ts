@@ -23,6 +23,9 @@ export class ShadeMeshRadiancePropertiesAbridged extends _PropertiesBaseAbridged
 
         if (_data) {
             const obj = deepTransform(ShadeMeshRadiancePropertiesAbridged, _data);
+            this.type = obj.type ?? "ShadeMeshRadiancePropertiesAbridged";
+            this.modifier = obj.modifier;
+            this.modifierBlk = obj.modifierBlk;
         }
     }
 

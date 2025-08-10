@@ -23,6 +23,7 @@ export class Autosize extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(Autosize, _data);
+            this.type = obj.type ?? "Autosize";
         }
     }
 

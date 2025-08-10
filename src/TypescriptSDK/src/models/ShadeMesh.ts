@@ -48,6 +48,13 @@ export class ShadeMesh extends IDdBaseModel {
 
         if (_data) {
             const obj = deepTransform(ShadeMesh, _data);
+            this.geometry = obj.geometry;
+            this.properties = obj.properties;
+            this.type = obj.type ?? "ShadeMesh";
+            this.isDetached = obj.isDetached ?? true;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
+            this.userData = obj.userData;
         }
     }
 

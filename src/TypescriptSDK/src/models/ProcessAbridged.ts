@@ -82,6 +82,17 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(ProcessAbridged, _data);
+            this.watts = obj.watts;
+            this.schedule = obj.schedule;
+            this.fuelType = obj.fuelType;
+            this.type = obj.type ?? "ProcessAbridged";
+            this.endUseCategory = obj.endUseCategory ?? "Process";
+            this.radiantFraction = obj.radiantFraction ?? 0;
+            this.latentFraction = obj.latentFraction ?? 0;
+            this.lostFraction = obj.lostFraction ?? 0;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

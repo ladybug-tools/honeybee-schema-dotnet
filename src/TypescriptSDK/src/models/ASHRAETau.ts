@@ -39,6 +39,11 @@ export class ASHRAETau extends _SkyCondition {
 
         if (_data) {
             const obj = deepTransform(ASHRAETau, _data);
+            this.tauB = obj.tauB;
+            this.tauD = obj.tauD;
+            this.type = obj.type ?? "ASHRAETau";
+            this.date = obj.date;
+            this.daylightSavings = obj.daylightSavings ?? false;
         }
     }
 

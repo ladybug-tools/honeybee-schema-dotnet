@@ -78,6 +78,16 @@ export class Lighting extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(Lighting, _data);
+            this.wattsPerArea = obj.wattsPerArea;
+            this.schedule = obj.schedule;
+            this.type = obj.type ?? "Lighting";
+            this.visibleFraction = obj.visibleFraction ?? 0.25;
+            this.radiantFraction = obj.radiantFraction ?? 0.32;
+            this.returnAirFraction = obj.returnAirFraction ?? 0;
+            this.baselineWattsPerArea = obj.baselineWattsPerArea ?? 11.84029;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

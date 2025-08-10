@@ -40,6 +40,12 @@ export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
 
         if (_data) {
             const obj = deepTransform(RadianceSubFaceStateAbridged, _data);
+            this.vmtxGeometry = obj.vmtxGeometry;
+            this.dmtxGeometry = obj.dmtxGeometry;
+            this.type = obj.type ?? "RadianceSubFaceStateAbridged";
+            this.modifier = obj.modifier;
+            this.modifierDirect = obj.modifierDirect;
+            this.shades = obj.shades;
         }
     }
 

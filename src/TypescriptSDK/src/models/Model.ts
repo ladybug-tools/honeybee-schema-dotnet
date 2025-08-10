@@ -125,6 +125,21 @@ export class Model extends IDdBaseModel {
 
         if (_data) {
             const obj = deepTransform(Model, _data);
+            this.properties = obj.properties;
+            this.type = obj.type ?? "Model";
+            this.version = obj.version ?? "1.59.0";
+            this.rooms = obj.rooms;
+            this.orphanedFaces = obj.orphanedFaces;
+            this.orphanedShades = obj.orphanedShades;
+            this.orphanedApertures = obj.orphanedApertures;
+            this.orphanedDoors = obj.orphanedDoors;
+            this.shadeMeshes = obj.shadeMeshes;
+            this.units = obj.units ?? Units.Meters;
+            this.tolerance = obj.tolerance ?? 0.01;
+            this.angleTolerance = obj.angleTolerance ?? 1;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
+            this.userData = obj.userData;
         }
     }
 

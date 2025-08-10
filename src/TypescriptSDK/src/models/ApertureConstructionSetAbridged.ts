@@ -55,6 +55,11 @@ export class ApertureConstructionSetAbridged extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(ApertureConstructionSetAbridged, _data);
+            this.type = obj.type ?? "ApertureConstructionSetAbridged";
+            this.interiorConstruction = obj.interiorConstruction;
+            this.windowConstruction = obj.windowConstruction;
+            this.skylightConstruction = obj.skylightConstruction;
+            this.operableConstruction = obj.operableConstruction;
         }
     }
 

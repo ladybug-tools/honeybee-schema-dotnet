@@ -38,6 +38,11 @@ export class OpaqueConstruction extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(OpaqueConstruction, _data);
+            this.materials = obj.materials;
+            this.type = obj.type ?? "OpaqueConstruction";
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

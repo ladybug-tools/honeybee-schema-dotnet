@@ -37,6 +37,9 @@ export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(IDdRadianceBaseModel, _data);
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
+            this.type = obj.type ?? "IDdRadianceBaseModel";
         }
     }
 

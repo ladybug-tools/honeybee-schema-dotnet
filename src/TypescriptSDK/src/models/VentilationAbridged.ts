@@ -63,6 +63,15 @@ export class VentilationAbridged extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(VentilationAbridged, _data);
+            this.type = obj.type ?? "VentilationAbridged";
+            this.flowPerPerson = obj.flowPerPerson ?? 0;
+            this.flowPerArea = obj.flowPerArea ?? 0;
+            this.airChangesPerHour = obj.airChangesPerHour ?? 0;
+            this.flowPerZone = obj.flowPerZone ?? 0;
+            this.schedule = obj.schedule;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

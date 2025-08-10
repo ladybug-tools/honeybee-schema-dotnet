@@ -48,6 +48,10 @@ export class WallConstructionSet extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(WallConstructionSet, _data);
+            this.interiorConstruction = obj.interiorConstruction;
+            this.exteriorConstruction = obj.exteriorConstruction;
+            this.groundConstruction = obj.groundConstruction;
+            this.type = obj.type ?? "WallConstructionSet";
         }
     }
 

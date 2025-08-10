@@ -101,6 +101,20 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(IdealAirSystemAbridged, _data);
+            this.type = obj.type ?? "IdealAirSystemAbridged";
+            this.economizerType = obj.economizerType ?? EconomizerType.DifferentialDryBulb;
+            this.demandControlledVentilation = obj.demandControlledVentilation ?? false;
+            this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
+            this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
+            this.heatingAirTemperature = obj.heatingAirTemperature ?? 50;
+            this.coolingAirTemperature = obj.coolingAirTemperature ?? 13;
+            this.heatingLimit = obj.heatingLimit ?? new Autosize();
+            this.coolingLimit = obj.coolingLimit ?? new Autosize();
+            this.heatingAvailability = obj.heatingAvailability;
+            this.coolingAvailability = obj.coolingAvailability;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

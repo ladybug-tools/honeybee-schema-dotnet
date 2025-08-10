@@ -83,6 +83,14 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(VentilationSimulationControl, _data);
+            this.type = obj.type ?? "VentilationSimulationControl";
+            this.ventControlType = obj.ventControlType ?? VentilationControlType.SingleZone;
+            this.referenceTemperature = obj.referenceTemperature ?? 20;
+            this.referencePressure = obj.referencePressure ?? 101325;
+            this.referenceHumidityRatio = obj.referenceHumidityRatio ?? 0;
+            this.buildingType = obj.buildingType ?? BuildingType.LowRise;
+            this.longAxisAngle = obj.longAxisAngle ?? 0;
+            this.aspectRatio = obj.aspectRatio ?? 1;
         }
     }
 

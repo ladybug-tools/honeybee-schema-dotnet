@@ -38,6 +38,9 @@ export class EnergyBaseModel extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(EnergyBaseModel, _data);
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
+            this.type = obj.type ?? "EnergyBaseModel";
         }
     }
 

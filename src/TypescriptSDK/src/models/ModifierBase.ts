@@ -23,6 +23,9 @@ export class ModifierBase extends IDdRadianceBaseModel {
 
         if (_data) {
             const obj = deepTransform(ModifierBase, _data);
+            this.type = obj.type ?? "ModifierBase";
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

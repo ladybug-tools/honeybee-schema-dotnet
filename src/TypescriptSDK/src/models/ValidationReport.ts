@@ -64,6 +64,13 @@ export class ValidationReport {
 
         if (_data) {
             const obj = deepTransform(ValidationReport, _data);
+            this.appVersion = obj.appVersion;
+            this.schemaVersion = obj.schemaVersion;
+            this.valid = obj.valid;
+            this.type = obj.type ?? "ValidationReport";
+            this.appName = obj.appName ?? "Honeybee";
+            this.fatalError = obj.fatalError ?? "";
+            this.errors = obj.errors;
         }
     }
 

@@ -40,6 +40,9 @@ export class DoorPropertiesAbridged extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(DoorPropertiesAbridged, _data);
+            this.type = obj.type ?? "DoorPropertiesAbridged";
+            this.energy = obj.energy;
+            this.radiance = obj.radiance;
         }
     }
 

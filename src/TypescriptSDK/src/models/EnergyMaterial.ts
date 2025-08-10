@@ -84,6 +84,18 @@ export class EnergyMaterial extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(EnergyMaterial, _data);
+            this.thickness = obj.thickness;
+            this.conductivity = obj.conductivity;
+            this.density = obj.density;
+            this.specificHeat = obj.specificHeat;
+            this.type = obj.type ?? "EnergyMaterial";
+            this.roughness = obj.roughness ?? Roughness.MediumRough;
+            this.thermalAbsorptance = obj.thermalAbsorptance ?? 0.9;
+            this.solarAbsorptance = obj.solarAbsorptance ?? 0.7;
+            this.visibleAbsorptance = obj.visibleAbsorptance ?? 0.7;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

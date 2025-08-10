@@ -41,6 +41,12 @@ export class EvaporativeCooler extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(EvaporativeCooler, _data);
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.type = obj.type ?? "EvaporativeCooler";
+            this.equipmentType = obj.equipmentType ?? EvaporativeCoolerEquipmentType.EvapCoolers_ElectricBaseboard;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

@@ -35,6 +35,9 @@ export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(_PropertiesBaseAbridged, _data);
+            this.modifier = obj.modifier;
+            this.modifierBlk = obj.modifierBlk;
+            this.type = obj.type ?? "_PropertiesBaseAbridged";
         }
     }
 

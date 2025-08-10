@@ -104,6 +104,11 @@ export class ApertureModifierSet extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(ApertureModifierSet, _data);
+            this.type = obj.type ?? "ApertureModifierSet";
+            this.windowModifier = obj.windowModifier;
+            this.interiorModifier = obj.interiorModifier;
+            this.skylightModifier = obj.skylightModifier;
+            this.operableModifier = obj.operableModifier;
         }
     }
 

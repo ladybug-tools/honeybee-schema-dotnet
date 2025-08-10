@@ -38,6 +38,9 @@ export class AFNCrack extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(AFNCrack, _data);
+            this.flowCoefficient = obj.flowCoefficient;
+            this.type = obj.type ?? "AFNCrack";
+            this.flowExponent = obj.flowExponent ?? 0.65;
         }
     }
 

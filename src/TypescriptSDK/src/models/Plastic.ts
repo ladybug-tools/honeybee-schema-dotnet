@@ -113,6 +113,16 @@ export class Plastic extends ModifierBase {
 
         if (_data) {
             const obj = deepTransform(Plastic, _data);
+            this.modifier = obj.modifier ?? new Void();
+            this.dependencies = obj.dependencies;
+            this.rReflectance = obj.rReflectance ?? 0;
+            this.gReflectance = obj.gReflectance ?? 0;
+            this.bReflectance = obj.bReflectance ?? 0;
+            this.specularity = obj.specularity ?? 0;
+            this.roughness = obj.roughness ?? 0;
+            this.type = obj.type ?? "Plastic";
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

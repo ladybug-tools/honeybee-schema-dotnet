@@ -41,6 +41,12 @@ export class WindowConstructionDynamicAbridged extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(WindowConstructionDynamicAbridged, _data);
+            this.constructions = obj.constructions;
+            this.schedule = obj.schedule;
+            this.type = obj.type ?? "WindowConstructionDynamicAbridged";
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

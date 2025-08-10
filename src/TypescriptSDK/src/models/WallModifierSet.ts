@@ -68,6 +68,9 @@ export class WallModifierSet extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(WallModifierSet, _data);
+            this.exteriorModifier = obj.exteriorModifier;
+            this.interiorModifier = obj.interiorModifier;
+            this.type = obj.type ?? "WallModifierSet";
         }
     }
 

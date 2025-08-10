@@ -237,6 +237,36 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(EnergyWindowMaterialBlind, _data);
+            this.type = obj.type ?? "EnergyWindowMaterialBlind";
+            this.slatOrientation = obj.slatOrientation ?? SlatOrientation.Horizontal;
+            this.slatWidth = obj.slatWidth ?? 0.025;
+            this.slatSeparation = obj.slatSeparation ?? 0.01875;
+            this.slatThickness = obj.slatThickness ?? 0.001;
+            this.slatAngle = obj.slatAngle ?? 45;
+            this.slatConductivity = obj.slatConductivity ?? 221;
+            this.beamSolarTransmittance = obj.beamSolarTransmittance ?? 0;
+            this.beamSolarReflectance = obj.beamSolarReflectance ?? 0.5;
+            this.beamSolarReflectanceBack = obj.beamSolarReflectanceBack ?? 0.5;
+            this.diffuseSolarTransmittance = obj.diffuseSolarTransmittance ?? 0;
+            this.diffuseSolarReflectance = obj.diffuseSolarReflectance ?? 0.5;
+            this.diffuseSolarReflectanceBack = obj.diffuseSolarReflectanceBack ?? 0.5;
+            this.beamVisibleTransmittance = obj.beamVisibleTransmittance ?? 0;
+            this.beamVisibleReflectance = obj.beamVisibleReflectance ?? 0.5;
+            this.beamVisibleReflectanceBack = obj.beamVisibleReflectanceBack ?? 0.5;
+            this.diffuseVisibleTransmittance = obj.diffuseVisibleTransmittance ?? 0;
+            this.diffuseVisibleReflectance = obj.diffuseVisibleReflectance ?? 0.5;
+            this.diffuseVisibleReflectanceBack = obj.diffuseVisibleReflectanceBack ?? 0.5;
+            this.infraredTransmittance = obj.infraredTransmittance ?? 0;
+            this.emissivity = obj.emissivity ?? 0.9;
+            this.emissivityBack = obj.emissivityBack ?? 0.9;
+            this.distanceToGlass = obj.distanceToGlass ?? 0.05;
+            this.topOpeningMultiplier = obj.topOpeningMultiplier ?? 0.5;
+            this.bottomOpeningMultiplier = obj.bottomOpeningMultiplier ?? 0.5;
+            this.leftOpeningMultiplier = obj.leftOpeningMultiplier ?? 0.5;
+            this.rightOpeningMultiplier = obj.rightOpeningMultiplier ?? 0.5;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

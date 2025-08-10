@@ -44,6 +44,10 @@ export class Plane extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(Plane, _data);
+            this.n = obj.n;
+            this.o = obj.o;
+            this.type = obj.type ?? "Plane";
+            this.x = obj.x;
         }
     }
 

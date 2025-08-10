@@ -39,6 +39,12 @@ export class AirBoundaryConstructionAbridged extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(AirBoundaryConstructionAbridged, _data);
+            this.type = obj.type ?? "AirBoundaryConstructionAbridged";
+            this.airMixingPerArea = obj.airMixingPerArea ?? 0.1;
+            this.airMixingSchedule = obj.airMixingSchedule;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

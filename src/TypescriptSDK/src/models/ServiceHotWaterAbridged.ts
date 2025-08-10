@@ -63,6 +63,15 @@ export class ServiceHotWaterAbridged extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(ServiceHotWaterAbridged, _data);
+            this.flowPerArea = obj.flowPerArea;
+            this.schedule = obj.schedule;
+            this.type = obj.type ?? "ServiceHotWaterAbridged";
+            this.targetTemperature = obj.targetTemperature ?? 60;
+            this.sensibleFraction = obj.sensibleFraction ?? 0.2;
+            this.latentFraction = obj.latentFraction ?? 0.05;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

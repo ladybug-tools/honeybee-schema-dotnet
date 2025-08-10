@@ -104,6 +104,22 @@ export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(EnergyWindowMaterialGasCustom, _data);
+            this.conductivityCoeffA = obj.conductivityCoeffA;
+            this.viscosityCoeffA = obj.viscosityCoeffA;
+            this.specificHeatCoeffA = obj.specificHeatCoeffA;
+            this.specificHeatRatio = obj.specificHeatRatio;
+            this.molecularWeight = obj.molecularWeight;
+            this.type = obj.type ?? "EnergyWindowMaterialGasCustom";
+            this.thickness = obj.thickness ?? 0.0125;
+            this.conductivityCoeffB = obj.conductivityCoeffB ?? 0;
+            this.conductivityCoeffC = obj.conductivityCoeffC ?? 0;
+            this.viscosityCoeffB = obj.viscosityCoeffB ?? 0;
+            this.viscosityCoeffC = obj.viscosityCoeffC ?? 0;
+            this.specificHeatCoeffB = obj.specificHeatCoeffB ?? 0;
+            this.specificHeatCoeffC = obj.specificHeatCoeffC ?? 0;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

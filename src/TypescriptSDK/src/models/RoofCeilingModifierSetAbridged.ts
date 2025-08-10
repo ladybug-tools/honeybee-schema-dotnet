@@ -23,6 +23,9 @@ export class RoofCeilingModifierSetAbridged extends BaseModifierSetAbridged {
 
         if (_data) {
             const obj = deepTransform(RoofCeilingModifierSetAbridged, _data);
+            this.type = obj.type ?? "RoofCeilingModifierSetAbridged";
+            this.exteriorModifier = obj.exteriorModifier;
+            this.interiorModifier = obj.interiorModifier;
         }
     }
 

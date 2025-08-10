@@ -48,6 +48,10 @@ export class Mesh3D extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(Mesh3D, _data);
+            this.vertices = obj.vertices;
+            this.faces = obj.faces;
+            this.type = obj.type ?? "Mesh3D";
+            this.colors = obj.colors;
         }
     }
 

@@ -41,6 +41,12 @@ export class GasUnitHeater extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(GasUnitHeater, _data);
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.type = obj.type ?? "GasUnitHeater";
+            this.equipmentType = obj.equipmentType ?? GasUnitHeaterEquipmentType.GasHeaters;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

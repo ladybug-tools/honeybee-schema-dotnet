@@ -39,6 +39,11 @@ export class ShadeRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
 
         if (_data) {
             const obj = deepTransform(ShadeRadiancePropertiesAbridged, _data);
+            this.type = obj.type ?? "ShadeRadiancePropertiesAbridged";
+            this.dynamicGroupIdentifier = obj.dynamicGroupIdentifier;
+            this.states = obj.states;
+            this.modifier = obj.modifier;
+            this.modifierBlk = obj.modifierBlk;
         }
     }
 

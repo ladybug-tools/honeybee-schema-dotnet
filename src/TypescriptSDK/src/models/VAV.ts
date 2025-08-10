@@ -75,6 +75,16 @@ export class VAV extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(VAV, _data);
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.economizerType = obj.economizerType ?? AllAirEconomizerType.NoEconomizer;
+            this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
+            this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
+            this.demandControlledVentilation = obj.demandControlledVentilation ?? false;
+            this.type = obj.type ?? "VAV";
+            this.equipmentType = obj.equipmentType ?? VAVEquipmentType.VAV_Chiller_Boiler;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

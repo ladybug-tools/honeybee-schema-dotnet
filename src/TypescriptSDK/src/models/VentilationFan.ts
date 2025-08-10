@@ -61,6 +61,14 @@ export class VentilationFan extends EnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(VentilationFan, _data);
+            this.flowRate = obj.flowRate;
+            this.pressureRise = obj.pressureRise;
+            this.efficiency = obj.efficiency;
+            this.type = obj.type ?? "VentilationFan";
+            this.ventilationType = obj.ventilationType ?? VentilationType.Balanced;
+            this.control = obj.control;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

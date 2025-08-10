@@ -41,6 +41,12 @@ export class VRF extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(VRF, _data);
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.type = obj.type ?? "VRF";
+            this.equipmentType = obj.equipmentType ?? VRFEquipmentType.VRF;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

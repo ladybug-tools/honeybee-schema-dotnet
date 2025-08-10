@@ -74,6 +74,16 @@ export class FCUwithDOASAbridged extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(FCUwithDOASAbridged, _data);
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
+            this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
+            this.demandControlledVentilation = obj.demandControlledVentilation ?? false;
+            this.doasAvailabilitySchedule = obj.doasAvailabilitySchedule;
+            this.type = obj.type ?? "FCUwithDOASAbridged";
+            this.equipmentType = obj.equipmentType ?? FCUwithDOASEquipmentType.DOAS_FCU_Chiller_Boiler;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

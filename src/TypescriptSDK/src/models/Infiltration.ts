@@ -67,6 +67,15 @@ export class Infiltration extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(Infiltration, _data);
+            this.flowPerExteriorArea = obj.flowPerExteriorArea;
+            this.schedule = obj.schedule;
+            this.type = obj.type ?? "Infiltration";
+            this.constantCoefficient = obj.constantCoefficient ?? 1;
+            this.temperatureCoefficient = obj.temperatureCoefficient ?? 0;
+            this.velocityCoefficient = obj.velocityCoefficient ?? 0;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

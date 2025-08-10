@@ -66,6 +66,12 @@ export class ShadowCalculation extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(ShadowCalculation, _data);
+            this.type = obj.type ?? "ShadowCalculation";
+            this.solarDistribution = obj.solarDistribution ?? SolarDistribution.FullExteriorWithReflections;
+            this.calculationMethod = obj.calculationMethod ?? CalculationMethod.PolygonClipping;
+            this.calculationUpdateMethod = obj.calculationUpdateMethod ?? CalculationUpdateMethod.Periodic;
+            this.calculationFrequency = obj.calculationFrequency ?? 30;
+            this.maximumFigures = obj.maximumFigures ?? 15000;
         }
     }
 

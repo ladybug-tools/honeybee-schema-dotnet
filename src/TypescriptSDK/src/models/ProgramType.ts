@@ -95,6 +95,18 @@ export class ProgramType extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(ProgramType, _data);
+            this.type = obj.type ?? "ProgramType";
+            this.people = obj.people;
+            this.lighting = obj.lighting;
+            this.electricEquipment = obj.electricEquipment;
+            this.gasEquipment = obj.gasEquipment;
+            this.serviceHotWater = obj.serviceHotWater;
+            this.infiltration = obj.infiltration;
+            this.ventilation = obj.ventilation;
+            this.setpoint = obj.setpoint;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

@@ -62,6 +62,15 @@ export class PeopleAbridged extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(PeopleAbridged, _data);
+            this.peoplePerArea = obj.peoplePerArea;
+            this.occupancySchedule = obj.occupancySchedule;
+            this.type = obj.type ?? "PeopleAbridged";
+            this.activitySchedule = obj.activitySchedule;
+            this.radiantFraction = obj.radiantFraction ?? 0.3;
+            this.latentFraction = obj.latentFraction ?? new Autocalculate();
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

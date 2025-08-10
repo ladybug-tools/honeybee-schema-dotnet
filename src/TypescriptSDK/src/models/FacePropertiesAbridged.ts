@@ -40,6 +40,9 @@ export class FacePropertiesAbridged extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(FacePropertiesAbridged, _data);
+            this.type = obj.type ?? "FacePropertiesAbridged";
+            this.energy = obj.energy;
+            this.radiance = obj.radiance;
         }
     }
 

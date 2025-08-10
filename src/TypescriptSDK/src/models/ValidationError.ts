@@ -106,6 +106,17 @@ export class ValidationError {
 
         if (_data) {
             const obj = deepTransform(ValidationError, _data);
+            this.code = obj.code;
+            this.errorType = obj.errorType;
+            this.extensionType = obj.extensionType;
+            this.elementType = obj.elementType;
+            this.elementId = obj.elementId;
+            this.message = obj.message;
+            this.type = obj.type ?? "ValidationError";
+            this.elementName = obj.elementName;
+            this.parents = obj.parents;
+            this.topParents = obj.topParents;
+            this.helperGeometry = obj.helperGeometry;
         }
     }
 

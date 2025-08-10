@@ -23,6 +23,9 @@ export class WallModifierSetAbridged extends BaseModifierSetAbridged {
 
         if (_data) {
             const obj = deepTransform(WallModifierSetAbridged, _data);
+            this.type = obj.type ?? "WallModifierSetAbridged";
+            this.exteriorModifier = obj.exteriorModifier;
+            this.interiorModifier = obj.interiorModifier;
         }
     }
 

@@ -75,6 +75,12 @@ export class DoorConstructionSet extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(DoorConstructionSet, _data);
+            this.type = obj.type ?? "DoorConstructionSet";
+            this.interiorConstruction = obj.interiorConstruction;
+            this.exteriorConstruction = obj.exteriorConstruction;
+            this.overheadConstruction = obj.overheadConstruction;
+            this.exteriorGlassConstruction = obj.exteriorGlassConstruction;
+            this.interiorGlassConstruction = obj.interiorGlassConstruction;
         }
     }
 

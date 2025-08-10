@@ -48,6 +48,10 @@ export class _FaceSubSet extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(_FaceSubSet, _data);
+            this.interiorConstruction = obj.interiorConstruction;
+            this.exteriorConstruction = obj.exteriorConstruction;
+            this.groundConstruction = obj.groundConstruction;
+            this.type = obj.type ?? "_FaceSubSet";
         }
     }
 

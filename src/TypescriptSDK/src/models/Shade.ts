@@ -48,6 +48,13 @@ export class Shade extends IDdBaseModel {
 
         if (_data) {
             const obj = deepTransform(Shade, _data);
+            this.geometry = obj.geometry;
+            this.properties = obj.properties;
+            this.type = obj.type ?? "Shade";
+            this.isDetached = obj.isDetached ?? false;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
+            this.userData = obj.userData;
         }
     }
 

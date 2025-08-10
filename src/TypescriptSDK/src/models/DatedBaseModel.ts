@@ -23,6 +23,7 @@ export class DatedBaseModel extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(DatedBaseModel, _data);
+            this.type = obj.type ?? "DatedBaseModel";
         }
     }
 

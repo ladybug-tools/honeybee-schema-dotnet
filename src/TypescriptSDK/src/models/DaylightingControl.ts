@@ -71,6 +71,13 @@ export class DaylightingControl extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(DaylightingControl, _data);
+            this.sensorPosition = obj.sensorPosition;
+            this.type = obj.type ?? "DaylightingControl";
+            this.illuminanceSetpoint = obj.illuminanceSetpoint ?? 300;
+            this.controlFraction = obj.controlFraction ?? 1;
+            this.minPowerInput = obj.minPowerInput ?? 0.3;
+            this.minLightOutput = obj.minLightOutput ?? 0.2;
+            this.offAtMinimum = obj.offAtMinimum ?? false;
         }
     }
 

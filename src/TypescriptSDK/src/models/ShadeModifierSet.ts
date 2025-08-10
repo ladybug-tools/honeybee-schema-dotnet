@@ -68,6 +68,9 @@ export class ShadeModifierSet extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(ShadeModifierSet, _data);
+            this.exteriorModifier = obj.exteriorModifier;
+            this.interiorModifier = obj.interiorModifier;
+            this.type = obj.type ?? "ShadeModifierSet";
         }
     }
 

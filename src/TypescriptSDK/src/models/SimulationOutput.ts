@@ -55,6 +55,11 @@ export class SimulationOutput extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(SimulationOutput, _data);
+            this.type = obj.type ?? "SimulationOutput";
+            this.reportingFrequency = obj.reportingFrequency ?? ReportingFrequency.Hourly;
+            this.outputs = obj.outputs;
+            this.summaryReports = obj.summaryReports;
+            this.unmetSetpointTolerance = obj.unmetSetpointTolerance ?? 1.11;
         }
     }
 

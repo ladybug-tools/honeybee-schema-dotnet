@@ -80,6 +80,16 @@ export class Aperture extends IDdBaseModel {
 
         if (_data) {
             const obj = deepTransform(Aperture, _data);
+            this.geometry = obj.geometry;
+            this.boundaryCondition = obj.boundaryCondition;
+            this.properties = obj.properties;
+            this.type = obj.type ?? "Aperture";
+            this.isOperable = obj.isOperable ?? false;
+            this.indoorShades = obj.indoorShades;
+            this.outdoorShades = obj.outdoorShades;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
+            this.userData = obj.userData;
         }
     }
 

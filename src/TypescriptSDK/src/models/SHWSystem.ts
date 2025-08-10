@@ -52,6 +52,14 @@ export class SHWSystem extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(SHWSystem, _data);
+            this.type = obj.type ?? "SHWSystem";
+            this.equipmentType = obj.equipmentType ?? SHWEquipmentType.Gas_WaterHeater;
+            this.heaterEfficiency = obj.heaterEfficiency ?? new Autocalculate();
+            this.ambientCondition = obj.ambientCondition ?? 22;
+            this.ambientLossCoefficient = obj.ambientLossCoefficient ?? 6;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

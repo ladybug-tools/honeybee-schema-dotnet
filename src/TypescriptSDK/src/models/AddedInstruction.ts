@@ -45,6 +45,10 @@ export class AddedInstruction extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(AddedInstruction, _data);
+            this.elementType = obj.elementType;
+            this.elementId = obj.elementId;
+            this.elementName = obj.elementName;
+            this.type = obj.type ?? "AddedInstruction";
         }
     }
 

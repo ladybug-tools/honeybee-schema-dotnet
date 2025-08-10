@@ -131,6 +131,18 @@ export class Trans extends ModifierBase {
 
         if (_data) {
             const obj = deepTransform(Trans, _data);
+            this.modifier = obj.modifier ?? new Void();
+            this.dependencies = obj.dependencies;
+            this.rReflectance = obj.rReflectance ?? 0;
+            this.gReflectance = obj.gReflectance ?? 0;
+            this.bReflectance = obj.bReflectance ?? 0;
+            this.specularity = obj.specularity ?? 0;
+            this.roughness = obj.roughness ?? 0;
+            this.transmittedDiff = obj.transmittedDiff ?? 0;
+            this.transmittedSpec = obj.transmittedSpec ?? 0;
+            this.type = obj.type ?? "Trans";
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

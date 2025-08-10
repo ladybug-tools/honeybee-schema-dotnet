@@ -60,6 +60,12 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(HumidityCondition, _data);
+            this.humidityType = obj.humidityType;
+            this.humidityValue = obj.humidityValue;
+            this.type = obj.type ?? "HumidityCondition";
+            this.barometricPressure = obj.barometricPressure ?? 101325;
+            this.rain = obj.rain ?? false;
+            this.snowOnGround = obj.snowOnGround ?? false;
         }
     }
 

@@ -68,6 +68,9 @@ export class BaseModifierSet extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(BaseModifierSet, _data);
+            this.exteriorModifier = obj.exteriorModifier;
+            this.interiorModifier = obj.interiorModifier;
+            this.type = obj.type ?? "BaseModifierSet";
         }
     }
 

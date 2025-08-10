@@ -84,6 +84,16 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(WindowConstructionShade, _data);
+            this.windowConstruction = obj.windowConstruction;
+            this.shadeMaterial = obj.shadeMaterial;
+            this.type = obj.type ?? "WindowConstructionShade";
+            this.shadeLocation = obj.shadeLocation ?? ShadeLocation.Interior;
+            this.controlType = obj.controlType ?? ControlType.AlwaysOn;
+            this.setpoint = obj.setpoint;
+            this.schedule = obj.schedule;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

@@ -88,6 +88,18 @@ export class EnergyWindowFrame extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(EnergyWindowFrame, _data);
+            this.width = obj.width;
+            this.conductance = obj.conductance;
+            this.type = obj.type ?? "EnergyWindowFrame";
+            this.edgeToCenterRatio = obj.edgeToCenterRatio ?? 1;
+            this.outsideProjection = obj.outsideProjection ?? 0;
+            this.insideProjection = obj.insideProjection ?? 0;
+            this.thermalAbsorptance = obj.thermalAbsorptance ?? 0.9;
+            this.solarAbsorptance = obj.solarAbsorptance ?? 0.7;
+            this.visibleAbsorptance = obj.visibleAbsorptance ?? 0.7;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

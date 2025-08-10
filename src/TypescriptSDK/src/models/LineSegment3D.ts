@@ -35,6 +35,9 @@ export class LineSegment3D {
 
         if (_data) {
             const obj = deepTransform(LineSegment3D, _data);
+            this.p = obj.p;
+            this.v = obj.v;
+            this.type = obj.type ?? "LineSegment3D";
         }
     }
 

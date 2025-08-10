@@ -54,6 +54,13 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(ScheduleTypeLimit, _data);
+            this.type = obj.type ?? "ScheduleTypeLimit";
+            this.lowerLimit = obj.lowerLimit ?? new NoLimit();
+            this.upperLimit = obj.upperLimit ?? new NoLimit();
+            this.numericType = obj.numericType ?? ScheduleNumericType.Continuous;
+            this.unitType = obj.unitType ?? ScheduleUnitType.Dimensionless;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

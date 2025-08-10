@@ -37,6 +37,9 @@ export class Sensor extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(Sensor, _data);
+            this.pos = obj.pos;
+            this.dir = obj.dir;
+            this.type = obj.type ?? "Sensor";
         }
     }
 
