@@ -1,5 +1,6 @@
 ﻿import { IsInstance, ValidateNested, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { OpaqueConstruction } from "./OpaqueConstruction";
 
@@ -44,13 +45,9 @@ export class WallConstructionSet extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(WallConstructionSet, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.interiorConstruction = obj.interiorConstruction;
-            this.exteriorConstruction = obj.exteriorConstruction;
-            this.groundConstruction = obj.groundConstruction;
-            this.type = obj.type ?? "WallConstructionSet";
+            const obj = deepTransform(WallConstructionSet, _data);
         }
     }
 

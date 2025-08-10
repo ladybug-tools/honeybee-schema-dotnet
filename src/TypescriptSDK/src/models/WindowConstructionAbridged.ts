@@ -1,5 +1,6 @@
 ﻿import { IsArray, IsString, IsDefined, IsOptional, Matches, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Construction for window objects (Aperture, Door). */
@@ -34,12 +35,9 @@ export class WindowConstructionAbridged extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(WindowConstructionAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.materials = obj.materials;
-            this.type = obj.type ?? "WindowConstructionAbridged";
-            this.frame = obj.frame;
+            const obj = deepTransform(WindowConstructionAbridged, _data);
         }
     }
 

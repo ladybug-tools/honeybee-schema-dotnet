@@ -1,5 +1,6 @@
 ﻿import { IsNumber, IsDefined, Max, IsString, IsOptional, Matches, Min, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Opaque material representing a layer within an opaque construction. */
@@ -84,18 +85,9 @@ export class EnergyWindowFrame extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(EnergyWindowFrame, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.width = obj.width;
-            this.conductance = obj.conductance;
-            this.type = obj.type ?? "EnergyWindowFrame";
-            this.edgeToCenterRatio = obj.edgeToCenterRatio ?? 1;
-            this.outsideProjection = obj.outsideProjection ?? 0;
-            this.insideProjection = obj.insideProjection ?? 0;
-            this.thermalAbsorptance = obj.thermalAbsorptance ?? 0.9;
-            this.solarAbsorptance = obj.solarAbsorptance ?? 0.7;
-            this.visibleAbsorptance = obj.visibleAbsorptance ?? 0.7;
+            const obj = deepTransform(EnergyWindowFrame, _data);
         }
     }
 

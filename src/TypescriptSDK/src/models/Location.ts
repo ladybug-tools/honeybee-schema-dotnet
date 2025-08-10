@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Autocalculate } from "./Autocalculate";
 
@@ -66,17 +67,9 @@ export class Location extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(Location, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "Location";
-            this.city = obj.city ?? "-";
-            this.latitude = obj.latitude ?? 0;
-            this.longitude = obj.longitude ?? 0;
-            this.timeZone = obj.timeZone ?? new Autocalculate();
-            this.elevation = obj.elevation ?? 0;
-            this.stationId = obj.stationId;
-            this.source = obj.source;
+            const obj = deepTransform(Location, _data);
         }
     }
 

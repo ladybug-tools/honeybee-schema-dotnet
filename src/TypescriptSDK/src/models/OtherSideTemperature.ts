@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Autocalculate } from "./Autocalculate";
 
@@ -34,12 +35,9 @@ export class OtherSideTemperature extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(OtherSideTemperature, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "OtherSideTemperature";
-            this.heatTransferCoefficient = obj.heatTransferCoefficient ?? 0;
-            this.temperature = obj.temperature ?? new Autocalculate();
+            const obj = deepTransform(OtherSideTemperature, _data);
         }
     }
 

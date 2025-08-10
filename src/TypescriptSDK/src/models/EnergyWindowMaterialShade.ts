@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** This object specifies the properties of window shade materials. */
@@ -134,24 +135,9 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(EnergyWindowMaterialShade, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "EnergyWindowMaterialShade";
-            this.solarTransmittance = obj.solarTransmittance ?? 0.4;
-            this.solarReflectance = obj.solarReflectance ?? 0.5;
-            this.visibleTransmittance = obj.visibleTransmittance ?? 0.4;
-            this.visibleReflectance = obj.visibleReflectance ?? 0.4;
-            this.emissivity = obj.emissivity ?? 0.9;
-            this.infraredTransmittance = obj.infraredTransmittance ?? 0;
-            this.thickness = obj.thickness ?? 0.005;
-            this.conductivity = obj.conductivity ?? 0.1;
-            this.distanceToGlass = obj.distanceToGlass ?? 0.05;
-            this.topOpeningMultiplier = obj.topOpeningMultiplier ?? 0.5;
-            this.bottomOpeningMultiplier = obj.bottomOpeningMultiplier ?? 0.5;
-            this.leftOpeningMultiplier = obj.leftOpeningMultiplier ?? 0.5;
-            this.rightOpeningMultiplier = obj.rightOpeningMultiplier ?? 0.5;
-            this.airflowPermeability = obj.airflowPermeability ?? 0;
+            const obj = deepTransform(EnergyWindowMaterialShade, _data);
         }
     }
 

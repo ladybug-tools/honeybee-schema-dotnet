@@ -1,5 +1,6 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, IsEnum, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Roughness } from "./Roughness";
 
@@ -61,15 +62,9 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(EnergyMaterialNoMass, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.rValue = obj.rValue;
-            this.type = obj.type ?? "EnergyMaterialNoMass";
-            this.roughness = obj.roughness ?? Roughness.MediumRough;
-            this.thermalAbsorptance = obj.thermalAbsorptance ?? 0.9;
-            this.solarAbsorptance = obj.solarAbsorptance ?? 0.7;
-            this.visibleAbsorptance = obj.visibleAbsorptance ?? 0.7;
+            const obj = deepTransform(EnergyMaterialNoMass, _data);
         }
     }
 

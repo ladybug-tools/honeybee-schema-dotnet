@@ -1,5 +1,6 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { Face3D } from "./Face3D";
 import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 
@@ -40,13 +41,9 @@ export class StateGeometryAbridged extends IDdRadianceBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(StateGeometryAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.geometry = obj.geometry;
-            this.type = obj.type ?? "StateGeometryAbridged";
-            this.modifier = obj.modifier;
-            this.modifierDirect = obj.modifierDirect;
+            const obj = deepTransform(StateGeometryAbridged, _data);
         }
     }
 

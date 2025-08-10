@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 
 export abstract class _OpenAPIGenBaseModel {
     @IsString()
@@ -15,6 +16,7 @@ export abstract class _OpenAPIGenBaseModel {
 
 
     init(_data?: any) {
+
     }
 
 

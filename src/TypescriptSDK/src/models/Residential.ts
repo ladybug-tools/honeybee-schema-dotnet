@@ -1,5 +1,6 @@
 ﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ResidentialEquipmentType } from "./ResidentialEquipmentType";
 import { Vintages } from "./Vintages";
@@ -37,12 +38,9 @@ export class Residential extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(Residential, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
-            this.type = obj.type ?? "Residential";
-            this.equipmentType = obj.equipmentType ?? ResidentialEquipmentType.ResidentialAC_ElectricBaseboard;
+            const obj = deepTransform(Residential, _data);
         }
     }
 

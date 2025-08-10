@@ -1,5 +1,6 @@
 ﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { FCUEquipmentType } from "./FCUEquipmentType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
@@ -37,12 +38,9 @@ export class FCU extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(FCU, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
-            this.type = obj.type ?? "FCU";
-            this.equipmentType = obj.equipmentType ?? FCUEquipmentType.FCU_Chiller_Boiler;
+            const obj = deepTransform(FCU, _data);
         }
     }
 

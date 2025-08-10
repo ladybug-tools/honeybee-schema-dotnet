@@ -1,5 +1,6 @@
 ﻿import { IsString, IsDefined, Matches, MinLength, MaxLength, IsEnum, IsArray, IsOptional, ValidateNested, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { ExtensionTypes } from "./ExtensionTypes";
 import { LineSegment3D } from "./LineSegment3D";
 import { ObjectTypes } from "./ObjectTypes";
@@ -102,19 +103,9 @@ export class ValidationError {
 
 
     init(_data?: any) {
+
         if (_data) {
-            const obj = plainToClass(ValidationError, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.code = obj.code;
-            this.errorType = obj.errorType;
-            this.extensionType = obj.extensionType;
-            this.elementType = obj.elementType;
-            this.elementId = obj.elementId;
-            this.message = obj.message;
-            this.type = obj.type ?? "ValidationError";
-            this.elementName = obj.elementName;
-            this.parents = obj.parents;
-            this.topParents = obj.topParents;
-            this.helperGeometry = obj.helperGeometry;
+            const obj = deepTransform(ValidationError, _data);
         }
     }
 

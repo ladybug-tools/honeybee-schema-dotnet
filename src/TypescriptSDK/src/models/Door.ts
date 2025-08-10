@@ -1,5 +1,6 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsBoolean, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { DoorPropertiesAbridged } from "./DoorPropertiesAbridged";
 import { Face3D } from "./Face3D";
 import { IDdBaseModel } from "./IDdBaseModel";
@@ -76,16 +77,9 @@ export class Door extends IDdBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(Door, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.geometry = obj.geometry;
-            this.boundaryCondition = obj.boundaryCondition;
-            this.properties = obj.properties;
-            this.type = obj.type ?? "Door";
-            this.isGlass = obj.isGlass ?? false;
-            this.indoorShades = obj.indoorShades;
-            this.outdoorShades = obj.outdoorShades;
+            const obj = deepTransform(Door, _data);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿import { IsArray, IsDefined, IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IsNestedNumberArray } from "./../helpers/class-validator";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Plane } from "./Plane";
@@ -43,13 +44,9 @@ export class Face3D extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(Face3D, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.boundary = obj.boundary;
-            this.type = obj.type ?? "Face3D";
-            this.holes = obj.holes;
-            this.plane = obj.plane;
+            const obj = deepTransform(Face3D, _data);
         }
     }
 

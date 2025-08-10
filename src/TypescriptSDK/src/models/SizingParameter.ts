@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, IsNumber, IsEnum, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ClimateZones } from "./ClimateZones";
 import { DesignDay } from "./DesignDay";
@@ -72,17 +73,9 @@ export class SizingParameter extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(SizingParameter, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "SizingParameter";
-            this.designDays = obj.designDays;
-            this.heatingFactor = obj.heatingFactor ?? 1.25;
-            this.coolingFactor = obj.coolingFactor ?? 1.15;
-            this.efficiencyStandard = obj.efficiencyStandard;
-            this.climateZone = obj.climateZone;
-            this.buildingType = obj.buildingType;
-            this.bypassEfficiencySizing = obj.bypassEfficiencySizing ?? false;
+            const obj = deepTransform(SizingParameter, _data);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsOptional, Max, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
@@ -61,15 +62,9 @@ export class _EquipmentBase extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(_EquipmentBase, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.wattsPerArea = obj.wattsPerArea;
-            this.schedule = obj.schedule;
-            this.radiantFraction = obj.radiantFraction ?? 0;
-            this.latentFraction = obj.latentFraction ?? 0;
-            this.lostFraction = obj.lostFraction ?? 0;
-            this.type = obj.type ?? "_EquipmentBase";
+            const obj = deepTransform(_EquipmentBase, _data);
         }
     }
 

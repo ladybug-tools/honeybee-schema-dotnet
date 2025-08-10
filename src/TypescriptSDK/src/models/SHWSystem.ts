@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { SHWEquipmentType } from "./SHWEquipmentType";
@@ -48,14 +49,9 @@ export class SHWSystem extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(SHWSystem, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "SHWSystem";
-            this.equipmentType = obj.equipmentType ?? SHWEquipmentType.Gas_WaterHeater;
-            this.heaterEfficiency = obj.heaterEfficiency ?? new Autocalculate();
-            this.ambientCondition = obj.ambientCondition ?? 22;
-            this.ambientLossCoefficient = obj.ambientLossCoefficient ?? 6;
+            const obj = deepTransform(SHWSystem, _data);
         }
     }
 

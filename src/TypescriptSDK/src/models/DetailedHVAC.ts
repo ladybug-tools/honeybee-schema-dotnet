@@ -1,5 +1,6 @@
 ﻿import { IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Detailed HVAC system object defined using IronBug or OpenStudio .NET bindings. */
@@ -24,11 +25,9 @@ export class DetailedHVAC extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(DetailedHVAC, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.specification = obj.specification;
-            this.type = obj.type ?? "DetailedHVAC";
+            const obj = deepTransform(DetailedHVAC, _data);
         }
     }
 

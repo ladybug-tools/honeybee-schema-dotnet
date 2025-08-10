@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, IsInstance, ValidateNested, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { DaylightingControl } from "./DaylightingControl";
 import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
@@ -171,27 +172,9 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(RoomEnergyPropertiesAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "RoomEnergyPropertiesAbridged";
-            this.constructionSet = obj.constructionSet;
-            this.programType = obj.programType;
-            this.hvac = obj.hvac;
-            this.shw = obj.shw;
-            this.people = obj.people;
-            this.lighting = obj.lighting;
-            this.electricEquipment = obj.electricEquipment;
-            this.gasEquipment = obj.gasEquipment;
-            this.serviceHotWater = obj.serviceHotWater;
-            this.infiltration = obj.infiltration;
-            this.ventilation = obj.ventilation;
-            this.setpoint = obj.setpoint;
-            this.daylightingControl = obj.daylightingControl;
-            this.windowVentControl = obj.windowVentControl;
-            this.fans = obj.fans;
-            this.internalMasses = obj.internalMasses;
-            this.processLoads = obj.processLoads;
+            const obj = deepTransform(RoomEnergyPropertiesAbridged, _data);
         }
     }
 

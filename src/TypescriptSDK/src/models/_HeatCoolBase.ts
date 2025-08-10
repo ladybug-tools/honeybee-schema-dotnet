@@ -1,5 +1,6 @@
 ﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 
@@ -28,11 +29,9 @@ export class _HeatCoolBase extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(_HeatCoolBase, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
-            this.type = obj.type ?? "_HeatCoolBase";
+            const obj = deepTransform(_HeatCoolBase, _data);
         }
     }
 

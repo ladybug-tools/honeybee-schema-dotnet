@@ -1,5 +1,6 @@
 ﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Used to specify dry bulb conditions on a design day. */
@@ -34,12 +35,9 @@ export class DryBulbCondition extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(DryBulbCondition, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.dryBulbMax = obj.dryBulbMax;
-            this.dryBulbRange = obj.dryBulbRange;
-            this.type = obj.type ?? "DryBulbCondition";
+            const obj = deepTransform(DryBulbCondition, _data);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿import { IsString, IsDefined, Matches, MinLength, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects requiring a valid Radiance identifier. */
@@ -33,12 +34,9 @@ export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(IDdRadianceBaseModel, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.identifier = obj.identifier;
-            this.displayName = obj.displayName;
-            this.type = obj.type ?? "IDdRadianceBaseModel";
+            const obj = deepTransform(IDdRadianceBaseModel, _data);
         }
     }
 

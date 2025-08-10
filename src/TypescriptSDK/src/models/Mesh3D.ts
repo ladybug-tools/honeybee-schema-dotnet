@@ -1,5 +1,6 @@
 ﻿import { IsArray, IsDefined, IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IsNestedNumberArray, IsNestedIntegerArray } from "./../helpers/class-validator";
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Color } from "./Color";
@@ -44,13 +45,9 @@ export class Mesh3D extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(Mesh3D, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.vertices = obj.vertices;
-            this.faces = obj.faces;
-            this.type = obj.type ?? "Mesh3D";
-            this.colors = obj.colors;
+            const obj = deepTransform(Mesh3D, _data);
         }
     }
 

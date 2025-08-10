@@ -1,5 +1,6 @@
 ﻿import { IsArray, IsInt, IsDefined, IsBoolean, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Used to specify sky conditions on a design day. */
@@ -33,12 +34,9 @@ export class _SkyCondition extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(_SkyCondition, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.date = obj.date;
-            this.daylightSavings = obj.daylightSavings ?? false;
-            this.type = obj.type ?? "_SkyCondition";
+            const obj = deepTransform(_SkyCondition, _data);
         }
     }
 

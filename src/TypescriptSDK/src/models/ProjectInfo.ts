@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, IsArray, IsInstance, ValidateNested, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BuildingTypes } from "./BuildingTypes";
 import { ClimateZones } from "./ClimateZones";
@@ -70,16 +71,9 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ProjectInfo, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "ProjectInfo";
-            this.north = obj.north ?? 0;
-            this.weatherUrls = obj.weatherUrls;
-            this.location = obj.location;
-            this.ashraeClimateZone = obj.ashraeClimateZone;
-            this.buildingType = obj.buildingType;
-            this.vintage = obj.vintage;
+            const obj = deepTransform(ProjectInfo, _data);
         }
     }
 

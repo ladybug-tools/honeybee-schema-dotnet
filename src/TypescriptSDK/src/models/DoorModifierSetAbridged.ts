@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { BaseModifierSetAbridged } from "./BaseModifierSetAbridged";
 
 /** Abridged set containing radiance modifiers needed for a model's Doors. */
@@ -37,13 +38,9 @@ export class DoorModifierSetAbridged extends BaseModifierSetAbridged {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(DoorModifierSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "DoorModifierSetAbridged";
-            this.interiorGlassModifier = obj.interiorGlassModifier;
-            this.exteriorGlassModifier = obj.exteriorGlassModifier;
-            this.overheadModifier = obj.overheadModifier;
+            const obj = deepTransform(DoorModifierSetAbridged, _data);
         }
     }
 

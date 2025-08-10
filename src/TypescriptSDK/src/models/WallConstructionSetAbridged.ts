@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _FaceSubSetAbridged } from "./_FaceSubSetAbridged";
 
 /** A set of constructions for wall assemblies. */
@@ -19,10 +20,9 @@ export class WallConstructionSetAbridged extends _FaceSubSetAbridged {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(WallConstructionSetAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "WallConstructionSetAbridged";
+            const obj = deepTransform(WallConstructionSetAbridged, _data);
         }
     }
 

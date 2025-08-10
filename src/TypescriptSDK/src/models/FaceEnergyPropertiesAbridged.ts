@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { AFNCrack } from "./AFNCrack";
 
@@ -36,12 +37,9 @@ export class FaceEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(FaceEnergyPropertiesAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "FaceEnergyPropertiesAbridged";
-            this.construction = obj.construction;
-            this.ventCrack = obj.ventCrack;
+            const obj = deepTransform(FaceEnergyPropertiesAbridged, _data);
         }
     }
 

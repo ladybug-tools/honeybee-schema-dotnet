@@ -1,5 +1,6 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
@@ -59,15 +60,9 @@ export class ServiceHotWaterAbridged extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ServiceHotWaterAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.flowPerArea = obj.flowPerArea;
-            this.schedule = obj.schedule;
-            this.type = obj.type ?? "ServiceHotWaterAbridged";
-            this.targetTemperature = obj.targetTemperature ?? 60;
-            this.sensibleFraction = obj.sensibleFraction ?? 0.2;
-            this.latentFraction = obj.latentFraction ?? 0.05;
+            const obj = deepTransform(ServiceHotWaterAbridged, _data);
         }
     }
 

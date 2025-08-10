@@ -1,5 +1,6 @@
 ﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _RadianceAsset } from "./_RadianceAsset";
 import { Face3D } from "./Face3D";
 import { Mesh3D } from "./Mesh3D";
@@ -54,14 +55,9 @@ export class SensorGrid extends _RadianceAsset {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(SensorGrid, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.sensors = obj.sensors;
-            this.type = obj.type ?? "SensorGrid";
-            this.mesh = obj.mesh;
-            this.baseGeometry = obj.baseGeometry;
-            this.groupIdentifier = obj.groupIdentifier;
+            const obj = deepTransform(SensorGrid, _data);
         }
     }
 

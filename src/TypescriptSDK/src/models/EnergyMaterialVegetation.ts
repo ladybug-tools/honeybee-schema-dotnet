@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsNumber, Max, Min, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { MoistureDiffusionModel } from "./MoistureDiffusionModel";
 import { Roughness } from "./Roughness";
@@ -165,27 +166,9 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(EnergyMaterialVegetation, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "EnergyMaterialVegetation";
-            this.roughness = obj.roughness ?? Roughness.MediumRough;
-            this.thickness = obj.thickness ?? 0.1;
-            this.conductivity = obj.conductivity ?? 0.35;
-            this.density = obj.density ?? 1100;
-            this.specificHeat = obj.specificHeat ?? 1200;
-            this.soilThermalAbsorptance = obj.soilThermalAbsorptance ?? 0.9;
-            this.soilSolarAbsorptance = obj.soilSolarAbsorptance ?? 0.7;
-            this.soilVisibleAbsorptance = obj.soilVisibleAbsorptance ?? 0.7;
-            this.plantHeight = obj.plantHeight ?? 0.2;
-            this.leafAreaIndex = obj.leafAreaIndex ?? 1;
-            this.leafReflectivity = obj.leafReflectivity ?? 0.22;
-            this.leafEmissivity = obj.leafEmissivity ?? 0.95;
-            this.minStomatalResist = obj.minStomatalResist ?? 180;
-            this.satVolMoistCont = obj.satVolMoistCont ?? 0.3;
-            this.residualVolMoistCont = obj.residualVolMoistCont ?? 0.01;
-            this.initVolMoistCont = obj.initVolMoistCont ?? 0.01;
-            this.moistDiffModel = obj.moistDiffModel ?? MoistureDiffusionModel.Simple;
+            const obj = deepTransform(EnergyMaterialVegetation, _data);
         }
     }
 

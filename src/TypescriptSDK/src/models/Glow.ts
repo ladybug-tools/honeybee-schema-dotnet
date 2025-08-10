@@ -1,5 +1,6 @@
 ﻿import { IsOptional, IsArray, IsNumber, Min, Max, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
 import { Light } from "./Light";
@@ -98,16 +99,9 @@ export class Glow extends ModifierBase {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(Glow, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.modifier = obj.modifier ?? new Void();
-            this.dependencies = obj.dependencies;
-            this.rEmittance = obj.rEmittance ?? 0;
-            this.gEmittance = obj.gEmittance ?? 0;
-            this.bEmittance = obj.bEmittance ?? 0;
-            this.maxRadius = obj.maxRadius ?? 0;
-            this.type = obj.type ?? "Glow";
+            const obj = deepTransform(Glow, _data);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, IsInt, Min, Max, IsNumber, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { RunPeriod } from "./RunPeriod";
 import { ShadowCalculation } from "./ShadowCalculation";
@@ -91,18 +92,9 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(SimulationParameter, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "SimulationParameter";
-            this.output = obj.output;
-            this.runPeriod = obj.runPeriod;
-            this.timestep = obj.timestep ?? 6;
-            this.simulationControl = obj.simulationControl;
-            this.shadowCalculation = obj.shadowCalculation;
-            this.sizingParameter = obj.sizingParameter;
-            this.northAngle = obj.northAngle ?? 0;
-            this.terrainType = obj.terrainType ?? TerrianTypes.City;
+            const obj = deepTransform(SimulationParameter, _data);
         }
     }
 

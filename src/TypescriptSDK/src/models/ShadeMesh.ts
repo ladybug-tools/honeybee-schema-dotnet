@@ -1,5 +1,6 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdBaseModel } from "./IDdBaseModel";
 import { Mesh3D } from "./Mesh3D";
 import { ShadeMeshPropertiesAbridged } from "./ShadeMeshPropertiesAbridged";
@@ -44,13 +45,9 @@ export class ShadeMesh extends IDdBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ShadeMesh, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.geometry = obj.geometry;
-            this.properties = obj.properties;
-            this.type = obj.type ?? "ShadeMesh";
-            this.isDetached = obj.isDetached ?? true;
+            const obj = deepTransform(ShadeMesh, _data);
         }
     }
 

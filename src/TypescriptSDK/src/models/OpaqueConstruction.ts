@@ -1,5 +1,6 @@
 ﻿import { IsArray, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { EnergyMaterial } from "./EnergyMaterial";
 import { EnergyMaterialNoMass } from "./EnergyMaterialNoMass";
 import { EnergyMaterialVegetation } from "./EnergyMaterialVegetation";
@@ -34,11 +35,9 @@ export class OpaqueConstruction extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(OpaqueConstruction, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.materials = obj.materials;
-            this.type = obj.type ?? "OpaqueConstruction";
+            const obj = deepTransform(OpaqueConstruction, _data);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿import { IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
@@ -64,12 +65,9 @@ export class FloorModifierSet extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(FloorModifierSet, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.exteriorModifier = obj.exteriorModifier;
-            this.interiorModifier = obj.interiorModifier;
-            this.type = obj.type ?? "FloorModifierSet";
+            const obj = deepTransform(FloorModifierSet, _data);
         }
     }
 

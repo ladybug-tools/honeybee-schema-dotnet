@@ -1,5 +1,6 @@
 ﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, Min, Max, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
@@ -67,16 +68,9 @@ export class DaylightingControl extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(DaylightingControl, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.sensorPosition = obj.sensorPosition;
-            this.type = obj.type ?? "DaylightingControl";
-            this.illuminanceSetpoint = obj.illuminanceSetpoint ?? 300;
-            this.controlFraction = obj.controlFraction ?? 1;
-            this.minPowerInput = obj.minPowerInput ?? 0.3;
-            this.minLightOutput = obj.minLightOutput ?? 0.2;
-            this.offAtMinimum = obj.offAtMinimum ?? false;
+            const obj = deepTransform(DaylightingControl, _data);
         }
     }
 

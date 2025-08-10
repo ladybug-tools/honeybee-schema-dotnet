@@ -1,5 +1,6 @@
 ﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, IsEnum, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 import { VentilationControlAbridged } from "./VentilationControlAbridged";
 import { VentilationType } from "./VentilationType";
@@ -57,15 +58,9 @@ export class VentilationFan extends EnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(VentilationFan, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.flowRate = obj.flowRate;
-            this.pressureRise = obj.pressureRise;
-            this.efficiency = obj.efficiency;
-            this.type = obj.type ?? "VentilationFan";
-            this.ventilationType = obj.ventilationType ?? VentilationType.Balanced;
-            this.control = obj.control;
+            const obj = deepTransform(VentilationFan, _data);
         }
     }
 

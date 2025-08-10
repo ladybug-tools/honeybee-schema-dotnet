@@ -1,5 +1,6 @@
 ﻿import { IsString, IsDefined, MinLength, MaxLength, IsEnum, IsInstance, ValidateNested, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { ASHRAEClearSky } from "./ASHRAEClearSky";
 import { ASHRAETau } from "./ASHRAETau";
@@ -75,16 +76,9 @@ export class DesignDay extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(DesignDay, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.name = obj.name;
-            this.dayType = obj.dayType;
-            this.dryBulbCondition = obj.dryBulbCondition;
-            this.humidityCondition = obj.humidityCondition;
-            this.windCondition = obj.windCondition;
-            this.skyCondition = obj.skyCondition;
-            this.type = obj.type ?? "DesignDay";
+            const obj = deepTransform(DesignDay, _data);
         }
     }
 

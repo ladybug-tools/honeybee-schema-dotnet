@@ -1,5 +1,6 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { ControlType } from "./ControlType";
 import { EnergyWindowMaterialBlind } from "./EnergyWindowMaterialBlind";
 import { EnergyWindowMaterialGlazing } from "./EnergyWindowMaterialGlazing";
@@ -80,16 +81,9 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(WindowConstructionShade, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.windowConstruction = obj.windowConstruction;
-            this.shadeMaterial = obj.shadeMaterial;
-            this.type = obj.type ?? "WindowConstructionShade";
-            this.shadeLocation = obj.shadeLocation ?? ShadeLocation.Interior;
-            this.controlType = obj.controlType ?? ControlType.AlwaysOn;
-            this.setpoint = obj.setpoint;
-            this.schedule = obj.schedule;
+            const obj = deepTransform(WindowConstructionShade, _data);
         }
     }
 

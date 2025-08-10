@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Abridged Radiance Properties for Honeybee Room. */
@@ -25,11 +26,9 @@ export class RoomRadiancePropertiesAbridged extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(RoomRadiancePropertiesAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "RoomRadiancePropertiesAbridged";
-            this.modifierSet = obj.modifierSet;
+            const obj = deepTransform(RoomRadiancePropertiesAbridged, _data);
         }
     }
 

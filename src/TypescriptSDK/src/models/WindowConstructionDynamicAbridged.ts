@@ -1,5 +1,6 @@
 ﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, MinLength, MaxLength, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { WindowConstructionAbridged } from "./WindowConstructionAbridged";
 
@@ -37,12 +38,9 @@ export class WindowConstructionDynamicAbridged extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(WindowConstructionDynamicAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.constructions = obj.constructions;
-            this.schedule = obj.schedule;
-            this.type = obj.type ?? "WindowConstructionDynamicAbridged";
+            const obj = deepTransform(WindowConstructionDynamicAbridged, _data);
         }
     }
 

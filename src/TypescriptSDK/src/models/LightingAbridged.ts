@@ -1,5 +1,6 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
@@ -69,16 +70,9 @@ export class LightingAbridged extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(LightingAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.wattsPerArea = obj.wattsPerArea;
-            this.schedule = obj.schedule;
-            this.type = obj.type ?? "LightingAbridged";
-            this.visibleFraction = obj.visibleFraction ?? 0.25;
-            this.radiantFraction = obj.radiantFraction ?? 0.32;
-            this.returnAirFraction = obj.returnAirFraction ?? 0;
-            this.baselineWattsPerArea = obj.baselineWattsPerArea ?? 11.84029;
+            const obj = deepTransform(LightingAbridged, _data);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsBoolean, IsNumber, Min, Max, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { Autosize } from "./Autosize";
 import { EconomizerType } from "./EconomizerType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -97,20 +98,9 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(IdealAirSystemAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "IdealAirSystemAbridged";
-            this.economizerType = obj.economizerType ?? EconomizerType.DifferentialDryBulb;
-            this.demandControlledVentilation = obj.demandControlledVentilation ?? false;
-            this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
-            this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
-            this.heatingAirTemperature = obj.heatingAirTemperature ?? 50;
-            this.coolingAirTemperature = obj.coolingAirTemperature ?? 13;
-            this.heatingLimit = obj.heatingLimit ?? new Autosize();
-            this.coolingLimit = obj.coolingLimit ?? new Autosize();
-            this.heatingAvailability = obj.heatingAvailability;
-            this.coolingAvailability = obj.coolingAvailability;
+            const obj = deepTransform(IdealAirSystemAbridged, _data);
         }
     }
 

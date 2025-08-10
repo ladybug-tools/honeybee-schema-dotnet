@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _PropertiesBaseAbridged } from "./_PropertiesBaseAbridged";
 import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged";
 
@@ -35,12 +36,9 @@ export class ShadeRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ShadeRadiancePropertiesAbridged, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "ShadeRadiancePropertiesAbridged";
-            this.dynamicGroupIdentifier = obj.dynamicGroupIdentifier;
-            this.states = obj.states;
+            const obj = deepTransform(ShadeRadiancePropertiesAbridged, _data);
         }
     }
 

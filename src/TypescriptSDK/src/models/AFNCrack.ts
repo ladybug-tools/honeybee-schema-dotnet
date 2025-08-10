@@ -1,5 +1,6 @@
 ﻿import { IsNumber, IsDefined, IsString, IsOptional, Matches, Min, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Properties for airflow through a crack. */
@@ -34,12 +35,9 @@ export class AFNCrack extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(AFNCrack, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.flowCoefficient = obj.flowCoefficient;
-            this.type = obj.type ?? "AFNCrack";
-            this.flowExponent = obj.flowExponent ?? 0.65;
+            const obj = deepTransform(AFNCrack, _data);
         }
     }
 

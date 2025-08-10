@@ -1,5 +1,6 @@
 ﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
@@ -66,15 +67,9 @@ export class People extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(People, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.peoplePerArea = obj.peoplePerArea;
-            this.occupancySchedule = obj.occupancySchedule;
-            this.type = obj.type ?? "People";
-            this.activitySchedule = obj.activitySchedule;
-            this.radiantFraction = obj.radiantFraction ?? 0.3;
-            this.latentFraction = obj.latentFraction ?? new Autocalculate();
+            const obj = deepTransform(People, _data);
         }
     }
 

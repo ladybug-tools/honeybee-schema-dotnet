@@ -1,5 +1,6 @@
 ﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 
 /** A single line segment face in 3D space. */
 export class LineSegment3D {
@@ -31,11 +32,9 @@ export class LineSegment3D {
 
 
     init(_data?: any) {
+
         if (_data) {
-            const obj = plainToClass(LineSegment3D, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.p = obj.p;
-            this.v = obj.v;
-            this.type = obj.type ?? "LineSegment3D";
+            const obj = deepTransform(LineSegment3D, _data);
         }
     }
 

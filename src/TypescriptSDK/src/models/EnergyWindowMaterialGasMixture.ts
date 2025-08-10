@@ -1,5 +1,6 @@
 ﻿import { IsArray, IsEnum, IsDefined, IsNumber, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { GasType } from "./GasType";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
@@ -42,13 +43,9 @@ export class EnergyWindowMaterialGasMixture extends IDdEnergyBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(EnergyWindowMaterialGasMixture, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.gasTypes = obj.gasTypes;
-            this.gasFractions = obj.gasFractions;
-            this.type = obj.type ?? "EnergyWindowMaterialGasMixture";
-            this.thickness = obj.thickness ?? 0.0125;
+            const obj = deepTransform(EnergyWindowMaterialGasMixture, _data);
         }
     }
 

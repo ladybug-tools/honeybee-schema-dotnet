@@ -1,5 +1,6 @@
 ﻿import { IsString, IsOptional, Matches, IsEnum, IsInt, Min, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { CalculationMethod } from "./CalculationMethod";
 import { CalculationUpdateMethod } from "./CalculationUpdateMethod";
@@ -62,15 +63,9 @@ export class ShadowCalculation extends _OpenAPIGenBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(ShadowCalculation, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.type = obj.type ?? "ShadowCalculation";
-            this.solarDistribution = obj.solarDistribution ?? SolarDistribution.FullExteriorWithReflections;
-            this.calculationMethod = obj.calculationMethod ?? CalculationMethod.PolygonClipping;
-            this.calculationUpdateMethod = obj.calculationUpdateMethod ?? CalculationUpdateMethod.Periodic;
-            this.calculationFrequency = obj.calculationFrequency ?? 30;
-            this.maximumFigures = obj.maximumFigures ?? 15000;
+            const obj = deepTransform(ShadowCalculation, _data);
         }
     }
 

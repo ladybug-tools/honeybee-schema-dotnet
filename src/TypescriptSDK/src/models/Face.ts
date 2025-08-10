@@ -1,5 +1,6 @@
 ﻿import { IsInstance, ValidateNested, IsDefined, IsEnum, IsString, IsOptional, Matches, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
-import { Type, plainToClass, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
+import { deepTransform } from '../deepTransform';
 import { Adiabatic } from "./Adiabatic";
 import { Aperture } from "./Aperture";
 import { Door } from "./Door";
@@ -103,18 +104,9 @@ export class Face extends IDdBaseModel {
 
 
     override init(_data?: any) {
-        super.init(_data);
+
         if (_data) {
-            const obj = plainToClass(Face, _data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-            this.geometry = obj.geometry;
-            this.faceType = obj.faceType;
-            this.boundaryCondition = obj.boundaryCondition;
-            this.properties = obj.properties;
-            this.type = obj.type ?? "Face";
-            this.apertures = obj.apertures;
-            this.doors = obj.doors;
-            this.indoorShades = obj.indoorShades;
-            this.outdoorShades = obj.outdoorShades;
+            const obj = deepTransform(Face, _data);
         }
     }
 
