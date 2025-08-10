@@ -9,12 +9,14 @@
  */
 
 
-using NUnit.Framework;
-using System.Linq;
-using System.Collections.Generic;
-
 using HoneybeeSchema;
+using Newtonsoft.Json;
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace HoneybeeSchema.Test
 {
@@ -213,6 +215,36 @@ namespace HoneybeeSchema.Test
             var dup = dummy.DuplicateHVACScenario();
 
             Assert.AreEqual(dummy, dup);
+
+        }
+
+        [Test]
+        public void UserDataTest()
+        {
+            var room = new Room(
+                "A_mewRoom", 
+                new List<Face>(), 
+                new RoomPropertiesAbridged(),
+                userData: new { story = "floor 1" }
+                );
+
+            var json = room.ToJson();
+            //var json = JsonConvert.SerializeObject(room);
+            var hasUserData = json.Contains("floor 1");
+            Assert.IsTrue(hasUserData);
+
+            // test with System.Text.Json 
+            var setting = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                // DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, // Handled per-property
+                Converters = {
+                        new JsonStringEnumConverter()
+                    } // Serialize enums as strings
+            };
+            var msJson = System.Text.Json.JsonSerializer.Serialize(room, typeof(Room), setting);
+            var hasUserData2 = json.Contains("floor 1");
+            Assert.IsTrue(hasUserData2);
 
         }
     }
