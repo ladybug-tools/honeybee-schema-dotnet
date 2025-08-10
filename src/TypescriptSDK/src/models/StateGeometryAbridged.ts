@@ -44,6 +44,12 @@ export class StateGeometryAbridged extends IDdRadianceBaseModel {
 
         if (_data) {
             const obj = deepTransform(StateGeometryAbridged, _data);
+            this.geometry = obj.geometry;
+            this.type = obj.type ?? "StateGeometryAbridged";
+            this.modifier = obj.modifier;
+            this.modifierDirect = obj.modifierDirect;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

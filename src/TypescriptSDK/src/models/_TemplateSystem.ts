@@ -32,6 +32,11 @@ export class _TemplateSystem extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(_TemplateSystem, _data);
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.type = obj.type ?? "_TemplateSystem";
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

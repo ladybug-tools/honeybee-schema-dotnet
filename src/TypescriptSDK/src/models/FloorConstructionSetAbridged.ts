@@ -23,6 +23,10 @@ export class FloorConstructionSetAbridged extends _FaceSubSetAbridged {
 
         if (_data) {
             const obj = deepTransform(FloorConstructionSetAbridged, _data);
+            this.type = obj.type ?? "FloorConstructionSetAbridged";
+            this.interiorConstruction = obj.interiorConstruction;
+            this.exteriorConstruction = obj.exteriorConstruction;
+            this.groundConstruction = obj.groundConstruction;
         }
     }
 

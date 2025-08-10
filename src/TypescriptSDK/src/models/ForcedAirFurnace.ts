@@ -41,6 +41,12 @@ export class ForcedAirFurnace extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(ForcedAirFurnace, _data);
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.type = obj.type ?? "ForcedAirFurnace";
+            this.equipmentType = obj.equipmentType ?? FurnaceEquipmentType.Furnace;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

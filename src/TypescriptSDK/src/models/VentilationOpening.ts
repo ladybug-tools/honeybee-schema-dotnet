@@ -81,6 +81,14 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(VentilationOpening, _data);
+            this.type = obj.type ?? "VentilationOpening";
+            this.fractionAreaOperable = obj.fractionAreaOperable ?? 0.5;
+            this.fractionHeightOperable = obj.fractionHeightOperable ?? 1;
+            this.dischargeCoefficient = obj.dischargeCoefficient ?? 0.45;
+            this.windCrossVent = obj.windCrossVent ?? false;
+            this.flowCoefficientClosed = obj.flowCoefficientClosed ?? 0;
+            this.flowExponentClosed = obj.flowExponentClosed ?? 0.65;
+            this.twoWayThreshold = obj.twoWayThreshold ?? 0.0001;
         }
     }
 

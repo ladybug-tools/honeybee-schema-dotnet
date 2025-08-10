@@ -88,6 +88,18 @@ export class Room extends IDdBaseModel {
 
         if (_data) {
             const obj = deepTransform(Room, _data);
+            this.faces = obj.faces;
+            this.properties = obj.properties;
+            this.type = obj.type ?? "Room";
+            this.indoorShades = obj.indoorShades;
+            this.outdoorShades = obj.outdoorShades;
+            this.multiplier = obj.multiplier ?? 1;
+            this.excludeFloorArea = obj.excludeFloorArea ?? false;
+            this.zone = obj.zone;
+            this.story = obj.story;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
+            this.userData = obj.userData;
         }
     }
 

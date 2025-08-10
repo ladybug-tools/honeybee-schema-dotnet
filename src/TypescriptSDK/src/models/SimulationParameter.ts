@@ -95,6 +95,15 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(SimulationParameter, _data);
+            this.type = obj.type ?? "SimulationParameter";
+            this.output = obj.output;
+            this.runPeriod = obj.runPeriod;
+            this.timestep = obj.timestep ?? 6;
+            this.simulationControl = obj.simulationControl;
+            this.shadowCalculation = obj.shadowCalculation;
+            this.sizingParameter = obj.sizingParameter;
+            this.northAngle = obj.northAngle ?? 0;
+            this.terrainType = obj.terrainType ?? TerrianTypes.City;
         }
     }
 

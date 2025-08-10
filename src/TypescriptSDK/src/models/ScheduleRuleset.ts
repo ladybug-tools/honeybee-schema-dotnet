@@ -84,6 +84,17 @@ export class ScheduleRuleset extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(ScheduleRuleset, _data);
+            this.daySchedules = obj.daySchedules;
+            this.defaultDaySchedule = obj.defaultDaySchedule;
+            this.type = obj.type ?? "ScheduleRuleset";
+            this.scheduleRules = obj.scheduleRules;
+            this.holidaySchedule = obj.holidaySchedule;
+            this.summerDesigndaySchedule = obj.summerDesigndaySchedule;
+            this.winterDesigndaySchedule = obj.winterDesigndaySchedule;
+            this.scheduleTypeLimit = obj.scheduleTypeLimit;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

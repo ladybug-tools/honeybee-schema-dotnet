@@ -23,6 +23,7 @@ export class Void extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(Void, _data);
+            this.type = obj.type ?? "Void";
         }
     }
 

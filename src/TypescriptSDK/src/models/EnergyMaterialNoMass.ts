@@ -65,6 +65,15 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(EnergyMaterialNoMass, _data);
+            this.rValue = obj.rValue;
+            this.type = obj.type ?? "EnergyMaterialNoMass";
+            this.roughness = obj.roughness ?? Roughness.MediumRough;
+            this.thermalAbsorptance = obj.thermalAbsorptance ?? 0.9;
+            this.solarAbsorptance = obj.solarAbsorptance ?? 0.7;
+            this.visibleAbsorptance = obj.visibleAbsorptance ?? 0.7;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

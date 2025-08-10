@@ -122,6 +122,12 @@ export class DoorModifierSet extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(DoorModifierSet, _data);
+            this.exteriorModifier = obj.exteriorModifier;
+            this.interiorModifier = obj.interiorModifier;
+            this.interiorGlassModifier = obj.interiorGlassModifier;
+            this.exteriorGlassModifier = obj.exteriorGlassModifier;
+            this.overheadModifier = obj.overheadModifier;
+            this.type = obj.type ?? "DoorModifierSet";
         }
     }
 

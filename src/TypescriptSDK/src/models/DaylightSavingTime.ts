@@ -39,6 +39,9 @@ export class DaylightSavingTime extends DatedBaseModel {
 
         if (_data) {
             const obj = deepTransform(DaylightSavingTime, _data);
+            this.type = obj.type ?? "DaylightSavingTime";
+            this.startDate = obj.startDate ?? [3, 12];
+            this.endDate = obj.endDate ?? [11, 5];
         }
     }
 

@@ -175,6 +175,24 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(RoomEnergyPropertiesAbridged, _data);
+            this.type = obj.type ?? "RoomEnergyPropertiesAbridged";
+            this.constructionSet = obj.constructionSet;
+            this.programType = obj.programType;
+            this.hvac = obj.hvac;
+            this.shw = obj.shw;
+            this.people = obj.people;
+            this.lighting = obj.lighting;
+            this.electricEquipment = obj.electricEquipment;
+            this.gasEquipment = obj.gasEquipment;
+            this.serviceHotWater = obj.serviceHotWater;
+            this.infiltration = obj.infiltration;
+            this.ventilation = obj.ventilation;
+            this.setpoint = obj.setpoint;
+            this.daylightingControl = obj.daylightingControl;
+            this.windowVentControl = obj.windowVentControl;
+            this.fans = obj.fans;
+            this.internalMasses = obj.internalMasses;
+            this.processLoads = obj.processLoads;
         }
     }
 

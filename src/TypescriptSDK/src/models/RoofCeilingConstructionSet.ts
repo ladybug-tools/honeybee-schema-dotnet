@@ -48,6 +48,10 @@ export class RoofCeilingConstructionSet extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(RoofCeilingConstructionSet, _data);
+            this.interiorConstruction = obj.interiorConstruction;
+            this.exteriorConstruction = obj.exteriorConstruction;
+            this.groundConstruction = obj.groundConstruction;
+            this.type = obj.type ?? "RoofCeilingConstructionSet";
         }
     }
 

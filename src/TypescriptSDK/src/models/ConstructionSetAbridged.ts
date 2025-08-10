@@ -84,6 +84,17 @@ export class ConstructionSetAbridged extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(ConstructionSetAbridged, _data);
+            this.type = obj.type ?? "ConstructionSetAbridged";
+            this.wallSet = obj.wallSet;
+            this.floorSet = obj.floorSet;
+            this.roofCeilingSet = obj.roofCeilingSet;
+            this.apertureSet = obj.apertureSet;
+            this.doorSet = obj.doorSet;
+            this.shadeConstruction = obj.shadeConstruction;
+            this.airBoundaryConstruction = obj.airBoundaryConstruction;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

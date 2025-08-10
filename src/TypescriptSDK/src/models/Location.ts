@@ -70,6 +70,14 @@ export class Location extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(Location, _data);
+            this.type = obj.type ?? "Location";
+            this.city = obj.city ?? "-";
+            this.latitude = obj.latitude ?? 0;
+            this.longitude = obj.longitude ?? 0;
+            this.timeZone = obj.timeZone ?? new Autocalculate();
+            this.elevation = obj.elevation ?? 0;
+            this.stationId = obj.stationId;
+            this.source = obj.source;
         }
     }
 

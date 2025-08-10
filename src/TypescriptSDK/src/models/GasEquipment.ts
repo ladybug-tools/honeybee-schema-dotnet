@@ -70,6 +70,15 @@ export class GasEquipment extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(GasEquipment, _data);
+            this.wattsPerArea = obj.wattsPerArea;
+            this.schedule = obj.schedule;
+            this.radiantFraction = obj.radiantFraction ?? 0;
+            this.latentFraction = obj.latentFraction ?? 0;
+            this.lostFraction = obj.lostFraction ?? 0;
+            this.type = obj.type ?? "GasEquipment";
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

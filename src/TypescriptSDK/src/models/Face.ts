@@ -107,6 +107,18 @@ export class Face extends IDdBaseModel {
 
         if (_data) {
             const obj = deepTransform(Face, _data);
+            this.geometry = obj.geometry;
+            this.faceType = obj.faceType;
+            this.boundaryCondition = obj.boundaryCondition;
+            this.properties = obj.properties;
+            this.type = obj.type ?? "Face";
+            this.apertures = obj.apertures;
+            this.doors = obj.doors;
+            this.indoorShades = obj.indoorShades;
+            this.outdoorShades = obj.outdoorShades;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
+            this.userData = obj.userData;
         }
     }
 

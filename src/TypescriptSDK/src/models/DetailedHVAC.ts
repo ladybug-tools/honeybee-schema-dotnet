@@ -28,6 +28,11 @@ export class DetailedHVAC extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(DetailedHVAC, _data);
+            this.specification = obj.specification;
+            this.type = obj.type ?? "DetailedHVAC";
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

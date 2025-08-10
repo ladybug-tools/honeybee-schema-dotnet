@@ -23,6 +23,9 @@ export class ShadeModifierSetAbridged extends BaseModifierSetAbridged {
 
         if (_data) {
             const obj = deepTransform(ShadeModifierSetAbridged, _data);
+            this.type = obj.type ?? "ShadeModifierSetAbridged";
+            this.exteriorModifier = obj.exteriorModifier;
+            this.interiorModifier = obj.interiorModifier;
         }
     }
 

@@ -51,6 +51,11 @@ export class DeletedObject extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(DeletedObject, _data);
+            this.elementType = obj.elementType;
+            this.elementId = obj.elementId;
+            this.geometry = obj.geometry;
+            this.elementName = obj.elementName;
+            this.type = obj.type ?? "DeletedObject";
         }
     }
 

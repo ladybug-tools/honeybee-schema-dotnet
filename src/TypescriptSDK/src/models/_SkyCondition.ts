@@ -37,6 +37,9 @@ export class _SkyCondition extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(_SkyCondition, _data);
+            this.date = obj.date;
+            this.daylightSavings = obj.daylightSavings ?? false;
+            this.type = obj.type ?? "_SkyCondition";
         }
     }
 

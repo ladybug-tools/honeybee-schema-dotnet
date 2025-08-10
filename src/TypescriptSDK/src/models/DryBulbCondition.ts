@@ -38,6 +38,9 @@ export class DryBulbCondition extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(DryBulbCondition, _data);
+            this.dryBulbMax = obj.dryBulbMax;
+            this.dryBulbRange = obj.dryBulbRange;
+            this.type = obj.type ?? "DryBulbCondition";
         }
     }
 

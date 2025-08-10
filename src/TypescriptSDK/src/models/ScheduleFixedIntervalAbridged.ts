@@ -67,6 +67,16 @@ export class ScheduleFixedIntervalAbridged extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(ScheduleFixedIntervalAbridged, _data);
+            this.values = obj.values;
+            this.type = obj.type ?? "ScheduleFixedIntervalAbridged";
+            this.scheduleTypeLimit = obj.scheduleTypeLimit;
+            this.timestep = obj.timestep ?? 1;
+            this.startDate = obj.startDate ?? [1, 1];
+            this.placeholderValue = obj.placeholderValue ?? 0;
+            this.interpolate = obj.interpolate ?? false;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

@@ -58,6 +58,15 @@ export class SensorGrid extends _RadianceAsset {
 
         if (_data) {
             const obj = deepTransform(SensorGrid, _data);
+            this.sensors = obj.sensors;
+            this.type = obj.type ?? "SensorGrid";
+            this.mesh = obj.mesh;
+            this.baseGeometry = obj.baseGeometry;
+            this.groupIdentifier = obj.groupIdentifier;
+            this.roomIdentifier = obj.roomIdentifier;
+            this.lightPath = obj.lightPath;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

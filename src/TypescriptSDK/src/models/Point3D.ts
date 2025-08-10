@@ -39,6 +39,10 @@ export class Point3D {
 
         if (_data) {
             const obj = deepTransform(Point3D, _data);
+            this.x = obj.x;
+            this.y = obj.y;
+            this.z = obj.z;
+            this.type = obj.type ?? "Point3D";
         }
     }
 

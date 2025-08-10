@@ -68,6 +68,9 @@ export class RoofCeilingModifierSet extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(RoofCeilingModifierSet, _data);
+            this.exteriorModifier = obj.exteriorModifier;
+            this.interiorModifier = obj.interiorModifier;
+            this.type = obj.type ?? "RoofCeilingModifierSet";
         }
     }
 

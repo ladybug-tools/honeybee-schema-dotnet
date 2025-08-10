@@ -63,6 +63,13 @@ export class RoomDoe2Properties extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(RoomDoe2Properties, _data);
+            this.type = obj.type ?? "RoomDoe2Properties";
+            this.assignedFlow = obj.assignedFlow ?? new Autocalculate();
+            this.flowPerArea = obj.flowPerArea ?? new Autocalculate();
+            this.minFlowRatio = obj.minFlowRatio ?? new Autocalculate();
+            this.minFlowPerArea = obj.minFlowPerArea ?? new Autocalculate();
+            this.hmaxFlowRatio = obj.hmaxFlowRatio ?? new Autocalculate();
+            this.spacePolygonGeometry = obj.spacePolygonGeometry;
         }
     }
 

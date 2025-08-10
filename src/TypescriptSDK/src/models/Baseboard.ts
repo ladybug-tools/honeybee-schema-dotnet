@@ -41,6 +41,12 @@ export class Baseboard extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(Baseboard, _data);
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.type = obj.type ?? "Baseboard";
+            this.equipmentType = obj.equipmentType ?? BaseboardEquipmentType.ElectricBaseboard;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

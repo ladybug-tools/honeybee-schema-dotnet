@@ -43,6 +43,10 @@ export class ValidationParent {
 
         if (_data) {
             const obj = deepTransform(ValidationParent, _data);
+            this.parentType = obj.parentType;
+            this.id = obj.id;
+            this.type = obj.type ?? "ValidationParent";
+            this.name = obj.name;
         }
     }
 

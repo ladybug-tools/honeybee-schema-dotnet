@@ -58,6 +58,12 @@ export class SimulationControl extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(SimulationControl, _data);
+            this.type = obj.type ?? "SimulationControl";
+            this.doZoneSizing = obj.doZoneSizing ?? true;
+            this.doSystemSizing = obj.doSystemSizing ?? true;
+            this.doPlantSizing = obj.doPlantSizing ?? true;
+            this.runForRunPeriods = obj.runForRunPeriods ?? true;
+            this.runForSizingPeriods = obj.runForSizingPeriods ?? false;
         }
     }
 

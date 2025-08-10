@@ -41,6 +41,12 @@ export class DoorModifierSetAbridged extends BaseModifierSetAbridged {
 
         if (_data) {
             const obj = deepTransform(DoorModifierSetAbridged, _data);
+            this.type = obj.type ?? "DoorModifierSetAbridged";
+            this.interiorGlassModifier = obj.interiorGlassModifier;
+            this.exteriorGlassModifier = obj.exteriorGlassModifier;
+            this.overheadModifier = obj.overheadModifier;
+            this.exteriorModifier = obj.exteriorModifier;
+            this.interiorModifier = obj.interiorModifier;
         }
     }
 

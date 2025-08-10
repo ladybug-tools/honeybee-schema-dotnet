@@ -49,6 +49,10 @@ export class ModelProperties extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(ModelProperties, _data);
+            this.type = obj.type ?? "ModelProperties";
+            this.energy = obj.energy;
+            this.radiance = obj.radiance;
+            this.doe2 = obj.doe2;
         }
     }
 

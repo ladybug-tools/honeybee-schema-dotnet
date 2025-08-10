@@ -52,6 +52,10 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(SyncInstructions, _data);
+            this.type = obj.type ?? "SyncInstructions";
+            this.changedObjects = obj.changedObjects;
+            this.deletedObjects = obj.deletedObjects;
+            this.addedObjects = obj.addedObjects;
         }
     }
 

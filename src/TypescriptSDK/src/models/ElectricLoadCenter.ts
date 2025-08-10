@@ -38,6 +38,9 @@ export class ElectricLoadCenter extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(ElectricLoadCenter, _data);
+            this.type = obj.type ?? "ElectricLoadCenter";
+            this.inverterEfficiency = obj.inverterEfficiency ?? 0.96;
+            this.inverterDcToAcSizeRatio = obj.inverterDcToAcSizeRatio ?? 1.1;
         }
     }
 

@@ -41,6 +41,12 @@ export class PTAC extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(PTAC, _data);
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.type = obj.type ?? "PTAC";
+            this.equipmentType = obj.equipmentType ?? PTACEquipmentType.PTAC_ElectricBaseboard;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

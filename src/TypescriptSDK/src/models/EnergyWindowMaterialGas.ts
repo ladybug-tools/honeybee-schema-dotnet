@@ -39,6 +39,12 @@ export class EnergyWindowMaterialGas extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(EnergyWindowMaterialGas, _data);
+            this.type = obj.type ?? "EnergyWindowMaterialGas";
+            this.thickness = obj.thickness ?? 0.0125;
+            this.gasType = obj.gasType ?? GasType.Air;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

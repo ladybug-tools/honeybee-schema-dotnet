@@ -43,6 +43,13 @@ export class EnergyWindowMaterialSimpleGlazSys extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(EnergyWindowMaterialSimpleGlazSys, _data);
+            this.uFactor = obj.uFactor;
+            this.shgc = obj.shgc;
+            this.type = obj.type ?? "EnergyWindowMaterialSimpleGlazSys";
+            this.vt = obj.vt ?? 0.54;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

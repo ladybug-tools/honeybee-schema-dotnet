@@ -45,6 +45,10 @@ export class RadianceShadeStateAbridged extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(RadianceShadeStateAbridged, _data);
+            this.type = obj.type ?? "RadianceShadeStateAbridged";
+            this.modifier = obj.modifier;
+            this.modifierDirect = obj.modifierDirect;
+            this.shades = obj.shades;
         }
     }
 

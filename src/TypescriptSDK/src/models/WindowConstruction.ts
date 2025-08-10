@@ -51,6 +51,12 @@ export class WindowConstruction extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(WindowConstruction, _data);
+            this.materials = obj.materials;
+            this.type = obj.type ?? "WindowConstruction";
+            this.frame = obj.frame;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

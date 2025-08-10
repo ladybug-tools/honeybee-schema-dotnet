@@ -40,6 +40,9 @@ export class WindCondition extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(WindCondition, _data);
+            this.windSpeed = obj.windSpeed;
+            this.type = obj.type ?? "WindCondition";
+            this.windDirection = obj.windDirection ?? 0;
         }
     }
 

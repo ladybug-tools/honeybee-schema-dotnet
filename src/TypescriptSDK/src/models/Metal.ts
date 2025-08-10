@@ -113,6 +113,16 @@ export class Metal extends ModifierBase {
 
         if (_data) {
             const obj = deepTransform(Metal, _data);
+            this.modifier = obj.modifier ?? new Void();
+            this.dependencies = obj.dependencies;
+            this.rReflectance = obj.rReflectance ?? 0;
+            this.gReflectance = obj.gReflectance ?? 0;
+            this.bReflectance = obj.bReflectance ?? 0;
+            this.specularity = obj.specularity ?? 0.9;
+            this.roughness = obj.roughness ?? 0;
+            this.type = obj.type ?? "Metal";
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

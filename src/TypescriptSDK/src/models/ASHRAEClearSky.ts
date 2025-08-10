@@ -31,6 +31,10 @@ export class ASHRAEClearSky extends _SkyCondition {
 
         if (_data) {
             const obj = deepTransform(ASHRAEClearSky, _data);
+            this.clearness = obj.clearness;
+            this.type = obj.type ?? "ASHRAEClearSky";
+            this.date = obj.date;
+            this.daylightSavings = obj.daylightSavings ?? false;
         }
     }
 

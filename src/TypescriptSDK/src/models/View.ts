@@ -97,6 +97,22 @@ export class View extends _RadianceAsset {
 
         if (_data) {
             const obj = deepTransform(View, _data);
+            this.position = obj.position;
+            this.direction = obj.direction;
+            this.upVector = obj.upVector;
+            this.type = obj.type ?? "View";
+            this.viewType = obj.viewType ?? ViewType.V;
+            this.hSize = obj.hSize ?? 60;
+            this.vSize = obj.vSize ?? 60;
+            this.shift = obj.shift;
+            this.lift = obj.lift;
+            this.foreClip = obj.foreClip;
+            this.aftClip = obj.aftClip;
+            this.groupIdentifier = obj.groupIdentifier;
+            this.roomIdentifier = obj.roomIdentifier;
+            this.lightPath = obj.lightPath;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

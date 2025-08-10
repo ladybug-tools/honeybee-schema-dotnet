@@ -49,6 +49,10 @@ export class RoomPropertiesAbridged extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(RoomPropertiesAbridged, _data);
+            this.type = obj.type ?? "RoomPropertiesAbridged";
+            this.energy = obj.energy;
+            this.radiance = obj.radiance;
+            this.doe2 = obj.doe2;
         }
     }
 

@@ -23,6 +23,9 @@ export class FloorModifierSetAbridged extends BaseModifierSetAbridged {
 
         if (_data) {
             const obj = deepTransform(FloorModifierSetAbridged, _data);
+            this.type = obj.type ?? "FloorModifierSetAbridged";
+            this.exteriorModifier = obj.exteriorModifier;
+            this.interiorModifier = obj.interiorModifier;
         }
     }
 

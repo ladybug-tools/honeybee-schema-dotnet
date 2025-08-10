@@ -23,6 +23,7 @@ export class Ground extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(Ground, _data);
+            this.type = obj.type ?? "Ground";
         }
     }
 

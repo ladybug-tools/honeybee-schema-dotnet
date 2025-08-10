@@ -11,7 +11,7 @@ export class _DiffObjectBase extends _OpenAPIGenBaseModel {
     @Expose({ name: "element_type" })
     /** Text for the type of object that has been changed. */
     elementType!: GeometryObjectTypes;
-
+	
     @IsString()
     @IsDefined()
     @Matches(/^[^,;!\n\t]+$/)
@@ -20,22 +20,22 @@ export class _DiffObjectBase extends _OpenAPIGenBaseModel {
     @Expose({ name: "element_id" })
     /** Text string for the unique object ID that has changed. */
     elementId!: string;
-
+	
     @IsString()
     @IsOptional()
     @Expose({ name: "element_name" })
     /** Text string for the display name of the object that has changed. */
     elementName?: string;
-
+	
     @IsString()
     @IsOptional()
     @Matches(/^_DiffObjectBase$/)
     @Expose({ name: "type" })
     /** type */
     type: string = "_DiffObjectBase";
+	
 
-
-    constructor () {
+    constructor() {
         super();
         this.type = "_DiffObjectBase";
     }
@@ -45,6 +45,10 @@ export class _DiffObjectBase extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(_DiffObjectBase, _data);
+            this.elementType = obj.elementType;
+            this.elementId = obj.elementId;
+            this.elementName = obj.elementName;
+            this.type = obj.type ?? "_DiffObjectBase";
         }
     }
 
@@ -53,7 +57,7 @@ export class _DiffObjectBase extends _OpenAPIGenBaseModel {
         data = typeof data === 'object' ? data : {};
 
         if (Array.isArray(data)) {
-            const obj: any = {};
+            const obj:any = {};
             for (var property in data) {
                 obj[property] = data[property];
             }
@@ -64,7 +68,7 @@ export class _DiffObjectBase extends _OpenAPIGenBaseModel {
         return result;
     }
 
-    override toJSON(data?: any) {
+	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["element_type"] = this.elementType;
         data["element_id"] = this.elementId;
@@ -74,12 +78,12 @@ export class _DiffObjectBase extends _OpenAPIGenBaseModel {
         return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
-    async validate(): Promise<boolean> {
+	async validate(): Promise<boolean> {
         const errors = await validate(this);
-        if (errors.length > 0) {
-            const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error]).join(', ')).join('; ');
-            throw new Error(`Validation failed: ${errorMessages}`);
-        }
+        if (errors.length > 0){
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error]).join(', ')).join('; ');
+      		throw new Error(`Validation failed: ${errorMessages}`);
+		}
         return true;
     }
 }

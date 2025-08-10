@@ -77,6 +77,15 @@ export class Setpoint extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(Setpoint, _data);
+            this.coolingSchedule = obj.coolingSchedule;
+            this.heatingSchedule = obj.heatingSchedule;
+            this.type = obj.type ?? "Setpoint";
+            this.humidifyingSchedule = obj.humidifyingSchedule;
+            this.dehumidifyingSchedule = obj.dehumidifyingSchedule;
+            this.setpointCutoutDifference = obj.setpointCutoutDifference ?? 0;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

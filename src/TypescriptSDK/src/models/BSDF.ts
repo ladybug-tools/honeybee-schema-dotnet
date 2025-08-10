@@ -127,6 +127,19 @@ export class BSDF extends ModifierBase {
 
         if (_data) {
             const obj = deepTransform(BSDF, _data);
+            this.bsdfData = obj.bsdfData;
+            this.modifier = obj.modifier ?? new Void();
+            this.dependencies = obj.dependencies;
+            this.upOrientation = obj.upOrientation ?? [0.01, 0.01, 1];
+            this.thickness = obj.thickness ?? 0;
+            this.functionFile = obj.functionFile ?? ".";
+            this.transform = obj.transform;
+            this.frontDiffuseReflectance = obj.frontDiffuseReflectance;
+            this.backDiffuseReflectance = obj.backDiffuseReflectance;
+            this.diffuseTransmittance = obj.diffuseTransmittance;
+            this.type = obj.type ?? "BSDF";
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

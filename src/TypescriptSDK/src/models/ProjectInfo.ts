@@ -74,6 +74,13 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(ProjectInfo, _data);
+            this.type = obj.type ?? "ProjectInfo";
+            this.north = obj.north ?? 0;
+            this.weatherUrls = obj.weatherUrls;
+            this.location = obj.location;
+            this.ashraeClimateZone = obj.ashraeClimateZone;
+            this.buildingType = obj.buildingType;
+            this.vintage = obj.vintage;
         }
     }
 

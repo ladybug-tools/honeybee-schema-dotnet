@@ -23,6 +23,7 @@ export class Adiabatic extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(Adiabatic, _data);
+            this.type = obj.type ?? "Adiabatic";
         }
     }
 

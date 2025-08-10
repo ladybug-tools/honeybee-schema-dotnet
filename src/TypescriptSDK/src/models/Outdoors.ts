@@ -44,6 +44,10 @@ export class Outdoors extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(Outdoors, _data);
+            this.type = obj.type ?? "Outdoors";
+            this.sunExposure = obj.sunExposure ?? true;
+            this.windExposure = obj.windExposure ?? true;
+            this.viewFactor = obj.viewFactor ?? new Autocalculate();
         }
     }
 

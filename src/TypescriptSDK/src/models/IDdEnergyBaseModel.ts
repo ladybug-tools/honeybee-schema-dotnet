@@ -28,6 +28,10 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(IDdEnergyBaseModel, _data);
+            this.userData = obj.userData;
+            this.type = obj.type ?? "IDdEnergyBaseModel";
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

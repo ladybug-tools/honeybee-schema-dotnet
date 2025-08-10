@@ -52,6 +52,10 @@ export class ComparisonReport extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(ComparisonReport, _data);
+            this.type = obj.type ?? "ComparisonReport";
+            this.changedObjects = obj.changedObjects;
+            this.deletedObjects = obj.deletedObjects;
+            this.addedObjects = obj.addedObjects;
         }
     }
 

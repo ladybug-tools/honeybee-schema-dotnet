@@ -48,6 +48,13 @@ export class ShadeConstruction extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(ShadeConstruction, _data);
+            this.type = obj.type ?? "ShadeConstruction";
+            this.solarReflectance = obj.solarReflectance ?? 0.2;
+            this.visibleReflectance = obj.visibleReflectance ?? 0.2;
+            this.isSpecular = obj.isSpecular ?? false;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

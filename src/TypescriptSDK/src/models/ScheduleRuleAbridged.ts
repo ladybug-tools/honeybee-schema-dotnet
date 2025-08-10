@@ -96,6 +96,17 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
 
         if (_data) {
             const obj = deepTransform(ScheduleRuleAbridged, _data);
+            this.scheduleDay = obj.scheduleDay;
+            this.type = obj.type ?? "ScheduleRuleAbridged";
+            this.applySunday = obj.applySunday ?? false;
+            this.applyMonday = obj.applyMonday ?? false;
+            this.applyTuesday = obj.applyTuesday ?? false;
+            this.applyWednesday = obj.applyWednesday ?? false;
+            this.applyThursday = obj.applyThursday ?? false;
+            this.applyFriday = obj.applyFriday ?? false;
+            this.applySaturday = obj.applySaturday ?? false;
+            this.startDate = obj.startDate ?? [1, 1];
+            this.endDate = obj.endDate ?? [12, 31];
         }
     }
 

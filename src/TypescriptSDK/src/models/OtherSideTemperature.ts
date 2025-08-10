@@ -38,6 +38,9 @@ export class OtherSideTemperature extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(OtherSideTemperature, _data);
+            this.type = obj.type ?? "OtherSideTemperature";
+            this.heatTransferCoefficient = obj.heatTransferCoefficient ?? 0;
+            this.temperature = obj.temperature ?? new Autocalculate();
         }
     }
 

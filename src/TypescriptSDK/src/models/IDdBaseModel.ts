@@ -43,6 +43,10 @@ export class IDdBaseModel extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(IDdBaseModel, _data);
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
+            this.userData = obj.userData;
+            this.type = obj.type ?? "IDdBaseModel";
         }
     }
 

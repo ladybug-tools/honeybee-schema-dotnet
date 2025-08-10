@@ -39,6 +39,11 @@ export class DoorRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
 
         if (_data) {
             const obj = deepTransform(DoorRadiancePropertiesAbridged, _data);
+            this.type = obj.type ?? "DoorRadiancePropertiesAbridged";
+            this.dynamicGroupIdentifier = obj.dynamicGroupIdentifier;
+            this.states = obj.states;
+            this.modifier = obj.modifier;
+            this.modifierBlk = obj.modifierBlk;
         }
     }
 

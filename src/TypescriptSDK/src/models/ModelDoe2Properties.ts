@@ -23,6 +23,7 @@ export class ModelDoe2Properties extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(ModelDoe2Properties, _data);
+            this.type = obj.type ?? "ModelDoe2Properties";
         }
     }
 

@@ -102,6 +102,15 @@ export class Glow extends ModifierBase {
 
         if (_data) {
             const obj = deepTransform(Glow, _data);
+            this.modifier = obj.modifier ?? new Void();
+            this.dependencies = obj.dependencies;
+            this.rEmittance = obj.rEmittance ?? 0;
+            this.gEmittance = obj.gEmittance ?? 0;
+            this.bEmittance = obj.bEmittance ?? 0;
+            this.maxRadius = obj.maxRadius ?? 0;
+            this.type = obj.type ?? "Glow";
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

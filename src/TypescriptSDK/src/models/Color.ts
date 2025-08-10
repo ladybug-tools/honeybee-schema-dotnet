@@ -56,6 +56,11 @@ export class Color extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(Color, _data);
+            this.r = obj.r;
+            this.g = obj.g;
+            this.b = obj.b;
+            this.type = obj.type ?? "Color";
+            this.a = obj.a ?? 255;
         }
     }
 

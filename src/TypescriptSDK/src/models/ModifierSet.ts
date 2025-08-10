@@ -104,6 +104,16 @@ export class ModifierSet extends IDdRadianceBaseModel {
 
         if (_data) {
             const obj = deepTransform(ModifierSet, _data);
+            this.type = obj.type ?? "ModifierSet";
+            this.wallSet = obj.wallSet;
+            this.floorSet = obj.floorSet;
+            this.roofCeilingSet = obj.roofCeilingSet;
+            this.apertureSet = obj.apertureSet;
+            this.doorSet = obj.doorSet;
+            this.shadeSet = obj.shadeSet;
+            this.airBoundaryModifier = obj.airBoundaryModifier;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

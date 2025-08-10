@@ -48,6 +48,10 @@ export class ShadeEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(ShadeEnergyPropertiesAbridged, _data);
+            this.type = obj.type ?? "ShadeEnergyPropertiesAbridged";
+            this.construction = obj.construction;
+            this.transmittanceSchedule = obj.transmittanceSchedule;
+            this.pvProperties = obj.pvProperties;
         }
     }
 

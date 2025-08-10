@@ -72,6 +72,13 @@ export class RunPeriod extends DatedBaseModel {
 
         if (_data) {
             const obj = deepTransform(RunPeriod, _data);
+            this.type = obj.type ?? "RunPeriod";
+            this.startDate = obj.startDate ?? [1, 1];
+            this.endDate = obj.endDate ?? [12, 31];
+            this.startDayOfWeek = obj.startDayOfWeek ?? DaysOfWeek.Sunday;
+            this.holidays = obj.holidays;
+            this.daylightSavingTime = obj.daylightSavingTime;
+            this.leapYear = obj.leapYear ?? false;
         }
     }
 

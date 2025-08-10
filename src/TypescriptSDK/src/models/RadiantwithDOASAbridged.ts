@@ -97,6 +97,19 @@ export class RadiantwithDOASAbridged extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(RadiantwithDOASAbridged, _data);
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
+            this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
+            this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
+            this.demandControlledVentilation = obj.demandControlledVentilation ?? false;
+            this.doasAvailabilitySchedule = obj.doasAvailabilitySchedule;
+            this.type = obj.type ?? "RadiantwithDOASAbridged";
+            this.equipmentType = obj.equipmentType ?? RadiantwithDOASEquipmentType.DOAS_Radiant_Chiller_Boiler;
+            this.radiantFaceType = obj.radiantFaceType ?? RadiantFaceTypes.Floor;
+            this.minimumOperationTime = obj.minimumOperationTime ?? 1;
+            this.switchOverTime = obj.switchOverTime ?? 24;
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

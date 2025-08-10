@@ -66,6 +66,13 @@ export class ChangedInstruction extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(ChangedInstruction, _data);
+            this.elementType = obj.elementType;
+            this.elementId = obj.elementId;
+            this.elementName = obj.elementName;
+            this.updateGeometry = obj.updateGeometry ?? true;
+            this.updateEnergy = obj.updateEnergy ?? true;
+            this.updateRadiance = obj.updateRadiance ?? true;
+            this.type = obj.type ?? "ChangedInstruction";
         }
     }
 

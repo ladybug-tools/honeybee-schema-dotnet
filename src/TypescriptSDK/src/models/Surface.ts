@@ -30,6 +30,8 @@ export class Surface extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(Surface, _data);
+            this.boundaryConditionObjects = obj.boundaryConditionObjects;
+            this.type = obj.type ?? "Surface";
         }
     }
 

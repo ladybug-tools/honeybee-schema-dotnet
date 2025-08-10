@@ -65,6 +65,14 @@ export class PVProperties extends EnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(PVProperties, _data);
+            this.type = obj.type ?? "PVProperties";
+            this.ratedEfficiency = obj.ratedEfficiency ?? 0.15;
+            this.activeAreaFraction = obj.activeAreaFraction ?? 0.9;
+            this.moduleType = obj.moduleType ?? ModuleType.Standard;
+            this.mountingType = obj.mountingType ?? MountingType.FixedOpenRack;
+            this.systemLossFraction = obj.systemLossFraction ?? 0.14;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 

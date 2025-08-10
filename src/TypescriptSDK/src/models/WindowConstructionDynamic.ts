@@ -46,6 +46,12 @@ export class WindowConstructionDynamic extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(WindowConstructionDynamic, _data);
+            this.constructions = obj.constructions;
+            this.schedule = obj.schedule;
+            this.type = obj.type ?? "WindowConstructionDynamic";
+            this.userData = obj.userData;
+            this.identifier = obj.identifier;
+            this.displayName = obj.displayName;
         }
     }
 
