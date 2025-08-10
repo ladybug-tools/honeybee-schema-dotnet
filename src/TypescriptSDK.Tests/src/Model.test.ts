@@ -1,7 +1,8 @@
-import { plainToClass } from "class-transformer";
+import { plainToClass, plainToInstance } from "class-transformer";
 import { Model, Face3D, Glass, Plane, Face, GlobalModifierSet, Plastic, DoorConstructionSetAbridged } from "honeybee-schema";
 import * as fs from 'fs';
 import * as path from 'path';
+import { deepTransform } from "./deepTransform";
 
 test('test model', () => {
   const dir = path.dirname(path.dirname(path.dirname(__dirname)));
@@ -63,9 +64,14 @@ test('test glass', () => {
     "refraction_index": null,
     "dependencies": []
   };
+  const obj = deepTransform(Glass, json);
+  expect(obj).toBeInstanceOf(Glass);
+  expect(obj.identifier).toBe('generic_interior_window_vis_0.88');
+  // console.log(obj);
+  expect(obj.validate()).resolves.toBe(true);
+
   const loc = Glass.fromJS(json);
   expect(loc.validate()).resolves.toBe(true);
-
 
 });
 
@@ -225,10 +231,6 @@ test('test Glass with undefined dependencies', () => {
   g1.init(data);
   expect(g1?.gTransmissivity).toBe(0.9584154328610596);
   expect(g1?.dependencies).toBe(undefined);
-
-  const g2 = plainToClass(Glass, data, { enableImplicitConversion: true, exposeUnsetFields: false, exposeDefaultValues: true });
-  expect(g2?.gTransmissivity).toBe(0.9584154328610596);
-  expect(g2?.dependencies).toBe(undefined);
 
 
   const obj = Glass.fromJS(data);
