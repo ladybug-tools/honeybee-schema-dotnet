@@ -77,6 +77,8 @@ namespace HoneybeeSchema
         [Summary(@"Material modifier.")]
         [DataMember(Name = "modifier")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("modifier")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> Modifier { get; set; } = new Void();
 
         /// <summary>
@@ -120,6 +122,8 @@ namespace HoneybeeSchema
         [Summary(@"An optional material (like the illum type) that may be used to specify a different material to be used for shading non-source rays. If None, this will keep the alternat_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance.")]
         [DataMember(Name = "alternate_material")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("alternate_material")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> AlternateMaterial { get; set; }
 
 

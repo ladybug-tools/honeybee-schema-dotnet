@@ -87,6 +87,8 @@ namespace HoneybeeSchema
         [Required]
         [DataMember(Name = "occupancy_schedule", IsRequired = true)] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("occupancy_schedule")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<ScheduleRuleset, ScheduleFixedInterval> OccupancySchedule { get; set; }
 
         /// <summary>
@@ -95,6 +97,8 @@ namespace HoneybeeSchema
         [Summary(@"A schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated.")]
         [DataMember(Name = "activity_schedule")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("activity_schedule")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<ScheduleRuleset, ScheduleFixedInterval> ActivitySchedule { get; set; }
 
         /// <summary>
@@ -112,6 +116,8 @@ namespace HoneybeeSchema
         [Summary(@"Number for the latent fraction of heat gain due to people or an Autocalculate object.")]
         [DataMember(Name = "latent_fraction")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("latent_fraction")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Autocalculate, double> LatentFraction { get; set; } = new Autocalculate();
 
 

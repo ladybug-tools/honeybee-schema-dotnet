@@ -88,6 +88,8 @@ namespace HoneybeeSchema
         [Required]
         [DataMember(Name = "boundary_condition", IsRequired = true)] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("boundary_condition")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Outdoors, Surface> BoundaryCondition { get; set; }
 
         /// <summary>

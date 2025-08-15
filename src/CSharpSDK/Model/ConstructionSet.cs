@@ -128,6 +128,8 @@ namespace HoneybeeSchema
         [Summary(@"An AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type.")]
         [DataMember(Name = "air_boundary_construction")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("air_boundary_construction")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<AirBoundaryConstruction, OpaqueConstruction> AirBoundaryConstruction { get; set; }
 
 

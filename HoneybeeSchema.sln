@@ -1,3 +1,4 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34916.146
@@ -5,6 +6,8 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HoneybeeSchema", "src\CSharpSDK\HoneybeeSchema.csproj", "{3CA952A3-B5AE-43BF-8AD3-FB6B872145AB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HoneybeeSchema.Tests", "src\CSharpSDK.Tests\HoneybeeSchema.Tests.csproj", "{5990E699-A83E-41F7-93B7-2B3CC0F908D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator", ".generator\SchemaGenerator\Generator.csproj", "{2DF1AF44-FA64-35CF-AC12-A4A0B0036168}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +23,10 @@ Global
 		{5990E699-A83E-41F7-93B7-2B3CC0F908D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5990E699-A83E-41F7-93B7-2B3CC0F908D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5990E699-A83E-41F7-93B7-2B3CC0F908D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DF1AF44-FA64-35CF-AC12-A4A0B0036168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DF1AF44-FA64-35CF-AC12-A4A0B0036168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DF1AF44-FA64-35CF-AC12-A4A0B0036168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DF1AF44-FA64-35CF-AC12-A4A0B0036168}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

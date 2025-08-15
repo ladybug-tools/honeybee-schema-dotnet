@@ -79,6 +79,8 @@ namespace HoneybeeSchema
         [Summary(@"A fractional schedule as a ScheduleRuleset or ScheduleFixedInterval for the air mixing schedule across the construction. If unspecified, an Always On schedule will be assumed.")]
         [DataMember(Name = "air_mixing_schedule")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("air_mixing_schedule")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<ScheduleRuleset, ScheduleFixedInterval> AirMixingSchedule { get; set; }
 
 

@@ -73,6 +73,8 @@ namespace HoneybeeSchema
         [Summary(@"Lower limit for the schedule type or NoLimit.")]
         [DataMember(Name = "lower_limit")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("lower_limit")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<NoLimit, double> LowerLimit { get; set; } = new NoLimit();
 
         /// <summary>
@@ -81,6 +83,8 @@ namespace HoneybeeSchema
         [Summary(@"Upper limit for the schedule type or NoLimit.")]
         [DataMember(Name = "upper_limit")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("upper_limit")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<NoLimit, double> UpperLimit { get; set; } = new NoLimit();
 
         /// <summary>

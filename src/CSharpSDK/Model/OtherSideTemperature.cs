@@ -76,6 +76,8 @@ namespace HoneybeeSchema
         [Summary(@"A temperature value in Celsius to note the temperature on the other side of the object. This input can also be an Autocalculate object to signify that the temperature is equal to the outdoor air temperature.")]
         [DataMember(Name = "temperature")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("temperature")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Autocalculate, double> Temperature { get; set; } = new Autocalculate();
 
 

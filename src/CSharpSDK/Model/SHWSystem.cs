@@ -82,6 +82,8 @@ namespace HoneybeeSchema
         [Summary(@"A number for the efficiency of the heater within the system. For Gas systems, this is the efficiency of the burner. For HeatPump systems, this is the rated COP of the system. For electric systems, this should usually be set to 1. If set to Autocalculate, this value will automatically be set based on the equipment_type. Gas_WaterHeater - 0.8, Electric_WaterHeater - 1.0, HeatPump_WaterHeater - 3.5, Gas_TanklessHeater - 0.8, Electric_TanklessHeater - 1.0.")]
         [DataMember(Name = "heater_efficiency")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("heater_efficiency")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<double, Autocalculate> HeaterEfficiency { get; set; } = new Autocalculate();
 
         /// <summary>
@@ -90,6 +92,8 @@ namespace HoneybeeSchema
         [Summary(@"A number for the ambient temperature in which the hot water tank is located [C]. This can also be the identifier of a Room in which the tank is located.")]
         [DataMember(Name = "ambient_condition")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("ambient_condition")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<double, string> AmbientCondition { get; set; } = 22;
 
         /// <summary>

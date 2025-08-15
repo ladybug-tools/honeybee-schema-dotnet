@@ -71,6 +71,8 @@ namespace HoneybeeSchema
         [Summary(@"A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and Wall parent Face.")]
         [DataMember(Name = "window_modifier")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("window_modifier")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> WindowModifier { get; set; }
 
         /// <summary>
@@ -79,6 +81,8 @@ namespace HoneybeeSchema
         [Summary(@"A modifier object for apertures with a Surface boundary condition.")]
         [DataMember(Name = "interior_modifier")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("interior_modifier")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> InteriorModifier { get; set; }
 
         /// <summary>
@@ -87,6 +91,8 @@ namespace HoneybeeSchema
         [Summary(@"A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.")]
         [DataMember(Name = "skylight_modifier")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("skylight_modifier")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> SkylightModifier { get; set; }
 
         /// <summary>
@@ -95,6 +101,8 @@ namespace HoneybeeSchema
         [Summary(@"A modifier object for apertures with an Outdoors boundary condition and a True is_operable property.")]
         [DataMember(Name = "operable_modifier")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("operable_modifier")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> OperableModifier { get; set; }
 
 

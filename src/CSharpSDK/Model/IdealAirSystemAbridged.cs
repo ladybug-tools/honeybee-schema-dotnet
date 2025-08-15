@@ -136,6 +136,8 @@ namespace HoneybeeSchema
         [Summary(@"A number for the maximum heating capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the heating capacity.")]
         [DataMember(Name = "heating_limit")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("heating_limit")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Autosize, NoLimit, double> HeatingLimit { get; set; } = new Autosize();
 
         /// <summary>
@@ -144,6 +146,8 @@ namespace HoneybeeSchema
         [Summary(@"A number for the maximum cooling capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the cooling capacity.")]
         [DataMember(Name = "cooling_limit")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("cooling_limit")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Autosize, NoLimit, double> CoolingLimit { get; set; } = new Autosize();
 
         /// <summary>

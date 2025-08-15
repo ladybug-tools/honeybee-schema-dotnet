@@ -77,6 +77,8 @@ namespace HoneybeeSchema
         [Summary(@"Material modifier.")]
         [DataMember(Name = "modifier")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("modifier")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> Modifier { get; set; } = new Void();
 
         /// <summary>
