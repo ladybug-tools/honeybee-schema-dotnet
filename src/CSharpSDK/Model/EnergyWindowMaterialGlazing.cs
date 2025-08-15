@@ -118,6 +118,8 @@ namespace HoneybeeSchema
         [Summary(@"Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum.")]
         [DataMember(Name = "solar_reflectance_back")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("solar_reflectance_back")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Autocalculate, double> SolarReflectanceBack { get; set; } = new Autocalculate();
 
         /// <summary>
@@ -144,6 +146,8 @@ namespace HoneybeeSchema
         [Summary(@"Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye.")]
         [DataMember(Name = "visible_reflectance_back")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("visible_reflectance_back")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Autocalculate, double> VisibleReflectanceBack { get; set; } = new Autocalculate();
 
         /// <summary>

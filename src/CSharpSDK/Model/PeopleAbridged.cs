@@ -116,6 +116,8 @@ namespace HoneybeeSchema
         [Summary(@"Number for the latent fraction of heat gain due to people or an Autocalculate object.")]
         [DataMember(Name = "latent_fraction")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("latent_fraction")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Autocalculate, double> LatentFraction { get; set; } = new Autocalculate();
 
 

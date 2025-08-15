@@ -87,6 +87,8 @@ namespace HoneybeeSchema
         [Required]
         [DataMember(Name = "schedule", IsRequired = true)] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<ScheduleRuleset, ScheduleFixedInterval> Schedule { get; set; }
 
         /// <summary>

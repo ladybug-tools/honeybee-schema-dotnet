@@ -73,6 +73,8 @@ namespace HoneybeeSchema
         [Summary(@"A radiance modifier object for faces with an Outdoors boundary condition.")]
         [DataMember(Name = "exterior_modifier")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("exterior_modifier")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> ExteriorModifier { get; set; }
 
         /// <summary>
@@ -81,6 +83,8 @@ namespace HoneybeeSchema
         [Summary(@"A radiance modifier object for faces with a boundary condition other than Outdoors.")]
         [DataMember(Name = "interior_modifier")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("interior_modifier")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> InteriorModifier { get; set; }
 
         /// <summary>
@@ -89,6 +93,8 @@ namespace HoneybeeSchema
         [Summary(@"A modifier object for glass with a Surface boundary condition.")]
         [DataMember(Name = "interior_glass_modifier")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("interior_glass_modifier")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> InteriorGlassModifier { get; set; }
 
         /// <summary>
@@ -97,6 +103,8 @@ namespace HoneybeeSchema
         [Summary(@"A modifier object for glass with an Outdoors boundary condition.")]
         [DataMember(Name = "exterior_glass_modifier")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("exterior_glass_modifier")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> ExteriorGlassModifier { get; set; }
 
         /// <summary>
@@ -105,6 +113,8 @@ namespace HoneybeeSchema
         [Summary(@"A window modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face.")]
         [DataMember(Name = "overhead_modifier")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("overhead_modifier")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> OverheadModifier { get; set; }
 
 

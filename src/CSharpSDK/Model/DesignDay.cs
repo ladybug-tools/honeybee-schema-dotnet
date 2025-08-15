@@ -123,6 +123,8 @@ namespace HoneybeeSchema
         [Required]
         [DataMember(Name = "sky_condition", IsRequired = true)] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("sky_condition")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<ASHRAEClearSky, ASHRAETau> SkyCondition { get; set; }
 
 

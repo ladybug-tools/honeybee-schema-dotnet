@@ -85,6 +85,8 @@ namespace HoneybeeSchema
         [Summary(@"A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated.")]
         [DataMember(Name = "view_factor")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("view_factor")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Autocalculate, double> ViewFactor { get; set; } = new Autocalculate();
 
 

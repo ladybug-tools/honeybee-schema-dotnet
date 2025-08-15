@@ -127,6 +127,8 @@ namespace HoneybeeSchema
         [Summary(@"An optional Modifier to be used for all Faces with an AirBoundary face type. If None, it will be the honeybee generic air wall modifier.")]
         [DataMember(Name = "air_boundary_modifier")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("air_boundary_modifier")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> AirBoundaryModifier { get; set; }
 
 

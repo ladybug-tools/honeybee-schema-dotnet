@@ -77,6 +77,8 @@ namespace HoneybeeSchema
         [Required]
         [DataMember(Name = "cooling_schedule", IsRequired = true)] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("cooling_schedule")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<ScheduleRuleset, ScheduleFixedInterval> CoolingSchedule { get; set; }
 
         /// <summary>
@@ -86,6 +88,8 @@ namespace HoneybeeSchema
         [Required]
         [DataMember(Name = "heating_schedule", IsRequired = true)] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("heating_schedule")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<ScheduleRuleset, ScheduleFixedInterval> HeatingSchedule { get; set; }
 
         /// <summary>
@@ -94,6 +98,8 @@ namespace HoneybeeSchema
         [Summary(@"Schedule for the humidification setpoint. The values in this schedule should be in [%].")]
         [DataMember(Name = "humidifying_schedule")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("humidifying_schedule")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<ScheduleRuleset, ScheduleFixedInterval> HumidifyingSchedule { get; set; }
 
         /// <summary>
@@ -102,6 +108,8 @@ namespace HoneybeeSchema
         [Summary(@"Schedule for the dehumidification setpoint. The values in this schedule should be in [%].")]
         [DataMember(Name = "dehumidifying_schedule")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("dehumidifying_schedule")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<ScheduleRuleset, ScheduleFixedInterval> DehumidifyingSchedule { get; set; }
 
         /// <summary>

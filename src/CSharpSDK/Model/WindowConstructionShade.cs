@@ -88,6 +88,8 @@ namespace HoneybeeSchema
         [Required]
         [DataMember(Name = "shade_material", IsRequired = true)] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("shade_material")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<EnergyWindowMaterialShade, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing> ShadeMaterial { get; set; }
 
         /// <summary>
@@ -120,6 +122,8 @@ namespace HoneybeeSchema
         [Summary(@"An optional ScheduleRuleset or ScheduleFixedInterval to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction.")]
         [DataMember(Name = "schedule")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<ScheduleRuleset, ScheduleFixedInterval> Schedule { get; set; }
 
 

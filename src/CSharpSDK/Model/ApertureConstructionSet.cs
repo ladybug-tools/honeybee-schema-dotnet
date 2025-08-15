@@ -71,6 +71,8 @@ namespace HoneybeeSchema
         [Summary(@"A WindowConstruction for all apertures with a Surface boundary condition.")]
         [DataMember(Name = "interior_construction")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("interior_construction")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<WindowConstruction, WindowConstructionShade, WindowConstructionDynamic> InteriorConstruction { get; set; }
 
         /// <summary>
@@ -79,6 +81,8 @@ namespace HoneybeeSchema
         [Summary(@"A WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.")]
         [DataMember(Name = "window_construction")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("window_construction")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<WindowConstruction, WindowConstructionShade, WindowConstructionDynamic> WindowConstruction { get; set; }
 
         /// <summary>
@@ -87,6 +91,8 @@ namespace HoneybeeSchema
         [Summary(@"A WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.")]
         [DataMember(Name = "skylight_construction")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("skylight_construction")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<WindowConstruction, WindowConstructionShade, WindowConstructionDynamic> SkylightConstruction { get; set; }
 
         /// <summary>
@@ -95,6 +101,8 @@ namespace HoneybeeSchema
         [Summary(@"A WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property.")]
         [DataMember(Name = "operable_construction")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("operable_construction")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<WindowConstruction, WindowConstructionShade, WindowConstructionDynamic> OperableConstruction { get; set; }
 
 

@@ -112,6 +112,8 @@ namespace HoneybeeSchema
         [Summary(@"Schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.")]
         [DataMember(Name = "schedule")] // For Newtonsoft.Json
         [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
+        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
         public AnyOf<ScheduleRuleset, ScheduleFixedInterval> Schedule { get; set; }
 
 
