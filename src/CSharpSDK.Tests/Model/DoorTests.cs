@@ -1,11 +1,12 @@
 
 
-using NUnit.Framework;
-
-using System;
-using System.Linq;
-using System.Collections.Generic;
 using HoneybeeSchema;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace HoneybeeSchema.Test
 {
@@ -264,6 +265,20 @@ namespace HoneybeeSchema.Test
             var dic = dup.GetUserData();
             Assert.AreEqual(dic["__layer__"].ToString(), "door 1");
 
+        }
+
+
+        [Test]
+        public void SystemTextJsonTest()
+        {
+            var j = System.Text.Json.JsonSerializer.Serialize( this.instance);
+            var d = System.Text.Json.JsonSerializer.Deserialize<Door>(j);
+            var obj = Door.FromJson(j);
+            Assert.AreEqual(obj, d);
+            Assert.AreEqual(this.instance, d);
+
+            var bc = obj.BoundaryCondition.Obj as Outdoors;
+            Assert.IsTrue(bc.ViewFactor.Obj is Autocalculate);
         }
     }
 
