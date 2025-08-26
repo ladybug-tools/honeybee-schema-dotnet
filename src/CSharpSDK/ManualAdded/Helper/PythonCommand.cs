@@ -1,4 +1,4 @@
-﻿extern alias LBTNewtonSoft; using System;
+﻿using System;
 using System.IO;
 
 namespace HoneybeeSchema.Helper

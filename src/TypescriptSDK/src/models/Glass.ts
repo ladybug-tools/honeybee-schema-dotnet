@@ -16,39 +16,39 @@ export class Glass extends ModifierBase {
     @IsOptional()
     @Expose({ name: "modifier" })
     @Transform(({ value }) => {
-        const item = value;
-        if (item?.type === 'Plastic') return Plastic.fromJS(item);
-        else if (item?.type === 'Glass') return Glass.fromJS(item);
-        else if (item?.type === 'BSDF') return BSDF.fromJS(item);
-        else if (item?.type === 'Glow') return Glow.fromJS(item);
-        else if (item?.type === 'Light') return Light.fromJS(item);
-        else if (item?.type === 'Trans') return Trans.fromJS(item);
-        else if (item?.type === 'Metal') return Metal.fromJS(item);
-        else if (item?.type === 'Void') return Void.fromJS(item);
-        else if (item?.type === 'Mirror') return Mirror.fromJS(item);
-        else return item;
+      const item = value;
+      if (item?.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item?.type === 'Glass') return Glass.fromJS(item);
+      else if (item?.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item?.type === 'Glow') return Glow.fromJS(item);
+      else if (item?.type === 'Light') return Light.fromJS(item);
+      else if (item?.type === 'Trans') return Trans.fromJS(item);
+      else if (item?.type === 'Metal') return Metal.fromJS(item);
+      else if (item?.type === 'Void') return Void.fromJS(item);
+      else if (item?.type === 'Mirror') return Mirror.fromJS(item);
+      else return item;
     })
     /** Material modifier. */
     modifier: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) = new Void();
-
+	
     @IsArray()
     @IsOptional()
     @Expose({ name: "dependencies" })
     @Transform(({ value }) => value?.map((item: any) => {
-        if (item?.type === 'Plastic') return Plastic.fromJS(item);
-        else if (item?.type === 'Glass') return Glass.fromJS(item);
-        else if (item?.type === 'BSDF') return BSDF.fromJS(item);
-        else if (item?.type === 'Glow') return Glow.fromJS(item);
-        else if (item?.type === 'Light') return Light.fromJS(item);
-        else if (item?.type === 'Trans') return Trans.fromJS(item);
-        else if (item?.type === 'Metal') return Metal.fromJS(item);
-        else if (item?.type === 'Void') return Void.fromJS(item);
-        else if (item?.type === 'Mirror') return Mirror.fromJS(item);
-        else return item;
+      if (item?.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item?.type === 'Glass') return Glass.fromJS(item);
+      else if (item?.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item?.type === 'Glow') return Glow.fromJS(item);
+      else if (item?.type === 'Light') return Light.fromJS(item);
+      else if (item?.type === 'Trans') return Trans.fromJS(item);
+      else if (item?.type === 'Metal') return Metal.fromJS(item);
+      else if (item?.type === 'Void') return Void.fromJS(item);
+      else if (item?.type === 'Mirror') return Mirror.fromJS(item);
+      else return item;
     }))
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
     dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
-
+	
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -56,7 +56,7 @@ export class Glass extends ModifierBase {
     @Expose({ name: "r_transmissivity" })
     /** A value between 0 and 1 for the red channel transmissivity. */
     rTransmissivity: number = 0;
-
+	
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -64,7 +64,7 @@ export class Glass extends ModifierBase {
     @Expose({ name: "g_transmissivity" })
     /** A value between 0 and 1 for the green channel transmissivity. */
     gTransmissivity: number = 0;
-
+	
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -72,22 +72,22 @@ export class Glass extends ModifierBase {
     @Expose({ name: "b_transmissivity" })
     /** A value between 0 and 1 for the blue channel transmissivity. */
     bTransmissivity: number = 0;
-
+	
     @IsNumber()
     @IsOptional()
     @Expose({ name: "refraction_index" })
     /** A value greater than 1 for the index of refraction. Typical values are 1.52 for float glass and 1.4 for ETFE. */
     refractionIndex: number = 1.52;
-
+	
     @IsString()
     @IsOptional()
     @Matches(/^Glass$/)
     @Expose({ name: "type" })
     /** type */
     type: string = "Glass";
+	
 
-
-    constructor () {
+    constructor() {
         super();
         this.modifier = new Void();
         this.rTransmissivity = 0;
@@ -119,7 +119,7 @@ export class Glass extends ModifierBase {
         data = typeof data === 'object' ? data : {};
 
         if (Array.isArray(data)) {
-            const obj: any = {};
+            const obj:any = {};
             for (var property in data) {
                 obj[property] = data[property];
             }
@@ -130,7 +130,7 @@ export class Glass extends ModifierBase {
         return result;
     }
 
-    override toJSON(data?: any) {
+	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["modifier"] = this.modifier ?? new Void();
         data["dependencies"] = this.dependencies;
@@ -143,12 +143,12 @@ export class Glass extends ModifierBase {
         return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
-    async validate(): Promise<boolean> {
+	async validate(): Promise<boolean> {
         const errors = await validate(this);
-        if (errors.length > 0) {
-            const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error]).join(', ')).join('; ');
-            throw new Error(`Validation failed: ${errorMessages}`);
-        }
+        if (errors.length > 0){
+			const errorMessages = errors.map((error: TsValidationError) => Object.values(error.constraints || [error]).join(', ')).join('; ');
+      		throw new Error(`Validation failed: ${errorMessages}`);
+		}
         return true;
     }
 }

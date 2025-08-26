@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="IdealAirSystemAbridged" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected IdealAirSystemAbridged() 
         { 
             // Set readonly properties with defaultValue
@@ -85,7 +84,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone.")]
         [DataMember(Name = "economizer_type")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("economizer_type")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("economizer_type")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public EconomizerType EconomizerType { get; set; } = EconomizerType.DifferentialDryBulb;
 
         /// <summary>
@@ -93,7 +94,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the zone.")]
         [DataMember(Name = "demand_controlled_ventilation")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("demand_controlled_ventilation")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("demand_controlled_ventilation")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool DemandControlledVentilation { get; set; } = false;
 
         /// <summary>
@@ -102,7 +105,9 @@ namespace HoneybeeSchema
         [Summary(@"A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.")]
         [Range(0, 1)]
         [DataMember(Name = "sensible_heat_recovery")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("sensible_heat_recovery")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("sensible_heat_recovery")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SensibleHeatRecovery { get; set; } = 0D;
 
         /// <summary>
@@ -111,7 +116,9 @@ namespace HoneybeeSchema
         [Summary(@"A number between 0 and 1 for the effectiveness of latent heat recovery within the system.")]
         [Range(0, 1)]
         [DataMember(Name = "latent_heat_recovery")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("latent_heat_recovery")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("latent_heat_recovery")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LatentHeatRecovery { get; set; } = 0D;
 
         /// <summary>
@@ -119,7 +126,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number for the maximum heating supply air temperature [C].")]
         [DataMember(Name = "heating_air_temperature")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("heating_air_temperature")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("heating_air_temperature")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double HeatingAirTemperature { get; set; } = 50D;
 
         /// <summary>
@@ -127,7 +136,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number for the minimum cooling supply air temperature [C].")]
         [DataMember(Name = "cooling_air_temperature")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("cooling_air_temperature")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("cooling_air_temperature")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double CoolingAirTemperature { get; set; } = 13D;
 
         /// <summary>
@@ -135,9 +146,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number for the maximum heating capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the heating capacity.")]
         [DataMember(Name = "heating_limit")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("heating_limit")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("heating_limit")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Autosize, NoLimit, double> HeatingLimit { get; set; } = new Autosize();
 
         /// <summary>
@@ -145,9 +156,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number for the maximum cooling capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the cooling capacity.")]
         [DataMember(Name = "cooling_limit")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("cooling_limit")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("cooling_limit")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Autosize, NoLimit, double> CoolingLimit { get; set; } = new Autosize();
 
         /// <summary>
@@ -157,7 +168,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "heating_availability")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("heating_availability")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("heating_availability")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string HeatingAvailability { get; set; }
 
         /// <summary>
@@ -167,7 +180,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "cooling_availability")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("cooling_availability")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("cooling_availability")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string CoolingAvailability { get; set; }
 
 

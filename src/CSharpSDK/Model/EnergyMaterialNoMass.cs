@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyMaterialNoMass" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected EnergyMaterialNoMass() 
         { 
             // Set readonly properties with defaultValue
@@ -77,7 +76,7 @@ namespace HoneybeeSchema
         [Required]
         [Range(0.001, double.MaxValue)]
         [DataMember(Name = "r_value", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("r_value")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("r_value")] // For System.Text.Json
         public double RValue { get; set; }
 
         /// <summary>
@@ -85,7 +84,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Roughness")]
         [DataMember(Name = "roughness")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("roughness")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("roughness")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Roughness Roughness { get; set; } = Roughness.MediumRough;
 
         /// <summary>
@@ -94,7 +95,9 @@ namespace HoneybeeSchema
         [Summary(@"Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9.")]
         [Range(double.MinValue, 0.99999)]
         [DataMember(Name = "thermal_absorptance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("thermal_absorptance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("thermal_absorptance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double ThermalAbsorptance { get; set; } = 0.9D;
 
         /// <summary>
@@ -103,7 +106,9 @@ namespace HoneybeeSchema
         [Summary(@"Fraction of incident solar radiation absorbed by the material. Default: 0.7.")]
         [Range(0, 1)]
         [DataMember(Name = "solar_absorptance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("solar_absorptance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("solar_absorptance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SolarAbsorptance { get; set; } = 0.7D;
 
         /// <summary>
@@ -112,7 +117,9 @@ namespace HoneybeeSchema
         [Summary(@"Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7.")]
         [Range(0, 1)]
         [DataMember(Name = "visible_absorptance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("visible_absorptance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("visible_absorptance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double VisibleAbsorptance { get; set; } = 0.7D;
 
 

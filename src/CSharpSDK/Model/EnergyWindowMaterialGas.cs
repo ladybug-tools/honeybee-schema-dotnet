@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialGas" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected EnergyWindowMaterialGas() 
         { 
             // Set readonly properties with defaultValue
@@ -69,7 +68,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Thickness of the gas layer in meters. Default: 0.0125.")]
         [DataMember(Name = "thickness")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Thickness { get; set; } = 0.0125D;
 
         /// <summary>
@@ -77,7 +78,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"GasType")]
         [DataMember(Name = "gas_type")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("gas_type")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("gas_type")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public GasType GasType { get; set; } = GasType.Air;
 
 

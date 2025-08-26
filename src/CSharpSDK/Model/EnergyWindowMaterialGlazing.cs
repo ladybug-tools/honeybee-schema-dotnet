@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialGlazing" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected EnergyWindowMaterialGlazing() 
         { 
             // Set readonly properties with defaultValue
@@ -91,7 +90,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"The surface-to-surface thickness of the glass in meters. Default:  0.003.")]
         [DataMember(Name = "thickness")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Thickness { get; set; } = 0.003D;
 
         /// <summary>
@@ -100,7 +101,9 @@ namespace HoneybeeSchema
         [Summary(@"Transmittance of solar radiation through the glass at normal incidence. Default: 0.85 for clear glass.")]
         [Range(0, 1)]
         [DataMember(Name = "solar_transmittance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("solar_transmittance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("solar_transmittance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SolarTransmittance { get; set; } = 0.85D;
 
         /// <summary>
@@ -109,7 +112,9 @@ namespace HoneybeeSchema
         [Summary(@"Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default: 0.075 for clear glass.")]
         [Range(0, 1)]
         [DataMember(Name = "solar_reflectance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("solar_reflectance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("solar_reflectance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SolarReflectance { get; set; } = 0.075D;
 
         /// <summary>
@@ -117,9 +122,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum.")]
         [DataMember(Name = "solar_reflectance_back")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("solar_reflectance_back")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("solar_reflectance_back")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Autocalculate, double> SolarReflectanceBack { get; set; } = new Autocalculate();
 
         /// <summary>
@@ -128,7 +133,9 @@ namespace HoneybeeSchema
         [Summary(@"Transmittance of visible light through the glass at normal incidence. Default: 0.9 for clear glass.")]
         [Range(0, 1)]
         [DataMember(Name = "visible_transmittance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("visible_transmittance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("visible_transmittance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double VisibleTransmittance { get; set; } = 0.9D;
 
         /// <summary>
@@ -137,7 +144,9 @@ namespace HoneybeeSchema
         [Summary(@"Reflectance of visible light off of the front side of the glass at normal incidence. Default: 0.075 for clear glass.")]
         [Range(0, 1)]
         [DataMember(Name = "visible_reflectance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("visible_reflectance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("visible_reflectance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double VisibleReflectance { get; set; } = 0.075D;
 
         /// <summary>
@@ -145,9 +154,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye.")]
         [DataMember(Name = "visible_reflectance_back")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("visible_reflectance_back")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("visible_reflectance_back")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Autocalculate, double> VisibleReflectanceBack { get; set; } = new Autocalculate();
 
         /// <summary>
@@ -156,7 +165,9 @@ namespace HoneybeeSchema
         [Summary(@"Long-wave transmittance at normal incidence.")]
         [Range(0, 1)]
         [DataMember(Name = "infrared_transmittance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("infrared_transmittance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("infrared_transmittance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double InfraredTransmittance { get; set; } = 0D;
 
         /// <summary>
@@ -165,7 +176,9 @@ namespace HoneybeeSchema
         [Summary(@"Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.")]
         [Range(0, 1)]
         [DataMember(Name = "emissivity")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("emissivity")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("emissivity")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Emissivity { get; set; } = 0.84D;
 
         /// <summary>
@@ -174,7 +187,9 @@ namespace HoneybeeSchema
         [Summary(@"Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.")]
         [Range(0, 1)]
         [DataMember(Name = "emissivity_back")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("emissivity_back")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("emissivity_back")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double EmissivityBack { get; set; } = 0.84D;
 
         /// <summary>
@@ -182,7 +197,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is  typical for clear glass without a low-e coating.")]
         [DataMember(Name = "conductivity")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("conductivity")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("conductivity")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Conductivity { get; set; } = 0.9D;
 
         /// <summary>
@@ -190,7 +207,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean.")]
         [DataMember(Name = "dirt_correction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("dirt_correction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("dirt_correction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double DirtCorrection { get; set; } = 1D;
 
         /// <summary>
@@ -198,7 +217,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.")]
         [DataMember(Name = "solar_diffusing")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("solar_diffusing")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("solar_diffusing")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool SolarDiffusing { get; set; } = false;
 
 

@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Location" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected Location() 
         { 
             // Set readonly properties with defaultValue
@@ -76,7 +75,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Name of the city as a string.")]
         [DataMember(Name = "city")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("city")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("city")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string City { get; set; } = "-";
 
         /// <summary>
@@ -84,7 +85,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Location latitude between -90 and 90 (Default: 0).")]
         [DataMember(Name = "latitude")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("latitude")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("latitude")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Latitude { get; set; } = 0D;
 
         /// <summary>
@@ -92,7 +95,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Location longitude between -180 (west) and 180 (east) (Default: 0).")]
         [DataMember(Name = "longitude")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("longitude")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("longitude")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Longitude { get; set; } = 0D;
 
         /// <summary>
@@ -100,9 +105,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Time zone between -12 hours (west) and +14 hours (east). If None, the time zone will be an estimated integer value derived from the longitude in accordance with solar time.")]
         [DataMember(Name = "time_zone")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("time_zone")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("time_zone")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Autocalculate, int> TimeZone { get; set; } = new Autocalculate();
 
         /// <summary>
@@ -110,7 +115,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number for elevation of the location in meters. (Default: 0).")]
         [DataMember(Name = "elevation")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("elevation")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("elevation")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Elevation { get; set; } = 0D;
 
         /// <summary>
@@ -118,7 +125,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"ID of the location if the location is representing a weather station.")]
         [DataMember(Name = "station_id")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("station_id")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("station_id")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string StationId { get; set; }
 
         /// <summary>
@@ -126,7 +135,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Source of data (e.g. TMY, TMY3).")]
         [DataMember(Name = "source")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("source")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("source")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Source { get; set; }
 
 

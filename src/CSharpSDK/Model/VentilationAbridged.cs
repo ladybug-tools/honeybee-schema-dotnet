@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="VentilationAbridged" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected VentilationAbridged() 
         { 
             // Set readonly properties with defaultValue
@@ -76,7 +75,9 @@ namespace HoneybeeSchema
         [Summary(@"Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room.")]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "flow_per_person")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("flow_per_person")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("flow_per_person")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double FlowPerPerson { get; set; } = 0D;
 
         /// <summary>
@@ -85,7 +86,9 @@ namespace HoneybeeSchema
         [Summary(@"Intensity of ventilation in [m3/s per m2 of floor area].")]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "flow_per_area")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("flow_per_area")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("flow_per_area")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double FlowPerArea { get; set; } = 0D;
 
         /// <summary>
@@ -94,7 +97,9 @@ namespace HoneybeeSchema
         [Summary(@"Intensity of ventilation in air changes per hour (ACH) for the entire Room.")]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "air_changes_per_hour")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("air_changes_per_hour")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("air_changes_per_hour")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double AirChangesPerHour { get; set; } = 0D;
 
         /// <summary>
@@ -103,7 +108,9 @@ namespace HoneybeeSchema
         [Summary(@"Intensity of ventilation in m3/s for the entire Room.")]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "flow_per_zone")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("flow_per_zone")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("flow_per_zone")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double FlowPerZone { get; set; } = 0D;
 
         /// <summary>
@@ -113,7 +120,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "schedule")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Schedule { get; set; }
 
 

@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="InfiltrationAbridged" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected InfiltrationAbridged() 
         { 
             // Set readonly properties with defaultValue
@@ -77,7 +76,7 @@ namespace HoneybeeSchema
         [Required]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "flow_per_exterior_area", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("flow_per_exterior_area")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("flow_per_exterior_area")] // For System.Text.Json
         public double FlowPerExteriorArea { get; set; }
 
         /// <summary>
@@ -88,7 +87,7 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "schedule", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
         public string Schedule { get; set; }
 
         /// <summary>
@@ -97,7 +96,9 @@ namespace HoneybeeSchema
         [Summary(@"ConstantCoefficient")]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "constant_coefficient")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("constant_coefficient")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("constant_coefficient")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double ConstantCoefficient { get; set; } = 1D;
 
         /// <summary>
@@ -106,7 +107,9 @@ namespace HoneybeeSchema
         [Summary(@"TemperatureCoefficient")]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "temperature_coefficient")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("temperature_coefficient")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("temperature_coefficient")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double TemperatureCoefficient { get; set; } = 0D;
 
         /// <summary>
@@ -115,7 +118,9 @@ namespace HoneybeeSchema
         [Summary(@"VelocityCoefficient")]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "velocity_coefficient")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("velocity_coefficient")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("velocity_coefficient")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double VelocityCoefficient { get; set; } = 0D;
 
 

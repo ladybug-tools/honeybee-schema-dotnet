@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Sensor" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected Sensor() 
         { 
             // Set readonly properties with defaultValue
@@ -67,7 +66,7 @@ namespace HoneybeeSchema
         [Summary(@"Position of sensor in space as an array of (x, y, z) values.")]
         [Required]
         [DataMember(Name = "pos", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("pos")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("pos")] // For System.Text.Json
         public List<double> Pos { get; set; }
 
         /// <summary>
@@ -76,7 +75,7 @@ namespace HoneybeeSchema
         [Summary(@"Direction of sensor as an array of (x, y, z) values.")]
         [Required]
         [DataMember(Name = "dir", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("dir")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("dir")] // For System.Text.Json
         public List<double> Dir { get; set; }
 
 

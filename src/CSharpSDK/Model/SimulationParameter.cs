@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="SimulationParameter" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected SimulationParameter() 
         { 
             // Set readonly properties with defaultValue
@@ -78,7 +77,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A SimulationOutput that lists the desired outputs from the simulation and the format in which to report them.")]
         [DataMember(Name = "output")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("output")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("output")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public SimulationOutput Output { get; set; }
 
         /// <summary>
@@ -86,7 +87,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A RunPeriod to describe the time period over which to run the simulation.")]
         [DataMember(Name = "run_period")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("run_period")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("run_period")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public RunPeriod RunPeriod { get; set; }
 
         /// <summary>
@@ -95,7 +98,9 @@ namespace HoneybeeSchema
         [Summary(@"An integer for the number of timesteps per hour at which the energy calculation will be run.")]
         [Range(1, 60)]
         [DataMember(Name = "timestep")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("timestep")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("timestep")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public int Timestep { get; set; } = 6;
 
         /// <summary>
@@ -103,7 +108,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A SimulationControl object that describes which types of calculations to run.")]
         [DataMember(Name = "simulation_control")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("simulation_control")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("simulation_control")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public SimulationControl SimulationControl { get; set; }
 
         /// <summary>
@@ -111,7 +118,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A ShadowCalculation object describing settings for the EnergyPlus Shadow Calculation.")]
         [DataMember(Name = "shadow_calculation")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("shadow_calculation")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("shadow_calculation")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ShadowCalculation ShadowCalculation { get; set; }
 
         /// <summary>
@@ -119,7 +128,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A SizingParameter object with criteria for sizing the heating and cooling system.")]
         [DataMember(Name = "sizing_parameter")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("sizing_parameter")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("sizing_parameter")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public SizingParameter SizingParameter { get; set; }
 
         /// <summary>
@@ -128,7 +139,9 @@ namespace HoneybeeSchema
         [Summary(@"A number between -360 and 360 for the north direction in degrees.This is the counterclockwise difference between the North and the positive Y-axis. 90 is West and 270 is East. Note that this is different than the convention used in EnergyPlus, which uses clockwise difference instead of counterclockwise difference.")]
         [Range(-360, 360)]
         [DataMember(Name = "north_angle")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("north_angle")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("north_angle")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double NorthAngle { get; set; } = 0D;
 
         /// <summary>
@@ -136,7 +149,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms.")]
         [DataMember(Name = "terrain_type")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("terrain_type")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("terrain_type")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public TerrianTypes TerrainType { get; set; } = TerrianTypes.City;
 
 

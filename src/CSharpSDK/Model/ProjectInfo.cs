@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ProjectInfo" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected ProjectInfo() 
         { 
             // Set readonly properties with defaultValue
@@ -75,7 +74,9 @@ namespace HoneybeeSchema
         [Summary(@"A number between -360 to 360 where positive values rotate the compass counterclockwise (towards the West) and negative values rotate the compass clockwise (towards the East).")]
         [Range(-360, 360)]
         [DataMember(Name = "north")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("north")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("north")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double North { get; set; } = 0D;
 
         /// <summary>
@@ -83,7 +84,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of URLs to zip files that includes EPW, DDY and STAT files. You can find these URLs from the EPWMAP. The first URL will be used as the primary weather file.")]
         [DataMember(Name = "weather_urls")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("weather_urls")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("weather_urls")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<string> WeatherUrls { get; set; }
 
         /// <summary>
@@ -91,7 +94,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Project location. This value is usually generated from the information in the weather files.")]
         [DataMember(Name = "location")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("location")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("location")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Location Location { get; set; }
 
         /// <summary>
@@ -99,7 +104,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Project location climate zone.")]
         [DataMember(Name = "ashrae_climate_zone")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("ashrae_climate_zone")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("ashrae_climate_zone")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ClimateZones AshraeClimateZone { get; set; }
 
         /// <summary>
@@ -107,7 +114,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of building types for the project. The first building type is considered the primary type for the project.")]
         [DataMember(Name = "building_type")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("building_type")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("building_type")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<BuildingTypes> BuildingType { get; set; }
 
         /// <summary>
@@ -115,7 +124,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of building vintages (e.g. ASHRAE_2019, ASHRAE_2016).")]
         [DataMember(Name = "vintage")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("vintage")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("vintage")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<EfficiencyStandards> Vintage { get; set; }
 
 

@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="BSDF" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected BSDF() 
         { 
             // Set readonly properties with defaultValue
@@ -85,7 +84,7 @@ namespace HoneybeeSchema
         [Summary(@"A string with the contents of the BSDF XML file.")]
         [Required]
         [DataMember(Name = "bsdf_data", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("bsdf_data")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("bsdf_data")] // For System.Text.Json
         public string BsdfData { get; set; }
 
         /// <summary>
@@ -93,9 +92,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Material modifier.")]
         [DataMember(Name = "modifier")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("modifier")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("modifier")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> Modifier { get; set; } = new Void();
 
         /// <summary>
@@ -103,7 +102,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.")]
         [DataMember(Name = "dependencies")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("dependencies")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("dependencies")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>> Dependencies { get; set; }
 
         /// <summary>
@@ -111,7 +112,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Vector as sequence that sets the hemisphere that the BSDF material faces.")]
         [DataMember(Name = "up_orientation")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("up_orientation")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("up_orientation")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<double> UpOrientation { get; set; } = new List<double>{ 0.01, 0.01, 1 };
 
         /// <summary>
@@ -119,7 +122,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative).")]
         [DataMember(Name = "thickness")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Thickness { get; set; } = 0D;
 
         /// <summary>
@@ -129,7 +134,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "function_file")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("function_file")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("function_file")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string FunctionFile { get; set; } = ".";
 
         /// <summary>
@@ -139,7 +146,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "transform")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("transform")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("transform")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Transform { get; set; }
 
         /// <summary>
@@ -147,7 +156,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Optional additional front diffuse reflectance as sequence of three RGB numbers.")]
         [DataMember(Name = "front_diffuse_reflectance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("front_diffuse_reflectance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("front_diffuse_reflectance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<double> FrontDiffuseReflectance { get; set; }
 
         /// <summary>
@@ -155,7 +166,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Optional additional back diffuse reflectance as sequence of three RGB numbers.")]
         [DataMember(Name = "back_diffuse_reflectance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("back_diffuse_reflectance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("back_diffuse_reflectance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<double> BackDiffuseReflectance { get; set; }
 
         /// <summary>
@@ -163,7 +176,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Optional additional diffuse transmittance as sequence of three RGB numbers.")]
         [DataMember(Name = "diffuse_transmittance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("diffuse_transmittance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("diffuse_transmittance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<double> DiffuseTransmittance { get; set; }
 
 

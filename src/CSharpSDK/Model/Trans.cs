@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Trans" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected Trans() 
         { 
             // Set readonly properties with defaultValue
@@ -82,9 +81,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Material modifier.")]
         [DataMember(Name = "modifier")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("modifier")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("modifier")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> Modifier { get; set; } = new Void();
 
         /// <summary>
@@ -92,7 +91,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.")]
         [DataMember(Name = "dependencies")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("dependencies")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("dependencies")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>> Dependencies { get; set; }
 
         /// <summary>
@@ -101,7 +102,9 @@ namespace HoneybeeSchema
         [Summary(@"A value between 0 and 1 for the red channel reflectance.")]
         [Range(0, 1)]
         [DataMember(Name = "r_reflectance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("r_reflectance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("r_reflectance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double RReflectance { get; set; } = 0D;
 
         /// <summary>
@@ -110,7 +113,9 @@ namespace HoneybeeSchema
         [Summary(@"A value between 0 and 1 for the green channel reflectance.")]
         [Range(0, 1)]
         [DataMember(Name = "g_reflectance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("g_reflectance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("g_reflectance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double GReflectance { get; set; } = 0D;
 
         /// <summary>
@@ -119,7 +124,9 @@ namespace HoneybeeSchema
         [Summary(@"A value between 0 and 1 for the blue channel reflectance.")]
         [Range(0, 1)]
         [DataMember(Name = "b_reflectance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("b_reflectance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("b_reflectance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double BReflectance { get; set; } = 0D;
 
         /// <summary>
@@ -128,7 +135,9 @@ namespace HoneybeeSchema
         [Summary(@"A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials.")]
         [Range(0, 1)]
         [DataMember(Name = "specularity")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("specularity")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("specularity")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Specularity { get; set; } = 0D;
 
         /// <summary>
@@ -137,7 +146,9 @@ namespace HoneybeeSchema
         [Summary(@"A value between 0 and 1 for the roughness, specified as the RMS slope of surface facets. Roughness greater than 0.2 are not realistic.")]
         [Range(0, 1)]
         [DataMember(Name = "roughness")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("roughness")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("roughness")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Roughness { get; set; } = 0D;
 
         /// <summary>
@@ -146,7 +157,9 @@ namespace HoneybeeSchema
         [Summary(@"The fraction of transmitted light that is transmitted diffusely in a scattering fashion.")]
         [Range(0, 1)]
         [DataMember(Name = "transmitted_diff")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("transmitted_diff")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("transmitted_diff")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double TransmittedDiff { get; set; } = 0D;
 
         /// <summary>
@@ -155,7 +168,9 @@ namespace HoneybeeSchema
         [Summary(@"The fraction of transmitted light that is not diffusely scattered.")]
         [Range(0, 1)]
         [DataMember(Name = "transmitted_spec")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("transmitted_spec")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("transmitted_spec")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double TransmittedSpec { get; set; } = 0D;
 
 

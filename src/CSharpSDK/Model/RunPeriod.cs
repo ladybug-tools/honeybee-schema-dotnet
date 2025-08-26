@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="RunPeriod" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected RunPeriod() 
         { 
             // Set readonly properties with defaultValue
@@ -74,7 +73,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of two integers for [month, day], representing the date for the start of the run period. Must be before the end date.")]
         [DataMember(Name = "start_date")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("start_date")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("start_date")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<int> StartDate { get; set; } = new List<int>{ 1, 1 };
 
         /// <summary>
@@ -82,7 +83,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of two integers for [month, day], representing the date for the end of the run period. Must be after the start date.")]
         [DataMember(Name = "end_date")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("end_date")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("end_date")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<int> EndDate { get; set; } = new List<int>{ 12, 31 };
 
         /// <summary>
@@ -90,7 +93,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text for the day of the week on which the simulation starts.")]
         [DataMember(Name = "start_day_of_week")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("start_day_of_week")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("start_day_of_week")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public DaysOfWeek StartDayOfWeek { get; set; } = DaysOfWeek.Sunday;
 
         /// <summary>
@@ -98,7 +103,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of lists where each sub-list consists of two integers for [month, day], representing a date which is a holiday within the simulation. If None, no holidays are applied.")]
         [DataMember(Name = "holidays")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("holidays")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("holidays")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<List<int>> Holidays { get; set; }
 
         /// <summary>
@@ -106,7 +113,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A DaylightSavingTime to dictate the start and end dates of daylight saving time. If None, no daylight saving time is applied to the simulation.")]
         [DataMember(Name = "daylight_saving_time")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("daylight_saving_time")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("daylight_saving_time")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public DaylightSavingTime DaylightSavingTime { get; set; }
 
         /// <summary>
@@ -114,7 +123,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Boolean noting whether the simulation will be run for a leap year.")]
         [DataMember(Name = "leap_year")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("leap_year")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("leap_year")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool LeapYear { get; set; } = false;
 
 

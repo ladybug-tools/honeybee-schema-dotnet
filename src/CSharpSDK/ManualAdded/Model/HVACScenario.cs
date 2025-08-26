@@ -1,5 +1,5 @@
-﻿extern alias LBTNewtonSoft;
-using LBTNewtonSoft::Newtonsoft.Json;
+﻿
+using LBT.Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System;

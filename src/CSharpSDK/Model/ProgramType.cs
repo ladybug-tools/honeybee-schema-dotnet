@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ProgramType" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected ProgramType() 
         { 
             // Set readonly properties with defaultValue
@@ -81,7 +80,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"People to describe the occupancy of the program. If None, no occupancy will be assumed for the program.")]
         [DataMember(Name = "people")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("people")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("people")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public People People { get; set; }
 
         /// <summary>
@@ -89,7 +90,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program.")]
         [DataMember(Name = "lighting")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("lighting")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("lighting")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Lighting Lighting { get; set; }
 
         /// <summary>
@@ -97,7 +100,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed.")]
         [DataMember(Name = "electric_equipment")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("electric_equipment")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("electric_equipment")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ElectricEquipment ElectricEquipment { get; set; }
 
         /// <summary>
@@ -105,7 +110,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed.")]
         [DataMember(Name = "gas_equipment")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("gas_equipment")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("gas_equipment")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public GasEquipment GasEquipment { get; set; }
 
         /// <summary>
@@ -113,7 +120,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"ServiceHotWater object to describe the usage of hot water within the program. If None, no hot water will be assumed.")]
         [DataMember(Name = "service_hot_water")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("service_hot_water")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("service_hot_water")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ServiceHotWater ServiceHotWater { get; set; }
 
         /// <summary>
@@ -121,7 +130,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program.")]
         [DataMember(Name = "infiltration")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("infiltration")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("infiltration")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Infiltration Infiltration { get; set; }
 
         /// <summary>
@@ -129,7 +140,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed.")]
         [DataMember(Name = "ventilation")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("ventilation")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("ventilation")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Ventilation Ventilation { get; set; }
 
         /// <summary>
@@ -137,7 +150,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.")]
         [DataMember(Name = "setpoint")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("setpoint")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("setpoint")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Setpoint Setpoint { get; set; }
 
 

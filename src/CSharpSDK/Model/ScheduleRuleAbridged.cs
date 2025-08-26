@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleRuleAbridged" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected ScheduleRuleAbridged() 
         { 
             // Set readonly properties with defaultValue
@@ -85,7 +84,7 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "schedule_day", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("schedule_day")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("schedule_day")] // For System.Text.Json
         public string ScheduleDay { get; set; }
 
         /// <summary>
@@ -93,7 +92,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Boolean noting whether to apply schedule_day on Sundays.")]
         [DataMember(Name = "apply_sunday")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("apply_sunday")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("apply_sunday")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool ApplySunday { get; set; } = false;
 
         /// <summary>
@@ -101,7 +102,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Boolean noting whether to apply schedule_day on Mondays.")]
         [DataMember(Name = "apply_monday")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("apply_monday")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("apply_monday")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool ApplyMonday { get; set; } = false;
 
         /// <summary>
@@ -109,7 +112,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Boolean noting whether to apply schedule_day on Tuesdays.")]
         [DataMember(Name = "apply_tuesday")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("apply_tuesday")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("apply_tuesday")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool ApplyTuesday { get; set; } = false;
 
         /// <summary>
@@ -117,7 +122,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Boolean noting whether to apply schedule_day on Wednesdays.")]
         [DataMember(Name = "apply_wednesday")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("apply_wednesday")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("apply_wednesday")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool ApplyWednesday { get; set; } = false;
 
         /// <summary>
@@ -125,7 +132,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Boolean noting whether to apply schedule_day on Thursdays.")]
         [DataMember(Name = "apply_thursday")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("apply_thursday")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("apply_thursday")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool ApplyThursday { get; set; } = false;
 
         /// <summary>
@@ -133,7 +142,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Boolean noting whether to apply schedule_day on Fridays.")]
         [DataMember(Name = "apply_friday")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("apply_friday")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("apply_friday")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool ApplyFriday { get; set; } = false;
 
         /// <summary>
@@ -141,7 +152,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Boolean noting whether to apply schedule_day on Saturdays.")]
         [DataMember(Name = "apply_saturday")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("apply_saturday")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("apply_saturday")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool ApplySaturday { get; set; } = false;
 
         /// <summary>
@@ -149,7 +162,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of two integers for [month, day], representing the start date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).")]
         [DataMember(Name = "start_date")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("start_date")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("start_date")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<int> StartDate { get; set; } = new List<int>{ 1, 1 };
 
         /// <summary>
@@ -157,7 +172,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of two integers for [month, day], representing the end date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).")]
         [DataMember(Name = "end_date")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("end_date")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("end_date")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<int> EndDate { get; set; } = new List<int>{ 12, 31 };
 
 

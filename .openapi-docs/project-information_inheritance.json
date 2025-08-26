@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Documentation for Honeybee project-information schema",
-    "version": "1.59.0",
+    "version": "1.59.1",
     "title": "Honeybee Project Information Schema",
     "contact": {
       "name": "Ladybug Tools",

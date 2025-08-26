@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Room" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected Room() 
         { 
             // Set readonly properties with defaultValue
@@ -82,7 +81,7 @@ namespace HoneybeeSchema
         [Summary(@"Faces that together form the closed volume of a room.")]
         [Required]
         [DataMember(Name = "faces", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("faces")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("faces")] // For System.Text.Json
         public List<Face> Faces { get; set; }
 
         /// <summary>
@@ -91,7 +90,7 @@ namespace HoneybeeSchema
         [Summary(@"Extension properties for particular simulation engines (Radiance, EnergyPlus).")]
         [Required]
         [DataMember(Name = "properties", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("properties")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("properties")] // For System.Text.Json
         public RoomPropertiesAbridged Properties { get; set; }
 
         /// <summary>
@@ -99,7 +98,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Shades assigned to the interior side of this object (eg. partitions, tables).")]
         [DataMember(Name = "indoor_shades")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("indoor_shades")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("indoor_shades")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<Shade> IndoorShades { get; set; }
 
         /// <summary>
@@ -107,7 +108,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Shades assigned to the exterior side of this object (eg. trees, landscaping).")]
         [DataMember(Name = "outdoor_shades")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("outdoor_shades")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("outdoor_shades")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<Shade> OutdoorShades { get; set; }
 
         /// <summary>
@@ -116,7 +119,9 @@ namespace HoneybeeSchema
         [Summary(@"An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is multiplied by the multiplier.")]
         [Range(1, int.MaxValue)]
         [DataMember(Name = "multiplier")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("multiplier")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("multiplier")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public int Multiplier { get; set; } = 1;
 
         /// <summary>
@@ -124,7 +129,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A boolean for whether the Room floor area contributes to Models it is a part of. Note that this will not affect the floor_area property of this Room itself but it will ensure the Room floor area is excluded from any calculations when the Room is part of a Model, including EUI calculations.")]
         [DataMember(Name = "exclude_floor_area")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("exclude_floor_area")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("exclude_floor_area")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool ExcludeFloorArea { get; set; } = false;
 
         /// <summary>
@@ -132,7 +139,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text string for for the zone identifier to which this Room belongs. Rooms sharing the same zone identifier are considered part of the same zone in a Model. If the zone identifier has not been specified, it will be the same as the Room identifier in the destination engine. Note that this property has no character restrictions.")]
         [DataMember(Name = "zone")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("zone")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("zone")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Zone { get; set; }
 
         /// <summary>
@@ -140,7 +149,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model. Note that this property has no character restrictions.")]
         [DataMember(Name = "story")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("story")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("story")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Story { get; set; }
 
 

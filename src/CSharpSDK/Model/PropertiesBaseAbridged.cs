@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertiesBaseAbridged" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected PropertiesBaseAbridged() 
         { 
             // Set readonly properties with defaultValue
@@ -66,7 +65,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A string for a Honeybee Radiance Modifier (default: None).")]
         [DataMember(Name = "modifier")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("modifier")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("modifier")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Modifier { get; set; }
 
         /// <summary>
@@ -74,7 +75,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).")]
         [DataMember(Name = "modifier_blk")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("modifier_blk")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("modifier_blk")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ModifierBlk { get; set; }
 
 

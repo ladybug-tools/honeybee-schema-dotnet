@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="DOASBase" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected DOASBase() 
         { 
             // Set readonly properties with defaultValue
@@ -75,7 +74,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards")]
         [DataMember(Name = "vintage")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("vintage")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("vintage")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Vintages Vintage { get; set; } = Vintages.ASHRAE_2019;
 
         /// <summary>
@@ -84,7 +85,9 @@ namespace HoneybeeSchema
         [Summary(@"A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.")]
         [Range(0, 1)]
         [DataMember(Name = "sensible_heat_recovery")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("sensible_heat_recovery")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("sensible_heat_recovery")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SensibleHeatRecovery { get; set; } = 0D;
 
         /// <summary>
@@ -93,7 +96,9 @@ namespace HoneybeeSchema
         [Summary(@"A number between 0 and 1 for the effectiveness of latent heat recovery within the system.")]
         [Range(0, 1)]
         [DataMember(Name = "latent_heat_recovery")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("latent_heat_recovery")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("latent_heat_recovery")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LatentHeatRecovery { get; set; } = 0D;
 
         /// <summary>
@@ -101,7 +106,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.")]
         [DataMember(Name = "demand_controlled_ventilation")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("demand_controlled_ventilation")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("demand_controlled_ventilation")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool DemandControlledVentilation { get; set; } = false;
 
         /// <summary>
@@ -111,7 +118,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "doas_availability_schedule")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("doas_availability_schedule")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("doas_availability_schedule")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string DoasAvailabilitySchedule { get; set; }
 
 

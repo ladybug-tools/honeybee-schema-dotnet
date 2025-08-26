@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Face3D" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected Face3D() 
         { 
             // Set readonly properties with defaultValue
@@ -69,7 +68,7 @@ namespace HoneybeeSchema
         [Summary(@"A list of points representing the outer boundary vertices of the face. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.")]
         [Required]
         [DataMember(Name = "boundary", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("boundary")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("boundary")] // For System.Text.Json
         public List<List<double>> Boundary { get; set; }
 
         /// <summary>
@@ -77,7 +76,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Optional list of lists with one list for each hole in the face.Each hole should be a list of at least 3 points and each point a list of 3 (x, y, z) values. If None, it will be assumed that there are no holes in the face.")]
         [DataMember(Name = "holes")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("holes")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("holes")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<List<List<double>>> Holes { get; set; }
 
         /// <summary>
@@ -85,7 +86,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Optional Plane indicating the plane in which the face exists.If None, the plane will usually be derived from the boundary points.")]
         [DataMember(Name = "plane")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("plane")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("plane")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Plane Plane { get; set; }
 
 

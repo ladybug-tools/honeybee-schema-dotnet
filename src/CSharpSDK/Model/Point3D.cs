@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Point3D" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected Point3D() 
         { 
             // Set readonly properties with defaultValue
@@ -69,7 +68,7 @@ namespace HoneybeeSchema
         [Summary(@"Number for X coordinate.")]
         [Required]
         [DataMember(Name = "x", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("x")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("x")] // For System.Text.Json
         public double X { get; set; }
 
         /// <summary>
@@ -78,7 +77,7 @@ namespace HoneybeeSchema
         [Summary(@"Number for Y coordinate.")]
         [Required]
         [DataMember(Name = "y", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("y")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("y")] // For System.Text.Json
         public double Y { get; set; }
 
         /// <summary>
@@ -87,7 +86,7 @@ namespace HoneybeeSchema
         [Summary(@"Number for Z coordinate.")]
         [Required]
         [DataMember(Name = "z", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("z")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("z")] // For System.Text.Json
         public double Z { get; set; }
 
         /// <summary>
@@ -96,7 +95,9 @@ namespace HoneybeeSchema
         [Summary(@"Type")]
         [RegularExpression(@"^Point3D$")]
         [DataMember(Name = "type")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("type")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("type")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Type { get; protected set; } = "Point3D";
 
 

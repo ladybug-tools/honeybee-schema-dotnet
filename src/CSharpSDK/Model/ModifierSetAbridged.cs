@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ModifierSetAbridged" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected ModifierSetAbridged() 
         { 
             // Set readonly properties with defaultValue
@@ -78,7 +77,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Optional WallModifierSet object for this ModifierSet (default: None).")]
         [DataMember(Name = "wall_set")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("wall_set")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("wall_set")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public WallModifierSetAbridged WallSet { get; set; }
 
         /// <summary>
@@ -86,7 +87,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Optional FloorModifierSet object for this ModifierSet (default: None).")]
         [DataMember(Name = "floor_set")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("floor_set")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("floor_set")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public FloorModifierSetAbridged FloorSet { get; set; }
 
         /// <summary>
@@ -94,7 +97,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Optional RoofCeilingModifierSet object for this ModifierSet (default: None).")]
         [DataMember(Name = "roof_ceiling_set")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("roof_ceiling_set")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("roof_ceiling_set")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public RoofCeilingModifierSetAbridged RoofCeilingSet { get; set; }
 
         /// <summary>
@@ -102,7 +107,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Optional ApertureModifierSet object for this ModifierSet (default: None).")]
         [DataMember(Name = "aperture_set")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("aperture_set")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("aperture_set")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ApertureModifierSetAbridged ApertureSet { get; set; }
 
         /// <summary>
@@ -110,7 +117,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Optional DoorModifierSet object for this ModifierSet (default: None).")]
         [DataMember(Name = "door_set")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("door_set")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("door_set")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public DoorModifierSetAbridged DoorSet { get; set; }
 
         /// <summary>
@@ -118,7 +127,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Optional ShadeModifierSet object for this ModifierSet (default: None).")]
         [DataMember(Name = "shade_set")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("shade_set")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("shade_set")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ShadeModifierSetAbridged ShadeSet { get; set; }
 
         /// <summary>
@@ -126,7 +137,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Optional Modifier to be used for all Faces with an AirBoundary face type. If None, it will be the honeybee generic air wall modifier.")]
         [DataMember(Name = "air_boundary_modifier")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("air_boundary_modifier")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("air_boundary_modifier")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string AirBoundaryModifier { get; set; }
 
 

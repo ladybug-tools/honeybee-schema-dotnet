@@ -1,6 +1,6 @@
-﻿extern alias LBTNewtonSoft;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Linq;
+﻿
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
 
@@ -84,6 +84,7 @@ namespace HoneybeeSchema
             t.WriteTo(writer);
         }
 
+        
 
     }
 }

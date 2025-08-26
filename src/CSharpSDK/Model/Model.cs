@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,13 +30,13 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Model" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected Model() 
         { 
             // Set readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.59.0";
+            this.Version = "1.59.1";
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="Model" /> class.
@@ -73,7 +72,7 @@ namespace HoneybeeSchema
 
             // Set readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.59.0";
+            this.Version = "1.59.1";
 
             // check if object is valid, only check for inherited class
             if (this.GetType() == typeof(Model))
@@ -88,7 +87,7 @@ namespace HoneybeeSchema
         [Summary(@"Extension properties for particular simulation engines (Radiance, EnergyPlus).")]
         [Required]
         [DataMember(Name = "properties", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("properties")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("properties")] // For System.Text.Json
         public ModelProperties Properties { get; set; }
 
         /// <summary>
@@ -97,15 +96,19 @@ namespace HoneybeeSchema
         [Summary(@"Text string for the current version of the schema.")]
         [RegularExpression(@"([0-9]+)\.([0-9]+)\.([0-9]+)")]
         [DataMember(Name = "version")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("version")] // For System.Text.Json
-        public string Version { get; protected set; } = "1.59.0";
+        // [System.Text.Json.Serialization.JsonPropertyName("version")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
+        public string Version { get; protected set; } = "1.59.1";
 
         /// <summary>
         /// A list of Rooms in the model.
         /// </summary>
         [Summary(@"A list of Rooms in the model.")]
         [DataMember(Name = "rooms")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("rooms")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("rooms")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<Room> Rooms { get; set; }
 
         /// <summary>
@@ -113,7 +116,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of Faces in the model that lack a parent Room. Note that orphaned Faces are not acceptable for Models that are to be exported for energy simulation.")]
         [DataMember(Name = "orphaned_faces")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("orphaned_faces")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("orphaned_faces")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<Face> OrphanedFaces { get; set; }
 
         /// <summary>
@@ -121,7 +126,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of Shades in the model that lack a parent.")]
         [DataMember(Name = "orphaned_shades")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("orphaned_shades")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("orphaned_shades")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<Shade> OrphanedShades { get; set; }
 
         /// <summary>
@@ -129,7 +136,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of Apertures in the model that lack a parent Face. Note that orphaned Apertures are not acceptable for Models that are to be exported for energy simulation.")]
         [DataMember(Name = "orphaned_apertures")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("orphaned_apertures")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("orphaned_apertures")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<Aperture> OrphanedApertures { get; set; }
 
         /// <summary>
@@ -137,7 +146,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of Doors in the model that lack a parent Face. Note that orphaned Doors are not acceptable for Models that are to be exported for energy simulation.")]
         [DataMember(Name = "orphaned_doors")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("orphaned_doors")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("orphaned_doors")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<Door> OrphanedDoors { get; set; }
 
         /// <summary>
@@ -145,7 +156,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of ShadeMesh in the model.")]
         [DataMember(Name = "shade_meshes")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("shade_meshes")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("shade_meshes")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<ShadeMesh> ShadeMeshes { get; set; }
 
         /// <summary>
@@ -153,7 +166,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text indicating the units in which the model geometry exists. This is used to scale the geometry to the correct units for simulation engines like EnergyPlus, which requires all geometry be in meters.")]
         [DataMember(Name = "units")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("units")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("units")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Units Units { get; set; } = Units.Meters;
 
         /// <summary>
@@ -162,7 +177,9 @@ namespace HoneybeeSchema
         [Summary(@"The maximum difference between x, y, and z values at which vertices are considered equivalent. This value should be in the Model units and it is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a Model. The default of 0.01 is suitable for models in meters.")]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "tolerance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("tolerance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("tolerance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Tolerance { get; set; } = 0.01D;
 
         /// <summary>
@@ -171,7 +188,9 @@ namespace HoneybeeSchema
         [Summary(@"The max angle difference in degrees that vertices are allowed to differ from one another in order to consider them colinear. This value is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a given Model.")]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "angle_tolerance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("angle_tolerance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("angle_tolerance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double AngleTolerance { get; set; } = 1D;
 
 

@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ShadowCalculation" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected ShadowCalculation() 
         { 
             // Set readonly properties with defaultValue
@@ -72,7 +71,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"SolarDistribution")]
         [DataMember(Name = "solar_distribution")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("solar_distribution")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("solar_distribution")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public SolarDistribution SolarDistribution { get; set; } = SolarDistribution.FullExteriorWithReflections;
 
         /// <summary>
@@ -80,7 +81,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text noting whether CPU-based polygon clipping method orGPU-based pixel counting method should be used. For low numbers of shadingsurfaces (less than ~200), PolygonClipping requires less runtime thanPixelCounting. However, PixelCounting runtime scales significantlybetter at higher numbers of shading surfaces. PixelCounting also hasno limitations related to zone concavity when used with any“FullInterior” solar distribution options.")]
         [DataMember(Name = "calculation_method")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("calculation_method")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("calculation_method")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public CalculationMethod CalculationMethod { get; set; } = CalculationMethod.PolygonClipping;
 
         /// <summary>
@@ -88,7 +91,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text describing how often the solar and shading calculations are updated with respect to the flow of time in the simulation.")]
         [DataMember(Name = "calculation_update_method")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("calculation_update_method")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("calculation_update_method")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public CalculationUpdateMethod CalculationUpdateMethod { get; set; } = CalculationUpdateMethod.Periodic;
 
         /// <summary>
@@ -97,7 +102,9 @@ namespace HoneybeeSchema
         [Summary(@"Integer for the number of days in each period for which a unique shadow calculation will be performed. This field is only used if the Periodic calculation_method is used.")]
         [Range(1, int.MaxValue)]
         [DataMember(Name = "calculation_frequency")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("calculation_frequency")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("calculation_frequency")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public int CalculationFrequency { get; set; } = 30;
 
         /// <summary>
@@ -106,7 +113,9 @@ namespace HoneybeeSchema
         [Summary(@"Number of allowable figures in shadow overlap calculations.")]
         [Range(200, int.MaxValue)]
         [DataMember(Name = "maximum_figures")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("maximum_figures")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("maximum_figures")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public int MaximumFigures { get; set; } = 15000;
 
 

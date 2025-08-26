@@ -4,10 +4,9 @@
  * Contact: info@ladybug.tools
  */
 
- extern alias LBTNewtonSoft;
  using System.Runtime.Serialization;
- using LBTNewtonSoft::Newtonsoft.Json;
- using LBTNewtonSoft::Newtonsoft.Json.Converters;
+ using LBT.Newtonsoft.Json;
+ using LBT.Newtonsoft.Json.Converters;
 
 namespace HoneybeeSchema
 {

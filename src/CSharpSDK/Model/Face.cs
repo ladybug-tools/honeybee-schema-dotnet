@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Face" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected Face() 
         { 
             // Set readonly properties with defaultValue
@@ -82,7 +81,7 @@ namespace HoneybeeSchema
         [Summary(@"Planar Face3D for the geometry.")]
         [Required]
         [DataMember(Name = "geometry", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("geometry")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("geometry")] // For System.Text.Json
         public Face3D Geometry { get; set; }
 
         /// <summary>
@@ -91,7 +90,7 @@ namespace HoneybeeSchema
         [Summary(@"FaceType")]
         [Required]
         [DataMember(Name = "face_type", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("face_type")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("face_type")] // For System.Text.Json
         public FaceType FaceType { get; set; }
 
         /// <summary>
@@ -100,9 +99,7 @@ namespace HoneybeeSchema
         [Summary(@"BoundaryCondition")]
         [Required]
         [DataMember(Name = "boundary_condition", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("boundary_condition")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("boundary_condition")] // For System.Text.Json
         public AnyOf<Ground, Outdoors, Adiabatic, Surface, OtherSideTemperature> BoundaryCondition { get; set; }
 
         /// <summary>
@@ -111,7 +108,7 @@ namespace HoneybeeSchema
         [Summary(@"Extension properties for particular simulation engines (Radiance, EnergyPlus).")]
         [Required]
         [DataMember(Name = "properties", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("properties")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("properties")] // For System.Text.Json
         public FacePropertiesAbridged Properties { get; set; }
 
         /// <summary>
@@ -119,7 +116,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Apertures assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid.")]
         [DataMember(Name = "apertures")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("apertures")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("apertures")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<Aperture> Apertures { get; set; }
 
         /// <summary>
@@ -127,7 +126,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Doors assigned to this Face. Should be coplanar with this Face and completely within the boundary of the Face to be valid.")]
         [DataMember(Name = "doors")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("doors")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("doors")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<Door> Doors { get; set; }
 
         /// <summary>
@@ -135,7 +136,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Shades assigned to the interior side of this object.")]
         [DataMember(Name = "indoor_shades")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("indoor_shades")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("indoor_shades")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<Shade> IndoorShades { get; set; }
 
         /// <summary>
@@ -143,7 +146,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Shades assigned to the exterior side of this object (eg. balcony, overhang).")]
         [DataMember(Name = "outdoor_shades")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("outdoor_shades")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("outdoor_shades")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<Shade> OutdoorShades { get; set; }
 
 

@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleRulesetAbridged" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected ScheduleRulesetAbridged() 
         { 
             // Set readonly properties with defaultValue
@@ -80,7 +79,7 @@ namespace HoneybeeSchema
         [Summary(@"A list of ScheduleDays that are referenced in the other keys of this ScheduleRulesetAbridged.")]
         [Required]
         [DataMember(Name = "day_schedules", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("day_schedules")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("day_schedules")] // For System.Text.Json
         public List<ScheduleDay> DaySchedules { get; set; }
 
         /// <summary>
@@ -91,7 +90,7 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "default_day_schedule", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("default_day_schedule")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("default_day_schedule")] // For System.Text.Json
         public string DefaultDaySchedule { get; set; }
 
         /// <summary>
@@ -99,7 +98,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of ScheduleRuleAbridged that note exceptions to the default_day_schedule. These rules should be ordered from highest to lowest priority.")]
         [DataMember(Name = "schedule_rules")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("schedule_rules")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("schedule_rules")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<ScheduleRuleAbridged> ScheduleRules { get; set; }
 
         /// <summary>
@@ -109,7 +110,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "holiday_schedule")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("holiday_schedule")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("holiday_schedule")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string HolidaySchedule { get; set; }
 
         /// <summary>
@@ -119,7 +122,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "summer_designday_schedule")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("summer_designday_schedule")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("summer_designday_schedule")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string SummerDesigndaySchedule { get; set; }
 
         /// <summary>
@@ -129,7 +134,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "winter_designday_schedule")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("winter_designday_schedule")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("winter_designday_schedule")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string WinterDesigndaySchedule { get; set; }
 
         /// <summary>
@@ -139,7 +146,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "schedule_type_limit")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("schedule_type_limit")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("schedule_type_limit")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ScheduleTypeLimit { get; set; }
 
 

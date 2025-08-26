@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowConstructionShade" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected WindowConstructionShade() 
         { 
             // Set readonly properties with defaultValue
@@ -78,7 +77,7 @@ namespace HoneybeeSchema
         [Summary(@"A WindowConstruction object that serves as the ""switched off"" version of the construction (aka. the ""bare construction""). The shade_material and shade_location will be used to modify this starting construction.")]
         [Required]
         [DataMember(Name = "window_construction", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("window_construction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("window_construction")] // For System.Text.Json
         public WindowConstruction WindowConstruction { get; set; }
 
         /// <summary>
@@ -87,9 +86,7 @@ namespace HoneybeeSchema
         [Summary(@"Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly.")]
         [Required]
         [DataMember(Name = "shade_material", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("shade_material")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("shade_material")] // For System.Text.Json
         public AnyOf<EnergyWindowMaterialShade, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing> ShadeMaterial { get; set; }
 
         /// <summary>
@@ -97,7 +94,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the ""Between"" option. Also note that, for a WindowConstruction with more than one gas gap, the ""Between"" option defaults to using the inner gap as this is the only option that EnergyPlus supports.")]
         [DataMember(Name = "shade_location")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("shade_location")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("shade_location")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ShadeLocation ShadeLocation { get; set; } = ShadeLocation.Interior;
 
         /// <summary>
@@ -105,7 +104,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text to indicate how the shading device is controlled, which determines when the shading is “on” or “off.”")]
         [DataMember(Name = "control_type")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("control_type")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("control_type")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ControlType ControlType { get; set; } = ControlType.AlwaysOn;
 
         /// <summary>
@@ -113,7 +114,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number that corresponds to the specified control_type. This can be a value in (W/m2), (C) or (W) depending upon the control type.Note that this value cannot be None for any control type except ""AlwaysOn.""")]
         [DataMember(Name = "setpoint")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("setpoint")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("setpoint")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Setpoint { get; set; }
 
         /// <summary>
@@ -121,9 +124,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"An optional ScheduleRuleset or ScheduleFixedInterval to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction.")]
         [DataMember(Name = "schedule")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<ScheduleRuleset, ScheduleFixedInterval> Schedule { get; set; }
 
 

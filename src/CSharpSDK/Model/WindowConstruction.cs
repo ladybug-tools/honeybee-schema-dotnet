@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowConstruction" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected WindowConstruction() 
         { 
             // Set readonly properties with defaultValue
@@ -70,7 +69,7 @@ namespace HoneybeeSchema
         [Summary(@"List of glazing and gas material definitions. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.")]
         [Required]
         [DataMember(Name = "materials", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("materials")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("materials")] // For System.Text.Json
         public List<AnyOf<EnergyWindowMaterialSimpleGlazSys, EnergyWindowMaterialGlazing, EnergyWindowMaterialGas, EnergyWindowMaterialGasCustom, EnergyWindowMaterialGasMixture>> Materials { get; set; }
 
         /// <summary>
@@ -78,7 +77,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"An optional window frame material for the frame that surrounds the window construction.")]
         [DataMember(Name = "frame")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("frame")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("frame")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public EnergyWindowFrame Frame { get; set; }
 
 

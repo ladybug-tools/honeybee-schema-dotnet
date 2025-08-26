@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ServiceHotWaterAbridged" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected ServiceHotWaterAbridged() 
         { 
             // Set readonly properties with defaultValue
@@ -77,7 +76,7 @@ namespace HoneybeeSchema
         [Required]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "flow_per_area", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("flow_per_area")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("flow_per_area")] // For System.Text.Json
         public double FlowPerArea { get; set; }
 
         /// <summary>
@@ -88,7 +87,7 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "schedule", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
         public string Schedule { get; set; }
 
         /// <summary>
@@ -96,7 +95,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Number for the target temperature of water out of the tap (C). This the temperature after hot water has been mixed with cold water from the water mains. The default is 60C, which essentially assumes that the flow_per_area on this object is only for water straight out of the water heater.")]
         [DataMember(Name = "target_temperature")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("target_temperature")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("target_temperature")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double TargetTemperature { get; set; } = 60D;
 
         /// <summary>
@@ -105,7 +106,9 @@ namespace HoneybeeSchema
         [Summary(@"A number between 0 and 1 for the fraction of the total hot water load given off as sensible heat in the zone.")]
         [Range(0, 1)]
         [DataMember(Name = "sensible_fraction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("sensible_fraction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("sensible_fraction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SensibleFraction { get; set; } = 0.2D;
 
         /// <summary>
@@ -114,7 +117,9 @@ namespace HoneybeeSchema
         [Summary(@"A number between 0 and 1 for the fraction of the total hot water load that is latent.")]
         [Range(0, 1)]
         [DataMember(Name = "latent_fraction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("latent_fraction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("latent_fraction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LatentFraction { get; set; } = 0.05D;
 
 

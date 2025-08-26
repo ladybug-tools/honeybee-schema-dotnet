@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0</TargetFrameworks>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<Version>1.5900.8</Version>
+		<Version>1.5901.0</Version>
 		<Authors>Ladybug Tools</Authors>
 		<Description>This is the .Net version of Honeybee Schema</Description>
 		<Copyright>Copyright © 2025 Ladybug Tools LLC</Copyright>
@@ -24,12 +24,9 @@
 		<DebugType>none</DebugType>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="LBT.Newtonsoft.Json" Version="12.0.3.23910">
-			<Aliases>LBTNewtonSoft</Aliases>
-		</PackageReference>
+		<PackageReference Include="LBT.Newtonsoft.Json" Version="13.0.3"/>
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
 		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
-		<PackageReference Include="System.Text.Json" Version="[6.0.10,)" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Update="Resource.Designer.cs">

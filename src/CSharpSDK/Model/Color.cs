@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Color" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected Color() 
         { 
             // Set readonly properties with defaultValue
@@ -72,7 +71,7 @@ namespace HoneybeeSchema
         [Required]
         [Range(0, 255)]
         [DataMember(Name = "r", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("r")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("r")] // For System.Text.Json
         public int R { get; set; }
 
         /// <summary>
@@ -82,7 +81,7 @@ namespace HoneybeeSchema
         [Required]
         [Range(0, 255)]
         [DataMember(Name = "g", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("g")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("g")] // For System.Text.Json
         public int G { get; set; }
 
         /// <summary>
@@ -92,7 +91,7 @@ namespace HoneybeeSchema
         [Required]
         [Range(0, 255)]
         [DataMember(Name = "b", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("b")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("b")] // For System.Text.Json
         public int B { get; set; }
 
         /// <summary>
@@ -101,7 +100,9 @@ namespace HoneybeeSchema
         [Summary(@"Value for the alpha channel, which defines the opacity as a number between 0 (fully transparent) and 255 (fully opaque).")]
         [Range(0, 255)]
         [DataMember(Name = "a")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("a")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("a")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public int A { get; set; } = 255;
 
 

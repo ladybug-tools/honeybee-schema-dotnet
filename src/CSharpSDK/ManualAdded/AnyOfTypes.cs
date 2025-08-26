@@ -1,11 +1,14 @@
-﻿extern alias LBTNewtonSoft; using System;
+﻿using LBT.Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace HoneybeeSchema
 {
 
-
+    [LBT.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
+     //[System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
     public class AnyOf
     {
 

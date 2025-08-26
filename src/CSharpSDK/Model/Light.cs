@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Light" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected Light() 
         { 
             // Set readonly properties with defaultValue
@@ -74,9 +73,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Material modifier.")]
         [DataMember(Name = "modifier")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("modifier")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("modifier")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> Modifier { get; set; } = new Void();
 
         /// <summary>
@@ -84,7 +83,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.")]
         [DataMember(Name = "dependencies")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("dependencies")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("dependencies")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>> Dependencies { get; set; }
 
         /// <summary>
@@ -93,7 +94,9 @@ namespace HoneybeeSchema
         [Summary(@"A value between 0 and 1 for the red channel of the modifier.")]
         [Range(0, 1)]
         [DataMember(Name = "r_emittance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("r_emittance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("r_emittance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double REmittance { get; set; } = 0D;
 
         /// <summary>
@@ -102,7 +105,9 @@ namespace HoneybeeSchema
         [Summary(@"A value between 0 and 1 for the green channel of the modifier.")]
         [Range(0, 1)]
         [DataMember(Name = "g_emittance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("g_emittance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("g_emittance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double GEmittance { get; set; } = 0D;
 
         /// <summary>
@@ -111,7 +116,9 @@ namespace HoneybeeSchema
         [Summary(@"A value between 0 and 1 for the blue channel of the modifier.")]
         [Range(0, 1)]
         [DataMember(Name = "b_emittance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("b_emittance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("b_emittance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double BEmittance { get; set; } = 0D;
 
 

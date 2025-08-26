@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="WindCondition" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected WindCondition() 
         { 
             // Set readonly properties with defaultValue
@@ -68,7 +67,7 @@ namespace HoneybeeSchema
         [Required]
         [Range(0, 40)]
         [DataMember(Name = "wind_speed", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("wind_speed")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("wind_speed")] // For System.Text.Json
         public double WindSpeed { get; set; }
 
         /// <summary>
@@ -77,7 +76,9 @@ namespace HoneybeeSchema
         [Summary(@"Wind direction on the design day [degrees].")]
         [Range(0, 360)]
         [DataMember(Name = "wind_direction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("wind_direction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("wind_direction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double WindDirection { get; set; } = 0D;
 
 

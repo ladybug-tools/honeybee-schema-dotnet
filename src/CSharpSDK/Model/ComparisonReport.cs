@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -28,8 +27,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ComparisonReport" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected ComparisonReport() 
         { 
             // Set readonly properties with defaultValue
@@ -65,7 +64,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of ChangedObject definitions for each top-level object that has changed in the model. To be a changed object, the object identifier must be the same in both models but some other property (either geometry or extension attributes) has experienced a meaningful change.")]
         [DataMember(Name = "changed_objects")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("changed_objects")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("changed_objects")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<ChangedObject> ChangedObjects { get; set; }
 
         /// <summary>
@@ -73,7 +74,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of DeletedObject definitions for each top-level object that has been deleted in the process of going from the base model to the new model.")]
         [DataMember(Name = "deleted_objects")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("deleted_objects")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("deleted_objects")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<DeletedObject> DeletedObjects { get; set; }
 
         /// <summary>
@@ -81,7 +84,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of AddedObject definitions for each top-level object that has been added in the process of going from the base model to the new model.")]
         [DataMember(Name = "added_objects")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("added_objects")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("added_objects")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<AddedObject> AddedObjects { get; set; }
 
 

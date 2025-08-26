@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="RoomEnergyPropertiesAbridged" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected RoomEnergyPropertiesAbridged() 
         { 
             // Set readonly properties with defaultValue
@@ -98,7 +97,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "construction_set")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("construction_set")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("construction_set")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ConstructionSet { get; set; }
 
         /// <summary>
@@ -108,7 +109,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "program_type")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("program_type")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("program_type")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ProgramType { get; set; }
 
         /// <summary>
@@ -118,7 +121,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "hvac")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("hvac")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("hvac")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Hvac { get; set; }
 
         /// <summary>
@@ -128,7 +133,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "shw")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("shw")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("shw")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Shw { get; set; }
 
         /// <summary>
@@ -136,7 +143,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"People object to describe the occupancy of the Room.")]
         [DataMember(Name = "people")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("people")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("people")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public PeopleAbridged People { get; set; }
 
         /// <summary>
@@ -144,7 +153,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Lighting object to describe the lighting usage of the Room.")]
         [DataMember(Name = "lighting")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("lighting")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("lighting")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public LightingAbridged Lighting { get; set; }
 
         /// <summary>
@@ -152,7 +163,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"ElectricEquipment object to describe the electric equipment usage.")]
         [DataMember(Name = "electric_equipment")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("electric_equipment")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("electric_equipment")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ElectricEquipmentAbridged ElectricEquipment { get; set; }
 
         /// <summary>
@@ -160,7 +173,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"GasEquipment object to describe the gas equipment usage.")]
         [DataMember(Name = "gas_equipment")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("gas_equipment")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("gas_equipment")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public GasEquipmentAbridged GasEquipment { get; set; }
 
         /// <summary>
@@ -168,7 +183,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"ServiceHotWater object to describe the hot water usage.")]
         [DataMember(Name = "service_hot_water")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("service_hot_water")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("service_hot_water")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ServiceHotWaterAbridged ServiceHotWater { get; set; }
 
         /// <summary>
@@ -176,7 +193,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Infiltration object to to describe the outdoor air leakage.")]
         [DataMember(Name = "infiltration")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("infiltration")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("infiltration")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public InfiltrationAbridged Infiltration { get; set; }
 
         /// <summary>
@@ -184,7 +203,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Ventilation object for the minimum outdoor air requirement.")]
         [DataMember(Name = "ventilation")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("ventilation")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("ventilation")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public VentilationAbridged Ventilation { get; set; }
 
         /// <summary>
@@ -192,7 +213,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Setpoint object for the temperature setpoints of the Room.")]
         [DataMember(Name = "setpoint")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("setpoint")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("setpoint")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public SetpointAbridged Setpoint { get; set; }
 
         /// <summary>
@@ -200,7 +223,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"An optional DaylightingControl object to dictate the dimming of lights. If None, the lighting will respond only to the schedule and not the daylight conditions within the room.")]
         [DataMember(Name = "daylighting_control")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("daylighting_control")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("daylighting_control")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public DaylightingControl DaylightingControl { get; set; }
 
         /// <summary>
@@ -208,7 +233,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"An optional VentilationControl object to dictate the opening of windows. If None, the windows will never open.")]
         [DataMember(Name = "window_vent_control")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("window_vent_control")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("window_vent_control")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public VentilationControlAbridged WindowVentControl { get; set; }
 
         /// <summary>
@@ -216,7 +243,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"An optional list of VentilationFan objects for fans within the room. Note that these fans are not connected to the heating or cooling system and are meant to represent the intentional circulation of unconditioned outdoor air for the purposes of keeping a space cooler, drier or free of indoor pollutants (as in the case of kitchen or bathroom exhaust fans). For the specification of mechanical ventilation of conditioned outdoor air, the Room.ventilation property should be used and the Room should be given a HVAC that can meet this specification.")]
         [DataMember(Name = "fans")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("fans")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("fans")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<VentilationFan> Fans { get; set; }
 
         /// <summary>
@@ -224,7 +253,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"An optional list of of InternalMass objects for thermal mass exposed to Room air. Note that internal masses assigned this way cannot ""see"" solar radiation that may potentially hit them and, as such, caution should be taken when using this component with internal mass objects that are not always in shade. Masses are factored into the the thermal calculations of the Room by undergoing heat transfer with the indoor air.")]
         [DataMember(Name = "internal_masses")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("internal_masses")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("internal_masses")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<InternalMassAbridged> InternalMasses { get; set; }
 
         /// <summary>
@@ -232,7 +263,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"An optional list of of Process objects for process loads within the room. These can represent kilns, manufacturing equipment, and various industrial processes. They can also be used to represent wood burning fireplaces or certain pieces of equipment to be separated from the other end uses.")]
         [DataMember(Name = "process_loads")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("process_loads")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("process_loads")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<ProcessAbridged> ProcessLoads { get; set; }
 
 

@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="SkyCondition" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected SkyCondition() 
         { 
             // Set readonly properties with defaultValue
@@ -67,7 +66,7 @@ namespace HoneybeeSchema
         [Summary(@"A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).")]
         [Required]
         [DataMember(Name = "date", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("date")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("date")] // For System.Text.Json
         public List<int> Date { get; set; }
 
         /// <summary>
@@ -75,7 +74,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Boolean to indicate whether daylight savings time is active on the design day.")]
         [DataMember(Name = "daylight_savings")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("daylight_savings")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("daylight_savings")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool DaylightSavings { get; set; } = false;
 
 

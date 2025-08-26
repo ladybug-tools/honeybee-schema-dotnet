@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ShadeConstruction" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected ShadeConstruction() 
         { 
             // Set readonly properties with defaultValue
@@ -72,7 +71,9 @@ namespace HoneybeeSchema
         [Summary(@"A number for the solar reflectance of the construction.")]
         [Range(0, 1)]
         [DataMember(Name = "solar_reflectance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("solar_reflectance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("solar_reflectance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SolarReflectance { get; set; } = 0.2D;
 
         /// <summary>
@@ -81,7 +82,9 @@ namespace HoneybeeSchema
         [Summary(@"A number for the visible reflectance of the construction.")]
         [Range(0, 1)]
         [DataMember(Name = "visible_reflectance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("visible_reflectance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("visible_reflectance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double VisibleReflectance { get; set; } = 0.2D;
 
         /// <summary>
@@ -89,7 +92,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Boolean to note whether the reflection off the shade is diffuse (False) or specular (True). Set to True if the construction is representing a glass facade or a mirror material.")]
         [DataMember(Name = "is_specular")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("is_specular")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("is_specular")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool IsSpecular { get; set; } = false;
 
 

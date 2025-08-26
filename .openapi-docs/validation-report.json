@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Honeybee validation-report schema.",
-    "version": "1.59.0",
+    "version": "1.59.1",
     "title": "Honeybee Validation Report Schema",
     "contact": {
       "name": "Ladybug Tools",
@@ -30,6 +30,11 @@
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/ExtensionTypes\" />\n"
     },
     {
+      "name": "face3d_model",
+      "x-displayName": "Face3D",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/Face3D\" />\n"
+    },
+    {
       "name": "linesegment3d_model",
       "x-displayName": "LineSegment3D",
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/LineSegment3D\" />\n"
@@ -43,6 +48,11 @@
       "name": "parenttypes_model",
       "x-displayName": "ParentTypes",
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/ParentTypes\" />\n"
+    },
+    {
+      "name": "plane_model",
+      "x-displayName": "Plane",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/Plane\" />\n"
     },
     {
       "name": "point3d_model",
@@ -70,9 +80,11 @@
       "name": "Models",
       "tags": [
         "extensiontypes_model",
+        "face3d_model",
         "linesegment3d_model",
         "objecttypes_model",
         "parenttypes_model",
+        "plane_model",
         "point3d_model",
         "validationerror_model",
         "validationparent_model",
@@ -252,6 +264,118 @@
         ],
         "additionalProperties": false
       },
+      "Plane": {
+        "title": "Plane",
+        "description": "Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.",
+        "type": "object",
+        "properties": {
+          "n": {
+            "title": "N",
+            "description": "Plane normal as 3 (x, y, z) values.",
+            "minItems": 3,
+            "maxItems": 3,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "o": {
+            "title": "O",
+            "description": "Plane origin as 3 (x, y, z) values",
+            "minItems": 3,
+            "maxItems": 3,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "type": {
+            "title": "Type",
+            "default": "Plane",
+            "pattern": "^Plane$",
+            "type": "string",
+            "readOnly": true
+          },
+          "x": {
+            "title": "X",
+            "description": "Plane x-axis as 3 (x, y, z) values. If None, it is autocalculated.",
+            "minItems": 3,
+            "maxItems": 3,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        },
+        "required": [
+          "n",
+          "o"
+        ],
+        "additionalProperties": false
+      },
+      "Face3D": {
+        "title": "Face3D",
+        "description": "A single planar face in 3D space.",
+        "type": "object",
+        "properties": {
+          "boundary": {
+            "title": "Boundary",
+            "description": "A list of points representing the outer boundary vertices of the face. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.",
+            "minItems": 3,
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "format": "double"
+              },
+              "minItems": 3,
+              "maxItems": 3
+            }
+          },
+          "type": {
+            "title": "Type",
+            "default": "Face3D",
+            "pattern": "^Face3D$",
+            "type": "string",
+            "readOnly": true
+          },
+          "holes": {
+            "title": "Holes",
+            "description": "Optional list of lists with one list for each hole in the face.Each hole should be a list of at least 3 points and each point a list of 3 (x, y, z) values. If None, it will be assumed that there are no holes in the face.",
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                },
+                "minItems": 3,
+                "maxItems": 3
+              },
+              "minItems": 3
+            }
+          },
+          "plane": {
+            "title": "Plane",
+            "description": "Optional Plane indicating the plane in which the face exists.If None, the plane will usually be derived from the boundary points.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Plane"
+              }
+            ]
+          }
+        },
+        "required": [
+          "boundary"
+        ],
+        "additionalProperties": false
+      },
       "ValidationError": {
         "title": "ValidationError",
         "type": "object",
@@ -346,6 +470,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/LineSegment3D"
+                },
+                {
+                  "$ref": "#/components/schemas/Face3D"
                 }
               ]
             }

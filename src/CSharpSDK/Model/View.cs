@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="View" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected View() 
         { 
             // Set readonly properties with defaultValue
@@ -89,7 +88,7 @@ namespace HoneybeeSchema
         [Summary(@"The view position (-vp) as an array of (x, y, z) values.This is the focal point of a perspective view or the center of a parallel projection.")]
         [Required]
         [DataMember(Name = "position", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("position")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("position")] // For System.Text.Json
         public List<double> Position { get; set; }
 
         /// <summary>
@@ -98,7 +97,7 @@ namespace HoneybeeSchema
         [Summary(@"The view direction (-vd) as an array of (x, y, z) values.The length of this vector indicates the focal distance as needed by the pixel depth of field (-pd) in rpict.")]
         [Required]
         [DataMember(Name = "direction", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("direction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("direction")] // For System.Text.Json
         public List<double> Direction { get; set; }
 
         /// <summary>
@@ -107,7 +106,7 @@ namespace HoneybeeSchema
         [Summary(@"The view up (-vu) vector as an array of (x, y, z) values.")]
         [Required]
         [DataMember(Name = "up_vector", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("up_vector")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("up_vector")] // For System.Text.Json
         public List<double> UpVector { get; set; }
 
         /// <summary>
@@ -115,7 +114,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"ViewType")]
         [DataMember(Name = "view_type")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("view_type")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("view_type")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ViewType ViewType { get; set; } = ViewType.V;
 
         /// <summary>
@@ -123,7 +124,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number for the horizontal field of view in degrees (for all perspective projections including fisheye). For a parallel projection, this is the view width in world coordinates.")]
         [DataMember(Name = "h_size")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("h_size")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("h_size")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double HSize { get; set; } = 60D;
 
         /// <summary>
@@ -131,7 +134,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number for the vertical field of view in degrees (for all perspective projections including fisheye). For a parallel projection, this is the view width in world coordinates.")]
         [DataMember(Name = "v_size")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("v_size")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("v_size")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double VSize { get; set; } = 60D;
 
         /// <summary>
@@ -139,7 +144,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"The view shift (-vs). This is the amount the actual image will be shifted to the right of the specified view. This option is useful for generating skewed perspectives or rendering an image a piece at a time. A value of 1 means that the rendered image starts just to the right of the normal view. A value of -1 would be to the left. Larger or fractional values are permitted as well.")]
         [DataMember(Name = "shift")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("shift")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("shift")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Shift { get; set; }
 
         /// <summary>
@@ -147,7 +154,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"The view lift (-vl). This is the amount the actual image will be lifted up from the specified view. This option is useful for generating skewed perspectives or rendering an image a piece at a time. A value of 1 means that the rendered image starts just to the right of the normal view. A value of -1 would be to the left. Larger or fractional values are permitted as well.")]
         [DataMember(Name = "lift")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("lift")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("lift")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Lift { get; set; }
 
         /// <summary>
@@ -155,7 +164,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"View fore clip (-vo) at a distance from the view point.The plane will be perpendicular to the view direction for perspective and parallel view types. For fisheye view types, the clipping plane is actually a clipping sphere, centered on the view point with fore_clip radius. Objects in front of this imaginary surface will not be visible.")]
         [DataMember(Name = "fore_clip")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("fore_clip")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("fore_clip")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double ForeClip { get; set; }
 
         /// <summary>
@@ -163,7 +174,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"View aft clip (-va) at a distance from the view point.Like the view fore plane, it will be perpendicular to the view direction for perspective and parallel view types. For fisheye view types, the clipping plane is actually a clipping sphere, centered on the view point with radius val.")]
         [DataMember(Name = "aft_clip")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("aft_clip")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("aft_clip")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double AftClip { get; set; }
 
         /// <summary>
@@ -171,7 +184,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"An optional string to note the view group '             'to which the sensor is a part of. Views sharing the same '             'group_identifier will be written to the same subfolder in Radiance '             'folder (default: None).")]
         [DataMember(Name = "group_identifier")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("group_identifier")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("group_identifier")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string GroupIdentifier { get; set; }
 
 
