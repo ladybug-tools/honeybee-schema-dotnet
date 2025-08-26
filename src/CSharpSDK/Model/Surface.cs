@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Surface" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected Surface() 
         { 
             // Set readonly properties with defaultValue
@@ -65,7 +64,7 @@ namespace HoneybeeSchema
         [Summary(@"A list of up to 3 object identifiers that are adjacent to this one. The first object is always the one that is immediately adjacent and is of the same object type (Face, Aperture, Door). When this boundary condition is applied to a Face, the second object in the tuple will be the parent Room of the adjacent object. When the boundary condition is applied to a sub-face (Door or Aperture), the second object will be the parent Face of the adjacent sub-face and the third object will be the parent Room of the adjacent sub-face.")]
         [Required]
         [DataMember(Name = "boundary_condition_objects", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("boundary_condition_objects")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("boundary_condition_objects")] // For System.Text.Json
         public List<string> BoundaryConditionObjects { get; set; }
 
 

@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructionSetAbridged" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected ConstructionSetAbridged() 
         { 
             // Set readonly properties with defaultValue
@@ -79,7 +78,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A WallConstructionSetAbridged object for this ConstructionSet.")]
         [DataMember(Name = "wall_set")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("wall_set")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("wall_set")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public WallConstructionSetAbridged WallSet { get; set; }
 
         /// <summary>
@@ -87,7 +88,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A FloorConstructionSetAbridged object for this ConstructionSet.")]
         [DataMember(Name = "floor_set")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("floor_set")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("floor_set")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public FloorConstructionSetAbridged FloorSet { get; set; }
 
         /// <summary>
@@ -95,7 +98,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A RoofCeilingConstructionSetAbridged object for this ConstructionSet.")]
         [DataMember(Name = "roof_ceiling_set")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("roof_ceiling_set")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("roof_ceiling_set")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public RoofCeilingConstructionSetAbridged RoofCeilingSet { get; set; }
 
         /// <summary>
@@ -103,7 +108,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A ApertureConstructionSetAbridged object for this ConstructionSet.")]
         [DataMember(Name = "aperture_set")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("aperture_set")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("aperture_set")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ApertureConstructionSetAbridged ApertureSet { get; set; }
 
         /// <summary>
@@ -111,7 +118,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A DoorConstructionSetAbridged object for this ConstructionSet.")]
         [DataMember(Name = "door_set")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("door_set")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("door_set")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public DoorConstructionSetAbridged DoorSet { get; set; }
 
         /// <summary>
@@ -121,7 +130,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "shade_construction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("shade_construction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("shade_construction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ShadeConstruction { get; set; }
 
         /// <summary>
@@ -131,7 +142,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "air_boundary_construction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("air_boundary_construction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("air_boundary_construction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string AirBoundaryConstruction { get; set; }
 
 

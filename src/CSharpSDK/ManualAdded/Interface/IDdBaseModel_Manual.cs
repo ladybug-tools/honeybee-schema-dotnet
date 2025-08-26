@@ -1,4 +1,6 @@
 
+
+
 namespace HoneybeeSchema
 {
     public partial interface IIDdBaseModel: IIDdBase
@@ -14,7 +16,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Get UserData in Dictionary
         /// </summary>
-        [System.Text.Json.Serialization.JsonIgnore]
+        [LBT.Newtonsoft.Json.JsonIgnore]
+        // [System.Text.Json.Serialization.JsonIgnore] // for future switching to System.Text.Json
         public System.Collections.Generic.Dictionary<string, object> UserDictionary => this.GetUserData();
         /// <summary>
         /// Add a new value to UserData
@@ -30,7 +33,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Get UserData in Dictionary
         /// </summary>
-        [System.Text.Json.Serialization.JsonIgnore]
+        [LBT.Newtonsoft.Json.JsonIgnore]
+        // [System.Text.Json.Serialization.JsonIgnore] // for future switching to System.Text.Json
         public System.Collections.Generic.Dictionary<string, object> UserDictionary => this.GetUserData();
         /// <summary>
         /// Add a new value to UserData

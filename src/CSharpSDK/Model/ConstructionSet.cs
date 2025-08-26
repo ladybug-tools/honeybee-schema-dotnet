@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ConstructionSet" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected ConstructionSet() 
         { 
             // Set readonly properties with defaultValue
@@ -79,7 +78,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A WallConstructionSet object for this ConstructionSet.")]
         [DataMember(Name = "wall_set")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("wall_set")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("wall_set")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public WallConstructionSet WallSet { get; set; }
 
         /// <summary>
@@ -87,7 +88,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A FloorConstructionSet object for this ConstructionSet.")]
         [DataMember(Name = "floor_set")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("floor_set")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("floor_set")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public FloorConstructionSet FloorSet { get; set; }
 
         /// <summary>
@@ -95,7 +98,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A RoofCeilingConstructionSet object for this ConstructionSet.")]
         [DataMember(Name = "roof_ceiling_set")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("roof_ceiling_set")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("roof_ceiling_set")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public RoofCeilingConstructionSet RoofCeilingSet { get; set; }
 
         /// <summary>
@@ -103,7 +108,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A ApertureConstructionSet object for this ConstructionSet.")]
         [DataMember(Name = "aperture_set")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("aperture_set")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("aperture_set")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ApertureConstructionSet ApertureSet { get; set; }
 
         /// <summary>
@@ -111,7 +118,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A DoorConstructionSet object for this ConstructionSet.")]
         [DataMember(Name = "door_set")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("door_set")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("door_set")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public DoorConstructionSet DoorSet { get; set; }
 
         /// <summary>
@@ -119,7 +128,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned.")]
         [DataMember(Name = "shade_construction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("shade_construction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("shade_construction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ShadeConstruction ShadeConstruction { get; set; }
 
         /// <summary>
@@ -127,9 +138,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"An AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type.")]
         [DataMember(Name = "air_boundary_construction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("air_boundary_construction")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("air_boundary_construction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<AirBoundaryConstruction, OpaqueConstruction> AirBoundaryConstruction { get; set; }
 
 

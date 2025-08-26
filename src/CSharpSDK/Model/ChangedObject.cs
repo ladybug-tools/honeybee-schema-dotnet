@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -28,8 +27,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ChangedObject" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected ChangedObject() 
         { 
             // Set readonly properties with defaultValue
@@ -76,7 +75,7 @@ namespace HoneybeeSchema
         [Summary(@"Text for the type of object that has been changed.")]
         [Required]
         [DataMember(Name = "element_type", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("element_type")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("element_type")] // For System.Text.Json
         public GeometryObjectTypes ElementType { get; set; }
 
         /// <summary>
@@ -88,7 +87,7 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "element_id", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("element_id")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("element_id")] // For System.Text.Json
         public string ElementId { get; set; }
 
         /// <summary>
@@ -97,7 +96,7 @@ namespace HoneybeeSchema
         [Summary(@"A boolean to note whether the geometry of the object has changed (True) or not (False). For the case of a Room, any change in the geometry of child Faces, Apertures or Doors will cause this property to be True. Note that this property is only True if the change in geometry produces a visible change greater than the base model tolerance. So converting the model between different unit systems, removing colinear vertices, or doing other transformations that are common for export to simulation engines will not trigger this property to become True.")]
         [Required]
         [DataMember(Name = "geometry_changed", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("geometry_changed")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("geometry_changed")] // For System.Text.Json
         public bool GeometryChanged { get; set; }
 
         /// <summary>
@@ -106,7 +105,7 @@ namespace HoneybeeSchema
         [Summary(@"A list of DisplayFace3D dictionaries for the new, changed geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been changed. Note that this attribute is always included in the ChangedObject, even when geometry_changed is False.")]
         [Required]
         [DataMember(Name = "geometry", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("geometry")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("geometry")] // For System.Text.Json
         public List<object> Geometry { get; set; }
 
         /// <summary>
@@ -114,7 +113,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text string for the display name of the object that has changed.")]
         [DataMember(Name = "element_name")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("element_name")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("element_name")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ElementName { get; set; }
 
         /// <summary>
@@ -122,7 +123,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A boolean to note whether the energy properties of the object have changed (True) or not (False) such that it is possible for the properties of the changed object to be applied to the base model. For Rooms, this property will only be true if the energy property assigned to the Room has changed and will not be true if a property assigned to an individual child Face or Aperture has changed.")]
         [DataMember(Name = "energy_changed")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("energy_changed")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("energy_changed")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool EnergyChanged { get; set; } = false;
 
         /// <summary>
@@ -130,7 +133,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A boolean to note whether the radiance properties of the object have changed (True) or not (False) such that it is possible for the properties of the changed object to be applied to the base model. For Rooms, this property will only be true if the radiance property assigned to the Room has changed and will not be true if a property assigned to an individual child Face or Aperture has changed.")]
         [DataMember(Name = "radiance_changed")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("radiance_changed")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("radiance_changed")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool RadianceChanged { get; set; } = false;
 
         /// <summary>
@@ -138,7 +143,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of DisplayFace3D dictionaries for the existing (base) geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been changed. This attribute is optional and will NOT be output if geometry_changed is False.")]
         [DataMember(Name = "existing_geometry")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("existing_geometry")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("existing_geometry")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<object> ExistingGeometry { get; set; }
 
 

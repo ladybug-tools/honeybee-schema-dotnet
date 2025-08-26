@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="SimulationOutput" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected SimulationOutput() 
         { 
             // Set readonly properties with defaultValue
@@ -70,7 +69,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"ReportingFrequency")]
         [DataMember(Name = "reporting_frequency")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("reporting_frequency")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("reporting_frequency")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ReportingFrequency ReportingFrequency { get; set; } = ReportingFrequency.Hourly;
 
         /// <summary>
@@ -78,7 +79,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of EnergyPlus output names as strings, which are requested from the simulation.")]
         [DataMember(Name = "outputs")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("outputs")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("outputs")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<string> Outputs { get; set; }
 
         /// <summary>
@@ -86,7 +89,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of EnergyPlus summary report names as strings.")]
         [DataMember(Name = "summary_reports")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("summary_reports")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("summary_reports")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<string> SummaryReports { get; set; }
 
         /// <summary>
@@ -95,7 +100,9 @@ namespace HoneybeeSchema
         [Summary(@"A number in degrees Celsius for the difference that the zone conditions must be from the thermostat setpoint in order for the setpoint to be considered unmet. This will affect how unmet hours are reported in the output. ASHRAE 90.1 uses a tolerance of 1.11C, which is equivalent to 1.8F.")]
         [Range(0, 10)]
         [DataMember(Name = "unmet_setpoint_tolerance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("unmet_setpoint_tolerance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("unmet_setpoint_tolerance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double UnmetSetpointTolerance { get; set; } = 1.11D;
 
 

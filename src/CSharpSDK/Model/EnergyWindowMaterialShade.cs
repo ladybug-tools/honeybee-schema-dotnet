@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialShade" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected EnergyWindowMaterialShade() 
         { 
             // Set readonly properties with defaultValue
@@ -94,7 +93,9 @@ namespace HoneybeeSchema
         [Summary(@"The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default: 0.4.")]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "solar_transmittance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("solar_transmittance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("solar_transmittance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SolarTransmittance { get; set; } = 0.4D;
 
         /// <summary>
@@ -103,7 +104,9 @@ namespace HoneybeeSchema
         [Summary(@"The reflectance averaged over the solar spectrum. It us assumed same on both sides of shade and independent of incidence angle. Default value is 0.5")]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "solar_reflectance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("solar_reflectance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("solar_reflectance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SolarReflectance { get; set; } = 0.5D;
 
         /// <summary>
@@ -112,7 +115,9 @@ namespace HoneybeeSchema
         [Summary(@"The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default: 0.4.")]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "visible_transmittance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("visible_transmittance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("visible_transmittance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double VisibleTransmittance { get; set; } = 0.4D;
 
         /// <summary>
@@ -121,7 +126,9 @@ namespace HoneybeeSchema
         [Summary(@"The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default: 0.4")]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "visible_reflectance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("visible_reflectance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("visible_reflectance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double VisibleReflectance { get; set; } = 0.4D;
 
         /// <summary>
@@ -129,7 +136,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"The effective long-wave infrared hemispherical emissivity. It is assumed same on both sides of shade. Default: 0.9.")]
         [DataMember(Name = "emissivity")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("emissivity")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("emissivity")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Emissivity { get; set; } = 0.9D;
 
         /// <summary>
@@ -138,7 +147,9 @@ namespace HoneybeeSchema
         [Summary(@"The effective long-wave transmittance. It is assumed independent of incidence angle. Default: 0.")]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "infrared_transmittance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("infrared_transmittance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("infrared_transmittance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double InfraredTransmittance { get; set; } = 0D;
 
         /// <summary>
@@ -146,7 +157,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"The thickness of the shade material in meters. Default: 0.005.")]
         [DataMember(Name = "thickness")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Thickness { get; set; } = 0.005D;
 
         /// <summary>
@@ -154,7 +167,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"The conductivity of the shade material in W/(m-K). Default value is 0.1.")]
         [DataMember(Name = "conductivity")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("conductivity")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("conductivity")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Conductivity { get; set; } = 0.1D;
 
         /// <summary>
@@ -163,7 +178,9 @@ namespace HoneybeeSchema
         [Summary(@"The distance from shade to adjacent glass in meters. Default value is 0.05")]
         [Range(0.001, 1)]
         [DataMember(Name = "distance_to_glass")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("distance_to_glass")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("distance_to_glass")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double DistanceToGlass { get; set; } = 0.05D;
 
         /// <summary>
@@ -172,7 +189,9 @@ namespace HoneybeeSchema
         [Summary(@"The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. Default: 0.5.")]
         [Range(0, 1)]
         [DataMember(Name = "top_opening_multiplier")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("top_opening_multiplier")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("top_opening_multiplier")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double TopOpeningMultiplier { get; set; } = 0.5D;
 
         /// <summary>
@@ -181,7 +200,9 @@ namespace HoneybeeSchema
         [Summary(@"The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. Default: 0.5.")]
         [Range(0, 1)]
         [DataMember(Name = "bottom_opening_multiplier")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("bottom_opening_multiplier")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("bottom_opening_multiplier")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double BottomOpeningMultiplier { get; set; } = 0.5D;
 
         /// <summary>
@@ -190,7 +211,9 @@ namespace HoneybeeSchema
         [Summary(@"The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. Default: 0.5.")]
         [Range(0, 1)]
         [DataMember(Name = "left_opening_multiplier")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("left_opening_multiplier")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("left_opening_multiplier")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LeftOpeningMultiplier { get; set; } = 0.5D;
 
         /// <summary>
@@ -199,7 +222,9 @@ namespace HoneybeeSchema
         [Summary(@"The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. Default: 0.5.")]
         [Range(0, 1)]
         [DataMember(Name = "right_opening_multiplier")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("right_opening_multiplier")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("right_opening_multiplier")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double RightOpeningMultiplier { get; set; } = 0.5D;
 
         /// <summary>
@@ -208,7 +233,9 @@ namespace HoneybeeSchema
         [Summary(@"The fraction of the shade surface that is open to air flow. If air cannot pass through the shade material, airflow_permeability = 0. Default: 0.")]
         [Range(0, 0.8)]
         [DataMember(Name = "airflow_permeability")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("airflow_permeability")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("airflow_permeability")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double AirflowPermeability { get; set; } = 0D;
 
 

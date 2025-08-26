@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Mesh3D" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected Mesh3D() 
         { 
             // Set readonly properties with defaultValue
@@ -69,7 +68,7 @@ namespace HoneybeeSchema
         [Summary(@"A list of points representing the vertices of the mesh. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.")]
         [Required]
         [DataMember(Name = "vertices", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("vertices")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("vertices")] // For System.Text.Json
         public List<List<double>> Vertices { get; set; }
 
         /// <summary>
@@ -78,7 +77,7 @@ namespace HoneybeeSchema
         [Summary(@"A list of lists with each sub-list having either 3 or 4 integers. These integers correspond to indices within the list of vertices.")]
         [Required]
         [DataMember(Name = "faces", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("faces")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("faces")] // For System.Text.Json
         public List<List<int>> Faces { get; set; }
 
         /// <summary>
@@ -86,7 +85,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"An optional list of colors that correspond to either the faces of the mesh or the vertices of the mesh.")]
         [DataMember(Name = "colors")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("colors")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("colors")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<Color> Colors { get; set; }
 
 

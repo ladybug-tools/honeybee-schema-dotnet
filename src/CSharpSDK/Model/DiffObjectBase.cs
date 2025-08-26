@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -28,8 +27,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="DiffObjectBase" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected DiffObjectBase() 
         { 
             // Set readonly properties with defaultValue
@@ -66,7 +65,7 @@ namespace HoneybeeSchema
         [Summary(@"Text for the type of object that has been changed.")]
         [Required]
         [DataMember(Name = "element_type", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("element_type")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("element_type")] // For System.Text.Json
         public GeometryObjectTypes ElementType { get; set; }
 
         /// <summary>
@@ -78,7 +77,7 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "element_id", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("element_id")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("element_id")] // For System.Text.Json
         public string ElementId { get; set; }
 
         /// <summary>
@@ -86,7 +85,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text string for the display name of the object that has changed.")]
         [DataMember(Name = "element_name")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("element_name")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("element_name")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ElementName { get; set; }
 
 

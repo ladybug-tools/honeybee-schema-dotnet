@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="RadianceAsset" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected RadianceAsset() 
         { 
             // Set readonly properties with defaultValue
@@ -71,7 +70,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "room_identifier")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("room_identifier")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("room_identifier")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string RoomIdentifier { get; set; }
 
         /// <summary>
@@ -79,7 +80,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [[""SouthWindow1""], [""static_apertures"", ""NorthWindow2""]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation.")]
         [DataMember(Name = "light_path")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("light_path")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("light_path")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<List<string>> LightPath { get; set; }
 
 

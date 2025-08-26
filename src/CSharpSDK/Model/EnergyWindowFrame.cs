@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowFrame" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected EnergyWindowFrame() 
         { 
             // Set readonly properties with defaultValue
@@ -83,7 +82,7 @@ namespace HoneybeeSchema
         [Required]
         [Range(double.MinValue, 1)]
         [DataMember(Name = "width", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("width")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("width")] // For System.Text.Json
         public double Width { get; set; }
 
         /// <summary>
@@ -92,7 +91,7 @@ namespace HoneybeeSchema
         [Summary(@"Number for the thermal conductance of the frame material measured from inside to outside of the frame surface (no air films) and taking 2D conduction effects into account [W/m2-K].")]
         [Required]
         [DataMember(Name = "conductance", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("conductance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("conductance")] // For System.Text.Json
         public double Conductance { get; set; }
 
         /// <summary>
@@ -101,7 +100,9 @@ namespace HoneybeeSchema
         [Summary(@"Number between 0 and 4 for the ratio of the glass conductance near the frame (excluding air films) divided by the glass conductance at the center of the glazing (excluding air films). This is used only for multi-pane glazing constructions. This ratio should usually be greater than 1.0 since the spacer material that separates the glass panes is usually more conductive than the gap between panes. A value of 1 effectively indicates no spacer. Values should usually be obtained from the LBNL WINDOW program so that the unique characteristics of the window construction can be accounted for.")]
         [Range(double.MinValue, 4)]
         [DataMember(Name = "edge_to_center_ratio")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("edge_to_center_ratio")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("edge_to_center_ratio")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double EdgeToCenterRatio { get; set; } = 1D;
 
         /// <summary>
@@ -110,7 +111,9 @@ namespace HoneybeeSchema
         [Summary(@"Number for the distance that the frame projects outward from the outside face of the glazing [m]. This is used to calculate shadowing of frame onto glass, solar absorbed by the frame, IR emitted and absorbed by the frame, and convection from frame.")]
         [Range(0, 0.5)]
         [DataMember(Name = "outside_projection")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("outside_projection")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("outside_projection")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double OutsideProjection { get; set; } = 0D;
 
         /// <summary>
@@ -119,7 +122,9 @@ namespace HoneybeeSchema
         [Summary(@"Number for the distance that the frame projects inward from the inside face of the glazing [m]. This is used to calculate solar absorbed by the frame, IR emitted and absorbed by the frame, and convection from frame.")]
         [Range(0, 0.5)]
         [DataMember(Name = "inside_projection")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("inside_projection")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("inside_projection")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double InsideProjection { get; set; } = 0D;
 
         /// <summary>
@@ -128,7 +133,9 @@ namespace HoneybeeSchema
         [Summary(@"Fraction of incident long wavelength radiation that is absorbed by the frame material.")]
         [Range(double.MinValue, 0.99999)]
         [DataMember(Name = "thermal_absorptance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("thermal_absorptance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("thermal_absorptance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double ThermalAbsorptance { get; set; } = 0.9D;
 
         /// <summary>
@@ -137,7 +144,9 @@ namespace HoneybeeSchema
         [Summary(@"Fraction of incident solar radiation absorbed by the frame material.")]
         [Range(0, 1)]
         [DataMember(Name = "solar_absorptance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("solar_absorptance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("solar_absorptance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SolarAbsorptance { get; set; } = 0.7D;
 
         /// <summary>
@@ -146,7 +155,9 @@ namespace HoneybeeSchema
         [Summary(@"Fraction of incident visible wavelength radiation absorbed by the frame material.")]
         [Range(0, 1)]
         [DataMember(Name = "visible_absorptance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("visible_absorptance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("visible_absorptance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double VisibleAbsorptance { get; set; } = 0.7D;
 
 

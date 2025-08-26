@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="PeopleAbridged" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected PeopleAbridged() 
         { 
             // Set readonly properties with defaultValue
@@ -77,7 +76,7 @@ namespace HoneybeeSchema
         [Required]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "people_per_area", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("people_per_area")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("people_per_area")] // For System.Text.Json
         public double PeoplePerArea { get; set; }
 
         /// <summary>
@@ -88,7 +87,7 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "occupancy_schedule", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("occupancy_schedule")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("occupancy_schedule")] // For System.Text.Json
         public string OccupancySchedule { get; set; }
 
         /// <summary>
@@ -98,7 +97,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "activity_schedule")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("activity_schedule")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("activity_schedule")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ActivitySchedule { get; set; }
 
         /// <summary>
@@ -107,7 +108,9 @@ namespace HoneybeeSchema
         [Summary(@"The radiant fraction of sensible heat released by people. (Default: 0.3).")]
         [Range(0, 1)]
         [DataMember(Name = "radiant_fraction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("radiant_fraction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("radiant_fraction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double RadiantFraction { get; set; } = 0.3D;
 
         /// <summary>
@@ -115,9 +118,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Number for the latent fraction of heat gain due to people or an Autocalculate object.")]
         [DataMember(Name = "latent_fraction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("latent_fraction")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("latent_fraction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Autocalculate, double> LatentFraction { get; set; } = new Autocalculate();
 
 

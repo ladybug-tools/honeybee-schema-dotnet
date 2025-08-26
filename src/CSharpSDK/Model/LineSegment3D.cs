@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="LineSegment3D" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected LineSegment3D() 
         { 
             // Set readonly properties with defaultValue
@@ -67,7 +66,7 @@ namespace HoneybeeSchema
         [Summary(@"Line segment base point as 3 (x, y, z) values.")]
         [Required]
         [DataMember(Name = "p", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("p")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("p")] // For System.Text.Json
         public List<double> P { get; set; }
 
         /// <summary>
@@ -76,7 +75,7 @@ namespace HoneybeeSchema
         [Summary(@"Line segment direction vector as 3 (x, y, z) values.")]
         [Required]
         [DataMember(Name = "v", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("v")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("v")] // For System.Text.Json
         public List<double> V { get; set; }
 
         /// <summary>
@@ -85,7 +84,9 @@ namespace HoneybeeSchema
         [Summary(@"Type")]
         [RegularExpression(@"^LineSegment3D$")]
         [DataMember(Name = "type")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("type")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("type")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Type { get; protected set; } = "LineSegment3D";
 
 

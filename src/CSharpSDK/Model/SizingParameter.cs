@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="SizingParameter" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected SizingParameter() 
         { 
             // Set readonly properties with defaultValue
@@ -76,7 +75,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of DesignDays that represent the criteria for which the HVAC systems will be sized.")]
         [DataMember(Name = "design_days")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("design_days")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("design_days")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<DesignDay> DesignDays { get; set; }
 
         /// <summary>
@@ -84,7 +85,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number that will be multiplied by the peak heating load for each zone in order to size the heating system.")]
         [DataMember(Name = "heating_factor")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("heating_factor")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("heating_factor")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double HeatingFactor { get; set; } = 1.25D;
 
         /// <summary>
@@ -92,7 +95,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number that will be multiplied by the peak cooling load for each zone in order to size the heating system.")]
         [DataMember(Name = "cooling_factor")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("cooling_factor")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("cooling_factor")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double CoolingFactor { get; set; } = 1.15D;
 
         /// <summary>
@@ -100,7 +105,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text to specify the efficiency standard, which will automatically set the efficiencies of all HVAC equipment when provided. Note that providing a standard here will cause the OpenStudio translation process to perform an additional sizing calculation with EnergyPlus, which is needed since the default efficiencies of equipment vary depending on their size. THIS WILL SIGNIFICANTLY INCREASE TRANSLATION TIME TO OPENSTUDIO. However, it is often worthwhile when the goal is to match the HVAC specification with a particular standard.")]
         [DataMember(Name = "efficiency_standard")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("efficiency_standard")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("efficiency_standard")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public EfficiencyStandards EfficiencyStandard { get; set; }
 
         /// <summary>
@@ -108,7 +115,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text indicating the ASHRAE climate zone to be used with the efficiency_standard. When unspecified, the climate zone will be inferred from the design days on this sizing parameter object.")]
         [DataMember(Name = "climate_zone")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("climate_zone")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("climate_zone")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ClimateZones ClimateZone { get; set; }
 
         /// <summary>
@@ -116,7 +125,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text for the building type to be used in the efficiency_standard. If the type is not recognized or is None, it will be assumed that the building is a generic NonResidential. The following have specified systems per the standard:  Residential, NonResidential, MidriseApartment, HighriseApartment, LargeOffice, MediumOffice, SmallOffice, Retail, StripMall, PrimarySchool, SecondarySchool, SmallHotel, LargeHotel, Hospital, Outpatient, Warehouse, SuperMarket, FullServiceRestaurant, QuickServiceRestaurant, Laboratory, Courthouse.")]
         [DataMember(Name = "building_type")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("building_type")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("building_type")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string BuildingType { get; set; }
 
         /// <summary>
@@ -124,7 +135,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A boolean to indicate whether the efficiency standard should trigger an sizing run that sets the efficiencies of all HVAC equipment in the Model (False) or the standard should only be written into the OSM and the sizing run should be bypassed (True). Bypassing the sizing run is useful when you only want to check that the overall HVAC system architecture is correct and you do not want to wait the extra time that it takes to run the sizing calculation.")]
         [DataMember(Name = "bypass_efficiency_sizing")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("bypass_efficiency_sizing")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("bypass_efficiency_sizing")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool BypassEfficiencySizing { get; set; } = false;
 
 

@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="DoorConstructionSet" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected DoorConstructionSet() 
         { 
             // Set readonly properties with defaultValue
@@ -72,7 +71,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"An OpaqueConstruction for all opaque doors with a Surface boundary condition.")]
         [DataMember(Name = "interior_construction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("interior_construction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("interior_construction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public OpaqueConstruction InteriorConstruction { get; set; }
 
         /// <summary>
@@ -80,7 +81,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face.")]
         [DataMember(Name = "exterior_construction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("exterior_construction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("exterior_construction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public OpaqueConstruction ExteriorConstruction { get; set; }
 
         /// <summary>
@@ -88,7 +91,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face.")]
         [DataMember(Name = "overhead_construction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("overhead_construction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("overhead_construction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public OpaqueConstruction OverheadConstruction { get; set; }
 
         /// <summary>
@@ -96,9 +101,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A WindowConstruction for all glass doors with an Outdoors boundary condition.")]
         [DataMember(Name = "exterior_glass_construction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("exterior_glass_construction")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("exterior_glass_construction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<WindowConstruction, WindowConstructionShade, WindowConstructionDynamic> ExteriorGlassConstruction { get; set; }
 
         /// <summary>
@@ -106,9 +111,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A WindowConstruction for all glass doors with a Surface boundary condition.")]
         [DataMember(Name = "interior_glass_construction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("interior_glass_construction")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("interior_glass_construction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<WindowConstruction, WindowConstructionShade, WindowConstructionDynamic> InteriorGlassConstruction { get; set; }
 
 

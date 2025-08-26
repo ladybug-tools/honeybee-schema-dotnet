@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="Radiant" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected Radiant() 
         { 
             // Set readonly properties with defaultValue
@@ -75,7 +74,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards")]
         [DataMember(Name = "vintage")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("vintage")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("vintage")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Vintages Vintage { get; set; } = Vintages.ASHRAE_2019;
 
         /// <summary>
@@ -83,7 +84,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text for the specific type of system equipment from the RadiantEquipmentType enumeration.")]
         [DataMember(Name = "equipment_type")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("equipment_type")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("equipment_type")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public RadiantEquipmentType EquipmentType { get; set; } = RadiantEquipmentType.Radiant_Chiller_Boiler;
 
         /// <summary>
@@ -91,7 +94,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text to indicate which faces are thermally active by default. Note that this property has no effect when the rooms to which the HVAC system is assigned have constructions with internal source materials. In this case, those constructions will dictate the thermally active surfaces.")]
         [DataMember(Name = "radiant_face_type")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("radiant_face_type")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("radiant_face_type")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public RadiantFaceTypes RadiantFaceType { get; set; } = RadiantFaceTypes.Floor;
 
         /// <summary>
@@ -99,7 +104,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number for the minimum number of hours of operation for the radiant system before it shuts off.")]
         [DataMember(Name = "minimum_operation_time")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("minimum_operation_time")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("minimum_operation_time")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double MinimumOperationTime { get; set; } = 1D;
 
         /// <summary>
@@ -107,7 +114,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number for the minimum number of hours for when the system can switch between heating and cooling.")]
         [DataMember(Name = "switch_over_time")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("switch_over_time")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("switch_over_time")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SwitchOverTime { get; set; } = 24D;
 
 

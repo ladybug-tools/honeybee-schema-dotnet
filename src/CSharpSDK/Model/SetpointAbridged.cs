@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="SetpointAbridged" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected SetpointAbridged() 
         { 
             // Set readonly properties with defaultValue
@@ -78,7 +77,7 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "cooling_schedule", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("cooling_schedule")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("cooling_schedule")] // For System.Text.Json
         public string CoolingSchedule { get; set; }
 
         /// <summary>
@@ -89,7 +88,7 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "heating_schedule", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("heating_schedule")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("heating_schedule")] // For System.Text.Json
         public string HeatingSchedule { get; set; }
 
         /// <summary>
@@ -99,7 +98,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "humidifying_schedule")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("humidifying_schedule")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("humidifying_schedule")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string HumidifyingSchedule { get; set; }
 
         /// <summary>
@@ -109,7 +110,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "dehumidifying_schedule")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("dehumidifying_schedule")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("dehumidifying_schedule")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string DehumidifyingSchedule { get; set; }
 
         /// <summary>
@@ -118,7 +121,9 @@ namespace HoneybeeSchema
         [Summary(@"An optional positive number for the temperature difference between the cutout temperature and the setpoint temperature. Specifying a non-zero number here is useful for modeling the throttling range associated with a given setup of setpoint controls and HVAC equipment. Throttling ranges describe the range where a zone is slightly over-cooled or over-heated beyond the thermostat setpoint. They are used to avoid situations where HVAC systems turn on only to turn off a few minutes later, thereby wearing out the parts of mechanical systems faster. They can have a minor impact on energy consumption and can often have significant impacts on occupant thermal comfort, though using the default value of zero will often yield results that are close enough when trying to estimate the annual heating/cooling energy use. Specifying a value of zero effectively assumes that the system will turn on whenever conditions are outside the setpoint range and will cut out as soon as the setpoint is reached.")]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "setpoint_cutout_difference")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("setpoint_cutout_difference")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("setpoint_cutout_difference")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SetpointCutoutDifference { get; set; } = 0D;
 
 

@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Documentation for Honeybee simulation-parameter schema",
-    "version": "1.59.0",
+    "version": "1.59.1",
     "title": "Honeybee Simulation Parameter Schema",
     "contact": {
       "name": "Ladybug Tools",
@@ -191,6 +191,97 @@
   "paths": {},
   "components": {
     "schemas": {
+      "DaylightSavingTime": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DatedBaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "title": "Type",
+                "default": "DaylightSavingTime",
+                "pattern": "^DaylightSavingTime$",
+                "type": "string",
+                "readOnly": true
+              },
+              "start_date": {
+                "title": "Start Date",
+                "description": "A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).",
+                "default": [
+                  3,
+                  12
+                ],
+                "minItems": 2,
+                "maxItems": 3,
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "end_date": {
+                "title": "End Date",
+                "description": "A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).",
+                "default": [
+                  11,
+                  5
+                ],
+                "minItems": 2,
+                "maxItems": 3,
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        ],
+        "title": "DaylightSavingTime",
+        "description": "Used to describe the daylight savings time for the simulation.",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "ASHRAEClearSky": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/_SkyCondition"
+          },
+          {
+            "type": "object",
+            "required": [
+              "clearness"
+            ],
+            "properties": {
+              "clearness": {
+                "title": "Clearness",
+                "description": "Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.",
+                "minimum": 0,
+                "maximum": 1.2,
+                "type": "number",
+                "format": "double"
+              },
+              "type": {
+                "title": "Type",
+                "default": "ASHRAEClearSky",
+                "pattern": "^ASHRAEClearSky$",
+                "type": "string",
+                "readOnly": true
+              }
+            },
+            "additionalProperties": false
+          }
+        ],
+        "title": "ASHRAEClearSky",
+        "description": "Used to specify sky conditions on a design day.",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
       "ReportingFrequency": {
         "title": "ReportingFrequency",
         "description": "An enumeration.",
@@ -274,61 +365,6 @@
           "Saturday"
         ],
         "type": "string"
-      },
-      "DaylightSavingTime": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/DatedBaseModel"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "type": {
-                "title": "Type",
-                "default": "DaylightSavingTime",
-                "pattern": "^DaylightSavingTime$",
-                "type": "string",
-                "readOnly": true
-              },
-              "start_date": {
-                "title": "Start Date",
-                "description": "A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).",
-                "default": [
-                  3,
-                  12
-                ],
-                "minItems": 2,
-                "maxItems": 3,
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "end_date": {
-                "title": "End Date",
-                "description": "A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).",
-                "default": [
-                  11,
-                  5
-                ],
-                "minItems": 2,
-                "maxItems": 3,
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
-            "additionalProperties": false
-          }
-        ],
-        "title": "DaylightSavingTime",
-        "description": "Used to describe the daylight savings time for the simulation.",
-        "discriminator": {
-          "propertyName": "type"
-        }
       },
       "RunPeriod": {
         "allOf": [
@@ -748,42 +784,6 @@
         ],
         "title": "WindCondition",
         "description": "Used to specify wind conditions on a design day.",
-        "discriminator": {
-          "propertyName": "type"
-        }
-      },
-      "ASHRAEClearSky": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/_SkyCondition"
-          },
-          {
-            "type": "object",
-            "required": [
-              "clearness"
-            ],
-            "properties": {
-              "clearness": {
-                "title": "Clearness",
-                "description": "Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.",
-                "minimum": 0,
-                "maximum": 1.2,
-                "type": "number",
-                "format": "double"
-              },
-              "type": {
-                "title": "Type",
-                "default": "ASHRAEClearSky",
-                "pattern": "^ASHRAEClearSky$",
-                "type": "string",
-                "readOnly": true
-              }
-            },
-            "additionalProperties": false
-          }
-        ],
-        "title": "ASHRAEClearSky",
-        "description": "Used to specify sky conditions on a design day.",
         "discriminator": {
           "propertyName": "type"
         }

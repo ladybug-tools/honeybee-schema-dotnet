@@ -2,6 +2,7 @@
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { ExtensionTypes } from "./ExtensionTypes";
+import { Face3D } from "./Face3D";
 import { LineSegment3D } from "./LineSegment3D";
 import { ObjectTypes } from "./ObjectTypes";
 import { Point3D } from "./Point3D";
@@ -91,10 +92,11 @@ export class ValidationError {
     @Transform(({ value }) => value?.map((item: any) => {
       if (item?.type === 'Point3D') return Point3D.fromJS(item);
       else if (item?.type === 'LineSegment3D') return LineSegment3D.fromJS(item);
+      else if (item?.type === 'Face3D') return Face3D.fromJS(item);
       else return item;
     }))
     /** An optional list of geometry objects that helps illustrate where exactly issues with invalid geometry exist within the Honeybee object. Examples include the naked and non-manifold line segments for non-solid Room geometries, the points of self-intersection for cases of self-intersecting geometry and out-of-plane vertices for non-planar objects. Oftentimes, zooming directly to these helper geometries will help end users understand invalid situations in their model faster than simple zooming to the invalid Honeybee object in its totality. */
-    helperGeometry?: (Point3D | LineSegment3D)[];
+    helperGeometry?: (Point3D | LineSegment3D | Face3D)[];
 	
 
     constructor() {

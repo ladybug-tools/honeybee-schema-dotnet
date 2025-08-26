@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ScheduleFixedIntervalAbridged" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected ScheduleFixedIntervalAbridged() 
         { 
             // Set readonly properties with defaultValue
@@ -78,7 +77,7 @@ namespace HoneybeeSchema
         [Summary(@"A list of timeseries values occurring at each timestep over the course of the simulation.")]
         [Required]
         [DataMember(Name = "values", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("values")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("values")] // For System.Text.Json
         public List<double> Values { get; set; }
 
         /// <summary>
@@ -88,7 +87,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "schedule_type_limit")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("schedule_type_limit")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("schedule_type_limit")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ScheduleTypeLimit { get; set; }
 
         /// <summary>
@@ -96,7 +97,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"An integer for the number of steps per hour that the input values correspond to.  For example, if each value represents 30 minutes, the timestep is 2. For 15 minutes, it is 4.")]
         [DataMember(Name = "timestep")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("timestep")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("timestep")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public int Timestep { get; set; } = 1;
 
         /// <summary>
@@ -104,7 +107,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of two integers for [month, day], representing the start date when the schedule values begin to take effect.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).")]
         [DataMember(Name = "start_date")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("start_date")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("start_date")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<int> StartDate { get; set; } = new List<int>{ 1, 1 };
 
         /// <summary>
@@ -112,7 +117,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@" A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period.")]
         [DataMember(Name = "placeholder_value")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("placeholder_value")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("placeholder_value")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double PlaceholderValue { get; set; } = 0D;
 
         /// <summary>
@@ -120,7 +127,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Boolean to note whether values in between intervals should be linearly interpolated or whether successive values should take effect immediately upon the beginning time corresponding to them.")]
         [DataMember(Name = "interpolate")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("interpolate")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("interpolate")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool Interpolate { get; set; } = false;
 
 

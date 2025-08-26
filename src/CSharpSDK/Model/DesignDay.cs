@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="DesignDay" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected DesignDay() 
         { 
             // Set readonly properties with defaultValue
@@ -77,7 +76,7 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "name", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("name")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("name")] // For System.Text.Json
         public string Name { get; set; }
 
         /// <summary>
@@ -86,7 +85,7 @@ namespace HoneybeeSchema
         [Summary(@"DayType")]
         [Required]
         [DataMember(Name = "day_type", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("day_type")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("day_type")] // For System.Text.Json
         public DesignDayTypes DayType { get; set; }
 
         /// <summary>
@@ -95,7 +94,7 @@ namespace HoneybeeSchema
         [Summary(@"A DryBulbCondition describing temperature conditions on the design day.")]
         [Required]
         [DataMember(Name = "dry_bulb_condition", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("dry_bulb_condition")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("dry_bulb_condition")] // For System.Text.Json
         public DryBulbCondition DryBulbCondition { get; set; }
 
         /// <summary>
@@ -104,7 +103,7 @@ namespace HoneybeeSchema
         [Summary(@"A HumidityCondition describing humidity and precipitation conditions on the design day.")]
         [Required]
         [DataMember(Name = "humidity_condition", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("humidity_condition")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("humidity_condition")] // For System.Text.Json
         public HumidityCondition HumidityCondition { get; set; }
 
         /// <summary>
@@ -113,7 +112,7 @@ namespace HoneybeeSchema
         [Summary(@"A WindCondition describing wind conditions on the design day.")]
         [Required]
         [DataMember(Name = "wind_condition", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("wind_condition")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("wind_condition")] // For System.Text.Json
         public WindCondition WindCondition { get; set; }
 
         /// <summary>
@@ -122,9 +121,7 @@ namespace HoneybeeSchema
         [Summary(@"SkyCondition")]
         [Required]
         [DataMember(Name = "sky_condition", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("sky_condition")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("sky_condition")] // For System.Text.Json
         public AnyOf<ASHRAEClearSky, ASHRAETau> SkyCondition { get; set; }
 
 

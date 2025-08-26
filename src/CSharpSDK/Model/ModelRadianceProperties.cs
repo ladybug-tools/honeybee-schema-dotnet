@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelRadianceProperties" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected ModelRadianceProperties() 
         { 
             // Set readonly properties with defaultValue
@@ -234,7 +233,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Global Radiance modifier set.")]
         [DataMember(Name = "global_modifier_set")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("global_modifier_set")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("global_modifier_set")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public GlobalModifierSet GlobalModifierSet { get; protected set; } = GlobalModifierSetDefault;
 
         /// <summary>
@@ -242,7 +243,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set.")]
         [DataMember(Name = "modifiers")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("modifiers")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("modifiers")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>> Modifiers { get; set; }
 
         /// <summary>
@@ -250,7 +253,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A list of all unique Room-Assigned ModifierSets in the Model.")]
         [DataMember(Name = "modifier_sets")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("modifier_sets")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("modifier_sets")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<AnyOf<ModifierSet, ModifierSetAbridged>> ModifierSets { get; set; }
 
         /// <summary>
@@ -258,7 +263,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"An array of SensorGrids that are associated with the model.")]
         [DataMember(Name = "sensor_grids")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("sensor_grids")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("sensor_grids")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<SensorGrid> SensorGrids { get; set; }
 
         /// <summary>
@@ -266,7 +273,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"An array of Views that are associated with the model.")]
         [DataMember(Name = "views")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("views")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("views")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<View> Views { get; set; }
 
 

@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ApertureRadiancePropertiesAbridged" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected ApertureRadiancePropertiesAbridged() 
         { 
             // Set readonly properties with defaultValue
@@ -68,7 +67,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"An optional string to note the dynamic group '             'to which the Aperture is a part of. Apertures sharing the same '             'dynamic_group_identifier will have their states change in unison. '             'If None, the Aperture is assumed to be static. (default: None).")]
         [DataMember(Name = "dynamic_group_identifier")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("dynamic_group_identifier")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("dynamic_group_identifier")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string DynamicGroupIdentifier { get; set; }
 
         /// <summary>
@@ -76,7 +77,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"An optional list of abridged states (default: None).")]
         [DataMember(Name = "states")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("states")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("states")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<RadianceSubFaceStateAbridged> States { get; set; }
 
 

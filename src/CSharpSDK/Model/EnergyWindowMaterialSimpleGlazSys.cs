@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyWindowMaterialSimpleGlazSys" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected EnergyWindowMaterialSimpleGlazSys() 
         { 
             // Set readonly properties with defaultValue
@@ -73,7 +72,7 @@ namespace HoneybeeSchema
         [Required]
         [Range(double.MinValue, 12)]
         [DataMember(Name = "u_factor", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("u_factor")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("u_factor")] // For System.Text.Json
         public double UFactor { get; set; }
 
         /// <summary>
@@ -82,7 +81,7 @@ namespace HoneybeeSchema
         [Summary(@"Unit-less quantity for the Solar Heat Gain Coefficient (solar transmittance + conduction) at normal incidence and vertical orientation.")]
         [Required]
         [DataMember(Name = "shgc", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("shgc")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("shgc")] // For System.Text.Json
         public double Shgc { get; set; }
 
         /// <summary>
@@ -90,7 +89,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"The fraction of visible light falling on the window that makes it through the glass at normal incidence.")]
         [DataMember(Name = "vt")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("vt")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("vt")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Vt { get; set; } = 0.54D;
 
 

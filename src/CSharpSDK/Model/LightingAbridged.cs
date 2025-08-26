@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="LightingAbridged" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected LightingAbridged() 
         { 
             // Set readonly properties with defaultValue
@@ -79,7 +78,7 @@ namespace HoneybeeSchema
         [Required]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "watts_per_area", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("watts_per_area")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("watts_per_area")] // For System.Text.Json
         public double WattsPerArea { get; set; }
 
         /// <summary>
@@ -90,7 +89,7 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "schedule", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
         public string Schedule { get; set; }
 
         /// <summary>
@@ -99,7 +98,9 @@ namespace HoneybeeSchema
         [Summary(@"The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. (Default: 0.25).")]
         [Range(0, 1)]
         [DataMember(Name = "visible_fraction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("visible_fraction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("visible_fraction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double VisibleFraction { get; set; } = 0.25D;
 
         /// <summary>
@@ -108,7 +109,9 @@ namespace HoneybeeSchema
         [Summary(@"The fraction of heat from lights that is long-wave radiation. (Default: 0.32).")]
         [Range(0, 1)]
         [DataMember(Name = "radiant_fraction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("radiant_fraction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("radiant_fraction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double RadiantFraction { get; set; } = 0.32D;
 
         /// <summary>
@@ -117,7 +120,9 @@ namespace HoneybeeSchema
         [Summary(@"The fraction of the heat from lights that goes into the zone return air. (Default: 0).")]
         [Range(0, 1)]
         [DataMember(Name = "return_air_fraction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("return_air_fraction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("return_air_fraction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double ReturnAirFraction { get; set; } = 0D;
 
         /// <summary>
@@ -126,7 +131,9 @@ namespace HoneybeeSchema
         [Summary(@"The baseline lighting power density in [W/m2] of floor area. This baseline is useful to track how much better the installed lights are in comparison to a standard like ASHRAE 90.1. If set to None, it will default to 11.84029 W/m2, which is that ASHRAE 90.1-2004 baseline for an office.")]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "baseline_watts_per_area")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("baseline_watts_per_area")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("baseline_watts_per_area")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double BaselineWattsPerArea { get; set; } = 11.84029D;
 
 

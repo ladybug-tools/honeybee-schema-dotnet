@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="EnergyMaterialVegetation" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected EnergyMaterialVegetation() 
         { 
             // Set readonly properties with defaultValue
@@ -99,7 +98,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Roughness")]
         [DataMember(Name = "roughness")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("roughness")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("roughness")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Roughness Roughness { get; set; } = Roughness.MediumRough;
 
         /// <summary>
@@ -108,7 +109,9 @@ namespace HoneybeeSchema
         [Summary(@"Thickness of the soil layer in meters.")]
         [Range(double.MinValue, 3)]
         [DataMember(Name = "thickness")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Thickness { get; set; } = 0.1D;
 
         /// <summary>
@@ -116,7 +119,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Thermal conductivity of the dry soil in W/m-K.")]
         [DataMember(Name = "conductivity")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("conductivity")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("conductivity")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Conductivity { get; set; } = 0.35D;
 
         /// <summary>
@@ -124,7 +129,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Density of the dry soil in kg/m3.")]
         [DataMember(Name = "density")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("density")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("density")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Density { get; set; } = 1100D;
 
         /// <summary>
@@ -133,7 +140,9 @@ namespace HoneybeeSchema
         [Summary(@"Specific heat of the dry soil in J/kg-K.")]
         [Range(100, double.MaxValue)]
         [DataMember(Name = "specific_heat")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("specific_heat")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("specific_heat")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SpecificHeat { get; set; } = 1200D;
 
         /// <summary>
@@ -142,7 +151,9 @@ namespace HoneybeeSchema
         [Summary(@"Fraction of incident long wavelength radiation that is absorbed by the soil. Default: 0.9.")]
         [Range(double.MinValue, 0.99999)]
         [DataMember(Name = "soil_thermal_absorptance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("soil_thermal_absorptance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("soil_thermal_absorptance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SoilThermalAbsorptance { get; set; } = 0.9D;
 
         /// <summary>
@@ -151,7 +162,9 @@ namespace HoneybeeSchema
         [Summary(@"Fraction of incident solar radiation absorbed by the soil. Default: 0.7.")]
         [Range(0, 1)]
         [DataMember(Name = "soil_solar_absorptance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("soil_solar_absorptance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("soil_solar_absorptance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SoilSolarAbsorptance { get; set; } = 0.7D;
 
         /// <summary>
@@ -160,7 +173,9 @@ namespace HoneybeeSchema
         [Summary(@"Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7.")]
         [Range(0, 1)]
         [DataMember(Name = "soil_visible_absorptance")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("soil_visible_absorptance")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("soil_visible_absorptance")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SoilVisibleAbsorptance { get; set; } = 0.7D;
 
         /// <summary>
@@ -169,7 +184,9 @@ namespace HoneybeeSchema
         [Summary(@"The height of plants in the vegetation in meters.")]
         [Range(0.005, 1.0)]
         [DataMember(Name = "plant_height")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("plant_height")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("plant_height")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double PlantHeight { get; set; } = 0.2D;
 
         /// <summary>
@@ -178,7 +195,9 @@ namespace HoneybeeSchema
         [Summary(@"The projected leaf area per unit area of soil surface (aka. Leaf Area Index or LAI). Note that the fraction of vegetation cover is calculated directly from LAI using an empirical relation.")]
         [Range(0.001, 5.0)]
         [DataMember(Name = "leaf_area_index")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("leaf_area_index")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("leaf_area_index")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LeafAreaIndex { get; set; } = 1D;
 
         /// <summary>
@@ -187,7 +206,9 @@ namespace HoneybeeSchema
         [Summary(@"The fraction of incident solar radiation that is reflected by the leaf surfaces. Solar radiation includes the visible spectrum as well as infrared and ultraviolet wavelengths. Typical values are 0.18 to 0.25.")]
         [Range(0.005, 0.5)]
         [DataMember(Name = "leaf_reflectivity")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("leaf_reflectivity")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("leaf_reflectivity")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LeafReflectivity { get; set; } = 0.22D;
 
         /// <summary>
@@ -196,7 +217,9 @@ namespace HoneybeeSchema
         [Summary(@"The ratio of thermal radiation emitted from leaf surfaces to that emitted by an ideal black body at the same temperature.")]
         [Range(0.8, 1.0)]
         [DataMember(Name = "leaf_emissivity")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("leaf_emissivity")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("leaf_emissivity")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LeafEmissivity { get; set; } = 0.95D;
 
         /// <summary>
@@ -205,7 +228,9 @@ namespace HoneybeeSchema
         [Summary(@"The resistance of the plants to moisture transport [s/m]. Plants with low values of stomatal resistance will result in higher evapotranspiration rates than plants with high resistance.")]
         [Range(50, 300)]
         [DataMember(Name = "min_stomatal_resist")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("min_stomatal_resist")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("min_stomatal_resist")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double MinStomatalResist { get; set; } = 180D;
 
         /// <summary>
@@ -214,7 +239,9 @@ namespace HoneybeeSchema
         [Summary(@"The saturation moisture content of the soil by volume.")]
         [Range(0.1, 0.5)]
         [DataMember(Name = "sat_vol_moist_cont")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("sat_vol_moist_cont")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("sat_vol_moist_cont")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SatVolMoistCont { get; set; } = 0.3D;
 
         /// <summary>
@@ -223,7 +250,9 @@ namespace HoneybeeSchema
         [Summary(@"The residual moisture content of the soil by volume.")]
         [Range(0.01, 0.1)]
         [DataMember(Name = "residual_vol_moist_cont")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("residual_vol_moist_cont")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("residual_vol_moist_cont")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double ResidualVolMoistCont { get; set; } = 0.01D;
 
         /// <summary>
@@ -232,7 +261,9 @@ namespace HoneybeeSchema
         [Summary(@"The initial moisture content of the soil by volume.")]
         [Range(0.05, 0.5)]
         [DataMember(Name = "init_vol_moist_cont")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("init_vol_moist_cont")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("init_vol_moist_cont")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double InitVolMoistCont { get; set; } = 0.01D;
 
         /// <summary>
@@ -240,7 +271,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"MoistDiffModel")]
         [DataMember(Name = "moist_diff_model")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("moist_diff_model")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("moist_diff_model")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public MoistureDiffusionModel MoistDiffModel { get; set; } = MoistureDiffusionModel.Simple;
 
 

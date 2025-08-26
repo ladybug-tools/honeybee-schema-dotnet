@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="DoorModifierSet" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected DoorModifierSet() 
         { 
             // Set readonly properties with defaultValue
@@ -72,9 +71,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A radiance modifier object for faces with an Outdoors boundary condition.")]
         [DataMember(Name = "exterior_modifier")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("exterior_modifier")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("exterior_modifier")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> ExteriorModifier { get; set; }
 
         /// <summary>
@@ -82,9 +81,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A radiance modifier object for faces with a boundary condition other than Outdoors.")]
         [DataMember(Name = "interior_modifier")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("interior_modifier")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("interior_modifier")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> InteriorModifier { get; set; }
 
         /// <summary>
@@ -92,9 +91,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A modifier object for glass with a Surface boundary condition.")]
         [DataMember(Name = "interior_glass_modifier")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("interior_glass_modifier")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("interior_glass_modifier")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> InteriorGlassModifier { get; set; }
 
         /// <summary>
@@ -102,9 +101,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A modifier object for glass with an Outdoors boundary condition.")]
         [DataMember(Name = "exterior_glass_modifier")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("exterior_glass_modifier")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("exterior_glass_modifier")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> ExteriorGlassModifier { get; set; }
 
         /// <summary>
@@ -112,9 +111,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A window modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face.")]
         [DataMember(Name = "overhead_modifier")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("overhead_modifier")] // For System.Text.Json
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConverter(typeof(AnyOfJsonConverter))] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonConverter(typeof(AnyOfSystemJsonConverter))] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("overhead_modifier")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> OverheadModifier { get; set; }
 
 

@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="ProcessAbridged" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected ProcessAbridged() 
         { 
             // Set readonly properties with defaultValue
@@ -81,7 +80,7 @@ namespace HoneybeeSchema
         [Required]
         [Range(0, double.MaxValue)]
         [DataMember(Name = "watts", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("watts")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("watts")] // For System.Text.Json
         public double Watts { get; set; }
 
         /// <summary>
@@ -92,7 +91,7 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "schedule", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
         public string Schedule { get; set; }
 
         /// <summary>
@@ -101,7 +100,7 @@ namespace HoneybeeSchema
         [Summary(@"Text to denote the type of fuel consumed by the process. Using the ""None"" type indicates that no end uses will be associated with the process, only the zone gains.")]
         [Required]
         [DataMember(Name = "fuel_type", IsRequired = true)] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("fuel_type")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("fuel_type")] // For System.Text.Json
         public FuelTypes FuelType { get; set; }
 
         /// <summary>
@@ -111,7 +110,9 @@ namespace HoneybeeSchema
         [MinLength(1)]
         [MaxLength(100)]
         [DataMember(Name = "end_use_category")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("end_use_category")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("end_use_category")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string EndUseCategory { get; set; } = "Process";
 
         /// <summary>
@@ -120,7 +121,9 @@ namespace HoneybeeSchema
         [Summary(@"Number for the amount of long-wave radiation heat given off by the process load. Default value is 0.")]
         [Range(0, 1)]
         [DataMember(Name = "radiant_fraction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("radiant_fraction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("radiant_fraction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double RadiantFraction { get; set; } = 0D;
 
         /// <summary>
@@ -129,7 +132,9 @@ namespace HoneybeeSchema
         [Summary(@"Number for the amount of latent heat given off by the process load. Default value is 0.")]
         [Range(0, 1)]
         [DataMember(Name = "latent_fraction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("latent_fraction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("latent_fraction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LatentFraction { get; set; } = 0D;
 
         /// <summary>
@@ -138,7 +143,9 @@ namespace HoneybeeSchema
         [Summary(@"Number for the amount of “lost” heat being given off by the process load. The default value is 0.")]
         [Range(0, 1)]
         [DataMember(Name = "lost_fraction")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("lost_fraction")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("lost_fraction")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LostFraction { get; set; } = 0D;
 
 

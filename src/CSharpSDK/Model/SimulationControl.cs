@@ -4,7 +4,6 @@
  * Contact: info@ladybug.tools
  */
 
-extern alias LBTNewtonSoft;
 //using System;
 using System.Linq;
 using System.IO;
@@ -14,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using LBTNewtonSoft::Newtonsoft.Json;
-using LBTNewtonSoft::Newtonsoft.Json.Converters;
+using LBT.Newtonsoft.Json;
+using LBT.Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
@@ -31,8 +30,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="SimulationControl" /> class.
         /// </summary>
-        [LBTNewtonSoft.Newtonsoft.Json.JsonConstructorAttribute]
-        [System.Text.Json.Serialization.JsonConstructor]
+        [LBT.Newtonsoft.Json.JsonConstructorAttribute]
+        // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
         protected SimulationControl() 
         { 
             // Set readonly properties with defaultValue
@@ -72,7 +71,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Boolean for whether the zone sizing calculation should be run.")]
         [DataMember(Name = "do_zone_sizing")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("do_zone_sizing")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("do_zone_sizing")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool DoZoneSizing { get; set; } = true;
 
         /// <summary>
@@ -80,7 +81,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Boolean for whether the system sizing calculation should be run.")]
         [DataMember(Name = "do_system_sizing")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("do_system_sizing")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("do_system_sizing")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool DoSystemSizing { get; set; } = true;
 
         /// <summary>
@@ -88,7 +91,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Boolean for whether the plant sizing calculation should be run.")]
         [DataMember(Name = "do_plant_sizing")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("do_plant_sizing")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("do_plant_sizing")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool DoPlantSizing { get; set; } = true;
 
         /// <summary>
@@ -96,7 +101,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Boolean for whether the simulation should be run for the sizing periods.")]
         [DataMember(Name = "run_for_run_periods")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("run_for_run_periods")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("run_for_run_periods")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool RunForRunPeriods { get; set; } = true;
 
         /// <summary>
@@ -104,7 +111,9 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Boolean for whether the simulation should be run for the run periods.")]
         [DataMember(Name = "run_for_sizing_periods")] // For Newtonsoft.Json
-        [System.Text.Json.Serialization.JsonPropertyName("run_for_sizing_periods")] // For System.Text.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("run_for_sizing_periods")] // For System.Text.Json
+        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool RunForSizingPeriods { get; set; } = false;
 
 

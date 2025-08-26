@@ -1,6 +1,6 @@
-extern alias LBTNewtonSoft;
+
 using HoneybeeSchema.Energy;
-using LBTNewtonSoft::Newtonsoft.Json.Linq;
+using LBT.Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;

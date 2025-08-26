@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace HoneybeeSchema {
-    extern alias LBTNewtonSoft; using System;
+     using System;
     
     
     /// <summary>
