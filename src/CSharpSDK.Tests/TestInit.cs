@@ -1,4 +1,4 @@
-﻿extern alias LBTNewtonsoft;
+﻿
 using NUnit.Framework;
 using System;
 using System.IO;
@@ -29,7 +29,7 @@ namespace HoneybeeSchema.Test
                 //wc.Headers.Add("Accept", "application/vnd.github.v3+json");
                 var json = wc.DownloadString(releaseJson);
 
-                var obj = LBTNewtonsoft.Newtonsoft.Json.Linq.JObject.Parse(json);
+                var obj = LBT.Newtonsoft.Json.Linq.JObject.Parse(json);
                 var zipUrl = obj["zipball_url"].ToString();
 
                 var zipfile = Path.Combine(temp, "standard.zip");
