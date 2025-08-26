@@ -1,6 +1,7 @@
 
 
 using HoneybeeSchema;
+using LBT.Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace HoneybeeSchema.Test
                     new List<double>(){0.5,0.5,0.5 },
                     new List<double>(){1,0,0 }
                 });
-            instance = new Door( 
+            instance = new Door(
                 "mainEntrance",
                 face
                 );
@@ -136,17 +137,17 @@ namespace HoneybeeSchema.Test
                 if (match != item)
                     diffs.Add(match);
             }
-             
+
             Assert.IsTrue(diffs.Any());
 
             var r1 = m1.Rooms.FirstOrDefault(_ => _.Identifier == id);
             var r2 = m2.Rooms.FirstOrDefault(_ => _.Identifier == id);
 
-            
+
             Assert.IsTrue(Extension.Equals(r1.UserData, r2.UserData));
 
             Assert.IsTrue(r1.Properties.Equals(r2.Properties));
-           
+
             Assert.IsTrue(Extension.AllEquals(r1.Faces, r2.Faces));
             Assert.IsTrue(Extension.AllEquals(r1.IndoorShades, r2.IndoorShades));
             Assert.IsTrue(Extension.AllEquals(r1.OutdoorShades, r2.OutdoorShades));
@@ -235,8 +236,14 @@ namespace HoneybeeSchema.Test
         [Test]
         public void ToJsonViewTypeTest()
         {
-            this.instance.BoundaryCondition = new Outdoors(sunExposure: false, viewFactor: 0.5);
+            var outdoor = new Outdoors(sunExposure: false, viewFactor: 0.5);
+            this.instance.BoundaryCondition = outdoor;
+
+            // generic serializer without converter settings, as each AnyOf property has AnyOf Attribute
+            var j2 = JsonConvert.SerializeObject(this.instance);
             var j = this.instance.ToJson();
+            // ensure two internal and external serializer generates the same results  
+            Assert.AreEqual(j, j2);
 
             var obj = Door.FromJson(j);
 
@@ -248,13 +255,13 @@ namespace HoneybeeSchema.Test
         [Test]
         public void ValidateTest()
         {
-       
+
             var res = this.instance.Validate();
 
             this.instance.Identifier = "ateta adfsadf%";
             res = this.instance.Validate();
             Assert.IsTrue(res.FirstOrDefault().MemberNames.Contains("Identifier"));
-  
+
         }
 
         [Test]
@@ -269,9 +276,22 @@ namespace HoneybeeSchema.Test
 
 
         [Test]
+        public void NewtonJsonAttributeTest()
+        {
+            var dup = this.instance.DuplicateDoor();
+            var outdoor = new Outdoors(sunExposure: false, viewFactor: 0.5);
+            dup.BoundaryCondition = outdoor;
+            var json = LBT.Newtonsoft.Json.JsonConvert.SerializeObject(dup);
+
+            var validAnyof = !json.ToLower().Contains("obj");
+            Assert.IsTrue(validAnyof);
+
+        }
+
+        [Test]
         public void SystemTextJsonTest()
         {
-            var j = System.Text.Json.JsonSerializer.Serialize( this.instance);
+            var j = System.Text.Json.JsonSerializer.Serialize(this.instance);
             var d = System.Text.Json.JsonSerializer.Deserialize<Door>(j);
             var obj = Door.FromJson(j);
             Assert.AreEqual(obj, d);

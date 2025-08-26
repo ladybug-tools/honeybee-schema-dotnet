@@ -10,7 +10,7 @@
 
 
 using HoneybeeSchema;
-using Newtonsoft.Json;
+using LBT.Newtonsoft.Json;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -245,6 +245,18 @@ namespace HoneybeeSchema.Test
             var msJson = System.Text.Json.JsonSerializer.Serialize(room, typeof(Room), setting);
             var hasUserData2 = json.Contains("floor 1");
             Assert.IsTrue(hasUserData2);
+
+        }
+
+        [Test]
+        public void ExternalSerializerTest()
+        {
+           
+            // generic serializer without converter settings, as each AnyOf property has AnyOf Attribute
+            var j2 = JsonConvert.SerializeObject(this.instance);
+            var j = this.instance.ToJson();
+            // ensure two internal and external serializer generates the same results  
+            Assert.AreEqual(j, j2);
 
         }
     }

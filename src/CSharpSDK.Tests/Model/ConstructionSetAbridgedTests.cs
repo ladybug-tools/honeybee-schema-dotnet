@@ -135,6 +135,18 @@ namespace HoneybeeSchema.Test
             Assert.AreEqual(instanceFromJson.ShadeConstruction, "Generic Shade");
         }
 
+        [Test]
+        public void ExternalSerializerTest()
+        {
+
+            // generic serializer without converter settings, as each AnyOf property has AnyOf Attribute
+            var j2 = LBT.Newtonsoft.Json.JsonConvert.SerializeObject(this.instance);
+            var j = this.instance.ToJson();
+            // ensure two internal and external serializer generates the same results  
+            Assert.AreEqual(j, j2);
+
+        }
+
     }
 
 }
