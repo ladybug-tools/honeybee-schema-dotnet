@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Construction for Air Boundary objects.")]
     [System.Serializable]
-    [DataContract(Name = "AirBoundaryConstructionAbridged")]
+    [DataContract(Name = "AirBoundaryConstructionAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class AirBoundaryConstructionAbridged : IDdEnergyBaseModel, System.IEquatable<AirBoundaryConstructionAbridged>
     {
         /// <summary>
@@ -67,23 +67,23 @@ namespace HoneybeeSchema
         /// A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system.
         /// </summary>
         [Summary(@"A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "air_mixing_per_area")] // For Newtonsoft.Json
+        [DataMember(Name = "air_mixing_per_area")] // For internal Serialization XML/JSON
+        [JsonProperty("air_mixing_per_area", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("air_mixing_per_area")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double AirMixingPerArea { get; set; } = 0.1D;
 
         /// <summary>
         /// Identifier of a fractional schedule for the air mixing schedule across the construction. If unspecified, an Always On schedule will be assumed.
         /// </summary>
         [Summary(@"Identifier of a fractional schedule for the air mixing schedule across the construction. If unspecified, an Always On schedule will be assumed.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "air_mixing_schedule")] // For Newtonsoft.Json
+        [DataMember(Name = "air_mixing_schedule")] // For internal Serialization XML/JSON
+        [JsonProperty("air_mixing_schedule", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("air_mixing_schedule")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string AirMixingSchedule { get; set; }
 
 

@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Used to specify humidity conditions on a design day.")]
     [System.Serializable]
-    [DataContract(Name = "HumidityCondition")]
+    [DataContract(Name = "HumidityCondition")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class HumidityCondition : OpenAPIGenBaseModel, System.IEquatable<HumidityCondition>
     {
         /// <summary>
@@ -70,8 +70,10 @@ namespace HoneybeeSchema
         /// HumidityType
         /// </summary>
         [Summary(@"HumidityType")]
-        [Required]
-        [DataMember(Name = "humidity_type", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "humidity_type", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("humidity_type", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("humidity_type")] // For System.Text.Json
         public HumidityTypes HumidityType { get; set; }
 
@@ -79,8 +81,10 @@ namespace HoneybeeSchema
         /// The value correcponding to the humidity_type.
         /// </summary>
         [Summary(@"The value correcponding to the humidity_type.")]
-        [Required]
-        [DataMember(Name = "humidity_value", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "humidity_value", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("humidity_value", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("humidity_value")] // For System.Text.Json
         public double HumidityValue { get; set; }
 
@@ -88,31 +92,31 @@ namespace HoneybeeSchema
         /// Barometric air pressure on the design day [Pa].
         /// </summary>
         [Summary(@"Barometric air pressure on the design day [Pa].")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(31000, 120000)]
-        [DataMember(Name = "barometric_pressure")] // For Newtonsoft.Json
+        [DataMember(Name = "barometric_pressure")] // For internal Serialization XML/JSON
+        [JsonProperty("barometric_pressure", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("barometric_pressure")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double BarometricPressure { get; set; } = 101325D;
 
         /// <summary>
         /// Boolean to indicate rain on the design day.
         /// </summary>
         [Summary(@"Boolean to indicate rain on the design day.")]
-        [DataMember(Name = "rain")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "rain")] // For internal Serialization XML/JSON
+        [JsonProperty("rain", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("rain")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool Rain { get; set; } = false;
 
         /// <summary>
         /// Boolean to indicate snow on the ground during the design day.
         /// </summary>
         [Summary(@"Boolean to indicate snow on the ground during the design day.")]
-        [DataMember(Name = "snow_on_ground")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "snow_on_ground")] // For internal Serialization XML/JSON
+        [JsonProperty("snow_on_ground", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("snow_on_ground")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool SnowOnGround { get; set; } = false;
 
 

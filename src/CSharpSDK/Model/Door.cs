@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects requiring a identifiers acceptable for all engines.")]
     [System.Serializable]
-    [DataContract(Name = "Door")]
+    [DataContract(Name = "Door")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class Door : IDdBaseModel, System.IEquatable<Door>
     {
         /// <summary>
@@ -75,8 +75,10 @@ namespace HoneybeeSchema
         /// Planar Face3D for the geometry.
         /// </summary>
         [Summary(@"Planar Face3D for the geometry.")]
-        [Required]
-        [DataMember(Name = "geometry", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "geometry", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("geometry", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("geometry")] // For System.Text.Json
         public Face3D Geometry { get; set; }
 
@@ -84,8 +86,10 @@ namespace HoneybeeSchema
         /// BoundaryCondition
         /// </summary>
         [Summary(@"BoundaryCondition")]
-        [Required]
-        [DataMember(Name = "boundary_condition", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "boundary_condition", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("boundary_condition", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("boundary_condition")] // For System.Text.Json
         public AnyOf<Outdoors, Surface> BoundaryCondition { get; set; }
 
@@ -93,8 +97,10 @@ namespace HoneybeeSchema
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
         [Summary(@"Extension properties for particular simulation engines (Radiance, EnergyPlus).")]
-        [Required]
-        [DataMember(Name = "properties", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "properties", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("properties", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("properties")] // For System.Text.Json
         public DoorPropertiesAbridged Properties { get; set; }
 
@@ -102,30 +108,30 @@ namespace HoneybeeSchema
         /// Boolean to note whether this object is a glass door as opposed to an opaque door.
         /// </summary>
         [Summary(@"Boolean to note whether this object is a glass door as opposed to an opaque door.")]
-        [DataMember(Name = "is_glass")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "is_glass")] // For internal Serialization XML/JSON
+        [JsonProperty("is_glass", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("is_glass")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool IsGlass { get; set; } = false;
 
         /// <summary>
         /// Shades assigned to the interior side of this object.
         /// </summary>
         [Summary(@"Shades assigned to the interior side of this object.")]
-        [DataMember(Name = "indoor_shades")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "indoor_shades")] // For internal Serialization XML/JSON
+        [JsonProperty("indoor_shades", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("indoor_shades")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<Shade> IndoorShades { get; set; }
 
         /// <summary>
         /// Shades assigned to the exterior side of this object (eg. entryway awning).
         /// </summary>
         [Summary(@"Shades assigned to the exterior side of this object (eg. entryway awning).")]
-        [DataMember(Name = "outdoor_shades")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "outdoor_shades")] // For internal Serialization XML/JSON
+        [JsonProperty("outdoor_shades", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("outdoor_shades")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<Shade> OutdoorShades { get; set; }
 
 

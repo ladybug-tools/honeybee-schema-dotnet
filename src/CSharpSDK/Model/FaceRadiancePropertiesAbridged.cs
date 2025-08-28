@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Radiance Properties for Honeybee Face Abridged.")]
     [System.Serializable]
-    [DataContract(Name = "FaceRadiancePropertiesAbridged")]
+    [DataContract(Name = "FaceRadiancePropertiesAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class FaceRadiancePropertiesAbridged : PropertiesBaseAbridged, System.IEquatable<FaceRadiancePropertiesAbridged>
     {
         /// <summary>

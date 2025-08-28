@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"A single line segment face in 3D space.")]
     [System.Serializable]
-    [DataContract(Name = "LineSegment3D")]
+    [DataContract(Name = "LineSegment3D")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class LineSegment3D : System.IEquatable<LineSegment3D>
     {
         /// <summary>
@@ -64,8 +64,10 @@ namespace HoneybeeSchema
         /// Line segment base point as 3 (x, y, z) values.
         /// </summary>
         [Summary(@"Line segment base point as 3 (x, y, z) values.")]
-        [Required]
-        [DataMember(Name = "p", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "p", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("p", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("p")] // For System.Text.Json
         public List<double> P { get; set; }
 
@@ -73,8 +75,10 @@ namespace HoneybeeSchema
         /// Line segment direction vector as 3 (x, y, z) values.
         /// </summary>
         [Summary(@"Line segment direction vector as 3 (x, y, z) values.")]
-        [Required]
-        [DataMember(Name = "v", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "v", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("v", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("v")] // For System.Text.Json
         public List<double> V { get; set; }
 
@@ -82,11 +86,11 @@ namespace HoneybeeSchema
         /// Type
         /// </summary>
         [Summary(@"Type")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [RegularExpression(@"^LineSegment3D$")]
-        [DataMember(Name = "type")] // For Newtonsoft.Json
+        [DataMember(Name = "type")] // For internal Serialization XML/JSON
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("type")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Type { get; protected set; } = "LineSegment3D";
 
 

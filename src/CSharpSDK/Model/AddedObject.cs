@@ -21,7 +21,7 @@ namespace HoneybeeSchema
 {
     [Summary(@"")]
     [System.Serializable]
-    [DataContract(Name = "AddedObject")]
+    [DataContract(Name = "AddedObject")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class AddedObject : OpenAPIGenBaseModel, System.IEquatable<AddedObject>
     {
         /// <summary>
@@ -65,8 +65,10 @@ namespace HoneybeeSchema
         /// Text for the type of object that has been changed.
         /// </summary>
         [Summary(@"Text for the type of object that has been changed.")]
-        [Required]
-        [DataMember(Name = "element_type", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "element_type", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("element_type", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("element_type")] // For System.Text.Json
         public GeometryObjectTypes ElementType { get; set; }
 
@@ -74,11 +76,13 @@ namespace HoneybeeSchema
         /// Text string for the unique object ID that has changed.
         /// </summary>
         [Summary(@"Text string for the unique object ID that has changed.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [RegularExpression(@"^[^,;!\n\t]+$")]
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "element_id", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "element_id", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("element_id", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("element_id")] // For System.Text.Json
         public string ElementId { get; set; }
 
@@ -86,8 +90,10 @@ namespace HoneybeeSchema
         /// A list of DisplayFace3D dictionaries for the added geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been added.
         /// </summary>
         [Summary(@"A list of DisplayFace3D dictionaries for the added geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been added.")]
-        [Required]
-        [DataMember(Name = "geometry", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "geometry", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("geometry", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("geometry")] // For System.Text.Json
         public List<object> Geometry { get; set; }
 
@@ -95,10 +101,10 @@ namespace HoneybeeSchema
         /// Text string for the display name of the object that has changed.
         /// </summary>
         [Summary(@"Text string for the display name of the object that has changed.")]
-        [DataMember(Name = "element_name")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "element_name")] // For internal Serialization XML/JSON
+        [JsonProperty("element_name", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("element_name")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ElementName { get; set; }
 
 

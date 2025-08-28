@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Used to specify which types of calculations to run.")]
     [System.Serializable]
-    [DataContract(Name = "SimulationControl")]
+    [DataContract(Name = "SimulationControl")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class SimulationControl : OpenAPIGenBaseModel, System.IEquatable<SimulationControl>
     {
         /// <summary>
@@ -70,50 +70,50 @@ namespace HoneybeeSchema
         /// Boolean for whether the zone sizing calculation should be run.
         /// </summary>
         [Summary(@"Boolean for whether the zone sizing calculation should be run.")]
-        [DataMember(Name = "do_zone_sizing")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "do_zone_sizing")] // For internal Serialization XML/JSON
+        [JsonProperty("do_zone_sizing", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("do_zone_sizing")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool DoZoneSizing { get; set; } = true;
 
         /// <summary>
         /// Boolean for whether the system sizing calculation should be run.
         /// </summary>
         [Summary(@"Boolean for whether the system sizing calculation should be run.")]
-        [DataMember(Name = "do_system_sizing")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "do_system_sizing")] // For internal Serialization XML/JSON
+        [JsonProperty("do_system_sizing", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("do_system_sizing")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool DoSystemSizing { get; set; } = true;
 
         /// <summary>
         /// Boolean for whether the plant sizing calculation should be run.
         /// </summary>
         [Summary(@"Boolean for whether the plant sizing calculation should be run.")]
-        [DataMember(Name = "do_plant_sizing")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "do_plant_sizing")] // For internal Serialization XML/JSON
+        [JsonProperty("do_plant_sizing", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("do_plant_sizing")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool DoPlantSizing { get; set; } = true;
 
         /// <summary>
         /// Boolean for whether the simulation should be run for the sizing periods.
         /// </summary>
         [Summary(@"Boolean for whether the simulation should be run for the sizing periods.")]
-        [DataMember(Name = "run_for_run_periods")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "run_for_run_periods")] // For internal Serialization XML/JSON
+        [JsonProperty("run_for_run_periods", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("run_for_run_periods")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool RunForRunPeriods { get; set; } = true;
 
         /// <summary>
         /// Boolean for whether the simulation should be run for the run periods.
         /// </summary>
         [Summary(@"Boolean for whether the simulation should be run for the run periods.")]
-        [DataMember(Name = "run_for_sizing_periods")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "run_for_sizing_periods")] // For internal Serialization XML/JSON
+        [JsonProperty("run_for_sizing_periods", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("run_for_sizing_periods")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool RunForSizingPeriods { get; set; } = false;
 
 

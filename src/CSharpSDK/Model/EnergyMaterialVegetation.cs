@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Material representing vegetation on the exterior of an opaque construction.")]
     [System.Serializable]
-    [DataContract(Name = "EnergyMaterialVegetation")]
+    [DataContract(Name = "EnergyMaterialVegetation")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class EnergyMaterialVegetation : IDdEnergyBaseModel, System.IEquatable<EnergyMaterialVegetation>
     {
         /// <summary>
@@ -97,183 +97,183 @@ namespace HoneybeeSchema
         /// Roughness
         /// </summary>
         [Summary(@"Roughness")]
-        [DataMember(Name = "roughness")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "roughness")] // For internal Serialization XML/JSON
+        [JsonProperty("roughness", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("roughness")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Roughness Roughness { get; set; } = Roughness.MediumRough;
 
         /// <summary>
         /// Thickness of the soil layer in meters.
         /// </summary>
         [Summary(@"Thickness of the soil layer in meters.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(double.MinValue, 3)]
-        [DataMember(Name = "thickness")] // For Newtonsoft.Json
+        [DataMember(Name = "thickness")] // For internal Serialization XML/JSON
+        [JsonProperty("thickness", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Thickness { get; set; } = 0.1D;
 
         /// <summary>
         /// Thermal conductivity of the dry soil in W/m-K.
         /// </summary>
         [Summary(@"Thermal conductivity of the dry soil in W/m-K.")]
-        [DataMember(Name = "conductivity")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "conductivity")] // For internal Serialization XML/JSON
+        [JsonProperty("conductivity", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("conductivity")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Conductivity { get; set; } = 0.35D;
 
         /// <summary>
         /// Density of the dry soil in kg/m3.
         /// </summary>
         [Summary(@"Density of the dry soil in kg/m3.")]
-        [DataMember(Name = "density")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "density")] // For internal Serialization XML/JSON
+        [JsonProperty("density", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("density")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Density { get; set; } = 1100D;
 
         /// <summary>
         /// Specific heat of the dry soil in J/kg-K.
         /// </summary>
         [Summary(@"Specific heat of the dry soil in J/kg-K.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(100, double.MaxValue)]
-        [DataMember(Name = "specific_heat")] // For Newtonsoft.Json
+        [DataMember(Name = "specific_heat")] // For internal Serialization XML/JSON
+        [JsonProperty("specific_heat", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("specific_heat")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SpecificHeat { get; set; } = 1200D;
 
         /// <summary>
         /// Fraction of incident long wavelength radiation that is absorbed by the soil. Default: 0.9.
         /// </summary>
         [Summary(@"Fraction of incident long wavelength radiation that is absorbed by the soil. Default: 0.9.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(double.MinValue, 0.99999)]
-        [DataMember(Name = "soil_thermal_absorptance")] // For Newtonsoft.Json
+        [DataMember(Name = "soil_thermal_absorptance")] // For internal Serialization XML/JSON
+        [JsonProperty("soil_thermal_absorptance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("soil_thermal_absorptance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SoilThermalAbsorptance { get; set; } = 0.9D;
 
         /// <summary>
         /// Fraction of incident solar radiation absorbed by the soil. Default: 0.7.
         /// </summary>
         [Summary(@"Fraction of incident solar radiation absorbed by the soil. Default: 0.7.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "soil_solar_absorptance")] // For Newtonsoft.Json
+        [DataMember(Name = "soil_solar_absorptance")] // For internal Serialization XML/JSON
+        [JsonProperty("soil_solar_absorptance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("soil_solar_absorptance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SoilSolarAbsorptance { get; set; } = 0.7D;
 
         /// <summary>
         /// Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7.
         /// </summary>
         [Summary(@"Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "soil_visible_absorptance")] // For Newtonsoft.Json
+        [DataMember(Name = "soil_visible_absorptance")] // For internal Serialization XML/JSON
+        [JsonProperty("soil_visible_absorptance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("soil_visible_absorptance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SoilVisibleAbsorptance { get; set; } = 0.7D;
 
         /// <summary>
         /// The height of plants in the vegetation in meters.
         /// </summary>
         [Summary(@"The height of plants in the vegetation in meters.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0.005, 1.0)]
-        [DataMember(Name = "plant_height")] // For Newtonsoft.Json
+        [DataMember(Name = "plant_height")] // For internal Serialization XML/JSON
+        [JsonProperty("plant_height", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("plant_height")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double PlantHeight { get; set; } = 0.2D;
 
         /// <summary>
         /// The projected leaf area per unit area of soil surface (aka. Leaf Area Index or LAI). Note that the fraction of vegetation cover is calculated directly from LAI using an empirical relation.
         /// </summary>
         [Summary(@"The projected leaf area per unit area of soil surface (aka. Leaf Area Index or LAI). Note that the fraction of vegetation cover is calculated directly from LAI using an empirical relation.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0.001, 5.0)]
-        [DataMember(Name = "leaf_area_index")] // For Newtonsoft.Json
+        [DataMember(Name = "leaf_area_index")] // For internal Serialization XML/JSON
+        [JsonProperty("leaf_area_index", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("leaf_area_index")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LeafAreaIndex { get; set; } = 1D;
 
         /// <summary>
         /// The fraction of incident solar radiation that is reflected by the leaf surfaces. Solar radiation includes the visible spectrum as well as infrared and ultraviolet wavelengths. Typical values are 0.18 to 0.25.
         /// </summary>
         [Summary(@"The fraction of incident solar radiation that is reflected by the leaf surfaces. Solar radiation includes the visible spectrum as well as infrared and ultraviolet wavelengths. Typical values are 0.18 to 0.25.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0.005, 0.5)]
-        [DataMember(Name = "leaf_reflectivity")] // For Newtonsoft.Json
+        [DataMember(Name = "leaf_reflectivity")] // For internal Serialization XML/JSON
+        [JsonProperty("leaf_reflectivity", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("leaf_reflectivity")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LeafReflectivity { get; set; } = 0.22D;
 
         /// <summary>
         /// The ratio of thermal radiation emitted from leaf surfaces to that emitted by an ideal black body at the same temperature.
         /// </summary>
         [Summary(@"The ratio of thermal radiation emitted from leaf surfaces to that emitted by an ideal black body at the same temperature.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0.8, 1.0)]
-        [DataMember(Name = "leaf_emissivity")] // For Newtonsoft.Json
+        [DataMember(Name = "leaf_emissivity")] // For internal Serialization XML/JSON
+        [JsonProperty("leaf_emissivity", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("leaf_emissivity")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LeafEmissivity { get; set; } = 0.95D;
 
         /// <summary>
         /// The resistance of the plants to moisture transport [s/m]. Plants with low values of stomatal resistance will result in higher evapotranspiration rates than plants with high resistance.
         /// </summary>
         [Summary(@"The resistance of the plants to moisture transport [s/m]. Plants with low values of stomatal resistance will result in higher evapotranspiration rates than plants with high resistance.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(50, 300)]
-        [DataMember(Name = "min_stomatal_resist")] // For Newtonsoft.Json
+        [DataMember(Name = "min_stomatal_resist")] // For internal Serialization XML/JSON
+        [JsonProperty("min_stomatal_resist", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("min_stomatal_resist")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double MinStomatalResist { get; set; } = 180D;
 
         /// <summary>
         /// The saturation moisture content of the soil by volume.
         /// </summary>
         [Summary(@"The saturation moisture content of the soil by volume.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0.1, 0.5)]
-        [DataMember(Name = "sat_vol_moist_cont")] // For Newtonsoft.Json
+        [DataMember(Name = "sat_vol_moist_cont")] // For internal Serialization XML/JSON
+        [JsonProperty("sat_vol_moist_cont", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("sat_vol_moist_cont")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SatVolMoistCont { get; set; } = 0.3D;
 
         /// <summary>
         /// The residual moisture content of the soil by volume.
         /// </summary>
         [Summary(@"The residual moisture content of the soil by volume.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0.01, 0.1)]
-        [DataMember(Name = "residual_vol_moist_cont")] // For Newtonsoft.Json
+        [DataMember(Name = "residual_vol_moist_cont")] // For internal Serialization XML/JSON
+        [JsonProperty("residual_vol_moist_cont", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("residual_vol_moist_cont")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double ResidualVolMoistCont { get; set; } = 0.01D;
 
         /// <summary>
         /// The initial moisture content of the soil by volume.
         /// </summary>
         [Summary(@"The initial moisture content of the soil by volume.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0.05, 0.5)]
-        [DataMember(Name = "init_vol_moist_cont")] // For Newtonsoft.Json
+        [DataMember(Name = "init_vol_moist_cont")] // For internal Serialization XML/JSON
+        [JsonProperty("init_vol_moist_cont", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("init_vol_moist_cont")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double InitVolMoistCont { get; set; } = 0.01D;
 
         /// <summary>
         /// MoistDiffModel
         /// </summary>
         [Summary(@"MoistDiffModel")]
-        [DataMember(Name = "moist_diff_model")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "moist_diff_model")] // For internal Serialization XML/JSON
+        [JsonProperty("moist_diff_model", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("moist_diff_model")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public MoistureDiffusionModel MoistDiffModel { get; set; } = MoistureDiffusionModel.Simple;
 
 

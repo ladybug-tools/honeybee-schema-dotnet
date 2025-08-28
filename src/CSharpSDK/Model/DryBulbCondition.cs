@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Used to specify dry bulb conditions on a design day.")]
     [System.Serializable]
-    [DataContract(Name = "DryBulbCondition")]
+    [DataContract(Name = "DryBulbCondition")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class DryBulbCondition : OpenAPIGenBaseModel, System.IEquatable<DryBulbCondition>
     {
         /// <summary>
@@ -64,9 +64,11 @@ namespace HoneybeeSchema
         /// The maximum dry bulb temperature on the design day [C].
         /// </summary>
         [Summary(@"The maximum dry bulb temperature on the design day [C].")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [Range(-90, 70)]
-        [DataMember(Name = "dry_bulb_max", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "dry_bulb_max", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("dry_bulb_max", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("dry_bulb_max")] // For System.Text.Json
         public double DryBulbMax { get; set; }
 
@@ -74,9 +76,11 @@ namespace HoneybeeSchema
         /// The difference between min and max temperatures on the design day [C].
         /// </summary>
         [Summary(@"The difference between min and max temperatures on the design day [C].")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "dry_bulb_range", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "dry_bulb_range", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("dry_bulb_range", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("dry_bulb_range")] // For System.Text.Json
         public double DryBulbRange { get; set; }
 

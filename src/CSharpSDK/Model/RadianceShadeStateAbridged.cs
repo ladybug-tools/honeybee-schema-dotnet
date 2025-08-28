@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"RadianceShadeStateAbridged represents a single state for a dynamic Shade.")]
     [System.Serializable]
-    [DataContract(Name = "RadianceShadeStateAbridged")]
+    [DataContract(Name = "RadianceShadeStateAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class RadianceShadeStateAbridged : OpenAPIGenBaseModel, System.IEquatable<RadianceShadeStateAbridged>
     {
         /// <summary>
@@ -66,30 +66,30 @@ namespace HoneybeeSchema
         /// A Radiance Modifier identifier (default: None).
         /// </summary>
         [Summary(@"A Radiance Modifier identifier (default: None).")]
-        [DataMember(Name = "modifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "modifier")] // For internal Serialization XML/JSON
+        [JsonProperty("modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("modifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Modifier { get; set; }
 
         /// <summary>
         /// A Radiance Modifier identifier (default: None).
         /// </summary>
         [Summary(@"A Radiance Modifier identifier (default: None).")]
-        [DataMember(Name = "modifier_direct")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "modifier_direct")] // For internal Serialization XML/JSON
+        [JsonProperty("modifier_direct", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("modifier_direct")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ModifierDirect { get; set; }
 
         /// <summary>
         /// A list of StateGeometryAbridged objects (default: None).
         /// </summary>
         [Summary(@"A list of StateGeometryAbridged objects (default: None).")]
-        [DataMember(Name = "shades")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "shades")] // For internal Serialization XML/JSON
+        [JsonProperty("shades", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("shades")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<StateGeometryAbridged> Shades { get; set; }
 
 

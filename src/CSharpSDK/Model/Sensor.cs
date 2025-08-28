@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"A single Radiance of sensors.")]
     [System.Serializable]
-    [DataContract(Name = "Sensor")]
+    [DataContract(Name = "Sensor")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class Sensor : OpenAPIGenBaseModel, System.IEquatable<Sensor>
     {
         /// <summary>
@@ -64,8 +64,10 @@ namespace HoneybeeSchema
         /// Position of sensor in space as an array of (x, y, z) values.
         /// </summary>
         [Summary(@"Position of sensor in space as an array of (x, y, z) values.")]
-        [Required]
-        [DataMember(Name = "pos", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "pos", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("pos", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("pos")] // For System.Text.Json
         public List<double> Pos { get; set; }
 
@@ -73,8 +75,10 @@ namespace HoneybeeSchema
         /// Direction of sensor as an array of (x, y, z) values.
         /// </summary>
         [Summary(@"Direction of sensor as an array of (x, y, z) values.")]
-        [Required]
-        [DataMember(Name = "dir", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "dir", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("dir", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("dir")] // For System.Text.Json
         public List<double> Dir { get; set; }
 

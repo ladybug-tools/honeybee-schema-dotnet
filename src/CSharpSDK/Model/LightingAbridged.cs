@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
     [System.Serializable]
-    [DataContract(Name = "LightingAbridged")]
+    [DataContract(Name = "LightingAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class LightingAbridged : IDdEnergyBaseModel, System.IEquatable<LightingAbridged>
     {
         /// <summary>
@@ -75,9 +75,11 @@ namespace HoneybeeSchema
         /// Lighting per floor area as [W/m2].
         /// </summary>
         [Summary(@"Lighting per floor area as [W/m2].")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "watts_per_area", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "watts_per_area", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("watts_per_area", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("watts_per_area")] // For System.Text.Json
         public double WattsPerArea { get; set; }
 
@@ -85,10 +87,12 @@ namespace HoneybeeSchema
         /// Identifier of the schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile.
         /// </summary>
         [Summary(@"Identifier of the schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "schedule", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "schedule", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("schedule", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
         public string Schedule { get; set; }
 
@@ -96,44 +100,44 @@ namespace HoneybeeSchema
         /// The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. (Default: 0.25).
         /// </summary>
         [Summary(@"The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. (Default: 0.25).")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "visible_fraction")] // For Newtonsoft.Json
+        [DataMember(Name = "visible_fraction")] // For internal Serialization XML/JSON
+        [JsonProperty("visible_fraction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("visible_fraction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double VisibleFraction { get; set; } = 0.25D;
 
         /// <summary>
         /// The fraction of heat from lights that is long-wave radiation. (Default: 0.32).
         /// </summary>
         [Summary(@"The fraction of heat from lights that is long-wave radiation. (Default: 0.32).")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "radiant_fraction")] // For Newtonsoft.Json
+        [DataMember(Name = "radiant_fraction")] // For internal Serialization XML/JSON
+        [JsonProperty("radiant_fraction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("radiant_fraction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double RadiantFraction { get; set; } = 0.32D;
 
         /// <summary>
         /// The fraction of the heat from lights that goes into the zone return air. (Default: 0).
         /// </summary>
         [Summary(@"The fraction of the heat from lights that goes into the zone return air. (Default: 0).")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "return_air_fraction")] // For Newtonsoft.Json
+        [DataMember(Name = "return_air_fraction")] // For internal Serialization XML/JSON
+        [JsonProperty("return_air_fraction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("return_air_fraction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double ReturnAirFraction { get; set; } = 0D;
 
         /// <summary>
         /// The baseline lighting power density in [W/m2] of floor area. This baseline is useful to track how much better the installed lights are in comparison to a standard like ASHRAE 90.1. If set to None, it will default to 11.84029 W/m2, which is that ASHRAE 90.1-2004 baseline for an office.
         /// </summary>
         [Summary(@"The baseline lighting power density in [W/m2] of floor area. This baseline is useful to track how much better the installed lights are in comparison to a standard like ASHRAE 90.1. If set to None, it will default to 11.84029 W/m2, which is that ASHRAE 90.1-2004 baseline for an office.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "baseline_watts_per_area")] // For Newtonsoft.Json
+        [DataMember(Name = "baseline_watts_per_area")] // For internal Serialization XML/JSON
+        [JsonProperty("baseline_watts_per_area", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("baseline_watts_per_area")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double BaselineWattsPerArea { get; set; } = 11.84029D;
 
 

@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"A set of constructions for aperture assemblies.")]
     [System.Serializable]
-    [DataContract(Name = "ApertureConstructionSetAbridged")]
+    [DataContract(Name = "ApertureConstructionSetAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ApertureConstructionSetAbridged : OpenAPIGenBaseModel, System.IEquatable<ApertureConstructionSetAbridged>
     {
         /// <summary>
@@ -68,48 +68,48 @@ namespace HoneybeeSchema
         /// Identifier for a WindowConstruction for all apertures with a Surface boundary condition.
         /// </summary>
         [Summary(@"Identifier for a WindowConstruction for all apertures with a Surface boundary condition.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "interior_construction")] // For Newtonsoft.Json
+        [DataMember(Name = "interior_construction")] // For internal Serialization XML/JSON
+        [JsonProperty("interior_construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("interior_construction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string InteriorConstruction { get; set; }
 
         /// <summary>
         /// Identifier for a WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.
         /// </summary>
         [Summary(@"Identifier for a WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "window_construction")] // For Newtonsoft.Json
+        [DataMember(Name = "window_construction")] // For internal Serialization XML/JSON
+        [JsonProperty("window_construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("window_construction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string WindowConstruction { get; set; }
 
         /// <summary>
         /// Identifier for a WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.
         /// </summary>
         [Summary(@"Identifier for a WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "skylight_construction")] // For Newtonsoft.Json
+        [DataMember(Name = "skylight_construction")] // For internal Serialization XML/JSON
+        [JsonProperty("skylight_construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("skylight_construction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string SkylightConstruction { get; set; }
 
         /// <summary>
         /// Identifier for a WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property.
         /// </summary>
         [Summary(@"Identifier for a WindowConstruction for all apertures with an Outdoors boundary condition and True is_operable property.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "operable_construction")] // For Newtonsoft.Json
+        [DataMember(Name = "operable_construction")] // For internal Serialization XML/JSON
+        [JsonProperty("operable_construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("operable_construction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string OperableConstruction { get; set; }
 
 

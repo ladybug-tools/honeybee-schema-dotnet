@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"A set of constructions for different surface types and boundary conditions.")]
     [System.Serializable]
-    [DataContract(Name = "ConstructionSetAbridged")]
+    [DataContract(Name = "ConstructionSetAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ConstructionSetAbridged : IDdEnergyBaseModel, System.IEquatable<ConstructionSetAbridged>
     {
         /// <summary>
@@ -77,74 +77,74 @@ namespace HoneybeeSchema
         /// A WallConstructionSetAbridged object for this ConstructionSet.
         /// </summary>
         [Summary(@"A WallConstructionSetAbridged object for this ConstructionSet.")]
-        [DataMember(Name = "wall_set")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "wall_set")] // For internal Serialization XML/JSON
+        [JsonProperty("wall_set", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("wall_set")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public WallConstructionSetAbridged WallSet { get; set; }
 
         /// <summary>
         /// A FloorConstructionSetAbridged object for this ConstructionSet.
         /// </summary>
         [Summary(@"A FloorConstructionSetAbridged object for this ConstructionSet.")]
-        [DataMember(Name = "floor_set")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "floor_set")] // For internal Serialization XML/JSON
+        [JsonProperty("floor_set", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("floor_set")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public FloorConstructionSetAbridged FloorSet { get; set; }
 
         /// <summary>
         /// A RoofCeilingConstructionSetAbridged object for this ConstructionSet.
         /// </summary>
         [Summary(@"A RoofCeilingConstructionSetAbridged object for this ConstructionSet.")]
-        [DataMember(Name = "roof_ceiling_set")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "roof_ceiling_set")] // For internal Serialization XML/JSON
+        [JsonProperty("roof_ceiling_set", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("roof_ceiling_set")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public RoofCeilingConstructionSetAbridged RoofCeilingSet { get; set; }
 
         /// <summary>
         /// A ApertureConstructionSetAbridged object for this ConstructionSet.
         /// </summary>
         [Summary(@"A ApertureConstructionSetAbridged object for this ConstructionSet.")]
-        [DataMember(Name = "aperture_set")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "aperture_set")] // For internal Serialization XML/JSON
+        [JsonProperty("aperture_set", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("aperture_set")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ApertureConstructionSetAbridged ApertureSet { get; set; }
 
         /// <summary>
         /// A DoorConstructionSetAbridged object for this ConstructionSet.
         /// </summary>
         [Summary(@"A DoorConstructionSetAbridged object for this ConstructionSet.")]
-        [DataMember(Name = "door_set")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "door_set")] // For internal Serialization XML/JSON
+        [JsonProperty("door_set", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("door_set")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public DoorConstructionSetAbridged DoorSet { get; set; }
 
         /// <summary>
         /// The identifier of a ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned.
         /// </summary>
         [Summary(@"The identifier of a ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "shade_construction")] // For Newtonsoft.Json
+        [DataMember(Name = "shade_construction")] // For internal Serialization XML/JSON
+        [JsonProperty("shade_construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("shade_construction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ShadeConstruction { get; set; }
 
         /// <summary>
         /// The identifier of an AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type.
         /// </summary>
         [Summary(@"The identifier of an AirBoundaryConstruction or OpaqueConstruction to set the properties of Faces with an AirBoundary type.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "air_boundary_construction")] // For Newtonsoft.Json
+        [DataMember(Name = "air_boundary_construction")] // For internal Serialization XML/JSON
+        [JsonProperty("air_boundary_construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("air_boundary_construction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string AirBoundaryConstruction { get; set; }
 
 

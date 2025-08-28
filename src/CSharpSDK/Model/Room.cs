@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects requiring a identifiers acceptable for all engines.")]
     [System.Serializable]
-    [DataContract(Name = "Room")]
+    [DataContract(Name = "Room")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class Room : IDdBaseModel, System.IEquatable<Room>
     {
         /// <summary>
@@ -79,8 +79,10 @@ namespace HoneybeeSchema
         /// Faces that together form the closed volume of a room.
         /// </summary>
         [Summary(@"Faces that together form the closed volume of a room.")]
-        [Required]
-        [DataMember(Name = "faces", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "faces", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("faces", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("faces")] // For System.Text.Json
         public List<Face> Faces { get; set; }
 
@@ -88,8 +90,10 @@ namespace HoneybeeSchema
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
         [Summary(@"Extension properties for particular simulation engines (Radiance, EnergyPlus).")]
-        [Required]
-        [DataMember(Name = "properties", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "properties", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("properties", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("properties")] // For System.Text.Json
         public RoomPropertiesAbridged Properties { get; set; }
 
@@ -97,61 +101,61 @@ namespace HoneybeeSchema
         /// Shades assigned to the interior side of this object (eg. partitions, tables).
         /// </summary>
         [Summary(@"Shades assigned to the interior side of this object (eg. partitions, tables).")]
-        [DataMember(Name = "indoor_shades")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "indoor_shades")] // For internal Serialization XML/JSON
+        [JsonProperty("indoor_shades", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("indoor_shades")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<Shade> IndoorShades { get; set; }
 
         /// <summary>
         /// Shades assigned to the exterior side of this object (eg. trees, landscaping).
         /// </summary>
         [Summary(@"Shades assigned to the exterior side of this object (eg. trees, landscaping).")]
-        [DataMember(Name = "outdoor_shades")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "outdoor_shades")] // For internal Serialization XML/JSON
+        [JsonProperty("outdoor_shades", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("outdoor_shades")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<Shade> OutdoorShades { get; set; }
 
         /// <summary>
         /// An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is multiplied by the multiplier.
         /// </summary>
         [Summary(@"An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is multiplied by the multiplier.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(1, int.MaxValue)]
-        [DataMember(Name = "multiplier")] // For Newtonsoft.Json
+        [DataMember(Name = "multiplier")] // For internal Serialization XML/JSON
+        [JsonProperty("multiplier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("multiplier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public int Multiplier { get; set; } = 1;
 
         /// <summary>
         /// A boolean for whether the Room floor area contributes to Models it is a part of. Note that this will not affect the floor_area property of this Room itself but it will ensure the Room floor area is excluded from any calculations when the Room is part of a Model, including EUI calculations.
         /// </summary>
         [Summary(@"A boolean for whether the Room floor area contributes to Models it is a part of. Note that this will not affect the floor_area property of this Room itself but it will ensure the Room floor area is excluded from any calculations when the Room is part of a Model, including EUI calculations.")]
-        [DataMember(Name = "exclude_floor_area")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "exclude_floor_area")] // For internal Serialization XML/JSON
+        [JsonProperty("exclude_floor_area", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("exclude_floor_area")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool ExcludeFloorArea { get; set; } = false;
 
         /// <summary>
         /// Text string for for the zone identifier to which this Room belongs. Rooms sharing the same zone identifier are considered part of the same zone in a Model. If the zone identifier has not been specified, it will be the same as the Room identifier in the destination engine. Note that this property has no character restrictions.
         /// </summary>
         [Summary(@"Text string for for the zone identifier to which this Room belongs. Rooms sharing the same zone identifier are considered part of the same zone in a Model. If the zone identifier has not been specified, it will be the same as the Room identifier in the destination engine. Note that this property has no character restrictions.")]
-        [DataMember(Name = "zone")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "zone")] // For internal Serialization XML/JSON
+        [JsonProperty("zone", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("zone")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Zone { get; set; }
 
         /// <summary>
         /// Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model. Note that this property has no character restrictions.
         /// </summary>
         [Summary(@"Text string for the story identifier to which this Room belongs. Rooms sharing the same story identifier are considered part of the same story in a Model. Note that this property has no character restrictions.")]
-        [DataMember(Name = "story")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "story")] // For internal Serialization XML/JSON
+        [JsonProperty("story", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("story")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Story { get; set; }
 
 

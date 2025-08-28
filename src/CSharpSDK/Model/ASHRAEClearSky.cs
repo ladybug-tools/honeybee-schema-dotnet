@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Used to specify sky conditions on a design day.")]
     [System.Serializable]
-    [DataContract(Name = "ASHRAEClearSky")]
+    [DataContract(Name = "ASHRAEClearSky")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ASHRAEClearSky : SkyCondition, System.IEquatable<ASHRAEClearSky>
     {
         /// <summary>
@@ -64,9 +64,11 @@ namespace HoneybeeSchema
         /// Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.
         /// </summary>
         [Summary(@"Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [Range(0, 1.2)]
-        [DataMember(Name = "clearness", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "clearness", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("clearness", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("clearness")] // For System.Text.Json
         public double Clearness { get; set; }
 

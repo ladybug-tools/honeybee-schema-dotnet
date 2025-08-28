@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"A grid of sensors.")]
     [System.Serializable]
-    [DataContract(Name = "SensorGrid")]
+    [DataContract(Name = "SensorGrid")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class SensorGrid : RadianceAsset, System.IEquatable<SensorGrid>
     {
         /// <summary>
@@ -72,8 +72,10 @@ namespace HoneybeeSchema
         /// A list of sensors that belong to the grid.
         /// </summary>
         [Summary(@"A list of sensors that belong to the grid.")]
-        [Required]
-        [DataMember(Name = "sensors", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "sensors", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("sensors", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("sensors")] // For System.Text.Json
         public List<Sensor> Sensors { get; set; }
 
@@ -81,30 +83,30 @@ namespace HoneybeeSchema
         /// An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D.
         /// </summary>
         [Summary(@"An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D.")]
-        [DataMember(Name = "mesh")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "mesh")] // For internal Serialization XML/JSON
+        [JsonProperty("mesh", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("mesh")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Mesh3D Mesh { get; set; }
 
         /// <summary>
         /// An optional array of Face3D used to represent the grid. There are no restrictions on how this property relates to the sensors and it is provided only to assist with the display of the grid when the number of sensors or the mesh is too large to be practically visualized.
         /// </summary>
         [Summary(@"An optional array of Face3D used to represent the grid. There are no restrictions on how this property relates to the sensors and it is provided only to assist with the display of the grid when the number of sensors or the mesh is too large to be practically visualized.")]
-        [DataMember(Name = "base_geometry")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "base_geometry")] // For internal Serialization XML/JSON
+        [JsonProperty("base_geometry", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("base_geometry")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<Face3D> BaseGeometry { get; set; }
 
         /// <summary>
         /// An optional string to note the sensor grid group '             'to which the sensor is a part of. Grids sharing the same '             'group_identifier will be written to the same subfolder in Radiance '             'folder (default: None).
         /// </summary>
         [Summary(@"An optional string to note the sensor grid group '             'to which the sensor is a part of. Grids sharing the same '             'group_identifier will be written to the same subfolder in Radiance '             'folder (default: None).")]
-        [DataMember(Name = "group_identifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "group_identifier")] // For internal Serialization XML/JSON
+        [JsonProperty("group_identifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("group_identifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string GroupIdentifier { get; set; }
 
 

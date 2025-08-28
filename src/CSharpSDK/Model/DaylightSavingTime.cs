@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Used to describe the daylight savings time for the simulation.")]
     [System.Serializable]
-    [DataContract(Name = "DaylightSavingTime")]
+    [DataContract(Name = "DaylightSavingTime")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class DaylightSavingTime : DatedBaseModel, System.IEquatable<DaylightSavingTime>
     {
         /// <summary>
@@ -64,20 +64,20 @@ namespace HoneybeeSchema
         /// A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).
         /// </summary>
         [Summary(@"A list of two integers for [month, day], representing the date for the start of daylight savings time. Default: 12 Mar (daylight savings in the US in 2017).")]
-        [DataMember(Name = "start_date")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "start_date")] // For internal Serialization XML/JSON
+        [JsonProperty("start_date", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("start_date")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<int> StartDate { get; set; } = new List<int>{ 3, 12 };
 
         /// <summary>
         /// A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).
         /// </summary>
         [Summary(@"A list of two integers for [month, day], representing the date for the end of daylight savings time. Default: 5 Nov (daylight savings in the US in 2017).")]
-        [DataMember(Name = "end_date")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "end_date")] // For internal Serialization XML/JSON
+        [JsonProperty("end_date", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("end_date")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<int> EndDate { get; set; } = new List<int>{ 11, 5 };
 
 

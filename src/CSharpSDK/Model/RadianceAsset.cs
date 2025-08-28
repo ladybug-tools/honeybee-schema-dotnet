@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Hidden base class for all Radiance Assets.")]
     [System.Serializable]
-    [DataContract(Name = "_RadianceAsset")]
+    [DataContract(Name = "RadianceAsset")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class RadianceAsset : IDdRadianceBaseModel, System.IEquatable<RadianceAsset>
     {
         /// <summary>
@@ -66,23 +66,23 @@ namespace HoneybeeSchema
         /// Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model.
         /// </summary>
         [Summary(@"Optional text string for the Room identifier to which this object belongs. This will be used to narrow down the number of aperture groups that have to be run with this sensor grid. If None, the grid will be run with all aperture groups in the model.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [RegularExpression(@"^[.A-Za-z0-9_-]+$")]
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "room_identifier")] // For Newtonsoft.Json
+        [DataMember(Name = "room_identifier")] // For internal Serialization XML/JSON
+        [JsonProperty("room_identifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("room_identifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string RoomIdentifier { get; set; }
 
         /// <summary>
         /// Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [[""SouthWindow1""], [""static_apertures"", ""NorthWindow2""]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation.
         /// </summary>
         [Summary(@"Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [[""SouthWindow1""], [""static_apertures"", ""NorthWindow2""]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation.")]
-        [DataMember(Name = "light_path")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "light_path")] // For internal Serialization XML/JSON
+        [JsonProperty("light_path", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("light_path")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<List<string>> LightPath { get; set; }
 
 

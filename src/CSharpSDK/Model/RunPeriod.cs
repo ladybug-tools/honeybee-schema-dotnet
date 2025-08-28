@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Used to describe the time period over which to run the simulation.")]
     [System.Serializable]
-    [DataContract(Name = "RunPeriod")]
+    [DataContract(Name = "RunPeriod")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class RunPeriod : DatedBaseModel, System.IEquatable<RunPeriod>
     {
         /// <summary>
@@ -72,60 +72,60 @@ namespace HoneybeeSchema
         /// A list of two integers for [month, day], representing the date for the start of the run period. Must be before the end date.
         /// </summary>
         [Summary(@"A list of two integers for [month, day], representing the date for the start of the run period. Must be before the end date.")]
-        [DataMember(Name = "start_date")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "start_date")] // For internal Serialization XML/JSON
+        [JsonProperty("start_date", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("start_date")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<int> StartDate { get; set; } = new List<int>{ 1, 1 };
 
         /// <summary>
         /// A list of two integers for [month, day], representing the date for the end of the run period. Must be after the start date.
         /// </summary>
         [Summary(@"A list of two integers for [month, day], representing the date for the end of the run period. Must be after the start date.")]
-        [DataMember(Name = "end_date")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "end_date")] // For internal Serialization XML/JSON
+        [JsonProperty("end_date", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("end_date")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<int> EndDate { get; set; } = new List<int>{ 12, 31 };
 
         /// <summary>
         /// Text for the day of the week on which the simulation starts.
         /// </summary>
         [Summary(@"Text for the day of the week on which the simulation starts.")]
-        [DataMember(Name = "start_day_of_week")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "start_day_of_week")] // For internal Serialization XML/JSON
+        [JsonProperty("start_day_of_week", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("start_day_of_week")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public DaysOfWeek StartDayOfWeek { get; set; } = DaysOfWeek.Sunday;
 
         /// <summary>
         /// A list of lists where each sub-list consists of two integers for [month, day], representing a date which is a holiday within the simulation. If None, no holidays are applied.
         /// </summary>
         [Summary(@"A list of lists where each sub-list consists of two integers for [month, day], representing a date which is a holiday within the simulation. If None, no holidays are applied.")]
-        [DataMember(Name = "holidays")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "holidays")] // For internal Serialization XML/JSON
+        [JsonProperty("holidays", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("holidays")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<List<int>> Holidays { get; set; }
 
         /// <summary>
         /// A DaylightSavingTime to dictate the start and end dates of daylight saving time. If None, no daylight saving time is applied to the simulation.
         /// </summary>
         [Summary(@"A DaylightSavingTime to dictate the start and end dates of daylight saving time. If None, no daylight saving time is applied to the simulation.")]
-        [DataMember(Name = "daylight_saving_time")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "daylight_saving_time")] // For internal Serialization XML/JSON
+        [JsonProperty("daylight_saving_time", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("daylight_saving_time")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public DaylightSavingTime DaylightSavingTime { get; set; }
 
         /// <summary>
         /// Boolean noting whether the simulation will be run for a leap year.
         /// </summary>
         [Summary(@"Boolean noting whether the simulation will be run for a leap year.")]
-        [DataMember(Name = "leap_year")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "leap_year")] // For internal Serialization XML/JSON
+        [JsonProperty("leap_year", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("leap_year")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool LeapYear { get; set; } = false;
 
 

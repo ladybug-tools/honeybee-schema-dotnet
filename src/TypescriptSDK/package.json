@@ -1,7 +1,7 @@
 {
   "name": "honeybee-schema",
   "license": "MIT",
-  "version": "1.5901.0",
+  "version": "1.5901.2",
   "description": "Honeybee Schema's typescript version",
   "author": "Ladybug Tools",
   "type": "module",

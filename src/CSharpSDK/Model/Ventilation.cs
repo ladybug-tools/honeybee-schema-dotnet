@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
     [System.Serializable]
-    [DataContract(Name = "Ventilation")]
+    [DataContract(Name = "Ventilation")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class Ventilation : IDdEnergyBaseModel, System.IEquatable<Ventilation>
     {
         /// <summary>
@@ -73,54 +73,54 @@ namespace HoneybeeSchema
         /// Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room.
         /// </summary>
         [Summary(@"Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "flow_per_person")] // For Newtonsoft.Json
+        [DataMember(Name = "flow_per_person")] // For internal Serialization XML/JSON
+        [JsonProperty("flow_per_person", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("flow_per_person")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double FlowPerPerson { get; set; } = 0D;
 
         /// <summary>
         /// Intensity of ventilation in [m3/s per m2 of floor area].
         /// </summary>
         [Summary(@"Intensity of ventilation in [m3/s per m2 of floor area].")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "flow_per_area")] // For Newtonsoft.Json
+        [DataMember(Name = "flow_per_area")] // For internal Serialization XML/JSON
+        [JsonProperty("flow_per_area", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("flow_per_area")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double FlowPerArea { get; set; } = 0D;
 
         /// <summary>
         /// Intensity of ventilation in air changes per hour (ACH) for the entire Room.
         /// </summary>
         [Summary(@"Intensity of ventilation in air changes per hour (ACH) for the entire Room.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "air_changes_per_hour")] // For Newtonsoft.Json
+        [DataMember(Name = "air_changes_per_hour")] // For internal Serialization XML/JSON
+        [JsonProperty("air_changes_per_hour", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("air_changes_per_hour")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double AirChangesPerHour { get; set; } = 0D;
 
         /// <summary>
         /// Intensity of ventilation in m3/s for the entire Room.
         /// </summary>
         [Summary(@"Intensity of ventilation in m3/s for the entire Room.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "flow_per_zone")] // For Newtonsoft.Json
+        [DataMember(Name = "flow_per_zone")] // For internal Serialization XML/JSON
+        [JsonProperty("flow_per_zone", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("flow_per_zone")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double FlowPerZone { get; set; } = 0D;
 
         /// <summary>
         /// Schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.
         /// </summary>
         [Summary(@"Schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.")]
-        [DataMember(Name = "schedule")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "schedule")] // For internal Serialization XML/JSON
+        [JsonProperty("schedule", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<ScheduleRuleset, ScheduleFixedInterval> Schedule { get; set; }
 
 

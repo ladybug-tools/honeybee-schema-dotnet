@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"This object specifies the properties of window shade materials.")]
     [System.Serializable]
-    [DataContract(Name = "EnergyWindowMaterialShade")]
+    [DataContract(Name = "EnergyWindowMaterialShade")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class EnergyWindowMaterialShade : IDdEnergyBaseModel, System.IEquatable<EnergyWindowMaterialShade>
     {
         /// <summary>
@@ -91,151 +91,151 @@ namespace HoneybeeSchema
         /// The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default: 0.4.
         /// </summary>
         [Summary(@"The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default: 0.4.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "solar_transmittance")] // For Newtonsoft.Json
+        [DataMember(Name = "solar_transmittance")] // For internal Serialization XML/JSON
+        [JsonProperty("solar_transmittance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("solar_transmittance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SolarTransmittance { get; set; } = 0.4D;
 
         /// <summary>
         /// The reflectance averaged over the solar spectrum. It us assumed same on both sides of shade and independent of incidence angle. Default value is 0.5
         /// </summary>
         [Summary(@"The reflectance averaged over the solar spectrum. It us assumed same on both sides of shade and independent of incidence angle. Default value is 0.5")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "solar_reflectance")] // For Newtonsoft.Json
+        [DataMember(Name = "solar_reflectance")] // For internal Serialization XML/JSON
+        [JsonProperty("solar_reflectance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("solar_reflectance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SolarReflectance { get; set; } = 0.5D;
 
         /// <summary>
         /// The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default: 0.4.
         /// </summary>
         [Summary(@"The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default: 0.4.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "visible_transmittance")] // For Newtonsoft.Json
+        [DataMember(Name = "visible_transmittance")] // For internal Serialization XML/JSON
+        [JsonProperty("visible_transmittance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("visible_transmittance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double VisibleTransmittance { get; set; } = 0.4D;
 
         /// <summary>
         /// The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default: 0.4
         /// </summary>
         [Summary(@"The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default: 0.4")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "visible_reflectance")] // For Newtonsoft.Json
+        [DataMember(Name = "visible_reflectance")] // For internal Serialization XML/JSON
+        [JsonProperty("visible_reflectance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("visible_reflectance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double VisibleReflectance { get; set; } = 0.4D;
 
         /// <summary>
         /// The effective long-wave infrared hemispherical emissivity. It is assumed same on both sides of shade. Default: 0.9.
         /// </summary>
         [Summary(@"The effective long-wave infrared hemispherical emissivity. It is assumed same on both sides of shade. Default: 0.9.")]
-        [DataMember(Name = "emissivity")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "emissivity")] // For internal Serialization XML/JSON
+        [JsonProperty("emissivity", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("emissivity")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Emissivity { get; set; } = 0.9D;
 
         /// <summary>
         /// The effective long-wave transmittance. It is assumed independent of incidence angle. Default: 0.
         /// </summary>
         [Summary(@"The effective long-wave transmittance. It is assumed independent of incidence angle. Default: 0.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "infrared_transmittance")] // For Newtonsoft.Json
+        [DataMember(Name = "infrared_transmittance")] // For internal Serialization XML/JSON
+        [JsonProperty("infrared_transmittance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("infrared_transmittance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double InfraredTransmittance { get; set; } = 0D;
 
         /// <summary>
         /// The thickness of the shade material in meters. Default: 0.005.
         /// </summary>
         [Summary(@"The thickness of the shade material in meters. Default: 0.005.")]
-        [DataMember(Name = "thickness")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "thickness")] // For internal Serialization XML/JSON
+        [JsonProperty("thickness", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Thickness { get; set; } = 0.005D;
 
         /// <summary>
         /// The conductivity of the shade material in W/(m-K). Default value is 0.1.
         /// </summary>
         [Summary(@"The conductivity of the shade material in W/(m-K). Default value is 0.1.")]
-        [DataMember(Name = "conductivity")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "conductivity")] // For internal Serialization XML/JSON
+        [JsonProperty("conductivity", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("conductivity")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Conductivity { get; set; } = 0.1D;
 
         /// <summary>
         /// The distance from shade to adjacent glass in meters. Default value is 0.05
         /// </summary>
         [Summary(@"The distance from shade to adjacent glass in meters. Default value is 0.05")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0.001, 1)]
-        [DataMember(Name = "distance_to_glass")] // For Newtonsoft.Json
+        [DataMember(Name = "distance_to_glass")] // For internal Serialization XML/JSON
+        [JsonProperty("distance_to_glass", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("distance_to_glass")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double DistanceToGlass { get; set; } = 0.05D;
 
         /// <summary>
         /// The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. Default: 0.5.
         /// </summary>
         [Summary(@"The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. Default: 0.5.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "top_opening_multiplier")] // For Newtonsoft.Json
+        [DataMember(Name = "top_opening_multiplier")] // For internal Serialization XML/JSON
+        [JsonProperty("top_opening_multiplier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("top_opening_multiplier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double TopOpeningMultiplier { get; set; } = 0.5D;
 
         /// <summary>
         /// The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. Default: 0.5.
         /// </summary>
         [Summary(@"The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. Default: 0.5.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "bottom_opening_multiplier")] // For Newtonsoft.Json
+        [DataMember(Name = "bottom_opening_multiplier")] // For internal Serialization XML/JSON
+        [JsonProperty("bottom_opening_multiplier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("bottom_opening_multiplier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double BottomOpeningMultiplier { get; set; } = 0.5D;
 
         /// <summary>
         /// The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. Default: 0.5.
         /// </summary>
         [Summary(@"The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. Default: 0.5.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "left_opening_multiplier")] // For Newtonsoft.Json
+        [DataMember(Name = "left_opening_multiplier")] // For internal Serialization XML/JSON
+        [JsonProperty("left_opening_multiplier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("left_opening_multiplier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LeftOpeningMultiplier { get; set; } = 0.5D;
 
         /// <summary>
         /// The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. Default: 0.5.
         /// </summary>
         [Summary(@"The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. Default: 0.5.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "right_opening_multiplier")] // For Newtonsoft.Json
+        [DataMember(Name = "right_opening_multiplier")] // For internal Serialization XML/JSON
+        [JsonProperty("right_opening_multiplier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("right_opening_multiplier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double RightOpeningMultiplier { get; set; } = 0.5D;
 
         /// <summary>
         /// The fraction of the shade surface that is open to air flow. If air cannot pass through the shade material, airflow_permeability = 0. Default: 0.
         /// </summary>
         [Summary(@"The fraction of the shade surface that is open to air flow. If air cannot pass through the shade material, airflow_permeability = 0. Default: 0.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 0.8)]
-        [DataMember(Name = "airflow_permeability")] // For Newtonsoft.Json
+        [DataMember(Name = "airflow_permeability")] // For internal Serialization XML/JSON
+        [JsonProperty("airflow_permeability", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("airflow_permeability")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double AirflowPermeability { get; set; } = 0D;
 
 

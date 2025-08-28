@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.")]
     [System.Serializable]
-    [DataContract(Name = "DaylightingControl")]
+    [DataContract(Name = "DaylightingControl")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class DaylightingControl : OpenAPIGenBaseModel, System.IEquatable<DaylightingControl>
     {
         /// <summary>
@@ -72,8 +72,10 @@ namespace HoneybeeSchema
         /// A point as 3 (x, y, z) values for the position of the daylight sensor within the parent Room. This point should lie within the Room volume in order for the results to be meaningful.
         /// </summary>
         [Summary(@"A point as 3 (x, y, z) values for the position of the daylight sensor within the parent Room. This point should lie within the Room volume in order for the results to be meaningful.")]
-        [Required]
-        [DataMember(Name = "sensor_position", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "sensor_position", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("sensor_position", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("sensor_position")] // For System.Text.Json
         public List<double> SensorPosition { get; set; }
 
@@ -81,53 +83,53 @@ namespace HoneybeeSchema
         /// A number for the illuminance setpoint in lux beyond which electric lights are dimmed if there is sufficient daylight.
         /// </summary>
         [Summary(@"A number for the illuminance setpoint in lux beyond which electric lights are dimmed if there is sufficient daylight.")]
-        [DataMember(Name = "illuminance_setpoint")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "illuminance_setpoint")] // For internal Serialization XML/JSON
+        [JsonProperty("illuminance_setpoint", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("illuminance_setpoint")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double IlluminanceSetpoint { get; set; } = 300D;
 
         /// <summary>
         /// A number between 0 and 1 that represents the fraction of the Room lights that are dimmed when the illuminance at the sensor position is at the specified illuminance. 1 indicates that all lights are dim-able while 0 indicates that no lights are dim-able. Deeper rooms should have lower control fractions to account for the face that the lights in the back of the space do not dim in response to suitable daylight at the front of the room.
         /// </summary>
         [Summary(@"A number between 0 and 1 that represents the fraction of the Room lights that are dimmed when the illuminance at the sensor position is at the specified illuminance. 1 indicates that all lights are dim-able while 0 indicates that no lights are dim-able. Deeper rooms should have lower control fractions to account for the face that the lights in the back of the space do not dim in response to suitable daylight at the front of the room.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "control_fraction")] // For Newtonsoft.Json
+        [DataMember(Name = "control_fraction")] // For internal Serialization XML/JSON
+        [JsonProperty("control_fraction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("control_fraction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double ControlFraction { get; set; } = 1D;
 
         /// <summary>
         /// A number between 0 and 1 for the the lowest power the lighting system can dim down to, expressed as a fraction of maximum input power.
         /// </summary>
         [Summary(@"A number between 0 and 1 for the the lowest power the lighting system can dim down to, expressed as a fraction of maximum input power.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "min_power_input")] // For Newtonsoft.Json
+        [DataMember(Name = "min_power_input")] // For internal Serialization XML/JSON
+        [JsonProperty("min_power_input", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("min_power_input")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double MinPowerInput { get; set; } = 0.3D;
 
         /// <summary>
         /// A number between 0 and 1 the lowest lighting output the lighting system can dim down to, expressed as a fraction of maximum light output.
         /// </summary>
         [Summary(@"A number between 0 and 1 the lowest lighting output the lighting system can dim down to, expressed as a fraction of maximum light output.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "min_light_output")] // For Newtonsoft.Json
+        [DataMember(Name = "min_light_output")] // For internal Serialization XML/JSON
+        [JsonProperty("min_light_output", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("min_light_output")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double MinLightOutput { get; set; } = 0.2D;
 
         /// <summary>
         /// Boolean to note whether lights should switch off completely when they get to the minimum power input.
         /// </summary>
         [Summary(@"Boolean to note whether lights should switch off completely when they get to the minimum power input.")]
-        [DataMember(Name = "off_at_minimum")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "off_at_minimum")] // For internal Serialization XML/JSON
+        [JsonProperty("off_at_minimum", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("off_at_minimum")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool OffAtMinimum { get; set; } = false;
 
 

@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"A set of constructions for wall assemblies.")]
     [System.Serializable]
-    [DataContract(Name = "WallConstructionSetAbridged")]
+    [DataContract(Name = "WallConstructionSetAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class WallConstructionSetAbridged : FaceSubSetAbridged, System.IEquatable<WallConstructionSetAbridged>
     {
         /// <summary>

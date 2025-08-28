@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects requiring a valid EnergyPlus identifier.")]
     [System.Serializable]
-    [DataContract(Name = "EnergyBaseModel")]
+    [DataContract(Name = "EnergyBaseModel")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class EnergyBaseModel : OpenAPIGenBaseModel, System.IEquatable<EnergyBaseModel>
     {
         /// <summary>
@@ -64,11 +64,13 @@ namespace HoneybeeSchema
         /// Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).
         /// </summary>
         [Summary(@"Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [RegularExpression(@"^[^,;!\n\t]+$")]
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "identifier", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "identifier", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("identifier", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("identifier")] // For System.Text.Json
         public string Identifier { get; set; }
 
@@ -76,10 +78,10 @@ namespace HoneybeeSchema
         /// Display name of the object with no character restrictions.
         /// </summary>
         [Summary(@"Display name of the object with no character restrictions.")]
-        [DataMember(Name = "display_name")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "display_name")] // For internal Serialization XML/JSON
+        [JsonProperty("display_name", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("display_name")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string DisplayName { get; set; }
 
 

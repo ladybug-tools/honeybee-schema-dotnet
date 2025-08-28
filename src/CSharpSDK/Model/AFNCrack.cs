@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Properties for airflow through a crack.")]
     [System.Serializable]
-    [DataContract(Name = "AFNCrack")]
+    [DataContract(Name = "AFNCrack")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class AFNCrack : OpenAPIGenBaseModel, System.IEquatable<AFNCrack>
     {
         /// <summary>
@@ -64,8 +64,10 @@ namespace HoneybeeSchema
         /// A number in kg/s-m at 1 Pa per meter of crack length at the conditions defined in the ReferenceCrack condition; required to run an AirflowNetwork simulation. The DesignBuilder Cracks template defines the flow coefficient for a tight, low-leakage wall to be 0.00001 and 0.001 for external and internal constructions, respectively. Flow coefficients for a very poor, high-leakage wall are defined to be 0.0004 and 0.019 for external and internal constructions, respectively.
         /// </summary>
         [Summary(@"A number in kg/s-m at 1 Pa per meter of crack length at the conditions defined in the ReferenceCrack condition; required to run an AirflowNetwork simulation. The DesignBuilder Cracks template defines the flow coefficient for a tight, low-leakage wall to be 0.00001 and 0.001 for external and internal constructions, respectively. Flow coefficients for a very poor, high-leakage wall are defined to be 0.0004 and 0.019 for external and internal constructions, respectively.")]
-        [Required]
-        [DataMember(Name = "flow_coefficient", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "flow_coefficient", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("flow_coefficient", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("flow_coefficient")] // For System.Text.Json
         public double FlowCoefficient { get; set; }
 
@@ -73,11 +75,11 @@ namespace HoneybeeSchema
         /// An optional dimensionless number between 0.5 and 1 used to calculate the crack mass flow rate; required to run an AirflowNetwork simulation. This value represents the leak geometry impact on airflow, with 0.5 generally corresponding to turbulent orifice flow and 1 generally corresponding to laminar flow. The default of 0.65 is representative of many cases of wall and window leakage, used when the exponent cannot be measured.
         /// </summary>
         [Summary(@"An optional dimensionless number between 0.5 and 1 used to calculate the crack mass flow rate; required to run an AirflowNetwork simulation. This value represents the leak geometry impact on airflow, with 0.5 generally corresponding to turbulent orifice flow and 1 generally corresponding to laminar flow. The default of 0.65 is representative of many cases of wall and window leakage, used when the exponent cannot be measured.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0.5, 1)]
-        [DataMember(Name = "flow_exponent")] // For Newtonsoft.Json
+        [DataMember(Name = "flow_exponent")] // For internal Serialization XML/JSON
+        [JsonProperty("flow_exponent", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("flow_exponent")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double FlowExponent { get; set; } = 0.65D;
 
 

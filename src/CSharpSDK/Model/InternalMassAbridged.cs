@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
     [System.Serializable]
-    [DataContract(Name = "InternalMassAbridged")]
+    [DataContract(Name = "InternalMassAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class InternalMassAbridged : IDdEnergyBaseModel, System.IEquatable<InternalMassAbridged>
     {
         /// <summary>
@@ -67,10 +67,12 @@ namespace HoneybeeSchema
         /// Identifier for an OpaqueConstruction that represents the material that the internal thermal mass is composed of.
         /// </summary>
         [Summary(@"Identifier for an OpaqueConstruction that represents the material that the internal thermal mass is composed of.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "construction", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "construction", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("construction", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("construction")] // For System.Text.Json
         public string Construction { get; set; }
 
@@ -78,8 +80,10 @@ namespace HoneybeeSchema
         /// A number representing the surface area of the internal mass that is exposed to the Room air. This value should always be in square meters regardless of what units system the parent model is a part of.
         /// </summary>
         [Summary(@"A number representing the surface area of the internal mass that is exposed to the Room air. This value should always be in square meters regardless of what units system the parent model is a part of.")]
-        [Required]
-        [DataMember(Name = "area", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "area", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("area", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("area")] // For System.Text.Json
         public double Area { get; set; }
 

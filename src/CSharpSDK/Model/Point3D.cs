@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"A point object in 3D space.")]
     [System.Serializable]
-    [DataContract(Name = "Point3D")]
+    [DataContract(Name = "Point3D")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class Point3D : System.IEquatable<Point3D>
     {
         /// <summary>
@@ -66,8 +66,10 @@ namespace HoneybeeSchema
         /// Number for X coordinate.
         /// </summary>
         [Summary(@"Number for X coordinate.")]
-        [Required]
-        [DataMember(Name = "x", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "x", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("x", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("x")] // For System.Text.Json
         public double X { get; set; }
 
@@ -75,8 +77,10 @@ namespace HoneybeeSchema
         /// Number for Y coordinate.
         /// </summary>
         [Summary(@"Number for Y coordinate.")]
-        [Required]
-        [DataMember(Name = "y", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "y", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("y", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("y")] // For System.Text.Json
         public double Y { get; set; }
 
@@ -84,8 +88,10 @@ namespace HoneybeeSchema
         /// Number for Z coordinate.
         /// </summary>
         [Summary(@"Number for Z coordinate.")]
-        [Required]
-        [DataMember(Name = "z", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "z", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("z", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("z")] // For System.Text.Json
         public double Z { get; set; }
 
@@ -93,11 +99,11 @@ namespace HoneybeeSchema
         /// Type
         /// </summary>
         [Summary(@"Type")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [RegularExpression(@"^Point3D$")]
-        [DataMember(Name = "type")] // For Newtonsoft.Json
+        [DataMember(Name = "type")] // For internal Serialization XML/JSON
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("type")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Type { get; protected set; } = "Point3D";
 
 

@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Used to specify sky conditions on a design day.")]
     [System.Serializable]
-    [DataContract(Name = "ASHRAETau")]
+    [DataContract(Name = "ASHRAETau")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ASHRAETau : SkyCondition, System.IEquatable<ASHRAETau>
     {
         /// <summary>
@@ -66,9 +66,11 @@ namespace HoneybeeSchema
         /// Value for the beam optical depth. Typically found in .stat files.
         /// </summary>
         [Summary(@"Value for the beam optical depth. Typically found in .stat files.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [Range(0, 1.2)]
-        [DataMember(Name = "tau_b", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "tau_b", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("tau_b", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("tau_b")] // For System.Text.Json
         public double TauB { get; set; }
 
@@ -76,9 +78,11 @@ namespace HoneybeeSchema
         /// Value for the diffuse optical depth. Typically found in .stat files.
         /// </summary>
         [Summary(@"Value for the diffuse optical depth. Typically found in .stat files.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [Range(0, 3)]
-        [DataMember(Name = "tau_d", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "tau_d", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("tau_d", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("tau_d")] // For System.Text.Json
         public double TauD { get; set; }
 

@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Used to specify information about the setpoint schedule.")]
     [System.Serializable]
-    [DataContract(Name = "SetpointAbridged")]
+    [DataContract(Name = "SetpointAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class SetpointAbridged : IDdEnergyBaseModel, System.IEquatable<SetpointAbridged>
     {
         /// <summary>
@@ -73,10 +73,12 @@ namespace HoneybeeSchema
         /// Identifier of the schedule for the cooling setpoint. The values in this schedule should be temperature in [C].
         /// </summary>
         [Summary(@"Identifier of the schedule for the cooling setpoint. The values in this schedule should be temperature in [C].")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "cooling_schedule", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "cooling_schedule", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("cooling_schedule", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("cooling_schedule")] // For System.Text.Json
         public string CoolingSchedule { get; set; }
 
@@ -84,10 +86,12 @@ namespace HoneybeeSchema
         /// Identifier of the schedule for the heating setpoint. The values in this schedule should be temperature in [C].
         /// </summary>
         [Summary(@"Identifier of the schedule for the heating setpoint. The values in this schedule should be temperature in [C].")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "heating_schedule", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "heating_schedule", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("heating_schedule", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("heating_schedule")] // For System.Text.Json
         public string HeatingSchedule { get; set; }
 
@@ -95,35 +99,35 @@ namespace HoneybeeSchema
         /// Identifier of the schedule for the humidification setpoint. The values in this schedule should be in [%].
         /// </summary>
         [Summary(@"Identifier of the schedule for the humidification setpoint. The values in this schedule should be in [%].")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "humidifying_schedule")] // For Newtonsoft.Json
+        [DataMember(Name = "humidifying_schedule")] // For internal Serialization XML/JSON
+        [JsonProperty("humidifying_schedule", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("humidifying_schedule")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string HumidifyingSchedule { get; set; }
 
         /// <summary>
         /// Identifier of the schedule for the dehumidification setpoint. The values in this schedule should be in [%].
         /// </summary>
         [Summary(@"Identifier of the schedule for the dehumidification setpoint. The values in this schedule should be in [%].")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "dehumidifying_schedule")] // For Newtonsoft.Json
+        [DataMember(Name = "dehumidifying_schedule")] // For internal Serialization XML/JSON
+        [JsonProperty("dehumidifying_schedule", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("dehumidifying_schedule")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string DehumidifyingSchedule { get; set; }
 
         /// <summary>
         /// An optional positive number for the temperature difference between the cutout temperature and the setpoint temperature. Specifying a non-zero number here is useful for modeling the throttling range associated with a given setup of setpoint controls and HVAC equipment. Throttling ranges describe the range where a zone is slightly over-cooled or over-heated beyond the thermostat setpoint. They are used to avoid situations where HVAC systems turn on only to turn off a few minutes later, thereby wearing out the parts of mechanical systems faster. They can have a minor impact on energy consumption and can often have significant impacts on occupant thermal comfort, though using the default value of zero will often yield results that are close enough when trying to estimate the annual heating/cooling energy use. Specifying a value of zero effectively assumes that the system will turn on whenever conditions are outside the setpoint range and will cut out as soon as the setpoint is reached.
         /// </summary>
         [Summary(@"An optional positive number for the temperature difference between the cutout temperature and the setpoint temperature. Specifying a non-zero number here is useful for modeling the throttling range associated with a given setup of setpoint controls and HVAC equipment. Throttling ranges describe the range where a zone is slightly over-cooled or over-heated beyond the thermostat setpoint. They are used to avoid situations where HVAC systems turn on only to turn off a few minutes later, thereby wearing out the parts of mechanical systems faster. They can have a minor impact on energy consumption and can often have significant impacts on occupant thermal comfort, though using the default value of zero will often yield results that are close enough when trying to estimate the annual heating/cooling energy use. Specifying a value of zero effectively assumes that the system will turn on whenever conditions are outside the setpoint range and will cut out as soon as the setpoint is reached.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "setpoint_cutout_difference")] // For Newtonsoft.Json
+        [DataMember(Name = "setpoint_cutout_difference")] // For internal Serialization XML/JSON
+        [JsonProperty("setpoint_cutout_difference", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("setpoint_cutout_difference")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SetpointCutoutDifference { get; set; } = 0D;
 
 

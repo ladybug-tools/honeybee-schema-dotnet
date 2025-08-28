@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Lists the outputs to report from the simulation and their format.")]
     [System.Serializable]
-    [DataContract(Name = "SimulationOutput")]
+    [DataContract(Name = "SimulationOutput")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class SimulationOutput : OpenAPIGenBaseModel, System.IEquatable<SimulationOutput>
     {
         /// <summary>
@@ -68,41 +68,41 @@ namespace HoneybeeSchema
         /// ReportingFrequency
         /// </summary>
         [Summary(@"ReportingFrequency")]
-        [DataMember(Name = "reporting_frequency")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "reporting_frequency")] // For internal Serialization XML/JSON
+        [JsonProperty("reporting_frequency", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("reporting_frequency")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ReportingFrequency ReportingFrequency { get; set; } = ReportingFrequency.Hourly;
 
         /// <summary>
         /// A list of EnergyPlus output names as strings, which are requested from the simulation.
         /// </summary>
         [Summary(@"A list of EnergyPlus output names as strings, which are requested from the simulation.")]
-        [DataMember(Name = "outputs")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "outputs")] // For internal Serialization XML/JSON
+        [JsonProperty("outputs", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("outputs")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<string> Outputs { get; set; }
 
         /// <summary>
         /// A list of EnergyPlus summary report names as strings.
         /// </summary>
         [Summary(@"A list of EnergyPlus summary report names as strings.")]
-        [DataMember(Name = "summary_reports")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "summary_reports")] // For internal Serialization XML/JSON
+        [JsonProperty("summary_reports", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("summary_reports")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<string> SummaryReports { get; set; }
 
         /// <summary>
         /// A number in degrees Celsius for the difference that the zone conditions must be from the thermostat setpoint in order for the setpoint to be considered unmet. This will affect how unmet hours are reported in the output. ASHRAE 90.1 uses a tolerance of 1.11C, which is equivalent to 1.8F.
         /// </summary>
         [Summary(@"A number in degrees Celsius for the difference that the zone conditions must be from the thermostat setpoint in order for the setpoint to be considered unmet. This will affect how unmet hours are reported in the output. ASHRAE 90.1 uses a tolerance of 1.11C, which is equivalent to 1.8F.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 10)]
-        [DataMember(Name = "unmet_setpoint_tolerance")] // For Newtonsoft.Json
+        [DataMember(Name = "unmet_setpoint_tolerance")] // For internal Serialization XML/JSON
+        [JsonProperty("unmet_setpoint_tolerance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("unmet_setpoint_tolerance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double UnmetSetpointTolerance { get; set; } = 1.11D;
 
 

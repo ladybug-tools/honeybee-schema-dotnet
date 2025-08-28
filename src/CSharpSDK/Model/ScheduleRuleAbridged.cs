@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Schedule rule including a ScheduleDay and when it should be applied..")]
     [System.Serializable]
-    [DataContract(Name = "ScheduleRuleAbridged")]
+    [DataContract(Name = "ScheduleRuleAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ScheduleRuleAbridged : DatedBaseModel, System.IEquatable<ScheduleRuleAbridged>
     {
         /// <summary>
@@ -80,10 +80,12 @@ namespace HoneybeeSchema
         /// The identifier of a ScheduleDay object associated with this rule.
         /// </summary>
         [Summary(@"The identifier of a ScheduleDay object associated with this rule.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "schedule_day", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "schedule_day", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("schedule_day", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("schedule_day")] // For System.Text.Json
         public string ScheduleDay { get; set; }
 
@@ -91,90 +93,90 @@ namespace HoneybeeSchema
         /// Boolean noting whether to apply schedule_day on Sundays.
         /// </summary>
         [Summary(@"Boolean noting whether to apply schedule_day on Sundays.")]
-        [DataMember(Name = "apply_sunday")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "apply_sunday")] // For internal Serialization XML/JSON
+        [JsonProperty("apply_sunday", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("apply_sunday")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool ApplySunday { get; set; } = false;
 
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Mondays.
         /// </summary>
         [Summary(@"Boolean noting whether to apply schedule_day on Mondays.")]
-        [DataMember(Name = "apply_monday")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "apply_monday")] // For internal Serialization XML/JSON
+        [JsonProperty("apply_monday", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("apply_monday")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool ApplyMonday { get; set; } = false;
 
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Tuesdays.
         /// </summary>
         [Summary(@"Boolean noting whether to apply schedule_day on Tuesdays.")]
-        [DataMember(Name = "apply_tuesday")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "apply_tuesday")] // For internal Serialization XML/JSON
+        [JsonProperty("apply_tuesday", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("apply_tuesday")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool ApplyTuesday { get; set; } = false;
 
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Wednesdays.
         /// </summary>
         [Summary(@"Boolean noting whether to apply schedule_day on Wednesdays.")]
-        [DataMember(Name = "apply_wednesday")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "apply_wednesday")] // For internal Serialization XML/JSON
+        [JsonProperty("apply_wednesday", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("apply_wednesday")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool ApplyWednesday { get; set; } = false;
 
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Thursdays.
         /// </summary>
         [Summary(@"Boolean noting whether to apply schedule_day on Thursdays.")]
-        [DataMember(Name = "apply_thursday")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "apply_thursday")] // For internal Serialization XML/JSON
+        [JsonProperty("apply_thursday", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("apply_thursday")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool ApplyThursday { get; set; } = false;
 
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Fridays.
         /// </summary>
         [Summary(@"Boolean noting whether to apply schedule_day on Fridays.")]
-        [DataMember(Name = "apply_friday")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "apply_friday")] // For internal Serialization XML/JSON
+        [JsonProperty("apply_friday", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("apply_friday")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool ApplyFriday { get; set; } = false;
 
         /// <summary>
         /// Boolean noting whether to apply schedule_day on Saturdays.
         /// </summary>
         [Summary(@"Boolean noting whether to apply schedule_day on Saturdays.")]
-        [DataMember(Name = "apply_saturday")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "apply_saturday")] // For internal Serialization XML/JSON
+        [JsonProperty("apply_saturday", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("apply_saturday")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool ApplySaturday { get; set; } = false;
 
         /// <summary>
         /// A list of two integers for [month, day], representing the start date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).
         /// </summary>
         [Summary(@"A list of two integers for [month, day], representing the start date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).")]
-        [DataMember(Name = "start_date")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "start_date")] // For internal Serialization XML/JSON
+        [JsonProperty("start_date", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("start_date")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<int> StartDate { get; set; } = new List<int>{ 1, 1 };
 
         /// <summary>
         /// A list of two integers for [month, day], representing the end date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).
         /// </summary>
         [Summary(@"A list of two integers for [month, day], representing the end date of the period over which the schedule_day will be applied.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).")]
-        [DataMember(Name = "end_date")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "end_date")] // For internal Serialization XML/JSON
+        [JsonProperty("end_date", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("end_date")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<int> EndDate { get; set; } = new List<int>{ 12, 31 };
 
 

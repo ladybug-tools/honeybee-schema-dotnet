@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"An object representing design day conditions.")]
     [System.Serializable]
-    [DataContract(Name = "DesignDay")]
+    [DataContract(Name = "DesignDay")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class DesignDay : OpenAPIGenBaseModel, System.IEquatable<DesignDay>
     {
         /// <summary>
@@ -72,10 +72,12 @@ namespace HoneybeeSchema
         /// Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).
         /// </summary>
         [Summary(@"Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "name", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "name", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("name", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("name")] // For System.Text.Json
         public string Name { get; set; }
 
@@ -83,8 +85,10 @@ namespace HoneybeeSchema
         /// DayType
         /// </summary>
         [Summary(@"DayType")]
-        [Required]
-        [DataMember(Name = "day_type", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "day_type", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("day_type", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("day_type")] // For System.Text.Json
         public DesignDayTypes DayType { get; set; }
 
@@ -92,8 +96,10 @@ namespace HoneybeeSchema
         /// A DryBulbCondition describing temperature conditions on the design day.
         /// </summary>
         [Summary(@"A DryBulbCondition describing temperature conditions on the design day.")]
-        [Required]
-        [DataMember(Name = "dry_bulb_condition", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "dry_bulb_condition", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("dry_bulb_condition", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("dry_bulb_condition")] // For System.Text.Json
         public DryBulbCondition DryBulbCondition { get; set; }
 
@@ -101,8 +107,10 @@ namespace HoneybeeSchema
         /// A HumidityCondition describing humidity and precipitation conditions on the design day.
         /// </summary>
         [Summary(@"A HumidityCondition describing humidity and precipitation conditions on the design day.")]
-        [Required]
-        [DataMember(Name = "humidity_condition", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "humidity_condition", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("humidity_condition", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("humidity_condition")] // For System.Text.Json
         public HumidityCondition HumidityCondition { get; set; }
 
@@ -110,8 +118,10 @@ namespace HoneybeeSchema
         /// A WindCondition describing wind conditions on the design day.
         /// </summary>
         [Summary(@"A WindCondition describing wind conditions on the design day.")]
-        [Required]
-        [DataMember(Name = "wind_condition", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "wind_condition", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("wind_condition", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("wind_condition")] // For System.Text.Json
         public WindCondition WindCondition { get; set; }
 
@@ -119,8 +129,10 @@ namespace HoneybeeSchema
         /// SkyCondition
         /// </summary>
         [Summary(@"SkyCondition")]
-        [Required]
-        [DataMember(Name = "sky_condition", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "sky_condition", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("sky_condition", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("sky_condition")] // For System.Text.Json
         public AnyOf<ASHRAEClearSky, ASHRAETau> SkyCondition { get; set; }
 

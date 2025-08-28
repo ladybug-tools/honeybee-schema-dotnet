@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Abridged Radiance Properties for Honeybee Room.")]
     [System.Serializable]
-    [DataContract(Name = "RoomRadiancePropertiesAbridged")]
+    [DataContract(Name = "RoomRadiancePropertiesAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class RoomRadiancePropertiesAbridged : OpenAPIGenBaseModel, System.IEquatable<RoomRadiancePropertiesAbridged>
     {
         /// <summary>
@@ -62,10 +62,10 @@ namespace HoneybeeSchema
         /// An identifier for a unique Room-Assigned ModifierSet (default: None).
         /// </summary>
         [Summary(@"An identifier for a unique Room-Assigned ModifierSet (default: None).")]
-        [DataMember(Name = "modifier_set")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "modifier_set")] // For internal Serialization XML/JSON
+        [JsonProperty("modifier_set", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("modifier_set")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ModifierSet { get; set; }
 
 

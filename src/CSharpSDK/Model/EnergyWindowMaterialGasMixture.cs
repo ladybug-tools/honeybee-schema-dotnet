@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Create a mixture of two to four different gases to fill the panes of multiple\npane windows.")]
     [System.Serializable]
-    [DataContract(Name = "EnergyWindowMaterialGasMixture")]
+    [DataContract(Name = "EnergyWindowMaterialGasMixture")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class EnergyWindowMaterialGasMixture : IDdEnergyBaseModel, System.IEquatable<EnergyWindowMaterialGasMixture>
     {
         /// <summary>
@@ -69,8 +69,10 @@ namespace HoneybeeSchema
         /// List of gases in the gas mixture.
         /// </summary>
         [Summary(@"List of gases in the gas mixture.")]
-        [Required]
-        [DataMember(Name = "gas_types", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "gas_types", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("gas_types", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("gas_types")] // For System.Text.Json
         public List<GasType> GasTypes { get; set; }
 
@@ -78,8 +80,10 @@ namespace HoneybeeSchema
         /// A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1.
         /// </summary>
         [Summary(@"A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1.")]
-        [Required]
-        [DataMember(Name = "gas_fractions", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "gas_fractions", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("gas_fractions", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("gas_fractions")] // For System.Text.Json
         public List<double> GasFractions { get; set; }
 
@@ -87,10 +91,10 @@ namespace HoneybeeSchema
         /// The thickness of the gas mixture layer in meters.
         /// </summary>
         [Summary(@"The thickness of the gas mixture layer in meters.")]
-        [DataMember(Name = "thickness")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "thickness")] // For internal Serialization XML/JSON
+        [JsonProperty("thickness", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Thickness { get; set; } = 0.0125D;
 
 

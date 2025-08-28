@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
     [System.Serializable]
-    [DataContract(Name = "ProcessAbridged")]
+    [DataContract(Name = "ProcessAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ProcessAbridged : IDdEnergyBaseModel, System.IEquatable<ProcessAbridged>
     {
         /// <summary>
@@ -77,9 +77,11 @@ namespace HoneybeeSchema
         /// A number for the process load power in Watts.
         /// </summary>
         [Summary(@"A number for the process load power in Watts.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "watts", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "watts", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("watts", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("watts")] // For System.Text.Json
         public double Watts { get; set; }
 
@@ -87,10 +89,12 @@ namespace HoneybeeSchema
         /// Identifier of the schedule for the use of the process over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts to yield a complete equipment profile.
         /// </summary>
         [Summary(@"Identifier of the schedule for the use of the process over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts to yield a complete equipment profile.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "schedule", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "schedule", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("schedule", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
         public string Schedule { get; set; }
 
@@ -98,8 +102,10 @@ namespace HoneybeeSchema
         /// Text to denote the type of fuel consumed by the process. Using the ""None"" type indicates that no end uses will be associated with the process, only the zone gains.
         /// </summary>
         [Summary(@"Text to denote the type of fuel consumed by the process. Using the ""None"" type indicates that no end uses will be associated with the process, only the zone gains.")]
-        [Required]
-        [DataMember(Name = "fuel_type", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "fuel_type", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("fuel_type", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("fuel_type")] // For System.Text.Json
         public FuelTypes FuelType { get; set; }
 
@@ -107,45 +113,45 @@ namespace HoneybeeSchema
         /// Text to indicate the end-use subcategory, which will identify the process load in the end use output. For example, “Cooking”, “Clothes Drying”, etc. A new meter for reporting is created for each unique subcategory.
         /// </summary>
         [Summary(@"Text to indicate the end-use subcategory, which will identify the process load in the end use output. For example, “Cooking”, “Clothes Drying”, etc. A new meter for reporting is created for each unique subcategory.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "end_use_category")] // For Newtonsoft.Json
+        [DataMember(Name = "end_use_category")] // For internal Serialization XML/JSON
+        [JsonProperty("end_use_category", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("end_use_category")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string EndUseCategory { get; set; } = "Process";
 
         /// <summary>
         /// Number for the amount of long-wave radiation heat given off by the process load. Default value is 0.
         /// </summary>
         [Summary(@"Number for the amount of long-wave radiation heat given off by the process load. Default value is 0.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "radiant_fraction")] // For Newtonsoft.Json
+        [DataMember(Name = "radiant_fraction")] // For internal Serialization XML/JSON
+        [JsonProperty("radiant_fraction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("radiant_fraction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double RadiantFraction { get; set; } = 0D;
 
         /// <summary>
         /// Number for the amount of latent heat given off by the process load. Default value is 0.
         /// </summary>
         [Summary(@"Number for the amount of latent heat given off by the process load. Default value is 0.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "latent_fraction")] // For Newtonsoft.Json
+        [DataMember(Name = "latent_fraction")] // For internal Serialization XML/JSON
+        [JsonProperty("latent_fraction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("latent_fraction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LatentFraction { get; set; } = 0D;
 
         /// <summary>
         /// Number for the amount of “lost” heat being given off by the process load. The default value is 0.
         /// </summary>
         [Summary(@"Number for the amount of “lost” heat being given off by the process load. The default value is 0.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "lost_fraction")] // For Newtonsoft.Json
+        [DataMember(Name = "lost_fraction")] // For internal Serialization XML/JSON
+        [JsonProperty("lost_fraction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("lost_fraction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LostFraction { get; set; } = 0D;
 
 

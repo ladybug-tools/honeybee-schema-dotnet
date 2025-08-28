@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"A single planar face in 3D space.")]
     [System.Serializable]
-    [DataContract(Name = "Face3D")]
+    [DataContract(Name = "Face3D")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class Face3D : OpenAPIGenBaseModel, System.IEquatable<Face3D>
     {
         /// <summary>
@@ -66,8 +66,10 @@ namespace HoneybeeSchema
         /// A list of points representing the outer boundary vertices of the face. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.
         /// </summary>
         [Summary(@"A list of points representing the outer boundary vertices of the face. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values.")]
-        [Required]
-        [DataMember(Name = "boundary", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "boundary", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("boundary", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("boundary")] // For System.Text.Json
         public List<List<double>> Boundary { get; set; }
 
@@ -75,20 +77,20 @@ namespace HoneybeeSchema
         /// Optional list of lists with one list for each hole in the face.Each hole should be a list of at least 3 points and each point a list of 3 (x, y, z) values. If None, it will be assumed that there are no holes in the face.
         /// </summary>
         [Summary(@"Optional list of lists with one list for each hole in the face.Each hole should be a list of at least 3 points and each point a list of 3 (x, y, z) values. If None, it will be assumed that there are no holes in the face.")]
-        [DataMember(Name = "holes")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "holes")] // For internal Serialization XML/JSON
+        [JsonProperty("holes", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("holes")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<List<List<double>>> Holes { get; set; }
 
         /// <summary>
         /// Optional Plane indicating the plane in which the face exists.If None, the plane will usually be derived from the boundary points.
         /// </summary>
         [Summary(@"Optional Plane indicating the plane in which the face exists.If None, the plane will usually be derived from the boundary points.")]
-        [DataMember(Name = "plane")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "plane")] // For internal Serialization XML/JSON
+        [JsonProperty("plane", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("plane")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Plane Plane { get; set; }
 
 

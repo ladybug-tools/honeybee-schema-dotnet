@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Abridged set containing radiance modifiers needed for a model's Floors.")]
     [System.Serializable]
-    [DataContract(Name = "FloorModifierSetAbridged")]
+    [DataContract(Name = "FloorModifierSetAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class FloorModifierSetAbridged : BaseModifierSetAbridged, System.IEquatable<FloorModifierSetAbridged>
     {
         /// <summary>

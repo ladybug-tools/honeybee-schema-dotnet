@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Project information.")]
     [System.Serializable]
-    [DataContract(Name = "ProjectInfo")]
+    [DataContract(Name = "ProjectInfo")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ProjectInfo : OpenAPIGenBaseModel, System.IEquatable<ProjectInfo>
     {
         /// <summary>
@@ -72,61 +72,61 @@ namespace HoneybeeSchema
         /// A number between -360 to 360 where positive values rotate the compass counterclockwise (towards the West) and negative values rotate the compass clockwise (towards the East).
         /// </summary>
         [Summary(@"A number between -360 to 360 where positive values rotate the compass counterclockwise (towards the West) and negative values rotate the compass clockwise (towards the East).")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(-360, 360)]
-        [DataMember(Name = "north")] // For Newtonsoft.Json
+        [DataMember(Name = "north")] // For internal Serialization XML/JSON
+        [JsonProperty("north", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("north")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double North { get; set; } = 0D;
 
         /// <summary>
         /// A list of URLs to zip files that includes EPW, DDY and STAT files. You can find these URLs from the EPWMAP. The first URL will be used as the primary weather file.
         /// </summary>
         [Summary(@"A list of URLs to zip files that includes EPW, DDY and STAT files. You can find these URLs from the EPWMAP. The first URL will be used as the primary weather file.")]
-        [DataMember(Name = "weather_urls")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "weather_urls")] // For internal Serialization XML/JSON
+        [JsonProperty("weather_urls", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("weather_urls")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<string> WeatherUrls { get; set; }
 
         /// <summary>
         /// Project location. This value is usually generated from the information in the weather files.
         /// </summary>
         [Summary(@"Project location. This value is usually generated from the information in the weather files.")]
-        [DataMember(Name = "location")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "location")] // For internal Serialization XML/JSON
+        [JsonProperty("location", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("location")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Location Location { get; set; }
 
         /// <summary>
         /// Project location climate zone.
         /// </summary>
         [Summary(@"Project location climate zone.")]
-        [DataMember(Name = "ashrae_climate_zone")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "ashrae_climate_zone")] // For internal Serialization XML/JSON
+        [JsonProperty("ashrae_climate_zone", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("ashrae_climate_zone")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ClimateZones AshraeClimateZone { get; set; }
 
         /// <summary>
         /// A list of building types for the project. The first building type is considered the primary type for the project.
         /// </summary>
         [Summary(@"A list of building types for the project. The first building type is considered the primary type for the project.")]
-        [DataMember(Name = "building_type")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "building_type")] // For internal Serialization XML/JSON
+        [JsonProperty("building_type", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("building_type")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<BuildingTypes> BuildingType { get; set; }
 
         /// <summary>
         /// A list of building vintages (e.g. ASHRAE_2019, ASHRAE_2016).
         /// </summary>
         [Summary(@"A list of building vintages (e.g. ASHRAE_2019, ASHRAE_2016).")]
-        [DataMember(Name = "vintage")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "vintage")] // For internal Serialization XML/JSON
+        [JsonProperty("vintage", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("vintage")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<EfficiencyStandards> Vintage { get; set; }
 
 

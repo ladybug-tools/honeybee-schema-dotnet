@@ -21,7 +21,7 @@ namespace HoneybeeSchema
 {
     [Summary(@"")]
     [System.Serializable]
-    [DataContract(Name = "ValidationReport")]
+    [DataContract(Name = "ValidationReport")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ValidationReport : System.IEquatable<ValidationReport>
     {
         /// <summary>
@@ -69,9 +69,11 @@ namespace HoneybeeSchema
         /// Text string for the version of honeybee-core or dragonfly-core that performed the validation.
         /// </summary>
         [Summary(@"Text string for the version of honeybee-core or dragonfly-core that performed the validation.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [RegularExpression(@"([0-9]+)\.([0-9]+)\.([0-9]+)")]
-        [DataMember(Name = "app_version", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "app_version", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("app_version", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("app_version")] // For System.Text.Json
         public string AppVersion { get; set; }
 
@@ -79,9 +81,11 @@ namespace HoneybeeSchema
         /// Text string for the version of honeybee-schema or dragonfly-schema that performed the validation.
         /// </summary>
         [Summary(@"Text string for the version of honeybee-schema or dragonfly-schema that performed the validation.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [RegularExpression(@"([0-9]+)\.([0-9]+)\.([0-9]+)")]
-        [DataMember(Name = "schema_version", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "schema_version", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("schema_version", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("schema_version")] // For System.Text.Json
         public string SchemaVersion { get; set; }
 
@@ -89,8 +93,10 @@ namespace HoneybeeSchema
         /// Boolean to note whether the Model is valid or not.
         /// </summary>
         [Summary(@"Boolean to note whether the Model is valid or not.")]
-        [Required]
-        [DataMember(Name = "valid", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "valid", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("valid", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("valid")] // For System.Text.Json
         public bool Valid { get; set; }
 
@@ -98,41 +104,41 @@ namespace HoneybeeSchema
         /// Type
         /// </summary>
         [Summary(@"Type")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [RegularExpression(@"^ValidationReport$")]
-        [DataMember(Name = "type")] // For Newtonsoft.Json
+        [DataMember(Name = "type")] // For internal Serialization XML/JSON
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("type")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Type { get; protected set; } = "ValidationReport";
 
         /// <summary>
         /// Text string for the name of the application that performed the validation. This is typically either Honeybee or Dragonfly.
         /// </summary>
         [Summary(@"Text string for the name of the application that performed the validation. This is typically either Honeybee or Dragonfly.")]
-        [DataMember(Name = "app_name")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "app_name")] // For internal Serialization XML/JSON
+        [JsonProperty("app_name", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("app_name")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string AppName { get; set; } = "Honeybee";
 
         /// <summary>
         /// A text string containing an exception if the Model failed to serialize. It will be an empty string if serialization was successful.
         /// </summary>
         [Summary(@"A text string containing an exception if the Model failed to serialize. It will be an empty string if serialization was successful.")]
-        [DataMember(Name = "fatal_error")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "fatal_error")] // For internal Serialization XML/JSON
+        [JsonProperty("fatal_error", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("fatal_error")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string FatalError { get; set; } = "";
 
         /// <summary>
         /// A list of objects for each error that was discovered in the model. This will be an empty list or None if no errors were found.
         /// </summary>
         [Summary(@"A list of objects for each error that was discovered in the model. This will be an empty list or None if no errors were found.")]
-        [DataMember(Name = "errors")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "errors")] // For internal Serialization XML/JSON
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("errors")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<ValidationError> Errors { get; set; }
 
 

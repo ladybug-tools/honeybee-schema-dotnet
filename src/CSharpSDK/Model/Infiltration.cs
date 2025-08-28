@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
     [System.Serializable]
-    [DataContract(Name = "Infiltration")]
+    [DataContract(Name = "Infiltration")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class Infiltration : IDdEnergyBaseModel, System.IEquatable<Infiltration>
     {
         /// <summary>
@@ -73,9 +73,11 @@ namespace HoneybeeSchema
         /// Number for the infiltration per exterior surface area in m3/s-m2.
         /// </summary>
         [Summary(@"Number for the infiltration per exterior surface area in m3/s-m2.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "flow_per_exterior_area", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "flow_per_exterior_area", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("flow_per_exterior_area", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("flow_per_exterior_area")] // For System.Text.Json
         public double FlowPerExteriorArea { get; set; }
 
@@ -83,8 +85,10 @@ namespace HoneybeeSchema
         /// The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.
         /// </summary>
         [Summary(@"The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.")]
-        [Required]
-        [DataMember(Name = "schedule", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "schedule", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("schedule", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
         public AnyOf<ScheduleRuleset, ScheduleFixedInterval> Schedule { get; set; }
 
@@ -92,33 +96,33 @@ namespace HoneybeeSchema
         /// ConstantCoefficient
         /// </summary>
         [Summary(@"ConstantCoefficient")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "constant_coefficient")] // For Newtonsoft.Json
+        [DataMember(Name = "constant_coefficient")] // For internal Serialization XML/JSON
+        [JsonProperty("constant_coefficient", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("constant_coefficient")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double ConstantCoefficient { get; set; } = 1D;
 
         /// <summary>
         /// TemperatureCoefficient
         /// </summary>
         [Summary(@"TemperatureCoefficient")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "temperature_coefficient")] // For Newtonsoft.Json
+        [DataMember(Name = "temperature_coefficient")] // For internal Serialization XML/JSON
+        [JsonProperty("temperature_coefficient", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("temperature_coefficient")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double TemperatureCoefficient { get; set; } = 0D;
 
         /// <summary>
         /// VelocityCoefficient
         /// </summary>
         [Summary(@"VelocityCoefficient")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "velocity_coefficient")] // For Newtonsoft.Json
+        [DataMember(Name = "velocity_coefficient")] // For internal Serialization XML/JSON
+        [JsonProperty("velocity_coefficient", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("velocity_coefficient")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double VelocityCoefficient { get; set; } = 0D;
 
 

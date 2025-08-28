@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Construction for window objects (Aperture, Door).")]
     [System.Serializable]
-    [DataContract(Name = "WindowConstructionAbridged")]
+    [DataContract(Name = "WindowConstructionAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class WindowConstructionAbridged : IDdEnergyBaseModel, System.IEquatable<WindowConstructionAbridged>
     {
         /// <summary>
@@ -67,8 +67,10 @@ namespace HoneybeeSchema
         /// List of strings for glazing or gas material identifiers. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.
         /// </summary>
         [Summary(@"List of strings for glazing or gas material identifiers. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer.")]
-        [Required]
-        [DataMember(Name = "materials", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "materials", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("materials", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("materials")] // For System.Text.Json
         public List<string> Materials { get; set; }
 
@@ -76,12 +78,12 @@ namespace HoneybeeSchema
         /// An optional identifier for a frame material that surrounds the window construction.
         /// </summary>
         [Summary(@"An optional identifier for a frame material that surrounds the window construction.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "frame")] // For Newtonsoft.Json
+        [DataMember(Name = "frame")] // For internal Serialization XML/JSON
+        [JsonProperty("frame", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("frame")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Frame { get; set; }
 
 

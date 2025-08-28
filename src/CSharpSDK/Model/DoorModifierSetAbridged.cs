@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Abridged set containing radiance modifiers needed for a model's Doors.")]
     [System.Serializable]
-    [DataContract(Name = "DoorModifierSetAbridged")]
+    [DataContract(Name = "DoorModifierSetAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class DoorModifierSetAbridged : BaseModifierSetAbridged, System.IEquatable<DoorModifierSetAbridged>
     {
         /// <summary>
@@ -68,30 +68,30 @@ namespace HoneybeeSchema
         /// Identifier of modifier object for glass with a Surface boundary condition.
         /// </summary>
         [Summary(@"Identifier of modifier object for glass with a Surface boundary condition.")]
-        [DataMember(Name = "interior_glass_modifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "interior_glass_modifier")] // For internal Serialization XML/JSON
+        [JsonProperty("interior_glass_modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("interior_glass_modifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string InteriorGlassModifier { get; set; }
 
         /// <summary>
         /// Identifier of modifier object for glass with an Outdoors boundary condition.
         /// </summary>
         [Summary(@"Identifier of modifier object for glass with an Outdoors boundary condition.")]
-        [DataMember(Name = "exterior_glass_modifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "exterior_glass_modifier")] // For internal Serialization XML/JSON
+        [JsonProperty("exterior_glass_modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("exterior_glass_modifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ExteriorGlassModifier { get; set; }
 
         /// <summary>
         /// Identifier of a modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face.
         /// </summary>
         [Summary(@"Identifier of a modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face.")]
-        [DataMember(Name = "overhead_modifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "overhead_modifier")] // For internal Serialization XML/JSON
+        [JsonProperty("overhead_modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("overhead_modifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string OverheadModifier { get; set; }
 
 
