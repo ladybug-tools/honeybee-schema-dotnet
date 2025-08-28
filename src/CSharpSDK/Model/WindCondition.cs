@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Used to specify wind conditions on a design day.")]
     [System.Serializable]
-    [DataContract(Name = "WindCondition")]
+    [DataContract(Name = "WindCondition")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class WindCondition : OpenAPIGenBaseModel, System.IEquatable<WindCondition>
     {
         /// <summary>
@@ -64,9 +64,11 @@ namespace HoneybeeSchema
         /// Wind speed on the design day [m/s].
         /// </summary>
         [Summary(@"Wind speed on the design day [m/s].")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [Range(0, 40)]
-        [DataMember(Name = "wind_speed", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "wind_speed", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("wind_speed", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("wind_speed")] // For System.Text.Json
         public double WindSpeed { get; set; }
 
@@ -74,11 +76,11 @@ namespace HoneybeeSchema
         /// Wind direction on the design day [degrees].
         /// </summary>
         [Summary(@"Wind direction on the design day [degrees].")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 360)]
-        [DataMember(Name = "wind_direction")] // For Newtonsoft.Json
+        [DataMember(Name = "wind_direction")] // For internal Serialization XML/JSON
+        [JsonProperty("wind_direction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("wind_direction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double WindDirection { get; set; } = 0D;
 
 

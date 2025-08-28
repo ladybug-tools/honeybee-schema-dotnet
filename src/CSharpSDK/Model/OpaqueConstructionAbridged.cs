@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Construction for opaque objects (Face, Shade, Door).")]
     [System.Serializable]
-    [DataContract(Name = "OpaqueConstructionAbridged")]
+    [DataContract(Name = "OpaqueConstructionAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class OpaqueConstructionAbridged : IDdEnergyBaseModel, System.IEquatable<OpaqueConstructionAbridged>
     {
         /// <summary>
@@ -65,8 +65,10 @@ namespace HoneybeeSchema
         /// List of strings for opaque material identifiers. The order of the materials is from exterior to interior.
         /// </summary>
         [Summary(@"List of strings for opaque material identifiers. The order of the materials is from exterior to interior.")]
-        [Required]
-        [DataMember(Name = "materials", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "materials", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("materials", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("materials")] // For System.Text.Json
         public List<string> Materials { get; set; }
 

@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Radiance Properties for Honeybee Aperture Abridged.")]
     [System.Serializable]
-    [DataContract(Name = "ApertureRadiancePropertiesAbridged")]
+    [DataContract(Name = "ApertureRadiancePropertiesAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ApertureRadiancePropertiesAbridged : PropertiesBaseAbridged, System.IEquatable<ApertureRadiancePropertiesAbridged>
     {
         /// <summary>
@@ -66,20 +66,20 @@ namespace HoneybeeSchema
         /// An optional string to note the dynamic group '             'to which the Aperture is a part of. Apertures sharing the same '             'dynamic_group_identifier will have their states change in unison. '             'If None, the Aperture is assumed to be static. (default: None).
         /// </summary>
         [Summary(@"An optional string to note the dynamic group '             'to which the Aperture is a part of. Apertures sharing the same '             'dynamic_group_identifier will have their states change in unison. '             'If None, the Aperture is assumed to be static. (default: None).")]
-        [DataMember(Name = "dynamic_group_identifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "dynamic_group_identifier")] // For internal Serialization XML/JSON
+        [JsonProperty("dynamic_group_identifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("dynamic_group_identifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string DynamicGroupIdentifier { get; set; }
 
         /// <summary>
         /// An optional list of abridged states (default: None).
         /// </summary>
         [Summary(@"An optional list of abridged states (default: None).")]
-        [DataMember(Name = "states")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "states")] // For internal Serialization XML/JSON
+        [JsonProperty("states", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("states")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<RadianceSubFaceStateAbridged> States { get; set; }
 
 

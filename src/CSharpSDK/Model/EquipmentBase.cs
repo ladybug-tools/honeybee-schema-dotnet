@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
     [System.Serializable]
-    [DataContract(Name = "_EquipmentBase")]
+    [DataContract(Name = "EquipmentBase")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class EquipmentBase : IDdEnergyBaseModel, System.IEquatable<EquipmentBase>
     {
         /// <summary>
@@ -73,9 +73,11 @@ namespace HoneybeeSchema
         /// Equipment level per floor area as [W/m2].
         /// </summary>
         [Summary(@"Equipment level per floor area as [W/m2].")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "watts_per_area", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "watts_per_area", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("watts_per_area", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("watts_per_area")] // For System.Text.Json
         public double WattsPerArea { get; set; }
 
@@ -83,10 +85,12 @@ namespace HoneybeeSchema
         /// Identifier of the schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.
         /// </summary>
         [Summary(@"Identifier of the schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "schedule", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "schedule", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("schedule", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
         public string Schedule { get; set; }
 
@@ -94,33 +98,33 @@ namespace HoneybeeSchema
         /// Number for the amount of long-wave radiation heat given off by equipment. Default value is 0.
         /// </summary>
         [Summary(@"Number for the amount of long-wave radiation heat given off by equipment. Default value is 0.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "radiant_fraction")] // For Newtonsoft.Json
+        [DataMember(Name = "radiant_fraction")] // For internal Serialization XML/JSON
+        [JsonProperty("radiant_fraction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("radiant_fraction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double RadiantFraction { get; set; } = 0D;
 
         /// <summary>
         /// Number for the amount of latent heat given off by equipment. Default value is 0.
         /// </summary>
         [Summary(@"Number for the amount of latent heat given off by equipment. Default value is 0.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "latent_fraction")] // For Newtonsoft.Json
+        [DataMember(Name = "latent_fraction")] // For internal Serialization XML/JSON
+        [JsonProperty("latent_fraction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("latent_fraction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LatentFraction { get; set; } = 0D;
 
         /// <summary>
         /// Number for the amount of “lost” heat being given off by equipment. The default value is 0.
         /// </summary>
         [Summary(@"Number for the amount of “lost” heat being given off by equipment. The default value is 0.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "lost_fraction")] // For Newtonsoft.Json
+        [DataMember(Name = "lost_fraction")] // For internal Serialization XML/JSON
+        [JsonProperty("lost_fraction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("lost_fraction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LostFraction { get; set; } = 0D;
 
 

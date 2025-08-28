@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Set containing radiance modifiers needed for a model's Shade.")]
     [System.Serializable]
-    [DataContract(Name = "ShadeModifierSet")]
+    [DataContract(Name = "ShadeModifierSet")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ShadeModifierSet : OpenAPIGenBaseModel, System.IEquatable<ShadeModifierSet>
     {
         /// <summary>
@@ -64,20 +64,20 @@ namespace HoneybeeSchema
         /// A radiance modifier object for faces with an Outdoors boundary condition.
         /// </summary>
         [Summary(@"A radiance modifier object for faces with an Outdoors boundary condition.")]
-        [DataMember(Name = "exterior_modifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "exterior_modifier")] // For internal Serialization XML/JSON
+        [JsonProperty("exterior_modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("exterior_modifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> ExteriorModifier { get; set; }
 
         /// <summary>
         /// A radiance modifier object for faces with a boundary condition other than Outdoors.
         /// </summary>
         [Summary(@"A radiance modifier object for faces with a boundary condition other than Outdoors.")]
-        [DataMember(Name = "interior_modifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "interior_modifier")] // For internal Serialization XML/JSON
+        [JsonProperty("interior_modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("interior_modifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> InteriorModifier { get; set; }
 
 

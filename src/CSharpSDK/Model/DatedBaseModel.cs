@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects needing to check for a valid Date.")]
     [System.Serializable]
-    [DataContract(Name = "DatedBaseModel")]
+    [DataContract(Name = "DatedBaseModel")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class DatedBaseModel : OpenAPIGenBaseModel, System.IEquatable<DatedBaseModel>
     {
         /// <summary>

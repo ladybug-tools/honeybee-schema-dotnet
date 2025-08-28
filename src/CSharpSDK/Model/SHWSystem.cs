@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Provides a model for a Service Hot Water system.")]
     [System.Serializable]
-    [DataContract(Name = "SHWSystem")]
+    [DataContract(Name = "SHWSystem")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class SHWSystem : IDdEnergyBaseModel, System.IEquatable<SHWSystem>
     {
         /// <summary>
@@ -71,40 +71,40 @@ namespace HoneybeeSchema
         /// Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone.
         /// </summary>
         [Summary(@"Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone.")]
-        [DataMember(Name = "equipment_type")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "equipment_type")] // For internal Serialization XML/JSON
+        [JsonProperty("equipment_type", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("equipment_type")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public SHWEquipmentType EquipmentType { get; set; } = SHWEquipmentType.Gas_WaterHeater;
 
         /// <summary>
         /// A number for the efficiency of the heater within the system. For Gas systems, this is the efficiency of the burner. For HeatPump systems, this is the rated COP of the system. For electric systems, this should usually be set to 1. If set to Autocalculate, this value will automatically be set based on the equipment_type. Gas_WaterHeater - 0.8, Electric_WaterHeater - 1.0, HeatPump_WaterHeater - 3.5, Gas_TanklessHeater - 0.8, Electric_TanklessHeater - 1.0.
         /// </summary>
         [Summary(@"A number for the efficiency of the heater within the system. For Gas systems, this is the efficiency of the burner. For HeatPump systems, this is the rated COP of the system. For electric systems, this should usually be set to 1. If set to Autocalculate, this value will automatically be set based on the equipment_type. Gas_WaterHeater - 0.8, Electric_WaterHeater - 1.0, HeatPump_WaterHeater - 3.5, Gas_TanklessHeater - 0.8, Electric_TanklessHeater - 1.0.")]
-        [DataMember(Name = "heater_efficiency")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "heater_efficiency")] // For internal Serialization XML/JSON
+        [JsonProperty("heater_efficiency", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("heater_efficiency")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<double, Autocalculate> HeaterEfficiency { get; set; } = new Autocalculate();
 
         /// <summary>
         /// A number for the ambient temperature in which the hot water tank is located [C]. This can also be the identifier of a Room in which the tank is located.
         /// </summary>
         [Summary(@"A number for the ambient temperature in which the hot water tank is located [C]. This can also be the identifier of a Room in which the tank is located.")]
-        [DataMember(Name = "ambient_condition")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "ambient_condition")] // For internal Serialization XML/JSON
+        [JsonProperty("ambient_condition", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("ambient_condition")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<double, string> AmbientCondition { get; set; } = 22;
 
         /// <summary>
         /// A number for the loss of heat from the water heater tank to the surrounding ambient conditions [W/K].
         /// </summary>
         [Summary(@"A number for the loss of heat from the water heater tank to the surrounding ambient conditions [W/K].")]
-        [DataMember(Name = "ambient_loss_coefficient")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "ambient_loss_coefficient")] // For internal Serialization XML/JSON
+        [JsonProperty("ambient_loss_coefficient", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("ambient_loss_coefficient")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double AmbientLossCoefficient { get; set; } = 6D;
 
 

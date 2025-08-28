@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"A RGB color.")]
     [System.Serializable]
-    [DataContract(Name = "Color")]
+    [DataContract(Name = "Color")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class Color : OpenAPIGenBaseModel, System.IEquatable<Color>
     {
         /// <summary>
@@ -68,9 +68,11 @@ namespace HoneybeeSchema
         /// Value for red channel.
         /// </summary>
         [Summary(@"Value for red channel.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [Range(0, 255)]
-        [DataMember(Name = "r", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "r", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("r", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("r")] // For System.Text.Json
         public int R { get; set; }
 
@@ -78,9 +80,11 @@ namespace HoneybeeSchema
         /// Value for green channel.
         /// </summary>
         [Summary(@"Value for green channel.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [Range(0, 255)]
-        [DataMember(Name = "g", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "g", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("g", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("g")] // For System.Text.Json
         public int G { get; set; }
 
@@ -88,9 +92,11 @@ namespace HoneybeeSchema
         /// Value for blue channel.
         /// </summary>
         [Summary(@"Value for blue channel.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [Range(0, 255)]
-        [DataMember(Name = "b", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "b", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("b", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("b")] // For System.Text.Json
         public int B { get; set; }
 
@@ -98,11 +104,11 @@ namespace HoneybeeSchema
         /// Value for the alpha channel, which defines the opacity as a number between 0 (fully transparent) and 255 (fully opaque).
         /// </summary>
         [Summary(@"Value for the alpha channel, which defines the opacity as a number between 0 (fully transparent) and 255 (fully opaque).")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 255)]
-        [DataMember(Name = "a")] // For Newtonsoft.Json
+        [DataMember(Name = "a")] // For internal Serialization XML/JSON
+        [JsonProperty("a", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("a")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public int A { get; set; } = 255;
 
 

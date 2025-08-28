@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
     [System.Serializable]
-    [DataContract(Name = "IDdEnergyBaseModel")]
+    [DataContract(Name = "IDdEnergyBaseModel")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class IDdEnergyBaseModel : EnergyBaseModel, System.IEquatable<IDdEnergyBaseModel>
     {
         /// <summary>
@@ -64,10 +64,10 @@ namespace HoneybeeSchema
         /// Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).
         /// </summary>
         [Summary(@"Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).")]
-        [DataMember(Name = "user_data")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "user_data")] // For internal Serialization XML/JSON
+        [JsonProperty("user_data", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("user_data")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public object UserData { get; set; }
 
 

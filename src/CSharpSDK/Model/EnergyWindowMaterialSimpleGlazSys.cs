@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Describe an entire glazing system rather than individual layers.\n\nUsed when only very limited information is available on the glazing layers or when\nspecific performance levels are being targeted.")]
     [System.Serializable]
-    [DataContract(Name = "EnergyWindowMaterialSimpleGlazSys")]
+    [DataContract(Name = "EnergyWindowMaterialSimpleGlazSys")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class EnergyWindowMaterialSimpleGlazSys : IDdEnergyBaseModel, System.IEquatable<EnergyWindowMaterialSimpleGlazSys>
     {
         /// <summary>
@@ -69,9 +69,11 @@ namespace HoneybeeSchema
         /// The overall heat transfer coefficient for window system in W/m2-K. Note that constructions with U-values above 5.8 should not be assigned to skylights as this implies the resistance of the window is negative when air films are subtracted.
         /// </summary>
         [Summary(@"The overall heat transfer coefficient for window system in W/m2-K. Note that constructions with U-values above 5.8 should not be assigned to skylights as this implies the resistance of the window is negative when air films are subtracted.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [Range(double.MinValue, 12)]
-        [DataMember(Name = "u_factor", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "u_factor", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("u_factor", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("u_factor")] // For System.Text.Json
         public double UFactor { get; set; }
 
@@ -79,8 +81,10 @@ namespace HoneybeeSchema
         /// Unit-less quantity for the Solar Heat Gain Coefficient (solar transmittance + conduction) at normal incidence and vertical orientation.
         /// </summary>
         [Summary(@"Unit-less quantity for the Solar Heat Gain Coefficient (solar transmittance + conduction) at normal incidence and vertical orientation.")]
-        [Required]
-        [DataMember(Name = "shgc", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "shgc", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("shgc", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("shgc")] // For System.Text.Json
         public double Shgc { get; set; }
 
@@ -88,10 +92,10 @@ namespace HoneybeeSchema
         /// The fraction of visible light falling on the window that makes it through the glass at normal incidence.
         /// </summary>
         [Summary(@"The fraction of visible light falling on the window that makes it through the glass at normal incidence.")]
-        [DataMember(Name = "vt")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "vt")] // For internal Serialization XML/JSON
+        [JsonProperty("vt", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("vt")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Vt { get; set; } = 0.54D;
 
 

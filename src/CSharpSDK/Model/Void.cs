@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Void modifier")]
     [System.Serializable]
-    [DataContract(Name = "Void")]
+    [DataContract(Name = "Void")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class Void : OpenAPIGenBaseModel, System.IEquatable<Void>
     {
         /// <summary>

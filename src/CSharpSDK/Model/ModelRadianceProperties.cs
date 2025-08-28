@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Radiance Properties for Honeybee Model.")]
     [System.Serializable]
-    [DataContract(Name = "ModelRadianceProperties")]
+    [DataContract(Name = "ModelRadianceProperties")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ModelRadianceProperties : OpenAPIGenBaseModel, System.IEquatable<ModelRadianceProperties>
     {
         /// <summary>
@@ -232,50 +232,50 @@ namespace HoneybeeSchema
         /// Global Radiance modifier set.
         /// </summary>
         [Summary(@"Global Radiance modifier set.")]
-        [DataMember(Name = "global_modifier_set")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "global_modifier_set")] // For internal Serialization XML/JSON
+        [JsonProperty("global_modifier_set", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("global_modifier_set")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public GlobalModifierSet GlobalModifierSet { get; protected set; } = GlobalModifierSetDefault;
 
         /// <summary>
         /// A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set.
         /// </summary>
         [Summary(@"A list of all unique modifiers in the model. This includes modifiers across all Faces, Apertures, Doors, Shades, Room ModifierSets, and the global_modifier_set.")]
-        [DataMember(Name = "modifiers")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "modifiers")] // For internal Serialization XML/JSON
+        [JsonProperty("modifiers", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("modifiers")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>> Modifiers { get; set; }
 
         /// <summary>
         /// A list of all unique Room-Assigned ModifierSets in the Model.
         /// </summary>
         [Summary(@"A list of all unique Room-Assigned ModifierSets in the Model.")]
-        [DataMember(Name = "modifier_sets")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "modifier_sets")] // For internal Serialization XML/JSON
+        [JsonProperty("modifier_sets", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("modifier_sets")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<AnyOf<ModifierSet, ModifierSetAbridged>> ModifierSets { get; set; }
 
         /// <summary>
         /// An array of SensorGrids that are associated with the model.
         /// </summary>
         [Summary(@"An array of SensorGrids that are associated with the model.")]
-        [DataMember(Name = "sensor_grids")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "sensor_grids")] // For internal Serialization XML/JSON
+        [JsonProperty("sensor_grids", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("sensor_grids")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<SensorGrid> SensorGrids { get; set; }
 
         /// <summary>
         /// An array of Views that are associated with the model.
         /// </summary>
         [Summary(@"An array of Views that are associated with the model.")]
-        [DataMember(Name = "views")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "views")] // For internal Serialization XML/JSON
+        [JsonProperty("views", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("views")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<View> Views { get; set; }
 
 

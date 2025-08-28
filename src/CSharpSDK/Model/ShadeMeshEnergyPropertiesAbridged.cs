@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.")]
     [System.Serializable]
-    [DataContract(Name = "ShadeMeshEnergyPropertiesAbridged")]
+    [DataContract(Name = "ShadeMeshEnergyPropertiesAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ShadeMeshEnergyPropertiesAbridged : OpenAPIGenBaseModel, System.IEquatable<ShadeMeshEnergyPropertiesAbridged>
     {
         /// <summary>
@@ -64,24 +64,24 @@ namespace HoneybeeSchema
         /// Identifier of a ShadeConstruction to set the reflectance and specularity of the Shade. If None, it will be a generic context construction that is completely diffuse with 0.2 visible and solar reflectance. Unless it is building attached, in which case it will be set by the default generic ConstructionSet.
         /// </summary>
         [Summary(@"Identifier of a ShadeConstruction to set the reflectance and specularity of the Shade. If None, it will be a generic context construction that is completely diffuse with 0.2 visible and solar reflectance. Unless it is building attached, in which case it will be set by the default generic ConstructionSet.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "construction")] // For Newtonsoft.Json
+        [DataMember(Name = "construction")] // For internal Serialization XML/JSON
+        [JsonProperty("construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("construction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Construction { get; set; }
 
         /// <summary>
         /// Identifier of a schedule to set the transmittance of the shade, which can vary throughout the simulation. If None, the shade will be completely opaque.
         /// </summary>
         [Summary(@"Identifier of a schedule to set the transmittance of the shade, which can vary throughout the simulation. If None, the shade will be completely opaque.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "transmittance_schedule")] // For Newtonsoft.Json
+        [DataMember(Name = "transmittance_schedule")] // For internal Serialization XML/JSON
+        [JsonProperty("transmittance_schedule", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("transmittance_schedule")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string TransmittanceSchedule { get; set; }
 
 

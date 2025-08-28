@@ -21,7 +21,7 @@ namespace HoneybeeSchema
 {
     [Summary(@"")]
     [System.Serializable]
-    [DataContract(Name = "SyncInstructions")]
+    [DataContract(Name = "SyncInstructions")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class SyncInstructions : OpenAPIGenBaseModel, System.IEquatable<SyncInstructions>
     {
         /// <summary>
@@ -63,30 +63,30 @@ namespace HoneybeeSchema
         /// A list of ChangedInstruction definitions for each top-level object with properties to transfer from the new/updated model to the base/existing model.
         /// </summary>
         [Summary(@"A list of ChangedInstruction definitions for each top-level object with properties to transfer from the new/updated model to the base/existing model.")]
-        [DataMember(Name = "changed_objects")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "changed_objects")] // For internal Serialization XML/JSON
+        [JsonProperty("changed_objects", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("changed_objects")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<ChangedInstruction> ChangedObjects { get; set; }
 
         /// <summary>
         /// A list of DeletedInstruction definitions for each top-level object to be deleted from the base/existing model.
         /// </summary>
         [Summary(@"A list of DeletedInstruction definitions for each top-level object to be deleted from the base/existing model.")]
-        [DataMember(Name = "deleted_objects")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "deleted_objects")] // For internal Serialization XML/JSON
+        [JsonProperty("deleted_objects", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("deleted_objects")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<DeletedInstruction> DeletedObjects { get; set; }
 
         /// <summary>
         /// A list of AddedInstruction definitions for each top-level object to be added to the base/existing model from the new/updated model.
         /// </summary>
         [Summary(@"A list of AddedInstruction definitions for each top-level object to be added to the base/existing model from the new/updated model.")]
-        [DataMember(Name = "added_objects")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "added_objects")] // For internal Serialization XML/JSON
+        [JsonProperty("added_objects", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("added_objects")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<AddedInstruction> AddedObjects { get; set; }
 
 

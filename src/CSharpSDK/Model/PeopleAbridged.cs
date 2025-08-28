@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
     [System.Serializable]
-    [DataContract(Name = "PeopleAbridged")]
+    [DataContract(Name = "PeopleAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class PeopleAbridged : IDdEnergyBaseModel, System.IEquatable<PeopleAbridged>
     {
         /// <summary>
@@ -73,9 +73,11 @@ namespace HoneybeeSchema
         /// People per floor area expressed as [people/m2]
         /// </summary>
         [Summary(@"People per floor area expressed as [people/m2]")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "people_per_area", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "people_per_area", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("people_per_area", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("people_per_area")] // For System.Text.Json
         public double PeoplePerArea { get; set; }
 
@@ -83,10 +85,12 @@ namespace HoneybeeSchema
         /// Identifier of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile.
         /// </summary>
         [Summary(@"Identifier of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "occupancy_schedule", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "occupancy_schedule", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("occupancy_schedule", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("occupancy_schedule")] // For System.Text.Json
         public string OccupancySchedule { get; set; }
 
@@ -94,33 +98,33 @@ namespace HoneybeeSchema
         /// Identifier of a schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated.
         /// </summary>
         [Summary(@"Identifier of a schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "activity_schedule")] // For Newtonsoft.Json
+        [DataMember(Name = "activity_schedule")] // For internal Serialization XML/JSON
+        [JsonProperty("activity_schedule", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("activity_schedule")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ActivitySchedule { get; set; }
 
         /// <summary>
         /// The radiant fraction of sensible heat released by people. (Default: 0.3).
         /// </summary>
         [Summary(@"The radiant fraction of sensible heat released by people. (Default: 0.3).")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "radiant_fraction")] // For Newtonsoft.Json
+        [DataMember(Name = "radiant_fraction")] // For internal Serialization XML/JSON
+        [JsonProperty("radiant_fraction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("radiant_fraction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double RadiantFraction { get; set; } = 0.3D;
 
         /// <summary>
         /// Number for the latent fraction of heat gain due to people or an Autocalculate object.
         /// </summary>
         [Summary(@"Number for the latent fraction of heat gain due to people or an Autocalculate object.")]
-        [DataMember(Name = "latent_fraction")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "latent_fraction")] // For internal Serialization XML/JSON
+        [JsonProperty("latent_fraction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("latent_fraction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Autocalculate, double> LatentFraction { get; set; } = new Autocalculate();
 
 

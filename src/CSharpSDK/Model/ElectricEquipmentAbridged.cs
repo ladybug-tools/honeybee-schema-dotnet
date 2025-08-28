@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
     [System.Serializable]
-    [DataContract(Name = "ElectricEquipmentAbridged")]
+    [DataContract(Name = "ElectricEquipmentAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ElectricEquipmentAbridged : EquipmentBase, System.IEquatable<ElectricEquipmentAbridged>
     {
         /// <summary>

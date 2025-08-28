@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"No mass opaque material representing a layer within an opaque construction.\n\nUsed when only the thermal resistance (R value) of the material is known.")]
     [System.Serializable]
-    [DataContract(Name = "EnergyMaterialNoMass")]
+    [DataContract(Name = "EnergyMaterialNoMass")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class EnergyMaterialNoMass : IDdEnergyBaseModel, System.IEquatable<EnergyMaterialNoMass>
     {
         /// <summary>
@@ -73,9 +73,11 @@ namespace HoneybeeSchema
         /// The thermal resistance (R-value) of the material layer [m2-K/W].
         /// </summary>
         [Summary(@"The thermal resistance (R-value) of the material layer [m2-K/W].")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [Range(0.001, double.MaxValue)]
-        [DataMember(Name = "r_value", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "r_value", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("r_value", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("r_value")] // For System.Text.Json
         public double RValue { get; set; }
 
@@ -83,43 +85,43 @@ namespace HoneybeeSchema
         /// Roughness
         /// </summary>
         [Summary(@"Roughness")]
-        [DataMember(Name = "roughness")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "roughness")] // For internal Serialization XML/JSON
+        [JsonProperty("roughness", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("roughness")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Roughness Roughness { get; set; } = Roughness.MediumRough;
 
         /// <summary>
         /// Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9.
         /// </summary>
         [Summary(@"Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(double.MinValue, 0.99999)]
-        [DataMember(Name = "thermal_absorptance")] // For Newtonsoft.Json
+        [DataMember(Name = "thermal_absorptance")] // For internal Serialization XML/JSON
+        [JsonProperty("thermal_absorptance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("thermal_absorptance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double ThermalAbsorptance { get; set; } = 0.9D;
 
         /// <summary>
         /// Fraction of incident solar radiation absorbed by the material. Default: 0.7.
         /// </summary>
         [Summary(@"Fraction of incident solar radiation absorbed by the material. Default: 0.7.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "solar_absorptance")] // For Newtonsoft.Json
+        [DataMember(Name = "solar_absorptance")] // For internal Serialization XML/JSON
+        [JsonProperty("solar_absorptance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("solar_absorptance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SolarAbsorptance { get; set; } = 0.7D;
 
         /// <summary>
         /// Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7.
         /// </summary>
         [Summary(@"Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "visible_absorptance")] // For Newtonsoft.Json
+        [DataMember(Name = "visible_absorptance")] // For internal Serialization XML/JSON
+        [JsonProperty("visible_absorptance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("visible_absorptance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double VisibleAbsorptance { get; set; } = 0.7D;
 
 

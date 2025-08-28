@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects requiring a identifiers acceptable for all engines.")]
     [System.Serializable]
-    [DataContract(Name = "Shade")]
+    [DataContract(Name = "Shade")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class Shade : IDdBaseModel, System.IEquatable<Shade>
     {
         /// <summary>
@@ -69,8 +69,10 @@ namespace HoneybeeSchema
         /// Planar Face3D for the geometry.
         /// </summary>
         [Summary(@"Planar Face3D for the geometry.")]
-        [Required]
-        [DataMember(Name = "geometry", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "geometry", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("geometry", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("geometry")] // For System.Text.Json
         public Face3D Geometry { get; set; }
 
@@ -78,8 +80,10 @@ namespace HoneybeeSchema
         /// Extension properties for particular simulation engines (Radiance, EnergyPlus).
         /// </summary>
         [Summary(@"Extension properties for particular simulation engines (Radiance, EnergyPlus).")]
-        [Required]
-        [DataMember(Name = "properties", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "properties", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("properties", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("properties")] // For System.Text.Json
         public ShadePropertiesAbridged Properties { get; set; }
 
@@ -87,10 +91,10 @@ namespace HoneybeeSchema
         /// Boolean to note whether this shade is detached from any of the other geometry in the model. Cases where this should be True include shade representing surrounding buildings or context. Note that this should always be False for shades assigned to parent objects.
         /// </summary>
         [Summary(@"Boolean to note whether this shade is detached from any of the other geometry in the model. Cases where this should be True include shade representing surrounding buildings or context. Note that this should always be False for shades assigned to parent objects.")]
-        [DataMember(Name = "is_detached")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "is_detached")] // For internal Serialization XML/JSON
+        [JsonProperty("is_detached", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("is_detached")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool IsDetached { get; set; } = false;
 
 

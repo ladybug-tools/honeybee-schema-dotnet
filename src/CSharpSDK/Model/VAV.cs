@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Variable Air Volume (VAV) HVAC system (aka. System 7 or 8).\n\nAll rooms/zones are connected to a central air loop that is kept at a constant\ncentral temperature of 12.8C (55F). The central temperature is maintained by a\ncooling coil, which runs whenever the combination of return air and fresh outdoor\nair is greater than 12.8C, as well as a heating coil, which runs whenever\nthe combination of return air and fresh outdoor air is less than 12.8C.\n\nEach air terminal for the connected rooms/zones contains its own reheat coil,\nwhich runs whenever the room is not in need of the cooling supplied by the 12.8C\ncentral air.\n\nThe central cooling coil is always a chilled water coil, which is connected to a\nchilled water loop operating at 6.7C (44F). All heating coils are hot water coils\nexcept when Gas Coil equipment_type is used (in which case coils are gas)\nor when Parallel Fan-Powered (PFP) boxes equipment_type is used (in which case\ncoils are electric resistance). Hot water temperature is 82C (180F) for\nboiler/district heating and 49C (120F) when ASHP is used.\n\nVAV systems are the traditional baseline system for commercial buildings\ntaller than 5 stories or larger than 14,000 m2 (150,000 ft2) of floor area.")]
     [System.Serializable]
-    [DataContract(Name = "VAV")]
+    [DataContract(Name = "VAV")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class VAV : IDdEnergyBaseModel, System.IEquatable<VAV>
     {
         /// <summary>
@@ -75,62 +75,62 @@ namespace HoneybeeSchema
         /// Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards
         /// </summary>
         [Summary(@"Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards")]
-        [DataMember(Name = "vintage")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "vintage")] // For internal Serialization XML/JSON
+        [JsonProperty("vintage", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("vintage")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Vintages Vintage { get; set; } = Vintages.ASHRAE_2019;
 
         /// <summary>
         /// Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration).
         /// </summary>
         [Summary(@"Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration).")]
-        [DataMember(Name = "economizer_type")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "economizer_type")] // For internal Serialization XML/JSON
+        [JsonProperty("economizer_type", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("economizer_type")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AllAirEconomizerType EconomizerType { get; set; } = AllAirEconomizerType.NoEconomizer;
 
         /// <summary>
         /// A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.
         /// </summary>
         [Summary(@"A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "sensible_heat_recovery")] // For Newtonsoft.Json
+        [DataMember(Name = "sensible_heat_recovery")] // For internal Serialization XML/JSON
+        [JsonProperty("sensible_heat_recovery", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("sensible_heat_recovery")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SensibleHeatRecovery { get; set; } = 0D;
 
         /// <summary>
         /// A number between 0 and 1 for the effectiveness of latent heat recovery within the system.
         /// </summary>
         [Summary(@"A number between 0 and 1 for the effectiveness of latent heat recovery within the system.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "latent_heat_recovery")] // For Newtonsoft.Json
+        [DataMember(Name = "latent_heat_recovery")] // For internal Serialization XML/JSON
+        [JsonProperty("latent_heat_recovery", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("latent_heat_recovery")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LatentHeatRecovery { get; set; } = 0D;
 
         /// <summary>
         /// Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.
         /// </summary>
         [Summary(@"Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.")]
-        [DataMember(Name = "demand_controlled_ventilation")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "demand_controlled_ventilation")] // For internal Serialization XML/JSON
+        [JsonProperty("demand_controlled_ventilation", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("demand_controlled_ventilation")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool DemandControlledVentilation { get; set; } = false;
 
         /// <summary>
         /// Text for the specific type of system equipment from the VAVEquipmentType enumeration.
         /// </summary>
         [Summary(@"Text for the specific type of system equipment from the VAVEquipmentType enumeration.")]
-        [DataMember(Name = "equipment_type")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "equipment_type")] // For internal Serialization XML/JSON
+        [JsonProperty("equipment_type", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("equipment_type")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public VAVEquipmentType EquipmentType { get; set; } = VAVEquipmentType.VAV_Chiller_Boiler;
 
 

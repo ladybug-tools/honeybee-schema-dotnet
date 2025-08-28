@@ -14,6 +14,8 @@ namespace HoneybeeSchema
 	
 	public partial class ElectricEquipmentAbridged: HoneybeeSchema.Energy.ILoad {}
 	
+	public partial class EquipmentBase: HoneybeeSchema.Energy.ILoad {}
+	
 	public partial class GasEquipment: HoneybeeSchema.Energy.ILoad {}
 	
 	public partial class GasEquipmentAbridged: HoneybeeSchema.Energy.ILoad {}
@@ -43,7 +45,5 @@ namespace HoneybeeSchema
 	public partial class Ventilation: HoneybeeSchema.Energy.ILoad {}
 	
 	public partial class VentilationAbridged: HoneybeeSchema.Energy.ILoad {}
-	
-	public partial class EquipmentBase: HoneybeeSchema.Energy.ILoad {}
 	
 }

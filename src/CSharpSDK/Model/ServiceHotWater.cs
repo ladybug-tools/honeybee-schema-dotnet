@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
     [System.Serializable]
-    [DataContract(Name = "ServiceHotWater")]
+    [DataContract(Name = "ServiceHotWater")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ServiceHotWater : IDdEnergyBaseModel, System.IEquatable<ServiceHotWater>
     {
         /// <summary>
@@ -73,9 +73,11 @@ namespace HoneybeeSchema
         /// Number for the total volume flow rate of water per unit area of floor [L/h-m2].
         /// </summary>
         [Summary(@"Number for the total volume flow rate of water per unit area of floor [L/h-m2].")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [Range(0, double.MaxValue)]
-        [DataMember(Name = "flow_per_area", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "flow_per_area", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("flow_per_area", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("flow_per_area")] // For System.Text.Json
         public double FlowPerArea { get; set; }
 
@@ -83,8 +85,10 @@ namespace HoneybeeSchema
         /// The schedule for the use of hot water over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile.
         /// </summary>
         [Summary(@"The schedule for the use of hot water over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile.")]
-        [Required]
-        [DataMember(Name = "schedule", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "schedule", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("schedule", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
         public AnyOf<ScheduleRuleset, ScheduleFixedInterval> Schedule { get; set; }
 
@@ -92,32 +96,32 @@ namespace HoneybeeSchema
         /// Number for the target temperature of water out of the tap (C). This the temperature after hot water has been mixed with cold water from the water mains. The default is 60C, which essentially assumes that the flow_per_area on this object is only for water straight out of the water heater.
         /// </summary>
         [Summary(@"Number for the target temperature of water out of the tap (C). This the temperature after hot water has been mixed with cold water from the water mains. The default is 60C, which essentially assumes that the flow_per_area on this object is only for water straight out of the water heater.")]
-        [DataMember(Name = "target_temperature")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "target_temperature")] // For internal Serialization XML/JSON
+        [JsonProperty("target_temperature", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("target_temperature")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double TargetTemperature { get; set; } = 60D;
 
         /// <summary>
         /// A number between 0 and 1 for the fraction of the total hot water load given off as sensible heat in the zone.
         /// </summary>
         [Summary(@"A number between 0 and 1 for the fraction of the total hot water load given off as sensible heat in the zone.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "sensible_fraction")] // For Newtonsoft.Json
+        [DataMember(Name = "sensible_fraction")] // For internal Serialization XML/JSON
+        [JsonProperty("sensible_fraction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("sensible_fraction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SensibleFraction { get; set; } = 0.2D;
 
         /// <summary>
         /// A number between 0 and 1 for the fraction of the total hot water load that is latent.
         /// </summary>
         [Summary(@"A number between 0 and 1 for the fraction of the total hot water load that is latent.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "latent_fraction")] // For Newtonsoft.Json
+        [DataMember(Name = "latent_fraction")] // For internal Serialization XML/JSON
+        [JsonProperty("latent_fraction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("latent_fraction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double LatentFraction { get; set; } = 0.05D;
 
 

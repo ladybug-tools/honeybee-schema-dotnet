@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"A single planar geometry that can be assigned to Radiance states.")]
     [System.Serializable]
-    [DataContract(Name = "StateGeometryAbridged")]
+    [DataContract(Name = "StateGeometryAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class StateGeometryAbridged : IDdRadianceBaseModel, System.IEquatable<StateGeometryAbridged>
     {
         /// <summary>
@@ -68,8 +68,10 @@ namespace HoneybeeSchema
         /// A ladybug_geometry Face3D.
         /// </summary>
         [Summary(@"A ladybug_geometry Face3D.")]
-        [Required]
-        [DataMember(Name = "geometry", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "geometry", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("geometry", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("geometry")] // For System.Text.Json
         public Face3D Geometry { get; set; }
 
@@ -77,20 +79,20 @@ namespace HoneybeeSchema
         /// A string for a Honeybee Radiance Modifier identifier (default: None).
         /// </summary>
         [Summary(@"A string for a Honeybee Radiance Modifier identifier (default: None).")]
-        [DataMember(Name = "modifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "modifier")] // For internal Serialization XML/JSON
+        [JsonProperty("modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("modifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Modifier { get; set; }
 
         /// <summary>
         /// A string for Honeybee Radiance Modifier identifiers to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).
         /// </summary>
         [Summary(@"A string for Honeybee Radiance Modifier identifiers to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).")]
-        [DataMember(Name = "modifier_direct")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "modifier_direct")] // For internal Serialization XML/JSON
+        [JsonProperty("modifier_direct", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("modifier_direct")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ModifierDirect { get; set; }
 
 

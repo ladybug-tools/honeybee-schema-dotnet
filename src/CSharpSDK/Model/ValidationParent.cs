@@ -21,7 +21,7 @@ namespace HoneybeeSchema
 {
     [Summary(@"")]
     [System.Serializable]
-    [DataContract(Name = "ValidationParent")]
+    [DataContract(Name = "ValidationParent")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ValidationParent : System.IEquatable<ValidationParent>
     {
         /// <summary>
@@ -63,8 +63,10 @@ namespace HoneybeeSchema
         /// Text for the type of object that the parent is.
         /// </summary>
         [Summary(@"Text for the type of object that the parent is.")]
-        [Required]
-        [DataMember(Name = "parent_type", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "parent_type", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("parent_type", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("parent_type")] // For System.Text.Json
         public ParentTypes ParentType { get; set; }
 
@@ -72,11 +74,13 @@ namespace HoneybeeSchema
         /// Text string for the unique ID of the parent object.
         /// </summary>
         [Summary(@"Text string for the unique ID of the parent object.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [RegularExpression(@"^[.A-Za-z0-9_-]+$")]
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "id", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "id", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("id", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("id")] // For System.Text.Json
         public string Id { get; set; }
 
@@ -84,21 +88,21 @@ namespace HoneybeeSchema
         /// Type
         /// </summary>
         [Summary(@"Type")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [RegularExpression(@"^ValidationParent$")]
-        [DataMember(Name = "type")] // For Newtonsoft.Json
+        [DataMember(Name = "type")] // For internal Serialization XML/JSON
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("type")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Type { get; protected set; } = "ValidationParent";
 
         /// <summary>
         /// Display name of the parent object.
         /// </summary>
         [Summary(@"Display name of the parent object.")]
-        [DataMember(Name = "name")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "name")] // For internal Serialization XML/JSON
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("name")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Name { get; set; }
 
 

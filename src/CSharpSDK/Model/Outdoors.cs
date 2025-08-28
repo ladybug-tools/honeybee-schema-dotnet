@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.")]
     [System.Serializable]
-    [DataContract(Name = "Outdoors")]
+    [DataContract(Name = "Outdoors")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class Outdoors : OpenAPIGenBaseModel, System.IEquatable<Outdoors>
     {
         /// <summary>
@@ -66,30 +66,30 @@ namespace HoneybeeSchema
         /// A boolean noting whether the boundary is exposed to sun.
         /// </summary>
         [Summary(@"A boolean noting whether the boundary is exposed to sun.")]
-        [DataMember(Name = "sun_exposure")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "sun_exposure")] // For internal Serialization XML/JSON
+        [JsonProperty("sun_exposure", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("sun_exposure")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool SunExposure { get; set; } = true;
 
         /// <summary>
         /// A boolean noting whether the boundary is exposed to wind.
         /// </summary>
         [Summary(@"A boolean noting whether the boundary is exposed to wind.")]
-        [DataMember(Name = "wind_exposure")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "wind_exposure")] // For internal Serialization XML/JSON
+        [JsonProperty("wind_exposure", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("wind_exposure")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool WindExposure { get; set; } = true;
 
         /// <summary>
         /// A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated.
         /// </summary>
         [Summary(@"A number for the view factor to the ground. This can also be an Autocalculate object to have the view factor automatically calculated.")]
-        [DataMember(Name = "view_factor")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "view_factor")] // For internal Serialization XML/JSON
+        [JsonProperty("view_factor", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("view_factor")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Autocalculate, double> ViewFactor { get; set; } = new Autocalculate();
 
 

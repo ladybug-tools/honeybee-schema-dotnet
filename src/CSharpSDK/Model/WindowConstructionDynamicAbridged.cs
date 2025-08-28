@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Construction for window objects with an included shade layer.")]
     [System.Serializable]
-    [DataContract(Name = "WindowConstructionDynamicAbridged")]
+    [DataContract(Name = "WindowConstructionDynamicAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class WindowConstructionDynamicAbridged : IDdEnergyBaseModel, System.IEquatable<WindowConstructionDynamicAbridged>
     {
         /// <summary>
@@ -67,8 +67,10 @@ namespace HoneybeeSchema
         /// A list of WindowConstructionAbridged objects that define the various states that the dynamic window can assume.
         /// </summary>
         [Summary(@"A list of WindowConstructionAbridged objects that define the various states that the dynamic window can assume.")]
-        [Required]
-        [DataMember(Name = "constructions", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "constructions", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("constructions", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("constructions")] // For System.Text.Json
         public List<WindowConstructionAbridged> Constructions { get; set; }
 
@@ -76,10 +78,12 @@ namespace HoneybeeSchema
         /// An identifier for a control schedule that dictates which constructions are active at given times throughout the simulation. The values of the schedule should be integers and range from 0 to one less then the number of constructions. Zero indicates that the first construction is active, one indicates that the second on is active, etc. The schedule type limits of this schedule should be ""Control Level."" If building custom schedule type limits that describe a particular range of states, the type limits should be ""Discrete"" and the unit type should be ""Mode,"" ""Control,"" or some other fractional unit.
         /// </summary>
         [Summary(@"An identifier for a control schedule that dictates which constructions are active at given times throughout the simulation. The values of the schedule should be integers and range from 0 to one less then the number of constructions. Zero indicates that the first construction is active, one indicates that the second on is active, etc. The schedule type limits of this schedule should be ""Control Level."" If building custom schedule type limits that describe a particular range of states, the type limits should be ""Discrete"" and the unit type should be ""Mode,"" ""Control,"" or some other fractional unit.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "schedule", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "schedule", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("schedule", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
         public string Schedule { get; set; }
 

@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Detailed HVAC system object defined using IronBug or OpenStudio .NET bindings.")]
     [System.Serializable]
-    [DataContract(Name = "DetailedHVAC")]
+    [DataContract(Name = "DetailedHVAC")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class DetailedHVAC : IDdEnergyBaseModel, System.IEquatable<DetailedHVAC>
     {
         /// <summary>
@@ -65,8 +65,10 @@ namespace HoneybeeSchema
         /// A JSON-serializable dictionary representing the full specification of the detailed system. This can be obtained by calling the ToJson() method on any IronBug HVAC system and then serializing the resulting JSON string into a Python dictionary using the native Python json package. Note that the Rooms that the HVAC is assigned to must be specified as ThermalZones under this specification in order for the resulting Model this HVAC is a part of to be valid.
         /// </summary>
         [Summary(@"A JSON-serializable dictionary representing the full specification of the detailed system. This can be obtained by calling the ToJson() method on any IronBug HVAC system and then serializing the resulting JSON string into a Python dictionary using the native Python json package. Note that the Rooms that the HVAC is assigned to must be specified as ThermalZones under this specification in order for the resulting Model this HVAC is a part of to be valid.")]
-        [Required]
-        [DataMember(Name = "specification", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "specification", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("specification", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("specification")] // For System.Text.Json
         public object Specification { get; set; }
 

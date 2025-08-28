@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.")]
     [System.Serializable]
-    [DataContract(Name = "ApertureEnergyPropertiesAbridged")]
+    [DataContract(Name = "ApertureEnergyPropertiesAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ApertureEnergyPropertiesAbridged : OpenAPIGenBaseModel, System.IEquatable<ApertureEnergyPropertiesAbridged>
     {
         /// <summary>
@@ -64,22 +64,22 @@ namespace HoneybeeSchema
         /// Identifier of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.
         /// </summary>
         [Summary(@"Identifier of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "construction")] // For Newtonsoft.Json
+        [DataMember(Name = "construction")] // For internal Serialization XML/JSON
+        [JsonProperty("construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("construction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Construction { get; set; }
 
         /// <summary>
         /// An optional VentilationOpening to specify the operable portion of the Aperture.
         /// </summary>
         [Summary(@"An optional VentilationOpening to specify the operable portion of the Aperture.")]
-        [DataMember(Name = "vent_opening")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "vent_opening")] // For internal Serialization XML/JSON
+        [JsonProperty("vent_opening", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("vent_opening")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public VentilationOpening VentOpening { get; set; }
 
 

@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"A Ladybug Location.")]
     [System.Serializable]
-    [DataContract(Name = "Location")]
+    [DataContract(Name = "Location")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class Location : OpenAPIGenBaseModel, System.IEquatable<Location>
     {
         /// <summary>
@@ -74,70 +74,70 @@ namespace HoneybeeSchema
         /// Name of the city as a string.
         /// </summary>
         [Summary(@"Name of the city as a string.")]
-        [DataMember(Name = "city")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "city")] // For internal Serialization XML/JSON
+        [JsonProperty("city", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("city")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string City { get; set; } = "-";
 
         /// <summary>
         /// Location latitude between -90 and 90 (Default: 0).
         /// </summary>
         [Summary(@"Location latitude between -90 and 90 (Default: 0).")]
-        [DataMember(Name = "latitude")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "latitude")] // For internal Serialization XML/JSON
+        [JsonProperty("latitude", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("latitude")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Latitude { get; set; } = 0D;
 
         /// <summary>
         /// Location longitude between -180 (west) and 180 (east) (Default: 0).
         /// </summary>
         [Summary(@"Location longitude between -180 (west) and 180 (east) (Default: 0).")]
-        [DataMember(Name = "longitude")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "longitude")] // For internal Serialization XML/JSON
+        [JsonProperty("longitude", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("longitude")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Longitude { get; set; } = 0D;
 
         /// <summary>
         /// Time zone between -12 hours (west) and +14 hours (east). If None, the time zone will be an estimated integer value derived from the longitude in accordance with solar time.
         /// </summary>
         [Summary(@"Time zone between -12 hours (west) and +14 hours (east). If None, the time zone will be an estimated integer value derived from the longitude in accordance with solar time.")]
-        [DataMember(Name = "time_zone")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "time_zone")] // For internal Serialization XML/JSON
+        [JsonProperty("time_zone", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("time_zone")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Autocalculate, int> TimeZone { get; set; } = new Autocalculate();
 
         /// <summary>
         /// A number for elevation of the location in meters. (Default: 0).
         /// </summary>
         [Summary(@"A number for elevation of the location in meters. (Default: 0).")]
-        [DataMember(Name = "elevation")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "elevation")] // For internal Serialization XML/JSON
+        [JsonProperty("elevation", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("elevation")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Elevation { get; set; } = 0D;
 
         /// <summary>
         /// ID of the location if the location is representing a weather station.
         /// </summary>
         [Summary(@"ID of the location if the location is representing a weather station.")]
-        [DataMember(Name = "station_id")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "station_id")] // For internal Serialization XML/JSON
+        [JsonProperty("station_id", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("station_id")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string StationId { get; set; }
 
         /// <summary>
         /// Source of data (e.g. TMY, TMY3).
         /// </summary>
         [Summary(@"Source of data (e.g. TMY, TMY3).")]
-        [DataMember(Name = "source")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "source")] // For internal Serialization XML/JSON
+        [JsonProperty("source", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("source")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Source { get; set; }
 
 

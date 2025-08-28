@@ -10,6 +10,8 @@ namespace HoneybeeSchema.Energy.Hvac
 namespace HoneybeeSchema
 {
 	
+	public partial class AllAirBase: HoneybeeSchema.Energy.Hvac.IAllair {}
+	
 	public partial class ForcedAirFurnace: HoneybeeSchema.Energy.Hvac.IAllair {}
 	
 	public partial class PSZ: HoneybeeSchema.Energy.Hvac.IAllair {}
@@ -19,7 +21,5 @@ namespace HoneybeeSchema
 	public partial class PVAV: HoneybeeSchema.Energy.Hvac.IAllair {}
 	
 	public partial class VAV: HoneybeeSchema.Energy.Hvac.IAllair {}
-	
-	public partial class AllAirBase: HoneybeeSchema.Energy.Hvac.IAllair {}
 	
 }

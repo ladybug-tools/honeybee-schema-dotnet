@@ -21,7 +21,7 @@ namespace HoneybeeSchema
 {
     [Summary(@"")]
     [System.Serializable]
-    [DataContract(Name = "ModelProperties")]
+    [DataContract(Name = "ModelProperties")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ModelProperties : OpenAPIGenBaseModel, System.IEquatable<ModelProperties>
     {
         /// <summary>
@@ -63,30 +63,30 @@ namespace HoneybeeSchema
         /// Energy
         /// </summary>
         [Summary(@"Energy")]
-        [DataMember(Name = "energy")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "energy")] // For internal Serialization XML/JSON
+        [JsonProperty("energy", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("energy")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ModelEnergyProperties Energy { get; set; }
 
         /// <summary>
         /// Radiance
         /// </summary>
         [Summary(@"Radiance")]
-        [DataMember(Name = "radiance")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "radiance")] // For internal Serialization XML/JSON
+        [JsonProperty("radiance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("radiance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ModelRadianceProperties Radiance { get; set; }
 
         /// <summary>
         /// Doe2
         /// </summary>
         [Summary(@"Doe2")]
-        [DataMember(Name = "doe2")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "doe2")] // For internal Serialization XML/JSON
+        [JsonProperty("doe2", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("doe2")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ModelDoe2Properties Doe2 { get; set; }
 
 

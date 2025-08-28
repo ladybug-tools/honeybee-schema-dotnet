@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Set containing radiance modifiers needed for a model's Apertures.")]
     [System.Serializable]
-    [DataContract(Name = "ApertureModifierSet")]
+    [DataContract(Name = "ApertureModifierSet")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ApertureModifierSet : OpenAPIGenBaseModel, System.IEquatable<ApertureModifierSet>
     {
         /// <summary>
@@ -68,40 +68,40 @@ namespace HoneybeeSchema
         /// A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and Wall parent Face.
         /// </summary>
         [Summary(@"A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and Wall parent Face.")]
-        [DataMember(Name = "window_modifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "window_modifier")] // For internal Serialization XML/JSON
+        [JsonProperty("window_modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("window_modifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> WindowModifier { get; set; }
 
         /// <summary>
         /// A modifier object for apertures with a Surface boundary condition.
         /// </summary>
         [Summary(@"A modifier object for apertures with a Surface boundary condition.")]
-        [DataMember(Name = "interior_modifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "interior_modifier")] // For internal Serialization XML/JSON
+        [JsonProperty("interior_modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("interior_modifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> InteriorModifier { get; set; }
 
         /// <summary>
         /// A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.
         /// </summary>
         [Summary(@"A modifier object for apertures with an Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face.")]
-        [DataMember(Name = "skylight_modifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "skylight_modifier")] // For internal Serialization XML/JSON
+        [JsonProperty("skylight_modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("skylight_modifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> SkylightModifier { get; set; }
 
         /// <summary>
         /// A modifier object for apertures with an Outdoors boundary condition and a True is_operable property.
         /// </summary>
         [Summary(@"A modifier object for apertures with an Outdoors boundary condition and a True is_operable property.")]
-        [DataMember(Name = "operable_modifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "operable_modifier")] // For internal Serialization XML/JSON
+        [JsonProperty("operable_modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("operable_modifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> OperableModifier { get; set; }
 
 

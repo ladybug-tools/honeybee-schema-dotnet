@@ -21,7 +21,7 @@ namespace HoneybeeSchema
 {
     [Summary(@"")]
     [System.Serializable]
-    [DataContract(Name = "ChangedInstruction")]
+    [DataContract(Name = "ChangedInstruction")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ChangedInstruction : OpenAPIGenBaseModel, System.IEquatable<ChangedInstruction>
     {
         /// <summary>
@@ -69,8 +69,10 @@ namespace HoneybeeSchema
         /// Text for the type of object that has been changed.
         /// </summary>
         [Summary(@"Text for the type of object that has been changed.")]
-        [Required]
-        [DataMember(Name = "element_type", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "element_type", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("element_type", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("element_type")] // For System.Text.Json
         public GeometryObjectTypes ElementType { get; set; }
 
@@ -78,11 +80,13 @@ namespace HoneybeeSchema
         /// Text string for the unique object ID that has changed.
         /// </summary>
         [Summary(@"Text string for the unique object ID that has changed.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [RegularExpression(@"^[^,;!\n\t]+$")]
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "element_id", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "element_id", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("element_id", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("element_id")] // For System.Text.Json
         public string ElementId { get; set; }
 
@@ -90,40 +94,40 @@ namespace HoneybeeSchema
         /// Text string for the display name of the object that has changed.
         /// </summary>
         [Summary(@"Text string for the display name of the object that has changed.")]
-        [DataMember(Name = "element_name")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "element_name")] // For internal Serialization XML/JSON
+        [JsonProperty("element_name", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("element_name")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ElementName { get; set; }
 
         /// <summary>
         /// A boolean to note whether the geometry of the object in the new/updated model should replace the base/existing geometry (True) or the existing geometry should be kept (False).
         /// </summary>
         [Summary(@"A boolean to note whether the geometry of the object in the new/updated model should replace the base/existing geometry (True) or the existing geometry should be kept (False).")]
-        [DataMember(Name = "update_geometry")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "update_geometry")] // For internal Serialization XML/JSON
+        [JsonProperty("update_geometry", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("update_geometry")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool UpdateGeometry { get; set; } = true;
 
         /// <summary>
         /// A boolean to note whether the energy properties of the object in the new/updated model should replace the base/existing energy properties (True) or the base/existing energy properties should be kept (False).
         /// </summary>
         [Summary(@"A boolean to note whether the energy properties of the object in the new/updated model should replace the base/existing energy properties (True) or the base/existing energy properties should be kept (False).")]
-        [DataMember(Name = "update_energy")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "update_energy")] // For internal Serialization XML/JSON
+        [JsonProperty("update_energy", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("update_energy")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool UpdateEnergy { get; set; } = true;
 
         /// <summary>
         /// A boolean to note whether the radiance properties of the object in the new/updated model should replace the base/existing radiance properties (True) or the base/existing radiance properties should be kept (False).
         /// </summary>
         [Summary(@"A boolean to note whether the radiance properties of the object in the new/updated model should replace the base/existing radiance properties (True) or the base/existing radiance properties should be kept (False).")]
-        [DataMember(Name = "update_radiance")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "update_radiance")] // For internal Serialization XML/JSON
+        [JsonProperty("update_radiance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("update_radiance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool UpdateRadiance { get; set; } = true;
 
 

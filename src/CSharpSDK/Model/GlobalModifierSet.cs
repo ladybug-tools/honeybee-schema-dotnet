@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.")]
     [System.Serializable]
-    [DataContract(Name = "GlobalModifierSet")]
+    [DataContract(Name = "GlobalModifierSet")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class GlobalModifierSet : OpenAPIGenBaseModel, System.IEquatable<GlobalModifierSet>
     {
         /// <summary>
@@ -172,10 +172,10 @@ namespace HoneybeeSchema
         /// Global Honeybee Radiance modifiers.
         /// </summary>
         [Summary(@"Global Honeybee Radiance modifiers.")]
-        [DataMember(Name = "modifiers")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "modifiers")] // For internal Serialization XML/JSON
+        [JsonProperty("modifiers", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("modifiers")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<AnyOf<Plastic, Glass, Trans>> Modifiers { get; protected set; } = ModifiersDefault;
 
         public static readonly WallModifierSetAbridged WallSetDefault = (@"{
@@ -187,10 +187,10 @@ namespace HoneybeeSchema
         /// Global Honeybee WallModifierSet.
         /// </summary>
         [Summary(@"Global Honeybee WallModifierSet.")]
-        [DataMember(Name = "wall_set")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "wall_set")] // For internal Serialization XML/JSON
+        [JsonProperty("wall_set", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("wall_set")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public WallModifierSetAbridged WallSet { get; protected set; } = WallSetDefault;
 
         public static readonly FloorModifierSetAbridged FloorSetDefault = (@"{
@@ -202,10 +202,10 @@ namespace HoneybeeSchema
         /// Global Honeybee FloorModifierSet.
         /// </summary>
         [Summary(@"Global Honeybee FloorModifierSet.")]
-        [DataMember(Name = "floor_set")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "floor_set")] // For internal Serialization XML/JSON
+        [JsonProperty("floor_set", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("floor_set")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public FloorModifierSetAbridged FloorSet { get; protected set; } = FloorSetDefault;
 
         public static readonly RoofCeilingModifierSetAbridged RoofCeilingSetDefault = (@"{
@@ -217,10 +217,10 @@ namespace HoneybeeSchema
         /// Global Honeybee RoofCeilingModifierSet.
         /// </summary>
         [Summary(@"Global Honeybee RoofCeilingModifierSet.")]
-        [DataMember(Name = "roof_ceiling_set")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "roof_ceiling_set")] // For internal Serialization XML/JSON
+        [JsonProperty("roof_ceiling_set", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("roof_ceiling_set")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public RoofCeilingModifierSetAbridged RoofCeilingSet { get; protected set; } = RoofCeilingSetDefault;
 
         public static readonly ApertureModifierSetAbridged ApertureSetDefault = (@"{
@@ -234,10 +234,10 @@ namespace HoneybeeSchema
         /// Global Honeybee ApertureModifierSet.
         /// </summary>
         [Summary(@"Global Honeybee ApertureModifierSet.")]
-        [DataMember(Name = "aperture_set")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "aperture_set")] // For internal Serialization XML/JSON
+        [JsonProperty("aperture_set", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("aperture_set")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ApertureModifierSetAbridged ApertureSet { get; protected set; } = ApertureSetDefault;
 
         public static readonly DoorModifierSetAbridged DoorSetDefault = (@"{
@@ -252,10 +252,10 @@ namespace HoneybeeSchema
         /// Global Honeybee DoorModifierSet.
         /// </summary>
         [Summary(@"Global Honeybee DoorModifierSet.")]
-        [DataMember(Name = "door_set")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "door_set")] // For internal Serialization XML/JSON
+        [JsonProperty("door_set", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("door_set")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public DoorModifierSetAbridged DoorSet { get; protected set; } = DoorSetDefault;
 
         public static readonly ShadeModifierSetAbridged ShadeSetDefault = (@"{
@@ -267,30 +267,30 @@ namespace HoneybeeSchema
         /// Global Honeybee ShadeModifierSet.
         /// </summary>
         [Summary(@"Global Honeybee ShadeModifierSet.")]
-        [DataMember(Name = "shade_set")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "shade_set")] // For internal Serialization XML/JSON
+        [JsonProperty("shade_set", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("shade_set")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ShadeModifierSetAbridged ShadeSet { get; protected set; } = ShadeSetDefault;
 
         /// <summary>
         /// Global Honeybee Modifier for AirBoundary Faces.
         /// </summary>
         [Summary(@"Global Honeybee Modifier for AirBoundary Faces.")]
-        [DataMember(Name = "air_boundary_modifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "air_boundary_modifier")] // For internal Serialization XML/JSON
+        [JsonProperty("air_boundary_modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("air_boundary_modifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string AirBoundaryModifier { get; protected set; } = "air_boundary";
 
         /// <summary>
         /// Global Honeybee Modifier for context Shades.
         /// </summary>
         [Summary(@"Global Honeybee Modifier for context Shades.")]
-        [DataMember(Name = "context_modifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "context_modifier")] // For internal Serialization XML/JSON
+        [JsonProperty("context_modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("context_modifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ContextModifier { get; protected set; } = "generic_context_0.20";
 
 

@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Create single layer of custom gas.")]
     [System.Serializable]
-    [DataContract(Name = "EnergyWindowMaterialGasCustom")]
+    [DataContract(Name = "EnergyWindowMaterialGasCustom")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class EnergyWindowMaterialGasCustom : IDdEnergyBaseModel, System.IEquatable<EnergyWindowMaterialGasCustom>
     {
         /// <summary>
@@ -87,8 +87,10 @@ namespace HoneybeeSchema
         /// The A coefficient for gas conductivity in W/(m-K).
         /// </summary>
         [Summary(@"The A coefficient for gas conductivity in W/(m-K).")]
-        [Required]
-        [DataMember(Name = "conductivity_coeff_a", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "conductivity_coeff_a", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("conductivity_coeff_a", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("conductivity_coeff_a")] // For System.Text.Json
         public double ConductivityCoeffA { get; set; }
 
@@ -96,8 +98,10 @@ namespace HoneybeeSchema
         /// The A coefficient for gas viscosity in kg/(m-s).
         /// </summary>
         [Summary(@"The A coefficient for gas viscosity in kg/(m-s).")]
-        [Required]
-        [DataMember(Name = "viscosity_coeff_a", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "viscosity_coeff_a", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("viscosity_coeff_a", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("viscosity_coeff_a")] // For System.Text.Json
         public double ViscosityCoeffA { get; set; }
 
@@ -105,8 +109,10 @@ namespace HoneybeeSchema
         /// The A coefficient for gas specific heat in J/(kg-K).
         /// </summary>
         [Summary(@"The A coefficient for gas specific heat in J/(kg-K).")]
-        [Required]
-        [DataMember(Name = "specific_heat_coeff_a", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "specific_heat_coeff_a", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("specific_heat_coeff_a", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("specific_heat_coeff_a")] // For System.Text.Json
         public double SpecificHeatCoeffA { get; set; }
 
@@ -114,8 +120,10 @@ namespace HoneybeeSchema
         /// The specific heat ratio for gas.
         /// </summary>
         [Summary(@"The specific heat ratio for gas.")]
-        [Required]
-        [DataMember(Name = "specific_heat_ratio", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "specific_heat_ratio", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("specific_heat_ratio", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("specific_heat_ratio")] // For System.Text.Json
         public double SpecificHeatRatio { get; set; }
 
@@ -123,9 +131,11 @@ namespace HoneybeeSchema
         /// The molecular weight for gas in g/mol.
         /// </summary>
         [Summary(@"The molecular weight for gas in g/mol.")]
-        [Required]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
         [Range(20, 200)]
-        [DataMember(Name = "molecular_weight", IsRequired = true)] // For Newtonsoft.Json
+        [DataMember(Name = "molecular_weight", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("molecular_weight", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("molecular_weight")] // For System.Text.Json
         public double MolecularWeight { get; set; }
 
@@ -133,70 +143,70 @@ namespace HoneybeeSchema
         /// Thickness of the gas layer in meters. Default: 0.0125.
         /// </summary>
         [Summary(@"Thickness of the gas layer in meters. Default: 0.0125.")]
-        [DataMember(Name = "thickness")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "thickness")] // For internal Serialization XML/JSON
+        [JsonProperty("thickness", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Thickness { get; set; } = 0.0125D;
 
         /// <summary>
         /// The B coefficient for gas conductivity in W/(m-K2).
         /// </summary>
         [Summary(@"The B coefficient for gas conductivity in W/(m-K2).")]
-        [DataMember(Name = "conductivity_coeff_b")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "conductivity_coeff_b")] // For internal Serialization XML/JSON
+        [JsonProperty("conductivity_coeff_b", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("conductivity_coeff_b")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double ConductivityCoeffB { get; set; } = 0D;
 
         /// <summary>
         /// The C coefficient for gas conductivity in W/(m-K3).
         /// </summary>
         [Summary(@"The C coefficient for gas conductivity in W/(m-K3).")]
-        [DataMember(Name = "conductivity_coeff_c")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "conductivity_coeff_c")] // For internal Serialization XML/JSON
+        [JsonProperty("conductivity_coeff_c", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("conductivity_coeff_c")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double ConductivityCoeffC { get; set; } = 0D;
 
         /// <summary>
         /// The B coefficient for gas viscosity in kg/(m-s-K).
         /// </summary>
         [Summary(@"The B coefficient for gas viscosity in kg/(m-s-K).")]
-        [DataMember(Name = "viscosity_coeff_b")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "viscosity_coeff_b")] // For internal Serialization XML/JSON
+        [JsonProperty("viscosity_coeff_b", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("viscosity_coeff_b")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double ViscosityCoeffB { get; set; } = 0D;
 
         /// <summary>
         /// The C coefficient for gas viscosity in kg/(m-s-K2).
         /// </summary>
         [Summary(@"The C coefficient for gas viscosity in kg/(m-s-K2).")]
-        [DataMember(Name = "viscosity_coeff_c")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "viscosity_coeff_c")] // For internal Serialization XML/JSON
+        [JsonProperty("viscosity_coeff_c", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("viscosity_coeff_c")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double ViscosityCoeffC { get; set; } = 0D;
 
         /// <summary>
         /// The B coefficient for gas specific heat in J/(kg-K2).
         /// </summary>
         [Summary(@"The B coefficient for gas specific heat in J/(kg-K2).")]
-        [DataMember(Name = "specific_heat_coeff_b")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "specific_heat_coeff_b")] // For internal Serialization XML/JSON
+        [JsonProperty("specific_heat_coeff_b", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("specific_heat_coeff_b")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SpecificHeatCoeffB { get; set; } = 0D;
 
         /// <summary>
         /// The C coefficient for gas specific heat in J/(kg-K3).
         /// </summary>
         [Summary(@"The C coefficient for gas specific heat in J/(kg-K3).")]
-        [DataMember(Name = "specific_heat_coeff_c")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "specific_heat_coeff_c")] // For internal Serialization XML/JSON
+        [JsonProperty("specific_heat_coeff_c", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("specific_heat_coeff_c")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SpecificHeatCoeffC { get; set; } = 0D;
 
 

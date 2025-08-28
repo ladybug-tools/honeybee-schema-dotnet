@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for the abridged modifier sets assigned to Faces.")]
     [System.Serializable]
-    [DataContract(Name = "BaseModifierSetAbridged")]
+    [DataContract(Name = "BaseModifierSetAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class BaseModifierSetAbridged : OpenAPIGenBaseModel, System.IEquatable<BaseModifierSetAbridged>
     {
         /// <summary>
@@ -64,20 +64,20 @@ namespace HoneybeeSchema
         /// Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.
         /// </summary>
         [Summary(@"Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.")]
-        [DataMember(Name = "exterior_modifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "exterior_modifier")] // For internal Serialization XML/JSON
+        [JsonProperty("exterior_modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("exterior_modifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ExteriorModifier { get; set; }
 
         /// <summary>
         /// Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors.
         /// </summary>
         [Summary(@"Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors.")]
-        [DataMember(Name = "interior_modifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "interior_modifier")] // For internal Serialization XML/JSON
+        [JsonProperty("interior_modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("interior_modifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string InteriorModifier { get; set; }
 
 

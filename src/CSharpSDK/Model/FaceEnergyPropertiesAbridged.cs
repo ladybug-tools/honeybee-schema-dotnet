@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.")]
     [System.Serializable]
-    [DataContract(Name = "FaceEnergyPropertiesAbridged")]
+    [DataContract(Name = "FaceEnergyPropertiesAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class FaceEnergyPropertiesAbridged : OpenAPIGenBaseModel, System.IEquatable<FaceEnergyPropertiesAbridged>
     {
         /// <summary>
@@ -64,22 +64,22 @@ namespace HoneybeeSchema
         /// Identifier of an OpaqueConstruction for the Face. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.
         /// </summary>
         [Summary(@"Identifier of an OpaqueConstruction for the Face. If None, the construction is set by the parent Room construction_set or the Model global_construction_set.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "construction")] // For Newtonsoft.Json
+        [DataMember(Name = "construction")] // For internal Serialization XML/JSON
+        [JsonProperty("construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("construction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Construction { get; set; }
 
         /// <summary>
         /// An optional AFNCrack to specify airflow through a surface crack used by the AirflowNetwork.
         /// </summary>
         [Summary(@"An optional AFNCrack to specify airflow through a surface crack used by the AirflowNetwork.")]
-        [DataMember(Name = "vent_crack")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "vent_crack")] // For internal Serialization XML/JSON
+        [JsonProperty("vent_crack", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("vent_crack")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AFNCrack VentCrack { get; set; }
 
 

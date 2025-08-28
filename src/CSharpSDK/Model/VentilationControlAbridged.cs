@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.")]
     [System.Serializable]
-    [DataContract(Name = "VentilationControlAbridged")]
+    [DataContract(Name = "VentilationControlAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class VentilationControlAbridged : OpenAPIGenBaseModel, System.IEquatable<VentilationControlAbridged>
     {
         /// <summary>
@@ -72,67 +72,67 @@ namespace HoneybeeSchema
         /// A number for the minimum indoor temperature at which to ventilate in Celsius. Typically, this variable is used to initiate ventilation.
         /// </summary>
         [Summary(@"A number for the minimum indoor temperature at which to ventilate in Celsius. Typically, this variable is used to initiate ventilation.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(-100, 100)]
-        [DataMember(Name = "min_indoor_temperature")] // For Newtonsoft.Json
+        [DataMember(Name = "min_indoor_temperature")] // For internal Serialization XML/JSON
+        [JsonProperty("min_indoor_temperature", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("min_indoor_temperature")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double MinIndoorTemperature { get; set; } = -100D;
 
         /// <summary>
         /// A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a maximum temperature at which point ventilation is stopped and a cooling system is turned on.
         /// </summary>
         [Summary(@"A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a maximum temperature at which point ventilation is stopped and a cooling system is turned on.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(-100, 100)]
-        [DataMember(Name = "max_indoor_temperature")] // For Newtonsoft.Json
+        [DataMember(Name = "max_indoor_temperature")] // For internal Serialization XML/JSON
+        [JsonProperty("max_indoor_temperature", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("max_indoor_temperature")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double MaxIndoorTemperature { get; set; } = 100D;
 
         /// <summary>
         /// A number for the minimum outdoor temperature at which to ventilate in Celsius. This can be used to ensure ventilative cooling does not happen during the winter even if the Room is above the min_indoor_temperature.
         /// </summary>
         [Summary(@"A number for the minimum outdoor temperature at which to ventilate in Celsius. This can be used to ensure ventilative cooling does not happen during the winter even if the Room is above the min_indoor_temperature.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(-100, 100)]
-        [DataMember(Name = "min_outdoor_temperature")] // For Newtonsoft.Json
+        [DataMember(Name = "min_outdoor_temperature")] // For internal Serialization XML/JSON
+        [JsonProperty("min_outdoor_temperature", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("min_outdoor_temperature")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double MinOutdoorTemperature { get; set; } = -100D;
 
         /// <summary>
         /// A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a limit for when it is considered too hot outside for ventilative cooling.
         /// </summary>
         [Summary(@"A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a limit for when it is considered too hot outside for ventilative cooling.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(-100, 100)]
-        [DataMember(Name = "max_outdoor_temperature")] // For Newtonsoft.Json
+        [DataMember(Name = "max_outdoor_temperature")] // For internal Serialization XML/JSON
+        [JsonProperty("max_outdoor_temperature", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("max_outdoor_temperature")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double MaxOutdoorTemperature { get; set; } = 100D;
 
         /// <summary>
         /// A number for the temperature differential in Celsius between indoor and outdoor below which ventilation is shut off.  This should usually be a positive number so that ventilation only occurs when the outdoors is cooler than the indoors. Negative numbers indicate how much hotter the outdoors can be than the indoors before ventilation is stopped.
         /// </summary>
         [Summary(@"A number for the temperature differential in Celsius between indoor and outdoor below which ventilation is shut off.  This should usually be a positive number so that ventilation only occurs when the outdoors is cooler than the indoors. Negative numbers indicate how much hotter the outdoors can be than the indoors before ventilation is stopped.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(-100, 100)]
-        [DataMember(Name = "delta_temperature")] // For Newtonsoft.Json
+        [DataMember(Name = "delta_temperature")] // For internal Serialization XML/JSON
+        [JsonProperty("delta_temperature", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("delta_temperature")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double DeltaTemperature { get; set; } = -100D;
 
         /// <summary>
         /// Identifier of the schedule for the ventilation over the course of the year. Note that this is applied on top of any setpoints. The type of this schedule should be On/Off and values should be either 0 (no possibility of ventilation) or 1 (ventilation possible).
         /// </summary>
         [Summary(@"Identifier of the schedule for the ventilation over the course of the year. Note that this is applied on top of any setpoints. The type of this schedule should be On/Off and values should be either 0 (no possibility of ventilation) or 1 (ventilation possible).")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "schedule")] // For Newtonsoft.Json
+        [DataMember(Name = "schedule")] // For internal Serialization XML/JSON
+        [JsonProperty("schedule", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Schedule { get; set; }
 
 

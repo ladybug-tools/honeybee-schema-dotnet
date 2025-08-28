@@ -22,6 +22,10 @@ namespace HoneybeeSchema
 	
 	public partial class DoorConstructionSetAbridged: HoneybeeSchema.Energy.IConstructionset {}
 	
+	public partial class FaceSubSet: HoneybeeSchema.Energy.IConstructionset {}
+	
+	public partial class FaceSubSetAbridged: HoneybeeSchema.Energy.IConstructionset {}
+	
 	public partial class FloorConstructionSet: HoneybeeSchema.Energy.IConstructionset {}
 	
 	public partial class FloorConstructionSetAbridged: HoneybeeSchema.Energy.IConstructionset {}
@@ -33,9 +37,5 @@ namespace HoneybeeSchema
 	public partial class WallConstructionSet: HoneybeeSchema.Energy.IConstructionset {}
 	
 	public partial class WallConstructionSetAbridged: HoneybeeSchema.Energy.IConstructionset {}
-	
-	public partial class FaceSubSet: HoneybeeSchema.Energy.IConstructionset {}
-	
-	public partial class FaceSubSetAbridged: HoneybeeSchema.Energy.IConstructionset {}
 	
 }

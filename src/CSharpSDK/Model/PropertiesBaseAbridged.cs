@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class of Abridged Radiance Properties.")]
     [System.Serializable]
-    [DataContract(Name = "_PropertiesBaseAbridged")]
+    [DataContract(Name = "PropertiesBaseAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class PropertiesBaseAbridged : OpenAPIGenBaseModel, System.IEquatable<PropertiesBaseAbridged>
     {
         /// <summary>
@@ -64,20 +64,20 @@ namespace HoneybeeSchema
         /// A string for a Honeybee Radiance Modifier (default: None).
         /// </summary>
         [Summary(@"A string for a Honeybee Radiance Modifier (default: None).")]
-        [DataMember(Name = "modifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "modifier")] // For internal Serialization XML/JSON
+        [JsonProperty("modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("modifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Modifier { get; set; }
 
         /// <summary>
         /// A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).
         /// </summary>
         [Summary(@"A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).")]
-        [DataMember(Name = "modifier_blk")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "modifier_blk")] // For internal Serialization XML/JSON
+        [JsonProperty("modifier_blk", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("modifier_blk")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ModifierBlk { get; set; }
 
 

@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Base class for Radiance Modifiers")]
     [System.Serializable]
-    [DataContract(Name = "ModifierBase")]
+    [DataContract(Name = "ModifierBase")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ModifierBase : IDdRadianceBaseModel, System.IEquatable<ModifierBase>
     {
         /// <summary>

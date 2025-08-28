@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Radiance BSDF (Bidirectional Scattering Distribution Function) material.")]
     [System.Serializable]
-    [DataContract(Name = "BSDF")]
+    [DataContract(Name = "BSDF")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class BSDF : ModifierBase, System.IEquatable<BSDF>
     {
         /// <summary>
@@ -82,8 +82,10 @@ namespace HoneybeeSchema
         /// A string with the contents of the BSDF XML file.
         /// </summary>
         [Summary(@"A string with the contents of the BSDF XML file.")]
-        [Required]
-        [DataMember(Name = "bsdf_data", IsRequired = true)] // For Newtonsoft.Json
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "bsdf_data", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("bsdf_data", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("bsdf_data")] // For System.Text.Json
         public string BsdfData { get; set; }
 
@@ -91,94 +93,94 @@ namespace HoneybeeSchema
         /// Material modifier.
         /// </summary>
         [Summary(@"Material modifier.")]
-        [DataMember(Name = "modifier")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "modifier")] // For internal Serialization XML/JSON
+        [JsonProperty("modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("modifier")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> Modifier { get; set; } = new Void();
 
         /// <summary>
         /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.
         /// </summary>
         [Summary(@"List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.")]
-        [DataMember(Name = "dependencies")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "dependencies")] // For internal Serialization XML/JSON
+        [JsonProperty("dependencies", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("dependencies")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>> Dependencies { get; set; }
 
         /// <summary>
         /// Vector as sequence that sets the hemisphere that the BSDF material faces.
         /// </summary>
         [Summary(@"Vector as sequence that sets the hemisphere that the BSDF material faces.")]
-        [DataMember(Name = "up_orientation")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "up_orientation")] // For internal Serialization XML/JSON
+        [JsonProperty("up_orientation", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("up_orientation")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<double> UpOrientation { get; set; } = new List<double>{ 0.01, 0.01, 1 };
 
         /// <summary>
         /// Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative).
         /// </summary>
         [Summary(@"Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative).")]
-        [DataMember(Name = "thickness")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "thickness")] // For internal Serialization XML/JSON
+        [JsonProperty("thickness", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double Thickness { get; set; } = 0D;
 
         /// <summary>
         /// Optional input for function file. Using ""."" will ensure that BSDF data is written to the root of wherever a given study is run.
         /// </summary>
         [Summary(@"Optional input for function file. Using ""."" will ensure that BSDF data is written to the root of wherever a given study is run.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "function_file")] // For Newtonsoft.Json
+        [DataMember(Name = "function_file")] // For internal Serialization XML/JSON
+        [JsonProperty("function_file", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("function_file")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string FunctionFile { get; set; } = ".";
 
         /// <summary>
         /// Optional transform input to scale the thickness and reorient the up vector.
         /// </summary>
         [Summary(@"Optional transform input to scale the thickness and reorient the up vector.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "transform")] // For Newtonsoft.Json
+        [DataMember(Name = "transform")] // For internal Serialization XML/JSON
+        [JsonProperty("transform", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("transform")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string Transform { get; set; }
 
         /// <summary>
         /// Optional additional front diffuse reflectance as sequence of three RGB numbers.
         /// </summary>
         [Summary(@"Optional additional front diffuse reflectance as sequence of three RGB numbers.")]
-        [DataMember(Name = "front_diffuse_reflectance")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "front_diffuse_reflectance")] // For internal Serialization XML/JSON
+        [JsonProperty("front_diffuse_reflectance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("front_diffuse_reflectance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<double> FrontDiffuseReflectance { get; set; }
 
         /// <summary>
         /// Optional additional back diffuse reflectance as sequence of three RGB numbers.
         /// </summary>
         [Summary(@"Optional additional back diffuse reflectance as sequence of three RGB numbers.")]
-        [DataMember(Name = "back_diffuse_reflectance")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "back_diffuse_reflectance")] // For internal Serialization XML/JSON
+        [JsonProperty("back_diffuse_reflectance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("back_diffuse_reflectance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<double> BackDiffuseReflectance { get; set; }
 
         /// <summary>
         /// Optional additional diffuse transmittance as sequence of three RGB numbers.
         /// </summary>
         [Summary(@"Optional additional diffuse transmittance as sequence of three RGB numbers.")]
-        [DataMember(Name = "diffuse_transmittance")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "diffuse_transmittance")] // For internal Serialization XML/JSON
+        [JsonProperty("diffuse_transmittance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("diffuse_transmittance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public List<double> DiffuseTransmittance { get; set; }
 
 

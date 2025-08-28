@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Specifies the data types and limits for values contained in schedules.")]
     [System.Serializable]
-    [DataContract(Name = "ScheduleTypeLimit")]
+    [DataContract(Name = "ScheduleTypeLimit")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ScheduleTypeLimit : EnergyBaseModel, System.IEquatable<ScheduleTypeLimit>
     {
         /// <summary>
@@ -70,40 +70,40 @@ namespace HoneybeeSchema
         /// Lower limit for the schedule type or NoLimit.
         /// </summary>
         [Summary(@"Lower limit for the schedule type or NoLimit.")]
-        [DataMember(Name = "lower_limit")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "lower_limit")] // For internal Serialization XML/JSON
+        [JsonProperty("lower_limit", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("lower_limit")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<NoLimit, double> LowerLimit { get; set; } = new NoLimit();
 
         /// <summary>
         /// Upper limit for the schedule type or NoLimit.
         /// </summary>
         [Summary(@"Upper limit for the schedule type or NoLimit.")]
-        [DataMember(Name = "upper_limit")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "upper_limit")] // For internal Serialization XML/JSON
+        [JsonProperty("upper_limit", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("upper_limit")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public AnyOf<NoLimit, double> UpperLimit { get; set; } = new NoLimit();
 
         /// <summary>
         /// NumericType
         /// </summary>
         [Summary(@"NumericType")]
-        [DataMember(Name = "numeric_type")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "numeric_type")] // For internal Serialization XML/JSON
+        [JsonProperty("numeric_type", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("numeric_type")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ScheduleNumericType NumericType { get; set; } = ScheduleNumericType.Continuous;
 
         /// <summary>
         /// UnitType
         /// </summary>
         [Summary(@"UnitType")]
-        [DataMember(Name = "unit_type")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "unit_type")] // For internal Serialization XML/JSON
+        [JsonProperty("unit_type", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("unit_type")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public ScheduleUnitType UnitType { get; set; } = ScheduleUnitType.Dimensionless;
 
 

@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door.\n    ")]
     [System.Serializable]
-    [DataContract(Name = "RadianceSubFaceStateAbridged")]
+    [DataContract(Name = "RadianceSubFaceStateAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class RadianceSubFaceStateAbridged : RadianceShadeStateAbridged, System.IEquatable<RadianceSubFaceStateAbridged>
     {
         /// <summary>
@@ -67,20 +67,20 @@ namespace HoneybeeSchema
         /// A Face3D for the view matrix geometry (default: None).
         /// </summary>
         [Summary(@"A Face3D for the view matrix geometry (default: None).")]
-        [DataMember(Name = "vmtx_geometry")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "vmtx_geometry")] // For internal Serialization XML/JSON
+        [JsonProperty("vmtx_geometry", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("vmtx_geometry")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Face3D VmtxGeometry { get; set; }
 
         /// <summary>
         /// A Face3D for the daylight matrix geometry (default: None).
         /// </summary>
         [Summary(@"A Face3D for the daylight matrix geometry (default: None).")]
-        [DataMember(Name = "dmtx_geometry")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "dmtx_geometry")] // For internal Serialization XML/JSON
+        [JsonProperty("dmtx_geometry", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("dmtx_geometry")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public Face3D DmtxGeometry { get; set; }
 
 

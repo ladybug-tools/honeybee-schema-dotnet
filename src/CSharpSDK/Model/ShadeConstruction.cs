@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"Construction for Shade objects.")]
     [System.Serializable]
-    [DataContract(Name = "ShadeConstruction")]
+    [DataContract(Name = "ShadeConstruction")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ShadeConstruction : IDdEnergyBaseModel, System.IEquatable<ShadeConstruction>
     {
         /// <summary>
@@ -69,32 +69,32 @@ namespace HoneybeeSchema
         /// A number for the solar reflectance of the construction.
         /// </summary>
         [Summary(@"A number for the solar reflectance of the construction.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "solar_reflectance")] // For Newtonsoft.Json
+        [DataMember(Name = "solar_reflectance")] // For internal Serialization XML/JSON
+        [JsonProperty("solar_reflectance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("solar_reflectance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double SolarReflectance { get; set; } = 0.2D;
 
         /// <summary>
         /// A number for the visible reflectance of the construction.
         /// </summary>
         [Summary(@"A number for the visible reflectance of the construction.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
-        [DataMember(Name = "visible_reflectance")] // For Newtonsoft.Json
+        [DataMember(Name = "visible_reflectance")] // For internal Serialization XML/JSON
+        [JsonProperty("visible_reflectance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("visible_reflectance")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public double VisibleReflectance { get; set; } = 0.2D;
 
         /// <summary>
         /// Boolean to note whether the reflection off the shade is diffuse (False) or specular (True). Set to True if the construction is representing a glass facade or a mirror material.
         /// </summary>
         [Summary(@"Boolean to note whether the reflection off the shade is diffuse (False) or specular (True). Set to True if the construction is representing a glass facade or a mirror material.")]
-        [DataMember(Name = "is_specular")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "is_specular")] // For internal Serialization XML/JSON
+        [JsonProperty("is_specular", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("is_specular")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public bool IsSpecular { get; set; } = false;
 
 

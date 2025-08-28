@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"A set of constructions for door assemblies.")]
     [System.Serializable]
-    [DataContract(Name = "DoorConstructionSetAbridged")]
+    [DataContract(Name = "DoorConstructionSetAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class DoorConstructionSetAbridged : OpenAPIGenBaseModel, System.IEquatable<DoorConstructionSetAbridged>
     {
         /// <summary>
@@ -70,60 +70,60 @@ namespace HoneybeeSchema
         /// Identifier for an OpaqueConstruction for all opaque doors with a Surface boundary condition.
         /// </summary>
         [Summary(@"Identifier for an OpaqueConstruction for all opaque doors with a Surface boundary condition.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "interior_construction")] // For Newtonsoft.Json
+        [DataMember(Name = "interior_construction")] // For internal Serialization XML/JSON
+        [JsonProperty("interior_construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("interior_construction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string InteriorConstruction { get; set; }
 
         /// <summary>
         /// Identifier for an OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face.
         /// </summary>
         [Summary(@"Identifier for an OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "exterior_construction")] // For Newtonsoft.Json
+        [DataMember(Name = "exterior_construction")] // For internal Serialization XML/JSON
+        [JsonProperty("exterior_construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("exterior_construction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ExteriorConstruction { get; set; }
 
         /// <summary>
         /// Identifier for an OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face.
         /// </summary>
         [Summary(@"Identifier for an OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "overhead_construction")] // For Newtonsoft.Json
+        [DataMember(Name = "overhead_construction")] // For internal Serialization XML/JSON
+        [JsonProperty("overhead_construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("overhead_construction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string OverheadConstruction { get; set; }
 
         /// <summary>
         /// Identifier for a WindowConstruction for all glass doors with an Outdoors boundary condition.
         /// </summary>
         [Summary(@"Identifier for a WindowConstruction for all glass doors with an Outdoors boundary condition.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "exterior_glass_construction")] // For Newtonsoft.Json
+        [DataMember(Name = "exterior_glass_construction")] // For internal Serialization XML/JSON
+        [JsonProperty("exterior_glass_construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("exterior_glass_construction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string ExteriorGlassConstruction { get; set; }
 
         /// <summary>
         /// Identifier for a WindowConstruction for all glass doors with a Surface boundary condition.
         /// </summary>
         [Summary(@"Identifier for a WindowConstruction for all glass doors with a Surface boundary condition.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "interior_glass_construction")] // For Newtonsoft.Json
+        [DataMember(Name = "interior_glass_construction")] // For internal Serialization XML/JSON
+        [JsonProperty("interior_glass_construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("interior_glass_construction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public string InteriorGlassConstruction { get; set; }
 
 

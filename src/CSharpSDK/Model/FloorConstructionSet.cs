@@ -24,7 +24,7 @@ namespace HoneybeeSchema
     /// </summary>
     [Summary(@"A set of constructions for floor assemblies.")]
     [System.Serializable]
-    [DataContract(Name = "FloorConstructionSet")]
+    [DataContract(Name = "FloorConstructionSet")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class FloorConstructionSet : OpenAPIGenBaseModel, System.IEquatable<FloorConstructionSet>
     {
         /// <summary>
@@ -66,30 +66,30 @@ namespace HoneybeeSchema
         /// An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition.
         /// </summary>
         [Summary(@"An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition.")]
-        [DataMember(Name = "interior_construction")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "interior_construction")] // For internal Serialization XML/JSON
+        [JsonProperty("interior_construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("interior_construction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public OpaqueConstruction InteriorConstruction { get; set; }
 
         /// <summary>
         /// An OpaqueConstruction for walls with an Outdoors boundary condition.
         /// </summary>
         [Summary(@"An OpaqueConstruction for walls with an Outdoors boundary condition.")]
-        [DataMember(Name = "exterior_construction")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "exterior_construction")] // For internal Serialization XML/JSON
+        [JsonProperty("exterior_construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("exterior_construction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public OpaqueConstruction ExteriorConstruction { get; set; }
 
         /// <summary>
         /// An OpaqueConstruction for walls with a Ground boundary condition.
         /// </summary>
         [Summary(@"An OpaqueConstruction for walls with a Ground boundary condition.")]
-        [DataMember(Name = "ground_construction")] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "ground_construction")] // For internal Serialization XML/JSON
+        [JsonProperty("ground_construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("ground_construction")] // For System.Text.Json
-        [LBT.Newtonsoft.Json.JsonProperty(NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json
         public OpaqueConstruction GroundConstruction { get; set; }
 
 
