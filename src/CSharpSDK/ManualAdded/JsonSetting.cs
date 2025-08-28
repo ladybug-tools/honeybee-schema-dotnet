@@ -17,12 +17,11 @@ namespace HoneybeeSchema
 				{
 					_setting = new JsonSerializerSettings
 					{
-						NullValueHandling = NullValueHandling.Ignore,
+                        //NullValueHandling = NullValueHandling.Ignore, // Handled per-property
                         //DefaultValueHandling = DefaultValueHandling.,
                         Converters = new List<JsonConverter>() { new AnyOfJsonConverter() },
 						ObjectCreationHandling = ObjectCreationHandling.Replace,
-						
-					};
+                    };
 				}
 			
 				return _setting; 

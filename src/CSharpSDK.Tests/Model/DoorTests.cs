@@ -288,6 +288,30 @@ namespace HoneybeeSchema.Test
 
         }
 
+        [Test]
+        public void EnumInDicTest()
+        {
+            var dic = new Dictionary<HoneybeeSchema.ClimateZones, string>();
+            dic.Add(ClimateZones.ASHRAE_1A, "1");   
+
+            var json = LBT.Newtonsoft.Json.JsonConvert.SerializeObject(dic);
+            Assert.That(json, Is.EqualTo("{\"1A\":\"1\"}"));
+
+            // camel case
+            var dicc = new Dictionary<HoneybeeSchema.BuildingType, string>();
+            dicc.Add(BuildingType.HighRise, "1");
+            var json2 = LBT.Newtonsoft.Json.JsonConvert.SerializeObject(dicc);
+            Assert.That(json2, Is.EqualTo("{\"HighRise\":\"1\"}"));
+
+            // with settings
+            var setting = JsonSetting.AnyOfConvertSetting;
+            var json3 = LBT.Newtonsoft.Json.JsonConvert.SerializeObject(dicc, setting);
+            Assert.That(json3, Is.EqualTo("{\"HighRise\":\"1\"}"));
+
+            var json4 = LBT.Newtonsoft.Json.JsonConvert.SerializeObject(dic, setting);
+            Assert.That(json4, Is.EqualTo("{\"1A\":\"1\"}"));
+        }
+
         // Ignore for now until System.Text.Json is supported in the future
         //[Test]
         //public void SystemTextJsonTest()
