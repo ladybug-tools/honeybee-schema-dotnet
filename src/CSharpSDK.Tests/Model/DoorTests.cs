@@ -6,6 +6,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -61,6 +62,16 @@ namespace HoneybeeSchema.Test
             // TODO uncomment below to test "IsInstanceOf" Door
             Assert.IsInstanceOf(typeof(Door), instance);
         }
+
+        [Test]
+        public void StrongNameNewtonsoftTest()
+        {
+            var asm = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(_ => _.FullName.Contains("LBT.Newtonsoft"));
+            var token = asm.GetName().GetPublicKeyToken();
+            bool isStrongNamed = token.Length > 0;
+            Assert.IsTrue(isStrongNamed);
+        }
+
 
         [Test]
         public void FaceTest()
