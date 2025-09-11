@@ -11,6 +11,7 @@ import { WallModifierSetAbridged } from "./WallModifierSetAbridged";
 
 /** Abridged set containing all modifiers needed to create a radiance model. */
 export class ModifierSetAbridged extends IDdRadianceBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ModifierSetAbridged$/)
@@ -18,54 +19,55 @@ export class ModifierSetAbridged extends IDdRadianceBaseModel {
     /** type */
     type: string = "ModifierSetAbridged";
 	
-    @IsInstance(WallModifierSetAbridged)
     @Type(() => WallModifierSetAbridged)
+    @IsInstance(WallModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "wall_set" })
     /** Optional WallModifierSet object for this ModifierSet (default: None). */
     wallSet?: WallModifierSetAbridged;
 	
-    @IsInstance(FloorModifierSetAbridged)
     @Type(() => FloorModifierSetAbridged)
+    @IsInstance(FloorModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "floor_set" })
     /** Optional FloorModifierSet object for this ModifierSet (default: None). */
     floorSet?: FloorModifierSetAbridged;
 	
-    @IsInstance(RoofCeilingModifierSetAbridged)
     @Type(() => RoofCeilingModifierSetAbridged)
+    @IsInstance(RoofCeilingModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "roof_ceiling_set" })
     /** Optional RoofCeilingModifierSet object for this ModifierSet (default: None). */
     roofCeilingSet?: RoofCeilingModifierSetAbridged;
 	
-    @IsInstance(ApertureModifierSetAbridged)
     @Type(() => ApertureModifierSetAbridged)
+    @IsInstance(ApertureModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "aperture_set" })
     /** Optional ApertureModifierSet object for this ModifierSet (default: None). */
     apertureSet?: ApertureModifierSetAbridged;
 	
-    @IsInstance(DoorModifierSetAbridged)
     @Type(() => DoorModifierSetAbridged)
+    @IsInstance(DoorModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "door_set" })
     /** Optional DoorModifierSet object for this ModifierSet (default: None). */
     doorSet?: DoorModifierSetAbridged;
 	
-    @IsInstance(ShadeModifierSetAbridged)
     @Type(() => ShadeModifierSetAbridged)
+    @IsInstance(ShadeModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "shade_set" })
     /** Optional ShadeModifierSet object for this ModifierSet (default: None). */
     shadeSet?: ShadeModifierSetAbridged;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "air_boundary_modifier" })

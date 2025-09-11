@@ -6,19 +6,21 @@ import { HumidityTypes } from "./HumidityTypes";
 
 /** Used to specify humidity conditions on a design day. */
 export class HumidityCondition extends _OpenAPIGenBaseModel {
-    @IsEnum(HumidityTypes)
     @Type(() => String)
+    @IsEnum(HumidityTypes)
     @IsDefined()
     @Expose({ name: "humidity_type" })
     /** humidityType */
     humidityType!: HumidityTypes;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Expose({ name: "humidity_value" })
     /** The value correcponding to the humidity_type. */
     humidityValue!: number;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^HumidityCondition$/)
@@ -26,6 +28,7 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "HumidityCondition";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(31000)
@@ -34,12 +37,14 @@ export class HumidityCondition extends _OpenAPIGenBaseModel {
     /** Barometric air pressure on the design day [Pa]. */
     barometricPressure: number = 101325;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "rain" })
     /** Boolean to indicate rain on the design day. */
     rain: boolean = false;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "snow_on_ground" })

@@ -21,6 +21,7 @@ export class Mesh3D extends _OpenAPIGenBaseModel {
     /** A list of lists with each sub-list having either 3 or 4 integers. These integers correspond to indices within the list of vertices. */
     faces!: number[][];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Mesh3D$/)
@@ -29,8 +30,8 @@ export class Mesh3D extends _OpenAPIGenBaseModel {
     type: string = "Mesh3D";
 	
     @IsArray()
-    @IsInstance(Color, { each: true })
     @Type(() => Color)
+    @IsInstance(Color, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "colors" })

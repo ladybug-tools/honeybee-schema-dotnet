@@ -6,6 +6,7 @@ import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 
 /** Hidden base class for all Radiance Assets. */
 export class _RadianceAsset extends IDdRadianceBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^[.A-Za-z0-9_-]+$/)
@@ -22,6 +23,7 @@ export class _RadianceAsset extends IDdRadianceBaseModel {
     /** Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [[""SouthWindow1""], [""static_apertures"", ""NorthWindow2""]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation. */
     lightPath?: string[][];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^_RadianceAsset$/)

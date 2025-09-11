@@ -49,6 +49,7 @@ export class Trans extends ModifierBase {
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
     dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -57,6 +58,7 @@ export class Trans extends ModifierBase {
     /** A value between 0 and 1 for the red channel reflectance. */
     rReflectance: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -65,6 +67,7 @@ export class Trans extends ModifierBase {
     /** A value between 0 and 1 for the green channel reflectance. */
     gReflectance: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -73,6 +76,7 @@ export class Trans extends ModifierBase {
     /** A value between 0 and 1 for the blue channel reflectance. */
     bReflectance: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -81,6 +85,7 @@ export class Trans extends ModifierBase {
     /** A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials. */
     specularity: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -89,6 +94,7 @@ export class Trans extends ModifierBase {
     /** A value between 0 and 1 for the roughness, specified as the RMS slope of surface facets. Roughness greater than 0.2 are not realistic. */
     roughness: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -97,6 +103,7 @@ export class Trans extends ModifierBase {
     /** The fraction of transmitted light that is transmitted diffusely in a scattering fashion. */
     transmittedDiff: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -105,6 +112,7 @@ export class Trans extends ModifierBase {
     /** The fraction of transmitted light that is not diffusely scattered. */
     transmittedSpec: number = 0;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Trans$/)

@@ -49,6 +49,7 @@ export class Mirror extends ModifierBase {
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
     dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -57,6 +58,7 @@ export class Mirror extends ModifierBase {
     /** A value between 0 and 1 for the red channel reflectance. */
     rReflectance: number = 1;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -65,6 +67,7 @@ export class Mirror extends ModifierBase {
     /** A value between 0 and 1 for the green channel reflectance. */
     gReflectance: number = 1;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -91,6 +94,7 @@ export class Mirror extends ModifierBase {
     /** An optional material (like the illum type) that may be used to specify a different material to be used for shading non-source rays. If None, this will keep the alternat_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance. */
     alternateMaterial?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Mirror$/)

@@ -5,6 +5,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Construction for Air Boundary objects. */
 export class AirBoundaryConstructionAbridged extends IDdEnergyBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^AirBoundaryConstructionAbridged$/)
@@ -12,6 +13,7 @@ export class AirBoundaryConstructionAbridged extends IDdEnergyBaseModel {
     /** type */
     type: string = "AirBoundaryConstructionAbridged";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -19,6 +21,7 @@ export class AirBoundaryConstructionAbridged extends IDdEnergyBaseModel {
     /** A positive number for the amount of air mixing between Rooms across the air boundary surface [m3/s-m2]. Default: 0.1 corresponds to average indoor air speeds of 0.1 m/s (roughly 20 fpm), which is typical of what would be induced by a HVAC system. */
     airMixingPerArea: number = 0.1;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)

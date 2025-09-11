@@ -5,13 +5,14 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { GeometryObjectTypes } from "./GeometryObjectTypes";
 
 export class ChangedObject extends _OpenAPIGenBaseModel {
-    @IsEnum(GeometryObjectTypes)
     @Type(() => String)
+    @IsEnum(GeometryObjectTypes)
     @IsDefined()
     @Expose({ name: "element_type" })
     /** Text for the type of object that has been changed. */
     elementType!: GeometryObjectTypes;
 	
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @Matches(/^[^,;!\n\t]+$/)
@@ -21,6 +22,7 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
     /** Text string for the unique object ID that has changed. */
     elementId!: string;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsDefined()
     @Expose({ name: "geometry_changed" })
@@ -33,18 +35,21 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
     /** A list of DisplayFace3D dictionaries for the new, changed geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been changed. Note that this attribute is always included in the ChangedObject, even when geometry_changed is False. */
     geometry!: Object[];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "element_name" })
     /** Text string for the display name of the object that has changed. */
     elementName?: string;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "energy_changed" })
     /** A boolean to note whether the energy properties of the object have changed (True) or not (False) such that it is possible for the properties of the changed object to be applied to the base model. For Rooms, this property will only be true if the energy property assigned to the Room has changed and will not be true if a property assigned to an individual child Face or Aperture has changed. */
     energyChanged: boolean = false;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "radiance_changed" })
@@ -57,6 +62,7 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
     /** A list of DisplayFace3D dictionaries for the existing (base) geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been changed. This attribute is optional and will NOT be output if geometry_changed is False. */
     existingGeometry?: Object[];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ChangedObject$/)

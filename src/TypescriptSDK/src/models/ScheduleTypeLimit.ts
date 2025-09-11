@@ -8,6 +8,7 @@ import { ScheduleUnitType } from "./ScheduleUnitType";
 
 /** Specifies the data types and limits for values contained in schedules. */
 export class ScheduleTypeLimit extends EnergyBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ScheduleTypeLimit$/)
@@ -25,15 +26,15 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
     /** Upper limit for the schedule type or NoLimit. */
     upperLimit: (NoLimit | number) = new NoLimit();
 	
-    @IsEnum(ScheduleNumericType)
     @Type(() => String)
+    @IsEnum(ScheduleNumericType)
     @IsOptional()
     @Expose({ name: "numeric_type" })
     /** numericType */
     numericType: ScheduleNumericType = ScheduleNumericType.Continuous;
 	
-    @IsEnum(ScheduleUnitType)
     @Type(() => String)
+    @IsEnum(ScheduleUnitType)
     @IsOptional()
     @Expose({ name: "unit_type" })
     /** unitType */

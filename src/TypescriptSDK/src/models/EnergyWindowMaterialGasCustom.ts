@@ -5,30 +5,35 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Create single layer of custom gas. */
 export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Expose({ name: "conductivity_coeff_a" })
     /** The A coefficient for gas conductivity in W/(m-K). */
     conductivityCoeffA!: number;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Expose({ name: "viscosity_coeff_a" })
     /** The A coefficient for gas viscosity in kg/(m-s). */
     viscosityCoeffA!: number;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Expose({ name: "specific_heat_coeff_a" })
     /** The A coefficient for gas specific heat in J/(kg-K). */
     specificHeatCoeffA!: number;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Expose({ name: "specific_heat_ratio" })
     /** The specific heat ratio for gas. */
     specificHeatRatio!: number;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Min(20)
@@ -37,6 +42,7 @@ export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
     /** The molecular weight for gas in g/mol. */
     molecularWeight!: number;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^EnergyWindowMaterialGasCustom$/)
@@ -44,42 +50,49 @@ export class EnergyWindowMaterialGasCustom extends IDdEnergyBaseModel {
     /** type */
     type: string = "EnergyWindowMaterialGasCustom";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "thickness" })
     /** Thickness of the gas layer in meters. Default: 0.0125. */
     thickness: number = 0.0125;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "conductivity_coeff_b" })
     /** The B coefficient for gas conductivity in W/(m-K2). */
     conductivityCoeffB: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "conductivity_coeff_c" })
     /** The C coefficient for gas conductivity in W/(m-K3). */
     conductivityCoeffC: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "viscosity_coeff_b" })
     /** The B coefficient for gas viscosity in kg/(m-s-K). */
     viscosityCoeffB: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "viscosity_coeff_c" })
     /** The C coefficient for gas viscosity in kg/(m-s-K2). */
     viscosityCoeffC: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "specific_heat_coeff_b" })
     /** The B coefficient for gas specific heat in J/(kg-K2). */
     specificHeatCoeffB: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "specific_heat_coeff_c" })

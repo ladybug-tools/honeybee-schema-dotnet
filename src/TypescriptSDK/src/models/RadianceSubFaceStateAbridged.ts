@@ -6,22 +6,23 @@ import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged";
 
 /** RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door.\n     */
 export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
-    @IsInstance(Face3D)
     @Type(() => Face3D)
+    @IsInstance(Face3D)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "vmtx_geometry" })
     /** A Face3D for the view matrix geometry (default: None). */
     vmtxGeometry?: Face3D;
 	
-    @IsInstance(Face3D)
     @Type(() => Face3D)
+    @IsInstance(Face3D)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "dmtx_geometry" })
     /** A Face3D for the daylight matrix geometry (default: None). */
     dmtxGeometry?: Face3D;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^RadianceSubFaceStateAbridged$/)

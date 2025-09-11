@@ -6,6 +6,7 @@ import { StateGeometryAbridged } from "./StateGeometryAbridged";
 
 /** RadianceShadeStateAbridged represents a single state for a dynamic Shade. */
 export class RadianceShadeStateAbridged extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^RadianceShadeStateAbridged$/)
@@ -13,12 +14,14 @@ export class RadianceShadeStateAbridged extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "RadianceShadeStateAbridged";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "modifier" })
     /** A Radiance Modifier identifier (default: None). */
     modifier?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "modifier_direct" })
@@ -26,8 +29,8 @@ export class RadianceShadeStateAbridged extends _OpenAPIGenBaseModel {
     modifierDirect?: string;
 	
     @IsArray()
-    @IsInstance(StateGeometryAbridged, { each: true })
     @Type(() => StateGeometryAbridged)
+    @IsInstance(StateGeometryAbridged, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "shades" })

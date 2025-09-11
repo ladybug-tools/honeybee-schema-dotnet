@@ -7,6 +7,7 @@ import { VentilationControlType } from "./VentilationControlType";
 
 /** The global parameters used in the ventilation simulation. */
 export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^VentilationSimulationControl$/)
@@ -14,13 +15,14 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "VentilationSimulationControl";
 	
-    @IsEnum(VentilationControlType)
     @Type(() => String)
+    @IsEnum(VentilationControlType)
     @IsOptional()
     @Expose({ name: "vent_control_type" })
     /** Text indicating type of ventilation control. Choices are: SingleZone, MultiZoneWithDistribution, MultiZoneWithoutDistribution. The MultiZone options will model air flow with the AirflowNetwork model, which is generally more accurate then the SingleZone option, but will take considerably longer to simulate, and requires defining more ventilation parameters to explicitly account for weather and building-induced pressure differences, and the leakage geometry corresponding to specific windows, doors, and surface cracks. */
     ventControlType: VentilationControlType = VentilationControlType.SingleZone;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(-273.15)
@@ -28,6 +30,7 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
     /** Reference temperature measurement in Celsius under which the surface crack data were obtained. */
     referenceTemperature: number = 20;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(31000)
@@ -36,6 +39,7 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
     /** Reference barometric pressure measurement in Pascals under which the surface crack data were obtained. */
     referencePressure: number = 101325;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -43,13 +47,14 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
     /** Reference humidity ratio measurement in kgWater/kgDryAir under which the surface crack data were obtained. */
     referenceHumidityRatio: number = 0;
 	
-    @IsEnum(BuildingType)
     @Type(() => String)
+    @IsEnum(BuildingType)
     @IsOptional()
     @Expose({ name: "building_type" })
     /** Text indicating relationship between building footprint and height used to calculate the wind pressure coefficients for exterior surfaces.Choices are: LowRise and HighRise. LowRise corresponds to rectangular building whose height is less then three times the width and length of the footprint. HighRise corresponds to a rectangular building whose height is more than three times the width and length of the footprint. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate. */
     buildingType: BuildingType = BuildingType.LowRise;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -58,6 +63,7 @@ export class VentilationSimulationControl extends _OpenAPIGenBaseModel {
     /** The clockwise rotation in degrees from true North of the long axis of the building. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate. */
     longAxisAngle: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Max(1)

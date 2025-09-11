@@ -7,6 +7,7 @@ import { Roughness } from "./Roughness";
 
 /** Material representing vegetation on the exterior of an opaque construction. */
 export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^EnergyMaterialVegetation$/)
@@ -14,13 +15,14 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     /** type */
     type: string = "EnergyMaterialVegetation";
 	
-    @IsEnum(Roughness)
     @Type(() => String)
+    @IsEnum(Roughness)
     @IsOptional()
     @Expose({ name: "roughness" })
     /** roughness */
     roughness: Roughness = Roughness.MediumRough;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Max(3)
@@ -28,18 +30,21 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     /** Thickness of the soil layer in meters. */
     thickness: number = 0.1;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "conductivity" })
     /** Thermal conductivity of the dry soil in W/m-K. */
     conductivity: number = 0.35;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "density" })
     /** Density of the dry soil in kg/m3. */
     density: number = 1100;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(100)
@@ -47,6 +52,7 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     /** Specific heat of the dry soil in J/kg-K. */
     specificHeat: number = 1200;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Max(0.99999)
@@ -54,6 +60,7 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     /** Fraction of incident long wavelength radiation that is absorbed by the soil. Default: 0.9. */
     soilThermalAbsorptance: number = 0.9;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -62,6 +69,7 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     /** Fraction of incident solar radiation absorbed by the soil. Default: 0.7. */
     soilSolarAbsorptance: number = 0.7;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -70,6 +78,7 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     /** Fraction of incident visible wavelength radiation absorbed by the material. Default: 0.7. */
     soilVisibleAbsorptance: number = 0.7;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0.005)
@@ -78,6 +87,7 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     /** The height of plants in the vegetation in meters. */
     plantHeight: number = 0.2;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0.001)
@@ -86,6 +96,7 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     /** The projected leaf area per unit area of soil surface (aka. Leaf Area Index or LAI). Note that the fraction of vegetation cover is calculated directly from LAI using an empirical relation. */
     leafAreaIndex: number = 1;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0.005)
@@ -94,6 +105,7 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     /** The fraction of incident solar radiation that is reflected by the leaf surfaces. Solar radiation includes the visible spectrum as well as infrared and ultraviolet wavelengths. Typical values are 0.18 to 0.25. */
     leafReflectivity: number = 0.22;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0.8)
@@ -102,6 +114,7 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     /** The ratio of thermal radiation emitted from leaf surfaces to that emitted by an ideal black body at the same temperature. */
     leafEmissivity: number = 0.95;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(50)
@@ -110,6 +123,7 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     /** The resistance of the plants to moisture transport [s/m]. Plants with low values of stomatal resistance will result in higher evapotranspiration rates than plants with high resistance. */
     minStomatalResist: number = 180;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0.1)
@@ -118,6 +132,7 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     /** The saturation moisture content of the soil by volume. */
     satVolMoistCont: number = 0.3;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0.01)
@@ -126,6 +141,7 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     /** The residual moisture content of the soil by volume. */
     residualVolMoistCont: number = 0.01;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0.05)
@@ -134,8 +150,8 @@ export class EnergyMaterialVegetation extends IDdEnergyBaseModel {
     /** The initial moisture content of the soil by volume. */
     initVolMoistCont: number = 0.01;
 	
-    @IsEnum(MoistureDiffusionModel)
     @Type(() => String)
+    @IsEnum(MoistureDiffusionModel)
     @IsOptional()
     @Expose({ name: "moist_diff_model" })
     /** moistDiffModel */

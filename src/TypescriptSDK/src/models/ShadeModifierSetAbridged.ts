@@ -5,6 +5,7 @@ import { BaseModifierSetAbridged } from "./BaseModifierSetAbridged";
 
 /** Abridged set containing radiance modifiers needed for a model's Shade. */
 export class ShadeModifierSetAbridged extends BaseModifierSetAbridged {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ShadeModifierSetAbridged$/)

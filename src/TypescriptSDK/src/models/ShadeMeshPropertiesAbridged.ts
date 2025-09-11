@@ -6,6 +6,7 @@ import { ShadeMeshEnergyPropertiesAbridged } from "./ShadeMeshEnergyPropertiesAb
 import { ShadeMeshRadiancePropertiesAbridged } from "./ShadeMeshRadiancePropertiesAbridged";
 
 export class ShadeMeshPropertiesAbridged extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ShadeMeshPropertiesAbridged$/)
@@ -13,16 +14,16 @@ export class ShadeMeshPropertiesAbridged extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "ShadeMeshPropertiesAbridged";
 	
-    @IsInstance(ShadeMeshEnergyPropertiesAbridged)
     @Type(() => ShadeMeshEnergyPropertiesAbridged)
+    @IsInstance(ShadeMeshEnergyPropertiesAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "energy" })
     /** energy */
     energy?: ShadeMeshEnergyPropertiesAbridged;
 	
-    @IsInstance(ShadeMeshRadiancePropertiesAbridged)
     @Type(() => ShadeMeshRadiancePropertiesAbridged)
+    @IsInstance(ShadeMeshRadiancePropertiesAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "radiance" })

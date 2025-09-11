@@ -9,6 +9,7 @@ import { Point3D } from "./Point3D";
 import { ValidationParent } from "./ValidationParent";
 
 export class ValidationError {
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @Matches(/([0-9]+)/)
@@ -18,39 +19,43 @@ export class ValidationError {
     /** Text with 6 digits for the error code. The first two digits indicate whether the error is a core honeybee error (00) vs. an extension error (any non-zero number). The second two digits indicate the nature of the error (00 is an identifier error, 01 is a geometry error, 02 is an adjacency error). The third two digits are used to give a unique ID to each condition moving upwards from more specific/detailed objects/errors to coarser/more abstract objects/errors. A full list of error codes can be found here: https://docs.pollination.solutions/user-manual/rhino-plugin/troubleshooting/help-with-modeling-error-codes */
     code!: string;
 	
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @Expose({ name: "error_type" })
     /** A human-readable version of the error code, typically not more than five words long. */
     errorType!: string;
 	
-    @IsEnum(ExtensionTypes)
     @Type(() => String)
+    @IsEnum(ExtensionTypes)
     @IsDefined()
     @Expose({ name: "extension_type" })
     /** Text for the Honeybee extension from which the error originated (from the ExtensionTypes enumeration). */
     extensionType!: ExtensionTypes;
 	
-    @IsEnum(ObjectTypes)
     @Type(() => String)
+    @IsEnum(ObjectTypes)
     @IsDefined()
     @Expose({ name: "element_type" })
     /** Text for the type of object that caused the error. */
     elementType!: ObjectTypes;
 	
     @IsArray()
+    @Type(() => String)
     @IsString({ each: true })
     @IsDefined()
     @Expose({ name: "element_id" })
     /** A list of text strings for the unique object IDs that caused the error. The list typically contains a single item but there are some types errors that stem from multiple objects like mis-matched area adjacencies or overlapping Room geometries. Note that the IDs in this list can be the identifier of a core object like a Room or a Face or it can be for an extension object like a SensorGrid or a Construction. */
     elementId!: string[];
 	
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @Expose({ name: "message" })
     /** Text for the error message with a detailed description of what exactly is invalid about the element. */
     message!: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ValidationError$/)
@@ -59,6 +64,7 @@ export class ValidationError {
     type: string = "ValidationError";
 	
     @IsArray()
+    @Type(() => String)
     @IsString({ each: true })
     @IsOptional()
     @Expose({ name: "element_name" })
@@ -69,8 +75,8 @@ export class ValidationError {
     @IsArray({ each: true })
     @ValidateNested({each: true })
     @Type(() => Array)
-    @IsInstance(ValidationParent, { each: true })
     @Type(() => ValidationParent)
+    @IsInstance(ValidationParent, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "parents" })
@@ -78,8 +84,8 @@ export class ValidationError {
     parents?: ValidationParent[][];
 	
     @IsArray()
-    @IsInstance(ValidationParent, { each: true })
     @Type(() => ValidationParent)
+    @IsInstance(ValidationParent, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "top_parents" })

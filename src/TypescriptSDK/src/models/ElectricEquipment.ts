@@ -7,6 +7,7 @@ import { ScheduleRuleset } from "./ScheduleRuleset";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class ElectricEquipment extends IDdEnergyBaseModel {
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Min(0)
@@ -25,6 +26,7 @@ export class ElectricEquipment extends IDdEnergyBaseModel {
     /** The schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile. */
     schedule!: (ScheduleRuleset | ScheduleFixedInterval);
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -33,6 +35,7 @@ export class ElectricEquipment extends IDdEnergyBaseModel {
     /** Number for the amount of long-wave radiation heat given off by equipment. Default value is 0. */
     radiantFraction: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -41,6 +44,7 @@ export class ElectricEquipment extends IDdEnergyBaseModel {
     /** Number for the amount of latent heat given off by equipment. Default value is 0. */
     latentFraction: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -49,6 +53,7 @@ export class ElectricEquipment extends IDdEnergyBaseModel {
     /** Number for the amount of “lost” heat being given off by equipment. The default value is 0. */
     lostFraction: number = 0;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ElectricEquipment$/)

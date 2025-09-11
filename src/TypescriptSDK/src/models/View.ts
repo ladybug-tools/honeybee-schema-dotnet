@@ -7,6 +7,7 @@ import { ViewType } from "./ViewType";
 /** A single Radiance of sensors. */
 export class View extends _RadianceAsset {
     @IsArray()
+    @Type(() => Number)
     @IsNumber({},{ each: true })
     @IsDefined()
     @Expose({ name: "position" })
@@ -14,6 +15,7 @@ export class View extends _RadianceAsset {
     position!: number[];
 	
     @IsArray()
+    @Type(() => Number)
     @IsNumber({},{ each: true })
     @IsDefined()
     @Expose({ name: "direction" })
@@ -21,12 +23,14 @@ export class View extends _RadianceAsset {
     direction!: number[];
 	
     @IsArray()
+    @Type(() => Number)
     @IsNumber({},{ each: true })
     @IsDefined()
     @Expose({ name: "up_vector" })
     /** The view up (-vu) vector as an array of (x, y, z) values. */
     upVector!: number[];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^View$/)
@@ -34,49 +38,56 @@ export class View extends _RadianceAsset {
     /** type */
     type: string = "View";
 	
-    @IsEnum(ViewType)
     @Type(() => String)
+    @IsEnum(ViewType)
     @IsOptional()
     @Expose({ name: "view_type" })
     /** viewType */
     viewType: ViewType = ViewType.V;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "h_size" })
     /** A number for the horizontal field of view in degrees (for all perspective projections including fisheye). For a parallel projection, this is the view width in world coordinates. */
     hSize: number = 60;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "v_size" })
     /** A number for the vertical field of view in degrees (for all perspective projections including fisheye). For a parallel projection, this is the view width in world coordinates. */
     vSize: number = 60;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "shift" })
     /** The view shift (-vs). This is the amount the actual image will be shifted to the right of the specified view. This option is useful for generating skewed perspectives or rendering an image a piece at a time. A value of 1 means that the rendered image starts just to the right of the normal view. A value of -1 would be to the left. Larger or fractional values are permitted as well. */
     shift?: number;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "lift" })
     /** The view lift (-vl). This is the amount the actual image will be lifted up from the specified view. This option is useful for generating skewed perspectives or rendering an image a piece at a time. A value of 1 means that the rendered image starts just to the right of the normal view. A value of -1 would be to the left. Larger or fractional values are permitted as well. */
     lift?: number;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "fore_clip" })
     /** View fore clip (-vo) at a distance from the view point.The plane will be perpendicular to the view direction for perspective and parallel view types. For fisheye view types, the clipping plane is actually a clipping sphere, centered on the view point with fore_clip radius. Objects in front of this imaginary surface will not be visible. */
     foreClip?: number;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "aft_clip" })
     /** View aft clip (-va) at a distance from the view point.Like the view fore plane, it will be perpendicular to the view direction for perspective and parallel view types. For fisheye view types, the clipping plane is actually a clipping sphere, centered on the view point with radius val. */
     aftClip?: number;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "group_identifier" })

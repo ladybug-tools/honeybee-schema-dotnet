@@ -20,6 +20,7 @@ export class OpaqueConstruction extends IDdEnergyBaseModel {
     /** List of opaque material definitions. The order of the materials is from exterior to interior. */
     materials!: (EnergyMaterial | EnergyMaterialNoMass | EnergyMaterialVegetation)[];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^OpaqueConstruction$/)

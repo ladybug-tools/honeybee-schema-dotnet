@@ -13,14 +13,15 @@ import { Units } from "./Units";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Model extends IDdBaseModel {
-    @IsInstance(ModelProperties)
     @Type(() => ModelProperties)
+    @IsInstance(ModelProperties)
     @ValidateNested()
     @IsDefined()
     @Expose({ name: "properties" })
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
     properties!: ModelProperties;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Model$/)
@@ -28,6 +29,7 @@ export class Model extends IDdBaseModel {
     /** type */
     type: string = "Model";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/([0-9]+)\.([0-9]+)\.([0-9]+)/)
@@ -36,8 +38,8 @@ export class Model extends IDdBaseModel {
     version: string = "1.59.1";
 	
     @IsArray()
-    @IsInstance(Room, { each: true })
     @Type(() => Room)
+    @IsInstance(Room, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "rooms" })
@@ -45,8 +47,8 @@ export class Model extends IDdBaseModel {
     rooms?: Room[];
 	
     @IsArray()
-    @IsInstance(Face, { each: true })
     @Type(() => Face)
+    @IsInstance(Face, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "orphaned_faces" })
@@ -54,8 +56,8 @@ export class Model extends IDdBaseModel {
     orphanedFaces?: Face[];
 	
     @IsArray()
-    @IsInstance(Shade, { each: true })
     @Type(() => Shade)
+    @IsInstance(Shade, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "orphaned_shades" })
@@ -63,8 +65,8 @@ export class Model extends IDdBaseModel {
     orphanedShades?: Shade[];
 	
     @IsArray()
-    @IsInstance(Aperture, { each: true })
     @Type(() => Aperture)
+    @IsInstance(Aperture, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "orphaned_apertures" })
@@ -72,8 +74,8 @@ export class Model extends IDdBaseModel {
     orphanedApertures?: Aperture[];
 	
     @IsArray()
-    @IsInstance(Door, { each: true })
     @Type(() => Door)
+    @IsInstance(Door, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "orphaned_doors" })
@@ -81,21 +83,22 @@ export class Model extends IDdBaseModel {
     orphanedDoors?: Door[];
 	
     @IsArray()
-    @IsInstance(ShadeMesh, { each: true })
     @Type(() => ShadeMesh)
+    @IsInstance(ShadeMesh, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "shade_meshes" })
     /** A list of ShadeMesh in the model. */
     shadeMeshes?: ShadeMesh[];
 	
-    @IsEnum(Units)
     @Type(() => String)
+    @IsEnum(Units)
     @IsOptional()
     @Expose({ name: "units" })
     /** Text indicating the units in which the model geometry exists. This is used to scale the geometry to the correct units for simulation engines like EnergyPlus, which requires all geometry be in meters. */
     units: Units = Units.Meters;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -103,6 +106,7 @@ export class Model extends IDdBaseModel {
     /** The maximum difference between x, y, and z values at which vertices are considered equivalent. This value should be in the Model units and it is used in a variety of checks, including checks for whether Room faces form a closed volume and subsequently correcting all face normals point outward from the Room. A value of 0 will result in bypassing all checks so it is recommended that this always be a positive number when such checks have not already been performed on a Model. The default of 0.01 is suitable for models in meters. */
     tolerance: number = 0.01;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)

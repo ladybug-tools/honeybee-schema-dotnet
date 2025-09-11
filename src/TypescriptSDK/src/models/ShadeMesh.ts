@@ -7,22 +7,23 @@ import { ShadeMeshPropertiesAbridged } from "./ShadeMeshPropertiesAbridged";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class ShadeMesh extends IDdBaseModel {
-    @IsInstance(Mesh3D)
     @Type(() => Mesh3D)
+    @IsInstance(Mesh3D)
     @ValidateNested()
     @IsDefined()
     @Expose({ name: "geometry" })
     /** A Mesh3D for the geometry. */
     geometry!: Mesh3D;
 	
-    @IsInstance(ShadeMeshPropertiesAbridged)
     @Type(() => ShadeMeshPropertiesAbridged)
+    @IsInstance(ShadeMeshPropertiesAbridged)
     @ValidateNested()
     @IsDefined()
     @Expose({ name: "properties" })
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
     properties!: ShadeMeshPropertiesAbridged;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ShadeMesh$/)
@@ -30,6 +31,7 @@ export class ShadeMesh extends IDdBaseModel {
     /** type */
     type: string = "ShadeMesh";
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "is_detached" })

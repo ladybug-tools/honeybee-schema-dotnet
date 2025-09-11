@@ -5,6 +5,7 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Used to specify dry bulb conditions on a design day. */
 export class DryBulbCondition extends _OpenAPIGenBaseModel {
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Min(-90)
@@ -13,6 +14,7 @@ export class DryBulbCondition extends _OpenAPIGenBaseModel {
     /** The maximum dry bulb temperature on the design day [C]. */
     dryBulbMax!: number;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Min(0)
@@ -20,6 +22,7 @@ export class DryBulbCondition extends _OpenAPIGenBaseModel {
     /** The difference between min and max temperatures on the design day [C]. */
     dryBulbRange!: number;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^DryBulbCondition$/)

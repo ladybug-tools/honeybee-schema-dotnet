@@ -6,6 +6,7 @@ import { Roughness } from "./Roughness";
 
 /** No mass opaque material representing a layer within an opaque construction.\n\nUsed when only the thermal resistance (R value) of the material is known. */
 export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Min(0.001)
@@ -13,6 +14,7 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
     /** The thermal resistance (R-value) of the material layer [m2-K/W]. */
     rValue!: number;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^EnergyMaterialNoMass$/)
@@ -20,13 +22,14 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
     /** type */
     type: string = "EnergyMaterialNoMass";
 	
-    @IsEnum(Roughness)
     @Type(() => String)
+    @IsEnum(Roughness)
     @IsOptional()
     @Expose({ name: "roughness" })
     /** roughness */
     roughness: Roughness = Roughness.MediumRough;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Max(0.99999)
@@ -34,6 +37,7 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
     /** Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9. */
     thermalAbsorptance: number = 0.9;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -42,6 +46,7 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
     /** Fraction of incident solar radiation absorbed by the material. Default: 0.7. */
     solarAbsorptance: number = 0.7;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)

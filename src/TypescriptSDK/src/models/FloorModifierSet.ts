@@ -50,6 +50,7 @@ export class FloorModifierSet extends _OpenAPIGenBaseModel {
     /** A radiance modifier object for faces with a boundary condition other than Outdoors. */
     interiorModifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^FloorModifierSet$/)

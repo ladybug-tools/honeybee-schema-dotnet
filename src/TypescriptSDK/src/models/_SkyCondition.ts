@@ -6,18 +6,21 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 /** Used to specify sky conditions on a design day. */
 export class _SkyCondition extends _OpenAPIGenBaseModel {
     @IsArray()
+    @Type(() => Number)
     @IsInt({ each: true })
     @IsDefined()
     @Expose({ name: "date" })
     /** A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case). */
     date!: number[];
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "daylight_savings" })
     /** Boolean to indicate whether daylight savings time is active on the design day. */
     daylightSavings: boolean = false;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^_SkyCondition$/)

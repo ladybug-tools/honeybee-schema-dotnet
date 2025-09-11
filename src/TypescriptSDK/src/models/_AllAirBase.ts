@@ -7,20 +7,21 @@ import { Vintages } from "./Vintages";
 
 /** Base class for all-air systems.\n\nAll-air systems provide both ventilation and heating + cooling demand with\nthe same stream of warm/cool air. As such, they often grant tight control\nover zone humidity. However, because such systems often involve the\ncooling of air only to reheat it again, they are often more energy intensive\nthan systems that separate ventilation from the meeting of thermal loads. */
 export class _AllAirBase extends IDdEnergyBaseModel {
-    @IsEnum(Vintages)
     @Type(() => String)
+    @IsEnum(Vintages)
     @IsOptional()
     @Expose({ name: "vintage" })
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
     vintage: Vintages = Vintages.ASHRAE_2019;
 	
-    @IsEnum(AllAirEconomizerType)
     @Type(() => String)
+    @IsEnum(AllAirEconomizerType)
     @IsOptional()
     @Expose({ name: "economizer_type" })
     /** Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration). */
     economizerType: AllAirEconomizerType = AllAirEconomizerType.NoEconomizer;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -29,6 +30,7 @@ export class _AllAirBase extends IDdEnergyBaseModel {
     /** A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. */
     sensibleHeatRecovery: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -37,12 +39,14 @@ export class _AllAirBase extends IDdEnergyBaseModel {
     /** A number between 0 and 1 for the effectiveness of latent heat recovery within the system. */
     latentHeatRecovery: number = 0;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "demand_controlled_ventilation" })
     /** Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms. */
     demandControlledVentilation: boolean = false;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^_AllAirBase$/)

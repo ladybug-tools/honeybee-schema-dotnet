@@ -5,6 +5,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** This object specifies the properties of window shade materials. */
 export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^EnergyWindowMaterialShade$/)
@@ -12,6 +13,7 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
     /** type */
     type: string = "EnergyWindowMaterialShade";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -19,6 +21,7 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
     /** The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default: 0.4. */
     solarTransmittance: number = 0.4;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -26,6 +29,7 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
     /** The reflectance averaged over the solar spectrum. It us assumed same on both sides of shade and independent of incidence angle. Default value is 0.5 */
     solarReflectance: number = 0.5;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -33,6 +37,7 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
     /** The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default: 0.4. */
     visibleTransmittance: number = 0.4;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -40,12 +45,14 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
     /** The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default: 0.4 */
     visibleReflectance: number = 0.4;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "emissivity" })
     /** The effective long-wave infrared hemispherical emissivity. It is assumed same on both sides of shade. Default: 0.9. */
     emissivity: number = 0.9;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -53,18 +60,21 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
     /** The effective long-wave transmittance. It is assumed independent of incidence angle. Default: 0. */
     infraredTransmittance: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "thickness" })
     /** The thickness of the shade material in meters. Default: 0.005. */
     thickness: number = 0.005;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "conductivity" })
     /** The conductivity of the shade material in W/(m-K). Default value is 0.1. */
     conductivity: number = 0.1;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0.001)
@@ -73,6 +83,7 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
     /** The distance from shade to adjacent glass in meters. Default value is 0.05 */
     distanceToGlass: number = 0.05;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -81,6 +92,7 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
     /** The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. Default: 0.5. */
     topOpeningMultiplier: number = 0.5;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -89,6 +101,7 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
     /** The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. Default: 0.5. */
     bottomOpeningMultiplier: number = 0.5;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -97,6 +110,7 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
     /** The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. Default: 0.5. */
     leftOpeningMultiplier: number = 0.5;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -105,6 +119,7 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
     /** The effective area for air flow at the right side of the shade, divided by the vertical area between glass and shade. Default: 0.5. */
     rightOpeningMultiplier: number = 0.5;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)

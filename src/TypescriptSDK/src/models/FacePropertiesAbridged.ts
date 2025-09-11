@@ -6,6 +6,7 @@ import { FaceEnergyPropertiesAbridged } from "./FaceEnergyPropertiesAbridged";
 import { FaceRadiancePropertiesAbridged } from "./FaceRadiancePropertiesAbridged";
 
 export class FacePropertiesAbridged extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^FacePropertiesAbridged$/)
@@ -13,16 +14,16 @@ export class FacePropertiesAbridged extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "FacePropertiesAbridged";
 	
-    @IsInstance(FaceEnergyPropertiesAbridged)
     @Type(() => FaceEnergyPropertiesAbridged)
+    @IsInstance(FaceEnergyPropertiesAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "energy" })
     /** energy */
     energy?: FaceEnergyPropertiesAbridged;
 	
-    @IsInstance(FaceRadiancePropertiesAbridged)
     @Type(() => FaceRadiancePropertiesAbridged)
+    @IsInstance(FaceRadiancePropertiesAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "radiance" })

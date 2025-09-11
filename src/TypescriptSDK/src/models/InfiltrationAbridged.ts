@@ -5,6 +5,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class InfiltrationAbridged extends IDdEnergyBaseModel {
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Min(0)
@@ -12,6 +13,7 @@ export class InfiltrationAbridged extends IDdEnergyBaseModel {
     /** Number for the infiltration per exterior surface area in m3/s-m2. */
     flowPerExteriorArea!: number;
 	
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @MinLength(1)
@@ -20,6 +22,7 @@ export class InfiltrationAbridged extends IDdEnergyBaseModel {
     /** Identifier of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile. */
     schedule!: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^InfiltrationAbridged$/)
@@ -27,6 +30,7 @@ export class InfiltrationAbridged extends IDdEnergyBaseModel {
     /** type */
     type: string = "InfiltrationAbridged";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -34,6 +38,7 @@ export class InfiltrationAbridged extends IDdEnergyBaseModel {
     /** constantCoefficient */
     constantCoefficient: number = 1;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -41,6 +46,7 @@ export class InfiltrationAbridged extends IDdEnergyBaseModel {
     /** temperatureCoefficient */
     temperatureCoefficient: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)

@@ -6,6 +6,7 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 /** A single Radiance of sensors. */
 export class Sensor extends _OpenAPIGenBaseModel {
     @IsArray()
+    @Type(() => Number)
     @IsNumber({},{ each: true })
     @IsDefined()
     @Expose({ name: "pos" })
@@ -13,12 +14,14 @@ export class Sensor extends _OpenAPIGenBaseModel {
     pos!: number[];
 	
     @IsArray()
+    @Type(() => Number)
     @IsNumber({},{ each: true })
     @IsDefined()
     @Expose({ name: "dir" })
     /** Direction of sensor as an array of (x, y, z) values. */
     dir!: number[];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Sensor$/)

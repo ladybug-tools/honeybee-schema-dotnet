@@ -9,8 +9,8 @@ import { WindowConstruction } from "./WindowConstruction";
 /** Construction for window objects with an included shade layer. */
 export class WindowConstructionDynamic extends IDdEnergyBaseModel {
     @IsArray()
-    @IsInstance(WindowConstruction, { each: true })
     @Type(() => WindowConstruction)
+    @IsInstance(WindowConstruction, { each: true })
     @ValidateNested({ each: true })
     @IsDefined()
     @Expose({ name: "constructions" })
@@ -28,6 +28,7 @@ export class WindowConstructionDynamic extends IDdEnergyBaseModel {
     /** A control schedule that dictates which constructions are active at given times throughout the simulation. The values of the schedule should be integers and range from 0 to one less then the number of constructions. Zero indicates that the first construction is active, one indicates that the second on is active, etc. The schedule type limits of this schedule should be ""Control Level."" If building custom schedule type limits that describe a particular range of states, the type limits should be ""Discrete"" and the unit type should be ""Mode,"" ""Control,"" or some other fractional unit. */
     schedule!: (ScheduleRuleset | ScheduleFixedInterval);
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^WindowConstructionDynamic$/)

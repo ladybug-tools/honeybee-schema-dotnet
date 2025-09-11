@@ -5,6 +5,7 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A set of constructions for aperture assemblies. */
 export class ApertureConstructionSetAbridged extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ApertureConstructionSetAbridged$/)
@@ -12,6 +13,7 @@ export class ApertureConstructionSetAbridged extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "ApertureConstructionSetAbridged";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -20,6 +22,7 @@ export class ApertureConstructionSetAbridged extends _OpenAPIGenBaseModel {
     /** Identifier for a WindowConstruction for all apertures with a Surface boundary condition. */
     interiorConstruction?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -28,6 +31,7 @@ export class ApertureConstructionSetAbridged extends _OpenAPIGenBaseModel {
     /** Identifier for a WindowConstruction for apertures with an Outdoors boundary condition, False is_operable property, and a Wall face type for their parent face. */
     windowConstruction?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -36,6 +40,7 @@ export class ApertureConstructionSetAbridged extends _OpenAPIGenBaseModel {
     /** Identifier for a WindowConstruction for apertures with a Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face. */
     skylightConstruction?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)

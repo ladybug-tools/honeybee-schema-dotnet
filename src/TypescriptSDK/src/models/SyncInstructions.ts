@@ -7,6 +7,7 @@ import { ChangedInstruction } from "./ChangedInstruction";
 import { DeletedInstruction } from "./DeletedInstruction";
 
 export class SyncInstructions extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^SyncInstructions$/)
@@ -15,8 +16,8 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
     type: string = "SyncInstructions";
 	
     @IsArray()
-    @IsInstance(ChangedInstruction, { each: true })
     @Type(() => ChangedInstruction)
+    @IsInstance(ChangedInstruction, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "changed_objects" })
@@ -24,8 +25,8 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
     changedObjects?: ChangedInstruction[];
 	
     @IsArray()
-    @IsInstance(DeletedInstruction, { each: true })
     @Type(() => DeletedInstruction)
+    @IsInstance(DeletedInstruction, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "deleted_objects" })
@@ -33,8 +34,8 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
     deletedObjects?: DeletedInstruction[];
 	
     @IsArray()
-    @IsInstance(AddedInstruction, { each: true })
     @Type(() => AddedInstruction)
+    @IsInstance(AddedInstruction, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "added_objects" })

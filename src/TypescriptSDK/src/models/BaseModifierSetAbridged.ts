@@ -5,18 +5,21 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for the abridged modifier sets assigned to Faces. */
 export class BaseModifierSetAbridged extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "exterior_modifier" })
     /** Identifier for a radiance modifier object for faces with an  Outdoors boundary condition. */
     exteriorModifier?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "interior_modifier" })
     /** Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors. */
     interiorModifier?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^BaseModifierSetAbridged$/)

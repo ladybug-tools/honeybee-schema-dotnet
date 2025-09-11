@@ -4,13 +4,14 @@ import { deepTransform } from '../deepTransform';
 import { ParentTypes } from "./ParentTypes";
 
 export class ValidationParent {
-    @IsEnum(ParentTypes)
     @Type(() => String)
+    @IsEnum(ParentTypes)
     @IsDefined()
     @Expose({ name: "parent_type" })
     /** Text for the type of object that the parent is. */
     parentType!: ParentTypes;
 	
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @Matches(/^[.A-Za-z0-9_-]+$/)
@@ -20,6 +21,7 @@ export class ValidationParent {
     /** Text string for the unique ID of the parent object. */
     id!: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ValidationParent$/)
@@ -27,6 +29,7 @@ export class ValidationParent {
     /** type */
     type: string = "ValidationParent";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "name" })

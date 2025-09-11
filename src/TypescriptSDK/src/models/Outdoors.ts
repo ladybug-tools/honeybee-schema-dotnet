@@ -6,6 +6,7 @@ import { Autocalculate } from "./Autocalculate";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class Outdoors extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Outdoors$/)
@@ -13,12 +14,14 @@ export class Outdoors extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "Outdoors";
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "sun_exposure" })
     /** A boolean noting whether the boundary is exposed to sun. */
     sunExposure: boolean = true;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "wind_exposure" })

@@ -5,6 +5,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Opaque material representing a layer within an opaque construction. */
 export class EnergyWindowFrame extends IDdEnergyBaseModel {
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Max(1)
@@ -12,12 +13,14 @@ export class EnergyWindowFrame extends IDdEnergyBaseModel {
     /** Number for the width of frame in plane of window [m]. The frame width is assumed to be the same on all sides of window.. */
     width!: number;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Expose({ name: "conductance" })
     /** Number for the thermal conductance of the frame material measured from inside to outside of the frame surface (no air films) and taking 2D conduction effects into account [W/m2-K]. */
     conductance!: number;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^EnergyWindowFrame$/)
@@ -25,6 +28,7 @@ export class EnergyWindowFrame extends IDdEnergyBaseModel {
     /** type */
     type: string = "EnergyWindowFrame";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Max(4)
@@ -32,6 +36,7 @@ export class EnergyWindowFrame extends IDdEnergyBaseModel {
     /** Number between 0 and 4 for the ratio of the glass conductance near the frame (excluding air films) divided by the glass conductance at the center of the glazing (excluding air films). This is used only for multi-pane glazing constructions. This ratio should usually be greater than 1.0 since the spacer material that separates the glass panes is usually more conductive than the gap between panes. A value of 1 effectively indicates no spacer. Values should usually be obtained from the LBNL WINDOW program so that the unique characteristics of the window construction can be accounted for. */
     edgeToCenterRatio: number = 1;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -40,6 +45,7 @@ export class EnergyWindowFrame extends IDdEnergyBaseModel {
     /** Number for the distance that the frame projects outward from the outside face of the glazing [m]. This is used to calculate shadowing of frame onto glass, solar absorbed by the frame, IR emitted and absorbed by the frame, and convection from frame. */
     outsideProjection: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -48,6 +54,7 @@ export class EnergyWindowFrame extends IDdEnergyBaseModel {
     /** Number for the distance that the frame projects inward from the inside face of the glazing [m]. This is used to calculate solar absorbed by the frame, IR emitted and absorbed by the frame, and convection from frame. */
     insideProjection: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Max(0.99999)
@@ -55,6 +62,7 @@ export class EnergyWindowFrame extends IDdEnergyBaseModel {
     /** Fraction of incident long wavelength radiation that is absorbed by the frame material. */
     thermalAbsorptance: number = 0.9;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -63,6 +71,7 @@ export class EnergyWindowFrame extends IDdEnergyBaseModel {
     /** Fraction of incident solar radiation absorbed by the frame material. */
     solarAbsorptance: number = 0.7;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)

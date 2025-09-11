@@ -5,6 +5,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class ServiceHotWaterAbridged extends IDdEnergyBaseModel {
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Min(0)
@@ -12,6 +13,7 @@ export class ServiceHotWaterAbridged extends IDdEnergyBaseModel {
     /** Number for the total volume flow rate of water per unit area of floor [L/h-m2]. */
     flowPerArea!: number;
 	
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @MinLength(1)
@@ -20,6 +22,7 @@ export class ServiceHotWaterAbridged extends IDdEnergyBaseModel {
     /** Identifier of the schedule for the hot water use over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile. */
     schedule!: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ServiceHotWaterAbridged$/)
@@ -27,12 +30,14 @@ export class ServiceHotWaterAbridged extends IDdEnergyBaseModel {
     /** type */
     type: string = "ServiceHotWaterAbridged";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "target_temperature" })
     /** Number for the target temperature of water out of the tap (C). This the temperature after hot water has been mixed with cold water from the water mains. The default is 60C, which essentially assumes that the flow_per_area on this object is only for water straight out of the water heater. */
     targetTemperature: number = 60;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -41,6 +46,7 @@ export class ServiceHotWaterAbridged extends IDdEnergyBaseModel {
     /** A number between 0 and 1 for the fraction of the total hot water load given off as sensible heat in the zone. */
     sensibleFraction: number = 0.2;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)

@@ -5,6 +5,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Describe an entire glazing system rather than individual layers.\n\nUsed when only very limited information is available on the glazing layers or when\nspecific performance levels are being targeted. */
 export class EnergyWindowMaterialSimpleGlazSys extends IDdEnergyBaseModel {
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Max(12)
@@ -12,12 +13,14 @@ export class EnergyWindowMaterialSimpleGlazSys extends IDdEnergyBaseModel {
     /** The overall heat transfer coefficient for window system in W/m2-K. Note that constructions with U-values above 5.8 should not be assigned to skylights as this implies the resistance of the window is negative when air films are subtracted. */
     uFactor!: number;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Expose({ name: "shgc" })
     /** Unit-less quantity for the Solar Heat Gain Coefficient (solar transmittance + conduction) at normal incidence and vertical orientation. */
     shgc!: number;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^EnergyWindowMaterialSimpleGlazSys$/)
@@ -25,6 +28,7 @@ export class EnergyWindowMaterialSimpleGlazSys extends IDdEnergyBaseModel {
     /** type */
     type: string = "EnergyWindowMaterialSimpleGlazSys";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "vt" })

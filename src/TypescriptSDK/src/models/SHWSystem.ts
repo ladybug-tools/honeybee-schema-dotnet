@@ -7,6 +7,7 @@ import { SHWEquipmentType } from "./SHWEquipmentType";
 
 /** Provides a model for a Service Hot Water system. */
 export class SHWSystem extends IDdEnergyBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^SHWSystem$/)
@@ -14,8 +15,8 @@ export class SHWSystem extends IDdEnergyBaseModel {
     /** type */
     type: string = "SHWSystem";
 	
-    @IsEnum(SHWEquipmentType)
     @Type(() => String)
+    @IsEnum(SHWEquipmentType)
     @IsOptional()
     @Expose({ name: "equipment_type" })
     /** Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone. */
@@ -31,6 +32,7 @@ export class SHWSystem extends IDdEnergyBaseModel {
     /** A number for the ambient temperature in which the hot water tank is located [C]. This can also be the identifier of a Room in which the tank is located. */
     ambientCondition: (number | string) = 22;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "ambient_loss_coefficient" })

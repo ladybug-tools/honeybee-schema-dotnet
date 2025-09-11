@@ -13,6 +13,7 @@ import { Ventilation } from "./Ventilation";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class ProgramType extends IDdEnergyBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ProgramType$/)
@@ -20,64 +21,64 @@ export class ProgramType extends IDdEnergyBaseModel {
     /** type */
     type: string = "ProgramType";
 	
-    @IsInstance(People)
     @Type(() => People)
+    @IsInstance(People)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "people" })
     /** People to describe the occupancy of the program. If None, no occupancy will be assumed for the program. */
     people?: People;
 	
-    @IsInstance(Lighting)
     @Type(() => Lighting)
+    @IsInstance(Lighting)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "lighting" })
     /** Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program. */
     lighting?: Lighting;
 	
-    @IsInstance(ElectricEquipment)
     @Type(() => ElectricEquipment)
+    @IsInstance(ElectricEquipment)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "electric_equipment" })
     /** ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed. */
     electricEquipment?: ElectricEquipment;
 	
-    @IsInstance(GasEquipment)
     @Type(() => GasEquipment)
+    @IsInstance(GasEquipment)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "gas_equipment" })
     /** GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed. */
     gasEquipment?: GasEquipment;
 	
-    @IsInstance(ServiceHotWater)
     @Type(() => ServiceHotWater)
+    @IsInstance(ServiceHotWater)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "service_hot_water" })
     /** ServiceHotWater object to describe the usage of hot water within the program. If None, no hot water will be assumed. */
     serviceHotWater?: ServiceHotWater;
 	
-    @IsInstance(Infiltration)
     @Type(() => Infiltration)
+    @IsInstance(Infiltration)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "infiltration" })
     /** Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program. */
     infiltration?: Infiltration;
 	
-    @IsInstance(Ventilation)
     @Type(() => Ventilation)
+    @IsInstance(Ventilation)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "ventilation" })
     /** Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed. */
     ventilation?: Ventilation;
 	
-    @IsInstance(Setpoint)
     @Type(() => Setpoint)
+    @IsInstance(Setpoint)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "setpoint" })

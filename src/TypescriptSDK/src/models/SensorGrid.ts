@@ -9,14 +9,15 @@ import { Sensor } from "./Sensor";
 /** A grid of sensors. */
 export class SensorGrid extends _RadianceAsset {
     @IsArray()
-    @IsInstance(Sensor, { each: true })
     @Type(() => Sensor)
+    @IsInstance(Sensor, { each: true })
     @ValidateNested({ each: true })
     @IsDefined()
     @Expose({ name: "sensors" })
     /** A list of sensors that belong to the grid. */
     sensors!: Sensor[];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^SensorGrid$/)
@@ -24,8 +25,8 @@ export class SensorGrid extends _RadianceAsset {
     /** type */
     type: string = "SensorGrid";
 	
-    @IsInstance(Mesh3D)
     @Type(() => Mesh3D)
+    @IsInstance(Mesh3D)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "mesh" })
@@ -33,14 +34,15 @@ export class SensorGrid extends _RadianceAsset {
     mesh?: Mesh3D;
 	
     @IsArray()
-    @IsInstance(Face3D, { each: true })
     @Type(() => Face3D)
+    @IsInstance(Face3D, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "base_geometry" })
     /** An optional array of Face3D used to represent the grid. There are no restrictions on how this property relates to the sensors and it is provided only to assist with the display of the grid when the number of sensors or the mesh is too large to be practically visualized. */
     baseGeometry?: Face3D[];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "group_identifier" })

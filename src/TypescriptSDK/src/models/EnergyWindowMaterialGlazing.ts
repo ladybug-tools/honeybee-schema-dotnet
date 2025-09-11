@@ -6,6 +6,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Describe a single glass pane corresponding to a layer in a window construction. */
 export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^EnergyWindowMaterialGlazing$/)
@@ -13,12 +14,14 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
     /** type */
     type: string = "EnergyWindowMaterialGlazing";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "thickness" })
     /** The surface-to-surface thickness of the glass in meters. Default:  0.003. */
     thickness: number = 0.003;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -27,6 +30,7 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
     /** Transmittance of solar radiation through the glass at normal incidence. Default: 0.85 for clear glass. */
     solarTransmittance: number = 0.85;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -40,6 +44,7 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
     /** Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum. */
     solarReflectanceBack: (Autocalculate | number) = new Autocalculate();
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -48,6 +53,7 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
     /** Transmittance of visible light through the glass at normal incidence. Default: 0.9 for clear glass. */
     visibleTransmittance: number = 0.9;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -61,6 +67,7 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
     /** Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye. */
     visibleReflectanceBack: (Autocalculate | number) = new Autocalculate();
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -69,6 +76,7 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
     /** Long-wave transmittance at normal incidence. */
     infraredTransmittance: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -77,6 +85,7 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
     /** Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating. */
     emissivity: number = 0.84;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -85,18 +94,21 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
     /** Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating. */
     emissivityBack: number = 0.84;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "conductivity" })
     /** Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is  typical for clear glass without a low-e coating. */
     conductivity: number = 0.9;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "dirt_correction" })
     /** Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean. */
     dirtCorrection: number = 1;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "solar_diffusing" })

@@ -5,6 +5,7 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Abridged Radiance Properties for Honeybee Room. */
 export class RoomRadiancePropertiesAbridged extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^RoomRadiancePropertiesAbridged$/)
@@ -12,6 +13,7 @@ export class RoomRadiancePropertiesAbridged extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "RoomRadiancePropertiesAbridged";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "modifier_set" })

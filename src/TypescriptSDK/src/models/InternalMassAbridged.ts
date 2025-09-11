@@ -5,6 +5,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class InternalMassAbridged extends IDdEnergyBaseModel {
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @MinLength(1)
@@ -13,12 +14,14 @@ export class InternalMassAbridged extends IDdEnergyBaseModel {
     /** Identifier for an OpaqueConstruction that represents the material that the internal thermal mass is composed of. */
     construction!: string;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Expose({ name: "area" })
     /** A number representing the surface area of the internal mass that is exposed to the Room air. This value should always be in square meters regardless of what units system the parent model is a part of. */
     area!: number;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^InternalMassAbridged$/)

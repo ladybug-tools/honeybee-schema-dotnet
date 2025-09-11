@@ -5,6 +5,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Used to specify information about the setpoint schedule. */
 export class SetpointAbridged extends IDdEnergyBaseModel {
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @MinLength(1)
@@ -13,6 +14,7 @@ export class SetpointAbridged extends IDdEnergyBaseModel {
     /** Identifier of the schedule for the cooling setpoint. The values in this schedule should be temperature in [C]. */
     coolingSchedule!: string;
 	
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @MinLength(1)
@@ -21,6 +23,7 @@ export class SetpointAbridged extends IDdEnergyBaseModel {
     /** Identifier of the schedule for the heating setpoint. The values in this schedule should be temperature in [C]. */
     heatingSchedule!: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^SetpointAbridged$/)
@@ -28,6 +31,7 @@ export class SetpointAbridged extends IDdEnergyBaseModel {
     /** type */
     type: string = "SetpointAbridged";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -36,6 +40,7 @@ export class SetpointAbridged extends IDdEnergyBaseModel {
     /** Identifier of the schedule for the humidification setpoint. The values in this schedule should be in [%]. */
     humidifyingSchedule?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -44,6 +49,7 @@ export class SetpointAbridged extends IDdEnergyBaseModel {
     /** Identifier of the schedule for the dehumidification setpoint. The values in this schedule should be in [%]. */
     dehumidifyingSchedule?: string;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)

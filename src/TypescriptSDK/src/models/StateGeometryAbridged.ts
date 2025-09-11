@@ -6,14 +6,15 @@ import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 
 /** A single planar geometry that can be assigned to Radiance states. */
 export class StateGeometryAbridged extends IDdRadianceBaseModel {
-    @IsInstance(Face3D)
     @Type(() => Face3D)
+    @IsInstance(Face3D)
     @ValidateNested()
     @IsDefined()
     @Expose({ name: "geometry" })
     /** A ladybug_geometry Face3D. */
     geometry!: Face3D;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^StateGeometryAbridged$/)
@@ -21,12 +22,14 @@ export class StateGeometryAbridged extends IDdRadianceBaseModel {
     /** type */
     type: string = "StateGeometryAbridged";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "modifier" })
     /** A string for a Honeybee Radiance Modifier identifier (default: None). */
     modifier?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "modifier_direct" })

@@ -7,6 +7,7 @@ import { Face3D } from "./Face3D";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class RoomDoe2Properties extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^RoomDoe2Properties$/)
@@ -39,8 +40,8 @@ export class RoomDoe2Properties extends _OpenAPIGenBaseModel {
     /** A number between 0 and 1 for the ratio of the maximum (or fixed) heating airflow to the cooling airflow. The specific meaning varies according to the type of zone terminal. If Autocalculate, this parameter will not be written into the INP. */
     hmaxFlowRatio: (Autocalculate | number) = new Autocalculate();
 	
-    @IsInstance(Face3D)
     @Type(() => Face3D)
+    @IsInstance(Face3D)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "space_polygon_geometry" })

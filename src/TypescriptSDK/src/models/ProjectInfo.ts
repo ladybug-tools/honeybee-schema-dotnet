@@ -9,6 +9,7 @@ import { Location } from "./Location";
 
 /** Project information. */
 export class ProjectInfo extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ProjectInfo$/)
@@ -16,6 +17,7 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "ProjectInfo";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(-360)
@@ -25,38 +27,39 @@ export class ProjectInfo extends _OpenAPIGenBaseModel {
     north: number = 0;
 	
     @IsArray()
+    @Type(() => String)
     @IsString({ each: true })
     @IsOptional()
     @Expose({ name: "weather_urls" })
     /** A list of URLs to zip files that includes EPW, DDY and STAT files. You can find these URLs from the EPWMAP. The first URL will be used as the primary weather file. */
     weatherUrls?: string[];
 	
-    @IsInstance(Location)
     @Type(() => Location)
+    @IsInstance(Location)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "location" })
     /** Project location. This value is usually generated from the information in the weather files. */
     location?: Location;
 	
-    @IsEnum(ClimateZones)
     @Type(() => String)
+    @IsEnum(ClimateZones)
     @IsOptional()
     @Expose({ name: "ashrae_climate_zone" })
     /** Project location climate zone. */
     ashraeClimateZone?: ClimateZones;
 	
     @IsArray()
-    @IsEnum(BuildingTypes, { each: true })
     @Type(() => String)
+    @IsEnum(BuildingTypes, { each: true })
     @IsOptional()
     @Expose({ name: "building_type" })
     /** A list of building types for the project. The first building type is considered the primary type for the project. */
     buildingType?: BuildingTypes[];
 	
     @IsArray()
-    @IsEnum(EfficiencyStandards, { each: true })
     @Type(() => String)
+    @IsEnum(EfficiencyStandards, { each: true })
     @IsOptional()
     @Expose({ name: "vintage" })
     /** A list of building vintages (e.g. ASHRAE_2019, ASHRAE_2016). */

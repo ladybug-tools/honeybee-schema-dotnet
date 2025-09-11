@@ -5,18 +5,21 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class of Abridged Radiance Properties. */
 export class _PropertiesBaseAbridged extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "modifier" })
     /** A string for a Honeybee Radiance Modifier (default: None). */
     modifier?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "modifier_blk" })
     /** A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None). */
     modifierBlk?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^_PropertiesBaseAbridged$/)

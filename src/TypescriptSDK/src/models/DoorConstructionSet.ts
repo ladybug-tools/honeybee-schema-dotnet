@@ -9,6 +9,7 @@ import { WindowConstructionShade } from "./WindowConstructionShade";
 
 /** A set of constructions for door assemblies. */
 export class DoorConstructionSet extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^DoorConstructionSet$/)
@@ -16,24 +17,24 @@ export class DoorConstructionSet extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "DoorConstructionSet";
 	
-    @IsInstance(OpaqueConstruction)
     @Type(() => OpaqueConstruction)
+    @IsInstance(OpaqueConstruction)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "interior_construction" })
     /** An OpaqueConstruction for all opaque doors with a Surface boundary condition. */
     interiorConstruction?: OpaqueConstruction;
 	
-    @IsInstance(OpaqueConstruction)
     @Type(() => OpaqueConstruction)
+    @IsInstance(OpaqueConstruction)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "exterior_construction" })
     /** An OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face. */
     exteriorConstruction?: OpaqueConstruction;
 	
-    @IsInstance(OpaqueConstruction)
     @Type(() => OpaqueConstruction)
+    @IsInstance(OpaqueConstruction)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "overhead_construction" })

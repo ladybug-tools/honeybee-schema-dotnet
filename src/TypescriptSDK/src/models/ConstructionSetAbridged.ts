@@ -10,6 +10,7 @@ import { WallConstructionSetAbridged } from "./WallConstructionSetAbridged";
 
 /** A set of constructions for different surface types and boundary conditions. */
 export class ConstructionSetAbridged extends IDdEnergyBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ConstructionSetAbridged$/)
@@ -17,46 +18,47 @@ export class ConstructionSetAbridged extends IDdEnergyBaseModel {
     /** type */
     type: string = "ConstructionSetAbridged";
 	
-    @IsInstance(WallConstructionSetAbridged)
     @Type(() => WallConstructionSetAbridged)
+    @IsInstance(WallConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "wall_set" })
     /** A WallConstructionSetAbridged object for this ConstructionSet. */
     wallSet?: WallConstructionSetAbridged;
 	
-    @IsInstance(FloorConstructionSetAbridged)
     @Type(() => FloorConstructionSetAbridged)
+    @IsInstance(FloorConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "floor_set" })
     /** A FloorConstructionSetAbridged object for this ConstructionSet. */
     floorSet?: FloorConstructionSetAbridged;
 	
-    @IsInstance(RoofCeilingConstructionSetAbridged)
     @Type(() => RoofCeilingConstructionSetAbridged)
+    @IsInstance(RoofCeilingConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "roof_ceiling_set" })
     /** A RoofCeilingConstructionSetAbridged object for this ConstructionSet. */
     roofCeilingSet?: RoofCeilingConstructionSetAbridged;
 	
-    @IsInstance(ApertureConstructionSetAbridged)
     @Type(() => ApertureConstructionSetAbridged)
+    @IsInstance(ApertureConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "aperture_set" })
     /** A ApertureConstructionSetAbridged object for this ConstructionSet. */
     apertureSet?: ApertureConstructionSetAbridged;
 	
-    @IsInstance(DoorConstructionSetAbridged)
     @Type(() => DoorConstructionSetAbridged)
+    @IsInstance(DoorConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "door_set" })
     /** A DoorConstructionSetAbridged object for this ConstructionSet. */
     doorSet?: DoorConstructionSetAbridged;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -65,6 +67,7 @@ export class ConstructionSetAbridged extends IDdEnergyBaseModel {
     /** The identifier of a ShadeConstruction to set the reflectance properties of all outdoor shades of all objects to which this ConstructionSet is assigned. */
     shadeConstruction?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)

@@ -5,6 +5,7 @@ import { DatedBaseModel } from "./DatedBaseModel";
 
 /** Used to describe the daylight savings time for the simulation. */
 export class DaylightSavingTime extends DatedBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^DaylightSavingTime$/)
@@ -13,6 +14,7 @@ export class DaylightSavingTime extends DatedBaseModel {
     type: string = "DaylightSavingTime";
 	
     @IsArray()
+    @Type(() => Number)
     @IsInt({ each: true })
     @IsOptional()
     @Expose({ name: "start_date" })
@@ -20,6 +22,7 @@ export class DaylightSavingTime extends DatedBaseModel {
     startDate: number[] = [3, 12];
 	
     @IsArray()
+    @Type(() => Number)
     @IsInt({ each: true })
     @IsOptional()
     @Expose({ name: "end_date" })

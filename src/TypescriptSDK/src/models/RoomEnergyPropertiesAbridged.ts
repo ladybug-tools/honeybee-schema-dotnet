@@ -18,6 +18,7 @@ import { VentilationFan } from "./VentilationFan";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^RoomEnergyPropertiesAbridged$/)
@@ -25,6 +26,7 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "RoomEnergyPropertiesAbridged";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -33,6 +35,7 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     /** Identifier of a ConstructionSet to specify all default constructions for the Faces, Apertures, and Doors of the Room. If None, the Room will use the Model global_construction_set. */
     constructionSet?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -41,6 +44,7 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     /** Identifier of a ProgramType to specify all default schedules and loads for the Room. If None, the Room will have no loads or setpoints. */
     programType?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -49,6 +53,7 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     /** An optional identifier of a HVAC system (such as an IdealAirSystem) that specifies how the Room is conditioned. If None, it will be assumed that the Room is not conditioned. */
     hvac?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -57,80 +62,80 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     /** An optional identifier of a Service Hot Water (SHW) system that specifies how the hot water load of the Room is met. If None, the hot water load will be met with a generic system that only measures thermal loadand does not account for system efficiencies. */
     shw?: string;
 	
-    @IsInstance(PeopleAbridged)
     @Type(() => PeopleAbridged)
+    @IsInstance(PeopleAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "people" })
     /** People object to describe the occupancy of the Room. */
     people?: PeopleAbridged;
 	
-    @IsInstance(LightingAbridged)
     @Type(() => LightingAbridged)
+    @IsInstance(LightingAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "lighting" })
     /** Lighting object to describe the lighting usage of the Room. */
     lighting?: LightingAbridged;
 	
-    @IsInstance(ElectricEquipmentAbridged)
     @Type(() => ElectricEquipmentAbridged)
+    @IsInstance(ElectricEquipmentAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "electric_equipment" })
     /** ElectricEquipment object to describe the electric equipment usage. */
     electricEquipment?: ElectricEquipmentAbridged;
 	
-    @IsInstance(GasEquipmentAbridged)
     @Type(() => GasEquipmentAbridged)
+    @IsInstance(GasEquipmentAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "gas_equipment" })
     /** GasEquipment object to describe the gas equipment usage. */
     gasEquipment?: GasEquipmentAbridged;
 	
-    @IsInstance(ServiceHotWaterAbridged)
     @Type(() => ServiceHotWaterAbridged)
+    @IsInstance(ServiceHotWaterAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "service_hot_water" })
     /** ServiceHotWater object to describe the hot water usage. */
     serviceHotWater?: ServiceHotWaterAbridged;
 	
-    @IsInstance(InfiltrationAbridged)
     @Type(() => InfiltrationAbridged)
+    @IsInstance(InfiltrationAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "infiltration" })
     /** Infiltration object to to describe the outdoor air leakage. */
     infiltration?: InfiltrationAbridged;
 	
-    @IsInstance(VentilationAbridged)
     @Type(() => VentilationAbridged)
+    @IsInstance(VentilationAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "ventilation" })
     /** Ventilation object for the minimum outdoor air requirement. */
     ventilation?: VentilationAbridged;
 	
-    @IsInstance(SetpointAbridged)
     @Type(() => SetpointAbridged)
+    @IsInstance(SetpointAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "setpoint" })
     /** Setpoint object for the temperature setpoints of the Room. */
     setpoint?: SetpointAbridged;
 	
-    @IsInstance(DaylightingControl)
     @Type(() => DaylightingControl)
+    @IsInstance(DaylightingControl)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "daylighting_control" })
     /** An optional DaylightingControl object to dictate the dimming of lights. If None, the lighting will respond only to the schedule and not the daylight conditions within the room. */
     daylightingControl?: DaylightingControl;
 	
-    @IsInstance(VentilationControlAbridged)
     @Type(() => VentilationControlAbridged)
+    @IsInstance(VentilationControlAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "window_vent_control" })
@@ -138,8 +143,8 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     windowVentControl?: VentilationControlAbridged;
 	
     @IsArray()
-    @IsInstance(VentilationFan, { each: true })
     @Type(() => VentilationFan)
+    @IsInstance(VentilationFan, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "fans" })
@@ -147,8 +152,8 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     fans?: VentilationFan[];
 	
     @IsArray()
-    @IsInstance(InternalMassAbridged, { each: true })
     @Type(() => InternalMassAbridged)
+    @IsInstance(InternalMassAbridged, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "internal_masses" })
@@ -156,8 +161,8 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     internalMasses?: InternalMassAbridged[];
 	
     @IsArray()
-    @IsInstance(ProcessAbridged, { each: true })
     @Type(() => ProcessAbridged)
+    @IsInstance(ProcessAbridged, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "process_loads" })

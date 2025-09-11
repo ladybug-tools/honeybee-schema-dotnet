@@ -5,6 +5,7 @@ import { _SkyCondition } from "./_SkyCondition";
 
 /** Used to specify sky conditions on a design day. */
 export class ASHRAETau extends _SkyCondition {
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Min(0)
@@ -13,6 +14,7 @@ export class ASHRAETau extends _SkyCondition {
     /** Value for the beam optical depth. Typically found in .stat files. */
     tauB!: number;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Min(0)
@@ -21,6 +23,7 @@ export class ASHRAETau extends _SkyCondition {
     /** Value for the diffuse optical depth. Typically found in .stat files. */
     tauD!: number;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ASHRAETau$/)

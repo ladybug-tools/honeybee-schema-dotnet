@@ -11,6 +11,7 @@ import { TerrianTypes } from "./TerrianTypes";
 
 /** The complete set of EnergyPlus Simulation Settings. */
 export class SimulationParameter extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^SimulationParameter$/)
@@ -18,22 +19,23 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "SimulationParameter";
 	
-    @IsInstance(SimulationOutput)
     @Type(() => SimulationOutput)
+    @IsInstance(SimulationOutput)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "output" })
     /** A SimulationOutput that lists the desired outputs from the simulation and the format in which to report them. */
     output?: SimulationOutput;
 	
-    @IsInstance(RunPeriod)
     @Type(() => RunPeriod)
+    @IsInstance(RunPeriod)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "run_period" })
     /** A RunPeriod to describe the time period over which to run the simulation. */
     runPeriod?: RunPeriod;
 	
+    @Type(() => Number)
     @IsInt()
     @IsOptional()
     @Min(1)
@@ -42,30 +44,31 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
     /** An integer for the number of timesteps per hour at which the energy calculation will be run. */
     timestep: number = 6;
 	
-    @IsInstance(SimulationControl)
     @Type(() => SimulationControl)
+    @IsInstance(SimulationControl)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "simulation_control" })
     /** A SimulationControl object that describes which types of calculations to run. */
     simulationControl?: SimulationControl;
 	
-    @IsInstance(ShadowCalculation)
     @Type(() => ShadowCalculation)
+    @IsInstance(ShadowCalculation)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "shadow_calculation" })
     /** A ShadowCalculation object describing settings for the EnergyPlus Shadow Calculation. */
     shadowCalculation?: ShadowCalculation;
 	
-    @IsInstance(SizingParameter)
     @Type(() => SizingParameter)
+    @IsInstance(SizingParameter)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "sizing_parameter" })
     /** A SizingParameter object with criteria for sizing the heating and cooling system. */
     sizingParameter?: SizingParameter;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(-360)
@@ -74,8 +77,8 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
     /** A number between -360 and 360 for the north direction in degrees.This is the counterclockwise difference between the North and the positive Y-axis. 90 is West and 270 is East. Note that this is different than the convention used in EnergyPlus, which uses clockwise difference instead of counterclockwise difference. */
     northAngle: number = 0;
 	
-    @IsEnum(TerrianTypes)
     @Type(() => String)
+    @IsEnum(TerrianTypes)
     @IsOptional()
     @Expose({ name: "terrain_type" })
     /** Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms. */

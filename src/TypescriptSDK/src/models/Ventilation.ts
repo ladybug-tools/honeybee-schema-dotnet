@@ -7,6 +7,7 @@ import { ScheduleRuleset } from "./ScheduleRuleset";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class Ventilation extends IDdEnergyBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Ventilation$/)
@@ -14,6 +15,7 @@ export class Ventilation extends IDdEnergyBaseModel {
     /** type */
     type: string = "Ventilation";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -21,6 +23,7 @@ export class Ventilation extends IDdEnergyBaseModel {
     /** Intensity of ventilation in[] m3/s per person]. Note that setting this value does not mean that ventilation is varied based on real-time occupancy but rather that the design level of ventilation is determined using this value and the People object of the Room. */
     flowPerPerson: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -28,6 +31,7 @@ export class Ventilation extends IDdEnergyBaseModel {
     /** Intensity of ventilation in [m3/s per m2 of floor area]. */
     flowPerArea: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -35,6 +39,7 @@ export class Ventilation extends IDdEnergyBaseModel {
     /** Intensity of ventilation in air changes per hour (ACH) for the entire Room. */
     airChangesPerHour: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)

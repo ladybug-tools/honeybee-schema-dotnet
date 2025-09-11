@@ -13,8 +13,8 @@ import { WindowConstruction } from "./WindowConstruction";
 
 /** Construction for window objects (Aperture, Door). */
 export class WindowConstructionShade extends IDdEnergyBaseModel {
-    @IsInstance(WindowConstruction)
     @Type(() => WindowConstruction)
+    @IsInstance(WindowConstruction)
     @ValidateNested()
     @IsDefined()
     @Expose({ name: "window_construction" })
@@ -33,6 +33,7 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
     /** Identifier of a An EnergyWindowMaterialShade or an EnergyWindowMaterialBlind that serves as the shading layer for this construction. This can also be an EnergyWindowMaterialGlazing, which will indicate that the WindowConstruction has a dynamically-controlled glass pane like an electrochromic window assembly. */
     shadeMaterial!: (EnergyWindowMaterialShade | EnergyWindowMaterialBlind | EnergyWindowMaterialGlazing);
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^WindowConstructionShade$/)
@@ -40,20 +41,21 @@ export class WindowConstructionShade extends IDdEnergyBaseModel {
     /** type */
     type: string = "WindowConstructionShade";
 	
-    @IsEnum(ShadeLocation)
     @Type(() => String)
+    @IsEnum(ShadeLocation)
     @IsOptional()
     @Expose({ name: "shade_location" })
     /** Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the ""Between"" option. Also note that, for a WindowConstruction with more than one gas gap, the ""Between"" option defaults to using the inner gap as this is the only option that EnergyPlus supports. */
     shadeLocation: ShadeLocation = ShadeLocation.Interior;
 	
-    @IsEnum(ControlType)
     @Type(() => String)
+    @IsEnum(ControlType)
     @IsOptional()
     @Expose({ name: "control_type" })
     /** Text to indicate how the shading device is controlled, which determines when the shading is “on” or “off.” */
     controlType: ControlType = ControlType.AlwaysOn;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "setpoint" })

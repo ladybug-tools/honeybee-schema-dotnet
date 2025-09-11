@@ -49,6 +49,7 @@ export class Glow extends ModifierBase {
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
     dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -57,6 +58,7 @@ export class Glow extends ModifierBase {
     /** A value between 0 and 1 for the red channel of the modifier. */
     rEmittance: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -65,6 +67,7 @@ export class Glow extends ModifierBase {
     /** A value between 0 and 1 for the green channel of the modifier. */
     gEmittance: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -73,12 +76,14 @@ export class Glow extends ModifierBase {
     /** A value between 0 and 1 for the blue channel of the modifier. */
     bEmittance: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "max_radius" })
     /** Maximum radius for shadow testing. Objects with zero radius are permissable and may participate in interreflection calculation (though they are not representative of real light sources). Negative values will never contribute to scene illumination. */
     maxRadius: number = 0;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Glow$/)

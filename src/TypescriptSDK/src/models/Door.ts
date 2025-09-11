@@ -10,8 +10,8 @@ import { Surface } from "./Surface";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Door extends IDdBaseModel {
-    @IsInstance(Face3D)
     @Type(() => Face3D)
+    @IsInstance(Face3D)
     @ValidateNested()
     @IsDefined()
     @Expose({ name: "geometry" })
@@ -29,14 +29,15 @@ export class Door extends IDdBaseModel {
     /** boundaryCondition */
     boundaryCondition!: (Outdoors | Surface);
 	
-    @IsInstance(DoorPropertiesAbridged)
     @Type(() => DoorPropertiesAbridged)
+    @IsInstance(DoorPropertiesAbridged)
     @ValidateNested()
     @IsDefined()
     @Expose({ name: "properties" })
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
     properties!: DoorPropertiesAbridged;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Door$/)
@@ -44,6 +45,7 @@ export class Door extends IDdBaseModel {
     /** type */
     type: string = "Door";
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "is_glass" })
@@ -51,8 +53,8 @@ export class Door extends IDdBaseModel {
     isGlass: boolean = false;
 	
     @IsArray()
-    @IsInstance(Shade, { each: true })
     @Type(() => Shade)
+    @IsInstance(Shade, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "indoor_shades" })
@@ -60,8 +62,8 @@ export class Door extends IDdBaseModel {
     indoorShades?: Shade[];
 	
     @IsArray()
-    @IsInstance(Shade, { each: true })
     @Type(() => Shade)
+    @IsInstance(Shade, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "outdoor_shades" })

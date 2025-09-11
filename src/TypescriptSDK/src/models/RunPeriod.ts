@@ -8,6 +8,7 @@ import { DaysOfWeek } from "./DaysOfWeek";
 
 /** Used to describe the time period over which to run the simulation. */
 export class RunPeriod extends DatedBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^RunPeriod$/)
@@ -16,6 +17,7 @@ export class RunPeriod extends DatedBaseModel {
     type: string = "RunPeriod";
 	
     @IsArray()
+    @Type(() => Number)
     @IsInt({ each: true })
     @IsOptional()
     @Expose({ name: "start_date" })
@@ -23,14 +25,15 @@ export class RunPeriod extends DatedBaseModel {
     startDate: number[] = [1, 1];
 	
     @IsArray()
+    @Type(() => Number)
     @IsInt({ each: true })
     @IsOptional()
     @Expose({ name: "end_date" })
     /** A list of two integers for [month, day], representing the date for the end of the run period. Must be after the start date. */
     endDate: number[] = [12, 31];
 	
-    @IsEnum(DaysOfWeek)
     @Type(() => String)
+    @IsEnum(DaysOfWeek)
     @IsOptional()
     @Expose({ name: "start_day_of_week" })
     /** Text for the day of the week on which the simulation starts. */
@@ -43,14 +46,15 @@ export class RunPeriod extends DatedBaseModel {
     /** A list of lists where each sub-list consists of two integers for [month, day], representing a date which is a holiday within the simulation. If None, no holidays are applied. */
     holidays?: number[][];
 	
-    @IsInstance(DaylightSavingTime)
     @Type(() => DaylightSavingTime)
+    @IsInstance(DaylightSavingTime)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "daylight_saving_time" })
     /** A DaylightSavingTime to dictate the start and end dates of daylight saving time. If None, no daylight saving time is applied to the simulation. */
     daylightSavingTime?: DaylightSavingTime;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "leap_year" })

@@ -9,14 +9,15 @@ import { ScheduleTypeLimit } from "./ScheduleTypeLimit";
 /** Used to define a schedule for a default day, further described by ScheduleRule. */
 export class ScheduleRuleset extends IDdEnergyBaseModel {
     @IsArray()
-    @IsInstance(ScheduleDay, { each: true })
     @Type(() => ScheduleDay)
+    @IsInstance(ScheduleDay, { each: true })
     @ValidateNested({ each: true })
     @IsDefined()
     @Expose({ name: "day_schedules" })
     /** A list of ScheduleDays that are referenced in the other keys of this ScheduleRulesetAbridged. */
     daySchedules!: ScheduleDay[];
 	
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @MinLength(1)
@@ -25,6 +26,7 @@ export class ScheduleRuleset extends IDdEnergyBaseModel {
     /** An identifier for the ScheduleDay that will be used for all days when no ScheduleRule is applied. This ScheduleDay must be in the day_schedules. */
     defaultDaySchedule!: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ScheduleRuleset$/)
@@ -33,14 +35,15 @@ export class ScheduleRuleset extends IDdEnergyBaseModel {
     type: string = "ScheduleRuleset";
 	
     @IsArray()
-    @IsInstance(ScheduleRuleAbridged, { each: true })
     @Type(() => ScheduleRuleAbridged)
+    @IsInstance(ScheduleRuleAbridged, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "schedule_rules" })
     /** A list of ScheduleRuleAbridged that note exceptions to the default_day_schedule. These rules should be ordered from highest to lowest priority. */
     scheduleRules?: ScheduleRuleAbridged[];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -49,6 +52,7 @@ export class ScheduleRuleset extends IDdEnergyBaseModel {
     /** An identifier for the ScheduleDay that will be used for holidays. This ScheduleDay must be in the day_schedules. */
     holidaySchedule?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -57,6 +61,7 @@ export class ScheduleRuleset extends IDdEnergyBaseModel {
     /** An identifier for the ScheduleDay that will be used for the summer design day. This ScheduleDay must be in the day_schedules. */
     summerDesigndaySchedule?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -65,8 +70,8 @@ export class ScheduleRuleset extends IDdEnergyBaseModel {
     /** An identifier for the ScheduleDay that will be used for the winter design day. This ScheduleDay must be in the day_schedules. */
     winterDesigndaySchedule?: string;
 	
-    @IsInstance(ScheduleTypeLimit)
     @Type(() => ScheduleTypeLimit)
+    @IsInstance(ScheduleTypeLimit)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "schedule_type_limit" })

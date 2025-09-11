@@ -10,8 +10,8 @@ import { Surface } from "./Surface";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Aperture extends IDdBaseModel {
-    @IsInstance(Face3D)
     @Type(() => Face3D)
+    @IsInstance(Face3D)
     @ValidateNested()
     @IsDefined()
     @Expose({ name: "geometry" })
@@ -29,14 +29,15 @@ export class Aperture extends IDdBaseModel {
     /** boundaryCondition */
     boundaryCondition!: (Outdoors | Surface);
 	
-    @IsInstance(AperturePropertiesAbridged)
     @Type(() => AperturePropertiesAbridged)
+    @IsInstance(AperturePropertiesAbridged)
     @ValidateNested()
     @IsDefined()
     @Expose({ name: "properties" })
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
     properties!: AperturePropertiesAbridged;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Aperture$/)
@@ -44,6 +45,7 @@ export class Aperture extends IDdBaseModel {
     /** type */
     type: string = "Aperture";
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "is_operable" })
@@ -51,8 +53,8 @@ export class Aperture extends IDdBaseModel {
     isOperable: boolean = false;
 	
     @IsArray()
-    @IsInstance(Shade, { each: true })
     @Type(() => Shade)
+    @IsInstance(Shade, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "indoor_shades" })
@@ -60,8 +62,8 @@ export class Aperture extends IDdBaseModel {
     indoorShades?: Shade[];
 	
     @IsArray()
-    @IsInstance(Shade, { each: true })
     @Type(() => Shade)
+    @IsInstance(Shade, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "outdoor_shades" })

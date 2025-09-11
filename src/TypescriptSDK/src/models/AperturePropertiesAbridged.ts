@@ -6,6 +6,7 @@ import { ApertureEnergyPropertiesAbridged } from "./ApertureEnergyPropertiesAbri
 import { ApertureRadiancePropertiesAbridged } from "./ApertureRadiancePropertiesAbridged";
 
 export class AperturePropertiesAbridged extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^AperturePropertiesAbridged$/)
@@ -13,16 +14,16 @@ export class AperturePropertiesAbridged extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "AperturePropertiesAbridged";
 	
-    @IsInstance(ApertureEnergyPropertiesAbridged)
     @Type(() => ApertureEnergyPropertiesAbridged)
+    @IsInstance(ApertureEnergyPropertiesAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "energy" })
     /** energy */
     energy?: ApertureEnergyPropertiesAbridged;
 	
-    @IsInstance(ApertureRadiancePropertiesAbridged)
     @Type(() => ApertureRadiancePropertiesAbridged)
+    @IsInstance(ApertureRadiancePropertiesAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "radiance" })

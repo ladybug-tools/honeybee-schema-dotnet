@@ -18,6 +18,7 @@ import { WindowConstructionAbridged } from "./WindowConstructionAbridged";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^GlobalConstructionSet$/)
@@ -407,8 +408,8 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
   ]
 })];
 	
-    @IsInstance(WallConstructionSetAbridged)
     @Type(() => WallConstructionSetAbridged)
+    @IsInstance(WallConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "wall_set" })
@@ -420,8 +421,8 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
   "type": "WallConstructionSetAbridged"
 });
 	
-    @IsInstance(FloorConstructionSetAbridged)
     @Type(() => FloorConstructionSetAbridged)
+    @IsInstance(FloorConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "floor_set" })
@@ -433,8 +434,8 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
   "type": "FloorConstructionSetAbridged"
 });
 	
-    @IsInstance(RoofCeilingConstructionSetAbridged)
     @Type(() => RoofCeilingConstructionSetAbridged)
+    @IsInstance(RoofCeilingConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "roof_ceiling_set" })
@@ -446,8 +447,8 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
   "type": "RoofCeilingConstructionSetAbridged"
 });
 	
-    @IsInstance(ApertureConstructionSetAbridged)
     @Type(() => ApertureConstructionSetAbridged)
+    @IsInstance(ApertureConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "aperture_set" })
@@ -460,8 +461,8 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
   "operable_construction": "Generic Double Pane"
 });
 	
-    @IsInstance(DoorConstructionSetAbridged)
     @Type(() => DoorConstructionSetAbridged)
+    @IsInstance(DoorConstructionSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "door_set" })
@@ -475,18 +476,21 @@ export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
   "interior_glass_construction": "Generic Single Pane"
 });
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "shade_construction" })
     /** Global Honeybee Construction for building-attached Shades. */
     shadeConstruction: string = "Generic Shade";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "context_construction" })
     /** Global Honeybee Construction for context Shades. */
     contextConstruction: string = "Generic Context";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "air_boundary_construction" })

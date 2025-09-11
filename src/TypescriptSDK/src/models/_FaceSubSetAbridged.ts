@@ -5,6 +5,7 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A set of constructions for wall, floor, or roof assemblies. */
 export class _FaceSubSetAbridged extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -13,6 +14,7 @@ export class _FaceSubSetAbridged extends _OpenAPIGenBaseModel {
     /** Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition. */
     interiorConstruction?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -21,6 +23,7 @@ export class _FaceSubSetAbridged extends _OpenAPIGenBaseModel {
     /** Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition. */
     exteriorConstruction?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -29,6 +32,7 @@ export class _FaceSubSetAbridged extends _OpenAPIGenBaseModel {
     /** Identifier for an OpaqueConstruction for faces with a Ground boundary condition. */
     groundConstruction?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^_FaceSubSetAbridged$/)
