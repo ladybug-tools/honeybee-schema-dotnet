@@ -6,6 +6,7 @@ import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged";
 
 /** Radiance Properties for Honeybee Shade Abridged. */
 export class ShadeRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ShadeRadiancePropertiesAbridged$/)
@@ -13,6 +14,7 @@ export class ShadeRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
     /** type */
     type: string = "ShadeRadiancePropertiesAbridged";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "dynamic_group_identifier" })
@@ -20,8 +22,8 @@ export class ShadeRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
     dynamicGroupIdentifier?: string;
 	
     @IsArray()
-    @IsInstance(RadianceShadeStateAbridged, { each: true })
     @Type(() => RadianceShadeStateAbridged)
+    @IsInstance(RadianceShadeStateAbridged, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "states" })

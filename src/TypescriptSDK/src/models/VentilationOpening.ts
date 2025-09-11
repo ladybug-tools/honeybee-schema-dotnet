@@ -5,6 +5,7 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class VentilationOpening extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^VentilationOpening$/)
@@ -12,6 +13,7 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "VentilationOpening";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -20,6 +22,7 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
     /** A number for the fraction of the window area that is operable. */
     fractionAreaOperable: number = 0.5;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -28,6 +31,7 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
     /** A number for the fraction of the distance from the bottom of the window to the top that is operable */
     fractionHeightOperable: number = 1;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -36,12 +40,14 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
     /** A number that will be multiplied by the area of the window in the stack (buoyancy-driven) part of the equation to account for additional friction from window geometry, insect screens, etc. Typical values include 0.45, for unobstructed windows WITH insect screens and 0.65 for unobstructed windows WITHOUT insect screens. This value should be lowered if windows are of an awning or casement type and are not allowed to fully open. */
     dischargeCoefficient: number = 0.45;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "wind_cross_vent" })
     /** Boolean to indicate if there is an opening of roughly equal area on the opposite side of the Room such that wind-driven cross ventilation will be induced. If False, the assumption is that the operable area is primarily on one side of the Room and there is no wind-driven ventilation. */
     windCrossVent: boolean = false;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -49,6 +55,7 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
     /** An optional number in kg/s-m, at 1 Pa per meter of crack length, used to calculate the mass flow rate when the opening is closed; required to run an AirflowNetwork simulation. The DesignBuilder Cracks template defines the flow coefficient for a tight, low-leakage closed external window to be 0.00001, and the flow coefficient for a very poor, high-leakage closed external window to be 0.003. */
     flowCoefficientClosed: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0.5)
@@ -57,6 +64,7 @@ export class VentilationOpening extends _OpenAPIGenBaseModel {
     /** An optional dimensionless number between 0.5 and 1 used to calculate the mass flow rate when the opening is closed; required to run an AirflowNetwork simulation. This value represents the leak geometry impact on airflow, with 0.5 generally corresponding to turbulent orifice flow and 1 generally corresponding to laminar flow. The default of 0.65 is representative of many cases of wall and window leakage, used when the exponent cannot be measured. */
     flowExponentClosed: number = 0.65;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "two_way_threshold" })

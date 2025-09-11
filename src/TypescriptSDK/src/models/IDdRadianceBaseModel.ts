@@ -5,6 +5,7 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects requiring a valid Radiance identifier. */
 export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @Matches(/^[.A-Za-z0-9_-]+$/)
@@ -13,12 +14,14 @@ export class IDdRadianceBaseModel extends _OpenAPIGenBaseModel {
     /** Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. */
     identifier!: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "display_name" })
     /** Display name of the object with no character restrictions. */
     displayName?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^IDdRadianceBaseModel$/)

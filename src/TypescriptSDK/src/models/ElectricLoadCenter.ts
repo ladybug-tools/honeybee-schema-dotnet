@@ -5,6 +5,7 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class ElectricLoadCenter extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ElectricLoadCenter$/)
@@ -12,6 +13,7 @@ export class ElectricLoadCenter extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "ElectricLoadCenter";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Max(1)
@@ -19,6 +21,7 @@ export class ElectricLoadCenter extends _OpenAPIGenBaseModel {
     /** A number between 0 and 1 for the load center inverter nominal rated DC-to-AC conversion efficiency. An inverter converts DC power, such as that output by photovoltaic panels, to AC power, such as that distributed by the electrical grid and is available from standard electrical outlets. Inverter efficiency is defined as the inverter rated AC power output divided by its rated DC power output. */
     inverterEfficiency: number = 0.96;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "inverter_dc_to_ac_size_ratio" })

@@ -8,6 +8,7 @@ import { NoLimit } from "./NoLimit";
 
 /** Provides a model for an ideal HVAC system. */
 export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^IdealAirSystemAbridged$/)
@@ -15,19 +16,21 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
     /** type */
     type: string = "IdealAirSystemAbridged";
 	
-    @IsEnum(EconomizerType)
     @Type(() => String)
+    @IsEnum(EconomizerType)
     @IsOptional()
     @Expose({ name: "economizer_type" })
     /** Text to indicate the type of air-side economizer used on the ideal air system. Economizers will mix in a greater amount of outdoor air to cool the zone (rather than running the cooling system) when the zone needs cooling and the outdoor air is cooler than the zone. */
     economizerType: EconomizerType = EconomizerType.DifferentialDryBulb;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "demand_controlled_ventilation" })
     /** Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the zone. */
     demandControlledVentilation: boolean = false;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -36,6 +39,7 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
     /** A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. */
     sensibleHeatRecovery: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -44,12 +48,14 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
     /** A number between 0 and 1 for the effectiveness of latent heat recovery within the system. */
     latentHeatRecovery: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "heating_air_temperature" })
     /** A number for the maximum heating supply air temperature [C]. */
     heatingAirTemperature: number = 50;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "cooling_air_temperature" })
@@ -66,6 +72,7 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
     /** A number for the maximum cooling capacity in Watts. This can also be an Autosize object to indicate that the capacity should be determined during the EnergyPlus sizing calculation. This can also be a NoLimit object to indicate no upper limit to the cooling capacity. */
     coolingLimit: (Autosize | NoLimit | number) = new Autosize();
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -74,6 +81,7 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
     /** An optional identifier of a schedule to set the availability of heating over the course of the simulation. */
     heatingAvailability?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)

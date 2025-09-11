@@ -8,6 +8,7 @@ import { WindowConstructionShade } from "./WindowConstructionShade";
 
 /** A set of constructions for aperture assemblies. */
 export class ApertureConstructionSet extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ApertureConstructionSet$/)

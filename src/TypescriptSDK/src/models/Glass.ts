@@ -49,6 +49,7 @@ export class Glass extends ModifierBase {
     /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
     dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -57,6 +58,7 @@ export class Glass extends ModifierBase {
     /** A value between 0 and 1 for the red channel transmissivity. */
     rTransmissivity: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -65,6 +67,7 @@ export class Glass extends ModifierBase {
     /** A value between 0 and 1 for the green channel transmissivity. */
     gTransmissivity: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -73,12 +76,14 @@ export class Glass extends ModifierBase {
     /** A value between 0 and 1 for the blue channel transmissivity. */
     bTransmissivity: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "refraction_index" })
     /** A value greater than 1 for the index of refraction. Typical values are 1.52 for float glass and 1.4 for ETFE. */
     refractionIndex: number = 1.52;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Glass$/)

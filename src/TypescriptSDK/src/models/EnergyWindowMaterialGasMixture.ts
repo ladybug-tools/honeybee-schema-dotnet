@@ -7,20 +7,22 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 /** Create a mixture of two to four different gases to fill the panes of multiple\npane windows. */
 export class EnergyWindowMaterialGasMixture extends IDdEnergyBaseModel {
     @IsArray()
-    @IsEnum(GasType, { each: true })
     @Type(() => String)
+    @IsEnum(GasType, { each: true })
     @IsDefined()
     @Expose({ name: "gas_types" })
     /** List of gases in the gas mixture. */
     gasTypes!: GasType[];
 	
     @IsArray()
+    @Type(() => Number)
     @IsNumber({},{ each: true })
     @IsDefined()
     @Expose({ name: "gas_fractions" })
     /** A list of fractional numbers describing the volumetric fractions of gas types in the mixture. This list must align with the gas_types list and must sum to 1. */
     gasFractions!: number[];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^EnergyWindowMaterialGasMixture$/)
@@ -28,6 +30,7 @@ export class EnergyWindowMaterialGasMixture extends IDdEnergyBaseModel {
     /** type */
     type: string = "EnergyWindowMaterialGasMixture";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "thickness" })

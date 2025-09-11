@@ -6,30 +6,31 @@ import { OpaqueConstruction } from "./OpaqueConstruction";
 
 /** A set of constructions for floor assemblies. */
 export class FloorConstructionSet extends _OpenAPIGenBaseModel {
-    @IsInstance(OpaqueConstruction)
     @Type(() => OpaqueConstruction)
+    @IsInstance(OpaqueConstruction)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "interior_construction" })
     /** An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition. */
     interiorConstruction?: OpaqueConstruction;
 	
-    @IsInstance(OpaqueConstruction)
     @Type(() => OpaqueConstruction)
+    @IsInstance(OpaqueConstruction)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "exterior_construction" })
     /** An OpaqueConstruction for walls with an Outdoors boundary condition. */
     exteriorConstruction?: OpaqueConstruction;
 	
-    @IsInstance(OpaqueConstruction)
     @Type(() => OpaqueConstruction)
+    @IsInstance(OpaqueConstruction)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "ground_construction" })
     /** An OpaqueConstruction for walls with a Ground boundary condition. */
     groundConstruction?: OpaqueConstruction;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^FloorConstructionSet$/)

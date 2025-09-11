@@ -7,6 +7,7 @@ import { ScheduleRuleset } from "./ScheduleRuleset";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class ServiceHotWater extends IDdEnergyBaseModel {
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Min(0)
@@ -25,6 +26,7 @@ export class ServiceHotWater extends IDdEnergyBaseModel {
     /** The schedule for the use of hot water over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile. */
     schedule!: (ScheduleRuleset | ScheduleFixedInterval);
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ServiceHotWater$/)
@@ -32,12 +34,14 @@ export class ServiceHotWater extends IDdEnergyBaseModel {
     /** type */
     type: string = "ServiceHotWater";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "target_temperature" })
     /** Number for the target temperature of water out of the tap (C). This the temperature after hot water has been mixed with cold water from the water mains. The default is 60C, which essentially assumes that the flow_per_area on this object is only for water straight out of the water heater. */
     targetTemperature: number = 60;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -46,6 +50,7 @@ export class ServiceHotWater extends IDdEnergyBaseModel {
     /** A number between 0 and 1 for the fraction of the total hot water load given off as sensible heat in the zone. */
     sensibleFraction: number = 0.2;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)

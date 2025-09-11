@@ -5,6 +5,7 @@ import { _SkyCondition } from "./_SkyCondition";
 
 /** Used to specify sky conditions on a design day. */
 export class ASHRAEClearSky extends _SkyCondition {
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Min(0)
@@ -13,6 +14,7 @@ export class ASHRAEClearSky extends _SkyCondition {
     /** Value between 0 and 1.2 that will get multiplied by the irradiance to correct for factors like elevation above sea level. */
     clearness!: number;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ASHRAEClearSky$/)

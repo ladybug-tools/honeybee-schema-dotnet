@@ -6,6 +6,7 @@ import { ReportingFrequency } from "./ReportingFrequency";
 
 /** Lists the outputs to report from the simulation and their format. */
 export class SimulationOutput extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^SimulationOutput$/)
@@ -13,14 +14,15 @@ export class SimulationOutput extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "SimulationOutput";
 	
-    @IsEnum(ReportingFrequency)
     @Type(() => String)
+    @IsEnum(ReportingFrequency)
     @IsOptional()
     @Expose({ name: "reporting_frequency" })
     /** reportingFrequency */
     reportingFrequency: ReportingFrequency = ReportingFrequency.Hourly;
 	
     @IsArray()
+    @Type(() => String)
     @IsString({ each: true })
     @IsOptional()
     @Expose({ name: "outputs" })
@@ -28,12 +30,14 @@ export class SimulationOutput extends _OpenAPIGenBaseModel {
     outputs?: string[];
 	
     @IsArray()
+    @Type(() => String)
     @IsString({ each: true })
     @IsOptional()
     @Expose({ name: "summary_reports" })
     /** A list of EnergyPlus summary report names as strings. */
     summaryReports?: string[];
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)

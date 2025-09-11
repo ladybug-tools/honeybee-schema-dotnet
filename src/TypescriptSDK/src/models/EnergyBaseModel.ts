@@ -5,6 +5,7 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects requiring a valid EnergyPlus identifier. */
 export class EnergyBaseModel extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @Matches(/^[^,;!\n\t]+$/)
@@ -14,12 +15,14 @@ export class EnergyBaseModel extends _OpenAPIGenBaseModel {
     /** Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t). */
     identifier!: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "display_name" })
     /** Display name of the object with no character restrictions. */
     displayName?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^EnergyBaseModel$/)

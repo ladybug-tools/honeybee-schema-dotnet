@@ -5,6 +5,7 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Used to specify wind conditions on a design day. */
 export class WindCondition extends _OpenAPIGenBaseModel {
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Min(0)
@@ -13,6 +14,7 @@ export class WindCondition extends _OpenAPIGenBaseModel {
     /** Wind speed on the design day [m/s]. */
     windSpeed!: number;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^WindCondition$/)
@@ -20,6 +22,7 @@ export class WindCondition extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "WindCondition";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)

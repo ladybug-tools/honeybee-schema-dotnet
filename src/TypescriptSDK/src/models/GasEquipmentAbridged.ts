@@ -5,6 +5,7 @@ import { _EquipmentBase } from "./_EquipmentBase";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class GasEquipmentAbridged extends _EquipmentBase {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^GasEquipmentAbridged$/)

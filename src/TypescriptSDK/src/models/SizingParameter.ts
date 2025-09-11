@@ -8,6 +8,7 @@ import { EfficiencyStandards } from "./EfficiencyStandards";
 
 /** Used to specify heating and cooling sizing criteria and safety factors. */
 export class SizingParameter extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^SizingParameter$/)
@@ -16,46 +17,50 @@ export class SizingParameter extends _OpenAPIGenBaseModel {
     type: string = "SizingParameter";
 	
     @IsArray()
-    @IsInstance(DesignDay, { each: true })
     @Type(() => DesignDay)
+    @IsInstance(DesignDay, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "design_days" })
     /** A list of DesignDays that represent the criteria for which the HVAC systems will be sized. */
     designDays?: DesignDay[];
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "heating_factor" })
     /** A number that will be multiplied by the peak heating load for each zone in order to size the heating system. */
     heatingFactor: number = 1.25;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "cooling_factor" })
     /** A number that will be multiplied by the peak cooling load for each zone in order to size the heating system. */
     coolingFactor: number = 1.15;
 	
-    @IsEnum(EfficiencyStandards)
     @Type(() => String)
+    @IsEnum(EfficiencyStandards)
     @IsOptional()
     @Expose({ name: "efficiency_standard" })
     /** Text to specify the efficiency standard, which will automatically set the efficiencies of all HVAC equipment when provided. Note that providing a standard here will cause the OpenStudio translation process to perform an additional sizing calculation with EnergyPlus, which is needed since the default efficiencies of equipment vary depending on their size. THIS WILL SIGNIFICANTLY INCREASE TRANSLATION TIME TO OPENSTUDIO. However, it is often worthwhile when the goal is to match the HVAC specification with a particular standard. */
     efficiencyStandard?: EfficiencyStandards;
 	
-    @IsEnum(ClimateZones)
     @Type(() => String)
+    @IsEnum(ClimateZones)
     @IsOptional()
     @Expose({ name: "climate_zone" })
     /** Text indicating the ASHRAE climate zone to be used with the efficiency_standard. When unspecified, the climate zone will be inferred from the design days on this sizing parameter object. */
     climateZone?: ClimateZones;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "building_type" })
     /** Text for the building type to be used in the efficiency_standard. If the type is not recognized or is None, it will be assumed that the building is a generic NonResidential. The following have specified systems per the standard:  Residential, NonResidential, MidriseApartment, HighriseApartment, LargeOffice, MediumOffice, SmallOffice, Retail, StripMall, PrimarySchool, SecondarySchool, SmallHotel, LargeHotel, Hospital, Outpatient, Warehouse, SuperMarket, FullServiceRestaurant, QuickServiceRestaurant, Laboratory, Courthouse. */
     buildingType?: string;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "bypass_efficiency_sizing" })

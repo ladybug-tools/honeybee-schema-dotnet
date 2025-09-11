@@ -6,12 +6,14 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 /** Construction for opaque objects (Face, Shade, Door). */
 export class OpaqueConstructionAbridged extends IDdEnergyBaseModel {
     @IsArray()
+    @Type(() => String)
     @IsString({ each: true })
     @IsDefined()
     @Expose({ name: "materials" })
     /** List of strings for opaque material identifiers. The order of the materials is from exterior to interior. */
     materials!: string[];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^OpaqueConstructionAbridged$/)

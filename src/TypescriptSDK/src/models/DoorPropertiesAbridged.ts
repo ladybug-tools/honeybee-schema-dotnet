@@ -6,6 +6,7 @@ import { DoorEnergyPropertiesAbridged } from "./DoorEnergyPropertiesAbridged";
 import { DoorRadiancePropertiesAbridged } from "./DoorRadiancePropertiesAbridged";
 
 export class DoorPropertiesAbridged extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^DoorPropertiesAbridged$/)
@@ -13,16 +14,16 @@ export class DoorPropertiesAbridged extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "DoorPropertiesAbridged";
 	
-    @IsInstance(DoorEnergyPropertiesAbridged)
     @Type(() => DoorEnergyPropertiesAbridged)
+    @IsInstance(DoorEnergyPropertiesAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "energy" })
     /** energy */
     energy?: DoorEnergyPropertiesAbridged;
 	
-    @IsInstance(DoorRadiancePropertiesAbridged)
     @Type(() => DoorRadiancePropertiesAbridged)
+    @IsInstance(DoorRadiancePropertiesAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "radiance" })

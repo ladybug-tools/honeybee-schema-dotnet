@@ -16,16 +16,16 @@ import { Surface } from "./Surface";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Face extends IDdBaseModel {
-    @IsInstance(Face3D)
     @Type(() => Face3D)
+    @IsInstance(Face3D)
     @ValidateNested()
     @IsDefined()
     @Expose({ name: "geometry" })
     /** Planar Face3D for the geometry. */
     geometry!: Face3D;
 	
-    @IsEnum(FaceType)
     @Type(() => String)
+    @IsEnum(FaceType)
     @IsDefined()
     @Expose({ name: "face_type" })
     /** faceType */
@@ -45,14 +45,15 @@ export class Face extends IDdBaseModel {
     /** boundaryCondition */
     boundaryCondition!: (Ground | Outdoors | Adiabatic | Surface | OtherSideTemperature);
 	
-    @IsInstance(FacePropertiesAbridged)
     @Type(() => FacePropertiesAbridged)
+    @IsInstance(FacePropertiesAbridged)
     @ValidateNested()
     @IsDefined()
     @Expose({ name: "properties" })
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
     properties!: FacePropertiesAbridged;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Face$/)
@@ -61,8 +62,8 @@ export class Face extends IDdBaseModel {
     type: string = "Face";
 	
     @IsArray()
-    @IsInstance(Aperture, { each: true })
     @Type(() => Aperture)
+    @IsInstance(Aperture, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "apertures" })
@@ -70,8 +71,8 @@ export class Face extends IDdBaseModel {
     apertures?: Aperture[];
 	
     @IsArray()
-    @IsInstance(Door, { each: true })
     @Type(() => Door)
+    @IsInstance(Door, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "doors" })
@@ -79,8 +80,8 @@ export class Face extends IDdBaseModel {
     doors?: Door[];
 	
     @IsArray()
-    @IsInstance(Shade, { each: true })
     @Type(() => Shade)
+    @IsInstance(Shade, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "indoor_shades" })
@@ -88,8 +89,8 @@ export class Face extends IDdBaseModel {
     indoorShades?: Shade[];
 	
     @IsArray()
-    @IsInstance(Shade, { each: true })
     @Type(() => Shade)
+    @IsInstance(Shade, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "outdoor_shades" })

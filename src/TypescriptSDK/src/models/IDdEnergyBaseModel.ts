@@ -10,6 +10,7 @@ export class IDdEnergyBaseModel extends EnergyBaseModel {
     /** Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list). */
     userData?: Object;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^IDdEnergyBaseModel$/)

@@ -14,6 +14,7 @@ export class Face3D extends _OpenAPIGenBaseModel {
     /** A list of points representing the outer boundary vertices of the face. The list should include at least 3 points and each point should be a list of 3 (x, y, z) values. */
     boundary!: number[][];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Face3D$/)
@@ -28,8 +29,8 @@ export class Face3D extends _OpenAPIGenBaseModel {
     /** Optional list of lists with one list for each hole in the face.Each hole should be a list of at least 3 points and each point a list of 3 (x, y, z) values. If None, it will be assumed that there are no holes in the face. */
     holes?: number[][][];
 	
-    @IsInstance(Plane)
     @Type(() => Plane)
+    @IsInstance(Plane)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "plane" })

@@ -5,6 +5,7 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A RGB color. */
 export class Color extends _OpenAPIGenBaseModel {
+    @Type(() => Number)
     @IsInt()
     @IsDefined()
     @Min(0)
@@ -13,6 +14,7 @@ export class Color extends _OpenAPIGenBaseModel {
     /** Value for red channel. */
     r!: number;
 	
+    @Type(() => Number)
     @IsInt()
     @IsDefined()
     @Min(0)
@@ -21,6 +23,7 @@ export class Color extends _OpenAPIGenBaseModel {
     /** Value for green channel. */
     g!: number;
 	
+    @Type(() => Number)
     @IsInt()
     @IsDefined()
     @Min(0)
@@ -29,6 +32,7 @@ export class Color extends _OpenAPIGenBaseModel {
     /** Value for blue channel. */
     b!: number;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Color$/)
@@ -36,6 +40,7 @@ export class Color extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "Color";
 	
+    @Type(() => Number)
     @IsInt()
     @IsOptional()
     @Min(0)

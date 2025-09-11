@@ -5,6 +5,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class LightingAbridged extends IDdEnergyBaseModel {
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Min(0)
@@ -12,6 +13,7 @@ export class LightingAbridged extends IDdEnergyBaseModel {
     /** Lighting per floor area as [W/m2]. */
     wattsPerArea!: number;
 	
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @MinLength(1)
@@ -20,6 +22,7 @@ export class LightingAbridged extends IDdEnergyBaseModel {
     /** Identifier of the schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile. */
     schedule!: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^LightingAbridged$/)
@@ -27,6 +30,7 @@ export class LightingAbridged extends IDdEnergyBaseModel {
     /** type */
     type: string = "LightingAbridged";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -35,6 +39,7 @@ export class LightingAbridged extends IDdEnergyBaseModel {
     /** The fraction of heat from lights that goes into the zone as visible (short-wave) radiation. (Default: 0.25). */
     visibleFraction: number = 0.25;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -43,6 +48,7 @@ export class LightingAbridged extends IDdEnergyBaseModel {
     /** The fraction of heat from lights that is long-wave radiation. (Default: 0.32). */
     radiantFraction: number = 0.32;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -51,6 +57,7 @@ export class LightingAbridged extends IDdEnergyBaseModel {
     /** The fraction of the heat from lights that goes into the zone return air. (Default: 0). */
     returnAirFraction: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)

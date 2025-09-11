@@ -5,6 +5,7 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** A set of constructions for door assemblies. */
 export class DoorConstructionSetAbridged extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^DoorConstructionSetAbridged$/)
@@ -12,6 +13,7 @@ export class DoorConstructionSetAbridged extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "DoorConstructionSetAbridged";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -20,6 +22,7 @@ export class DoorConstructionSetAbridged extends _OpenAPIGenBaseModel {
     /** Identifier for an OpaqueConstruction for all opaque doors with a Surface boundary condition. */
     interiorConstruction?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -28,6 +31,7 @@ export class DoorConstructionSetAbridged extends _OpenAPIGenBaseModel {
     /** Identifier for an OpaqueConstruction for opaque doors with an Outdoors boundary condition and a Wall face type for their parent face. */
     exteriorConstruction?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -36,6 +40,7 @@ export class DoorConstructionSetAbridged extends _OpenAPIGenBaseModel {
     /** Identifier for an OpaqueConstruction for opaque doors with an Outdoors boundary condition and a RoofCeiling or Floor type for their parent face. */
     overheadConstruction?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -44,6 +49,7 @@ export class DoorConstructionSetAbridged extends _OpenAPIGenBaseModel {
     /** Identifier for a WindowConstruction for all glass doors with an Outdoors boundary condition. */
     exteriorGlassConstruction?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)

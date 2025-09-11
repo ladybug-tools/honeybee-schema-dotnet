@@ -6,13 +6,14 @@ import { Vintages } from "./Vintages";
 
 /** Base class for all heating/cooling systems without any ventilation.\n\nThese systems are only designed to satisfy heating + cooling demand and they\ncannot meet any minimum ventilation requirements.\n\nAs such, these systems tend to be used in residential or storage settings where\nmeeting minimum ventilation requirements may not be required or the density\nof occupancy is so low that infiltration is enough to meet fresh air demand. */
 export class _HeatCoolBase extends IDdEnergyBaseModel {
-    @IsEnum(Vintages)
     @Type(() => String)
+    @IsEnum(Vintages)
     @IsOptional()
     @Expose({ name: "vintage" })
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
     vintage: Vintages = Vintages.ASHRAE_2019;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^_HeatCoolBase$/)

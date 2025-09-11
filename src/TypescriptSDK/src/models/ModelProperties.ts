@@ -7,6 +7,7 @@ import { ModelEnergyProperties } from "./ModelEnergyProperties";
 import { ModelRadianceProperties } from "./ModelRadianceProperties";
 
 export class ModelProperties extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ModelProperties$/)
@@ -14,24 +15,24 @@ export class ModelProperties extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "ModelProperties";
 	
-    @IsInstance(ModelEnergyProperties)
     @Type(() => ModelEnergyProperties)
+    @IsInstance(ModelEnergyProperties)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "energy" })
     /** energy */
     energy?: ModelEnergyProperties;
 	
-    @IsInstance(ModelRadianceProperties)
     @Type(() => ModelRadianceProperties)
+    @IsInstance(ModelRadianceProperties)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "radiance" })
     /** radiance */
     radiance?: ModelRadianceProperties;
 	
-    @IsInstance(ModelDoe2Properties)
     @Type(() => ModelDoe2Properties)
+    @IsInstance(ModelDoe2Properties)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "doe2" })

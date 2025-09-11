@@ -13,6 +13,7 @@ import { Void } from "./Void";
 
 /** Radiance BSDF (Bidirectional Scattering Distribution Function) material. */
 export class BSDF extends ModifierBase {
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @Expose({ name: "bsdf_data" })
@@ -56,18 +57,21 @@ export class BSDF extends ModifierBase {
     dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
 	
     @IsArray()
+    @Type(() => Number)
     @IsNumber({},{ each: true })
     @IsOptional()
     @Expose({ name: "up_orientation" })
     /** Vector as sequence that sets the hemisphere that the BSDF material faces. */
     upOrientation: number[] = [0.01, 0.01, 1];
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "thickness" })
     /** Optional number to set the thickness of the BSDF material Sign of thickness indicates whether proxied geometry is behind the BSDF surface (when thickness is positive) or in front (when thickness is negative). */
     thickness: number = 0;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -76,6 +80,7 @@ export class BSDF extends ModifierBase {
     /** Optional input for function file. Using ""."" will ensure that BSDF data is written to the root of wherever a given study is run. */
     functionFile: string = ".";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -85,6 +90,7 @@ export class BSDF extends ModifierBase {
     transform?: string;
 	
     @IsArray()
+    @Type(() => Number)
     @IsNumber({},{ each: true })
     @IsOptional()
     @Expose({ name: "front_diffuse_reflectance" })
@@ -92,6 +98,7 @@ export class BSDF extends ModifierBase {
     frontDiffuseReflectance?: number[];
 	
     @IsArray()
+    @Type(() => Number)
     @IsNumber({},{ each: true })
     @IsOptional()
     @Expose({ name: "back_diffuse_reflectance" })
@@ -99,12 +106,14 @@ export class BSDF extends ModifierBase {
     backDiffuseReflectance?: number[];
 	
     @IsArray()
+    @Type(() => Number)
     @IsNumber({},{ each: true })
     @IsOptional()
     @Expose({ name: "diffuse_transmittance" })
     /** Optional additional diffuse transmittance as sequence of three RGB numbers. */
     diffuseTransmittance?: number[];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^BSDF$/)

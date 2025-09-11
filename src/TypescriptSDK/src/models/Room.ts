@@ -9,22 +9,23 @@ import { Shade } from "./Shade";
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Room extends IDdBaseModel {
     @IsArray()
-    @IsInstance(Face, { each: true })
     @Type(() => Face)
+    @IsInstance(Face, { each: true })
     @ValidateNested({ each: true })
     @IsDefined()
     @Expose({ name: "faces" })
     /** Faces that together form the closed volume of a room. */
     faces!: Face[];
 	
-    @IsInstance(RoomPropertiesAbridged)
     @Type(() => RoomPropertiesAbridged)
+    @IsInstance(RoomPropertiesAbridged)
     @ValidateNested()
     @IsDefined()
     @Expose({ name: "properties" })
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
     properties!: RoomPropertiesAbridged;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Room$/)
@@ -33,8 +34,8 @@ export class Room extends IDdBaseModel {
     type: string = "Room";
 	
     @IsArray()
-    @IsInstance(Shade, { each: true })
     @Type(() => Shade)
+    @IsInstance(Shade, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "indoor_shades" })
@@ -42,14 +43,15 @@ export class Room extends IDdBaseModel {
     indoorShades?: Shade[];
 	
     @IsArray()
-    @IsInstance(Shade, { each: true })
     @Type(() => Shade)
+    @IsInstance(Shade, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "outdoor_shades" })
     /** Shades assigned to the exterior side of this object (eg. trees, landscaping). */
     outdoorShades?: Shade[];
 	
+    @Type(() => Number)
     @IsInt()
     @IsOptional()
     @Min(1)
@@ -57,18 +59,21 @@ export class Room extends IDdBaseModel {
     /** An integer noting how many times this Room is repeated. Multipliers are used to speed up the calculation when similar Rooms are repeated more than once. Essentially, a given simulation with the Room is run once and then the result is multiplied by the multiplier. */
     multiplier: number = 1;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "exclude_floor_area" })
     /** A boolean for whether the Room floor area contributes to Models it is a part of. Note that this will not affect the floor_area property of this Room itself but it will ensure the Room floor area is excluded from any calculations when the Room is part of a Model, including EUI calculations. */
     excludeFloorArea: boolean = false;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "zone" })
     /** Text string for for the zone identifier to which this Room belongs. Rooms sharing the same zone identifier are considered part of the same zone in a Model. If the zone identifier has not been specified, it will be the same as the Room identifier in the destination engine. Note that this property has no character restrictions. */
     zone?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "story" })

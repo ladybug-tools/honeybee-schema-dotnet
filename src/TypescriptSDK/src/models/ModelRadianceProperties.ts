@@ -19,6 +19,7 @@ import { Void } from "./Void";
 
 /** Radiance Properties for Honeybee Model. */
 export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ModelRadianceProperties$/)
@@ -26,8 +27,8 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "ModelRadianceProperties";
 	
-    @IsInstance(GlobalModifierSet)
     @Type(() => GlobalModifierSet)
+    @IsInstance(GlobalModifierSet)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "global_modifier_set" })
@@ -225,8 +226,8 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
     modifierSets?: (ModifierSet | ModifierSetAbridged)[];
 	
     @IsArray()
-    @IsInstance(SensorGrid, { each: true })
     @Type(() => SensorGrid)
+    @IsInstance(SensorGrid, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "sensor_grids" })
@@ -234,8 +235,8 @@ export class ModelRadianceProperties extends _OpenAPIGenBaseModel {
     sensorGrids?: SensorGrid[];
 	
     @IsArray()
-    @IsInstance(View, { each: true })
     @Type(() => View)
+    @IsInstance(View, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "views" })

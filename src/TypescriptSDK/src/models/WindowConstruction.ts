@@ -25,6 +25,7 @@ export class WindowConstruction extends IDdEnergyBaseModel {
     /** List of glazing and gas material definitions. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer. */
     materials!: (EnergyWindowMaterialSimpleGlazSys | EnergyWindowMaterialGlazing | EnergyWindowMaterialGas | EnergyWindowMaterialGasCustom | EnergyWindowMaterialGasMixture)[];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^WindowConstruction$/)
@@ -32,8 +33,8 @@ export class WindowConstruction extends IDdEnergyBaseModel {
     /** type */
     type: string = "WindowConstruction";
 	
-    @IsInstance(EnergyWindowFrame)
     @Type(() => EnergyWindowFrame)
+    @IsInstance(EnergyWindowFrame)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "frame" })

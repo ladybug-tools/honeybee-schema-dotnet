@@ -5,6 +5,7 @@ import { DatedBaseModel } from "./DatedBaseModel";
 
 /** Schedule rule including a ScheduleDay and when it should be applied.. */
 export class ScheduleRuleAbridged extends DatedBaseModel {
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @MinLength(1)
@@ -13,6 +14,7 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
     /** The identifier of a ScheduleDay object associated with this rule. */
     scheduleDay!: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ScheduleRuleAbridged$/)
@@ -20,42 +22,49 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
     /** type */
     type: string = "ScheduleRuleAbridged";
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "apply_sunday" })
     /** Boolean noting whether to apply schedule_day on Sundays. */
     applySunday: boolean = false;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "apply_monday" })
     /** Boolean noting whether to apply schedule_day on Mondays. */
     applyMonday: boolean = false;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "apply_tuesday" })
     /** Boolean noting whether to apply schedule_day on Tuesdays. */
     applyTuesday: boolean = false;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "apply_wednesday" })
     /** Boolean noting whether to apply schedule_day on Wednesdays. */
     applyWednesday: boolean = false;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "apply_thursday" })
     /** Boolean noting whether to apply schedule_day on Thursdays. */
     applyThursday: boolean = false;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "apply_friday" })
     /** Boolean noting whether to apply schedule_day on Fridays. */
     applyFriday: boolean = false;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "apply_saturday" })
@@ -63,6 +72,7 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
     applySaturday: boolean = false;
 	
     @IsArray()
+    @Type(() => Number)
     @IsInt({ each: true })
     @IsOptional()
     @Expose({ name: "start_date" })
@@ -70,6 +80,7 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
     startDate: number[] = [1, 1];
 	
     @IsArray()
+    @Type(() => Number)
     @IsInt({ each: true })
     @IsOptional()
     @Expose({ name: "end_date" })

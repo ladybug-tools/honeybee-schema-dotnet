@@ -6,6 +6,7 @@ import { RadianceSubFaceStateAbridged } from "./RadianceSubFaceStateAbridged";
 
 /** Radiance Properties for Honeybee Aperture Abridged. */
 export class ApertureRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ApertureRadiancePropertiesAbridged$/)
@@ -13,6 +14,7 @@ export class ApertureRadiancePropertiesAbridged extends _PropertiesBaseAbridged 
     /** type */
     type: string = "ApertureRadiancePropertiesAbridged";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "dynamic_group_identifier" })
@@ -20,8 +22,8 @@ export class ApertureRadiancePropertiesAbridged extends _PropertiesBaseAbridged 
     dynamicGroupIdentifier?: string;
 	
     @IsArray()
-    @IsInstance(RadianceSubFaceStateAbridged, { each: true })
     @Type(() => RadianceSubFaceStateAbridged)
+    @IsInstance(RadianceSubFaceStateAbridged, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "states" })

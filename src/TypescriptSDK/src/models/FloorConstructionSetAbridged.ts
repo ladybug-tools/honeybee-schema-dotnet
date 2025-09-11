@@ -5,6 +5,7 @@ import { _FaceSubSetAbridged } from "./_FaceSubSetAbridged";
 
 /** A set of constructions for floor assemblies. */
 export class FloorConstructionSetAbridged extends _FaceSubSetAbridged {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^FloorConstructionSetAbridged$/)

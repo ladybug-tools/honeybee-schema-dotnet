@@ -5,6 +5,7 @@ import { _PropertiesBaseAbridged } from "./_PropertiesBaseAbridged";
 
 /** Radiance Properties for Honeybee ShadeMesh Abridged. */
 export class ShadeMeshRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ShadeMeshRadiancePropertiesAbridged$/)

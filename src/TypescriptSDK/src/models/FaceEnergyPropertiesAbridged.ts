@@ -6,6 +6,7 @@ import { AFNCrack } from "./AFNCrack";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class FaceEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^FaceEnergyPropertiesAbridged$/)
@@ -13,6 +14,7 @@ export class FaceEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "FaceEnergyPropertiesAbridged";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -21,8 +23,8 @@ export class FaceEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     /** Identifier of an OpaqueConstruction for the Face. If None, the construction is set by the parent Room construction_set or the Model global_construction_set. */
     construction?: string;
 	
-    @IsInstance(AFNCrack)
     @Type(() => AFNCrack)
+    @IsInstance(AFNCrack)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "vent_crack" })

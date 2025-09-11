@@ -5,13 +5,14 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { GeometryObjectTypes } from "./GeometryObjectTypes";
 
 export class ChangedInstruction extends _OpenAPIGenBaseModel {
-    @IsEnum(GeometryObjectTypes)
     @Type(() => String)
+    @IsEnum(GeometryObjectTypes)
     @IsDefined()
     @Expose({ name: "element_type" })
     /** Text for the type of object that has been changed. */
     elementType!: GeometryObjectTypes;
 	
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @Matches(/^[^,;!\n\t]+$/)
@@ -21,30 +22,35 @@ export class ChangedInstruction extends _OpenAPIGenBaseModel {
     /** Text string for the unique object ID that has changed. */
     elementId!: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "element_name" })
     /** Text string for the display name of the object that has changed. */
     elementName?: string;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "update_geometry" })
     /** A boolean to note whether the geometry of the object in the new/updated model should replace the base/existing geometry (True) or the existing geometry should be kept (False). */
     updateGeometry: boolean = true;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "update_energy" })
     /** A boolean to note whether the energy properties of the object in the new/updated model should replace the base/existing energy properties (True) or the base/existing energy properties should be kept (False). */
     updateEnergy: boolean = true;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "update_radiance" })
     /** A boolean to note whether the radiance properties of the object in the new/updated model should replace the base/existing radiance properties (True) or the base/existing radiance properties should be kept (False). */
     updateRadiance: boolean = true;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ChangedInstruction$/)

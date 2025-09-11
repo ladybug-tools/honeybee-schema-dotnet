@@ -6,6 +6,7 @@ import { Autocalculate } from "./Autocalculate";
 
 /** A Ladybug Location. */
 export class Location extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Location$/)
@@ -13,18 +14,21 @@ export class Location extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "Location";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "city" })
     /** Name of the city as a string. */
     city: string = "-";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "latitude" })
     /** Location latitude between -90 and 90 (Default: 0). */
     latitude: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "longitude" })
@@ -36,18 +40,21 @@ export class Location extends _OpenAPIGenBaseModel {
     /** Time zone between -12 hours (west) and +14 hours (east). If None, the time zone will be an estimated integer value derived from the longitude in accordance with solar time. */
     timeZone: (Autocalculate | number) = new Autocalculate();
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "elevation" })
     /** A number for elevation of the location in meters. (Default: 0). */
     elevation: number = 0;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "station_id" })
     /** ID of the location if the location is representing a weather station. */
     stationId?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "source" })

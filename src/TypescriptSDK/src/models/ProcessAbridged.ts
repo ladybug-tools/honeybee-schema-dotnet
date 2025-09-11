@@ -6,6 +6,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class ProcessAbridged extends IDdEnergyBaseModel {
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Min(0)
@@ -13,6 +14,7 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
     /** A number for the process load power in Watts. */
     watts!: number;
 	
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @MinLength(1)
@@ -21,13 +23,14 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
     /** Identifier of the schedule for the use of the process over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts to yield a complete equipment profile. */
     schedule!: string;
 	
-    @IsEnum(FuelTypes)
     @Type(() => String)
+    @IsEnum(FuelTypes)
     @IsDefined()
     @Expose({ name: "fuel_type" })
     /** Text to denote the type of fuel consumed by the process. Using the ""None"" type indicates that no end uses will be associated with the process, only the zone gains. */
     fuelType!: FuelTypes;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ProcessAbridged$/)
@@ -35,6 +38,7 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
     /** type */
     type: string = "ProcessAbridged";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -43,6 +47,7 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
     /** Text to indicate the end-use subcategory, which will identify the process load in the end use output. For example, “Cooking”, “Clothes Drying”, etc. A new meter for reporting is created for each unique subcategory. */
     endUseCategory: string = "Process";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -51,6 +56,7 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
     /** Number for the amount of long-wave radiation heat given off by the process load. Default value is 0. */
     radiantFraction: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -59,6 +65,7 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
     /** Number for the amount of latent heat given off by the process load. Default value is 0. */
     latentFraction: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)

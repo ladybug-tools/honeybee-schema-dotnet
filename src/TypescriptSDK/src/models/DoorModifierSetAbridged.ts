@@ -5,6 +5,7 @@ import { BaseModifierSetAbridged } from "./BaseModifierSetAbridged";
 
 /** Abridged set containing radiance modifiers needed for a model's Doors. */
 export class DoorModifierSetAbridged extends BaseModifierSetAbridged {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^DoorModifierSetAbridged$/)
@@ -12,18 +13,21 @@ export class DoorModifierSetAbridged extends BaseModifierSetAbridged {
     /** type */
     type: string = "DoorModifierSetAbridged";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "interior_glass_modifier" })
     /** Identifier of modifier object for glass with a Surface boundary condition. */
     interiorGlassModifier?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "exterior_glass_modifier" })
     /** Identifier of modifier object for glass with an Outdoors boundary condition. */
     exteriorGlassModifier?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "overhead_modifier" })

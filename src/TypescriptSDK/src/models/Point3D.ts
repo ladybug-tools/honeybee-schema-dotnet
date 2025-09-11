@@ -4,24 +4,28 @@ import { deepTransform } from '../deepTransform';
 
 /** A point object in 3D space. */
 export class Point3D {
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Expose({ name: "x" })
     /** Number for X coordinate. */
     x!: number;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Expose({ name: "y" })
     /** Number for Y coordinate. */
     y!: number;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Expose({ name: "z" })
     /** Number for Z coordinate. */
     z!: number;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Point3D$/)

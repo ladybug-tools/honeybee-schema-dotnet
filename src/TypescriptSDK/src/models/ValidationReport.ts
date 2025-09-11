@@ -4,6 +4,7 @@ import { deepTransform } from '../deepTransform';
 import { ValidationError } from "./ValidationError";
 
 export class ValidationReport {
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @Matches(/([0-9]+)\.([0-9]+)\.([0-9]+)/)
@@ -11,6 +12,7 @@ export class ValidationReport {
     /** Text string for the version of honeybee-core or dragonfly-core that performed the validation. */
     appVersion!: string;
 	
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @Matches(/([0-9]+)\.([0-9]+)\.([0-9]+)/)
@@ -18,12 +20,14 @@ export class ValidationReport {
     /** Text string for the version of honeybee-schema or dragonfly-schema that performed the validation. */
     schemaVersion!: string;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsDefined()
     @Expose({ name: "valid" })
     /** Boolean to note whether the Model is valid or not. */
     valid!: boolean;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ValidationReport$/)
@@ -31,12 +35,14 @@ export class ValidationReport {
     /** type */
     type: string = "ValidationReport";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "app_name" })
     /** Text string for the name of the application that performed the validation. This is typically either Honeybee or Dragonfly. */
     appName: string = "Honeybee";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "fatal_error" })
@@ -44,8 +50,8 @@ export class ValidationReport {
     fatalError: string = "";
 	
     @IsArray()
-    @IsInstance(ValidationError, { each: true })
     @Type(() => ValidationError)
+    @IsInstance(ValidationError, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "errors" })

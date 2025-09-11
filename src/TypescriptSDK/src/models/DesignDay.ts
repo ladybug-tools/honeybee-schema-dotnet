@@ -11,6 +11,7 @@ import { WindCondition } from "./WindCondition";
 
 /** An object representing design day conditions. */
 export class DesignDay extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @MinLength(1)
@@ -19,31 +20,31 @@ export class DesignDay extends _OpenAPIGenBaseModel {
     /** Text string for a unique design day name. This name remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). It is also used to reference the object within SimulationParameters. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t). */
     name!: string;
 	
-    @IsEnum(DesignDayTypes)
     @Type(() => String)
+    @IsEnum(DesignDayTypes)
     @IsDefined()
     @Expose({ name: "day_type" })
     /** dayType */
     dayType!: DesignDayTypes;
 	
-    @IsInstance(DryBulbCondition)
     @Type(() => DryBulbCondition)
+    @IsInstance(DryBulbCondition)
     @ValidateNested()
     @IsDefined()
     @Expose({ name: "dry_bulb_condition" })
     /** A DryBulbCondition describing temperature conditions on the design day. */
     dryBulbCondition!: DryBulbCondition;
 	
-    @IsInstance(HumidityCondition)
     @Type(() => HumidityCondition)
+    @IsInstance(HumidityCondition)
     @ValidateNested()
     @IsDefined()
     @Expose({ name: "humidity_condition" })
     /** A HumidityCondition describing humidity and precipitation conditions on the design day. */
     humidityCondition!: HumidityCondition;
 	
-    @IsInstance(WindCondition)
     @Type(() => WindCondition)
+    @IsInstance(WindCondition)
     @ValidateNested()
     @IsDefined()
     @Expose({ name: "wind_condition" })
@@ -61,6 +62,7 @@ export class DesignDay extends _OpenAPIGenBaseModel {
     /** skyCondition */
     skyCondition!: (ASHRAEClearSky | ASHRAETau);
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^DesignDay$/)

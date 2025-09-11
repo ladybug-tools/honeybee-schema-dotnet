@@ -7,13 +7,14 @@ import { Vintages } from "./Vintages";
 
 /** Forced Air Furnace HVAC system (aka. System 9 or 10).\n\nForced air furnaces are intended only for spaces only requiring heating and\nventilation. Each room/zone receives its own air loop with its own gas heating\ncoil, which will supply air at a temperature up to 50C (122F) to meet the\nheating needs of the room/zone. Fans are constant volume.\n\nForcedAirFurnace systems are the traditional baseline system for storage\nspaces that only require heating. */
 export class ForcedAirFurnace extends IDdEnergyBaseModel {
-    @IsEnum(Vintages)
     @Type(() => String)
+    @IsEnum(Vintages)
     @IsOptional()
     @Expose({ name: "vintage" })
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
     vintage: Vintages = Vintages.ASHRAE_2019;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ForcedAirFurnace$/)
@@ -21,8 +22,8 @@ export class ForcedAirFurnace extends IDdEnergyBaseModel {
     /** type */
     type: string = "ForcedAirFurnace";
 	
-    @IsEnum(FurnaceEquipmentType)
     @Type(() => String)
+    @IsEnum(FurnaceEquipmentType)
     @IsOptional()
     @Expose({ name: "equipment_type" })
     /** Text for the specific type of system equipment from the FurnaceEquipmentType enumeration. */

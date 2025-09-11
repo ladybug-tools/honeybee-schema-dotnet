@@ -5,6 +5,7 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class VentilationControlAbridged extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^VentilationControlAbridged$/)
@@ -12,6 +13,7 @@ export class VentilationControlAbridged extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "VentilationControlAbridged";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(-100)
@@ -20,6 +22,7 @@ export class VentilationControlAbridged extends _OpenAPIGenBaseModel {
     /** A number for the minimum indoor temperature at which to ventilate in Celsius. Typically, this variable is used to initiate ventilation. */
     minIndoorTemperature: number = -100;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(-100)
@@ -28,6 +31,7 @@ export class VentilationControlAbridged extends _OpenAPIGenBaseModel {
     /** A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a maximum temperature at which point ventilation is stopped and a cooling system is turned on. */
     maxIndoorTemperature: number = 100;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(-100)
@@ -36,6 +40,7 @@ export class VentilationControlAbridged extends _OpenAPIGenBaseModel {
     /** A number for the minimum outdoor temperature at which to ventilate in Celsius. This can be used to ensure ventilative cooling does not happen during the winter even if the Room is above the min_indoor_temperature. */
     minOutdoorTemperature: number = -100;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(-100)
@@ -44,6 +49,7 @@ export class VentilationControlAbridged extends _OpenAPIGenBaseModel {
     /** A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a limit for when it is considered too hot outside for ventilative cooling. */
     maxOutdoorTemperature: number = 100;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(-100)
@@ -52,6 +58,7 @@ export class VentilationControlAbridged extends _OpenAPIGenBaseModel {
     /** A number for the temperature differential in Celsius between indoor and outdoor below which ventilation is shut off.  This should usually be a positive number so that ventilation only occurs when the outdoors is cooler than the indoors. Negative numbers indicate how much hotter the outdoors can be than the indoors before ventilation is stopped. */
     deltaTemperature: number = -100;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)

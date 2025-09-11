@@ -14,6 +14,7 @@ import { WallModifierSetAbridged } from "./WallModifierSetAbridged";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class GlobalModifierSet extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^GlobalModifierSet$/)
@@ -143,8 +144,8 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
   "transmitted_spec": 1.0
 })];
 	
-    @IsInstance(WallModifierSetAbridged)
     @Type(() => WallModifierSetAbridged)
+    @IsInstance(WallModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "wall_set" })
@@ -155,8 +156,8 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
   "type": "WallModifierSetAbridged"
 });
 	
-    @IsInstance(FloorModifierSetAbridged)
     @Type(() => FloorModifierSetAbridged)
+    @IsInstance(FloorModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "floor_set" })
@@ -167,8 +168,8 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
   "type": "FloorModifierSetAbridged"
 });
 	
-    @IsInstance(RoofCeilingModifierSetAbridged)
     @Type(() => RoofCeilingModifierSetAbridged)
+    @IsInstance(RoofCeilingModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "roof_ceiling_set" })
@@ -179,8 +180,8 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
   "type": "RoofCeilingModifierSetAbridged"
 });
 	
-    @IsInstance(ApertureModifierSetAbridged)
     @Type(() => ApertureModifierSetAbridged)
+    @IsInstance(ApertureModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "aperture_set" })
@@ -193,8 +194,8 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
   "operable_modifier": "generic_exterior_window_vis_0.64"
 });
 	
-    @IsInstance(DoorModifierSetAbridged)
     @Type(() => DoorModifierSetAbridged)
+    @IsInstance(DoorModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "door_set" })
@@ -208,8 +209,8 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
   "overhead_modifier": "generic_opaque_door_0.50"
 });
 	
-    @IsInstance(ShadeModifierSetAbridged)
     @Type(() => ShadeModifierSetAbridged)
+    @IsInstance(ShadeModifierSetAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "shade_set" })
@@ -220,12 +221,14 @@ export class GlobalModifierSet extends _OpenAPIGenBaseModel {
   "type": "ShadeModifierSetAbridged"
 });
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "air_boundary_modifier" })
     /** Global Honeybee Modifier for AirBoundary Faces. */
     airBoundaryModifier: string = "air_boundary";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "context_modifier" })

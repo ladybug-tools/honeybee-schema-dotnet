@@ -5,13 +5,14 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { GeometryObjectTypes } from "./GeometryObjectTypes";
 
 export class AddedObject extends _OpenAPIGenBaseModel {
-    @IsEnum(GeometryObjectTypes)
     @Type(() => String)
+    @IsEnum(GeometryObjectTypes)
     @IsDefined()
     @Expose({ name: "element_type" })
     /** Text for the type of object that has been changed. */
     elementType!: GeometryObjectTypes;
 	
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @Matches(/^[^,;!\n\t]+$/)
@@ -27,12 +28,14 @@ export class AddedObject extends _OpenAPIGenBaseModel {
     /** A list of DisplayFace3D dictionaries for the added geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been added. */
     geometry!: Object[];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "element_name" })
     /** Text string for the display name of the object that has changed. */
     elementName?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^AddedObject$/)

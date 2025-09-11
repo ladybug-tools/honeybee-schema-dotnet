@@ -7,12 +7,14 @@ import { ScheduleTypeLimit } from "./ScheduleTypeLimit";
 /** Used to specify a start date and a list of values for a period of analysis. */
 export class ScheduleFixedInterval extends IDdEnergyBaseModel {
     @IsArray()
+    @Type(() => Number)
     @IsNumber({},{ each: true })
     @IsDefined()
     @Expose({ name: "values" })
     /** A list of timeseries values occurring at each timestep over the course of the simulation. */
     values!: number[];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ScheduleFixedInterval$/)
@@ -20,14 +22,15 @@ export class ScheduleFixedInterval extends IDdEnergyBaseModel {
     /** type */
     type: string = "ScheduleFixedInterval";
 	
-    @IsInstance(ScheduleTypeLimit)
     @Type(() => ScheduleTypeLimit)
+    @IsInstance(ScheduleTypeLimit)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "schedule_type_limit" })
     /** ScheduleTypeLimit object that will be used to validate schedule values against upper/lower limits and assign units to the schedule values. If None, no validation will occur. */
     scheduleTypeLimit?: ScheduleTypeLimit;
 	
+    @Type(() => Number)
     @IsInt()
     @IsOptional()
     @Expose({ name: "timestep" })
@@ -35,18 +38,21 @@ export class ScheduleFixedInterval extends IDdEnergyBaseModel {
     timestep: number = 1;
 	
     @IsArray()
+    @Type(() => Number)
     @IsInt({ each: true })
     @IsOptional()
     @Expose({ name: "start_date" })
     /** A list of two integers for [month, day], representing the start date when the schedule values begin to take effect.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case). */
     startDate: number[] = [1, 1];
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "placeholder_value" })
     /**  A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period. */
     placeholderValue: number = 0;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "interpolate" })

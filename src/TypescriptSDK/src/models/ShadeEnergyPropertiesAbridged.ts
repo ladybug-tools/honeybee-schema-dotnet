@@ -6,6 +6,7 @@ import { PVProperties } from "./PVProperties";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class ShadeEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ShadeEnergyPropertiesAbridged$/)
@@ -13,6 +14,7 @@ export class ShadeEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "ShadeEnergyPropertiesAbridged";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -21,6 +23,7 @@ export class ShadeEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     /** Identifier of a ShadeConstruction to set the reflectance and specularity of the Shade. If None, the construction is set by theparent Room construction_set, the Model global_construction_set or (in the case fo an orphaned shade) the EnergyPlus default of 0.2 diffuse reflectance. */
     construction?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -29,8 +32,8 @@ export class ShadeEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     /** Identifier of a schedule to set the transmittance of the shade, which can vary throughout the simulation. If None, the shade will be completely opaque. */
     transmittanceSchedule?: string;
 	
-    @IsInstance(PVProperties)
     @Type(() => PVProperties)
+    @IsInstance(PVProperties)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "pv_properties" })

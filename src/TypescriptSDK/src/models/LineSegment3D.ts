@@ -5,6 +5,7 @@ import { deepTransform } from '../deepTransform';
 /** A single line segment face in 3D space. */
 export class LineSegment3D {
     @IsArray()
+    @Type(() => Number)
     @IsNumber({},{ each: true })
     @IsDefined()
     @Expose({ name: "p" })
@@ -12,12 +13,14 @@ export class LineSegment3D {
     p!: number[];
 	
     @IsArray()
+    @Type(() => Number)
     @IsNumber({},{ each: true })
     @IsDefined()
     @Expose({ name: "v" })
     /** Line segment direction vector as 3 (x, y, z) values. */
     v!: number[];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^LineSegment3D$/)

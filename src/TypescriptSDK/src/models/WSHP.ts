@@ -7,13 +7,14 @@ import { WSHPEquipmentType } from "./WSHPEquipmentType";
 
 /** Water Source Heat Pump (WSHP) heating/cooling system (with no ventilation).\n\nEach room/zone receives its own Water Source Heat Pump (WSHP), which meets\nthe heating and cooling loads of the space. All WSHPs are connected to the\nsame water condenser loop, which has its temperature maintained by the\nequipment_type (eg. Boiler with Cooling Tower). */
 export class WSHP extends IDdEnergyBaseModel {
-    @IsEnum(Vintages)
     @Type(() => String)
+    @IsEnum(Vintages)
     @IsOptional()
     @Expose({ name: "vintage" })
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
     vintage: Vintages = Vintages.ASHRAE_2019;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^WSHP$/)
@@ -21,8 +22,8 @@ export class WSHP extends IDdEnergyBaseModel {
     /** type */
     type: string = "WSHP";
 	
-    @IsEnum(WSHPEquipmentType)
     @Type(() => String)
+    @IsEnum(WSHPEquipmentType)
     @IsOptional()
     @Expose({ name: "equipment_type" })
     /** Text for the specific type of system equipment from the WSHPEquipmentType enumeration. */

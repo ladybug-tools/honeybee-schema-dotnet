@@ -20,6 +20,7 @@ import { WallModifierSet } from "./WallModifierSet";
 
 /** Set containing all radiance modifiers needed to create a radiance model. */
 export class ModifierSet extends IDdRadianceBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ModifierSet$/)
@@ -27,48 +28,48 @@ export class ModifierSet extends IDdRadianceBaseModel {
     /** type */
     type: string = "ModifierSet";
 	
-    @IsInstance(WallModifierSet)
     @Type(() => WallModifierSet)
+    @IsInstance(WallModifierSet)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "wall_set" })
     /** An optional WallModifierSet object for this ModifierSet. (default: None). */
     wallSet?: WallModifierSet;
 	
-    @IsInstance(FloorModifierSet)
     @Type(() => FloorModifierSet)
+    @IsInstance(FloorModifierSet)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "floor_set" })
     /** An optional FloorModifierSet object for this ModifierSet. (default: None). */
     floorSet?: FloorModifierSet;
 	
-    @IsInstance(RoofCeilingModifierSet)
     @Type(() => RoofCeilingModifierSet)
+    @IsInstance(RoofCeilingModifierSet)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "roof_ceiling_set" })
     /** An optional RoofCeilingModifierSet object for this ModifierSet. (default: None). */
     roofCeilingSet?: RoofCeilingModifierSet;
 	
-    @IsInstance(ApertureModifierSet)
     @Type(() => ApertureModifierSet)
+    @IsInstance(ApertureModifierSet)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "aperture_set" })
     /** An optional ApertureModifierSet object for this ModifierSet. (default: None). */
     apertureSet?: ApertureModifierSet;
 	
-    @IsInstance(DoorModifierSet)
     @Type(() => DoorModifierSet)
+    @IsInstance(DoorModifierSet)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "door_set" })
     /** An optional DoorModifierSet object for this ModifierSet. (default: None). */
     doorSet?: DoorModifierSet;
 	
-    @IsInstance(ShadeModifierSet)
     @Type(() => ShadeModifierSet)
+    @IsInstance(ShadeModifierSet)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "shade_set" })

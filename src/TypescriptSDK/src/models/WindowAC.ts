@@ -7,13 +7,14 @@ import { WindowACEquipmentType } from "./WindowACEquipmentType";
 
 /** Window Air Conditioning cooling system (with optional heating).\n\nEach room/zone will receive its own Packaged Terminal Air Conditioner (PTAC)\nwith properties set to reflect a typical window air conditioning (AC) unit.\nNo ventilation air is supplied by the unit and the cooling coil within the\nunit is a single-speed direct expansion (DX) cooling coil. Heating loads\ncan be met with various options, including several types of baseboards,\na furnace, or gas unit heaters. */
 export class WindowAC extends IDdEnergyBaseModel {
-    @IsEnum(Vintages)
     @Type(() => String)
+    @IsEnum(Vintages)
     @IsOptional()
     @Expose({ name: "vintage" })
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
     vintage: Vintages = Vintages.ASHRAE_2019;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^WindowAC$/)
@@ -21,8 +22,8 @@ export class WindowAC extends IDdEnergyBaseModel {
     /** type */
     type: string = "WindowAC";
 	
-    @IsEnum(WindowACEquipmentType)
     @Type(() => String)
+    @IsEnum(WindowACEquipmentType)
     @IsOptional()
     @Expose({ name: "equipment_type" })
     /** Text for the specific type of system equipment from the WindowACEquipmentType enumeration. */

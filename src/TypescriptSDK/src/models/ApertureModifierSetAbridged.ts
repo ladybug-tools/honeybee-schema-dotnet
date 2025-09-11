@@ -5,6 +5,7 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Abridged set containing radiance modifiers needed for a model's Apertures. */
 export class ApertureModifierSetAbridged extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ApertureModifierSetAbridged$/)
@@ -12,24 +13,28 @@ export class ApertureModifierSetAbridged extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "ApertureModifierSetAbridged";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "window_modifier" })
     /** Identifier of modifier object for apertures with an Outdoors boundary condition, False is_operable property, and Wall parent Face. */
     windowModifier?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "interior_modifier" })
     /** Identifier of modifier object for apertures with a Surface boundary condition. */
     interiorModifier?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "skylight_modifier" })
     /** Identifier of modifier object for apertures with an Outdoors boundary condition, False is_operable property, and a RoofCeiling or Floor face type for their parent face. */
     skylightModifier?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "operable_modifier" })

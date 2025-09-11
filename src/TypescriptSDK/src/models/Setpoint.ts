@@ -29,6 +29,7 @@ export class Setpoint extends IDdEnergyBaseModel {
     /** Schedule for the heating setpoint. The values in this schedule should be temperature in [C]. */
     heatingSchedule!: (ScheduleRuleset | ScheduleFixedInterval);
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Setpoint$/)
@@ -58,6 +59,7 @@ export class Setpoint extends IDdEnergyBaseModel {
     /** Schedule for the dehumidification setpoint. The values in this schedule should be in [%]. */
     dehumidifyingSchedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)

@@ -7,6 +7,7 @@ import { ScheduleRuleset } from "./ScheduleRuleset";
 
 /** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class Infiltration extends IDdEnergyBaseModel {
+    @Type(() => Number)
     @IsNumber()
     @IsDefined()
     @Min(0)
@@ -25,6 +26,7 @@ export class Infiltration extends IDdEnergyBaseModel {
     /** The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile. */
     schedule!: (ScheduleRuleset | ScheduleFixedInterval);
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Infiltration$/)
@@ -32,6 +34,7 @@ export class Infiltration extends IDdEnergyBaseModel {
     /** type */
     type: string = "Infiltration";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -39,6 +42,7 @@ export class Infiltration extends IDdEnergyBaseModel {
     /** constantCoefficient */
     constantCoefficient: number = 1;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -46,6 +50,7 @@ export class Infiltration extends IDdEnergyBaseModel {
     /** temperatureCoefficient */
     temperatureCoefficient: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)

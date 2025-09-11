@@ -5,6 +5,7 @@ import { IDdRadianceBaseModel } from "./IDdRadianceBaseModel";
 
 /** Base class for Radiance Modifiers */
 export class ModifierBase extends IDdRadianceBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ModifierBase$/)

@@ -7,6 +7,7 @@ import { ChangedObject } from "./ChangedObject";
 import { DeletedObject } from "./DeletedObject";
 
 export class ComparisonReport extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ComparisonReport$/)
@@ -15,8 +16,8 @@ export class ComparisonReport extends _OpenAPIGenBaseModel {
     type: string = "ComparisonReport";
 	
     @IsArray()
-    @IsInstance(ChangedObject, { each: true })
     @Type(() => ChangedObject)
+    @IsInstance(ChangedObject, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "changed_objects" })
@@ -24,8 +25,8 @@ export class ComparisonReport extends _OpenAPIGenBaseModel {
     changedObjects?: ChangedObject[];
 	
     @IsArray()
-    @IsInstance(DeletedObject, { each: true })
     @Type(() => DeletedObject)
+    @IsInstance(DeletedObject, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "deleted_objects" })
@@ -33,8 +34,8 @@ export class ComparisonReport extends _OpenAPIGenBaseModel {
     deletedObjects?: DeletedObject[];
 	
     @IsArray()
-    @IsInstance(AddedObject, { each: true })
     @Type(() => AddedObject)
+    @IsInstance(AddedObject, { each: true })
     @ValidateNested({ each: true })
     @IsOptional()
     @Expose({ name: "added_objects" })

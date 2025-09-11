@@ -104,6 +104,7 @@ export class DoorModifierSet extends _OpenAPIGenBaseModel {
     /** A window modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face. */
     overheadModifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^DoorModifierSet$/)

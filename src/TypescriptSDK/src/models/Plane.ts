@@ -6,6 +6,7 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class Plane extends _OpenAPIGenBaseModel {
     @IsArray()
+    @Type(() => Number)
     @IsNumber({},{ each: true })
     @IsDefined()
     @Expose({ name: "n" })
@@ -13,12 +14,14 @@ export class Plane extends _OpenAPIGenBaseModel {
     n!: number[];
 	
     @IsArray()
+    @Type(() => Number)
     @IsNumber({},{ each: true })
     @IsDefined()
     @Expose({ name: "o" })
     /** Plane origin as 3 (x, y, z) values */
     o!: number[];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Plane$/)
@@ -27,6 +30,7 @@ export class Plane extends _OpenAPIGenBaseModel {
     type: string = "Plane";
 	
     @IsArray()
+    @Type(() => Number)
     @IsNumber({},{ each: true })
     @IsOptional()
     @Expose({ name: "x" })

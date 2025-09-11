@@ -6,6 +6,7 @@ import { VentilationOpening } from "./VentilationOpening";
 
 /** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class ApertureEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ApertureEnergyPropertiesAbridged$/)
@@ -13,6 +14,7 @@ export class ApertureEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "ApertureEnergyPropertiesAbridged";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)
@@ -21,8 +23,8 @@ export class ApertureEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     /** Identifier of a WindowConstruction for the aperture. If None, the construction is set by the parent Room construction_set or the Model global_construction_set. */
     construction?: string;
 	
-    @IsInstance(VentilationOpening)
     @Type(() => VentilationOpening)
+    @IsInstance(VentilationOpening)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "vent_opening" })

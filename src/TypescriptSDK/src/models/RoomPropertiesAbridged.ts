@@ -7,6 +7,7 @@ import { RoomEnergyPropertiesAbridged } from "./RoomEnergyPropertiesAbridged";
 import { RoomRadiancePropertiesAbridged } from "./RoomRadiancePropertiesAbridged";
 
 export class RoomPropertiesAbridged extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^RoomPropertiesAbridged$/)
@@ -14,24 +15,24 @@ export class RoomPropertiesAbridged extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "RoomPropertiesAbridged";
 	
-    @IsInstance(RoomEnergyPropertiesAbridged)
     @Type(() => RoomEnergyPropertiesAbridged)
+    @IsInstance(RoomEnergyPropertiesAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "energy" })
     /** energy */
     energy?: RoomEnergyPropertiesAbridged;
 	
-    @IsInstance(RoomRadiancePropertiesAbridged)
     @Type(() => RoomRadiancePropertiesAbridged)
+    @IsInstance(RoomRadiancePropertiesAbridged)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "radiance" })
     /** radiance */
     radiance?: RoomRadiancePropertiesAbridged;
 	
-    @IsInstance(RoomDoe2Properties)
     @Type(() => RoomDoe2Properties)
+    @IsInstance(RoomDoe2Properties)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "doe2" })

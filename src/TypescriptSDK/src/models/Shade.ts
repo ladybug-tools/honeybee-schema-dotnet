@@ -7,22 +7,23 @@ import { ShadePropertiesAbridged } from "./ShadePropertiesAbridged";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Shade extends IDdBaseModel {
-    @IsInstance(Face3D)
     @Type(() => Face3D)
+    @IsInstance(Face3D)
     @ValidateNested()
     @IsDefined()
     @Expose({ name: "geometry" })
     /** Planar Face3D for the geometry. */
     geometry!: Face3D;
 	
-    @IsInstance(ShadePropertiesAbridged)
     @Type(() => ShadePropertiesAbridged)
+    @IsInstance(ShadePropertiesAbridged)
     @ValidateNested()
     @IsDefined()
     @Expose({ name: "properties" })
     /** Extension properties for particular simulation engines (Radiance, EnergyPlus). */
     properties!: ShadePropertiesAbridged;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Shade$/)
@@ -30,6 +31,7 @@ export class Shade extends IDdBaseModel {
     /** type */
     type: string = "Shade";
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "is_detached" })

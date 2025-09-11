@@ -5,13 +5,14 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { GeometryObjectTypes } from "./GeometryObjectTypes";
 
 export class _DiffObjectBase extends _OpenAPIGenBaseModel {
-    @IsEnum(GeometryObjectTypes)
     @Type(() => String)
+    @IsEnum(GeometryObjectTypes)
     @IsDefined()
     @Expose({ name: "element_type" })
     /** Text for the type of object that has been changed. */
     elementType!: GeometryObjectTypes;
 	
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @Matches(/^[^,;!\n\t]+$/)
@@ -21,12 +22,14 @@ export class _DiffObjectBase extends _OpenAPIGenBaseModel {
     /** Text string for the unique object ID that has changed. */
     elementId!: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "element_name" })
     /** Text string for the display name of the object that has changed. */
     elementName?: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^_DiffObjectBase$/)

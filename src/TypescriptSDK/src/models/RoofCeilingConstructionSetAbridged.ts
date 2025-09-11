@@ -5,6 +5,7 @@ import { _FaceSubSetAbridged } from "./_FaceSubSetAbridged";
 
 /** A set of constructions for roof and ceiling assemblies. */
 export class RoofCeilingConstructionSetAbridged extends _FaceSubSetAbridged {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^RoofCeilingConstructionSetAbridged$/)

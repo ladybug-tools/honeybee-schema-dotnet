@@ -6,12 +6,14 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 /** Construction for window objects (Aperture, Door). */
 export class WindowConstructionAbridged extends IDdEnergyBaseModel {
     @IsArray()
+    @Type(() => String)
     @IsString({ each: true })
     @IsDefined()
     @Expose({ name: "materials" })
     /** List of strings for glazing or gas material identifiers. The order of the materials is from exterior to interior. If a SimpleGlazSys material is used, it must be the only material in the construction. For multi-layered constructions, adjacent glass layers must be separated by one and only one gas layer. */
     materials!: string[];
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^WindowConstructionAbridged$/)
@@ -19,6 +21,7 @@ export class WindowConstructionAbridged extends IDdEnergyBaseModel {
     /** type */
     type: string = "WindowConstructionAbridged";
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @MinLength(1)

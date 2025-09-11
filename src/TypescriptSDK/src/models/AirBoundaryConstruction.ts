@@ -7,6 +7,7 @@ import { ScheduleRuleset } from "./ScheduleRuleset";
 
 /** Construction for Air Boundary objects. */
 export class AirBoundaryConstruction extends IDdEnergyBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^AirBoundaryConstruction$/)
@@ -14,6 +15,7 @@ export class AirBoundaryConstruction extends IDdEnergyBaseModel {
     /** type */
     type: string = "AirBoundaryConstruction";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)

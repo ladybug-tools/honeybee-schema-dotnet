@@ -6,6 +6,7 @@ import { SlatOrientation } from "./SlatOrientation";
 
 /** Window blind material consisting of flat, equally-spaced slats. */
 export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^EnergyWindowMaterialBlind$/)
@@ -13,13 +14,14 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** type */
     type: string = "EnergyWindowMaterialBlind";
 	
-    @IsEnum(SlatOrientation)
     @Type(() => String)
+    @IsEnum(SlatOrientation)
     @IsOptional()
     @Expose({ name: "slat_orientation" })
     /** slatOrientation */
     slatOrientation: SlatOrientation = SlatOrientation.Horizontal;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Max(1)
@@ -27,6 +29,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The width of slat measured from edge to edge in meters. */
     slatWidth: number = 0.025;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Max(1)
@@ -34,6 +37,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The distance between the front of a slat and the back of the adjacent slat in meters. */
     slatSeparation: number = 0.01875;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Max(0.1)
@@ -41,6 +45,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The distance between the faces of a slat in meters. The default value is 0.001. */
     slatThickness: number = 0.001;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -49,12 +54,14 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The angle (degrees) between the glazing outward normal and the slat outward normal where the outward normal points away from the front face of the slat (degrees). The default value is 45. */
     slatAngle: number = 45;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "slat_conductivity" })
     /** The thermal conductivity of the slat in W/(m-K). Default: 221. */
     slatConductivity: number = 221;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -62,6 +69,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The beam solar transmittance of the slat, assumed to be independent of angle of incidence on the slat. Any transmitted beam radiation is assumed to be 100% diffuse (i.e., slats are translucent). The default value is 0. */
     beamSolarTransmittance: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -69,6 +77,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The beam solar reflectance of the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5. */
     beamSolarReflectance: number = 0.5;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -76,6 +85,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The beam solar reflectance of the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5. */
     beamSolarReflectanceBack: number = 0.5;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -83,6 +93,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The slat transmittance for hemispherically diffuse solar radiation. Default: 0. */
     diffuseSolarTransmittance: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -90,6 +101,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The front-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5. */
     diffuseSolarReflectance: number = 0.5;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -97,6 +109,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The back-side slat reflectance for hemispherically diffuse solar radiation. Default: 0.5. */
     diffuseSolarReflectanceBack: number = 0.5;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -104,6 +117,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The beam visible transmittance of the slat, it is assumed to be independent of the angle of incidence. Default: 0. */
     beamVisibleTransmittance: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -111,6 +125,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The beam visible reflectance on the front side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5. */
     beamVisibleReflectance: number = 0.5;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -118,6 +133,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The beam visible reflectance on the back side of the slat, it is assumed to be independent of the angle of incidence. Default: 0.5. */
     beamVisibleReflectanceBack: number = 0.5;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -125,6 +141,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The slat transmittance for hemispherically diffuse visible radiation. This value should equal “Slat Beam Visible Transmittance.” */
     diffuseVisibleTransmittance: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -132,6 +149,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The front-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Front Side Slat Beam Visible Reflectance.” Default: 0.5. */
     diffuseVisibleReflectance: number = 0.5;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -139,6 +157,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The back-side slat reflectance for hemispherically diffuse visible radiation. This value should equal “Back Side Slat Beam Visible Reflectance. Default: 0.5.” */
     diffuseVisibleReflectanceBack: number = 0.5;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -146,6 +165,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The slat infrared hemispherical transmittance. It is zero for solid metallic, wooden or glass slats, but may be non-zero in some cases such as for thin plastic slats. The default value is 0. */
     infraredTransmittance: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -153,6 +173,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** Front side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9. */
     emissivity: number = 0.9;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -160,6 +181,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** Back side hemispherical emissivity of the slat. Default is 0.9 for most materials. The default value is 0.9. */
     emissivityBack: number = 0.9;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0.01)
@@ -168,6 +190,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The distance from the mid-plane of the blind to the adjacent glass in meters. The default value is 0.05. */
     distanceToGlass: number = 0.05;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -176,6 +199,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The effective area for air flow at the top of the shade, divided by the horizontal area between glass and shade. */
     topOpeningMultiplier: number = 0.5;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -184,6 +208,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The effective area for air flow at the bottom of the shade, divided by the horizontal area between glass and shade. */
     bottomOpeningMultiplier: number = 0.5;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -192,6 +217,7 @@ export class EnergyWindowMaterialBlind extends IDdEnergyBaseModel {
     /** The effective area for air flow at the left side of the shade, divided by the vertical area between glass and shade. */
     leftOpeningMultiplier: number = 0.5;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)

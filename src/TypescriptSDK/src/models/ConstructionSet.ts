@@ -13,6 +13,7 @@ import { WallConstructionSet } from "./WallConstructionSet";
 
 /** A set of constructions for different surface types and boundary conditions. */
 export class ConstructionSet extends IDdEnergyBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ConstructionSet$/)
@@ -20,48 +21,48 @@ export class ConstructionSet extends IDdEnergyBaseModel {
     /** type */
     type: string = "ConstructionSet";
 	
-    @IsInstance(WallConstructionSet)
     @Type(() => WallConstructionSet)
+    @IsInstance(WallConstructionSet)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "wall_set" })
     /** A WallConstructionSet object for this ConstructionSet. */
     wallSet?: WallConstructionSet;
 	
-    @IsInstance(FloorConstructionSet)
     @Type(() => FloorConstructionSet)
+    @IsInstance(FloorConstructionSet)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "floor_set" })
     /** A FloorConstructionSet object for this ConstructionSet. */
     floorSet?: FloorConstructionSet;
 	
-    @IsInstance(RoofCeilingConstructionSet)
     @Type(() => RoofCeilingConstructionSet)
+    @IsInstance(RoofCeilingConstructionSet)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "roof_ceiling_set" })
     /** A RoofCeilingConstructionSet object for this ConstructionSet. */
     roofCeilingSet?: RoofCeilingConstructionSet;
 	
-    @IsInstance(ApertureConstructionSet)
     @Type(() => ApertureConstructionSet)
+    @IsInstance(ApertureConstructionSet)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "aperture_set" })
     /** A ApertureConstructionSet object for this ConstructionSet. */
     apertureSet?: ApertureConstructionSet;
 	
-    @IsInstance(DoorConstructionSet)
     @Type(() => DoorConstructionSet)
+    @IsInstance(DoorConstructionSet)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "door_set" })
     /** A DoorConstructionSet object for this ConstructionSet. */
     doorSet?: DoorConstructionSet;
 	
-    @IsInstance(ShadeConstruction)
     @Type(() => ShadeConstruction)
+    @IsInstance(ShadeConstruction)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "shade_construction" })

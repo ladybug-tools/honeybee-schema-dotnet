@@ -7,13 +7,14 @@ import { Vintages } from "./Vintages";
 
 /** Baseboard heating system.\n\nBaseboard systems are intended for spaces only requiring heating and\nno ventilation or cooling. Each room/zone will get its own baseboard\nheating unit that satisfies the heating load. */
 export class Baseboard extends IDdEnergyBaseModel {
-    @IsEnum(Vintages)
     @Type(() => String)
+    @IsEnum(Vintages)
     @IsOptional()
     @Expose({ name: "vintage" })
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
     vintage: Vintages = Vintages.ASHRAE_2019;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^Baseboard$/)
@@ -21,8 +22,8 @@ export class Baseboard extends IDdEnergyBaseModel {
     /** type */
     type: string = "Baseboard";
 	
-    @IsEnum(BaseboardEquipmentType)
     @Type(() => String)
+    @IsEnum(BaseboardEquipmentType)
     @IsOptional()
     @Expose({ name: "equipment_type" })
     /** Text for the specific type of system equipment from the BaseboardEquipmentType enumeration. */

@@ -8,20 +8,21 @@ import { Vintages } from "./Vintages";
 
 /** Packaged Single-Zone (PSZ) HVAC system (aka. System 3 or 4).\n\nEach room/zone receives its own air loop with its own single-speed direct expansion\n(DX) cooling coil, which will condition the supply air to a value in between\n12.8C (55F) and 50C (122F) depending on the heating/cooling needs of the room/zone.\nAs long as a Baseboard equipment_type is NOT selected, heating will be supplied\nby a heating coil in the air loop. Otherwise, heating is accomplished with\nbaseboards and the air loop only supplies cooling and ventilation air.\nFans are constant volume.\n\nPSZ systems are the traditional baseline system for commercial buildings\nwith less than 4 stories or less than 2,300 m2 (25,000 ft2) of floor area.\nThey are also the default for all retail with less than 3 stories and all public\nassembly spaces. */
 export class PSZ extends IDdEnergyBaseModel {
-    @IsEnum(Vintages)
     @Type(() => String)
+    @IsEnum(Vintages)
     @IsOptional()
     @Expose({ name: "vintage" })
     /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
     vintage: Vintages = Vintages.ASHRAE_2019;
 	
-    @IsEnum(AllAirEconomizerType)
     @Type(() => String)
+    @IsEnum(AllAirEconomizerType)
     @IsOptional()
     @Expose({ name: "economizer_type" })
     /** Text to indicate the type of air-side economizer used on the system (from the AllAirEconomizerType enumeration). */
     economizerType: AllAirEconomizerType = AllAirEconomizerType.NoEconomizer;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -30,6 +31,7 @@ export class PSZ extends IDdEnergyBaseModel {
     /** A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. */
     sensibleHeatRecovery: number = 0;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -38,12 +40,14 @@ export class PSZ extends IDdEnergyBaseModel {
     /** A number between 0 and 1 for the effectiveness of latent heat recovery within the system. */
     latentHeatRecovery: number = 0;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "demand_controlled_ventilation" })
     /** Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms. */
     demandControlledVentilation: boolean = false;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^PSZ$/)
@@ -51,8 +55,8 @@ export class PSZ extends IDdEnergyBaseModel {
     /** type */
     type: string = "PSZ";
 	
-    @IsEnum(PSZEquipmentType)
     @Type(() => String)
+    @IsEnum(PSZEquipmentType)
     @IsOptional()
     @Expose({ name: "equipment_type" })
     /** Text for the specific type of system equipment from the PVAVEquipmentType enumeration. */

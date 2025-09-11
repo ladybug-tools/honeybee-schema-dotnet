@@ -14,6 +14,7 @@ import { Void } from "./Void";
 
 /** Set containing radiance modifiers needed for a model's Apertures. */
 export class ApertureModifierSet extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ApertureModifierSet$/)

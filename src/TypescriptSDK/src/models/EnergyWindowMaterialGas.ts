@@ -6,6 +6,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Create single layer of gas in a window construction.\n\nCan be combined with EnergyWindowMaterialGlazing to make multi-pane windows. */
 export class EnergyWindowMaterialGas extends IDdEnergyBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^EnergyWindowMaterialGas$/)
@@ -13,14 +14,15 @@ export class EnergyWindowMaterialGas extends IDdEnergyBaseModel {
     /** type */
     type: string = "EnergyWindowMaterialGas";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "thickness" })
     /** Thickness of the gas layer in meters. Default: 0.0125. */
     thickness: number = 0.0125;
 	
-    @IsEnum(GasType)
     @Type(() => String)
+    @IsEnum(GasType)
     @IsOptional()
     @Expose({ name: "gas_type" })
     /** gasType */

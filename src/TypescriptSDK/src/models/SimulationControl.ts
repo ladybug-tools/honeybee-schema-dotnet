@@ -5,6 +5,7 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Used to specify which types of calculations to run. */
 export class SimulationControl extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^SimulationControl$/)
@@ -12,30 +13,35 @@ export class SimulationControl extends _OpenAPIGenBaseModel {
     /** type */
     type: string = "SimulationControl";
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "do_zone_sizing" })
     /** Boolean for whether the zone sizing calculation should be run. */
     doZoneSizing: boolean = true;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "do_system_sizing" })
     /** Boolean for whether the system sizing calculation should be run. */
     doSystemSizing: boolean = true;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "do_plant_sizing" })
     /** Boolean for whether the plant sizing calculation should be run. */
     doPlantSizing: boolean = true;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "run_for_run_periods" })
     /** Boolean for whether the simulation should be run for the sizing periods. */
     runForRunPeriods: boolean = true;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "run_for_sizing_periods" })

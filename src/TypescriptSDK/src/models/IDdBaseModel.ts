@@ -5,6 +5,7 @@ import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
 /** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class IDdBaseModel extends _OpenAPIGenBaseModel {
+    @Type(() => String)
     @IsString()
     @IsDefined()
     @Matches(/^[.A-Za-z0-9_-]+$/)
@@ -14,6 +15,7 @@ export class IDdBaseModel extends _OpenAPIGenBaseModel {
     /** Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, rad). This identifier is also used to reference the object across a Model. It must be < 100 characters and not contain any spaces or special characters. */
     identifier!: string;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Expose({ name: "display_name" })
@@ -25,6 +27,7 @@ export class IDdBaseModel extends _OpenAPIGenBaseModel {
     /** Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list). */
     userData?: Object;
 	
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^IDdBaseModel$/)

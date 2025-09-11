@@ -5,6 +5,7 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
 /** Construction for Shade objects. */
 export class ShadeConstruction extends IDdEnergyBaseModel {
+    @Type(() => String)
     @IsString()
     @IsOptional()
     @Matches(/^ShadeConstruction$/)
@@ -12,6 +13,7 @@ export class ShadeConstruction extends IDdEnergyBaseModel {
     /** type */
     type: string = "ShadeConstruction";
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -20,6 +22,7 @@ export class ShadeConstruction extends IDdEnergyBaseModel {
     /** A number for the solar reflectance of the construction. */
     solarReflectance: number = 0.2;
 	
+    @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Min(0)
@@ -28,6 +31,7 @@ export class ShadeConstruction extends IDdEnergyBaseModel {
     /** A number for the visible reflectance of the construction. */
     visibleReflectance: number = 0.2;
 	
+    @Type(() => Boolean)
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "is_specular" })
