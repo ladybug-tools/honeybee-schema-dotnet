@@ -146,6 +146,59 @@ namespace HoneybeeSchema.Test
 
         }
 
+        [Test]
+        public void ConstructionSetJsonTest()
+        {
+
+            var aptSet = new ApertureConstructionSet(
+                                      windowConstruction: null,
+                                      interiorConstruction: null as WindowConstruction,
+                                      skylightConstruction: null
+                                      );
+            var aptSetJson = aptSet.ToJson();
+
+            Assert.IsTrue(aptSet.IsValid(false));
+            Assert.IsNotNull(aptSetJson);
+            var dupApt = ApertureConstructionSet.FromJson(aptSetJson);
+            Assert.IsTrue(dupApt.InteriorConstruction == null);
+
+            var constructionSet2 = new ConstructionSet(
+                                  identifier: "testId",
+                                  displayName: "testName",
+                                  wallSet: new WallConstructionSet(
+                                      exteriorConstruction: null,
+                                      interiorConstruction: null,
+                                      groundConstruction: null
+                                      ),
+                                  roofCeilingSet: new RoofCeilingConstructionSet(
+                                      exteriorConstruction: null,
+                                      interiorConstruction: null
+                                      ),
+                                  floorSet: new FloorConstructionSet(
+                                      interiorConstruction: null,
+                                      groundConstruction: null
+                                      ),
+                                  doorSet: new DoorConstructionSet(
+                                      exteriorConstruction: null,
+                                      interiorConstruction: null,
+                                      exteriorGlassConstruction: null,
+                                      interiorGlassConstruction: null
+                                      ),
+                                  apertureSet: new ApertureConstructionSet(
+                                      windowConstruction: null,
+                                      interiorConstruction: null as WindowConstruction,
+                                      skylightConstruction: null
+                                      )
+                                  );
+
+
+            var isvalid = constructionSet2.IsValid(false);
+            var json = constructionSet2.ToJson();
+
+            Assert.IsTrue(isvalid);
+            Assert.IsNotNull(json);
+        }
+
     }
 
 }

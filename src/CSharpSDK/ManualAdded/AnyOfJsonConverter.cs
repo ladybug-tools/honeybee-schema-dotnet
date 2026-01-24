@@ -80,6 +80,11 @@ namespace HoneybeeSchema
 
         public override void WriteJson(JsonWriter writer, AnyOf value, JsonSerializer serializer)
         {
+            if (value?.Obj == null)
+            {
+                writer.WriteNull();
+                return;
+            }
             JToken t = JToken.FromObject(value.Obj, serializer);
             t.WriteTo(writer);
         }
