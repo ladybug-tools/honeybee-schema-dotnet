@@ -9,9 +9,8 @@
  */
 
 
-using NUnit.Framework;
-
 using HoneybeeSchema;
+using NUnit.Framework;
 
 namespace HoneybeeSchema.Test
 {
