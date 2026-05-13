@@ -19,10 +19,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
 {
-    /// <summary>
-    /// Base class for all objects requiring a valid EnergyPlus identifier.
-    /// </summary>
-    [Summary(@"Base class for all objects requiring a valid EnergyPlus identifier.")]
+    [Summary(@"")]
     [System.Serializable]
     [DataContract(Name = "PVProperties")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class PVProperties : EnergyBaseModel, System.IEquatable<PVProperties>
@@ -73,6 +70,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number between 0 and 1 for the rated nameplate efficiency of the photovoltaic solar cells under standard test conditions (STC). Standard test conditions are 1,000 Watts per square meter solar irradiance, 25 degrees C cell temperature, and ASTM G173-03 standard spectrum. Nameplate efficiencies reported by manufacturers are typically under STC. Standard poly- or mono-crystalline silicon modules tend to have rated efficiencies in the range of 14-17%. Premium high efficiency mono-crystalline silicon modules with anti-reflective coatings can have efficiencies in the range of 18-20%. Thin film photovoltaic modules typically have efficiencies of 11% or less. (Default: 0.15 for standard silicon solar cells).")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, 1)]
         [DataMember(Name = "rated_efficiency")] // For internal Serialization XML/JSON
         [JsonProperty("rated_efficiency", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("rated_efficiency")] // For System.Text.Json
@@ -83,7 +81,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"The fraction of the parent Shade geometry that is covered in active solar cells. This fraction includes the difference between the PV panel (aka. PV module) area and the active cells within the panel as well as any losses for how the (typically rectangular) panels can be arranged on the Shade geometry. When the parent Shade geometry represents just the solar panels, this fraction is typically around 0.9 given that the framing elements of the panel reduce the overall active area. (Default: 0.9, assuming parent Shade geometry represents only the PV panel geometry).")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(double.MinValue, 1)]
+        [Range(0, 1)]
         [DataMember(Name = "active_area_fraction")] // For internal Serialization XML/JSON
         [JsonProperty("active_area_fraction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("active_area_fraction")] // For System.Text.Json

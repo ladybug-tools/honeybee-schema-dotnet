@@ -1,4 +1,4 @@
-﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Equals, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { _RadianceAsset } from "./_RadianceAsset";
@@ -33,7 +33,7 @@ export class View extends _RadianceAsset {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^View$/)
+    @Equals("View")
     @Expose({ name: "type" })
     /** type */
     type: string = "View";

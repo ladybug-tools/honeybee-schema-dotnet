@@ -1,4 +1,4 @@
-﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Equals, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IsNestedIntegerArray } from "./../helpers/class-validator";
@@ -17,7 +17,7 @@ export class ScheduleDay extends EnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^ScheduleDay$/)
+    @Equals("ScheduleDay")
     @Expose({ name: "type" })
     /** type */
     type: string = "ScheduleDay";

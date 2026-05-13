@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, IsEnum, IsInt, Min, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsEnum, IsInt, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
@@ -11,7 +11,7 @@ export class ShadowCalculation extends _OpenAPIGenBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^ShadowCalculation$/)
+    @Equals("ShadowCalculation")
     @Expose({ name: "type" })
     /** type */
     type: string = "ShadowCalculation";

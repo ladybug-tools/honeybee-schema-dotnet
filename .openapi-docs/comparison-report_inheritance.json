@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Documentation for Honeybee comparison-report schema",
-    "version": "1.59.1",
+    "version": "2.0.5",
     "title": "Honeybee Comparison Report Schema",
     "contact": {
       "name": "Ladybug Tools",
@@ -77,204 +77,30 @@
   "paths": {},
   "components": {
     "schemas": {
-      "GeometryObjectTypes": {
-        "title": "GeometryObjectTypes",
-        "description": "Types of Honeybee geometry objects.",
-        "enum": [
-          "Shade",
-          "Aperture",
-          "Door",
-          "Face",
-          "Room"
-        ],
-        "type": "string"
-      },
-      "ChangedObject": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-          },
-          {
-            "type": "object",
-            "required": [
-              "element_type",
-              "element_id",
-              "geometry_changed",
-              "geometry"
-            ],
-            "properties": {
-              "element_type": {
-                "description": "Text for the type of object that has been changed.",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/GeometryObjectTypes"
-                  }
-                ]
-              },
-              "element_id": {
-                "title": "Element Id",
-                "description": "Text string for the unique object ID that has changed.",
-                "maxLength": 100,
-                "minLength": 1,
-                "pattern": "^[^,;!\\n\\t]+$",
-                "type": "string"
-              },
-              "geometry_changed": {
-                "title": "Geometry Changed",
-                "description": "A boolean to note whether the geometry of the object has changed (True) or not (False). For the case of a Room, any change in the geometry of child Faces, Apertures or Doors will cause this property to be True. Note that this property is only True if the change in geometry produces a visible change greater than the base model tolerance. So converting the model between different unit systems, removing colinear vertices, or doing other transformations that are common for export to simulation engines will not trigger this property to become True.",
-                "type": "boolean"
-              },
-              "geometry": {
-                "title": "Geometry",
-                "description": "A list of DisplayFace3D dictionaries for the new, changed geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been changed. Note that this attribute is always included in the ChangedObject, even when geometry_changed is False.",
-                "type": "array",
-                "items": {
-                  "type": "object"
-                }
-              },
-              "element_name": {
-                "title": "Element Name",
-                "description": "Text string for the display name of the object that has changed.",
-                "type": "string"
-              },
-              "energy_changed": {
-                "title": "Energy Changed",
-                "description": "A boolean to note whether the energy properties of the object have changed (True) or not (False) such that it is possible for the properties of the changed object to be applied to the base model. For Rooms, this property will only be true if the energy property assigned to the Room has changed and will not be true if a property assigned to an individual child Face or Aperture has changed.",
-                "default": false,
-                "type": "boolean"
-              },
-              "radiance_changed": {
-                "title": "Radiance Changed",
-                "description": "A boolean to note whether the radiance properties of the object have changed (True) or not (False) such that it is possible for the properties of the changed object to be applied to the base model. For Rooms, this property will only be true if the radiance property assigned to the Room has changed and will not be true if a property assigned to an individual child Face or Aperture has changed.",
-                "default": false,
-                "type": "boolean"
-              },
-              "existing_geometry": {
-                "title": "Existing Geometry",
-                "description": "A list of DisplayFace3D dictionaries for the existing (base) geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been changed. This attribute is optional and will NOT be output if geometry_changed is False.",
-                "type": "array",
-                "items": {
-                  "type": "object"
-                }
-              },
-              "type": {
-                "title": "Type",
-                "default": "ChangedObject",
-                "pattern": "^ChangedObject$",
-                "type": "string",
-                "readOnly": true
-              }
-            }
-          }
-        ],
-        "title": "ChangedObject",
-        "discriminator": {
-          "propertyName": "type"
-        }
-      },
-      "DeletedObject": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-          },
-          {
-            "type": "object",
-            "required": [
-              "element_type",
-              "element_id",
-              "geometry"
-            ],
-            "properties": {
-              "element_type": {
-                "description": "Text for the type of object that has been changed.",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/GeometryObjectTypes"
-                  }
-                ]
-              },
-              "element_id": {
-                "title": "Element Id",
-                "description": "Text string for the unique object ID that has changed.",
-                "maxLength": 100,
-                "minLength": 1,
-                "pattern": "^[^,;!\\n\\t]+$",
-                "type": "string"
-              },
-              "geometry": {
-                "title": "Geometry",
-                "description": "A list of DisplayFace3D dictionaries for the deleted geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been deleted.",
-                "type": "array",
-                "items": {
-                  "type": "object"
-                }
-              },
-              "element_name": {
-                "title": "Element Name",
-                "description": "Text string for the display name of the object that has changed.",
-                "type": "string"
-              },
-              "type": {
-                "title": "Type",
-                "default": "DeletedObject",
-                "pattern": "^DeletedObject$",
-                "type": "string",
-                "readOnly": true
-              }
-            }
-          }
-        ],
-        "title": "DeletedObject",
-        "discriminator": {
-          "propertyName": "type"
-        }
-      },
       "AddedObject": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+            "$ref": "#/components/schemas/_DiffObjectBase"
           },
           {
             "type": "object",
             "required": [
-              "element_type",
-              "element_id",
               "geometry"
             ],
             "properties": {
-              "element_type": {
-                "description": "Text for the type of object that has been changed.",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/GeometryObjectTypes"
-                  }
-                ]
-              },
-              "element_id": {
-                "title": "Element Id",
-                "description": "Text string for the unique object ID that has changed.",
-                "maxLength": 100,
-                "minLength": 1,
-                "pattern": "^[^,;!\\n\\t]+$",
-                "type": "string"
-              },
               "geometry": {
-                "title": "Geometry",
                 "description": "A list of DisplayFace3D dictionaries for the added geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been added.",
-                "type": "array",
                 "items": {
+                  "additionalProperties": true,
                   "type": "object"
-                }
-              },
-              "element_name": {
-                "title": "Element Name",
-                "description": "Text string for the display name of the object that has changed.",
-                "type": "string"
+                },
+                "title": "Geometry",
+                "type": "array"
               },
               "type": {
-                "title": "Type",
+                "const": "AddedObject",
                 "default": "AddedObject",
-                "pattern": "^AddedObject$",
+                "title": "Type",
                 "type": "string",
                 "readOnly": true
               }
@@ -282,6 +108,76 @@
           }
         ],
         "title": "AddedObject",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "ChangedObject": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/_DiffObjectBase"
+          },
+          {
+            "type": "object",
+            "required": [
+              "geometry_changed",
+              "geometry"
+            ],
+            "properties": {
+              "geometry_changed": {
+                "description": "A boolean to note whether the geometry of the object has changed (True) or not (False). For the case of a Room, any change in the geometry of child Faces, Apertures or Doors will cause this property to be True. Note that this property is only True if the change in geometry produces a visible change greater than the base model tolerance. So converting the model between different unit systems, removing colinear vertices, or doing other transformations that are common for export to simulation engines will not trigger this property to become True.",
+                "title": "Geometry Changed",
+                "type": "boolean"
+              },
+              "geometry": {
+                "description": "A list of DisplayFace3D dictionaries for the new, changed geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been changed. Note that this attribute is always included in the ChangedObject, even when geometry_changed is False.",
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "title": "Geometry",
+                "type": "array"
+              },
+              "type": {
+                "const": "ChangedObject",
+                "default": "ChangedObject",
+                "title": "Type",
+                "type": "string",
+                "readOnly": true
+              },
+              "energy_changed": {
+                "default": false,
+                "description": "A boolean to note whether the energy properties of the object have changed (True) or not (False) such that it is possible for the properties of the changed object to be applied to the base model. For Rooms, this property will only be true if the energy property assigned to the Room has changed and will not be true if a property assigned to an individual child Face or Aperture has changed.",
+                "title": "Energy Changed",
+                "type": "boolean"
+              },
+              "radiance_changed": {
+                "default": false,
+                "description": "A boolean to note whether the radiance properties of the object have changed (True) or not (False) such that it is possible for the properties of the changed object to be applied to the base model. For Rooms, this property will only be true if the radiance property assigned to the Room has changed and will not be true if a property assigned to an individual child Face or Aperture has changed.",
+                "title": "Radiance Changed",
+                "type": "boolean"
+              },
+              "existing_geometry": {
+                "anyOf": [
+                  {
+                    "items": {
+                      "additionalProperties": true,
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "A list of DisplayFace3D dictionaries for the existing (base) geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been changed. This attribute is optional and will NOT be output if geometry_changed is False.",
+                "title": "Existing Geometry"
+              }
+            }
+          }
+        ],
+        "title": "ChangedObject",
         "discriminator": {
           "propertyName": "type"
         }
@@ -295,35 +191,59 @@
             "type": "object",
             "properties": {
               "type": {
-                "title": "Type",
+                "const": "ComparisonReport",
                 "default": "ComparisonReport",
-                "pattern": "^ComparisonReport$",
+                "title": "Type",
                 "type": "string",
                 "readOnly": true
               },
               "changed_objects": {
-                "title": "Changed Objects",
+                "anyOf": [
+                  {
+                    "items": {
+                      "$ref": "#/components/schemas/ChangedObject"
+                    },
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
                 "description": "A list of ChangedObject definitions for each top-level object that has changed in the model. To be a changed object, the object identifier must be the same in both models but some other property (either geometry or extension attributes) has experienced a meaningful change.",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/ChangedObject"
-                }
+                "title": "Changed Objects"
               },
               "deleted_objects": {
-                "title": "Deleted Objects",
+                "anyOf": [
+                  {
+                    "items": {
+                      "$ref": "#/components/schemas/DeletedObject"
+                    },
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
                 "description": "A list of DeletedObject definitions for each top-level object that has been deleted in the process of going from the base model to the new model.",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/DeletedObject"
-                }
+                "title": "Deleted Objects"
               },
               "added_objects": {
-                "title": "Added Objects",
+                "anyOf": [
+                  {
+                    "items": {
+                      "$ref": "#/components/schemas/AddedObject"
+                    },
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
                 "description": "A list of AddedObject definitions for each top-level object that has been added in the process of going from the base model to the new model.",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/AddedObject"
-                }
+                "title": "Added Objects"
               }
             }
           }
@@ -332,6 +252,53 @@
         "discriminator": {
           "propertyName": "type"
         }
+      },
+      "DeletedObject": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/_DiffObjectBase"
+          },
+          {
+            "type": "object",
+            "required": [
+              "geometry"
+            ],
+            "properties": {
+              "geometry": {
+                "description": "A list of DisplayFace3D dictionaries for the deleted geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been deleted.",
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "title": "Geometry",
+                "type": "array"
+              },
+              "type": {
+                "const": "DeletedObject",
+                "default": "DeletedObject",
+                "title": "Type",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          }
+        ],
+        "title": "DeletedObject",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "GeometryObjectTypes": {
+        "description": "Types of Honeybee geometry objects.",
+        "enum": [
+          "Shade",
+          "Aperture",
+          "Door",
+          "Face",
+          "Room"
+        ],
+        "title": "GeometryObjectTypes",
+        "type": "string"
       },
       "_DiffObjectBase": {
         "allOf": [
@@ -342,25 +309,29 @@
             "type": "object",
             "properties": {
               "element_type": {
-                "description": "Text for the type of object that has been changed.",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/GeometryObjectTypes"
-                  }
-                ]
+                "$ref": "#/components/schemas/GeometryObjectTypes",
+                "description": "Text for the type of object that has been changed."
               },
               "element_id": {
-                "title": "Element Id",
                 "description": "Text string for the unique object ID that has changed.",
                 "maxLength": 100,
                 "minLength": 1,
                 "pattern": "^[^,;!\\n\\t]+$",
+                "title": "Element Id",
                 "type": "string"
               },
               "element_name": {
-                "title": "Element Name",
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
                 "description": "Text string for the display name of the object that has changed.",
-                "type": "string"
+                "title": "Element Name"
               },
               "type": {
                 "title": "Type",
@@ -382,17 +353,17 @@
         }
       },
       "_OpenAPIGenBaseModel": {
-        "title": "_OpenAPIGenBaseModel",
-        "type": "object",
         "properties": {
           "type": {
-            "title": "Type",
-            "description": "A base class to use when there is no baseclass available to fall on.",
             "default": "InvalidType",
+            "description": "A base class to use when there is no baseclass available to fall on.",
+            "title": "Type",
             "type": "string",
             "readOnly": true
           }
         },
+        "title": "_OpenAPIGenBaseModel",
+        "type": "object",
         "discriminator": {
           "propertyName": "type"
         }

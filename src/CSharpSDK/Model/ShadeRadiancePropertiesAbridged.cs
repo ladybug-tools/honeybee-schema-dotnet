@@ -42,7 +42,7 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="modifier">A string for a Honeybee Radiance Modifier (default: None).</param>
         /// <param name="modifierBlk">A string for a Honeybee Radiance Modifier to be used in direct solar simulations and in isolation studies (assessingthe contribution of individual objects) (default: None).</param>
-        /// <param name="dynamicGroupIdentifier">An optional string to note the dynamic group '             'to which the Shade is a part of. Shades sharing the same '             'dynamic_group_identifier will have their states change in unison. '             'If None, the Shade is assumed to be static. (default: None).</param>
+        /// <param name="dynamicGroupIdentifier">An optional string to note the dynamic group to which the Shade is a part of. Shades sharing the same dynamic_group_identifier will have their states change in unison. If None, the Shade is assumed to be static.</param>
         /// <param name="states">An optional list of abridged states (default: None).</param>
         public ShadeRadiancePropertiesAbridged
         (
@@ -63,9 +63,9 @@ namespace HoneybeeSchema
 	
 	
         /// <summary>
-        /// An optional string to note the dynamic group '             'to which the Shade is a part of. Shades sharing the same '             'dynamic_group_identifier will have their states change in unison. '             'If None, the Shade is assumed to be static. (default: None).
+        /// An optional string to note the dynamic group to which the Shade is a part of. Shades sharing the same dynamic_group_identifier will have their states change in unison. If None, the Shade is assumed to be static.
         /// </summary>
-        [Summary(@"An optional string to note the dynamic group '             'to which the Shade is a part of. Shades sharing the same '             'dynamic_group_identifier will have their states change in unison. '             'If None, the Shade is assumed to be static. (default: None).")]
+        [Summary(@"An optional string to note the dynamic group to which the Shade is a part of. Shades sharing the same dynamic_group_identifier will have their states change in unison. If None, the Shade is assumed to be static.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [DataMember(Name = "dynamic_group_identifier")] // For internal Serialization XML/JSON
         [JsonProperty("dynamic_group_identifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json

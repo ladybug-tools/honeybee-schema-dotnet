@@ -22,7 +22,7 @@ namespace HoneybeeSchema
     [Summary(@"")]
     [System.Serializable]
     [DataContract(Name = "DeletedObject")] // Enables DataMember rules. For internal Serialization XML/JSON
-    public partial class DeletedObject : OpenAPIGenBaseModel, System.IEquatable<DeletedObject>
+    public partial class DeletedObject : DiffObjectBase, System.IEquatable<DeletedObject>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DeletedObject" /> class.
@@ -44,12 +44,9 @@ namespace HoneybeeSchema
         public DeletedObject
         (
             GeometryObjectTypes elementType, string elementId, List<object> geometry, string elementName = default
-        ) : base()
+        ) : base(elementType: elementType, elementId: elementId, elementName: elementName)
         {
-            this.ElementType = elementType;
-            this.ElementId = elementId ?? throw new System.ArgumentNullException("elementId is a required property for DeletedObject and cannot be null");
             this.Geometry = geometry ?? throw new System.ArgumentNullException("geometry is a required property for DeletedObject and cannot be null");
-            this.ElementName = elementName;
 
             // Set readonly properties with defaultValue
             this.Type = "DeletedObject";
@@ -62,31 +59,6 @@ namespace HoneybeeSchema
 	
 	
         /// <summary>
-        /// Text for the type of object that has been changed.
-        /// </summary>
-        [Summary(@"Text for the type of object that has been changed.")]
-        [Required] // For validation after deserialization
-        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
-        [DataMember(Name = "element_type", IsRequired = true)] // For internal Serialization XML/JSON
-        [JsonProperty("element_type", Required = Required.Always)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("element_type")] // For System.Text.Json
-        public GeometryObjectTypes ElementType { get; set; }
-
-        /// <summary>
-        /// Text string for the unique object ID that has changed.
-        /// </summary>
-        [Summary(@"Text string for the unique object ID that has changed.")]
-        [Required] // For validation after deserialization
-        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
-        [RegularExpression(@"^[^,;!\n\t]+$")]
-        [MinLength(1)]
-        [MaxLength(100)]
-        [DataMember(Name = "element_id", IsRequired = true)] // For internal Serialization XML/JSON
-        [JsonProperty("element_id", Required = Required.Always)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("element_id")] // For System.Text.Json
-        public string ElementId { get; set; }
-
-        /// <summary>
         /// A list of DisplayFace3D dictionaries for the deleted geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been deleted.
         /// </summary>
         [Summary(@"A list of DisplayFace3D dictionaries for the deleted geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been deleted.")]
@@ -96,16 +68,6 @@ namespace HoneybeeSchema
         [JsonProperty("geometry", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("geometry")] // For System.Text.Json
         public List<object> Geometry { get; set; }
-
-        /// <summary>
-        /// Text string for the display name of the object that has changed.
-        /// </summary>
-        [Summary(@"Text string for the display name of the object that has changed.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "element_name")] // For internal Serialization XML/JSON
-        [JsonProperty("element_name", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("element_name")] // For System.Text.Json
-        public string ElementName { get; set; }
 
 
         /// <summary>
@@ -166,8 +128,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        /// <returns>DiffObjectBase</returns>
+        public override DiffObjectBase DuplicateDiffObjectBase()
         {
             return DuplicateDeletedObject();
         }
@@ -195,10 +157,7 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                    Extension.Equals(this.ElementType, input.ElementType) && 
-                    Extension.Equals(this.ElementId, input.ElementId) && 
-                    Extension.AllEquals(this.Geometry, input.Geometry) && 
-                    Extension.Equals(this.ElementName, input.ElementName);
+                    Extension.AllEquals(this.Geometry, input.Geometry);
         }
 
 
@@ -211,14 +170,8 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.ElementType != null)
-                    hashCode = hashCode * 59 + this.ElementType.GetHashCode();
-                if (this.ElementId != null)
-                    hashCode = hashCode * 59 + this.ElementId.GetHashCode();
                 if (this.Geometry != null)
                     hashCode = hashCode * 59 + this.Geometry.GetHashCode();
-                if (this.ElementName != null)
-                    hashCode = hashCode * 59 + this.ElementName.GetHashCode();
                 return hashCode;
             }
         }

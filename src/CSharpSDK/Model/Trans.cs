@@ -25,7 +25,7 @@ namespace HoneybeeSchema
     [Summary(@"Radiance Translucent material.")]
     [System.Serializable]
     [DataContract(Name = "Trans")] // Enables DataMember rules. For internal Serialization XML/JSON
-    public partial class Trans : ModifierBase, System.IEquatable<Trans>
+    public partial class Trans : Plastic, System.IEquatable<Trans>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Trans" /> class.
@@ -54,15 +54,8 @@ namespace HoneybeeSchema
         public Trans
         (
             string identifier, string displayName = default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> modifier = default, List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>> dependencies = default, double rReflectance = 0D, double gReflectance = 0D, double bReflectance = 0D, double specularity = 0D, double roughness = 0D, double transmittedDiff = 0D, double transmittedSpec = 0D
-        ) : base(identifier: identifier, displayName: displayName)
+        ) : base(identifier: identifier, displayName: displayName, modifier: modifier, dependencies: dependencies, rReflectance: rReflectance, gReflectance: gReflectance, bReflectance: bReflectance, specularity: specularity, roughness: roughness)
         {
-            this.Modifier = modifier ?? new Void();
-            this.Dependencies = dependencies;
-            this.RReflectance = rReflectance;
-            this.GReflectance = gReflectance;
-            this.BReflectance = bReflectance;
-            this.Specularity = specularity;
-            this.Roughness = roughness;
             this.TransmittedDiff = transmittedDiff;
             this.TransmittedSpec = transmittedSpec;
 
@@ -76,81 +69,6 @@ namespace HoneybeeSchema
 
 	
 	
-        /// <summary>
-        /// Material modifier.
-        /// </summary>
-        [Summary(@"Material modifier.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "modifier")] // For internal Serialization XML/JSON
-        [JsonProperty("modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("modifier")] // For System.Text.Json
-        public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> Modifier { get; set; } = new Void();
-
-        /// <summary>
-        /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.
-        /// </summary>
-        [Summary(@"List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "dependencies")] // For internal Serialization XML/JSON
-        [JsonProperty("dependencies", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("dependencies")] // For System.Text.Json
-        public List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>> Dependencies { get; set; }
-
-        /// <summary>
-        /// A value between 0 and 1 for the red channel reflectance.
-        /// </summary>
-        [Summary(@"A value between 0 and 1 for the red channel reflectance.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(0, 1)]
-        [DataMember(Name = "r_reflectance")] // For internal Serialization XML/JSON
-        [JsonProperty("r_reflectance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("r_reflectance")] // For System.Text.Json
-        public double RReflectance { get; set; } = 0D;
-
-        /// <summary>
-        /// A value between 0 and 1 for the green channel reflectance.
-        /// </summary>
-        [Summary(@"A value between 0 and 1 for the green channel reflectance.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(0, 1)]
-        [DataMember(Name = "g_reflectance")] // For internal Serialization XML/JSON
-        [JsonProperty("g_reflectance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("g_reflectance")] // For System.Text.Json
-        public double GReflectance { get; set; } = 0D;
-
-        /// <summary>
-        /// A value between 0 and 1 for the blue channel reflectance.
-        /// </summary>
-        [Summary(@"A value between 0 and 1 for the blue channel reflectance.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(0, 1)]
-        [DataMember(Name = "b_reflectance")] // For internal Serialization XML/JSON
-        [JsonProperty("b_reflectance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("b_reflectance")] // For System.Text.Json
-        public double BReflectance { get; set; } = 0D;
-
-        /// <summary>
-        /// A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials.
-        /// </summary>
-        [Summary(@"A value between 0 and 1 for the fraction of specularity. Specularity fractions greater than 0.1 are not realistic for non-metallic materials.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(0, 1)]
-        [DataMember(Name = "specularity")] // For internal Serialization XML/JSON
-        [JsonProperty("specularity", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("specularity")] // For System.Text.Json
-        public double Specularity { get; set; } = 0D;
-
-        /// <summary>
-        /// A value between 0 and 1 for the roughness, specified as the RMS slope of surface facets. Roughness greater than 0.2 are not realistic.
-        /// </summary>
-        [Summary(@"A value between 0 and 1 for the roughness, specified as the RMS slope of surface facets. Roughness greater than 0.2 are not realistic.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(0, 1)]
-        [DataMember(Name = "roughness")] // For internal Serialization XML/JSON
-        [JsonProperty("roughness", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("roughness")] // For System.Text.Json
-        public double Roughness { get; set; } = 0D;
-
         /// <summary>
         /// The fraction of transmitted light that is transmitted diffusely in a scattering fashion.
         /// </summary>
@@ -239,8 +157,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>ModifierBase</returns>
-        public override ModifierBase DuplicateModifierBase()
+        /// <returns>Plastic</returns>
+        public override Plastic DuplicatePlastic()
         {
             return DuplicateTrans();
         }
@@ -268,13 +186,6 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                    Extension.Equals(this.Modifier, input.Modifier) && 
-                    Extension.AllEquals(this.Dependencies, input.Dependencies) && 
-                    Extension.Equals(this.RReflectance, input.RReflectance) && 
-                    Extension.Equals(this.GReflectance, input.GReflectance) && 
-                    Extension.Equals(this.BReflectance, input.BReflectance) && 
-                    Extension.Equals(this.Specularity, input.Specularity) && 
-                    Extension.Equals(this.Roughness, input.Roughness) && 
                     Extension.Equals(this.TransmittedDiff, input.TransmittedDiff) && 
                     Extension.Equals(this.TransmittedSpec, input.TransmittedSpec);
         }
@@ -289,20 +200,6 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Modifier != null)
-                    hashCode = hashCode * 59 + this.Modifier.GetHashCode();
-                if (this.Dependencies != null)
-                    hashCode = hashCode * 59 + this.Dependencies.GetHashCode();
-                if (this.RReflectance != null)
-                    hashCode = hashCode * 59 + this.RReflectance.GetHashCode();
-                if (this.GReflectance != null)
-                    hashCode = hashCode * 59 + this.GReflectance.GetHashCode();
-                if (this.BReflectance != null)
-                    hashCode = hashCode * 59 + this.BReflectance.GetHashCode();
-                if (this.Specularity != null)
-                    hashCode = hashCode * 59 + this.Specularity.GetHashCode();
-                if (this.Roughness != null)
-                    hashCode = hashCode * 59 + this.Roughness.GetHashCode();
                 if (this.TransmittedDiff != null)
                     hashCode = hashCode * 59 + this.TransmittedDiff.GetHashCode();
                 if (this.TransmittedSpec != null)

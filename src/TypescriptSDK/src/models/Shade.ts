@@ -1,11 +1,10 @@
-﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Equals, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { Face3D } from "./Face3D";
 import { IDdBaseModel } from "./IDdBaseModel";
 import { ShadePropertiesAbridged } from "./ShadePropertiesAbridged";
 
-/** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Shade extends IDdBaseModel {
     @Type(() => Face3D)
     @IsInstance(Face3D)
@@ -26,7 +25,7 @@ export class Shade extends IDdBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^Shade$/)
+    @Equals("Shade")
     @Expose({ name: "type" })
     /** type */
     type: string = "Shade";

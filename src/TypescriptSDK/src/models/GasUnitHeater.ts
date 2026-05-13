@@ -1,23 +1,16 @@
-﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
+import { _HeatCoolBase } from "./_HeatCoolBase";
 import { GasUnitHeaterEquipmentType } from "./GasUnitHeaterEquipmentType";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 
 /** Gas unit heating system.\n\nGas unit systems are intended for spaces only requiring heating and no\nventilation or cooling. Each room/zone will get its own gaa heating unit\nthat satisfies the heating load. */
-export class GasUnitHeater extends IDdEnergyBaseModel {
-    @Type(() => String)
-    @IsEnum(Vintages)
-    @IsOptional()
-    @Expose({ name: "vintage" })
-    /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
-    vintage: Vintages = Vintages.ASHRAE_2019;
-	
+export class GasUnitHeater extends _HeatCoolBase {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^GasUnitHeater$/)
+    @Equals("GasUnitHeater")
     @Expose({ name: "type" })
     /** type */
     type: string = "GasUnitHeater";
@@ -32,7 +25,6 @@ export class GasUnitHeater extends IDdEnergyBaseModel {
 
     constructor() {
         super();
-        this.vintage = Vintages.ASHRAE_2019;
         this.type = "GasUnitHeater";
         this.equipmentType = GasUnitHeaterEquipmentType.GasHeaters;
     }
@@ -42,9 +34,9 @@ export class GasUnitHeater extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(GasUnitHeater, _data);
-            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.type = obj.type ?? "GasUnitHeater";
             this.equipmentType = obj.equipmentType ?? GasUnitHeaterEquipmentType.GasHeaters;
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.userData = obj.userData;
             this.identifier = obj.identifier;
             this.displayName = obj.displayName;
@@ -69,7 +61,6 @@ export class GasUnitHeater extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["vintage"] = this.vintage ?? Vintages.ASHRAE_2019;
         data["type"] = this.type ?? "GasUnitHeater";
         data["equipment_type"] = this.equipmentType ?? GasUnitHeaterEquipmentType.GasHeaters;
         data = super.toJSON(data);

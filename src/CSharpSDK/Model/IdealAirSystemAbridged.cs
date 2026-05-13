@@ -126,6 +126,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number for the maximum heating supply air temperature [C].")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, 100)]
         [DataMember(Name = "heating_air_temperature")] // For internal Serialization XML/JSON
         [JsonProperty("heating_air_temperature", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("heating_air_temperature")] // For System.Text.Json
@@ -136,6 +137,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number for the minimum cooling supply air temperature [C].")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(-100, 50)]
         [DataMember(Name = "cooling_air_temperature")] // For internal Serialization XML/JSON
         [JsonProperty("cooling_air_temperature", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("cooling_air_temperature")] // For System.Text.Json

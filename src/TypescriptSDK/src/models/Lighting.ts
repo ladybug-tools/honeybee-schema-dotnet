@@ -1,11 +1,10 @@
-﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Equals, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { ScheduleRuleset } from "./ScheduleRuleset";
 
-/** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class Lighting extends IDdEnergyBaseModel {
     @Type(() => Number)
     @IsNumber()
@@ -15,7 +14,15 @@ export class Lighting extends IDdEnergyBaseModel {
     /** Lighting per floor area as [W/m2]. */
     wattsPerArea!: number;
 	
-    @IsDefined()
+    @Type(() => String)
+    @IsString()
+    @IsOptional()
+    @Equals("Lighting")
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Lighting";
+	
+    @IsOptional()
     @Expose({ name: "schedule" })
     @Transform(({ value }) => {
       const item = value;
@@ -23,16 +30,8 @@ export class Lighting extends IDdEnergyBaseModel {
       else if (item?.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
       else return item;
     })
-    /** The schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile. */
-    schedule!: (ScheduleRuleset | ScheduleFixedInterval);
-	
-    @Type(() => String)
-    @IsString()
-    @IsOptional()
-    @Matches(/^Lighting$/)
-    @Expose({ name: "type" })
-    /** type */
-    type: string = "Lighting";
+    /** The schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile. If None, an Always On schedule will be used. */
+    schedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @Type(() => Number)
     @IsNumber()
@@ -85,8 +84,8 @@ export class Lighting extends IDdEnergyBaseModel {
         if (_data) {
             const obj = deepTransform(Lighting, _data);
             this.wattsPerArea = obj.wattsPerArea;
-            this.schedule = obj.schedule;
             this.type = obj.type ?? "Lighting";
+            this.schedule = obj.schedule;
             this.visibleFraction = obj.visibleFraction ?? 0.25;
             this.radiantFraction = obj.radiantFraction ?? 0.32;
             this.returnAirFraction = obj.returnAirFraction ?? 0;
@@ -116,8 +115,8 @@ export class Lighting extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["watts_per_area"] = this.wattsPerArea;
-        data["schedule"] = this.schedule;
         data["type"] = this.type ?? "Lighting";
+        data["schedule"] = this.schedule;
         data["visible_fraction"] = this.visibleFraction ?? 0.25;
         data["radiant_fraction"] = this.radiantFraction ?? 0.32;
         data["return_air_fraction"] = this.returnAirFraction ?? 0;

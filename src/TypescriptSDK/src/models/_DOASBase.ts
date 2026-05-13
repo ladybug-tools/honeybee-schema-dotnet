@@ -1,18 +1,11 @@
-﻿import { IsEnum, IsOptional, IsNumber, Min, Max, IsBoolean, IsString, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsOptional, Min, Max, IsBoolean, IsString, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { _TemplateSystem } from "./_TemplateSystem";
 import { Vintages } from "./Vintages";
 
 /** Base class for Dedicated Outdoor Air System (DOAS) HVACs.\n\nDOAS systems separate minimum ventilation supply from the satisfaction of heating\n+ cooling demand. Ventilation air tends to be supplied at neutral temperatures\n(close to room air temperature) and heating / cooling loads are met with additional\npieces of zone equipment (eg. Fan Coil Units (FCUs)).\n\nBecause DOAS systems only have to cool down and re-heat the minimum ventilation air,\nthey tend to use less energy than all-air systems. They also tend to use less energy\nto distribute heating + cooling by pumping around hot/cold water or refrigerant\ninstead of blowing hot/cold air. However, they do not provide as good of control\nover humidity and so they may not be appropriate for rooms with high latent loads\nlike auditoriums, kitchens, laundromats, etc. */
-export class _DOASBase extends IDdEnergyBaseModel {
-    @Type(() => String)
-    @IsEnum(Vintages)
-    @IsOptional()
-    @Expose({ name: "vintage" })
-    /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
-    vintage: Vintages = Vintages.ASHRAE_2019;
-	
+export class _DOASBase extends _TemplateSystem {
     @Type(() => Number)
     @IsNumber()
     @IsOptional()
@@ -58,7 +51,6 @@ export class _DOASBase extends IDdEnergyBaseModel {
 
     constructor() {
         super();
-        this.vintage = Vintages.ASHRAE_2019;
         this.sensibleHeatRecovery = 0;
         this.latentHeatRecovery = 0;
         this.demandControlledVentilation = false;
@@ -70,12 +62,12 @@ export class _DOASBase extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(_DOASBase, _data);
-            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
             this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
             this.demandControlledVentilation = obj.demandControlledVentilation ?? false;
             this.doasAvailabilitySchedule = obj.doasAvailabilitySchedule;
             this.type = obj.type ?? "_DOASBase";
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.userData = obj.userData;
             this.identifier = obj.identifier;
             this.displayName = obj.displayName;
@@ -100,7 +92,6 @@ export class _DOASBase extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["vintage"] = this.vintage ?? Vintages.ASHRAE_2019;
         data["sensible_heat_recovery"] = this.sensibleHeatRecovery ?? 0;
         data["latent_heat_recovery"] = this.latentHeatRecovery ?? 0;
         data["demand_controlled_ventilation"] = this.demandControlledVentilation ?? false;

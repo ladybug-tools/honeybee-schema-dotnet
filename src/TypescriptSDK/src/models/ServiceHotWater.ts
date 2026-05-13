@@ -1,11 +1,10 @@
-﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Equals, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { ScheduleRuleset } from "./ScheduleRuleset";
 
-/** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class ServiceHotWater extends IDdEnergyBaseModel {
     @Type(() => Number)
     @IsNumber()
@@ -15,7 +14,15 @@ export class ServiceHotWater extends IDdEnergyBaseModel {
     /** Number for the total volume flow rate of water per unit area of floor [L/h-m2]. */
     flowPerArea!: number;
 	
-    @IsDefined()
+    @Type(() => String)
+    @IsString()
+    @IsOptional()
+    @Equals("ServiceHotWater")
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ServiceHotWater";
+	
+    @IsOptional()
     @Expose({ name: "schedule" })
     @Transform(({ value }) => {
       const item = value;
@@ -23,16 +30,8 @@ export class ServiceHotWater extends IDdEnergyBaseModel {
       else if (item?.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
       else return item;
     })
-    /** The schedule for the use of hot water over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile. */
-    schedule!: (ScheduleRuleset | ScheduleFixedInterval);
-	
-    @Type(() => String)
-    @IsString()
-    @IsOptional()
-    @Matches(/^ServiceHotWater$/)
-    @Expose({ name: "type" })
-    /** type */
-    type: string = "ServiceHotWater";
+    /** The schedule for the use of hot water over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile. If None, an Always On schedule will be used. */
+    schedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @Type(() => Number)
     @IsNumber()
@@ -74,8 +73,8 @@ export class ServiceHotWater extends IDdEnergyBaseModel {
         if (_data) {
             const obj = deepTransform(ServiceHotWater, _data);
             this.flowPerArea = obj.flowPerArea;
-            this.schedule = obj.schedule;
             this.type = obj.type ?? "ServiceHotWater";
+            this.schedule = obj.schedule;
             this.targetTemperature = obj.targetTemperature ?? 60;
             this.sensibleFraction = obj.sensibleFraction ?? 0.2;
             this.latentFraction = obj.latentFraction ?? 0.05;
@@ -104,8 +103,8 @@ export class ServiceHotWater extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["flow_per_area"] = this.flowPerArea;
-        data["schedule"] = this.schedule;
         data["type"] = this.type ?? "ServiceHotWater";
+        data["schedule"] = this.schedule;
         data["target_temperature"] = this.targetTemperature ?? 60;
         data["sensible_fraction"] = this.sensibleFraction ?? 0.2;
         data["latent_fraction"] = this.latentFraction ?? 0.05;

@@ -1,89 +1,16 @@
-﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
-import { ElectricEquipment } from "./ElectricEquipment";
-import { GasEquipment } from "./GasEquipment";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
-import { Infiltration } from "./Infiltration";
-import { Lighting } from "./Lighting";
-import { People } from "./People";
-import { ServiceHotWater } from "./ServiceHotWater";
-import { Setpoint } from "./Setpoint";
-import { Ventilation } from "./Ventilation";
+import { ProgramTypeAbridged } from "./ProgramTypeAbridged";
 
-/** Base class for all objects requiring an EnergyPlus identifier and user_data. */
-export class ProgramType extends IDdEnergyBaseModel {
+export class ProgramType extends ProgramTypeAbridged {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^ProgramType$/)
+    @Equals("ProgramType")
     @Expose({ name: "type" })
     /** type */
     type: string = "ProgramType";
-	
-    @Type(() => People)
-    @IsInstance(People)
-    @ValidateNested()
-    @IsOptional()
-    @Expose({ name: "people" })
-    /** People to describe the occupancy of the program. If None, no occupancy will be assumed for the program. */
-    people?: People;
-	
-    @Type(() => Lighting)
-    @IsInstance(Lighting)
-    @ValidateNested()
-    @IsOptional()
-    @Expose({ name: "lighting" })
-    /** Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program. */
-    lighting?: Lighting;
-	
-    @Type(() => ElectricEquipment)
-    @IsInstance(ElectricEquipment)
-    @ValidateNested()
-    @IsOptional()
-    @Expose({ name: "electric_equipment" })
-    /** ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed. */
-    electricEquipment?: ElectricEquipment;
-	
-    @Type(() => GasEquipment)
-    @IsInstance(GasEquipment)
-    @ValidateNested()
-    @IsOptional()
-    @Expose({ name: "gas_equipment" })
-    /** GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed. */
-    gasEquipment?: GasEquipment;
-	
-    @Type(() => ServiceHotWater)
-    @IsInstance(ServiceHotWater)
-    @ValidateNested()
-    @IsOptional()
-    @Expose({ name: "service_hot_water" })
-    /** ServiceHotWater object to describe the usage of hot water within the program. If None, no hot water will be assumed. */
-    serviceHotWater?: ServiceHotWater;
-	
-    @Type(() => Infiltration)
-    @IsInstance(Infiltration)
-    @ValidateNested()
-    @IsOptional()
-    @Expose({ name: "infiltration" })
-    /** Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program. */
-    infiltration?: Infiltration;
-	
-    @Type(() => Ventilation)
-    @IsInstance(Ventilation)
-    @ValidateNested()
-    @IsOptional()
-    @Expose({ name: "ventilation" })
-    /** Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed. */
-    ventilation?: Ventilation;
-	
-    @Type(() => Setpoint)
-    @IsInstance(Setpoint)
-    @ValidateNested()
-    @IsOptional()
-    @Expose({ name: "setpoint" })
-    /** Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned. */
-    setpoint?: Setpoint;
 	
 
     constructor() {
@@ -130,14 +57,6 @@ export class ProgramType extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type ?? "ProgramType";
-        data["people"] = this.people;
-        data["lighting"] = this.lighting;
-        data["electric_equipment"] = this.electricEquipment;
-        data["gas_equipment"] = this.gasEquipment;
-        data["service_hot_water"] = this.serviceHotWater;
-        data["infiltration"] = this.infiltration;
-        data["ventilation"] = this.ventilation;
-        data["setpoint"] = this.setpoint;
         data = super.toJSON(data);
         return instanceToPlain(data, { exposeUnsetFields: false });
     }

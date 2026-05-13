@@ -25,7 +25,7 @@ namespace HoneybeeSchema
     [Summary(@"Forced Air Furnace HVAC system (aka. System 9 or 10).\n\nForced air furnaces are intended only for spaces only requiring heating and\nventilation. Each room/zone receives its own air loop with its own gas heating\ncoil, which will supply air at a temperature up to 50C (122F) to meet the\nheating needs of the room/zone. Fans are constant volume.\n\nForcedAirFurnace systems are the traditional baseline system for storage\nspaces that only require heating.")]
     [System.Serializable]
     [DataContract(Name = "ForcedAirFurnace")] // Enables DataMember rules. For internal Serialization XML/JSON
-    public partial class ForcedAirFurnace : IDdEnergyBaseModel, System.IEquatable<ForcedAirFurnace>
+    public partial class ForcedAirFurnace : TemplateSystem, System.IEquatable<ForcedAirFurnace>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ForcedAirFurnace" /> class.
@@ -48,9 +48,8 @@ namespace HoneybeeSchema
         public ForcedAirFurnace
         (
             string identifier, string displayName = default, object userData = default, Vintages vintage = Vintages.ASHRAE_2019, FurnaceEquipmentType equipmentType = FurnaceEquipmentType.Furnace
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)
+        ) : base(identifier: identifier, displayName: displayName, userData: userData, vintage: vintage)
         {
-            this.Vintage = vintage;
             this.EquipmentType = equipmentType;
 
             // Set readonly properties with defaultValue
@@ -63,16 +62,6 @@ namespace HoneybeeSchema
 
 	
 	
-        /// <summary>
-        /// Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards
-        /// </summary>
-        [Summary(@"Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "vintage")] // For internal Serialization XML/JSON
-        [JsonProperty("vintage", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("vintage")] // For System.Text.Json
-        public Vintages Vintage { get; set; } = Vintages.ASHRAE_2019;
-
         /// <summary>
         /// Text for the specific type of system equipment from the FurnaceEquipmentType enumeration.
         /// </summary>
@@ -143,8 +132,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>IDdEnergyBaseModel</returns>
-        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        /// <returns>TemplateSystem</returns>
+        public override TemplateSystem DuplicateTemplateSystem()
         {
             return DuplicateForcedAirFurnace();
         }
@@ -172,7 +161,6 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                    Extension.Equals(this.Vintage, input.Vintage) && 
                     Extension.Equals(this.EquipmentType, input.EquipmentType);
         }
 
@@ -186,8 +174,6 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Vintage != null)
-                    hashCode = hashCode * 59 + this.Vintage.GetHashCode();
                 if (this.EquipmentType != null)
                     hashCode = hashCode * 59 + this.EquipmentType.GetHashCode();
                 return hashCode;

@@ -25,7 +25,7 @@ namespace HoneybeeSchema
     [Summary(@"Base class for Dedicated Outdoor Air System (DOAS) HVACs.\n\nDOAS systems separate minimum ventilation supply from the satisfaction of heating\n+ cooling demand. Ventilation air tends to be supplied at neutral temperatures\n(close to room air temperature) and heating / cooling loads are met with additional\npieces of zone equipment (eg. Fan Coil Units (FCUs)).\n\nBecause DOAS systems only have to cool down and re-heat the minimum ventilation air,\nthey tend to use less energy than all-air systems. They also tend to use less energy\nto distribute heating + cooling by pumping around hot/cold water or refrigerant\ninstead of blowing hot/cold air. However, they do not provide as good of control\nover humidity and so they may not be appropriate for rooms with high latent loads\nlike auditoriums, kitchens, laundromats, etc.")]
     [System.Serializable]
     [DataContract(Name = "DOASBase")] // Enables DataMember rules. For internal Serialization XML/JSON
-    public partial class DOASBase : IDdEnergyBaseModel, System.IEquatable<DOASBase>
+    public partial class DOASBase : TemplateSystem, System.IEquatable<DOASBase>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DOASBase" /> class.
@@ -51,9 +51,8 @@ namespace HoneybeeSchema
         public DOASBase
         (
             string identifier, string displayName = default, object userData = default, Vintages vintage = Vintages.ASHRAE_2019, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, bool demandControlledVentilation = false, string doasAvailabilitySchedule = default
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)
+        ) : base(identifier: identifier, displayName: displayName, userData: userData, vintage: vintage)
         {
-            this.Vintage = vintage;
             this.SensibleHeatRecovery = sensibleHeatRecovery;
             this.LatentHeatRecovery = latentHeatRecovery;
             this.DemandControlledVentilation = demandControlledVentilation;
@@ -69,16 +68,6 @@ namespace HoneybeeSchema
 
 	
 	
-        /// <summary>
-        /// Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards
-        /// </summary>
-        [Summary(@"Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "vintage")] // For internal Serialization XML/JSON
-        [JsonProperty("vintage", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("vintage")] // For System.Text.Json
-        public Vintages Vintage { get; set; } = Vintages.ASHRAE_2019;
-
         /// <summary>
         /// A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.
         /// </summary>
@@ -186,8 +175,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>IDdEnergyBaseModel</returns>
-        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        /// <returns>TemplateSystem</returns>
+        public override TemplateSystem DuplicateTemplateSystem()
         {
             return DuplicateDOASBase();
         }
@@ -215,7 +204,6 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                    Extension.Equals(this.Vintage, input.Vintage) && 
                     Extension.Equals(this.SensibleHeatRecovery, input.SensibleHeatRecovery) && 
                     Extension.Equals(this.LatentHeatRecovery, input.LatentHeatRecovery) && 
                     Extension.Equals(this.DemandControlledVentilation, input.DemandControlledVentilation) && 
@@ -232,8 +220,6 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Vintage != null)
-                    hashCode = hashCode * 59 + this.Vintage.GetHashCode();
                 if (this.SensibleHeatRecovery != null)
                     hashCode = hashCode * 59 + this.SensibleHeatRecovery.GetHashCode();
                 if (this.LatentHeatRecovery != null)

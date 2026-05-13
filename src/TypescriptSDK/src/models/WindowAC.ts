@@ -1,23 +1,16 @@
-﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { _HeatCoolBase } from "./_HeatCoolBase";
 import { Vintages } from "./Vintages";
 import { WindowACEquipmentType } from "./WindowACEquipmentType";
 
 /** Window Air Conditioning cooling system (with optional heating).\n\nEach room/zone will receive its own Packaged Terminal Air Conditioner (PTAC)\nwith properties set to reflect a typical window air conditioning (AC) unit.\nNo ventilation air is supplied by the unit and the cooling coil within the\nunit is a single-speed direct expansion (DX) cooling coil. Heating loads\ncan be met with various options, including several types of baseboards,\na furnace, or gas unit heaters. */
-export class WindowAC extends IDdEnergyBaseModel {
-    @Type(() => String)
-    @IsEnum(Vintages)
-    @IsOptional()
-    @Expose({ name: "vintage" })
-    /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
-    vintage: Vintages = Vintages.ASHRAE_2019;
-	
+export class WindowAC extends _HeatCoolBase {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^WindowAC$/)
+    @Equals("WindowAC")
     @Expose({ name: "type" })
     /** type */
     type: string = "WindowAC";
@@ -32,7 +25,6 @@ export class WindowAC extends IDdEnergyBaseModel {
 
     constructor() {
         super();
-        this.vintage = Vintages.ASHRAE_2019;
         this.type = "WindowAC";
         this.equipmentType = WindowACEquipmentType.WindowAC_ElectricBaseboard;
     }
@@ -42,9 +34,9 @@ export class WindowAC extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(WindowAC, _data);
-            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.type = obj.type ?? "WindowAC";
             this.equipmentType = obj.equipmentType ?? WindowACEquipmentType.WindowAC_ElectricBaseboard;
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.userData = obj.userData;
             this.identifier = obj.identifier;
             this.displayName = obj.displayName;
@@ -69,7 +61,6 @@ export class WindowAC extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["vintage"] = this.vintage ?? Vintages.ASHRAE_2019;
         data["type"] = this.type ?? "WindowAC";
         data["equipment_type"] = this.equipmentType ?? WindowACEquipmentType.WindowAC_ElectricBaseboard;
         data = super.toJSON(data);

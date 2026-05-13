@@ -19,10 +19,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
 {
-    /// <summary>
-    /// Base class for all objects requiring an EnergyPlus identifier and user_data.
-    /// </summary>
-    [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
+    [Summary(@"")]
     [System.Serializable]
     [DataContract(Name = "PeopleAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class PeopleAbridged : IDdEnergyBaseModel, System.IEquatable<PeopleAbridged>
@@ -42,19 +39,19 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
         /// <param name="peoplePerArea">People per floor area expressed as [people/m2]</param>
-        /// <param name="occupancySchedule">Identifier of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile.</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
+        /// <param name="occupancySchedule">Identifier of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile. If None, an Always On schedule will be used.</param>
         /// <param name="activitySchedule">Identifier of a schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated.</param>
         /// <param name="radiantFraction">The radiant fraction of sensible heat released by people. (Default: 0.3).</param>
         /// <param name="latentFraction">Number for the latent fraction of heat gain due to people or an Autocalculate object.</param>
         public PeopleAbridged
         (
-            string identifier, double peoplePerArea, string occupancySchedule, string displayName = default, object userData = default, string activitySchedule = default, double radiantFraction = 0.3D, AnyOf<Autocalculate, double> latentFraction = default
+            string identifier, double peoplePerArea, string displayName = default, object userData = default, string occupancySchedule = default, string activitySchedule = default, double radiantFraction = 0.3D, AnyOf<Autocalculate, double> latentFraction = default
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.PeoplePerArea = peoplePerArea;
-            this.OccupancySchedule = occupancySchedule ?? throw new System.ArgumentNullException("occupancySchedule is a required property for PeopleAbridged and cannot be null");
+            this.OccupancySchedule = occupancySchedule;
             this.ActivitySchedule = activitySchedule;
             this.RadiantFraction = radiantFraction;
             this.LatentFraction = latentFraction ?? new Autocalculate();
@@ -82,15 +79,14 @@ namespace HoneybeeSchema
         public double PeoplePerArea { get; set; }
 
         /// <summary>
-        /// Identifier of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile.
+        /// Identifier of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile. If None, an Always On schedule will be used.
         /// </summary>
-        [Summary(@"Identifier of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile.")]
-        [Required] // For validation after deserialization
-        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [Summary(@"Identifier of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile. If None, an Always On schedule will be used.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "occupancy_schedule", IsRequired = true)] // For internal Serialization XML/JSON
-        [JsonProperty("occupancy_schedule", Required = Required.Always)] // For Newtonsoft.Json
+        [DataMember(Name = "occupancy_schedule")] // For internal Serialization XML/JSON
+        [JsonProperty("occupancy_schedule", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("occupancy_schedule")] // For System.Text.Json
         public string OccupancySchedule { get; set; }
 
@@ -151,10 +147,10 @@ namespace HoneybeeSchema
             sb.Append("PeopleAbridged:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  PeoplePerArea: ").Append(this.PeoplePerArea).Append("\n");
-            sb.Append("  OccupancySchedule: ").Append(this.OccupancySchedule).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  OccupancySchedule: ").Append(this.OccupancySchedule).Append("\n");
             sb.Append("  ActivitySchedule: ").Append(this.ActivitySchedule).Append("\n");
             sb.Append("  RadiantFraction: ").Append(this.RadiantFraction).Append("\n");
             sb.Append("  LatentFraction: ").Append(this.LatentFraction).Append("\n");

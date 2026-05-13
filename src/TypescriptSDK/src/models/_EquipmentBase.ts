@@ -1,9 +1,8 @@
-﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsOptional, Max, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, MinLength, MaxLength, Max, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
-/** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class _EquipmentBase extends IDdEnergyBaseModel {
     @Type(() => Number)
     @IsNumber()
@@ -15,12 +14,12 @@ export class _EquipmentBase extends IDdEnergyBaseModel {
 	
     @Type(() => String)
     @IsString()
-    @IsDefined()
+    @IsOptional()
     @MinLength(1)
     @MaxLength(100)
     @Expose({ name: "schedule" })
-    /** Identifier of the schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile. */
-    schedule!: string;
+    /** Identifier of the schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile. If None, an Always On schedule will be used. */
+    schedule?: string;
 	
     @Type(() => Number)
     @IsNumber()

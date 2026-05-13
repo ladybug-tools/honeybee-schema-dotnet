@@ -1,27 +1,9 @@
-﻿import { IsEnum, IsDefined, IsString, Matches, MinLength, MaxLength, IsArray, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsDefined, IsString, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { GeometryObjectTypes } from "./GeometryObjectTypes";
+import { _DiffObjectBase } from "./_DiffObjectBase";
 
-export class AddedObject extends _OpenAPIGenBaseModel {
-    @Type(() => String)
-    @IsEnum(GeometryObjectTypes)
-    @IsDefined()
-    @Expose({ name: "element_type" })
-    /** Text for the type of object that has been changed. */
-    elementType!: GeometryObjectTypes;
-	
-    @Type(() => String)
-    @IsString()
-    @IsDefined()
-    @Matches(/^[^,;!\n\t]+$/)
-    @MinLength(1)
-    @MaxLength(100)
-    @Expose({ name: "element_id" })
-    /** Text string for the unique object ID that has changed. */
-    elementId!: string;
-	
+export class AddedObject extends _DiffObjectBase {
     @IsArray()
     @IsDefined()
     @Expose({ name: "geometry" })
@@ -31,14 +13,7 @@ export class AddedObject extends _OpenAPIGenBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Expose({ name: "element_name" })
-    /** Text string for the display name of the object that has changed. */
-    elementName?: string;
-	
-    @Type(() => String)
-    @IsString()
-    @IsOptional()
-    @Matches(/^AddedObject$/)
+    @Equals("AddedObject")
     @Expose({ name: "type" })
     /** type */
     type: string = "AddedObject";
@@ -54,11 +29,11 @@ export class AddedObject extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(AddedObject, _data);
+            this.geometry = obj.geometry;
+            this.type = obj.type ?? "AddedObject";
             this.elementType = obj.elementType;
             this.elementId = obj.elementId;
-            this.geometry = obj.geometry;
             this.elementName = obj.elementName;
-            this.type = obj.type ?? "AddedObject";
         }
     }
 
@@ -80,10 +55,7 @@ export class AddedObject extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["element_type"] = this.elementType;
-        data["element_id"] = this.elementId;
         data["geometry"] = this.geometry;
-        data["element_name"] = this.elementName;
         data["type"] = this.type ?? "AddedObject";
         data = super.toJSON(data);
         return instanceToPlain(data, { exposeUnsetFields: false });

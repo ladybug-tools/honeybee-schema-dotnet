@@ -1,4 +1,4 @@
-﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsBoolean, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Equals, IsBoolean, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { DoorPropertiesAbridged } from "./DoorPropertiesAbridged";
@@ -8,7 +8,6 @@ import { Outdoors } from "./Outdoors";
 import { Shade } from "./Shade";
 import { Surface } from "./Surface";
 
-/** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Door extends IDdBaseModel {
     @Type(() => Face3D)
     @IsInstance(Face3D)
@@ -40,7 +39,7 @@ export class Door extends IDdBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^Door$/)
+    @Equals("Door")
     @Expose({ name: "type" })
     /** type */
     type: string = "Door";

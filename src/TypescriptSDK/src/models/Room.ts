@@ -1,4 +1,4 @@
-﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsInt, Min, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Equals, IsInt, Min, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { Face } from "./Face";
@@ -6,7 +6,6 @@ import { IDdBaseModel } from "./IDdBaseModel";
 import { RoomPropertiesAbridged } from "./RoomPropertiesAbridged";
 import { Shade } from "./Shade";
 
-/** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Room extends IDdBaseModel {
     @IsArray()
     @Type(() => Face)
@@ -28,7 +27,7 @@ export class Room extends IDdBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^Room$/)
+    @Equals("Room")
     @Expose({ name: "type" })
     /** type */
     type: string = "Room";

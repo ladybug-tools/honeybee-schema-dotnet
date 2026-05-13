@@ -25,7 +25,7 @@ namespace HoneybeeSchema
     [Summary(@"Set containing radiance modifiers needed for a model's roofs.")]
     [System.Serializable]
     [DataContract(Name = "RoofCeilingModifierSet")] // Enables DataMember rules. For internal Serialization XML/JSON
-    public partial class RoofCeilingModifierSet : OpenAPIGenBaseModel, System.IEquatable<RoofCeilingModifierSet>
+    public partial class RoofCeilingModifierSet : BaseModifierSet, System.IEquatable<RoofCeilingModifierSet>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RoofCeilingModifierSet" /> class.
@@ -45,10 +45,8 @@ namespace HoneybeeSchema
         public RoofCeilingModifierSet
         (
             AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> exteriorModifier = default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> interiorModifier = default
-        ) : base()
+        ) : base(exteriorModifier: exteriorModifier, interiorModifier: interiorModifier)
         {
-            this.ExteriorModifier = exteriorModifier;
-            this.InteriorModifier = interiorModifier;
 
             // Set readonly properties with defaultValue
             this.Type = "RoofCeilingModifierSet";
@@ -60,26 +58,6 @@ namespace HoneybeeSchema
 
 	
 	
-        /// <summary>
-        /// A radiance modifier object for faces with an Outdoors boundary condition.
-        /// </summary>
-        [Summary(@"A radiance modifier object for faces with an Outdoors boundary condition.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "exterior_modifier")] // For internal Serialization XML/JSON
-        [JsonProperty("exterior_modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("exterior_modifier")] // For System.Text.Json
-        public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> ExteriorModifier { get; set; }
-
-        /// <summary>
-        /// A radiance modifier object for faces with a boundary condition other than Outdoors.
-        /// </summary>
-        [Summary(@"A radiance modifier object for faces with a boundary condition other than Outdoors.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "interior_modifier")] // For internal Serialization XML/JSON
-        [JsonProperty("interior_modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("interior_modifier")] // For System.Text.Json
-        public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> InteriorModifier { get; set; }
-
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -137,8 +115,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        /// <returns>BaseModifierSet</returns>
+        public override BaseModifierSet DuplicateBaseModifierSet()
         {
             return DuplicateRoofCeilingModifierSet();
         }
@@ -165,9 +143,7 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
-                    Extension.Equals(this.ExteriorModifier, input.ExteriorModifier) && 
-                    Extension.Equals(this.InteriorModifier, input.InteriorModifier);
+            return base.Equals(input);
         }
 
 
@@ -180,10 +156,6 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.ExteriorModifier != null)
-                    hashCode = hashCode * 59 + this.ExteriorModifier.GetHashCode();
-                if (this.InteriorModifier != null)
-                    hashCode = hashCode * 59 + this.InteriorModifier.GetHashCode();
                 return hashCode;
             }
         }

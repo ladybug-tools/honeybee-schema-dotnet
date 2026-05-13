@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { _SkyCondition } from "./_SkyCondition";
@@ -17,7 +17,7 @@ export class ASHRAEClearSky extends _SkyCondition {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^ASHRAEClearSky$/)
+    @Equals("ASHRAEClearSky")
     @Expose({ name: "type" })
     /** type */
     type: string = "ASHRAEClearSky";

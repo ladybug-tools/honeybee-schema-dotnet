@@ -1,19 +1,12 @@
 ﻿import { IsEnum, IsOptional, IsNumber, Min, Max, IsBoolean, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
+import { _TemplateSystem } from "./_TemplateSystem";
 import { AllAirEconomizerType } from "./AllAirEconomizerType";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 
 /** Base class for all-air systems.\n\nAll-air systems provide both ventilation and heating + cooling demand with\nthe same stream of warm/cool air. As such, they often grant tight control\nover zone humidity. However, because such systems often involve the\ncooling of air only to reheat it again, they are often more energy intensive\nthan systems that separate ventilation from the meeting of thermal loads. */
-export class _AllAirBase extends IDdEnergyBaseModel {
-    @Type(() => String)
-    @IsEnum(Vintages)
-    @IsOptional()
-    @Expose({ name: "vintage" })
-    /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
-    vintage: Vintages = Vintages.ASHRAE_2019;
-	
+export class _AllAirBase extends _TemplateSystem {
     @Type(() => String)
     @IsEnum(AllAirEconomizerType)
     @IsOptional()
@@ -57,7 +50,6 @@ export class _AllAirBase extends IDdEnergyBaseModel {
 
     constructor() {
         super();
-        this.vintage = Vintages.ASHRAE_2019;
         this.economizerType = AllAirEconomizerType.NoEconomizer;
         this.sensibleHeatRecovery = 0;
         this.latentHeatRecovery = 0;
@@ -70,12 +62,12 @@ export class _AllAirBase extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(_AllAirBase, _data);
-            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.economizerType = obj.economizerType ?? AllAirEconomizerType.NoEconomizer;
             this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
             this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
             this.demandControlledVentilation = obj.demandControlledVentilation ?? false;
             this.type = obj.type ?? "_AllAirBase";
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.userData = obj.userData;
             this.identifier = obj.identifier;
             this.displayName = obj.displayName;
@@ -100,7 +92,6 @@ export class _AllAirBase extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["vintage"] = this.vintage ?? Vintages.ASHRAE_2019;
         data["economizer_type"] = this.economizerType ?? AllAirEconomizerType.NoEconomizer;
         data["sensible_heat_recovery"] = this.sensibleHeatRecovery ?? 0;
         data["latent_heat_recovery"] = this.latentHeatRecovery ?? 0;

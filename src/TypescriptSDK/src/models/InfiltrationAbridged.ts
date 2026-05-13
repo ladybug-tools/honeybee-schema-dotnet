@@ -1,9 +1,8 @@
-﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Equals, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
-/** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class InfiltrationAbridged extends IDdEnergyBaseModel {
     @Type(() => Number)
     @IsNumber()
@@ -15,20 +14,20 @@ export class InfiltrationAbridged extends IDdEnergyBaseModel {
 	
     @Type(() => String)
     @IsString()
-    @IsDefined()
-    @MinLength(1)
-    @MaxLength(100)
-    @Expose({ name: "schedule" })
-    /** Identifier of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile. */
-    schedule!: string;
+    @IsOptional()
+    @Equals("InfiltrationAbridged")
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "InfiltrationAbridged";
 	
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^InfiltrationAbridged$/)
-    @Expose({ name: "type" })
-    /** type */
-    type: string = "InfiltrationAbridged";
+    @MinLength(1)
+    @MaxLength(100)
+    @Expose({ name: "schedule" })
+    /** Identifier of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile. If None, an Always On schedule will be used. */
+    schedule?: string;
 	
     @Type(() => Number)
     @IsNumber()
@@ -69,8 +68,8 @@ export class InfiltrationAbridged extends IDdEnergyBaseModel {
         if (_data) {
             const obj = deepTransform(InfiltrationAbridged, _data);
             this.flowPerExteriorArea = obj.flowPerExteriorArea;
-            this.schedule = obj.schedule;
             this.type = obj.type ?? "InfiltrationAbridged";
+            this.schedule = obj.schedule;
             this.constantCoefficient = obj.constantCoefficient ?? 1;
             this.temperatureCoefficient = obj.temperatureCoefficient ?? 0;
             this.velocityCoefficient = obj.velocityCoefficient ?? 0;
@@ -99,8 +98,8 @@ export class InfiltrationAbridged extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["flow_per_exterior_area"] = this.flowPerExteriorArea;
-        data["schedule"] = this.schedule;
         data["type"] = this.type ?? "InfiltrationAbridged";
+        data["schedule"] = this.schedule;
         data["constant_coefficient"] = this.constantCoefficient ?? 1;
         data["temperature_coefficient"] = this.temperatureCoefficient ?? 0;
         data["velocity_coefficient"] = this.velocityCoefficient ?? 0;

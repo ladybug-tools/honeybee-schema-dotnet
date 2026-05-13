@@ -1,4 +1,4 @@
-﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -31,7 +31,7 @@ export class WindowConstructionDynamic extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^WindowConstructionDynamic$/)
+    @Equals("WindowConstructionDynamic")
     @Expose({ name: "type" })
     /** type */
     type: string = "WindowConstructionDynamic";

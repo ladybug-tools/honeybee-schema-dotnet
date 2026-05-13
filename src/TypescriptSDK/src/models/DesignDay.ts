@@ -1,4 +1,4 @@
-﻿import { IsString, IsDefined, MinLength, MaxLength, IsEnum, IsInstance, ValidateNested, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, MinLength, MaxLength, IsEnum, IsInstance, ValidateNested, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
@@ -65,7 +65,7 @@ export class DesignDay extends _OpenAPIGenBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^DesignDay$/)
+    @Equals("DesignDay")
     @Expose({ name: "type" })
     /** type */
     type: string = "DesignDay";

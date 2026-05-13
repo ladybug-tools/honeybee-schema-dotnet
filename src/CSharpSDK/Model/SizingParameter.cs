@@ -85,6 +85,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number that will be multiplied by the peak heating load for each zone in order to size the heating system.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "heating_factor")] // For internal Serialization XML/JSON
         [JsonProperty("heating_factor", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("heating_factor")] // For System.Text.Json
@@ -95,6 +96,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number that will be multiplied by the peak cooling load for each zone in order to size the heating system.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "cooling_factor")] // For internal Serialization XML/JSON
         [JsonProperty("cooling_factor", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("cooling_factor")] // For System.Text.Json

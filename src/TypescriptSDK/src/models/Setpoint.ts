@@ -1,4 +1,4 @@
-﻿import { IsDefined, IsString, IsOptional, Matches, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsDefined, IsString, IsOptional, Equals, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -32,7 +32,7 @@ export class Setpoint extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^Setpoint$/)
+    @Equals("Setpoint")
     @Expose({ name: "type" })
     /** type */
     type: string = "Setpoint";

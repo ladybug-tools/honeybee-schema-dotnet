@@ -7,4 +7,6 @@ export enum SHWEquipmentType {
     HeatPump_WaterHeater = "HeatPump_WaterHeater",
     Gas_TanklessHeater = "Gas_TanklessHeater",
     Electric_TanklessHeater = "Electric_TanklessHeater",
+    District_WaterHeater = "District_WaterHeater",
+    District_TanklessHeater = "District_TanklessHeater",
 }

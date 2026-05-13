@@ -71,7 +71,7 @@ namespace HoneybeeSchema
         [Summary(@"The overall heat transfer coefficient for window system in W/m2-K. Note that constructions with U-values above 5.8 should not be assigned to skylights as this implies the resistance of the window is negative when air films are subtracted.")]
         [Required] // For validation after deserialization
         // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
-        [Range(double.MinValue, 12)]
+        [Range(0, 12)]
         [DataMember(Name = "u_factor", IsRequired = true)] // For internal Serialization XML/JSON
         [JsonProperty("u_factor", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("u_factor")] // For System.Text.Json
@@ -83,6 +83,7 @@ namespace HoneybeeSchema
         [Summary(@"Unit-less quantity for the Solar Heat Gain Coefficient (solar transmittance + conduction) at normal incidence and vertical orientation.")]
         [Required] // For validation after deserialization
         // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [Range(0, 1)]
         [DataMember(Name = "shgc", IsRequired = true)] // For internal Serialization XML/JSON
         [JsonProperty("shgc", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("shgc")] // For System.Text.Json
@@ -93,6 +94,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"The fraction of visible light falling on the window that makes it through the glass at normal incidence.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, 1)]
         [DataMember(Name = "vt")] // For internal Serialization XML/JSON
         [JsonProperty("vt", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("vt")] // For System.Text.Json

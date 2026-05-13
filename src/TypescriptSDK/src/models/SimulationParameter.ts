@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, IsInt, Min, Max, IsNumber, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsInstance, ValidateNested, IsInt, Min, Max, IsNumber, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
@@ -14,7 +14,7 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^SimulationParameter$/)
+    @Equals("SimulationParameter")
     @Expose({ name: "type" })
     /** type */
     type: string = "SimulationParameter";

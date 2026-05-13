@@ -1,4 +1,4 @@
-﻿import { IsOptional, IsArray, IsNumber, Min, Max, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsOptional, IsArray, IsNumber, Min, Max, IsString, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { BSDF } from "./BSDF";
@@ -91,13 +91,13 @@ export class Mirror extends ModifierBase {
       else if (item?.type === 'Mirror') return Mirror.fromJS(item);
       else return item;
     })
-    /** An optional material (like the illum type) that may be used to specify a different material to be used for shading non-source rays. If None, this will keep the alternat_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance. */
+    /** An optional material (like the illum type) that may be used to specify a different material to be used for shading non-source rays. If None, this will keep the alternate_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance. */
     alternateMaterial?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^Mirror$/)
+    @Equals("Mirror")
     @Expose({ name: "type" })
     /** type */
     type: string = "Mirror";

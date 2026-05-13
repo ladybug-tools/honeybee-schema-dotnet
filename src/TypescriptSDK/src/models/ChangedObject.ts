@@ -1,27 +1,9 @@
-﻿import { IsEnum, IsDefined, IsString, Matches, MinLength, MaxLength, IsBoolean, IsArray, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsBoolean, IsDefined, IsArray, IsString, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { GeometryObjectTypes } from "./GeometryObjectTypes";
+import { _DiffObjectBase } from "./_DiffObjectBase";
 
-export class ChangedObject extends _OpenAPIGenBaseModel {
-    @Type(() => String)
-    @IsEnum(GeometryObjectTypes)
-    @IsDefined()
-    @Expose({ name: "element_type" })
-    /** Text for the type of object that has been changed. */
-    elementType!: GeometryObjectTypes;
-	
-    @Type(() => String)
-    @IsString()
-    @IsDefined()
-    @Matches(/^[^,;!\n\t]+$/)
-    @MinLength(1)
-    @MaxLength(100)
-    @Expose({ name: "element_id" })
-    /** Text string for the unique object ID that has changed. */
-    elementId!: string;
-	
+export class ChangedObject extends _DiffObjectBase {
     @Type(() => Boolean)
     @IsBoolean()
     @IsDefined()
@@ -38,9 +20,10 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Expose({ name: "element_name" })
-    /** Text string for the display name of the object that has changed. */
-    elementName?: string;
+    @Equals("ChangedObject")
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ChangedObject";
 	
     @Type(() => Boolean)
     @IsBoolean()
@@ -62,20 +45,12 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
     /** A list of DisplayFace3D dictionaries for the existing (base) geometry. The schema of DisplayFace3D can be found in the ladybug-display-schema documentation (https://www.ladybug.tools/ladybug-display-schema) and these objects can be used to generate visualizations of individual objects that have been changed. This attribute is optional and will NOT be output if geometry_changed is False. */
     existingGeometry?: Object[];
 	
-    @Type(() => String)
-    @IsString()
-    @IsOptional()
-    @Matches(/^ChangedObject$/)
-    @Expose({ name: "type" })
-    /** type */
-    type: string = "ChangedObject";
-	
 
     constructor() {
         super();
+        this.type = "ChangedObject";
         this.energyChanged = false;
         this.radianceChanged = false;
-        this.type = "ChangedObject";
     }
 
 
@@ -83,15 +58,15 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(ChangedObject, _data);
-            this.elementType = obj.elementType;
-            this.elementId = obj.elementId;
             this.geometryChanged = obj.geometryChanged;
             this.geometry = obj.geometry;
-            this.elementName = obj.elementName;
+            this.type = obj.type ?? "ChangedObject";
             this.energyChanged = obj.energyChanged ?? false;
             this.radianceChanged = obj.radianceChanged ?? false;
             this.existingGeometry = obj.existingGeometry;
-            this.type = obj.type ?? "ChangedObject";
+            this.elementType = obj.elementType;
+            this.elementId = obj.elementId;
+            this.elementName = obj.elementName;
         }
     }
 
@@ -113,15 +88,12 @@ export class ChangedObject extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["element_type"] = this.elementType;
-        data["element_id"] = this.elementId;
         data["geometry_changed"] = this.geometryChanged;
         data["geometry"] = this.geometry;
-        data["element_name"] = this.elementName;
+        data["type"] = this.type ?? "ChangedObject";
         data["energy_changed"] = this.energyChanged ?? false;
         data["radiance_changed"] = this.radianceChanged ?? false;
         data["existing_geometry"] = this.existingGeometry;
-        data["type"] = this.type ?? "ChangedObject";
         data = super.toJSON(data);
         return instanceToPlain(data, { exposeUnsetFields: false });
     }

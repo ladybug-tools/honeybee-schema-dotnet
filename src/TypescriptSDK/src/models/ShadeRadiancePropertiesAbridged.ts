@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { _PropertiesBaseAbridged } from "./_PropertiesBaseAbridged";
@@ -9,7 +9,7 @@ export class ShadeRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^ShadeRadiancePropertiesAbridged$/)
+    @Equals("ShadeRadiancePropertiesAbridged")
     @Expose({ name: "type" })
     /** type */
     type: string = "ShadeRadiancePropertiesAbridged";
@@ -18,7 +18,7 @@ export class ShadeRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
     @IsString()
     @IsOptional()
     @Expose({ name: "dynamic_group_identifier" })
-    /** An optional string to note the dynamic group '             'to which the Shade is a part of. Shades sharing the same '             'dynamic_group_identifier will have their states change in unison. '             'If None, the Shade is assumed to be static. (default: None). */
+    /** An optional string to note the dynamic group to which the Shade is a part of. Shades sharing the same dynamic_group_identifier will have their states change in unison. If None, the Shade is assumed to be static. */
     dynamicGroupIdentifier?: string;
 	
     @IsArray()

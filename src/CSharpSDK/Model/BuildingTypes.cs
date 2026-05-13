@@ -127,6 +127,11 @@ namespace HoneybeeSchema
         // [JsonPropertyName("Courthouse")]                   // STJ
         Courthouse = 21,
 
+        [EnumMember(Value = "College")]
+        [JsonProperty("College")]       // Newtonsoft
+        // [JsonPropertyName("College")]                   // STJ
+        College = 22,
+
     }
  
 }

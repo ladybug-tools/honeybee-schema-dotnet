@@ -1,4 +1,4 @@
-﻿import { IsString, IsDefined, Matches, MinLength, MaxLength, IsEnum, IsArray, IsOptional, ValidateNested, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, Matches, MinLength, MaxLength, IsEnum, IsArray, IsOptional, Equals, ValidateNested, IsInstance, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { ExtensionTypes } from "./ExtensionTypes";
@@ -58,7 +58,7 @@ export class ValidationError {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^ValidationError$/)
+    @Equals("ValidationError")
     @Expose({ name: "type" })
     /** type */
     type: string = "ValidationError";

@@ -1,39 +1,14 @@
-﻿import { IsInstance, ValidateNested, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { OpaqueConstruction } from "./OpaqueConstruction";
+import { _FaceSubSet } from "./_FaceSubSet";
 
 /** A set of constructions for roof and ceiling assemblies. */
-export class RoofCeilingConstructionSet extends _OpenAPIGenBaseModel {
-    @Type(() => OpaqueConstruction)
-    @IsInstance(OpaqueConstruction)
-    @ValidateNested()
-    @IsOptional()
-    @Expose({ name: "interior_construction" })
-    /** An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition. */
-    interiorConstruction?: OpaqueConstruction;
-	
-    @Type(() => OpaqueConstruction)
-    @IsInstance(OpaqueConstruction)
-    @ValidateNested()
-    @IsOptional()
-    @Expose({ name: "exterior_construction" })
-    /** An OpaqueConstruction for walls with an Outdoors boundary condition. */
-    exteriorConstruction?: OpaqueConstruction;
-	
-    @Type(() => OpaqueConstruction)
-    @IsInstance(OpaqueConstruction)
-    @ValidateNested()
-    @IsOptional()
-    @Expose({ name: "ground_construction" })
-    /** An OpaqueConstruction for walls with a Ground boundary condition. */
-    groundConstruction?: OpaqueConstruction;
-	
+export class RoofCeilingConstructionSet extends _FaceSubSet {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^RoofCeilingConstructionSet$/)
+    @Equals("RoofCeilingConstructionSet")
     @Expose({ name: "type" })
     /** type */
     type: string = "RoofCeilingConstructionSet";
@@ -49,10 +24,10 @@ export class RoofCeilingConstructionSet extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(RoofCeilingConstructionSet, _data);
+            this.type = obj.type ?? "RoofCeilingConstructionSet";
             this.interiorConstruction = obj.interiorConstruction;
             this.exteriorConstruction = obj.exteriorConstruction;
             this.groundConstruction = obj.groundConstruction;
-            this.type = obj.type ?? "RoofCeilingConstructionSet";
         }
     }
 
@@ -74,9 +49,6 @@ export class RoofCeilingConstructionSet extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["interior_construction"] = this.interiorConstruction;
-        data["exterior_construction"] = this.exteriorConstruction;
-        data["ground_construction"] = this.groundConstruction;
         data["type"] = this.type ?? "RoofCeilingConstructionSet";
         data = super.toJSON(data);
         return instanceToPlain(data, { exposeUnsetFields: false });

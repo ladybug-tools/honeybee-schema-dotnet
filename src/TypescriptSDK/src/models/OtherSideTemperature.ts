@@ -1,15 +1,14 @@
-﻿import { IsString, IsOptional, Matches, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { Autocalculate } from "./Autocalculate";
 
-/** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class OtherSideTemperature extends _OpenAPIGenBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^OtherSideTemperature$/)
+    @Equals("OtherSideTemperature")
     @Expose({ name: "type" })
     /** type */
     type: string = "OtherSideTemperature";

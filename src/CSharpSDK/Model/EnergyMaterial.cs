@@ -81,7 +81,7 @@ namespace HoneybeeSchema
         [Summary(@"Thickness of the material layer in meters.")]
         [Required] // For validation after deserialization
         // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
-        [Range(double.MinValue, 3)]
+        [Range(0, 3)]
         [DataMember(Name = "thickness", IsRequired = true)] // For internal Serialization XML/JSON
         [JsonProperty("thickness", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
@@ -93,6 +93,7 @@ namespace HoneybeeSchema
         [Summary(@"Thermal conductivity of the material layer in W/m-K.")]
         [Required] // For validation after deserialization
         // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "conductivity", IsRequired = true)] // For internal Serialization XML/JSON
         [JsonProperty("conductivity", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("conductivity")] // For System.Text.Json
@@ -104,6 +105,7 @@ namespace HoneybeeSchema
         [Summary(@"Density of the material layer in kg/m3.")]
         [Required] // For validation after deserialization
         // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "density", IsRequired = true)] // For internal Serialization XML/JSON
         [JsonProperty("density", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("density")] // For System.Text.Json
@@ -136,7 +138,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(double.MinValue, 0.99999)]
+        [Range(0, 0.99999)]
         [DataMember(Name = "thermal_absorptance")] // For internal Serialization XML/JSON
         [JsonProperty("thermal_absorptance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("thermal_absorptance")] // For System.Text.Json

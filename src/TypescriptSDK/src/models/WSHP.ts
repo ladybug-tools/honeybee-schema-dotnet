@@ -1,23 +1,16 @@
-﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { _HeatCoolBase } from "./_HeatCoolBase";
 import { Vintages } from "./Vintages";
 import { WSHPEquipmentType } from "./WSHPEquipmentType";
 
 /** Water Source Heat Pump (WSHP) heating/cooling system (with no ventilation).\n\nEach room/zone receives its own Water Source Heat Pump (WSHP), which meets\nthe heating and cooling loads of the space. All WSHPs are connected to the\nsame water condenser loop, which has its temperature maintained by the\nequipment_type (eg. Boiler with Cooling Tower). */
-export class WSHP extends IDdEnergyBaseModel {
-    @Type(() => String)
-    @IsEnum(Vintages)
-    @IsOptional()
-    @Expose({ name: "vintage" })
-    /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
-    vintage: Vintages = Vintages.ASHRAE_2019;
-	
+export class WSHP extends _HeatCoolBase {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^WSHP$/)
+    @Equals("WSHP")
     @Expose({ name: "type" })
     /** type */
     type: string = "WSHP";
@@ -32,7 +25,6 @@ export class WSHP extends IDdEnergyBaseModel {
 
     constructor() {
         super();
-        this.vintage = Vintages.ASHRAE_2019;
         this.type = "WSHP";
         this.equipmentType = WSHPEquipmentType.WSHP_FluidCooler_Boiler;
     }
@@ -42,9 +34,9 @@ export class WSHP extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(WSHP, _data);
-            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.type = obj.type ?? "WSHP";
             this.equipmentType = obj.equipmentType ?? WSHPEquipmentType.WSHP_FluidCooler_Boiler;
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.userData = obj.userData;
             this.identifier = obj.identifier;
             this.displayName = obj.displayName;
@@ -69,7 +61,6 @@ export class WSHP extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["vintage"] = this.vintage ?? Vintages.ASHRAE_2019;
         data["type"] = this.type ?? "WSHP";
         data["equipment_type"] = this.equipmentType ?? WSHPEquipmentType.WSHP_FluidCooler_Boiler;
         data = super.toJSON(data);

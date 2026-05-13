@@ -19,10 +19,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
 {
-    /// <summary>
-    /// Base class for all objects requiring an EnergyPlus identifier and user_data.
-    /// </summary>
-    [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
+    [Summary(@"")]
     [System.Serializable]
     [DataContract(Name = "Ventilation")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class Ventilation : IDdEnergyBaseModel, System.IEquatable<Ventilation>
@@ -48,9 +45,10 @@ namespace HoneybeeSchema
         /// <param name="airChangesPerHour">Intensity of ventilation in air changes per hour (ACH) for the entire Room.</param>
         /// <param name="flowPerZone">Intensity of ventilation in m3/s for the entire Room.</param>
         /// <param name="schedule">Schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.</param>
+        /// <param name="method">Text to set how the ventilation criteria are reconciled against one another.</param>
         public Ventilation
         (
-            string identifier, string displayName = default, object userData = default, double flowPerPerson = 0D, double flowPerArea = 0D, double airChangesPerHour = 0D, double flowPerZone = 0D, AnyOf<ScheduleRuleset, ScheduleFixedInterval> schedule = default
+            string identifier, string displayName = default, object userData = default, double flowPerPerson = 0D, double flowPerArea = 0D, double airChangesPerHour = 0D, double flowPerZone = 0D, AnyOf<ScheduleRuleset, ScheduleFixedInterval> schedule = default, VentilationMethod method = VentilationMethod.Sum
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.FlowPerPerson = flowPerPerson;
@@ -58,6 +56,7 @@ namespace HoneybeeSchema
             this.AirChangesPerHour = airChangesPerHour;
             this.FlowPerZone = flowPerZone;
             this.Schedule = schedule;
+            this.Method = method;
 
             // Set readonly properties with defaultValue
             this.Type = "Ventilation";
@@ -123,6 +122,16 @@ namespace HoneybeeSchema
         // [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
         public AnyOf<ScheduleRuleset, ScheduleFixedInterval> Schedule { get; set; }
 
+        /// <summary>
+        /// Text to set how the ventilation criteria are reconciled against one another.
+        /// </summary>
+        [Summary(@"Text to set how the ventilation criteria are reconciled against one another.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "method")] // For internal Serialization XML/JSON
+        [JsonProperty("method", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("method")] // For System.Text.Json
+        public VentilationMethod Method { get; set; } = VentilationMethod.Sum;
+
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -154,6 +163,7 @@ namespace HoneybeeSchema
             sb.Append("  AirChangesPerHour: ").Append(this.AirChangesPerHour).Append("\n");
             sb.Append("  FlowPerZone: ").Append(this.FlowPerZone).Append("\n");
             sb.Append("  Schedule: ").Append(this.Schedule).Append("\n");
+            sb.Append("  Method: ").Append(this.Method).Append("\n");
             return sb.ToString();
         }
 
@@ -219,7 +229,8 @@ namespace HoneybeeSchema
                     Extension.Equals(this.FlowPerArea, input.FlowPerArea) && 
                     Extension.Equals(this.AirChangesPerHour, input.AirChangesPerHour) && 
                     Extension.Equals(this.FlowPerZone, input.FlowPerZone) && 
-                    Extension.Equals(this.Schedule, input.Schedule);
+                    Extension.Equals(this.Schedule, input.Schedule) && 
+                    Extension.Equals(this.Method, input.Method);
         }
 
 
@@ -242,6 +253,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.FlowPerZone.GetHashCode();
                 if (this.Schedule != null)
                     hashCode = hashCode * 59 + this.Schedule.GetHashCode();
+                if (this.Method != null)
+                    hashCode = hashCode * 59 + this.Method.GetHashCode();
                 return hashCode;
             }
         }

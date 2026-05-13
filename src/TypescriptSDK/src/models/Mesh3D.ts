@@ -1,4 +1,4 @@
-﻿import { IsArray, IsDefined, IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsDefined, IsString, IsOptional, Equals, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IsNestedNumberArray, IsNestedIntegerArray } from "./../helpers/class-validator";
@@ -24,7 +24,7 @@ export class Mesh3D extends _OpenAPIGenBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^Mesh3D$/)
+    @Equals("Mesh3D")
     @Expose({ name: "type" })
     /** type */
     type: string = "Mesh3D";

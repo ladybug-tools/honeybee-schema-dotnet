@@ -25,7 +25,7 @@ namespace HoneybeeSchema
     [Summary(@"A set of constructions for roof and ceiling assemblies.")]
     [System.Serializable]
     [DataContract(Name = "RoofCeilingConstructionSet")] // Enables DataMember rules. For internal Serialization XML/JSON
-    public partial class RoofCeilingConstructionSet : OpenAPIGenBaseModel, System.IEquatable<RoofCeilingConstructionSet>
+    public partial class RoofCeilingConstructionSet : FaceSubSet, System.IEquatable<RoofCeilingConstructionSet>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RoofCeilingConstructionSet" /> class.
@@ -46,11 +46,8 @@ namespace HoneybeeSchema
         public RoofCeilingConstructionSet
         (
             OpaqueConstruction interiorConstruction = default, OpaqueConstruction exteriorConstruction = default, OpaqueConstruction groundConstruction = default
-        ) : base()
+        ) : base(interiorConstruction: interiorConstruction, exteriorConstruction: exteriorConstruction, groundConstruction: groundConstruction)
         {
-            this.InteriorConstruction = interiorConstruction;
-            this.ExteriorConstruction = exteriorConstruction;
-            this.GroundConstruction = groundConstruction;
 
             // Set readonly properties with defaultValue
             this.Type = "RoofCeilingConstructionSet";
@@ -62,36 +59,6 @@ namespace HoneybeeSchema
 
 	
 	
-        /// <summary>
-        /// An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition.
-        /// </summary>
-        [Summary(@"An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "interior_construction")] // For internal Serialization XML/JSON
-        [JsonProperty("interior_construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("interior_construction")] // For System.Text.Json
-        public OpaqueConstruction InteriorConstruction { get; set; }
-
-        /// <summary>
-        /// An OpaqueConstruction for walls with an Outdoors boundary condition.
-        /// </summary>
-        [Summary(@"An OpaqueConstruction for walls with an Outdoors boundary condition.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "exterior_construction")] // For internal Serialization XML/JSON
-        [JsonProperty("exterior_construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("exterior_construction")] // For System.Text.Json
-        public OpaqueConstruction ExteriorConstruction { get; set; }
-
-        /// <summary>
-        /// An OpaqueConstruction for walls with a Ground boundary condition.
-        /// </summary>
-        [Summary(@"An OpaqueConstruction for walls with a Ground boundary condition.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "ground_construction")] // For internal Serialization XML/JSON
-        [JsonProperty("ground_construction", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("ground_construction")] // For System.Text.Json
-        public OpaqueConstruction GroundConstruction { get; set; }
-
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -150,8 +117,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        /// <returns>FaceSubSet</returns>
+        public override FaceSubSet DuplicateFaceSubSet()
         {
             return DuplicateRoofCeilingConstructionSet();
         }
@@ -178,10 +145,7 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
-                    Extension.Equals(this.InteriorConstruction, input.InteriorConstruction) && 
-                    Extension.Equals(this.ExteriorConstruction, input.ExteriorConstruction) && 
-                    Extension.Equals(this.GroundConstruction, input.GroundConstruction);
+            return base.Equals(input);
         }
 
 
@@ -194,12 +158,6 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.InteriorConstruction != null)
-                    hashCode = hashCode * 59 + this.InteriorConstruction.GetHashCode();
-                if (this.ExteriorConstruction != null)
-                    hashCode = hashCode * 59 + this.ExteriorConstruction.GetHashCode();
-                if (this.GroundConstruction != null)
-                    hashCode = hashCode * 59 + this.GroundConstruction.GetHashCode();
                 return hashCode;
             }
         }

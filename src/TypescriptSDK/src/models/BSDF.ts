@@ -1,4 +1,4 @@
-﻿import { IsString, IsDefined, IsOptional, IsArray, IsNumber, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, IsOptional, IsArray, IsNumber, MinLength, MaxLength, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { Glass } from "./Glass";
@@ -116,7 +116,7 @@ export class BSDF extends ModifierBase {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^BSDF$/)
+    @Equals("BSDF")
     @Expose({ name: "type" })
     /** type */
     type: string = "BSDF";

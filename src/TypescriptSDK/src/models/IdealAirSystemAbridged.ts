@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, IsEnum, IsBoolean, IsNumber, Min, Max, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsEnum, IsBoolean, IsNumber, Min, Max, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { Autosize } from "./Autosize";
@@ -11,7 +11,7 @@ export class IdealAirSystemAbridged extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^IdealAirSystemAbridged$/)
+    @Equals("IdealAirSystemAbridged")
     @Expose({ name: "type" })
     /** type */
     type: string = "IdealAirSystemAbridged";

@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
@@ -10,7 +10,7 @@ export class SyncInstructions extends _OpenAPIGenBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^SyncInstructions$/)
+    @Equals("SyncInstructions")
     @Expose({ name: "type" })
     /** type */
     type: string = "SyncInstructions";

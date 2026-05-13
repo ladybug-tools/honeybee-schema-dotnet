@@ -1,9 +1,8 @@
-﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Equals, MinLength, MaxLength, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
-/** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class LightingAbridged extends IDdEnergyBaseModel {
     @Type(() => Number)
     @IsNumber()
@@ -15,20 +14,20 @@ export class LightingAbridged extends IDdEnergyBaseModel {
 	
     @Type(() => String)
     @IsString()
-    @IsDefined()
-    @MinLength(1)
-    @MaxLength(100)
-    @Expose({ name: "schedule" })
-    /** Identifier of the schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile. */
-    schedule!: string;
+    @IsOptional()
+    @Equals("LightingAbridged")
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "LightingAbridged";
 	
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^LightingAbridged$/)
-    @Expose({ name: "type" })
-    /** type */
-    type: string = "LightingAbridged";
+    @MinLength(1)
+    @MaxLength(100)
+    @Expose({ name: "schedule" })
+    /** Identifier of the schedule for the use of lights over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete lighting profile. If None, an Always On schedule will be used. */
+    schedule?: string;
 	
     @Type(() => Number)
     @IsNumber()
@@ -81,8 +80,8 @@ export class LightingAbridged extends IDdEnergyBaseModel {
         if (_data) {
             const obj = deepTransform(LightingAbridged, _data);
             this.wattsPerArea = obj.wattsPerArea;
-            this.schedule = obj.schedule;
             this.type = obj.type ?? "LightingAbridged";
+            this.schedule = obj.schedule;
             this.visibleFraction = obj.visibleFraction ?? 0.25;
             this.radiantFraction = obj.radiantFraction ?? 0.32;
             this.returnAirFraction = obj.returnAirFraction ?? 0;
@@ -112,8 +111,8 @@ export class LightingAbridged extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["watts_per_area"] = this.wattsPerArea;
-        data["schedule"] = this.schedule;
         data["type"] = this.type ?? "LightingAbridged";
+        data["schedule"] = this.schedule;
         data["visible_fraction"] = this.visibleFraction ?? 0.25;
         data["radiant_fraction"] = this.radiantFraction ?? 0.32;
         data["return_air_fraction"] = this.returnAirFraction ?? 0;

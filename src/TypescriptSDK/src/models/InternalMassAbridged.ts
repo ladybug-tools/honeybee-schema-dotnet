@@ -1,9 +1,8 @@
-﻿import { IsString, IsDefined, MinLength, MaxLength, IsNumber, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, MinLength, MaxLength, IsNumber, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
-/** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class InternalMassAbridged extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
@@ -24,7 +23,7 @@ export class InternalMassAbridged extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^InternalMassAbridged$/)
+    @Equals("InternalMassAbridged")
     @Expose({ name: "type" })
     /** type */
     type: string = "InternalMassAbridged";

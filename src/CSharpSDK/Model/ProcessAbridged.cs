@@ -19,10 +19,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
 {
-    /// <summary>
-    /// Base class for all objects requiring an EnergyPlus identifier and user_data.
-    /// </summary>
-    [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
+    [Summary(@"")]
     [System.Serializable]
     [DataContract(Name = "ProcessAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ProcessAbridged : IDdEnergyBaseModel, System.IEquatable<ProcessAbridged>
@@ -42,21 +39,21 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
         /// <param name="watts">A number for the process load power in Watts.</param>
-        /// <param name="schedule">Identifier of the schedule for the use of the process over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts to yield a complete equipment profile.</param>
-        /// <param name="fuelType">Text to denote the type of fuel consumed by the process. Using the ""None"" type indicates that no end uses will be associated with the process, only the zone gains.</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
+        /// <param name="schedule">Identifier of the schedule for the use of the process over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts to yield a complete equipment profile. If None, an Always On schedule will be used.</param>
+        /// <param name="fuelType">Text to denote the type of fuel consumed by the process. Using the ""None"" type indicates that no end uses will be associated with the process, only the zone gains.</param>
         /// <param name="endUseCategory">Text to indicate the end-use subcategory, which will identify the process load in the end use output. For example, “Cooking”, “Clothes Drying”, etc. A new meter for reporting is created for each unique subcategory.</param>
         /// <param name="radiantFraction">Number for the amount of long-wave radiation heat given off by the process load. Default value is 0.</param>
         /// <param name="latentFraction">Number for the amount of latent heat given off by the process load. Default value is 0.</param>
         /// <param name="lostFraction">Number for the amount of “lost” heat being given off by the process load. The default value is 0.</param>
         public ProcessAbridged
         (
-            string identifier, double watts, string schedule, FuelTypes fuelType, string displayName = default, object userData = default, string endUseCategory = "Process", double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D
+            string identifier, double watts, string displayName = default, object userData = default, string schedule = default, FuelTypes fuelType = FuelTypes.Electricity, string endUseCategory = "Process", double radiantFraction = 0D, double latentFraction = 0D, double lostFraction = 0D
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.Watts = watts;
-            this.Schedule = schedule ?? throw new System.ArgumentNullException("schedule is a required property for ProcessAbridged and cannot be null");
+            this.Schedule = schedule;
             this.FuelType = fuelType;
             this.EndUseCategory = endUseCategory ?? "Process";
             this.RadiantFraction = radiantFraction;
@@ -86,15 +83,14 @@ namespace HoneybeeSchema
         public double Watts { get; set; }
 
         /// <summary>
-        /// Identifier of the schedule for the use of the process over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts to yield a complete equipment profile.
+        /// Identifier of the schedule for the use of the process over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts to yield a complete equipment profile. If None, an Always On schedule will be used.
         /// </summary>
-        [Summary(@"Identifier of the schedule for the use of the process over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts to yield a complete equipment profile.")]
-        [Required] // For validation after deserialization
-        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [Summary(@"Identifier of the schedule for the use of the process over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts to yield a complete equipment profile. If None, an Always On schedule will be used.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "schedule", IsRequired = true)] // For internal Serialization XML/JSON
-        [JsonProperty("schedule", Required = Required.Always)] // For Newtonsoft.Json
+        [DataMember(Name = "schedule")] // For internal Serialization XML/JSON
+        [JsonProperty("schedule", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
         public string Schedule { get; set; }
 
@@ -102,12 +98,11 @@ namespace HoneybeeSchema
         /// Text to denote the type of fuel consumed by the process. Using the ""None"" type indicates that no end uses will be associated with the process, only the zone gains.
         /// </summary>
         [Summary(@"Text to denote the type of fuel consumed by the process. Using the ""None"" type indicates that no end uses will be associated with the process, only the zone gains.")]
-        [Required] // For validation after deserialization
-        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
-        [DataMember(Name = "fuel_type", IsRequired = true)] // For internal Serialization XML/JSON
-        [JsonProperty("fuel_type", Required = Required.Always)] // For Newtonsoft.Json
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "fuel_type")] // For internal Serialization XML/JSON
+        [JsonProperty("fuel_type", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("fuel_type")] // For System.Text.Json
-        public FuelTypes FuelType { get; set; }
+        public FuelTypes FuelType { get; set; } = FuelTypes.Electricity;
 
         /// <summary>
         /// Text to indicate the end-use subcategory, which will identify the process load in the end use output. For example, “Cooking”, “Clothes Drying”, etc. A new meter for reporting is created for each unique subcategory.
@@ -178,11 +173,11 @@ namespace HoneybeeSchema
             sb.Append("ProcessAbridged:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  Watts: ").Append(this.Watts).Append("\n");
-            sb.Append("  Schedule: ").Append(this.Schedule).Append("\n");
-            sb.Append("  FuelType: ").Append(this.FuelType).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  Schedule: ").Append(this.Schedule).Append("\n");
+            sb.Append("  FuelType: ").Append(this.FuelType).Append("\n");
             sb.Append("  EndUseCategory: ").Append(this.EndUseCategory).Append("\n");
             sb.Append("  RadiantFraction: ").Append(this.RadiantFraction).Append("\n");
             sb.Append("  LatentFraction: ").Append(this.LatentFraction).Append("\n");

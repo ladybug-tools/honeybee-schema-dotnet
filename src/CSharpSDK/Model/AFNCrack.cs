@@ -66,6 +66,7 @@ namespace HoneybeeSchema
         [Summary(@"A number in kg/s-m at 1 Pa per meter of crack length at the conditions defined in the ReferenceCrack condition; required to run an AirflowNetwork simulation. The DesignBuilder Cracks template defines the flow coefficient for a tight, low-leakage wall to be 0.00001 and 0.001 for external and internal constructions, respectively. Flow coefficients for a very poor, high-leakage wall are defined to be 0.0004 and 0.019 for external and internal constructions, respectively.")]
         [Required] // For validation after deserialization
         // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "flow_coefficient", IsRequired = true)] // For internal Serialization XML/JSON
         [JsonProperty("flow_coefficient", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("flow_coefficient")] // For System.Text.Json

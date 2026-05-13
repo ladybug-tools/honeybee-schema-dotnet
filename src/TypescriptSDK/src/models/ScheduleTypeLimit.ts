@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { EnergyBaseModel } from "./EnergyBaseModel";
@@ -11,7 +11,7 @@ export class ScheduleTypeLimit extends EnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^ScheduleTypeLimit$/)
+    @Equals("ScheduleTypeLimit")
     @Expose({ name: "type" })
     /** type */
     type: string = "ScheduleTypeLimit";

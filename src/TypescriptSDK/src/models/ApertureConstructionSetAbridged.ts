@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
@@ -8,7 +8,7 @@ export class ApertureConstructionSetAbridged extends _OpenAPIGenBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^ApertureConstructionSetAbridged$/)
+    @Equals("ApertureConstructionSetAbridged")
     @Expose({ name: "type" })
     /** type */
     type: string = "ApertureConstructionSetAbridged";

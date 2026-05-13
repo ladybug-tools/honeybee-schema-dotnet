@@ -19,10 +19,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
 {
-    /// <summary>
-    /// Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.
-    /// </summary>
-    [Summary(@"Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.")]
+    [Summary(@"")]
     [System.Serializable]
     [DataContract(Name = "ModelEnergyProperties")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ModelEnergyProperties : OpenAPIGenBaseModel, System.IEquatable<ModelEnergyProperties>
@@ -82,427 +79,427 @@ namespace HoneybeeSchema
   ""type"": ""GlobalConstructionSet"",
   ""materials"": [
     {
-      ""identifier"": ""Generic Roof Membrane"",
-      ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""EnergyMaterial"",
-      ""roughness"": ""MediumRough"",
-      ""thickness"": 0.01,
       ""conductivity"": 0.16,
       ""density"": 1120.0,
+      ""display_name"": null,
+      ""identifier"": ""Generic Roof Membrane"",
+      ""roughness"": ""MediumRough"",
+      ""solar_absorptance"": 0.65,
       ""specific_heat"": 1460.0,
       ""thermal_absorptance"": 0.9,
-      ""solar_absorptance"": 0.65,
+      ""thickness"": 0.01,
+      ""type"": ""EnergyMaterial"",
+      ""user_data"": null,
       ""visible_absorptance"": 0.65
     },
     {
-      ""identifier"": ""Generic Acoustic Tile"",
-      ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""EnergyMaterial"",
-      ""roughness"": ""MediumSmooth"",
-      ""thickness"": 0.02,
       ""conductivity"": 0.06,
       ""density"": 368.0,
+      ""display_name"": null,
+      ""identifier"": ""Generic Acoustic Tile"",
+      ""roughness"": ""MediumSmooth"",
+      ""solar_absorptance"": 0.2,
       ""specific_heat"": 590.0,
       ""thermal_absorptance"": 0.9,
-      ""solar_absorptance"": 0.2,
+      ""thickness"": 0.02,
+      ""type"": ""EnergyMaterial"",
+      ""user_data"": null,
       ""visible_absorptance"": 0.2
     },
     {
-      ""identifier"": ""Generic 25mm Wood"",
-      ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""EnergyMaterial"",
-      ""roughness"": ""MediumSmooth"",
-      ""thickness"": 0.0254,
       ""conductivity"": 0.15,
       ""density"": 608.0,
+      ""display_name"": null,
+      ""identifier"": ""Generic 25mm Wood"",
+      ""roughness"": ""MediumSmooth"",
+      ""solar_absorptance"": 0.5,
       ""specific_heat"": 1630.0,
       ""thermal_absorptance"": 0.9,
-      ""solar_absorptance"": 0.5,
+      ""thickness"": 0.0254,
+      ""type"": ""EnergyMaterial"",
+      ""user_data"": null,
       ""visible_absorptance"": 0.5
     },
     {
-      ""identifier"": ""Generic HW Concrete"",
-      ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""EnergyMaterial"",
-      ""roughness"": ""MediumRough"",
-      ""thickness"": 0.2,
       ""conductivity"": 1.95,
       ""density"": 2240.0,
+      ""display_name"": null,
+      ""identifier"": ""Generic HW Concrete"",
+      ""roughness"": ""MediumRough"",
+      ""solar_absorptance"": 0.8,
       ""specific_heat"": 900.0,
       ""thermal_absorptance"": 0.9,
-      ""solar_absorptance"": 0.8,
+      ""thickness"": 0.2,
+      ""type"": ""EnergyMaterial"",
+      ""user_data"": null,
       ""visible_absorptance"": 0.8
     },
     {
-      ""identifier"": ""Generic Window Air Gap"",
       ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""EnergyWindowMaterialGas"",
+      ""gas_type"": ""Air"",
+      ""identifier"": ""Generic Window Air Gap"",
       ""thickness"": 0.0127,
-      ""gas_type"": ""Air""
+      ""type"": ""EnergyWindowMaterialGas"",
+      ""user_data"": null
     },
     {
-      ""identifier"": ""Generic Gypsum Board"",
-      ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""EnergyMaterial"",
-      ""roughness"": ""MediumSmooth"",
-      ""thickness"": 0.0127,
       ""conductivity"": 0.16,
       ""density"": 800.0,
+      ""display_name"": null,
+      ""identifier"": ""Generic Gypsum Board"",
+      ""roughness"": ""MediumSmooth"",
+      ""solar_absorptance"": 0.5,
       ""specific_heat"": 1090.0,
       ""thermal_absorptance"": 0.9,
-      ""solar_absorptance"": 0.5,
+      ""thickness"": 0.0127,
+      ""type"": ""EnergyMaterial"",
+      ""user_data"": null,
       ""visible_absorptance"": 0.5
     },
     {
-      ""identifier"": ""Generic Wall Air Gap"",
-      ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""EnergyMaterial"",
-      ""roughness"": ""Smooth"",
-      ""thickness"": 0.1,
       ""conductivity"": 0.667,
       ""density"": 1.28,
+      ""display_name"": null,
+      ""identifier"": ""Generic Wall Air Gap"",
+      ""roughness"": ""Smooth"",
+      ""solar_absorptance"": 0.7,
       ""specific_heat"": 1000.0,
       ""thermal_absorptance"": 0.9,
-      ""solar_absorptance"": 0.7,
+      ""thickness"": 0.1,
+      ""type"": ""EnergyMaterial"",
+      ""user_data"": null,
       ""visible_absorptance"": 0.7
     },
     {
-      ""identifier"": ""Generic Ceiling Air Gap"",
-      ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""EnergyMaterial"",
-      ""roughness"": ""Smooth"",
-      ""thickness"": 0.1,
       ""conductivity"": 0.556,
       ""density"": 1.28,
+      ""display_name"": null,
+      ""identifier"": ""Generic Ceiling Air Gap"",
+      ""roughness"": ""Smooth"",
+      ""solar_absorptance"": 0.7,
       ""specific_heat"": 1000.0,
       ""thermal_absorptance"": 0.9,
-      ""solar_absorptance"": 0.7,
+      ""thickness"": 0.1,
+      ""type"": ""EnergyMaterial"",
+      ""user_data"": null,
       ""visible_absorptance"": 0.7
     },
     {
-      ""identifier"": ""Generic Brick"",
-      ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""EnergyMaterial"",
-      ""roughness"": ""MediumRough"",
-      ""thickness"": 0.1,
       ""conductivity"": 0.9,
       ""density"": 1920.0,
+      ""display_name"": null,
+      ""identifier"": ""Generic Brick"",
+      ""roughness"": ""MediumRough"",
+      ""solar_absorptance"": 0.65,
       ""specific_heat"": 790.0,
       ""thermal_absorptance"": 0.9,
-      ""solar_absorptance"": 0.65,
+      ""thickness"": 0.1,
+      ""type"": ""EnergyMaterial"",
+      ""user_data"": null,
       ""visible_absorptance"": 0.65
     },
     {
-      ""identifier"": ""Generic 50mm Insulation"",
-      ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""EnergyMaterial"",
-      ""roughness"": ""MediumRough"",
-      ""thickness"": 0.05,
       ""conductivity"": 0.03,
       ""density"": 43.0,
+      ""display_name"": null,
+      ""identifier"": ""Generic 50mm Insulation"",
+      ""roughness"": ""MediumRough"",
+      ""solar_absorptance"": 0.7,
       ""specific_heat"": 1210.0,
       ""thermal_absorptance"": 0.9,
-      ""solar_absorptance"": 0.7,
+      ""thickness"": 0.05,
+      ""type"": ""EnergyMaterial"",
+      ""user_data"": null,
       ""visible_absorptance"": 0.7
     },
     {
-      ""identifier"": ""Generic Low-e Glass"",
-      ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""EnergyWindowMaterialGlazing"",
-      ""thickness"": 0.006,
-      ""solar_transmittance"": 0.45,
-      ""solar_reflectance"": 0.36,
-      ""solar_reflectance_back"": 0.36,
-      ""visible_transmittance"": 0.71,
-      ""visible_reflectance"": 0.21,
-      ""visible_reflectance_back"": 0.21,
-      ""infrared_transmittance"": 0.0,
-      ""emissivity"": 0.84,
-      ""emissivity_back"": 0.047,
       ""conductivity"": 1.0,
       ""dirt_correction"": 1.0,
-      ""solar_diffusing"": false
+      ""display_name"": null,
+      ""emissivity"": 0.84,
+      ""emissivity_back"": 0.047,
+      ""identifier"": ""Generic Low-e Glass"",
+      ""infrared_transmittance"": 0.0,
+      ""solar_diffusing"": false,
+      ""solar_reflectance"": 0.36,
+      ""solar_reflectance_back"": 0.36,
+      ""solar_transmittance"": 0.45,
+      ""thickness"": 0.006,
+      ""type"": ""EnergyWindowMaterialGlazing"",
+      ""user_data"": null,
+      ""visible_reflectance"": 0.21,
+      ""visible_reflectance_back"": 0.21,
+      ""visible_transmittance"": 0.71
     },
     {
-      ""identifier"": ""Generic Painted Metal"",
-      ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""EnergyMaterial"",
-      ""roughness"": ""Smooth"",
-      ""thickness"": 0.0015,
       ""conductivity"": 45.0,
       ""density"": 7690.0,
+      ""display_name"": null,
+      ""identifier"": ""Generic Painted Metal"",
+      ""roughness"": ""Smooth"",
+      ""solar_absorptance"": 0.5,
       ""specific_heat"": 410.0,
       ""thermal_absorptance"": 0.9,
-      ""solar_absorptance"": 0.5,
+      ""thickness"": 0.0015,
+      ""type"": ""EnergyMaterial"",
+      ""user_data"": null,
       ""visible_absorptance"": 0.5
     },
     {
-      ""identifier"": ""Generic LW Concrete"",
-      ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""EnergyMaterial"",
-      ""roughness"": ""MediumRough"",
-      ""thickness"": 0.1,
       ""conductivity"": 0.53,
       ""density"": 1280.0,
+      ""display_name"": null,
+      ""identifier"": ""Generic LW Concrete"",
+      ""roughness"": ""MediumRough"",
+      ""solar_absorptance"": 0.8,
       ""specific_heat"": 840.0,
       ""thermal_absorptance"": 0.9,
-      ""solar_absorptance"": 0.8,
+      ""thickness"": 0.1,
+      ""type"": ""EnergyMaterial"",
+      ""user_data"": null,
       ""visible_absorptance"": 0.8
     },
     {
-      ""identifier"": ""Generic 25mm Insulation"",
-      ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""EnergyMaterial"",
-      ""roughness"": ""MediumRough"",
-      ""thickness"": 0.025,
       ""conductivity"": 0.03,
       ""density"": 43.0,
+      ""display_name"": null,
+      ""identifier"": ""Generic 25mm Insulation"",
+      ""roughness"": ""MediumRough"",
+      ""solar_absorptance"": 0.7,
       ""specific_heat"": 1210.0,
       ""thermal_absorptance"": 0.9,
-      ""solar_absorptance"": 0.7,
+      ""thickness"": 0.025,
+      ""type"": ""EnergyMaterial"",
+      ""user_data"": null,
       ""visible_absorptance"": 0.7
     },
     {
-      ""identifier"": ""Generic Clear Glass"",
-      ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""EnergyWindowMaterialGlazing"",
-      ""thickness"": 0.006,
-      ""solar_transmittance"": 0.77,
-      ""solar_reflectance"": 0.07,
-      ""solar_reflectance_back"": 0.07,
-      ""visible_transmittance"": 0.88,
-      ""visible_reflectance"": 0.08,
-      ""visible_reflectance_back"": 0.08,
-      ""infrared_transmittance"": 0.0,
-      ""emissivity"": 0.84,
-      ""emissivity_back"": 0.84,
       ""conductivity"": 1.0,
       ""dirt_correction"": 1.0,
-      ""solar_diffusing"": false
+      ""display_name"": null,
+      ""emissivity"": 0.84,
+      ""emissivity_back"": 0.84,
+      ""identifier"": ""Generic Clear Glass"",
+      ""infrared_transmittance"": 0.0,
+      ""solar_diffusing"": false,
+      ""solar_reflectance"": 0.07,
+      ""solar_reflectance_back"": 0.07,
+      ""solar_transmittance"": 0.77,
+      ""thickness"": 0.006,
+      ""type"": ""EnergyWindowMaterialGlazing"",
+      ""user_data"": null,
+      ""visible_reflectance"": 0.08,
+      ""visible_reflectance_back"": 0.08,
+      ""visible_transmittance"": 0.88
     }
   ],
   ""constructions"": [
     {
-      ""identifier"": ""Generic Interior Door"",
       ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""OpaqueConstructionAbridged"",
+      ""identifier"": ""Generic Interior Door"",
       ""materials"": [
         ""Generic 25mm Wood""
-      ]
+      ],
+      ""type"": ""OpaqueConstructionAbridged"",
+      ""user_data"": null
     },
     {
-      ""identifier"": ""Generic Single Pane"",
       ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""WindowConstructionAbridged"",
+      ""frame"": null,
+      ""identifier"": ""Generic Single Pane"",
       ""materials"": [
         ""Generic Clear Glass""
       ],
-      ""frame"": null
+      ""type"": ""WindowConstructionAbridged"",
+      ""user_data"": null
     },
     {
+      ""display_name"": null,
       ""identifier"": ""Generic Shade"",
-      ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""ShadeConstruction"",
+      ""is_specular"": false,
       ""solar_reflectance"": 0.35,
-      ""visible_reflectance"": 0.35,
-      ""is_specular"": false
-    },
-    {
-      ""identifier"": ""Generic Context"",
-      ""display_name"": null,
-      ""user_data"": null,
       ""type"": ""ShadeConstruction"",
-      ""solar_reflectance"": 0.2,
-      ""visible_reflectance"": 0.2,
-      ""is_specular"": false
+      ""user_data"": null,
+      ""visible_reflectance"": 0.35
     },
     {
-      ""identifier"": ""Generic Interior Ceiling"",
       ""display_name"": null,
+      ""identifier"": ""Generic Context"",
+      ""is_specular"": false,
+      ""solar_reflectance"": 0.2,
+      ""type"": ""ShadeConstruction"",
       ""user_data"": null,
-      ""type"": ""OpaqueConstructionAbridged"",
+      ""visible_reflectance"": 0.2
+    },
+    {
+      ""display_name"": null,
+      ""identifier"": ""Generic Interior Ceiling"",
       ""materials"": [
         ""Generic LW Concrete"",
         ""Generic Ceiling Air Gap"",
         ""Generic Acoustic Tile""
-      ]
+      ],
+      ""type"": ""OpaqueConstructionAbridged"",
+      ""user_data"": null
     },
     {
-      ""identifier"": ""Generic Interior Wall"",
       ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""OpaqueConstructionAbridged"",
+      ""identifier"": ""Generic Interior Wall"",
       ""materials"": [
         ""Generic Gypsum Board"",
         ""Generic Wall Air Gap"",
         ""Generic Gypsum Board""
-      ]
+      ],
+      ""type"": ""OpaqueConstructionAbridged"",
+      ""user_data"": null
     },
     {
-      ""identifier"": ""Generic Exposed Floor"",
       ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""OpaqueConstructionAbridged"",
+      ""identifier"": ""Generic Exposed Floor"",
       ""materials"": [
         ""Generic Painted Metal"",
         ""Generic Ceiling Air Gap"",
         ""Generic 50mm Insulation"",
         ""Generic LW Concrete""
-      ]
+      ],
+      ""type"": ""OpaqueConstructionAbridged"",
+      ""user_data"": null
     },
     {
-      ""identifier"": ""Generic Interior Floor"",
       ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""OpaqueConstructionAbridged"",
+      ""identifier"": ""Generic Interior Floor"",
       ""materials"": [
         ""Generic Acoustic Tile"",
         ""Generic Ceiling Air Gap"",
         ""Generic LW Concrete""
-      ]
+      ],
+      ""type"": ""OpaqueConstructionAbridged"",
+      ""user_data"": null
     },
     {
-      ""identifier"": ""Generic Ground Slab"",
       ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""OpaqueConstructionAbridged"",
+      ""identifier"": ""Generic Ground Slab"",
       ""materials"": [
         ""Generic 50mm Insulation"",
         ""Generic HW Concrete""
-      ]
+      ],
+      ""type"": ""OpaqueConstructionAbridged"",
+      ""user_data"": null
     },
     {
-      ""identifier"": ""Generic Roof"",
       ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""OpaqueConstructionAbridged"",
+      ""identifier"": ""Generic Roof"",
       ""materials"": [
         ""Generic Roof Membrane"",
         ""Generic 50mm Insulation"",
         ""Generic LW Concrete"",
         ""Generic Ceiling Air Gap"",
         ""Generic Acoustic Tile""
-      ]
+      ],
+      ""type"": ""OpaqueConstructionAbridged"",
+      ""user_data"": null
     },
     {
-      ""identifier"": ""Generic Exterior Wall"",
       ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""OpaqueConstructionAbridged"",
+      ""identifier"": ""Generic Exterior Wall"",
       ""materials"": [
         ""Generic Brick"",
         ""Generic LW Concrete"",
         ""Generic 50mm Insulation"",
         ""Generic Wall Air Gap"",
         ""Generic Gypsum Board""
-      ]
+      ],
+      ""type"": ""OpaqueConstructionAbridged"",
+      ""user_data"": null
     },
     {
-      ""identifier"": ""Generic Underground Wall"",
       ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""OpaqueConstructionAbridged"",
+      ""identifier"": ""Generic Underground Wall"",
       ""materials"": [
         ""Generic 50mm Insulation"",
         ""Generic HW Concrete"",
         ""Generic Wall Air Gap"",
         ""Generic Gypsum Board""
-      ]
-    },
-    {
-      ""identifier"": ""Generic Air Boundary"",
-      ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""AirBoundaryConstructionAbridged"",
-      ""air_mixing_per_area"": 0.1,
-      ""air_mixing_schedule"": ""Always On""
-    },
-    {
-      ""identifier"": ""Generic Underground Roof"",
-      ""display_name"": null,
-      ""user_data"": null,
+      ],
       ""type"": ""OpaqueConstructionAbridged"",
+      ""user_data"": null
+    },
+    {
+      ""air_mixing_per_area"": 0.1,
+      ""air_mixing_schedule"": ""Always On"",
+      ""display_name"": null,
+      ""identifier"": ""Generic Air Boundary"",
+      ""type"": ""AirBoundaryConstructionAbridged"",
+      ""user_data"": null
+    },
+    {
+      ""display_name"": null,
+      ""identifier"": ""Generic Underground Roof"",
       ""materials"": [
         ""Generic 50mm Insulation"",
         ""Generic HW Concrete"",
         ""Generic Ceiling Air Gap"",
         ""Generic Acoustic Tile""
-      ]
+      ],
+      ""type"": ""OpaqueConstructionAbridged"",
+      ""user_data"": null
     },
     {
-      ""identifier"": ""Generic Double Pane"",
       ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""WindowConstructionAbridged"",
+      ""frame"": null,
+      ""identifier"": ""Generic Double Pane"",
       ""materials"": [
         ""Generic Low-e Glass"",
         ""Generic Window Air Gap"",
         ""Generic Clear Glass""
       ],
-      ""frame"": null
+      ""type"": ""WindowConstructionAbridged"",
+      ""user_data"": null
     },
     {
-      ""identifier"": ""Generic Exterior Door"",
       ""display_name"": null,
-      ""user_data"": null,
-      ""type"": ""OpaqueConstructionAbridged"",
+      ""identifier"": ""Generic Exterior Door"",
       ""materials"": [
         ""Generic Painted Metal"",
         ""Generic 25mm Insulation"",
         ""Generic Painted Metal""
-      ]
+      ],
+      ""type"": ""OpaqueConstructionAbridged"",
+      ""user_data"": null
     }
   ],
   ""wall_set"": {
-    ""interior_construction"": ""Generic Interior Wall"",
     ""exterior_construction"": ""Generic Exterior Wall"",
     ""ground_construction"": ""Generic Underground Wall"",
+    ""interior_construction"": ""Generic Interior Wall"",
     ""type"": ""WallConstructionSetAbridged""
   },
   ""floor_set"": {
-    ""interior_construction"": ""Generic Interior Floor"",
     ""exterior_construction"": ""Generic Exposed Floor"",
     ""ground_construction"": ""Generic Ground Slab"",
+    ""interior_construction"": ""Generic Interior Floor"",
     ""type"": ""FloorConstructionSetAbridged""
   },
   ""roof_ceiling_set"": {
-    ""interior_construction"": ""Generic Interior Ceiling"",
     ""exterior_construction"": ""Generic Roof"",
     ""ground_construction"": ""Generic Underground Roof"",
+    ""interior_construction"": ""Generic Interior Ceiling"",
     ""type"": ""RoofCeilingConstructionSetAbridged""
   },
   ""aperture_set"": {
-    ""type"": ""ApertureConstructionSetAbridged"",
     ""interior_construction"": ""Generic Single Pane"",
-    ""window_construction"": ""Generic Double Pane"",
+    ""operable_construction"": ""Generic Double Pane"",
     ""skylight_construction"": ""Generic Double Pane"",
-    ""operable_construction"": ""Generic Double Pane""
+    ""type"": ""ApertureConstructionSetAbridged"",
+    ""window_construction"": ""Generic Double Pane""
   },
   ""door_set"": {
-    ""type"": ""DoorConstructionSetAbridged"",
-    ""interior_construction"": ""Generic Interior Door"",
     ""exterior_construction"": ""Generic Exterior Door"",
-    ""overhead_construction"": ""Generic Exterior Door"",
     ""exterior_glass_construction"": ""Generic Double Pane"",
-    ""interior_glass_construction"": ""Generic Single Pane""
+    ""interior_construction"": ""Generic Interior Door"",
+    ""interior_glass_construction"": ""Generic Single Pane"",
+    ""overhead_construction"": ""Generic Exterior Door"",
+    ""type"": ""DoorConstructionSetAbridged""
   },
   ""shade_construction"": ""Generic Shade"",
   ""context_construction"": ""Generic Context"",

@@ -1,4 +1,4 @@
-﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, MinLength, MaxLength, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Equals, MinLength, MaxLength, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -16,7 +16,7 @@ export class ScheduleFixedIntervalAbridged extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^ScheduleFixedIntervalAbridged$/)
+    @Equals("ScheduleFixedIntervalAbridged")
     @Expose({ name: "type" })
     /** type */
     type: string = "ScheduleFixedIntervalAbridged";

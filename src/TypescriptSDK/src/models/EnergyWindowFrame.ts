@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, Max, IsString, IsOptional, Matches, Min, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Max, IsString, IsOptional, Equals, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -23,7 +23,7 @@ export class EnergyWindowFrame extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^EnergyWindowFrame$/)
+    @Equals("EnergyWindowFrame")
     @Expose({ name: "type" })
     /** type */
     type: string = "EnergyWindowFrame";

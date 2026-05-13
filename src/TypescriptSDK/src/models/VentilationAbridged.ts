@@ -1,14 +1,14 @@
-﻿import { IsString, IsOptional, Matches, IsNumber, Min, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsNumber, Min, MinLength, MaxLength, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { VentilationMethod } from "./VentilationMethod";
 
-/** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class VentilationAbridged extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^VentilationAbridged$/)
+    @Equals("VentilationAbridged")
     @Expose({ name: "type" })
     /** type */
     type: string = "VentilationAbridged";
@@ -54,6 +54,13 @@ export class VentilationAbridged extends IDdEnergyBaseModel {
     /** Identifier of the schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile. */
     schedule?: string;
 	
+    @Type(() => String)
+    @IsEnum(VentilationMethod)
+    @IsOptional()
+    @Expose({ name: "method" })
+    /** Text to set how the ventilation criteria are reconciled against one another. */
+    method: VentilationMethod = VentilationMethod.Sum;
+	
 
     constructor() {
         super();
@@ -62,6 +69,7 @@ export class VentilationAbridged extends IDdEnergyBaseModel {
         this.flowPerArea = 0;
         this.airChangesPerHour = 0;
         this.flowPerZone = 0;
+        this.method = VentilationMethod.Sum;
     }
 
 
@@ -75,6 +83,7 @@ export class VentilationAbridged extends IDdEnergyBaseModel {
             this.airChangesPerHour = obj.airChangesPerHour ?? 0;
             this.flowPerZone = obj.flowPerZone ?? 0;
             this.schedule = obj.schedule;
+            this.method = obj.method ?? VentilationMethod.Sum;
             this.userData = obj.userData;
             this.identifier = obj.identifier;
             this.displayName = obj.displayName;
@@ -105,6 +114,7 @@ export class VentilationAbridged extends IDdEnergyBaseModel {
         data["air_changes_per_hour"] = this.airChangesPerHour ?? 0;
         data["flow_per_zone"] = this.flowPerZone ?? 0;
         data["schedule"] = this.schedule;
+        data["method"] = this.method ?? VentilationMethod.Sum;
         data = super.toJSON(data);
         return instanceToPlain(data, { exposeUnsetFields: false });
     }

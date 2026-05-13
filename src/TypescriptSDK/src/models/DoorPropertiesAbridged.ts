@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
@@ -9,7 +9,7 @@ export class DoorPropertiesAbridged extends _OpenAPIGenBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^DoorPropertiesAbridged$/)
+    @Equals("DoorPropertiesAbridged")
     @Expose({ name: "type" })
     /** type */
     type: string = "DoorPropertiesAbridged";

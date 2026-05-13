@@ -47,7 +47,7 @@ namespace HoneybeeSchema
         /// <param name="rReflectance">A value between 0 and 1 for the red channel reflectance.</param>
         /// <param name="gReflectance">A value between 0 and 1 for the green channel reflectance.</param>
         /// <param name="bReflectance">A value between 0 and 1 for the blue channel reflectance.</param>
-        /// <param name="alternateMaterial">An optional material (like the illum type) that may be used to specify a different material to be used for shading non-source rays. If None, this will keep the alternat_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance.</param>
+        /// <param name="alternateMaterial">An optional material (like the illum type) that may be used to specify a different material to be used for shading non-source rays. If None, this will keep the alternate_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance.</param>
         public Mirror
         (
             string identifier, string displayName = default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> modifier = default, List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>> dependencies = default, double rReflectance = 1D, double gReflectance = 1D, double bReflectance = 1D, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> alternateMaterial = default
@@ -124,9 +124,9 @@ namespace HoneybeeSchema
         public double BReflectance { get; set; } = 1D;
 
         /// <summary>
-        /// An optional material (like the illum type) that may be used to specify a different material to be used for shading non-source rays. If None, this will keep the alternat_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance.
+        /// An optional material (like the illum type) that may be used to specify a different material to be used for shading non-source rays. If None, this will keep the alternate_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance.
         /// </summary>
-        [Summary(@"An optional material (like the illum type) that may be used to specify a different material to be used for shading non-source rays. If None, this will keep the alternat_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance.")]
+        [Summary(@"An optional material (like the illum type) that may be used to specify a different material to be used for shading non-source rays. If None, this will keep the alternate_material as mirror. If this alternate material is given as Void, then the mirror surface will be invisible. Using Void is only appropriate if the surface hides other (more detailed) geometry with the same overall reflectance.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [DataMember(Name = "alternate_material")] // For internal Serialization XML/JSON
         [JsonProperty("alternate_material", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json

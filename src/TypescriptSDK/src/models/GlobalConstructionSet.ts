@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
@@ -16,12 +16,11 @@ import { ShadeConstruction } from "./ShadeConstruction";
 import { WallConstructionSetAbridged } from "./WallConstructionSetAbridged";
 import { WindowConstructionAbridged } from "./WindowConstructionAbridged";
 
-/** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class GlobalConstructionSet extends _OpenAPIGenBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^GlobalConstructionSet$/)
+    @Equals("GlobalConstructionSet")
     @Expose({ name: "type" })
     /** type */
     type: string = "GlobalConstructionSet";

@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsInstance, ValidateNested, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { ApertureConstructionSetAbridged } from "./ApertureConstructionSetAbridged";
@@ -13,7 +13,7 @@ export class ConstructionSetAbridged extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^ConstructionSetAbridged$/)
+    @Equals("ConstructionSetAbridged")
     @Expose({ name: "type" })
     /** type */
     type: string = "ConstructionSetAbridged";

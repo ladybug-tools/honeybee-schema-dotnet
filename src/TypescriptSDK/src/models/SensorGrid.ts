@@ -1,4 +1,4 @@
-﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { _RadianceAsset } from "./_RadianceAsset";
@@ -20,7 +20,7 @@ export class SensorGrid extends _RadianceAsset {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^SensorGrid$/)
+    @Equals("SensorGrid")
     @Expose({ name: "type" })
     /** type */
     type: string = "SensorGrid";

@@ -1,4 +1,4 @@
-﻿import { IsArray, IsString, IsDefined, IsOptional, Matches, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsString, IsDefined, IsOptional, Equals, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -16,7 +16,7 @@ export class WindowConstructionAbridged extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^WindowConstructionAbridged$/)
+    @Equals("WindowConstructionAbridged")
     @Expose({ name: "type" })
     /** type */
     type: string = "WindowConstructionAbridged";

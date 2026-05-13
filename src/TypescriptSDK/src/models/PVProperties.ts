@@ -1,16 +1,15 @@
-﻿import { IsString, IsOptional, Matches, IsNumber, Max, IsEnum, Min, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsNumber, Max, IsEnum, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 import { ModuleType } from "./ModuleType";
 import { MountingType } from "./MountingType";
 
-/** Base class for all objects requiring a valid EnergyPlus identifier. */
 export class PVProperties extends EnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^PVProperties$/)
+    @Equals("PVProperties")
     @Expose({ name: "type" })
     /** type */
     type: string = "PVProperties";

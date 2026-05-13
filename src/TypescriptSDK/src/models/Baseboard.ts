@@ -1,23 +1,16 @@
-﻿import { IsEnum, IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsEnum, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
+import { _HeatCoolBase } from "./_HeatCoolBase";
 import { BaseboardEquipmentType } from "./BaseboardEquipmentType";
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Vintages } from "./Vintages";
 
 /** Baseboard heating system.\n\nBaseboard systems are intended for spaces only requiring heating and\nno ventilation or cooling. Each room/zone will get its own baseboard\nheating unit that satisfies the heating load. */
-export class Baseboard extends IDdEnergyBaseModel {
-    @Type(() => String)
-    @IsEnum(Vintages)
-    @IsOptional()
-    @Expose({ name: "vintage" })
-    /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
-    vintage: Vintages = Vintages.ASHRAE_2019;
-	
+export class Baseboard extends _HeatCoolBase {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^Baseboard$/)
+    @Equals("Baseboard")
     @Expose({ name: "type" })
     /** type */
     type: string = "Baseboard";
@@ -32,7 +25,6 @@ export class Baseboard extends IDdEnergyBaseModel {
 
     constructor() {
         super();
-        this.vintage = Vintages.ASHRAE_2019;
         this.type = "Baseboard";
         this.equipmentType = BaseboardEquipmentType.ElectricBaseboard;
     }
@@ -42,9 +34,9 @@ export class Baseboard extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(Baseboard, _data);
-            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.type = obj.type ?? "Baseboard";
             this.equipmentType = obj.equipmentType ?? BaseboardEquipmentType.ElectricBaseboard;
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.userData = obj.userData;
             this.identifier = obj.identifier;
             this.displayName = obj.displayName;
@@ -69,7 +61,6 @@ export class Baseboard extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["vintage"] = this.vintage ?? Vintages.ASHRAE_2019;
         data["type"] = this.type ?? "Baseboard";
         data["equipment_type"] = this.equipmentType ?? BaseboardEquipmentType.ElectricBaseboard;
         data = super.toJSON(data);

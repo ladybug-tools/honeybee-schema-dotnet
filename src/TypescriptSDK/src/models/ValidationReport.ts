@@ -1,4 +1,4 @@
-﻿import { IsString, IsDefined, Matches, IsBoolean, IsOptional, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, Matches, IsBoolean, IsOptional, Equals, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { ValidationError } from "./ValidationError";
@@ -30,7 +30,7 @@ export class ValidationReport {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^ValidationReport$/)
+    @Equals("ValidationReport")
     @Expose({ name: "type" })
     /** type */
     type: string = "ValidationReport";

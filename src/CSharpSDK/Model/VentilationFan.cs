@@ -19,10 +19,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
 {
-    /// <summary>
-    /// Base class for all objects requiring a valid EnergyPlus identifier.
-    /// </summary>
-    [Summary(@"Base class for all objects requiring a valid EnergyPlus identifier.")]
+    [Summary(@"")]
     [System.Serializable]
     [DataContract(Name = "VentilationFan")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class VentilationFan : EnergyBaseModel, System.IEquatable<VentilationFan>
@@ -74,6 +71,7 @@ namespace HoneybeeSchema
         [Summary(@"A number for the flow rate of the fan in m3/s.")]
         [Required] // For validation after deserialization
         // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "flow_rate", IsRequired = true)] // For internal Serialization XML/JSON
         [JsonProperty("flow_rate", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("flow_rate")] // For System.Text.Json
@@ -85,6 +83,7 @@ namespace HoneybeeSchema
         [Summary(@"A number for the the pressure rise across the fan in Pascals (N/m2). This is often a function of the fan speed and the conditions in which the fan is operating since having the fan blow air through filters or narrow ducts will increase the pressure rise that is needed to deliver the input flow rate. The pressure rise plays an important role in determining the amount of energy consumed by the fan. Smaller fans like a 0.05 m3/s desk fan tend to have lower pressure rises around 60 Pa. Larger fans, such as a 6 m3/s fan used for ventilating a large room tend to have higher pressure rises around 400 Pa. The highest pressure rises are typically for large fans blowing air through ducts and filters, which can have pressure rises as high as 1000 Pa.")]
         [Required] // For validation after deserialization
         // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "pressure_rise", IsRequired = true)] // For internal Serialization XML/JSON
         [JsonProperty("pressure_rise", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("pressure_rise")] // For System.Text.Json
